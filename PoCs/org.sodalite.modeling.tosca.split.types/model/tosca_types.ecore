@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tosca_types" nsURI="http://eu.sodalite.dsl.tosca-types" nsPrefix="tosca_types">
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceTemplate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tosca_definitions_version"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node_types" upperBound="-1"
+        eType="#//NodeType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationship_types" upperBound="-1"
+        eType="#//RelationshipType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data_types" upperBound="-1"
+        eType="#//DataType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artifact_types" upperBound="-1"
+        eType="#//ArtifactType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="capability_types" upperBound="-1"
+        eType="#//CapabilityType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="group_types" upperBound="-1"
+        eType="#//GroupType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="policy_types" upperBound="-1"
+        eType="#//PolicyType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interface_types" upperBound="-1"
+        eType="#//InterfaceType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeType" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
+        eType="#//RequirementDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="capabilities" upperBound="-1"
+        eType="#//CapabilityDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//AttributeDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//PropertyDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="derived_from" eType="#//NodeType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" upperBound="-1"
+        eType="#//InterfaceDefinitionForTypes" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationshipType" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Type ../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Relationship">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="derived_from" eType="#//RelationshipType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valid_target_types" upperBound="-1"
+        eType="#//NodeType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" upperBound="-1"
+        eType="ecore:EClass ../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//InterfaceDefinition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArtifactType" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Type">
+    <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
+      <details key="archetype" value="Description"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArtifactDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ArtifactType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" eType="#//OperationImplementationDefinition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="ecore:EClass ../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Input"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequirementDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="capability" lowerBound="1"
+        eType="#//CapabilityType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//NodeType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationship" eType="#//RelationshipType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CapabilityDefinition" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Capability">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//CapabilityType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//PropertyDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valid_source_types" upperBound="-1"
+        eType="#//NodeType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="ecore:EClass ../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Constraint"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CapabilityType" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//PropertyDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupType" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PolicyType" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfaceType" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfaceDefinitionForTypes" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//InterfaceDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//InterfaceType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//PropertyDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationImplementationDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDefinition" eSuperTypes="../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//Input">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datatype" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="ecore:EClass ../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//AbstractPropertyValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="default" upperBound="-1"
+        eType="ecore:EClass ../../org.sodalite.modeling.tosca.split.commons/model/tosca_commons.ecore#//AbstractPropertyValue"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

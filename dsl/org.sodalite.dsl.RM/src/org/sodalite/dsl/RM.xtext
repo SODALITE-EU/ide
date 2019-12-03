@@ -1,0 +1,166 @@
+/*******************************************************************************
+ * Copyright (c) 2019 Atos Spain S.A.
+ * This program and the accompanying materials
+ * are made available under the terms of the Apache Public License 2.0 (APL2)
+ * which accompanies this distribution, and is available at
+ * https://apache.org/licenses/LICENSE-2.0
+ *
+ * Contributors:
+ *     Jesús Gorroñogoitia - Design and implementation
+ *******************************************************************************/
+
+grammar org.sodalite.dsl.RM with org.eclipse.xtext.common.Terminals
+
+generate rM "http://www.sodalite.org/dsl/RM"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+RM_Model:
+	('node_types{'
+		nodeTypes=ENodeTypes
+	'}')?
+;
+
+ENodeTypes:
+	{ENodeTypes}(nodeTypes+=ENodeType)+
+;
+
+ENodeType: 
+	name = QUALIFIED_NAME '{'
+	('derived_from:' superType=[ENodeType|QUALIFIED_NAME])?
+	('properties{' 
+		properties=EProperties 
+		'}')?
+	('attributes{' 
+		atributes=EAttributes 
+		'}')?
+	('interfaces{'
+		interfaces=EInterfaces 
+		'}')?
+	('capabilities{'
+		capabilities=ECapabilities 
+		'}')?	
+	('requirements{'
+		requirements=ERequirements 
+		'}')?
+	
+"}";
+
+EProperties:
+	{EProperties} (properties+=EPropertyDefinition)*
+;
+
+EPropertyDefinition:
+	name = ID '{'
+	('type:' type=STRING)
+	('description:' description=STRING)?
+	('required:' required=BOOLEAN)?
+	('default:' default=STRING)?
+	"}";
+	
+EAttributes:
+	{EAttributes} (attributes+=EAttributeDefinition)*
+;
+
+EAttributeDefinition:
+	name = ID '{'
+	('type:' type=STRING)
+	('description:' description=STRING)?
+	"}";
+	
+EInterfaces:
+	{EInterfaces} (interfaces+=EInterfaceDefinition)*
+;
+
+EInterfaceDefinition:
+	name = ID '{'
+		'type:' type=QUALIFIED_NAME
+		('operations{' 
+			operations=EOperations 
+		'}')?
+	'}'
+;
+
+EOperations:
+	{EOperations} (operations+=EOperationDefinition)*
+;
+
+EOperationDefinition:
+	name = ID '{'
+		('inputs{'
+			inputs=EInputs 
+		'}')?
+		'implementation:' implementation=STRING
+	'}'
+;
+
+EInputs:
+	{EInputs} (inputs+=EParameterDefinition)*
+;
+
+//inputs of operation definition in NodeTypes are ParameterDefinition
+EParameterDefinition: 
+	name = ID '{'
+		('value{' value=EValueExpression '}')?
+		('default{' default=EValueExpression '}')?
+	'}'
+;
+
+EValueExpression:
+	{EValueExpression} STRING | EFunction
+;
+
+EFunction:
+	GetProperty | GetAttribute
+;
+
+GetAttribute:
+	'get_attribute{'
+		('attribute:' attribute=STRING)
+		('entity:' entity=ENTITY)
+		('req_cap:' req_cap=STRING)? 
+	'}'
+;
+
+GetProperty:
+	'get_property{'
+		('property:' attribute=STRING)
+		('entity:' entity=ENTITY)
+		('req_cap:' req_cap=STRING)? 
+	'}'
+;
+
+ECapabilities:
+	{ECapabilities} (capabilities+=ECapabilityDefinition)*
+;
+
+ECapabilityDefinition:
+	name = ID '{'
+		('type:' type=QUALIFIED_NAME)
+		('valid_source_types:' valid_source_types=STRING)
+	'}'
+;
+
+ERequirements:
+	{ERequirements} (requirements+=ERequirementDefinition)*
+;
+
+ERequirementDefinition:
+	name = ID '{'
+		('capability:' capability=QUALIFIED_NAME)
+		('node:' node=QUALIFIED_NAME)
+		('relationship:' relationship=QUALIFIED_NAME)
+	'}'
+;
+
+terminal QUALIFIED_NAME:
+	ID ('.' ID)+
+;
+
+terminal BOOLEAN returns ecore::EBoolean:
+	'true' | 'false'
+;
+
+terminal ENTITY:
+	'SELF' | 'SOURCE' | 'TARGET' | 'HOST'
+;

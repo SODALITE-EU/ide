@@ -1,0 +1,71 @@
+/*******************************************************************************
+ * Copyright (c) 2019 Atos Spain S.A.
+ * This program and the accompanying materials
+ * are made available under the terms of the Apache Public License 2.0 (APL2)
+ * which accompanies this distribution, and is available at
+ * https://apache.org/licenses/LICENSE-2.0
+ *
+ * Contributors:
+ *     Jesús Gorroñogoitia - Design and implementation
+ *******************************************************************************/
+
+
+grammar org.sodalite.dsl.AADM with org.eclipse.xtext.common.Terminals
+import "http://www.sodalite.org/dsl/RM" as rm
+
+generate aADM "http://www.sodalite.org/dsl/AADM"
+
+AADM_Model:
+	('node_templates{'
+		nodeTemplates=ENodeTemplates
+	'}')?
+;
+
+ENodeTemplates:
+	{ENodeTemplates}(nodeTemplates+=ENodeTemplate)+
+;
+
+ENodeTemplate: 
+	name = ID '{'
+	('type:' type=QUALIFIED_NAME)
+	('description:' description=STRING)?
+	('properties{'
+		properties=EProperties 
+	 	'}')?
+	('attributes{'
+		atributes=EAttributes 
+		'}')?
+	('requirements{' 
+		requirements=ERequirements 
+		'}')?
+"}";
+
+ERequirements:
+	{ERequirements} (requirements+=ERequirementAssignment)*
+;
+
+ERequirementAssignment:
+	name = ID '{' 
+	('node:' node=[ENodeTemplate|ID])
+	'}'
+;
+
+EAttributes:
+	{EAttributes} (attributes+=EAttributeAssignment)*
+;
+
+EAttributeAssignment:
+	name = ID ':' value = STRING
+;
+
+EProperties:
+	{EProperties} (properties+=EPropertyAssignment)*
+;
+	
+EPropertyAssignment:
+	name = ID ':' value = STRING
+;
+
+terminal QUALIFIED_NAME:
+	ID ('.' ID)+
+;

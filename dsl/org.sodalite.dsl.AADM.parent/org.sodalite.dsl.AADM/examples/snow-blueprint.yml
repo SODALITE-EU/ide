@@ -1,0 +1,51 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+node_types:
+  my.nodes.SnowComponent:
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      path:
+        type: string
+        description: Path on the host where this "component" resides
+    attributes:
+      id:
+        type: string
+        description: Unique ID of the "server"
+
+  my.nodes.SkylineExtractor:
+    derived_from: my.nodes.SnowComponent
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          implementation: ../skyline-extractor/ansible-lifecycle-steps/skyline_extractor_deploy.yml
+
+  my.nodes.SkylineAlignment:
+    derived_from: my.nodes.SnowComponent
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          implementation: ../skyline-alignment/ansible-lifecycle-steps/skyline_alignment_deploy.yml
+
+topology_template:
+  node_templates:
+    my-workstation:
+      type: tosca.nodes.Compute
+      attributes:
+        private_address: localhost
+        public_address: localhost
+
+    skyline-extractor:
+      type: my.nodes.SkylineExtractor
+      properties:
+        path: /tmp/snow/skyline-extractor
+      requirements:
+        - host: my-workstation
+
+    skyline-extractor:
+      type: my.nodes.SkylineAlignment
+      properties:
+        path: /tmp/snow/skyline-alignment
+      requirements:
+        - host: my-workstation

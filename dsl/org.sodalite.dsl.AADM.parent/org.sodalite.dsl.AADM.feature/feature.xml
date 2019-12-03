@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature id="org.sodalite.dsl.AADM.feature"
+	label="AADM Feature "
+	version="1.0.0.qualifier">
+	<plugin
+			id="org.sodalite.dsl.AADM"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+	<plugin
+			id="org.sodalite.dsl.AADM.ide"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+	<plugin
+			id="org.sodalite.dsl.AADM.ui"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+</feature>
