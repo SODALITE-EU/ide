@@ -35,7 +35,7 @@ class AADMGenerator extends AbstractGenerator {
 	var int parameter_counter = 1
 	var Map<EPropertyAssignment, Integer> property_numbers
 	var Map<ERequirementAssignment, Integer> requirement_numbers
-	var Map<EObject, Integer> parameter_numbers
+	var Map<EObject, Map<String,Integer>> parameter_numbers
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		template_counter = 1
@@ -44,7 +44,7 @@ class AADMGenerator extends AbstractGenerator {
 		parameter_counter = 1
 		property_numbers = new HashMap<EPropertyAssignment, Integer>()
 		requirement_numbers = new HashMap<ERequirementAssignment, Integer>()
-		parameter_numbers = new HashMap<EObject, Integer>()
+		parameter_numbers = new HashMap<EObject, Map<String, Integer>>()
 		
 		val filename = getFilename(resource.URI)
 		fsa.generateFile(filename,  compileAADM (resource))
@@ -117,22 +117,33 @@ class AADMGenerator extends AbstractGenerator {
 	.
 	'''
 	
+	def void putParameterNumber (EObject entity, String parameterName, Integer number){
+		if (parameter_numbers.get(entity)==null){
+			parameter_numbers.put(entity, new HashMap<String, Integer>())
+		}
+		parameter_numbers.get(entity).put(parameterName, number)
+	}
+	
+	def Integer getParameterNumber (EObject entity, String parameterName){
+		if (parameter_numbers.get(entity)==null)
+			return null;
+		return parameter_numbers.get(entity).get(parameterName)
+	}
+	
 	def compile (ERequirementAssignment r) '''
-	«parameter_numbers.put(r.node, parameter_counter)»
+	«putParameterNumber(r, "node", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "node" ;
 	  exchange:value "«r.node.name»" ;
 	.
-	
 	«requirement_numbers.put(r, requirement_counter)»
 	:Requirement_«requirement_counter++»
 	  rdf:type exchange:Requirement ;
 	  exchange:name "«r.name»" ;
-	  exchange:hasParameter :Parameter_«parameter_numbers.get(r.node)» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "node")» ;
 	.
 	'''
-	
 		
 	def getFilename(URI uri) {
 		var filename = uri.toString
