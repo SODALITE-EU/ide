@@ -134,6 +134,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EDataType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entry_schema" eType="#//EDataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInterfaces">
     <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" upperBound="-1"
@@ -182,7 +183,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="ECapabilityDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ECapabilityType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid_source_types" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERequirements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
@@ -193,6 +197,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="capability" eType="#//ECapabilityType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//ENodeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relationship" eType="#//ERelationshipType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EConstraints">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
@@ -212,8 +218,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInRange" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ELessOrEqual" eSuperTypes="#//EConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

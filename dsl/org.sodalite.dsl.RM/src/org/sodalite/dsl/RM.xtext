@@ -189,6 +189,7 @@ EAttributeDefinition:
 name = ID '{'
 ('type:' type=[EDataType|EDataTypeName])
 ('description:' description=STRING)?
+('entry_schema:' entry_schema=[EDataType|EDataTypeName])?
 "}";
 	
 EInterfaces:
@@ -261,7 +262,9 @@ ECapabilities:
 ECapabilityDefinition:
 name = ID '{'
 	('type:' type=[ECapabilityType|QUALIFIED_NAME])
+	('description:' description=STRING)?
 	('valid_source_types:' valid_source_types=STRING)? //FIXME support list of node components (see TOSCA specification)
+	('occurrences:' '[' start=STRING ',' end=STRING ']')?
 '}'
 ;
 
@@ -274,6 +277,7 @@ name = ID '{'
 	('capability:' capability=[ECapabilityType|QUALIFIED_NAME])
 	('node:' node=[ENodeType|QUALIFIED_NAME])?
 	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])?
+	('occurrences:' '[' start=STRING ',' end=STRING ']')?
 '}'
 ;
 
@@ -302,7 +306,7 @@ EValid_Values:
 ;
 
 EInRange:
-	'in_range:' + '[' val1=STRING "," val2=STRING ']'
+	'in_range:' '[' start=STRING "," end=STRING ']'
 ;
 
 ELessOrEqual:

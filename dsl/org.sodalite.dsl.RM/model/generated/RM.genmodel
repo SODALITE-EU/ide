@@ -108,6 +108,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EAttributeDefinition/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinition/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EAttributeDefinition/description"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinition/entry_schema"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInterfaces">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaces/interfaces"/>
@@ -148,7 +149,10 @@
     <genClasses ecoreClass="RM.ecore#//ECapabilityDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinition/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinition/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinition/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinition/valid_source_types"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinition/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinition/end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERequirements">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirements/requirements"/>
@@ -158,6 +162,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinition/capability"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinition/node"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinition/relationship"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERequirementDefinition/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERequirementDefinition/end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EConstraints">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EConstraints/constraints"/>
@@ -176,8 +182,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EValid_Values/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInRange">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInRange/val1"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInRange/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInRange/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInRange/end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ELessOrEqual">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ELessOrEqual/val"/>
