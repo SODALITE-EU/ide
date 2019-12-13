@@ -16,69 +16,192 @@ generate rM "http://www.sodalite.org/dsl/RM"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 RM_Model:
-	('node_types{'
-		nodeTypes=ENodeTypes
-	'}')?
+('data_types{'
+	dataTypes=EDataTypes
+'}')?
+('artifact_types{'
+	artifactTypes=EArtifactTypes
+'}')?
+('capability_types{'
+	capabilityTypes=ECapabilityTypes
+'}')?
+('interface_types{'
+	interfaceTypes=EInterfaceTypes
+'}')?
+('relationship_types{'
+	relationshipTypes=ERelationshipTypes
+'}')?
+('node_types{'
+	nodeTypes=ENodeTypes
+'}')?
+('policy_types{'
+	policyTypes=EPolicyTypes
+'}')?
+;
+
+EDataTypes:
+	{EDataTypes}(dataTypes+=EDataType)+
+;
+
+EDataType:
+name = EDataTypeName '{' 
+('derived_from:' superType=[EDataType|EDataTypeName])?
+('description:' description=STRING)?
+('constraints{' 
+	constraints=EConstraints 
+'}')?
+('properties{' 
+	properties=EProperties 
+'}')?
+'}'
+;
+
+EDataTypeName:
+	QUALIFIED_NAME | PRIMITIVE_DATA_TYPE
+;
+
+EArtifactTypes:
+	{EArtifactTypes}(artifactTypes+=EArtifactType)+
+;
+
+EArtifactType:
+name = QUALIFIED_NAME '{' //FIXME Qualified Names are not suggested by default with context assistance
+('derived_from:' superType=[EArtifactType|QUALIFIED_NAME])?
+('description:' description=STRING)?
+('mime_type:' mime_type=STRING)?
+('file_ext:' + file_ext=STRING)?
+'}'
+;
+
+ECapabilityTypes:
+	{ECapabilityTypes}(capabilityTypes+=ECapabilityType)+
+;
+
+ECapabilityType:
+name = QUALIFIED_NAME '{'
+('derived_from:' superType=[ECapabilityType|QUALIFIED_NAME])?
+('description:' description=STRING)?
+('properties{' 
+	properties=EProperties 
+'}')?
+('attributes{' 
+	atributes=EAttributes 
+'}')?
+'}'
+;
+
+EInterfaceTypes:
+	{EInterfaceTypes}(interfaceTypes+=EInterfaceType)+
+;
+
+EInterfaceType:
+name = QUALIFIED_NAME '{'
+('derived_from:' superType=[EInterfaceType|QUALIFIED_NAME])?
+('description:' description=STRING)?
+('inputs{' 
+	inputs=EProperties 
+'}')?
+('operations{' 
+	operations=EOperations 
+'}')?
+'}'
+;
+
+EPolicyTypes:
+	{EPolicyTypes}(policyTypes+=EPolicyType)+
+;
+
+EPolicyType:
+name = QUALIFIED_NAME '{'
+('derived_from:' superType=[EPolicyType|QUALIFIED_NAME])?
+('description:' description=STRING)?
+'}'
 ;
 
 ENodeTypes:
 	{ENodeTypes}(nodeTypes+=ENodeType)+
 ;
 
-ENodeType: 
-	name = QUALIFIED_NAME '{'
-	('derived_from:' superType=[ENodeType|QUALIFIED_NAME])?
-	('properties{' 
-		properties=EProperties 
-		'}')?
-	('attributes{' 
-		atributes=EAttributes 
-		'}')?
-	('interfaces{'
-		interfaces=EInterfaces 
-		'}')?
-	('capabilities{'
-		capabilities=ECapabilities 
-		'}')?	
-	('requirements{'
-		requirements=ERequirements 
-		'}')?
-	
+ENodeType: //FIXME enables to introduce the nested elements in any order (for all types)
+name = QUALIFIED_NAME '{'
+('derived_from:' superType=[ENodeType|QUALIFIED_NAME])?
+('description:' description=STRING)?
+('properties{' 
+	properties=EProperties 
+'}')?
+('attributes{' 
+	atributes=EAttributes 
+'}')?
+('interfaces{'
+	interfaces=EInterfaces 
+'}')?
+('capabilities{'
+	capabilities=ECapabilities 
+'}')?	
+('requirements{'
+	requirements=ERequirements 
+'}')?
 "}";
+
+ERelationshipTypes:
+	{ERelationshipTypes}(relationshipTypes+=ERelationshipType)+
+;
+
+ERelationshipType:
+name = QUALIFIED_NAME '{' 
+('derived_from:' superType=[ERelationshipType|QUALIFIED_NAME])?
+('description:' description=STRING)?
+('properties{' 
+	properties=EProperties 
+'}')?
+('attributes{' 
+	atributes=EAttributes 
+'}')?
+('interfaces{'
+	interfaces=EInterfaces 
+'}')?
+('valid_target_types:' valid_target_types=STRING)?
+'}'
+;
 
 EProperties:
 	{EProperties} (properties+=EPropertyDefinition)*
 ;
 
 EPropertyDefinition:
-	name = ID '{'
-	('type:' type=STRING)
-	('description:' description=STRING)?
-	('required:' required=BOOLEAN)?
-	('default:' default=STRING)?
-	"}";
+name = ID '{'
+('type:' type=[EDataType|EDataTypeName])
+('description:' description=STRING)?
+('required:' required=BOOLEAN)? //FIXME: possible values true|false are not suggested
+('default:' default=STRING)?
+('status:' status=STRING)?
+('constraints{' 
+	constraints=EConstraints 
+'}')?
+('entry_schema:' entry_schema=[EDataType|EDataTypeName])?
+"}";
 	
 EAttributes:
 	{EAttributes} (attributes+=EAttributeDefinition)*
 ;
 
 EAttributeDefinition:
-	name = ID '{'
-	('type:' type=STRING)
-	('description:' description=STRING)?
-	"}";
+name = ID '{'
+('type:' type=[EDataType|EDataTypeName])
+('description:' description=STRING)?
+"}";
 	
 EInterfaces:
 	{EInterfaces} (interfaces+=EInterfaceDefinition)*
 ;
 
 EInterfaceDefinition:
-	name = ID '{'
-		'type:' type=QUALIFIED_NAME
-		('operations{' 
-			operations=EOperations 
-		'}')?
-	'}'
+name = ID '{'
+'type:' type=[EInterfaceType|QUALIFIED_NAME]
+('operations{' 
+	operations=EOperations 
+'}')?
+'}'
 ;
 
 EOperations:
@@ -86,12 +209,13 @@ EOperations:
 ;
 
 EOperationDefinition:
-	name = ID '{'
-		('inputs{'
-			inputs=EInputs 
-		'}')?
-		'implementation:' implementation=STRING
-	'}'
+name = ID '{'
+('description:' description=STRING)?
+('inputs{'
+	inputs=EInputs 
+'}')?
+('implementation:' implementation=STRING)?
+'}'
 ;
 
 EInputs:
@@ -100,10 +224,10 @@ EInputs:
 
 //inputs of operation definition in NodeTypes are ParameterDefinition
 EParameterDefinition: 
-	name = ID '{'
-		('value{' value=EValueExpression '}')?
-		('default{' default=EValueExpression '}')?
-	'}'
+name = ID '{'
+('value{' value=EValueExpression '}')?
+('default{' default=EValueExpression '}')?
+'}'
 ;
 
 EValueExpression:
@@ -115,19 +239,19 @@ EFunction:
 ;
 
 GetAttribute:
-	'get_attribute{'
-		('attribute:' attribute=STRING)
-		('entity:' entity=ENTITY)
-		('req_cap:' req_cap=STRING)? 
-	'}'
+'get_attribute{'
+	('attribute:' attribute=STRING)
+	('entity:' entity=ENTITY)
+	('req_cap:' req_cap=STRING)? 
+'}'
 ;
 
 GetProperty:
-	'get_property{'
-		('property:' attribute=STRING)
-		('entity:' entity=ENTITY)
-		('req_cap:' req_cap=STRING)? 
-	'}'
+'get_property{'
+	('property:' attribute=STRING)
+	('entity:' entity=ENTITY)
+	('req_cap:' req_cap=STRING)? 
+'}'
 ;
 
 ECapabilities:
@@ -135,10 +259,10 @@ ECapabilities:
 ;
 
 ECapabilityDefinition:
-	name = ID '{'
-		('type:' type=QUALIFIED_NAME)
-		('valid_source_types:' valid_source_types=STRING)
-	'}'
+name = ID '{'
+	('type:' type=[ECapabilityType|QUALIFIED_NAME])
+	('valid_source_types:' valid_source_types=STRING)? //FIXME support list of node components (see TOSCA specification)
+'}'
 ;
 
 ERequirements:
@@ -146,11 +270,59 @@ ERequirements:
 ;
 
 ERequirementDefinition:
-	name = ID '{'
-		('capability:' capability=QUALIFIED_NAME)
-		('node:' node=QUALIFIED_NAME)
-		('relationship:' relationship=QUALIFIED_NAME)
-	'}'
+name = ID '{'
+	('capability:' capability=[ECapabilityType|QUALIFIED_NAME])
+	('node:' node=[ENodeType|QUALIFIED_NAME])?
+	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])?
+'}'
+;
+
+EConstraints:
+	{EConstraints} (constraints+=EConstraint)*
+;
+
+EConstraint:
+	EEqual | EGreaterThan | EGreaterOrEqual | ELessThan | ELessOrEqual | EInRange | EValid_Values | ELength | EMinLength | EMaxLength 
+;
+
+EMaxLength:
+	'max_length:' val=STRING
+;
+
+EMinLength:
+	'min_length:' val=STRING
+;
+
+ELength:
+	'length:' val=STRING
+;
+
+EValid_Values:
+	'valid_values:' val=STRING
+;
+
+EInRange:
+	'in_range:' + '[' val1=STRING "," val2=STRING ']'
+;
+
+ELessOrEqual:
+	'less_or_equal:' val=STRING
+;
+
+ELessThan:
+	'less_than:' val=STRING
+;
+
+EGreaterOrEqual:
+	'greater_or_equal:' val=STRING
+;
+
+EGreaterThan:
+	'greater_than:' val=STRING
+;
+
+EEqual:
+	'equal:' val=STRING
 ;
 
 terminal QUALIFIED_NAME:
@@ -163,4 +335,8 @@ terminal BOOLEAN returns ecore::EBoolean:
 
 terminal ENTITY:
 	'SELF' | 'SOURCE' | 'TARGET' | 'HOST'
+;
+
+terminal PRIMITIVE_DATA_TYPE:
+	'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type'
 ;
