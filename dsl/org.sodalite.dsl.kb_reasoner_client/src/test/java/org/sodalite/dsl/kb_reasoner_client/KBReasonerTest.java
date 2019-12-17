@@ -10,11 +10,15 @@
  *******************************************************************************/
 package org.sodalite.dsl.kb_reasoner_client;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import java.util.List;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
@@ -83,12 +87,22 @@ class KBReasonerTest {
 		requirements.getElements().stream().forEach(node -> System.out.println("Requirement: " + node));
 	}
 	
-	@Test
+	@Disabled @Test
 	void testGetValidRequirementNodes() throws Exception {
 		ValidRequirementNodeData valid_requirement_nodes = kbclient.getValidRequirementNodes(requirementId, nodeType);
 		assertFalse(valid_requirement_nodes.getElements().isEmpty());
 		System.out.println("ValidRequirementNodes for resource: " + resourceId);
 		valid_requirement_nodes.getElements().stream().forEach(node -> System.out.println("Requirement: " + node));
+	}
+	
+	@Test
+	void testSaveAADM() throws Exception {
+		//TODO open HPC AADM model from file
+		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/hpc.ttl");
+		String aadmTTL = new String(Files.readAllBytes (aadm_path));
+		String submissionId = "hpc";
+		String submissionIRI = kbclient.saveAADM(aadmTTL, submissionId);
+		assertNotNull (submissionIRI);
 	}
 
 }

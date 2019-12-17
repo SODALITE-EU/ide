@@ -26,4 +26,5 @@ public interface KBReasoner {
 	PropertyData getProperties(String resourceId) throws Exception;
 	RequirementData getRequirements(String resourceId) throws Exception;
 	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception;
+	String saveAADM (String aadmTTL, String submissionId) throws Exception;
 }
