@@ -318,14 +318,40 @@
 				</reference>
 			</activeWhen>
 		</handler>
+  <handler
+        class="org.sodalite.dsl.ui.handlers.AADMSaveHandler"
+        commandId="org.sodalite.dsl.AADM.ui.handler.saveAADM">
+  </handler>
+  <handler
+        class="org.sodalite.dsl.ui.handlers.AADMDeployHandler"
+        commandId="org.sodalite.dsl.AADM.ui.handler.deployAADM">
+  </handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
 		<command
-			description="Open the quick outline."
-			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
-			name="Quick Outline">
+        description="Open the quick outline."
+        id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+        name="Quick Outline">
 		</command>
+  <category
+        id="org.sodalite.dsl.AADM.ui.category"
+        name="Sodalite">
+  </category>
+  <command
+        categoryId="org.sodalite.dsl.AADM.ui.category"
+        defaultHandler="org.sodalite.dsl.ui.handlers.AADMSaveHandler"
+        description="Save the AADM into the KB"
+        id="org.sodalite.dsl.AADM.ui.command.saveAADM"
+        name="saveAADM">
+  </command>
+  <command
+        categoryId="org.sodalite.dsl.AADM.ui.category"
+        defaultHandler="org.sodalite.dsl.ui.handlers.AADMDeployHandler"
+        description="Deploy the AADM using the Sodalite IoC layer"
+        id="org.sodalite.dsl.AADM.ui.command.deployAADM"
+        name="deployAADM">
+  </command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 		<menuContribution
@@ -338,6 +364,58 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+     <menu
+           label="Sodalite">
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.saveAADM"
+              id="org.sodalite.dsl.AADM.ui.popup.command.saveAADM"
+              label="Save AADM  in the KB"
+              style="push"
+              tooltip="Save AADM into the remote Sodalite Knowledge Base">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.aadm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.deployAADM"
+              label="Deploy AADM"
+              style="push"
+              tooltip="Deploy the AADM  using the Sodalite IoC layer">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.aadm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+     </menu>
+  </menuContribution>
 	</extension>
 	<!-- quickfix marker resolution generator for org.sodalite.dsl.AADM -->
 	<extension
