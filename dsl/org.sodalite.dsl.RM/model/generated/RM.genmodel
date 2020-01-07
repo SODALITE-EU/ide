@@ -96,7 +96,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinition/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinition/required"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinition/default"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/default"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinition/status"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/constraints"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/entry_schema"/>
@@ -116,6 +116,7 @@
     <genClasses ecoreClass="RM.ecore#//EInterfaceDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInterfaceDefinition/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinition/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinition/inputs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinition/operations"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EOperations">

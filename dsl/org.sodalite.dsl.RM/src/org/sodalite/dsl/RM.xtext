@@ -173,7 +173,7 @@ name = ID '{'
 ('type:' type=[EDataType|EDataTypeName])
 ('description:' description=STRING)?
 ('required:' required=BOOLEAN)? //FIXME: possible values true|false are not suggested
-('default:' default=STRING)?
+('default:' default=EValueExpression)?
 ('status:' status=STRING)?
 ('constraints{' 
 	constraints=EConstraints 
@@ -199,6 +199,9 @@ EInterfaces:
 EInterfaceDefinition:
 name = ID '{'
 'type:' type=[EInterfaceType|QUALIFIED_NAME]
+('inputs{' 
+	inputs=EProperties 
+'}')?
 ('operations{' 
 	operations=EOperations 
 '}')?
@@ -226,8 +229,8 @@ EInputs:
 //inputs of operation definition in NodeTypes are ParameterDefinition
 EParameterDefinition: 
 name = ID '{'
-('value{' value=EValueExpression '}')?
-('default{' default=EValueExpression '}')?
+('value:' value=EValueExpression)?
+('default:' default=EValueExpression)?
 '}'
 ;
 
