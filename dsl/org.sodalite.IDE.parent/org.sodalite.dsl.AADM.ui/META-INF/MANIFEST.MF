@@ -24,4 +24,5 @@ Export-Package: org.sodalite.dsl.ui.contentassist,
  org.sodalite.dsl.AADM.ui.internal
 Bundle-Activator: org.sodalite.dsl.AADM.ui.internal.AADMActivator
 Bundle-ClassPath: .,
- lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-dependencies.jar
+ lib/,
+ .settings/
