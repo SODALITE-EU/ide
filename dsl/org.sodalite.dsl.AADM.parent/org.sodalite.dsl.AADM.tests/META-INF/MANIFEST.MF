@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Automatic-Module-Name: org.sodalite.dsl.AADM.tests
 Bundle-ManifestVersion: 2
 Bundle-Name: org.sodalite.dsl.AADM.tests
-Bundle-Vendor: My Company
+Bundle-Vendor: Atos Spain SA
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.sodalite.dsl.AADM.tests; singleton:=true
 Bundle-ActivationPolicy: lazy

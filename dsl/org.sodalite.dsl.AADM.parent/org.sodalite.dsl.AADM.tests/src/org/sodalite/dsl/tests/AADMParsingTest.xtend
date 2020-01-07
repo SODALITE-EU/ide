@@ -21,7 +21,19 @@ class AADMParsingTest {
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			Hello Xtext!
+			node_templates{
+				vm{
+						type: sodalite.nodes.VM.OpenStack
+						properties{
+							name: 'snow-vm'
+							image: 'centos7'
+							flavor: 'm1.small'
+							network: '87b57656-381c-4921-82c0-bd65a8a67cfd'
+							security_groups: 'default,snow'
+							key_name: 'draganrX'
+						} 
+					}
+			}
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors

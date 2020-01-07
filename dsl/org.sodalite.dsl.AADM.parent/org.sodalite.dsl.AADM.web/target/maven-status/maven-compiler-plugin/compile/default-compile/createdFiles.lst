@@ -1,0 +1,5 @@
+org/sodalite/dsl/web/AADMWebModule.class
+org/sodalite/dsl/web/AADMServlet.class
+org/sodalite/dsl/web/AbstractAADMWebModule.class
+org/sodalite/dsl/web/AADMWebSetup.class
+org/sodalite/dsl/web/ServerLauncher.class
