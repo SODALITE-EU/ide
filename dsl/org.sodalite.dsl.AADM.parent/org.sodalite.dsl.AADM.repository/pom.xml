@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.sodalite.dsl.AADM</groupId>
-		<artifactId>org.sodalite.dsl.AADM.parent</artifactId>
+		<groupId>org.sodalite.IDE</groupId>
+		<artifactId>org.sodalite.IDE.parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>org.sodalite.dsl.AADM.repository</artifactId>
+	<artifactId>org.sodalite.IDE.repository</artifactId>
 	<packaging>eclipse-repository</packaging>
 
 	<build>

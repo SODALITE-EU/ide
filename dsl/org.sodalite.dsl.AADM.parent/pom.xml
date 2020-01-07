@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.sodalite.dsl.AADM</groupId>
+	<groupId>org.sodalite.IDE</groupId>
 	<version>1.0.0-SNAPSHOT</version>
-	<artifactId>org.sodalite.dsl.AADM.parent</artifactId>
+	<artifactId>org.sodalite.IDE.parent</artifactId>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -102,8 +102,8 @@
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>org.sodalite.dsl.AADM</groupId>
-							<artifactId>org.sodalite.dsl.AADM.target</artifactId>
+							<groupId>org.sodalite.IDE</groupId>
+							<artifactId>org.sodalite.IDE.target</artifactId>
 							<version>${project.version}</version>
 						</artifact>
 					</target>
