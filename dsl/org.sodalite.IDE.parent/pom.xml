@@ -24,9 +24,9 @@
 		<module>org.sodalite.dsl.AADM.ide</module>
 		<module>org.sodalite.dsl.AADM.ui</module>
 		<module>org.sodalite.dsl.AADM.web</module>
-		<module>org.sodalite.dsl.AADM.target</module>
+		<module>org.sodalite.IDE.target</module>
 		<module>org.sodalite.dsl.AADM.feature</module>
-		<module>org.sodalite.dsl.AADM.repository</module>
+		<module>org.sodalite.IDE.repository</module>
 		<module>org.sodalite.dsl.AADM.tests</module>
 		<module>org.sodalite.dsl.AADM.ui.tests</module>
 		<module>org.sodalite.dsl.RM</module>
