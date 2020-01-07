@@ -29,6 +29,11 @@
 		<module>org.sodalite.dsl.AADM.repository</module>
 		<module>org.sodalite.dsl.AADM.tests</module>
 		<module>org.sodalite.dsl.AADM.ui.tests</module>
+		<module>org.sodalite.dsl.RM</module>
+		<module>org.sodalite.dsl.RM.ide</module>
+		<module>org.sodalite.dsl.RM.ui</module>
+		<module>org.sodalite.dsl.kb_reasoner_client</module>
+		<module>org.sodalite.dsl.RM.feature</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
