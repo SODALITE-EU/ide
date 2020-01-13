@@ -172,7 +172,7 @@ EPropertyDefinition:
 name = ID '{'
 ('type:' type=[EDataType|EDataTypeName])
 ('description:' description=STRING)?
-('required:' required=BOOLEAN)? //FIXME: possible values true|false are not suggested
+('required:' required=BOOLEAN)?
 ('default:' default=EValueExpression)?
 ('status:' status=STRING)?
 ('constraints{' 
@@ -244,17 +244,17 @@ EFunction:
 
 GetAttribute:
 'get_attribute{'
-	('attribute:' attribute=STRING)
+	('attribute:' attribute=[EAttributeDefinition|QUALIFIED_NAME])
 	('entity:' entity=ENTITY)
-	('req_cap:' req_cap=STRING)? 
+	('req_cap:' req_cap=[EReqOrCap|QUALIFIED_NAME])?
 '}'
 ;
 
 GetProperty:
 'get_property{'
-	('property:' attribute=STRING)
-	('entity:' entity=ENTITY)
-	('req_cap:' req_cap=STRING)? 
+	('property:' property=[EPropertyDefinition|QUALIFIED_NAME])
+	('entity:' entity=ENTITY) 
+	('req_cap:' req_cap=[EReqOrCap|QUALIFIED_NAME])?
 '}'
 ;
 
@@ -266,9 +266,17 @@ ECapabilityDefinition:
 name = ID '{'
 	('type:' type=[ECapabilityType|QUALIFIED_NAME])
 	('description:' description=STRING)?
-	('valid_source_types:' valid_source_types=STRING)? //FIXME support list of node components (see TOSCA specification)
+	('valid_source_types:' '[' (valid_source_types+=EValidSourceType)? ']')?
 	('occurrences:' '[' start=STRING ',' end=STRING ']')?
 '}'
+;
+
+EValidSourceType:
+	sourceTypes += ETypeRef (',' sourceType+=ETypeRef)*
+;
+
+ETypeRef:
+	name = [ENodeType|QUALIFIED_NAME]
 ;
 
 ERequirements:
@@ -282,6 +290,10 @@ name = ID '{'
 	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])?
 	('occurrences:' '[' start=STRING ',' end=STRING ']')?
 '}'
+;
+
+EReqOrCap:
+	ERequirementDefinition | ECapabilityDefinition
 ;
 
 EConstraints:
@@ -347,3 +359,7 @@ terminal ENTITY:
 terminal PRIMITIVE_DATA_TYPE:
 	'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type'
 ;
+
+@Override
+terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
+

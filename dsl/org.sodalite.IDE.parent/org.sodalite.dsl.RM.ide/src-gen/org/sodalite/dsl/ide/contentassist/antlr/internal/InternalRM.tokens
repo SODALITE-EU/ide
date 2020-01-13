@@ -1,6 +1,6 @@
-','=53
-'['=52
-']'=54
+','=54
+'['=51
+']'=52
 'artifact_types{'=17
 'attribute:'=45
 'attributes{'=30
@@ -33,7 +33,7 @@
 'min_length:'=59
 'node:'=56
 'node_types{'=21
-'occurrences:'=51
+'occurrences:'=53
 'operations{'=32
 'policy_types{'=22
 'properties{'=27

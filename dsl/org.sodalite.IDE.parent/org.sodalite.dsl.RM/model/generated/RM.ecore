@@ -173,33 +173,45 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValueExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EFunction" eSuperTypes="#//EValueExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="entity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="req_cap" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="req_cap" eType="#//EReqOrCap"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GetAttribute" eSuperTypes="#//EFunction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GetProperty" eSuperTypes="#//EFunction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GetAttribute" eSuperTypes="#//EFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//EAttributeDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GetProperty" eSuperTypes="#//EFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" eType="#//EPropertyDefinition"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ECapabilities">
     <eStructuralFeatures xsi:type="ecore:EReference" name="capabilities" upperBound="-1"
         eType="#//ECapabilityDefinition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ECapabilityDefinition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ECapabilityDefinition" eSuperTypes="#//EReqOrCap">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ECapabilityType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid_source_types" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valid_source_types" upperBound="-1"
+        eType="#//EValidSourceType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EValidSourceType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTypes" upperBound="-1"
+        eType="#//ETypeRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceType" upperBound="-1"
+        eType="#//ETypeRef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ETypeRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//ENodeType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERequirements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
         eType="#//ERequirementDefinition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ERequirementDefinition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ERequirementDefinition" eSuperTypes="#//EReqOrCap">
     <eStructuralFeatures xsi:type="ecore:EReference" name="capability" eType="#//ECapabilityType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//ENodeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relationship" eType="#//ERelationshipType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EReqOrCap">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

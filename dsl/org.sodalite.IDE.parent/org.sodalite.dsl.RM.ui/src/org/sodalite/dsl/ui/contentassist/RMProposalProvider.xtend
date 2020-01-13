@@ -3,10 +3,221 @@
  */
 package org.sodalite.dsl.ui.contentassist
 
+import java.util.Arrays
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.jface.text.contentassist.ICompletionProposal
+import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
-class RMProposalProvider extends AbstractRMProposalProvider {
+ 
+
+
+class RMProposalProvider extends AbstractRMProposalProvider {	
+	
+	override void completeGetAttribute_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		System.out.println("Invoking content assist for GetAttribute::entity property")
+		
+		createEntityProposals(context, acceptor, model, assignment)
+	}
+	
+	override void completeGetProperty_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		System.out.println("Invoking content assist for GetProperty::entity property")
+		
+		createEntityProposals(context, acceptor, model, assignment)
+	}
+	
+	override void completeEPropertyDefinition_Required(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		System.out.println("Invoking content assist for EPropertyDefinition::required property")
+		
+		createBooleanProposals(context, acceptor, model, assignment)
+	}
+	
+	override void completeENodeType_Name(EObject model, Assignment assignment, ContentAssistContext context,
+		ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for ENodeType::name property")
+		val String proposalText = "tosca.types.id"
+		val String displayText = "tosca.types.id"
+		val String additionalProposalInfo = "The required id of the node type"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEDataType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EDataType::name property")
+		val String proposalText = "tosca.datatypes.id"
+		val String displayText = "tosca.datatypes.id"
+		val String additionalProposalInfo = "The required id of the data type"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEArtifactType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EArtifactType::name property")
+		val String proposalText = "tosca.artifacts.id"
+		val String displayText = "tosca.artifacts.id"
+		val String additionalProposalInfo = "The required id of the artifact type"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeECapabilityType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for ECapabilityType::name property")
+		val String proposalText = "tosca.capabilities.id"
+		val String displayText = "tosca.capabilities.id"
+		val String additionalProposalInfo = "The required id of the capability type"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEInterfaceType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		System.out.println("Invoking content assist for EInterfaceType::name property")
+		val String proposalText = "tosca.interfaces.id"
+		val String displayText = "tosca.interfaces.id"
+		val String additionalProposalInfo = "The required id of the interface type"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+
+	
+	override void completeERelationshipType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		System.out.println("Invoking content assist for ERelationshipType::name property")
+		val String proposalText = "tosca.relationships.id"
+		val String displayText = "tosca.relationships.id"
+		val String additionalProposalInfo = "The required id of the relationship type"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEPolicyType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EPolicyType::name property")
+		val String proposalText = "tosca.policies.id"
+		val String displayText = "tosca.policies.id"
+		val String additionalProposalInfo = "The required id of the policy type"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEPropertyDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		System.out.println("Invoking content assist for EPropertyDefinition::name property")
+		val String proposalText = "property_name"
+		val String displayText = "property_name"
+		val String additionalProposalInfo = "The required id of the property definition"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEAttributeDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		System.out.println("Invoking content assist for EAttributeDefinition::name property")
+		val String proposalText = "attribute_name"
+		val String displayText = "attribute_name"
+		val String additionalProposalInfo = "The required id of the attribute definition"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEInterfaceDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EInterfaceDefinition::name property")
+		val String proposalText = "interface_name"
+		val String displayText = "interface_name"
+		val String additionalProposalInfo = "The required id of the interface definition"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEOperationDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EOperationDefinition::name property")
+		val String proposalText = "operation_name"
+		val String displayText = "operation_name"
+		val String additionalProposalInfo = "The required id of the operation definition"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEParameterDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EParameterDefinition::name property")
+		val String proposalText = "parameter_name"
+		val String displayText = "parameter_name"
+		val String additionalProposalInfo = "The required id of the parameter definition"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeECapabilityDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for ECapabilityDefinition::name property")
+		val String proposalText = "capability_name"
+		val String displayText = "capability_name"
+		val String additionalProposalInfo = "The required id of the capability definition"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeERequirementDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for ERequirementDefinition::name property")
+		val String proposalText = "requirement_name"
+		val String displayText = "requirement_name"
+		val String additionalProposalInfo = "The required id of the requirement definition"
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	protected def void createEntityProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor, EObject model, Assignment assignment) {
+		for (entity: Arrays.asList(Entity.values())){
+			System.out.println ("\tEntity: " + entity)
+			val proposalText = entity.toString
+			val displayText = entity.toString
+			val additionalProposalInfo = entity.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+		
+		super.completeGetAttribute_Entity(model, assignment, context, acceptor)
+	}
+	
+	protected def void createBooleanProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor, EObject model, Assignment assignment) {
+		for (bool: Arrays.asList(BooleanEnum.values())){
+			System.out.println ("\tBoolean: " + bool)
+			val proposalText = bool.getLabel()
+			val displayText = bool.getLabel()
+			val additionalProposalInfo = null
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+		
+		super.completeGetAttribute_Entity(model, assignment, context, acceptor)
+	}
+
+	
+	protected def void createNonEditableCompletionProposal(String proposalText, String displayText,
+		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setAdditionalProposalInfo(additionalProposalInfo);
+			configurable.setAutoInsertable(false);
+		}
+		acceptor.accept(proposal)
+	}
+	
+	protected def void createEditableCompletionProposal(String proposalText, String displayText,
+		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setSelectionStart(configurable.getReplacementOffset());
+			configurable.setSelectionLength(proposalText.length());
+			configurable.setAutoInsertable(false);
+			configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+			configurable.setAdditionalProposalInfo(additionalProposalInfo);
+		}
+		acceptor.accept(proposal)
+	}
+	
+	static enum Boolean{
+		True, False
+	}
+
 }

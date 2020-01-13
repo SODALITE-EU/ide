@@ -3,7 +3,17 @@
  */
 package org.sodalite.dsl.ui.contentassist;
 
+import java.util.Arrays;
+import java.util.List;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
+import org.sodalite.dsl.ui.contentassist.BooleanEnum;
+import org.sodalite.dsl.ui.contentassist.Entity;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -11,4 +21,204 @@ import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
  */
 @SuppressWarnings("all")
 public class RMProposalProvider extends AbstractRMProposalProvider {
+  public enum Boolean {
+    True,
+    
+    False;
+  }
+  
+  @Override
+  public void completeGetAttribute_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for GetAttribute::entity property");
+    this.createEntityProposals(context, acceptor, model, assignment);
+  }
+  
+  @Override
+  public void completeGetProperty_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for GetProperty::entity property");
+    this.createEntityProposals(context, acceptor, model, assignment);
+  }
+  
+  @Override
+  public void completeEPropertyDefinition_Required(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EPropertyDefinition::required property");
+    this.createBooleanProposals(context, acceptor, model, assignment);
+  }
+  
+  @Override
+  public void completeENodeType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for ENodeType::name property");
+    final String proposalText = "tosca.types.id";
+    final String displayText = "tosca.types.id";
+    final String additionalProposalInfo = "The required id of the node type";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEDataType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EDataType::name property");
+    final String proposalText = "tosca.datatypes.id";
+    final String displayText = "tosca.datatypes.id";
+    final String additionalProposalInfo = "The required id of the data type";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEArtifactType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EArtifactType::name property");
+    final String proposalText = "tosca.artifacts.id";
+    final String displayText = "tosca.artifacts.id";
+    final String additionalProposalInfo = "The required id of the artifact type";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeECapabilityType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for ECapabilityType::name property");
+    final String proposalText = "tosca.capabilities.id";
+    final String displayText = "tosca.capabilities.id";
+    final String additionalProposalInfo = "The required id of the capability type";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEInterfaceType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EInterfaceType::name property");
+    final String proposalText = "tosca.interfaces.id";
+    final String displayText = "tosca.interfaces.id";
+    final String additionalProposalInfo = "The required id of the interface type";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeERelationshipType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for ERelationshipType::name property");
+    final String proposalText = "tosca.relationships.id";
+    final String displayText = "tosca.relationships.id";
+    final String additionalProposalInfo = "The required id of the relationship type";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEPolicyType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EPolicyType::name property");
+    final String proposalText = "tosca.policies.id";
+    final String displayText = "tosca.policies.id";
+    final String additionalProposalInfo = "The required id of the policy type";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEPropertyDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EPropertyDefinition::name property");
+    final String proposalText = "property_name";
+    final String displayText = "property_name";
+    final String additionalProposalInfo = "The required id of the property definition";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEAttributeDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EAttributeDefinition::name property");
+    final String proposalText = "attribute_name";
+    final String displayText = "attribute_name";
+    final String additionalProposalInfo = "The required id of the attribute definition";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEInterfaceDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EInterfaceDefinition::name property");
+    final String proposalText = "interface_name";
+    final String displayText = "interface_name";
+    final String additionalProposalInfo = "The required id of the interface definition";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEOperationDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EOperationDefinition::name property");
+    final String proposalText = "operation_name";
+    final String displayText = "operation_name";
+    final String additionalProposalInfo = "The required id of the operation definition";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEParameterDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EParameterDefinition::name property");
+    final String proposalText = "parameter_name";
+    final String displayText = "parameter_name";
+    final String additionalProposalInfo = "The required id of the parameter definition";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeECapabilityDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for ECapabilityDefinition::name property");
+    final String proposalText = "capability_name";
+    final String displayText = "capability_name";
+    final String additionalProposalInfo = "The required id of the capability definition";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeERequirementDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for ERequirementDefinition::name property");
+    final String proposalText = "requirement_name";
+    final String displayText = "requirement_name";
+    final String additionalProposalInfo = "The required id of the requirement definition";
+    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  protected void createEntityProposals(final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final EObject model, final Assignment assignment) {
+    List<Entity> _asList = Arrays.<Entity>asList(Entity.values());
+    for (final Entity entity : _asList) {
+      {
+        System.out.println(("\tEntity: " + entity));
+        final String proposalText = entity.toString();
+        final String displayText = entity.toString();
+        final String additionalProposalInfo = entity.getDescription();
+        this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+      }
+    }
+    super.completeGetAttribute_Entity(model, assignment, context, acceptor);
+  }
+  
+  protected void createBooleanProposals(final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final EObject model, final Assignment assignment) {
+    List<BooleanEnum> _asList = Arrays.<BooleanEnum>asList(BooleanEnum.values());
+    for (final BooleanEnum bool : _asList) {
+      {
+        System.out.println(("\tBoolean: " + bool));
+        final String proposalText = bool.getLabel();
+        final String displayText = bool.getLabel();
+        final Object additionalProposalInfo = null;
+        this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
+      }
+    }
+    super.completeGetAttribute_Entity(model, assignment, context, acceptor);
+  }
+  
+  protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+    if ((proposal instanceof ConfigurableCompletionProposal)) {
+      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
+      configurable.setAdditionalProposalInfo(additionalProposalInfo);
+      configurable.setAutoInsertable(false);
+    }
+    acceptor.accept(proposal);
+  }
+  
+  protected void createEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+    if ((proposal instanceof ConfigurableCompletionProposal)) {
+      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
+      configurable.setSelectionStart(configurable.getReplacementOffset());
+      configurable.setSelectionLength(proposalText.length());
+      configurable.setAutoInsertable(false);
+      configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+      configurable.setAdditionalProposalInfo(additionalProposalInfo);
+    }
+    acceptor.accept(proposal);
+  }
 }
