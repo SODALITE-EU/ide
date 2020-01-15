@@ -1,0 +1,190 @@
+node_templates{
+	
+	data_processing_vm{
+		type: sodalite.nodes.VM.OpenStack
+		properties{
+			name: 'data-processing-vm'
+			image: 'centos7'
+			flavor: 'm1.small'
+			network: '87b57656-381c-4921-82c0-bd65a8a67cfd'
+			security_groups: 'default,snow'
+			key_name: 'draganrX'
+		} 
+	}
+	
+	data_stream_vm{
+		type: sodalite.nodes.VM.OpenStack
+		properties{
+			name: 'data-processing-vm'
+			image: 'centos7'
+			flavor: 'm1.small'
+			network: '87b57656-381c-4921-82c0-bd65a8a67cfd'
+			security_groups: 'default,snow'
+			key_name: 'draganrX'
+			mounted_disk: '/mnt/disk'
+		}
+		requirements{
+			dependency{
+				node: data_processing_vm
+			}
+		}
+	}
+	
+	data_processing_docker_host{
+		type: sodalite.nodes.DockerHost
+		properties{
+			registry_ip: '154.48.185.207'
+		}
+		requirements{
+			host{
+				node: data_processing_vm
+			} 
+		}
+	} 
+	
+	data_stream_docker_host{
+		type: sodalite.nodes.DockerHost
+		properties{
+			registry_ip: '154.48.185.208'
+		}
+		requirements{
+			host{
+				node: data_stream_docker_host
+			} 
+		}
+	}
+	 
+	skyline_extractor{
+		 type: sodalite.nodes.DockerizedComponent
+		 properties{
+		 	image_name: 'snow-skyline-extractor'
+		 	ports: '8080:8080'
+		 	exposed_ports: '8080'
+		 }
+		 requirements{
+		 	host{
+		 		node: data_processing_docker_host
+		 	}
+		 	dependency{
+		 		node: panorama_generator
+		 	}
+		 }
+	}
+	
+	panorama_generator{
+		type: sodalite.nodes.DockerizedComponent
+		properties{
+			image_name: 'snow-panorama-generator'
+			ports: '8082:8082'
+			exposed_ports: '8082'
+		}
+		requirements{
+			host{
+				node: data_processing_docker_host
+			}
+			dependency{
+		 		node: panorama_alignment
+		 	}
+		}
+	}
+	
+	panorama_alignment{
+		type: sodalite.nodes.DockerizedComponent
+		properties{
+			image_name: 'snow-panorama-alignment'
+			ports: '8081:8081'
+			exposed_ports: '8081'
+		}
+		requirements{
+			host{
+				node: data_processing_docker_host
+			}
+		}
+	}
+	
+	mysql{
+		type: sodalite.nodes.DockerizedComponent
+		properties{
+			image_name: 'snow-mysql'
+			ports: '3306:3306'
+			exposed_ports: '3306'
+		}
+		requirements{
+			host{
+				node: data_stream_docker_host
+			}
+		}
+	}
+	
+	wic{
+		type: sodalite.nodes.DockerizedComponent
+		properties{
+			image_name: 'snow-wic'
+			ports: '8083:8083'
+			exposed_ports: '8083'
+		}
+		requirements{
+			host{
+				node: data_stream_docker_host
+			}
+			dependency{
+				node: wcf
+			}
+		}
+	}
+	
+	wcf{
+		type: sodalite.nodes.DockerizedComponent
+		properties{
+			image_name: 'snow-wcf'
+			ports: '8084:8084'
+			exposed_ports: '8084'
+		}
+		requirements{
+			host{
+				node: data_stream_docker_host
+			}
+			dependency{
+				node: dia
+			}
+		}
+	}
+	
+	dia{
+		type: sodalite.nodes.DockerizedComponent
+		properties{
+			image_name: 'snow-dmia'
+			ports: '8085:8085'
+			exposed_ports: '8085'
+		}
+		requirements{
+			host{
+				node: data_stream_docker_host
+			}
+		}
+	}
+	
+	orchestrator{
+		type: sodalite.nodes.DockerizedComponent
+		properties{
+			image_name: 'snow-orchestrator'
+			ports: '8086:8086'
+			exposed_ports: '8086'
+			mounted_disk: '/mnt/disk' //Orchestrator needs this property, which is available in the VM
+		}
+		requirements{
+			host{
+				node: data_stream_docker_host
+			}
+			dependency{
+				node: wic
+			}
+			dependency{
+				node: wcf
+			}
+			dependency{
+				node: dia
+			}
+		}
+	}
+}

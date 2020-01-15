@@ -1,0 +1,158 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+node_types:
+
+  sodalite.nodes.DockerHost:
+    derived_from: tosca.nodes.Compute
+    properties:
+      registry_ip:
+        type: string
+        description: IP of the SODALITE docker registry
+        required: true
+        default: localhost
+    attributes:
+      registry_ip:
+        type: string
+        description: IP of the SODALITE docker registry
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            registry_ip:    { default: { get_property: [ SELF, registry_ip ] } }
+            public_ipv4_address: { default:  { get_attribute: [ SELF, host, public_address ] } }            
+          implementation:
+            primary: playbooks/docker/create_docker_host.yml
+        delete:
+          inputs:
+            registry_ip:    { default: { get_property: [ SELF, registry_ip ] } }
+          implementation:
+            primary: playbooks/docker/destroy_docker_host.yml
+    capabilities:
+      host:
+        type: tosca.capabilities.Compute
+        valid_source_types: [ sodalite.nodes.DockerizedComponent ]
+
+  sodalite.nodes.DockerizedComponent:
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      image_name:
+        type: string
+        description: The name of the image on the host
+        required: true
+      ports:
+        type: string
+        description: Port binding for the docker container "exposed:internal" like "8081:8080"
+        required: true
+      exposed_ports:
+        type: string
+        description: Exposed ports of the container like "8081" 
+        required: true
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            registry_ip:    { default: { get_attribute: [ SELF, host, registry_ip ] } }
+            image_name:     { default: { get_property: [ SELF, image_name ] } }
+            ports:          { default: { get_property: [ SELF, ports ] } }
+            exposed_ports:  { default: { get_property: [ SELF, exposed_ports ] } }
+          implementation:
+            primary: playbooks/docker/dockerized_component_deploy.yml
+        delete:
+          inputs:
+            image_name:     { default: { get_property: [ SELF, image_name ] } }
+            registry_ip:    { default: { get_attribute: [ SELF, host, registry_ip ] } }
+          implementation:
+            primary: playbooks/docker/dockerized_component_undeploy.yml
+    requirements:
+      - host:
+          capability: tosca.capabilities.Compute
+          node: sodalite.nodes.DockerHost
+          relationship: tosca.relationships.HostedOn
+
+  sodalite.nodes.VM.OpenStack:
+    derived_from: tosca.nodes.Compute
+    properties:
+      name:
+        type: string
+        description: Name that should be given to the VM in OpenStack
+      image:
+        type: string
+        description: OpenStack image id (image names are not accepted)
+      flavor:
+        type: string
+        description: OpenStack flavor id (flavor names are not accepted)
+      network:
+        type: string
+        description: OpenStack network id (network names are not accepted)
+      security_groups:
+        type: string
+        description: OpenStack names of the security groups to which the instance should be added.Comma separated string.
+      key_name:
+        type: string
+        description: OpenStack SSH key name that should be placed on the VM
+    attributes:
+      id:
+        type: string
+        description: OpenStack id of the VM
+      private_address:
+        type: string
+        description: Private ipv4
+      public_address:
+        type: string
+        description: Public ipv4
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            vm_name:  { default: { get_property: [ SELF, name     ] } }
+            image:    { default: { get_property: [ SELF, image    ] } }
+            flavor:   { default: { get_property: [ SELF, flavor   ] } }
+            network:  { default: { get_property: [ SELF, network  ] } }
+            security_groups:  { default: { get_property: [ SELF, security_groups  ] } }
+            key_name: { default: { get_property: [ SELF, key_name ] } }
+          implementation: playbooks/vm/create.yml
+        delete:
+          inputs:
+            id: { default: { get_attribute: [ SELF, id ] } }
+          implementation: playbooks/vm/delete.yml
+
+
+topology_template:
+  node_templates:
+    vm:
+      type: sodalite.nodes.VM.OpenStack
+      properties:
+        name: snow-vm
+        image: centos7
+        flavor: m1.small
+        network: 87b57656-381c-4921-82c0-bd65a8a67cfd
+        security_groups: default,snow
+        key_name: draganrX
+
+    docker-host:
+      type: sodalite.nodes.DockerHost
+      properties:
+        registry_ip: 154.48.185.207
+      requirements:
+        - host: vm
+
+    skyline-extractor:
+      type: sodalite.nodes.DockerizedComponent
+      properties:
+        image_name: snow-skyline-extractor
+        ports: 8080:8080
+        exposed_ports: 8080
+      requirements:
+        - host: docker-host
+
+    skyline-alignment:
+      type: sodalite.nodes.DockerizedComponent
+      properties:
+        image_name: snow-skyline-alignment
+        ports: 8081:8080
+        exposed_ports: 8080
+      requirements:
+        - host: docker-host

@@ -1,7 +1,7 @@
 node_types{
 	
 	sodalite.nodes.DockerHost {
-		derived_from: tosca.nodes.SoftwareComponent	
+		derived_from: tosca.nodes.Compute	
 		properties{
 			registry_ip{
 				type: string
@@ -25,16 +25,16 @@ node_types{
 							registry_ip {
 								default:
 									get_attribute{
-										attribute: 'registry_ip'
+										attribute: sodalite.nodes.DockerHost.registry_ip
 										entity: SELF
 									}
 							}
 							public_ipv4_address{
 								default:
 									get_attribute{
-										attribute: 'public_address'
+										attribute: tosca.nodes.Compute.public_address
 										entity: SELF
-										req_cap: 'host'
+										req_cap: tosca.nodes.Compute.host
 									}
 							}
 						}
@@ -45,7 +45,7 @@ node_types{
 							registry_ip{
 								default:
 									get_property{
-										property: 'registry_ip'
+										property: sodalite.nodes.DockerHost.registry_ip
 										entity: SELF
 									}
 							}
@@ -58,7 +58,7 @@ node_types{
 		capabilities{
 			host{
 				type: tosca.capabilities.Compute
-				valid_source_types: '[ sodalite.nodes.DockerizedComponent ]'
+				valid_source_types: [ sodalite.nodes.DockerizedComponent ]
 			}
 		}
 	}
@@ -81,6 +81,10 @@ node_types{
 				description: 'Exposed ports of the container like "8081"'
 				required: true
 			}
+			mounted_disk{
+				type: string
+				description: "define the path to the mounted disk accessible for this component"
+			}
 		}
 		interfaces{
 			Standard{
@@ -91,28 +95,28 @@ node_types{
 							registry_ip{
 								default:
 									get_attribute{
-										attribute: "registry_ip"
+										attribute: sodalite.nodes.DockerHost.registry_ip
 										entity: SELF
 									}
 							}
 							image_name{
 								default:
 									get_property{
-										property: "image_name"
+										property: sodalite.nodes.DockerizedComponent.image_name
 										entity: SELF
 									}
 							}
 							ports{
 								default:
 									get_property{
-										property: "ports"
+										property: sodalite.nodes.DockerizedComponent.ports
 										entity: SELF
 									}
 							}
 							exposed_ports {
 								default:
 									get_property{
-										property: "exposed_ports"
+										property: sodalite.nodes.DockerizedComponent.exposed_ports
 										entity: SELF
 									}
 							}
@@ -124,16 +128,16 @@ node_types{
 							image_name{
 								default:
 									get_property{
-										property: "image_name"
+										property: sodalite.nodes.DockerizedComponent.image_name
 										entity: SELF
 									}
 							}
 							registry_ip{
 								default:
 									get_attribute{
-										attribute: "registry_ip"
+										attribute: sodalite.nodes.DockerHost.registry_ip
 										entity: SELF
-										req_cap: 'host'
+										req_cap: sodalite.nodes.DockerHost.host
 									}
 							}
 						}
@@ -178,6 +182,10 @@ node_types{
 				type: string
 				description: 'OpenStack SSH key name that should be placed on the VM'
 			}
+			mounted_disk{
+				type: string
+				description: "define the path to the mounted disk"
+			}
 		}
 		attributes{
 			id{
@@ -202,35 +210,35 @@ node_types{
 							vm_name{
 								default:
 									get_property{
-										property: "name"
+										property: sodalite.nodes.VM.OpenStack.name
 										entity: SELF
 									}
 							}
 							image{
 								default:
 									get_property{
-										property: "image"
+										property: sodalite.nodes.VM.OpenStack.image
 										entity: SELF
 									}
 							}
 							flavor{
 								default:
 									get_property{
-										property: "flavor"
+										property: sodalite.nodes.VM.OpenStack.flavor
 										entity: SELF
 									}
 							}
 							network{
 								default:
 									get_property{
-										property: "network"
+										property: sodalite.nodes.VM.OpenStack.network
 										entity: SELF
 									}
 							}
 							security_groups{
 								default:
 									get_property{
-										property:"security_groups"
+										property: sodalite.nodes.VM.OpenStack.security_groups
 										entity: SELF
 									}									
 							}
@@ -242,7 +250,7 @@ node_types{
 								id{
 									default:
 										get_attribute{
-											attribute: "id"
+											attribute: sodalite.nodes.VM.OpenStack.id
 											entity: SELF
 										}
 								}
