@@ -318,6 +318,10 @@
 				</reference>
 			</activeWhen>
 		</handler>
+  <handler
+        class="org.sodalite.dsl.ui.handlers.RMSaveHandler"
+        commandId="org.sodalite.dsl.RM.ui.handler.saveRM">
+  </handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
@@ -326,6 +330,17 @@
 			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
 			name="Quick Outline">
 		</command>
+  <category
+        id="org.sodalite.dsl.RM.ui.category"
+        name="Sodalite">
+  </category>
+  <command
+        categoryId="org.sodalite.dsl.RM.ui.category"
+        defaultHandler="org.sodalite.dsl.ui.handlers.RMSaveHandler"
+        description="Save the RM into the KB"
+        id="org.sodalite.dsl.RM.ui.command.saveRM"
+        name="saveRM">
+  </command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 		<menuContribution
@@ -338,6 +353,36 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+     <menu
+           label="Sodalite">
+        <command
+              commandId="org.sodalite.dsl.RM.ui.command.saveRM"
+              id="org.sodalite.dsl.RM.ui.popup.command.saveRM"
+              label="Save RM  in the KB"
+              style="push"
+              tooltip="Save RM into the remote Sodalite Knowledge Base">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.rm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+     </menu>
+  </menuContribution>
 	</extension>
 	<!-- quickfix marker resolution generator for org.sodalite.dsl.RM -->
 	<extension
