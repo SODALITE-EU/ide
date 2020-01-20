@@ -1,4 +1,4 @@
-package org.sodalite.dsl.ui.handlers;
+package org.sodalite.dsl.ui.validation;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;

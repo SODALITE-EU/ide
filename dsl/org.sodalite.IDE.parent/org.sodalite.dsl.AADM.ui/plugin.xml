@@ -319,11 +319,11 @@
 			</activeWhen>
 		</handler>
   <handler
-        class="org.sodalite.dsl.ui.handlers.AADMSaveHandler"
+        class="org.sodalite.dsl.ui.validation.AADMSaveHandler"
         commandId="org.sodalite.dsl.AADM.ui.handler.saveAADM">
   </handler>
   <handler
-        class="org.sodalite.dsl.ui.handlers.AADMDeployHandler"
+        class="org.sodalite.dsl.ui.validation.AADMDeployHandler"
         commandId="org.sodalite.dsl.AADM.ui.handler.deployAADM">
   </handler>
 	</extension>
@@ -340,14 +340,14 @@
   </category>
   <command
         categoryId="org.sodalite.dsl.AADM.ui.category"
-        defaultHandler="org.sodalite.dsl.ui.handlers.AADMSaveHandler"
+        defaultHandler="org.sodalite.dsl.ui.validation.AADMSaveHandler"
         description="Save the AADM into the KB"
         id="org.sodalite.dsl.AADM.ui.command.saveAADM"
         name="saveAADM">
   </command>
   <command
         categoryId="org.sodalite.dsl.AADM.ui.category"
-        defaultHandler="org.sodalite.dsl.ui.handlers.AADMDeployHandler"
+        defaultHandler="org.sodalite.dsl.ui.validation.AADMDeployHandler"
         description="Deploy the AADM using the Sodalite IoC layer"
         id="org.sodalite.dsl.AADM.ui.command.deployAADM"
         name="deployAADM">
