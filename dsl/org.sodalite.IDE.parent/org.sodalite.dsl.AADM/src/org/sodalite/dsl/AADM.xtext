@@ -8,67 +8,60 @@
  * Contributors:
  *     Jesús Gorroñogoitia - Design and implementation
  *******************************************************************************/
-
-
 grammar org.sodalite.dsl.AADM with org.eclipse.xtext.common.Terminals
-import "http://www.sodalite.org/dsl/RM" as rm
 
+import "http://www.sodalite.org/dsl/RM" as rm
 generate aADM "http://www.sodalite.org/dsl/AADM"
 
 AADM_Model:
 	('node_templates{'
-		nodeTemplates=ENodeTemplates
-	'}')?
-;
+	nodeTemplates=ENodeTemplates
+	'}')?;
 
 ENodeTemplates:
-	{ENodeTemplates}(nodeTemplates+=ENodeTemplate)+
-;
+	{ENodeTemplates} (nodeTemplates+=ENodeTemplate)+;
 
-ENodeTemplate: 
-	name = ID '{'
-	('type:' type=QUALIFIED_NAME)
-	('description:' description=STRING)?
+ENodeTemplate:
+	name=ID '{'
+	node=ENodeTemplateBody
+	"}";
+
+ENodeTemplateBody:
+	('type:' type=QUALIFIED_NAME) &
+	('description:' description=STRING)? &
 	('properties{'
-		properties=EProperties 
-	 	'}')?
+	properties=EProperties
+	'}')? &
 	('attributes{'
-		atributes=EAttributes 
-		'}')?
-	('requirements{' 
-		requirements=ERequirements 
-		'}')?
-"}";
+	atributes=EAttributes
+	'}')? &
+	('requirements{'
+	requirements=ERequirements
+	'}')?;
 
 ERequirements:
-	{ERequirements} (requirements+=ERequirementAssignment)*
-;
+	{ERequirements} (requirements+=ERequirementAssignment)*;
 
 ERequirementAssignment:
-	name = ID '{' 
+	name=ID '{'
 	('node:' node=[ENodeTemplate|ID])
-	'}'
-;
+	'}';
 
 EAttributes:
-	{EAttributes} (attributes+=EAttributeAssignment)*
-;
+	{EAttributes} (attributes+=EAttributeAssignment)*;
 
 EAttributeAssignment:
-	name = ID ':' value = STRING
-;
+	name=ID ':' value=STRING;
 
 EProperties:
-	{EProperties} (properties+=EPropertyAssignment)*
-;
-	
+	{EProperties} (properties+=EPropertyAssignment)*;
+
 EPropertyAssignment:
-	name = ID ':' value = STRING
-;
+	name=ID ':' value=STRING;
 
 terminal QUALIFIED_NAME:
-	ID ('.' ID)+
-;
+	ID ('.' ID)+;
 
 @Override
-terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
+terminal ID:
+	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '0'..'9')*;

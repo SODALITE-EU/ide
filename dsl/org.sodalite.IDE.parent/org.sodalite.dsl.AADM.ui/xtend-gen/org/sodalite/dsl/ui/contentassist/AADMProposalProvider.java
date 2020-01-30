@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.sodalite.dsl.aADM.impl.EAttributesImpl;
-import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl;
+import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.EPropertiesImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementsImpl;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
@@ -151,7 +151,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
-  public void completeENodeTemplate_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeENodeTemplateBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
       final ReasonerData<Node> nodes = this.kbclient.getNodes();
@@ -168,7 +168,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
       }
-      super.completeENodeTemplate_Type(model, assignment, context, acceptor);
+      super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -182,12 +182,12 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String displayText = "";
       String additionalProposalInfo = "";
       String resourceId = "";
-      if ((model instanceof ENodeTemplateImpl)) {
-        resourceId = ((ENodeTemplateImpl) model).getType();
+      if ((model instanceof ENodeTemplateBodyImpl)) {
+        resourceId = ((ENodeTemplateBodyImpl) model).getType();
       } else {
         if ((model instanceof EAttributesImpl)) {
           EObject _eContainer = ((EAttributesImpl)model).eContainer();
-          resourceId = ((ENodeTemplateImpl) _eContainer).getType();
+          resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
       if ((resourceId != null)) {
@@ -234,12 +234,12 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String displayText = "";
       String additionalProposalInfo = "";
       String resourceId = "";
-      if ((model instanceof ENodeTemplateImpl)) {
-        resourceId = ((ENodeTemplateImpl) model).getType();
+      if ((model instanceof ENodeTemplateBodyImpl)) {
+        resourceId = ((ENodeTemplateBodyImpl) model).getType();
       } else {
         if ((model instanceof EPropertiesImpl)) {
           EObject _eContainer = ((EPropertiesImpl)model).eContainer();
-          resourceId = ((ENodeTemplateImpl) _eContainer).getType();
+          resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
       if ((resourceId != null)) {
@@ -286,12 +286,12 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String displayText = "";
       String additionalProposalInfo = "";
       String resourceId = "";
-      if ((model instanceof ENodeTemplateImpl)) {
-        resourceId = ((ENodeTemplateImpl) model).getType();
+      if ((model instanceof ENodeTemplateBodyImpl)) {
+        resourceId = ((ENodeTemplateBodyImpl) model).getType();
       } else {
         if ((model instanceof ERequirementsImpl)) {
           EObject _eContainer = ((ERequirementsImpl)model).eContainer();
-          resourceId = ((ENodeTemplateImpl) _eContainer).getType();
+          resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
       if ((resourceId != null)) {

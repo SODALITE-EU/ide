@@ -34,11 +34,11 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAADM_ModelAccess().getGroup(), "rule__AADM_Model__Group__0");
 			builder.put(grammarAccess.getENodeTemplatesAccess().getGroup(), "rule__ENodeTemplates__Group__0");
 			builder.put(grammarAccess.getENodeTemplateAccess().getGroup(), "rule__ENodeTemplate__Group__0");
-			builder.put(grammarAccess.getENodeTemplateAccess().getGroup_2(), "rule__ENodeTemplate__Group_2__0");
-			builder.put(grammarAccess.getENodeTemplateAccess().getGroup_3(), "rule__ENodeTemplate__Group_3__0");
-			builder.put(grammarAccess.getENodeTemplateAccess().getGroup_4(), "rule__ENodeTemplate__Group_4__0");
-			builder.put(grammarAccess.getENodeTemplateAccess().getGroup_5(), "rule__ENodeTemplate__Group_5__0");
-			builder.put(grammarAccess.getENodeTemplateAccess().getGroup_6(), "rule__ENodeTemplate__Group_6__0");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_0(), "rule__ENodeTemplateBody__Group_0__0");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_1(), "rule__ENodeTemplateBody__Group_1__0");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_2(), "rule__ENodeTemplateBody__Group_2__0");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_3(), "rule__ENodeTemplateBody__Group_3__0");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_4(), "rule__ENodeTemplateBody__Group_4__0");
 			builder.put(grammarAccess.getERequirementsAccess().getGroup(), "rule__ERequirements__Group__0");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getGroup(), "rule__ERequirementAssignment__Group__0");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getGroup_2(), "rule__ERequirementAssignment__Group_2__0");
@@ -49,11 +49,12 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAADM_ModelAccess().getNodeTemplatesAssignment_1(), "rule__AADM_Model__NodeTemplatesAssignment_1");
 			builder.put(grammarAccess.getENodeTemplatesAccess().getNodeTemplatesAssignment_1(), "rule__ENodeTemplates__NodeTemplatesAssignment_1");
 			builder.put(grammarAccess.getENodeTemplateAccess().getNameAssignment_0(), "rule__ENodeTemplate__NameAssignment_0");
-			builder.put(grammarAccess.getENodeTemplateAccess().getTypeAssignment_2_1(), "rule__ENodeTemplate__TypeAssignment_2_1");
-			builder.put(grammarAccess.getENodeTemplateAccess().getDescriptionAssignment_3_1(), "rule__ENodeTemplate__DescriptionAssignment_3_1");
-			builder.put(grammarAccess.getENodeTemplateAccess().getPropertiesAssignment_4_1(), "rule__ENodeTemplate__PropertiesAssignment_4_1");
-			builder.put(grammarAccess.getENodeTemplateAccess().getAtributesAssignment_5_1(), "rule__ENodeTemplate__AtributesAssignment_5_1");
-			builder.put(grammarAccess.getENodeTemplateAccess().getRequirementsAssignment_6_1(), "rule__ENodeTemplate__RequirementsAssignment_6_1");
+			builder.put(grammarAccess.getENodeTemplateAccess().getNodeAssignment_2(), "rule__ENodeTemplate__NodeAssignment_2");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getTypeAssignment_0_1(), "rule__ENodeTemplateBody__TypeAssignment_0_1");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getDescriptionAssignment_1_1(), "rule__ENodeTemplateBody__DescriptionAssignment_1_1");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getPropertiesAssignment_2_1(), "rule__ENodeTemplateBody__PropertiesAssignment_2_1");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getAtributesAssignment_3_1(), "rule__ENodeTemplateBody__AtributesAssignment_3_1");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getRequirementsAssignment_4_1(), "rule__ENodeTemplateBody__RequirementsAssignment_4_1");
 			builder.put(grammarAccess.getERequirementsAccess().getRequirementsAssignment_1(), "rule__ERequirements__RequirementsAssignment_1");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getNameAssignment_0(), "rule__ERequirementAssignment__NameAssignment_0");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getNodeAssignment_2_1(), "rule__ERequirementAssignment__NodeAssignment_2_1");
@@ -63,6 +64,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPropertiesAccess().getPropertiesAssignment_1(), "rule__EProperties__PropertiesAssignment_1");
 			builder.put(grammarAccess.getEPropertyAssignmentAccess().getNameAssignment_0(), "rule__EPropertyAssignment__NameAssignment_0");
 			builder.put(grammarAccess.getEPropertyAssignmentAccess().getValueAssignment_2(), "rule__EPropertyAssignment__ValueAssignment_2");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getUnorderedGroup(), "rule__ENodeTemplateBody__UnorderedGroup");
 		}
 	}
 	

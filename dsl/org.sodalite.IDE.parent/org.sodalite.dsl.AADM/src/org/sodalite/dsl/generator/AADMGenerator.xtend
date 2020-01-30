@@ -90,18 +90,18 @@ class AADMGenerator extends AbstractGenerator {
 	def compile(ENodeTemplate n) '''
 	:Template_«template_counter++»
 	  rdf:type exchange:Template ;
-	  «IF n.description !== null»
-	  exchange:description "«n.description»" ;
+	  «IF n.node.description !== null»
+	  exchange:description "«n.node.description»" ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
-	  exchange:type "«n.type»" ;
-	  «IF n.properties !== null»
-	  «FOR p:n.properties.properties»
+	  exchange:type "«n.node.type»" ;
+	  «IF n.node.properties !== null»
+	  «FOR p:n.node.properties.properties»
 	  exchange:properties :Property_«property_numbers.get(p)» ; 
 	  «ENDFOR»
 	  «ENDIF»
-	  «IF n.requirements !== null»
-	  «FOR p:n.requirements.requirements»
+	  «IF n.node.requirements !== null»
+	  «FOR p:n.node.requirements.requirements»
 	  exchange:requirements :Requirement_«requirement_numbers.get(p)» ; 
 	  «ENDFOR»
 	  «ENDIF»

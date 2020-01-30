@@ -35,6 +35,7 @@ import org.sodalite.dsl.aADM.impl.EPropertiesImpl
 import org.eclipse.emf.ecore.impl.EAttributeImpl
 import org.sodalite.dsl.aADM.impl.EAttributesImpl
 import org.sodalite.dsl.aADM.impl.ERequirementsImpl
+import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -128,7 +129,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 	}
 
-	override void completeENodeTemplate_Type(EObject model, Assignment assignment, ContentAssistContext context,
+	override void completeENodeTemplateBody_Type(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for NodeTemplate::type property")
 		
@@ -142,7 +143,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
 
-		super.completeENodeTemplate_Type(model, assignment, context, acceptor)
+		super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
 	}
 	
 	override void completeEAttributeAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -152,10 +153,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var String additionalProposalInfo = ""
 		
 		var resourceId = ""
-		if (model instanceof ENodeTemplateImpl)
-			resourceId = (model as ENodeTemplateImpl).type
+		if (model instanceof ENodeTemplateBodyImpl)
+			resourceId = (model as ENodeTemplateBodyImpl).type
 		else if (model instanceof EAttributesImpl)
-			resourceId = (model.eContainer as ENodeTemplateImpl).type
+			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
 
 		if (resourceId !== null){
 			val ReasonerData<Attribute> attributes = kbclient.getAttributes(resourceId)
@@ -185,10 +186,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var String additionalProposalInfo = ""
 		
 		var resourceId = ""
-		if (model instanceof ENodeTemplateImpl)
-			resourceId = (model as ENodeTemplateImpl).type
+		if (model instanceof ENodeTemplateBodyImpl)
+			resourceId = (model as ENodeTemplateBodyImpl).type
 		else if (model instanceof EPropertiesImpl)
-			resourceId = (model.eContainer as ENodeTemplateImpl).type
+			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
 		
 		if (resourceId !== null){
 			val ReasonerData<Property> properties = kbclient.getProperties(resourceId)
@@ -219,10 +220,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var String additionalProposalInfo = ""
 		
 		var resourceId = ""
-		if (model instanceof ENodeTemplateImpl)
-			resourceId = (model as ENodeTemplateImpl).type
+		if (model instanceof ENodeTemplateBodyImpl)
+			resourceId = (model as ENodeTemplateBodyImpl).type
 		else if (model instanceof ERequirementsImpl)
-			resourceId = (model.eContainer as ENodeTemplateImpl).type
+			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
 		
 		if (resourceId !== null){
 			val ReasonerData<Requirement> requirements = kbclient.getRequirements(resourceId)

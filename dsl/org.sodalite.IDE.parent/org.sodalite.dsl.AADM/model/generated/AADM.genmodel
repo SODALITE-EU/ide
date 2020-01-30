@@ -14,11 +14,14 @@
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ENodeTemplate">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ENodeTemplate/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ENodeTemplate/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ENodeTemplate/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplate/properties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplate/atributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplate/requirements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplate/node"/>
+    </genClasses>
+    <genClasses ecoreClass="AADM.ecore#//ENodeTemplateBody">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ENodeTemplateBody/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ENodeTemplateBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/atributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/requirements"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ERequirements">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ERequirements/requirements"/>
