@@ -3,63 +3,20 @@
  */
 package org.sodalite.dsl.rM.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.dsl.rM.EFunction;
-import org.sodalite.dsl.rM.EReqOrCap;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>EFunction</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.EFunctionImpl#getEntity <em>Entity</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EFunctionImpl#getReq_cap <em>Req cap</em>}</li>
- * </ul>
  *
  * @generated
  */
 public class EFunctionImpl extends EValueExpressionImpl implements EFunction
 {
-  /**
-   * The default value of the '{@link #getEntity() <em>Entity</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEntity()
-   * @generated
-   * @ordered
-   */
-  protected static final String ENTITY_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getEntity() <em>Entity</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEntity()
-   * @generated
-   * @ordered
-   */
-  protected String entity = ENTITY_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getReq_cap() <em>Req cap</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getReq_cap()
-   * @generated
-   * @ordered
-   */
-  protected EReqOrCap req_cap;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -79,170 +36,6 @@ public class EFunctionImpl extends EValueExpressionImpl implements EFunction
   protected EClass eStaticClass()
   {
     return RMPackage.Literals.EFUNCTION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getEntity()
-  {
-    return entity;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setEntity(String newEntity)
-  {
-    String oldEntity = entity;
-    entity = newEntity;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EFUNCTION__ENTITY, oldEntity, entity));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReqOrCap getReq_cap()
-  {
-    if (req_cap != null && req_cap.eIsProxy())
-    {
-      InternalEObject oldReq_cap = (InternalEObject)req_cap;
-      req_cap = (EReqOrCap)eResolveProxy(oldReq_cap);
-      if (req_cap != oldReq_cap)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EFUNCTION__REQ_CAP, oldReq_cap, req_cap));
-      }
-    }
-    return req_cap;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReqOrCap basicGetReq_cap()
-  {
-    return req_cap;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setReq_cap(EReqOrCap newReq_cap)
-  {
-    EReqOrCap oldReq_cap = req_cap;
-    req_cap = newReq_cap;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EFUNCTION__REQ_CAP, oldReq_cap, req_cap));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case RMPackage.EFUNCTION__ENTITY:
-        return getEntity();
-      case RMPackage.EFUNCTION__REQ_CAP:
-        if (resolve) return getReq_cap();
-        return basicGetReq_cap();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case RMPackage.EFUNCTION__ENTITY:
-        setEntity((String)newValue);
-        return;
-      case RMPackage.EFUNCTION__REQ_CAP:
-        setReq_cap((EReqOrCap)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case RMPackage.EFUNCTION__ENTITY:
-        setEntity(ENTITY_EDEFAULT);
-        return;
-      case RMPackage.EFUNCTION__REQ_CAP:
-        setReq_cap((EReqOrCap)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case RMPackage.EFUNCTION__ENTITY:
-        return ENTITY_EDEFAULT == null ? entity != null : !ENTITY_EDEFAULT.equals(entity);
-      case RMPackage.EFUNCTION__REQ_CAP:
-        return req_cap != null;
-    }
-    return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (entity: ");
-    result.append(entity);
-    result.append(')');
-    return result.toString();
   }
 
 } //EFunctionImpl

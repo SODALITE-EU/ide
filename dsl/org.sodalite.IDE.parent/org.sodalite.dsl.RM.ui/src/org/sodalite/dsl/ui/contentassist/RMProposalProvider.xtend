@@ -20,24 +20,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 
 class RMProposalProvider extends AbstractRMProposalProvider {	
 	
-	override void completeGetAttribute_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
-		System.out.println("Invoking content assist for GetAttribute::entity property")
-		
-		createEntityProposals(context, acceptor, model, assignment)
-	}
-	
-	override void completeGetProperty_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
-		System.out.println("Invoking content assist for GetProperty::entity property")
-		
-		createEntityProposals(context, acceptor, model, assignment)
-	}
-	
-	override void completeEPropertyDefinition_Required(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
-		System.out.println("Invoking content assist for EPropertyDefinition::required property")
-		
-		createBooleanProposals(context, acceptor, model, assignment)
-	}
-	
 	override void completeENodeType_Name(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for ENodeType::name property")
@@ -165,32 +147,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 
 		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 	}
-	
-	protected def void createEntityProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor, EObject model, Assignment assignment) {
-		for (entity: Arrays.asList(Entity.values())){
-			System.out.println ("\tEntity: " + entity)
-			val proposalText = entity.toString
-			val displayText = entity.toString
-			val additionalProposalInfo = entity.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-		
-		super.completeGetAttribute_Entity(model, assignment, context, acceptor)
-	}
-	
-	protected def void createBooleanProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor, EObject model, Assignment assignment) {
-		for (bool: Arrays.asList(BooleanEnum.values())){
-			System.out.println ("\tBoolean: " + bool)
-			val proposalText = bool.getLabel()
-			val displayText = bool.getLabel()
-			val additionalProposalInfo = null
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-		
-		super.completeGetAttribute_Entity(model, assignment, context, acceptor)
-	}
 
-	
 	protected def void createNonEditableCompletionProposal(String proposalText, String displayText,
 		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EParameterDefinition;
-import org.sodalite.dsl.rM.EValueExpression;
+import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -25,8 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionImpl#getDefault <em>Default</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionImpl#getParameter <em>Parameter</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,24 +53,14 @@ public class EParameterDefinitionImpl extends MinimalEObjectImpl.Container imple
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue()
+   * @see #getParameter()
    * @generated
    * @ordered
    */
-  protected EValueExpression value;
-
-  /**
-   * The cached value of the '{@link #getDefault() <em>Default</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDefault()
-   * @generated
-   * @ordered
-   */
-  protected EValueExpression default_;
+  protected EParameterDefinitionBody parameter;
 
   /**
    * <!-- begin-user-doc -->
@@ -125,9 +114,9 @@ public class EParameterDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public EValueExpression getValue()
+  public EParameterDefinitionBody getParameter()
   {
-    return value;
+    return parameter;
   }
 
   /**
@@ -135,13 +124,13 @@ public class EParameterDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(EValueExpression newValue, NotificationChain msgs)
+  public NotificationChain basicSetParameter(EParameterDefinitionBody newParameter, NotificationChain msgs)
   {
-    EValueExpression oldValue = value;
-    value = newValue;
+    EParameterDefinitionBody oldParameter = parameter;
+    parameter = newParameter;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION__VALUE, oldValue, newValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION__PARAMETER, oldParameter, newParameter);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -153,70 +142,20 @@ public class EParameterDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setValue(EValueExpression newValue)
+  public void setParameter(EParameterDefinitionBody newParameter)
   {
-    if (newValue != value)
+    if (newParameter != parameter)
     {
       NotificationChain msgs = null;
-      if (value != null)
-        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPARAMETER_DEFINITION__VALUE, null, msgs);
-      if (newValue != null)
-        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPARAMETER_DEFINITION__VALUE, null, msgs);
-      msgs = basicSetValue(newValue, msgs);
+      if (parameter != null)
+        msgs = ((InternalEObject)parameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPARAMETER_DEFINITION__PARAMETER, null, msgs);
+      if (newParameter != null)
+        msgs = ((InternalEObject)newParameter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPARAMETER_DEFINITION__PARAMETER, null, msgs);
+      msgs = basicSetParameter(newParameter, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION__VALUE, newValue, newValue));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EValueExpression getDefault()
-  {
-    return default_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetDefault(EValueExpression newDefault, NotificationChain msgs)
-  {
-    EValueExpression oldDefault = default_;
-    default_ = newDefault;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION__DEFAULT, oldDefault, newDefault);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDefault(EValueExpression newDefault)
-  {
-    if (newDefault != default_)
-    {
-      NotificationChain msgs = null;
-      if (default_ != null)
-        msgs = ((InternalEObject)default_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPARAMETER_DEFINITION__DEFAULT, null, msgs);
-      if (newDefault != null)
-        msgs = ((InternalEObject)newDefault).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPARAMETER_DEFINITION__DEFAULT, null, msgs);
-      msgs = basicSetDefault(newDefault, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION__DEFAULT, newDefault, newDefault));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION__PARAMETER, newParameter, newParameter));
   }
 
   /**
@@ -229,10 +168,8 @@ public class EParameterDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case RMPackage.EPARAMETER_DEFINITION__VALUE:
-        return basicSetValue(null, msgs);
-      case RMPackage.EPARAMETER_DEFINITION__DEFAULT:
-        return basicSetDefault(null, msgs);
+      case RMPackage.EPARAMETER_DEFINITION__PARAMETER:
+        return basicSetParameter(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -249,10 +186,8 @@ public class EParameterDefinitionImpl extends MinimalEObjectImpl.Container imple
     {
       case RMPackage.EPARAMETER_DEFINITION__NAME:
         return getName();
-      case RMPackage.EPARAMETER_DEFINITION__VALUE:
-        return getValue();
-      case RMPackage.EPARAMETER_DEFINITION__DEFAULT:
-        return getDefault();
+      case RMPackage.EPARAMETER_DEFINITION__PARAMETER:
+        return getParameter();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -270,11 +205,8 @@ public class EParameterDefinitionImpl extends MinimalEObjectImpl.Container imple
       case RMPackage.EPARAMETER_DEFINITION__NAME:
         setName((String)newValue);
         return;
-      case RMPackage.EPARAMETER_DEFINITION__VALUE:
-        setValue((EValueExpression)newValue);
-        return;
-      case RMPackage.EPARAMETER_DEFINITION__DEFAULT:
-        setDefault((EValueExpression)newValue);
+      case RMPackage.EPARAMETER_DEFINITION__PARAMETER:
+        setParameter((EParameterDefinitionBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -293,11 +225,8 @@ public class EParameterDefinitionImpl extends MinimalEObjectImpl.Container imple
       case RMPackage.EPARAMETER_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.EPARAMETER_DEFINITION__VALUE:
-        setValue((EValueExpression)null);
-        return;
-      case RMPackage.EPARAMETER_DEFINITION__DEFAULT:
-        setDefault((EValueExpression)null);
+      case RMPackage.EPARAMETER_DEFINITION__PARAMETER:
+        setParameter((EParameterDefinitionBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -315,10 +244,8 @@ public class EParameterDefinitionImpl extends MinimalEObjectImpl.Container imple
     {
       case RMPackage.EPARAMETER_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.EPARAMETER_DEFINITION__VALUE:
-        return value != null;
-      case RMPackage.EPARAMETER_DEFINITION__DEFAULT:
-        return default_ != null;
+      case RMPackage.EPARAMETER_DEFINITION__PARAMETER:
+        return parameter != null;
     }
     return super.eIsSet(featureID);
   }

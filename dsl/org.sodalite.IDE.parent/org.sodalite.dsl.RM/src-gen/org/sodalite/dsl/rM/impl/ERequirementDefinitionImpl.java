@@ -4,16 +4,15 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.sodalite.dsl.rM.ECapabilityType;
-import org.sodalite.dsl.rM.ENodeType;
-import org.sodalite.dsl.rM.ERelationshipType;
 import org.sodalite.dsl.rM.ERequirementDefinition;
+import org.sodalite.dsl.rM.ERequirementDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -24,9 +23,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.ERequirementDefinitionImpl#getCapability <em>Capability</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ERequirementDefinitionImpl#getNode <em>Node</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ERequirementDefinitionImpl#getRelationship <em>Relationship</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ERequirementDefinitionImpl#getRequirement <em>Requirement</em>}</li>
  * </ul>
  *
  * @generated
@@ -34,34 +31,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequirementDefinition
 {
   /**
-   * The cached value of the '{@link #getCapability() <em>Capability</em>}' reference.
+   * The cached value of the '{@link #getRequirement() <em>Requirement</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCapability()
+   * @see #getRequirement()
    * @generated
    * @ordered
    */
-  protected ECapabilityType capability;
-
-  /**
-   * The cached value of the '{@link #getNode() <em>Node</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNode()
-   * @generated
-   * @ordered
-   */
-  protected ENodeType node;
-
-  /**
-   * The cached value of the '{@link #getRelationship() <em>Relationship</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRelationship()
-   * @generated
-   * @ordered
-   */
-  protected ERelationshipType relationship;
+  protected ERequirementDefinitionBody requirement;
 
   /**
    * <!-- begin-user-doc -->
@@ -90,19 +67,9 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
    * @generated
    */
   @Override
-  public ECapabilityType getCapability()
+  public ERequirementDefinitionBody getRequirement()
   {
-    if (capability != null && capability.eIsProxy())
-    {
-      InternalEObject oldCapability = (InternalEObject)capability;
-      capability = (ECapabilityType)eResolveProxy(oldCapability);
-      if (capability != oldCapability)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EREQUIREMENT_DEFINITION__CAPABILITY, oldCapability, capability));
-      }
-    }
-    return capability;
+    return requirement;
   }
 
   /**
@@ -110,54 +77,16 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
    * <!-- end-user-doc -->
    * @generated
    */
-  public ECapabilityType basicGetCapability()
+  public NotificationChain basicSetRequirement(ERequirementDefinitionBody newRequirement, NotificationChain msgs)
   {
-    return capability;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setCapability(ECapabilityType newCapability)
-  {
-    ECapabilityType oldCapability = capability;
-    capability = newCapability;
+    ERequirementDefinitionBody oldRequirement = requirement;
+    requirement = newRequirement;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION__CAPABILITY, oldCapability, capability));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ENodeType getNode()
-  {
-    if (node != null && node.eIsProxy())
     {
-      InternalEObject oldNode = (InternalEObject)node;
-      node = (ENodeType)eResolveProxy(oldNode);
-      if (node != oldNode)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EREQUIREMENT_DEFINITION__NODE, oldNode, node));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION__REQUIREMENT, oldRequirement, newRequirement);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return node;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ENodeType basicGetNode()
-  {
-    return node;
+    return msgs;
   }
 
   /**
@@ -166,43 +95,20 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
    * @generated
    */
   @Override
-  public void setNode(ENodeType newNode)
+  public void setRequirement(ERequirementDefinitionBody newRequirement)
   {
-    ENodeType oldNode = node;
-    node = newNode;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION__NODE, oldNode, node));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ERelationshipType getRelationship()
-  {
-    if (relationship != null && relationship.eIsProxy())
+    if (newRequirement != requirement)
     {
-      InternalEObject oldRelationship = (InternalEObject)relationship;
-      relationship = (ERelationshipType)eResolveProxy(oldRelationship);
-      if (relationship != oldRelationship)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EREQUIREMENT_DEFINITION__RELATIONSHIP, oldRelationship, relationship));
-      }
+      NotificationChain msgs = null;
+      if (requirement != null)
+        msgs = ((InternalEObject)requirement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION__REQUIREMENT, null, msgs);
+      if (newRequirement != null)
+        msgs = ((InternalEObject)newRequirement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION__REQUIREMENT, null, msgs);
+      msgs = basicSetRequirement(newRequirement, msgs);
+      if (msgs != null) msgs.dispatch();
     }
-    return relationship;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ERelationshipType basicGetRelationship()
-  {
-    return relationship;
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION__REQUIREMENT, newRequirement, newRequirement));
   }
 
   /**
@@ -211,12 +117,14 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
    * @generated
    */
   @Override
-  public void setRelationship(ERelationshipType newRelationship)
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    ERelationshipType oldRelationship = relationship;
-    relationship = newRelationship;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION__RELATIONSHIP, oldRelationship, relationship));
+    switch (featureID)
+    {
+      case RMPackage.EREQUIREMENT_DEFINITION__REQUIREMENT:
+        return basicSetRequirement(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -229,15 +137,8 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
   {
     switch (featureID)
     {
-      case RMPackage.EREQUIREMENT_DEFINITION__CAPABILITY:
-        if (resolve) return getCapability();
-        return basicGetCapability();
-      case RMPackage.EREQUIREMENT_DEFINITION__NODE:
-        if (resolve) return getNode();
-        return basicGetNode();
-      case RMPackage.EREQUIREMENT_DEFINITION__RELATIONSHIP:
-        if (resolve) return getRelationship();
-        return basicGetRelationship();
+      case RMPackage.EREQUIREMENT_DEFINITION__REQUIREMENT:
+        return getRequirement();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -252,14 +153,8 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
   {
     switch (featureID)
     {
-      case RMPackage.EREQUIREMENT_DEFINITION__CAPABILITY:
-        setCapability((ECapabilityType)newValue);
-        return;
-      case RMPackage.EREQUIREMENT_DEFINITION__NODE:
-        setNode((ENodeType)newValue);
-        return;
-      case RMPackage.EREQUIREMENT_DEFINITION__RELATIONSHIP:
-        setRelationship((ERelationshipType)newValue);
+      case RMPackage.EREQUIREMENT_DEFINITION__REQUIREMENT:
+        setRequirement((ERequirementDefinitionBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -275,14 +170,8 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
   {
     switch (featureID)
     {
-      case RMPackage.EREQUIREMENT_DEFINITION__CAPABILITY:
-        setCapability((ECapabilityType)null);
-        return;
-      case RMPackage.EREQUIREMENT_DEFINITION__NODE:
-        setNode((ENodeType)null);
-        return;
-      case RMPackage.EREQUIREMENT_DEFINITION__RELATIONSHIP:
-        setRelationship((ERelationshipType)null);
+      case RMPackage.EREQUIREMENT_DEFINITION__REQUIREMENT:
+        setRequirement((ERequirementDefinitionBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -298,12 +187,8 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
   {
     switch (featureID)
     {
-      case RMPackage.EREQUIREMENT_DEFINITION__CAPABILITY:
-        return capability != null;
-      case RMPackage.EREQUIREMENT_DEFINITION__NODE:
-        return node != null;
-      case RMPackage.EREQUIREMENT_DEFINITION__RELATIONSHIP:
-        return relationship != null;
+      case RMPackage.EREQUIREMENT_DEFINITION__REQUIREMENT:
+        return requirement != null;
     }
     return super.eIsSet(featureID);
   }

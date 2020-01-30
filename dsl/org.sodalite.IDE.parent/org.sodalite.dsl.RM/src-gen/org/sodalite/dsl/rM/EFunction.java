@@ -9,13 +9,6 @@ package org.sodalite.dsl.rM;
  * A representation of the model object '<em><b>EFunction</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.sodalite.dsl.rM.EFunction#getEntity <em>Entity</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EFunction#getReq_cap <em>Req cap</em>}</li>
- * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEFunction()
  * @model
@@ -23,48 +16,4 @@ package org.sodalite.dsl.rM;
  */
 public interface EFunction extends EValueExpression
 {
-  /**
-   * Returns the value of the '<em><b>Entity</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Entity</em>' attribute.
-   * @see #setEntity(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEFunction_Entity()
-   * @model
-   * @generated
-   */
-  String getEntity();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EFunction#getEntity <em>Entity</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entity</em>' attribute.
-   * @see #getEntity()
-   * @generated
-   */
-  void setEntity(String value);
-
-  /**
-   * Returns the value of the '<em><b>Req cap</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Req cap</em>' reference.
-   * @see #setReq_cap(EReqOrCap)
-   * @see org.sodalite.dsl.rM.RMPackage#getEFunction_Req_cap()
-   * @model
-   * @generated
-   */
-  EReqOrCap getReq_cap();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EFunction#getReq_cap <em>Req cap</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Req cap</em>' reference.
-   * @see #getReq_cap()
-   * @generated
-   */
-  void setReq_cap(EReqOrCap value);
-
 } // EFunction

@@ -12,9 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
-import org.sodalite.dsl.rM.EProperties;
+import org.sodalite.dsl.rM.EDataTypeBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -26,10 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EDataTypeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EDataTypeImpl#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EDataTypeImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EDataTypeImpl#getConstraints <em>Constraints</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EDataTypeImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EDataTypeImpl#getData <em>Data</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,54 +53,14 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The cached value of the '{@link #getData() <em>Data</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSuperType()
+   * @see #getData()
    * @generated
    * @ordered
    */
-  protected EDataType superType;
-
-  /**
-   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected static final String DESCRIPTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected String description = DESCRIPTION_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConstraints()
-   * @generated
-   * @ordered
-   */
-  protected EConstraints constraints;
-
-  /**
-   * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getProperties()
-   * @generated
-   * @ordered
-   */
-  protected EProperties properties;
+  protected EDataTypeBody data;
 
   /**
    * <!-- begin-user-doc -->
@@ -158,19 +114,9 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
    * @generated
    */
   @Override
-  public EDataType getSuperType()
+  public EDataTypeBody getData()
   {
-    if (superType != null && superType.eIsProxy())
-    {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (EDataType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EDATA_TYPE__SUPER_TYPE, oldSuperType, superType));
-      }
-    }
-    return superType;
+    return data;
   }
 
   /**
@@ -178,73 +124,13 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
    * <!-- end-user-doc -->
    * @generated
    */
-  public EDataType basicGetSuperType()
+  public NotificationChain basicSetData(EDataTypeBody newData, NotificationChain msgs)
   {
-    return superType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setSuperType(EDataType newSuperType)
-  {
-    EDataType oldSuperType = superType;
-    superType = newSuperType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__SUPER_TYPE, oldSuperType, superType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getDescription()
-  {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(String newDescription)
-  {
-    String oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__DESCRIPTION, oldDescription, description));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EConstraints getConstraints()
-  {
-    return constraints;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetConstraints(EConstraints newConstraints, NotificationChain msgs)
-  {
-    EConstraints oldConstraints = constraints;
-    constraints = newConstraints;
+    EDataTypeBody oldData = data;
+    data = newData;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__CONSTRAINTS, oldConstraints, newConstraints);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__DATA, oldData, newData);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -256,70 +142,20 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
    * @generated
    */
   @Override
-  public void setConstraints(EConstraints newConstraints)
+  public void setData(EDataTypeBody newData)
   {
-    if (newConstraints != constraints)
+    if (newData != data)
     {
       NotificationChain msgs = null;
-      if (constraints != null)
-        msgs = ((InternalEObject)constraints).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE__CONSTRAINTS, null, msgs);
-      if (newConstraints != null)
-        msgs = ((InternalEObject)newConstraints).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE__CONSTRAINTS, null, msgs);
-      msgs = basicSetConstraints(newConstraints, msgs);
+      if (data != null)
+        msgs = ((InternalEObject)data).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE__DATA, null, msgs);
+      if (newData != null)
+        msgs = ((InternalEObject)newData).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE__DATA, null, msgs);
+      msgs = basicSetData(newData, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__CONSTRAINTS, newConstraints, newConstraints));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EProperties getProperties()
-  {
-    return properties;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetProperties(EProperties newProperties, NotificationChain msgs)
-  {
-    EProperties oldProperties = properties;
-    properties = newProperties;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__PROPERTIES, oldProperties, newProperties);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setProperties(EProperties newProperties)
-  {
-    if (newProperties != properties)
-    {
-      NotificationChain msgs = null;
-      if (properties != null)
-        msgs = ((InternalEObject)properties).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE__PROPERTIES, null, msgs);
-      if (newProperties != null)
-        msgs = ((InternalEObject)newProperties).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE__PROPERTIES, null, msgs);
-      msgs = basicSetProperties(newProperties, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__PROPERTIES, newProperties, newProperties));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__DATA, newData, newData));
   }
 
   /**
@@ -332,10 +168,8 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
   {
     switch (featureID)
     {
-      case RMPackage.EDATA_TYPE__CONSTRAINTS:
-        return basicSetConstraints(null, msgs);
-      case RMPackage.EDATA_TYPE__PROPERTIES:
-        return basicSetProperties(null, msgs);
+      case RMPackage.EDATA_TYPE__DATA:
+        return basicSetData(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -352,15 +186,8 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
     {
       case RMPackage.EDATA_TYPE__NAME:
         return getName();
-      case RMPackage.EDATA_TYPE__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
-      case RMPackage.EDATA_TYPE__DESCRIPTION:
-        return getDescription();
-      case RMPackage.EDATA_TYPE__CONSTRAINTS:
-        return getConstraints();
-      case RMPackage.EDATA_TYPE__PROPERTIES:
-        return getProperties();
+      case RMPackage.EDATA_TYPE__DATA:
+        return getData();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -378,17 +205,8 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
       case RMPackage.EDATA_TYPE__NAME:
         setName((String)newValue);
         return;
-      case RMPackage.EDATA_TYPE__SUPER_TYPE:
-        setSuperType((EDataType)newValue);
-        return;
-      case RMPackage.EDATA_TYPE__DESCRIPTION:
-        setDescription((String)newValue);
-        return;
-      case RMPackage.EDATA_TYPE__CONSTRAINTS:
-        setConstraints((EConstraints)newValue);
-        return;
-      case RMPackage.EDATA_TYPE__PROPERTIES:
-        setProperties((EProperties)newValue);
+      case RMPackage.EDATA_TYPE__DATA:
+        setData((EDataTypeBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -407,17 +225,8 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
       case RMPackage.EDATA_TYPE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.EDATA_TYPE__SUPER_TYPE:
-        setSuperType((EDataType)null);
-        return;
-      case RMPackage.EDATA_TYPE__DESCRIPTION:
-        setDescription(DESCRIPTION_EDEFAULT);
-        return;
-      case RMPackage.EDATA_TYPE__CONSTRAINTS:
-        setConstraints((EConstraints)null);
-        return;
-      case RMPackage.EDATA_TYPE__PROPERTIES:
-        setProperties((EProperties)null);
+      case RMPackage.EDATA_TYPE__DATA:
+        setData((EDataTypeBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -435,14 +244,8 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
     {
       case RMPackage.EDATA_TYPE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.EDATA_TYPE__SUPER_TYPE:
-        return superType != null;
-      case RMPackage.EDATA_TYPE__DESCRIPTION:
-        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-      case RMPackage.EDATA_TYPE__CONSTRAINTS:
-        return constraints != null;
-      case RMPackage.EDATA_TYPE__PROPERTIES:
-        return properties != null;
+      case RMPackage.EDATA_TYPE__DATA:
+        return data != null;
     }
     return super.eIsSet(featureID);
   }
@@ -460,8 +263,6 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", description: ");
-    result.append(description);
     result.append(')');
     return result.toString();
   }

@@ -12,10 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EConstraints;
-import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EPropertyDefinition;
-import org.sodalite.dsl.rM.EValueExpression;
+import org.sodalite.dsl.rM.EPropertyDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -27,13 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionImpl#isRequired <em>Required</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionImpl#getDefault <em>Default</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionImpl#getStatus <em>Status</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionImpl#getConstraints <em>Constraints</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionImpl#getEntry_schema <em>Entry schema</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionImpl#getProperty <em>Property</em>}</li>
  * </ul>
  *
  * @generated
@@ -61,104 +53,14 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getProperty()
    * @generated
    * @ordered
    */
-  protected EDataType type;
-
-  /**
-   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected static final String DESCRIPTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected String description = DESCRIPTION_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #isRequired() <em>Required</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isRequired()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean REQUIRED_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isRequired() <em>Required</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isRequired()
-   * @generated
-   * @ordered
-   */
-  protected boolean required = REQUIRED_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getDefault() <em>Default</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDefault()
-   * @generated
-   * @ordered
-   */
-  protected EValueExpression default_;
-
-  /**
-   * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStatus()
-   * @generated
-   * @ordered
-   */
-  protected static final String STATUS_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStatus()
-   * @generated
-   * @ordered
-   */
-  protected String status = STATUS_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConstraints()
-   * @generated
-   * @ordered
-   */
-  protected EConstraints constraints;
-
-  /**
-   * The cached value of the '{@link #getEntry_schema() <em>Entry schema</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEntry_schema()
-   * @generated
-   * @ordered
-   */
-  protected EDataType entry_schema;
+  protected EPropertyDefinitionBody property;
 
   /**
    * <!-- begin-user-doc -->
@@ -212,19 +114,9 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
    * @generated
    */
   @Override
-  public EDataType getType()
+  public EPropertyDefinitionBody getProperty()
   {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (EDataType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EPROPERTY_DEFINITION__TYPE, oldType, type));
-      }
-    }
-    return type;
+    return property;
   }
 
   /**
@@ -232,98 +124,13 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EDataType basicGetType()
+  public NotificationChain basicSetProperty(EPropertyDefinitionBody newProperty, NotificationChain msgs)
   {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setType(EDataType newType)
-  {
-    EDataType oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__TYPE, oldType, type));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getDescription()
-  {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(String newDescription)
-  {
-    String oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__DESCRIPTION, oldDescription, description));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean isRequired()
-  {
-    return required;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setRequired(boolean newRequired)
-  {
-    boolean oldRequired = required;
-    required = newRequired;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__REQUIRED, oldRequired, required));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EValueExpression getDefault()
-  {
-    return default_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetDefault(EValueExpression newDefault, NotificationChain msgs)
-  {
-    EValueExpression oldDefault = default_;
-    default_ = newDefault;
+    EPropertyDefinitionBody oldProperty = property;
+    property = newProperty;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__DEFAULT, oldDefault, newDefault);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__PROPERTY, oldProperty, newProperty);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -335,140 +142,20 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
    * @generated
    */
   @Override
-  public void setDefault(EValueExpression newDefault)
+  public void setProperty(EPropertyDefinitionBody newProperty)
   {
-    if (newDefault != default_)
+    if (newProperty != property)
     {
       NotificationChain msgs = null;
-      if (default_ != null)
-        msgs = ((InternalEObject)default_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION__DEFAULT, null, msgs);
-      if (newDefault != null)
-        msgs = ((InternalEObject)newDefault).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION__DEFAULT, null, msgs);
-      msgs = basicSetDefault(newDefault, msgs);
+      if (property != null)
+        msgs = ((InternalEObject)property).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION__PROPERTY, null, msgs);
+      if (newProperty != null)
+        msgs = ((InternalEObject)newProperty).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION__PROPERTY, null, msgs);
+      msgs = basicSetProperty(newProperty, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__DEFAULT, newDefault, newDefault));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getStatus()
-  {
-    return status;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setStatus(String newStatus)
-  {
-    String oldStatus = status;
-    status = newStatus;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__STATUS, oldStatus, status));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EConstraints getConstraints()
-  {
-    return constraints;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetConstraints(EConstraints newConstraints, NotificationChain msgs)
-  {
-    EConstraints oldConstraints = constraints;
-    constraints = newConstraints;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__CONSTRAINTS, oldConstraints, newConstraints);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setConstraints(EConstraints newConstraints)
-  {
-    if (newConstraints != constraints)
-    {
-      NotificationChain msgs = null;
-      if (constraints != null)
-        msgs = ((InternalEObject)constraints).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION__CONSTRAINTS, null, msgs);
-      if (newConstraints != null)
-        msgs = ((InternalEObject)newConstraints).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION__CONSTRAINTS, null, msgs);
-      msgs = basicSetConstraints(newConstraints, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__CONSTRAINTS, newConstraints, newConstraints));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EDataType getEntry_schema()
-  {
-    if (entry_schema != null && entry_schema.eIsProxy())
-    {
-      InternalEObject oldEntry_schema = (InternalEObject)entry_schema;
-      entry_schema = (EDataType)eResolveProxy(oldEntry_schema);
-      if (entry_schema != oldEntry_schema)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EPROPERTY_DEFINITION__ENTRY_SCHEMA, oldEntry_schema, entry_schema));
-      }
-    }
-    return entry_schema;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EDataType basicGetEntry_schema()
-  {
-    return entry_schema;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setEntry_schema(EDataType newEntry_schema)
-  {
-    EDataType oldEntry_schema = entry_schema;
-    entry_schema = newEntry_schema;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__ENTRY_SCHEMA, oldEntry_schema, entry_schema));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION__PROPERTY, newProperty, newProperty));
   }
 
   /**
@@ -481,10 +168,8 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case RMPackage.EPROPERTY_DEFINITION__DEFAULT:
-        return basicSetDefault(null, msgs);
-      case RMPackage.EPROPERTY_DEFINITION__CONSTRAINTS:
-        return basicSetConstraints(null, msgs);
+      case RMPackage.EPROPERTY_DEFINITION__PROPERTY:
+        return basicSetProperty(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -501,22 +186,8 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
     {
       case RMPackage.EPROPERTY_DEFINITION__NAME:
         return getName();
-      case RMPackage.EPROPERTY_DEFINITION__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
-      case RMPackage.EPROPERTY_DEFINITION__DESCRIPTION:
-        return getDescription();
-      case RMPackage.EPROPERTY_DEFINITION__REQUIRED:
-        return isRequired();
-      case RMPackage.EPROPERTY_DEFINITION__DEFAULT:
-        return getDefault();
-      case RMPackage.EPROPERTY_DEFINITION__STATUS:
-        return getStatus();
-      case RMPackage.EPROPERTY_DEFINITION__CONSTRAINTS:
-        return getConstraints();
-      case RMPackage.EPROPERTY_DEFINITION__ENTRY_SCHEMA:
-        if (resolve) return getEntry_schema();
-        return basicGetEntry_schema();
+      case RMPackage.EPROPERTY_DEFINITION__PROPERTY:
+        return getProperty();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -534,26 +205,8 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
       case RMPackage.EPROPERTY_DEFINITION__NAME:
         setName((String)newValue);
         return;
-      case RMPackage.EPROPERTY_DEFINITION__TYPE:
-        setType((EDataType)newValue);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__DESCRIPTION:
-        setDescription((String)newValue);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__REQUIRED:
-        setRequired((Boolean)newValue);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__DEFAULT:
-        setDefault((EValueExpression)newValue);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__STATUS:
-        setStatus((String)newValue);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__CONSTRAINTS:
-        setConstraints((EConstraints)newValue);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__ENTRY_SCHEMA:
-        setEntry_schema((EDataType)newValue);
+      case RMPackage.EPROPERTY_DEFINITION__PROPERTY:
+        setProperty((EPropertyDefinitionBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -572,26 +225,8 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
       case RMPackage.EPROPERTY_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.EPROPERTY_DEFINITION__TYPE:
-        setType((EDataType)null);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__DESCRIPTION:
-        setDescription(DESCRIPTION_EDEFAULT);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__REQUIRED:
-        setRequired(REQUIRED_EDEFAULT);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__DEFAULT:
-        setDefault((EValueExpression)null);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__STATUS:
-        setStatus(STATUS_EDEFAULT);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__CONSTRAINTS:
-        setConstraints((EConstraints)null);
-        return;
-      case RMPackage.EPROPERTY_DEFINITION__ENTRY_SCHEMA:
-        setEntry_schema((EDataType)null);
+      case RMPackage.EPROPERTY_DEFINITION__PROPERTY:
+        setProperty((EPropertyDefinitionBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -609,20 +244,8 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
     {
       case RMPackage.EPROPERTY_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.EPROPERTY_DEFINITION__TYPE:
-        return type != null;
-      case RMPackage.EPROPERTY_DEFINITION__DESCRIPTION:
-        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-      case RMPackage.EPROPERTY_DEFINITION__REQUIRED:
-        return required != REQUIRED_EDEFAULT;
-      case RMPackage.EPROPERTY_DEFINITION__DEFAULT:
-        return default_ != null;
-      case RMPackage.EPROPERTY_DEFINITION__STATUS:
-        return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
-      case RMPackage.EPROPERTY_DEFINITION__CONSTRAINTS:
-        return constraints != null;
-      case RMPackage.EPROPERTY_DEFINITION__ENTRY_SCHEMA:
-        return entry_schema != null;
+      case RMPackage.EPROPERTY_DEFINITION__PROPERTY:
+        return property != null;
     }
     return super.eIsSet(featureID);
   }
@@ -640,12 +263,6 @@ public class EPropertyDefinitionImpl extends MinimalEObjectImpl.Container implem
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", description: ");
-    result.append(description);
-    result.append(", required: ");
-    result.append(required);
-    result.append(", status: ");
-    result.append(status);
     result.append(')');
     return result.toString();
   }

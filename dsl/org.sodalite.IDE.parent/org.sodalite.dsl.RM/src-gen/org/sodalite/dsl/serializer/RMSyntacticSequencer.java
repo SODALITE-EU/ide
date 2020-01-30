@@ -21,14 +21,20 @@ import org.sodalite.dsl.services.RMGrammarAccess;
 public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RMGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_EArtifactType_File_extKeyword_5_0_p;
-	protected AbstractElementAlias match_ECapabilityDefinition___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__q;
+	protected AbstractElementAlias match_EArtifactTypeBody_File_extKeyword_1_3_0_p;
+	protected AbstractElementAlias match_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__a;
+	protected AbstractElementAlias match_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__p;
+	protected AbstractElementAlias match_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__a;
+	protected AbstractElementAlias match_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RMGrammarAccess) access;
-		match_EArtifactType_File_extKeyword_5_0_p = new TokenAlias(true, false, grammarAccess.getEArtifactTypeAccess().getFile_extKeyword_5_0());
-		match_ECapabilityDefinition___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionAccess().getValid_source_typesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionAccess().getLeftSquareBracketKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionAccess().getRightSquareBracketKeyword_4_3()));
+		match_EArtifactTypeBody_File_extKeyword_1_3_0_p = new TokenAlias(true, false, grammarAccess.getEArtifactTypeBodyAccess().getFile_extKeyword_1_3_0());
+		match_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_2_3()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_2_1()));
+		match_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_2_3()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_2_1()));
+		match_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_2_1()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_2_3()));
+		match_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_2_1()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_2_3()));
 	}
 	
 	@Override
@@ -56,10 +62,16 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_EArtifactType_File_extKeyword_5_0_p.equals(syntax))
-				emit_EArtifactType_File_extKeyword_5_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ECapabilityDefinition___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__q.equals(syntax))
-				emit_ECapabilityDefinition___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_EArtifactTypeBody_File_extKeyword_1_3_0_p.equals(syntax))
+				emit_EArtifactTypeBody_File_extKeyword_1_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__a.equals(syntax))
+				emit_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__p.equals(syntax))
+				emit_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__a.equals(syntax))
+				emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__p.equals(syntax))
+				emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -69,26 +81,79 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     'file_ext:'+
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) file_ext=STRING
 	 *     description=STRING (ambiguity) file_ext=STRING
+	 *     file_ext=STRING (ambiguity) file_ext=STRING
 	 *     mime_type=STRING (ambiguity) file_ext=STRING
-	 *     name=QUALIFIED_NAME '{' (ambiguity) file_ext=STRING
 	 *     superType=[EArtifactType|QUALIFIED_NAME] (ambiguity) file_ext=STRING
 	 */
-	protected void emit_EArtifactType_File_extKeyword_5_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_EArtifactTypeBody_File_extKeyword_1_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ('valid_source_types:' '[' ']')?
+	 *     (']' 'valid_source_types:' '[')*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     description=STRING (ambiguity) 'occurrences:' '[' start=STRING
-	 *     description=STRING (ambiguity) '}' (rule end)
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'occurrences:' '[' start=STRING
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) '}' (rule end)
+	 *     (rule start) 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
+	 *     description=STRING 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
+	 *     end=STRING ']' 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
+	 *     type=[ECapabilityType|QUALIFIED_NAME] 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
 	 */
-	protected void emit_ECapabilityDefinition___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (']' 'valid_source_types:' '[')+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     valid_source_types+=EValidSourceType (ambiguity) valid_source_types+=EValidSourceType
+	 */
+	protected void emit_ECapabilityDefinitionBody___RightSquareBracketKeyword_2_3_Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('valid_source_types:' '[' ']')*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) 'description:' description=STRING
+	 *     (rule start) (ambiguity) 'occurrences:' '[' start=STRING
+	 *     (rule start) (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     (rule start) (ambiguity) (rule start)
+	 *     description=STRING (ambiguity) 'description:' description=STRING
+	 *     description=STRING (ambiguity) 'occurrences:' '[' start=STRING
+	 *     description=STRING (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     description=STRING (ambiguity) (rule end)
+	 *     end=STRING ']' (ambiguity) 'description:' description=STRING
+	 *     end=STRING ']' (ambiguity) 'occurrences:' '[' start=STRING
+	 *     end=STRING ']' (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     end=STRING ']' (ambiguity) (rule end)
+	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'description:' description=STRING
+	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'occurrences:' '[' start=STRING
+	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) (rule end)
+	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'description:' description=STRING
+	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'occurrences:' '[' start=STRING
+	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     valid_source_types+=EValidSourceType ']' (ambiguity) (rule end)
+	 */
+	protected void emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('valid_source_types:' '[' ']')+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
+	 */
+	protected void emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_2_0_LeftSquareBracketKeyword_2_1_RightSquareBracketKeyword_2_3__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

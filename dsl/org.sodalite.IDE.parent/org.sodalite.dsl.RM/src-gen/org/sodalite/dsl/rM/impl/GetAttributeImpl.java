@@ -4,14 +4,15 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.GetAttribute;
+import org.sodalite.dsl.rM.GetAttributeBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -30,14 +31,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class GetAttributeImpl extends EFunctionImpl implements GetAttribute
 {
   /**
-   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
+   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getAttribute()
    * @generated
    * @ordered
    */
-  protected EAttributeDefinition attribute;
+  protected GetAttributeBody attribute;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,18 +67,8 @@ public class GetAttributeImpl extends EFunctionImpl implements GetAttribute
    * @generated
    */
   @Override
-  public EAttributeDefinition getAttribute()
+  public GetAttributeBody getAttribute()
   {
-    if (attribute != null && attribute.eIsProxy())
-    {
-      InternalEObject oldAttribute = (InternalEObject)attribute;
-      attribute = (EAttributeDefinition)eResolveProxy(oldAttribute);
-      if (attribute != oldAttribute)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.GET_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
-      }
-    }
     return attribute;
   }
 
@@ -86,9 +77,16 @@ public class GetAttributeImpl extends EFunctionImpl implements GetAttribute
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttributeDefinition basicGetAttribute()
+  public NotificationChain basicSetAttribute(GetAttributeBody newAttribute, NotificationChain msgs)
   {
-    return attribute;
+    GetAttributeBody oldAttribute = attribute;
+    attribute = newAttribute;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.GET_ATTRIBUTE__ATTRIBUTE, oldAttribute, newAttribute);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -97,12 +95,36 @@ public class GetAttributeImpl extends EFunctionImpl implements GetAttribute
    * @generated
    */
   @Override
-  public void setAttribute(EAttributeDefinition newAttribute)
+  public void setAttribute(GetAttributeBody newAttribute)
   {
-    EAttributeDefinition oldAttribute = attribute;
-    attribute = newAttribute;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+    if (newAttribute != attribute)
+    {
+      NotificationChain msgs = null;
+      if (attribute != null)
+        msgs = ((InternalEObject)attribute).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_ATTRIBUTE__ATTRIBUTE, null, msgs);
+      if (newAttribute != null)
+        msgs = ((InternalEObject)newAttribute).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_ATTRIBUTE__ATTRIBUTE, null, msgs);
+      msgs = basicSetAttribute(newAttribute, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_ATTRIBUTE__ATTRIBUTE, newAttribute, newAttribute));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.GET_ATTRIBUTE__ATTRIBUTE:
+        return basicSetAttribute(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -116,8 +138,7 @@ public class GetAttributeImpl extends EFunctionImpl implements GetAttribute
     switch (featureID)
     {
       case RMPackage.GET_ATTRIBUTE__ATTRIBUTE:
-        if (resolve) return getAttribute();
-        return basicGetAttribute();
+        return getAttribute();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -133,7 +154,7 @@ public class GetAttributeImpl extends EFunctionImpl implements GetAttribute
     switch (featureID)
     {
       case RMPackage.GET_ATTRIBUTE__ATTRIBUTE:
-        setAttribute((EAttributeDefinition)newValue);
+        setAttribute((GetAttributeBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -150,7 +171,7 @@ public class GetAttributeImpl extends EFunctionImpl implements GetAttribute
     switch (featureID)
     {
       case RMPackage.GET_ATTRIBUTE__ATTRIBUTE:
-        setAttribute((EAttributeDefinition)null);
+        setAttribute((GetAttributeBody)null);
         return;
     }
     super.eUnset(featureID);

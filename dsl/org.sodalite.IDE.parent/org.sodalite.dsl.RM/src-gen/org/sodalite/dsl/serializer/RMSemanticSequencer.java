@@ -15,15 +15,20 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.sodalite.dsl.rM.EArtifactType;
+import org.sodalite.dsl.rM.EArtifactTypeBody;
 import org.sodalite.dsl.rM.EArtifactTypes;
 import org.sodalite.dsl.rM.EAttributeDefinition;
+import org.sodalite.dsl.rM.EAttributeDefinitionBody;
 import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.ECapabilityDefinition;
+import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
 import org.sodalite.dsl.rM.ECapabilityType;
+import org.sodalite.dsl.rM.ECapabilityTypeBody;
 import org.sodalite.dsl.rM.ECapabilityTypes;
 import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
+import org.sodalite.dsl.rM.EDataTypeBody;
 import org.sodalite.dsl.rM.EDataTypes;
 import org.sodalite.dsl.rM.EEqual;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
@@ -31,7 +36,9 @@ import org.sodalite.dsl.rM.EGreaterThan;
 import org.sodalite.dsl.rM.EInRange;
 import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.EInterfaceDefinition;
+import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.EInterfaceType;
+import org.sodalite.dsl.rM.EInterfaceTypeBody;
 import org.sodalite.dsl.rM.EInterfaceTypes;
 import org.sodalite.dsl.rM.EInterfaces;
 import org.sodalite.dsl.rM.ELength;
@@ -40,24 +47,33 @@ import org.sodalite.dsl.rM.ELessThan;
 import org.sodalite.dsl.rM.EMaxLength;
 import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.ENodeType;
+import org.sodalite.dsl.rM.ENodeTypeBody;
 import org.sodalite.dsl.rM.ENodeTypes;
 import org.sodalite.dsl.rM.EOperationDefinition;
+import org.sodalite.dsl.rM.EOperationDefinitionBody;
 import org.sodalite.dsl.rM.EOperations;
 import org.sodalite.dsl.rM.EParameterDefinition;
+import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.EPolicyType;
+import org.sodalite.dsl.rM.EPolicyTypeBody;
 import org.sodalite.dsl.rM.EPolicyTypes;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.EPropertyDefinition;
+import org.sodalite.dsl.rM.EPropertyDefinitionBody;
 import org.sodalite.dsl.rM.ERelationshipType;
+import org.sodalite.dsl.rM.ERelationshipTypeBody;
 import org.sodalite.dsl.rM.ERelationshipTypes;
 import org.sodalite.dsl.rM.ERequirementDefinition;
+import org.sodalite.dsl.rM.ERequirementDefinitionBody;
 import org.sodalite.dsl.rM.ERequirements;
 import org.sodalite.dsl.rM.ETypeRef;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.EValid_Values;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.GetAttribute;
+import org.sodalite.dsl.rM.GetAttributeBody;
 import org.sodalite.dsl.rM.GetProperty;
+import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.services.RMGrammarAccess;
@@ -79,11 +95,17 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EARTIFACT_TYPE:
 				sequence_EArtifactType(context, (EArtifactType) semanticObject); 
 				return; 
+			case RMPackage.EARTIFACT_TYPE_BODY:
+				sequence_EArtifactTypeBody(context, (EArtifactTypeBody) semanticObject); 
+				return; 
 			case RMPackage.EARTIFACT_TYPES:
 				sequence_EArtifactTypes(context, (EArtifactTypes) semanticObject); 
 				return; 
 			case RMPackage.EATTRIBUTE_DEFINITION:
 				sequence_EAttributeDefinition(context, (EAttributeDefinition) semanticObject); 
+				return; 
+			case RMPackage.EATTRIBUTE_DEFINITION_BODY:
+				sequence_EAttributeDefinitionBody(context, (EAttributeDefinitionBody) semanticObject); 
 				return; 
 			case RMPackage.EATTRIBUTES:
 				sequence_EAttributes(context, (EAttributes) semanticObject); 
@@ -94,8 +116,14 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.ECAPABILITY_DEFINITION:
 				sequence_ECapabilityDefinition(context, (ECapabilityDefinition) semanticObject); 
 				return; 
+			case RMPackage.ECAPABILITY_DEFINITION_BODY:
+				sequence_ECapabilityDefinitionBody(context, (ECapabilityDefinitionBody) semanticObject); 
+				return; 
 			case RMPackage.ECAPABILITY_TYPE:
 				sequence_ECapabilityType(context, (ECapabilityType) semanticObject); 
+				return; 
+			case RMPackage.ECAPABILITY_TYPE_BODY:
+				sequence_ECapabilityTypeBody(context, (ECapabilityTypeBody) semanticObject); 
 				return; 
 			case RMPackage.ECAPABILITY_TYPES:
 				sequence_ECapabilityTypes(context, (ECapabilityTypes) semanticObject); 
@@ -105,6 +133,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RMPackage.EDATA_TYPE:
 				sequence_EDataType(context, (EDataType) semanticObject); 
+				return; 
+			case RMPackage.EDATA_TYPE_BODY:
+				sequence_EDataTypeBody(context, (EDataTypeBody) semanticObject); 
 				return; 
 			case RMPackage.EDATA_TYPES:
 				sequence_EDataTypes(context, (EDataTypes) semanticObject); 
@@ -127,8 +158,14 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EINTERFACE_DEFINITION:
 				sequence_EInterfaceDefinition(context, (EInterfaceDefinition) semanticObject); 
 				return; 
+			case RMPackage.EINTERFACE_DEFINITION_BODY:
+				sequence_EInterfaceDefinitionBody(context, (EInterfaceDefinitionBody) semanticObject); 
+				return; 
 			case RMPackage.EINTERFACE_TYPE:
 				sequence_EInterfaceType(context, (EInterfaceType) semanticObject); 
+				return; 
+			case RMPackage.EINTERFACE_TYPE_BODY:
+				sequence_EInterfaceTypeBody(context, (EInterfaceTypeBody) semanticObject); 
 				return; 
 			case RMPackage.EINTERFACE_TYPES:
 				sequence_EInterfaceTypes(context, (EInterfaceTypes) semanticObject); 
@@ -154,11 +191,17 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.ENODE_TYPE:
 				sequence_ENodeType(context, (ENodeType) semanticObject); 
 				return; 
+			case RMPackage.ENODE_TYPE_BODY:
+				sequence_ENodeTypeBody(context, (ENodeTypeBody) semanticObject); 
+				return; 
 			case RMPackage.ENODE_TYPES:
 				sequence_ENodeTypes(context, (ENodeTypes) semanticObject); 
 				return; 
 			case RMPackage.EOPERATION_DEFINITION:
 				sequence_EOperationDefinition(context, (EOperationDefinition) semanticObject); 
+				return; 
+			case RMPackage.EOPERATION_DEFINITION_BODY:
+				sequence_EOperationDefinitionBody(context, (EOperationDefinitionBody) semanticObject); 
 				return; 
 			case RMPackage.EOPERATIONS:
 				sequence_EOperations(context, (EOperations) semanticObject); 
@@ -166,8 +209,14 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EPARAMETER_DEFINITION:
 				sequence_EParameterDefinition(context, (EParameterDefinition) semanticObject); 
 				return; 
+			case RMPackage.EPARAMETER_DEFINITION_BODY:
+				sequence_EParameterDefinitionBody(context, (EParameterDefinitionBody) semanticObject); 
+				return; 
 			case RMPackage.EPOLICY_TYPE:
 				sequence_EPolicyType(context, (EPolicyType) semanticObject); 
+				return; 
+			case RMPackage.EPOLICY_TYPE_BODY:
+				sequence_EPolicyTypeBody(context, (EPolicyTypeBody) semanticObject); 
 				return; 
 			case RMPackage.EPOLICY_TYPES:
 				sequence_EPolicyTypes(context, (EPolicyTypes) semanticObject); 
@@ -178,14 +227,23 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EPROPERTY_DEFINITION:
 				sequence_EPropertyDefinition(context, (EPropertyDefinition) semanticObject); 
 				return; 
+			case RMPackage.EPROPERTY_DEFINITION_BODY:
+				sequence_EPropertyDefinitionBody(context, (EPropertyDefinitionBody) semanticObject); 
+				return; 
 			case RMPackage.ERELATIONSHIP_TYPE:
 				sequence_ERelationshipType(context, (ERelationshipType) semanticObject); 
+				return; 
+			case RMPackage.ERELATIONSHIP_TYPE_BODY:
+				sequence_ERelationshipTypeBody(context, (ERelationshipTypeBody) semanticObject); 
 				return; 
 			case RMPackage.ERELATIONSHIP_TYPES:
 				sequence_ERelationshipTypes(context, (ERelationshipTypes) semanticObject); 
 				return; 
 			case RMPackage.EREQUIREMENT_DEFINITION:
 				sequence_ERequirementDefinition(context, (ERequirementDefinition) semanticObject); 
+				return; 
+			case RMPackage.EREQUIREMENT_DEFINITION_BODY:
+				sequence_ERequirementDefinitionBody(context, (ERequirementDefinitionBody) semanticObject); 
 				return; 
 			case RMPackage.EREQUIREMENTS:
 				sequence_ERequirements(context, (ERequirements) semanticObject); 
@@ -205,8 +263,14 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.GET_ATTRIBUTE:
 				sequence_GetAttribute(context, (GetAttribute) semanticObject); 
 				return; 
+			case RMPackage.GET_ATTRIBUTE_BODY:
+				sequence_GetAttributeBody(context, (GetAttributeBody) semanticObject); 
+				return; 
 			case RMPackage.GET_PROPERTY:
 				sequence_GetProperty(context, (GetProperty) semanticObject); 
+				return; 
+			case RMPackage.GET_PROPERTY_BODY:
+				sequence_GetPropertyBody(context, (GetPropertyBody) semanticObject); 
 				return; 
 			case RMPackage.RM_MODEL:
 				sequence_RM_Model(context, (RM_Model) semanticObject); 
@@ -218,13 +282,34 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EArtifactTypeBody returns EArtifactTypeBody
+	 *
+	 * Constraint:
+	 *     (superType=[EArtifactType|QUALIFIED_NAME] | description=STRING | mime_type=STRING | file_ext=STRING)*
+	 */
+	protected void sequence_EArtifactTypeBody(ISerializationContext context, EArtifactTypeBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EArtifactType returns EArtifactType
 	 *
 	 * Constraint:
-	 *     (name=QUALIFIED_NAME superType=[EArtifactType|QUALIFIED_NAME]? description=STRING? mime_type=STRING? file_ext=STRING?)
+	 *     (name=QUALIFIED_NAME artifact=EArtifactTypeBody)
 	 */
 	protected void sequence_EArtifactType(ISerializationContext context, EArtifactType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EARTIFACT_TYPE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EARTIFACT_TYPE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EARTIFACT_TYPE__ARTIFACT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EARTIFACT_TYPE__ARTIFACT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEArtifactTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEArtifactTypeAccess().getArtifactEArtifactTypeBodyParserRuleCall_2_0(), semanticObject.getArtifact());
+		feeder.finish();
 	}
 	
 	
@@ -242,13 +327,34 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EAttributeDefinitionBody returns EAttributeDefinitionBody
+	 *
+	 * Constraint:
+	 *     (type=[EDataType|EDataTypeName] | description=STRING | entry_schema=[EDataType|EDataTypeName])+
+	 */
+	protected void sequence_EAttributeDefinitionBody(ISerializationContext context, EAttributeDefinitionBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EAttributeDefinition returns EAttributeDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID type=[EDataType|EDataTypeName] description=STRING? entry_schema=[EDataType|EDataTypeName]?)
+	 *     (name=ID attribute=EAttributeDefinitionBody)
 	 */
 	protected void sequence_EAttributeDefinition(ISerializationContext context, EAttributeDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EATTRIBUTE_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EATTRIBUTE_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EATTRIBUTE_DEFINITION__ATTRIBUTE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EATTRIBUTE_DEFINITION__ATTRIBUTE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEAttributeDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEAttributeDefinitionAccess().getAttributeEAttributeDefinitionBodyParserRuleCall_2_0(), semanticObject.getAttribute());
+		feeder.finish();
 	}
 	
 	
@@ -278,13 +384,46 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     ECapabilityDefinitionBody returns ECapabilityDefinitionBody
+	 *
+	 * Constraint:
+	 *     ((type=[ECapabilityType|QUALIFIED_NAME] | description=STRING | valid_source_types+=EValidSourceType)? (start=STRING end=STRING)?)+
+	 */
+	protected void sequence_ECapabilityDefinitionBody(ISerializationContext context, ECapabilityDefinitionBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ECapabilityDefinition returns ECapabilityDefinition
 	 *     EReqOrCap returns ECapabilityDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID type=[ECapabilityType|QUALIFIED_NAME] description=STRING? valid_source_types+=EValidSourceType? (start=STRING end=STRING)?)
+	 *     (name=ID capability=ECapabilityDefinitionBody)
 	 */
 	protected void sequence_ECapabilityDefinition(ISerializationContext context, ECapabilityDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EREQ_OR_CAP__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EREQ_OR_CAP__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ECAPABILITY_DEFINITION__CAPABILITY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ECAPABILITY_DEFINITION__CAPABILITY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getECapabilityDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getECapabilityDefinitionAccess().getCapabilityECapabilityDefinitionBodyParserRuleCall_2_0(), semanticObject.getCapability());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ECapabilityTypeBody returns ECapabilityTypeBody
+	 *
+	 * Constraint:
+	 *     (superType=[ECapabilityType|QUALIFIED_NAME] | description=STRING | properties=EProperties | atributes=EAttributes)*
+	 */
+	protected void sequence_ECapabilityTypeBody(ISerializationContext context, ECapabilityTypeBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -294,10 +433,19 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ECapabilityType returns ECapabilityType
 	 *
 	 * Constraint:
-	 *     (name=QUALIFIED_NAME superType=[ECapabilityType|QUALIFIED_NAME]? description=STRING? properties=EProperties? atributes=EAttributes?)
+	 *     (name=QUALIFIED_NAME capability=ECapabilityTypeBody)
 	 */
 	protected void sequence_ECapabilityType(ISerializationContext context, ECapabilityType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ECAPABILITY_TYPE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ECAPABILITY_TYPE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ECAPABILITY_TYPE__CAPABILITY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ECAPABILITY_TYPE__CAPABILITY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getECapabilityTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getECapabilityTypeAccess().getCapabilityECapabilityTypeBodyParserRuleCall_2_0(), semanticObject.getCapability());
+		feeder.finish();
 	}
 	
 	
@@ -327,13 +475,34 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EDataTypeBody returns EDataTypeBody
+	 *
+	 * Constraint:
+	 *     (superType=[EDataType|EDataTypeName] | description=STRING | constraints=EConstraints | properties=EProperties)*
+	 */
+	protected void sequence_EDataTypeBody(ISerializationContext context, EDataTypeBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EDataType returns EDataType
 	 *
 	 * Constraint:
-	 *     (name=EDataTypeName superType=[EDataType|EDataTypeName]? description=STRING? constraints=EConstraints? properties=EProperties?)
+	 *     (name=EDataTypeName data=EDataTypeBody)
 	 */
 	protected void sequence_EDataType(ISerializationContext context, EDataType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EDATA_TYPE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EDATA_TYPE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EDATA_TYPE__DATA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EDATA_TYPE__DATA));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEDataTypeAccess().getNameEDataTypeNameParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEDataTypeAccess().getDataEDataTypeBodyParserRuleCall_2_0(), semanticObject.getData());
+		feeder.finish();
 	}
 	
 	
@@ -442,12 +611,45 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EInterfaceDefinitionBody returns EInterfaceDefinitionBody
+	 *
+	 * Constraint:
+	 *     (type=[EInterfaceType|QUALIFIED_NAME] | inputs=EProperties | operations=EOperations)+
+	 */
+	protected void sequence_EInterfaceDefinitionBody(ISerializationContext context, EInterfaceDefinitionBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EInterfaceDefinition returns EInterfaceDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID type=[EInterfaceType|QUALIFIED_NAME] inputs=EProperties? operations=EOperations?)
+	 *     (name=ID interface=EInterfaceDefinitionBody)
 	 */
 	protected void sequence_EInterfaceDefinition(ISerializationContext context, EInterfaceDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EINTERFACE_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EINTERFACE_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EINTERFACE_DEFINITION__INTERFACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EINTERFACE_DEFINITION__INTERFACE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEInterfaceDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEInterfaceDefinitionAccess().getInterfaceEInterfaceDefinitionBodyParserRuleCall_2_0(), semanticObject.getInterface());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EInterfaceTypeBody returns EInterfaceTypeBody
+	 *
+	 * Constraint:
+	 *     (superType=[EInterfaceType|QUALIFIED_NAME] | description=STRING | inputs=EProperties | operations=EOperations)*
+	 */
+	protected void sequence_EInterfaceTypeBody(ISerializationContext context, EInterfaceTypeBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -457,10 +659,19 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EInterfaceType returns EInterfaceType
 	 *
 	 * Constraint:
-	 *     (name=QUALIFIED_NAME superType=[EInterfaceType|QUALIFIED_NAME]? description=STRING? inputs=EProperties? operations=EOperations?)
+	 *     (name=QUALIFIED_NAME interface=EInterfaceTypeBody)
 	 */
 	protected void sequence_EInterfaceType(ISerializationContext context, EInterfaceType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EINTERFACE_TYPE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EINTERFACE_TYPE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EINTERFACE_TYPE__INTERFACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EINTERFACE_TYPE__INTERFACE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEInterfaceTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEInterfaceTypeAccess().getInterfaceEInterfaceTypeBodyParserRuleCall_2_0(), semanticObject.getInterface());
+		feeder.finish();
 	}
 	
 	
@@ -585,22 +796,42 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     ENodeType returns ENodeType
+	 *     ENodeTypeBody returns ENodeTypeBody
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=QUALIFIED_NAME 
-	 *         superType=[ENodeType|QUALIFIED_NAME]? 
-	 *         description=STRING? 
-	 *         properties=EProperties? 
-	 *         atributes=EAttributes? 
-	 *         interfaces=EInterfaces? 
-	 *         capabilities=ECapabilities? 
-	 *         requirements=ERequirements?
-	 *     )
+	 *         superType=[ENodeType|QUALIFIED_NAME] | 
+	 *         description=STRING | 
+	 *         properties=EProperties | 
+	 *         attributes=EAttributes | 
+	 *         interfaces=EInterfaces | 
+	 *         capabilities=ECapabilities | 
+	 *         requirements=ERequirements
+	 *     )*
+	 */
+	protected void sequence_ENodeTypeBody(ISerializationContext context, ENodeTypeBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ENodeType returns ENodeType
+	 *
+	 * Constraint:
+	 *     (name=QUALIFIED_NAME node=ENodeTypeBody)
 	 */
 	protected void sequence_ENodeType(ISerializationContext context, ENodeType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ENODE_TYPE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ENODE_TYPE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ENODE_TYPE__NODE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ENODE_TYPE__NODE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getENodeTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getENodeTypeAccess().getNodeENodeTypeBodyParserRuleCall_2_0(), semanticObject.getNode());
+		feeder.finish();
 	}
 	
 	
@@ -618,13 +849,34 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EOperationDefinitionBody returns EOperationDefinitionBody
+	 *
+	 * Constraint:
+	 *     (description=STRING | inputs=EInputs | implementation=STRING)*
+	 */
+	protected void sequence_EOperationDefinitionBody(ISerializationContext context, EOperationDefinitionBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EOperationDefinition returns EOperationDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID description=STRING? inputs=EInputs? implementation=STRING?)
+	 *     (name=ID operation=EOperationDefinitionBody)
 	 */
 	protected void sequence_EOperationDefinition(ISerializationContext context, EOperationDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EOPERATION_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EOPERATION_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EOPERATION_DEFINITION__OPERATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EOPERATION_DEFINITION__OPERATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEOperationDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEOperationDefinitionAccess().getOperationEOperationDefinitionBodyParserRuleCall_2_0(), semanticObject.getOperation());
+		feeder.finish();
 	}
 	
 	
@@ -642,12 +894,45 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EParameterDefinitionBody returns EParameterDefinitionBody
+	 *
+	 * Constraint:
+	 *     (value=EValueExpression | default=EValueExpression)*
+	 */
+	protected void sequence_EParameterDefinitionBody(ISerializationContext context, EParameterDefinitionBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EParameterDefinition returns EParameterDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID value=EValueExpression? default=EValueExpression?)
+	 *     (name=ID parameter=EParameterDefinitionBody)
 	 */
 	protected void sequence_EParameterDefinition(ISerializationContext context, EParameterDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EPARAMETER_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EPARAMETER_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EPARAMETER_DEFINITION__PARAMETER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EPARAMETER_DEFINITION__PARAMETER));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEParameterDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEParameterDefinitionAccess().getParameterEParameterDefinitionBodyParserRuleCall_2_0(), semanticObject.getParameter());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EPolicyTypeBody returns EPolicyTypeBody
+	 *
+	 * Constraint:
+	 *     (superType=[EPolicyType|QUALIFIED_NAME] | description=STRING)*
+	 */
+	protected void sequence_EPolicyTypeBody(ISerializationContext context, EPolicyTypeBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -657,10 +942,19 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EPolicyType returns EPolicyType
 	 *
 	 * Constraint:
-	 *     (name=QUALIFIED_NAME superType=[EPolicyType|QUALIFIED_NAME]? description=STRING?)
+	 *     (name=QUALIFIED_NAME policy=EPolicyTypeBody)
 	 */
 	protected void sequence_EPolicyType(ISerializationContext context, EPolicyType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EPOLICY_TYPE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EPOLICY_TYPE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EPOLICY_TYPE__POLICY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EPOLICY_TYPE__POLICY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEPolicyTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEPolicyTypeAccess().getPolicyEPolicyTypeBodyParserRuleCall_2_0(), semanticObject.getPolicy());
+		feeder.finish();
 	}
 	
 	
@@ -690,21 +984,60 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     EPropertyDefinition returns EPropertyDefinition
+	 *     EPropertyDefinitionBody returns EPropertyDefinitionBody
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=ID 
-	 *         type=[EDataType|EDataTypeName] 
-	 *         description=STRING? 
-	 *         required=BOOLEAN? 
-	 *         default=EValueExpression? 
-	 *         status=STRING? 
-	 *         constraints=EConstraints? 
-	 *         entry_schema=[EDataType|EDataTypeName]?
-	 *     )
+	 *         type=[EDataType|EDataTypeName] | 
+	 *         description=STRING | 
+	 *         required=BOOLEAN | 
+	 *         default=EValueExpression | 
+	 *         status=STRING | 
+	 *         constraints=EConstraints | 
+	 *         entry_schema=[EDataType|EDataTypeName]
+	 *     )+
+	 */
+	protected void sequence_EPropertyDefinitionBody(ISerializationContext context, EPropertyDefinitionBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EPropertyDefinition returns EPropertyDefinition
+	 *
+	 * Constraint:
+	 *     (name=ID property=EPropertyDefinitionBody)
 	 */
 	protected void sequence_EPropertyDefinition(ISerializationContext context, EPropertyDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EPROPERTY_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EPROPERTY_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EPROPERTY_DEFINITION__PROPERTY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EPROPERTY_DEFINITION__PROPERTY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEPropertyDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEPropertyDefinitionAccess().getPropertyEPropertyDefinitionBodyParserRuleCall_2_0(), semanticObject.getProperty());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ERelationshipTypeBody returns ERelationshipTypeBody
+	 *
+	 * Constraint:
+	 *     (
+	 *         superType=[ERelationshipType|QUALIFIED_NAME] | 
+	 *         description=STRING | 
+	 *         properties=EProperties | 
+	 *         atributes=EAttributes | 
+	 *         interfaces=EInterfaces | 
+	 *         valid_target_types=STRING
+	 *     )*
+	 */
+	protected void sequence_ERelationshipTypeBody(ISerializationContext context, ERelationshipTypeBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -714,18 +1047,19 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ERelationshipType returns ERelationshipType
 	 *
 	 * Constraint:
-	 *     (
-	 *         name=QUALIFIED_NAME 
-	 *         superType=[ERelationshipType|QUALIFIED_NAME]? 
-	 *         description=STRING? 
-	 *         properties=EProperties? 
-	 *         atributes=EAttributes? 
-	 *         interfaces=EInterfaces? 
-	 *         valid_target_types=STRING?
-	 *     )
+	 *     (name=QUALIFIED_NAME relationship=ERelationshipTypeBody)
 	 */
 	protected void sequence_ERelationshipType(ISerializationContext context, ERelationshipType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ERELATIONSHIP_TYPE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ERELATIONSHIP_TYPE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ERELATIONSHIP_TYPE__RELATIONSHIP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ERELATIONSHIP_TYPE__RELATIONSHIP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getERelationshipTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getERelationshipTypeAccess().getRelationshipERelationshipTypeBodyParserRuleCall_2_0(), semanticObject.getRelationship());
+		feeder.finish();
 	}
 	
 	
@@ -743,20 +1077,40 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     ERequirementDefinitionBody returns ERequirementDefinitionBody
+	 *
+	 * Constraint:
+	 *     (
+	 *         capability=[ECapabilityType|QUALIFIED_NAME] | 
+	 *         node=[ENodeType|QUALIFIED_NAME] | 
+	 *         relationship=[ERelationshipType|QUALIFIED_NAME] | 
+	 *         (start=STRING end=STRING)
+	 *     )+
+	 */
+	protected void sequence_ERequirementDefinitionBody(ISerializationContext context, ERequirementDefinitionBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ERequirementDefinition returns ERequirementDefinition
 	 *     EReqOrCap returns ERequirementDefinition
 	 *
 	 * Constraint:
-	 *     (
-	 *         name=ID 
-	 *         capability=[ECapabilityType|QUALIFIED_NAME] 
-	 *         node=[ENodeType|QUALIFIED_NAME]? 
-	 *         relationship=[ERelationshipType|QUALIFIED_NAME]? 
-	 *         (start=STRING end=STRING)?
-	 *     )
+	 *     (name=ID requirement=ERequirementDefinitionBody)
 	 */
 	protected void sequence_ERequirementDefinition(ISerializationContext context, ERequirementDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EREQ_OR_CAP__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EREQ_OR_CAP__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EREQUIREMENT_DEFINITION__REQUIREMENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EREQUIREMENT_DEFINITION__REQUIREMENT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getERequirementDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getERequirementDefinitionAccess().getRequirementERequirementDefinitionBodyParserRuleCall_2_0(), semanticObject.getRequirement());
+		feeder.finish();
 	}
 	
 	
@@ -835,14 +1189,44 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     GetAttributeBody returns GetAttributeBody
+	 *
+	 * Constraint:
+	 *     (attribute=[EAttributeDefinition|QUALIFIED_NAME] | entity=ENTITY | req_cap=[EReqOrCap|QUALIFIED_NAME])+
+	 */
+	protected void sequence_GetAttributeBody(ISerializationContext context, GetAttributeBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EValueExpression returns GetAttribute
 	 *     EFunction returns GetAttribute
 	 *     GetAttribute returns GetAttribute
 	 *
 	 * Constraint:
-	 *     (attribute=[EAttributeDefinition|QUALIFIED_NAME] entity=ENTITY req_cap=[EReqOrCap|QUALIFIED_NAME]?)
+	 *     attribute=GetAttributeBody
 	 */
 	protected void sequence_GetAttribute(ISerializationContext context, GetAttribute semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.GET_ATTRIBUTE__ATTRIBUTE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.GET_ATTRIBUTE__ATTRIBUTE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGetAttributeAccess().getAttributeGetAttributeBodyParserRuleCall_1_0(), semanticObject.getAttribute());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     GetPropertyBody returns GetPropertyBody
+	 *
+	 * Constraint:
+	 *     (property=[EPropertyDefinition|QUALIFIED_NAME] | entity=ENTITY | req_cap=[EReqOrCap|QUALIFIED_NAME])+
+	 */
+	protected void sequence_GetPropertyBody(ISerializationContext context, GetPropertyBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -854,10 +1238,16 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     GetProperty returns GetProperty
 	 *
 	 * Constraint:
-	 *     (property=[EPropertyDefinition|QUALIFIED_NAME] entity=ENTITY req_cap=[EReqOrCap|QUALIFIED_NAME]?)
+	 *     property=GetPropertyBody
 	 */
 	protected void sequence_GetProperty(ISerializationContext context, GetProperty semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.GET_PROPERTY__PROPERTY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.GET_PROPERTY__PROPERTY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGetPropertyAccess().getPropertyGetPropertyBodyParserRuleCall_1_0(), semanticObject.getProperty());
+		feeder.finish();
 	}
 	
 	
@@ -867,58 +1257,14 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         (dataTypes=EDataTypes? ((relationshipTypes=ERelationshipTypes policyTypes=EPolicyTypes) | policyTypes=EPolicyTypes)) | 
-	 *         (
-	 *             dataTypes=EDataTypes? 
-	 *             artifactTypes=EArtifactTypes 
-	 *             ((relationshipTypes=ERelationshipTypes policyTypes=EPolicyTypes) | policyTypes=EPolicyTypes)
-	 *         ) | 
-	 *         (
-	 *             (
-	 *                 (dataTypes=EDataTypes? capabilityTypes=ECapabilityTypes) | 
-	 *                 (dataTypes=EDataTypes? artifactTypes=EArtifactTypes capabilityTypes=ECapabilityTypes) | 
-	 *                 capabilityTypes=ECapabilityTypes
-	 *             ) 
-	 *             ((relationshipTypes=ERelationshipTypes policyTypes=EPolicyTypes) | policyTypes=EPolicyTypes)
-	 *         ) | 
-	 *         (
-	 *             (
-	 *                 (dataTypes=EDataTypes? ((capabilityTypes=ECapabilityTypes interfaceTypes=EInterfaceTypes) | interfaceTypes=EInterfaceTypes)) | 
-	 *                 (
-	 *                     dataTypes=EDataTypes? 
-	 *                     artifactTypes=EArtifactTypes 
-	 *                     ((capabilityTypes=ECapabilityTypes interfaceTypes=EInterfaceTypes) | interfaceTypes=EInterfaceTypes)
-	 *                 ) | 
-	 *                 (capabilityTypes=ECapabilityTypes interfaceTypes=EInterfaceTypes) | 
-	 *                 interfaceTypes=EInterfaceTypes
-	 *             ) 
-	 *             ((relationshipTypes=ERelationshipTypes policyTypes=EPolicyTypes) | policyTypes=EPolicyTypes)
-	 *         ) | 
-	 *         (
-	 *             (
-	 *                 (dataTypes=EDataTypes? ((interfaceTypes=EInterfaceTypes relationshipTypes=ERelationshipTypes) | relationshipTypes=ERelationshipTypes)) | 
-	 *                 (
-	 *                     dataTypes=EDataTypes? 
-	 *                     artifactTypes=EArtifactTypes 
-	 *                     ((interfaceTypes=EInterfaceTypes relationshipTypes=ERelationshipTypes) | relationshipTypes=ERelationshipTypes)
-	 *                 ) | 
-	 *                 (
-	 *                     (
-	 *                         (dataTypes=EDataTypes? capabilityTypes=ECapabilityTypes) | 
-	 *                         (dataTypes=EDataTypes? artifactTypes=EArtifactTypes capabilityTypes=ECapabilityTypes) | 
-	 *                         capabilityTypes=ECapabilityTypes
-	 *                     ) 
-	 *                     ((interfaceTypes=EInterfaceTypes relationshipTypes=ERelationshipTypes) | relationshipTypes=ERelationshipTypes)
-	 *                 ) | 
-	 *                 (interfaceTypes=EInterfaceTypes relationshipTypes=ERelationshipTypes) | 
-	 *                 relationshipTypes=ERelationshipTypes
-	 *             )? 
-	 *             nodeTypes=ENodeTypes 
-	 *             policyTypes=EPolicyTypes
-	 *         ) | 
-	 *         (relationshipTypes=ERelationshipTypes policyTypes=EPolicyTypes) | 
+	 *         dataTypes=EDataTypes | 
+	 *         artifactTypes=EArtifactTypes | 
+	 *         capabilityTypes=ECapabilityTypes | 
+	 *         interfaceTypes=EInterfaceTypes | 
+	 *         relationshipTypes=ERelationshipTypes | 
+	 *         nodeTypes=ENodeTypes | 
 	 *         policyTypes=EPolicyTypes
-	 *     )?
+	 *     )+
 	 */
 	protected void sequence_RM_Model(ISerializationContext context, RM_Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

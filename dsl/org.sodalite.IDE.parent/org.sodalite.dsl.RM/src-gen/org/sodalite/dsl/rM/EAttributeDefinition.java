@@ -15,9 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinition#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinition#getType <em>Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinition#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinition#getEntry_schema <em>Entry schema</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinition#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinition()
@@ -49,69 +47,25 @@ public interface EAttributeDefinition extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Attribute</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(EDataType)
-   * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinition_Type()
-   * @model
+   * @return the value of the '<em>Attribute</em>' containment reference.
+   * @see #setAttribute(EAttributeDefinitionBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinition_Attribute()
+   * @model containment="true"
    * @generated
    */
-  EDataType getType();
+  EAttributeDefinitionBody getAttribute();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinition#getType <em>Type</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinition#getAttribute <em>Attribute</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
+   * @param value the new value of the '<em>Attribute</em>' containment reference.
+   * @see #getAttribute()
    * @generated
    */
-  void setType(EDataType value);
-
-  /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinition_Description()
-   * @model
-   * @generated
-   */
-  String getDescription();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinition#getDescription <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(String value);
-
-  /**
-   * Returns the value of the '<em><b>Entry schema</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Entry schema</em>' reference.
-   * @see #setEntry_schema(EDataType)
-   * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinition_Entry_schema()
-   * @model
-   * @generated
-   */
-  EDataType getEntry_schema();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinition#getEntry_schema <em>Entry schema</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entry schema</em>' reference.
-   * @see #getEntry_schema()
-   * @generated
-   */
-  void setEntry_schema(EDataType value);
+  void setAttribute(EAttributeDefinitionBody value);
 
 } // EAttributeDefinition

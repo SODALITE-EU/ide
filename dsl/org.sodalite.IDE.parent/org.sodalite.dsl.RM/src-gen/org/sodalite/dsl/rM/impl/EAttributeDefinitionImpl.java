@@ -4,6 +4,7 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EAttributeDefinition;
-import org.sodalite.dsl.rM.EDataType;
+import org.sodalite.dsl.rM.EAttributeDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -24,9 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EAttributeDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EAttributeDefinitionImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EAttributeDefinitionImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EAttributeDefinitionImpl#getEntry_schema <em>Entry schema</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EAttributeDefinitionImpl#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,44 +53,14 @@ public class EAttributeDefinitionImpl extends MinimalEObjectImpl.Container imple
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getAttribute()
    * @generated
    * @ordered
    */
-  protected EDataType type;
-
-  /**
-   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected static final String DESCRIPTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected String description = DESCRIPTION_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getEntry_schema() <em>Entry schema</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEntry_schema()
-   * @generated
-   * @ordered
-   */
-  protected EDataType entry_schema;
+  protected EAttributeDefinitionBody attribute;
 
   /**
    * <!-- begin-user-doc -->
@@ -145,29 +114,26 @@ public class EAttributeDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public EDataType getType()
+  public EAttributeDefinitionBody getAttribute()
   {
-    if (type != null && type.eIsProxy())
+    return attribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAttribute(EAttributeDefinitionBody newAttribute, NotificationChain msgs)
+  {
+    EAttributeDefinitionBody oldAttribute = attribute;
+    attribute = newAttribute;
+    if (eNotificationRequired())
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (EDataType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EATTRIBUTE_DEFINITION__TYPE, oldType, type));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EATTRIBUTE_DEFINITION__ATTRIBUTE, oldAttribute, newAttribute);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EDataType basicGetType()
-  {
-    return type;
+    return msgs;
   }
 
   /**
@@ -176,68 +142,20 @@ public class EAttributeDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setType(EDataType newType)
+  public void setAttribute(EAttributeDefinitionBody newAttribute)
   {
-    EDataType oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EATTRIBUTE_DEFINITION__TYPE, oldType, type));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getDescription()
-  {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(String newDescription)
-  {
-    String oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EATTRIBUTE_DEFINITION__DESCRIPTION, oldDescription, description));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EDataType getEntry_schema()
-  {
-    if (entry_schema != null && entry_schema.eIsProxy())
+    if (newAttribute != attribute)
     {
-      InternalEObject oldEntry_schema = (InternalEObject)entry_schema;
-      entry_schema = (EDataType)eResolveProxy(oldEntry_schema);
-      if (entry_schema != oldEntry_schema)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EATTRIBUTE_DEFINITION__ENTRY_SCHEMA, oldEntry_schema, entry_schema));
-      }
+      NotificationChain msgs = null;
+      if (attribute != null)
+        msgs = ((InternalEObject)attribute).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EATTRIBUTE_DEFINITION__ATTRIBUTE, null, msgs);
+      if (newAttribute != null)
+        msgs = ((InternalEObject)newAttribute).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EATTRIBUTE_DEFINITION__ATTRIBUTE, null, msgs);
+      msgs = basicSetAttribute(newAttribute, msgs);
+      if (msgs != null) msgs.dispatch();
     }
-    return entry_schema;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EDataType basicGetEntry_schema()
-  {
-    return entry_schema;
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EATTRIBUTE_DEFINITION__ATTRIBUTE, newAttribute, newAttribute));
   }
 
   /**
@@ -246,12 +164,14 @@ public class EAttributeDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setEntry_schema(EDataType newEntry_schema)
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    EDataType oldEntry_schema = entry_schema;
-    entry_schema = newEntry_schema;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EATTRIBUTE_DEFINITION__ENTRY_SCHEMA, oldEntry_schema, entry_schema));
+    switch (featureID)
+    {
+      case RMPackage.EATTRIBUTE_DEFINITION__ATTRIBUTE:
+        return basicSetAttribute(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -266,14 +186,8 @@ public class EAttributeDefinitionImpl extends MinimalEObjectImpl.Container imple
     {
       case RMPackage.EATTRIBUTE_DEFINITION__NAME:
         return getName();
-      case RMPackage.EATTRIBUTE_DEFINITION__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
-      case RMPackage.EATTRIBUTE_DEFINITION__DESCRIPTION:
-        return getDescription();
-      case RMPackage.EATTRIBUTE_DEFINITION__ENTRY_SCHEMA:
-        if (resolve) return getEntry_schema();
-        return basicGetEntry_schema();
+      case RMPackage.EATTRIBUTE_DEFINITION__ATTRIBUTE:
+        return getAttribute();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -291,14 +205,8 @@ public class EAttributeDefinitionImpl extends MinimalEObjectImpl.Container imple
       case RMPackage.EATTRIBUTE_DEFINITION__NAME:
         setName((String)newValue);
         return;
-      case RMPackage.EATTRIBUTE_DEFINITION__TYPE:
-        setType((EDataType)newValue);
-        return;
-      case RMPackage.EATTRIBUTE_DEFINITION__DESCRIPTION:
-        setDescription((String)newValue);
-        return;
-      case RMPackage.EATTRIBUTE_DEFINITION__ENTRY_SCHEMA:
-        setEntry_schema((EDataType)newValue);
+      case RMPackage.EATTRIBUTE_DEFINITION__ATTRIBUTE:
+        setAttribute((EAttributeDefinitionBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -317,14 +225,8 @@ public class EAttributeDefinitionImpl extends MinimalEObjectImpl.Container imple
       case RMPackage.EATTRIBUTE_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.EATTRIBUTE_DEFINITION__TYPE:
-        setType((EDataType)null);
-        return;
-      case RMPackage.EATTRIBUTE_DEFINITION__DESCRIPTION:
-        setDescription(DESCRIPTION_EDEFAULT);
-        return;
-      case RMPackage.EATTRIBUTE_DEFINITION__ENTRY_SCHEMA:
-        setEntry_schema((EDataType)null);
+      case RMPackage.EATTRIBUTE_DEFINITION__ATTRIBUTE:
+        setAttribute((EAttributeDefinitionBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -342,12 +244,8 @@ public class EAttributeDefinitionImpl extends MinimalEObjectImpl.Container imple
     {
       case RMPackage.EATTRIBUTE_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.EATTRIBUTE_DEFINITION__TYPE:
-        return type != null;
-      case RMPackage.EATTRIBUTE_DEFINITION__DESCRIPTION:
-        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-      case RMPackage.EATTRIBUTE_DEFINITION__ENTRY_SCHEMA:
-        return entry_schema != null;
+      case RMPackage.EATTRIBUTE_DEFINITION__ATTRIBUTE:
+        return attribute != null;
     }
     return super.eIsSet(featureID);
   }
@@ -365,8 +263,6 @@ public class EAttributeDefinitionImpl extends MinimalEObjectImpl.Container imple
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", description: ");
-    result.append(description);
     result.append(')');
     return result.toString();
   }

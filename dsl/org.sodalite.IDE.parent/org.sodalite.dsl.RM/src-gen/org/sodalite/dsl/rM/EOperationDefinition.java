@@ -15,9 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EOperationDefinition#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EOperationDefinition#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EOperationDefinition#getInputs <em>Inputs</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EOperationDefinition#getImplementation <em>Implementation</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EOperationDefinition#getOperation <em>Operation</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEOperationDefinition()
@@ -49,69 +47,25 @@ public interface EOperationDefinition extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
+   * Returns the value of the '<em><b>Operation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEOperationDefinition_Description()
-   * @model
-   * @generated
-   */
-  String getDescription();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EOperationDefinition#getDescription <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(String value);
-
-  /**
-   * Returns the value of the '<em><b>Inputs</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Inputs</em>' containment reference.
-   * @see #setInputs(EInputs)
-   * @see org.sodalite.dsl.rM.RMPackage#getEOperationDefinition_Inputs()
+   * @return the value of the '<em>Operation</em>' containment reference.
+   * @see #setOperation(EOperationDefinitionBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getEOperationDefinition_Operation()
    * @model containment="true"
    * @generated
    */
-  EInputs getInputs();
+  EOperationDefinitionBody getOperation();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EOperationDefinition#getInputs <em>Inputs</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EOperationDefinition#getOperation <em>Operation</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Inputs</em>' containment reference.
-   * @see #getInputs()
+   * @param value the new value of the '<em>Operation</em>' containment reference.
+   * @see #getOperation()
    * @generated
    */
-  void setInputs(EInputs value);
-
-  /**
-   * Returns the value of the '<em><b>Implementation</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Implementation</em>' attribute.
-   * @see #setImplementation(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEOperationDefinition_Implementation()
-   * @model
-   * @generated
-   */
-  String getImplementation();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EOperationDefinition#getImplementation <em>Implementation</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Implementation</em>' attribute.
-   * @see #getImplementation()
-   * @generated
-   */
-  void setImplementation(String value);
+  void setOperation(EOperationDefinitionBody value);
 
 } // EOperationDefinition

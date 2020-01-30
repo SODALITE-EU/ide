@@ -22,8 +22,6 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EReqOrCapImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EReqOrCapImpl#getStart <em>Start</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EReqOrCapImpl#getEnd <em>End</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,46 +47,6 @@ public class EReqOrCapImpl extends MinimalEObjectImpl.Container implements EReqO
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getStart() <em>Start</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStart()
-   * @generated
-   * @ordered
-   */
-  protected static final String START_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getStart() <em>Start</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStart()
-   * @generated
-   * @ordered
-   */
-  protected String start = START_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getEnd() <em>End</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEnd()
-   * @generated
-   * @ordered
-   */
-  protected static final String END_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getEnd() <em>End</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEnd()
-   * @generated
-   * @ordered
-   */
-  protected String end = END_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -142,66 +100,12 @@ public class EReqOrCapImpl extends MinimalEObjectImpl.Container implements EReqO
    * @generated
    */
   @Override
-  public String getStart()
-  {
-    return start;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setStart(String newStart)
-  {
-    String oldStart = start;
-    start = newStart;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQ_OR_CAP__START, oldStart, start));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getEnd()
-  {
-    return end;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setEnd(String newEnd)
-  {
-    String oldEnd = end;
-    end = newEnd;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQ_OR_CAP__END, oldEnd, end));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case RMPackage.EREQ_OR_CAP__NAME:
         return getName();
-      case RMPackage.EREQ_OR_CAP__START:
-        return getStart();
-      case RMPackage.EREQ_OR_CAP__END:
-        return getEnd();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -218,12 +122,6 @@ public class EReqOrCapImpl extends MinimalEObjectImpl.Container implements EReqO
     {
       case RMPackage.EREQ_OR_CAP__NAME:
         setName((String)newValue);
-        return;
-      case RMPackage.EREQ_OR_CAP__START:
-        setStart((String)newValue);
-        return;
-      case RMPackage.EREQ_OR_CAP__END:
-        setEnd((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -242,12 +140,6 @@ public class EReqOrCapImpl extends MinimalEObjectImpl.Container implements EReqO
       case RMPackage.EREQ_OR_CAP__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.EREQ_OR_CAP__START:
-        setStart(START_EDEFAULT);
-        return;
-      case RMPackage.EREQ_OR_CAP__END:
-        setEnd(END_EDEFAULT);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -264,10 +156,6 @@ public class EReqOrCapImpl extends MinimalEObjectImpl.Container implements EReqO
     {
       case RMPackage.EREQ_OR_CAP__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.EREQ_OR_CAP__START:
-        return START_EDEFAULT == null ? start != null : !START_EDEFAULT.equals(start);
-      case RMPackage.EREQ_OR_CAP__END:
-        return END_EDEFAULT == null ? end != null : !END_EDEFAULT.equals(end);
     }
     return super.eIsSet(featureID);
   }
@@ -285,10 +173,6 @@ public class EReqOrCapImpl extends MinimalEObjectImpl.Container implements EReqO
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", start: ");
-    result.append(start);
-    result.append(", end: ");
-    result.append(end);
     result.append(')');
     return result.toString();
   }

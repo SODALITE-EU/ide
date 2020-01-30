@@ -15,8 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EPolicyType#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPolicyType#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPolicyType#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EPolicyType#getPolicy <em>Policy</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEPolicyType()
@@ -48,47 +47,25 @@ public interface EPolicyType extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Super Type</b></em>' reference.
+   * Returns the value of the '<em><b>Policy</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Type</em>' reference.
-   * @see #setSuperType(EPolicyType)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPolicyType_SuperType()
-   * @model
+   * @return the value of the '<em>Policy</em>' containment reference.
+   * @see #setPolicy(EPolicyTypeBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getEPolicyType_Policy()
+   * @model containment="true"
    * @generated
    */
-  EPolicyType getSuperType();
+  EPolicyTypeBody getPolicy();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPolicyType#getSuperType <em>Super Type</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EPolicyType#getPolicy <em>Policy</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Type</em>' reference.
-   * @see #getSuperType()
+   * @param value the new value of the '<em>Policy</em>' containment reference.
+   * @see #getPolicy()
    * @generated
    */
-  void setSuperType(EPolicyType value);
-
-  /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPolicyType_Description()
-   * @model
-   * @generated
-   */
-  String getDescription();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPolicyType#getDescription <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(String value);
+  void setPolicy(EPolicyTypeBody value);
 
 } // EPolicyType

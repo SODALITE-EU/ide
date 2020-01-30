@@ -94,6 +94,13 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EDATA_TYPE_BODY:
+      {
+        EDataTypeBody eDataTypeBody = (EDataTypeBody)theEObject;
+        T result = caseEDataTypeBody(eDataTypeBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EARTIFACT_TYPES:
       {
         EArtifactTypes eArtifactTypes = (EArtifactTypes)theEObject;
@@ -105,6 +112,13 @@ public class RMSwitch<T> extends Switch<T>
       {
         EArtifactType eArtifactType = (EArtifactType)theEObject;
         T result = caseEArtifactType(eArtifactType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EARTIFACT_TYPE_BODY:
+      {
+        EArtifactTypeBody eArtifactTypeBody = (EArtifactTypeBody)theEObject;
+        T result = caseEArtifactTypeBody(eArtifactTypeBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -122,6 +136,13 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.ECAPABILITY_TYPE_BODY:
+      {
+        ECapabilityTypeBody eCapabilityTypeBody = (ECapabilityTypeBody)theEObject;
+        T result = caseECapabilityTypeBody(eCapabilityTypeBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EINTERFACE_TYPES:
       {
         EInterfaceTypes eInterfaceTypes = (EInterfaceTypes)theEObject;
@@ -133,6 +154,13 @@ public class RMSwitch<T> extends Switch<T>
       {
         EInterfaceType eInterfaceType = (EInterfaceType)theEObject;
         T result = caseEInterfaceType(eInterfaceType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EINTERFACE_TYPE_BODY:
+      {
+        EInterfaceTypeBody eInterfaceTypeBody = (EInterfaceTypeBody)theEObject;
+        T result = caseEInterfaceTypeBody(eInterfaceTypeBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -150,6 +178,13 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EPOLICY_TYPE_BODY:
+      {
+        EPolicyTypeBody ePolicyTypeBody = (EPolicyTypeBody)theEObject;
+        T result = caseEPolicyTypeBody(ePolicyTypeBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.ENODE_TYPES:
       {
         ENodeTypes eNodeTypes = (ENodeTypes)theEObject;
@@ -161,6 +196,13 @@ public class RMSwitch<T> extends Switch<T>
       {
         ENodeType eNodeType = (ENodeType)theEObject;
         T result = caseENodeType(eNodeType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ENODE_TYPE_BODY:
+      {
+        ENodeTypeBody eNodeTypeBody = (ENodeTypeBody)theEObject;
+        T result = caseENodeTypeBody(eNodeTypeBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -178,6 +220,13 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.ERELATIONSHIP_TYPE_BODY:
+      {
+        ERelationshipTypeBody eRelationshipTypeBody = (ERelationshipTypeBody)theEObject;
+        T result = caseERelationshipTypeBody(eRelationshipTypeBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EPROPERTIES:
       {
         EProperties eProperties = (EProperties)theEObject;
@@ -189,6 +238,13 @@ public class RMSwitch<T> extends Switch<T>
       {
         EPropertyDefinition ePropertyDefinition = (EPropertyDefinition)theEObject;
         T result = caseEPropertyDefinition(ePropertyDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EPROPERTY_DEFINITION_BODY:
+      {
+        EPropertyDefinitionBody ePropertyDefinitionBody = (EPropertyDefinitionBody)theEObject;
+        T result = caseEPropertyDefinitionBody(ePropertyDefinitionBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -206,6 +262,13 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EATTRIBUTE_DEFINITION_BODY:
+      {
+        EAttributeDefinitionBody eAttributeDefinitionBody = (EAttributeDefinitionBody)theEObject;
+        T result = caseEAttributeDefinitionBody(eAttributeDefinitionBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EINTERFACES:
       {
         EInterfaces eInterfaces = (EInterfaces)theEObject;
@@ -217,6 +280,13 @@ public class RMSwitch<T> extends Switch<T>
       {
         EInterfaceDefinition eInterfaceDefinition = (EInterfaceDefinition)theEObject;
         T result = caseEInterfaceDefinition(eInterfaceDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EINTERFACE_DEFINITION_BODY:
+      {
+        EInterfaceDefinitionBody eInterfaceDefinitionBody = (EInterfaceDefinitionBody)theEObject;
+        T result = caseEInterfaceDefinitionBody(eInterfaceDefinitionBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -234,6 +304,13 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EOPERATION_DEFINITION_BODY:
+      {
+        EOperationDefinitionBody eOperationDefinitionBody = (EOperationDefinitionBody)theEObject;
+        T result = caseEOperationDefinitionBody(eOperationDefinitionBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EINPUTS:
       {
         EInputs eInputs = (EInputs)theEObject;
@@ -245,6 +322,13 @@ public class RMSwitch<T> extends Switch<T>
       {
         EParameterDefinition eParameterDefinition = (EParameterDefinition)theEObject;
         T result = caseEParameterDefinition(eParameterDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EPARAMETER_DEFINITION_BODY:
+      {
+        EParameterDefinitionBody eParameterDefinitionBody = (EParameterDefinitionBody)theEObject;
+        T result = caseEParameterDefinitionBody(eParameterDefinitionBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -272,12 +356,26 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.GET_ATTRIBUTE_BODY:
+      {
+        GetAttributeBody getAttributeBody = (GetAttributeBody)theEObject;
+        T result = caseGetAttributeBody(getAttributeBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.GET_PROPERTY:
       {
         GetProperty getProperty = (GetProperty)theEObject;
         T result = caseGetProperty(getProperty);
         if (result == null) result = caseEFunction(getProperty);
         if (result == null) result = caseEValueExpression(getProperty);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.GET_PROPERTY_BODY:
+      {
+        GetPropertyBody getPropertyBody = (GetPropertyBody)theEObject;
+        T result = caseGetPropertyBody(getPropertyBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -293,6 +391,13 @@ public class RMSwitch<T> extends Switch<T>
         ECapabilityDefinition eCapabilityDefinition = (ECapabilityDefinition)theEObject;
         T result = caseECapabilityDefinition(eCapabilityDefinition);
         if (result == null) result = caseEReqOrCap(eCapabilityDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ECAPABILITY_DEFINITION_BODY:
+      {
+        ECapabilityDefinitionBody eCapabilityDefinitionBody = (ECapabilityDefinitionBody)theEObject;
+        T result = caseECapabilityDefinitionBody(eCapabilityDefinitionBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -322,6 +427,13 @@ public class RMSwitch<T> extends Switch<T>
         ERequirementDefinition eRequirementDefinition = (ERequirementDefinition)theEObject;
         T result = caseERequirementDefinition(eRequirementDefinition);
         if (result == null) result = caseEReqOrCap(eRequirementDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EREQUIREMENT_DEFINITION_BODY:
+      {
+        ERequirementDefinitionBody eRequirementDefinitionBody = (ERequirementDefinitionBody)theEObject;
+        T result = caseERequirementDefinitionBody(eRequirementDefinitionBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -479,6 +591,22 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EData Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EData Type Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEDataTypeBody(EDataTypeBody object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EArtifact Types</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -506,6 +634,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEArtifactType(EArtifactType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EArtifact Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EArtifact Type Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEArtifactTypeBody(EArtifactTypeBody object)
   {
     return null;
   }
@@ -543,6 +687,22 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>ECapability Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECapability Type Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseECapabilityTypeBody(ECapabilityTypeBody object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EInterface Types</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -570,6 +730,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEInterfaceType(EInterfaceType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EInterface Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EInterface Type Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEInterfaceTypeBody(EInterfaceTypeBody object)
   {
     return null;
   }
@@ -607,6 +783,22 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EPolicy Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EPolicy Type Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPolicyTypeBody(EPolicyTypeBody object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>ENode Types</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -634,6 +826,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseENodeType(ENodeType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ENode Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ENode Type Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseENodeTypeBody(ENodeTypeBody object)
   {
     return null;
   }
@@ -671,6 +879,22 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>ERelationship Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ERelationship Type Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseERelationshipTypeBody(ERelationshipTypeBody object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EProperties</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -698,6 +922,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEPropertyDefinition(EPropertyDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EProperty Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EProperty Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPropertyDefinitionBody(EPropertyDefinitionBody object)
   {
     return null;
   }
@@ -735,6 +975,22 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EAttribute Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EAttribute Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEAttributeDefinitionBody(EAttributeDefinitionBody object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EInterfaces</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -762,6 +1018,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEInterfaceDefinition(EInterfaceDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EInterface Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EInterface Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEInterfaceDefinitionBody(EInterfaceDefinitionBody object)
   {
     return null;
   }
@@ -799,6 +1071,22 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EOperation Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EOperation Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEOperationDefinitionBody(EOperationDefinitionBody object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EInputs</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -826,6 +1114,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEParameterDefinition(EParameterDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EParameter Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EParameter Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEParameterDefinitionBody(EParameterDefinitionBody object)
   {
     return null;
   }
@@ -879,6 +1183,22 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Get Attribute Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Get Attribute Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGetAttributeBody(GetAttributeBody object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Get Property</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -890,6 +1210,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseGetProperty(GetProperty object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Get Property Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Get Property Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGetPropertyBody(GetPropertyBody object)
   {
     return null;
   }
@@ -922,6 +1258,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseECapabilityDefinition(ECapabilityDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ECapability Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECapability Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseECapabilityDefinitionBody(ECapabilityDefinitionBody object)
   {
     return null;
   }
@@ -986,6 +1338,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseERequirementDefinition(ERequirementDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ERequirement Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ERequirement Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseERequirementDefinitionBody(ERequirementDefinitionBody object)
   {
     return null;
   }

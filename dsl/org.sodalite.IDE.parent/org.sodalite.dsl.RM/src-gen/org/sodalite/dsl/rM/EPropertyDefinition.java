@@ -15,13 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinition#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinition#getType <em>Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinition#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinition#isRequired <em>Required</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinition#getDefault <em>Default</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinition#getStatus <em>Status</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinition#getConstraints <em>Constraints</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinition#getEntry_schema <em>Entry schema</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinition#getProperty <em>Property</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinition()
@@ -53,157 +47,25 @@ public interface EPropertyDefinition extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Property</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(EDataType)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinition_Type()
-   * @model
-   * @generated
-   */
-  EDataType getType();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinition#getType <em>Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
-   * @generated
-   */
-  void setType(EDataType value);
-
-  /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinition_Description()
-   * @model
-   * @generated
-   */
-  String getDescription();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinition#getDescription <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(String value);
-
-  /**
-   * Returns the value of the '<em><b>Required</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Required</em>' attribute.
-   * @see #setRequired(boolean)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinition_Required()
-   * @model
-   * @generated
-   */
-  boolean isRequired();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinition#isRequired <em>Required</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Required</em>' attribute.
-   * @see #isRequired()
-   * @generated
-   */
-  void setRequired(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Default</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Default</em>' containment reference.
-   * @see #setDefault(EValueExpression)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinition_Default()
+   * @return the value of the '<em>Property</em>' containment reference.
+   * @see #setProperty(EPropertyDefinitionBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinition_Property()
    * @model containment="true"
    * @generated
    */
-  EValueExpression getDefault();
+  EPropertyDefinitionBody getProperty();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinition#getDefault <em>Default</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinition#getProperty <em>Property</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Default</em>' containment reference.
-   * @see #getDefault()
+   * @param value the new value of the '<em>Property</em>' containment reference.
+   * @see #getProperty()
    * @generated
    */
-  void setDefault(EValueExpression value);
-
-  /**
-   * Returns the value of the '<em><b>Status</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Status</em>' attribute.
-   * @see #setStatus(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinition_Status()
-   * @model
-   * @generated
-   */
-  String getStatus();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinition#getStatus <em>Status</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Status</em>' attribute.
-   * @see #getStatus()
-   * @generated
-   */
-  void setStatus(String value);
-
-  /**
-   * Returns the value of the '<em><b>Constraints</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Constraints</em>' containment reference.
-   * @see #setConstraints(EConstraints)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinition_Constraints()
-   * @model containment="true"
-   * @generated
-   */
-  EConstraints getConstraints();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinition#getConstraints <em>Constraints</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Constraints</em>' containment reference.
-   * @see #getConstraints()
-   * @generated
-   */
-  void setConstraints(EConstraints value);
-
-  /**
-   * Returns the value of the '<em><b>Entry schema</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Entry schema</em>' reference.
-   * @see #setEntry_schema(EDataType)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinition_Entry_schema()
-   * @model
-   * @generated
-   */
-  EDataType getEntry_schema();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinition#getEntry_schema <em>Entry schema</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entry schema</em>' reference.
-   * @see #getEntry_schema()
-   * @generated
-   */
-  void setEntry_schema(EDataType value);
+  void setProperty(EPropertyDefinitionBody value);
 
 } // EPropertyDefinition

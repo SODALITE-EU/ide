@@ -51,6 +51,15 @@ public interface RMFactory extends EFactory
   EDataType createEDataType();
 
   /**
+   * Returns a new object of class '<em>EData Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EData Type Body</em>'.
+   * @generated
+   */
+  EDataTypeBody createEDataTypeBody();
+
+  /**
    * Returns a new object of class '<em>EArtifact Types</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,6 +76,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   EArtifactType createEArtifactType();
+
+  /**
+   * Returns a new object of class '<em>EArtifact Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EArtifact Type Body</em>'.
+   * @generated
+   */
+  EArtifactTypeBody createEArtifactTypeBody();
 
   /**
    * Returns a new object of class '<em>ECapability Types</em>'.
@@ -87,6 +105,15 @@ public interface RMFactory extends EFactory
   ECapabilityType createECapabilityType();
 
   /**
+   * Returns a new object of class '<em>ECapability Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECapability Type Body</em>'.
+   * @generated
+   */
+  ECapabilityTypeBody createECapabilityTypeBody();
+
+  /**
    * Returns a new object of class '<em>EInterface Types</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -103,6 +130,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   EInterfaceType createEInterfaceType();
+
+  /**
+   * Returns a new object of class '<em>EInterface Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EInterface Type Body</em>'.
+   * @generated
+   */
+  EInterfaceTypeBody createEInterfaceTypeBody();
 
   /**
    * Returns a new object of class '<em>EPolicy Types</em>'.
@@ -123,6 +159,15 @@ public interface RMFactory extends EFactory
   EPolicyType createEPolicyType();
 
   /**
+   * Returns a new object of class '<em>EPolicy Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EPolicy Type Body</em>'.
+   * @generated
+   */
+  EPolicyTypeBody createEPolicyTypeBody();
+
+  /**
    * Returns a new object of class '<em>ENode Types</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -139,6 +184,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   ENodeType createENodeType();
+
+  /**
+   * Returns a new object of class '<em>ENode Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ENode Type Body</em>'.
+   * @generated
+   */
+  ENodeTypeBody createENodeTypeBody();
 
   /**
    * Returns a new object of class '<em>ERelationship Types</em>'.
@@ -159,6 +213,15 @@ public interface RMFactory extends EFactory
   ERelationshipType createERelationshipType();
 
   /**
+   * Returns a new object of class '<em>ERelationship Type Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ERelationship Type Body</em>'.
+   * @generated
+   */
+  ERelationshipTypeBody createERelationshipTypeBody();
+
+  /**
    * Returns a new object of class '<em>EProperties</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -175,6 +238,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   EPropertyDefinition createEPropertyDefinition();
+
+  /**
+   * Returns a new object of class '<em>EProperty Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EProperty Definition Body</em>'.
+   * @generated
+   */
+  EPropertyDefinitionBody createEPropertyDefinitionBody();
 
   /**
    * Returns a new object of class '<em>EAttributes</em>'.
@@ -195,6 +267,15 @@ public interface RMFactory extends EFactory
   EAttributeDefinition createEAttributeDefinition();
 
   /**
+   * Returns a new object of class '<em>EAttribute Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EAttribute Definition Body</em>'.
+   * @generated
+   */
+  EAttributeDefinitionBody createEAttributeDefinitionBody();
+
+  /**
    * Returns a new object of class '<em>EInterfaces</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -211,6 +292,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   EInterfaceDefinition createEInterfaceDefinition();
+
+  /**
+   * Returns a new object of class '<em>EInterface Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EInterface Definition Body</em>'.
+   * @generated
+   */
+  EInterfaceDefinitionBody createEInterfaceDefinitionBody();
 
   /**
    * Returns a new object of class '<em>EOperations</em>'.
@@ -231,6 +321,15 @@ public interface RMFactory extends EFactory
   EOperationDefinition createEOperationDefinition();
 
   /**
+   * Returns a new object of class '<em>EOperation Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EOperation Definition Body</em>'.
+   * @generated
+   */
+  EOperationDefinitionBody createEOperationDefinitionBody();
+
+  /**
    * Returns a new object of class '<em>EInputs</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -247,6 +346,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   EParameterDefinition createEParameterDefinition();
+
+  /**
+   * Returns a new object of class '<em>EParameter Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EParameter Definition Body</em>'.
+   * @generated
+   */
+  EParameterDefinitionBody createEParameterDefinitionBody();
 
   /**
    * Returns a new object of class '<em>EValue Expression</em>'.
@@ -276,6 +384,15 @@ public interface RMFactory extends EFactory
   GetAttribute createGetAttribute();
 
   /**
+   * Returns a new object of class '<em>Get Attribute Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Get Attribute Body</em>'.
+   * @generated
+   */
+  GetAttributeBody createGetAttributeBody();
+
+  /**
    * Returns a new object of class '<em>Get Property</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -283,6 +400,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   GetProperty createGetProperty();
+
+  /**
+   * Returns a new object of class '<em>Get Property Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Get Property Body</em>'.
+   * @generated
+   */
+  GetPropertyBody createGetPropertyBody();
 
   /**
    * Returns a new object of class '<em>ECapabilities</em>'.
@@ -301,6 +427,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   ECapabilityDefinition createECapabilityDefinition();
+
+  /**
+   * Returns a new object of class '<em>ECapability Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECapability Definition Body</em>'.
+   * @generated
+   */
+  ECapabilityDefinitionBody createECapabilityDefinitionBody();
 
   /**
    * Returns a new object of class '<em>EValid Source Type</em>'.
@@ -337,6 +472,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   ERequirementDefinition createERequirementDefinition();
+
+  /**
+   * Returns a new object of class '<em>ERequirement Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ERequirement Definition Body</em>'.
+   * @generated
+   */
+  ERequirementDefinitionBody createERequirementDefinitionBody();
 
   /**
    * Returns a new object of class '<em>EReq Or Cap</em>'.

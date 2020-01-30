@@ -20,140 +20,188 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EDataType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EDataType/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EDataType/superType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EDataType/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataType/constraints"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataType/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataType/data"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EDataTypeBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypeBody/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EDataTypeBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypeBody/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypeBody/properties"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EArtifactTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactTypes/artifactTypes"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EArtifactType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactType/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactType/superType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactType/description"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactType/mime_type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactType/file_ext"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactType/artifact"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EArtifactTypeBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactTypeBody/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactTypeBody/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactTypeBody/mime_type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactTypeBody/file_ext"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilityTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypes/capabilityTypes"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilityType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityType/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityType/superType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityType/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityType/properties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityType/atributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityType/capability"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ECapabilityTypeBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeBody/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityTypeBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeBody/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeBody/atributes"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInterfaceTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceTypes/interfaceTypes"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInterfaceType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInterfaceType/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceType/superType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInterfaceType/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceType/inputs"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceType/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceType/interface"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EInterfaceTypeBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceTypeBody/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInterfaceTypeBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceTypeBody/inputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceTypeBody/operations"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EPolicyTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypes/policyTypes"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EPolicyType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPolicyType/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyType/superType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPolicyType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyType/policy"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EPolicyTypeBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPolicyTypeBody/description"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ENodeTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypes/nodeTypes"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ENodeType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ENodeType/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeType/superType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ENodeType/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeType/properties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeType/atributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeType/interfaces"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeType/capabilities"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeType/requirements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeType/node"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ENodeTypeBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ENodeTypeBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/interfaces"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/capabilities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/requirements"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERelationshipTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypes/relationshipTypes"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERelationshipType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERelationshipType/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipType/superType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERelationshipType/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipType/properties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipType/atributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipType/interfaces"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERelationshipType/valid_target_types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipType/relationship"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ERelationshipTypeBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypeBody/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERelationshipTypeBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypeBody/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypeBody/atributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypeBody/interfaces"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERelationshipTypeBody/valid_target_types"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EProperties">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EProperties/properties"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EPropertyDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinition/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinition/description"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinition/required"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/default"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinition/status"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/constraints"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/entry_schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/property"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EPropertyDefinitionBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinitionBody/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinitionBody/required"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/default"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinitionBody/status"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/constraints"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/entry_schema"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EAttributes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributes/attributes"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EAttributeDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EAttributeDefinition/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinition/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EAttributeDefinition/description"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinition/entry_schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinition/attribute"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EAttributeDefinitionBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinitionBody/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EAttributeDefinitionBody/description"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinitionBody/entry_schema"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInterfaces">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaces/interfaces"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInterfaceDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInterfaceDefinition/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinition/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinition/inputs"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinition/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinition/interface"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EInterfaceDefinitionBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinitionBody/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinitionBody/inputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinitionBody/operations"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EOperations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EOperations/operations"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EOperationDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EOperationDefinition/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EOperationDefinition/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EOperationDefinition/inputs"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EOperationDefinition/implementation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EOperationDefinition/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EOperationDefinitionBody">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EOperationDefinitionBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EOperationDefinitionBody/inputs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EOperationDefinitionBody/implementation"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInputs">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInputs/inputs"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EParameterDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EParameterDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinition/value"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinition/default"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinition/parameter"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EParameterDefinitionBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/default"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EValueExpression"/>
-    <genClasses ecoreClass="RM.ecore#//EFunction">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EFunction/entity"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EFunction/req_cap"/>
-    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EFunction"/>
     <genClasses ecoreClass="RM.ecore#//GetAttribute">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttribute/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttribute/attribute"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//GetAttributeBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/attribute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//GetAttributeBody/entity"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/req_cap"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//GetProperty">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetProperty/property"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetProperty/property"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//GetPropertyBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//GetPropertyBody/entity"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/req_cap"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilities">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilities/capabilities"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilityDefinition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinition/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinition/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinition/valid_source_types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinition/capability"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ECapabilityDefinitionBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/valid_source_types"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EValidSourceType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidSourceType/sourceTypes"/>
@@ -166,14 +214,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirements/requirements"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERequirementDefinition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinition/capability"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinition/node"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinition/relationship"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinition/requirement"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ERequirementDefinitionBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/capability"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/node"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/relationship"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERequirementDefinitionBody/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERequirementDefinitionBody/end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EReqOrCap">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EReqOrCap/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EReqOrCap/start"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EReqOrCap/end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EConstraints">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EConstraints/constraints"/>

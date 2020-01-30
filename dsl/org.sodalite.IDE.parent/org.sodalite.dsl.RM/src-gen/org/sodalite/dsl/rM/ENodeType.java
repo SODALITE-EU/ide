@@ -15,13 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.ENodeType#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ENodeType#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ENodeType#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ENodeType#getProperties <em>Properties</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ENodeType#getAtributes <em>Atributes</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ENodeType#getInterfaces <em>Interfaces</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ENodeType#getCapabilities <em>Capabilities</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ENodeType#getRequirements <em>Requirements</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.ENodeType#getNode <em>Node</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getENodeType()
@@ -53,157 +47,25 @@ public interface ENodeType extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Super Type</b></em>' reference.
+   * Returns the value of the '<em><b>Node</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Type</em>' reference.
-   * @see #setSuperType(ENodeType)
-   * @see org.sodalite.dsl.rM.RMPackage#getENodeType_SuperType()
-   * @model
-   * @generated
-   */
-  ENodeType getSuperType();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeType#getSuperType <em>Super Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Type</em>' reference.
-   * @see #getSuperType()
-   * @generated
-   */
-  void setSuperType(ENodeType value);
-
-  /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getENodeType_Description()
-   * @model
-   * @generated
-   */
-  String getDescription();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeType#getDescription <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(String value);
-
-  /**
-   * Returns the value of the '<em><b>Properties</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Properties</em>' containment reference.
-   * @see #setProperties(EProperties)
-   * @see org.sodalite.dsl.rM.RMPackage#getENodeType_Properties()
+   * @return the value of the '<em>Node</em>' containment reference.
+   * @see #setNode(ENodeTypeBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getENodeType_Node()
    * @model containment="true"
    * @generated
    */
-  EProperties getProperties();
+  ENodeTypeBody getNode();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeType#getProperties <em>Properties</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeType#getNode <em>Node</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Properties</em>' containment reference.
-   * @see #getProperties()
+   * @param value the new value of the '<em>Node</em>' containment reference.
+   * @see #getNode()
    * @generated
    */
-  void setProperties(EProperties value);
-
-  /**
-   * Returns the value of the '<em><b>Atributes</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Atributes</em>' containment reference.
-   * @see #setAtributes(EAttributes)
-   * @see org.sodalite.dsl.rM.RMPackage#getENodeType_Atributes()
-   * @model containment="true"
-   * @generated
-   */
-  EAttributes getAtributes();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeType#getAtributes <em>Atributes</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Atributes</em>' containment reference.
-   * @see #getAtributes()
-   * @generated
-   */
-  void setAtributes(EAttributes value);
-
-  /**
-   * Returns the value of the '<em><b>Interfaces</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Interfaces</em>' containment reference.
-   * @see #setInterfaces(EInterfaces)
-   * @see org.sodalite.dsl.rM.RMPackage#getENodeType_Interfaces()
-   * @model containment="true"
-   * @generated
-   */
-  EInterfaces getInterfaces();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeType#getInterfaces <em>Interfaces</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Interfaces</em>' containment reference.
-   * @see #getInterfaces()
-   * @generated
-   */
-  void setInterfaces(EInterfaces value);
-
-  /**
-   * Returns the value of the '<em><b>Capabilities</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Capabilities</em>' containment reference.
-   * @see #setCapabilities(ECapabilities)
-   * @see org.sodalite.dsl.rM.RMPackage#getENodeType_Capabilities()
-   * @model containment="true"
-   * @generated
-   */
-  ECapabilities getCapabilities();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeType#getCapabilities <em>Capabilities</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Capabilities</em>' containment reference.
-   * @see #getCapabilities()
-   * @generated
-   */
-  void setCapabilities(ECapabilities value);
-
-  /**
-   * Returns the value of the '<em><b>Requirements</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Requirements</em>' containment reference.
-   * @see #setRequirements(ERequirements)
-   * @see org.sodalite.dsl.rM.RMPackage#getENodeType_Requirements()
-   * @model containment="true"
-   * @generated
-   */
-  ERequirements getRequirements();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeType#getRequirements <em>Requirements</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Requirements</em>' containment reference.
-   * @see #getRequirements()
-   * @generated
-   */
-  void setRequirements(ERequirements value);
+  void setNode(ENodeTypeBody value);
 
 } // ENodeType

@@ -4,14 +4,15 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.GetProperty;
+import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -30,14 +31,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class GetPropertyImpl extends EFunctionImpl implements GetProperty
 {
   /**
-   * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
+   * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getProperty()
    * @generated
    * @ordered
    */
-  protected EPropertyDefinition property;
+  protected GetPropertyBody property;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,18 +67,8 @@ public class GetPropertyImpl extends EFunctionImpl implements GetProperty
    * @generated
    */
   @Override
-  public EPropertyDefinition getProperty()
+  public GetPropertyBody getProperty()
   {
-    if (property != null && property.eIsProxy())
-    {
-      InternalEObject oldProperty = (InternalEObject)property;
-      property = (EPropertyDefinition)eResolveProxy(oldProperty);
-      if (property != oldProperty)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.GET_PROPERTY__PROPERTY, oldProperty, property));
-      }
-    }
     return property;
   }
 
@@ -86,9 +77,16 @@ public class GetPropertyImpl extends EFunctionImpl implements GetProperty
    * <!-- end-user-doc -->
    * @generated
    */
-  public EPropertyDefinition basicGetProperty()
+  public NotificationChain basicSetProperty(GetPropertyBody newProperty, NotificationChain msgs)
   {
-    return property;
+    GetPropertyBody oldProperty = property;
+    property = newProperty;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY__PROPERTY, oldProperty, newProperty);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -97,12 +95,36 @@ public class GetPropertyImpl extends EFunctionImpl implements GetProperty
    * @generated
    */
   @Override
-  public void setProperty(EPropertyDefinition newProperty)
+  public void setProperty(GetPropertyBody newProperty)
   {
-    EPropertyDefinition oldProperty = property;
-    property = newProperty;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY__PROPERTY, oldProperty, property));
+    if (newProperty != property)
+    {
+      NotificationChain msgs = null;
+      if (property != null)
+        msgs = ((InternalEObject)property).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY__PROPERTY, null, msgs);
+      if (newProperty != null)
+        msgs = ((InternalEObject)newProperty).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY__PROPERTY, null, msgs);
+      msgs = basicSetProperty(newProperty, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY__PROPERTY, newProperty, newProperty));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.GET_PROPERTY__PROPERTY:
+        return basicSetProperty(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -116,8 +138,7 @@ public class GetPropertyImpl extends EFunctionImpl implements GetProperty
     switch (featureID)
     {
       case RMPackage.GET_PROPERTY__PROPERTY:
-        if (resolve) return getProperty();
-        return basicGetProperty();
+        return getProperty();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -133,7 +154,7 @@ public class GetPropertyImpl extends EFunctionImpl implements GetProperty
     switch (featureID)
     {
       case RMPackage.GET_PROPERTY__PROPERTY:
-        setProperty((EPropertyDefinition)newValue);
+        setProperty((GetPropertyBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -150,7 +171,7 @@ public class GetPropertyImpl extends EFunctionImpl implements GetProperty
     switch (featureID)
     {
       case RMPackage.GET_PROPERTY__PROPERTY:
-        setProperty((EPropertyDefinition)null);
+        setProperty((GetPropertyBody)null);
         return;
     }
     super.eUnset(featureID);

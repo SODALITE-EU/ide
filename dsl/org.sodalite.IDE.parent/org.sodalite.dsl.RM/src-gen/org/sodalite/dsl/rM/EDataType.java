@@ -15,10 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EDataType#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EDataType#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EDataType#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EDataType#getConstraints <em>Constraints</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EDataType#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EDataType#getData <em>Data</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEDataType()
@@ -50,91 +47,25 @@ public interface EDataType extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Super Type</b></em>' reference.
+   * Returns the value of the '<em><b>Data</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Type</em>' reference.
-   * @see #setSuperType(EDataType)
-   * @see org.sodalite.dsl.rM.RMPackage#getEDataType_SuperType()
-   * @model
-   * @generated
-   */
-  EDataType getSuperType();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EDataType#getSuperType <em>Super Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Type</em>' reference.
-   * @see #getSuperType()
-   * @generated
-   */
-  void setSuperType(EDataType value);
-
-  /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEDataType_Description()
-   * @model
-   * @generated
-   */
-  String getDescription();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EDataType#getDescription <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(String value);
-
-  /**
-   * Returns the value of the '<em><b>Constraints</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Constraints</em>' containment reference.
-   * @see #setConstraints(EConstraints)
-   * @see org.sodalite.dsl.rM.RMPackage#getEDataType_Constraints()
+   * @return the value of the '<em>Data</em>' containment reference.
+   * @see #setData(EDataTypeBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getEDataType_Data()
    * @model containment="true"
    * @generated
    */
-  EConstraints getConstraints();
+  EDataTypeBody getData();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EDataType#getConstraints <em>Constraints</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EDataType#getData <em>Data</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Constraints</em>' containment reference.
-   * @see #getConstraints()
+   * @param value the new value of the '<em>Data</em>' containment reference.
+   * @see #getData()
    * @generated
    */
-  void setConstraints(EConstraints value);
-
-  /**
-   * Returns the value of the '<em><b>Properties</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Properties</em>' containment reference.
-   * @see #setProperties(EProperties)
-   * @see org.sodalite.dsl.rM.RMPackage#getEDataType_Properties()
-   * @model containment="true"
-   * @generated
-   */
-  EProperties getProperties();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EDataType#getProperties <em>Properties</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Properties</em>' containment reference.
-   * @see #getProperties()
-   * @generated
-   */
-  void setProperties(EProperties value);
+  void setData(EDataTypeBody value);
 
 } // EDataType

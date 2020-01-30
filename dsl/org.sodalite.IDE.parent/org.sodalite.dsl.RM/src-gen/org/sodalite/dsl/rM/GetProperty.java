@@ -23,25 +23,25 @@ package org.sodalite.dsl.rM;
 public interface GetProperty extends EFunction
 {
   /**
-   * Returns the value of the '<em><b>Property</b></em>' reference.
+   * Returns the value of the '<em><b>Property</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Property</em>' reference.
-   * @see #setProperty(EPropertyDefinition)
+   * @return the value of the '<em>Property</em>' containment reference.
+   * @see #setProperty(GetPropertyBody)
    * @see org.sodalite.dsl.rM.RMPackage#getGetProperty_Property()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EPropertyDefinition getProperty();
+  GetPropertyBody getProperty();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.GetProperty#getProperty <em>Property</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.GetProperty#getProperty <em>Property</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Property</em>' reference.
+   * @param value the new value of the '<em>Property</em>' containment reference.
    * @see #getProperty()
    * @generated
    */
-  void setProperty(EPropertyDefinition value);
+  void setProperty(GetPropertyBody value);
 
 } // GetProperty

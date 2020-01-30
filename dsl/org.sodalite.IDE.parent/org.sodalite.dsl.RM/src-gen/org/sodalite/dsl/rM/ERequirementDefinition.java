@@ -13,9 +13,7 @@ package org.sodalite.dsl.rM;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.ERequirementDefinition#getCapability <em>Capability</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ERequirementDefinition#getNode <em>Node</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ERequirementDefinition#getRelationship <em>Relationship</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.ERequirementDefinition#getRequirement <em>Requirement</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getERequirementDefinition()
@@ -25,69 +23,25 @@ package org.sodalite.dsl.rM;
 public interface ERequirementDefinition extends EReqOrCap
 {
   /**
-   * Returns the value of the '<em><b>Capability</b></em>' reference.
+   * Returns the value of the '<em><b>Requirement</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Capability</em>' reference.
-   * @see #setCapability(ECapabilityType)
-   * @see org.sodalite.dsl.rM.RMPackage#getERequirementDefinition_Capability()
-   * @model
+   * @return the value of the '<em>Requirement</em>' containment reference.
+   * @see #setRequirement(ERequirementDefinitionBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getERequirementDefinition_Requirement()
+   * @model containment="true"
    * @generated
    */
-  ECapabilityType getCapability();
+  ERequirementDefinitionBody getRequirement();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinition#getCapability <em>Capability</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinition#getRequirement <em>Requirement</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Capability</em>' reference.
-   * @see #getCapability()
+   * @param value the new value of the '<em>Requirement</em>' containment reference.
+   * @see #getRequirement()
    * @generated
    */
-  void setCapability(ECapabilityType value);
-
-  /**
-   * Returns the value of the '<em><b>Node</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Node</em>' reference.
-   * @see #setNode(ENodeType)
-   * @see org.sodalite.dsl.rM.RMPackage#getERequirementDefinition_Node()
-   * @model
-   * @generated
-   */
-  ENodeType getNode();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinition#getNode <em>Node</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Node</em>' reference.
-   * @see #getNode()
-   * @generated
-   */
-  void setNode(ENodeType value);
-
-  /**
-   * Returns the value of the '<em><b>Relationship</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Relationship</em>' reference.
-   * @see #setRelationship(ERelationshipType)
-   * @see org.sodalite.dsl.rM.RMPackage#getERequirementDefinition_Relationship()
-   * @model
-   * @generated
-   */
-  ERelationshipType getRelationship();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinition#getRelationship <em>Relationship</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Relationship</em>' reference.
-   * @see #getRelationship()
-   * @generated
-   */
-  void setRelationship(ERelationshipType value);
+  void setRequirement(ERequirementDefinitionBody value);
 
 } // ERequirementDefinition

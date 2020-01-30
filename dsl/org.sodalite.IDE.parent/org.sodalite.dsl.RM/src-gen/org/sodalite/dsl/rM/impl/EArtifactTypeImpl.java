@@ -4,6 +4,7 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EArtifactType;
+import org.sodalite.dsl.rM.EArtifactTypeBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -23,10 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeImpl#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeImpl#getMime_type <em>Mime type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeImpl#getFile_ext <em>File ext</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeImpl#getArtifact <em>Artifact</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,74 +53,14 @@ public class EArtifactTypeImpl extends MinimalEObjectImpl.Container implements E
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The cached value of the '{@link #getArtifact() <em>Artifact</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSuperType()
+   * @see #getArtifact()
    * @generated
    * @ordered
    */
-  protected EArtifactType superType;
-
-  /**
-   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected static final String DESCRIPTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected String description = DESCRIPTION_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getMime_type() <em>Mime type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getMime_type()
-   * @generated
-   * @ordered
-   */
-  protected static final String MIME_TYPE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getMime_type() <em>Mime type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getMime_type()
-   * @generated
-   * @ordered
-   */
-  protected String mime_type = MIME_TYPE_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getFile_ext() <em>File ext</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFile_ext()
-   * @generated
-   * @ordered
-   */
-  protected static final String FILE_EXT_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getFile_ext() <em>File ext</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFile_ext()
-   * @generated
-   * @ordered
-   */
-  protected String file_ext = FILE_EXT_EDEFAULT;
+  protected EArtifactTypeBody artifact;
 
   /**
    * <!-- begin-user-doc -->
@@ -175,29 +114,26 @@ public class EArtifactTypeImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
-  public EArtifactType getSuperType()
+  public EArtifactTypeBody getArtifact()
   {
-    if (superType != null && superType.eIsProxy())
+    return artifact;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetArtifact(EArtifactTypeBody newArtifact, NotificationChain msgs)
+  {
+    EArtifactTypeBody oldArtifact = artifact;
+    artifact = newArtifact;
+    if (eNotificationRequired())
     {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (EArtifactType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EARTIFACT_TYPE__SUPER_TYPE, oldSuperType, superType));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE__ARTIFACT, oldArtifact, newArtifact);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return superType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EArtifactType basicGetSuperType()
-  {
-    return superType;
+    return msgs;
   }
 
   /**
@@ -206,12 +142,20 @@ public class EArtifactTypeImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
-  public void setSuperType(EArtifactType newSuperType)
+  public void setArtifact(EArtifactTypeBody newArtifact)
   {
-    EArtifactType oldSuperType = superType;
-    superType = newSuperType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE__SUPER_TYPE, oldSuperType, superType));
+    if (newArtifact != artifact)
+    {
+      NotificationChain msgs = null;
+      if (artifact != null)
+        msgs = ((InternalEObject)artifact).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EARTIFACT_TYPE__ARTIFACT, null, msgs);
+      if (newArtifact != null)
+        msgs = ((InternalEObject)newArtifact).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EARTIFACT_TYPE__ARTIFACT, null, msgs);
+      msgs = basicSetArtifact(newArtifact, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE__ARTIFACT, newArtifact, newArtifact));
   }
 
   /**
@@ -220,73 +164,14 @@ public class EArtifactTypeImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
-  public String getDescription()
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(String newDescription)
-  {
-    String oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE__DESCRIPTION, oldDescription, description));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getMime_type()
-  {
-    return mime_type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setMime_type(String newMime_type)
-  {
-    String oldMime_type = mime_type;
-    mime_type = newMime_type;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE__MIME_TYPE, oldMime_type, mime_type));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getFile_ext()
-  {
-    return file_ext;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setFile_ext(String newFile_ext)
-  {
-    String oldFile_ext = file_ext;
-    file_ext = newFile_ext;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE__FILE_EXT, oldFile_ext, file_ext));
+    switch (featureID)
+    {
+      case RMPackage.EARTIFACT_TYPE__ARTIFACT:
+        return basicSetArtifact(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -301,15 +186,8 @@ public class EArtifactTypeImpl extends MinimalEObjectImpl.Container implements E
     {
       case RMPackage.EARTIFACT_TYPE__NAME:
         return getName();
-      case RMPackage.EARTIFACT_TYPE__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
-      case RMPackage.EARTIFACT_TYPE__DESCRIPTION:
-        return getDescription();
-      case RMPackage.EARTIFACT_TYPE__MIME_TYPE:
-        return getMime_type();
-      case RMPackage.EARTIFACT_TYPE__FILE_EXT:
-        return getFile_ext();
+      case RMPackage.EARTIFACT_TYPE__ARTIFACT:
+        return getArtifact();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -327,17 +205,8 @@ public class EArtifactTypeImpl extends MinimalEObjectImpl.Container implements E
       case RMPackage.EARTIFACT_TYPE__NAME:
         setName((String)newValue);
         return;
-      case RMPackage.EARTIFACT_TYPE__SUPER_TYPE:
-        setSuperType((EArtifactType)newValue);
-        return;
-      case RMPackage.EARTIFACT_TYPE__DESCRIPTION:
-        setDescription((String)newValue);
-        return;
-      case RMPackage.EARTIFACT_TYPE__MIME_TYPE:
-        setMime_type((String)newValue);
-        return;
-      case RMPackage.EARTIFACT_TYPE__FILE_EXT:
-        setFile_ext((String)newValue);
+      case RMPackage.EARTIFACT_TYPE__ARTIFACT:
+        setArtifact((EArtifactTypeBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -356,17 +225,8 @@ public class EArtifactTypeImpl extends MinimalEObjectImpl.Container implements E
       case RMPackage.EARTIFACT_TYPE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.EARTIFACT_TYPE__SUPER_TYPE:
-        setSuperType((EArtifactType)null);
-        return;
-      case RMPackage.EARTIFACT_TYPE__DESCRIPTION:
-        setDescription(DESCRIPTION_EDEFAULT);
-        return;
-      case RMPackage.EARTIFACT_TYPE__MIME_TYPE:
-        setMime_type(MIME_TYPE_EDEFAULT);
-        return;
-      case RMPackage.EARTIFACT_TYPE__FILE_EXT:
-        setFile_ext(FILE_EXT_EDEFAULT);
+      case RMPackage.EARTIFACT_TYPE__ARTIFACT:
+        setArtifact((EArtifactTypeBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -384,14 +244,8 @@ public class EArtifactTypeImpl extends MinimalEObjectImpl.Container implements E
     {
       case RMPackage.EARTIFACT_TYPE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.EARTIFACT_TYPE__SUPER_TYPE:
-        return superType != null;
-      case RMPackage.EARTIFACT_TYPE__DESCRIPTION:
-        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-      case RMPackage.EARTIFACT_TYPE__MIME_TYPE:
-        return MIME_TYPE_EDEFAULT == null ? mime_type != null : !MIME_TYPE_EDEFAULT.equals(mime_type);
-      case RMPackage.EARTIFACT_TYPE__FILE_EXT:
-        return FILE_EXT_EDEFAULT == null ? file_ext != null : !FILE_EXT_EDEFAULT.equals(file_ext);
+      case RMPackage.EARTIFACT_TYPE__ARTIFACT:
+        return artifact != null;
     }
     return super.eIsSet(featureID);
   }
@@ -409,12 +263,6 @@ public class EArtifactTypeImpl extends MinimalEObjectImpl.Container implements E
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", description: ");
-    result.append(description);
-    result.append(", mime_type: ");
-    result.append(mime_type);
-    result.append(", file_ext: ");
-    result.append(file_ext);
     result.append(')');
     return result.toString();
   }

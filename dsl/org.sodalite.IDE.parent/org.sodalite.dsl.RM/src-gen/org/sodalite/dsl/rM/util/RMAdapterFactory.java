@@ -91,6 +91,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEDataTypeAdapter();
       }
       @Override
+      public Adapter caseEDataTypeBody(EDataTypeBody object)
+      {
+        return createEDataTypeBodyAdapter();
+      }
+      @Override
       public Adapter caseEArtifactTypes(EArtifactTypes object)
       {
         return createEArtifactTypesAdapter();
@@ -99,6 +104,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEArtifactType(EArtifactType object)
       {
         return createEArtifactTypeAdapter();
+      }
+      @Override
+      public Adapter caseEArtifactTypeBody(EArtifactTypeBody object)
+      {
+        return createEArtifactTypeBodyAdapter();
       }
       @Override
       public Adapter caseECapabilityTypes(ECapabilityTypes object)
@@ -111,6 +121,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createECapabilityTypeAdapter();
       }
       @Override
+      public Adapter caseECapabilityTypeBody(ECapabilityTypeBody object)
+      {
+        return createECapabilityTypeBodyAdapter();
+      }
+      @Override
       public Adapter caseEInterfaceTypes(EInterfaceTypes object)
       {
         return createEInterfaceTypesAdapter();
@@ -119,6 +134,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEInterfaceType(EInterfaceType object)
       {
         return createEInterfaceTypeAdapter();
+      }
+      @Override
+      public Adapter caseEInterfaceTypeBody(EInterfaceTypeBody object)
+      {
+        return createEInterfaceTypeBodyAdapter();
       }
       @Override
       public Adapter caseEPolicyTypes(EPolicyTypes object)
@@ -131,6 +151,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEPolicyTypeAdapter();
       }
       @Override
+      public Adapter caseEPolicyTypeBody(EPolicyTypeBody object)
+      {
+        return createEPolicyTypeBodyAdapter();
+      }
+      @Override
       public Adapter caseENodeTypes(ENodeTypes object)
       {
         return createENodeTypesAdapter();
@@ -139,6 +164,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseENodeType(ENodeType object)
       {
         return createENodeTypeAdapter();
+      }
+      @Override
+      public Adapter caseENodeTypeBody(ENodeTypeBody object)
+      {
+        return createENodeTypeBodyAdapter();
       }
       @Override
       public Adapter caseERelationshipTypes(ERelationshipTypes object)
@@ -151,6 +181,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createERelationshipTypeAdapter();
       }
       @Override
+      public Adapter caseERelationshipTypeBody(ERelationshipTypeBody object)
+      {
+        return createERelationshipTypeBodyAdapter();
+      }
+      @Override
       public Adapter caseEProperties(EProperties object)
       {
         return createEPropertiesAdapter();
@@ -159,6 +194,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEPropertyDefinition(EPropertyDefinition object)
       {
         return createEPropertyDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseEPropertyDefinitionBody(EPropertyDefinitionBody object)
+      {
+        return createEPropertyDefinitionBodyAdapter();
       }
       @Override
       public Adapter caseEAttributes(EAttributes object)
@@ -171,6 +211,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEAttributeDefinitionAdapter();
       }
       @Override
+      public Adapter caseEAttributeDefinitionBody(EAttributeDefinitionBody object)
+      {
+        return createEAttributeDefinitionBodyAdapter();
+      }
+      @Override
       public Adapter caseEInterfaces(EInterfaces object)
       {
         return createEInterfacesAdapter();
@@ -179,6 +224,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEInterfaceDefinition(EInterfaceDefinition object)
       {
         return createEInterfaceDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseEInterfaceDefinitionBody(EInterfaceDefinitionBody object)
+      {
+        return createEInterfaceDefinitionBodyAdapter();
       }
       @Override
       public Adapter caseEOperations(EOperations object)
@@ -191,6 +241,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEOperationDefinitionAdapter();
       }
       @Override
+      public Adapter caseEOperationDefinitionBody(EOperationDefinitionBody object)
+      {
+        return createEOperationDefinitionBodyAdapter();
+      }
+      @Override
       public Adapter caseEInputs(EInputs object)
       {
         return createEInputsAdapter();
@@ -199,6 +254,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEParameterDefinition(EParameterDefinition object)
       {
         return createEParameterDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseEParameterDefinitionBody(EParameterDefinitionBody object)
+      {
+        return createEParameterDefinitionBodyAdapter();
       }
       @Override
       public Adapter caseEValueExpression(EValueExpression object)
@@ -216,9 +276,19 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createGetAttributeAdapter();
       }
       @Override
+      public Adapter caseGetAttributeBody(GetAttributeBody object)
+      {
+        return createGetAttributeBodyAdapter();
+      }
+      @Override
       public Adapter caseGetProperty(GetProperty object)
       {
         return createGetPropertyAdapter();
+      }
+      @Override
+      public Adapter caseGetPropertyBody(GetPropertyBody object)
+      {
+        return createGetPropertyBodyAdapter();
       }
       @Override
       public Adapter caseECapabilities(ECapabilities object)
@@ -229,6 +299,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseECapabilityDefinition(ECapabilityDefinition object)
       {
         return createECapabilityDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseECapabilityDefinitionBody(ECapabilityDefinitionBody object)
+      {
+        return createECapabilityDefinitionBodyAdapter();
       }
       @Override
       public Adapter caseEValidSourceType(EValidSourceType object)
@@ -249,6 +324,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseERequirementDefinition(ERequirementDefinition object)
       {
         return createERequirementDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseERequirementDefinitionBody(ERequirementDefinitionBody object)
+      {
+        return createERequirementDefinitionBodyAdapter();
       }
       @Override
       public Adapter caseEReqOrCap(EReqOrCap object)
@@ -383,6 +463,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EDataTypeBody <em>EData Type Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EDataTypeBody
+   * @generated
+   */
+  public Adapter createEDataTypeBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EArtifactTypes <em>EArtifact Types</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -408,6 +503,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEArtifactTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EArtifactTypeBody <em>EArtifact Type Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EArtifactTypeBody
+   * @generated
+   */
+  public Adapter createEArtifactTypeBodyAdapter()
   {
     return null;
   }
@@ -443,6 +553,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ECapabilityTypeBody <em>ECapability Type Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ECapabilityTypeBody
+   * @generated
+   */
+  public Adapter createECapabilityTypeBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EInterfaceTypes <em>EInterface Types</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -468,6 +593,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEInterfaceTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EInterfaceTypeBody <em>EInterface Type Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EInterfaceTypeBody
+   * @generated
+   */
+  public Adapter createEInterfaceTypeBodyAdapter()
   {
     return null;
   }
@@ -503,6 +643,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPolicyTypeBody <em>EPolicy Type Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPolicyTypeBody
+   * @generated
+   */
+  public Adapter createEPolicyTypeBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ENodeTypes <em>ENode Types</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -528,6 +683,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createENodeTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ENodeTypeBody <em>ENode Type Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ENodeTypeBody
+   * @generated
+   */
+  public Adapter createENodeTypeBodyAdapter()
   {
     return null;
   }
@@ -563,6 +733,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ERelationshipTypeBody <em>ERelationship Type Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ERelationshipTypeBody
+   * @generated
+   */
+  public Adapter createERelationshipTypeBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EProperties <em>EProperties</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -588,6 +773,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEPropertyDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPropertyDefinitionBody <em>EProperty Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPropertyDefinitionBody
+   * @generated
+   */
+  public Adapter createEPropertyDefinitionBodyAdapter()
   {
     return null;
   }
@@ -623,6 +823,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody <em>EAttribute Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EAttributeDefinitionBody
+   * @generated
+   */
+  public Adapter createEAttributeDefinitionBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EInterfaces <em>EInterfaces</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -648,6 +863,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEInterfaceDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EInterfaceDefinitionBody <em>EInterface Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EInterfaceDefinitionBody
+   * @generated
+   */
+  public Adapter createEInterfaceDefinitionBodyAdapter()
   {
     return null;
   }
@@ -683,6 +913,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EOperationDefinitionBody <em>EOperation Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EOperationDefinitionBody
+   * @generated
+   */
+  public Adapter createEOperationDefinitionBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EInputs <em>EInputs</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -708,6 +953,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEParameterDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EParameterDefinitionBody <em>EParameter Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EParameterDefinitionBody
+   * @generated
+   */
+  public Adapter createEParameterDefinitionBodyAdapter()
   {
     return null;
   }
@@ -758,6 +1018,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.GetAttributeBody <em>Get Attribute Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.GetAttributeBody
+   * @generated
+   */
+  public Adapter createGetAttributeBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.GetProperty <em>Get Property</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -768,6 +1043,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createGetPropertyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.GetPropertyBody <em>Get Property Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.GetPropertyBody
+   * @generated
+   */
+  public Adapter createGetPropertyBodyAdapter()
   {
     return null;
   }
@@ -798,6 +1088,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createECapabilityDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody <em>ECapability Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ECapabilityDefinitionBody
+   * @generated
+   */
+  public Adapter createECapabilityDefinitionBodyAdapter()
   {
     return null;
   }
@@ -858,6 +1163,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createERequirementDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody <em>ERequirement Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ERequirementDefinitionBody
+   * @generated
+   */
+  public Adapter createERequirementDefinitionBodyAdapter()
   {
     return null;
   }

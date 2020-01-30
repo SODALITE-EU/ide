@@ -3,24 +3,16 @@
  */
 package org.sodalite.dsl.rM.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.sodalite.dsl.rM.ECapabilityDefinition;
-import org.sodalite.dsl.rM.ECapabilityType;
-import org.sodalite.dsl.rM.EValidSourceType;
+import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -31,9 +23,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionImpl#getValid_source_types <em>Valid source types</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionImpl#getCapability <em>Capability</em>}</li>
  * </ul>
  *
  * @generated
@@ -41,44 +31,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabilityDefinition
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getCapability() <em>Capability</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getCapability()
    * @generated
    * @ordered
    */
-  protected ECapabilityType type;
-
-  /**
-   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected static final String DESCRIPTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected String description = DESCRIPTION_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getValid_source_types() <em>Valid source types</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValid_source_types()
-   * @generated
-   * @ordered
-   */
-  protected EList<EValidSourceType> valid_source_types;
+  protected ECapabilityDefinitionBody capability;
 
   /**
    * <!-- begin-user-doc -->
@@ -107,19 +67,9 @@ public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabil
    * @generated
    */
   @Override
-  public ECapabilityType getType()
+  public ECapabilityDefinitionBody getCapability()
   {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (ECapabilityType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.ECAPABILITY_DEFINITION__TYPE, oldType, type));
-      }
-    }
-    return type;
+    return capability;
   }
 
   /**
@@ -127,63 +77,38 @@ public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabil
    * <!-- end-user-doc -->
    * @generated
    */
-  public ECapabilityType basicGetType()
+  public NotificationChain basicSetCapability(ECapabilityDefinitionBody newCapability, NotificationChain msgs)
   {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setType(ECapabilityType newType)
-  {
-    ECapabilityType oldType = type;
-    type = newType;
+    ECapabilityDefinitionBody oldCapability = capability;
+    capability = newCapability;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION__TYPE, oldType, type));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getDescription()
-  {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(String newDescription)
-  {
-    String oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION__DESCRIPTION, oldDescription, description));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<EValidSourceType> getValid_source_types()
-  {
-    if (valid_source_types == null)
     {
-      valid_source_types = new EObjectContainmentEList<EValidSourceType>(EValidSourceType.class, this, RMPackage.ECAPABILITY_DEFINITION__VALID_SOURCE_TYPES);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION__CAPABILITY, oldCapability, newCapability);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return valid_source_types;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setCapability(ECapabilityDefinitionBody newCapability)
+  {
+    if (newCapability != capability)
+    {
+      NotificationChain msgs = null;
+      if (capability != null)
+        msgs = ((InternalEObject)capability).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION__CAPABILITY, null, msgs);
+      if (newCapability != null)
+        msgs = ((InternalEObject)newCapability).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION__CAPABILITY, null, msgs);
+      msgs = basicSetCapability(newCapability, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION__CAPABILITY, newCapability, newCapability));
   }
 
   /**
@@ -196,8 +121,8 @@ public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabil
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_DEFINITION__VALID_SOURCE_TYPES:
-        return ((InternalEList<?>)getValid_source_types()).basicRemove(otherEnd, msgs);
+      case RMPackage.ECAPABILITY_DEFINITION__CAPABILITY:
+        return basicSetCapability(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -212,13 +137,8 @@ public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabil
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_DEFINITION__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
-      case RMPackage.ECAPABILITY_DEFINITION__DESCRIPTION:
-        return getDescription();
-      case RMPackage.ECAPABILITY_DEFINITION__VALID_SOURCE_TYPES:
-        return getValid_source_types();
+      case RMPackage.ECAPABILITY_DEFINITION__CAPABILITY:
+        return getCapability();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -228,21 +148,13 @@ public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabil
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_DEFINITION__TYPE:
-        setType((ECapabilityType)newValue);
-        return;
-      case RMPackage.ECAPABILITY_DEFINITION__DESCRIPTION:
-        setDescription((String)newValue);
-        return;
-      case RMPackage.ECAPABILITY_DEFINITION__VALID_SOURCE_TYPES:
-        getValid_source_types().clear();
-        getValid_source_types().addAll((Collection<? extends EValidSourceType>)newValue);
+      case RMPackage.ECAPABILITY_DEFINITION__CAPABILITY:
+        setCapability((ECapabilityDefinitionBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -258,14 +170,8 @@ public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabil
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_DEFINITION__TYPE:
-        setType((ECapabilityType)null);
-        return;
-      case RMPackage.ECAPABILITY_DEFINITION__DESCRIPTION:
-        setDescription(DESCRIPTION_EDEFAULT);
-        return;
-      case RMPackage.ECAPABILITY_DEFINITION__VALID_SOURCE_TYPES:
-        getValid_source_types().clear();
+      case RMPackage.ECAPABILITY_DEFINITION__CAPABILITY:
+        setCapability((ECapabilityDefinitionBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -281,31 +187,10 @@ public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabil
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_DEFINITION__TYPE:
-        return type != null;
-      case RMPackage.ECAPABILITY_DEFINITION__DESCRIPTION:
-        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-      case RMPackage.ECAPABILITY_DEFINITION__VALID_SOURCE_TYPES:
-        return valid_source_types != null && !valid_source_types.isEmpty();
+      case RMPackage.ECAPABILITY_DEFINITION__CAPABILITY:
+        return capability != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (description: ");
-    result.append(description);
-    result.append(')');
-    return result.toString();
   }
 
 } //ECapabilityDefinitionImpl

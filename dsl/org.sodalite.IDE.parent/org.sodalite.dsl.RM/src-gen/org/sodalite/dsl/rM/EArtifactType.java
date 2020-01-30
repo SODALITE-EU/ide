@@ -15,10 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EArtifactType#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EArtifactType#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EArtifactType#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EArtifactType#getMime_type <em>Mime type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EArtifactType#getFile_ext <em>File ext</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EArtifactType#getArtifact <em>Artifact</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEArtifactType()
@@ -50,91 +47,25 @@ public interface EArtifactType extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Super Type</b></em>' reference.
+   * Returns the value of the '<em><b>Artifact</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Type</em>' reference.
-   * @see #setSuperType(EArtifactType)
-   * @see org.sodalite.dsl.rM.RMPackage#getEArtifactType_SuperType()
-   * @model
+   * @return the value of the '<em>Artifact</em>' containment reference.
+   * @see #setArtifact(EArtifactTypeBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getEArtifactType_Artifact()
+   * @model containment="true"
    * @generated
    */
-  EArtifactType getSuperType();
+  EArtifactTypeBody getArtifact();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EArtifactType#getSuperType <em>Super Type</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EArtifactType#getArtifact <em>Artifact</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Type</em>' reference.
-   * @see #getSuperType()
+   * @param value the new value of the '<em>Artifact</em>' containment reference.
+   * @see #getArtifact()
    * @generated
    */
-  void setSuperType(EArtifactType value);
-
-  /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEArtifactType_Description()
-   * @model
-   * @generated
-   */
-  String getDescription();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EArtifactType#getDescription <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(String value);
-
-  /**
-   * Returns the value of the '<em><b>Mime type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Mime type</em>' attribute.
-   * @see #setMime_type(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEArtifactType_Mime_type()
-   * @model
-   * @generated
-   */
-  String getMime_type();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EArtifactType#getMime_type <em>Mime type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Mime type</em>' attribute.
-   * @see #getMime_type()
-   * @generated
-   */
-  void setMime_type(String value);
-
-  /**
-   * Returns the value of the '<em><b>File ext</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>File ext</em>' attribute.
-   * @see #setFile_ext(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEArtifactType_File_ext()
-   * @model
-   * @generated
-   */
-  String getFile_ext();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EArtifactType#getFile_ext <em>File ext</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>File ext</em>' attribute.
-   * @see #getFile_ext()
-   * @generated
-   */
-  void setFile_ext(String value);
+  void setArtifact(EArtifactTypeBody value);
 
 } // EArtifactType

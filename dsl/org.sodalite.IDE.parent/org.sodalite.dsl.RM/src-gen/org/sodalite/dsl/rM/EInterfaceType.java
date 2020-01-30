@@ -15,10 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EInterfaceType#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EInterfaceType#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EInterfaceType#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EInterfaceType#getInputs <em>Inputs</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EInterfaceType#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EInterfaceType#getInterface <em>Interface</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEInterfaceType()
@@ -50,91 +47,25 @@ public interface EInterfaceType extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Super Type</b></em>' reference.
+   * Returns the value of the '<em><b>Interface</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Type</em>' reference.
-   * @see #setSuperType(EInterfaceType)
-   * @see org.sodalite.dsl.rM.RMPackage#getEInterfaceType_SuperType()
-   * @model
-   * @generated
-   */
-  EInterfaceType getSuperType();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EInterfaceType#getSuperType <em>Super Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Type</em>' reference.
-   * @see #getSuperType()
-   * @generated
-   */
-  void setSuperType(EInterfaceType value);
-
-  /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEInterfaceType_Description()
-   * @model
-   * @generated
-   */
-  String getDescription();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EInterfaceType#getDescription <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(String value);
-
-  /**
-   * Returns the value of the '<em><b>Inputs</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Inputs</em>' containment reference.
-   * @see #setInputs(EProperties)
-   * @see org.sodalite.dsl.rM.RMPackage#getEInterfaceType_Inputs()
+   * @return the value of the '<em>Interface</em>' containment reference.
+   * @see #setInterface(EInterfaceTypeBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getEInterfaceType_Interface()
    * @model containment="true"
    * @generated
    */
-  EProperties getInputs();
+  EInterfaceTypeBody getInterface();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EInterfaceType#getInputs <em>Inputs</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EInterfaceType#getInterface <em>Interface</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Inputs</em>' containment reference.
-   * @see #getInputs()
+   * @param value the new value of the '<em>Interface</em>' containment reference.
+   * @see #getInterface()
    * @generated
    */
-  void setInputs(EProperties value);
-
-  /**
-   * Returns the value of the '<em><b>Operations</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Operations</em>' containment reference.
-   * @see #setOperations(EOperations)
-   * @see org.sodalite.dsl.rM.RMPackage#getEInterfaceType_Operations()
-   * @model containment="true"
-   * @generated
-   */
-  EOperations getOperations();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EInterfaceType#getOperations <em>Operations</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Operations</em>' containment reference.
-   * @see #getOperations()
-   * @generated
-   */
-  void setOperations(EOperations value);
+  void setInterface(EInterfaceTypeBody value);
 
 } // EInterfaceType

@@ -3,8 +3,6 @@
  */
 package org.sodalite.dsl.ui.contentassist;
 
-import java.util.Arrays;
-import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
@@ -12,8 +10,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
-import org.sodalite.dsl.ui.contentassist.BooleanEnum;
-import org.sodalite.dsl.ui.contentassist.Entity;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -25,24 +21,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     True,
     
     False;
-  }
-  
-  @Override
-  public void completeGetAttribute_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for GetAttribute::entity property");
-    this.createEntityProposals(context, acceptor, model, assignment);
-  }
-  
-  @Override
-  public void completeGetProperty_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for GetProperty::entity property");
-    this.createEntityProposals(context, acceptor, model, assignment);
-  }
-  
-  @Override
-  public void completeEPropertyDefinition_Required(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for EPropertyDefinition::required property");
-    this.createBooleanProposals(context, acceptor, model, assignment);
   }
   
   @Override
@@ -169,34 +147,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String displayText = "requirement_name";
     final String additionalProposalInfo = "The required id of the requirement definition";
     this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
-  }
-  
-  protected void createEntityProposals(final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final EObject model, final Assignment assignment) {
-    List<Entity> _asList = Arrays.<Entity>asList(Entity.values());
-    for (final Entity entity : _asList) {
-      {
-        System.out.println(("\tEntity: " + entity));
-        final String proposalText = entity.toString();
-        final String displayText = entity.toString();
-        final String additionalProposalInfo = entity.getDescription();
-        this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
-      }
-    }
-    super.completeGetAttribute_Entity(model, assignment, context, acceptor);
-  }
-  
-  protected void createBooleanProposals(final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final EObject model, final Assignment assignment) {
-    List<BooleanEnum> _asList = Arrays.<BooleanEnum>asList(BooleanEnum.values());
-    for (final BooleanEnum bool : _asList) {
-      {
-        System.out.println(("\tBoolean: " + bool));
-        final String proposalText = bool.getLabel();
-        final String displayText = bool.getLabel();
-        final Object additionalProposalInfo = null;
-        this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
-      }
-    }
-    super.completeGetAttribute_Entity(model, assignment, context, acceptor);
   }
   
   protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {

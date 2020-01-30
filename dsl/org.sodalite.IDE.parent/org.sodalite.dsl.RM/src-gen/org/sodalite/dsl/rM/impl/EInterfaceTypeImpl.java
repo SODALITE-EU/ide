@@ -13,8 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EInterfaceType;
-import org.sodalite.dsl.rM.EOperations;
-import org.sodalite.dsl.rM.EProperties;
+import org.sodalite.dsl.rM.EInterfaceTypeBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -26,10 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceTypeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceTypeImpl#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceTypeImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceTypeImpl#getInputs <em>Inputs</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceTypeImpl#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceTypeImpl#getInterface <em>Interface</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,54 +53,14 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The cached value of the '{@link #getInterface() <em>Interface</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSuperType()
+   * @see #getInterface()
    * @generated
    * @ordered
    */
-  protected EInterfaceType superType;
-
-  /**
-   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected static final String DESCRIPTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected String description = DESCRIPTION_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInputs()
-   * @generated
-   * @ordered
-   */
-  protected EProperties inputs;
-
-  /**
-   * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOperations()
-   * @generated
-   * @ordered
-   */
-  protected EOperations operations;
+  protected EInterfaceTypeBody interface_;
 
   /**
    * <!-- begin-user-doc -->
@@ -158,19 +114,9 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public EInterfaceType getSuperType()
+  public EInterfaceTypeBody getInterface()
   {
-    if (superType != null && superType.eIsProxy())
-    {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (EInterfaceType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EINTERFACE_TYPE__SUPER_TYPE, oldSuperType, superType));
-      }
-    }
-    return superType;
+    return interface_;
   }
 
   /**
@@ -178,73 +124,13 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public EInterfaceType basicGetSuperType()
+  public NotificationChain basicSetInterface(EInterfaceTypeBody newInterface, NotificationChain msgs)
   {
-    return superType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setSuperType(EInterfaceType newSuperType)
-  {
-    EInterfaceType oldSuperType = superType;
-    superType = newSuperType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE__SUPER_TYPE, oldSuperType, superType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getDescription()
-  {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(String newDescription)
-  {
-    String oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE__DESCRIPTION, oldDescription, description));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EProperties getInputs()
-  {
-    return inputs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetInputs(EProperties newInputs, NotificationChain msgs)
-  {
-    EProperties oldInputs = inputs;
-    inputs = newInputs;
+    EInterfaceTypeBody oldInterface = interface_;
+    interface_ = newInterface;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE__INPUTS, oldInputs, newInputs);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE__INTERFACE, oldInterface, newInterface);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -256,70 +142,20 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public void setInputs(EProperties newInputs)
+  public void setInterface(EInterfaceTypeBody newInterface)
   {
-    if (newInputs != inputs)
+    if (newInterface != interface_)
     {
       NotificationChain msgs = null;
-      if (inputs != null)
-        msgs = ((InternalEObject)inputs).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_TYPE__INPUTS, null, msgs);
-      if (newInputs != null)
-        msgs = ((InternalEObject)newInputs).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_TYPE__INPUTS, null, msgs);
-      msgs = basicSetInputs(newInputs, msgs);
+      if (interface_ != null)
+        msgs = ((InternalEObject)interface_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_TYPE__INTERFACE, null, msgs);
+      if (newInterface != null)
+        msgs = ((InternalEObject)newInterface).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_TYPE__INTERFACE, null, msgs);
+      msgs = basicSetInterface(newInterface, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE__INPUTS, newInputs, newInputs));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EOperations getOperations()
-  {
-    return operations;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetOperations(EOperations newOperations, NotificationChain msgs)
-  {
-    EOperations oldOperations = operations;
-    operations = newOperations;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE__OPERATIONS, oldOperations, newOperations);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setOperations(EOperations newOperations)
-  {
-    if (newOperations != operations)
-    {
-      NotificationChain msgs = null;
-      if (operations != null)
-        msgs = ((InternalEObject)operations).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_TYPE__OPERATIONS, null, msgs);
-      if (newOperations != null)
-        msgs = ((InternalEObject)newOperations).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_TYPE__OPERATIONS, null, msgs);
-      msgs = basicSetOperations(newOperations, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE__OPERATIONS, newOperations, newOperations));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE__INTERFACE, newInterface, newInterface));
   }
 
   /**
@@ -332,10 +168,8 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case RMPackage.EINTERFACE_TYPE__INPUTS:
-        return basicSetInputs(null, msgs);
-      case RMPackage.EINTERFACE_TYPE__OPERATIONS:
-        return basicSetOperations(null, msgs);
+      case RMPackage.EINTERFACE_TYPE__INTERFACE:
+        return basicSetInterface(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -352,15 +186,8 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
     {
       case RMPackage.EINTERFACE_TYPE__NAME:
         return getName();
-      case RMPackage.EINTERFACE_TYPE__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
-      case RMPackage.EINTERFACE_TYPE__DESCRIPTION:
-        return getDescription();
-      case RMPackage.EINTERFACE_TYPE__INPUTS:
-        return getInputs();
-      case RMPackage.EINTERFACE_TYPE__OPERATIONS:
-        return getOperations();
+      case RMPackage.EINTERFACE_TYPE__INTERFACE:
+        return getInterface();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -378,17 +205,8 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
       case RMPackage.EINTERFACE_TYPE__NAME:
         setName((String)newValue);
         return;
-      case RMPackage.EINTERFACE_TYPE__SUPER_TYPE:
-        setSuperType((EInterfaceType)newValue);
-        return;
-      case RMPackage.EINTERFACE_TYPE__DESCRIPTION:
-        setDescription((String)newValue);
-        return;
-      case RMPackage.EINTERFACE_TYPE__INPUTS:
-        setInputs((EProperties)newValue);
-        return;
-      case RMPackage.EINTERFACE_TYPE__OPERATIONS:
-        setOperations((EOperations)newValue);
+      case RMPackage.EINTERFACE_TYPE__INTERFACE:
+        setInterface((EInterfaceTypeBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -407,17 +225,8 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
       case RMPackage.EINTERFACE_TYPE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.EINTERFACE_TYPE__SUPER_TYPE:
-        setSuperType((EInterfaceType)null);
-        return;
-      case RMPackage.EINTERFACE_TYPE__DESCRIPTION:
-        setDescription(DESCRIPTION_EDEFAULT);
-        return;
-      case RMPackage.EINTERFACE_TYPE__INPUTS:
-        setInputs((EProperties)null);
-        return;
-      case RMPackage.EINTERFACE_TYPE__OPERATIONS:
-        setOperations((EOperations)null);
+      case RMPackage.EINTERFACE_TYPE__INTERFACE:
+        setInterface((EInterfaceTypeBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -435,14 +244,8 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
     {
       case RMPackage.EINTERFACE_TYPE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.EINTERFACE_TYPE__SUPER_TYPE:
-        return superType != null;
-      case RMPackage.EINTERFACE_TYPE__DESCRIPTION:
-        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-      case RMPackage.EINTERFACE_TYPE__INPUTS:
-        return inputs != null;
-      case RMPackage.EINTERFACE_TYPE__OPERATIONS:
-        return operations != null;
+      case RMPackage.EINTERFACE_TYPE__INTERFACE:
+        return interface_ != null;
     }
     return super.eIsSet(featureID);
   }
@@ -460,8 +263,6 @@ public class EInterfaceTypeImpl extends MinimalEObjectImpl.Container implements 
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", description: ");
-    result.append(description);
     result.append(')');
     return result.toString();
   }

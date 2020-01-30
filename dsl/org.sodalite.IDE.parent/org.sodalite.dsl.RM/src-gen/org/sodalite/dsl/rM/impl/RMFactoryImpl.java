@@ -68,38 +68,54 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.RM_MODEL: return createRM_Model();
       case RMPackage.EDATA_TYPES: return createEDataTypes();
       case RMPackage.EDATA_TYPE: return createEDataType();
+      case RMPackage.EDATA_TYPE_BODY: return createEDataTypeBody();
       case RMPackage.EARTIFACT_TYPES: return createEArtifactTypes();
       case RMPackage.EARTIFACT_TYPE: return createEArtifactType();
+      case RMPackage.EARTIFACT_TYPE_BODY: return createEArtifactTypeBody();
       case RMPackage.ECAPABILITY_TYPES: return createECapabilityTypes();
       case RMPackage.ECAPABILITY_TYPE: return createECapabilityType();
+      case RMPackage.ECAPABILITY_TYPE_BODY: return createECapabilityTypeBody();
       case RMPackage.EINTERFACE_TYPES: return createEInterfaceTypes();
       case RMPackage.EINTERFACE_TYPE: return createEInterfaceType();
+      case RMPackage.EINTERFACE_TYPE_BODY: return createEInterfaceTypeBody();
       case RMPackage.EPOLICY_TYPES: return createEPolicyTypes();
       case RMPackage.EPOLICY_TYPE: return createEPolicyType();
+      case RMPackage.EPOLICY_TYPE_BODY: return createEPolicyTypeBody();
       case RMPackage.ENODE_TYPES: return createENodeTypes();
       case RMPackage.ENODE_TYPE: return createENodeType();
+      case RMPackage.ENODE_TYPE_BODY: return createENodeTypeBody();
       case RMPackage.ERELATIONSHIP_TYPES: return createERelationshipTypes();
       case RMPackage.ERELATIONSHIP_TYPE: return createERelationshipType();
+      case RMPackage.ERELATIONSHIP_TYPE_BODY: return createERelationshipTypeBody();
       case RMPackage.EPROPERTIES: return createEProperties();
       case RMPackage.EPROPERTY_DEFINITION: return createEPropertyDefinition();
+      case RMPackage.EPROPERTY_DEFINITION_BODY: return createEPropertyDefinitionBody();
       case RMPackage.EATTRIBUTES: return createEAttributes();
       case RMPackage.EATTRIBUTE_DEFINITION: return createEAttributeDefinition();
+      case RMPackage.EATTRIBUTE_DEFINITION_BODY: return createEAttributeDefinitionBody();
       case RMPackage.EINTERFACES: return createEInterfaces();
       case RMPackage.EINTERFACE_DEFINITION: return createEInterfaceDefinition();
+      case RMPackage.EINTERFACE_DEFINITION_BODY: return createEInterfaceDefinitionBody();
       case RMPackage.EOPERATIONS: return createEOperations();
       case RMPackage.EOPERATION_DEFINITION: return createEOperationDefinition();
+      case RMPackage.EOPERATION_DEFINITION_BODY: return createEOperationDefinitionBody();
       case RMPackage.EINPUTS: return createEInputs();
       case RMPackage.EPARAMETER_DEFINITION: return createEParameterDefinition();
+      case RMPackage.EPARAMETER_DEFINITION_BODY: return createEParameterDefinitionBody();
       case RMPackage.EVALUE_EXPRESSION: return createEValueExpression();
       case RMPackage.EFUNCTION: return createEFunction();
       case RMPackage.GET_ATTRIBUTE: return createGetAttribute();
+      case RMPackage.GET_ATTRIBUTE_BODY: return createGetAttributeBody();
       case RMPackage.GET_PROPERTY: return createGetProperty();
+      case RMPackage.GET_PROPERTY_BODY: return createGetPropertyBody();
       case RMPackage.ECAPABILITIES: return createECapabilities();
       case RMPackage.ECAPABILITY_DEFINITION: return createECapabilityDefinition();
+      case RMPackage.ECAPABILITY_DEFINITION_BODY: return createECapabilityDefinitionBody();
       case RMPackage.EVALID_SOURCE_TYPE: return createEValidSourceType();
       case RMPackage.ETYPE_REF: return createETypeRef();
       case RMPackage.EREQUIREMENTS: return createERequirements();
       case RMPackage.EREQUIREMENT_DEFINITION: return createERequirementDefinition();
+      case RMPackage.EREQUIREMENT_DEFINITION_BODY: return createERequirementDefinitionBody();
       case RMPackage.EREQ_OR_CAP: return createEReqOrCap();
       case RMPackage.ECONSTRAINTS: return createEConstraints();
       case RMPackage.ECONSTRAINT: return createEConstraint();
@@ -160,6 +176,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public EDataTypeBody createEDataTypeBody()
+  {
+    EDataTypeBodyImpl eDataTypeBody = new EDataTypeBodyImpl();
+    return eDataTypeBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EArtifactTypes createEArtifactTypes()
   {
     EArtifactTypesImpl eArtifactTypes = new EArtifactTypesImpl();
@@ -176,6 +204,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EArtifactTypeImpl eArtifactType = new EArtifactTypeImpl();
     return eArtifactType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EArtifactTypeBody createEArtifactTypeBody()
+  {
+    EArtifactTypeBodyImpl eArtifactTypeBody = new EArtifactTypeBodyImpl();
+    return eArtifactTypeBody;
   }
 
   /**
@@ -208,6 +248,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public ECapabilityTypeBody createECapabilityTypeBody()
+  {
+    ECapabilityTypeBodyImpl eCapabilityTypeBody = new ECapabilityTypeBodyImpl();
+    return eCapabilityTypeBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EInterfaceTypes createEInterfaceTypes()
   {
     EInterfaceTypesImpl eInterfaceTypes = new EInterfaceTypesImpl();
@@ -224,6 +276,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EInterfaceTypeImpl eInterfaceType = new EInterfaceTypeImpl();
     return eInterfaceType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EInterfaceTypeBody createEInterfaceTypeBody()
+  {
+    EInterfaceTypeBodyImpl eInterfaceTypeBody = new EInterfaceTypeBodyImpl();
+    return eInterfaceTypeBody;
   }
 
   /**
@@ -256,6 +320,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public EPolicyTypeBody createEPolicyTypeBody()
+  {
+    EPolicyTypeBodyImpl ePolicyTypeBody = new EPolicyTypeBodyImpl();
+    return ePolicyTypeBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public ENodeTypes createENodeTypes()
   {
     ENodeTypesImpl eNodeTypes = new ENodeTypesImpl();
@@ -272,6 +348,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     ENodeTypeImpl eNodeType = new ENodeTypeImpl();
     return eNodeType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ENodeTypeBody createENodeTypeBody()
+  {
+    ENodeTypeBodyImpl eNodeTypeBody = new ENodeTypeBodyImpl();
+    return eNodeTypeBody;
   }
 
   /**
@@ -304,6 +392,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public ERelationshipTypeBody createERelationshipTypeBody()
+  {
+    ERelationshipTypeBodyImpl eRelationshipTypeBody = new ERelationshipTypeBodyImpl();
+    return eRelationshipTypeBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EProperties createEProperties()
   {
     EPropertiesImpl eProperties = new EPropertiesImpl();
@@ -320,6 +420,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EPropertyDefinitionImpl ePropertyDefinition = new EPropertyDefinitionImpl();
     return ePropertyDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPropertyDefinitionBody createEPropertyDefinitionBody()
+  {
+    EPropertyDefinitionBodyImpl ePropertyDefinitionBody = new EPropertyDefinitionBodyImpl();
+    return ePropertyDefinitionBody;
   }
 
   /**
@@ -352,6 +464,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public EAttributeDefinitionBody createEAttributeDefinitionBody()
+  {
+    EAttributeDefinitionBodyImpl eAttributeDefinitionBody = new EAttributeDefinitionBodyImpl();
+    return eAttributeDefinitionBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EInterfaces createEInterfaces()
   {
     EInterfacesImpl eInterfaces = new EInterfacesImpl();
@@ -368,6 +492,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EInterfaceDefinitionImpl eInterfaceDefinition = new EInterfaceDefinitionImpl();
     return eInterfaceDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EInterfaceDefinitionBody createEInterfaceDefinitionBody()
+  {
+    EInterfaceDefinitionBodyImpl eInterfaceDefinitionBody = new EInterfaceDefinitionBodyImpl();
+    return eInterfaceDefinitionBody;
   }
 
   /**
@@ -400,6 +536,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public EOperationDefinitionBody createEOperationDefinitionBody()
+  {
+    EOperationDefinitionBodyImpl eOperationDefinitionBody = new EOperationDefinitionBodyImpl();
+    return eOperationDefinitionBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EInputs createEInputs()
   {
     EInputsImpl eInputs = new EInputsImpl();
@@ -416,6 +564,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EParameterDefinitionImpl eParameterDefinition = new EParameterDefinitionImpl();
     return eParameterDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EParameterDefinitionBody createEParameterDefinitionBody()
+  {
+    EParameterDefinitionBodyImpl eParameterDefinitionBody = new EParameterDefinitionBodyImpl();
+    return eParameterDefinitionBody;
   }
 
   /**
@@ -460,10 +620,34 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public GetAttributeBody createGetAttributeBody()
+  {
+    GetAttributeBodyImpl getAttributeBody = new GetAttributeBodyImpl();
+    return getAttributeBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public GetProperty createGetProperty()
   {
     GetPropertyImpl getProperty = new GetPropertyImpl();
     return getProperty;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GetPropertyBody createGetPropertyBody()
+  {
+    GetPropertyBodyImpl getPropertyBody = new GetPropertyBodyImpl();
+    return getPropertyBody;
   }
 
   /**
@@ -488,6 +672,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     ECapabilityDefinitionImpl eCapabilityDefinition = new ECapabilityDefinitionImpl();
     return eCapabilityDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ECapabilityDefinitionBody createECapabilityDefinitionBody()
+  {
+    ECapabilityDefinitionBodyImpl eCapabilityDefinitionBody = new ECapabilityDefinitionBodyImpl();
+    return eCapabilityDefinitionBody;
   }
 
   /**
@@ -536,6 +732,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     ERequirementDefinitionImpl eRequirementDefinition = new ERequirementDefinitionImpl();
     return eRequirementDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ERequirementDefinitionBody createERequirementDefinitionBody()
+  {
+    ERequirementDefinitionBodyImpl eRequirementDefinitionBody = new ERequirementDefinitionBodyImpl();
+    return eRequirementDefinitionBody;
   }
 
   /**

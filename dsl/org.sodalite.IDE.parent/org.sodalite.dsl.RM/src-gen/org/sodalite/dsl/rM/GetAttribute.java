@@ -23,25 +23,25 @@ package org.sodalite.dsl.rM;
 public interface GetAttribute extends EFunction
 {
   /**
-   * Returns the value of the '<em><b>Attribute</b></em>' reference.
+   * Returns the value of the '<em><b>Attribute</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Attribute</em>' reference.
-   * @see #setAttribute(EAttributeDefinition)
+   * @return the value of the '<em>Attribute</em>' containment reference.
+   * @see #setAttribute(GetAttributeBody)
    * @see org.sodalite.dsl.rM.RMPackage#getGetAttribute_Attribute()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EAttributeDefinition getAttribute();
+  GetAttributeBody getAttribute();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttribute#getAttribute <em>Attribute</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttribute#getAttribute <em>Attribute</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Attribute</em>' reference.
+   * @param value the new value of the '<em>Attribute</em>' containment reference.
    * @see #getAttribute()
    * @generated
    */
-  void setAttribute(EAttributeDefinition value);
+  void setAttribute(GetAttributeBody value);
 
 } // GetAttribute

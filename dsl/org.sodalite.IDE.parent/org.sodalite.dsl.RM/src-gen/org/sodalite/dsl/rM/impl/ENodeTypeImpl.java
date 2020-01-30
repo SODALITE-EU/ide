@@ -12,12 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EAttributes;
-import org.sodalite.dsl.rM.ECapabilities;
-import org.sodalite.dsl.rM.EInterfaces;
 import org.sodalite.dsl.rM.ENodeType;
-import org.sodalite.dsl.rM.EProperties;
-import org.sodalite.dsl.rM.ERequirements;
+import org.sodalite.dsl.rM.ENodeTypeBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -29,13 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeImpl#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeImpl#getProperties <em>Properties</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeImpl#getAtributes <em>Atributes</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeImpl#getInterfaces <em>Interfaces</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeImpl#getCapabilities <em>Capabilities</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeImpl#getRequirements <em>Requirements</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeImpl#getNode <em>Node</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,84 +53,14 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The cached value of the '{@link #getNode() <em>Node</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSuperType()
+   * @see #getNode()
    * @generated
    * @ordered
    */
-  protected ENodeType superType;
-
-  /**
-   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected static final String DESCRIPTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected String description = DESCRIPTION_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getProperties()
-   * @generated
-   * @ordered
-   */
-  protected EProperties properties;
-
-  /**
-   * The cached value of the '{@link #getAtributes() <em>Atributes</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAtributes()
-   * @generated
-   * @ordered
-   */
-  protected EAttributes atributes;
-
-  /**
-   * The cached value of the '{@link #getInterfaces() <em>Interfaces</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInterfaces()
-   * @generated
-   * @ordered
-   */
-  protected EInterfaces interfaces;
-
-  /**
-   * The cached value of the '{@link #getCapabilities() <em>Capabilities</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCapabilities()
-   * @generated
-   * @ordered
-   */
-  protected ECapabilities capabilities;
-
-  /**
-   * The cached value of the '{@link #getRequirements() <em>Requirements</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRequirements()
-   * @generated
-   * @ordered
-   */
-  protected ERequirements requirements;
+  protected ENodeTypeBody node;
 
   /**
    * <!-- begin-user-doc -->
@@ -194,19 +114,9 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
    * @generated
    */
   @Override
-  public ENodeType getSuperType()
+  public ENodeTypeBody getNode()
   {
-    if (superType != null && superType.eIsProxy())
-    {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (ENodeType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.ENODE_TYPE__SUPER_TYPE, oldSuperType, superType));
-      }
-    }
-    return superType;
+    return node;
   }
 
   /**
@@ -214,73 +124,13 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
    * <!-- end-user-doc -->
    * @generated
    */
-  public ENodeType basicGetSuperType()
+  public NotificationChain basicSetNode(ENodeTypeBody newNode, NotificationChain msgs)
   {
-    return superType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setSuperType(ENodeType newSuperType)
-  {
-    ENodeType oldSuperType = superType;
-    superType = newSuperType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__SUPER_TYPE, oldSuperType, superType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getDescription()
-  {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(String newDescription)
-  {
-    String oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__DESCRIPTION, oldDescription, description));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EProperties getProperties()
-  {
-    return properties;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetProperties(EProperties newProperties, NotificationChain msgs)
-  {
-    EProperties oldProperties = properties;
-    properties = newProperties;
+    ENodeTypeBody oldNode = node;
+    node = newNode;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__PROPERTIES, oldProperties, newProperties);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__NODE, oldNode, newNode);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -292,220 +142,20 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
    * @generated
    */
   @Override
-  public void setProperties(EProperties newProperties)
+  public void setNode(ENodeTypeBody newNode)
   {
-    if (newProperties != properties)
+    if (newNode != node)
     {
       NotificationChain msgs = null;
-      if (properties != null)
-        msgs = ((InternalEObject)properties).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__PROPERTIES, null, msgs);
-      if (newProperties != null)
-        msgs = ((InternalEObject)newProperties).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__PROPERTIES, null, msgs);
-      msgs = basicSetProperties(newProperties, msgs);
+      if (node != null)
+        msgs = ((InternalEObject)node).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__NODE, null, msgs);
+      if (newNode != null)
+        msgs = ((InternalEObject)newNode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__NODE, null, msgs);
+      msgs = basicSetNode(newNode, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__PROPERTIES, newProperties, newProperties));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttributes getAtributes()
-  {
-    return atributes;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetAtributes(EAttributes newAtributes, NotificationChain msgs)
-  {
-    EAttributes oldAtributes = atributes;
-    atributes = newAtributes;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__ATRIBUTES, oldAtributes, newAtributes);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setAtributes(EAttributes newAtributes)
-  {
-    if (newAtributes != atributes)
-    {
-      NotificationChain msgs = null;
-      if (atributes != null)
-        msgs = ((InternalEObject)atributes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__ATRIBUTES, null, msgs);
-      if (newAtributes != null)
-        msgs = ((InternalEObject)newAtributes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__ATRIBUTES, null, msgs);
-      msgs = basicSetAtributes(newAtributes, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__ATRIBUTES, newAtributes, newAtributes));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EInterfaces getInterfaces()
-  {
-    return interfaces;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetInterfaces(EInterfaces newInterfaces, NotificationChain msgs)
-  {
-    EInterfaces oldInterfaces = interfaces;
-    interfaces = newInterfaces;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__INTERFACES, oldInterfaces, newInterfaces);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setInterfaces(EInterfaces newInterfaces)
-  {
-    if (newInterfaces != interfaces)
-    {
-      NotificationChain msgs = null;
-      if (interfaces != null)
-        msgs = ((InternalEObject)interfaces).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__INTERFACES, null, msgs);
-      if (newInterfaces != null)
-        msgs = ((InternalEObject)newInterfaces).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__INTERFACES, null, msgs);
-      msgs = basicSetInterfaces(newInterfaces, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__INTERFACES, newInterfaces, newInterfaces));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ECapabilities getCapabilities()
-  {
-    return capabilities;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetCapabilities(ECapabilities newCapabilities, NotificationChain msgs)
-  {
-    ECapabilities oldCapabilities = capabilities;
-    capabilities = newCapabilities;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__CAPABILITIES, oldCapabilities, newCapabilities);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setCapabilities(ECapabilities newCapabilities)
-  {
-    if (newCapabilities != capabilities)
-    {
-      NotificationChain msgs = null;
-      if (capabilities != null)
-        msgs = ((InternalEObject)capabilities).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__CAPABILITIES, null, msgs);
-      if (newCapabilities != null)
-        msgs = ((InternalEObject)newCapabilities).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__CAPABILITIES, null, msgs);
-      msgs = basicSetCapabilities(newCapabilities, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__CAPABILITIES, newCapabilities, newCapabilities));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ERequirements getRequirements()
-  {
-    return requirements;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetRequirements(ERequirements newRequirements, NotificationChain msgs)
-  {
-    ERequirements oldRequirements = requirements;
-    requirements = newRequirements;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__REQUIREMENTS, oldRequirements, newRequirements);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setRequirements(ERequirements newRequirements)
-  {
-    if (newRequirements != requirements)
-    {
-      NotificationChain msgs = null;
-      if (requirements != null)
-        msgs = ((InternalEObject)requirements).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__REQUIREMENTS, null, msgs);
-      if (newRequirements != null)
-        msgs = ((InternalEObject)newRequirements).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE__REQUIREMENTS, null, msgs);
-      msgs = basicSetRequirements(newRequirements, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__REQUIREMENTS, newRequirements, newRequirements));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE__NODE, newNode, newNode));
   }
 
   /**
@@ -518,16 +168,8 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
   {
     switch (featureID)
     {
-      case RMPackage.ENODE_TYPE__PROPERTIES:
-        return basicSetProperties(null, msgs);
-      case RMPackage.ENODE_TYPE__ATRIBUTES:
-        return basicSetAtributes(null, msgs);
-      case RMPackage.ENODE_TYPE__INTERFACES:
-        return basicSetInterfaces(null, msgs);
-      case RMPackage.ENODE_TYPE__CAPABILITIES:
-        return basicSetCapabilities(null, msgs);
-      case RMPackage.ENODE_TYPE__REQUIREMENTS:
-        return basicSetRequirements(null, msgs);
+      case RMPackage.ENODE_TYPE__NODE:
+        return basicSetNode(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -544,21 +186,8 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
     {
       case RMPackage.ENODE_TYPE__NAME:
         return getName();
-      case RMPackage.ENODE_TYPE__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
-      case RMPackage.ENODE_TYPE__DESCRIPTION:
-        return getDescription();
-      case RMPackage.ENODE_TYPE__PROPERTIES:
-        return getProperties();
-      case RMPackage.ENODE_TYPE__ATRIBUTES:
-        return getAtributes();
-      case RMPackage.ENODE_TYPE__INTERFACES:
-        return getInterfaces();
-      case RMPackage.ENODE_TYPE__CAPABILITIES:
-        return getCapabilities();
-      case RMPackage.ENODE_TYPE__REQUIREMENTS:
-        return getRequirements();
+      case RMPackage.ENODE_TYPE__NODE:
+        return getNode();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -576,26 +205,8 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
       case RMPackage.ENODE_TYPE__NAME:
         setName((String)newValue);
         return;
-      case RMPackage.ENODE_TYPE__SUPER_TYPE:
-        setSuperType((ENodeType)newValue);
-        return;
-      case RMPackage.ENODE_TYPE__DESCRIPTION:
-        setDescription((String)newValue);
-        return;
-      case RMPackage.ENODE_TYPE__PROPERTIES:
-        setProperties((EProperties)newValue);
-        return;
-      case RMPackage.ENODE_TYPE__ATRIBUTES:
-        setAtributes((EAttributes)newValue);
-        return;
-      case RMPackage.ENODE_TYPE__INTERFACES:
-        setInterfaces((EInterfaces)newValue);
-        return;
-      case RMPackage.ENODE_TYPE__CAPABILITIES:
-        setCapabilities((ECapabilities)newValue);
-        return;
-      case RMPackage.ENODE_TYPE__REQUIREMENTS:
-        setRequirements((ERequirements)newValue);
+      case RMPackage.ENODE_TYPE__NODE:
+        setNode((ENodeTypeBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -614,26 +225,8 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
       case RMPackage.ENODE_TYPE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.ENODE_TYPE__SUPER_TYPE:
-        setSuperType((ENodeType)null);
-        return;
-      case RMPackage.ENODE_TYPE__DESCRIPTION:
-        setDescription(DESCRIPTION_EDEFAULT);
-        return;
-      case RMPackage.ENODE_TYPE__PROPERTIES:
-        setProperties((EProperties)null);
-        return;
-      case RMPackage.ENODE_TYPE__ATRIBUTES:
-        setAtributes((EAttributes)null);
-        return;
-      case RMPackage.ENODE_TYPE__INTERFACES:
-        setInterfaces((EInterfaces)null);
-        return;
-      case RMPackage.ENODE_TYPE__CAPABILITIES:
-        setCapabilities((ECapabilities)null);
-        return;
-      case RMPackage.ENODE_TYPE__REQUIREMENTS:
-        setRequirements((ERequirements)null);
+      case RMPackage.ENODE_TYPE__NODE:
+        setNode((ENodeTypeBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -651,20 +244,8 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
     {
       case RMPackage.ENODE_TYPE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.ENODE_TYPE__SUPER_TYPE:
-        return superType != null;
-      case RMPackage.ENODE_TYPE__DESCRIPTION:
-        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-      case RMPackage.ENODE_TYPE__PROPERTIES:
-        return properties != null;
-      case RMPackage.ENODE_TYPE__ATRIBUTES:
-        return atributes != null;
-      case RMPackage.ENODE_TYPE__INTERFACES:
-        return interfaces != null;
-      case RMPackage.ENODE_TYPE__CAPABILITIES:
-        return capabilities != null;
-      case RMPackage.ENODE_TYPE__REQUIREMENTS:
-        return requirements != null;
+      case RMPackage.ENODE_TYPE__NODE:
+        return node != null;
     }
     return super.eIsSet(featureID);
   }
@@ -682,8 +263,6 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", description: ");
-    result.append(description);
     result.append(')');
     return result.toString();
   }

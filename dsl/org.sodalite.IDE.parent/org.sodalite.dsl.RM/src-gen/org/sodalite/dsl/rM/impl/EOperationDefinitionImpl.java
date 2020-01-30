@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.EOperationDefinition;
+import org.sodalite.dsl.rM.EOperationDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -25,9 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EOperationDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EOperationDefinitionImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EOperationDefinitionImpl#getInputs <em>Inputs</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EOperationDefinitionImpl#getImplementation <em>Implementation</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EOperationDefinitionImpl#getOperation <em>Operation</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,54 +53,14 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+   * The cached value of the '{@link #getOperation() <em>Operation</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDescription()
+   * @see #getOperation()
    * @generated
    * @ordered
    */
-  protected static final String DESCRIPTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected String description = DESCRIPTION_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInputs()
-   * @generated
-   * @ordered
-   */
-  protected EInputs inputs;
-
-  /**
-   * The default value of the '{@link #getImplementation() <em>Implementation</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getImplementation()
-   * @generated
-   * @ordered
-   */
-  protected static final String IMPLEMENTATION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getImplementation() <em>Implementation</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getImplementation()
-   * @generated
-   * @ordered
-   */
-  protected String implementation = IMPLEMENTATION_EDEFAULT;
+  protected EOperationDefinitionBody operation;
 
   /**
    * <!-- begin-user-doc -->
@@ -156,9 +114,9 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public String getDescription()
+  public EOperationDefinitionBody getOperation()
   {
-    return description;
+    return operation;
   }
 
   /**
@@ -166,38 +124,13 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setDescription(String newDescription)
+  public NotificationChain basicSetOperation(EOperationDefinitionBody newOperation, NotificationChain msgs)
   {
-    String oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EOPERATION_DEFINITION__DESCRIPTION, oldDescription, description));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EInputs getInputs()
-  {
-    return inputs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetInputs(EInputs newInputs, NotificationChain msgs)
-  {
-    EInputs oldInputs = inputs;
-    inputs = newInputs;
+    EOperationDefinitionBody oldOperation = operation;
+    operation = newOperation;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EOPERATION_DEFINITION__INPUTS, oldInputs, newInputs);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EOPERATION_DEFINITION__OPERATION, oldOperation, newOperation);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -209,45 +142,20 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setInputs(EInputs newInputs)
+  public void setOperation(EOperationDefinitionBody newOperation)
   {
-    if (newInputs != inputs)
+    if (newOperation != operation)
     {
       NotificationChain msgs = null;
-      if (inputs != null)
-        msgs = ((InternalEObject)inputs).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EOPERATION_DEFINITION__INPUTS, null, msgs);
-      if (newInputs != null)
-        msgs = ((InternalEObject)newInputs).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EOPERATION_DEFINITION__INPUTS, null, msgs);
-      msgs = basicSetInputs(newInputs, msgs);
+      if (operation != null)
+        msgs = ((InternalEObject)operation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EOPERATION_DEFINITION__OPERATION, null, msgs);
+      if (newOperation != null)
+        msgs = ((InternalEObject)newOperation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EOPERATION_DEFINITION__OPERATION, null, msgs);
+      msgs = basicSetOperation(newOperation, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EOPERATION_DEFINITION__INPUTS, newInputs, newInputs));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getImplementation()
-  {
-    return implementation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setImplementation(String newImplementation)
-  {
-    String oldImplementation = implementation;
-    implementation = newImplementation;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EOPERATION_DEFINITION__IMPLEMENTATION, oldImplementation, implementation));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EOPERATION_DEFINITION__OPERATION, newOperation, newOperation));
   }
 
   /**
@@ -260,8 +168,8 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case RMPackage.EOPERATION_DEFINITION__INPUTS:
-        return basicSetInputs(null, msgs);
+      case RMPackage.EOPERATION_DEFINITION__OPERATION:
+        return basicSetOperation(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -278,12 +186,8 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
     {
       case RMPackage.EOPERATION_DEFINITION__NAME:
         return getName();
-      case RMPackage.EOPERATION_DEFINITION__DESCRIPTION:
-        return getDescription();
-      case RMPackage.EOPERATION_DEFINITION__INPUTS:
-        return getInputs();
-      case RMPackage.EOPERATION_DEFINITION__IMPLEMENTATION:
-        return getImplementation();
+      case RMPackage.EOPERATION_DEFINITION__OPERATION:
+        return getOperation();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -301,14 +205,8 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
       case RMPackage.EOPERATION_DEFINITION__NAME:
         setName((String)newValue);
         return;
-      case RMPackage.EOPERATION_DEFINITION__DESCRIPTION:
-        setDescription((String)newValue);
-        return;
-      case RMPackage.EOPERATION_DEFINITION__INPUTS:
-        setInputs((EInputs)newValue);
-        return;
-      case RMPackage.EOPERATION_DEFINITION__IMPLEMENTATION:
-        setImplementation((String)newValue);
+      case RMPackage.EOPERATION_DEFINITION__OPERATION:
+        setOperation((EOperationDefinitionBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -327,14 +225,8 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
       case RMPackage.EOPERATION_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.EOPERATION_DEFINITION__DESCRIPTION:
-        setDescription(DESCRIPTION_EDEFAULT);
-        return;
-      case RMPackage.EOPERATION_DEFINITION__INPUTS:
-        setInputs((EInputs)null);
-        return;
-      case RMPackage.EOPERATION_DEFINITION__IMPLEMENTATION:
-        setImplementation(IMPLEMENTATION_EDEFAULT);
+      case RMPackage.EOPERATION_DEFINITION__OPERATION:
+        setOperation((EOperationDefinitionBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -352,12 +244,8 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
     {
       case RMPackage.EOPERATION_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.EOPERATION_DEFINITION__DESCRIPTION:
-        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-      case RMPackage.EOPERATION_DEFINITION__INPUTS:
-        return inputs != null;
-      case RMPackage.EOPERATION_DEFINITION__IMPLEMENTATION:
-        return IMPLEMENTATION_EDEFAULT == null ? implementation != null : !IMPLEMENTATION_EDEFAULT.equals(implementation);
+      case RMPackage.EOPERATION_DEFINITION__OPERATION:
+        return operation != null;
     }
     return super.eIsSet(featureID);
   }
@@ -375,10 +263,6 @@ public class EOperationDefinitionImpl extends MinimalEObjectImpl.Container imple
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", description: ");
-    result.append(description);
-    result.append(", implementation: ");
-    result.append(implementation);
     result.append(')');
     return result.toString();
   }

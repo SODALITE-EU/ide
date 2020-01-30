@@ -13,9 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EInterfaceDefinition;
-import org.sodalite.dsl.rM.EInterfaceType;
-import org.sodalite.dsl.rM.EOperations;
-import org.sodalite.dsl.rM.EProperties;
+import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -27,9 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl#getInputs <em>Inputs</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl#getInterface <em>Interface</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,34 +53,14 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getInterface() <em>Interface</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getInterface()
    * @generated
    * @ordered
    */
-  protected EInterfaceType type;
-
-  /**
-   * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInputs()
-   * @generated
-   * @ordered
-   */
-  protected EProperties inputs;
-
-  /**
-   * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOperations()
-   * @generated
-   * @ordered
-   */
-  protected EOperations operations;
+  protected EInterfaceDefinitionBody interface_;
 
   /**
    * <!-- begin-user-doc -->
@@ -138,19 +114,9 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public EInterfaceType getType()
+  public EInterfaceDefinitionBody getInterface()
   {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (EInterfaceType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EINTERFACE_DEFINITION__TYPE, oldType, type));
-      }
-    }
-    return type;
+    return interface_;
   }
 
   /**
@@ -158,48 +124,13 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EInterfaceType basicGetType()
+  public NotificationChain basicSetInterface(EInterfaceDefinitionBody newInterface, NotificationChain msgs)
   {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setType(EInterfaceType newType)
-  {
-    EInterfaceType oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION__TYPE, oldType, type));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EProperties getInputs()
-  {
-    return inputs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetInputs(EProperties newInputs, NotificationChain msgs)
-  {
-    EProperties oldInputs = inputs;
-    inputs = newInputs;
+    EInterfaceDefinitionBody oldInterface = interface_;
+    interface_ = newInterface;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION__INPUTS, oldInputs, newInputs);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION__INTERFACE, oldInterface, newInterface);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -211,70 +142,20 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setInputs(EProperties newInputs)
+  public void setInterface(EInterfaceDefinitionBody newInterface)
   {
-    if (newInputs != inputs)
+    if (newInterface != interface_)
     {
       NotificationChain msgs = null;
-      if (inputs != null)
-        msgs = ((InternalEObject)inputs).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_DEFINITION__INPUTS, null, msgs);
-      if (newInputs != null)
-        msgs = ((InternalEObject)newInputs).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_DEFINITION__INPUTS, null, msgs);
-      msgs = basicSetInputs(newInputs, msgs);
+      if (interface_ != null)
+        msgs = ((InternalEObject)interface_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_DEFINITION__INTERFACE, null, msgs);
+      if (newInterface != null)
+        msgs = ((InternalEObject)newInterface).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_DEFINITION__INTERFACE, null, msgs);
+      msgs = basicSetInterface(newInterface, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION__INPUTS, newInputs, newInputs));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EOperations getOperations()
-  {
-    return operations;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetOperations(EOperations newOperations, NotificationChain msgs)
-  {
-    EOperations oldOperations = operations;
-    operations = newOperations;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION__OPERATIONS, oldOperations, newOperations);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setOperations(EOperations newOperations)
-  {
-    if (newOperations != operations)
-    {
-      NotificationChain msgs = null;
-      if (operations != null)
-        msgs = ((InternalEObject)operations).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_DEFINITION__OPERATIONS, null, msgs);
-      if (newOperations != null)
-        msgs = ((InternalEObject)newOperations).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_DEFINITION__OPERATIONS, null, msgs);
-      msgs = basicSetOperations(newOperations, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION__OPERATIONS, newOperations, newOperations));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION__INTERFACE, newInterface, newInterface));
   }
 
   /**
@@ -287,10 +168,8 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case RMPackage.EINTERFACE_DEFINITION__INPUTS:
-        return basicSetInputs(null, msgs);
-      case RMPackage.EINTERFACE_DEFINITION__OPERATIONS:
-        return basicSetOperations(null, msgs);
+      case RMPackage.EINTERFACE_DEFINITION__INTERFACE:
+        return basicSetInterface(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -307,13 +186,8 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
     {
       case RMPackage.EINTERFACE_DEFINITION__NAME:
         return getName();
-      case RMPackage.EINTERFACE_DEFINITION__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
-      case RMPackage.EINTERFACE_DEFINITION__INPUTS:
-        return getInputs();
-      case RMPackage.EINTERFACE_DEFINITION__OPERATIONS:
-        return getOperations();
+      case RMPackage.EINTERFACE_DEFINITION__INTERFACE:
+        return getInterface();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -331,14 +205,8 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
       case RMPackage.EINTERFACE_DEFINITION__NAME:
         setName((String)newValue);
         return;
-      case RMPackage.EINTERFACE_DEFINITION__TYPE:
-        setType((EInterfaceType)newValue);
-        return;
-      case RMPackage.EINTERFACE_DEFINITION__INPUTS:
-        setInputs((EProperties)newValue);
-        return;
-      case RMPackage.EINTERFACE_DEFINITION__OPERATIONS:
-        setOperations((EOperations)newValue);
+      case RMPackage.EINTERFACE_DEFINITION__INTERFACE:
+        setInterface((EInterfaceDefinitionBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -357,14 +225,8 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
       case RMPackage.EINTERFACE_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RMPackage.EINTERFACE_DEFINITION__TYPE:
-        setType((EInterfaceType)null);
-        return;
-      case RMPackage.EINTERFACE_DEFINITION__INPUTS:
-        setInputs((EProperties)null);
-        return;
-      case RMPackage.EINTERFACE_DEFINITION__OPERATIONS:
-        setOperations((EOperations)null);
+      case RMPackage.EINTERFACE_DEFINITION__INTERFACE:
+        setInterface((EInterfaceDefinitionBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -382,12 +244,8 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
     {
       case RMPackage.EINTERFACE_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RMPackage.EINTERFACE_DEFINITION__TYPE:
-        return type != null;
-      case RMPackage.EINTERFACE_DEFINITION__INPUTS:
-        return inputs != null;
-      case RMPackage.EINTERFACE_DEFINITION__OPERATIONS:
-        return operations != null;
+      case RMPackage.EINTERFACE_DEFINITION__INTERFACE:
+        return interface_ != null;
     }
     return super.eIsSet(featureID);
   }

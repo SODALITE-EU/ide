@@ -3,7 +3,6 @@
  */
 package org.sodalite.dsl.rM;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,9 +13,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinition#getType <em>Type</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinition#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinition#getValid_source_types <em>Valid source types</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinition#getCapability <em>Capability</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinition()
@@ -26,59 +23,25 @@ import org.eclipse.emf.common.util.EList;
 public interface ECapabilityDefinition extends EReqOrCap
 {
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Capability</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(ECapabilityType)
-   * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinition_Type()
-   * @model
-   * @generated
-   */
-  ECapabilityType getType();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinition#getType <em>Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
-   * @generated
-   */
-  void setType(ECapabilityType value);
-
-  /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinition_Description()
-   * @model
-   * @generated
-   */
-  String getDescription();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinition#getDescription <em>Description</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(String value);
-
-  /**
-   * Returns the value of the '<em><b>Valid source types</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.dsl.rM.EValidSourceType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Valid source types</em>' containment reference list.
-   * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinition_Valid_source_types()
+   * @return the value of the '<em>Capability</em>' containment reference.
+   * @see #setCapability(ECapabilityDefinitionBody)
+   * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinition_Capability()
    * @model containment="true"
    * @generated
    */
-  EList<EValidSourceType> getValid_source_types();
+  ECapabilityDefinitionBody getCapability();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinition#getCapability <em>Capability</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Capability</em>' containment reference.
+   * @see #getCapability()
+   * @generated
+   */
+  void setCapability(ECapabilityDefinitionBody value);
 
 } // ECapabilityDefinition
