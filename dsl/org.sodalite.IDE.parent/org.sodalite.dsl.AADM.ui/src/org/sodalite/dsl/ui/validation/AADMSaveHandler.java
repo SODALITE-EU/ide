@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.inject.Inject;
+
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
@@ -16,16 +18,21 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.custom.BusyIndicator;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.UISynchronizer;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
@@ -56,6 +63,8 @@ public class AADMSaveHandler implements IHandler {
 	private MarkerTypeProvider markerTypeProvider;
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
+	Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+	String submissionIRI = null;
 	
 	//TODO Configure KBReasonerClient endpoint from preference page information
 	KBReasonerClient kbclient = new KBReasonerClient();
@@ -72,7 +81,6 @@ public class AADMSaveHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		try {
 			//Return selected resource
 			IFile file = getSelectedFile();
@@ -87,17 +95,9 @@ public class AADMSaveHandler implements IHandler {
 			String aadmTTL = new String(Files.readAllBytes (aadm_path));
 			String submissionId = filename;
 			
-			//TODO Manage saving in background reporting progress
-			String submissionIRI = kbclient.saveAADM(aadmTTL, submissionId);
+			//Send model to the KB
+			saveAADM (aadmTTL, submissionId, event);
 			
-			//TODO Manage returned recommendation as validation issues
-			//TODO Notify user about successful or non-successful storage and the existence of validation issues
-			List<AADMValidationIssue> issues = readRecommendationsFromKB();
-			manageRecommendationIssues(event, issues);
-			
-			// Upon completion, show dialog
-			MessageDialog.openInformation(parent,
-					"Save AADM", "The selected AADM model has been successfully store in the KB with IRI:\n" + submissionIRI);
 		}catch (Exception ex) {
 			ex.printStackTrace();
 			MessageDialog.openError(parent, "Save AADM Error", "There were an error reported by the KB:\n" + ex.getMessage());
@@ -105,11 +105,43 @@ public class AADMSaveHandler implements IHandler {
 		return null;
 	}
 
+	private void saveAADM(String aadmTTL, String submissionId, ExecutionEvent event) {
+		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
+			try {
+				submissionIRI = kbclient.saveAADM(aadmTTL, submissionId);
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						notifyADDMSave (event);
+					}
+				});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		job.setPriority(Job.SHORT);
+		job.schedule();
+	}
+
+	protected void notifyADDMSave(ExecutionEvent event) {
+		//TODO Manage returned recommendation as validation issues
+		List<AADMValidationIssue> issues = readRecommendationsFromKB();
+		manageRecommendationIssues(event, issues);
+		
+		// Upon completion, show dialog
+		if (issues.isEmpty()) { //TODO Check there are not warnings (they do not prevent storage in KB)
+			MessageDialog.openInformation(parent,
+				"Save AADM", "The selected AADM model has been successfully store in the KB with IRI:\n" + submissionIRI);
+		}else {
+			MessageDialog.openError(parent, "Save AADM", "The selected AADM model has errors and could not be store in the KB");
+		}
+	}
+
 	private List<AADMValidationIssue> readRecommendationsFromKB() {
 		// TODO Read issues from KB recommendations
 		List<AADMValidationIssue> issues = new ArrayList<>();
-//		issues.add(new AADMValidationIssue("Wrong AADM node template name", "node_templates/hpc-job-torque-1"));
-//		issues.add(new AADMValidationIssue("Wrong number of node templates", "node_templates"));
+		issues.add(new AADMValidationIssue("Wrong AADM node template name", "node_templates/hpc-job-torque-1"));
+		issues.add(new AADMValidationIssue("Wrong number of node templates", "node_templates"));
 		return issues;
 	}
 
