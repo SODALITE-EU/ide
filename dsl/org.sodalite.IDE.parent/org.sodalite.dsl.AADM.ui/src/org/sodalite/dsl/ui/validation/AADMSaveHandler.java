@@ -140,8 +140,8 @@ public class AADMSaveHandler implements IHandler {
 	private List<AADMValidationIssue> readRecommendationsFromKB() {
 		// TODO Read issues from KB recommendations
 		List<AADMValidationIssue> issues = new ArrayList<>();
-		issues.add(new AADMValidationIssue("Wrong AADM node template name", "node_templates/hpc-job-torque-1"));
-		issues.add(new AADMValidationIssue("Wrong number of node templates", "node_templates"));
+//		issues.add(new AADMValidationIssue("Wrong AADM node template name", "node_templates/hpc-job-torque-1"));
+//		issues.add(new AADMValidationIssue("Wrong number of node templates", "node_templates"));
 		return issues;
 	}
 
