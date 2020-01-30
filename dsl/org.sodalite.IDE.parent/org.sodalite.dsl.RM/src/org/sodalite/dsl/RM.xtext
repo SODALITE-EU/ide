@@ -61,7 +61,7 @@ EArtifactTypes:
 	{EArtifactTypes} (artifactTypes+=EArtifactType)+;
 
 EArtifactType:
-	name=QUALIFIED_NAME '{' //FIXME Qualified Names are not suggested by default with context assistance
+	name=QUALIFIED_NAME '{'
 	artifact=EArtifactTypeBody
 	'}';
 
