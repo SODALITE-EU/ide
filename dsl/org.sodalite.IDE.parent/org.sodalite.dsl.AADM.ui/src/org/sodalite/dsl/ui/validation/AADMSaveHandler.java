@@ -92,7 +92,8 @@ public class AADMSaveHandler implements IHandler {
 			
 			//TODO Manage returned recommendation as validation issues
 			//TODO Notify user about successful or non-successful storage and the existence of validation issues
-			manageRecommendationIssues(event);
+			List<AADMValidationIssue> issues = readRecommendationsFromKB();
+			manageRecommendationIssues(event, issues);
 			
 			// Upon completion, show dialog
 			MessageDialog.openInformation(parent,
@@ -104,15 +105,21 @@ public class AADMSaveHandler implements IHandler {
 		return null;
 	}
 
-	private void manageRecommendationIssues(ExecutionEvent event) {
+	private List<AADMValidationIssue> readRecommendationsFromKB() {
+		// TODO Read issues from KB recommendations
+		List<AADMValidationIssue> issues = new ArrayList<>();
+//		issues.add(new AADMValidationIssue("Wrong AADM node template name", "node_templates/hpc-job-torque-1"));
+//		issues.add(new AADMValidationIssue("Wrong number of node templates", "node_templates"));
+		return issues;
+	}
+
+	private void manageRecommendationIssues(ExecutionEvent event, List<AADMValidationIssue> validationIssues) {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {
 			IValidationIssueProcessor issueProcessor;
 			IXtextDocument xtextDocument = xtextEditor.getDocument();
 			IResource resource = xtextEditor.getResource();
 			
-			// Create Issues from recommendations
-			List<AADMValidationIssue> validationIssues = readIssuesFromRecommendations();
 			List<Issue> issues = createIssues(xtextDocument, validationIssues);
 			
 			if(resource != null)
@@ -126,21 +133,11 @@ public class AADMSaveHandler implements IHandler {
 		}
 	}
 
-	private List<AADMValidationIssue> readIssuesFromRecommendations() {
-		// TODO Read issues from KB recommendations
-		// Current method test the XText validation framework
-		List<AADMValidationIssue> issues = new ArrayList<>();
-		issues.add(new AADMValidationIssue("Wrong AADM node template name", "node_templates/hpc-job-torque-1"));
-		issues.add(new AADMValidationIssue("Wrong number of node templates", "node_templates"));
-		return issues;
-	}
-
 	private List<Issue> createIssues(IXtextDocument xtextDocument, List<AADMValidationIssue> validationIssues) {
 		final List<Issue> issues = xtextDocument
 				.tryReadOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
 					@Override
 					public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
-						//xtextResource.getResourceServiceProvider().getResourceValidator();
 						resolvedInjectedXtextObjects(resource);
 						return createIssues(resource, validationIssues);
 					}
