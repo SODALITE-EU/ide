@@ -99,7 +99,6 @@ class KBReasonerTest {
 	
 	@Test
 	void testSaveAADMWithErrors() throws Exception {
-		//TODO open HPC AADM model from file
 		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow_with_errors.ttl");
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
 		String submissionId = "snow";
@@ -109,11 +108,11 @@ class KBReasonerTest {
 	
 	@Test
 	void testSaveAADM() throws Exception {
-		//TODO open HPC AADM model from file
 		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow.ttl");
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
 		String submissionId = "snow";
 		KBSaveReportData report = kbclient.saveAADM(aadmTTL, submissionId);
+		assertFalse (report.hasErrors());
 		assertNotNull (report.getIRI());
 	}
 
