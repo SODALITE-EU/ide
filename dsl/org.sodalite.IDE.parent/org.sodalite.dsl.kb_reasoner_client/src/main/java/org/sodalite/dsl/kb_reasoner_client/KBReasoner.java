@@ -13,6 +13,7 @@ package org.sodalite.dsl.kb_reasoner_client;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
@@ -26,5 +27,5 @@ public interface KBReasoner {
 	PropertyData getProperties(String resourceId) throws Exception;
 	RequirementData getRequirements(String resourceId) throws Exception;
 	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception;
-	String saveAADM (String aadmTTL, String submissionId) throws Exception;
+	KBSaveReportData saveAADM (String aadmTTL, String submissionId) throws Exception;
 }

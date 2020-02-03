@@ -11,12 +11,15 @@
 package org.sodalite.dsl.kb_reasoner_client;
 
 import java.net.URI;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBError;
+import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
@@ -31,8 +34,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KBReasonerClient implements KBReasoner {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -86,7 +94,7 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public String saveAADM(String aadmTTL, String submissionId) throws Exception {
+	public KBSaveReportData saveAADM(String aadmTTL, String submissionId) throws Exception{
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		Assert.isTrue(!submissionId.isEmpty(), "SubmissionId can neither be null nor empty");
 		String url = SERVER_URI + "saveAADM";
@@ -99,8 +107,32 @@ public class KBReasonerClient implements KBReasoner {
 		//AADM TTL
 		map.add("submissionId", submissionId);
 		
-		//Send multipart-form message
-		return sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
+		KBSaveReportData report = new KBSaveReportData();
+		try {
+			//Send multipart-form message
+			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
+			report.setIRI (result);
+		}catch (Exception ex) {
+			if (ex instanceof HttpClientErrorException) {
+				HttpClientErrorException hcee = (HttpClientErrorException) ex;
+				if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
+					//TODO Process errors
+					String result = hcee.getResponseBodyAsString();
+					String json = result.substring(result.indexOf(":") + 1);
+					report.setErrors(processErrors (json));
+				}else {
+					throw ex;
+				}
+			}
+		}
+		
+		return report;
+	}
+
+	private List<KBError> processErrors(String json) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		List<KBError> errors = mapper.readValue(json, new TypeReference<List<KBError>>(){});
+		return errors;
 	}
 
 	/**
@@ -135,13 +167,13 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 	
-	private <T> T sendFormURLEncodedMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts, HttpMethod method) {
+	private <T> T sendFormURLEncodedMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts, HttpMethod method) throws HttpStatusCodeException{
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		
 		HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(parts, headers);
-		
 		ResponseEntity<T> response = exchange(uri, method, entity, returnType);
+
 		return response.getBody();
 	}
 

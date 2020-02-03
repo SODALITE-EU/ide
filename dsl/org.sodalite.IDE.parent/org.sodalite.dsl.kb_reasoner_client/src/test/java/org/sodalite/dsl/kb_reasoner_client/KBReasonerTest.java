@@ -11,6 +11,7 @@
 package org.sodalite.dsl.kb_reasoner_client;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.nio.file.FileSystems;
@@ -23,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
@@ -96,13 +98,23 @@ class KBReasonerTest {
 	}
 	
 	@Test
+	void testSaveAADMWithErrors() throws Exception {
+		//TODO open HPC AADM model from file
+		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow_with_errors.ttl");
+		String aadmTTL = new String(Files.readAllBytes (aadm_path));
+		String submissionId = "snow";
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, submissionId);
+		assertTrue(report.hasErrors());
+	}
+	
+	@Test
 	void testSaveAADM() throws Exception {
 		//TODO open HPC AADM model from file
-		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/hpc.ttl");
+		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow.ttl");
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
-		String submissionId = "hpc";
-		String submissionIRI = kbclient.saveAADM(aadmTTL, submissionId);
-		assertNotNull (submissionIRI);
+		String submissionId = "snow";
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, submissionId);
+		assertNotNull (report.getIRI());
 	}
 
 }

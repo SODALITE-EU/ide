@@ -1,0 +1,517 @@
+# baseURI: https://www.sodalite.eu/ontologies/exchange0/
+# imports: https://www.sodalite.eu/ontologies/exchange/
+
+@prefix : <https://www.sodalite.eu/ontologies/exchange0/> .
+@prefix exchange: <https://www.sodalite.eu/ontologies/exchange/> .
+@prefix exchange0: <https://www.sodalite.eu/ontologies/exchange0#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:
+  rdf:type owl:Ontology ;
+  owl:imports exchange: ;
+  owl:versionInfo "Created by the SODALITE IDE" ;
+.
+
+:AADM_1
+  rdf:type exchange:AADM ;
+  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
+.
+
+:Property_1
+  rdf:type exchange:Property ;
+  exchange:name "name" ;
+  exchange:value "data-processing-vm" ;
+.
+:Property_2
+  rdf:type exchange:Property ;
+  exchange:name "image" ;
+  exchange:value "centos7" ;
+.
+:Property_3
+  rdf:type exchange:Property ;
+  exchange:name "flavor" ;
+  exchange:value "m1.small" ;
+.
+:Property_4
+  rdf:type exchange:Property ;
+  exchange:name "network" ;
+  exchange:value "87b57656-381c-4921-82c0-bd65a8a67cfd" ;
+.
+:Property_5
+  rdf:type exchange:Property ;
+  exchange:name "security_groups" ;
+  exchange:value "default,snow" ;
+.
+:Property_6
+  rdf:type exchange:Property ;
+  exchange:name "key_name" ;
+  exchange:value "draganrX" ;
+.
+:Property_7
+  rdf:type exchange:Property ;
+  exchange:name "name" ;
+  exchange:value "data-processing-vm" ;
+.
+:Property_8
+  rdf:type exchange:Property ;
+  exchange:name "image" ;
+  exchange:value "centos7" ;
+.
+:Property_9
+  rdf:type exchange:Property ;
+  exchange:name "flavor" ;
+  exchange:value "m1.small" ;
+.
+:Property_10
+  rdf:type exchange:Property ;
+  exchange:name "network" ;
+  exchange:value "87b57656-381c-4921-82c0-bd65a8a67cfd" ;
+.
+:Property_11
+  rdf:type exchange:Property ;
+  exchange:name "security_groups" ;
+  exchange:value "default,snow" ;
+.
+:Property_12
+  rdf:type exchange:Property ;
+  exchange:name "key_name" ;
+  exchange:value "draganrX" ;
+.
+:Property_13
+  rdf:type exchange:Property ;
+  exchange:name "mounted_disk" ;
+  exchange:value "/mnt/disk" ;
+.
+:Property_14
+  rdf:type exchange:Property ;
+  exchange:name "registry_ip" ;
+  exchange:value "154.48.185.208" ;
+.
+:Property_15
+  rdf:type exchange:Property ;
+  exchange:name "image_name" ;
+  exchange:value "snow-skyline-extractor" ;
+.
+:Property_16
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:value "8080:8080" ;
+.
+:Property_17
+  rdf:type exchange:Property ;
+  exchange:name "exposed_ports" ;
+  exchange:value "8080" ;
+.
+:Property_18
+  rdf:type exchange:Property ;
+  exchange:name "image_name" ;
+  exchange:value "snow-panorama-generator" ;
+.
+:Property_19
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:value "8082:8082" ;
+.
+:Property_20
+  rdf:type exchange:Property ;
+  exchange:name "exposed_ports" ;
+  exchange:value "8082" ;
+.
+:Property_21
+  rdf:type exchange:Property ;
+  exchange:name "image_name" ;
+  exchange:value "snow-panorama-alignment" ;
+.
+:Property_22
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:value "8081:8081" ;
+.
+:Property_23
+  rdf:type exchange:Property ;
+  exchange:name "exposed_ports" ;
+  exchange:value "8081" ;
+.
+:Property_24
+  rdf:type exchange:Property ;
+  exchange:name "image_name" ;
+  exchange:value "snow-mysql" ;
+.
+:Property_25
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:value "3306:3306" ;
+.
+:Property_26
+  rdf:type exchange:Property ;
+  exchange:name "exposed_ports" ;
+  exchange:value "3306" ;
+.
+:Property_27
+  rdf:type exchange:Property ;
+  exchange:name "image_name" ;
+  exchange:value "snow-wic" ;
+.
+:Property_28
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:value "8083:8083" ;
+.
+:Property_29
+  rdf:type exchange:Property ;
+  exchange:name "exposed_ports" ;
+  exchange:value "8083" ;
+.
+:Property_30
+  rdf:type exchange:Property ;
+  exchange:name "image_name" ;
+  exchange:value "snow-wcf" ;
+.
+:Property_31
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:value "8084:8084" ;
+.
+:Property_32
+  rdf:type exchange:Property ;
+  exchange:name "exposed_ports" ;
+  exchange:value "8084" ;
+.
+:Property_33
+  rdf:type exchange:Property ;
+  exchange:name "image_name" ;
+  exchange:value "snow-dmia" ;
+.
+:Property_34
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:value "8085:8085" ;
+.
+:Property_35
+  rdf:type exchange:Property ;
+  exchange:name "exposed_ports" ;
+  exchange:value "8085" ;
+.
+:Property_36
+  rdf:type exchange:Property ;
+  exchange:name "image_name" ;
+  exchange:value "snow-orchestrator" ;
+.
+:Property_37
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:value "8086:8086" ;
+.
+:Property_38
+  rdf:type exchange:Property ;
+  exchange:name "exposed_ports" ;
+  exchange:value "8086" ;
+.
+:Property_39
+  rdf:type exchange:Property ;
+  exchange:name "mounted_disk" ;
+  exchange:value "/mnt/disk" ;
+.
+
+:Parameter_1
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_processing_vm" ;
+.
+:Requirement_1
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:hasParameter :Parameter_1 ;
+.
+:Parameter_2
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_processing_vm" ;
+.
+:Requirement_2
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_2 ;
+.
+:Parameter_3
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_stream_docker_host" ;
+.
+:Requirement_3
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_3 ;
+.
+:Parameter_4
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_processing_docker_host" ;
+.
+:Requirement_4
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_4 ;
+.
+:Parameter_5
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "panorama_generator" ;
+.
+:Requirement_5
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:hasParameter :Parameter_5 ;
+.
+:Parameter_6
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_processing_docker_host" ;
+.
+:Requirement_6
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_6 ;
+.
+:Parameter_7
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "panorama_alignment" ;
+.
+:Requirement_7
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:hasParameter :Parameter_7 ;
+.
+:Parameter_8
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_processing_docker_host" ;
+.
+:Requirement_8
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_8 ;
+.
+:Parameter_9
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_stream_docker_host" ;
+.
+:Requirement_9
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_9 ;
+.
+:Parameter_10
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_stream_docker_host" ;
+.
+:Requirement_10
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_10 ;
+.
+:Parameter_11
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "wcf" ;
+.
+:Requirement_11
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:hasParameter :Parameter_11 ;
+.
+:Parameter_12
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_stream_docker_host" ;
+.
+:Requirement_12
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_12 ;
+.
+:Parameter_13
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "dia" ;
+.
+:Requirement_13
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:hasParameter :Parameter_13 ;
+.
+:Parameter_14
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_stream_docker_host" ;
+.
+:Requirement_14
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_14 ;
+.
+:Parameter_15
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "data_stream_docker_host" ;
+.
+:Requirement_15
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_15 ;
+.
+:Parameter_16
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "wic" ;
+.
+:Requirement_16
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:hasParameter :Parameter_16 ;
+.
+:Parameter_17
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "wcf" ;
+.
+:Requirement_17
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:hasParameter :Parameter_17 ;
+.
+:Parameter_18
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value "dia" ;
+.
+:Requirement_18
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:hasParameter :Parameter_18 ;
+.
+
+:Template_1
+  rdf:type exchange:Template ;
+  exchange:name "data_processing_vm" ;
+  exchange:type "sodalite.nodes.VM.OpenStack" ;
+  exchange:properties :Property_1 ; 
+  exchange:properties :Property_2 ; 
+  exchange:properties :Property_3 ; 
+  exchange:properties :Property_4 ; 
+  exchange:properties :Property_5 ; 
+  exchange:properties :Property_6 ; 
+.  
+:Template_2
+  rdf:type exchange:Template ;
+  exchange:name "data_stream_vm" ;
+  exchange:type "sodalite.nodes.VM.OpenStack" ;
+  exchange:properties :Property_7 ; 
+  exchange:properties :Property_8 ; 
+  exchange:properties :Property_9 ; 
+  exchange:properties :Property_10 ; 
+  exchange:properties :Property_11 ; 
+  exchange:properties :Property_12 ; 
+  exchange:properties :Property_13 ; 
+  exchange:requirements :Requirement_1 ; 
+.  
+:Template_3
+  rdf:type exchange:Template ;
+  exchange:name "data_processing_docker_host" ;
+  exchange:type "sodalite.nodes.DockerHost" ;
+  exchange:requirements :Requirement_2 ; 
+.  
+:Template_4
+  rdf:type exchange:Template ;
+  exchange:name "data_stream_docker_host" ;
+  exchange:type "sodalite.nodes.DockerHost" ;
+  exchange:properties :Property_14 ; 
+  exchange:requirements :Requirement_3 ; 
+.  
+:Template_5
+  rdf:type exchange:Template ;
+  exchange:name "skyline_extractor" ;
+  exchange:type "sodalite.nodes.DockerizedComponent" ;
+  exchange:properties :Property_15 ; 
+  exchange:properties :Property_16 ; 
+  exchange:properties :Property_17 ; 
+  exchange:requirements :Requirement_4 ; 
+  exchange:requirements :Requirement_5 ; 
+.  
+:Template_6
+  rdf:type exchange:Template ;
+  exchange:name "panorama_generator" ;
+  exchange:type "sodalite.nodes.DockerizedComponent" ;
+  exchange:properties :Property_18 ; 
+  exchange:properties :Property_19 ; 
+  exchange:properties :Property_20 ; 
+  exchange:requirements :Requirement_6 ; 
+  exchange:requirements :Requirement_7 ; 
+.  
+:Template_7
+  rdf:type exchange:Template ;
+  exchange:name "panorama_alignment" ;
+  exchange:type "sodalite.nodes.DockerizedComponent" ;
+  exchange:properties :Property_21 ; 
+  exchange:properties :Property_22 ; 
+  exchange:properties :Property_23 ; 
+  exchange:requirements :Requirement_8 ; 
+.  
+:Template_8
+  rdf:type exchange:Template ;
+  exchange:name "mysql" ;
+  exchange:type "sodalite.nodes.DockerizedComponent" ;
+  exchange:properties :Property_24 ; 
+  exchange:properties :Property_25 ; 
+  exchange:properties :Property_26 ; 
+  exchange:requirements :Requirement_9 ; 
+.  
+:Template_9
+  rdf:type exchange:Template ;
+  exchange:name "wic" ;
+  exchange:type "sodalite.nodes.DockerizedComponent" ;
+  exchange:properties :Property_27 ; 
+  exchange:properties :Property_28 ; 
+  exchange:properties :Property_29 ; 
+  exchange:requirements :Requirement_10 ; 
+  exchange:requirements :Requirement_11 ; 
+.  
+:Template_10
+  rdf:type exchange:Template ;
+  exchange:name "wcf" ;
+  exchange:type "sodalite.nodes.DockerizedComponent" ;
+  exchange:properties :Property_30 ; 
+  exchange:properties :Property_31 ; 
+  exchange:properties :Property_32 ; 
+  exchange:requirements :Requirement_12 ; 
+  exchange:requirements :Requirement_13 ; 
+.  
+:Template_11
+  rdf:type exchange:Template ;
+  exchange:name "dia" ;
+  exchange:type "sodalite.nodes.DockerizedComponent" ;
+  exchange:properties :Property_33 ; 
+  exchange:properties :Property_34 ; 
+  exchange:properties :Property_35 ; 
+  exchange:requirements :Requirement_14 ; 
+.  
+:Template_12
+  rdf:type exchange:Template ;
+  exchange:name "orchestrator" ;
+  exchange:type "sodalite.nodes.DockerizedComponent" ;
+  exchange:properties :Property_36 ; 
+  exchange:properties :Property_37 ; 
+  exchange:properties :Property_38 ; 
+  exchange:properties :Property_39 ; 
+  exchange:requirements :Requirement_15 ; 
+  exchange:requirements :Requirement_16 ; 
+  exchange:requirements :Requirement_17 ; 
+  exchange:requirements :Requirement_18 ; 
+.  
+
