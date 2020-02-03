@@ -54,6 +54,8 @@ import org.eclipse.xtext.validation.Issue;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.types.KBError;
+import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.ui.handlers.AADMValidationIssue;
 
 import com.google.common.collect.Lists;
@@ -64,7 +66,7 @@ public class AADMSaveHandler implements IHandler {
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
 	Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	String submissionIRI = null;
+	KBSaveReportData saveReport = null;
 	
 	//TODO Configure KBReasonerClient endpoint from preference page information
 	KBReasonerClient kbclient = new KBReasonerClient();
@@ -108,7 +110,7 @@ public class AADMSaveHandler implements IHandler {
 	private void saveAADM(String aadmTTL, String submissionId, ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
-				submissionIRI = kbclient.saveAADM(aadmTTL, submissionId);
+				saveReport = kbclient.saveAADM(aadmTTL, submissionId);
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
@@ -124,24 +126,28 @@ public class AADMSaveHandler implements IHandler {
 	}
 
 	protected void notifyADDMSave(ExecutionEvent event) {
-		//TODO Manage returned recommendation as validation issues
-		List<AADMValidationIssue> issues = readRecommendationsFromKB();
-		manageRecommendationIssues(event, issues);
-		
-		// Upon completion, show dialog
-		if (issues.isEmpty()) { //TODO Check there are not warnings (they do not prevent storage in KB)
-			MessageDialog.openInformation(parent,
-				"Save AADM", "The selected AADM model has been successfully store in the KB with IRI:\n" + submissionIRI);
-		}else {
+		//Manage returned recommendation as validation issues
+		//TODO Check there are not warnings (they do not prevent storage in KB)
+		if (saveReport != null && saveReport.hasErrors()) {
+			List<AADMValidationIssue> issues = readRecommendationsFromKB();
+			manageRecommendationIssues(event, issues);
 			MessageDialog.openError(parent, "Save AADM", "The selected AADM model has errors and could not be store in the KB");
+		}else {
+			MessageDialog.openInformation(parent,
+				"Save AADM", "The selected AADM model has been successfully store in the KB with IRI:\n" + saveReport.getIRI());
 		}
 	}
 
 	private List<AADMValidationIssue> readRecommendationsFromKB() {
 		// TODO Read issues from KB recommendations
 		List<AADMValidationIssue> issues = new ArrayList<>();
-//		issues.add(new AADMValidationIssue("Wrong AADM node template name", "node_templates/hpc-job-torque-1"));
-//		issues.add(new AADMValidationIssue("Wrong number of node templates", "node_templates"));
+		
+		for (KBError error: saveReport.getErrors()) {
+			issues.add(new AADMValidationIssue (
+				error.getType() + "." + error.getDescription() + ":" + error.getEntity_name(),
+				"node_templates/" + error.getContext()
+			));
+		}
 		return issues;
 	}
 
