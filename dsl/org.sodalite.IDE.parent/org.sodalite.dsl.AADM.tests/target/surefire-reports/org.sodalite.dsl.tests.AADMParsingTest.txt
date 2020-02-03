@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
 Test set: org.sodalite.dsl.tests.AADMParsingTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.691 s - in org.sodalite.dsl.tests.AADMParsingTest
-loadModel  Time elapsed: 0.684 s
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.656 s - in org.sodalite.dsl.tests.AADMParsingTest
+loadModel  Time elapsed: 0.651 s

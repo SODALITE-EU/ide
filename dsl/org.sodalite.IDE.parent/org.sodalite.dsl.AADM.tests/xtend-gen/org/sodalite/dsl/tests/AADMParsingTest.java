@@ -4,18 +4,11 @@
 package org.sodalite.dsl.tests;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.tests.AADMInjectorProvider;
 
 @ExtendWith(InjectionExtension.class)
@@ -23,60 +16,15 @@ import org.sodalite.dsl.tests.AADMInjectorProvider;
 @SuppressWarnings("all")
 public class AADMParsingTest {
   @Inject
-  private ParseHelper<AADM_Model> parseHelper;
+  private /* ParseHelper<AADM_Model> */Object parseHelper;
   
   @Test
   public void loadModel() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("node_templates{");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("vm{");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("type: sodalite.nodes.VM.OpenStack");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("properties{");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("name: \'snow-vm\'");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("image: \'centos7\'");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("flavor: \'m1.small\'");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("network: \'87b57656-381c-4921-82c0-bd65a8a67cfd\'");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("security_groups: \'default,snow\'");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("key_name: \'draganrX\'");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("} ");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final AADM_Model result = this.parseHelper.parse(_builder);
-      Assertions.assertNotNull(result);
-      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
-      boolean _isEmpty = errors.isEmpty();
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Unexpected errors: ");
-      String _join = IterableExtensions.join(errors, ", ");
-      _builder_1.append(_join);
-      Assertions.assertTrue(_isEmpty, _builder_1.toString());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe field AADMParsingTest.parseHelper refers to the missing type AADM_Model"
+      + "\neResource cannot be resolved"
+      + "\nerrors cannot be resolved"
+      + "\nisEmpty cannot be resolved"
+      + "\njoin cannot be resolved");
   }
 }

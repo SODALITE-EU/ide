@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.sodalite.dsl.tests.AADMParsingTest" time="0.691" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.sodalite.dsl.tests.AADMParsingTest" time="0.656" tests="1" errors="0" skipped="0" failures="0">
   <properties/>
-  <testcase name="loadModel" classname="org.sodalite.dsl.tests.AADMParsingTest" time="0.684"/>
+  <testcase name="loadModel" classname="org.sodalite.dsl.tests.AADMParsingTest" time="0.651"/>
 </testsuite>
