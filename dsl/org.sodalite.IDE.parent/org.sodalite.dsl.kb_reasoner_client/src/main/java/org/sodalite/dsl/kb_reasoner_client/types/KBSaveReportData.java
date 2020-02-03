@@ -15,9 +15,11 @@ public class KBSaveReportData {
 	}
 	
 	public boolean hasErrors() {
-		return !errors.isEmpty();
+		return !this.errors.isEmpty();
 	}
-	
+	public List<KBError> getErrors(){
+		return this.errors;
+	}
 	public void setErrors (List<KBError> errors) {
 		this.errors = errors;
 	}
