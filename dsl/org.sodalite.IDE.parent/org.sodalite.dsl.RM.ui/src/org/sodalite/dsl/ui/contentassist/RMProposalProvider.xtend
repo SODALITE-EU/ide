@@ -19,6 +19,17 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 
 
 class RMProposalProvider extends AbstractRMProposalProvider {	
+	final String SELF_DESCRIPTION = 
+	"A TOSCA orchestrator will interpret this keyword as the Node or Relationship\n" + 
+	"Template instance that contains the function at the time the function is evaluated"
+	final String SOURCE_DESCRIPTION = 
+	"A TOSCA orchestrator will interpret this keyword as the Node Template instance that\n" + 
+	"is at the source end of the relationship that contains the referencing function."
+	final String TARGET_DESCRIPTION = 
+	"A TOSCA orchestratorwill interpret this keyword as the Node Template instance that is\n" + 
+	"at the target end of the relationship that contains the referencing function"
+	final String HOST_DESCRIPTION = "A TOSCA orchestrator will interpret this keyword to refer\n" + 
+	"to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship)."
 	
 	override void completeENodeType_Name(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
@@ -146,6 +157,29 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String additionalProposalInfo = "The required id of the requirement definition"
 
 		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEPropertyDefinitionBody_Required(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EPropertyDefinitionBody::required property")
+		createNonEditableCompletionProposal ("true", "true", context, "", acceptor);
+		createNonEditableCompletionProposal ("false", "false", context, "", acceptor);
+	}
+	
+	override void completeGetAttributeBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetAttributeBody::entity property")
+		createEntityProposals (context, acceptor);
+	}
+	
+	override void completeGetPropertyBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetPropertyBody::entity property")
+		createEntityProposals (context, acceptor);
+	}
+	
+	protected def void createEntityProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		createNonEditableCompletionProposal ("SELF", "SELF", context, SELF_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("SOURCE", "SOURCE", context, SOURCE_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("TARGET", "TARGET", context, TARGET_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("HOST", "HOST", context, HOST_DESCRIPTION, acceptor);
 	}
 
 	protected def void createNonEditableCompletionProposal(String proposalText, String displayText,

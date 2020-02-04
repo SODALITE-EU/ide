@@ -137,7 +137,17 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" eType="#//EInterfaces"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid_target_types" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valid_target_types" eType="#//EValidTargetTypes"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EValidTargetTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetTypes" upperBound="-1"
+        eType="#//ECapabilityTypeRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceType" upperBound="-1"
+        eType="#//ECapabilityTypeRef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECapabilityTypeRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//ECapabilityType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EProperties">
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
@@ -257,11 +267,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValidSourceType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTypes" upperBound="-1"
-        eType="#//ETypeRef" containment="true"/>
+        eType="#//ENodeTypeRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceType" upperBound="-1"
-        eType="#//ETypeRef" containment="true"/>
+        eType="#//ENodeTypeRef" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ETypeRef">
+  <eClassifiers xsi:type="ecore:EClass" name="ENodeTypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//ENodeType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERequirements">
@@ -297,7 +307,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValid_Values" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//ELIST" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ELIST">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="list" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInRange" eSuperTypes="#//EConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

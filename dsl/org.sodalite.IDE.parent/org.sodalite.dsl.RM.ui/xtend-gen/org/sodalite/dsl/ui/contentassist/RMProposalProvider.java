@@ -23,6 +23,18 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     False;
   }
   
+  private final String SELF_DESCRIPTION = ("A TOSCA orchestrator will interpret this keyword as the Node or Relationship\n" + 
+    "Template instance that contains the function at the time the function is evaluated");
+  
+  private final String SOURCE_DESCRIPTION = ("A TOSCA orchestrator will interpret this keyword as the Node Template instance that\n" + 
+    "is at the source end of the relationship that contains the referencing function.");
+  
+  private final String TARGET_DESCRIPTION = ("A TOSCA orchestratorwill interpret this keyword as the Node Template instance that is\n" + 
+    "at the target end of the relationship that contains the referencing function");
+  
+  private final String HOST_DESCRIPTION = ("A TOSCA orchestrator will interpret this keyword to refer\n" + 
+    "to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship).");
+  
   @Override
   public void completeENodeType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ENodeType::name property");
@@ -147,6 +159,32 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String displayText = "requirement_name";
     final String additionalProposalInfo = "The required id of the requirement definition";
     this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEPropertyDefinitionBody_Required(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EPropertyDefinitionBody::required property");
+    this.createNonEditableCompletionProposal("true", "true", context, "", acceptor);
+    this.createNonEditableCompletionProposal("false", "false", context, "", acceptor);
+  }
+  
+  @Override
+  public void completeGetAttributeBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for GetAttributeBody::entity property");
+    this.createEntityProposals(context, acceptor);
+  }
+  
+  @Override
+  public void completeGetPropertyBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for GetPropertyBody::entity property");
+    this.createEntityProposals(context, acceptor);
+  }
+  
+  protected void createEntityProposals(final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.createNonEditableCompletionProposal("SELF", "SELF", context, this.SELF_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("SOURCE", "SOURCE", context, this.SOURCE_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("TARGET", "TARGET", context, this.TARGET_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("HOST", "HOST", context, this.HOST_DESCRIPTION, acceptor);
   }
   
   protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
