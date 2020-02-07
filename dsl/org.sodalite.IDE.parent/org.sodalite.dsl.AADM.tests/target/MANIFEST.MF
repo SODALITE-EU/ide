@@ -3,7 +3,7 @@ Automatic-Module-Name: org.sodalite.dsl.AADM.tests
 Bundle-SymbolicName: org.sodalite.dsl.AADM.tests; singleton:=true
 Export-Package: org.sodalite.dsl.tests;x-internal=true
 Bundle-Name: org.sodalite.dsl.AADM.tests
-Bundle-Version: 1.0.0.202002031500
+Bundle-Version: 1.0.0.202002071224
 Require-Bundle: org.sodalite.dsl.AADM,org.junit.jupiter.api;bundle-ver
  sion="[5.0.0,6.0.0)",org.eclipse.xtext.testing,org.eclipse.xtext.xbas
  e.testing,org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"

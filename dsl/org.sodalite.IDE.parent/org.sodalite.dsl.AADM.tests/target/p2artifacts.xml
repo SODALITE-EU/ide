@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?artifactRepository version='1.1.0'?>
 <artifacts size='2'>
-  <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.tests' version='1.0.0.202002031500'>
+  <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.tests' version='1.0.0.202002071224'>
     <properties size='5'>
-      <property name='artifact.size' value='7546'/>
-      <property name='download.size' value='7546'/>
+      <property name='artifact.size' value='7548'/>
+      <property name='download.size' value='7548'/>
       <property name='maven-groupId' value='org.sodalite.IDE'/>
       <property name='maven-artifactId' value='org.sodalite.dsl.AADM.tests'/>
       <property name='maven-version' value='1.0.0-SNAPSHOT'/>
     </properties>
   </artifact>
-  <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.tests.source' version='1.0.0.202002031500'>
+  <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.tests.source' version='1.0.0.202002071224'>
     <properties size='6'>
       <property name='artifact.size' value='4673'/>
       <property name='download.size' value='4673'/>
