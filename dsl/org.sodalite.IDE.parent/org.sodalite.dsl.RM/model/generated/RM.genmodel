@@ -176,11 +176,15 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinition/parameter"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EParameterDefinitionBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/default"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EValueExpression"/>
     <genClasses ecoreClass="RM.ecore#//EFunction"/>
+    <genClasses ecoreClass="RM.ecore#//GetInput">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetInput/input"/>
+    </genClasses>
     <genClasses ecoreClass="RM.ecore#//GetAttribute">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttribute/attribute"/>
     </genClasses>
@@ -270,6 +274,14 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EEqual">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EEqual/val"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EPropertyAssignmentValue"/>
+    <genClasses ecoreClass="RM.ecore#//EMAP">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EMAP/map"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EMapEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EMapEntry/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EMapEntry/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

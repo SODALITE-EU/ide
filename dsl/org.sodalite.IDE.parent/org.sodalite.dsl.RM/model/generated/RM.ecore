@@ -224,13 +224,17 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EParameterDefinitionBody">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EDataType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EValueExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//EValueExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValueExpression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EFunction" eSuperTypes="#//EValueExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EFunction" eSuperTypes="#//EValueExpression #//EPropertyAssignmentValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GetInput" eSuperTypes="#//EFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" eType="#//EParameterDefinition"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GetAttribute" eSuperTypes="#//EFunction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//GetAttributeBody"
         containment="true"/>
@@ -309,7 +313,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EValid_Values" eSuperTypes="#//EConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//ELIST" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ELIST">
+  <eClassifiers xsi:type="ecore:EClass" name="ELIST" eSuperTypes="#//EPropertyAssignmentValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="list" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -331,5 +335,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EEqual" eSuperTypes="#//EConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPropertyAssignmentValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EMAP" eSuperTypes="#//EPropertyAssignmentValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="map" upperBound="-1" eType="#//EMapEntry"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EMapEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EPropertyAssignmentValue"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
