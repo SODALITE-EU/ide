@@ -9,8 +9,6 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.sodalite.dsl.rM.ELIST;
@@ -29,7 +27,7 @@ import org.sodalite.dsl.rM.RMPackage;
  *
  * @generated
  */
-public class ELISTImpl extends MinimalEObjectImpl.Container implements ELIST
+public class ELISTImpl extends EPropertyAssignmentValueImpl implements ELIST
 {
   /**
    * The cached value of the '{@link #getList() <em>List</em>}' attribute list.

@@ -5,8 +5,6 @@ package org.sodalite.dsl.rM;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>ELIST</b></em>'.
@@ -23,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ELIST extends EObject
+public interface ELIST extends EPropertyAssignmentValue
 {
   /**
    * Returns the value of the '<em><b>List</b></em>' attribute list.

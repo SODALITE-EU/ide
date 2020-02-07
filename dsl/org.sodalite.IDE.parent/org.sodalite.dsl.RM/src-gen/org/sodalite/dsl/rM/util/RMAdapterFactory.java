@@ -281,6 +281,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEFunctionAdapter();
       }
       @Override
+      public Adapter caseGetInput(GetInput object)
+      {
+        return createGetInputAdapter();
+      }
+      @Override
       public Adapter caseGetAttribute(GetAttribute object)
       {
         return createGetAttributeAdapter();
@@ -409,6 +414,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEEqual(EEqual object)
       {
         return createEEqualAdapter();
+      }
+      @Override
+      public Adapter caseEPropertyAssignmentValue(EPropertyAssignmentValue object)
+      {
+        return createEPropertyAssignmentValueAdapter();
+      }
+      @Override
+      public Adapter caseEMAP(EMAP object)
+      {
+        return createEMAPAdapter();
+      }
+      @Override
+      public Adapter caseEMapEntry(EMapEntry object)
+      {
+        return createEMapEntryAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -1048,6 +1068,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.GetInput <em>Get Input</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.GetInput
+   * @generated
+   */
+  public Adapter createGetInputAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.GetAttribute <em>Get Attribute</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1433,6 +1468,51 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEEqualAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPropertyAssignmentValue <em>EProperty Assignment Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPropertyAssignmentValue
+   * @generated
+   */
+  public Adapter createEPropertyAssignmentValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EMAP <em>EMAP</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EMAP
+   * @generated
+   */
+  public Adapter createEMAPAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EMapEntry <em>EMap Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EMapEntry
+   * @generated
+   */
+  public Adapter createEMapEntryAdapter()
   {
     return null;
   }

@@ -28,10 +28,10 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.sodalite.dsl.aADM.impl.EAttributesImpl;
+import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
-import org.sodalite.dsl.aADM.impl.EPropertiesImpl;
-import org.sodalite.dsl.aADM.impl.ERequirementsImpl;
+import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl;
+import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
@@ -185,8 +185,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       if ((model instanceof ENodeTemplateBodyImpl)) {
         resourceId = ((ENodeTemplateBodyImpl) model).getType();
       } else {
-        if ((model instanceof EAttributesImpl)) {
-          EObject _eContainer = ((EAttributesImpl)model).eContainer();
+        if ((model instanceof EAttributeAssigmentsImpl)) {
+          EObject _eContainer = ((EAttributeAssigmentsImpl)model).eContainer();
           resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
@@ -237,8 +237,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       if ((model instanceof ENodeTemplateBodyImpl)) {
         resourceId = ((ENodeTemplateBodyImpl) model).getType();
       } else {
-        if ((model instanceof EPropertiesImpl)) {
-          EObject _eContainer = ((EPropertiesImpl)model).eContainer();
+        if ((model instanceof EPropertyAssigmentsImpl)) {
+          EObject _eContainer = ((EPropertyAssigmentsImpl)model).eContainer();
           resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
@@ -289,8 +289,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       if ((model instanceof ENodeTemplateBodyImpl)) {
         resourceId = ((ENodeTemplateBodyImpl) model).getType();
       } else {
-        if ((model instanceof ERequirementsImpl)) {
-          EObject _eContainer = ((ERequirementsImpl)model).eContainer();
+        if ((model instanceof ERequirementAssignmentsImpl)) {
+          EObject _eContainer = ((ERequirementAssignmentsImpl)model).eContainer();
           resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
@@ -366,6 +366,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     return;
   }
   
+  @Override
   protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
     ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
     if ((proposal instanceof ConfigurableCompletionProposal)) {
@@ -376,6 +377,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     acceptor.accept(proposal);
   }
   
+  @Override
   protected void createEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
     ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
     if ((proposal instanceof ConfigurableCompletionProposal)) {

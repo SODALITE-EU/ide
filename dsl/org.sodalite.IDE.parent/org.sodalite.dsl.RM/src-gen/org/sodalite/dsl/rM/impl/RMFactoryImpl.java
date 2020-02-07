@@ -106,6 +106,7 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EPARAMETER_DEFINITION_BODY: return createEParameterDefinitionBody();
       case RMPackage.EVALUE_EXPRESSION: return createEValueExpression();
       case RMPackage.EFUNCTION: return createEFunction();
+      case RMPackage.GET_INPUT: return createGetInput();
       case RMPackage.GET_ATTRIBUTE: return createGetAttribute();
       case RMPackage.GET_ATTRIBUTE_BODY: return createGetAttributeBody();
       case RMPackage.GET_PROPERTY: return createGetProperty();
@@ -132,6 +133,9 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EGREATER_OR_EQUAL: return createEGreaterOrEqual();
       case RMPackage.EGREATER_THAN: return createEGreaterThan();
       case RMPackage.EEQUAL: return createEEqual();
+      case RMPackage.EPROPERTY_ASSIGNMENT_VALUE: return createEPropertyAssignmentValue();
+      case RMPackage.EMAP: return createEMAP();
+      case RMPackage.EMAP_ENTRY: return createEMapEntry();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -635,6 +639,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public GetInput createGetInput()
+  {
+    GetInputImpl getInput = new GetInputImpl();
+    return getInput;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public GetAttribute createGetAttribute()
   {
     GetAttributeImpl getAttribute = new GetAttributeImpl();
@@ -939,6 +955,42 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EEqualImpl eEqual = new EEqualImpl();
     return eEqual;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPropertyAssignmentValue createEPropertyAssignmentValue()
+  {
+    EPropertyAssignmentValueImpl ePropertyAssignmentValue = new EPropertyAssignmentValueImpl();
+    return ePropertyAssignmentValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EMAP createEMAP()
+  {
+    EMAPImpl emap = new EMAPImpl();
+    return emap;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EMapEntry createEMapEntry()
+  {
+    EMapEntryImpl eMapEntry = new EMapEntryImpl();
+    return eMapEntry;
   }
 
   /**

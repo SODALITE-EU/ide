@@ -14,6 +14,6 @@ package org.sodalite.dsl.rM;
  * @model
  * @generated
  */
-public interface EFunction extends EValueExpression
+public interface EFunction extends EValueExpression, EPropertyAssignmentValue
 {
 } // EFunction

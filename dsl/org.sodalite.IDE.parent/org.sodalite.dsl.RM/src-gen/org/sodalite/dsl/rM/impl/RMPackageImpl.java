@@ -43,6 +43,7 @@ import org.sodalite.dsl.rM.EInterfaces;
 import org.sodalite.dsl.rM.ELength;
 import org.sodalite.dsl.rM.ELessOrEqual;
 import org.sodalite.dsl.rM.ELessThan;
+import org.sodalite.dsl.rM.EMapEntry;
 import org.sodalite.dsl.rM.EMaxLength;
 import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.ENodeType;
@@ -58,6 +59,7 @@ import org.sodalite.dsl.rM.EPolicyType;
 import org.sodalite.dsl.rM.EPolicyTypeBody;
 import org.sodalite.dsl.rM.EPolicyTypes;
 import org.sodalite.dsl.rM.EProperties;
+import org.sodalite.dsl.rM.EPropertyAssignmentValue;
 import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.EPropertyDefinitionBody;
 import org.sodalite.dsl.rM.ERelationshipType;
@@ -73,6 +75,7 @@ import org.sodalite.dsl.rM.EValid_Values;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetAttributeBody;
+import org.sodalite.dsl.rM.GetInput;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RMFactory;
@@ -379,6 +382,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass getInputEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass getAttributeEClass = null;
 
   /**
@@ -555,6 +565,27 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   private EClass eEqualEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ePropertyAssignmentValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass emapEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eMapEntryEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -2077,7 +2108,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEParameterDefinitionBody_Value()
+  public EReference getEParameterDefinitionBody_Type()
   {
     return (EReference)eParameterDefinitionBodyEClass.getEStructuralFeatures().get(0);
   }
@@ -2088,9 +2119,20 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEParameterDefinitionBody_Default()
+  public EReference getEParameterDefinitionBody_Value()
   {
     return (EReference)eParameterDefinitionBodyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEParameterDefinitionBody_Default()
+  {
+    return (EReference)eParameterDefinitionBodyEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -2113,6 +2155,28 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
   public EClass getEFunction()
   {
     return eFunctionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getGetInput()
+  {
+    return getInputEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getGetInput_Input()
+  {
+    return (EReference)getInputEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2836,6 +2900,72 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EClass getEPropertyAssignmentValue()
+  {
+    return ePropertyAssignmentValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEMAP()
+  {
+    return emapEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEMAP_Map()
+  {
+    return (EReference)emapEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEMapEntry()
+  {
+    return eMapEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEMapEntry_Key()
+  {
+    return (EAttribute)eMapEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEMapEntry_Value()
+  {
+    return (EReference)eMapEntryEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public RMFactory getRMFactory()
   {
     return (RMFactory)getEFactoryInstance();
@@ -3031,12 +3161,16 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eParameterDefinitionEClass, EPARAMETER_DEFINITION__PARAMETER);
 
     eParameterDefinitionBodyEClass = createEClass(EPARAMETER_DEFINITION_BODY);
+    createEReference(eParameterDefinitionBodyEClass, EPARAMETER_DEFINITION_BODY__TYPE);
     createEReference(eParameterDefinitionBodyEClass, EPARAMETER_DEFINITION_BODY__VALUE);
     createEReference(eParameterDefinitionBodyEClass, EPARAMETER_DEFINITION_BODY__DEFAULT);
 
     eValueExpressionEClass = createEClass(EVALUE_EXPRESSION);
 
     eFunctionEClass = createEClass(EFUNCTION);
+
+    getInputEClass = createEClass(GET_INPUT);
+    createEReference(getInputEClass, GET_INPUT__INPUT);
 
     getAttributeEClass = createEClass(GET_ATTRIBUTE);
     createEReference(getAttributeEClass, GET_ATTRIBUTE__ATTRIBUTE);
@@ -3128,6 +3262,15 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eEqualEClass = createEClass(EEQUAL);
     createEAttribute(eEqualEClass, EEQUAL__VAL);
+
+    ePropertyAssignmentValueEClass = createEClass(EPROPERTY_ASSIGNMENT_VALUE);
+
+    emapEClass = createEClass(EMAP);
+    createEReference(emapEClass, EMAP__MAP);
+
+    eMapEntryEClass = createEClass(EMAP_ENTRY);
+    createEAttribute(eMapEntryEClass, EMAP_ENTRY__KEY);
+    createEReference(eMapEntryEClass, EMAP_ENTRY__VALUE);
   }
 
   /**
@@ -3160,6 +3303,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     // Add supertypes to classes
     eFunctionEClass.getESuperTypes().add(this.getEValueExpression());
+    eFunctionEClass.getESuperTypes().add(this.getEPropertyAssignmentValue());
+    getInputEClass.getESuperTypes().add(this.getEFunction());
     getAttributeEClass.getESuperTypes().add(this.getEFunction());
     getPropertyEClass.getESuperTypes().add(this.getEFunction());
     eCapabilityDefinitionEClass.getESuperTypes().add(this.getEReqOrCap());
@@ -3168,12 +3313,14 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eMinLengthEClass.getESuperTypes().add(this.getEConstraint());
     eLengthEClass.getESuperTypes().add(this.getEConstraint());
     eValid_ValuesEClass.getESuperTypes().add(this.getEConstraint());
+    elistEClass.getESuperTypes().add(this.getEPropertyAssignmentValue());
     eInRangeEClass.getESuperTypes().add(this.getEConstraint());
     eLessOrEqualEClass.getESuperTypes().add(this.getEConstraint());
     eLessThanEClass.getESuperTypes().add(this.getEConstraint());
     eGreaterOrEqualEClass.getESuperTypes().add(this.getEConstraint());
     eGreaterThanEClass.getESuperTypes().add(this.getEConstraint());
     eEqualEClass.getESuperTypes().add(this.getEConstraint());
+    emapEClass.getESuperTypes().add(this.getEPropertyAssignmentValue());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rM_ModelEClass, RM_Model.class, "RM_Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3346,12 +3493,16 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEParameterDefinition_Parameter(), this.getEParameterDefinitionBody(), null, "parameter", null, 0, 1, EParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eParameterDefinitionBodyEClass, EParameterDefinitionBody.class, "EParameterDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEParameterDefinitionBody_Type(), this.getEDataType(), null, "type", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParameterDefinitionBody_Value(), this.getEValueExpression(), null, "value", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParameterDefinitionBody_Default(), this.getEValueExpression(), null, "default", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eValueExpressionEClass, EValueExpression.class, "EValueExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eFunctionEClass, EFunction.class, "EFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(getInputEClass, GetInput.class, "GetInput", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGetInput_Input(), this.getEParameterDefinition(), null, "input", null, 0, 1, GetInput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getAttributeEClass, GetAttribute.class, "GetAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGetAttribute_Attribute(), this.getGetAttributeBody(), null, "attribute", null, 0, 1, GetAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3443,6 +3594,15 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eEqualEClass, EEqual.class, "EEqual", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEEqual_Val(), ecorePackage.getEString(), "val", null, 0, 1, EEqual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(ePropertyAssignmentValueEClass, EPropertyAssignmentValue.class, "EPropertyAssignmentValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(emapEClass, org.sodalite.dsl.rM.EMAP.class, "EMAP", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEMAP_Map(), this.getEMapEntry(), null, "map", null, 0, -1, org.sodalite.dsl.rM.EMAP.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eMapEntryEClass, EMapEntry.class, "EMapEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEMapEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEMapEntry_Value(), this.getEPropertyAssignmentValue(), null, "value", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

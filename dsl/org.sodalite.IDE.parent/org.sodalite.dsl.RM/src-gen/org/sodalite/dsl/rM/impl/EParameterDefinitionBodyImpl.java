@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.RMPackage;
@@ -24,6 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionBodyImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionBodyImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionBodyImpl#getDefault <em>Default</em>}</li>
  * </ul>
@@ -32,6 +34,16 @@ import org.sodalite.dsl.rM.RMPackage;
  */
 public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container implements EParameterDefinitionBody
 {
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected EDataType type;
+
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -71,6 +83,51 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
   protected EClass eStaticClass()
   {
     return RMPackage.Literals.EPARAMETER_DEFINITION_BODY;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDataType getType()
+  {
+    if (type != null && type.eIsProxy())
+    {
+      InternalEObject oldType = (InternalEObject)type;
+      type = (EDataType)eResolveProxy(oldType);
+      if (type != oldType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, oldType, type));
+      }
+    }
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EDataType basicGetType()
+  {
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setType(EDataType newType)
+  {
+    EDataType oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, oldType, type));
   }
 
   /**
@@ -201,6 +258,9 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
+      case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
+        if (resolve) return getType();
+        return basicGetType();
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         return getValue();
       case RMPackage.EPARAMETER_DEFINITION_BODY__DEFAULT:
@@ -219,6 +279,9 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
+      case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
+        setType((EDataType)newValue);
+        return;
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         setValue((EValueExpression)newValue);
         return;
@@ -239,6 +302,9 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
+      case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
+        setType((EDataType)null);
+        return;
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         setValue((EValueExpression)null);
         return;
@@ -259,6 +325,8 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
+      case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
+        return type != null;
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         return value != null;
       case RMPackage.EPARAMETER_DEFINITION_BODY__DEFAULT:

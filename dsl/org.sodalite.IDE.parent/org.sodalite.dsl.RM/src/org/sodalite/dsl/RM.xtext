@@ -248,17 +248,23 @@ EParameterDefinition:
 	'}';
 
 EParameterDefinitionBody:
-	{EParameterDefinitionBody} (('value:' value=EValueExpression)? &
+	{EParameterDefinitionBody} (
+	('type:' type=[EDataType|EDataTypeName])? &
+	('value:' value=EValueExpression)? &
 	('default:' default=EValueExpression)?);
 
 EValueExpression:
 	{EValueExpression} STRING | EFunction;
 
 EFunction:
-	GetProperty | GetAttribute;
+	GetProperty | GetAttribute | GetInput;
+
+GetInput:
+	'get_input:' input=[EParameterDefinition]
+;
 
 GetAttribute:
-	'get_attribute' '{'
+	'get_attribute{'
 	attribute=GetAttributeBody
 	'}';
 
@@ -354,6 +360,20 @@ EGreaterThan:
 
 EEqual:
 	'equal:' val=STRING;
+	
+EPropertyAssignmentValue:
+	ELIST | EMAP | EFunction
+;
+
+EMAP:
+	"{"
+		map+=EMapEntry+
+	"}"
+;
+
+EMapEntry:
+	key=ID ":" value=EPropertyAssignmentValue
+;
 
 terminal QUALIFIED_NAME: //FIXME convert to data type rule, remove terminal
 	ID ('.' ID)+;

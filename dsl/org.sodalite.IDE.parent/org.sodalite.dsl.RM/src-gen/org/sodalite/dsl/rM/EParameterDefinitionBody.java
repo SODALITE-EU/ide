@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getType <em>Type</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getValue <em>Value</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getDefault <em>Default</em>}</li>
  * </ul>
@@ -24,6 +25,28 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface EParameterDefinitionBody extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' reference.
+   * @see #setType(EDataType)
+   * @see org.sodalite.dsl.rM.RMPackage#getEParameterDefinitionBody_Type()
+   * @model
+   * @generated
+   */
+  EDataType getType();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getType <em>Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Type</em>' reference.
+   * @see #getType()
+   * @generated
+   */
+  void setType(EDataType value);
+
   /**
    * Returns the value of the '<em><b>Value</b></em>' containment reference.
    * <!-- begin-user-doc -->

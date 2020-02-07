@@ -6,6 +6,7 @@ package org.sodalite.dsl.ui.contentassist;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -178,6 +179,24 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void completeGetPropertyBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::entity property");
     this.createEntityProposals(context, acceptor);
+  }
+  
+  @Override
+  public void completeEMapEntry_Key(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EMapEntry::key property");
+    this.createEditableCompletionProposal("map_key_name", "map_key_name", context, "Key name for map entry", acceptor);
+  }
+  
+  @Override
+  public void completeELIST_List(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for ELIST::list property");
+    this.createEditableCompletionProposal("\"value\"", "\"value\"", context, "Give a single String value or a comma separate list of String values", acceptor);
+  }
+  
+  @Override
+  public void complete_EMAP(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EMAP::map property");
+    this.createEditableCompletionProposal("{", "{", context, "Start a Map of key=value entries", acceptor);
   }
   
   protected void createEntityProposals(final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {

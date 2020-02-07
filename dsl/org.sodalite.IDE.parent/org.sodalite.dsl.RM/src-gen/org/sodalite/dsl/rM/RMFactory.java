@@ -393,6 +393,15 @@ public interface RMFactory extends EFactory
   EFunction createEFunction();
 
   /**
+   * Returns a new object of class '<em>Get Input</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Get Input</em>'.
+   * @generated
+   */
+  GetInput createGetInput();
+
+  /**
    * Returns a new object of class '<em>Get Attribute</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -625,6 +634,33 @@ public interface RMFactory extends EFactory
    * @generated
    */
   EEqual createEEqual();
+
+  /**
+   * Returns a new object of class '<em>EProperty Assignment Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EProperty Assignment Value</em>'.
+   * @generated
+   */
+  EPropertyAssignmentValue createEPropertyAssignmentValue();
+
+  /**
+   * Returns a new object of class '<em>EMAP</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EMAP</em>'.
+   * @generated
+   */
+  EMAP createEMAP();
+
+  /**
+   * Returns a new object of class '<em>EMap Entry</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EMap Entry</em>'.
+   * @generated
+   */
+  EMapEntry createEMapEntry();
 
   /**
    * Returns the package supported by this factory.

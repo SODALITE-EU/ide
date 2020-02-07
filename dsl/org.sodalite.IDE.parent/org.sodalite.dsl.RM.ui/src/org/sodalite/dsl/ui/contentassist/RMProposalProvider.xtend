@@ -3,13 +3,14 @@
  */
 package org.sodalite.dsl.ui.contentassist
 
-import java.util.Arrays
+
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import org.eclipse.xtext.RuleCall
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -173,6 +174,21 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	override void completeGetPropertyBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::entity property")
 		createEntityProposals (context, acceptor);
+	}
+	
+	override void completeEMapEntry_Key(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EMapEntry::key property")
+		createEditableCompletionProposal ("map_key_name", "map_key_name", context, "Key name for map entry", acceptor);
+	}
+	
+	override void completeELIST_List(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for ELIST::list property")
+		createEditableCompletionProposal ("\"value\"", "\"value\"", context, "Give a single String value or a comma separate list of String values", acceptor);
+	}
+	
+	override void complete_EMAP(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EMAP::map property")
+		createEditableCompletionProposal ("{", "{", context, "Start a Map of key=value entries", acceptor);
 	}
 	
 	protected def void createEntityProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor){

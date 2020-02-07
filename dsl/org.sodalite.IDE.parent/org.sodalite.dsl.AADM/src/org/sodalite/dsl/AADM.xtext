@@ -8,15 +8,21 @@
  * Contributors:
  *     Jesús Gorroñogoitia - Design and implementation
  *******************************************************************************/
-grammar org.sodalite.dsl.AADM with org.eclipse.xtext.common.Terminals
+//grammar org.sodalite.dsl.AADM with org.eclipse.xtext.common.Terminals
+grammar org.sodalite.dsl.AADM with org.sodalite.dsl.RM
 
-import "http://www.sodalite.org/dsl/RM" as rm
 generate aADM "http://www.sodalite.org/dsl/AADM"
+import "http://www.sodalite.org/dsl/RM" as rm
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 AADM_Model:
+	('inputs{'
+		inputs = EInputs
+	'}')? &
 	('node_templates{'
-	nodeTemplates=ENodeTemplates
+		nodeTemplates=ENodeTemplates
 	'}')?;
+
 
 ENodeTemplates:
 	{ENodeTemplates} (nodeTemplates+=ENodeTemplate)+;
@@ -30,38 +36,32 @@ ENodeTemplateBody:
 	('type:' type=QUALIFIED_NAME) &
 	('description:' description=STRING)? &
 	('properties{'
-	properties=EProperties
+	properties=EPropertyAssigments
 	'}')? &
 	('attributes{'
-	atributes=EAttributes
+	atributes=EAttributeAssigments
 	'}')? &
 	('requirements{'
-	requirements=ERequirements
+	requirements=ERequirementAssignments
 	'}')?;
 
-ERequirements:
-	{ERequirements} (requirements+=ERequirementAssignment)*;
+ERequirementAssignments:
+	{ERequirementAssignments} (requirements+=ERequirementAssignment)*;
 
 ERequirementAssignment:
 	name=ID '{'
 	('node:' node=[ENodeTemplate|ID])
 	'}';
 
-EAttributes:
-	{EAttributes} (attributes+=EAttributeAssignment)*;
+EAttributeAssigments:
+	{EAttributeAssigments} (attributes+=EAttributeAssignment)*;
 
 EAttributeAssignment:
 	name=ID ':' value=STRING;
 
-EProperties:
-	{EProperties} (properties+=EPropertyAssignment)*;
+EPropertyAssigments:
+	{EPropertyAssigments} (properties+=EPropertyAssignment)*;
 
 EPropertyAssignment:
-	name=ID ':' value=STRING;
+	name=ID ':' value=EPropertyAssignmentValue;
 
-terminal QUALIFIED_NAME:
-	ID ('.' ID)+;
-
-@Override
-terminal ID:
-	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '0'..'9')*;

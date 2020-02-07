@@ -1,0 +1,282 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+node_types:
+
+  sodalite.nodes.DockerHost:
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      registry_ip:
+        type: string
+        description: IP of the SODALITE docker registry
+        required: true
+        default: localhost
+    attributes:
+      registry_ip:
+        type: string
+        description: IP of the SODALITE docker registry
+      ansible_ip:        
+        type: string
+        description: ansible ipv4
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            registry_ip:          { default: { get_property: [ SELF, registry_ip ] } }
+            public_ipv4_address:  { default:  { get_attribute: [ SELF, host, public_address ] } }            
+          implementation:
+            primary: playbooks/docker/create_docker_host.yml
+        delete:
+          inputs:
+            registry_ip:          { default: { get_property: [ SELF, registry_ip ] } }
+          implementation:
+            primary: playbooks/docker/destroy_docker_host.yml
+    capabilities:
+      host:
+        type: tosca.capabilities.Compute
+        valid_source_types: [ sodalite.nodes.DockerizedComponent ]
+
+  sodalite.nodes.DockerizedComponent:
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      image_name:
+        type: string
+        description: The name of the image on the host
+        required: true
+      alias:
+        type: string
+        description: Alias name for docker container
+        required: false 
+      command:
+        type: list
+        description: Commands list for starting the container
+        default: ""
+        required: false
+      env:
+        type: map
+        description: Map for docker enviroment variables key-value dictionary
+        required: false
+      ports:
+        type: list
+        description: A list of port bindings for the docker container "exposed:internal" like "8081:8080"
+        required: true
+      exposed_ports:
+        type: list
+        description: Exposed ports of the container like "8081" 
+        required: true
+      volumes:
+        type: list
+        description: A list of mounted volumes for the docker container "host_path:container_path" like ""/tmp/docker:/tmp""
+        required: false
+      restart_policy:
+        type: string
+        description: Restart policy [no, on-failure, always, unless-stopped]
+        default: "no"
+        required: false 
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            registry_ip:    { default: { get_attribute: [ SELF, host, registry_ip ] } }
+            ansible_ip:     { default: { get_attribute: [ SELF, host, ansible_ip ] } }
+            image_name:     { default: { get_property: [ SELF, image_name ] } }
+            alias:          { default: { get_property: [ SELF, alias ] } }
+            command:        { default: { get_property: [ SELF, command ] } }
+            env:            { default: { get_property: [ SELF, env ] } }
+            ports:          { default: { get_property: [ SELF, ports ] } }
+            exposed_ports:  { default: { get_property: [ SELF, exposed_ports ] } }
+            volumes:        { default: { get_property: [ SELF, volumes ] } }
+            restart_policy: { default: { get_property: [ SELF, restart_policy ] } }            
+          implementation:
+            primary: playbooks/docker/dockerized_component_deploy.yml
+        delete:
+          inputs:
+            alias:          { default: { get_property: [ SELF, alias ] } }
+          implementation:
+            primary: playbooks/docker/dockerized_component_undeploy.yml
+    requirements:
+      - host:
+          capability: tosca.capabilities.Compute
+          node: sodalite.nodes.DockerHost
+          relationship: tosca.relationships.HostedOn
+
+  sodalite.nodes.OpenStack.SecurityRule: 
+    derived_from: tosca.nodes.Root
+    properties:  
+      protocol: 
+        type: string
+        required: true
+        default: tcp
+        constraints:
+          - valid_values: [ udp, tcp, icmp ]
+      port_range_min:  
+        type: PortDef
+        required: true
+      port_range_max:
+        type: PortDef
+        required: true
+      remote_ip_prefix:
+        type: string
+        required: true
+        default: "0.0.0.0/0"
+
+
+  sodalite.nodes.OpenStack.SecurityRules:
+    derived_from: tosca.nodes.Root
+    properties:
+      group_name:
+        type: string
+        description: Name of the security group in openstack.
+        required: true
+      group_description:
+        type: string
+        description: Description of the security group in openstack.
+        required: true
+      ports:
+        type: map
+        required: false
+        constraints:
+          - min_length: 1
+        entry_schema:
+          type: sodalite.nodes.OpenStack.SecurityRule   
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            group_name:           { default: { get_property: [ SELF, group_name         ] } }
+            group_description:    { default: { get_property: [ SELF, group_description  ] } }
+            ports:                { default: { get_property: [ SELF, ports  ] } } 
+          implementation: playbooks/openstack/security-rule/create.yml
+        delete:
+          inputs:
+            group_name:           { default: { get_property: [ SELF, group_name         ] } }
+          implementation: playbooks/openstack/security-rule/delete.yml
+
+  sodalite.nodes.OpenStack.VM:
+    derived_from: tosca.nodes.Compute
+    properties:
+      name:
+        type: string
+        description: Name that should be given to the VM in OpenStack
+      image:
+        type: string
+        description: OpenStack image id (image names are not accepted)
+      flavor:
+        type: string
+        description: OpenStack flavor id (flavor names are not accepted)
+      network:
+        type: string
+        description: OpenStack network id (network names are not accepted)
+      security_groups:
+        type: string
+        description: OpenStack names of the security groups to which the instance should be added.Comma separated string.
+    attributes:
+      id:
+        type: string
+        description: OpenStack id of the VM
+      private_address:
+        type: string
+        description: Private ipv4
+      public_address:
+        type: string
+        description: Public ipv4
+      ansible_ip:        
+        type: string
+        description: ansible ipv4
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            vm_name:  { default: { get_property: [ SELF, name     ] } }
+            image:    { default: { get_property: [ SELF, image    ] } }
+            flavor:   { default: { get_property: [ SELF, flavor   ] } }
+            network:  { default: { get_property: [ SELF, network  ] } }
+            security_groups:  { default: { get_property: [ SELF, security_groups ] } }
+            key_name: { default: { get_property: [ SELF, key_name ] } }
+          implementation: playbooks/openstack/vm/create.yml
+        delete:
+          inputs:
+            id: { default: { get_attribute: [ SELF, id ] } }
+          implementation: playbooks/openstack/vm/delete.yml
+    requirements:
+      - protected_by:
+          capability: sodalite.nodes.OpenStack.SecurityRules
+          relationship: tosca.relationships.DependsOn
+
+topology_template:
+
+  inputs:
+    # ssh key for OS access
+    ssh-key-name:
+      type: string
+
+    docker-registry-ip:
+      type: string
+
+  node_templates:
+
+    security-rules-snow:
+      type: sodalite.nodes.OpenStack.SecurityRules
+      properties:
+        group_name: snow
+        group_description: "Snow UC security group"
+        ports:
+            http_port:
+              protocol: tcp
+              port_range_min: 80
+              port_range_max: 80
+              remote_ip_prefix: 0.0.0.0/0
+            component_ports:
+              protocol: tcp
+              port_range_min: 8080
+              port_range_max: 8081
+              remote_ip_prefix: 0.0.0.0/0
+
+    vm:
+      type: sodalite.nodes.OpenStack.VM
+      properties:
+        name: snow-vm1
+        image: centos7
+        flavor: m1.small
+        network: orchestrator-net
+        security_groups: default,snow
+        key_name:  { get_input: ssh-key-name }
+      requirements:
+        - protected_by: security-rules-snow
+
+    docker-host:
+      type: sodalite.nodes.DockerHost
+      properties:
+        registry_ip: { get_input: docker-registry-ip }
+      requirements:
+        - host: vm
+
+    skyline-extractor:
+      type: sodalite.nodes.DockerizedComponent
+      properties:
+        image_name: snow-skyline-extractor
+        ports: 
+          - "8080:8080"
+        exposed_ports: 
+          - 8080
+        volumes: 
+          - "/tmp/docker:/tmp"
+      requirements:
+        - host: docker-host
+
+    skyline-alignment:
+      type: sodalite.nodes.DockerizedComponent
+      properties:
+        image_name: snow-skyline-alignment
+        ports: 
+          - "8081:8080"
+          - "80:8080"
+        exposed_ports: 
+          - 8080
+        volumes: 
+          - "/tmp/docker:/tmp"
+      requirements:
+        - host: docker-host

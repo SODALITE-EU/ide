@@ -3,8 +3,12 @@
  */
 package org.sodalite.dsl.ide;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.eclipse.xtext.util.Modules2;
+import org.sodalite.dsl.AADMRuntimeModule;
 import org.sodalite.dsl.AADMStandaloneSetup;
+import org.sodalite.dsl.ide.AADMIdeModule;
 
 /**
  * Initialization support for running Xtext languages as language servers.
@@ -13,7 +17,8 @@ import org.sodalite.dsl.AADMStandaloneSetup;
 public class AADMIdeSetup extends AADMStandaloneSetup {
   @Override
   public Injector createInjector() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nType mismatch: cannot convert from AADMRuntimeModule to Module");
+    AADMRuntimeModule _aADMRuntimeModule = new AADMRuntimeModule();
+    AADMIdeModule _aADMIdeModule = new AADMIdeModule();
+    return Guice.createInjector(Modules2.mixin(_aADMRuntimeModule, _aADMIdeModule));
   }
 }

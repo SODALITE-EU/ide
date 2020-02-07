@@ -30,11 +30,9 @@ import org.sodalite.dsl.kb_reasoner_client.KBReasoner
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute
 import org.sodalite.dsl.kb_reasoner_client.types.Property
 import org.sodalite.dsl.kb_reasoner_client.types.Requirement
-import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
-import org.sodalite.dsl.aADM.impl.EPropertiesImpl
-import org.eclipse.emf.ecore.impl.EAttributeImpl
-import org.sodalite.dsl.aADM.impl.EAttributesImpl
-import org.sodalite.dsl.aADM.impl.ERequirementsImpl
+import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl
+import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl
+import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl
 
 /**
@@ -155,7 +153,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var resourceId = ""
 		if (model instanceof ENodeTemplateBodyImpl)
 			resourceId = (model as ENodeTemplateBodyImpl).type
-		else if (model instanceof EAttributesImpl)
+		else if (model instanceof EAttributeAssigmentsImpl)
 			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
 
 		if (resourceId !== null){
@@ -188,7 +186,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var resourceId = ""
 		if (model instanceof ENodeTemplateBodyImpl)
 			resourceId = (model as ENodeTemplateBodyImpl).type
-		else if (model instanceof EPropertiesImpl)
+		else if (model instanceof EPropertyAssigmentsImpl)
 			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
 		
 		if (resourceId !== null){
@@ -222,7 +220,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var resourceId = ""
 		if (model instanceof ENodeTemplateBodyImpl)
 			resourceId = (model as ENodeTemplateBodyImpl).type
-		else if (model instanceof ERequirementsImpl)
+		else if (model instanceof ERequirementAssignmentsImpl)
 			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
 		
 		if (resourceId !== null){
@@ -269,7 +267,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		return
 	}
 
-	protected def void createNonEditableCompletionProposal(String proposalText, String displayText,
+	override protected def void createNonEditableCompletionProposal(String proposalText, String displayText,
 		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
 		if (proposal instanceof ConfigurableCompletionProposal) {
@@ -280,7 +278,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		acceptor.accept(proposal)
 	}
 
-	protected def void createEditableCompletionProposal(String proposalText, String displayText,
+	override protected def void createEditableCompletionProposal(String proposalText, String displayText,
 		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
 		if (proposal instanceof ConfigurableCompletionProposal) {

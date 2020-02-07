@@ -46,6 +46,8 @@ import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.ELength;
 import org.sodalite.dsl.rM.ELessOrEqual;
 import org.sodalite.dsl.rM.ELessThan;
+import org.sodalite.dsl.rM.EMAP;
+import org.sodalite.dsl.rM.EMapEntry;
 import org.sodalite.dsl.rM.EMaxLength;
 import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.ENodeType;
@@ -75,6 +77,7 @@ import org.sodalite.dsl.rM.EValid_Values;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetAttributeBody;
+import org.sodalite.dsl.rM.GetInput;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RMPackage;
@@ -191,6 +194,12 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.ELESS_THAN:
 				sequence_ELessThan(context, (ELessThan) semanticObject); 
 				return; 
+			case RMPackage.EMAP:
+				sequence_EMAP(context, (EMAP) semanticObject); 
+				return; 
+			case RMPackage.EMAP_ENTRY:
+				sequence_EMapEntry(context, (EMapEntry) semanticObject); 
+				return; 
 			case RMPackage.EMAX_LENGTH:
 				sequence_EMaxLength(context, (EMaxLength) semanticObject); 
 				return; 
@@ -277,6 +286,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RMPackage.GET_ATTRIBUTE_BODY:
 				sequence_GetAttributeBody(context, (GetAttributeBody) semanticObject); 
+				return; 
+			case RMPackage.GET_INPUT:
+				sequence_GetInput(context, (GetInput) semanticObject); 
 				return; 
 			case RMPackage.GET_PROPERTY:
 				sequence_GetProperty(context, (GetProperty) semanticObject); 
@@ -732,6 +744,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * Contexts:
 	 *     ELIST returns ELIST
+	 *     EPropertyAssignmentValue returns ELIST
 	 *
 	 * Constraint:
 	 *     list+=STRING
@@ -794,6 +807,40 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getELessThanAccess().getValSTRINGTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EPropertyAssignmentValue returns EMAP
+	 *     EMAP returns EMAP
+	 *
+	 * Constraint:
+	 *     map+=EMapEntry+
+	 */
+	protected void sequence_EMAP(ISerializationContext context, EMAP semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EMapEntry returns EMapEntry
+	 *
+	 * Constraint:
+	 *     (key=ID value=EPropertyAssignmentValue)
+	 */
+	protected void sequence_EMapEntry(ISerializationContext context, EMapEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EMAP_ENTRY__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EMAP_ENTRY__KEY));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EMAP_ENTRY__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EMAP_ENTRY__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEMapEntryAccess().getKeyIDTerminalRuleCall_0_0(), semanticObject.getKey());
+		feeder.accept(grammarAccess.getEMapEntryAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -957,7 +1004,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EParameterDefinitionBody returns EParameterDefinitionBody
 	 *
 	 * Constraint:
-	 *     (value=EValueExpression | default=EValueExpression)*
+	 *     (type=[EDataType|EDataTypeName] | value=EValueExpression | default=EValueExpression)*
 	 */
 	protected void sequence_EParameterDefinitionBody(ISerializationContext context, EParameterDefinitionBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1258,6 +1305,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EValueExpression returns GetAttribute
 	 *     EFunction returns GetAttribute
 	 *     GetAttribute returns GetAttribute
+	 *     EPropertyAssignmentValue returns GetAttribute
 	 *
 	 * Constraint:
 	 *     attribute=GetAttributeBody
@@ -1268,7 +1316,28 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.GET_ATTRIBUTE__ATTRIBUTE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGetAttributeAccess().getAttributeGetAttributeBodyParserRuleCall_2_0(), semanticObject.getAttribute());
+		feeder.accept(grammarAccess.getGetAttributeAccess().getAttributeGetAttributeBodyParserRuleCall_1_0(), semanticObject.getAttribute());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EValueExpression returns GetInput
+	 *     EFunction returns GetInput
+	 *     GetInput returns GetInput
+	 *     EPropertyAssignmentValue returns GetInput
+	 *
+	 * Constraint:
+	 *     input=[EParameterDefinition|ID]
+	 */
+	protected void sequence_GetInput(ISerializationContext context, GetInput semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.GET_INPUT__INPUT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.GET_INPUT__INPUT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGetInputAccess().getInputEParameterDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(RMPackage.Literals.GET_INPUT__INPUT, false));
 		feeder.finish();
 	}
 	
@@ -1290,6 +1359,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EValueExpression returns GetProperty
 	 *     EFunction returns GetProperty
 	 *     GetProperty returns GetProperty
+	 *     EPropertyAssignmentValue returns GetProperty
 	 *
 	 * Constraint:
 	 *     property=GetPropertyBody
