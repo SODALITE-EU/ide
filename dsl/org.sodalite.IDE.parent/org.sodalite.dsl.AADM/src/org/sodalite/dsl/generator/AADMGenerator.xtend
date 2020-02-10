@@ -22,6 +22,14 @@ import java.util.HashMap
 import java.util.Map
 import org.sodalite.dsl.aADM.ERequirementAssignment
 import org.eclipse.emf.ecore.EObject
+import org.sodalite.dsl.rM.EInputs
+import org.sodalite.dsl.rM.EParameterDefinition
+import org.sodalite.dsl.rM.ELIST
+import org.sodalite.dsl.rM.EMAP
+import org.sodalite.dsl.rM.EFunction
+import org.sodalite.dsl.rM.GetInput
+import org.sodalite.dsl.rM.EMapEntry
+import org.sodalite.dsl.rM.ESTRING
 
 /**
  * Generates code from your model files on save.
@@ -30,6 +38,7 @@ import org.eclipse.emf.ecore.EObject
  */
 class AADMGenerator extends AbstractGenerator {
 	var int template_counter = 1
+	var int input_counter = 1
 	var int property_counter = 1
 	var int requirement_counter = 1
 	var int parameter_counter = 1
@@ -39,6 +48,7 @@ class AADMGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		template_counter = 1
+		input_counter = 1
 		property_counter = 1
 		requirement_counter = 1
 		parameter_counter = 1
@@ -51,12 +61,11 @@ class AADMGenerator extends AbstractGenerator {
 	}
 		
 	def compileAADM(Resource r) '''
-	# baseURI: https://www.sodalite.eu/ontologies/exchange0/
+	# baseURI: https://www.sodalite.eu/ontologies/exchange/«r.getName()»/
 	# imports: https://www.sodalite.eu/ontologies/exchange/
 	
-	@prefix : <https://www.sodalite.eu/ontologies/exchange0/> .
+	@prefix : <https://www.sodalite.eu/ontologies/exchange/«r.getName()»/> .
 	@prefix exchange: <https://www.sodalite.eu/ontologies/exchange/> .
-	@prefix exchange0: <https://www.sodalite.eu/ontologies/exchange0#> .
 	@prefix owl: <http://www.w3.org/2002/07/owl#> .
 	@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 	@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -72,6 +81,22 @@ class AADMGenerator extends AbstractGenerator {
 	  rdf:type exchange:AADM ;
 	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
 	.
+	
+	«FOR p:r.allContents.toIterable.filter(EParameterDefinition)»
+		«p.compileInput»
+	«ENDFOR»
+	
+	«FOR e:r.allContents.toIterable.filter(EMapEntry)»
+		«IF  e.value instanceof ESTRING»
+			«e.compile»
+		«ENDIF»
+	«ENDFOR»
+	
+	«FOR e:r.allContents.toIterable.filter(EMapEntry)»
+		«IF  e.value instanceof EMAP»
+			«e.compile»
+		«ENDIF»	
+	«ENDFOR»
 
  	«FOR p:r.allContents.toIterable.filter(EPropertyAssignment)»
 	«p.compile»
@@ -85,6 +110,42 @@ class AADMGenerator extends AbstractGenerator {
 	«f.compile»
 	«ENDFOR»
 
+	'''
+	
+	def compileInput (EParameterDefinition p) '''
+	«IF p.eContainer !== null && p.eContainer instanceof EInputs»
+	«putParameterNumber(p, "type", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "type" ;
+	  exchange:value "«p.parameter.type.name»" ;
+	.
+	:Input_«input_counter++»
+	  rdf:type exchange:Input ;
+	  exchange:name "«p.name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ;
+	.
+	«ENDIF»
+	'''
+	
+	def compile (EMapEntry e) '''
+	«IF  e.value instanceof ESTRING»
+	«putParameterNumber(e, "map", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«e.key»" ;
+	  exchange:value "«(e.value as ESTRING).string»" ;
+	.
+	«ELSEIF e.value instanceof EMAP»
+	«putParameterNumber(e, "map", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«e.key»" ;
+	  «FOR me:(e.value as EMAP).map»
+	  exchange:hasParameter :Parameter_«getParameterNumber(me, "map")» ;
+	  «ENDFOR»
+	.
+	«ENDIF»
 	'''
 	
 	def compile(ENodeTemplate n) '''
@@ -113,7 +174,21 @@ class AADMGenerator extends AbstractGenerator {
 	:Property_«property_counter++»
 	  rdf:type exchange:Property ;
 	  exchange:name "«p.name»" ;
-	  exchange:value "«p.value»" ;
+	  «IF p.value instanceof ELIST»
+	  		«FOR entry:(p.value as ELIST).list»
+	  		exchange:listValue "«entry»" ;
+	  		«ENDFOR»
+	  «ELSEIF p.value instanceof EMAP»
+	    «FOR entry:(p.value as EMAP).map»
+	    	exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
+	    «ENDFOR»	  
+	  «ELSEIF p.value instanceof EFunction»
+	  	«IF p.value instanceof GetInput»
+	  	exchange:value "{ get_input: «(p.value as GetInput).input.name» }" ;
+	  	«ENDIF»
+	  «ELSE»
+	  	exchange:value "«(p.value as ESTRING).string»" ;
+	  «ENDIF»
 	.
 	'''
 	
@@ -131,19 +206,15 @@ class AADMGenerator extends AbstractGenerator {
 	}
 	
 	def compile (ERequirementAssignment r) '''
-	«putParameterNumber(r, "node", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "node" ;
-	  exchange:value "«r.node.name»" ;
-	.
 	«requirement_numbers.put(r, requirement_counter)»
 	:Requirement_«requirement_counter++»
 	  rdf:type exchange:Requirement ;
 	  exchange:name "«r.name»" ;
-	  exchange:hasParameter :Parameter_«getParameterNumber(r, "node")» ;
+	  exchange:value «r.node.name» ;
 	.
 	'''
+	
+	
 		
 	def getFilename(URI uri) {
 		var filename = uri.toString
@@ -151,4 +222,7 @@ class AADMGenerator extends AbstractGenerator {
 		return filename 
 	}
 		
+	def String getName(Resource resource){
+		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.'))
+	}
 }

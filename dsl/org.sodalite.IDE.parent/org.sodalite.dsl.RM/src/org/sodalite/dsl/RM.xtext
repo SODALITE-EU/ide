@@ -340,7 +340,7 @@ EValid_Values:
 	'valid_values:' val=ELIST;
 
 ELIST:
-	list+=STRING ("," STRING)*
+	'['list+=STRING ("," list+=STRING)* ']'
 ;
 
 EInRange:
@@ -362,7 +362,11 @@ EEqual:
 	'equal:' val=STRING;
 	
 EPropertyAssignmentValue:
-	ELIST | EMAP | EFunction
+	ESTRING | ELIST | EMAP | EFunction
+;
+
+ESTRING:
+	string = STRING
 ;
 
 EMAP:

@@ -337,6 +337,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPropertyAssignmentValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ESTRING" eSuperTypes="#//EPropertyAssignmentValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EMAP" eSuperTypes="#//EPropertyAssignmentValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="map" upperBound="-1" eType="#//EMapEntry"
         containment="true"/>
