@@ -1,4 +1,4 @@
-package org.sodalite.dsl.ui.handlers;
+package org.sodalite.dsl.ui.validation;
 
 public class AADMValidationIssue {
 	String message;

@@ -1,5 +1,6 @@
-package org.sodalite.dsl.ui.validation;
+package org.sodalite.dsl.ui.backend;
 
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,12 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import javax.inject.Inject;
-
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.commands.IHandler;
-import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -27,12 +23,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.UISynchronizer;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
@@ -56,55 +50,54 @@ import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
-import org.sodalite.dsl.ui.handlers.AADMValidationIssue;
+import org.sodalite.dsl.ui.validation.AADMDiagnostic;
+import org.sodalite.dsl.ui.validation.AADMValidationIssue;
 
 import com.google.common.collect.Lists;
 
-public class AADMSaveHandler implements IHandler {
+public class BackendProxy {
 	private MarkerCreator markerCreator;
 	private MarkerTypeProvider markerTypeProvider;
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
-	Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	KBSaveReportData saveReport = null;
+	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+	private KBSaveReportData saveReport = null;
+	private boolean deploymentSucceded = true;
 	
 	//TODO Configure KBReasonerClient endpoint from preference page information
-	KBReasonerClient kbclient = new KBReasonerClient();
-
-	@Override
-	public void addHandlerListener(IHandlerListener handlerListener) {
-		// TODO Auto-generated method stub
+	private KBReasonerClient kbclient = new KBReasonerClient();
+	
+	public void processSaveAADM(ExecutionEvent event) throws IOException {
+		//Return selected resource
+		IFile file = getSelectedFile();
+		String filename = file.getName().substring(0, file.getName().indexOf("."));
+		IProject project = getProject (file);
+		//Get serialize AADM model in Turtle
+		String aadmTTL = readTurtle(filename, project);
+		
+		//Send model to the KB
+		saveAADM (aadmTTL, filename, event);
 	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
+	
+	public void processDeployAADM(ExecutionEvent event) throws IOException {
+		//Return selected resource
+		IFile file = getSelectedFile();
+		IProject project = getProject (file);
+		//Get serialize AADM model in Turtle
+		String filename = file.getName().substring(0, file.getName().indexOf("."));
+		String aadmTTL = readTurtle(filename, project);
+		
+		//Deploy AADM model
+		deployAADM (aadmTTL, filename, event);
 	}
-
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		try {
-			//Return selected resource
-			IFile file = getSelectedFile();
-			IProject project = getProject (file);
-			//Get serialize AADM model in Turtle
-			String filename = file.getName().substring(0, file.getName().indexOf("."));
-			IFile turtle = project.getFile("src-gen/" + filename + ".ttl");
-			String turtle_path = turtle.getLocationURI().toString();
-			turtle_path = turtle_path.substring(turtle_path.indexOf("/"));
-			//Send turtle to KB
-			Path aadm_path = FileSystems.getDefault().getPath(turtle_path);
-			String aadmTTL = new String(Files.readAllBytes (aadm_path));
-			String submissionId = filename;
-			
-			//Send model to the KB
-			saveAADM (aadmTTL, submissionId, event);
-			
-		}catch (Exception ex) {
-			ex.printStackTrace();
-			MessageDialog.openError(parent, "Save AADM Error", "There were an error reported by the KB:\n" + ex.getMessage());
-		}
-		return null;
+	
+	private String readTurtle(String filename, IProject project) throws IOException {
+		IFile turtle = project.getFile("src-gen/" + filename + ".ttl");
+		String turtle_path = turtle.getLocationURI().toString();
+		turtle_path = turtle_path.substring(turtle_path.indexOf("/"));
+		Path aadm_path = FileSystems.getDefault().getPath(turtle_path);
+		String aadmTTL = new String(Files.readAllBytes (aadm_path));
+		return aadmTTL;
 	}
 
 	private void saveAADM(String aadmTTL, String submissionId, ExecutionEvent event) {
@@ -114,7 +107,40 @@ public class AADMSaveHandler implements IHandler {
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
-						notifyADDMSave (event);
+						notifyADDMSaved (event);
+					}
+				});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		job.setPriority(Job.SHORT);
+		job.schedule();
+	}
+	
+	private void deployAADM(String aadmTTL, String submissionId, ExecutionEvent event) {
+		Job job = Job.create("Deploy AADM", (ICoreRunnable) monitor -> {
+			try {
+				// Save AADM model
+				saveReport = kbclient.saveAADM(aadmTTL, submissionId);
+				
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						notifyADDMSaved (event);
+					}
+				});
+				
+				// TODO Ask AADM JSON serialization to KB Reasoner: getAADM: JSON
+				// TODO Ask IaC Blueprint Builder to build AADM JSON: buildIaC (Json AADM): blueprint-token
+				// TODO Ask xOpera to deploy the blueprint: deploy (blueprint-token, inputs): session-token
+				// TODO Ask xOpera deployment status: info/status (session-token): status JSON
+				// Upon completion, show dialog
+				
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						notifyADDMDeployed (event);
 					}
 				});
 			} catch (Exception e) {
@@ -125,7 +151,7 @@ public class AADMSaveHandler implements IHandler {
 		job.schedule();
 	}
 
-	protected void notifyADDMSave(ExecutionEvent event) {
+	protected void notifyADDMSaved(ExecutionEvent event) {
 		//Manage returned recommendation as validation issues
 		//TODO Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && saveReport.hasErrors()) {
@@ -135,6 +161,16 @@ public class AADMSaveHandler implements IHandler {
 		}else {
 			MessageDialog.openInformation(parent,
 				"Save AADM", "The selected AADM model has been successfully store in the KB with IRI:\n" + saveReport.getIRI());
+		}
+	}
+	
+	protected void notifyADDMDeployed(ExecutionEvent event) {
+		//TODO Check AADM model has been deployed correctly
+		if (!deploymentSucceded) {
+			MessageDialog.openError(parent, "Deploy AADM", "The selected AADM model could not be deployed");
+		}else {
+			MessageDialog.openInformation(parent,
+				"Save AADM", "The selected AADM model has been successfully deployed into the Sodalite backend");
 		}
 	}
 
@@ -280,24 +316,6 @@ public class AADMSaveHandler implements IHandler {
 		}
 		return file;
 	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Validate AADM before enabling
-		return true;
-	}
-
-	@Override
-	public boolean isHandled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public void removeHandlerListener(IHandlerListener handlerListener) {
-		// TODO Auto-generated method stub
-
-	}
 	
 	protected static class ListBasedMarkerAcceptor implements IAcceptor<Issue> {
 		private final List<Issue> result;
@@ -312,5 +330,4 @@ public class AADMSaveHandler implements IHandler {
 				result.add(issue);
 		}
 	}
-
 }
