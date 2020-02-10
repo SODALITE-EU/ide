@@ -23,6 +23,9 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.Node;
@@ -115,5 +118,36 @@ class KBReasonerTest {
 		assertFalse (report.hasErrors());
 		assertNotNull (report.getIRI());
 	}
+	
+	@Test
+	void testGetAADM() throws Exception{
+		String aadmIRI = "https://www.sodalite.eu/ontologies/workspace/1/snow/-AADM_untsf9kuv3hijfp2roqbri4quv";
+		String json = kbclient.getAADM(aadmIRI);
+		assertNotNull(json);
+	}
+	
+	@Test
+	void testAskIaCBuilderToRegisterAADM() throws Exception {
+		Path aadm_json_path = FileSystems.getDefault().getPath("src/test/resources/snow.json");
+		String aadm_json = new String(Files.readAllBytes (aadm_json_path));
+		IaCBuilderAADMRegistrationReport report = kbclient.askIaCBuilderToRegisterAADM(aadm_json);
+		assertNotNull (report.getToken());
+	}
+	
+	@Test
+	void testDeployAADM() throws Exception {
+		Path inputs_json_path = FileSystems.getDefault().getPath("src/test/resources/inputs.yaml");
+		String blueprint_token = "070132fd-5e61-4c6c-87f9-74474b891efa";
+		DeploymentReport report = kbclient.deployAADM(inputs_json_path, blueprint_token);
+		assertNotNull (report.getSession_token());
+	}
+	
+	@Test
+	void testGetAADMDeploymentStatus() throws Exception {
+		String session_token = "d892456a-5db1-4656-b896-ed2389c8639f";
+		DeploymentStatus status = kbclient.getAADMDeploymentStatus(session_token);
+		assertNotNull (status);
+	}
+
 
 }

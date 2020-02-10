@@ -11,12 +11,17 @@
 package org.sodalite.dsl.kb_reasoner_client;
 
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
@@ -24,6 +29,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -45,51 +52,53 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class KBReasonerClient implements KBReasoner {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private RestTemplate restTemplate;
-	private final String SERVER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
+	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
+	private final String IaC_URI = "http://154.48.185.202:8080/";
+	private final String xOPERA_URI = "http://154.48.185.206:5000/";
 
 	public KBReasonerClient() {
 		restTemplate = new RestTemplate();
 	}
 
 	public NodeData getNodes() throws Exception {
-		String url = SERVER_URI + "nodes";
+		String url = KB_REASONER_URI + "nodes";
 		return getJSONObjectForType(NodeData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public AttributeData getAttributes(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = SERVER_URI + "attributes?resource=" + resourceId;
+		String url = KB_REASONER_URI + "attributes?resource=" + resourceId;
 		return getJSONObjectForType(AttributeData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public CapabilityData getCapabilities(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = SERVER_URI + "capabilities?resource=" + resourceId;
+		String url = KB_REASONER_URI + "capabilities?resource=" + resourceId;
 		return getJSONObjectForType(CapabilityData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public InterfaceData getInterfaces(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = SERVER_URI + "interfaces?resource=" + resourceId;
+		String url = KB_REASONER_URI + "interfaces?resource=" + resourceId;
 		return getJSONObjectForType(InterfaceData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public PropertyData getProperties(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = SERVER_URI + "properties?resource=" + resourceId;
+		String url = KB_REASONER_URI + "properties?resource=" + resourceId;
 		return getJSONObjectForType(PropertyData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public RequirementData getRequirements(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = SERVER_URI + "requirements?resource=" + resourceId;
+		String url = KB_REASONER_URI + "requirements?resource=" + resourceId;
 		return getJSONObjectForType(RequirementData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception {
 		Assert.notNull(requirementId, "Pass a not null requirementId");
 		Assert.notNull(nodeType, "Pass a not null nodeType");
-		String url = SERVER_URI + "valid-requirement-nodes?requirement=" + requirementId + "&nodeType=" + nodeType;
+		String url = KB_REASONER_URI + "valid-requirement-nodes?requirement=" + requirementId + "&nodeType=" + nodeType;
 		return getJSONObjectForType(ValidRequirementNodeData.class, new URI(url), HttpStatus.OK);
 	}
 
@@ -97,7 +106,7 @@ public class KBReasonerClient implements KBReasoner {
 	public KBSaveReportData saveAADM(String aadmTTL, String submissionId) throws Exception{
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		Assert.isTrue(!submissionId.isEmpty(), "SubmissionId can neither be null nor empty");
-		String url = SERVER_URI + "saveAADM";
+		String url = KB_REASONER_URI + "saveAADM";
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -128,6 +137,63 @@ public class KBReasonerClient implements KBReasoner {
 		
 		return report;
 	}
+	
+	@Override
+	public String getAADM(String aadmIRI) throws Exception {
+		Assert.notNull(aadmIRI, "Pass a not null aadmIRI");
+		String url = KB_REASONER_URI + "aadm?aadmIRI=" + aadmIRI;
+		return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
+	}
+	
+	@Override
+	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String aadm_json) throws Exception{
+		Assert.notNull(aadm_json, "Pass a not null aadm_json");
+		String url = IaC_URI + "parse";
+		return postObjectAndReturnAnotherType (aadm_json, IaCBuilderAADMRegistrationReport.class, new URI(url), HttpStatus.OK);
+	}
+	
+	@Override
+	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token) throws Exception{
+		Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
+		Assert.notNull(blueprint_token, "Pass a not null blueprint_token");
+		String url = xOPERA_URI + "deploy/" + blueprint_token;
+		LinkedMultiValueMap<String, Object> parts = 
+		          new LinkedMultiValueMap<String, Object>();
+		
+		Resource inputs_yaml = new ByteArrayResource(Files.readAllBytes(inputs_yaml_path)){
+            @Override
+            public String getFilename(){
+                return inputs_yaml_path.getFileName().toString();
+            }
+        };
+		
+		HttpHeaders xmlHeaders = new HttpHeaders();
+        xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
+        HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
+		
+		parts.add("inputs_file", fileEntity);
+		
+		return sendMultipartFormDataMessage(new URI(url), DeploymentReport.class, parts, HttpMethod.POST, HttpStatus.ACCEPTED);
+	}
+	
+	@Override
+	public DeploymentStatus getAADMDeploymentStatus(String session_token) throws Exception {
+		DeploymentStatus deploymentStatus = DeploymentStatus.FAILED;
+		Assert.notNull(session_token, "Pass a not null session_token");
+		String url = xOPERA_URI + "info/status?token=" + session_token;
+		try {
+			HttpStatus status = getStatusOfURI(new URI(url));
+			if (status == HttpStatus.CREATED) {
+				deploymentStatus = DeploymentStatus.IN_PROGRESS;
+			}else if (status == HttpStatus.ACCEPTED) {
+				deploymentStatus = DeploymentStatus.DONE;
+			}
+		} catch (Exception e) {
+			//Ignored
+		}
+		
+		return deploymentStatus;
+	}
 
 	private List<KBError> processErrors(String json) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
@@ -145,7 +211,6 @@ public class KBReasonerClient implements KBReasoner {
 	private <T> ResponseEntity<T> getJSONMessage(URI uri, Class<T> clazz) throws RestClientException {
 		RequestEntity<T> request = (RequestEntity<T>) RequestEntity.get(uri).accept(MediaType.APPLICATION_JSON).build();
 		return restTemplate.exchange(request, clazz);
-
 	}
 
 
@@ -167,6 +232,40 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 	
+	private HttpStatus getStatusOfURI(URI uri) {
+		try {
+			Assert.notNull(uri, "Provide a valid uri");
+			return getJSONMessage(uri, String.class).getStatusCode();
+		} catch (Exception e) {
+			log.info("There was a problem getting JSON object(s) in uri: " + uri);
+			log.error(e.getMessage(), e);
+			throw e;
+		}
+	}
+	
+	private <T,S> S postObjectAndReturnAnotherType(T object, Class<S> returnedType, URI uri, HttpStatus expectedStatus) throws Exception {
+		S result = null;
+		try {
+			Assert.notNull(object, "Provide a valid object of type " + object.getClass());
+			Assert.notNull(uri, "Provide a valid uri");
+			ResponseEntity<S> response = 
+				postJsonMessage(object, uri, returnedType);
+			result = response.getBody();
+			if (response.getStatusCode().equals(expectedStatus)) {
+				log.info("Successfully inserted JSON object " + object);
+				log.info("Result obtained: " + result);
+			} else {
+				log.info("There was a problem inserting JSON object " + object + " in URI: " + uri);
+				result = null;
+			}
+			return result;
+		} catch (Exception e) {
+			log.info("There was a problem inserting JSON object " + object + " in URI: " + uri);
+			log.error(e.getMessage(), e);
+			throw e;
+		}
+	}
+	
 	private <T> T sendFormURLEncodedMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts, HttpMethod method) throws HttpStatusCodeException{
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -176,10 +275,32 @@ public class KBReasonerClient implements KBReasoner {
 
 		return response.getBody();
 	}
+	
+	public <T> T sendMultipartFormDataMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts, HttpMethod method, HttpStatus expectedStatus) throws Exception{
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+		
+		HttpEntity<MultiValueMap<String, Object>> requestEntity =
+		          new HttpEntity<MultiValueMap<String, Object>>(parts, headers);
+		
+		ResponseEntity<T> response = exchange(uri, method, requestEntity, returnType);
+		if (!response.getStatusCode().equals(expectedStatus)) {
+			log.error ("Expected status " + expectedStatus + " was not received");
+			throw new HttpClientErrorException(response.getStatusCode());
+		}
+		return response.getBody();
+	}
 
 	private <T> ResponseEntity<T> exchange(URI uri, HttpMethod method,
 			HttpEntity<MultiValueMap<String, Object>> requestEntity, Class<T> clazz) {
 		return restTemplate.exchange(uri, method, requestEntity, clazz);
+	}
+	
+	public <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) {
+		RequestEntity<S> request = RequestEntity.post(uri)
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(object);
+		return (ResponseEntity<T>) restTemplate.exchange(request, clazz);
 	}
 
 }
