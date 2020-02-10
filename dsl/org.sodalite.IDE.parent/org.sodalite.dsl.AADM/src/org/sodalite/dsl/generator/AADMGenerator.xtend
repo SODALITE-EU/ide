@@ -210,7 +210,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Requirement_«requirement_counter++»
 	  rdf:type exchange:Requirement ;
 	  exchange:name "«r.name»" ;
-	  exchange:value «r.node.name» ;
+	  exchange:value "«r.node.name»" ;
 	.
 	'''
 	
