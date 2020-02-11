@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
@@ -22,6 +23,9 @@ import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
@@ -116,11 +120,13 @@ public class BackendProxy {
 					@Override
 					public void run() {
 						MessageDialog.openInformation(parent, "Save AADM",
-								"The selected AADM model has been successfully store in the KB with IRI:\n" + saveReport.getIRI());
+								"The selected AADM model has been successfully store in the KB with IRI:\n"
+										+ saveReport.getIRI());
 					}
 				});
 			} catch (Exception e) {
-				MessageDialog.openError(parent, "Save AADM", "There were problems to store the AADM into the KB: " + e.getMessage());
+				MessageDialog.openError(parent, "Save AADM",
+						"There were problems to store the AADM into the KB: " + e.getMessage());
 				e.printStackTrace();
 			}
 		});
@@ -129,63 +135,76 @@ public class BackendProxy {
 	}
 
 	private void deployAADM(String aadmTTL, String submissionId, ExecutionEvent event) {
-		Job job = Job.create("Deploy AADM", (ICoreRunnable) monitor -> {
-			try {
+		Job job = new Job("Deploy AADM") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
 				// TODO Manage job states
-				// Save the AADM model into the KB
-				KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, submissionId);
-				processValidationIssues(saveReport, event);
+				SubMonitor subMonitor = SubMonitor.convert(monitor, 5);
+				try {
 
-				if (saveReport != null && saveReport.hasErrors())
-					throw new Exception ("There are detected validation issues in the AADM, please fix them");
+					// Save the AADM model into the KB
+					subMonitor.setTaskName("Saving AADM");
+					KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, submissionId);
+					processValidationIssues(saveReport, event);
 
-				// Ask the AADM JSON serialization to the KB Reasoner
-				String aadmJson = kbclient.getAADM(saveReport.getIRI());
-				if (aadmJson == null)
-					throw new Exception ("Processed ADDM could not be obtained from the KB");
-				
-				// Ask IaC Blueprint Builder to build the AADM blueprint
-				IaCBuilderAADMRegistrationReport iacReport = kbclient.askIaCBuilderToRegisterAADM(aadmJson);
-				if (iacReport == null || iacReport.getToken().isEmpty())
-					throw new Exception ("AADM could not be parsed by IaC Builder");
+					if (saveReport != null && saveReport.hasErrors())
+						throw new Exception("There are detected validation issues in the AADM, please fix them");
 
-				// Ask xOpera to deploy the AADM blueprint
-				// TODO Get inputs.yaml path
-				Path inputs_yaml_path = getInputsYamlPath();
-				DeploymentReport depl_report = kbclient.deployAADM(inputs_yaml_path, iacReport.getToken());
+					// Ask the AADM JSON serialization to the KB Reasoner
+					subMonitor.setTaskName("Getting AADM serialization from the KB");
+					String aadmJson = kbclient.getAADM(saveReport.getIRI());
+					if (aadmJson == null)
+						throw new Exception("Processed ADDM could not be obtained from the KB");
 
-				// Ask xOpera deployment status: info/status (session-token): status JSON
-				DeploymentStatus status = kbclient.getAADMDeploymentStatus(depl_report.getSession_token());
-				while (status  == DeploymentStatus.IN_PROGRESS) {
-					status = kbclient.getAADMDeploymentStatus(depl_report.getSession_token());
+					// Ask IaC Blueprint Builder to build the AADM blueprint
+					subMonitor.setTaskName("Generating AADM blueprint");
+					IaCBuilderAADMRegistrationReport iacReport = kbclient.askIaCBuilderToRegisterAADM(aadmJson);
+					if (iacReport == null || iacReport.getToken().isEmpty())
+						throw new Exception("AADM could not be parsed by IaC Builder");
+
+					// Ask xOpera to deploy the AADM blueprint
+					subMonitor.setTaskName("Deploying AADM");
+					Path inputs_yaml_path = getInputsYamlPath();
+					DeploymentReport depl_report = kbclient.deployAADM(inputs_yaml_path, iacReport.getToken());
+
+					// Ask xOpera deployment status: info/status (session-token): status JSON
+					subMonitor.setTaskName("Checking deployment status");
+					DeploymentStatus status = kbclient.getAADMDeploymentStatus(depl_report.getSession_token());
+					while (status == DeploymentStatus.IN_PROGRESS) {
+						status = kbclient.getAADMDeploymentStatus(depl_report.getSession_token());
+						TimeUnit.SECONDS.sleep(1);
+					}
+					if (status == DeploymentStatus.FAILED)
+						throw new Exception("Deployment failed as reported by xOpera");
+
+					// Upon completion, show dialog
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							MessageDialog.openInformation(parent, "Deploy AADM",
+									"The selected AADM model has been successfully deployed into the Sodalite backend");
+						}
+					});
+				} catch (Exception e) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							MessageDialog.openError(parent, "Deploy AADM",
+									"There were problems to deploy the AADM into the infrastructure: "
+											+ e.getMessage());
+						}
+					});
+					e.printStackTrace();
+					return Status.CANCEL_STATUS;
 				}
-				if (status == DeploymentStatus.FAILED)
-					throw new Exception ("Deployment failed as reported by xOpera");
-
-				// Upon completion, show dialog
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						MessageDialog.openInformation(parent, "Deploy AADM",
-								"The selected AADM model has been successfully deployed into the Sodalite backend");
-					}
-				});
-			} catch (Exception e) {
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						MessageDialog.openError(parent, "Deploy AADM",
-								"There were problems to deploy the AADM into the infrastructure: " + e.getMessage());
-					}
-				});
-				e.printStackTrace();
+				return Status.OK_STATUS;
 			}
-		});
+		};
 		job.setPriority(Job.SHORT);
 		job.schedule();
 	}
-	
-	private Path getInputsYamlPath() throws Exception{
+
+	private Path getInputsYamlPath() throws Exception {
 		Bundle bundle = Platform.getBundle("org.sodalite.dsl.AADM.ui");
 		URL fileURL = bundle.getEntry("resources/inputs.yaml");
 		File file = new File(FileLocator.resolve(fileURL).toURI());
@@ -197,7 +216,7 @@ public class BackendProxy {
 		if (saveReport != null && saveReport.hasErrors()) {
 			List<AADMValidationIssue> issues = readRecommendationsFromKB(saveReport);
 			manageRecommendationIssues(event, issues);
-			throw new Exception ("There are detected validation issues in the AADM, please fix them");
+			throw new Exception("There are detected validation issues in the AADM, please fix them");
 		}
 	}
 
