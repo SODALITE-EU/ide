@@ -1,6 +1,9 @@
 package org.sodalite.dsl.ui.backend;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,10 +16,12 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
@@ -45,9 +50,13 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
+import org.osgi.framework.Bundle;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.ui.validation.AADMDiagnostic;
@@ -61,128 +70,145 @@ public class BackendProxy {
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	private KBSaveReportData saveReport = null;
-	private boolean deploymentSucceded = true;
-	
-	//TODO Configure KBReasonerClient endpoint from preference page information
+
+	// TODO Configure KBReasonerClient endpoint from preference page information
 	private KBReasonerClient kbclient = new KBReasonerClient();
-	
+
 	public void processSaveAADM(ExecutionEvent event) throws IOException {
-		//Return selected resource
+		// Return selected resource
 		IFile file = getSelectedFile();
 		String filename = file.getName().substring(0, file.getName().indexOf("."));
-		IProject project = getProject (file);
-		//Get serialize AADM model in Turtle
+		IProject project = getProject(file);
+		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(filename, project);
-		
-		//Send model to the KB
-		saveAADM (aadmTTL, filename, event);
+
+		// Send model to the KB
+		saveAADM(aadmTTL, filename, event);
 	}
-	
+
 	public void processDeployAADM(ExecutionEvent event) throws IOException {
-		//Return selected resource
+		// Return selected resource
 		IFile file = getSelectedFile();
-		IProject project = getProject (file);
-		//Get serialize AADM model in Turtle
+		IProject project = getProject(file);
+		// Get serialize AADM model in Turtle
 		String filename = file.getName().substring(0, file.getName().indexOf("."));
 		String aadmTTL = readTurtle(filename, project);
-		
-		//Deploy AADM model
-		deployAADM (aadmTTL, filename, event);
+
+		// Deploy AADM model
+		deployAADM(aadmTTL, filename, event);
 	}
-	
+
 	private String readTurtle(String filename, IProject project) throws IOException {
 		IFile turtle = project.getFile("src-gen/" + filename + ".ttl");
 		String turtle_path = turtle.getLocationURI().toString();
 		turtle_path = turtle_path.substring(turtle_path.indexOf("/"));
 		Path aadm_path = FileSystems.getDefault().getPath(turtle_path);
-		String aadmTTL = new String(Files.readAllBytes (aadm_path));
+		String aadmTTL = new String(Files.readAllBytes(aadm_path));
 		return aadmTTL;
 	}
 
 	private void saveAADM(String aadmTTL, String submissionId, ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
-				saveReport = kbclient.saveAADM(aadmTTL, submissionId);
+				KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, submissionId);
+				processValidationIssues(saveReport, event);
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
-						notifyADDMSaved (event);
+						MessageDialog.openInformation(parent, "Save AADM",
+								"The selected AADM model has been successfully store in the KB with IRI:\n" + saveReport.getIRI());
 					}
 				});
 			} catch (Exception e) {
+				MessageDialog.openError(parent, "Save AADM", "There were problems to store the AADM into the KB: " + e.getMessage());
 				e.printStackTrace();
 			}
 		});
 		job.setPriority(Job.SHORT);
 		job.schedule();
 	}
-	
+
 	private void deployAADM(String aadmTTL, String submissionId, ExecutionEvent event) {
 		Job job = Job.create("Deploy AADM", (ICoreRunnable) monitor -> {
 			try {
-				// Save AADM model
-				saveReport = kbclient.saveAADM(aadmTTL, submissionId);
+				// TODO Manage job states
+				// Save the AADM model into the KB
+				KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, submissionId);
+				processValidationIssues(saveReport, event);
+
+				if (saveReport != null && saveReport.hasErrors())
+					throw new Exception ("There are detected validation issues in the AADM, please fix them");
+
+				// Ask the AADM JSON serialization to the KB Reasoner
+				String aadmJson = kbclient.getAADM(saveReport.getIRI());
+				if (aadmJson == null)
+					throw new Exception ("Processed ADDM could not be obtained from the KB");
 				
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						notifyADDMSaved (event);
-					}
-				});
-				
-				// TODO Ask AADM JSON serialization to KB Reasoner: getAADM: JSON
-				// TODO Ask IaC Blueprint Builder to build AADM JSON: buildIaC (Json AADM): blueprint-token
-				// TODO Ask xOpera to deploy the blueprint: deploy (blueprint-token, inputs): session-token
-				// TODO Ask xOpera deployment status: info/status (session-token): status JSON
+				// Ask IaC Blueprint Builder to build the AADM blueprint
+				IaCBuilderAADMRegistrationReport iacReport = kbclient.askIaCBuilderToRegisterAADM(aadmJson);
+				if (iacReport == null || iacReport.getToken().isEmpty())
+					throw new Exception ("AADM could not be parsed by IaC Builder");
+
+				// Ask xOpera to deploy the AADM blueprint
+				// TODO Get inputs.yaml path
+				Path inputs_yaml_path = getInputsYamlPath();
+				DeploymentReport depl_report = kbclient.deployAADM(inputs_yaml_path, iacReport.getToken());
+
+				// Ask xOpera deployment status: info/status (session-token): status JSON
+				DeploymentStatus status = kbclient.getAADMDeploymentStatus(depl_report.getSession_token());
+				while (status  == DeploymentStatus.IN_PROGRESS) {
+					status = kbclient.getAADMDeploymentStatus(depl_report.getSession_token());
+				}
+				if (status == DeploymentStatus.FAILED)
+					throw new Exception ("Deployment failed as reported by xOpera");
+
 				// Upon completion, show dialog
-				
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
-						notifyADDMDeployed (event);
+						MessageDialog.openInformation(parent, "Deploy AADM",
+								"The selected AADM model has been successfully deployed into the Sodalite backend");
 					}
 				});
 			} catch (Exception e) {
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						MessageDialog.openError(parent, "Deploy AADM",
+								"There were problems to deploy the AADM into the infrastructure: " + e.getMessage());
+					}
+				});
 				e.printStackTrace();
 			}
 		});
 		job.setPriority(Job.SHORT);
 		job.schedule();
 	}
-
-	protected void notifyADDMSaved(ExecutionEvent event) {
-		//Manage returned recommendation as validation issues
-		//TODO Check there are not warnings (they do not prevent storage in KB)
-		if (saveReport != null && saveReport.hasErrors()) {
-			List<AADMValidationIssue> issues = readRecommendationsFromKB();
-			manageRecommendationIssues(event, issues);
-			MessageDialog.openError(parent, "Save AADM", "The selected AADM model has errors and could not be store in the KB");
-		}else {
-			MessageDialog.openInformation(parent,
-				"Save AADM", "The selected AADM model has been successfully store in the KB with IRI:\n" + saveReport.getIRI());
-		}
-	}
 	
-	protected void notifyADDMDeployed(ExecutionEvent event) {
-		//TODO Check AADM model has been deployed correctly
-		if (!deploymentSucceded) {
-			MessageDialog.openError(parent, "Deploy AADM", "The selected AADM model could not be deployed");
-		}else {
-			MessageDialog.openInformation(parent,
-				"Save AADM", "The selected AADM model has been successfully deployed into the Sodalite backend");
+	private Path getInputsYamlPath() throws Exception{
+		Bundle bundle = Platform.getBundle("org.sodalite.dsl.AADM.ui");
+		URL fileURL = bundle.getEntry("resources/inputs.yaml");
+		File file = new File(FileLocator.resolve(fileURL).toURI());
+		return file.toPath();
+	}
+
+	private void processValidationIssues(KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
+		// TODO Check there are not warnings (they do not prevent storage in KB)
+		if (saveReport != null && saveReport.hasErrors()) {
+			List<AADMValidationIssue> issues = readRecommendationsFromKB(saveReport);
+			manageRecommendationIssues(event, issues);
+			throw new Exception ("There are detected validation issues in the AADM, please fix them");
 		}
 	}
 
-	private List<AADMValidationIssue> readRecommendationsFromKB() {
+	private List<AADMValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
 		// TODO Read issues from KB recommendations
 		List<AADMValidationIssue> issues = new ArrayList<>();
-		
-		for (KBError error: saveReport.getErrors()) {
-			issues.add(new AADMValidationIssue (
-				error.getType() + "." + error.getDescription() + ":" + error.getEntity_name(),
-				"node_templates/" + error.getContext()
-			));
+
+		for (KBError error : saveReport.getErrors()) {
+			issues.add(new AADMValidationIssue(
+					error.getType() + "." + error.getDescription() + ":" + error.getEntity_name(),
+					"node_templates/" + error.getContext()));
 		}
 		return issues;
 	}
@@ -193,14 +219,16 @@ public class BackendProxy {
 			IValidationIssueProcessor issueProcessor;
 			IXtextDocument xtextDocument = xtextEditor.getDocument();
 			IResource resource = xtextEditor.getResource();
-			
+
 			List<Issue> issues = createIssues(xtextDocument, validationIssues);
-			
-			if(resource != null)
-				issueProcessor = new MarkerIssueProcessor(resource, xtextEditor.getInternalSourceViewer().getAnnotationModel(), markerCreator, markerTypeProvider);
+
+			if (resource != null)
+				issueProcessor = new MarkerIssueProcessor(resource,
+						xtextEditor.getInternalSourceViewer().getAnnotationModel(), markerCreator, markerTypeProvider);
 			else
-				issueProcessor = new AnnotationIssueProcessor(xtextDocument, xtextEditor.getInternalSourceViewer().getAnnotationModel(), issueResolutionProvider);
-			
+				issueProcessor = new AnnotationIssueProcessor(xtextDocument,
+						xtextEditor.getInternalSourceViewer().getAnnotationModel(), issueResolutionProvider);
+
 			// Process Issues
 			IProgressMonitor monitor = new NullProgressMonitor();
 			issueProcessor.processIssues(issues, monitor);
@@ -208,17 +236,16 @@ public class BackendProxy {
 	}
 
 	private List<Issue> createIssues(IXtextDocument xtextDocument, List<AADMValidationIssue> validationIssues) {
-		final List<Issue> issues = xtextDocument
-				.tryReadOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
-					@Override
-					public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
-						resolvedInjectedXtextObjects(resource);
-						return createIssues(resource, validationIssues);
-					}
-				}, () -> Collections.emptyList());
+		final List<Issue> issues = xtextDocument.tryReadOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
+			@Override
+			public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
+				resolvedInjectedXtextObjects(resource);
+				return createIssues(resource, validationIssues);
+			}
+		}, () -> Collections.emptyList());
 		return issues;
 	}
-	
+
 	private void resolvedInjectedXtextObjects(XtextResource resource) {
 		issueResolutionProvider = resource.getResourceServiceProvider().get(IssueResolutionProvider.class);
 		markerTypeProvider = resource.getResourceServiceProvider().get(MarkerTypeProvider.class);
@@ -227,54 +254,53 @@ public class BackendProxy {
 	}
 
 	protected List<Issue> createIssues(XtextResource resource, List<AADMValidationIssue> validationIssues) {
-		final List<Issue> result = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
-				+ resource.getWarnings().size());
+		final List<Issue> result = Lists
+				.newArrayListWithExpectedSize(resource.getErrors().size() + resource.getWarnings().size());
 		IAcceptor<Issue> acceptor = new ListBasedMarkerAcceptor(result);
-		
-		//Create Diagnostics from issues
+
+		// Create Diagnostics from issues
 		List<AADMDiagnostic> diagnostics = new ArrayList<AADMDiagnostic>();
-		
-		for (AADMValidationIssue issue: validationIssues) {
+
+		for (AADMValidationIssue issue : validationIssues) {
 			// Add diagnostic
 			EObject eObject = resource.getContents().get(0);
-			String location = EcoreUtil.getURI(eObject).toString(); 
-			int line = getLine (resource, issue.getPath()); //Compute line based on EObject
-			
+			String location = EcoreUtil.getURI(eObject).toString();
+			int line = getLine(resource, issue.getPath()); // Compute line based on EObject
+
 			diagnostics.add(new AADMDiagnostic(issue.getMessage(), location, line, 1));
 		}
-		
-		
-		for (AADMDiagnostic diagnostic: diagnostics) {
+
+		for (AADMDiagnostic diagnostic : diagnostics) {
 			if (!resource.getErrors().contains(diagnostic))
 				resource.getErrors().add(diagnostic);
 		}
-		
-		
+
 		for (int i = 0; i < resource.getErrors().size(); i++) {
 			converter.convertResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
 		}
-		
+
 		for (int i = 0; i < resource.getWarnings().size(); i++) {
 			converter.convertResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
 		}
-		
+
 		return result;
 	}
 
 	private int getLine(XtextResource resource, String path) {
-		//Extract object path to find nodes
-		StringTokenizer st = new StringTokenizer (path, "/");
-		
+		// Extract object path to find nodes
+		StringTokenizer st = new StringTokenizer(path, "/");
+
 		int line = 1;
-		
+
 		if (resource.getAllContents().hasNext()) {
 			AADM_Model model = (AADM_Model) resource.getAllContents().next();
 			if (st.hasMoreTokens()) {
 				if ("node_templates".equals(st.nextToken())) {
-					line = getNodeLine(model.getNodeTemplates()) - 1; //Correction to point to node-templates correct line
+					line = getNodeLine(model.getNodeTemplates()) - 1; // Correction to point to node-templates correct
+																		// line
 					if (st.hasMoreTokens()) {
 						String node_name = st.nextToken();
-						for (ENodeTemplate node:model.getNodeTemplates().getNodeTemplates()) {
+						for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
 							if (node.getName().contentEquals(node_name)) {
 								line = getNodeLine(node);
 							}
@@ -288,7 +314,7 @@ public class BackendProxy {
 
 	private int getNodeLine(EObject node) {
 		int line = 1;
-		for (Adapter adapter: node.eAdapters()) {
+		for (Adapter adapter : node.eAdapters()) {
 			if (adapter instanceof INode) {
 				AbstractNode aNode = (AbstractNode) adapter;
 				line = aNode.getStartLine();
@@ -305,18 +331,16 @@ public class BackendProxy {
 	private IFile getSelectedFile() {
 		IFile file = null;
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		if (window != null)
-		{
-		    IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
-		    Object firstElement = selection.getFirstElement();
-		    if (firstElement instanceof IAdaptable)
-		    {
-		    	file = (IFile)((IAdaptable)firstElement).getAdapter(IFile.class);
-		    }
+		if (window != null) {
+			IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
+			Object firstElement = selection.getFirstElement();
+			if (firstElement instanceof IAdaptable) {
+				file = (IFile) ((IAdaptable) firstElement).getAdapter(IFile.class);
+			}
 		}
 		return file;
 	}
-	
+
 	protected static class ListBasedMarkerAcceptor implements IAcceptor<Issue> {
 		private final List<Issue> result;
 
