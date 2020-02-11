@@ -184,9 +184,9 @@ public class KBReasonerClient implements KBReasoner {
 		try {
 			HttpStatus status = getStatusOfURI(new URI(url));
 			if (status == HttpStatus.CREATED) {
-				deploymentStatus = DeploymentStatus.IN_PROGRESS;
-			}else if (status == HttpStatus.ACCEPTED) {
 				deploymentStatus = DeploymentStatus.DONE;
+			}else if (status == HttpStatus.ACCEPTED) {
+				deploymentStatus = DeploymentStatus.IN_PROGRESS;
 			}
 		} catch (Exception e) {
 			//Ignored
