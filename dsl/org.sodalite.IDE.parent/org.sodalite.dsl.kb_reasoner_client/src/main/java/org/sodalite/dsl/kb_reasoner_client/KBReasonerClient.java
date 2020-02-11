@@ -146,10 +146,16 @@ public class KBReasonerClient implements KBReasoner {
 	}
 	
 	@Override
-	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String aadm_json) throws Exception{
+	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json) throws Exception{
 		Assert.notNull(aadm_json, "Pass a not null aadm_json");
 		String url = IaC_URI + "parse";
-		return postObjectAndReturnAnotherType (aadm_json, IaCBuilderAADMRegistrationReport.class, new URI(url), HttpStatus.OK);
+		//FIXME create Json content
+		String jsonContent = 
+		"{\n" 
+			+ "\"name\" : \"" + model_name + "\",\n"
+			+ "\"data\" : " + aadm_json
+		+"\n}";
+		return postObjectAndReturnAnotherType (jsonContent, IaCBuilderAADMRegistrationReport.class, new URI(url), HttpStatus.OK);
 	}
 	
 	@Override

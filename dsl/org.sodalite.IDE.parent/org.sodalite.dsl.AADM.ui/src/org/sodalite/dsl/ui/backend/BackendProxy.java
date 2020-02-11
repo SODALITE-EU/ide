@@ -141,7 +141,6 @@ public class BackendProxy {
 				// TODO Manage job states
 				SubMonitor subMonitor = SubMonitor.convert(monitor, 5);
 				try {
-
 					// Save the AADM model into the KB
 					subMonitor.setTaskName("Saving AADM");
 					KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, submissionId);
@@ -158,7 +157,7 @@ public class BackendProxy {
 
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");
-					IaCBuilderAADMRegistrationReport iacReport = kbclient.askIaCBuilderToRegisterAADM(aadmJson);
+					IaCBuilderAADMRegistrationReport iacReport = kbclient.askIaCBuilderToRegisterAADM(submissionId, aadmJson);
 					if (iacReport == null || iacReport.getToken().isEmpty())
 						throw new Exception("AADM could not be parsed by IaC Builder");
 
@@ -172,7 +171,7 @@ public class BackendProxy {
 					DeploymentStatus status = kbclient.getAADMDeploymentStatus(depl_report.getSession_token());
 					while (status == DeploymentStatus.IN_PROGRESS) {
 						status = kbclient.getAADMDeploymentStatus(depl_report.getSession_token());
-						TimeUnit.SECONDS.sleep(1);
+						TimeUnit.SECONDS.sleep(5);
 					}
 					if (status == DeploymentStatus.FAILED)
 						throw new Exception("Deployment failed as reported by xOpera");

@@ -130,7 +130,7 @@ class KBReasonerTest {
 	void testAskIaCBuilderToRegisterAADM() throws Exception {
 		Path aadm_json_path = FileSystems.getDefault().getPath("src/test/resources/snow.json");
 		String aadm_json = new String(Files.readAllBytes (aadm_json_path));
-		IaCBuilderAADMRegistrationReport report = kbclient.askIaCBuilderToRegisterAADM(aadm_json);
+		IaCBuilderAADMRegistrationReport report = kbclient.askIaCBuilderToRegisterAADM("snow", aadm_json);
 		assertNotNull (report.getToken());
 	}
 	
