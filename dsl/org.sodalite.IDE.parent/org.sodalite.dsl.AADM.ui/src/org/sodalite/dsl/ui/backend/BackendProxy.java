@@ -148,6 +148,7 @@ public class BackendProxy {
 					subMonitor.setTaskName("Saving AADM");
 					KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, submissionId);
 					processValidationIssues(saveReport, event);
+					subMonitor.worked(1);
 
 					if (saveReport != null && saveReport.hasErrors())
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
@@ -157,6 +158,7 @@ public class BackendProxy {
 					String aadmJson = kbclient.getAADM(saveReport.getIRI());
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
+					subMonitor.worked(2);
 
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");
@@ -165,6 +167,7 @@ public class BackendProxy {
 						throw new Exception("AADM could not be parsed by IaC Builder");
 					admin_report[0] = iacReport.getToken();
 					System.out.println ("IaC Builder blueprint token: " + iacReport.getToken());
+					subMonitor.worked(3);
 
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
@@ -172,6 +175,7 @@ public class BackendProxy {
 					DeploymentReport depl_report = kbclient.deployAADM(inputs_yaml_path, iacReport.getToken());
 					admin_report[1] = depl_report.getSession_token();
 					System.out.println ("xOpera session token: " + depl_report.getSession_token());
+					subMonitor.worked(4);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
 					subMonitor.setTaskName("Checking deployment status");
@@ -191,6 +195,8 @@ public class BackendProxy {
 									"The selected AADM model has been successfully deployed into the Sodalite backend");
 						}
 					});
+					subMonitor.worked(-1);
+					subMonitor.done();
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
@@ -207,7 +213,7 @@ public class BackendProxy {
 				return Status.OK_STATUS;
 			}
 		};
-		job.setPriority(Job.SHORT);
+		job.setPriority(Job.LONG);
 		job.schedule();
 	}
 
