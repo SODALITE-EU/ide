@@ -138,8 +138,11 @@ public class BackendProxy {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				// TODO Manage job states
+				// Manage job states
+				// TODO Inform about percentage of progress
 				SubMonitor subMonitor = SubMonitor.convert(monitor, 5);
+				String[] admin_report = new String[2];
+				
 				try {
 					// Save the AADM model into the KB
 					subMonitor.setTaskName("Saving AADM");
@@ -160,11 +163,15 @@ public class BackendProxy {
 					IaCBuilderAADMRegistrationReport iacReport = kbclient.askIaCBuilderToRegisterAADM(submissionId, aadmJson);
 					if (iacReport == null || iacReport.getToken().isEmpty())
 						throw new Exception("AADM could not be parsed by IaC Builder");
+					admin_report[0] = iacReport.getToken();
+					System.out.println ("IaC Builder blueprint token: " + iacReport.getToken());
 
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
 					Path inputs_yaml_path = getInputsYamlPath();
 					DeploymentReport depl_report = kbclient.deployAADM(inputs_yaml_path, iacReport.getToken());
+					admin_report[1] = depl_report.getSession_token();
+					System.out.println ("xOpera session token: " + depl_report.getSession_token());
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
 					subMonitor.setTaskName("Checking deployment status");
@@ -189,8 +196,9 @@ public class BackendProxy {
 						@Override
 						public void run() {
 							MessageDialog.openError(parent, "Deploy AADM",
-									"There were problems to deploy the AADM into the infrastructure: "
-											+ e.getMessage());
+									"There were problems to deploy the AADM into the infrastructure: " + e.getMessage() 
+									+ "\nPlease contact Sodalite administrator and provide her/him this information: "
+									+ "blueprint token: " + admin_report[0] + ", session token: " + admin_report[1]);
 						}
 					});
 					e.printStackTrace();
