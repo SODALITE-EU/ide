@@ -7,6 +7,7 @@ import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -158,6 +159,9 @@ public class BackendProxy {
 					String aadmJson = kbclient.getAADM(saveReport.getIRI());
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
+					//Save json for debugging
+					//Files.write(Paths.get(System.getProperty("user.dir") + "/" + submissionId + ".json"), aadmJson.getBytes());
+					
 					subMonitor.worked(2);
 
 					// Ask IaC Blueprint Builder to build the AADM blueprint
