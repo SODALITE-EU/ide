@@ -4,24 +4,32 @@
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="AADM Diagram" domainClass="aADM::AADM_Model" enablePopupBars="true">
       <metamodel href="http://www.sodalite.org/dsl/AADM#/"/>
       <defaultLayer name="Default">
-        <edgeMappings name="Relationships" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetFinderExpression="aql:self.node.requirements.requirements.node">
+        <edgeMappings name="RelationshipLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetFinderExpression="feature:node">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="aql:self.node.requirements.requirements.name">
+            <centerLabelStyleDescription labelSize="12">
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
         <containerMappings name="NodeTemplate" semanticCandidatesExpression="aql:self.nodeTemplates.nodeTemplates" domainClass="aADM::ENodeTemplate" childrenPresentation="VerticalStack">
-          <borderedNodeMappings name="Type" semanticCandidatesExpression="feature:node" domainClass="aADM::ENodeTemplateBody">
-            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" borderLineStyle="dot" labelSize="12" showIcon="false" labelExpression="feature:type" sizeComputationExpression="10" labelPosition="node" resizeKind="EAST_WEST" width="25" height="3">
+          <borderedNodeMappings name="BType" semanticCandidatesExpression="feature:node" domainClass="aADM::ENodeTemplateBody">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" borderLineStyle="dot" labelSize="12" showIcon="false" labelExpression="service:getTypeLabel()" sizeComputationExpression="service:getTypeSize()" labelPosition="node" resizeKind="EAST_WEST" width="15" height="3">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelFormat>italic</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <forbiddenSides>WEST</forbiddenSides>
+              <forbiddenSides>SOUTH</forbiddenSides>
               <forbiddenSides>EAST</forbiddenSides>
-              <forbiddenSides>NORTH</forbiddenSides>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </borderedNodeMappings>
+          <borderedNodeMappings name="BRequirements" semanticCandidatesExpression="aql:self.node.requirements.requirements" domainClass="aADM::ERequirementAssignment">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" borderLineStyle="dash" labelSize="12" showIcon="false" labelExpression="aql:'req: ' + self.name" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW" width="10" height="3">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
             </style>
           </borderedNodeMappings>
           <subContainerMappings name="Properties" semanticCandidatesExpression="aql:self.node" domainClass="aADM::ENodeTemplateBody" childrenPresentation="List">
@@ -33,23 +41,6 @@
               </style>
             </subNodeMappings>
             <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="Properties" labelAlignment="LEFT">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelFormat>bold</labelFormat>
-              <labelFormat>italic</labelFormat>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
-            </style>
-          </subContainerMappings>
-          <subContainerMappings name="Requirements" preconditionExpression="aql:self.requirements.requirements->size() > 0" semanticCandidatesExpression="aql:self.node" domainClass="aADM::ENodeTemplateBody" childrenPresentation="List">
-            <subNodeMappings name="Requirement" semanticCandidatesExpression="aql:self.requirements.requirements" domainClass="aADM::ERequirementAssignment">
-              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:getRequirementLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
-                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-              </style>
-            </subNodeMappings>
-            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="Requirements" labelAlignment="LEFT">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelFormat>bold</labelFormat>
               <labelFormat>italic</labelFormat>
