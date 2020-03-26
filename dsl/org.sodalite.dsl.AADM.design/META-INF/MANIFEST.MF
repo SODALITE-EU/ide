@@ -14,7 +14,9 @@ Require-Bundle: org.eclipse.ui,
  com.google.inject;bundle-version="3.0.0",
  com.altran.general.integration.xtextsirius.runtime;bundle-version="0.18.0",
  org.sodalite.dsl.AADM;bundle-version="1.0.0",
- org.sodalite.dsl.AADM.ui;bundle-version="1.0.0"
+ org.sodalite.dsl.AADM.ui;bundle-version="1.0.0",
+ org.eclipse.sirius.ext.emf.edit;bundle-version="6.2.3",
+ org.sodalite.dsl.RM
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
