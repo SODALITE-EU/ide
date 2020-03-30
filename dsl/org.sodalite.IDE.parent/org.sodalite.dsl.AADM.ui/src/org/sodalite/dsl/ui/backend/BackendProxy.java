@@ -196,7 +196,7 @@ public class BackendProxy {
 						@Override
 						public void run() {
 							MessageDialog.openInformation(parent, "Deploy AADM",
-									"The selected AADM model has been successfully deployed into the Sodalite backend");
+									"The selected AADM model has been successfully deployed into the Sodalite backend with token: " + admin_report[0]);
 						}
 					});
 					subMonitor.worked(-1);

@@ -383,6 +383,66 @@
         </command>
      </menu>
   </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
+     <menu
+           label="Sodalite">
+        <command
+              commandId="org.sodalite.dsl.RM.ui.command.saveRM"
+              id="org.sodalite.dsl.RM.ui.popup.command.saveRM"
+              label="Save RM  in the KB"
+              style="push"
+              tooltip="Save RM into the remote Sodalite Knowledge Base">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.rm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+     </menu>
+  </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.sirius.ui.tools.views.model.explorer#PopupMenu?after=additions">
+     <menu
+           label="Sodalite">
+        <command
+              commandId="org.sodalite.dsl.RM.ui.command.saveRM"
+              id="org.sodalite.dsl.RM.ui.popup.command.saveRM"
+              label="Save RM  in the KB"
+              style="push"
+              tooltip="Save RM into the remote Sodalite Knowledge Base">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.rm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+     </menu>
+  </menuContribution>
 	</extension>
 	<!-- quickfix marker resolution generator for org.sodalite.dsl.RM -->
 	<extension

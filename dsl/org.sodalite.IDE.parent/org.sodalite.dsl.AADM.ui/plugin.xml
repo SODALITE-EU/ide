@@ -366,7 +366,111 @@
 		</menuContribution>
   <menuContribution
         allPopups="false"
+        locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
+     <menu
+           label="Sodalite">
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.saveAADM"
+              id="org.sodalite.dsl.AADM.ui.popup.command.saveAADM"
+              label="Save AADM  in the KB"
+              style="push"
+              tooltip="Save AADM into the remote Sodalite Knowledge Base">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.aadm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.deployAADM"
+              label="Deploy AADM"
+              style="push"
+              tooltip="Deploy the AADM  using the Sodalite IoC layer">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.aadm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+     </menu>
+  </menuContribution>
+  <menuContribution
+        allPopups="false"
         locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+     <menu
+           label="Sodalite">
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.saveAADM"
+              id="org.sodalite.dsl.AADM.ui.popup.command.saveAADM"
+              label="Save AADM  in the KB"
+              style="push"
+              tooltip="Save AADM into the remote Sodalite Knowledge Base">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.aadm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.deployAADM"
+              label="Deploy AADM"
+              style="push"
+              tooltip="Deploy the AADM  using the Sodalite IoC layer">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.aadm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+     </menu>
+  </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.sirius.ui.tools.views.model.explorer#PopupMenu?after=additions">
      <menu
            label="Sodalite">
         <command
