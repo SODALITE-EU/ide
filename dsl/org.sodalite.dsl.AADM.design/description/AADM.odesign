@@ -102,8 +102,8 @@
         </controls>
         <controls xsi:type="properties:TextDescription" name="Value" labelExpression="Value" isEnabledExpression="aql:self.value.oclIsKindOf(rM::ESTRING)" valueExpression="aql:self.value.oclAsType(rM::ESTRING).string">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
-              <subModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="var:newValue"/>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ESTRING)">
+              <subModelOperations xsi:type="tool:SetValue" featureName="string" valueExpression="var:newValue"/>
             </firstModelOperations>
           </initialOperation>
         </controls>
