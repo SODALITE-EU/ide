@@ -91,8 +91,8 @@
   </ownedViewpoints>
   <extensions xsi:type="properties:ViewExtensionDescription" name="Properties">
     <categories name="Default Category">
-      <pages name="Default Page" labelExpression="General" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0"/>
-      <groups name="PropertyAssignment" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self">
+      <pages name="Default Page" labelExpression="General" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3"/>
+      <groups name="SingleStringValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ESTRING)">
         <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
@@ -100,7 +100,51 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:TextDescription" name="Value" labelExpression="Value" isEnabledExpression="aql:self.value.oclIsKindOf(rM::ESTRING)" valueExpression="aql:self.value.oclAsType(rM::ESTRING).string">
+        <controls xsi:type="properties:TextDescription" name="SingleStringValue" labelExpression="Value" valueExpression="aql:self.value.oclAsType(rM::ESTRING).string">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ESTRING)">
+              <subModelOperations xsi:type="tool:SetValue" featureName="string" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="ListStringValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ELIST)">
+        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="ListStringValue" labelExpression="List of values" valueExpression="aql:self.value.oclAsType(rM::ELIST).list">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="GetInputValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::GetInput)">
+        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="GetInputValue" labelExpression="Get input" valueExpression="aql:self.value.oclAsType(rM::GetInput).input.oclAsType(rM::EParameterDefinition).name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="ComplexValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::EMAP)">
+        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="ComplexValue" labelExpression="Complex value" valueExpression="&lt;complex_value>">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ESTRING)">
               <subModelOperations xsi:type="tool:SetValue" featureName="string" valueExpression="var:newValue"/>
