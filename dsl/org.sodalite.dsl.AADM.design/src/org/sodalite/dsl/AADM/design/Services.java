@@ -54,6 +54,16 @@ public class Services {
     	return size;
     }
     
+    public void addStringToPropertyValueList (EPropertyAssignment prop) {
+    	System.out.println ("Requested to add string to property list value. Property: " +
+    		prop.getName());
+    }
+    
+    public void removeStringFromPropertyValueList (EPropertyAssignment prop, String item) {
+    	System.out.println ("Requested to remove string from property list value. Property: " +
+    		prop.getName() + " Item: " + item);
+    }
+    
 //    public String getLabel (EObject obj) {
 //    	System.out.println("obj: " + obj.getClass());
 //    	
