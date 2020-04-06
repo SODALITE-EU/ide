@@ -1115,11 +1115,11 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_QUALIFIED_NAME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17186:21: ( RULE_ID ( '.' RULE_ID )+ )
-            // InternalAADM.g:17186:23: RULE_ID ( '.' RULE_ID )+
+            // InternalAADM.g:17432:21: ( RULE_ID ( '.' RULE_ID )+ )
+            // InternalAADM.g:17432:23: RULE_ID ( '.' RULE_ID )+
             {
             mRULE_ID(); 
-            // InternalAADM.g:17186:31: ( '.' RULE_ID )+
+            // InternalAADM.g:17432:31: ( '.' RULE_ID )+
             int cnt1=0;
             loop1:
             do {
@@ -1133,7 +1133,7 @@ public class InternalAADMLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalAADM.g:17186:32: '.' RULE_ID
+            	    // InternalAADM.g:17432:32: '.' RULE_ID
             	    {
             	    match('.'); 
             	    mRULE_ID(); 
@@ -1166,10 +1166,10 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_BOOLEAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17188:14: ( ( 'true' | 'false' ) )
-            // InternalAADM.g:17188:16: ( 'true' | 'false' )
+            // InternalAADM.g:17434:14: ( ( 'true' | 'false' ) )
+            // InternalAADM.g:17434:16: ( 'true' | 'false' )
             {
-            // InternalAADM.g:17188:16: ( 'true' | 'false' )
+            // InternalAADM.g:17434:16: ( 'true' | 'false' )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -1187,7 +1187,7 @@ public class InternalAADMLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalAADM.g:17188:17: 'true'
+                    // InternalAADM.g:17434:17: 'true'
                     {
                     match("true"); 
 
@@ -1195,7 +1195,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalAADM.g:17188:24: 'false'
+                    // InternalAADM.g:17434:24: 'false'
                     {
                     match("false"); 
 
@@ -1221,10 +1221,10 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_ENTITY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17190:13: ( ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' ) )
-            // InternalAADM.g:17190:15: ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' )
+            // InternalAADM.g:17436:13: ( ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' ) )
+            // InternalAADM.g:17436:15: ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' )
             {
-            // InternalAADM.g:17190:15: ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' )
+            // InternalAADM.g:17436:15: ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' )
             int alt3=4;
             switch ( input.LA(1) ) {
             case 'S':
@@ -1264,7 +1264,7 @@ public class InternalAADMLexer extends Lexer {
 
             switch (alt3) {
                 case 1 :
-                    // InternalAADM.g:17190:16: 'SELF'
+                    // InternalAADM.g:17436:16: 'SELF'
                     {
                     match("SELF"); 
 
@@ -1272,7 +1272,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalAADM.g:17190:23: 'SOURCE'
+                    // InternalAADM.g:17436:23: 'SOURCE'
                     {
                     match("SOURCE"); 
 
@@ -1280,7 +1280,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // InternalAADM.g:17190:32: 'TARGET'
+                    // InternalAADM.g:17436:32: 'TARGET'
                     {
                     match("TARGET"); 
 
@@ -1288,7 +1288,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // InternalAADM.g:17190:41: 'HOST'
+                    // InternalAADM.g:17436:41: 'HOST'
                     {
                     match("HOST"); 
 
@@ -1314,15 +1314,15 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_PRIMITIVE_DATA_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17192:26: ( ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' ) )
-            // InternalAADM.g:17192:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )
+            // InternalAADM.g:17438:26: ( ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' ) )
+            // InternalAADM.g:17438:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )
             {
-            // InternalAADM.g:17192:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )
+            // InternalAADM.g:17438:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )
             int alt4=10;
             alt4 = dfa4.predict(input);
             switch (alt4) {
                 case 1 :
-                    // InternalAADM.g:17192:29: 'string'
+                    // InternalAADM.g:17438:29: 'string'
                     {
                     match("string"); 
 
@@ -1330,7 +1330,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalAADM.g:17192:38: 'integer'
+                    // InternalAADM.g:17438:38: 'integer'
                     {
                     match("integer"); 
 
@@ -1338,7 +1338,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // InternalAADM.g:17192:48: 'boolean'
+                    // InternalAADM.g:17438:48: 'boolean'
                     {
                     match("boolean"); 
 
@@ -1346,7 +1346,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // InternalAADM.g:17192:58: 'map'
+                    // InternalAADM.g:17438:58: 'map'
                     {
                     match("map"); 
 
@@ -1354,7 +1354,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // InternalAADM.g:17192:64: 'list'
+                    // InternalAADM.g:17438:64: 'list'
                     {
                     match("list"); 
 
@@ -1362,7 +1362,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // InternalAADM.g:17192:71: 'range'
+                    // InternalAADM.g:17438:71: 'range'
                     {
                     match("range"); 
 
@@ -1370,7 +1370,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // InternalAADM.g:17192:79: 'timestamp'
+                    // InternalAADM.g:17438:79: 'timestamp'
                     {
                     match("timestamp"); 
 
@@ -1378,7 +1378,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // InternalAADM.g:17192:91: 'scalar-unit.frequency'
+                    // InternalAADM.g:17438:91: 'scalar-unit.frequency'
                     {
                     match("scalar-unit.frequency"); 
 
@@ -1386,7 +1386,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 9 :
-                    // InternalAADM.g:17192:115: 'scalar-unit.size'
+                    // InternalAADM.g:17438:115: 'scalar-unit.size'
                     {
                     match("scalar-unit.size"); 
 
@@ -1394,7 +1394,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 10 :
-                    // InternalAADM.g:17192:134: 'version-type'
+                    // InternalAADM.g:17438:134: 'version-type'
                     {
                     match("version-type"); 
 
@@ -1420,10 +1420,10 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17194:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
-            // InternalAADM.g:17194:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // InternalAADM.g:17440:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
+            // InternalAADM.g:17440:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             {
-            // InternalAADM.g:17194:11: ( '^' )?
+            // InternalAADM.g:17440:11: ( '^' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1432,7 +1432,7 @@ public class InternalAADMLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalAADM.g:17194:11: '^'
+                    // InternalAADM.g:17440:11: '^'
                     {
                     match('^'); 
 
@@ -1450,7 +1450,7 @@ public class InternalAADMLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalAADM.g:17194:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // InternalAADM.g:17440:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             loop6:
             do {
                 int alt6=2;
@@ -1499,10 +1499,10 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17196:10: ( ( '0' .. '9' )+ )
-            // InternalAADM.g:17196:12: ( '0' .. '9' )+
+            // InternalAADM.g:17442:10: ( ( '0' .. '9' )+ )
+            // InternalAADM.g:17442:12: ( '0' .. '9' )+
             {
-            // InternalAADM.g:17196:12: ( '0' .. '9' )+
+            // InternalAADM.g:17442:12: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -1516,7 +1516,7 @@ public class InternalAADMLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalAADM.g:17196:13: '0' .. '9'
+            	    // InternalAADM.g:17442:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1548,10 +1548,10 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17198:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalAADM.g:17198:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalAADM.g:17444:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalAADM.g:17444:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalAADM.g:17198:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalAADM.g:17444:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1569,10 +1569,10 @@ public class InternalAADMLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalAADM.g:17198:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalAADM.g:17444:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalAADM.g:17198:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalAADM.g:17444:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -1588,7 +1588,7 @@ public class InternalAADMLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // InternalAADM.g:17198:21: '\\\\' .
+                    	    // InternalAADM.g:17444:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1596,7 +1596,7 @@ public class InternalAADMLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalAADM.g:17198:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalAADM.g:17444:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1621,10 +1621,10 @@ public class InternalAADMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalAADM.g:17198:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalAADM.g:17444:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalAADM.g:17198:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalAADM.g:17444:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop9:
                     do {
                         int alt9=3;
@@ -1640,7 +1640,7 @@ public class InternalAADMLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // InternalAADM.g:17198:54: '\\\\' .
+                    	    // InternalAADM.g:17444:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1648,7 +1648,7 @@ public class InternalAADMLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalAADM.g:17198:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalAADM.g:17444:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1691,12 +1691,12 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17200:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalAADM.g:17200:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalAADM.g:17446:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalAADM.g:17446:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalAADM.g:17200:24: ( options {greedy=false; } : . )*
+            // InternalAADM.g:17446:24: ( options {greedy=false; } : . )*
             loop11:
             do {
                 int alt11=2;
@@ -1721,7 +1721,7 @@ public class InternalAADMLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalAADM.g:17200:52: .
+            	    // InternalAADM.g:17446:52: .
             	    {
             	    matchAny(); 
 
@@ -1751,12 +1751,12 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17202:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalAADM.g:17202:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalAADM.g:17448:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalAADM.g:17448:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalAADM.g:17202:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalAADM.g:17448:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop12:
             do {
                 int alt12=2;
@@ -1769,7 +1769,7 @@ public class InternalAADMLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalAADM.g:17202:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalAADM.g:17448:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1789,7 +1789,7 @@ public class InternalAADMLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalAADM.g:17202:40: ( ( '\\r' )? '\\n' )?
+            // InternalAADM.g:17448:40: ( ( '\\r' )? '\\n' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1798,9 +1798,9 @@ public class InternalAADMLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // InternalAADM.g:17202:41: ( '\\r' )? '\\n'
+                    // InternalAADM.g:17448:41: ( '\\r' )? '\\n'
                     {
-                    // InternalAADM.g:17202:41: ( '\\r' )?
+                    // InternalAADM.g:17448:41: ( '\\r' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -1809,7 +1809,7 @@ public class InternalAADMLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // InternalAADM.g:17202:41: '\\r'
+                            // InternalAADM.g:17448:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1841,10 +1841,10 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17204:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalAADM.g:17204:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalAADM.g:17450:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalAADM.g:17450:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalAADM.g:17204:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalAADM.g:17450:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt15=0;
             loop15:
             do {
@@ -1898,8 +1898,8 @@ public class InternalAADMLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAADM.g:17206:16: ( . )
-            // InternalAADM.g:17206:18: .
+            // InternalAADM.g:17452:16: ( . )
+            // InternalAADM.g:17452:18: .
             {
             matchAny(); 
 
@@ -2414,7 +2414,7 @@ public class InternalAADMLexer extends Lexer {
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "17192:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )";
+            return "17438:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )";
         }
     }
     static final String DFA16_eotS =
