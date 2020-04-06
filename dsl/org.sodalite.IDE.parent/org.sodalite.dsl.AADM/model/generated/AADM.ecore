@@ -25,6 +25,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" eType="#//ERequirementAssignments"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="capabilities" eType="#//ECapabilityAssignments"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERequirementAssignments">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
@@ -33,6 +35,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="ERequirementAssignment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//ENodeTemplate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECapabilityAssignments">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="capabilities" upperBound="-1"
+        eType="#//ECapabilityAssignment" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECapabilityAssignment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//EPropertyAssigments"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EAttributeAssigments">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"

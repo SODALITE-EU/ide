@@ -116,10 +116,21 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:TextDescription" name="ListStringValue" labelExpression="List of values" valueExpression="aql:self.value.oclAsType(rM::ELIST).list">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
-          </initialOperation>
+        <controls xsi:type="properties:ListDescription" name="Values List" labelExpression="List of values" valueExpression="aql:self.value.oclAsType(rM::ELIST).list" displayExpression="aql:value">
+          <actions labelExpression="Add list item">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:addStringToPropertyValueList()"/>
+            </initialOperation>
+          </actions>
+          <actions labelExpression="Delete selected items">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ELIST).list">
+                <subModelOperations xsi:type="tool:For" expression="var:selection" iteratorName="item">
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:removeStringFromPropertyValueList(item)"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </actions>
         </controls>
       </groups>
       <groups name="GetInputValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::GetInput)">
