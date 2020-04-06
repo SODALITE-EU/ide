@@ -116,6 +116,9 @@ public class BackendProxy {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
 				KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, submissionId);
+				if (saveReport.getIRI() == null && saveReport.getErrors() == null) {
+					throw new Exception("The AADM model could not be saved into the KB. Please, contact your Sodalite administrator");
+				}
 				processValidationIssues(saveReport, event);
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
@@ -126,8 +129,13 @@ public class BackendProxy {
 					}
 				});
 			} catch (Exception e) {
-				MessageDialog.openError(parent, "Save AADM",
-						"There were problems to store the AADM into the KB: " + e.getMessage());
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						MessageDialog.openError(parent, "Save AADM",
+								"There were problems to store the AADM into the KB: " + e.getMessage());
+					}
+				});
 				e.printStackTrace();
 			}
 		});
