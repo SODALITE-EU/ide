@@ -21,6 +21,7 @@
 	</properties>
 	<modules>
 		<module>org.sodalite.dsl.AADM</module>
+		<module>org.sodalite.dsl.AADM.design</module>
 		<module>org.sodalite.dsl.AADM.ide</module>
 		<module>org.sodalite.dsl.AADM.ui</module>
 		<module>org.sodalite.dsl.AADM.web</module>

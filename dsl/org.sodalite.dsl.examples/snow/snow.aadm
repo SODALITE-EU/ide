@@ -40,6 +40,7 @@ node_templates{
 			network: 'orchestrator-net'
 			security_groups: 'default,snow'
 			key_name: get_input: ssh-key-name
+			user_name: 'root'
 		} 
 		requirements{
 			protected_by{
