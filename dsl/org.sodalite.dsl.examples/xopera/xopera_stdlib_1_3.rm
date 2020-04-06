@@ -271,6 +271,13 @@ capability_types{
 					greater_or_equal: "0 MB"
 				}
 			}
+			num_nodes{
+				type: integer
+				required: false
+				constraints{
+					greater_or_equal: "1"
+				}
+			}
 		}
 	}
 	tosca.capabilities.Network{
