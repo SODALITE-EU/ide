@@ -1247,11 +1247,11 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_QUALIFIED_NAME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5941:21: ( RULE_ID ( '.' RULE_ID )+ )
-            // InternalRM.g:5941:23: RULE_ID ( '.' RULE_ID )+
+            // InternalRM.g:6017:21: ( RULE_ID ( '.' RULE_ID )+ )
+            // InternalRM.g:6017:23: RULE_ID ( '.' RULE_ID )+
             {
             mRULE_ID(); 
-            // InternalRM.g:5941:31: ( '.' RULE_ID )+
+            // InternalRM.g:6017:31: ( '.' RULE_ID )+
             int cnt1=0;
             loop1:
             do {
@@ -1265,7 +1265,7 @@ public class InternalRMLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalRM.g:5941:32: '.' RULE_ID
+            	    // InternalRM.g:6017:32: '.' RULE_ID
             	    {
             	    match('.'); 
             	    mRULE_ID(); 
@@ -1298,10 +1298,10 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_BOOLEAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5943:14: ( ( 'true' | 'false' ) )
-            // InternalRM.g:5943:16: ( 'true' | 'false' )
+            // InternalRM.g:6019:14: ( ( 'true' | 'false' ) )
+            // InternalRM.g:6019:16: ( 'true' | 'false' )
             {
-            // InternalRM.g:5943:16: ( 'true' | 'false' )
+            // InternalRM.g:6019:16: ( 'true' | 'false' )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -1319,7 +1319,7 @@ public class InternalRMLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalRM.g:5943:17: 'true'
+                    // InternalRM.g:6019:17: 'true'
                     {
                     match("true"); 
 
@@ -1327,7 +1327,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalRM.g:5943:24: 'false'
+                    // InternalRM.g:6019:24: 'false'
                     {
                     match("false"); 
 
@@ -1353,10 +1353,10 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_ENTITY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5945:13: ( ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' ) )
-            // InternalRM.g:5945:15: ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' )
+            // InternalRM.g:6021:13: ( ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' ) )
+            // InternalRM.g:6021:15: ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' )
             {
-            // InternalRM.g:5945:15: ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' )
+            // InternalRM.g:6021:15: ( 'SELF' | 'SOURCE' | 'TARGET' | 'HOST' )
             int alt3=4;
             switch ( input.LA(1) ) {
             case 'S':
@@ -1396,7 +1396,7 @@ public class InternalRMLexer extends Lexer {
 
             switch (alt3) {
                 case 1 :
-                    // InternalRM.g:5945:16: 'SELF'
+                    // InternalRM.g:6021:16: 'SELF'
                     {
                     match("SELF"); 
 
@@ -1404,7 +1404,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalRM.g:5945:23: 'SOURCE'
+                    // InternalRM.g:6021:23: 'SOURCE'
                     {
                     match("SOURCE"); 
 
@@ -1412,7 +1412,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // InternalRM.g:5945:32: 'TARGET'
+                    // InternalRM.g:6021:32: 'TARGET'
                     {
                     match("TARGET"); 
 
@@ -1420,7 +1420,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // InternalRM.g:5945:41: 'HOST'
+                    // InternalRM.g:6021:41: 'HOST'
                     {
                     match("HOST"); 
 
@@ -1446,15 +1446,15 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_PRIMITIVE_DATA_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5947:26: ( ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' ) )
-            // InternalRM.g:5947:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )
+            // InternalRM.g:6023:26: ( ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' ) )
+            // InternalRM.g:6023:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )
             {
-            // InternalRM.g:5947:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )
+            // InternalRM.g:6023:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )
             int alt4=10;
             alt4 = dfa4.predict(input);
             switch (alt4) {
                 case 1 :
-                    // InternalRM.g:5947:29: 'string'
+                    // InternalRM.g:6023:29: 'string'
                     {
                     match("string"); 
 
@@ -1462,7 +1462,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalRM.g:5947:38: 'integer'
+                    // InternalRM.g:6023:38: 'integer'
                     {
                     match("integer"); 
 
@@ -1470,7 +1470,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // InternalRM.g:5947:48: 'boolean'
+                    // InternalRM.g:6023:48: 'boolean'
                     {
                     match("boolean"); 
 
@@ -1478,7 +1478,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // InternalRM.g:5947:58: 'map'
+                    // InternalRM.g:6023:58: 'map'
                     {
                     match("map"); 
 
@@ -1486,7 +1486,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // InternalRM.g:5947:64: 'list'
+                    // InternalRM.g:6023:64: 'list'
                     {
                     match("list"); 
 
@@ -1494,7 +1494,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // InternalRM.g:5947:71: 'range'
+                    // InternalRM.g:6023:71: 'range'
                     {
                     match("range"); 
 
@@ -1502,7 +1502,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // InternalRM.g:5947:79: 'timestamp'
+                    // InternalRM.g:6023:79: 'timestamp'
                     {
                     match("timestamp"); 
 
@@ -1510,7 +1510,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // InternalRM.g:5947:91: 'scalar-unit.frequency'
+                    // InternalRM.g:6023:91: 'scalar-unit.frequency'
                     {
                     match("scalar-unit.frequency"); 
 
@@ -1518,7 +1518,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 9 :
-                    // InternalRM.g:5947:115: 'scalar-unit.size'
+                    // InternalRM.g:6023:115: 'scalar-unit.size'
                     {
                     match("scalar-unit.size"); 
 
@@ -1526,7 +1526,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 10 :
-                    // InternalRM.g:5947:134: 'version-type'
+                    // InternalRM.g:6023:134: 'version-type'
                     {
                     match("version-type"); 
 
@@ -1552,10 +1552,10 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5949:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
-            // InternalRM.g:5949:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // InternalRM.g:6025:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
+            // InternalRM.g:6025:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             {
-            // InternalRM.g:5949:11: ( '^' )?
+            // InternalRM.g:6025:11: ( '^' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1564,7 +1564,7 @@ public class InternalRMLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalRM.g:5949:11: '^'
+                    // InternalRM.g:6025:11: '^'
                     {
                     match('^'); 
 
@@ -1582,7 +1582,7 @@ public class InternalRMLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalRM.g:5949:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // InternalRM.g:6025:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             loop6:
             do {
                 int alt6=2;
@@ -1631,10 +1631,10 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5951:10: ( ( '0' .. '9' )+ )
-            // InternalRM.g:5951:12: ( '0' .. '9' )+
+            // InternalRM.g:6027:10: ( ( '0' .. '9' )+ )
+            // InternalRM.g:6027:12: ( '0' .. '9' )+
             {
-            // InternalRM.g:5951:12: ( '0' .. '9' )+
+            // InternalRM.g:6027:12: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -1648,7 +1648,7 @@ public class InternalRMLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalRM.g:5951:13: '0' .. '9'
+            	    // InternalRM.g:6027:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1680,10 +1680,10 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5953:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalRM.g:5953:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalRM.g:6029:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalRM.g:6029:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalRM.g:5953:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalRM.g:6029:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1701,10 +1701,10 @@ public class InternalRMLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalRM.g:5953:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalRM.g:6029:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalRM.g:5953:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalRM.g:6029:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -1720,7 +1720,7 @@ public class InternalRMLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // InternalRM.g:5953:21: '\\\\' .
+                    	    // InternalRM.g:6029:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1728,7 +1728,7 @@ public class InternalRMLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalRM.g:5953:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalRM.g:6029:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1753,10 +1753,10 @@ public class InternalRMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalRM.g:5953:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalRM.g:6029:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalRM.g:5953:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalRM.g:6029:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop9:
                     do {
                         int alt9=3;
@@ -1772,7 +1772,7 @@ public class InternalRMLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // InternalRM.g:5953:54: '\\\\' .
+                    	    // InternalRM.g:6029:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1780,7 +1780,7 @@ public class InternalRMLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalRM.g:5953:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalRM.g:6029:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1823,12 +1823,12 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5955:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalRM.g:5955:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalRM.g:6031:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalRM.g:6031:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalRM.g:5955:24: ( options {greedy=false; } : . )*
+            // InternalRM.g:6031:24: ( options {greedy=false; } : . )*
             loop11:
             do {
                 int alt11=2;
@@ -1853,7 +1853,7 @@ public class InternalRMLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalRM.g:5955:52: .
+            	    // InternalRM.g:6031:52: .
             	    {
             	    matchAny(); 
 
@@ -1883,12 +1883,12 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5957:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalRM.g:5957:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalRM.g:6033:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalRM.g:6033:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalRM.g:5957:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalRM.g:6033:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop12:
             do {
                 int alt12=2;
@@ -1901,7 +1901,7 @@ public class InternalRMLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalRM.g:5957:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalRM.g:6033:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1921,7 +1921,7 @@ public class InternalRMLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalRM.g:5957:40: ( ( '\\r' )? '\\n' )?
+            // InternalRM.g:6033:40: ( ( '\\r' )? '\\n' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1930,9 +1930,9 @@ public class InternalRMLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // InternalRM.g:5957:41: ( '\\r' )? '\\n'
+                    // InternalRM.g:6033:41: ( '\\r' )? '\\n'
                     {
-                    // InternalRM.g:5957:41: ( '\\r' )?
+                    // InternalRM.g:6033:41: ( '\\r' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -1941,7 +1941,7 @@ public class InternalRMLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // InternalRM.g:5957:41: '\\r'
+                            // InternalRM.g:6033:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1973,10 +1973,10 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5959:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalRM.g:5959:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRM.g:6035:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalRM.g:6035:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalRM.g:5959:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRM.g:6035:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt15=0;
             loop15:
             do {
@@ -2030,8 +2030,8 @@ public class InternalRMLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRM.g:5961:16: ( . )
-            // InternalRM.g:5961:18: .
+            // InternalRM.g:6037:16: ( . )
+            // InternalRM.g:6037:18: .
             {
             matchAny(); 
 
@@ -2588,7 +2588,7 @@ public class InternalRMLexer extends Lexer {
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "5947:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )";
+            return "6023:28: ( 'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' | 'scalar-unit.size' | 'version-type' )";
         }
     }
     static final String DFA16_eotS =

@@ -264,6 +264,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="ECapabilityDefinitionBody">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ECapabilityType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//EProperties"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" eType="#//EAttributes"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valid_source_types" upperBound="-1"
         eType="#//EValidSourceType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

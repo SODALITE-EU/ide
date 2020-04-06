@@ -38,6 +38,15 @@ node_types{
 			host{
 				type: tosca.capabilities.Compute
 				valid_source_types:[my.nodes.hpc.job.torque]
+				properties{
+					num_nodes{
+						type: integer
+						required: false
+						constraints{
+							greater_or_equal: "1"
+						}
+					}
+				}
 			}
 		}
 	}

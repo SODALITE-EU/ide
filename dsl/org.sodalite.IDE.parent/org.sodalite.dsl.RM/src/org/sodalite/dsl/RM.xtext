@@ -294,6 +294,12 @@ ECapabilityDefinition:
 ECapabilityDefinitionBody:
 	('type:' type=[ECapabilityType|QUALIFIED_NAME]) &
 	('description:' description=STRING)? &
+	('properties{'
+	properties=EProperties
+	'}')? &
+	('attributes{'
+	attributes=EAttributes
+	'}')? &
 	('valid_source_types:[' (valid_source_types+=EValidSourceType)? ']')? &
 	('occurrences:[' start=STRING ',' end=STRING ']')?;
 
