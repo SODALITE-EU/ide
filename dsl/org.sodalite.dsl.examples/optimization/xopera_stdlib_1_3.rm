@@ -243,13 +243,6 @@ capability_types{
 					greater_or_equal: "1"
 				}
 			}
-			num_gpus{
-				type: integer
-				required: false
-				constraints{
-					greater_or_equal: "1"
-				}
-			}
 			cpu_frequency{
 				type: scalar-unit.frequency
 				required: false

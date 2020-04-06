@@ -46,12 +46,28 @@ node_templates{
 				node: security-rules-snow
 			}
 		}
+		capabilities{
+			host{
+				properties{
+					disk_size: "10 GB"
+					num_cpus: "4"
+					num_gpus: "1"
+					mem_size: "4 GB"
+				}
+			}
+			os{
+				properties{
+					architecture: "x86_64"
+				}
+			}
+		}
 	}
 
 	snow-docker_host{
 		type: sodalite.nodes.DockerHost
 		properties{
 			registry_ip: get_input: docker-registry-ip
+			
 		}
 		requirements{
 			host{
@@ -67,10 +83,14 @@ node_templates{
 		 	ports: ['8080:8080']
 		 	exposed_ports: ['8080']
 		 	volumes: "/tmp/docker:/tmp"
+		 	optimization:['GraphCompiler', 'ExtractTransformLoad']
 		 }
 		 requirements{
 		 	host{
 		 		node: snow-docker_host
+		 	}
+		 	dependency{
+		 		node: tensorflow
 		 	}
 		 }
 	}
@@ -88,5 +108,9 @@ node_templates{
 				node: snow-docker_host
 			}
 		}
+	}
+	
+	tensorflow{
+		type:tosca.nodes.SoftwareComponent
 	}
 }

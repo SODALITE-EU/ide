@@ -1,0 +1,61 @@
+data_types{
+	tosca.datatypes.optimization.Root{
+		derived_from: tosca.datatypes.Root
+	}
+	tosca.datatypes.optimization.Autotuning{
+		derived_from: tosca.datatypes.optimization.Root
+	}
+	tosca.datatypes.optimization.MultiArchitectureSupport{
+		derived_from: tosca.datatypes.optimization.Root
+	}
+	tosca.datatypes.optimization.AITrainingOrInference{
+		derived_from: tosca.datatypes.optimization.Root
+	}
+	tosca.datatypes.optimization.AITrainingOrInference.AIFramework{
+		derived_from: tosca.datatypes.optimization.AITrainingOrInference
+	}
+	tosca.datatypes.optimization.AITrainingOrInference.GraphCompiler{
+		derived_from: tosca.datatypes.optimization.AITrainingOrInference
+	}
+	tosca.datatypes.optimization.AITrainingOrInference.ExtractTransformLoad{
+		derived_from: tosca.datatypes.optimization.AITrainingOrInference
+	}
+	tosca.datatypes.optimization.BigDataAnalytics{
+		derived_from: tosca.datatypes.optimization.Root
+	}
+	tosca.datatypes.optimization.BigDataAnalytics.AnalyticsFramework{
+		derived_from: tosca.datatypes.optimization.BigDataAnalytics
+	}
+	tosca.datatypes.optimization.BigDataAnalytics.Storage{
+		derived_from: tosca.datatypes.optimization.BigDataAnalytics
+	}
+	tosca.datatypes.optimization.HPCSolver{
+		derived_from: tosca.datatypes.optimization.Root
+	}
+	tosca.datatypes.optimization.HPCSolver.Libraries{
+		derived_from: tosca.datatypes.optimization.HPCSolver
+	}
+	tosca.datatypes.optimization.HPCSolver.MPI{
+		derived_from: tosca.datatypes.optimization.HPCSolver
+	}
+	tosca.datatypes.optimization.HPCSolver.OpenMP{
+		derived_from: tosca.datatypes.optimization.HPCSolver
+	}
+	tosca.datatypes.optimization.HPCSolver.OpenACC{
+		derived_from: tosca.datatypes.optimization.HPCSolver
+	}
+}
+
+node_types{
+	tosca.nodes.SoftwareComponent{
+		derived_from: tosca.nodes.Root
+		properties{  
+			optimization{
+				description: 'List of required optimization options. @TODO '
+				required:false
+				type:list
+				entry_schema: tosca.datatypes.optimization.Root
+			}
+		}
+	}
+}

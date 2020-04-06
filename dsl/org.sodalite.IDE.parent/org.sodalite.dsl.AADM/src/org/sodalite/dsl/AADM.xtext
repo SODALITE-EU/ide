@@ -43,7 +43,11 @@ ENodeTemplateBody:
 	'}')? &
 	('requirements{'
 	requirements=ERequirementAssignments
-	'}')?;
+	'}')? &
+	('capabilities{'
+	capabilities=ECapabilityAssignments
+	'}')?
+	;
 
 ERequirementAssignments:
 	{ERequirementAssignments} (requirements+=ERequirementAssignment)*;
@@ -51,6 +55,16 @@ ERequirementAssignments:
 ERequirementAssignment:
 	name=ID '{'
 	('node:' node=[ENodeTemplate|ID])
+	'}';
+
+ECapabilityAssignments:
+	{ECapabilityAssignments} (capabilities+=ECapabilityAssignment)*;
+
+ECapabilityAssignment:
+	name=ID '{'
+	('properties{'
+	properties=EPropertyAssigments
+	'}')? 
 	'}';
 
 EAttributeAssigments:

@@ -1,0 +1,14 @@
+node_templates{
+	optimized_computation_node {
+		type:tosca.nodes.SoftwareComponent
+		properties{
+			optimization:['Autotuning', 'AIFramework', 'MPI']
+		}
+		requirements{
+			host{
+				//Should offer GPUs. KB Reasoner should filter out nodes that do not satisfy optimization features
+				node: hpc_job_torque_1
+			}
+		}
+	}
+}
