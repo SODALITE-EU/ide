@@ -21,3 +21,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Automatic-Module-Name: org.sodalite.dsl.AADM.design
+Bundle-ClassPath: lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-dependencies.jar,
+ .

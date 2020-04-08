@@ -1,12 +1,17 @@
 package org.sodalite.dsl.AADM.design;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
+import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
-import org.sodalite.dsl.aADM.impl.EPropertyAssignmentImpl;
-import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
+import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
+import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.types.Node;
+import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.ESTRING;
@@ -64,9 +69,4 @@ public class Services {
     		prop.getName() + " Item: " + item);
     }
     
-//    public String getLabel (EObject obj) {
-//    	System.out.println("obj: " + obj.getClass());
-//    	
-//    	return "XXX";
-//    }
 }
