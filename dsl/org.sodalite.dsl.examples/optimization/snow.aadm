@@ -32,7 +32,7 @@ node_templates{
 	}
 
 	snow-vm{
-		type: sodalite.nodes.OpenStack.VM
+		type: sodalite.nodes.VM.OpenStack
 		properties{
 			name: 'snow-vm'
 			image: 'centos7'

@@ -1,0 +1,1137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aADM="http://www.sodalite.org/dsl/AADM" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_8ZQ2AHjZEeqIbaNeXqxckg" selectedViews="_9ia2cHjZEeqIbaNeXqxckg" version="14.1.0.201810161215">
+    <semanticResources>hpc.aadm</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_9ia2cHjZEeqIbaNeXqxckg">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="__5CvkHjZEeqIbaNeXqxckg" name="AADM Diagram" repPath="#__1TfEHjZEeqIbaNeXqxckg">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']"/>
+        <target xmi:type="aADM:AADM_Model" href="hpc.aadm#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="__1TfEHjZEeqIbaNeXqxckg" name="AADM Diagram">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="__49QDHjZEeqIbaNeXqxckg" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="__49QDXjZEeqIbaNeXqxckg"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="__5DWoHjZEeqIbaNeXqxckg" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="__5DWoXjZEeqIbaNeXqxckg" type="Sirius" element="__1TfEHjZEeqIbaNeXqxckg" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="__5DWo3jZEeqIbaNeXqxckg" type="2002" element="__3DLgHjZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5HBAHjZEeqIbaNeXqxckg" type="3012" element="__3FAtHjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5HBA3jZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5HBBHjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5IPIHjZEeqIbaNeXqxckg" type="3003" element="__3eCQHjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5IPIXjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5IPInjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5HBAXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5HBAnjZEeqIbaNeXqxckg" x="-15" y="-22" width="150" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5EkwHjZEeqIbaNeXqxckg" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="__5EkwXjZEeqIbaNeXqxckg" type="7001">
+            <children xmi:type="notation:Node" xmi:id="__XqAIHjhEeqIbaNeXqxckg" type="3009" element="__WN1sXjhEeqIbaNeXqxckg">
+              <children xmi:type="notation:Node" xmi:id="__XqnMHjhEeqIbaNeXqxckg" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="__XqnMXjhEeqIbaNeXqxckg" type="7003">
+                <children xmi:type="notation:Node" xmi:id="__XrOQHjhEeqIbaNeXqxckg" type="3010" element="__WPq4XjhEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__XrOQXjhEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__XrOQnjhEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__XrOQ3jhEeqIbaNeXqxckg" type="3010" element="__WQR8XjhEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__XrORHjhEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__XrORXjhEeqIbaNeXqxckg"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="__XqnMnjhEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="__XqnM3jhEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="__XqnNHjhEeqIbaNeXqxckg"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__XqAIXjhEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__XqAInjhEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="__5EkwnjZEeqIbaNeXqxckg"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="__5Ekw3jZEeqIbaNeXqxckg"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="__5DWpHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5DWpXjZEeqIbaNeXqxckg" x="468" y="234"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="__5FL0HjZEeqIbaNeXqxckg" type="2002" element="__3EZoHjZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5I2NHjZEeqIbaNeXqxckg" type="3012" element="__3gegHjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5JdQHjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5JdQXjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5LScHjZEeqIbaNeXqxckg" type="3003" element="__3iTsHjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5LScXjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5LScnjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5I2NXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5I2NnjZEeqIbaNeXqxckg" y="-22" width="150" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5KEUHjZEeqIbaNeXqxckg" type="3012" element="__3iTsnjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5KrYHjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5KrYXjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5LSc3jZEeqIbaNeXqxckg" type="3003" element="__3i6wHjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5LSdHjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5LSdXjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5KEUXjZEeqIbaNeXqxckg" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5KEUnjZEeqIbaNeXqxckg" x="165" y="18" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5FL03jZEeqIbaNeXqxckg" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="__5FL1HjZEeqIbaNeXqxckg" type="7001">
+            <children xmi:type="notation:Node" xmi:id="__5LSdnjZEeqIbaNeXqxckg" type="3009" element="__3i6wnjZEeqIbaNeXqxckg">
+              <children xmi:type="notation:Node" xmi:id="__5L5gHjZEeqIbaNeXqxckg" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="__5L5gXjZEeqIbaNeXqxckg" type="7003">
+                <children xmi:type="notation:Node" xmi:id="__5L5hXjZEeqIbaNeXqxckg" type="3010" element="__3kI4HjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5L5hnjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5L5h3jZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5MgkHjZEeqIbaNeXqxckg" type="3010" element="__3l-EXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5MgkXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5MgknjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5Mgk3jZEeqIbaNeXqxckg" type="3010" element="__3nzQHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5MglHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5MglXjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5MglnjZEeqIbaNeXqxckg" type="3010" element="__3pBYXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5Mgl3jZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5MgmHjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5NHoHjZEeqIbaNeXqxckg" type="3010" element="__3q2kHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5NHoXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5NHonjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5NHo3jZEeqIbaNeXqxckg" type="3010" element="__3sEsXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5NHpHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5NHpXjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5NHpnjZEeqIbaNeXqxckg" type="3010" element="__3t54HjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5NHp3jZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5NHqHjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5NusHjZEeqIbaNeXqxckg" type="3010" element="__3wWIHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5NusXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5NusnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5Nus3jZEeqIbaNeXqxckg" type="3010" element="__3xkQXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5NutHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5NutXjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5OVwHjZEeqIbaNeXqxckg" type="3010" element="__3yyYXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5OVwXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5OVwnjZEeqIbaNeXqxckg"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="__5L5gnjZEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="__5L5g3jZEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="__5L5hHjZEeqIbaNeXqxckg"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5LSd3jZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5LSeHjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="__5FL1XjZEeqIbaNeXqxckg"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="__5FL1njZEeqIbaNeXqxckg"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="__5FL0XjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5FL0njZEeqIbaNeXqxckg" x="126" y="234"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="__5Fy4HjZEeqIbaNeXqxckg" type="2002" element="__3EZo3jZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5OVw3jZEeqIbaNeXqxckg" type="3012" element="__30nkHjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5O80HjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5O80XjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5QyAHjZEeqIbaNeXqxckg" type="3003" element="__311sHjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5QyAXjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5QyAnjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5OVxHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5OVxXjZEeqIbaNeXqxckg" y="-22" width="150" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5O80njZEeqIbaNeXqxckg" type="3012" element="__32cwHjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5Pj4HjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5Pj4XjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5RZEHjZEeqIbaNeXqxckg" type="3003" element="__32cwXjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5RZEXjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5RZEnjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5O803jZEeqIbaNeXqxckg" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5O81HjZEeqIbaNeXqxckg" x="-92" y="9" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5Pj4njZEeqIbaNeXqxckg" type="3012" element="__33D0HjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5QK8HjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5QK8XjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5SAIHjZEeqIbaNeXqxckg" type="3003" element="__33D0XjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5SAIXjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5SAInjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5Pj43jZEeqIbaNeXqxckg" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5Pj5HjZEeqIbaNeXqxckg" x="-92" y="162" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5QK8njZEeqIbaNeXqxckg" type="3012" element="__33D03jZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5QK9XjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5QK9njZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5SAI3jZEeqIbaNeXqxckg" type="3003" element="__33D1HjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5SAJHjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5SAJXjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5QK83jZEeqIbaNeXqxckg" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5QK9HjZEeqIbaNeXqxckg" x="-92" y="72" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5Fy43jZEeqIbaNeXqxckg" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="__5Fy5HjZEeqIbaNeXqxckg" type="7001">
+            <children xmi:type="notation:Node" xmi:id="__5SnMHjZEeqIbaNeXqxckg" type="3009" element="__33q4HjZEeqIbaNeXqxckg">
+              <children xmi:type="notation:Node" xmi:id="__5SnM3jZEeqIbaNeXqxckg" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="__5TOQHjZEeqIbaNeXqxckg" type="7003">
+                <children xmi:type="notation:Node" xmi:id="__5TORHjZEeqIbaNeXqxckg" type="3010" element="__34R8HjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5TORXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5TORnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5T1UHjZEeqIbaNeXqxckg" type="3010" element="__36uMHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5T1UXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5T1UnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5UcYHjZEeqIbaNeXqxckg" type="3010" element="__38jYHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5UcYXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5UcYnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5UcY3jZEeqIbaNeXqxckg" type="3010" element="__39xgXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5UcZHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5UcZXjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5VDcHjZEeqIbaNeXqxckg" type="3010" element="__3-_oXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5VDcXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5VDcnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5VqgHjZEeqIbaNeXqxckg" type="3010" element="__4A00HjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5VqgXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5VqgnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5Vqg3jZEeqIbaNeXqxckg" type="3010" element="__4CqAXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5VqhHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5VqhXjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5WRkHjZEeqIbaNeXqxckg" type="3010" element="__4EfMHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5WRkXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5WRknjZEeqIbaNeXqxckg"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="__5TOQXjZEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="__5TOQnjZEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="__5TOQ3jZEeqIbaNeXqxckg"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5SnMXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5SnMnjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="__5Fy5XjZEeqIbaNeXqxckg"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="__5Fy5njZEeqIbaNeXqxckg"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="__5Fy4XjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5Fy4njZEeqIbaNeXqxckg" x="864" y="630"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="__5Fy53jZEeqIbaNeXqxckg" type="2002" element="__3EZpnjZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5WRk3jZEeqIbaNeXqxckg" type="3012" element="__4FtUHjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5W4oHjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5W4oXjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5Yt0HjZEeqIbaNeXqxckg" type="3003" element="__4GUYHjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5Yt0XjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5Yt0njZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5WRlHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5WRlXjZEeqIbaNeXqxckg" y="-22" width="150" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5W4onjZEeqIbaNeXqxckg" type="3012" element="__4G7cHjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5XfsHjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5XfsXjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5Yt03jZEeqIbaNeXqxckg" type="3003" element="__4G7cXjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5Yt1HjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5Yt1XjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5W4o3jZEeqIbaNeXqxckg" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5W4pHjZEeqIbaNeXqxckg" x="165" y="36" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5XfsnjZEeqIbaNeXqxckg" type="3012" element="__4G7c3jZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5YGwHjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5YGwXjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5ZU4HjZEeqIbaNeXqxckg" type="3003" element="__4G7dHjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5ZU4XjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5ZU4njZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5Xfs3jZEeqIbaNeXqxckg" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5XftHjZEeqIbaNeXqxckg" x="-92" y="36" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5GZ8HjZEeqIbaNeXqxckg" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="__5GZ8XjZEeqIbaNeXqxckg" type="7001">
+            <children xmi:type="notation:Node" xmi:id="__5ZU43jZEeqIbaNeXqxckg" type="3009" element="__4HigHjZEeqIbaNeXqxckg">
+              <children xmi:type="notation:Node" xmi:id="__5Z78HjZEeqIbaNeXqxckg" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="__5Z78XjZEeqIbaNeXqxckg" type="7003">
+                <children xmi:type="notation:Node" xmi:id="__5Z79XjZEeqIbaNeXqxckg" type="3010" element="__4IJkHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5Z79njZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5Z793jZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5ajAHjZEeqIbaNeXqxckg" type="3010" element="__4J-wHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5ajAXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5ajAnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5ajA3jZEeqIbaNeXqxckg" type="3010" element="__4mqsHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5ajBHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5ajBXjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5ajBnjZEeqIbaNeXqxckg" type="3010" element="__4n40XjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5ajB3jZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5ajCHjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5bKEHjZEeqIbaNeXqxckg" type="3010" element="__4pG8XjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5bKEXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5bKEnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5bKE3jZEeqIbaNeXqxckg" type="3010" element="__4q8IHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5bKFHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5bKFXjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5bxIHjZEeqIbaNeXqxckg" type="3010" element="__4sKQXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5bxIXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5bxInjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5bxI3jZEeqIbaNeXqxckg" type="3010" element="__4t_cHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5bxJHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5bxJXjZEeqIbaNeXqxckg"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="__5Z78njZEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="__5Z783jZEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="__5Z79HjZEeqIbaNeXqxckg"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5ZU5HjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5ZU5XjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="__5GZ8njZEeqIbaNeXqxckg"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="__5GZ83jZEeqIbaNeXqxckg"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="__5Fy6HjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5Fy6XjZEeqIbaNeXqxckg" x="504" y="540"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="__5GZ9HjZEeqIbaNeXqxckg" type="2002" element="__3FAsXjZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5cYMHjZEeqIbaNeXqxckg" type="3012" element="__4vNkHjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5cYM3jZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5cYNHjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5e0cHjZEeqIbaNeXqxckg" type="3003" element="__4wbsHjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5e0cXjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5e0cnjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5cYMXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5cYMnjZEeqIbaNeXqxckg" y="-22" width="150" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5c_QHjZEeqIbaNeXqxckg" type="3012" element="__4wbsnjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5c_Q3jZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5c_RHjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5fbgHjZEeqIbaNeXqxckg" type="3003" element="__4wbs3jZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5fbgXjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5fbgnjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5c_QXjZEeqIbaNeXqxckg" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5c_QnjZEeqIbaNeXqxckg" x="165" y="36" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5dmUHjZEeqIbaNeXqxckg" type="3012" element="__4wbtXjZEeqIbaNeXqxckg">
+            <children xmi:type="notation:Node" xmi:id="__5eNYHjZEeqIbaNeXqxckg" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__5eNYXjZEeqIbaNeXqxckg" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="__5fbg3jZEeqIbaNeXqxckg" type="3003" element="__4xCwHjZEeqIbaNeXqxckg">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5fbhHjZEeqIbaNeXqxckg" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5fbhXjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="__5dmUXjZEeqIbaNeXqxckg" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5dmUnjZEeqIbaNeXqxckg" x="-92" y="36" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5GZ93jZEeqIbaNeXqxckg" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="__5GZ-HjZEeqIbaNeXqxckg" type="7001">
+            <children xmi:type="notation:Node" xmi:id="__5gCkHjZEeqIbaNeXqxckg" type="3009" element="__4xCwnjZEeqIbaNeXqxckg">
+              <children xmi:type="notation:Node" xmi:id="__5gpoHjZEeqIbaNeXqxckg" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="__5gpoXjZEeqIbaNeXqxckg" type="7003">
+                <children xmi:type="notation:Node" xmi:id="__5hQsHjZEeqIbaNeXqxckg" type="3010" element="__4xCxXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5hQsXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5hQsnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5hQs3jZEeqIbaNeXqxckg" type="3010" element="__4y38HjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5hQtHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5hQtXjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5hQtnjZEeqIbaNeXqxckg" type="3010" element="__40GEHjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5hQt3jZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5hQuHjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5h3wHjZEeqIbaNeXqxckg" type="3010" element="__41UMXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5h3wXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5h3wnjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5h3w3jZEeqIbaNeXqxckg" type="3010" element="__42iUXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5h3xHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5h3xXjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5h3xnjZEeqIbaNeXqxckg" type="3010" element="__43wcXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5h3x3jZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5h3yHjZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5ie0HjZEeqIbaNeXqxckg" type="3010" element="__44-kXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5ie0XjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5ie0njZEeqIbaNeXqxckg"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="__5ie03jZEeqIbaNeXqxckg" type="3010" element="__46MsXjZEeqIbaNeXqxckg">
+                  <styles xmi:type="notation:FontStyle" xmi:id="__5ie1HjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__5ie1XjZEeqIbaNeXqxckg"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="__5gponjZEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="__5gpo3jZEeqIbaNeXqxckg"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="__5gppHjZEeqIbaNeXqxckg"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="__5gCkXjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5gCknjZEeqIbaNeXqxckg"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="__5GZ-XjZEeqIbaNeXqxckg"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="__5GZ-njZEeqIbaNeXqxckg"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="__5GZ9XjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5GZ9njZEeqIbaNeXqxckg" x="126" y="666"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="__5DWonjZEeqIbaNeXqxckg"/>
+        <edges xmi:type="notation:Edge" xmi:id="__5jF4HjZEeqIbaNeXqxckg" type="4001" element="__48B4HjZEeqIbaNeXqxckg" source="__5KEUHjZEeqIbaNeXqxckg" target="__5DWo3jZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5jF5HjZEeqIbaNeXqxckg" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5jF5XjZEeqIbaNeXqxckg" x="-3" y="-9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5jF5njZEeqIbaNeXqxckg" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5jF53jZEeqIbaNeXqxckg" x="1" y="7"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5jF6HjZEeqIbaNeXqxckg" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5jF6XjZEeqIbaNeXqxckg" y="8"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="__5jF4XjZEeqIbaNeXqxckg"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="__5jF4njZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__5jF43jZEeqIbaNeXqxckg" points="[50, -2, -89, 0]$[127, -2, -12, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5js8HjZEeqIbaNeXqxckg" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5js8XjZEeqIbaNeXqxckg" id="(0.1,0.43661971830985913)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="__5js8njZEeqIbaNeXqxckg" type="4001" element="__48o8HjZEeqIbaNeXqxckg" source="__5O80njZEeqIbaNeXqxckg" target="__5DWo3jZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5js9njZEeqIbaNeXqxckg" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5js93jZEeqIbaNeXqxckg" x="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5kUAHjZEeqIbaNeXqxckg" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5kUAXjZEeqIbaNeXqxckg" x="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5kUAnjZEeqIbaNeXqxckg" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5kUA3jZEeqIbaNeXqxckg" y="-10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="__5js83jZEeqIbaNeXqxckg"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="__5js9HjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__5js9XjZEeqIbaNeXqxckg" points="[6, -15, 240, 359]$[6, -366, 240, 8]$[-234, -366, 0, 8]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5kUBHjZEeqIbaNeXqxckg" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5kUBXjZEeqIbaNeXqxckg" id="(1.0,0.647887323943662)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="__5kUBnjZEeqIbaNeXqxckg" type="4001" element="__48o9XjZEeqIbaNeXqxckg" source="__5Pj4njZEeqIbaNeXqxckg" target="__5GZ9HjZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5kUCnjZEeqIbaNeXqxckg" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5kUC3jZEeqIbaNeXqxckg" x="31" y="-2"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5kUDHjZEeqIbaNeXqxckg" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5kUDXjZEeqIbaNeXqxckg" x="-6" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5kUDnjZEeqIbaNeXqxckg" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5kUD3jZEeqIbaNeXqxckg" x="-4" y="7"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="__5kUB3jZEeqIbaNeXqxckg"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="__5kUCHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__5kUCXjZEeqIbaNeXqxckg" points="[-50, 0, 474, 0]$[-523, 0, 1, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5k7EHjZEeqIbaNeXqxckg" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5k7EXjZEeqIbaNeXqxckg" id="(0.9942196531791907,0.6467889908256881)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="__5k7EnjZEeqIbaNeXqxckg" type="4001" element="__48o-njZEeqIbaNeXqxckg" source="__5QK8njZEeqIbaNeXqxckg" target="__5Fy53jZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5k7FnjZEeqIbaNeXqxckg" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5k7F3jZEeqIbaNeXqxckg" x="17" y="8"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5k7GHjZEeqIbaNeXqxckg" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5k7GXjZEeqIbaNeXqxckg" x="6" y="-3"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5k7GnjZEeqIbaNeXqxckg" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5k7G3jZEeqIbaNeXqxckg" x="5" y="-1"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="__5k7E3jZEeqIbaNeXqxckg"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="__5k7FHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__5k7FXjZEeqIbaNeXqxckg" points="[-50, -3, 97, 0]$[-145, -3, 2, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5liIHjZEeqIbaNeXqxckg" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5liIXjZEeqIbaNeXqxckg" id="(0.9884393063583815,0.7981651376146789)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="__5liInjZEeqIbaNeXqxckg" type="4001" element="__48o_3jZEeqIbaNeXqxckg" source="__5W4onjZEeqIbaNeXqxckg" target="__5DWo3jZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5mJMHjZEeqIbaNeXqxckg" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5mJMXjZEeqIbaNeXqxckg" x="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5mJMnjZEeqIbaNeXqxckg" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5mJM3jZEeqIbaNeXqxckg" x="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5mJNHjZEeqIbaNeXqxckg" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5mJNXjZEeqIbaNeXqxckg" x="-3" y="-10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="__5liI3jZEeqIbaNeXqxckg"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="__5liJHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__5liJXjZEeqIbaNeXqxckg" points="[0, -15, 190, 271]$[0, -231, 190, 55]$[-190, -286, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5mwQHjZEeqIbaNeXqxckg" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5mwQXjZEeqIbaNeXqxckg" id="(0.5083333333333333,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="__5mwQnjZEeqIbaNeXqxckg" type="4001" element="__48pBHjZEeqIbaNeXqxckg" source="__5XfsnjZEeqIbaNeXqxckg" target="__5FL0HjZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5mwRnjZEeqIbaNeXqxckg" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5mwR3jZEeqIbaNeXqxckg" x="13" y="-3"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5mwSHjZEeqIbaNeXqxckg" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5mwSXjZEeqIbaNeXqxckg" x="-6" y="4"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5mwSnjZEeqIbaNeXqxckg" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5mwS3jZEeqIbaNeXqxckg" x="-7" y="5"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="__5mwQ3jZEeqIbaNeXqxckg"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="__5mwRHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__5mwRXjZEeqIbaNeXqxckg" points="[-37, -15, 212, 86]$[-249, -101, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5nXUHjZEeqIbaNeXqxckg" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5nXUXjZEeqIbaNeXqxckg" id="(0.5028901734104047,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="__5nXUnjZEeqIbaNeXqxckg" type="4001" element="__49QAnjZEeqIbaNeXqxckg" source="__5c_QHjZEeqIbaNeXqxckg" target="__5DWo3jZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5nXVnjZEeqIbaNeXqxckg" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5nXV3jZEeqIbaNeXqxckg" x="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5nXWHjZEeqIbaNeXqxckg" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5nXWXjZEeqIbaNeXqxckg" x="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5nXWnjZEeqIbaNeXqxckg" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5nXW3jZEeqIbaNeXqxckg" x="-3" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="__5nXU3jZEeqIbaNeXqxckg"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="__5nXVHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__5nXVXjZEeqIbaNeXqxckg" points="[0, -15, -188, 397]$[0, -357, -188, 55]$[188, -412, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5n-YHjZEeqIbaNeXqxckg" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5n-YXjZEeqIbaNeXqxckg" id="(0.5083333333333333,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="__5n-YnjZEeqIbaNeXqxckg" type="4001" element="__49QB3jZEeqIbaNeXqxckg" source="__5dmUHjZEeqIbaNeXqxckg" target="__5FL0HjZEeqIbaNeXqxckg">
+          <children xmi:type="notation:Node" xmi:id="__5olcHjZEeqIbaNeXqxckg" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5olcXjZEeqIbaNeXqxckg" x="-32" y="-2"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5olcnjZEeqIbaNeXqxckg" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5olc3jZEeqIbaNeXqxckg" x="-20" y="3"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="__5oldHjZEeqIbaNeXqxckg" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5oldXjZEeqIbaNeXqxckg" x="-37" y="8"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="__5n-Y3jZEeqIbaNeXqxckg"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="__5n-ZHjZEeqIbaNeXqxckg" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__5n-ZXjZEeqIbaNeXqxckg" points="[6, -15, -123, 212]$[6, -159, -123, 68]$[129, -227, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5pMgHjZEeqIbaNeXqxckg" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__5pMgXjZEeqIbaNeXqxckg" id="(0.5028901734104047,1.0)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="__3DLgHjZEeqIbaNeXqxckg" name="hpc_wm_torque" incomingEdges="__48B4HjZEeqIbaNeXqxckg __48o8HjZEeqIbaNeXqxckg __48o_3jZEeqIbaNeXqxckg __49QAnjZEeqIbaNeXqxckg" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__3FAtHjZEeqIbaNeXqxckg" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0/@node"/>
+        <ownedStyle xmi:type="diagram:Square" uid="__3eCQHjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__3DykHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="__WN1sXjhEeqIbaNeXqxckg" name="Capabilities">
+        <target xmi:type="aADM:ECapabilityAssignments" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities"/>
+        <semanticElements xmi:type="aADM:ECapabilityAssignments" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__WOcwHjhEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>italic</labelFormat>
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__WPq4XjhEeqIbaNeXqxckg" name="host">
+          <target xmi:type="aADM:ECapabilityAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0"/>
+          <semanticElements xmi:type="aADM:ECapabilityAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__WQR8HjhEeqIbaNeXqxckg" labelSize="12" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subNodeMappings[name='Capability']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subNodeMappings[name='Capability']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__WQR8XjhEeqIbaNeXqxckg" name="os">
+          <target xmi:type="aADM:ECapabilityAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.1"/>
+          <semanticElements xmi:type="aADM:ECapabilityAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__WQ5AHjhEeqIbaNeXqxckg" labelSize="12" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subNodeMappings[name='Capability']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subNodeMappings[name='Capability']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="__3EZoHjZEeqIbaNeXqxckg" name="hpc_job_torque_1" incomingEdges="__48pBHjZEeqIbaNeXqxckg __49QB3jZEeqIbaNeXqxckg" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__3gegHjZEeqIbaNeXqxckg" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node"/>
+        <ownedStyle xmi:type="diagram:Square" uid="__3iTsHjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__3iTsnjZEeqIbaNeXqxckg" name="req: host" outgoingEdges="__48B4HjZEeqIbaNeXqxckg" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@requirements/@requirements.0"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="__3i6wHjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__3EZoXjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="__3i6wnjZEeqIbaNeXqxckg" name="Properties">
+        <target xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__3i6w3jZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>italic</labelFormat>
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3kI4HjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.0"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3l-EHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3l-EXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.1"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3nMMHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3nzQHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.2"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.2"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3pBYHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3pBYXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.3"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.3"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3qPgHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3q2kHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.4"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.4"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3sEsHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3sEsXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.5"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.5"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3tS0HjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3t54HjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.6"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.6"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3vvEHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3wWIHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.7"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.7"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3xkQHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3xkQXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.8"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.8"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3yyYHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3yyYXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.9"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.9"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__30AgHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="__3EZo3jZEeqIbaNeXqxckg" name="hpc_job_torque_4" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__30nkHjZEeqIbaNeXqxckg" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node"/>
+        <ownedStyle xmi:type="diagram:Square" uid="__311sHjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__32cwHjZEeqIbaNeXqxckg" name="req: host" outgoingEdges="__48o8HjZEeqIbaNeXqxckg" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.0"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="__32cwXjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__33D0HjZEeqIbaNeXqxckg" name="req: dependency" outgoingEdges="__48o9XjZEeqIbaNeXqxckg" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.1"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.1"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="__33D0XjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__33D03jZEeqIbaNeXqxckg" name="req: dependency" outgoingEdges="__48o-njZEeqIbaNeXqxckg" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.2"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.2"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="__33D1HjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__3EZpHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="__33q4HjZEeqIbaNeXqxckg" name="Properties">
+        <target xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__33q4XjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>italic</labelFormat>
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__34R8HjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.0"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__36HIHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__36uMHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.1"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__378UHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__38jYHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.2"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.2"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__39xgHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__39xgXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.3"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.3"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__3-_oHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__3-_oXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.4"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.4"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4ANwHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4A00HjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.5"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.5"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4CqAHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4CqAXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.6"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.6"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4D4IHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4EfMHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.7"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.7"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4FGQHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="__3EZpnjZEeqIbaNeXqxckg" name="hpc_job_torque_2" incomingEdges="__48o-njZEeqIbaNeXqxckg" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__4FtUHjZEeqIbaNeXqxckg" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node"/>
+        <ownedStyle xmi:type="diagram:Square" uid="__4GUYHjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__4G7cHjZEeqIbaNeXqxckg" name="req: host" outgoingEdges="__48o_3jZEeqIbaNeXqxckg" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.0"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="__4G7cXjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__4G7c3jZEeqIbaNeXqxckg" name="req: dependency" outgoingEdges="__48pBHjZEeqIbaNeXqxckg" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.1"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.1"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="__4G7dHjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__3EZp3jZEeqIbaNeXqxckg" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="__4HigHjZEeqIbaNeXqxckg" name="Properties">
+        <target xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__4HigXjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>italic</labelFormat>
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4IJkHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.0"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4JXsHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4J-wHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.1"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4mDoHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4mqsHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.2"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.2"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4n40HjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4n40XjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.3"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.3"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4pG8HjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4pG8XjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.4"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.4"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4qVEHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4q8IHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.5"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.5"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4sKQHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4sKQXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.6"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.6"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4tYYHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4t_cHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.7"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.7"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4umgHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="__3FAsXjZEeqIbaNeXqxckg" name="hpc_job_torque_3" incomingEdges="__48o9XjZEeqIbaNeXqxckg" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__4vNkHjZEeqIbaNeXqxckg" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node"/>
+        <ownedStyle xmi:type="diagram:Square" uid="__4wbsHjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__4wbsnjZEeqIbaNeXqxckg" name="req: host" outgoingEdges="__49QAnjZEeqIbaNeXqxckg" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="__4wbs3jZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="__4wbtXjZEeqIbaNeXqxckg" name="req: dependency" outgoingEdges="__49QB3jZEeqIbaNeXqxckg" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.1"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.1"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="__4xCwHjZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__3FAsnjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="__4xCwnjZEeqIbaNeXqxckg" name="Properties">
+        <target xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__4xCw3jZEeqIbaNeXqxckg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>italic</labelFormat>
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4xCxXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.0"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4yQ4HjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__4y38HjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.1"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__4zfAHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__40GEHjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.2"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.2"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__41UMHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__41UMXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.3"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.3"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__42iUHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__42iUXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.4"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.4"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__43wcHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__43wcXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.5"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.5"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__44-kHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__44-kXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.6"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.6"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__46MsHjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="__46MsXjZEeqIbaNeXqxckg" name="Invalid feature as name">
+          <target xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.7"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.7"/>
+          <ownedStyle xmi:type="diagram:Square" uid="__47a0HjZEeqIbaNeXqxckg" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="__48B4HjZEeqIbaNeXqxckg" sourceNode="__3iTsnjZEeqIbaNeXqxckg" targetNode="__3DLgHjZEeqIbaNeXqxckg">
+      <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@requirements/@requirements.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="__48B4XjZEeqIbaNeXqxckg" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="__48B4njZEeqIbaNeXqxckg" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="__48o8HjZEeqIbaNeXqxckg" sourceNode="__32cwHjZEeqIbaNeXqxckg" targetNode="__3DLgHjZEeqIbaNeXqxckg">
+      <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="__48o8XjZEeqIbaNeXqxckg" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="__48o8njZEeqIbaNeXqxckg" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="__48o9XjZEeqIbaNeXqxckg" sourceNode="__33D0HjZEeqIbaNeXqxckg" targetNode="__3FAsXjZEeqIbaNeXqxckg">
+      <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="__48o9njZEeqIbaNeXqxckg" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="__48o93jZEeqIbaNeXqxckg" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="__48o-njZEeqIbaNeXqxckg" sourceNode="__33D03jZEeqIbaNeXqxckg" targetNode="__3EZpnjZEeqIbaNeXqxckg">
+      <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.2"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="__48o-3jZEeqIbaNeXqxckg" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="__48o_HjZEeqIbaNeXqxckg" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="__48o_3jZEeqIbaNeXqxckg" sourceNode="__4G7cHjZEeqIbaNeXqxckg" targetNode="__3DLgHjZEeqIbaNeXqxckg">
+      <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="__48pAHjZEeqIbaNeXqxckg" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="__48pAXjZEeqIbaNeXqxckg" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="__48pBHjZEeqIbaNeXqxckg" sourceNode="__4G7c3jZEeqIbaNeXqxckg" targetNode="__3EZoHjZEeqIbaNeXqxckg">
+      <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="__48pBXjZEeqIbaNeXqxckg" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="__48pBnjZEeqIbaNeXqxckg" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="__49QAnjZEeqIbaNeXqxckg" sourceNode="__4wbsnjZEeqIbaNeXqxckg" targetNode="__3DLgHjZEeqIbaNeXqxckg">
+      <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="__49QA3jZEeqIbaNeXqxckg" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="__49QBHjZEeqIbaNeXqxckg" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="__49QB3jZEeqIbaNeXqxckg" sourceNode="__4wbtXjZEeqIbaNeXqxckg" targetNode="__3EZoHjZEeqIbaNeXqxckg">
+      <target xmi:type="aADM:ERequirementAssignment" href="hpc.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="__49QCHjZEeqIbaNeXqxckg" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="__49QCXjZEeqIbaNeXqxckg" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="__1TfEXjZEeqIbaNeXqxckg"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/resource/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer"/>
+    <target xmi:type="aADM:AADM_Model" href="hpc.aadm#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>
