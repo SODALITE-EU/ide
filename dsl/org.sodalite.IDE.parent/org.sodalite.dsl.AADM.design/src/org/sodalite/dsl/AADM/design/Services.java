@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
+import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
@@ -67,6 +69,11 @@ public class Services {
     public void removeStringFromPropertyValueList (EPropertyAssignment prop, String item) {
     	System.out.println ("Requested to remove string from property list value. Property: " +
     		prop.getName() + " Item: " + item);
+    }
+    
+    public List<ENodeTemplate> getNodes (ERequirementAssignment req){
+    	ENodeTemplates container = (ENodeTemplates) req.eContainer().eContainer().eContainer().eContainer();
+    	return container.getNodeTemplates();
     }
     
 }

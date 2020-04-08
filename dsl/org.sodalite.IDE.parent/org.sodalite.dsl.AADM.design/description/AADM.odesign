@@ -121,6 +121,8 @@
     <categories name="Default Category">
       <pages name="Property Default Page" labelExpression="General" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3"/>
       <pages name="Node Template Default Page" labelExpression="General" domainClass="aADM::ENodeTemplate" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.4"/>
+      <pages name="Capability Default Page" labelExpression="General" domainClass="aADM::ECapabilityAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.5"/>
+      <pages name="Requirement Default Page" labelExpression="General" domainClass="aADM::ERequirementAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.6"/>
       <groups name="SingleStringValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ESTRING)">
         <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
           <initialOperation>
@@ -204,6 +206,31 @@
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
               <subModelOperations xsi:type="tool:SetValue" featureName="type" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="Capability" labelExpression="Capability" domainClass="aADM::ECapabilityAssignment" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="Requirement" labelExpression="Requirement" domainClass="aADM::ERequirementAssignment" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="Node" labelExpression="Node" valueExpression="aql:self.node" candidatesExpression="service:getNodes()" candidateDisplayExpression="aql:candidate.name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="node" valueExpression="var:newValue"/>
             </firstModelOperations>
           </initialOperation>
         </controls>
