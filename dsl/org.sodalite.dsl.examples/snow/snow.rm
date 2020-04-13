@@ -109,6 +109,12 @@ node_types{
 				description: "Alias name for docker container"
 				required: false
 			}
+			pull{
+				type:string
+				description: 'If true, always pull the latest version of an image. Otherwise, will only pull an image when missing'
+				default: 'no'
+				required: false
+			}
 			command{
 				type: list
 				description: "Commands list for starting the container"
@@ -174,6 +180,13 @@ node_types{
 								default:
 									get_property{
 										property: sodalite.nodes.DockerizedComponent.alias
+										entity: SELF
+									}
+							}
+							pull{
+								default:
+									get_property{
+										property: sodalite.nodes.DockerizedComponent.pull
 										entity: SELF
 									}
 							}
@@ -336,6 +349,10 @@ node_types{
 			}
 			key_name{
 				type: string
+			}
+			user-name{
+				type: string
+				description: 'OpenStack username'
 			}
 		}
 		attributes{
