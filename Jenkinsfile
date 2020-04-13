@@ -20,6 +20,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'sodalite-jenkins_github_creds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 	  sh('git config --global user.email "jesus.gorronogoitia@atos.net"')
 	  sh('git config --global user.name "Sodalite Jenkins"')
+	  sh('git checkout master')
     	  sh('git add dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository/')
 	  sh('git commit -a -m "Sodalite IDE update site updated"')
     	  sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/SODALITE-EU/ide.git')
