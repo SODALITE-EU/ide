@@ -6,6 +6,7 @@ public class KBSaveReportData {
 
 	String IRI;
 	List<KBError> errors;
+	List<KBWarning> warnings;
 	
 	public String getIRI() {
 		return IRI;
@@ -22,6 +23,16 @@ public class KBSaveReportData {
 	}
 	public void setErrors (List<KBError> errors) {
 		this.errors = errors;
+	}
+	
+	public boolean hasWarnings() {
+		return this.warnings!= null && !this.warnings.isEmpty();
+	}
+	public List<KBWarning> getWarnings(){
+		return this.warnings;
+	}
+	public void setWarnings (List<KBWarning> warnings) {
+		this.warnings = warnings;
 	}
 	
 }

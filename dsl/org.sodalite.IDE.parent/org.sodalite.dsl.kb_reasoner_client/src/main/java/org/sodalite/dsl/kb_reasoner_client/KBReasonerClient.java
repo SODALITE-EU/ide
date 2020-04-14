@@ -25,6 +25,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationRepor
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
@@ -42,11 +43,14 @@ import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KBReasonerClient implements KBReasoner {
@@ -120,7 +124,8 @@ public class KBReasonerClient implements KBReasoner {
 		try {
 			//Send multipart-form message
 			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
-			report.setIRI (result);
+			report.setIRI (processIRI(result));
+			report.setWarnings(processWarnings(result));
 		}catch (Exception ex) {
 			if (ex instanceof HttpClientErrorException) {
 				HttpClientErrorException hcee = (HttpClientErrorException) ex;
@@ -132,12 +137,14 @@ public class KBReasonerClient implements KBReasoner {
 				}else {
 					throw ex;
 				}
+			}else if (ex instanceof HttpServerErrorException) {
+				throw ex;
 			}
 		}
 		
 		return report;
 	}
-	
+
 	@Override
 	public String getAADM(String aadmIRI) throws Exception {
 		Assert.notNull(aadmIRI, "Pass a not null aadmIRI");
@@ -205,6 +212,26 @@ public class KBReasonerClient implements KBReasoner {
 		ObjectMapper mapper = new ObjectMapper();
 		List<KBError> errors = mapper.readValue(json, new TypeReference<List<KBError>>(){});
 		return errors;
+	}
+	
+	private List<KBWarning> processWarnings(String result) throws JsonMappingException, JsonProcessingException {
+		String key = "\"warnings\"";
+		int key_index = result.indexOf(key) + key.length();
+		int index1 = result.indexOf("[", key_index);
+		int index2 =  result.indexOf("]", key_index) + 1;
+		String json = result.substring(index1, index2);
+		ObjectMapper mapper = new ObjectMapper();
+		List<KBWarning> warnings = mapper.readValue(json, new TypeReference<List<KBWarning>>(){});
+		return warnings;
+	}
+
+	private String processIRI(String result) {
+		String key = "\"aadmuri\"";
+		int key_index = result.indexOf(key) + key.length();
+		int index1 = result.indexOf("\"", key_index) + 1;
+		int index2 =  result.indexOf("\"", index1);
+		String iri = result.substring(index1, index2);
+		return iri;
 	}
 
 	/**
