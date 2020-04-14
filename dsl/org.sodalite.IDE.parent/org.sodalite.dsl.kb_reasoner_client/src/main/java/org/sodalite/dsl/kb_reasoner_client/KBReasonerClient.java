@@ -231,6 +231,7 @@ public class KBReasonerClient implements KBReasoner {
 		int index1 = result.indexOf("\"", key_index) + 1;
 		int index2 =  result.indexOf("\"", index1);
 		String iri = result.substring(index1, index2);
+		iri = iri.replace("\\", "");
 		return iri;
 	}
 

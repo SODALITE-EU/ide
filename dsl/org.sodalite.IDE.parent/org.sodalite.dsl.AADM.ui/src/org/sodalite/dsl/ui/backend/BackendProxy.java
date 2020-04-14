@@ -2,12 +2,10 @@ package org.sodalite.dsl.ui.backend;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,12 +56,14 @@ import org.eclipse.xtext.validation.Issue;
 import org.osgi.framework.Bundle;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.ui.validation.AADMDiagnostic;
 import org.sodalite.dsl.ui.validation.AADMValidationIssue;
 
@@ -238,10 +238,12 @@ public class BackendProxy {
 
 	private void processValidationIssues(KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
 		// TODO Check there are not warnings (they do not prevent storage in KB)
-		if (saveReport != null && saveReport.hasErrors()) {
+		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings())) {
 			List<AADMValidationIssue> issues = readRecommendationsFromKB(saveReport);
 			manageRecommendationIssues(event, issues);
-			throw new Exception("There are detected validation issues in the AADM, please fix them");
+			if (saveReport.hasErrors()) {
+				throw new Exception("There are detected validation issues in the AADM, please fix them");
+			}
 		}
 	}
 
@@ -249,11 +251,23 @@ public class BackendProxy {
 		// TODO Read issues from KB recommendations
 		List<AADMValidationIssue> issues = new ArrayList<>();
 
-		for (KBError error : saveReport.getErrors()) {
-			issues.add(new AADMValidationIssue(
-					error.getType() + "." + error.getDescription() + ":" + error.getEntity_name(),
-					"node_templates/" + error.getContext()));
+		if (saveReport.hasErrors()) {
+			for (KBError error : saveReport.getErrors()) {
+				issues.add(new AADMValidationIssue(
+						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
+						"node_templates/" + error.getContext(), null, AADMValidationIssue.Type.ERROR));
+			}
 		}
+		
+		if (saveReport.hasWarnings()) {
+			for (KBWarning warning : saveReport.getWarnings()) {
+				issues.add(new AADMValidationIssue(
+						warning.getType() + "." + warning.getDescription() + " warning located at: " + warning.getEntity_name(),
+						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(), 
+						warning.getElementType(), AADMValidationIssue.Type.WARNING));
+			}
+		}
+		
 		return issues;
 	}
 
@@ -309,14 +323,19 @@ public class BackendProxy {
 			// Add diagnostic
 			EObject eObject = resource.getContents().get(0);
 			String location = EcoreUtil.getURI(eObject).toString();
-			int line = getLine(resource, issue.getPath()); // Compute line based on EObject
+			int line = getLine(resource, issue.getPath(), issue.getPathType()); // Compute line based on EObject
 
-			diagnostics.add(new AADMDiagnostic(issue.getMessage(), location, line, 1));
+			diagnostics.add(new AADMDiagnostic(issue.getMessage(), location, line, 1, issue.getType()));
 		}
 
 		for (AADMDiagnostic diagnostic : diagnostics) {
-			if (!resource.getErrors().contains(diagnostic))
-				resource.getErrors().add(diagnostic);
+			if (diagnostic.getType() == AADMValidationIssue.Type.ERROR) {
+				if (!resource.getErrors().contains(diagnostic))
+					resource.getErrors().add(diagnostic);
+			}else if (diagnostic.getType() == AADMValidationIssue.Type.WARNING) {
+				if (!resource.getWarnings().contains(diagnostic))
+					resource.getWarnings().add(diagnostic);
+			}
 		}
 
 		for (int i = 0; i < resource.getErrors().size(); i++) {
@@ -330,7 +349,7 @@ public class BackendProxy {
 		return result;
 	}
 
-	private int getLine(XtextResource resource, String path) {
+	private int getLine(XtextResource resource, String path, String path_type) {
 		// Extract object path to find nodes
 		StringTokenizer st = new StringTokenizer(path, "/");
 
@@ -342,11 +361,23 @@ public class BackendProxy {
 				if ("node_templates".equals(st.nextToken())) {
 					line = getNodeLine(model.getNodeTemplates()) - 1; // Correction to point to node-templates correct
 																		// line
-					if (st.hasMoreTokens()) {
+					if (st.hasMoreTokens()) { //Node_template
 						String node_name = st.nextToken();
 						for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
 							if (node.getName().contentEquals(node_name)) {
 								line = getNodeLine(node);
+							
+								if (st.hasMoreElements()) { //Node_Template children
+									String entity_name = st.nextToken();
+									
+									if ("Property".equals(path_type)) {
+										for (EPropertyAssignment property:node.getNode().getProperties().getProperties()) {
+											if (property.getName().contentEquals(entity_name)) {
+												line = getNodeLine(property);
+											}
+										}
+									}
+								}
 							}
 						}
 					}

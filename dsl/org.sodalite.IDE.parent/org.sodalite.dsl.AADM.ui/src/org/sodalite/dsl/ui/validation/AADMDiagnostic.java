@@ -8,12 +8,14 @@ public class AADMDiagnostic implements Diagnostic {
 	private String location;
 	private int line;
 	private int column;
+	private AADMValidationIssue.Type type; 
 
-	public AADMDiagnostic(String message, String location, int line, int column) {
+	public AADMDiagnostic(String message, String location, int line, int column, AADMValidationIssue.Type type) {
 		this.message = message;
 		this.location = location;
 		this.line = line;
 		this.column = column;
+		this.type = type;
 	}
 
 	@Override
@@ -35,13 +37,18 @@ public class AADMDiagnostic implements Diagnostic {
 	public int getColumn() {
 		return column;
 	}
+	
+	public AADMValidationIssue.Type getType(){
+		return type;
+	}
 
 	@Override
 	public boolean equals (Object o) {
 		AADMDiagnostic diag = (AADMDiagnostic)o;
 		return (this.getLine() == diag.getLine()) &&
 				(this.getColumn() == diag.getColumn()) &&
-				(this.getMessage() == diag.getMessage());
+				(this.getMessage() == diag.getMessage()) &&
+				(this.getType() == diag.getType());
 	}
 	
 }
