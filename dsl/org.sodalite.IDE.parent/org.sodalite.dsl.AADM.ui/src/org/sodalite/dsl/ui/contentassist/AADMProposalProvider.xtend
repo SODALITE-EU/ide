@@ -34,6 +34,11 @@ import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl
 import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl
+import org.eclipse.jface.preference.IPreferenceStore
+import org.eclipse.ui.preferences.ScopedPreferenceStore
+import org.eclipse.core.runtime.preferences.InstanceScope
+import org.sodalite.dsl.ui.preferences.PreferenceConstants
+import java.text.MessageFormat
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -45,7 +50,20 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 
 	val keywords = #{'node_templates{'}
 	val assignments = #{'nodeTemplates'}
-	val kbclient = new KBReasonerClient() as KBReasoner;
+	KBReasoner kbclient;
+	new(){
+		val store = 
+	        	new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui") as IPreferenceStore;
+		val kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
+		val iacURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
+		val xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
+		kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI) as KBReasoner;
+		
+		System.out.println (
+			MessageFormat.format(
+				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI)
+		);
+	}
 
 	// this override filters the keywords for which to create content assist proposals
 	override void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,

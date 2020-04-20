@@ -40,9 +40,13 @@ class KBReasonerTest {
 	String requirementId = "host";
 	String nodeType = "tosca.nodes.SoftwareComponent";
 	
+	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
+	private final String IaC_URI = "http://154.48.185.202:8080/";
+	private final String xOPERA_URI = "http://154.48.185.206:5000/";
+	
 	@BeforeEach
 	void setup() {
-		kbclient = new KBReasonerClient();
+		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI);
 	}
 	
 	@Test

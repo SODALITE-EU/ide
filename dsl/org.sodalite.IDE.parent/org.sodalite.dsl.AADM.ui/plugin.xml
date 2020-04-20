@@ -80,7 +80,7 @@
 		<page
 			class="org.sodalite.dsl.ui.AADMExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
 			id="org.sodalite.dsl.AADM"
-			name="AADM">
+			name="Sodalite AADM">
 			<keywordReference id="org.sodalite.dsl.ui.keyword_AADM"/>
 		</page>
 		<page
@@ -97,6 +97,12 @@
 			name="Templates">
 			<keywordReference id="org.sodalite.dsl.ui.keyword_AADM"/>
 		</page>
+  <page
+        category="org.sodalite.dsl.AADM"
+        class="org.sodalite.dsl.ui.preferences.SodaliteBackendPreferencePage"
+        id="org.sodalite.dsl.aadm.ui.preferences.SodaliteBackendPreferencePage"
+        name="Sodalite Backend">
+  </page>
 	</extension>
 	<extension
 			point="org.eclipse.ui.propertyPages">
@@ -613,4 +619,10 @@
 			type="text">
 		</fileTypes>
 	</extension>
+ <extension
+       point="org.eclipse.core.runtime.preferences">
+    <initializer
+          class="org.sodalite.dsl.ui.preferences.PreferenceInitializer">
+    </initializer>
+ </extension>
 </plugin>

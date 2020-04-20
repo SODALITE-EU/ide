@@ -56,53 +56,56 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class KBReasonerClient implements KBReasoner {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private RestTemplate restTemplate;
-	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
-	private final String IaC_URI = "http://154.48.185.202:8080/";
-	private final String xOPERA_URI = "http://154.48.185.206:5000/";
+	private String kbReasonerUri;
+	private String iacUri;
+	private String xoperaUri;
 
-	public KBReasonerClient() {
+	public KBReasonerClient(String kbReasonerUri, String iacUri, String xoperaUri) {
 		restTemplate = new RestTemplate();
+		this.kbReasonerUri = kbReasonerUri;
+		this.iacUri = iacUri;
+		this.xoperaUri = xoperaUri;
 	}
 
 	public NodeData getNodes() throws Exception {
-		String url = KB_REASONER_URI + "nodes";
+		String url = kbReasonerUri + "nodes";
 		return getJSONObjectForType(NodeData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public AttributeData getAttributes(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = KB_REASONER_URI + "attributes?resource=" + resourceId;
+		String url = kbReasonerUri + "attributes?resource=" + resourceId;
 		return getJSONObjectForType(AttributeData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public CapabilityData getCapabilities(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = KB_REASONER_URI + "capabilities?resource=" + resourceId;
+		String url = kbReasonerUri + "capabilities?resource=" + resourceId;
 		return getJSONObjectForType(CapabilityData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public InterfaceData getInterfaces(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = KB_REASONER_URI + "interfaces?resource=" + resourceId;
+		String url = kbReasonerUri + "interfaces?resource=" + resourceId;
 		return getJSONObjectForType(InterfaceData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public PropertyData getProperties(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = KB_REASONER_URI + "properties?resource=" + resourceId;
+		String url = kbReasonerUri + "properties?resource=" + resourceId;
 		return getJSONObjectForType(PropertyData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public RequirementData getRequirements(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
-		String url = KB_REASONER_URI + "requirements?resource=" + resourceId;
+		String url = kbReasonerUri + "requirements?resource=" + resourceId;
 		return getJSONObjectForType(RequirementData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception {
 		Assert.notNull(requirementId, "Pass a not null requirementId");
 		Assert.notNull(nodeType, "Pass a not null nodeType");
-		String url = KB_REASONER_URI + "valid-requirement-nodes?requirement=" + requirementId + "&nodeType=" + nodeType;
+		String url = kbReasonerUri + "valid-requirement-nodes?requirement=" + requirementId + "&nodeType=" + nodeType;
 		return getJSONObjectForType(ValidRequirementNodeData.class, new URI(url), HttpStatus.OK);
 	}
 
@@ -110,7 +113,7 @@ public class KBReasonerClient implements KBReasoner {
 	public KBSaveReportData saveAADM(String aadmTTL, String submissionId) throws Exception{
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		Assert.isTrue(!submissionId.isEmpty(), "SubmissionId can neither be null nor empty");
-		String url = KB_REASONER_URI + "saveAADM";
+		String url = kbReasonerUri + "saveAADM";
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -148,14 +151,14 @@ public class KBReasonerClient implements KBReasoner {
 	@Override
 	public String getAADM(String aadmIRI) throws Exception {
 		Assert.notNull(aadmIRI, "Pass a not null aadmIRI");
-		String url = KB_REASONER_URI + "aadm?aadmIRI=" + aadmIRI;
+		String url = kbReasonerUri + "aadm?aadmIRI=" + aadmIRI;
 		return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
 	}
 	
 	@Override
 	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json) throws Exception{
 		Assert.notNull(aadm_json, "Pass a not null aadm_json");
-		String url = IaC_URI + "parse";
+		String url = iacUri + "parse";
 		//FIXME create Json content
 		String jsonContent = 
 		"{\n" 
@@ -169,7 +172,7 @@ public class KBReasonerClient implements KBReasoner {
 	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token) throws Exception{
 		Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
 		Assert.notNull(blueprint_token, "Pass a not null blueprint_token");
-		String url = xOPERA_URI + "deploy/" + blueprint_token;
+		String url = xoperaUri + "deploy/" + blueprint_token;
 		LinkedMultiValueMap<String, Object> parts = 
 		          new LinkedMultiValueMap<String, Object>();
 		
@@ -193,7 +196,7 @@ public class KBReasonerClient implements KBReasoner {
 	public DeploymentStatus getAADMDeploymentStatus(String session_token) throws Exception {
 		DeploymentStatus deploymentStatus = DeploymentStatus.FAILED;
 		Assert.notNull(session_token, "Pass a not null session_token");
-		String url = xOPERA_URI + "info/status?token=" + session_token;
+		String url = xoperaUri + "info/status?token=" + session_token;
 		try {
 			HttpStatus status = getStatusOfURI(new URI(url));
 			if (status == HttpStatus.CREATED) {

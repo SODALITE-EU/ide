@@ -12,12 +12,16 @@ package org.sodalite.dsl.ui.contentassist;
 
 import com.google.common.base.Objects;
 import java.net.URI;
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -43,6 +47,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.services.AADMGrammarAccess;
 import org.sodalite.dsl.ui.contentassist.AbstractAADMProposalProvider;
+import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -57,7 +62,23 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   
   private final Set<String> assignments = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("nodeTemplates"));
   
-  private final KBReasoner kbclient = ((KBReasoner) new KBReasonerClient());
+  private KBReasoner kbclient;
+  
+  public AADMProposalProvider() {
+    ScopedPreferenceStore _scopedPreferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui");
+    final IPreferenceStore store = ((IPreferenceStore) _scopedPreferenceStore);
+    String _string = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final String kbReasonerURI = ((String) _string);
+    String _string_1 = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final String iacURI = ((String) _string_1);
+    String _string_2 = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final String xoperaURI = ((String) _string_2);
+    KBReasonerClient _kBReasonerClient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
+    this.kbclient = ((KBReasoner) _kBReasonerClient);
+    System.out.println(
+      MessageFormat.format(
+        "Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI));
+  }
   
   @Override
   public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {

@@ -6,6 +6,7 @@ import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,15 +27,18 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
@@ -64,6 +68,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationRepor
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
+import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.dsl.ui.validation.AADMDiagnostic;
 import org.sodalite.dsl.ui.validation.AADMValidationIssue;
 
@@ -77,7 +82,20 @@ public class BackendProxy {
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
 	// TODO Configure KBReasonerClient endpoint from preference page information
-	private KBReasonerClient kbclient = new KBReasonerClient();
+	private KBReasonerClient kbclient;
+	
+	public BackendProxy() {
+		IPreferenceStore store = 
+	        	new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui");
+		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
+		System.out.println (
+			MessageFormat.format(
+				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI)
+		);
+	}
 
 	public void processSaveAADM(ExecutionEvent event) throws IOException {
 		// Return selected resource
