@@ -1,0 +1,335 @@
+# baseURI: https://www.sodalite.eu/ontologies/exchange/hpc_opt/
+# imports: https://www.sodalite.eu/ontologies/exchange/
+
+@prefix : <https://www.sodalite.eu/ontologies/exchange/hpc_opt/> .
+@prefix exchange: <https://www.sodalite.eu/ontologies/exchange/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:
+  rdf:type owl:Ontology ;
+  owl:imports exchange: ;
+  owl:versionInfo "Created by the SODALITE IDE" ;
+.
+
+:AADM_1
+  rdf:type exchange:AADM ;
+  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
+.
+
+
+
+
+:Property_1
+  rdf:type exchange:Property ;
+  exchange:name "disk_size" ;
+  exchange:value "10 TB" ;
+.
+:Property_2
+  rdf:type exchange:Property ;
+  exchange:name "num_cpus" ;
+  exchange:value "40" ;
+.
+:Property_3
+  rdf:type exchange:Property ;
+  exchange:name "num_gpus" ;
+  exchange:value "10" ;
+.
+:Property_4
+  rdf:type exchange:Property ;
+  exchange:name "mem_size" ;
+  exchange:value "64 GB" ;
+.
+:Property_5
+  rdf:type exchange:Property ;
+  exchange:name "num_nodes" ;
+  exchange:value "10" ;
+.
+:Property_6
+  rdf:type exchange:Property ;
+  exchange:name "architecture" ;
+  exchange:value "x86_64" ;
+.
+:Property_7
+  rdf:type exchange:Property ;
+  exchange:name "name" ;
+  exchange:value "hpc-test-1" ;
+.
+:Property_8
+  rdf:type exchange:Property ;
+  exchange:name "script_template" ;
+  exchange:value "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2" ;
+.
+:Property_9
+  rdf:type exchange:Property ;
+  exchange:name "email" ;
+  exchange:value "tokmakov@hlrs.de" ;
+.
+:Property_10
+  rdf:type exchange:Property ;
+  exchange:name "ppn" ;
+  exchange:value "1" ;
+.
+:Property_11
+  rdf:type exchange:Property ;
+  exchange:name "nb_nodes" ;
+  exchange:value "1" ;
+.
+:Property_12
+  rdf:type exchange:Property ;
+  exchange:name "ppn" ;
+  exchange:value "1" ;
+.
+:Property_13
+  rdf:type exchange:Property ;
+  exchange:name "walltime" ;
+  exchange:value "00:02:00" ;
+.
+:Property_14
+  rdf:type exchange:Property ;
+  exchange:name "monitor_period" ;
+  exchange:value "10" ;
+.
+:Property_15
+  rdf:type exchange:Property ;
+  exchange:name "monitor_retries_headroom" ;
+  exchange:value "2" ;
+.
+:Property_16
+  rdf:type exchange:Property ;
+  exchange:name "optimization" ;
+  exchange:listValue "OpenACC" ;
+  exchange:listValue "MPI" ;
+.
+:Property_17
+  rdf:type exchange:Property ;
+  exchange:name "name" ;
+  exchange:value "hpc-test-4" ;
+.
+:Property_18
+  rdf:type exchange:Property ;
+  exchange:name "script_template" ;
+  exchange:value "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2" ;
+.
+:Property_19
+  rdf:type exchange:Property ;
+  exchange:name "email" ;
+  exchange:value "tokmakov@hlrs.de" ;
+.
+:Property_20
+  rdf:type exchange:Property ;
+  exchange:name "nb_nodes" ;
+  exchange:value "1" ;
+.
+:Property_21
+  rdf:type exchange:Property ;
+  exchange:name "ppn" ;
+  exchange:value "1" ;
+.
+:Property_22
+  rdf:type exchange:Property ;
+  exchange:name "walltime" ;
+  exchange:value "00:02:00" ;
+.
+:Property_23
+  rdf:type exchange:Property ;
+  exchange:name "monitor_period" ;
+  exchange:value "10" ;
+.
+:Property_24
+  rdf:type exchange:Property ;
+  exchange:name "monitor_retries_headroom" ;
+  exchange:value "2" ;
+.
+:Property_25
+  rdf:type exchange:Property ;
+  exchange:name "name" ;
+  exchange:value "hpc-test-2" ;
+.
+:Property_26
+  rdf:type exchange:Property ;
+  exchange:name "script_template" ;
+  exchange:value "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2" ;
+.
+:Property_27
+  rdf:type exchange:Property ;
+  exchange:name "email" ;
+  exchange:value "tokmakov@hlrs.de" ;
+.
+:Property_28
+  rdf:type exchange:Property ;
+  exchange:name "nb_nodes" ;
+  exchange:value "1" ;
+.
+:Property_29
+  rdf:type exchange:Property ;
+  exchange:name "ppn" ;
+  exchange:value "1" ;
+.
+:Property_30
+  rdf:type exchange:Property ;
+  exchange:name "walltime" ;
+  exchange:value "00:02:00" ;
+.
+:Property_31
+  rdf:type exchange:Property ;
+  exchange:name "monitor_period" ;
+  exchange:value "10" ;
+.
+:Property_32
+  rdf:type exchange:Property ;
+  exchange:name "monitor_retries_headroom" ;
+  exchange:value "2" ;
+.
+:Property_33
+  rdf:type exchange:Property ;
+  exchange:name "name" ;
+  exchange:value "hpc-test-3" ;
+.
+:Property_34
+  rdf:type exchange:Property ;
+  exchange:name "script_template" ;
+  exchange:value "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2" ;
+.
+:Property_35
+  rdf:type exchange:Property ;
+  exchange:name "email" ;
+  exchange:value "tokmakov@hlrs.de" ;
+.
+:Property_36
+  rdf:type exchange:Property ;
+  exchange:name "nb_nodes" ;
+  exchange:value "1" ;
+.
+:Property_37
+  rdf:type exchange:Property ;
+  exchange:name "ppn" ;
+  exchange:value "1" ;
+.
+:Property_38
+  rdf:type exchange:Property ;
+  exchange:name "walltime" ;
+  exchange:value "00:02:00" ;
+.
+:Property_39
+  rdf:type exchange:Property ;
+  exchange:name "monitor_period" ;
+  exchange:value "10" ;
+.
+:Property_40
+  rdf:type exchange:Property ;
+  exchange:name "monitor_retries_headroom" ;
+  exchange:value "2" ;
+.
+
+:Requirement_1
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:value "hpc_wm_torque" ;
+.
+:Requirement_2
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:value "hpc_wm_torque" ;
+.
+:Requirement_3
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:value "hpc_job_torque_3" ;
+.
+:Requirement_4
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:value "hpc_job_torque_2" ;
+.
+:Requirement_5
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:value "hpc_wm_torque" ;
+.
+:Requirement_6
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:value "hpc_job_torque_1" ;
+.
+:Requirement_7
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:value "hpc_wm_torque" ;
+.
+:Requirement_8
+  rdf:type exchange:Requirement ;
+  exchange:name "dependency" ;
+  exchange:value "hpc_job_torque_1" ;
+.
+
+:Template_1
+  rdf:type exchange:Template ;
+  exchange:name "hpc_wm_torque" ;
+  exchange:type "my.nodes.hpc.wm.torque" ;
+.  
+:Template_2
+  rdf:type exchange:Template ;
+  exchange:name "hpc_job_torque_1" ;
+  exchange:type "my.nodes.hpc.job.torque" ;
+  exchange:properties :Property_7 ; 
+  exchange:properties :Property_8 ; 
+  exchange:properties :Property_9 ; 
+  exchange:properties :Property_10 ; 
+  exchange:properties :Property_11 ; 
+  exchange:properties :Property_12 ; 
+  exchange:properties :Property_13 ; 
+  exchange:properties :Property_14 ; 
+  exchange:properties :Property_15 ; 
+  exchange:properties :Property_16 ; 
+  exchange:requirements :Requirement_1 ; 
+.  
+:Template_3
+  rdf:type exchange:Template ;
+  exchange:name "hpc_job_torque_4" ;
+  exchange:type "my.nodes.hpc.job.torque" ;
+  exchange:properties :Property_17 ; 
+  exchange:properties :Property_18 ; 
+  exchange:properties :Property_19 ; 
+  exchange:properties :Property_20 ; 
+  exchange:properties :Property_21 ; 
+  exchange:properties :Property_22 ; 
+  exchange:properties :Property_23 ; 
+  exchange:properties :Property_24 ; 
+  exchange:requirements :Requirement_2 ; 
+  exchange:requirements :Requirement_3 ; 
+  exchange:requirements :Requirement_4 ; 
+.  
+:Template_4
+  rdf:type exchange:Template ;
+  exchange:name "hpc_job_torque_2" ;
+  exchange:type "my.nodes.hpc.job.torque" ;
+  exchange:properties :Property_25 ; 
+  exchange:properties :Property_26 ; 
+  exchange:properties :Property_27 ; 
+  exchange:properties :Property_28 ; 
+  exchange:properties :Property_29 ; 
+  exchange:properties :Property_30 ; 
+  exchange:properties :Property_31 ; 
+  exchange:properties :Property_32 ; 
+  exchange:requirements :Requirement_5 ; 
+  exchange:requirements :Requirement_6 ; 
+.  
+:Template_5
+  rdf:type exchange:Template ;
+  exchange:name "hpc_job_torque_3" ;
+  exchange:type "my.nodes.hpc.job.torque" ;
+  exchange:properties :Property_33 ; 
+  exchange:properties :Property_34 ; 
+  exchange:properties :Property_35 ; 
+  exchange:properties :Property_36 ; 
+  exchange:properties :Property_37 ; 
+  exchange:properties :Property_38 ; 
+  exchange:properties :Property_39 ; 
+  exchange:properties :Property_40 ; 
+  exchange:requirements :Requirement_7 ; 
+  exchange:requirements :Requirement_8 ; 
+.  
+

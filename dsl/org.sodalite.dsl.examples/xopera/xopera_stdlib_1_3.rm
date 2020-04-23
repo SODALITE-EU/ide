@@ -118,7 +118,7 @@ data_types{
 	}
 	
 	//Primitive datatypes
-	string{}
+	string{} 
 	integer{}
 	boolean{}
 	map{}
