@@ -16,56 +16,56 @@ import "http://www.sodalite.org/dsl/RM" as rm
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 AADM_Model:
-	('inputs{'
+	('inputs'START_BLOCK
 		inputs = EInputs
-	'}')? &
-	('node_templates{'
+	END_BLOCK)? &
+	('node_templates'START_BLOCK
 		nodeTemplates=ENodeTemplates
-	'}')?;
+	END_BLOCK)?;
 
 
 ENodeTemplates:
 	{ENodeTemplates} (nodeTemplates+=ENodeTemplate)+;
 
 ENodeTemplate:
-	name=ID '{'
+	name=ID START_BLOCK
 	node=ENodeTemplateBody
-	"}";
+	END_BLOCK;
 
 ENodeTemplateBody:
 	('type:' type=QUALIFIED_NAME) &
 	('description:' description=STRING)? &
-	('properties{'
+	('properties'START_BLOCK
 	properties=EPropertyAssigments
-	'}')? &
-	('attributes{'
+	END_BLOCK)? &
+	('attributes'START_BLOCK
 	atributes=EAttributeAssigments
-	'}')? &
-	('requirements{'
+	END_BLOCK)? &
+	('requirements'START_BLOCK
 	requirements=ERequirementAssignments
-	'}')? &
-	('capabilities{'
+	END_BLOCK)? &
+	('capabilities'START_BLOCK
 	capabilities=ECapabilityAssignments
-	'}')?
+	END_BLOCK)?
 	;
 
 ERequirementAssignments:
 	{ERequirementAssignments} (requirements+=ERequirementAssignment)*;
 
 ERequirementAssignment:
-	name=ID '{'
+	name=ID START_BLOCK
 	('node:' node=[ENodeTemplate|ID])
-	'}';
+	END_BLOCK;
 
 ECapabilityAssignments:
 	{ECapabilityAssignments} (capabilities+=ECapabilityAssignment)*;
 
 ECapabilityAssignment:
-	name=ID '{'
+	name=ID START_BLOCK
 	('properties{'
 	properties=EPropertyAssigments
-	'}')? 
-	'}';
+	END_BLOCK)? 
+	END_BLOCK;
 
 EAttributeAssigments:
 	{EAttributeAssigments} (attributes+=EAttributeAssignment)*;
@@ -78,4 +78,6 @@ EPropertyAssigments:
 
 EPropertyAssignment:
 	name=ID ':' value=EPropertyAssignmentValue;
+	
+
 

@@ -84,7 +84,7 @@ node_templates{
 		 	ports: ['8080:8080']
 		 	exposed_ports: ['8080']
 		 	volumes: "/tmp/docker:/tmp"
-		 	optimization:['GraphCompiler', 'ExtractTransformLoad']
+		 	optimization:['GraphCompiler:XLA', 'ExtractTransformLoad:Prefetch(100)']
 		 }
 		 requirements{
 		 	host{

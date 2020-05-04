@@ -14,45 +14,45 @@ generate rM "http://www.sodalite.org/dsl/RM"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 RM_Model:
-	('data_types{'
+	('data_types'START_BLOCK
 	dataTypes=EDataTypes
-	'}')? &
-	('artifact_types{'
+	END_BLOCK)? &
+	('artifact_types'START_BLOCK
 	artifactTypes=EArtifactTypes
-	'}')? &
-	('capability_types{'
+	END_BLOCK)? &
+	('capability_types'START_BLOCK
 	capabilityTypes=ECapabilityTypes
-	'}')? &
-	('interface_types{'
+	END_BLOCK)? &
+	('interface_types'START_BLOCK
 	interfaceTypes=EInterfaceTypes
-	'}')? &
-	('relationship_types{'
+	END_BLOCK)? &
+	('relationship_types'START_BLOCK
 	relationshipTypes=ERelationshipTypes
-	'}')? &
-	('node_types{'
+	END_BLOCK)? &
+	('node_types'START_BLOCK
 	nodeTypes=ENodeTypes
-	'}')? &
-	('policy_types{'
+	END_BLOCK)? &
+	('policy_types'START_BLOCK
 	policyTypes=EPolicyTypes
-	'}')?;
+	END_BLOCK)?;
 
 EDataTypes:
 	{EDataTypes} (dataTypes+=EDataType)+;
 
 EDataType:
-	name=EDataTypeName '{'
+	name=EDataTypeName START_BLOCK
 	data=EDataTypeBody
-	'}';
+	END_BLOCK;
 
 EDataTypeBody:
 	{EDataTypeBody} (('derived_from:' superType=[EDataType|EDataTypeName])? &
 	('description:' description=STRING)? &
-	('constraints{'
+	('constraints'START_BLOCK
 	constraints=EConstraints
-	'}')? &
-	('properties{'
+	END_BLOCK)? &
+	('properties'START_BLOCK
 	properties=EProperties
-	'}')?);
+	END_BLOCK)?);
 
 EDataTypeName:
 	QUALIFIED_NAME | PRIMITIVE_DATA_TYPE;
@@ -61,9 +61,9 @@ EArtifactTypes:
 	{EArtifactTypes} (artifactTypes+=EArtifactType)+;
 
 EArtifactType:
-	name=QUALIFIED_NAME '{'
+	name=QUALIFIED_NAME START_BLOCK
 	artifact=EArtifactTypeBody
-	'}';
+	END_BLOCK;
 
 EArtifactTypeBody:
 	{EArtifactTypeBody} (('derived_from:' superType=[EArtifactType|QUALIFIED_NAME])? &
@@ -75,45 +75,45 @@ ECapabilityTypes:
 	{ECapabilityTypes} (capabilityTypes+=ECapabilityType)+;
 
 ECapabilityType:
-	name=QUALIFIED_NAME '{'
+	name=QUALIFIED_NAME START_BLOCK
 	capability=ECapabilityTypeBody
-	'}';
+	END_BLOCK;
 
 ECapabilityTypeBody:
 	{ECapabilityTypeBody} (('derived_from:' superType=[ECapabilityType|QUALIFIED_NAME])? &
 	('description:' description=STRING)? &
-	('properties{'
+	('properties'START_BLOCK
 	properties=EProperties
-	'}')? &
-	('attributes{'
+	END_BLOCK)? &
+	('attributes'START_BLOCK
 	atributes=EAttributes
-	'}')?);
+	END_BLOCK)?);
 
 EInterfaceTypes:
 	{EInterfaceTypes} (interfaceTypes+=EInterfaceType)+;
 
 EInterfaceType:
-	name=QUALIFIED_NAME '{'
+	name=QUALIFIED_NAME START_BLOCK
 	interface=EInterfaceTypeBody
-	'}';
+	END_BLOCK;
 
 EInterfaceTypeBody:
 	{EInterfaceTypeBody} (('derived_from:' superType=[EInterfaceType|QUALIFIED_NAME])? &
 	('description:' description=STRING)? &
-	('inputs{'
+	('inputs'START_BLOCK
 	inputs=EProperties
-	'}')? &
-	('operations{'
+	END_BLOCK)? &
+	('operations'START_BLOCK
 	operations=EOperations
-	'}')?);
+	END_BLOCK)?);
 
 EPolicyTypes:
 	{EPolicyTypes} (policyTypes+=EPolicyType)+;
 
 EPolicyType:
-	name=QUALIFIED_NAME '{'
+	name=QUALIFIED_NAME START_BLOCK
 	policy=EPolicyTypeBody
-	'}';
+	END_BLOCK;
 
 EPolicyTypeBody:
 	{EPolicyTypeBody} (('derived_from:' superType=[EPolicyType|QUALIFIED_NAME])? &
@@ -123,49 +123,49 @@ ENodeTypes:
 	{ENodeTypes} (nodeTypes+=ENodeType)+;
 
 ENodeType:
-	name=QUALIFIED_NAME '{'
+	name=QUALIFIED_NAME START_BLOCK
 	node=ENodeTypeBody
-	"}";
+	END_BLOCK;
 
 ENodeTypeBody:
 	{ENodeTypeBody} (('derived_from:' superType=[ENodeType|QUALIFIED_NAME])? &
 	('description:' description=STRING)? &
-	('properties{'
+	('properties'START_BLOCK
 	properties=EProperties
-	'}')? &
-	('attributes{'
+	END_BLOCK)? &
+	('attributes'START_BLOCK
 	attributes=EAttributes
-	'}')? &
-	('interfaces{'
+	END_BLOCK)? &
+	('interfaces'START_BLOCK
 	interfaces=EInterfaces
-	'}')? &
-	('capabilities{'
+	END_BLOCK)? &
+	('capabilities'START_BLOCK
 	capabilities=ECapabilities
-	'}')? &
-	('requirements{'
+	END_BLOCK)? &
+	('requirements'START_BLOCK
 	requirements=ERequirements
-	'}')?);
+	END_BLOCK)?);
 
 ERelationshipTypes:
 	{ERelationshipTypes} (relationshipTypes+=ERelationshipType)+;
 
 ERelationshipType:
-	name=QUALIFIED_NAME '{'
+	name=QUALIFIED_NAME START_BLOCK
 	relationship=ERelationshipTypeBody
-	'}';
+	END_BLOCK;
 
 ERelationshipTypeBody:
 	{ERelationshipTypeBody} (('derived_from:' superType=[ERelationshipType|QUALIFIED_NAME])? &
 	('description:' description=STRING)? &
-	('properties{'
+	('properties'START_BLOCK
 	properties=EProperties
-	'}')? &
-	('attributes{'
+	END_BLOCK)? &
+	('attributes'START_BLOCK
 	atributes=EAttributes
-	'}')? &
-	('interfaces{'
+	END_BLOCK)? &
+	('interfaces'START_BLOCK
 	interfaces=EInterfaces
-	'}')? &
+	END_BLOCK)? &
 	('valid_target_types:[' valid_target_types=EValidTargetTypes "]")?);
 
 EValidTargetTypes:
@@ -178,9 +178,9 @@ EProperties:
 	{EProperties} (properties+=EPropertyDefinition)*;
 
 EPropertyDefinition:
-	name=ID '{'
+	name=ID START_BLOCK
 	property=EPropertyDefinitionBody
-	"}";
+	END_BLOCK;
 
 EPropertyDefinitionBody:
 	('type:' type=[EDataType|EDataTypeName]) &
@@ -188,18 +188,18 @@ EPropertyDefinitionBody:
 	('required:' required=BOOLEAN)? &
 	('default:' default=EValueExpression)? &
 	('status:' status=STRING)? &
-	('constraints{'
+	('constraints'START_BLOCK
 	constraints=EConstraints
-	'}')? &
+	END_BLOCK)? &
 	('entry_schema:' entry_schema=[EDataType|EDataTypeName])?;
 
 EAttributes:
 	{EAttributes} (attributes+=EAttributeDefinition)*;
 
 EAttributeDefinition:
-	name=ID '{'
+	name=ID START_BLOCK
 	attribute=EAttributeDefinitionBody
-	"}";
+	END_BLOCK;
 
 EAttributeDefinitionBody:
 	('type:' type=[EDataType|EDataTypeName]) &
@@ -210,32 +210,32 @@ EInterfaces:
 	{EInterfaces} (interfaces+=EInterfaceDefinition)*;
 
 EInterfaceDefinition:
-	name=ID '{'
+	name=ID START_BLOCK
 	interface=EInterfaceDefinitionBody
-	'}';
+	END_BLOCK;
 
 EInterfaceDefinitionBody:
 	'type:' type=[EInterfaceType|QUALIFIED_NAME] &
-	('inputs{'
+	('inputs'START_BLOCK
 	inputs=EProperties
-	'}')? &
-	('operations{'
+	END_BLOCK)? &
+	('operations'START_BLOCK
 	operations=EOperations
-	'}')?;
+	END_BLOCK)?;
 
 EOperations:
 	{EOperations} (operations+=EOperationDefinition)*;
 
 EOperationDefinition:
-	name=ID '{'
+	name=ID START_BLOCK
 	operation=EOperationDefinitionBody
-	'}';
+	END_BLOCK;
 
 EOperationDefinitionBody:
 	{EOperationDefinitionBody} (('description:' description=STRING)? &
-	('inputs{'
+	('inputs'START_BLOCK
 	inputs=EInputs
-	'}')? &
+	END_BLOCK)? &
 	('implementation:' implementation=STRING)?);
 
 EInputs:
@@ -243,9 +243,9 @@ EInputs:
 
 	//inputs of operation definition in NodeTypes are ParameterDefinition
 EParameterDefinition:
-	name=ID '{'
+	name=ID START_BLOCK
 	parameter=EParameterDefinitionBody
-	'}';
+	END_BLOCK;
 
 EParameterDefinitionBody:
 	{EParameterDefinitionBody} (
@@ -264,9 +264,9 @@ GetInput:
 ;
 
 GetAttribute:
-	'get_attribute{'
+	'get_attribute'START_BLOCK
 	attribute=GetAttributeBody
-	'}';
+	END_BLOCK;
 
 GetAttributeBody:
 	('attribute:' attribute=[EAttributeDefinition|QUALIFIED_NAME]) &
@@ -274,9 +274,9 @@ GetAttributeBody:
 	('req_cap:' req_cap=[EReqOrCap|QUALIFIED_NAME])?;
 
 GetProperty:
-	'get_property{'
+	'get_property'START_BLOCK
 	property=GetPropertyBody
-	'}';
+	END_BLOCK;
 
 GetPropertyBody:
 	('property:' property=[EPropertyDefinition|QUALIFIED_NAME]) &
@@ -287,19 +287,19 @@ ECapabilities:
 	{ECapabilities} (capabilities+=ECapabilityDefinition)*;
 
 ECapabilityDefinition:
-	name=ID '{'
+	name=ID START_BLOCK
 	capability=ECapabilityDefinitionBody
-	'}';
+	END_BLOCK;
 
 ECapabilityDefinitionBody:
 	('type:' type=[ECapabilityType|QUALIFIED_NAME]) &
 	('description:' description=STRING)? &
-	('properties{'
+	('properties'START_BLOCK
 	properties=EProperties
-	'}')? &
-	('attributes{'
+	END_BLOCK)? &
+	('attributes'START_BLOCK
 	attributes=EAttributes
-	'}')? &
+	END_BLOCK)? &
 	('valid_source_types:[' (valid_source_types+=EValidSourceType)? ']')? &
 	('occurrences:[' start=STRING ',' end=STRING ']')?;
 
@@ -313,9 +313,9 @@ ERequirements:
 	{ERequirements} (requirements+=ERequirementDefinition)*;
 
 ERequirementDefinition:
-	name=ID '{'
+	name=ID START_BLOCK
 	requirement=ERequirementDefinitionBody
-	'}';
+	END_BLOCK;
 
 ERequirementDefinitionBody:
 	('capability:' capability=[ECapabilityType|QUALIFIED_NAME]) &
@@ -376,9 +376,9 @@ ESTRING:
 ;
 
 EMAP:
-	"{"
+	START_BLOCK
 		map+=EMapEntry+
-	"}"
+	END_BLOCK
 ;
 
 EMapEntry:
@@ -402,3 +402,10 @@ terminal PRIMITIVE_DATA_TYPE:
 terminal ID:
 	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '0'..'9')*;
 
+terminal START_BLOCK:
+	'{'
+;
+
+terminal END_BLOCK:
+	'}'
+;

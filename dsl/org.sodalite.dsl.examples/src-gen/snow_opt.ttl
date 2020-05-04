@@ -202,8 +202,8 @@
 :Property_21
   rdf:type exchange:Property ;
   exchange:name "optimization" ;
-  exchange:listValue "GraphCompiler" ;
-  exchange:listValue "ExtractTransformLoad" ;
+  exchange:listValue "GraphCompiler:XLA" ;
+  exchange:listValue "ExtractTransformLoad:Prefetch(100)" ;
 .
 :Property_22
   rdf:type exchange:Property ;
