@@ -7,6 +7,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Map;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.sodalite.dsl.ide.contentassist.antlr.internal.InternalAADMParser;
@@ -49,10 +51,10 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_5(), "rule__ENodeTemplateBody__Group_5__0");
 			builder.put(grammarAccess.getERequirementAssignmentsAccess().getGroup(), "rule__ERequirementAssignments__Group__0");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getGroup(), "rule__ERequirementAssignment__Group__0");
-			builder.put(grammarAccess.getERequirementAssignmentAccess().getGroup_2(), "rule__ERequirementAssignment__Group_2__0");
+			builder.put(grammarAccess.getERequirementAssignmentAccess().getGroup_3(), "rule__ERequirementAssignment__Group_3__0");
 			builder.put(grammarAccess.getECapabilityAssignmentsAccess().getGroup(), "rule__ECapabilityAssignments__Group__0");
 			builder.put(grammarAccess.getECapabilityAssignmentAccess().getGroup(), "rule__ECapabilityAssignment__Group__0");
-			builder.put(grammarAccess.getECapabilityAssignmentAccess().getGroup_2(), "rule__ECapabilityAssignment__Group_2__0");
+			builder.put(grammarAccess.getECapabilityAssignmentAccess().getGroup_3(), "rule__ECapabilityAssignment__Group_3__0");
 			builder.put(grammarAccess.getEAttributeAssigmentsAccess().getGroup(), "rule__EAttributeAssigments__Group__0");
 			builder.put(grammarAccess.getEAttributeAssignmentAccess().getGroup(), "rule__EAttributeAssignment__Group__0");
 			builder.put(grammarAccess.getEPropertyAssigmentsAccess().getGroup(), "rule__EPropertyAssigments__Group__0");
@@ -194,7 +196,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAADM_ModelAccess().getNodeTemplatesAssignment_1_2(), "rule__AADM_Model__NodeTemplatesAssignment_1_2");
 			builder.put(grammarAccess.getENodeTemplatesAccess().getNodeTemplatesAssignment_1(), "rule__ENodeTemplates__NodeTemplatesAssignment_1");
 			builder.put(grammarAccess.getENodeTemplateAccess().getNameAssignment_0(), "rule__ENodeTemplate__NameAssignment_0");
-			builder.put(grammarAccess.getENodeTemplateAccess().getNodeAssignment_2(), "rule__ENodeTemplate__NodeAssignment_2");
+			builder.put(grammarAccess.getENodeTemplateAccess().getNodeAssignment_3(), "rule__ENodeTemplate__NodeAssignment_3");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getTypeAssignment_0_1(), "rule__ENodeTemplateBody__TypeAssignment_0_1");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getDescriptionAssignment_1_1(), "rule__ENodeTemplateBody__DescriptionAssignment_1_1");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getPropertiesAssignment_2_2(), "rule__ENodeTemplateBody__PropertiesAssignment_2_2");
@@ -203,10 +205,10 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getCapabilitiesAssignment_5_2(), "rule__ENodeTemplateBody__CapabilitiesAssignment_5_2");
 			builder.put(grammarAccess.getERequirementAssignmentsAccess().getRequirementsAssignment_1(), "rule__ERequirementAssignments__RequirementsAssignment_1");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getNameAssignment_0(), "rule__ERequirementAssignment__NameAssignment_0");
-			builder.put(grammarAccess.getERequirementAssignmentAccess().getNodeAssignment_2_1(), "rule__ERequirementAssignment__NodeAssignment_2_1");
+			builder.put(grammarAccess.getERequirementAssignmentAccess().getNodeAssignment_3_1(), "rule__ERequirementAssignment__NodeAssignment_3_1");
 			builder.put(grammarAccess.getECapabilityAssignmentsAccess().getCapabilitiesAssignment_1(), "rule__ECapabilityAssignments__CapabilitiesAssignment_1");
 			builder.put(grammarAccess.getECapabilityAssignmentAccess().getNameAssignment_0(), "rule__ECapabilityAssignment__NameAssignment_0");
-			builder.put(grammarAccess.getECapabilityAssignmentAccess().getPropertiesAssignment_2_1(), "rule__ECapabilityAssignment__PropertiesAssignment_2_1");
+			builder.put(grammarAccess.getECapabilityAssignmentAccess().getPropertiesAssignment_3_2(), "rule__ECapabilityAssignment__PropertiesAssignment_3_2");
 			builder.put(grammarAccess.getEAttributeAssigmentsAccess().getAttributesAssignment_1(), "rule__EAttributeAssigments__AttributesAssignment_1");
 			builder.put(grammarAccess.getEAttributeAssignmentAccess().getNameAssignment_0(), "rule__EAttributeAssignment__NameAssignment_0");
 			builder.put(grammarAccess.getEAttributeAssignmentAccess().getValueAssignment_2(), "rule__EAttributeAssignment__ValueAssignment_2");
@@ -222,40 +224,40 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getRM_ModelAccess().getPolicyTypesAssignment_6_2(), "rule__RM_Model__PolicyTypesAssignment_6_2");
 			builder.put(grammarAccess.getEDataTypesAccess().getDataTypesAssignment_1(), "rule__EDataTypes__DataTypesAssignment_1");
 			builder.put(grammarAccess.getEDataTypeAccess().getNameAssignment_0(), "rule__EDataType__NameAssignment_0");
-			builder.put(grammarAccess.getEDataTypeAccess().getDataAssignment_2(), "rule__EDataType__DataAssignment_2");
+			builder.put(grammarAccess.getEDataTypeAccess().getDataAssignment_3(), "rule__EDataType__DataAssignment_3");
 			builder.put(grammarAccess.getEDataTypeBodyAccess().getSuperTypeAssignment_1_0_1(), "rule__EDataTypeBody__SuperTypeAssignment_1_0_1");
 			builder.put(grammarAccess.getEDataTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__EDataTypeBody__DescriptionAssignment_1_1_1");
 			builder.put(grammarAccess.getEDataTypeBodyAccess().getConstraintsAssignment_1_2_2(), "rule__EDataTypeBody__ConstraintsAssignment_1_2_2");
 			builder.put(grammarAccess.getEDataTypeBodyAccess().getPropertiesAssignment_1_3_2(), "rule__EDataTypeBody__PropertiesAssignment_1_3_2");
 			builder.put(grammarAccess.getEArtifactTypesAccess().getArtifactTypesAssignment_1(), "rule__EArtifactTypes__ArtifactTypesAssignment_1");
 			builder.put(grammarAccess.getEArtifactTypeAccess().getNameAssignment_0(), "rule__EArtifactType__NameAssignment_0");
-			builder.put(grammarAccess.getEArtifactTypeAccess().getArtifactAssignment_2(), "rule__EArtifactType__ArtifactAssignment_2");
+			builder.put(grammarAccess.getEArtifactTypeAccess().getArtifactAssignment_3(), "rule__EArtifactType__ArtifactAssignment_3");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getSuperTypeAssignment_1_0_1(), "rule__EArtifactTypeBody__SuperTypeAssignment_1_0_1");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__EArtifactTypeBody__DescriptionAssignment_1_1_1");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getMime_typeAssignment_1_2_1(), "rule__EArtifactTypeBody__Mime_typeAssignment_1_2_1");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getFile_extAssignment_1_3_1(), "rule__EArtifactTypeBody__File_extAssignment_1_3_1");
 			builder.put(grammarAccess.getECapabilityTypesAccess().getCapabilityTypesAssignment_1(), "rule__ECapabilityTypes__CapabilityTypesAssignment_1");
 			builder.put(grammarAccess.getECapabilityTypeAccess().getNameAssignment_0(), "rule__ECapabilityType__NameAssignment_0");
-			builder.put(grammarAccess.getECapabilityTypeAccess().getCapabilityAssignment_2(), "rule__ECapabilityType__CapabilityAssignment_2");
+			builder.put(grammarAccess.getECapabilityTypeAccess().getCapabilityAssignment_3(), "rule__ECapabilityType__CapabilityAssignment_3");
 			builder.put(grammarAccess.getECapabilityTypeBodyAccess().getSuperTypeAssignment_1_0_1(), "rule__ECapabilityTypeBody__SuperTypeAssignment_1_0_1");
 			builder.put(grammarAccess.getECapabilityTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__ECapabilityTypeBody__DescriptionAssignment_1_1_1");
 			builder.put(grammarAccess.getECapabilityTypeBodyAccess().getPropertiesAssignment_1_2_2(), "rule__ECapabilityTypeBody__PropertiesAssignment_1_2_2");
 			builder.put(grammarAccess.getECapabilityTypeBodyAccess().getAtributesAssignment_1_3_2(), "rule__ECapabilityTypeBody__AtributesAssignment_1_3_2");
 			builder.put(grammarAccess.getEInterfaceTypesAccess().getInterfaceTypesAssignment_1(), "rule__EInterfaceTypes__InterfaceTypesAssignment_1");
 			builder.put(grammarAccess.getEInterfaceTypeAccess().getNameAssignment_0(), "rule__EInterfaceType__NameAssignment_0");
-			builder.put(grammarAccess.getEInterfaceTypeAccess().getInterfaceAssignment_2(), "rule__EInterfaceType__InterfaceAssignment_2");
+			builder.put(grammarAccess.getEInterfaceTypeAccess().getInterfaceAssignment_3(), "rule__EInterfaceType__InterfaceAssignment_3");
 			builder.put(grammarAccess.getEInterfaceTypeBodyAccess().getSuperTypeAssignment_1_0_1(), "rule__EInterfaceTypeBody__SuperTypeAssignment_1_0_1");
 			builder.put(grammarAccess.getEInterfaceTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__EInterfaceTypeBody__DescriptionAssignment_1_1_1");
 			builder.put(grammarAccess.getEInterfaceTypeBodyAccess().getInputsAssignment_1_2_2(), "rule__EInterfaceTypeBody__InputsAssignment_1_2_2");
 			builder.put(grammarAccess.getEInterfaceTypeBodyAccess().getOperationsAssignment_1_3_2(), "rule__EInterfaceTypeBody__OperationsAssignment_1_3_2");
 			builder.put(grammarAccess.getEPolicyTypesAccess().getPolicyTypesAssignment_1(), "rule__EPolicyTypes__PolicyTypesAssignment_1");
 			builder.put(grammarAccess.getEPolicyTypeAccess().getNameAssignment_0(), "rule__EPolicyType__NameAssignment_0");
-			builder.put(grammarAccess.getEPolicyTypeAccess().getPolicyAssignment_2(), "rule__EPolicyType__PolicyAssignment_2");
+			builder.put(grammarAccess.getEPolicyTypeAccess().getPolicyAssignment_3(), "rule__EPolicyType__PolicyAssignment_3");
 			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getSuperTypeAssignment_1_0_1(), "rule__EPolicyTypeBody__SuperTypeAssignment_1_0_1");
 			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__EPolicyTypeBody__DescriptionAssignment_1_1_1");
 			builder.put(grammarAccess.getENodeTypesAccess().getNodeTypesAssignment_1(), "rule__ENodeTypes__NodeTypesAssignment_1");
 			builder.put(grammarAccess.getENodeTypeAccess().getNameAssignment_0(), "rule__ENodeType__NameAssignment_0");
-			builder.put(grammarAccess.getENodeTypeAccess().getNodeAssignment_2(), "rule__ENodeType__NodeAssignment_2");
+			builder.put(grammarAccess.getENodeTypeAccess().getNodeAssignment_3(), "rule__ENodeType__NodeAssignment_3");
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getSuperTypeAssignment_1_0_1(), "rule__ENodeTypeBody__SuperTypeAssignment_1_0_1");
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__ENodeTypeBody__DescriptionAssignment_1_1_1");
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getPropertiesAssignment_1_2_2(), "rule__ENodeTypeBody__PropertiesAssignment_1_2_2");
@@ -265,7 +267,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getRequirementsAssignment_1_6_2(), "rule__ENodeTypeBody__RequirementsAssignment_1_6_2");
 			builder.put(grammarAccess.getERelationshipTypesAccess().getRelationshipTypesAssignment_1(), "rule__ERelationshipTypes__RelationshipTypesAssignment_1");
 			builder.put(grammarAccess.getERelationshipTypeAccess().getNameAssignment_0(), "rule__ERelationshipType__NameAssignment_0");
-			builder.put(grammarAccess.getERelationshipTypeAccess().getRelationshipAssignment_2(), "rule__ERelationshipType__RelationshipAssignment_2");
+			builder.put(grammarAccess.getERelationshipTypeAccess().getRelationshipAssignment_3(), "rule__ERelationshipType__RelationshipAssignment_3");
 			builder.put(grammarAccess.getERelationshipTypeBodyAccess().getSuperTypeAssignment_1_0_1(), "rule__ERelationshipTypeBody__SuperTypeAssignment_1_0_1");
 			builder.put(grammarAccess.getERelationshipTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__ERelationshipTypeBody__DescriptionAssignment_1_1_1");
 			builder.put(grammarAccess.getERelationshipTypeBodyAccess().getPropertiesAssignment_1_2_2(), "rule__ERelationshipTypeBody__PropertiesAssignment_1_2_2");
@@ -277,7 +279,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getECapabilityTypeRefAccess().getNameAssignment(), "rule__ECapabilityTypeRef__NameAssignment");
 			builder.put(grammarAccess.getEPropertiesAccess().getPropertiesAssignment_1(), "rule__EProperties__PropertiesAssignment_1");
 			builder.put(grammarAccess.getEPropertyDefinitionAccess().getNameAssignment_0(), "rule__EPropertyDefinition__NameAssignment_0");
-			builder.put(grammarAccess.getEPropertyDefinitionAccess().getPropertyAssignment_2(), "rule__EPropertyDefinition__PropertyAssignment_2");
+			builder.put(grammarAccess.getEPropertyDefinitionAccess().getPropertyAssignment_3(), "rule__EPropertyDefinition__PropertyAssignment_3");
 			builder.put(grammarAccess.getEPropertyDefinitionBodyAccess().getTypeAssignment_0_1(), "rule__EPropertyDefinitionBody__TypeAssignment_0_1");
 			builder.put(grammarAccess.getEPropertyDefinitionBodyAccess().getDescriptionAssignment_1_1(), "rule__EPropertyDefinitionBody__DescriptionAssignment_1_1");
 			builder.put(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredAssignment_2_1(), "rule__EPropertyDefinitionBody__RequiredAssignment_2_1");
@@ -287,25 +289,25 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPropertyDefinitionBodyAccess().getEntry_schemaAssignment_6_1(), "rule__EPropertyDefinitionBody__Entry_schemaAssignment_6_1");
 			builder.put(grammarAccess.getEAttributesAccess().getAttributesAssignment_1(), "rule__EAttributes__AttributesAssignment_1");
 			builder.put(grammarAccess.getEAttributeDefinitionAccess().getNameAssignment_0(), "rule__EAttributeDefinition__NameAssignment_0");
-			builder.put(grammarAccess.getEAttributeDefinitionAccess().getAttributeAssignment_2(), "rule__EAttributeDefinition__AttributeAssignment_2");
+			builder.put(grammarAccess.getEAttributeDefinitionAccess().getAttributeAssignment_3(), "rule__EAttributeDefinition__AttributeAssignment_3");
 			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getTypeAssignment_0_1(), "rule__EAttributeDefinitionBody__TypeAssignment_0_1");
 			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getDescriptionAssignment_1_1(), "rule__EAttributeDefinitionBody__DescriptionAssignment_1_1");
 			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaAssignment_2_1(), "rule__EAttributeDefinitionBody__Entry_schemaAssignment_2_1");
 			builder.put(grammarAccess.getEInterfacesAccess().getInterfacesAssignment_1(), "rule__EInterfaces__InterfacesAssignment_1");
 			builder.put(grammarAccess.getEInterfaceDefinitionAccess().getNameAssignment_0(), "rule__EInterfaceDefinition__NameAssignment_0");
-			builder.put(grammarAccess.getEInterfaceDefinitionAccess().getInterfaceAssignment_2(), "rule__EInterfaceDefinition__InterfaceAssignment_2");
+			builder.put(grammarAccess.getEInterfaceDefinitionAccess().getInterfaceAssignment_3(), "rule__EInterfaceDefinition__InterfaceAssignment_3");
 			builder.put(grammarAccess.getEInterfaceDefinitionBodyAccess().getTypeAssignment_0_1(), "rule__EInterfaceDefinitionBody__TypeAssignment_0_1");
 			builder.put(grammarAccess.getEInterfaceDefinitionBodyAccess().getInputsAssignment_1_2(), "rule__EInterfaceDefinitionBody__InputsAssignment_1_2");
 			builder.put(grammarAccess.getEInterfaceDefinitionBodyAccess().getOperationsAssignment_2_2(), "rule__EInterfaceDefinitionBody__OperationsAssignment_2_2");
 			builder.put(grammarAccess.getEOperationsAccess().getOperationsAssignment_1(), "rule__EOperations__OperationsAssignment_1");
 			builder.put(grammarAccess.getEOperationDefinitionAccess().getNameAssignment_0(), "rule__EOperationDefinition__NameAssignment_0");
-			builder.put(grammarAccess.getEOperationDefinitionAccess().getOperationAssignment_2(), "rule__EOperationDefinition__OperationAssignment_2");
+			builder.put(grammarAccess.getEOperationDefinitionAccess().getOperationAssignment_3(), "rule__EOperationDefinition__OperationAssignment_3");
 			builder.put(grammarAccess.getEOperationDefinitionBodyAccess().getDescriptionAssignment_1_0_1(), "rule__EOperationDefinitionBody__DescriptionAssignment_1_0_1");
 			builder.put(grammarAccess.getEOperationDefinitionBodyAccess().getInputsAssignment_1_1_2(), "rule__EOperationDefinitionBody__InputsAssignment_1_1_2");
 			builder.put(grammarAccess.getEOperationDefinitionBodyAccess().getImplementationAssignment_1_2_1(), "rule__EOperationDefinitionBody__ImplementationAssignment_1_2_1");
 			builder.put(grammarAccess.getEInputsAccess().getInputsAssignment_1(), "rule__EInputs__InputsAssignment_1");
 			builder.put(grammarAccess.getEParameterDefinitionAccess().getNameAssignment_0(), "rule__EParameterDefinition__NameAssignment_0");
-			builder.put(grammarAccess.getEParameterDefinitionAccess().getParameterAssignment_2(), "rule__EParameterDefinition__ParameterAssignment_2");
+			builder.put(grammarAccess.getEParameterDefinitionAccess().getParameterAssignment_3(), "rule__EParameterDefinition__ParameterAssignment_3");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getTypeAssignment_1_0_1(), "rule__EParameterDefinitionBody__TypeAssignment_1_0_1");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getValueAssignment_1_1_1(), "rule__EParameterDefinitionBody__ValueAssignment_1_1_1");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getDefaultAssignment_1_2_1(), "rule__EParameterDefinitionBody__DefaultAssignment_1_2_1");
@@ -320,7 +322,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getGetPropertyBodyAccess().getReq_capAssignment_2_1(), "rule__GetPropertyBody__Req_capAssignment_2_1");
 			builder.put(grammarAccess.getECapabilitiesAccess().getCapabilitiesAssignment_1(), "rule__ECapabilities__CapabilitiesAssignment_1");
 			builder.put(grammarAccess.getECapabilityDefinitionAccess().getNameAssignment_0(), "rule__ECapabilityDefinition__NameAssignment_0");
-			builder.put(grammarAccess.getECapabilityDefinitionAccess().getCapabilityAssignment_2(), "rule__ECapabilityDefinition__CapabilityAssignment_2");
+			builder.put(grammarAccess.getECapabilityDefinitionAccess().getCapabilityAssignment_3(), "rule__ECapabilityDefinition__CapabilityAssignment_3");
 			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getTypeAssignment_0_1(), "rule__ECapabilityDefinitionBody__TypeAssignment_0_1");
 			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getDescriptionAssignment_1_1(), "rule__ECapabilityDefinitionBody__DescriptionAssignment_1_1");
 			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getPropertiesAssignment_2_2(), "rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2");
@@ -333,7 +335,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENodeTypeRefAccess().getNameAssignment(), "rule__ENodeTypeRef__NameAssignment");
 			builder.put(grammarAccess.getERequirementsAccess().getRequirementsAssignment_1(), "rule__ERequirements__RequirementsAssignment_1");
 			builder.put(grammarAccess.getERequirementDefinitionAccess().getNameAssignment_0(), "rule__ERequirementDefinition__NameAssignment_0");
-			builder.put(grammarAccess.getERequirementDefinitionAccess().getRequirementAssignment_2(), "rule__ERequirementDefinition__RequirementAssignment_2");
+			builder.put(grammarAccess.getERequirementDefinitionAccess().getRequirementAssignment_3(), "rule__ERequirementDefinition__RequirementAssignment_3");
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getCapabilityAssignment_0_1(), "rule__ERequirementDefinitionBody__CapabilityAssignment_0_1");
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getNodeAssignment_1_1(), "rule__ERequirementDefinitionBody__NodeAssignment_1_1");
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getRelationshipAssignment_2_1(), "rule__ERequirementDefinitionBody__RelationshipAssignment_2_1");
@@ -392,6 +394,11 @@ public class AADMParser extends AbstractContentAssistParser {
 		return result;
 	}
 
+	@Override
+	protected TokenSource createLexer(CharStream stream) {
+		return new AADMTokenSource(super.createLexer(stream));
+	}
+	
 	@Override
 	protected String getRuleName(AbstractElement element) {
 		return nameMappings.getRuleName(element);
