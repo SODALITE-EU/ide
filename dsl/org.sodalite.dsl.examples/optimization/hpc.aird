@@ -2914,7 +2914,7 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_LzLYsIhkEeqP3Nee_9IR6w" name="hpc_wm_torque" incomingEdges="_Lz7moIhkEeqP3Nee_9IR6w _Lz8NsohkEeqP3Nee_9IR6w _Lz80wohkEeqP3Nee_9IR6w _Lz80zIhkEeqP3Nee_9IR6w" childrenPresentation="VerticalStack">
       <target xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0"/>
       <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0"/>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LzQRMIhkEeqP3Nee_9IR6w" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LzQRMIhkEeqP3Nee_9IR6w" name="torque" width="15" height="3" resizeKind="EAST_WEST">
         <target xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node"/>
         <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node"/>
         <ownedStyle xmi:type="diagram:Square" uid="_LzT7kIhkEeqP3Nee_9IR6w" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
@@ -2948,7 +2948,7 @@
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']"/>
-          <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzbQUIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+          <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzbQUIhkEeqP3Nee_9IR6w" name="disk_size: 10 TB">
             <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.0"/>
             <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_LzbQUYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
@@ -2956,7 +2956,7 @@
             </ownedStyle>
             <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']/@subNodeMappings[name='Properties']"/>
           </ownedElements>
-          <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzb3YIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+          <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzb3YIhkEeqP3Nee_9IR6w" name="num_cpus: 40">
             <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.1"/>
             <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.1"/>
             <ownedStyle xmi:type="diagram:Square" uid="_Lzb3YYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
@@ -2964,7 +2964,7 @@
             </ownedStyle>
             <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']/@subNodeMappings[name='Properties']"/>
           </ownedElements>
-          <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzb3YohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+          <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzb3YohkEeqP3Nee_9IR6w" name="num_gpus: 10">
             <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.2"/>
             <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.2"/>
             <ownedStyle xmi:type="diagram:Square" uid="_Lzb3Y4hkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
@@ -2972,7 +2972,7 @@
             </ownedStyle>
             <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']/@subNodeMappings[name='Properties']"/>
           </ownedElements>
-          <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzcecIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+          <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzcecIhkEeqP3Nee_9IR6w" name="mem_size: 64 GB">
             <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.3"/>
             <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.3"/>
             <ownedStyle xmi:type="diagram:Square" uid="_LzcecYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
@@ -2980,7 +2980,7 @@
             </ownedStyle>
             <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']/@subNodeMappings[name='Properties']"/>
           </ownedElements>
-          <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzcecohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+          <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzcecohkEeqP3Nee_9IR6w" name="num_nodes: 10">
             <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.4"/>
             <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.0/@properties/@properties.4"/>
             <ownedStyle xmi:type="diagram:Square" uid="_Lzcec4hkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
@@ -2997,7 +2997,7 @@
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']"/>
-          <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzdFgIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+          <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzdFgIhkEeqP3Nee_9IR6w" name="architecture: x86_64">
             <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.1/@properties/@properties.0"/>
             <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@capabilities/@capabilities.1/@properties/@properties.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_LzdFgYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" labelPosition="node">
@@ -3011,7 +3011,7 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_LzPDEIhkEeqP3Nee_9IR6w" name="hpc_job_torque_1" incomingEdges="_Lz80x4hkEeqP3Nee_9IR6w _Lz800YhkEeqP3Nee_9IR6w" childrenPresentation="VerticalStack">
       <target xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1"/>
       <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1"/>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LzdskIhkEeqP3Nee_9IR6w" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LzdskIhkEeqP3Nee_9IR6w" name="torque" width="15" height="3" resizeKind="EAST_WEST">
         <target xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node"/>
         <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node"/>
         <ownedStyle xmi:type="diagram:Square" uid="_LzdskYhkEeqP3Nee_9IR6w" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
@@ -3049,7 +3049,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzjzMIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzjzMIhkEeqP3Nee_9IR6w" name="name: hpc-test-1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.0"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzjzMYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3057,7 +3057,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzjzMohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzjzMohkEeqP3Nee_9IR6w" name="script_template: ~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.1"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.1"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzjzM4hkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3065,7 +3065,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzjzNIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzjzNIhkEeqP3Nee_9IR6w" name="email: tokmakov@hlrs.de">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.2"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.2"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzkaQIhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3073,7 +3073,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzkaQYhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzkaQYhkEeqP3Nee_9IR6w" name="ppn: 1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.3"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.3"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzkaQohkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3081,7 +3081,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzkaQ4hkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzkaQ4hkEeqP3Nee_9IR6w" name="nb_nodes: 1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.4"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.4"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzlBUIhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3089,7 +3089,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzlBUYhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzlBUYhkEeqP3Nee_9IR6w" name="ppn: 1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.5"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.5"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzlBUohkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3097,7 +3097,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzloYIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzloYIhkEeqP3Nee_9IR6w" name="walltime: 00:02:00">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.6"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.6"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzloYYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3105,7 +3105,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzloYohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzloYohkEeqP3Nee_9IR6w" name="monitor_period: 10">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.7"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.7"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzloY4hkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3113,7 +3113,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzloZIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzloZIhkEeqP3Nee_9IR6w" name="monitor_retries_headroom: 2">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.8"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.8"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzmPcIhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3121,7 +3121,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzmPcYhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzmPcYhkEeqP3Nee_9IR6w" name="optimization: [OpenACC, MPI]">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.9"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@properties/@properties.9"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzmPcohkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3134,7 +3134,7 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_LzPDE4hkEeqP3Nee_9IR6w" name="hpc_job_torque_4" childrenPresentation="VerticalStack">
       <target xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2"/>
       <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2"/>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_Lzm2gIhkEeqP3Nee_9IR6w" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_Lzm2gIhkEeqP3Nee_9IR6w" name="torque" width="15" height="3" resizeKind="EAST_WEST">
         <target xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node"/>
         <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node"/>
         <ownedStyle xmi:type="diagram:Square" uid="_Lzm2gYhkEeqP3Nee_9IR6w" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
@@ -3196,7 +3196,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzsWEIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzsWEIhkEeqP3Nee_9IR6w" name="name: hpc-test-4">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.0"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzsWEYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3204,7 +3204,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzs9IIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzs9IIhkEeqP3Nee_9IR6w" name="script_template: ~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.1"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.1"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lzs9IYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3212,7 +3212,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LztkMIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LztkMIhkEeqP3Nee_9IR6w" name="email: tokmakov@hlrs.de">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.2"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.2"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LztkMYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3220,7 +3220,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LztkMohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LztkMohkEeqP3Nee_9IR6w" name="nb_nodes: 1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.3"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.3"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LztkM4hkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3228,7 +3228,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LztkNIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LztkNIhkEeqP3Nee_9IR6w" name="ppn: 1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.4"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.4"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LztkNYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3236,7 +3236,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzuLQIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzuLQIhkEeqP3Nee_9IR6w" name="walltime: 00:02:00">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.5"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.5"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzuLQYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3244,7 +3244,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzuLQohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzuLQohkEeqP3Nee_9IR6w" name="monitor_period: 10">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.6"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.6"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzuLQ4hkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3252,7 +3252,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzuLRIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzuLRIhkEeqP3Nee_9IR6w" name="monitor_retries_headroom: 2">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.7"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.7"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzuyUIhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3265,7 +3265,7 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_LzPDFohkEeqP3Nee_9IR6w" name="hpc_job_torque_2" incomingEdges="_Lz8NvIhkEeqP3Nee_9IR6w" childrenPresentation="VerticalStack">
       <target xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3"/>
       <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3"/>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LzuyUYhkEeqP3Nee_9IR6w" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LzuyUYhkEeqP3Nee_9IR6w" name="torque" width="15" height="3" resizeKind="EAST_WEST">
         <target xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node"/>
         <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
@@ -3318,7 +3318,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzxOkIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzxOkIhkEeqP3Nee_9IR6w" name="name: hpc-test-2">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.0"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzxOkYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3326,7 +3326,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzxOkohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzxOkohkEeqP3Nee_9IR6w" name="script_template: ~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.1"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.1"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzxOk4hkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3334,7 +3334,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzxOlIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzxOlIhkEeqP3Nee_9IR6w" name="email: tokmakov@hlrs.de">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.2"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.2"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lzx1oIhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3342,7 +3342,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzx1oYhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzx1oYhkEeqP3Nee_9IR6w" name="nb_nodes: 1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.3"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.3"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lzx1oohkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3350,7 +3350,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzx1o4hkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lzx1o4hkEeqP3Nee_9IR6w" name="ppn: 1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.4"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.4"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lzx1pIhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3358,7 +3358,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzycsIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzycsIhkEeqP3Nee_9IR6w" name="walltime: 00:02:00">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.5"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.5"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzycsYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3366,7 +3366,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzycsohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzycsohkEeqP3Nee_9IR6w" name="monitor_period: 10">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.6"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.6"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lzycs4hkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3374,7 +3374,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzyctIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_LzyctIhkEeqP3Nee_9IR6w" name="monitor_retries_headroom: 2">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.7"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.7"/>
           <ownedStyle xmi:type="diagram:Square" uid="_LzyctYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3387,7 +3387,7 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_LzPqIohkEeqP3Nee_9IR6w" name="hpc_job_torque_3" incomingEdges="_Lz8Nt4hkEeqP3Nee_9IR6w" childrenPresentation="VerticalStack">
       <target xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4"/>
       <semanticElements xmi:type="aADM:ENodeTemplate" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4"/>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LzzDwIhkEeqP3Nee_9IR6w" name="Invalid feature as name" width="15" height="3" resizeKind="EAST_WEST">
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LzzDwIhkEeqP3Nee_9IR6w" name="torque" width="15" height="3" resizeKind="EAST_WEST">
         <target xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node"/>
         <semanticElements xmi:type="aADM:ENodeTemplateBody" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
@@ -3440,7 +3440,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz4jUIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz4jUIhkEeqP3Nee_9IR6w" name="name: hpc-test-3">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.0"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lz4jUYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3448,7 +3448,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz5KYIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz5KYIhkEeqP3Nee_9IR6w" name="script_template: ~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.1"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.1"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lz5KYYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3456,7 +3456,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz5KYohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz5KYohkEeqP3Nee_9IR6w" name="email: tokmakov@hlrs.de">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.2"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.2"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lz5KY4hkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3464,7 +3464,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz5xcIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz5xcIhkEeqP3Nee_9IR6w" name="nb_nodes: 1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.3"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.3"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lz5xcYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3472,7 +3472,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz5xcohkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz5xcohkEeqP3Nee_9IR6w" name="ppn: 1">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.4"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.4"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lz6YgIhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3480,7 +3480,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz6YgYhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz6YgYhkEeqP3Nee_9IR6w" name="walltime: 00:02:00">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.5"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.5"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lz6YgohkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3488,7 +3488,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz6Yg4hkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz6Yg4hkEeqP3Nee_9IR6w" name="monitor_period: 10">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.6"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.6"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lz6YhIhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -3496,7 +3496,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz6_kIhkEeqP3Nee_9IR6w" name="Invalid feature as name">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Lz6_kIhkEeqP3Nee_9IR6w" name="monitor_retries_headroom: 2">
           <target xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.7"/>
           <semanticElements xmi:type="aADM:EPropertyAssignment" href="hpc_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.7"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Lz6_kYhkEeqP3Nee_9IR6w" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">

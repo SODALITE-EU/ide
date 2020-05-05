@@ -336,7 +336,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEArtifactTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEArtifactTypeAccess().getArtifactEArtifactTypeBodyParserRuleCall_2_0(), semanticObject.getArtifact());
+		feeder.accept(grammarAccess.getEArtifactTypeAccess().getArtifactEArtifactTypeBodyParserRuleCall_3_0(), semanticObject.getArtifact());
 		feeder.finish();
 	}
 	
@@ -381,7 +381,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEAttributeDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEAttributeDefinitionAccess().getAttributeEAttributeDefinitionBodyParserRuleCall_2_0(), semanticObject.getAttribute());
+		feeder.accept(grammarAccess.getEAttributeDefinitionAccess().getAttributeEAttributeDefinitionBodyParserRuleCall_3_0(), semanticObject.getAttribute());
 		feeder.finish();
 	}
 	
@@ -442,7 +442,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getECapabilityDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getECapabilityDefinitionAccess().getCapabilityECapabilityDefinitionBodyParserRuleCall_2_0(), semanticObject.getCapability());
+		feeder.accept(grammarAccess.getECapabilityDefinitionAccess().getCapabilityECapabilityDefinitionBodyParserRuleCall_3_0(), semanticObject.getCapability());
 		feeder.finish();
 	}
 	
@@ -493,7 +493,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getECapabilityTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getECapabilityTypeAccess().getCapabilityECapabilityTypeBodyParserRuleCall_2_0(), semanticObject.getCapability());
+		feeder.accept(grammarAccess.getECapabilityTypeAccess().getCapabilityECapabilityTypeBodyParserRuleCall_3_0(), semanticObject.getCapability());
 		feeder.finish();
 	}
 	
@@ -550,7 +550,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEDataTypeAccess().getNameEDataTypeNameParserRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEDataTypeAccess().getDataEDataTypeBodyParserRuleCall_2_0(), semanticObject.getData());
+		feeder.accept(grammarAccess.getEDataTypeAccess().getDataEDataTypeBodyParserRuleCall_3_0(), semanticObject.getData());
 		feeder.finish();
 	}
 	
@@ -686,7 +686,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEInterfaceDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEInterfaceDefinitionAccess().getInterfaceEInterfaceDefinitionBodyParserRuleCall_2_0(), semanticObject.getInterface());
+		feeder.accept(grammarAccess.getEInterfaceDefinitionAccess().getInterfaceEInterfaceDefinitionBodyParserRuleCall_3_0(), semanticObject.getInterface());
 		feeder.finish();
 	}
 	
@@ -719,7 +719,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEInterfaceTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEInterfaceTypeAccess().getInterfaceEInterfaceTypeBodyParserRuleCall_2_0(), semanticObject.getInterface());
+		feeder.accept(grammarAccess.getEInterfaceTypeAccess().getInterfaceEInterfaceTypeBodyParserRuleCall_3_0(), semanticObject.getInterface());
 		feeder.finish();
 	}
 	
@@ -944,7 +944,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getENodeTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getENodeTypeAccess().getNodeENodeTypeBodyParserRuleCall_2_0(), semanticObject.getNode());
+		feeder.accept(grammarAccess.getENodeTypeAccess().getNodeENodeTypeBodyParserRuleCall_3_0(), semanticObject.getNode());
 		feeder.finish();
 	}
 	
@@ -989,7 +989,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEOperationDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEOperationDefinitionAccess().getOperationEOperationDefinitionBodyParserRuleCall_2_0(), semanticObject.getOperation());
+		feeder.accept(grammarAccess.getEOperationDefinitionAccess().getOperationEOperationDefinitionBodyParserRuleCall_3_0(), semanticObject.getOperation());
 		feeder.finish();
 	}
 	
@@ -1034,7 +1034,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEParameterDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEParameterDefinitionAccess().getParameterEParameterDefinitionBodyParserRuleCall_2_0(), semanticObject.getParameter());
+		feeder.accept(grammarAccess.getEParameterDefinitionAccess().getParameterEParameterDefinitionBodyParserRuleCall_3_0(), semanticObject.getParameter());
 		feeder.finish();
 	}
 	
@@ -1067,7 +1067,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEPolicyTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEPolicyTypeAccess().getPolicyEPolicyTypeBodyParserRuleCall_2_0(), semanticObject.getPolicy());
+		feeder.accept(grammarAccess.getEPolicyTypeAccess().getPolicyEPolicyTypeBodyParserRuleCall_3_0(), semanticObject.getPolicy());
 		feeder.finish();
 	}
 	
@@ -1132,7 +1132,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEPropertyDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEPropertyDefinitionAccess().getPropertyEPropertyDefinitionBodyParserRuleCall_2_0(), semanticObject.getProperty());
+		feeder.accept(grammarAccess.getEPropertyDefinitionAccess().getPropertyEPropertyDefinitionBodyParserRuleCall_3_0(), semanticObject.getProperty());
 		feeder.finish();
 	}
 	
@@ -1172,7 +1172,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getERelationshipTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getERelationshipTypeAccess().getRelationshipERelationshipTypeBodyParserRuleCall_2_0(), semanticObject.getRelationship());
+		feeder.accept(grammarAccess.getERelationshipTypeAccess().getRelationshipERelationshipTypeBodyParserRuleCall_3_0(), semanticObject.getRelationship());
 		feeder.finish();
 	}
 	
@@ -1223,7 +1223,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getERequirementDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getERequirementDefinitionAccess().getRequirementERequirementDefinitionBodyParserRuleCall_2_0(), semanticObject.getRequirement());
+		feeder.accept(grammarAccess.getERequirementDefinitionAccess().getRequirementERequirementDefinitionBodyParserRuleCall_3_0(), semanticObject.getRequirement());
 		feeder.finish();
 	}
 	

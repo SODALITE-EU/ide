@@ -21,6 +21,8 @@ import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider;
+import org.eclipse.xtext.ide.editor.contentassist.IndentationAwareCompletionPrefixProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
@@ -71,7 +73,7 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.sodalite.dsl.ide.contentassist.antlr.PartialRMContentAssistParser;
 import org.sodalite.dsl.ide.contentassist.antlr.RMParser;
-import org.sodalite.dsl.ide.contentassist.antlr.internal.InternalRMLexer;
+import org.sodalite.dsl.ide.contentassist.antlr.lexer.InternalRMLexer;
 import org.sodalite.dsl.ui.contentassist.RMProposalProvider;
 import org.sodalite.dsl.ui.labeling.RMDescriptionLabelProvider;
 import org.sodalite.dsl.ui.labeling.RMLabelProvider;
@@ -110,7 +112,7 @@ public abstract class AbstractRMUiModule extends DefaultUiModule {
 	public void configureHighlightingLexer(Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
 			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
-			.to(org.sodalite.dsl.parser.antlr.internal.InternalRMLexer.class);
+			.to(org.sodalite.dsl.parser.antlr.lexer.InternalRMLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
@@ -133,6 +135,11 @@ public abstract class AbstractRMUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
 		binder.bind(InternalRMLexer.class).toProvider(LexerProvider.create(InternalRMLexer.class));
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends CompletionPrefixProvider> bindCompletionPrefixProvider() {
+		return IndentationAwareCompletionPrefixProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2

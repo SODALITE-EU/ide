@@ -11,6 +11,6 @@ public class RMAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-		return classLoader.getResourceAsStream("org/sodalite/dsl/parser/antlr/internal/InternalRM.tokens");
+		return classLoader.getResourceAsStream("org/sodalite/dsl/parser/antlr/internal/InternalRMParser.tokens");
 	}
 }

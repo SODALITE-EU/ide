@@ -46,7 +46,7 @@ import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.sodalite.dsl.generator.RMGenerator;
 import org.sodalite.dsl.parser.antlr.RMAntlrTokenFileProvider;
 import org.sodalite.dsl.parser.antlr.RMParser;
-import org.sodalite.dsl.parser.antlr.internal.InternalRMLexer;
+import org.sodalite.dsl.parser.antlr.lexer.InternalRMLexer;
 import org.sodalite.dsl.scoping.RMScopeProvider;
 import org.sodalite.dsl.serializer.RMSemanticSequencer;
 import org.sodalite.dsl.serializer.RMSyntacticSequencer;

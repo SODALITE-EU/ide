@@ -16,68 +16,79 @@ import "http://www.sodalite.org/dsl/RM" as rm
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 AADM_Model:
-	('inputs'START_BLOCK
+	('inputs:'
+		BEGIN
 		inputs = EInputs
-	END_BLOCK)? &
-	('node_templates'START_BLOCK
+		END)? &
+	('node_templates:'
+		BEGIN
 		nodeTemplates=ENodeTemplates
-	END_BLOCK)?;
+		END)?;
 
 
 ENodeTemplates:
 	{ENodeTemplates} (nodeTemplates+=ENodeTemplate)+;
 
 ENodeTemplate:
-	name=ID START_BLOCK
-	node=ENodeTemplateBody
-	END_BLOCK;
+	name = ID ':'
+	BEGIN
+		node=ENodeTemplateBody
+	END
+;
 
 ENodeTemplateBody:
 	('type:' type=QUALIFIED_NAME) &
 	('description:' description=STRING)? &
-	('properties'START_BLOCK
-	properties=EPropertyAssigments
-	END_BLOCK)? &
-	('attributes'START_BLOCK
-	atributes=EAttributeAssigments
-	END_BLOCK)? &
-	('requirements'START_BLOCK
-	requirements=ERequirementAssignments
-	END_BLOCK)? &
-	('capabilities'START_BLOCK
-	capabilities=ECapabilityAssignments
-	END_BLOCK)?
-	;
+	('properties:'
+	BEGIN
+		properties=EPropertyAssigments
+	END)? &
+	('attributes:'
+	BEGIN
+		atributes=EAttributeAssigments
+	END)? &
+	('requirements:'
+	BEGIN
+		requirements=ERequirementAssignments
+	END)? &
+	('capabilities:'
+	BEGIN
+		capabilities=ECapabilityAssignments
+	END)?
+;
 
 ERequirementAssignments:
 	{ERequirementAssignments} (requirements+=ERequirementAssignment)*;
 
 ERequirementAssignment:
-	name=ID START_BLOCK
-	('node:' node=[ENodeTemplate|ID])
-	END_BLOCK;
+	name = ID ':'
+	BEGIN
+		('node:' node=[ENodeTemplate|ID])
+	END;
 
 ECapabilityAssignments:
 	{ECapabilityAssignments} (capabilities+=ECapabilityAssignment)*;
 
 ECapabilityAssignment:
-	name=ID START_BLOCK
-	('properties{'
-	properties=EPropertyAssigments
-	END_BLOCK)? 
-	END_BLOCK;
+	name = ID ':'
+	BEGIN
+		('properties:'
+		BEGIN
+			properties=EPropertyAssigments
+		END)? 
+	END;
 
 EAttributeAssigments:
 	{EAttributeAssigments} (attributes+=EAttributeAssignment)*;
 
 EAttributeAssignment:
-	name=ID ':' value=STRING;
+	name = ID ':' value=STRING;
 
 EPropertyAssigments:
 	{EPropertyAssigments} (properties+=EPropertyAssignment)*;
 
 EPropertyAssignment:
-	name=ID ':' value=EPropertyAssignmentValue;
+	name = ID ':' value=EPropertyAssignmentValue;
 	
 
 

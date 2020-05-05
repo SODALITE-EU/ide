@@ -39,36 +39,26 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getEND_BLOCKRule())
-			return getEND_BLOCKToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getSTART_BLOCKRule())
-			return getSTART_BLOCKToken(semanticObject, ruleCall, node);
+		if (ruleCall.getRule() == grammarAccess.getBEGINRule())
+			return getBEGINToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getENDRule())
+			return getENDToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getSTRINGRule())
 			return getSTRINGToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
 	/**
-	 * terminal END_BLOCK:
-	 * 	'}'
-	 * ;
+	 * Synthetic terminal rule. The concrete syntax is to be specified by clients.
+	 * Defaults to the empty string.
 	 */
-	protected String getEND_BLOCKToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "}";
-	}
+	protected String getBEGINToken(EObject semanticObject, RuleCall ruleCall, INode node) { return ""; }
 	
 	/**
-	 * terminal START_BLOCK:
-	 * 	'{'
-	 * ;
+	 * Synthetic terminal rule. The concrete syntax is to be specified by clients.
+	 * Defaults to the empty string.
 	 */
-	protected String getSTART_BLOCKToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "{";
-	}
+	protected String getENDToken(EObject semanticObject, RuleCall ruleCall, INode node) { return ""; }
 	
 	/**
 	 * terminal STRING:
@@ -123,10 +113,10 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'valid_source_types:[' (ambiguity) valid_source_types+=EValidSourceType
-	 *     attributes=EAttributes END_BLOCK 'valid_source_types:[' (ambiguity) valid_source_types+=EValidSourceType
+	 *     attributes=EAttributes END 'valid_source_types:[' (ambiguity) valid_source_types+=EValidSourceType
 	 *     description=STRING 'valid_source_types:[' (ambiguity) valid_source_types+=EValidSourceType
 	 *     end=STRING ']' 'valid_source_types:[' (ambiguity) valid_source_types+=EValidSourceType
-	 *     properties=EProperties END_BLOCK 'valid_source_types:[' (ambiguity) valid_source_types+=EValidSourceType
+	 *     properties=EProperties END 'valid_source_types:[' (ambiguity) valid_source_types+=EValidSourceType
 	 *     type=[ECapabilityType|QUALIFIED_NAME] 'valid_source_types:[' (ambiguity) valid_source_types+=EValidSourceType
 	 */
 	protected void emit_ECapabilityDefinitionBody___RightSquareBracketKeyword_4_2_Valid_source_typesKeyword_4_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -149,46 +139,46 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('valid_source_types:[' ']')*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) 'attributes' START_BLOCK attributes=EAttributes
+	 *     (rule start) (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     (rule start) (ambiguity) 'description:' description=STRING
 	 *     (rule start) (ambiguity) 'occurrences:[' start=STRING
-	 *     (rule start) (ambiguity) 'properties' START_BLOCK properties=EProperties
+	 *     (rule start) (ambiguity) 'properties:' BEGIN properties=EProperties
 	 *     (rule start) (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
 	 *     (rule start) (ambiguity) (rule start)
-	 *     attributes=EAttributes END_BLOCK (ambiguity) 'attributes' START_BLOCK attributes=EAttributes
-	 *     attributes=EAttributes END_BLOCK (ambiguity) 'description:' description=STRING
-	 *     attributes=EAttributes END_BLOCK (ambiguity) 'occurrences:[' start=STRING
-	 *     attributes=EAttributes END_BLOCK (ambiguity) 'properties' START_BLOCK properties=EProperties
-	 *     attributes=EAttributes END_BLOCK (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
-	 *     attributes=EAttributes END_BLOCK (ambiguity) (rule end)
-	 *     description=STRING (ambiguity) 'attributes' START_BLOCK attributes=EAttributes
+	 *     attributes=EAttributes END (ambiguity) 'attributes:' BEGIN attributes=EAttributes
+	 *     attributes=EAttributes END (ambiguity) 'description:' description=STRING
+	 *     attributes=EAttributes END (ambiguity) 'occurrences:[' start=STRING
+	 *     attributes=EAttributes END (ambiguity) 'properties:' BEGIN properties=EProperties
+	 *     attributes=EAttributes END (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     attributes=EAttributes END (ambiguity) (rule end)
+	 *     description=STRING (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     description=STRING (ambiguity) 'description:' description=STRING
 	 *     description=STRING (ambiguity) 'occurrences:[' start=STRING
-	 *     description=STRING (ambiguity) 'properties' START_BLOCK properties=EProperties
+	 *     description=STRING (ambiguity) 'properties:' BEGIN properties=EProperties
 	 *     description=STRING (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
 	 *     description=STRING (ambiguity) (rule end)
-	 *     end=STRING ']' (ambiguity) 'attributes' START_BLOCK attributes=EAttributes
+	 *     end=STRING ']' (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     end=STRING ']' (ambiguity) 'description:' description=STRING
 	 *     end=STRING ']' (ambiguity) 'occurrences:[' start=STRING
-	 *     end=STRING ']' (ambiguity) 'properties' START_BLOCK properties=EProperties
+	 *     end=STRING ']' (ambiguity) 'properties:' BEGIN properties=EProperties
 	 *     end=STRING ']' (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
 	 *     end=STRING ']' (ambiguity) (rule end)
-	 *     properties=EProperties END_BLOCK (ambiguity) 'attributes' START_BLOCK attributes=EAttributes
-	 *     properties=EProperties END_BLOCK (ambiguity) 'description:' description=STRING
-	 *     properties=EProperties END_BLOCK (ambiguity) 'occurrences:[' start=STRING
-	 *     properties=EProperties END_BLOCK (ambiguity) 'properties' START_BLOCK properties=EProperties
-	 *     properties=EProperties END_BLOCK (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
-	 *     properties=EProperties END_BLOCK (ambiguity) (rule end)
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'attributes' START_BLOCK attributes=EAttributes
+	 *     properties=EProperties END (ambiguity) 'attributes:' BEGIN attributes=EAttributes
+	 *     properties=EProperties END (ambiguity) 'description:' description=STRING
+	 *     properties=EProperties END (ambiguity) 'occurrences:[' start=STRING
+	 *     properties=EProperties END (ambiguity) 'properties:' BEGIN properties=EProperties
+	 *     properties=EProperties END (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     properties=EProperties END (ambiguity) (rule end)
+	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'description:' description=STRING
 	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'occurrences:[' start=STRING
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'properties' START_BLOCK properties=EProperties
+	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'properties:' BEGIN properties=EProperties
 	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
 	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) (rule end)
-	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'attributes' START_BLOCK attributes=EAttributes
+	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'description:' description=STRING
 	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'occurrences:[' start=STRING
-	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'properties' START_BLOCK properties=EProperties
+	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'properties:' BEGIN properties=EProperties
 	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
 	 *     valid_source_types+=EValidSourceType ']' (ambiguity) (rule end)
 	 */

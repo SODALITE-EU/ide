@@ -21,6 +21,8 @@ import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider;
+import org.eclipse.xtext.ide.editor.contentassist.IndentationAwareCompletionPrefixProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
@@ -71,7 +73,7 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.sodalite.dsl.ide.contentassist.antlr.AADMParser;
 import org.sodalite.dsl.ide.contentassist.antlr.PartialAADMContentAssistParser;
-import org.sodalite.dsl.ide.contentassist.antlr.internal.InternalAADMLexer;
+import org.sodalite.dsl.ide.contentassist.antlr.lexer.InternalAADMLexer;
 import org.sodalite.dsl.ui.contentassist.AADMProposalProvider;
 import org.sodalite.dsl.ui.labeling.AADMDescriptionLabelProvider;
 import org.sodalite.dsl.ui.labeling.AADMLabelProvider;
@@ -110,7 +112,7 @@ public abstract class AbstractAADMUiModule extends DefaultUiModule {
 	public void configureHighlightingLexer(Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
 			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
-			.to(org.sodalite.dsl.parser.antlr.internal.InternalAADMLexer.class);
+			.to(org.sodalite.dsl.parser.antlr.lexer.InternalAADMLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
@@ -133,6 +135,11 @@ public abstract class AbstractAADMUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
 		binder.bind(InternalAADMLexer.class).toProvider(LexerProvider.create(InternalAADMLexer.class));
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends CompletionPrefixProvider> bindCompletionPrefixProvider() {
+		return IndentationAwareCompletionPrefixProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2

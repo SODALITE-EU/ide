@@ -26,5 +26,6 @@ Export-Package: org.sodalite.dsl,
  org.sodalite.dsl.serializer,
  org.sodalite.dsl.services,
  org.sodalite.dsl.validation,
- org.sodalite.dsl.generator
+ org.sodalite.dsl.generator,
+ org.sodalite.dsl.parser.antlr.lexer
 Import-Package: org.apache.log4j

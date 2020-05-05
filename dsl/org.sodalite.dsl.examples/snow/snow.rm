@@ -1,450 +1,363 @@
-data_types{
-	sodalite.types.OpenStack.SecurityRule{
+data_types:
+	sodalite.types.OpenStack.SecurityRule:
 		derived_from: tosca.datatypes.Root
-		properties{
-			protocol{
+		properties:
+			protocol:
 				type: string
 				required: true
 				default: "tcp"
-				constraints{
+				constraints:
 					valid_values: ["udp", "tcp", "icmp"]
-				}
-			}
-			port_range_min{
+				
+			port_range_min:
 				type: tosca.datatypes.network.PortDef
 				required: true 
-			}
-			port_range_max{
+			
+			port_range_max:
 				type: tosca.datatypes.network.PortDef
 				required: true 
-			}
-			remote_ip_prefix{
+			
+			remote_ip_prefix:
 				type: string
 				required: true 
 				default: "0.0.0.0/0"
-			}
-		}
-	}
-}
 
-node_types{
+node_types:
 	
-	sodalite.nodes.DockerHost {
+	sodalite.nodes.DockerHost :
 		derived_from: tosca.nodes.SoftwareComponent	
-		properties{
-			registry_ip{
+		properties:
+			registry_ip:
 				type: string
 				description: 'IP of the SODALITE docker registry'
 				required: true
 				default: "localhost"
-			}
-		}
-		attributes{
-			registry_ip{
+			
+		attributes:
+			registry_ip:
 				type: string
 				description: 'IP of the SODALITE docker registry'
-			}
-			ansible_ip{
+			
+			ansible_ip:
 				type: string
 				description: "ansible ipv4"
-			}
-		}
-		interfaces{
-			Standard{
+			
+		interfaces:
+			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard
-				operations{
-					create{
-						inputs{
-							registry_ip {
-								default:
-									get_attribute{
-										attribute: sodalite.nodes.DockerHost.registry_ip
-										entity: SELF
-									}
-							}
-							public_ipv4_address{
-								default:
-									get_attribute{
-										attribute: tosca.nodes.Compute.public_address
-										entity: SELF
-										req_cap: tosca.nodes.Compute.host
-									}
-							}
-						}
+				operations:
+					create:
+						inputs:
+							registry_ip :
+								default: get_attribute:
+									attribute: sodalite.nodes.DockerHost.registry_ip
+									entity: SELF
+									
+							public_ipv4_address:
+								default: get_attribute:
+									attribute: tosca.nodes.Compute.public_address
+									entity: SELF
+									req_cap: tosca.nodes.Compute.host
+									
 						implementation: 'playbooks/docker/create_docker_host.yml'
-					}
-					delete{
-						inputs{
-							registry_ip{
-								default:
-									get_property{
-										property: sodalite.nodes.DockerHost.registry_ip
-										entity: SELF
-									}
-							}
-						}
+					
+					delete:
+						inputs:
+							registry_ip:
+								default: get_property:
+									property: sodalite.nodes.DockerHost.registry_ip
+									entity: SELF
+								
 						implementation: 'playbooks/docker/destroy_docker_host.yml'
-					}
-				}
-			}
-		}
-		capabilities{
-			host{
+					
+		capabilities:
+			host:
 				type: tosca.capabilities.Compute
 				valid_source_types:[ sodalite.nodes.DockerizedComponent ]
-			}
-		}
-	}
-	
-	sodalite.nodes.DockerizedComponent{
+			
+	sodalite.nodes.DockerizedComponent:
 		derived_from: tosca.nodes.SoftwareComponent
-		properties{
-			image_name{
+		properties:
+			image_name:
 				type: string
 				description: 'The name of the image on the host'
 				required: true
-			}
-			alias{
+			
+			alias:
 				type: string
 				description: "Alias name for docker container"
 				required: false
-			}
-			pull{
+			
+			pull:
 				type:string
 				description: 'If true, always pull the latest version of an image. Otherwise, will only pull an image when missing'
 				default: 'no'
 				required: false
-			}
-			command{
+			
+			command:
 				type: list
 				description: "Commands list for starting the container"
 				default: ""
 				required: false
-			}
-			env{
+			
+			env:
 				type: map
 				description: "Map for docker environment variables key-value dictionary"
 				required: false
-			}
-			ports{
+			
+			ports:
 				type: string
 				description: 'A list of port binding for the docker container "exposed:internal" like "8081:8080"'
 				required: true
-			}
-			exposed_ports{
+			
+			exposed_ports:
 				type: string
 				description: 'Exposed ports of the container like "8081"'
 				required: true
-			}
-			volumes{
+			
+			volumes:
 				type: list
 				description: 'Exposed ports of the container like "8081"'
 				required: false
-			}
-			restart_policy{
+			
+			restart_policy:
 				type: string
 				default: "Restart policy [no, on-failure, always, unless-stopped]"
 				required: false
-			}
-		}
-		interfaces{
-			Standard{
+		
+		interfaces:
+			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard
-				operations{
-					create{
-						inputs{
-							registry_ip{
-								default:
-									get_attribute{
-										attribute: sodalite.nodes.DockerHost.registry_ip
-										entity: SELF
-										req_cap: sodalite.nodes.DockerizedComponent.host
-									}
-							}
-							ansible_ip{
-								default:
-									get_attribute{
-										attribute: sodalite.nodes.DockerHost.ansible_ip
-										entity: SELF
-										req_cap: sodalite.nodes.DockerizedComponent.host
-									}
-							}
-							image_name{
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.image_name
-										entity: SELF
-									}
-							}
-							alias{
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.alias
-										entity: SELF
-									}
-							}
-							pull{
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.pull
-										entity: SELF
-									}
-							}
-							command{
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.command
-										entity: SELF
-									}
-							}
-							env{
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.env
-										entity: SELF
-									}
-							}
-							ports{
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.ports
-										entity: SELF
-									}
-							}
-							exposed_ports {
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.exposed_ports
-										entity: SELF
-									}
-							}
-							volumes {
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.volumes
-										entity: SELF
-									}
-							}
-							restart_policy {
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.restart_policy
-										entity: SELF
-									}
-							}
-						}
+				operations:
+					create:
+						inputs:
+							registry_ip:
+								default: get_attribute:
+									attribute: sodalite.nodes.DockerHost.registry_ip
+									entity: SELF
+									req_cap: sodalite.nodes.DockerizedComponent.host
+							
+							ansible_ip:
+								default: get_attribute:
+									attribute: sodalite.nodes.DockerHost.ansible_ip
+									entity: SELF
+									req_cap: sodalite.nodes.DockerizedComponent.host
+							
+							image_name:
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.image_name
+									entity: SELF
+								
+							alias:
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.alias
+									entity: SELF
+							
+							pull:
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.pull
+									entity: SELF
+							
+							command:
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.command
+									entity: SELF
+						
+							env:
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.env
+									entity: SELF
+							
+							ports:
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.ports
+									entity: SELF
+					
+							exposed_ports:
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.exposed_ports
+									entity: SELF
+									
+							volumes :
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.volumes
+									entity: SELF
+										
+							restart_policy :
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.restart_policy
+									entity: SELF
+							
 						implementation: "playbooks/docker/dockerized_component_deploy.yml"
-					}
-					delete{
-						inputs{
-							alias{
-								default:
-									get_property{
-										property: sodalite.nodes.DockerizedComponent.alias
-										entity: SELF
-									}
-							}
-						}
+					
+					delete:
+						inputs:
+							alias:
+								default: get_property:
+									property: sodalite.nodes.DockerizedComponent.alias
+									entity: SELF
+									
 						implementation: "playbooks/docker/dockerized_component_undeploy.yml"
-					}
-				}
-			}
-		}
-		requirements{
-			host{
+		
+		requirements:
+			host:
 				capability: tosca.capabilities.Compute
 				node: sodalite.nodes.DockerHost
 				relationship: tosca.relationships.HostedOn
-			}
-		}
-	}
 	
-	sodalite.nodes.OpenStack.SecurityRules{
+	sodalite.nodes.OpenStack.SecurityRules:
 	  	derived_from: tosca.nodes.Root
-	  	properties{
-	  		group_name{
+	  	properties:
+	  		group_name:
 	  			type: string
 	  			description: "Name of the security group in openstack."
 	  			required: true
-	  		}
-	  		group_description{
+	  		
+	  		group_description:
 	  			type: string
 	  			description: "Description of the security group in openstack."
 	  			required: true
-	  		}
-	  		ports{
+	  		
+	  		ports:
 	  			type: map
 	  			required: false
-	  			constraints{
+	  			constraints:
 	  				min_length: "1"
-	  			}
+	  			
 	  			entry_schema: sodalite.types.OpenStack.SecurityRule 
-	  		}
-	  	}
-	  	interfaces{
-	  		Standard{
+	  	
+	  	interfaces:
+	  		Standard:
 	  			type: tosca.interfaces.node.lifecycle.Standard
-	  			operations{
-	  				create{
-	  					inputs{
-	  						group_name{
-	  							default: get_property{
+	  			operations:
+	  				create:
+	  					inputs:
+	  						group_name:
+	  							default: get_property:
 	  								property: sodalite.nodes.OpenStack.SecurityRules.group_name
 	  								entity: SELF
-	  							}
-	  						}
-	  						group_description {
-	  							default: get_property{
+	  							
+	  						group_description :
+	  							default: get_property:
 	  								property: sodalite.nodes.OpenStack.SecurityRules.group_description
 	  								entity: SELF
-	  							}
-	  						}
-	  						port{
-	  							default: get_property{
+	  						
+	  						port:
+	  							default: get_property:
 	  								property: sodalite.nodes.OpenStack.SecurityRules.ports
 	  								entity: SELF
-	  							}
-	  						}
-	  					}
+	  					
 	  					implementation: "playbooks/openstack/security-rule/create.yml"
-	  				}
-	  				delete{
-	  					inputs{
-	  						group_name{
-	  							default: get_property{
+	  				
+	  				delete:
+	  					inputs:
+	  						group_name:
+	  							default: get_property:
 	  								property: sodalite.nodes.OpenStack.SecurityRules.group_name
 	  								entity: SELF
-	  							}
-	  						}
-	  					}
+	  					
 	  					implementation: "playbooks/openstack/security-rule/delete.yml"
-	  				}
-	  			}
-	  		}
-	  	}
-	  }
 
-	sodalite.nodes.OpenStack.VM{
+	sodalite.nodes.OpenStack.VM:
 		derived_from:tosca.nodes.Compute
-		properties{
-			name{
+		properties:
+			name:
 				type: string
 				description: 'Name that should be given to the VM in OpenStack'
-			}
-			image{
+			
+			image:
 				type: string
 				description: 'OpenStack image id (image names are not accepted)'
-			}
-			flavor{
+			
+			flavor:
 				type: string
 				description: 'OpenStack flavor id (flavor names are not accepted)'
-			}
-			network{
+			
+			network:
 				type: string
 				description: 'OpenStack network id (network names are not accepted)'
-			}
-			security_groups{
+			
+			security_groups:
 				type: string
 				description: 'OpenStack names of the security groups to which the instance should be added.Comma separated string.'
-			}
-			key_name{
+			
+			key_name:
 				type: string
-			}
-			user-name{
+			
+			user-name:
 				type: string
 				description: 'OpenStack username'
-			}
-		}
-		attributes{
-			id{
+			
+		attributes:
+			id:
 				type: string
 				description: 'OpenStack id of the VM'
-			}
-			private_address{
+			
+			private_address:
 				type: string
 				description: 'Private ipv4'
-			}
-			public_address{
+			
+			public_address:
 				type: string
 				description: 'Public ipv4'
-			}
-			ansible_ip{
+			
+			ansible_ip:
 				type: string
 				description: 'ansible ipv4'
-			}
-		}
-		interfaces{
-			Standard{
+		
+		interfaces:
+			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard
-				operations{
-					create{
-						inputs{
-							vm_name{
-								default:
-									get_property{
+				operations:
+					create:
+						inputs:
+							vm_name:
+								default: get_property:
 										property: sodalite.nodes.OpenStack.VM.name
 										entity: SELF
-									}
-							}
-							image{
-								default:
-									get_property{
-										property: sodalite.nodes.OpenStack.VM.image
-										entity: SELF
-									}
-							}
-							flavor{
-								default:
-									get_property{
-										property: sodalite.nodes.OpenStack.VM.flavor
-										entity: SELF
-									}
-							}
-							network{
-								default:
-									get_property{
-										property: sodalite.nodes.OpenStack.VM.network
-										entity: SELF
-									}
-							}
-							security_groups{
-								default:
-									get_property{
-										property: sodalite.nodes.OpenStack.VM.security_groups
-										entity: SELF
-									}									
-							}
-							key_name{
-								default:
-									get_property{
-										property: sodalite.nodes.OpenStack.VM.key_name
-										entity: SELF
-									}									
-							}
-						}
+									
+							image:
+								default: get_property:
+									property: sodalite.nodes.OpenStack.VM.image
+									entity: SELF
+							
+							flavor:
+								default: get_property:
+									property: sodalite.nodes.OpenStack.VM.flavor
+									entity: SELF
+									
+							network:
+								default: get_property:
+									property: sodalite.nodes.OpenStack.VM.network
+									entity: SELF
+									
+							security_groups:
+								default: get_property:
+									property: sodalite.nodes.OpenStack.VM.security_groups
+									entity: SELF
+																		
+							key_name:
+								default: get_property:
+									property: sodalite.nodes.OpenStack.VM.key_name
+									entity: SELF
+																		
 						implementation: 'playbooks/openstack/vm/create.yml'
-					}
-					delete{
-						inputs{
-								id{
-									default:
-										get_attribute{
-											attribute: sodalite.nodes.OpenStack.VM.id
-											entity: SELF
-										}
-								}
-						}
+					
+					delete:
+						inputs:
+							id:
+								default: get_attribute:
+									attribute: sodalite.nodes.OpenStack.VM.id
+									entity: SELF
+						
 						implementation: "playbooks/openstack/vm/delete.yml"
-					}
-				}
-			}
-		}
-		requirements{
-			protected_by{
+					
+		requirements:
+			protected_by:
 				capability: tosca.capabilities.Node 
 				node: sodalite.nodes.OpenStack.SecurityRules
 				relationship: tosca.relationships.DependsOn
-			}
-		}
-	}
-}
+			
+		
+	
+

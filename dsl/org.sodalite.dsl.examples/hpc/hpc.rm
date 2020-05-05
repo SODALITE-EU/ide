@@ -1,216 +1,173 @@
-relationship_types{
-	my.relationships.jobHostedOn{
+relationship_types:
+	my.relationships.jobHostedOn:
 		derived_from: tosca.relationships.HostedOn
-		interfaces{
-			Configure{
+		interfaces:
+			Configure:
 				type: tosca.interfaces.relationship.Configure
-				operations{
-					add_source{
+				operations:
+					add_source:
 						implementation: "playbooks/torque-job/test.yml"
-					}
-				}
-			}
-		}
-	}
-}
-
-node_types{
-	
-	my.nodes.hpc.wm.torque{
+					
+node_types:
+	my.nodes.hpc.wm.torque:
 		derived_from: tosca.nodes.Compute
 		description: "torque vm"
-		properties{
-			num_nodes{
+		properties:
+			num_nodes:
 				type: integer
 				description: "number of nodes in the HPC cluster"
 				required: false
-			}
-		}
-		attributes{
-			username{
+		
+		attributes:
+			username:
 				type: string
-			}
-			ssh-key{
+			
+			ssh-key:
 				type: string
-			}
-		}
-		capabilities{
-			host{
+		
+		capabilities:
+			host:
 				type: tosca.capabilities.Compute
 				valid_source_types:[my.nodes.hpc.job.torque]
-				properties{
-					num_nodes{
+				properties:
+					num_nodes:
 						type: integer
 						required: false
-						constraints{
+						constraints:
 							greater_or_equal: "1"
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	my.nodes.hpc.job.torque{
-        derived_from: tosca.nodes.SoftwareComponent
-        description: "torque job type, here we can define properties/attributes applicable for torque WM,
+						
+	my.nodes.hpc.job.torque:
+		derived_from: tosca.nodes.SoftwareComponent
+		description: "torque job type, here we can define properties/attributes applicable for torque WM,
                         e.g. execution environment, etc."
-          properties{
-              name{
-                  type: string
-                  description: "Name of the job"
-              }
-              script_template{
-                  type: string
-                  description: "Job script template with j2 extension,
-                  such that Ansible can process it with the template module"
-              }
-              email{
-                  type: string
-                  description: "ob status will be notified to this email"
-              }
-              nb_nodes{
-                  type: integer
-                  description: "Number of requested nodes"
-              }
-              ppn{
-                  type: integer
-                  description: "Number of processes per node"
-              }
-              walltime{
-                  type: string
-                  description: "Expected time of execution
-                                FORMAT: HH:MM:SS"
-              }
-              monitor_period{
-                  type: integer
-                  default: "10"
-                  
-              }
-              monitor_retries_headroom{
-                  type: integer
-                  default: "2"
-              }
-          }
-          attributes{
-              job_id{
-                  type: string
-              }
-          }
-          interfaces{
-              Standard{
-                  type: tosca.interfaces.node.lifecycle.Standard
-                  inputs{
-                      wm_public_address{
-                          type: string
-                          default:
-                              get_attribute{
-                                  attribute: tosca.nodes.Compute.public_address
-                                  entity: SELF //TODO context assist support
-                                  req_cap: tosca.nodes.Compute.host
-                              }
-                      }
-               		  wm_username{
+		properties:
+			name:
+				type: string
+				description: "Name of the job"
+  
+			script_template:
+				type: string
+				description: "Job script template with j2 extension,
+				such that Ansible can process it with the template module"
+  
+			email:
+				type: string
+				description: "ob status will be notified to this email"
+  
+			nb_nodes:
+				type: integer
+				description: "Number of requested nodes"
+  
+			ppn:
+				type: integer
+				description: "Number of processes per node"
+  
+			walltime:
+				type: string
+				description: "Expected time of execution FORMAT: HH:MM:SS"
+  
+			monitor_period:
+				type: integer
+				default: "10"
+      
+			monitor_retries_headroom:
+				type: integer
+				default: "2"
+          
+		attributes:
+			job_id:
+				type: string
+           
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				inputs:
+					wm_public_address:
+						type: string
+						default: get_attribute:
+							attribute: tosca.nodes.Compute.public_address
+							entity: SELF //TODO context assist support
+							req_cap: tosca.nodes.Compute.host
+                      
+					wm_username:
+						type: string
+						default: get_attribute:
+							attribute: my.nodes.hpc.wm.torque.username
+							entity: SELF
+							req_cap: my.nodes.hpc.wm.torque.host
+               		  
+					wm_keypath:
                		  	type: string
-               		  	default: get_attribute{
-               		  		attribute: my.nodes.hpc.wm.torque.username
-               		  		entity: SELF
-               		  		req_cap: my.nodes.hpc.wm.torque.host
-               		  	}
-               		  }
-               		  wm_keypath{
-               		  	type: string
-               		  	default: get_attribute{ 
+               		  	default: get_attribute: 
                		  		attribute: my.nodes.hpc.wm.torque.ssh-key
                		  		entity: SELF
                		  		req_cap: my.nodes.hpc.wm.torque.host
-               		  	}
-               		  }
-                      job_name{
-                          type: string
-                          default:
-                              get_property{
-                                  property: my.nodes.hpc.job.torque.name
-                                  entity: SELF
-                              }
-                      }
-                      job_script_template{
-                          type: string
-                          default:
-                              get_property{
-                                  property: my.nodes.hpc.job.torque.script_template
-                                  entity: SELF
-                              }
-                      }
-                      job_email{
-                          type: string
-                          default:
-                              get_property{
-                                  property: my.nodes.hpc.job.torque.email
-                                  entity: SELF
-                              }
-                      }
-                      job_nb_nodes{
-                          type: string
-                          default:
-                              get_property{
-                                  property: my.nodes.hpc.job.torque.nb_nodes
-                                  entity: SELF
-                              }
-                      }
-                      job_ppn{
-                          type: string
-                          default:
-                              get_property{
-                                  property: my.nodes.hpc.job.torque.ppn
-                                  entity: SELF
-                              }
-                      }
-                      job_walltime{
-                          type: string
-                          default:
-                              get_property{
-                                  property: my.nodes.hpc.job.torque.walltime
-                                  entity: SELF
-                              }
-                      }
-                      job_monitor_period{
-                          type: string
-                          default:
-                              get_property{
-                                  property: my.nodes.hpc.job.torque.monitor_period
-                                  entity: SELF
-                              }
-                      }
-                      job_monitor_retries_headroom{
-                          type: string
-                          default:
-                              get_property{
-                                  property: my.nodes.hpc.job.torque.monitor_retries_headroom
-                                  entity: SELF
-                              }
-                      }
-                  }
-                  operations{
-                      create{
-                          implementation: "playbooks/torque-job/create.yml"
-                      }
-                      configure{
-                          implementation: "playbooks/torque-job/configure.yml"
-                      }
-                      start{
-                          implementation: "playbooks/torque-job/start.yml"
-                      }
-                  }
-              }
-          }
-          requirements{
-          	host{
+                		  
+					job_name:
+						type: string
+						default: get_property:
+							property: my.nodes.hpc.job.torque.name
+							entity: SELF
+                      
+					job_script_template:
+						type: string
+						default: get_property:
+							property: my.nodes.hpc.job.torque.script_template
+							entity: SELF
+                      
+					job_email:
+						type: string
+						default: get_property:
+							property: my.nodes.hpc.job.torque.email
+							entity: SELF
+                      
+					job_nb_nodes:
+						type: string
+						default: get_property:
+							property: my.nodes.hpc.job.torque.nb_nodes
+							entity: SELF
+                      
+					job_ppn:
+						type: string
+						default: get_property:
+							property: my.nodes.hpc.job.torque.ppn
+							entity: SELF
+                      
+					job_walltime:
+						type: string
+						default: get_property:
+							property: my.nodes.hpc.job.torque.walltime
+							entity: SELF
+                      
+					job_monitor_period:
+						type: string
+						default: get_property:
+							property: my.nodes.hpc.job.torque.monitor_period
+							entity: SELF
+                      
+					job_monitor_retries_headroom:
+						type: string
+						default: get_property:
+							property: my.nodes.hpc.job.torque.monitor_retries_headroom
+							entity: SELF
+                  
+				operations:
+					create:
+						implementation: "playbooks/torque-job/create.yml"
+                      
+					configure:
+						implementation: "playbooks/torque-job/configure.yml"
+                      
+					start:
+						implementation: "playbooks/torque-job/start.yml"
+          
+		requirements:
+          	host:
           		capability: tosca.capabilities.Compute
           		node: my.nodes.hpc.wm.torque
           		relationship: tosca.relationships.HostedOn
-          	}
-          }
-    }
+          	
+          
+    
 
-}
+

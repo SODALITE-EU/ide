@@ -57,7 +57,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_g9JHso3YEeqwAMo8gMnBcw"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_g9CaAY3YEeqwAMo8gMnBcw" fontName="Cantarell" fontHeight="12" bold="true"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9CaAo3YEeqwAMo8gMnBcw" x="396"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9CaAo3YEeqwAMo8gMnBcw" x="396" y="144"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_g9NZII3YEeqwAMo8gMnBcw" type="2002" element="_g7804I3YEeqwAMo8gMnBcw">
           <children xmi:type="notation:Node" xmi:id="_g9gUE43YEeqwAMo8gMnBcw" type="3012" element="_g8H0AI3YEeqwAMo8gMnBcw">
@@ -80,7 +80,7 @@
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9hiNY3YEeqwAMo8gMnBcw"/>
             </children>
             <styles xmi:type="notation:ShapeStyle" xmi:id="_g9g7IY3YEeqwAMo8gMnBcw" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9g7Io3YEeqwAMo8gMnBcw" x="-92" y="18" width="100" height="30"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9g7Io3YEeqwAMo8gMnBcw" x="-154" y="18" width="162" height="30"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g9OAMI3YEeqwAMo8gMnBcw" type="5006"/>
           <children xmi:type="notation:Node" xmi:id="_g9OAMY3YEeqwAMo8gMnBcw" type="7001">
@@ -176,7 +176,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_g9OAM43YEeqwAMo8gMnBcw"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_g9NZIY3YEeqwAMo8gMnBcw" fontName="Cantarell" fontHeight="12" bold="true"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9NZIo3YEeqwAMo8gMnBcw" x="424" y="288"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9NZIo3YEeqwAMo8gMnBcw" x="424" y="378"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_g9OANI3YEeqwAMo8gMnBcw" type="2002" element="_g780443YEeqwAMo8gMnBcw">
           <children xmi:type="notation:Node" xmi:id="_g9peAI3YEeqwAMo8gMnBcw" type="3012" element="_g8OhsI3YEeqwAMo8gMnBcw">
@@ -199,7 +199,7 @@
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9rTMo3YEeqwAMo8gMnBcw"/>
             </children>
             <styles xmi:type="notation:ShapeStyle" xmi:id="_g9qFEY3YEeqwAMo8gMnBcw" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9qFEo3YEeqwAMo8gMnBcw" x="42" y="79" width="100" height="30"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9qFEo3YEeqwAMo8gMnBcw" x="-92" y="36" width="100" height="30"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g9OnQI3YEeqwAMo8gMnBcw" type="5006"/>
           <children xmi:type="notation:Node" xmi:id="_g9OnQY3YEeqwAMo8gMnBcw" type="7001">
@@ -244,7 +244,7 @@
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9vkoo3YEeqwAMo8gMnBcw"/>
             </children>
             <styles xmi:type="notation:ShapeStyle" xmi:id="_g9tIY43YEeqwAMo8gMnBcw" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9tIZI3YEeqwAMo8gMnBcw" x="151" y="-22" width="100" height="30"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9tIZI3YEeqwAMo8gMnBcw" x="212" y="-22" width="100" height="30"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g9tvco3YEeqwAMo8gMnBcw" type="3012" element="_g8Q9843YEeqwAMo8gMnBcw">
             <children xmi:type="notation:Node" xmi:id="_g9uWgo3YEeqwAMo8gMnBcw" type="5010">
@@ -255,7 +255,7 @@
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9vkpY3YEeqwAMo8gMnBcw"/>
             </children>
             <styles xmi:type="notation:ShapeStyle" xmi:id="_g9uWgI3YEeqwAMo8gMnBcw" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9uWgY3YEeqwAMo8gMnBcw" x="151" y="-22" width="100" height="30"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9uWgY3YEeqwAMo8gMnBcw" x="360" y="-22" width="100" height="30"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g9OnR43YEeqwAMo8gMnBcw" type="5006"/>
           <children xmi:type="notation:Node" xmi:id="_g9POUI3YEeqwAMo8gMnBcw" type="7001">
@@ -316,7 +316,7 @@
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9zPAo3YEeqwAMo8gMnBcw"/>
             </children>
             <styles xmi:type="notation:ShapeStyle" xmi:id="_g9yA443YEeqwAMo8gMnBcw" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9yA5I3YEeqwAMo8gMnBcw" x="151" y="-22" width="100" height="30"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9yA5I3YEeqwAMo8gMnBcw" x="180" y="-22" width="100" height="30"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g9POVo3YEeqwAMo8gMnBcw" type="5006"/>
           <children xmi:type="notation:Node" xmi:id="_g9POV43YEeqwAMo8gMnBcw" type="7001">
@@ -370,7 +370,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_g9P1Zo3YEeqwAMo8gMnBcw"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_g9P1YY3YEeqwAMo8gMnBcw" fontName="Cantarell" fontHeight="12" bold="true"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9P1Yo3YEeqwAMo8gMnBcw" x="759" y="864"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9P1Yo3YEeqwAMo8gMnBcw" x="900" y="886"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_g9P1Z43YEeqwAMo8gMnBcw" type="2002" element="_g8UoU43YEeqwAMo8gMnBcw">
           <children xmi:type="notation:Node" xmi:id="_g9QccI3YEeqwAMo8gMnBcw" type="5006"/>
@@ -407,86 +407,86 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_g9Qcc43YEeqwAMo8gMnBcw"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_g9P1aI3YEeqwAMo8gMnBcw" fontName="Cantarell" fontHeight="12" bold="true"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9P1aY3YEeqwAMo8gMnBcw" y="54"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g9P1aY3YEeqwAMo8gMnBcw" x="108" y="126"/>
         </children>
         <styles xmi:type="notation:DiagramStyle" xmi:id="_g84B8o3YEeqwAMo8gMnBcw"/>
         <edges xmi:type="notation:Edge" xmi:id="_g-JNQI3YEeqwAMo8gMnBcw" type="4001" element="_g8au8I3YEeqwAMo8gMnBcw" source="_g9g7II3YEeqwAMo8gMnBcw" target="_g9CaAI3YEeqwAMo8gMnBcw">
           <children xmi:type="notation:Node" xmi:id="_g-J0UI3YEeqwAMo8gMnBcw" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-J0UY3YEeqwAMo8gMnBcw" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-J0UY3YEeqwAMo8gMnBcw"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-KbYI3YEeqwAMo8gMnBcw" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-KbYY3YEeqwAMo8gMnBcw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-KbYY3YEeqwAMo8gMnBcw" x="6"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-LCcI3YEeqwAMo8gMnBcw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-LCcY3YEeqwAMo8gMnBcw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-LCcY3YEeqwAMo8gMnBcw" x="-1" y="27"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_g-JNQY3YEeqwAMo8gMnBcw"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_g-JNQo3YEeqwAMo8gMnBcw" fontName="Cantarell" fontHeight="12"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-JNQ43YEeqwAMo8gMnBcw" points="[0, 0, -64, 158]$[64, -158, 0, 0]"/>
-          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-UzcI3YEeqwAMo8gMnBcw" id="(0.5,0.5)"/>
-          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-UzcY3YEeqwAMo8gMnBcw" id="(0.5031446540880503,1.0)"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-JNQ43YEeqwAMo8gMnBcw" points="[7, -7, -41, 190]$[7, -205, -41, -8]$[43, -205, -5, -8]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-UzcI3YEeqwAMo8gMnBcw" id="(0.5123456790123457,0.23333333333333334)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-UzcY3YEeqwAMo8gMnBcw" id="(0.015723270440251572,0.496)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_g-VagI3YEeqwAMo8gMnBcw" type="4001" element="_g8bWAI3YEeqwAMo8gMnBcw" source="_g9qFEI3YEeqwAMo8gMnBcw" target="_g9NZII3YEeqwAMo8gMnBcw">
           <children xmi:type="notation:Node" xmi:id="_g-VahI3YEeqwAMo8gMnBcw" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-VahY3YEeqwAMo8gMnBcw" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-VahY3YEeqwAMo8gMnBcw" x="69"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-Vaho3YEeqwAMo8gMnBcw" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-Vah43YEeqwAMo8gMnBcw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-Vah43YEeqwAMo8gMnBcw" x="8"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-VaiI3YEeqwAMo8gMnBcw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-VaiY3YEeqwAMo8gMnBcw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-VaiY3YEeqwAMo8gMnBcw" x="2" y="2"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_g-VagY3YEeqwAMo8gMnBcw"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_g-Vago3YEeqwAMo8gMnBcw" fontName="Cantarell" fontHeight="12"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-Vag43YEeqwAMo8gMnBcw" points="[0, 0, -75, 163]$[75, -163, 0, 0]"/>
-          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-WBkI3YEeqwAMo8gMnBcw" id="(0.5,0.5)"/>
-          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-WBkY3YEeqwAMo8gMnBcw" id="(0.5019157088122606,1.0)"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-Vag43YEeqwAMo8gMnBcw" points="[-8, 0, -64, 267]$[-8, -267, -64, 0]$[56, -267, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-WBkI3YEeqwAMo8gMnBcw" id="(0.52,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-WBkY3YEeqwAMo8gMnBcw" id="(0.0,0.6505102040816326)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_g-WBko3YEeqwAMo8gMnBcw" type="4001" element="_g8bWBY3YEeqwAMo8gMnBcw" source="_g9tIYo3YEeqwAMo8gMnBcw" target="_g9OANI3YEeqwAMo8gMnBcw">
           <children xmi:type="notation:Node" xmi:id="_g-WBlo3YEeqwAMo8gMnBcw" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-WBl43YEeqwAMo8gMnBcw" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-WBl43YEeqwAMo8gMnBcw" x="2" y="-10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-WBmI3YEeqwAMo8gMnBcw" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-WBmY3YEeqwAMo8gMnBcw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-WBmY3YEeqwAMo8gMnBcw" x="-2" y="10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-WooI3YEeqwAMo8gMnBcw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-WooY3YEeqwAMo8gMnBcw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-WooY3YEeqwAMo8gMnBcw" x="-1" y="11"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_g-WBk43YEeqwAMo8gMnBcw"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_g-WBlI3YEeqwAMo8gMnBcw" fontName="Cantarell" fontHeight="12"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-WBlY3YEeqwAMo8gMnBcw" points="[0, 0, 49, 190]$[-49, -190, 0, 0]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-WBlY3YEeqwAMo8gMnBcw" points="[-22, -15, 225, 161]$[-247, -176, 0, 0]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-Wooo3YEeqwAMo8gMnBcw" id="(0.5,0.5)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-Woo43YEeqwAMo8gMnBcw" id="(0.5017064846416383,1.0)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_g-WopI3YEeqwAMo8gMnBcw" type="4001" element="_g8bWCo3YEeqwAMo8gMnBcw" source="_g9tvco3YEeqwAMo8gMnBcw" target="_g9P1YI3YEeqwAMo8gMnBcw">
           <children xmi:type="notation:Node" xmi:id="_g-WoqI3YEeqwAMo8gMnBcw" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-WoqY3YEeqwAMo8gMnBcw" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-WoqY3YEeqwAMo8gMnBcw" x="-1" y="-9"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-XPsI3YEeqwAMo8gMnBcw" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-XPsY3YEeqwAMo8gMnBcw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-XPsY3YEeqwAMo8gMnBcw" x="5" y="6"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-XPso3YEeqwAMo8gMnBcw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-XPs43YEeqwAMo8gMnBcw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-XPs43YEeqwAMo8gMnBcw" x="3" y="5"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_g-WopY3YEeqwAMo8gMnBcw"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_g-Wopo3YEeqwAMo8gMnBcw" fontName="Cantarell" fontHeight="12"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-Wop43YEeqwAMo8gMnBcw" points="[0, 0, 38, 233]$[-38, -233, 0, 0]"/>
-          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-XPtI3YEeqwAMo8gMnBcw" id="(0.5,0.5)"/>
-          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-XPtY3YEeqwAMo8gMnBcw" id="(0.5058823529411764,1.0)"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-Wop43YEeqwAMo8gMnBcw" points="[3, 0, 1, 186]$[3, -182, 1, 4]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-XPtI3YEeqwAMo8gMnBcw" id="(0.47,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-XPtY3YEeqwAMo8gMnBcw" id="(0.5764705882352941,0.9090909090909091)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_g-XPto3YEeqwAMo8gMnBcw" type="4001" element="_g8b9EI3YEeqwAMo8gMnBcw" source="_g9yA4o3YEeqwAMo8gMnBcw" target="_g9OANI3YEeqwAMo8gMnBcw">
           <children xmi:type="notation:Node" xmi:id="_g-X2wI3YEeqwAMo8gMnBcw" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-X2wY3YEeqwAMo8gMnBcw" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-X2wY3YEeqwAMo8gMnBcw" x="2" y="-10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-X2wo3YEeqwAMo8gMnBcw" type="6002">
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-X2w43YEeqwAMo8gMnBcw" y="10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_g-X2xI3YEeqwAMo8gMnBcw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-X2xY3YEeqwAMo8gMnBcw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g-X2xY3YEeqwAMo8gMnBcw" x="1" y="10"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_g-XPt43YEeqwAMo8gMnBcw"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_g-XPuI3YEeqwAMo8gMnBcw" fontName="Cantarell" fontHeight="12"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-XPuY3YEeqwAMo8gMnBcw" points="[0, 0, -329, 190]$[329, -190, 0, 0]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_g-XPuY3YEeqwAMo8gMnBcw" points="[13, -15, -150, 161]$[163, -176, 0, 0]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-X2xo3YEeqwAMo8gMnBcw" id="(0.5,0.5)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_g-X2x43YEeqwAMo8gMnBcw" id="(0.5017064846416383,1.0)"/>
         </edges>
@@ -504,6 +504,9 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
       </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_g74jcI3YEeqwAMo8gMnBcw" labelSize="12" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="39,76,114" foregroundColor="194,239,255">
         <labelFormat>bold</labelFormat>
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
@@ -559,12 +562,18 @@
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_g8IbEI3YEeqwAMo8gMnBcw" name="req: protected_by" outgoingEdges="_g8au8I3YEeqwAMo8gMnBcw" width="10" height="3" resizeKind="NSEW">
         <target xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@requirements/@requirements.0"/>
         <semanticElements xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
         <ownedStyle xmi:type="diagram:Square" uid="_g8JCII3YEeqwAMo8gMnBcw" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
           <labelFormat>italic</labelFormat>
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
       </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_g7804Y3YEeqwAMo8gMnBcw" labelSize="12" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="39,76,114" foregroundColor="194,239,255">
         <labelFormat>bold</labelFormat>
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
@@ -720,6 +729,9 @@
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_g8Ohs43YEeqwAMo8gMnBcw" name="req: host" outgoingEdges="_g8bWAI3YEeqwAMo8gMnBcw" width="10" height="3" resizeKind="NSEW">
         <target xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.0"/>
         <semanticElements xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
         <ownedStyle xmi:type="diagram:Square" uid="_g8OhtI3YEeqwAMo8gMnBcw" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
           <labelFormat>italic</labelFormat>
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
@@ -765,6 +777,9 @@
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_g8Q98I3YEeqwAMo8gMnBcw" name="req: host" outgoingEdges="_g8bWBY3YEeqwAMo8gMnBcw" width="10" height="3" resizeKind="NSEW">
         <target xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.0"/>
         <semanticElements xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
         <ownedStyle xmi:type="diagram:Square" uid="_g8Q98Y3YEeqwAMo8gMnBcw" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
           <labelFormat>italic</labelFormat>
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
@@ -774,6 +789,9 @@
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_g8Q9843YEeqwAMo8gMnBcw" name="req: dependency" outgoingEdges="_g8bWCo3YEeqwAMo8gMnBcw" width="10" height="3" resizeKind="NSEW">
         <target xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.1"/>
         <semanticElements xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.1"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
         <ownedStyle xmi:type="diagram:Square" uid="_g8Q99I3YEeqwAMo8gMnBcw" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
           <labelFormat>italic</labelFormat>
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
@@ -851,6 +869,9 @@
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_g8SzI43YEeqwAMo8gMnBcw" name="req: host" outgoingEdges="_g8b9EI3YEeqwAMo8gMnBcw" width="10" height="3" resizeKind="NSEW">
         <target xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
         <semanticElements xmi:type="aADM:ERequirementAssignment" href="snow_opt.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
         <ownedStyle xmi:type="diagram:Square" uid="_g8SzJI3YEeqwAMo8gMnBcw" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
           <labelFormat>italic</labelFormat>
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
@@ -917,6 +938,9 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
       </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_g79b9o3YEeqwAMo8gMnBcw" labelSize="12" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="39,76,114" foregroundColor="194,239,255">
         <labelFormat>bold</labelFormat>
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
@@ -926,6 +950,9 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_g8UoU43YEeqwAMo8gMnBcw" name="Inputs" childrenPresentation="VerticalStack">
       <target xmi:type="rM:EInputs" href="snow_opt.aadm#//@inputs"/>
       <semanticElements xmi:type="rM:EInputs" href="snow_opt.aadm#//@inputs"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_g8UoVI3YEeqwAMo8gMnBcw" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="GradientTopToBottom" backgroundColor="173,127,168" foregroundColor="173,127,168">
         <labelFormat>bold</labelFormat>
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Inputs']/@style"/>

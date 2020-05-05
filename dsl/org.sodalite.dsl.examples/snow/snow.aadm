@@ -1,38 +1,32 @@
-inputs{
-	ssh-key-name{
+inputs:
+	ssh-key-name:
 		type: string
-	}
-	docker-registry-ip{
+	
+	docker-registry-ip:
 		type: string
-	}
-}
 
-node_templates{
-	security-rules-snow{
+node_templates:
+	security-rules-snow:
 		type: sodalite.nodes.OpenStack.SecurityRules
-		properties{
+		properties:
 			group_name: "snow"
 			group_description: "Snow UC security group"
-			ports:{
-				http_port: { 
+			ports:
+				http_port: 
 					protocol: 'tcp' 
 					port_range_min: '80'
 					port_range_max: '80'
 					remote_ip_prefix: "0.0.0.0/0"
-				}
-				component_ports: {
+				
+				component_ports:
 					protocol: 'tcp' 
 					port_range_min: '8080'
 					port_range_max: '8081'
 					remote_ip_prefix: "0.0.0.0/0"
-				}
-			}
-		}
-	}
 
-	snow-vm{
+	snow-vm:
 		type: sodalite.nodes.OpenStack.VM
-		properties{
+		properties:
 			name: 'snow-vm'
 			image: 'centos7'
 			flavor: 'm1.small'
@@ -40,53 +34,57 @@ node_templates{
 			security_groups: 'default,snow'
 			key_name: get_input: ssh-key-name
 			user_name: 'root'
-		} 
-		requirements{
-			protected_by{
+		 
+		requirements:
+			// TODO (SIMPLIFICATION) protected_by requirement (optional) could be missed, and resolved by the KB
+			// If missed, KB should determined a node instance (template) that could satisfy this requirement, among those (in this order):
+			// i) in this AADM
+			// ii) in the KB
+			// whose capabilities satisfy the requirement
+			// In general, all mandatory requirements could be resolved by KB if not explicitely expressed. 
+			// In case of optional requirements, they could be suggested if there is a node instance (within the AADM) that satisfies them
+			protected_by:
 				node: security-rules-snow
-			}
-		}
-	}
 
-	snow-docker_host{
+	snow-docker_host:
 		type: sodalite.nodes.DockerHost
-		properties{
+		properties:
 			registry_ip: get_input: docker-registry-ip
-		}
-		requirements{
-			host{
+		
+		requirements:
+			// TODO (SIMPLIFICATION) host requirement (mandatory) could be missed, and resolved by the KB
+			// If missed, KB should determined a node instance (template) that could satisfy this requirement, among those (in this order):
+			// i) in this AADM
+			// ii) in the KB
+			// whose capabilities satisfy the requirement
+			host:
 				node: snow-vm
-			} 
-		}
-	}
  
-	skyline_extractor{
+	skyline_extractor:
 		 type: sodalite.nodes.DockerizedComponent
-		 properties{
+		 properties:
 		 	image_name: 'snow-skyline-extractor'
 		 	ports: ['8080:8080']
 		 	exposed_ports: ['8080']
 		 	volumes: "/tmp/docker:/tmp"
-		 }
-		 requirements{
-		 	host{
+		 
+		 requirements:
+		 	// TODO (SIMPLIFICATION) see above
+		 	host:
 		 		node: snow-docker_host
-		 	}
-		 }
-	}
 	
-	skyline_alignment{
+	skyline_alignment:
 		type: sodalite.nodes.DockerizedComponent
-		properties{
+		properties:
 			image_name: "snow-skyline-alignment"
 			ports: ["8081:8080", "80:8080"]
 			exposed_ports: ["8080"]
 			volumes: "/tmp/docker:/tmp"
-		}
-		requirements{
-			host{
+		
+		requirements:
+			// TODO (SIMPLIFICATION) see above
+			host:
 				node: snow-docker_host
-			}
-		}
-	}
-}
+			
+		
+	
