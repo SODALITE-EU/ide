@@ -1,16 +1,20 @@
 package org.sodalite.dsl.ui.validation;
 
+import org.eclipse.xtext.diagnostics.Severity;
+
 public class AADMValidationIssue {
 	String message;
 	String path;
 	String pathType;
-	Type type;
+	String code;
+	Severity type;
 	
-	public AADMValidationIssue (String message, String path, String pathType, Type type){
+	public AADMValidationIssue (String message, String path, String pathType, Severity type, String code){
 		this.message = message;
 		this.path = path;
 		this.pathType = pathType;
 		this.type = type;
+		this.code = code;
 	}
 
 	public String getMessage() {
@@ -21,7 +25,7 @@ public class AADMValidationIssue {
 		return path;
 	}
 	
-	public Type getType() {
+	public Severity getType() {
 		return type;
 	}
 	
@@ -29,7 +33,16 @@ public class AADMValidationIssue {
 		return pathType;
 	}
 	
-	public enum Type {
-		ERROR, WARNING
+	public String getCode() {
+		return code;
 	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
+	public enum ValidationCode {
+		OPTIMIZATION
+	}
+	
 }

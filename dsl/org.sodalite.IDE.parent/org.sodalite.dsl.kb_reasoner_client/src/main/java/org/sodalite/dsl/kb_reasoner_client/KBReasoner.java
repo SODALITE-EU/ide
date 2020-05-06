@@ -18,6 +18,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
@@ -33,6 +34,7 @@ public interface KBReasoner {
 	RequirementData getRequirements(String resourceId) throws Exception;
 	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception;
 	KBSaveReportData saveAADM (String aadmTTL, String submissionId) throws Exception;
+	KBOptimizationReportData optimizeAADM (String aadmTTL, String submissionId) throws Exception;
 	String getAADM (String aadmIRI) throws Exception;
 	IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json) throws Exception;
 	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token) throws Exception;

@@ -13,6 +13,7 @@ package org.sodalite.dsl.kb_reasoner_client;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -24,6 +25,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
+import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization;
+import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
@@ -48,10 +51,16 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonFactoryBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class KBReasonerClient implements KBReasoner {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -127,20 +136,20 @@ public class KBReasonerClient implements KBReasoner {
 		try {
 			//Send multipart-form message
 			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
-			report.setIRI (processIRI(result));
-			report.setWarnings(processWarnings(result));
+			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
+			report.setIRI(jsonObject.get("aadmuri").getAsString());
+			report.setWarnings(processWarnings(jsonObject.getAsJsonArray("warnings").toString()));
 		}catch (Exception ex) {
 			if (ex instanceof HttpClientErrorException) {
 				HttpClientErrorException hcee = (HttpClientErrorException) ex;
 				if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
-					//TODO Process errors
 					String result = hcee.getResponseBodyAsString();
 					String json = result.substring(result.indexOf(":") + 1);
 					report.setErrors(processErrors (json));
 				}else {
 					throw ex;
 				}
-			}else if (ex instanceof HttpServerErrorException) {
+			}else {
 				throw ex;
 			}
 		}
@@ -148,6 +157,46 @@ public class KBReasonerClient implements KBReasoner {
 		return report;
 	}
 
+	@Override
+	public KBOptimizationReportData optimizeAADM(String aadmTTL, String submissionId) throws Exception{
+		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
+		Assert.isTrue(!submissionId.isEmpty(), "SubmissionId can neither be null nor empty");
+		String url = kbReasonerUri + "optimizations";
+
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+		//AADM TTL
+		map.add("aadmTTL", aadmTTL);
+		
+		//AADM TTL
+		map.add("submissionId", submissionId);
+		
+		KBOptimizationReportData report = new KBOptimizationReportData();
+		try {
+			//Send multipart-form message
+			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
+			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
+			report.setIRI(jsonObject.get("aadmuri").getAsString());
+			report.setWarnings(processWarnings(jsonObject.getAsJsonArray("warnings").toString()));
+			report.setOptimizations(processOptimizations(jsonObject.getAsJsonArray("templates_optimizations")));
+		}catch (Exception ex) {
+			if (ex instanceof HttpClientErrorException) {
+				HttpClientErrorException hcee = (HttpClientErrorException) ex;
+				if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
+					String result = hcee.getResponseBodyAsString();
+					JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
+					report.setErrors(processErrors (jsonObject.get("errors").getAsString()));
+				}else {
+					throw ex;
+				}
+			}else{
+				throw ex;
+			}
+		}
+		
+		return report;
+	}
+	
 	@Override
 	public String getAADM(String aadmIRI) throws Exception {
 		Assert.notNull(aadmIRI, "Pass a not null aadmIRI");
@@ -217,17 +266,41 @@ public class KBReasonerClient implements KBReasoner {
 		return errors;
 	}
 	
-	private List<KBWarning> processWarnings(String result) throws JsonMappingException, JsonProcessingException {
-		String key = "\"warnings\"";
-		int key_index = result.indexOf(key) + key.length();
-		int index1 = result.indexOf("[", key_index);
-		int index2 =  result.indexOf("]", key_index) + 1;
-		String json = result.substring(index1, index2);
+//	private List<KBWarning> processWarnings(String result) throws JsonMappingException, JsonProcessingException {
+//		String key = "\"warnings\"";
+//		int key_index = result.indexOf(key) + key.length();
+//		int index1 = result.indexOf("[", key_index);
+//		int index2 =  result.indexOf("]", key_index) + 1;
+//		String json = result.substring(index1, index2);
+//		ObjectMapper mapper = new ObjectMapper();
+//		List<KBWarning> warnings = mapper.readValue(json, new TypeReference<List<KBWarning>>(){});
+//		return warnings;
+//	}
+	
+	private List<KBWarning> processWarnings(String json) throws JsonMappingException, JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		List<KBWarning> warnings = mapper.readValue(json, new TypeReference<List<KBWarning>>(){});
 		return warnings;
 	}
-
+	
+	private List<KBOptimization> processOptimizations(JsonArray jsonArray) throws JsonMappingException, JsonProcessingException {
+		List<KBOptimization> kbOptimization = new ArrayList<>();
+		for (JsonElement json:jsonArray) {
+			JsonObject jsonObj = (JsonObject) json;
+			KBOptimization opt = new KBOptimization();
+			String node = jsonObj.keySet().iterator().next();
+			if (node != null) {
+				KBOptimization optimization = new KBOptimization();
+				optimization.setNodeTemplate(node);
+				JsonArray optimizationsJson = jsonObj.getAsJsonObject(node).getAsJsonArray("optimizations");
+				List<String> optimizations = new Gson().fromJson(optimizationsJson, ArrayList.class);
+				optimization.setOptimizations(optimizations);
+				kbOptimization.add(optimization);
+			}
+		}
+		return kbOptimization;
+	}
+	
 	private String processIRI(String result) {
 		String key = "\"aadmuri\"";
 		int key_index = result.indexOf(key) + key.length();

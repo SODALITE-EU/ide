@@ -332,6 +332,10 @@
         class="org.sodalite.dsl.ui.handlers.AADMDeployHandler"
         commandId="org.sodalite.dsl.AADM.ui.handler.deployAADM">
   </handler>
+  <handler
+        class="org.sodalite.dsl.ui.handlers.AADMOptimizeHandler"
+        commandId="org.sodalite.dsl.AADM.ui.handler.optimizeAADM">
+  </handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
@@ -357,6 +361,13 @@
         description="Deploy the AADM using the Sodalite IoC layer"
         id="org.sodalite.dsl.AADM.ui.command.deployAADM"
         name="deployAADM">
+  </command>
+  <command
+        categoryId="org.sodalite.dsl.AADM.ui.category"
+        defaultHandler="org.sodalite.dsl.ui.handlers.AADMOptimizeHandler"
+        description="Get optimization recommendations "
+        id="org.sodalite.dsl.AADM.ui.command.optimizeAADM"
+        name="optimizeAADM">
   </command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -403,6 +414,29 @@
               label="Deploy AADM"
               style="push"
               tooltip="Deploy the AADM  using the Sodalite IoC layer">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.aadm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.optimizeAADM"
+              id="org.sodalite.dsl.AADM.ui.popup.command.optimizeAADM"
+              label="Get AADM optimization recommendations"
+              style="push"
+              tooltip="Get AADM optimization recommendations">
            <visibleWhen
                  checkEnabled="false">
               <with
@@ -472,6 +506,29 @@
               </with>
            </visibleWhen>
         </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.optimizeAADM"
+              id="org.sodalite.dsl.AADM.ui.popup.command.optimizeAADM"
+              label="Get AADM optimization recommendations"
+              style="push"
+              tooltip="Get AADM optimization recommendations">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.aadm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
      </menu>
   </menuContribution>
   <menuContribution
@@ -507,6 +564,29 @@
               label="Deploy AADM"
               style="push"
               tooltip="Deploy the AADM  using the Sodalite IoC layer">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.aadm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.optimizeAADM"
+              id="org.sodalite.dsl.AADM.ui.popup.command.optimizeAADM"
+              label="Get AADM optimization recommendations"
+              style="push"
+              tooltip="Get AADM optimization recommendations">
            <visibleWhen
                  checkEnabled="false">
               <with

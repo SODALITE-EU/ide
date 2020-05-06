@@ -29,7 +29,9 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -55,9 +57,13 @@ import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
+import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.osgi.framework.Bundle;
+import org.sodalite.dsl.aADM.AADMPackage;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
@@ -66,10 +72,11 @@ import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
+import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization;
+import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
-import org.sodalite.dsl.ui.validation.AADMDiagnostic;
 import org.sodalite.dsl.ui.validation.AADMValidationIssue;
 
 import com.google.common.collect.Lists;
@@ -109,6 +116,19 @@ public class BackendProxy {
 		saveAADM(aadmTTL, filename, event);
 	}
 
+	public void processOptimizeAADM(ExecutionEvent event) throws IOException {
+		// Return selected resource
+		IFile file = getSelectedFile();
+		String filename = file.getName().substring(0, file.getName().indexOf("."));
+		IProject project = getProject(file);
+		// Get serialize AADM model in Turtle
+		String aadmTTL = readTurtle(filename, project);
+
+		// Send model to the KB
+		optimizeAADM(aadmTTL, filename, event);
+	}
+
+	
 	public void processDeployAADM(ExecutionEvent event) throws IOException {
 		// Return selected resource
 		IFile file = getSelectedFile();
@@ -152,6 +172,38 @@ public class BackendProxy {
 					public void run() {
 						MessageDialog.openError(parent, "Save AADM",
 								"There were problems to store the AADM into the KB: " + e.getMessage());
+					}
+				});
+				e.printStackTrace();
+			}
+		});
+		job.setPriority(Job.SHORT);
+		job.schedule();
+	}
+	
+	private void optimizeAADM(String aadmTTL, String submissionId, ExecutionEvent event) {
+		Job job = Job.create("Get AADM optimization recommendations", (ICoreRunnable) monitor -> {
+			try {
+				KBOptimizationReportData optimizationReport = kbclient.optimizeAADM(aadmTTL, submissionId);
+				if (optimizationReport.getIRI() == null && optimizationReport.getErrors() == null) {
+					throw new Exception("AADM optimization recommendations could not be retrieved from the KB. Please, contact your Sodalite administrator");
+				}
+				processOptimizationIssues(optimizationReport, event);
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						MessageDialog.openInformation(parent, "Get AADM optimization recommendations",
+								"Optimization recommendations for AADM model has been successfully retrieved from the KB\n. "
+								+ "AADM model have been saved with IRI:\n"
+										+ optimizationReport.getIRI());
+					}
+				});
+			} catch (Exception e) {
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						MessageDialog.openError(parent, "Get AADM optimization recommendations",
+								"There were problems to retrieve AADM optimization recommendations from the KB: " + e.getMessage());
 					}
 				});
 				e.printStackTrace();
@@ -264,6 +316,18 @@ public class BackendProxy {
 			}
 		}
 	}
+	
+	private void processOptimizationIssues(KBOptimizationReportData optimizationReport, ExecutionEvent event) throws Exception {
+		// TODO Check there are not warnings (they do not prevent storage in KB)
+		if (optimizationReport != null && (optimizationReport.hasErrors() || 
+				optimizationReport.hasWarnings() || optimizationReport.hasOptimizations())) {
+			List<AADMValidationIssue> issues = readRecommendationsFromKB(optimizationReport);
+			manageRecommendationIssues(event, issues);
+			if (optimizationReport.hasErrors()) {
+				throw new Exception("There are detected validation issues in the AADM, please fix them");
+			}
+		}
+	}
 
 	private List<AADMValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
 		// TODO Read issues from KB recommendations
@@ -273,7 +337,7 @@ public class BackendProxy {
 			for (KBError error : saveReport.getErrors()) {
 				issues.add(new AADMValidationIssue(
 						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						"node_templates/" + error.getContext(), null, AADMValidationIssue.Type.ERROR));
+						"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType()));
 			}
 		}
 		
@@ -282,12 +346,46 @@ public class BackendProxy {
 				issues.add(new AADMValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: " + warning.getEntity_name(),
 						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(), 
-						warning.getElementType(), AADMValidationIssue.Type.WARNING));
+						warning.getElementType(), Severity.WARNING, warning.getType()));
 			}
 		}
 		
 		return issues;
 	}
+	
+	private List<AADMValidationIssue> readRecommendationsFromKB(KBOptimizationReportData optimizationReport) {
+		// TODO Read issues from KB recommendations
+		List<AADMValidationIssue> issues = new ArrayList<>();
+
+		if (optimizationReport.hasErrors()) {
+			for (KBError error : optimizationReport.getErrors()) {
+				issues.add(new AADMValidationIssue(
+						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
+						"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType()));
+			}
+		}
+		
+		if (optimizationReport.hasWarnings()) {
+			for (KBWarning warning : optimizationReport.getWarnings()) {
+				issues.add(new AADMValidationIssue(
+						warning.getType() + "." + warning.getDescription() + " warning located at: " + warning.getEntity_name(),
+						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(), 
+						warning.getElementType(), Severity.WARNING, warning.getType()));
+			}
+		}
+		
+		if (optimizationReport.hasOptimizations()) {
+			for (KBOptimization optimization : optimizationReport.getOptimizations()) {
+				issues.add(new AADMValidationIssue(
+						"Suggested optimization recommendations: " + optimization.getOptimizations(),
+						"node_templates/" + optimization.getNodeTemplate(), 
+						"NodeTemplate", Severity.WARNING, AADMValidationIssue.ValidationCode.OPTIMIZATION.toString()));
+			}
+		}
+		
+		return issues;
+	}
+
 
 	private void manageRecommendationIssues(ExecutionEvent event, List<AADMValidationIssue> validationIssues) {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
@@ -335,63 +433,42 @@ public class BackendProxy {
 		IAcceptor<Issue> acceptor = new ListBasedMarkerAcceptor(result);
 
 		// Create Diagnostics from issues
-		List<AADMDiagnostic> diagnostics = new ArrayList<AADMDiagnostic>();
+		List<FeatureBasedDiagnostic> diagnostics = new ArrayList<FeatureBasedDiagnostic>();
 
 		for (AADMValidationIssue issue : validationIssues) {
 			// Add diagnostic
-			EObject eObject = resource.getContents().get(0);
-			String location = EcoreUtil.getURI(eObject).toString();
-			int line = getLine(resource, issue.getPath(), issue.getPathType()); // Compute line based on EObject
-
-			diagnostics.add(new AADMDiagnostic(issue.getMessage(), location, line, 1, issue.getType()));
+			ValidationSourceFeature sourceFeature = getIssueFeature(resource, issue.getPath(), issue.getPathType());
+			diagnostics.add(new FeatureBasedDiagnostic(toDiagnosticSeverity(issue.getType()), issue.getMessage(), 
+					sourceFeature.getSource(), sourceFeature.getFeature(), ValidationMessageAcceptor.INSIGNIFICANT_INDEX, 
+					CheckType.NORMAL, issue.getCode(), issue.getMessage()));
 		}
-
-		for (AADMDiagnostic diagnostic : diagnostics) {
-			if (diagnostic.getType() == AADMValidationIssue.Type.ERROR) {
-				if (!resource.getErrors().contains(diagnostic))
-					resource.getErrors().add(diagnostic);
-			}else if (diagnostic.getType() == AADMValidationIssue.Type.WARNING) {
-				if (!resource.getWarnings().contains(diagnostic))
-					resource.getWarnings().add(diagnostic);
-			}
-		}
-
-		for (int i = 0; i < resource.getErrors().size(); i++) {
-			converter.convertResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
-		}
-
-		for (int i = 0; i < resource.getWarnings().size(); i++) {
-			converter.convertResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
+		
+		for (Diagnostic diagnostic:diagnostics) {
+			converter.convertValidatorDiagnostic(diagnostic, acceptor);
 		}
 
 		return result;
 	}
-
-	private int getLine(XtextResource resource, String path, String path_type) {
+	
+	private ValidationSourceFeature getIssueFeature (XtextResource resource, String path, String path_type) {
 		// Extract object path to find nodes
 		StringTokenizer st = new StringTokenizer(path, "/");
-
-		int line = 1;
-
+		ValidationSourceFeature result = null;
 		if (resource.getAllContents().hasNext()) {
 			AADM_Model model = (AADM_Model) resource.getAllContents().next();
 			if (st.hasMoreTokens()) {
 				if ("node_templates".equals(st.nextToken())) {
-					line = getNodeLine(model.getNodeTemplates()) - 1; // Correction to point to node-templates correct
-																		// line
 					if (st.hasMoreTokens()) { //Node_template
 						String node_name = st.nextToken();
 						for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
 							if (node.getName().contentEquals(node_name)) {
-								line = getNodeLine(node);
-							
+								result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
 								if (st.hasMoreElements()) { //Node_Template children
 									String entity_name = st.nextToken();
-									
 									if ("Property".equals(path_type)) {
 										for (EPropertyAssignment property:node.getNode().getProperties().getProperties()) {
 											if (property.getName().contentEquals(entity_name)) {
-												line = getNodeLine(property);
+												result = new ValidationSourceFeature(property, AADMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
 											}
 										}
 									}
@@ -402,19 +479,7 @@ public class BackendProxy {
 				}
 			}
 		}
-		return line;
-	}
-
-	private int getNodeLine(EObject node) {
-		int line = 1;
-		for (Adapter adapter : node.eAdapters()) {
-			if (adapter instanceof INode) {
-				AbstractNode aNode = (AbstractNode) adapter;
-				line = aNode.getStartLine();
-				break;
-			}
-		}
-		return line;
+		return result;
 	}
 
 	private IProject getProject(IResource resource) {
@@ -447,4 +512,38 @@ public class BackendProxy {
 				result.add(issue);
 		}
 	}
+	
+	protected int toDiagnosticSeverity(Severity severity) {
+		int diagnosticSeverity = -1;
+		switch (severity) {
+			case ERROR:
+				diagnosticSeverity = Diagnostic.ERROR;
+				break;
+			case WARNING:
+				diagnosticSeverity = Diagnostic.WARNING;
+				break;
+			default:
+				throw new IllegalArgumentException("Unknow severity " + severity);
+		}
+		return diagnosticSeverity;
+	}
+	
+	protected class ValidationSourceFeature{
+		EStructuralFeature feature;
+		EObject source;
+		
+		public ValidationSourceFeature(EObject source, EStructuralFeature feature) {
+			this.source = source;
+			this.feature = feature;
+		}
+
+		public EStructuralFeature getFeature() {
+			return feature;
+		}
+
+		public EObject getSource() {
+			return source;
+		}
+	}
+
 }

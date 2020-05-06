@@ -14,10 +14,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -27,6 +29,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
@@ -44,9 +47,12 @@ class KBReasonerTest {
 	private final String IaC_URI = "http://154.48.185.202:8080/";
 	private final String xOPERA_URI = "http://154.48.185.206:5000/";
 	
+	private String aadmIRI = null;
+	
 	@BeforeEach
-	void setup() {
+	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI);
+		aadmIRI = saveAADM("snow", "src/test/resources/snow.ttl").getIRI();
 	}
 	
 	@Test
@@ -115,22 +121,36 @@ class KBReasonerTest {
 	
 	@Test
 	void testSaveAADM() throws Exception {
-		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow.ttl");
-		String aadmTTL = new String(Files.readAllBytes (aadm_path));
-		String submissionId = "snow";
-		KBSaveReportData report = kbclient.saveAADM(aadmTTL, submissionId);
+		KBSaveReportData report = saveAADM("snow", "src/test/resources/snow.ttl");
 		assertFalse (report.hasErrors());
 		assertNotNull (report.getIRI());
+	}
+
+	private KBSaveReportData saveAADM(String submissionId, String ttlPath) throws IOException, Exception {
+		Path aadm_path = FileSystems.getDefault().getPath(ttlPath);
+		String aadmTTL = new String(Files.readAllBytes (aadm_path));
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, submissionId);
+		return report;
+	}
+	
+	@Test
+	void testOptimizeAADM() throws Exception {
+		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow_opt.ttl");
+		String aadmTTL = new String(Files.readAllBytes (aadm_path));
+		String submissionId = "snow";
+		KBOptimizationReportData report = kbclient.optimizeAADM(aadmTTL, submissionId);
+		assertFalse (report.hasErrors());
+		assertNotNull (report.getIRI());
+		assertTrue (report.hasOptimizations());
 	}
 	
 	@Test
 	void testGetAADM() throws Exception{
-		String aadmIRI = "https://www.sodalite.eu/ontologies/workspace/1/snow/-AADM_untsf9kuv3hijfp2roqbri4quv";
 		String json = kbclient.getAADM(aadmIRI);
 		assertNotNull(json);
 	}
 	
-	@Test
+	@Test @Ignore
 	void testAskIaCBuilderToRegisterAADM() throws Exception {
 		Path aadm_json_path = FileSystems.getDefault().getPath("src/test/resources/snow.json");
 		String aadm_json = new String(Files.readAllBytes (aadm_json_path));
@@ -138,7 +158,7 @@ class KBReasonerTest {
 		assertNotNull (report.getToken());
 	}
 	
-	@Test
+	@Test @Ignore
 	void testDeployAADM() throws Exception {
 		Path inputs_json_path = FileSystems.getDefault().getPath("src/test/resources/inputs.yaml");
 		String blueprint_token = "070132fd-5e61-4c6c-87f9-74474b891efa";
@@ -146,7 +166,7 @@ class KBReasonerTest {
 		assertNotNull (report.getSession_token());
 	}
 	
-	@Test
+	@Test @Ignore
 	void testGetAADMDeploymentStatus() throws Exception {
 		String session_token = "d892456a-5db1-4656-b896-ed2389c8639f";
 		DeploymentStatus status = kbclient.getAADMDeploymentStatus(session_token);
