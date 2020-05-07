@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -337,7 +338,7 @@ public class BackendProxy {
 			for (KBError error : saveReport.getErrors()) {
 				issues.add(new AADMValidationIssue(
 						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType()));
+						"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 		
@@ -346,7 +347,7 @@ public class BackendProxy {
 				issues.add(new AADMValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: " + warning.getEntity_name(),
 						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(), 
-						warning.getElementType(), Severity.WARNING, warning.getType()));
+						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
 		}
 		
@@ -361,7 +362,7 @@ public class BackendProxy {
 			for (KBError error : optimizationReport.getErrors()) {
 				issues.add(new AADMValidationIssue(
 						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType()));
+						"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 		
@@ -370,7 +371,7 @@ public class BackendProxy {
 				issues.add(new AADMValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: " + warning.getEntity_name(),
 						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(), 
-						warning.getElementType(), Severity.WARNING, warning.getType()));
+						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
 		}
 		
@@ -379,7 +380,7 @@ public class BackendProxy {
 				issues.add(new AADMValidationIssue(
 						"Suggested optimization recommendations: " + optimization.getOptimizations(),
 						"node_templates/" + optimization.getNodeTemplate(), 
-						"NodeTemplate", Severity.WARNING, AADMValidationIssue.ValidationCode.OPTIMIZATION.toString()));
+						"NodeTemplate", Severity.WARNING, AADMValidationIssue.OPTIMIZATION, optimization.getOptimizations()));
 			}
 		}
 		
@@ -438,9 +439,10 @@ public class BackendProxy {
 		for (AADMValidationIssue issue : validationIssues) {
 			// Add diagnostic
 			ValidationSourceFeature sourceFeature = getIssueFeature(resource, issue.getPath(), issue.getPathType());
+			String[] data = processIssueData (issue.getData());
 			diagnostics.add(new FeatureBasedDiagnostic(toDiagnosticSeverity(issue.getType()), issue.getMessage(), 
 					sourceFeature.getSource(), sourceFeature.getFeature(), ValidationMessageAcceptor.INSIGNIFICANT_INDEX, 
-					CheckType.NORMAL, issue.getCode(), issue.getMessage()));
+					CheckType.NORMAL, issue.getCode(), data));
 		}
 		
 		for (Diagnostic diagnostic:diagnostics) {
@@ -450,6 +452,16 @@ public class BackendProxy {
 		return result;
 	}
 	
+	private String[] processIssueData(Object obj) {
+		String[] data = null;
+		if (obj instanceof ArrayList) {
+			data = (String[]) ((ArrayList<String>)obj).toArray(new String[((ArrayList) obj).size()]);
+		}else {
+			data = new String[] {obj.toString()};
+		}
+		return data;
+	}
+
 	private ValidationSourceFeature getIssueFeature (XtextResource resource, String path, String path_type) {
 		// Extract object path to find nodes
 		StringTokenizer st = new StringTokenizer(path, "/");

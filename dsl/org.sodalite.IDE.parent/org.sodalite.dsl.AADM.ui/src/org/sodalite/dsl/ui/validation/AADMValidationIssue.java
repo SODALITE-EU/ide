@@ -7,14 +7,18 @@ public class AADMValidationIssue {
 	String path;
 	String pathType;
 	String code;
+	Object data;
 	Severity type;
 	
-	public AADMValidationIssue (String message, String path, String pathType, Severity type, String code){
+	public static final String OPTIMIZATION = "Optimization";
+	
+	public AADMValidationIssue (String message, String path, String pathType, Severity type, String code, Object data){
 		this.message = message;
 		this.path = path;
 		this.pathType = pathType;
 		this.type = type;
 		this.code = code;
+		this.data = data;
 	}
 
 	public String getMessage() {
@@ -40,9 +44,12 @@ public class AADMValidationIssue {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
-	public enum ValidationCode {
-		OPTIMIZATION
+
+	public Object getData() {
+		return data;
 	}
-	
+
+	public void setData(String data) {
+		this.data = data;
+	}
 }

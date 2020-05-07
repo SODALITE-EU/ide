@@ -178,7 +178,11 @@ public class KBReasonerClient implements KBReasoner {
 			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
 			report.setIRI(jsonObject.get("aadmuri").getAsString());
 			report.setWarnings(processWarnings(jsonObject.getAsJsonArray("warnings").toString()));
-			report.setOptimizations(processOptimizations(jsonObject.getAsJsonArray("templates_optimizations")));
+			JsonArray optimizationsJson = jsonObject.getAsJsonArray("templates_optimizations");
+			if (optimizationsJson == null){
+				throw new Exception ("No optimizations have been returned from the KB");
+			}
+			report.setOptimizations(processOptimizations(optimizationsJson));
 		}catch (Exception ex) {
 			if (ex instanceof HttpClientErrorException) {
 				HttpClientErrorException hcee = (HttpClientErrorException) ex;

@@ -3,7 +3,25 @@
  */
 package org.sodalite.dsl.ui.quickfix;
 
+import com.google.common.base.Objects;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.Fix;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.sodalite.dsl.aADM.AADMFactory;
+import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.EPropertyAssignment;
+import org.sodalite.dsl.rM.ELIST;
+import org.sodalite.dsl.rM.EPropertyAssignmentValue;
+import org.sodalite.dsl.rM.RMFactory;
+import org.sodalite.dsl.ui.validation.AADMValidationIssue;
 
 /**
  * Custom quickfixes.
@@ -12,4 +30,31 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
  */
 @SuppressWarnings("all")
 public class AADMQuickfixProvider extends DefaultQuickfixProvider {
+  @Fix(AADMValidationIssue.OPTIMIZATION)
+  public void fixNodeTypeName(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final String message = "Apply recommended optimizations";
+    final String sub_message = ((List<String>)Conversions.doWrapArray(issue.getData())).toString();
+    final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
+      EPropertyAssignment opt = null;
+      EList<EPropertyAssignment> _properties = ((ENodeTemplate) nodeTemplate).getNode().getProperties().getProperties();
+      for (final EPropertyAssignment prop : _properties) {
+        boolean _equalsIgnoreCase = prop.getName().equalsIgnoreCase("optimization");
+        if (_equalsIgnoreCase) {
+          opt = prop;
+        }
+      }
+      boolean _equals = Objects.equal(opt, null);
+      if (_equals) {
+        opt = AADMFactory.eINSTANCE.createEPropertyAssignment();
+        opt.setName("optimization");
+        opt.setValue(RMFactory.eINSTANCE.createELIST());
+      } else {
+        EPropertyAssignmentValue _value = opt.getValue();
+        ((ELIST) _value).getList().clear();
+      }
+      EPropertyAssignmentValue _value_1 = opt.getValue();
+      CollectionExtensions.<String>addAll(((ELIST) _value_1).getList(), issue.getData());
+    };
+    acceptor.accept(issue, message, sub_message, "", _function);
+  }
 }
