@@ -119,9 +119,8 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public KBSaveReportData saveAADM(String aadmTTL, String submissionId) throws Exception{
+	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI) throws Exception{
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
-		Assert.isTrue(!submissionId.isEmpty(), "SubmissionId can neither be null nor empty");
 		String url = kbReasonerUri + "saveAADM";
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -130,7 +129,7 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("aadmTTL", aadmTTL);
 		
 		//AADM TTL
-		map.add("submissionId", submissionId);
+		map.add("aadmURI", aadmURI);
 		
 		KBSaveReportData report = new KBSaveReportData();
 		try {
@@ -138,7 +137,10 @@ public class KBReasonerClient implements KBReasoner {
 			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
 			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
 			report.setIRI(jsonObject.get("aadmuri").getAsString());
-			report.setWarnings(processWarnings(jsonObject.getAsJsonArray("warnings").toString()));
+			JsonArray warningsJson = jsonObject.getAsJsonArray("warnings");
+			if (warningsJson != null){
+				report.setWarnings(processWarnings(warningsJson.toString()));
+			}
 		}catch (Exception ex) {
 			if (ex instanceof HttpClientErrorException) {
 				HttpClientErrorException hcee = (HttpClientErrorException) ex;
@@ -158,9 +160,8 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public KBOptimizationReportData optimizeAADM(String aadmTTL, String submissionId) throws Exception{
+	public KBOptimizationReportData optimizeAADM(String aadmTTL, String aadmURI) throws Exception{
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
-		Assert.isTrue(!submissionId.isEmpty(), "SubmissionId can neither be null nor empty");
 		String url = kbReasonerUri + "optimizations";
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -169,7 +170,7 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("aadmTTL", aadmTTL);
 		
 		//AADM TTL
-		map.add("submissionId", submissionId);
+		map.add("aadmURI", aadmURI);
 		
 		KBOptimizationReportData report = new KBOptimizationReportData();
 		try {
@@ -177,7 +178,10 @@ public class KBReasonerClient implements KBReasoner {
 			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
 			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
 			report.setIRI(jsonObject.get("aadmuri").getAsString());
-			report.setWarnings(processWarnings(jsonObject.getAsJsonArray("warnings").toString()));
+			JsonArray warningsJson = jsonObject.getAsJsonArray("warnings");
+			if (warningsJson != null){
+				report.setWarnings(processWarnings(warningsJson.toString()));
+			}
 			JsonArray optimizationsJson = jsonObject.getAsJsonArray("templates_optimizations");
 			if (optimizationsJson == null){
 				throw new Exception ("No optimizations have been returned from the KB");

@@ -52,7 +52,7 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI);
-		aadmIRI = saveAADM("snow", "src/test/resources/snow.ttl").getIRI();
+		aadmIRI = saveAADM(null, "src/test/resources/snow.ttl").getIRI();
 	}
 	
 	@Test
@@ -137,8 +137,7 @@ class KBReasonerTest {
 	void testOptimizeAADM() throws Exception {
 		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow_opt.ttl");
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
-		String submissionId = "snow";
-		KBOptimizationReportData report = kbclient.optimizeAADM(aadmTTL, submissionId);
+		KBOptimizationReportData report = kbclient.optimizeAADM(aadmTTL, null);
 		assertFalse (report.hasErrors());
 		assertNotNull (report.getIRI());
 		assertTrue (report.hasOptimizations());

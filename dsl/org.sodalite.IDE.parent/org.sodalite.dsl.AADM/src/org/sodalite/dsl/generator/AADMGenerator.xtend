@@ -30,6 +30,7 @@ import org.sodalite.dsl.rM.EFunction
 import org.sodalite.dsl.rM.GetInput
 import org.sodalite.dsl.rM.EMapEntry
 import org.sodalite.dsl.rM.ESTRING
+import org.sodalite.dsl.aADM.ECapabilityAssignment
 
 /**
  * Generates code from your model files on save.
@@ -41,9 +42,11 @@ class AADMGenerator extends AbstractGenerator {
 	var int input_counter = 1
 	var int property_counter = 1
 	var int requirement_counter = 1
+	var int capability_counter = 1
 	var int parameter_counter = 1
 	var Map<EPropertyAssignment, Integer> property_numbers
 	var Map<ERequirementAssignment, Integer> requirement_numbers
+	var Map<ECapabilityAssignment, Integer> capability_numbers
 	var Map<EObject, Map<String,Integer>> parameter_numbers
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
@@ -51,9 +54,11 @@ class AADMGenerator extends AbstractGenerator {
 		input_counter = 1
 		property_counter = 1
 		requirement_counter = 1
+		capability_counter = 1
 		parameter_counter = 1
 		property_numbers = new HashMap<EPropertyAssignment, Integer>()
 		requirement_numbers = new HashMap<ERequirementAssignment, Integer>()
+		capability_numbers = new HashMap<ECapabilityAssignment, Integer>()
 		parameter_numbers = new HashMap<EObject, Map<String, Integer>>()
 		
 		val filename = getFilename(resource.URI)
@@ -103,6 +108,10 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDFOR»
 	
  	«FOR req:r.allContents.toIterable.filter(ERequirementAssignment)»
+	«req.compile»
+	«ENDFOR»
+	
+	«FOR req:r.allContents.toIterable.filter(ECapabilityAssignment)»
 	«req.compile»
 	«ENDFOR»
 	
@@ -166,6 +175,11 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:requirements :Requirement_«requirement_numbers.get(p)» ; 
 	  «ENDFOR»
 	  «ENDIF»
+	  «IF n.node.capabilities !== null»
+	  «FOR c:n.node.capabilities.capabilities»
+	  exchange:capabilities :Capability_«capability_numbers.get(c)» ; 
+	  «ENDFOR»
+	  «ENDIF»
 	.  
 	'''
 	
@@ -214,6 +228,24 @@ class AADMGenerator extends AbstractGenerator {
 	.
 	'''
 	
+	def compile (ECapabilityAssignment c) '''
+	«capability_numbers.put(c, capability_counter)»
+	:Capability_«capability_counter»
+	  rdf:type exchange:Capability ;
+	  exchange:name "«c.name»" ;
+	  exchange:value "capability_«c.name»_«capability_counter»" ;
+	.
+	
+	:capability_«c.name»_«capability_counter»
+	  rdf:type exchange:Template ;
+	  exchange:name "capability_«c.name»_«capability_counter++»" ;
+	  «IF c.properties !== null»
+	  «FOR p:c.properties.properties»
+	  :properties :Property_«property_numbers.get(p)» ; 
+	  «ENDFOR»
+	  «ENDIF»
+	.
+	'''
 	
 		
 	def getFilename(URI uri) {

@@ -33,8 +33,8 @@ public interface KBReasoner {
 	PropertyData getProperties(String resourceId) throws Exception;
 	RequirementData getRequirements(String resourceId) throws Exception;
 	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception;
-	KBSaveReportData saveAADM (String aadmTTL, String submissionId) throws Exception;
-	KBOptimizationReportData optimizeAADM (String aadmTTL, String submissionId) throws Exception;
+	KBSaveReportData saveAADM (String aadmTTL, String aadmURI) throws Exception;
+	KBOptimizationReportData optimizeAADM (String aadmTTL, String aadmURI) throws Exception;
 	String getAADM (String aadmIRI) throws Exception;
 	IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json) throws Exception;
 	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token) throws Exception;
