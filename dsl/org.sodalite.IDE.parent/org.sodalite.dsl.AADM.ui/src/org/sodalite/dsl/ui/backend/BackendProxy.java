@@ -495,6 +495,8 @@ public class BackendProxy {
 		for (AADMValidationIssue issue : validationIssues) {
 			// Add diagnostic
 			ValidationSourceFeature sourceFeature = getIssueFeature(resource, issue.getPath(), issue.getPathType());
+			if (sourceFeature == null)
+				continue; //Reported issue that does not correspond to the AADM
 			String[] data = processIssueData (issue.getData());
 			diagnostics.add(new FeatureBasedDiagnostic(toDiagnosticSeverity(issue.getType()), issue.getMessage(), 
 					sourceFeature.getSource(), sourceFeature.getFeature(), ValidationMessageAcceptor.INSIGNIFICANT_INDEX, 

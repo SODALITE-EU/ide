@@ -230,18 +230,12 @@ class AADMGenerator extends AbstractGenerator {
 	
 	def compile (ECapabilityAssignment c) '''
 	«capability_numbers.put(c, capability_counter)»
-	:Capability_«capability_counter»
+	:Capability_«capability_counter++»
 	  rdf:type exchange:Capability ;
 	  exchange:name "«c.name»" ;
-	  exchange:value "capability_«c.name»_«capability_counter»" ;
-	.
-	
-	:capability_«c.name»_«capability_counter»
-	  rdf:type exchange:Template ;
-	  exchange:name "capability_«c.name»_«capability_counter++»" ;
 	  «IF c.properties !== null»
 	  «FOR p:c.properties.properties»
-	  :properties :Property_«property_numbers.get(p)» ; 
+	  exchange:properties :Property_«property_numbers.get(p)» ;
 	  «ENDFOR»
 	  «ENDIF»
 	.
