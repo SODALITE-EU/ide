@@ -40,7 +40,8 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 				//IF found, delete existing optimizations
 				//Add new optimizations
 				var EPropertyAssignment opt = null
-				for (EPropertyAssignment prop:(nodeTemplate as ENodeTemplate).node.properties.properties){
+				var node = nodeTemplate as ENodeTemplate
+				for (EPropertyAssignment prop:node.node.properties.properties){
 					if (prop.name.equalsIgnoreCase("optimization")){
 						opt = prop;
 					}
@@ -50,6 +51,7 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 					opt = AADMFactory.eINSTANCE.createEPropertyAssignment
 					opt.name = "optimization"
 					opt.value = RMFactory.eINSTANCE.createELIST
+					node.node.properties.properties.add(opt)
 				}else{
 					(opt.value as ELIST).list.clear
 				}
