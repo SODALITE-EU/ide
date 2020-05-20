@@ -39,8 +39,8 @@ import org.sodalite.dsl.rM.RMPackage;
  *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionBodyImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionBodyImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionBodyImpl#getValid_source_types <em>Valid source types</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionBodyImpl#getStart <em>Start</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionBodyImpl#getEnd <em>End</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionBodyImpl#getOccurrences_start <em>Occurrences start</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityDefinitionBodyImpl#getOccurrences_end <em>Occurrences end</em>}</li>
  * </ul>
  *
  * @generated
@@ -108,44 +108,44 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
   protected EList<EValidSourceType> valid_source_types;
 
   /**
-   * The default value of the '{@link #getStart() <em>Start</em>}' attribute.
+   * The default value of the '{@link #getOccurrences_start() <em>Occurrences start</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStart()
+   * @see #getOccurrences_start()
    * @generated
    * @ordered
    */
-  protected static final String START_EDEFAULT = null;
+  protected static final String OCCURRENCES_START_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getStart() <em>Start</em>}' attribute.
+   * The cached value of the '{@link #getOccurrences_start() <em>Occurrences start</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStart()
+   * @see #getOccurrences_start()
    * @generated
    * @ordered
    */
-  protected String start = START_EDEFAULT;
+  protected String occurrences_start = OCCURRENCES_START_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getEnd() <em>End</em>}' attribute.
+   * The default value of the '{@link #getOccurrences_end() <em>Occurrences end</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEnd()
+   * @see #getOccurrences_end()
    * @generated
    * @ordered
    */
-  protected static final String END_EDEFAULT = null;
+  protected static final String OCCURRENCES_END_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getEnd() <em>End</em>}' attribute.
+   * The cached value of the '{@link #getOccurrences_end() <em>Occurrences end</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEnd()
+   * @see #getOccurrences_end()
    * @generated
    * @ordered
    */
-  protected String end = END_EDEFAULT;
+  protected String occurrences_end = OCCURRENCES_END_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -359,9 +359,9 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public String getStart()
+  public String getOccurrences_start()
   {
-    return start;
+    return occurrences_start;
   }
 
   /**
@@ -370,12 +370,12 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public void setStart(String newStart)
+  public void setOccurrences_start(String newOccurrences_start)
   {
-    String oldStart = start;
-    start = newStart;
+    String oldOccurrences_start = occurrences_start;
+    occurrences_start = newOccurrences_start;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__START, oldStart, start));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START, oldOccurrences_start, occurrences_start));
   }
 
   /**
@@ -384,9 +384,9 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public String getEnd()
+  public String getOccurrences_end()
   {
-    return end;
+    return occurrences_end;
   }
 
   /**
@@ -395,12 +395,12 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public void setEnd(String newEnd)
+  public void setOccurrences_end(String newOccurrences_end)
   {
-    String oldEnd = end;
-    end = newEnd;
+    String oldOccurrences_end = occurrences_end;
+    occurrences_end = newOccurrences_end;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__END, oldEnd, end));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END, oldOccurrences_end, occurrences_end));
   }
 
   /**
@@ -444,10 +444,10 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
         return getAttributes();
       case RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES:
         return getValid_source_types();
-      case RMPackage.ECAPABILITY_DEFINITION_BODY__START:
-        return getStart();
-      case RMPackage.ECAPABILITY_DEFINITION_BODY__END:
-        return getEnd();
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
+        return getOccurrences_start();
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:
+        return getOccurrences_end();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -479,11 +479,11 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
         getValid_source_types().clear();
         getValid_source_types().addAll((Collection<? extends EValidSourceType>)newValue);
         return;
-      case RMPackage.ECAPABILITY_DEFINITION_BODY__START:
-        setStart((String)newValue);
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
+        setOccurrences_start((String)newValue);
         return;
-      case RMPackage.ECAPABILITY_DEFINITION_BODY__END:
-        setEnd((String)newValue);
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:
+        setOccurrences_end((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -514,11 +514,11 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
       case RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES:
         getValid_source_types().clear();
         return;
-      case RMPackage.ECAPABILITY_DEFINITION_BODY__START:
-        setStart(START_EDEFAULT);
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
+        setOccurrences_start(OCCURRENCES_START_EDEFAULT);
         return;
-      case RMPackage.ECAPABILITY_DEFINITION_BODY__END:
-        setEnd(END_EDEFAULT);
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:
+        setOccurrences_end(OCCURRENCES_END_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -544,10 +544,10 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
         return attributes != null;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES:
         return valid_source_types != null && !valid_source_types.isEmpty();
-      case RMPackage.ECAPABILITY_DEFINITION_BODY__START:
-        return START_EDEFAULT == null ? start != null : !START_EDEFAULT.equals(start);
-      case RMPackage.ECAPABILITY_DEFINITION_BODY__END:
-        return END_EDEFAULT == null ? end != null : !END_EDEFAULT.equals(end);
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
+        return OCCURRENCES_START_EDEFAULT == null ? occurrences_start != null : !OCCURRENCES_START_EDEFAULT.equals(occurrences_start);
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:
+        return OCCURRENCES_END_EDEFAULT == null ? occurrences_end != null : !OCCURRENCES_END_EDEFAULT.equals(occurrences_end);
     }
     return super.eIsSet(featureID);
   }
@@ -565,10 +565,10 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (description: ");
     result.append(description);
-    result.append(", start: ");
-    result.append(start);
-    result.append(", end: ");
-    result.append(end);
+    result.append(", occurrences_start: ");
+    result.append(occurrences_start);
+    result.append(", occurrences_end: ");
+    result.append(occurrences_end);
     result.append(')');
     return result.toString();
   }

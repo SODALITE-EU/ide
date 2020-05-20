@@ -75,7 +75,6 @@ import org.sodalite.dsl.rM.ESTRING;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.EValidTargetTypes;
 import org.sodalite.dsl.rM.EValid_Values;
-import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetAttributeBody;
 import org.sodalite.dsl.rM.GetInput;
@@ -282,9 +281,6 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EVALID_VALUES:
 				sequence_EValid_Values(context, (EValid_Values) semanticObject); 
 				return; 
-			case RMPackage.EVALUE_EXPRESSION:
-				sequence_EValueExpression(context, (EValueExpression) semanticObject); 
-				return; 
 			case RMPackage.GET_ATTRIBUTE:
 				sequence_GetAttribute(context, (GetAttribute) semanticObject); 
 				return; 
@@ -417,7 +413,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         (type=[ECapabilityType|QUALIFIED_NAME] | description=STRING | properties=EProperties | attributes=EAttributes | valid_source_types+=EValidSourceType)? 
-	 *         (start=STRING end=STRING)?
+	 *         (occurrences_start=STRING occurrences_end=STRING)?
 	 *     )+
 	 */
 	protected void sequence_ECapabilityDefinitionBody(ISerializationContext context, ECapabilityDefinitionBody semanticObject) {
@@ -1242,6 +1238,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EValueExpression returns ESTRING
 	 *     EPropertyAssignmentValue returns ESTRING
 	 *     ESTRING returns ESTRING
 	 *
@@ -1299,18 +1296,6 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEValid_ValuesAccess().getValELISTParserRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     EValueExpression returns EValueExpression
-	 *
-	 * Constraint:
-	 *     {EValueExpression}
-	 */
-	protected void sequence_EValueExpression(ISerializationContext context, EValueExpression semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

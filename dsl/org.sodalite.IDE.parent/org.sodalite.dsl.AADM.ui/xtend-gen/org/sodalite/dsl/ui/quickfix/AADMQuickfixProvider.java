@@ -36,7 +36,8 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
     final String sub_message = ((List<String>)Conversions.doWrapArray(issue.getData())).toString();
     final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
       EPropertyAssignment opt = null;
-      EList<EPropertyAssignment> _properties = ((ENodeTemplate) nodeTemplate).getNode().getProperties().getProperties();
+      ENodeTemplate node = ((ENodeTemplate) nodeTemplate);
+      EList<EPropertyAssignment> _properties = node.getNode().getProperties().getProperties();
       for (final EPropertyAssignment prop : _properties) {
         boolean _equalsIgnoreCase = prop.getName().equalsIgnoreCase("optimization");
         if (_equalsIgnoreCase) {
@@ -48,6 +49,7 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
         opt = AADMFactory.eINSTANCE.createEPropertyAssignment();
         opt.setName("optimization");
         opt.setValue(RMFactory.eINSTANCE.createELIST());
+        node.getNode().getProperties().getProperties().add(opt);
       } else {
         EPropertyAssignmentValue _value = opt.getValue();
         ((ELIST) _value).getList().clear();

@@ -116,7 +116,7 @@ public class BackendProxy {
 	public void processSaveAADM(ExecutionEvent event) throws IOException {
 		// Return selected resource
 		IFile file = getSelectedFile();
-		String aadmFilename = file.getName().substring(0, file.getName().indexOf("."));
+		String aadmFilename = file.getName();
 		IProject project = getProject(file);
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFilename, project);
@@ -129,7 +129,7 @@ public class BackendProxy {
 	public void processOptimizeAADM(ExecutionEvent event) throws IOException {
 		// Return selected resource
 		IFile file = getSelectedFile();
-		String aadmFilename = file.getName().substring(0, file.getName().indexOf("."));
+		String aadmFilename = file.getName();
 		IProject project = getProject(file);
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFilename, project);
@@ -145,7 +145,7 @@ public class BackendProxy {
 		IFile file = getSelectedFile();
 		IProject project = getProject(file);
 		// Get serialize AADM model in Turtle
-		String aadmFilename = file.getName().substring(0, file.getName().indexOf("."));
+		String aadmFilename = file.getName();
 		String aadmTTL = readTurtle(aadmFilename, project);
 
 		// Deploy AADM model

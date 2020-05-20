@@ -291,7 +291,7 @@ EParameterDefinitionBody:
 	('default:' default=EValueExpression)?);
 
 EValueExpression:
-	{EValueExpression} STRING | EFunction;
+	ESTRING | EFunction;
 
 EFunction:
 	GetProperty | GetAttribute | GetInput;
@@ -343,7 +343,7 @@ ECapabilityDefinitionBody:
 	attributes=EAttributes
 	END)? &
 	('valid_source_types:[' (valid_source_types+=EValidSourceType)? ']')? &
-	('occurrences:[' start=STRING ',' end=STRING ']')?;
+	('occurrences:[' occurrences_start=STRING ',' occurrences_end=STRING ']')?;
 
 EValidSourceType:
 	sourceTypes+=ENodeTypeRef (',' sourceType+=ENodeTypeRef)*;

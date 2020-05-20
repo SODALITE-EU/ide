@@ -151,7 +151,6 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup_1_0(), "rule__EParameterDefinitionBody__Group_1_0__0");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup_1_1(), "rule__EParameterDefinitionBody__Group_1_1__0");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup_1_2(), "rule__EParameterDefinitionBody__Group_1_2__0");
-			builder.put(grammarAccess.getEValueExpressionAccess().getGroup_0(), "rule__EValueExpression__Group_0__0");
 			builder.put(grammarAccess.getGetInputAccess().getGroup(), "rule__GetInput__Group__0");
 			builder.put(grammarAccess.getGetAttributeAccess().getGroup(), "rule__GetAttribute__Group__0");
 			builder.put(grammarAccess.getGetAttributeBodyAccess().getGroup_0(), "rule__GetAttributeBody__Group_0__0");
@@ -328,8 +327,8 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getPropertiesAssignment_2_2(), "rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2");
 			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getAttributesAssignment_3_2(), "rule__ECapabilityDefinitionBody__AttributesAssignment_3_2");
 			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesAssignment_4_1(), "rule__ECapabilityDefinitionBody__Valid_source_typesAssignment_4_1");
-			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getStartAssignment_5_1(), "rule__ECapabilityDefinitionBody__StartAssignment_5_1");
-			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getEndAssignment_5_3(), "rule__ECapabilityDefinitionBody__EndAssignment_5_3");
+			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startAssignment_5_1(), "rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_1");
+			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endAssignment_5_3(), "rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_3");
 			builder.put(grammarAccess.getEValidSourceTypeAccess().getSourceTypesAssignment_0(), "rule__EValidSourceType__SourceTypesAssignment_0");
 			builder.put(grammarAccess.getEValidSourceTypeAccess().getSourceTypeAssignment_1_1(), "rule__EValidSourceType__SourceTypeAssignment_1_1");
 			builder.put(grammarAccess.getENodeTypeRefAccess().getNameAssignment(), "rule__ENodeTypeRef__NameAssignment");

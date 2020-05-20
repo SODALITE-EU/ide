@@ -584,6 +584,7 @@ public class RMSwitch<T> extends Switch<T>
       {
         ESTRING estring = (ESTRING)theEObject;
         T result = caseESTRING(estring);
+        if (result == null) result = caseEValueExpression(estring);
         if (result == null) result = caseEPropertyAssignmentValue(estring);
         if (result == null) result = defaultCase(theEObject);
         return result;

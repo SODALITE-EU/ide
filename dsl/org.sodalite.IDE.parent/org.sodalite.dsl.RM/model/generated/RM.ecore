@@ -270,8 +270,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valid_source_types" upperBound="-1"
         eType="#//EValidSourceType" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurrences_start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurrences_end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValidSourceType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTypes" upperBound="-1"
@@ -341,7 +341,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPropertyAssignmentValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ESTRING" eSuperTypes="#//EPropertyAssignmentValue">
+  <eClassifiers xsi:type="ecore:EClass" name="ESTRING" eSuperTypes="#//EValueExpression #//EPropertyAssignmentValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EMAP" eSuperTypes="#//EPropertyAssignmentValue">

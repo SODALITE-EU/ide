@@ -4109,26 +4109,21 @@ ruleEValueExpression returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getEValueExpressionAccess().getEValueExpressionAction_0_0(),
-						$current);
-				}
-			)
-			this_STRING_1=RULE_STRING
-			{
-				newLeafNode(this_STRING_1, grammarAccess.getEValueExpressionAccess().getSTRINGTerminalRuleCall_0_1());
-			}
-		)
+		{
+			newCompositeNode(grammarAccess.getEValueExpressionAccess().getESTRINGParserRuleCall_0());
+		}
+		this_ESTRING_0=ruleESTRING
+		{
+			$current = $this_ESTRING_0.current;
+			afterParserOrEnumRuleCall();
+		}
 		    |
 		{
 			newCompositeNode(grammarAccess.getEValueExpressionAccess().getEFunctionParserRuleCall_1());
 		}
-		this_EFunction_2=ruleEFunction
+		this_EFunction_1=ruleEFunction
 		{
-			$current = $this_EFunction_2.current;
+			$current = $this_EFunction_1.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -4886,9 +4881,9 @@ ruleECapabilityDefinitionBody returns [EObject current=null]
 							}
 							(
 								(
-									lv_start_17_0=RULE_STRING
+									lv_occurrences_start_17_0=RULE_STRING
 									{
-										newLeafNode(lv_start_17_0, grammarAccess.getECapabilityDefinitionBodyAccess().getStartSTRINGTerminalRuleCall_5_1_0());
+										newLeafNode(lv_occurrences_start_17_0, grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startSTRINGTerminalRuleCall_5_1_0());
 									}
 									{
 										if ($current==null) {
@@ -4896,8 +4891,8 @@ ruleECapabilityDefinitionBody returns [EObject current=null]
 										}
 										setWithLastConsumed(
 											$current,
-											"start",
-											lv_start_17_0,
+											"occurrences_start",
+											lv_occurrences_start_17_0,
 											"org.eclipse.xtext.common.Terminals.STRING");
 									}
 								)
@@ -4908,9 +4903,9 @@ ruleECapabilityDefinitionBody returns [EObject current=null]
 							}
 							(
 								(
-									lv_end_19_0=RULE_STRING
+									lv_occurrences_end_19_0=RULE_STRING
 									{
-										newLeafNode(lv_end_19_0, grammarAccess.getECapabilityDefinitionBodyAccess().getEndSTRINGTerminalRuleCall_5_3_0());
+										newLeafNode(lv_occurrences_end_19_0, grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endSTRINGTerminalRuleCall_5_3_0());
 									}
 									{
 										if ($current==null) {
@@ -4918,8 +4913,8 @@ ruleECapabilityDefinitionBody returns [EObject current=null]
 										}
 										setWithLastConsumed(
 											$current,
-											"end",
-											lv_end_19_0,
+											"occurrences_end",
+											lv_occurrences_end_19_0,
 											"org.eclipse.xtext.common.Terminals.STRING");
 									}
 								)

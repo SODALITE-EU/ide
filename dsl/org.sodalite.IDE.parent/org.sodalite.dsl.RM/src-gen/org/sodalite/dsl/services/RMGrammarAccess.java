@@ -2380,26 +2380,18 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	public class EValueExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EValueExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cEValueExpressionAction_0_0 = (Action)cGroup_0.eContents().get(0);
-		private final RuleCall cSTRINGTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final RuleCall cESTRINGParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEFunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//EValueExpression:
-		//	{EValueExpression} STRING | EFunction;
+		//	ESTRING | EFunction;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{EValueExpression} STRING | EFunction
+		//ESTRING | EFunction
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//{EValueExpression} STRING
-		public Group getGroup_0() { return cGroup_0; }
-		
-		//{EValueExpression}
-		public Action getEValueExpressionAction_0_0() { return cEValueExpressionAction_0_0; }
-		
-		//STRING
-		public RuleCall getSTRINGTerminalRuleCall_0_1() { return cSTRINGTerminalRuleCall_0_1; }
+		//ESTRING
+		public RuleCall getESTRINGParserRuleCall_0() { return cESTRINGParserRuleCall_0; }
 		
 		//EFunction
 		public RuleCall getEFunctionParserRuleCall_1() { return cEFunctionParserRuleCall_1; }
@@ -2756,11 +2748,11 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightSquareBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		private final Group cGroup_5 = (Group)cUnorderedGroup.eContents().get(5);
 		private final Keyword cOccurrencesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cStartAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cStartSTRINGTerminalRuleCall_5_1_0 = (RuleCall)cStartAssignment_5_1.eContents().get(0);
+		private final Assignment cOccurrences_startAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cOccurrences_startSTRINGTerminalRuleCall_5_1_0 = (RuleCall)cOccurrences_startAssignment_5_1.eContents().get(0);
 		private final Keyword cCommaKeyword_5_2 = (Keyword)cGroup_5.eContents().get(2);
-		private final Assignment cEndAssignment_5_3 = (Assignment)cGroup_5.eContents().get(3);
-		private final RuleCall cEndSTRINGTerminalRuleCall_5_3_0 = (RuleCall)cEndAssignment_5_3.eContents().get(0);
+		private final Assignment cOccurrences_endAssignment_5_3 = (Assignment)cGroup_5.eContents().get(3);
+		private final RuleCall cOccurrences_endSTRINGTerminalRuleCall_5_3_0 = (RuleCall)cOccurrences_endAssignment_5_3.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_5_4 = (Keyword)cGroup_5.eContents().get(4);
 		
 		//ECapabilityDefinitionBody:
@@ -2770,13 +2762,14 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		//	END)? & ('attributes:'
 		//	BEGIN
 		//	attributes=EAttributes
-		//	END)? & ('valid_source_types:[' valid_source_types+=EValidSourceType? ']')? & ('occurrences:[' start=STRING ','
-		//	end=STRING ']')?;
+		//	END)? & ('valid_source_types:[' valid_source_types+=EValidSourceType? ']')? & ('occurrences:['
+		//	occurrences_start=STRING ',' occurrences_end=STRING ']')?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'type:' type=[ECapabilityType|QUALIFIED_NAME] & ('description:' description=STRING)? & ('properties:' BEGIN
 		//properties=EProperties END)? & ('attributes:' BEGIN attributes=EAttributes END)? & ('valid_source_types:['
-		//valid_source_types+=EValidSourceType? ']')? & ('occurrences:[' start=STRING ',' end=STRING ']')?
+		//valid_source_types+=EValidSourceType? ']')? & ('occurrences:[' occurrences_start=STRING ',' occurrences_end=STRING
+		//']')?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'type:' type=[ECapabilityType|QUALIFIED_NAME]
@@ -2857,26 +2850,26 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		//']'
 		public Keyword getRightSquareBracketKeyword_4_2() { return cRightSquareBracketKeyword_4_2; }
 		
-		//('occurrences:[' start=STRING ',' end=STRING ']')?
+		//('occurrences:[' occurrences_start=STRING ',' occurrences_end=STRING ']')?
 		public Group getGroup_5() { return cGroup_5; }
 		
 		//'occurrences:['
 		public Keyword getOccurrencesKeyword_5_0() { return cOccurrencesKeyword_5_0; }
 		
-		//start=STRING
-		public Assignment getStartAssignment_5_1() { return cStartAssignment_5_1; }
+		//occurrences_start=STRING
+		public Assignment getOccurrences_startAssignment_5_1() { return cOccurrences_startAssignment_5_1; }
 		
 		//STRING
-		public RuleCall getStartSTRINGTerminalRuleCall_5_1_0() { return cStartSTRINGTerminalRuleCall_5_1_0; }
+		public RuleCall getOccurrences_startSTRINGTerminalRuleCall_5_1_0() { return cOccurrences_startSTRINGTerminalRuleCall_5_1_0; }
 		
 		//','
 		public Keyword getCommaKeyword_5_2() { return cCommaKeyword_5_2; }
 		
-		//end=STRING
-		public Assignment getEndAssignment_5_3() { return cEndAssignment_5_3; }
+		//occurrences_end=STRING
+		public Assignment getOccurrences_endAssignment_5_3() { return cOccurrences_endAssignment_5_3; }
 		
 		//STRING
-		public RuleCall getEndSTRINGTerminalRuleCall_5_3_0() { return cEndSTRINGTerminalRuleCall_5_3_0; }
+		public RuleCall getOccurrences_endSTRINGTerminalRuleCall_5_3_0() { return cOccurrences_endSTRINGTerminalRuleCall_5_3_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_5_4() { return cRightSquareBracketKeyword_5_4; }
@@ -4315,7 +4308,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EValueExpression:
-	//	{EValueExpression} STRING | EFunction;
+	//	ESTRING | EFunction;
 	public EValueExpressionElements getEValueExpressionAccess() {
 		return pEValueExpression;
 	}
@@ -4422,8 +4415,8 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	//	END)? & ('attributes:'
 	//	BEGIN
 	//	attributes=EAttributes
-	//	END)? & ('valid_source_types:[' valid_source_types+=EValidSourceType? ']')? & ('occurrences:[' start=STRING ','
-	//	end=STRING ']')?;
+	//	END)? & ('valid_source_types:[' valid_source_types+=EValidSourceType? ']')? & ('occurrences:['
+	//	occurrences_start=STRING ',' occurrences_end=STRING ']')?;
 	public ECapabilityDefinitionBodyElements getECapabilityDefinitionBodyAccess() {
 		return pECapabilityDefinitionBody;
 	}

@@ -20,7 +20,7 @@ package org.sodalite.dsl.rM;
  * @model
  * @generated
  */
-public interface ESTRING extends EPropertyAssignmentValue
+public interface ESTRING extends EValueExpression, EPropertyAssignmentValue
 {
   /**
    * Returns the value of the '<em><b>String</b></em>' attribute.

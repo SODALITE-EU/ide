@@ -2434,7 +2434,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getECapabilityDefinitionBody_Start()
+  public EAttribute getECapabilityDefinitionBody_Occurrences_start()
   {
     return (EAttribute)eCapabilityDefinitionBodyEClass.getEStructuralFeatures().get(5);
   }
@@ -2445,7 +2445,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getECapabilityDefinitionBody_End()
+  public EAttribute getECapabilityDefinitionBody_Occurrences_end()
   {
     return (EAttribute)eCapabilityDefinitionBodyEClass.getEStructuralFeatures().get(6);
   }
@@ -3251,8 +3251,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eCapabilityDefinitionBodyEClass, ECAPABILITY_DEFINITION_BODY__PROPERTIES);
     createEReference(eCapabilityDefinitionBodyEClass, ECAPABILITY_DEFINITION_BODY__ATTRIBUTES);
     createEReference(eCapabilityDefinitionBodyEClass, ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES);
-    createEAttribute(eCapabilityDefinitionBodyEClass, ECAPABILITY_DEFINITION_BODY__START);
-    createEAttribute(eCapabilityDefinitionBodyEClass, ECAPABILITY_DEFINITION_BODY__END);
+    createEAttribute(eCapabilityDefinitionBodyEClass, ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START);
+    createEAttribute(eCapabilityDefinitionBodyEClass, ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END);
 
     eValidSourceTypeEClass = createEClass(EVALID_SOURCE_TYPE);
     createEReference(eValidSourceTypeEClass, EVALID_SOURCE_TYPE__SOURCE_TYPES);
@@ -3376,6 +3376,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eGreaterOrEqualEClass.getESuperTypes().add(this.getEConstraint());
     eGreaterThanEClass.getESuperTypes().add(this.getEConstraint());
     eEqualEClass.getESuperTypes().add(this.getEConstraint());
+    estringEClass.getESuperTypes().add(this.getEValueExpression());
     estringEClass.getESuperTypes().add(this.getEPropertyAssignmentValue());
     emapEClass.getESuperTypes().add(this.getEPropertyAssignmentValue());
 
@@ -3589,8 +3590,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getECapabilityDefinitionBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityDefinitionBody_Attributes(), this.getEAttributes(), null, "attributes", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityDefinitionBody_Valid_source_types(), this.getEValidSourceType(), null, "valid_source_types", null, 0, -1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getECapabilityDefinitionBody_Start(), ecorePackage.getEString(), "start", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getECapabilityDefinitionBody_End(), ecorePackage.getEString(), "end", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getECapabilityDefinitionBody_Occurrences_start(), ecorePackage.getEString(), "occurrences_start", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getECapabilityDefinitionBody_Occurrences_end(), ecorePackage.getEString(), "occurrences_end", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eValidSourceTypeEClass, EValidSourceType.class, "EValidSourceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEValidSourceType_SourceTypes(), this.getENodeTypeRef(), null, "sourceTypes", null, 0, -1, EValidSourceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

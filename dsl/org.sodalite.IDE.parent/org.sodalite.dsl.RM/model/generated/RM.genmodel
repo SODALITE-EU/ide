@@ -213,8 +213,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/valid_source_types"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/start"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/end"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/occurrences_start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/occurrences_end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EValidSourceType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidSourceType/sourceTypes"/>

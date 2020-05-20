@@ -2025,22 +2025,22 @@ public interface RMPackage extends EPackage
   int ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES = 4;
 
   /**
-   * The feature id for the '<em><b>Start</b></em>' attribute.
+   * The feature id for the '<em><b>Occurrences start</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ECAPABILITY_DEFINITION_BODY__START = 5;
+  int ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START = 5;
 
   /**
-   * The feature id for the '<em><b>End</b></em>' attribute.
+   * The feature id for the '<em><b>Occurrences end</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ECAPABILITY_DEFINITION_BODY__END = 6;
+  int ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END = 6;
 
   /**
    * The number of structural features of the '<em>ECapability Definition Body</em>' class.
@@ -2645,7 +2645,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ESTRING__STRING = EPROPERTY_ASSIGNMENT_VALUE_FEATURE_COUNT + 0;
+  int ESTRING__STRING = EVALUE_EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>ESTRING</em>' class.
@@ -2654,7 +2654,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ESTRING_FEATURE_COUNT = EPROPERTY_ASSIGNMENT_VALUE_FEATURE_COUNT + 1;
+  int ESTRING_FEATURE_COUNT = EVALUE_EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EMAPImpl <em>EMAP</em>}' class.
@@ -4445,26 +4445,26 @@ public interface RMPackage extends EPackage
   EReference getECapabilityDefinitionBody_Valid_source_types();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getStart <em>Start</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_start <em>Occurrences start</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Start</em>'.
-   * @see org.sodalite.dsl.rM.ECapabilityDefinitionBody#getStart()
+   * @return the meta object for the attribute '<em>Occurrences start</em>'.
+   * @see org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_start()
    * @see #getECapabilityDefinitionBody()
    * @generated
    */
-  EAttribute getECapabilityDefinitionBody_Start();
+  EAttribute getECapabilityDefinitionBody_Occurrences_start();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getEnd <em>End</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_end <em>Occurrences end</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>End</em>'.
-   * @see org.sodalite.dsl.rM.ECapabilityDefinitionBody#getEnd()
+   * @return the meta object for the attribute '<em>Occurrences end</em>'.
+   * @see org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_end()
    * @see #getECapabilityDefinitionBody()
    * @generated
    */
-  EAttribute getECapabilityDefinitionBody_End();
+  EAttribute getECapabilityDefinitionBody_Occurrences_end();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EValidSourceType <em>EValid Source Type</em>}'.
@@ -6414,20 +6414,20 @@ public interface RMPackage extends EPackage
     EReference ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES = eINSTANCE.getECapabilityDefinitionBody_Valid_source_types();
 
     /**
-     * The meta object literal for the '<em><b>Start</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Occurrences start</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ECAPABILITY_DEFINITION_BODY__START = eINSTANCE.getECapabilityDefinitionBody_Start();
+    EAttribute ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START = eINSTANCE.getECapabilityDefinitionBody_Occurrences_start();
 
     /**
-     * The meta object literal for the '<em><b>End</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Occurrences end</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ECAPABILITY_DEFINITION_BODY__END = eINSTANCE.getECapabilityDefinitionBody_End();
+    EAttribute ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END = eINSTANCE.getECapabilityDefinitionBody_Occurrences_end();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EValidSourceTypeImpl <em>EValid Source Type</em>}' class.

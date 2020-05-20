@@ -25,7 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  *
  * @generated
  */
-public class ESTRINGImpl extends EPropertyAssignmentValueImpl implements ESTRING
+public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
 {
   /**
    * The default value of the '{@link #getString() <em>String</em>}' attribute.

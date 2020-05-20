@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getValid_source_types <em>Valid source types</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getStart <em>Start</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getEnd <em>End</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_start <em>Occurrences start</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_end <em>Occurrences end</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody()
@@ -132,47 +132,47 @@ public interface ECapabilityDefinitionBody extends EObject
   EList<EValidSourceType> getValid_source_types();
 
   /**
-   * Returns the value of the '<em><b>Start</b></em>' attribute.
+   * Returns the value of the '<em><b>Occurrences start</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Start</em>' attribute.
-   * @see #setStart(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody_Start()
+   * @return the value of the '<em>Occurrences start</em>' attribute.
+   * @see #setOccurrences_start(String)
+   * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody_Occurrences_start()
    * @model
    * @generated
    */
-  String getStart();
+  String getOccurrences_start();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getStart <em>Start</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_start <em>Occurrences start</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Start</em>' attribute.
-   * @see #getStart()
+   * @param value the new value of the '<em>Occurrences start</em>' attribute.
+   * @see #getOccurrences_start()
    * @generated
    */
-  void setStart(String value);
+  void setOccurrences_start(String value);
 
   /**
-   * Returns the value of the '<em><b>End</b></em>' attribute.
+   * Returns the value of the '<em><b>Occurrences end</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>End</em>' attribute.
-   * @see #setEnd(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody_End()
+   * @return the value of the '<em>Occurrences end</em>' attribute.
+   * @see #setOccurrences_end(String)
+   * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody_Occurrences_end()
    * @model
    * @generated
    */
-  String getEnd();
+  String getOccurrences_end();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getEnd <em>End</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_end <em>Occurrences end</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>End</em>' attribute.
-   * @see #getEnd()
+   * @param value the new value of the '<em>Occurrences end</em>' attribute.
+   * @see #getOccurrences_end()
    * @generated
    */
-  void setEnd(String value);
+  void setOccurrences_end(String value);
 
 } // ECapabilityDefinitionBody
