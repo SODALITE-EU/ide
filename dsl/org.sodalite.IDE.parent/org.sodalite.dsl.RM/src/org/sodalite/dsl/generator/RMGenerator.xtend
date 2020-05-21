@@ -121,14 +121,60 @@ class RMGenerator extends AbstractGenerator {
 	«cap.compile»
 	«ENDFOR»
 	
+	«FOR req:r.allContents.toIterable.filter(ERequirementDefinition)»
+	«req.compile»
+	«ENDFOR»
+	
 	«FOR n:r.allContents.toIterable.filter(ENodeType)»
 	«n.compile»
 	«ENDFOR»
+	'''
 	
+	def compile (ERequirementDefinition r) '''
+	«IF r.requirement.capability !== null»
+	«putParameterNumber(r, "capability", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "capability" ;
+	  exchange:value "«r.requirement.capability.name»" ;
+	.
+	«ENDIF»
+	
+	«IF r.requirement.node !== null»
+	«putParameterNumber(r, "node", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "node" ;
+	  exchange:value "«r.requirement.node.name»" ;
+	.
+	«ENDIF»
+	
+	«IF r.requirement.relationship !== null»
+	«putParameterNumber(r, "relationship", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "relationship" ;	  
+	  exchange:value "«r.requirement.relationship.name»" ;
+	.
+	«ENDIF»
+	
+	«requirement_numbers.put(r, requirement_counter)»
+	:Requirement_«requirement_counter++»
+	  rdf:type exchange:Requirement ;
+	  exchange:name "«r.name»" ;
+	  «IF r.requirement.capability !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "capability")» ;
+	  «ENDIF»
+	  «IF r.requirement.node !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "node")» ;
+	  «ENDIF»
+	  «IF r.requirement.relationship !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "relationship")» ;
+	  «ENDIF»
+	.		
 	'''
 	
 	def compile (ECapabilityDefinition c) '''
-	
 	«IF c.capability.type !== null»
 	«putParameterNumber(c, "type", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -159,8 +205,6 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDFOR»
 	.
 	«ENDIF»
-
-	
 		
 	«capability_numbers.put(c, capability_counter)»
 	:Capability_«capability_counter++»
@@ -179,7 +223,6 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(EInterfaceDefinition i) '''
-	
 	«IF i.interface.type !== null»
 	«putParameterNumber(i, "type", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -200,8 +243,6 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»	
 	
-	
-	
 	«interface_numbers.put(i, interface_counter)»
 	:Interface_«interface_counter++»
 	  rdf:type exchange:Interface ;
@@ -216,7 +257,6 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(EOperationDefinition o) '''
-	
 	«IF o.operation.inputs !== null»
 	«putParameterNumber(o, "inputs", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -251,7 +291,6 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(EParameterDefinition p) '''
-	
 	«IF p.parameter.value !== null»
 	«putParameterNumber(p, "value", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -295,7 +334,6 @@ class RMGenerator extends AbstractGenerator {
 	'''
 
 	def compile(GetProperty p) '''
-	
 	«IF p.property.property !== null»
 	«putParameterNumber(p, "property", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -340,7 +378,6 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(GetAttribute a) '''
-	
 	«IF a.attribute.attribute !== null»
 	«putParameterNumber(a, "attribute", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -421,7 +458,6 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile (EPropertyDefinition p) '''
-	
 	«IF p.property.description !== null»
 	«putParameterNumber(p, "description", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -466,7 +502,6 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile (EAttributeDefinition a) '''
-
 	«IF a.attribute.type !== null»
 	«putParameterNumber(a, "type", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -494,9 +529,9 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
-	«attribute_numbers.put(a, property_counter)»
-	:Attribute_«property_counter++»
-	  rdf:type exchange:Property ;
+	«attribute_numbers.put(a, attribute_counter)»
+	:Attribute_«attribute_counter++»
+	  rdf:type exchange:Attribute ;
 	  exchange:name "«a.name»" ;
 	  «IF a.attribute.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "type")» ;

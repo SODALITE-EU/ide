@@ -34,6 +34,7 @@ import org.sodalite.dsl.rM.EOperations;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.EPropertyDefinition;
+import org.sodalite.dsl.rM.ERelationshipType;
 import org.sodalite.dsl.rM.EReqOrCap;
 import org.sodalite.dsl.rM.ERequirementDefinition;
 import org.sodalite.dsl.rM.ERequirements;
@@ -219,20 +220,167 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      Iterable<ENodeType> _filter_8 = Iterables.<ENodeType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ENodeType.class);
-      for(final ENodeType n : _filter_8) {
-        CharSequence _compile_8 = this.compile(n);
+      Iterable<ERequirementDefinition> _filter_8 = Iterables.<ERequirementDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ERequirementDefinition.class);
+      for(final ERequirementDefinition req : _filter_8) {
+        CharSequence _compile_8 = this.compile(req);
         _builder.append(_compile_8);
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.newLine();
+    {
+      Iterable<ENodeType> _filter_9 = Iterables.<ENodeType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ENodeType.class);
+      for(final ENodeType n : _filter_9) {
+        CharSequence _compile_9 = this.compile(n);
+        _builder.append(_compile_9);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compile(final ERequirementDefinition r) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      ECapabilityType _capability = r.getRequirement().getCapability();
+      boolean _tripleNotEquals = (_capability != null);
+      if (_tripleNotEquals) {
+        this.putParameterNumber(r, "capability", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus = this.parameter_counter++;
+        _builder.append(_plusPlus);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"capability\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _name = r.getRequirement().getCapability().getName();
+        _builder.append(_name, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
+    {
+      ENodeType _node = r.getRequirement().getNode();
+      boolean _tripleNotEquals_1 = (_node != null);
+      if (_tripleNotEquals_1) {
+        this.putParameterNumber(r, "node", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_1 = this.parameter_counter++;
+        _builder.append(_plusPlus_1);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"node\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _name_1 = r.getRequirement().getNode().getName();
+        _builder.append(_name_1, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
+    {
+      ERelationshipType _relationship = r.getRequirement().getRelationship();
+      boolean _tripleNotEquals_2 = (_relationship != null);
+      if (_tripleNotEquals_2) {
+        this.putParameterNumber(r, "relationship", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_2 = this.parameter_counter++;
+        _builder.append(_plusPlus_2);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"relationship\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _name_2 = r.getRequirement().getRelationship().getName();
+        _builder.append(_name_2, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
+    Integer _put = this.requirement_numbers.put(r, Integer.valueOf(this.requirement_counter));
+    _builder.append(_put);
+    _builder.newLineIfNotEmpty();
+    _builder.append(":Requirement_");
+    int _plusPlus_3 = this.requirement_counter++;
+    _builder.append(_plusPlus_3);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Requirement ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:name \"");
+    String _name_3 = r.getName();
+    _builder.append(_name_3, "  ");
+    _builder.append("\" ;");
+    _builder.newLineIfNotEmpty();
+    {
+      ECapabilityType _capability_1 = r.getRequirement().getCapability();
+      boolean _tripleNotEquals_3 = (_capability_1 != null);
+      if (_tripleNotEquals_3) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber = this.getParameterNumber(r, "capability");
+        _builder.append(_parameterNumber, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      ENodeType _node_1 = r.getRequirement().getNode();
+      boolean _tripleNotEquals_4 = (_node_1 != null);
+      if (_tripleNotEquals_4) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_1 = this.getParameterNumber(r, "node");
+        _builder.append(_parameterNumber_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      ERelationshipType _relationship_1 = r.getRequirement().getRelationship();
+      boolean _tripleNotEquals_5 = (_relationship_1 != null);
+      if (_tripleNotEquals_5) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_2 = this.getParameterNumber(r, "relationship");
+        _builder.append(_parameterNumber_2, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append(".\t\t");
     _builder.newLine();
     return _builder;
   }
   
   public CharSequence compile(final ECapabilityDefinition c) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
     {
       ECapabilityType _type = c.getCapability().getType();
       boolean _tripleNotEquals = (_type != null);
@@ -323,8 +471,6 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
       }
     }
-    _builder.newLine();
-    _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
     Integer _put = this.capability_numbers.put(c, Integer.valueOf(this.capability_counter));
@@ -386,7 +532,6 @@ public class RMGenerator extends AbstractGenerator {
   
   public CharSequence compile(final EInterfaceDefinition i) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
     {
       EInterfaceType _type = i.getInterface().getType();
       boolean _tripleNotEquals = (_type != null);
@@ -446,8 +591,6 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
     Integer _put = this.interface_numbers.put(i, Integer.valueOf(this.interface_counter));
     _builder.append(_put);
     _builder.newLineIfNotEmpty();
@@ -495,7 +638,6 @@ public class RMGenerator extends AbstractGenerator {
   
   public CharSequence compile(final EOperationDefinition o) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
     {
       EInputs _inputs = o.getOperation().getInputs();
       boolean _tripleNotEquals = (_inputs != null);
@@ -601,7 +743,6 @@ public class RMGenerator extends AbstractGenerator {
   
   public CharSequence compile(final EParameterDefinition p) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
     {
       EValueExpression _value = p.getParameter().getValue();
       boolean _tripleNotEquals = (_value != null);
@@ -738,7 +879,6 @@ public class RMGenerator extends AbstractGenerator {
   
   public CharSequence compile(final GetProperty p) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
     {
       EPropertyDefinition _property = p.getProperty().getProperty();
       boolean _tripleNotEquals = (_property != null);
@@ -875,7 +1015,6 @@ public class RMGenerator extends AbstractGenerator {
   
   public CharSequence compile(final GetAttribute a) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
     {
       EAttributeDefinition _attribute = a.getAttribute().getAttribute();
       boolean _tripleNotEquals = (_attribute != null);
@@ -1135,7 +1274,6 @@ public class RMGenerator extends AbstractGenerator {
   
   public CharSequence compile(final EPropertyDefinition p) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
     {
       String _description = p.getProperty().getDescription();
       boolean _tripleNotEquals = (_description != null);
@@ -1274,7 +1412,6 @@ public class RMGenerator extends AbstractGenerator {
   
   public CharSequence compile(final EAttributeDefinition a) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
     {
       EDataType _type = a.getAttribute().getType();
       boolean _tripleNotEquals = (_type != null);
@@ -1356,15 +1493,15 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     _builder.newLine();
-    Integer _put = this.attribute_numbers.put(a, Integer.valueOf(this.property_counter));
+    Integer _put = this.attribute_numbers.put(a, Integer.valueOf(this.attribute_counter));
     _builder.append(_put);
     _builder.newLineIfNotEmpty();
     _builder.append(":Attribute_");
-    int _plusPlus_3 = this.property_counter++;
+    int _plusPlus_3 = this.attribute_counter++;
     _builder.append(_plusPlus_3);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
-    _builder.append("rdf:type exchange:Property ;");
+    _builder.append("rdf:type exchange:Attribute ;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("exchange:name \"");
