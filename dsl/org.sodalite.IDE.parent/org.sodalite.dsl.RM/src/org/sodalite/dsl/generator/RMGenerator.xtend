@@ -19,10 +19,13 @@ import java.util.HashMap
 import org.sodalite.dsl.rM.EInterfaceDefinition
 import org.sodalite.dsl.rM.EValueExpression
 import org.sodalite.dsl.rM.ESTRING
-import org.sodalite.dsl.rM.ELIST
 import org.eclipse.emf.ecore.util.EObjectContainmentEList
 import org.sodalite.dsl.rM.EValidSourceType
 import org.sodalite.dsl.rM.EOperationDefinition
+import org.sodalite.dsl.rM.EParameterDefinition
+import org.sodalite.dsl.rM.EFunction
+import org.sodalite.dsl.rM.GetProperty
+import org.sodalite.dsl.rM.GetAttribute
 
 /**
  * Generates code from your model files on save.
@@ -85,6 +88,18 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:RM ;
 	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
 	.
+	
+	«FOR p:r.allContents.toIterable.filter(GetProperty)»
+	«p.compile»
+	«ENDFOR»
+	
+	«FOR a:r.allContents.toIterable.filter(GetAttribute)»
+	«a.compile»
+	«ENDFOR»
+	
+	«FOR p:r.allContents.toIterable.filter(EParameterDefinition)»
+	«p.compile»
+	«ENDFOR»
 
 	«FOR o:r.allContents.toIterable.filter(EOperationDefinition)»
 	«o.compile»
@@ -174,6 +189,19 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	«IF i.interface.operations !== null»
+	«putParameterNumber(i, "operations", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "operations" ;
+	  «FOR op:(i.interface.operations.operations)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(op, "name")» ;
+	  «ENDFOR»	  
+	.
+	«ENDIF»	
+	
+	
+	
 	«interface_numbers.put(i, interface_counter)»
 	:Interface_«interface_counter++»
 	  rdf:type exchange:Interface ;
@@ -182,23 +210,180 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "type")» ;
 	  «ENDIF»
 	  «IF i.interface.operations !== null»
-	  «FOR op:(i.interface.operations.operations)»
-	  exchange:hasParameter :Parameter_«getParameterNumber(op, "name")» ;
-	  «ENDFOR»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "operations")» ;
 	  «ENDIF»
 	.
 	'''
 	
 	def compile(EOperationDefinition o) '''
+	
+	«IF o.operation.inputs !== null»
+	«putParameterNumber(o, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «FOR in:(o.operation.inputs.inputs)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(in, "name")» ;
+	  «ENDFOR»	  
+	.
+	«ENDIF»		
+	
+	«IF o.operation.implementation !== null»
+	«putParameterNumber(o, "implementation", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "implementation" ;
+	  exchange:value "«o.operation.implementation»" ;
+	.
+	«ENDIF»		
+	
 	«putParameterNumber(o, "name", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "name" ;
-	  exchange:value "«o.name»" ;
+	  exchange:name "«o.name»" ;
+	  «IF o.operation.inputs !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "inputs")» ;
+	  «ENDIF»
+	  «IF o.operation.implementation !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "implementation")» ;
+	  «ENDIF»  
 	.
 	'''
 	
+	def compile(EParameterDefinition p) '''
 	
+	«IF p.parameter.value !== null»
+	«putParameterNumber(p, "value", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "value" ;  
+	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
+	.
+	«ENDIF»		
+	
+	«IF p.parameter.^default !== null»
+	«putParameterNumber(p, "default", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "default" ;  
+	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ; 
+	.
+	«ENDIF»	
+	
+	«putParameterNumber(p, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«p.name»" ;
+	  «IF p.parameter.type !== null»
+	  exchange:value «p.parameter.type.name» ;
+	  «ENDIF»
+	  «IF p.parameter.value !== null»
+	  «IF p.parameter.value instanceof EFunction»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "value")» ;
+	  «ELSE»
+	  exchange:value «p.parameter.value.compile» ;	  
+	  «ENDIF»
+	  «ENDIF»
+	  «IF p.parameter.^default !== null»
+	  «IF p.parameter.^default instanceof EFunction»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "default")» ;
+	  «ELSE»
+	  exchange:value «p.parameter.^default.compile» ;	  
+	  «ENDIF»	  
+	  «ENDIF»  
+	.	
+	'''
+
+	def compile(GetProperty p) '''
+	
+	«IF p.property.property !== null»
+	«putParameterNumber(p, "property", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "property" ;  
+	  exchange:value «p.property.property.name» ; 
+	.
+	«ENDIF»	
+	
+	«IF p.property.entity !== null»
+	«putParameterNumber(p, "entity", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "entity" ;  
+	  exchange:value «p.property.entity» ; 
+	.
+	«ENDIF»	
+	
+	«IF p.property.req_cap !== null»
+	«putParameterNumber(p, "req_cap", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "req_cap" ;  
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "req_cap")» ; 
+	.
+	«ENDIF»		
+	
+	«putParameterNumber(p, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "get_property" ;
+	  «IF p.property.property !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "property")» ;
+	  «ENDIF»	
+	  «IF p.property.entity !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "entity")» ;
+	  «ENDIF»
+	  «IF p.property.req_cap !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "req_cap")» ;
+	  «ENDIF»
+	.	
+	'''
+	
+	def compile(GetAttribute a) '''
+	
+	«IF a.attribute.attribute !== null»
+	«putParameterNumber(a, "attribute", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "attribute" ;  
+	  exchange:value «a.attribute.attribute.name» ; 
+	.
+	«ENDIF»	
+	
+	«IF a.attribute.entity !== null»
+	«putParameterNumber(a, "entity", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "entity" ;  
+	  exchange:value «a.attribute.entity» ; 
+	.
+	«ENDIF»	
+	
+	«IF a.attribute.req_cap !== null»
+	«putParameterNumber(a, "req_cap", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "req_cap" ;  
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "req_cap")» ; 
+	.
+	«ENDIF»		
+	
+	«putParameterNumber(a, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "get_property" ;
+	  «IF a.attribute.attribute !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "attribute")» ;
+	  «ENDIF»	
+	  «IF a.attribute.entity !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "entity")» ;
+	  «ENDIF»
+	  «IF a.attribute.req_cap !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "req_cap")» ;
+	  «ENDIF»
+	.	
+	'''
+
 	def compile(ENodeType n) '''
 	:Node_«node_counter++»
 	  rdf:type exchange:Node ;
@@ -260,7 +445,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "default" ;
-	  exchange:value "«p.property.^default.compile»" ;
+	  exchange:value "«p.property.^default.compile»" ; 
 	.
 	«ENDIF»
 	
