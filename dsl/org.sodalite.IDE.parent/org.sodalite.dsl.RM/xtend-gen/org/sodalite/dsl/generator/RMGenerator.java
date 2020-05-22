@@ -29,6 +29,7 @@ import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.EInterfaceDefinition;
 import org.sodalite.dsl.rM.EInterfaceType;
 import org.sodalite.dsl.rM.EInterfaces;
+import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.ENodeTypeRef;
 import org.sodalite.dsl.rM.EOperationDefinition;
@@ -294,6 +295,30 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
       }
     }
+    {
+      if ((c instanceof EMinLength)) {
+        this.putParameterNumber(c, "name", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_1 = this.parameter_counter++;
+        _builder.append(_plusPlus_1);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"min_length\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _val = ((EMinLength)c).getVal();
+        _builder.append(_val, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".\t\t");
+        _builder.newLine();
+      }
+    }
     return _builder;
   }
   
@@ -316,10 +341,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"capability\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name = r.getRequirement().getCapability().getName();
         _builder.append(_name, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -343,10 +368,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"node\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name_1 = r.getRequirement().getNode().getName();
         _builder.append(_name_1, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -370,10 +395,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"relationship\" ;\t  ");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name_2 = r.getRequirement().getRelationship().getName();
         _builder.append(_name_2, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -456,10 +481,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"type\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name = c.getCapability().getType().getName();
         _builder.append(_name, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -483,10 +508,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"description\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _description_1 = c.getCapability().getDescription();
         _builder.append(_description_1, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -607,10 +632,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"type\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name = i.getInterface().getType().getName();
         _builder.append(_name, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -745,10 +770,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"implementation\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _implementation_1 = o.getOperation().getImplementation();
         _builder.append(_implementation_1, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -875,10 +900,10 @@ public class RMGenerator extends AbstractGenerator {
       boolean _tripleNotEquals_2 = (_type != null);
       if (_tripleNotEquals_2) {
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name_1 = p.getParameter().getType().getName();
         _builder.append(_name_1, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -897,10 +922,10 @@ public class RMGenerator extends AbstractGenerator {
             _builder.newLineIfNotEmpty();
           } else {
             _builder.append("  ");
-            _builder.append("exchange:value \"");
+            _builder.append("exchange:value \'");
             CharSequence _compile = this.compile(p.getParameter().getValue());
             _builder.append(_compile, "  ");
-            _builder.append("\" ;\t  ");
+            _builder.append("\' ;\t  ");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -921,10 +946,10 @@ public class RMGenerator extends AbstractGenerator {
             _builder.newLineIfNotEmpty();
           } else {
             _builder.append("  ");
-            _builder.append("exchange:value \"");
+            _builder.append("exchange:value \'");
             CharSequence _compile_1 = this.compile(p.getParameter().getDefault());
             _builder.append(_compile_1, "  ");
-            _builder.append("\" ;\t  ");
+            _builder.append("\' ;\t  ");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -954,10 +979,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"property\" ;  ");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name = p.getProperty().getProperty().getName();
         _builder.append(_name, "  ");
-        _builder.append("\" ; ");
+        _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -981,10 +1006,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"entity\" ;  ");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _entity_1 = p.getProperty().getEntity();
         _builder.append(_entity_1, "  ");
-        _builder.append("\" ; ");
+        _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1090,10 +1115,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"attribute\" ;  ");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name = a.getAttribute().getAttribute().getName();
         _builder.append(_name, "  ");
-        _builder.append("\" ; ");
+        _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1117,10 +1142,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"entity\" ;  ");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _entity_1 = a.getAttribute().getEntity();
         _builder.append(_entity_1, "  ");
-        _builder.append("\" ; ");
+        _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1144,10 +1169,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"req_cap\" ;  ");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name_1 = a.getAttribute().getReq_cap().getName();
         _builder.append(_name_1, "  ");
-        _builder.append("\" ; ");
+        _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1398,10 +1423,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"type\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name = p.getProperty().getType().getName();
         _builder.append(_name, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1425,10 +1450,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"description\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _description_1 = p.getProperty().getDescription();
         _builder.append(_description_1, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1451,10 +1476,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"required\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         boolean _isRequired_1 = p.getProperty().isRequired();
         _builder.append(_isRequired_1, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1478,10 +1503,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"default\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         CharSequence _compile = this.compile(p.getProperty().getDefault());
         _builder.append(_compile, "  ");
-        _builder.append("\" ; ");
+        _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1505,10 +1530,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"status\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _status_1 = p.getProperty().getStatus();
         _builder.append(_status_1, "  ");
-        _builder.append("\" ; ");
+        _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1532,10 +1557,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"entry_schema\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         EDataType _entry_schema_1 = p.getProperty().getEntry_schema();
         _builder.append(_entry_schema_1, "  ");
-        _builder.append("\" ; ");
+        _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1698,10 +1723,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"type\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name = a.getAttribute().getType().getName();
         _builder.append(_name, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1725,10 +1750,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"description\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _description_1 = a.getAttribute().getDescription();
         _builder.append(_description_1, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
@@ -1752,10 +1777,10 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"required\" ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:value \"");
+        _builder.append("exchange:value \'");
         String _name_1 = a.getAttribute().getEntry_schema().getName();
         _builder.append(_name_1, "  ");
-        _builder.append("\" ;");
+        _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
