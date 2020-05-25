@@ -23,7 +23,7 @@ Optimization_Model:
 EOptimization:
 	('enable_opt_build:' enable_opt_build=BOOLEAN) 
 	('enable_autotuning:' enable_autotuning=BOOLEAN) 
-	('app_type:' app_type=EAppType) 
+	('app_type:' app_type=EAppType)
 	('opt_build:'
 		BEGIN
 		opt_build=EOptBuild
@@ -34,23 +34,12 @@ EOptimization:
 		autotuning=EAutotuning
 		END
 	)?  //TODO Force to be mandatory if enable_autotuning = True
-	EOptimizationCases
-//	('ai_training:'
-//		BEGIN
-//		ai_training=EAITraining
-//		END
-//	)? & //TODO Force to be mandatory if app_type = AI_Training
-//	('hpc:'
-//		BEGIN
-//		hpc=EHPC
-//		END
-//	)? //TODO Force to be mandatory if app_type = HPC
+	app_optimization = EOptimizationCases
 ;
 
 EOptimizationCases:
 	EAutotuningCase | EAITrainingCase
 ;
-
 
 EAITrainingCase:
 	('ai_training:'
@@ -88,7 +77,7 @@ EAutotuning:
 		BEGIN
 		input=EAutotuingDSL
 		END
-	) //TODO Add autotunning DSL
+	)
 ;
 
 EAutotuingDSL:
@@ -144,22 +133,7 @@ EAITraining:
 		data=EAITrainingData
 		END
 	)
-	EAITrainingCases
-//	('keras:' 
-//		BEGIN
-//		keras=EKeras
-//		END
-//	)? & //TODO Force to be mandatory if config.AI_Framework = Keras
-//	('tensorflow:' 
-//		BEGIN
-//		tensorflow=ETensorFlow
-//		END
-//	)? & //TODO Force to be mandatory if config.AI_Framework = TensorFlow
-//	('pyTorch:' 
-//		BEGIN
-//		pytorch=EPyTorch
-//		END
-//	)? //TODO Force to be mandatory if config.AI_Framework = PyTorch
+	aitrainingcase = EAITrainingCases
 ;
 
 EAITrainingCases:
@@ -253,27 +227,7 @@ EHPC:
 		data=EHPCData
 		END
 	)
-	EHPCCases
-//	('mpi:' 
-//		BEGIN
-//		mpi=EMPI
-//		END
-//	)? & //TODO Force to be mandatory if config.parallelisation = OPENMP
-//	('openmp:' 
-//		BEGIN
-//		openmp=EOPENMP
-//		END
-//	)? & //TODO Force to be mandatory if config.parallelisation = OPENMP
-//	('openacc:' 
-//		BEGIN
-//		openacc=EOPENACC
-//		END
-//	)? & //TODO Force to be mandatory if config.parallelisation = OPENMP
-//	('opencl:' 
-//		BEGIN
-//		opencl=EOPENCL
-//		END
-//	)? //TODO Force to be mandatory if config.parallelisation = OPENMP
+	hpccase = EHPCCases
 ;
 
 EHPCCases:

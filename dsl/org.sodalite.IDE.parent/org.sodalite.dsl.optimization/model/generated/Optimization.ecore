@@ -14,8 +14,10 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="autotuning" eType="#//EAutotuning"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="app_optimization" eType="#//EOptimizationCases"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EOptimizationCases" eSuperTypes="#//EOptimization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EOptimizationCases"/>
   <eClassifiers xsi:type="ecore:EClass" name="EAITrainingCase" eSuperTypes="#//EOptimizationCases">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ai_training" eType="#//EAITraining"
         containment="true"/>
@@ -51,8 +53,10 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//EAITrainingData"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aitrainingcase" eType="#//EAITrainingCases"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EAITrainingCases" eSuperTypes="#//EAITraining"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EAITrainingCases"/>
   <eClassifiers xsi:type="ecore:EClass" name="EPyTorchCase" eSuperTypes="#//EAITrainingCases">
     <eStructuralFeatures xsi:type="ecore:EReference" name="pytorch" eType="#//EPyTorch"
         containment="true"/>
@@ -101,8 +105,10 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//EHPCData"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hpccase" eType="#//EHPCCases"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EHPCCases" eSuperTypes="#//EHPC"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EHPCCases"/>
   <eClassifiers xsi:type="ecore:EClass" name="EOPENCLCase" eSuperTypes="#//EHPCCases">
     <eStructuralFeatures xsi:type="ecore:EReference" name="opencl" eType="#//EOPENCL"
         containment="true"/>

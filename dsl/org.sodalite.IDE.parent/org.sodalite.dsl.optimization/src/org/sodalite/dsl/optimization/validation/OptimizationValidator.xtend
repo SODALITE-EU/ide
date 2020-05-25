@@ -3,6 +3,9 @@
  */
 package org.sodalite.dsl.optimization.validation
 
+import org.eclipse.xtext.validation.Check
+import org.sodalite.dsl.optimization.optimization.EOptimization
+import org.sodalite.dsl.optimization.optimization.OptimizationPackage
 
 /**
  * This class contains custom validation rules. 
@@ -11,15 +14,15 @@ package org.sodalite.dsl.optimization.validation
  */
 class OptimizationValidator extends AbstractOptimizationValidator {
 	
-//	public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					OptimizationPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	public static val MANDATORY_ELEMENT = 'MandatoryElement'
+
+	@Check
+	def checkMandatoryElement(EOptimization opt) {
+		if (opt.enable_opt_build && opt.opt_build === null) {
+			error('opt_build entity should be present if enable_opt_build is true', 
+					OptimizationPackage.Literals.EOPTIMIZATION__ENABLE_OPT_BUILD,
+					MANDATORY_ELEMENT)
+		}
+	}
 	
 }
