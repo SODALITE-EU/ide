@@ -1,0 +1,391 @@
+/*******************************************************************************
+ * Copyright (c) 2019 Atos Spain S.A.
+ * This program and the accompanying materials
+ * are made available under the terms of the Apache Public License 2.0 (APL2)
+ * which accompanies this distribution, and is available at
+ * https://apache.org/licenses/LICENSE-2.0
+ *
+ * Contributors:
+ *     Jesús Gorroñogoitia - Design and implementation
+ *******************************************************************************/
+grammar org.sodalite.dsl.optimization.Optimization with org.eclipse.xtext.common.Terminals
+
+generate optimization "http://www.sodalite.org/dsl/optimization/Optimization"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Optimization_Model:
+	'optimization:'
+		BEGIN
+		optimization = EOptimization
+		END
+;
+
+EOptimization:
+	('enable_opt_build:' enable_opt_build=BOOLEAN) 
+	('enable_autotuning:' enable_autotuning=BOOLEAN) 
+	('app_type:' app_type=EAppType) 
+	('opt_build:'
+		BEGIN
+		opt_build=EOptBuild
+		END
+	)?  //TODO Force to be mandatory if enable_opt_build = True
+	('autotuning:'
+		BEGIN
+		autotuning=EAutotuning
+		END
+	)?  //TODO Force to be mandatory if enable_autotuning = True
+	EOptimizationCases
+//	('ai_training:'
+//		BEGIN
+//		ai_training=EAITraining
+//		END
+//	)? & //TODO Force to be mandatory if app_type = AI_Training
+//	('hpc:'
+//		BEGIN
+//		hpc=EHPC
+//		END
+//	)? //TODO Force to be mandatory if app_type = HPC
+;
+
+EOptimizationCases:
+	EAutotuningCase | EAITrainingCase
+;
+
+
+EAITrainingCase:
+	('ai_training:'
+		BEGIN
+		ai_training=EAITraining
+		END
+	)  //TODO Force to be mandatory if app_type = AI_Training
+;
+
+EAutotuningCase:
+	('hpc:'
+		BEGIN
+		hpc=EHPC
+		END
+	) //TODO Force to be mandatory if app_type = HPC
+;
+
+EAppType:
+	'AI_Training' | 'HPC' | 'BigData' | 'AI_Inference' ;
+	
+EOptBuild:
+	('CPU_type:' cpu_type=ECPUType) &
+	('acc_type:' acc_type=EACCType)
+;
+
+ECPUType:
+	'Intelx86' | 'ARM' | 'AMD' | 'Power' ;
+	
+EACCType:
+	'NVIDIA-V100' | 'AMD-M100' | 'FPGA-Xilinx' ;
+
+EAutotuning:
+	('tuner:' tuner=ETuner) &
+	('input:' 
+		BEGIN
+		input=EAutotuingDSL
+		END
+	) //TODO Add autotunning DSL
+;
+
+EAutotuingDSL:
+	('parameters:' 
+		BEGIN
+		parameters=EParameters
+		END
+	)
+	('build:' 
+		BEGIN
+		parameters=EBuild
+		END
+	)
+	('run:' 
+		BEGIN
+		parameters=ERun
+		END
+	)
+;
+
+ERun:
+	'command:' command = STRING
+;
+
+EBuild:
+	'command:' command = STRING
+;
+
+EParameters:
+	('typing:' 
+		BEGIN
+		'int:' int=STRING
+		END
+	)
+	('constraints:' 
+		BEGIN
+		'range:' range=STRING
+		END
+	)
+;
+
+ETuner:
+	'CREATA' | 'AUTOTUNE'  ;
+
+EAITraining:
+	('config:'
+		BEGIN 
+		config=EAITrainingConfig
+		END
+	)
+	('data:' 
+		BEGIN
+		data=EAITrainingData
+		END
+	)
+	EAITrainingCases
+//	('keras:' 
+//		BEGIN
+//		keras=EKeras
+//		END
+//	)? & //TODO Force to be mandatory if config.AI_Framework = Keras
+//	('tensorflow:' 
+//		BEGIN
+//		tensorflow=ETensorFlow
+//		END
+//	)? & //TODO Force to be mandatory if config.AI_Framework = TensorFlow
+//	('pyTorch:' 
+//		BEGIN
+//		pytorch=EPyTorch
+//		END
+//	)? //TODO Force to be mandatory if config.AI_Framework = PyTorch
+;
+
+EAITrainingCases:
+	EKerasCase | ETensorFlowCase | EPyTorchCase
+;
+
+EPyTorchCase:
+	('pyTorch:' 
+		BEGIN
+		pytorch=EPyTorch
+		END
+	) //TODO Force to be mandatory if config.AI_Framework = PyTorch
+;
+
+ETensorFlowCase:
+	('tensorflow:' 
+		BEGIN
+		tensorflow=ETensorFlow
+		END
+	)  //TODO Force to be mandatory if config.AI_Framework = TensorFlow
+;
+
+EKerasCase:
+	('keras:' 
+		BEGIN
+		keras=EKeras
+		END
+	)  //TODO Force to be mandatory if config.AI_Framework = Keras
+;
+	
+EAITrainingConfig:
+	('ai_framework:' ai_framework=EAIFramework) &
+	('type:' type=EAITrainingType)? &
+	('distributed_training:' distributed_training=BOOLEAN)? &
+	('layers:' layers=INT)? &
+	('parameters:' parameters=INT)? 
+;	
+
+EAIFramework:
+	'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet';
+	
+EAITrainingType:
+	'Image_classification' | 'object_detection' | 'translation' | 'recommendation' | 'reinforncement_learning';
+
+EAITrainingData:
+	('location:' location=STRING)? &
+	('basedata:' basedata=EBasedata)? &
+	('size:' size=INT)? &
+	('count:' count=INT)? &
+	('etl:' 
+		BEGIN
+		etl=EAITrainingETL
+		END
+	)? 
+;
+
+EBasedata:
+	'Imagenet' | 'CIFAR' | 'MNIST' ;
+
+EAITrainingETL:
+	('prefetch:' prefetch=INT)? &
+	('cache:' cache=INT)? 
+;
+
+EKeras:
+	('version:' version=STRING)? &
+	('backend:' backend=EBackend)? 
+;
+
+EBackend:
+	'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet';
+
+ETensorFlow:
+	('version:' version=STRING)? &
+	('xla:' xla=BOOLEAN)? 
+;
+
+EPyTorch:
+	('version:' version=STRING)? &
+	('glow:' glow=BOOLEAN)? 
+;
+
+EHPC:
+	('config:' 
+		BEGIN
+		config=EHPCConfig
+		END
+	)
+	('data:' 
+		BEGIN
+		data=EHPCData
+		END
+	)
+	EHPCCases
+//	('mpi:' 
+//		BEGIN
+//		mpi=EMPI
+//		END
+//	)? & //TODO Force to be mandatory if config.parallelisation = OPENMP
+//	('openmp:' 
+//		BEGIN
+//		openmp=EOPENMP
+//		END
+//	)? & //TODO Force to be mandatory if config.parallelisation = OPENMP
+//	('openacc:' 
+//		BEGIN
+//		openacc=EOPENACC
+//		END
+//	)? & //TODO Force to be mandatory if config.parallelisation = OPENMP
+//	('opencl:' 
+//		BEGIN
+//		opencl=EOPENCL
+//		END
+//	)? //TODO Force to be mandatory if config.parallelisation = OPENMP
+;
+
+EHPCCases:
+	EMPICase | EOPENMPCase | EOPENACCCase | EOPENCLCase
+;
+
+EOPENCLCase:
+	('opencl:' 
+		BEGIN
+		opencl=EOPENCL
+		END
+	) //TODO Force to be mandatory if config.parallelisation = OPENMP
+;
+
+EOPENACCCase:
+	('openacc:' 
+		BEGIN
+		openacc=EOPENACC
+		END
+	) //TODO Force to be mandatory if config.parallelisation = OPENMP
+;
+
+EOPENMPCase:
+	('openmp:' 
+		BEGIN
+		openmp=EOPENMP
+		END
+	) //TODO Force to be mandatory if config.parallelisation = OPENMP
+;
+
+EMPICase:
+	('mpi:' 
+		BEGIN
+		mpi=EMPI
+		END
+	) //TODO Force to be mandatory if config.parallelisation = OPENMP
+;
+
+EHPCConfig:
+	'parallelisation:' ai_framework=EParallelisation
+;	
+
+EParallelisation:
+	'MPI' | 'OPENMP' | 'OPENACC' | 'OPENCL' ;
+	
+EHPCData:
+	('location:' location=STRING)? &
+	('basedata:' basedata=EHPCBasedata)? &
+	('size:' size=INT)? &
+	('count:' count=INT)? &
+	('etl:'
+		BEGIN 
+		etl=EHPCETL
+		END
+	)?
+;
+
+EHPCETL:
+	('prefetch:' prefetch=BOOLEAN)? &
+	('cache:' cache=BOOLEAN)? 
+;
+
+EHPCBasedata:
+	'IMAGE' | 'RESTART' ;
+
+EMPI:
+	('library:' library=EMPILibrary) &
+	('version:' version=STRING)? &
+	('scaling_efficiency:' scaling_efficiency=RealValue)? & 
+	('core_subscription:' core_subscription=INT)? &
+	('message_size:' message_size=EMPIMessageSize)? 
+;
+
+EMPILibrary:
+	'mvapch' | 'opnmpi' ;
+	
+EMPIMessageSize:
+	'small' | 'medium' | 'large';
+
+EOPENMP:
+	('number_of_threads:' number_of_threads=INT) &
+	('scaling_efficiency:' scaling_efficiency=RealValue)? & 
+	('affinity:' affinity=EOPENAffinity)? 
+;
+
+EOPENAffinity:
+	'block' | 'simple' ;
+	
+EOPENACC:
+	('compiler:' compiler=ECompiler) &
+	('version:' version=STRING)? &
+	('number_of_acc:' number_of_acc=INT)? 
+;
+
+EOPENCL:
+	('compiler:' compiler=ECompiler) &
+	('version:' version=STRING)? &
+	('number_of_acc:' number_of_acc=INT)? 
+;
+
+ECompiler:
+	'pgi' | 'cray' ;
+
+
+	
+//Positional blocks delimited with indentation
+terminal BEGIN: 'synthetic:BEGIN';
+terminal END: 'synthetic:END';
+
+terminal BOOLEAN returns ecore::EBoolean:
+	'true' | 'false';
+	
+REAL hidden(): INT ? '.' (EXT_INT | INT);
+terminal EXT_INT: INT ('e'|'E')('-'|'+') INT;
+RealValue returns ecore::EDoubleObject: REAL ;

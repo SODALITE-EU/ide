@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.sodalite.dsl.optimization
+Bundle-ManifestVersion: 2
+Bundle-Name: org.sodalite.dsl.optimization
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.sodalite.dsl.optimization; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.sodalite.dsl.optimization.optimization,
+ org.sodalite.dsl.optimization.scoping,
+ org.sodalite.dsl.optimization.optimization.util,
+ org.sodalite.dsl.optimization.parser.antlr,
+ org.sodalite.dsl.optimization.generator,
+ org.sodalite.dsl.optimization.optimization.impl,
+ org.sodalite.dsl.optimization.validation,
+ org.sodalite.dsl.optimization,
+ org.sodalite.dsl.optimization.parser.antlr.lexer,
+ org.sodalite.dsl.optimization.parser.antlr.internal,
+ org.sodalite.dsl.optimization.services,
+ org.sodalite.dsl.optimization.serializer
+Import-Package: org.apache.log4j

@@ -111,8 +111,8 @@ class AADMGenerator extends AbstractGenerator {
 	«req.compile»
 	«ENDFOR»
 	
-	«FOR req:r.allContents.toIterable.filter(ECapabilityAssignment)»
-	«req.compile»
+	«FOR cap:r.allContents.toIterable.filter(ECapabilityAssignment)»
+	«cap.compile»
 	«ENDFOR»
 	
 	«FOR f:r.allContents.toIterable.filter(ENodeTemplate)»
@@ -244,7 +244,7 @@ class AADMGenerator extends AbstractGenerator {
 		
 	def getFilename(URI uri) {
 		var filename = uri.toString
-		filename = filename.substring(filename.lastIndexOf('/')+1).replace('aadm', 'ttl')
+		filename = filename.substring(filename.lastIndexOf('/')+1).concat('.ttl')
 		return filename 
 	}
 		

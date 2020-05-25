@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.sodalite.org/dsl/optimization/Optimization"
+			class = "org.sodalite.dsl.optimization.optimization.OptimizationPackage"
+			genModel = "model/generated/Optimization.genmodel" />
+	</extension>
+</plugin>

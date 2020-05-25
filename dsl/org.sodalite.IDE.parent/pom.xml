@@ -24,7 +24,7 @@
 		<module>org.sodalite.dsl.AADM.design</module>
 		<module>org.sodalite.dsl.AADM.ide</module>
 		<module>org.sodalite.dsl.AADM.ui</module>
-		<module>org.sodalite.dsl.AADM.web</module>
+		<!--<module>org.sodalite.dsl.AADM.web</module>-->
 		<module>org.sodalite.IDE.target</module>
 		<module>org.sodalite.dsl.AADM.feature</module>
 		<module>org.sodalite.IDE.repository</module>
@@ -35,6 +35,10 @@
 		<module>org.sodalite.dsl.RM.ui</module>
 		<module>org.sodalite.dsl.kb_reasoner_client</module>
 		<module>org.sodalite.dsl.RM.feature</module>
+		<module>org.sodalite.dsl.optimization</module>
+		<module>org.sodalite.dsl.optimization.feature</module>
+		<module>org.sodalite.dsl.optimization.ide</module>
+		<module>org.sodalite.dsl.optimization.ui</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
