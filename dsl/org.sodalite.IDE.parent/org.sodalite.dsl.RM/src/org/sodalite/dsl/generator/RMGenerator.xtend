@@ -443,7 +443,7 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(a, "name", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "get_property" ;
+	  exchange:name "get_attribute" ;
 	  «IF a.attribute.attribute !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "attribute")» ;
 	  «ENDIF»	
@@ -496,6 +496,7 @@ class RMGenerator extends AbstractGenerator {
 	:DataType_«data_type_counter++»
 	  rdf:type exchange:DataType ;
 	  exchange:name "«d.name»" ;
+	  exchange:derivesFrom "«d.data.superType.name»" ;
 	  «IF d.data.description !== null»
 	  exchange:description "«d.data.description»" ;
 	  «ENDIF»
