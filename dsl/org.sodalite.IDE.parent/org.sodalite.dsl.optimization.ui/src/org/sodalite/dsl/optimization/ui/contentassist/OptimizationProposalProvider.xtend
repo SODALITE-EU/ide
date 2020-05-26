@@ -3,10 +3,323 @@
  */
 package org.sodalite.dsl.optimization.ui.contentassist
 
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.jface.text.contentassist.ICompletionProposal
+import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import org.eclipse.xtext.Keyword
+import org.eclipse.xtext.impl.KeywordImpl
+import org.eclipse.xtext.ParserRule
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 class OptimizationProposalProvider extends AbstractOptimizationProposalProvider {
+	
+	// this override filters the keywords for which to create content assist proposals
+	override void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+		ICompletionProposalAcceptor acceptor) {
+		System.out.println("keyword: " + keyword.value)
+		//super.completeKeyword(keyword, contentAssistContext, acceptor)
+		_completeKeyword(keyword, contentAssistContext, acceptor);
+	}
+
+	def _completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+		ICompletionProposalAcceptor acceptor) {
+		val ICompletionProposal proposal = createCompletionProposal(keyword.getValue(),
+			getKeywordDisplayString(keyword), getImage(keyword), contentAssistContext);
+		proposal.additionalProposalInfo = getAdditionalProposalInfo(keyword)
+		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
+		acceptor.accept(proposal);
+	}
+
+	def setAdditionalProposalInfo(ICompletionProposal proposal, String info) {
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setAdditionalProposalInfo(info);
+		}
+	}
+	
+	def String getAdditionalProposalInfo(Keyword keyword) {
+		if (keyword instanceof KeywordImpl) {
+			val keywordImpl = keyword as KeywordImpl
+			val rule = findParserRule (keywordImpl)
+			
+			//EOptimization
+			if (rule.name == "EOptimization" && keyword.value == "enable_opt_build:")
+				return "Enable target specific optimised build container"
+			else if (rule.name == "EOptimization" && keyword.value == "enable_autotuning:")
+				return "Enable autotuning node if this is true"
+			else if (rule.name == "EOptimization" && keyword.value == "app_type:")
+				return "Specify the type of application; Enable application node based on the application type"
+			
+			//EOptBuild
+			else if (rule.name == "EOptBuild" && keyword.value == "cpu_type:")
+				return "Specify the CPU architecture"
+			else if (rule.name == "EOptBuild" && keyword.value == "acc_type:")
+				return "Specify the accelerator architecture"
+				
+			//EAutotuning
+			else if (rule.name == "EAutotuning" && keyword.value == "tuner:")
+				return "Specify the autotuning tool to be used"
+			else if (rule.name == "EAutotuning" && keyword.value == "input:")
+				return "DSL or input text for the autotuning tool"
+				
+			//EAITrainingConfig
+			else if (rule.name == "EAITrainingConfig" && keyword.value == "ai_framework:")
+				return "Specify the AI framework to support"
+			else if (rule.name == "EAITrainingConfig" && keyword.value == "type:")
+				return "Specify the type of AI training network"
+			else if (rule.name == "EAITrainingConfig" && keyword.value == "distributed_training:")
+				return "Enable distributed training"
+			else if (rule.name == "EAITrainingConfig" && keyword.value == "layers:")
+				return "specify the number of layers"
+			else if (rule.name == "EAITrainingConfig" && keyword.value == "parameters:")
+				return "Specify the numer of model parameters"
+				
+			//EAITrainingData
+			else if (rule.name == "EAITrainingData" && keyword.value == "location:")
+				return "Specify the data location"
+			else if (rule.name == "EAITrainingData" && keyword.value == "basedata:")
+				return "Specify the type of data"
+			else if (rule.name == "EAITrainingData" && keyword.value == "size:")
+				return "Size of single data element"
+			else if (rule.name == "EAITrainingData" && keyword.value == "count:")
+				return "Number of data elements"
+				
+			//EAITrainingETL
+			else if (rule.name == "EAITrainingETL" && keyword.value == "prefetch:")
+				return "Prefetch size to use"
+			else if (rule.name == "EAITrainingETL" && keyword.value == "cache:")
+				return "Caching size to use"
+				
+			//EKeras
+			else if (rule.name == "EKeras" && keyword.value == "version:")
+				return "Version of Keras"
+			else if (rule.name == "EKeras" && keyword.value == "backend:")
+				return "Keras backend to use"
+			
+			//ETensorFlow
+			else if (rule.name == "ETensorFlow" && keyword.value == "version:")
+				return "Specify the TensorFlow version to use, default version will be used if not specified"
+			else if (rule.name == "ETensorFlow" && keyword.value == "xla:")
+				return "Enable XLA compiler for optimisation"
+				
+			//EPyTorch
+			else if (rule.name == "EPyTorch" && keyword.value == "version:")
+				return "Specify the EPyTorch version to use, default version will be used if not specified"
+			else if (rule.name == "EPyTorch" && keyword.value == "glow:")
+				return "Enable GLOW compiler for optimisation"
+				
+			//EHPCConfig
+			else if (rule.name == "EHPCConfig" && keyword.value == "parallelisation:")
+				return "Select the application parallelisation strategy. Multiple selections possible"
+
+			//EHPCData
+			else if (rule.name == "EHPCData" && keyword.value == "location:")
+				return "Specify the data location"
+			else if (rule.name == "EHPCData" && keyword.value == "basedata:")
+				return "Specify the type of data"
+			else if (rule.name == "EHPCData" && keyword.value == "size:")
+				return "Size of single data element"
+			else if (rule.name == "EHPCData" && keyword.value == "count:")
+				return "Number of data elements"
+
+			//EMPI
+			else if (rule.name == "EMPI" && keyword.value == "library:")
+				return "Specify the MPI library to use"
+			else if (rule.name == "EMPI" && keyword.value == "version:")
+				return "Specify the MPI version to use, default used if not specified"
+			else if (rule.name == "EMPI" && keyword.value == "scaling_efficiency:")
+				return "Specify the scaling_efficiency to use, default used if not specified"
+			else if (rule.name == "EMPI" && keyword.value == "core_subscription:")
+				return "Specify the core subscription to use, default used if not specified"
+			else if (rule.name == "EMPI" && keyword.value == "message_size:")
+				return "MPI message size, default used if not specified"
+				
+			//EOPENMP
+			else if (rule.name == "EOPENMP" && keyword.value == "number_of_threads:")
+				return "Specify the number of threads to use"
+			else if (rule.name == "EOPENMP" && keyword.value == "affinity:")
+				return "Specify the thread affinity to use, default used if not specified"
+			else if (rule.name == "EOPENMP" && keyword.value == "scaling_efficiency:")
+				return "Specify the scaling_efficiency to use, default used if not specified"
+				
+			//EOPENACC
+			else if (rule.name == "EOPENACC" && keyword.value == "version:")
+				return "Specify the OPENACC version to use, default used if not specified"
+			else if (rule.name == "EOPENACC" && keyword.value == "compiler:")
+				return "Specify the compiler to use"
+			else if (rule.name == "EOPENACC" && keyword.value == "number_of_acc:")
+				return "Specify the number of accelerators to be used, default used if not specified"
+
+			//OPENCL
+			else if (rule.name == "EOPENACC" && keyword.value == "version:")
+				return "Specify the OPENACC version to use, default used if not specified"
+			else if (rule.name == "EOPENACC" && keyword.value == "compiler:")
+				return "Specify the compiler to use"
+			else if (rule.name == "EOPENACC" && keyword.value == "number_of_acc:")
+				return "Specify the number of accelerators to be used, default used if not specified"
+
+			
+			else
+				return ""
+		}
+	}
+	
+	def ParserRule findParserRule (EObject obj){
+		if (obj === null)
+			return null
+		else if (obj instanceof ParserRule)
+			return obj as ParserRule
+		else
+			return findParserRule (obj.eContainer) 
+	}
+
+	override void completeEAITrainingETL_Prefetch(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createBooleanCompletionProposal(context, acceptor);
+	}
+	
+
+	override void completeEOptimization_Enable_opt_build(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createBooleanCompletionProposal(context, acceptor);
+	}
+
+	override void completeEOptimization_Enable_autotuning(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createBooleanCompletionProposal(context, acceptor);
+	}
+	
+	override void completeEAITrainingConfig_Distributed_training(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createBooleanCompletionProposal(context, acceptor);
+	}
+	
+	override void completeETensorFlow_Xla(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createBooleanCompletionProposal(context, acceptor);
+	}
+	
+	override void completeEPyTorch_Glow(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createBooleanCompletionProposal(context, acceptor);
+	}
+	
+	override void completeEOptimization_App_type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("AI_Training", "AI_Training", context, "", acceptor);
+		createNonEditableCompletionProposal ("HPC", "HPC", context, "", acceptor);
+		createNonEditableCompletionProposal ("BigData", "BigData", context, "BigData not supported in this version", acceptor);
+		createNonEditableCompletionProposal ("AI_Inference", "AI_Inference", context, "AI_Inference not supported in this version", acceptor);
+	}
+	
+	override void completeEOptBuild_Cpu_type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("Intelx86", "Intelx86", context, "", acceptor);
+		createNonEditableCompletionProposal ("ARM", "ARM", context, "", acceptor);
+		createNonEditableCompletionProposal ("AMD", "AMD", context, "", acceptor);
+		createNonEditableCompletionProposal ("Power", "Power", context, "", acceptor);
+	}
+	
+	override void completeEOptBuild_Acc_type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("NVIDIA-V100", "NVIDIA-V100", context, "", acceptor);
+		createNonEditableCompletionProposal ("AMD-M100", "AMD-M100", context, "", acceptor);
+		createNonEditableCompletionProposal ("FPGA-Xilinx", "FPGA-Xilinx", context, "", acceptor);
+	}
+	
+	override void completeEAutotuning_Tuner(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("CREATA", "CREATA", context, "", acceptor);
+		createNonEditableCompletionProposal ("AUTOTUNE", "AUTOTUNE", context, "", acceptor);
+	}
+	
+	override completeEAITrainingConfig_Ai_framework(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("TensorFlow", "TensorFlow", context, "", acceptor);
+		createNonEditableCompletionProposal ("PyTorch", "PyTorch", context, "", acceptor);
+		createNonEditableCompletionProposal ("Keras", "Keras", context, "", acceptor);
+		createNonEditableCompletionProposal ("CNTK", "CNTK", context, "CNTK not supported in this version", acceptor);
+		createNonEditableCompletionProposal ("MXNet", "MXNet", context, "MXNet not supported in this version", acceptor);
+	}
+	
+	override void completeEAITrainingConfig_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("Image_classification", "Image_classification", context, "", acceptor);
+		createNonEditableCompletionProposal ("object_detection", "object_detection", context, "", acceptor);
+		createNonEditableCompletionProposal ("translation", "translation", context, "", acceptor);
+		createNonEditableCompletionProposal ("recommendation", "recommendation", context, "", acceptor);
+		createNonEditableCompletionProposal ("reinforncement_learning", "reinforncement_learning", context, "", acceptor);
+	}
+	
+	override void completeEAITrainingData_Basedata(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("Imagenet", "Imagenet", context, "", acceptor);
+		createNonEditableCompletionProposal ("CIFAR", "CIFAR", context, "", acceptor);
+		createNonEditableCompletionProposal ("MNIST", "MNIST", context, "", acceptor);	
+	}
+	
+	override void completeEKeras_Backend(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("TensorFlow", "TensorFlow", context, "", acceptor);
+		createNonEditableCompletionProposal ("PyTorch", "PyTorch", context, "", acceptor);
+		createNonEditableCompletionProposal ("Keras", "Keras", context, "", acceptor);
+		createNonEditableCompletionProposal ("CNTK", "CNTK", context, "CNTK not supported in this version", acceptor);
+		createNonEditableCompletionProposal ("MXNet", "MXNet", context, "MXNet not supported in this version", acceptor);
+	}
+	
+	override void completeEHPCConfig_Parallelisation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("MPI", "MPI", context, "", acceptor);
+		createNonEditableCompletionProposal ("OPENMP", "OPENMP", context, "", acceptor);
+		createNonEditableCompletionProposal ("OPENACC", "OPENACC", context, "", acceptor);
+		createNonEditableCompletionProposal ("OPENCL", "OPENCL", context, "", acceptor);
+	}
+	
+	override void completeEHPCData_Basedata(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("IMAGE", "IMAGE", context, "", acceptor);
+		createNonEditableCompletionProposal ("RESTART", "RESTART", context, "", acceptor);
+	}
+	
+	override void completeEMPI_Library(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("mvapch", "mvapch", context, "", acceptor);
+		createNonEditableCompletionProposal ("opnmpi", "opnmpi", context, "", acceptor);
+	}
+	
+	override void completeEMPI_Message_size(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("small", "small", context, "", acceptor);
+		createNonEditableCompletionProposal ("medium", "medium", context, "", acceptor);
+		createNonEditableCompletionProposal ("large", "large", context, "", acceptor);	
+	}
+	
+	override void completeEOPENMP_Affinity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("block", "block", context, "", acceptor);
+		createNonEditableCompletionProposal ("simple", "simple", context, "", acceptor);	
+	}
+	
+	override void completeEOPENCL_Compiler(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("pgi", "pgi", context, "", acceptor);
+		createNonEditableCompletionProposal ("cray", "cray", context, "", acceptor);	
+	}
+
+	protected def void createBooleanCompletionProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("true", "true", context, "", acceptor);
+		createNonEditableCompletionProposal ("false", "false", context, "", acceptor);
+	}	
+
+	protected def void createNonEditableCompletionProposal(String proposalText, String displayText,
+		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setAdditionalProposalInfo(additionalProposalInfo);
+			configurable.setAutoInsertable(false);
+		}
+		acceptor.accept(proposal)
+	}
+	
+	protected def void createEditableCompletionProposal(String proposalText, String displayText,
+		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setSelectionStart(configurable.getReplacementOffset());
+			configurable.setSelectionLength(proposalText.length());
+			configurable.setAutoInsertable(false);
+			configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+			configurable.setAdditionalProposalInfo(additionalProposalInfo);
+		}
+		acceptor.accept(proposal)
+	}
+
 }

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOptimizationParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Reinforncement_learning", "Distributed_training", "Image_classification", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "Message_size", "Optimization", "AI_Inference", "Ai_training", "Constraints", "AI_Training", "FPGAXilinx", "NVIDIAV100", "Autotuning", "Parameters", "Tensorflow", "Translation", "TensorFlow", "Opt_build", "CPU_type", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Location", "Prefetch", "AMDM100", "AUTOTUNE", "Imagenet", "Intelx86", "Backend", "Command", "Library", "Openacc", "PyTorch_1", "Version", "BigData", "OPENACC", "PyTorch", "RESTART", "Config", "Layers", "Opencl", "Openmp", "Typing", "CREATA", "OPENCL", "OPENMP", "Build", "Cache", "Count", "Input", "Keras_1", "Medium", "Mvapch", "Opnmpi", "Range", "Simple", "Tuner", "CIFAR", "IMAGE", "Keras", "MNIST", "MXNet", "Power", "Block", "Data", "Glow", "Large", "Size", "Small", "Type", "CNTK", "Cray", "Etl", "Hpc", "Int", "Mpi", "Run", "Xla", "AMD", "ARM", "HPC", "MPI", "Pgi", "FullStop", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Reinforncement_learning", "Distributed_training", "Image_classification", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "Message_size", "Optimization", "AI_Inference", "Ai_training", "Constraints", "AI_Training", "FPGAXilinx", "NVIDIAV100", "Autotuning", "Parameters", "Tensorflow", "Translation", "TensorFlow", "Opt_build", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Cpu_type", "Location", "Prefetch", "AMDM100", "AUTOTUNE", "Imagenet", "Intelx86", "Backend", "Command", "Library", "Openacc", "PyTorch_1", "Version", "BigData", "OPENACC", "PyTorch", "RESTART", "Config", "Layers", "Opencl", "Openmp", "Typing", "CREATA", "OPENCL", "OPENMP", "Build", "Cache", "Count", "Input", "Keras_1", "Medium", "Mvapch", "Opnmpi", "Range", "Simple", "Tuner", "CIFAR", "IMAGE", "Keras", "MNIST", "MXNet", "Power", "Block", "Data", "Glow", "Large", "Size", "Small", "Type", "CNTK", "Cray", "Etl", "Hpc", "Int", "Mpi", "Run", "Xla", "AMD", "ARM", "HPC", "MPI", "Pgi", "FullStop", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int Tensorflow=27;
     public static final int CREATA=58;
@@ -63,12 +63,13 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final int Large=81;
     public static final int MNIST=75;
     public static final int Simple=70;
+    public static final int Cpu_type=36;
     public static final int AUTOTUNE=40;
     public static final int Opnmpi=68;
     public static final int Ai_training=20;
     public static final int OPENACC=50;
     public static final int Layers=54;
-    public static final int Basedata=35;
+    public static final int Basedata=34;
     public static final int TensorFlow=29;
     public static final int FullStop=98;
     public static final int AI_Training=22;
@@ -96,13 +97,13 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final int NVIDIAV100=24;
     public static final int Object_detection=12;
     public static final int AMDM100=39;
-    public static final int Compiler=36;
+    public static final int Compiler=35;
     public static final int Typing=57;
     public static final int Openmp=56;
     public static final int Range=69;
     public static final int Constraints=21;
     public static final int Medium=66;
-    public static final int Affinity=33;
+    public static final int Affinity=32;
     public static final int Block=78;
     public static final int Library=45;
     public static final int Cache=62;
@@ -113,10 +114,9 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final int RULE_STRING=105;
     public static final int Xla=92;
     public static final int Optimization=18;
-    public static final int Acc_type=32;
-    public static final int App_type=34;
+    public static final int Acc_type=31;
+    public static final int App_type=33;
     public static final int Int=89;
-    public static final int CPU_type=31;
     public static final int RULE_SL_COMMENT=107;
     public static final int Intelx86=42;
     public static final int RESTART=52;
@@ -215,12 +215,12 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     		tokenNameToValue.put("Openacc", "'openacc:'");
     		tokenNameToValue.put("PyTorch_1", "'pyTorch:'");
     		tokenNameToValue.put("Version", "'version:'");
-    		tokenNameToValue.put("CPU_type", "'CPU_type:'");
     		tokenNameToValue.put("Acc_type", "'acc_type:'");
     		tokenNameToValue.put("Affinity", "'affinity:'");
     		tokenNameToValue.put("App_type", "'app_type:'");
     		tokenNameToValue.put("Basedata", "'basedata:'");
     		tokenNameToValue.put("Compiler", "'compiler:'");
+    		tokenNameToValue.put("Cpu_type", "'cpu_type:'");
     		tokenNameToValue.put("Location", "'location:'");
     		tokenNameToValue.put("Prefetch", "'prefetch:'");
     		tokenNameToValue.put("TensorFlow", "'TensorFlow'");
@@ -8534,21 +8534,21 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EOptBuild__Group_0__0__Impl"
-    // InternalOptimizationParser.g:2812:1: rule__EOptBuild__Group_0__0__Impl : ( CPU_type ) ;
+    // InternalOptimizationParser.g:2812:1: rule__EOptBuild__Group_0__0__Impl : ( Cpu_type ) ;
     public final void rule__EOptBuild__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:2816:1: ( ( CPU_type ) )
-            // InternalOptimizationParser.g:2817:1: ( CPU_type )
+            // InternalOptimizationParser.g:2816:1: ( ( Cpu_type ) )
+            // InternalOptimizationParser.g:2817:1: ( Cpu_type )
             {
-            // InternalOptimizationParser.g:2817:1: ( CPU_type )
-            // InternalOptimizationParser.g:2818:2: CPU_type
+            // InternalOptimizationParser.g:2817:1: ( Cpu_type )
+            // InternalOptimizationParser.g:2818:2: Cpu_type
             {
-             before(grammarAccess.getEOptBuildAccess().getCPU_typeKeyword_0_0()); 
-            match(input,CPU_type,FOLLOW_2); 
-             after(grammarAccess.getEOptBuildAccess().getCPU_typeKeyword_0_0()); 
+             before(grammarAccess.getEOptBuildAccess().getCpu_typeKeyword_0_0()); 
+            match(input,Cpu_type,FOLLOW_2); 
+             after(grammarAccess.getEOptBuildAccess().getCpu_typeKeyword_0_0()); 
 
             }
 
@@ -22320,7 +22320,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             int alt22=2;
             int LA22_0 = input.LA(1);
 
-            if ( LA22_0 == CPU_type && getUnorderedGroupHelper().canSelect(grammarAccess.getEOptBuildAccess().getUnorderedGroup(), 0) ) {
+            if ( LA22_0 == Cpu_type && getUnorderedGroupHelper().canSelect(grammarAccess.getEOptBuildAccess().getUnorderedGroup(), 0) ) {
                 alt22=1;
             }
             else if ( LA22_0 == Acc_type && getUnorderedGroupHelper().canSelect(grammarAccess.getEOptBuildAccess().getUnorderedGroup(), 1) ) {
@@ -22467,7 +22467,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             int alt23=2;
             int LA23_0 = input.LA(1);
 
-            if ( LA23_0 == CPU_type && getUnorderedGroupHelper().canSelect(grammarAccess.getEOptBuildAccess().getUnorderedGroup(), 0) ) {
+            if ( LA23_0 == Cpu_type && getUnorderedGroupHelper().canSelect(grammarAccess.getEOptBuildAccess().getUnorderedGroup(), 0) ) {
                 alt23=1;
             }
             else if ( LA23_0 == Acc_type && getUnorderedGroupHelper().canSelect(grammarAccess.getEOptBuildAccess().getUnorderedGroup(), 1) ) {
@@ -30858,11 +30858,11 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000200000000L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000042100000L,0x0000000001000000L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000000L,0x0000002000000000L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0002000000480000L,0x0000000080000000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000180000000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000001080000000L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000081L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0020000000000000L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000040000000000L,0x0000000060002000L});
@@ -30880,7 +30880,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000800008000000L,0x0000000000000002L});
     public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0040000004010020L,0x0000000000100000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x8000002800000000L,0x0000000000840000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x8000002400000000L,0x0000000000840000L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0001000000000000L,0x0000000000010000L});
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0001000000000000L,0x0000000010000000L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0001080000000000L});
@@ -30891,8 +30891,8 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x4000004000000000L});
     public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0180400000000000L,0x0000000004000000L});
     public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0001001000004000L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000200000480L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0001000800004000L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000100000480L});
     public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0001200000020180L});
     public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x1804000000000000L,0x0000000100000000L});
     public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0010000000000000L,0x0000000000000200L});
@@ -30902,16 +30902,16 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000000000000000L,0x0000000000004040L});
     public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000000000000000L,0x0000000200400000L});
     public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000000L,0x000000C000000000L});
-    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000180000002L});
+    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000001080000002L});
     public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000081L});
     public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0040000004010022L,0x0000000000100000L});
-    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x8000002800000002L,0x0000000000840000L});
+    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x8000002400000002L,0x0000000000840000L});
     public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x4000004000000002L});
     public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0001080000000002L});
     public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0001000000000002L,0x0000000010000000L});
     public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0001000000000002L,0x0000000000010000L});
     public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0001200000020182L});
-    public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000000200000482L});
-    public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0001001000004002L});
+    public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000000100000482L});
+    public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0001000800004002L});
 
 }

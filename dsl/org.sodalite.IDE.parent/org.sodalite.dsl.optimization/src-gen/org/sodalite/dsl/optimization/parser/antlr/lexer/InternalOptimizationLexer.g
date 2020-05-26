@@ -65,8 +65,6 @@ TensorFlow : 'TensorFlow';
 
 Opt_build : 'opt_build:';
 
-CPU_type : 'CPU_type:';
-
 Acc_type : 'acc_type:';
 
 Affinity : 'affinity:';
@@ -76,6 +74,8 @@ App_type : 'app_type:';
 Basedata : 'basedata:';
 
 Compiler : 'compiler:';
+
+Cpu_type : 'cpu_type:';
 
 Location : 'location:';
 

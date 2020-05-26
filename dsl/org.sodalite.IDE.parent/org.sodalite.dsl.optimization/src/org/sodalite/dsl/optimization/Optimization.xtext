@@ -61,7 +61,7 @@ EAppType:
 	'AI_Training' | 'HPC' | 'BigData' | 'AI_Inference' ;
 	
 EOptBuild:
-	('CPU_type:' cpu_type=ECPUType) &
+	('cpu_type:' cpu_type=ECPUType) &
 	('acc_type:' acc_type=EACCType)
 ;
 
@@ -267,7 +267,7 @@ EMPICase:
 ;
 
 EHPCConfig:
-	'parallelisation:' parallelisation=EParallelisation
+	'parallelisation:' parallelisation=EParallelisation //TODO Multiple selections are supported
 ;	
 
 EParallelisation:

@@ -485,9 +485,9 @@ ruleEOptBuild returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getEOptBuildAccess().getUnorderedGroup(), 0);
 				}
-							({true}?=>(otherlv_1=CPU_type
+							({true}?=>(otherlv_1=Cpu_type
 							{
-								newLeafNode(otherlv_1, grammarAccess.getEOptBuildAccess().getCPU_typeKeyword_0_0());
+								newLeafNode(otherlv_1, grammarAccess.getEOptBuildAccess().getCpu_typeKeyword_0_0());
 							}
 							(
 								(

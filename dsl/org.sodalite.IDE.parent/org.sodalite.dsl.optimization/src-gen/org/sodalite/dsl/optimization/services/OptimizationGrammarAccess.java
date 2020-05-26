@@ -300,7 +300,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOptBuild");
 		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
-		private final Keyword cCPU_typeKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Keyword cCpu_typeKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cCpu_typeAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
 		private final RuleCall cCpu_typeECPUTypeParserRuleCall_0_1_0 = (RuleCall)cCpu_typeAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
@@ -309,17 +309,17 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAcc_typeEACCTypeParserRuleCall_1_1_0 = (RuleCall)cAcc_typeAssignment_1_1.eContents().get(0);
 		
 		//EOptBuild:
-		//	'CPU_type:' cpu_type=ECPUType & 'acc_type:' acc_type=EACCType;
+		//	'cpu_type:' cpu_type=ECPUType & 'acc_type:' acc_type=EACCType;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'CPU_type:' cpu_type=ECPUType & 'acc_type:' acc_type=EACCType
+		//'cpu_type:' cpu_type=ECPUType & 'acc_type:' acc_type=EACCType
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//'CPU_type:' cpu_type=ECPUType
+		//'cpu_type:' cpu_type=ECPUType
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//'CPU_type:'
-		public Keyword getCPU_typeKeyword_0_0() { return cCPU_typeKeyword_0_0; }
+		//'cpu_type:'
+		public Keyword getCpu_typeKeyword_0_0() { return cCpu_typeKeyword_0_0; }
 		
 		//cpu_type=ECPUType
 		public Assignment getCpu_typeAssignment_0_1() { return cCpu_typeAssignment_0_1; }
@@ -2432,7 +2432,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EOptBuild:
-	//	'CPU_type:' cpu_type=ECPUType & 'acc_type:' acc_type=EACCType;
+	//	'cpu_type:' cpu_type=ECPUType & 'acc_type:' acc_type=EACCType;
 	public EOptBuildElements getEOptBuildAccess() {
 		return pEOptBuild;
 	}

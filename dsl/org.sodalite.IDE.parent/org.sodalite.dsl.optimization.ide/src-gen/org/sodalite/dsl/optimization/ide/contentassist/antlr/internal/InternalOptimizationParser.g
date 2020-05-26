@@ -91,12 +91,12 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Openacc", "'openacc:'");
 		tokenNameToValue.put("PyTorch_1", "'pyTorch:'");
 		tokenNameToValue.put("Version", "'version:'");
-		tokenNameToValue.put("CPU_type", "'CPU_type:'");
 		tokenNameToValue.put("Acc_type", "'acc_type:'");
 		tokenNameToValue.put("Affinity", "'affinity:'");
 		tokenNameToValue.put("App_type", "'app_type:'");
 		tokenNameToValue.put("Basedata", "'basedata:'");
 		tokenNameToValue.put("Compiler", "'compiler:'");
+		tokenNameToValue.put("Cpu_type", "'cpu_type:'");
 		tokenNameToValue.put("Location", "'location:'");
 		tokenNameToValue.put("Prefetch", "'prefetch:'");
 		tokenNameToValue.put("TensorFlow", "'TensorFlow'");
@@ -2815,9 +2815,9 @@ rule__EOptBuild__Group_0__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEOptBuildAccess().getCPU_typeKeyword_0_0()); }
-	CPU_type
-	{ after(grammarAccess.getEOptBuildAccess().getCPU_typeKeyword_0_0()); }
+	{ before(grammarAccess.getEOptBuildAccess().getCpu_typeKeyword_0_0()); }
+	Cpu_type
+	{ after(grammarAccess.getEOptBuildAccess().getCpu_typeKeyword_0_0()); }
 )
 ;
 finally {
