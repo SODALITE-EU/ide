@@ -95,12 +95,12 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//	END)? ('autotuning:'
 		//	BEGIN
 		//	autotuning=EAutotuning
-		//	END)? //TODO Force to be mandatory if enable_autotuning = True
+		//	END)?
 		//	app_optimization=EOptimizationCases;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//('enable_opt_build:' enable_opt_build=BOOLEAN) ('enable_autotuning:' enable_autotuning=BOOLEAN) ('app_type:'
-		//app_type=EAppType) ('opt_build:' BEGIN opt_build=EOptBuild END)? ('autotuning:' BEGIN autotuning=EAutotuning END)? //TODO Force to be mandatory if enable_autotuning = True
+		//app_type=EAppType) ('opt_build:' BEGIN opt_build=EOptBuild END)? ('autotuning:' BEGIN autotuning=EAutotuning END)?
 		//app_optimization=EOptimizationCases
 		public Group getGroup() { return cGroup; }
 		
@@ -176,7 +176,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//END
 		public RuleCall getENDTerminalRuleCall_4_3() { return cENDTerminalRuleCall_4_3; }
 		
-		////TODO Force to be mandatory if enable_autotuning = True
 		//app_optimization=EOptimizationCases
 		public Assignment getApp_optimizationAssignment_5() { return cApp_optimizationAssignment_5; }
 		
@@ -186,21 +185,21 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EOptimizationCasesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOptimizationCases");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cEAutotuningCaseParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cEAITrainingCaseParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEAITrainingCaseParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEHPCCaseParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//EOptimizationCases:
-		//	EAutotuningCase | EAITrainingCase;
+		//	EAITrainingCase | EHPCCase;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EAutotuningCase | EAITrainingCase
+		//EAITrainingCase | EHPCCase
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//EAutotuningCase
-		public RuleCall getEAutotuningCaseParserRuleCall_0() { return cEAutotuningCaseParserRuleCall_0; }
-		
 		//EAITrainingCase
-		public RuleCall getEAITrainingCaseParserRuleCall_1() { return cEAITrainingCaseParserRuleCall_1; }
+		public RuleCall getEAITrainingCaseParserRuleCall_0() { return cEAITrainingCaseParserRuleCall_0; }
+		
+		//EHPCCase
+		public RuleCall getEHPCCaseParserRuleCall_1() { return cEHPCCaseParserRuleCall_1; }
 	}
 	public class EAITrainingCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAITrainingCase");
@@ -236,8 +235,8 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//END
 		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
 	}
-	public class EAutotuningCaseElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAutotuningCase");
+	public class EHPCCaseElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EHPCCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHpcKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -245,7 +244,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cHpcEHPCParserRuleCall_2_0 = (RuleCall)cHpcAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
-		//EAutotuningCase:
+		//EHPCCase:
 		//	'hpc:'
 		//	BEGIN
 		//	hpc=EHPC
@@ -1598,24 +1597,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EHPCConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cParallelisationKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cAi_frameworkAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cAi_frameworkEParallelisationParserRuleCall_1_0 = (RuleCall)cAi_frameworkAssignment_1.eContents().get(0);
+		private final Assignment cParallelisationAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cParallelisationEParallelisationParserRuleCall_1_0 = (RuleCall)cParallelisationAssignment_1.eContents().get(0);
 		
 		//EHPCConfig:
-		//	'parallelisation:' ai_framework=EParallelisation;
+		//	'parallelisation:' parallelisation=EParallelisation;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'parallelisation:' ai_framework=EParallelisation
+		//'parallelisation:' parallelisation=EParallelisation
 		public Group getGroup() { return cGroup; }
 		
 		//'parallelisation:'
 		public Keyword getParallelisationKeyword_0() { return cParallelisationKeyword_0; }
 		
-		//ai_framework=EParallelisation
-		public Assignment getAi_frameworkAssignment_1() { return cAi_frameworkAssignment_1; }
+		//parallelisation=EParallelisation
+		public Assignment getParallelisationAssignment_1() { return cParallelisationAssignment_1; }
 		
 		//EParallelisation
-		public RuleCall getAi_frameworkEParallelisationParserRuleCall_1_0() { return cAi_frameworkEParallelisationParserRuleCall_1_0; }
+		public RuleCall getParallelisationEParallelisationParserRuleCall_1_0() { return cParallelisationEParallelisationParserRuleCall_1_0; }
 	}
 	public class EParallelisationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EParallelisation");
@@ -2210,7 +2209,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	private final EOptimizationElements pEOptimization;
 	private final EOptimizationCasesElements pEOptimizationCases;
 	private final EAITrainingCaseElements pEAITrainingCase;
-	private final EAutotuningCaseElements pEAutotuningCase;
+	private final EHPCCaseElements pEHPCCase;
 	private final EAppTypeElements pEAppType;
 	private final EOptBuildElements pEOptBuild;
 	private final ECPUTypeElements pECPUType;
@@ -2275,7 +2274,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		this.pEOptimization = new EOptimizationElements();
 		this.pEOptimizationCases = new EOptimizationCasesElements();
 		this.pEAITrainingCase = new EAITrainingCaseElements();
-		this.pEAutotuningCase = new EAutotuningCaseElements();
+		this.pEHPCCase = new EHPCCaseElements();
 		this.pEAppType = new EAppTypeElements();
 		this.pEOptBuild = new EOptBuildElements();
 		this.pECPUType = new ECPUTypeElements();
@@ -2376,7 +2375,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	//	END)? ('autotuning:'
 	//	BEGIN
 	//	autotuning=EAutotuning
-	//	END)? //TODO Force to be mandatory if enable_autotuning = True
+	//	END)?
 	//	app_optimization=EOptimizationCases;
 	public EOptimizationElements getEOptimizationAccess() {
 		return pEOptimization;
@@ -2387,7 +2386,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EOptimizationCases:
-	//	EAutotuningCase | EAITrainingCase;
+	//	EAITrainingCase | EHPCCase;
 	public EOptimizationCasesElements getEOptimizationCasesAccess() {
 		return pEOptimizationCases;
 	}
@@ -2409,17 +2408,17 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		return getEAITrainingCaseAccess().getRule();
 	}
 	
-	//EAutotuningCase:
+	//EHPCCase:
 	//	'hpc:'
 	//	BEGIN
 	//	hpc=EHPC
 	//	END;
-	public EAutotuningCaseElements getEAutotuningCaseAccess() {
-		return pEAutotuningCase;
+	public EHPCCaseElements getEHPCCaseAccess() {
+		return pEHPCCase;
 	}
 	
-	public ParserRule getEAutotuningCaseRule() {
-		return getEAutotuningCaseAccess().getRule();
+	public ParserRule getEHPCCaseRule() {
+		return getEHPCCaseAccess().getRule();
 	}
 	
 	//EAppType:
@@ -2789,7 +2788,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EHPCConfig:
-	//	'parallelisation:' ai_framework=EParallelisation;
+	//	'parallelisation:' parallelisation=EParallelisation;
 	public EHPCConfigElements getEHPCConfigAccess() {
 		return pEHPCConfig;
 	}

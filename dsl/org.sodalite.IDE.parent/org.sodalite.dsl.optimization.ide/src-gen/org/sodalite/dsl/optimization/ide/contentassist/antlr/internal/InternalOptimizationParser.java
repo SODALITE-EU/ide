@@ -579,20 +579,20 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     // $ANTLR end "ruleEAITrainingCase"
 
 
-    // $ANTLR start "entryRuleEAutotuningCase"
-    // InternalOptimizationParser.g:250:1: entryRuleEAutotuningCase : ruleEAutotuningCase EOF ;
-    public final void entryRuleEAutotuningCase() throws RecognitionException {
+    // $ANTLR start "entryRuleEHPCCase"
+    // InternalOptimizationParser.g:250:1: entryRuleEHPCCase : ruleEHPCCase EOF ;
+    public final void entryRuleEHPCCase() throws RecognitionException {
         try {
-            // InternalOptimizationParser.g:251:1: ( ruleEAutotuningCase EOF )
-            // InternalOptimizationParser.g:252:1: ruleEAutotuningCase EOF
+            // InternalOptimizationParser.g:251:1: ( ruleEHPCCase EOF )
+            // InternalOptimizationParser.g:252:1: ruleEHPCCase EOF
             {
-             before(grammarAccess.getEAutotuningCaseRule()); 
+             before(grammarAccess.getEHPCCaseRule()); 
             pushFollow(FOLLOW_1);
-            ruleEAutotuningCase();
+            ruleEHPCCase();
 
             state._fsp--;
 
-             after(grammarAccess.getEAutotuningCaseRule()); 
+             after(grammarAccess.getEHPCCaseRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -606,35 +606,35 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "entryRuleEAutotuningCase"
+    // $ANTLR end "entryRuleEHPCCase"
 
 
-    // $ANTLR start "ruleEAutotuningCase"
-    // InternalOptimizationParser.g:259:1: ruleEAutotuningCase : ( ( rule__EAutotuningCase__Group__0 ) ) ;
-    public final void ruleEAutotuningCase() throws RecognitionException {
+    // $ANTLR start "ruleEHPCCase"
+    // InternalOptimizationParser.g:259:1: ruleEHPCCase : ( ( rule__EHPCCase__Group__0 ) ) ;
+    public final void ruleEHPCCase() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:263:2: ( ( ( rule__EAutotuningCase__Group__0 ) ) )
-            // InternalOptimizationParser.g:264:2: ( ( rule__EAutotuningCase__Group__0 ) )
+            // InternalOptimizationParser.g:263:2: ( ( ( rule__EHPCCase__Group__0 ) ) )
+            // InternalOptimizationParser.g:264:2: ( ( rule__EHPCCase__Group__0 ) )
             {
-            // InternalOptimizationParser.g:264:2: ( ( rule__EAutotuningCase__Group__0 ) )
-            // InternalOptimizationParser.g:265:3: ( rule__EAutotuningCase__Group__0 )
+            // InternalOptimizationParser.g:264:2: ( ( rule__EHPCCase__Group__0 ) )
+            // InternalOptimizationParser.g:265:3: ( rule__EHPCCase__Group__0 )
             {
-             before(grammarAccess.getEAutotuningCaseAccess().getGroup()); 
-            // InternalOptimizationParser.g:266:3: ( rule__EAutotuningCase__Group__0 )
-            // InternalOptimizationParser.g:266:4: rule__EAutotuningCase__Group__0
+             before(grammarAccess.getEHPCCaseAccess().getGroup()); 
+            // InternalOptimizationParser.g:266:3: ( rule__EHPCCase__Group__0 )
+            // InternalOptimizationParser.g:266:4: rule__EHPCCase__Group__0
             {
             pushFollow(FOLLOW_2);
-            rule__EAutotuningCase__Group__0();
+            rule__EHPCCase__Group__0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEAutotuningCaseAccess().getGroup()); 
+             after(grammarAccess.getEHPCCaseAccess().getGroup()); 
 
             }
 
@@ -653,7 +653,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "ruleEAutotuningCase"
+    // $ANTLR end "ruleEHPCCase"
 
 
     // $ANTLR start "entryRuleEAppType"
@@ -4201,20 +4201,20 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EOptimizationCases__Alternatives"
-    // InternalOptimizationParser.g:1432:1: rule__EOptimizationCases__Alternatives : ( ( ruleEAutotuningCase ) | ( ruleEAITrainingCase ) );
+    // InternalOptimizationParser.g:1432:1: rule__EOptimizationCases__Alternatives : ( ( ruleEAITrainingCase ) | ( ruleEHPCCase ) );
     public final void rule__EOptimizationCases__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:1436:1: ( ( ruleEAutotuningCase ) | ( ruleEAITrainingCase ) )
+            // InternalOptimizationParser.g:1436:1: ( ( ruleEAITrainingCase ) | ( ruleEHPCCase ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==Hpc) ) {
+            if ( (LA1_0==Ai_training) ) {
                 alt1=1;
             }
-            else if ( (LA1_0==Ai_training) ) {
+            else if ( (LA1_0==Hpc) ) {
                 alt1=2;
             }
             else {
@@ -4225,18 +4225,18 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             }
             switch (alt1) {
                 case 1 :
-                    // InternalOptimizationParser.g:1437:2: ( ruleEAutotuningCase )
+                    // InternalOptimizationParser.g:1437:2: ( ruleEAITrainingCase )
                     {
-                    // InternalOptimizationParser.g:1437:2: ( ruleEAutotuningCase )
-                    // InternalOptimizationParser.g:1438:3: ruleEAutotuningCase
+                    // InternalOptimizationParser.g:1437:2: ( ruleEAITrainingCase )
+                    // InternalOptimizationParser.g:1438:3: ruleEAITrainingCase
                     {
-                     before(grammarAccess.getEOptimizationCasesAccess().getEAutotuningCaseParserRuleCall_0()); 
+                     before(grammarAccess.getEOptimizationCasesAccess().getEAITrainingCaseParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
-                    ruleEAutotuningCase();
+                    ruleEAITrainingCase();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEOptimizationCasesAccess().getEAutotuningCaseParserRuleCall_0()); 
+                     after(grammarAccess.getEOptimizationCasesAccess().getEAITrainingCaseParserRuleCall_0()); 
 
                     }
 
@@ -4244,18 +4244,18 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalOptimizationParser.g:1443:2: ( ruleEAITrainingCase )
+                    // InternalOptimizationParser.g:1443:2: ( ruleEHPCCase )
                     {
-                    // InternalOptimizationParser.g:1443:2: ( ruleEAITrainingCase )
-                    // InternalOptimizationParser.g:1444:3: ruleEAITrainingCase
+                    // InternalOptimizationParser.g:1443:2: ( ruleEHPCCase )
+                    // InternalOptimizationParser.g:1444:3: ruleEHPCCase
                     {
-                     before(grammarAccess.getEOptimizationCasesAccess().getEAITrainingCaseParserRuleCall_1()); 
+                     before(grammarAccess.getEOptimizationCasesAccess().getEHPCCaseParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
-                    ruleEAITrainingCase();
+                    ruleEHPCCase();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEOptimizationCasesAccess().getEAITrainingCaseParserRuleCall_1()); 
+                     after(grammarAccess.getEOptimizationCasesAccess().getEHPCCaseParserRuleCall_1()); 
 
                     }
 
@@ -8190,23 +8190,23 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__EAITrainingCase__Group__3__Impl"
 
 
-    // $ANTLR start "rule__EAutotuningCase__Group__0"
-    // InternalOptimizationParser.g:2692:1: rule__EAutotuningCase__Group__0 : rule__EAutotuningCase__Group__0__Impl rule__EAutotuningCase__Group__1 ;
-    public final void rule__EAutotuningCase__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__EHPCCase__Group__0"
+    // InternalOptimizationParser.g:2692:1: rule__EHPCCase__Group__0 : rule__EHPCCase__Group__0__Impl rule__EHPCCase__Group__1 ;
+    public final void rule__EHPCCase__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:2696:1: ( rule__EAutotuningCase__Group__0__Impl rule__EAutotuningCase__Group__1 )
-            // InternalOptimizationParser.g:2697:2: rule__EAutotuningCase__Group__0__Impl rule__EAutotuningCase__Group__1
+            // InternalOptimizationParser.g:2696:1: ( rule__EHPCCase__Group__0__Impl rule__EHPCCase__Group__1 )
+            // InternalOptimizationParser.g:2697:2: rule__EHPCCase__Group__0__Impl rule__EHPCCase__Group__1
             {
             pushFollow(FOLLOW_3);
-            rule__EAutotuningCase__Group__0__Impl();
+            rule__EHPCCase__Group__0__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__EAutotuningCase__Group__1();
+            rule__EHPCCase__Group__1();
 
             state._fsp--;
 
@@ -8225,12 +8225,12 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EAutotuningCase__Group__0"
+    // $ANTLR end "rule__EHPCCase__Group__0"
 
 
-    // $ANTLR start "rule__EAutotuningCase__Group__0__Impl"
-    // InternalOptimizationParser.g:2704:1: rule__EAutotuningCase__Group__0__Impl : ( Hpc ) ;
-    public final void rule__EAutotuningCase__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__EHPCCase__Group__0__Impl"
+    // InternalOptimizationParser.g:2704:1: rule__EHPCCase__Group__0__Impl : ( Hpc ) ;
+    public final void rule__EHPCCase__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -8241,9 +8241,9 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             // InternalOptimizationParser.g:2709:1: ( Hpc )
             // InternalOptimizationParser.g:2710:2: Hpc
             {
-             before(grammarAccess.getEAutotuningCaseAccess().getHpcKeyword_0()); 
+             before(grammarAccess.getEHPCCaseAccess().getHpcKeyword_0()); 
             match(input,Hpc,FOLLOW_2); 
-             after(grammarAccess.getEAutotuningCaseAccess().getHpcKeyword_0()); 
+             after(grammarAccess.getEHPCCaseAccess().getHpcKeyword_0()); 
 
             }
 
@@ -8262,26 +8262,26 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EAutotuningCase__Group__0__Impl"
+    // $ANTLR end "rule__EHPCCase__Group__0__Impl"
 
 
-    // $ANTLR start "rule__EAutotuningCase__Group__1"
-    // InternalOptimizationParser.g:2719:1: rule__EAutotuningCase__Group__1 : rule__EAutotuningCase__Group__1__Impl rule__EAutotuningCase__Group__2 ;
-    public final void rule__EAutotuningCase__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__EHPCCase__Group__1"
+    // InternalOptimizationParser.g:2719:1: rule__EHPCCase__Group__1 : rule__EHPCCase__Group__1__Impl rule__EHPCCase__Group__2 ;
+    public final void rule__EHPCCase__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:2723:1: ( rule__EAutotuningCase__Group__1__Impl rule__EAutotuningCase__Group__2 )
-            // InternalOptimizationParser.g:2724:2: rule__EAutotuningCase__Group__1__Impl rule__EAutotuningCase__Group__2
+            // InternalOptimizationParser.g:2723:1: ( rule__EHPCCase__Group__1__Impl rule__EHPCCase__Group__2 )
+            // InternalOptimizationParser.g:2724:2: rule__EHPCCase__Group__1__Impl rule__EHPCCase__Group__2
             {
             pushFollow(FOLLOW_13);
-            rule__EAutotuningCase__Group__1__Impl();
+            rule__EHPCCase__Group__1__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__EAutotuningCase__Group__2();
+            rule__EHPCCase__Group__2();
 
             state._fsp--;
 
@@ -8300,12 +8300,12 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EAutotuningCase__Group__1"
+    // $ANTLR end "rule__EHPCCase__Group__1"
 
 
-    // $ANTLR start "rule__EAutotuningCase__Group__1__Impl"
-    // InternalOptimizationParser.g:2731:1: rule__EAutotuningCase__Group__1__Impl : ( RULE_BEGIN ) ;
-    public final void rule__EAutotuningCase__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__EHPCCase__Group__1__Impl"
+    // InternalOptimizationParser.g:2731:1: rule__EHPCCase__Group__1__Impl : ( RULE_BEGIN ) ;
+    public final void rule__EHPCCase__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -8316,9 +8316,9 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             // InternalOptimizationParser.g:2736:1: ( RULE_BEGIN )
             // InternalOptimizationParser.g:2737:2: RULE_BEGIN
             {
-             before(grammarAccess.getEAutotuningCaseAccess().getBEGINTerminalRuleCall_1()); 
+             before(grammarAccess.getEHPCCaseAccess().getBEGINTerminalRuleCall_1()); 
             match(input,RULE_BEGIN,FOLLOW_2); 
-             after(grammarAccess.getEAutotuningCaseAccess().getBEGINTerminalRuleCall_1()); 
+             after(grammarAccess.getEHPCCaseAccess().getBEGINTerminalRuleCall_1()); 
 
             }
 
@@ -8337,26 +8337,26 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EAutotuningCase__Group__1__Impl"
+    // $ANTLR end "rule__EHPCCase__Group__1__Impl"
 
 
-    // $ANTLR start "rule__EAutotuningCase__Group__2"
-    // InternalOptimizationParser.g:2746:1: rule__EAutotuningCase__Group__2 : rule__EAutotuningCase__Group__2__Impl rule__EAutotuningCase__Group__3 ;
-    public final void rule__EAutotuningCase__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__EHPCCase__Group__2"
+    // InternalOptimizationParser.g:2746:1: rule__EHPCCase__Group__2 : rule__EHPCCase__Group__2__Impl rule__EHPCCase__Group__3 ;
+    public final void rule__EHPCCase__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:2750:1: ( rule__EAutotuningCase__Group__2__Impl rule__EAutotuningCase__Group__3 )
-            // InternalOptimizationParser.g:2751:2: rule__EAutotuningCase__Group__2__Impl rule__EAutotuningCase__Group__3
+            // InternalOptimizationParser.g:2750:1: ( rule__EHPCCase__Group__2__Impl rule__EHPCCase__Group__3 )
+            // InternalOptimizationParser.g:2751:2: rule__EHPCCase__Group__2__Impl rule__EHPCCase__Group__3
             {
             pushFollow(FOLLOW_5);
-            rule__EAutotuningCase__Group__2__Impl();
+            rule__EHPCCase__Group__2__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__EAutotuningCase__Group__3();
+            rule__EHPCCase__Group__3();
 
             state._fsp--;
 
@@ -8375,35 +8375,35 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EAutotuningCase__Group__2"
+    // $ANTLR end "rule__EHPCCase__Group__2"
 
 
-    // $ANTLR start "rule__EAutotuningCase__Group__2__Impl"
-    // InternalOptimizationParser.g:2758:1: rule__EAutotuningCase__Group__2__Impl : ( ( rule__EAutotuningCase__HpcAssignment_2 ) ) ;
-    public final void rule__EAutotuningCase__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__EHPCCase__Group__2__Impl"
+    // InternalOptimizationParser.g:2758:1: rule__EHPCCase__Group__2__Impl : ( ( rule__EHPCCase__HpcAssignment_2 ) ) ;
+    public final void rule__EHPCCase__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:2762:1: ( ( ( rule__EAutotuningCase__HpcAssignment_2 ) ) )
-            // InternalOptimizationParser.g:2763:1: ( ( rule__EAutotuningCase__HpcAssignment_2 ) )
+            // InternalOptimizationParser.g:2762:1: ( ( ( rule__EHPCCase__HpcAssignment_2 ) ) )
+            // InternalOptimizationParser.g:2763:1: ( ( rule__EHPCCase__HpcAssignment_2 ) )
             {
-            // InternalOptimizationParser.g:2763:1: ( ( rule__EAutotuningCase__HpcAssignment_2 ) )
-            // InternalOptimizationParser.g:2764:2: ( rule__EAutotuningCase__HpcAssignment_2 )
+            // InternalOptimizationParser.g:2763:1: ( ( rule__EHPCCase__HpcAssignment_2 ) )
+            // InternalOptimizationParser.g:2764:2: ( rule__EHPCCase__HpcAssignment_2 )
             {
-             before(grammarAccess.getEAutotuningCaseAccess().getHpcAssignment_2()); 
-            // InternalOptimizationParser.g:2765:2: ( rule__EAutotuningCase__HpcAssignment_2 )
-            // InternalOptimizationParser.g:2765:3: rule__EAutotuningCase__HpcAssignment_2
+             before(grammarAccess.getEHPCCaseAccess().getHpcAssignment_2()); 
+            // InternalOptimizationParser.g:2765:2: ( rule__EHPCCase__HpcAssignment_2 )
+            // InternalOptimizationParser.g:2765:3: rule__EHPCCase__HpcAssignment_2
             {
             pushFollow(FOLLOW_2);
-            rule__EAutotuningCase__HpcAssignment_2();
+            rule__EHPCCase__HpcAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEAutotuningCaseAccess().getHpcAssignment_2()); 
+             after(grammarAccess.getEHPCCaseAccess().getHpcAssignment_2()); 
 
             }
 
@@ -8422,21 +8422,21 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EAutotuningCase__Group__2__Impl"
+    // $ANTLR end "rule__EHPCCase__Group__2__Impl"
 
 
-    // $ANTLR start "rule__EAutotuningCase__Group__3"
-    // InternalOptimizationParser.g:2773:1: rule__EAutotuningCase__Group__3 : rule__EAutotuningCase__Group__3__Impl ;
-    public final void rule__EAutotuningCase__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__EHPCCase__Group__3"
+    // InternalOptimizationParser.g:2773:1: rule__EHPCCase__Group__3 : rule__EHPCCase__Group__3__Impl ;
+    public final void rule__EHPCCase__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:2777:1: ( rule__EAutotuningCase__Group__3__Impl )
-            // InternalOptimizationParser.g:2778:2: rule__EAutotuningCase__Group__3__Impl
+            // InternalOptimizationParser.g:2777:1: ( rule__EHPCCase__Group__3__Impl )
+            // InternalOptimizationParser.g:2778:2: rule__EHPCCase__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
-            rule__EAutotuningCase__Group__3__Impl();
+            rule__EHPCCase__Group__3__Impl();
 
             state._fsp--;
 
@@ -8455,12 +8455,12 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EAutotuningCase__Group__3"
+    // $ANTLR end "rule__EHPCCase__Group__3"
 
 
-    // $ANTLR start "rule__EAutotuningCase__Group__3__Impl"
-    // InternalOptimizationParser.g:2784:1: rule__EAutotuningCase__Group__3__Impl : ( RULE_END ) ;
-    public final void rule__EAutotuningCase__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__EHPCCase__Group__3__Impl"
+    // InternalOptimizationParser.g:2784:1: rule__EHPCCase__Group__3__Impl : ( RULE_END ) ;
+    public final void rule__EHPCCase__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -8471,9 +8471,9 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             // InternalOptimizationParser.g:2789:1: ( RULE_END )
             // InternalOptimizationParser.g:2790:2: RULE_END
             {
-             before(grammarAccess.getEAutotuningCaseAccess().getENDTerminalRuleCall_3()); 
+             before(grammarAccess.getEHPCCaseAccess().getENDTerminalRuleCall_3()); 
             match(input,RULE_END,FOLLOW_2); 
-             after(grammarAccess.getEAutotuningCaseAccess().getENDTerminalRuleCall_3()); 
+             after(grammarAccess.getEHPCCaseAccess().getENDTerminalRuleCall_3()); 
 
             }
 
@@ -8492,7 +8492,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EAutotuningCase__Group__3__Impl"
+    // $ANTLR end "rule__EHPCCase__Group__3__Impl"
 
 
     // $ANTLR start "rule__EOptBuild__Group_0__0"
@@ -18569,31 +18569,31 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EHPCConfig__Group__1__Impl"
-    // InternalOptimizationParser.g:6321:1: rule__EHPCConfig__Group__1__Impl : ( ( rule__EHPCConfig__Ai_frameworkAssignment_1 ) ) ;
+    // InternalOptimizationParser.g:6321:1: rule__EHPCConfig__Group__1__Impl : ( ( rule__EHPCConfig__ParallelisationAssignment_1 ) ) ;
     public final void rule__EHPCConfig__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:6325:1: ( ( ( rule__EHPCConfig__Ai_frameworkAssignment_1 ) ) )
-            // InternalOptimizationParser.g:6326:1: ( ( rule__EHPCConfig__Ai_frameworkAssignment_1 ) )
+            // InternalOptimizationParser.g:6325:1: ( ( ( rule__EHPCConfig__ParallelisationAssignment_1 ) ) )
+            // InternalOptimizationParser.g:6326:1: ( ( rule__EHPCConfig__ParallelisationAssignment_1 ) )
             {
-            // InternalOptimizationParser.g:6326:1: ( ( rule__EHPCConfig__Ai_frameworkAssignment_1 ) )
-            // InternalOptimizationParser.g:6327:2: ( rule__EHPCConfig__Ai_frameworkAssignment_1 )
+            // InternalOptimizationParser.g:6326:1: ( ( rule__EHPCConfig__ParallelisationAssignment_1 ) )
+            // InternalOptimizationParser.g:6327:2: ( rule__EHPCConfig__ParallelisationAssignment_1 )
             {
-             before(grammarAccess.getEHPCConfigAccess().getAi_frameworkAssignment_1()); 
-            // InternalOptimizationParser.g:6328:2: ( rule__EHPCConfig__Ai_frameworkAssignment_1 )
-            // InternalOptimizationParser.g:6328:3: rule__EHPCConfig__Ai_frameworkAssignment_1
+             before(grammarAccess.getEHPCConfigAccess().getParallelisationAssignment_1()); 
+            // InternalOptimizationParser.g:6328:2: ( rule__EHPCConfig__ParallelisationAssignment_1 )
+            // InternalOptimizationParser.g:6328:3: rule__EHPCConfig__ParallelisationAssignment_1
             {
             pushFollow(FOLLOW_2);
-            rule__EHPCConfig__Ai_frameworkAssignment_1();
+            rule__EHPCConfig__ParallelisationAssignment_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEHPCConfigAccess().getAi_frameworkAssignment_1()); 
+             after(grammarAccess.getEHPCConfigAccess().getParallelisationAssignment_1()); 
 
             }
 
@@ -28299,9 +28299,9 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__EAITrainingCase__Ai_trainingAssignment_2"
 
 
-    // $ANTLR start "rule__EAutotuningCase__HpcAssignment_2"
-    // InternalOptimizationParser.g:9293:1: rule__EAutotuningCase__HpcAssignment_2 : ( ruleEHPC ) ;
-    public final void rule__EAutotuningCase__HpcAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__EHPCCase__HpcAssignment_2"
+    // InternalOptimizationParser.g:9293:1: rule__EHPCCase__HpcAssignment_2 : ( ruleEHPC ) ;
+    public final void rule__EHPCCase__HpcAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -28312,13 +28312,13 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             // InternalOptimizationParser.g:9298:2: ( ruleEHPC )
             // InternalOptimizationParser.g:9299:3: ruleEHPC
             {
-             before(grammarAccess.getEAutotuningCaseAccess().getHpcEHPCParserRuleCall_2_0()); 
+             before(grammarAccess.getEHPCCaseAccess().getHpcEHPCParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
             ruleEHPC();
 
             state._fsp--;
 
-             after(grammarAccess.getEAutotuningCaseAccess().getHpcEHPCParserRuleCall_2_0()); 
+             after(grammarAccess.getEHPCCaseAccess().getHpcEHPCParserRuleCall_2_0()); 
 
             }
 
@@ -28337,7 +28337,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EAutotuningCase__HpcAssignment_2"
+    // $ANTLR end "rule__EHPCCase__HpcAssignment_2"
 
 
     // $ANTLR start "rule__EOptBuild__Cpu_typeAssignment_0_1"
@@ -29994,9 +29994,9 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__EMPICase__MpiAssignment_2"
 
 
-    // $ANTLR start "rule__EHPCConfig__Ai_frameworkAssignment_1"
-    // InternalOptimizationParser.g:9938:1: rule__EHPCConfig__Ai_frameworkAssignment_1 : ( ruleEParallelisation ) ;
-    public final void rule__EHPCConfig__Ai_frameworkAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__EHPCConfig__ParallelisationAssignment_1"
+    // InternalOptimizationParser.g:9938:1: rule__EHPCConfig__ParallelisationAssignment_1 : ( ruleEParallelisation ) ;
+    public final void rule__EHPCConfig__ParallelisationAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -30007,13 +30007,13 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             // InternalOptimizationParser.g:9943:2: ( ruleEParallelisation )
             // InternalOptimizationParser.g:9944:3: ruleEParallelisation
             {
-             before(grammarAccess.getEHPCConfigAccess().getAi_frameworkEParallelisationParserRuleCall_1_0()); 
+             before(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
             ruleEParallelisation();
 
             state._fsp--;
 
-             after(grammarAccess.getEHPCConfigAccess().getAi_frameworkEParallelisationParserRuleCall_1_0()); 
+             after(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_1_0()); 
 
             }
 
@@ -30032,7 +30032,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__EHPCConfig__Ai_frameworkAssignment_1"
+    // $ANTLR end "rule__EHPCConfig__ParallelisationAssignment_1"
 
 
     // $ANTLR start "rule__EHPCData__LocationAssignment_0_1"

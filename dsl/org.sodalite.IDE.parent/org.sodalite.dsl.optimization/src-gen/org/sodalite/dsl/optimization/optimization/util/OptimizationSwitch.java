@@ -102,11 +102,11 @@ public class OptimizationSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case OptimizationPackage.EAUTOTUNING_CASE:
+      case OptimizationPackage.EHPC_CASE:
       {
-        EAutotuningCase eAutotuningCase = (EAutotuningCase)theEObject;
-        T result = caseEAutotuningCase(eAutotuningCase);
-        if (result == null) result = caseEOptimizationCases(eAutotuningCase);
+        EHPCCase ehpcCase = (EHPCCase)theEObject;
+        T result = caseEHPCCase(ehpcCase);
+        if (result == null) result = caseEOptimizationCases(ehpcCase);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -396,17 +396,17 @@ public class OptimizationSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EAutotuning Case</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EHPC Case</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EAutotuning Case</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EHPC Case</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEAutotuningCase(EAutotuningCase object)
+  public T caseEHPCCase(EHPCCase object)
   {
     return null;
   }

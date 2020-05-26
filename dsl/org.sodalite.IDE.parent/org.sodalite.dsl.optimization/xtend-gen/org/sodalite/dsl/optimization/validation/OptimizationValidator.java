@@ -3,8 +3,23 @@
  */
 package org.sodalite.dsl.optimization.validation;
 
+import com.google.common.base.Objects;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
+import org.sodalite.dsl.optimization.optimization.EAITraining;
+import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
+import org.sodalite.dsl.optimization.optimization.EAITrainingConfig;
+import org.sodalite.dsl.optimization.optimization.EHPC;
+import org.sodalite.dsl.optimization.optimization.EHPCCase;
+import org.sodalite.dsl.optimization.optimization.EHPCConfig;
+import org.sodalite.dsl.optimization.optimization.EKerasCase;
+import org.sodalite.dsl.optimization.optimization.EMPICase;
+import org.sodalite.dsl.optimization.optimization.EOPENACCCase;
+import org.sodalite.dsl.optimization.optimization.EOPENCLCase;
+import org.sodalite.dsl.optimization.optimization.EOPENMPCase;
 import org.sodalite.dsl.optimization.optimization.EOptimization;
+import org.sodalite.dsl.optimization.optimization.EPyTorchCase;
+import org.sodalite.dsl.optimization.optimization.ETensorFlowCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 import org.sodalite.dsl.optimization.validation.AbstractOptimizationValidator;
 
@@ -18,10 +33,131 @@ public class OptimizationValidator extends AbstractOptimizationValidator {
   public static final String MANDATORY_ELEMENT = "MandatoryElement";
   
   @Check
-  public void checkMandatoryElement(final EOptimization opt) {
+  public void checkOptimizationMandatoryElement(final EOptimization opt) {
     if ((opt.isEnable_opt_build() && (opt.getOpt_build() == null))) {
-      this.error("opt_build entity should be present if enable_opt_build is true", 
+      this.error("opt_build property should be present if enable_opt_build is true", 
         OptimizationPackage.Literals.EOPTIMIZATION__ENABLE_OPT_BUILD, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if (((!opt.isEnable_opt_build()) && (opt.getOpt_build() != null))) {
+      this.error("An opt_build property is present but enable_opt_build is false", 
+        OptimizationPackage.Literals.EOPTIMIZATION__ENABLE_OPT_BUILD, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((opt.isEnable_autotuning() && (opt.getAutotuning() == null))) {
+      this.error("autotuning property should be present if enable_autotuning is true", 
+        OptimizationPackage.Literals.EOPTIMIZATION__ENABLE_AUTOTUNING, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if (((!opt.isEnable_autotuning()) && (opt.getAutotuning() != null))) {
+      this.error("An autotuning property is present but enable_autotuning is false", 
+        OptimizationPackage.Literals.EOPTIMIZATION__ENABLE_AUTOTUNING, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(opt.getApp_type(), "AI_Training") && (!(opt.getApp_optimization() instanceof EAITrainingCase)))) {
+      this.error("A ai_training property should be present if app_type is AI_Training", 
+        OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+      this.error("This property is not compatible with selected app_type", 
+        OptimizationPackage.Literals.EOPTIMIZATION__APP_OPTIMIZATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(opt.getApp_type(), "HPC") && (!(opt.getApp_optimization() instanceof EHPCCase)))) {
+      this.error("Ah hpc property should be present if app_type is HPC", 
+        OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+      this.error("This property is not compatible with selected app_type", 
+        OptimizationPackage.Literals.EOPTIMIZATION__APP_OPTIMIZATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+  }
+  
+  @Check
+  public void checkAITrainingConfigMandatoryElement(final EAITrainingConfig conf) {
+    EObject _eContainer = conf.eContainer();
+    final EAITraining parent = ((EAITraining) _eContainer);
+    if ((Objects.equal(conf.getAi_framework(), "PyTorch") && (!(parent.getAitrainingcase() instanceof EPyTorchCase)))) {
+      this.error("A pytorch property should be present if ai_framework is PyTorch", 
+        OptimizationPackage.Literals.EAI_TRAINING_CONFIG__AI_FRAMEWORK, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(conf.getAi_framework(), "TensorFlow") && (!(parent.getAitrainingcase() instanceof ETensorFlowCase)))) {
+      this.error("A tensorflow property should be present if ai_framework is TensorFlow", 
+        OptimizationPackage.Literals.EAI_TRAINING_CONFIG__AI_FRAMEWORK, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(conf.getAi_framework(), "Keras") && (!(parent.getAitrainingcase() instanceof EKerasCase)))) {
+      this.error("A keras property should be present if ai_framework is Keras", 
+        OptimizationPackage.Literals.EAI_TRAINING_CONFIG__AI_FRAMEWORK, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+  }
+  
+  @Check
+  public void checkAITrainingMandatoryElement(final EAITraining ai_training) {
+    if ((Objects.equal(ai_training.getConfig().getAi_framework(), "PyTorch") && (!(ai_training.getAitrainingcase() instanceof EPyTorchCase)))) {
+      this.error("This property is not compatible with selected app_type", 
+        OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(ai_training.getConfig().getAi_framework(), "TensorFlow") && (!(ai_training.getAitrainingcase() instanceof ETensorFlowCase)))) {
+      this.error("This property is not compatible with selected app_type", 
+        OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(ai_training.getConfig().getAi_framework(), "Keras") && (!(ai_training.getAitrainingcase() instanceof EKerasCase)))) {
+      this.error("This property is not compatible with selected app_type", 
+        OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+  }
+  
+  @Check
+  public void checkHPCConfigMandatoryElement(final EHPCConfig conf) {
+    EObject _eContainer = conf.eContainer();
+    final EHPC parent = ((EHPC) _eContainer);
+    if ((Objects.equal(conf.getParallelisation(), "MPI") && (!(parent.getHpccase() instanceof EMPICase)))) {
+      this.error("A mpi property should be present if ai_framework is MPI", 
+        OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(conf.getParallelisation(), "OPENMP") && (!(parent.getHpccase() instanceof EOPENMPCase)))) {
+      this.error("A openmp property should be present if ai_framework is OPENMP", 
+        OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(conf.getParallelisation(), "OPENACC") && (!(parent.getHpccase() instanceof EOPENACCCase)))) {
+      this.error("A openacc property should be present if ai_framework is OPENACC", 
+        OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(conf.getParallelisation(), "OPENCL") && (!(parent.getHpccase() instanceof EOPENCLCase)))) {
+      this.error("A opencl property should be present if ai_framework is OPENCL", 
+        OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+  }
+  
+  @Check
+  public void checkHPCMandatoryElement(final EHPC hpc) {
+    if ((Objects.equal(hpc.getConfig().getParallelisation(), "MPI") && (!(hpc.getHpccase() instanceof EMPICase)))) {
+      this.error("This property is not compatible with selected app_type", 
+        OptimizationPackage.Literals.EHPC__HPCCASE, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(hpc.getConfig().getParallelisation(), "OPENMP") && (!(hpc.getHpccase() instanceof EOPENMPCase)))) {
+      this.error("This property is not compatible with selected app_type", 
+        OptimizationPackage.Literals.EHPC__HPCCASE, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(hpc.getConfig().getParallelisation(), "OPENACC") && (!(hpc.getHpccase() instanceof EOPENACCCase)))) {
+      this.error("This property is not compatible with selected app_type", 
+        OptimizationPackage.Literals.EHPC__HPCCASE, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if ((Objects.equal(hpc.getConfig().getParallelisation(), "OPENCL") && (!(hpc.getHpccase() instanceof EOPENCLCase)))) {
+      this.error("This property is not compatible with selected app_type", 
+        OptimizationPackage.Literals.EHPC__HPCCASE, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
   }

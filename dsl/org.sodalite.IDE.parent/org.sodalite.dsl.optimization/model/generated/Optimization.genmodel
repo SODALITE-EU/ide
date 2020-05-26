@@ -21,8 +21,8 @@
     <genClasses ecoreClass="Optimization.ecore#//EAITrainingCase">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EAITrainingCase/ai_training"/>
     </genClasses>
-    <genClasses ecoreClass="Optimization.ecore#//EAutotuningCase">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EAutotuningCase/hpc"/>
+    <genClasses ecoreClass="Optimization.ecore#//EHPCCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPCCase/hpc"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EOptBuild">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EOptBuild/cpu_type"/>
@@ -109,7 +109,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EMPICase/mpi"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EHPCConfig">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EHPCConfig/ai_framework"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EHPCConfig/parallelisation"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EHPCData">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EHPCData/location"/>

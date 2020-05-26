@@ -686,30 +686,30 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEOptimizationCases"
-    // InternalOptimizationParser.g:291:1: ruleEOptimizationCases returns [EObject current=null] : (this_EAutotuningCase_0= ruleEAutotuningCase | this_EAITrainingCase_1= ruleEAITrainingCase ) ;
+    // InternalOptimizationParser.g:291:1: ruleEOptimizationCases returns [EObject current=null] : (this_EAITrainingCase_0= ruleEAITrainingCase | this_EHPCCase_1= ruleEHPCCase ) ;
     public final EObject ruleEOptimizationCases() throws RecognitionException {
         EObject current = null;
 
-        EObject this_EAutotuningCase_0 = null;
+        EObject this_EAITrainingCase_0 = null;
 
-        EObject this_EAITrainingCase_1 = null;
+        EObject this_EHPCCase_1 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalOptimizationParser.g:297:2: ( (this_EAutotuningCase_0= ruleEAutotuningCase | this_EAITrainingCase_1= ruleEAITrainingCase ) )
-            // InternalOptimizationParser.g:298:2: (this_EAutotuningCase_0= ruleEAutotuningCase | this_EAITrainingCase_1= ruleEAITrainingCase )
+            // InternalOptimizationParser.g:297:2: ( (this_EAITrainingCase_0= ruleEAITrainingCase | this_EHPCCase_1= ruleEHPCCase ) )
+            // InternalOptimizationParser.g:298:2: (this_EAITrainingCase_0= ruleEAITrainingCase | this_EHPCCase_1= ruleEHPCCase )
             {
-            // InternalOptimizationParser.g:298:2: (this_EAutotuningCase_0= ruleEAutotuningCase | this_EAITrainingCase_1= ruleEAITrainingCase )
+            // InternalOptimizationParser.g:298:2: (this_EAITrainingCase_0= ruleEAITrainingCase | this_EHPCCase_1= ruleEHPCCase )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==Hpc) ) {
+            if ( (LA3_0==Ai_training) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==Ai_training) ) {
+            else if ( (LA3_0==Hpc) ) {
                 alt3=2;
             }
             else {
@@ -720,36 +720,36 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalOptimizationParser.g:299:3: this_EAutotuningCase_0= ruleEAutotuningCase
+                    // InternalOptimizationParser.g:299:3: this_EAITrainingCase_0= ruleEAITrainingCase
                     {
 
-                    			newCompositeNode(grammarAccess.getEOptimizationCasesAccess().getEAutotuningCaseParserRuleCall_0());
+                    			newCompositeNode(grammarAccess.getEOptimizationCasesAccess().getEAITrainingCaseParserRuleCall_0());
                     		
                     pushFollow(FOLLOW_2);
-                    this_EAutotuningCase_0=ruleEAutotuningCase();
+                    this_EAITrainingCase_0=ruleEAITrainingCase();
 
                     state._fsp--;
 
 
-                    			current = this_EAutotuningCase_0;
+                    			current = this_EAITrainingCase_0;
                     			afterParserOrEnumRuleCall();
                     		
 
                     }
                     break;
                 case 2 :
-                    // InternalOptimizationParser.g:308:3: this_EAITrainingCase_1= ruleEAITrainingCase
+                    // InternalOptimizationParser.g:308:3: this_EHPCCase_1= ruleEHPCCase
                     {
 
-                    			newCompositeNode(grammarAccess.getEOptimizationCasesAccess().getEAITrainingCaseParserRuleCall_1());
+                    			newCompositeNode(grammarAccess.getEOptimizationCasesAccess().getEHPCCaseParserRuleCall_1());
                     		
                     pushFollow(FOLLOW_2);
-                    this_EAITrainingCase_1=ruleEAITrainingCase();
+                    this_EHPCCase_1=ruleEHPCCase();
 
                     state._fsp--;
 
 
-                    			current = this_EAITrainingCase_1;
+                    			current = this_EHPCCase_1;
                     			afterParserOrEnumRuleCall();
                     		
 
@@ -899,25 +899,25 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleEAITrainingCase"
 
 
-    // $ANTLR start "entryRuleEAutotuningCase"
-    // InternalOptimizationParser.g:370:1: entryRuleEAutotuningCase returns [EObject current=null] : iv_ruleEAutotuningCase= ruleEAutotuningCase EOF ;
-    public final EObject entryRuleEAutotuningCase() throws RecognitionException {
+    // $ANTLR start "entryRuleEHPCCase"
+    // InternalOptimizationParser.g:370:1: entryRuleEHPCCase returns [EObject current=null] : iv_ruleEHPCCase= ruleEHPCCase EOF ;
+    public final EObject entryRuleEHPCCase() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleEAutotuningCase = null;
+        EObject iv_ruleEHPCCase = null;
 
 
         try {
-            // InternalOptimizationParser.g:370:56: (iv_ruleEAutotuningCase= ruleEAutotuningCase EOF )
-            // InternalOptimizationParser.g:371:2: iv_ruleEAutotuningCase= ruleEAutotuningCase EOF
+            // InternalOptimizationParser.g:370:49: (iv_ruleEHPCCase= ruleEHPCCase EOF )
+            // InternalOptimizationParser.g:371:2: iv_ruleEHPCCase= ruleEHPCCase EOF
             {
-             newCompositeNode(grammarAccess.getEAutotuningCaseRule()); 
+             newCompositeNode(grammarAccess.getEHPCCaseRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleEAutotuningCase=ruleEAutotuningCase();
+            iv_ruleEHPCCase=ruleEHPCCase();
 
             state._fsp--;
 
-             current =iv_ruleEAutotuningCase; 
+             current =iv_ruleEHPCCase; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -932,12 +932,12 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleEAutotuningCase"
+    // $ANTLR end "entryRuleEHPCCase"
 
 
-    // $ANTLR start "ruleEAutotuningCase"
-    // InternalOptimizationParser.g:377:1: ruleEAutotuningCase returns [EObject current=null] : (otherlv_0= Hpc this_BEGIN_1= RULE_BEGIN ( (lv_hpc_2_0= ruleEHPC ) ) this_END_3= RULE_END ) ;
-    public final EObject ruleEAutotuningCase() throws RecognitionException {
+    // $ANTLR start "ruleEHPCCase"
+    // InternalOptimizationParser.g:377:1: ruleEHPCCase returns [EObject current=null] : (otherlv_0= Hpc this_BEGIN_1= RULE_BEGIN ( (lv_hpc_2_0= ruleEHPC ) ) this_END_3= RULE_END ) ;
+    public final EObject ruleEHPCCase() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
@@ -958,11 +958,11 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
             {
             otherlv_0=(Token)match(input,Hpc,FOLLOW_3); 
 
-            			newLeafNode(otherlv_0, grammarAccess.getEAutotuningCaseAccess().getHpcKeyword_0());
+            			newLeafNode(otherlv_0, grammarAccess.getEHPCCaseAccess().getHpcKeyword_0());
             		
             this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_13); 
 
-            			newLeafNode(this_BEGIN_1, grammarAccess.getEAutotuningCaseAccess().getBEGINTerminalRuleCall_1());
+            			newLeafNode(this_BEGIN_1, grammarAccess.getEHPCCaseAccess().getBEGINTerminalRuleCall_1());
             		
             // InternalOptimizationParser.g:393:3: ( (lv_hpc_2_0= ruleEHPC ) )
             // InternalOptimizationParser.g:394:4: (lv_hpc_2_0= ruleEHPC )
@@ -971,7 +971,7 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
             // InternalOptimizationParser.g:395:5: lv_hpc_2_0= ruleEHPC
             {
 
-            					newCompositeNode(grammarAccess.getEAutotuningCaseAccess().getHpcEHPCParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getEHPCCaseAccess().getHpcEHPCParserRuleCall_2_0());
             				
             pushFollow(FOLLOW_5);
             lv_hpc_2_0=ruleEHPC();
@@ -980,7 +980,7 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
 
 
             					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getEAutotuningCaseRule());
+            						current = createModelElementForParent(grammarAccess.getEHPCCaseRule());
             					}
             					set(
             						current,
@@ -997,7 +997,7 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
 
             this_END_3=(Token)match(input,RULE_END,FOLLOW_2); 
 
-            			newLeafNode(this_END_3, grammarAccess.getEAutotuningCaseAccess().getENDTerminalRuleCall_3());
+            			newLeafNode(this_END_3, grammarAccess.getEHPCCaseAccess().getENDTerminalRuleCall_3());
             		
 
             }
@@ -1018,7 +1018,7 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleEAutotuningCase"
+    // $ANTLR end "ruleEHPCCase"
 
 
     // $ANTLR start "entryRuleEAppType"
@@ -7113,39 +7113,39 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEHPCConfig"
-    // InternalOptimizationParser.g:2707:1: ruleEHPCConfig returns [EObject current=null] : (otherlv_0= Parallelisation ( (lv_ai_framework_1_0= ruleEParallelisation ) ) ) ;
+    // InternalOptimizationParser.g:2707:1: ruleEHPCConfig returns [EObject current=null] : (otherlv_0= Parallelisation ( (lv_parallelisation_1_0= ruleEParallelisation ) ) ) ;
     public final EObject ruleEHPCConfig() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
-        AntlrDatatypeRuleToken lv_ai_framework_1_0 = null;
+        AntlrDatatypeRuleToken lv_parallelisation_1_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalOptimizationParser.g:2713:2: ( (otherlv_0= Parallelisation ( (lv_ai_framework_1_0= ruleEParallelisation ) ) ) )
-            // InternalOptimizationParser.g:2714:2: (otherlv_0= Parallelisation ( (lv_ai_framework_1_0= ruleEParallelisation ) ) )
+            // InternalOptimizationParser.g:2713:2: ( (otherlv_0= Parallelisation ( (lv_parallelisation_1_0= ruleEParallelisation ) ) ) )
+            // InternalOptimizationParser.g:2714:2: (otherlv_0= Parallelisation ( (lv_parallelisation_1_0= ruleEParallelisation ) ) )
             {
-            // InternalOptimizationParser.g:2714:2: (otherlv_0= Parallelisation ( (lv_ai_framework_1_0= ruleEParallelisation ) ) )
-            // InternalOptimizationParser.g:2715:3: otherlv_0= Parallelisation ( (lv_ai_framework_1_0= ruleEParallelisation ) )
+            // InternalOptimizationParser.g:2714:2: (otherlv_0= Parallelisation ( (lv_parallelisation_1_0= ruleEParallelisation ) ) )
+            // InternalOptimizationParser.g:2715:3: otherlv_0= Parallelisation ( (lv_parallelisation_1_0= ruleEParallelisation ) )
             {
             otherlv_0=(Token)match(input,Parallelisation,FOLLOW_51); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEHPCConfigAccess().getParallelisationKeyword_0());
             		
-            // InternalOptimizationParser.g:2719:3: ( (lv_ai_framework_1_0= ruleEParallelisation ) )
-            // InternalOptimizationParser.g:2720:4: (lv_ai_framework_1_0= ruleEParallelisation )
+            // InternalOptimizationParser.g:2719:3: ( (lv_parallelisation_1_0= ruleEParallelisation ) )
+            // InternalOptimizationParser.g:2720:4: (lv_parallelisation_1_0= ruleEParallelisation )
             {
-            // InternalOptimizationParser.g:2720:4: (lv_ai_framework_1_0= ruleEParallelisation )
-            // InternalOptimizationParser.g:2721:5: lv_ai_framework_1_0= ruleEParallelisation
+            // InternalOptimizationParser.g:2720:4: (lv_parallelisation_1_0= ruleEParallelisation )
+            // InternalOptimizationParser.g:2721:5: lv_parallelisation_1_0= ruleEParallelisation
             {
 
-            					newCompositeNode(grammarAccess.getEHPCConfigAccess().getAi_frameworkEParallelisationParserRuleCall_1_0());
+            					newCompositeNode(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_1_0());
             				
             pushFollow(FOLLOW_2);
-            lv_ai_framework_1_0=ruleEParallelisation();
+            lv_parallelisation_1_0=ruleEParallelisation();
 
             state._fsp--;
 
@@ -7155,8 +7155,8 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
             					}
             					set(
             						current,
-            						"ai_framework",
-            						lv_ai_framework_1_0,
+            						"parallelisation",
+            						lv_parallelisation_1_0,
             						"org.sodalite.dsl.optimization.Optimization.EParallelisation");
             					afterParserOrEnumRuleCall();
             				

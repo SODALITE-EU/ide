@@ -1,0 +1,40 @@
+optimization:
+	enable_opt_build: true
+	enable_autotuning: true
+	app_type: HPC
+	opt_build:
+		CPU_type: ARM
+		acc_type: NVIDIA-V100
+	autotuning:
+		tuner: CREATA
+		input: 
+			parameters:
+				typing:
+					int: "NB"
+				constraints:
+					range: 'NB 80, 90, 100, 120, 140'
+			build:
+				command: "make -DNB=$NB"
+			run:
+				command: './solver'
+	hpc:
+		config:
+			parallelisation: MPI
+		data:
+			location: "/some/data"
+			basedata: RESTART
+			size: 67
+			count: 4389
+			etl:
+				cache: true
+				prefetch: true
+		mpi:
+			library: mvapch
+			version: "1.1"
+			scaling_efficiency: 0.75
+			core_subscription: 1
+			message_size: small
+		
+			
+								
+				

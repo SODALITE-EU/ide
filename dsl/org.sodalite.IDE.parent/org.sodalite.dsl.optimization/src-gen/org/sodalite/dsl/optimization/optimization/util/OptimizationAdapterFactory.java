@@ -96,9 +96,9 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
         return createEAITrainingCaseAdapter();
       }
       @Override
-      public Adapter caseEAutotuningCase(EAutotuningCase object)
+      public Adapter caseEHPCCase(EHPCCase object)
       {
-        return createEAutotuningCaseAdapter();
+        return createEHPCCaseAdapter();
       }
       @Override
       public Adapter caseEOptBuild(EOptBuild object)
@@ -333,16 +333,16 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EAutotuningCase <em>EAutotuning Case</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EHPCCase <em>EHPC Case</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.dsl.optimization.optimization.EAutotuningCase
+   * @see org.sodalite.dsl.optimization.optimization.EHPCCase
    * @generated
    */
-  public Adapter createEAutotuningCaseAdapter()
+  public Adapter createEHPCCaseAdapter()
   {
     return null;
   }

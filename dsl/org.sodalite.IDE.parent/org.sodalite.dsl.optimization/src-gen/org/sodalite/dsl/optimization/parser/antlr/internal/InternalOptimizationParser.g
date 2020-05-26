@@ -297,20 +297,20 @@ ruleEOptimizationCases returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getEOptimizationCasesAccess().getEAutotuningCaseParserRuleCall_0());
+			newCompositeNode(grammarAccess.getEOptimizationCasesAccess().getEAITrainingCaseParserRuleCall_0());
 		}
-		this_EAutotuningCase_0=ruleEAutotuningCase
+		this_EAITrainingCase_0=ruleEAITrainingCase
 		{
-			$current = $this_EAutotuningCase_0.current;
+			$current = $this_EAITrainingCase_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getEOptimizationCasesAccess().getEAITrainingCaseParserRuleCall_1());
+			newCompositeNode(grammarAccess.getEOptimizationCasesAccess().getEHPCCaseParserRuleCall_1());
 		}
-		this_EAITrainingCase_1=ruleEAITrainingCase
+		this_EHPCCase_1=ruleEHPCCase
 		{
-			$current = $this_EAITrainingCase_1.current;
+			$current = $this_EHPCCase_1.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -366,15 +366,15 @@ ruleEAITrainingCase returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleEAutotuningCase
-entryRuleEAutotuningCase returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getEAutotuningCaseRule()); }
-	iv_ruleEAutotuningCase=ruleEAutotuningCase
-	{ $current=$iv_ruleEAutotuningCase.current; }
+// Entry rule entryRuleEHPCCase
+entryRuleEHPCCase returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEHPCCaseRule()); }
+	iv_ruleEHPCCase=ruleEHPCCase
+	{ $current=$iv_ruleEHPCCase.current; }
 	EOF;
 
-// Rule EAutotuningCase
-ruleEAutotuningCase returns [EObject current=null]
+// Rule EHPCCase
+ruleEHPCCase returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -384,21 +384,21 @@ ruleEAutotuningCase returns [EObject current=null]
 	(
 		otherlv_0=Hpc
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEAutotuningCaseAccess().getHpcKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEHPCCaseAccess().getHpcKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
-			newLeafNode(this_BEGIN_1, grammarAccess.getEAutotuningCaseAccess().getBEGINTerminalRuleCall_1());
+			newLeafNode(this_BEGIN_1, grammarAccess.getEHPCCaseAccess().getBEGINTerminalRuleCall_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEAutotuningCaseAccess().getHpcEHPCParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getEHPCCaseAccess().getHpcEHPCParserRuleCall_2_0());
 				}
 				lv_hpc_2_0=ruleEHPC
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEAutotuningCaseRule());
+						$current = createModelElementForParent(grammarAccess.getEHPCCaseRule());
 					}
 					set(
 						$current,
@@ -411,7 +411,7 @@ ruleEAutotuningCase returns [EObject current=null]
 		)
 		this_END_3=RULE_END
 		{
-			newLeafNode(this_END_3, grammarAccess.getEAutotuningCaseAccess().getENDTerminalRuleCall_3());
+			newLeafNode(this_END_3, grammarAccess.getEHPCCaseAccess().getENDTerminalRuleCall_3());
 		}
 	)
 ;
@@ -2719,17 +2719,17 @@ ruleEHPCConfig returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEHPCConfigAccess().getAi_frameworkEParallelisationParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_1_0());
 				}
-				lv_ai_framework_1_0=ruleEParallelisation
+				lv_parallelisation_1_0=ruleEParallelisation
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEHPCConfigRule());
 					}
 					set(
 						$current,
-						"ai_framework",
-						lv_ai_framework_1_0,
+						"parallelisation",
+						lv_parallelisation_1_0,
 						"org.sodalite.dsl.optimization.Optimization.EParallelisation");
 					afterParserOrEnumRuleCall();
 				}

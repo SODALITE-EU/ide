@@ -59,7 +59,7 @@ public class OptimizationParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEOptimizationAccess().getGroup_3(), "rule__EOptimization__Group_3__0");
 			builder.put(grammarAccess.getEOptimizationAccess().getGroup_4(), "rule__EOptimization__Group_4__0");
 			builder.put(grammarAccess.getEAITrainingCaseAccess().getGroup(), "rule__EAITrainingCase__Group__0");
-			builder.put(grammarAccess.getEAutotuningCaseAccess().getGroup(), "rule__EAutotuningCase__Group__0");
+			builder.put(grammarAccess.getEHPCCaseAccess().getGroup(), "rule__EHPCCase__Group__0");
 			builder.put(grammarAccess.getEOptBuildAccess().getGroup_0(), "rule__EOptBuild__Group_0__0");
 			builder.put(grammarAccess.getEOptBuildAccess().getGroup_1(), "rule__EOptBuild__Group_1__0");
 			builder.put(grammarAccess.getEAutotuningAccess().getGroup_0(), "rule__EAutotuning__Group_0__0");
@@ -135,7 +135,7 @@ public class OptimizationParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEOptimizationAccess().getAutotuningAssignment_4_2(), "rule__EOptimization__AutotuningAssignment_4_2");
 			builder.put(grammarAccess.getEOptimizationAccess().getApp_optimizationAssignment_5(), "rule__EOptimization__App_optimizationAssignment_5");
 			builder.put(grammarAccess.getEAITrainingCaseAccess().getAi_trainingAssignment_2(), "rule__EAITrainingCase__Ai_trainingAssignment_2");
-			builder.put(grammarAccess.getEAutotuningCaseAccess().getHpcAssignment_2(), "rule__EAutotuningCase__HpcAssignment_2");
+			builder.put(grammarAccess.getEHPCCaseAccess().getHpcAssignment_2(), "rule__EHPCCase__HpcAssignment_2");
 			builder.put(grammarAccess.getEOptBuildAccess().getCpu_typeAssignment_0_1(), "rule__EOptBuild__Cpu_typeAssignment_0_1");
 			builder.put(grammarAccess.getEOptBuildAccess().getAcc_typeAssignment_1_1(), "rule__EOptBuild__Acc_typeAssignment_1_1");
 			builder.put(grammarAccess.getEAutotuningAccess().getTunerAssignment_0_1(), "rule__EAutotuning__TunerAssignment_0_1");
@@ -178,7 +178,7 @@ public class OptimizationParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEOPENACCCaseAccess().getOpenaccAssignment_2(), "rule__EOPENACCCase__OpenaccAssignment_2");
 			builder.put(grammarAccess.getEOPENMPCaseAccess().getOpenmpAssignment_2(), "rule__EOPENMPCase__OpenmpAssignment_2");
 			builder.put(grammarAccess.getEMPICaseAccess().getMpiAssignment_2(), "rule__EMPICase__MpiAssignment_2");
-			builder.put(grammarAccess.getEHPCConfigAccess().getAi_frameworkAssignment_1(), "rule__EHPCConfig__Ai_frameworkAssignment_1");
+			builder.put(grammarAccess.getEHPCConfigAccess().getParallelisationAssignment_1(), "rule__EHPCConfig__ParallelisationAssignment_1");
 			builder.put(grammarAccess.getEHPCDataAccess().getLocationAssignment_0_1(), "rule__EHPCData__LocationAssignment_0_1");
 			builder.put(grammarAccess.getEHPCDataAccess().getBasedataAssignment_1_1(), "rule__EHPCData__BasedataAssignment_1_1");
 			builder.put(grammarAccess.getEHPCDataAccess().getSizeAssignment_2_1(), "rule__EHPCData__SizeAssignment_2_1");

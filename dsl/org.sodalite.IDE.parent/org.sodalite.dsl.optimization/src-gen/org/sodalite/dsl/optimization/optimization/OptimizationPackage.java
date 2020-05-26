@@ -206,14 +206,14 @@ public interface OptimizationPackage extends EPackage
   int EAI_TRAINING_CASE_FEATURE_COUNT = EOPTIMIZATION_CASES_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAutotuningCaseImpl <em>EAutotuning Case</em>}' class.
+   * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EHPCCaseImpl <em>EHPC Case</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.sodalite.dsl.optimization.optimization.impl.EAutotuningCaseImpl
-   * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEAutotuningCase()
+   * @see org.sodalite.dsl.optimization.optimization.impl.EHPCCaseImpl
+   * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEHPCCase()
    * @generated
    */
-  int EAUTOTUNING_CASE = 4;
+  int EHPC_CASE = 4;
 
   /**
    * The feature id for the '<em><b>Hpc</b></em>' containment reference.
@@ -222,16 +222,16 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EAUTOTUNING_CASE__HPC = EOPTIMIZATION_CASES_FEATURE_COUNT + 0;
+  int EHPC_CASE__HPC = EOPTIMIZATION_CASES_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>EAutotuning Case</em>' class.
+   * The number of structural features of the '<em>EHPC Case</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EAUTOTUNING_CASE_FEATURE_COUNT = EOPTIMIZATION_CASES_FEATURE_COUNT + 1;
+  int EHPC_CASE_FEATURE_COUNT = EOPTIMIZATION_CASES_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EOptBuildImpl <em>EOpt Build</em>}' class.
@@ -1041,13 +1041,13 @@ public interface OptimizationPackage extends EPackage
   int EHPC_CONFIG = 28;
 
   /**
-   * The feature id for the '<em><b>Ai framework</b></em>' attribute.
+   * The feature id for the '<em><b>Parallelisation</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EHPC_CONFIG__AI_FRAMEWORK = 0;
+  int EHPC_CONFIG__PARALLELISATION = 0;
 
   /**
    * The number of structural features of the '<em>EHPC Config</em>' class.
@@ -1491,25 +1491,25 @@ public interface OptimizationPackage extends EPackage
   EReference getEAITrainingCase_Ai_training();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EAutotuningCase <em>EAutotuning Case</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EHPCCase <em>EHPC Case</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EAutotuning Case</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EAutotuningCase
+   * @return the meta object for class '<em>EHPC Case</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EHPCCase
    * @generated
    */
-  EClass getEAutotuningCase();
+  EClass getEHPCCase();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EAutotuningCase#getHpc <em>Hpc</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EHPCCase#getHpc <em>Hpc</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Hpc</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EAutotuningCase#getHpc()
-   * @see #getEAutotuningCase()
+   * @see org.sodalite.dsl.optimization.optimization.EHPCCase#getHpc()
+   * @see #getEHPCCase()
    * @generated
    */
-  EReference getEAutotuningCase_Hpc();
+  EReference getEHPCCase_Hpc();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EOptBuild <em>EOpt Build</em>}'.
@@ -2192,15 +2192,15 @@ public interface OptimizationPackage extends EPackage
   EClass getEHPCConfig();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getAi_framework <em>Ai framework</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation <em>Parallelisation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Ai framework</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EHPCConfig#getAi_framework()
+   * @return the meta object for the attribute '<em>Parallelisation</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation()
    * @see #getEHPCConfig()
    * @generated
    */
-  EAttribute getEHPCConfig_Ai_framework();
+  EAttribute getEHPCConfig_Parallelisation();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EHPCData <em>EHPC Data</em>}'.
@@ -2621,14 +2621,14 @@ public interface OptimizationPackage extends EPackage
     EReference EAI_TRAINING_CASE__AI_TRAINING = eINSTANCE.getEAITrainingCase_Ai_training();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAutotuningCaseImpl <em>EAutotuning Case</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EHPCCaseImpl <em>EHPC Case</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.dsl.optimization.optimization.impl.EAutotuningCaseImpl
-     * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEAutotuningCase()
+     * @see org.sodalite.dsl.optimization.optimization.impl.EHPCCaseImpl
+     * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEHPCCase()
      * @generated
      */
-    EClass EAUTOTUNING_CASE = eINSTANCE.getEAutotuningCase();
+    EClass EHPC_CASE = eINSTANCE.getEHPCCase();
 
     /**
      * The meta object literal for the '<em><b>Hpc</b></em>' containment reference feature.
@@ -2636,7 +2636,7 @@ public interface OptimizationPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EAUTOTUNING_CASE__HPC = eINSTANCE.getEAutotuningCase_Hpc();
+    EReference EHPC_CASE__HPC = eINSTANCE.getEHPCCase_Hpc();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EOptBuildImpl <em>EOpt Build</em>}' class.
@@ -3199,12 +3199,12 @@ public interface OptimizationPackage extends EPackage
     EClass EHPC_CONFIG = eINSTANCE.getEHPCConfig();
 
     /**
-     * The meta object literal for the '<em><b>Ai framework</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Parallelisation</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EHPC_CONFIG__AI_FRAMEWORK = eINSTANCE.getEHPCConfig_Ai_framework();
+    EAttribute EHPC_CONFIG__PARALLELISATION = eINSTANCE.getEHPCConfig_Parallelisation();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EHPCDataImpl <em>EHPC Data</em>}' class.

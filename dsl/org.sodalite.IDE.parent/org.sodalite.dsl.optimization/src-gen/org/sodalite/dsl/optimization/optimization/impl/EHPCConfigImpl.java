@@ -21,7 +21,7 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCConfigImpl#getAi_framework <em>Ai framework</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCConfigImpl#getParallelisation <em>Parallelisation</em>}</li>
  * </ul>
  *
  * @generated
@@ -29,24 +29,24 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPCConfig
 {
   /**
-   * The default value of the '{@link #getAi_framework() <em>Ai framework</em>}' attribute.
+   * The default value of the '{@link #getParallelisation() <em>Parallelisation</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAi_framework()
+   * @see #getParallelisation()
    * @generated
    * @ordered
    */
-  protected static final String AI_FRAMEWORK_EDEFAULT = null;
+  protected static final String PARALLELISATION_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getAi_framework() <em>Ai framework</em>}' attribute.
+   * The cached value of the '{@link #getParallelisation() <em>Parallelisation</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAi_framework()
+   * @see #getParallelisation()
    * @generated
    * @ordered
    */
-  protected String ai_framework = AI_FRAMEWORK_EDEFAULT;
+  protected String parallelisation = PARALLELISATION_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,9 +75,9 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
    * @generated
    */
   @Override
-  public String getAi_framework()
+  public String getParallelisation()
   {
-    return ai_framework;
+    return parallelisation;
   }
 
   /**
@@ -86,12 +86,12 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
    * @generated
    */
   @Override
-  public void setAi_framework(String newAi_framework)
+  public void setParallelisation(String newParallelisation)
   {
-    String oldAi_framework = ai_framework;
-    ai_framework = newAi_framework;
+    String oldParallelisation = parallelisation;
+    parallelisation = newParallelisation;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC_CONFIG__AI_FRAMEWORK, oldAi_framework, ai_framework));
+      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC_CONFIG__PARALLELISATION, oldParallelisation, parallelisation));
   }
 
   /**
@@ -104,8 +104,8 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
   {
     switch (featureID)
     {
-      case OptimizationPackage.EHPC_CONFIG__AI_FRAMEWORK:
-        return getAi_framework();
+      case OptimizationPackage.EHPC_CONFIG__PARALLELISATION:
+        return getParallelisation();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +120,8 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
   {
     switch (featureID)
     {
-      case OptimizationPackage.EHPC_CONFIG__AI_FRAMEWORK:
-        setAi_framework((String)newValue);
+      case OptimizationPackage.EHPC_CONFIG__PARALLELISATION:
+        setParallelisation((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +137,8 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
   {
     switch (featureID)
     {
-      case OptimizationPackage.EHPC_CONFIG__AI_FRAMEWORK:
-        setAi_framework(AI_FRAMEWORK_EDEFAULT);
+      case OptimizationPackage.EHPC_CONFIG__PARALLELISATION:
+        setParallelisation(PARALLELISATION_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -154,8 +154,8 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
   {
     switch (featureID)
     {
-      case OptimizationPackage.EHPC_CONFIG__AI_FRAMEWORK:
-        return AI_FRAMEWORK_EDEFAULT == null ? ai_framework != null : !AI_FRAMEWORK_EDEFAULT.equals(ai_framework);
+      case OptimizationPackage.EHPC_CONFIG__PARALLELISATION:
+        return PARALLELISATION_EDEFAULT == null ? parallelisation != null : !PARALLELISATION_EDEFAULT.equals(parallelisation);
     }
     return super.eIsSet(featureID);
   }
@@ -171,8 +171,8 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (ai_framework: ");
-    result.append(ai_framework);
+    result.append(" (parallelisation: ");
+    result.append(parallelisation);
     result.append(')');
     return result.toString();
   }

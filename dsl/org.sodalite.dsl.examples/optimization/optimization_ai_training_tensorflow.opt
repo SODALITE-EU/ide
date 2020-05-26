@@ -1,0 +1,38 @@
+optimization:
+	enable_opt_build: true
+	enable_autotuning: true
+	app_type: AI_Training
+	opt_build:
+		CPU_type: ARM
+		acc_type: NVIDIA-V100 
+	autotuning:
+		tuner: CREATA
+		input: 
+			parameters:
+				typing:
+					int: "NB"
+				constraints:
+					range: 'NB 80, 90, 100, 120, 140'
+			build:
+				command: "make -DNB=$NB"
+			run:
+				command: './solver'
+	ai_training:
+		config:
+			ai_framework: TensorFlow
+			type: translation
+			distributed_training: true
+			layers: 6
+			parameters: 872684236
+		data:
+			location: "/some/data"
+			basedata: Imagenet
+			size: 67
+			count: 4389
+			etl:
+				prefetch: 100
+				cache: 100
+		tensorflow:
+			version: "1.1"
+			xla: true
+		

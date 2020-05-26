@@ -28,17 +28,17 @@ EOptimization:
 		BEGIN
 		opt_build=EOptBuild
 		END
-	)?  //TODO Force to be mandatory if enable_opt_build = True
+	)?  
 	('autotuning:'
 		BEGIN
 		autotuning=EAutotuning
 		END
-	)?  //TODO Force to be mandatory if enable_autotuning = True
+	)?  
 	app_optimization = EOptimizationCases
 ;
 
 EOptimizationCases:
-	EAutotuningCase | EAITrainingCase
+	EAITrainingCase | EHPCCase
 ;
 
 EAITrainingCase:
@@ -46,15 +46,15 @@ EAITrainingCase:
 		BEGIN
 		ai_training=EAITraining
 		END
-	)  //TODO Force to be mandatory if app_type = AI_Training
+	)  
 ;
 
-EAutotuningCase:
+EHPCCase:
 	('hpc:'
 		BEGIN
 		hpc=EHPC
 		END
-	) //TODO Force to be mandatory if app_type = HPC
+	) 
 ;
 
 EAppType:
@@ -145,7 +145,7 @@ EPyTorchCase:
 		BEGIN
 		pytorch=EPyTorch
 		END
-	) //TODO Force to be mandatory if config.AI_Framework = PyTorch
+	) 
 ;
 
 ETensorFlowCase:
@@ -153,7 +153,7 @@ ETensorFlowCase:
 		BEGIN
 		tensorflow=ETensorFlow
 		END
-	)  //TODO Force to be mandatory if config.AI_Framework = TensorFlow
+	) 
 ;
 
 EKerasCase:
@@ -161,7 +161,7 @@ EKerasCase:
 		BEGIN
 		keras=EKeras
 		END
-	)  //TODO Force to be mandatory if config.AI_Framework = Keras
+	) 
 ;
 	
 EAITrainingConfig:
@@ -239,7 +239,7 @@ EOPENCLCase:
 		BEGIN
 		opencl=EOPENCL
 		END
-	) //TODO Force to be mandatory if config.parallelisation = OPENMP
+	) 
 ;
 
 EOPENACCCase:
@@ -247,7 +247,7 @@ EOPENACCCase:
 		BEGIN
 		openacc=EOPENACC
 		END
-	) //TODO Force to be mandatory if config.parallelisation = OPENMP
+	) 
 ;
 
 EOPENMPCase:
@@ -255,7 +255,7 @@ EOPENMPCase:
 		BEGIN
 		openmp=EOPENMP
 		END
-	) //TODO Force to be mandatory if config.parallelisation = OPENMP
+	) 
 ;
 
 EMPICase:
@@ -263,11 +263,11 @@ EMPICase:
 		BEGIN
 		mpi=EMPI
 		END
-	) //TODO Force to be mandatory if config.parallelisation = OPENMP
+	) 
 ;
 
 EHPCConfig:
-	'parallelisation:' ai_framework=EParallelisation
+	'parallelisation:' parallelisation=EParallelisation
 ;	
 
 EParallelisation:

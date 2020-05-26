@@ -18,8 +18,8 @@ import org.sodalite.dsl.optimization.optimization.EAITrainingData;
 import org.sodalite.dsl.optimization.optimization.EAITrainingETL;
 import org.sodalite.dsl.optimization.optimization.EAutotuingDSL;
 import org.sodalite.dsl.optimization.optimization.EAutotuning;
-import org.sodalite.dsl.optimization.optimization.EAutotuningCase;
 import org.sodalite.dsl.optimization.optimization.EBuild;
+import org.sodalite.dsl.optimization.optimization.EHPCCase;
 import org.sodalite.dsl.optimization.optimization.EHPCCases;
 import org.sodalite.dsl.optimization.optimization.EHPCConfig;
 import org.sodalite.dsl.optimization.optimization.EHPCData;
@@ -83,7 +83,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eAutotuningCaseEClass = null;
+  private EClass ehpcCaseEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -496,9 +496,9 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EClass getEAutotuningCase()
+  public EClass getEHPCCase()
   {
-    return eAutotuningCaseEClass;
+    return ehpcCaseEClass;
   }
 
   /**
@@ -507,9 +507,9 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EReference getEAutotuningCase_Hpc()
+  public EReference getEHPCCase_Hpc()
   {
-    return (EReference)eAutotuningCaseEClass.getEStructuralFeatures().get(0);
+    return (EReference)ehpcCaseEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1222,7 +1222,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EAttribute getEHPCConfig_Ai_framework()
+  public EAttribute getEHPCConfig_Parallelisation()
   {
     return (EAttribute)ehpcConfigEClass.getEStructuralFeatures().get(0);
   }
@@ -1571,8 +1571,8 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     eaiTrainingCaseEClass = createEClass(EAI_TRAINING_CASE);
     createEReference(eaiTrainingCaseEClass, EAI_TRAINING_CASE__AI_TRAINING);
 
-    eAutotuningCaseEClass = createEClass(EAUTOTUNING_CASE);
-    createEReference(eAutotuningCaseEClass, EAUTOTUNING_CASE__HPC);
+    ehpcCaseEClass = createEClass(EHPC_CASE);
+    createEReference(ehpcCaseEClass, EHPC_CASE__HPC);
 
     eOptBuildEClass = createEClass(EOPT_BUILD);
     createEAttribute(eOptBuildEClass, EOPT_BUILD__CPU_TYPE);
@@ -1661,7 +1661,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     createEReference(empiCaseEClass, EMPI_CASE__MPI);
 
     ehpcConfigEClass = createEClass(EHPC_CONFIG);
-    createEAttribute(ehpcConfigEClass, EHPC_CONFIG__AI_FRAMEWORK);
+    createEAttribute(ehpcConfigEClass, EHPC_CONFIG__PARALLELISATION);
 
     ehpcDataEClass = createEClass(EHPC_DATA);
     createEAttribute(ehpcDataEClass, EHPC_DATA__LOCATION);
@@ -1727,7 +1727,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
 
     // Add supertypes to classes
     eaiTrainingCaseEClass.getESuperTypes().add(this.getEOptimizationCases());
-    eAutotuningCaseEClass.getESuperTypes().add(this.getEOptimizationCases());
+    ehpcCaseEClass.getESuperTypes().add(this.getEOptimizationCases());
     ePyTorchCaseEClass.getESuperTypes().add(this.getEAITrainingCases());
     eTensorFlowCaseEClass.getESuperTypes().add(this.getEAITrainingCases());
     eKerasCaseEClass.getESuperTypes().add(this.getEAITrainingCases());
@@ -1753,8 +1753,8 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEClass(eaiTrainingCaseEClass, EAITrainingCase.class, "EAITrainingCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEAITrainingCase_Ai_training(), this.getEAITraining(), null, "ai_training", null, 0, 1, EAITrainingCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eAutotuningCaseEClass, EAutotuningCase.class, "EAutotuningCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEAutotuningCase_Hpc(), this.getEHPC(), null, "hpc", null, 0, 1, EAutotuningCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(ehpcCaseEClass, EHPCCase.class, "EHPCCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEHPCCase_Hpc(), this.getEHPC(), null, "hpc", null, 0, 1, EHPCCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eOptBuildEClass, EOptBuild.class, "EOptBuild", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEOptBuild_Cpu_type(), ecorePackage.getEString(), "cpu_type", null, 0, 1, EOptBuild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1843,7 +1843,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEReference(getEMPICase_Mpi(), this.getEMPI(), null, "mpi", null, 0, 1, EMPICase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ehpcConfigEClass, EHPCConfig.class, "EHPCConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEHPCConfig_Ai_framework(), ecorePackage.getEString(), "ai_framework", null, 0, 1, EHPCConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEHPCConfig_Parallelisation(), ecorePackage.getEString(), "parallelisation", null, 0, 1, EHPCConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ehpcDataEClass, EHPCData.class, "EHPCData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEHPCData_Location(), ecorePackage.getEString(), "location", null, 0, 1, EHPCData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getAi_framework <em>Ai framework</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation <em>Parallelisation</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPCConfig()
@@ -24,25 +24,25 @@ import org.eclipse.emf.ecore.EObject;
 public interface EHPCConfig extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Ai framework</b></em>' attribute.
+   * Returns the value of the '<em><b>Parallelisation</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Ai framework</em>' attribute.
-   * @see #setAi_framework(String)
-   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPCConfig_Ai_framework()
+   * @return the value of the '<em>Parallelisation</em>' attribute.
+   * @see #setParallelisation(String)
+   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPCConfig_Parallelisation()
    * @model
    * @generated
    */
-  String getAi_framework();
+  String getParallelisation();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getAi_framework <em>Ai framework</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation <em>Parallelisation</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ai framework</em>' attribute.
-   * @see #getAi_framework()
+   * @param value the new value of the '<em>Parallelisation</em>' attribute.
+   * @see #getParallelisation()
    * @generated
    */
-  void setAi_framework(String value);
+  void setParallelisation(String value);
 
 } // EHPCConfig

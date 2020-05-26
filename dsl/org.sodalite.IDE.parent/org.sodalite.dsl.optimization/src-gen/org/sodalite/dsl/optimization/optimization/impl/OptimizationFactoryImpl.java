@@ -69,7 +69,7 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
       case OptimizationPackage.EOPTIMIZATION: return createEOptimization();
       case OptimizationPackage.EOPTIMIZATION_CASES: return createEOptimizationCases();
       case OptimizationPackage.EAI_TRAINING_CASE: return createEAITrainingCase();
-      case OptimizationPackage.EAUTOTUNING_CASE: return createEAutotuningCase();
+      case OptimizationPackage.EHPC_CASE: return createEHPCCase();
       case OptimizationPackage.EOPT_BUILD: return createEOptBuild();
       case OptimizationPackage.EAUTOTUNING: return createEAutotuning();
       case OptimizationPackage.EAUTOTUING_DSL: return createEAutotuingDSL();
@@ -159,10 +159,10 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EAutotuningCase createEAutotuningCase()
+  public EHPCCase createEHPCCase()
   {
-    EAutotuningCaseImpl eAutotuningCase = new EAutotuningCaseImpl();
-    return eAutotuningCase;
+    EHPCCaseImpl ehpcCase = new EHPCCaseImpl();
+    return ehpcCase;
   }
 
   /**

@@ -22,7 +22,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ai_training" eType="#//EAITraining"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EAutotuningCase" eSuperTypes="#//EOptimizationCases">
+  <eClassifiers xsi:type="ecore:EClass" name="EHPCCase" eSuperTypes="#//EOptimizationCases">
     <eStructuralFeatures xsi:type="ecore:EReference" name="hpc" eType="#//EHPC" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EOptBuild">
@@ -125,7 +125,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mpi" eType="#//EMPI" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EHPCConfig">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ai_framework" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parallelisation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EHPCData">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

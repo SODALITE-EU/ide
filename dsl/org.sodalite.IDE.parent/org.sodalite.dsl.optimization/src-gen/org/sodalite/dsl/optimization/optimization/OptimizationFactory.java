@@ -60,13 +60,13 @@ public interface OptimizationFactory extends EFactory
   EAITrainingCase createEAITrainingCase();
 
   /**
-   * Returns a new object of class '<em>EAutotuning Case</em>'.
+   * Returns a new object of class '<em>EHPC Case</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EAutotuning Case</em>'.
+   * @return a new object of class '<em>EHPC Case</em>'.
    * @generated
    */
-  EAutotuningCase createEAutotuningCase();
+  EHPCCase createEHPCCase();
 
   /**
    * Returns a new object of class '<em>EOpt Build</em>'.

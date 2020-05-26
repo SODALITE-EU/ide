@@ -21,9 +21,9 @@ import org.sodalite.dsl.optimization.optimization.EAITrainingData;
 import org.sodalite.dsl.optimization.optimization.EAITrainingETL;
 import org.sodalite.dsl.optimization.optimization.EAutotuingDSL;
 import org.sodalite.dsl.optimization.optimization.EAutotuning;
-import org.sodalite.dsl.optimization.optimization.EAutotuningCase;
 import org.sodalite.dsl.optimization.optimization.EBuild;
 import org.sodalite.dsl.optimization.optimization.EHPC;
+import org.sodalite.dsl.optimization.optimization.EHPCCase;
 import org.sodalite.dsl.optimization.optimization.EHPCConfig;
 import org.sodalite.dsl.optimization.optimization.EHPCData;
 import org.sodalite.dsl.optimization.optimization.EHPCETL;
@@ -84,14 +84,14 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case OptimizationPackage.EAUTOTUNING:
 				sequence_EAutotuning(context, (EAutotuning) semanticObject); 
 				return; 
-			case OptimizationPackage.EAUTOTUNING_CASE:
-				sequence_EAutotuningCase(context, (EAutotuningCase) semanticObject); 
-				return; 
 			case OptimizationPackage.EBUILD:
 				sequence_EBuild(context, (EBuild) semanticObject); 
 				return; 
 			case OptimizationPackage.EHPC:
 				sequence_EHPC(context, (EHPC) semanticObject); 
+				return; 
+			case OptimizationPackage.EHPC_CASE:
+				sequence_EHPCCase(context, (EHPCCase) semanticObject); 
 				return; 
 			case OptimizationPackage.EHPC_CONFIG:
 				sequence_EHPCConfig(context, (EHPCConfig) semanticObject); 
@@ -257,25 +257,6 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
-	 *     EOptimizationCases returns EAutotuningCase
-	 *     EAutotuningCase returns EAutotuningCase
-	 *
-	 * Constraint:
-	 *     hpc=EHPC
-	 */
-	protected void sequence_EAutotuningCase(ISerializationContext context, EAutotuningCase semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EAUTOTUNING_CASE__HPC) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EAUTOTUNING_CASE__HPC));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEAutotuningCaseAccess().getHpcEHPCParserRuleCall_2_0(), semanticObject.getHpc());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     EAutotuning returns EAutotuning
 	 *
 	 * Constraint:
@@ -306,18 +287,37 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
+	 *     EOptimizationCases returns EHPCCase
+	 *     EHPCCase returns EHPCCase
+	 *
+	 * Constraint:
+	 *     hpc=EHPC
+	 */
+	protected void sequence_EHPCCase(ISerializationContext context, EHPCCase semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EHPC_CASE__HPC) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EHPC_CASE__HPC));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEHPCCaseAccess().getHpcEHPCParserRuleCall_2_0(), semanticObject.getHpc());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EHPCConfig returns EHPCConfig
 	 *
 	 * Constraint:
-	 *     ai_framework=EParallelisation
+	 *     parallelisation=EParallelisation
 	 */
 	protected void sequence_EHPCConfig(ISerializationContext context, EHPCConfig semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EHPC_CONFIG__AI_FRAMEWORK) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EHPC_CONFIG__AI_FRAMEWORK));
+			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEHPCConfigAccess().getAi_frameworkEParallelisationParserRuleCall_1_0(), semanticObject.getAi_framework());
+		feeder.accept(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_1_0(), semanticObject.getParallelisation());
 		feeder.finish();
 	}
 	
