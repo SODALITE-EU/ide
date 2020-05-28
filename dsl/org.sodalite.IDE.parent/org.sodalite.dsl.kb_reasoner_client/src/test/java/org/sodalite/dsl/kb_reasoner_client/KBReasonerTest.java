@@ -52,7 +52,7 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI);
-		aadmIRI = saveAADM(null, "src/test/resources/snow.ttl").getIRI();
+		aadmIRI = saveAADM(null, "src/test/resources/snow.aadm.ttl").getIRI();
 	}
 	
 	@Test
@@ -121,15 +121,29 @@ class KBReasonerTest {
 	
 	@Test
 	void testSaveAADM() throws Exception {
-		KBSaveReportData report = saveAADM("snow", "src/test/resources/snow.ttl");
+		KBSaveReportData report = saveAADM("", "src/test/resources/snow.ttl");
+		assertFalse (report.hasErrors());
+		assertNotNull (report.getIRI());
+	}
+	
+	@Test
+	void testSaveRM() throws Exception {
+		KBSaveReportData report = saveRM("", "src/test/resources/snow.rm.ttl");
 		assertFalse (report.hasErrors());
 		assertNotNull (report.getIRI());
 	}
 
-	private KBSaveReportData saveAADM(String submissionId, String ttlPath) throws IOException, Exception {
+	private KBSaveReportData saveAADM(String aadmURI, String ttlPath) throws IOException, Exception {
 		Path aadm_path = FileSystems.getDefault().getPath(ttlPath);
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
-		KBSaveReportData report = kbclient.saveAADM(aadmTTL, submissionId);
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI);
+		return report;
+	}
+	
+	private KBSaveReportData saveRM(String rmURI, String ttlPath) throws IOException, Exception {
+		Path rm_path = FileSystems.getDefault().getPath(ttlPath);
+		String rmTTL = new String(Files.readAllBytes (rm_path));
+		KBSaveReportData report = kbclient.saveRM(rmTTL, rmURI);
 		return report;
 	}
 	

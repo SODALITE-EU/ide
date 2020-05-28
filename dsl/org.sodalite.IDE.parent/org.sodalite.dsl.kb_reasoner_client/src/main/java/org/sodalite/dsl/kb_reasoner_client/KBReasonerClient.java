@@ -158,6 +158,47 @@ public class KBReasonerClient implements KBReasoner {
 		
 		return report;
 	}
+	
+	@Override
+	public KBSaveReportData saveRM(String rmTTL, String rmURI) throws Exception{
+		Assert.isTrue(!rmTTL.isEmpty(), "Turtle content for RM can neither be null nor empty");
+		String url = kbReasonerUri + "saveRM";
+
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+		//AADM TTL
+		map.add("rmTTL", rmTTL);
+		
+		//AADM TTL
+		map.add("rmURI", rmURI);
+		
+		KBSaveReportData report = new KBSaveReportData();
+		try {
+			//Send multipart-form message
+			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
+			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
+			report.setIRI(jsonObject.get("rmuri").getAsString());
+			JsonArray warningsJson = jsonObject.getAsJsonArray("warnings");
+			if (warningsJson != null){
+				report.setWarnings(processWarnings(warningsJson.toString()));
+			}
+		}catch (Exception ex) {
+			if (ex instanceof HttpClientErrorException) {
+				HttpClientErrorException hcee = (HttpClientErrorException) ex;
+				if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
+					String result = hcee.getResponseBodyAsString();
+					String json = result.substring(result.indexOf(":") + 1);
+					report.setErrors(processErrors (json));
+				}else {
+					throw ex;
+				}
+			}else {
+				throw ex;
+			}
+		}
+		
+		return report;
+	}
 
 	@Override
 	public KBOptimizationReportData optimizeAADM(String aadmTTL, String aadmURI) throws Exception{

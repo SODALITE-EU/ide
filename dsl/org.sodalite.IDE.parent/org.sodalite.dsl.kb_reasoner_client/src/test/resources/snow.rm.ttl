@@ -1,0 +1,1999 @@
+# baseURI: https://www.sodalite.eu/ontologies/exchange/rm/
+# imports: https://www.sodalite.eu/ontologies/exchange/
+
+@prefix : <https://www.sodalite.eu/ontologies/exchange/rm/> .
+@prefix exchange: <https://www.sodalite.eu/ontologies/exchange/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:
+  rdf:type owl:Ontology ;
+  owl:imports exchange: ;
+  owl:versionInfo "Created by the SODALITE IDE" ;
+.
+
+:RM_1
+  rdf:type exchange:RM ;
+  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
+.
+
+:Parameter_1
+  rdf:type exchange:Parameter ;
+  exchange:name "valid_values" ;
+  exchange:listValue "udp" ;
+  exchange:listValue "tcp" ;
+  exchange:listValue "icmp" ;
+.		
+:Parameter_2
+  rdf:type exchange:Parameter ;
+  exchange:name "min_length" ;
+  exchange:value "1" ;
+.		
+	
+:Parameter_3
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'registry_ip' ; 
+.
+
+:Parameter_4
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_5
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_3 ;
+  exchange:hasParameter :Parameter_4 ;
+.	
+:Parameter_6
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'image_name' ; 
+.
+
+:Parameter_7
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_8
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_6 ;
+  exchange:hasParameter :Parameter_7 ;
+.	
+:Parameter_9
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'alias' ; 
+.
+
+:Parameter_10
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_11
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_9 ;
+  exchange:hasParameter :Parameter_10 ;
+.	
+:Parameter_12
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'pull' ; 
+.
+
+:Parameter_13
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_14
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_12 ;
+  exchange:hasParameter :Parameter_13 ;
+.	
+:Parameter_15
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'command' ; 
+.
+
+:Parameter_16
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_17
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_15 ;
+  exchange:hasParameter :Parameter_16 ;
+.	
+:Parameter_18
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'env' ; 
+.
+
+:Parameter_19
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_20
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_18 ;
+  exchange:hasParameter :Parameter_19 ;
+.	
+:Parameter_21
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'ports' ; 
+.
+
+:Parameter_22
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_23
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_21 ;
+  exchange:hasParameter :Parameter_22 ;
+.	
+:Parameter_24
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'exposed_ports' ; 
+.
+
+:Parameter_25
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_26
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_24 ;
+  exchange:hasParameter :Parameter_25 ;
+.	
+:Parameter_27
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'volumes' ; 
+.
+
+:Parameter_28
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_29
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_27 ;
+  exchange:hasParameter :Parameter_28 ;
+.	
+:Parameter_30
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'restart_policy' ; 
+.
+
+:Parameter_31
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_32
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_30 ;
+  exchange:hasParameter :Parameter_31 ;
+.	
+:Parameter_33
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'alias' ; 
+.
+
+:Parameter_34
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_35
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_33 ;
+  exchange:hasParameter :Parameter_34 ;
+.	
+:Parameter_36
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'group_name' ; 
+.
+
+:Parameter_37
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_38
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_36 ;
+  exchange:hasParameter :Parameter_37 ;
+.	
+:Parameter_39
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'group_description' ; 
+.
+
+:Parameter_40
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_41
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_39 ;
+  exchange:hasParameter :Parameter_40 ;
+.	
+:Parameter_42
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'ports' ; 
+.
+
+:Parameter_43
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_44
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_42 ;
+  exchange:hasParameter :Parameter_43 ;
+.	
+:Parameter_45
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'group_name' ; 
+.
+
+:Parameter_46
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_47
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_45 ;
+  exchange:hasParameter :Parameter_46 ;
+.	
+:Parameter_48
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'name' ; 
+.
+
+:Parameter_49
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_50
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_48 ;
+  exchange:hasParameter :Parameter_49 ;
+.	
+:Parameter_51
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'image' ; 
+.
+
+:Parameter_52
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_53
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_51 ;
+  exchange:hasParameter :Parameter_52 ;
+.	
+:Parameter_54
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'flavor' ; 
+.
+
+:Parameter_55
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_56
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_54 ;
+  exchange:hasParameter :Parameter_55 ;
+.	
+:Parameter_57
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'network' ; 
+.
+
+:Parameter_58
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_59
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_57 ;
+  exchange:hasParameter :Parameter_58 ;
+.	
+:Parameter_60
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'security_groups' ; 
+.
+
+:Parameter_61
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_62
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_60 ;
+  exchange:hasParameter :Parameter_61 ;
+.	
+:Parameter_63
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'key_name' ; 
+.
+
+:Parameter_64
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_65
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_63 ;
+  exchange:hasParameter :Parameter_64 ;
+.	
+
+:Parameter_66
+  rdf:type exchange:Parameter ;
+  exchange:name "attribute" ;  
+  exchange:value 'registry_ip' ; 
+.
+
+:Parameter_67
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_68
+  rdf:type exchange:Parameter ;
+  exchange:name "get_attribute" ;
+  exchange:hasParameter :Parameter_66 ;
+  exchange:hasParameter :Parameter_67 ;
+.	
+:Parameter_69
+  rdf:type exchange:Parameter ;
+  exchange:name "attribute" ;  
+  exchange:value 'public_address' ; 
+.
+
+:Parameter_70
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+:Parameter_71
+  rdf:type exchange:Parameter ;
+  exchange:name "req_cap" ;  
+  exchange:value 'host' ; 
+.
+
+:Parameter_72
+  rdf:type exchange:Parameter ;
+  exchange:name "get_attribute" ;
+  exchange:hasParameter :Parameter_69 ;
+  exchange:hasParameter :Parameter_70 ;
+  exchange:hasParameter :Parameter_71 ;
+.	
+:Parameter_73
+  rdf:type exchange:Parameter ;
+  exchange:name "attribute" ;  
+  exchange:value 'registry_ip' ; 
+.
+
+:Parameter_74
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+:Parameter_75
+  rdf:type exchange:Parameter ;
+  exchange:name "req_cap" ;  
+  exchange:value 'host' ; 
+.
+
+:Parameter_76
+  rdf:type exchange:Parameter ;
+  exchange:name "get_attribute" ;
+  exchange:hasParameter :Parameter_73 ;
+  exchange:hasParameter :Parameter_74 ;
+  exchange:hasParameter :Parameter_75 ;
+.	
+:Parameter_77
+  rdf:type exchange:Parameter ;
+  exchange:name "attribute" ;  
+  exchange:value 'ansible_ip' ; 
+.
+
+:Parameter_78
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+:Parameter_79
+  rdf:type exchange:Parameter ;
+  exchange:name "req_cap" ;  
+  exchange:value 'host' ; 
+.
+
+:Parameter_80
+  rdf:type exchange:Parameter ;
+  exchange:name "get_attribute" ;
+  exchange:hasParameter :Parameter_77 ;
+  exchange:hasParameter :Parameter_78 ;
+  exchange:hasParameter :Parameter_79 ;
+.	
+:Parameter_81
+  rdf:type exchange:Parameter ;
+  exchange:name "attribute" ;  
+  exchange:value 'id' ; 
+.
+
+:Parameter_82
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_83
+  rdf:type exchange:Parameter ;
+  exchange:name "get_attribute" ;
+  exchange:hasParameter :Parameter_81 ;
+  exchange:hasParameter :Parameter_82 ;
+.	
+
+
+:Parameter_84
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_68 ; 
+.
+
+:Parameter_85
+  rdf:type exchange:Parameter ;
+  exchange:name "registry_ip" ;
+  exchange:hasParameter :Parameter_84 ;
+.	
+
+:Parameter_86
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_72 ; 
+.
+
+:Parameter_87
+  rdf:type exchange:Parameter ;
+  exchange:name "public_ipv4_address" ;
+  exchange:hasParameter :Parameter_86 ;
+.	
+
+:Parameter_88
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_5 ; 
+.
+
+:Parameter_89
+  rdf:type exchange:Parameter ;
+  exchange:name "registry_ip" ;
+  exchange:hasParameter :Parameter_88 ;
+.	
+
+:Parameter_90
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_76 ; 
+.
+
+:Parameter_91
+  rdf:type exchange:Parameter ;
+  exchange:name "registry_ip" ;
+  exchange:hasParameter :Parameter_90 ;
+.	
+
+:Parameter_92
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_80 ; 
+.
+
+:Parameter_93
+  rdf:type exchange:Parameter ;
+  exchange:name "ansible_ip" ;
+  exchange:hasParameter :Parameter_92 ;
+.	
+
+:Parameter_94
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_8 ; 
+.
+
+:Parameter_95
+  rdf:type exchange:Parameter ;
+  exchange:name "image_name" ;
+  exchange:hasParameter :Parameter_94 ;
+.	
+
+:Parameter_96
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_11 ; 
+.
+
+:Parameter_97
+  rdf:type exchange:Parameter ;
+  exchange:name "alias" ;
+  exchange:hasParameter :Parameter_96 ;
+.	
+
+:Parameter_98
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_14 ; 
+.
+
+:Parameter_99
+  rdf:type exchange:Parameter ;
+  exchange:name "pull" ;
+  exchange:hasParameter :Parameter_98 ;
+.	
+
+:Parameter_100
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_17 ; 
+.
+
+:Parameter_101
+  rdf:type exchange:Parameter ;
+  exchange:name "command" ;
+  exchange:hasParameter :Parameter_100 ;
+.	
+
+:Parameter_102
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_20 ; 
+.
+
+:Parameter_103
+  rdf:type exchange:Parameter ;
+  exchange:name "env" ;
+  exchange:hasParameter :Parameter_102 ;
+.	
+
+:Parameter_104
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_23 ; 
+.
+
+:Parameter_105
+  rdf:type exchange:Parameter ;
+  exchange:name "ports" ;
+  exchange:hasParameter :Parameter_104 ;
+.	
+
+:Parameter_106
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_26 ; 
+.
+
+:Parameter_107
+  rdf:type exchange:Parameter ;
+  exchange:name "exposed_ports" ;
+  exchange:hasParameter :Parameter_106 ;
+.	
+
+:Parameter_108
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_29 ; 
+.
+
+:Parameter_109
+  rdf:type exchange:Parameter ;
+  exchange:name "volumes" ;
+  exchange:hasParameter :Parameter_108 ;
+.	
+
+:Parameter_110
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_32 ; 
+.
+
+:Parameter_111
+  rdf:type exchange:Parameter ;
+  exchange:name "restart_policy" ;
+  exchange:hasParameter :Parameter_110 ;
+.	
+
+:Parameter_112
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_35 ; 
+.
+
+:Parameter_113
+  rdf:type exchange:Parameter ;
+  exchange:name "alias" ;
+  exchange:hasParameter :Parameter_112 ;
+.	
+
+:Parameter_114
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_38 ; 
+.
+
+:Parameter_115
+  rdf:type exchange:Parameter ;
+  exchange:name "group_name" ;
+  exchange:hasParameter :Parameter_114 ;
+.	
+
+:Parameter_116
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_41 ; 
+.
+
+:Parameter_117
+  rdf:type exchange:Parameter ;
+  exchange:name "group_description" ;
+  exchange:hasParameter :Parameter_116 ;
+.	
+
+:Parameter_118
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_44 ; 
+.
+
+:Parameter_119
+  rdf:type exchange:Parameter ;
+  exchange:name "port" ;
+  exchange:hasParameter :Parameter_118 ;
+.	
+
+:Parameter_120
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_47 ; 
+.
+
+:Parameter_121
+  rdf:type exchange:Parameter ;
+  exchange:name "group_name" ;
+  exchange:hasParameter :Parameter_120 ;
+.	
+
+:Parameter_122
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_50 ; 
+.
+
+:Parameter_123
+  rdf:type exchange:Parameter ;
+  exchange:name "vm_name" ;
+  exchange:hasParameter :Parameter_122 ;
+.	
+
+:Parameter_124
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_53 ; 
+.
+
+:Parameter_125
+  rdf:type exchange:Parameter ;
+  exchange:name "image" ;
+  exchange:hasParameter :Parameter_124 ;
+.	
+
+:Parameter_126
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_56 ; 
+.
+
+:Parameter_127
+  rdf:type exchange:Parameter ;
+  exchange:name "flavor" ;
+  exchange:hasParameter :Parameter_126 ;
+.	
+
+:Parameter_128
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_59 ; 
+.
+
+:Parameter_129
+  rdf:type exchange:Parameter ;
+  exchange:name "network" ;
+  exchange:hasParameter :Parameter_128 ;
+.	
+
+:Parameter_130
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_62 ; 
+.
+
+:Parameter_131
+  rdf:type exchange:Parameter ;
+  exchange:name "security_groups" ;
+  exchange:hasParameter :Parameter_130 ;
+.	
+
+:Parameter_132
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_65 ; 
+.
+
+:Parameter_133
+  rdf:type exchange:Parameter ;
+  exchange:name "key_name" ;
+  exchange:hasParameter :Parameter_132 ;
+.	
+
+:Parameter_134
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_83 ; 
+.
+
+:Parameter_135
+  rdf:type exchange:Parameter ;
+  exchange:name "id" ;
+  exchange:hasParameter :Parameter_134 ;
+.	
+
+:Parameter_136
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_85 ;
+  exchange:hasParameter :Parameter_87 ;
+.
+
+:Parameter_137
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:value 'playbooks/docker/create_docker_host.yml' ;
+.
+
+:Parameter_138
+  rdf:type exchange:Parameter ;
+  exchange:name "create" ;
+  exchange:hasParameter :Parameter_136 ;
+  exchange:hasParameter :Parameter_137 ;
+.
+:Parameter_139
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_89 ;
+.
+
+:Parameter_140
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:value 'playbooks/docker/destroy_docker_host.yml' ;
+.
+
+:Parameter_141
+  rdf:type exchange:Parameter ;
+  exchange:name "delete" ;
+  exchange:hasParameter :Parameter_139 ;
+  exchange:hasParameter :Parameter_140 ;
+.
+:Parameter_142
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_91 ;
+  exchange:hasParameter :Parameter_93 ;
+  exchange:hasParameter :Parameter_95 ;
+  exchange:hasParameter :Parameter_97 ;
+  exchange:hasParameter :Parameter_99 ;
+  exchange:hasParameter :Parameter_101 ;
+  exchange:hasParameter :Parameter_103 ;
+  exchange:hasParameter :Parameter_105 ;
+  exchange:hasParameter :Parameter_107 ;
+  exchange:hasParameter :Parameter_109 ;
+  exchange:hasParameter :Parameter_111 ;
+.
+
+:Parameter_143
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:value 'playbooks/docker/dockerized_component_deploy.yml' ;
+.
+
+:Parameter_144
+  rdf:type exchange:Parameter ;
+  exchange:name "create" ;
+  exchange:hasParameter :Parameter_142 ;
+  exchange:hasParameter :Parameter_143 ;
+.
+:Parameter_145
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_113 ;
+.
+
+:Parameter_146
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:value 'playbooks/docker/dockerized_component_undeploy.yml' ;
+.
+
+:Parameter_147
+  rdf:type exchange:Parameter ;
+  exchange:name "delete" ;
+  exchange:hasParameter :Parameter_145 ;
+  exchange:hasParameter :Parameter_146 ;
+.
+:Parameter_148
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_115 ;
+  exchange:hasParameter :Parameter_117 ;
+  exchange:hasParameter :Parameter_119 ;
+.
+
+:Parameter_149
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:value 'playbooks/openstack/security-rule/create.yml' ;
+.
+
+:Parameter_150
+  rdf:type exchange:Parameter ;
+  exchange:name "create" ;
+  exchange:hasParameter :Parameter_148 ;
+  exchange:hasParameter :Parameter_149 ;
+.
+:Parameter_151
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_121 ;
+.
+
+:Parameter_152
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:value 'playbooks/openstack/security-rule/delete.yml' ;
+.
+
+:Parameter_153
+  rdf:type exchange:Parameter ;
+  exchange:name "delete" ;
+  exchange:hasParameter :Parameter_151 ;
+  exchange:hasParameter :Parameter_152 ;
+.
+:Parameter_154
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_123 ;
+  exchange:hasParameter :Parameter_125 ;
+  exchange:hasParameter :Parameter_127 ;
+  exchange:hasParameter :Parameter_129 ;
+  exchange:hasParameter :Parameter_131 ;
+  exchange:hasParameter :Parameter_133 ;
+.
+
+:Parameter_155
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:value 'playbooks/openstack/vm/create.yml' ;
+.
+
+:Parameter_156
+  rdf:type exchange:Parameter ;
+  exchange:name "create" ;
+  exchange:hasParameter :Parameter_154 ;
+  exchange:hasParameter :Parameter_155 ;
+.
+:Parameter_157
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_135 ;
+.
+
+:Parameter_158
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:value 'playbooks/openstack/vm/delete.yml' ;
+.
+
+:Parameter_159
+  rdf:type exchange:Parameter ;
+  exchange:name "delete" ;
+  exchange:hasParameter :Parameter_157 ;
+  exchange:hasParameter :Parameter_158 ;
+.
+
+:Parameter_160
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+
+:Parameter_161
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+:Parameter_162
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;
+  exchange:value 'tcp' ; 
+.
+
+
+
+:Parameter_163
+  rdf:type exchange:Parameter ;
+  exchange:name "constraints" ;
+  exchange:hasParameter :Parameter_1 ;
+.
+
+
+:Property_1
+  rdf:type exchange:Property ;
+  exchange:name "protocol" ;
+  exchange:hasParameter :Parameter_160 ;
+  exchange:hasParameter :Parameter_161 ;
+  exchange:hasParameter :Parameter_162 ;
+  exchange:hasParameter :Parameter_163 ;
+.
+:Parameter_164
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'tosca.datatypes.network.PortDef' ;
+.
+
+
+:Parameter_165
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+
+
+
+
+
+:Property_2
+  rdf:type exchange:Property ;
+  exchange:name "port_range_min" ;
+  exchange:hasParameter :Parameter_164 ;
+  exchange:hasParameter :Parameter_165 ;
+.
+:Parameter_166
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'tosca.datatypes.network.PortDef' ;
+.
+
+
+:Parameter_167
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+
+
+
+
+
+:Property_3
+  rdf:type exchange:Property ;
+  exchange:name "port_range_max" ;
+  exchange:hasParameter :Parameter_166 ;
+  exchange:hasParameter :Parameter_167 ;
+.
+:Parameter_168
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+
+:Parameter_169
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+:Parameter_170
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;
+  exchange:value '0.0.0.0/0' ; 
+.
+
+
+
+
+
+:Property_4
+  rdf:type exchange:Property ;
+  exchange:name "remote_ip_prefix" ;
+  exchange:hasParameter :Parameter_168 ;
+  exchange:hasParameter :Parameter_169 ;
+  exchange:hasParameter :Parameter_170 ;
+.
+:Parameter_171
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_172
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'IP of the SODALITE docker registry' ;
+.
+
+:Parameter_173
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+:Parameter_174
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;
+  exchange:value 'localhost' ; 
+.
+
+
+
+
+
+:Property_5
+  rdf:type exchange:Property ;
+  exchange:name "registry_ip" ;
+  exchange:hasParameter :Parameter_171 ;
+  exchange:hasParameter :Parameter_172 ;
+  exchange:hasParameter :Parameter_173 ;
+  exchange:hasParameter :Parameter_174 ;
+.
+:Parameter_175
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_176
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'The name of the image on the host' ;
+.
+
+:Parameter_177
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+
+
+
+
+
+:Property_6
+  rdf:type exchange:Property ;
+  exchange:name "image_name" ;
+  exchange:hasParameter :Parameter_175 ;
+  exchange:hasParameter :Parameter_176 ;
+  exchange:hasParameter :Parameter_177 ;
+.
+:Parameter_178
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_179
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Alias name for docker container' ;
+.
+
+
+
+
+
+
+
+:Property_7
+  rdf:type exchange:Property ;
+  exchange:name "alias" ;
+  exchange:hasParameter :Parameter_178 ;
+  exchange:hasParameter :Parameter_179 ;
+.
+:Parameter_180
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_181
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'If true, always pull the latest version of an image. Otherwise, will only pull an image when missing' ;
+.
+
+
+:Parameter_182
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;
+  exchange:value 'no' ; 
+.
+
+
+
+
+
+:Property_8
+  rdf:type exchange:Property ;
+  exchange:name "pull" ;
+  exchange:hasParameter :Parameter_180 ;
+  exchange:hasParameter :Parameter_181 ;
+  exchange:hasParameter :Parameter_182 ;
+.
+:Parameter_183
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'list' ;
+.
+
+:Parameter_184
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Commands list for starting the container' ;
+.
+
+
+:Parameter_185
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;
+  exchange:value '' ; 
+.
+
+
+
+
+
+:Property_9
+  rdf:type exchange:Property ;
+  exchange:name "command" ;
+  exchange:hasParameter :Parameter_183 ;
+  exchange:hasParameter :Parameter_184 ;
+  exchange:hasParameter :Parameter_185 ;
+.
+:Parameter_186
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'map' ;
+.
+
+:Parameter_187
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Map for docker environment variables key-value dictionary' ;
+.
+
+
+
+
+
+
+
+:Property_10
+  rdf:type exchange:Property ;
+  exchange:name "env" ;
+  exchange:hasParameter :Parameter_186 ;
+  exchange:hasParameter :Parameter_187 ;
+.
+:Parameter_188
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_189
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'A list of port binding for the docker container "exposed:internal" like "8081:8080"' ;
+.
+
+:Parameter_190
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+
+
+
+
+
+:Property_11
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:hasParameter :Parameter_188 ;
+  exchange:hasParameter :Parameter_189 ;
+  exchange:hasParameter :Parameter_190 ;
+.
+:Parameter_191
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_192
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Exposed ports of the container like "8081"' ;
+.
+
+:Parameter_193
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+
+
+
+
+
+:Property_12
+  rdf:type exchange:Property ;
+  exchange:name "exposed_ports" ;
+  exchange:hasParameter :Parameter_191 ;
+  exchange:hasParameter :Parameter_192 ;
+  exchange:hasParameter :Parameter_193 ;
+.
+:Parameter_194
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'list' ;
+.
+
+:Parameter_195
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Exposed ports of the container like "8081"' ;
+.
+
+
+
+
+
+
+
+:Property_13
+  rdf:type exchange:Property ;
+  exchange:name "volumes" ;
+  exchange:hasParameter :Parameter_194 ;
+  exchange:hasParameter :Parameter_195 ;
+.
+:Parameter_196
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+
+
+:Parameter_197
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;
+  exchange:value 'Restart policy [no, on-failure, always, unless-stopped]' ; 
+.
+
+
+
+
+
+:Property_14
+  rdf:type exchange:Property ;
+  exchange:name "restart_policy" ;
+  exchange:hasParameter :Parameter_196 ;
+  exchange:hasParameter :Parameter_197 ;
+.
+:Parameter_198
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_199
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Name of the security group in openstack.' ;
+.
+
+:Parameter_200
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+
+
+
+
+
+:Property_15
+  rdf:type exchange:Property ;
+  exchange:name "group_name" ;
+  exchange:hasParameter :Parameter_198 ;
+  exchange:hasParameter :Parameter_199 ;
+  exchange:hasParameter :Parameter_200 ;
+.
+:Parameter_201
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_202
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Description of the security group in openstack.' ;
+.
+
+:Parameter_203
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+
+
+
+
+
+:Property_16
+  rdf:type exchange:Property ;
+  exchange:name "group_description" ;
+  exchange:hasParameter :Parameter_201 ;
+  exchange:hasParameter :Parameter_202 ;
+  exchange:hasParameter :Parameter_203 ;
+.
+:Parameter_204
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'map' ;
+.
+
+
+
+
+
+:Parameter_205
+  rdf:type exchange:Parameter ;
+  exchange:name "entry_schema" ;
+  exchange:value 'org.sodalite.dsl.rM.impl.EDataTypeImpl@648a10ef (name: sodalite.types.OpenStack.SecurityRule)' ; 
+.
+
+:Parameter_206
+  rdf:type exchange:Parameter ;
+  exchange:name "constraints" ;
+  exchange:hasParameter :Parameter_2 ;
+.
+
+
+:Property_17
+  rdf:type exchange:Property ;
+  exchange:name "ports" ;
+  exchange:hasParameter :Parameter_204 ;
+  exchange:hasParameter :Parameter_205 ;
+  exchange:hasParameter :Parameter_206 ;
+.
+:Parameter_207
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_208
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Name that should be given to the VM in OpenStack' ;
+.
+
+
+
+
+
+
+
+:Property_18
+  rdf:type exchange:Property ;
+  exchange:name "name" ;
+  exchange:hasParameter :Parameter_207 ;
+  exchange:hasParameter :Parameter_208 ;
+.
+:Parameter_209
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_210
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'OpenStack image id (image names are not accepted)' ;
+.
+
+
+
+
+
+
+
+:Property_19
+  rdf:type exchange:Property ;
+  exchange:name "image" ;
+  exchange:hasParameter :Parameter_209 ;
+  exchange:hasParameter :Parameter_210 ;
+.
+:Parameter_211
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_212
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'OpenStack flavor id (flavor names are not accepted)' ;
+.
+
+
+
+
+
+
+
+:Property_20
+  rdf:type exchange:Property ;
+  exchange:name "flavor" ;
+  exchange:hasParameter :Parameter_211 ;
+  exchange:hasParameter :Parameter_212 ;
+.
+:Parameter_213
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_214
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'OpenStack network id (network names are not accepted)' ;
+.
+
+
+
+
+
+
+
+:Property_21
+  rdf:type exchange:Property ;
+  exchange:name "network" ;
+  exchange:hasParameter :Parameter_213 ;
+  exchange:hasParameter :Parameter_214 ;
+.
+:Parameter_215
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_216
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'OpenStack names of the security groups to which the instance should be added.Comma separated string.' ;
+.
+
+
+
+
+
+
+
+:Property_22
+  rdf:type exchange:Property ;
+  exchange:name "security_groups" ;
+  exchange:hasParameter :Parameter_215 ;
+  exchange:hasParameter :Parameter_216 ;
+.
+:Parameter_217
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+
+
+
+
+
+
+
+:Property_23
+  rdf:type exchange:Property ;
+  exchange:name "key_name" ;
+  exchange:hasParameter :Parameter_217 ;
+.
+:Parameter_218
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_219
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'OpenStack username' ;
+.
+
+
+
+
+
+
+
+:Property_24
+  rdf:type exchange:Property ;
+  exchange:name "user-name" ;
+  exchange:hasParameter :Parameter_218 ;
+  exchange:hasParameter :Parameter_219 ;
+.
+
+:Parameter_220
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_221
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'IP of the SODALITE docker registry' ;
+.
+
+
+:Attribute_1
+  rdf:type exchange:Attribute ;
+  exchange:name "registry_ip" ;
+  exchange:hasParameter :Parameter_220 ;
+  exchange:hasParameter :Parameter_221 ;
+.
+:Parameter_222
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_223
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'ansible ipv4' ;
+.
+
+
+:Attribute_2
+  rdf:type exchange:Attribute ;
+  exchange:name "ansible_ip" ;
+  exchange:hasParameter :Parameter_222 ;
+  exchange:hasParameter :Parameter_223 ;
+.
+:Parameter_224
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_225
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'OpenStack id of the VM' ;
+.
+
+
+:Attribute_3
+  rdf:type exchange:Attribute ;
+  exchange:name "id" ;
+  exchange:hasParameter :Parameter_224 ;
+  exchange:hasParameter :Parameter_225 ;
+.
+:Parameter_226
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_227
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Private ipv4' ;
+.
+
+
+:Attribute_4
+  rdf:type exchange:Attribute ;
+  exchange:name "private_address" ;
+  exchange:hasParameter :Parameter_226 ;
+  exchange:hasParameter :Parameter_227 ;
+.
+:Parameter_228
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_229
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'Public ipv4' ;
+.
+
+
+:Attribute_5
+  rdf:type exchange:Attribute ;
+  exchange:name "public_address" ;
+  exchange:hasParameter :Parameter_228 ;
+  exchange:hasParameter :Parameter_229 ;
+.
+:Parameter_230
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_231
+  rdf:type exchange:Parameter ;
+  exchange:name "description" ;
+  exchange:value 'ansible ipv4' ;
+.
+
+
+:Attribute_6
+  rdf:type exchange:Attribute ;
+  exchange:name "ansible_ip" ;
+  exchange:hasParameter :Parameter_230 ;
+  exchange:hasParameter :Parameter_231 ;
+.
+
+:Parameter_232
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'tosca.interfaces.node.lifecycle.Standard' ;
+.
+
+:Parameter_233
+  rdf:type exchange:Parameter ;
+  exchange:name "operations" ;
+  exchange:hasParameter :Parameter_138 ;
+  exchange:hasParameter :Parameter_141 ;
+.
+
+:Interface_1
+  rdf:type exchange:Interface ;
+  exchange:name "Standard" ;
+  exchange:hasParameter :Parameter_232 ;
+  exchange:hasParameter :Parameter_233 ;
+.
+:Parameter_234
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'tosca.interfaces.node.lifecycle.Standard' ;
+.
+
+:Parameter_235
+  rdf:type exchange:Parameter ;
+  exchange:name "operations" ;
+  exchange:hasParameter :Parameter_144 ;
+  exchange:hasParameter :Parameter_147 ;
+.
+
+:Interface_2
+  rdf:type exchange:Interface ;
+  exchange:name "Standard" ;
+  exchange:hasParameter :Parameter_234 ;
+  exchange:hasParameter :Parameter_235 ;
+.
+:Parameter_236
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'tosca.interfaces.node.lifecycle.Standard' ;
+.
+
+:Parameter_237
+  rdf:type exchange:Parameter ;
+  exchange:name "operations" ;
+  exchange:hasParameter :Parameter_150 ;
+  exchange:hasParameter :Parameter_153 ;
+.
+
+:Interface_3
+  rdf:type exchange:Interface ;
+  exchange:name "Standard" ;
+  exchange:hasParameter :Parameter_236 ;
+  exchange:hasParameter :Parameter_237 ;
+.
+:Parameter_238
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'tosca.interfaces.node.lifecycle.Standard' ;
+.
+
+:Parameter_239
+  rdf:type exchange:Parameter ;
+  exchange:name "operations" ;
+  exchange:hasParameter :Parameter_156 ;
+  exchange:hasParameter :Parameter_159 ;
+.
+
+:Interface_4
+  rdf:type exchange:Interface ;
+  exchange:name "Standard" ;
+  exchange:hasParameter :Parameter_238 ;
+  exchange:hasParameter :Parameter_239 ;
+.
+
+:Parameter_240
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'tosca.capabilities.Compute' ;
+.
+
+
+:Parameter_241
+  rdf:type exchange:Parameter ;
+  exchange:name "valid_source_types" ;
+  exchange:listValue "sodalite.nodes.DockerizedComponent" ;
+.
+	
+:Capability_1
+  rdf:type exchange:Capability ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_240 ;
+  exchange:hasParameter :Parameter_241 ;
+.
+
+:Parameter_242
+  rdf:type exchange:Parameter ;
+  exchange:name "capability" ;
+  exchange:value 'tosca.capabilities.Compute' ;
+.
+
+:Parameter_243
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value 'sodalite.nodes.DockerHost' ;
+.
+
+:Parameter_244
+  rdf:type exchange:Parameter ;
+  exchange:name "relationship" ;	  
+  exchange:value 'tosca.relationships.HostedOn' ;
+.
+
+:Requirement_1
+  rdf:type exchange:Requirement ;
+  exchange:name "host" ;
+  exchange:hasParameter :Parameter_242 ;
+  exchange:hasParameter :Parameter_243 ;
+  exchange:hasParameter :Parameter_244 ;
+.		
+:Parameter_245
+  rdf:type exchange:Parameter ;
+  exchange:name "capability" ;
+  exchange:value 'tosca.capabilities.Node' ;
+.
+
+:Parameter_246
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value 'sodalite.nodes.OpenStack.SecurityRules' ;
+.
+
+:Parameter_247
+  rdf:type exchange:Parameter ;
+  exchange:name "relationship" ;	  
+  exchange:value 'tosca.relationships.DependsOn' ;
+.
+
+:Requirement_2
+  rdf:type exchange:Requirement ;
+  exchange:name "protected_by" ;
+  exchange:hasParameter :Parameter_245 ;
+  exchange:hasParameter :Parameter_246 ;
+  exchange:hasParameter :Parameter_247 ;
+.		
+
+:Node_1
+  rdf:type exchange:Node ;
+  exchange:name "sodalite.nodes.DockerHost" ;
+  exchange:derivesFrom "tosca.nodes.SoftwareComponent" ;
+  exchange:properties :Property_5 ; 
+  exchange:attributes :Attribute_1 ; 
+  exchange:attributes :Attribute_2 ; 
+  exchange:capabilities :Capability_1 ; 
+  exchange:interfaces :Interface_1 ; 
+.  
+:Node_2
+  rdf:type exchange:Node ;
+  exchange:name "sodalite.nodes.DockerizedComponent" ;
+  exchange:derivesFrom "tosca.nodes.SoftwareComponent" ;
+  exchange:properties :Property_6 ; 
+  exchange:properties :Property_7 ; 
+  exchange:properties :Property_8 ; 
+  exchange:properties :Property_9 ; 
+  exchange:properties :Property_10 ; 
+  exchange:properties :Property_11 ; 
+  exchange:properties :Property_12 ; 
+  exchange:properties :Property_13 ; 
+  exchange:properties :Property_14 ; 
+  exchange:requirements :Requirement_1 ; 
+  exchange:interfaces :Interface_2 ; 
+.  
+:Node_3
+  rdf:type exchange:Node ;
+  exchange:name "sodalite.nodes.OpenStack.SecurityRules" ;
+  exchange:derivesFrom "tosca.nodes.Root" ;
+  exchange:properties :Property_15 ; 
+  exchange:properties :Property_16 ; 
+  exchange:properties :Property_17 ; 
+  exchange:interfaces :Interface_3 ; 
+.  
+:Node_4
+  rdf:type exchange:Node ;
+  exchange:name "sodalite.nodes.OpenStack.VM" ;
+  exchange:derivesFrom "tosca.nodes.Compute" ;
+  exchange:properties :Property_18 ; 
+  exchange:properties :Property_19 ; 
+  exchange:properties :Property_20 ; 
+  exchange:properties :Property_21 ; 
+  exchange:properties :Property_22 ; 
+  exchange:properties :Property_23 ; 
+  exchange:properties :Property_24 ; 
+  exchange:attributes :Attribute_3 ; 
+  exchange:attributes :Attribute_4 ; 
+  exchange:attributes :Attribute_5 ; 
+  exchange:attributes :Attribute_6 ; 
+  exchange:requirements :Requirement_2 ; 
+  exchange:interfaces :Interface_4 ; 
+.  
+
+:DataType_1
+  rdf:type exchange:DataType ;
+  exchange:name "sodalite.types.OpenStack.SecurityRule" ;
+  exchange:derivesFrom "tosca.datatypes.Root" ;
+  exchange:properties :Property_1 ; 
+  exchange:properties :Property_2 ; 
+  exchange:properties :Property_3 ; 
+  exchange:properties :Property_4 ; 
+.  
