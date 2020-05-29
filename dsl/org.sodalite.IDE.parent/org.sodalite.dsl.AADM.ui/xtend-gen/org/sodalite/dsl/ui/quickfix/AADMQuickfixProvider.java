@@ -21,7 +21,7 @@ import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EPropertyAssignmentValue;
 import org.sodalite.dsl.rM.RMFactory;
-import org.sodalite.dsl.ui.validation.AADMValidationIssue;
+import org.sodalite.dsl.ui.validation.ValidationIssue;
 
 /**
  * Custom quickfixes.
@@ -30,7 +30,7 @@ import org.sodalite.dsl.ui.validation.AADMValidationIssue;
  */
 @SuppressWarnings("all")
 public class AADMQuickfixProvider extends DefaultQuickfixProvider {
-  @Fix(AADMValidationIssue.OPTIMIZATION)
+  @Fix(ValidationIssue.OPTIMIZATION)
   public void fixNodeTypeName(final Issue issue, final IssueResolutionAcceptor acceptor) {
     final String message = "Apply recommended optimizations";
     final String sub_message = ((List<String>)Conversions.doWrapArray(issue.getData())).toString();
