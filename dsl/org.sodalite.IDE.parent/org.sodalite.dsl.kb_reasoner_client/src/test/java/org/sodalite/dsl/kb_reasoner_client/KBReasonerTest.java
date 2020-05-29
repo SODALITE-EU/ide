@@ -47,12 +47,12 @@ class KBReasonerTest {
 	private final String IaC_URI = "http://154.48.185.202:8080/";
 	private final String xOPERA_URI = "http://154.48.185.206:5000/";
 	
-	private String aadmIRI = null;
+	private String aadmURI = null;
 	
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI);
-		aadmIRI = saveAADM(null, "src/test/resources/snow.aadm.ttl").getIRI();
+		aadmURI = saveAADM(null, "src/test/resources/snow.aadm.ttl").getURI();
 	}
 	
 	@Test
@@ -121,16 +121,16 @@ class KBReasonerTest {
 	
 	@Test
 	void testSaveAADM() throws Exception {
-		KBSaveReportData report = saveAADM("", "src/test/resources/snow.ttl");
+		KBSaveReportData report = saveAADM("", "src/test/resources/snow.aadm.ttl");
 		assertFalse (report.hasErrors());
-		assertNotNull (report.getIRI());
+		assertNotNull (report.getURI());
 	}
 	
 	@Test
 	void testSaveRM() throws Exception {
 		KBSaveReportData report = saveRM("", "src/test/resources/snow.rm.ttl");
 		assertFalse (report.hasErrors());
-		assertNotNull (report.getIRI());
+		assertNotNull (report.getURI());
 	}
 
 	private KBSaveReportData saveAADM(String aadmURI, String ttlPath) throws IOException, Exception {
@@ -153,13 +153,13 @@ class KBReasonerTest {
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
 		KBOptimizationReportData report = kbclient.optimizeAADM(aadmTTL, null);
 		assertFalse (report.hasErrors());
-		assertNotNull (report.getIRI());
+		assertNotNull (report.getURI());
 		assertTrue (report.hasOptimizations());
 	}
 	
 	@Test
 	void testGetAADM() throws Exception{
-		String json = kbclient.getAADM(aadmIRI);
+		String json = kbclient.getAADM(aadmURI);
 		assertNotNull(json);
 	}
 	

@@ -6,16 +6,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class KBOptimizationReportData {
-	String IRI;
+	String URI;
 	List<KBError> errors;
 	List<KBWarning> warnings;
 	List<KBOptimization> optimizations;
 	
-	public String getIRI() {
-		return IRI;
+	public String getURI() {
+		return URI;
 	}
-	public void setIRI(String iRI) {
-		IRI = iRI;
+	public void setURI(String uRI) {
+		URI = uRI;
 	}
 	
 	public boolean hasErrors() {

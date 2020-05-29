@@ -46,12 +46,10 @@ import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonFactoryBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -60,7 +58,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class KBReasonerClient implements KBReasoner {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -136,7 +133,7 @@ public class KBReasonerClient implements KBReasoner {
 			//Send multipart-form message
 			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
 			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
-			report.setIRI(jsonObject.get("aadmuri").getAsString());
+			report.setURI(jsonObject.get("aadmuri").getAsString());
 			JsonArray warningsJson = jsonObject.getAsJsonArray("warnings");
 			if (warningsJson != null){
 				report.setWarnings(processWarnings(warningsJson.toString()));
@@ -177,7 +174,7 @@ public class KBReasonerClient implements KBReasoner {
 			//Send multipart-form message
 			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
 			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
-			report.setIRI(jsonObject.get("rmuri").getAsString());
+			report.setURI(jsonObject.get("rmuri").getAsString());
 			JsonArray warningsJson = jsonObject.getAsJsonArray("warnings");
 			if (warningsJson != null){
 				report.setWarnings(processWarnings(warningsJson.toString()));
@@ -218,7 +215,7 @@ public class KBReasonerClient implements KBReasoner {
 			//Send multipart-form message
 			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
 			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
-			report.setIRI(jsonObject.get("aadmuri").getAsString());
+			report.setURI(jsonObject.get("aadmuri").getAsString());
 			JsonArray warningsJson = jsonObject.getAsJsonArray("warnings");
 			if (warningsJson != null){
 				report.setWarnings(processWarnings(warningsJson.toString()));
@@ -247,9 +244,9 @@ public class KBReasonerClient implements KBReasoner {
 	}
 	
 	@Override
-	public String getAADM(String aadmIRI) throws Exception {
-		Assert.notNull(aadmIRI, "Pass a not null aadmIRI");
-		String url = kbReasonerUri + "aadm?aadmIRI=" + aadmIRI;
+	public String getAADM(String aadmURI) throws Exception {
+		Assert.notNull(aadmURI, "Pass a not null aadmURI");
+		String url = kbReasonerUri + "aadm?aadmIRI=" + aadmURI;
 		return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
 	}
 	
@@ -315,17 +312,6 @@ public class KBReasonerClient implements KBReasoner {
 		return errors;
 	}
 	
-//	private List<KBWarning> processWarnings(String result) throws JsonMappingException, JsonProcessingException {
-//		String key = "\"warnings\"";
-//		int key_index = result.indexOf(key) + key.length();
-//		int index1 = result.indexOf("[", key_index);
-//		int index2 =  result.indexOf("]", key_index) + 1;
-//		String json = result.substring(index1, index2);
-//		ObjectMapper mapper = new ObjectMapper();
-//		List<KBWarning> warnings = mapper.readValue(json, new TypeReference<List<KBWarning>>(){});
-//		return warnings;
-//	}
-	
 	private List<KBWarning> processWarnings(String json) throws JsonMappingException, JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		List<KBWarning> warnings = mapper.readValue(json, new TypeReference<List<KBWarning>>(){});
@@ -348,16 +334,6 @@ public class KBReasonerClient implements KBReasoner {
 			}
 		}
 		return kbOptimization;
-	}
-	
-	private String processIRI(String result) {
-		String key = "\"aadmuri\"";
-		int key_index = result.indexOf(key) + key.length();
-		int index1 = result.indexOf("\"", key_index) + 1;
-		int index2 =  result.indexOf("\"", index1);
-		String iri = result.substring(index1, index2);
-		iri = iri.replace("\\", "");
-		return iri;
 	}
 
 	/**

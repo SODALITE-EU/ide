@@ -4,15 +4,15 @@ import java.util.List;
 
 public class KBSaveReportData {
 
-	String IRI;
+	String URI;
 	List<KBError> errors;
 	List<KBWarning> warnings;
 	
-	public String getIRI() {
-		return IRI;
+	public String getURI() {
+		return URI;
 	}
-	public void setIRI(String iRI) {
-		IRI = iRI;
+	public void setURI(String uRI) {
+		URI = uRI;
 	}
 	
 	public boolean hasErrors() {

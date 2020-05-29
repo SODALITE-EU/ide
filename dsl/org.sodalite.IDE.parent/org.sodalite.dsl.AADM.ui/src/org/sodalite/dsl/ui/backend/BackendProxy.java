@@ -116,8 +116,8 @@ public class BackendProxy {
 		String aadmTTL = readTurtle(aadmFilename, project);
 
 		// Send model to the KB
-		String aadmIri = getURI (aadmFilename, project);
-		saveAADM(aadmTTL, aadmFilename, aadmIri, project, event);
+		String aadmURI = getURI (aadmFilename, project);
+		saveAADM(aadmTTL, aadmFilename, aadmURI, project, event);
 	}
 	
 	public void processOptimizeAADM(ExecutionEvent event) throws IOException {
@@ -129,8 +129,8 @@ public class BackendProxy {
 		String aadmTTL = readTurtle(aadmFilename, project);
 
 		// Send model to the KB
-		String aadmIri = getURI (aadmFilename, project);
-		optimizeAADM(aadmTTL, aadmFilename, aadmIri, project, event);
+		String aadmURI = getURI (aadmFilename, project);
+		optimizeAADM(aadmTTL, aadmFilename, aadmURI, project, event);
 	}
 
 	
@@ -143,8 +143,8 @@ public class BackendProxy {
 		String aadmTTL = readTurtle(aadmFilename, project);
 
 		// Deploy AADM model
-		String aadmIri = getURI (aadmFilename, project);
-		deployAADM(aadmTTL, aadmFilename, aadmIri, project, event);
+		String aadmURI = getURI (aadmFilename, project);
+		deployAADM(aadmTTL, aadmFilename, aadmURI, project, event);
 	}
 
 	private String readTurtle(String filename, IProject project) throws IOException {
@@ -196,21 +196,22 @@ public class BackendProxy {
 			}
 	}
 
-	private void saveAADM(String aadmTTL, String aadmFileName, String aadmIri, IProject project, ExecutionEvent event) {
+	private void saveAADM(String aadmTTL, String aadmFileName, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
-				KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, aadmIri);
-				saveURI (saveReport.getIRI(), aadmFileName, project);
-				if (saveReport.getIRI() == null && saveReport.getErrors() == null) {
+				KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, aadmURI);
+				processValidationIssues(saveReport, event);
+				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception("The AADM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
-				processValidationIssues(saveReport, event);
+				saveURI (saveReport.getURI(), aadmFileName, project);
+				
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
 						MessageDialog.openInformation(parent, "Save AADM",
-								"The selected AADM model has been successfully store in the KB with IRI:\n"
-										+ saveReport.getIRI());
+								"The selected AADM model has been successfully store in the KB with URI:\n"
+										+ saveReport.getURI());
 					}
 				});
 			} catch (Exception e) {
@@ -228,22 +229,22 @@ public class BackendProxy {
 		job.schedule();
 	}
 	
-	private void optimizeAADM(String aadmTTL, String aadmFileName, String aadmIri, IProject project, ExecutionEvent event) {
+	private void optimizeAADM(String aadmTTL, String aadmFileName, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Get AADM optimization recommendations", (ICoreRunnable) monitor -> {
 			try {
-				KBOptimizationReportData optimizationReport = kbclient.optimizeAADM(aadmTTL, aadmIri);
-				saveURI (optimizationReport.getIRI(), aadmFileName, project);
-				if (optimizationReport.getIRI() == null && optimizationReport.getErrors() == null) {
+				KBOptimizationReportData optimizationReport = kbclient.optimizeAADM(aadmTTL, aadmURI);
+				processOptimizationIssues(optimizationReport, event);
+				if (optimizationReport.getURI() == null && optimizationReport.getErrors() == null) {
 					throw new Exception("AADM optimization recommendations could not be retrieved from the KB. Please, contact your Sodalite administrator");
 				}
-				processOptimizationIssues(optimizationReport, event);
+				saveURI (optimizationReport.getURI(), aadmFileName, project);
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
 						MessageDialog.openInformation(parent, "Get AADM optimization recommendations",
 								"Optimization recommendations for AADM model has been successfully retrieved from the KB\n. "
-								+ "AADM model have been saved with IRI:\n"
-										+ optimizationReport.getIRI());
+								+ "AADM model have been saved with URI:\n"
+										+ optimizationReport.getURI());
 					}
 				});
 			} catch (Exception e) {
@@ -261,7 +262,7 @@ public class BackendProxy {
 		job.schedule();
 	}
 
-	private void deployAADM(String aadmTTL, String aadmFileName, String aadmIri, IProject project, ExecutionEvent event) {
+	private void deployAADM(String aadmTTL, String aadmFileName, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -272,20 +273,19 @@ public class BackendProxy {
 				
 				try {
 					// Save the AADM model into the KB
-					//TODO use aadmIri in optimizeAADM call
 					subMonitor.setTaskName("Saving AADM");
-					KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, aadmIri);
-					saveURI (saveReport.getIRI(), aadmFileName, project);
-					// TODO save aadmIRI
+					KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, aadmURI);
 					processValidationIssues(saveReport, event);
-					subMonitor.worked(1);
-
+					
 					if (saveReport != null && saveReport.hasErrors())
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
+					
+					saveURI (saveReport.getURI(), aadmFileName, project);
+					subMonitor.worked(1);
 
 					// Ask the AADM JSON serialization to the KB Reasoner
 					subMonitor.setTaskName("Getting AADM serialization from the KB");
-					String aadmJson = kbclient.getAADM(saveReport.getIRI());
+					String aadmJson = kbclient.getAADM(saveReport.getURI());
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
 					//Save json for debugging
@@ -358,7 +358,7 @@ public class BackendProxy {
 	}
 
 	private void processValidationIssues(KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
-		// TODO Check there are not warnings (they do not prevent storage in KB)
+		// Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings())) {
 			List<ValidationIssue> issues = readRecommendationsFromKB(saveReport);
 			manageRecommendationIssues(event, issues);
@@ -369,7 +369,7 @@ public class BackendProxy {
 	}
 	
 	private void processOptimizationIssues(KBOptimizationReportData optimizationReport, ExecutionEvent event) throws Exception {
-		// TODO Check there are not warnings (they do not prevent storage in KB)
+		// Check there are not warnings (they do not prevent storage in KB)
 		if (optimizationReport != null && (optimizationReport.hasErrors() || 
 				optimizationReport.hasWarnings() || optimizationReport.hasOptimizations())) {
 			List<ValidationIssue> issues = readRecommendationsFromKB(optimizationReport);
@@ -381,7 +381,7 @@ public class BackendProxy {
 	}
 
 	private List<ValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
-		// TODO Read issues from KB recommendations
+		// Read issues from KB recommendations
 		List<ValidationIssue> issues = new ArrayList<>();
 
 		if (saveReport.hasErrors()) {
@@ -405,7 +405,7 @@ public class BackendProxy {
 	}
 	
 	private List<ValidationIssue> readRecommendationsFromKB(KBOptimizationReportData optimizationReport) {
-		// TODO Read issues from KB recommendations
+		// Read issues from KB recommendations
 		List<ValidationIssue> issues = new ArrayList<>();
 
 		if (optimizationReport.hasErrors()) {

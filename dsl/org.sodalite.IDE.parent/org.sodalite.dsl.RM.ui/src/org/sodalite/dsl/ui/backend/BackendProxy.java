@@ -154,21 +154,22 @@ public class BackendProxy {
 			}
 	}
 
-	private void saveRM(String rmTTL, String rmFileName, String rmIri, IProject project, ExecutionEvent event) {
+	private void saveRM(String rmTTL, String rmFileName, String rmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save RM", (ICoreRunnable) monitor -> {
 			try {
-				KBSaveReportData saveReport = kbclient.saveRM(rmTTL, rmIri);
-				saveURI (saveReport.getIRI(), rmFileName, project);
-				if (saveReport.getIRI() == null && saveReport.getErrors() == null) {
+				KBSaveReportData saveReport = kbclient.saveRM(rmTTL, rmURI);
+				processValidationIssues(saveReport, event);
+				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception("The RM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
-				processValidationIssues(saveReport, event);
+				saveURI (saveReport.getURI(), rmFileName, project);
+				
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
 						MessageDialog.openInformation(parent, "Save RM",
-								"The selected RM model has been successfully store in the KB with IRI:\n"
-										+ saveReport.getIRI());
+								"The selected RM model has been successfully store in the KB with URI:\n"
+										+ saveReport.getURI());
 					}
 				});
 			} catch (Exception e) {
