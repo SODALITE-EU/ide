@@ -4,7 +4,6 @@
 package org.sodalite.dsl.ui.quickfix
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
-import org.sodalite.dsl.ui.validation.AADMValidationIssue
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.ui.editor.quickfix.Fix
@@ -13,6 +12,7 @@ import org.sodalite.dsl.aADM.EPropertyAssignment
 import org.sodalite.dsl.rM.ELIST
 import org.sodalite.dsl.aADM.AADMFactory
 import org.sodalite.dsl.rM.RMFactory
+import org.sodalite.dsl.ui.validation.ValidationIssue
 
 /**
  * Custom quickfixes.
@@ -31,7 +31,7 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 //		]
 //	}
 
-	@Fix(AADMValidationIssue.OPTIMIZATION)
+	@Fix(ValidationIssue.OPTIMIZATION)
 	def fixNodeTypeName(Issue issue, IssueResolutionAcceptor acceptor) {
 			val message = 'Apply recommended optimizations';
 			val sub_message = issue.data.toString

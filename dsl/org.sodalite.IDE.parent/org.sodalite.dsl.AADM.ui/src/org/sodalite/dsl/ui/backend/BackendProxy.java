@@ -1,7 +1,6 @@
 package org.sodalite.dsl.ui.backend;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -15,7 +14,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -30,18 +28,16 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -51,8 +47,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -86,7 +80,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
-import org.sodalite.dsl.ui.validation.AADMValidationIssue;
+import org.sodalite.dsl.ui.validation.ValidationIssue;
 
 import com.google.common.collect.Lists;
 
@@ -96,8 +90,8 @@ public class BackendProxy {
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-
-	// TODO Configure KBReasonerClient endpoint from preference page information
+	
+	// Configure KBReasonerClient endpoint from preference page information
 	private KBReasonerClient kbclient;
 	
 	public BackendProxy() {
@@ -122,10 +116,10 @@ public class BackendProxy {
 		String aadmTTL = readTurtle(aadmFilename, project);
 
 		// Send model to the KB
-		String aadmIri = getIRI (aadmFilename, project);
+		String aadmIri = getURI (aadmFilename, project);
 		saveAADM(aadmTTL, aadmFilename, aadmIri, project, event);
 	}
-
+	
 	public void processOptimizeAADM(ExecutionEvent event) throws IOException {
 		// Return selected resource
 		IFile file = getSelectedFile();
@@ -135,7 +129,7 @@ public class BackendProxy {
 		String aadmTTL = readTurtle(aadmFilename, project);
 
 		// Send model to the KB
-		String aadmIri = getIRI (aadmFilename, project);
+		String aadmIri = getURI (aadmFilename, project);
 		optimizeAADM(aadmTTL, aadmFilename, aadmIri, project, event);
 	}
 
@@ -149,7 +143,7 @@ public class BackendProxy {
 		String aadmTTL = readTurtle(aadmFilename, project);
 
 		// Deploy AADM model
-		String aadmIri = getIRI (aadmFilename, project);
+		String aadmIri = getURI (aadmFilename, project);
 		deployAADM(aadmTTL, aadmFilename, aadmIri, project, event);
 	}
 
@@ -162,19 +156,19 @@ public class BackendProxy {
 		return aadmTTL;
 	}
 	
-	private String getIRI(String aadmFilename, IProject project) throws IOException {
-		Path path = getAadmPropertiesFile(aadmFilename, project);
-		String aadmIRI = null;
+	private String getURI(String filename, IProject project) throws IOException {
+		Path path = getAadmPropertiesFile(filename, project);
+		String uri = null;
 		if (Files.exists(path)) {
 			Properties props = new Properties();
 			try(final FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
 			final FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
 				props.load(Channels.newInputStream(channel));
 			}
-			aadmIRI = props.getProperty("aadmIRI");
+			uri = props.getProperty("URI");
 		}
 		
-		return aadmIRI;
+		return uri;
 	}
 
 	private Path getAadmPropertiesFile(String aadmFilename, IProject project) {
@@ -185,8 +179,8 @@ public class BackendProxy {
 		return path;
 	}
 	
-	private void saveAadmIri(String aadmIri, String aadmFileName, IProject project) throws IOException {
-		Path path = getAadmPropertiesFile(aadmFileName, project);
+	private void saveURI(String uri, String fileName, IProject project) throws IOException {
+		Path path = getAadmPropertiesFile(fileName, project);
 		Properties props = new Properties();
 
 		//Create properties file if it does not exist
@@ -196,9 +190,9 @@ public class BackendProxy {
 			final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
 				props.load(Channels.newInputStream(inChannel));
 			}
-		props.setProperty("aadmIRI", aadmIri);
+		props.setProperty("URI", uri);
 		try(final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE)) {
-				props.store(Channels.newOutputStream(outChannel), "AADM Metadata");
+				props.store(Channels.newOutputStream(outChannel), "Sodalite Metadata");
 			}
 	}
 
@@ -206,7 +200,7 @@ public class BackendProxy {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
 				KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, aadmIri);
-				saveAadmIri (saveReport.getIRI(), aadmFileName, project);
+				saveURI (saveReport.getIRI(), aadmFileName, project);
 				if (saveReport.getIRI() == null && saveReport.getErrors() == null) {
 					throw new Exception("The AADM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
@@ -233,12 +227,12 @@ public class BackendProxy {
 		job.setPriority(Job.SHORT);
 		job.schedule();
 	}
-
+	
 	private void optimizeAADM(String aadmTTL, String aadmFileName, String aadmIri, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Get AADM optimization recommendations", (ICoreRunnable) monitor -> {
 			try {
 				KBOptimizationReportData optimizationReport = kbclient.optimizeAADM(aadmTTL, aadmIri);
-				saveAadmIri (optimizationReport.getIRI(), aadmFileName, project);
+				saveURI (optimizationReport.getIRI(), aadmFileName, project);
 				if (optimizationReport.getIRI() == null && optimizationReport.getErrors() == null) {
 					throw new Exception("AADM optimization recommendations could not be retrieved from the KB. Please, contact your Sodalite administrator");
 				}
@@ -281,7 +275,7 @@ public class BackendProxy {
 					//TODO use aadmIri in optimizeAADM call
 					subMonitor.setTaskName("Saving AADM");
 					KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, aadmIri);
-					saveAadmIri (saveReport.getIRI(), aadmFileName, project);
+					saveURI (saveReport.getIRI(), aadmFileName, project);
 					// TODO save aadmIRI
 					processValidationIssues(saveReport, event);
 					subMonitor.worked(1);
@@ -366,7 +360,7 @@ public class BackendProxy {
 	private void processValidationIssues(KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
 		// TODO Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings())) {
-			List<AADMValidationIssue> issues = readRecommendationsFromKB(saveReport);
+			List<ValidationIssue> issues = readRecommendationsFromKB(saveReport);
 			manageRecommendationIssues(event, issues);
 			if (saveReport.hasErrors()) {
 				throw new Exception("There are detected validation issues in the AADM, please fix them");
@@ -378,7 +372,7 @@ public class BackendProxy {
 		// TODO Check there are not warnings (they do not prevent storage in KB)
 		if (optimizationReport != null && (optimizationReport.hasErrors() || 
 				optimizationReport.hasWarnings() || optimizationReport.hasOptimizations())) {
-			List<AADMValidationIssue> issues = readRecommendationsFromKB(optimizationReport);
+			List<ValidationIssue> issues = readRecommendationsFromKB(optimizationReport);
 			manageRecommendationIssues(event, issues);
 			if (optimizationReport.hasErrors()) {
 				throw new Exception("There are detected validation issues in the AADM, please fix them");
@@ -386,13 +380,13 @@ public class BackendProxy {
 		}
 	}
 
-	private List<AADMValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
+	private List<ValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
 		// TODO Read issues from KB recommendations
-		List<AADMValidationIssue> issues = new ArrayList<>();
+		List<ValidationIssue> issues = new ArrayList<>();
 
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
-				issues.add(new AADMValidationIssue(
+				issues.add(new ValidationIssue(
 						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
 						"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
 			}
@@ -400,7 +394,7 @@ public class BackendProxy {
 		
 		if (saveReport.hasWarnings()) {
 			for (KBWarning warning : saveReport.getWarnings()) {
-				issues.add(new AADMValidationIssue(
+				issues.add(new ValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: " + warning.getEntity_name(),
 						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(), 
 						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
@@ -410,13 +404,13 @@ public class BackendProxy {
 		return issues;
 	}
 	
-	private List<AADMValidationIssue> readRecommendationsFromKB(KBOptimizationReportData optimizationReport) {
+	private List<ValidationIssue> readRecommendationsFromKB(KBOptimizationReportData optimizationReport) {
 		// TODO Read issues from KB recommendations
-		List<AADMValidationIssue> issues = new ArrayList<>();
+		List<ValidationIssue> issues = new ArrayList<>();
 
 		if (optimizationReport.hasErrors()) {
 			for (KBError error : optimizationReport.getErrors()) {
-				issues.add(new AADMValidationIssue(
+				issues.add(new ValidationIssue(
 						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
 						"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
 			}
@@ -424,7 +418,7 @@ public class BackendProxy {
 		
 		if (optimizationReport.hasWarnings()) {
 			for (KBWarning warning : optimizationReport.getWarnings()) {
-				issues.add(new AADMValidationIssue(
+				issues.add(new ValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: " + warning.getEntity_name(),
 						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(), 
 						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
@@ -433,10 +427,10 @@ public class BackendProxy {
 		
 		if (optimizationReport.hasOptimizations()) {
 			for (KBOptimization optimization : optimizationReport.getOptimizations()) {
-				issues.add(new AADMValidationIssue(
+				issues.add(new ValidationIssue(
 						"Suggested optimization recommendations: " + optimization.getOptimizations(),
 						"node_templates/" + optimization.getNodeTemplate(), 
-						"NodeTemplate", Severity.WARNING, AADMValidationIssue.OPTIMIZATION, optimization.getOptimizations()));
+						"NodeTemplate", Severity.WARNING, ValidationIssue.OPTIMIZATION, optimization.getOptimizations()));
 			}
 		}
 		
@@ -444,7 +438,7 @@ public class BackendProxy {
 	}
 
 
-	private void manageRecommendationIssues(ExecutionEvent event, List<AADMValidationIssue> validationIssues) {
+	private void manageRecommendationIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {
 			IValidationIssueProcessor issueProcessor;
@@ -466,7 +460,7 @@ public class BackendProxy {
 		}
 	}
 
-	private List<Issue> createIssues(IXtextDocument xtextDocument, List<AADMValidationIssue> validationIssues) {
+	private List<Issue> createIssues(IXtextDocument xtextDocument, List<ValidationIssue> validationIssues) {
 		final List<Issue> issues = xtextDocument.tryReadOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
 			@Override
 			public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
@@ -484,7 +478,7 @@ public class BackendProxy {
 		converter = resource.getResourceServiceProvider().get(IDiagnosticConverter.class);
 	}
 
-	protected List<Issue> createIssues(XtextResource resource, List<AADMValidationIssue> validationIssues) {
+	protected List<Issue> createIssues(XtextResource resource, List<ValidationIssue> validationIssues) {
 		final List<Issue> result = Lists
 				.newArrayListWithExpectedSize(resource.getErrors().size() + resource.getWarnings().size());
 		IAcceptor<Issue> acceptor = new ListBasedMarkerAcceptor(result);
@@ -492,7 +486,7 @@ public class BackendProxy {
 		// Create Diagnostics from issues
 		List<FeatureBasedDiagnostic> diagnostics = new ArrayList<FeatureBasedDiagnostic>();
 
-		for (AADMValidationIssue issue : validationIssues) {
+		for (ValidationIssue issue : validationIssues) {
 			// Add diagnostic
 			ValidationSourceFeature sourceFeature = getIssueFeature(resource, issue.getPath(), issue.getPathType());
 			if (sourceFeature == null)

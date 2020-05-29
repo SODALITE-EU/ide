@@ -2,7 +2,7 @@ package org.sodalite.dsl.ui.validation;
 
 import org.eclipse.xtext.diagnostics.Severity;
 
-public class AADMValidationIssue {
+public class ValidationIssue {
 	String message;
 	String path;
 	String pathType;
@@ -12,7 +12,7 @@ public class AADMValidationIssue {
 	
 	public static final String OPTIMIZATION = "Optimization";
 	
-	public AADMValidationIssue (String message, String path, String pathType, Severity type, String code, Object data){
+	public ValidationIssue (String message, String path, String pathType, Severity type, String code, Object data){
 		this.message = message;
 		this.path = path;
 		this.pathType = pathType;
