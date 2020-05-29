@@ -99,11 +99,11 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			//ENodeTemplate
 			if (rule.name == "ENodeTemplate" && keyword.value == "type:")
 				return "The required name of the Node Type the Node Template is based upon"
-			else if (rule.name == "ENodeTemplate" && keyword.value == "attributes{")
+			else if (rule.name == "ENodeTemplate" && keyword.value == "attributes:")
 				return "An optional list of attribute value assignments for the Node Template."
-			else if (rule.name == "ENodeTemplate" && keyword.value == "properties{")
+			else if (rule.name == "ENodeTemplate" && keyword.value == "properties:")
 				return "An optional list of property value assignments for the Node Template."
-			else if (rule.name == "ENodeTemplate" && keyword.value == "requirements{")
+			else if (rule.name == "ENodeTemplate" && keyword.value == "requirements:")
 				return "An optional sequenced list of requirement assignments for the Node Template."
 			
 			//ERequirementAssignment

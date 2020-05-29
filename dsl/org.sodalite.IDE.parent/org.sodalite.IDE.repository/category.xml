@@ -12,6 +12,9 @@
    <feature id="org.sodalite.dsl.RM.feature">
       <category name="main"/>
    </feature>
+   <feature id="org.sodalite.dsl.optimization.feature">
+      <category name="main"/>
+   </feature>
    <category-def name="main" label="SODALITE IDE"/>
    <category-def name="main.source" label="SODALITE IDE (Sources)"/>
 </site>

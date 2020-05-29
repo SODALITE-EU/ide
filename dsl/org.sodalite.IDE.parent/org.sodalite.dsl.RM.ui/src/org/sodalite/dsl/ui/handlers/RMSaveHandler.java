@@ -5,10 +5,14 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.sodalite.dsl.ui.backend.BackendProxy;
 
 public class RMSaveHandler implements IHandler {
-
+	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+	private BackendProxy backendProxy = new BackendProxy();
+	
 	@Override
 	public void addHandlerListener(IHandlerListener handlerListener) {
 		// TODO Auto-generated method stub
@@ -23,13 +27,13 @@ public class RMSaveHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		// TODO Get serialize AADM model in Turtle
-				// TODO Send turtle to KB
-				// Upon completion, show dialog
-				MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-						"Save RM", "The selected RM model has been succesfully store in the KB");
-				
-				return null;
+		try {
+			backendProxy.processSaveRM(event);
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			MessageDialog.openError(parent, "Save RM Error", "There were an error reported by the KB:\n" + ex.getMessage());
+		}
+		return this;
 	}
 
 	@Override

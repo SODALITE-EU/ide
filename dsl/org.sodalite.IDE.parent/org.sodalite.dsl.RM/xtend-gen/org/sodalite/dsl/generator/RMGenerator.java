@@ -1189,7 +1189,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("rdf:type exchange:Parameter ;");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("exchange:name \"get_property\" ;");
+    _builder.append("exchange:name \"get_attribute\" ;");
     _builder.newLine();
     {
       EAttributeDefinition _attribute_1 = a.getAttribute().getAttribute();
@@ -1368,6 +1368,12 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"");
     String _name = d.getName();
     _builder.append(_name, "  ");
+    _builder.append("\" ;");
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("exchange:derivesFrom \"");
+    String _name_1 = d.getData().getSuperType().getName();
+    _builder.append(_name_1, "  ");
     _builder.append("\" ;");
     _builder.newLineIfNotEmpty();
     {

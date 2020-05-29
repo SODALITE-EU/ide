@@ -115,13 +115,13 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
         return "The required name of the Node Type the Node Template is based upon";
       } else {
-        if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes{"))) {
+        if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes:"))) {
           return "An optional list of attribute value assignments for the Node Template.";
         } else {
-          if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties{"))) {
+          if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
             return "An optional list of property value assignments for the Node Template.";
           } else {
-            if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirements{"))) {
+            if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirements:"))) {
               return "An optional sequenced list of requirement assignments for the Node Template.";
             } else {
               if ((Objects.equal(rule.getName(), "ERequirementAssignment") && Objects.equal(((KeywordImpl)keyword).getValue(), "node:"))) {
