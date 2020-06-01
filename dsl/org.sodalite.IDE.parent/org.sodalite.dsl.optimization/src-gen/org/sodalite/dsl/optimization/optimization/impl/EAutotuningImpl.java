@@ -4,15 +4,12 @@
 package org.sodalite.dsl.optimization.optimization.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.optimization.optimization.EAutotuingDSL;
 import org.sodalite.dsl.optimization.optimization.EAutotuning;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 
@@ -53,14 +50,24 @@ public class EAutotuningImpl extends MinimalEObjectImpl.Container implements EAu
   protected String tuner = TUNER_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getInput() <em>Input</em>}' containment reference.
+   * The default value of the '{@link #getInput() <em>Input</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getInput()
    * @generated
    * @ordered
    */
-  protected EAutotuingDSL input;
+  protected static final String INPUT_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getInput() <em>Input</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getInput()
+   * @generated
+   * @ordered
+   */
+  protected String input = INPUT_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -114,7 +121,7 @@ public class EAutotuningImpl extends MinimalEObjectImpl.Container implements EAu
    * @generated
    */
   @Override
-  public EAutotuingDSL getInput()
+  public String getInput()
   {
     return input;
   }
@@ -124,54 +131,13 @@ public class EAutotuningImpl extends MinimalEObjectImpl.Container implements EAu
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetInput(EAutotuingDSL newInput, NotificationChain msgs)
+  @Override
+  public void setInput(String newInput)
   {
-    EAutotuingDSL oldInput = input;
+    String oldInput = input;
     input = newInput;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EAUTOTUNING__INPUT, oldInput, newInput);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setInput(EAutotuingDSL newInput)
-  {
-    if (newInput != input)
-    {
-      NotificationChain msgs = null;
-      if (input != null)
-        msgs = ((InternalEObject)input).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EAUTOTUNING__INPUT, null, msgs);
-      if (newInput != null)
-        msgs = ((InternalEObject)newInput).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EAUTOTUNING__INPUT, null, msgs);
-      msgs = basicSetInput(newInput, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EAUTOTUNING__INPUT, newInput, newInput));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case OptimizationPackage.EAUTOTUNING__INPUT:
-        return basicSetInput(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EAUTOTUNING__INPUT, oldInput, input));
   }
 
   /**
@@ -206,7 +172,7 @@ public class EAutotuningImpl extends MinimalEObjectImpl.Container implements EAu
         setTuner((String)newValue);
         return;
       case OptimizationPackage.EAUTOTUNING__INPUT:
-        setInput((EAutotuingDSL)newValue);
+        setInput((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -226,7 +192,7 @@ public class EAutotuningImpl extends MinimalEObjectImpl.Container implements EAu
         setTuner(TUNER_EDEFAULT);
         return;
       case OptimizationPackage.EAUTOTUNING__INPUT:
-        setInput((EAutotuingDSL)null);
+        setInput(INPUT_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -245,7 +211,7 @@ public class EAutotuningImpl extends MinimalEObjectImpl.Container implements EAu
       case OptimizationPackage.EAUTOTUNING__TUNER:
         return TUNER_EDEFAULT == null ? tuner != null : !TUNER_EDEFAULT.equals(tuner);
       case OptimizationPackage.EAUTOTUNING__INPUT:
-        return input != null;
+        return INPUT_EDEFAULT == null ? input != null : !INPUT_EDEFAULT.equals(input);
     }
     return super.eIsSet(featureID);
   }
@@ -263,6 +229,8 @@ public class EAutotuningImpl extends MinimalEObjectImpl.Container implements EAu
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (tuner: ");
     result.append(tuner);
+    result.append(", input: ");
+    result.append(input);
     result.append(')');
     return result.toString();
   }

@@ -3,6 +3,7 @@
  */
 package org.sodalite.dsl.optimization.optimization;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,7 @@ package org.sodalite.dsl.optimization.optimization;
  * @model
  * @generated
  */
-public interface EMPICase extends EHPCCases
+public interface EMPICase extends EObject
 {
   /**
    * Returns the value of the '<em><b>Mpi</b></em>' containment reference.

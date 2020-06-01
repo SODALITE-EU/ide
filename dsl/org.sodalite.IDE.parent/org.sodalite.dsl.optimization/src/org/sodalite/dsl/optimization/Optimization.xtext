@@ -62,7 +62,7 @@ EAppType:
 	
 EOptBuild:
 	('cpu_type:' cpu_type=ECPUType) &
-	('acc_type:' acc_type=EACCType)
+	('acc_type:' acc_type=EACCType) (constraint=EConstraint)?
 ;
 
 ECPUType:
@@ -73,51 +73,47 @@ EACCType:
 
 EAutotuning:
 	('tuner:' tuner=ETuner) &
-	('input:' 
-		BEGIN
-		input=EAutotuingDSL
-		END
-	)
+	('input:' input=STRING) //TODO Prompt user with UI to select Autotuning model from the filesystem
 ;
 
-EAutotuingDSL:
-	('parameters:' 
-		BEGIN
-		parameters=EParameters
-		END
-	)
-	('build:' 
-		BEGIN
-		parameters=EBuild
-		END
-	)
-	('run:' 
-		BEGIN
-		parameters=ERun
-		END
-	)
-;
+//EAutotuingDSL:
+//	('parameters:' 
+//		BEGIN
+//		parameters=EParameters
+//		END
+//	)
+//	('build:' 
+//		BEGIN
+//		parameters=EBuild
+//		END
+//	)
+//	('run:' 
+//		BEGIN
+//		parameters=ERun
+//		END
+//	)
+//;
 
-ERun:
-	'command:' command = STRING
-;
-
-EBuild:
-	'command:' command = STRING
-;
-
-EParameters:
-	('typing:' 
-		BEGIN
-		'int:' int=STRING
-		END
-	)
-	('constraints:' 
-		BEGIN
-		'range:' range=STRING
-		END
-	)
-;
+//ERun:
+//	'command:' command = STRING
+//;
+//
+//EBuild:
+//	'command:' command = STRING
+//;
+//
+//EParameters:
+//	('typing:' 
+//		BEGIN
+//		'int:' int=STRING
+//		END
+//	)
+//	('constraints:' 
+//		BEGIN
+//		'range:' range=STRING
+//		END
+//	)
+//;
 
 ETuner:
 	'CREATA' | 'AUTOTUNE'  ;
@@ -167,7 +163,7 @@ EKerasCase:
 EAITrainingConfig:
 	('ai_framework:' ai_framework=EAIFramework) &
 	('type:' type=EAITrainingType)? &
-	('distributed_training:' distributed_training=BOOLEAN)? &
+	(('distributed_training:' distributed_training=BOOLEAN) (constraint=EConstraint)?)? &
 	('layers:' layers=INT)? &
 	('parameters:' parameters=INT)? 
 ;	
@@ -183,7 +179,7 @@ EAITrainingData:
 	('basedata:' basedata=EBasedata)? &
 	('size:' size=INT)? &
 	('count:' count=INT)? &
-	('etl:' 
+	('etl:' (constraint=EConstraint)?
 		BEGIN
 		etl=EAITrainingETL
 		END
@@ -208,12 +204,12 @@ EBackend:
 
 ETensorFlow:
 	('version:' version=STRING)? &
-	('xla:' xla=BOOLEAN)? 
+	(('xla:' xla=BOOLEAN)(constraint=EConstraint)?)? 
 ;
 
 EPyTorch:
 	('version:' version=STRING)? &
-	('glow:' glow=BOOLEAN)? 
+	(('glow:' glow=BOOLEAN)(constraint=EConstraint)?)? 
 ;
 
 EHPC:
@@ -227,15 +223,14 @@ EHPC:
 		data=EHPCData
 		END
 	)
-	hpccase = EHPCCases
-;
-
-EHPCCases:
-	EMPICase | EOPENMPCase | EOPENACCCase | EOPENCLCase
+	(mpi = EMPICase)? &
+	(openmp = EOPENMPCase)? &
+	(openacc = EOPENACCCase)? &
+	(opencl = EOPENCLCase)? 
 ;
 
 EOPENCLCase:
-	('opencl:' 
+	('opencl:' (constraint=EConstraint)?
 		BEGIN
 		opencl=EOPENCL
 		END
@@ -243,7 +238,7 @@ EOPENCLCase:
 ;
 
 EOPENACCCase:
-	('openacc:' 
+	('openacc:' (constraint=EConstraint)?
 		BEGIN
 		openacc=EOPENACC
 		END
@@ -267,7 +262,7 @@ EMPICase:
 ;
 
 EHPCConfig:
-	'parallelisation:' parallelisation=EParallelisation //TODO Multiple selections are supported
+	'parallelisation:' parallelisation+=EParallelisation (',' parallelisation += EParallelisation)* //Multiple selections are supported
 ;	
 
 EParallelisation:
@@ -278,7 +273,7 @@ EHPCData:
 	('basedata:' basedata=EHPCBasedata)? &
 	('size:' size=INT)? &
 	('count:' count=INT)? &
-	('etl:'
+	('etl:' (constraint=EConstraint)?
 		BEGIN 
 		etl=EHPCETL
 		END
@@ -331,7 +326,34 @@ EOPENCL:
 ECompiler:
 	'pgi' | 'cray' ;
 
+EConstraint:
+	{EConstraint} '(' + 'Constraint:' statements+=EStatement (ELogicOper statements+= EStatement)* ')'
+;
 
+ELogicOper:
+	OR | AND
+;
+
+EStatement:
+	property=STRING operator=EComparisonOperator value=EValue
+;
+
+EValue:
+	INT | RealValue
+;
+
+EComparisonOperator:
+	BT | LT | BET | LET | EQUAL | NOT_EQUAL
+;
+
+terminal BT: '>';
+terminal LT: '<';
+terminal BET: '>=';
+terminal LET: '<=';
+terminal EQUAL: '==';
+terminal NOT_EQUAL: '!=';
+terminal OR: 'OR';
+terminal AND: 'AND';
 	
 //Positional blocks delimited with indentation
 terminal BEGIN: 'synthetic:BEGIN';

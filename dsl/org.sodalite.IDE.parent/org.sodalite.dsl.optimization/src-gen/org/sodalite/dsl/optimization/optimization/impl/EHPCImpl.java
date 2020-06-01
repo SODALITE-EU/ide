@@ -13,9 +13,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.optimization.optimization.EHPC;
-import org.sodalite.dsl.optimization.optimization.EHPCCases;
 import org.sodalite.dsl.optimization.optimization.EHPCConfig;
 import org.sodalite.dsl.optimization.optimization.EHPCData;
+import org.sodalite.dsl.optimization.optimization.EMPICase;
+import org.sodalite.dsl.optimization.optimization.EOPENACCCase;
+import org.sodalite.dsl.optimization.optimization.EOPENCLCase;
+import org.sodalite.dsl.optimization.optimization.EOPENMPCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 
 /**
@@ -28,7 +31,10 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  * <ul>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCImpl#getConfig <em>Config</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCImpl#getData <em>Data</em>}</li>
- *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCImpl#getHpccase <em>Hpccase</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCImpl#getMpi <em>Mpi</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCImpl#getOpenmp <em>Openmp</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCImpl#getOpenacc <em>Openacc</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCImpl#getOpencl <em>Opencl</em>}</li>
  * </ul>
  *
  * @generated
@@ -56,14 +62,44 @@ public class EHPCImpl extends MinimalEObjectImpl.Container implements EHPC
   protected EHPCData data;
 
   /**
-   * The cached value of the '{@link #getHpccase() <em>Hpccase</em>}' containment reference.
+   * The cached value of the '{@link #getMpi() <em>Mpi</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getHpccase()
+   * @see #getMpi()
    * @generated
    * @ordered
    */
-  protected EHPCCases hpccase;
+  protected EMPICase mpi;
+
+  /**
+   * The cached value of the '{@link #getOpenmp() <em>Openmp</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOpenmp()
+   * @generated
+   * @ordered
+   */
+  protected EOPENMPCase openmp;
+
+  /**
+   * The cached value of the '{@link #getOpenacc() <em>Openacc</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOpenacc()
+   * @generated
+   * @ordered
+   */
+  protected EOPENACCCase openacc;
+
+  /**
+   * The cached value of the '{@link #getOpencl() <em>Opencl</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOpencl()
+   * @generated
+   * @ordered
+   */
+  protected EOPENCLCase opencl;
 
   /**
    * <!-- begin-user-doc -->
@@ -192,9 +228,9 @@ public class EHPCImpl extends MinimalEObjectImpl.Container implements EHPC
    * @generated
    */
   @Override
-  public EHPCCases getHpccase()
+  public EMPICase getMpi()
   {
-    return hpccase;
+    return mpi;
   }
 
   /**
@@ -202,13 +238,13 @@ public class EHPCImpl extends MinimalEObjectImpl.Container implements EHPC
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetHpccase(EHPCCases newHpccase, NotificationChain msgs)
+  public NotificationChain basicSetMpi(EMPICase newMpi, NotificationChain msgs)
   {
-    EHPCCases oldHpccase = hpccase;
-    hpccase = newHpccase;
+    EMPICase oldMpi = mpi;
+    mpi = newMpi;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__HPCCASE, oldHpccase, newHpccase);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__MPI, oldMpi, newMpi);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -220,20 +256,170 @@ public class EHPCImpl extends MinimalEObjectImpl.Container implements EHPC
    * @generated
    */
   @Override
-  public void setHpccase(EHPCCases newHpccase)
+  public void setMpi(EMPICase newMpi)
   {
-    if (newHpccase != hpccase)
+    if (newMpi != mpi)
     {
       NotificationChain msgs = null;
-      if (hpccase != null)
-        msgs = ((InternalEObject)hpccase).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__HPCCASE, null, msgs);
-      if (newHpccase != null)
-        msgs = ((InternalEObject)newHpccase).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__HPCCASE, null, msgs);
-      msgs = basicSetHpccase(newHpccase, msgs);
+      if (mpi != null)
+        msgs = ((InternalEObject)mpi).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__MPI, null, msgs);
+      if (newMpi != null)
+        msgs = ((InternalEObject)newMpi).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__MPI, null, msgs);
+      msgs = basicSetMpi(newMpi, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__HPCCASE, newHpccase, newHpccase));
+      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__MPI, newMpi, newMpi));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EOPENMPCase getOpenmp()
+  {
+    return openmp;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetOpenmp(EOPENMPCase newOpenmp, NotificationChain msgs)
+  {
+    EOPENMPCase oldOpenmp = openmp;
+    openmp = newOpenmp;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__OPENMP, oldOpenmp, newOpenmp);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setOpenmp(EOPENMPCase newOpenmp)
+  {
+    if (newOpenmp != openmp)
+    {
+      NotificationChain msgs = null;
+      if (openmp != null)
+        msgs = ((InternalEObject)openmp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__OPENMP, null, msgs);
+      if (newOpenmp != null)
+        msgs = ((InternalEObject)newOpenmp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__OPENMP, null, msgs);
+      msgs = basicSetOpenmp(newOpenmp, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__OPENMP, newOpenmp, newOpenmp));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EOPENACCCase getOpenacc()
+  {
+    return openacc;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetOpenacc(EOPENACCCase newOpenacc, NotificationChain msgs)
+  {
+    EOPENACCCase oldOpenacc = openacc;
+    openacc = newOpenacc;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__OPENACC, oldOpenacc, newOpenacc);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setOpenacc(EOPENACCCase newOpenacc)
+  {
+    if (newOpenacc != openacc)
+    {
+      NotificationChain msgs = null;
+      if (openacc != null)
+        msgs = ((InternalEObject)openacc).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__OPENACC, null, msgs);
+      if (newOpenacc != null)
+        msgs = ((InternalEObject)newOpenacc).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__OPENACC, null, msgs);
+      msgs = basicSetOpenacc(newOpenacc, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__OPENACC, newOpenacc, newOpenacc));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EOPENCLCase getOpencl()
+  {
+    return opencl;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetOpencl(EOPENCLCase newOpencl, NotificationChain msgs)
+  {
+    EOPENCLCase oldOpencl = opencl;
+    opencl = newOpencl;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__OPENCL, oldOpencl, newOpencl);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setOpencl(EOPENCLCase newOpencl)
+  {
+    if (newOpencl != opencl)
+    {
+      NotificationChain msgs = null;
+      if (opencl != null)
+        msgs = ((InternalEObject)opencl).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__OPENCL, null, msgs);
+      if (newOpencl != null)
+        msgs = ((InternalEObject)newOpencl).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC__OPENCL, null, msgs);
+      msgs = basicSetOpencl(newOpencl, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC__OPENCL, newOpencl, newOpencl));
   }
 
   /**
@@ -250,8 +436,14 @@ public class EHPCImpl extends MinimalEObjectImpl.Container implements EHPC
         return basicSetConfig(null, msgs);
       case OptimizationPackage.EHPC__DATA:
         return basicSetData(null, msgs);
-      case OptimizationPackage.EHPC__HPCCASE:
-        return basicSetHpccase(null, msgs);
+      case OptimizationPackage.EHPC__MPI:
+        return basicSetMpi(null, msgs);
+      case OptimizationPackage.EHPC__OPENMP:
+        return basicSetOpenmp(null, msgs);
+      case OptimizationPackage.EHPC__OPENACC:
+        return basicSetOpenacc(null, msgs);
+      case OptimizationPackage.EHPC__OPENCL:
+        return basicSetOpencl(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -270,8 +462,14 @@ public class EHPCImpl extends MinimalEObjectImpl.Container implements EHPC
         return getConfig();
       case OptimizationPackage.EHPC__DATA:
         return getData();
-      case OptimizationPackage.EHPC__HPCCASE:
-        return getHpccase();
+      case OptimizationPackage.EHPC__MPI:
+        return getMpi();
+      case OptimizationPackage.EHPC__OPENMP:
+        return getOpenmp();
+      case OptimizationPackage.EHPC__OPENACC:
+        return getOpenacc();
+      case OptimizationPackage.EHPC__OPENCL:
+        return getOpencl();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -292,8 +490,17 @@ public class EHPCImpl extends MinimalEObjectImpl.Container implements EHPC
       case OptimizationPackage.EHPC__DATA:
         setData((EHPCData)newValue);
         return;
-      case OptimizationPackage.EHPC__HPCCASE:
-        setHpccase((EHPCCases)newValue);
+      case OptimizationPackage.EHPC__MPI:
+        setMpi((EMPICase)newValue);
+        return;
+      case OptimizationPackage.EHPC__OPENMP:
+        setOpenmp((EOPENMPCase)newValue);
+        return;
+      case OptimizationPackage.EHPC__OPENACC:
+        setOpenacc((EOPENACCCase)newValue);
+        return;
+      case OptimizationPackage.EHPC__OPENCL:
+        setOpencl((EOPENCLCase)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -315,8 +522,17 @@ public class EHPCImpl extends MinimalEObjectImpl.Container implements EHPC
       case OptimizationPackage.EHPC__DATA:
         setData((EHPCData)null);
         return;
-      case OptimizationPackage.EHPC__HPCCASE:
-        setHpccase((EHPCCases)null);
+      case OptimizationPackage.EHPC__MPI:
+        setMpi((EMPICase)null);
+        return;
+      case OptimizationPackage.EHPC__OPENMP:
+        setOpenmp((EOPENMPCase)null);
+        return;
+      case OptimizationPackage.EHPC__OPENACC:
+        setOpenacc((EOPENACCCase)null);
+        return;
+      case OptimizationPackage.EHPC__OPENCL:
+        setOpencl((EOPENCLCase)null);
         return;
     }
     super.eUnset(featureID);
@@ -336,8 +552,14 @@ public class EHPCImpl extends MinimalEObjectImpl.Container implements EHPC
         return config != null;
       case OptimizationPackage.EHPC__DATA:
         return data != null;
-      case OptimizationPackage.EHPC__HPCCASE:
-        return hpccase != null;
+      case OptimizationPackage.EHPC__MPI:
+        return mpi != null;
+      case OptimizationPackage.EHPC__OPENMP:
+        return openmp != null;
+      case OptimizationPackage.EHPC__OPENACC:
+        return openacc != null;
+      case OptimizationPackage.EHPC__OPENCL:
+        return opencl != null;
     }
     return super.eIsSet(featureID);
   }

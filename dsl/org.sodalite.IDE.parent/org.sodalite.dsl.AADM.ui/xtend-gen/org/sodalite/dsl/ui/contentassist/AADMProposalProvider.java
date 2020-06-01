@@ -224,12 +224,27 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             String attribute_label = _string.substring(_plus_1, attribute.getUri().toString().length());
             proposalText = attribute_label;
             displayText = attribute_label;
+            String _xifexpression = null;
             String _label = attribute.getType().getLabel();
-            String _plus_2 = ("Type: " + _label);
-            String _plus_3 = (_plus_2 + "\nDescription: ");
+            boolean _tripleNotEquals = (_label != null);
+            if (_tripleNotEquals) {
+              String _label_1 = attribute.getType().getLabel();
+              _xifexpression = ("Type: " + _label_1);
+            } else {
+              _xifexpression = "";
+            }
+            additionalProposalInfo = _xifexpression;
+            String _additionalProposalInfo = additionalProposalInfo;
+            String _xifexpression_1 = null;
             String _description = attribute.getDescription();
-            String _plus_4 = (_plus_3 + _description);
-            additionalProposalInfo = _plus_4;
+            boolean _tripleNotEquals_1 = (_description != null);
+            if (_tripleNotEquals_1) {
+              String _description_1 = attribute.getDescription();
+              _xifexpression_1 = ("\nDescription: " + _description_1);
+            } else {
+              _xifexpression_1 = "";
+            }
+            additionalProposalInfo = (_additionalProposalInfo + _xifexpression_1);
             this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
           }
         }
@@ -275,12 +290,27 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
               String property_label = _string.substring(_plus_1, property.getUri().toString().length());
               proposalText = property_label;
               displayText = property_label;
+              String _xifexpression = null;
               String _label = property.getType().getLabel();
-              String _plus_2 = ("Type: " + _label);
-              String _plus_3 = (_plus_2 + "\nDescription: ");
+              boolean _tripleNotEquals = (_label != null);
+              if (_tripleNotEquals) {
+                String _label_1 = property.getType().getLabel();
+                _xifexpression = ("Type: " + _label_1);
+              } else {
+                _xifexpression = "";
+              }
+              additionalProposalInfo = _xifexpression;
+              String _additionalProposalInfo = additionalProposalInfo;
+              String _xifexpression_1 = null;
               String _description = property.getDescription();
-              String _plus_4 = (_plus_3 + _description);
-              additionalProposalInfo = _plus_4;
+              boolean _tripleNotEquals_1 = (_description != null);
+              if (_tripleNotEquals_1) {
+                String _description_1 = property.getDescription();
+                _xifexpression_1 = ("\nDescription: " + _description_1);
+              } else {
+                _xifexpression_1 = "";
+              }
+              additionalProposalInfo = (_additionalProposalInfo + _xifexpression_1);
               this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
             }
           }

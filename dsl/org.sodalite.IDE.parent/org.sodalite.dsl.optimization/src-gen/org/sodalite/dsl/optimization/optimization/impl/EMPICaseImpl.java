@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.optimization.optimization.EMPI;
 import org.sodalite.dsl.optimization.optimization.EMPICase;
@@ -28,7 +29,7 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  *
  * @generated
  */
-public class EMPICaseImpl extends EHPCCasesImpl implements EMPICase
+public class EMPICaseImpl extends MinimalEObjectImpl.Container implements EMPICase
 {
   /**
    * The cached value of the '{@link #getMpi() <em>Mpi</em>}' containment reference.

@@ -16,7 +16,10 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EHPC#getConfig <em>Config</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EHPC#getData <em>Data</em>}</li>
- *   <li>{@link org.sodalite.dsl.optimization.optimization.EHPC#getHpccase <em>Hpccase</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.EHPC#getMpi <em>Mpi</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.EHPC#getOpenmp <em>Openmp</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.EHPC#getOpenacc <em>Openacc</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.EHPC#getOpencl <em>Opencl</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPC()
@@ -70,25 +73,91 @@ public interface EHPC extends EObject
   void setData(EHPCData value);
 
   /**
-   * Returns the value of the '<em><b>Hpccase</b></em>' containment reference.
+   * Returns the value of the '<em><b>Mpi</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Hpccase</em>' containment reference.
-   * @see #setHpccase(EHPCCases)
-   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPC_Hpccase()
+   * @return the value of the '<em>Mpi</em>' containment reference.
+   * @see #setMpi(EMPICase)
+   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPC_Mpi()
    * @model containment="true"
    * @generated
    */
-  EHPCCases getHpccase();
+  EMPICase getMpi();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EHPC#getHpccase <em>Hpccase</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EHPC#getMpi <em>Mpi</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Hpccase</em>' containment reference.
-   * @see #getHpccase()
+   * @param value the new value of the '<em>Mpi</em>' containment reference.
+   * @see #getMpi()
    * @generated
    */
-  void setHpccase(EHPCCases value);
+  void setMpi(EMPICase value);
+
+  /**
+   * Returns the value of the '<em><b>Openmp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Openmp</em>' containment reference.
+   * @see #setOpenmp(EOPENMPCase)
+   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPC_Openmp()
+   * @model containment="true"
+   * @generated
+   */
+  EOPENMPCase getOpenmp();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EHPC#getOpenmp <em>Openmp</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Openmp</em>' containment reference.
+   * @see #getOpenmp()
+   * @generated
+   */
+  void setOpenmp(EOPENMPCase value);
+
+  /**
+   * Returns the value of the '<em><b>Openacc</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Openacc</em>' containment reference.
+   * @see #setOpenacc(EOPENACCCase)
+   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPC_Openacc()
+   * @model containment="true"
+   * @generated
+   */
+  EOPENACCCase getOpenacc();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EHPC#getOpenacc <em>Openacc</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Openacc</em>' containment reference.
+   * @see #getOpenacc()
+   * @generated
+   */
+  void setOpenacc(EOPENACCCase value);
+
+  /**
+   * Returns the value of the '<em><b>Opencl</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Opencl</em>' containment reference.
+   * @see #setOpencl(EOPENCLCase)
+   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPC_Opencl()
+   * @model containment="true"
+   * @generated
+   */
+  EOPENCLCase getOpencl();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EHPC#getOpencl <em>Opencl</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Opencl</em>' containment reference.
+   * @see #getOpencl()
+   * @generated
+   */
+  void setOpencl(EOPENCLCase value);
 
 } // EHPC

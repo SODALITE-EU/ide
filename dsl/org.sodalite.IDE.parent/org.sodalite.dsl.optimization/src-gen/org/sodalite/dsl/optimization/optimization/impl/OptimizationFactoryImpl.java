@@ -72,10 +72,6 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
       case OptimizationPackage.EHPC_CASE: return createEHPCCase();
       case OptimizationPackage.EOPT_BUILD: return createEOptBuild();
       case OptimizationPackage.EAUTOTUNING: return createEAutotuning();
-      case OptimizationPackage.EAUTOTUING_DSL: return createEAutotuingDSL();
-      case OptimizationPackage.ERUN: return createERun();
-      case OptimizationPackage.EBUILD: return createEBuild();
-      case OptimizationPackage.EPARAMETERS: return createEParameters();
       case OptimizationPackage.EAI_TRAINING: return createEAITraining();
       case OptimizationPackage.EAI_TRAINING_CASES: return createEAITrainingCases();
       case OptimizationPackage.EPY_TORCH_CASE: return createEPyTorchCase();
@@ -88,7 +84,6 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
       case OptimizationPackage.ETENSOR_FLOW: return createETensorFlow();
       case OptimizationPackage.EPY_TORCH: return createEPyTorch();
       case OptimizationPackage.EHPC: return createEHPC();
-      case OptimizationPackage.EHPC_CASES: return createEHPCCases();
       case OptimizationPackage.EOPENCL_CASE: return createEOPENCLCase();
       case OptimizationPackage.EOPENACC_CASE: return createEOPENACCCase();
       case OptimizationPackage.EOPENMP_CASE: return createEOPENMPCase();
@@ -100,6 +95,8 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
       case OptimizationPackage.EOPENMP: return createEOPENMP();
       case OptimizationPackage.EOPENACC: return createEOPENACC();
       case OptimizationPackage.EOPENCL: return createEOPENCL();
+      case OptimizationPackage.ECONSTRAINT: return createEConstraint();
+      case OptimizationPackage.ESTATEMENT: return createEStatement();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -187,54 +184,6 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
   {
     EAutotuningImpl eAutotuning = new EAutotuningImpl();
     return eAutotuning;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAutotuingDSL createEAutotuingDSL()
-  {
-    EAutotuingDSLImpl eAutotuingDSL = new EAutotuingDSLImpl();
-    return eAutotuingDSL;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ERun createERun()
-  {
-    ERunImpl eRun = new ERunImpl();
-    return eRun;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EBuild createEBuild()
-  {
-    EBuildImpl eBuild = new EBuildImpl();
-    return eBuild;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EParameters createEParameters()
-  {
-    EParametersImpl eParameters = new EParametersImpl();
-    return eParameters;
   }
 
   /**
@@ -387,18 +336,6 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EHPCCases createEHPCCases()
-  {
-    EHPCCasesImpl ehpcCases = new EHPCCasesImpl();
-    return ehpcCases;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EOPENCLCase createEOPENCLCase()
   {
     EOPENCLCaseImpl eopenclCase = new EOPENCLCaseImpl();
@@ -523,6 +460,30 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
   {
     EOPENCLImpl eopencl = new EOPENCLImpl();
     return eopencl;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EConstraint createEConstraint()
+  {
+    EConstraintImpl eConstraint = new EConstraintImpl();
+    return eConstraint;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EStatement createEStatement()
+  {
+    EStatementImpl eStatement = new EStatementImpl();
+    return eStatement;
   }
 
   /**

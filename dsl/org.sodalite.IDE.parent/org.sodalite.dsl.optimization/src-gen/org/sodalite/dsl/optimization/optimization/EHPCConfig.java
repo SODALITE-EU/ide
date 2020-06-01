@@ -3,6 +3,8 @@
  */
 package org.sodalite.dsl.optimization.optimization;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -24,25 +26,15 @@ import org.eclipse.emf.ecore.EObject;
 public interface EHPCConfig extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Parallelisation</b></em>' attribute.
+   * Returns the value of the '<em><b>Parallelisation</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Parallelisation</em>' attribute.
-   * @see #setParallelisation(String)
+   * @return the value of the '<em>Parallelisation</em>' attribute list.
    * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEHPCConfig_Parallelisation()
-   * @model
+   * @model unique="false"
    * @generated
    */
-  String getParallelisation();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation <em>Parallelisation</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Parallelisation</em>' attribute.
-   * @see #getParallelisation()
-   * @generated
-   */
-  void setParallelisation(String value);
+  EList<String> getParallelisation();
 
 } // EHPCConfig

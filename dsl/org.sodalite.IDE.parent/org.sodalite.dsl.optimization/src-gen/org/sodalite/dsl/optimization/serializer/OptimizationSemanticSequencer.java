@@ -19,9 +19,8 @@ import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
 import org.sodalite.dsl.optimization.optimization.EAITrainingConfig;
 import org.sodalite.dsl.optimization.optimization.EAITrainingData;
 import org.sodalite.dsl.optimization.optimization.EAITrainingETL;
-import org.sodalite.dsl.optimization.optimization.EAutotuingDSL;
 import org.sodalite.dsl.optimization.optimization.EAutotuning;
-import org.sodalite.dsl.optimization.optimization.EBuild;
+import org.sodalite.dsl.optimization.optimization.EConstraint;
 import org.sodalite.dsl.optimization.optimization.EHPC;
 import org.sodalite.dsl.optimization.optimization.EHPCCase;
 import org.sodalite.dsl.optimization.optimization.EHPCConfig;
@@ -39,10 +38,9 @@ import org.sodalite.dsl.optimization.optimization.EOPENMP;
 import org.sodalite.dsl.optimization.optimization.EOPENMPCase;
 import org.sodalite.dsl.optimization.optimization.EOptBuild;
 import org.sodalite.dsl.optimization.optimization.EOptimization;
-import org.sodalite.dsl.optimization.optimization.EParameters;
 import org.sodalite.dsl.optimization.optimization.EPyTorch;
 import org.sodalite.dsl.optimization.optimization.EPyTorchCase;
-import org.sodalite.dsl.optimization.optimization.ERun;
+import org.sodalite.dsl.optimization.optimization.EStatement;
 import org.sodalite.dsl.optimization.optimization.ETensorFlow;
 import org.sodalite.dsl.optimization.optimization.ETensorFlowCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
@@ -78,14 +76,11 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case OptimizationPackage.EAI_TRAINING_ETL:
 				sequence_EAITrainingETL(context, (EAITrainingETL) semanticObject); 
 				return; 
-			case OptimizationPackage.EAUTOTUING_DSL:
-				sequence_EAutotuingDSL(context, (EAutotuingDSL) semanticObject); 
-				return; 
 			case OptimizationPackage.EAUTOTUNING:
 				sequence_EAutotuning(context, (EAutotuning) semanticObject); 
 				return; 
-			case OptimizationPackage.EBUILD:
-				sequence_EBuild(context, (EBuild) semanticObject); 
+			case OptimizationPackage.ECONSTRAINT:
+				sequence_EConstraint(context, (EConstraint) semanticObject); 
 				return; 
 			case OptimizationPackage.EHPC:
 				sequence_EHPC(context, (EHPC) semanticObject); 
@@ -138,17 +133,14 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case OptimizationPackage.EOPTIMIZATION:
 				sequence_EOptimization(context, (EOptimization) semanticObject); 
 				return; 
-			case OptimizationPackage.EPARAMETERS:
-				sequence_EParameters(context, (EParameters) semanticObject); 
-				return; 
 			case OptimizationPackage.EPY_TORCH:
 				sequence_EPyTorch(context, (EPyTorch) semanticObject); 
 				return; 
 			case OptimizationPackage.EPY_TORCH_CASE:
 				sequence_EPyTorchCase(context, (EPyTorchCase) semanticObject); 
 				return; 
-			case OptimizationPackage.ERUN:
-				sequence_ERun(context, (ERun) semanticObject); 
+			case OptimizationPackage.ESTATEMENT:
+				sequence_EStatement(context, (EStatement) semanticObject); 
 				return; 
 			case OptimizationPackage.ETENSOR_FLOW:
 				sequence_ETensorFlow(context, (ETensorFlow) semanticObject); 
@@ -188,7 +180,7 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EAITrainingConfig returns EAITrainingConfig
 	 *
 	 * Constraint:
-	 *     (ai_framework=EAIFramework | type=EAITrainingType | distributed_training=BOOLEAN | layers=INT | parameters=INT)+
+	 *     (ai_framework=EAIFramework | type=EAITrainingType | (distributed_training=BOOLEAN constraint=EConstraint?) | layers=INT | parameters=INT)+
 	 */
 	protected void sequence_EAITrainingConfig(ISerializationContext context, EAITrainingConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -200,7 +192,7 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EAITrainingData returns EAITrainingData
 	 *
 	 * Constraint:
-	 *     (location=STRING | basedata=EBasedata | size=INT | count=INT | etl=EAITrainingETL)+
+	 *     (location=STRING | basedata=EBasedata | size=INT | count=INT | (constraint=EConstraint? etl=EAITrainingETL))+
 	 */
 	protected void sequence_EAITrainingData(ISerializationContext context, EAITrainingData semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -245,22 +237,10 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
-	 *     EAutotuingDSL returns EAutotuingDSL
-	 *
-	 * Constraint:
-	 *     (parameters=EParameters parameters=EBuild parameters=ERun)
-	 */
-	protected void sequence_EAutotuingDSL(ISerializationContext context, EAutotuingDSL semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     EAutotuning returns EAutotuning
 	 *
 	 * Constraint:
-	 *     (tuner=ETuner | input=EAutotuingDSL)+
+	 *     (tuner=ETuner | input=STRING)+
 	 */
 	protected void sequence_EAutotuning(ISerializationContext context, EAutotuning semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -269,19 +249,13 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
-	 *     EBuild returns EBuild
+	 *     EConstraint returns EConstraint
 	 *
 	 * Constraint:
-	 *     command=STRING
+	 *     (statements+=EStatement statements+=EStatement*)
 	 */
-	protected void sequence_EBuild(ISerializationContext context, EBuild semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EBUILD__COMMAND) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EBUILD__COMMAND));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEBuildAccess().getCommandSTRINGTerminalRuleCall_1_0(), semanticObject.getCommand());
-		feeder.finish();
+	protected void sequence_EConstraint(ISerializationContext context, EConstraint semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -309,16 +283,10 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EHPCConfig returns EHPCConfig
 	 *
 	 * Constraint:
-	 *     parallelisation=EParallelisation
+	 *     (parallelisation+=EParallelisation parallelisation+=EParallelisation*)
 	 */
 	protected void sequence_EHPCConfig(ISerializationContext context, EHPCConfig semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_1_0(), semanticObject.getParallelisation());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -327,7 +295,7 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EHPCData returns EHPCData
 	 *
 	 * Constraint:
-	 *     (location=STRING | basedata=EHPCBasedata | size=INT | count=INT | etl=EHPCETL)+
+	 *     (location=STRING | basedata=EHPCBasedata | size=INT | count=INT | (constraint=EConstraint? etl=EHPCETL))+
 	 */
 	protected void sequence_EHPCData(ISerializationContext context, EHPCData semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -351,22 +319,10 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EHPC returns EHPC
 	 *
 	 * Constraint:
-	 *     (config=EHPCConfig data=EHPCData hpccase=EHPCCases)
+	 *     ((config=EHPCConfig data=EHPCData mpi=EMPICase?) | openmp=EOPENMPCase | openacc=EOPENACCCase | opencl=EOPENCLCase)+
 	 */
 	protected void sequence_EHPC(ISerializationContext context, EHPC semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EHPC__CONFIG) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EHPC__CONFIG));
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EHPC__DATA) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EHPC__DATA));
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EHPC__HPCCASE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EHPC__HPCCASE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEHPCAccess().getConfigEHPCConfigParserRuleCall_0_2_0(), semanticObject.getConfig());
-		feeder.accept(grammarAccess.getEHPCAccess().getDataEHPCDataParserRuleCall_1_2_0(), semanticObject.getData());
-		feeder.accept(grammarAccess.getEHPCAccess().getHpccaseEHPCCasesParserRuleCall_2_0(), semanticObject.getHpccase());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -403,7 +359,6 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
-	 *     EHPCCases returns EMPICase
 	 *     EMPICase returns EMPICase
 	 *
 	 * Constraint:
@@ -434,20 +389,13 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
-	 *     EHPCCases returns EOPENACCCase
 	 *     EOPENACCCase returns EOPENACCCase
 	 *
 	 * Constraint:
-	 *     openacc=EOPENACC
+	 *     (constraint=EConstraint? openacc=EOPENACC)
 	 */
 	protected void sequence_EOPENACCCase(ISerializationContext context, EOPENACCCase semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EOPENACC_CASE__OPENACC) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EOPENACC_CASE__OPENACC));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEOPENACCCaseAccess().getOpenaccEOPENACCParserRuleCall_2_0(), semanticObject.getOpenacc());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -465,20 +413,13 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
-	 *     EHPCCases returns EOPENCLCase
 	 *     EOPENCLCase returns EOPENCLCase
 	 *
 	 * Constraint:
-	 *     opencl=EOPENCL
+	 *     (constraint=EConstraint? opencl=EOPENCL)
 	 */
 	protected void sequence_EOPENCLCase(ISerializationContext context, EOPENCLCase semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EOPENCL_CASE__OPENCL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EOPENCL_CASE__OPENCL));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEOPENCLCaseAccess().getOpenclEOPENCLParserRuleCall_2_0(), semanticObject.getOpencl());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -496,7 +437,6 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
-	 *     EHPCCases returns EOPENMPCase
 	 *     EOPENMPCase returns EOPENMPCase
 	 *
 	 * Constraint:
@@ -530,7 +470,7 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EOptBuild returns EOptBuild
 	 *
 	 * Constraint:
-	 *     (cpu_type=ECPUType | acc_type=EACCType)+
+	 *     (cpu_type=ECPUType | (acc_type=EACCType constraint=EConstraint?))+
 	 */
 	protected void sequence_EOptBuild(ISerializationContext context, EOptBuild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -558,27 +498,6 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
-	 *     EParameters returns EParameters
-	 *
-	 * Constraint:
-	 *     (int=STRING range=STRING)
-	 */
-	protected void sequence_EParameters(ISerializationContext context, EParameters semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EPARAMETERS__INT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EPARAMETERS__INT));
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EPARAMETERS__RANGE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EPARAMETERS__RANGE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEParametersAccess().getIntSTRINGTerminalRuleCall_0_3_0(), semanticObject.getInt());
-		feeder.accept(grammarAccess.getEParametersAccess().getRangeSTRINGTerminalRuleCall_1_3_0(), semanticObject.getRange());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     EAITrainingCases returns EPyTorchCase
 	 *     EPyTorchCase returns EPyTorchCase
 	 *
@@ -601,7 +520,7 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EPyTorch returns EPyTorch
 	 *
 	 * Constraint:
-	 *     (version=STRING | glow=BOOLEAN)+
+	 *     (version=STRING | (glow=BOOLEAN constraint=EConstraint?))+
 	 */
 	protected void sequence_EPyTorch(ISerializationContext context, EPyTorch semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -610,18 +529,24 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
-	 *     ERun returns ERun
+	 *     EStatement returns EStatement
 	 *
 	 * Constraint:
-	 *     command=STRING
+	 *     (property=STRING operator=EComparisonOperator value=EValue)
 	 */
-	protected void sequence_ERun(ISerializationContext context, ERun semanticObject) {
+	protected void sequence_EStatement(ISerializationContext context, EStatement semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.ERUN__COMMAND) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.ERUN__COMMAND));
+			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.ESTATEMENT__PROPERTY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.ESTATEMENT__PROPERTY));
+			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.ESTATEMENT__OPERATOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.ESTATEMENT__OPERATOR));
+			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.ESTATEMENT__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.ESTATEMENT__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getERunAccess().getCommandSTRINGTerminalRuleCall_1_0(), semanticObject.getCommand());
+		feeder.accept(grammarAccess.getEStatementAccess().getPropertySTRINGTerminalRuleCall_0_0(), semanticObject.getProperty());
+		feeder.accept(grammarAccess.getEStatementAccess().getOperatorEComparisonOperatorParserRuleCall_1_0(), semanticObject.getOperator());
+		feeder.accept(grammarAccess.getEStatementAccess().getValueEValueParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -650,7 +575,7 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     ETensorFlow returns ETensorFlow
 	 *
 	 * Constraint:
-	 *     (version=STRING | xla=BOOLEAN)+
+	 *     (version=STRING | (xla=BOOLEAN constraint=EConstraint?))+
 	 */
 	protected void sequence_ETensorFlow(ISerializationContext context, ETensorFlow semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

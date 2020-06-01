@@ -219,15 +219,6 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
-	«IF c.capability.description !== null»
-	«putParameterNumber(c, "description", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "description" ;
-	  exchange:value '«c.capability.description»' ;
-	.
-	«ENDIF»
-	
 	«IF c.capability.valid_source_types !== null»
 	«putParameterNumber(c, "valid_source_types", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -245,11 +236,11 @@ class RMGenerator extends AbstractGenerator {
 	:Capability_«capability_counter++»
 	  rdf:type exchange:Capability ;
 	  exchange:name "«c.name»" ;
+	  «IF c.capability.description !== null»
+	  exchange:description '«c.capability.description»' ;
+	  «ENDIF»
 	  «IF c.capability.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(c, "type")» ;
-	  «ENDIF»
-	  «IF c.capability.description !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(c, "description")» ;
 	  «ENDIF»
 	  «IF c.capability.valid_source_types !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(c, "valid_source_types")» ;
@@ -460,7 +451,7 @@ class RMGenerator extends AbstractGenerator {
 	:Node_«node_counter++»
 	  rdf:type exchange:Node ;
 	  «IF n.node.description !== null»
-	  exchange:description "«n.node.description»" ;
+	  exchange:description '«n.node.description»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
 	  exchange:derivesFrom "«n.node.superType.name»" ;
@@ -498,7 +489,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "«d.name»" ;
 	  exchange:derivesFrom "«d.data.superType.name»" ;
 	  «IF d.data.description !== null»
-	  exchange:description "«d.data.description»" ;
+	  exchange:description '«d.data.description»' ;
 	  «ENDIF»
 	  «IF d.data.properties !== null»
 	  «FOR p:d.data.properties.properties»
@@ -515,15 +506,6 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
 	  exchange:value '«p.property.type.name»' ;
-	.
-	«ENDIF»
-	
-	«IF p.property.description !== null»
-	«putParameterNumber(p, "description", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "description" ;
-	  exchange:value '«p.property.description»' ;
 	.
 	«ENDIF»
 	
@@ -579,14 +561,11 @@ class RMGenerator extends AbstractGenerator {
 	:Property_«property_counter++»
 	  rdf:type exchange:Property ;
 	  exchange:name "«p.name»" ;
+	  «IF p.property.description !== null»
+	  exchange:description '«p.property.description»' ;
+	  «ENDIF»
 	  «IF p.property.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ;
-	  «ENDIF»
-	  «IF p.property.description !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p, "description")» ;
-	  «ENDIF»
-	  «IF p.property.required»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p, "required")» ;
 	  «ENDIF»
 	  «IF p.property.^default !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "default")» ;
@@ -613,15 +592,6 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
-	«IF a.attribute.description !== null»
-	«putParameterNumber(a, "description", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "description" ;
-	  exchange:value '«a.attribute.description»' ;
-	.
-	«ENDIF»
-	
 	«IF a.attribute.entry_schema !== null»
 	«putParameterNumber(a, "entry_schema", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -635,11 +605,11 @@ class RMGenerator extends AbstractGenerator {
 	:Attribute_«attribute_counter++»
 	  rdf:type exchange:Attribute ;
 	  exchange:name "«a.name»" ;
+	  «IF a.attribute.description !== null»
+	  exchange:description '«a.attribute.description»' ;
+	  «ENDIF»
 	  «IF a.attribute.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "type")» ;
-	  «ENDIF»
-	  «IF a.attribute.description !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(a, "description")» ;
 	  «ENDIF»
 	  «IF a.attribute.entry_schema !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "entry_schema")» ;

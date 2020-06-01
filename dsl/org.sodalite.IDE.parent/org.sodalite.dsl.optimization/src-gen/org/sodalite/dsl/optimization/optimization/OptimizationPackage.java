@@ -262,13 +262,22 @@ public interface OptimizationPackage extends EPackage
   int EOPT_BUILD__ACC_TYPE = 1;
 
   /**
+   * The feature id for the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOPT_BUILD__CONSTRAINT = 2;
+
+  /**
    * The number of structural features of the '<em>EOpt Build</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EOPT_BUILD_FEATURE_COUNT = 2;
+  int EOPT_BUILD_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAutotuningImpl <em>EAutotuning</em>}' class.
@@ -290,7 +299,7 @@ public interface OptimizationPackage extends EPackage
   int EAUTOTUNING__TUNER = 0;
 
   /**
-   * The feature id for the '<em><b>Input</b></em>' containment reference.
+   * The feature id for the '<em><b>Input</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -308,127 +317,6 @@ public interface OptimizationPackage extends EPackage
   int EAUTOTUNING_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAutotuingDSLImpl <em>EAutotuing DSL</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.dsl.optimization.optimization.impl.EAutotuingDSLImpl
-   * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEAutotuingDSL()
-   * @generated
-   */
-  int EAUTOTUING_DSL = 7;
-
-  /**
-   * The feature id for the '<em><b>Parameters</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EAUTOTUING_DSL__PARAMETERS = 0;
-
-  /**
-   * The number of structural features of the '<em>EAutotuing DSL</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EAUTOTUING_DSL_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.ERunImpl <em>ERun</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.dsl.optimization.optimization.impl.ERunImpl
-   * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getERun()
-   * @generated
-   */
-  int ERUN = 8;
-
-  /**
-   * The feature id for the '<em><b>Command</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ERUN__COMMAND = 0;
-
-  /**
-   * The number of structural features of the '<em>ERun</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ERUN_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EBuildImpl <em>EBuild</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.dsl.optimization.optimization.impl.EBuildImpl
-   * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEBuild()
-   * @generated
-   */
-  int EBUILD = 9;
-
-  /**
-   * The feature id for the '<em><b>Command</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBUILD__COMMAND = 0;
-
-  /**
-   * The number of structural features of the '<em>EBuild</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBUILD_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EParametersImpl <em>EParameters</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.dsl.optimization.optimization.impl.EParametersImpl
-   * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEParameters()
-   * @generated
-   */
-  int EPARAMETERS = 10;
-
-  /**
-   * The feature id for the '<em><b>Int</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPARAMETERS__INT = 0;
-
-  /**
-   * The feature id for the '<em><b>Range</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPARAMETERS__RANGE = 1;
-
-  /**
-   * The number of structural features of the '<em>EParameters</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPARAMETERS_FEATURE_COUNT = 2;
-
-  /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingImpl <em>EAI Training</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -436,7 +324,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEAITraining()
    * @generated
    */
-  int EAI_TRAINING = 11;
+  int EAI_TRAINING = 7;
 
   /**
    * The feature id for the '<em><b>Config</b></em>' containment reference.
@@ -482,7 +370,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEAITrainingCases()
    * @generated
    */
-  int EAI_TRAINING_CASES = 12;
+  int EAI_TRAINING_CASES = 8;
 
   /**
    * The number of structural features of the '<em>EAI Training Cases</em>' class.
@@ -501,7 +389,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEPyTorchCase()
    * @generated
    */
-  int EPY_TORCH_CASE = 13;
+  int EPY_TORCH_CASE = 9;
 
   /**
    * The feature id for the '<em><b>Pytorch</b></em>' containment reference.
@@ -529,7 +417,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getETensorFlowCase()
    * @generated
    */
-  int ETENSOR_FLOW_CASE = 14;
+  int ETENSOR_FLOW_CASE = 10;
 
   /**
    * The feature id for the '<em><b>Tensorflow</b></em>' containment reference.
@@ -557,7 +445,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEKerasCase()
    * @generated
    */
-  int EKERAS_CASE = 15;
+  int EKERAS_CASE = 11;
 
   /**
    * The feature id for the '<em><b>Keras</b></em>' containment reference.
@@ -585,7 +473,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEAITrainingConfig()
    * @generated
    */
-  int EAI_TRAINING_CONFIG = 16;
+  int EAI_TRAINING_CONFIG = 12;
 
   /**
    * The feature id for the '<em><b>Ai framework</b></em>' attribute.
@@ -615,13 +503,22 @@ public interface OptimizationPackage extends EPackage
   int EAI_TRAINING_CONFIG__DISTRIBUTED_TRAINING = 2;
 
   /**
+   * The feature id for the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EAI_TRAINING_CONFIG__CONSTRAINT = 3;
+
+  /**
    * The feature id for the '<em><b>Layers</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EAI_TRAINING_CONFIG__LAYERS = 3;
+  int EAI_TRAINING_CONFIG__LAYERS = 4;
 
   /**
    * The feature id for the '<em><b>Parameters</b></em>' attribute.
@@ -630,7 +527,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EAI_TRAINING_CONFIG__PARAMETERS = 4;
+  int EAI_TRAINING_CONFIG__PARAMETERS = 5;
 
   /**
    * The number of structural features of the '<em>EAI Training Config</em>' class.
@@ -639,7 +536,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EAI_TRAINING_CONFIG_FEATURE_COUNT = 5;
+  int EAI_TRAINING_CONFIG_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingDataImpl <em>EAI Training Data</em>}' class.
@@ -649,7 +546,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEAITrainingData()
    * @generated
    */
-  int EAI_TRAINING_DATA = 17;
+  int EAI_TRAINING_DATA = 13;
 
   /**
    * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -688,13 +585,22 @@ public interface OptimizationPackage extends EPackage
   int EAI_TRAINING_DATA__COUNT = 3;
 
   /**
+   * The feature id for the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EAI_TRAINING_DATA__CONSTRAINT = 4;
+
+  /**
    * The feature id for the '<em><b>Etl</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EAI_TRAINING_DATA__ETL = 4;
+  int EAI_TRAINING_DATA__ETL = 5;
 
   /**
    * The number of structural features of the '<em>EAI Training Data</em>' class.
@@ -703,7 +609,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EAI_TRAINING_DATA_FEATURE_COUNT = 5;
+  int EAI_TRAINING_DATA_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingETLImpl <em>EAI Training ETL</em>}' class.
@@ -713,7 +619,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEAITrainingETL()
    * @generated
    */
-  int EAI_TRAINING_ETL = 18;
+  int EAI_TRAINING_ETL = 14;
 
   /**
    * The feature id for the '<em><b>Prefetch</b></em>' attribute.
@@ -750,7 +656,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEKeras()
    * @generated
    */
-  int EKERAS = 19;
+  int EKERAS = 15;
 
   /**
    * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -787,7 +693,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getETensorFlow()
    * @generated
    */
-  int ETENSOR_FLOW = 20;
+  int ETENSOR_FLOW = 16;
 
   /**
    * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -808,13 +714,22 @@ public interface OptimizationPackage extends EPackage
   int ETENSOR_FLOW__XLA = 1;
 
   /**
+   * The feature id for the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETENSOR_FLOW__CONSTRAINT = 2;
+
+  /**
    * The number of structural features of the '<em>ETensor Flow</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETENSOR_FLOW_FEATURE_COUNT = 2;
+  int ETENSOR_FLOW_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EPyTorchImpl <em>EPy Torch</em>}' class.
@@ -824,7 +739,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEPyTorch()
    * @generated
    */
-  int EPY_TORCH = 21;
+  int EPY_TORCH = 17;
 
   /**
    * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -845,13 +760,22 @@ public interface OptimizationPackage extends EPackage
   int EPY_TORCH__GLOW = 1;
 
   /**
+   * The feature id for the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPY_TORCH__CONSTRAINT = 2;
+
+  /**
    * The number of structural features of the '<em>EPy Torch</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPY_TORCH_FEATURE_COUNT = 2;
+  int EPY_TORCH_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EHPCImpl <em>EHPC</em>}' class.
@@ -861,7 +785,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEHPC()
    * @generated
    */
-  int EHPC = 22;
+  int EHPC = 18;
 
   /**
    * The feature id for the '<em><b>Config</b></em>' containment reference.
@@ -882,13 +806,40 @@ public interface OptimizationPackage extends EPackage
   int EHPC__DATA = 1;
 
   /**
-   * The feature id for the '<em><b>Hpccase</b></em>' containment reference.
+   * The feature id for the '<em><b>Mpi</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EHPC__HPCCASE = 2;
+  int EHPC__MPI = 2;
+
+  /**
+   * The feature id for the '<em><b>Openmp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EHPC__OPENMP = 3;
+
+  /**
+   * The feature id for the '<em><b>Openacc</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EHPC__OPENACC = 4;
+
+  /**
+   * The feature id for the '<em><b>Opencl</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EHPC__OPENCL = 5;
 
   /**
    * The number of structural features of the '<em>EHPC</em>' class.
@@ -897,26 +848,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EHPC_FEATURE_COUNT = 3;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EHPCCasesImpl <em>EHPC Cases</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.dsl.optimization.optimization.impl.EHPCCasesImpl
-   * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEHPCCases()
-   * @generated
-   */
-  int EHPC_CASES = 23;
-
-  /**
-   * The number of structural features of the '<em>EHPC Cases</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHPC_CASES_FEATURE_COUNT = 0;
+  int EHPC_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EOPENCLCaseImpl <em>EOPENCL Case</em>}' class.
@@ -926,7 +858,16 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEOPENCLCase()
    * @generated
    */
-  int EOPENCL_CASE = 24;
+  int EOPENCL_CASE = 19;
+
+  /**
+   * The feature id for the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOPENCL_CASE__CONSTRAINT = 0;
 
   /**
    * The feature id for the '<em><b>Opencl</b></em>' containment reference.
@@ -935,7 +876,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EOPENCL_CASE__OPENCL = EHPC_CASES_FEATURE_COUNT + 0;
+  int EOPENCL_CASE__OPENCL = 1;
 
   /**
    * The number of structural features of the '<em>EOPENCL Case</em>' class.
@@ -944,7 +885,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EOPENCL_CASE_FEATURE_COUNT = EHPC_CASES_FEATURE_COUNT + 1;
+  int EOPENCL_CASE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EOPENACCCaseImpl <em>EOPENACC Case</em>}' class.
@@ -954,7 +895,16 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEOPENACCCase()
    * @generated
    */
-  int EOPENACC_CASE = 25;
+  int EOPENACC_CASE = 20;
+
+  /**
+   * The feature id for the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOPENACC_CASE__CONSTRAINT = 0;
 
   /**
    * The feature id for the '<em><b>Openacc</b></em>' containment reference.
@@ -963,7 +913,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EOPENACC_CASE__OPENACC = EHPC_CASES_FEATURE_COUNT + 0;
+  int EOPENACC_CASE__OPENACC = 1;
 
   /**
    * The number of structural features of the '<em>EOPENACC Case</em>' class.
@@ -972,7 +922,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EOPENACC_CASE_FEATURE_COUNT = EHPC_CASES_FEATURE_COUNT + 1;
+  int EOPENACC_CASE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EOPENMPCaseImpl <em>EOPENMP Case</em>}' class.
@@ -982,7 +932,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEOPENMPCase()
    * @generated
    */
-  int EOPENMP_CASE = 26;
+  int EOPENMP_CASE = 21;
 
   /**
    * The feature id for the '<em><b>Openmp</b></em>' containment reference.
@@ -991,7 +941,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EOPENMP_CASE__OPENMP = EHPC_CASES_FEATURE_COUNT + 0;
+  int EOPENMP_CASE__OPENMP = 0;
 
   /**
    * The number of structural features of the '<em>EOPENMP Case</em>' class.
@@ -1000,7 +950,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EOPENMP_CASE_FEATURE_COUNT = EHPC_CASES_FEATURE_COUNT + 1;
+  int EOPENMP_CASE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EMPICaseImpl <em>EMPI Case</em>}' class.
@@ -1010,7 +960,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEMPICase()
    * @generated
    */
-  int EMPI_CASE = 27;
+  int EMPI_CASE = 22;
 
   /**
    * The feature id for the '<em><b>Mpi</b></em>' containment reference.
@@ -1019,7 +969,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EMPI_CASE__MPI = EHPC_CASES_FEATURE_COUNT + 0;
+  int EMPI_CASE__MPI = 0;
 
   /**
    * The number of structural features of the '<em>EMPI Case</em>' class.
@@ -1028,7 +978,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EMPI_CASE_FEATURE_COUNT = EHPC_CASES_FEATURE_COUNT + 1;
+  int EMPI_CASE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EHPCConfigImpl <em>EHPC Config</em>}' class.
@@ -1038,10 +988,10 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEHPCConfig()
    * @generated
    */
-  int EHPC_CONFIG = 28;
+  int EHPC_CONFIG = 23;
 
   /**
-   * The feature id for the '<em><b>Parallelisation</b></em>' attribute.
+   * The feature id for the '<em><b>Parallelisation</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1066,7 +1016,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEHPCData()
    * @generated
    */
-  int EHPC_DATA = 29;
+  int EHPC_DATA = 24;
 
   /**
    * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -1105,13 +1055,22 @@ public interface OptimizationPackage extends EPackage
   int EHPC_DATA__COUNT = 3;
 
   /**
+   * The feature id for the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EHPC_DATA__CONSTRAINT = 4;
+
+  /**
    * The feature id for the '<em><b>Etl</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EHPC_DATA__ETL = 4;
+  int EHPC_DATA__ETL = 5;
 
   /**
    * The number of structural features of the '<em>EHPC Data</em>' class.
@@ -1120,7 +1079,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EHPC_DATA_FEATURE_COUNT = 5;
+  int EHPC_DATA_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EHPCETLImpl <em>EHPCETL</em>}' class.
@@ -1130,7 +1089,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEHPCETL()
    * @generated
    */
-  int EHPCETL = 30;
+  int EHPCETL = 25;
 
   /**
    * The feature id for the '<em><b>Prefetch</b></em>' attribute.
@@ -1167,7 +1126,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEMPI()
    * @generated
    */
-  int EMPI = 31;
+  int EMPI = 26;
 
   /**
    * The feature id for the '<em><b>Library</b></em>' attribute.
@@ -1231,7 +1190,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEOPENMP()
    * @generated
    */
-  int EOPENMP = 32;
+  int EOPENMP = 27;
 
   /**
    * The feature id for the '<em><b>Number of threads</b></em>' attribute.
@@ -1277,7 +1236,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEOPENACC()
    * @generated
    */
-  int EOPENACC = 33;
+  int EOPENACC = 28;
 
   /**
    * The feature id for the '<em><b>Compiler</b></em>' attribute.
@@ -1323,7 +1282,7 @@ public interface OptimizationPackage extends EPackage
    * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEOPENCL()
    * @generated
    */
-  int EOPENCL = 34;
+  int EOPENCL = 29;
 
   /**
    * The feature id for the '<em><b>Compiler</b></em>' attribute.
@@ -1360,6 +1319,80 @@ public interface OptimizationPackage extends EPackage
    * @ordered
    */
   int EOPENCL_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EConstraintImpl <em>EConstraint</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.optimization.optimization.impl.EConstraintImpl
+   * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEConstraint()
+   * @generated
+   */
+  int ECONSTRAINT = 30;
+
+  /**
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONSTRAINT__STATEMENTS = 0;
+
+  /**
+   * The number of structural features of the '<em>EConstraint</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONSTRAINT_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EStatementImpl <em>EStatement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.optimization.optimization.impl.EStatementImpl
+   * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEStatement()
+   * @generated
+   */
+  int ESTATEMENT = 31;
+
+  /**
+   * The feature id for the '<em><b>Property</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESTATEMENT__PROPERTY = 0;
+
+  /**
+   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESTATEMENT__OPERATOR = 1;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESTATEMENT__VALUE = 2;
+
+  /**
+   * The number of structural features of the '<em>EStatement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESTATEMENT_FEATURE_COUNT = 3;
 
 
   /**
@@ -1544,6 +1577,17 @@ public interface OptimizationPackage extends EPackage
   EAttribute getEOptBuild_Acc_type();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EOptBuild#getConstraint <em>Constraint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constraint</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EOptBuild#getConstraint()
+   * @see #getEOptBuild()
+   * @generated
+   */
+  EReference getEOptBuild_Constraint();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EAutotuning <em>EAutotuning</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1565,110 +1609,15 @@ public interface OptimizationPackage extends EPackage
   EAttribute getEAutotuning_Tuner();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EAutotuning#getInput <em>Input</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EAutotuning#getInput <em>Input</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Input</em>'.
+   * @return the meta object for the attribute '<em>Input</em>'.
    * @see org.sodalite.dsl.optimization.optimization.EAutotuning#getInput()
    * @see #getEAutotuning()
    * @generated
    */
-  EReference getEAutotuning_Input();
-
-  /**
-   * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EAutotuingDSL <em>EAutotuing DSL</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EAutotuing DSL</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EAutotuingDSL
-   * @generated
-   */
-  EClass getEAutotuingDSL();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EAutotuingDSL#getParameters <em>Parameters</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Parameters</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EAutotuingDSL#getParameters()
-   * @see #getEAutotuingDSL()
-   * @generated
-   */
-  EReference getEAutotuingDSL_Parameters();
-
-  /**
-   * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.ERun <em>ERun</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>ERun</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.ERun
-   * @generated
-   */
-  EClass getERun();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.ERun#getCommand <em>Command</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Command</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.ERun#getCommand()
-   * @see #getERun()
-   * @generated
-   */
-  EAttribute getERun_Command();
-
-  /**
-   * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EBuild <em>EBuild</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EBuild</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EBuild
-   * @generated
-   */
-  EClass getEBuild();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EBuild#getCommand <em>Command</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Command</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EBuild#getCommand()
-   * @see #getEBuild()
-   * @generated
-   */
-  EAttribute getEBuild_Command();
-
-  /**
-   * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EParameters <em>EParameters</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EParameters</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EParameters
-   * @generated
-   */
-  EClass getEParameters();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EParameters#getInt <em>Int</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Int</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EParameters#getInt()
-   * @see #getEParameters()
-   * @generated
-   */
-  EAttribute getEParameters_Int();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EParameters#getRange <em>Range</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Range</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EParameters#getRange()
-   * @see #getEParameters()
-   * @generated
-   */
-  EAttribute getEParameters_Range();
+  EAttribute getEAutotuning_Input();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EAITraining <em>EAI Training</em>}'.
@@ -1830,6 +1779,17 @@ public interface OptimizationPackage extends EPackage
   EAttribute getEAITrainingConfig_Distributed_training();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EAITrainingConfig#getConstraint <em>Constraint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constraint</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EAITrainingConfig#getConstraint()
+   * @see #getEAITrainingConfig()
+   * @generated
+   */
+  EReference getEAITrainingConfig_Constraint();
+
+  /**
    * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EAITrainingConfig#getLayers <em>Layers</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1904,6 +1864,17 @@ public interface OptimizationPackage extends EPackage
    * @generated
    */
   EAttribute getEAITrainingData_Count();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EAITrainingData#getConstraint <em>Constraint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constraint</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EAITrainingData#getConstraint()
+   * @see #getEAITrainingData()
+   * @generated
+   */
+  EReference getEAITrainingData_Constraint();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EAITrainingData#getEtl <em>Etl</em>}'.
@@ -2013,6 +1984,17 @@ public interface OptimizationPackage extends EPackage
   EAttribute getETensorFlow_Xla();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.ETensorFlow#getConstraint <em>Constraint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constraint</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.ETensorFlow#getConstraint()
+   * @see #getETensorFlow()
+   * @generated
+   */
+  EReference getETensorFlow_Constraint();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EPyTorch <em>EPy Torch</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2043,6 +2025,17 @@ public interface OptimizationPackage extends EPackage
    * @generated
    */
   EAttribute getEPyTorch_Glow();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EPyTorch#getConstraint <em>Constraint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constraint</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EPyTorch#getConstraint()
+   * @see #getEPyTorch()
+   * @generated
+   */
+  EReference getEPyTorch_Constraint();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EHPC <em>EHPC</em>}'.
@@ -2077,25 +2070,48 @@ public interface OptimizationPackage extends EPackage
   EReference getEHPC_Data();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EHPC#getHpccase <em>Hpccase</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EHPC#getMpi <em>Mpi</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Hpccase</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EHPC#getHpccase()
+   * @return the meta object for the containment reference '<em>Mpi</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EHPC#getMpi()
    * @see #getEHPC()
    * @generated
    */
-  EReference getEHPC_Hpccase();
+  EReference getEHPC_Mpi();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EHPCCases <em>EHPC Cases</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EHPC#getOpenmp <em>Openmp</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EHPC Cases</em>'.
-   * @see org.sodalite.dsl.optimization.optimization.EHPCCases
+   * @return the meta object for the containment reference '<em>Openmp</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EHPC#getOpenmp()
+   * @see #getEHPC()
    * @generated
    */
-  EClass getEHPCCases();
+  EReference getEHPC_Openmp();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EHPC#getOpenacc <em>Openacc</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Openacc</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EHPC#getOpenacc()
+   * @see #getEHPC()
+   * @generated
+   */
+  EReference getEHPC_Openacc();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EHPC#getOpencl <em>Opencl</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Opencl</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EHPC#getOpencl()
+   * @see #getEHPC()
+   * @generated
+   */
+  EReference getEHPC_Opencl();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EOPENCLCase <em>EOPENCL Case</em>}'.
@@ -2106,6 +2122,17 @@ public interface OptimizationPackage extends EPackage
    * @generated
    */
   EClass getEOPENCLCase();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EOPENCLCase#getConstraint <em>Constraint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constraint</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EOPENCLCase#getConstraint()
+   * @see #getEOPENCLCase()
+   * @generated
+   */
+  EReference getEOPENCLCase_Constraint();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EOPENCLCase#getOpencl <em>Opencl</em>}'.
@@ -2127,6 +2154,17 @@ public interface OptimizationPackage extends EPackage
    * @generated
    */
   EClass getEOPENACCCase();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EOPENACCCase#getConstraint <em>Constraint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constraint</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EOPENACCCase#getConstraint()
+   * @see #getEOPENACCCase()
+   * @generated
+   */
+  EReference getEOPENACCCase_Constraint();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EOPENACCCase#getOpenacc <em>Openacc</em>}'.
@@ -2192,10 +2230,10 @@ public interface OptimizationPackage extends EPackage
   EClass getEHPCConfig();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation <em>Parallelisation</em>}'.
+   * Returns the meta object for the attribute list '{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation <em>Parallelisation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Parallelisation</em>'.
+   * @return the meta object for the attribute list '<em>Parallelisation</em>'.
    * @see org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation()
    * @see #getEHPCConfig()
    * @generated
@@ -2255,6 +2293,17 @@ public interface OptimizationPackage extends EPackage
    * @generated
    */
   EAttribute getEHPCData_Count();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EHPCData#getConstraint <em>Constraint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constraint</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EHPCData#getConstraint()
+   * @see #getEHPCData()
+   * @generated
+   */
+  EReference getEHPCData_Constraint();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.EHPCData#getEtl <em>Etl</em>}'.
@@ -2494,6 +2543,70 @@ public interface OptimizationPackage extends EPackage
   EAttribute getEOPENCL_Number_of_acc();
 
   /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EConstraint <em>EConstraint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EConstraint</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EConstraint
+   * @generated
+   */
+  EClass getEConstraint();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.optimization.optimization.EConstraint#getStatements <em>Statements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Statements</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EConstraint#getStatements()
+   * @see #getEConstraint()
+   * @generated
+   */
+  EReference getEConstraint_Statements();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EStatement <em>EStatement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EStatement</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EStatement
+   * @generated
+   */
+  EClass getEStatement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EStatement#getProperty <em>Property</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Property</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EStatement#getProperty()
+   * @see #getEStatement()
+   * @generated
+   */
+  EAttribute getEStatement_Property();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EStatement#getOperator <em>Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Operator</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EStatement#getOperator()
+   * @see #getEStatement()
+   * @generated
+   */
+  EAttribute getEStatement_Operator();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EStatement#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EStatement#getValue()
+   * @see #getEStatement()
+   * @generated
+   */
+  EAttribute getEStatement_Value();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2665,6 +2778,14 @@ public interface OptimizationPackage extends EPackage
     EAttribute EOPT_BUILD__ACC_TYPE = eINSTANCE.getEOptBuild_Acc_type();
 
     /**
+     * The meta object literal for the '<em><b>Constraint</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EOPT_BUILD__CONSTRAINT = eINSTANCE.getEOptBuild_Constraint();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAutotuningImpl <em>EAutotuning</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2683,92 +2804,12 @@ public interface OptimizationPackage extends EPackage
     EAttribute EAUTOTUNING__TUNER = eINSTANCE.getEAutotuning_Tuner();
 
     /**
-     * The meta object literal for the '<em><b>Input</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Input</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EAUTOTUNING__INPUT = eINSTANCE.getEAutotuning_Input();
-
-    /**
-     * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAutotuingDSLImpl <em>EAutotuing DSL</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.dsl.optimization.optimization.impl.EAutotuingDSLImpl
-     * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEAutotuingDSL()
-     * @generated
-     */
-    EClass EAUTOTUING_DSL = eINSTANCE.getEAutotuingDSL();
-
-    /**
-     * The meta object literal for the '<em><b>Parameters</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EAUTOTUING_DSL__PARAMETERS = eINSTANCE.getEAutotuingDSL_Parameters();
-
-    /**
-     * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.ERunImpl <em>ERun</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.dsl.optimization.optimization.impl.ERunImpl
-     * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getERun()
-     * @generated
-     */
-    EClass ERUN = eINSTANCE.getERun();
-
-    /**
-     * The meta object literal for the '<em><b>Command</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ERUN__COMMAND = eINSTANCE.getERun_Command();
-
-    /**
-     * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EBuildImpl <em>EBuild</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.dsl.optimization.optimization.impl.EBuildImpl
-     * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEBuild()
-     * @generated
-     */
-    EClass EBUILD = eINSTANCE.getEBuild();
-
-    /**
-     * The meta object literal for the '<em><b>Command</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EBUILD__COMMAND = eINSTANCE.getEBuild_Command();
-
-    /**
-     * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EParametersImpl <em>EParameters</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.dsl.optimization.optimization.impl.EParametersImpl
-     * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEParameters()
-     * @generated
-     */
-    EClass EPARAMETERS = eINSTANCE.getEParameters();
-
-    /**
-     * The meta object literal for the '<em><b>Int</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EPARAMETERS__INT = eINSTANCE.getEParameters_Int();
-
-    /**
-     * The meta object literal for the '<em><b>Range</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EPARAMETERS__RANGE = eINSTANCE.getEParameters_Range();
+    EAttribute EAUTOTUNING__INPUT = eINSTANCE.getEAutotuning_Input();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingImpl <em>EAI Training</em>}' class.
@@ -2903,6 +2944,14 @@ public interface OptimizationPackage extends EPackage
     EAttribute EAI_TRAINING_CONFIG__DISTRIBUTED_TRAINING = eINSTANCE.getEAITrainingConfig_Distributed_training();
 
     /**
+     * The meta object literal for the '<em><b>Constraint</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EAI_TRAINING_CONFIG__CONSTRAINT = eINSTANCE.getEAITrainingConfig_Constraint();
+
+    /**
      * The meta object literal for the '<em><b>Layers</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2959,6 +3008,14 @@ public interface OptimizationPackage extends EPackage
      * @generated
      */
     EAttribute EAI_TRAINING_DATA__COUNT = eINSTANCE.getEAITrainingData_Count();
+
+    /**
+     * The meta object literal for the '<em><b>Constraint</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EAI_TRAINING_DATA__CONSTRAINT = eINSTANCE.getEAITrainingData_Constraint();
 
     /**
      * The meta object literal for the '<em><b>Etl</b></em>' containment reference feature.
@@ -3047,6 +3104,14 @@ public interface OptimizationPackage extends EPackage
     EAttribute ETENSOR_FLOW__XLA = eINSTANCE.getETensorFlow_Xla();
 
     /**
+     * The meta object literal for the '<em><b>Constraint</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETENSOR_FLOW__CONSTRAINT = eINSTANCE.getETensorFlow_Constraint();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EPyTorchImpl <em>EPy Torch</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3071,6 +3136,14 @@ public interface OptimizationPackage extends EPackage
      * @generated
      */
     EAttribute EPY_TORCH__GLOW = eINSTANCE.getEPyTorch_Glow();
+
+    /**
+     * The meta object literal for the '<em><b>Constraint</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPY_TORCH__CONSTRAINT = eINSTANCE.getEPyTorch_Constraint();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EHPCImpl <em>EHPC</em>}' class.
@@ -3099,22 +3172,36 @@ public interface OptimizationPackage extends EPackage
     EReference EHPC__DATA = eINSTANCE.getEHPC_Data();
 
     /**
-     * The meta object literal for the '<em><b>Hpccase</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Mpi</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EHPC__HPCCASE = eINSTANCE.getEHPC_Hpccase();
+    EReference EHPC__MPI = eINSTANCE.getEHPC_Mpi();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EHPCCasesImpl <em>EHPC Cases</em>}' class.
+     * The meta object literal for the '<em><b>Openmp</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.dsl.optimization.optimization.impl.EHPCCasesImpl
-     * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEHPCCases()
      * @generated
      */
-    EClass EHPC_CASES = eINSTANCE.getEHPCCases();
+    EReference EHPC__OPENMP = eINSTANCE.getEHPC_Openmp();
+
+    /**
+     * The meta object literal for the '<em><b>Openacc</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EHPC__OPENACC = eINSTANCE.getEHPC_Openacc();
+
+    /**
+     * The meta object literal for the '<em><b>Opencl</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EHPC__OPENCL = eINSTANCE.getEHPC_Opencl();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EOPENCLCaseImpl <em>EOPENCL Case</em>}' class.
@@ -3125,6 +3212,14 @@ public interface OptimizationPackage extends EPackage
      * @generated
      */
     EClass EOPENCL_CASE = eINSTANCE.getEOPENCLCase();
+
+    /**
+     * The meta object literal for the '<em><b>Constraint</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EOPENCL_CASE__CONSTRAINT = eINSTANCE.getEOPENCLCase_Constraint();
 
     /**
      * The meta object literal for the '<em><b>Opencl</b></em>' containment reference feature.
@@ -3143,6 +3238,14 @@ public interface OptimizationPackage extends EPackage
      * @generated
      */
     EClass EOPENACC_CASE = eINSTANCE.getEOPENACCCase();
+
+    /**
+     * The meta object literal for the '<em><b>Constraint</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EOPENACC_CASE__CONSTRAINT = eINSTANCE.getEOPENACCCase_Constraint();
 
     /**
      * The meta object literal for the '<em><b>Openacc</b></em>' containment reference feature.
@@ -3199,7 +3302,7 @@ public interface OptimizationPackage extends EPackage
     EClass EHPC_CONFIG = eINSTANCE.getEHPCConfig();
 
     /**
-     * The meta object literal for the '<em><b>Parallelisation</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Parallelisation</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -3247,6 +3350,14 @@ public interface OptimizationPackage extends EPackage
      * @generated
      */
     EAttribute EHPC_DATA__COUNT = eINSTANCE.getEHPCData_Count();
+
+    /**
+     * The meta object literal for the '<em><b>Constraint</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EHPC_DATA__CONSTRAINT = eINSTANCE.getEHPCData_Constraint();
 
     /**
      * The meta object literal for the '<em><b>Etl</b></em>' containment reference feature.
@@ -3433,6 +3544,58 @@ public interface OptimizationPackage extends EPackage
      * @generated
      */
     EAttribute EOPENCL__NUMBER_OF_ACC = eINSTANCE.getEOPENCL_Number_of_acc();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EConstraintImpl <em>EConstraint</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.optimization.optimization.impl.EConstraintImpl
+     * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEConstraint()
+     * @generated
+     */
+    EClass ECONSTRAINT = eINSTANCE.getEConstraint();
+
+    /**
+     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ECONSTRAINT__STATEMENTS = eINSTANCE.getEConstraint_Statements();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EStatementImpl <em>EStatement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.optimization.optimization.impl.EStatementImpl
+     * @see org.sodalite.dsl.optimization.optimization.impl.OptimizationPackageImpl#getEStatement()
+     * @generated
+     */
+    EClass ESTATEMENT = eINSTANCE.getEStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Property</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESTATEMENT__PROPERTY = eINSTANCE.getEStatement_Property();
+
+    /**
+     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESTATEMENT__OPERATOR = eINSTANCE.getEStatement_Operator();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESTATEMENT__VALUE = eINSTANCE.getEStatement_Value();
 
   }
 

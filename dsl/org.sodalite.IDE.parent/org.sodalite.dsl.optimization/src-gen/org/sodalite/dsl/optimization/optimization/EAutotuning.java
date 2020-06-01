@@ -47,25 +47,25 @@ public interface EAutotuning extends EObject
   void setTuner(String value);
 
   /**
-   * Returns the value of the '<em><b>Input</b></em>' containment reference.
+   * Returns the value of the '<em><b>Input</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Input</em>' containment reference.
-   * @see #setInput(EAutotuingDSL)
+   * @return the value of the '<em>Input</em>' attribute.
+   * @see #setInput(String)
    * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEAutotuning_Input()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  EAutotuingDSL getInput();
+  String getInput();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EAutotuning#getInput <em>Input</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EAutotuning#getInput <em>Input</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Input</em>' containment reference.
+   * @param value the new value of the '<em>Input</em>' attribute.
    * @see #getInput()
    * @generated
    */
-  void setInput(EAutotuingDSL value);
+  void setInput(String value);
 
 } // EAutotuning

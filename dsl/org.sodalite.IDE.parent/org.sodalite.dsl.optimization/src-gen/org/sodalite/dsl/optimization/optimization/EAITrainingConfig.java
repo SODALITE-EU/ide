@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingConfig#getAi_framework <em>Ai framework</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingConfig#getType <em>Type</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingConfig#isDistributed_training <em>Distributed training</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingConfig#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingConfig#getLayers <em>Layers</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingConfig#getParameters <em>Parameters</em>}</li>
  * </ul>
@@ -92,6 +93,28 @@ public interface EAITrainingConfig extends EObject
    * @generated
    */
   void setDistributed_training(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Constraint</em>' containment reference.
+   * @see #setConstraint(EConstraint)
+   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEAITrainingConfig_Constraint()
+   * @model containment="true"
+   * @generated
+   */
+  EConstraint getConstraint();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EAITrainingConfig#getConstraint <em>Constraint</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Constraint</em>' containment reference.
+   * @see #getConstraint()
+   * @generated
+   */
+  void setConstraint(EConstraint value);
 
   /**
    * Returns the value of the '<em><b>Layers</b></em>' attribute.

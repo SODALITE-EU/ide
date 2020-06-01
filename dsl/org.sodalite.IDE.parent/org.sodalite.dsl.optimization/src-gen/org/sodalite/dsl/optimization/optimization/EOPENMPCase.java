@@ -3,6 +3,7 @@
  */
 package org.sodalite.dsl.optimization.optimization;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,7 @@ package org.sodalite.dsl.optimization.optimization;
  * @model
  * @generated
  */
-public interface EOPENMPCase extends EHPCCases
+public interface EOPENMPCase extends EObject
 {
   /**
    * Returns the value of the '<em><b>Openmp</b></em>' containment reference.

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.ETensorFlow#getVersion <em>Version</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.ETensorFlow#isXla <em>Xla</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.ETensorFlow#getConstraint <em>Constraint</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getETensorFlow()
@@ -67,5 +68,27 @@ public interface ETensorFlow extends EObject
    * @generated
    */
   void setXla(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Constraint</em>' containment reference.
+   * @see #setConstraint(EConstraint)
+   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getETensorFlow_Constraint()
+   * @model containment="true"
+   * @generated
+   */
+  EConstraint getConstraint();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.ETensorFlow#getConstraint <em>Constraint</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Constraint</em>' containment reference.
+   * @see #getConstraint()
+   * @generated
+   */
+  void setConstraint(EConstraint value);
 
 } // ETensorFlow

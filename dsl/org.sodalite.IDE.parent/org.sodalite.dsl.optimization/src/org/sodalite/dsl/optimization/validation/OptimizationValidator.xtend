@@ -51,7 +51,9 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 					OptimizationPackage.Literals.EOPTIMIZATION__ENABLE_AUTOTUNING,
 					MANDATORY_ELEMENT)
 		}
-		if (opt.app_type == "AI_Training" && !(opt.app_optimization instanceof EAITrainingCase)) {
+		if ((opt.app_type == "AI_Training" && !(opt.app_optimization instanceof EAITrainingCase))
+			|| (opt.app_optimization instanceof EAITrainingCase && !(opt.app_type == "AI_Training"))	
+		) {
 			error('A ai_training property should be present if app_type is AI_Training', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE,
 					MANDATORY_ELEMENT)
@@ -59,12 +61,20 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_OPTIMIZATION,
 					MANDATORY_ELEMENT)
 		}
-		if (opt.app_type == "HPC" && !(opt.app_optimization instanceof EHPCCase)) {
+		if ((opt.app_type == "HPC" && !(opt.app_optimization instanceof EHPCCase))
+			|| (opt.app_optimization instanceof EHPCCase != opt.app_type == "HPC")
+		) {
 			error('Ah hpc property should be present if app_type is HPC', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE,
 					MANDATORY_ELEMENT)
 			error('This property is not compatible with selected app_type', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_OPTIMIZATION,
+					MANDATORY_ELEMENT)
+		}
+		
+		if ((opt.app_type == "AI_Inference") || (opt.app_type == "BigData")){
+			error('This app_type is not supported in current version', 
+					OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE,
 					MANDATORY_ELEMENT)
 		}
 	}
@@ -111,22 +121,22 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 		@Check
 	def checkHPCConfigMandatoryElement(EHPCConfig conf) {
 		val parent = conf.eContainer as EHPC
-		if (conf.parallelisation == "MPI" && !(parent.hpccase instanceof EMPICase)) {
+		if (conf.parallelisation.contains("MPI") && !(parent.mpi !== null)) {
 			error('A mpi property should be present if ai_framework is MPI', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (conf.parallelisation == "OPENMP" && !(parent.hpccase instanceof EOPENMPCase)) {
+		if (conf.parallelisation.contains("OPENMP") && !(parent.openmp !== null)) {
 			error('A openmp property should be present if ai_framework is OPENMP', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (conf.parallelisation == "OPENACC" && !(parent.hpccase instanceof EOPENACCCase)) {
+		if (conf.parallelisation.contains("OPENACC") && !(parent.openacc !== null)) {
 			error('A openacc property should be present if ai_framework is OPENACC', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (conf.parallelisation == "OPENCL" && !(parent.hpccase instanceof EOPENCLCase)) {
+		if (conf.parallelisation.contains("OPENCL") && !(parent.opencl != null)) {
 			error('A opencl property should be present if ai_framework is OPENCL', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
@@ -135,24 +145,24 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 	
 	@Check
 	def checkHPCMandatoryElement(EHPC hpc) {
-		if (hpc.config.parallelisation == "MPI" && !(hpc.hpccase instanceof EMPICase)) {
+		if (hpc.config.parallelisation == "MPI" && !(hpc.mpi !== null)) {
 			error('This property is not compatible with selected app_type', 
-					OptimizationPackage.Literals.EHPC__HPCCASE,
+					OptimizationPackage.Literals.EHPC__MPI,
 					MANDATORY_ELEMENT)
 		}
-		if (hpc.config.parallelisation == "OPENMP" && !(hpc.hpccase instanceof EOPENMPCase)) {
+		if (hpc.config.parallelisation == "OPENMP" && !(hpc.openmp !== null)) {
 			error('This property is not compatible with selected app_type', 
-					OptimizationPackage.Literals.EHPC__HPCCASE,
+					OptimizationPackage.Literals.EHPC__OPENMP,
 					MANDATORY_ELEMENT)
 		}
-		if (hpc.config.parallelisation == "OPENACC" && !(hpc.hpccase instanceof EOPENACCCase)) {
+		if (hpc.config.parallelisation == "OPENACC" && !(hpc.openacc !== null)) {
 			error('This property is not compatible with selected app_type', 
-					OptimizationPackage.Literals.EHPC__HPCCASE,
+					OptimizationPackage.Literals.EHPC__OPENACC,
 					MANDATORY_ELEMENT)
 		}
-		if (hpc.config.parallelisation == "OPENCL" && !(hpc.hpccase instanceof EOPENCLCase)) {
+		if (hpc.config.parallelisation == "OPENCL" && !(hpc.opencl !== null)) {
 			error('This property is not compatible with selected app_type', 
-					OptimizationPackage.Literals.EHPC__HPCCASE,
+					OptimizationPackage.Literals.EHPC__OPENCL,
 					MANDATORY_ELEMENT)
 		}
 	}

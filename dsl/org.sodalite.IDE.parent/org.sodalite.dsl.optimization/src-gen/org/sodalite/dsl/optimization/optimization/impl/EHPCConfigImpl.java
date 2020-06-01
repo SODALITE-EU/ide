@@ -3,12 +3,15 @@
  */
 package org.sodalite.dsl.optimization.optimization.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.sodalite.dsl.optimization.optimization.EHPCConfig;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
@@ -29,24 +32,14 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPCConfig
 {
   /**
-   * The default value of the '{@link #getParallelisation() <em>Parallelisation</em>}' attribute.
+   * The cached value of the '{@link #getParallelisation() <em>Parallelisation</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getParallelisation()
    * @generated
    * @ordered
    */
-  protected static final String PARALLELISATION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getParallelisation() <em>Parallelisation</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getParallelisation()
-   * @generated
-   * @ordered
-   */
-  protected String parallelisation = PARALLELISATION_EDEFAULT;
+  protected EList<String> parallelisation;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,23 +68,13 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
    * @generated
    */
   @Override
-  public String getParallelisation()
+  public EList<String> getParallelisation()
   {
+    if (parallelisation == null)
+    {
+      parallelisation = new EDataTypeEList<String>(String.class, this, OptimizationPackage.EHPC_CONFIG__PARALLELISATION);
+    }
     return parallelisation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setParallelisation(String newParallelisation)
-  {
-    String oldParallelisation = parallelisation;
-    parallelisation = newParallelisation;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC_CONFIG__PARALLELISATION, oldParallelisation, parallelisation));
   }
 
   /**
@@ -115,13 +98,15 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
       case OptimizationPackage.EHPC_CONFIG__PARALLELISATION:
-        setParallelisation((String)newValue);
+        getParallelisation().clear();
+        getParallelisation().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -138,7 +123,7 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
     switch (featureID)
     {
       case OptimizationPackage.EHPC_CONFIG__PARALLELISATION:
-        setParallelisation(PARALLELISATION_EDEFAULT);
+        getParallelisation().clear();
         return;
     }
     super.eUnset(featureID);
@@ -155,7 +140,7 @@ public class EHPCConfigImpl extends MinimalEObjectImpl.Container implements EHPC
     switch (featureID)
     {
       case OptimizationPackage.EHPC_CONFIG__PARALLELISATION:
-        return PARALLELISATION_EDEFAULT == null ? parallelisation != null : !PARALLELISATION_EDEFAULT.equals(parallelisation);
+        return parallelisation != null && !parallelisation.isEmpty();
     }
     return super.eIsSet(featureID);
   }

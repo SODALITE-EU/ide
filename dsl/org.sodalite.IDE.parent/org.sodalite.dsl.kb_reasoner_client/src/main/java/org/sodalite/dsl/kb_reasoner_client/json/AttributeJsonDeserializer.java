@@ -48,7 +48,13 @@ public class AttributeJsonDeserializer extends JsonDeserializer<Attribute> {
 		if (objectNode.get("specification") != null) {
 			JsonNode spec = objectNode.get("specification");
 			if (spec.get("type")!=null) {
-				Type type = mapper.readerFor(javaType).readValue(spec.get("type"));
+				Type type = null;
+				if (!spec.get("type").isContainerNode()){ //single type
+					type = new Type();
+					type.setLabel(spec.get("type").asText());
+				}else {
+					type = mapper.readerFor(javaType).readValue(spec.get("type"));
+				}
 				attribute.setType(type);
 			}
 		}

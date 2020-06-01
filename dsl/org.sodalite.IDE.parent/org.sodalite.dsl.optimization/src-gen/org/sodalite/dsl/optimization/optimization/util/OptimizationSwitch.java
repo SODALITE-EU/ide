@@ -124,34 +124,6 @@ public class OptimizationSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case OptimizationPackage.EAUTOTUING_DSL:
-      {
-        EAutotuingDSL eAutotuingDSL = (EAutotuingDSL)theEObject;
-        T result = caseEAutotuingDSL(eAutotuingDSL);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case OptimizationPackage.ERUN:
-      {
-        ERun eRun = (ERun)theEObject;
-        T result = caseERun(eRun);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case OptimizationPackage.EBUILD:
-      {
-        EBuild eBuild = (EBuild)theEObject;
-        T result = caseEBuild(eBuild);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case OptimizationPackage.EPARAMETERS:
-      {
-        EParameters eParameters = (EParameters)theEObject;
-        T result = caseEParameters(eParameters);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case OptimizationPackage.EAI_TRAINING:
       {
         EAITraining eaiTraining = (EAITraining)theEObject;
@@ -239,18 +211,10 @@ public class OptimizationSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case OptimizationPackage.EHPC_CASES:
-      {
-        EHPCCases ehpcCases = (EHPCCases)theEObject;
-        T result = caseEHPCCases(ehpcCases);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case OptimizationPackage.EOPENCL_CASE:
       {
         EOPENCLCase eopenclCase = (EOPENCLCase)theEObject;
         T result = caseEOPENCLCase(eopenclCase);
-        if (result == null) result = caseEHPCCases(eopenclCase);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -258,7 +222,6 @@ public class OptimizationSwitch<T> extends Switch<T>
       {
         EOPENACCCase eopenaccCase = (EOPENACCCase)theEObject;
         T result = caseEOPENACCCase(eopenaccCase);
-        if (result == null) result = caseEHPCCases(eopenaccCase);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -266,7 +229,6 @@ public class OptimizationSwitch<T> extends Switch<T>
       {
         EOPENMPCase eopenmpCase = (EOPENMPCase)theEObject;
         T result = caseEOPENMPCase(eopenmpCase);
-        if (result == null) result = caseEHPCCases(eopenmpCase);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -274,7 +236,6 @@ public class OptimizationSwitch<T> extends Switch<T>
       {
         EMPICase empiCase = (EMPICase)theEObject;
         T result = caseEMPICase(empiCase);
-        if (result == null) result = caseEHPCCases(empiCase);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -324,6 +285,20 @@ public class OptimizationSwitch<T> extends Switch<T>
       {
         EOPENCL eopencl = (EOPENCL)theEObject;
         T result = caseEOPENCL(eopencl);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OptimizationPackage.ECONSTRAINT:
+      {
+        EConstraint eConstraint = (EConstraint)theEObject;
+        T result = caseEConstraint(eConstraint);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OptimizationPackage.ESTATEMENT:
+      {
+        EStatement eStatement = (EStatement)theEObject;
+        T result = caseEStatement(eStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -439,70 +414,6 @@ public class OptimizationSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEAutotuning(EAutotuning object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EAutotuing DSL</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EAutotuing DSL</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEAutotuingDSL(EAutotuingDSL object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>ERun</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ERun</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseERun(ERun object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EBuild</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EBuild</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEBuild(EBuild object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EParameters</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EParameters</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEParameters(EParameters object)
   {
     return null;
   }
@@ -700,22 +611,6 @@ public class OptimizationSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EHPC Cases</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EHPC Cases</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEHPCCases(EHPCCases object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>EOPENCL Case</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -887,6 +782,38 @@ public class OptimizationSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEOPENCL(EOPENCL object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EConstraint</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EConstraint</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEConstraint(EConstraint object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EStatement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EStatement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEStatement(EStatement object)
   {
     return null;
   }

@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.optimization.optimization.EOPENMP;
 import org.sodalite.dsl.optimization.optimization.EOPENMPCase;
@@ -28,7 +29,7 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  *
  * @generated
  */
-public class EOPENMPCaseImpl extends EHPCCasesImpl implements EOPENMPCase
+public class EOPENMPCaseImpl extends MinimalEObjectImpl.Container implements EOPENMPCase
 {
   /**
    * The cached value of the '{@link #getOpenmp() <em>Openmp</em>}' containment reference.

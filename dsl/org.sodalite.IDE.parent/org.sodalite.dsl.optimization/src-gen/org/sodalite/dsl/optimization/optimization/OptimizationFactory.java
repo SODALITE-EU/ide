@@ -87,42 +87,6 @@ public interface OptimizationFactory extends EFactory
   EAutotuning createEAutotuning();
 
   /**
-   * Returns a new object of class '<em>EAutotuing DSL</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EAutotuing DSL</em>'.
-   * @generated
-   */
-  EAutotuingDSL createEAutotuingDSL();
-
-  /**
-   * Returns a new object of class '<em>ERun</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>ERun</em>'.
-   * @generated
-   */
-  ERun createERun();
-
-  /**
-   * Returns a new object of class '<em>EBuild</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EBuild</em>'.
-   * @generated
-   */
-  EBuild createEBuild();
-
-  /**
-   * Returns a new object of class '<em>EParameters</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EParameters</em>'.
-   * @generated
-   */
-  EParameters createEParameters();
-
-  /**
    * Returns a new object of class '<em>EAI Training</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -231,15 +195,6 @@ public interface OptimizationFactory extends EFactory
   EHPC createEHPC();
 
   /**
-   * Returns a new object of class '<em>EHPC Cases</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EHPC Cases</em>'.
-   * @generated
-   */
-  EHPCCases createEHPCCases();
-
-  /**
    * Returns a new object of class '<em>EOPENCL Case</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -337,6 +292,24 @@ public interface OptimizationFactory extends EFactory
    * @generated
    */
   EOPENCL createEOPENCL();
+
+  /**
+   * Returns a new object of class '<em>EConstraint</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EConstraint</em>'.
+   * @generated
+   */
+  EConstraint createEConstraint();
+
+  /**
+   * Returns a new object of class '<em>EStatement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EStatement</em>'.
+   * @generated
+   */
+  EStatement createEStatement();
 
   /**
    * Returns the package supported by this factory.

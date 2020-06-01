@@ -3,6 +3,7 @@
  */
 package org.sodalite.dsl.optimization.optimization;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -13,6 +14,7 @@ package org.sodalite.dsl.optimization.optimization;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.EOPENCLCase#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EOPENCLCase#getOpencl <em>Opencl</em>}</li>
  * </ul>
  *
@@ -20,8 +22,30 @@ package org.sodalite.dsl.optimization.optimization;
  * @model
  * @generated
  */
-public interface EOPENCLCase extends EHPCCases
+public interface EOPENCLCase extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Constraint</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Constraint</em>' containment reference.
+   * @see #setConstraint(EConstraint)
+   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEOPENCLCase_Constraint()
+   * @model containment="true"
+   * @generated
+   */
+  EConstraint getConstraint();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EOPENCLCase#getConstraint <em>Constraint</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Constraint</em>' containment reference.
+   * @see #getConstraint()
+   * @generated
+   */
+  void setConstraint(EConstraint value);
+
   /**
    * Returns the value of the '<em><b>Opencl</b></em>' containment reference.
    * <!-- begin-user-doc -->

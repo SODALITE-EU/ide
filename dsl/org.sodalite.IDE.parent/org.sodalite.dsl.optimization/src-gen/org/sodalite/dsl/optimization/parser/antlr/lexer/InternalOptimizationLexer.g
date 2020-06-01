@@ -45,9 +45,9 @@ AI_Inference : 'AI_Inference';
 
 Ai_training : 'ai_training:';
 
-Constraints : 'constraints:';
-
 AI_Training : 'AI_Training';
+
+Constraint : 'Constraint:';
 
 FPGAXilinx : 'FPGA-Xilinx';
 
@@ -91,8 +91,6 @@ Intelx86 : 'Intelx86';
 
 Backend : 'backend:';
 
-Command : 'command:';
-
 Library : 'library:';
 
 Openacc : 'openacc:';
@@ -117,15 +115,11 @@ Opencl : 'opencl:';
 
 Openmp : 'openmp:';
 
-Typing : 'typing:';
-
 CREATA : 'CREATA';
 
 OPENCL : 'OPENCL';
 
 OPENMP : 'OPENMP';
-
-Build : 'build:';
 
 Cache : 'cache:';
 
@@ -140,8 +134,6 @@ Medium : 'medium';
 Mvapch : 'mvapch';
 
 Opnmpi : 'opnmpi';
-
-Range : 'range:';
 
 Simple : 'simple';
 
@@ -181,11 +173,7 @@ Etl : 'etl:';
 
 Hpc : 'hpc:';
 
-Int : 'int:';
-
 Mpi : 'mpi:';
-
-Run : 'run:';
 
 Xla : 'xla:';
 
@@ -199,7 +187,29 @@ MPI : 'MPI';
 
 Pgi : 'pgi';
 
+LeftParenthesis : '(';
+
+RightParenthesis : ')';
+
+Comma : ',';
+
 FullStop : '.';
+
+RULE_BT : '>';
+
+RULE_LT : '<';
+
+RULE_BET : '>=';
+
+RULE_LET : '<=';
+
+RULE_EQUAL : '==';
+
+RULE_NOT_EQUAL : '!=';
+
+RULE_OR : 'OR';
+
+RULE_AND : 'AND';
 
 fragment RULE_BEGIN : ;
 

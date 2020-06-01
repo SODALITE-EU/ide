@@ -10,6 +10,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
@@ -18,16 +20,20 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 public class OptimizationSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected OptimizationGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_EConstraint_LeftParenthesisKeyword_1_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (OptimizationGrammarAccess) access;
+		match_EConstraint_LeftParenthesisKeyword_1_p = new TokenAlias(true, false, grammarAccess.getEConstraintAccess().getLeftParenthesisKeyword_1());
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (ruleCall.getRule() == grammarAccess.getBEGINRule())
 			return getBEGINToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getELogicOperRule())
+			return getELogicOperToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getENDRule())
 			return getENDToken(semanticObject, ruleCall, node);
 		return "";
@@ -38,6 +44,17 @@ public class OptimizationSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * Defaults to the empty string.
 	 */
 	protected String getBEGINToken(EObject semanticObject, RuleCall ruleCall, INode node) { return ""; }
+	
+	/**
+	 * ELogicOper:
+	 * 	OR | AND
+	 * ;
+	 */
+	protected String getELogicOperToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "OR";
+	}
 	
 	/**
 	 * Synthetic terminal rule. The concrete syntax is to be specified by clients.
@@ -51,8 +68,21 @@ public class OptimizationSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if (match_EConstraint_LeftParenthesisKeyword_1_p.equals(syntax))
+				emit_EConstraint_LeftParenthesisKeyword_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     '('+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) 'Constraint:' statements+=EStatement
+	 */
+	protected void emit_EConstraint_LeftParenthesisKeyword_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }

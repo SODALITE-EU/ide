@@ -111,26 +111,6 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
         return createEAutotuningAdapter();
       }
       @Override
-      public Adapter caseEAutotuingDSL(EAutotuingDSL object)
-      {
-        return createEAutotuingDSLAdapter();
-      }
-      @Override
-      public Adapter caseERun(ERun object)
-      {
-        return createERunAdapter();
-      }
-      @Override
-      public Adapter caseEBuild(EBuild object)
-      {
-        return createEBuildAdapter();
-      }
-      @Override
-      public Adapter caseEParameters(EParameters object)
-      {
-        return createEParametersAdapter();
-      }
-      @Override
       public Adapter caseEAITraining(EAITraining object)
       {
         return createEAITrainingAdapter();
@@ -191,11 +171,6 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
         return createEHPCAdapter();
       }
       @Override
-      public Adapter caseEHPCCases(EHPCCases object)
-      {
-        return createEHPCCasesAdapter();
-      }
-      @Override
       public Adapter caseEOPENCLCase(EOPENCLCase object)
       {
         return createEOPENCLCaseAdapter();
@@ -249,6 +224,16 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEOPENCL(EOPENCL object)
       {
         return createEOPENCLAdapter();
+      }
+      @Override
+      public Adapter caseEConstraint(EConstraint object)
+      {
+        return createEConstraintAdapter();
+      }
+      @Override
+      public Adapter caseEStatement(EStatement object)
+      {
+        return createEStatementAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -373,66 +358,6 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEAutotuningAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EAutotuingDSL <em>EAutotuing DSL</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.dsl.optimization.optimization.EAutotuingDSL
-   * @generated
-   */
-  public Adapter createEAutotuingDSLAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.ERun <em>ERun</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.dsl.optimization.optimization.ERun
-   * @generated
-   */
-  public Adapter createERunAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EBuild <em>EBuild</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.dsl.optimization.optimization.EBuild
-   * @generated
-   */
-  public Adapter createEBuildAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EParameters <em>EParameters</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.dsl.optimization.optimization.EParameters
-   * @generated
-   */
-  public Adapter createEParametersAdapter()
   {
     return null;
   }
@@ -618,21 +543,6 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EHPCCases <em>EHPC Cases</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.dsl.optimization.optimization.EHPCCases
-   * @generated
-   */
-  public Adapter createEHPCCasesAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EOPENCLCase <em>EOPENCL Case</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -793,6 +703,36 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEOPENCLAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EConstraint <em>EConstraint</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.optimization.optimization.EConstraint
+   * @generated
+   */
+  public Adapter createEConstraintAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EStatement <em>EStatement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.optimization.optimization.EStatement
+   * @generated
+   */
+  public Adapter createEStatementAdapter()
   {
     return null;
   }

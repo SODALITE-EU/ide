@@ -6,6 +6,7 @@ package org.sodalite.dsl.optimization.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
@@ -304,15 +305,18 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cCpu_typeAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
 		private final RuleCall cCpu_typeECPUTypeParserRuleCall_0_1_0 = (RuleCall)cCpu_typeAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
-		private final Keyword cAcc_typeKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cAcc_typeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cAcc_typeEACCTypeParserRuleCall_1_1_0 = (RuleCall)cAcc_typeAssignment_1_1.eContents().get(0);
+		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
+		private final Keyword cAcc_typeKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cAcc_typeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cAcc_typeEACCTypeParserRuleCall_1_0_1_0 = (RuleCall)cAcc_typeAssignment_1_0_1.eContents().get(0);
+		private final Assignment cConstraintAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cConstraintEConstraintParserRuleCall_1_1_0 = (RuleCall)cConstraintAssignment_1_1.eContents().get(0);
 		
 		//EOptBuild:
-		//	'cpu_type:' cpu_type=ECPUType & 'acc_type:' acc_type=EACCType;
+		//	'cpu_type:' cpu_type=ECPUType & ('acc_type:' acc_type=EACCType) constraint=EConstraint?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'cpu_type:' cpu_type=ECPUType & 'acc_type:' acc_type=EACCType
+		//'cpu_type:' cpu_type=ECPUType & ('acc_type:' acc_type=EACCType) constraint=EConstraint?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'cpu_type:' cpu_type=ECPUType
@@ -327,17 +331,26 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//ECPUType
 		public RuleCall getCpu_typeECPUTypeParserRuleCall_0_1_0() { return cCpu_typeECPUTypeParserRuleCall_0_1_0; }
 		
-		//'acc_type:' acc_type=EACCType
+		//('acc_type:' acc_type=EACCType) constraint=EConstraint?
 		public Group getGroup_1() { return cGroup_1; }
 		
+		//('acc_type:' acc_type=EACCType)
+		public Group getGroup_1_0() { return cGroup_1_0; }
+		
 		//'acc_type:'
-		public Keyword getAcc_typeKeyword_1_0() { return cAcc_typeKeyword_1_0; }
+		public Keyword getAcc_typeKeyword_1_0_0() { return cAcc_typeKeyword_1_0_0; }
 		
 		//acc_type=EACCType
-		public Assignment getAcc_typeAssignment_1_1() { return cAcc_typeAssignment_1_1; }
+		public Assignment getAcc_typeAssignment_1_0_1() { return cAcc_typeAssignment_1_0_1; }
 		
 		//EACCType
-		public RuleCall getAcc_typeEACCTypeParserRuleCall_1_1_0() { return cAcc_typeEACCTypeParserRuleCall_1_1_0; }
+		public RuleCall getAcc_typeEACCTypeParserRuleCall_1_0_1_0() { return cAcc_typeEACCTypeParserRuleCall_1_0_1_0; }
+		
+		//constraint=EConstraint?
+		public Assignment getConstraintAssignment_1_1() { return cConstraintAssignment_1_1; }
+		
+		//EConstraint
+		public RuleCall getConstraintEConstraintParserRuleCall_1_1_0() { return cConstraintEConstraintParserRuleCall_1_1_0; }
 	}
 	public class ECPUTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.ECPUType");
@@ -398,19 +411,14 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTunerETunerParserRuleCall_0_1_0 = (RuleCall)cTunerAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cInputKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
-		private final Assignment cInputAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cInputEAutotuingDSLParserRuleCall_1_2_0 = (RuleCall)cInputAssignment_1_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
+		private final Assignment cInputAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cInputSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cInputAssignment_1_1.eContents().get(0);
 		
 		//EAutotuning:
-		//	'tuner:' tuner=ETuner & 'input:'
-		//	BEGIN
-		//	input=EAutotuingDSL
-		//	END;
+		//	'tuner:' tuner=ETuner & 'input:' input=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'tuner:' tuner=ETuner & 'input:' BEGIN input=EAutotuingDSL END
+		//'tuner:' tuner=ETuner & 'input:' input=STRING
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'tuner:' tuner=ETuner
@@ -425,235 +433,17 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//ETuner
 		public RuleCall getTunerETunerParserRuleCall_0_1_0() { return cTunerETunerParserRuleCall_0_1_0; }
 		
-		//'input:' BEGIN input=EAutotuingDSL END
+		//'input:' input=STRING
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'input:'
 		public Keyword getInputKeyword_1_0() { return cInputKeyword_1_0; }
 		
-		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_1_1() { return cBEGINTerminalRuleCall_1_1; }
-		
-		//input=EAutotuingDSL
-		public Assignment getInputAssignment_1_2() { return cInputAssignment_1_2; }
-		
-		//EAutotuingDSL
-		public RuleCall getInputEAutotuingDSLParserRuleCall_1_2_0() { return cInputEAutotuingDSLParserRuleCall_1_2_0; }
-		
-		//END
-		public RuleCall getENDTerminalRuleCall_1_3() { return cENDTerminalRuleCall_1_3; }
-	}
-	public class EAutotuingDSLElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAutotuingDSL");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
-		private final Keyword cParametersKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
-		private final Assignment cParametersAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
-		private final RuleCall cParametersEParametersParserRuleCall_0_2_0 = (RuleCall)cParametersAssignment_0_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_0_3 = (RuleCall)cGroup_0.eContents().get(3);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cBuildKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
-		private final Assignment cParametersAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cParametersEBuildParserRuleCall_1_2_0 = (RuleCall)cParametersAssignment_1_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cRunKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
-		private final Assignment cParametersAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cParametersERunParserRuleCall_2_2_0 = (RuleCall)cParametersAssignment_2_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_2_3 = (RuleCall)cGroup_2.eContents().get(3);
-		
-		//EAutotuingDSL:
-		//	('parameters:'
-		//	BEGIN
-		//	parameters=EParameters
-		//	END) ('build:'
-		//	BEGIN
-		//	parameters=EBuild
-		//	END) ('run:'
-		//	BEGIN
-		//	parameters=ERun
-		//	END);
-		@Override public ParserRule getRule() { return rule; }
-		
-		//('parameters:' BEGIN parameters=EParameters END) ('build:' BEGIN parameters=EBuild END) ('run:' BEGIN parameters=ERun
-		//END)
-		public Group getGroup() { return cGroup; }
-		
-		//('parameters:' BEGIN parameters=EParameters END)
-		public Group getGroup_0() { return cGroup_0; }
-		
-		//'parameters:'
-		public Keyword getParametersKeyword_0_0() { return cParametersKeyword_0_0; }
-		
-		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_0_1() { return cBEGINTerminalRuleCall_0_1; }
-		
-		//parameters=EParameters
-		public Assignment getParametersAssignment_0_2() { return cParametersAssignment_0_2; }
-		
-		//EParameters
-		public RuleCall getParametersEParametersParserRuleCall_0_2_0() { return cParametersEParametersParserRuleCall_0_2_0; }
-		
-		//END
-		public RuleCall getENDTerminalRuleCall_0_3() { return cENDTerminalRuleCall_0_3; }
-		
-		//('build:' BEGIN parameters=EBuild END)
-		public Group getGroup_1() { return cGroup_1; }
-		
-		//'build:'
-		public Keyword getBuildKeyword_1_0() { return cBuildKeyword_1_0; }
-		
-		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_1_1() { return cBEGINTerminalRuleCall_1_1; }
-		
-		//parameters=EBuild
-		public Assignment getParametersAssignment_1_2() { return cParametersAssignment_1_2; }
-		
-		//EBuild
-		public RuleCall getParametersEBuildParserRuleCall_1_2_0() { return cParametersEBuildParserRuleCall_1_2_0; }
-		
-		//END
-		public RuleCall getENDTerminalRuleCall_1_3() { return cENDTerminalRuleCall_1_3; }
-		
-		//('run:' BEGIN parameters=ERun END)
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//'run:'
-		public Keyword getRunKeyword_2_0() { return cRunKeyword_2_0; }
-		
-		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_2_1() { return cBEGINTerminalRuleCall_2_1; }
-		
-		//parameters=ERun
-		public Assignment getParametersAssignment_2_2() { return cParametersAssignment_2_2; }
-		
-		//ERun
-		public RuleCall getParametersERunParserRuleCall_2_2_0() { return cParametersERunParserRuleCall_2_2_0; }
-		
-		//END
-		public RuleCall getENDTerminalRuleCall_2_3() { return cENDTerminalRuleCall_2_3; }
-	}
-	public class ERunElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.ERun");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCommandKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cCommandAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cCommandSTRINGTerminalRuleCall_1_0 = (RuleCall)cCommandAssignment_1.eContents().get(0);
-		
-		//ERun:
-		//	'command:' command=STRING;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'command:' command=STRING
-		public Group getGroup() { return cGroup; }
-		
-		//'command:'
-		public Keyword getCommandKeyword_0() { return cCommandKeyword_0; }
-		
-		//command=STRING
-		public Assignment getCommandAssignment_1() { return cCommandAssignment_1; }
+		//input=STRING
+		public Assignment getInputAssignment_1_1() { return cInputAssignment_1_1; }
 		
 		//STRING
-		public RuleCall getCommandSTRINGTerminalRuleCall_1_0() { return cCommandSTRINGTerminalRuleCall_1_0; }
-	}
-	public class EBuildElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EBuild");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCommandKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cCommandAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cCommandSTRINGTerminalRuleCall_1_0 = (RuleCall)cCommandAssignment_1.eContents().get(0);
-		
-		//EBuild:
-		//	'command:' command=STRING;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'command:' command=STRING
-		public Group getGroup() { return cGroup; }
-		
-		//'command:'
-		public Keyword getCommandKeyword_0() { return cCommandKeyword_0; }
-		
-		//command=STRING
-		public Assignment getCommandAssignment_1() { return cCommandAssignment_1; }
-		
-		//STRING
-		public RuleCall getCommandSTRINGTerminalRuleCall_1_0() { return cCommandSTRINGTerminalRuleCall_1_0; }
-	}
-	public class EParametersElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EParameters");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
-		private final Keyword cTypingKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
-		private final Keyword cIntKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
-		private final Assignment cIntAssignment_0_3 = (Assignment)cGroup_0.eContents().get(3);
-		private final RuleCall cIntSTRINGTerminalRuleCall_0_3_0 = (RuleCall)cIntAssignment_0_3.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_0_4 = (RuleCall)cGroup_0.eContents().get(4);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cConstraintsKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
-		private final Keyword cRangeKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
-		private final Assignment cRangeAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
-		private final RuleCall cRangeSTRINGTerminalRuleCall_1_3_0 = (RuleCall)cRangeAssignment_1_3.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_1_4 = (RuleCall)cGroup_1.eContents().get(4);
-		
-		//EParameters:
-		//	('typing:'
-		//	BEGIN
-		//	'int:' int=STRING
-		//	END) ('constraints:'
-		//	BEGIN
-		//	'range:' range=STRING
-		//	END);
-		@Override public ParserRule getRule() { return rule; }
-		
-		//('typing:' BEGIN 'int:' int=STRING END) ('constraints:' BEGIN 'range:' range=STRING END)
-		public Group getGroup() { return cGroup; }
-		
-		//('typing:' BEGIN 'int:' int=STRING END)
-		public Group getGroup_0() { return cGroup_0; }
-		
-		//'typing:'
-		public Keyword getTypingKeyword_0_0() { return cTypingKeyword_0_0; }
-		
-		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_0_1() { return cBEGINTerminalRuleCall_0_1; }
-		
-		//'int:'
-		public Keyword getIntKeyword_0_2() { return cIntKeyword_0_2; }
-		
-		//int=STRING
-		public Assignment getIntAssignment_0_3() { return cIntAssignment_0_3; }
-		
-		//STRING
-		public RuleCall getIntSTRINGTerminalRuleCall_0_3_0() { return cIntSTRINGTerminalRuleCall_0_3_0; }
-		
-		//END
-		public RuleCall getENDTerminalRuleCall_0_4() { return cENDTerminalRuleCall_0_4; }
-		
-		//('constraints:' BEGIN 'range:' range=STRING END)
-		public Group getGroup_1() { return cGroup_1; }
-		
-		//'constraints:'
-		public Keyword getConstraintsKeyword_1_0() { return cConstraintsKeyword_1_0; }
-		
-		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_1_1() { return cBEGINTerminalRuleCall_1_1; }
-		
-		//'range:'
-		public Keyword getRangeKeyword_1_2() { return cRangeKeyword_1_2; }
-		
-		//range=STRING
-		public Assignment getRangeAssignment_1_3() { return cRangeAssignment_1_3; }
-		
-		//STRING
-		public RuleCall getRangeSTRINGTerminalRuleCall_1_3_0() { return cRangeSTRINGTerminalRuleCall_1_3_0; }
-		
-		//END
-		public RuleCall getENDTerminalRuleCall_1_4() { return cENDTerminalRuleCall_1_4; }
+		public RuleCall getInputSTRINGTerminalRuleCall_1_1_0() { return cInputSTRINGTerminalRuleCall_1_1_0; }
 	}
 	public class ETunerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.ETuner");
@@ -661,6 +451,43 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCREATAKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cAUTOTUNEKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
+		////EAutotuingDSL:
+		////	('parameters:' 
+		////		BEGIN
+		////		parameters=EParameters
+		////		END
+		////	)
+		////	('build:' 
+		////		BEGIN
+		////		parameters=EBuild
+		////		END
+		////	)
+		////	('run:' 
+		////		BEGIN
+		////		parameters=ERun
+		////		END
+		////	)
+		////;
+		////ERun:
+		////	'command:' command = STRING
+		////;
+		////
+		////EBuild:
+		////	'command:' command = STRING
+		////;
+		////
+		////EParameters:
+		////	('typing:' 
+		////		BEGIN
+		////		'int:' int=STRING
+		////		END
+		////	)
+		////	('constraints:' 
+		////		BEGIN
+		////		'range:' range=STRING
+		////		END
+		////	)
+		////;
 		//ETuner:
 		//	'CREATA' | 'AUTOTUNE';
 		@Override public ParserRule getRule() { return rule; }
@@ -884,9 +711,12 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cTypeEAITrainingTypeParserRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
-		private final Keyword cDistributed_trainingKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cDistributed_trainingAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cDistributed_trainingBOOLEANTerminalRuleCall_2_1_0 = (RuleCall)cDistributed_trainingAssignment_2_1.eContents().get(0);
+		private final Group cGroup_2_0 = (Group)cGroup_2.eContents().get(0);
+		private final Keyword cDistributed_trainingKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
+		private final Assignment cDistributed_trainingAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
+		private final RuleCall cDistributed_trainingBOOLEANTerminalRuleCall_2_0_1_0 = (RuleCall)cDistributed_trainingAssignment_2_0_1.eContents().get(0);
+		private final Assignment cConstraintAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cConstraintEConstraintParserRuleCall_2_1_0 = (RuleCall)cConstraintAssignment_2_1.eContents().get(0);
 		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
 		private final Keyword cLayersKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cLayersAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
@@ -897,12 +727,12 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cParametersINTTerminalRuleCall_4_1_0 = (RuleCall)cParametersAssignment_4_1.eContents().get(0);
 		
 		//EAITrainingConfig:
-		//	'ai_framework:' ai_framework=EAIFramework & ('type:' type=EAITrainingType)? & ('distributed_training:'
-		//	distributed_training=BOOLEAN)? & ('layers:' layers=INT)? & ('parameters:' parameters=INT)?;
+		//	'ai_framework:' ai_framework=EAIFramework & ('type:' type=EAITrainingType)? & (('distributed_training:'
+		//	distributed_training=BOOLEAN) constraint=EConstraint?)? & ('layers:' layers=INT)? & ('parameters:' parameters=INT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ai_framework:' ai_framework=EAIFramework & ('type:' type=EAITrainingType)? & ('distributed_training:'
-		//distributed_training=BOOLEAN)? & ('layers:' layers=INT)? & ('parameters:' parameters=INT)?
+		//'ai_framework:' ai_framework=EAIFramework & ('type:' type=EAITrainingType)? & (('distributed_training:'
+		//distributed_training=BOOLEAN) constraint=EConstraint?)? & ('layers:' layers=INT)? & ('parameters:' parameters=INT)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'ai_framework:' ai_framework=EAIFramework
@@ -929,17 +759,26 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//EAITrainingType
 		public RuleCall getTypeEAITrainingTypeParserRuleCall_1_1_0() { return cTypeEAITrainingTypeParserRuleCall_1_1_0; }
 		
-		//('distributed_training:' distributed_training=BOOLEAN)?
+		//(('distributed_training:' distributed_training=BOOLEAN) constraint=EConstraint?)?
 		public Group getGroup_2() { return cGroup_2; }
 		
+		//('distributed_training:' distributed_training=BOOLEAN)
+		public Group getGroup_2_0() { return cGroup_2_0; }
+		
 		//'distributed_training:'
-		public Keyword getDistributed_trainingKeyword_2_0() { return cDistributed_trainingKeyword_2_0; }
+		public Keyword getDistributed_trainingKeyword_2_0_0() { return cDistributed_trainingKeyword_2_0_0; }
 		
 		//distributed_training=BOOLEAN
-		public Assignment getDistributed_trainingAssignment_2_1() { return cDistributed_trainingAssignment_2_1; }
+		public Assignment getDistributed_trainingAssignment_2_0_1() { return cDistributed_trainingAssignment_2_0_1; }
 		
 		//BOOLEAN
-		public RuleCall getDistributed_trainingBOOLEANTerminalRuleCall_2_1_0() { return cDistributed_trainingBOOLEANTerminalRuleCall_2_1_0; }
+		public RuleCall getDistributed_trainingBOOLEANTerminalRuleCall_2_0_1_0() { return cDistributed_trainingBOOLEANTerminalRuleCall_2_0_1_0; }
+		
+		//constraint=EConstraint?
+		public Assignment getConstraintAssignment_2_1() { return cConstraintAssignment_2_1; }
+		
+		//EConstraint
+		public RuleCall getConstraintEConstraintParserRuleCall_2_1_0() { return cConstraintEConstraintParserRuleCall_2_1_0; }
 		
 		//('layers:' layers=INT)?
 		public Group getGroup_3() { return cGroup_3; }
@@ -1048,21 +887,23 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCountINTTerminalRuleCall_3_1_0 = (RuleCall)cCountAssignment_3_1.eContents().get(0);
 		private final Group cGroup_4 = (Group)cUnorderedGroup.eContents().get(4);
 		private final Keyword cEtlKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
-		private final Assignment cEtlAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
-		private final RuleCall cEtlEAITrainingETLParserRuleCall_4_2_0 = (RuleCall)cEtlAssignment_4_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_4_3 = (RuleCall)cGroup_4.eContents().get(3);
+		private final Assignment cConstraintAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cConstraintEConstraintParserRuleCall_4_1_0 = (RuleCall)cConstraintAssignment_4_1.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_4_2 = (RuleCall)cGroup_4.eContents().get(2);
+		private final Assignment cEtlAssignment_4_3 = (Assignment)cGroup_4.eContents().get(3);
+		private final RuleCall cEtlEAITrainingETLParserRuleCall_4_3_0 = (RuleCall)cEtlAssignment_4_3.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_4_4 = (RuleCall)cGroup_4.eContents().get(4);
 		
 		//EAITrainingData:
 		//	('location:' location=STRING)? & ('basedata:' basedata=EBasedata)? & ('size:' size=INT)? & ('count:' count=INT)? &
-		//	('etl:'
+		//	('etl:' constraint=EConstraint?
 		//	BEGIN
 		//	etl=EAITrainingETL
 		//	END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//('location:' location=STRING)? & ('basedata:' basedata=EBasedata)? & ('size:' size=INT)? & ('count:' count=INT)? &
-		//('etl:' BEGIN etl=EAITrainingETL END)?
+		//('etl:' constraint=EConstraint? BEGIN etl=EAITrainingETL END)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//('location:' location=STRING)?
@@ -1113,23 +954,29 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//INT
 		public RuleCall getCountINTTerminalRuleCall_3_1_0() { return cCountINTTerminalRuleCall_3_1_0; }
 		
-		//('etl:' BEGIN etl=EAITrainingETL END)?
+		//('etl:' constraint=EConstraint? BEGIN etl=EAITrainingETL END)?
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//'etl:'
 		public Keyword getEtlKeyword_4_0() { return cEtlKeyword_4_0; }
 		
+		//constraint=EConstraint?
+		public Assignment getConstraintAssignment_4_1() { return cConstraintAssignment_4_1; }
+		
+		//EConstraint
+		public RuleCall getConstraintEConstraintParserRuleCall_4_1_0() { return cConstraintEConstraintParserRuleCall_4_1_0; }
+		
 		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_4_1() { return cBEGINTerminalRuleCall_4_1; }
+		public RuleCall getBEGINTerminalRuleCall_4_2() { return cBEGINTerminalRuleCall_4_2; }
 		
 		//etl=EAITrainingETL
-		public Assignment getEtlAssignment_4_2() { return cEtlAssignment_4_2; }
+		public Assignment getEtlAssignment_4_3() { return cEtlAssignment_4_3; }
 		
 		//EAITrainingETL
-		public RuleCall getEtlEAITrainingETLParserRuleCall_4_2_0() { return cEtlEAITrainingETLParserRuleCall_4_2_0; }
+		public RuleCall getEtlEAITrainingETLParserRuleCall_4_3_0() { return cEtlEAITrainingETLParserRuleCall_4_3_0; }
 		
 		//END
-		public RuleCall getENDTerminalRuleCall_4_3() { return cENDTerminalRuleCall_4_3; }
+		public RuleCall getENDTerminalRuleCall_4_4() { return cENDTerminalRuleCall_4_4; }
 	}
 	public class EBasedataElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EBasedata");
@@ -1279,15 +1126,18 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cVersionAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
 		private final RuleCall cVersionSTRINGTerminalRuleCall_0_1_0 = (RuleCall)cVersionAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
-		private final Keyword cXlaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cXlaAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cXlaBOOLEANTerminalRuleCall_1_1_0 = (RuleCall)cXlaAssignment_1_1.eContents().get(0);
+		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
+		private final Keyword cXlaKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cXlaAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cXlaBOOLEANTerminalRuleCall_1_0_1_0 = (RuleCall)cXlaAssignment_1_0_1.eContents().get(0);
+		private final Assignment cConstraintAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cConstraintEConstraintParserRuleCall_1_1_0 = (RuleCall)cConstraintAssignment_1_1.eContents().get(0);
 		
 		//ETensorFlow:
-		//	('version:' version=STRING)? & ('xla:' xla=BOOLEAN)?;
+		//	('version:' version=STRING)? & (('xla:' xla=BOOLEAN) constraint=EConstraint?)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('version:' version=STRING)? & ('xla:' xla=BOOLEAN)?
+		//('version:' version=STRING)? & (('xla:' xla=BOOLEAN) constraint=EConstraint?)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//('version:' version=STRING)?
@@ -1302,17 +1152,26 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getVersionSTRINGTerminalRuleCall_0_1_0() { return cVersionSTRINGTerminalRuleCall_0_1_0; }
 		
-		//('xla:' xla=BOOLEAN)?
+		//(('xla:' xla=BOOLEAN) constraint=EConstraint?)?
 		public Group getGroup_1() { return cGroup_1; }
 		
+		//('xla:' xla=BOOLEAN)
+		public Group getGroup_1_0() { return cGroup_1_0; }
+		
 		//'xla:'
-		public Keyword getXlaKeyword_1_0() { return cXlaKeyword_1_0; }
+		public Keyword getXlaKeyword_1_0_0() { return cXlaKeyword_1_0_0; }
 		
 		//xla=BOOLEAN
-		public Assignment getXlaAssignment_1_1() { return cXlaAssignment_1_1; }
+		public Assignment getXlaAssignment_1_0_1() { return cXlaAssignment_1_0_1; }
 		
 		//BOOLEAN
-		public RuleCall getXlaBOOLEANTerminalRuleCall_1_1_0() { return cXlaBOOLEANTerminalRuleCall_1_1_0; }
+		public RuleCall getXlaBOOLEANTerminalRuleCall_1_0_1_0() { return cXlaBOOLEANTerminalRuleCall_1_0_1_0; }
+		
+		//constraint=EConstraint?
+		public Assignment getConstraintAssignment_1_1() { return cConstraintAssignment_1_1; }
+		
+		//EConstraint
+		public RuleCall getConstraintEConstraintParserRuleCall_1_1_0() { return cConstraintEConstraintParserRuleCall_1_1_0; }
 	}
 	public class EPyTorchElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EPyTorch");
@@ -1322,15 +1181,18 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cVersionAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
 		private final RuleCall cVersionSTRINGTerminalRuleCall_0_1_0 = (RuleCall)cVersionAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
-		private final Keyword cGlowKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cGlowAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cGlowBOOLEANTerminalRuleCall_1_1_0 = (RuleCall)cGlowAssignment_1_1.eContents().get(0);
+		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
+		private final Keyword cGlowKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cGlowAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cGlowBOOLEANTerminalRuleCall_1_0_1_0 = (RuleCall)cGlowAssignment_1_0_1.eContents().get(0);
+		private final Assignment cConstraintAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cConstraintEConstraintParserRuleCall_1_1_0 = (RuleCall)cConstraintAssignment_1_1.eContents().get(0);
 		
 		//EPyTorch:
-		//	('version:' version=STRING)? & ('glow:' glow=BOOLEAN)?;
+		//	('version:' version=STRING)? & (('glow:' glow=BOOLEAN) constraint=EConstraint?)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('version:' version=STRING)? & ('glow:' glow=BOOLEAN)?
+		//('version:' version=STRING)? & (('glow:' glow=BOOLEAN) constraint=EConstraint?)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//('version:' version=STRING)?
@@ -1345,35 +1207,51 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getVersionSTRINGTerminalRuleCall_0_1_0() { return cVersionSTRINGTerminalRuleCall_0_1_0; }
 		
-		//('glow:' glow=BOOLEAN)?
+		//(('glow:' glow=BOOLEAN) constraint=EConstraint?)?
 		public Group getGroup_1() { return cGroup_1; }
 		
+		//('glow:' glow=BOOLEAN)
+		public Group getGroup_1_0() { return cGroup_1_0; }
+		
 		//'glow:'
-		public Keyword getGlowKeyword_1_0() { return cGlowKeyword_1_0; }
+		public Keyword getGlowKeyword_1_0_0() { return cGlowKeyword_1_0_0; }
 		
 		//glow=BOOLEAN
-		public Assignment getGlowAssignment_1_1() { return cGlowAssignment_1_1; }
+		public Assignment getGlowAssignment_1_0_1() { return cGlowAssignment_1_0_1; }
 		
 		//BOOLEAN
-		public RuleCall getGlowBOOLEANTerminalRuleCall_1_1_0() { return cGlowBOOLEANTerminalRuleCall_1_1_0; }
+		public RuleCall getGlowBOOLEANTerminalRuleCall_1_0_1_0() { return cGlowBOOLEANTerminalRuleCall_1_0_1_0; }
+		
+		//constraint=EConstraint?
+		public Assignment getConstraintAssignment_1_1() { return cConstraintAssignment_1_1; }
+		
+		//EConstraint
+		public RuleCall getConstraintEConstraintParserRuleCall_1_1_0() { return cConstraintEConstraintParserRuleCall_1_1_0; }
 	}
 	public class EHPCElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EHPC");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
-		private final Keyword cConfigKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
-		private final Assignment cConfigAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
-		private final RuleCall cConfigEHPCConfigParserRuleCall_0_2_0 = (RuleCall)cConfigAssignment_0_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_0_3 = (RuleCall)cGroup_0.eContents().get(3);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cDataKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
-		private final Assignment cDataAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cDataEHPCDataParserRuleCall_1_2_0 = (RuleCall)cDataAssignment_1_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
-		private final Assignment cHpccaseAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cHpccaseEHPCCasesParserRuleCall_2_0 = (RuleCall)cHpccaseAssignment_2.eContents().get(0);
+		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
+		private final Group cGroup_0_0 = (Group)cGroup_0.eContents().get(0);
+		private final Keyword cConfigKeyword_0_0_0 = (Keyword)cGroup_0_0.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_0_0_1 = (RuleCall)cGroup_0_0.eContents().get(1);
+		private final Assignment cConfigAssignment_0_0_2 = (Assignment)cGroup_0_0.eContents().get(2);
+		private final RuleCall cConfigEHPCConfigParserRuleCall_0_0_2_0 = (RuleCall)cConfigAssignment_0_0_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_0_0_3 = (RuleCall)cGroup_0_0.eContents().get(3);
+		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
+		private final Keyword cDataKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_0_1_1 = (RuleCall)cGroup_0_1.eContents().get(1);
+		private final Assignment cDataAssignment_0_1_2 = (Assignment)cGroup_0_1.eContents().get(2);
+		private final RuleCall cDataEHPCDataParserRuleCall_0_1_2_0 = (RuleCall)cDataAssignment_0_1_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_0_1_3 = (RuleCall)cGroup_0_1.eContents().get(3);
+		private final Assignment cMpiAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
+		private final RuleCall cMpiEMPICaseParserRuleCall_0_2_0 = (RuleCall)cMpiAssignment_0_2.eContents().get(0);
+		private final Assignment cOpenmpAssignment_1 = (Assignment)cUnorderedGroup.eContents().get(1);
+		private final RuleCall cOpenmpEOPENMPCaseParserRuleCall_1_0 = (RuleCall)cOpenmpAssignment_1.eContents().get(0);
+		private final Assignment cOpenaccAssignment_2 = (Assignment)cUnorderedGroup.eContents().get(2);
+		private final RuleCall cOpenaccEOPENACCCaseParserRuleCall_2_0 = (RuleCall)cOpenaccAssignment_2.eContents().get(0);
+		private final Assignment cOpenclAssignment_3 = (Assignment)cUnorderedGroup.eContents().get(3);
+		private final RuleCall cOpenclEOPENCLCaseParserRuleCall_3_0 = (RuleCall)cOpenclAssignment_3.eContents().get(0);
 		
 		//EHPC:
 		//	('config:'
@@ -1382,148 +1260,159 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//	END) ('data:'
 		//	BEGIN
 		//	data=EHPCData
-		//	END) hpccase=EHPCCases;
+		//	END) mpi=EMPICase? & openmp=EOPENMPCase? & openacc=EOPENACCCase? & opencl=EOPENCLCase?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('config:' BEGIN config=EHPCConfig END) ('data:' BEGIN data=EHPCData END) hpccase=EHPCCases
-		public Group getGroup() { return cGroup; }
+		//('config:' BEGIN config=EHPCConfig END) ('data:' BEGIN data=EHPCData END) mpi=EMPICase? & openmp=EOPENMPCase? &
+		//openacc=EOPENACCCase? & opencl=EOPENCLCase?
+		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//('config:' BEGIN config=EHPCConfig END)
+		//('config:' BEGIN config=EHPCConfig END) ('data:' BEGIN data=EHPCData END) mpi=EMPICase?
 		public Group getGroup_0() { return cGroup_0; }
 		
+		//('config:' BEGIN config=EHPCConfig END)
+		public Group getGroup_0_0() { return cGroup_0_0; }
+		
 		//'config:'
-		public Keyword getConfigKeyword_0_0() { return cConfigKeyword_0_0; }
+		public Keyword getConfigKeyword_0_0_0() { return cConfigKeyword_0_0_0; }
 		
 		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_0_1() { return cBEGINTerminalRuleCall_0_1; }
+		public RuleCall getBEGINTerminalRuleCall_0_0_1() { return cBEGINTerminalRuleCall_0_0_1; }
 		
 		//config=EHPCConfig
-		public Assignment getConfigAssignment_0_2() { return cConfigAssignment_0_2; }
+		public Assignment getConfigAssignment_0_0_2() { return cConfigAssignment_0_0_2; }
 		
 		//EHPCConfig
-		public RuleCall getConfigEHPCConfigParserRuleCall_0_2_0() { return cConfigEHPCConfigParserRuleCall_0_2_0; }
+		public RuleCall getConfigEHPCConfigParserRuleCall_0_0_2_0() { return cConfigEHPCConfigParserRuleCall_0_0_2_0; }
 		
 		//END
-		public RuleCall getENDTerminalRuleCall_0_3() { return cENDTerminalRuleCall_0_3; }
+		public RuleCall getENDTerminalRuleCall_0_0_3() { return cENDTerminalRuleCall_0_0_3; }
 		
 		//('data:' BEGIN data=EHPCData END)
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup_0_1() { return cGroup_0_1; }
 		
 		//'data:'
-		public Keyword getDataKeyword_1_0() { return cDataKeyword_1_0; }
+		public Keyword getDataKeyword_0_1_0() { return cDataKeyword_0_1_0; }
 		
 		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_1_1() { return cBEGINTerminalRuleCall_1_1; }
+		public RuleCall getBEGINTerminalRuleCall_0_1_1() { return cBEGINTerminalRuleCall_0_1_1; }
 		
 		//data=EHPCData
-		public Assignment getDataAssignment_1_2() { return cDataAssignment_1_2; }
+		public Assignment getDataAssignment_0_1_2() { return cDataAssignment_0_1_2; }
 		
 		//EHPCData
-		public RuleCall getDataEHPCDataParserRuleCall_1_2_0() { return cDataEHPCDataParserRuleCall_1_2_0; }
+		public RuleCall getDataEHPCDataParserRuleCall_0_1_2_0() { return cDataEHPCDataParserRuleCall_0_1_2_0; }
 		
 		//END
-		public RuleCall getENDTerminalRuleCall_1_3() { return cENDTerminalRuleCall_1_3; }
+		public RuleCall getENDTerminalRuleCall_0_1_3() { return cENDTerminalRuleCall_0_1_3; }
 		
-		//hpccase=EHPCCases
-		public Assignment getHpccaseAssignment_2() { return cHpccaseAssignment_2; }
-		
-		//EHPCCases
-		public RuleCall getHpccaseEHPCCasesParserRuleCall_2_0() { return cHpccaseEHPCCasesParserRuleCall_2_0; }
-	}
-	public class EHPCCasesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EHPCCases");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cEMPICaseParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cEOPENMPCaseParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cEOPENACCCaseParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cEOPENCLCaseParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		
-		//EHPCCases:
-		//	EMPICase | EOPENMPCase | EOPENACCCase | EOPENCLCase;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//EMPICase | EOPENMPCase | EOPENACCCase | EOPENCLCase
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//mpi=EMPICase?
+		public Assignment getMpiAssignment_0_2() { return cMpiAssignment_0_2; }
 		
 		//EMPICase
-		public RuleCall getEMPICaseParserRuleCall_0() { return cEMPICaseParserRuleCall_0; }
+		public RuleCall getMpiEMPICaseParserRuleCall_0_2_0() { return cMpiEMPICaseParserRuleCall_0_2_0; }
+		
+		//openmp=EOPENMPCase?
+		public Assignment getOpenmpAssignment_1() { return cOpenmpAssignment_1; }
 		
 		//EOPENMPCase
-		public RuleCall getEOPENMPCaseParserRuleCall_1() { return cEOPENMPCaseParserRuleCall_1; }
+		public RuleCall getOpenmpEOPENMPCaseParserRuleCall_1_0() { return cOpenmpEOPENMPCaseParserRuleCall_1_0; }
+		
+		//openacc=EOPENACCCase?
+		public Assignment getOpenaccAssignment_2() { return cOpenaccAssignment_2; }
 		
 		//EOPENACCCase
-		public RuleCall getEOPENACCCaseParserRuleCall_2() { return cEOPENACCCaseParserRuleCall_2; }
+		public RuleCall getOpenaccEOPENACCCaseParserRuleCall_2_0() { return cOpenaccEOPENACCCaseParserRuleCall_2_0; }
+		
+		//opencl=EOPENCLCase?
+		public Assignment getOpenclAssignment_3() { return cOpenclAssignment_3; }
 		
 		//EOPENCLCase
-		public RuleCall getEOPENCLCaseParserRuleCall_3() { return cEOPENCLCaseParserRuleCall_3; }
+		public RuleCall getOpenclEOPENCLCaseParserRuleCall_3_0() { return cOpenclEOPENCLCaseParserRuleCall_3_0; }
 	}
 	public class EOPENCLCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOPENCLCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOpenclKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Assignment cOpenclAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cOpenclEOPENCLParserRuleCall_2_0 = (RuleCall)cOpenclAssignment_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final Assignment cConstraintAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cConstraintEConstraintParserRuleCall_1_0 = (RuleCall)cConstraintAssignment_1.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cOpenclAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cOpenclEOPENCLParserRuleCall_3_0 = (RuleCall)cOpenclAssignment_3.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//EOPENCLCase:
-		//	'opencl:'
+		//	'opencl:' constraint=EConstraint?
 		//	BEGIN
 		//	opencl=EOPENCL
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'opencl:' BEGIN opencl=EOPENCL END
+		//'opencl:' constraint=EConstraint? BEGIN opencl=EOPENCL END
 		public Group getGroup() { return cGroup; }
 		
 		//'opencl:'
 		public Keyword getOpenclKeyword_0() { return cOpenclKeyword_0; }
 		
+		//constraint=EConstraint?
+		public Assignment getConstraintAssignment_1() { return cConstraintAssignment_1; }
+		
+		//EConstraint
+		public RuleCall getConstraintEConstraintParserRuleCall_1_0() { return cConstraintEConstraintParserRuleCall_1_0; }
+		
 		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
+		public RuleCall getBEGINTerminalRuleCall_2() { return cBEGINTerminalRuleCall_2; }
 		
 		//opencl=EOPENCL
-		public Assignment getOpenclAssignment_2() { return cOpenclAssignment_2; }
+		public Assignment getOpenclAssignment_3() { return cOpenclAssignment_3; }
 		
 		//EOPENCL
-		public RuleCall getOpenclEOPENCLParserRuleCall_2_0() { return cOpenclEOPENCLParserRuleCall_2_0; }
+		public RuleCall getOpenclEOPENCLParserRuleCall_3_0() { return cOpenclEOPENCLParserRuleCall_3_0; }
 		
 		//END
-		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
+		public RuleCall getENDTerminalRuleCall_4() { return cENDTerminalRuleCall_4; }
 	}
 	public class EOPENACCCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOPENACCCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOpenaccKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Assignment cOpenaccAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cOpenaccEOPENACCParserRuleCall_2_0 = (RuleCall)cOpenaccAssignment_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final Assignment cConstraintAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cConstraintEConstraintParserRuleCall_1_0 = (RuleCall)cConstraintAssignment_1.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cOpenaccAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cOpenaccEOPENACCParserRuleCall_3_0 = (RuleCall)cOpenaccAssignment_3.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//EOPENACCCase:
-		//	'openacc:'
+		//	'openacc:' constraint=EConstraint?
 		//	BEGIN
 		//	openacc=EOPENACC
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'openacc:' BEGIN openacc=EOPENACC END
+		//'openacc:' constraint=EConstraint? BEGIN openacc=EOPENACC END
 		public Group getGroup() { return cGroup; }
 		
 		//'openacc:'
 		public Keyword getOpenaccKeyword_0() { return cOpenaccKeyword_0; }
 		
+		//constraint=EConstraint?
+		public Assignment getConstraintAssignment_1() { return cConstraintAssignment_1; }
+		
+		//EConstraint
+		public RuleCall getConstraintEConstraintParserRuleCall_1_0() { return cConstraintEConstraintParserRuleCall_1_0; }
+		
 		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
+		public RuleCall getBEGINTerminalRuleCall_2() { return cBEGINTerminalRuleCall_2; }
 		
 		//openacc=EOPENACC
-		public Assignment getOpenaccAssignment_2() { return cOpenaccAssignment_2; }
+		public Assignment getOpenaccAssignment_3() { return cOpenaccAssignment_3; }
 		
 		//EOPENACC
-		public RuleCall getOpenaccEOPENACCParserRuleCall_2_0() { return cOpenaccEOPENACCParserRuleCall_2_0; }
+		public RuleCall getOpenaccEOPENACCParserRuleCall_3_0() { return cOpenaccEOPENACCParserRuleCall_3_0; }
 		
 		//END
-		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
+		public RuleCall getENDTerminalRuleCall_4() { return cENDTerminalRuleCall_4; }
 	}
 	public class EOPENMPCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOPENMPCase");
@@ -1599,22 +1488,39 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cParallelisationKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cParallelisationAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cParallelisationEParallelisationParserRuleCall_1_0 = (RuleCall)cParallelisationAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cParallelisationAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cParallelisationEParallelisationParserRuleCall_2_1_0 = (RuleCall)cParallelisationAssignment_2_1.eContents().get(0);
 		
 		//EHPCConfig:
-		//	'parallelisation:' parallelisation=EParallelisation;
+		//	'parallelisation:' parallelisation+=EParallelisation (',' parallelisation+=EParallelisation)* //Multiple selections are supported
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'parallelisation:' parallelisation=EParallelisation
+		//'parallelisation:' parallelisation+=EParallelisation (',' parallelisation+=EParallelisation)*
 		public Group getGroup() { return cGroup; }
 		
 		//'parallelisation:'
 		public Keyword getParallelisationKeyword_0() { return cParallelisationKeyword_0; }
 		
-		//parallelisation=EParallelisation
+		//parallelisation+=EParallelisation
 		public Assignment getParallelisationAssignment_1() { return cParallelisationAssignment_1; }
 		
 		//EParallelisation
 		public RuleCall getParallelisationEParallelisationParserRuleCall_1_0() { return cParallelisationEParallelisationParserRuleCall_1_0; }
+		
+		//(',' parallelisation+=EParallelisation)*
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//','
+		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+		
+		//parallelisation+=EParallelisation
+		public Assignment getParallelisationAssignment_2_1() { return cParallelisationAssignment_2_1; }
+		
+		//EParallelisation
+		public RuleCall getParallelisationEParallelisationParserRuleCall_2_1_0() { return cParallelisationEParallelisationParserRuleCall_2_1_0; }
 	}
 	public class EParallelisationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EParallelisation");
@@ -1664,21 +1570,23 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCountINTTerminalRuleCall_3_1_0 = (RuleCall)cCountAssignment_3_1.eContents().get(0);
 		private final Group cGroup_4 = (Group)cUnorderedGroup.eContents().get(4);
 		private final Keyword cEtlKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
-		private final Assignment cEtlAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
-		private final RuleCall cEtlEHPCETLParserRuleCall_4_2_0 = (RuleCall)cEtlAssignment_4_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_4_3 = (RuleCall)cGroup_4.eContents().get(3);
+		private final Assignment cConstraintAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cConstraintEConstraintParserRuleCall_4_1_0 = (RuleCall)cConstraintAssignment_4_1.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_4_2 = (RuleCall)cGroup_4.eContents().get(2);
+		private final Assignment cEtlAssignment_4_3 = (Assignment)cGroup_4.eContents().get(3);
+		private final RuleCall cEtlEHPCETLParserRuleCall_4_3_0 = (RuleCall)cEtlAssignment_4_3.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_4_4 = (RuleCall)cGroup_4.eContents().get(4);
 		
 		//EHPCData:
 		//	('location:' location=STRING)? & ('basedata:' basedata=EHPCBasedata)? & ('size:' size=INT)? & ('count:' count=INT)? &
-		//	('etl:'
+		//	('etl:' constraint=EConstraint?
 		//	BEGIN
 		//	etl=EHPCETL
 		//	END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//('location:' location=STRING)? & ('basedata:' basedata=EHPCBasedata)? & ('size:' size=INT)? & ('count:' count=INT)? &
-		//('etl:' BEGIN etl=EHPCETL END)?
+		//('etl:' constraint=EConstraint? BEGIN etl=EHPCETL END)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//('location:' location=STRING)?
@@ -1729,23 +1637,29 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//INT
 		public RuleCall getCountINTTerminalRuleCall_3_1_0() { return cCountINTTerminalRuleCall_3_1_0; }
 		
-		//('etl:' BEGIN etl=EHPCETL END)?
+		//('etl:' constraint=EConstraint? BEGIN etl=EHPCETL END)?
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//'etl:'
 		public Keyword getEtlKeyword_4_0() { return cEtlKeyword_4_0; }
 		
+		//constraint=EConstraint?
+		public Assignment getConstraintAssignment_4_1() { return cConstraintAssignment_4_1; }
+		
+		//EConstraint
+		public RuleCall getConstraintEConstraintParserRuleCall_4_1_0() { return cConstraintEConstraintParserRuleCall_4_1_0; }
+		
 		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_4_1() { return cBEGINTerminalRuleCall_4_1; }
+		public RuleCall getBEGINTerminalRuleCall_4_2() { return cBEGINTerminalRuleCall_4_2; }
 		
 		//etl=EHPCETL
-		public Assignment getEtlAssignment_4_2() { return cEtlAssignment_4_2; }
+		public Assignment getEtlAssignment_4_3() { return cEtlAssignment_4_3; }
 		
 		//EHPCETL
-		public RuleCall getEtlEHPCETLParserRuleCall_4_2_0() { return cEtlEHPCETLParserRuleCall_4_2_0; }
+		public RuleCall getEtlEHPCETLParserRuleCall_4_3_0() { return cEtlEHPCETLParserRuleCall_4_3_0; }
 		
 		//END
-		public RuleCall getENDTerminalRuleCall_4_3() { return cENDTerminalRuleCall_4_3; }
+		public RuleCall getENDTerminalRuleCall_4_4() { return cENDTerminalRuleCall_4_4; }
 	}
 	public class EHPCETLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EHPCETL");
@@ -2161,6 +2075,165 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//'cray'
 		public Keyword getCrayKeyword_1() { return cCrayKeyword_1; }
 	}
+	public class EConstraintElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EConstraint");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cEConstraintAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cConstraintKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cStatementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cStatementsEStatementParserRuleCall_3_0 = (RuleCall)cStatementsAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final RuleCall cELogicOperParserRuleCall_4_0 = (RuleCall)cGroup_4.eContents().get(0);
+		private final Assignment cStatementsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cStatementsEStatementParserRuleCall_4_1_0 = (RuleCall)cStatementsAssignment_4_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//EConstraint:
+		//	{EConstraint} '('+ 'Constraint:' statements+=EStatement (ELogicOper statements+=EStatement)* ')';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{EConstraint} '('+ 'Constraint:' statements+=EStatement (ELogicOper statements+=EStatement)* ')'
+		public Group getGroup() { return cGroup; }
+		
+		//{EConstraint}
+		public Action getEConstraintAction_0() { return cEConstraintAction_0; }
+		
+		//'('+
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		
+		//'Constraint:'
+		public Keyword getConstraintKeyword_2() { return cConstraintKeyword_2; }
+		
+		//statements+=EStatement
+		public Assignment getStatementsAssignment_3() { return cStatementsAssignment_3; }
+		
+		//EStatement
+		public RuleCall getStatementsEStatementParserRuleCall_3_0() { return cStatementsEStatementParserRuleCall_3_0; }
+		
+		//(ELogicOper statements+=EStatement)*
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//ELogicOper
+		public RuleCall getELogicOperParserRuleCall_4_0() { return cELogicOperParserRuleCall_4_0; }
+		
+		//statements+=EStatement
+		public Assignment getStatementsAssignment_4_1() { return cStatementsAssignment_4_1; }
+		
+		//EStatement
+		public RuleCall getStatementsEStatementParserRuleCall_4_1_0() { return cStatementsEStatementParserRuleCall_4_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+	}
+	public class ELogicOperElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.ELogicOper");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cORTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cANDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ELogicOper:
+		//	OR | AND;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//OR | AND
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//OR
+		public RuleCall getORTerminalRuleCall_0() { return cORTerminalRuleCall_0; }
+		
+		//AND
+		public RuleCall getANDTerminalRuleCall_1() { return cANDTerminalRuleCall_1; }
+	}
+	public class EStatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EStatement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cPropertyAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cPropertySTRINGTerminalRuleCall_0_0 = (RuleCall)cPropertyAssignment_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOperatorEComparisonOperatorParserRuleCall_1_0 = (RuleCall)cOperatorAssignment_1.eContents().get(0);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValueEValueParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		
+		//EStatement:
+		//	property=STRING operator=EComparisonOperator value=EValue;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//property=STRING operator=EComparisonOperator value=EValue
+		public Group getGroup() { return cGroup; }
+		
+		//property=STRING
+		public Assignment getPropertyAssignment_0() { return cPropertyAssignment_0; }
+		
+		//STRING
+		public RuleCall getPropertySTRINGTerminalRuleCall_0_0() { return cPropertySTRINGTerminalRuleCall_0_0; }
+		
+		//operator=EComparisonOperator
+		public Assignment getOperatorAssignment_1() { return cOperatorAssignment_1; }
+		
+		//EComparisonOperator
+		public RuleCall getOperatorEComparisonOperatorParserRuleCall_1_0() { return cOperatorEComparisonOperatorParserRuleCall_1_0; }
+		
+		//value=EValue
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+		
+		//EValue
+		public RuleCall getValueEValueParserRuleCall_2_0() { return cValueEValueParserRuleCall_2_0; }
+	}
+	public class EValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EValue");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cRealValueParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//EValue:
+		//	INT | RealValue;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//INT | RealValue
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
+		
+		//RealValue
+		public RuleCall getRealValueParserRuleCall_1() { return cRealValueParserRuleCall_1; }
+	}
+	public class EComparisonOperatorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EComparisonOperator");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cBTTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cLTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cBETTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cLETTerminalRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cEQUALTerminalRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cNOT_EQUALTerminalRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		
+		//EComparisonOperator:
+		//	BT | LT | BET | LET | EQUAL | NOT_EQUAL;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//BT | LT | BET | LET | EQUAL | NOT_EQUAL
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//BT
+		public RuleCall getBTTerminalRuleCall_0() { return cBTTerminalRuleCall_0; }
+		
+		//LT
+		public RuleCall getLTTerminalRuleCall_1() { return cLTTerminalRuleCall_1; }
+		
+		//BET
+		public RuleCall getBETTerminalRuleCall_2() { return cBETTerminalRuleCall_2; }
+		
+		//LET
+		public RuleCall getLETTerminalRuleCall_3() { return cLETTerminalRuleCall_3; }
+		
+		//EQUAL
+		public RuleCall getEQUALTerminalRuleCall_4() { return cEQUALTerminalRuleCall_4; }
+		
+		//NOT_EQUAL
+		public RuleCall getNOT_EQUALTerminalRuleCall_5() { return cNOT_EQUALTerminalRuleCall_5; }
+	}
 	public class REALElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.REAL");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -2215,10 +2288,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	private final ECPUTypeElements pECPUType;
 	private final EACCTypeElements pEACCType;
 	private final EAutotuningElements pEAutotuning;
-	private final EAutotuingDSLElements pEAutotuingDSL;
-	private final ERunElements pERun;
-	private final EBuildElements pEBuild;
-	private final EParametersElements pEParameters;
 	private final ETunerElements pETuner;
 	private final EAITrainingElements pEAITraining;
 	private final EAITrainingCasesElements pEAITrainingCases;
@@ -2236,7 +2305,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	private final ETensorFlowElements pETensorFlow;
 	private final EPyTorchElements pEPyTorch;
 	private final EHPCElements pEHPC;
-	private final EHPCCasesElements pEHPCCases;
 	private final EOPENCLCaseElements pEOPENCLCase;
 	private final EOPENACCCaseElements pEOPENACCCase;
 	private final EOPENMPCaseElements pEOPENMPCase;
@@ -2254,6 +2322,19 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	private final EOPENACCElements pEOPENACC;
 	private final EOPENCLElements pEOPENCL;
 	private final ECompilerElements pECompiler;
+	private final EConstraintElements pEConstraint;
+	private final ELogicOperElements pELogicOper;
+	private final EStatementElements pEStatement;
+	private final EValueElements pEValue;
+	private final EComparisonOperatorElements pEComparisonOperator;
+	private final TerminalRule tBT;
+	private final TerminalRule tLT;
+	private final TerminalRule tBET;
+	private final TerminalRule tLET;
+	private final TerminalRule tEQUAL;
+	private final TerminalRule tNOT_EQUAL;
+	private final TerminalRule tOR;
+	private final TerminalRule tAND;
 	private final TerminalRule tBEGIN;
 	private final TerminalRule tEND;
 	private final TerminalRule tBOOLEAN;
@@ -2280,10 +2361,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		this.pECPUType = new ECPUTypeElements();
 		this.pEACCType = new EACCTypeElements();
 		this.pEAutotuning = new EAutotuningElements();
-		this.pEAutotuingDSL = new EAutotuingDSLElements();
-		this.pERun = new ERunElements();
-		this.pEBuild = new EBuildElements();
-		this.pEParameters = new EParametersElements();
 		this.pETuner = new ETunerElements();
 		this.pEAITraining = new EAITrainingElements();
 		this.pEAITrainingCases = new EAITrainingCasesElements();
@@ -2301,7 +2378,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		this.pETensorFlow = new ETensorFlowElements();
 		this.pEPyTorch = new EPyTorchElements();
 		this.pEHPC = new EHPCElements();
-		this.pEHPCCases = new EHPCCasesElements();
 		this.pEOPENCLCase = new EOPENCLCaseElements();
 		this.pEOPENACCCase = new EOPENACCCaseElements();
 		this.pEOPENMPCase = new EOPENMPCaseElements();
@@ -2319,6 +2395,19 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		this.pEOPENACC = new EOPENACCElements();
 		this.pEOPENCL = new EOPENCLElements();
 		this.pECompiler = new ECompilerElements();
+		this.pEConstraint = new EConstraintElements();
+		this.pELogicOper = new ELogicOperElements();
+		this.pEStatement = new EStatementElements();
+		this.pEValue = new EValueElements();
+		this.pEComparisonOperator = new EComparisonOperatorElements();
+		this.tBT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.BT");
+		this.tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.LT");
+		this.tBET = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.BET");
+		this.tLET = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.LET");
+		this.tEQUAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EQUAL");
+		this.tNOT_EQUAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.NOT_EQUAL");
+		this.tOR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.OR");
+		this.tAND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.AND");
 		this.tBEGIN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.BEGIN");
 		this.tEND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.END");
 		this.tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.BOOLEAN");
@@ -2432,7 +2521,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EOptBuild:
-	//	'cpu_type:' cpu_type=ECPUType & 'acc_type:' acc_type=EACCType;
+	//	'cpu_type:' cpu_type=ECPUType & ('acc_type:' acc_type=EACCType) constraint=EConstraint?;
 	public EOptBuildElements getEOptBuildAccess() {
 		return pEOptBuild;
 	}
@@ -2462,10 +2551,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EAutotuning:
-	//	'tuner:' tuner=ETuner & 'input:'
-	//	BEGIN
-	//	input=EAutotuingDSL
-	//	END;
+	//	'tuner:' tuner=ETuner & 'input:' input=STRING;
 	public EAutotuningElements getEAutotuningAccess() {
 		return pEAutotuning;
 	}
@@ -2474,61 +2560,43 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		return getEAutotuningAccess().getRule();
 	}
 	
-	//EAutotuingDSL:
-	//	('parameters:'
-	//	BEGIN
-	//	parameters=EParameters
-	//	END) ('build:'
-	//	BEGIN
-	//	parameters=EBuild
-	//	END) ('run:'
-	//	BEGIN
-	//	parameters=ERun
-	//	END);
-	public EAutotuingDSLElements getEAutotuingDSLAccess() {
-		return pEAutotuingDSL;
-	}
-	
-	public ParserRule getEAutotuingDSLRule() {
-		return getEAutotuingDSLAccess().getRule();
-	}
-	
-	//ERun:
-	//	'command:' command=STRING;
-	public ERunElements getERunAccess() {
-		return pERun;
-	}
-	
-	public ParserRule getERunRule() {
-		return getERunAccess().getRule();
-	}
-	
-	//EBuild:
-	//	'command:' command=STRING;
-	public EBuildElements getEBuildAccess() {
-		return pEBuild;
-	}
-	
-	public ParserRule getEBuildRule() {
-		return getEBuildAccess().getRule();
-	}
-	
-	//EParameters:
-	//	('typing:'
-	//	BEGIN
-	//	'int:' int=STRING
-	//	END) ('constraints:'
-	//	BEGIN
-	//	'range:' range=STRING
-	//	END);
-	public EParametersElements getEParametersAccess() {
-		return pEParameters;
-	}
-	
-	public ParserRule getEParametersRule() {
-		return getEParametersAccess().getRule();
-	}
-	
+	////EAutotuingDSL:
+	////	('parameters:' 
+	////		BEGIN
+	////		parameters=EParameters
+	////		END
+	////	)
+	////	('build:' 
+	////		BEGIN
+	////		parameters=EBuild
+	////		END
+	////	)
+	////	('run:' 
+	////		BEGIN
+	////		parameters=ERun
+	////		END
+	////	)
+	////;
+	////ERun:
+	////	'command:' command = STRING
+	////;
+	////
+	////EBuild:
+	////	'command:' command = STRING
+	////;
+	////
+	////EParameters:
+	////	('typing:' 
+	////		BEGIN
+	////		'int:' int=STRING
+	////		END
+	////	)
+	////	('constraints:' 
+	////		BEGIN
+	////		'range:' range=STRING
+	////		END
+	////	)
+	////;
 	//ETuner:
 	//	'CREATA' | 'AUTOTUNE';
 	public ETunerElements getETunerAccess() {
@@ -2605,8 +2673,8 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EAITrainingConfig:
-	//	'ai_framework:' ai_framework=EAIFramework & ('type:' type=EAITrainingType)? & ('distributed_training:'
-	//	distributed_training=BOOLEAN)? & ('layers:' layers=INT)? & ('parameters:' parameters=INT)?;
+	//	'ai_framework:' ai_framework=EAIFramework & ('type:' type=EAITrainingType)? & (('distributed_training:'
+	//	distributed_training=BOOLEAN) constraint=EConstraint?)? & ('layers:' layers=INT)? & ('parameters:' parameters=INT)?;
 	public EAITrainingConfigElements getEAITrainingConfigAccess() {
 		return pEAITrainingConfig;
 	}
@@ -2637,7 +2705,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//EAITrainingData:
 	//	('location:' location=STRING)? & ('basedata:' basedata=EBasedata)? & ('size:' size=INT)? & ('count:' count=INT)? &
-	//	('etl:'
+	//	('etl:' constraint=EConstraint?
 	//	BEGIN
 	//	etl=EAITrainingETL
 	//	END)?;
@@ -2690,7 +2758,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ETensorFlow:
-	//	('version:' version=STRING)? & ('xla:' xla=BOOLEAN)?;
+	//	('version:' version=STRING)? & (('xla:' xla=BOOLEAN) constraint=EConstraint?)?;
 	public ETensorFlowElements getETensorFlowAccess() {
 		return pETensorFlow;
 	}
@@ -2700,7 +2768,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EPyTorch:
-	//	('version:' version=STRING)? & ('glow:' glow=BOOLEAN)?;
+	//	('version:' version=STRING)? & (('glow:' glow=BOOLEAN) constraint=EConstraint?)?;
 	public EPyTorchElements getEPyTorchAccess() {
 		return pEPyTorch;
 	}
@@ -2716,7 +2784,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	//	END) ('data:'
 	//	BEGIN
 	//	data=EHPCData
-	//	END) hpccase=EHPCCases;
+	//	END) mpi=EMPICase? & openmp=EOPENMPCase? & openacc=EOPENACCCase? & opencl=EOPENCLCase?;
 	public EHPCElements getEHPCAccess() {
 		return pEHPC;
 	}
@@ -2725,18 +2793,8 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		return getEHPCAccess().getRule();
 	}
 	
-	//EHPCCases:
-	//	EMPICase | EOPENMPCase | EOPENACCCase | EOPENCLCase;
-	public EHPCCasesElements getEHPCCasesAccess() {
-		return pEHPCCases;
-	}
-	
-	public ParserRule getEHPCCasesRule() {
-		return getEHPCCasesAccess().getRule();
-	}
-	
 	//EOPENCLCase:
-	//	'opencl:'
+	//	'opencl:' constraint=EConstraint?
 	//	BEGIN
 	//	opencl=EOPENCL
 	//	END;
@@ -2749,7 +2807,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EOPENACCCase:
-	//	'openacc:'
+	//	'openacc:' constraint=EConstraint?
 	//	BEGIN
 	//	openacc=EOPENACC
 	//	END;
@@ -2788,7 +2846,8 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EHPCConfig:
-	//	'parallelisation:' parallelisation=EParallelisation;
+	//	'parallelisation:' parallelisation+=EParallelisation (',' parallelisation+=EParallelisation)* //Multiple selections are supported
+	//;
 	public EHPCConfigElements getEHPCConfigAccess() {
 		return pEHPCConfig;
 	}
@@ -2809,7 +2868,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//EHPCData:
 	//	('location:' location=STRING)? & ('basedata:' basedata=EHPCBasedata)? & ('size:' size=INT)? & ('count:' count=INT)? &
-	//	('etl:'
+	//	('etl:' constraint=EConstraint?
 	//	BEGIN
 	//	etl=EHPCETL
 	//	END)?;
@@ -2921,6 +2980,104 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getECompilerRule() {
 		return getECompilerAccess().getRule();
+	}
+	
+	//EConstraint:
+	//	{EConstraint} '('+ 'Constraint:' statements+=EStatement (ELogicOper statements+=EStatement)* ')';
+	public EConstraintElements getEConstraintAccess() {
+		return pEConstraint;
+	}
+	
+	public ParserRule getEConstraintRule() {
+		return getEConstraintAccess().getRule();
+	}
+	
+	//ELogicOper:
+	//	OR | AND;
+	public ELogicOperElements getELogicOperAccess() {
+		return pELogicOper;
+	}
+	
+	public ParserRule getELogicOperRule() {
+		return getELogicOperAccess().getRule();
+	}
+	
+	//EStatement:
+	//	property=STRING operator=EComparisonOperator value=EValue;
+	public EStatementElements getEStatementAccess() {
+		return pEStatement;
+	}
+	
+	public ParserRule getEStatementRule() {
+		return getEStatementAccess().getRule();
+	}
+	
+	//EValue:
+	//	INT | RealValue;
+	public EValueElements getEValueAccess() {
+		return pEValue;
+	}
+	
+	public ParserRule getEValueRule() {
+		return getEValueAccess().getRule();
+	}
+	
+	//EComparisonOperator:
+	//	BT | LT | BET | LET | EQUAL | NOT_EQUAL;
+	public EComparisonOperatorElements getEComparisonOperatorAccess() {
+		return pEComparisonOperator;
+	}
+	
+	public ParserRule getEComparisonOperatorRule() {
+		return getEComparisonOperatorAccess().getRule();
+	}
+	
+	//terminal BT:
+	//	'>';
+	public TerminalRule getBTRule() {
+		return tBT;
+	}
+	
+	//terminal LT:
+	//	'<';
+	public TerminalRule getLTRule() {
+		return tLT;
+	}
+	
+	//terminal BET:
+	//	'>=';
+	public TerminalRule getBETRule() {
+		return tBET;
+	}
+	
+	//terminal LET:
+	//	'<=';
+	public TerminalRule getLETRule() {
+		return tLET;
+	}
+	
+	//terminal EQUAL:
+	//	'==';
+	public TerminalRule getEQUALRule() {
+		return tEQUAL;
+	}
+	
+	//terminal NOT_EQUAL:
+	//	'!=';
+	public TerminalRule getNOT_EQUALRule() {
+		return tNOT_EQUAL;
+	}
+	
+	//terminal OR:
+	//	'OR';
+	public TerminalRule getORRule() {
+		return tOR;
+	}
+	
+	//terminal AND:
+	//	'AND';
+	public TerminalRule getANDRule() {
+		return tAND;
 	}
 	
 	//terminal BEGIN:
