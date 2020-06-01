@@ -16,7 +16,6 @@ import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import javax.inject.Inject;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -45,7 +44,6 @@ import org.sodalite.dsl.kb_reasoner_client.types.Property;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
-import org.sodalite.dsl.services.AADMGrammarAccess;
 import org.sodalite.dsl.ui.contentassist.AbstractAADMProposalProvider;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
@@ -55,10 +53,7 @@ import org.sodalite.dsl.ui.preferences.PreferenceConstants;
  */
 @SuppressWarnings("all")
 public class AADMProposalProvider extends AbstractAADMProposalProvider {
-  @Inject
-  private AADMGrammarAccess grammarAccess;
-  
-  private final Set<String> keywords = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("node_templates{"));
+  private final Set<Object> keywords = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet());
   
   private final Set<String> assignments = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("nodeTemplates"));
   
@@ -93,6 +88,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
+  @Override
   public void _completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     final ICompletionProposal proposal = this.createCompletionProposal(keyword.getValue(), 
       this.getKeywordDisplayString(keyword), this.getImage(keyword), contentAssistContext);
@@ -376,8 +372,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   
   @Override
   public void complete_AADM_Model(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final String proposalText = "node_templates{";
-    final String displayText = "node_templates{";
+    final String proposalText = "node_templates:";
+    final String displayText = "node_templates:";
     final String additionalProposalInfo = "A list of node template definitions for the Topology Template";
     this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
   }

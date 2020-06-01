@@ -11,7 +11,6 @@
 
 package org.sodalite.dsl.ui.contentassist
 
-import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.Assignment
@@ -20,7 +19,6 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
-import org.sodalite.dsl.services.AADMGrammarAccess
 import org.eclipse.xtext.impl.KeywordImpl
 import org.eclipse.xtext.ParserRule
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient
@@ -46,9 +44,8 @@ import java.text.MessageFormat
  */
 class AADMProposalProvider extends AbstractAADMProposalProvider {
 
-	@Inject AADMGrammarAccess grammarAccess
-
-	val keywords = #{'node_templates{'}
+	//val keywords = #{'node_templates:'}
+	val keywords = #{}
 	val assignments = #{'nodeTemplates'}
 	KBReasoner kbclient;
 	new(){
@@ -75,7 +72,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			_completeKeyword(keyword, contentAssistContext, acceptor);
 	}
 
-	def void _completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+	override void _completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 		ICompletionProposalAcceptor acceptor) {
 		val ICompletionProposal proposal = createCompletionProposal(keyword.getValue(),
 			getKeywordDisplayString(keyword), getImage(keyword), contentAssistContext);
@@ -271,8 +268,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	// Keywords
 	override void complete_AADM_Model(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		val String proposalText = "node_templates{"
-		val String displayText = "node_templates{"
+		val String proposalText = "node_templates:"
+		val String displayText = "node_templates:"
 		val String additionalProposalInfo = "A list of node template definitions for the Topology Template"
 
 		createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);

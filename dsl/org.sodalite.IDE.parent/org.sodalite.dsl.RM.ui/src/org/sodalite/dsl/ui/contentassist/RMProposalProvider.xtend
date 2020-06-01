@@ -11,13 +11,12 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.Keyword
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
- 
-
 
 class RMProposalProvider extends AbstractRMProposalProvider {	
 	final String SELF_DESCRIPTION = 
@@ -31,6 +30,20 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	"at the target end of the relationship that contains the referencing function"
 	final String HOST_DESCRIPTION = "A TOSCA orchestrator will interpret this keyword to refer\n" + 
 	"to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship)."
+	
+	// this override filters the keywords for which to create content assist proposals
+	override void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+		ICompletionProposalAcceptor acceptor) {
+		_completeKeyword(keyword, contentAssistContext, acceptor);
+	}
+
+	def void _completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+		ICompletionProposalAcceptor acceptor) {
+		val ICompletionProposal proposal = createCompletionProposal(keyword.getValue(),
+			getKeywordDisplayString(keyword), getImage(keyword), contentAssistContext);
+		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
+		acceptor.accept(proposal);
+	}
 	
 	override void completeENodeType_Name(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {

@@ -6,6 +6,7 @@ package org.sodalite.dsl.ui.contentassist;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -35,6 +36,18 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   private final String HOST_DESCRIPTION = ("A TOSCA orchestrator will interpret this keyword to refer\n" + 
     "to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship).");
+  
+  @Override
+  public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
+    this._completeKeyword(keyword, contentAssistContext, acceptor);
+  }
+  
+  public void _completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
+    final ICompletionProposal proposal = this.createCompletionProposal(keyword.getValue(), 
+      this.getKeywordDisplayString(keyword), this.getImage(keyword), contentAssistContext);
+    this.getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
+    acceptor.accept(proposal);
+  }
   
   @Override
   public void completeENodeType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
