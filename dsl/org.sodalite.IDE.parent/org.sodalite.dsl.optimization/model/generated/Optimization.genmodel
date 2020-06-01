@@ -143,6 +143,7 @@
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EConstraint">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EConstraint/statements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EConstraint/logicOpers"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EStatement/property"/>

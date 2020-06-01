@@ -171,6 +171,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="EConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
         eType="#//EStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicOpers" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EStatement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="property" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

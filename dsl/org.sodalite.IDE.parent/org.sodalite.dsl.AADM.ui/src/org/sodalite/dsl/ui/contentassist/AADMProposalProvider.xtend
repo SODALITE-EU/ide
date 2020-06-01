@@ -180,7 +180,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					var attribute_label = attribute.uri.toString.substring(attribute.uri.toString.lastIndexOf('/') + 1, attribute.uri.toString.length)
 					proposalText = attribute_label
 					displayText = attribute_label
-					additionalProposalInfo = "Type: " + attribute.type.label + "\nDescription: " + attribute.description
+					additionalProposalInfo = attribute.type.label!==null?"Type: " + attribute.type.label:""
+					additionalProposalInfo += attribute.description!==null?"\nDescription: " + attribute.description:""
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 				}
 		}
@@ -213,7 +214,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				 	var property_label = property.uri.toString.substring(property.uri.toString.lastIndexOf('/') + 1, property.uri.toString.length)
 					proposalText = property_label
 					displayText = property_label
-					additionalProposalInfo = "Type: " + property.type.label + "\nDescription: " + property.description
+					additionalProposalInfo = (property.type.label!==null?"Type: " + property.type.label:"") 
+					additionalProposalInfo += property.description!==null?"\nDescription: " + property.description:""
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 				 }
 			}
