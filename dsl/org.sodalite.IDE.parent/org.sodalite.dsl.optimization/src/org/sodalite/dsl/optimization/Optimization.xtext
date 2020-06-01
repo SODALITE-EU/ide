@@ -76,45 +76,6 @@ EAutotuning:
 	('input:' input=STRING) //TODO Prompt user with UI to select Autotuning model from the filesystem
 ;
 
-//EAutotuingDSL:
-//	('parameters:' 
-//		BEGIN
-//		parameters=EParameters
-//		END
-//	)
-//	('build:' 
-//		BEGIN
-//		parameters=EBuild
-//		END
-//	)
-//	('run:' 
-//		BEGIN
-//		parameters=ERun
-//		END
-//	)
-//;
-
-//ERun:
-//	'command:' command = STRING
-//;
-//
-//EBuild:
-//	'command:' command = STRING
-//;
-//
-//EParameters:
-//	('typing:' 
-//		BEGIN
-//		'int:' int=STRING
-//		END
-//	)
-//	('constraints:' 
-//		BEGIN
-//		'range:' range=STRING
-//		END
-//	)
-//;
-
 ETuner:
 	'CREATA' | 'AUTOTUNE'  ;
 
@@ -327,7 +288,7 @@ ECompiler:
 	'pgi' | 'cray' ;
 
 EConstraint:
-	{EConstraint} '(' + 'Constraint:' statements+=EStatement (ELogicOper statements+= EStatement)* ')'
+	{EConstraint} '(' + 'Constraint:' statements+=EStatement ((logicOpers+=ELogicOper) statements+= EStatement)* ')'
 ;
 
 ELogicOper:

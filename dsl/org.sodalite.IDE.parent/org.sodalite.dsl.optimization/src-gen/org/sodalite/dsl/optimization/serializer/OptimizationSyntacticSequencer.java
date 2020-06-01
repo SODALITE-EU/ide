@@ -32,8 +32,6 @@ public class OptimizationSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (ruleCall.getRule() == grammarAccess.getBEGINRule())
 			return getBEGINToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getELogicOperRule())
-			return getELogicOperToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getENDRule())
 			return getENDToken(semanticObject, ruleCall, node);
 		return "";
@@ -44,17 +42,6 @@ public class OptimizationSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * Defaults to the empty string.
 	 */
 	protected String getBEGINToken(EObject semanticObject, RuleCall ruleCall, INode node) { return ""; }
-	
-	/**
-	 * ELogicOper:
-	 * 	OR | AND
-	 * ;
-	 */
-	protected String getELogicOperToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "OR";
-	}
 	
 	/**
 	 * Synthetic terminal rule. The concrete syntax is to be specified by clients.

@@ -117,23 +117,43 @@ public class OptimizationValidator extends AbstractOptimizationValidator {
   public void checkHPCConfigMandatoryElement(final EHPCConfig conf) {
     EObject _eContainer = conf.eContainer();
     final EHPC parent = ((EHPC) _eContainer);
-    if ((conf.getParallelisation().contains("MPI") && (!(parent.getMpi() != null)))) {
-      this.error("A mpi property should be present if ai_framework is MPI", 
+    if ((conf.getParallelisation().contains("MPI") && (parent.getMpi() == null))) {
+      this.error("A mpi property should be present if parallelisation contains MPI", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((conf.getParallelisation().contains("OPENMP") && (!(parent.getOpenmp() != null)))) {
-      this.error("A openmp property should be present if ai_framework is OPENMP", 
+    if ((conf.getParallelisation().contains("OPENMP") && (parent.getOpenmp() == null))) {
+      this.error("A openmp property should be present if parallelisation contains OPENMP", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((conf.getParallelisation().contains("OPENACC") && (!(parent.getOpenacc() != null)))) {
-      this.error("A openacc property should be present if ai_framework is OPENACC", 
+    if ((conf.getParallelisation().contains("OPENACC") && (parent.getOpenacc() == null))) {
+      this.error("A openacc property should be present if parallelisation contains OPENACC", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((conf.getParallelisation().contains("OPENCL") && (!(!Objects.equal(parent.getOpencl(), null))))) {
-      this.error("A opencl property should be present if ai_framework is OPENCL", 
+    if ((conf.getParallelisation().contains("OPENCL") && (parent.getOpencl() == null))) {
+      this.error("A opencl property should be present if parallelisation contains OPENCL", 
+        OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if (((parent.getMpi() != null) && (!conf.getParallelisation().contains("MPI")))) {
+      this.error("Parallelisation should contains MPI as an mpi property exists", 
+        OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if (((parent.getOpenmp() != null) && (!conf.getParallelisation().contains("OPENMP")))) {
+      this.error("Parallelisation should contains OPENMP as an openmp property exists", 
+        OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if (((parent.getOpenacc() != null) && (!conf.getParallelisation().contains("OPENACC")))) {
+      this.error("Parallelisation should contains OPENACC as an openacc property exists", 
+        OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
+        OptimizationValidator.MANDATORY_ELEMENT);
+    }
+    if (((parent.getOpencl() != null) && (!conf.getParallelisation().contains("OPENCL")))) {
+      this.error("Parallelisation should contains OPENCL as an opencl property exists", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }

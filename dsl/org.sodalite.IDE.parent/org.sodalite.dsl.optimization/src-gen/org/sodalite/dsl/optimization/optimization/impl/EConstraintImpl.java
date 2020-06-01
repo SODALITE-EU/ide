@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -30,6 +31,7 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EConstraintImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EConstraintImpl#getLogicOpers <em>Logic Opers</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,6 +47,16 @@ public class EConstraintImpl extends MinimalEObjectImpl.Container implements ECo
    * @ordered
    */
   protected EList<EStatement> statements;
+
+  /**
+   * The cached value of the '{@link #getLogicOpers() <em>Logic Opers</em>}' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLogicOpers()
+   * @generated
+   * @ordered
+   */
+  protected EList<String> logicOpers;
 
   /**
    * <!-- begin-user-doc -->
@@ -88,6 +100,21 @@ public class EConstraintImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
+  public EList<String> getLogicOpers()
+  {
+    if (logicOpers == null)
+    {
+      logicOpers = new EDataTypeEList<String>(String.class, this, OptimizationPackage.ECONSTRAINT__LOGIC_OPERS);
+    }
+    return logicOpers;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -110,6 +137,8 @@ public class EConstraintImpl extends MinimalEObjectImpl.Container implements ECo
     {
       case OptimizationPackage.ECONSTRAINT__STATEMENTS:
         return getStatements();
+      case OptimizationPackage.ECONSTRAINT__LOGIC_OPERS:
+        return getLogicOpers();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -129,6 +158,10 @@ public class EConstraintImpl extends MinimalEObjectImpl.Container implements ECo
         getStatements().clear();
         getStatements().addAll((Collection<? extends EStatement>)newValue);
         return;
+      case OptimizationPackage.ECONSTRAINT__LOGIC_OPERS:
+        getLogicOpers().clear();
+        getLogicOpers().addAll((Collection<? extends String>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -146,6 +179,9 @@ public class EConstraintImpl extends MinimalEObjectImpl.Container implements ECo
       case OptimizationPackage.ECONSTRAINT__STATEMENTS:
         getStatements().clear();
         return;
+      case OptimizationPackage.ECONSTRAINT__LOGIC_OPERS:
+        getLogicOpers().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -162,8 +198,27 @@ public class EConstraintImpl extends MinimalEObjectImpl.Container implements ECo
     {
       case OptimizationPackage.ECONSTRAINT__STATEMENTS:
         return statements != null && !statements.isEmpty();
+      case OptimizationPackage.ECONSTRAINT__LOGIC_OPERS:
+        return logicOpers != null && !logicOpers.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (logicOpers: ");
+    result.append(logicOpers);
+    result.append(')');
+    return result.toString();
   }
 
 } //EConstraintImpl

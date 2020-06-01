@@ -7274,9 +7274,9 @@ rule__EConstraint__Group_4__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEConstraintAccess().getELogicOperParserRuleCall_4_0()); }
-	ruleELogicOper
-	{ after(grammarAccess.getEConstraintAccess().getELogicOperParserRuleCall_4_0()); }
+	{ before(grammarAccess.getEConstraintAccess().getLogicOpersAssignment_4_0()); }
+	(rule__EConstraint__LogicOpersAssignment_4_0)
+	{ after(grammarAccess.getEConstraintAccess().getLogicOpersAssignment_4_0()); }
 )
 ;
 finally {
@@ -10355,6 +10355,21 @@ rule__EConstraint__StatementsAssignment_3
 		{ before(grammarAccess.getEConstraintAccess().getStatementsEStatementParserRuleCall_3_0()); }
 		ruleEStatement
 		{ after(grammarAccess.getEConstraintAccess().getStatementsEStatementParserRuleCall_3_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EConstraint__LogicOpersAssignment_4_0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getEConstraintAccess().getLogicOpersELogicOperParserRuleCall_4_0_0()); }
+		ruleELogicOper
+		{ after(grammarAccess.getEConstraintAccess().getLogicOpersELogicOperParserRuleCall_4_0_0()); }
 	)
 ;
 finally {

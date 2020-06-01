@@ -1340,13 +1340,22 @@ public interface OptimizationPackage extends EPackage
   int ECONSTRAINT__STATEMENTS = 0;
 
   /**
+   * The feature id for the '<em><b>Logic Opers</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONSTRAINT__LOGIC_OPERS = 1;
+
+  /**
    * The number of structural features of the '<em>EConstraint</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ECONSTRAINT_FEATURE_COUNT = 1;
+  int ECONSTRAINT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EStatementImpl <em>EStatement</em>}' class.
@@ -2564,6 +2573,17 @@ public interface OptimizationPackage extends EPackage
   EReference getEConstraint_Statements();
 
   /**
+   * Returns the meta object for the attribute list '{@link org.sodalite.dsl.optimization.optimization.EConstraint#getLogicOpers <em>Logic Opers</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Logic Opers</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.EConstraint#getLogicOpers()
+   * @see #getEConstraint()
+   * @generated
+   */
+  EAttribute getEConstraint_LogicOpers();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.dsl.optimization.optimization.EStatement <em>EStatement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3562,6 +3582,14 @@ public interface OptimizationPackage extends EPackage
      * @generated
      */
     EReference ECONSTRAINT__STATEMENTS = eINSTANCE.getEConstraint_Statements();
+
+    /**
+     * The meta object literal for the '<em><b>Logic Opers</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ECONSTRAINT__LOGIC_OPERS = eINSTANCE.getEConstraint_LogicOpers();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.optimization.optimization.impl.EStatementImpl <em>EStatement</em>}' class.

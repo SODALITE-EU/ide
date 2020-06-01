@@ -1412,31 +1412,26 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     _builder.newLine();
-    {
-      boolean _isRequired = p.getProperty().isRequired();
-      if (_isRequired) {
-        this.putParameterNumber(p, "required", Integer.valueOf(this.parameter_counter));
-        _builder.newLineIfNotEmpty();
-        _builder.append(":Parameter_");
-        int _plusPlus_1 = this.parameter_counter++;
-        _builder.append(_plusPlus_1);
-        _builder.newLineIfNotEmpty();
-        _builder.append("  ");
-        _builder.append("rdf:type exchange:Parameter ;");
-        _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:name \"required\" ;");
-        _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:value \'");
-        boolean _isRequired_1 = p.getProperty().isRequired();
-        _builder.append(_isRequired_1, "  ");
-        _builder.append("\' ;");
-        _builder.newLineIfNotEmpty();
-        _builder.append(".");
-        _builder.newLine();
-      }
-    }
+    this.putParameterNumber(p, "required", Integer.valueOf(this.parameter_counter));
+    _builder.newLineIfNotEmpty();
+    _builder.append(":Parameter_");
+    int _plusPlus_1 = this.parameter_counter++;
+    _builder.append(_plusPlus_1);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Parameter ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:name \"required\" ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:value \'");
+    boolean _isRequired = p.getProperty().isRequired();
+    _builder.append(_isRequired, "  ");
+    _builder.append("\' ;");
+    _builder.newLineIfNotEmpty();
+    _builder.append(".");
+    _builder.newLine();
     _builder.newLine();
     {
       EValueExpression _default = p.getProperty().getDefault();
@@ -1592,14 +1587,20 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("  ");
+    _builder.append("exchange:hasParameter :Parameter_");
+    Integer _parameterNumber_2 = this.getParameterNumber(p, "required");
+    _builder.append(_parameterNumber_2, "  ");
+    _builder.append(" ;");
+    _builder.newLineIfNotEmpty();
     {
       EValueExpression _default_1 = p.getProperty().getDefault();
       boolean _tripleNotEquals_7 = (_default_1 != null);
       if (_tripleNotEquals_7) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_2 = this.getParameterNumber(p, "default");
-        _builder.append(_parameterNumber_2, "  ");
+        Integer _parameterNumber_3 = this.getParameterNumber(p, "default");
+        _builder.append(_parameterNumber_3, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -1610,8 +1611,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_8) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_3 = this.getParameterNumber(p, "status");
-        _builder.append(_parameterNumber_3, "  ");
+        Integer _parameterNumber_4 = this.getParameterNumber(p, "status");
+        _builder.append(_parameterNumber_4, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -1622,8 +1623,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_9) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_4 = this.getParameterNumber(p, "entry_schema");
-        _builder.append(_parameterNumber_4, "  ");
+        Integer _parameterNumber_5 = this.getParameterNumber(p, "entry_schema");
+        _builder.append(_parameterNumber_5, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -1634,8 +1635,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_10) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_5 = this.getParameterNumber(p, "constraints");
-        _builder.append(_parameterNumber_5, "  ");
+        Integer _parameterNumber_6 = this.getParameterNumber(p, "constraints");
+        _builder.append(_parameterNumber_6, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -1688,7 +1689,7 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("rdf:type exchange:Parameter ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:name \"required\" ;");
+        _builder.append("exchange:name \"entry_schema\" ;");
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");

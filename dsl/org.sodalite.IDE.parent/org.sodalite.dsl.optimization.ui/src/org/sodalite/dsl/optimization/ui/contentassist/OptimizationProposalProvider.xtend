@@ -292,11 +292,35 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 		createNonEditableCompletionProposal ("cray", "cray", context, "", acceptor);	
 	}
 
+	override void completeEOPENACC_Compiler(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("pgi", "pgi", context, "", acceptor);
+		createNonEditableCompletionProposal ("cray", "cray", context, "", acceptor);	
+	}
+	
+	override completeEConstraint_LogicOpers(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal ("OR", "OR", context, "", acceptor);
+		createNonEditableCompletionProposal ("AND", "AND", context, "", acceptor);
+	}
+	
+	override void completeEStatement_Operator(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal (">", ">", context, "", acceptor);
+		createNonEditableCompletionProposal ("<", "<", context, "", acceptor);
+		createNonEditableCompletionProposal (">=", ">=", context, "", acceptor);
+		createNonEditableCompletionProposal ("<=", "<=", context, "", acceptor);
+		createNonEditableCompletionProposal ("==", "==", context, "", acceptor);
+		createNonEditableCompletionProposal ("!=", "!=", context, "", acceptor);
+	}
+	
+	override void completeEStatement_Value(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createEditableCompletionProposal ("<integer or number>", "<integer or number>", context, "", acceptor);
+	
+	}
+
 	protected def void createBooleanCompletionProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createNonEditableCompletionProposal ("true", "true", context, "", acceptor);
 		createNonEditableCompletionProposal ("false", "false", context, "", acceptor);
-	}	
-
+	}
+	
 	protected def void createNonEditableCompletionProposal(String proposalText, String displayText,
 		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);

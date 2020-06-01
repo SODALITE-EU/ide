@@ -252,7 +252,7 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EConstraint returns EConstraint
 	 *
 	 * Constraint:
-	 *     (statements+=EStatement statements+=EStatement*)
+	 *     (statements+=EStatement (logicOpers+=ELogicOper statements+=EStatement)*)
 	 */
 	protected void sequence_EConstraint(ISerializationContext context, EConstraint semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -3828,13 +3828,25 @@ ruleEConstraint returns [EObject current=null]
 			)
 		)
 		(
-			{
-				newCompositeNode(grammarAccess.getEConstraintAccess().getELogicOperParserRuleCall_4_0());
-			}
-			ruleELogicOper
-			{
-				afterParserOrEnumRuleCall();
-			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEConstraintAccess().getLogicOpersELogicOperParserRuleCall_4_0_0());
+					}
+					lv_logicOpers_4_0=ruleELogicOper
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEConstraintRule());
+						}
+						add(
+							$current,
+							"logicOpers",
+							lv_logicOpers_4_0,
+							"org.sodalite.dsl.optimization.Optimization.ELogicOper");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
 			(
 				(
 					{

@@ -99,7 +99,7 @@ node_types:
 				description: "Commands list for starting the container"
 				default: ""
 				required: false
-			
+		
 			env:
 				type: map
 				description: "Map for docker environment variables key-value dictionary"
@@ -264,7 +264,7 @@ node_types:
 			name:
 				type: string
 				description: 'Name that should be given to the VM in OpenStack'
-			
+		
 			image:
 				type: string
 				description: 'OpenStack image id (image names are not accepted)'

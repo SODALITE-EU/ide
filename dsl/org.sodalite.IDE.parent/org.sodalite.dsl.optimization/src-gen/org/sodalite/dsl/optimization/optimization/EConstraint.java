@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EConstraint#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.EConstraint#getLogicOpers <em>Logic Opers</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEConstraint()
@@ -36,5 +37,17 @@ public interface EConstraint extends EObject
    * @generated
    */
   EList<EStatement> getStatements();
+
+  /**
+   * Returns the value of the '<em><b>Logic Opers</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Logic Opers</em>' attribute list.
+   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEConstraint_LogicOpers()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getLogicOpers();
 
 } // EConstraint

@@ -33,7 +33,7 @@ node_templates:
 			network: 'orchestrator-net'
 			security_groups: 'default,snow'
 			key_name: get_input: ssh-key-name
-			user_name: 'root'
+			user-name: 'root'
 		 
 		requirements:
 			// TODO (SIMPLIFICATION) protected_by requirement (optional) could be missed, and resolved by the KB
@@ -59,7 +59,7 @@ node_templates:
 			// whose capabilities satisfy the requirement
 			host:
 				node: snow-vm
- 
+
 	skyline_extractor:
 		 type: sodalite.nodes.DockerizedComponent
 		 properties:
@@ -67,6 +67,7 @@ node_templates:
 		 	ports: ['8080:8080']
 		 	exposed_ports: ['8080']
 		 	volumes: "/tmp/docker:/tmp"
+		 	
 		 
 		 requirements:
 		 	// TODO (SIMPLIFICATION) see above

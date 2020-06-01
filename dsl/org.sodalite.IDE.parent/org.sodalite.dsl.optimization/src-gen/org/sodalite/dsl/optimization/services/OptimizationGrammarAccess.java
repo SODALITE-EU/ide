@@ -451,43 +451,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCREATAKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cAUTOTUNEKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
-		////EAutotuingDSL:
-		////	('parameters:' 
-		////		BEGIN
-		////		parameters=EParameters
-		////		END
-		////	)
-		////	('build:' 
-		////		BEGIN
-		////		parameters=EBuild
-		////		END
-		////	)
-		////	('run:' 
-		////		BEGIN
-		////		parameters=ERun
-		////		END
-		////	)
-		////;
-		////ERun:
-		////	'command:' command = STRING
-		////;
-		////
-		////EBuild:
-		////	'command:' command = STRING
-		////;
-		////
-		////EParameters:
-		////	('typing:' 
-		////		BEGIN
-		////		'int:' int=STRING
-		////		END
-		////	)
-		////	('constraints:' 
-		////		BEGIN
-		////		'range:' range=STRING
-		////		END
-		////	)
-		////;
 		//ETuner:
 		//	'CREATA' | 'AUTOTUNE';
 		@Override public ParserRule getRule() { return rule; }
@@ -2084,16 +2047,17 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cStatementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cStatementsEStatementParserRuleCall_3_0 = (RuleCall)cStatementsAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final RuleCall cELogicOperParserRuleCall_4_0 = (RuleCall)cGroup_4.eContents().get(0);
+		private final Assignment cLogicOpersAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final RuleCall cLogicOpersELogicOperParserRuleCall_4_0_0 = (RuleCall)cLogicOpersAssignment_4_0.eContents().get(0);
 		private final Assignment cStatementsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final RuleCall cStatementsEStatementParserRuleCall_4_1_0 = (RuleCall)cStatementsAssignment_4_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//EConstraint:
-		//	{EConstraint} '('+ 'Constraint:' statements+=EStatement (ELogicOper statements+=EStatement)* ')';
+		//	{EConstraint} '('+ 'Constraint:' statements+=EStatement (logicOpers+=ELogicOper statements+=EStatement)* ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{EConstraint} '('+ 'Constraint:' statements+=EStatement (ELogicOper statements+=EStatement)* ')'
+		//{EConstraint} '('+ 'Constraint:' statements+=EStatement (logicOpers+=ELogicOper statements+=EStatement)* ')'
 		public Group getGroup() { return cGroup; }
 		
 		//{EConstraint}
@@ -2111,11 +2075,14 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//EStatement
 		public RuleCall getStatementsEStatementParserRuleCall_3_0() { return cStatementsEStatementParserRuleCall_3_0; }
 		
-		//(ELogicOper statements+=EStatement)*
+		//(logicOpers+=ELogicOper statements+=EStatement)*
 		public Group getGroup_4() { return cGroup_4; }
 		
+		//logicOpers+=ELogicOper
+		public Assignment getLogicOpersAssignment_4_0() { return cLogicOpersAssignment_4_0; }
+		
 		//ELogicOper
-		public RuleCall getELogicOperParserRuleCall_4_0() { return cELogicOperParserRuleCall_4_0; }
+		public RuleCall getLogicOpersELogicOperParserRuleCall_4_0_0() { return cLogicOpersELogicOperParserRuleCall_4_0_0; }
 		
 		//statements+=EStatement
 		public Assignment getStatementsAssignment_4_1() { return cStatementsAssignment_4_1; }
@@ -2560,43 +2527,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		return getEAutotuningAccess().getRule();
 	}
 	
-	////EAutotuingDSL:
-	////	('parameters:' 
-	////		BEGIN
-	////		parameters=EParameters
-	////		END
-	////	)
-	////	('build:' 
-	////		BEGIN
-	////		parameters=EBuild
-	////		END
-	////	)
-	////	('run:' 
-	////		BEGIN
-	////		parameters=ERun
-	////		END
-	////	)
-	////;
-	////ERun:
-	////	'command:' command = STRING
-	////;
-	////
-	////EBuild:
-	////	'command:' command = STRING
-	////;
-	////
-	////EParameters:
-	////	('typing:' 
-	////		BEGIN
-	////		'int:' int=STRING
-	////		END
-	////	)
-	////	('constraints:' 
-	////		BEGIN
-	////		'range:' range=STRING
-	////		END
-	////	)
-	////;
 	//ETuner:
 	//	'CREATA' | 'AUTOTUNE';
 	public ETunerElements getETunerAccess() {
@@ -2983,7 +2913,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EConstraint:
-	//	{EConstraint} '('+ 'Constraint:' statements+=EStatement (ELogicOper statements+=EStatement)* ')';
+	//	{EConstraint} '('+ 'Constraint:' statements+=EStatement (logicOpers+=ELogicOper statements+=EStatement)* ')';
 	public EConstraintElements getEConstraintAccess() {
 		return pEConstraint;
 	}

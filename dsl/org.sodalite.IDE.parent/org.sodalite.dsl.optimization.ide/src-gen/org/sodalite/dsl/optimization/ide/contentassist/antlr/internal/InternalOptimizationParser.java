@@ -5863,11 +5863,11 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             if ( (LA18_0==RULE_INT) ) {
                 int LA18_1 = input.LA(2);
 
-                if ( (LA18_1==EOF||LA18_1==RightParenthesis||(LA18_1>=RULE_OR && LA18_1<=RULE_AND)) ) {
-                    alt18=1;
-                }
-                else if ( (LA18_1==FullStop) ) {
+                if ( (LA18_1==FullStop) ) {
                     alt18=2;
+                }
+                else if ( (LA18_1==EOF||LA18_1==RightParenthesis||(LA18_1>=RULE_OR && LA18_1<=RULE_AND)) ) {
+                    alt18=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -21579,25 +21579,31 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EConstraint__Group_4__0__Impl"
-    // InternalOptimizationParser.g:7271:1: rule__EConstraint__Group_4__0__Impl : ( ruleELogicOper ) ;
+    // InternalOptimizationParser.g:7271:1: rule__EConstraint__Group_4__0__Impl : ( ( rule__EConstraint__LogicOpersAssignment_4_0 ) ) ;
     public final void rule__EConstraint__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:7275:1: ( ( ruleELogicOper ) )
-            // InternalOptimizationParser.g:7276:1: ( ruleELogicOper )
+            // InternalOptimizationParser.g:7275:1: ( ( ( rule__EConstraint__LogicOpersAssignment_4_0 ) ) )
+            // InternalOptimizationParser.g:7276:1: ( ( rule__EConstraint__LogicOpersAssignment_4_0 ) )
             {
-            // InternalOptimizationParser.g:7276:1: ( ruleELogicOper )
-            // InternalOptimizationParser.g:7277:2: ruleELogicOper
+            // InternalOptimizationParser.g:7276:1: ( ( rule__EConstraint__LogicOpersAssignment_4_0 ) )
+            // InternalOptimizationParser.g:7277:2: ( rule__EConstraint__LogicOpersAssignment_4_0 )
             {
-             before(grammarAccess.getEConstraintAccess().getELogicOperParserRuleCall_4_0()); 
+             before(grammarAccess.getEConstraintAccess().getLogicOpersAssignment_4_0()); 
+            // InternalOptimizationParser.g:7278:2: ( rule__EConstraint__LogicOpersAssignment_4_0 )
+            // InternalOptimizationParser.g:7278:3: rule__EConstraint__LogicOpersAssignment_4_0
+            {
             pushFollow(FOLLOW_2);
-            ruleELogicOper();
+            rule__EConstraint__LogicOpersAssignment_4_0();
 
             state._fsp--;
 
-             after(grammarAccess.getEConstraintAccess().getELogicOperParserRuleCall_4_0()); 
+
+            }
+
+             after(grammarAccess.getEConstraintAccess().getLogicOpersAssignment_4_0()); 
 
             }
 
@@ -31539,18 +31545,59 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__EConstraint__StatementsAssignment_3"
 
 
+    // $ANTLR start "rule__EConstraint__LogicOpersAssignment_4_0"
+    // InternalOptimizationParser.g:10364:1: rule__EConstraint__LogicOpersAssignment_4_0 : ( ruleELogicOper ) ;
+    public final void rule__EConstraint__LogicOpersAssignment_4_0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalOptimizationParser.g:10368:1: ( ( ruleELogicOper ) )
+            // InternalOptimizationParser.g:10369:2: ( ruleELogicOper )
+            {
+            // InternalOptimizationParser.g:10369:2: ( ruleELogicOper )
+            // InternalOptimizationParser.g:10370:3: ruleELogicOper
+            {
+             before(grammarAccess.getEConstraintAccess().getLogicOpersELogicOperParserRuleCall_4_0_0()); 
+            pushFollow(FOLLOW_2);
+            ruleELogicOper();
+
+            state._fsp--;
+
+             after(grammarAccess.getEConstraintAccess().getLogicOpersELogicOperParserRuleCall_4_0_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__EConstraint__LogicOpersAssignment_4_0"
+
+
     // $ANTLR start "rule__EConstraint__StatementsAssignment_4_1"
-    // InternalOptimizationParser.g:10364:1: rule__EConstraint__StatementsAssignment_4_1 : ( ruleEStatement ) ;
+    // InternalOptimizationParser.g:10379:1: rule__EConstraint__StatementsAssignment_4_1 : ( ruleEStatement ) ;
     public final void rule__EConstraint__StatementsAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:10368:1: ( ( ruleEStatement ) )
-            // InternalOptimizationParser.g:10369:2: ( ruleEStatement )
+            // InternalOptimizationParser.g:10383:1: ( ( ruleEStatement ) )
+            // InternalOptimizationParser.g:10384:2: ( ruleEStatement )
             {
-            // InternalOptimizationParser.g:10369:2: ( ruleEStatement )
-            // InternalOptimizationParser.g:10370:3: ruleEStatement
+            // InternalOptimizationParser.g:10384:2: ( ruleEStatement )
+            // InternalOptimizationParser.g:10385:3: ruleEStatement
             {
              before(grammarAccess.getEConstraintAccess().getStatementsEStatementParserRuleCall_4_1_0()); 
             pushFollow(FOLLOW_2);
@@ -31581,17 +31628,17 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EStatement__PropertyAssignment_0"
-    // InternalOptimizationParser.g:10379:1: rule__EStatement__PropertyAssignment_0 : ( RULE_STRING ) ;
+    // InternalOptimizationParser.g:10394:1: rule__EStatement__PropertyAssignment_0 : ( RULE_STRING ) ;
     public final void rule__EStatement__PropertyAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:10383:1: ( ( RULE_STRING ) )
-            // InternalOptimizationParser.g:10384:2: ( RULE_STRING )
+            // InternalOptimizationParser.g:10398:1: ( ( RULE_STRING ) )
+            // InternalOptimizationParser.g:10399:2: ( RULE_STRING )
             {
-            // InternalOptimizationParser.g:10384:2: ( RULE_STRING )
-            // InternalOptimizationParser.g:10385:3: RULE_STRING
+            // InternalOptimizationParser.g:10399:2: ( RULE_STRING )
+            // InternalOptimizationParser.g:10400:3: RULE_STRING
             {
              before(grammarAccess.getEStatementAccess().getPropertySTRINGTerminalRuleCall_0_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -31618,17 +31665,17 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EStatement__OperatorAssignment_1"
-    // InternalOptimizationParser.g:10394:1: rule__EStatement__OperatorAssignment_1 : ( ruleEComparisonOperator ) ;
+    // InternalOptimizationParser.g:10409:1: rule__EStatement__OperatorAssignment_1 : ( ruleEComparisonOperator ) ;
     public final void rule__EStatement__OperatorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:10398:1: ( ( ruleEComparisonOperator ) )
-            // InternalOptimizationParser.g:10399:2: ( ruleEComparisonOperator )
+            // InternalOptimizationParser.g:10413:1: ( ( ruleEComparisonOperator ) )
+            // InternalOptimizationParser.g:10414:2: ( ruleEComparisonOperator )
             {
-            // InternalOptimizationParser.g:10399:2: ( ruleEComparisonOperator )
-            // InternalOptimizationParser.g:10400:3: ruleEComparisonOperator
+            // InternalOptimizationParser.g:10414:2: ( ruleEComparisonOperator )
+            // InternalOptimizationParser.g:10415:3: ruleEComparisonOperator
             {
              before(grammarAccess.getEStatementAccess().getOperatorEComparisonOperatorParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -31659,17 +31706,17 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EStatement__ValueAssignment_2"
-    // InternalOptimizationParser.g:10409:1: rule__EStatement__ValueAssignment_2 : ( ruleEValue ) ;
+    // InternalOptimizationParser.g:10424:1: rule__EStatement__ValueAssignment_2 : ( ruleEValue ) ;
     public final void rule__EStatement__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:10413:1: ( ( ruleEValue ) )
-            // InternalOptimizationParser.g:10414:2: ( ruleEValue )
+            // InternalOptimizationParser.g:10428:1: ( ( ruleEValue ) )
+            // InternalOptimizationParser.g:10429:2: ( ruleEValue )
             {
-            // InternalOptimizationParser.g:10414:2: ( ruleEValue )
-            // InternalOptimizationParser.g:10415:3: ruleEValue
+            // InternalOptimizationParser.g:10429:2: ( ruleEValue )
+            // InternalOptimizationParser.g:10430:3: ruleEValue
             {
              before(grammarAccess.getEStatementAccess().getValueEValueParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);

@@ -1539,6 +1539,17 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
+  public EAttribute getEConstraint_LogicOpers()
+  {
+    return (EAttribute)eConstraintEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEStatement()
   {
     return eStatementEClass;
@@ -1747,6 +1758,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
 
     eConstraintEClass = createEClass(ECONSTRAINT);
     createEReference(eConstraintEClass, ECONSTRAINT__STATEMENTS);
+    createEAttribute(eConstraintEClass, ECONSTRAINT__LOGIC_OPERS);
 
     eStatementEClass = createEClass(ESTATEMENT);
     createEAttribute(eStatementEClass, ESTATEMENT__PROPERTY);
@@ -1929,6 +1941,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
 
     initEClass(eConstraintEClass, EConstraint.class, "EConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEConstraint_Statements(), this.getEStatement(), null, "statements", null, 0, -1, EConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEConstraint_LogicOpers(), ecorePackage.getEString(), "logicOpers", null, 0, -1, EConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eStatementEClass, EStatement.class, "EStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEStatement_Property(), ecorePackage.getEString(), "property", null, 0, 1, EStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

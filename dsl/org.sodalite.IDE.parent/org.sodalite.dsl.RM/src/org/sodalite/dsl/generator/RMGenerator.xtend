@@ -509,14 +509,12 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
-	«IF p.property.required»
 	«putParameterNumber(p, "required", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "required" ;
 	  exchange:value '«p.property.required»' ;
 	.
-	«ENDIF»
 	
 	«IF p.property.^default !== null»
 	«putParameterNumber(p, "default", parameter_counter)»
@@ -567,6 +565,7 @@ class RMGenerator extends AbstractGenerator {
 	  «IF p.property.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ;
 	  «ENDIF»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "required")» ;
 	  «IF p.property.^default !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "default")» ;
 	  «ENDIF»
@@ -596,7 +595,7 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(a, "entry_schema", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "required" ;
+	  exchange:name "entry_schema" ;
 	  exchange:value '«a.attribute.entry_schema.name»' ;
 	.
 	«ENDIF»
