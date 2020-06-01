@@ -27,23 +27,11 @@
     <genClasses ecoreClass="Optimization.ecore#//EOptBuild">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EOptBuild/cpu_type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EOptBuild/acc_type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EOptBuild/constraint"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EAutotuning">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAutotuning/tuner"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EAutotuning/input"/>
-    </genClasses>
-    <genClasses ecoreClass="Optimization.ecore#//EAutotuingDSL">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EAutotuingDSL/parameters"/>
-    </genClasses>
-    <genClasses ecoreClass="Optimization.ecore#//ERun">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//ERun/command"/>
-    </genClasses>
-    <genClasses ecoreClass="Optimization.ecore#//EBuild">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EBuild/command"/>
-    </genClasses>
-    <genClasses ecoreClass="Optimization.ecore#//EParameters">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EParameters/int"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EParameters/range"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAutotuning/input"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EAITraining">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EAITraining/config"/>
@@ -64,6 +52,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAITrainingConfig/ai_framework"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAITrainingConfig/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAITrainingConfig/distributed_training"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EAITrainingConfig/constraint"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAITrainingConfig/layers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAITrainingConfig/parameters"/>
     </genClasses>
@@ -72,6 +61,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAITrainingData/basedata"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAITrainingData/size"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EAITrainingData/count"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EAITrainingData/constraint"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EAITrainingData/etl"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EAITrainingETL">
@@ -85,21 +75,27 @@
     <genClasses ecoreClass="Optimization.ecore#//ETensorFlow">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//ETensorFlow/version"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//ETensorFlow/xla"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//ETensorFlow/constraint"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EPyTorch">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EPyTorch/version"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EPyTorch/glow"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EPyTorch/constraint"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EHPC">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPC/config"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPC/data"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPC/hpccase"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPC/mpi"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPC/openmp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPC/openacc"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPC/opencl"/>
     </genClasses>
-    <genClasses ecoreClass="Optimization.ecore#//EHPCCases"/>
     <genClasses ecoreClass="Optimization.ecore#//EOPENCLCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EOPENCLCase/constraint"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EOPENCLCase/opencl"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EOPENACCCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EOPENACCCase/constraint"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EOPENACCCase/openacc"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EOPENMPCase">
@@ -116,6 +112,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EHPCData/basedata"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EHPCData/size"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EHPCData/count"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPCData/constraint"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EHPCData/etl"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EHPCETL">
@@ -143,6 +140,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EOPENCL/compiler"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EOPENCL/version"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EOPENCL/number_of_acc"/>
+    </genClasses>
+    <genClasses ecoreClass="Optimization.ecore#//EConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//EConstraint/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="Optimization.ecore#//EStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EStatement/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EStatement/operator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//EStatement/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
