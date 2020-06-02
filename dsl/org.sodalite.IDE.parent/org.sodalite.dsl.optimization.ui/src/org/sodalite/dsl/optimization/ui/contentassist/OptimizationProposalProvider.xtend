@@ -12,6 +12,12 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.impl.KeywordImpl
 import org.eclipse.xtext.ParserRule
+import org.eclipse.ui.PlatformUI
+import org.eclipse.swt.widgets.Shell
+import org.eclipse.swt.widgets.MessageBox
+import org.eclipse.swt.SWT
+import org.eclipse.swt.widgets.FileDialog
+import org.sodalite.dsl.optimization.optimization.EAutotuning
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -313,7 +319,21 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 	
 	override void completeEStatement_Value(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createEditableCompletionProposal ("<integer or number>", "<integer or number>", context, "", acceptor);
+	}
 	
+	override void completeEAutotuning_Input(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// Show file selection dialog to the user. Get path of autotunig file selected by the user and provide suggestion
+		var shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()
+		// File standard dialog
+		var fileDialog = new FileDialog(shell);
+		fileDialog.setText("Select Autotuning file");
+		//fileDialog.setFilterExtensions(new String[] { "*.txt" });
+		// Put in a readable name for the filter
+		//fileDialog.setFilterNames(new String[] { "Textfiles(*.txt)" });
+		var selected = fileDialog.open();
+		System.out.println("Selected autotuning file: " + selected);
+		val input = "\"" + selected + "\""
+		createEditableCompletionProposal (input, input, context, "", acceptor);
 	}
 
 	protected def void createBooleanCompletionProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -345,5 +365,4 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 		}
 		acceptor.accept(proposal)
 	}
-
 }
