@@ -22,6 +22,9 @@ Follow the following procedure to download the SODALITE IDE, build and install i
 3. Once complete, open the Eclipse Modeling Tools instance.
 4. Select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and click on the *Local* button. Navigate to the path *$IDE_REPO/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository/*. Then, click on *Add* button. In the former dialog, in the *Work with* combo box, select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
 
+## IDE Documentation
+[IDE tutorial](https://docs.google.com/document/d/1w6wYJbTZvBbt5LD6sXReXbx1uPDjefYFAU5KEv8X_8w/edit?usp=sharing) for users is available
+
 Main contact: Jesús Gorroñogoitia <jesus.gorronogoitia@atos.net>
 
 ![Project funded by the European Union](images/european.union.logo.png)
