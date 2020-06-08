@@ -62,7 +62,7 @@ EAppType:
 	
 EOptBuild:
 	('cpu_type:' cpu_type=ECPUType) &
-	('acc_type:' acc_type=EACCType) (constraint=EConstraint)?
+	('acc_type:' acc_type=EACCType)
 ;
 
 ECPUType:
@@ -124,7 +124,7 @@ EKerasCase:
 EAITrainingConfig:
 	('ai_framework:' ai_framework=EAIFramework) &
 	('type:' type=EAITrainingType)? &
-	(('distributed_training:' distributed_training=BOOLEAN) (constraint=EConstraint)?)? &
+	(('distributed_training:' distributed_training=BOOLEAN))? &
 	('layers:' layers=INT)? &
 	('parameters:' parameters=INT)? 
 ;	
@@ -140,7 +140,7 @@ EAITrainingData:
 	('basedata:' basedata=EBasedata)? &
 	('size:' size=INT)? &
 	('count:' count=INT)? &
-	('etl:' (constraint=EConstraint)?
+	('etl:'
 		BEGIN
 		etl=EAITrainingETL
 		END
@@ -165,12 +165,12 @@ EBackend:
 
 ETensorFlow:
 	('version:' version=STRING)? &
-	(('xla:' xla=BOOLEAN)(constraint=EConstraint)?)? 
+	(('xla:' xla=BOOLEAN))? 
 ;
 
 EPyTorch:
 	('version:' version=STRING)? &
-	(('glow:' glow=BOOLEAN)(constraint=EConstraint)?)? 
+	(('glow:' glow=BOOLEAN))? 
 ;
 
 EHPC:
@@ -191,7 +191,7 @@ EHPC:
 ;
 
 EOPENCLCase:
-	('opencl:' (constraint=EConstraint)?
+	('opencl:'
 		BEGIN
 		opencl=EOPENCL
 		END
@@ -199,7 +199,7 @@ EOPENCLCase:
 ;
 
 EOPENACCCase:
-	('openacc:' (constraint=EConstraint)?
+	('openacc:'
 		BEGIN
 		openacc=EOPENACC
 		END
@@ -234,7 +234,7 @@ EHPCData:
 	('basedata:' basedata=EHPCBasedata)? &
 	('size:' size=INT)? &
 	('count:' count=INT)? &
-	('etl:' (constraint=EConstraint)?
+	('etl:'
 		BEGIN 
 		etl=EHPCETL
 		END
@@ -287,25 +287,6 @@ EOPENCL:
 ECompiler:
 	'pgi' | 'cray' ;
 
-EConstraint:
-	{EConstraint} '(' + 'Constraint:' statements+=EStatement ((logicOpers+=ELogicOper) statements+= EStatement)* ')'
-;
-
-ELogicOper:
-	OR | AND
-;
-
-EStatement:
-	property=STRING operator=EComparisonOperator value=EValue
-;
-
-EValue:
-	INT | RealValue
-;
-
-EComparisonOperator:
-	BT | LT | BET | LET | EQUAL | NOT_EQUAL
-;
 
 terminal BT: '>';
 terminal LT: '<';

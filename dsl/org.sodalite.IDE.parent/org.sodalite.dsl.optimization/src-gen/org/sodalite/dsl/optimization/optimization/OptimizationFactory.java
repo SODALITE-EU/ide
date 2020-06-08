@@ -294,24 +294,6 @@ public interface OptimizationFactory extends EFactory
   EOPENCL createEOPENCL();
 
   /**
-   * Returns a new object of class '<em>EConstraint</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EConstraint</em>'.
-   * @generated
-   */
-  EConstraint createEConstraint();
-
-  /**
-   * Returns a new object of class '<em>EStatement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EStatement</em>'.
-   * @generated
-   */
-  EStatement createEStatement();
-
-  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

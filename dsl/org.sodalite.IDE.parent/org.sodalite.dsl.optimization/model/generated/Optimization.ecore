@@ -29,8 +29,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="EOptBuild">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cpu_type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="acc_type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//EConstraint"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EAutotuning">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tuner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -61,8 +59,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ai_framework" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="distributed_training" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//EConstraint"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="layers" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameters" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
@@ -71,8 +67,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="basedata" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//EConstraint"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="etl" eType="#//EAITrainingETL"
         containment="true"/>
   </eClassifiers>
@@ -87,14 +81,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="ETensorFlow">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="xla" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//EConstraint"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPyTorch">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="glow" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//EConstraint"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EHPC">
     <eStructuralFeatures xsi:type="ecore:EReference" name="config" eType="#//EHPCConfig"
@@ -111,14 +101,10 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EOPENCLCase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//EConstraint"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="opencl" eType="#//EOPENCL"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EOPENACCCase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//EConstraint"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="openacc" eType="#//EOPENACC"
         containment="true"/>
   </eClassifiers>
@@ -138,8 +124,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="basedata" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//EConstraint"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="etl" eType="#//EHPCETL"
         containment="true"/>
   </eClassifiers>
@@ -168,16 +152,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="compiler" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="number_of_acc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
-        eType="#//EStatement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicOpers" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EStatement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="property" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

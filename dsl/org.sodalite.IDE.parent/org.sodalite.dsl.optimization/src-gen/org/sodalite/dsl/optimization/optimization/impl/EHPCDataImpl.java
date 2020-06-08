@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.optimization.optimization.EConstraint;
 import org.sodalite.dsl.optimization.optimization.EHPCData;
 import org.sodalite.dsl.optimization.optimization.EHPCETL;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
@@ -29,7 +28,6 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCDataImpl#getBasedata <em>Basedata</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCDataImpl#getSize <em>Size</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCDataImpl#getCount <em>Count</em>}</li>
- *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCDataImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EHPCDataImpl#getEtl <em>Etl</em>}</li>
  * </ul>
  *
@@ -116,16 +114,6 @@ public class EHPCDataImpl extends MinimalEObjectImpl.Container implements EHPCDa
    * @ordered
    */
   protected int count = COUNT_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConstraint()
-   * @generated
-   * @ordered
-   */
-  protected EConstraint constraint;
 
   /**
    * The cached value of the '{@link #getEtl() <em>Etl</em>}' containment reference.
@@ -264,56 +252,6 @@ public class EHPCDataImpl extends MinimalEObjectImpl.Container implements EHPCDa
    * @generated
    */
   @Override
-  public EConstraint getConstraint()
-  {
-    return constraint;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetConstraint(EConstraint newConstraint, NotificationChain msgs)
-  {
-    EConstraint oldConstraint = constraint;
-    constraint = newConstraint;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC_DATA__CONSTRAINT, oldConstraint, newConstraint);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setConstraint(EConstraint newConstraint)
-  {
-    if (newConstraint != constraint)
-    {
-      NotificationChain msgs = null;
-      if (constraint != null)
-        msgs = ((InternalEObject)constraint).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC_DATA__CONSTRAINT, null, msgs);
-      if (newConstraint != null)
-        msgs = ((InternalEObject)newConstraint).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EHPC_DATA__CONSTRAINT, null, msgs);
-      msgs = basicSetConstraint(newConstraint, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EHPC_DATA__CONSTRAINT, newConstraint, newConstraint));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EHPCETL getEtl()
   {
     return etl;
@@ -368,8 +306,6 @@ public class EHPCDataImpl extends MinimalEObjectImpl.Container implements EHPCDa
   {
     switch (featureID)
     {
-      case OptimizationPackage.EHPC_DATA__CONSTRAINT:
-        return basicSetConstraint(null, msgs);
       case OptimizationPackage.EHPC_DATA__ETL:
         return basicSetEtl(null, msgs);
     }
@@ -394,8 +330,6 @@ public class EHPCDataImpl extends MinimalEObjectImpl.Container implements EHPCDa
         return getSize();
       case OptimizationPackage.EHPC_DATA__COUNT:
         return getCount();
-      case OptimizationPackage.EHPC_DATA__CONSTRAINT:
-        return getConstraint();
       case OptimizationPackage.EHPC_DATA__ETL:
         return getEtl();
     }
@@ -423,9 +357,6 @@ public class EHPCDataImpl extends MinimalEObjectImpl.Container implements EHPCDa
         return;
       case OptimizationPackage.EHPC_DATA__COUNT:
         setCount((Integer)newValue);
-        return;
-      case OptimizationPackage.EHPC_DATA__CONSTRAINT:
-        setConstraint((EConstraint)newValue);
         return;
       case OptimizationPackage.EHPC_DATA__ETL:
         setEtl((EHPCETL)newValue);
@@ -456,9 +387,6 @@ public class EHPCDataImpl extends MinimalEObjectImpl.Container implements EHPCDa
       case OptimizationPackage.EHPC_DATA__COUNT:
         setCount(COUNT_EDEFAULT);
         return;
-      case OptimizationPackage.EHPC_DATA__CONSTRAINT:
-        setConstraint((EConstraint)null);
-        return;
       case OptimizationPackage.EHPC_DATA__ETL:
         setEtl((EHPCETL)null);
         return;
@@ -484,8 +412,6 @@ public class EHPCDataImpl extends MinimalEObjectImpl.Container implements EHPCDa
         return size != SIZE_EDEFAULT;
       case OptimizationPackage.EHPC_DATA__COUNT:
         return count != COUNT_EDEFAULT;
-      case OptimizationPackage.EHPC_DATA__CONSTRAINT:
-        return constraint != null;
       case OptimizationPackage.EHPC_DATA__ETL:
         return etl != null;
     }

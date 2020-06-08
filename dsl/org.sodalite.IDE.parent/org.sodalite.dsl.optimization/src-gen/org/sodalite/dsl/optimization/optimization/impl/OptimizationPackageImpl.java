@@ -17,7 +17,6 @@ import org.sodalite.dsl.optimization.optimization.EAITrainingConfig;
 import org.sodalite.dsl.optimization.optimization.EAITrainingData;
 import org.sodalite.dsl.optimization.optimization.EAITrainingETL;
 import org.sodalite.dsl.optimization.optimization.EAutotuning;
-import org.sodalite.dsl.optimization.optimization.EConstraint;
 import org.sodalite.dsl.optimization.optimization.EHPCCase;
 import org.sodalite.dsl.optimization.optimization.EHPCConfig;
 import org.sodalite.dsl.optimization.optimization.EHPCData;
@@ -32,7 +31,6 @@ import org.sodalite.dsl.optimization.optimization.EOptimization;
 import org.sodalite.dsl.optimization.optimization.EOptimizationCases;
 import org.sodalite.dsl.optimization.optimization.EPyTorch;
 import org.sodalite.dsl.optimization.optimization.EPyTorchCase;
-import org.sodalite.dsl.optimization.optimization.EStatement;
 import org.sodalite.dsl.optimization.optimization.ETensorFlow;
 import org.sodalite.dsl.optimization.optimization.ETensorFlowCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationFactory;
@@ -256,20 +254,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   private EClass eopenclEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eConstraintEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eStatementEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -538,17 +522,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EReference getEOptBuild_Constraint()
-  {
-    return (EReference)eOptBuildEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getEAutotuning()
   {
     return eAutotuningEClass;
@@ -747,20 +720,9 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EReference getEAITrainingConfig_Constraint()
-  {
-    return (EReference)eaiTrainingConfigEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EAttribute getEAITrainingConfig_Layers()
   {
-    return (EAttribute)eaiTrainingConfigEClass.getEStructuralFeatures().get(4);
+    return (EAttribute)eaiTrainingConfigEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -771,7 +733,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
   @Override
   public EAttribute getEAITrainingConfig_Parameters()
   {
-    return (EAttribute)eaiTrainingConfigEClass.getEStructuralFeatures().get(5);
+    return (EAttribute)eaiTrainingConfigEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -835,20 +797,9 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EReference getEAITrainingData_Constraint()
-  {
-    return (EReference)eaiTrainingDataEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getEAITrainingData_Etl()
   {
-    return (EReference)eaiTrainingDataEClass.getEStructuralFeatures().get(5);
+    return (EReference)eaiTrainingDataEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -956,17 +907,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EReference getETensorFlow_Constraint()
-  {
-    return (EReference)eTensorFlowEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getEPyTorch()
   {
     return ePyTorchEClass;
@@ -992,17 +932,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
   public EAttribute getEPyTorch_Glow()
   {
     return (EAttribute)ePyTorchEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEPyTorch_Constraint()
-  {
-    return (EReference)ePyTorchEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1099,20 +1028,9 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EReference getEOPENCLCase_Constraint()
-  {
-    return (EReference)eopenclCaseEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getEOPENCLCase_Opencl()
   {
-    return (EReference)eopenclCaseEClass.getEStructuralFeatures().get(1);
+    return (EReference)eopenclCaseEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1132,20 +1050,9 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EReference getEOPENACCCase_Constraint()
-  {
-    return (EReference)eopenaccCaseEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getEOPENACCCase_Openacc()
   {
-    return (EReference)eopenaccCaseEClass.getEStructuralFeatures().get(1);
+    return (EReference)eopenaccCaseEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1275,20 +1182,9 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EReference getEHPCData_Constraint()
-  {
-    return (EReference)ehpcDataEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getEHPCData_Etl()
   {
-    return (EReference)ehpcDataEClass.getEStructuralFeatures().get(5);
+    return (EReference)ehpcDataEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1528,83 +1424,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
-  public EClass getEConstraint()
-  {
-    return eConstraintEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEConstraint_Statements()
-  {
-    return (EReference)eConstraintEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEConstraint_LogicOpers()
-  {
-    return (EAttribute)eConstraintEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getEStatement()
-  {
-    return eStatementEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEStatement_Property()
-  {
-    return (EAttribute)eStatementEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEStatement_Operator()
-  {
-    return (EAttribute)eStatementEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEStatement_Value()
-  {
-    return (EAttribute)eStatementEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public OptimizationFactory getOptimizationFactory()
   {
     return (OptimizationFactory)getEFactoryInstance();
@@ -1653,7 +1472,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     eOptBuildEClass = createEClass(EOPT_BUILD);
     createEAttribute(eOptBuildEClass, EOPT_BUILD__CPU_TYPE);
     createEAttribute(eOptBuildEClass, EOPT_BUILD__ACC_TYPE);
-    createEReference(eOptBuildEClass, EOPT_BUILD__CONSTRAINT);
 
     eAutotuningEClass = createEClass(EAUTOTUNING);
     createEAttribute(eAutotuningEClass, EAUTOTUNING__TUNER);
@@ -1679,7 +1497,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     createEAttribute(eaiTrainingConfigEClass, EAI_TRAINING_CONFIG__AI_FRAMEWORK);
     createEAttribute(eaiTrainingConfigEClass, EAI_TRAINING_CONFIG__TYPE);
     createEAttribute(eaiTrainingConfigEClass, EAI_TRAINING_CONFIG__DISTRIBUTED_TRAINING);
-    createEReference(eaiTrainingConfigEClass, EAI_TRAINING_CONFIG__CONSTRAINT);
     createEAttribute(eaiTrainingConfigEClass, EAI_TRAINING_CONFIG__LAYERS);
     createEAttribute(eaiTrainingConfigEClass, EAI_TRAINING_CONFIG__PARAMETERS);
 
@@ -1688,7 +1505,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     createEAttribute(eaiTrainingDataEClass, EAI_TRAINING_DATA__BASEDATA);
     createEAttribute(eaiTrainingDataEClass, EAI_TRAINING_DATA__SIZE);
     createEAttribute(eaiTrainingDataEClass, EAI_TRAINING_DATA__COUNT);
-    createEReference(eaiTrainingDataEClass, EAI_TRAINING_DATA__CONSTRAINT);
     createEReference(eaiTrainingDataEClass, EAI_TRAINING_DATA__ETL);
 
     eaiTrainingETLEClass = createEClass(EAI_TRAINING_ETL);
@@ -1702,12 +1518,10 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     eTensorFlowEClass = createEClass(ETENSOR_FLOW);
     createEAttribute(eTensorFlowEClass, ETENSOR_FLOW__VERSION);
     createEAttribute(eTensorFlowEClass, ETENSOR_FLOW__XLA);
-    createEReference(eTensorFlowEClass, ETENSOR_FLOW__CONSTRAINT);
 
     ePyTorchEClass = createEClass(EPY_TORCH);
     createEAttribute(ePyTorchEClass, EPY_TORCH__VERSION);
     createEAttribute(ePyTorchEClass, EPY_TORCH__GLOW);
-    createEReference(ePyTorchEClass, EPY_TORCH__CONSTRAINT);
 
     ehpcEClass = createEClass(EHPC);
     createEReference(ehpcEClass, EHPC__CONFIG);
@@ -1718,11 +1532,9 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     createEReference(ehpcEClass, EHPC__OPENCL);
 
     eopenclCaseEClass = createEClass(EOPENCL_CASE);
-    createEReference(eopenclCaseEClass, EOPENCL_CASE__CONSTRAINT);
     createEReference(eopenclCaseEClass, EOPENCL_CASE__OPENCL);
 
     eopenaccCaseEClass = createEClass(EOPENACC_CASE);
-    createEReference(eopenaccCaseEClass, EOPENACC_CASE__CONSTRAINT);
     createEReference(eopenaccCaseEClass, EOPENACC_CASE__OPENACC);
 
     eopenmpCaseEClass = createEClass(EOPENMP_CASE);
@@ -1739,7 +1551,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     createEAttribute(ehpcDataEClass, EHPC_DATA__BASEDATA);
     createEAttribute(ehpcDataEClass, EHPC_DATA__SIZE);
     createEAttribute(ehpcDataEClass, EHPC_DATA__COUNT);
-    createEReference(ehpcDataEClass, EHPC_DATA__CONSTRAINT);
     createEReference(ehpcDataEClass, EHPC_DATA__ETL);
 
     ehpcetlEClass = createEClass(EHPCETL);
@@ -1767,15 +1578,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     createEAttribute(eopenclEClass, EOPENCL__COMPILER);
     createEAttribute(eopenclEClass, EOPENCL__VERSION);
     createEAttribute(eopenclEClass, EOPENCL__NUMBER_OF_ACC);
-
-    eConstraintEClass = createEClass(ECONSTRAINT);
-    createEReference(eConstraintEClass, ECONSTRAINT__STATEMENTS);
-    createEAttribute(eConstraintEClass, ECONSTRAINT__LOGIC_OPERS);
-
-    eStatementEClass = createEClass(ESTATEMENT);
-    createEAttribute(eStatementEClass, ESTATEMENT__PROPERTY);
-    createEAttribute(eStatementEClass, ESTATEMENT__OPERATOR);
-    createEAttribute(eStatementEClass, ESTATEMENT__VALUE);
   }
 
   /**
@@ -1837,7 +1639,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEClass(eOptBuildEClass, EOptBuild.class, "EOptBuild", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEOptBuild_Cpu_type(), ecorePackage.getEString(), "cpu_type", null, 0, 1, EOptBuild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEOptBuild_Acc_type(), ecorePackage.getEString(), "acc_type", null, 0, 1, EOptBuild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEOptBuild_Constraint(), this.getEConstraint(), null, "constraint", null, 0, 1, EOptBuild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eAutotuningEClass, EAutotuning.class, "EAutotuning", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEAutotuning_Tuner(), ecorePackage.getEString(), "tuner", null, 0, 1, EAutotuning.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1863,7 +1664,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEAttribute(getEAITrainingConfig_Ai_framework(), ecorePackage.getEString(), "ai_framework", null, 0, 1, EAITrainingConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEAITrainingConfig_Type(), ecorePackage.getEString(), "type", null, 0, 1, EAITrainingConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEAITrainingConfig_Distributed_training(), ecorePackage.getEBoolean(), "distributed_training", null, 0, 1, EAITrainingConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEAITrainingConfig_Constraint(), this.getEConstraint(), null, "constraint", null, 0, 1, EAITrainingConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEAITrainingConfig_Layers(), ecorePackage.getEInt(), "layers", null, 0, 1, EAITrainingConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEAITrainingConfig_Parameters(), ecorePackage.getEInt(), "parameters", null, 0, 1, EAITrainingConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1872,7 +1672,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEAttribute(getEAITrainingData_Basedata(), ecorePackage.getEString(), "basedata", null, 0, 1, EAITrainingData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEAITrainingData_Size(), ecorePackage.getEInt(), "size", null, 0, 1, EAITrainingData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEAITrainingData_Count(), ecorePackage.getEInt(), "count", null, 0, 1, EAITrainingData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEAITrainingData_Constraint(), this.getEConstraint(), null, "constraint", null, 0, 1, EAITrainingData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEAITrainingData_Etl(), this.getEAITrainingETL(), null, "etl", null, 0, 1, EAITrainingData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eaiTrainingETLEClass, EAITrainingETL.class, "EAITrainingETL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1886,12 +1685,10 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEClass(eTensorFlowEClass, ETensorFlow.class, "ETensorFlow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getETensorFlow_Version(), ecorePackage.getEString(), "version", null, 0, 1, ETensorFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getETensorFlow_Xla(), ecorePackage.getEBoolean(), "xla", null, 0, 1, ETensorFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETensorFlow_Constraint(), this.getEConstraint(), null, "constraint", null, 0, 1, ETensorFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePyTorchEClass, EPyTorch.class, "EPyTorch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPyTorch_Version(), ecorePackage.getEString(), "version", null, 0, 1, EPyTorch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPyTorch_Glow(), ecorePackage.getEBoolean(), "glow", null, 0, 1, EPyTorch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPyTorch_Constraint(), this.getEConstraint(), null, "constraint", null, 0, 1, EPyTorch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ehpcEClass, org.sodalite.dsl.optimization.optimization.EHPC.class, "EHPC", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEHPC_Config(), this.getEHPCConfig(), null, "config", null, 0, 1, org.sodalite.dsl.optimization.optimization.EHPC.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1902,11 +1699,9 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEReference(getEHPC_Opencl(), this.getEOPENCLCase(), null, "opencl", null, 0, 1, org.sodalite.dsl.optimization.optimization.EHPC.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eopenclCaseEClass, EOPENCLCase.class, "EOPENCLCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEOPENCLCase_Constraint(), this.getEConstraint(), null, "constraint", null, 0, 1, EOPENCLCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEOPENCLCase_Opencl(), this.getEOPENCL(), null, "opencl", null, 0, 1, EOPENCLCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eopenaccCaseEClass, EOPENACCCase.class, "EOPENACCCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEOPENACCCase_Constraint(), this.getEConstraint(), null, "constraint", null, 0, 1, EOPENACCCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEOPENACCCase_Openacc(), this.getEOPENACC(), null, "openacc", null, 0, 1, EOPENACCCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eopenmpCaseEClass, EOPENMPCase.class, "EOPENMPCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1923,7 +1718,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEAttribute(getEHPCData_Basedata(), ecorePackage.getEString(), "basedata", null, 0, 1, EHPCData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEHPCData_Size(), ecorePackage.getEInt(), "size", null, 0, 1, EHPCData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEHPCData_Count(), ecorePackage.getEInt(), "count", null, 0, 1, EHPCData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEHPCData_Constraint(), this.getEConstraint(), null, "constraint", null, 0, 1, EHPCData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEHPCData_Etl(), this.getEHPCETL(), null, "etl", null, 0, 1, EHPCData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ehpcetlEClass, org.sodalite.dsl.optimization.optimization.EHPCETL.class, "EHPCETL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1951,15 +1745,6 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEAttribute(getEOPENCL_Compiler(), ecorePackage.getEString(), "compiler", null, 0, 1, org.sodalite.dsl.optimization.optimization.EOPENCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEOPENCL_Version(), ecorePackage.getEString(), "version", null, 0, 1, org.sodalite.dsl.optimization.optimization.EOPENCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEOPENCL_Number_of_acc(), ecorePackage.getEInt(), "number_of_acc", null, 0, 1, org.sodalite.dsl.optimization.optimization.EOPENCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eConstraintEClass, EConstraint.class, "EConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEConstraint_Statements(), this.getEStatement(), null, "statements", null, 0, -1, EConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEConstraint_LogicOpers(), ecorePackage.getEString(), "logicOpers", null, 0, -1, EConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eStatementEClass, EStatement.class, "EStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEStatement_Property(), ecorePackage.getEString(), "property", null, 0, 1, EStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEStatement_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, EStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEStatement_Value(), ecorePackage.getEString(), "value", null, 0, 1, EStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

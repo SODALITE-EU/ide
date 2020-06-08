@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingData#getBasedata <em>Basedata</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingData#getSize <em>Size</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingData#getCount <em>Count</em>}</li>
- *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingData#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.EAITrainingData#getEtl <em>Etl</em>}</li>
  * </ul>
  *
@@ -115,28 +114,6 @@ public interface EAITrainingData extends EObject
    * @generated
    */
   void setCount(int value);
-
-  /**
-   * Returns the value of the '<em><b>Constraint</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Constraint</em>' containment reference.
-   * @see #setConstraint(EConstraint)
-   * @see org.sodalite.dsl.optimization.optimization.OptimizationPackage#getEAITrainingData_Constraint()
-   * @model containment="true"
-   * @generated
-   */
-  EConstraint getConstraint();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.optimization.optimization.EAITrainingData#getConstraint <em>Constraint</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Constraint</em>' containment reference.
-   * @see #getConstraint()
-   * @generated
-   */
-  void setConstraint(EConstraint value);
 
   /**
    * Returns the value of the '<em><b>Etl</b></em>' containment reference.

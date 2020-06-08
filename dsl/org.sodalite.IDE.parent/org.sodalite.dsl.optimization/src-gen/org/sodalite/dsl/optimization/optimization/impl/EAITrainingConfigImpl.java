@@ -4,16 +4,13 @@
 package org.sodalite.dsl.optimization.optimization.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.optimization.optimization.EAITrainingConfig;
-import org.sodalite.dsl.optimization.optimization.EConstraint;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 
 /**
@@ -27,7 +24,6 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingConfigImpl#getAi_framework <em>Ai framework</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingConfigImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingConfigImpl#isDistributed_training <em>Distributed training</em>}</li>
- *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingConfigImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingConfigImpl#getLayers <em>Layers</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EAITrainingConfigImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
@@ -95,16 +91,6 @@ public class EAITrainingConfigImpl extends MinimalEObjectImpl.Container implemen
    * @ordered
    */
   protected boolean distributed_training = DISTRIBUTED_TRAINING_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConstraint()
-   * @generated
-   * @ordered
-   */
-  protected EConstraint constraint;
 
   /**
    * The default value of the '{@link #getLayers() <em>Layers</em>}' attribute.
@@ -248,56 +234,6 @@ public class EAITrainingConfigImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    */
   @Override
-  public EConstraint getConstraint()
-  {
-    return constraint;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetConstraint(EConstraint newConstraint, NotificationChain msgs)
-  {
-    EConstraint oldConstraint = constraint;
-    constraint = newConstraint;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EAI_TRAINING_CONFIG__CONSTRAINT, oldConstraint, newConstraint);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setConstraint(EConstraint newConstraint)
-  {
-    if (newConstraint != constraint)
-    {
-      NotificationChain msgs = null;
-      if (constraint != null)
-        msgs = ((InternalEObject)constraint).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EAI_TRAINING_CONFIG__CONSTRAINT, null, msgs);
-      if (newConstraint != null)
-        msgs = ((InternalEObject)newConstraint).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EAI_TRAINING_CONFIG__CONSTRAINT, null, msgs);
-      msgs = basicSetConstraint(newConstraint, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EAI_TRAINING_CONFIG__CONSTRAINT, newConstraint, newConstraint));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public int getLayers()
   {
     return layers;
@@ -348,22 +284,6 @@ public class EAITrainingConfigImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case OptimizationPackage.EAI_TRAINING_CONFIG__CONSTRAINT:
-        return basicSetConstraint(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -374,8 +294,6 @@ public class EAITrainingConfigImpl extends MinimalEObjectImpl.Container implemen
         return getType();
       case OptimizationPackage.EAI_TRAINING_CONFIG__DISTRIBUTED_TRAINING:
         return isDistributed_training();
-      case OptimizationPackage.EAI_TRAINING_CONFIG__CONSTRAINT:
-        return getConstraint();
       case OptimizationPackage.EAI_TRAINING_CONFIG__LAYERS:
         return getLayers();
       case OptimizationPackage.EAI_TRAINING_CONFIG__PARAMETERS:
@@ -402,9 +320,6 @@ public class EAITrainingConfigImpl extends MinimalEObjectImpl.Container implemen
         return;
       case OptimizationPackage.EAI_TRAINING_CONFIG__DISTRIBUTED_TRAINING:
         setDistributed_training((Boolean)newValue);
-        return;
-      case OptimizationPackage.EAI_TRAINING_CONFIG__CONSTRAINT:
-        setConstraint((EConstraint)newValue);
         return;
       case OptimizationPackage.EAI_TRAINING_CONFIG__LAYERS:
         setLayers((Integer)newValue);
@@ -435,9 +350,6 @@ public class EAITrainingConfigImpl extends MinimalEObjectImpl.Container implemen
       case OptimizationPackage.EAI_TRAINING_CONFIG__DISTRIBUTED_TRAINING:
         setDistributed_training(DISTRIBUTED_TRAINING_EDEFAULT);
         return;
-      case OptimizationPackage.EAI_TRAINING_CONFIG__CONSTRAINT:
-        setConstraint((EConstraint)null);
-        return;
       case OptimizationPackage.EAI_TRAINING_CONFIG__LAYERS:
         setLayers(LAYERS_EDEFAULT);
         return;
@@ -464,8 +376,6 @@ public class EAITrainingConfigImpl extends MinimalEObjectImpl.Container implemen
         return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case OptimizationPackage.EAI_TRAINING_CONFIG__DISTRIBUTED_TRAINING:
         return distributed_training != DISTRIBUTED_TRAINING_EDEFAULT;
-      case OptimizationPackage.EAI_TRAINING_CONFIG__CONSTRAINT:
-        return constraint != null;
       case OptimizationPackage.EAI_TRAINING_CONFIG__LAYERS:
         return layers != LAYERS_EDEFAULT;
       case OptimizationPackage.EAI_TRAINING_CONFIG__PARAMETERS:

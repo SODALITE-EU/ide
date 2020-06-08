@@ -226,16 +226,6 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
         return createEOPENCLAdapter();
       }
       @Override
-      public Adapter caseEConstraint(EConstraint object)
-      {
-        return createEConstraintAdapter();
-      }
-      @Override
-      public Adapter caseEStatement(EStatement object)
-      {
-        return createEStatementAdapter();
-      }
-      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -703,36 +693,6 @@ public class OptimizationAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEOPENCLAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EConstraint <em>EConstraint</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.dsl.optimization.optimization.EConstraint
-   * @generated
-   */
-  public Adapter createEConstraintAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.optimization.optimization.EStatement <em>EStatement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.dsl.optimization.optimization.EStatement
-   * @generated
-   */
-  public Adapter createEStatementAdapter()
   {
     return null;
   }

@@ -10,8 +10,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
@@ -20,12 +18,10 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 public class OptimizationSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected OptimizationGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_EConstraint_LeftParenthesisKeyword_1_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (OptimizationGrammarAccess) access;
-		match_EConstraint_LeftParenthesisKeyword_1_p = new TokenAlias(true, false, grammarAccess.getEConstraintAccess().getLeftParenthesisKeyword_1());
 	}
 	
 	@Override
@@ -55,21 +51,8 @@ public class OptimizationSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_EConstraint_LeftParenthesisKeyword_1_p.equals(syntax))
-				emit_EConstraint_LeftParenthesisKeyword_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else acceptNodes(getLastNavigableState(), syntaxNodes);
+			acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
-	/**
-	 * Ambiguous syntax:
-	 *     '('+
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) 'Constraint:' statements+=EStatement
-	 */
-	protected void emit_EConstraint_LeftParenthesisKeyword_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 }

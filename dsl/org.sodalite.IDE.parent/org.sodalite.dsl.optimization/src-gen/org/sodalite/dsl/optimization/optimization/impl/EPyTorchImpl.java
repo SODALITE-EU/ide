@@ -4,15 +4,12 @@
 package org.sodalite.dsl.optimization.optimization.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.optimization.optimization.EConstraint;
 import org.sodalite.dsl.optimization.optimization.EPyTorch;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 
@@ -26,7 +23,6 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  * <ul>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EPyTorchImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EPyTorchImpl#isGlow <em>Glow</em>}</li>
- *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EPyTorchImpl#getConstraint <em>Constraint</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,16 +68,6 @@ public class EPyTorchImpl extends MinimalEObjectImpl.Container implements EPyTor
    * @ordered
    */
   protected boolean glow = GLOW_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConstraint()
-   * @generated
-   * @ordered
-   */
-  protected EConstraint constraint;
 
   /**
    * <!-- begin-user-doc -->
@@ -160,72 +146,6 @@ public class EPyTorchImpl extends MinimalEObjectImpl.Container implements EPyTor
    * @generated
    */
   @Override
-  public EConstraint getConstraint()
-  {
-    return constraint;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetConstraint(EConstraint newConstraint, NotificationChain msgs)
-  {
-    EConstraint oldConstraint = constraint;
-    constraint = newConstraint;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EPY_TORCH__CONSTRAINT, oldConstraint, newConstraint);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setConstraint(EConstraint newConstraint)
-  {
-    if (newConstraint != constraint)
-    {
-      NotificationChain msgs = null;
-      if (constraint != null)
-        msgs = ((InternalEObject)constraint).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EPY_TORCH__CONSTRAINT, null, msgs);
-      if (newConstraint != null)
-        msgs = ((InternalEObject)newConstraint).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EPY_TORCH__CONSTRAINT, null, msgs);
-      msgs = basicSetConstraint(newConstraint, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EPY_TORCH__CONSTRAINT, newConstraint, newConstraint));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case OptimizationPackage.EPY_TORCH__CONSTRAINT:
-        return basicSetConstraint(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -234,8 +154,6 @@ public class EPyTorchImpl extends MinimalEObjectImpl.Container implements EPyTor
         return getVersion();
       case OptimizationPackage.EPY_TORCH__GLOW:
         return isGlow();
-      case OptimizationPackage.EPY_TORCH__CONSTRAINT:
-        return getConstraint();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -255,9 +173,6 @@ public class EPyTorchImpl extends MinimalEObjectImpl.Container implements EPyTor
         return;
       case OptimizationPackage.EPY_TORCH__GLOW:
         setGlow((Boolean)newValue);
-        return;
-      case OptimizationPackage.EPY_TORCH__CONSTRAINT:
-        setConstraint((EConstraint)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -279,9 +194,6 @@ public class EPyTorchImpl extends MinimalEObjectImpl.Container implements EPyTor
       case OptimizationPackage.EPY_TORCH__GLOW:
         setGlow(GLOW_EDEFAULT);
         return;
-      case OptimizationPackage.EPY_TORCH__CONSTRAINT:
-        setConstraint((EConstraint)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -300,8 +212,6 @@ public class EPyTorchImpl extends MinimalEObjectImpl.Container implements EPyTor
         return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
       case OptimizationPackage.EPY_TORCH__GLOW:
         return glow != GLOW_EDEFAULT;
-      case OptimizationPackage.EPY_TORCH__CONSTRAINT:
-        return constraint != null;
     }
     return super.eIsSet(featureID);
   }

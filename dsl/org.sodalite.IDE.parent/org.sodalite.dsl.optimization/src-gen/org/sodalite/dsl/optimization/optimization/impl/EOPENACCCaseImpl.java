@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.optimization.optimization.EConstraint;
 import org.sodalite.dsl.optimization.optimization.EOPENACC;
 import org.sodalite.dsl.optimization.optimization.EOPENACCCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
@@ -25,7 +24,6 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EOPENACCCaseImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.EOPENACCCaseImpl#getOpenacc <em>Openacc</em>}</li>
  * </ul>
  *
@@ -33,16 +31,6 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
  */
 public class EOPENACCCaseImpl extends MinimalEObjectImpl.Container implements EOPENACCCase
 {
-  /**
-   * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConstraint()
-   * @generated
-   * @ordered
-   */
-  protected EConstraint constraint;
-
   /**
    * The cached value of the '{@link #getOpenacc() <em>Openacc</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -72,56 +60,6 @@ public class EOPENACCCaseImpl extends MinimalEObjectImpl.Container implements EO
   protected EClass eStaticClass()
   {
     return OptimizationPackage.Literals.EOPENACC_CASE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EConstraint getConstraint()
-  {
-    return constraint;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetConstraint(EConstraint newConstraint, NotificationChain msgs)
-  {
-    EConstraint oldConstraint = constraint;
-    constraint = newConstraint;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OptimizationPackage.EOPENACC_CASE__CONSTRAINT, oldConstraint, newConstraint);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setConstraint(EConstraint newConstraint)
-  {
-    if (newConstraint != constraint)
-    {
-      NotificationChain msgs = null;
-      if (constraint != null)
-        msgs = ((InternalEObject)constraint).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EOPENACC_CASE__CONSTRAINT, null, msgs);
-      if (newConstraint != null)
-        msgs = ((InternalEObject)newConstraint).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OptimizationPackage.EOPENACC_CASE__CONSTRAINT, null, msgs);
-      msgs = basicSetConstraint(newConstraint, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.EOPENACC_CASE__CONSTRAINT, newConstraint, newConstraint));
   }
 
   /**
@@ -184,8 +122,6 @@ public class EOPENACCCaseImpl extends MinimalEObjectImpl.Container implements EO
   {
     switch (featureID)
     {
-      case OptimizationPackage.EOPENACC_CASE__CONSTRAINT:
-        return basicSetConstraint(null, msgs);
       case OptimizationPackage.EOPENACC_CASE__OPENACC:
         return basicSetOpenacc(null, msgs);
     }
@@ -202,8 +138,6 @@ public class EOPENACCCaseImpl extends MinimalEObjectImpl.Container implements EO
   {
     switch (featureID)
     {
-      case OptimizationPackage.EOPENACC_CASE__CONSTRAINT:
-        return getConstraint();
       case OptimizationPackage.EOPENACC_CASE__OPENACC:
         return getOpenacc();
     }
@@ -220,9 +154,6 @@ public class EOPENACCCaseImpl extends MinimalEObjectImpl.Container implements EO
   {
     switch (featureID)
     {
-      case OptimizationPackage.EOPENACC_CASE__CONSTRAINT:
-        setConstraint((EConstraint)newValue);
-        return;
       case OptimizationPackage.EOPENACC_CASE__OPENACC:
         setOpenacc((EOPENACC)newValue);
         return;
@@ -240,9 +171,6 @@ public class EOPENACCCaseImpl extends MinimalEObjectImpl.Container implements EO
   {
     switch (featureID)
     {
-      case OptimizationPackage.EOPENACC_CASE__CONSTRAINT:
-        setConstraint((EConstraint)null);
-        return;
       case OptimizationPackage.EOPENACC_CASE__OPENACC:
         setOpenacc((EOPENACC)null);
         return;
@@ -260,8 +188,6 @@ public class EOPENACCCaseImpl extends MinimalEObjectImpl.Container implements EO
   {
     switch (featureID)
     {
-      case OptimizationPackage.EOPENACC_CASE__CONSTRAINT:
-        return constraint != null;
       case OptimizationPackage.EOPENACC_CASE__OPENACC:
         return openacc != null;
     }

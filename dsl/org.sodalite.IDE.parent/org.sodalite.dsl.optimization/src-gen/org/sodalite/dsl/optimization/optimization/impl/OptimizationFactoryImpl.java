@@ -95,8 +95,6 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
       case OptimizationPackage.EOPENMP: return createEOPENMP();
       case OptimizationPackage.EOPENACC: return createEOPENACC();
       case OptimizationPackage.EOPENCL: return createEOPENCL();
-      case OptimizationPackage.ECONSTRAINT: return createEConstraint();
-      case OptimizationPackage.ESTATEMENT: return createEStatement();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -460,30 +458,6 @@ public class OptimizationFactoryImpl extends EFactoryImpl implements Optimizatio
   {
     EOPENCLImpl eopencl = new EOPENCLImpl();
     return eopencl;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EConstraint createEConstraint()
-  {
-    EConstraintImpl eConstraint = new EConstraintImpl();
-    return eConstraint;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EStatement createEStatement()
-  {
-    EStatementImpl eStatement = new EStatementImpl();
-    return eStatement;
   }
 
   /**

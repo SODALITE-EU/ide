@@ -47,8 +47,6 @@ Optimization : 'optimization';
 
 AI_Training : 'AI_Training';
 
-Constraint : 'Constraint:';
-
 FPGAXilinx : 'FPGA-Xilinx';
 
 NVIDIAV100 : 'NVIDIA-V100';
@@ -186,10 +184,6 @@ HPC : 'HPC';
 MPI : 'MPI';
 
 Pgi : 'pgi';
-
-LeftParenthesis : '(';
-
-RightParenthesis : ')';
 
 Comma : ',';
 

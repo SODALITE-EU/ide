@@ -303,24 +303,6 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 		createNonEditableCompletionProposal ("cray", "cray", context, "", acceptor);	
 	}
 	
-	override completeEConstraint_LogicOpers(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("OR", "OR", context, "", acceptor);
-		createNonEditableCompletionProposal ("AND", "AND", context, "", acceptor);
-	}
-	
-	override void completeEStatement_Operator(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal (">", ">", context, "", acceptor);
-		createNonEditableCompletionProposal ("<", "<", context, "", acceptor);
-		createNonEditableCompletionProposal (">=", ">=", context, "", acceptor);
-		createNonEditableCompletionProposal ("<=", "<=", context, "", acceptor);
-		createNonEditableCompletionProposal ("==", "==", context, "", acceptor);
-		createNonEditableCompletionProposal ("!=", "!=", context, "", acceptor);
-	}
-	
-	override void completeEStatement_Value(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createEditableCompletionProposal ("<integer or number>", "<integer or number>", context, "", acceptor);
-	}
-	
 	override void completeEAutotuning_Input(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// Show file selection dialog to the user. Get path of autotunig file selected by the user and provide suggestion
 		var shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()
