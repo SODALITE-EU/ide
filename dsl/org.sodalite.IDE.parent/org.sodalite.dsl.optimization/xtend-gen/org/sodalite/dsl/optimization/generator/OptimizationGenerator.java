@@ -3,10 +3,32 @@
  */
 package org.sodalite.dsl.optimization.generator;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
+import org.sodalite.dsl.optimization.optimization.EAITrainingCases;
+import org.sodalite.dsl.optimization.optimization.EAITrainingETL;
+import org.sodalite.dsl.optimization.optimization.EAutotuning;
+import org.sodalite.dsl.optimization.optimization.EHPCCase;
+import org.sodalite.dsl.optimization.optimization.EKerasCase;
+import org.sodalite.dsl.optimization.optimization.EMPICase;
+import org.sodalite.dsl.optimization.optimization.EOPENACCCase;
+import org.sodalite.dsl.optimization.optimization.EOPENCLCase;
+import org.sodalite.dsl.optimization.optimization.EOPENMPCase;
+import org.sodalite.dsl.optimization.optimization.EOptBuild;
+import org.sodalite.dsl.optimization.optimization.EOptimizationCases;
+import org.sodalite.dsl.optimization.optimization.EPyTorchCase;
+import org.sodalite.dsl.optimization.optimization.ETensorFlowCase;
+import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 
 /**
  * Generates code from your model files on save.
@@ -15,7 +37,922 @@ import org.eclipse.xtext.generator.IGeneratorContext;
  */
 @SuppressWarnings("all")
 public class OptimizationGenerator extends AbstractGenerator {
+  private boolean comma = false;
+  
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    final String filename = this.getFilename(resource.getURI());
+    fsa.generateFile(filename, this.compileOptimization(resource));
+  }
+  
+  public CharSequence compileOptimization(final Resource r) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      Iterable<Optimization_Model> _filter = Iterables.<Optimization_Model>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), Optimization_Model.class);
+      for(final Optimization_Model m : _filter) {
+        CharSequence _compile = this.compile(m);
+        _builder.append(_compile);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compile(final Optimization_Model m) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\"name\": \"");
+    String _name = m.getName();
+    _builder.append(_name, "\t");
+    _builder.append("\",");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\"optimization\": {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\"enable_opt_build\": ");
+    boolean _isEnable_opt_build = m.getOptimization().isEnable_opt_build();
+    _builder.append(_isEnable_opt_build, "\t\t");
+    _builder.append(",");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("\"enable_autotuning\": ");
+    boolean _isEnable_autotuning = m.getOptimization().isEnable_autotuning();
+    _builder.append(_isEnable_autotuning, "\t\t");
+    _builder.append(",");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("\"app_type\":\"");
+    String _app_type = m.getOptimization().getApp_type();
+    _builder.append(_app_type, "\t\t");
+    _builder.append("\",");
+    _builder.newLineIfNotEmpty();
+    {
+      EOptBuild _opt_build = m.getOptimization().getOpt_build();
+      boolean _tripleNotEquals = (_opt_build != null);
+      if (_tripleNotEquals) {
+        _builder.append("\t\t");
+        _builder.append("\"opt_build\": {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("\"cpu_type\": \"");
+        String _cpu_type = m.getOptimization().getOpt_build().getCpu_type();
+        _builder.append(_cpu_type, "\t\t\t");
+        _builder.append("\",");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("\"acc_type\": \"");
+        String _acc_type = m.getOptimization().getOpt_build().getAcc_type();
+        _builder.append(_acc_type, "\t\t\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("},");
+        _builder.newLine();
+      }
+    }
+    {
+      EAutotuning _autotuning = m.getOptimization().getAutotuning();
+      boolean _tripleNotEquals_1 = (_autotuning != null);
+      if (_tripleNotEquals_1) {
+        _builder.append("\t\t");
+        _builder.append("\"autotuning\": {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("\"tuner\": \"");
+        String _tuner = m.getOptimization().getAutotuning().getTuner();
+        _builder.append(_tuner, "\t\t\t");
+        _builder.append("\",");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("\"input\": \"");
+        String _input = m.getOptimization().getAutotuning().getInput();
+        _builder.append(_input, "\t\t\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("},");
+        _builder.newLine();
+      }
+    }
+    {
+      if (((m.getOptimization().getApp_optimization() != null) && (m.getOptimization().getApp_optimization() instanceof EAITrainingCase))) {
+        _builder.append("\t\t");
+        _builder.append("\"ai_Training\": {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("\"config\": { ");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t       ");
+        _builder.append("\"ai_Framework\": \"");
+        EOptimizationCases _app_optimization = m.getOptimization().getApp_optimization();
+        String _ai_framework = ((EAITrainingCase) _app_optimization).getAi_training().getConfig().getAi_framework();
+        _builder.append(_ai_framework, "\t\t\t       ");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+        {
+          EOptimizationCases _app_optimization_1 = m.getOptimization().getApp_optimization();
+          String _type = ((EAITrainingCase) _app_optimization_1).getAi_training().getConfig().getType();
+          boolean _tripleNotEquals_2 = (_type != null);
+          if (_tripleNotEquals_2) {
+            _builder.append("\t\t");
+            _builder.append("\t       ");
+            _builder.append(",\"type\": \"");
+            EOptimizationCases _app_optimization_2 = m.getOptimization().getApp_optimization();
+            String _type_1 = ((EAITrainingCase) _app_optimization_2).getAi_training().getConfig().getType();
+            _builder.append(_type_1, "\t\t\t       ");
+            _builder.append("\"");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("\t       ");
+        _builder.append(",\"distributed_training\": ");
+        EOptimizationCases _app_optimization_3 = m.getOptimization().getApp_optimization();
+        boolean _isDistributed_training = ((EAITrainingCase) _app_optimization_3).getAi_training().getConfig().isDistributed_training();
+        _builder.append(_isDistributed_training, "\t\t\t       ");
+        _builder.newLineIfNotEmpty();
+        {
+          EOptimizationCases _app_optimization_4 = m.getOptimization().getApp_optimization();
+          int _layers = ((EAITrainingCase) _app_optimization_4).getAi_training().getConfig().getLayers();
+          boolean _greaterThan = (_layers > 0);
+          if (_greaterThan) {
+            _builder.append("\t\t");
+            _builder.append("\t       ");
+            _builder.append(",\"layers\": ");
+            EOptimizationCases _app_optimization_5 = m.getOptimization().getApp_optimization();
+            int _layers_1 = ((EAITrainingCase) _app_optimization_5).getAi_training().getConfig().getLayers();
+            _builder.append(_layers_1, "\t\t\t       ");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_6 = m.getOptimization().getApp_optimization();
+          int _parameters = ((EAITrainingCase) _app_optimization_6).getAi_training().getConfig().getParameters();
+          boolean _greaterThan_1 = (_parameters > 0);
+          if (_greaterThan_1) {
+            _builder.append("\t\t");
+            _builder.append("\t       ");
+            _builder.append(",\"parameters\": ");
+            EOptimizationCases _app_optimization_7 = m.getOptimization().getApp_optimization();
+            int _parameters_1 = ((EAITrainingCase) _app_optimization_7).getAi_training().getConfig().getParameters();
+            _builder.append(_parameters_1, "\t\t\t       ");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("},");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("\"data\": { ");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t\t");
+        this.disableComma();
+        _builder.newLineIfNotEmpty();
+        {
+          EOptimizationCases _app_optimization_8 = m.getOptimization().getApp_optimization();
+          String _location = ((EAITrainingCase) _app_optimization_8).getAi_training().getData().getLocation();
+          boolean _tripleNotEquals_3 = (_location != null);
+          if (_tripleNotEquals_3) {
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"location\": \"");
+            EOptimizationCases _app_optimization_9 = m.getOptimization().getApp_optimization();
+            String _location_1 = ((EAITrainingCase) _app_optimization_9).getAi_training().getData().getLocation();
+            _builder.append(_location_1, "\t\t\t\t");
+            _builder.append("\" ");
+            this.enableComma();
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_10 = m.getOptimization().getApp_optimization();
+          String _basedata = ((EAITrainingCase) _app_optimization_10).getAi_training().getData().getBasedata();
+          boolean _tripleNotEquals_4 = (_basedata != null);
+          if (_tripleNotEquals_4) {
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"basedata\": \"");
+            EOptimizationCases _app_optimization_11 = m.getOptimization().getApp_optimization();
+            String _basedata_1 = ((EAITrainingCase) _app_optimization_11).getAi_training().getData().getBasedata();
+            _builder.append(_basedata_1, "\t\t\t\t");
+            _builder.append("\" ");
+            this.enableComma();
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_12 = m.getOptimization().getApp_optimization();
+          int _size = ((EAITrainingCase) _app_optimization_12).getAi_training().getData().getSize();
+          boolean _greaterThan_2 = (_size > 0);
+          if (_greaterThan_2) {
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"size\": ");
+            EOptimizationCases _app_optimization_13 = m.getOptimization().getApp_optimization();
+            int _size_1 = ((EAITrainingCase) _app_optimization_13).getAi_training().getData().getSize();
+            _builder.append(_size_1, "\t\t\t\t");
+            _builder.append(" ");
+            this.enableComma();
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_14 = m.getOptimization().getApp_optimization();
+          int _count = ((EAITrainingCase) _app_optimization_14).getAi_training().getData().getCount();
+          boolean _greaterThan_3 = (_count > 0);
+          if (_greaterThan_3) {
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"count\": ");
+            EOptimizationCases _app_optimization_15 = m.getOptimization().getApp_optimization();
+            int _count_1 = ((EAITrainingCase) _app_optimization_15).getAi_training().getData().getCount();
+            _builder.append(_count_1, "\t\t\t\t");
+            _builder.append(" ");
+            this.enableComma();
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_16 = m.getOptimization().getApp_optimization();
+          EAITrainingETL _etl = ((EAITrainingCase) _app_optimization_16).getAi_training().getData().getEtl();
+          boolean _tripleNotEquals_5 = (_etl != null);
+          if (_tripleNotEquals_5) {
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"ETL\": { ");
+            this.disableComma();
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_17 = m.getOptimization().getApp_optimization();
+              int _prefetch = ((EAITrainingCase) _app_optimization_17).getAi_training().getData().getEtl().getPrefetch();
+              boolean _greaterThan_4 = (_prefetch > 0);
+              if (_greaterThan_4) {
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t");
+                {
+                  if (this.comma) {
+                    _builder.append(",");
+                  }
+                }
+                _builder.append("\"prefetch\": ");
+                EOptimizationCases _app_optimization_18 = m.getOptimization().getApp_optimization();
+                int _prefetch_1 = ((EAITrainingCase) _app_optimization_18).getAi_training().getData().getEtl().getPrefetch();
+                _builder.append(_prefetch_1, "\t\t\t\t\t");
+                _builder.append(" ");
+                this.enableComma();
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_19 = m.getOptimization().getApp_optimization();
+              int _cache = ((EAITrainingCase) _app_optimization_19).getAi_training().getData().getEtl().getCache();
+              boolean _greaterThan_5 = (_cache > 0);
+              if (_greaterThan_5) {
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t");
+                {
+                  if (this.comma) {
+                    _builder.append(",");
+                  }
+                }
+                _builder.append("\"cache\": ");
+                EOptimizationCases _app_optimization_20 = m.getOptimization().getApp_optimization();
+                int _cache_1 = ((EAITrainingCase) _app_optimization_20).getAi_training().getData().getEtl().getCache();
+                _builder.append(_cache_1, "\t\t\t\t\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        {
+          if (((((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() != null) && 
+            (((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() instanceof EKerasCase))) {
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append(",\"Keras\": { ");
+            this.disableComma();
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_21 = m.getOptimization().getApp_optimization();
+              EAITrainingCases _aitrainingcase = ((EAITrainingCase) _app_optimization_21).getAi_training().getAitrainingcase();
+              String _version = ((EKerasCase) _aitrainingcase).getKeras().getVersion();
+              boolean _notEquals = (!Objects.equal(_version, null));
+              if (_notEquals) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                {
+                  if (this.comma) {
+                    _builder.append(",");
+                  }
+                }
+                _builder.append("\"version\": \"");
+                EOptimizationCases _app_optimization_22 = m.getOptimization().getApp_optimization();
+                EAITrainingCases _aitrainingcase_1 = ((EAITrainingCase) _app_optimization_22).getAi_training().getAitrainingcase();
+                String _version_1 = ((EKerasCase) _aitrainingcase_1).getKeras().getVersion();
+                _builder.append(_version_1, "\t\t\t\t");
+                _builder.append("\" ");
+                this.enableComma();
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_23 = m.getOptimization().getApp_optimization();
+              EAITrainingCases _aitrainingcase_2 = ((EAITrainingCase) _app_optimization_23).getAi_training().getAitrainingcase();
+              String _backend = ((EKerasCase) _aitrainingcase_2).getKeras().getBackend();
+              boolean _notEquals_1 = (!Objects.equal(_backend, null));
+              if (_notEquals_1) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                {
+                  if (this.comma) {
+                    _builder.append(",");
+                  }
+                }
+                _builder.append("\"backend\": \"");
+                EOptimizationCases _app_optimization_24 = m.getOptimization().getApp_optimization();
+                EAITrainingCases _aitrainingcase_3 = ((EAITrainingCase) _app_optimization_24).getAi_training().getAitrainingcase();
+                String _backend_1 = ((EKerasCase) _aitrainingcase_3).getKeras().getBackend();
+                _builder.append(_backend_1, "\t\t\t\t");
+                _builder.append("\",");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        {
+          if (((((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() != null) && 
+            (((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() instanceof ETensorFlowCase))) {
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append(",\"TensorFlow\": { ");
+            this.disableComma();
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_25 = m.getOptimization().getApp_optimization();
+              EAITrainingCases _aitrainingcase_4 = ((EAITrainingCase) _app_optimization_25).getAi_training().getAitrainingcase();
+              String _version_2 = ((ETensorFlowCase) _aitrainingcase_4).getTensorflow().getVersion();
+              boolean _notEquals_2 = (!Objects.equal(_version_2, null));
+              if (_notEquals_2) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                {
+                  if (this.comma) {
+                    _builder.append(",");
+                  }
+                }
+                _builder.append("\"version\": \"");
+                EOptimizationCases _app_optimization_26 = m.getOptimization().getApp_optimization();
+                EAITrainingCases _aitrainingcase_5 = ((EAITrainingCase) _app_optimization_26).getAi_training().getAitrainingcase();
+                String _version_3 = ((ETensorFlowCase) _aitrainingcase_5).getTensorflow().getVersion();
+                _builder.append(_version_3, "\t\t\t\t");
+                _builder.append("\" ");
+                this.enableComma();
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"xla\": ");
+            EOptimizationCases _app_optimization_27 = m.getOptimization().getApp_optimization();
+            EAITrainingCases _aitrainingcase_6 = ((EAITrainingCase) _app_optimization_27).getAi_training().getAitrainingcase();
+            boolean _isXla = ((ETensorFlowCase) _aitrainingcase_6).getTensorflow().isXla();
+            _builder.append(_isXla, "\t\t\t\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        {
+          if (((((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() != null) && 
+            (((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() instanceof EPyTorchCase))) {
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append(",\"PyTorch\": { ");
+            this.disableComma();
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_28 = m.getOptimization().getApp_optimization();
+              EAITrainingCases _aitrainingcase_7 = ((EAITrainingCase) _app_optimization_28).getAi_training().getAitrainingcase();
+              String _version_4 = ((EPyTorchCase) _aitrainingcase_7).getPytorch().getVersion();
+              boolean _notEquals_3 = (!Objects.equal(_version_4, null));
+              if (_notEquals_3) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                {
+                  if (this.comma) {
+                    _builder.append(",");
+                  }
+                }
+                _builder.append("\"version\": \"");
+                EOptimizationCases _app_optimization_29 = m.getOptimization().getApp_optimization();
+                EAITrainingCases _aitrainingcase_8 = ((EAITrainingCase) _app_optimization_29).getAi_training().getAitrainingcase();
+                String _version_5 = ((EPyTorchCase) _aitrainingcase_8).getPytorch().getVersion();
+                _builder.append(_version_5, "\t\t\t\t");
+                _builder.append("\" ");
+                this.enableComma();
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"glow\": ");
+            EOptimizationCases _app_optimization_30 = m.getOptimization().getApp_optimization();
+            EAITrainingCases _aitrainingcase_9 = ((EAITrainingCase) _app_optimization_30).getAi_training().getAitrainingcase();
+            boolean _isGlow = ((EPyTorchCase) _aitrainingcase_9).getPytorch().isGlow();
+            _builder.append(_isGlow, "\t\t\t\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    {
+      if (((m.getOptimization().getApp_optimization() != null) && (m.getOptimization().getApp_optimization() instanceof EHPCCase))) {
+        _builder.append("\t\t");
+        _builder.append("\"hpc\": { ");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("\"config\":{ ");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t   \t");
+        _builder.append("\"parallelisation\": [ ");
+        this.disableComma();
+        _builder.newLineIfNotEmpty();
+        {
+          EOptimizationCases _app_optimization_31 = m.getOptimization().getApp_optimization();
+          EList<String> _parallelisation = ((EHPCCase) _app_optimization_31).getHpc().getConfig().getParallelisation();
+          for(final String entry : ((EList<String>) _parallelisation)) {
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"");
+            _builder.append(entry, "\t\t\t   \t");
+            _builder.append("\"");
+            this.enableComma();
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("\t   \t");
+        _builder.append("]");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t   ");
+        _builder.append("},");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t   ");
+        _builder.append("\"data\":{ ");
+        this.disableComma();
+        _builder.newLineIfNotEmpty();
+        {
+          EOptimizationCases _app_optimization_32 = m.getOptimization().getApp_optimization();
+          String _location_2 = ((EHPCCase) _app_optimization_32).getHpc().getData().getLocation();
+          boolean _tripleNotEquals_6 = (_location_2 != null);
+          if (_tripleNotEquals_6) {
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"location\": \"");
+            EOptimizationCases _app_optimization_33 = m.getOptimization().getApp_optimization();
+            String _location_3 = ((EHPCCase) _app_optimization_33).getHpc().getData().getLocation();
+            _builder.append(_location_3, "\t\t\t   \t");
+            _builder.append("\" ");
+            this.enableComma();
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_34 = m.getOptimization().getApp_optimization();
+          String _basedata_2 = ((EHPCCase) _app_optimization_34).getHpc().getData().getBasedata();
+          boolean _tripleNotEquals_7 = (_basedata_2 != null);
+          if (_tripleNotEquals_7) {
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"basedata\": \"");
+            EOptimizationCases _app_optimization_35 = m.getOptimization().getApp_optimization();
+            String _basedata_3 = ((EHPCCase) _app_optimization_35).getHpc().getData().getBasedata();
+            _builder.append(_basedata_3, "\t\t\t   \t");
+            _builder.append("\" ");
+            this.enableComma();
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_36 = m.getOptimization().getApp_optimization();
+          int _size_2 = ((EHPCCase) _app_optimization_36).getHpc().getData().getSize();
+          boolean _greaterThan_6 = (_size_2 > 0);
+          if (_greaterThan_6) {
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"size\": ");
+            EOptimizationCases _app_optimization_37 = m.getOptimization().getApp_optimization();
+            int _size_3 = ((EHPCCase) _app_optimization_37).getHpc().getData().getSize();
+            _builder.append(_size_3, "\t\t\t   \t");
+            _builder.append(" ");
+            this.enableComma();
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_38 = m.getOptimization().getApp_optimization();
+          int _count_2 = ((EHPCCase) _app_optimization_38).getHpc().getData().getCount();
+          boolean _greaterThan_7 = (_count_2 > 0);
+          if (_greaterThan_7) {
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"count\": ");
+            EOptimizationCases _app_optimization_39 = m.getOptimization().getApp_optimization();
+            int _count_3 = ((EHPCCase) _app_optimization_39).getHpc().getData().getCount();
+            _builder.append(_count_3, "\t\t\t   \t");
+            _builder.append(" ");
+            this.enableComma();
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("\t   ");
+        _builder.append("}");
+        _builder.newLine();
+        {
+          EOptimizationCases _app_optimization_40 = m.getOptimization().getApp_optimization();
+          EMPICase _mpi = ((EHPCCase) _app_optimization_40).getHpc().getMpi();
+          boolean _tripleNotEquals_8 = (_mpi != null);
+          if (_tripleNotEquals_8) {
+            _builder.append("\t\t");
+            _builder.append("\t   ");
+            _builder.append(",\"mpi\": {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t   ");
+            _builder.append("    ");
+            _builder.append("\"library\": \"");
+            EOptimizationCases _app_optimization_41 = m.getOptimization().getApp_optimization();
+            String _library = ((EHPCCase) _app_optimization_41).getHpc().getMpi().getMpi().getLibrary();
+            _builder.append(_library, "\t\t\t       ");
+            _builder.append("\"");
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_42 = m.getOptimization().getApp_optimization();
+              String _version_6 = ((EHPCCase) _app_optimization_42).getHpc().getMpi().getMpi().getVersion();
+              boolean _tripleNotEquals_9 = (_version_6 != null);
+              if (_tripleNotEquals_9) {
+                _builder.append("\t\t");
+                _builder.append("\t   ");
+                _builder.append("    ");
+                _builder.append(",\"version\": \"");
+                EOptimizationCases _app_optimization_43 = m.getOptimization().getApp_optimization();
+                String _library_1 = ((EHPCCase) _app_optimization_43).getHpc().getMpi().getMpi().getLibrary();
+                _builder.append(_library_1, "\t\t\t       ");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_44 = m.getOptimization().getApp_optimization();
+              Double _scaling_efficiency = ((EHPCCase) _app_optimization_44).getHpc().getMpi().getMpi().getScaling_efficiency();
+              boolean _tripleNotEquals_10 = (_scaling_efficiency != null);
+              if (_tripleNotEquals_10) {
+                _builder.append("\t\t");
+                _builder.append("\t   ");
+                _builder.append("    ");
+                _builder.append(",\"scaling_efficiency\": ");
+                EOptimizationCases _app_optimization_45 = m.getOptimization().getApp_optimization();
+                Double _scaling_efficiency_1 = ((EHPCCase) _app_optimization_45).getHpc().getMpi().getMpi().getScaling_efficiency();
+                _builder.append(_scaling_efficiency_1, "\t\t\t       ");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_46 = m.getOptimization().getApp_optimization();
+              int _core_subscription = ((EHPCCase) _app_optimization_46).getHpc().getMpi().getMpi().getCore_subscription();
+              boolean _greaterThan_8 = (_core_subscription > 0);
+              if (_greaterThan_8) {
+                _builder.append("\t\t");
+                _builder.append("\t   ");
+                _builder.append("    ");
+                _builder.append(",\"core_subscription\": ");
+                EOptimizationCases _app_optimization_47 = m.getOptimization().getApp_optimization();
+                int _core_subscription_1 = ((EHPCCase) _app_optimization_47).getHpc().getMpi().getMpi().getCore_subscription();
+                _builder.append(_core_subscription_1, "\t\t\t       ");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_48 = m.getOptimization().getApp_optimization();
+              String _message_size = ((EHPCCase) _app_optimization_48).getHpc().getMpi().getMpi().getMessage_size();
+              boolean _tripleNotEquals_11 = (_message_size != null);
+              if (_tripleNotEquals_11) {
+                _builder.append("\t\t");
+                _builder.append("\t   ");
+                _builder.append("    ");
+                _builder.append(",\"message_size\": \"");
+                EOptimizationCases _app_optimization_49 = m.getOptimization().getApp_optimization();
+                String _message_size_1 = ((EHPCCase) _app_optimization_49).getHpc().getMpi().getMpi().getMessage_size();
+                _builder.append(_message_size_1, "\t\t\t       ");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t   ");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_50 = m.getOptimization().getApp_optimization();
+          EOPENMPCase _openmp = ((EHPCCase) _app_optimization_50).getHpc().getOpenmp();
+          boolean _tripleNotEquals_12 = (_openmp != null);
+          if (_tripleNotEquals_12) {
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            _builder.append(",\"openmp\": {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            _builder.append("    ");
+            _builder.append("\"number_of_threads\": ");
+            EOptimizationCases _app_optimization_51 = m.getOptimization().getApp_optimization();
+            int _number_of_threads = ((EHPCCase) _app_optimization_51).getHpc().getOpenmp().getOpenmp().getNumber_of_threads();
+            _builder.append(_number_of_threads, "\t\t\t   \t    ");
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_52 = m.getOptimization().getApp_optimization();
+              Double _scaling_efficiency_2 = ((EHPCCase) _app_optimization_52).getHpc().getOpenmp().getOpenmp().getScaling_efficiency();
+              boolean _tripleNotEquals_13 = (_scaling_efficiency_2 != null);
+              if (_tripleNotEquals_13) {
+                _builder.append("\t\t");
+                _builder.append("\t   \t");
+                _builder.append("    ");
+                _builder.append(",\"scaling_efficiency\": ");
+                EOptimizationCases _app_optimization_53 = m.getOptimization().getApp_optimization();
+                Double _scaling_efficiency_3 = ((EHPCCase) _app_optimization_53).getHpc().getOpenmp().getOpenmp().getScaling_efficiency();
+                _builder.append(_scaling_efficiency_3, "\t\t\t   \t    ");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_54 = m.getOptimization().getApp_optimization();
+              String _affinity = ((EHPCCase) _app_optimization_54).getHpc().getOpenmp().getOpenmp().getAffinity();
+              boolean _tripleNotEquals_14 = (_affinity != null);
+              if (_tripleNotEquals_14) {
+                _builder.append("\t\t");
+                _builder.append("\t   \t");
+                _builder.append("    ");
+                _builder.append(",\"affinity\": \"");
+                EOptimizationCases _app_optimization_55 = m.getOptimization().getApp_optimization();
+                String _affinity_1 = ((EHPCCase) _app_optimization_55).getHpc().getOpenmp().getOpenmp().getAffinity();
+                _builder.append(_affinity_1, "\t\t\t   \t    ");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_56 = m.getOptimization().getApp_optimization();
+          EOPENACCCase _openacc = ((EHPCCase) _app_optimization_56).getHpc().getOpenacc();
+          boolean _tripleNotEquals_15 = (_openacc != null);
+          if (_tripleNotEquals_15) {
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            _builder.append(",\"openacc\": {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            _builder.append("    ");
+            _builder.append("\"compiler\": \"");
+            EOptimizationCases _app_optimization_57 = m.getOptimization().getApp_optimization();
+            String _compiler = ((EHPCCase) _app_optimization_57).getHpc().getOpenacc().getOpenacc().getCompiler();
+            _builder.append(_compiler, "\t\t\t   \t    ");
+            _builder.append("\"");
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_58 = m.getOptimization().getApp_optimization();
+              String _version_7 = ((EHPCCase) _app_optimization_58).getHpc().getOpenacc().getOpenacc().getVersion();
+              boolean _tripleNotEquals_16 = (_version_7 != null);
+              if (_tripleNotEquals_16) {
+                _builder.append("\t\t");
+                _builder.append("\t   \t");
+                _builder.append("    ");
+                _builder.append(",\"version\": \"");
+                EOptimizationCases _app_optimization_59 = m.getOptimization().getApp_optimization();
+                String _version_8 = ((EHPCCase) _app_optimization_59).getHpc().getOpenacc().getOpenacc().getVersion();
+                _builder.append(_version_8, "\t\t\t   \t    ");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_60 = m.getOptimization().getApp_optimization();
+              int _number_of_acc = ((EHPCCase) _app_optimization_60).getHpc().getOpenacc().getOpenacc().getNumber_of_acc();
+              boolean _greaterThan_9 = (_number_of_acc > 0);
+              if (_greaterThan_9) {
+                _builder.append("\t\t");
+                _builder.append("\t   \t");
+                _builder.append("    ");
+                _builder.append(",\"number_of_acc\": ");
+                EOptimizationCases _app_optimization_61 = m.getOptimization().getApp_optimization();
+                int _number_of_acc_1 = ((EHPCCase) _app_optimization_61).getHpc().getOpenacc().getOpenacc().getNumber_of_acc();
+                _builder.append(_number_of_acc_1, "\t\t\t   \t    ");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_62 = m.getOptimization().getApp_optimization();
+          EOPENCLCase _opencl = ((EHPCCase) _app_optimization_62).getHpc().getOpencl();
+          boolean _tripleNotEquals_17 = (_opencl != null);
+          if (_tripleNotEquals_17) {
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            _builder.append(",\"opencl\": {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            _builder.append("    ");
+            _builder.append("\"compiler\": \"");
+            EOptimizationCases _app_optimization_63 = m.getOptimization().getApp_optimization();
+            String _compiler_1 = ((EHPCCase) _app_optimization_63).getHpc().getOpencl().getOpencl().getCompiler();
+            _builder.append(_compiler_1, "\t\t\t   \t    ");
+            _builder.append("\"");
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_64 = m.getOptimization().getApp_optimization();
+              String _version_9 = ((EHPCCase) _app_optimization_64).getHpc().getOpencl().getOpencl().getVersion();
+              boolean _tripleNotEquals_18 = (_version_9 != null);
+              if (_tripleNotEquals_18) {
+                _builder.append("\t\t");
+                _builder.append("\t   \t");
+                _builder.append("    ");
+                _builder.append(",\"version\": \"");
+                EOptimizationCases _app_optimization_65 = m.getOptimization().getApp_optimization();
+                String _compiler_2 = ((EHPCCase) _app_optimization_65).getHpc().getOpencl().getOpencl().getCompiler();
+                _builder.append(_compiler_2, "\t\t\t   \t    ");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_66 = m.getOptimization().getApp_optimization();
+              int _number_of_acc_2 = ((EHPCCase) _app_optimization_66).getHpc().getOpencl().getOpencl().getNumber_of_acc();
+              boolean _greaterThan_10 = (_number_of_acc_2 > 0);
+              if (_greaterThan_10) {
+                _builder.append("\t\t");
+                _builder.append("\t   \t");
+                _builder.append("    ");
+                _builder.append(",\"number_of_acc\": ");
+                EOptimizationCases _app_optimization_67 = m.getOptimization().getApp_optimization();
+                int _number_of_acc_3 = ((EHPCCase) _app_optimization_67).getHpc().getOpencl().getOpencl().getNumber_of_acc();
+                _builder.append(_number_of_acc_3, "\t\t\t   \t    ");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t   \t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public void disableComma() {
+    this.comma = false;
+  }
+  
+  public void enableComma() {
+    this.comma = true;
+  }
+  
+  public String getFilename(final URI uri) {
+    String filename = uri.toString();
+    int _lastIndexOf = filename.lastIndexOf("/");
+    int _plus = (_lastIndexOf + 1);
+    filename = filename.substring(_plus).concat(".json");
+    return filename;
   }
 }
