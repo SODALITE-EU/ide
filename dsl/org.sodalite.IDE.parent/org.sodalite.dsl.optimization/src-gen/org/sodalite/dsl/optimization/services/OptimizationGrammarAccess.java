@@ -28,35 +28,47 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.Optimization_Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOptimizationKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Assignment cOptimizationAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cOptimizationEOptimizationParserRuleCall_2_0 = (RuleCall)cOptimizationAssignment_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameQUALIFIED_NAMETerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final RuleCall cBEGINTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final Assignment cOptimizationAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cOptimizationEOptimizationParserRuleCall_4_0 = (RuleCall)cOptimizationAssignment_4.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
 		
 		//Optimization_Model:
-		//	'optimization:'
+		//	'optimization' name=QUALIFIED_NAME ':'
 		//	BEGIN
 		//	optimization=EOptimization
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'optimization:' BEGIN optimization=EOptimization END
+		//'optimization' name=QUALIFIED_NAME ':' BEGIN optimization=EOptimization END
 		public Group getGroup() { return cGroup; }
 		
-		//'optimization:'
+		//'optimization'
 		public Keyword getOptimizationKeyword_0() { return cOptimizationKeyword_0; }
 		
+		//name=QUALIFIED_NAME
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//QUALIFIED_NAME
+		public RuleCall getNameQUALIFIED_NAMETerminalRuleCall_1_0() { return cNameQUALIFIED_NAMETerminalRuleCall_1_0; }
+		
+		//':'
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		
 		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
+		public RuleCall getBEGINTerminalRuleCall_3() { return cBEGINTerminalRuleCall_3; }
 		
 		//optimization=EOptimization
-		public Assignment getOptimizationAssignment_2() { return cOptimizationAssignment_2; }
+		public Assignment getOptimizationAssignment_4() { return cOptimizationAssignment_4; }
 		
 		//EOptimization
-		public RuleCall getOptimizationEOptimizationParserRuleCall_2_0() { return cOptimizationEOptimizationParserRuleCall_2_0; }
+		public RuleCall getOptimizationEOptimizationParserRuleCall_4_0() { return cOptimizationEOptimizationParserRuleCall_4_0; }
 		
 		//END
-		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
+		public RuleCall getENDTerminalRuleCall_5() { return cENDTerminalRuleCall_5; }
 	}
 	public class EOptimizationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOptimization");
@@ -2308,6 +2320,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	private final REALElements pREAL;
 	private final TerminalRule tEXT_INT;
 	private final RealValueElements pRealValue;
+	private final TerminalRule tQUALIFIED_NAME;
 	
 	private final Grammar grammar;
 	
@@ -2381,6 +2394,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		this.pREAL = new REALElements();
 		this.tEXT_INT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EXT_INT");
 		this.pRealValue = new RealValueElements();
+		this.tQUALIFIED_NAME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.QUALIFIED_NAME");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -2411,7 +2425,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Optimization_Model:
-	//	'optimization:'
+	//	'optimization' name=QUALIFIED_NAME ':'
 	//	BEGIN
 	//	optimization=EOptimization
 	//	END;
@@ -3052,6 +3066,12 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getRealValueRule() {
 		return getRealValueAccess().getRule();
+	}
+	
+	//terminal QUALIFIED_NAME:
+	//	ID ('.' ID)+;
+	public TerminalRule getQUALIFIED_NAMERule() {
+		return tQUALIFIED_NAME;
 	}
 	
 	//terminal ID:

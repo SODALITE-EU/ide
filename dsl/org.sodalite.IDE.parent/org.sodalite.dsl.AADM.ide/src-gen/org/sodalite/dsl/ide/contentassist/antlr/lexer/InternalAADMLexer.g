@@ -45,6 +45,8 @@ Greater_than : 'greater_than:';
 
 Occurrences : 'occurrences:[';
 
+Optimization : 'optimization:';
+
 Policy_types : 'policy_types:';
 
 Relationship : 'relationship:';

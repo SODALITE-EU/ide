@@ -24,6 +24,7 @@ import org.sodalite.dsl.optimization.optimization.Optimization_Model;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.Optimization_ModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.dsl.optimization.optimization.impl.Optimization_ModelImpl#getOptimization <em>Optimization</em>}</li>
  * </ul>
  *
@@ -31,6 +32,26 @@ import org.sodalite.dsl.optimization.optimization.Optimization_Model;
  */
 public class Optimization_ModelImpl extends MinimalEObjectImpl.Container implements Optimization_Model
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getOptimization() <em>Optimization</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -60,6 +81,31 @@ public class Optimization_ModelImpl extends MinimalEObjectImpl.Container impleme
   protected EClass eStaticClass()
   {
     return OptimizationPackage.Literals.OPTIMIZATION_MODEL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OptimizationPackage.OPTIMIZATION_MODEL__NAME, oldName, name));
   }
 
   /**
@@ -138,6 +184,8 @@ public class Optimization_ModelImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case OptimizationPackage.OPTIMIZATION_MODEL__NAME:
+        return getName();
       case OptimizationPackage.OPTIMIZATION_MODEL__OPTIMIZATION:
         return getOptimization();
     }
@@ -154,6 +202,9 @@ public class Optimization_ModelImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case OptimizationPackage.OPTIMIZATION_MODEL__NAME:
+        setName((String)newValue);
+        return;
       case OptimizationPackage.OPTIMIZATION_MODEL__OPTIMIZATION:
         setOptimization((EOptimization)newValue);
         return;
@@ -171,6 +222,9 @@ public class Optimization_ModelImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case OptimizationPackage.OPTIMIZATION_MODEL__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case OptimizationPackage.OPTIMIZATION_MODEL__OPTIMIZATION:
         setOptimization((EOptimization)null);
         return;
@@ -188,10 +242,29 @@ public class Optimization_ModelImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case OptimizationPackage.OPTIMIZATION_MODEL__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case OptimizationPackage.OPTIMIZATION_MODEL__OPTIMIZATION:
         return optimization != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //Optimization_ModelImpl

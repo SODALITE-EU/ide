@@ -1,4 +1,4 @@
-optimization:
+optimization hpc.mpi: 
 	enable_opt_build: true
 	enable_autotuning: true
 	app_type: HPC

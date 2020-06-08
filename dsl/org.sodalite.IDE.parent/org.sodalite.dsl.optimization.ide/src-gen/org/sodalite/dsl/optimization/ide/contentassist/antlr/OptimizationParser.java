@@ -128,7 +128,8 @@ public class OptimizationParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEConstraintAccess().getGroup_4(), "rule__EConstraint__Group_4__0");
 			builder.put(grammarAccess.getEStatementAccess().getGroup(), "rule__EStatement__Group__0");
 			builder.put(grammarAccess.getREALAccess().getGroup(), "rule__REAL__Group__0");
-			builder.put(grammarAccess.getOptimization_ModelAccess().getOptimizationAssignment_2(), "rule__Optimization_Model__OptimizationAssignment_2");
+			builder.put(grammarAccess.getOptimization_ModelAccess().getNameAssignment_1(), "rule__Optimization_Model__NameAssignment_1");
+			builder.put(grammarAccess.getOptimization_ModelAccess().getOptimizationAssignment_4(), "rule__Optimization_Model__OptimizationAssignment_4");
 			builder.put(grammarAccess.getEOptimizationAccess().getEnable_opt_buildAssignment_0_1(), "rule__EOptimization__Enable_opt_buildAssignment_0_1");
 			builder.put(grammarAccess.getEOptimizationAccess().getEnable_autotuningAssignment_1_1(), "rule__EOptimization__Enable_autotuningAssignment_1_1");
 			builder.put(grammarAccess.getEOptimizationAccess().getApp_typeAssignment_2_1(), "rule__EOptimization__App_typeAssignment_2_1");

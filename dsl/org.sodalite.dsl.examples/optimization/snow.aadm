@@ -69,7 +69,8 @@ node_templates:
 		 	ports: ['8080:8080']
 		 	exposed_ports: ['8080']
 		 	volumes: "/tmp/docker:/tmp"
-		 	optimization:["enable XLA", "enable src build" , "enable prefetching" , "enable CUDADNN" , "enable caching" ]
+		 	
+		 optimization: hpc.mpi
 		 
 		 requirements:
 		 	host:
@@ -77,6 +78,7 @@ node_templates:
 		 	
 		 	dependency:
 		 		node: tensorflow
+		 				 	
 	
 	skyline_alignment:
 		type: sodalite.nodes.DockerizedComponent

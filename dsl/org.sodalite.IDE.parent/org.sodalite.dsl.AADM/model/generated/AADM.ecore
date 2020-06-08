@@ -19,6 +19,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ENodeTemplateBody">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="optimization" eType="ecore:EClass platform:/resource/org.sodalite.dsl.optimization/model/generated/Optimization.ecore#//Optimization_Model"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//EPropertyAssigments"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="atributes" eType="#//EAttributeAssigments"

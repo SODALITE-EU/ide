@@ -36,6 +36,7 @@ Workflow {
 			name = "org.sodalite.dsl.AADM"
 			
 			referencedResource = "platform:/resource/org.sodalite.dsl.RM/model/generated/RM.genmodel"
+			referencedResource = "platform:/resource/org.sodalite.dsl.optimization/model/generated/Optimization.genmodel"
 			
 			fileExtensions = "aadm"
 

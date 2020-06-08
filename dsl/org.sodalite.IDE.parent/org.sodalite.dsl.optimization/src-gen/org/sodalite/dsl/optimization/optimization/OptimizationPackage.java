@@ -68,13 +68,22 @@ public interface OptimizationPackage extends EPackage
   int OPTIMIZATION_MODEL = 0;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIMIZATION_MODEL__NAME = 0;
+
+  /**
    * The feature id for the '<em><b>Optimization</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int OPTIMIZATION_MODEL__OPTIMIZATION = 0;
+  int OPTIMIZATION_MODEL__OPTIMIZATION = 1;
 
   /**
    * The number of structural features of the '<em>Optimization Model</em>' class.
@@ -83,7 +92,7 @@ public interface OptimizationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int OPTIMIZATION_MODEL_FEATURE_COUNT = 1;
+  int OPTIMIZATION_MODEL_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.optimization.optimization.impl.EOptimizationImpl <em>EOptimization</em>}' class.
@@ -1415,6 +1424,17 @@ public interface OptimizationPackage extends EPackage
   EClass getOptimization_Model();
 
   /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.Optimization_Model#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.sodalite.dsl.optimization.optimization.Optimization_Model#getName()
+   * @see #getOptimization_Model()
+   * @generated
+   */
+  EAttribute getOptimization_Model_Name();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.sodalite.dsl.optimization.optimization.Optimization_Model#getOptimization <em>Optimization</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2658,6 +2678,14 @@ public interface OptimizationPackage extends EPackage
      * @generated
      */
     EClass OPTIMIZATION_MODEL = eINSTANCE.getOptimization_Model();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIMIZATION_MODEL__NAME = eINSTANCE.getOptimization_Model_Name();
 
     /**
      * The meta object literal for the '<em><b>Optimization</b></em>' containment reference feature.

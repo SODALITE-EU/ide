@@ -7,6 +7,7 @@
   <genPackages prefix="Optimization" basePackage="org.sodalite.dsl.optimization" disposableProviderFactory="true"
       fileExtensions="opt" ecorePackage="Optimization.ecore#/">
     <genClasses ecoreClass="Optimization.ecore#//Optimization_Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Optimization.ecore#//Optimization_Model/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Optimization.ecore#//Optimization_Model/optimization"/>
     </genClasses>
     <genClasses ecoreClass="Optimization.ecore#//EOptimization">

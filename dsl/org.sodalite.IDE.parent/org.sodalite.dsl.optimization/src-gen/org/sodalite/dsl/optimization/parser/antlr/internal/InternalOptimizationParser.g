@@ -73,16 +73,38 @@ ruleOptimization_Model returns [EObject current=null]
 		{
 			newLeafNode(otherlv_0, grammarAccess.getOptimization_ModelAccess().getOptimizationKeyword_0());
 		}
-		this_BEGIN_1=RULE_BEGIN
+		(
+			(
+				lv_name_1_0=RULE_QUALIFIED_NAME
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getOptimization_ModelAccess().getNameQUALIFIED_NAMETerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getOptimization_ModelRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.sodalite.dsl.optimization.Optimization.QUALIFIED_NAME");
+				}
+			)
+		)
+		otherlv_2=Colon
 		{
-			newLeafNode(this_BEGIN_1, grammarAccess.getOptimization_ModelAccess().getBEGINTerminalRuleCall_1());
+			newLeafNode(otherlv_2, grammarAccess.getOptimization_ModelAccess().getColonKeyword_2());
+		}
+		this_BEGIN_3=RULE_BEGIN
+		{
+			newLeafNode(this_BEGIN_3, grammarAccess.getOptimization_ModelAccess().getBEGINTerminalRuleCall_3());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getOptimization_ModelAccess().getOptimizationEOptimizationParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getOptimization_ModelAccess().getOptimizationEOptimizationParserRuleCall_4_0());
 				}
-				lv_optimization_2_0=ruleEOptimization
+				lv_optimization_4_0=ruleEOptimization
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getOptimization_ModelRule());
@@ -90,15 +112,15 @@ ruleOptimization_Model returns [EObject current=null]
 					set(
 						$current,
 						"optimization",
-						lv_optimization_2_0,
+						lv_optimization_4_0,
 						"org.sodalite.dsl.optimization.Optimization.EOptimization");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		this_END_3=RULE_END
+		this_END_5=RULE_END
 		{
-			newLeafNode(this_END_3, grammarAccess.getOptimization_ModelAccess().getENDTerminalRuleCall_3());
+			newLeafNode(this_END_5, grammarAccess.getOptimization_ModelAccess().getENDTerminalRuleCall_5());
 		}
 	)
 ;

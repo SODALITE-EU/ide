@@ -39,11 +39,11 @@ Ai_framework : 'ai_framework:';
 
 Message_size : 'message_size:';
 
-Optimization : 'optimization:';
-
 AI_Inference : 'AI_Inference';
 
 Ai_training : 'ai_training:';
+
+Optimization : 'optimization';
 
 AI_Training : 'AI_Training';
 
@@ -195,6 +195,8 @@ Comma : ',';
 
 FullStop : '.';
 
+Colon : ':';
+
 RULE_BT : '>';
 
 RULE_LT : '<';
@@ -219,7 +221,9 @@ RULE_BOOLEAN : ('true'|'false');
 
 RULE_EXT_INT : RULE_INT ('e'|'E') ('-'|'+') RULE_INT;
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_QUALIFIED_NAME : RULE_ID ('.' RULE_ID)+;
+
+fragment RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 

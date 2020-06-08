@@ -351,9 +351,20 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
    * @generated
    */
   @Override
+  public EAttribute getOptimization_Model_Name()
+  {
+    return (EAttribute)optimization_ModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getOptimization_Model_Optimization()
   {
-    return (EReference)optimization_ModelEClass.getEStructuralFeatures().get(0);
+    return (EReference)optimization_ModelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1620,6 +1631,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
 
     // Create classes and their features
     optimization_ModelEClass = createEClass(OPTIMIZATION_MODEL);
+    createEAttribute(optimization_ModelEClass, OPTIMIZATION_MODEL__NAME);
     createEReference(optimization_ModelEClass, OPTIMIZATION_MODEL__OPTIMIZATION);
 
     eOptimizationEClass = createEClass(EOPTIMIZATION);
@@ -1803,6 +1815,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
 
     // Initialize classes and features; add operations and parameters
     initEClass(optimization_ModelEClass, Optimization_Model.class, "Optimization_Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOptimization_Model_Name(), ecorePackage.getEString(), "name", null, 0, 1, Optimization_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOptimization_Model_Optimization(), this.getEOptimization(), null, "optimization", null, 0, 1, Optimization_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eOptimizationEClass, EOptimization.class, "EOptimization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -587,15 +587,18 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     Optimization_Model returns Optimization_Model
 	 *
 	 * Constraint:
-	 *     optimization=EOptimization
+	 *     (name=QUALIFIED_NAME optimization=EOptimization)
 	 */
 	protected void sequence_Optimization_Model(ISerializationContext context, Optimization_Model semanticObject) {
 		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.OPTIMIZATION_MODEL__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.OPTIMIZATION_MODEL__NAME));
 			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.OPTIMIZATION_MODEL__OPTIMIZATION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.OPTIMIZATION_MODEL__OPTIMIZATION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getOptimization_ModelAccess().getOptimizationEOptimizationParserRuleCall_2_0(), semanticObject.getOptimization());
+		feeder.accept(grammarAccess.getOptimization_ModelAccess().getNameQUALIFIED_NAMETerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getOptimization_ModelAccess().getOptimizationEOptimizationParserRuleCall_4_0(), semanticObject.getOptimization());
 		feeder.finish();
 	}
 	

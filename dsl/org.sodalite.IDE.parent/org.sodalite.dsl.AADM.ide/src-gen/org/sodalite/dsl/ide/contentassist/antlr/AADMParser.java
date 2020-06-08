@@ -49,6 +49,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_3(), "rule__ENodeTemplateBody__Group_3__0");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_4(), "rule__ENodeTemplateBody__Group_4__0");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_5(), "rule__ENodeTemplateBody__Group_5__0");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getGroup_6(), "rule__ENodeTemplateBody__Group_6__0");
 			builder.put(grammarAccess.getERequirementAssignmentsAccess().getGroup(), "rule__ERequirementAssignments__Group__0");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getGroup(), "rule__ERequirementAssignment__Group__0");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getGroup_3(), "rule__ERequirementAssignment__Group_3__0");
@@ -198,10 +199,11 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENodeTemplateAccess().getNodeAssignment_3(), "rule__ENodeTemplate__NodeAssignment_3");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getTypeAssignment_0_1(), "rule__ENodeTemplateBody__TypeAssignment_0_1");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getDescriptionAssignment_1_1(), "rule__ENodeTemplateBody__DescriptionAssignment_1_1");
-			builder.put(grammarAccess.getENodeTemplateBodyAccess().getPropertiesAssignment_2_2(), "rule__ENodeTemplateBody__PropertiesAssignment_2_2");
-			builder.put(grammarAccess.getENodeTemplateBodyAccess().getAtributesAssignment_3_2(), "rule__ENodeTemplateBody__AtributesAssignment_3_2");
-			builder.put(grammarAccess.getENodeTemplateBodyAccess().getRequirementsAssignment_4_2(), "rule__ENodeTemplateBody__RequirementsAssignment_4_2");
-			builder.put(grammarAccess.getENodeTemplateBodyAccess().getCapabilitiesAssignment_5_2(), "rule__ENodeTemplateBody__CapabilitiesAssignment_5_2");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getOptimizationAssignment_2_1(), "rule__ENodeTemplateBody__OptimizationAssignment_2_1");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getPropertiesAssignment_3_2(), "rule__ENodeTemplateBody__PropertiesAssignment_3_2");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getAtributesAssignment_4_2(), "rule__ENodeTemplateBody__AtributesAssignment_4_2");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getRequirementsAssignment_5_2(), "rule__ENodeTemplateBody__RequirementsAssignment_5_2");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getCapabilitiesAssignment_6_2(), "rule__ENodeTemplateBody__CapabilitiesAssignment_6_2");
 			builder.put(grammarAccess.getERequirementAssignmentsAccess().getRequirementsAssignment_1(), "rule__ERequirementAssignments__RequirementsAssignment_1");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getNameAssignment_0(), "rule__ERequirementAssignment__NameAssignment_0");
 			builder.put(grammarAccess.getERequirementAssignmentAccess().getNodeAssignment_3_1(), "rule__ERequirementAssignment__NodeAssignment_3_1");

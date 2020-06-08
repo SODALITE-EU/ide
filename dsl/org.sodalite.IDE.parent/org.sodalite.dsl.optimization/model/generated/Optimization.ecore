@@ -3,6 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="optimization" nsURI="http://www.sodalite.org/dsl/optimization/Optimization"
     nsPrefix="optimization">
   <eClassifiers xsi:type="ecore:EClass" name="Optimization_Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="optimization" eType="#//EOptimization"
         containment="true"/>
   </eClassifiers>
