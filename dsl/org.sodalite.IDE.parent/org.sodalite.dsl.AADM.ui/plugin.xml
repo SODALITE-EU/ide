@@ -698,4 +698,17 @@
           class="org.sodalite.dsl.ui.preferences.PreferenceInitializer">
     </initializer>
  </extension>
+ <extension
+       point="org.eclipse.ui.newWizards">
+    <category
+          id="org.sodalite.dsl.newWizard.category"
+          name="Sodalite">
+    </category>
+    <wizard
+          category="org.sodalite.dsl.newWizard.category"
+          class="org.sodalite.dsl.ui.wizards.NewAADMWizard"
+          id="org.sodalite.dsl.AADM.ui.wizard.newAADM"
+          name="Create a new AADM">
+    </wizard>
+ </extension>
 </plugin>
