@@ -19,6 +19,7 @@ import org.sodalite.dsl.optimization.optimization.EAITrainingCases;
 import org.sodalite.dsl.optimization.optimization.EAITrainingETL;
 import org.sodalite.dsl.optimization.optimization.EAutotuning;
 import org.sodalite.dsl.optimization.optimization.EHPCCase;
+import org.sodalite.dsl.optimization.optimization.EHPCETL;
 import org.sodalite.dsl.optimization.optimization.EKerasCase;
 import org.sodalite.dsl.optimization.optimization.EMPICase;
 import org.sodalite.dsl.optimization.optimization.EOPENACCCase;
@@ -144,18 +145,18 @@ public class OptimizationGenerator extends AbstractGenerator {
     {
       if (((m.getOptimization().getApp_optimization() != null) && (m.getOptimization().getApp_optimization() instanceof EAITrainingCase))) {
         _builder.append("\t\t");
-        _builder.append("\"ai_Training\": {");
+        _builder.append("\"ai_training\": {");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
         _builder.append("\"config\": { ");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("\t       ");
-        _builder.append("\"ai_Framework\": \"");
+        _builder.append("\t\t");
+        _builder.append("\"ai_framework\": \"");
         EOptimizationCases _app_optimization = m.getOptimization().getApp_optimization();
         String _ai_framework = ((EAITrainingCase) _app_optimization).getAi_training().getConfig().getAi_framework();
-        _builder.append(_ai_framework, "\t\t\t       ");
+        _builder.append(_ai_framework, "\t\t\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
         {
@@ -164,21 +165,21 @@ public class OptimizationGenerator extends AbstractGenerator {
           boolean _tripleNotEquals_2 = (_type != null);
           if (_tripleNotEquals_2) {
             _builder.append("\t\t");
-            _builder.append("\t       ");
+            _builder.append("\t\t");
             _builder.append(",\"type\": \"");
             EOptimizationCases _app_optimization_2 = m.getOptimization().getApp_optimization();
             String _type_1 = ((EAITrainingCase) _app_optimization_2).getAi_training().getConfig().getType();
-            _builder.append(_type_1, "\t\t\t       ");
+            _builder.append(_type_1, "\t\t\t\t");
             _builder.append("\"");
             _builder.newLineIfNotEmpty();
           }
         }
         _builder.append("\t\t");
-        _builder.append("\t       ");
+        _builder.append("\t\t");
         _builder.append(",\"distributed_training\": ");
         EOptimizationCases _app_optimization_3 = m.getOptimization().getApp_optimization();
         boolean _isDistributed_training = ((EAITrainingCase) _app_optimization_3).getAi_training().getConfig().isDistributed_training();
-        _builder.append(_isDistributed_training, "\t\t\t       ");
+        _builder.append(_isDistributed_training, "\t\t\t\t");
         _builder.newLineIfNotEmpty();
         {
           EOptimizationCases _app_optimization_4 = m.getOptimization().getApp_optimization();
@@ -186,11 +187,11 @@ public class OptimizationGenerator extends AbstractGenerator {
           boolean _greaterThan = (_layers > 0);
           if (_greaterThan) {
             _builder.append("\t\t");
-            _builder.append("\t       ");
+            _builder.append("\t\t");
             _builder.append(",\"layers\": ");
             EOptimizationCases _app_optimization_5 = m.getOptimization().getApp_optimization();
             int _layers_1 = ((EAITrainingCase) _app_optimization_5).getAi_training().getConfig().getLayers();
-            _builder.append(_layers_1, "\t\t\t       ");
+            _builder.append(_layers_1, "\t\t\t\t");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -200,11 +201,11 @@ public class OptimizationGenerator extends AbstractGenerator {
           boolean _greaterThan_1 = (_parameters > 0);
           if (_greaterThan_1) {
             _builder.append("\t\t");
-            _builder.append("\t       ");
+            _builder.append("\t\t");
             _builder.append(",\"parameters\": ");
             EOptimizationCases _app_optimization_7 = m.getOptimization().getApp_optimization();
             int _parameters_1 = ((EAITrainingCase) _app_optimization_7).getAi_training().getConfig().getParameters();
-            _builder.append(_parameters_1, "\t\t\t       ");
+            _builder.append(_parameters_1, "\t\t\t\t");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -316,7 +317,7 @@ public class OptimizationGenerator extends AbstractGenerator {
                 _builder.append(",");
               }
             }
-            _builder.append("\"ETL\": { ");
+            _builder.append("\"etl\": { ");
             this.disableComma();
             _builder.newLineIfNotEmpty();
             {
@@ -376,7 +377,7 @@ public class OptimizationGenerator extends AbstractGenerator {
             (((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() instanceof EKerasCase))) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"Keras\": { ");
+            _builder.append(",\"keras\": { ");
             this.disableComma();
             _builder.newLineIfNotEmpty();
             {
@@ -437,7 +438,7 @@ public class OptimizationGenerator extends AbstractGenerator {
             (((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() instanceof ETensorFlowCase))) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"TensorFlow\": { ");
+            _builder.append(",\"tensorflow\": { ");
             this.disableComma();
             _builder.newLineIfNotEmpty();
             {
@@ -489,7 +490,7 @@ public class OptimizationGenerator extends AbstractGenerator {
             (((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() instanceof EPyTorchCase))) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"PyTorch\": { ");
+            _builder.append(",\"pytorch\": { ");
             this.disableComma();
             _builder.newLineIfNotEmpty();
             {
@@ -551,7 +552,7 @@ public class OptimizationGenerator extends AbstractGenerator {
         _builder.append("\"config\":{ ");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("\t   \t");
+        _builder.append("\t\t");
         _builder.append("\"parallelisation\": [ ");
         this.disableComma();
         _builder.newLineIfNotEmpty();
@@ -560,29 +561,29 @@ public class OptimizationGenerator extends AbstractGenerator {
           EList<String> _parallelisation = ((EHPCCase) _app_optimization_31).getHpc().getConfig().getParallelisation();
           for(final String entry : ((EList<String>) _parallelisation)) {
             _builder.append("\t\t");
-            _builder.append("\t   \t");
+            _builder.append("\t\t\t");
             {
               if (this.comma) {
                 _builder.append(",");
               }
             }
             _builder.append("\"");
-            _builder.append(entry, "\t\t\t   \t");
+            _builder.append(entry, "\t\t\t\t\t");
             _builder.append("\"");
             this.enableComma();
             _builder.newLineIfNotEmpty();
           }
         }
         _builder.append("\t\t");
-        _builder.append("\t   \t");
+        _builder.append("\t\t");
         _builder.append("]");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("\t   ");
+        _builder.append("\t");
         _builder.append("},");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("\t   ");
+        _builder.append("\t");
         _builder.append("\"data\":{ ");
         this.disableComma();
         _builder.newLineIfNotEmpty();
@@ -592,7 +593,7 @@ public class OptimizationGenerator extends AbstractGenerator {
           boolean _tripleNotEquals_6 = (_location_2 != null);
           if (_tripleNotEquals_6) {
             _builder.append("\t\t");
-            _builder.append("\t   \t");
+            _builder.append("\t\t");
             {
               if (this.comma) {
                 _builder.append(",");
@@ -601,7 +602,7 @@ public class OptimizationGenerator extends AbstractGenerator {
             _builder.append("\"location\": \"");
             EOptimizationCases _app_optimization_33 = m.getOptimization().getApp_optimization();
             String _location_3 = ((EHPCCase) _app_optimization_33).getHpc().getData().getLocation();
-            _builder.append(_location_3, "\t\t\t   \t");
+            _builder.append(_location_3, "\t\t\t\t");
             _builder.append("\" ");
             this.enableComma();
             _builder.newLineIfNotEmpty();
@@ -613,7 +614,7 @@ public class OptimizationGenerator extends AbstractGenerator {
           boolean _tripleNotEquals_7 = (_basedata_2 != null);
           if (_tripleNotEquals_7) {
             _builder.append("\t\t");
-            _builder.append("\t   \t");
+            _builder.append("\t\t");
             {
               if (this.comma) {
                 _builder.append(",");
@@ -622,7 +623,7 @@ public class OptimizationGenerator extends AbstractGenerator {
             _builder.append("\"basedata\": \"");
             EOptimizationCases _app_optimization_35 = m.getOptimization().getApp_optimization();
             String _basedata_3 = ((EHPCCase) _app_optimization_35).getHpc().getData().getBasedata();
-            _builder.append(_basedata_3, "\t\t\t   \t");
+            _builder.append(_basedata_3, "\t\t\t\t");
             _builder.append("\" ");
             this.enableComma();
             _builder.newLineIfNotEmpty();
@@ -634,7 +635,7 @@ public class OptimizationGenerator extends AbstractGenerator {
           boolean _greaterThan_6 = (_size_2 > 0);
           if (_greaterThan_6) {
             _builder.append("\t\t");
-            _builder.append("\t   \t");
+            _builder.append("\t\t");
             {
               if (this.comma) {
                 _builder.append(",");
@@ -643,7 +644,7 @@ public class OptimizationGenerator extends AbstractGenerator {
             _builder.append("\"size\": ");
             EOptimizationCases _app_optimization_37 = m.getOptimization().getApp_optimization();
             int _size_3 = ((EHPCCase) _app_optimization_37).getHpc().getData().getSize();
-            _builder.append(_size_3, "\t\t\t   \t");
+            _builder.append(_size_3, "\t\t\t\t");
             _builder.append(" ");
             this.enableComma();
             _builder.newLineIfNotEmpty();
@@ -655,7 +656,7 @@ public class OptimizationGenerator extends AbstractGenerator {
           boolean _greaterThan_7 = (_count_2 > 0);
           if (_greaterThan_7) {
             _builder.append("\t\t");
-            _builder.append("\t   \t");
+            _builder.append("\t\t");
             {
               if (this.comma) {
                 _builder.append(",");
@@ -664,263 +665,57 @@ public class OptimizationGenerator extends AbstractGenerator {
             _builder.append("\"count\": ");
             EOptimizationCases _app_optimization_39 = m.getOptimization().getApp_optimization();
             int _count_3 = ((EHPCCase) _app_optimization_39).getHpc().getData().getCount();
-            _builder.append(_count_3, "\t\t\t   \t");
+            _builder.append(_count_3, "\t\t\t\t");
             _builder.append(" ");
             this.enableComma();
             _builder.newLineIfNotEmpty();
           }
         }
-        _builder.append("\t\t");
-        _builder.append("\t   ");
-        _builder.append("}");
-        _builder.newLine();
         {
           EOptimizationCases _app_optimization_40 = m.getOptimization().getApp_optimization();
-          EMPICase _mpi = ((EHPCCase) _app_optimization_40).getHpc().getMpi();
-          boolean _tripleNotEquals_8 = (_mpi != null);
+          EHPCETL _etl_1 = ((EHPCCase) _app_optimization_40).getHpc().getData().getEtl();
+          boolean _tripleNotEquals_8 = (_etl_1 != null);
           if (_tripleNotEquals_8) {
             _builder.append("\t\t");
-            _builder.append("\t   ");
-            _builder.append(",\"mpi\": {");
-            _builder.newLine();
             _builder.append("\t\t");
-            _builder.append("\t   ");
-            _builder.append("    ");
-            _builder.append("\"library\": \"");
-            EOptimizationCases _app_optimization_41 = m.getOptimization().getApp_optimization();
-            String _library = ((EHPCCase) _app_optimization_41).getHpc().getMpi().getMpi().getLibrary();
-            _builder.append(_library, "\t\t\t       ");
-            _builder.append("\"");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"etl\": { ");
+            this.disableComma();
             _builder.newLineIfNotEmpty();
-            {
-              EOptimizationCases _app_optimization_42 = m.getOptimization().getApp_optimization();
-              String _version_6 = ((EHPCCase) _app_optimization_42).getHpc().getMpi().getMpi().getVersion();
-              boolean _tripleNotEquals_9 = (_version_6 != null);
-              if (_tripleNotEquals_9) {
-                _builder.append("\t\t");
-                _builder.append("\t   ");
-                _builder.append("    ");
-                _builder.append(",\"version\": \"");
-                EOptimizationCases _app_optimization_43 = m.getOptimization().getApp_optimization();
-                String _library_1 = ((EHPCCase) _app_optimization_43).getHpc().getMpi().getMpi().getLibrary();
-                _builder.append(_library_1, "\t\t\t       ");
-                _builder.append("\"");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            {
-              EOptimizationCases _app_optimization_44 = m.getOptimization().getApp_optimization();
-              Double _scaling_efficiency = ((EHPCCase) _app_optimization_44).getHpc().getMpi().getMpi().getScaling_efficiency();
-              boolean _tripleNotEquals_10 = (_scaling_efficiency != null);
-              if (_tripleNotEquals_10) {
-                _builder.append("\t\t");
-                _builder.append("\t   ");
-                _builder.append("    ");
-                _builder.append(",\"scaling_efficiency\": ");
-                EOptimizationCases _app_optimization_45 = m.getOptimization().getApp_optimization();
-                Double _scaling_efficiency_1 = ((EHPCCase) _app_optimization_45).getHpc().getMpi().getMpi().getScaling_efficiency();
-                _builder.append(_scaling_efficiency_1, "\t\t\t       ");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            {
-              EOptimizationCases _app_optimization_46 = m.getOptimization().getApp_optimization();
-              int _core_subscription = ((EHPCCase) _app_optimization_46).getHpc().getMpi().getMpi().getCore_subscription();
-              boolean _greaterThan_8 = (_core_subscription > 0);
-              if (_greaterThan_8) {
-                _builder.append("\t\t");
-                _builder.append("\t   ");
-                _builder.append("    ");
-                _builder.append(",\"core_subscription\": ");
-                EOptimizationCases _app_optimization_47 = m.getOptimization().getApp_optimization();
-                int _core_subscription_1 = ((EHPCCase) _app_optimization_47).getHpc().getMpi().getMpi().getCore_subscription();
-                _builder.append(_core_subscription_1, "\t\t\t       ");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            {
-              EOptimizationCases _app_optimization_48 = m.getOptimization().getApp_optimization();
-              String _message_size = ((EHPCCase) _app_optimization_48).getHpc().getMpi().getMpi().getMessage_size();
-              boolean _tripleNotEquals_11 = (_message_size != null);
-              if (_tripleNotEquals_11) {
-                _builder.append("\t\t");
-                _builder.append("\t   ");
-                _builder.append("    ");
-                _builder.append(",\"message_size\": \"");
-                EOptimizationCases _app_optimization_49 = m.getOptimization().getApp_optimization();
-                String _message_size_1 = ((EHPCCase) _app_optimization_49).getHpc().getMpi().getMpi().getMessage_size();
-                _builder.append(_message_size_1, "\t\t\t       ");
-                _builder.append("\"");
-                _builder.newLineIfNotEmpty();
-              }
-            }
             _builder.append("\t\t");
-            _builder.append("\t   ");
+            _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-        {
-          EOptimizationCases _app_optimization_50 = m.getOptimization().getApp_optimization();
-          EOPENMPCase _openmp = ((EHPCCase) _app_optimization_50).getHpc().getOpenmp();
-          boolean _tripleNotEquals_12 = (_openmp != null);
-          if (_tripleNotEquals_12) {
-            _builder.append("\t\t");
-            _builder.append("\t   \t");
-            _builder.append(",\"openmp\": {");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("\t   \t");
-            _builder.append("    ");
-            _builder.append("\"number_of_threads\": ");
-            EOptimizationCases _app_optimization_51 = m.getOptimization().getApp_optimization();
-            int _number_of_threads = ((EHPCCase) _app_optimization_51).getHpc().getOpenmp().getOpenmp().getNumber_of_threads();
-            _builder.append(_number_of_threads, "\t\t\t   \t    ");
+            {
+              if (this.comma) {
+                _builder.append(",");
+              }
+            }
+            _builder.append("\"prefetch\": ");
+            EOptimizationCases _app_optimization_41 = m.getOptimization().getApp_optimization();
+            boolean _isPrefetch = ((EHPCCase) _app_optimization_41).getHpc().getData().getEtl().isPrefetch();
+            _builder.append(_isPrefetch, "\t\t\t\t\t");
+            _builder.append(" ");
+            this.enableComma();
             _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("\t");
             {
-              EOptimizationCases _app_optimization_52 = m.getOptimization().getApp_optimization();
-              Double _scaling_efficiency_2 = ((EHPCCase) _app_optimization_52).getHpc().getOpenmp().getOpenmp().getScaling_efficiency();
-              boolean _tripleNotEquals_13 = (_scaling_efficiency_2 != null);
-              if (_tripleNotEquals_13) {
-                _builder.append("\t\t");
-                _builder.append("\t   \t");
-                _builder.append("    ");
-                _builder.append(",\"scaling_efficiency\": ");
-                EOptimizationCases _app_optimization_53 = m.getOptimization().getApp_optimization();
-                Double _scaling_efficiency_3 = ((EHPCCase) _app_optimization_53).getHpc().getOpenmp().getOpenmp().getScaling_efficiency();
-                _builder.append(_scaling_efficiency_3, "\t\t\t   \t    ");
-                _builder.newLineIfNotEmpty();
+              if (this.comma) {
+                _builder.append(",");
               }
             }
-            {
-              EOptimizationCases _app_optimization_54 = m.getOptimization().getApp_optimization();
-              String _affinity = ((EHPCCase) _app_optimization_54).getHpc().getOpenmp().getOpenmp().getAffinity();
-              boolean _tripleNotEquals_14 = (_affinity != null);
-              if (_tripleNotEquals_14) {
-                _builder.append("\t\t");
-                _builder.append("\t   \t");
-                _builder.append("    ");
-                _builder.append(",\"affinity\": \"");
-                EOptimizationCases _app_optimization_55 = m.getOptimization().getApp_optimization();
-                String _affinity_1 = ((EHPCCase) _app_optimization_55).getHpc().getOpenmp().getOpenmp().getAffinity();
-                _builder.append(_affinity_1, "\t\t\t   \t    ");
-                _builder.append("\"");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            _builder.append("\t\t");
-            _builder.append("\t   \t");
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-        {
-          EOptimizationCases _app_optimization_56 = m.getOptimization().getApp_optimization();
-          EOPENACCCase _openacc = ((EHPCCase) _app_optimization_56).getHpc().getOpenacc();
-          boolean _tripleNotEquals_15 = (_openacc != null);
-          if (_tripleNotEquals_15) {
-            _builder.append("\t\t");
-            _builder.append("\t   \t");
-            _builder.append(",\"openacc\": {");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("\t   \t");
-            _builder.append("    ");
-            _builder.append("\"compiler\": \"");
-            EOptimizationCases _app_optimization_57 = m.getOptimization().getApp_optimization();
-            String _compiler = ((EHPCCase) _app_optimization_57).getHpc().getOpenacc().getOpenacc().getCompiler();
-            _builder.append(_compiler, "\t\t\t   \t    ");
-            _builder.append("\"");
+            _builder.append("\"cache\": ");
+            EOptimizationCases _app_optimization_42 = m.getOptimization().getApp_optimization();
+            boolean _isCache = ((EHPCCase) _app_optimization_42).getHpc().getData().getEtl().isCache();
+            _builder.append(_isCache, "\t\t\t\t\t");
             _builder.newLineIfNotEmpty();
-            {
-              EOptimizationCases _app_optimization_58 = m.getOptimization().getApp_optimization();
-              String _version_7 = ((EHPCCase) _app_optimization_58).getHpc().getOpenacc().getOpenacc().getVersion();
-              boolean _tripleNotEquals_16 = (_version_7 != null);
-              if (_tripleNotEquals_16) {
-                _builder.append("\t\t");
-                _builder.append("\t   \t");
-                _builder.append("    ");
-                _builder.append(",\"version\": \"");
-                EOptimizationCases _app_optimization_59 = m.getOptimization().getApp_optimization();
-                String _version_8 = ((EHPCCase) _app_optimization_59).getHpc().getOpenacc().getOpenacc().getVersion();
-                _builder.append(_version_8, "\t\t\t   \t    ");
-                _builder.append("\"");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            {
-              EOptimizationCases _app_optimization_60 = m.getOptimization().getApp_optimization();
-              int _number_of_acc = ((EHPCCase) _app_optimization_60).getHpc().getOpenacc().getOpenacc().getNumber_of_acc();
-              boolean _greaterThan_9 = (_number_of_acc > 0);
-              if (_greaterThan_9) {
-                _builder.append("\t\t");
-                _builder.append("\t   \t");
-                _builder.append("    ");
-                _builder.append(",\"number_of_acc\": ");
-                EOptimizationCases _app_optimization_61 = m.getOptimization().getApp_optimization();
-                int _number_of_acc_1 = ((EHPCCase) _app_optimization_61).getHpc().getOpenacc().getOpenacc().getNumber_of_acc();
-                _builder.append(_number_of_acc_1, "\t\t\t   \t    ");
-                _builder.newLineIfNotEmpty();
-              }
-            }
             _builder.append("\t\t");
-            _builder.append("\t   \t");
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-        {
-          EOptimizationCases _app_optimization_62 = m.getOptimization().getApp_optimization();
-          EOPENCLCase _opencl = ((EHPCCase) _app_optimization_62).getHpc().getOpencl();
-          boolean _tripleNotEquals_17 = (_opencl != null);
-          if (_tripleNotEquals_17) {
             _builder.append("\t\t");
-            _builder.append("\t   \t");
-            _builder.append(",\"opencl\": {");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("\t   \t");
-            _builder.append("    ");
-            _builder.append("\"compiler\": \"");
-            EOptimizationCases _app_optimization_63 = m.getOptimization().getApp_optimization();
-            String _compiler_1 = ((EHPCCase) _app_optimization_63).getHpc().getOpencl().getOpencl().getCompiler();
-            _builder.append(_compiler_1, "\t\t\t   \t    ");
-            _builder.append("\"");
-            _builder.newLineIfNotEmpty();
-            {
-              EOptimizationCases _app_optimization_64 = m.getOptimization().getApp_optimization();
-              String _version_9 = ((EHPCCase) _app_optimization_64).getHpc().getOpencl().getOpencl().getVersion();
-              boolean _tripleNotEquals_18 = (_version_9 != null);
-              if (_tripleNotEquals_18) {
-                _builder.append("\t\t");
-                _builder.append("\t   \t");
-                _builder.append("    ");
-                _builder.append(",\"version\": \"");
-                EOptimizationCases _app_optimization_65 = m.getOptimization().getApp_optimization();
-                String _compiler_2 = ((EHPCCase) _app_optimization_65).getHpc().getOpencl().getOpencl().getCompiler();
-                _builder.append(_compiler_2, "\t\t\t   \t    ");
-                _builder.append("\"");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            {
-              EOptimizationCases _app_optimization_66 = m.getOptimization().getApp_optimization();
-              int _number_of_acc_2 = ((EHPCCase) _app_optimization_66).getHpc().getOpencl().getOpencl().getNumber_of_acc();
-              boolean _greaterThan_10 = (_number_of_acc_2 > 0);
-              if (_greaterThan_10) {
-                _builder.append("\t\t");
-                _builder.append("\t   \t");
-                _builder.append("    ");
-                _builder.append(",\"number_of_acc\": ");
-                EOptimizationCases _app_optimization_67 = m.getOptimization().getApp_optimization();
-                int _number_of_acc_3 = ((EHPCCase) _app_optimization_67).getHpc().getOpencl().getOpencl().getNumber_of_acc();
-                _builder.append(_number_of_acc_3, "\t\t\t   \t    ");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            _builder.append("\t\t");
-            _builder.append("\t   \t");
             _builder.append("}");
             _builder.newLine();
           }
@@ -929,12 +724,264 @@ public class OptimizationGenerator extends AbstractGenerator {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        {
+          EOptimizationCases _app_optimization_43 = m.getOptimization().getApp_optimization();
+          EMPICase _mpi = ((EHPCCase) _app_optimization_43).getHpc().getMpi();
+          boolean _tripleNotEquals_9 = (_mpi != null);
+          if (_tripleNotEquals_9) {
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append(",\"mpi\": {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("\"library\": \"");
+            EOptimizationCases _app_optimization_44 = m.getOptimization().getApp_optimization();
+            String _library = ((EHPCCase) _app_optimization_44).getHpc().getMpi().getMpi().getLibrary();
+            _builder.append(_library, "\t\t\t\t");
+            _builder.append("\"");
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_45 = m.getOptimization().getApp_optimization();
+              String _version_6 = ((EHPCCase) _app_optimization_45).getHpc().getMpi().getMpi().getVersion();
+              boolean _tripleNotEquals_10 = (_version_6 != null);
+              if (_tripleNotEquals_10) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"version\": \"");
+                EOptimizationCases _app_optimization_46 = m.getOptimization().getApp_optimization();
+                String _library_1 = ((EHPCCase) _app_optimization_46).getHpc().getMpi().getMpi().getLibrary();
+                _builder.append(_library_1, "\t\t\t\t");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_47 = m.getOptimization().getApp_optimization();
+              Double _scaling_efficiency = ((EHPCCase) _app_optimization_47).getHpc().getMpi().getMpi().getScaling_efficiency();
+              boolean _tripleNotEquals_11 = (_scaling_efficiency != null);
+              if (_tripleNotEquals_11) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"scaling_efficiency\": ");
+                EOptimizationCases _app_optimization_48 = m.getOptimization().getApp_optimization();
+                Double _scaling_efficiency_1 = ((EHPCCase) _app_optimization_48).getHpc().getMpi().getMpi().getScaling_efficiency();
+                _builder.append(_scaling_efficiency_1, "\t\t\t\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_49 = m.getOptimization().getApp_optimization();
+              int _core_subscription = ((EHPCCase) _app_optimization_49).getHpc().getMpi().getMpi().getCore_subscription();
+              boolean _greaterThan_8 = (_core_subscription > 0);
+              if (_greaterThan_8) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"core_subscription\": ");
+                EOptimizationCases _app_optimization_50 = m.getOptimization().getApp_optimization();
+                int _core_subscription_1 = ((EHPCCase) _app_optimization_50).getHpc().getMpi().getMpi().getCore_subscription();
+                _builder.append(_core_subscription_1, "\t\t\t\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_51 = m.getOptimization().getApp_optimization();
+              String _message_size = ((EHPCCase) _app_optimization_51).getHpc().getMpi().getMpi().getMessage_size();
+              boolean _tripleNotEquals_12 = (_message_size != null);
+              if (_tripleNotEquals_12) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"message_size\": \"");
+                EOptimizationCases _app_optimization_52 = m.getOptimization().getApp_optimization();
+                String _message_size_1 = ((EHPCCase) _app_optimization_52).getHpc().getMpi().getMpi().getMessage_size();
+                _builder.append(_message_size_1, "\t\t\t\t");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_53 = m.getOptimization().getApp_optimization();
+          EOPENMPCase _openmp = ((EHPCCase) _app_optimization_53).getHpc().getOpenmp();
+          boolean _tripleNotEquals_13 = (_openmp != null);
+          if (_tripleNotEquals_13) {
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append(",\"openmp\": {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("\"number_of_threads\": ");
+            EOptimizationCases _app_optimization_54 = m.getOptimization().getApp_optimization();
+            int _number_of_threads = ((EHPCCase) _app_optimization_54).getHpc().getOpenmp().getOpenmp().getNumber_of_threads();
+            _builder.append(_number_of_threads, "\t\t\t\t");
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_55 = m.getOptimization().getApp_optimization();
+              Double _scaling_efficiency_2 = ((EHPCCase) _app_optimization_55).getHpc().getOpenmp().getOpenmp().getScaling_efficiency();
+              boolean _tripleNotEquals_14 = (_scaling_efficiency_2 != null);
+              if (_tripleNotEquals_14) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"scaling_efficiency\": ");
+                EOptimizationCases _app_optimization_56 = m.getOptimization().getApp_optimization();
+                Double _scaling_efficiency_3 = ((EHPCCase) _app_optimization_56).getHpc().getOpenmp().getOpenmp().getScaling_efficiency();
+                _builder.append(_scaling_efficiency_3, "\t\t\t\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_57 = m.getOptimization().getApp_optimization();
+              String _affinity = ((EHPCCase) _app_optimization_57).getHpc().getOpenmp().getOpenmp().getAffinity();
+              boolean _tripleNotEquals_15 = (_affinity != null);
+              if (_tripleNotEquals_15) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"affinity\": \"");
+                EOptimizationCases _app_optimization_58 = m.getOptimization().getApp_optimization();
+                String _affinity_1 = ((EHPCCase) _app_optimization_58).getHpc().getOpenmp().getOpenmp().getAffinity();
+                _builder.append(_affinity_1, "\t\t\t\t");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_59 = m.getOptimization().getApp_optimization();
+          EOPENACCCase _openacc = ((EHPCCase) _app_optimization_59).getHpc().getOpenacc();
+          boolean _tripleNotEquals_16 = (_openacc != null);
+          if (_tripleNotEquals_16) {
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append(",\"openacc\": {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("\"compiler\": \"");
+            EOptimizationCases _app_optimization_60 = m.getOptimization().getApp_optimization();
+            String _compiler = ((EHPCCase) _app_optimization_60).getHpc().getOpenacc().getOpenacc().getCompiler();
+            _builder.append(_compiler, "\t\t\t\t");
+            _builder.append("\"");
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_61 = m.getOptimization().getApp_optimization();
+              String _version_7 = ((EHPCCase) _app_optimization_61).getHpc().getOpenacc().getOpenacc().getVersion();
+              boolean _tripleNotEquals_17 = (_version_7 != null);
+              if (_tripleNotEquals_17) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"version\": \"");
+                EOptimizationCases _app_optimization_62 = m.getOptimization().getApp_optimization();
+                String _version_8 = ((EHPCCase) _app_optimization_62).getHpc().getOpenacc().getOpenacc().getVersion();
+                _builder.append(_version_8, "\t\t\t\t");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_63 = m.getOptimization().getApp_optimization();
+              int _number_of_acc = ((EHPCCase) _app_optimization_63).getHpc().getOpenacc().getOpenacc().getNumber_of_acc();
+              boolean _greaterThan_9 = (_number_of_acc > 0);
+              if (_greaterThan_9) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"number_of_acc\": ");
+                EOptimizationCases _app_optimization_64 = m.getOptimization().getApp_optimization();
+                int _number_of_acc_1 = ((EHPCCase) _app_optimization_64).getHpc().getOpenacc().getOpenacc().getNumber_of_acc();
+                _builder.append(_number_of_acc_1, "\t\t\t\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        {
+          EOptimizationCases _app_optimization_65 = m.getOptimization().getApp_optimization();
+          EOPENCLCase _opencl = ((EHPCCase) _app_optimization_65).getHpc().getOpencl();
+          boolean _tripleNotEquals_18 = (_opencl != null);
+          if (_tripleNotEquals_18) {
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append(",\"opencl\": {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("\"compiler\": \"");
+            EOptimizationCases _app_optimization_66 = m.getOptimization().getApp_optimization();
+            String _compiler_1 = ((EHPCCase) _app_optimization_66).getHpc().getOpencl().getOpencl().getCompiler();
+            _builder.append(_compiler_1, "\t\t\t\t");
+            _builder.append("\"");
+            _builder.newLineIfNotEmpty();
+            {
+              EOptimizationCases _app_optimization_67 = m.getOptimization().getApp_optimization();
+              String _version_9 = ((EHPCCase) _app_optimization_67).getHpc().getOpencl().getOpencl().getVersion();
+              boolean _tripleNotEquals_19 = (_version_9 != null);
+              if (_tripleNotEquals_19) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"version\": \"");
+                EOptimizationCases _app_optimization_68 = m.getOptimization().getApp_optimization();
+                String _compiler_2 = ((EHPCCase) _app_optimization_68).getHpc().getOpencl().getOpencl().getCompiler();
+                _builder.append(_compiler_2, "\t\t\t\t");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              EOptimizationCases _app_optimization_69 = m.getOptimization().getApp_optimization();
+              int _number_of_acc_2 = ((EHPCCase) _app_optimization_69).getHpc().getOpencl().getOpencl().getNumber_of_acc();
+              boolean _greaterThan_10 = (_number_of_acc_2 > 0);
+              if (_greaterThan_10) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append(",\"number_of_acc\": ");
+                EOptimizationCases _app_optimization_70 = m.getOptimization().getApp_optimization();
+                int _number_of_acc_3 = ((EHPCCase) _app_optimization_70).getHpc().getOpencl().getOpencl().getNumber_of_acc();
+                _builder.append(_number_of_acc_3, "\t\t\t\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
       }
     }
-    _builder.append("\t\t");
+    _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
     return _builder;

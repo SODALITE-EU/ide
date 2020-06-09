@@ -562,24 +562,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EPyTorchCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EPyTorchCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPyTorchKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cPytorchKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cPytorchAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cPytorchEPyTorchParserRuleCall_2_0 = (RuleCall)cPytorchAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EPyTorchCase:
-		//	'pyTorch:'
+		//	'pytorch:'
 		//	BEGIN
 		//	pytorch=EPyTorch
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'pyTorch:' BEGIN pytorch=EPyTorch END
+		//'pytorch:' BEGIN pytorch=EPyTorch END
 		public Group getGroup() { return cGroup; }
 		
-		//'pyTorch:'
-		public Keyword getPyTorchKeyword_0() { return cPyTorchKeyword_0; }
+		//'pytorch:'
+		public Keyword getPytorchKeyword_0() { return cPytorchKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -2324,7 +2324,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EPyTorchCase:
-	//	'pyTorch:'
+	//	'pytorch:'
 	//	BEGIN
 	//	pytorch=EPyTorch
 	//	END;

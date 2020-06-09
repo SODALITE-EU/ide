@@ -98,7 +98,7 @@ EAITrainingCases:
 ;
 
 EPyTorchCase:
-	('pyTorch:' 
+	('pytorch:' 
 		BEGIN
 		pytorch=EPyTorch
 		END

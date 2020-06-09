@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOptimizationParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Reinforncement_learning", "Distributed_training", "Image_classification", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "Message_size", "AI_Inference", "Ai_training", "Optimization", "AI_Training", "FPGAXilinx", "NVIDIAV100", "Autotuning", "Parameters", "Tensorflow", "Translation", "TensorFlow", "Opt_build", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Cpu_type", "Location", "Prefetch", "AMDM100", "AUTOTUNE", "Imagenet", "Intelx86", "Backend", "Library", "Openacc", "PyTorch_1", "Version", "BigData", "OPENACC", "PyTorch", "RESTART", "Config", "Layers", "Opencl", "Openmp", "CREATA", "OPENCL", "OPENMP", "Cache", "Count", "Input", "Keras_1", "Medium", "Mvapch", "Opnmpi", "Simple", "Tuner", "CIFAR", "IMAGE", "Keras", "MNIST", "MXNet", "Power", "Block", "Data", "Glow", "Large", "Size", "Small", "Type", "CNTK", "Cray", "Etl", "Hpc", "Mpi", "Xla", "AMD", "ARM", "HPC", "MPI", "Pgi", "Comma", "FullStop", "Colon", "RULE_BT", "RULE_LT", "RULE_BET", "RULE_LET", "RULE_EQUAL", "RULE_NOT_EQUAL", "RULE_OR", "RULE_AND", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Reinforncement_learning", "Distributed_training", "Image_classification", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "Message_size", "AI_Inference", "Ai_training", "Optimization", "AI_Training", "FPGAXilinx", "NVIDIAV100", "Autotuning", "Parameters", "Tensorflow", "Translation", "TensorFlow", "Opt_build", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Cpu_type", "Location", "Prefetch", "AMDM100", "AUTOTUNE", "Imagenet", "Intelx86", "Backend", "Library", "Openacc", "Pytorch", "Version", "BigData", "OPENACC", "PyTorch", "RESTART", "Config", "Layers", "Opencl", "Openmp", "CREATA", "OPENCL", "OPENMP", "Cache", "Count", "Input", "Keras_1", "Medium", "Mvapch", "Opnmpi", "Simple", "Tuner", "CIFAR", "IMAGE", "Keras", "MNIST", "MXNet", "Power", "Block", "Data", "Glow", "Large", "Size", "Small", "Type", "CNTK", "Cray", "Etl", "Hpc", "Mpi", "Xla", "AMD", "ARM", "HPC", "MPI", "Pgi", "Comma", "FullStop", "Colon", "RULE_BT", "RULE_LT", "RULE_BET", "RULE_LET", "RULE_EQUAL", "RULE_NOT_EQUAL", "RULE_OR", "RULE_AND", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int Tensorflow=26;
     public static final int CREATA=55;
@@ -80,12 +80,12 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
     public static final int Opt_build=29;
     public static final int RULE_BT=94;
     public static final int Ai_framework=16;
+    public static final int Pytorch=45;
     public static final int Type=79;
     public static final int Image_classification=6;
     public static final int Message_size=17;
     public static final int Opencl=53;
     public static final int Etl=82;
-    public static final int PyTorch_1=45;
     public static final int Power=72;
     public static final int Number_of_threads=10;
     public static final int RULE_BEGIN=102;
@@ -2432,7 +2432,7 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
                 alt10=2;
                 }
                 break;
-            case PyTorch_1:
+            case Pytorch:
                 {
                 alt10=3;
                 }
@@ -2558,7 +2558,7 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPyTorchCase"
-    // InternalOptimizationParser.g:947:1: ruleEPyTorchCase returns [EObject current=null] : (otherlv_0= PyTorch_1 this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END ) ;
+    // InternalOptimizationParser.g:947:1: ruleEPyTorchCase returns [EObject current=null] : (otherlv_0= Pytorch this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END ) ;
     public final EObject ruleEPyTorchCase() throws RecognitionException {
         EObject current = null;
 
@@ -2572,15 +2572,15 @@ public class InternalOptimizationParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalOptimizationParser.g:953:2: ( (otherlv_0= PyTorch_1 this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END ) )
-            // InternalOptimizationParser.g:954:2: (otherlv_0= PyTorch_1 this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END )
+            // InternalOptimizationParser.g:953:2: ( (otherlv_0= Pytorch this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END ) )
+            // InternalOptimizationParser.g:954:2: (otherlv_0= Pytorch this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END )
             {
-            // InternalOptimizationParser.g:954:2: (otherlv_0= PyTorch_1 this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END )
-            // InternalOptimizationParser.g:955:3: otherlv_0= PyTorch_1 this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END
+            // InternalOptimizationParser.g:954:2: (otherlv_0= Pytorch this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END )
+            // InternalOptimizationParser.g:955:3: otherlv_0= Pytorch this_BEGIN_1= RULE_BEGIN ( (lv_pytorch_2_0= ruleEPyTorch ) ) this_END_3= RULE_END
             {
-            otherlv_0=(Token)match(input,PyTorch_1,FOLLOW_5); 
+            otherlv_0=(Token)match(input,Pytorch,FOLLOW_5); 
 
-            			newLeafNode(otherlv_0, grammarAccess.getEPyTorchCaseAccess().getPyTorchKeyword_0());
+            			newLeafNode(otherlv_0, grammarAccess.getEPyTorchCaseAccess().getPytorchKeyword_0());
             		
             this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_27); 
 

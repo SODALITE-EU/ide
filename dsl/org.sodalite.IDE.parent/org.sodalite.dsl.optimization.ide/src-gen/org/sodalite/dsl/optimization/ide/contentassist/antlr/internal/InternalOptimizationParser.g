@@ -85,7 +85,7 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Backend", "'backend:'");
 		tokenNameToValue.put("Library", "'library:'");
 		tokenNameToValue.put("Openacc", "'openacc:'");
-		tokenNameToValue.put("PyTorch_1", "'pyTorch:'");
+		tokenNameToValue.put("Pytorch", "'pytorch:'");
 		tokenNameToValue.put("Version", "'version:'");
 		tokenNameToValue.put("Acc_type", "'acc_type:'");
 		tokenNameToValue.put("Affinity", "'affinity:'");
@@ -3219,9 +3219,9 @@ rule__EPyTorchCase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEPyTorchCaseAccess().getPyTorchKeyword_0()); }
-	PyTorch_1
-	{ after(grammarAccess.getEPyTorchCaseAccess().getPyTorchKeyword_0()); }
+	{ before(grammarAccess.getEPyTorchCaseAccess().getPytorchKeyword_0()); }
+	Pytorch
+	{ after(grammarAccess.getEPyTorchCaseAccess().getPytorchKeyword_0()); }
 )
 ;
 finally {

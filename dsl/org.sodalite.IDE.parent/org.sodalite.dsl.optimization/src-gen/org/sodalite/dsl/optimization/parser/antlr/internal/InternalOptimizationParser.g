@@ -952,9 +952,9 @@ ruleEPyTorchCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=PyTorch_1
+		otherlv_0=Pytorch
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEPyTorchCaseAccess().getPyTorchKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEPyTorchCaseAccess().getPytorchKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{

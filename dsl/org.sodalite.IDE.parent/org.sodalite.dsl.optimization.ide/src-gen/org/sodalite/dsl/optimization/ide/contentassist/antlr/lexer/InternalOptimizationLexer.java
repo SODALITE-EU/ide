@@ -69,12 +69,12 @@ public class InternalOptimizationLexer extends Lexer {
     public static final int Opt_build=29;
     public static final int RULE_BT=94;
     public static final int Ai_framework=16;
+    public static final int Pytorch=45;
     public static final int Type=79;
     public static final int Image_classification=6;
     public static final int Message_size=17;
     public static final int Opencl=53;
     public static final int Etl=82;
-    public static final int PyTorch_1=45;
     public static final int Power=72;
     public static final int Number_of_threads=10;
     public static final int RULE_BEGIN=102;
@@ -998,15 +998,15 @@ public class InternalOptimizationLexer extends Lexer {
     }
     // $ANTLR end "Openacc"
 
-    // $ANTLR start "PyTorch_1"
-    public final void mPyTorch_1() throws RecognitionException {
+    // $ANTLR start "Pytorch"
+    public final void mPytorch() throws RecognitionException {
         try {
-            int _type = PyTorch_1;
+            int _type = Pytorch;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimizationLexer.g:96:11: ( 'pyTorch:' )
-            // InternalOptimizationLexer.g:96:13: 'pyTorch:'
+            // InternalOptimizationLexer.g:96:9: ( 'pytorch:' )
+            // InternalOptimizationLexer.g:96:11: 'pytorch:'
             {
-            match("pyTorch:"); 
+            match("pytorch:"); 
 
 
             }
@@ -1017,7 +1017,7 @@ public class InternalOptimizationLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "PyTorch_1"
+    // $ANTLR end "Pytorch"
 
     // $ANTLR start "Version"
     public final void mVersion() throws RecognitionException {
@@ -2858,7 +2858,7 @@ public class InternalOptimizationLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalOptimizationLexer.g:1:8: ( Reinforncement_learning | Distributed_training | Image_classification | Scaling_efficiency | Core_subscription | Enable_autotuning | Number_of_threads | Enable_opt_build | Object_detection | Parallelisation | Number_of_acc | Recommendation | Ai_framework | Message_size | AI_Inference | Ai_training | Optimization | AI_Training | FPGAXilinx | NVIDIAV100 | Autotuning | Parameters | Tensorflow | Translation | TensorFlow | Opt_build | Acc_type | Affinity | App_type | Basedata | Compiler | Cpu_type | Location | Prefetch | AMDM100 | AUTOTUNE | Imagenet | Intelx86 | Backend | Library | Openacc | PyTorch_1 | Version | BigData | OPENACC | PyTorch | RESTART | Config | Layers | Opencl | Openmp | CREATA | OPENCL | OPENMP | Cache | Count | Input | Keras_1 | Medium | Mvapch | Opnmpi | Simple | Tuner | CIFAR | IMAGE | Keras | MNIST | MXNet | Power | Block | Data | Glow | Large | Size | Small | Type | CNTK | Cray | Etl | Hpc | Mpi | Xla | AMD | ARM | HPC | MPI | Pgi | Comma | FullStop | Colon | RULE_BT | RULE_LT | RULE_BET | RULE_LET | RULE_EQUAL | RULE_NOT_EQUAL | RULE_OR | RULE_AND | RULE_BOOLEAN | RULE_EXT_INT | RULE_QUALIFIED_NAME | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalOptimizationLexer.g:1:8: ( Reinforncement_learning | Distributed_training | Image_classification | Scaling_efficiency | Core_subscription | Enable_autotuning | Number_of_threads | Enable_opt_build | Object_detection | Parallelisation | Number_of_acc | Recommendation | Ai_framework | Message_size | AI_Inference | Ai_training | Optimization | AI_Training | FPGAXilinx | NVIDIAV100 | Autotuning | Parameters | Tensorflow | Translation | TensorFlow | Opt_build | Acc_type | Affinity | App_type | Basedata | Compiler | Cpu_type | Location | Prefetch | AMDM100 | AUTOTUNE | Imagenet | Intelx86 | Backend | Library | Openacc | Pytorch | Version | BigData | OPENACC | PyTorch | RESTART | Config | Layers | Opencl | Openmp | CREATA | OPENCL | OPENMP | Cache | Count | Input | Keras_1 | Medium | Mvapch | Opnmpi | Simple | Tuner | CIFAR | IMAGE | Keras | MNIST | MXNet | Power | Block | Data | Glow | Large | Size | Small | Type | CNTK | Cray | Etl | Hpc | Mpi | Xla | AMD | ARM | HPC | MPI | Pgi | Comma | FullStop | Colon | RULE_BT | RULE_LT | RULE_BET | RULE_LET | RULE_EQUAL | RULE_NOT_EQUAL | RULE_OR | RULE_AND | RULE_BOOLEAN | RULE_EXT_INT | RULE_QUALIFIED_NAME | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt14=107;
         alt14 = dfa14.predict(input);
         switch (alt14) {
@@ -3150,462 +3150,462 @@ public class InternalOptimizationLexer extends Lexer {
                 }
                 break;
             case 42 :
-                // InternalOptimizationLexer.g:1:523: PyTorch_1
+                // InternalOptimizationLexer.g:1:523: Pytorch
                 {
-                mPyTorch_1(); 
+                mPytorch(); 
 
                 }
                 break;
             case 43 :
-                // InternalOptimizationLexer.g:1:533: Version
+                // InternalOptimizationLexer.g:1:531: Version
                 {
                 mVersion(); 
 
                 }
                 break;
             case 44 :
-                // InternalOptimizationLexer.g:1:541: BigData
+                // InternalOptimizationLexer.g:1:539: BigData
                 {
                 mBigData(); 
 
                 }
                 break;
             case 45 :
-                // InternalOptimizationLexer.g:1:549: OPENACC
+                // InternalOptimizationLexer.g:1:547: OPENACC
                 {
                 mOPENACC(); 
 
                 }
                 break;
             case 46 :
-                // InternalOptimizationLexer.g:1:557: PyTorch
+                // InternalOptimizationLexer.g:1:555: PyTorch
                 {
                 mPyTorch(); 
 
                 }
                 break;
             case 47 :
-                // InternalOptimizationLexer.g:1:565: RESTART
+                // InternalOptimizationLexer.g:1:563: RESTART
                 {
                 mRESTART(); 
 
                 }
                 break;
             case 48 :
-                // InternalOptimizationLexer.g:1:573: Config
+                // InternalOptimizationLexer.g:1:571: Config
                 {
                 mConfig(); 
 
                 }
                 break;
             case 49 :
-                // InternalOptimizationLexer.g:1:580: Layers
+                // InternalOptimizationLexer.g:1:578: Layers
                 {
                 mLayers(); 
 
                 }
                 break;
             case 50 :
-                // InternalOptimizationLexer.g:1:587: Opencl
+                // InternalOptimizationLexer.g:1:585: Opencl
                 {
                 mOpencl(); 
 
                 }
                 break;
             case 51 :
-                // InternalOptimizationLexer.g:1:594: Openmp
+                // InternalOptimizationLexer.g:1:592: Openmp
                 {
                 mOpenmp(); 
 
                 }
                 break;
             case 52 :
-                // InternalOptimizationLexer.g:1:601: CREATA
+                // InternalOptimizationLexer.g:1:599: CREATA
                 {
                 mCREATA(); 
 
                 }
                 break;
             case 53 :
-                // InternalOptimizationLexer.g:1:608: OPENCL
+                // InternalOptimizationLexer.g:1:606: OPENCL
                 {
                 mOPENCL(); 
 
                 }
                 break;
             case 54 :
-                // InternalOptimizationLexer.g:1:615: OPENMP
+                // InternalOptimizationLexer.g:1:613: OPENMP
                 {
                 mOPENMP(); 
 
                 }
                 break;
             case 55 :
-                // InternalOptimizationLexer.g:1:622: Cache
+                // InternalOptimizationLexer.g:1:620: Cache
                 {
                 mCache(); 
 
                 }
                 break;
             case 56 :
-                // InternalOptimizationLexer.g:1:628: Count
+                // InternalOptimizationLexer.g:1:626: Count
                 {
                 mCount(); 
 
                 }
                 break;
             case 57 :
-                // InternalOptimizationLexer.g:1:634: Input
+                // InternalOptimizationLexer.g:1:632: Input
                 {
                 mInput(); 
 
                 }
                 break;
             case 58 :
-                // InternalOptimizationLexer.g:1:640: Keras_1
+                // InternalOptimizationLexer.g:1:638: Keras_1
                 {
                 mKeras_1(); 
 
                 }
                 break;
             case 59 :
-                // InternalOptimizationLexer.g:1:648: Medium
+                // InternalOptimizationLexer.g:1:646: Medium
                 {
                 mMedium(); 
 
                 }
                 break;
             case 60 :
-                // InternalOptimizationLexer.g:1:655: Mvapch
+                // InternalOptimizationLexer.g:1:653: Mvapch
                 {
                 mMvapch(); 
 
                 }
                 break;
             case 61 :
-                // InternalOptimizationLexer.g:1:662: Opnmpi
+                // InternalOptimizationLexer.g:1:660: Opnmpi
                 {
                 mOpnmpi(); 
 
                 }
                 break;
             case 62 :
-                // InternalOptimizationLexer.g:1:669: Simple
+                // InternalOptimizationLexer.g:1:667: Simple
                 {
                 mSimple(); 
 
                 }
                 break;
             case 63 :
-                // InternalOptimizationLexer.g:1:676: Tuner
+                // InternalOptimizationLexer.g:1:674: Tuner
                 {
                 mTuner(); 
 
                 }
                 break;
             case 64 :
-                // InternalOptimizationLexer.g:1:682: CIFAR
+                // InternalOptimizationLexer.g:1:680: CIFAR
                 {
                 mCIFAR(); 
 
                 }
                 break;
             case 65 :
-                // InternalOptimizationLexer.g:1:688: IMAGE
+                // InternalOptimizationLexer.g:1:686: IMAGE
                 {
                 mIMAGE(); 
 
                 }
                 break;
             case 66 :
-                // InternalOptimizationLexer.g:1:694: Keras
+                // InternalOptimizationLexer.g:1:692: Keras
                 {
                 mKeras(); 
 
                 }
                 break;
             case 67 :
-                // InternalOptimizationLexer.g:1:700: MNIST
+                // InternalOptimizationLexer.g:1:698: MNIST
                 {
                 mMNIST(); 
 
                 }
                 break;
             case 68 :
-                // InternalOptimizationLexer.g:1:706: MXNet
+                // InternalOptimizationLexer.g:1:704: MXNet
                 {
                 mMXNet(); 
 
                 }
                 break;
             case 69 :
-                // InternalOptimizationLexer.g:1:712: Power
+                // InternalOptimizationLexer.g:1:710: Power
                 {
                 mPower(); 
 
                 }
                 break;
             case 70 :
-                // InternalOptimizationLexer.g:1:718: Block
+                // InternalOptimizationLexer.g:1:716: Block
                 {
                 mBlock(); 
 
                 }
                 break;
             case 71 :
-                // InternalOptimizationLexer.g:1:724: Data
+                // InternalOptimizationLexer.g:1:722: Data
                 {
                 mData(); 
 
                 }
                 break;
             case 72 :
-                // InternalOptimizationLexer.g:1:729: Glow
+                // InternalOptimizationLexer.g:1:727: Glow
                 {
                 mGlow(); 
 
                 }
                 break;
             case 73 :
-                // InternalOptimizationLexer.g:1:734: Large
+                // InternalOptimizationLexer.g:1:732: Large
                 {
                 mLarge(); 
 
                 }
                 break;
             case 74 :
-                // InternalOptimizationLexer.g:1:740: Size
+                // InternalOptimizationLexer.g:1:738: Size
                 {
                 mSize(); 
 
                 }
                 break;
             case 75 :
-                // InternalOptimizationLexer.g:1:745: Small
+                // InternalOptimizationLexer.g:1:743: Small
                 {
                 mSmall(); 
 
                 }
                 break;
             case 76 :
-                // InternalOptimizationLexer.g:1:751: Type
+                // InternalOptimizationLexer.g:1:749: Type
                 {
                 mType(); 
 
                 }
                 break;
             case 77 :
-                // InternalOptimizationLexer.g:1:756: CNTK
+                // InternalOptimizationLexer.g:1:754: CNTK
                 {
                 mCNTK(); 
 
                 }
                 break;
             case 78 :
-                // InternalOptimizationLexer.g:1:761: Cray
+                // InternalOptimizationLexer.g:1:759: Cray
                 {
                 mCray(); 
 
                 }
                 break;
             case 79 :
-                // InternalOptimizationLexer.g:1:766: Etl
+                // InternalOptimizationLexer.g:1:764: Etl
                 {
                 mEtl(); 
 
                 }
                 break;
             case 80 :
-                // InternalOptimizationLexer.g:1:770: Hpc
+                // InternalOptimizationLexer.g:1:768: Hpc
                 {
                 mHpc(); 
 
                 }
                 break;
             case 81 :
-                // InternalOptimizationLexer.g:1:774: Mpi
+                // InternalOptimizationLexer.g:1:772: Mpi
                 {
                 mMpi(); 
 
                 }
                 break;
             case 82 :
-                // InternalOptimizationLexer.g:1:778: Xla
+                // InternalOptimizationLexer.g:1:776: Xla
                 {
                 mXla(); 
 
                 }
                 break;
             case 83 :
-                // InternalOptimizationLexer.g:1:782: AMD
+                // InternalOptimizationLexer.g:1:780: AMD
                 {
                 mAMD(); 
 
                 }
                 break;
             case 84 :
-                // InternalOptimizationLexer.g:1:786: ARM
+                // InternalOptimizationLexer.g:1:784: ARM
                 {
                 mARM(); 
 
                 }
                 break;
             case 85 :
-                // InternalOptimizationLexer.g:1:790: HPC
+                // InternalOptimizationLexer.g:1:788: HPC
                 {
                 mHPC(); 
 
                 }
                 break;
             case 86 :
-                // InternalOptimizationLexer.g:1:794: MPI
+                // InternalOptimizationLexer.g:1:792: MPI
                 {
                 mMPI(); 
 
                 }
                 break;
             case 87 :
-                // InternalOptimizationLexer.g:1:798: Pgi
+                // InternalOptimizationLexer.g:1:796: Pgi
                 {
                 mPgi(); 
 
                 }
                 break;
             case 88 :
-                // InternalOptimizationLexer.g:1:802: Comma
+                // InternalOptimizationLexer.g:1:800: Comma
                 {
                 mComma(); 
 
                 }
                 break;
             case 89 :
-                // InternalOptimizationLexer.g:1:808: FullStop
+                // InternalOptimizationLexer.g:1:806: FullStop
                 {
                 mFullStop(); 
 
                 }
                 break;
             case 90 :
-                // InternalOptimizationLexer.g:1:817: Colon
+                // InternalOptimizationLexer.g:1:815: Colon
                 {
                 mColon(); 
 
                 }
                 break;
             case 91 :
-                // InternalOptimizationLexer.g:1:823: RULE_BT
+                // InternalOptimizationLexer.g:1:821: RULE_BT
                 {
                 mRULE_BT(); 
 
                 }
                 break;
             case 92 :
-                // InternalOptimizationLexer.g:1:831: RULE_LT
+                // InternalOptimizationLexer.g:1:829: RULE_LT
                 {
                 mRULE_LT(); 
 
                 }
                 break;
             case 93 :
-                // InternalOptimizationLexer.g:1:839: RULE_BET
+                // InternalOptimizationLexer.g:1:837: RULE_BET
                 {
                 mRULE_BET(); 
 
                 }
                 break;
             case 94 :
-                // InternalOptimizationLexer.g:1:848: RULE_LET
+                // InternalOptimizationLexer.g:1:846: RULE_LET
                 {
                 mRULE_LET(); 
 
                 }
                 break;
             case 95 :
-                // InternalOptimizationLexer.g:1:857: RULE_EQUAL
+                // InternalOptimizationLexer.g:1:855: RULE_EQUAL
                 {
                 mRULE_EQUAL(); 
 
                 }
                 break;
             case 96 :
-                // InternalOptimizationLexer.g:1:868: RULE_NOT_EQUAL
+                // InternalOptimizationLexer.g:1:866: RULE_NOT_EQUAL
                 {
                 mRULE_NOT_EQUAL(); 
 
                 }
                 break;
             case 97 :
-                // InternalOptimizationLexer.g:1:883: RULE_OR
+                // InternalOptimizationLexer.g:1:881: RULE_OR
                 {
                 mRULE_OR(); 
 
                 }
                 break;
             case 98 :
-                // InternalOptimizationLexer.g:1:891: RULE_AND
+                // InternalOptimizationLexer.g:1:889: RULE_AND
                 {
                 mRULE_AND(); 
 
                 }
                 break;
             case 99 :
-                // InternalOptimizationLexer.g:1:900: RULE_BOOLEAN
+                // InternalOptimizationLexer.g:1:898: RULE_BOOLEAN
                 {
                 mRULE_BOOLEAN(); 
 
                 }
                 break;
             case 100 :
-                // InternalOptimizationLexer.g:1:913: RULE_EXT_INT
+                // InternalOptimizationLexer.g:1:911: RULE_EXT_INT
                 {
                 mRULE_EXT_INT(); 
 
                 }
                 break;
             case 101 :
-                // InternalOptimizationLexer.g:1:926: RULE_QUALIFIED_NAME
+                // InternalOptimizationLexer.g:1:924: RULE_QUALIFIED_NAME
                 {
                 mRULE_QUALIFIED_NAME(); 
 
                 }
                 break;
             case 102 :
-                // InternalOptimizationLexer.g:1:946: RULE_INT
+                // InternalOptimizationLexer.g:1:944: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 103 :
-                // InternalOptimizationLexer.g:1:955: RULE_STRING
+                // InternalOptimizationLexer.g:1:953: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 104 :
-                // InternalOptimizationLexer.g:1:967: RULE_ML_COMMENT
+                // InternalOptimizationLexer.g:1:965: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 105 :
-                // InternalOptimizationLexer.g:1:983: RULE_SL_COMMENT
+                // InternalOptimizationLexer.g:1:981: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 106 :
-                // InternalOptimizationLexer.g:1:999: RULE_WS
+                // InternalOptimizationLexer.g:1:997: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 107 :
-                // InternalOptimizationLexer.g:1:1007: RULE_ANY_OTHER
+                // InternalOptimizationLexer.g:1:1005: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -3701,7 +3701,7 @@ public class InternalOptimizationLexer extends Lexer {
             "\1\62\1\uffff\12\62\7\uffff\32\62\4\uffff\1\62\1\uffff\4\62\1\u009d\10\62\1\u009e\5\62\1\u009c\6\62",
             "\1\62\1\uffff\12\62\7\uffff\32\62\4\uffff\1\62\1\uffff\21\62\1\u009f\10\62",
             "\1\62\1\uffff\12\62\7\uffff\32\62\4\uffff\1\62\1\uffff\4\62\1\u00a0\25\62",
-            "\1\62\1\uffff\12\62\7\uffff\23\62\1\u00a1\6\62\4\uffff\1\62\1\uffff\32\62",
+            "\1\62\1\uffff\12\62\7\uffff\32\62\4\uffff\1\62\1\uffff\23\62\1\u00a1\6\62",
             "\1\62\1\uffff\12\62\7\uffff\32\62\4\uffff\1\62\1\uffff\10\62\1\u00a2\21\62",
             "\1\62\1\uffff\12\62\7\uffff\32\62\4\uffff\1\u00a3\1\uffff\32\62",
             "\1\62\1\uffff\12\62\7\uffff\32\62\4\uffff\1\62\1\uffff\23\62\1\u00a4\6\62",
@@ -4376,7 +4376,7 @@ public class InternalOptimizationLexer extends Lexer {
             this.transition = DFA14_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( Reinforncement_learning | Distributed_training | Image_classification | Scaling_efficiency | Core_subscription | Enable_autotuning | Number_of_threads | Enable_opt_build | Object_detection | Parallelisation | Number_of_acc | Recommendation | Ai_framework | Message_size | AI_Inference | Ai_training | Optimization | AI_Training | FPGAXilinx | NVIDIAV100 | Autotuning | Parameters | Tensorflow | Translation | TensorFlow | Opt_build | Acc_type | Affinity | App_type | Basedata | Compiler | Cpu_type | Location | Prefetch | AMDM100 | AUTOTUNE | Imagenet | Intelx86 | Backend | Library | Openacc | PyTorch_1 | Version | BigData | OPENACC | PyTorch | RESTART | Config | Layers | Opencl | Openmp | CREATA | OPENCL | OPENMP | Cache | Count | Input | Keras_1 | Medium | Mvapch | Opnmpi | Simple | Tuner | CIFAR | IMAGE | Keras | MNIST | MXNet | Power | Block | Data | Glow | Large | Size | Small | Type | CNTK | Cray | Etl | Hpc | Mpi | Xla | AMD | ARM | HPC | MPI | Pgi | Comma | FullStop | Colon | RULE_BT | RULE_LT | RULE_BET | RULE_LET | RULE_EQUAL | RULE_NOT_EQUAL | RULE_OR | RULE_AND | RULE_BOOLEAN | RULE_EXT_INT | RULE_QUALIFIED_NAME | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( Reinforncement_learning | Distributed_training | Image_classification | Scaling_efficiency | Core_subscription | Enable_autotuning | Number_of_threads | Enable_opt_build | Object_detection | Parallelisation | Number_of_acc | Recommendation | Ai_framework | Message_size | AI_Inference | Ai_training | Optimization | AI_Training | FPGAXilinx | NVIDIAV100 | Autotuning | Parameters | Tensorflow | Translation | TensorFlow | Opt_build | Acc_type | Affinity | App_type | Basedata | Compiler | Cpu_type | Location | Prefetch | AMDM100 | AUTOTUNE | Imagenet | Intelx86 | Backend | Library | Openacc | Pytorch | Version | BigData | OPENACC | PyTorch | RESTART | Config | Layers | Opencl | Openmp | CREATA | OPENCL | OPENMP | Cache | Count | Input | Keras_1 | Medium | Mvapch | Opnmpi | Simple | Tuner | CIFAR | IMAGE | Keras | MNIST | MXNet | Power | Block | Data | Glow | Large | Size | Small | Type | CNTK | Cray | Etl | Hpc | Mpi | Xla | AMD | ARM | HPC | MPI | Pgi | Comma | FullStop | Colon | RULE_BT | RULE_LT | RULE_BET | RULE_LET | RULE_EQUAL | RULE_NOT_EQUAL | RULE_OR | RULE_AND | RULE_BOOLEAN | RULE_EXT_INT | RULE_QUALIFIED_NAME | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

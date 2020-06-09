@@ -24,7 +24,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOptimizationParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Reinforncement_learning", "Distributed_training", "Image_classification", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "Message_size", "AI_Inference", "Ai_training", "Optimization", "AI_Training", "FPGAXilinx", "NVIDIAV100", "Autotuning", "Parameters", "Tensorflow", "Translation", "TensorFlow", "Opt_build", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Cpu_type", "Location", "Prefetch", "AMDM100", "AUTOTUNE", "Imagenet", "Intelx86", "Backend", "Library", "Openacc", "PyTorch_1", "Version", "BigData", "OPENACC", "PyTorch", "RESTART", "Config", "Layers", "Opencl", "Openmp", "CREATA", "OPENCL", "OPENMP", "Cache", "Count", "Input", "Keras_1", "Medium", "Mvapch", "Opnmpi", "Simple", "Tuner", "CIFAR", "IMAGE", "Keras", "MNIST", "MXNet", "Power", "Block", "Data", "Glow", "Large", "Size", "Small", "Type", "CNTK", "Cray", "Etl", "Hpc", "Mpi", "Xla", "AMD", "ARM", "HPC", "MPI", "Pgi", "Comma", "FullStop", "Colon", "RULE_BT", "RULE_LT", "RULE_BET", "RULE_LET", "RULE_EQUAL", "RULE_NOT_EQUAL", "RULE_OR", "RULE_AND", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Reinforncement_learning", "Distributed_training", "Image_classification", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "Message_size", "AI_Inference", "Ai_training", "Optimization", "AI_Training", "FPGAXilinx", "NVIDIAV100", "Autotuning", "Parameters", "Tensorflow", "Translation", "TensorFlow", "Opt_build", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Cpu_type", "Location", "Prefetch", "AMDM100", "AUTOTUNE", "Imagenet", "Intelx86", "Backend", "Library", "Openacc", "Pytorch", "Version", "BigData", "OPENACC", "PyTorch", "RESTART", "Config", "Layers", "Opencl", "Openmp", "CREATA", "OPENCL", "OPENMP", "Cache", "Count", "Input", "Keras_1", "Medium", "Mvapch", "Opnmpi", "Simple", "Tuner", "CIFAR", "IMAGE", "Keras", "MNIST", "MXNet", "Power", "Block", "Data", "Glow", "Large", "Size", "Small", "Type", "CNTK", "Cray", "Etl", "Hpc", "Mpi", "Xla", "AMD", "ARM", "HPC", "MPI", "Pgi", "Comma", "FullStop", "Colon", "RULE_BT", "RULE_LT", "RULE_BET", "RULE_LET", "RULE_EQUAL", "RULE_NOT_EQUAL", "RULE_OR", "RULE_AND", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int Tensorflow=26;
     public static final int CREATA=55;
@@ -83,12 +83,12 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final int Opt_build=29;
     public static final int RULE_BT=94;
     public static final int Ai_framework=16;
+    public static final int Pytorch=45;
     public static final int Type=79;
     public static final int Image_classification=6;
     public static final int Message_size=17;
     public static final int Opencl=53;
     public static final int Etl=82;
-    public static final int PyTorch_1=45;
     public static final int Power=72;
     public static final int Number_of_threads=10;
     public static final int RULE_BEGIN=102;
@@ -213,7 +213,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     		tokenNameToValue.put("Backend", "'backend:'");
     		tokenNameToValue.put("Library", "'library:'");
     		tokenNameToValue.put("Openacc", "'openacc:'");
-    		tokenNameToValue.put("PyTorch_1", "'pyTorch:'");
+    		tokenNameToValue.put("Pytorch", "'pytorch:'");
     		tokenNameToValue.put("Version", "'version:'");
     		tokenNameToValue.put("Acc_type", "'acc_type:'");
     		tokenNameToValue.put("Affinity", "'affinity:'");
@@ -4309,7 +4309,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
                 alt6=2;
                 }
                 break;
-            case PyTorch_1:
+            case Pytorch:
                 {
                 alt6=3;
                 }
@@ -9657,21 +9657,21 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EPyTorchCase__Group__0__Impl"
-    // InternalOptimizationParser.g:3216:1: rule__EPyTorchCase__Group__0__Impl : ( PyTorch_1 ) ;
+    // InternalOptimizationParser.g:3216:1: rule__EPyTorchCase__Group__0__Impl : ( Pytorch ) ;
     public final void rule__EPyTorchCase__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:3220:1: ( ( PyTorch_1 ) )
-            // InternalOptimizationParser.g:3221:1: ( PyTorch_1 )
+            // InternalOptimizationParser.g:3220:1: ( ( Pytorch ) )
+            // InternalOptimizationParser.g:3221:1: ( Pytorch )
             {
-            // InternalOptimizationParser.g:3221:1: ( PyTorch_1 )
-            // InternalOptimizationParser.g:3222:2: PyTorch_1
+            // InternalOptimizationParser.g:3221:1: ( Pytorch )
+            // InternalOptimizationParser.g:3222:2: Pytorch
             {
-             before(grammarAccess.getEPyTorchCaseAccess().getPyTorchKeyword_0()); 
-            match(input,PyTorch_1,FOLLOW_2); 
-             after(grammarAccess.getEPyTorchCaseAccess().getPyTorchKeyword_0()); 
+             before(grammarAccess.getEPyTorchCaseAccess().getPytorchKeyword_0()); 
+            match(input,Pytorch,FOLLOW_2); 
+             after(grammarAccess.getEPyTorchCaseAccess().getPytorchKeyword_0()); 
 
             }
 

@@ -93,7 +93,7 @@ Library : 'library:';
 
 Openacc : 'openacc:';
 
-PyTorch_1 : 'pyTorch:';
+Pytorch : 'pytorch:';
 
 Version : 'version:';
 

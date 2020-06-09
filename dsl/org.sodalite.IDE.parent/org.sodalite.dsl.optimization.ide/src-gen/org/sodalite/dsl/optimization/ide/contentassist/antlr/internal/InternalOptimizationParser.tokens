@@ -75,7 +75,7 @@
 'parameters:'=25
 'pgi'=90
 'prefetch:'=37
-'pyTorch:'=45
+'pytorch:'=45
 'recommendation'=15
 'reinforncement_learning'=4
 'scaling_efficiency:'=7
