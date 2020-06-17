@@ -37,6 +37,31 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore
 import org.eclipse.core.runtime.preferences.InstanceScope
 import org.sodalite.dsl.ui.preferences.PreferenceConstants
 import java.text.MessageFormat
+import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData
+import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl
+import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode
+import java.util.Collection
+import java.util.Set
+import java.util.SortedSet
+import java.util.TreeSet
+import java.util.List
+import org.sodalite.dsl.aADM.ENodeTemplate
+import java.util.ArrayList
+import org.sodalite.dsl.aADM.AADM_Model
+import java.nio.file.Path
+import java.nio.file.Files
+import java.util.Properties
+import java.nio.channels.FileChannel
+import java.nio.file.StandardOpenOption
+import java.nio.channels.FileLock
+import java.nio.channels.Channels
+import java.nio.file.FileSystems
+import org.eclipse.core.resources.IFile
+import org.eclipse.core.resources.IProject
+import org.eclipse.emf.common.util.URI
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.resources.IResource
+import org.eclipse.core.runtime.IPath
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -194,7 +219,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	}
 	
 	override void completeEPropertyAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("Invoking content assist for EAttributeAssignment::name property")
+		System.out.println("Invoking content assist for EPropertyAssignment::name property")
 		var String proposalText = ""
 		var String displayText = ""
 		var String additionalProposalInfo = ""
@@ -229,7 +254,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	}
 	
 	override void completeERequirementAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-	System.out.println("Invoking content assist for ERequirementAssignment::name property")
+		System.out.println("Invoking content assist for ERequirementAssignment::name property")
 		var String proposalText = ""
 		var String displayText = ""
 		var String additionalProposalInfo = ""
@@ -265,6 +290,109 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		additionalProposalInfo = "represents the symbolic name of a requirement assignment "
 
 		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeERequirementAssignment_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for ERequirementAssignment::node property")
+		var String proposalText = ""
+		var String displayText = ""
+		var String additionalProposalInfo = ""
+		val requirementId = (model as ERequirementAssignmentImpl).name
+		val nodeType = (model.eContainer.eContainer as ENodeTemplateBodyImpl).type
+		
+		val AADM_Model rootModel = findModel(model) as AADM_Model
+		val String aadmURI = getAADMURI (rootModel); //TODO Use aadmURI to determine if KB suggestion belongs to the local model
+		
+		//Get valid requirement nodes from KB
+		var SortedSet<String> types = new TreeSet<String>()
+		val ValidRequirementNodeData vrnd = kbclient.getValidRequirementNodes(requirementId, nodeType);
+		if (vrnd !== null){
+			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
+			for (ValidRequirementNode vrn: vrnd.elements){
+				types.add(vrn.type.label)
+				System.out.println ("Valid requirement node: " + vrn.label)
+			 	val property_label = vrn.label
+			 	displayText = property_label
+				proposalText = property_label
+				if (existsInAadm(vrn.uri.toString, aadmURI)){
+					displayText += " <local>"
+				}else{
+					displayText += " <in KB>"
+				}
+				
+				additionalProposalInfo = "Node " + vrn.label + " of type " + vrn.type.label + " is available in the KB"
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+			}
+		}
+		
+		//Find local nodes that belongs to suggested types
+		val List<ENodeTemplate> localnodes = findLocalNodesForTypes(types, model)
+		for (ENodeTemplate node: localnodes){
+			System.out.println ("Valid requirement local node: " + node.name)
+		 	val property_label = node.name
+			proposalText = property_label
+			displayText = property_label + " <local>"
+			additionalProposalInfo = "Node " + node.name + " of type " + node.node.type + " is available in this AADM model"
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		}
+	
+	}
+		
+	def existsInAadm(String nodeUri, String aadmUri) {
+		return nodeUri.substring(0, nodeUri.lastIndexOf('/')).equals(
+			aadmUri.substring(0, aadmUri.lastIndexOf('/'))
+		)
+	}
+		
+	def getAADMURI(AADM_Model model) {
+		//val String filename = model.eResource.URI.lastSegment
+		val String filepath = model.eResource.URI.toString().substring('platform:/resource'.length)
+		val IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(new org.eclipse.core.runtime.Path(filepath));
+		val IProject project = resource.project
+		val Path path = getAadmPropertiesFile(resource.toString, project);
+		var String uri = null;
+		if (Files.exists(path)) {
+			val Properties props = new Properties();
+			try(val FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
+			val FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
+				props.load(Channels.newInputStream(channel));
+			}
+			uri = props.getProperty("URI");
+		}
+		
+		return uri;
+	}
+		
+	def getAadmPropertiesFile(String filepath, IProject project) {
+		//val String filepath = aadmFile.toString();
+		val String filename = filepath.substring(filepath.lastIndexOf("/") + 1);
+		val String directory = filepath.substring(filepath.indexOf('/', 2) + 1, filepath.lastIndexOf("/"));
+		val IFile propertiesFile = project.getFile(directory + "/." + filename + ".properties");
+		var String properties_path = propertiesFile.getLocationURI().toString();
+		properties_path = properties_path.substring(properties_path.indexOf("/"));
+		val Path path = FileSystems.getDefault().getPath(properties_path);
+		return path;
+	}
+	
+	
+		
+	def findLocalNodesForTypes(SortedSet<String> types, EObject reqAssign) {
+		val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
+		val AADM_Model model = findModel(reqAssign) as AADM_Model
+		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
+			if (types.contains(node.node.type))
+				nodes.add(node)
+		}
+		return nodes
+	}
+		
+	def findModel(EObject object) {
+		if (object.eContainer == null)
+			return null
+		else if (object.eContainer instanceof AADM_Model)
+			return object.eContainer
+		else
+			return findModel(object.eContainer)
 	}
 
 	// Keywords

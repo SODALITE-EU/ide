@@ -94,15 +94,14 @@ public class BackendProxy {
 
 	public void processSaveRM(ExecutionEvent event) throws IOException {
 		// Return selected resource
-		IFile file = getSelectedFile();
-		String rmFilename = file.getName();
-		IProject project = getProject(file);
+		IFile rmFile = getSelectedFile();
+		IProject project = getProject(rmFile);
 		// Get serialize AADM model in Turtle
-		String rmTTL = readTurtle(rmFilename, project);
+		String rmTTL = readTurtle(rmFile.getName(), project);
 
 		// Send model to the KB
-		String rmUri = getURI (rmFilename, project);
-		saveRM(rmTTL, rmFilename, rmUri, project, event);
+		String rmUri = getRmURI (rmFile, project);
+		saveRM(rmTTL, rmFile, rmUri, project, event);
 	}
 
 	private String readTurtle(String filename, IProject project) throws IOException {
@@ -114,8 +113,8 @@ public class BackendProxy {
 		return aadmTTL;
 	}
 	
-	private String getURI(String filename, IProject project) throws IOException {
-		Path path = getPropertiesFile(filename, project);
+	private String getRmURI(IFile rmfile, IProject project) throws IOException {
+		Path path = getRMPropertiesFile(rmfile, project);
 		String uri = null;
 		if (Files.exists(path)) {
 			Properties props = new Properties();
@@ -129,16 +128,19 @@ public class BackendProxy {
 		return uri;
 	}
 
-	private Path getPropertiesFile(String filename, IProject project) {
-		IFile propertiesFile = project.getFile("src-gen/." + filename + ".properties");
+	private Path getRMPropertiesFile(IFile rmfile, IProject project) {
+		String filepath = rmfile.toString();
+		String filename = filepath.substring(filepath.lastIndexOf("/") + 1);
+		String directory = filepath.substring(filepath.indexOf('/', 2) + 1, filepath.lastIndexOf("/"));
+		IFile propertiesFile = project.getFile(directory + "/." + filename + ".properties");
 		String properties_path = propertiesFile.getLocationURI().toString();
 		properties_path = properties_path.substring(properties_path.indexOf("/"));
 		Path path = FileSystems.getDefault().getPath(properties_path);
 		return path;
 	}
 	
-	private void saveURI(String uri, String fileName, IProject project) throws IOException {
-		Path path = getPropertiesFile(fileName, project);
+	private void saveURI(String uri, IFile rmfile, IProject project) throws IOException {
+		Path path = getRMPropertiesFile(rmfile, project);
 		Properties props = new Properties();
 
 		//Create properties file if it does not exist
@@ -154,7 +156,7 @@ public class BackendProxy {
 			}
 	}
 
-	private void saveRM(String rmTTL, String rmFileName, String rmURI, IProject project, ExecutionEvent event) {
+	private void saveRM(String rmTTL, IFile rmFile, String rmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save RM", (ICoreRunnable) monitor -> {
 			try {
 				KBSaveReportData saveReport = kbclient.saveRM(rmTTL, rmURI);
@@ -162,7 +164,7 @@ public class BackendProxy {
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception("The RM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI (saveReport.getURI(), rmFileName, project);
+				saveURI (saveReport.getURI(), rmFile, project);
 				
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override

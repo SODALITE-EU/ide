@@ -96,7 +96,7 @@ public class BackendProxy {
 	
 	public BackendProxy() {
 		IPreferenceStore store = 
-	        	new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui");
+	        new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui");
 		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
 		String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
 		String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
@@ -109,42 +109,39 @@ public class BackendProxy {
 
 	public void processSaveAADM(ExecutionEvent event) throws IOException {
 		// Return selected resource
-		IFile file = getSelectedFile();
-		String aadmFilename = file.getName();
-		IProject project = getProject(file);
+		IFile aadmFile = getSelectedFile();
+		IProject project = getProject(aadmFile);
 		// Get serialize AADM model in Turtle
-		String aadmTTL = readTurtle(aadmFilename, project);
+		String aadmTTL = readTurtle(aadmFile.getName(), project);
 
 		// Send model to the KB
-		String aadmURI = getURI (aadmFilename, project);
-		saveAADM(aadmTTL, aadmFilename, aadmURI, project, event);
+		String aadmURI = getAadmURI (aadmFile, project);
+		saveAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 	
 	public void processOptimizeAADM(ExecutionEvent event) throws IOException {
 		// Return selected resource
-		IFile file = getSelectedFile();
-		String aadmFilename = file.getName();
-		IProject project = getProject(file);
+		IFile aadmFile = getSelectedFile();
+		IProject project = getProject(aadmFile);
 		// Get serialize AADM model in Turtle
-		String aadmTTL = readTurtle(aadmFilename, project);
+		String aadmTTL = readTurtle(aadmFile.getName(), project);
 
 		// Send model to the KB
-		String aadmURI = getURI (aadmFilename, project);
-		optimizeAADM(aadmTTL, aadmFilename, aadmURI, project, event);
+		String aadmURI = getAadmURI (aadmFile, project);
+		optimizeAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 
 	
 	public void processDeployAADM(ExecutionEvent event) throws IOException {
 		// Return selected resource
-		IFile file = getSelectedFile();
-		IProject project = getProject(file);
+		IFile aadmFile = getSelectedFile();
+		IProject project = getProject(aadmFile);
 		// Get serialize AADM model in Turtle
-		String aadmFilename = file.getName();
-		String aadmTTL = readTurtle(aadmFilename, project);
+		String aadmTTL = readTurtle(aadmFile.getName(), project);
 
 		// Deploy AADM model
-		String aadmURI = getURI (aadmFilename, project);
-		deployAADM(aadmTTL, aadmFilename, aadmURI, project, event);
+		String aadmURI = getAadmURI (aadmFile, project);
+		deployAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 
 	private String readTurtle(String filename, IProject project) throws IOException {
@@ -156,8 +153,8 @@ public class BackendProxy {
 		return aadmTTL;
 	}
 	
-	private String getURI(String filename, IProject project) throws IOException {
-		Path path = getAadmPropertiesFile(filename, project);
+	private String getAadmURI(IFile aadmFile, IProject project) throws IOException {
+		Path path = getAadmPropertiesFile(aadmFile, project);
 		String uri = null;
 		if (Files.exists(path)) {
 			Properties props = new Properties();
@@ -171,16 +168,19 @@ public class BackendProxy {
 		return uri;
 	}
 
-	private Path getAadmPropertiesFile(String aadmFilename, IProject project) {
-		IFile propertiesFile = project.getFile("src-gen/." + aadmFilename + ".properties");
+	private Path getAadmPropertiesFile(IFile aadmfile, IProject project) {
+		String filepath = aadmfile.toString();
+		String filename = filepath.substring(filepath.lastIndexOf("/") + 1);
+		String directory = filepath.substring(filepath.indexOf('/', 2) + 1, filepath.lastIndexOf("/"));
+		IFile propertiesFile = project.getFile(directory + "/." + filename + ".properties");
 		String properties_path = propertiesFile.getLocationURI().toString();
 		properties_path = properties_path.substring(properties_path.indexOf("/"));
 		Path path = FileSystems.getDefault().getPath(properties_path);
 		return path;
 	}
 	
-	private void saveURI(String uri, String fileName, IProject project) throws IOException {
-		Path path = getAadmPropertiesFile(fileName, project);
+	private void saveURI(String uri, IFile aadmFile, IProject project) throws IOException {
+		Path path = getAadmPropertiesFile(aadmFile, project);
 		Properties props = new Properties();
 
 		//Create properties file if it does not exist
@@ -196,7 +196,7 @@ public class BackendProxy {
 			}
 	}
 
-	private void saveAADM(String aadmTTL, String aadmFileName, String aadmURI, IProject project, ExecutionEvent event) {
+	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
 				KBSaveReportData saveReport = kbclient.saveAADM(aadmTTL, aadmURI);
@@ -204,7 +204,7 @@ public class BackendProxy {
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception("The AADM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI (saveReport.getURI(), aadmFileName, project);
+				saveURI (saveReport.getURI(), aadmFile, project);
 				
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
@@ -229,7 +229,7 @@ public class BackendProxy {
 		job.schedule();
 	}
 	
-	private void optimizeAADM(String aadmTTL, String aadmFileName, String aadmURI, IProject project, ExecutionEvent event) {
+	private void optimizeAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Get AADM optimization recommendations", (ICoreRunnable) monitor -> {
 			try {
 				KBOptimizationReportData optimizationReport = kbclient.optimizeAADM(aadmTTL, aadmURI);
@@ -237,7 +237,7 @@ public class BackendProxy {
 				if (optimizationReport.getURI() == null && optimizationReport.getErrors() == null) {
 					throw new Exception("AADM optimization recommendations could not be retrieved from the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI (optimizationReport.getURI(), aadmFileName, project);
+				saveURI (optimizationReport.getURI(), aadmFile, project);
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
@@ -262,7 +262,7 @@ public class BackendProxy {
 		job.schedule();
 	}
 
-	private void deployAADM(String aadmTTL, String aadmFileName, String aadmURI, IProject project, ExecutionEvent event) {
+	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -280,7 +280,7 @@ public class BackendProxy {
 					if (saveReport != null && saveReport.hasErrors())
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
 					
-					saveURI (saveReport.getURI(), aadmFileName, project);
+					saveURI (saveReport.getURI(), aadmfile, project);
 					subMonitor.worked(1);
 
 					// Ask the AADM JSON serialization to the KB Reasoner
@@ -295,7 +295,7 @@ public class BackendProxy {
 
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");
-					IaCBuilderAADMRegistrationReport iacReport = kbclient.askIaCBuilderToRegisterAADM(aadmFileName, aadmJson);
+					IaCBuilderAADMRegistrationReport iacReport = kbclient.askIaCBuilderToRegisterAADM(aadmfile.getName(), aadmJson);
 					if (iacReport == null || iacReport.getToken().isEmpty())
 						throw new Exception("AADM could not be parsed by IaC Builder");
 					admin_report[0] = iacReport.getToken();

@@ -12,11 +12,28 @@ package org.sodalite.dsl.ui.contentassist;
 
 import com.google.common.base.Objects;
 import java.net.URI;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -31,9 +48,13 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.sodalite.dsl.aADM.AADM_Model;
+import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl;
+import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
@@ -44,6 +65,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.Property;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
+import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.ui.contentassist.AbstractAADMProposalProvider;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
@@ -261,7 +284,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   @Override
   public void completeEPropertyAssignment_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      System.out.println("Invoking content assist for EAttributeAssignment::name property");
+      System.out.println("Invoking content assist for EPropertyAssignment::name property");
       String proposalText = "";
       String displayText = "";
       String additionalProposalInfo = "";
@@ -397,6 +420,165 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeERequirementAssignment_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for ERequirementAssignment::node property");
+      String proposalText = "";
+      String displayText = "";
+      String additionalProposalInfo = "";
+      final String requirementId = ((ERequirementAssignmentImpl) model).getName();
+      EObject _eContainer = model.eContainer().eContainer();
+      final String nodeType = ((ENodeTemplateBodyImpl) _eContainer).getType();
+      Object _findModel = this.findModel(model);
+      final AADM_Model rootModel = ((AADM_Model) _findModel);
+      final String aadmURI = this.getAADMURI(rootModel);
+      SortedSet<String> types = new TreeSet<String>();
+      final ValidRequirementNodeData vrnd = this.kbclient.getValidRequirementNodes(requirementId, nodeType);
+      if ((vrnd != null)) {
+        System.out.println(("Valid requirement nodes retrieved from KB for requirement: " + requirementId));
+        List<ValidRequirementNode> _elements = vrnd.getElements();
+        for (final ValidRequirementNode vrn : _elements) {
+          {
+            types.add(vrn.getType().getLabel());
+            String _label = vrn.getLabel();
+            String _plus = ("Valid requirement node: " + _label);
+            System.out.println(_plus);
+            final String property_label = vrn.getLabel();
+            displayText = property_label;
+            proposalText = property_label;
+            boolean _existsInAadm = this.existsInAadm(vrn.getUri().toString(), aadmURI);
+            if (_existsInAadm) {
+              String _displayText = displayText;
+              displayText = (_displayText + " <local>");
+            } else {
+              String _displayText_1 = displayText;
+              displayText = (_displayText_1 + " <in KB>");
+            }
+            String _label_1 = vrn.getLabel();
+            String _plus_1 = ("Node " + _label_1);
+            String _plus_2 = (_plus_1 + " of type ");
+            String _label_2 = vrn.getType().getLabel();
+            String _plus_3 = (_plus_2 + _label_2);
+            String _plus_4 = (_plus_3 + " is available in the KB");
+            additionalProposalInfo = _plus_4;
+            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+          }
+        }
+      }
+      final List<ENodeTemplate> localnodes = this.findLocalNodesForTypes(types, model);
+      for (final ENodeTemplate node : localnodes) {
+        {
+          String _name = node.getName();
+          String _plus = ("Valid requirement local node: " + _name);
+          System.out.println(_plus);
+          final String property_label = node.getName();
+          proposalText = property_label;
+          displayText = (property_label + " <local>");
+          String _name_1 = node.getName();
+          String _plus_1 = ("Node " + _name_1);
+          String _plus_2 = (_plus_1 + " of type ");
+          String _type = node.getNode().getType();
+          String _plus_3 = (_plus_2 + _type);
+          String _plus_4 = (_plus_3 + " is available in this AADM model");
+          additionalProposalInfo = _plus_4;
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public boolean existsInAadm(final String nodeUri, final String aadmUri) {
+    return nodeUri.substring(0, nodeUri.lastIndexOf("/")).equals(
+      aadmUri.substring(0, aadmUri.lastIndexOf("/")));
+  }
+  
+  public String getAADMURI(final AADM_Model model) {
+    try {
+      final String filepath = model.eResource().getURI().toString().substring("platform:/resource".length());
+      IWorkspaceRoot _root = ResourcesPlugin.getWorkspace().getRoot();
+      Path _path = new Path(filepath);
+      final IResource resource = _root.findMember(_path);
+      final IProject project = resource.getProject();
+      final java.nio.file.Path path = this.getAadmPropertiesFile(resource.toString(), project);
+      String uri = null;
+      boolean _exists = Files.exists(path);
+      if (_exists) {
+        final Properties props = new Properties();
+        try (final FileChannel channel = new Function0<FileChannel>() {
+          @Override
+          public FileChannel apply() {
+            try {
+              return FileChannel.open(path, StandardOpenOption.READ);
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        }.apply(); final FileLock lock = new Function0<FileLock>() {
+          @Override
+          public FileLock apply() {
+            try {
+              return channel.lock(0L, Long.MAX_VALUE, true);
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        }.apply()) {
+          props.load(Channels.newInputStream(channel));
+        }
+        uri = props.getProperty("URI");
+      }
+      return uri;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public java.nio.file.Path getAadmPropertiesFile(final String filepath, final IProject project) {
+    int _lastIndexOf = filepath.lastIndexOf("/");
+    int _plus = (_lastIndexOf + 1);
+    final String filename = filepath.substring(_plus);
+    int _indexOf = filepath.indexOf("/", 2);
+    int _plus_1 = (_indexOf + 1);
+    final String directory = filepath.substring(_plus_1, filepath.lastIndexOf("/"));
+    final IFile propertiesFile = project.getFile((((directory + "/.") + filename) + ".properties"));
+    String properties_path = propertiesFile.getLocationURI().toString();
+    properties_path = properties_path.substring(properties_path.indexOf("/"));
+    final java.nio.file.Path path = FileSystems.getDefault().getPath(properties_path);
+    return path;
+  }
+  
+  public List<ENodeTemplate> findLocalNodesForTypes(final SortedSet<String> types, final EObject reqAssign) {
+    final List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
+    Object _findModel = this.findModel(reqAssign);
+    final AADM_Model model = ((AADM_Model) _findModel);
+    EList<ENodeTemplate> _nodeTemplates = model.getNodeTemplates().getNodeTemplates();
+    for (final ENodeTemplate node : _nodeTemplates) {
+      boolean _contains = types.contains(node.getNode().getType());
+      if (_contains) {
+        nodes.add(node);
+      }
+    }
+    return nodes;
+  }
+  
+  public Object findModel(final EObject object) {
+    EObject _eContainer = object.eContainer();
+    boolean _equals = Objects.equal(_eContainer, null);
+    if (_equals) {
+      return null;
+    } else {
+      EObject _eContainer_1 = object.eContainer();
+      if ((_eContainer_1 instanceof AADM_Model)) {
+        return object.eContainer();
+      } else {
+        return this.findModel(object.eContainer());
+      }
     }
   }
   
