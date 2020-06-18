@@ -39,6 +39,7 @@
 		<module>org.sodalite.dsl.optimization.feature</module>
 		<module>org.sodalite.dsl.optimization.ide</module>
 		<module>org.sodalite.dsl.optimization.ui</module>
+		<module>org.sodalite.dsl.preferences</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>

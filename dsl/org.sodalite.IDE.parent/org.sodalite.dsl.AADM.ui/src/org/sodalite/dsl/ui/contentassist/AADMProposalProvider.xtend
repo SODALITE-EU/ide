@@ -40,8 +40,6 @@ import java.text.MessageFormat
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode
-import java.util.Collection
-import java.util.Set
 import java.util.SortedSet
 import java.util.TreeSet
 import java.util.List
@@ -58,10 +56,8 @@ import java.nio.channels.Channels
 import java.nio.file.FileSystems
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IProject
-import org.eclipse.emf.common.util.URI
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
-import org.eclipse.core.runtime.IPath
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
