@@ -1,4 +1,4 @@
-#Sat Jun 20 21:55:32 UTC 2020
+#Wed Jun 24 10:24:28 CEST 2020
 version=1
 metadata.repository.factory.order=content.xml.xz,content.xml,\!
 artifact.repository.factory.order=artifacts.xml.xz,artifacts.xml,\!
