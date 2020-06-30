@@ -32,7 +32,7 @@ node_templates:
 			walltime: "00:02:00"
 			monitor_period: "10"
 			monitor_retries_headroom: "2"
-			optimization:['OpenACC', 'MPI']
+		optimization: hpc.mpi
 		
 		requirements:
 			host:
