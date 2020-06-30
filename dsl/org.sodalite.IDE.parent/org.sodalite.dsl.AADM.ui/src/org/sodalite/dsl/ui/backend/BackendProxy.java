@@ -96,7 +96,7 @@ public class BackendProxy {
 	
 	public BackendProxy() {
 		IPreferenceStore store = 
-	        new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui");
+	        new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.preferences");
 		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
 		String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
 		String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);

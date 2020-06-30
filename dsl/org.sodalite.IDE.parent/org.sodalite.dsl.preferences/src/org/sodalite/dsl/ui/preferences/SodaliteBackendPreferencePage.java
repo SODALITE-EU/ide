@@ -49,7 +49,7 @@ public class SodaliteBackendPreferencePage
 	 */
 	public void init(IWorkbench workbench) {
 		setPreferenceStore(new ScopedPreferenceStore(
-				InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui"));
+				InstanceScope.INSTANCE, "org.sodalite.dsl.preferences"));
 		setDescription("Sodalite Backend configuration");
 	}
 	
