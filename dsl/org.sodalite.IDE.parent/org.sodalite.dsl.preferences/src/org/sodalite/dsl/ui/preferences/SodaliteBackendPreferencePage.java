@@ -1,10 +1,9 @@
 package org.sodalite.dsl.ui.preferences;
 
-import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.jface.preference.*;
-import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
+import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPreferencePage;
 
 /**
  * This class represents a preference page that
@@ -23,7 +22,7 @@ import org.eclipse.ui.IWorkbench;
 public class SodaliteBackendPreferencePage
 	extends FieldEditorPreferencePage
 	implements IWorkbenchPreferencePage {
-
+	
 	public SodaliteBackendPreferencePage() {
 		super(GRID);
 	}
@@ -48,9 +47,8 @@ public class SodaliteBackendPreferencePage
 	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
 	public void init(IWorkbench workbench) {
-		setPreferenceStore(new ScopedPreferenceStore(
-				InstanceScope.INSTANCE, "org.sodalite.dsl.preferences"));
+		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 		setDescription("Sodalite Backend configuration");
 	}
-	
+
 }

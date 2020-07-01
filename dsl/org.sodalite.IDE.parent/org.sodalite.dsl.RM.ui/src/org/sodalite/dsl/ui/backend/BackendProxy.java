@@ -25,7 +25,6 @@ import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -36,7 +35,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -64,6 +62,7 @@ import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.rM.RM_Model;
+import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 
@@ -81,7 +80,7 @@ public class BackendProxy {
 	
 	public BackendProxy() {
 		IPreferenceStore store = 
-	        	new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.preferences");
+				Activator.getDefault().getPreferenceStore();
 		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
 		String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
 		String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);

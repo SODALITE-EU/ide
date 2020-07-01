@@ -10,4 +10,10 @@
 	        name="Sodalite Backend">
 	  </page>
   </extension>
+ <extension
+       point="org.eclipse.core.runtime.preferences">
+    <initializer
+          class="org.sodalite.dsl.ui.preferences.PreferenceInitializer">
+    </initializer>
+ </extension>
 </plugin>

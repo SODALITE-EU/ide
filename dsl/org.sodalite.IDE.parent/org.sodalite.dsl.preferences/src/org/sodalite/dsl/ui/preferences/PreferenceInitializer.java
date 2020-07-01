@@ -10,10 +10,10 @@ import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
-import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
+import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.service.prefs.Preferences;
 
 /**
  * Class used to initialize default preference values.
@@ -29,8 +29,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
-		// Read default values from a properties file located in default Eclipse root
-		// installation
+		// Read default values from a properties file located in default Eclipse root installation
 		Properties prop = readDefaultProperties();
 		String kb_reasoner_uri = prop.getProperty(PreferenceConstants.KB_REASONER_URI);
 		if (kb_reasoner_uri == null)
@@ -45,12 +44,11 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(), MessageFormat.format(
 				"Default Sodalite backend services configuration read from properties: KB_Reasoner endpoint: {0}, IaC endpoint: {1}, xOpera endpoint: {2}",
 				kb_reasoner_uri, iac_uri, xOpera_uri)));
-
-		ScopedPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.preferences");
-
-		store.setDefault(PreferenceConstants.KB_REASONER_URI, kb_reasoner_uri);
-		store.setDefault(PreferenceConstants.IaC_URI, iac_uri);
-		store.setDefault(PreferenceConstants.xOPERA_URI, xOpera_uri);
+		
+		Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
+		defaults.put(PreferenceConstants.KB_REASONER_URI, kb_reasoner_uri);
+		defaults.put(PreferenceConstants.IaC_URI, iac_uri);
+		defaults.put(PreferenceConstants.xOPERA_URI, xOpera_uri);
 	}
 
 	private Properties readDefaultProperties() {

@@ -9,3 +9,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.ui;bundle-version="3.114.0",
  org.eclipse.core.runtime;bundle-version="3.16.0"
 Export-Package: org.sodalite.dsl.ui.preferences
+Bundle-Activator: org.sodalite.dsl.ui.preferences.Activator
+Bundle-ActivationPolicy: lazy
