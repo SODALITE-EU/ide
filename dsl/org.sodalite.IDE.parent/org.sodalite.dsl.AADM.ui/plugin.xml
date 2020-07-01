@@ -90,12 +90,6 @@
 			name="Syntax Coloring">
 			<keywordReference id="org.sodalite.dsl.ui.keyword_AADM"/>
 		</page>
-  <page
-        category="org.sodalite.dsl.AADM"
-        class="org.sodalite.dsl.ui.preferences.SodaliteBackendPreferencePage"
-        id="org.sodalite.dsl.aadm.ui.preferences.SodaliteBackendPreferencePage"
-        name="Sodalite Backend">
-  </page>
 	</extension>
 	<extension
 			point="org.eclipse.ui.propertyPages">
