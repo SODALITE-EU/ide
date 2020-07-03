@@ -146,85 +146,51 @@
 .
 :Property_10
   rdf:type exchange:Property ;
-  exchange:name "user_name" ;
+  exchange:name "user-name" ;
   exchange:value "root" ;
 .
 :Property_11
   rdf:type exchange:Property ;
-  exchange:name "disk_size" ;
-  exchange:value "10 GB" ;
-.
-:Property_12
-  rdf:type exchange:Property ;
-  exchange:name "num_cpus" ;
-  exchange:value "4" ;
-.
-:Property_13
-  rdf:type exchange:Property ;
-  exchange:name "num_gpus" ;
-  exchange:value "1" ;
-.
-:Property_14
-  rdf:type exchange:Property ;
-  exchange:name "mem_size" ;
-  exchange:value "4 GB" ;
-.
-:Property_15
-  rdf:type exchange:Property ;
-  exchange:name "architecture" ;
-  exchange:value "x86_64" ;
-.
-:Property_16
-  rdf:type exchange:Property ;
   exchange:name "registry_ip" ;
   exchange:value "{ get_input: docker-registry-ip }" ;
 .
-:Property_17
+:Property_12
   rdf:type exchange:Property ;
   exchange:name "image_name" ;
   exchange:value "snow-skyline-extractor" ;
 .
-:Property_18
+:Property_13
   rdf:type exchange:Property ;
   exchange:name "ports" ;
   exchange:listValue "8080:8080" ;
 .
-:Property_19
+:Property_14
   rdf:type exchange:Property ;
   exchange:name "exposed_ports" ;
   exchange:listValue "8080" ;
 .
-:Property_20
+:Property_15
   rdf:type exchange:Property ;
   exchange:name "volumes" ;
   exchange:value "/tmp/docker:/tmp" ;
 .
-:Property_21
-  rdf:type exchange:Property ;
-  exchange:name "optimization" ;
-  exchange:listValue "enable XLA" ;
-  exchange:listValue "enable src build" ;
-  exchange:listValue "enable prefetching" ;
-  exchange:listValue "enable CUDADNN" ;
-  exchange:listValue "enable caching" ;
-.
-:Property_22
+:Property_16
   rdf:type exchange:Property ;
   exchange:name "image_name" ;
   exchange:value "snow-skyline-alignment" ;
 .
-:Property_23
+:Property_17
   rdf:type exchange:Property ;
   exchange:name "ports" ;
   exchange:listValue "8081:8080" ;
   exchange:listValue "80:8080" ;
 .
-:Property_24
+:Property_18
   rdf:type exchange:Property ;
   exchange:name "exposed_ports" ;
   exchange:listValue "8080" ;
 .
-:Property_25
+:Property_19
   rdf:type exchange:Property ;
   exchange:name "volumes" ;
   exchange:value "/tmp/docker:/tmp" ;
@@ -245,30 +211,7 @@
   exchange:name "host" ;
   exchange:value "snow-docker_host" ;
 .
-:Requirement_4
-  rdf:type exchange:Requirement ;
-  exchange:name "dependency" ;
-  exchange:value "tensorflow" ;
-.
-:Requirement_5
-  rdf:type exchange:Requirement ;
-  exchange:name "host" ;
-  exchange:value "snow-docker_host" ;
-.
 
-:Capability_1
-  rdf:type exchange:Capability ;
-  exchange:name "host" ;
-  exchange:properties :Property_11 ;
-  exchange:properties :Property_12 ;
-  exchange:properties :Property_13 ;
-  exchange:properties :Property_14 ;
-.
-:Capability_2
-  rdf:type exchange:Capability ;
-  exchange:name "os" ;
-  exchange:properties :Property_15 ;
-.
 
 :Template_1
   rdf:type exchange:Template ;
@@ -290,41 +233,31 @@
   exchange:properties :Property_9 ; 
   exchange:properties :Property_10 ; 
   exchange:requirements :Requirement_1 ; 
-  exchange:capabilities :Capability_1 ; 
-  exchange:capabilities :Capability_2 ; 
 .  
 :Template_3
   rdf:type exchange:Template ;
   exchange:name "snow-docker_host" ;
   exchange:type "sodalite.nodes.DockerHost" ;
-  exchange:properties :Property_16 ; 
+  exchange:properties :Property_11 ; 
   exchange:requirements :Requirement_2 ; 
 .  
 :Template_4
   rdf:type exchange:Template ;
   exchange:name "skyline_extractor" ;
   exchange:type "sodalite.nodes.DockerizedComponent" ;
-  exchange:properties :Property_17 ; 
-  exchange:properties :Property_18 ; 
-  exchange:properties :Property_19 ; 
-  exchange:properties :Property_20 ; 
-  exchange:properties :Property_21 ; 
+  exchange:properties :Property_12 ; 
+  exchange:properties :Property_13 ; 
+  exchange:properties :Property_14 ; 
+  exchange:properties :Property_15 ; 
   exchange:requirements :Requirement_3 ; 
-  exchange:requirements :Requirement_4 ; 
 .  
 :Template_5
   rdf:type exchange:Template ;
   exchange:name "skyline_alignment" ;
   exchange:type "sodalite.nodes.DockerizedComponent" ;
-  exchange:properties :Property_22 ; 
-  exchange:properties :Property_23 ; 
-  exchange:properties :Property_24 ; 
-  exchange:properties :Property_25 ; 
-  exchange:requirements :Requirement_5 ; 
-.  
-:Template_6
-  rdf:type exchange:Template ;
-  exchange:name "tensorflow" ;
-  exchange:type "tosca.nodes.SoftwareComponent" ;
+  exchange:properties :Property_16 ; 
+  exchange:properties :Property_17 ; 
+  exchange:properties :Property_18 ; 
+  exchange:properties :Property_19 ; 
 .  
 

@@ -167,7 +167,8 @@ node_types:
           		node: my.nodes.hpc.wm.torque
           		relationship: tosca.relationships.HostedOn
           	
-          
+	my.nodes.hpc.my_job:
+		derived_from: my.nodes.hpc.job.torque
     
 
 

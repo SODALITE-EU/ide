@@ -13,11 +13,7 @@ import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.impl.KeywordImpl
 import org.eclipse.xtext.ParserRule
 import org.eclipse.ui.PlatformUI
-import org.eclipse.swt.widgets.Shell
-import org.eclipse.swt.widgets.MessageBox
-import org.eclipse.swt.SWT
 import org.eclipse.swt.widgets.FileDialog
-import org.sodalite.dsl.optimization.optimization.EAutotuning
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist

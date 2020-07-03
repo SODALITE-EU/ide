@@ -7,7 +7,7 @@ data_types:
 		derived_from: string
 	
 	tosca.datatypes.xml:
-		derived_from: string
+		derived_from: string 
 	
 	tosca.datatypes.Credential:
 		derived_from:tosca.datatypes.Root
@@ -509,8 +509,6 @@ relationship_types:
 		interfaces:
 			Configure:
 				type: tosca.interfaces.relationship.Configure
-			
-		
 	
 	tosca.relationships.DependsOn: 
 		derived_from: tosca.relationships.Root
@@ -757,8 +755,6 @@ node_types:
 				capability: tosca.capabilities.Compute
 				node: tosca.nodes.DBMS
 				relationship: tosca.relationships.HostedOn
-			
-		
 	
 	tosca.nodes.Abstract.Storage:
 		derived_from: tosca.nodes.Root
@@ -852,16 +848,11 @@ node_types:
 				description: 'The Floating (IP) clients on the public network can connect to.'
 				occurrences:["0", "UNBOUNDED"]
 			
-		
 		requirements:
 			application:
 				capability: tosca.capabilities.Endpoint
 				relationship: tosca.relationships.RoutesTo
 				occurrences:["0", "UNBOUNDED"]
-			
-		
-	
-
 
 policy_types:
 	tosca.policies.Root:

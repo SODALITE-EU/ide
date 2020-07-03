@@ -115,7 +115,8 @@ class KBReasonerTest {
 		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow_with_errors.ttl");
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
 		String submissionId = "snow";
-		KBSaveReportData report = kbclient.saveAADM(aadmTTL, submissionId);
+		boolean complete = false;
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, submissionId, complete);
 		assertTrue(report.hasErrors());
 	}
 	
@@ -136,7 +137,8 @@ class KBReasonerTest {
 	private KBSaveReportData saveAADM(String aadmURI, String ttlPath) throws IOException, Exception {
 		Path aadm_path = FileSystems.getDefault().getPath(ttlPath);
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
-		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI);
+		boolean complete = true;
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, complete);
 		return report;
 	}
 	

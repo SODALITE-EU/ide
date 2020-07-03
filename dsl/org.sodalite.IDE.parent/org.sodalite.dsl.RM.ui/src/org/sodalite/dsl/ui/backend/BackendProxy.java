@@ -75,20 +75,18 @@ public class BackendProxy {
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();	
 
-	// Configure KBReasonerClient endpoint from preference page information
-	private KBReasonerClient kbclient;
-	
-	public BackendProxy() {
-		IPreferenceStore store = 
-				Activator.getDefault().getPreferenceStore();
+	private KBReasonerClient getKBReasoner() {
+		// Configure KBReasonerClient endpoint from preference page information
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+
 		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
 		String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
 		String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
-		System.out.println (
-			MessageFormat.format(
-				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI)
-		);
+		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
+		System.out.println(
+				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
+						kbReasonerURI, iacURI, xoperaURI));
+		return kbclient;
 	}
 
 	public void processSaveRM(ExecutionEvent event) throws IOException {
@@ -158,7 +156,7 @@ public class BackendProxy {
 	private void saveRM(String rmTTL, IFile rmFile, String rmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save RM", (ICoreRunnable) monitor -> {
 			try {
-				KBSaveReportData saveReport = kbclient.saveRM(rmTTL, rmURI);
+				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI);
 				processValidationIssues(saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception("The RM model could not be saved into the KB. Please, contact your Sodalite administrator");

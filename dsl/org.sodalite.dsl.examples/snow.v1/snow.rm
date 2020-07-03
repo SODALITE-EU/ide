@@ -259,7 +259,7 @@ node_types:
 	  					implementation: "playbooks/openstack/security-rule/delete.yml"
 
 	sodalite.nodes.OpenStack.VM:
-		derived_from:tosca.nodes.Compute
+		derived_from: tosca.nodes.Compute
 		properties:
 			name:
 				type: string
