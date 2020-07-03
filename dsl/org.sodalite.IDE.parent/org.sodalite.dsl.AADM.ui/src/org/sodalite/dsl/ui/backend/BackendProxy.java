@@ -17,8 +17,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+import java.util.SortedSet;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
@@ -412,16 +417,34 @@ public class BackendProxy {
 
 		if (saveReport.hasSuggestions()) {
 			for (KBSuggestion suggestion : saveReport.getSuggestions()) {
-				String message = "Suggested : " + suggestion.getSuggestions();
-				String path = createPath(suggestion.getEntityHierarchy());
-				String pathType = getPathType(suggestion.getEntityHierarchy());
-				String code = "Suggestion";
+				String message = MessageFormat.format(
+					"The following nodes can satisfy the requirement {0}: {1}", 
+					getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
+				String path = createPath(suggestion.getHierarchyPath());
+				String pathType = getPathType(suggestion.getHierarchyPath());
+				String code = "KB Suggestion";
 				Object data = suggestion.getSuggestions();
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
 			}
 		}
 
 		return issues;
+	}
+
+	private String getDependency (List<String> entityHierarchy) {
+		String dependency = null;
+		for (String entry: entityHierarchy) {
+			if (entry.contains("requirements")) {
+				int index = entityHierarchy.indexOf(entry) + 1;
+				dependency = entityHierarchy.get(index);
+				break;
+			}
+		}
+		return dependency.substring(dependency.lastIndexOf('/') + 1);
+	}
+	
+	private SortedSet<String> getSuggestedNodes(SortedSet<String> suggestions){
+		return suggestions.stream().map(s->s.substring(s.lastIndexOf('/') + 1)).collect(Collectors.toCollection(TreeSet::new));
 	}
 
 	private String getPathType(List<String> entityHierarchy) {
@@ -580,12 +603,19 @@ public class BackendProxy {
 											}
 										}
 									}else if ("requirements".equals(path_type)) {
-										for (ERequirementAssignment req: node.getNode().getRequirements().getRequirements()) {
-											if (req.getName().contentEquals(entity_name)) {
-												result = new ValidationSourceFeature(req,
-														AADMPackage.Literals.EREQUIREMENT_ASSIGNMENT__NAME);
-											}
-										}
+										boolean req_found = false;
+										if (node.getNode().getRequirements()!=null) {
+											for (ERequirementAssignment req: node.getNode().getRequirements().getRequirements()) {
+												//Target requirement found
+												if (req.getName().contentEquals(getRequirement(path))) {
+													req_found = true;
+													result = new ValidationSourceFeature(req,
+															AADMPackage.Literals.EREQUIREMENT_ASSIGNMENT__NAME);
+												}
+											}										}
+										if (!req_found)
+											result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+										
 									}
 								}
 							}
@@ -595,6 +625,15 @@ public class BackendProxy {
 			}
 		}
 		return result;
+	}
+	
+	private String getRequirement(String path) {
+		String req = null;
+		Pattern pattern = Pattern.compile("requirements/(.*?)/");
+		Matcher matcher = pattern.matcher(path);
+		if (matcher.find())
+			req = matcher.group(1);
+		return req;
 	}
 
 	private IProject getProject(IResource resource) {
