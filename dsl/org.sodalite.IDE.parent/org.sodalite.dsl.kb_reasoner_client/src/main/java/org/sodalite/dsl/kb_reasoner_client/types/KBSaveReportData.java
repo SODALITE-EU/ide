@@ -7,6 +7,7 @@ public class KBSaveReportData {
 	String URI;
 	List<KBError> errors;
 	List<KBWarning> warnings;
+	List<KBSuggestion> suggestions;
 	
 	public String getURI() {
 		return URI;
@@ -33,6 +34,16 @@ public class KBSaveReportData {
 	}
 	public void setWarnings (List<KBWarning> warnings) {
 		this.warnings = warnings;
+	}
+	
+	public boolean hasSuggestions() {
+		return this.suggestions!= null && !this.suggestions.isEmpty();
+	}
+	public List<KBSuggestion> getSuggestions(){
+		return this.suggestions;
+	}
+	public void setSuggestions (List<KBSuggestion> suggestions) {
+		this.suggestions = suggestions;
 	}
 	
 }

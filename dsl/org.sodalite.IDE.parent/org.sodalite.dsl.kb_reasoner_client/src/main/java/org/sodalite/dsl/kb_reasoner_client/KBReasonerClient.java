@@ -15,6 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
@@ -116,7 +119,7 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI) throws Exception{
+	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI, boolean complete) throws Exception{
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		String url = kbReasonerUri + "saveAADM";
 
@@ -128,6 +131,8 @@ public class KBReasonerClient implements KBReasoner {
 		//AADM TTL
 		map.add("aadmURI", aadmURI);
 		
+		map.add("complete", complete);
+		
 		KBSaveReportData report = new KBSaveReportData();
 		try {
 			//Send multipart-form message
@@ -137,6 +142,10 @@ public class KBReasonerClient implements KBReasoner {
 			JsonArray warningsJson = jsonObject.getAsJsonArray("warnings");
 			if (warningsJson != null){
 				report.setWarnings(processWarnings(warningsJson.toString()));
+			}
+			JsonArray suggestionsJson = jsonObject.getAsJsonArray("suggestions");
+			if (suggestionsJson != null){
+				report.setSuggestions(processSuggestions(suggestionsJson));
 			}
 		}catch (Exception ex) {
 			if (ex instanceof HttpClientErrorException) {
@@ -334,6 +343,36 @@ public class KBReasonerClient implements KBReasoner {
 			}
 		}
 		return kbOptimization;
+	}
+	
+	private List<KBSuggestion> processSuggestions(JsonArray jsonArray) throws JsonMappingException, JsonProcessingException {
+		List<KBSuggestion> result = new ArrayList<>();
+		for (JsonElement json:jsonArray) {
+			JsonObject jsonObj = (JsonObject) json;
+			KBSuggestion opt = new KBSuggestion();
+			String node = jsonObj.keySet().iterator().next();
+			if (node != null && !node.equals("description")) {
+				KBSuggestion suggestion = new KBSuggestion();
+				suggestion.getHierarchyPath().add(node);
+				JsonObject obj = (JsonObject)jsonObj.get(node);
+				JsonArray array = null;
+				while (true) {
+					String key = obj.keySet().iterator().next();
+					suggestion.getHierarchyPath().add(key);
+					try {
+						obj = (JsonObject) obj.get(key);					
+					}catch (Exception ex){
+						array = obj.getAsJsonArray(key);
+						break;
+					}
+				}
+				SortedSet<String> suggestions = new Gson().fromJson(array, TreeSet.class);
+				suggestion.setSuggestions(suggestions);
+				
+				result.add(suggestion);
+			}
+		}
+		return result;
 	}
 
 	/**
