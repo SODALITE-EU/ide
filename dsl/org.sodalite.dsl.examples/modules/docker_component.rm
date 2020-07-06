@@ -1,0 +1,168 @@
+node_types:
+	sodalite.nodes.DockerizedComponent:  
+		derived_from: tosca.nodes.SoftwareComponent 
+		properties:  
+			registry_url:  
+				description: "The URL of the registry containing images"
+				required: true 
+				type: string     
+			command:  
+				description: "Commands list for starting the container" 
+				default: ""  
+				type: list 
+				required: false 
+			volumes:  
+				description: 'A list of mounted volumes for the docker container "host_path:container_path" like "/tmp/docker:/tmp"'
+				type: list 
+				default: "[]" 
+				required: false 
+			ports:
+				type: list
+				description: 'Port binding for the docker container "exposed:internal" like "8081:8080"'
+				default: "[]" 
+				required: false        
+			exposed_ports:  
+				description: 'Exposed ports of the container like "8081"' 
+				type: string 
+				default: "[]" 
+				required: false 
+			restart_policy:  
+				description: 'Restart policy [no, on-failure, always, unless-stopped]'
+				default: "always" 
+				type: string 
+				required: false 
+			env:  
+				description: "Map for docker enviroment variables key-value dictionary"
+				required: false 
+				type: map 
+				default: "{}"
+			image_name:  
+				description: "The name of the image on the host" 
+				required: true 
+				type: string 
+			hostname:  
+				description: "The container's hostname" //TODO Support scaping aposthope during Turtle serialization of RMs 
+				type: string 
+				required: false         
+			alias:  
+				description: "Alias name for docker container" 
+				type: string 
+				required: true 
+			sleep:
+				type: integer
+				description: "Sleep after image is deployed"
+				default: "0"
+				required: false
+			docker_network_name: 
+				description: "Alias name for docker container" 
+				type: string 
+				required: false  
+		requirements:  
+			network:
+				capability: tosca.capabilities.Network
+				node: sodalite.nodes.DockerNetwork    
+				relationship: tosca.relationships.DependsOn
+				occurrences:[ "0", "1" ]
+			registry:
+				capability: tosca.capabilities.Node
+				node: sodalite.nodes.DockerRegistry    
+				relationship: tosca.relationships.DependsOn
+				occurrences:[ "1", "1" ]          
+		interfaces:  
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard   
+				operations:
+					create:  
+						inputs:  
+							env:                  
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.env
+							ports:                
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.ports
+							restart_policy:       
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.restart_policy
+							image_name:           
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.image_name
+							alias:                
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.alias
+							exposed_ports:        
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.exposed_ports
+							registry_url:         
+								default: get_property: 
+									entity: SELF
+									req_cap: sodalite.nodes.DockerizedComponent.registry
+									property: sodalite.nodes.DockerRegistry.docker_registry_url
+							volumes:              
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.volumes
+							command:              
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.command
+							docker_network_name:  
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.docker_network_name
+							sleep:                
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.sleep
+							public_address: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.OpenStack.VM.public_address
+									req_cap: tosca.nodes.SoftwareComponent.host
+						implementation:  "playbooks/add_container.yml"
+					delete:  
+						inputs:  
+							alias: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.alias
+						implementation: "playbooks/remove_container.yml"
+	sodalite.nodes.TestComponent:
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			test_delay:
+				type: integer
+				description: "Delay for waiting container to come up"
+				required: false
+			test_port:
+				type: integer
+				description: "Port for testing avalability of the container"
+				required: false
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							component_name: 
+								default: "FIXME"
+							test_delay: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.TestComponent.test_delay
+							test_port: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.TestComponent.test_port
+						implementation: "playbooks/test_container.yml"
+		requirements:
+			tested_component:
+				node: tosca.nodes.SoftwareComponent  
+				relationship: tosca.relationships.DependsOn
+				capability: tosca.capabilities.Node
+              

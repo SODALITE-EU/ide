@@ -121,7 +121,7 @@ node_templates:
 				node: snow-vm
 			dependency: 
 				node: snow-docker-host 
-			ependency: 
+			dependency: 
 				node: snow-docker-host-2
 				
 	configuration-demo:

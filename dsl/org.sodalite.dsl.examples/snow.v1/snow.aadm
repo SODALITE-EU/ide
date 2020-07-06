@@ -73,7 +73,7 @@ node_templates:
 		 	// TODO (SIMPLIFICATION) see above
 		 	host:
 		 		node: snow-docker_host
-	
+
 	skyline_alignment:
 		type: sodalite.nodes.DockerizedComponent
 		properties:
@@ -82,10 +82,5 @@ node_templates:
 			exposed_ports: ["8080"]
 			volumes: "/tmp/docker:/tmp"
 		
-		requirements:
-			// TODO (SIMPLIFICATION) see above
-			host:
-				node: snow-docker_host
-			
 		
 	

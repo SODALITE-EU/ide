@@ -1,0 +1,67 @@
+data_types:
+	sodalite.nodes.OpenStack.SecurityRule:  
+		derived_from: tosca.datatypes.Root 
+		properties:  
+			protocol:  
+				required: true 
+				type: string 
+				default: "tcp" 
+				constraints:  
+					valid_values: ['tcp', 'udp', 'icmp'] 
+			port_range_min:  
+				required: true 
+				type: tosca.datatypes.network.PortDef 
+			port_range_max:  
+				type: tosca.datatypes.network.PortDef 
+				required: true 
+			remote_ip_prefix:  
+				default: "0.0.0.0/0" 
+				required: true 
+				type: string
+				
+node_types:
+	sodalite.nodes.OpenStack.SecurityRules:  
+		derived_from: tosca.nodes.Root 
+		properties:  
+			group_name:  
+				description: "Name of the security group in openstack."
+				required: true 
+				type: string 
+			ports:  
+				required: false 
+				constraints:  
+					min_length: "1" 
+				type: map 
+				entry_schema:  sodalite.nodes.OpenStack.SecurityRule 
+			group_description:  
+				description: "Description of the security group in openstack"
+				required: true 
+				type: string 
+		interfaces:  
+			Standard:  
+				type: tosca.interfaces.node.lifecycle.Standard   
+				operations:
+					create:  
+						implementation: "playbooks/security_rule_create.yml" 
+						inputs:  
+							ports: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.nodes.OpenStack.SecurityRules.ports
+									
+							group_name:
+								default: get_property:
+									entity: SELF
+									property: sodalite.nodes.OpenStack.SecurityRules.group_name
+							group_description: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.SecurityRules.group_description
+					delete:  
+						implementation: "playbooks/security_rule_delete.yml"
+						inputs:  
+							group_name: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.SecurityRules.group_name
+ 

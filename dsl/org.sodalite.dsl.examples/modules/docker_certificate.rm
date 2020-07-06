@@ -1,0 +1,60 @@
+node_types:
+	sodalite.nodes.RegistryCertificate:
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			registry_ip:
+				type: string
+				description: "IP of the SODALITE docker registry"
+				required: true
+				default: "localhost"
+			country_name:
+				type: string
+				description: "Country name field of the certificate signing request subject."
+				required: true
+			organization_name:
+				type: string
+				description: "The organizationName field of the certificate signing request subject."
+				required: true
+			email_address:
+				type: string
+				description: "The email address field of the certificate signing request subject."
+				required: true
+
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create: 
+						inputs:
+							registry_ip:              
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerHost.registry_ip
+							country_name:             
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.RegistryCertificate.country_name
+							organization_name:        
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.RegistryCertificate.organization_name
+							email_address:            
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.RegistryCertificate.email_address
+							public_ipv4_address:     
+								default: get_attribute: 
+									entity: SELF
+									attribute: tosca.nodes.Compute.public_address
+									req_cap: tosca.nodes.SoftwareComponent.host
+						implementation: "playbooks/add_cert.yml" // FIXME dependencies: [artifacts/ca.crt, artifacts/ca.key]
+						
+					delete:
+						inputs:
+							registry_ip:              
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.RegistryCertificate.registry_ip
+						implementation: "playbooks/remove_cert.yml"
+              
+              

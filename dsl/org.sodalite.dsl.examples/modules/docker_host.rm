@@ -1,0 +1,15 @@
+node_types:
+	sodalite.nodes.DockerHost:  
+		derived_from: tosca.nodes.SoftwareComponent 
+		capabilities:  
+			host:  
+				type: tosca.capabilities.Node
+				valid_source_types:[sodalite.nodes.DockerizedComponent] 
+		interfaces:  
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard 
+				operations:
+					create:  
+						implementation:  "playbooks/create_docker_host.yml"
+					delete:  
+						implementation:  "playbooks/delete_docker_host.yml"

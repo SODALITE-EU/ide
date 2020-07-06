@@ -1,0 +1,43 @@
+node_types:
+	sodalite.nodes.DockerRegistry:
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			docker_registry_url:
+				type: string
+				description: "Docker Hub login"      
+			docker_user:
+				type: string
+				description: "Docker Hub login"
+				default: ""
+			docker_pass:
+				type: string
+				description: "Docker Hub password"
+				default: ""
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							docker_registry_url:      
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerRegistry.docker_registry_url
+							docker_user:              
+								default: get_property:
+									entity: SELF
+									property: sodalite.nodes.DockerRegistry.docker_user
+							docker_pass:             
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerRegistry.docker_pass
+						implementation: "playbooks/login_user.yml"
+					delete:
+						inputs:
+							docker_registry_url:      
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerRegistry.docker_registry_url
+						implementation: "playbooks/logout_user.yml"
+              
+              

@@ -1,0 +1,26 @@
+node_types:
+	sodalite.nodes.DockerVolume:
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			name:
+				type: string
+				description: "The name of the volume"
+				required: true
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							volume_name:    
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerVolume.name
+						implementation: "playbooks/add_volume.yml"
+					delete:
+						inputs:
+							volume_name:    
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerVolume.name
+						implementation: "playbooks/remove_volume.yml"

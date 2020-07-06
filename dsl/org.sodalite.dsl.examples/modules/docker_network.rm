@@ -1,0 +1,30 @@
+node_types:
+	sodalite.nodes.DockerNetwork:
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			name:
+				type: string
+				description: "The name of the network"
+				required: true
+		capabilities:
+			network:
+				type: tosca.capabilities.Network
+				valid_source_types:[ sodalite.nodes.DockerizedComponent ]
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							docker_network_name:    
+								default: get_property: 
+									entity: SELF
+									property: tosca.capabilities.Network.name
+						implementation: "playbooks/add_network.yml"
+					delete:
+						inputs:
+							docker_network_name:
+								default: get_property: 
+									entity: SELF
+									property: tosca.capabilities.Network.name
+						implementation: "playbooks/remove_network.yml"
