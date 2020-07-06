@@ -198,11 +198,11 @@ node_templates:
 				entity: SELF
 				property: tosca.capabilities.Network.name
 				req_cap: tosca.nodes.Container.Application.network
-			volumes:  
-				//FIXME /tmp/conf/config.json: "/SnowWatch-SODALITE/WebCamCrawler/config.json"
-				snow_volume_shots:"/SnowWatch-SODALITE/data/shots"
-        		//- "/tmp/masks:/SnowWatch-SODALITE/data/masks"
-				snow_volume_daily_shots:"/SnowWatch-SODALITE/data/daily_shots"
+			volumes: [
+			"/tmp/conf/config.json: /SnowWatch-SODALITE/WebCamCrawler/config.json", 
+			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
+			//"/tmp/masks:/SnowWatch-SODALITE/data/masks", 
+			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
 			image_name:  "snow-webcam-crawler:latest" 
 			alias: "snow-webcam-crawler"
 			command: "34,40,50,62,608,666,822,852,943,1307,6666"
@@ -227,17 +227,17 @@ node_templates:
 				entity: SELF
 				property: tosca.capabilities.Network.name
 				req_cap: tosca.nodes.Container.Application.network
-			volumes:  
-				//FIXME tmp/conf/config.json:/SnowWatch-SODALITE/config.json 
-				snow_volume_shots:"/SnowWatch-SODALITE/data/shots"
-				///tmp/masks: "/SnowWatch-SODALITE/data/masks"
-				snow_volume_daily_shots: "/SnowWatch-SODALITE/data/daily_shots"
+			volumes: [
+			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json", 
+			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
+			//"/tmp/masks: /SnowWatch-SODALITE/data/masks", 
+			"snow_volume_daily_shots: /SnowWatch-SODALITE/data/daily_shots"]
 			image_name:  "snow-weather-condition-filter:latest" 
 			alias: "snow-weather-condition-filter"
 			restart_policy: "always"
-			command:  
-				param1: "{{ ansible_date_time.date }}" //FIXME
-				param2:  "34 40 50 62 608 666 822 852 943 1307 6666" //FIXME  
+			command: [
+			"{{ ansible_date_time.date }}", 
+			"34 40 50 62 608 666 822 852 943 1307 6666"]  
 				
 		requirements:  
 			host:  
@@ -264,16 +264,16 @@ node_templates:
 				entity: SELF
 				property: tosca.capabilities.Network.name
 				req_cap: tosca.nodes.Container.Application.network
-			volumes:  
-				//FIXME /tmp/conf/config.json:/SnowWatch-SODALITE/config.json 
-				snow_volume_shots:"/SnowWatch-SODALITE/data/shots"
-				snow_volume_daily_shots:"/SnowWatch-SODALITE/data/daily_shots"
+			volumes:  [
+			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json", 
+			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
+			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
 			image_name:  "snow-daily-median-aggregator:latest"
 			alias: "snow-daily-median-aggregator"
 			restart_policy: "always"
-			command: 
-				param1: "{{ ansible_date_time.date }}" //FIXME
-				param1: "34 40 50 62 608 666 822 852 943 1307 6666" //FIXME
+			command: [
+			"{{ ansible_date_time.date }}", 
+			"34 40 50 62 608 666 822 852 943 1307 6666"]
 				
 		requirements:  
 			host:  
@@ -353,10 +353,10 @@ node_templates:
 				entity: SELF
 				property: tosca.capabilities.Network.name
 				req_cap: tosca.nodes.Container.Application.network 
-			volumes:  
-				//FIXME /tmp/conf/config.json:/SnowWatch-SODALITE/config.json 
-				snow_volume_daily_shots: "/SnowWatch-SODALITE/data/daily_shots"
-				snow_volume_demo_output: "/SnowWatch-SODALITE/data/output"
+			volumes: [
+			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json",  
+			"snow_volume_daily_shots: /SnowWatch-SODALITE/data/daily_shots", 
+			"snow_volume_demo_output: /SnowWatch-SODALITE/data/output"]
 			image_name:  "snow-demo:latest"
 			alias: "snow-demo"
 			restart_policy: "always"
