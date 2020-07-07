@@ -36,8 +36,8 @@ pipeline {
             steps{
             	withDockerRegistry(credentialsId: 'jenkins-sodalite.docker_token', url: '') {
             		sh "cd Docker; ./create_sodalite_ide_image.sh"
-                	sh "docker tag sodalite-ide $docker_registry_ip/sodalite-ide"
-                	sh "docker push $docker_registry_ip/sodalite-ide"
+                	sh "docker tag sodalite-ide sodaliteh2020/sodalite-ide"
+                	sh "docker push sodaliteh2020/sodalite-ide"
             }
         }
     }
