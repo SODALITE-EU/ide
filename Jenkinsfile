@@ -38,13 +38,14 @@ pipeline {
                 	sh "docker push $docker_registry_ip/sodalite-ide"
             }
         }
-  }
-  post {
-    failure {
-        slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
     }
-    fixed {
+    post {
+      failure {
+        slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+      }
+      fixed {
         slackSend (color: '#6d3be3', message: "FIXED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+      }
     }
   }
 }
