@@ -32,12 +32,10 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -68,6 +66,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.ui.contentassist.AbstractAADMProposalProvider;
+import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
 /**
@@ -80,22 +79,15 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   
   private final Set<String> assignments = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("nodeTemplates"));
   
-  private KBReasoner kbclient;
-  
-  public AADMProposalProvider() {
-    ScopedPreferenceStore _scopedPreferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui");
-    final IPreferenceStore store = ((IPreferenceStore) _scopedPreferenceStore);
-    String _string = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final String kbReasonerURI = ((String) _string);
-    String _string_1 = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final String iacURI = ((String) _string_1);
-    String _string_2 = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final String xoperaURI = ((String) _string_2);
-    KBReasonerClient _kBReasonerClient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
-    this.kbclient = ((KBReasoner) _kBReasonerClient);
+  public KBReasoner getKBReasoner() {
+    final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+    final String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
     System.out.println(
-      MessageFormat.format(
-        "Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI));
+      MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI));
+    return kbclient;
   }
   
   @Override
@@ -194,7 +186,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   public void completeENodeTemplateBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
-      final ReasonerData<Node> nodes = this.kbclient.getNodes();
+      final ReasonerData<Node> nodes = this.getKBReasoner().getNodes();
       System.out.println("Nodes retrieved from KB:");
       List<Node> _elements = nodes.getElements();
       for (final Node node : _elements) {
@@ -231,7 +223,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
       }
       if ((resourceId != null)) {
-        final ReasonerData<Attribute> attributes = this.kbclient.getAttributes(resourceId);
+        final ReasonerData<Attribute> attributes = this.getKBReasoner().getAttributes(resourceId);
         if ((attributes != null)) {
         }
         System.out.println(("Attributes retrieved from KB for resource: " + resourceId));
@@ -298,7 +290,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
       }
       if ((resourceId != null)) {
-        final ReasonerData<Property> properties = this.kbclient.getProperties(resourceId);
+        final ReasonerData<Property> properties = this.getKBReasoner().getProperties(resourceId);
         if ((properties != null)) {
           System.out.println(("Properties retrieved from KB for resource: " + resourceId));
           List<Property> _elements = properties.getElements();
@@ -365,7 +357,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
       }
       if ((resourceId != null)) {
-        final ReasonerData<Requirement> requirements = this.kbclient.getRequirements(resourceId);
+        final ReasonerData<Requirement> requirements = this.getKBReasoner().getRequirements(resourceId);
         if ((requirements != null)) {
           System.out.println(("Requirements retrieved from KB for resource: " + resourceId));
           List<Requirement> _elements = requirements.getElements();
@@ -437,7 +429,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       final AADM_Model rootModel = ((AADM_Model) _findModel);
       final String aadmURI = this.getAADMURI(rootModel);
       SortedSet<String> types = new TreeSet<String>();
-      final ValidRequirementNodeData vrnd = this.kbclient.getValidRequirementNodes(requirementId, nodeType);
+      final ValidRequirementNodeData vrnd = this.getKBReasoner().getValidRequirementNodes(requirementId, nodeType);
       if ((vrnd != null)) {
         System.out.println(("Valid requirement nodes retrieved from KB for requirement: " + requirementId));
         List<ValidRequirementNode> _elements = vrnd.getElements();
