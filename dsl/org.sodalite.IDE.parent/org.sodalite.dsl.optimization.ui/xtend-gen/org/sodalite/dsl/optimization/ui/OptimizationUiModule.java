@@ -13,7 +13,7 @@ import org.sodalite.dsl.optimization.ui.AbstractOptimizationUiModule;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class OptimizationUiModule extends AbstractOptimizationUiModule {
-  public OptimizationUiModule(final AbstractUIPlugin plugin) {
-    super(plugin);
+  public OptimizationUiModule(final AbstractUIPlugin arg0) {
+    super(arg0);
   }
 }
