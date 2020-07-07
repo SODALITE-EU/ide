@@ -5,14 +5,15 @@ pipeline {
     stage ('Pull repo code from github') {
       steps {
         checkout scm
-      }
-    }
-    stage ('Build IDE') {
-      steps {
         sh('git config --global user.email "jesus.gorronogoitia@atos.net"')
 	sh('git config --global user.name "Sodalite Jenkins"')
       	sh('git stash')
       	sh('git checkout master')
+      	sh('git pull origin master')
+      }
+    }
+    stage ('Build IDE') {
+      steps {
         sh  """ #!/bin/bash
                 cd "dsl/org.sodalite.IDE.parent/"
                 mvn clean verify
