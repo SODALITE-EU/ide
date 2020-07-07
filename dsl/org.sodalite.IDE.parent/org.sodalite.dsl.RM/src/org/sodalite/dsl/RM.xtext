@@ -276,7 +276,11 @@ EOperationDefinitionBody:
 	
 EImplementation:
 	('implementation:' primary=STRING)? &
-	(BEGIN 'dependencies:''[' dependencies+=STRING ']' END)?
+	(BEGIN 'dependencies:''[' (dependencies+=EDependencies)? ']' END)?
+;
+
+EDependencies:
+	deps+=STRING (',' deps+=STRING)*
 ;
 
 EInputs:

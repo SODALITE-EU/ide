@@ -26,6 +26,10 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_ECapabilityDefinitionBody___RightSquareBracketKeyword_4_3_Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1__p;
 	protected AbstractElementAlias match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__a;
 	protected AbstractElementAlias match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p;
+	protected AbstractElementAlias match_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__a;
+	protected AbstractElementAlias match_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__p;
+	protected AbstractElementAlias match_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__a;
+	protected AbstractElementAlias match_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
@@ -35,6 +39,10 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_ECapabilityDefinitionBody___RightSquareBracketKeyword_4_3_Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_4_3()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_4_1()));
 		match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_4_3()));
 		match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_4_3()));
+		match_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getBEGINTerminalRuleCall_1_0()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getDependenciesKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getLeftSquareBracketKeyword_1_2()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getRightSquareBracketKeyword_1_4()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getENDTerminalRuleCall_1_5()));
+		match_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getBEGINTerminalRuleCall_1_0()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getDependenciesKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getLeftSquareBracketKeyword_1_2()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getRightSquareBracketKeyword_1_4()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getENDTerminalRuleCall_1_5()));
+		match_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getRightSquareBracketKeyword_1_4()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getENDTerminalRuleCall_1_5()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getBEGINTerminalRuleCall_1_0()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getDependenciesKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getLeftSquareBracketKeyword_1_2()));
+		match_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getRightSquareBracketKeyword_1_4()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getENDTerminalRuleCall_1_5()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getBEGINTerminalRuleCall_1_0()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getDependenciesKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getEImplementationAccess().getLeftSquareBracketKeyword_1_2()));
 	}
 	
 	@Override
@@ -74,6 +82,14 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p.equals(syntax))
 				emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__a.equals(syntax))
+				emit_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__p.equals(syntax))
+				emit_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__a.equals(syntax))
+				emit_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__p.equals(syntax))
+				emit_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -180,6 +196,56 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) (rule start)
 	 */
 	protected void emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (BEGIN 'dependencies:' '[' ']' END)*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) 'implementation:' primary=STRING
+	 *     (rule start) (ambiguity) (rule start)
+	 *     dependencies+=EDependencies ']' END (ambiguity) 'implementation:' primary=STRING
+	 *     dependencies+=EDependencies ']' END (ambiguity) (rule end)
+	 *     primary=STRING (ambiguity) 'implementation:' primary=STRING
+	 *     primary=STRING (ambiguity) (rule end)
+	 */
+	protected void emit_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (BEGIN 'dependencies:' '[' ']' END)+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
+	 */
+	protected void emit_EImplementation___BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2_RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (']' END BEGIN 'dependencies:' '[')*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) BEGIN 'dependencies:' '[' (ambiguity) dependencies+=EDependencies
+	 *     primary=STRING BEGIN 'dependencies:' '[' (ambiguity) dependencies+=EDependencies
+	 */
+	protected void emit_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (']' END BEGIN 'dependencies:' '[')+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     dependencies+=EDependencies (ambiguity) dependencies+=EDependencies
+	 */
+	protected void emit_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

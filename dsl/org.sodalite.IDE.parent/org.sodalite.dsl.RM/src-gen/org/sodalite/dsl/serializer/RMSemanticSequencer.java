@@ -31,6 +31,7 @@ import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDataTypeBody;
 import org.sodalite.dsl.rM.EDataTypes;
+import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EEqual;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
 import org.sodalite.dsl.rM.EGreaterThan;
@@ -149,6 +150,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RMPackage.EDATA_TYPES:
 				sequence_EDataTypes(context, (EDataTypes) semanticObject); 
+				return; 
+			case RMPackage.EDEPENDENCIES:
+				sequence_EDependencies(context, (EDependencies) semanticObject); 
 				return; 
 			case RMPackage.EEQUAL:
 				sequence_EEqual(context, (EEqual) semanticObject); 
@@ -569,6 +573,18 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EDependencies returns EDependencies
+	 *
+	 * Constraint:
+	 *     (deps+=STRING deps+=STRING*)
+	 */
+	protected void sequence_EDependencies(ISerializationContext context, EDependencies semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EConstraint returns EEqual
 	 *     EEqual returns EEqual
 	 *
@@ -629,7 +645,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EImplementation returns EImplementation
 	 *
 	 * Constraint:
-	 *     (primary=STRING | dependencies+=STRING)+
+	 *     (primary=STRING | dependencies+=EDependencies)*
 	 */
 	protected void sequence_EImplementation(ISerializationContext context, EImplementation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

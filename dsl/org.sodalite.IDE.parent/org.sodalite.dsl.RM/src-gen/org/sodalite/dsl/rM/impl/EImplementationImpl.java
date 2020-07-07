@@ -6,16 +6,20 @@ package org.sodalite.dsl.rM.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EImplementation;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -56,14 +60,14 @@ public class EImplementationImpl extends MinimalEObjectImpl.Container implements
   protected String primary = PRIMARY_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' attribute list.
+   * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getDependencies()
    * @generated
    * @ordered
    */
-  protected EList<String> dependencies;
+  protected EList<EDependencies> dependencies;
 
   /**
    * <!-- begin-user-doc -->
@@ -117,13 +121,29 @@ public class EImplementationImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EList<String> getDependencies()
+  public EList<EDependencies> getDependencies()
   {
     if (dependencies == null)
     {
-      dependencies = new EDataTypeEList<String>(String.class, this, RMPackage.EIMPLEMENTATION__DEPENDENCIES);
+      dependencies = new EObjectContainmentEList<EDependencies>(EDependencies.class, this, RMPackage.EIMPLEMENTATION__DEPENDENCIES);
     }
     return dependencies;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.EIMPLEMENTATION__DEPENDENCIES:
+        return ((InternalEList<?>)getDependencies()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -160,7 +180,7 @@ public class EImplementationImpl extends MinimalEObjectImpl.Container implements
         return;
       case RMPackage.EIMPLEMENTATION__DEPENDENCIES:
         getDependencies().clear();
-        getDependencies().addAll((Collection<? extends String>)newValue);
+        getDependencies().addAll((Collection<? extends EDependencies>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -217,8 +237,6 @@ public class EImplementationImpl extends MinimalEObjectImpl.Container implements
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (primary: ");
     result.append(primary);
-    result.append(", dependencies: ");
-    result.append(dependencies);
     result.append(')');
     return result.toString();
   }

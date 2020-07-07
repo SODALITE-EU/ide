@@ -126,6 +126,8 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEOperationDefinitionBodyAccess().getGroup_1_1(), "rule__EOperationDefinitionBody__Group_1_1__0");
 			builder.put(grammarAccess.getEImplementationAccess().getGroup_0(), "rule__EImplementation__Group_0__0");
 			builder.put(grammarAccess.getEImplementationAccess().getGroup_1(), "rule__EImplementation__Group_1__0");
+			builder.put(grammarAccess.getEDependenciesAccess().getGroup(), "rule__EDependencies__Group__0");
+			builder.put(grammarAccess.getEDependenciesAccess().getGroup_1(), "rule__EDependencies__Group_1__0");
 			builder.put(grammarAccess.getEInputsAccess().getGroup(), "rule__EInputs__Group__0");
 			builder.put(grammarAccess.getEParameterDefinitionAccess().getGroup(), "rule__EParameterDefinition__Group__0");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup(), "rule__EParameterDefinitionBody__Group__0");
@@ -264,6 +266,8 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEOperationDefinitionBodyAccess().getImplementationAssignment_1_2(), "rule__EOperationDefinitionBody__ImplementationAssignment_1_2");
 			builder.put(grammarAccess.getEImplementationAccess().getPrimaryAssignment_0_1(), "rule__EImplementation__PrimaryAssignment_0_1");
 			builder.put(grammarAccess.getEImplementationAccess().getDependenciesAssignment_1_3(), "rule__EImplementation__DependenciesAssignment_1_3");
+			builder.put(grammarAccess.getEDependenciesAccess().getDepsAssignment_0(), "rule__EDependencies__DepsAssignment_0");
+			builder.put(grammarAccess.getEDependenciesAccess().getDepsAssignment_1_1(), "rule__EDependencies__DepsAssignment_1_1");
 			builder.put(grammarAccess.getEInputsAccess().getInputsAssignment_1(), "rule__EInputs__InputsAssignment_1");
 			builder.put(grammarAccess.getEParameterDefinitionAccess().getNameAssignment_0(), "rule__EParameterDefinition__NameAssignment_0");
 			builder.put(grammarAccess.getEParameterDefinitionAccess().getParameterAssignment_3(), "rule__EParameterDefinition__ParameterAssignment_3");

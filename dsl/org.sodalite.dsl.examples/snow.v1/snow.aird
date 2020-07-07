@@ -242,17 +242,6 @@
             <styles xmi:type="notation:ShapeStyle" xmi:id="_ap51waspEeqUOOZYSEa-qg" fontName="Cantarell" fontHeight="12" italic="true"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ap51wqspEeqUOOZYSEa-qg" x="118" y="-22" width="163" height="30"/>
           </children>
-          <children xmi:type="notation:Node" xmi:id="_ap6c0KspEeqUOOZYSEa-qg" type="3012" element="_aouKAKspEeqUOOZYSEa-qg">
-            <children xmi:type="notation:Node" xmi:id="_ap7D4KspEeqUOOZYSEa-qg" type="5010">
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_ap7D4aspEeqUOOZYSEa-qg" y="5"/>
-            </children>
-            <children xmi:type="notation:Node" xmi:id="_ap8SAKspEeqUOOZYSEa-qg" type="3003" element="_aouKAaspEeqUOOZYSEa-qg">
-              <styles xmi:type="notation:ShapeStyle" xmi:id="_ap8SAaspEeqUOOZYSEa-qg" fontName="Cantarell"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ap8SAqspEeqUOOZYSEa-qg"/>
-            </children>
-            <styles xmi:type="notation:ShapeStyle" xmi:id="_ap6c0aspEeqUOOZYSEa-qg" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ap6c0qspEeqUOOZYSEa-qg" y="-22" width="100" height="30"/>
-          </children>
           <children xmi:type="notation:Node" xmi:id="_apciwKspEeqUOOZYSEa-qg" type="5006"/>
           <children xmi:type="notation:Node" xmi:id="_apdJ0KspEeqUOOZYSEa-qg" type="7001">
             <children xmi:type="notation:Node" xmi:id="_ap85EKspEeqUOOZYSEa-qg" type="3009" element="_aovYIKspEeqUOOZYSEa-qg">
@@ -355,22 +344,6 @@
           <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_aqoOg6spEeqUOOZYSEa-qg" points="[-50, 6, 81, 1]$[-111, 6, 20, 1]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_aqo1kKspEeqUOOZYSEa-qg" id="(0.5,0.5)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_aqo1kaspEeqUOOZYSEa-qg" id="(0.9233716475095786,0.2537313432835821)"/>
-        </edges>
-        <edges xmi:type="notation:Edge" xmi:id="_aqqDsqspEeqUOOZYSEa-qg" type="4001" element="_apF9cqspEeqUOOZYSEa-qg" source="_ap6c0KspEeqUOOZYSEa-qg" target="_apYRVKspEeqUOOZYSEa-qg">
-          <children xmi:type="notation:Node" xmi:id="_aqqDtqspEeqUOOZYSEa-qg" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aqqDt6spEeqUOOZYSEa-qg" x="3" y="-2"/>
-          </children>
-          <children xmi:type="notation:Node" xmi:id="_aqqDuKspEeqUOOZYSEa-qg" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aqqDuaspEeqUOOZYSEa-qg" x="4"/>
-          </children>
-          <children xmi:type="notation:Node" xmi:id="_aqqqwKspEeqUOOZYSEa-qg" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aqqqwaspEeqUOOZYSEa-qg" x="4"/>
-          </children>
-          <styles xmi:type="notation:ConnectorStyle" xmi:id="_aqqDs6spEeqUOOZYSEa-qg"/>
-          <styles xmi:type="notation:FontStyle" xmi:id="_aqqDtKspEeqUOOZYSEa-qg" fontName="Cantarell" fontHeight="12"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_aqqDtaspEeqUOOZYSEa-qg" points="[-9, -15, 74, 125]$[-83, -140, 0, 0]"/>
-          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_aqqqwqspEeqUOOZYSEa-qg" id="(0.5,0.5)"/>
-          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_aqqqw6spEeqUOOZYSEa-qg" id="(0.5017064846416383,1.0)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_dlCOwLRsEeqPeu9XNqOvEA" type="4001" element="_dkGapLRsEeqPeu9XNqOvEA" source="_dkW5ULRsEeqPeu9XNqOvEA" target="_apYRVKspEeqUOOZYSEa-qg">
           <children xmi:type="notation:Node" xmi:id="_dlDc4LRsEeqPeu9XNqOvEA" type="6001">
@@ -547,7 +520,7 @@
         </ownedElements>
       </ownedDiagramElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_an6RsKspEeqUOOZYSEa-qg" name="snow-docker_host" incomingEdges="_apF9cqspEeqUOOZYSEa-qg _dkGapLRsEeqPeu9XNqOvEA" childrenPresentation="VerticalStack">
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_an6RsKspEeqUOOZYSEa-qg" name="snow-docker_host" incomingEdges="_dkGapLRsEeqPeu9XNqOvEA" childrenPresentation="VerticalStack">
       <target xmi:type="aADM:ENodeTemplate" href="snow.aadm#//@nodeTemplates/@nodeTemplates.2"/>
       <semanticElements xmi:type="aADM:ENodeTemplate" href="snow.aadm#//@nodeTemplates/@nodeTemplates.2"/>
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_aoij0KspEeqUOOZYSEa-qg" name="DockerHost" width="15" height="3" resizeKind="EAST_WEST">
@@ -691,18 +664,6 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
       </ownedBorderedNodes>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_aouKAKspEeqUOOZYSEa-qg" name="req: host" outgoingEdges="_apF9cqspEeqUOOZYSEa-qg" width="10" height="3" resizeKind="NSEW">
-        <target xmi:type="aADM:ERequirementAssignment" href="snow.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
-        <semanticElements xmi:type="aADM:ERequirementAssignment" href="snow.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
-        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
-        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
-        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:Square" uid="_aouKAaspEeqUOOZYSEa-qg" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
-          <labelFormat>italic</labelFormat>
-          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
-      </ownedBorderedNodes>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -815,14 +776,6 @@
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_apFWYaspEeqUOOZYSEa-qg" size="2">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_apFWYqspEeqUOOZYSEa-qg" labelSize="12"/>
-      </ownedStyle>
-      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
-    </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_apF9cqspEeqUOOZYSEa-qg" sourceNode="_aouKAKspEeqUOOZYSEa-qg" targetNode="_an6RsKspEeqUOOZYSEa-qg">
-      <target xmi:type="aADM:ERequirementAssignment" href="snow.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_apF9c6spEeqUOOZYSEa-qg" size="2">
-        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_apF9dKspEeqUOOZYSEa-qg" labelSize="12"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
     </ownedDiagramElements>

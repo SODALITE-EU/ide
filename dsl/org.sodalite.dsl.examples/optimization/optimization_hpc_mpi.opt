@@ -6,7 +6,7 @@ optimization hpc.mpi:
 		cpu_type: arm
 		acc_type: nvidia
 	autotuning:
-		tuner: creata
+		tuner: cresta
 		input: "path/to/autotuning.model"
 	hpc:
 		config:

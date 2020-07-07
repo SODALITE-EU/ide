@@ -33,8 +33,6 @@ import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl
 import org.eclipse.jface.preference.IPreferenceStore
-import org.eclipse.ui.preferences.ScopedPreferenceStore
-import org.eclipse.core.runtime.preferences.InstanceScope
 import org.sodalite.dsl.ui.preferences.PreferenceConstants
 import java.text.MessageFormat
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData
@@ -58,6 +56,7 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
+import org.sodalite.dsl.ui.preferences.Activator
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -68,19 +67,33 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	//val keywords = #{'node_templates:'}
 	val keywords = #{}
 	val assignments = #{'nodeTemplates'}
-	KBReasoner kbclient;
-	new(){
-		val store = 
-	        	new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui") as IPreferenceStore;
-		val kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
-		val iacURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
-		val xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
-		kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI) as KBReasoner;
-		
-		System.out.println (
-			MessageFormat.format(
-				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI)
-		);
+//	KBReasoner kbclient;
+//	new(){
+//		val store = 
+//	        	new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui") as IPreferenceStore;
+//		val kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
+//		val iacURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
+//		val xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
+//		kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI) as KBReasoner;
+//		
+//		System.out.println (
+//			MessageFormat.format(
+//				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI)
+//		);
+//	}
+	
+	def KBReasoner getKBReasoner() {
+		// Configure KBReasonerClient endpoint from preference page information
+		val IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+
+		val String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		val String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		val String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		val KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
+		System.out.println(
+				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
+						kbReasonerURI, iacURI, xoperaURI));
+		return kbclient;
 	}
 
 	// this override filters the keywords for which to create content assist proposals
@@ -167,7 +180,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for NodeTemplate::type property")
 		
-		val ReasonerData<Node> nodes = kbclient.getNodes()
+		val ReasonerData<Node> nodes = getKBReasoner().getNodes()
 		System.out.println ("Nodes retrieved from KB:")
 		for (node: nodes.elements){
 			System.out.println ("\tNode: " + node.label)
@@ -193,7 +206,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
 
 		if (resourceId !== null){
-			val ReasonerData<Attribute> attributes = kbclient.getAttributes(resourceId)
+			val ReasonerData<Attribute> attributes = getKBReasoner().getAttributes(resourceId)
 			if (attributes !== null){}
 				System.out.println ("Attributes retrieved from KB for resource: " + resourceId)
 				for (attribute: attributes.elements){
@@ -227,7 +240,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
 		
 		if (resourceId !== null){
-			val ReasonerData<Property> properties = kbclient.getProperties(resourceId)
+			val ReasonerData<Property> properties = getKBReasoner().getProperties(resourceId)
 			if (properties !== null){
 				System.out.println ("Properties retrieved from KB for resource: " + resourceId)
 				for (property: properties.elements){
@@ -262,7 +275,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
 		
 		if (resourceId !== null){
-			val ReasonerData<Requirement> requirements = kbclient.getRequirements(resourceId)
+			val ReasonerData<Requirement> requirements = getKBReasoner().getRequirements(resourceId)
 			if (requirements !== null){
 				System.out.println ("Requirements retrieved from KB for resource: " + resourceId)
 				for (requirement: requirements.elements){
@@ -301,7 +314,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		
 		//Get valid requirement nodes from KB
 		var SortedSet<String> types = new TreeSet<String>()
-		val ValidRequirementNodeData vrnd = kbclient.getValidRequirementNodes(requirementId, nodeType);
+		val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, nodeType);
 		if (vrnd !== null){
 			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
 			for (ValidRequirementNode vrn: vrnd.elements){

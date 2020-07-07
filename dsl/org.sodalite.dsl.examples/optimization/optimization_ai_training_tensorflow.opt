@@ -6,7 +6,7 @@ optimization ai_training.tensor_flow:
 		cpu_type: arm
 		acc_type: nvidia
 	autotuning:
-		tuner: creata
+		tuner: cresta
 		input: "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/snow/test.rm"
 	app_type-ai_training: 
 		config:
@@ -24,6 +24,6 @@ optimization ai_training.tensor_flow:
 				prefetch: 100
 				cache: 100
 		ai_framework-tensorflow: 
-			version: "1.1"
+			version: "2.1"
 			xla: true
 		 

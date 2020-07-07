@@ -70,7 +70,7 @@ node_templates:
 		 	exposed_ports: ['8080']
 		 	volumes: "/tmp/docker:/tmp"
 		 	
-		 optimization: hpc.mpi
+		 optimization: ai_training.tensor_flow
 		 
 		 requirements:
 		 	host:

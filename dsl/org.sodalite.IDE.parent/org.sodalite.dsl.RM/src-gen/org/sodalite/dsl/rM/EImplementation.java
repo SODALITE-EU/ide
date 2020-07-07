@@ -49,15 +49,15 @@ public interface EImplementation extends EObject
   void setPrimary(String value);
 
   /**
-   * Returns the value of the '<em><b>Dependencies</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
+   * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
+   * The list contents are of type {@link org.sodalite.dsl.rM.EDependencies}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Dependencies</em>' attribute list.
+   * @return the value of the '<em>Dependencies</em>' containment reference list.
    * @see org.sodalite.dsl.rM.RMPackage#getEImplementation_Dependencies()
-   * @model unique="false"
+   * @model containment="true"
    * @generated
    */
-  EList<String> getDependencies();
+  EList<EDependencies> getDependencies();
 
 } // EImplementation

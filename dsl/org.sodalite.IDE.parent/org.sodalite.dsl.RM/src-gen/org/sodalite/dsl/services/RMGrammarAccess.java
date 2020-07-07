@@ -2244,15 +2244,15 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cDependenciesKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		private final Assignment cDependenciesAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
-		private final RuleCall cDependenciesSTRINGTerminalRuleCall_1_3_0 = (RuleCall)cDependenciesAssignment_1_3.eContents().get(0);
+		private final RuleCall cDependenciesEDependenciesParserRuleCall_1_3_0 = (RuleCall)cDependenciesAssignment_1_3.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		private final RuleCall cENDTerminalRuleCall_1_5 = (RuleCall)cGroup_1.eContents().get(5);
 		
 		//EImplementation:
-		//	('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies+=STRING ']' END)?;
+		//	('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies+=EDependencies? ']' END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies+=STRING ']' END)?
+		//('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies+=EDependencies? ']' END)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//('implementation:' primary=STRING)?
@@ -2267,7 +2267,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getPrimarySTRINGTerminalRuleCall_0_1_0() { return cPrimarySTRINGTerminalRuleCall_0_1_0; }
 		
-		//(BEGIN 'dependencies:' '[' dependencies+=STRING ']' END)?
+		//(BEGIN 'dependencies:' '[' dependencies+=EDependencies? ']' END)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//BEGIN
@@ -2279,17 +2279,52 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		//'['
 		public Keyword getLeftSquareBracketKeyword_1_2() { return cLeftSquareBracketKeyword_1_2; }
 		
-		//dependencies+=STRING
+		//dependencies+=EDependencies?
 		public Assignment getDependenciesAssignment_1_3() { return cDependenciesAssignment_1_3; }
 		
-		//STRING
-		public RuleCall getDependenciesSTRINGTerminalRuleCall_1_3_0() { return cDependenciesSTRINGTerminalRuleCall_1_3_0; }
+		//EDependencies
+		public RuleCall getDependenciesEDependenciesParserRuleCall_1_3_0() { return cDependenciesEDependenciesParserRuleCall_1_3_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_1_4() { return cRightSquareBracketKeyword_1_4; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_1_5() { return cENDTerminalRuleCall_1_5; }
+	}
+	public class EDependenciesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EDependencies");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cDepsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cDepsSTRINGTerminalRuleCall_0_0 = (RuleCall)cDepsAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cDepsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cDepsSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cDepsAssignment_1_1.eContents().get(0);
+		
+		//EDependencies:
+		//	deps+=STRING (',' deps+=STRING)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//deps+=STRING (',' deps+=STRING)*
+		public Group getGroup() { return cGroup; }
+		
+		//deps+=STRING
+		public Assignment getDepsAssignment_0() { return cDepsAssignment_0; }
+		
+		//STRING
+		public RuleCall getDepsSTRINGTerminalRuleCall_0_0() { return cDepsSTRINGTerminalRuleCall_0_0; }
+		
+		//(',' deps+=STRING)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//','
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
+		
+		//deps+=STRING
+		public Assignment getDepsAssignment_1_1() { return cDepsAssignment_1_1; }
+		
+		//STRING
+		public RuleCall getDepsSTRINGTerminalRuleCall_1_1_0() { return cDepsSTRINGTerminalRuleCall_1_1_0; }
 	}
 	public class EInputsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EInputs");
@@ -3696,6 +3731,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	private final EOperationDefinitionElements pEOperationDefinition;
 	private final EOperationDefinitionBodyElements pEOperationDefinitionBody;
 	private final EImplementationElements pEImplementation;
+	private final EDependenciesElements pEDependencies;
 	private final EInputsElements pEInputs;
 	private final EParameterDefinitionElements pEParameterDefinition;
 	private final EParameterDefinitionBodyElements pEParameterDefinitionBody;
@@ -3787,6 +3823,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		this.pEOperationDefinition = new EOperationDefinitionElements();
 		this.pEOperationDefinitionBody = new EOperationDefinitionBodyElements();
 		this.pEImplementation = new EImplementationElements();
+		this.pEDependencies = new EDependenciesElements();
 		this.pEInputs = new EInputsElements();
 		this.pEParameterDefinition = new EParameterDefinitionElements();
 		this.pEParameterDefinitionBody = new EParameterDefinitionBodyElements();
@@ -4346,13 +4383,23 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EImplementation:
-	//	('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies+=STRING ']' END)?;
+	//	('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies+=EDependencies? ']' END)?;
 	public EImplementationElements getEImplementationAccess() {
 		return pEImplementation;
 	}
 	
 	public ParserRule getEImplementationRule() {
 		return getEImplementationAccess().getRule();
+	}
+	
+	//EDependencies:
+	//	deps+=STRING (',' deps+=STRING)*;
+	public EDependenciesElements getEDependenciesAccess() {
+		return pEDependencies;
+	}
+	
+	public ParserRule getEDependenciesRule() {
+		return getEDependenciesAccess().getRule();
 	}
 	
 	//EInputs:

@@ -1571,7 +1571,7 @@ public interface RMPackage extends EPackage
   int EIMPLEMENTATION__PRIMARY = 0;
 
   /**
-   * The feature id for the '<em><b>Dependencies</b></em>' attribute list.
+   * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1589,6 +1589,34 @@ public interface RMPackage extends EPackage
   int EIMPLEMENTATION_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EDependenciesImpl <em>EDependencies</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EDependenciesImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEDependencies()
+   * @generated
+   */
+  int EDEPENDENCIES = 37;
+
+  /**
+   * The feature id for the '<em><b>Deps</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDEPENDENCIES__DEPS = 0;
+
+  /**
+   * The number of structural features of the '<em>EDependencies</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDEPENDENCIES_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EInputsImpl <em>EInputs</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1596,7 +1624,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEInputs()
    * @generated
    */
-  int EINPUTS = 37;
+  int EINPUTS = 38;
 
   /**
    * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
@@ -1624,7 +1652,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEParameterDefinition()
    * @generated
    */
-  int EPARAMETER_DEFINITION = 38;
+  int EPARAMETER_DEFINITION = 39;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1661,7 +1689,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEParameterDefinitionBody()
    * @generated
    */
-  int EPARAMETER_DEFINITION_BODY = 39;
+  int EPARAMETER_DEFINITION_BODY = 40;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1707,7 +1735,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEValueExpression()
    * @generated
    */
-  int EVALUE_EXPRESSION = 40;
+  int EVALUE_EXPRESSION = 41;
 
   /**
    * The number of structural features of the '<em>EValue Expression</em>' class.
@@ -1726,7 +1754,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEFunction()
    * @generated
    */
-  int EFUNCTION = 41;
+  int EFUNCTION = 42;
 
   /**
    * The number of structural features of the '<em>EFunction</em>' class.
@@ -1745,7 +1773,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetInput()
    * @generated
    */
-  int GET_INPUT = 42;
+  int GET_INPUT = 43;
 
   /**
    * The feature id for the '<em><b>Input</b></em>' reference.
@@ -1773,7 +1801,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetAttribute()
    * @generated
    */
-  int GET_ATTRIBUTE = 43;
+  int GET_ATTRIBUTE = 44;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' containment reference.
@@ -1801,7 +1829,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetAttributeBody()
    * @generated
    */
-  int GET_ATTRIBUTE_BODY = 44;
+  int GET_ATTRIBUTE_BODY = 45;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -1847,7 +1875,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetProperty()
    * @generated
    */
-  int GET_PROPERTY = 45;
+  int GET_PROPERTY = 46;
 
   /**
    * The feature id for the '<em><b>Property</b></em>' containment reference.
@@ -1875,7 +1903,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetPropertyBody()
    * @generated
    */
-  int GET_PROPERTY_BODY = 46;
+  int GET_PROPERTY_BODY = 47;
 
   /**
    * The feature id for the '<em><b>Property</b></em>' reference.
@@ -1921,7 +1949,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilities()
    * @generated
    */
-  int ECAPABILITIES = 47;
+  int ECAPABILITIES = 48;
 
   /**
    * The feature id for the '<em><b>Capabilities</b></em>' containment reference list.
@@ -1949,7 +1977,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEReqOrCap()
    * @generated
    */
-  int EREQ_OR_CAP = 55;
+  int EREQ_OR_CAP = 56;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1977,7 +2005,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilityDefinition()
    * @generated
    */
-  int ECAPABILITY_DEFINITION = 48;
+  int ECAPABILITY_DEFINITION = 49;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2014,7 +2042,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilityDefinitionBody()
    * @generated
    */
-  int ECAPABILITY_DEFINITION_BODY = 49;
+  int ECAPABILITY_DEFINITION_BODY = 50;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -2096,7 +2124,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEValidSourceType()
    * @generated
    */
-  int EVALID_SOURCE_TYPE = 50;
+  int EVALID_SOURCE_TYPE = 51;
 
   /**
    * The feature id for the '<em><b>Source Types</b></em>' containment reference list.
@@ -2133,7 +2161,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getENodeTypeRef()
    * @generated
    */
-  int ENODE_TYPE_REF = 51;
+  int ENODE_TYPE_REF = 52;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -2161,7 +2189,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERequirements()
    * @generated
    */
-  int EREQUIREMENTS = 52;
+  int EREQUIREMENTS = 53;
 
   /**
    * The feature id for the '<em><b>Requirements</b></em>' containment reference list.
@@ -2189,7 +2217,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERequirementDefinition()
    * @generated
    */
-  int EREQUIREMENT_DEFINITION = 53;
+  int EREQUIREMENT_DEFINITION = 54;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2226,7 +2254,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERequirementDefinitionBody()
    * @generated
    */
-  int EREQUIREMENT_DEFINITION_BODY = 54;
+  int EREQUIREMENT_DEFINITION_BODY = 55;
 
   /**
    * The feature id for the '<em><b>Capability</b></em>' reference.
@@ -2290,7 +2318,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConstraints()
    * @generated
    */
-  int ECONSTRAINTS = 56;
+  int ECONSTRAINTS = 57;
 
   /**
    * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -2318,7 +2346,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConstraint()
    * @generated
    */
-  int ECONSTRAINT = 57;
+  int ECONSTRAINT = 58;
 
   /**
    * The number of structural features of the '<em>EConstraint</em>' class.
@@ -2337,7 +2365,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMaxLength()
    * @generated
    */
-  int EMAX_LENGTH = 58;
+  int EMAX_LENGTH = 59;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -2365,7 +2393,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMinLength()
    * @generated
    */
-  int EMIN_LENGTH = 59;
+  int EMIN_LENGTH = 60;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -2393,7 +2421,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELength()
    * @generated
    */
-  int ELENGTH = 60;
+  int ELENGTH = 61;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -2421,7 +2449,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEValid_Values()
    * @generated
    */
-  int EVALID_VALUES = 61;
+  int EVALID_VALUES = 62;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2449,7 +2477,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPropertyAssignmentValue()
    * @generated
    */
-  int EPROPERTY_ASSIGNMENT_VALUE = 69;
+  int EPROPERTY_ASSIGNMENT_VALUE = 70;
 
   /**
    * The number of structural features of the '<em>EProperty Assignment Value</em>' class.
@@ -2468,7 +2496,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELIST()
    * @generated
    */
-  int ELIST = 62;
+  int ELIST = 63;
 
   /**
    * The feature id for the '<em><b>List</b></em>' attribute list.
@@ -2496,7 +2524,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEInRange()
    * @generated
    */
-  int EIN_RANGE = 63;
+  int EIN_RANGE = 64;
 
   /**
    * The feature id for the '<em><b>Start</b></em>' attribute.
@@ -2533,7 +2561,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELessOrEqual()
    * @generated
    */
-  int ELESS_OR_EQUAL = 64;
+  int ELESS_OR_EQUAL = 65;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -2561,7 +2589,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELessThan()
    * @generated
    */
-  int ELESS_THAN = 65;
+  int ELESS_THAN = 66;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -2589,7 +2617,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEGreaterOrEqual()
    * @generated
    */
-  int EGREATER_OR_EQUAL = 66;
+  int EGREATER_OR_EQUAL = 67;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -2617,7 +2645,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEGreaterThan()
    * @generated
    */
-  int EGREATER_THAN = 67;
+  int EGREATER_THAN = 68;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -2645,7 +2673,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEEqual()
    * @generated
    */
-  int EEQUAL = 68;
+  int EEQUAL = 69;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -2673,7 +2701,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESTRING()
    * @generated
    */
-  int ESTRING = 70;
+  int ESTRING = 71;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -2701,7 +2729,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMAP()
    * @generated
    */
-  int EMAP = 71;
+  int EMAP = 72;
 
   /**
    * The feature id for the '<em><b>Map</b></em>' containment reference list.
@@ -2729,7 +2757,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMapEntry()
    * @generated
    */
-  int EMAP_ENTRY = 72;
+  int EMAP_ENTRY = 73;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -4131,15 +4159,36 @@ public interface RMPackage extends EPackage
   EAttribute getEImplementation_Primary();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.dsl.rM.EImplementation#getDependencies <em>Dependencies</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.EImplementation#getDependencies <em>Dependencies</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Dependencies</em>'.
+   * @return the meta object for the containment reference list '<em>Dependencies</em>'.
    * @see org.sodalite.dsl.rM.EImplementation#getDependencies()
    * @see #getEImplementation()
    * @generated
    */
-  EAttribute getEImplementation_Dependencies();
+  EReference getEImplementation_Dependencies();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EDependencies <em>EDependencies</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EDependencies</em>'.
+   * @see org.sodalite.dsl.rM.EDependencies
+   * @generated
+   */
+  EClass getEDependencies();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.sodalite.dsl.rM.EDependencies#getDeps <em>Deps</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Deps</em>'.
+   * @see org.sodalite.dsl.rM.EDependencies#getDeps()
+   * @see #getEDependencies()
+   * @generated
+   */
+  EAttribute getEDependencies_Deps();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EInputs <em>EInputs</em>}'.
@@ -6195,12 +6244,30 @@ public interface RMPackage extends EPackage
     EAttribute EIMPLEMENTATION__PRIMARY = eINSTANCE.getEImplementation_Primary();
 
     /**
-     * The meta object literal for the '<em><b>Dependencies</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Dependencies</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EIMPLEMENTATION__DEPENDENCIES = eINSTANCE.getEImplementation_Dependencies();
+    EReference EIMPLEMENTATION__DEPENDENCIES = eINSTANCE.getEImplementation_Dependencies();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EDependenciesImpl <em>EDependencies</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EDependenciesImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEDependencies()
+     * @generated
+     */
+    EClass EDEPENDENCIES = eINSTANCE.getEDependencies();
+
+    /**
+     * The meta object literal for the '<em><b>Deps</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EDEPENDENCIES__DEPS = eINSTANCE.getEDependencies_Deps();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EInputsImpl <em>EInputs</em>}' class.

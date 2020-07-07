@@ -357,6 +357,15 @@ public interface RMFactory extends EFactory
   EImplementation createEImplementation();
 
   /**
+   * Returns a new object of class '<em>EDependencies</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDependencies</em>'.
+   * @generated
+   */
+  EDependencies createEDependencies();
+
+  /**
    * Returns a new object of class '<em>EInputs</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

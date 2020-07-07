@@ -3914,22 +3914,23 @@ ruleEImplementation returns [EObject current=null]
 							}
 							(
 								(
-									lv_dependencies_6_0=RULE_STRING
 									{
-										newLeafNode(lv_dependencies_6_0, grammarAccess.getEImplementationAccess().getDependenciesSTRINGTerminalRuleCall_1_3_0());
+										newCompositeNode(grammarAccess.getEImplementationAccess().getDependenciesEDependenciesParserRuleCall_1_3_0());
 									}
+									lv_dependencies_6_0=ruleEDependencies
 									{
 										if ($current==null) {
-											$current = createModelElement(grammarAccess.getEImplementationRule());
+											$current = createModelElementForParent(grammarAccess.getEImplementationRule());
 										}
-										addWithLastConsumed(
+										add(
 											$current,
 											"dependencies",
 											lv_dependencies_6_0,
-											"org.eclipse.xtext.common.Terminals.STRING");
+											"org.sodalite.dsl.RM.EDependencies");
+										afterParserOrEnumRuleCall();
 									}
 								)
-							)
+							)?
 							otherlv_7=RightSquareBracket
 							{
 								newLeafNode(otherlv_7, grammarAccess.getEImplementationAccess().getRightSquareBracketKeyword_1_4());
@@ -3950,6 +3951,67 @@ ruleEImplementation returns [EObject current=null]
 			{ 
 			  getUnorderedGroupHelper().leave(grammarAccess.getEImplementationAccess().getUnorderedGroup());
 			}
+	)
+;
+
+// Entry rule entryRuleEDependencies
+entryRuleEDependencies returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEDependenciesRule()); }
+	iv_ruleEDependencies=ruleEDependencies
+	{ $current=$iv_ruleEDependencies.current; }
+	EOF;
+
+// Rule EDependencies
+ruleEDependencies returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_deps_0_0=RULE_STRING
+				{
+					newLeafNode(lv_deps_0_0, grammarAccess.getEDependenciesAccess().getDepsSTRINGTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEDependenciesRule());
+					}
+					addWithLastConsumed(
+						$current,
+						"deps",
+						lv_deps_0_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+		(
+			otherlv_1=Comma
+			{
+				newLeafNode(otherlv_1, grammarAccess.getEDependenciesAccess().getCommaKeyword_1_0());
+			}
+			(
+				(
+					lv_deps_2_0=RULE_STRING
+					{
+						newLeafNode(lv_deps_2_0, grammarAccess.getEDependenciesAccess().getDepsSTRINGTerminalRuleCall_1_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEDependenciesRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"deps",
+							lv_deps_2_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)*
 	)
 ;
 

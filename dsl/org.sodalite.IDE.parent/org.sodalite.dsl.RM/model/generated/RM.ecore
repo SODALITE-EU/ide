@@ -217,8 +217,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EImplementation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dependencies" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
+        eType="#//EDependencies" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EDependencies">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deps" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInputs">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"

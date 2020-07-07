@@ -28,6 +28,7 @@ import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDataTypeBody;
 import org.sodalite.dsl.rM.EDataTypes;
+import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EEqual;
 import org.sodalite.dsl.rM.EFunction;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
@@ -349,6 +350,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   private EClass eImplementationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eDependenciesEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2079,9 +2087,31 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getEImplementation_Dependencies()
+  public EReference getEImplementation_Dependencies()
   {
-    return (EAttribute)eImplementationEClass.getEStructuralFeatures().get(1);
+    return (EReference)eImplementationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEDependencies()
+  {
+    return eDependenciesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEDependencies_Deps()
+  {
+    return (EAttribute)eDependenciesEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3247,7 +3277,10 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eImplementationEClass = createEClass(EIMPLEMENTATION);
     createEAttribute(eImplementationEClass, EIMPLEMENTATION__PRIMARY);
-    createEAttribute(eImplementationEClass, EIMPLEMENTATION__DEPENDENCIES);
+    createEReference(eImplementationEClass, EIMPLEMENTATION__DEPENDENCIES);
+
+    eDependenciesEClass = createEClass(EDEPENDENCIES);
+    createEAttribute(eDependenciesEClass, EDEPENDENCIES__DEPS);
 
     eInputsEClass = createEClass(EINPUTS);
     createEReference(eInputsEClass, EINPUTS__INPUTS);
@@ -3590,7 +3623,10 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eImplementationEClass, EImplementation.class, "EImplementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEImplementation_Primary(), ecorePackage.getEString(), "primary", null, 0, 1, EImplementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEImplementation_Dependencies(), ecorePackage.getEString(), "dependencies", null, 0, -1, EImplementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEImplementation_Dependencies(), this.getEDependencies(), null, "dependencies", null, 0, -1, EImplementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eDependenciesEClass, EDependencies.class, "EDependencies", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEDependencies_Deps(), ecorePackage.getEString(), "deps", null, 0, -1, EDependencies.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eInputsEClass, EInputs.class, "EInputs", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEInputs_Inputs(), this.getEParameterDefinition(), null, "inputs", null, 0, -1, EInputs.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

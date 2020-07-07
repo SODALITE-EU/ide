@@ -170,7 +170,10 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EImplementation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EImplementation/primary"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EImplementation/dependencies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EImplementation/dependencies"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EDependencies">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EDependencies/deps"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInputs">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInputs/inputs"/>

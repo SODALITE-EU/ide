@@ -102,6 +102,7 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EOPERATION_DEFINITION: return createEOperationDefinition();
       case RMPackage.EOPERATION_DEFINITION_BODY: return createEOperationDefinitionBody();
       case RMPackage.EIMPLEMENTATION: return createEImplementation();
+      case RMPackage.EDEPENDENCIES: return createEDependencies();
       case RMPackage.EINPUTS: return createEInputs();
       case RMPackage.EPARAMETER_DEFINITION: return createEParameterDefinition();
       case RMPackage.EPARAMETER_DEFINITION_BODY: return createEParameterDefinitionBody();
@@ -585,6 +586,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EImplementationImpl eImplementation = new EImplementationImpl();
     return eImplementation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDependencies createEDependencies()
+  {
+    EDependenciesImpl eDependencies = new EDependenciesImpl();
+    return eDependencies;
   }
 
   /**
