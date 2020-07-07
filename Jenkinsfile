@@ -27,6 +27,17 @@ pipeline {
 	}
       }
     }
+    stage('Build and push IDE image') {
+            when {
+               branch "master"
+            }
+            steps{
+            	withDockerRegistry(credentialsId: 'jenkins-sodalite.docker_token', url: '') {
+            		sh "cd Docker; ./create_sodalite_ide_image.sh"
+                	sh "docker tag sodalite-ide $docker_registry_ip/sodalite-ide"
+                	sh "docker push $docker_registry_ip/sodalite-ide"
+            }
+        }
   }
   post {
     failure {
