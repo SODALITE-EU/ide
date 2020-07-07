@@ -50,23 +50,23 @@ public class OptimizationValidator extends AbstractOptimizationValidator {
         OptimizationPackage.Literals.EOPTIMIZATION__ENABLE_AUTOTUNING, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if (((Objects.equal(opt.getApp_type(), "AI_Training") && (!(opt.getApp_optimization() instanceof EAITrainingCase))) || ((opt.getApp_optimization() instanceof EAITrainingCase) && (!Objects.equal(opt.getApp_type(), "AI_Training"))))) {
-      this.error("A ai_training property should be present if app_type is AI_Training", 
+    if (((Objects.equal(opt.getApp_type(), "AI_Training") && (!(opt.getApp_optimization() instanceof EAITrainingCase))) || ((opt.getApp_optimization() instanceof EAITrainingCase) && (!Objects.equal(opt.getApp_type(), "ai_training"))))) {
+      this.error("A app_type-ai_training property should be present if app_type is AI_Training", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE, 
         OptimizationValidator.MANDATORY_ELEMENT);
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_OPTIMIZATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if (((Objects.equal(opt.getApp_type(), "HPC") && (!(opt.getApp_optimization() instanceof EHPCCase))) || Objects.equal(Boolean.valueOf((!Objects.equal(Boolean.valueOf((opt.getApp_optimization() instanceof EHPCCase)), opt.getApp_type()))), "HPC"))) {
-      this.error("Ah hpc property should be present if app_type is HPC", 
+    if (((Objects.equal(opt.getApp_type(), "HPC") && (!(opt.getApp_optimization() instanceof EHPCCase))) || Objects.equal(Boolean.valueOf((!Objects.equal(Boolean.valueOf((opt.getApp_optimization() instanceof EHPCCase)), opt.getApp_type()))), "hpc"))) {
+      this.error("Ah app_type-hpc property should be present if app_type is HPC", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE, 
         OptimizationValidator.MANDATORY_ELEMENT);
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_OPTIMIZATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((Objects.equal(opt.getApp_type(), "AI_Inference") || Objects.equal(opt.getApp_type(), "BigData"))) {
+    if ((Objects.equal(opt.getApp_type(), "AI_Inference") || Objects.equal(opt.getApp_type(), "big_data"))) {
       this.error("This app_type is not supported in current version", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE, 
         OptimizationValidator.MANDATORY_ELEMENT);
@@ -77,18 +77,18 @@ public class OptimizationValidator extends AbstractOptimizationValidator {
   public void checkAITrainingConfigMandatoryElement(final EAITrainingConfig conf) {
     EObject _eContainer = conf.eContainer();
     final EAITraining parent = ((EAITraining) _eContainer);
-    if ((Objects.equal(conf.getAi_framework(), "PyTorch") && (!(parent.getAitrainingcase() instanceof EPyTorchCase)))) {
-      this.error("A pytorch property should be present if ai_framework is PyTorch", 
+    if ((Objects.equal(conf.getAi_framework(), "pytorch") && (!(parent.getAitrainingcase() instanceof EPyTorchCase)))) {
+      this.error("An ai_framework-pytorch property should be present if ai_framework is pytorch", 
         OptimizationPackage.Literals.EAI_TRAINING_CONFIG__AI_FRAMEWORK, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((Objects.equal(conf.getAi_framework(), "TensorFlow") && (!(parent.getAitrainingcase() instanceof ETensorFlowCase)))) {
-      this.error("A tensorflow property should be present if ai_framework is TensorFlow", 
+    if ((Objects.equal(conf.getAi_framework(), "tensorflow") && (!(parent.getAitrainingcase() instanceof ETensorFlowCase)))) {
+      this.error("An ai_framework-tensorflow property should be present if ai_framework is tensorflow", 
         OptimizationPackage.Literals.EAI_TRAINING_CONFIG__AI_FRAMEWORK, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((Objects.equal(conf.getAi_framework(), "Keras") && (!(parent.getAitrainingcase() instanceof EKerasCase)))) {
-      this.error("A keras property should be present if ai_framework is Keras", 
+    if ((Objects.equal(conf.getAi_framework(), "keras") && (!(parent.getAitrainingcase() instanceof EKerasCase)))) {
+      this.error("An ai_framework-keras property should be present if ai_framework is Keras", 
         OptimizationPackage.Literals.EAI_TRAINING_CONFIG__AI_FRAMEWORK, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
@@ -96,17 +96,17 @@ public class OptimizationValidator extends AbstractOptimizationValidator {
   
   @Check
   public void checkAITrainingMandatoryElement(final EAITraining ai_training) {
-    if ((Objects.equal(ai_training.getConfig().getAi_framework(), "PyTorch") && (!(ai_training.getAitrainingcase() instanceof EPyTorchCase)))) {
+    if ((Objects.equal(ai_training.getConfig().getAi_framework(), "pytorch") && (!(ai_training.getAitrainingcase() instanceof EPyTorchCase)))) {
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((Objects.equal(ai_training.getConfig().getAi_framework(), "TensorFlow") && (!(ai_training.getAitrainingcase() instanceof ETensorFlowCase)))) {
+    if ((Objects.equal(ai_training.getConfig().getAi_framework(), "tensorflow") && (!(ai_training.getAitrainingcase() instanceof ETensorFlowCase)))) {
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((Objects.equal(ai_training.getConfig().getAi_framework(), "Keras") && (!(ai_training.getAitrainingcase() instanceof EKerasCase)))) {
+    if ((Objects.equal(ai_training.getConfig().getAi_framework(), "keras") && (!(ai_training.getAitrainingcase() instanceof EKerasCase)))) {
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE, 
         OptimizationValidator.MANDATORY_ELEMENT);
@@ -117,43 +117,43 @@ public class OptimizationValidator extends AbstractOptimizationValidator {
   public void checkHPCConfigMandatoryElement(final EHPCConfig conf) {
     EObject _eContainer = conf.eContainer();
     final EHPC parent = ((EHPC) _eContainer);
-    if ((conf.getParallelisation().contains("MPI") && (parent.getMpi() == null))) {
-      this.error("A mpi property should be present if parallelisation contains MPI", 
+    if ((conf.getParallelisation().contains("mpi") && (parent.getMpi() == null))) {
+      this.error("A parallelisation-mpi property should be present if parallelisation contains mpi", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((conf.getParallelisation().contains("OPENMP") && (parent.getOpenmp() == null))) {
-      this.error("A openmp property should be present if parallelisation contains OPENMP", 
+    if ((conf.getParallelisation().contains("openmp") && (parent.getOpenmp() == null))) {
+      this.error("A parallelisation-openmp property should be present if parallelisation contains openmp", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((conf.getParallelisation().contains("OPENACC") && (parent.getOpenacc() == null))) {
-      this.error("A openacc property should be present if parallelisation contains OPENACC", 
+    if ((conf.getParallelisation().contains("openacc") && (parent.getOpenacc() == null))) {
+      this.error("A parallelisation-openacc property should be present if parallelisation contains openacc", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((conf.getParallelisation().contains("OPENCL") && (parent.getOpencl() == null))) {
-      this.error("A opencl property should be present if parallelisation contains OPENCL", 
+    if ((conf.getParallelisation().contains("opencl") && (parent.getOpencl() == null))) {
+      this.error("A parallelisation-opencl property should be present if parallelisation contains opencl", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if (((parent.getMpi() != null) && (!conf.getParallelisation().contains("MPI")))) {
-      this.error("Parallelisation should contains MPI as an mpi property exists", 
+    if (((parent.getMpi() != null) && (!conf.getParallelisation().contains("mpi")))) {
+      this.error("Parallelisation should contains mpi as an parallelisation-mpi property exists", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if (((parent.getOpenmp() != null) && (!conf.getParallelisation().contains("OPENMP")))) {
-      this.error("Parallelisation should contains OPENMP as an openmp property exists", 
+    if (((parent.getOpenmp() != null) && (!conf.getParallelisation().contains("openmp")))) {
+      this.error("Parallelisation should contains openmp as an parallelisation-openmp property exists", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if (((parent.getOpenacc() != null) && (!conf.getParallelisation().contains("OPENACC")))) {
-      this.error("Parallelisation should contains OPENACC as an openacc property exists", 
+    if (((parent.getOpenacc() != null) && (!conf.getParallelisation().contains("openacc")))) {
+      this.error("Parallelisation should contains openacc as an parallelisation-openacc property exists", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if (((parent.getOpencl() != null) && (!conf.getParallelisation().contains("OPENCL")))) {
-      this.error("Parallelisation should contains OPENCL as an opencl property exists", 
+    if (((parent.getOpencl() != null) && (!conf.getParallelisation().contains("opencl")))) {
+      this.error("Parallelisation should contains opencl as an parallelisation-opencl property exists", 
         OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
@@ -161,22 +161,22 @@ public class OptimizationValidator extends AbstractOptimizationValidator {
   
   @Check
   public void checkHPCMandatoryElement(final EHPC hpc) {
-    if ((Objects.equal(hpc.getConfig().getParallelisation(), "MPI") && (!(hpc.getMpi() != null)))) {
+    if ((Objects.equal(hpc.getConfig().getParallelisation(), "mpi") && (!(hpc.getMpi() != null)))) {
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EHPC__MPI, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((Objects.equal(hpc.getConfig().getParallelisation(), "OPENMP") && (!(hpc.getOpenmp() != null)))) {
+    if ((Objects.equal(hpc.getConfig().getParallelisation(), "openmp") && (!(hpc.getOpenmp() != null)))) {
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EHPC__OPENMP, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((Objects.equal(hpc.getConfig().getParallelisation(), "OPENACC") && (!(hpc.getOpenacc() != null)))) {
+    if ((Objects.equal(hpc.getConfig().getParallelisation(), "openacc") && (!(hpc.getOpenacc() != null)))) {
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EHPC__OPENACC, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((Objects.equal(hpc.getConfig().getParallelisation(), "OPENCL") && (!(hpc.getOpencl() != null)))) {
+    if ((Objects.equal(hpc.getConfig().getParallelisation(), "opencl") && (!(hpc.getOpencl() != null)))) {
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EHPC__OPENCL, 
         OptimizationValidator.MANDATORY_ELEMENT);
