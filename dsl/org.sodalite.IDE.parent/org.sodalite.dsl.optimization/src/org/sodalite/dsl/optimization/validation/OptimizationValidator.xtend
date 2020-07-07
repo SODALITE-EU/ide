@@ -52,9 +52,9 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 					MANDATORY_ELEMENT)
 		}
 		if ((opt.app_type == "AI_Training" && !(opt.app_optimization instanceof EAITrainingCase))
-			|| (opt.app_optimization instanceof EAITrainingCase && !(opt.app_type == "AI_Training"))	
+			|| (opt.app_optimization instanceof EAITrainingCase && !(opt.app_type == "ai_training"))	
 		) {
-			error('A ai_training property should be present if app_type is AI_Training', 
+			error('A app_type-ai_training property should be present if app_type is AI_Training', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE,
 					MANDATORY_ELEMENT)
 			error('This property is not compatible with selected app_type', 
@@ -62,9 +62,9 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 					MANDATORY_ELEMENT)
 		}
 		if ((opt.app_type == "HPC" && !(opt.app_optimization instanceof EHPCCase))
-			|| (opt.app_optimization instanceof EHPCCase != opt.app_type == "HPC")
+			|| (opt.app_optimization instanceof EHPCCase != opt.app_type == "hpc")
 		) {
-			error('Ah hpc property should be present if app_type is HPC', 
+			error('Ah app_type-hpc property should be present if app_type is HPC', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE,
 					MANDATORY_ELEMENT)
 			error('This property is not compatible with selected app_type', 
@@ -72,7 +72,7 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 					MANDATORY_ELEMENT)
 		}
 		
-		if ((opt.app_type == "AI_Inference") || (opt.app_type == "BigData")){
+		if ((opt.app_type == "AI_Inference") || (opt.app_type == "big_data")){
 			error('This app_type is not supported in current version', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE,
 					MANDATORY_ELEMENT)
@@ -82,18 +82,18 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 	@Check
 	def checkAITrainingConfigMandatoryElement(EAITrainingConfig conf) {
 		val parent = conf.eContainer as EAITraining
-		if (conf.ai_framework == "PyTorch" && !(parent.aitrainingcase instanceof EPyTorchCase)) {
-			error('A pytorch property should be present if ai_framework is PyTorch', 
+		if (conf.ai_framework == "pytorch" && !(parent.aitrainingcase instanceof EPyTorchCase)) {
+			error('An ai_framework-pytorch property should be present if ai_framework is pytorch', 
 					OptimizationPackage.Literals.EAI_TRAINING_CONFIG__AI_FRAMEWORK,
 					MANDATORY_ELEMENT)
 		}
-		if (conf.ai_framework == "TensorFlow" && !(parent.aitrainingcase instanceof ETensorFlowCase)) {
-			error('A tensorflow property should be present if ai_framework is TensorFlow', 
+		if (conf.ai_framework == "tensorflow" && !(parent.aitrainingcase instanceof ETensorFlowCase)) {
+			error('An ai_framework-tensorflow property should be present if ai_framework is tensorflow', 
 					OptimizationPackage.Literals.EAI_TRAINING_CONFIG__AI_FRAMEWORK,
 					MANDATORY_ELEMENT)
 		}
-		if (conf.ai_framework == "Keras" && !(parent.aitrainingcase instanceof EKerasCase)) {
-			error('A keras property should be present if ai_framework is Keras', 
+		if (conf.ai_framework == "keras" && !(parent.aitrainingcase instanceof EKerasCase)) {
+			error('An ai_framework-keras property should be present if ai_framework is Keras', 
 					OptimizationPackage.Literals.EAI_TRAINING_CONFIG__AI_FRAMEWORK,
 					MANDATORY_ELEMENT)
 		}
@@ -101,17 +101,17 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 	
 	@Check
 	def checkAITrainingMandatoryElement(EAITraining ai_training) {
-		if (ai_training.config.ai_framework == "PyTorch" && !(ai_training.aitrainingcase instanceof EPyTorchCase)) {
+		if (ai_training.config.ai_framework == "pytorch" && !(ai_training.aitrainingcase instanceof EPyTorchCase)) {
 			error('This property is not compatible with selected app_type', 
 					OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE,
 					MANDATORY_ELEMENT)
 		}
-		if (ai_training.config.ai_framework == "TensorFlow" && !(ai_training.aitrainingcase instanceof ETensorFlowCase)) {
+		if (ai_training.config.ai_framework == "tensorflow" && !(ai_training.aitrainingcase instanceof ETensorFlowCase)) {
 			error('This property is not compatible with selected app_type', 
 					OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE,
 					MANDATORY_ELEMENT)
 		}
-		if (ai_training.config.ai_framework == "Keras" && !(ai_training.aitrainingcase instanceof EKerasCase)) {
+		if (ai_training.config.ai_framework == "keras" && !(ai_training.aitrainingcase instanceof EKerasCase)) {
 			error('This property is not compatible with selected app_type', 
 					OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE,
 					MANDATORY_ELEMENT)
@@ -121,43 +121,43 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 		@Check
 	def checkHPCConfigMandatoryElement(EHPCConfig conf) {
 		val parent = conf.eContainer as EHPC
-		if (conf.parallelisation.contains("MPI") && parent.mpi === null) {
-			error('A mpi property should be present if parallelisation contains MPI', 
+		if (conf.parallelisation.contains("mpi") && parent.mpi === null) {
+			error('A parallelisation-mpi property should be present if parallelisation contains mpi', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (conf.parallelisation.contains("OPENMP") && parent.openmp === null) {
-			error('A openmp property should be present if parallelisation contains OPENMP', 
+		if (conf.parallelisation.contains("openmp") && parent.openmp === null) {
+			error('A parallelisation-openmp property should be present if parallelisation contains openmp', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (conf.parallelisation.contains("OPENACC") && parent.openacc === null) {
-			error('A openacc property should be present if parallelisation contains OPENACC', 
+		if (conf.parallelisation.contains("openacc") && parent.openacc === null) {
+			error('A parallelisation-openacc property should be present if parallelisation contains openacc', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (conf.parallelisation.contains("OPENCL") && parent.opencl === null) {
-			error('A opencl property should be present if parallelisation contains OPENCL', 
+		if (conf.parallelisation.contains("opencl") && parent.opencl === null) {
+			error('A parallelisation-opencl property should be present if parallelisation contains opencl', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (parent.mpi !== null && !conf.parallelisation.contains("MPI")) {
-			error('Parallelisation should contains MPI as an mpi property exists', 
+		if (parent.mpi !== null && !conf.parallelisation.contains("mpi")) {
+			error('Parallelisation should contains mpi as an parallelisation-mpi property exists', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (parent.openmp !== null && !conf.parallelisation.contains("OPENMP")) {
-			error('Parallelisation should contains OPENMP as an openmp property exists', 
+		if (parent.openmp !== null && !conf.parallelisation.contains("openmp")) {
+			error('Parallelisation should contains openmp as an parallelisation-openmp property exists', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (parent.openacc !== null && !conf.parallelisation.contains("OPENACC")) {
-			error('Parallelisation should contains OPENACC as an openacc property exists', 
+		if (parent.openacc !== null && !conf.parallelisation.contains("openacc")) {
+			error('Parallelisation should contains openacc as an parallelisation-openacc property exists', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
-		if (parent.opencl !== null && !conf.parallelisation.contains("OPENCL")) {
-			error('Parallelisation should contains OPENCL as an opencl property exists', 
+		if (parent.opencl !== null && !conf.parallelisation.contains("opencl")) {
+			error('Parallelisation should contains opencl as an parallelisation-opencl property exists', 
 					OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION,
 					MANDATORY_ELEMENT)
 		}
@@ -165,22 +165,22 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 	
 	@Check
 	def checkHPCMandatoryElement(EHPC hpc) {
-		if (hpc.config.parallelisation == "MPI" && !(hpc.mpi !== null)) {
+		if (hpc.config.parallelisation == "mpi" && !(hpc.mpi !== null)) {
 			error('This property is not compatible with selected app_type', 
 					OptimizationPackage.Literals.EHPC__MPI,
 					MANDATORY_ELEMENT)
 		}
-		if (hpc.config.parallelisation == "OPENMP" && !(hpc.openmp !== null)) {
+		if (hpc.config.parallelisation == "openmp" && !(hpc.openmp !== null)) {
 			error('This property is not compatible with selected app_type', 
 					OptimizationPackage.Literals.EHPC__OPENMP,
 					MANDATORY_ELEMENT)
 		}
-		if (hpc.config.parallelisation == "OPENACC" && !(hpc.openacc !== null)) {
+		if (hpc.config.parallelisation == "openacc" && !(hpc.openacc !== null)) {
 			error('This property is not compatible with selected app_type', 
 					OptimizationPackage.Literals.EHPC__OPENACC,
 					MANDATORY_ELEMENT)
 		}
-		if (hpc.config.parallelisation == "OPENCL" && !(hpc.opencl !== null)) {
+		if (hpc.config.parallelisation == "opencl" && !(hpc.opencl !== null)) {
 			error('This property is not compatible with selected app_type', 
 					OptimizationPackage.Literals.EHPC__OPENCL,
 					MANDATORY_ELEMENT)

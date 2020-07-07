@@ -42,7 +42,7 @@ EOptimizationCases:
 ;
 
 EAITrainingCase:
-	('ai_training:'
+	('app_type-ai_training:'
 		BEGIN
 		ai_training=EAITraining
 		END
@@ -58,7 +58,7 @@ EHPCCase:
 ;
 
 EAppType:
-	'AI_Training' | 'HPC' | 'BigData' | 'AI_Inference' ;
+	'ai_training' | 'hpc' | 'big_data' | 'ai_inference' ;
 	
 EOptBuild:
 	('cpu_type:' cpu_type=ECPUType) &
@@ -66,10 +66,10 @@ EOptBuild:
 ;
 
 ECPUType:
-	'Intelx86' | 'ARM' | 'AMD' | 'Power' ;
+	'x86' | 'arm' | 'amd' | 'power' ;
 	
 EACCType:
-	'NVIDIA-V100' | 'AMD-M100' | 'FPGA-Xilinx' ;
+	'nvidia' | 'amd' | 'fpga' ;
 
 EAutotuning:
 	('tuner:' tuner=ETuner) &
@@ -77,7 +77,7 @@ EAutotuning:
 ;
 
 ETuner:
-	'CREATA' | 'AUTOTUNE'  ;
+	'creata' | 'autotune'  ;
 
 EAITraining:
 	('config:'
@@ -98,7 +98,7 @@ EAITrainingCases:
 ;
 
 EPyTorchCase:
-	('pytorch:' 
+	('ai_framework-pytorch:' 
 		BEGIN
 		pytorch=EPyTorch
 		END
@@ -106,7 +106,7 @@ EPyTorchCase:
 ;
 
 ETensorFlowCase:
-	('tensorflow:' 
+	('ai_framework-tensorflow:' 
 		BEGIN
 		tensorflow=ETensorFlow
 		END
@@ -114,7 +114,7 @@ ETensorFlowCase:
 ;
 
 EKerasCase:
-	('keras:' 
+	('ai_framework-keras:' 
 		BEGIN
 		keras=EKeras
 		END
@@ -130,10 +130,10 @@ EAITrainingConfig:
 ;	
 
 EAIFramework:
-	'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet';
+	'tensorflow' | 'pytorch' | 'keras' | 'cntk' | 'mxnet';
 	
 EAITrainingType:
-	'Image_classification' | 'object_detection' | 'translation' | 'recommendation' | 'reinforncement_learning';
+	'image_classification' | 'object_detection' | 'translation' | 'recommendation' | 'reinforncement_learning';
 
 EAITrainingData:
 	('location:' location=STRING)? &
@@ -148,7 +148,7 @@ EAITrainingData:
 ;
 
 EBasedata:
-	'Imagenet' | 'CIFAR' | 'MNIST' ;
+	'imagenet' | 'cifar' | 'mnist' ;
 
 EAITrainingETL:
 	('prefetch:' prefetch=INT)? &
@@ -157,11 +157,11 @@ EAITrainingETL:
 
 EKeras:
 	('version:' version=STRING)? &
-	('backend:' backend=EBackend)? 
+	('backend:' backend=EAIFramework)? 
 ;
 
-EBackend:
-	'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet';
+//EBackend:
+//	'tensorflow' | 'pytorch' | 'keras' | 'cntk' | 'mxnet';
 
 ETensorFlow:
 	('version:' version=STRING)? &
@@ -191,7 +191,7 @@ EHPC:
 ;
 
 EOPENCLCase:
-	('opencl:'
+	('parallelisation-opencl:'
 		BEGIN
 		opencl=EOPENCL
 		END
@@ -199,7 +199,7 @@ EOPENCLCase:
 ;
 
 EOPENACCCase:
-	('openacc:'
+	('parallelisation-openacc:'
 		BEGIN
 		openacc=EOPENACC
 		END
@@ -207,7 +207,7 @@ EOPENACCCase:
 ;
 
 EOPENMPCase:
-	('openmp:' 
+	('parallelisation-openmp:' 
 		BEGIN
 		openmp=EOPENMP
 		END
@@ -215,7 +215,7 @@ EOPENMPCase:
 ;
 
 EMPICase:
-	('mpi:' 
+	('parallelisation-mpi:' 
 		BEGIN
 		mpi=EMPI
 		END
@@ -227,7 +227,7 @@ EHPCConfig:
 ;	
 
 EParallelisation:
-	'MPI' | 'OPENMP' | 'OPENACC' | 'OPENCL' ;
+	'mpi' | 'openmp' | 'openacc' | 'opencl' ;
 	
 EHPCData:
 	('location:' location=STRING)? &
@@ -247,7 +247,7 @@ EHPCETL:
 ;
 
 EHPCBasedata:
-	'IMAGE' | 'RESTART' ;
+	'image' | 'restart' ;
 
 EMPI:
 	('library:' library=EMPILibrary) &
@@ -287,15 +287,6 @@ EOPENCL:
 ECompiler:
 	'pgi' | 'cray' ;
 
-
-terminal BT: '>';
-terminal LT: '<';
-terminal BET: '>=';
-terminal LET: '<=';
-terminal EQUAL: '==';
-terminal NOT_EQUAL: '!=';
-terminal OR: 'OR';
-terminal AND: 'AND';
 	
 //Positional blocks delimited with indentation
 terminal BEGIN: 'synthetic:BEGIN';

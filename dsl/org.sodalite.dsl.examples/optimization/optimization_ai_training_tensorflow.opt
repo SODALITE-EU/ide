@@ -1,29 +1,29 @@
-optimization ai_training.tensor_flow:
+optimization ai_training.tensor_flow: 
 	enable_opt_build: true
 	enable_autotuning: true
-	app_type: AI_Training
+	app_type: ai_training 
 	opt_build:
-		cpu_type: ARM
-		acc_type: NVIDIA-V100
+		cpu_type: arm
+		acc_type: nvidia
 	autotuning:
-		tuner: CREATA
+		tuner: creata
 		input: "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/snow/test.rm"
-	ai_training: 
+	app_type-ai_training: 
 		config:
-			ai_framework: TensorFlow
+			ai_framework: tensorflow
 			type: translation
 			distributed_training: true 
 			layers: 6
 			parameters: 872684236
 		data:
 			location: "/some/data"
-			basedata: Imagenet
+			basedata: imagenet
 			size: 67
 			count: 4389
 			etl: 
 				prefetch: 100
 				cache: 100
-		tensorflow: 
+		ai_framework-tensorflow: 
 			version: "1.1"
 			xla: true
 		 

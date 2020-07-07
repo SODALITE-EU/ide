@@ -207,40 +207,40 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 	}
 	
 	override void completeEOptimization_App_type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("AI_Training", "AI_Training", context, "", acceptor);
-		createNonEditableCompletionProposal ("HPC", "HPC", context, "", acceptor);
-		createNonEditableCompletionProposal ("BigData", "BigData", context, "BigData not supported in this version", acceptor);
-		createNonEditableCompletionProposal ("AI_Inference", "AI_Inference", context, "AI_Inference not supported in this version", acceptor);
+		createNonEditableCompletionProposal ("ai_training", "ai_training", context, "", acceptor);
+		createNonEditableCompletionProposal ("hpc", "hpc", context, "", acceptor);
+		createNonEditableCompletionProposal ("big_data", "big_data", context, "BigData not supported in this version", acceptor);
+		createNonEditableCompletionProposal ("ai_inference", "ai_inference", context, "AI_Inference not supported in this version", acceptor);
 	}
 	
 	override void completeEOptBuild_Cpu_type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("Intelx86", "Intelx86", context, "", acceptor);
-		createNonEditableCompletionProposal ("ARM", "ARM", context, "", acceptor);
-		createNonEditableCompletionProposal ("AMD", "AMD", context, "", acceptor);
-		createNonEditableCompletionProposal ("Power", "Power", context, "", acceptor);
+		createNonEditableCompletionProposal ("x86", "x86", context, "", acceptor);
+		createNonEditableCompletionProposal ("arm", "arm", context, "", acceptor);
+		createNonEditableCompletionProposal ("amd", "amd", context, "", acceptor);
+		createNonEditableCompletionProposal ("power", "power", context, "", acceptor);
 	}
 	
 	override void completeEOptBuild_Acc_type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("NVIDIA-V100", "NVIDIA-V100", context, "", acceptor);
-		createNonEditableCompletionProposal ("AMD-M100", "AMD-M100", context, "", acceptor);
-		createNonEditableCompletionProposal ("FPGA-Xilinx", "FPGA-Xilinx", context, "", acceptor);
+		createNonEditableCompletionProposal ("nvidia", "nvidia", context, "", acceptor);
+		createNonEditableCompletionProposal ("amd", "amd", context, "", acceptor);
+		createNonEditableCompletionProposal ("fpga", "fpga", context, "", acceptor);
 	}
 	
 	override void completeEAutotuning_Tuner(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("CREATA", "CREATA", context, "", acceptor);
-		createNonEditableCompletionProposal ("AUTOTUNE", "AUTOTUNE", context, "", acceptor);
+		createNonEditableCompletionProposal ("creata", "creata", context, "", acceptor);
+		createNonEditableCompletionProposal ("autotune", "autotune", context, "", acceptor);
 	}
 	
 	override completeEAITrainingConfig_Ai_framework(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("TensorFlow", "TensorFlow", context, "", acceptor);
-		createNonEditableCompletionProposal ("PyTorch", "PyTorch", context, "", acceptor);
-		createNonEditableCompletionProposal ("Keras", "Keras", context, "", acceptor);
-		createNonEditableCompletionProposal ("CNTK", "CNTK", context, "CNTK not supported in this version", acceptor);
-		createNonEditableCompletionProposal ("MXNet", "MXNet", context, "MXNet not supported in this version", acceptor);
+		createNonEditableCompletionProposal ("tensorflow", "tensorflow", context, "", acceptor);
+		createNonEditableCompletionProposal ("pytorch", "pytorch", context, "", acceptor);
+		createNonEditableCompletionProposal ("keras", "keras", context, "", acceptor);
+		createNonEditableCompletionProposal ("cntk", "cntk", context, "CNTK not supported in this version", acceptor);
+		createNonEditableCompletionProposal ("mxnet", "mxnet", context, "MXNet not supported in this version", acceptor);
 	}
 	
 	override void completeEAITrainingConfig_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("Image_classification", "Image_classification", context, "", acceptor);
+		createNonEditableCompletionProposal ("image_classification", "image_classification", context, "", acceptor);
 		createNonEditableCompletionProposal ("object_detection", "object_detection", context, "", acceptor);
 		createNonEditableCompletionProposal ("translation", "translation", context, "", acceptor);
 		createNonEditableCompletionProposal ("recommendation", "recommendation", context, "", acceptor);
@@ -248,29 +248,29 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 	}
 	
 	override void completeEAITrainingData_Basedata(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("Imagenet", "Imagenet", context, "", acceptor);
-		createNonEditableCompletionProposal ("CIFAR", "CIFAR", context, "", acceptor);
-		createNonEditableCompletionProposal ("MNIST", "MNIST", context, "", acceptor);	
+		createNonEditableCompletionProposal ("imagenet", "imagenet", context, "", acceptor);
+		createNonEditableCompletionProposal ("cifar", "cifar", context, "", acceptor);
+		createNonEditableCompletionProposal ("mnist", "mnist", context, "", acceptor);	
 	}
 	
 	override void completeEKeras_Backend(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("TensorFlow", "TensorFlow", context, "", acceptor);
-		createNonEditableCompletionProposal ("PyTorch", "PyTorch", context, "", acceptor);
-		createNonEditableCompletionProposal ("Keras", "Keras", context, "", acceptor);
-		createNonEditableCompletionProposal ("CNTK", "CNTK", context, "CNTK not supported in this version", acceptor);
-		createNonEditableCompletionProposal ("MXNet", "MXNet", context, "MXNet not supported in this version", acceptor);
+		createNonEditableCompletionProposal ("tensorflow", "tensorflow", context, "", acceptor);
+		createNonEditableCompletionProposal ("pytorch", "pytorch", context, "", acceptor);
+		createNonEditableCompletionProposal ("keras", "keras", context, "", acceptor);
+		createNonEditableCompletionProposal ("cntk", "cntk", context, "CNTK not supported in this version", acceptor);
+		createNonEditableCompletionProposal ("mxnet", "mxnet", context, "MXNet not supported in this version", acceptor);
 	}
 	
 	override void completeEHPCConfig_Parallelisation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("MPI", "MPI", context, "", acceptor);
-		createNonEditableCompletionProposal ("OPENMP", "OPENMP", context, "", acceptor);
-		createNonEditableCompletionProposal ("OPENACC", "OPENACC", context, "", acceptor);
-		createNonEditableCompletionProposal ("OPENCL", "OPENCL", context, "", acceptor);
+		createNonEditableCompletionProposal ("mpi", "mpi", context, "", acceptor);
+		createNonEditableCompletionProposal ("openmp", "openmp", context, "", acceptor);
+		createNonEditableCompletionProposal ("openacc", "openacc", context, "", acceptor);
+		createNonEditableCompletionProposal ("opencl", "opencl", context, "", acceptor);
 	}
 	
 	override void completeEHPCData_Basedata(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("IMAGE", "IMAGE", context, "", acceptor);
-		createNonEditableCompletionProposal ("RESTART", "RESTART", context, "", acceptor);
+		createNonEditableCompletionProposal ("image", "image", context, "", acceptor);
+		createNonEditableCompletionProposal ("restart", "restart", context, "", acceptor);
 	}
 	
 	override void completeEMPI_Library(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

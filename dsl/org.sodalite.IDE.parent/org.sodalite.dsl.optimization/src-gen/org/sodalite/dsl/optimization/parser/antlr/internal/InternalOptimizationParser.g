@@ -354,9 +354,9 @@ ruleEAITrainingCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Ai_training
+		otherlv_0=App_typeAi_training
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEAITrainingCaseAccess().getAi_trainingKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEAITrainingCaseAccess().getApp_typeAi_trainingKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
@@ -404,7 +404,7 @@ ruleEHPCCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Hpc
+		otherlv_0=Hpc_1
 		{
 			newLeafNode(otherlv_0, grammarAccess.getEHPCCaseAccess().getHpcKeyword_0());
 		}
@@ -454,28 +454,28 @@ ruleEAppType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 	leaveRule();
 }:
 	(
-		kw=AI_Training
+		kw=Ai_training
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEAppTypeAccess().getAI_TrainingKeyword_0());
+			newLeafNode(kw, grammarAccess.getEAppTypeAccess().getAi_trainingKeyword_0());
 		}
 		    |
-		kw=HPC
+		kw=Hpc
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEAppTypeAccess().getHPCKeyword_1());
+			newLeafNode(kw, grammarAccess.getEAppTypeAccess().getHpcKeyword_1());
 		}
 		    |
-		kw=BigData
+		kw=Big_data
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEAppTypeAccess().getBigDataKeyword_2());
+			newLeafNode(kw, grammarAccess.getEAppTypeAccess().getBig_dataKeyword_2());
 		}
 		    |
-		kw=AI_Inference
+		kw=Ai_inference
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEAppTypeAccess().getAI_InferenceKeyword_3());
+			newLeafNode(kw, grammarAccess.getEAppTypeAccess().getAi_inferenceKeyword_3());
 		}
 	)
 ;
@@ -596,22 +596,22 @@ ruleECPUType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 	leaveRule();
 }:
 	(
-		kw=Intelx86
+		kw=X86
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getECPUTypeAccess().getIntelx86Keyword_0());
+			newLeafNode(kw, grammarAccess.getECPUTypeAccess().getX86Keyword_0());
 		}
 		    |
-		kw=ARM
+		kw=Arm
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getECPUTypeAccess().getARMKeyword_1());
+			newLeafNode(kw, grammarAccess.getECPUTypeAccess().getArmKeyword_1());
 		}
 		    |
-		kw=AMD
+		kw=Amd
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getECPUTypeAccess().getAMDKeyword_2());
+			newLeafNode(kw, grammarAccess.getECPUTypeAccess().getAmdKeyword_2());
 		}
 		    |
 		kw=Power
@@ -638,22 +638,22 @@ ruleEACCType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 	leaveRule();
 }:
 	(
-		kw=NVIDIAV100
+		kw=Nvidia
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEACCTypeAccess().getNVIDIAV100Keyword_0());
+			newLeafNode(kw, grammarAccess.getEACCTypeAccess().getNvidiaKeyword_0());
 		}
 		    |
-		kw=AMDM100
+		kw=Amd
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEACCTypeAccess().getAMDM100Keyword_1());
+			newLeafNode(kw, grammarAccess.getEACCTypeAccess().getAmdKeyword_1());
 		}
 		    |
-		kw=FPGAXilinx
+		kw=Fpga
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEACCTypeAccess().getFPGAXilinxKeyword_2());
+			newLeafNode(kw, grammarAccess.getEACCTypeAccess().getFpgaKeyword_2());
 		}
 	)
 ;
@@ -773,16 +773,16 @@ ruleETuner returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	leaveRule();
 }:
 	(
-		kw=CREATA
+		kw=Creata
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getETunerAccess().getCREATAKeyword_0());
+			newLeafNode(kw, grammarAccess.getETunerAccess().getCreataKeyword_0());
 		}
 		    |
-		kw=AUTOTUNE
+		kw=Autotune
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getETunerAccess().getAUTOTUNEKeyword_1());
+			newLeafNode(kw, grammarAccess.getETunerAccess().getAutotuneKeyword_1());
 		}
 	)
 ;
@@ -952,9 +952,9 @@ ruleEPyTorchCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Pytorch
+		otherlv_0=Ai_frameworkPytorch
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEPyTorchCaseAccess().getPytorchKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEPyTorchCaseAccess().getAi_frameworkPytorchKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
@@ -1002,9 +1002,9 @@ ruleETensorFlowCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Tensorflow
+		otherlv_0=Ai_frameworkTensorflow
 		{
-			newLeafNode(otherlv_0, grammarAccess.getETensorFlowCaseAccess().getTensorflowKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getETensorFlowCaseAccess().getAi_frameworkTensorflowKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
@@ -1052,9 +1052,9 @@ ruleEKerasCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Keras_1
+		otherlv_0=Ai_frameworkKeras
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEKerasCaseAccess().getKerasKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEKerasCaseAccess().getAi_frameworkKerasKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
@@ -1301,16 +1301,16 @@ ruleEAIFramework returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 	leaveRule();
 }:
 	(
-		kw=TensorFlow
+		kw=Tensorflow
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEAIFrameworkAccess().getTensorFlowKeyword_0());
+			newLeafNode(kw, grammarAccess.getEAIFrameworkAccess().getTensorflowKeyword_0());
 		}
 		    |
-		kw=PyTorch
+		kw=Pytorch
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEAIFrameworkAccess().getPyTorchKeyword_1());
+			newLeafNode(kw, grammarAccess.getEAIFrameworkAccess().getPytorchKeyword_1());
 		}
 		    |
 		kw=Keras
@@ -1319,16 +1319,16 @@ ruleEAIFramework returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 			newLeafNode(kw, grammarAccess.getEAIFrameworkAccess().getKerasKeyword_2());
 		}
 		    |
-		kw=CNTK
+		kw=Cntk
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEAIFrameworkAccess().getCNTKKeyword_3());
+			newLeafNode(kw, grammarAccess.getEAIFrameworkAccess().getCntkKeyword_3());
 		}
 		    |
-		kw=MXNet
+		kw=Mxnet
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEAIFrameworkAccess().getMXNetKeyword_4());
+			newLeafNode(kw, grammarAccess.getEAIFrameworkAccess().getMxnetKeyword_4());
 		}
 	)
 ;
@@ -1609,16 +1609,16 @@ ruleEBasedata returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
 			newLeafNode(kw, grammarAccess.getEBasedataAccess().getImagenetKeyword_0());
 		}
 		    |
-		kw=CIFAR
+		kw=Cifar
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEBasedataAccess().getCIFARKeyword_1());
+			newLeafNode(kw, grammarAccess.getEBasedataAccess().getCifarKeyword_1());
 		}
 		    |
-		kw=MNIST
+		kw=Mnist
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEBasedataAccess().getMNISTKeyword_2());
+			newLeafNode(kw, grammarAccess.getEBasedataAccess().getMnistKeyword_2());
 		}
 	)
 ;
@@ -1787,9 +1787,9 @@ ruleEKeras returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getEKerasAccess().getBackendEBackendParserRuleCall_1_1_0());
+										newCompositeNode(grammarAccess.getEKerasAccess().getBackendEAIFrameworkParserRuleCall_1_1_0());
 									}
-									lv_backend_4_0=ruleEBackend
+									lv_backend_4_0=ruleEAIFramework
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEKerasRule());
@@ -1798,7 +1798,7 @@ ruleEKeras returns [EObject current=null]
 											$current,
 											"backend",
 											lv_backend_4_0,
-											"org.sodalite.dsl.optimization.Optimization.EBackend");
+											"org.sodalite.dsl.optimization.Optimization.EAIFramework");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -1815,54 +1815,6 @@ ruleEKeras returns [EObject current=null]
 			{ 
 			  getUnorderedGroupHelper().leave(grammarAccess.getEKerasAccess().getUnorderedGroup());
 			}
-	)
-;
-
-// Entry rule entryRuleEBackend
-entryRuleEBackend returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getEBackendRule()); }
-	iv_ruleEBackend=ruleEBackend
-	{ $current=$iv_ruleEBackend.current.getText(); }
-	EOF;
-
-// Rule EBackend
-ruleEBackend returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		kw=TensorFlow
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEBackendAccess().getTensorFlowKeyword_0());
-		}
-		    |
-		kw=PyTorch
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEBackendAccess().getPyTorchKeyword_1());
-		}
-		    |
-		kw=Keras
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEBackendAccess().getKerasKeyword_2());
-		}
-		    |
-		kw=CNTK
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEBackendAccess().getCNTKKeyword_3());
-		}
-		    |
-		kw=MXNet
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEBackendAccess().getMXNetKeyword_4());
-		}
 	)
 ;
 
@@ -2288,9 +2240,9 @@ ruleEOPENCLCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Opencl
+		otherlv_0=ParallelisationOpencl
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEOPENCLCaseAccess().getOpenclKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEOPENCLCaseAccess().getParallelisationOpenclKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
@@ -2338,9 +2290,9 @@ ruleEOPENACCCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Openacc
+		otherlv_0=ParallelisationOpenacc
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEOPENACCCaseAccess().getOpenaccKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEOPENACCCaseAccess().getParallelisationOpenaccKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
@@ -2388,9 +2340,9 @@ ruleEOPENMPCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Openmp
+		otherlv_0=ParallelisationOpenmp
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEOPENMPCaseAccess().getOpenmpKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEOPENMPCaseAccess().getParallelisationOpenmpKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
@@ -2438,9 +2390,9 @@ ruleEMPICase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Mpi
+		otherlv_0=ParallelisationMpi
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEMPICaseAccess().getMpiKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEMPICaseAccess().getParallelisationMpiKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
@@ -2555,28 +2507,28 @@ ruleEParallelisation returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRu
 	leaveRule();
 }:
 	(
-		kw=MPI
+		kw=Mpi
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEParallelisationAccess().getMPIKeyword_0());
+			newLeafNode(kw, grammarAccess.getEParallelisationAccess().getMpiKeyword_0());
 		}
 		    |
-		kw=OPENMP
+		kw=Openmp
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEParallelisationAccess().getOPENMPKeyword_1());
+			newLeafNode(kw, grammarAccess.getEParallelisationAccess().getOpenmpKeyword_1());
 		}
 		    |
-		kw=OPENACC
+		kw=Openacc
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEParallelisationAccess().getOPENACCKeyword_2());
+			newLeafNode(kw, grammarAccess.getEParallelisationAccess().getOpenaccKeyword_2());
 		}
 		    |
-		kw=OPENCL
+		kw=Opencl
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEParallelisationAccess().getOPENCLKeyword_3());
+			newLeafNode(kw, grammarAccess.getEParallelisationAccess().getOpenclKeyword_3());
 		}
 	)
 ;
@@ -2900,16 +2852,16 @@ ruleEHPCBasedata returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 	leaveRule();
 }:
 	(
-		kw=IMAGE
+		kw=Image
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEHPCBasedataAccess().getIMAGEKeyword_0());
+			newLeafNode(kw, grammarAccess.getEHPCBasedataAccess().getImageKeyword_0());
 		}
 		    |
-		kw=RESTART
+		kw=Restart
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEHPCBasedataAccess().getRESTARTKeyword_1());
+			newLeafNode(kw, grammarAccess.getEHPCBasedataAccess().getRestartKeyword_1());
 		}
 	)
 ;

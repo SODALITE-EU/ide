@@ -11,11 +11,27 @@ package org.sodalite.dsl.optimization.parser.antlr.lexer;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
+Ai_frameworkTensorflow : 'ai_framework-tensorflow:';
+
+ParallelisationOpenacc : 'parallelisation-openacc:';
+
+ParallelisationOpencl : 'parallelisation-opencl:';
+
+ParallelisationOpenmp : 'parallelisation-openmp:';
+
 Reinforncement_learning : 'reinforncement_learning';
+
+Ai_frameworkPytorch : 'ai_framework-pytorch:';
+
+App_typeAi_training : 'app_type-ai_training:';
 
 Distributed_training : 'distributed_training:';
 
-Image_classification : 'Image_classification';
+Image_classification : 'image_classification';
+
+ParallelisationMpi : 'parallelisation-mpi:';
+
+Ai_frameworkKeras : 'ai_framework-keras:';
 
 Scaling_efficiency : 'scaling_efficiency:';
 
@@ -39,29 +55,21 @@ Ai_framework : 'ai_framework:';
 
 Message_size : 'message_size:';
 
-AI_Inference : 'AI_Inference';
-
-Ai_training : 'ai_training:';
+Ai_inference : 'ai_inference';
 
 Optimization : 'optimization';
 
-AI_Training : 'AI_Training';
-
-FPGAXilinx : 'FPGA-Xilinx';
-
-NVIDIAV100 : 'NVIDIA-V100';
+Ai_training : 'ai_training';
 
 Autotuning : 'autotuning:';
 
 Parameters : 'parameters:';
 
-Tensorflow : 'tensorflow:';
-
 Translation : 'translation';
 
-TensorFlow : 'TensorFlow';
-
 Opt_build : 'opt_build:';
+
+Tensorflow : 'tensorflow';
 
 Acc_type : 'acc_type:';
 
@@ -79,57 +87,45 @@ Location : 'location:';
 
 Prefetch : 'prefetch:';
 
-AMDM100 : 'AMD-M100';
-
-AUTOTUNE : 'AUTOTUNE';
-
-Imagenet : 'Imagenet';
-
-Intelx86 : 'Intelx86';
+Autotune : 'autotune';
 
 Backend : 'backend:';
 
+Big_data : 'big_data';
+
+Imagenet : 'imagenet';
+
 Library : 'library:';
 
-Openacc : 'openacc:';
-
-Pytorch : 'pytorch:';
-
 Version : 'version:';
-
-BigData : 'BigData';
-
-OPENACC : 'OPENACC';
-
-PyTorch : 'PyTorch';
-
-RESTART : 'RESTART';
 
 Config : 'config:';
 
 Layers : 'layers:';
 
-Opencl : 'opencl:';
+Openacc : 'openacc';
 
-Openmp : 'openmp:';
+Pytorch : 'pytorch';
 
-CREATA : 'CREATA';
-
-OPENCL : 'OPENCL';
-
-OPENMP : 'OPENMP';
+Restart : 'restart';
 
 Cache : 'cache:';
 
 Count : 'count:';
 
-Input : 'input:';
+Creata : 'creata';
 
-Keras_1 : 'keras:';
+Input : 'input:';
 
 Medium : 'medium';
 
 Mvapch : 'mvapch';
+
+Nvidia : 'nvidia';
+
+Opencl : 'opencl';
+
+Openmp : 'openmp';
 
 Opnmpi : 'opnmpi';
 
@@ -137,25 +133,25 @@ Simple : 'simple';
 
 Tuner : 'tuner:';
 
-CIFAR : 'CIFAR';
-
-IMAGE : 'IMAGE';
-
-Keras : 'Keras';
-
-MNIST : 'MNIST';
-
-MXNet : 'MXNet';
-
-Power : 'Power';
-
 Block : 'block';
+
+Cifar : 'cifar';
 
 Data : 'data:';
 
 Glow : 'glow:';
 
+Image : 'image';
+
+Keras : 'keras';
+
 Large : 'large';
+
+Mnist : 'mnist';
+
+Mxnet : 'mxnet';
+
+Power : 'power';
 
 Size : 'size:';
 
@@ -163,49 +159,35 @@ Small : 'small';
 
 Type : 'type:';
 
-CNTK : 'CNTK';
+Cntk : 'cntk';
 
 Cray : 'cray';
 
 Etl : 'etl:';
 
-Hpc : 'hpc:';
+Fpga : 'fpga';
 
-Mpi : 'mpi:';
+Hpc_1 : 'hpc:';
 
 Xla : 'xla:';
 
-AMD : 'AMD';
+Amd : 'amd';
 
-ARM : 'ARM';
+Arm : 'arm';
 
-HPC : 'HPC';
+Hpc : 'hpc';
 
-MPI : 'MPI';
+Mpi : 'mpi';
 
 Pgi : 'pgi';
+
+X86 : 'x86';
 
 Comma : ',';
 
 FullStop : '.';
 
 Colon : ':';
-
-RULE_BT : '>';
-
-RULE_LT : '<';
-
-RULE_BET : '>=';
-
-RULE_LET : '<=';
-
-RULE_EQUAL : '==';
-
-RULE_NOT_EQUAL : '!=';
-
-RULE_OR : 'OR';
-
-RULE_AND : 'AND';
 
 fragment RULE_BEGIN : ;
 

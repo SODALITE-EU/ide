@@ -1,39 +1,39 @@
 optimization hpc.mpi: 
 	enable_opt_build: true
 	enable_autotuning: true
-	app_type: HPC
+	app_type: hpc
 	opt_build:
-		cpu_type: ARM
-		acc_type: NVIDIA-V100
+		cpu_type: arm
+		acc_type: nvidia
 	autotuning:
-		tuner: CREATA
+		tuner: creata
 		input: "path/to/autotuning.model"
 	hpc:
 		config:
-			parallelisation: MPI, OPENACC, OPENCL, OPENMP
+			parallelisation: mpi, openacc, opencl, openmp
 		data:
 			location: "/some/data"
-			basedata: RESTART
+			basedata: restart
 			size: 67
 			count: 4389
 			etl:
 				cache: true
 				prefetch: true
-		mpi:
+		parallelisation-mpi:
 			library: mvapch
 			version: "1.1"
 			scaling_efficiency: 0.75
 			core_subscription: 1
 			message_size: small
-		openacc:
+		parallelisation-openacc:
 			compiler: pgi 
 			number_of_acc: 1
 			version: "1.1"
-		opencl:
+		parallelisation-opencl:
 			compiler: cray 
 			number_of_acc:2
 			version: "1.1"
-		openmp:
+		parallelisation-openmp:
 			affinity: block
 			number_of_threads: 2
 			scaling_efficiency: 1.1

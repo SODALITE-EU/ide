@@ -34,58 +34,53 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Comma", "','");
 		tokenNameToValue.put("FullStop", "'.'");
 		tokenNameToValue.put("Colon", "':'");
-		tokenNameToValue.put("AMD", "'AMD'");
-		tokenNameToValue.put("ARM", "'ARM'");
-		tokenNameToValue.put("HPC", "'HPC'");
-		tokenNameToValue.put("MPI", "'MPI'");
+		tokenNameToValue.put("Amd", "'amd'");
+		tokenNameToValue.put("Arm", "'arm'");
+		tokenNameToValue.put("Hpc", "'hpc'");
+		tokenNameToValue.put("Mpi", "'mpi'");
 		tokenNameToValue.put("Pgi", "'pgi'");
-		tokenNameToValue.put("CNTK", "'CNTK'");
+		tokenNameToValue.put("X86", "'x86'");
+		tokenNameToValue.put("Cntk", "'cntk'");
 		tokenNameToValue.put("Cray", "'cray'");
 		tokenNameToValue.put("Etl", "'etl:'");
-		tokenNameToValue.put("Hpc", "'hpc:'");
-		tokenNameToValue.put("Mpi", "'mpi:'");
+		tokenNameToValue.put("Fpga", "'fpga'");
+		tokenNameToValue.put("Hpc_1", "'hpc:'");
 		tokenNameToValue.put("Xla", "'xla:'");
-		tokenNameToValue.put("CIFAR", "'CIFAR'");
-		tokenNameToValue.put("IMAGE", "'IMAGE'");
-		tokenNameToValue.put("Keras", "'Keras'");
-		tokenNameToValue.put("MNIST", "'MNIST'");
-		tokenNameToValue.put("MXNet", "'MXNet'");
-		tokenNameToValue.put("Power", "'Power'");
 		tokenNameToValue.put("Block", "'block'");
+		tokenNameToValue.put("Cifar", "'cifar'");
 		tokenNameToValue.put("Data", "'data:'");
 		tokenNameToValue.put("Glow", "'glow:'");
+		tokenNameToValue.put("Image", "'image'");
+		tokenNameToValue.put("Keras", "'keras'");
 		tokenNameToValue.put("Large", "'large'");
+		tokenNameToValue.put("Mnist", "'mnist'");
+		tokenNameToValue.put("Mxnet", "'mxnet'");
+		tokenNameToValue.put("Power", "'power'");
 		tokenNameToValue.put("Size", "'size:'");
 		tokenNameToValue.put("Small", "'small'");
 		tokenNameToValue.put("Type", "'type:'");
-		tokenNameToValue.put("CREATA", "'CREATA'");
-		tokenNameToValue.put("OPENCL", "'OPENCL'");
-		tokenNameToValue.put("OPENMP", "'OPENMP'");
 		tokenNameToValue.put("Cache", "'cache:'");
 		tokenNameToValue.put("Count", "'count:'");
+		tokenNameToValue.put("Creata", "'creata'");
 		tokenNameToValue.put("Input", "'input:'");
-		tokenNameToValue.put("Keras_1", "'keras:'");
 		tokenNameToValue.put("Medium", "'medium'");
 		tokenNameToValue.put("Mvapch", "'mvapch'");
+		tokenNameToValue.put("Nvidia", "'nvidia'");
+		tokenNameToValue.put("Opencl", "'opencl'");
+		tokenNameToValue.put("Openmp", "'openmp'");
 		tokenNameToValue.put("Opnmpi", "'opnmpi'");
 		tokenNameToValue.put("Simple", "'simple'");
 		tokenNameToValue.put("Tuner", "'tuner:'");
-		tokenNameToValue.put("BigData", "'BigData'");
-		tokenNameToValue.put("OPENACC", "'OPENACC'");
-		tokenNameToValue.put("PyTorch", "'PyTorch'");
-		tokenNameToValue.put("RESTART", "'RESTART'");
 		tokenNameToValue.put("Config", "'config:'");
 		tokenNameToValue.put("Layers", "'layers:'");
-		tokenNameToValue.put("Opencl", "'opencl:'");
-		tokenNameToValue.put("Openmp", "'openmp:'");
-		tokenNameToValue.put("AMDM100", "'AMD-M100'");
-		tokenNameToValue.put("AUTOTUNE", "'AUTOTUNE'");
-		tokenNameToValue.put("Imagenet", "'Imagenet'");
-		tokenNameToValue.put("Intelx86", "'Intelx86'");
+		tokenNameToValue.put("Openacc", "'openacc'");
+		tokenNameToValue.put("Pytorch", "'pytorch'");
+		tokenNameToValue.put("Restart", "'restart'");
+		tokenNameToValue.put("Autotune", "'autotune'");
 		tokenNameToValue.put("Backend", "'backend:'");
+		tokenNameToValue.put("Big_data", "'big_data'");
+		tokenNameToValue.put("Imagenet", "'imagenet'");
 		tokenNameToValue.put("Library", "'library:'");
-		tokenNameToValue.put("Openacc", "'openacc:'");
-		tokenNameToValue.put("Pytorch", "'pytorch:'");
 		tokenNameToValue.put("Version", "'version:'");
 		tokenNameToValue.put("Acc_type", "'acc_type:'");
 		tokenNameToValue.put("Affinity", "'affinity:'");
@@ -95,17 +90,13 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Cpu_type", "'cpu_type:'");
 		tokenNameToValue.put("Location", "'location:'");
 		tokenNameToValue.put("Prefetch", "'prefetch:'");
-		tokenNameToValue.put("TensorFlow", "'TensorFlow'");
 		tokenNameToValue.put("Opt_build", "'opt_build:'");
-		tokenNameToValue.put("AI_Training", "'AI_Training'");
-		tokenNameToValue.put("FPGAXilinx", "'FPGA-Xilinx'");
-		tokenNameToValue.put("NVIDIAV100", "'NVIDIA-V100'");
+		tokenNameToValue.put("Tensorflow", "'tensorflow'");
+		tokenNameToValue.put("Ai_training", "'ai_training'");
 		tokenNameToValue.put("Autotuning", "'autotuning:'");
 		tokenNameToValue.put("Parameters", "'parameters:'");
-		tokenNameToValue.put("Tensorflow", "'tensorflow:'");
 		tokenNameToValue.put("Translation", "'translation'");
-		tokenNameToValue.put("AI_Inference", "'AI_Inference'");
-		tokenNameToValue.put("Ai_training", "'ai_training:'");
+		tokenNameToValue.put("Ai_inference", "'ai_inference'");
 		tokenNameToValue.put("Optimization", "'optimization'");
 		tokenNameToValue.put("Ai_framework", "'ai_framework:'");
 		tokenNameToValue.put("Message_size", "'message_size:'");
@@ -117,10 +108,18 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Core_subscription", "'core_subscription:'");
 		tokenNameToValue.put("Enable_autotuning", "'enable_autotuning:'");
 		tokenNameToValue.put("Number_of_threads", "'number_of_threads:'");
+		tokenNameToValue.put("Ai_frameworkKeras", "'ai_framework-keras:'");
 		tokenNameToValue.put("Scaling_efficiency", "'scaling_efficiency:'");
-		tokenNameToValue.put("Image_classification", "'Image_classification'");
+		tokenNameToValue.put("Image_classification", "'image_classification'");
+		tokenNameToValue.put("ParallelisationMpi", "'parallelisation-mpi:'");
+		tokenNameToValue.put("Ai_frameworkPytorch", "'ai_framework-pytorch:'");
+		tokenNameToValue.put("App_typeAi_training", "'app_type-ai_training:'");
 		tokenNameToValue.put("Distributed_training", "'distributed_training:'");
+		tokenNameToValue.put("ParallelisationOpencl", "'parallelisation-opencl:'");
+		tokenNameToValue.put("ParallelisationOpenmp", "'parallelisation-openmp:'");
 		tokenNameToValue.put("Reinforncement_learning", "'reinforncement_learning'");
+		tokenNameToValue.put("Ai_frameworkTensorflow", "'ai_framework-tensorflow:'");
+		tokenNameToValue.put("ParallelisationOpenacc", "'parallelisation-openacc:'");
 	}
 
 	public void setGrammarAccess(OptimizationGrammarAccess grammarAccess) {
@@ -716,31 +715,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleEBackend
-entryRuleEBackend
-:
-{ before(grammarAccess.getEBackendRule()); }
-	 ruleEBackend
-{ after(grammarAccess.getEBackendRule()); } 
-	 EOF 
-;
-
-// Rule EBackend
-ruleEBackend 
-	@init {
-		int stackSize = keepStackSize();
-	}
-	:
-	(
-		{ before(grammarAccess.getEBackendAccess().getAlternatives()); }
-		(rule__EBackend__Alternatives)
-		{ after(grammarAccess.getEBackendAccess().getAlternatives()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
 // Entry rule entryRuleETensorFlow
 entryRuleETensorFlow
 :
@@ -1326,27 +1300,27 @@ rule__EAppType__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getEAppTypeAccess().getAI_TrainingKeyword_0()); }
-		AI_Training
-		{ after(grammarAccess.getEAppTypeAccess().getAI_TrainingKeyword_0()); }
+		{ before(grammarAccess.getEAppTypeAccess().getAi_trainingKeyword_0()); }
+		Ai_training
+		{ after(grammarAccess.getEAppTypeAccess().getAi_trainingKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEAppTypeAccess().getHPCKeyword_1()); }
-		HPC
-		{ after(grammarAccess.getEAppTypeAccess().getHPCKeyword_1()); }
+		{ before(grammarAccess.getEAppTypeAccess().getHpcKeyword_1()); }
+		Hpc
+		{ after(grammarAccess.getEAppTypeAccess().getHpcKeyword_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEAppTypeAccess().getBigDataKeyword_2()); }
-		BigData
-		{ after(grammarAccess.getEAppTypeAccess().getBigDataKeyword_2()); }
+		{ before(grammarAccess.getEAppTypeAccess().getBig_dataKeyword_2()); }
+		Big_data
+		{ after(grammarAccess.getEAppTypeAccess().getBig_dataKeyword_2()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEAppTypeAccess().getAI_InferenceKeyword_3()); }
-		AI_Inference
-		{ after(grammarAccess.getEAppTypeAccess().getAI_InferenceKeyword_3()); }
+		{ before(grammarAccess.getEAppTypeAccess().getAi_inferenceKeyword_3()); }
+		Ai_inference
+		{ after(grammarAccess.getEAppTypeAccess().getAi_inferenceKeyword_3()); }
 	)
 ;
 finally {
@@ -1359,21 +1333,21 @@ rule__ECPUType__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getECPUTypeAccess().getIntelx86Keyword_0()); }
-		Intelx86
-		{ after(grammarAccess.getECPUTypeAccess().getIntelx86Keyword_0()); }
+		{ before(grammarAccess.getECPUTypeAccess().getX86Keyword_0()); }
+		X86
+		{ after(grammarAccess.getECPUTypeAccess().getX86Keyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getECPUTypeAccess().getARMKeyword_1()); }
-		ARM
-		{ after(grammarAccess.getECPUTypeAccess().getARMKeyword_1()); }
+		{ before(grammarAccess.getECPUTypeAccess().getArmKeyword_1()); }
+		Arm
+		{ after(grammarAccess.getECPUTypeAccess().getArmKeyword_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getECPUTypeAccess().getAMDKeyword_2()); }
-		AMD
-		{ after(grammarAccess.getECPUTypeAccess().getAMDKeyword_2()); }
+		{ before(grammarAccess.getECPUTypeAccess().getAmdKeyword_2()); }
+		Amd
+		{ after(grammarAccess.getECPUTypeAccess().getAmdKeyword_2()); }
 	)
 	|
 	(
@@ -1392,21 +1366,21 @@ rule__EACCType__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getEACCTypeAccess().getNVIDIAV100Keyword_0()); }
-		NVIDIAV100
-		{ after(grammarAccess.getEACCTypeAccess().getNVIDIAV100Keyword_0()); }
+		{ before(grammarAccess.getEACCTypeAccess().getNvidiaKeyword_0()); }
+		Nvidia
+		{ after(grammarAccess.getEACCTypeAccess().getNvidiaKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEACCTypeAccess().getAMDM100Keyword_1()); }
-		AMDM100
-		{ after(grammarAccess.getEACCTypeAccess().getAMDM100Keyword_1()); }
+		{ before(grammarAccess.getEACCTypeAccess().getAmdKeyword_1()); }
+		Amd
+		{ after(grammarAccess.getEACCTypeAccess().getAmdKeyword_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEACCTypeAccess().getFPGAXilinxKeyword_2()); }
-		FPGAXilinx
-		{ after(grammarAccess.getEACCTypeAccess().getFPGAXilinxKeyword_2()); }
+		{ before(grammarAccess.getEACCTypeAccess().getFpgaKeyword_2()); }
+		Fpga
+		{ after(grammarAccess.getEACCTypeAccess().getFpgaKeyword_2()); }
 	)
 ;
 finally {
@@ -1419,15 +1393,15 @@ rule__ETuner__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getETunerAccess().getCREATAKeyword_0()); }
-		CREATA
-		{ after(grammarAccess.getETunerAccess().getCREATAKeyword_0()); }
+		{ before(grammarAccess.getETunerAccess().getCreataKeyword_0()); }
+		Creata
+		{ after(grammarAccess.getETunerAccess().getCreataKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getETunerAccess().getAUTOTUNEKeyword_1()); }
-		AUTOTUNE
-		{ after(grammarAccess.getETunerAccess().getAUTOTUNEKeyword_1()); }
+		{ before(grammarAccess.getETunerAccess().getAutotuneKeyword_1()); }
+		Autotune
+		{ after(grammarAccess.getETunerAccess().getAutotuneKeyword_1()); }
 	)
 ;
 finally {
@@ -1467,15 +1441,15 @@ rule__EAIFramework__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getEAIFrameworkAccess().getTensorFlowKeyword_0()); }
-		TensorFlow
-		{ after(grammarAccess.getEAIFrameworkAccess().getTensorFlowKeyword_0()); }
+		{ before(grammarAccess.getEAIFrameworkAccess().getTensorflowKeyword_0()); }
+		Tensorflow
+		{ after(grammarAccess.getEAIFrameworkAccess().getTensorflowKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEAIFrameworkAccess().getPyTorchKeyword_1()); }
-		PyTorch
-		{ after(grammarAccess.getEAIFrameworkAccess().getPyTorchKeyword_1()); }
+		{ before(grammarAccess.getEAIFrameworkAccess().getPytorchKeyword_1()); }
+		Pytorch
+		{ after(grammarAccess.getEAIFrameworkAccess().getPytorchKeyword_1()); }
 	)
 	|
 	(
@@ -1485,15 +1459,15 @@ rule__EAIFramework__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getEAIFrameworkAccess().getCNTKKeyword_3()); }
-		CNTK
-		{ after(grammarAccess.getEAIFrameworkAccess().getCNTKKeyword_3()); }
+		{ before(grammarAccess.getEAIFrameworkAccess().getCntkKeyword_3()); }
+		Cntk
+		{ after(grammarAccess.getEAIFrameworkAccess().getCntkKeyword_3()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEAIFrameworkAccess().getMXNetKeyword_4()); }
-		MXNet
-		{ after(grammarAccess.getEAIFrameworkAccess().getMXNetKeyword_4()); }
+		{ before(grammarAccess.getEAIFrameworkAccess().getMxnetKeyword_4()); }
+		Mxnet
+		{ after(grammarAccess.getEAIFrameworkAccess().getMxnetKeyword_4()); }
 	)
 ;
 finally {
@@ -1551,54 +1525,15 @@ rule__EBasedata__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getEBasedataAccess().getCIFARKeyword_1()); }
-		CIFAR
-		{ after(grammarAccess.getEBasedataAccess().getCIFARKeyword_1()); }
+		{ before(grammarAccess.getEBasedataAccess().getCifarKeyword_1()); }
+		Cifar
+		{ after(grammarAccess.getEBasedataAccess().getCifarKeyword_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEBasedataAccess().getMNISTKeyword_2()); }
-		MNIST
-		{ after(grammarAccess.getEBasedataAccess().getMNISTKeyword_2()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__EBackend__Alternatives
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getEBackendAccess().getTensorFlowKeyword_0()); }
-		TensorFlow
-		{ after(grammarAccess.getEBackendAccess().getTensorFlowKeyword_0()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getEBackendAccess().getPyTorchKeyword_1()); }
-		PyTorch
-		{ after(grammarAccess.getEBackendAccess().getPyTorchKeyword_1()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getEBackendAccess().getKerasKeyword_2()); }
-		Keras
-		{ after(grammarAccess.getEBackendAccess().getKerasKeyword_2()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getEBackendAccess().getCNTKKeyword_3()); }
-		CNTK
-		{ after(grammarAccess.getEBackendAccess().getCNTKKeyword_3()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getEBackendAccess().getMXNetKeyword_4()); }
-		MXNet
-		{ after(grammarAccess.getEBackendAccess().getMXNetKeyword_4()); }
+		{ before(grammarAccess.getEBasedataAccess().getMnistKeyword_2()); }
+		Mnist
+		{ after(grammarAccess.getEBasedataAccess().getMnistKeyword_2()); }
 	)
 ;
 finally {
@@ -1611,27 +1546,27 @@ rule__EParallelisation__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getEParallelisationAccess().getMPIKeyword_0()); }
-		MPI
-		{ after(grammarAccess.getEParallelisationAccess().getMPIKeyword_0()); }
+		{ before(grammarAccess.getEParallelisationAccess().getMpiKeyword_0()); }
+		Mpi
+		{ after(grammarAccess.getEParallelisationAccess().getMpiKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEParallelisationAccess().getOPENMPKeyword_1()); }
-		OPENMP
-		{ after(grammarAccess.getEParallelisationAccess().getOPENMPKeyword_1()); }
+		{ before(grammarAccess.getEParallelisationAccess().getOpenmpKeyword_1()); }
+		Openmp
+		{ after(grammarAccess.getEParallelisationAccess().getOpenmpKeyword_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEParallelisationAccess().getOPENACCKeyword_2()); }
-		OPENACC
-		{ after(grammarAccess.getEParallelisationAccess().getOPENACCKeyword_2()); }
+		{ before(grammarAccess.getEParallelisationAccess().getOpenaccKeyword_2()); }
+		Openacc
+		{ after(grammarAccess.getEParallelisationAccess().getOpenaccKeyword_2()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEParallelisationAccess().getOPENCLKeyword_3()); }
-		OPENCL
-		{ after(grammarAccess.getEParallelisationAccess().getOPENCLKeyword_3()); }
+		{ before(grammarAccess.getEParallelisationAccess().getOpenclKeyword_3()); }
+		Opencl
+		{ after(grammarAccess.getEParallelisationAccess().getOpenclKeyword_3()); }
 	)
 ;
 finally {
@@ -1644,15 +1579,15 @@ rule__EHPCBasedata__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getEHPCBasedataAccess().getIMAGEKeyword_0()); }
-		IMAGE
-		{ after(grammarAccess.getEHPCBasedataAccess().getIMAGEKeyword_0()); }
+		{ before(grammarAccess.getEHPCBasedataAccess().getImageKeyword_0()); }
+		Image
+		{ after(grammarAccess.getEHPCBasedataAccess().getImageKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEHPCBasedataAccess().getRESTARTKeyword_1()); }
-		RESTART
-		{ after(grammarAccess.getEHPCBasedataAccess().getRESTARTKeyword_1()); }
+		{ before(grammarAccess.getEHPCBasedataAccess().getRestartKeyword_1()); }
+		Restart
+		{ after(grammarAccess.getEHPCBasedataAccess().getRestartKeyword_1()); }
 	)
 ;
 finally {
@@ -2490,9 +2425,9 @@ rule__EAITrainingCase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEAITrainingCaseAccess().getAi_trainingKeyword_0()); }
-	Ai_training
-	{ after(grammarAccess.getEAITrainingCaseAccess().getAi_trainingKeyword_0()); }
+	{ before(grammarAccess.getEAITrainingCaseAccess().getApp_typeAi_trainingKeyword_0()); }
+	App_typeAi_training
+	{ after(grammarAccess.getEAITrainingCaseAccess().getApp_typeAi_trainingKeyword_0()); }
 )
 ;
 finally {
@@ -2599,7 +2534,7 @@ rule__EHPCCase__Group__0__Impl
 :
 (
 	{ before(grammarAccess.getEHPCCaseAccess().getHpcKeyword_0()); }
-	Hpc
+	Hpc_1
 	{ after(grammarAccess.getEHPCCaseAccess().getHpcKeyword_0()); }
 )
 ;
@@ -3219,9 +3154,9 @@ rule__EPyTorchCase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEPyTorchCaseAccess().getPytorchKeyword_0()); }
-	Pytorch
-	{ after(grammarAccess.getEPyTorchCaseAccess().getPytorchKeyword_0()); }
+	{ before(grammarAccess.getEPyTorchCaseAccess().getAi_frameworkPytorchKeyword_0()); }
+	Ai_frameworkPytorch
+	{ after(grammarAccess.getEPyTorchCaseAccess().getAi_frameworkPytorchKeyword_0()); }
 )
 ;
 finally {
@@ -3327,9 +3262,9 @@ rule__ETensorFlowCase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getETensorFlowCaseAccess().getTensorflowKeyword_0()); }
-	Tensorflow
-	{ after(grammarAccess.getETensorFlowCaseAccess().getTensorflowKeyword_0()); }
+	{ before(grammarAccess.getETensorFlowCaseAccess().getAi_frameworkTensorflowKeyword_0()); }
+	Ai_frameworkTensorflow
+	{ after(grammarAccess.getETensorFlowCaseAccess().getAi_frameworkTensorflowKeyword_0()); }
 )
 ;
 finally {
@@ -3435,9 +3370,9 @@ rule__EKerasCase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEKerasCaseAccess().getKerasKeyword_0()); }
-	Keras_1
-	{ after(grammarAccess.getEKerasCaseAccess().getKerasKeyword_0()); }
+	{ before(grammarAccess.getEKerasCaseAccess().getAi_frameworkKerasKeyword_0()); }
+	Ai_frameworkKeras
+	{ after(grammarAccess.getEKerasCaseAccess().getAi_frameworkKerasKeyword_0()); }
 )
 ;
 finally {
@@ -4866,9 +4801,9 @@ rule__EOPENCLCase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEOPENCLCaseAccess().getOpenclKeyword_0()); }
-	Opencl
-	{ after(grammarAccess.getEOPENCLCaseAccess().getOpenclKeyword_0()); }
+	{ before(grammarAccess.getEOPENCLCaseAccess().getParallelisationOpenclKeyword_0()); }
+	ParallelisationOpencl
+	{ after(grammarAccess.getEOPENCLCaseAccess().getParallelisationOpenclKeyword_0()); }
 )
 ;
 finally {
@@ -4974,9 +4909,9 @@ rule__EOPENACCCase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEOPENACCCaseAccess().getOpenaccKeyword_0()); }
-	Openacc
-	{ after(grammarAccess.getEOPENACCCaseAccess().getOpenaccKeyword_0()); }
+	{ before(grammarAccess.getEOPENACCCaseAccess().getParallelisationOpenaccKeyword_0()); }
+	ParallelisationOpenacc
+	{ after(grammarAccess.getEOPENACCCaseAccess().getParallelisationOpenaccKeyword_0()); }
 )
 ;
 finally {
@@ -5082,9 +5017,9 @@ rule__EOPENMPCase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEOPENMPCaseAccess().getOpenmpKeyword_0()); }
-	Openmp
-	{ after(grammarAccess.getEOPENMPCaseAccess().getOpenmpKeyword_0()); }
+	{ before(grammarAccess.getEOPENMPCaseAccess().getParallelisationOpenmpKeyword_0()); }
+	ParallelisationOpenmp
+	{ after(grammarAccess.getEOPENMPCaseAccess().getParallelisationOpenmpKeyword_0()); }
 )
 ;
 finally {
@@ -5190,9 +5125,9 @@ rule__EMPICase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEMPICaseAccess().getMpiKeyword_0()); }
-	Mpi
-	{ after(grammarAccess.getEMPICaseAccess().getMpiKeyword_0()); }
+	{ before(grammarAccess.getEMPICaseAccess().getParallelisationMpiKeyword_0()); }
+	ParallelisationMpi
+	{ after(grammarAccess.getEMPICaseAccess().getParallelisationMpiKeyword_0()); }
 )
 ;
 finally {
@@ -8889,9 +8824,9 @@ rule__EKeras__BackendAssignment_1_1
 	}
 :
 	(
-		{ before(grammarAccess.getEKerasAccess().getBackendEBackendParserRuleCall_1_1_0()); }
-		ruleEBackend
-		{ after(grammarAccess.getEKerasAccess().getBackendEBackendParserRuleCall_1_1_0()); }
+		{ before(grammarAccess.getEKerasAccess().getBackendEAIFrameworkParserRuleCall_1_1_0()); }
+		ruleEAIFramework
+		{ after(grammarAccess.getEKerasAccess().getBackendEAIFrameworkParserRuleCall_1_1_0()); }
 	)
 ;
 finally {

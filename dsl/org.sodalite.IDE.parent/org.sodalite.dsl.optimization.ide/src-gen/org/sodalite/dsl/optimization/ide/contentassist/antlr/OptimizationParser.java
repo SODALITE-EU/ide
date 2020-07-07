@@ -42,7 +42,6 @@ public class OptimizationParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEAIFrameworkAccess().getAlternatives(), "rule__EAIFramework__Alternatives");
 			builder.put(grammarAccess.getEAITrainingTypeAccess().getAlternatives(), "rule__EAITrainingType__Alternatives");
 			builder.put(grammarAccess.getEBasedataAccess().getAlternatives(), "rule__EBasedata__Alternatives");
-			builder.put(grammarAccess.getEBackendAccess().getAlternatives(), "rule__EBackend__Alternatives");
 			builder.put(grammarAccess.getEParallelisationAccess().getAlternatives(), "rule__EParallelisation__Alternatives");
 			builder.put(grammarAccess.getEHPCBasedataAccess().getAlternatives(), "rule__EHPCBasedata__Alternatives");
 			builder.put(grammarAccess.getEMPILibraryAccess().getAlternatives(), "rule__EMPILibrary__Alternatives");

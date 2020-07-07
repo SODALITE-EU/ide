@@ -216,24 +216,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EAITrainingCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAITrainingCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAi_trainingKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cApp_typeAi_trainingKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cAi_trainingAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cAi_trainingEAITrainingParserRuleCall_2_0 = (RuleCall)cAi_trainingAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EAITrainingCase:
-		//	'ai_training:'
+		//	'app_type-ai_training:'
 		//	BEGIN
 		//	ai_training=EAITraining
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ai_training:' BEGIN ai_training=EAITraining END
+		//'app_type-ai_training:' BEGIN ai_training=EAITraining END
 		public Group getGroup() { return cGroup; }
 		
-		//'ai_training:'
-		public Keyword getAi_trainingKeyword_0() { return cAi_trainingKeyword_0; }
+		//'app_type-ai_training:'
+		public Keyword getApp_typeAi_trainingKeyword_0() { return cApp_typeAi_trainingKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -284,29 +284,29 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EAppTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAppType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cAI_TrainingKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cHPCKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cBigDataKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cAI_InferenceKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cAi_trainingKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cHpcKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cBig_dataKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cAi_inferenceKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		
 		//EAppType:
-		//	'AI_Training' | 'HPC' | 'BigData' | 'AI_Inference';
+		//	'ai_training' | 'hpc' | 'big_data' | 'ai_inference';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'AI_Training' | 'HPC' | 'BigData' | 'AI_Inference'
+		//'ai_training' | 'hpc' | 'big_data' | 'ai_inference'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'AI_Training'
-		public Keyword getAI_TrainingKeyword_0() { return cAI_TrainingKeyword_0; }
+		//'ai_training'
+		public Keyword getAi_trainingKeyword_0() { return cAi_trainingKeyword_0; }
 		
-		//'HPC'
-		public Keyword getHPCKeyword_1() { return cHPCKeyword_1; }
+		//'hpc'
+		public Keyword getHpcKeyword_1() { return cHpcKeyword_1; }
 		
-		//'BigData'
-		public Keyword getBigDataKeyword_2() { return cBigDataKeyword_2; }
+		//'big_data'
+		public Keyword getBig_dataKeyword_2() { return cBig_dataKeyword_2; }
 		
-		//'AI_Inference'
-		public Keyword getAI_InferenceKeyword_3() { return cAI_InferenceKeyword_3; }
+		//'ai_inference'
+		public Keyword getAi_inferenceKeyword_3() { return cAi_inferenceKeyword_3; }
 	}
 	public class EOptBuildElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOptBuild");
@@ -354,52 +354,52 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class ECPUTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.ECPUType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cIntelx86Keyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cARMKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cAMDKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cX86Keyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cArmKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cAmdKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cPowerKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		
 		//ECPUType:
-		//	'Intelx86' | 'ARM' | 'AMD' | 'Power';
+		//	'x86' | 'arm' | 'amd' | 'power';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Intelx86' | 'ARM' | 'AMD' | 'Power'
+		//'x86' | 'arm' | 'amd' | 'power'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'Intelx86'
-		public Keyword getIntelx86Keyword_0() { return cIntelx86Keyword_0; }
+		//'x86'
+		public Keyword getX86Keyword_0() { return cX86Keyword_0; }
 		
-		//'ARM'
-		public Keyword getARMKeyword_1() { return cARMKeyword_1; }
+		//'arm'
+		public Keyword getArmKeyword_1() { return cArmKeyword_1; }
 		
-		//'AMD'
-		public Keyword getAMDKeyword_2() { return cAMDKeyword_2; }
+		//'amd'
+		public Keyword getAmdKeyword_2() { return cAmdKeyword_2; }
 		
-		//'Power'
+		//'power'
 		public Keyword getPowerKeyword_3() { return cPowerKeyword_3; }
 	}
 	public class EACCTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EACCType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cNVIDIAV100Keyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cAMDM100Keyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cFPGAXilinxKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cNvidiaKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cAmdKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cFpgaKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		
 		//EACCType:
-		//	'NVIDIA-V100' | 'AMD-M100' | 'FPGA-Xilinx';
+		//	'nvidia' | 'amd' | 'fpga';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'NVIDIA-V100' | 'AMD-M100' | 'FPGA-Xilinx'
+		//'nvidia' | 'amd' | 'fpga'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'NVIDIA-V100'
-		public Keyword getNVIDIAV100Keyword_0() { return cNVIDIAV100Keyword_0; }
+		//'nvidia'
+		public Keyword getNvidiaKeyword_0() { return cNvidiaKeyword_0; }
 		
-		//'AMD-M100'
-		public Keyword getAMDM100Keyword_1() { return cAMDM100Keyword_1; }
+		//'amd'
+		public Keyword getAmdKeyword_1() { return cAmdKeyword_1; }
 		
-		//'FPGA-Xilinx'
-		public Keyword getFPGAXilinxKeyword_2() { return cFPGAXilinxKeyword_2; }
+		//'fpga'
+		public Keyword getFpgaKeyword_2() { return cFpgaKeyword_2; }
 	}
 	public class EAutotuningElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAutotuning");
@@ -447,21 +447,21 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class ETunerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.ETuner");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cCREATAKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cAUTOTUNEKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cCreataKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cAutotuneKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
 		//ETuner:
-		//	'CREATA' | 'AUTOTUNE';
+		//	'creata' | 'autotune';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'CREATA' | 'AUTOTUNE'
+		//'creata' | 'autotune'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'CREATA'
-		public Keyword getCREATAKeyword_0() { return cCREATAKeyword_0; }
+		//'creata'
+		public Keyword getCreataKeyword_0() { return cCreataKeyword_0; }
 		
-		//'AUTOTUNE'
-		public Keyword getAUTOTUNEKeyword_1() { return cAUTOTUNEKeyword_1; }
+		//'autotune'
+		public Keyword getAutotuneKeyword_1() { return cAutotuneKeyword_1; }
 	}
 	public class EAITrainingElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAITraining");
@@ -562,24 +562,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EPyTorchCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EPyTorchCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPytorchKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cAi_frameworkPytorchKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cPytorchAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cPytorchEPyTorchParserRuleCall_2_0 = (RuleCall)cPytorchAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EPyTorchCase:
-		//	'pytorch:'
+		//	'ai_framework-pytorch:'
 		//	BEGIN
 		//	pytorch=EPyTorch
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'pytorch:' BEGIN pytorch=EPyTorch END
+		//'ai_framework-pytorch:' BEGIN pytorch=EPyTorch END
 		public Group getGroup() { return cGroup; }
 		
-		//'pytorch:'
-		public Keyword getPytorchKeyword_0() { return cPytorchKeyword_0; }
+		//'ai_framework-pytorch:'
+		public Keyword getAi_frameworkPytorchKeyword_0() { return cAi_frameworkPytorchKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -596,24 +596,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class ETensorFlowCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.ETensorFlowCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cTensorflowKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cAi_frameworkTensorflowKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cTensorflowAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cTensorflowETensorFlowParserRuleCall_2_0 = (RuleCall)cTensorflowAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//ETensorFlowCase:
-		//	'tensorflow:'
+		//	'ai_framework-tensorflow:'
 		//	BEGIN
 		//	tensorflow=ETensorFlow
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'tensorflow:' BEGIN tensorflow=ETensorFlow END
+		//'ai_framework-tensorflow:' BEGIN tensorflow=ETensorFlow END
 		public Group getGroup() { return cGroup; }
 		
-		//'tensorflow:'
-		public Keyword getTensorflowKeyword_0() { return cTensorflowKeyword_0; }
+		//'ai_framework-tensorflow:'
+		public Keyword getAi_frameworkTensorflowKeyword_0() { return cAi_frameworkTensorflowKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -630,24 +630,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EKerasCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EKerasCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cKerasKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cAi_frameworkKerasKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cKerasAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cKerasEKerasParserRuleCall_2_0 = (RuleCall)cKerasAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EKerasCase:
-		//	'keras:'
+		//	'ai_framework-keras:'
 		//	BEGIN
 		//	keras=EKeras
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'keras:' BEGIN keras=EKeras END
+		//'ai_framework-keras:' BEGIN keras=EKeras END
 		public Group getGroup() { return cGroup; }
 		
-		//'keras:'
-		public Keyword getKerasKeyword_0() { return cKerasKeyword_0; }
+		//'ai_framework-keras:'
+		public Keyword getAi_frameworkKerasKeyword_0() { return cAi_frameworkKerasKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -757,33 +757,33 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EAIFrameworkElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAIFramework");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cTensorFlowKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cPyTorchKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cTensorflowKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cPytorchKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cKerasKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cCNTKKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		private final Keyword cMXNetKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cCntkKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cMxnetKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		
 		//EAIFramework:
-		//	'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet';
+		//	'tensorflow' | 'pytorch' | 'keras' | 'cntk' | 'mxnet';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet'
+		//'tensorflow' | 'pytorch' | 'keras' | 'cntk' | 'mxnet'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'TensorFlow'
-		public Keyword getTensorFlowKeyword_0() { return cTensorFlowKeyword_0; }
+		//'tensorflow'
+		public Keyword getTensorflowKeyword_0() { return cTensorflowKeyword_0; }
 		
-		//'PyTorch'
-		public Keyword getPyTorchKeyword_1() { return cPyTorchKeyword_1; }
+		//'pytorch'
+		public Keyword getPytorchKeyword_1() { return cPytorchKeyword_1; }
 		
-		//'Keras'
+		//'keras'
 		public Keyword getKerasKeyword_2() { return cKerasKeyword_2; }
 		
-		//'CNTK'
-		public Keyword getCNTKKeyword_3() { return cCNTKKeyword_3; }
+		//'cntk'
+		public Keyword getCntkKeyword_3() { return cCntkKeyword_3; }
 		
-		//'MXNet'
-		public Keyword getMXNetKeyword_4() { return cMXNetKeyword_4; }
+		//'mxnet'
+		public Keyword getMxnetKeyword_4() { return cMxnetKeyword_4; }
 	}
 	public class EAITrainingTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAITrainingType");
@@ -795,13 +795,13 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cReinforncement_learningKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		
 		//EAITrainingType:
-		//	'Image_classification' | 'object_detection' | 'translation' | 'recommendation' | 'reinforncement_learning';
+		//	'image_classification' | 'object_detection' | 'translation' | 'recommendation' | 'reinforncement_learning';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Image_classification' | 'object_detection' | 'translation' | 'recommendation' | 'reinforncement_learning'
+		//'image_classification' | 'object_detection' | 'translation' | 'recommendation' | 'reinforncement_learning'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'Image_classification'
+		//'image_classification'
 		public Keyword getImage_classificationKeyword_0() { return cImage_classificationKeyword_0; }
 		
 		//'object_detection'
@@ -924,24 +924,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EBasedata");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cImagenetKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cCIFARKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cMNISTKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cCifarKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cMnistKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		
 		//EBasedata:
-		//	'Imagenet' | 'CIFAR' | 'MNIST';
+		//	'imagenet' | 'cifar' | 'mnist';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Imagenet' | 'CIFAR' | 'MNIST'
+		//'imagenet' | 'cifar' | 'mnist'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'Imagenet'
+		//'imagenet'
 		public Keyword getImagenetKeyword_0() { return cImagenetKeyword_0; }
 		
-		//'CIFAR'
-		public Keyword getCIFARKeyword_1() { return cCIFARKeyword_1; }
+		//'cifar'
+		public Keyword getCifarKeyword_1() { return cCifarKeyword_1; }
 		
-		//'MNIST'
-		public Keyword getMNISTKeyword_2() { return cMNISTKeyword_2; }
+		//'mnist'
+		public Keyword getMnistKeyword_2() { return cMnistKeyword_2; }
 	}
 	public class EAITrainingETLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAITrainingETL");
@@ -996,13 +996,13 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cBackendKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cBackendAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cBackendEBackendParserRuleCall_1_1_0 = (RuleCall)cBackendAssignment_1_1.eContents().get(0);
+		private final RuleCall cBackendEAIFrameworkParserRuleCall_1_1_0 = (RuleCall)cBackendAssignment_1_1.eContents().get(0);
 		
 		//EKeras:
-		//	('version:' version=STRING)? & ('backend:' backend=EBackend)?;
+		//	('version:' version=STRING)? & ('backend:' backend=EAIFramework)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('version:' version=STRING)? & ('backend:' backend=EBackend)?
+		//('version:' version=STRING)? & ('backend:' backend=EAIFramework)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//('version:' version=STRING)?
@@ -1017,48 +1017,17 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getVersionSTRINGTerminalRuleCall_0_1_0() { return cVersionSTRINGTerminalRuleCall_0_1_0; }
 		
-		//('backend:' backend=EBackend)?
+		//('backend:' backend=EAIFramework)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'backend:'
 		public Keyword getBackendKeyword_1_0() { return cBackendKeyword_1_0; }
 		
-		//backend=EBackend
+		//backend=EAIFramework
 		public Assignment getBackendAssignment_1_1() { return cBackendAssignment_1_1; }
 		
-		//EBackend
-		public RuleCall getBackendEBackendParserRuleCall_1_1_0() { return cBackendEBackendParserRuleCall_1_1_0; }
-	}
-	public class EBackendElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EBackend");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cTensorFlowKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cPyTorchKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cKerasKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cCNTKKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		private final Keyword cMXNetKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
-		
-		//EBackend:
-		//	'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet'
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//'TensorFlow'
-		public Keyword getTensorFlowKeyword_0() { return cTensorFlowKeyword_0; }
-		
-		//'PyTorch'
-		public Keyword getPyTorchKeyword_1() { return cPyTorchKeyword_1; }
-		
-		//'Keras'
-		public Keyword getKerasKeyword_2() { return cKerasKeyword_2; }
-		
-		//'CNTK'
-		public Keyword getCNTKKeyword_3() { return cCNTKKeyword_3; }
-		
-		//'MXNet'
-		public Keyword getMXNetKeyword_4() { return cMXNetKeyword_4; }
+		//EAIFramework
+		public RuleCall getBackendEAIFrameworkParserRuleCall_1_1_0() { return cBackendEAIFrameworkParserRuleCall_1_1_0; }
 	}
 	public class ETensorFlowElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.ETensorFlow");
@@ -1072,6 +1041,8 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cXlaAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cXlaBOOLEANTerminalRuleCall_1_1_0 = (RuleCall)cXlaAssignment_1_1.eContents().get(0);
 		
+		////EBackend:
+		////	'tensorflow' | 'pytorch' | 'keras' | 'cntk' | 'mxnet';
 		//ETensorFlow:
 		//	('version:' version=STRING)? & ('xla:' xla=BOOLEAN)?;
 		@Override public ParserRule getRule() { return rule; }
@@ -1251,24 +1222,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EOPENCLCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOPENCLCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOpenclKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cParallelisationOpenclKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cOpenclAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOpenclEOPENCLParserRuleCall_2_0 = (RuleCall)cOpenclAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EOPENCLCase:
-		//	'opencl:'
+		//	'parallelisation-opencl:'
 		//	BEGIN
 		//	opencl=EOPENCL
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'opencl:' BEGIN opencl=EOPENCL END
+		//'parallelisation-opencl:' BEGIN opencl=EOPENCL END
 		public Group getGroup() { return cGroup; }
 		
-		//'opencl:'
-		public Keyword getOpenclKeyword_0() { return cOpenclKeyword_0; }
+		//'parallelisation-opencl:'
+		public Keyword getParallelisationOpenclKeyword_0() { return cParallelisationOpenclKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -1285,24 +1256,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EOPENACCCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOPENACCCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOpenaccKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cParallelisationOpenaccKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cOpenaccAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOpenaccEOPENACCParserRuleCall_2_0 = (RuleCall)cOpenaccAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EOPENACCCase:
-		//	'openacc:'
+		//	'parallelisation-openacc:'
 		//	BEGIN
 		//	openacc=EOPENACC
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'openacc:' BEGIN openacc=EOPENACC END
+		//'parallelisation-openacc:' BEGIN openacc=EOPENACC END
 		public Group getGroup() { return cGroup; }
 		
-		//'openacc:'
-		public Keyword getOpenaccKeyword_0() { return cOpenaccKeyword_0; }
+		//'parallelisation-openacc:'
+		public Keyword getParallelisationOpenaccKeyword_0() { return cParallelisationOpenaccKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -1319,24 +1290,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EOPENMPCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EOPENMPCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOpenmpKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cParallelisationOpenmpKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cOpenmpAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOpenmpEOPENMPParserRuleCall_2_0 = (RuleCall)cOpenmpAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EOPENMPCase:
-		//	'openmp:'
+		//	'parallelisation-openmp:'
 		//	BEGIN
 		//	openmp=EOPENMP
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'openmp:' BEGIN openmp=EOPENMP END
+		//'parallelisation-openmp:' BEGIN openmp=EOPENMP END
 		public Group getGroup() { return cGroup; }
 		
-		//'openmp:'
-		public Keyword getOpenmpKeyword_0() { return cOpenmpKeyword_0; }
+		//'parallelisation-openmp:'
+		public Keyword getParallelisationOpenmpKeyword_0() { return cParallelisationOpenmpKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -1353,24 +1324,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EMPICaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EMPICase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cMpiKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cParallelisationMpiKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cMpiAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cMpiEMPIParserRuleCall_2_0 = (RuleCall)cMpiAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EMPICase:
-		//	'mpi:'
+		//	'parallelisation-mpi:'
 		//	BEGIN
 		//	mpi=EMPI
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'mpi:' BEGIN mpi=EMPI END
+		//'parallelisation-mpi:' BEGIN mpi=EMPI END
 		public Group getGroup() { return cGroup; }
 		
-		//'mpi:'
-		public Keyword getMpiKeyword_0() { return cMpiKeyword_0; }
+		//'parallelisation-mpi:'
+		public Keyword getParallelisationMpiKeyword_0() { return cParallelisationMpiKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -1427,29 +1398,29 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EParallelisationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EParallelisation");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cMPIKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cOPENMPKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cOPENACCKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cOPENCLKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cMpiKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cOpenmpKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cOpenaccKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cOpenclKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		
 		//EParallelisation:
-		//	'MPI' | 'OPENMP' | 'OPENACC' | 'OPENCL';
+		//	'mpi' | 'openmp' | 'openacc' | 'opencl';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'MPI' | 'OPENMP' | 'OPENACC' | 'OPENCL'
+		//'mpi' | 'openmp' | 'openacc' | 'opencl'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'MPI'
-		public Keyword getMPIKeyword_0() { return cMPIKeyword_0; }
+		//'mpi'
+		public Keyword getMpiKeyword_0() { return cMpiKeyword_0; }
 		
-		//'OPENMP'
-		public Keyword getOPENMPKeyword_1() { return cOPENMPKeyword_1; }
+		//'openmp'
+		public Keyword getOpenmpKeyword_1() { return cOpenmpKeyword_1; }
 		
-		//'OPENACC'
-		public Keyword getOPENACCKeyword_2() { return cOPENACCKeyword_2; }
+		//'openacc'
+		public Keyword getOpenaccKeyword_2() { return cOpenaccKeyword_2; }
 		
-		//'OPENCL'
-		public Keyword getOPENCLKeyword_3() { return cOPENCLKeyword_3; }
+		//'opencl'
+		public Keyword getOpenclKeyword_3() { return cOpenclKeyword_3; }
 	}
 	public class EHPCDataElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EHPCData");
@@ -1601,21 +1572,21 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EHPCBasedataElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EHPCBasedata");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cIMAGEKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cRESTARTKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cImageKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cRestartKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
 		//EHPCBasedata:
-		//	'IMAGE' | 'RESTART';
+		//	'image' | 'restart';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'IMAGE' | 'RESTART'
+		//'image' | 'restart'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'IMAGE'
-		public Keyword getIMAGEKeyword_0() { return cIMAGEKeyword_0; }
+		//'image'
+		public Keyword getImageKeyword_0() { return cImageKeyword_0; }
 		
-		//'RESTART'
-		public Keyword getRESTARTKeyword_1() { return cRESTARTKeyword_1; }
+		//'restart'
+		public Keyword getRestartKeyword_1() { return cRestartKeyword_1; }
 	}
 	public class EMPIElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EMPI");
@@ -2036,7 +2007,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	private final EBasedataElements pEBasedata;
 	private final EAITrainingETLElements pEAITrainingETL;
 	private final EKerasElements pEKeras;
-	private final EBackendElements pEBackend;
 	private final ETensorFlowElements pETensorFlow;
 	private final EPyTorchElements pEPyTorch;
 	private final EHPCElements pEHPC;
@@ -2057,14 +2027,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	private final EOPENACCElements pEOPENACC;
 	private final EOPENCLElements pEOPENCL;
 	private final ECompilerElements pECompiler;
-	private final TerminalRule tBT;
-	private final TerminalRule tLT;
-	private final TerminalRule tBET;
-	private final TerminalRule tLET;
-	private final TerminalRule tEQUAL;
-	private final TerminalRule tNOT_EQUAL;
-	private final TerminalRule tOR;
-	private final TerminalRule tAND;
 	private final TerminalRule tBEGIN;
 	private final TerminalRule tEND;
 	private final TerminalRule tBOOLEAN;
@@ -2105,7 +2067,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		this.pEBasedata = new EBasedataElements();
 		this.pEAITrainingETL = new EAITrainingETLElements();
 		this.pEKeras = new EKerasElements();
-		this.pEBackend = new EBackendElements();
 		this.pETensorFlow = new ETensorFlowElements();
 		this.pEPyTorch = new EPyTorchElements();
 		this.pEHPC = new EHPCElements();
@@ -2126,14 +2087,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		this.pEOPENACC = new EOPENACCElements();
 		this.pEOPENCL = new EOPENCLElements();
 		this.pECompiler = new ECompilerElements();
-		this.tBT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.BT");
-		this.tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.LT");
-		this.tBET = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.BET");
-		this.tLET = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.LET");
-		this.tEQUAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EQUAL");
-		this.tNOT_EQUAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.NOT_EQUAL");
-		this.tOR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.OR");
-		this.tAND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.AND");
 		this.tBEGIN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.BEGIN");
 		this.tEND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.END");
 		this.tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.BOOLEAN");
@@ -2212,7 +2165,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EAITrainingCase:
-	//	'ai_training:'
+	//	'app_type-ai_training:'
 	//	BEGIN
 	//	ai_training=EAITraining
 	//	END;
@@ -2238,7 +2191,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EAppType:
-	//	'AI_Training' | 'HPC' | 'BigData' | 'AI_Inference';
+	//	'ai_training' | 'hpc' | 'big_data' | 'ai_inference';
 	public EAppTypeElements getEAppTypeAccess() {
 		return pEAppType;
 	}
@@ -2258,7 +2211,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ECPUType:
-	//	'Intelx86' | 'ARM' | 'AMD' | 'Power';
+	//	'x86' | 'arm' | 'amd' | 'power';
 	public ECPUTypeElements getECPUTypeAccess() {
 		return pECPUType;
 	}
@@ -2268,7 +2221,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EACCType:
-	//	'NVIDIA-V100' | 'AMD-M100' | 'FPGA-Xilinx';
+	//	'nvidia' | 'amd' | 'fpga';
 	public EACCTypeElements getEACCTypeAccess() {
 		return pEACCType;
 	}
@@ -2288,7 +2241,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ETuner:
-	//	'CREATA' | 'AUTOTUNE';
+	//	'creata' | 'autotune';
 	public ETunerElements getETunerAccess() {
 		return pETuner;
 	}
@@ -2324,7 +2277,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EPyTorchCase:
-	//	'pytorch:'
+	//	'ai_framework-pytorch:'
 	//	BEGIN
 	//	pytorch=EPyTorch
 	//	END;
@@ -2337,7 +2290,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ETensorFlowCase:
-	//	'tensorflow:'
+	//	'ai_framework-tensorflow:'
 	//	BEGIN
 	//	tensorflow=ETensorFlow
 	//	END;
@@ -2350,7 +2303,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EKerasCase:
-	//	'keras:'
+	//	'ai_framework-keras:'
 	//	BEGIN
 	//	keras=EKeras
 	//	END;
@@ -2374,7 +2327,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EAIFramework:
-	//	'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet';
+	//	'tensorflow' | 'pytorch' | 'keras' | 'cntk' | 'mxnet';
 	public EAIFrameworkElements getEAIFrameworkAccess() {
 		return pEAIFramework;
 	}
@@ -2384,7 +2337,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EAITrainingType:
-	//	'Image_classification' | 'object_detection' | 'translation' | 'recommendation' | 'reinforncement_learning';
+	//	'image_classification' | 'object_detection' | 'translation' | 'recommendation' | 'reinforncement_learning';
 	public EAITrainingTypeElements getEAITrainingTypeAccess() {
 		return pEAITrainingType;
 	}
@@ -2408,7 +2361,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EBasedata:
-	//	'Imagenet' | 'CIFAR' | 'MNIST';
+	//	'imagenet' | 'cifar' | 'mnist';
 	public EBasedataElements getEBasedataAccess() {
 		return pEBasedata;
 	}
@@ -2428,7 +2381,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EKeras:
-	//	('version:' version=STRING)? & ('backend:' backend=EBackend)?;
+	//	('version:' version=STRING)? & ('backend:' backend=EAIFramework)?;
 	public EKerasElements getEKerasAccess() {
 		return pEKeras;
 	}
@@ -2437,16 +2390,8 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 		return getEKerasAccess().getRule();
 	}
 	
-	//EBackend:
-	//	'TensorFlow' | 'PyTorch' | 'Keras' | 'CNTK' | 'MXNet';
-	public EBackendElements getEBackendAccess() {
-		return pEBackend;
-	}
-	
-	public ParserRule getEBackendRule() {
-		return getEBackendAccess().getRule();
-	}
-	
+	////EBackend:
+	////	'tensorflow' | 'pytorch' | 'keras' | 'cntk' | 'mxnet';
 	//ETensorFlow:
 	//	('version:' version=STRING)? & ('xla:' xla=BOOLEAN)?;
 	public ETensorFlowElements getETensorFlowAccess() {
@@ -2484,7 +2429,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EOPENCLCase:
-	//	'opencl:'
+	//	'parallelisation-opencl:'
 	//	BEGIN
 	//	opencl=EOPENCL
 	//	END;
@@ -2497,7 +2442,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EOPENACCCase:
-	//	'openacc:'
+	//	'parallelisation-openacc:'
 	//	BEGIN
 	//	openacc=EOPENACC
 	//	END;
@@ -2510,7 +2455,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EOPENMPCase:
-	//	'openmp:'
+	//	'parallelisation-openmp:'
 	//	BEGIN
 	//	openmp=EOPENMP
 	//	END;
@@ -2523,7 +2468,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EMPICase:
-	//	'mpi:'
+	//	'parallelisation-mpi:'
 	//	BEGIN
 	//	mpi=EMPI
 	//	END;
@@ -2547,7 +2492,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EParallelisation:
-	//	'MPI' | 'OPENMP' | 'OPENACC' | 'OPENCL';
+	//	'mpi' | 'openmp' | 'openacc' | 'opencl';
 	public EParallelisationElements getEParallelisationAccess() {
 		return pEParallelisation;
 	}
@@ -2581,7 +2526,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EHPCBasedata:
-	//	'IMAGE' | 'RESTART';
+	//	'image' | 'restart';
 	public EHPCBasedataElements getEHPCBasedataAccess() {
 		return pEHPCBasedata;
 	}
@@ -2670,54 +2615,6 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getECompilerRule() {
 		return getECompilerAccess().getRule();
-	}
-	
-	//terminal BT:
-	//	'>';
-	public TerminalRule getBTRule() {
-		return tBT;
-	}
-	
-	//terminal LT:
-	//	'<';
-	public TerminalRule getLTRule() {
-		return tLT;
-	}
-	
-	//terminal BET:
-	//	'>=';
-	public TerminalRule getBETRule() {
-		return tBET;
-	}
-	
-	//terminal LET:
-	//	'<=';
-	public TerminalRule getLETRule() {
-		return tLET;
-	}
-	
-	//terminal EQUAL:
-	//	'==';
-	public TerminalRule getEQUALRule() {
-		return tEQUAL;
-	}
-	
-	//terminal NOT_EQUAL:
-	//	'!=';
-	public TerminalRule getNOT_EQUALRule() {
-		return tNOT_EQUAL;
-	}
-	
-	//terminal OR:
-	//	'OR';
-	public TerminalRule getORRule() {
-		return tOR;
-	}
-	
-	//terminal AND:
-	//	'AND';
-	public TerminalRule getANDRule() {
-		return tAND;
 	}
 	
 	//terminal BEGIN:

@@ -330,7 +330,7 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EKeras returns EKeras
 	 *
 	 * Constraint:
-	 *     (version=STRING | backend=EBackend)+
+	 *     (version=STRING | backend=EAIFramework)+
 	 */
 	protected void sequence_EKeras(ISerializationContext context, EKeras semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
