@@ -295,7 +295,7 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
   
   @Override
   public void completeEAutotuning_Tuner(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("creata", "creata", context, "", acceptor);
+    this.createNonEditableCompletionProposal("cresta", "creata", context, "", acceptor);
     this.createNonEditableCompletionProposal("autotune", "autotune", context, "", acceptor);
   }
   

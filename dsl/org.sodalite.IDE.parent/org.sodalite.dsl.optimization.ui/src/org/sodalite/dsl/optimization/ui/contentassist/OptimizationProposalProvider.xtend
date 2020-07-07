@@ -227,7 +227,7 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 	}
 	
 	override void completeEAutotuning_Tuner(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("creata", "creata", context, "", acceptor);
+		createNonEditableCompletionProposal ("cresta", "creata", context, "", acceptor);
 		createNonEditableCompletionProposal ("autotune", "autotune", context, "", acceptor);
 	}
 	

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOptimizationParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Ai_frameworkTensorflow", "ParallelisationOpenacc", "ParallelisationOpencl", "ParallelisationOpenmp", "Reinforncement_learning", "Ai_frameworkPytorch", "App_typeAi_training", "Distributed_training", "Image_classification", "ParallelisationMpi", "Ai_frameworkKeras", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "Message_size", "Ai_inference", "Optimization", "Ai_training", "Autotuning", "Parameters", "Translation", "Opt_build", "Tensorflow", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Cpu_type", "Location", "Prefetch", "Autotune", "Backend", "Big_data", "Imagenet", "Library", "Version", "Config", "Layers", "Openacc", "Pytorch", "Restart", "Cache", "Count", "Creata", "Input", "Medium", "Mvapch", "Nvidia", "Opencl", "Openmp", "Opnmpi", "Simple", "Tuner", "Block", "Cifar", "Data", "Glow", "Image", "Keras", "Large", "Mnist", "Mxnet", "Power", "Size", "Small", "Type", "Cntk", "Cray", "Etl", "Fpga", "Hpc_1", "Xla", "Amd", "Arm", "Hpc", "Mpi", "Pgi", "X86", "Comma", "FullStop", "Colon", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Ai_frameworkTensorflow", "ParallelisationOpenacc", "ParallelisationOpencl", "ParallelisationOpenmp", "Reinforncement_learning", "Ai_frameworkPytorch", "App_typeAi_training", "Distributed_training", "Image_classification", "ParallelisationMpi", "Ai_frameworkKeras", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "Message_size", "Ai_inference", "Optimization", "Ai_training", "Autotuning", "Parameters", "Translation", "Opt_build", "Tensorflow", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Cpu_type", "Location", "Prefetch", "Autotune", "Backend", "Big_data", "Imagenet", "Library", "Version", "Config", "Layers", "Openacc", "Pytorch", "Restart", "Cache", "Count", "Cresta", "Input", "Medium", "Mvapch", "Nvidia", "Opencl", "Openmp", "Opnmpi", "Simple", "Tuner", "Block", "Cifar", "Data", "Glow", "Image", "Keras", "Large", "Mnist", "Mxnet", "Power", "Size", "Small", "Type", "Cntk", "Cray", "Etl", "Fpga", "Hpc_1", "Xla", "Amd", "Arm", "Hpc", "Mpi", "Pgi", "X86", "Comma", "FullStop", "Colon", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int Tensorflow=33;
     public static final int Big_data=44;
@@ -69,6 +69,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final int Mnist=72;
     public static final int Layers=49;
     public static final int Basedata=37;
+    public static final int Cresta=55;
     public static final int FullStop=91;
     public static final int Cntk=78;
     public static final int Ai_inference=26;
@@ -113,7 +114,6 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final int Acc_type=34;
     public static final int App_type=36;
     public static final int RULE_SL_COMMENT=102;
-    public static final int Creata=55;
     public static final int Colon=92;
     public static final int EOF=-1;
     public static final int RULE_WS=103;
@@ -180,7 +180,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     		tokenNameToValue.put("Type", "'type:'");
     		tokenNameToValue.put("Cache", "'cache:'");
     		tokenNameToValue.put("Count", "'count:'");
-    		tokenNameToValue.put("Creata", "'creata'");
+    		tokenNameToValue.put("Cresta", "'cresta'");
     		tokenNameToValue.put("Input", "'input:'");
     		tokenNameToValue.put("Medium", "'medium'");
     		tokenNameToValue.put("Mvapch", "'mvapch'");
@@ -4132,17 +4132,17 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ETuner__Alternatives"
-    // InternalOptimizationParser.g:1390:1: rule__ETuner__Alternatives : ( ( Creata ) | ( Autotune ) );
+    // InternalOptimizationParser.g:1390:1: rule__ETuner__Alternatives : ( ( Cresta ) | ( Autotune ) );
     public final void rule__ETuner__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:1394:1: ( ( Creata ) | ( Autotune ) )
+            // InternalOptimizationParser.g:1394:1: ( ( Cresta ) | ( Autotune ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==Creata) ) {
+            if ( (LA5_0==Cresta) ) {
                 alt5=1;
             }
             else if ( (LA5_0==Autotune) ) {
@@ -4156,14 +4156,14 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             }
             switch (alt5) {
                 case 1 :
-                    // InternalOptimizationParser.g:1395:2: ( Creata )
+                    // InternalOptimizationParser.g:1395:2: ( Cresta )
                     {
-                    // InternalOptimizationParser.g:1395:2: ( Creata )
-                    // InternalOptimizationParser.g:1396:3: Creata
+                    // InternalOptimizationParser.g:1395:2: ( Cresta )
+                    // InternalOptimizationParser.g:1396:3: Cresta
                     {
-                     before(grammarAccess.getETunerAccess().getCreataKeyword_0()); 
-                    match(input,Creata,FOLLOW_2); 
-                     after(grammarAccess.getETunerAccess().getCreataKeyword_0()); 
+                     before(grammarAccess.getETunerAccess().getCrestaKeyword_0()); 
+                    match(input,Cresta,FOLLOW_2); 
+                     after(grammarAccess.getETunerAccess().getCrestaKeyword_0()); 
 
                     }
 

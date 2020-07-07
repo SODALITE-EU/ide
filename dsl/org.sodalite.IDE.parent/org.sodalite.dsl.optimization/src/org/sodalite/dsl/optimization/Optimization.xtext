@@ -77,7 +77,7 @@ EAutotuning:
 ;
 
 ETuner:
-	'creata' | 'autotune'  ;
+	'cresta' | 'autotune'  ;
 
 EAITraining:
 	('config:'
