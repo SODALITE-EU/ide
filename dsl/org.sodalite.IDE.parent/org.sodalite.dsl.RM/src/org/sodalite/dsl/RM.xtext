@@ -194,7 +194,7 @@ ERelationshipTypeBody:
 	BEGIN
 	interfaces=EInterfaces
 	END)? &
-	('valid_target_types:[' valid_target_types=EValidTargetTypes "]")?);
+	('valid_target_types:' '[' valid_target_types=EValidTargetTypes "]")?);
 
 EValidTargetTypes:
 	targetTypes+=ECapabilityTypeRef (',' sourceType+=ECapabilityTypeRef)*;
@@ -272,7 +272,12 @@ EOperationDefinitionBody:
 	BEGIN
 	inputs=EInputs
 	END)? &
-	('implementation:' implementation=STRING)?);
+	(implementation=EImplementation)?);
+	
+EImplementation:
+	('implementation:' primary=STRING)? &
+	(BEGIN 'dependencies:''[' dependencies+=STRING ']' END)?
+;
 
 EInputs:
 	{EInputs} (inputs+=EParameterDefinition)*;
@@ -342,8 +347,8 @@ ECapabilityDefinitionBody:
 	BEGIN
 	attributes=EAttributes
 	END)? &
-	('valid_source_types:[' (valid_source_types+=EValidSourceType)? ']')? &
-	('occurrences:[' occurrences_start=STRING ',' occurrences_end=STRING ']')?;
+	('valid_source_types:' '[' (valid_source_types+=EValidSourceType)? ']')? &
+	('occurrences:' '[' occurrences_start=STRING ',' occurrences_end=STRING ']')?;
 
 EValidSourceType:
 	sourceTypes+=ENodeTypeRef (',' sourceType+=ENodeTypeRef)*;
@@ -364,7 +369,7 @@ ERequirementDefinitionBody:
 	('capability:' capability=[ECapabilityType|QUALIFIED_NAME]) &
 	('node:' node=[ENodeType|QUALIFIED_NAME])? &
 	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? &
-	('occurrences:[' start=STRING ',' end=STRING ']')?;
+	('occurrences:' '[' start=STRING ',' end=STRING ']')?;
 
 EReqOrCap:
 	ERequirementDefinition | ECapabilityDefinition;
@@ -393,7 +398,7 @@ ELIST:
 ;
 
 EInRange:
-	'in_range:[' start=STRING "," end=STRING ']';
+	'in_range:' '[' start=STRING "," end=STRING ']';
 
 ELessOrEqual:
 	'less_or_equal:' val=STRING;

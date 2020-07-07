@@ -12,6 +12,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.Keyword
+import org.eclipse.ui.PlatformUI
+import org.eclipse.swt.widgets.FileDialog
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -202,6 +204,31 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	override void complete_EMAP(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EMAP::map property")
 		createEditableCompletionProposal ("{", "{", context, "Start a Map of key=value entries", acceptor);
+	}
+	
+	override void completeEImplementation_Primary(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
+		val input = selectFile ("Select implementation primary file")
+		createEditableCompletionProposal (input, input, context, "", acceptor);
+	}
+	
+	override void completeEImplementation_Dependencies(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
+		val input = selectFile ("Select implementation dependency file")
+		createEditableCompletionProposal (input, input, context, "", acceptor);
+	}
+	
+	protected def String selectFile (String dialogText){
+		var shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()
+		// File standard dialog
+		var fileDialog = new FileDialog(shell);
+		fileDialog.setText(dialogText);
+		//fileDialog.setFilterExtensions(new String[] { "*.txt" });
+		// Put in a readable name for the filter
+		//fileDialog.setFilterNames(new String[] { "Textfiles(*.txt)" });
+		var selected = fileDialog.open();
+		System.out.println(dialogText +": " + selected);
+		return "\"" + selected + "\""
 	}
 	
 	protected def void createEntityProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor){

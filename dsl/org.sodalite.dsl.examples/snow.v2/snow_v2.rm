@@ -27,7 +27,7 @@ node_types:
 									property: sodalite.nodes.ConfigurationDemo.mysql_db_pass
 									entity: SELF
 						implementation: "playbooks/configure_demo.yml"
-						//TODO support dependencies
-
+							dependencies: ["playbooks/config.json.tmpl"]
+							
         	
 		

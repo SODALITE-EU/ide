@@ -47,7 +47,8 @@ node_types:
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
 									req_cap: tosca.nodes.SoftwareComponent.host
-						implementation: "playbooks/add_cert.yml" // FIXME dependencies: [artifacts/ca.crt, artifacts/ca.key]
+						implementation: "playbooks/add_cert.yml" 
+							dependencies: ["artifacts/ca.crt", "artifacts/ca.key"]
 						
 					delete:
 						inputs:

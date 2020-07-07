@@ -25,6 +25,7 @@ import org.sodalite.dsl.rM.EConstraint;
 import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EFunction;
+import org.sodalite.dsl.rM.EImplementation;
 import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.EInterfaceDefinition;
 import org.sodalite.dsl.rM.EInterfaceType;
@@ -727,7 +728,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      String _implementation = o.getOperation().getImplementation();
+      EImplementation _implementation = o.getOperation().getImplementation();
       boolean _tripleNotEquals_1 = (_implementation != null);
       if (_tripleNotEquals_1) {
         this.putParameterNumber(o, "implementation", Integer.valueOf(this.parameter_counter));
@@ -744,8 +745,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _implementation_1 = o.getOperation().getImplementation();
-        _builder.append(_implementation_1, "  ");
+        String _primary = o.getOperation().getImplementation().getPrimary();
+        _builder.append(_primary, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -781,8 +782,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      String _implementation_2 = o.getOperation().getImplementation();
-      boolean _tripleNotEquals_3 = (_implementation_2 != null);
+      EImplementation _implementation_1 = o.getOperation().getImplementation();
+      boolean _tripleNotEquals_3 = (_implementation_1 != null);
       if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");

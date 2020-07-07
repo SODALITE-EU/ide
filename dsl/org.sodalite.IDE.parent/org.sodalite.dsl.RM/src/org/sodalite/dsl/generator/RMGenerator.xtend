@@ -299,7 +299,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "implementation" ;
-	  exchange:value '«o.operation.implementation»' ;
+	  exchange:value '«o.operation.implementation.primary»' ;
 	.
 	«ENDIF»		
 	

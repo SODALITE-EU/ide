@@ -5,6 +5,9 @@ package org.sodalite.dsl.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -210,6 +213,27 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void complete_EMAP(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EMAP::map property");
     this.createEditableCompletionProposal("{", "{", context, "Start a Map of key=value entries", acceptor);
+  }
+  
+  @Override
+  public void completeEImplementation_Primary(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final String input = this.selectFile("Select implementation primary file");
+    this.createEditableCompletionProposal(input, input, context, "", acceptor);
+  }
+  
+  @Override
+  public void completeEImplementation_Dependencies(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final String input = this.selectFile("Select implementation dependency file");
+    this.createEditableCompletionProposal(input, input, context, "", acceptor);
+  }
+  
+  protected String selectFile(final String dialogText) {
+    Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+    FileDialog fileDialog = new FileDialog(shell);
+    fileDialog.setText(dialogText);
+    String selected = fileDialog.open();
+    System.out.println(((dialogText + ": ") + selected));
+    return (("\"" + selected) + "\"");
   }
   
   protected void createEntityProposals(final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
