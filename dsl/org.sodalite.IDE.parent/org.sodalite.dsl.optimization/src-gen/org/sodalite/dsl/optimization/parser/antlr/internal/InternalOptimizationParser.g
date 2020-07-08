@@ -404,9 +404,9 @@ ruleEHPCCase returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Hpc_1
+		otherlv_0=App_typeHpc
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEHPCCaseAccess().getHpcKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEHPCCaseAccess().getApp_typeHpcKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{

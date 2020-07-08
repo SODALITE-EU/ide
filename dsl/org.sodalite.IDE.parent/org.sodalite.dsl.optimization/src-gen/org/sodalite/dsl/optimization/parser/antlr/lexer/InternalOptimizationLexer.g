@@ -53,6 +53,8 @@ Recommendation : 'recommendation';
 
 Ai_framework : 'ai_framework:';
 
+App_typeHpc : 'app_type-hpc:';
+
 Message_size : 'message_size:';
 
 Ai_inference : 'ai_inference';
@@ -166,8 +168,6 @@ Cray : 'cray';
 Etl : 'etl:';
 
 Fpga : 'fpga';
-
-Hpc_1 : 'hpc:';
 
 Xla : 'xla:';
 

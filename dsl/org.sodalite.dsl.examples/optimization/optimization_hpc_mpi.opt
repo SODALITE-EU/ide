@@ -7,8 +7,8 @@ optimization hpc.mpi:
 		acc_type: nvidia
 	autotuning:
 		tuner: cresta
-		input: "path/to/autotuning.model"
-	hpc:
+		input: "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/optimization/autotunig.at"
+	app_type-hpc: 
 		config:
 			parallelisation: mpi, openacc, opencl, openmp
 		data:

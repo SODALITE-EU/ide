@@ -51,20 +51,20 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 					OptimizationPackage.Literals.EOPTIMIZATION__ENABLE_AUTOTUNING,
 					MANDATORY_ELEMENT)
 		}
-		if ((opt.app_type == "AI_Training" && !(opt.app_optimization instanceof EAITrainingCase))
+		if ((opt.app_type == "ai_training" && !(opt.app_optimization instanceof EAITrainingCase))
 			|| (opt.app_optimization instanceof EAITrainingCase && !(opt.app_type == "ai_training"))	
 		) {
-			error('A app_type-ai_training property should be present if app_type is AI_Training', 
+			error('A app_type-ai_training property should be present if app_type is ai_training', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE,
 					MANDATORY_ELEMENT)
 			error('This property is not compatible with selected app_type', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_OPTIMIZATION,
 					MANDATORY_ELEMENT)
 		}
-		if ((opt.app_type == "HPC" && !(opt.app_optimization instanceof EHPCCase))
+		if ((opt.app_type == "hpc" && !(opt.app_optimization instanceof EHPCCase))
 			|| (opt.app_optimization instanceof EHPCCase != opt.app_type == "hpc")
 		) {
-			error('Ah app_type-hpc property should be present if app_type is HPC', 
+			error('Ah app_type-hpc property should be present if app_type is hpc', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE,
 					MANDATORY_ELEMENT)
 			error('This property is not compatible with selected app_type', 
@@ -72,7 +72,7 @@ class OptimizationValidator extends AbstractOptimizationValidator {
 					MANDATORY_ELEMENT)
 		}
 		
-		if ((opt.app_type == "AI_Inference") || (opt.app_type == "big_data")){
+		if ((opt.app_type == "ai_inference") || (opt.app_type == "big_data")){
 			error('This app_type is not supported in current version', 
 					OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE,
 					MANDATORY_ELEMENT)

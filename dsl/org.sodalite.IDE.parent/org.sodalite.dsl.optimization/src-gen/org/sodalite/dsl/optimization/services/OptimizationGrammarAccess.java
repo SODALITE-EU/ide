@@ -250,24 +250,24 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	public class EHPCCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EHPCCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cHpcKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cApp_typeHpcKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cHpcAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cHpcEHPCParserRuleCall_2_0 = (RuleCall)cHpcAssignment_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EHPCCase:
-		//	'hpc:'
+		//	'app_type-hpc:'
 		//	BEGIN
 		//	hpc=EHPC
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'hpc:' BEGIN hpc=EHPC END
+		//'app_type-hpc:' BEGIN hpc=EHPC END
 		public Group getGroup() { return cGroup; }
 		
-		//'hpc:'
-		public Keyword getHpcKeyword_0() { return cHpcKeyword_0; }
+		//'app_type-hpc:'
+		public Keyword getApp_typeHpcKeyword_0() { return cApp_typeHpcKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -2178,7 +2178,7 @@ public class OptimizationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EHPCCase:
-	//	'hpc:'
+	//	'app_type-hpc:'
 	//	BEGIN
 	//	hpc=EHPC
 	//	END;

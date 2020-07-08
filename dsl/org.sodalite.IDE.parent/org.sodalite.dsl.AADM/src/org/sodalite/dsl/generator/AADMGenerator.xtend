@@ -31,6 +31,12 @@ import org.sodalite.dsl.rM.GetInput
 import org.sodalite.dsl.rM.EMapEntry
 import org.sodalite.dsl.rM.ESTRING
 import org.sodalite.dsl.aADM.ECapabilityAssignment
+import org.sodalite.dsl.optimization.optimization.Optimization_Model
+import java.nio.file.Files
+import java.nio.file.Paths
+import org.eclipse.core.runtime.Path
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.IFile
 
 /**
  * Generates code from your model files on save.
@@ -44,10 +50,12 @@ class AADMGenerator extends AbstractGenerator {
 	var int requirement_counter = 1
 	var int capability_counter = 1
 	var int parameter_counter = 1
+	var int optimization_counter = 1
 	var Map<EPropertyAssignment, Integer> property_numbers
 	var Map<ERequirementAssignment, Integer> requirement_numbers
 	var Map<ECapabilityAssignment, Integer> capability_numbers
 	var Map<EObject, Map<String,Integer>> parameter_numbers
+	var Map<Optimization_Model, Integer> optimization_numbers
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		template_counter = 1
@@ -56,10 +64,12 @@ class AADMGenerator extends AbstractGenerator {
 		requirement_counter = 1
 		capability_counter = 1
 		parameter_counter = 1
+		optimization_counter = 1
 		property_numbers = new HashMap<EPropertyAssignment, Integer>()
 		requirement_numbers = new HashMap<ERequirementAssignment, Integer>()
 		capability_numbers = new HashMap<ECapabilityAssignment, Integer>()
 		parameter_numbers = new HashMap<EObject, Map<String, Integer>>()
+		optimization_numbers = new HashMap<Optimization_Model, Integer>()
 		
 		val filename = getFilename(resource.URI)
 		fsa.generateFile(filename,  compileAADM (resource))
@@ -114,7 +124,7 @@ class AADMGenerator extends AbstractGenerator {
 	«FOR cap:r.allContents.toIterable.filter(ECapabilityAssignment)»
 	«cap.compile»
 	«ENDFOR»
-	
+
 	«FOR f:r.allContents.toIterable.filter(ENodeTemplate)»
 	«f.compile»
 	«ENDFOR»
@@ -158,6 +168,10 @@ class AADMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(ENodeTemplate n) '''
+	«IF n.node.optimization !== null»
+	  «n.node.optimization.compile»
+	«ENDIF»
+	
 	:Template_«template_counter++»
 	  rdf:type exchange:Template ;
 	  «IF n.node.description !== null»
@@ -165,9 +179,12 @@ class AADMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
 	  exchange:type "«n.node.type»" ;
+	  «IF n.node.optimization !== null»
+	  	  exchange:optimization :Optimization_«optimization_numbers.get(n.node.optimization)» ;
+	  «ENDIF»
 	  «IF n.node.properties !== null»
 	  «FOR p:n.node.properties.properties»
-	  exchange:properties :Property_«property_numbers.get(p)» ; 
+	  exchange:properties :Property_«property_numbers.get(p)» ;
 	  «ENDFOR»
 	  «ENDIF»
 	  «IF n.node.requirements !== null»
@@ -181,6 +198,15 @@ class AADMGenerator extends AbstractGenerator {
 	  «ENDFOR»
 	  «ENDIF»
 	.  
+	'''
+	
+	def compile (Optimization_Model m) '''
+	«optimization_numbers.put(m, optimization_counter)»
+	:Optimization_«optimization_counter++»
+	  rdf:type exchange:Optimization ;
+	  exchange:name "«m.name»" ;
+	  exchange:value '«readOptimization(m)»' ;
+	.
 	'''
 	
 	def compile (EPropertyAssignment p) '''
@@ -251,4 +277,42 @@ class AADMGenerator extends AbstractGenerator {
 	def String getName(Resource resource){
 		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.'))
 	}
+	
+	def readOptimization(Optimization_Model m){
+		//Get model path name
+		//Read serialized model
+		var IFile file = getResourceFile(m.eResource)
+		var String path = file.project.rawLocation.toOSString + "/src-gen/" + file.name + ".json"
+		return readFileAsString(path)
+	}
+	
+	def readFileAsString(String path){
+		var String content = new String(Files.readAllBytes(Paths.get(path)));
+		return content.replaceAll("[\\t\\n\\r]+"," ")
+	}
+	
+	def getResourcePath(Resource r){
+		var String path
+		if (r.URI.isPlatform) {
+			path = ResourcesPlugin.workspace.root.getFile(
+				new Path(r.URI.toPlatformString(true))
+			).rawLocation.toOSString	
+		}            	
+		else {
+			path = r.resourceSet.URIConverter.normalize(r.URI).toFileString
+		}
+		return path
+	}
+	
+	def getResourceFile(Resource r){
+		var IFile path
+		if (r.URI.isPlatform) {
+			path = ResourcesPlugin.workspace.root.getFile(
+				new Path(r.URI.toPlatformString(true))
+			)	
+		}            	
+		return path
+	}
+	
+	
 }

@@ -5,6 +5,8 @@ package org.sodalite.dsl.optimization.generator;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -13,6 +15,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
 import org.sodalite.dsl.optimization.optimization.EAITrainingCases;
@@ -133,8 +136,8 @@ public class OptimizationGenerator extends AbstractGenerator {
         _builder.append("\t\t");
         _builder.append("\t");
         _builder.append("\"input\": \"");
-        String _input = m.getOptimization().getAutotuning().getInput();
-        _builder.append(_input, "\t\t\t");
+        String _readFileAsString = this.readFileAsString(m.getOptimization().getAutotuning().getInput());
+        _builder.append(_readFileAsString, "\t\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
@@ -145,7 +148,7 @@ public class OptimizationGenerator extends AbstractGenerator {
     {
       if (((m.getOptimization().getApp_optimization() != null) && (m.getOptimization().getApp_optimization() instanceof EAITrainingCase))) {
         _builder.append("\t\t");
-        _builder.append("\"ai_training\": {");
+        _builder.append("\"app_type-ai_training\": {");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -377,7 +380,7 @@ public class OptimizationGenerator extends AbstractGenerator {
             (((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() instanceof EKerasCase))) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"keras\": { ");
+            _builder.append(",\"ai_framework-keras\": { ");
             this.disableComma();
             _builder.newLineIfNotEmpty();
             {
@@ -438,7 +441,7 @@ public class OptimizationGenerator extends AbstractGenerator {
             (((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() instanceof ETensorFlowCase))) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"tensorflow\": { ");
+            _builder.append(",\"ai_framework-tensorflow\": { ");
             this.disableComma();
             _builder.newLineIfNotEmpty();
             {
@@ -490,7 +493,7 @@ public class OptimizationGenerator extends AbstractGenerator {
             (((EAITrainingCase) m.getOptimization().getApp_optimization()).getAi_training().getAitrainingcase() instanceof EPyTorchCase))) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"pytorch\": { ");
+            _builder.append(",\"ai_framework-pytorch\": { ");
             this.disableComma();
             _builder.newLineIfNotEmpty();
             {
@@ -545,7 +548,7 @@ public class OptimizationGenerator extends AbstractGenerator {
     {
       if (((m.getOptimization().getApp_optimization() != null) && (m.getOptimization().getApp_optimization() instanceof EHPCCase))) {
         _builder.append("\t\t");
-        _builder.append("\"hpc\": { ");
+        _builder.append("\"app_type-hpc\": { ");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -731,7 +734,7 @@ public class OptimizationGenerator extends AbstractGenerator {
           if (_tripleNotEquals_9) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"mpi\": {");
+            _builder.append(",\"parallelisation-mpi\": {");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
@@ -817,7 +820,7 @@ public class OptimizationGenerator extends AbstractGenerator {
           if (_tripleNotEquals_13) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"openmp\": {");
+            _builder.append(",\"parallelisation-openmp\": {");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
@@ -871,7 +874,7 @@ public class OptimizationGenerator extends AbstractGenerator {
           if (_tripleNotEquals_16) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"openacc\": {");
+            _builder.append(",\"parallelisation-openacc\": {");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
@@ -926,7 +929,7 @@ public class OptimizationGenerator extends AbstractGenerator {
           if (_tripleNotEquals_18) {
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append(",\"opencl\": {");
+            _builder.append(",\"parallelisation-opencl\": {");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
@@ -985,6 +988,16 @@ public class OptimizationGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder;
+  }
+  
+  public String readFileAsString(final String path) {
+    try {
+      byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
+      String content = new String(_readAllBytes);
+      return content.replaceAll("[\\t\\n\\r]+", " ");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public void disableComma() {
