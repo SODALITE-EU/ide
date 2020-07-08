@@ -15,6 +15,7 @@ import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.SortedSet;
@@ -417,14 +418,16 @@ public class BackendProxy {
 
 		if (saveReport.hasSuggestions()) {
 			for (KBSuggestion suggestion : saveReport.getSuggestions()) {
-				String message = MessageFormat.format(
-					"The following nodes can satisfy the requirement {0}: {1}", 
-					getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
-				String path = createPath(suggestion.getHierarchyPath());
-				String pathType = getPathType(suggestion.getHierarchyPath());
-				String code = "KB Suggestion";
-				Object data = suggestion.getSuggestions();
-				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
+				String dependency = getDependency(suggestion.getHierarchyPath());
+				for (String node : getSuggestedNodes(suggestion.getSuggestions())) {
+					String message = MessageFormat.format(
+						"Requirement {0} can be satisfied by node {1}", dependency, node);
+					String path = createPath(suggestion.getHierarchyPath());
+					String pathType = getPathType(suggestion.getHierarchyPath());
+					String code = ValidationIssue.REQUIREMENT;
+					Object data = new HashMap<String, String>() {{put(dependency, node);}};
+					issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
+				}
 			}
 		}
 
@@ -449,7 +452,7 @@ public class BackendProxy {
 
 	private String getPathType(List<String> entityHierarchy) {
 		if (entityHierarchy.contains("requirements")) {
-			return "requirements";
+			return ValidationIssue.REQUIREMENT;
 		} else {
 			return "";
 		}
@@ -602,7 +605,7 @@ public class BackendProxy {
 														AADMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
 											}
 										}
-									}else if ("requirements".equals(path_type)) {
+									}else if (ValidationIssue.REQUIREMENT.equals(path_type)) {
 										boolean req_found = false;
 										if (node.getNode().getRequirements()!=null) {
 											for (ERequirementAssignment req: node.getNode().getRequirements().getRequirements()) {

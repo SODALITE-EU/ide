@@ -13,6 +13,15 @@ import org.sodalite.dsl.rM.ELIST
 import org.sodalite.dsl.aADM.AADMFactory
 import org.sodalite.dsl.rM.RMFactory
 import org.sodalite.dsl.ui.validation.ValidationIssue
+import java.text.MessageFormat
+import java.util.HashMap
+import java.util.Map
+import java.util.regex.Pattern
+import java.util.regex.Matcher
+import org.sodalite.dsl.aADM.ERequirementAssignment
+import org.sodalite.dsl.aADM.AADM_Model
+import org.eclipse.emf.common.util.EList
+import org.sodalite.dsl.aADM.impl.ENodeTemplatesImpl
 
 /**
  * Custom quickfixes.
@@ -31,32 +40,84 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 //		]
 //	}
 
-	@Fix(ValidationIssue.OPTIMIZATION)
-	def fixNodeTypeName(Issue issue, IssueResolutionAcceptor acceptor) {
-			val message = 'Apply recommended optimizations';
-			val sub_message = issue.data.toString
+//	@Fix(ValidationIssue.OPTIMIZATION)
+//	def fixNodeTypeName(Issue issue, IssueResolutionAcceptor acceptor) {
+//			val message = 'Apply recommended optimizations';
+//			val sub_message = issue.data.toString
+//			acceptor.accept(issue, message, sub_message, '') [ nodeTemplate, context |
+//				//Get optimization property. If not created.
+//				//IF found, delete existing optimizations
+//				//Add new optimizations
+//				var EPropertyAssignment opt = null
+//				var node = nodeTemplate as ENodeTemplate
+//				for (EPropertyAssignment prop:node.node.properties.properties){
+//					if (prop.name.equalsIgnoreCase("optimization")){
+//						opt = prop;
+//					}
+//				}
+//				if (opt == null){
+//					//Create a EPropertyAssignment with name optimization
+//					opt = AADMFactory.eINSTANCE.createEPropertyAssignment
+//					opt.name = "optimization"
+//					opt.value = RMFactory.eINSTANCE.createELIST
+//					node.node.properties.properties.add(opt)
+//				}else{
+//					(opt.value as ELIST).list.clear
+//				}
+//				//Add list of optimizations
+//				(opt.value as ELIST).list.addAll(issue.data)
+//			]
+//	}
+	
+	@Fix(ValidationIssue.REQUIREMENT)
+	def fixRequirement(Issue issue, IssueResolutionAcceptor acceptor) {
+			val String data = (issue.data as String[]).get(0)
+			val String targetRequirement = getSubstring(data, "\\{(.*?)=")
+			val String targetNode = getSubstring(data, "=(.*?)\\}")
+			
+			val message = MessageFormat.format('Create requirement "{0}" with node "{1}"',
+				targetRequirement, targetNode);
+			val sub_message = message
 			acceptor.accept(issue, message, sub_message, '') [ nodeTemplate, context |
-				//Get optimization property. If not created.
-				//IF found, delete existing optimizations
-				//Add new optimizations
-				var EPropertyAssignment opt = null
+				//Get requirement. If not created.
+				//Add/replace node
+				var ERequirementAssignment req = null
 				var node = nodeTemplate as ENodeTemplate
-				for (EPropertyAssignment prop:node.node.properties.properties){
-					if (prop.name.equalsIgnoreCase("optimization")){
-						opt = prop;
+				if (node.node.requirements == null){
+					val requirements = AADMFactory.eINSTANCE.createERequirementAssignments
+					node.node.requirements = requirements
+				}
+				for (ERequirementAssignment requirement:node.node.requirements.requirements){
+					if (req.name.equalsIgnoreCase(targetRequirement)){
+						req = requirement;
 					}
 				}
-				if (opt == null){
-					//Create a EPropertyAssignment with name optimization
-					opt = AADMFactory.eINSTANCE.createEPropertyAssignment
-					opt.name = "optimization"
-					opt.value = RMFactory.eINSTANCE.createELIST
-					node.node.properties.properties.add(opt)
-				}else{
-					(opt.value as ELIST).list.clear
+				if (req == null){
+					//Create a ERequirementAssignment
+					req = AADMFactory.eINSTANCE.createERequirementAssignment
+					req.name = targetRequirement
+					node.node.requirements.requirements.add(req)
 				}
-				//Add list of optimizations
-				(opt.value as ELIST).list.addAll(issue.data)
+				val ENodeTemplatesImpl model = nodeTemplate.eContainer as ENodeTemplatesImpl
+				req.node = getNode(model, targetNode)
 			]
 	}
+	
+	def getNode(ENodeTemplatesImpl templates, String name){
+		var ENodeTemplate node = null
+		for (ENodeTemplate n: templates.nodeTemplates){
+			if (n.name.equals(name)){
+				node = n
+			}
+		}
+		return node
+	}
+	
+	def getSubstring(String data, String sPattern){
+		val Pattern pattern = Pattern.compile(sPattern);
+		val Matcher matcher = pattern.matcher(data);
+		if (matcher.find())
+			return matcher.group(1);
+	}
+	
 }
