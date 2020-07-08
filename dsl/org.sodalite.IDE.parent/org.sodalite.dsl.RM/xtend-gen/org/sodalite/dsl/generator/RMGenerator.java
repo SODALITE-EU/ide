@@ -4,6 +4,8 @@
 package org.sodalite.dsl.generator;
 
 import com.google.common.collect.Iterables;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +17,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributes;
@@ -731,7 +734,8 @@ public class RMGenerator extends AbstractGenerator {
       EImplementation _implementation = o.getOperation().getImplementation();
       boolean _tripleNotEquals_1 = (_implementation != null);
       if (_tripleNotEquals_1) {
-        this.putParameterNumber(o, "implementation", Integer.valueOf(this.parameter_counter));
+        _builder.newLine();
+        this.putParameterNumber(o, "primary.path", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
         int _plusPlus_1 = this.parameter_counter++;
@@ -741,7 +745,7 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("rdf:type exchange:Parameter ;");
         _builder.newLine();
         _builder.append("  ");
-        _builder.append("exchange:name \"implementation\" ;");
+        _builder.append("exchange:name \"primary.path\" ;");
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
@@ -751,14 +755,64 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(o, "primary.content", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_2 = this.parameter_counter++;
+        _builder.append(_plusPlus_2);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"primary.content\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _readFileAsString = this.readFileAsString(o.getOperation().getImplementation().getPrimary());
+        _builder.append(_readFileAsString, "  ");
+        _builder.append("\' ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(o, "implementation", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_3 = this.parameter_counter++;
+        _builder.append(_plusPlus_3);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"implementation\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_1 = this.getParameterNumber(o, "primary.path");
+        _builder.append(_parameterNumber_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_2 = this.getParameterNumber(o, "primary.content");
+        _builder.append(_parameterNumber_2, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.newLine();
       }
     }
     _builder.newLine();
     this.putParameterNumber(o, "name", Integer.valueOf(this.parameter_counter));
     _builder.newLineIfNotEmpty();
     _builder.append(":Parameter_");
-    int _plusPlus_2 = this.parameter_counter++;
-    _builder.append(_plusPlus_2);
+    int _plusPlus_4 = this.parameter_counter++;
+    _builder.append(_plusPlus_4);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("rdf:type exchange:Parameter ;");
@@ -775,8 +829,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_2) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_1 = this.getParameterNumber(o, "inputs");
-        _builder.append(_parameterNumber_1, "  ");
+        Integer _parameterNumber_3 = this.getParameterNumber(o, "inputs");
+        _builder.append(_parameterNumber_3, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -787,8 +841,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_2 = this.getParameterNumber(o, "implementation");
-        _builder.append(_parameterNumber_2, "  ");
+        Integer _parameterNumber_4 = this.getParameterNumber(o, "implementation");
+        _builder.append(_parameterNumber_4, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -1820,5 +1874,15 @@ public class RMGenerator extends AbstractGenerator {
   
   public String getName(final Resource resource) {
     return resource.getURI().lastSegment().substring(0, resource.getURI().lastSegment().lastIndexOf("."));
+  }
+  
+  public String readFileAsString(final String path) {
+    try {
+      byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
+      String content = new String(_readAllBytes);
+      return content.replaceAll("[\\n\\r]+", "\\\\n");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

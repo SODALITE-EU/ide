@@ -30,6 +30,8 @@ import org.sodalite.dsl.rM.EDataType
 import org.sodalite.dsl.rM.EConstraint
 import org.sodalite.dsl.rM.EValid_Values
 import org.sodalite.dsl.rM.EMinLength
+import java.nio.file.Files
+import java.nio.file.Paths
 
 /**
  * Generates code from your model files on save.
@@ -295,12 +297,30 @@ class RMGenerator extends AbstractGenerator {
 	«ENDIF»		
 	
 	«IF o.operation.implementation !== null»
+	
+	«putParameterNumber(o, "primary.path", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "primary.path" ;
+	  exchange:value '«o.operation.implementation.primary»' ;
+	.
+	
+	«putParameterNumber(o, "primary.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "primary.content" ;
+	  exchange:value '«readFileAsString(o.operation.implementation.primary)»' ;
+	.
+	
 	«putParameterNumber(o, "implementation", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "implementation" ;
-	  exchange:value '«o.operation.implementation.primary»' ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.path")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.content")» ;
 	.
+	
+	
 	«ENDIF»		
 	
 	«putParameterNumber(o, "name", parameter_counter)»
@@ -647,5 +667,10 @@ class RMGenerator extends AbstractGenerator {
 		
 	def String getName(Resource resource){
 		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.'))
+	}
+	
+	def readFileAsString(String path){
+		var String content = new String(Files.readAllBytes(Paths.get(path)));
+		return content.replaceAll("[\\n\\r]+","\\\\n")
 	}
 }
