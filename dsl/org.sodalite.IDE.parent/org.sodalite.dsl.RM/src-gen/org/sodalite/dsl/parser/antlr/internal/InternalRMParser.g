@@ -3922,7 +3922,7 @@ ruleEImplementation returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEImplementationRule());
 										}
-										add(
+										set(
 											$current,
 											"dependencies",
 											lv_dependencies_6_0,

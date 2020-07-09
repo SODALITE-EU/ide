@@ -3623,7 +3623,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eImplementationEClass, EImplementation.class, "EImplementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEImplementation_Primary(), ecorePackage.getEString(), "primary", null, 0, 1, EImplementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEImplementation_Dependencies(), this.getEDependencies(), null, "dependencies", null, 0, -1, EImplementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEImplementation_Dependencies(), this.getEDependencies(), null, "dependencies", null, 0, 1, EImplementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDependenciesEClass, EDependencies.class, "EDependencies", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEDependencies_Deps(), ecorePackage.getEString(), "deps", null, 0, -1, EDependencies.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

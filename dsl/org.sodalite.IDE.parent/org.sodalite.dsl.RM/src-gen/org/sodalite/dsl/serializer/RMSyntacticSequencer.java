@@ -206,8 +206,8 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) 'implementation:' primary=STRING
 	 *     (rule start) (ambiguity) (rule start)
-	 *     dependencies+=EDependencies ']' END (ambiguity) 'implementation:' primary=STRING
-	 *     dependencies+=EDependencies ']' END (ambiguity) (rule end)
+	 *     dependencies=EDependencies ']' END (ambiguity) 'implementation:' primary=STRING
+	 *     dependencies=EDependencies ']' END (ambiguity) (rule end)
 	 *     primary=STRING (ambiguity) 'implementation:' primary=STRING
 	 *     primary=STRING (ambiguity) (rule end)
 	 */
@@ -231,8 +231,8 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (']' END BEGIN 'dependencies:' '[')*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) BEGIN 'dependencies:' '[' (ambiguity) dependencies+=EDependencies
-	 *     primary=STRING BEGIN 'dependencies:' '[' (ambiguity) dependencies+=EDependencies
+	 *     (rule start) BEGIN 'dependencies:' '[' (ambiguity) dependencies=EDependencies
+	 *     primary=STRING BEGIN 'dependencies:' '[' (ambiguity) dependencies=EDependencies
 	 */
 	protected void emit_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -243,7 +243,7 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (']' END BEGIN 'dependencies:' '[')+
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     dependencies+=EDependencies (ambiguity) dependencies+=EDependencies
+	 *     dependencies=EDependencies (ambiguity) dependencies=EDependencies
 	 */
 	protected void emit_EImplementation___RightSquareBracketKeyword_1_4_ENDTerminalRuleCall_1_5_BEGINTerminalRuleCall_1_0_DependenciesKeyword_1_1_LeftSquareBracketKeyword_1_2__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

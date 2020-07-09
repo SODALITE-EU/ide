@@ -52,7 +52,7 @@ class RMGenerator extends AbstractGenerator {
 	var Map<ERequirementDefinition, Integer> requirement_numbers
 	var Map<ECapabilityDefinition, Integer> capability_numbers
 	var Map<EInterfaceDefinition, Integer> interface_numbers
-	var Map<EObject, Map<String,Integer>> parameter_numbers
+	var Map<Object, Map<String,Integer>> parameter_numbers
 	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		data_type_counter = 1
@@ -67,7 +67,7 @@ class RMGenerator extends AbstractGenerator {
 		attribute_numbers = new HashMap<EAttributeDefinition, Integer>()
 		requirement_numbers = new HashMap<ERequirementDefinition, Integer>()
 		capability_numbers = new HashMap<ECapabilityDefinition, Integer>()
-		parameter_numbers = new HashMap<EObject, Map<String, Integer>>()
+		parameter_numbers = new HashMap<Object, Map<String, Integer>>()
 		interface_numbers = new HashMap<EInterfaceDefinition, Integer>()
 		
 		val filename = getFilename(resource.URI)
@@ -301,25 +301,66 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(o, "primary.path", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "primary.path" ;
+	  exchange:name "path" ;
 	  exchange:value '«o.operation.implementation.primary»' ;
 	.
 	
 	«putParameterNumber(o, "primary.content", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "primary.content" ;
+	  exchange:name "content" ;
 	  exchange:value '«readFileAsString(o.operation.implementation.primary)»' ;
+	.
+	
+	«putParameterNumber(o, "primary", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "primary" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.path")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.content")» ;
+	.
+	
+	«FOR d:o.operation.implementation.dependencies.deps»
+	
+	«putParameterNumber(d, "file.path", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "path" ;
+	  exchange:value '«d»' ; 
+	 .
+	
+	«putParameterNumber(d, "file.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "content" ;
+	  exchange:value '«readFileAsString(d)»' ;
+	.
+
+	«putParameterNumber(d, "file", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "file" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file.path")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file.content")» ;
+	.
+	«ENDFOR»
+	
+	«putParameterNumber(o, "dependencies", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "dependencies" ;
+	  «FOR d:o.operation.implementation.dependencies.deps»
+	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file")» ; 
+	  «ENDFOR»
 	.
 	
 	«putParameterNumber(o, "implementation", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "implementation" ;
-	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.path")» ;
-	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.content")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "dependencies")» ;
 	.
-	
 	
 	«ENDIF»		
 	
@@ -646,14 +687,14 @@ class RMGenerator extends AbstractGenerator {
 	
 	def compile (EValueExpression ve) '''«(ve as ESTRING).string»'''
 	
-	def void putParameterNumber (EObject entity, String parameterName, Integer number){
+	def void putParameterNumber (Object entity, String parameterName, Integer number){
 		if (parameter_numbers.get(entity) === null){
 			parameter_numbers.put(entity, new HashMap<String, Integer>())
 		}
 		parameter_numbers.get(entity).put(parameterName, number)
 	}
 	
-	def Integer getParameterNumber (EObject entity, String parameterName){
+	def Integer getParameterNumber (Object entity, String parameterName){
 		if (parameter_numbers.get(entity) === null)
 			return null;
 		return parameter_numbers.get(entity).get(parameterName)
