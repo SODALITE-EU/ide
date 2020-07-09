@@ -1,0 +1,40 @@
+node_types:
+	sodalite.nodes.PrometheusConfiguration:        
+		derived_from: tosca.nodes.SoftwareComponent
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:      
+						inputs:
+							public_address: 
+								default: get_attribute:
+									entity: SELF
+									attribute: tosca.nodes.Compute.public_address
+									req_cap: tosca.nodes.SoftwareComponent.host
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/configure_prometheus.yml"
+							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/prometheus.yml.tmpl"]
+							
+	sodalite.nodes.PrometheusDockerizedComponent:  
+		derived_from: sodalite.nodes.DockerizedComponent
+		requirements:  
+			configuration:
+				capability: tosca.capabilities.Node
+				node: sodalite.nodes.PrometheusConfiguration    
+				relationship: tosca.relationships.DependsOn
+				
+relationship_types:
+	sodalite.relationships.PrometheusHosting:
+		derived_from: tosca.relationships.HostedOn
+		interfaces:
+			Configure:
+				type: tosca.interfaces.relationship.Configure
+				operations:
+					pre_configure_target:  
+						inputs:  
+							public_address: 
+								default: get_attribute:
+									entity: TARGET
+									attribute: tosca.nodes.Compute.public_address
+						implementation: "playbooks/configure_prometheus.yml"
+							dependencies: ["playbooks/prometheus.yml.tmpl"]
