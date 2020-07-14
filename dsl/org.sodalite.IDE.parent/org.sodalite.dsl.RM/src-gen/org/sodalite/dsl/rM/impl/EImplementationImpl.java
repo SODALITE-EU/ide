@@ -111,10 +111,7 @@ public class EImplementationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-
-  @Override
   public EDependencies getDependencies()
-
   {
     return dependencies;
   }
@@ -141,7 +138,6 @@ public class EImplementationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDependencies(EDependencies newDependencies)
   {
     if (newDependencies != dependencies)
