@@ -19,7 +19,7 @@ In the former dialog, in the *Work with* combo box, select the *SODALITE IDE* en
 
 Follow the following procedure to download the SODALITE IDE, build and install it into your Eclipse installation:
 
-1. Clone SODALITE IDE repository from GitHub: `git clone https://github.com/SODALITE-EU/ide.git` . This will create a local folder, hereafter referenced as *$IDE_REPO*
+1. Clone SODALITE IDE repository from GitHub: `git clone https://github.com/SODALITE-EU/ide.git`. This will create a local folder, hereafter referenced as *$IDE_REPO*
 2. Open a CLI and go to *$IDE_REPO/dsl/org.sodalite.IDE.parent* folder. Build the SODALITE IDE Eclipse repository (i.e. update site) using Maven, with this command: `mvn clean verify`
 3. Once complete, open the Eclipse Modeling Tools instance.
 4. Select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and click on the *Local* button. Navigate to the path *$IDE_REPO/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository/*. Then, click on *Add* button. 

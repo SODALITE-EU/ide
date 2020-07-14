@@ -1,0 +1,478 @@
+inputs:
+	docker-registry-ip:  
+		type: string 
+	ssh-key-name:  
+		type: string 
+	image-name:  
+		type: string 
+	openstack-network-name:  
+		type: string 
+	security-groups:  
+		type: string    
+	flavor-name:  
+		type: string                   
+	docker-network: 
+		type: string
+	dockerhub-user:
+		type: string
+		default: ""      
+	dockerhub-pass: 
+		type: string
+		default: "" 
+	docker-registry-url: 
+		type: string
+		default: ""
+	docker-registry-cert-country-name:
+		type: string
+		default: ""
+	docker-registry-cert-organization-name: 
+		type: string
+		default: ""
+	docker-registry-cert-email-address: 
+		type: string
+		default: ""
+		
+node_templates:
+	vehicle-iot-vm:  
+		type: sodalite.nodes.OpenStack.VM 
+		properties:  
+			name:  "vehicle-iot-demo"
+			key_name: get_input: ssh-key-name  
+			image: get_input: image-name 
+			network: get_input: openstack-network-name
+			security_groups: get_input: security-groups
+			flavor: get_input: flavor-name
+
+	docker-host:
+		type: sodalite.nodes.DockerHost
+		requirements:
+			host: 
+				node: vehicle-iot-vm
+				
+	docker-registry-certificate:
+		type: sodalite.nodes.RegistryCertificate
+		properties:  
+			registry_ip: get_input: docker-registry-ip 
+			country_name: get_input: docker-registry-cert-country-name
+			organization_name: get_input: docker-registry-cert-organization-name
+			email_address: get_input: docker-registry-cert-email-address
+		requirements:
+			host: 
+				node: vehicle-iot-vm 
+			dependency: 
+				node: docker-host
+	
+	docker-registry:
+		type: sodalite.nodes.DockerRegistry
+		properties:  
+			docker_registry_url: get_input: docker-registry-url 
+			docker_user:  get_input: dockerhub-user 
+			docker_pass:  get_input: dockerhub-pass 
+		requirements:
+			host: 
+				node: vehicle-iot-vm
+			dependency: 
+				node: docker-host
+				
+	docker-network:
+		type: sodalite.nodes.DockerNetwork
+		properties:  
+			name: get_input: docker-network
+		requirements:
+			host: 
+				node: vehicle-iot-vm 
+			dependency: 
+				node: docker-host
+				
+	consul-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property: 
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network
+			alias: "consul"
+			image_name: "library/consul"
+			hostname: "consul"
+			restart_policy: "always"
+			ports: ["8500:8500"]
+			env: 
+				SERVICE_IGNORE: "ignore"        
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network  
+			registry: 
+				node: docker-registry
+	
+	consul-container-test:
+		type: sodalite.nodes.TestComponent
+		properties:
+			test_port: "8500"
+			test_delay: "5"
+		requirements:
+			host: 
+				node: vehicle-iot-vm  
+			tested_component: 
+				node: consul-container
+	
+	registrator-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name:  get_property: 
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network
+			alias: "registrator"
+			image_name: "adaptant/registrator:latest"
+			command: "-ip {{ public_address }} consul://consul:8500"
+			volumes:["/var/run/docker.sock:/tmp/docker.sock"]
+			sleep: "5"
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+ 				node: docker-network 
+			registry: 
+				node: docker-registry 
+	
+	kafka-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name:  get_property: 
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network
+			alias: "kafka"
+			image_name: "adaptant/kafka-zookeeper"
+			ports: ["9092:9092"]
+			env:
+				ADVERTISED_HOST: "kafka"
+				SERVICE_9092_NAME: "kafka"
+				SERVICE_2181_IGNORE: "ignore"
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network     
+			registry: 
+				node: docker-registry 
+	
+	mysql-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name:  get_property: 
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network         
+			alias: "knowgo-mysql"
+			image_name: "library/mysql:latest"
+			command: "--default-authentication-plugin=mysql_native_password"
+			env:
+				MYSQL_ROOT_PASSWORD: "root"
+				MYSQL_DATABASE: "knowgo"
+				SERVICE_3306_NAME: "knowgo-mysql"
+			volumes:[
+			"./data/db:/var/lib/mysql", 
+			"./conf/db:/docker-entrypoint-initdb.d"]
+			ports: ["3306:3306"]  
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network  
+			registry: 
+				node: docker-registry
+	
+	vin-decoder-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name:  get_property: 
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network         
+			alias: "vin-decoder"
+			image_name: "adaptant/vin-decoder-service:latest"
+			command: "--consul-agent consul:8500"
+			env:
+				SERVICE_IGNORE: "ignore"
+			volumes: ["./data/db:/var/lib/mysql", 
+			"./conf/db:/docker-entrypoint-initdb.d"]
+			ports: ["4040:8080"]  
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network 
+			registry: 
+				node: docker-registry
+	
+	reverse-geocoder-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name:  get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network         
+			alias: "reverse-geocoder"
+			image_name: "adaptant/reverse-geocoding-service:latest"
+			command: "--consul-agent consul:8500"
+			env:
+				SERVICE_IGNORE: "ignore"
+			ports:["4041:4041"] 
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network 
+			registry: 
+				node: docker-registry
+	
+	licenseplate-recognition-service-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name:  get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network         
+			alias: "licenseplate-recognition-service"
+			image_name: "adaptant/licenseplate-recognition-service:latest"
+			command: "--consul-agent consul:8500"
+			env:
+				SERVICE_IGNORE: "ignore"
+			ports: ["8888:8888"] 
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network 
+			registry: 
+				node: docker-registry			
+				
+	knowgo-score-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name:  get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network        
+			alias: "knowgo-score"
+			image_name: "adaptant/knowgo-score:latest"
+			command: "--consul-agent consul:8500"
+			env:
+				SERVICE_IGNORE: "ignore"
+			ports: "5000:5000"  
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network 
+			registry: 
+				node: docker-registry			
+				
+	openpolicyagent-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name:  get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network        
+			alias: "opa"
+			image_name: "openpolicyagent/opa"
+			command: "run --server"
+			env:
+				SERVICE_NAME: "opa"
+			ports: ["8181:8181"]  
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network 
+			registry: 
+				node: docker-registry
+        
+	region-router-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name:  get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network          
+			alias: "region-router"
+			image_name: "adaptant/go-region-router:latest"
+			command: "--consul-agent consul:8500"
+			env:
+				SERVICE_IGNORE: "ignore"
+			ports: "7000:7000"  
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network 
+			registry: 
+				node: docker-registry
+        
+	mqtt-broker-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network         
+			alias: "mqtt-broker"
+			image_name: "library/eclipse-mosquitto:latest"
+			env:
+				SERVICE_NAME: "mqtt-broker"
+			ports:["1883:1883"]
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network  
+			registry: 
+				node: docker-registry 
+        
+	mqtt-broker-container-test:
+		type: sodalite.nodes.TestComponent
+		properties:
+			test_port: "1883"
+			test_delay: "5"
+		requirements:
+			host: 
+				node: vehicle-iot-vm       
+			tested_component: 
+				node: mqtt-broker-container   
+				
+	knowgo-service-registry-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network         
+			alias: "knowgo-service-registry"
+			image_name: "adaptant/knowgo-service-registry:latest"
+			command: "--consul-agent consul:8500"
+			env:
+				SERVICE_IGNORE: "ignore"
+			ports: ["3000:3000"] 
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network 
+			registry: 
+				node: docker-registry			
+	
+	knowgo-service-registry-container-test:
+		type: sodalite.nodes.TestComponent
+		properties:
+			test_port: "3000"
+			test_delay: "5"
+		requirements:
+			host: 
+				node: vehicle-iot-vm 
+			tested_component: 
+				node: knowgo-service-registry-container			
+				
+	knowgo-api-gateway-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network         
+			alias: "knowgo-api-gateway"
+			image_name: "adaptant/knowgo-api-gateway:latest"
+			command: "run --server"
+			env:
+				KNOWGO_APIGW_DBNAME: "knowgo"
+				KNOWGO_APIGW_DBSERVER: "knowgo-mysql"
+				KNOWGO_APIGW_DBUSER: "root"
+				KNOWGO_APIGW_DBPASS: "root"
+				SERVICE_IGNORE: "ignore"     
+			ports:["8080:8080","8081:8081"]
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network
+			registry: 
+				node: docker-registry
+	
+	knowgo-api-gateway-container-test:
+		type: sodalite.nodes.TestComponent
+		properties:
+			test_port: "8081"
+			test_delay: "5"
+		requirements:
+			host: 
+				node: vehicle-iot-vm
+			tested_component: 
+				node: knowgo-api-gateway-container			
+				
+	prometheus-configuration:
+		type: sodalite.nodes.PrometheusConfiguration     
+		requirements:
+			host: 
+				node: vehicle-iot-vm
+				
+	prometheus-container:
+		type: sodalite.nodes.PrometheusDockerizedComponent
+		properties:
+			docker_network_name: get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network        
+			alias: "prometheus"
+			image_name: "prom/prometheus:latest"
+			volumes:["{{ lookup('env','HOME') }}/.knowgo/conf/prometheus:/etc/prometheus"]
+			env:
+				SERVICE_NAME: "prometheus"
+			ports:["9091:9090"]
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network 
+			configuration: 
+				node: prometheus-configuration
+			registry: 
+				node: docker-registry
+	
+	prometheus-container-test:
+		type: sodalite.nodes.TestComponent
+		properties:
+			test_port: "9091"
+			test_delay: "5"
+		requirements:
+			host: 
+				node: vehicle-iot-vm
+			tested_component: 
+				node: prometheus-container
+	
+	grafana-container:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property:
+				entity: SELF
+				property: sodalite.nodes.DockerNetwork.name
+				req_cap: sodalite.nodes.DockerNetwork.network          
+			alias: "grafana"
+			image_name: "grafana/grafana:latest"
+			env:
+				GF_SECURITY_ADMIN_PASSWORD: "knowgo"
+				SERVICE_NAME: "grafana"
+			ports:["3001:3000"]
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network 
+			registry: 
+				node: docker-registry			
+				
+				
+	
+	

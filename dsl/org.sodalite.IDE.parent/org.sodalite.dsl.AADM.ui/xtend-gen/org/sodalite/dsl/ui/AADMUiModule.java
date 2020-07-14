@@ -13,7 +13,7 @@ import org.sodalite.dsl.ui.AbstractAADMUiModule;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class AADMUiModule extends AbstractAADMUiModule {
-  public AADMUiModule(final AbstractUIPlugin plugin) {
-    super(plugin);
+  public AADMUiModule(final AbstractUIPlugin arg0) {
+    super(arg0);
   }
 }
