@@ -6,7 +6,7 @@ relationship_types:
 				type: tosca.interfaces.relationship.Configure
 				operations:
 					add_source:
-						implementation: "playbooks/torque-job/test.yml"
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/clinical-uc/hpc-clinical-uc/playbooks/torque-job/test.yml"
 					
 node_types:
 	my.nodes.hpc.wm.torque:
@@ -153,13 +153,13 @@ node_types:
                   
 				operations:
 					create:
-						implementation: "playbooks/torque-job/create.yml"
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/clinical-uc/hpc-clinical-uc/playbooks/torque-job/create.yml"
                       
 					configure:
-						implementation: "playbooks/torque-job/configure.yml"
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/clinical-uc/hpc-clinical-uc/playbooks/torque-job/configure.yml"
                       
 					start:
-						implementation: "playbooks/torque-job/start.yml"
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/clinical-uc/hpc-clinical-uc/playbooks/torque-job/start.yml"
           
 		requirements:
           	host:

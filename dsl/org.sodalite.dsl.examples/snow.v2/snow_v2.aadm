@@ -136,7 +136,7 @@ node_templates:
 				
 	snow-docker-network:
 		type: sodalite.nodes.DockerNetwork
-		properties:  
+		properties: 
 			name: get_input: docker-network
 		requirements:
 			host: 
@@ -167,8 +167,7 @@ node_templates:
 		requirements:
 			host: 
 				node: snow-vm
-				
-	snow-mysql:  
+	snow-mysql:
 		type: sodalite.nodes.DockerizedComponent 
 		properties:  
 			docker_network_name: get_property:
@@ -182,7 +181,8 @@ node_templates:
 			alias: "mysql"
 			env:
 				MYSQL_ROOT_PASSWORD: "#set password here"
-				MYSQL_DATABASE: "wc_crawler_db" 
+				MYSQL_DATABASE: "wc_crawler_db"
+			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
 				node: snow-docker-host 
@@ -206,6 +206,7 @@ node_templates:
 			image_name:  "snow-webcam-crawler:latest" 
 			alias: "snow-webcam-crawler"
 			command: "34,40,50,62,608,666,822,852,943,1307,6666"
+			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
 				node: snow-docker-host 
@@ -238,7 +239,7 @@ node_templates:
 			command: [
 			"{{ ansible_date_time.date }}", 
 			"34 40 50 62 608 666 822 852 943 1307 6666"]  
-				
+			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
 				node: snow-docker-host
@@ -274,7 +275,7 @@ node_templates:
 			command: [
 			"{{ ansible_date_time.date }}", 
 			"34 40 50 62 608 666 822 852 943 1307 6666"]
-				
+			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
 				node: snow-docker-host
@@ -298,7 +299,8 @@ node_templates:
 			volumes:  "/tmp/docker:/tmp" 
 			image_name:  "snow-skyline-extractor:latest"
 			ports:  ['8080:8080'] 
-			exposed_ports:  ['8080'] 
+			exposed_ports:  ['8080']
+			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
 				node: snow-docker-host-2 
@@ -313,6 +315,7 @@ node_templates:
 			image_name:  "snow-skyline-alignment:latest"
 			exposed_ports:  ['8080'] 
 			ports:  ["8081:8080","80:8080"]
+			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
 				node: snow-docker-host-2 
@@ -337,7 +340,8 @@ node_templates:
 			image_name:  "snow-webcam-mockup:latest"
 			alias: "snow-webcam-mockup"
 			ports:  ['8080:8080'] 
-			exposed_ports:  ['8080'] 
+			exposed_ports:  ['8080']
+			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
 				node: snow-docker-host 
@@ -361,6 +365,7 @@ node_templates:
 			alias: "snow-demo"
 			restart_policy: "always"
 			command: "{{ ansible_date_time.date }}"
+			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
 				node: snow-docker-host
@@ -387,6 +392,7 @@ node_templates:
 			restart_policy: "always"
 			ports: ['80:80'] 
 			exposed_ports: ['80']
+			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
 				node: snow-docker-host

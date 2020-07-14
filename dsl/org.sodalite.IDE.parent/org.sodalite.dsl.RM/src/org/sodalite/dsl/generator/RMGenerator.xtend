@@ -239,7 +239,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Capability ;
 	  exchange:name "«c.name»" ;
 	  «IF c.capability.description !== null»
-	  exchange:description '«c.capability.description»' ;
+	  exchange:description '«processDescription(c.capability.description)»' ;
 	  «ENDIF»
 	  «IF c.capability.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(c, "type")» ;
@@ -297,7 +297,6 @@ class RMGenerator extends AbstractGenerator {
 	«ENDIF»		
 	
 	«IF o.operation.implementation !== null»
-	
 	«putParameterNumber(o, "primary.path", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
@@ -320,6 +319,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.content")» ;
 	.
 	
+	«IF o.operation.implementation.dependencies !== null»
 	«FOR d:o.operation.implementation.dependencies.deps»
 	
 	«putParameterNumber(d, "file.path", parameter_counter)»
@@ -353,15 +353,17 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file")» ; 
 	  «ENDFOR»
 	.
+	«ENDIF»
 	
 	«putParameterNumber(o, "implementation", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "implementation" ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary")» ;
+	 «IF o.operation.implementation.dependencies !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "dependencies")» ;
+	 «ENDIF»
 	.
-	
 	«ENDIF»		
 	
 	«putParameterNumber(o, "name", parameter_counter)»
@@ -444,7 +446,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:hasParameter value«p.property.req_cap.name» ; 
+	  exchange:value '«p.property.req_cap.name»' ; 
 	.
 	«ENDIF»		
 	
@@ -512,7 +514,7 @@ class RMGenerator extends AbstractGenerator {
 	:Node_«node_counter++»
 	  rdf:type exchange:Node ;
 	  «IF n.node.description !== null»
-	  exchange:description '«n.node.description»' ;
+	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
 	  exchange:derivesFrom "«n.node.superType.name»" ;
@@ -552,7 +554,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:derivesFrom "«d.data.superType.name»" ;
 	  «ENDIF»
 	  «IF d.data.description !== null»
-	  exchange:description '«d.data.description»' ;
+	  exchange:description '«processDescription(d.data.description)»' ;
 	  «ENDIF»
 	  «IF d.data.properties !== null»
 	  «FOR p:d.data.properties.properties»
@@ -629,7 +631,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Property ;
 	  exchange:name "«p.name»" ;
 	  «IF p.property.description !== null»
-	  exchange:description '«p.property.description»' ;
+	  exchange:description '«processDescription(p.property.description)»' ;
 	  «ENDIF»
 	  «IF p.property.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ;
@@ -674,7 +676,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Attribute ;
 	  exchange:name "«a.name»" ;
 	  «IF a.attribute.description !== null»
-	  exchange:description '«a.attribute.description»' ;
+	  exchange:description '«processDescription(a.attribute.description)»' ;
 	  «ENDIF»
 	  «IF a.attribute.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "type")» ;
@@ -712,6 +714,10 @@ class RMGenerator extends AbstractGenerator {
 	
 	def readFileAsString(String path){
 		var String content = new String(Files.readAllBytes(Paths.get(path)));
-		return content.replaceAll("[\\n\\r]+","\\\\n")
+		return content.replace("\'", "\\\'").replaceAll("[\\n\\r]+","\\\\n")
+	}
+	
+	def processDescription (String description){
+		return description.replaceAll("[\\n\\r]+","\\\\n")
 	}
 }
