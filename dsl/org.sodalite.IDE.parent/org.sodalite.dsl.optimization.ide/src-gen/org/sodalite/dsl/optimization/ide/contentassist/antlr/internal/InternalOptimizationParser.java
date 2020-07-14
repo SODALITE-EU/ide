@@ -24,110 +24,110 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOptimizationParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Ai_frameworkTensorflow", "ParallelisationOpenacc", "ParallelisationOpencl", "ParallelisationOpenmp", "Reinforncement_learning", "Ai_frameworkPytorch", "App_typeAi_training", "Distributed_training", "Image_classification", "ParallelisationMpi", "Ai_frameworkKeras", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "Message_size", "Ai_inference", "Optimization", "Ai_training", "Autotuning", "Parameters", "Translation", "Opt_build", "Tensorflow", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Cpu_type", "Location", "Prefetch", "Autotune", "Backend", "Big_data", "Imagenet", "Library", "Version", "Config", "Layers", "Openacc", "Pytorch", "Restart", "Cache", "Count", "Cresta", "Input", "Medium", "Mvapch", "Nvidia", "Opencl", "Openmp", "Opnmpi", "Simple", "Tuner", "Block", "Cifar", "Data", "Glow", "Image", "Keras", "Large", "Mnist", "Mxnet", "Power", "Size", "Small", "Type", "Cntk", "Cray", "Etl", "Fpga", "Hpc_1", "Xla", "Amd", "Arm", "Hpc", "Mpi", "Pgi", "X86", "Comma", "FullStop", "Colon", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Ai_frameworkTensorflow", "ParallelisationOpenacc", "ParallelisationOpencl", "ParallelisationOpenmp", "Reinforncement_learning", "Ai_frameworkPytorch", "App_typeAi_training", "Distributed_training", "Image_classification", "ParallelisationMpi", "Ai_frameworkKeras", "Scaling_efficiency", "Core_subscription", "Enable_autotuning", "Number_of_threads", "Enable_opt_build", "Object_detection", "Parallelisation", "Number_of_acc", "Recommendation", "Ai_framework", "App_typeHpc", "Message_size", "Ai_inference", "Optimization", "Ai_training", "Autotuning", "Parameters", "Translation", "Opt_build", "Tensorflow", "Acc_type", "Affinity", "App_type", "Basedata", "Compiler", "Cpu_type", "Location", "Prefetch", "Autotune", "Backend", "Big_data", "Imagenet", "Library", "Version", "Config", "Layers", "Openacc", "Pytorch", "Restart", "Cache", "Count", "Cresta", "Input", "Medium", "Mvapch", "Nvidia", "Opencl", "Openmp", "Opnmpi", "Simple", "Tuner", "Block", "Cifar", "Data", "Glow", "Image", "Keras", "Large", "Mnist", "Mxnet", "Power", "Size", "Small", "Type", "Cntk", "Cray", "Etl", "Fpga", "Xla", "Amd", "Arm", "Hpc", "Mpi", "Pgi", "X86", "Comma", "FullStop", "Colon", "RULE_BEGIN", "RULE_END", "RULE_BOOLEAN", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int Tensorflow=33;
-    public static final int Big_data=44;
-    public static final int Size=75;
-    public static final int Hpc_1=82;
+    public static final int Tensorflow=34;
+    public static final int Big_data=45;
+    public static final int Size=76;
     public static final int Mpi=87;
     public static final int Enable_autotuning=17;
-    public static final int Count=54;
-    public static final int Mvapch=58;
-    public static final int Image=69;
-    public static final int Autotuning=29;
-    public static final int Imagenet=45;
-    public static final int Prefetch=41;
+    public static final int Count=55;
+    public static final int Mvapch=59;
+    public static final int Image=70;
+    public static final int Autotuning=30;
+    public static final int Imagenet=46;
+    public static final int Prefetch=42;
     public static final int RULE_QUALIFIED_NAME=99;
-    public static final int Translation=31;
-    public static final int Parameters=30;
-    public static final int Small=76;
+    public static final int Translation=32;
+    public static final int Parameters=31;
+    public static final int Small=77;
     public static final int RULE_ID=98;
-    public static final int Cray=79;
+    public static final int Cray=80;
     public static final int Number_of_acc=22;
     public static final int Recommendation=23;
-    public static final int Cifar=66;
+    public static final int Cifar=67;
     public static final int Pgi=88;
     public static final int Enable_opt_build=19;
     public static final int RULE_INT=96;
     public static final int RULE_ML_COMMENT=101;
-    public static final int Openacc=50;
-    public static final int Keras=70;
+    public static final int Openacc=51;
+    public static final int Keras=71;
     public static final int Hpc=86;
     public static final int Arm=85;
     public static final int Core_subscription=16;
-    public static final int Large=71;
+    public static final int Large=72;
     public static final int Ai_frameworkTensorflow=4;
-    public static final int Restart=52;
+    public static final int Restart=53;
     public static final int ParallelisationOpenmp=7;
-    public static final int Simple=63;
-    public static final int Cpu_type=39;
+    public static final int Simple=64;
+    public static final int Cpu_type=40;
     public static final int Comma=90;
-    public static final int Opnmpi=62;
-    public static final int Ai_training=28;
+    public static final int Opnmpi=63;
+    public static final int Ai_training=29;
     public static final int X86=89;
-    public static final int Mnist=72;
-    public static final int Layers=49;
-    public static final int Basedata=37;
-    public static final int Cresta=55;
+    public static final int Mnist=73;
+    public static final int App_typeHpc=25;
+    public static final int Layers=50;
+    public static final int Basedata=38;
+    public static final int Cresta=56;
     public static final int FullStop=91;
-    public static final int Cntk=78;
-    public static final int Ai_inference=26;
-    public static final int Fpga=81;
+    public static final int Cntk=79;
+    public static final int Ai_inference=27;
+    public static final int Fpga=82;
     public static final int Ai_frameworkPytorch=9;
-    public static final int Opt_build=32;
+    public static final int Opt_build=33;
     public static final int Ai_framework=24;
-    public static final int Pytorch=51;
-    public static final int Type=77;
+    public static final int Pytorch=52;
+    public static final int Type=78;
     public static final int Image_classification=12;
-    public static final int Message_size=25;
-    public static final int Opencl=60;
-    public static final int Etl=80;
-    public static final int Power=74;
+    public static final int Message_size=26;
+    public static final int Opencl=61;
+    public static final int Etl=81;
+    public static final int Power=75;
     public static final int Number_of_threads=18;
     public static final int RULE_BEGIN=93;
-    public static final int Mxnet=73;
+    public static final int Mxnet=74;
     public static final int ParallelisationOpencl=6;
     public static final int RULE_BOOLEAN=95;
-    public static final int Tuner=64;
-    public static final int Glow=68;
-    public static final int Nvidia=59;
-    public static final int Input=56;
-    public static final int Version=47;
+    public static final int Tuner=65;
+    public static final int Glow=69;
+    public static final int Nvidia=60;
+    public static final int Input=57;
+    public static final int Version=48;
     public static final int Amd=84;
     public static final int Object_detection=20;
-    public static final int Compiler=38;
+    public static final int Compiler=39;
     public static final int ParallelisationOpenacc=5;
     public static final int Ai_frameworkKeras=14;
-    public static final int Openmp=61;
-    public static final int Medium=57;
-    public static final int Affinity=35;
-    public static final int Block=65;
-    public static final int Library=46;
-    public static final int Cache=53;
+    public static final int Openmp=62;
+    public static final int Medium=58;
+    public static final int Affinity=36;
+    public static final int Block=66;
+    public static final int Library=47;
+    public static final int Cache=54;
     public static final int RULE_END=94;
     public static final int Reinforncement_learning=8;
-    public static final int Config=48;
+    public static final int Config=49;
     public static final int RULE_STRING=100;
     public static final int Xla=83;
-    public static final int Optimization=27;
-    public static final int Acc_type=34;
-    public static final int App_type=36;
+    public static final int Optimization=28;
+    public static final int Acc_type=35;
+    public static final int App_type=37;
     public static final int RULE_SL_COMMENT=102;
     public static final int Colon=92;
     public static final int EOF=-1;
     public static final int RULE_WS=103;
     public static final int RULE_EXT_INT=97;
-    public static final int Data=67;
+    public static final int Data=68;
     public static final int RULE_ANY_OTHER=104;
     public static final int Distributed_training=11;
-    public static final int Autotune=42;
+    public static final int Autotune=43;
     public static final int App_typeAi_training=10;
     public static final int ParallelisationMpi=13;
-    public static final int Backend=43;
+    public static final int Backend=44;
     public static final int Parallelisation=21;
     public static final int Scaling_efficiency=15;
-    public static final int Location=40;
+    public static final int Location=41;
 
     // delegates
     // delegators
@@ -163,7 +163,6 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     		tokenNameToValue.put("Cray", "'cray'");
     		tokenNameToValue.put("Etl", "'etl:'");
     		tokenNameToValue.put("Fpga", "'fpga'");
-    		tokenNameToValue.put("Hpc_1", "'hpc:'");
     		tokenNameToValue.put("Xla", "'xla:'");
     		tokenNameToValue.put("Block", "'block'");
     		tokenNameToValue.put("Cifar", "'cifar'");
@@ -218,6 +217,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     		tokenNameToValue.put("Ai_inference", "'ai_inference'");
     		tokenNameToValue.put("Optimization", "'optimization'");
     		tokenNameToValue.put("Ai_framework", "'ai_framework:'");
+    		tokenNameToValue.put("App_typeHpc", "'app_type-hpc:'");
     		tokenNameToValue.put("Message_size", "'message_size:'");
     		tokenNameToValue.put("Number_of_acc", "'number_of_acc:'");
     		tokenNameToValue.put("Recommendation", "'recommendation'");
@@ -3741,7 +3741,7 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
             if ( LA1_0 == App_typeAi_training ) {
                 alt1=1;
             }
-            else if ( (LA1_0==Hpc_1) ) {
+            else if ( LA1_0 == App_typeHpc ) {
                 alt1=2;
             }
             else {
@@ -7650,21 +7650,21 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EHPCCase__Group__0__Impl"
-    // InternalOptimizationParser.g:2530:1: rule__EHPCCase__Group__0__Impl : ( Hpc_1 ) ;
+    // InternalOptimizationParser.g:2530:1: rule__EHPCCase__Group__0__Impl : ( App_typeHpc ) ;
     public final void rule__EHPCCase__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimizationParser.g:2534:1: ( ( Hpc_1 ) )
-            // InternalOptimizationParser.g:2535:1: ( Hpc_1 )
+            // InternalOptimizationParser.g:2534:1: ( ( App_typeHpc ) )
+            // InternalOptimizationParser.g:2535:1: ( App_typeHpc )
             {
-            // InternalOptimizationParser.g:2535:1: ( Hpc_1 )
-            // InternalOptimizationParser.g:2536:2: Hpc_1
+            // InternalOptimizationParser.g:2535:1: ( App_typeHpc )
+            // InternalOptimizationParser.g:2536:2: App_typeHpc
             {
-             before(grammarAccess.getEHPCCaseAccess().getHpcKeyword_0()); 
-            match(input,Hpc_1,FOLLOW_2); 
-             after(grammarAccess.getEHPCCaseAccess().getHpcKeyword_0()); 
+             before(grammarAccess.getEHPCCaseAccess().getApp_typeHpcKeyword_0()); 
+            match(input,App_typeHpc,FOLLOW_2); 
+             after(grammarAccess.getEHPCCaseAccess().getApp_typeHpcKeyword_0()); 
 
             }
 
@@ -28430,56 +28430,56 @@ public class InternalOptimizationParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000120000400L,0x0000000000040000L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000242000400L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000000L,0x0000000080000000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000100014000000L,0x0000000000400000L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000008400000000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0100000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x00010000000000E0L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000000L,0x0000000002300400L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0800000000000000L,0x0000000000120000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0080040000000000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000200028000000L,0x0000000000400000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000010800000000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0200000000000000L,0x0000000000000002L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x00020000000000E0L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000000L,0x0000000002300800L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x1000000000000000L,0x0000000000140000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0100080000000000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000004210L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0002000041000800L,0x0000000000002000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0040012000000000L,0x0000000000010800L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000800000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000800000000000L,0x0000000000080000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000880000000000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0008000200000000L,0x0000000000004240L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000080901100L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0004000081000800L,0x0000000000004000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0080024000000000L,0x0000000000021000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0001000000000000L,0x0000000000000020L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0001000000000000L,0x0000000000080000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0001100000000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0010000400000000L,0x0000000000008480L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000100901100L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000000000L,0x0000000100000000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000200000000000L,0x0000000000000104L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0020020000000000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000400000000000L,0x0000000000000208L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0040040000000000L});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000804000400000L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000800048000L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000C00002018000L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x3004000000000000L,0x0000000000800000L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0001008000400000L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000001000048000L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0001800004018000L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x6008000000000000L,0x0000000000800000L});
     public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000000000L,0x0000000004000000L});
     public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000002L,0x0000000004000000L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0010000000000000L,0x0000000000000020L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x4400000000000000L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0020000000000000L,0x0000000000000040L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x8800000000000000L});
     public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000000L,0x0000000108000000L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0200000000000000L,0x0000000000001080L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x8000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000000L,0x0000000001008000L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0400000000000000L,0x0000000000002100L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000005L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000000L,0x0000000001010000L});
     public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000000000L,0x0000000300000000L});
-    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000008400000002L});
-    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0100000000000002L,0x0000000000000001L});
-    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0002000041000802L,0x0000000000002000L});
-    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0040012000000002L,0x0000000000010800L});
-    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0020020000000002L});
-    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000880000000002L});
-    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0000800000000002L,0x0000000000080000L});
-    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0000800000000002L,0x0000000000000010L});
-    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x00010000000000E2L});
-    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0000C00002018002L});
-    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000000800048002L});
-    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000804000400002L});
+    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000010800000002L});
+    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0200000000000002L,0x0000000000000002L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0004000081000802L,0x0000000000004000L});
+    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0080024000000002L,0x0000000000021000L});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0040040000000002L});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0001100000000002L});
+    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0001000000000002L,0x0000000000080000L});
+    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0001000000000002L,0x0000000000000020L});
+    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x00020000000000E2L});
+    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0001800004018002L});
+    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000001000048002L});
+    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0001008000400002L});
 
 }

@@ -50,7 +50,7 @@ EAITrainingCase:
 ;
 
 EHPCCase:
-	('hpc:'
+	('app_type-hpc:'
 		BEGIN
 		hpc=EHPC
 		END

@@ -50,23 +50,23 @@ public class OptimizationValidator extends AbstractOptimizationValidator {
         OptimizationPackage.Literals.EOPTIMIZATION__ENABLE_AUTOTUNING, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if (((Objects.equal(opt.getApp_type(), "AI_Training") && (!(opt.getApp_optimization() instanceof EAITrainingCase))) || ((opt.getApp_optimization() instanceof EAITrainingCase) && (!Objects.equal(opt.getApp_type(), "ai_training"))))) {
-      this.error("A app_type-ai_training property should be present if app_type is AI_Training", 
+    if (((Objects.equal(opt.getApp_type(), "ai_training") && (!(opt.getApp_optimization() instanceof EAITrainingCase))) || ((opt.getApp_optimization() instanceof EAITrainingCase) && (!Objects.equal(opt.getApp_type(), "ai_training"))))) {
+      this.error("A app_type-ai_training property should be present if app_type is ai_training", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE, 
         OptimizationValidator.MANDATORY_ELEMENT);
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_OPTIMIZATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if (((Objects.equal(opt.getApp_type(), "HPC") && (!(opt.getApp_optimization() instanceof EHPCCase))) || Objects.equal(Boolean.valueOf((!Objects.equal(Boolean.valueOf((opt.getApp_optimization() instanceof EHPCCase)), opt.getApp_type()))), "hpc"))) {
-      this.error("Ah app_type-hpc property should be present if app_type is HPC", 
+    if (((Objects.equal(opt.getApp_type(), "hpc") && (!(opt.getApp_optimization() instanceof EHPCCase))) || Objects.equal(Boolean.valueOf((!Objects.equal(Boolean.valueOf((opt.getApp_optimization() instanceof EHPCCase)), opt.getApp_type()))), "hpc"))) {
+      this.error("Ah app_type-hpc property should be present if app_type is hpc", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE, 
         OptimizationValidator.MANDATORY_ELEMENT);
       this.error("This property is not compatible with selected app_type", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_OPTIMIZATION, 
         OptimizationValidator.MANDATORY_ELEMENT);
     }
-    if ((Objects.equal(opt.getApp_type(), "AI_Inference") || Objects.equal(opt.getApp_type(), "big_data"))) {
+    if ((Objects.equal(opt.getApp_type(), "ai_inference") || Objects.equal(opt.getApp_type(), "big_data"))) {
       this.error("This app_type is not supported in current version", 
         OptimizationPackage.Literals.EOPTIMIZATION__APP_TYPE, 
         OptimizationValidator.MANDATORY_ELEMENT);

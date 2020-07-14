@@ -3,8 +3,6 @@
  */
 package org.sodalite.dsl.rM;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -53,19 +51,29 @@ public interface EImplementation extends EObject
   void setPrimary(String value);
 
   /**
-   * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.dsl.rM.EDependencies}.
+   * Returns the value of the '<em><b>Dependencies</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Dependencies</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Dependencies</em>' containment reference list.
+   * @return the value of the '<em>Dependencies</em>' containment reference.
+   * @see #setDependencies(EDependencies)
    * @see org.sodalite.dsl.rM.RMPackage#getEImplementation_Dependencies()
    * @model containment="true"
    * @generated
    */
-  EList<EDependencies> getDependencies();
+  EDependencies getDependencies();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EImplementation#getDependencies <em>Dependencies</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Dependencies</em>' containment reference.
+   * @see #getDependencies()
+   * @generated
+   */
+  void setDependencies(EDependencies value);
 
 } // EImplementation

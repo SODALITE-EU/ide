@@ -2249,10 +2249,10 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cENDTerminalRuleCall_1_5 = (RuleCall)cGroup_1.eContents().get(5);
 		
 		//EImplementation:
-		//	('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies+=EDependencies? ']' END)?;
+		//	('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies=EDependencies? ']' END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies+=EDependencies? ']' END)?
+		//('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies=EDependencies? ']' END)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//('implementation:' primary=STRING)?
@@ -2267,7 +2267,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getPrimarySTRINGTerminalRuleCall_0_1_0() { return cPrimarySTRINGTerminalRuleCall_0_1_0; }
 		
-		//(BEGIN 'dependencies:' '[' dependencies+=EDependencies? ']' END)?
+		//(BEGIN 'dependencies:' '[' dependencies=EDependencies? ']' END)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//BEGIN
@@ -2279,7 +2279,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		//'['
 		public Keyword getLeftSquareBracketKeyword_1_2() { return cLeftSquareBracketKeyword_1_2; }
 		
-		//dependencies+=EDependencies?
+		//dependencies=EDependencies?
 		public Assignment getDependenciesAssignment_1_3() { return cDependenciesAssignment_1_3; }
 		
 		//EDependencies
@@ -4382,7 +4382,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EImplementation:
-	//	('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies+=EDependencies? ']' END)?;
+	//	('implementation:' primary=STRING)? & (BEGIN 'dependencies:' '[' dependencies=EDependencies? ']' END)?;
 	public EImplementationElements getEImplementationAccess() {
 		return pEImplementation;
 	}

@@ -44,7 +44,6 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Cray", "'cray'");
 		tokenNameToValue.put("Etl", "'etl:'");
 		tokenNameToValue.put("Fpga", "'fpga'");
-		tokenNameToValue.put("Hpc_1", "'hpc:'");
 		tokenNameToValue.put("Xla", "'xla:'");
 		tokenNameToValue.put("Block", "'block'");
 		tokenNameToValue.put("Cifar", "'cifar'");
@@ -99,6 +98,7 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Ai_inference", "'ai_inference'");
 		tokenNameToValue.put("Optimization", "'optimization'");
 		tokenNameToValue.put("Ai_framework", "'ai_framework:'");
+		tokenNameToValue.put("App_typeHpc", "'app_type-hpc:'");
 		tokenNameToValue.put("Message_size", "'message_size:'");
 		tokenNameToValue.put("Number_of_acc", "'number_of_acc:'");
 		tokenNameToValue.put("Recommendation", "'recommendation'");
@@ -2533,9 +2533,9 @@ rule__EHPCCase__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEHPCCaseAccess().getHpcKeyword_0()); }
-	Hpc_1
-	{ after(grammarAccess.getEHPCCaseAccess().getHpcKeyword_0()); }
+	{ before(grammarAccess.getEHPCCaseAccess().getApp_typeHpcKeyword_0()); }
+	App_typeHpc
+	{ after(grammarAccess.getEHPCCaseAccess().getApp_typeHpcKeyword_0()); }
 )
 ;
 finally {

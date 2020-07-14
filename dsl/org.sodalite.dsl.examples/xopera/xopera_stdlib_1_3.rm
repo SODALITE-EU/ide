@@ -653,13 +653,6 @@ node_types:
 				type: tosca.datatypes.Credential
 				required: false
 			
-			//Optimization options
-			optimization:
-				description: 'List of required optimization options. @TODO '
-				required:false
-				type:list
-				entry_schema: tosca.datatypes.optimization.Root
-			
 		
 		requirements:
 			host:

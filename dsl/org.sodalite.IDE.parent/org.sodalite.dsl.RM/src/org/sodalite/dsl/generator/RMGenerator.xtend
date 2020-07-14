@@ -30,6 +30,8 @@ import org.sodalite.dsl.rM.EDataType
 import org.sodalite.dsl.rM.EConstraint
 import org.sodalite.dsl.rM.EValid_Values
 import org.sodalite.dsl.rM.EMinLength
+import java.nio.file.Files
+import java.nio.file.Paths
 
 /**
  * Generates code from your model files on save.
@@ -50,7 +52,7 @@ class RMGenerator extends AbstractGenerator {
 	var Map<ERequirementDefinition, Integer> requirement_numbers
 	var Map<ECapabilityDefinition, Integer> capability_numbers
 	var Map<EInterfaceDefinition, Integer> interface_numbers
-	var Map<EObject, Map<String,Integer>> parameter_numbers
+	var Map<Object, Map<String,Integer>> parameter_numbers
 	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		data_type_counter = 1
@@ -65,7 +67,7 @@ class RMGenerator extends AbstractGenerator {
 		attribute_numbers = new HashMap<EAttributeDefinition, Integer>()
 		requirement_numbers = new HashMap<ERequirementDefinition, Integer>()
 		capability_numbers = new HashMap<ECapabilityDefinition, Integer>()
-		parameter_numbers = new HashMap<EObject, Map<String, Integer>>()
+		parameter_numbers = new HashMap<Object, Map<String, Integer>>()
 		interface_numbers = new HashMap<EInterfaceDefinition, Integer>()
 		
 		val filename = getFilename(resource.URI)
@@ -237,7 +239,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Capability ;
 	  exchange:name "«c.name»" ;
 	  «IF c.capability.description !== null»
-	  exchange:description '«c.capability.description»' ;
+	  exchange:description '«processDescription(c.capability.description)»' ;
 	  «ENDIF»
 	  «IF c.capability.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(c, "type")» ;
@@ -295,11 +297,72 @@ class RMGenerator extends AbstractGenerator {
 	«ENDIF»		
 	
 	«IF o.operation.implementation !== null»
+	«putParameterNumber(o, "primary.path", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "path" ;
+	  exchange:value '«o.operation.implementation.primary»' ;
+	.
+	
+	«putParameterNumber(o, "primary.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "content" ;
+	  exchange:value '«readFileAsString(o.operation.implementation.primary)»' ;
+	.
+	
+	«putParameterNumber(o, "primary", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "primary" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.path")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.content")» ;
+	.
+	
+	«IF o.operation.implementation.dependencies !== null»
+	«FOR d:o.operation.implementation.dependencies.deps»
+	
+	«putParameterNumber(d, "file.path", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "path" ;
+	  exchange:value '«d»' ; 
+	 .
+	
+	«putParameterNumber(d, "file.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "content" ;
+	  exchange:value '«readFileAsString(d)»' ;
+	.
+
+	«putParameterNumber(d, "file", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "file" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file.path")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file.content")» ;
+	.
+	«ENDFOR»
+	
+	«putParameterNumber(o, "dependencies", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "dependencies" ;
+	  «FOR d:o.operation.implementation.dependencies.deps»
+	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file")» ; 
+	  «ENDFOR»
+	.
+	«ENDIF»
+	
 	«putParameterNumber(o, "implementation", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "implementation" ;
-	  exchange:value '«o.operation.implementation.primary»' ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary")» ;
+	 «IF o.operation.implementation.dependencies !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "dependencies")» ;
+	 «ENDIF»
 	.
 	«ENDIF»		
 	
@@ -383,7 +446,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:hasParameter value«p.property.req_cap.name» ; 
+	  exchange:value '«p.property.req_cap.name»' ; 
 	.
 	«ENDIF»		
 	
@@ -451,7 +514,7 @@ class RMGenerator extends AbstractGenerator {
 	:Node_«node_counter++»
 	  rdf:type exchange:Node ;
 	  «IF n.node.description !== null»
-	  exchange:description '«n.node.description»' ;
+	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
 	  exchange:derivesFrom "«n.node.superType.name»" ;
@@ -491,7 +554,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:derivesFrom "«d.data.superType.name»" ;
 	  «ENDIF»
 	  «IF d.data.description !== null»
-	  exchange:description '«d.data.description»' ;
+	  exchange:description '«processDescription(d.data.description)»' ;
 	  «ENDIF»
 	  «IF d.data.properties !== null»
 	  «FOR p:d.data.properties.properties»
@@ -568,7 +631,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Property ;
 	  exchange:name "«p.name»" ;
 	  «IF p.property.description !== null»
-	  exchange:description '«p.property.description»' ;
+	  exchange:description '«processDescription(p.property.description)»' ;
 	  «ENDIF»
 	  «IF p.property.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ;
@@ -613,7 +676,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Attribute ;
 	  exchange:name "«a.name»" ;
 	  «IF a.attribute.description !== null»
-	  exchange:description '«a.attribute.description»' ;
+	  exchange:description '«processDescription(a.attribute.description)»' ;
 	  «ENDIF»
 	  «IF a.attribute.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "type")» ;
@@ -626,14 +689,14 @@ class RMGenerator extends AbstractGenerator {
 	
 	def compile (EValueExpression ve) '''«(ve as ESTRING).string»'''
 	
-	def void putParameterNumber (EObject entity, String parameterName, Integer number){
+	def void putParameterNumber (Object entity, String parameterName, Integer number){
 		if (parameter_numbers.get(entity) === null){
 			parameter_numbers.put(entity, new HashMap<String, Integer>())
 		}
 		parameter_numbers.get(entity).put(parameterName, number)
 	}
 	
-	def Integer getParameterNumber (EObject entity, String parameterName){
+	def Integer getParameterNumber (Object entity, String parameterName){
 		if (parameter_numbers.get(entity) === null)
 			return null;
 		return parameter_numbers.get(entity).get(parameterName)
@@ -647,5 +710,14 @@ class RMGenerator extends AbstractGenerator {
 		
 	def String getName(Resource resource){
 		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.'))
+	}
+	
+	def readFileAsString(String path){
+		var String content = new String(Files.readAllBytes(Paths.get(path)));
+		return content.replace("\'", "\\\'").replaceAll("[\\n\\r]+","\\\\n")
+	}
+	
+	def processDescription (String description){
+		return description.replaceAll("[\\n\\r]+","\\\\n")
 	}
 }

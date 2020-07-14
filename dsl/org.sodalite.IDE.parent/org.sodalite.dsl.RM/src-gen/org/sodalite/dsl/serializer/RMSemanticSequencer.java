@@ -645,7 +645,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EImplementation returns EImplementation
 	 *
 	 * Constraint:
-	 *     (primary=STRING | dependencies+=EDependencies)*
+	 *     (primary=STRING | dependencies=EDependencies)*
 	 */
 	protected void sequence_EImplementation(ISerializationContext context, EImplementation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

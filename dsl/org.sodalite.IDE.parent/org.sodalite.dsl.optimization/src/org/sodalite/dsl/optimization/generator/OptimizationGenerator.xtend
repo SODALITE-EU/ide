@@ -15,6 +15,8 @@ import org.sodalite.dsl.optimization.optimization.ETensorFlowCase
 import org.sodalite.dsl.optimization.optimization.EPyTorchCase
 import org.sodalite.dsl.optimization.optimization.EHPCCase
 import org.eclipse.emf.common.util.EList
+import java.nio.file.Paths
+import java.nio.file.Files
 
 /**
  * Generates code from your model files on save.
@@ -51,11 +53,11 @@ class OptimizationGenerator extends AbstractGenerator {
 		«IF m.optimization.autotuning !== null»
 		"autotuning": {
 			"tuner": "«m.optimization.autotuning.tuner»",
-			"input": "«m.optimization.autotuning.input»"
+			"input": "«readFileAsString(m.optimization.autotuning.input)»"
 		},
 		«ENDIF»
 		«IF m.optimization.app_optimization !== null && m.optimization.app_optimization instanceof EAITrainingCase»
-		"ai_training": {
+		"app_type-ai_training": {
 			"config": { 
 				"ai_framework": "«(m.optimization.app_optimization as EAITrainingCase).ai_training.config.ai_framework»"
 				«IF (m.optimization.app_optimization as EAITrainingCase).ai_training.config.type !== null»
@@ -96,7 +98,7 @@ class OptimizationGenerator extends AbstractGenerator {
 			}
 			«IF (m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase !== null &&
 				(m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase instanceof EKerasCase»
-			,"keras": { «disableComma()»
+			,"ai_framework-keras": { «disableComma()»
 				«IF ((m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase as EKerasCase).keras.version != null»
 				«IF comma»,«ENDIF»"version": "«((m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase as EKerasCase).keras.version»" «enableComma()»
 				«ENDIF»
@@ -107,7 +109,7 @@ class OptimizationGenerator extends AbstractGenerator {
 			«ENDIF»
 			«IF (m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase !== null &&
 				(m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase instanceof ETensorFlowCase»
-			,"tensorflow": { «disableComma()»
+			,"ai_framework-tensorflow": { «disableComma()»
 				«IF ((m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase as ETensorFlowCase).tensorflow.version != null»
 				«IF comma»,«ENDIF»"version": "«((m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase as ETensorFlowCase).tensorflow.version»" «enableComma()»
 				«ENDIF»
@@ -116,7 +118,7 @@ class OptimizationGenerator extends AbstractGenerator {
 			«ENDIF»
 			«IF (m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase !== null &&
 				(m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase instanceof EPyTorchCase»
-			,"pytorch": { «disableComma()»
+			,"ai_framework-pytorch": { «disableComma()»
 				«IF ((m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase as EPyTorchCase).pytorch.version != null»
 				«IF comma»,«ENDIF»"version": "«((m.optimization.app_optimization as EAITrainingCase).ai_training.aitrainingcase as EPyTorchCase).pytorch.version»" «enableComma()»
 				«ENDIF»
@@ -126,7 +128,7 @@ class OptimizationGenerator extends AbstractGenerator {
 		}
 		«ENDIF»
 		«IF m.optimization.app_optimization !== null && m.optimization.app_optimization instanceof EHPCCase»
-		"hpc": { 
+		"app_type-hpc": { 
 			"config":{ 
 				"parallelisation": [ «disableComma()»
 					«FOR entry:((m.optimization.app_optimization as EHPCCase).hpc.config.parallelisation as EList<String>)»
@@ -155,7 +157,7 @@ class OptimizationGenerator extends AbstractGenerator {
 				«ENDIF»
 			}
 			«IF (m.optimization.app_optimization as EHPCCase).hpc.mpi !== null»
-			,"mpi": {
+			,"parallelisation-mpi": {
 				"library": "«(m.optimization.app_optimization as EHPCCase).hpc.mpi.mpi.library»"
 				«IF (m.optimization.app_optimization as EHPCCase).hpc.mpi.mpi.version !== null»
 				,"version": "«(m.optimization.app_optimization as EHPCCase).hpc.mpi.mpi.library»"
@@ -172,7 +174,7 @@ class OptimizationGenerator extends AbstractGenerator {
 			}
 			«ENDIF»
 			«IF (m.optimization.app_optimization as EHPCCase).hpc.openmp !== null»
-			,"openmp": {
+			,"parallelisation-openmp": {
 				"number_of_threads": «(m.optimization.app_optimization as EHPCCase).hpc.openmp.openmp.number_of_threads»
 				«IF (m.optimization.app_optimization as EHPCCase).hpc.openmp.openmp.scaling_efficiency !== null»
 				,"scaling_efficiency": «(m.optimization.app_optimization as EHPCCase).hpc.openmp.openmp.scaling_efficiency»
@@ -183,7 +185,7 @@ class OptimizationGenerator extends AbstractGenerator {
 			}
 			«ENDIF»
 			«IF (m.optimization.app_optimization as EHPCCase).hpc.openacc !== null»
-			,"openacc": {
+			,"parallelisation-openacc": {
 				"compiler": "«(m.optimization.app_optimization as EHPCCase).hpc.openacc.openacc.compiler»"
 				«IF (m.optimization.app_optimization as EHPCCase).hpc.openacc.openacc.version !== null»
 				,"version": "«(m.optimization.app_optimization as EHPCCase).hpc.openacc.openacc.version»"
@@ -194,7 +196,7 @@ class OptimizationGenerator extends AbstractGenerator {
 			}
 			«ENDIF»
 			«IF (m.optimization.app_optimization as EHPCCase).hpc.opencl !== null»
-			,"opencl": {
+			,"parallelisation-opencl": {
 				"compiler": "«(m.optimization.app_optimization as EHPCCase).hpc.opencl.opencl.compiler»"
 				«IF (m.optimization.app_optimization as EHPCCase).hpc.opencl.opencl.version !== null»
 				,"version": "«(m.optimization.app_optimization as EHPCCase).hpc.opencl.opencl.compiler»"
@@ -209,6 +211,11 @@ class OptimizationGenerator extends AbstractGenerator {
 	}
 }
 	'''
+	
+	def readFileAsString(String path){
+		var String content = new String(Files.readAllBytes(Paths.get(path)));
+		return content.replaceAll("[\\t\\n\\r]+"," ")
+	}
 
 	def void disableComma() {
 		comma = false

@@ -7,7 +7,7 @@ optimization ai_training.tensor_flow:
 		acc_type: nvidia
 	autotuning:
 		tuner: cresta
-		input: "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/snow/test.rm"
+		input: "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/optimization/autotunig.at"
 	app_type-ai_training: 
 		config:
 			ai_framework: tensorflow
