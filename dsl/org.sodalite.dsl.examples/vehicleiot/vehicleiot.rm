@@ -36,5 +36,5 @@ relationship_types:
 								default: get_attribute:
 									entity: TARGET
 									attribute: tosca.nodes.Compute.public_address
-						implementation: "playbooks/configure_prometheus.yml"
-							dependencies: ["playbooks/prometheus.yml.tmpl"]
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/configure_prometheus.yml"
+							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/prometheus.yml.tmpl"]
