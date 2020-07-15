@@ -10,6 +10,6 @@ node_types:
 				type: tosca.interfaces.node.lifecycle.Standard 
 				operations:
 					create:  
-						implementation:  "playbooks/create_docker_host.yml"
+						implementation:  "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/create_docker_host.yml"
 					delete:  
-						implementation:  "playbooks/delete_docker_host.yml"
+						implementation:  "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/delete_docker_host.yml"

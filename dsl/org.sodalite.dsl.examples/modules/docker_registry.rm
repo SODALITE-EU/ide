@@ -31,13 +31,13 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerRegistry.docker_pass
-						implementation: "playbooks/login_user.yml"
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/login_user.yml"
 					delete:
 						inputs:
 							docker_registry_url:      
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerRegistry.docker_registry_url
-						implementation: "playbooks/logout_user.yml"
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/logout_user.yml"
               
               

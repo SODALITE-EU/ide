@@ -42,7 +42,7 @@ node_types:
 				type: tosca.interfaces.node.lifecycle.Standard   
 				operations:
 					create:  
-						implementation: "playbooks/security_rule_create.yml" 
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_create.yml" 
 						inputs:  
 							ports: 
 								default: get_property:
@@ -58,7 +58,7 @@ node_types:
 									entity: SELF
 									property: sodalite.nodes.OpenStack.SecurityRules.group_description
 					delete:  
-						implementation: "playbooks/security_rule_delete.yml"
+						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
 						inputs:  
 							group_name: 
 								default: get_property: 
