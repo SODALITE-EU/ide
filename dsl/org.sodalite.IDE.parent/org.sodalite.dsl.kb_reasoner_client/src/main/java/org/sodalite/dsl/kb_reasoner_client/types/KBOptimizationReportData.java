@@ -2,12 +2,9 @@ package org.sodalite.dsl.kb_reasoner_client.types;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class KBOptimizationReportData {
 	String URI;
-	List<KBError> errors;
+	List<? extends KBError> errors;
 	List<KBWarning> warnings;
 	List<KBOptimization> optimizations;
 	
@@ -21,10 +18,10 @@ public class KBOptimizationReportData {
 	public boolean hasErrors() {
 		return this.errors!= null && !this.errors.isEmpty();
 	}
-	public List<KBError> getErrors(){
+	public List<? extends KBError> getErrors(){
 		return this.errors;
 	}
-	public void setErrors (List<KBError> errors) {
+	public void setErrors (List<? extends KBError> errors) {
 		this.errors = errors;
 	}
 	

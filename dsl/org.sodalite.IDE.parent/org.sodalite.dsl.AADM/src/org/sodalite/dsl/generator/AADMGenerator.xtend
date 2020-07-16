@@ -50,12 +50,10 @@ class AADMGenerator extends AbstractGenerator {
 	var int requirement_counter = 1
 	var int capability_counter = 1
 	var int parameter_counter = 1
-	var int optimization_counter = 1
 	var Map<EPropertyAssignment, Integer> property_numbers
 	var Map<ERequirementAssignment, Integer> requirement_numbers
 	var Map<ECapabilityAssignment, Integer> capability_numbers
 	var Map<EObject, Map<String,Integer>> parameter_numbers
-	var Map<Optimization_Model, Integer> optimization_numbers
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		template_counter = 1
@@ -64,12 +62,10 @@ class AADMGenerator extends AbstractGenerator {
 		requirement_counter = 1
 		capability_counter = 1
 		parameter_counter = 1
-		optimization_counter = 1
 		property_numbers = new HashMap<EPropertyAssignment, Integer>()
 		requirement_numbers = new HashMap<ERequirementAssignment, Integer>()
 		capability_numbers = new HashMap<ECapabilityAssignment, Integer>()
 		parameter_numbers = new HashMap<EObject, Map<String, Integer>>()
-		optimization_numbers = new HashMap<Optimization_Model, Integer>()
 		
 		val filename = getFilename(resource.URI)
 		fsa.generateFile(filename,  compileAADM (resource))
@@ -168,10 +164,6 @@ class AADMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(ENodeTemplate n) '''
-	«IF n.node.optimization !== null»
-	  «n.node.optimization.compile»
-	«ENDIF»
-	
 	:Template_«template_counter++»
 	  rdf:type exchange:Template ;
 	  «IF n.node.description !== null»
@@ -180,7 +172,7 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:name "«n.name»" ;
 	  exchange:type "«n.node.type»" ;
 	  «IF n.node.optimization !== null»
-	  	  exchange:optimization :Optimization_«optimization_numbers.get(n.node.optimization)» ;
+	  	  exchange:optimization '«readOptimization(n.node.optimization)»' ;
 	  «ENDIF»
 	  «IF n.node.properties !== null»
 	  «FOR p:n.node.properties.properties»
@@ -198,15 +190,6 @@ class AADMGenerator extends AbstractGenerator {
 	  «ENDFOR»
 	  «ENDIF»
 	.  
-	'''
-	
-	def compile (Optimization_Model m) '''
-	«optimization_numbers.put(m, optimization_counter)»
-	:Optimization_«optimization_counter++»
-	  rdf:type exchange:Optimization ;
-	  exchange:name "«m.name»" ;
-	  exchange:value '«readOptimization(m)»' ;
-	.
 	'''
 	
 	def compile (EPropertyAssignment p) '''
