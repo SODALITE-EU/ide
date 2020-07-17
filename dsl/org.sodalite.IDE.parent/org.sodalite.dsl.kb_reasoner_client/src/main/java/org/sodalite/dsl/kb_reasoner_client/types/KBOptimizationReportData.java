@@ -1,6 +1,8 @@
 package org.sodalite.dsl.kb_reasoner_client.types;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class KBOptimizationReportData {
 	String URI;
@@ -16,11 +18,27 @@ public class KBOptimizationReportData {
 	}
 	
 	public boolean hasErrors() {
-		return this.errors!= null && !this.errors.isEmpty();
+		return this.errors!= null && !this.getErrors().isEmpty();
 	}
+	
+	public boolean hasOptimizationErrors() {
+		return this.errors!= null && !this.getOptimizationErrors().isEmpty();
+	}
+	
 	public List<? extends KBError> getErrors(){
-		return this.errors;
+		if (this.errors!= null)
+			return this.errors.stream().filter(e -> !(e instanceof KBOptimizationError)).collect(Collectors.toList());
+		else 
+			return new ArrayList<KBError>();
 	}
+	
+	public List<? extends KBError> getOptimizationErrors(){
+		if (this.errors!= null)
+			return this.errors.stream().filter(e -> e instanceof KBOptimizationError).collect(Collectors.toList());
+		else 
+			return new ArrayList<KBError>();
+	}
+	
 	public void setErrors (List<? extends KBError> errors) {
 		this.errors = errors;
 	}

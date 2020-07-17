@@ -155,6 +155,7 @@ class KBReasonerTest {
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
 		KBOptimizationReportData report = kbclient.optimizeAADM(aadmTTL, null);
 		assertFalse (report.hasErrors());
+		assertFalse (report.hasOptimizationErrors());
 		assertNotNull (report.getURI());
 		assertTrue (report.hasOptimizations());
 	}
