@@ -1,13 +1,12 @@
 package org.sodalite.dsl.kb_reasoner_client.types;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.stream.Collectors;
 
 public class KBOptimizationReportData {
 	String URI;
-	List<KBError> errors;
+	List<? extends KBError> errors;
 	List<KBWarning> warnings;
 	List<KBOptimization> optimizations;
 	
@@ -19,12 +18,28 @@ public class KBOptimizationReportData {
 	}
 	
 	public boolean hasErrors() {
-		return this.errors!= null && !this.errors.isEmpty();
+		return this.errors!= null && !this.getErrors().isEmpty();
 	}
-	public List<KBError> getErrors(){
-		return this.errors;
+	
+	public boolean hasOptimizationErrors() {
+		return this.errors!= null && !this.getOptimizationErrors().isEmpty();
 	}
-	public void setErrors (List<KBError> errors) {
+	
+	public List<? extends KBError> getErrors(){
+		if (this.errors!= null)
+			return this.errors.stream().filter(e -> !(e instanceof KBOptimizationError)).collect(Collectors.toList());
+		else 
+			return new ArrayList<KBError>();
+	}
+	
+	public List<? extends KBError> getOptimizationErrors(){
+		if (this.errors!= null)
+			return this.errors.stream().filter(e -> e instanceof KBOptimizationError).collect(Collectors.toList());
+		else 
+			return new ArrayList<KBError>();
+	}
+	
+	public void setErrors (List<? extends KBError> errors) {
 		this.errors = errors;
 	}
 	

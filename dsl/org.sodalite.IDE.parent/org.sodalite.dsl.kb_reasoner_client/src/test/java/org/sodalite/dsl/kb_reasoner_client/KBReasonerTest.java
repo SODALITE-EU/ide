@@ -151,10 +151,11 @@ class KBReasonerTest {
 	
 	@Test
 	void testOptimizeAADM() throws Exception {
-		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow_opt.ttl");
+		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow_opt.aadm.ttl");
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
 		KBOptimizationReportData report = kbclient.optimizeAADM(aadmTTL, null);
 		assertFalse (report.hasErrors());
+		assertFalse (report.hasOptimizationErrors());
 		assertNotNull (report.getURI());
 		assertTrue (report.hasOptimizations());
 	}

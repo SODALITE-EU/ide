@@ -15,8 +15,10 @@ import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
@@ -29,6 +31,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.ICoreRunnable;
@@ -40,17 +43,26 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
@@ -59,16 +71,19 @@ import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.editor.validation.MarkerIssueProcessor;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.osgi.framework.Bundle;
+import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADMPackage;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
@@ -80,15 +95,26 @@ import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization;
+import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization.KBIssue;
+import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
+import org.sodalite.dsl.optimization.optimization.EAITraining;
+import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
+import org.sodalite.dsl.optimization.optimization.EAITrainingData;
+import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
+import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.inject.Injector;
 
 public class BackendProxy {
 	private MarkerCreator markerCreator;
@@ -111,7 +137,7 @@ public class BackendProxy {
 		return kbclient;
 	}
 
-	public void processSaveAADM(ExecutionEvent event) throws IOException {
+	public void processSaveAADM(ExecutionEvent event) throws IOException, PartInitException {
 		// Return selected resource
 		IFile aadmFile = getSelectedFile();
 		IProject project = getProject(aadmFile);
@@ -123,7 +149,7 @@ public class BackendProxy {
 		saveAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 
-	public void processOptimizeAADM(ExecutionEvent event) throws IOException {
+	public void processOptimizeAADM(ExecutionEvent event) throws IOException, PartInitException {
 		// Return selected resource
 		IFile aadmFile = getSelectedFile();
 		IProject project = getProject(aadmFile);
@@ -135,6 +161,21 @@ public class BackendProxy {
 		optimizeAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 
+	private void openFileInEditor(IFile file) throws PartInitException {
+		Display.getDefault().syncExec(new Runnable() {
+			@Override
+			public void run() {
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
+				try {
+					page.openEditor(new FileEditorInput(file), desc.getId());
+				} catch (PartInitException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	public void processDeployAADM(ExecutionEvent event) throws IOException {
 		// Return selected resource
 		IFile aadmFile = getSelectedFile();
@@ -203,7 +244,7 @@ public class BackendProxy {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
 				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, false);
-				processValidationIssues(saveReport, event);
+				processValidationIssues(aadmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception(
 							"The AADM model could not be saved into the KB. Please, contact your Sodalite administrator");
@@ -237,7 +278,7 @@ public class BackendProxy {
 		Job job = Job.create("Get AADM optimization recommendations", (ICoreRunnable) monitor -> {
 			try {
 				KBOptimizationReportData optimizationReport = getKBReasoner().optimizeAADM(aadmTTL, aadmURI);
-				processOptimizationIssues(optimizationReport, event);
+				processOptimizationIssues(aadmFile, optimizationReport, event);
 				if (optimizationReport.getURI() == null && optimizationReport.getErrors() == null) {
 					throw new Exception(
 							"AADM optimization recommendations could not be retrieved from the KB. Please, contact your Sodalite administrator");
@@ -280,7 +321,7 @@ public class BackendProxy {
 					// Save the AADM model into the KB
 					subMonitor.setTaskName("Saving AADM");
 					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, true);
-					processValidationIssues(saveReport, event);
+					processValidationIssues(aadmfile, saveReport, event);
 
 					if (saveReport != null && saveReport.hasErrors())
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
@@ -366,9 +407,11 @@ public class BackendProxy {
 		return file.toPath();
 	}
 
-	private void processValidationIssues(KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
+	private void processValidationIssues(IFile aadmFile, KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
 		// Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings())) {
+			//Open AADM file if not opened to show the errors and warnings
+			openFileInEditor(aadmFile);
 			List<ValidationIssue> issues = readRecommendationsFromKB(saveReport);
 			manageRecommendationIssues(event, issues);
 			if (saveReport.hasErrors()) {
@@ -377,17 +420,193 @@ public class BackendProxy {
 		}
 	}
 
-	private void processOptimizationIssues(KBOptimizationReportData optimizationReport, ExecutionEvent event)
+	private void processOptimizationIssues(IFile aadmFile, KBOptimizationReportData optimizationReport, ExecutionEvent event)
 			throws Exception {
 		// Check there are not warnings (they do not prevent storage in KB)
-		if (optimizationReport != null && (optimizationReport.hasErrors() || optimizationReport.hasWarnings()
-				|| optimizationReport.hasOptimizations())) {
-			List<ValidationIssue> issues = readRecommendationsFromKB(optimizationReport);
+		if (optimizationReport != null && (optimizationReport.hasErrors() || optimizationReport.hasWarnings())) {
+			//Open AADM file if not opened to show the errors and warnings
+			openFileInEditor(aadmFile);
+			
+			List<ValidationIssue> issues = readIssuesFromKB(optimizationReport);
 			manageRecommendationIssues(event, issues);
 			if (optimizationReport.hasErrors()) {
-				throw new Exception("There are detected validation issues in the AADM, please fix them");
+				throw new Exception("There are detected validation issues in the associated optimization models, please fix them");
 			}
 		}
+		
+		if (optimizationReport != null && (optimizationReport.hasOptimizationErrors() || optimizationReport.hasOptimizations())) {
+			AADM_Model aadmModel = readAADMModel(aadmFile, event);
+			// For each optimization model in the list of issues, open the model and process its issues
+			for (String node: getOptimizationNodes (optimizationReport)) {
+				openOptimizationModel(node, aadmModel);
+				List<ValidationIssue> issues = readOptimizationIssuesFromKB(getIssuesForModel (optimizationReport, node));
+				manageOptimizationIssues(event, issues);
+			}
+			
+			if (optimizationReport.hasErrors()) {
+				throw new Exception("There are detected validation issues in the associated optimization models, please fix them");
+			}
+		}
+	}
+	
+	private KBOptimizationReportData getIssuesForModel(KBOptimizationReportData optimizationReport, String node) {
+		KBOptimizationReportData result = new KBOptimizationReportData();
+		List<KBError> errors = new ArrayList<>();
+		for (KBError error:optimizationReport.getOptimizationErrors()) {
+			if (error instanceof KBOptimizationError) {
+				if (getNodeFromContext(error.getContext()).equals(node)) {
+					errors.add(error);
+				}
+			}
+		}
+		result.setErrors(errors);
+		List<KBOptimization> optimizations = new ArrayList<>();
+		for (KBOptimization opt: optimizationReport.getOptimizations()) {
+			if (opt.getNodeTemplate().equals(node)) {
+				optimizations.add(opt);
+			}
+		}
+		result.setOptimizations(optimizations);
+		return result;
+	}
+
+	private String getNodeFromContext(String context) {
+		return context.substring(context.lastIndexOf('/') + 1);
+	}
+
+	private void openOptimizationModel(String node, AADM_Model aadmModel) throws PartInitException {
+		// Find the associated node in the model and read the bound optimization model.
+		ENodeTemplate nodeTemplate = null;
+		for (ENodeTemplate template: aadmModel.getNodeTemplates().getNodeTemplates()) {
+			if (template.getName().equals(node)) {
+				nodeTemplate = template;
+				break;
+			}
+		}
+		// Find the optimization model location
+		Optimization_Model optimizationModel = nodeTemplate.getNode().getOptimization();
+		// Open the optimization model
+		IFile file = getFileFromModel(optimizationModel);
+		openFileInEditor(file);
+	}
+
+	private IFile getFileFromModel(Optimization_Model optimizationModel) {
+		URI eUri = optimizationModel.eResource().getURI();
+		if (eUri.isPlatformResource()) {
+			String platformString = eUri.toPlatformString(true);
+			return (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(platformString);
+		}
+		return null;
+	}
+
+	private Set<String> getOptimizationNodes(KBOptimizationReportData optimizationReport) {
+		Set<String> nodes = new HashSet<>();
+		for (KBError error: optimizationReport.getOptimizationErrors()) {
+			KBOptimizationError optError = (KBOptimizationError) error;
+			nodes.add(optError.getContext().substring(optError.getContext().lastIndexOf('/') + 1));
+		}
+		for (KBOptimization opt: optimizationReport.getOptimizations()) {
+			nodes.add(opt.getNodeTemplate());
+		}
+		return nodes;
+	}
+
+	private AADM_Model readAADMModel(IFile aadmFile, ExecutionEvent event) throws PartInitException {
+		openFileInEditor(aadmFile);
+		AADM_Model model = null;
+		Injector injector = AADMActivator.getInstance().getInjector(
+				AADMActivator.ORG_SODALITE_DSL_AADM);
+		XtextResourceSet resourceSet = (XtextResourceSet) injector
+		        .getInstance(XtextResourceSetProvider.class)
+		        .get(aadmFile.getProject());
+		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+
+		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
+		//FIXME Check this behaviour of reading the XTextEditor
+		while (xtextEditor == null) {
+			xtextEditor = EditorUtils.getActiveXtextEditor(event);
+		}
+		System.out.println ("Reading XTextEditor: " + xtextEditor);
+		if (xtextEditor != null) {
+			IValidationIssueProcessor issueProcessor;
+			IXtextDocument xtextDocument = xtextEditor.getDocument();
+			// FIXME Investigate why the model is not always read, returning null
+			int attempt = 0;
+			while (model == null) {
+				System.out.println ("Reading AADM model. Attempt: " + (++attempt));
+				model = (AADM_Model) xtextDocument.readOnly(
+						new IUnitOfWork(){
+						       public AADM_Model exec(Object resource) {
+						    	   AADM_Model model = (AADM_Model) ((XtextResource)resource).getContents().get(0);
+						             return model;
+						       }
+						 });
+			}
+		}
+		//TODO Fix that the optimization models are resolvable
+		if (model != null)
+			EcoreUtil2.resolveAll(model.eResource());
+		return model;
+	}
+
+	private List<ValidationIssue> readIssuesFromKB(KBOptimizationReportData optimizationReport) {
+		List<ValidationIssue> issues = new ArrayList<>();
+
+		if (optimizationReport.hasErrors()) {
+			for (KBError error : optimizationReport.getErrors()) {
+				issues.add(
+						new ValidationIssue(
+								error.getType() + "." + error.getDescription() + " error located at: "
+										+ error.getEntity_name(),
+								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
+								error.getDescription()));
+			}
+		}
+
+		if (optimizationReport.hasWarnings()) {
+			for (KBWarning warning : optimizationReport.getWarnings()) {
+				issues.add(new ValidationIssue(
+						warning.getType() + "." + warning.getDescription() + " warning located at: "
+								+ warning.getEntity_name(),
+						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(),
+						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
+			}
+		}
+		return issues;
+	}
+	
+	private List<ValidationIssue> readOptimizationIssuesFromKB(KBOptimizationReportData optimizationReport) {
+		List<ValidationIssue> issues = new ArrayList<>();
+
+		if (optimizationReport.hasOptimizationErrors()) {
+			for (KBError error : optimizationReport.getOptimizationErrors()) {
+				issues.add(
+						new ValidationIssue(
+								error.getType() + "." + error.getDescription() + " error located at: "
+										+ error.getEntity_name(),
+								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
+								error.getDescription()));
+			}
+		}
+
+		if (optimizationReport.hasOptimizations()) {
+			for (KBOptimization optimization : optimizationReport.getOptimizations()) {
+				for (KBIssue issue: optimization.getIssues()) {
+					String message = "Suggested optimization recommendation: " + 
+							beautifySuggestion(issue.getValue());
+					String path = issue.getPath();
+					String path_type = "Optimization";
+					String data = issue.toString();
+					issues.add(new ValidationIssue(message, path, path_type, Severity.WARNING,
+							ValidationIssue.OPTIMIZATION, data));
+				}
+			}
+		}
+		return issues;
+	}
+
+	private String beautifySuggestion(String suggestion) {
+		return suggestion.replace(":{", ":\t\n").replace("}", "").replace(",", "\t\n").replace("{", "");
 	}
 
 	private List<ValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
@@ -465,42 +684,29 @@ public class BackendProxy {
 
 		return sb.toString();
 	}
+	
+	
+	//TODO Fix this code
+	private void manageOptimizationIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
+		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
+		if (xtextEditor != null) {
+			IValidationIssueProcessor issueProcessor;
+			IXtextDocument xtextDocument = xtextEditor.getDocument();
+			IResource resource = xtextEditor.getResource();
 
-	private List<ValidationIssue> readRecommendationsFromKB(KBOptimizationReportData optimizationReport) {
-		// Read issues from KB recommendations
-		List<ValidationIssue> issues = new ArrayList<>();
+			List<Issue> issues = createIssues(xtextDocument, validationIssues);
 
-		if (optimizationReport.hasErrors()) {
-			for (KBError error : optimizationReport.getErrors()) {
-				issues.add(
-						new ValidationIssue(
-								error.getType() + "." + error.getDescription() + " error located at: "
-										+ error.getEntity_name(),
-								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
-								error.getDescription()));
-			}
+			if (resource != null)
+				issueProcessor = new MarkerIssueProcessor(resource,
+						xtextEditor.getInternalSourceViewer().getAnnotationModel(), markerCreator, markerTypeProvider);
+			else
+				issueProcessor = new AnnotationIssueProcessor(xtextDocument,
+						xtextEditor.getInternalSourceViewer().getAnnotationModel(), issueResolutionProvider);
+
+			// Process Issues
+			IProgressMonitor monitor = new NullProgressMonitor();
+			issueProcessor.processIssues(issues, monitor);
 		}
-
-		if (optimizationReport.hasWarnings()) {
-			for (KBWarning warning : optimizationReport.getWarnings()) {
-				issues.add(new ValidationIssue(
-						warning.getType() + "." + warning.getDescription() + " warning located at: "
-								+ warning.getEntity_name(),
-						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(),
-						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
-			}
-		}
-
-		if (optimizationReport.hasOptimizations()) {
-			for (KBOptimization optimization : optimizationReport.getOptimizations()) {
-				issues.add(new ValidationIssue(
-						"Suggested optimization recommendations: " + optimization.getOptimizations(),
-						"node_templates/" + optimization.getNodeTemplate(), "NodeTemplate", Severity.WARNING,
-						ValidationIssue.OPTIMIZATION, optimization.getOptimizations()));
-			}
-		}
-
-		return issues;
 	}
 
 	private void manageRecommendationIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
@@ -584,45 +790,73 @@ public class BackendProxy {
 		StringTokenizer st = new StringTokenizer(path, "/");
 		ValidationSourceFeature result = null;
 		if (resource.getAllContents().hasNext()) {
-			AADM_Model model = (AADM_Model) resource.getAllContents().next();
-			if (st.hasMoreTokens()) {
-				if ("node_templates".equals(st.nextToken())) {
-					if (st.hasMoreTokens()) { // Node_template
-						String node_name = st.nextToken();
-						for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
-							if (node.getName().contentEquals(node_name)) {
-								result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
-								if (st.hasMoreElements()) { // Node_Template children
-									String entity_name = st.nextToken();
-									if ("Property".equals(path_type)) {
-										for (EPropertyAssignment property : node.getNode().getProperties()
-												.getProperties()) {
-											if (property.getName().contentEquals(entity_name)) {
-												result = new ValidationSourceFeature(property,
-														AADMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
-											}
+			EObject eobject = resource.getAllContents().next();
+			if(eobject instanceof AADM_Model) {
+				AADM_Model model = (AADM_Model) eobject;
+				result = getAADMIssueFeature(model, path, path_type, st);
+			}else if (eobject instanceof Optimization_Model) {
+				Optimization_Model model = (Optimization_Model) eobject;
+				result = getOptimizationIssueFeature(model, path, path_type);
+			}
+		}
+		return result;
+	}
+
+	private ValidationSourceFeature getAADMIssueFeature(AADM_Model model, String path, String path_type,
+			StringTokenizer st) {
+		ValidationSourceFeature result = null;
+		if (st.hasMoreTokens()) {
+			if ("node_templates".equals(st.nextToken())) {
+				if (st.hasMoreTokens()) { // Node_template
+					String node_name = st.nextToken();
+					for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
+						if (node.getName().contentEquals(node_name)) {
+							result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+							if (st.hasMoreElements()) { // Node_Template children
+								String entity_name = st.nextToken();
+								if ("Property".equals(path_type)) {
+									for (EPropertyAssignment property : node.getNode().getProperties()
+											.getProperties()) {
+										if (property.getName().contentEquals(entity_name)) {
+											result = new ValidationSourceFeature(property,
+													AADMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
 										}
-									}else if ("requirements".equals(path_type)) {
-										boolean req_found = false;
-										if (node.getNode().getRequirements()!=null) {
-											for (ERequirementAssignment req: node.getNode().getRequirements().getRequirements()) {
-												//Target requirement found
-												if (req.getName().contentEquals(getRequirement(path))) {
-													req_found = true;
-													result = new ValidationSourceFeature(req,
-															AADMPackage.Literals.EREQUIREMENT_ASSIGNMENT__NAME);
-												}
-											}										}
-										if (!req_found)
-											result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
-										
 									}
+								}else if ("requirements".equals(path_type)) {
+									boolean req_found = false;
+									if (node.getNode().getRequirements()!=null) {
+										for (ERequirementAssignment req: node.getNode().getRequirements().getRequirements()) {
+											//Target requirement found
+											if (req.getName().contentEquals(getRequirement(path))) {
+												req_found = true;
+												result = new ValidationSourceFeature(req,
+														AADMPackage.Literals.EREQUIREMENT_ASSIGNMENT__NAME);
+											}
+										}										}
+									if (!req_found)
+										result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+									
 								}
 							}
 						}
 					}
 				}
 			}
+		}
+		return result;
+	}
+	
+	private ValidationSourceFeature getOptimizationIssueFeature(Optimization_Model model, String path, String path_type) {
+		ValidationSourceFeature result = null;
+		JsonObject pathObject = new Gson().fromJson(path, JsonObject.class);
+		if (pathObject.has("app_type-ai_training")) {
+			EAITrainingCase aiTrainingCase = (EAITrainingCase) model.getOptimization().getApp_optimization();
+			result = new ValidationSourceFeature(aiTrainingCase, OptimizationPackage.Literals.EAI_TRAINING_CASE__AI_TRAINING);
+			JsonObject aiTrainingObject = pathObject.get("app_type-ai_training").getAsJsonObject();
+			if (aiTrainingObject.has("data")) {
+				EAITraining aiTraining = aiTrainingCase.getAi_training();
+				result = new ValidationSourceFeature(aiTraining, OptimizationPackage.Literals.EAI_TRAINING__DATA);
+			}	
 		}
 		return result;
 	}
@@ -700,22 +934,22 @@ public class BackendProxy {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		String aadmIri = "0000:1234:1236:4533:6353";
-		Path path = Paths.get("/home/yosu/.aadm.properties");
-		Properties props = new Properties();
-
-		// Create properties file if it does not exist
-		if (!Files.exists(path, LinkOption.NOFOLLOW_LINKS))
-			Files.createFile(path);
-		try (final FileChannel inChannel = FileChannel.open(path, StandardOpenOption.READ);
-				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
-			props.load(Channels.newInputStream(inChannel));
-		}
-		props.setProperty("aadmIRI", aadmIri);
-		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE)) {
-			props.store(Channels.newOutputStream(outChannel), "AADM Metadata");
-		}
-	}
+//	public static void main(String[] args) throws IOException {
+//		String aadmIri = "0000:1234:1236:4533:6353";
+//		Path path = Paths.get("/home/yosu/.aadm.properties");
+//		Properties props = new Properties();
+//
+//		// Create properties file if it does not exist
+//		if (!Files.exists(path, LinkOption.NOFOLLOW_LINKS))
+//			Files.createFile(path);
+//		try (final FileChannel inChannel = FileChannel.open(path, StandardOpenOption.READ);
+//				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
+//			props.load(Channels.newInputStream(inChannel));
+//		}
+//		props.setProperty("aadmIRI", aadmIri);
+//		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE)) {
+//			props.store(Channels.newOutputStream(outChannel), "AADM Metadata");
+//		}
+//	}
 
 }

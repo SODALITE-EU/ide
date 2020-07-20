@@ -5,7 +5,7 @@ import java.util.List;
 
 public class KBOptimization {
 	String node_template;
-	List<String> optimizations = new ArrayList<>();
+	List<KBIssue> issues = new ArrayList<>();
 	
 	public String getNodeTemplate() {
 		return node_template;
@@ -14,12 +14,33 @@ public class KBOptimization {
 		this.node_template = node_template;
 	}
 	
-	public List<String> getOptimizations() {
-		return optimizations;
+	public List<KBIssue> getIssues() {
+		return issues;
 	}
 	
-	public void setOptimizations(List<String> optimizations) {
-		this.optimizations = optimizations;
+	public void setIssues(List<KBIssue> issues) {
+		this.issues = issues;
 	}
-
+	
+	public class KBIssue{
+		String path;
+		String value;
+		public String getPath() {
+			return path;
+		}
+		public void setPath(String path) {
+			this.path = path;
+		}
+		public String getValue() {
+			return value;
+		}
+		public void setValue(String value) {
+			this.value = value;
+		}
+		
+		@Override
+		public String toString() {
+			return "{\"path\": " + this.path + ", \"value\":" + this.value + "}";
+		}
+	}
 }

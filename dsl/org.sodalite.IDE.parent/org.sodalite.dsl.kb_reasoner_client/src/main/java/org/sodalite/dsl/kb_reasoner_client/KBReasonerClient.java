@@ -28,6 +28,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationRepor
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization;
+import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
@@ -240,7 +241,15 @@ public class KBReasonerClient implements KBReasoner {
 				if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
 					String result = hcee.getResponseBodyAsString();
 					JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
-					report.setErrors(processErrors (jsonObject.get("errors").getAsString()));
+					JsonElement errors = jsonObject.get("errors");
+					if(errors.isJsonArray()) { //There are validation errors
+						report.setErrors(processErrors (errors.getAsJsonArray().toString()));
+					}else { //There are optimization errors
+						JsonElement optimization_errors = errors.getAsJsonObject().get("templates_optimizations");
+						if (optimization_errors != null) {
+							report.setErrors(processOptimizationErrors (optimization_errors.toString()));
+						}
+					}
 				}else {
 					throw ex;
 				}
@@ -336,13 +345,26 @@ public class KBReasonerClient implements KBReasoner {
 			if (node != null) {
 				KBOptimization optimization = new KBOptimization();
 				optimization.setNodeTemplate(node);
-				JsonArray optimizationsJson = jsonObj.getAsJsonObject(node).getAsJsonArray("optimizations");
-				List<String> optimizations = new Gson().fromJson(optimizationsJson, ArrayList.class);
-				optimization.setOptimizations(optimizations);
+				JsonArray optimizationsJson = jsonObj.getAsJsonArray(node);
+				List<KBOptimization.KBIssue> issues = new ArrayList<>();
+				for (JsonElement optJson: optimizationsJson) {
+					JsonObject optJsonObj = (JsonObject) optJson;
+					KBOptimization.KBIssue issue = optimization.new KBIssue();
+					issue.setPath(optJsonObj.get("path").getAsString());
+					issue.setValue(optJsonObj.get("value").getAsString());
+					issues.add(issue);
+				}
+				optimization.setIssues(issues);
 				kbOptimization.add(optimization);
 			}
 		}
 		return kbOptimization;
+	}
+	
+	private List<KBOptimizationError> processOptimizationErrors(String json) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		List<KBOptimizationError> errors = mapper.readValue(json, new TypeReference<List<KBOptimizationError>>(){});
+		return errors;
 	}
 	
 	private List<KBSuggestion> processSuggestions(JsonArray jsonArray) throws JsonMappingException, JsonProcessingException {
