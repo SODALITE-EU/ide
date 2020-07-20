@@ -37,5 +37,10 @@ public class KBOptimization {
 		public void setValue(String value) {
 			this.value = value;
 		}
+		
+		@Override
+		public String toString() {
+			return "{\"path\": " + this.path + ", \"value\":" + this.value + "}";
+		}
 	}
 }

@@ -346,7 +346,14 @@ public class KBReasonerClient implements KBReasoner {
 				KBOptimization optimization = new KBOptimization();
 				optimization.setNodeTemplate(node);
 				JsonArray optimizationsJson = jsonObj.getAsJsonArray(node);
-				List<KBOptimization.KBIssue> issues = new Gson().fromJson(optimizationsJson, ArrayList.class);
+				List<KBOptimization.KBIssue> issues = new ArrayList<>();
+				for (JsonElement optJson: optimizationsJson) {
+					JsonObject optJsonObj = (JsonObject) optJson;
+					KBOptimization.KBIssue issue = optimization.new KBIssue();
+					issue.setPath(optJsonObj.get("path").getAsString());
+					issue.setValue(optJsonObj.get("value").getAsString());
+					issues.add(issue);
+				}
 				optimization.setIssues(issues);
 				kbOptimization.add(optimization);
 			}
