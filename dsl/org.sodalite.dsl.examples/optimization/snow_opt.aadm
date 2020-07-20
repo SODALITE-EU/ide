@@ -69,6 +69,8 @@ node_templates:
 		 	ports: ['8080:8080']
 		 	exposed_ports: ['8080']
 		 	volumes: "/tmp/docker:/tmp"
+		 	alias: "alias"
+		 	registry_url: "registry_url"
 		 	
 		 optimization: ai_training.tensor_flow
 		 
@@ -80,14 +82,16 @@ node_templates:
 		 		node: tensorflow
 		 				 	
 	
-	skyline_alignment:
+	skyline_alignment: 
 		type: sodalite.nodes.DockerizedComponent
 		properties:
 			image_name: "snow-skyline-alignment"
 			ports: ["8081:8080", "80:8080"]
 			exposed_ports: ["8080"]
 			volumes: "/tmp/docker:/tmp"
-		
+			alias: "alias"
+			registry_url: "registry_url"
+
 		requirements:
 			host:
 				node: snow-docker_host
