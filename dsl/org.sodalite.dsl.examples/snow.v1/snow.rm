@@ -59,7 +59,8 @@ node_types:
 									entity: SELF
 									req_cap: tosca.nodes.Compute.host
 									
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/create_docker_host.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/create_docker_host.yml"
 					
 					delete:
 						inputs:
@@ -68,7 +69,8 @@ node_types:
 									property: sodalite.nodes.DockerHost.registry_ip
 									entity: SELF
 								
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/delete_docker_host.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/delete_docker_host.yml"
 					
 		capabilities:
 			host:
@@ -188,7 +190,8 @@ node_types:
 									property: sodalite.nodes.DockerizedComponent.restart_policy
 									entity: SELF
 							
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_container.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_container.yml"
 					
 					delete:
 						inputs:
@@ -197,7 +200,8 @@ node_types:
 									property: sodalite.nodes.DockerizedComponent.alias
 									entity: SELF
 									
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_container.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_container.yml"
 		
 		requirements:
 			host:
@@ -247,7 +251,8 @@ node_types:
 	  								property: sodalite.nodes.OpenStack.SecurityRules.ports
 	  								entity: SELF
 	  					
-	  					implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_create.yml"
+	  					implementation: 
+	  						primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_create.yml"
 	  				
 	  				delete:
 	  					inputs:
@@ -256,7 +261,8 @@ node_types:
 	  								property: sodalite.nodes.OpenStack.SecurityRules.group_name
 	  								entity: SELF
 	  					
-	  					implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
+	  					implementation: 
+	  						primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
 
 	sodalite.nodes.OpenStack.VM:
 		derived_from: tosca.nodes.Compute
@@ -341,7 +347,8 @@ node_types:
 									property: sodalite.nodes.OpenStack.VM.key_name
 									entity: SELF
 																		
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
 					
 					delete:
 						inputs:
@@ -350,7 +357,8 @@ node_types:
 									attribute: sodalite.nodes.OpenStack.VM.id
 									entity: SELF
 						
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml"
+						implementation:
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml"
 					
 		requirements:
 			protected_by:

@@ -13,7 +13,6 @@ import org.sodalite.dsl.rM.EPropertyDefinition
 import org.sodalite.dsl.rM.EAttributeDefinition
 import org.sodalite.dsl.rM.ERequirementDefinition
 import org.sodalite.dsl.rM.ECapabilityDefinition
-import org.eclipse.emf.ecore.EObject
 import java.util.Map
 import java.util.HashMap
 import org.sodalite.dsl.rM.EInterfaceDefinition
@@ -301,15 +300,24 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "path" ;
-	  exchange:value '«o.operation.implementation.primary»' ;
+	  exchange:value '«o.operation.implementation.primary.file»' ;
 	.
 	
 	«putParameterNumber(o, "primary.content", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "content" ;
-	  exchange:value '«readFileAsString(o.operation.implementation.primary)»' ;
+	  exchange:value '«readFileAsString(o.operation.implementation.primary.file)»' ;
 	.
+	
+	«IF o.operation.implementation.primary.relative_path !== null»
+	«putParameterNumber(o, "primary.relative_path", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "relative_path" ;
+	  exchange:value '«o.operation.implementation.primary.relative_path»' ;
+	.
+	«ENDIF»
 	
 	«putParameterNumber(o, "primary", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -317,10 +325,13 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "primary" ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.path")» ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.content")» ;
+	  «IF o.operation.implementation.primary.relative_path !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.relative_path")» ;
+	  «ENDIF»
 	.
 	
 	«IF o.operation.implementation.dependencies !== null»
-	«FOR d:o.operation.implementation.dependencies.deps»
+	«FOR d:o.operation.implementation.dependencies.files.files»
 	
 	«putParameterNumber(d, "file.path", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -345,13 +356,25 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDFOR»
 	
+	«IF o.operation.implementation.dependencies.relative_path !== null»
+	«putParameterNumber(o, "dependencies.relative_path", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "relative_path" ;
+	  exchange:value '«o.operation.implementation.dependencies.relative_path»' ;
+	.
+	«ENDIF»
+	
 	«putParameterNumber(o, "dependencies", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "dependencies" ;
-	  «FOR d:o.operation.implementation.dependencies.deps»
+	  «FOR d:o.operation.implementation.dependencies.files.files»
 	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file")» ; 
 	  «ENDFOR»
+	  «IF o.operation.implementation.dependencies.relative_path !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "dependencies.relative_path")» ;
+	  «ENDIF»
 	.
 	«ENDIF»
 	

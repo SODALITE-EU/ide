@@ -267,20 +267,36 @@ EOperationDefinition:
 	END;
 
 EOperationDefinitionBody:
-	{EOperationDefinitionBody} (('description:' description=STRING)? &
+	{EOperationDefinitionBody} (
+	('description:' description=STRING)? &
 	('inputs:'
 	BEGIN
 	inputs=EInputs
 	END)? &
-	(implementation=EImplementation)?);
+	('implementation:'
+		BEGIN
+		implementation=EImplementation
+		END
+	)?
+	);
 	
 EImplementation:
-	('implementation:' primary=STRING)? &
-	(BEGIN 'dependencies:''[' (dependencies=EDependencies)? ']' END)?
+	(primary=EPrimary)
+	(dependencies=EDependencies)?
+;
+
+EPrimary:
+	('primary:' file=STRING)
+	(BEGIN 'relative_path:' relative_path=STRING END)?
 ;
 
 EDependencies:
-	deps+=STRING (',' deps+=STRING)*
+	'dependencies:''[' (files=EDependencyFiles)? ']'
+	(BEGIN 'relative_path:' relative_path=STRING END)?
+;
+
+EDependencyFiles:
+	files+=STRING (',' files+=STRING)*
 ;
 
 EInputs:

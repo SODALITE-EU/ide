@@ -47,8 +47,12 @@ node_types:
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
 									req_cap: tosca.nodes.SoftwareComponent.host
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_cert.yml" 
-						//dependencies: ["artifacts/ca.crt", "artifacts/ca.key"]
+						implementation:
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_cert.yml"
+								relative_path: "playbooks"
+							//dependencies: ["artifacts/ca.crt", "artifacts/ca.key"]
+								//relative_path: "artifacts"
+						
 						
 					delete:
 						inputs:
@@ -56,6 +60,7 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.RegistryCertificate.registry_ip
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_cert.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_cert.yml"
               
               

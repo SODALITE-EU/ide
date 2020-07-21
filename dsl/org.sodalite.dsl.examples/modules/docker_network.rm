@@ -20,11 +20,13 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: tosca.capabilities.Network.name
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_network.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_network.yml"
 					delete:
 						inputs:
 							docker_network_name:
 								default: get_property: 
 									entity: SELF
 									property: tosca.capabilities.Network.name
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_network.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_network.yml"

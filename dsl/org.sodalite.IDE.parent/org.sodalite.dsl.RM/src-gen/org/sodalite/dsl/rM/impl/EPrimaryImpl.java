@@ -8,72 +8,73 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EInRange;
+import org.sodalite.dsl.rM.EPrimary;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EIn Range</b></em>'.
+ * An implementation of the model object '<em><b>EPrimary</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInRangeImpl#getStart <em>Start</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInRangeImpl#getEnd <em>End</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EPrimaryImpl#getFile <em>File</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EPrimaryImpl#getRelative_path <em>Relative path</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EInRangeImpl extends EConstraintImpl implements EInRange
+public class EPrimaryImpl extends MinimalEObjectImpl.Container implements EPrimary
 {
   /**
-   * The default value of the '{@link #getStart() <em>Start</em>}' attribute.
+   * The default value of the '{@link #getFile() <em>File</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStart()
+   * @see #getFile()
    * @generated
    * @ordered
    */
-  protected static final String START_EDEFAULT = null;
+  protected static final String FILE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getStart() <em>Start</em>}' attribute.
+   * The cached value of the '{@link #getFile() <em>File</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStart()
+   * @see #getFile()
    * @generated
    * @ordered
    */
-  protected String start = START_EDEFAULT;
+  protected String file = FILE_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getEnd() <em>End</em>}' attribute.
+   * The default value of the '{@link #getRelative_path() <em>Relative path</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEnd()
+   * @see #getRelative_path()
    * @generated
    * @ordered
    */
-  protected static final String END_EDEFAULT = null;
+  protected static final String RELATIVE_PATH_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getEnd() <em>End</em>}' attribute.
+   * The cached value of the '{@link #getRelative_path() <em>Relative path</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEnd()
+   * @see #getRelative_path()
    * @generated
    * @ordered
    */
-  protected String end = END_EDEFAULT;
+  protected String relative_path = RELATIVE_PATH_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EInRangeImpl()
+  protected EPrimaryImpl()
   {
     super();
   }
@@ -86,7 +87,7 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
   @Override
   protected EClass eStaticClass()
   {
-    return RMPackage.Literals.EIN_RANGE;
+    return RMPackage.Literals.EPRIMARY;
   }
 
   /**
@@ -95,9 +96,9 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
    * @generated
    */
   @Override
-  public String getStart()
+  public String getFile()
   {
-    return start;
+    return file;
   }
 
   /**
@@ -106,12 +107,12 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
    * @generated
    */
   @Override
-  public void setStart(String newStart)
+  public void setFile(String newFile)
   {
-    String oldStart = start;
-    start = newStart;
+    String oldFile = file;
+    file = newFile;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EIN_RANGE__START, oldStart, start));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPRIMARY__FILE, oldFile, file));
   }
 
   /**
@@ -120,9 +121,9 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
    * @generated
    */
   @Override
-  public String getEnd()
+  public String getRelative_path()
   {
-    return end;
+    return relative_path;
   }
 
   /**
@@ -131,12 +132,12 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
    * @generated
    */
   @Override
-  public void setEnd(String newEnd)
+  public void setRelative_path(String newRelative_path)
   {
-    String oldEnd = end;
-    end = newEnd;
+    String oldRelative_path = relative_path;
+    relative_path = newRelative_path;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EIN_RANGE__END, oldEnd, end));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPRIMARY__RELATIVE_PATH, oldRelative_path, relative_path));
   }
 
   /**
@@ -149,10 +150,10 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
   {
     switch (featureID)
     {
-      case RMPackage.EIN_RANGE__START:
-        return getStart();
-      case RMPackage.EIN_RANGE__END:
-        return getEnd();
+      case RMPackage.EPRIMARY__FILE:
+        return getFile();
+      case RMPackage.EPRIMARY__RELATIVE_PATH:
+        return getRelative_path();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -167,11 +168,11 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
   {
     switch (featureID)
     {
-      case RMPackage.EIN_RANGE__START:
-        setStart((String)newValue);
+      case RMPackage.EPRIMARY__FILE:
+        setFile((String)newValue);
         return;
-      case RMPackage.EIN_RANGE__END:
-        setEnd((String)newValue);
+      case RMPackage.EPRIMARY__RELATIVE_PATH:
+        setRelative_path((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -187,11 +188,11 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
   {
     switch (featureID)
     {
-      case RMPackage.EIN_RANGE__START:
-        setStart(START_EDEFAULT);
+      case RMPackage.EPRIMARY__FILE:
+        setFile(FILE_EDEFAULT);
         return;
-      case RMPackage.EIN_RANGE__END:
-        setEnd(END_EDEFAULT);
+      case RMPackage.EPRIMARY__RELATIVE_PATH:
+        setRelative_path(RELATIVE_PATH_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -207,10 +208,10 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
   {
     switch (featureID)
     {
-      case RMPackage.EIN_RANGE__START:
-        return START_EDEFAULT == null ? start != null : !START_EDEFAULT.equals(start);
-      case RMPackage.EIN_RANGE__END:
-        return END_EDEFAULT == null ? end != null : !END_EDEFAULT.equals(end);
+      case RMPackage.EPRIMARY__FILE:
+        return FILE_EDEFAULT == null ? file != null : !FILE_EDEFAULT.equals(file);
+      case RMPackage.EPRIMARY__RELATIVE_PATH:
+        return RELATIVE_PATH_EDEFAULT == null ? relative_path != null : !RELATIVE_PATH_EDEFAULT.equals(relative_path);
     }
     return super.eIsSet(featureID);
   }
@@ -226,12 +227,12 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (start: ");
-    result.append(start);
-    result.append(", end: ");
-    result.append(end);
+    result.append(" (file: ");
+    result.append(file);
+    result.append(", relative_path: ");
+    result.append(relative_path);
     result.append(')');
     return result.toString();
   }
 
-} //EInRangeImpl
+} //EPrimaryImpl
