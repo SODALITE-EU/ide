@@ -4,7 +4,9 @@
 package org.sodalite.dsl.ui.quickfix;
 
 import com.google.common.base.Objects;
-import java.util.List;
+import java.text.MessageFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
@@ -13,14 +15,12 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.sodalite.dsl.aADM.AADMFactory;
 import org.sodalite.dsl.aADM.ENodeTemplate;
-import org.sodalite.dsl.aADM.EPropertyAssignment;
-import org.sodalite.dsl.rM.ELIST;
-import org.sodalite.dsl.rM.EPropertyAssignmentValue;
-import org.sodalite.dsl.rM.RMFactory;
+import org.sodalite.dsl.aADM.ENodeTemplateBody;
+import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.aADM.ERequirementAssignments;
+import org.sodalite.dsl.aADM.impl.ENodeTemplatesImpl;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 
 /**
@@ -30,33 +30,63 @@ import org.sodalite.dsl.ui.validation.ValidationIssue;
  */
 @SuppressWarnings("all")
 public class AADMQuickfixProvider extends DefaultQuickfixProvider {
-  @Fix(ValidationIssue.OPTIMIZATION)
-  public void fixNodeTypeName(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    final String message = "Apply recommended optimizations";
-    final String sub_message = ((List<String>)Conversions.doWrapArray(issue.getData())).toString();
+  @Fix(ValidationIssue.REQUIREMENT)
+  public void fixRequirement(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    String[] _data = issue.getData();
+    final String data = ((String[]) _data)[0];
+    final String targetRequirement = this.getSubstring(data, "\\{(.*?)=");
+    final String targetNode = this.getSubstring(data, "=(.*?)\\}");
+    final String message = MessageFormat.format("Create requirement \"{0}\" with node \"{1}\"", targetRequirement, targetNode);
+    final String sub_message = message;
     final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
-      EPropertyAssignment opt = null;
+      ERequirementAssignment req = null;
       ENodeTemplate node = ((ENodeTemplate) nodeTemplate);
-      EList<EPropertyAssignment> _properties = node.getNode().getProperties().getProperties();
-      for (final EPropertyAssignment prop : _properties) {
-        boolean _equalsIgnoreCase = prop.getName().equalsIgnoreCase("optimization");
+      ERequirementAssignments _requirements = node.getNode().getRequirements();
+      boolean _equals = Objects.equal(_requirements, null);
+      if (_equals) {
+        final ERequirementAssignments requirements = AADMFactory.eINSTANCE.createERequirementAssignments();
+        ENodeTemplateBody _node = node.getNode();
+        _node.setRequirements(requirements);
+      }
+      EList<ERequirementAssignment> _requirements_1 = node.getNode().getRequirements().getRequirements();
+      for (final ERequirementAssignment requirement : _requirements_1) {
+        boolean _equalsIgnoreCase = req.getName().equalsIgnoreCase(targetRequirement);
         if (_equalsIgnoreCase) {
-          opt = prop;
+          req = requirement;
         }
       }
-      boolean _equals = Objects.equal(opt, null);
-      if (_equals) {
-        opt = AADMFactory.eINSTANCE.createEPropertyAssignment();
-        opt.setName("optimization");
-        opt.setValue(RMFactory.eINSTANCE.createELIST());
-        node.getNode().getProperties().getProperties().add(opt);
-      } else {
-        EPropertyAssignmentValue _value = opt.getValue();
-        ((ELIST) _value).getList().clear();
+      boolean _equals_1 = Objects.equal(req, null);
+      if (_equals_1) {
+        req = AADMFactory.eINSTANCE.createERequirementAssignment();
+        req.setName(targetRequirement);
+        node.getNode().getRequirements().getRequirements().add(req);
       }
-      EPropertyAssignmentValue _value_1 = opt.getValue();
-      CollectionExtensions.<String>addAll(((ELIST) _value_1).getList(), issue.getData());
+      EObject _eContainer = nodeTemplate.eContainer();
+      final ENodeTemplatesImpl model = ((ENodeTemplatesImpl) _eContainer);
+      req.setNode(this.getNode(model, targetNode));
     };
     acceptor.accept(issue, message, sub_message, "", _function);
+  }
+  
+  public ENodeTemplate getNode(final ENodeTemplatesImpl templates, final String name) {
+    ENodeTemplate node = null;
+    EList<ENodeTemplate> _nodeTemplates = templates.getNodeTemplates();
+    for (final ENodeTemplate n : _nodeTemplates) {
+      boolean _equals = n.getName().equals(name);
+      if (_equals) {
+        node = n;
+      }
+    }
+    return node;
+  }
+  
+  public String getSubstring(final String data, final String sPattern) {
+    final Pattern pattern = Pattern.compile(sPattern);
+    final Matcher matcher = pattern.matcher(data);
+    boolean _find = matcher.find();
+    if (_find) {
+      return matcher.group(1);
+    }
+    return null;
   }
 }
