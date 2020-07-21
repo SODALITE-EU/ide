@@ -749,8 +749,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _primary = o.getOperation().getImplementation().getPrimary();
-        _builder.append(_primary, "  ");
+        String _file = o.getOperation().getImplementation().getPrimary().getFile();
+        _builder.append(_file, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -770,18 +770,45 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _readFileAsString = this.readFileAsString(o.getOperation().getImplementation().getPrimary());
+        String _readFileAsString = this.readFileAsString(o.getOperation().getImplementation().getPrimary().getFile());
         _builder.append(_readFileAsString, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
         _builder.newLine();
+        {
+          String _relative_path = o.getOperation().getImplementation().getPrimary().getRelative_path();
+          boolean _tripleNotEquals_2 = (_relative_path != null);
+          if (_tripleNotEquals_2) {
+            this.putParameterNumber(o, "primary.relative_path", Integer.valueOf(this.parameter_counter));
+            _builder.newLineIfNotEmpty();
+            _builder.append(":Parameter_");
+            int _plusPlus_3 = this.parameter_counter++;
+            _builder.append(_plusPlus_3);
+            _builder.newLineIfNotEmpty();
+            _builder.append("  ");
+            _builder.append("rdf:type exchange:Parameter ;");
+            _builder.newLine();
+            _builder.append("  ");
+            _builder.append("exchange:name \"relative_path\" ;");
+            _builder.newLine();
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            String _relative_path_1 = o.getOperation().getImplementation().getPrimary().getRelative_path();
+            _builder.append(_relative_path_1, "  ");
+            _builder.append("\' ;");
+            _builder.newLineIfNotEmpty();
+            _builder.append(".");
+            _builder.newLine();
+          }
+        }
+        _builder.newLine();
         this.putParameterNumber(o, "primary", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
-        int _plusPlus_3 = this.parameter_counter++;
-        _builder.append(_plusPlus_3);
+        int _plusPlus_4 = this.parameter_counter++;
+        _builder.append(_plusPlus_4);
         _builder.newLineIfNotEmpty();
         _builder.append("  ");
         _builder.append("rdf:type exchange:Parameter ;");
@@ -801,22 +828,34 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append(_parameterNumber_2, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
+        {
+          String _relative_path_2 = o.getOperation().getImplementation().getPrimary().getRelative_path();
+          boolean _tripleNotEquals_3 = (_relative_path_2 != null);
+          if (_tripleNotEquals_3) {
+            _builder.append("  ");
+            _builder.append("exchange:hasParameter :Parameter_");
+            Integer _parameterNumber_3 = this.getParameterNumber(o, "primary.relative_path");
+            _builder.append(_parameterNumber_3, "  ");
+            _builder.append(" ;");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.append(".");
         _builder.newLine();
         _builder.newLine();
         {
           EDependencies _dependencies = o.getOperation().getImplementation().getDependencies();
-          boolean _tripleNotEquals_2 = (_dependencies != null);
-          if (_tripleNotEquals_2) {
+          boolean _tripleNotEquals_4 = (_dependencies != null);
+          if (_tripleNotEquals_4) {
             {
-              EList<String> _deps = o.getOperation().getImplementation().getDependencies().getDeps();
-              for(final String d : _deps) {
+              EList<String> _files = o.getOperation().getImplementation().getDependencies().getFiles().getFiles();
+              for(final String d : _files) {
                 _builder.newLine();
                 this.putParameterNumber(d, "file.path", Integer.valueOf(this.parameter_counter));
                 _builder.newLineIfNotEmpty();
                 _builder.append(":Parameter_");
-                int _plusPlus_4 = this.parameter_counter++;
-                _builder.append(_plusPlus_4);
+                int _plusPlus_5 = this.parameter_counter++;
+                _builder.append(_plusPlus_5);
                 _builder.newLineIfNotEmpty();
                 _builder.append("  ");
                 _builder.append("rdf:type exchange:Parameter ;");
@@ -836,8 +875,8 @@ public class RMGenerator extends AbstractGenerator {
                 this.putParameterNumber(d, "file.content", Integer.valueOf(this.parameter_counter));
                 _builder.newLineIfNotEmpty();
                 _builder.append(":Parameter_");
-                int _plusPlus_5 = this.parameter_counter++;
-                _builder.append(_plusPlus_5);
+                int _plusPlus_6 = this.parameter_counter++;
+                _builder.append(_plusPlus_6);
                 _builder.newLineIfNotEmpty();
                 _builder.append("  ");
                 _builder.append("rdf:type exchange:Parameter ;");
@@ -857,8 +896,8 @@ public class RMGenerator extends AbstractGenerator {
                 this.putParameterNumber(d, "file", Integer.valueOf(this.parameter_counter));
                 _builder.newLineIfNotEmpty();
                 _builder.append(":Parameter_");
-                int _plusPlus_6 = this.parameter_counter++;
-                _builder.append(_plusPlus_6);
+                int _plusPlus_7 = this.parameter_counter++;
+                _builder.append(_plusPlus_7);
                 _builder.newLineIfNotEmpty();
                 _builder.append("  ");
                 _builder.append("rdf:type exchange:Parameter ;");
@@ -868,15 +907,42 @@ public class RMGenerator extends AbstractGenerator {
                 _builder.newLine();
                 _builder.append("  ");
                 _builder.append("exchange:hasParameter :Parameter_");
-                Integer _parameterNumber_3 = this.getParameterNumber(d, "file.path");
-                _builder.append(_parameterNumber_3, "  ");
+                Integer _parameterNumber_4 = this.getParameterNumber(d, "file.path");
+                _builder.append(_parameterNumber_4, "  ");
                 _builder.append(" ;");
                 _builder.newLineIfNotEmpty();
                 _builder.append("  ");
                 _builder.append("exchange:hasParameter :Parameter_");
-                Integer _parameterNumber_4 = this.getParameterNumber(d, "file.content");
-                _builder.append(_parameterNumber_4, "  ");
+                Integer _parameterNumber_5 = this.getParameterNumber(d, "file.content");
+                _builder.append(_parameterNumber_5, "  ");
                 _builder.append(" ;");
+                _builder.newLineIfNotEmpty();
+                _builder.append(".");
+                _builder.newLine();
+              }
+            }
+            _builder.newLine();
+            {
+              String _relative_path_3 = o.getOperation().getImplementation().getDependencies().getRelative_path();
+              boolean _tripleNotEquals_5 = (_relative_path_3 != null);
+              if (_tripleNotEquals_5) {
+                this.putParameterNumber(o, "dependencies.relative_path", Integer.valueOf(this.parameter_counter));
+                _builder.newLineIfNotEmpty();
+                _builder.append(":Parameter_");
+                int _plusPlus_8 = this.parameter_counter++;
+                _builder.append(_plusPlus_8);
+                _builder.newLineIfNotEmpty();
+                _builder.append("  ");
+                _builder.append("rdf:type exchange:Parameter ;");
+                _builder.newLine();
+                _builder.append("  ");
+                _builder.append("exchange:name \"relative_path\" ;");
+                _builder.newLine();
+                _builder.append("  ");
+                _builder.append("exchange:value \'");
+                String _relative_path_4 = o.getOperation().getImplementation().getDependencies().getRelative_path();
+                _builder.append(_relative_path_4, "  ");
+                _builder.append("\' ;");
                 _builder.newLineIfNotEmpty();
                 _builder.append(".");
                 _builder.newLine();
@@ -886,8 +952,8 @@ public class RMGenerator extends AbstractGenerator {
             this.putParameterNumber(o, "dependencies", Integer.valueOf(this.parameter_counter));
             _builder.newLineIfNotEmpty();
             _builder.append(":Parameter_");
-            int _plusPlus_7 = this.parameter_counter++;
-            _builder.append(_plusPlus_7);
+            int _plusPlus_9 = this.parameter_counter++;
+            _builder.append(_plusPlus_9);
             _builder.newLineIfNotEmpty();
             _builder.append("  ");
             _builder.append("rdf:type exchange:Parameter ;");
@@ -896,13 +962,25 @@ public class RMGenerator extends AbstractGenerator {
             _builder.append("exchange:name \"dependencies\" ;");
             _builder.newLine();
             {
-              EList<String> _deps_1 = o.getOperation().getImplementation().getDependencies().getDeps();
-              for(final String d_1 : _deps_1) {
+              EList<String> _files_1 = o.getOperation().getImplementation().getDependencies().getFiles().getFiles();
+              for(final String d_1 : _files_1) {
                 _builder.append("  ");
                 _builder.append("exchange:hasParameter :Parameter_");
-                Integer _parameterNumber_5 = this.getParameterNumber(d_1, "file");
-                _builder.append(_parameterNumber_5, "  ");
+                Integer _parameterNumber_6 = this.getParameterNumber(d_1, "file");
+                _builder.append(_parameterNumber_6, "  ");
                 _builder.append(" ; ");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              String _relative_path_5 = o.getOperation().getImplementation().getDependencies().getRelative_path();
+              boolean _tripleNotEquals_6 = (_relative_path_5 != null);
+              if (_tripleNotEquals_6) {
+                _builder.append("  ");
+                _builder.append("exchange:hasParameter :Parameter_");
+                Integer _parameterNumber_7 = this.getParameterNumber(o, "dependencies.relative_path");
+                _builder.append(_parameterNumber_7, "  ");
+                _builder.append(" ;");
                 _builder.newLineIfNotEmpty();
               }
             }
@@ -914,8 +992,8 @@ public class RMGenerator extends AbstractGenerator {
         this.putParameterNumber(o, "implementation", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
-        int _plusPlus_8 = this.parameter_counter++;
-        _builder.append(_plusPlus_8);
+        int _plusPlus_10 = this.parameter_counter++;
+        _builder.append(_plusPlus_10);
         _builder.newLineIfNotEmpty();
         _builder.append("  ");
         _builder.append("rdf:type exchange:Parameter ;");
@@ -925,18 +1003,18 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_6 = this.getParameterNumber(o, "primary");
-        _builder.append(_parameterNumber_6, "  ");
+        Integer _parameterNumber_8 = this.getParameterNumber(o, "primary");
+        _builder.append(_parameterNumber_8, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
         {
           EDependencies _dependencies_1 = o.getOperation().getImplementation().getDependencies();
-          boolean _tripleNotEquals_3 = (_dependencies_1 != null);
-          if (_tripleNotEquals_3) {
+          boolean _tripleNotEquals_7 = (_dependencies_1 != null);
+          if (_tripleNotEquals_7) {
             _builder.append(" ");
             _builder.append("exchange:hasParameter :Parameter_");
-            Integer _parameterNumber_7 = this.getParameterNumber(o, "dependencies");
-            _builder.append(_parameterNumber_7, " ");
+            Integer _parameterNumber_9 = this.getParameterNumber(o, "dependencies");
+            _builder.append(_parameterNumber_9, " ");
             _builder.append(" ;");
             _builder.newLineIfNotEmpty();
           }
@@ -949,8 +1027,8 @@ public class RMGenerator extends AbstractGenerator {
     this.putParameterNumber(o, "name", Integer.valueOf(this.parameter_counter));
     _builder.newLineIfNotEmpty();
     _builder.append(":Parameter_");
-    int _plusPlus_9 = this.parameter_counter++;
-    _builder.append(_plusPlus_9);
+    int _plusPlus_11 = this.parameter_counter++;
+    _builder.append(_plusPlus_11);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("rdf:type exchange:Parameter ;");
@@ -963,24 +1041,24 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     {
       EInputs _inputs_2 = o.getOperation().getInputs();
-      boolean _tripleNotEquals_4 = (_inputs_2 != null);
-      if (_tripleNotEquals_4) {
+      boolean _tripleNotEquals_8 = (_inputs_2 != null);
+      if (_tripleNotEquals_8) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_8 = this.getParameterNumber(o, "inputs");
-        _builder.append(_parameterNumber_8, "  ");
+        Integer _parameterNumber_10 = this.getParameterNumber(o, "inputs");
+        _builder.append(_parameterNumber_10, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
     }
     {
       EImplementation _implementation_1 = o.getOperation().getImplementation();
-      boolean _tripleNotEquals_5 = (_implementation_1 != null);
-      if (_tripleNotEquals_5) {
+      boolean _tripleNotEquals_9 = (_implementation_1 != null);
+      if (_tripleNotEquals_9) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_9 = this.getParameterNumber(o, "implementation");
-        _builder.append(_parameterNumber_9, "  ");
+        Integer _parameterNumber_11 = this.getParameterNumber(o, "implementation");
+        _builder.append(_parameterNumber_11, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }

@@ -216,12 +216,22 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EImplementation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primary" eType="#//EPrimary"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" eType="#//EDependencies"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPrimary">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relative_path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDependencies">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deps" unique="false" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="files" eType="#//EDependencyFiles"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relative_path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EDependencyFiles">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="files" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInputs">

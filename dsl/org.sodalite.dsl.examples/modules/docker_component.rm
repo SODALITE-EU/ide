@@ -124,14 +124,16 @@ node_types:
 									entity: SELF
 									attribute: sodalite.nodes.OpenStack.VM.public_address
 									req_cap: tosca.nodes.SoftwareComponent.host
-						implementation:  "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_container.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_container.yml"
 					delete:  
 						inputs:  
 							alias: 
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.alias
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_container.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_container.yml"
 	sodalite.nodes.TestComponent:
 		derived_from: tosca.nodes.SoftwareComponent
 		properties:
@@ -159,7 +161,8 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.TestComponent.test_port
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/test_container.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/test_container.yml"
 		requirements:
 			tested_component:
 				node: tosca.nodes.SoftwareComponent  

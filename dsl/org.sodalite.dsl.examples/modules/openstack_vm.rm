@@ -65,12 +65,14 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.OpenStack.VM.name
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
 					delete:  
 						inputs:  
 							id:                       
 								default: get_attribute:
 									entity: SELF
 									attribute: sodalite.nodes.OpenStack.VM.id
-						implementation: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
             

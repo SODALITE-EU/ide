@@ -216,13 +216,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   @Override
-  public void completeEImplementation_Primary(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeEPrimary_File(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String input = this.selectFile("Select implementation primary file");
     this.createEditableCompletionProposal(input, input, context, "", acceptor);
   }
   
   @Override
-  public void completeEImplementation_Dependencies(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeEDependencies_Files(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String input = this.selectFile("Select implementation dependency file");
     this.createEditableCompletionProposal(input, input, context, "", acceptor);
   }

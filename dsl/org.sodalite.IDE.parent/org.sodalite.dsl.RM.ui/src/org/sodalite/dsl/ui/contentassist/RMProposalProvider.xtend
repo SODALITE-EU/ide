@@ -206,13 +206,13 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		createEditableCompletionProposal ("{", "{", context, "Start a Map of key=value entries", acceptor);
 	}
 	
-	override void completeEImplementation_Primary(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	override void completeEPrimary_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
 		val input = selectFile ("Select implementation primary file")
 		createEditableCompletionProposal (input, input, context, "", acceptor);
 	}
 	
-	override void completeEImplementation_Dependencies(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	override void completeEDependencies_Files(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
 		val input = selectFile ("Select implementation dependency file")
 		createEditableCompletionProposal (input, input, context, "", acceptor);
