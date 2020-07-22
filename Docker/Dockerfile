@@ -14,5 +14,10 @@ RUN ./eclipse/eclipse -application org.eclipse.equinox.p2.director -noSplash -re
 #Sodalite IDE
 RUN ./eclipse/eclipse -application org.eclipse.equinox.p2.director -noSplash -repository https://raw.githubusercontent.com/SODALITE-EU/ide/master/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository -installIUs org.sodalite.dsl.AADM.feature.feature.group,org.sodalite.dsl.optimization.feature.feature.group,org.sodalite.dsl.RM.feature.feature.group
 
+#Sodalite workspace
+ADD workspace/ /workspace
+RUN ./eclipse/eclipse -application org.eclipse.equinox.p2.director -noSplash -repository http://download.eclipse.org/releases/2019-09 -installIUs org.eclipse.cdt.feature.group
+
+RUN ./eclipse/eclipse -nosplash -data /workspace -application org.eclipse.cdt.managedbuilder.core.headlessbuild -import /workspace/org.sodalite.dsl.examples
 
 ENTRYPOINT ["/sodalite/eclipse/eclipse", "-data", "/workspace"]
