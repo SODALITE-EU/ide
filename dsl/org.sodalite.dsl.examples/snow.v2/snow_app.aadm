@@ -1,3 +1,5 @@
+
+
 inputs:
 	ssh-key-name:  
 		type: string 
@@ -30,99 +32,6 @@ inputs:
 		default: "" 
 		
 node_templates:
-	
-	security-rules-snow:  
-		type: sodalite.nodes.OpenStack.SecurityRules 
-		properties:  
-			ports:  
-				component_ports:  
-					port_range_max: "8081" 
-					remote_ip_prefix: "0.0.0.0/0" 
-					port_range_min: "8080" 
-					protocol: "tcp" 
-				http_port:  
-					port_range_min: "80" 
-					port_range_max: "80" 
-					protocol: "tcp" 
-					remote_ip_prefix: "0.0.0.0/0" 
-				group_name:  "snow" 
-				group_description:  "Snow UC security group"
-				
-	snow-vm:  
-		type: sodalite.nodes.OpenStack.VM
-		properties:  
-			key_name:  get_input: ssh-key-name 
-			image: get_input: image-name 
-			name:  "snow-vm_am_10"
-			network: get_input: openstack-network-name  
-			security_groups:  get_input: security-groups 
-			flavor:  get_input: flavor-name
-		requirements:  
-			protected_by: 
-				node: security-rules-snow
-				
-	snow-vm-2:  
-		type: sodalite.nodes.OpenStack.VM
-		properties:  
-			key_name:  get_input: ssh-key-name 
-			image: get_input: image-name 
-			name:  "snow-vm_am_9"
-			network: get_input: openstack-network-name  
-			security_groups:  get_input: security-groups 
-			flavor:  get_input: flavor-name
-		requirements:  
-			protected_by: 
-				node: security-rules-snow
-				
-	snow-docker-host:  
-		type: sodalite.nodes.DockerHost 
-		requirements:  
-			host:  
-				node:snow-vm
-	
-	docker-registry-certificate:
-		type: sodalite.nodes.RegistryCertificate
-		properties:  
-			registry_ip: get_input: docker-registry-url 
-			country_name:  get_input: docker-registry-cert-country-name 
-			organization_name: get_input: docker-registry-cert-organization-name 
-			email_address: get_input: docker-registry-cert-email-address 
-		requirements:
-			host: 
-				node: snow-vm 
-			dependency: 
-				node: snow-docker-host
-		
-	snow-docker-host-2:  
-		type: sodalite.nodes.DockerHost 
-		requirements:  
-			host:  
-				node: snow-vm-2	
-				
-	docker-registry-certificate-2:
-		type: sodalite.nodes.RegistryCertificate
-		properties:  
-			registry_ip: get_input: docker-registry-url
-			country_name:  get_input: docker-registry-cert-country-name
-			organization_name: get_input: docker-registry-cert-organization-name
-			email_address: get_input: docker-registry-cert-email-address
-		requirements:
-			host: 
-				node: snow-vm-2 
-			dependency: 
-				node: snow-docker-host-2
-	
-	docker-registry:
-		type: sodalite.nodes.DockerRegistry
-		properties:  
-			docker_registry_url: get_input: docker-registry-url 
-		requirements:
-			host: 
-				node: snow-vm
-			dependency: 
-				node: snow-docker-host 
-			dependency: 
-				node: snow-docker-host-2
 				
 	configuration-demo:
 		type: sodalite.nodes.ConfigurationDemo  
@@ -134,39 +43,6 @@ node_templates:
 			remote_server: 
 				node: snow-vm-2
 				
-	snow-docker-network:
-		type: sodalite.nodes.DockerNetwork
-		properties: 
-			name: get_input: docker-network
-		requirements:
-			host: 
-				node: snow-vm    
-			dependency: 
-				node: snow-docker-host
-				
-	snow-docker-volume-shots:
-		type: sodalite.nodes.DockerVolume
-		properties:  
-			name: "snow_volume_shots"
-		requirements:
-			host: 
-				node: snow-vm
-	
-	snow-docker-volume-masks:
-		type: sodalite.nodes.DockerVolume
-		properties:  
-			name: "snow_volume_masks"
-		requirements:
-			host: 
-				node: snow-vm
-	
-	snow-docker-volume-daily-shots:
-		type: sodalite.nodes.DockerVolume
-		properties:  
-			name: "snow_volume_daily_shots"
-		requirements:
-			host: 
-				node: snow-vm
 	snow-mysql:
 		type: sodalite.nodes.DockerizedComponent 
 		properties:  

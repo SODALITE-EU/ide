@@ -32,58 +32,7 @@ inputs:
 		type: string
 		default: ""
 		
-node_templates:
-	vehicle-iot-vm:  
-		type: sodalite.nodes.OpenStack.VM 
-		properties:  
-			name:  "vehicle-iot-demo"
-			key_name: get_input: ssh-key-name  
-			image: get_input: image-name 
-			network: get_input: openstack-network-name
-			security_groups: get_input: security-groups
-			flavor: get_input: flavor-name
-
-	docker-host:
-		type: sodalite.nodes.DockerHost
-		requirements:
-			host: 
-				node: vehicle-iot-vm
-				
-	docker-registry-certificate:
-		type: sodalite.nodes.RegistryCertificate
-		properties:  
-			registry_ip: get_input: docker-registry-ip 
-			country_name: get_input: docker-registry-cert-country-name
-			organization_name: get_input: docker-registry-cert-organization-name
-			email_address: get_input: docker-registry-cert-email-address
-		requirements:
-			host: 
-				node: vehicle-iot-vm 
-			dependency: 
-				node: docker-host
-	
-	docker-registry:
-		type: sodalite.nodes.DockerRegistry
-		properties:  
-			docker_registry_url: get_input: docker-registry-url 
-			docker_user:  get_input: dockerhub-user 
-			docker_pass:  get_input: dockerhub-pass 
-		requirements:
-			host: 
-				node: vehicle-iot-vm
-			dependency: 
-				node: docker-host
-				
-	docker-network:
-		type: sodalite.nodes.DockerNetwork
-		properties:  
-			name: get_input: docker-network
-		requirements:
-			host: 
-				node: vehicle-iot-vm 
-			dependency: 
-				node: docker-host
-				
+node_templates:				
 	consul-container:
 		type: sodalite.nodes.DockerizedComponent
 		properties:
