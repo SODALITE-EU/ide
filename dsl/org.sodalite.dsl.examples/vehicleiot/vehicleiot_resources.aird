@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aADM="http://www.sodalite.org/dsl/AADM" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_wlUA0MwdEeqt15McUrpiXA" selectedViews="_xATTsMwdEeqt15McUrpiXA" version="14.1.0.201810161215">
+    <semanticResources>vehicleiot_resources.aadm</semanticResources>
+    <semanticResources>../optimization/snow_opt.aadm</semanticResources>
+    <semanticResources>vehicleiot_app.aadm</semanticResources>
+    <semanticResources>../xopera/xopera_stdlib_1_3.rm</semanticResources>
+    <semanticResources>../optimization/optimization_ai_training_tensorflow.opt</semanticResources>
+    <semanticResources>../modules/docker_network.rm</semanticResources>
+    <semanticResources>../snow.v1/snow.rm</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_xATTsMwdEeqt15McUrpiXA">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_0L5F8MwdEeqt15McUrpiXA" name="VehicleIoT Resources" repPath="#_0Lak0MwdEeqt15McUrpiXA">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']"/>
+        <target xmi:type="aADM:AADM_Model" href="vehicleiot_resources.aadm#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_0Lak0MwdEeqt15McUrpiXA" name="VehicleIoT Resources">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_0L00iswdEeqt15McUrpiXA" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_0L00i8wdEeqt15McUrpiXA"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_0L5F8cwdEeqt15McUrpiXA" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_0L5F8swdEeqt15McUrpiXA" type="Sirius" element="_0Lak0MwdEeqt15McUrpiXA" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_0L5tAMwdEeqt15McUrpiXA" type="2002" element="_0LkV0MwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0L7iNswdEeqt15McUrpiXA" type="3012" element="_0LmLBcwdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0L7iOcwdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0L7iOswdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0L8JQMwdEeqt15McUrpiXA" type="3003" element="_0LoAMMwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0L8JQcwdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L8JQswdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0L7iN8wdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L7iOMwdEeqt15McUrpiXA" y="-22" width="150" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0L6UEMwdEeqt15McUrpiXA" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_0L6UEcwdEeqt15McUrpiXA" type="7001">
+            <children xmi:type="notation:Node" xmi:id="_0L8JQ8wdEeqt15McUrpiXA" type="3009" element="_0LqccMwdEeqt15McUrpiXA">
+              <children xmi:type="notation:Node" xmi:id="_0L8wUMwdEeqt15McUrpiXA" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="_0L8wUcwdEeqt15McUrpiXA" type="7003">
+                <children xmi:type="notation:Node" xmi:id="_0L8wVcwdEeqt15McUrpiXA" type="3010" element="_0LrqkMwdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0L8wVswdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0L8wV8wdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0L8wWMwdEeqt15McUrpiXA" type="3010" element="_0LrqkswdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0L8wWcwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0L8wWswdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0L8wW8wdEeqt15McUrpiXA" type="3010" element="_0LsRoMwdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0L8wXMwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0L8wXcwdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0L8wXswdEeqt15McUrpiXA" type="3010" element="_0LsRoswdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0L8wX8wdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0L8wYMwdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0L9XYMwdEeqt15McUrpiXA" type="3010" element="_0LsRpMwdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0L9XYcwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0L9XYswdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0L9XY8wdEeqt15McUrpiXA" type="3010" element="_0LsRpswdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0L9XZMwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0L9XZcwdEeqt15McUrpiXA"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_0L8wUswdEeqt15McUrpiXA"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_0L8wU8wdEeqt15McUrpiXA"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_0L8wVMwdEeqt15McUrpiXA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0L8JRMwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" bold="true" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L8JRcwdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_0L6UEswdEeqt15McUrpiXA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_0L6UE8wdEeqt15McUrpiXA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_0L5tAcwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L5tAswdEeqt15McUrpiXA" x="522"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_0L6UFMwdEeqt15McUrpiXA" type="2002" element="_0Llj8cwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0L9XZswdEeqt15McUrpiXA" type="3012" element="_0Ls4sMwdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0L9XacwdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0L9XaswdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0L_MkMwdEeqt15McUrpiXA" type="3003" element="_0Ls4scwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0L_MkcwdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L_MkswdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0L9XZ8wdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L9XaMwdEeqt15McUrpiXA" x="-28" y="-22" width="150" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0L9Xa8wdEeqt15McUrpiXA" type="3012" element="_0LtfwcwdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0L-lgMwdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0L-lgcwdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0L_Mk8wdEeqt15McUrpiXA" type="3003" element="_0LuG0MwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0L_MlMwdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L_MlcwdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0L9XbMwdEeqt15McUrpiXA" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L9XbcwdEeqt15McUrpiXA" x="86" y="9" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0L67IMwdEeqt15McUrpiXA" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_0L67IcwdEeqt15McUrpiXA" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_0L67IswdEeqt15McUrpiXA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_0L67I8wdEeqt15McUrpiXA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_0L6UFcwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L6UFswdEeqt15McUrpiXA" x="630" y="360"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_0L67JMwdEeqt15McUrpiXA" type="2002" element="_0Llj9MwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0L_zoMwdEeqt15McUrpiXA" type="3012" element="_0Lut4MwdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0L_zo8wdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0L_zpMwdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0MBo0MwdEeqt15McUrpiXA" type="3003" element="_0Lut4cwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MBo0cwdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MBo0swdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0L_zocwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L_zoswdEeqt15McUrpiXA" x="172" y="-22" width="163" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0L_zpcwdEeqt15McUrpiXA" type="3012" element="_0Lut48wdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0MBBwMwdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0MBBwcwdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0MBo08wdEeqt15McUrpiXA" type="3003" element="_0Lut5MwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MBo1MwdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MBo1cwdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0L_zpswdEeqt15McUrpiXA" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L_zp8wdEeqt15McUrpiXA" x="18" y="-22" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MBBwswdEeqt15McUrpiXA" type="3012" element="_0LvU8MwdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0MBBxcwdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0MBBxswdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0MBo1swdEeqt15McUrpiXA" type="3003" element="_0LvU8cwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MBo18wdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MBo2MwdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0MBBw8wdEeqt15McUrpiXA" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MBBxMwdEeqt15McUrpiXA" x="408" y="-22" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0L67J8wdEeqt15McUrpiXA" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_0L67KMwdEeqt15McUrpiXA" type="7001">
+            <children xmi:type="notation:Node" xmi:id="_0MBo2cwdEeqt15McUrpiXA" type="3009" element="_0LvU88wdEeqt15McUrpiXA">
+              <children xmi:type="notation:Node" xmi:id="_0MCP4MwdEeqt15McUrpiXA" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="_0MCP4cwdEeqt15McUrpiXA" type="7003">
+                <children xmi:type="notation:Node" xmi:id="_0MCP5cwdEeqt15McUrpiXA" type="3010" element="_0Lv8AMwdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0MCP5swdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0MCP58wdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0MCP6MwdEeqt15McUrpiXA" type="3010" element="_0Lv8AswdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0MCP6cwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0MCP6swdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0MCP68wdEeqt15McUrpiXA" type="3010" element="_0Lv8BMwdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0MCP7MwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0MCP7cwdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0MCP7swdEeqt15McUrpiXA" type="3010" element="_0Lv8BswdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0MCP78wdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0MCP8MwdEeqt15McUrpiXA"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_0MCP4swdEeqt15McUrpiXA"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_0MCP48wdEeqt15McUrpiXA"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_0MCP5MwdEeqt15McUrpiXA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MBo2swdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" bold="true" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MBo28wdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_0L67KcwdEeqt15McUrpiXA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_0L67KswdEeqt15McUrpiXA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_0L67JcwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L67JswdEeqt15McUrpiXA" x="-126" y="566"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_0L67K8wdEeqt15McUrpiXA" type="2002" element="_0Llj98wdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0MCP8cwdEeqt15McUrpiXA" type="3012" element="_0LwjEMwdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0MC28MwdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0MC28cwdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0MDeAswdEeqt15McUrpiXA" type="3003" element="_0LwjEcwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MDeA8wdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MDeBMwdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0MCP8swdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MCP88wdEeqt15McUrpiXA" x="109" y="-22" width="150" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MC28swdEeqt15McUrpiXA" type="3012" element="_0LwjE8wdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0MC29cwdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0MC29swdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0MDeBcwdEeqt15McUrpiXA" type="3003" element="_0LwjFMwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MDeBswdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MDeB8wdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0MC288wdEeqt15McUrpiXA" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MC29MwdEeqt15McUrpiXA" y="-22" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MC298wdEeqt15McUrpiXA" type="3012" element="_0LwjFswdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0MDeAMwdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0MDeAcwdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0MDeCMwdEeqt15McUrpiXA" type="3003" element="_0LwjF8wdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MDeCcwdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MDeCswdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0MC2-MwdEeqt15McUrpiXA" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MC2-cwdEeqt15McUrpiXA" x="-92" y="37" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0L67LswdEeqt15McUrpiXA" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_0L67L8wdEeqt15McUrpiXA" type="7001">
+            <children xmi:type="notation:Node" xmi:id="_0MEFEMwdEeqt15McUrpiXA" type="3009" element="_0LxKIcwdEeqt15McUrpiXA">
+              <children xmi:type="notation:Node" xmi:id="_0MEFE8wdEeqt15McUrpiXA" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="_0MEFFMwdEeqt15McUrpiXA" type="7003">
+                <children xmi:type="notation:Node" xmi:id="_0MEFGMwdEeqt15McUrpiXA" type="3010" element="_0LxKJMwdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0MEFGcwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0MEFGswdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0MEFG8wdEeqt15McUrpiXA" type="3010" element="_0LxxMcwdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0MEFHMwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0MEFHcwdEeqt15McUrpiXA"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_0MEFHswdEeqt15McUrpiXA" type="3010" element="_0LxxM8wdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0MEFH8wdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0MEFIMwdEeqt15McUrpiXA"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_0MEFFcwdEeqt15McUrpiXA"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_0MEFFswdEeqt15McUrpiXA"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_0MEFF8wdEeqt15McUrpiXA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MEFEcwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" bold="true" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MEFEswdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_0L67MMwdEeqt15McUrpiXA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_0L67McwdEeqt15McUrpiXA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_0L67LMwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L67LcwdEeqt15McUrpiXA" x="1026" y="575"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_0L67MswdEeqt15McUrpiXA" type="2002" element="_0LmLAswdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0MEsIMwdEeqt15McUrpiXA" type="3012" element="_0LxxNcwdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0MEsI8wdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0MEsJMwdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0MFTNcwdEeqt15McUrpiXA" type="3003" element="_0LxxNswdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MFTNswdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MFTN8wdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0MEsIcwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MEsIswdEeqt15McUrpiXA" x="35" y="-22" width="150" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MEsJcwdEeqt15McUrpiXA" type="3012" element="_0LyYQMwdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0MEsKMwdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0MEsKcwdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0MFTOMwdEeqt15McUrpiXA" type="3003" element="_0LyYQcwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MFTOcwdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MFTOswdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0MEsJswdEeqt15McUrpiXA" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MEsJ8wdEeqt15McUrpiXA" x="-92" y="18" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MFTMMwdEeqt15McUrpiXA" type="3012" element="_0LyYQ8wdEeqt15McUrpiXA">
+            <children xmi:type="notation:Node" xmi:id="_0MFTM8wdEeqt15McUrpiXA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_0MFTNMwdEeqt15McUrpiXA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0MF6QMwdEeqt15McUrpiXA" type="3003" element="_0LyYRMwdEeqt15McUrpiXA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MF6QcwdEeqt15McUrpiXA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MF6QswdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0MFTMcwdEeqt15McUrpiXA" fontColor="1533850" fontName="Cantarell" fontHeight="12" italic="true"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MFTMswdEeqt15McUrpiXA" x="234" y="18" width="100" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0L7iMswdEeqt15McUrpiXA" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_0L7iM8wdEeqt15McUrpiXA" type="7001">
+            <children xmi:type="notation:Node" xmi:id="_0MF6Q8wdEeqt15McUrpiXA" type="3009" element="_0Ly_UMwdEeqt15McUrpiXA">
+              <children xmi:type="notation:Node" xmi:id="_0MF6RswdEeqt15McUrpiXA" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="_0MF6R8wdEeqt15McUrpiXA" type="7003">
+                <children xmi:type="notation:Node" xmi:id="_0MF6S8wdEeqt15McUrpiXA" type="3010" element="_0Ly_U8wdEeqt15McUrpiXA">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_0MF6TMwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_0MF6TcwdEeqt15McUrpiXA"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_0MF6SMwdEeqt15McUrpiXA"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_0MF6ScwdEeqt15McUrpiXA"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_0MF6SswdEeqt15McUrpiXA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0MF6RMwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" bold="true" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MF6RcwdEeqt15McUrpiXA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_0L7iNMwdEeqt15McUrpiXA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_0L7iNcwdEeqt15McUrpiXA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_0L7iMMwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0L7iMcwdEeqt15McUrpiXA" x="567" y="594"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_0L5F88wdEeqt15McUrpiXA"/>
+        <edges xmi:type="notation:Edge" xmi:id="_0MGhUMwdEeqt15McUrpiXA" type="4001" element="_0LzmYMwdEeqt15McUrpiXA" source="_0L9Xa8wdEeqt15McUrpiXA" target="_0L5tAMwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0MHIYMwdEeqt15McUrpiXA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MHIYcwdEeqt15McUrpiXA" x="8" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MHIYswdEeqt15McUrpiXA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MHIY8wdEeqt15McUrpiXA" x="-6" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MHIZMwdEeqt15McUrpiXA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MHIZcwdEeqt15McUrpiXA" x="-4" y="5"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_0MGhUcwdEeqt15McUrpiXA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_0MGhUswdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0MGhU8wdEeqt15McUrpiXA" points="[-6, -15, 71, 187]$[-77, -202, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MHIZswdEeqt15McUrpiXA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MHIZ8wdEeqt15McUrpiXA" id="(0.5030120481927711,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_0MHIaMwdEeqt15McUrpiXA" type="4001" element="_0L0NcMwdEeqt15McUrpiXA" source="_0L_zpcwdEeqt15McUrpiXA" target="_0L5tAMwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0MHvcMwdEeqt15McUrpiXA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MHvccwdEeqt15McUrpiXA" x="2" y="-11"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MHvcswdEeqt15McUrpiXA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MHvc8wdEeqt15McUrpiXA" x="-6" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MHvdMwdEeqt15McUrpiXA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MHvdcwdEeqt15McUrpiXA" x="2" y="4"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_0MHIacwdEeqt15McUrpiXA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_0MHIaswdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0MHIa8wdEeqt15McUrpiXA" points="[29, -15, -718, 362]$[747, -377, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MHvdswdEeqt15McUrpiXA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MHvd8wdEeqt15McUrpiXA" id="(0.5030120481927711,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_0MHveMwdEeqt15McUrpiXA" type="4001" element="_0L0NdcwdEeqt15McUrpiXA" source="_0MBBwswdEeqt15McUrpiXA" target="_0L6UFMwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0MHvfMwdEeqt15McUrpiXA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MHvfcwdEeqt15McUrpiXA" y="-11"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MHvfswdEeqt15McUrpiXA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MHvf8wdEeqt15McUrpiXA" x="-3" y="9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MIWgMwdEeqt15McUrpiXA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MIWgcwdEeqt15McUrpiXA" x="-3" y="6"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_0MHvecwdEeqt15McUrpiXA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_0MHveswdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0MHve8wdEeqt15McUrpiXA" points="[33, -15, -313, 140]$[346, -155, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MIWgswdEeqt15McUrpiXA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MIWg8wdEeqt15McUrpiXA" id="(0.5106382978723404,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_0MIWhMwdEeqt15McUrpiXA" type="4001" element="_0L0NeswdEeqt15McUrpiXA" source="_0MC28swdEeqt15McUrpiXA" target="_0L5tAMwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0MIWiMwdEeqt15McUrpiXA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MIWicwdEeqt15McUrpiXA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MIWiswdEeqt15McUrpiXA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MIWi8wdEeqt15McUrpiXA" x="4" y="9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MIWjMwdEeqt15McUrpiXA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MIWjcwdEeqt15McUrpiXA" x="2" y="8"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_0MIWhcwdEeqt15McUrpiXA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_0MIWhswdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0MIWh8wdEeqt15McUrpiXA" points="[-16, -15, 371, 371]$[-387, -386, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MIWjswdEeqt15McUrpiXA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MI9kMwdEeqt15McUrpiXA" id="(0.5030120481927711,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_0MI9kcwdEeqt15McUrpiXA" type="4001" element="_0L0Nf8wdEeqt15McUrpiXA" source="_0MC298wdEeqt15McUrpiXA" target="_0L6UFMwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0MI9lcwdEeqt15McUrpiXA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MI9lswdEeqt15McUrpiXA" x="-2" y="-8"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MI9l8wdEeqt15McUrpiXA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MI9mMwdEeqt15McUrpiXA" x="7" y="11"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MJkoMwdEeqt15McUrpiXA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MJkocwdEeqt15McUrpiXA" x="8" y="11"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_0MI9kswdEeqt15McUrpiXA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_0MI9k8wdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0MI9lMwdEeqt15McUrpiXA" points="[-21, -15, 285, 208]$[-306, -223, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MJkoswdEeqt15McUrpiXA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MJko8wdEeqt15McUrpiXA" id="(0.5106382978723404,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_0MJkpMwdEeqt15McUrpiXA" type="4001" element="_0L00gMwdEeqt15McUrpiXA" source="_0MEsJcwdEeqt15McUrpiXA" target="_0L5tAMwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0MJkqMwdEeqt15McUrpiXA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MJkqcwdEeqt15McUrpiXA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MJkqswdEeqt15McUrpiXA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MJkq8wdEeqt15McUrpiXA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MJkrMwdEeqt15McUrpiXA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MJkrcwdEeqt15McUrpiXA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_0MJkpcwdEeqt15McUrpiXA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_0MJkpswdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0MJkp8wdEeqt15McUrpiXA" points="[0, 0, 51, 405]$[-51, -405, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MKLsMwdEeqt15McUrpiXA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MKLscwdEeqt15McUrpiXA" id="(0.5030120481927711,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_0MKLsswdEeqt15McUrpiXA" type="4001" element="_0L00hcwdEeqt15McUrpiXA" source="_0MFTMMwdEeqt15McUrpiXA" target="_0L6UFMwdEeqt15McUrpiXA">
+          <children xmi:type="notation:Node" xmi:id="_0MKLtswdEeqt15McUrpiXA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MKLt8wdEeqt15McUrpiXA" x="4" y="-8"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MKLuMwdEeqt15McUrpiXA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MKLucwdEeqt15McUrpiXA" x="-3" y="8"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0MKLuswdEeqt15McUrpiXA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0MKLu8wdEeqt15McUrpiXA" x="-2" y="7"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_0MKLs8wdEeqt15McUrpiXA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_0MKLtMwdEeqt15McUrpiXA" fontName="Cantarell" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0MKLtcwdEeqt15McUrpiXA" points="[-12, -15, 161, 208]$[-173, -223, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MKLvMwdEeqt15McUrpiXA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0MKLvcwdEeqt15McUrpiXA" id="(0.5106382978723404,1.0)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_0LkV0MwdEeqt15McUrpiXA" name="vehicle-iot-vm" incomingEdges="_0LzmYMwdEeqt15McUrpiXA _0L0NcMwdEeqt15McUrpiXA _0L0NeswdEeqt15McUrpiXA _0L00gMwdEeqt15McUrpiXA" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0LmLBcwdEeqt15McUrpiXA" name="VM" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_0LoAMMwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0Lk84MwdEeqt15McUrpiXA" labelSize="12" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="39,76,114" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_0LqccMwdEeqt15McUrpiXA" name="Properties">
+        <target xmi:type="aADM:EPropertyAssigments" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties"/>
+        <semanticElements xmi:type="aADM:EPropertyAssigments" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0LrDgMwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>italic</labelFormat>
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0LrqkMwdEeqt15McUrpiXA" name="name: vehicle-iot-demo">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.0"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0LrqkcwdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0LrqkswdEeqt15McUrpiXA" name="key_name: getInput(ssh-key-name)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.1"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0Lrqk8wdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0LsRoMwdEeqt15McUrpiXA" name="image: getInput(image-name)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.2"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.2"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0LsRocwdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0LsRoswdEeqt15McUrpiXA" name="network: getInput(openstack-network-name)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.3"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.3"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0LsRo8wdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0LsRpMwdEeqt15McUrpiXA" name="security_groups: getInput(security-groups)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.4"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.4"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0LsRpcwdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0LsRpswdEeqt15McUrpiXA" name="flavor: getInput(flavor-name)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.5"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@properties/@properties.5"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0LsRp8wdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_0Llj8cwdEeqt15McUrpiXA" name="docker-host" incomingEdges="_0L0NdcwdEeqt15McUrpiXA _0L0Nf8wdEeqt15McUrpiXA _0L00hcwdEeqt15McUrpiXA" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.1"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.1"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0Ls4sMwdEeqt15McUrpiXA" name="DockerHost" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.1/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.1/@node"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_0Ls4scwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0LtfwcwdEeqt15McUrpiXA" name="req: host" outgoingEdges="_0LzmYMwdEeqt15McUrpiXA" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@requirements/@requirements.0"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_0LuG0MwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0Llj8swdEeqt15McUrpiXA" labelSize="12" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="39,76,114" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_0Llj9MwdEeqt15McUrpiXA" name="docker-registry-certificate" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0Lut4MwdEeqt15McUrpiXA" name="RegistryCertificate" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_0Lut4cwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0Lut48wdEeqt15McUrpiXA" name="req: host" outgoingEdges="_0L0NcMwdEeqt15McUrpiXA" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.0"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_0Lut5MwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0LvU8MwdEeqt15McUrpiXA" name="req: dependency" outgoingEdges="_0L0NdcwdEeqt15McUrpiXA" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.1"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.1"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_0LvU8cwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0Llj9cwdEeqt15McUrpiXA" labelSize="12" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="39,76,114" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_0LvU88wdEeqt15McUrpiXA" name="Properties">
+        <target xmi:type="aADM:EPropertyAssigments" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties"/>
+        <semanticElements xmi:type="aADM:EPropertyAssigments" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0LvU9MwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>italic</labelFormat>
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0Lv8AMwdEeqt15McUrpiXA" name="registry_ip: getInput(docker-registry-ip)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.0"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0Lv8AcwdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0Lv8AswdEeqt15McUrpiXA" name="country_name: getInput(docker-registry-cert-country-name)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.1"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0Lv8A8wdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0Lv8BMwdEeqt15McUrpiXA" name="organization_name: getInput(docker-registry-cert-organization-name)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.2"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.2"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0Lv8BcwdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0Lv8BswdEeqt15McUrpiXA" name="email_address: getInput(docker-registry-cert-email-address)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.3"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@properties/@properties.3"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0Lv8B8wdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_0Llj98wdEeqt15McUrpiXA" name="docker-registry" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0LwjEMwdEeqt15McUrpiXA" name="DockerRegistry" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_0LwjEcwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0LwjE8wdEeqt15McUrpiXA" name="req: host" outgoingEdges="_0L0NeswdEeqt15McUrpiXA" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.0"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_0LwjFMwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0LwjFswdEeqt15McUrpiXA" name="req: dependency" outgoingEdges="_0L0Nf8wdEeqt15McUrpiXA" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.1"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.1"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_0LwjF8wdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0LmLAMwdEeqt15McUrpiXA" labelSize="12" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="39,76,114" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_0LxKIcwdEeqt15McUrpiXA" name="Properties">
+        <target xmi:type="aADM:EPropertyAssigments" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties"/>
+        <semanticElements xmi:type="aADM:EPropertyAssigments" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0LxKIswdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>italic</labelFormat>
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0LxKJMwdEeqt15McUrpiXA" name="docker_registry_url: getInput(docker-registry-url)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.0"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0LxxMMwdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0LxxMcwdEeqt15McUrpiXA" name="docker_user: getInput(dockerhub-user)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.1"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0LxxMswdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0LxxM8wdEeqt15McUrpiXA" name="docker_pass: getInput(dockerhub-pass)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.2"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@properties/@properties.2"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0LxxNMwdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_0LmLAswdEeqt15McUrpiXA" name="docker-network" childrenPresentation="VerticalStack">
+      <target xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4"/>
+      <semanticElements xmi:type="aADM:ENodeTemplate" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0LxxNcwdEeqt15McUrpiXA" name="DockerNetwork" width="15" height="3" resizeKind="EAST_WEST">
+        <target xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node"/>
+        <semanticElements xmi:type="aADM:ENodeTemplateBody" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_0LxxNswdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" borderSize="1" borderSizeComputationExpression="1" borderLineStyle="dot" labelPosition="node" width="15" height="3" color="255,255,255">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BType']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0LyYQMwdEeqt15McUrpiXA" name="req: host" outgoingEdges="_0L00gMwdEeqt15McUrpiXA" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_0LyYQcwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_0LyYQ8wdEeqt15McUrpiXA" name="req: dependency" outgoingEdges="_0L00hcwdEeqt15McUrpiXA" width="10" height="3" resizeKind="NSEW">
+        <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.1"/>
+        <semanticElements xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.1"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_0LyYRMwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelColor="154,103,23" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" borderColor="154,103,23" borderLineStyle="dash" labelPosition="node" width="10" height="3" color="253,206,137">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0LmLA8wdEeqt15McUrpiXA" labelSize="12" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="39,76,114" foregroundColor="194,239,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_0Ly_UMwdEeqt15McUrpiXA" name="Properties">
+        <target xmi:type="aADM:EPropertyAssigments" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties"/>
+        <semanticElements xmi:type="aADM:EPropertyAssigments" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0Ly_UcwdEeqt15McUrpiXA" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>italic</labelFormat>
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0Ly_U8wdEeqt15McUrpiXA" name="name: getInput(docker-network)">
+          <target xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.0"/>
+          <semanticElements xmi:type="aADM:EPropertyAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@properties/@properties.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_0Ly_VMwdEeqt15McUrpiXA" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_0LzmYMwdEeqt15McUrpiXA" sourceNode="_0LtfwcwdEeqt15McUrpiXA" targetNode="_0LkV0MwdEeqt15McUrpiXA">
+      <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.1/@node/@requirements/@requirements.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_0LzmYcwdEeqt15McUrpiXA" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_0LzmYswdEeqt15McUrpiXA" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_0L0NcMwdEeqt15McUrpiXA" sourceNode="_0Lut48wdEeqt15McUrpiXA" targetNode="_0LkV0MwdEeqt15McUrpiXA">
+      <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_0L0NccwdEeqt15McUrpiXA" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_0L0NcswdEeqt15McUrpiXA" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_0L0NdcwdEeqt15McUrpiXA" sourceNode="_0LvU8MwdEeqt15McUrpiXA" targetNode="_0Llj8cwdEeqt15McUrpiXA">
+      <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.2/@node/@requirements/@requirements.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_0L0NdswdEeqt15McUrpiXA" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_0L0Nd8wdEeqt15McUrpiXA" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_0L0NeswdEeqt15McUrpiXA" sourceNode="_0LwjE8wdEeqt15McUrpiXA" targetNode="_0LkV0MwdEeqt15McUrpiXA">
+      <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_0L0Ne8wdEeqt15McUrpiXA" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_0L0NfMwdEeqt15McUrpiXA" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_0L0Nf8wdEeqt15McUrpiXA" sourceNode="_0LwjFswdEeqt15McUrpiXA" targetNode="_0Llj8cwdEeqt15McUrpiXA">
+      <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.3/@node/@requirements/@requirements.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_0L0NgMwdEeqt15McUrpiXA" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_0L0NgcwdEeqt15McUrpiXA" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_0L00gMwdEeqt15McUrpiXA" sourceNode="_0LyYQMwdEeqt15McUrpiXA" targetNode="_0LkV0MwdEeqt15McUrpiXA">
+      <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_0L00gcwdEeqt15McUrpiXA" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_0L00gswdEeqt15McUrpiXA" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_0L00hcwdEeqt15McUrpiXA" sourceNode="_0LyYQ8wdEeqt15McUrpiXA" targetNode="_0Llj8cwdEeqt15McUrpiXA">
+      <target xmi:type="aADM:ERequirementAssignment" href="vehicleiot_resources.aadm#//@nodeTemplates/@nodeTemplates.4/@node/@requirements/@requirements.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_0L00hswdEeqt15McUrpiXA" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_0L00h8wdEeqt15McUrpiXA" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RelationshipLink']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_0Lak0cwdEeqt15McUrpiXA"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer"/>
+    <target xmi:type="aADM:AADM_Model" href="vehicleiot_resources.aadm#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>
