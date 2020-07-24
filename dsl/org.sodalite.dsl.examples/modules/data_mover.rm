@@ -1,0 +1,246 @@
+data_types:
+	//nested datatypes not supported
+	sodalite.datatypes.data.mover.gridftpSpec: 
+		derived_from: tosca.datatypes.Root
+		properties:
+			protocol:
+				type: string
+				constraints:
+					valid_values: [ "ftp", "sshftp", "gsiftp", "file" ]
+			address:
+				type: string
+			port:
+				type: tosca.datatypes.network.PortDef
+				required: false
+			path:
+				type: string
+				
+node_types:
+	sodalite.nodes.remote.client: 
+		description: "Some remote node"
+		derived_from: tosca.nodes.Compute
+		attributes:
+			username:
+				type: string
+			ssh-key:
+				type: string
+				
+	//artifacts to be supported
+	sodalite.data.textFile: 
+		derived_from: tosca.nodes.Root
+		properties:
+			location:
+				type: string
+			content:
+				type: string
+		requirements:
+			host:
+				node: tosca.nodes.Compute
+				capability: tosca.capabilities.Compute
+				relationship: tosca.relationships.HostedOn
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							remote_host_public_address:
+								default: get_attribute: 
+									entity: SELF
+									attribute: tosca.nodes.Compute.public_address
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_username: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.username
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_keypath: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							location: 
+								default: get_property:
+									entity: SELF 
+									property: sodalite.data.textFile.location
+							content: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.data.textFile.content
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/data-movement/library/data/mover/playbooks/create-text-file.yml"
+							
+	sodalite.data.mover:
+		description: 'Moves data from "src" node to "dst" node'
+		derived_from: tosca.nodes.Root
+		
+	sodalite.data.mover.url:
+		description: 'Moves data from "src" url to "dst" location on the "host".
+      				 "dst" can be either absolute path or relative. "dst" is relative to $HOME directory'
+		derived_from: sodalite.data.mover
+		properties:
+			src:
+				type: string
+				required: true
+			dst:
+				type: string
+				required: true
+		requirements:
+			host:
+				node: tosca.nodes.Compute
+				capability: tosca.capabilities.Compute
+				relationship: tosca.relationships.HostedOn
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							remote_host_public_address:
+								default: get_attribute: 
+									entity: SELF
+									attribute: tosca.nodes.Compute.public_address
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_username: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.username
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_keypath: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							src: 
+								default: get_property:
+									entity: SELF 
+									property: sodalite.data.mover.url.src
+							dst: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.data.mover.url.dst
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/data-movement/library/data/mover/playbooks/create-url.yml"	
+		
+	sodalite.data.mover.gridftp:
+		description: 'Moves data from "src" location to "dst" location.
+      				  "src" and "dst" must be absolute path'
+		derived_from: sodalite.data.mover
+		properties:
+			name:
+				type: string
+				required: false
+				default: "Sample gridftp transfer"
+			parallel_streams:
+				type: integer
+				required: false
+				default: "1"
+				constraints:
+					greater_than: "0"
+			src_protocol:
+				type: string
+				constraints:
+					valid_values: [ "ftp", "sshftp", "gsiftp", "file" ]
+			src_address:
+				type: string
+			src_port:
+				type: tosca.datatypes.network.PortDef
+				required: false
+			src_path:
+				type: string
+			dst_protocol:
+				type: string
+				constraints:
+					valid_values: [ "ftp", "sshftp", "gsiftp", "file" ]
+			dst_address:
+				type: string
+			dst_port:
+				type: tosca.datatypes.network.PortDef
+				required: false
+			dst_path:
+				type: string
+		requirements:
+			client:
+				node: tosca.nodes.Compute
+				capability: tosca.capabilities.Compute
+				relationship: tosca.relationships.HostedOn
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					configure:
+						inputs:
+							remote_host_public_address:
+								default: get_attribute: 
+									entity: SELF
+									attribute: tosca.nodes.Compute.public_address
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_username: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.username
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_keypath: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/data-movement/library/data/mover/playbooks/configure-gridftp-client.yml"
+					start:
+						inputs:
+							remote_host_public_address:
+								default: get_attribute: 
+									entity: SELF
+									attribute: tosca.nodes.Compute.public_address
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_username: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.username
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_keypath: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							src_protocol: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.data.mover.gridftp.src_protocol
+							src_address: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.data.mover.gridftp.src_address
+							src_port: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.data.mover.gridftp.src_port
+							src_path: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.data.mover.gridftp.src_path
+							dst_protocol: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.data.mover.gridftp.dst_protocol
+							dst_address: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.data.mover.gridftp.dst_address
+							dst_port:
+								default: get_property:
+									entity: SELF
+									property: sodalite.data.mover.gridftp.dst_port
+							dst_path: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.data.mover.gridftp.dst_path
+							parallel_streams: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.data.mover.gridftp.parallel_streams
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/data-movement/library/data/mover/playbooks/start-gridftp-client.yml"
+				
+							
