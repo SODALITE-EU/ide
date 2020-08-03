@@ -46,7 +46,8 @@ node_templates:
 			restart_policy: "always"
 			ports: ["8500:8500"]
 			env: 
-				SERVICE_IGNORE: "ignore"        
+				SERVICE_IGNORE: "ignore"
+			registry_url: "provide_this_registry_url"      
 		requirements:
 			host: 
 				node: docker-host
@@ -78,6 +79,7 @@ node_templates:
 			command: "-ip {{ public_address }} consul://consul:8500"
 			volumes:["/var/run/docker.sock:/tmp/docker.sock"]
 			sleep: "5"
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -100,6 +102,7 @@ node_templates:
 				ADVERTISED_HOST: "kafka"
 				SERVICE_9092_NAME: "kafka"
 				SERVICE_2181_IGNORE: "ignore"
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -126,6 +129,7 @@ node_templates:
 			"./data/db:/var/lib/mysql", 
 			"./conf/db:/docker-entrypoint-initdb.d"]
 			ports: ["3306:3306"]  
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -149,6 +153,7 @@ node_templates:
 			volumes: ["./data/db:/var/lib/mysql", 
 			"./conf/db:/docker-entrypoint-initdb.d"]
 			ports: ["4040:8080"]  
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -170,6 +175,7 @@ node_templates:
 			env:
 				SERVICE_IGNORE: "ignore"
 			ports:["4041:4041"] 
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -191,6 +197,7 @@ node_templates:
 			env:
 				SERVICE_IGNORE: "ignore"
 			ports: ["8888:8888"] 
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -212,6 +219,7 @@ node_templates:
 			env:
 				SERVICE_IGNORE: "ignore"
 			ports: "5000:5000"  
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -233,6 +241,7 @@ node_templates:
 			env:
 				SERVICE_NAME: "opa"
 			ports: ["8181:8181"]  
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -254,6 +263,7 @@ node_templates:
 			env:
 				SERVICE_IGNORE: "ignore"
 			ports: "7000:7000"  
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -274,6 +284,7 @@ node_templates:
 			env:
 				SERVICE_NAME: "mqtt-broker"
 			ports:["1883:1883"]
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -306,6 +317,7 @@ node_templates:
 			env:
 				SERVICE_IGNORE: "ignore"
 			ports: ["3000:3000"] 
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -342,6 +354,7 @@ node_templates:
 				KNOWGO_APIGW_DBPASS: "root"
 				SERVICE_IGNORE: "ignore"     
 			ports:["8080:8080","8081:8081"]
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -380,6 +393,7 @@ node_templates:
 			env:
 				SERVICE_NAME: "prometheus"
 			ports:["9091:9090"]
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host
@@ -414,6 +428,7 @@ node_templates:
 				GF_SECURITY_ADMIN_PASSWORD: "knowgo"
 				SERVICE_NAME: "grafana"
 			ports:["3001:3000"]
+			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
 				node: docker-host

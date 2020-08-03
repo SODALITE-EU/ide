@@ -1,0 +1,120 @@
+node_types:
+	sodalite.image_puller.singularity:
+		derived_from: tosca.nodes.Root
+		properties:
+			output:
+				type: string
+			image:
+				type: string
+			registry:
+				type: string
+				constraints:
+					valid_values: [ "library", "docker", "shub", "private" ]
+			images_location:
+				type: string
+				default: "images"
+			certs_location:
+				type: string
+				required: false
+				default: "certs"
+			puller_image:
+				type: string
+				default: "puller.sif"
+			puller_image_remote:
+				type: string
+				default: "modakopt/modak:puller"
+		requirements:
+			host:
+				node: tosca.nodes.Compute
+				capability: tosca.capabilities.Compute
+				relationship: tosca.relationships.HostedOn
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					configure:
+						inputs:
+							remote_host_public_address:
+								default: get_attribute: 
+									entity: SELF
+									attribute: tosca.nodes.Compute.public_address
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_username: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.username
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_keypath: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							registry: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.registry
+							certs_location: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.certs_location
+							images_location: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.images_location
+							puller_image: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.puller_image
+							puller_image_remote: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.puller_image_remote
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/image-puller/library/image-puller/playbooks/configure-puller.yml"
+					start:
+						inputs:
+							remote_host_public_address:
+								default: get_attribute: 
+									entity: SELF
+									attribute: tosca.nodes.Compute.public_address
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_username: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.username
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							remote_host_keypath: 
+								default: get_attribute: 
+									entity: SELF
+									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							image: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.image
+							output: 
+								default: get_property:
+									entity: SELF
+									property: sodalite.image_puller.singularity.output 								
+							registry: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.registry
+							certs_location: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.certs_location
+							images_location: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.images_location
+							puller_image: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.image_puller.singularity.puller_image
+ 		
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/image-puller/library/image-puller/playbooks/start-puller.yml"
+							
+							
+							

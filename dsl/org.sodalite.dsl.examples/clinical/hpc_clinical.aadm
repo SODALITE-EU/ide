@@ -1,0 +1,211 @@
+inputs:
+    frontend-address:
+      type: string
+    user:
+      type: string
+    key-location:
+      type: string
+    email:
+      type: string
+    density-mapping-script:
+      type: string
+    probabilistic-mapping-script:
+      type: string
+    boundary-condition-script:
+      type: string
+    solver-script:
+      type: string
+    mapper-data-input:
+      type: string
+    mapper-data-output-struct:
+      type: string
+    solver-data:
+      type: string
+      
+node_templates:
+
+	hpc-wm-torque:
+		type: sodalite.nodes.hpc.wm.torque
+		attributes:
+			public_address: ""//FIXME get_input: frontend-address 
+			username: "" //FIXME get_input: user 		
+			ssh-key: "" //FIXME get_input: key-location
+
+	//image pulling
+
+	cadt-image:
+		type: sodalite.image_puller.singularity
+		properties:
+			output: "cadt.sif"
+			image: "cadt:1.0.0"
+			registry: "private"
+			certs_location: "certs"
+			images_location: "images"
+		requirements:
+			host: 
+				node: hpc-wm-torque
+				
+	moduli-image:
+		type: sodalite.image_puller.singularity
+		properties:
+			output: "moduli.sif"
+			image: "moduli:1.0.0"
+			registry: "private"
+			certs_location: "certs"
+			images_location: "images"
+		requirements:
+			host: 
+				node: hpc-wm-torque
+				
+	code-aster-image:
+		type: sodalite.image_puller.singularity
+		properties:
+			output: "code-aster.sif"
+			image: "quay.io/tianyikillua/code_aster"
+			registry: "docker"
+			images_location: "images"
+		requirements:
+			host: 
+				node: hpc-wm-torque				
+				
+	//data staging
+
+	gridftp-client-host:
+		type: sodalite.nodes.remote.client
+		attributes:
+			public_address: "localhost"
+			username: "" //FIXME get_input: user
+			ssh-key: "" //FIXME get_input: key-location
+
+	input-data-mapper-transfer:
+		type: sodalite.data.mover.gridftp
+		properties:
+			name: "Transfer client data to server"
+			src_protocol: "file"
+			src_address: "localhost"
+			src_port: '~'
+			src_path: get_input: mapper-data-input 
+			dst_protocol: "gsiftp"
+			dst_address: get_input: frontend-address
+			dst_port: '~'
+			dst_path: '~/workflow-container/input/'
+		requirements:
+			client: 
+				node: gridftp-client-host			
+				
+	output-struct-data-mapper-transfer:
+		type: sodalite.data.mover.gridftp
+		properties:
+			name: "Transfer client data to server"
+			src_protocol: "file"
+			src_address: "localhost"
+			src_port: '~'
+			src_path: get_input: mapper-data-output-struct 
+			dst_protocol: "gsiftp"
+			dst_address: get_input: frontend-address 
+			dst_port: '~'
+			dst_path: "~/workflow-container/output/"
+		requirements:
+			client: 
+				node: gridftp-client-host	
+				
+	//job configs
+
+	density-mapping-job-config:
+		type: sodalite.nodes.hpc.job.torque.configuration
+		properties:
+			name: "density-mapping"
+			script: get_input: density-mapping-script 
+			workspace: "~/workflow-container"
+			ppn: "4"
+			walltime: "00:30:00"
+			email: get_input: email 
+			enable_audit: "true"
+		requirements:
+			host: 
+				node: hpc-wm-torque			
+				
+	probabilistic-mapping-job-config:
+		type: sodalite.nodes.hpc.job.torque.configuration
+		properties:
+			name: "probabilistic-mapping"
+			script: get_input: probabilistic-mapping-script
+			workspace: "~/workflow-container"
+			ppn: "4"
+			walltime: "00:30:00"
+			email: get_input: email 
+			enable_audit: "true"
+		requirements:
+			host: 
+				node: hpc-wm-torque			
+				
+	boundary-condition-job-config:
+		type: sodalite.nodes.hpc.job.torque.configuration
+		properties:
+			name: "boundary-condition"
+			script: get_input: boundary-condition-script 
+			workspace: "~/workflow-container"
+			ppn: "4"
+			walltime: "00:30:00"
+			email: get_input: email 
+			enable_audit: "true"
+		requirements:
+  			host: 
+  				node: hpc-wm-torque			
+				
+	//job workflow
+
+	density-mapping-job:
+		type: sodalite.nodes.hpc.job.torque
+		requirements:
+			host: 
+				node: hpc-wm-torque
+			configured_job: 
+				node: density-mapping-job-config
+
+	probabilistic-mapping-job:
+		type: sodalite.nodes.hpc.job.torque
+		requirements:
+			host: 
+				node: hpc-wm-torque
+			configured_job: 
+				node: probabilistic-mapping-job-config
+			dependency: 
+				node: density-mapping-job-result
+
+	boundary-condition-job:
+		type: sodalite.nodes.hpc.job.torque
+		requirements:
+			host: 
+				node: hpc-wm-torque
+			configured_job: 
+				node: boundary-condition-job-config
+			dependency: 
+				node: probabilistic-mapping-job-result				
+				
+	//job result
+
+	density-mapping-job-result:
+		type: sodalite.nodes.hpc.job.torque.result
+		requirements:
+			host: 
+				node: hpc-wm-torque
+			job: 
+				node: density-mapping-job
+
+	probabilistic-mapping-job-result:
+		type: sodalite.nodes.hpc.job.torque.result
+		requirements:
+			host: 
+				node: hpc-wm-torque
+			job: 
+				node: probabilistic-mapping-job
+
+	boundary-condition-job-result:
+		type: sodalite.nodes.hpc.job.torque.result
+		requirements:
+			host: 
+				node: hpc-wm-torque
+			job: 
+				node: boundary-condition-job
+	

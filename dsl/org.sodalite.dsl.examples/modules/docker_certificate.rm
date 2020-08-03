@@ -50,9 +50,8 @@ node_types:
 						implementation:
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_cert.yml"
 								relative_path: "playbooks"
-							//dependencies: ["artifacts/ca.crt", "artifacts/ca.key"]
-								//relative_path: "artifacts"
-						
+							dependencies: ["/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/certificates/docker/ca.crt", "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/certificates/docker/ca.key"]
+								relative_path: "artifacts"
 						
 					delete:
 						inputs:

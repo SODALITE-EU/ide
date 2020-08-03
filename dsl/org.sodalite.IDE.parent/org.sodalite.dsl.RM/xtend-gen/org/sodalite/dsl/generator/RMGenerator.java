@@ -2103,6 +2103,6 @@ public class RMGenerator extends AbstractGenerator {
   }
   
   public String processDescription(final String description) {
-    return description.replaceAll("[\\n\\r]+", "\\\\n");
+    return description.replaceAll("\'", "\\\\\'").replaceAll("[\\n\\r]+", "\\\\n");
   }
 }

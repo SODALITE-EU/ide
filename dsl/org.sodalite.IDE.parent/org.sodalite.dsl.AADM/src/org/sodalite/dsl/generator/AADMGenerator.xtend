@@ -167,7 +167,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Template_«template_counter++»
 	  rdf:type exchange:Template ;
 	  «IF n.node.description !== null»
-	  exchange:description "«n.node.description»" ;
+	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
 	  exchange:type "«n.node.type»" ;
@@ -297,5 +297,8 @@ class AADMGenerator extends AbstractGenerator {
 		return path
 	}
 	
+	def processDescription (String description){
+		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
+	}
 	
 }
