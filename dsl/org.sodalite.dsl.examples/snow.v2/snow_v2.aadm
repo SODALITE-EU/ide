@@ -1,0 +1,406 @@
+
+
+inputs:
+	ssh-key-name:  
+		type: string 
+	image-name:  
+		type: string 
+	openstack-network-name:  
+		type: string 
+	security-groups:  
+ 		type: string    
+	flavor-name:  
+		type: string                   
+	demo-files-path:  
+		type: string 
+		default: ""       
+	docker-registry-url: 
+		type: string
+	docker-network: 
+		type: string      
+	docker-registry-cert-country-name:
+		type: string
+		default: ""
+	docker-registry-cert-organization-name: 
+		type: string
+		default: ""
+	docker-registry-cert-email-address: 
+		type: string
+		default: ""
+	mysql-db-pass: 
+		type: string
+		default: "" 
+		
+node_templates:
+
+	security-rules-snow:  
+		type: sodalite.nodes.OpenStack.SecurityRules 
+		properties:  
+			ports:  
+				component_ports:  
+					port_range_max: "8081" 
+					remote_ip_prefix: "0.0.0.0/0" 
+					port_range_min: "8080" 
+					protocol: "tcp" 
+				http_port:  
+					port_range_min: "80" 
+					port_range_max: "80" 
+					protocol: "tcp" 
+					remote_ip_prefix: "0.0.0.0/0" 
+			group_name:  "snow" 
+			group_description:  "Snow UC security group"
+	
+	snow-vm:  
+		type: sodalite.nodes.OpenStack.VM
+		properties:  
+			key_name:  get_input: ssh-key-name 
+			image: get_input: image-name 
+			name:  "snow-vm_am_10"
+			network: get_input: openstack-network-name  
+			security_groups:  get_input: security-groups 
+			flavor:  get_input: flavor-name
+		requirements:  
+			protected_by: 
+				node: security-rules-snow
+				
+	snow-vm-2:  
+		type: sodalite.nodes.OpenStack.VM
+		properties:  
+			key_name:  get_input: ssh-key-name 
+			image: get_input: image-name 
+			name:  "snow-vm_am_9"
+			network: get_input: openstack-network-name  
+			security_groups:  get_input: security-groups 
+			flavor:  get_input: flavor-name
+		requirements:  
+			protected_by: 
+				node: security-rules-snow
+				
+	snow-docker-host:  
+		type: sodalite.nodes.DockerHost 
+		requirements:  
+			host:  
+				node:snow-vm
+				
+	docker-registry-certificate:
+		type: sodalite.nodes.RegistryCertificate
+		properties:  
+			registry_ip: get_input: docker-registry-url 
+			country_name:  get_input: docker-registry-cert-country-name 
+			organization_name: get_input: docker-registry-cert-organization-name 
+			email_address: get_input: docker-registry-cert-email-address 
+		requirements:
+			host: 
+				node: snow-vm 
+			dependency: 
+				node: snow-docker-host
+		
+	snow-docker-host-2:  
+		type: sodalite.nodes.DockerHost 
+		requirements:  
+			host:  
+				node: snow-vm-2	
+				
+	docker-registry-certificate-2:
+		type: sodalite.nodes.RegistryCertificate
+		properties:  
+			registry_ip: get_input: docker-registry-url
+			country_name:  get_input: docker-registry-cert-country-name
+			organization_name: get_input: docker-registry-cert-organization-name
+			email_address: get_input: docker-registry-cert-email-address
+		requirements:
+			host: 
+				node: snow-vm-2 
+			dependency: 
+				node: snow-docker-host-2
+	
+	docker-registry:
+		type: sodalite.nodes.DockerRegistry
+		properties:  
+			docker_registry_url: get_input: docker-registry-url 
+		requirements:
+			host: 
+				node: snow-vm
+			dependency: 
+				node: snow-docker-host 
+			dependency: 
+				node: snow-docker-host-2
+				
+	snow-docker-network:
+		type: sodalite.nodes.DockerNetwork
+		properties: 
+			name: get_input: docker-network
+		requirements:
+			host: 
+				node: snow-vm    
+			dependency: 
+				node: snow-docker-host
+				
+	snow-docker-volume-shots:
+		type: sodalite.nodes.DockerVolume
+		properties:  
+			name: "snow_volume_shots"
+		requirements:
+			host: 
+				node: snow-vm
+	
+	snow-docker-volume-masks:
+		type: sodalite.nodes.DockerVolume
+		properties:  
+			name: "snow_volume_masks"
+		requirements:
+			host: 
+				node: snow-vm
+	
+	snow-docker-volume-daily-shots:
+		type: sodalite.nodes.DockerVolume
+		properties:  
+			name: "snow_volume_daily_shots"
+		requirements:
+			host: 
+				node: snow-vm
+				
+	configuration-demo:
+		type: sodalite.nodes.ConfigurationDemo  
+		properties:  
+			mysql_db_pass: get_input: mysql-db-pass    
+		requirements:
+			host: 
+				node: snow-vm         
+			remote_server: 
+				node: snow-vm-2
+				
+	snow-mysql:
+		type: sodalite.nodes.DockerizedComponent 
+		properties:  
+			docker_network_name: get_property:
+				entity: SELF
+				property: tosca.capabilities.Network.name
+				req_cap: tosca.nodes.Container.Application.network
+			image_name:  "snow-mysql:latest" 
+			command: "--default-authentication-plugin=mysql_native_password"
+			ports:  ['3306:3306'] 
+			exposed_ports:  ['3306']
+			alias: "mysql"
+			env:
+				MYSQL_ROOT_PASSWORD: "#set password here"
+				MYSQL_DATABASE: "wc_crawler_db"
+			registry_url: get_input: docker-registry-url
+		requirements:  
+			host:  
+				node: snow-docker-host 
+			network: 
+				node: snow-docker-network 
+			registry: 
+				node: docker-registry
+				
+	snow-webcam-crawler:  
+		type: sodalite.nodes.DockerizedComponent 
+		properties:  
+			docker_network_name:  get_property: 
+				entity: SELF
+				property: tosca.capabilities.Network.name
+				req_cap: tosca.nodes.Container.Application.network
+			volumes: [
+			"/tmp/conf/config.json: /SnowWatch-SODALITE/WebCamCrawler/config.json", 
+			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
+			//"/tmp/masks:/SnowWatch-SODALITE/data/masks", 
+			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
+			image_name:  "snow-webcam-crawler:latest" 
+			alias: "snow-webcam-crawler"
+			command: "34,40,50,62,608,666,822,852,943,1307,6666"
+			registry_url: get_input: docker-registry-url
+		requirements:  
+			host:  
+				node: snow-docker-host 
+			dependency: 
+				node: snow-mysql
+			dependency: 
+				node: snow-docker-volume-shots
+			dependency: 
+				node: configuration-demo
+			network: 
+				node: snow-docker-network 
+			registry: 
+				node: docker-registry
+				
+	snow-weather-condition-filter:  
+		type: sodalite.nodes.DockerizedComponent 
+		properties:  
+			docker_network_name:  get_property: 
+				entity: SELF
+				property: tosca.capabilities.Network.name
+				req_cap: tosca.nodes.Container.Application.network
+			volumes: [
+			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json", 
+			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
+			//"/tmp/masks: /SnowWatch-SODALITE/data/masks", 
+			"snow_volume_daily_shots: /SnowWatch-SODALITE/data/daily_shots"]
+			image_name:  "snow-weather-condition-filter:latest" 
+			alias: "snow-weather-condition-filter"
+			restart_policy: "always"
+			command: [
+			"{{ ansible_date_time.date }}", 
+			"34 40 50 62 608 666 822 852 943 1307 6666"]  
+			registry_url: get_input: docker-registry-url
+		requirements:  
+			host:  
+				node: snow-docker-host
+			dependency: 
+				node: snow-mysql
+			dependency: 
+				 node: snow-docker-volume-shots
+			dependency: 
+				node: snow-docker-volume-masks
+			dependency: 
+				node: snow-docker-volume-daily-shots
+			dependency: 
+				node: configuration-demo
+			network: 
+				node: snow-docker-network
+			registry: 
+				node: docker-registry
+				
+	snow-daily-median-aggregator: 
+		type: sodalite.nodes.DockerizedComponent 
+		properties:  
+			docker_network_name:  get_property:
+				entity: SELF
+				property: tosca.capabilities.Network.name
+				req_cap: tosca.nodes.Container.Application.network
+			volumes:  [
+			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json", 
+			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
+			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
+			image_name:  "snow-daily-median-aggregator:latest"
+			alias: "snow-daily-median-aggregator"
+			restart_policy: "always"
+			command: [
+			"{{ ansible_date_time.date }}", 
+			"34 40 50 62 608 666 822 852 943 1307 6666"]
+			registry_url: get_input: docker-registry-url
+		requirements:  
+			host:  
+				node: snow-docker-host
+			dependency: 
+				node: snow-mysql
+			dependency: 
+				node: snow-docker-volume-shots
+			dependency: 
+				node: snow-docker-volume-daily-shots
+			dependency: 
+				node: configuration-demo        
+			network: 
+				node: snow-docker-network
+			registry: 
+				node: docker-registry
+				
+	snow-skyline-extractor:  
+		type: sodalite.nodes.DockerizedComponent 
+		properties:  
+			alias: "snow-skyline-extractor"
+			volumes:  "/tmp/docker:/tmp" 
+			image_name:  "snow-skyline-extractor:latest"
+			ports:  ['8080:8080'] 
+			exposed_ports:  ['8080']
+			registry_url: get_input: docker-registry-url
+		requirements:  
+			host:  
+				node: snow-docker-host-2 
+			registry: 
+				node: docker-registry
+				
+	snow-skyline-alignment:  
+		type: sodalite.nodes.DockerizedComponent 
+		properties:  
+			alias: "snow-skyline-alignment"
+			volumes:  "/tmp/docker:/tmp" 
+			image_name:  "snow-skyline-alignment:latest"
+			exposed_ports:  ['8080'] 
+			ports:  ["8081:8080","80:8080"]
+			registry_url: get_input: docker-registry-url
+		requirements:  
+			host:  
+				node: snow-docker-host-2 
+			registry: 
+				node: docker-registry
+				
+	snow-docker-volume-demo-output:
+		type: sodalite.nodes.DockerVolume
+		properties:  
+			name: "snow_volume_demo_output"
+		requirements:
+			host: 
+				node: snow-vm
+	
+	snow-webcam-mockup:  
+		type: sodalite.nodes.DockerizedComponent 
+		properties:  
+			docker_network_name:  get_property:
+				entity: SELF
+				property: tosca.capabilities.Network.name
+				req_cap: tosca.nodes.Container.Application.network 
+			image_name:  "snow-webcam-mockup:latest"
+			alias: "snow-webcam-mockup"
+			ports:  ['8080:8080'] 
+			exposed_ports:  ['8080']
+			registry_url: get_input: docker-registry-url
+		requirements:  
+			host:  
+				node: snow-docker-host 
+			network: 
+				node: snow-docker-network  
+			registry: 
+				node: docker-registry
+				
+	snow-demo: 
+		type: sodalite.nodes.DockerizedComponent 
+		properties:  
+			docker_network_name: get_property:
+				entity: SELF
+				property: tosca.capabilities.Network.name
+				req_cap: tosca.nodes.Container.Application.network 
+			volumes: [
+			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json",  
+			"snow_volume_daily_shots: /SnowWatch-SODALITE/data/daily_shots", 
+			"snow_volume_demo_output: /SnowWatch-SODALITE/data/output"]
+			image_name:  "snow-demo:latest"
+			alias: "snow-demo"
+			restart_policy: "always"
+			command: "{{ ansible_date_time.date }}"
+			registry_url: get_input: docker-registry-url
+		requirements:  
+			host:  
+				node: snow-docker-host
+			dependency: 
+				node: snow-mysql
+			dependency: 
+				node: snow-docker-volume-daily-shots
+			dependency: 
+				node: snow-docker-volume-demo-output
+			dependency: 
+				node: configuration-demo    
+			network: 
+				node: snow-docker-network 
+			registry: 
+				node: docker-registry
+				
+	snow-demo-nginx:   
+		type: sodalite.nodes.DockerizedComponent 
+		properties:  
+			volumes:  
+				snow_volume_demo_output: "/usr/share/nginx/html"
+			image_name: "nginx:latest"
+			alias: "snow-nginx"
+			restart_policy: "always"
+			ports: ['80:80'] 
+			exposed_ports: ['80']
+			registry_url: get_input: docker-registry-url
+		requirements:  
+			host:  
+				node: snow-docker-host
+			dependency: 
+				node: snow-docker-volume-demo-output
+			registry: 
+				node: docker-registry
+	
