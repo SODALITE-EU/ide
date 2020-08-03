@@ -2096,7 +2096,7 @@ public class RMGenerator extends AbstractGenerator {
     try {
       byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
       String content = new String(_readAllBytes);
-      return content.replace("\'", "\\\'").replaceAll("[\\n\\r]+", "\\\\n");
+      return content.replace("\'", "\\\'").replace("\\", "\\\\").replaceAll("[\\n\\r]+", "\\\\n");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
