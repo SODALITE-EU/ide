@@ -1,0 +1,98 @@
+capability_types:
+	sodalite.capabilities.Compute:
+		derived_from: tosca.capabilities.Compute
+		properties:
+			num_gpus:
+				type: integer
+				required: false
+				constraints:
+					greater_or_equal: "1"				
+								
+node_types:
+	sodalite.nodes.Compute:
+		derived_from: tosca.nodes.Compute
+		
+		capabilities:
+			host:
+				type: sodalite.capabilities.Compute
+				valid_source_types:[tosca.nodes.SoftwareComponent]
+				
+	sodalite.nodes.OpenStack.VM:  
+		derived_from: sodalite.nodes.Compute 
+		properties:  
+			network:  
+				description: "OpenStack network id (network names are not accepted)" 
+				type: string 
+			name:  
+				description: "Name that should be given to the VM in OpenStack"
+				type: string 
+			security_groups:  
+				description: "OpenStack names of the security groups to which the instance should be added.Comma separated string." 
+				type: string 
+			flavor:  
+				description: "OpenStack flavor id (flavor names are not accepted)"
+				type: string 
+			image:  
+				description: "OpenStack image id (image names are not accepted)"
+				type: string 
+			key_name:  
+				description: "OpenStack SSH key name that should be placed on the VM"
+				type: string 
+		attributes:  
+			id:  
+				description: "OpenStack id of the VM"
+				type: string 
+			ansible_ip:  
+				description: "ansible ipv4"
+				type: string 
+		requirements:  
+			protected_by:  
+				relationship: tosca.relationships.DependsOn 
+				node: sodalite.nodes.OpenStack.SecurityRules 
+				capability: tosca.capabilities.Node
+			host:
+				capability: sodalite.capabilities.Compute
+				node: tosca.nodes.SoftwareComponent
+		capabilities:  
+			feature:  
+				type: tosca.capabilities.Node 
+		interfaces:  
+			Standard:  
+				type: tosca.interfaces.node.lifecycle.Standard 
+				operations:
+					create:  
+						inputs:  
+							network: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.network
+							flavor: 	
+								default: get_property:
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.flavor
+							key_name:                 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.key_name
+							image:                    
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.image
+							security_groups:          
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.security_groups								
+							vm_name:                  
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.name
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
+					delete:  
+						inputs:  
+							id:                       
+								default: get_attribute:
+									entity: SELF
+									attribute: sodalite.nodes.OpenStack.VM.id
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
