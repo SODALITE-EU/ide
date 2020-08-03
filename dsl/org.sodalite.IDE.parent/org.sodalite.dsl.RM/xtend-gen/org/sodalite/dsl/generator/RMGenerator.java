@@ -1800,8 +1800,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        EDataType _entry_schema_1 = p.getProperty().getEntry_schema();
-        _builder.append(_entry_schema_1, "  ");
+        String _name_1 = p.getProperty().getEntry_schema().getName();
+        _builder.append(_name_1, "  ");
         _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -1854,8 +1854,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("exchange:name \"");
-    String _name_1 = p.getName();
-    _builder.append(_name_1, "  ");
+    String _name_2 = p.getName();
+    _builder.append(_name_2, "  ");
     _builder.append("\" ;");
     _builder.newLineIfNotEmpty();
     {
@@ -1913,8 +1913,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EDataType _entry_schema_2 = p.getProperty().getEntry_schema();
-      boolean _tripleNotEquals_10 = (_entry_schema_2 != null);
+      EDataType _entry_schema_1 = p.getProperty().getEntry_schema();
+      boolean _tripleNotEquals_10 = (_entry_schema_1 != null);
       if (_tripleNotEquals_10) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");

@@ -1,5 +1,5 @@
 data_types:
-	sodalite.nodes.OpenStack.SecurityRule:  
+	sodalite.datatypes.OpenStack.SecurityRule:  
 		derived_from: tosca.datatypes.Root 
 		properties:  
 			protocol:  
@@ -32,7 +32,7 @@ node_types:
 				constraints:  
 					min_length: "1" 
 				type: map 
-				entry_schema:  sodalite.nodes.OpenStack.SecurityRule 
+				entry_schema:  sodalite.datatypes.OpenStack.SecurityRule 
 			group_description:  
 				description: "Description of the security group in openstack"
 				required: true 

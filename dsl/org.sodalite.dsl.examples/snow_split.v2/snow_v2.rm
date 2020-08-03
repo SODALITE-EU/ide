@@ -1,0 +1,34 @@
+node_types:
+	sodalite.nodes.ConfigurationDemo:        
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			mysql_db_pass:
+				type: string
+				description: "MYSQL database password"
+				required: true
+		requirements:
+			remote_server:  
+				capability: tosca.capabilities.Compute 
+				node: sodalite.nodes.OpenStack.VM
+				relationship: tosca.relationships.DependsOn
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							remote_server: 
+								default: get_attribute:
+									attribute: tosca.nodes.Compute.public_address
+									entity: SELF
+									req_cap: sodalite.nodes.ConfigurationDemo.remote_server
+							mysql_db_pass:
+								default: get_property:
+									property: sodalite.nodes.ConfigurationDemo.mysql_db_pass
+									entity: SELF
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/snow-uc/snow-demo/playbooks/configure_demo.yml"
+							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/snow-uc/snow-demo/playbooks/config.json.tmpl"]
+							
+        	
+		

@@ -14,8 +14,8 @@ node_templates:
 					port_range_max: "80" 
 					protocol: "tcp" 
 					remote_ip_prefix: "0.0.0.0/0" 
-				group_name:  "snow" 
-				group_description:  "Snow UC security group"
+			group_name:  "snow" 
+			group_description:  "Snow UC security group"
 	
 	snow-vm:  
 		type: sodalite.nodes.OpenStack.VM

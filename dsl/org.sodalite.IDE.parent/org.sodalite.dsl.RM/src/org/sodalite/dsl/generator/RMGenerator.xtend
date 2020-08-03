@@ -633,7 +633,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entry_schema" ;
-	  exchange:value '«p.property.entry_schema»' ; 
+	  exchange:value '«p.property.entry_schema.name»' ; 
 	.
 	«ENDIF»
 	
