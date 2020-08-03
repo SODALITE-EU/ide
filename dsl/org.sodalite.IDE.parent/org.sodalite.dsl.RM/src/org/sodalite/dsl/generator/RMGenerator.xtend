@@ -737,7 +737,7 @@ class RMGenerator extends AbstractGenerator {
 	
 	def readFileAsString(String path){
 		var String content = new String(Files.readAllBytes(Paths.get(path)));
-		return content.replace("\'", "\\\'").replaceAll("[\\n\\r]+","\\\\n")
+		return content.replace("\'", "\\\'").replace("\\", "\\\\").replaceAll("[\\n\\r]+","\\\\n")
 	}
 	
 	def processDescription (String description){
