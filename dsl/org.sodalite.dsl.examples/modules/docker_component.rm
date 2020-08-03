@@ -41,7 +41,7 @@ node_types:
 				required: true 
 				type: string 
 			hostname:  
-				description: "The container's hostname" //TODO Support scaping aposthope during Turtle serialization of RMs 
+				description: "The container's hostname"
 				type: string 
 				required: false         
 			alias:  
