@@ -1,19 +1,13 @@
 package org.sodalite.dsl.AADM.design;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
-import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
-import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
-import org.sodalite.dsl.kb_reasoner_client.types.Node;
-import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.ESTRING;
@@ -53,6 +47,10 @@ public class Services {
     public String getTypeLabel(ENodeTemplateBody node) {
     	String type = node.getType();
     	return type.substring(type.lastIndexOf('.') + 1);
+    }
+    
+    public String getTypeDescription(ENodeTemplateBody node) {
+    	return "description: " + node.getDescription();
     }
     
     public int getTypeSize(ENodeTemplateBody node) {

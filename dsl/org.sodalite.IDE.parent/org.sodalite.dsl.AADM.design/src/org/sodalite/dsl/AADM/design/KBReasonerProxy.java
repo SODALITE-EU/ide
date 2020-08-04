@@ -9,6 +9,7 @@ import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
+import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
@@ -32,7 +33,15 @@ public class KBReasonerProxy {
 	}
     
     public List<String> getTypes(ENodeTemplate node){
-    	List<String> types = new ArrayList<>();
+    	return getKBTypes();
+    }
+    
+    public List<String> getTypes(EParameterDefinition par){
+    	return getKBTypes();
+    }
+
+	private List<String> getKBTypes() {
+		List<String> types = new ArrayList<>();
 		try {
 			ReasonerData<Node> nodes = getKBReasoner().getNodes();
 			for (Node n: nodes.getElements()){
@@ -44,6 +53,6 @@ public class KBReasonerProxy {
 		}
 		
     	return types;
-    }
+	}
     
 }
