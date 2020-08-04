@@ -36,8 +36,9 @@ public class KBReasonerProxy {
     	return getKBTypes();
     }
     
-    public List<String> getTypes(EParameterDefinition par){
-    	return getKBTypes();
+    public List<String> getDataTypes(EParameterDefinition par){
+    	//TODO implement it
+    	throw new UnsupportedOperationException();
     }
 
 	private List<String> getKBTypes() {

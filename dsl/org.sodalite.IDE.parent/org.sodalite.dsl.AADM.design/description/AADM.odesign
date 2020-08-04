@@ -49,7 +49,7 @@
                 <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
               </style>
             </subNodeMappings>
-            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="0" arcHeight="0" borderSizeComputationExpression="1" labelSize="12" labelExpression="aql:'Features'" labelAlignment="LEFT">
+            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="0" arcHeight="0" borderSizeComputationExpression="1" labelSize="12" labelExpression="aql:'Features'" iconPath="/org.sodalite.dsl.AADM.design/icons/features.png" labelAlignment="LEFT">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelFormat>bold</labelFormat>
               <labelFormat>italic</labelFormat>
@@ -235,6 +235,20 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
+        <controls xsi:type="properties:TextDescription" name="Description" labelExpression="Description" valueExpression="aql:self.node.description">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
+              <subModelOperations xsi:type="tool:SetValue" featureName="description" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="Optimization" labelExpression="Optimization" valueExpression="aql:self.node.optimization.name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
+              <subModelOperations xsi:type="tool:SetValue" featureName="optimization" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
       </groups>
       <groups name="Capability" labelExpression="Capability" domainClass="aADM::ECapabilityAssignment" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
@@ -264,12 +278,16 @@
       <groups name="ParameterDefinition" labelExpression="Group" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="aql:self.parameter.type->toString()" candidatesExpression="service:getTypes()" candidateDisplayExpression="aql:candidate">
+        <controls xsi:type="properties:TextDescription" name="Type" labelExpression="Type" valueExpression="aql:self.parameter.type.name">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.parameter">
+              <subModelOperations xsi:type="tool:SetValue" featureName="type" valueExpression="var:newValue"/>
+            </firstModelOperations>
           </initialOperation>
         </controls>
       </groups>
