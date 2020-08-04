@@ -33,8 +33,12 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -157,7 +161,7 @@ public class BackendProxy {
 		Job job = Job.create("Save RM", (ICoreRunnable) monitor -> {
 			try {
 				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI);
-				processValidationIssues(saveReport, event);
+				processValidationIssues(rmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception("The RM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
@@ -186,15 +190,32 @@ public class BackendProxy {
 		job.schedule();
 	}
 
-	private void processValidationIssues(KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
+	private void processValidationIssues(IFile rmFile, KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
 		// TODO Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings())) {
+			//Open RM file if not opened to show the errors and warnings
+			openFileInEditor(rmFile);
 			List<ValidationIssue> issues = readRecommendationsFromKB(saveReport);
 			manageRecommendationIssues(event, issues);
 			if (saveReport.hasErrors()) {
 				throw new Exception("There are detected validation issues in the AADM, please fix them");
 			}
 		}
+	}
+	
+	private void openFileInEditor(IFile file) throws PartInitException {
+		Display.getDefault().syncExec(new Runnable() {
+			@Override
+			public void run() {
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
+				try {
+					page.openEditor(new FileEditorInput(file), desc.getId());
+				} catch (PartInitException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	private List<ValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
