@@ -22,4 +22,10 @@ public class KBEntity {
 	public void setUri(URI uri) {
 		this.uri = uri;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return ((KBEntity)o).getUri().equals(this.getUri());
+	}
+	
 }

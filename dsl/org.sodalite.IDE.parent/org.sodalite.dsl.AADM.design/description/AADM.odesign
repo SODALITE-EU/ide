@@ -269,7 +269,7 @@
         </controls>
       </groups>
       <groups name="Capability" labelExpression="Capability" domainClass="aADM::ECapabilityAssignment" semanticCandidateExpression="var:self">
-        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+        <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getCapabilities()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
@@ -278,7 +278,7 @@
         </controls>
       </groups>
       <groups name="Requirement" labelExpression="Requirement" domainClass="aADM::ERequirementAssignment" semanticCandidateExpression="var:self">
-        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+        <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getRequirements()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>

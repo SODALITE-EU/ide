@@ -6,14 +6,18 @@ import java.util.List;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
+import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
+import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
+import org.sodalite.dsl.kb_reasoner_client.types.Capability;
 import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.Property;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
+import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
@@ -82,6 +86,46 @@ public class KBReasonerProxy {
 				String label = p.getUri().toString().substring(
 						p.getUri().toString().lastIndexOf('/') + 1, 
 						p.getUri().toString().length());
+				result.add(label);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+    	return result;
+    }
+    
+    public List<String> getCapabilities(ECapabilityAssignment cap){
+    	List<String> result = new ArrayList<>();
+		try {
+			ENodeTemplateBody template = (ENodeTemplateBody) cap.eContainer().eContainer();
+			if (template.getType() == null)
+				return result;
+			ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(template.getType());
+			for (Capability c: capabilities.getElements()){
+				String label = c.getUri().toString().substring(
+						c.getUri().toString().lastIndexOf('/') + 1, 
+						c.getUri().toString().length());
+				result.add(label);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+    	return result;
+    }
+    
+    public List<String> getRequirements(ERequirementAssignment req){
+    	List<String> result = new ArrayList<>();
+		try {
+			ENodeTemplateBody template = (ENodeTemplateBody) req.eContainer().eContainer();
+			if (template.getType() == null)
+				return result;
+			ReasonerData<Requirement> requirements = getKBReasoner().getRequirements(template.getType());
+			for (Requirement r: requirements.getElements()){
+				String label = r.getUri().toString().substring(
+						r.getUri().toString().lastIndexOf('/') + 1, 
+						r.getUri().toString().length());
 				result.add(label);
 			}
 		} catch (Exception e) {

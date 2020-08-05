@@ -88,6 +88,7 @@ class KBReasonerTest {
 	
 	@Test
 	void testGetCapabilities() throws Exception {
+		String resourceId = "sodalite.nodes.OpenStack.VM";
 		CapabilityData capabilities = kbclient.getCapabilities(resourceId);
 		assertFalse(capabilities.getElements().isEmpty());
 		System.out.println("Capabilities for resource: " + resourceId);
@@ -96,6 +97,7 @@ class KBReasonerTest {
 	
 	@Test
 	void testGetRequirements() throws Exception {
+		String resourceId = "sodalite.nodes.OpenStack.VM";
 		RequirementData requirements = kbclient.getRequirements(resourceId);
 		assertFalse(requirements.getElements().isEmpty());
 		System.out.println("Requirements for resource: " + resourceId);

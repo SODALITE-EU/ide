@@ -57,7 +57,8 @@ public abstract class ReasonerDataJsonDeserializer<T extends KBEntity> extends J
 					T entity = mapper.readerFor(nodeType).readValue(node.elements().next());
 					URI uri = new URI(((ObjectNode)node).fields().next().getKey());
 					entity.setUri(uri);
-					nodes.add(entity);
+					if (!nodes.contains(entity))
+						nodes.add(entity);
 				} catch (IOException | URISyntaxException e) {
 					e.printStackTrace();
 				}

@@ -50,6 +50,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl;
+import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
@@ -57,6 +58,7 @@ import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
+import org.sodalite.dsl.kb_reasoner_client.types.Capability;
 import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.Occurrences;
 import org.sodalite.dsl.kb_reasoner_client.types.Property;
@@ -334,6 +336,69 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       proposalText = "property_name";
       displayText = "property_name";
       additionalProposalInfo = "represents the name of a property that would be used to select a property \ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship \nTemplate, etc.,) which is declared in its declared type (e.g., a Node Type, Node Template, \nCapability Type, etc.). ";
+      this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeECapabilityAssignment_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for ECapabilityAssignment::name property");
+      String proposalText = "";
+      String displayText = "";
+      String additionalProposalInfo = "";
+      String resourceId = "";
+      if ((model instanceof ENodeTemplateBodyImpl)) {
+        resourceId = ((ENodeTemplateBodyImpl) model).getType();
+      } else {
+        if ((model instanceof ECapabilityAssignmentsImpl)) {
+          EObject _eContainer = ((ECapabilityAssignmentsImpl)model).eContainer();
+          resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
+        }
+      }
+      if ((resourceId != null)) {
+        final ReasonerData<Capability> capabilities = this.getKBReasoner().getCapabilities(resourceId);
+        if ((capabilities != null)) {
+          System.out.println(("Capabilities retrieved from KB for resource: " + resourceId));
+          List<Capability> _elements = capabilities.getElements();
+          for (final Capability capability : _elements) {
+            {
+              URI _uri = capability.getUri();
+              String _plus = ("\nCapability: " + _uri);
+              System.out.println(_plus);
+              String _string = capability.getUri().toString();
+              int _lastIndexOf = capability.getUri().toString().lastIndexOf("/");
+              int _plus_1 = (_lastIndexOf + 1);
+              String property_label = _string.substring(_plus_1, capability.getUri().toString().length());
+              proposalText = property_label;
+              displayText = property_label;
+              additionalProposalInfo = "";
+              Type _type = capability.getType();
+              boolean _tripleNotEquals = (_type != null);
+              if (_tripleNotEquals) {
+                String _additionalProposalInfo = additionalProposalInfo;
+                String _label = capability.getType().getLabel();
+                String _plus_2 = ("\nType: " + _label);
+                additionalProposalInfo = (_additionalProposalInfo + _plus_2);
+              }
+              List<String> _valid_source_types = capability.getValid_source_types();
+              boolean _tripleNotEquals_1 = (_valid_source_types != null);
+              if (_tripleNotEquals_1) {
+                String _additionalProposalInfo_1 = additionalProposalInfo;
+                List<String> _valid_source_types_1 = capability.getValid_source_types();
+                String _plus_3 = ("\nValid source types:" + _valid_source_types_1);
+                additionalProposalInfo = (_additionalProposalInfo_1 + _plus_3);
+              }
+              this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            }
+          }
+        }
+      }
+      proposalText = "capability_name";
+      displayText = "capability_name";
+      additionalProposalInfo = "represents the symbolic name of a capability assignment ";
       this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
