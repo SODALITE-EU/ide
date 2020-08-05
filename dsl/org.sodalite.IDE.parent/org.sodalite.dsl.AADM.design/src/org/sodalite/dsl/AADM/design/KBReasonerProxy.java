@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
@@ -58,10 +59,10 @@ public class KBReasonerProxy {
     public List<String> getAttributes(EAttributeAssignment attr){
     	List<String> result = new ArrayList<>();
 		try {
-			ENodeTemplateBody template = (ENodeTemplateBody) attr.eContainer().eContainer();
-			if (template.getType() == null)
+			String type = findContainerType(attr);
+			if (type == null)
 				return result;
-			ReasonerData<Attribute> attributes = getKBReasoner().getAttributes(template.getType());
+			ReasonerData<Attribute> attributes = getKBReasoner().getAttributes(type);
 			for (Attribute a: attributes.getElements()){
 				String label = a.getUri().toString().substring(
 						a.getUri().toString().lastIndexOf('/') + 1, 
@@ -78,10 +79,10 @@ public class KBReasonerProxy {
     public List<String> getProperties(EPropertyAssignment prop){
     	List<String> result = new ArrayList<>();
 		try {
-			ENodeTemplateBody template = (ENodeTemplateBody) prop.eContainer().eContainer();
-			if (template.getType() == null)
+			String type = findContainerType(prop);
+			if (type == null)
 				return result;
-			ReasonerData<Property> properties = getKBReasoner().getProperties(template.getType());
+			ReasonerData<Property> properties = getKBReasoner().getProperties(type);
 			for (Property p: properties.getElements()){
 				String label = p.getUri().toString().substring(
 						p.getUri().toString().lastIndexOf('/') + 1, 
@@ -94,14 +95,14 @@ public class KBReasonerProxy {
 		
     	return result;
     }
-    
-    public List<String> getCapabilities(ECapabilityAssignment cap){
+
+	public List<String> getCapabilities(ECapabilityAssignment cap){
     	List<String> result = new ArrayList<>();
 		try {
-			ENodeTemplateBody template = (ENodeTemplateBody) cap.eContainer().eContainer();
-			if (template.getType() == null)
+			String type = findContainerType(cap);
+			if (type == null)
 				return result;
-			ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(template.getType());
+			ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(type);
 			for (Capability c: capabilities.getElements()){
 				String label = c.getUri().toString().substring(
 						c.getUri().toString().lastIndexOf('/') + 1, 
@@ -118,10 +119,10 @@ public class KBReasonerProxy {
     public List<String> getRequirements(ERequirementAssignment req){
     	List<String> result = new ArrayList<>();
 		try {
-			ENodeTemplateBody template = (ENodeTemplateBody) req.eContainer().eContainer();
-			if (template.getType() == null)
+			String type = findContainerType(req);
+			if (type == null)
 				return result;
-			ReasonerData<Requirement> requirements = getKBReasoner().getRequirements(template.getType());
+			ReasonerData<Requirement> requirements = getKBReasoner().getRequirements(type);
 			for (Requirement r: requirements.getElements()){
 				String label = r.getUri().toString().substring(
 						r.getUri().toString().lastIndexOf('/') + 1, 
@@ -138,6 +139,38 @@ public class KBReasonerProxy {
     public List<String> getDataTypes(EParameterDefinition par){
     	//TODO implement it
     	throw new UnsupportedOperationException();
+    }
+    
+    private String findContainerType(EObject obj) {
+    	EObject container = obj.eContainer().eContainer();
+    	if (container instanceof ENodeTemplateBody)
+    		return ((ENodeTemplateBody) container).getType();
+    	else if (container instanceof ECapabilityAssignment) {
+    		ECapabilityAssignment cap = (ECapabilityAssignment) container;
+    		return findCapabilityType(cap);
+    	}else
+    		return null;
+	}
+    
+    private String findCapabilityType(ECapabilityAssignment cap){
+    	String result = null;
+		try {
+			String type = findContainerType(cap);
+			if (type == null)
+				return result;
+			ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(type);
+			for (Capability c: capabilities.getElements()){
+				String label = c.getUri().toString().substring(
+						c.getUri().toString().lastIndexOf('/') + 1, 
+						c.getUri().toString().length());
+				if (label.equals(cap.getName()))
+					return c.getType().getLabel();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+    	return result;
     }
     
 }
