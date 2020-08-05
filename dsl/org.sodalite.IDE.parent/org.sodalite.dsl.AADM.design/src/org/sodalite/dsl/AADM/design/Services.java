@@ -3,6 +3,7 @@ package org.sodalite.dsl.AADM.design;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
@@ -38,6 +39,10 @@ public class Services {
     	}
     	
     	return result;
+    }
+    
+    public String getAttributeLabel(EAttributeAssignment attribute) {
+    	return attribute.getName() +  ": " + attribute.getValue();
     }
     
     public String getRequirementLabel(ERequirementAssignment requirement) {
