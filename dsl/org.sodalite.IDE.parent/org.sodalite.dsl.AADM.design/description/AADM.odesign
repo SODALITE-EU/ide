@@ -168,7 +168,7 @@
       <pages name="Input Default Page" labelExpression="General" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.7"/>
       <pages name="Attribute Default Page" labelExpression="General" domainClass="aADM::EAttributeAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.8"/>
       <groups name="SingleStringValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ESTRING)">
-        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+        <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
@@ -184,7 +184,7 @@
         </controls>
       </groups>
       <groups name="ListStringValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ELIST)">
-        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+        <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
@@ -209,7 +209,7 @@
         </controls>
       </groups>
       <groups name="GetInputValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::GetInput)">
-        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+        <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
@@ -223,7 +223,7 @@
         </controls>
       </groups>
       <groups name="ComplexValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::EMAP)">
-        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+        <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
@@ -310,7 +310,7 @@
         </controls>
       </groups>
       <groups name="SingleStringValueAttribute" labelExpression="Attribute" domainClass="aADM::EAttributeAssignment" semanticCandidateExpression="var:self">
-        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+        <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getAttributes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>

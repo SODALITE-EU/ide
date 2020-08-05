@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.ENodeTemplateBody;
+import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
 import org.sodalite.dsl.kb_reasoner_client.types.Node;
+import org.sodalite.dsl.kb_reasoner_client.types.Property;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.ui.preferences.Activator;
@@ -33,27 +38,62 @@ public class KBReasonerProxy {
 	}
     
     public List<String> getTypes(ENodeTemplate node){
-    	return getKBTypes();
-    }
-    
-    public List<String> getDataTypes(EParameterDefinition par){
-    	//TODO implement it
-    	throw new UnsupportedOperationException();
-    }
-
-	private List<String> getKBTypes() {
-		List<String> types = new ArrayList<>();
+    	List<String> types = new ArrayList<>();
 		try {
 			ReasonerData<Node> nodes = getKBReasoner().getNodes();
 			for (Node n: nodes.getElements()){
 				types.add(n.getLabel());
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
     	return types;
-	}
+    }
+    
+    public List<String> getAttributes(EAttributeAssignment attr){
+    	List<String> result = new ArrayList<>();
+		try {
+			ENodeTemplateBody template = (ENodeTemplateBody) attr.eContainer().eContainer();
+			if (template.getType() == null)
+				return result;
+			ReasonerData<Attribute> attributes = getKBReasoner().getAttributes(template.getType());
+			for (Attribute a: attributes.getElements()){
+				String label = a.getUri().toString().substring(
+						a.getUri().toString().lastIndexOf('/') + 1, 
+						a.getUri().toString().length());
+				result.add(label);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+    	return result;
+    }
+    
+    public List<String> getProperties(EPropertyAssignment prop){
+    	List<String> result = new ArrayList<>();
+		try {
+			ENodeTemplateBody template = (ENodeTemplateBody) prop.eContainer().eContainer();
+			if (template.getType() == null)
+				return result;
+			ReasonerData<Property> properties = getKBReasoner().getProperties(template.getType());
+			for (Property p: properties.getElements()){
+				String label = p.getUri().toString().substring(
+						p.getUri().toString().lastIndexOf('/') + 1, 
+						p.getUri().toString().length());
+				result.add(label);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+    	return result;
+    }
+    
+    public List<String> getDataTypes(EParameterDefinition par){
+    	//TODO implement it
+    	throw new UnsupportedOperationException();
+    }
     
 }
