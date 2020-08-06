@@ -69,9 +69,25 @@ public class Services {
     		prop.getName());
     }
     
-    public void removeStringFromPropertyValueList (EPropertyAssignment prop, String item) {
-    	System.out.println ("Requested to remove string from property list value. Property: " +
+    public void addItemToPropertyValueList (ELIST list, String item) {
+    	System.out.println ("Requested to add item to property list value. List: " +
+    		list + ". Item: " + item);
+    	list.getList().add(item);
+    }
+    
+    public void cancelAddItemToPropertyValueList (ELIST list, Integer size) {
+    	System.out.println ("Requested to cancel the addition of item to property list value. List: " +
+    		list + ". Default size: " + size);
+    	if (list.getList().size() != size)
+    		list.getList().remove(size);
+    }
+    
+    public void removeItemFromPropertyValueList (EPropertyAssignment prop, String item) {
+    	System.out.println ("Requested to remove item from property list value. Property: " +
     		prop.getName() + " Item: " + item);
+    	if (prop.getValue() instanceof ELIST) {
+    		((ELIST)prop.getValue()).getList().remove(item);
+    	}
     }
     
     public List<ENodeTemplate> getNodes (ERequirementAssignment req){
