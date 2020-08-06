@@ -90,6 +90,12 @@ public class Services {
     	}
     }
     
+    public void editItemInPropertyValueList (ELIST list, Integer index, String newValue, String oldValue) {
+    	System.out.println ("Requested to edit an item in a property list value. List: " + list 
+    			+ ". Index: " + index + ". NewValue: " + newValue + ". OldValue: " + oldValue);
+    	list.getList().set(index - 1, newValue);
+    }
+    
     public List<ENodeTemplate> getNodes (ERequirementAssignment req){
     	ENodeTemplates container = (ENodeTemplates) req.eContainer().eContainer().eContainer().eContainer();
     	return container.getNodeTemplates();
