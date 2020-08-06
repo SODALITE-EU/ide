@@ -1,9 +1,13 @@
 package org.sodalite.dsl.AADM.design;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
+import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
@@ -11,6 +15,7 @@ import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EMAP;
+import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.ESTRING;
 import org.sodalite.dsl.rM.GetInput;
 
@@ -100,5 +105,22 @@ public class Services {
     	ENodeTemplates container = (ENodeTemplates) req.eContainer().eContainer().eContainer().eContainer();
     	return container.getNodeTemplates();
     }
+    
+    public List<String> getInputs(EPropertyAssignment prop){
+    	List<String> result = new ArrayList<>();
+    	AADM_Model model = findModel(prop);
+    	for (EParameterDefinition input: model.getInputs().getInputs()) {
+    		result.add(input.getName());
+    	}
+    	return result;
+    }
+    
+    private AADM_Model findModel(EObject obj) {
+    	EObject container = obj.eContainer();
+    	while (container != null && !(container instanceof AADM_Model)) {
+    		container = container.eContainer();
+    	}
+    	return (AADM_Model) container;
+	}
     
 }
