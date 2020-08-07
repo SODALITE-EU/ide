@@ -463,7 +463,7 @@ terminal ENTITY:
 	'SELF' | 'SOURCE' | 'TARGET' | 'HOST';
 
 terminal PRIMITIVE_DATA_TYPE:
-	'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' |
+	'string' | 'integer' | 'float'| 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' |
 	'scalar-unit.size' | 'version-type';
 
 @Override

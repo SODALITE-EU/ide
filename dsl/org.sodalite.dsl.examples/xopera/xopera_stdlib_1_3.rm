@@ -122,6 +122,8 @@ data_types:
 		description: "string primitive type" 
 	integer:
 		description: "integer primitive type"
+	float:
+		description: "float primitive type"
 	boolean:
 		description: "boolean primitive type"
 	map:
