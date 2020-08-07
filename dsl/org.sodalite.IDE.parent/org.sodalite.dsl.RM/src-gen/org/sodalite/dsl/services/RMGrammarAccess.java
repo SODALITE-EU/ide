@@ -4933,7 +4933,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal PRIMITIVE_DATA_TYPE:
-	//	'string' | 'integer' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' |
+	//	'string' | 'integer' | 'float' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' |
 	//	'scalar-unit.size' | 'version-type';
 	public TerminalRule getPRIMITIVE_DATA_TYPERule() {
 		return tPRIMITIVE_DATA_TYPE;
