@@ -2,6 +2,7 @@ package org.sodalite.dsl.AADM.design;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -13,11 +14,14 @@ import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.kb_reasoner_client.types.Node;
+import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.ESTRING;
 import org.sodalite.dsl.rM.GetInput;
+import org.sodalite.dsl.scoping.AADMScopeProvider;
 
 /**
  * The services class used by VSM.
@@ -113,6 +117,10 @@ public class Services {
     		result.add(input.getName());
     	}
     	return result;
+    }
+    
+    public Set<String> getOptimizations(ENodeTemplate node){
+    	return AADMScopeProvider.getOptimizationModels();	
     }
     
     private AADM_Model findModel(EObject obj) {

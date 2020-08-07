@@ -321,7 +321,7 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:TextDescription" name="Optimization" labelExpression="Optimization" valueExpression="aql:self.node.optimization.name">
+        <controls xsi:type="properties:SelectDescription" name="Optimization" labelExpression="Optimization" valueExpression="aql:self.node.optimization.name" candidatesExpression="service:getOptimizations()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
               <subModelOperations xsi:type="tool:SetValue" featureName="optimization" valueExpression="var:newValue"/>
