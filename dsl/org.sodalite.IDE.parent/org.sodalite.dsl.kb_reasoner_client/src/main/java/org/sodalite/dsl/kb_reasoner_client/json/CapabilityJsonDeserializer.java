@@ -62,6 +62,8 @@ public class CapabilityJsonDeserializer extends JsonDeserializer<Capability> {
 		
 	private List<String> getList(String valid_source_types_string) {
 		List<String> l = new ArrayList<String>();
+		if (valid_source_types_string.isEmpty())
+			return l;
 		StringTokenizer st = new StringTokenizer(valid_source_types_string.substring(1, valid_source_types_string.length()-1), ",");
 		while (st.hasMoreElements())
 			l.add(st.nextToken());

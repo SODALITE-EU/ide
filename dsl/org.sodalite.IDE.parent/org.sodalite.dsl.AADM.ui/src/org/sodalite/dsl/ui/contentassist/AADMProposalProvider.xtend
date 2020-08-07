@@ -57,6 +57,8 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
 import org.sodalite.dsl.ui.preferences.Activator
+import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl
+import org.sodalite.dsl.kb_reasoner_client.types.Capability
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -258,6 +260,43 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		proposalText = "property_name"
 		displayText = "property_name"
 		additionalProposalInfo = "represents the name of a property that would be used to select a property \ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship \nTemplate, etc.,) which is declared in its declared type (e.g., a Node Type, Node Template, \nCapability Type, etc.). "
+
+		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeECapabilityAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		System.out.println("Invoking content assist for ECapabilityAssignment::name property")
+		var String proposalText = ""
+		var String displayText = ""
+		var String additionalProposalInfo = ""
+		
+		var resourceId = ""
+		if (model instanceof ENodeTemplateBodyImpl)
+			resourceId = (model as ENodeTemplateBodyImpl).type
+		else if (model instanceof ECapabilityAssignmentsImpl)
+			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
+		
+		if (resourceId !== null){
+			val ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(resourceId)
+			if (capabilities !== null){
+				System.out.println ("Capabilities retrieved from KB for resource: " + resourceId)
+				for (capability: capabilities.elements){
+					System.out.println ("\nCapability: " + capability.uri)
+				 	var property_label = capability.uri.toString.substring(capability.uri.toString.lastIndexOf('/') + 1, capability.uri.toString.length)
+					proposalText = property_label
+					displayText = property_label
+					additionalProposalInfo = ""
+					if (capability.type !== null)
+						additionalProposalInfo += "\nType: " + capability.type.label
+					if (capability.valid_source_types !== null)
+						additionalProposalInfo += "\nValid source types:" + capability.valid_source_types 
+					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+				}
+			}
+		}
+		proposalText = "capability_name"
+		displayText = "capability_name"
+		additionalProposalInfo = "represents the symbolic name of a capability assignment "
 
 		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 	}

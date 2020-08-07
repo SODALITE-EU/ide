@@ -10,6 +10,11 @@
  *******************************************************************************/
 package org.sodalite.dsl.kb_reasoner_client.types;
 
+import org.sodalite.dsl.kb_reasoner_client.json.OccurrencesJsonDeserializer;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(using = OccurrencesJsonDeserializer.class)
 public class Occurrences {
 	String min;
 	String max;

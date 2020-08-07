@@ -11,7 +11,6 @@
 package org.sodalite.dsl.kb_reasoner_client.types;
 
 import org.sodalite.dsl.kb_reasoner_client.json.AttributeDataJsonDeserializer;
-import org.sodalite.dsl.kb_reasoner_client.json.NodeDataJsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(using = AttributeDataJsonDeserializer.class)
