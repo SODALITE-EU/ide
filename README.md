@@ -8,12 +8,12 @@ This repository contains the Sodalite IDE (based on Eclipse).
 - PoCs: This folder contains some PoCs developed to test XText technologies and model Tosca metamodels
 
 ## Requirements
-Install the version 2019-09 R (4.13.0) of the Eclipse Modeling Tools instance from [here](https://www.eclipse.org/downloads/packages/release/2019-12/r/eclipse-modeling-tools) 
+Install the Eclipse Modeling Tools instance from [here](https://www.eclipse.org/downloads/) 
 
 ## IDE Installation from the Sodalite IDE update site
-Install the Sodalite IDE into the Eclipse Modeling Tools instance using this [update site](https://raw.githubusercontent.com/SODALITE-EU/ide/master/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository). For that, select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and the update site location given before. Then, click on *Add* button. 
-Following the same procedure add the this external [repository for Sirius-XText integration](https://altran-mde.github.io/xtext-sirius-integration.io/p2/) to your list of software sites.
-In the former dialog, in the *Work with* combo box, select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
+Install the Sodalite IDE into the Eclipse Modeling Tools instance using this [update site](https://raw.githubusercontent.com/SODALITE-EU/ide/master/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository). 
+In Eclipse, select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and the update site location given Above. Then, click on *Add* button. 
+Following the same procedure as before the this external [repository for Sirius-XText integration](https://altran-mde.github.io/xtext-sirius-integration.io/p2/) to your list of software sites but make sure that in the *Install software* dialog window, in the *Work with* combo box, you also select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
 
 ## IDE Installation from the Sodalite IDE source code
 
