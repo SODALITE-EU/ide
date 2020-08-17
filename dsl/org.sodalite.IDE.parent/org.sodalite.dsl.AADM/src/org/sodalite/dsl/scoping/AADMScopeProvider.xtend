@@ -11,6 +11,9 @@ import org.sodalite.dsl.aADM.AADMPackage
 import org.eclipse.xtext.resource.IEObjectDescription
 import java.util.Set
 import java.util.TreeSet
+import org.sodalite.dsl.rM.EPropertyDefinitionBody
+import org.sodalite.dsl.rM.RMPackage
+import org.sodalite.dsl.rM.EParameterDefinitionBody
 
 /**
  * This class contains custom scoping description.
@@ -20,6 +23,7 @@ import java.util.TreeSet
  */
 class AADMScopeProvider extends AbstractAADMScopeProvider {
 	static var Set<String> optimization_models = new TreeSet()
+	static var Set<String> data_types = new TreeSet()
 	
     override public IScope getScope(EObject context, EReference reference) {
         // We want to define the Scope for the Element's superElement cross-reference
@@ -34,11 +38,24 @@ class AADMScopeProvider extends AbstractAADMScopeProvider {
             	var desc = opt as IEObjectDescription
             	optimization_models.add(desc.name.toString)
             }
+        }else if (context instanceof EParameterDefinitionBody 
+        	&& reference == RMPackage.Literals.EPARAMETER_DEFINITION_BODY__TYPE
+        	
+        ){
+        	var types = scope.allElements
+            for (type: types){
+            	var desc = type as IEObjectDescription
+            	data_types.add(desc.name.toString)
+            }
         }
         return scope
     }
     
     def static Set<String> getOptimizationModels(){
     	return optimization_models
+    }
+    
+    def static Set<String> getDataTypes(){
+    	return data_types
     }
 }

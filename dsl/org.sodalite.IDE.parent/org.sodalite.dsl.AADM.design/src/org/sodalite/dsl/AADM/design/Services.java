@@ -8,14 +8,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
-import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
-import org.sodalite.dsl.kb_reasoner_client.types.Node;
-import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EParameterDefinition;
@@ -121,6 +118,10 @@ public class Services {
     
     public Set<String> getOptimizations(ENodeTemplate node){
     	return AADMScopeProvider.getOptimizationModels();	
+    }
+    
+    public Set<String> getDataTypes(EParameterDefinition par){
+    	return AADMScopeProvider.getDataTypes();	
     }
     
     private AADM_Model findModel(EObject obj) {
