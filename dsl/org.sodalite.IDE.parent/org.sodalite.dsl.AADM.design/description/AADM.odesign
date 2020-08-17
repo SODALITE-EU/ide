@@ -362,11 +362,9 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:TextDescription" name="Type" labelExpression="Type" valueExpression="aql:self.parameter.type.name">
+        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="aql:self.parameter.type.name" candidatesExpression="service:getDataTypes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.parameter">
-              <subModelOperations xsi:type="tool:SetValue" featureName="type" valueExpression="var:newValue"/>
-            </firstModelOperations>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
           </initialOperation>
         </controls>
       </groups>
