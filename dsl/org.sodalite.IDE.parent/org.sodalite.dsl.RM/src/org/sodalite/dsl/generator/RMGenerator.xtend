@@ -31,6 +31,14 @@ import org.sodalite.dsl.rM.EValid_Values
 import org.sodalite.dsl.rM.EMinLength
 import java.nio.file.Files
 import java.nio.file.Paths
+import org.sodalite.dsl.rM.EGreaterThan
+import org.sodalite.dsl.rM.EEqual
+import org.sodalite.dsl.rM.EGreaterOrEqual
+import org.sodalite.dsl.rM.ELessThan
+import org.sodalite.dsl.rM.ELessOrEqual
+import org.sodalite.dsl.rM.ELength
+import org.sodalite.dsl.rM.EMaxLength
+import org.sodalite.dsl.rM.EInRange
 
 /**
  * Generates code from your model files on save.
@@ -161,6 +169,62 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "min_length" ;
+	  exchange:value "«c.^val»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof EGreaterThan»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "greater_than" ;
+	  exchange:value "«c.^val»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof EEqual»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "equal" ;
+	  exchange:value "«c.^val»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof EGreaterOrEqual»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "greater_or_equal" ;
+	  exchange:value "«c.^val»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof ELessThan»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "less_than" ;
+	  exchange:value "«c.^val»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof ELessOrEqual»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "less_or_equal" ;
+	  exchange:value "«c.^val»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof ELength»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "length" ;
+	  exchange:value "«c.^val»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof EMaxLength»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "max_length" ;
 	  exchange:value "«c.^val»" ;
 	.		
 	«ENDIF»
@@ -737,7 +801,7 @@ class RMGenerator extends AbstractGenerator {
 	
 	def readFileAsString(String path){
 		var String content = new String(Files.readAllBytes(Paths.get(path)));
-		return content.replace("\'", "\\\'").replace("\\", "\\\\").replaceAll("[\\n\\r]+","\\\\n")
+		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
 	}
 	
 	def processDescription (String description){

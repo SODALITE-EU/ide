@@ -436,9 +436,9 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEEqualAdapter();
       }
       @Override
-      public Adapter caseEPropertyAssignmentValue(EPropertyAssignmentValue object)
+      public Adapter caseEAssignmentValue(EAssignmentValue object)
       {
-        return createEPropertyAssignmentValueAdapter();
+        return createEAssignmentValueAdapter();
       }
       @Override
       public Adapter caseESTRING(ESTRING object)
@@ -1558,16 +1558,16 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPropertyAssignmentValue <em>EProperty Assignment Value</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EAssignmentValue <em>EAssignment Value</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.dsl.rM.EPropertyAssignmentValue
+   * @see org.sodalite.dsl.rM.EAssignmentValue
    * @generated
    */
-  public Adapter createEPropertyAssignmentValueAdapter()
+  public Adapter createEAssignmentValueAdapter()
   {
     return null;
   }

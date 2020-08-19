@@ -32,7 +32,7 @@ import org.sodalite.dsl.rM.RMPackage;
  *
  * @generated
  */
-public class EMAPImpl extends EPropertyAssignmentValueImpl implements EMAP
+public class EMAPImpl extends EAssignmentValueImpl implements EMAP
 {
   /**
    * The cached value of the '{@link #getMap() <em>Map</em>}' containment reference list.

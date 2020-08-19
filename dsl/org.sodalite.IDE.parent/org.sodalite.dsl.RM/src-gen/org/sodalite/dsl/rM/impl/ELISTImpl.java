@@ -27,7 +27,7 @@ import org.sodalite.dsl.rM.RMPackage;
  *
  * @generated
  */
-public class ELISTImpl extends EPropertyAssignmentValueImpl implements ELIST
+public class ELISTImpl extends EAssignmentValueImpl implements ELIST
 {
   /**
    * The cached value of the '{@link #getList() <em>List</em>}' attribute list.

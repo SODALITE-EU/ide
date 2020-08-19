@@ -6283,15 +6283,15 @@ ruleEEqual returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleEPropertyAssignmentValue
-entryRuleEPropertyAssignmentValue returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getEPropertyAssignmentValueRule()); }
-	iv_ruleEPropertyAssignmentValue=ruleEPropertyAssignmentValue
-	{ $current=$iv_ruleEPropertyAssignmentValue.current; }
+// Entry rule entryRuleEAssignmentValue
+entryRuleEAssignmentValue returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEAssignmentValueRule()); }
+	iv_ruleEAssignmentValue=ruleEAssignmentValue
+	{ $current=$iv_ruleEAssignmentValue.current; }
 	EOF;
 
-// Rule EPropertyAssignmentValue
-ruleEPropertyAssignmentValue returns [EObject current=null]
+// Rule EAssignmentValue
+ruleEAssignmentValue returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -6300,7 +6300,7 @@ ruleEPropertyAssignmentValue returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getEPropertyAssignmentValueAccess().getESTRINGParserRuleCall_0());
+			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getESTRINGParserRuleCall_0());
 		}
 		this_ESTRING_0=ruleESTRING
 		{
@@ -6309,7 +6309,7 @@ ruleEPropertyAssignmentValue returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getEPropertyAssignmentValueAccess().getELISTParserRuleCall_1());
+			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getELISTParserRuleCall_1());
 		}
 		this_ELIST_1=ruleELIST
 		{
@@ -6318,7 +6318,7 @@ ruleEPropertyAssignmentValue returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getEPropertyAssignmentValueAccess().getEMAPParserRuleCall_2());
+			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getEMAPParserRuleCall_2());
 		}
 		this_EMAP_2=ruleEMAP
 		{
@@ -6327,7 +6327,7 @@ ruleEPropertyAssignmentValue returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getEPropertyAssignmentValueAccess().getEFunctionParserRuleCall_3());
+			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getEFunctionParserRuleCall_3());
 		}
 		this_EFunction_3=ruleEFunction
 		{
@@ -6459,9 +6459,9 @@ ruleEMapEntry returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEMapEntryAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0());
 				}
-				lv_value_2_0=ruleEPropertyAssignmentValue
+				lv_value_2_0=ruleEAssignmentValue
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEMapEntryRule());
@@ -6470,7 +6470,7 @@ ruleEMapEntry returns [EObject current=null]
 						$current,
 						"value",
 						lv_value_2_0,
-						"org.sodalite.dsl.RM.EPropertyAssignmentValue");
+						"org.sodalite.dsl.RM.EAssignmentValue");
 					afterParserOrEnumRuleCall();
 				}
 			)

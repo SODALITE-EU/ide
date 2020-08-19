@@ -6590,20 +6590,20 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleEEqual"
 
 
-    // $ANTLR start "entryRuleEPropertyAssignmentValue"
-    // InternalAADMParser.g:2188:1: entryRuleEPropertyAssignmentValue : ruleEPropertyAssignmentValue EOF ;
-    public final void entryRuleEPropertyAssignmentValue() throws RecognitionException {
+    // $ANTLR start "entryRuleEAssignmentValue"
+    // InternalAADMParser.g:2188:1: entryRuleEAssignmentValue : ruleEAssignmentValue EOF ;
+    public final void entryRuleEAssignmentValue() throws RecognitionException {
         try {
-            // InternalAADMParser.g:2189:1: ( ruleEPropertyAssignmentValue EOF )
-            // InternalAADMParser.g:2190:1: ruleEPropertyAssignmentValue EOF
+            // InternalAADMParser.g:2189:1: ( ruleEAssignmentValue EOF )
+            // InternalAADMParser.g:2190:1: ruleEAssignmentValue EOF
             {
-             before(grammarAccess.getEPropertyAssignmentValueRule()); 
+             before(grammarAccess.getEAssignmentValueRule()); 
             pushFollow(FOLLOW_1);
-            ruleEPropertyAssignmentValue();
+            ruleEAssignmentValue();
 
             state._fsp--;
 
-             after(grammarAccess.getEPropertyAssignmentValueRule()); 
+             after(grammarAccess.getEAssignmentValueRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -6617,35 +6617,35 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleEPropertyAssignmentValue"
+    // $ANTLR end "entryRuleEAssignmentValue"
 
 
-    // $ANTLR start "ruleEPropertyAssignmentValue"
-    // InternalAADMParser.g:2197:1: ruleEPropertyAssignmentValue : ( ( rule__EPropertyAssignmentValue__Alternatives ) ) ;
-    public final void ruleEPropertyAssignmentValue() throws RecognitionException {
+    // $ANTLR start "ruleEAssignmentValue"
+    // InternalAADMParser.g:2197:1: ruleEAssignmentValue : ( ( rule__EAssignmentValue__Alternatives ) ) ;
+    public final void ruleEAssignmentValue() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:2201:2: ( ( ( rule__EPropertyAssignmentValue__Alternatives ) ) )
-            // InternalAADMParser.g:2202:2: ( ( rule__EPropertyAssignmentValue__Alternatives ) )
+            // InternalAADMParser.g:2201:2: ( ( ( rule__EAssignmentValue__Alternatives ) ) )
+            // InternalAADMParser.g:2202:2: ( ( rule__EAssignmentValue__Alternatives ) )
             {
-            // InternalAADMParser.g:2202:2: ( ( rule__EPropertyAssignmentValue__Alternatives ) )
-            // InternalAADMParser.g:2203:3: ( rule__EPropertyAssignmentValue__Alternatives )
+            // InternalAADMParser.g:2202:2: ( ( rule__EAssignmentValue__Alternatives ) )
+            // InternalAADMParser.g:2203:3: ( rule__EAssignmentValue__Alternatives )
             {
-             before(grammarAccess.getEPropertyAssignmentValueAccess().getAlternatives()); 
-            // InternalAADMParser.g:2204:3: ( rule__EPropertyAssignmentValue__Alternatives )
-            // InternalAADMParser.g:2204:4: rule__EPropertyAssignmentValue__Alternatives
+             before(grammarAccess.getEAssignmentValueAccess().getAlternatives()); 
+            // InternalAADMParser.g:2204:3: ( rule__EAssignmentValue__Alternatives )
+            // InternalAADMParser.g:2204:4: rule__EAssignmentValue__Alternatives
             {
             pushFollow(FOLLOW_2);
-            rule__EPropertyAssignmentValue__Alternatives();
+            rule__EAssignmentValue__Alternatives();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEPropertyAssignmentValueAccess().getAlternatives()); 
+             after(grammarAccess.getEAssignmentValueAccess().getAlternatives()); 
 
             }
 
@@ -6664,7 +6664,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleEPropertyAssignmentValue"
+    // $ANTLR end "ruleEAssignmentValue"
 
 
     // $ANTLR start "entryRuleESTRING"
@@ -7430,9 +7430,9 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__EConstraint__Alternatives"
 
 
-    // $ANTLR start "rule__EPropertyAssignmentValue__Alternatives"
-    // InternalAADMParser.g:2425:1: rule__EPropertyAssignmentValue__Alternatives : ( ( ruleESTRING ) | ( ruleELIST ) | ( ruleEMAP ) | ( ruleEFunction ) );
-    public final void rule__EPropertyAssignmentValue__Alternatives() throws RecognitionException {
+    // $ANTLR start "rule__EAssignmentValue__Alternatives"
+    // InternalAADMParser.g:2425:1: rule__EAssignmentValue__Alternatives : ( ( ruleESTRING ) | ( ruleELIST ) | ( ruleEMAP ) | ( ruleEFunction ) );
+    public final void rule__EAssignmentValue__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -7476,13 +7476,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                     // InternalAADMParser.g:2430:2: ( ruleESTRING )
                     // InternalAADMParser.g:2431:3: ruleESTRING
                     {
-                     before(grammarAccess.getEPropertyAssignmentValueAccess().getESTRINGParserRuleCall_0()); 
+                     before(grammarAccess.getEAssignmentValueAccess().getESTRINGParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
                     ruleESTRING();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEPropertyAssignmentValueAccess().getESTRINGParserRuleCall_0()); 
+                     after(grammarAccess.getEAssignmentValueAccess().getESTRINGParserRuleCall_0()); 
 
                     }
 
@@ -7495,13 +7495,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                     // InternalAADMParser.g:2436:2: ( ruleELIST )
                     // InternalAADMParser.g:2437:3: ruleELIST
                     {
-                     before(grammarAccess.getEPropertyAssignmentValueAccess().getELISTParserRuleCall_1()); 
+                     before(grammarAccess.getEAssignmentValueAccess().getELISTParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
                     ruleELIST();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEPropertyAssignmentValueAccess().getELISTParserRuleCall_1()); 
+                     after(grammarAccess.getEAssignmentValueAccess().getELISTParserRuleCall_1()); 
 
                     }
 
@@ -7514,13 +7514,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                     // InternalAADMParser.g:2442:2: ( ruleEMAP )
                     // InternalAADMParser.g:2443:3: ruleEMAP
                     {
-                     before(grammarAccess.getEPropertyAssignmentValueAccess().getEMAPParserRuleCall_2()); 
+                     before(grammarAccess.getEAssignmentValueAccess().getEMAPParserRuleCall_2()); 
                     pushFollow(FOLLOW_2);
                     ruleEMAP();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEPropertyAssignmentValueAccess().getEMAPParserRuleCall_2()); 
+                     after(grammarAccess.getEAssignmentValueAccess().getEMAPParserRuleCall_2()); 
 
                     }
 
@@ -7533,13 +7533,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                     // InternalAADMParser.g:2448:2: ( ruleEFunction )
                     // InternalAADMParser.g:2449:3: ruleEFunction
                     {
-                     before(grammarAccess.getEPropertyAssignmentValueAccess().getEFunctionParserRuleCall_3()); 
+                     before(grammarAccess.getEAssignmentValueAccess().getEFunctionParserRuleCall_3()); 
                     pushFollow(FOLLOW_2);
                     ruleEFunction();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEPropertyAssignmentValueAccess().getEFunctionParserRuleCall_3()); 
+                     after(grammarAccess.getEAssignmentValueAccess().getEFunctionParserRuleCall_3()); 
 
                     }
 
@@ -7560,7 +7560,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EPropertyAssignmentValue__Alternatives"
+    // $ANTLR end "rule__EAssignmentValue__Alternatives"
 
 
     // $ANTLR start "rule__AADM_Model__Group_0__0"
@@ -12311,7 +12311,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:4089:1: ( rule__EAttributeAssignment__Group__1__Impl rule__EAttributeAssignment__Group__2 )
             // InternalAADMParser.g:4090:2: rule__EAttributeAssignment__Group__1__Impl rule__EAttributeAssignment__Group__2
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_13);
             rule__EAttributeAssignment__Group__1__Impl();
 
             state._fsp--;
@@ -53636,21 +53636,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributeAssignment__ValueAssignment_2"
-    // InternalAADMParser.g:17479:1: rule__EAttributeAssignment__ValueAssignment_2 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:17479:1: rule__EAttributeAssignment__ValueAssignment_2 : ( ruleEAssignmentValue ) ;
     public final void rule__EAttributeAssignment__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:17483:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:17484:2: ( RULE_STRING )
+            // InternalAADMParser.g:17483:1: ( ( ruleEAssignmentValue ) )
+            // InternalAADMParser.g:17484:2: ( ruleEAssignmentValue )
             {
-            // InternalAADMParser.g:17484:2: ( RULE_STRING )
-            // InternalAADMParser.g:17485:3: RULE_STRING
+            // InternalAADMParser.g:17484:2: ( ruleEAssignmentValue )
+            // InternalAADMParser.g:17485:3: ruleEAssignmentValue
             {
-             before(grammarAccess.getEAttributeAssignmentAccess().getValueSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEAttributeAssignmentAccess().getValueSTRINGTerminalRuleCall_2_0()); 
+             before(grammarAccess.getEAttributeAssignmentAccess().getValueEAssignmentValueParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAssignmentValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEAttributeAssignmentAccess().getValueEAssignmentValueParserRuleCall_2_0()); 
 
             }
 
@@ -53751,25 +53755,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyAssignment__ValueAssignment_2"
-    // InternalAADMParser.g:17524:1: rule__EPropertyAssignment__ValueAssignment_2 : ( ruleEPropertyAssignmentValue ) ;
+    // InternalAADMParser.g:17524:1: rule__EPropertyAssignment__ValueAssignment_2 : ( ruleEAssignmentValue ) ;
     public final void rule__EPropertyAssignment__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:17528:1: ( ( ruleEPropertyAssignmentValue ) )
-            // InternalAADMParser.g:17529:2: ( ruleEPropertyAssignmentValue )
+            // InternalAADMParser.g:17528:1: ( ( ruleEAssignmentValue ) )
+            // InternalAADMParser.g:17529:2: ( ruleEAssignmentValue )
             {
-            // InternalAADMParser.g:17529:2: ( ruleEPropertyAssignmentValue )
-            // InternalAADMParser.g:17530:3: ruleEPropertyAssignmentValue
+            // InternalAADMParser.g:17529:2: ( ruleEAssignmentValue )
+            // InternalAADMParser.g:17530:3: ruleEAssignmentValue
             {
-             before(grammarAccess.getEPropertyAssignmentAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0()); 
+             before(grammarAccess.getEPropertyAssignmentAccess().getValueEAssignmentValueParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
-            ruleEPropertyAssignmentValue();
+            ruleEAssignmentValue();
 
             state._fsp--;
 
-             after(grammarAccess.getEPropertyAssignmentAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0()); 
+             after(grammarAccess.getEPropertyAssignmentAccess().getValueEAssignmentValueParserRuleCall_2_0()); 
 
             }
 
@@ -59604,25 +59608,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMapEntry__ValueAssignment_2"
-    // InternalAADMParser.g:19795:1: rule__EMapEntry__ValueAssignment_2 : ( ruleEPropertyAssignmentValue ) ;
+    // InternalAADMParser.g:19795:1: rule__EMapEntry__ValueAssignment_2 : ( ruleEAssignmentValue ) ;
     public final void rule__EMapEntry__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19799:1: ( ( ruleEPropertyAssignmentValue ) )
-            // InternalAADMParser.g:19800:2: ( ruleEPropertyAssignmentValue )
+            // InternalAADMParser.g:19799:1: ( ( ruleEAssignmentValue ) )
+            // InternalAADMParser.g:19800:2: ( ruleEAssignmentValue )
             {
-            // InternalAADMParser.g:19800:2: ( ruleEPropertyAssignmentValue )
-            // InternalAADMParser.g:19801:3: ruleEPropertyAssignmentValue
+            // InternalAADMParser.g:19800:2: ( ruleEAssignmentValue )
+            // InternalAADMParser.g:19801:3: ruleEAssignmentValue
             {
-             before(grammarAccess.getEMapEntryAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0()); 
+             before(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
-            ruleEPropertyAssignmentValue();
+            ruleEAssignmentValue();
 
             state._fsp--;
 
-             after(grammarAccess.getEMapEntryAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0()); 
+             after(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0()); 
 
             }
 

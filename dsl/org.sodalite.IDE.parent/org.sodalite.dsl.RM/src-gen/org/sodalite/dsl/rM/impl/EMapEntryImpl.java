@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EMapEntry;
-import org.sodalite.dsl.rM.EPropertyAssignmentValue;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -60,7 +60,7 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
    * @generated
    * @ordered
    */
-  protected EPropertyAssignmentValue value;
+  protected EAssignmentValue value;
 
   /**
    * <!-- begin-user-doc -->
@@ -114,7 +114,7 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
    * @generated
    */
   @Override
-  public EPropertyAssignmentValue getValue()
+  public EAssignmentValue getValue()
   {
     return value;
   }
@@ -124,9 +124,9 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(EPropertyAssignmentValue newValue, NotificationChain msgs)
+  public NotificationChain basicSetValue(EAssignmentValue newValue, NotificationChain msgs)
   {
-    EPropertyAssignmentValue oldValue = value;
+    EAssignmentValue oldValue = value;
     value = newValue;
     if (eNotificationRequired())
     {
@@ -142,7 +142,7 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
    * @generated
    */
   @Override
-  public void setValue(EPropertyAssignmentValue newValue)
+  public void setValue(EAssignmentValue newValue)
   {
     if (newValue != value)
     {
@@ -206,7 +206,7 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
         setKey((String)newValue);
         return;
       case RMPackage.EMAP_ENTRY__VALUE:
-        setValue((EPropertyAssignmentValue)newValue);
+        setValue((EAssignmentValue)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -226,7 +226,7 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
         setKey(KEY_EDEFAULT);
         return;
       case RMPackage.EMAP_ENTRY__VALUE:
-        setValue((EPropertyAssignmentValue)null);
+        setValue((EAssignmentValue)null);
         return;
     }
     super.eUnset(featureID);

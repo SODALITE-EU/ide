@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ELIST extends EPropertyAssignmentValue
+public interface ELIST extends EAssignmentValue
 {
   /**
    * Returns the value of the '<em><b>List</b></em>' attribute list.

@@ -3683,15 +3683,15 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getValSTRINGTerminalRuleCall_1_0() { return cValSTRINGTerminalRuleCall_1_0; }
 	}
-	public class EPropertyAssignmentValueElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EPropertyAssignmentValue");
+	public class EAssignmentValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EAssignmentValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cESTRINGParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cELISTParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cEMAPParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cEFunctionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//EPropertyAssignmentValue:
+		//EAssignmentValue:
 		//	ESTRING | ELIST | EMAP | EFunction;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3761,13 +3761,13 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cKeyIDTerminalRuleCall_0_0 = (RuleCall)cKeyAssignment_0.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cValueEPropertyAssignmentValueParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		private final RuleCall cValueEAssignmentValueParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//EMapEntry:
-		//	key=ID ":" value=EPropertyAssignmentValue;
+		//	key=ID ":" value=EAssignmentValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//key=ID ":" value=EPropertyAssignmentValue
+		//key=ID ":" value=EAssignmentValue
 		public Group getGroup() { return cGroup; }
 		
 		//key=ID
@@ -3779,11 +3779,11 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 		
-		//value=EPropertyAssignmentValue
+		//value=EAssignmentValue
 		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
 		
-		//EPropertyAssignmentValue
-		public RuleCall getValueEPropertyAssignmentValueParserRuleCall_2_0() { return cValueEPropertyAssignmentValueParserRuleCall_2_0; }
+		//EAssignmentValue
+		public RuleCall getValueEAssignmentValueParserRuleCall_2_0() { return cValueEAssignmentValueParserRuleCall_2_0; }
 	}
 	
 	
@@ -3860,7 +3860,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	private final EGreaterOrEqualElements pEGreaterOrEqual;
 	private final EGreaterThanElements pEGreaterThan;
 	private final EEqualElements pEEqual;
-	private final EPropertyAssignmentValueElements pEPropertyAssignmentValue;
+	private final EAssignmentValueElements pEAssignmentValue;
 	private final ESTRINGElements pESTRING;
 	private final EMAPElements pEMAP;
 	private final EMapEntryElements pEMapEntry;
@@ -3954,7 +3954,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		this.pEGreaterOrEqual = new EGreaterOrEqualElements();
 		this.pEGreaterThan = new EGreaterThanElements();
 		this.pEEqual = new EEqualElements();
-		this.pEPropertyAssignmentValue = new EPropertyAssignmentValueElements();
+		this.pEAssignmentValue = new EAssignmentValueElements();
 		this.pESTRING = new ESTRINGElements();
 		this.pEMAP = new EMAPElements();
 		this.pEMapEntry = new EMapEntryElements();
@@ -4872,14 +4872,14 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		return getEEqualAccess().getRule();
 	}
 	
-	//EPropertyAssignmentValue:
+	//EAssignmentValue:
 	//	ESTRING | ELIST | EMAP | EFunction;
-	public EPropertyAssignmentValueElements getEPropertyAssignmentValueAccess() {
-		return pEPropertyAssignmentValue;
+	public EAssignmentValueElements getEAssignmentValueAccess() {
+		return pEAssignmentValue;
 	}
 	
-	public ParserRule getEPropertyAssignmentValueRule() {
-		return getEPropertyAssignmentValueAccess().getRule();
+	public ParserRule getEAssignmentValueRule() {
+		return getEAssignmentValueAccess().getRule();
 	}
 	
 	//ESTRING:
@@ -4905,7 +4905,7 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EMapEntry:
-	//	key=ID ":" value=EPropertyAssignmentValue;
+	//	key=ID ":" value=EAssignmentValue;
 	public EMapEntryElements getEMapEntryAccess() {
 		return pEMapEntry;
 	}

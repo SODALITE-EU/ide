@@ -1,0 +1,6 @@
+node_types:
+	sodalite.nodes.Compute:
+    	derived_from: tosca.nodes.Compute
+    	properties: 
+      		username:
+        		type: string

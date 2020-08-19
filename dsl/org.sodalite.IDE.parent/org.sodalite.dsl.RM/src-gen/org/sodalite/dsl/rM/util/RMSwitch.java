@@ -386,7 +386,7 @@ public class RMSwitch<T> extends Switch<T>
         EFunction eFunction = (EFunction)theEObject;
         T result = caseEFunction(eFunction);
         if (result == null) result = caseEValueExpression(eFunction);
-        if (result == null) result = caseEPropertyAssignmentValue(eFunction);
+        if (result == null) result = caseEAssignmentValue(eFunction);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -396,7 +396,7 @@ public class RMSwitch<T> extends Switch<T>
         T result = caseGetInput(getInput);
         if (result == null) result = caseEFunction(getInput);
         if (result == null) result = caseEValueExpression(getInput);
-        if (result == null) result = caseEPropertyAssignmentValue(getInput);
+        if (result == null) result = caseEAssignmentValue(getInput);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -406,7 +406,7 @@ public class RMSwitch<T> extends Switch<T>
         T result = caseGetAttribute(getAttribute);
         if (result == null) result = caseEFunction(getAttribute);
         if (result == null) result = caseEValueExpression(getAttribute);
-        if (result == null) result = caseEPropertyAssignmentValue(getAttribute);
+        if (result == null) result = caseEAssignmentValue(getAttribute);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -423,7 +423,7 @@ public class RMSwitch<T> extends Switch<T>
         T result = caseGetProperty(getProperty);
         if (result == null) result = caseEFunction(getProperty);
         if (result == null) result = caseEValueExpression(getProperty);
-        if (result == null) result = caseEPropertyAssignmentValue(getProperty);
+        if (result == null) result = caseEAssignmentValue(getProperty);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -549,7 +549,7 @@ public class RMSwitch<T> extends Switch<T>
       {
         ELIST elist = (ELIST)theEObject;
         T result = caseELIST(elist);
-        if (result == null) result = caseEPropertyAssignmentValue(elist);
+        if (result == null) result = caseEAssignmentValue(elist);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -601,10 +601,10 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RMPackage.EPROPERTY_ASSIGNMENT_VALUE:
+      case RMPackage.EASSIGNMENT_VALUE:
       {
-        EPropertyAssignmentValue ePropertyAssignmentValue = (EPropertyAssignmentValue)theEObject;
-        T result = caseEPropertyAssignmentValue(ePropertyAssignmentValue);
+        EAssignmentValue eAssignmentValue = (EAssignmentValue)theEObject;
+        T result = caseEAssignmentValue(eAssignmentValue);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -613,7 +613,7 @@ public class RMSwitch<T> extends Switch<T>
         ESTRING estring = (ESTRING)theEObject;
         T result = caseESTRING(estring);
         if (result == null) result = caseEValueExpression(estring);
-        if (result == null) result = caseEPropertyAssignmentValue(estring);
+        if (result == null) result = caseEAssignmentValue(estring);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -621,7 +621,7 @@ public class RMSwitch<T> extends Switch<T>
       {
         EMAP emap = (EMAP)theEObject;
         T result = caseEMAP(emap);
-        if (result == null) result = caseEPropertyAssignmentValue(emap);
+        if (result == null) result = caseEAssignmentValue(emap);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1789,17 +1789,17 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EProperty Assignment Value</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EAssignment Value</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EProperty Assignment Value</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EAssignment Value</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEPropertyAssignmentValue(EPropertyAssignmentValue object)
+  public T caseEAssignmentValue(EAssignmentValue object)
   {
     return null;
   }

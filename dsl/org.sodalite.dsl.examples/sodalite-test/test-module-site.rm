@@ -1,0 +1,34 @@
+node_types:
+	sodalite.nodes.nginx.Site:
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			destination:
+				type: string
+				default: "/usr/share/nginx/html/index.html"
+		requirements:
+			host:
+				capability: tosca.capabilities.Compute
+				relationship: tosca.relationships.HostedOn
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				inputs:
+					destination:
+						default: get_property: 
+							entity: SELF
+							property: sodalite.nodes.nginx.Site.destination
+						type: string
+					ansible_user:
+						default:  get_property: 
+							entity: SELF
+							property: sodalite.nodes.Compute.username
+							req_cap: tosca.nodes.Compute.host
+						type: string    
+				operations:          
+					create: 
+						implementation:
+							primary:  "/home/yosu/Projects/Sodalite/Git/iac-management/blueprint-samples/blueprints/sodalite-test/modules/site/playbooks/create.yaml"
+							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/blueprint-samples/blueprints/sodalite-test/modules/site/artifacts/site.html"]
+					delete: 
+						implementation:
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/blueprint-samples/blueprints/sodalite-test/modules/site/playbooks/delete.yaml"

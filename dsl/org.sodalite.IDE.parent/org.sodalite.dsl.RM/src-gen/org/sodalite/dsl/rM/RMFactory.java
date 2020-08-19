@@ -672,13 +672,13 @@ public interface RMFactory extends EFactory
   EEqual createEEqual();
 
   /**
-   * Returns a new object of class '<em>EProperty Assignment Value</em>'.
+   * Returns a new object of class '<em>EAssignment Value</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EProperty Assignment Value</em>'.
+   * @return a new object of class '<em>EAssignment Value</em>'.
    * @generated
    */
-  EPropertyAssignmentValue createEPropertyAssignmentValue();
+  EAssignmentValue createEAssignmentValue();
 
   /**
    * Returns a new object of class '<em>ESTRING</em>'.

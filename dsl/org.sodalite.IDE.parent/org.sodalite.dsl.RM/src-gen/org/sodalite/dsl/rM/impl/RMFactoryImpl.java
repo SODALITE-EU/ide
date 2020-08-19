@@ -137,7 +137,7 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EGREATER_OR_EQUAL: return createEGreaterOrEqual();
       case RMPackage.EGREATER_THAN: return createEGreaterThan();
       case RMPackage.EEQUAL: return createEEqual();
-      case RMPackage.EPROPERTY_ASSIGNMENT_VALUE: return createEPropertyAssignmentValue();
+      case RMPackage.EASSIGNMENT_VALUE: return createEAssignmentValue();
       case RMPackage.ESTRING: return createESTRING();
       case RMPackage.EMAP: return createEMAP();
       case RMPackage.EMAP_ENTRY: return createEMapEntry();
@@ -1016,10 +1016,10 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
-  public EPropertyAssignmentValue createEPropertyAssignmentValue()
+  public EAssignmentValue createEAssignmentValue()
   {
-    EPropertyAssignmentValueImpl ePropertyAssignmentValue = new EPropertyAssignmentValueImpl();
-    return ePropertyAssignmentValue;
+    EAssignmentValueImpl eAssignmentValue = new EAssignmentValueImpl();
+    return eAssignmentValue;
   }
 
   /**

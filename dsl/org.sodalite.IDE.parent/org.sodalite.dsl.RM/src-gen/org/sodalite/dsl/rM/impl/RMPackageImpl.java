@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.sodalite.dsl.rM.EArtifactType;
 import org.sodalite.dsl.rM.EArtifactTypeBody;
 import org.sodalite.dsl.rM.EArtifactTypes;
+import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributeDefinitionBody;
 import org.sodalite.dsl.rM.EAttributes;
@@ -63,7 +64,6 @@ import org.sodalite.dsl.rM.EPolicyTypeBody;
 import org.sodalite.dsl.rM.EPolicyTypes;
 import org.sodalite.dsl.rM.EPrimary;
 import org.sodalite.dsl.rM.EProperties;
-import org.sodalite.dsl.rM.EPropertyAssignmentValue;
 import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.EPropertyDefinitionBody;
 import org.sodalite.dsl.rM.ERelationshipType;
@@ -603,7 +603,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass ePropertyAssignmentValueEClass = null;
+  private EClass eAssignmentValueEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -3082,9 +3082,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EClass getEPropertyAssignmentValue()
+  public EClass getEAssignmentValue()
   {
-    return ePropertyAssignmentValueEClass;
+    return eAssignmentValueEClass;
   }
 
   /**
@@ -3484,7 +3484,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eEqualEClass = createEClass(EEQUAL);
     createEAttribute(eEqualEClass, EEQUAL__VAL);
 
-    ePropertyAssignmentValueEClass = createEClass(EPROPERTY_ASSIGNMENT_VALUE);
+    eAssignmentValueEClass = createEClass(EASSIGNMENT_VALUE);
 
     estringEClass = createEClass(ESTRING);
     createEAttribute(estringEClass, ESTRING__STRING);
@@ -3527,7 +3527,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     // Add supertypes to classes
     eFunctionEClass.getESuperTypes().add(this.getEValueExpression());
-    eFunctionEClass.getESuperTypes().add(this.getEPropertyAssignmentValue());
+    eFunctionEClass.getESuperTypes().add(this.getEAssignmentValue());
     getInputEClass.getESuperTypes().add(this.getEFunction());
     getAttributeEClass.getESuperTypes().add(this.getEFunction());
     getPropertyEClass.getESuperTypes().add(this.getEFunction());
@@ -3537,7 +3537,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eMinLengthEClass.getESuperTypes().add(this.getEConstraint());
     eLengthEClass.getESuperTypes().add(this.getEConstraint());
     eValid_ValuesEClass.getESuperTypes().add(this.getEConstraint());
-    elistEClass.getESuperTypes().add(this.getEPropertyAssignmentValue());
+    elistEClass.getESuperTypes().add(this.getEAssignmentValue());
     eInRangeEClass.getESuperTypes().add(this.getEConstraint());
     eLessOrEqualEClass.getESuperTypes().add(this.getEConstraint());
     eLessThanEClass.getESuperTypes().add(this.getEConstraint());
@@ -3545,8 +3545,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eGreaterThanEClass.getESuperTypes().add(this.getEConstraint());
     eEqualEClass.getESuperTypes().add(this.getEConstraint());
     estringEClass.getESuperTypes().add(this.getEValueExpression());
-    estringEClass.getESuperTypes().add(this.getEPropertyAssignmentValue());
-    emapEClass.getESuperTypes().add(this.getEPropertyAssignmentValue());
+    estringEClass.getESuperTypes().add(this.getEAssignmentValue());
+    emapEClass.getESuperTypes().add(this.getEAssignmentValue());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rM_ModelEClass, RM_Model.class, "RM_Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3838,7 +3838,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEClass(eEqualEClass, EEqual.class, "EEqual", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEEqual_Val(), ecorePackage.getEString(), "val", null, 0, 1, EEqual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(ePropertyAssignmentValueEClass, EPropertyAssignmentValue.class, "EPropertyAssignmentValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(eAssignmentValueEClass, EAssignmentValue.class, "EAssignmentValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(estringEClass, org.sodalite.dsl.rM.ESTRING.class, "ESTRING", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getESTRING_String(), ecorePackage.getEString(), "string", null, 0, 1, org.sodalite.dsl.rM.ESTRING.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3848,7 +3848,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eMapEntryEClass, EMapEntry.class, "EMapEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEMapEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEMapEntry_Value(), this.getEPropertyAssignmentValue(), null, "value", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEMapEntry_Value(), this.getEAssignmentValue(), null, "value", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

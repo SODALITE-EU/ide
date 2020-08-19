@@ -51,12 +51,12 @@ public interface EMapEntry extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(EPropertyAssignmentValue)
+   * @see #setValue(EAssignmentValue)
    * @see org.sodalite.dsl.rM.RMPackage#getEMapEntry_Value()
    * @model containment="true"
    * @generated
    */
-  EPropertyAssignmentValue getValue();
+  EAssignmentValue getValue();
 
   /**
    * Sets the value of the '{@link org.sodalite.dsl.rM.EMapEntry#getValue <em>Value</em>}' containment reference.
@@ -66,6 +66,6 @@ public interface EMapEntry extends EObject
    * @see #getValue()
    * @generated
    */
-  void setValue(EPropertyAssignmentValue value);
+  void setValue(EAssignmentValue value);
 
 } // EMapEntry

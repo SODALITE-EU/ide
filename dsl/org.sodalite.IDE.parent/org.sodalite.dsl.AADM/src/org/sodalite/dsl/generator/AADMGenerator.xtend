@@ -37,6 +37,7 @@ import java.nio.file.Paths
 import org.eclipse.core.runtime.Path
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.IFile
+import org.sodalite.dsl.aADM.EAttributeAssignment
 
 /**
  * Generates code from your model files on save.
@@ -47,10 +48,12 @@ class AADMGenerator extends AbstractGenerator {
 	var int template_counter = 1
 	var int input_counter = 1
 	var int property_counter = 1
+	var int attribute_counter = 1
 	var int requirement_counter = 1
 	var int capability_counter = 1
 	var int parameter_counter = 1
 	var Map<EPropertyAssignment, Integer> property_numbers
+	var Map<EAttributeAssignment, Integer> attribute_numbers
 	var Map<ERequirementAssignment, Integer> requirement_numbers
 	var Map<ECapabilityAssignment, Integer> capability_numbers
 	var Map<EObject, Map<String,Integer>> parameter_numbers
@@ -59,10 +62,12 @@ class AADMGenerator extends AbstractGenerator {
 		template_counter = 1
 		input_counter = 1
 		property_counter = 1
+		attribute_counter = 1
 		requirement_counter = 1
 		capability_counter = 1
 		parameter_counter = 1
 		property_numbers = new HashMap<EPropertyAssignment, Integer>()
+		attribute_numbers = new HashMap<EAttributeAssignment, Integer>()
 		requirement_numbers = new HashMap<ERequirementAssignment, Integer>()
 		capability_numbers = new HashMap<ECapabilityAssignment, Integer>()
 		parameter_numbers = new HashMap<EObject, Map<String, Integer>>()
@@ -111,6 +116,10 @@ class AADMGenerator extends AbstractGenerator {
 
  	«FOR p:r.allContents.toIterable.filter(EPropertyAssignment)»
 	«p.compile»
+	«ENDFOR»
+	
+	«FOR a:r.allContents.toIterable.filter(EAttributeAssignment)»
+	«a.compile»
 	«ENDFOR»
 	
  	«FOR req:r.allContents.toIterable.filter(ERequirementAssignment)»
@@ -179,6 +188,11 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:properties :Property_«property_numbers.get(p)» ;
 	  «ENDFOR»
 	  «ENDIF»
+	  «IF n.node.atributes !== null»
+	  «FOR a:n.node.atributes.attributes»
+	  exchange:attributes :Attribute_«attribute_numbers.get(a)» ;
+  	  «ENDFOR»
+  	  «ENDIF»
 	  «IF n.node.requirements !== null»
 	  «FOR p:n.node.requirements.requirements»
 	  exchange:requirements :Requirement_«requirement_numbers.get(p)» ; 
@@ -211,6 +225,29 @@ class AADMGenerator extends AbstractGenerator {
 	  	«ENDIF»
 	  «ELSE»
 	  	exchange:value "«(p.value as ESTRING).string»" ;
+	  «ENDIF»
+	.
+	'''
+	
+	def compile (EAttributeAssignment a) '''
+	«attribute_numbers.put(a, attribute_counter)»
+	:Attribute_«attribute_counter++»
+	  rdf:type exchange:Attribute ;
+	  exchange:name "«a.name»" ;
+	  «IF a.value instanceof ELIST»
+	  		«FOR entry:(a.value as ELIST).list»
+	  		exchange:listValue "«entry»" ;
+	  		«ENDFOR»
+	  «ELSEIF a.value instanceof EMAP»
+	    «FOR entry:(a.value as EMAP).map»
+	    	exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
+	    «ENDFOR»	  
+	  «ELSEIF a.value instanceof EFunction»
+	  	«IF a.value instanceof GetInput»
+	  	exchange:value "{ get_input: «(a.value as GetInput).input.name» }" ;
+	  	«ENDIF»
+	  «ELSE»
+	  	exchange:value "«(a.value as ESTRING).string»" ;
 	  «ENDIF»
 	.
 	'''

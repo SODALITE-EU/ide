@@ -45,7 +45,7 @@
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//EAttributeAssignment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//EAttributeAssignment/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//EAttributeAssignment/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EAttributeAssignment/value"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//EPropertyAssigments">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPropertyAssigments/properties"/>

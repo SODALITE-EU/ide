@@ -27,9 +27,9 @@ node_templates:
 	hpc-wm-torque:
 		type: sodalite.nodes.hpc.wm.torque
 		attributes:
-			public_address: ""//FIXME get_input: frontend-address 
-			username: "" //FIXME get_input: user 		
-			ssh-key: "" //FIXME get_input: key-location
+			public_address: get_input: frontend-address
+			username: get_input: user 		
+			ssh-key: get_input: key-location 
 
 	//image pulling
 
@@ -74,8 +74,8 @@ node_templates:
 		type: sodalite.nodes.remote.client
 		attributes:
 			public_address: "localhost"
-			username: "" //FIXME get_input: user
-			ssh-key: "" //FIXME get_input: key-location
+			username: get_input: user
+			ssh-key: get_input: key-location
 
 	input-data-mapper-transfer:
 		type: sodalite.data.mover.gridftp

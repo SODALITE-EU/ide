@@ -1907,25 +1907,25 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleEPropertyAssignmentValue
-entryRuleEPropertyAssignmentValue
+// Entry rule entryRuleEAssignmentValue
+entryRuleEAssignmentValue
 :
-{ before(grammarAccess.getEPropertyAssignmentValueRule()); }
-	 ruleEPropertyAssignmentValue
-{ after(grammarAccess.getEPropertyAssignmentValueRule()); } 
+{ before(grammarAccess.getEAssignmentValueRule()); }
+	 ruleEAssignmentValue
+{ after(grammarAccess.getEAssignmentValueRule()); } 
 	 EOF 
 ;
 
-// Rule EPropertyAssignmentValue
-ruleEPropertyAssignmentValue 
+// Rule EAssignmentValue
+ruleEAssignmentValue 
 	@init {
 		int stackSize = keepStackSize();
 	}
 	:
 	(
-		{ before(grammarAccess.getEPropertyAssignmentValueAccess().getAlternatives()); }
-		(rule__EPropertyAssignmentValue__Alternatives)
-		{ after(grammarAccess.getEPropertyAssignmentValueAccess().getAlternatives()); }
+		{ before(grammarAccess.getEAssignmentValueAccess().getAlternatives()); }
+		(rule__EAssignmentValue__Alternatives)
+		{ after(grammarAccess.getEAssignmentValueAccess().getAlternatives()); }
 	)
 ;
 finally {
@@ -2145,33 +2145,33 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__EPropertyAssignmentValue__Alternatives
+rule__EAssignmentValue__Alternatives
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getEPropertyAssignmentValueAccess().getESTRINGParserRuleCall_0()); }
+		{ before(grammarAccess.getEAssignmentValueAccess().getESTRINGParserRuleCall_0()); }
 		ruleESTRING
-		{ after(grammarAccess.getEPropertyAssignmentValueAccess().getESTRINGParserRuleCall_0()); }
+		{ after(grammarAccess.getEAssignmentValueAccess().getESTRINGParserRuleCall_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEPropertyAssignmentValueAccess().getELISTParserRuleCall_1()); }
+		{ before(grammarAccess.getEAssignmentValueAccess().getELISTParserRuleCall_1()); }
 		ruleELIST
-		{ after(grammarAccess.getEPropertyAssignmentValueAccess().getELISTParserRuleCall_1()); }
+		{ after(grammarAccess.getEAssignmentValueAccess().getELISTParserRuleCall_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEPropertyAssignmentValueAccess().getEMAPParserRuleCall_2()); }
+		{ before(grammarAccess.getEAssignmentValueAccess().getEMAPParserRuleCall_2()); }
 		ruleEMAP
-		{ after(grammarAccess.getEPropertyAssignmentValueAccess().getEMAPParserRuleCall_2()); }
+		{ after(grammarAccess.getEAssignmentValueAccess().getEMAPParserRuleCall_2()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEPropertyAssignmentValueAccess().getEFunctionParserRuleCall_3()); }
+		{ before(grammarAccess.getEAssignmentValueAccess().getEFunctionParserRuleCall_3()); }
 		ruleEFunction
-		{ after(grammarAccess.getEPropertyAssignmentValueAccess().getEFunctionParserRuleCall_3()); }
+		{ after(grammarAccess.getEAssignmentValueAccess().getEFunctionParserRuleCall_3()); }
 	)
 ;
 finally {
@@ -18115,9 +18115,9 @@ rule__EMapEntry__ValueAssignment_2
 	}
 :
 	(
-		{ before(grammarAccess.getEMapEntryAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0()); }
-		ruleEPropertyAssignmentValue
-		{ after(grammarAccess.getEMapEntryAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0()); }
+		{ before(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0()); }
+		ruleEAssignmentValue
+		{ after(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0()); }
 	)
 ;
 finally {

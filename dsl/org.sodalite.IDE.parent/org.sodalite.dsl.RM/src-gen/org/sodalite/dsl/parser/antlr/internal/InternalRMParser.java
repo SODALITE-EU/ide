@@ -16044,25 +16044,25 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleEEqual"
 
 
-    // $ANTLR start "entryRuleEPropertyAssignmentValue"
-    // InternalRMParser.g:6287:1: entryRuleEPropertyAssignmentValue returns [EObject current=null] : iv_ruleEPropertyAssignmentValue= ruleEPropertyAssignmentValue EOF ;
-    public final EObject entryRuleEPropertyAssignmentValue() throws RecognitionException {
+    // $ANTLR start "entryRuleEAssignmentValue"
+    // InternalRMParser.g:6287:1: entryRuleEAssignmentValue returns [EObject current=null] : iv_ruleEAssignmentValue= ruleEAssignmentValue EOF ;
+    public final EObject entryRuleEAssignmentValue() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleEPropertyAssignmentValue = null;
+        EObject iv_ruleEAssignmentValue = null;
 
 
         try {
-            // InternalRMParser.g:6287:65: (iv_ruleEPropertyAssignmentValue= ruleEPropertyAssignmentValue EOF )
-            // InternalRMParser.g:6288:2: iv_ruleEPropertyAssignmentValue= ruleEPropertyAssignmentValue EOF
+            // InternalRMParser.g:6287:57: (iv_ruleEAssignmentValue= ruleEAssignmentValue EOF )
+            // InternalRMParser.g:6288:2: iv_ruleEAssignmentValue= ruleEAssignmentValue EOF
             {
-             newCompositeNode(grammarAccess.getEPropertyAssignmentValueRule()); 
+             newCompositeNode(grammarAccess.getEAssignmentValueRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleEPropertyAssignmentValue=ruleEPropertyAssignmentValue();
+            iv_ruleEAssignmentValue=ruleEAssignmentValue();
 
             state._fsp--;
 
-             current =iv_ruleEPropertyAssignmentValue; 
+             current =iv_ruleEAssignmentValue; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -16077,12 +16077,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleEPropertyAssignmentValue"
+    // $ANTLR end "entryRuleEAssignmentValue"
 
 
-    // $ANTLR start "ruleEPropertyAssignmentValue"
-    // InternalRMParser.g:6294:1: ruleEPropertyAssignmentValue returns [EObject current=null] : (this_ESTRING_0= ruleESTRING | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction ) ;
-    public final EObject ruleEPropertyAssignmentValue() throws RecognitionException {
+    // $ANTLR start "ruleEAssignmentValue"
+    // InternalRMParser.g:6294:1: ruleEAssignmentValue returns [EObject current=null] : (this_ESTRING_0= ruleESTRING | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction ) ;
+    public final EObject ruleEAssignmentValue() throws RecognitionException {
         EObject current = null;
 
         EObject this_ESTRING_0 = null;
@@ -16138,7 +16138,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     // InternalRMParser.g:6302:3: this_ESTRING_0= ruleESTRING
                     {
 
-                    			newCompositeNode(grammarAccess.getEPropertyAssignmentValueAccess().getESTRINGParserRuleCall_0());
+                    			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getESTRINGParserRuleCall_0());
                     		
                     pushFollow(FOLLOW_2);
                     this_ESTRING_0=ruleESTRING();
@@ -16156,7 +16156,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     // InternalRMParser.g:6311:3: this_ELIST_1= ruleELIST
                     {
 
-                    			newCompositeNode(grammarAccess.getEPropertyAssignmentValueAccess().getELISTParserRuleCall_1());
+                    			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getELISTParserRuleCall_1());
                     		
                     pushFollow(FOLLOW_2);
                     this_ELIST_1=ruleELIST();
@@ -16174,7 +16174,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     // InternalRMParser.g:6320:3: this_EMAP_2= ruleEMAP
                     {
 
-                    			newCompositeNode(grammarAccess.getEPropertyAssignmentValueAccess().getEMAPParserRuleCall_2());
+                    			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getEMAPParserRuleCall_2());
                     		
                     pushFollow(FOLLOW_2);
                     this_EMAP_2=ruleEMAP();
@@ -16192,7 +16192,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     // InternalRMParser.g:6329:3: this_EFunction_3= ruleEFunction
                     {
 
-                    			newCompositeNode(grammarAccess.getEPropertyAssignmentValueAccess().getEFunctionParserRuleCall_3());
+                    			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getEFunctionParserRuleCall_3());
                     		
                     pushFollow(FOLLOW_2);
                     this_EFunction_3=ruleEFunction();
@@ -16225,7 +16225,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleEPropertyAssignmentValue"
+    // $ANTLR end "ruleEAssignmentValue"
 
 
     // $ANTLR start "entryRuleESTRING"
@@ -16500,7 +16500,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEMapEntry"
-    // InternalRMParser.g:6429:1: ruleEMapEntry returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEPropertyAssignmentValue ) ) ) ;
+    // InternalRMParser.g:6429:1: ruleEMapEntry returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) ) ;
     public final EObject ruleEMapEntry() throws RecognitionException {
         EObject current = null;
 
@@ -16513,11 +16513,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6435:2: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEPropertyAssignmentValue ) ) ) )
-            // InternalRMParser.g:6436:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEPropertyAssignmentValue ) ) )
+            // InternalRMParser.g:6435:2: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) ) )
+            // InternalRMParser.g:6436:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) )
             {
-            // InternalRMParser.g:6436:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEPropertyAssignmentValue ) ) )
-            // InternalRMParser.g:6437:3: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEPropertyAssignmentValue ) )
+            // InternalRMParser.g:6436:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) )
+            // InternalRMParser.g:6437:3: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) )
             {
             // InternalRMParser.g:6437:3: ( (lv_key_0_0= RULE_ID ) )
             // InternalRMParser.g:6438:4: (lv_key_0_0= RULE_ID )
@@ -16549,17 +16549,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEMapEntryAccess().getColonKeyword_1());
             		
-            // InternalRMParser.g:6459:3: ( (lv_value_2_0= ruleEPropertyAssignmentValue ) )
-            // InternalRMParser.g:6460:4: (lv_value_2_0= ruleEPropertyAssignmentValue )
+            // InternalRMParser.g:6459:3: ( (lv_value_2_0= ruleEAssignmentValue ) )
+            // InternalRMParser.g:6460:4: (lv_value_2_0= ruleEAssignmentValue )
             {
-            // InternalRMParser.g:6460:4: (lv_value_2_0= ruleEPropertyAssignmentValue )
-            // InternalRMParser.g:6461:5: lv_value_2_0= ruleEPropertyAssignmentValue
+            // InternalRMParser.g:6460:4: (lv_value_2_0= ruleEAssignmentValue )
+            // InternalRMParser.g:6461:5: lv_value_2_0= ruleEAssignmentValue
             {
 
-            					newCompositeNode(grammarAccess.getEMapEntryAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0());
             				
             pushFollow(FOLLOW_2);
-            lv_value_2_0=ruleEPropertyAssignmentValue();
+            lv_value_2_0=ruleEAssignmentValue();
 
             state._fsp--;
 
@@ -16571,7 +16571,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             						current,
             						"value",
             						lv_value_2_0,
-            						"org.sodalite.dsl.RM.EPropertyAssignmentValue");
+            						"org.sodalite.dsl.RM.EAssignmentValue");
             					afterParserOrEnumRuleCall();
             				
 

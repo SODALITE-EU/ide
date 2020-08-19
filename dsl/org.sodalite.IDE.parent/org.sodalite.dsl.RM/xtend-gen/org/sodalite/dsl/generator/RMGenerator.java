@@ -28,12 +28,19 @@ import org.sodalite.dsl.rM.EConstraint;
 import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDependencies;
+import org.sodalite.dsl.rM.EEqual;
 import org.sodalite.dsl.rM.EFunction;
+import org.sodalite.dsl.rM.EGreaterOrEqual;
+import org.sodalite.dsl.rM.EGreaterThan;
 import org.sodalite.dsl.rM.EImplementation;
 import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.EInterfaceDefinition;
 import org.sodalite.dsl.rM.EInterfaceType;
 import org.sodalite.dsl.rM.EInterfaces;
+import org.sodalite.dsl.rM.ELength;
+import org.sodalite.dsl.rM.ELessOrEqual;
+import org.sodalite.dsl.rM.ELessThan;
+import org.sodalite.dsl.rM.EMaxLength;
 import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.ENodeTypeRef;
@@ -318,6 +325,174 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:value \"");
         String _val = ((EMinLength)c).getVal();
         _builder.append(_val, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".\t\t");
+        _builder.newLine();
+      }
+    }
+    {
+      if ((c instanceof EGreaterThan)) {
+        this.putParameterNumber(c, "name", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_2 = this.parameter_counter++;
+        _builder.append(_plusPlus_2);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"greater_than\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _val_1 = ((EGreaterThan)c).getVal();
+        _builder.append(_val_1, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".\t\t");
+        _builder.newLine();
+      }
+    }
+    {
+      if ((c instanceof EEqual)) {
+        this.putParameterNumber(c, "name", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_3 = this.parameter_counter++;
+        _builder.append(_plusPlus_3);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"equal\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _val_2 = ((EEqual)c).getVal();
+        _builder.append(_val_2, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".\t\t");
+        _builder.newLine();
+      }
+    }
+    {
+      if ((c instanceof EGreaterOrEqual)) {
+        this.putParameterNumber(c, "name", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_4 = this.parameter_counter++;
+        _builder.append(_plusPlus_4);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"greater_or_equal\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _val_3 = ((EGreaterOrEqual)c).getVal();
+        _builder.append(_val_3, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".\t\t");
+        _builder.newLine();
+      }
+    }
+    {
+      if ((c instanceof ELessThan)) {
+        this.putParameterNumber(c, "name", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_5 = this.parameter_counter++;
+        _builder.append(_plusPlus_5);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"less_than\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _val_4 = ((ELessThan)c).getVal();
+        _builder.append(_val_4, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".\t\t");
+        _builder.newLine();
+      }
+    }
+    {
+      if ((c instanceof ELessOrEqual)) {
+        this.putParameterNumber(c, "name", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_6 = this.parameter_counter++;
+        _builder.append(_plusPlus_6);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"less_or_equal\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _val_5 = ((ELessOrEqual)c).getVal();
+        _builder.append(_val_5, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".\t\t");
+        _builder.newLine();
+      }
+    }
+    {
+      if ((c instanceof ELength)) {
+        this.putParameterNumber(c, "name", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_7 = this.parameter_counter++;
+        _builder.append(_plusPlus_7);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"length\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _val_6 = ((ELength)c).getVal();
+        _builder.append(_val_6, "  ");
+        _builder.append("\" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".\t\t");
+        _builder.newLine();
+      }
+    }
+    {
+      if ((c instanceof EMaxLength)) {
+        this.putParameterNumber(c, "name", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_8 = this.parameter_counter++;
+        _builder.append(_plusPlus_8);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"max_length\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \"");
+        String _val_7 = ((EMaxLength)c).getVal();
+        _builder.append(_val_7, "  ");
         _builder.append("\" ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".\t\t");
@@ -2096,7 +2271,7 @@ public class RMGenerator extends AbstractGenerator {
     try {
       byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
       String content = new String(_readAllBytes);
-      return content.replace("\'", "\\\'").replace("\\", "\\\\").replaceAll("[\\n\\r]+", "\\\\n");
+      return content.replace("\\", "\\\\").replace("\'", "\\\'").replaceAll("[\\n\\r]+", "\\\\n");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

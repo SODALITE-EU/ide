@@ -52,7 +52,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EAttributeAssignment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EAssignmentValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPropertyAssigments">
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
@@ -60,7 +61,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPropertyAssignment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPropertyAssignmentValue"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EAssignmentValue"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

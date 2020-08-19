@@ -435,7 +435,7 @@ EGreaterThan:
 EEqual:
 	'equal:' val=STRING;
 	
-EPropertyAssignmentValue:
+EAssignmentValue:
 	ESTRING | ELIST | EMAP | EFunction
 ;
 
@@ -450,7 +450,7 @@ EMAP:
 ;
 
 EMapEntry:
-	key=ID ":" value=EPropertyAssignmentValue
+	key=ID ":" value=EAssignmentValue
 ;
 
 terminal QUALIFIED_NAME: //FIXME convert to data type rule, remove terminal

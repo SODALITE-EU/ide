@@ -2544,23 +2544,23 @@ public interface RMPackage extends EPackage
   int EVALID_VALUES_FEATURE_COUNT = ECONSTRAINT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EPropertyAssignmentValueImpl <em>EProperty Assignment Value</em>}' class.
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EAssignmentValueImpl <em>EAssignment Value</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.sodalite.dsl.rM.impl.EPropertyAssignmentValueImpl
-   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPropertyAssignmentValue()
+   * @see org.sodalite.dsl.rM.impl.EAssignmentValueImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAssignmentValue()
    * @generated
    */
-  int EPROPERTY_ASSIGNMENT_VALUE = 72;
+  int EASSIGNMENT_VALUE = 72;
 
   /**
-   * The number of structural features of the '<em>EProperty Assignment Value</em>' class.
+   * The number of structural features of the '<em>EAssignment Value</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPROPERTY_ASSIGNMENT_VALUE_FEATURE_COUNT = 0;
+  int EASSIGNMENT_VALUE_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ELISTImpl <em>ELIST</em>}' class.
@@ -2579,7 +2579,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST__LIST = EPROPERTY_ASSIGNMENT_VALUE_FEATURE_COUNT + 0;
+  int ELIST__LIST = EASSIGNMENT_VALUE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>ELIST</em>' class.
@@ -2588,7 +2588,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST_FEATURE_COUNT = EPROPERTY_ASSIGNMENT_VALUE_FEATURE_COUNT + 1;
+  int ELIST_FEATURE_COUNT = EASSIGNMENT_VALUE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EInRangeImpl <em>EIn Range</em>}' class.
@@ -2812,7 +2812,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EMAP__MAP = EPROPERTY_ASSIGNMENT_VALUE_FEATURE_COUNT + 0;
+  int EMAP__MAP = EASSIGNMENT_VALUE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>EMAP</em>' class.
@@ -2821,7 +2821,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EMAP_FEATURE_COUNT = EPROPERTY_ASSIGNMENT_VALUE_FEATURE_COUNT + 1;
+  int EMAP_FEATURE_COUNT = EASSIGNMENT_VALUE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EMapEntryImpl <em>EMap Entry</em>}' class.
@@ -5177,14 +5177,14 @@ public interface RMPackage extends EPackage
   EAttribute getEEqual_Val();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EPropertyAssignmentValue <em>EProperty Assignment Value</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EAssignmentValue <em>EAssignment Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EProperty Assignment Value</em>'.
-   * @see org.sodalite.dsl.rM.EPropertyAssignmentValue
+   * @return the meta object for class '<em>EAssignment Value</em>'.
+   * @see org.sodalite.dsl.rM.EAssignmentValue
    * @generated
    */
-  EClass getEPropertyAssignmentValue();
+  EClass getEAssignmentValue();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ESTRING <em>ESTRING</em>}'.
@@ -7164,14 +7164,14 @@ public interface RMPackage extends EPackage
     EAttribute EEQUAL__VAL = eINSTANCE.getEEqual_Val();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EPropertyAssignmentValueImpl <em>EProperty Assignment Value</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EAssignmentValueImpl <em>EAssignment Value</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.dsl.rM.impl.EPropertyAssignmentValueImpl
-     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPropertyAssignmentValue()
+     * @see org.sodalite.dsl.rM.impl.EAssignmentValueImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAssignmentValue()
      * @generated
      */
-    EClass EPROPERTY_ASSIGNMENT_VALUE = eINSTANCE.getEPropertyAssignmentValue();
+    EClass EASSIGNMENT_VALUE = eINSTANCE.getEAssignmentValue();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ESTRINGImpl <em>ESTRING</em>}' class.

@@ -799,7 +799,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * Contexts:
 	 *     ELIST returns ELIST
-	 *     EPropertyAssignmentValue returns ELIST
+	 *     EAssignmentValue returns ELIST
 	 *
 	 * Constraint:
 	 *     (list+=STRING list+=STRING*)
@@ -868,7 +868,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     EPropertyAssignmentValue returns EMAP
+	 *     EAssignmentValue returns EMAP
 	 *     EMAP returns EMAP
 	 *
 	 * Constraint:
@@ -884,7 +884,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EMapEntry returns EMapEntry
 	 *
 	 * Constraint:
-	 *     (key=ID value=EPropertyAssignmentValue)
+	 *     (key=ID value=EAssignmentValue)
 	 */
 	protected void sequence_EMapEntry(ISerializationContext context, EMapEntry semanticObject) {
 		if (errorAcceptor != null) {
@@ -895,7 +895,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEMapEntryAccess().getKeyIDTerminalRuleCall_0_0(), semanticObject.getKey());
-		feeder.accept(grammarAccess.getEMapEntryAccess().getValueEPropertyAssignmentValueParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -1303,7 +1303,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * Contexts:
 	 *     EValueExpression returns ESTRING
-	 *     EPropertyAssignmentValue returns ESTRING
+	 *     EAssignmentValue returns ESTRING
 	 *     ESTRING returns ESTRING
 	 *
 	 * Constraint:
@@ -1380,7 +1380,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EValueExpression returns GetAttribute
 	 *     EFunction returns GetAttribute
 	 *     GetAttribute returns GetAttribute
-	 *     EPropertyAssignmentValue returns GetAttribute
+	 *     EAssignmentValue returns GetAttribute
 	 *
 	 * Constraint:
 	 *     attribute=GetAttributeBody
@@ -1401,7 +1401,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EValueExpression returns GetInput
 	 *     EFunction returns GetInput
 	 *     GetInput returns GetInput
-	 *     EPropertyAssignmentValue returns GetInput
+	 *     EAssignmentValue returns GetInput
 	 *
 	 * Constraint:
 	 *     input=[EParameterDefinition|ID]
@@ -1434,7 +1434,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EValueExpression returns GetProperty
 	 *     EFunction returns GetProperty
 	 *     GetProperty returns GetProperty
-	 *     EPropertyAssignmentValue returns GetProperty
+	 *     EAssignmentValue returns GetProperty
 	 *
 	 * Constraint:
 	 *     property=GetPropertyBody

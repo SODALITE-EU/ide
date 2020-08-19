@@ -84,13 +84,13 @@ EAttributeAssigments:
 	{EAttributeAssigments} (attributes+=EAttributeAssignment)*;
 
 EAttributeAssignment:
-	name = ID ':' value=STRING;
+	name = ID ':' value=EAssignmentValue;
 
 EPropertyAssigments:
 	{EPropertyAssigments} (properties+=EPropertyAssignment)*;
 
 EPropertyAssignment:
-	name = ID ':' value=EPropertyAssignmentValue;
+	name = ID ':' value=EAssignmentValue;
 	
 
 

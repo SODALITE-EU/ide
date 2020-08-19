@@ -38,7 +38,7 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEFunctionAccess().getAlternatives(), "rule__EFunction__Alternatives");
 			builder.put(grammarAccess.getEReqOrCapAccess().getAlternatives(), "rule__EReqOrCap__Alternatives");
 			builder.put(grammarAccess.getEConstraintAccess().getAlternatives(), "rule__EConstraint__Alternatives");
-			builder.put(grammarAccess.getEPropertyAssignmentValueAccess().getAlternatives(), "rule__EPropertyAssignmentValue__Alternatives");
+			builder.put(grammarAccess.getEAssignmentValueAccess().getAlternatives(), "rule__EAssignmentValue__Alternatives");
 			builder.put(grammarAccess.getRM_ModelAccess().getGroup_0(), "rule__RM_Model__Group_0__0");
 			builder.put(grammarAccess.getRM_ModelAccess().getGroup_1(), "rule__RM_Model__Group_1__0");
 			builder.put(grammarAccess.getRM_ModelAccess().getGroup_2(), "rule__RM_Model__Group_2__0");

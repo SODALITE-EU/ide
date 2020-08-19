@@ -292,7 +292,7 @@
     <genClasses ecoreClass="RM.ecore#//EEqual">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EEqual/val"/>
     </genClasses>
-    <genClasses ecoreClass="RM.ecore#//EPropertyAssignmentValue"/>
+    <genClasses ecoreClass="RM.ecore#//EAssignmentValue"/>
     <genClasses ecoreClass="RM.ecore#//ESTRING">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ESTRING/string"/>
     </genClasses>

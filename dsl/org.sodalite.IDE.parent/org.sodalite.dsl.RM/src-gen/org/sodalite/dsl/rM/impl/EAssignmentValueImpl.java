@@ -7,24 +7,24 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EPropertyAssignmentValue;
+import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EProperty Assignment Value</b></em>'.
+ * An implementation of the model object '<em><b>EAssignment Value</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class EPropertyAssignmentValueImpl extends MinimalEObjectImpl.Container implements EPropertyAssignmentValue
+public class EAssignmentValueImpl extends MinimalEObjectImpl.Container implements EAssignmentValue
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EPropertyAssignmentValueImpl()
+  protected EAssignmentValueImpl()
   {
     super();
   }
@@ -37,7 +37,7 @@ public class EPropertyAssignmentValueImpl extends MinimalEObjectImpl.Container i
   @Override
   protected EClass eStaticClass()
   {
-    return RMPackage.Literals.EPROPERTY_ASSIGNMENT_VALUE;
+    return RMPackage.Literals.EASSIGNMENT_VALUE;
   }
 
-} //EPropertyAssignmentValueImpl
+} //EAssignmentValueImpl

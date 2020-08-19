@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface EMAP extends EPropertyAssignmentValue
+public interface EMAP extends EAssignmentValue
 {
   /**
    * Returns the value of the '<em><b>Map</b></em>' containment reference list.
