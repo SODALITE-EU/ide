@@ -3,7 +3,21 @@
  */
 package org.sodalite.dsl.optimization.ui.quickfix;
 
+import com.google.common.base.Objects;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import java.text.MessageFormat;
+import java.util.Iterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.Fix;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.validation.Issue;
+import org.sodalite.dsl.ui.validation.ValidationIssue;
 
 /**
  * Custom quickfixes.
@@ -12,4 +26,66 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
  */
 @SuppressWarnings("all")
 public class OptimizationQuickfixProvider extends DefaultQuickfixProvider {
+  @Fix(ValidationIssue.OPTIMIZATION)
+  public void fixNodeTypeName(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    String[] _data = issue.getData();
+    final String data = ((String[]) _data)[0];
+    final JsonObject jsonObject = new Gson().<JsonObject>fromJson(data, JsonObject.class);
+    JsonElement _get = jsonObject.get("path");
+    final JsonObject path = ((JsonObject) _get);
+    JsonElement _get_1 = jsonObject.get("value");
+    final JsonObject value = ((JsonObject) _get_1);
+    final String message = MessageFormat.format("Create graph \"{0}\" in entity \"{1}\"", 
+      this.convertGraphToString(value, ""), this.convertPathToString(path));
+    final String sub_message = message;
+    final ISemanticModification _function = (EObject node, IModificationContext context) -> {
+      System.out.println(("Injecting quick fix in model in node: " + node));
+    };
+    acceptor.accept(issue, message, sub_message, "", _function);
+  }
+  
+  public String convertPathToString(final JsonObject target) {
+    String result = "";
+    JsonObject obj = target;
+    while (((!Objects.equal(obj, null)) && obj.keySet().iterator().hasNext())) {
+      {
+        String key = obj.keySet().iterator().next();
+        String _result = result;
+        result = (_result + ("/" + key));
+        JsonElement _get = obj.get(key);
+        obj = ((JsonObject) _get);
+      }
+    }
+    return result;
+  }
+  
+  public String convertGraphToString(final JsonObject target, final String result) {
+    String str = "";
+    String key = null;
+    boolean _notEquals = (!Objects.equal(target, null));
+    if (_notEquals) {
+      final Iterator<String> iterator = target.keySet().iterator();
+      while (iterator.hasNext()) {
+        {
+          key = iterator.next();
+          JsonElement obj = target.get(key);
+          if ((obj instanceof JsonObject)) {
+            String _str = str;
+            Object _convertGraphToString = this.convertGraphToString(((JsonObject)obj), str);
+            String _plus = ((key + ":\n") + ((String) _convertGraphToString));
+            str = (_str + _plus);
+          } else {
+            if ((obj instanceof JsonPrimitive)) {
+              String _str_1 = str;
+              String _asString = ((JsonPrimitive) obj).getAsString();
+              String _plus_1 = ((key + ":") + _asString);
+              String _plus_2 = (_plus_1 + "\n");
+              str = (_str_1 + _plus_2);
+            }
+          }
+        }
+      }
+    }
+    return (result + str);
+  }
 }

@@ -8,19 +8,12 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.sodalite.dsl.aADM.ENodeTemplate
-import org.sodalite.dsl.aADM.EPropertyAssignment
-import org.sodalite.dsl.rM.ELIST
 import org.sodalite.dsl.aADM.AADMFactory
-import org.sodalite.dsl.rM.RMFactory
 import org.sodalite.dsl.ui.validation.ValidationIssue
 import java.text.MessageFormat
-import java.util.HashMap
-import java.util.Map
 import java.util.regex.Pattern
 import java.util.regex.Matcher
 import org.sodalite.dsl.aADM.ERequirementAssignment
-import org.sodalite.dsl.aADM.AADM_Model
-import org.eclipse.emf.common.util.EList
 import org.sodalite.dsl.aADM.impl.ENodeTemplatesImpl
 
 /**

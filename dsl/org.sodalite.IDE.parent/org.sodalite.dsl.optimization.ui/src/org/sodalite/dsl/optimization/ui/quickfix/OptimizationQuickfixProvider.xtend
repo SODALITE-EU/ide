@@ -4,6 +4,15 @@
 package org.sodalite.dsl.optimization.ui.quickfix
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
+import org.eclipse.xtext.ui.editor.quickfix.Fix
+import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
+import org.sodalite.dsl.ui.validation.ValidationIssue
+import java.text.MessageFormat
+import com.google.gson.JsonObject
+import com.google.gson.Gson
+import com.google.gson.JsonElement
+import com.google.gson.JsonPrimitive
 
 /**
  * Custom quickfixes.
@@ -21,4 +30,57 @@ class OptimizationQuickfixProvider extends DefaultQuickfixProvider {
 //			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
 //		]
 //	}
+
+
+	@Fix(ValidationIssue.OPTIMIZATION)
+	def fixNodeTypeName(Issue issue, IssueResolutionAcceptor acceptor) {
+			val String data = (issue.data as String[]).get(0)
+			val JsonObject jsonObject = new Gson().fromJson(data, typeof(JsonObject));
+			
+			val JsonObject path = jsonObject.get("path") as JsonObject
+			val JsonObject value = jsonObject.get("value") as JsonObject
+			
+			val message = MessageFormat.format('Create graph "{0}" in entity "{1}"',
+				convertGraphToString(value, ""), convertPathToString(path))
+			val sub_message = message
+			acceptor.accept(issue, message, sub_message, '') [ node, context |
+				// Get path entrypoint
+				// Interpret and create graph
+				System.out.println("Injecting quick fix in model in node: " + node)
+				
+				//TODO Find model entrypoint from path
+				//TODO Interpret the graph to create it as a child on the model entrypoint
+				//TODO Need to follow a generic approach to modify the model
+			]
+	}
+		
+	def convertPathToString(JsonObject target) {
+		var String result = ""
+		var JsonObject obj = target
+		while (obj != null && obj.keySet().iterator().hasNext){
+			var String key = obj.keySet().iterator().next
+			result += '/' + key
+			obj = obj.get(key) as JsonObject
+		}
+		return result;
+	}
+	
+	def convertGraphToString(JsonObject target, String result) {
+		var String str = ""
+		var String key = null
+		if (target != null){
+			val iterator = target.keySet().iterator()
+			while (iterator.hasNext){
+				key = iterator.next
+				var obj = target.get(key)
+				if (obj instanceof JsonObject){
+					str += key + ":\n" + convertGraphToString(obj, str) as String
+				}else if (obj instanceof JsonPrimitive){
+					str += key + ":" + (obj as JsonPrimitive).asString + "\n"
+				}
+			}
+		}
+		return result + str;
+	}
+
 }

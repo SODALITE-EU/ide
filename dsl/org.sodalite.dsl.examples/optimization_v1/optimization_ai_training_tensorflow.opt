@@ -1,0 +1,26 @@
+optimization ai_training.tensor_flow:
+	enable_opt_build: true
+	enable_autotuning: true
+	app_type: ai_training 
+	opt_build:
+		cpu_type: arm
+		acc_type: nvidia
+	autotuning:
+		tuner: cresta
+		input: "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/optimization_v1/autotunig.at"
+	app_type-ai_training: 
+		config:
+			ai_framework: tensorflow
+			type: translation
+			distributed_training: true 
+			layers: 6
+			parameters: 872684236
+		data:
+			location: "/some/data"
+			basedata: imagenet
+			size: 67
+			count: 4389
+		ai_framework-tensorflow: 
+			version: "2.1"
+			xla: true
+		 

@@ -409,7 +409,7 @@ public class BackendProxy {
 
 	private void processValidationIssues(IFile aadmFile, KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
 		// Check there are not warnings (they do not prevent storage in KB)
-		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings())) {
+		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
 			//Open AADM file if not opened to show the errors and warnings
 			openFileInEditor(aadmFile);
 			List<ValidationIssue> issues = readRecommendationsFromKB(saveReport);
@@ -438,7 +438,8 @@ public class BackendProxy {
 			AADM_Model aadmModel = readAADMModel(aadmFile, event);
 			// For each optimization model in the list of issues, open the model and process its issues
 			for (String node: getOptimizationNodes (optimizationReport)) {
-				openOptimizationModel(node, aadmModel);
+				String nodeName = node.substring(node.lastIndexOf('/') + 1);
+				openOptimizationModel(nodeName, aadmModel);
 				List<ValidationIssue> issues = readOptimizationIssuesFromKB(getIssuesForModel (optimizationReport, node));
 				manageOptimizationIssues(event, issues);
 			}
@@ -634,6 +635,7 @@ public class BackendProxy {
 			}
 		}
 
+		//Suggestions are not shown in model
 		if (saveReport.hasSuggestions()) {
 			for (KBSuggestion suggestion : saveReport.getSuggestions()) {
 				String message = MessageFormat.format(

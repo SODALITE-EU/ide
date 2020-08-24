@@ -14,6 +14,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -234,7 +235,7 @@ public class KBReasonerClient implements KBReasoner {
 			if (optimizationsJson == null){
 				throw new Exception ("No optimizations have been returned from the KB");
 			}
-			report.setOptimizations(processOptimizations(optimizationsJson));
+			processOptimizations(optimizationsJson, report);
 		}catch (Exception ex) {
 			if (ex instanceof HttpClientErrorException) {
 				HttpClientErrorException hcee = (HttpClientErrorException) ex;
@@ -336,29 +337,48 @@ public class KBReasonerClient implements KBReasoner {
 		return warnings;
 	}
 	
-	private List<KBOptimization> processOptimizations(JsonArray jsonArray) throws JsonMappingException, JsonProcessingException {
-		List<KBOptimization> kbOptimization = new ArrayList<>();
+	private void processOptimizations(JsonArray jsonArray, KBOptimizationReportData report) throws JsonMappingException, JsonProcessingException {
+		List<KBOptimization> optimizations = new ArrayList<>();
+		List<KBOptimizationError> errors = new ArrayList<>();
 		for (JsonElement json:jsonArray) {
 			JsonObject jsonObj = (JsonObject) json;
 			KBOptimization opt = new KBOptimization();
-			String node = jsonObj.keySet().iterator().next();
-			if (node != null) {
-				KBOptimization optimization = new KBOptimization();
-				optimization.setNodeTemplate(node);
-				JsonArray optimizationsJson = jsonObj.getAsJsonArray(node);
-				List<KBOptimization.KBIssue> issues = new ArrayList<>();
-				for (JsonElement optJson: optimizationsJson) {
-					JsonObject optJsonObj = (JsonObject) optJson;
-					KBOptimization.KBIssue issue = optimization.new KBIssue();
-					issue.setPath(optJsonObj.get("path").getAsString());
-					issue.setValue(optJsonObj.get("value").getAsString());
-					issues.add(issue);
+			String type = jsonObj.get("type").getAsString();
+			if (type != null) {
+				if (type.equals("Optimization")) {
+					KBOptimization optimization = new KBOptimization();
+					JsonObject info = (JsonObject)jsonObj.get("info");
+					if (info != null) {
+						optimization.setNodeTemplate(info.get("context").getAsString());
+						optimization.setDescription(info.get("description").getAsString());
+						JsonArray optimizationsJson = info.getAsJsonArray("optimizations");
+						List<KBOptimization.KBIssue> issues = new ArrayList<>();
+						for (JsonElement optJson: optimizationsJson) {
+							JsonObject optJsonObj = (JsonObject) optJson;
+							KBOptimization.KBIssue issue = optimization.new KBIssue();
+							issue.setPath(optJsonObj.get("path").getAsString());
+							issue.setValue(optJsonObj.get("value").getAsString());
+							issues.add(issue);
+						}
+						optimization.setIssues(issues);
+						optimizations.add(optimization);
+					}
+				}else if (type.equals("OptimizationMismatch")) {
+					KBOptimizationError error = new KBOptimizationError();
+					error.setType(type);
+					JsonObject info = (JsonObject)jsonObj.get("info");
+					if (info != null) {
+						error.setPath(info.get("path").getAsString());
+						error.setContext(info.get("context").getAsString());
+						error.setDescription(info.get("description").getAsString());
+						error.setValue(info.get("value").getAsString());
+					}
+					errors.add(error);
 				}
-				optimization.setIssues(issues);
-				kbOptimization.add(optimization);
 			}
 		}
-		return kbOptimization;
+		report.setOptimizations(optimizations);
+		report.setErrors(errors);
 	}
 	
 	private List<KBOptimizationError> processOptimizationErrors(String json) throws Exception {
@@ -367,12 +387,14 @@ public class KBReasonerClient implements KBReasoner {
 		return errors;
 	}
 	
+	
+	//FIXME Some suggestions are not read and lost
 	private List<KBSuggestion> processSuggestions(JsonArray jsonArray) throws JsonMappingException, JsonProcessingException {
 		List<KBSuggestion> result = new ArrayList<>();
 		for (JsonElement json:jsonArray) {
 			JsonObject jsonObj = (JsonObject) json;
 			KBSuggestion opt = new KBSuggestion();
-			String node = jsonObj.keySet().iterator().next();
+			String node = getSuggestionNode(jsonObj);
 			if (node != null && !node.equals("description")) {
 				KBSuggestion suggestion = new KBSuggestion();
 				suggestion.getHierarchyPath().add(node);
@@ -395,6 +417,19 @@ public class KBReasonerClient implements KBReasoner {
 			}
 		}
 		return result;
+	}
+
+	private String getSuggestionNode(JsonObject jsonObj) {
+		String node = null;
+		Iterator<String> iter = jsonObj.keySet().iterator();
+		while (iter.hasNext()) {
+			String candidate = iter.next();
+			if (!candidate.equals("description")) {
+				node = candidate;
+				break;
+			}
+		}
+		return node;
 	}
 
 	/**

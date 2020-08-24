@@ -1,0 +1,19 @@
+capability_types:
+	sodalite.capabilities.optimization.Compute:
+		derived_from: tosca.capabilities.Compute
+		properties:
+			num_gpus:
+				type: integer
+				required: false
+				constraints:
+					greater_or_equal: "1"				
+								
+node_types:
+	sodalite.nodes.optimization.Compute:
+		derived_from: tosca.nodes.Compute
+		
+		capabilities:
+			host:
+				type: sodalite.capabilities.optimization.Compute
+				valid_source_types:[tosca.nodes.SoftwareComponent]
+				

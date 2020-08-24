@@ -9,14 +9,18 @@ public class KBOptimizationError extends KBError{
 	String path;
 	String value;
 	
+	public void setPath(String path) {
+		this.path = path;
+	}
 	public String getPath() {
 		return path;
 	}
-
+	public void setValue(String value) {
+		this.value = value;
+	}
 	public String getValue() {
 		return value;
 	}
-
 	@JsonProperty("info")
 	private void unpackNameFromNestedObject(Map<String, String> info) {
 		context = info.get("context");

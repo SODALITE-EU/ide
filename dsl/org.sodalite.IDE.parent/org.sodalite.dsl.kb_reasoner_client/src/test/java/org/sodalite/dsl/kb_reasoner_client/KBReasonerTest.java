@@ -124,7 +124,7 @@ class KBReasonerTest {
 	
 	@Test
 	void testSaveAADM() throws Exception {
-		KBSaveReportData report = saveAADM("", "src/test/resources/snow.aadm.ttl");
+		KBSaveReportData report = saveAADM("", "src/test/resources/optimization.aadm.ttl");
 		assertFalse (report.hasErrors());
 		assertNotNull (report.getURI());
 	}
@@ -153,11 +153,11 @@ class KBReasonerTest {
 	
 	@Test
 	void testOptimizeAADM() throws Exception {
-		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow_opt.aadm.ttl");
+		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/optimization.aadm.ttl");
 		String aadmTTL = new String(Files.readAllBytes (aadm_path));
 		KBOptimizationReportData report = kbclient.optimizeAADM(aadmTTL, null);
 		assertFalse (report.hasErrors());
-		assertFalse (report.hasOptimizationErrors());
+		assertTrue (report.hasOptimizationErrors());
 		assertNotNull (report.getURI());
 		assertTrue (report.hasOptimizations());
 	}
