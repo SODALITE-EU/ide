@@ -3,11 +3,11 @@
  */
 package org.sodalite.dsl.optimization.ui.quickfix;
 
-import com.google.common.base.Objects;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
@@ -17,6 +17,11 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.sodalite.dsl.optimization.optimization.EAITrainingETL;
+import org.sodalite.dsl.optimization.optimization.OptimizationFactory;
+import org.sodalite.dsl.optimization.optimization.impl.EAITrainingDataImpl;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 
 /**
@@ -39,15 +44,54 @@ public class OptimizationQuickfixProvider extends DefaultQuickfixProvider {
       this.convertGraphToString(value, ""), this.convertPathToString(path));
     final String sub_message = message;
     final ISemanticModification _function = (EObject node, IModificationContext context) -> {
-      System.out.println(("Injecting quick fix in model in node: " + node));
+      final String entrypointName = this.findEntryPoint(node, path);
+      Object _entryPoint = this.getEntryPoint(node, entrypointName);
+      final EObject entrypoint = ((EObject) _entryPoint);
+      this.createGraph(entrypoint, value);
     };
     acceptor.accept(issue, message, sub_message, "", _function);
+  }
+  
+  public void createGraph(final EObject entrypoint, final JsonObject graph) {
+    boolean _equals = (((String[])Conversions.unwrapArray(graph.keySet(), String.class))[0]).equals("etl");
+    if (_equals) {
+      JsonElement _get = graph.get(((String[])Conversions.unwrapArray(graph.keySet(), String.class))[0]);
+      this.createETL(((EAITrainingDataImpl) entrypoint), ((JsonObject) _get));
+    }
+  }
+  
+  public void createETL(final EAITrainingDataImpl data, final JsonObject graph) {
+    EAITrainingETL _etl = data.getEtl();
+    boolean _tripleEquals = (_etl == null);
+    if (_tripleEquals) {
+      data.setEtl(OptimizationFactory.eINSTANCE.createEAITrainingETL());
+    }
+    EAITrainingETL _etl_1 = data.getEtl();
+    _etl_1.setPrefetch(graph.get("prefetch").getAsInt());
+    EAITrainingETL _etl_2 = data.getEtl();
+    _etl_2.setCache(graph.get("cache").getAsInt());
+  }
+  
+  public Object getEntryPoint(final EObject object, final String name) {
+    try {
+      final Class<? extends EObject> clz = object.getClass();
+      final Field field = clz.getDeclaredField(name);
+      field.setAccessible(true);
+      return field.get(object);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public String findEntryPoint(final EObject object, final JsonObject path) {
+    JsonElement _get = path.get(((String[])Conversions.unwrapArray(path.keySet(), String.class))[0]);
+    return ((String[])Conversions.unwrapArray(((JsonObject) _get).keySet(), String.class))[0];
   }
   
   public String convertPathToString(final JsonObject target) {
     String result = "";
     JsonObject obj = target;
-    while (((!Objects.equal(obj, null)) && obj.keySet().iterator().hasNext())) {
+    while (((obj != null) && obj.keySet().iterator().hasNext())) {
       {
         String key = obj.keySet().iterator().next();
         String _result = result;
@@ -62,8 +106,7 @@ public class OptimizationQuickfixProvider extends DefaultQuickfixProvider {
   public String convertGraphToString(final JsonObject target, final String result) {
     String str = "";
     String key = null;
-    boolean _notEquals = (!Objects.equal(target, null));
-    if (_notEquals) {
+    if ((target != null)) {
       final Iterator<String> iterator = target.keySet().iterator();
       while (iterator.hasNext()) {
         {
@@ -72,14 +115,14 @@ public class OptimizationQuickfixProvider extends DefaultQuickfixProvider {
           if ((obj instanceof JsonObject)) {
             String _str = str;
             Object _convertGraphToString = this.convertGraphToString(((JsonObject)obj), str);
-            String _plus = ((key + ":\n") + ((String) _convertGraphToString));
+            String _plus = ((key + ": ") + ((String) _convertGraphToString));
             str = (_str + _plus);
           } else {
             if ((obj instanceof JsonPrimitive)) {
               String _str_1 = str;
               String _asString = ((JsonPrimitive) obj).getAsString();
-              String _plus_1 = ((key + ":") + _asString);
-              String _plus_2 = (_plus_1 + "\n");
+              String _plus_1 = ((key + ": ") + _asString);
+              String _plus_2 = (_plus_1 + " ");
               str = (_str_1 + _plus_2);
             }
           }

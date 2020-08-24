@@ -100,4 +100,5 @@ node_templates:
 		requirements:  
 			registry: 
 				node: optimization-docker-registry
-				
+				 
+				 
