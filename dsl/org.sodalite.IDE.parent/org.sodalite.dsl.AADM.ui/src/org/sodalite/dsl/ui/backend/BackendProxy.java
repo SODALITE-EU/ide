@@ -15,8 +15,10 @@ import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.SortedSet;
@@ -412,8 +414,8 @@ public class BackendProxy {
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
 			//Open AADM file if not opened to show the errors and warnings
 			openFileInEditor(aadmFile);
-			List<ValidationIssue> issues = readRecommendationsFromKB(saveReport);
-			manageRecommendationIssues(event, issues);
+			List<ValidationIssue> issues = readIssuesFromKB(saveReport);
+			manageIssues(event, issues);
 			if (saveReport.hasErrors()) {
 				throw new Exception("There are detected validation issues in the AADM, please fix them");
 			}
@@ -428,7 +430,7 @@ public class BackendProxy {
 			openFileInEditor(aadmFile);
 			
 			List<ValidationIssue> issues = readIssuesFromKB(optimizationReport);
-			manageRecommendationIssues(event, issues);
+			manageIssues(event, issues);
 			if (optimizationReport.hasErrors()) {
 				throw new Exception("There are detected validation issues in the associated optimization models, please fix them");
 			}
@@ -610,7 +612,7 @@ public class BackendProxy {
 		return suggestion.replace(":{", ":\t\n").replace("}", "").replace(",", "\t\n").replace("{", "");
 	}
 
-	private List<ValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
+	private List<ValidationIssue> readIssuesFromKB(KBSaveReportData saveReport) {
 		// Read issues from KB recommendations
 		List<ValidationIssue> issues = new ArrayList<>();
 
@@ -643,13 +645,24 @@ public class BackendProxy {
 					getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
 				String path = createPath(suggestion.getHierarchyPath());
 				String pathType = getPathType(suggestion.getHierarchyPath());
-				String code = "KB Suggestion";
-				Object data = suggestion.getSuggestions();
+				String code = getCode (suggestion.getHierarchyPath());
+				Map<String, SortedSet<String>> data = new HashMap<>();
+				data.put(path, suggestion.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
 			}
 		}
 
 		return issues;
+	}
+
+	private String getCode(List<String> hierarchyPath) {
+		// Assigns a suggestion code based in the issue hierarchy path
+		String code = "Suggestion";
+		if (hierarchyPath.contains("requirements")){
+			code = ValidationIssue.REQUIREMENT;
+		}
+		
+		return code;
 	}
 
 	private String getDependency (List<String> entityHierarchy) {
@@ -711,7 +724,7 @@ public class BackendProxy {
 		}
 	}
 
-	private void manageRecommendationIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
+	private void manageIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {
 			IValidationIssueProcessor issueProcessor;
