@@ -65,7 +65,7 @@ ERequirementAssignments:
 ERequirementAssignment:
 	name = ID ':'
 	BEGIN
-		('node:' node=[ENodeTemplate|ID])
+		('node:' node=ID)
 	END;
 
 ECapabilityAssignments:

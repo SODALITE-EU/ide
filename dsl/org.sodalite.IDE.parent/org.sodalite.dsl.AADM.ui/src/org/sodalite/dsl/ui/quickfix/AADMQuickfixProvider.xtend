@@ -56,7 +56,8 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 						node.node.requirements.requirements.add(req)
 					}
 					val ENodeTemplatesImpl model = nodeTemplate.eContainer as ENodeTemplatesImpl
-					req.node = getNode(model, targetNode)
+					System.out.println ("Applying targetNode: " + targetNode)
+					req.node = targetNode
 				]
 			}
 	}

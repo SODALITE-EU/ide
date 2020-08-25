@@ -52,7 +52,7 @@ public class Services {
     }
     
     public String getRequirementLabel(ERequirementAssignment requirement) {
-        return requirement.getName() + ": [ node: " + requirement.getNode().getName() + "]";
+        return requirement.getName() + ": [ node: " + requirement.getNode() + "]";
     }
     
     public String getTypeLabel(ENodeTemplateBody node) {

@@ -31,7 +31,7 @@
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ERequirementAssignment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ERequirementAssignment/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AADM.ecore#//ERequirementAssignment/node"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ERequirementAssignment/node"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ECapabilityAssignments">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ECapabilityAssignments/capabilities"/>

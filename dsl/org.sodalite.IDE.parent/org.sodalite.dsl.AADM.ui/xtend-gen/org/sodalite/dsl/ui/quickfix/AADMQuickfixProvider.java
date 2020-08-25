@@ -66,7 +66,8 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
           }
           EObject _eContainer = nodeTemplate.eContainer();
           final ENodeTemplatesImpl model = ((ENodeTemplatesImpl) _eContainer);
-          req.setNode(this.getNode(model, targetNode));
+          System.out.println(("Applying targetNode: " + targetNode));
+          req.setNode(targetNode);
         };
         acceptor.accept(issue, message, sub_message, "", _function);
       }

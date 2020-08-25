@@ -17388,13 +17388,9 @@ rule__ERequirementAssignment__NodeAssignment_3_1
 	}
 :
 	(
-		{ before(grammarAccess.getERequirementAssignmentAccess().getNodeENodeTemplateCrossReference_3_1_0()); }
-		(
-			{ before(grammarAccess.getERequirementAssignmentAccess().getNodeENodeTemplateIDTerminalRuleCall_3_1_0_1()); }
-			RULE_ID
-			{ after(grammarAccess.getERequirementAssignmentAccess().getNodeENodeTemplateIDTerminalRuleCall_3_1_0_1()); }
-		)
-		{ after(grammarAccess.getERequirementAssignmentAccess().getNodeENodeTemplateCrossReference_3_1_0()); }
+		{ before(grammarAccess.getERequirementAssignmentAccess().getNodeIDTerminalRuleCall_3_1_0()); }
+		RULE_ID
+		{ after(grammarAccess.getERequirementAssignmentAccess().getNodeIDTerminalRuleCall_3_1_0()); }
 	)
 ;
 finally {
