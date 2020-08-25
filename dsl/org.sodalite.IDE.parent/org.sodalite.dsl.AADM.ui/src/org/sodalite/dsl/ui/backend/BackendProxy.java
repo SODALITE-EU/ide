@@ -10,13 +10,14 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.SortedSet;
@@ -46,14 +47,12 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorDescriptor;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
@@ -103,7 +102,6 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.optimization.optimization.EAITraining;
 import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
-import org.sodalite.dsl.optimization.optimization.EAITrainingData;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.ui.preferences.Activator;
@@ -113,7 +111,6 @@ import org.sodalite.dsl.ui.validation.ValidationIssue;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.internal.LinkedTreeMap;
 import com.google.inject.Injector;
 
 public class BackendProxy {
@@ -297,7 +294,7 @@ public class BackendProxy {
 					@Override
 					public void run() {
 						MessageDialog.openError(parent, "Get AADM optimization recommendations",
-								"There were problems to retrieve AADM optimization recommendations from the KB: "
+								"There were problems during the processing of AADM optimization recommendations from the KB: "
 										+ e.getMessage());
 					}
 				});
@@ -409,11 +406,11 @@ public class BackendProxy {
 
 	private void processValidationIssues(IFile aadmFile, KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
 		// Check there are not warnings (they do not prevent storage in KB)
-		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings())) {
+		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
 			//Open AADM file if not opened to show the errors and warnings
 			openFileInEditor(aadmFile);
-			List<ValidationIssue> issues = readRecommendationsFromKB(saveReport);
-			manageRecommendationIssues(event, issues);
+			List<ValidationIssue> issues = readIssuesFromKB(saveReport);
+			manageIssues(event, issues);
 			if (saveReport.hasErrors()) {
 				throw new Exception("There are detected validation issues in the AADM, please fix them");
 			}
@@ -428,7 +425,7 @@ public class BackendProxy {
 			openFileInEditor(aadmFile);
 			
 			List<ValidationIssue> issues = readIssuesFromKB(optimizationReport);
-			manageRecommendationIssues(event, issues);
+			manageIssues(event, issues);
 			if (optimizationReport.hasErrors()) {
 				throw new Exception("There are detected validation issues in the associated optimization models, please fix them");
 			}
@@ -438,12 +435,13 @@ public class BackendProxy {
 			AADM_Model aadmModel = readAADMModel(aadmFile, event);
 			// For each optimization model in the list of issues, open the model and process its issues
 			for (String node: getOptimizationNodes (optimizationReport)) {
-				openOptimizationModel(node, aadmModel);
+				String nodeName = node.substring(node.lastIndexOf('/') + 1);
+				openOptimizationModel(nodeName, aadmModel);
 				List<ValidationIssue> issues = readOptimizationIssuesFromKB(getIssuesForModel (optimizationReport, node));
 				manageOptimizationIssues(event, issues);
 			}
 			
-			if (optimizationReport.hasErrors()) {
+			if (optimizationReport.hasOptimizationErrors() ) {
 				throw new Exception("There are detected validation issues in the associated optimization models, please fix them");
 			}
 		}
@@ -462,7 +460,7 @@ public class BackendProxy {
 		result.setErrors(errors);
 		List<KBOptimization> optimizations = new ArrayList<>();
 		for (KBOptimization opt: optimizationReport.getOptimizations()) {
-			if (opt.getNodeTemplate().equals(node)) {
+			if (opt.getNodeTemplate().contains(node)) {
 				optimizations.add(opt);
 			}
 		}
@@ -506,7 +504,7 @@ public class BackendProxy {
 			nodes.add(optError.getContext().substring(optError.getContext().lastIndexOf('/') + 1));
 		}
 		for (KBOptimization opt: optimizationReport.getOptimizations()) {
-			nodes.add(opt.getNodeTemplate());
+			nodes.add(opt.getNodeTemplate().substring(opt.getNodeTemplate().lastIndexOf('/') + 1));
 		}
 		return nodes;
 	}
@@ -580,12 +578,13 @@ public class BackendProxy {
 
 		if (optimizationReport.hasOptimizationErrors()) {
 			for (KBError error : optimizationReport.getOptimizationErrors()) {
-				issues.add(
-						new ValidationIssue(
-								error.getType() + "." + error.getDescription() + " error located at: "
-										+ error.getEntity_name(),
-								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
-								error.getDescription()));
+				KBOptimizationError optError = (KBOptimizationError) error;
+				String message = "Optimization error: " + optError.getDescription();
+				String path = optError.getPath();
+				String path_type = "Optimization";
+				String data = optError.toString();
+				issues.add(new ValidationIssue(message, path, path_type, Severity.ERROR,
+						ValidationIssue.OPTIMIZATION_MISMATCH, data));
 			}
 		}
 
@@ -606,10 +605,10 @@ public class BackendProxy {
 	}
 
 	private String beautifySuggestion(String suggestion) {
-		return suggestion.replace(":{", ":\t\n").replace("}", "").replace(",", "\t\n").replace("{", "");
+		return suggestion.replace(":{", ": ").replace("}", "").replace(",", ", ").replace("{", "").replace("\"", "");
 	}
 
-	private List<ValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
+	private List<ValidationIssue> readIssuesFromKB(KBSaveReportData saveReport) {
 		// Read issues from KB recommendations
 		List<ValidationIssue> issues = new ArrayList<>();
 
@@ -634,6 +633,7 @@ public class BackendProxy {
 			}
 		}
 
+		//Suggestions are not shown in model
 		if (saveReport.hasSuggestions()) {
 			for (KBSuggestion suggestion : saveReport.getSuggestions()) {
 				String message = MessageFormat.format(
@@ -641,13 +641,24 @@ public class BackendProxy {
 					getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
 				String path = createPath(suggestion.getHierarchyPath());
 				String pathType = getPathType(suggestion.getHierarchyPath());
-				String code = "KB Suggestion";
-				Object data = suggestion.getSuggestions();
+				String code = getCode (suggestion.getHierarchyPath());
+				Map<String, SortedSet<String>> data = new HashMap<>();
+				data.put(path, suggestion.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
 			}
 		}
 
 		return issues;
+	}
+
+	private String getCode(List<String> hierarchyPath) {
+		// Assigns a suggestion code based in the issue hierarchy path
+		String code = "Suggestion";
+		if (hierarchyPath.contains("requirements")){
+			code = ValidationIssue.REQUIREMENT;
+		}
+		
+		return code;
 	}
 
 	private String getDependency (List<String> entityHierarchy) {
@@ -709,7 +720,7 @@ public class BackendProxy {
 		}
 	}
 
-	private void manageRecommendationIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
+	private void manageIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {
 			IValidationIssueProcessor issueProcessor;
@@ -856,7 +867,10 @@ public class BackendProxy {
 			if (aiTrainingObject.has("data")) {
 				EAITraining aiTraining = aiTrainingCase.getAi_training();
 				result = new ValidationSourceFeature(aiTraining, OptimizationPackage.Literals.EAI_TRAINING__DATA);
-			}	
+			}else if (aiTrainingObject.has("ai_framework-tensorflow")) {
+				EAITraining aiTraining = aiTrainingCase.getAi_training();
+				result = new ValidationSourceFeature(aiTraining, OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE);
+			}
 		}
 		return result;
 	}

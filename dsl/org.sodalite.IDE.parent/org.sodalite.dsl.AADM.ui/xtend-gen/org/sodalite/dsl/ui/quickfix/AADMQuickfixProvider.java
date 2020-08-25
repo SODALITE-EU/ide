@@ -3,7 +3,6 @@
  */
 package org.sodalite.dsl.ui.quickfix;
 
-import com.google.common.base.Objects;
 import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,38 +33,44 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
   public void fixRequirement(final Issue issue, final IssueResolutionAcceptor acceptor) {
     String[] _data = issue.getData();
     final String data = ((String[]) _data)[0];
-    final String targetRequirement = this.getSubstring(data, "\\{(.*?)=");
-    final String targetNode = this.getSubstring(data, "=(.*?)\\}");
-    final String message = MessageFormat.format("Create requirement \"{0}\" with node \"{1}\"", targetRequirement, targetNode);
-    final String sub_message = message;
-    final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
-      ERequirementAssignment req = null;
-      ENodeTemplate node = ((ENodeTemplate) nodeTemplate);
-      ERequirementAssignments _requirements = node.getNode().getRequirements();
-      boolean _equals = Objects.equal(_requirements, null);
-      if (_equals) {
-        final ERequirementAssignments requirements = AADMFactory.eINSTANCE.createERequirementAssignments();
-        ENodeTemplateBody _node = node.getNode();
-        _node.setRequirements(requirements);
+    final String targetRequirement = this.getSubstring(data, "requirements\\/(.*?)\\/");
+    final String[] matches = this.getSubstring(data, "\\[(.*?)\\]").split(Pattern.quote(","));
+    for (final String match : matches) {
+      {
+        int _lastIndexOf = match.lastIndexOf("/");
+        int _plus = (_lastIndexOf + 1);
+        final String targetNode = match.substring(_plus);
+        final String message = MessageFormat.format("Create requirement \"{0}\" referencing node \"{1}\"", targetRequirement, targetNode);
+        final String sub_message = message;
+        final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
+          ERequirementAssignment req = null;
+          ENodeTemplate node = ((ENodeTemplate) nodeTemplate);
+          ERequirementAssignments _requirements = node.getNode().getRequirements();
+          boolean _tripleEquals = (_requirements == null);
+          if (_tripleEquals) {
+            final ERequirementAssignments requirements = AADMFactory.eINSTANCE.createERequirementAssignments();
+            ENodeTemplateBody _node = node.getNode();
+            _node.setRequirements(requirements);
+          }
+          EList<ERequirementAssignment> _requirements_1 = node.getNode().getRequirements().getRequirements();
+          for (final ERequirementAssignment requirement : _requirements_1) {
+            boolean _equalsIgnoreCase = requirement.getName().equalsIgnoreCase(targetRequirement);
+            if (_equalsIgnoreCase) {
+              req = requirement;
+            }
+          }
+          if ((req == null)) {
+            req = AADMFactory.eINSTANCE.createERequirementAssignment();
+            req.setName(targetRequirement);
+            node.getNode().getRequirements().getRequirements().add(req);
+          }
+          EObject _eContainer = nodeTemplate.eContainer();
+          final ENodeTemplatesImpl model = ((ENodeTemplatesImpl) _eContainer);
+          req.setNode(this.getNode(model, targetNode));
+        };
+        acceptor.accept(issue, message, sub_message, "", _function);
       }
-      EList<ERequirementAssignment> _requirements_1 = node.getNode().getRequirements().getRequirements();
-      for (final ERequirementAssignment requirement : _requirements_1) {
-        boolean _equalsIgnoreCase = req.getName().equalsIgnoreCase(targetRequirement);
-        if (_equalsIgnoreCase) {
-          req = requirement;
-        }
-      }
-      boolean _equals_1 = Objects.equal(req, null);
-      if (_equals_1) {
-        req = AADMFactory.eINSTANCE.createERequirementAssignment();
-        req.setName(targetRequirement);
-        node.getNode().getRequirements().getRequirements().add(req);
-      }
-      EObject _eContainer = nodeTemplate.eContainer();
-      final ENodeTemplatesImpl model = ((ENodeTemplatesImpl) _eContainer);
-      req.setNode(this.getNode(model, targetNode));
-    };
-    acceptor.accept(issue, message, sub_message, "", _function);
+    }
   }
   
   public ENodeTemplate getNode(final ENodeTemplatesImpl templates, final String name) {

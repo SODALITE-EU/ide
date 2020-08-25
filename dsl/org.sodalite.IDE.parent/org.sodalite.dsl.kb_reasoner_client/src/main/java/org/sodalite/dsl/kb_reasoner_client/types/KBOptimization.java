@@ -5,6 +5,7 @@ import java.util.List;
 
 public class KBOptimization {
 	String node_template;
+	String description;
 	List<KBIssue> issues = new ArrayList<>();
 	
 	public String getNodeTemplate() {
@@ -13,7 +14,12 @@ public class KBOptimization {
 	public void setNodeTemplate(String node_template) {
 		this.node_template = node_template;
 	}
-	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public List<KBIssue> getIssues() {
 		return issues;
 	}

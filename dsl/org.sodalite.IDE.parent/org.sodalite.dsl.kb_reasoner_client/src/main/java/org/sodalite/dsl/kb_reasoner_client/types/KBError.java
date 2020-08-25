@@ -19,13 +19,17 @@ public class KBError {
 	public String getEntity_name() {
 		return entity_name;
 	}
-	
 	public String getContext() {
 		return context;
 	}
-	
+	public void setContext(String context) {
+		this.context = context;
+	}
 	public String getDescription() {
 		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	
