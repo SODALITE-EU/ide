@@ -20,7 +20,10 @@ optimization ai_training.tensor_flow:
 			basedata: imagenet
 			size: 67
 			count: 4389
+			etl:  
+				prefetch: 100 
+				cache: 100 
 		ai_framework-tensorflow: 
 			version: "2.1"
-			xla: true
+			xla: false
 		 
