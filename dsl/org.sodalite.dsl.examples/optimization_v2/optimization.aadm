@@ -73,11 +73,11 @@ node_templates:
 					
 	optimization-docker-host:  
 		type: sodalite.nodes.DockerHost 
-		requirements:  
+		requirements:
 			host:  
 				node: optimization-vm	
 				
-	optimization-docker-registry:
+	optimization-docker-registry1:
 		type: sodalite.nodes.DockerRegistry
 		properties:  
 			docker_registry_url: get_input: docker-registry-url 
@@ -99,6 +99,8 @@ node_templates:
 		optimization: ai_training.tensor_flow
 		requirements:  
 			registry: 
-				node: optimization-docker-registry
+				node: optimization-docker-registry1
+			host:
+				node: optimization-vm
 				 
 				 

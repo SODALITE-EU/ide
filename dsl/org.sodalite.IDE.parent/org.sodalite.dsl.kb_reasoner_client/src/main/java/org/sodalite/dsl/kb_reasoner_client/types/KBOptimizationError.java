@@ -28,5 +28,10 @@ public class KBOptimizationError extends KBError{
 		path = info.get("path");
 		value = info.get("value");
 	}
+	
+	@Override
+	public String toString() {
+		return "{\"path\": " + this.path + ", \"value\":" + this.value + "}";
+	}
 
 }

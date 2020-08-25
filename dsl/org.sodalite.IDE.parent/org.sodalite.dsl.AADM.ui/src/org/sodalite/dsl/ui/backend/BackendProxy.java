@@ -294,7 +294,7 @@ public class BackendProxy {
 					@Override
 					public void run() {
 						MessageDialog.openError(parent, "Get AADM optimization recommendations",
-								"There were problems to retrieve AADM optimization recommendations from the KB: "
+								"There were problems during the processing of AADM optimization recommendations from the KB: "
 										+ e.getMessage());
 					}
 				});
@@ -441,7 +441,7 @@ public class BackendProxy {
 				manageOptimizationIssues(event, issues);
 			}
 			
-			if (optimizationReport.hasErrors()) {
+			if (optimizationReport.hasOptimizationErrors() ) {
 				throw new Exception("There are detected validation issues in the associated optimization models, please fix them");
 			}
 		}
@@ -460,7 +460,7 @@ public class BackendProxy {
 		result.setErrors(errors);
 		List<KBOptimization> optimizations = new ArrayList<>();
 		for (KBOptimization opt: optimizationReport.getOptimizations()) {
-			if (opt.getNodeTemplate().equals(node)) {
+			if (opt.getNodeTemplate().contains(node)) {
 				optimizations.add(opt);
 			}
 		}
@@ -504,7 +504,7 @@ public class BackendProxy {
 			nodes.add(optError.getContext().substring(optError.getContext().lastIndexOf('/') + 1));
 		}
 		for (KBOptimization opt: optimizationReport.getOptimizations()) {
-			nodes.add(opt.getNodeTemplate());
+			nodes.add(opt.getNodeTemplate().substring(opt.getNodeTemplate().lastIndexOf('/') + 1));
 		}
 		return nodes;
 	}
@@ -578,12 +578,13 @@ public class BackendProxy {
 
 		if (optimizationReport.hasOptimizationErrors()) {
 			for (KBError error : optimizationReport.getOptimizationErrors()) {
-				issues.add(
-						new ValidationIssue(
-								error.getType() + "." + error.getDescription() + " error located at: "
-										+ error.getEntity_name(),
-								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
-								error.getDescription()));
+				KBOptimizationError optError = (KBOptimizationError) error;
+				String message = "Optimization error: " + optError.getDescription();
+				String path = optError.getPath();
+				String path_type = "Optimization";
+				String data = optError.toString();
+				issues.add(new ValidationIssue(message, path, path_type, Severity.ERROR,
+						ValidationIssue.OPTIMIZATION_MISMATCH, data));
 			}
 		}
 
@@ -866,7 +867,10 @@ public class BackendProxy {
 			if (aiTrainingObject.has("data")) {
 				EAITraining aiTraining = aiTrainingCase.getAi_training();
 				result = new ValidationSourceFeature(aiTraining, OptimizationPackage.Literals.EAI_TRAINING__DATA);
-			}	
+			}else if (aiTrainingObject.has("ai_framework-tensorflow")) {
+				EAITraining aiTraining = aiTrainingCase.getAi_training();
+				result = new ValidationSourceFeature(aiTraining, OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE);
+			}
 		}
 		return result;
 	}
