@@ -44,6 +44,7 @@ node_types:
 					create:  
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_create.yml" 
+							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
 						inputs:  
 							ports: 
 								default: get_property:
@@ -61,6 +62,7 @@ node_types:
 					delete:  
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
+							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
 						inputs:  
 							group_name: 
 								default: get_property: 

@@ -39,7 +39,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 			iac_uri = "http://154.48.185.202:8080/";
 		String xOpera_uri = prop.getProperty(PreferenceConstants.xOPERA_URI);
 		if (xOpera_uri == null)
-			xOpera_uri = "http://154.48.185.206:5000/";
+			xOpera_uri = "http://154.48.185.209:5000/";
 
 		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(), MessageFormat.format(
 				"Default Sodalite backend services configuration read from properties: KB_Reasoner endpoint: {0}, IaC endpoint: {1}, xOpera endpoint: {2}",
