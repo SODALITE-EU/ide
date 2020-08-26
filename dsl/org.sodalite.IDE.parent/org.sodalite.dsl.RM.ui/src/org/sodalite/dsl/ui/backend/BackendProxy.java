@@ -325,7 +325,7 @@ public class BackendProxy {
 		if (resource.getAllContents().hasNext()) {
 			RM_Model model = (RM_Model) resource.getAllContents().next();
 			if (st.hasMoreTokens()) {
-				if ("node_templates".equals(st.nextToken())) {
+				if ("node_templates".equals(st.nextToken()) && model.getNodeTypes()!=null) {
 					if (st.hasMoreTokens()) { //Node_template
 						String node_name = st.nextToken();
 						for (ENodeType node : model.getNodeTypes().getNodeTypes()) {

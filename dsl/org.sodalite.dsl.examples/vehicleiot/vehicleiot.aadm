@@ -43,13 +43,13 @@ node_templates:
 			security_groups: get_input: security-groups
 			flavor: get_input: flavor-name
 
-	docker-host:
+	vehicle-docker-host:
 		type: sodalite.nodes.DockerHost
 		requirements:
 			host: 
 				node: vehicle-iot-vm
 				
-	docker-registry-certificate:
+	docker-registry-certificate-vehicle:
 		type: sodalite.nodes.RegistryCertificate
 		properties:  
 			registry_ip: get_input: docker-registry-ip 
@@ -60,9 +60,9 @@ node_templates:
 			host: 
 				node: vehicle-iot-vm 
 			dependency: 
-				node: docker-host
+				node: vehicle-docker-host
 	
-	docker-registry:
+	vehicle-docker-registry:
 		type: sodalite.nodes.DockerRegistry
 		properties:  
 			docker_registry_url: get_input: docker-registry-url 
@@ -72,9 +72,9 @@ node_templates:
 			host: 
 				node: vehicle-iot-vm
 			dependency: 
-				node: docker-host
+				node: vehicle-docker-host
 				
-	docker-network:
+	vehicle-docker-network:
 		type: sodalite.nodes.DockerNetwork
 		properties:  
 			name: get_input: docker-network
@@ -82,7 +82,7 @@ node_templates:
 			host: 
 				node: vehicle-iot-vm 
 			dependency: 
-				node: docker-host
+				node: vehicle-docker-host
 						
 	consul-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -101,11 +101,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"      
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network  
+				node: vehicle-docker-network  
 			registry: 
-				node: docker-registry
+				node: vehicle-docker-registry
 	
 	consul-container-test:
 		type: sodalite.nodes.TestComponent
@@ -133,11 +133,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
- 				node: docker-network 
+ 				node: vehicle-docker-network 
 			registry: 
-				node: docker-registry 
+				node: vehicle-docker-registry
 	
 	kafka-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -156,11 +156,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network     
+				node: vehicle-docker-network     
 			registry: 
-				node: docker-registry 
+				node: vehicle-docker-registry
 	
 	mysql-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -183,11 +183,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network  
+				node: vehicle-docker-network  
 			registry: 
-				node: docker-registry
+				node: vehicle-docker-registry
 	
 	vin-decoder-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -207,11 +207,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network 
+				node: vehicle-docker-network 
 			registry: 
-				node: docker-registry
+				node: vehicle-docker-registry
 	
 	reverse-geocoder-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -229,11 +229,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network 
+				node: vehicle-docker-network 
 			registry: 
-				node: docker-registry
+				node: vehicle-docker-registry
 	
 	licenseplate-recognition-service-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -251,11 +251,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network 
+				node: vehicle-docker-network 
 			registry: 
-				node: docker-registry			
+				node: vehicle-docker-registry			
 				
 	knowgo-score-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -273,11 +273,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network 
+				node: vehicle-docker-network 
 			registry: 
-				node: docker-registry			
+				node: vehicle-docker-registry			
 				
 	openpolicyagent-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -295,11 +295,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network 
+				node: vehicle-docker-network 
 			registry: 
-				node: docker-registry
+				node: vehicle-docker-registry
         
 	region-router-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -317,11 +317,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network 
+				node: vehicle-docker-network 
 			registry: 
-				node: docker-registry
+				node: vehicle-docker-registry
         
 	mqtt-broker-container:
 		type: sodalite.nodes.DockerizedComponent
@@ -338,11 +338,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network  
+				node: vehicle-docker-network  
 			registry: 
-				node: docker-registry 
+				node: vehicle-docker-registry 
         
 	mqtt-broker-container-test:
 		type: sodalite.nodes.TestComponent
@@ -371,11 +371,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network 
+				node: vehicle-docker-network 
 			registry: 
-				node: docker-registry			
+				node: vehicle-docker-registry			
 	
 	knowgo-service-registry-container-test:
 		type: sodalite.nodes.TestComponent
@@ -408,11 +408,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network
+				node: vehicle-docker-network
 			registry: 
-				node: docker-registry
+				node: vehicle-docker-registry
 	
 	knowgo-api-gateway-container-test:
 		type: sodalite.nodes.TestComponent
@@ -447,13 +447,13 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network 
+				node: vehicle-docker-network 
 			configuration: 
 				node: prometheus-configuration
 			registry: 
-				node: docker-registry
+				node: vehicle-docker-registry
 	
 	prometheus-container-test:
 		type: sodalite.nodes.TestComponent
@@ -482,11 +482,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: docker-host
+				node: vehicle-docker-host
 			network: 
-				node: docker-network 
+				node: vehicle-docker-network 
 			registry: 
-				node: docker-registry			
+				node: vehicle-docker-registry			
 				
 				
 	

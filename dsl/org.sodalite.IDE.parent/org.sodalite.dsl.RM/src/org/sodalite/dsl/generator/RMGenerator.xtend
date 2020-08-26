@@ -692,12 +692,19 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	««« Temporary patch for injecting type in entry_schema serialization FIX IT
 	«IF p.property.entry_schema !== null»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "type" ;
+	  exchange:value '«p.property.entry_schema.name»' ;
+	.
+	
 	«putParameterNumber(p, "entry_schema", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entry_schema" ;
-	  exchange:value '«p.property.entry_schema.name»' ; 
+	  exchange:hasParameter :Parameter_«parameter_counter-2»
 	.
 	«ENDIF»
 	
