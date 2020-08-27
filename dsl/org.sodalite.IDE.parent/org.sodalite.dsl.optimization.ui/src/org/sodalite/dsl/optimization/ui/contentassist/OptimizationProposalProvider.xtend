@@ -181,11 +181,6 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 			return findParserRule (obj.eContainer) 
 	}
 
-	override void completeEAITrainingETL_Prefetch(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createBooleanCompletionProposal(context, acceptor);
-	}
-	
-
 	override void completeEOptimization_Enable_opt_build(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createBooleanCompletionProposal(context, acceptor);
 	}
@@ -227,7 +222,7 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 	}
 	
 	override void completeEAutotuning_Tuner(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal ("cresta", "creata", context, "", acceptor);
+		createNonEditableCompletionProposal ("cresta", "cresta", context, "", acceptor);
 		createNonEditableCompletionProposal ("autotune", "autotune", context, "", acceptor);
 	}
 	

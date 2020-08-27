@@ -241,11 +241,6 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
   }
   
   @Override
-  public void completeEAITrainingETL_Prefetch(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createBooleanCompletionProposal(context, acceptor);
-  }
-  
-  @Override
   public void completeEOptimization_Enable_opt_build(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createBooleanCompletionProposal(context, acceptor);
   }
@@ -295,7 +290,7 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
   
   @Override
   public void completeEAutotuning_Tuner(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("cresta", "creata", context, "", acceptor);
+    this.createNonEditableCompletionProposal("cresta", "cresta", context, "", acceptor);
     this.createNonEditableCompletionProposal("autotune", "autotune", context, "", acceptor);
   }
   

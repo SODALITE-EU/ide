@@ -346,7 +346,7 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:SelectDescription" name="Node" labelExpression="Node" valueExpression="aql:self.node" candidatesExpression="service:getNodes()" candidateDisplayExpression="aql:candidate">
+        <controls xsi:type="properties:SelectDescription" name="Node" labelExpression="Node" valueExpression="aql:self.node" candidatesExpression="service:getRequirementNodes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="node" valueExpression="var:newValue"/>

@@ -3,9 +3,12 @@ package org.sodalite.dsl.AADM.design;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
@@ -19,6 +22,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.Property;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
+import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
+import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
@@ -136,6 +141,30 @@ public class KBReasonerProxy {
     	return result;
     }
     
+    
+    public SortedSet<String> getRequirementNodes(ERequirementAssignment req) throws Exception{
+    	SortedSet<String> result = new TreeSet<String>();
+    	SortedSet<String> types = new TreeSet<String>();
+    	String nodeType = ((ENodeTemplateBody)req.eContainer().eContainer()).getType();
+    	ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(req.getName(), nodeType);
+		if (vrnd != null){
+			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + req.getName());
+			for (ValidRequirementNode vrn: vrnd.getElements()){
+				types.add(vrn.getType().getLabel());
+				System.out.println ("Valid requirement node: " + vrn.getLabel());
+				result.add (vrn.getLabel());
+			}
+		}
+		
+		//Find local nodes that belongs to suggested types
+		List<ENodeTemplate> localnodes = findLocalNodesForTypes(types, req);
+		for (ENodeTemplate node: localnodes){
+			System.out.println ("Valid requirement local node: " + node.getName());
+			result.add(node.getName());
+		}
+		return result;
+    }
+    
     public List<String> getDataTypes(EParameterDefinition par){
     	//TODO implement it
     	throw new UnsupportedOperationException();
@@ -172,5 +201,23 @@ public class KBReasonerProxy {
 		
     	return result;
     }
+    
+    private AADM_Model findModel(EObject obj) {
+    	EObject container = obj.eContainer();
+    	while (container != null && !(container instanceof AADM_Model)) {
+    		container = container.eContainer();
+    	}
+    	return (AADM_Model) container;
+	}
+	
+	private List<ENodeTemplate> findLocalNodesForTypes(SortedSet<String> types, EObject reqAssign) {
+		List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
+		AADM_Model model = (AADM_Model) findModel(reqAssign);
+		for (ENodeTemplate node: model.getNodeTemplates().getNodeTemplates()){
+			if (types.contains(node.getNode().getType()))
+				nodes.add(node);
+		}
+		return nodes;
+	}
     
 }

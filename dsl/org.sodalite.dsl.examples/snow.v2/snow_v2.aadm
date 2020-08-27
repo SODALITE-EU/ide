@@ -124,7 +124,9 @@ node_templates:
 			dependency: 
 				node: snow-docker-host 
 			dependency: 
-				node: snow-docker-host-2
+				node: snow-docker-registry-certificate
+			dependency:
+				node: snow-docker-registry-certificate-2
 				
 	snow-docker-network:
 		type: sodalite.nodes.DockerNetwork
@@ -143,6 +145,8 @@ node_templates:
 		requirements:
 			host: 
 				node: snow-vm
+			dependency:
+				node: snow-docker-host
 	
 	snow-docker-volume-masks:
 		type: sodalite.nodes.DockerVolume
@@ -151,6 +155,8 @@ node_templates:
 		requirements:
 			host: 
 				node: snow-vm
+			dependency:
+				node: snow-docker-host
 	
 	snow-docker-volume-daily-shots:
 		type: sodalite.nodes.DockerVolume
@@ -159,6 +165,8 @@ node_templates:
 		requirements:
 			host: 
 				node: snow-vm
+			dependency:
+				node: snow-docker-host
 				
 	snow-configuration-demo:
 		type: sodalite.nodes.ConfigurationDemo  
@@ -233,7 +241,7 @@ node_templates:
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json", 
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
 			//"/tmp/masks: /SnowWatch-SODALITE/data/masks", 
-			"snow_volume_daily_shots: /SnowWatch-SODALITE/data/daily_shots"]
+			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
 			image_name:  "snow-weather-condition-filter:latest" 
 			alias: "snow-weather-condition-filter"
 			restart_policy: "always"
@@ -330,6 +338,8 @@ node_templates:
 		requirements:
 			host: 
 				node: snow-vm
+			dependency:
+				node: snow-docker-host
 	
 	snow-webcam-mockup:  
 		type: sodalite.nodes.DockerizedComponent 
@@ -360,8 +370,8 @@ node_templates:
 				req_cap: tosca.nodes.Container.Application.network 
 			volumes: [
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json",  
-			"snow_volume_daily_shots: /SnowWatch-SODALITE/data/daily_shots", 
-			"snow_volume_demo_output: /SnowWatch-SODALITE/data/output"]
+			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots", 
+			"snow_volume_demo_output:/SnowWatch-SODALITE/data/output"]
 			image_name:  "snow-demo:latest"
 			alias: "snow-demo"
 			restart_policy: "always"
