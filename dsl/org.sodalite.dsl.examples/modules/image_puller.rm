@@ -4,6 +4,9 @@ node_types:
 		properties:
 			output:
 				type: string
+				required: false
+				default: ""
+				description: "Output name of SIF file. Must be specified when registry is private"
 			image:
 				type: string
 			registry:
@@ -49,6 +52,10 @@ node_types:
 									entity: SELF
 									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
 									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+							output:
+								default: get_property:
+									entity: SELF
+									property: sodalite.image_puller.singularity.output
 							registry: 
 								default: get_property: 
 									entity: SELF

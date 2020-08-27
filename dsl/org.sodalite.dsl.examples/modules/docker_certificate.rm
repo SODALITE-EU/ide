@@ -52,7 +52,7 @@ node_types:
 								relative_path: "playbooks"
 							dependencies: ["/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/certificates/docker/ca.crt", "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/certificates/docker/ca.key"]
 								relative_path: "artifacts"
-						
+					
 					delete:
 						inputs:
 							registry_ip:              
