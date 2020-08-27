@@ -123,7 +123,7 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: sodalite.nodes.OpenStack.VM.public_address
-									req_cap: tosca.nodes.SoftwareComponent.host
+									req_cap: sodalite.nodes.DockerHost.host
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_container.yml"
 					delete:  

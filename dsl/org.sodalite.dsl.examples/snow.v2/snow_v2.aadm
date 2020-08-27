@@ -27,7 +27,9 @@ inputs:
 		default: ""
 	mysql-db-pass: 
 		type: string
-		default: "" 
+		default: ""
+	mysql-env:
+		type: map
 		
 node_templates:
 
@@ -180,9 +182,7 @@ node_templates:
 			ports:  ['3306:3306'] 
 			exposed_ports:  ['3306']
 			alias: "mysql"
-			env:
-				MYSQL_ROOT_PASSWORD: "somepassword"
-				MYSQL_DATABASE: "wc_crawler_db"
+			env: get_input: mysql-env
 			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  

@@ -3,6 +3,7 @@ package org.sodalite.dsl.AADM.design;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -102,9 +103,9 @@ public class Services {
     	list.getList().set(index - 1, newValue);
     }
     
-    public List<ENodeTemplate> getNodes (ERequirementAssignment req){
+    public List<String> getNodes (ERequirementAssignment req){
     	ENodeTemplates container = (ENodeTemplates) req.eContainer().eContainer().eContainer().eContainer();
-    	return container.getNodeTemplates();
+    	return container.getNodeTemplates().stream().map(ENodeTemplate::getName).collect(Collectors.toList());
     }
     
     public List<String> getInputs(EPropertyAssignment prop){
@@ -130,6 +131,21 @@ public class Services {
     		container = container.eContainer();
     	}
     	return (AADM_Model) container;
+	}
+    
+    public ENodeTemplate findNode(ERequirementAssignment req) {
+    	System.out.println("Invoked findNode with req: " + req);
+    	return findNode (req, req.getNode());
+    }
+
+	private ENodeTemplate findNode(ERequirementAssignment req, String nodeName) {
+		AADM_Model model = findModel(req);
+		for (ENodeTemplate node: model.getNodeTemplates().getNodeTemplates()) {
+			if (node.getName().equals(nodeName)) {
+				return node;
+			}
+		}
+		return null;
 	}
     
 }

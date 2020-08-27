@@ -45,7 +45,7 @@ class KBReasonerTest {
 	
 	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
 	private final String IaC_URI = "http://154.48.185.202:8080/";
-	private final String xOPERA_URI = "http://154.48.185.206:5000/";
+	private final String xOPERA_URI = "http://154.48.185.209:5001/";
 	
 	private String aadmURI = null;
 	

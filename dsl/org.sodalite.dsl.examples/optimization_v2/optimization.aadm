@@ -89,18 +89,15 @@ node_templates:
 
 	optimization-skyline-extractor:  
 		type: sodalite.nodes.DockerizedComponent 
-		properties:  
-			alias: "optimization-skyline-extractor"
+		optimization: ai_training.tensor_flow
+		properties:  alias: "optimization-skyline-extractor"
 			volumes:  "/tmp/docker:/tmp" 
 			image_name:  "optimization-skyline-extractor:latest"
 			ports:  ['8080:8080'] 
 			exposed_ports:  ['8080']
 			registry_url: get_input: docker-registry-url
-		optimization: ai_training.tensor_flow
-		requirements:  
-			registry: 
+		requirements:  registry: 
 				node: optimization-docker-registry1
 			host:
 				node: optimization-vm
-				 
-				 
+			

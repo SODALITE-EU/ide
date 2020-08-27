@@ -54,6 +54,7 @@ class RMGenerator extends AbstractGenerator {
 	var int capability_counter = 1
 	var int parameter_counter = 1
 	var int interface_counter = 1
+	var int file_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
 	var Map<EAttributeDefinition, Integer> attribute_numbers
 	var Map<ERequirementDefinition, Integer> requirement_numbers
@@ -394,9 +395,8 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	.
 	
-	«IF o.operation.implementation.dependencies !== null»
+	«IF (resetFileCounter() && o.operation.implementation.dependencies !== null)»
 	«FOR d:o.operation.implementation.dependencies.files.files»
-	
 	«putParameterNumber(d, "file.path", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
@@ -414,7 +414,7 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(d, "file", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "file" ;
+	  exchange:name "file«file_counter++»" ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file.path")» ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file.content")» ;
 	.
@@ -813,5 +813,10 @@ class RMGenerator extends AbstractGenerator {
 	
 	def processDescription (String description){
 		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
+	}
+	
+	def resetFileCounter() {
+		file_counter = 1
+		return true
 	}
 }
