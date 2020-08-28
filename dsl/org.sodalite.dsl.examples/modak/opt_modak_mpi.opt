@@ -1,0 +1,19 @@
+optimization modak.mpi:
+	enable_opt_build: true
+	enable_autotuning: true
+	app_type: hpc
+	opt_build: 
+		cpu_type: x86
+		acc_type: amd
+	autotuning: 
+		tuner: cresta
+		input: "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/optimization_v1/autotunig.at"
+	app_type-hpc: 
+		config:
+			parallelisation: mpi
+		data:
+			location: "L1L2_NonLinear_prepared.tar.gz"
+		parallelisation-mpi: 
+			library: mvapch
+			version: "3.14"
+			scaling_efficiency: 0.75
