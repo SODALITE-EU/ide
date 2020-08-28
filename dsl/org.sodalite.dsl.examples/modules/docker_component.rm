@@ -57,6 +57,7 @@ node_types:
 				description: "Alias name for docker container" 
 				type: string 
 				required: false  
+				default: ""
 		requirements:  
 			network:
 				capability: tosca.capabilities.Network

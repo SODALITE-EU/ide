@@ -38,6 +38,7 @@ import org.eclipse.core.runtime.Path
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.IFile
 import org.sodalite.dsl.aADM.EAttributeAssignment
+import org.sodalite.dsl.rM.GetProperty
 
 /**
  * Generates code from your model files on save.
@@ -98,6 +99,10 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
 	.
 	
+	«FOR p:r.allContents.toIterable.filter(GetProperty)»
+		«p.compile»
+	«ENDFOR»
+	
 	«FOR p:r.allContents.toIterable.filter(EParameterDefinition)»
 		«p.compileInput»
 	«ENDFOR»
@@ -134,6 +139,50 @@ class AADMGenerator extends AbstractGenerator {
 	«f.compile»
 	«ENDFOR»
 
+	'''
+	
+	def compile(GetProperty p) '''
+	«IF p.property.property !== null»
+	«putParameterNumber(p, "property", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "property" ;  
+	  exchange:value '«p.property.property.name»' ; 
+	.
+	«ENDIF»	
+	
+	«IF p.property.entity !== null»
+	«putParameterNumber(p, "entity", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "entity" ;  
+	  exchange:value '«p.property.entity»' ; 
+	.
+	«ENDIF»	
+	
+	«IF p.property.req_cap !== null»
+	«putParameterNumber(p, "req_cap", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "req_cap" ;  
+	  exchange:value '«p.property.req_cap.name»' ; 
+	.
+	«ENDIF»		
+	
+	«putParameterNumber(p, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "get_property" ;
+	  «IF p.property.property !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "property")» ;
+	  «ENDIF»	
+	  «IF p.property.entity !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "entity")» ;
+	  «ENDIF»
+	  «IF p.property.req_cap !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "req_cap")» ;
+	  «ENDIF»
+	.	
 	'''
 	
 	def compileInput (EParameterDefinition p) '''
@@ -222,6 +271,9 @@ class AADMGenerator extends AbstractGenerator {
 	  «ELSEIF p.value instanceof EFunction»
 	  	«IF p.value instanceof GetInput»
 	  	exchange:value "{ get_input: «(p.value as GetInput).input.name» }" ;
+	  	«ENDIF»
+	  	«IF p.value instanceof GetProperty»
+	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
 	  	«ENDIF»
 	  «ELSE»
 	  	exchange:value "«(p.value as ESTRING).string»" ;

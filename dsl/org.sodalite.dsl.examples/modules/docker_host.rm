@@ -1,6 +1,10 @@
 node_types:
 	sodalite.nodes.DockerHost:  
-		derived_from: tosca.nodes.SoftwareComponent 
+		derived_from: tosca.nodes.SoftwareComponent
+		attributes:
+			public_address:
+				description: "Host's IP"
+				type: string
 		capabilities:  
 			host:  
 				type: tosca.capabilities.Node
@@ -10,6 +14,12 @@ node_types:
 				type: tosca.interfaces.node.lifecycle.Standard 
 				operations:
 					create:  
+						inputs:
+							host_public_address:
+								default: get_attribute:
+									entity: SELF
+									attribute: sodalite.nodes.DockerHost.public_address
+									req_cap: sodalite.nodes.DockerHost.host
 						implementation:  
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/create_docker_host.yml"
 					delete:  

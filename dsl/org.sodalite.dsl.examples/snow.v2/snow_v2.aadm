@@ -307,7 +307,7 @@ node_templates:
 		type: sodalite.nodes.DockerizedComponent 
 		properties:  
 			alias: "snow-skyline-extractor"
-			volumes:  "/tmp/docker:/tmp" 
+			volumes:  ["/tmp/docker:/tmp"] 
 			image_name:  "snow-skyline-extractor:latest"
 			ports:  ['8080:8080'] 
 			exposed_ports:  ['8080']
@@ -322,7 +322,7 @@ node_templates:
 		type: sodalite.nodes.DockerizedComponent 
 		properties:  
 			alias: "snow-skyline-alignment"
-			volumes:  "/tmp/docker:/tmp" 
+			volumes:  ["/tmp/docker:/tmp"] 
 			image_name:  "snow-skyline-alignment:latest"
 			exposed_ports:  ['8080'] 
 			ports:  ["8081:8080","80:8080"]
@@ -363,7 +363,7 @@ node_templates:
 			registry: 
 				node: snow-docker-registry
 				
-	snow-demo: 
+	snow-demo:
 		type: sodalite.nodes.DockerizedComponent 
 		properties:  
 			docker_network_name: get_property:
@@ -398,8 +398,7 @@ node_templates:
 	snow-demo-nginx:   
 		type: sodalite.nodes.DockerizedComponent 
 		properties:  
-			volumes:  
-				snow_volume_demo_output: "/usr/share/nginx/html"
+			volumes:  ["snow_volume_demo_output:/usr/share/nginx/html"]
 			image_name: "nginx:latest"
 			alias: "snow-nginx"
 			restart_policy: "always"
