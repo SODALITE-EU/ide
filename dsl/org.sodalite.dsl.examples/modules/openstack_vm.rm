@@ -20,6 +20,29 @@ node_types:
 			key_name:  
 				description: "OpenStack SSH key name that should be placed on the VM"
 				type: string 
+			username:  
+				description: 'Username for SSH connection' 
+				type: string   
+			include_exporter:
+				description: 'Flag to include exporter'
+				type: boolean
+				default: 'true'
+				required: false   
+			timeout:
+				description: 'Timeout to instantiate the VM'
+				type: integer
+				default: '600'
+				required: false 
+			floating_ip_pools:
+				description: 'Name of floating IP pool from which to choose a floating IP'
+				type: string
+				default: "provider"
+				required: false 
+			userdata:
+				description: 'Additional userdata applied to configure the VM'
+				type: string
+				default: ""
+				required: false 
 		attributes:  
 			id:  
 				description: "OpenStack id of the VM"
@@ -40,7 +63,7 @@ node_types:
 				type: tosca.interfaces.node.lifecycle.Standard 
 				operations:
 					create:  
-						inputs:  
+						inputs: 
 							network: 
 								default: get_property: 
 									entity: SELF
@@ -65,8 +88,29 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.OpenStack.VM.name
+							ansible_user:             
+								default: get_property:
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.username
+							include_exporter:         
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.include_exporter
+							timeout:                  
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.timeout
+							floating_ip_pools:        
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.floating_ip_pools
+							userdata:                 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.OpenStack.VM.userdata
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
+							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
 					delete:  
 						inputs:  
 							id:                       
@@ -75,4 +119,5 @@ node_types:
 									attribute: sodalite.nodes.OpenStack.VM.id
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
+							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
             
