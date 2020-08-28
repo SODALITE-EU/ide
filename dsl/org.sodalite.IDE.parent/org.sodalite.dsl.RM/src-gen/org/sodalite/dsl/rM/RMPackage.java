@@ -1312,13 +1312,31 @@ public interface RMPackage extends EPackage
   int EATTRIBUTE_DEFINITION_BODY__DESCRIPTION = 1;
 
   /**
+   * The feature id for the '<em><b>Default</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EATTRIBUTE_DEFINITION_BODY__DEFAULT = 2;
+
+  /**
+   * The feature id for the '<em><b>Status</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EATTRIBUTE_DEFINITION_BODY__STATUS = 3;
+
+  /**
    * The feature id for the '<em><b>Entry schema</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EATTRIBUTE_DEFINITION_BODY__ENTRY_SCHEMA = 2;
+  int EATTRIBUTE_DEFINITION_BODY__ENTRY_SCHEMA = 4;
 
   /**
    * The number of structural features of the '<em>EAttribute Definition Body</em>' class.
@@ -1327,7 +1345,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EATTRIBUTE_DEFINITION_BODY_FEATURE_COUNT = 3;
+  int EATTRIBUTE_DEFINITION_BODY_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EInterfacesImpl <em>EInterfaces</em>}' class.
@@ -4009,6 +4027,28 @@ public interface RMPackage extends EPackage
   EAttribute getEAttributeDefinitionBody_Description();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getDefault <em>Default</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Default</em>'.
+   * @see org.sodalite.dsl.rM.EAttributeDefinitionBody#getDefault()
+   * @see #getEAttributeDefinitionBody()
+   * @generated
+   */
+  EReference getEAttributeDefinitionBody_Default();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getStatus <em>Status</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Status</em>'.
+   * @see org.sodalite.dsl.rM.EAttributeDefinitionBody#getStatus()
+   * @see #getEAttributeDefinitionBody()
+   * @generated
+   */
+  EAttribute getEAttributeDefinitionBody_Status();
+
+  /**
    * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getEntry_schema <em>Entry schema</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6198,6 +6238,22 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EAttribute EATTRIBUTE_DEFINITION_BODY__DESCRIPTION = eINSTANCE.getEAttributeDefinitionBody_Description();
+
+    /**
+     * The meta object literal for the '<em><b>Default</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EATTRIBUTE_DEFINITION_BODY__DEFAULT = eINSTANCE.getEAttributeDefinitionBody_Default();
+
+    /**
+     * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EATTRIBUTE_DEFINITION_BODY__STATUS = eINSTANCE.getEAttributeDefinitionBody_Status();
 
     /**
      * The meta object literal for the '<em><b>Entry schema</b></em>' reference feature.

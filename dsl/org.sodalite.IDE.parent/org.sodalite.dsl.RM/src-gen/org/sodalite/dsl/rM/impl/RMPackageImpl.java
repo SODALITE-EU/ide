@@ -1872,9 +1872,31 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEAttributeDefinitionBody_Entry_schema()
+  public EReference getEAttributeDefinitionBody_Default()
   {
     return (EReference)eAttributeDefinitionBodyEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEAttributeDefinitionBody_Status()
+  {
+    return (EAttribute)eAttributeDefinitionBodyEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEAttributeDefinitionBody_Entry_schema()
+  {
+    return (EReference)eAttributeDefinitionBodyEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -3331,6 +3353,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eAttributeDefinitionBodyEClass = createEClass(EATTRIBUTE_DEFINITION_BODY);
     createEReference(eAttributeDefinitionBodyEClass, EATTRIBUTE_DEFINITION_BODY__TYPE);
     createEAttribute(eAttributeDefinitionBodyEClass, EATTRIBUTE_DEFINITION_BODY__DESCRIPTION);
+    createEReference(eAttributeDefinitionBodyEClass, EATTRIBUTE_DEFINITION_BODY__DEFAULT);
+    createEAttribute(eAttributeDefinitionBodyEClass, EATTRIBUTE_DEFINITION_BODY__STATUS);
     createEReference(eAttributeDefinitionBodyEClass, EATTRIBUTE_DEFINITION_BODY__ENTRY_SCHEMA);
 
     eInterfacesEClass = createEClass(EINTERFACES);
@@ -3685,6 +3709,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEClass(eAttributeDefinitionBodyEClass, EAttributeDefinitionBody.class, "EAttributeDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEAttributeDefinitionBody_Type(), this.getEDataType(), null, "type", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEAttributeDefinitionBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEAttributeDefinitionBody_Default(), this.getEValueExpression(), null, "default", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEAttributeDefinitionBody_Status(), ecorePackage.getEString(), "status", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEAttributeDefinitionBody_Entry_schema(), this.getEDataType(), null, "entry_schema", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eInterfacesEClass, EInterfaces.class, "EInterfaces", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

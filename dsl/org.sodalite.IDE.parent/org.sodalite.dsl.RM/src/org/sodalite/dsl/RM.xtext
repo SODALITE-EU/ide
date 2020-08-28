@@ -235,6 +235,8 @@ EAttributeDefinition:
 EAttributeDefinitionBody:
 	('type:' type=[EDataType|EDataTypeName]) &
 	('description:' description=STRING)? &
+	('default:' default=EValueExpression)? &
+	('status:' status=STRING)? &
 	('entry_schema:' entry_schema=[EDataType|EDataTypeName])?;
 
 EInterfaces:

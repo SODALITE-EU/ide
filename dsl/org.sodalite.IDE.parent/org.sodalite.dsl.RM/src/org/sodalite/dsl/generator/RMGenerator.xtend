@@ -38,7 +38,6 @@ import org.sodalite.dsl.rM.ELessThan
 import org.sodalite.dsl.rM.ELessOrEqual
 import org.sodalite.dsl.rM.ELength
 import org.sodalite.dsl.rM.EMaxLength
-import org.sodalite.dsl.rM.EInRange
 
 /**
  * Generates code from your model files on save.
@@ -54,7 +53,6 @@ class RMGenerator extends AbstractGenerator {
 	var int capability_counter = 1
 	var int parameter_counter = 1
 	var int interface_counter = 1
-	var int file_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
 	var Map<EAttributeDefinition, Integer> attribute_numbers
 	var Map<ERequirementDefinition, Integer> requirement_numbers
@@ -395,7 +393,7 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	.
 	
-	«IF (resetFileCounter() && o.operation.implementation.dependencies !== null)»
+	«IF (o.operation.implementation.dependencies !== null)»
 	«FOR d:o.operation.implementation.dependencies.files.files»
 	«putParameterNumber(d, "file.path", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -414,7 +412,7 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(d, "file", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "file«file_counter++»" ;
+	  exchange:name "file" ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file.path")» ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(d, "file.content")» ;
 	.
@@ -756,6 +754,30 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	«IF a.attribute.^default !== null»
+	«putParameterNumber(a, "default", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "default" ;
+	  «IF a.attribute.^default !== null»
+	  «IF a.attribute.^default instanceof EFunction»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "default")» ;
+	  «ELSE»
+	  exchange:value '«a.attribute.^default.compile»' ;	  
+	  «ENDIF»	  
+	  «ENDIF» 
+	.
+	«ENDIF»
+		
+	«IF a.attribute.status !== null»
+	«putParameterNumber(a, "status", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "status" ;
+	  exchange:value '«a.attribute.status»' ; 
+	.
+	«ENDIF»
+	
 	«IF a.attribute.entry_schema !== null»
 	«putParameterNumber(a, "entry_schema", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -775,6 +797,12 @@ class RMGenerator extends AbstractGenerator {
 	  «IF a.attribute.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "type")» ;
 	  «ENDIF»
+	  «IF a.attribute.^default !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "default")» ;
+  	  «ENDIF»
+  	  «IF a.attribute.status !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "status")» ;
+  	  «ENDIF»
 	  «IF a.attribute.entry_schema !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "entry_schema")» ;
 	  «ENDIF»
@@ -813,10 +841,5 @@ class RMGenerator extends AbstractGenerator {
 	
 	def processDescription (String description){
 		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
-	}
-	
-	def resetFileCounter() {
-		file_counter = 1
-		return true
 	}
 }

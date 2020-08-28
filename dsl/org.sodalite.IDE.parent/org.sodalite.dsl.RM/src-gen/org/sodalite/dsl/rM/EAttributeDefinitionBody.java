@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getType <em>Type</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getDefault <em>Default</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getStatus <em>Status</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getEntry_schema <em>Entry schema</em>}</li>
  * </ul>
  *
@@ -68,6 +70,50 @@ public interface EAttributeDefinitionBody extends EObject
    * @generated
    */
   void setDescription(String value);
+
+  /**
+   * Returns the value of the '<em><b>Default</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Default</em>' containment reference.
+   * @see #setDefault(EValueExpression)
+   * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinitionBody_Default()
+   * @model containment="true"
+   * @generated
+   */
+  EValueExpression getDefault();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getDefault <em>Default</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Default</em>' containment reference.
+   * @see #getDefault()
+   * @generated
+   */
+  void setDefault(EValueExpression value);
+
+  /**
+   * Returns the value of the '<em><b>Status</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Status</em>' attribute.
+   * @see #setStatus(String)
+   * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinitionBody_Status()
+   * @model
+   * @generated
+   */
+  String getStatus();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getStatus <em>Status</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Status</em>' attribute.
+   * @see #getStatus()
+   * @generated
+   */
+  void setStatus(String value);
 
   /**
    * Returns the value of the '<em><b>Entry schema</b></em>' reference.

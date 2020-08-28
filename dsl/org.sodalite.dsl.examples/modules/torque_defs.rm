@@ -101,9 +101,10 @@ node_types:
 		attributes:
 			job_id: 
 				type: string
-			//FIXME default: "" (in both attributes)
+				default: ""
 			audit:
-				type: string 
+				type: string
+				default: ""
 		interfaces:
 			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard

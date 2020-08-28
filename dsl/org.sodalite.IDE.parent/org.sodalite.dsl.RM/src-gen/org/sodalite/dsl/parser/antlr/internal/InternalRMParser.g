@@ -3291,9 +3291,76 @@ ruleEAttributeDefinitionBody returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 2);
 				}
-							({true}?=>(otherlv_5=Entry_schema
+							({true}?=>(otherlv_5=Default
 							{
-								newLeafNode(otherlv_5, grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaKeyword_2_0());
+								newLeafNode(otherlv_5, grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultKeyword_2_0());
+							}
+							(
+								(
+									{
+										newCompositeNode(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_2_1_0());
+									}
+									lv_default_6_0=ruleEValueExpression
+									{
+										if ($current==null) {
+											$current = createModelElementForParent(grammarAccess.getEAttributeDefinitionBodyRule());
+										}
+										set(
+											$current,
+											"default",
+											lv_default_6_0,
+											"org.sodalite.dsl.RM.EValueExpression");
+										afterParserOrEnumRuleCall();
+									}
+								)
+							)
+							))
+				{ 
+					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup());
+				}
+			)
+		)|
+		(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 3)}?=>(
+				{
+					getUnorderedGroupHelper().select(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 3);
+				}
+							({true}?=>(otherlv_7=Status
+							{
+								newLeafNode(otherlv_7, grammarAccess.getEAttributeDefinitionBodyAccess().getStatusKeyword_3_0());
+							}
+							(
+								(
+									lv_status_8_0=RULE_STRING
+									{
+										newLeafNode(lv_status_8_0, grammarAccess.getEAttributeDefinitionBodyAccess().getStatusSTRINGTerminalRuleCall_3_1_0());
+									}
+									{
+										if ($current==null) {
+											$current = createModelElement(grammarAccess.getEAttributeDefinitionBodyRule());
+										}
+										setWithLastConsumed(
+											$current,
+											"status",
+											lv_status_8_0,
+											"org.eclipse.xtext.common.Terminals.STRING");
+									}
+								)
+							)
+							))
+				{ 
+					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup());
+				}
+			)
+		)|
+		(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 4)}?=>(
+				{
+					getUnorderedGroupHelper().select(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 4);
+				}
+							({true}?=>(otherlv_9=Entry_schema
+							{
+								newLeafNode(otherlv_9, grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaKeyword_4_0());
 							}
 							(
 								(
@@ -3303,7 +3370,7 @@ ruleEAttributeDefinitionBody returns [EObject current=null]
 										}
 									}
 									{
-										newCompositeNode(grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaEDataTypeCrossReference_2_1_0());
+										newCompositeNode(grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaEDataTypeCrossReference_4_1_0());
 									}
 									ruleEDataTypeName
 									{

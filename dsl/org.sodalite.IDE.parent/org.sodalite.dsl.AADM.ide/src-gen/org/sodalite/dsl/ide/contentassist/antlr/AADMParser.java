@@ -135,6 +135,8 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getGroup_0(), "rule__EAttributeDefinitionBody__Group_0__0");
 			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getGroup_1(), "rule__EAttributeDefinitionBody__Group_1__0");
 			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getGroup_2(), "rule__EAttributeDefinitionBody__Group_2__0");
+			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getGroup_3(), "rule__EAttributeDefinitionBody__Group_3__0");
+			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getGroup_4(), "rule__EAttributeDefinitionBody__Group_4__0");
 			builder.put(grammarAccess.getEInterfacesAccess().getGroup(), "rule__EInterfaces__Group__0");
 			builder.put(grammarAccess.getEInterfaceDefinitionAccess().getGroup(), "rule__EInterfaceDefinition__Group__0");
 			builder.put(grammarAccess.getEInterfaceDefinitionBodyAccess().getGroup_0(), "rule__EInterfaceDefinitionBody__Group_0__0");
@@ -301,7 +303,9 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEAttributeDefinitionAccess().getAttributeAssignment_3(), "rule__EAttributeDefinition__AttributeAssignment_3");
 			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getTypeAssignment_0_1(), "rule__EAttributeDefinitionBody__TypeAssignment_0_1");
 			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getDescriptionAssignment_1_1(), "rule__EAttributeDefinitionBody__DescriptionAssignment_1_1");
-			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaAssignment_2_1(), "rule__EAttributeDefinitionBody__Entry_schemaAssignment_2_1");
+			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultAssignment_2_1(), "rule__EAttributeDefinitionBody__DefaultAssignment_2_1");
+			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getStatusAssignment_3_1(), "rule__EAttributeDefinitionBody__StatusAssignment_3_1");
+			builder.put(grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaAssignment_4_1(), "rule__EAttributeDefinitionBody__Entry_schemaAssignment_4_1");
 			builder.put(grammarAccess.getEInterfacesAccess().getInterfacesAssignment_1(), "rule__EInterfaces__InterfacesAssignment_1");
 			builder.put(grammarAccess.getEInterfaceDefinitionAccess().getNameAssignment_0(), "rule__EInterfaceDefinition__NameAssignment_0");
 			builder.put(grammarAccess.getEInterfaceDefinitionAccess().getInterfaceAssignment_3(), "rule__EInterfaceDefinition__InterfaceAssignment_3");

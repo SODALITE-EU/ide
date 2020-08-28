@@ -1889,18 +1889,26 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDescriptionAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cDescriptionAssignment_1_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
-		private final Keyword cEntry_schemaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cEntry_schemaAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cEntry_schemaEDataTypeCrossReference_2_1_0 = (CrossReference)cEntry_schemaAssignment_2_1.eContents().get(0);
-		private final RuleCall cEntry_schemaEDataTypeEDataTypeNameParserRuleCall_2_1_0_1 = (RuleCall)cEntry_schemaEDataTypeCrossReference_2_1_0.eContents().get(1);
+		private final Keyword cDefaultKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cDefaultAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cDefaultEValueExpressionParserRuleCall_2_1_0 = (RuleCall)cDefaultAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
+		private final Keyword cStatusKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cStatusAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cStatusSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cStatusAssignment_3_1.eContents().get(0);
+		private final Group cGroup_4 = (Group)cUnorderedGroup.eContents().get(4);
+		private final Keyword cEntry_schemaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cEntry_schemaAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final CrossReference cEntry_schemaEDataTypeCrossReference_4_1_0 = (CrossReference)cEntry_schemaAssignment_4_1.eContents().get(0);
+		private final RuleCall cEntry_schemaEDataTypeEDataTypeNameParserRuleCall_4_1_0_1 = (RuleCall)cEntry_schemaEDataTypeCrossReference_4_1_0.eContents().get(1);
 		
 		//EAttributeDefinitionBody:
-		//	'type:' type=[EDataType|EDataTypeName] & ('description:' description=STRING)? & ('entry_schema:'
-		//	entry_schema=[EDataType|EDataTypeName])?;
+		//	'type:' type=[EDataType|EDataTypeName] & ('description:' description=STRING)? & ('default:' default=EValueExpression)?
+		//	& ('status:' status=STRING)? & ('entry_schema:' entry_schema=[EDataType|EDataTypeName])?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type:' type=[EDataType|EDataTypeName] & ('description:' description=STRING)? & ('entry_schema:'
-		//entry_schema=[EDataType|EDataTypeName])?
+		//'type:' type=[EDataType|EDataTypeName] & ('description:' description=STRING)? & ('default:' default=EValueExpression)? &
+		//('status:' status=STRING)? & ('entry_schema:' entry_schema=[EDataType|EDataTypeName])?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'type:' type=[EDataType|EDataTypeName]
@@ -1930,20 +1938,44 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getDescriptionSTRINGTerminalRuleCall_1_1_0() { return cDescriptionSTRINGTerminalRuleCall_1_1_0; }
 		
-		//('entry_schema:' entry_schema=[EDataType|EDataTypeName])?
+		//('default:' default=EValueExpression)?
 		public Group getGroup_2() { return cGroup_2; }
 		
+		//'default:'
+		public Keyword getDefaultKeyword_2_0() { return cDefaultKeyword_2_0; }
+		
+		//default=EValueExpression
+		public Assignment getDefaultAssignment_2_1() { return cDefaultAssignment_2_1; }
+		
+		//EValueExpression
+		public RuleCall getDefaultEValueExpressionParserRuleCall_2_1_0() { return cDefaultEValueExpressionParserRuleCall_2_1_0; }
+		
+		//('status:' status=STRING)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'status:'
+		public Keyword getStatusKeyword_3_0() { return cStatusKeyword_3_0; }
+		
+		//status=STRING
+		public Assignment getStatusAssignment_3_1() { return cStatusAssignment_3_1; }
+		
+		//STRING
+		public RuleCall getStatusSTRINGTerminalRuleCall_3_1_0() { return cStatusSTRINGTerminalRuleCall_3_1_0; }
+		
+		//('entry_schema:' entry_schema=[EDataType|EDataTypeName])?
+		public Group getGroup_4() { return cGroup_4; }
+		
 		//'entry_schema:'
-		public Keyword getEntry_schemaKeyword_2_0() { return cEntry_schemaKeyword_2_0; }
+		public Keyword getEntry_schemaKeyword_4_0() { return cEntry_schemaKeyword_4_0; }
 		
 		//entry_schema=[EDataType|EDataTypeName]
-		public Assignment getEntry_schemaAssignment_2_1() { return cEntry_schemaAssignment_2_1; }
+		public Assignment getEntry_schemaAssignment_4_1() { return cEntry_schemaAssignment_4_1; }
 		
 		//[EDataType|EDataTypeName]
-		public CrossReference getEntry_schemaEDataTypeCrossReference_2_1_0() { return cEntry_schemaEDataTypeCrossReference_2_1_0; }
+		public CrossReference getEntry_schemaEDataTypeCrossReference_4_1_0() { return cEntry_schemaEDataTypeCrossReference_4_1_0; }
 		
 		//EDataTypeName
-		public RuleCall getEntry_schemaEDataTypeEDataTypeNameParserRuleCall_2_1_0_1() { return cEntry_schemaEDataTypeEDataTypeNameParserRuleCall_2_1_0_1; }
+		public RuleCall getEntry_schemaEDataTypeEDataTypeNameParserRuleCall_4_1_0_1() { return cEntry_schemaEDataTypeEDataTypeNameParserRuleCall_4_1_0_1; }
 	}
 	public class EInterfacesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EInterfaces");
@@ -4395,8 +4427,8 @@ public class RMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EAttributeDefinitionBody:
-	//	'type:' type=[EDataType|EDataTypeName] & ('description:' description=STRING)? & ('entry_schema:'
-	//	entry_schema=[EDataType|EDataTypeName])?;
+	//	'type:' type=[EDataType|EDataTypeName] & ('description:' description=STRING)? & ('default:' default=EValueExpression)?
+	//	& ('status:' status=STRING)? & ('entry_schema:' entry_schema=[EDataType|EDataTypeName])?;
 	public EAttributeDefinitionBodyElements getEAttributeDefinitionBodyAccess() {
 		return pEAttributeDefinitionBody;
 	}
