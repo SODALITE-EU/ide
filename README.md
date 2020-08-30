@@ -31,4 +31,4 @@ In the former dialog, in the *Work with* combo box, select the *SODALITE IDE* en
 
 Main contact: Jesús Gorroñogoitia <jesus.gorronogoitia@atos.net>
 
-![Project funded by the European Union](images/european.union.logo.png)
+![Project funded by the European Union](images/european.union.logo.png) 
