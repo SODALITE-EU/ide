@@ -9,7 +9,7 @@ This repository contains the Sodalite IDE (based on Eclipse).
 
 ## Requirements
 Install the Eclipse Modeling Tools instance from [here](https://www.eclipse.org/downloads/)
-Note: SODALITE IDE in the version 2019-09 R (4.13.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2019-12/r/eclipse-modeling-tools)
+Note: SODALITE IDE has been tested in the version 2019-09 R (4.13.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2019-12/r/eclipse-modeling-tools)
 
 ## IDE Installation from the Sodalite IDE update site
 Install the Sodalite IDE into the Eclipse Modeling Tools instance using this [update site](https://raw.githubusercontent.com/SODALITE-EU/ide/master/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository). 
@@ -28,10 +28,10 @@ Follow the following procedure to download the SODALITE IDE, build and install i
 2. Open a CLI and go to *$IDE_REPO/dsl/org.sodalite.IDE.parent* folder. Build the SODALITE IDE Eclipse repository (i.e. update site) using Maven, with this command: `mvn clean verify`
 3. Once complete, open the Eclipse Modeling Tools instance.
 4. Select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and click on the *Local* button. Navigate to the path *$IDE_REPO/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository/*. Then, click on *Add* button. 
-Following the same procedure as before add the following external software repositories to your list of software sites:
+5. Following the same procedure as before add the following external software repositories to your list of software sites:
 - [Sirius-XText integration](https://altran-mde.github.io/xtext-sirius-integration.io/p2/) 
 - [Eclipse Orbit Composite Site R20170919201930](http://download.eclipse.org/tools/orbit/downloads/drops/R20170919201930/repository)
-In the former dialog, in the *Work with* combo box, select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
+6. In the former dialog, in the *Work with* combo box, select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
 
 ## IDE Documentation
 [IDE tutorial](https://docs.google.com/document/d/1w6wYJbTZvBbt5LD6sXReXbx1uPDjefYFAU5KEv8X_8w/edit?usp=sharing) for users is available
