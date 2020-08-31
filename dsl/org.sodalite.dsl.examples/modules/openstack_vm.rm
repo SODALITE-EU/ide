@@ -36,7 +36,7 @@ node_types:
 			floating_ip_pools:
 				description: 'Name of floating IP pool from which to choose a floating IP'
 				type: string
-				default: "provider"
+				default: ""
 				required: false 
 			userdata:
 				description: 'Additional userdata applied to configure the VM'
