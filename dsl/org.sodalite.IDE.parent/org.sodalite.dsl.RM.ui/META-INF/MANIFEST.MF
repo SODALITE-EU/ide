@@ -26,7 +26,8 @@ Export-Package: org.sodalite.dsl.RM.ui.internal,
  org.sodalite.dsl.kb_reasoner_client.json,
  org.sodalite.dsl.kb_reasoner_client.types,
  org.sodalite.dsl.ui.contentassist,
- org.sodalite.dsl.ui.quickfix
+ org.sodalite.dsl.ui.quickfix,
+ org.sodalite.dsl.ui.validation
 Bundle-Activator: org.sodalite.dsl.RM.ui.internal.RMActivator
 Bundle-ClassPath: lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-dependencies.jar,
  .
