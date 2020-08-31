@@ -51,6 +51,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
@@ -173,7 +174,7 @@ public class BackendProxy {
 		});
 	}
 	
-	public void processDeployAADM(ExecutionEvent event) throws IOException {
+	public void processDeployAADM(ExecutionEvent event) throws Exception {
 		// Return selected resource
 		IFile aadmFile = getSelectedFile();
 		IProject project = getProject(aadmFile);
@@ -182,7 +183,11 @@ public class BackendProxy {
 
 		// Deploy AADM model
 		String aadmURI = getAadmURI(aadmFile, project);
-		deployAADM(aadmTTL, aadmFile, aadmURI, project, event);
+		Path inputs_yaml_path = getInputsYamlPath();
+		if (inputs_yaml_path == null)
+			throw new Exception("Invalid inputs file, please select a correct one");
+		
+		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, project, event);
 	}
 
 	private String readTurtle(String filename, IProject project) throws IOException {
@@ -305,7 +310,7 @@ public class BackendProxy {
 		job.schedule();
 	}
 
-	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, IProject project, ExecutionEvent event) {
+	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -349,7 +354,6 @@ public class BackendProxy {
 
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
-					Path inputs_yaml_path = getInputsYamlPath();
 					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path, iacReport.getToken());
 					admin_report[1] = depl_report.getSession_token();
 					System.out.println("xOpera session token: " + depl_report.getSession_token());
@@ -398,10 +402,25 @@ public class BackendProxy {
 	}
 
 	private Path getInputsYamlPath() throws Exception {
-		Bundle bundle = Platform.getBundle("org.sodalite.dsl.AADM.ui");
-		URL fileURL = bundle.getEntry("resources/inputs.yaml");
-		File file = new File(FileLocator.resolve(fileURL).toURI());
+//		Bundle bundle = Platform.getBundle("org.sodalite.dsl.AADM.ui");
+//		URL fileURL = bundle.getEntry("resources/inputs.yaml");
+//		File file = new File(FileLocator.resolve(fileURL).toURI());
+		String selectedInputFile = selectFile("Select the inputs file for app deployment");
+		File file = new File (selectedInputFile);
 		return file.toPath();
+	}
+	
+	protected String selectFile (String dialogText){
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		// File standard dialog
+		FileDialog fileDialog = new FileDialog(shell);
+		fileDialog.setText(dialogText);
+		//fileDialog.setFilterExtensions(new String[] { "*.txt" });
+		// Put in a readable name for the filter
+		//fileDialog.setFilterNames(new String[] { "Textfiles(*.txt)" });
+		String selected = fileDialog.open();
+		System.out.println("Selected inputs file: " + selected);
+		return selected;
 	}
 
 	private void processValidationIssues(IFile aadmFile, KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
