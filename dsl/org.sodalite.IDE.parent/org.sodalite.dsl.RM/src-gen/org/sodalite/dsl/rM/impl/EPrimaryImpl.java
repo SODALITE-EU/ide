@@ -95,7 +95,6 @@ public class EPrimaryImpl extends MinimalEObjectImpl.Container implements EPrima
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getFile()
   {
     return file;
@@ -106,7 +105,6 @@ public class EPrimaryImpl extends MinimalEObjectImpl.Container implements EPrima
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setFile(String newFile)
   {
     String oldFile = file;
@@ -120,7 +118,6 @@ public class EPrimaryImpl extends MinimalEObjectImpl.Container implements EPrima
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getRelative_path()
   {
     return relative_path;
@@ -131,7 +128,6 @@ public class EPrimaryImpl extends MinimalEObjectImpl.Container implements EPrima
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRelative_path(String newRelative_path)
   {
     String oldRelative_path = relative_path;
@@ -226,7 +222,7 @@ public class EPrimaryImpl extends MinimalEObjectImpl.Container implements EPrima
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (file: ");
     result.append(file);
     result.append(", relative_path: ");

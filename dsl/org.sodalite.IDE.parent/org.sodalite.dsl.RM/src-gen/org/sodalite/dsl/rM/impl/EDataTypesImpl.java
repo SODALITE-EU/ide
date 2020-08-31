@@ -72,7 +72,6 @@ public class EDataTypesImpl extends MinimalEObjectImpl.Container implements EDat
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EDataType> getDataTypes()
   {
     if (dataTypes == null)

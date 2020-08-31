@@ -165,7 +165,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EDataType getType()
   {
     if (type != null && type.eIsProxy())
@@ -196,7 +195,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setType(EDataType newType)
   {
     EDataType oldType = type;
@@ -210,7 +208,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getDescription()
   {
     return description;
@@ -221,7 +218,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDescription(String newDescription)
   {
     String oldDescription = description;
@@ -235,7 +231,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isRequired()
   {
     return required;
@@ -246,7 +241,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRequired(boolean newRequired)
   {
     boolean oldRequired = required;
@@ -260,7 +254,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EValueExpression getDefault()
   {
     return default_;
@@ -288,7 +281,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDefault(EValueExpression newDefault)
   {
     if (newDefault != default_)
@@ -310,7 +302,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getStatus()
   {
     return status;
@@ -321,7 +312,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setStatus(String newStatus)
   {
     String oldStatus = status;
@@ -335,7 +325,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EConstraints getConstraints()
   {
     return constraints;
@@ -363,7 +352,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setConstraints(EConstraints newConstraints)
   {
     if (newConstraints != constraints)
@@ -385,7 +373,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EDataType getEntry_schema()
   {
     if (entry_schema != null && entry_schema.eIsProxy())
@@ -416,7 +403,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setEntry_schema(EDataType newEntry_schema)
   {
     EDataType oldEntry_schema = entry_schema;
@@ -581,7 +567,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (description: ");
     result.append(description);
     result.append(", required: ");

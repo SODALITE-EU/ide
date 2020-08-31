@@ -66,7 +66,6 @@ public class GetAttributeImpl extends EFunctionImpl implements GetAttribute
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public GetAttributeBody getAttribute()
   {
     return attribute;
@@ -94,7 +93,6 @@ public class GetAttributeImpl extends EFunctionImpl implements GetAttribute
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setAttribute(GetAttributeBody newAttribute)
   {
     if (newAttribute != attribute)

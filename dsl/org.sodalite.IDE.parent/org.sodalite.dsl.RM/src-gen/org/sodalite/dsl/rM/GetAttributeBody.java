@@ -28,6 +28,10 @@ public interface GetAttributeBody extends EObject
   /**
    * Returns the value of the '<em><b>Attribute</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Attribute</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attribute</em>' reference.
    * @see #setAttribute(EAttributeDefinition)
@@ -50,6 +54,10 @@ public interface GetAttributeBody extends EObject
   /**
    * Returns the value of the '<em><b>Entity</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Entity</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Entity</em>' attribute.
    * @see #setEntity(String)
@@ -72,6 +80,10 @@ public interface GetAttributeBody extends EObject
   /**
    * Returns the value of the '<em><b>Req cap</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Req cap</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Req cap</em>' reference.
    * @see #setReq_cap(EReqOrCap)

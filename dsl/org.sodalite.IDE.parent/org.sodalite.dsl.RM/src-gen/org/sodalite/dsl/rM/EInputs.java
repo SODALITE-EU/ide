@@ -29,6 +29,10 @@ public interface EInputs extends EObject
    * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
    * The list contents are of type {@link org.sodalite.dsl.rM.EParameterDefinition}.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Inputs</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Inputs</em>' containment reference list.
    * @see org.sodalite.dsl.rM.RMPackage#getEInputs_Inputs()

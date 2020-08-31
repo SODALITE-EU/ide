@@ -72,7 +72,6 @@ public class ENodeTypesImpl extends MinimalEObjectImpl.Container implements ENod
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ENodeType> getNodeTypes()
   {
     if (nodeTypes == null)

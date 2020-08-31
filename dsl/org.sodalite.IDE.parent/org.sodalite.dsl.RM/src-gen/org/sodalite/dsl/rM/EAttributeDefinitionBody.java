@@ -30,6 +30,10 @@ public interface EAttributeDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
    * @see #setType(EDataType)
@@ -52,6 +56,10 @@ public interface EAttributeDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Description</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Description</em>' attribute.
    * @see #setDescription(String)
@@ -74,6 +82,10 @@ public interface EAttributeDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Default</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Default</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Default</em>' containment reference.
    * @see #setDefault(EValueExpression)
@@ -96,6 +108,10 @@ public interface EAttributeDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Status</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Status</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Status</em>' attribute.
    * @see #setStatus(String)
@@ -118,6 +134,10 @@ public interface EAttributeDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Entry schema</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Entry schema</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Entry schema</em>' reference.
    * @see #setEntry_schema(EDataType)

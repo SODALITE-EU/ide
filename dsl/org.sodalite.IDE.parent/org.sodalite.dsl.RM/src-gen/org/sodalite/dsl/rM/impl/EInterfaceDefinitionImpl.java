@@ -88,7 +88,6 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -99,7 +98,6 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -113,7 +111,6 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EInterfaceDefinitionBody getInterface()
   {
     return interface_;
@@ -141,7 +138,6 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setInterface(EInterfaceDefinitionBody newInterface)
   {
     if (newInterface != interface_)
@@ -260,7 +256,7 @@ public class EInterfaceDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

@@ -66,7 +66,6 @@ public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabil
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ECapabilityDefinitionBody getCapability()
   {
     return capability;
@@ -94,7 +93,6 @@ public class ECapabilityDefinitionImpl extends EReqOrCapImpl implements ECapabil
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setCapability(ECapabilityDefinitionBody newCapability)
   {
     if (newCapability != capability)

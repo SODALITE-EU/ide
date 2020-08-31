@@ -88,7 +88,6 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -99,7 +98,6 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -113,7 +111,6 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ENodeTypeBody getNode()
   {
     return node;
@@ -141,7 +138,6 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setNode(ENodeTypeBody newNode)
   {
     if (newNode != node)
@@ -260,7 +256,7 @@ public class ENodeTypeImpl extends MinimalEObjectImpl.Container implements ENode
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

@@ -30,6 +30,10 @@ public interface EValidSourceType extends EObject
    * Returns the value of the '<em><b>Source Types</b></em>' containment reference list.
    * The list contents are of type {@link org.sodalite.dsl.rM.ENodeTypeRef}.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Source Types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Source Types</em>' containment reference list.
    * @see org.sodalite.dsl.rM.RMPackage#getEValidSourceType_SourceTypes()
@@ -42,6 +46,10 @@ public interface EValidSourceType extends EObject
    * Returns the value of the '<em><b>Source Type</b></em>' containment reference list.
    * The list contents are of type {@link org.sodalite.dsl.rM.ENodeTypeRef}.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Source Type</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Source Type</em>' containment reference list.
    * @see org.sodalite.dsl.rM.RMPackage#getEValidSourceType_SourceType()

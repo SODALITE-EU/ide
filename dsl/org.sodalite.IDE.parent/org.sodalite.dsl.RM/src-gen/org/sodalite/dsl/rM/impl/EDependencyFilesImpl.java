@@ -67,7 +67,6 @@ public class EDependencyFilesImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<String> getFiles()
   {
     if (files == null)
@@ -155,7 +154,7 @@ public class EDependencyFilesImpl extends MinimalEObjectImpl.Container implement
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (files: ");
     result.append(files);
     result.append(')');

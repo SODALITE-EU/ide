@@ -73,7 +73,6 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getString()
   {
     return string;
@@ -84,7 +83,6 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setString(String newString)
   {
     String oldString = string;
@@ -169,7 +167,7 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (string: ");
     result.append(string);
     result.append(')');

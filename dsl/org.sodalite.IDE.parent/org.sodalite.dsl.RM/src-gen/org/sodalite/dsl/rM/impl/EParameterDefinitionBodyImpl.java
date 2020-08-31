@@ -90,7 +90,6 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EDataType getType()
   {
     if (type != null && type.eIsProxy())
@@ -121,7 +120,6 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setType(EDataType newType)
   {
     EDataType oldType = type;
@@ -135,7 +133,6 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EValueExpression getValue()
   {
     return value;
@@ -163,7 +160,6 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setValue(EValueExpression newValue)
   {
     if (newValue != value)
@@ -185,7 +181,6 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EValueExpression getDefault()
   {
     return default_;
@@ -213,7 +208,6 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDefault(EValueExpression newDefault)
   {
     if (newDefault != default_)

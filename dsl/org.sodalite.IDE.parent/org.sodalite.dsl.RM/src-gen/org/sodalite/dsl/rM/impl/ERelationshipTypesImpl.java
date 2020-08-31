@@ -72,7 +72,6 @@ public class ERelationshipTypesImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ERelationshipType> getRelationshipTypes()
   {
     if (relationshipTypes == null)

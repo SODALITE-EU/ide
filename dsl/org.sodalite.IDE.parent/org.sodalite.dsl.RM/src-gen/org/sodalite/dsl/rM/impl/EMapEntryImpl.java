@@ -88,7 +88,6 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getKey()
   {
     return key;
@@ -99,7 +98,6 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setKey(String newKey)
   {
     String oldKey = key;
@@ -113,7 +111,6 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EAssignmentValue getValue()
   {
     return value;
@@ -141,7 +138,6 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setValue(EAssignmentValue newValue)
   {
     if (newValue != value)
@@ -260,7 +256,7 @@ public class EMapEntryImpl extends MinimalEObjectImpl.Container implements EMapE
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (key: ");
     result.append(key);
     result.append(')');

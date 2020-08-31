@@ -29,6 +29,10 @@ public interface EInterfaces extends EObject
    * Returns the value of the '<em><b>Interfaces</b></em>' containment reference list.
    * The list contents are of type {@link org.sodalite.dsl.rM.EInterfaceDefinition}.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Interfaces</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Interfaces</em>' containment reference list.
    * @see org.sodalite.dsl.rM.RMPackage#getEInterfaces_Interfaces()

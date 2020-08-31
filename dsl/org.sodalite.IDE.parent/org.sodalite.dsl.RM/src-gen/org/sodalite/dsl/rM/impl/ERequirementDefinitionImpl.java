@@ -66,7 +66,6 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ERequirementDefinitionBody getRequirement()
   {
     return requirement;
@@ -94,7 +93,6 @@ public class ERequirementDefinitionImpl extends EReqOrCapImpl implements ERequir
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRequirement(ERequirementDefinitionBody newRequirement)
   {
     if (newRequirement != requirement)

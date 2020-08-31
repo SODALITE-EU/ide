@@ -72,7 +72,6 @@ public class EInterfacesImpl extends MinimalEObjectImpl.Container implements EIn
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EInterfaceDefinition> getInterfaces()
   {
     if (interfaces == null)

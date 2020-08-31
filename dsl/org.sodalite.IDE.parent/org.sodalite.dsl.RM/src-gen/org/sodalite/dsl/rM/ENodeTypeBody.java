@@ -32,6 +32,10 @@ public interface ENodeTypeBody extends EObject
   /**
    * Returns the value of the '<em><b>Super Type</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Super Type</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Super Type</em>' reference.
    * @see #setSuperType(ENodeType)
@@ -54,6 +58,10 @@ public interface ENodeTypeBody extends EObject
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Description</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Description</em>' attribute.
    * @see #setDescription(String)
@@ -76,6 +84,10 @@ public interface ENodeTypeBody extends EObject
   /**
    * Returns the value of the '<em><b>Properties</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Properties</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Properties</em>' containment reference.
    * @see #setProperties(EProperties)
@@ -98,6 +110,10 @@ public interface ENodeTypeBody extends EObject
   /**
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Attributes</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference.
    * @see #setAttributes(EAttributes)
@@ -120,6 +136,10 @@ public interface ENodeTypeBody extends EObject
   /**
    * Returns the value of the '<em><b>Interfaces</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Interfaces</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Interfaces</em>' containment reference.
    * @see #setInterfaces(EInterfaces)
@@ -142,6 +162,10 @@ public interface ENodeTypeBody extends EObject
   /**
    * Returns the value of the '<em><b>Capabilities</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Capabilities</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Capabilities</em>' containment reference.
    * @see #setCapabilities(ECapabilities)
@@ -164,6 +188,10 @@ public interface ENodeTypeBody extends EObject
   /**
    * Returns the value of the '<em><b>Requirements</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Requirements</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Requirements</em>' containment reference.
    * @see #setRequirements(ERequirements)

@@ -88,7 +88,6 @@ public class EDependenciesImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EDependencyFiles getFiles()
   {
     return files;
@@ -116,7 +115,6 @@ public class EDependenciesImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setFiles(EDependencyFiles newFiles)
   {
     if (newFiles != files)
@@ -138,7 +136,6 @@ public class EDependenciesImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getRelative_path()
   {
     return relative_path;
@@ -149,7 +146,6 @@ public class EDependenciesImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRelative_path(String newRelative_path)
   {
     String oldRelative_path = relative_path;
@@ -260,7 +256,7 @@ public class EDependenciesImpl extends MinimalEObjectImpl.Container implements E
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (relative_path: ");
     result.append(relative_path);
     result.append(')');

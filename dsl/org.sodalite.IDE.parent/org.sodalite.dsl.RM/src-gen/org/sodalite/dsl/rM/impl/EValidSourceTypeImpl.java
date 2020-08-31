@@ -83,7 +83,6 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ENodeTypeRef> getSourceTypes()
   {
     if (sourceTypes == null)
@@ -98,7 +97,6 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ENodeTypeRef> getSourceType()
   {
     if (sourceType == null)

@@ -72,7 +72,6 @@ public class ERequirementsImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ERequirementDefinition> getRequirements()
   {
     if (requirements == null)

@@ -34,6 +34,10 @@ public interface ECapabilityDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
    * @see #setType(ECapabilityType)
@@ -56,6 +60,10 @@ public interface ECapabilityDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Description</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Description</em>' attribute.
    * @see #setDescription(String)
@@ -78,6 +86,10 @@ public interface ECapabilityDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Properties</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Properties</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Properties</em>' containment reference.
    * @see #setProperties(EProperties)
@@ -100,6 +112,10 @@ public interface ECapabilityDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Attributes</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference.
    * @see #setAttributes(EAttributes)
@@ -123,6 +139,10 @@ public interface ECapabilityDefinitionBody extends EObject
    * Returns the value of the '<em><b>Valid source types</b></em>' containment reference list.
    * The list contents are of type {@link org.sodalite.dsl.rM.EValidSourceType}.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Valid source types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Valid source types</em>' containment reference list.
    * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody_Valid_source_types()
@@ -134,6 +154,10 @@ public interface ECapabilityDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Occurrences start</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Occurrences start</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Occurrences start</em>' attribute.
    * @see #setOccurrences_start(String)
@@ -156,6 +180,10 @@ public interface ECapabilityDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Occurrences end</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Occurrences end</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Occurrences end</em>' attribute.
    * @see #setOccurrences_end(String)

@@ -100,7 +100,6 @@ public class EOperationDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getDescription()
   {
     return description;
@@ -111,7 +110,6 @@ public class EOperationDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDescription(String newDescription)
   {
     String oldDescription = description;
@@ -125,7 +123,6 @@ public class EOperationDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EInputs getInputs()
   {
     return inputs;
@@ -153,7 +150,6 @@ public class EOperationDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setInputs(EInputs newInputs)
   {
     if (newInputs != inputs)
@@ -175,7 +171,6 @@ public class EOperationDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EImplementation getImplementation()
   {
     return implementation;
@@ -203,7 +198,6 @@ public class EOperationDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setImplementation(EImplementation newImplementation)
   {
     if (newImplementation != implementation)
@@ -334,7 +328,7 @@ public class EOperationDefinitionBodyImpl extends MinimalEObjectImpl.Container i
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (description: ");
     result.append(description);
     result.append(')');

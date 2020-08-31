@@ -72,7 +72,6 @@ public class EOperationsImpl extends MinimalEObjectImpl.Container implements EOp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EOperationDefinition> getOperations()
   {
     if (operations == null)

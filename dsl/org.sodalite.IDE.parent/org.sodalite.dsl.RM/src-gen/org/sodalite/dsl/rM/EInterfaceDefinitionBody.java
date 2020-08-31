@@ -28,6 +28,10 @@ public interface EInterfaceDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
    * @see #setType(EInterfaceType)
@@ -50,6 +54,10 @@ public interface EInterfaceDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Inputs</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Inputs</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Inputs</em>' containment reference.
    * @see #setInputs(EProperties)
@@ -72,6 +80,10 @@ public interface EInterfaceDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Operations</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Operations</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Operations</em>' containment reference.
    * @see #setOperations(EOperations)

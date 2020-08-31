@@ -83,7 +83,6 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ECapabilityTypeRef> getTargetTypes()
   {
     if (targetTypes == null)
@@ -98,7 +97,6 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ECapabilityTypeRef> getSourceType()
   {
     if (sourceType == null)

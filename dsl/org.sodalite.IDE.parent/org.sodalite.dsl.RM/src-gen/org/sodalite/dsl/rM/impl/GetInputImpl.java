@@ -65,7 +65,6 @@ public class GetInputImpl extends EFunctionImpl implements GetInput
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EParameterDefinition getInput()
   {
     if (input != null && input.eIsProxy())
@@ -96,7 +95,6 @@ public class GetInputImpl extends EFunctionImpl implements GetInput
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setInput(EParameterDefinition newInput)
   {
     EParameterDefinition oldInput = input;

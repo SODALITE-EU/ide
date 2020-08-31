@@ -25,6 +25,10 @@ public interface GetAttribute extends EFunction
   /**
    * Returns the value of the '<em><b>Attribute</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Attribute</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attribute</em>' containment reference.
    * @see #setAttribute(GetAttributeBody)

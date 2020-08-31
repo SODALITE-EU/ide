@@ -30,6 +30,10 @@ public interface ERequirementDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Capability</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Capability</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Capability</em>' reference.
    * @see #setCapability(ECapabilityType)
@@ -52,6 +56,10 @@ public interface ERequirementDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Node</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Node</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Node</em>' reference.
    * @see #setNode(ENodeType)
@@ -74,6 +82,10 @@ public interface ERequirementDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Relationship</b></em>' reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Relationship</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Relationship</em>' reference.
    * @see #setRelationship(ERelationshipType)
@@ -96,6 +108,10 @@ public interface ERequirementDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Start</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Start</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Start</em>' attribute.
    * @see #setStart(String)
@@ -118,6 +134,10 @@ public interface ERequirementDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>End</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>End</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>End</em>' attribute.
    * @see #setEnd(String)

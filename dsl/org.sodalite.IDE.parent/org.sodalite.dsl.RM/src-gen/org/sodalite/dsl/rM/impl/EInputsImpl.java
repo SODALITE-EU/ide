@@ -72,7 +72,6 @@ public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EParameterDefinition> getInputs()
   {
     if (inputs == null)

@@ -28,6 +28,10 @@ public interface EOperationDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Description</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Description</em>' attribute.
    * @see #setDescription(String)
@@ -50,6 +54,10 @@ public interface EOperationDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Inputs</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Inputs</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Inputs</em>' containment reference.
    * @see #setInputs(EInputs)
@@ -72,6 +80,10 @@ public interface EOperationDefinitionBody extends EObject
   /**
    * Returns the value of the '<em><b>Implementation</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Implementation</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Implementation</em>' containment reference.
    * @see #setImplementation(EImplementation)

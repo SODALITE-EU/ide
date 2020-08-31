@@ -27,6 +27,10 @@ public interface EImplementation extends EObject
   /**
    * Returns the value of the '<em><b>Primary</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Primary</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Primary</em>' containment reference.
    * @see #setPrimary(EPrimary)
@@ -49,6 +53,10 @@ public interface EImplementation extends EObject
   /**
    * Returns the value of the '<em><b>Dependencies</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Dependencies</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Dependencies</em>' containment reference.
    * @see #setDependencies(EDependencies)

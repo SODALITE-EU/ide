@@ -72,7 +72,6 @@ public class EArtifactTypesImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EArtifactType> getArtifactTypes()
   {
     if (artifactTypes == null)

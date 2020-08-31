@@ -112,7 +112,6 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EInterfaceType getSuperType()
   {
     if (superType != null && superType.eIsProxy())
@@ -143,7 +142,6 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setSuperType(EInterfaceType newSuperType)
   {
     EInterfaceType oldSuperType = superType;
@@ -157,7 +155,6 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getDescription()
   {
     return description;
@@ -168,7 +165,6 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDescription(String newDescription)
   {
     String oldDescription = description;
@@ -182,7 +178,6 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EProperties getInputs()
   {
     return inputs;
@@ -210,7 +205,6 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setInputs(EProperties newInputs)
   {
     if (newInputs != inputs)
@@ -232,7 +226,6 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EOperations getOperations()
   {
     return operations;
@@ -260,7 +253,6 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setOperations(EOperations newOperations)
   {
     if (newOperations != operations)
@@ -402,7 +394,7 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (description: ");
     result.append(description);
     result.append(')');

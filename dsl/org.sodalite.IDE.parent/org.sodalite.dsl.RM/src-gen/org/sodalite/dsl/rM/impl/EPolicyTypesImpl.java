@@ -72,7 +72,6 @@ public class EPolicyTypesImpl extends MinimalEObjectImpl.Container implements EP
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EPolicyType> getPolicyTypes()
   {
     if (policyTypes == null)

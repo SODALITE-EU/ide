@@ -32,6 +32,10 @@ public interface RM_Model extends EObject
   /**
    * Returns the value of the '<em><b>Data Types</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Data Types</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Data Types</em>' containment reference.
    * @see #setDataTypes(EDataTypes)
@@ -54,6 +58,10 @@ public interface RM_Model extends EObject
   /**
    * Returns the value of the '<em><b>Artifact Types</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Artifact Types</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Artifact Types</em>' containment reference.
    * @see #setArtifactTypes(EArtifactTypes)
@@ -76,6 +84,10 @@ public interface RM_Model extends EObject
   /**
    * Returns the value of the '<em><b>Capability Types</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Capability Types</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Capability Types</em>' containment reference.
    * @see #setCapabilityTypes(ECapabilityTypes)
@@ -98,6 +110,10 @@ public interface RM_Model extends EObject
   /**
    * Returns the value of the '<em><b>Interface Types</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Interface Types</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Interface Types</em>' containment reference.
    * @see #setInterfaceTypes(EInterfaceTypes)
@@ -120,6 +136,10 @@ public interface RM_Model extends EObject
   /**
    * Returns the value of the '<em><b>Relationship Types</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Relationship Types</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Relationship Types</em>' containment reference.
    * @see #setRelationshipTypes(ERelationshipTypes)
@@ -142,6 +162,10 @@ public interface RM_Model extends EObject
   /**
    * Returns the value of the '<em><b>Node Types</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Node Types</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Node Types</em>' containment reference.
    * @see #setNodeTypes(ENodeTypes)
@@ -164,6 +188,10 @@ public interface RM_Model extends EObject
   /**
    * Returns the value of the '<em><b>Policy Types</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Policy Types</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Policy Types</em>' containment reference.
    * @see #setPolicyTypes(EPolicyTypes)

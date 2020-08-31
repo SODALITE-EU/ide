@@ -72,7 +72,6 @@ public class ECapabilityTypesImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ECapabilityType> getCapabilityTypes()
   {
     if (capabilityTypes == null)

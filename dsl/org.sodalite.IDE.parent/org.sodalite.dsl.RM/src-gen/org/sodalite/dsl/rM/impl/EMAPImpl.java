@@ -70,7 +70,6 @@ public class EMAPImpl extends EAssignmentValueImpl implements EMAP
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EMapEntry> getMap()
   {
     if (map == null)

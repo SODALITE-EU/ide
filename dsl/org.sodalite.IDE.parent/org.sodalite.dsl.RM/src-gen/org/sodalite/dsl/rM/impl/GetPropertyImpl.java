@@ -66,7 +66,6 @@ public class GetPropertyImpl extends EFunctionImpl implements GetProperty
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public GetPropertyBody getProperty()
   {
     return property;
@@ -94,7 +93,6 @@ public class GetPropertyImpl extends EFunctionImpl implements GetProperty
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setProperty(GetPropertyBody newProperty)
   {
     if (newProperty != property)

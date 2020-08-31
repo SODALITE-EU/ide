@@ -88,7 +88,6 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -99,7 +98,6 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -113,7 +111,6 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EDataTypeBody getData()
   {
     return data;
@@ -141,7 +138,6 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setData(EDataTypeBody newData)
   {
     if (newData != data)
@@ -260,7 +256,7 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

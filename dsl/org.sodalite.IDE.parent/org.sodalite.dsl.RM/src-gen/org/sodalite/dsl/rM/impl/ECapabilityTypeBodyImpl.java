@@ -112,7 +112,6 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ECapabilityType getSuperType()
   {
     if (superType != null && superType.eIsProxy())
@@ -143,7 +142,6 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setSuperType(ECapabilityType newSuperType)
   {
     ECapabilityType oldSuperType = superType;
@@ -157,7 +155,6 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getDescription()
   {
     return description;
@@ -168,7 +165,6 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDescription(String newDescription)
   {
     String oldDescription = description;
@@ -182,7 +178,6 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EProperties getProperties()
   {
     return properties;
@@ -210,7 +205,6 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setProperties(EProperties newProperties)
   {
     if (newProperties != properties)
@@ -232,7 +226,6 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EAttributes getAtributes()
   {
     return atributes;
@@ -260,7 +253,6 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setAtributes(EAttributes newAtributes)
   {
     if (newAtributes != atributes)
@@ -402,7 +394,7 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (description: ");
     result.append(description);
     result.append(')');

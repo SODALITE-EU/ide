@@ -132,7 +132,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ECapabilityType getCapability()
   {
     if (capability != null && capability.eIsProxy())
@@ -163,7 +162,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setCapability(ECapabilityType newCapability)
   {
     ECapabilityType oldCapability = capability;
@@ -177,7 +175,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ENodeType getNode()
   {
     if (node != null && node.eIsProxy())
@@ -208,7 +205,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setNode(ENodeType newNode)
   {
     ENodeType oldNode = node;
@@ -222,7 +218,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ERelationshipType getRelationship()
   {
     if (relationship != null && relationship.eIsProxy())
@@ -253,7 +248,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRelationship(ERelationshipType newRelationship)
   {
     ERelationshipType oldRelationship = relationship;
@@ -267,7 +261,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getStart()
   {
     return start;
@@ -278,7 +271,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setStart(String newStart)
   {
     String oldStart = start;
@@ -292,7 +284,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getEnd()
   {
     return end;
@@ -303,7 +294,6 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setEnd(String newEnd)
   {
     String oldEnd = end;
@@ -431,7 +421,7 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (start: ");
     result.append(start);
     result.append(", end: ");

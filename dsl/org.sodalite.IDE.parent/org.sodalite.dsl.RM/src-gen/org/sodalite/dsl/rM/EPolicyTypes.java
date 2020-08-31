@@ -29,6 +29,10 @@ public interface EPolicyTypes extends EObject
    * Returns the value of the '<em><b>Policy Types</b></em>' containment reference list.
    * The list contents are of type {@link org.sodalite.dsl.rM.EPolicyType}.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Policy Types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Policy Types</em>' containment reference list.
    * @see org.sodalite.dsl.rM.RMPackage#getEPolicyTypes_PolicyTypes()

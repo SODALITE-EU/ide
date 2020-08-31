@@ -112,7 +112,6 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EDataType getSuperType()
   {
     if (superType != null && superType.eIsProxy())
@@ -143,7 +142,6 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setSuperType(EDataType newSuperType)
   {
     EDataType oldSuperType = superType;
@@ -157,7 +155,6 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getDescription()
   {
     return description;
@@ -168,7 +165,6 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDescription(String newDescription)
   {
     String oldDescription = description;
@@ -182,7 +178,6 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EConstraints getConstraints()
   {
     return constraints;
@@ -210,7 +205,6 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setConstraints(EConstraints newConstraints)
   {
     if (newConstraints != constraints)
@@ -232,7 +226,6 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EProperties getProperties()
   {
     return properties;
@@ -260,7 +253,6 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setProperties(EProperties newProperties)
   {
     if (newProperties != properties)
@@ -402,7 +394,7 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (description: ");
     result.append(description);
     result.append(')');

@@ -129,7 +129,6 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EArtifactType getSuperType()
   {
     if (superType != null && superType.eIsProxy())
@@ -160,7 +159,6 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setSuperType(EArtifactType newSuperType)
   {
     EArtifactType oldSuperType = superType;
@@ -174,7 +172,6 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getDescription()
   {
     return description;
@@ -185,7 +182,6 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDescription(String newDescription)
   {
     String oldDescription = description;
@@ -199,7 +195,6 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getMime_type()
   {
     return mime_type;
@@ -210,7 +205,6 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setMime_type(String newMime_type)
   {
     String oldMime_type = mime_type;
@@ -224,7 +218,6 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getFile_ext()
   {
     return file_ext;
@@ -235,7 +228,6 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setFile_ext(String newFile_ext)
   {
     String oldFile_ext = file_ext;
@@ -351,7 +343,7 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (description: ");
     result.append(description);
     result.append(", mime_type: ");

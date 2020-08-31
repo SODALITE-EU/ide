@@ -73,7 +73,6 @@ public class EMaxLengthImpl extends EConstraintImpl implements EMaxLength
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getVal()
   {
     return val;
@@ -84,7 +83,6 @@ public class EMaxLengthImpl extends EConstraintImpl implements EMaxLength
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setVal(String newVal)
   {
     String oldVal = val;
@@ -169,7 +167,7 @@ public class EMaxLengthImpl extends EConstraintImpl implements EMaxLength
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(')');

@@ -29,6 +29,10 @@ public interface ENodeTypes extends EObject
    * Returns the value of the '<em><b>Node Types</b></em>' containment reference list.
    * The list contents are of type {@link org.sodalite.dsl.rM.ENodeType}.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Node Types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Node Types</em>' containment reference list.
    * @see org.sodalite.dsl.rM.RMPackage#getENodeTypes_NodeTypes()

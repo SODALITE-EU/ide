@@ -65,7 +65,6 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<String> getList()
   {
     if (list == null)
@@ -153,7 +152,7 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (list: ");
     result.append(list);
     result.append(')');

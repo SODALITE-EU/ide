@@ -66,7 +66,6 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ECapabilityType getName()
   {
     if (name != null && name.eIsProxy())
@@ -97,7 +96,6 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(ECapabilityType newName)
   {
     ECapabilityType oldName = name;

@@ -26,6 +26,10 @@ public interface EInRange extends EConstraint
   /**
    * Returns the value of the '<em><b>Start</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Start</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Start</em>' attribute.
    * @see #setStart(String)
@@ -48,6 +52,10 @@ public interface EInRange extends EConstraint
   /**
    * Returns the value of the '<em><b>End</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>End</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>End</em>' attribute.
    * @see #setEnd(String)

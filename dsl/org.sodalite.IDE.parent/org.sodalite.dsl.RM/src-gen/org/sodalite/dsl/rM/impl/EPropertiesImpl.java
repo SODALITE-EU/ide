@@ -72,7 +72,6 @@ public class EPropertiesImpl extends MinimalEObjectImpl.Container implements EPr
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EPropertyDefinition> getProperties()
   {
     if (properties == null)

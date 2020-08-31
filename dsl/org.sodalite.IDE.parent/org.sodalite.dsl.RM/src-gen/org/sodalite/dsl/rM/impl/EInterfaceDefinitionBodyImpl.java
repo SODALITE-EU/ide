@@ -91,7 +91,6 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EInterfaceType getType()
   {
     if (type != null && type.eIsProxy())
@@ -122,7 +121,6 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setType(EInterfaceType newType)
   {
     EInterfaceType oldType = type;
@@ -136,7 +134,6 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EProperties getInputs()
   {
     return inputs;
@@ -164,7 +161,6 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setInputs(EProperties newInputs)
   {
     if (newInputs != inputs)
@@ -186,7 +182,6 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EOperations getOperations()
   {
     return operations;
@@ -214,7 +209,6 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setOperations(EOperations newOperations)
   {
     if (newOperations != operations)

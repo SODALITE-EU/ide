@@ -72,7 +72,6 @@ public class EAttributesImpl extends MinimalEObjectImpl.Container implements EAt
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EAttributeDefinition> getAttributes()
   {
     if (attributes == null)

@@ -99,7 +99,6 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EAttributeDefinition getAttribute()
   {
     if (attribute != null && attribute.eIsProxy())
@@ -130,7 +129,6 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setAttribute(EAttributeDefinition newAttribute)
   {
     EAttributeDefinition oldAttribute = attribute;
@@ -144,7 +142,6 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getEntity()
   {
     return entity;
@@ -155,7 +152,6 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setEntity(String newEntity)
   {
     String oldEntity = entity;
@@ -169,7 +165,6 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EReqOrCap getReq_cap()
   {
     if (req_cap != null && req_cap.eIsProxy())
@@ -200,7 +195,6 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setReq_cap(EReqOrCap newReq_cap)
   {
     EReqOrCap oldReq_cap = req_cap;
@@ -307,7 +301,7 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (entity: ");
     result.append(entity);
     result.append(')');

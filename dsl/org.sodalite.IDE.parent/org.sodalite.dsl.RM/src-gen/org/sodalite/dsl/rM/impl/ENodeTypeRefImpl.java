@@ -66,7 +66,6 @@ public class ENodeTypeRefImpl extends MinimalEObjectImpl.Container implements EN
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ENodeType getName()
   {
     if (name != null && name.eIsProxy())
@@ -97,7 +96,6 @@ public class ENodeTypeRefImpl extends MinimalEObjectImpl.Container implements EN
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(ENodeType newName)
   {
     ENodeType oldName = name;

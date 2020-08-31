@@ -72,7 +72,6 @@ public class EConstraintsImpl extends MinimalEObjectImpl.Container implements EC
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EConstraint> getConstraints()
   {
     if (constraints == null)

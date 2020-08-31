@@ -94,7 +94,6 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getStart()
   {
     return start;
@@ -105,7 +104,6 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setStart(String newStart)
   {
     String oldStart = start;
@@ -119,7 +117,6 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getEnd()
   {
     return end;
@@ -130,7 +127,6 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setEnd(String newEnd)
   {
     String oldEnd = end;
@@ -225,7 +221,7 @@ public class EInRangeImpl extends EConstraintImpl implements EInRange
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (start: ");
     result.append(start);
     result.append(", end: ");
