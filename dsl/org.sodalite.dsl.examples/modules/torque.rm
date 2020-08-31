@@ -321,6 +321,10 @@ node_types:
 				type: string
 			job_name:
 				type: string
+	      	job_workspace:
+        		type: string
+      		job_enable_audit:
+        		type: boolean
 		interfaces:
 			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard
@@ -381,6 +385,11 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.hpc.job.torque.configuration.env
+									req_cap: sodalite.nodes.hpc.job.torque.configured_job
+							job_enable_audit: 
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.hpc.job.torque.configuration.enable_audit
 									req_cap: sodalite.nodes.hpc.job.torque.configured_job
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/start.yml"
@@ -445,19 +454,19 @@ node_types:
 									attribute: sodalite.nodes.hpc.job.torque.job_id
 									req_cap: sodalite.nodes.hpc.job.torque.job
 							job_name: 
-								default: get_property: 
+								default: get_attribute: 
 									entity: SELF
-									property: sodalite.datatypes.modak.job_options.job_name
+									attribute: sodalite.nodes.hpc.job.torque.job_name
 									req_cap: sodalite.nodes.hpc.job.torque.job
 							job_workspace: 
-								default: get_property: 
+								default: get_attribute: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.workspace
+									attribute: sodalite.nodes.hpc.job.torque.job_workspace
 									req_cap: sodalite.nodes.hpc.job.torque.job
 							job_walltime: 
-								default: get_property: 
+								default: get_attribute: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.walltime
+									attribute: sodalite.nodes.hpc.job.torque.job_walltime
 									req_cap: sodalite.nodes.hpc.job.torque.job
 							job_monitor_period: 
 								default: get_property: 
@@ -468,9 +477,9 @@ node_types:
 									entity: SELF
 									property: my.nodes.hpc.job.torque.monitor_retries_headroom
 							job_enable_audit: 
-								default: get_property: 
+								default: get_attribute: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.enable_audit
+									attribute: sodalite.nodes.hpc.job.torque.job_enable_audit
 									req_cap: sodalite.nodes.hpc.job.torque.job		
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/check.yml"    		

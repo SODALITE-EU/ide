@@ -1,9 +1,7 @@
 capability_types:
 	sodalite.capabilities.modak.ModakEndpoint:
     	derived_from: tosca.capabilities.Root
-    
-	sodalite.capabilities.modak.Target:
-    	derived_from: tosca.capabilities.Root
+
 node_types:
 	sodalite.nodes.modak:
     	derived_from: tosca.nodes.Root
@@ -13,18 +11,6 @@ node_types:
     	capabilities:
       		modak_endpoint:
         		type: sodalite.capabilities.modak.ModakEndpoint
-        		valid_source_types: [ sodalite.nodes.modak.job ]
-
-	sodalite.nodes.modak.target:
-    	derived_from: tosca.nodes.Root
-    	properties:
-      		name:
-        		type: string
-      		queue_type:
-        		type: string
-    	capabilities:
-      		target:
-        		type: sodalite.capabilities.modak.Target
         		valid_source_types: [ sodalite.nodes.modak.job ]
 
 
@@ -50,15 +36,12 @@ node_types:
 		attributes:
 			artifact_url:
 				type: string
+            container_runtime:
+                type: string
 		requirements:
 			modak_endpoint:
 				node: sodalite.nodes.modak
 				capability: sodalite.capabilities.modak.ModakEndpoint
-				relationship: tosca.relationships.DependsOn
-				occurrences: [ "1", "1" ]
-			target:
-				node: sodalite.nodes.modak.target
-				capability: sodalite.capabilities.modak.Target
 				relationship: tosca.relationships.DependsOn
 				occurrences: [ "1", "1" ]
 		interfaces:
@@ -99,4 +82,4 @@ node_types:
 									entity: SELF
 									property: sodalite.nodes.modak.job.optimisation
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/modak/library/modak/job/playbooks/create-modak-job.yml"	
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/modak/job/playbooks/create-modak-job.yml"	
