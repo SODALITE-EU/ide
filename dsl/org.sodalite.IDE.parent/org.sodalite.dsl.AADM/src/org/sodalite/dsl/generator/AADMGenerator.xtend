@@ -207,7 +207,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "«e.key»" ;
-	  exchange:value "«(e.value as ESTRING).string»" ;
+	  exchange:value "«processStringValue((e.value as ESTRING).string)»" ;
 	.
 	«ELSEIF e.value instanceof EMAP»
 	«putParameterNumber(e, "map", parameter_counter)»
@@ -276,7 +276,7 @@ class AADMGenerator extends AbstractGenerator {
 	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
 	  	«ENDIF»
 	  «ELSE»
-	  	exchange:value "«(p.value as ESTRING).string»" ;
+	  	exchange:value "«processStringValue((p.value as ESTRING).string)»" ;
 	  «ENDIF»
 	.
 	'''
@@ -299,7 +299,7 @@ class AADMGenerator extends AbstractGenerator {
 	  	exchange:value "{ get_input: «(a.value as GetInput).input.name» }" ;
 	  	«ENDIF»
 	  «ELSE»
-	  	exchange:value "«(a.value as ESTRING).string»" ;
+	  	exchange:value "«processStringValue((a.value as ESTRING).string)»" ;
 	  «ENDIF»
 	.
 	'''
@@ -388,6 +388,11 @@ class AADMGenerator extends AbstractGenerator {
 	
 	def processDescription (String description){
 		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
+	}
+	
+	def processStringValue(String value) {
+		val processed = value.replaceAll('"', '\\\\"')
+		return processed
 	}
 	
 }

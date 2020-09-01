@@ -26,17 +26,17 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_username: 
 								default: get_attribute: 
 									entity: SELF
 									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_keypath: 
 								default: get_attribute: 
 									entity: SELF
 									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 							src: 
 								default: get_property:
 									entity: SELF 
@@ -100,17 +100,17 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_username: 
 								default: get_attribute: 
 									entity: SELF
 									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_keypath: 
 								default: get_attribute: 
 									entity: SELF
 									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/data-movement/library/data/mover/playbooks/configure-gridftp-client.yml"
 					start:
@@ -119,17 +119,17 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_username: 
 								default: get_attribute: 
 									entity: SELF
 									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_keypath: 
 								default: get_attribute: 
 									entity: SELF
 									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.host
+									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 							src_protocol: 
 								default: get_property:
 									entity: SELF

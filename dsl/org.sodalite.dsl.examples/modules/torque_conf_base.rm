@@ -1,0 +1,37 @@
+node_types:
+	sodalite.nodes.hpc.job.torque.configuration.base:
+		description: "torque job configuration"
+		derived_from: tosca.nodes.SoftwareComponent
+		requirements:
+			host:
+				node: sodalite.nodes.hpc.wm.torque
+				capability: tosca.capabilities.Compute
+				relationship: tosca.relationships.HostedOn
+		properties:
+			name:
+				type: string
+				description: "Name of the job"
+				required: true
+			script:
+				type: string
+				description: "Job script that will be wrapped with j2 template to provide a PBS job script, 
+          					Ansible can process it with the template module"
+				required: true
+			workspace:
+				type: string
+				description: "Location of the sources and the job script"
+				default: '~/'
+			enable_audit:
+				type: boolean
+				default: 'false'
+			env:
+				type: map
+				required: false
+				default: 'null'
+		attributes:
+			job_id:
+				type: string
+		capabilities:
+			configured_job:
+				type: sodalite.capabilities.hpc.ConfiguredJob
+				valid_source_types: [sodalite.nodes.hpc.job.torque]
