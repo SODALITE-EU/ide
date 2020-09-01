@@ -77,7 +77,7 @@ node_types:
 									entity: SELF
 									property: sodalite.image_puller.singularity.puller_image_remote
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/image-puller/library/image-puller/playbooks/configure-puller.yml"
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/image-puller/playbooks/configure-puller.yml"
 					start:
 						inputs:
 							remote_host_public_address:
@@ -121,7 +121,7 @@ node_types:
 									property: sodalite.image_puller.singularity.puller_image
  		
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/image-puller/library/image-puller/playbooks/start-puller.yml"
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/image-puller/playbooks/start-puller.yml"
 							
 							
 							
