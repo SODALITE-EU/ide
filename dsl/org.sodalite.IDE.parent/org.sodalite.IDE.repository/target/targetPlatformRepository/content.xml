@@ -122,6 +122,97 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.AADM.ide.source' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='9'>
+        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
+        <property name='df_LT.bundleName' value='org.sodalite.dsl.AADM.ide Source'/>
+        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.ide'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.AADM.ide.source&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.RM.ui' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.RM.ui' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.RM.ui'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM.ui'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='11'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ui' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.ui' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.RM.ui.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.kb_reasoner_client' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.kb_reasoner_client.json' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.kb_reasoner_client.types' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ui.contentassist' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ui.quickfix' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ui.validation' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.ui' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='15'>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM.ide' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.shared' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.codetemplates.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui.editors' range='3.5.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='3.5.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.compare' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.builder' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0' optional='true' greedy='false'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.preferences' range='1.0.0'/>
+        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.ui' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.RM.ui; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.eclipse.sirius.ext.swt' version='6.2.3.201908120659' singleton='false' generation='2'>
       <update id='org.eclipse.sirius.ext.swt' range='[0.0.0,6.2.3.201908120659)' severity='0'/>
       <properties size='8'>
@@ -291,6 +382,31 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.sodalite.dsl.optimization.feature.feature.group' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.optimization.feature.feature.group' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='6'>
+        <property name='org.eclipse.equinox.p2.name' value='Optimization Editor'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.optimization.feature'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.feature.feature.group' version='1.0.0.202009011241'/>
+      </provides>
+      <requires size='4'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.ide' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.ui' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.feature.feature.jar' range='[1.0.0.202009011241,1.0.0.202009011241]'>
+          <filter>
+            (org.eclipse.update.install.features=true)
+          </filter>
+        </required>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
     <unit id='org.w3c.dom.events' version='3.0.0.draft20060413_v201105210656' singleton='false'>
       <update id='org.w3c.dom.events' range='[0.0.0,3.0.0.draft20060413_v201105210656)' severity='0'/>
       <properties size='8'>
@@ -365,47 +481,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.xtext.ui.codetemplates.ide&#xA;Bundle-Version: 2.19.0.v20190902-1023
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.AADM.ide' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.AADM.ide'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.ide'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='7'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr.internal' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr.lexer' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='5'>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ide' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.ide' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.AADM.ide; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
           </instruction>
         </instructions>
       </touchpointData>
@@ -541,6 +616,62 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.xtext.xbase.lib&#xA;Bundle-Version: 2.19.0.v20190902-0728
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.optimization' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.optimization' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.optimization'/>
+        <property name='org.eclipse.equinox.p2.provider' value='My Company'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.optimization'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='16'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.optimization' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.optimization' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.scoping' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.optimization.util' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.parser.antlr' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.generator' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.optimization.impl' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.validation' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.parser.antlr.lexer' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.parser.antlr.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.services' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.serializer' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.optimization' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='11'>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.5.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.util' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.common' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0'/>
+        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
+        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.optimization' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.optimization; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
           </instruction>
         </instructions>
       </touchpointData>
@@ -1215,70 +1346,41 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.AADM.feature.source.feature.jar' version='1.0.0.202009011144'>
-      <properties size='6'>
-        <property name='org.eclipse.equinox.p2.name' value='AADM Editor Developer Resources'/>
+    <unit id='org.sodalite.dsl.RM.feature.feature.group' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.RM.feature.feature.group' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='8'>
+        <property name='org.eclipse.equinox.p2.name' value='RM Editor'/>
+        <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
+        <property name='org.eclipse.equinox.p2.description.url' value='http://www.example.com/description'/>
         <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
         <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.feature'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM.feature'/>
         <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources-feature'/>
       </properties>
-      <provides size='3'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.source.feature.jar' version='1.0.0.202009011144'/>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
-        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.AADM.feature.source' version='1.0.0.202009011144'/>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.feature.group' version='1.0.0.202009011241'/>
       </provides>
-      <filter>
-        (org.eclipse.update.install.features=true)
-      </filter>
-      <artifacts size='1'>
-        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.AADM.feature.source' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='zipped'>
-            true
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.AADM.ui.source' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='9'>
-        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
-        <property name='df_LT.bundleName' value='org.sodalite.dsl.AADM.ui Source'/>
-        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.ui'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources'/>
-      </properties>
-      <provides size='5'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.AADM.ui.source&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
+      <requires size='5'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ui' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ide' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.feature.jar' range='[1.0.0.202009011241,1.0.0.202009011241]'>
+          <filter>
+            (org.eclipse.update.install.features=true)
+          </filter>
+        </required>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+      <licenses size='1'>
+        <license uri='http://www.example.com/license' url='http://www.example.com/license'>
+          [Enter License Description here.]
+        </license>
+      </licenses>
+      <copyright uri='http://www.example.com/copyright' url='http://www.example.com/copyright'>
+        [Enter Copyright Description here.]
+      </copyright>
     </unit>
     <unit id='org.apache.commons.logging' version='1.2.0.v20180409-1502' singleton='false'>
       <update id='org.apache.commons.logging' range='[0.0.0,1.2.0.v20180409-1502)' severity='0'/>
@@ -1365,6 +1467,42 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.emf.edit.ui;singleton:=true&#xA;Bundle-Version: 2.16.0.v20181104-0733
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.RM.source' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.RM.source' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='9'>
+        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
+        <property name='df_LT.bundleName' value='org.sodalite.dsl.RM Source'/>
+        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.source' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.source' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.RM.source&#xA;Bundle-Version: 1.0.0.202009011241
           </instruction>
         </instructions>
       </touchpointData>
@@ -1984,6 +2122,58 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.optimization.ui' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.optimization.ui'/>
+        <property name='org.eclipse.equinox.p2.provider' value='My Company'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.optimization.ui'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='7'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ui.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ui.quickfix' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ui.contentassist' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='16'>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization.ide' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.shared' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.codetemplates.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui.editors' range='3.5.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='3.5.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.compare' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.builder' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0' optional='true' greedy='false'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ui' range='1.0.0'/>
+        <required namespace='osgi.bundle' name='com.google.gson' range='2.8.2'/>
+        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.optimization.ui; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.apache.ant' version='1.10.5.v20190526-1402' singleton='false' generation='2'>
       <update id='org.apache.ant' range='[0.0.0,1.10.5.v20190526-1402)' severity='0'/>
       <properties size='7'>
@@ -2194,86 +2384,6 @@
           </instruction>
         </instructions>
       </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.RM.ui' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.RM.ui' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.RM.ui'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM.ui'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='11'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ui' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.ui' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.RM.ui.internal' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.kb_reasoner_client' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.kb_reasoner_client.json' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.kb_reasoner_client.types' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ui.contentassist' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ui.quickfix' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ui.validation' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.ui' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='15'>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM.ide' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.shared' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.codetemplates.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui.editors' range='3.5.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='3.5.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.compare' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.builder' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0' optional='true' greedy='false'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.preferences' range='1.0.0'/>
-        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.ui' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.RM.ui; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.optimization.feature.feature.group' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.optimization.feature.feature.group' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='6'>
-        <property name='org.eclipse.equinox.p2.name' value='Optimization Editor'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.optimization.feature'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='1'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.feature.feature.group' version='1.0.0.202009011144'/>
-      </provides>
-      <requires size='4'>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.ide' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.ui' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.feature.feature.jar' range='[1.0.0.202009011144,1.0.0.202009011144]'>
-          <filter>
-            (org.eclipse.update.install.features=true)
-          </filter>
-        </required>
-      </requires>
-      <touchpoint id='null' version='0.0.0'/>
     </unit>
     <unit id='org.eclipse.e4.ui.css.swt' version='0.13.600.v20190805-1157' generation='2'>
       <update id='org.eclipse.e4.ui.css.swt' range='[0.0.0,0.13.600.v20190805-1157)' severity='0'/>
@@ -2576,42 +2686,6 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.AADM.ide.source' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='9'>
-        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
-        <property name='df_LT.bundleName' value='org.sodalite.dsl.AADM.ide Source'/>
-        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.ide'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources'/>
-      </properties>
-      <provides size='5'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.ide.source' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.AADM.ide.source&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
     <unit id='org.eclipse.swt.cocoa.macosx.x86_64' version='3.112.0.v20190904-0609'>
       <update id='org.eclipse.swt.cocoa.macosx.x86_64' range='[0.0.0,3.112.0.v20190904-0609)' severity='0'/>
       <properties size='8'>
@@ -2815,79 +2889,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.e4.ui.dialogs&#xA;Bundle-Version: 1.1.600.v20190814-0636
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.preferences' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.preferences' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='Sodalite IDE Preferences Pages'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain S.A.'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.preferences'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='5'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.preferences' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ui.preferences' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.preferences' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='3'>
-        <required namespace='osgi.bundle' name='org.eclipse.ui' range='3.114.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.16.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.preferences' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.preferences;singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.RM.source' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.RM.source' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='9'>
-        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
-        <property name='df_LT.bundleName' value='org.sodalite.dsl.RM Source'/>
-        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources'/>
-      </properties>
-      <provides size='5'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.source' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.source' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.RM.source&#xA;Bundle-Version: 1.0.0.202009011144
           </instruction>
         </instructions>
       </touchpointData>
@@ -3122,34 +3123,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.gmf.runtime.emf.clipboard.core;singleton:=true&#xA;Bundle-Version: 1.7.0.201905141505
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.AADM.feature.feature.jar' version='1.0.0.202009011144'>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='AADM Editor'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.feature'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='3'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.feature.jar' version='1.0.0.202009011144'/>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
-        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.AADM.feature' version='1.0.0.202009011144'/>
-      </provides>
-      <filter>
-        (org.eclipse.update.install.features=true)
-      </filter>
-      <artifacts size='1'>
-        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.AADM.feature' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='zipped'>
-            true
           </instruction>
         </instructions>
       </touchpointData>
@@ -3603,6 +3576,47 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.jdt.ui; singleton:=true&#xA;Bundle-Version: 3.19.0.v20190827-1733
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.RM.ide' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.RM.ide' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.RM.ide'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM.ide'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='7'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ide' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.ide' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr.lexer' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.ide' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='5'>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ide' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.ide' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.ide' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.RM.ide; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
           </instruction>
         </instructions>
       </touchpointData>
@@ -4065,62 +4079,6 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.RM' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.RM' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.RM'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='16'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr.internal' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.rM' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.rM.impl' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.rM.util' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.scoping' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.serializer' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.services' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.validation' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.generator' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr.lexer' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='11'>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.5.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.util' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.common' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0'/>
-        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
-        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.RM; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
     <unit id='org.eclipse.xtext' version='2.19.0.v20190902-0737' generation='2'>
       <update id='org.eclipse.xtext' range='[0.0.0,2.19.0.v20190902-0737)' severity='0'/>
       <properties size='5'>
@@ -4339,6 +4297,58 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.sirius.ext.emf.ui;singleton:=true&#xA;Bundle-Version: 6.2.3.201908120659
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.AADM.design' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.AADM.design' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='8'>
+        <property name='df_LT.pluginName' value='org.sodalite.dsl.AADM.design'/>
+        <property name='df_LT.providerName' value='Eclipse Modeling Project'/>
+        <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.design'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='6'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.design' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.design' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.AADM.design' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.design' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <requires size='14'>
+        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.core.resources' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.sirius' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.sirius.common.acceleo.aql' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='com.google.guava' range='27.1.0'/>
+        <required namespace='osgi.bundle' name='com.google.inject' range='3.0.0'/>
+        <required namespace='osgi.bundle' name='com.altran.general.integration.xtextsirius.runtime' range='0.18.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM' range='1.0.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ui' range='1.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.sirius.ext.emf.edit' range='6.2.3'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.preferences' range='1.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.design' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.AADM.design;singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
           </instruction>
         </instructions>
       </touchpointData>
@@ -4626,6 +4636,67 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.AADM.ui' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.AADM.ui'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.ui'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='8'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.AADM.ui.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ui.backend' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ui.contentassist' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ui.quickfix' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='24'>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ide' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.shared' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.codetemplates.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui.editors' range='3.5.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='3.5.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.compare' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.builder' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0' optional='true' greedy='false'/>
+        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='1.0.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.preferences' range='1.0.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM.ui' range='1.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.sirius' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.transaction' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.sirius.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.sirius.common' range='6.2.3'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='com.google.gson' range='0.0.0'/>
+        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.AADM.ui; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.eclipse.e4.emf.xpath' version='0.2.400.v20190621-1946' singleton='false' generation='2'>
       <update id='org.eclipse.e4.emf.xpath' range='[0.0.0,0.2.400.v20190621-1946)' severity='0'/>
       <properties size='7'>
@@ -4709,6 +4780,47 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.xtext.ui.shared;singleton:=true&#xA;Bundle-Version: 2.19.0.v20190902-1023
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.AADM.ide' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.AADM.ide'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.ide'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='7'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr.lexer' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='5'>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ide' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.ide' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.ide' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.AADM.ide; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
           </instruction>
         </instructions>
       </touchpointData>
@@ -4841,47 +4953,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.eef;singleton:=true&#xA;Bundle-Version: 2.1.2.201903071543
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.RM.ide' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.RM.ide' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.RM.ide'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM.ide'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='7'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ide' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.ide' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr.internal' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ide.contentassist.antlr.lexer' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.ide' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='5'>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ide' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.ide' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.ide' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.RM.ide; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
           </instruction>
         </instructions>
       </touchpointData>
@@ -5665,6 +5736,127 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.sodalite.dsl.AADM.feature.source.feature.jar' version='1.0.0.202009011241'>
+      <properties size='6'>
+        <property name='org.eclipse.equinox.p2.name' value='AADM Editor Developer Resources'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.feature'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources-feature'/>
+      </properties>
+      <provides size='3'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.source.feature.jar' version='1.0.0.202009011241'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
+        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.AADM.feature.source' version='1.0.0.202009011241'/>
+      </provides>
+      <filter>
+        (org.eclipse.update.install.features=true)
+      </filter>
+      <artifacts size='1'>
+        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.AADM.feature.source' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='zipped'>
+            true
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.AADM.ui.source' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='9'>
+        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
+        <property name='df_LT.bundleName' value='org.sodalite.dsl.AADM.ui Source'/>
+        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.ui'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.ui.source' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.AADM.ui.source&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.RM' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.RM' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.RM'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='16'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.rM' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.rM.impl' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.rM.util' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.scoping' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.serializer' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.services' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.validation' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.generator' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr.lexer' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='11'>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.5.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.util' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.common' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0'/>
+        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
+        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.RM; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='com.ibm.icu' version='64.2.0.v20190507-1337' singleton='false' generation='2'>
       <update id='com.ibm.icu' range='[0.0.0,64.2.0.v20190507-1337)' severity='0'/>
       <properties size='8'>
@@ -5782,58 +5974,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.xtext.common.types;singleton:=true&#xA;Bundle-Version: 2.19.0.v20190902-0952
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.AADM.design' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.AADM.design' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='8'>
-        <property name='df_LT.pluginName' value='org.sodalite.dsl.AADM.design'/>
-        <property name='df_LT.providerName' value='Eclipse Modeling Project'/>
-        <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.design'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='6'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.design' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.design' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.AADM.design' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.design' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <requires size='14'>
-        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.core.resources' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.sirius' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.sirius.common.acceleo.aql' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='com.google.guava' range='27.1.0'/>
-        <required namespace='osgi.bundle' name='com.google.inject' range='3.0.0'/>
-        <required namespace='osgi.bundle' name='com.altran.general.integration.xtextsirius.runtime' range='0.18.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM' range='1.0.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ui' range='1.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.sirius.ext.emf.edit' range='6.2.3'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.preferences' range='1.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.design' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.AADM.design;singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
           </instruction>
         </instructions>
       </touchpointData>
@@ -6307,103 +6447,6 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.AADM.source' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.AADM.source' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='9'>
-        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
-        <property name='df_LT.bundleName' value='org.sodalite.dsl.AADM Source'/>
-        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources'/>
-      </properties>
-      <provides size='5'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.source' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.source' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.AADM.source&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.AADM.ui' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.AADM.ui'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.ui'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='8'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.AADM.ui.internal' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ui.backend' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ui.contentassist' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.ui.quickfix' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='24'>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ide' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.shared' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.codetemplates.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui.editors' range='3.5.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='3.5.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.compare' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.builder' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0' optional='true' greedy='false'/>
-        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='1.0.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.preferences' range='1.0.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM.ui' range='1.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.sirius' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.transaction' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.sirius.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.sirius.common' range='6.2.3'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='com.google.gson' range='0.0.0'/>
-        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.ui' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.AADM.ui; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
     <unit id='org.eclipse.xpand' version='2.2.0.v201605260315' singleton='false'>
       <update id='org.eclipse.xpand' range='[0.0.0,2.2.0.v201605260315)' severity='0'/>
       <properties size='5'>
@@ -6572,42 +6615,6 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.RM.ui.source' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='9'>
-        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
-        <property name='df_LT.bundleName' value='org.sodalite.dsl.RM.ui Source'/>
-        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM.ui'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources'/>
-      </properties>
-      <provides size='5'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.RM.ui.source&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
     <unit id='org.eclipse.ltk.core.refactoring' version='3.10.200.v20190814-1719' generation='2'>
       <update id='org.eclipse.ltk.core.refactoring' range='[0.0.0,3.10.200.v20190814-1719)' severity='0'/>
       <properties size='8'>
@@ -6662,6 +6669,45 @@
           </instruction>
         </instructions>
       </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.RM.feature.source.feature.jar' version='1.0.0.202009011241'>
+      <properties size='8'>
+        <property name='org.eclipse.equinox.p2.name' value='RM Editor Developer Resources'/>
+        <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
+        <property name='org.eclipse.equinox.p2.description.url' value='http://www.example.com/description'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM.feature'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources-feature'/>
+      </properties>
+      <provides size='3'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.source.feature.jar' version='1.0.0.202009011241'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
+        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.RM.feature.source' version='1.0.0.202009011241'/>
+      </provides>
+      <filter>
+        (org.eclipse.update.install.features=true)
+      </filter>
+      <artifacts size='1'>
+        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.RM.feature.source' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='zipped'>
+            true
+          </instruction>
+        </instructions>
+      </touchpointData>
+      <licenses size='1'>
+        <license uri='http://www.example.com/license' url='http://www.example.com/license'>
+          [Enter License Description here.]
+        </license>
+      </licenses>
+      <copyright uri='http://www.example.com/copyright' url='http://www.example.com/copyright'>
+        [Enter Copyright Description here.]
+      </copyright>
     </unit>
     <unit id='org.eclipse.sirius.ext.emf.edit' version='6.2.3.201908120659' singleton='false' generation='2'>
       <update id='org.eclipse.sirius.ext.emf.edit' range='[0.0.0,6.2.3.201908120659)' severity='0'/>
@@ -7590,65 +7636,6 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.AADM' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.AADM' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.AADM'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='16'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr.internal' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.services' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.validation' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.aADM' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.aADM.util' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.serializer' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.scoping' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.generator' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.aADM.impl' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr.lexer' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='14'>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.5.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.util' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.common' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0'/>
-        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='1.0.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization' range='1.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.core.resources' range='3.13.500'/>
-        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.AADM; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
     <unit id='org.eclipse.e4.ui.css.swt.theme' version='0.12.400.v20190812-0413' generation='2'>
       <update id='org.eclipse.e4.ui.css.swt.theme' range='[0.0.0,0.12.400.v20190812-0413)' severity='0'/>
       <properties size='8'>
@@ -7700,6 +7687,42 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.e4.ui.css.swt.theme;singleton:=true&#xA;Bundle-Version: 0.12.400.v20190812-0413
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.AADM.source' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.AADM.source' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='9'>
+        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
+        <property name='df_LT.bundleName' value='org.sodalite.dsl.AADM Source'/>
+        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.source' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.source' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.AADM.source&#xA;Bundle-Version: 1.0.0.202009011241
           </instruction>
         </instructions>
       </touchpointData>
@@ -7932,6 +7955,78 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.emf.validation; singleton:=true&#xA;Bundle-Version: 1.8.0.201812070911
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.preferences.source' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.preferences.source' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='9'>
+        <property name='df_LT.bundleVendor' value='Atos Spain S.A.'/>
+        <property name='df_LT.bundleName' value='Sodalite IDE Preferences Pages Source'/>
+        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.preferences'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.preferences.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.preferences.source' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.preferences.source' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.preferences.source&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.RM.ui.source' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='9'>
+        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
+        <property name='df_LT.bundleName' value='org.sodalite.dsl.RM.ui Source'/>
+        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM.ui'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.ui.source' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.RM.ui.source&#xA;Bundle-Version: 1.0.0.202009011241
           </instruction>
         </instructions>
       </touchpointData>
@@ -9045,6 +9140,101 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.RM.ide.source' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='9'>
+        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
+        <property name='df_LT.bundleName' value='org.sodalite.dsl.RM.ide Source'/>
+        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM.ide'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.RM.ide.source&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.AADM' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.AADM' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.AADM'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='16'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.services' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.validation' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.aADM' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.aADM.util' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.serializer' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.scoping' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.generator' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.aADM.impl' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.parser.antlr.lexer' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='14'>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.5.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.util' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.common' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0'/>
+        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.RM' range='1.0.0'/>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization' range='1.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.core.resources' range='3.13.500'/>
+        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.AADM; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.eclipse.e4.ui.di' version='1.2.600.v20190510-1100' singleton='false' generation='2'>
       <update id='org.eclipse.e4.ui.di' range='[0.0.0,1.2.600.v20190510-1100)' severity='0'/>
       <properties size='8'>
@@ -9178,6 +9368,33 @@
           </instruction>
         </instructions>
       </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.AADM.feature.feature.group' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.AADM.feature.feature.group' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='6'>
+        <property name='org.eclipse.equinox.p2.name' value='AADM Editor'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.feature'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.feature.group' version='1.0.0.202009011241'/>
+      </provides>
+      <requires size='6'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ide' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ui' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.design' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.feature.jar' range='[1.0.0.202009011241,1.0.0.202009011241]'>
+          <filter>
+            (org.eclipse.update.install.features=true)
+          </filter>
+        </required>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
     </unit>
     <unit id='org.apache.commons.cli' version='1.2.0.v201404270220' singleton='false'>
       <update id='org.apache.commons.cli' range='[0.0.0,1.2.0.v201404270220)' severity='0'/>
@@ -9315,6 +9532,44 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.sodalite.dsl.RM.feature.source.feature.group' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.RM.feature.source.feature.group' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='9'>
+        <property name='org.eclipse.equinox.p2.name' value='RM Editor Developer Resources'/>
+        <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
+        <property name='org.eclipse.equinox.p2.description.url' value='http://www.example.com/description'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM.feature'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources-feature'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.source.feature.group' version='1.0.0.202009011241'/>
+      </provides>
+      <requires size='6'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.feature.group' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ui.source' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.source' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ide.source' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences.source' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.source.feature.jar' range='[1.0.0.202009011241,1.0.0.202009011241]'>
+          <filter>
+            (org.eclipse.update.install.features=true)
+          </filter>
+        </required>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+      <licenses size='1'>
+        <license uri='http://www.example.com/license' url='http://www.example.com/license'>
+          [Enter License Description here.]
+        </license>
+      </licenses>
+      <copyright uri='http://www.example.com/copyright' url='http://www.example.com/copyright'>
+        [Enter Copyright Description here.]
+      </copyright>
+    </unit>
     <unit id='org.eclipse.compare' version='3.7.700.v20190802-1838' generation='2'>
       <update id='org.eclipse.compare' range='[0.0.0,3.7.700.v20190802-1838)' severity='0'/>
       <properties size='8'>
@@ -9374,23 +9629,23 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.preferences.source' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.preferences.source' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
+    <unit id='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.AADM.design.source' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
       <properties size='9'>
-        <property name='df_LT.bundleVendor' value='Atos Spain S.A.'/>
-        <property name='df_LT.bundleName' value='Sodalite IDE Preferences Pages Source'/>
+        <property name='df_LT.bundleVendor' value='Eclipse Modeling Project'/>
+        <property name='df_LT.bundleName' value='org.sodalite.dsl.AADM.design Source'/>
         <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
         <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
         <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
         <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.preferences'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.design'/>
         <property name='maven-version' value='1.0.0-SNAPSHOT'/>
         <property name='maven-classifier' value='sources'/>
       </properties>
       <provides size='5'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.preferences.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.preferences.source' version='1.0.0.202009011144'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011241'>
           <properties size='1'>
             <property name='type' value='osgi.bundle'/>
           </properties>
@@ -9399,16 +9654,45 @@
         <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
       </provides>
       <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.preferences.source' version='1.0.0.202009011144'/>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011241'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
         <instructions size='1'>
           <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.preferences.source&#xA;Bundle-Version: 1.0.0.202009011144
+            Bundle-SymbolicName: org.sodalite.dsl.AADM.design.source&#xA;Bundle-Version: 1.0.0.202009011241
           </instruction>
         </instructions>
       </touchpointData>
+    </unit>
+    <unit id='org.sodalite.dsl.AADM.feature.source.feature.group' version='1.0.0.202009011241' singleton='false'>
+      <update id='org.sodalite.dsl.AADM.feature.source.feature.group' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='7'>
+        <property name='org.eclipse.equinox.p2.name' value='AADM Editor Developer Resources'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
+        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.feature'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+        <property name='maven-classifier' value='sources-feature'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.source.feature.group' version='1.0.0.202009011241'/>
+      </provides>
+      <requires size='7'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.feature.group' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.source' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ide.source' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ui.source' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences.source' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.design.source' range='[1.0.0.202009011241,1.0.0.202009011241]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.source.feature.jar' range='[1.0.0.202009011241,1.0.0.202009011241]'>
+          <filter>
+            (org.eclipse.update.install.features=true)
+          </filter>
+        </required>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
     </unit>
     <unit id='org.eclipse.emf.mwe.utils' version='1.5.0.201906111547' singleton='false' generation='2'>
       <update id='org.eclipse.emf.mwe.utils' range='[0.0.0,1.5.0.201906111547)' severity='0'/>
@@ -9595,34 +9879,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.team.core; singleton:=true&#xA;Bundle-Version: 3.8.700.v20190619-1613
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.optimization.feature.feature.jar' version='1.0.0.202009011144'>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='Optimization Editor'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.optimization.feature'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='3'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.feature.feature.jar' version='1.0.0.202009011144'/>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
-        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.optimization.feature' version='1.0.0.202009011144'/>
-      </provides>
-      <filter>
-        (org.eclipse.update.install.features=true)
-      </filter>
-      <artifacts size='1'>
-        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.optimization.feature' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='zipped'>
-            true
           </instruction>
         </instructions>
       </touchpointData>
@@ -10176,6 +10432,43 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='org.sodalite.dsl.preferences' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.preferences' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='Sodalite IDE Preferences Pages'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain S.A.'/>
+        <property name='maven-groupId' value='org.sodalite.IDE'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.preferences'/>
+        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.preferences' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.ui.preferences' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.preferences' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='3'>
+        <required namespace='osgi.bundle' name='org.eclipse.ui' range='3.114.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='3.16.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.preferences' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.preferences;singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.eclipse.xtext.smap' version='2.19.0.v20190902-0952' singleton='false' generation='2'>
       <update id='org.eclipse.xtext.smap' range='[0.0.0,2.19.0.v20190902-0952)' severity='0'/>
       <properties size='5'>
@@ -10213,41 +10506,43 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.RM.ide.source' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='9'>
-        <property name='df_LT.bundleVendor' value='Atos Spain SA'/>
-        <property name='df_LT.bundleName' value='org.sodalite.dsl.RM.ide Source'/>
-        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
+    <unit id='org.sodalite.dsl.RM.feature.feature.jar' version='1.0.0.202009011241'>
+      <properties size='7'>
+        <property name='org.eclipse.equinox.p2.name' value='RM Editor'/>
+        <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
+        <property name='org.eclipse.equinox.p2.description.url' value='http://www.example.com/description'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
         <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM.ide'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.RM.feature'/>
         <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources'/>
       </properties>
-      <provides size='5'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      <provides size='3'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.feature.jar' version='1.0.0.202009011241'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
+        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.RM.feature' version='1.0.0.202009011241'/>
       </provides>
+      <filter>
+        (org.eclipse.update.install.features=true)
+      </filter>
       <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.RM.ide.source' version='1.0.0.202009011144'/>
+        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.RM.feature' version='1.0.0.202009011241'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
         <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.RM.ide.source&#xA;Bundle-Version: 1.0.0.202009011144
+          <instruction key='zipped'>
+            true
           </instruction>
         </instructions>
       </touchpointData>
+      <licenses size='1'>
+        <license uri='http://www.example.com/license' url='http://www.example.com/license'>
+          [Enter License Description here.]
+        </license>
+      </licenses>
+      <copyright uri='http://www.example.com/copyright' url='http://www.example.com/copyright'>
+        [Enter Copyright Description here.]
+      </copyright>
     </unit>
     <unit id='org.eclipse.gmf.runtime.emf.type.core' version='1.9.0.201905141505' generation='2'>
       <update id='org.eclipse.gmf.runtime.emf.type.core' range='[0.0.0,1.9.0.201905141505)' severity='0'/>
@@ -10302,74 +10597,6 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.optimization.ide' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.optimization.ide'/>
-        <property name='org.eclipse.equinox.p2.provider' value='My Company'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.optimization.ide'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='7'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ide.contentassist.antlr' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ide.contentassist.antlr.lexer' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ide.contentassist.antlr.internal' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='5'>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ide' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.ide' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.optimization.ide; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.AADM.feature.feature.group' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.AADM.feature.feature.group' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='6'>
-        <property name='org.eclipse.equinox.p2.name' value='AADM Editor'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.feature'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='1'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.feature.group' version='1.0.0.202009011144'/>
-      </provides>
-      <requires size='6'>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ide' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ui' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.design' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.feature.jar' range='[1.0.0.202009011144,1.0.0.202009011144]'>
-          <filter>
-            (org.eclipse.update.install.features=true)
-          </filter>
-        </required>
-      </requires>
-      <touchpoint id='null' version='0.0.0'/>
-    </unit>
     <unit id='org.w3c.dom.smil' version='1.0.1.v200903091627' singleton='false'>
       <update id='org.w3c.dom.smil' range='[0.0.0,1.0.1.v200903091627)' severity='0'/>
       <properties size='8'>
@@ -10401,58 +10628,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.w3c.dom.smil&#xA;Bundle-Version: 1.0.1.v200903091627
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.optimization.ui' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.optimization.ui'/>
-        <property name='org.eclipse.equinox.p2.provider' value='My Company'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.optimization.ui'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='7'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ui.internal' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ui.quickfix' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ui.contentassist' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='16'>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization.ide' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.shared' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.codetemplates.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui.editors' range='3.5.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='3.5.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.compare' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.builder' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0' optional='true' greedy='false'/>
-        <required namespace='osgi.bundle' name='org.sodalite.dsl.AADM.ui' range='1.0.0'/>
-        <required namespace='osgi.bundle' name='com.google.gson' range='2.8.2'/>
-        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.optimization.ui' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.optimization.ui; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
           </instruction>
         </instructions>
       </touchpointData>
@@ -10513,43 +10688,33 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.RM.feature.source.feature.group' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.RM.feature.source.feature.group' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='9'>
-        <property name='org.eclipse.equinox.p2.name' value='RM Editor Developer Resources'/>
-        <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
-        <property name='org.eclipse.equinox.p2.description.url' value='http://www.example.com/description'/>
+    <unit id='org.sodalite.dsl.AADM.feature.feature.jar' version='1.0.0.202009011241'>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='AADM Editor'/>
         <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
         <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM.feature'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.feature'/>
         <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources-feature'/>
       </properties>
-      <provides size='1'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.source.feature.group' version='1.0.0.202009011144'/>
+      <provides size='3'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.feature.jar' version='1.0.0.202009011241'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
+        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.AADM.feature' version='1.0.0.202009011241'/>
       </provides>
-      <requires size='6'>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.feature.group' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ui.source' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.source' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ide.source' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences.source' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.source.feature.jar' range='[1.0.0.202009011144,1.0.0.202009011144]'>
-          <filter>
-            (org.eclipse.update.install.features=true)
-          </filter>
-        </required>
-      </requires>
-      <touchpoint id='null' version='0.0.0'/>
-      <licenses size='1'>
-        <license uri='http://www.example.com/license' url='http://www.example.com/license'>
-          [Enter License Description here.]
-        </license>
-      </licenses>
-      <copyright uri='http://www.example.com/copyright' url='http://www.example.com/copyright'>
-        [Enter Copyright Description here.]
-      </copyright>
+      <filter>
+        (org.eclipse.update.install.features=true)
+      </filter>
+      <artifacts size='1'>
+        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.AADM.feature' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='zipped'>
+            true
+          </instruction>
+        </instructions>
+      </touchpointData>
     </unit>
     <unit id='org.eclipse.emf.codegen' version='2.19.0.v20190821-1536'>
       <update id='org.eclipse.emf.codegen' range='[0.0.0,2.19.0.v20190821-1536)' severity='0'/>
@@ -10653,74 +10818,6 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.AADM.feature.source.feature.group' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.AADM.feature.source.feature.group' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='7'>
-        <property name='org.eclipse.equinox.p2.name' value='AADM Editor Developer Resources'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.feature'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources-feature'/>
-      </properties>
-      <provides size='1'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.source.feature.group' version='1.0.0.202009011144'/>
-      </provides>
-      <requires size='7'>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.feature.group' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.source' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ide.source' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.ui.source' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences.source' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.design.source' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.feature.source.feature.jar' range='[1.0.0.202009011144,1.0.0.202009011144]'>
-          <filter>
-            (org.eclipse.update.install.features=true)
-          </filter>
-        </required>
-      </requires>
-      <touchpoint id='null' version='0.0.0'/>
-    </unit>
-    <unit id='org.sodalite.dsl.RM.feature.source.feature.jar' version='1.0.0.202009011144'>
-      <properties size='8'>
-        <property name='org.eclipse.equinox.p2.name' value='RM Editor Developer Resources'/>
-        <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
-        <property name='org.eclipse.equinox.p2.description.url' value='http://www.example.com/description'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM.feature'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources-feature'/>
-      </properties>
-      <provides size='3'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.source.feature.jar' version='1.0.0.202009011144'/>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
-        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.RM.feature.source' version='1.0.0.202009011144'/>
-      </provides>
-      <filter>
-        (org.eclipse.update.install.features=true)
-      </filter>
-      <artifacts size='1'>
-        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.RM.feature.source' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='zipped'>
-            true
-          </instruction>
-        </instructions>
-      </touchpointData>
-      <licenses size='1'>
-        <license uri='http://www.example.com/license' url='http://www.example.com/license'>
-          [Enter License Description here.]
-        </license>
-      </licenses>
-      <copyright uri='http://www.example.com/copyright' url='http://www.example.com/copyright'>
-        [Enter Copyright Description here.]
-      </copyright>
-    </unit>
     <unit id='org.apache.batik.constants' version='1.11.0.v20190515-0436' singleton='false' generation='2'>
       <update id='org.apache.batik.constants' range='[0.0.0,1.11.0.v20190515-0436)' severity='0'/>
       <properties size='7'>
@@ -10756,42 +10853,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.apache.batik.constants&#xA;Bundle-Version: 1.11.0.v20190515-0436
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.AADM.design.source' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='9'>
-        <property name='df_LT.bundleVendor' value='Eclipse Modeling Project'/>
-        <property name='df_LT.bundleName' value='org.sodalite.dsl.AADM.design Source'/>
-        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.AADM.design'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-        <property name='maven-classifier' value='sources'/>
-      </properties>
-      <provides size='5'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.AADM.design.source' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.AADM.design.source&#xA;Bundle-Version: 1.0.0.202009011144
           </instruction>
         </instructions>
       </touchpointData>
@@ -11192,26 +11253,24 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.RM.feature.feature.jar' version='1.0.0.202009011144'>
-      <properties size='7'>
-        <property name='org.eclipse.equinox.p2.name' value='RM Editor'/>
-        <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
-        <property name='org.eclipse.equinox.p2.description.url' value='http://www.example.com/description'/>
+    <unit id='org.sodalite.dsl.optimization.feature.feature.jar' version='1.0.0.202009011241'>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='Optimization Editor'/>
         <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
         <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM.feature'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.optimization.feature'/>
         <property name='maven-version' value='1.0.0-SNAPSHOT'/>
       </properties>
       <provides size='3'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.feature.jar' version='1.0.0.202009011144'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.feature.feature.jar' version='1.0.0.202009011241'/>
         <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
-        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.RM.feature' version='1.0.0.202009011144'/>
+        <provided namespace='org.eclipse.update.feature' name='org.sodalite.dsl.optimization.feature' version='1.0.0.202009011241'/>
       </provides>
       <filter>
         (org.eclipse.update.install.features=true)
       </filter>
       <artifacts size='1'>
-        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.RM.feature' version='1.0.0.202009011144'/>
+        <artifact classifier='org.eclipse.update.feature' id='org.sodalite.dsl.optimization.feature' version='1.0.0.202009011241'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
@@ -11221,14 +11280,6 @@
           </instruction>
         </instructions>
       </touchpointData>
-      <licenses size='1'>
-        <license uri='http://www.example.com/license' url='http://www.example.com/license'>
-          [Enter License Description here.]
-        </license>
-      </licenses>
-      <copyright uri='http://www.example.com/copyright' url='http://www.example.com/copyright'>
-        [Enter Copyright Description here.]
-      </copyright>
     </unit>
     <unit id='org.eclipse.ui.ide' version='3.16.0.v20190916-1323' generation='2'>
       <update id='org.eclipse.ui.ide' range='[0.0.0,3.16.0.v20190916-1323)' severity='0'/>
@@ -11600,62 +11651,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.sirius.ui;singleton:=true&#xA;Bundle-Version: 6.2.3.201908120659
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='org.sodalite.dsl.optimization' version='1.0.0.202009011144' generation='2'>
-      <update id='org.sodalite.dsl.optimization' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='5'>
-        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.optimization'/>
-        <property name='org.eclipse.equinox.p2.provider' value='My Company'/>
-        <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.optimization'/>
-        <property name='maven-version' value='1.0.0-SNAPSHOT'/>
-      </properties>
-      <provides size='16'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization' version='1.0.0.202009011144'/>
-        <provided namespace='osgi.bundle' name='org.sodalite.dsl.optimization' version='1.0.0.202009011144'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.optimization' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.scoping' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.optimization.util' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.parser.antlr' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.generator' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.optimization.impl' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.validation' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.parser.antlr.lexer' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.parser.antlr.internal' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.services' version='0.0.0'/>
-        <provided namespace='java.package' name='org.sodalite.dsl.optimization.serializer' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='org.sodalite.dsl.optimization' version='1.0.0.202009011144'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-      </provides>
-      <requires size='11'>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.equinox.common' range='3.5.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.lib' range='2.14.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.util' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.common' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtend.lib' range='2.14.0'/>
-        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
-        <required namespace='java.package' name='org.apache.log4j' range='0.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.optimization' version='1.0.0.202009011144'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: org.sodalite.dsl.optimization; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011144
           </instruction>
         </instructions>
       </touchpointData>
@@ -12038,41 +12033,46 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='org.sodalite.dsl.RM.feature.feature.group' version='1.0.0.202009011144' singleton='false'>
-      <update id='org.sodalite.dsl.RM.feature.feature.group' range='[0.0.0,1.0.0.202009011144)' severity='0'/>
-      <properties size='8'>
-        <property name='org.eclipse.equinox.p2.name' value='RM Editor'/>
-        <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
-        <property name='org.eclipse.equinox.p2.description.url' value='http://www.example.com/description'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Atos Spain SA'/>
-        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
+    <unit id='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011241' generation='2'>
+      <update id='org.sodalite.dsl.optimization.ide' range='[0.0.0,1.0.0.202009011241)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='org.sodalite.dsl.optimization.ide'/>
+        <property name='org.eclipse.equinox.p2.provider' value='My Company'/>
         <property name='maven-groupId' value='org.sodalite.IDE'/>
-        <property name='maven-artifactId' value='org.sodalite.dsl.RM.feature'/>
+        <property name='maven-artifactId' value='org.sodalite.dsl.optimization.ide'/>
         <property name='maven-version' value='1.0.0-SNAPSHOT'/>
       </properties>
-      <provides size='1'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.feature.group' version='1.0.0.202009011144'/>
+      <provides size='7'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011241'/>
+        <provided namespace='osgi.bundle' name='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011241'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ide.contentassist.antlr' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ide.contentassist.antlr.lexer' version='0.0.0'/>
+        <provided namespace='java.package' name='org.sodalite.dsl.optimization.ide.contentassist.antlr.internal' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011241'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
       </provides>
       <requires size='5'>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ui' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.ide' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.preferences' range='[1.0.0.202009011144,1.0.0.202009011144]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.sodalite.dsl.RM.feature.feature.jar' range='[1.0.0.202009011144,1.0.0.202009011144]'>
-          <filter>
-            (org.eclipse.update.install.features=true)
-          </filter>
-        </required>
+        <required namespace='osgi.bundle' name='org.sodalite.dsl.optimization' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ide' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase.ide' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.antlr.runtime' range='[3.2.0,3.2.1)'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'/>
       </requires>
-      <touchpoint id='null' version='0.0.0'/>
-      <licenses size='1'>
-        <license uri='http://www.example.com/license' url='http://www.example.com/license'>
-          [Enter License Description here.]
-        </license>
-      </licenses>
-      <copyright uri='http://www.example.com/copyright' url='http://www.example.com/copyright'>
-        [Enter Copyright Description here.]
-      </copyright>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.sodalite.dsl.optimization.ide' version='1.0.0.202009011241'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.sodalite.dsl.optimization.ide; singleton:=true&#xA;Bundle-Version: 1.0.0.202009011241
+          </instruction>
+        </instructions>
+      </touchpointData>
     </unit>
     <unit id='org.eclipse.xtend.typesystem.emf' version='2.2.0.v201605260315'>
       <update id='org.eclipse.xtend.typesystem.emf' range='[0.0.0,2.2.0.v201605260315)' severity='0'/>
