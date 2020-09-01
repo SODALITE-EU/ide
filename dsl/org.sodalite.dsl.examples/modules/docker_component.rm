@@ -153,7 +153,10 @@ node_types:
 					create:
 						inputs:
 							component_name: 
-								default: "FIXME"
+								default: get_attribute:
+									entity: SELF
+									attribute: tosca.nodes.Root.tosca_name
+									req_cap: sodalite.nodes.TestComponent.tested_component
 							test_delay: 
 								default: get_property: 
 									entity: SELF
