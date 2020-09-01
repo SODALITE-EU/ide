@@ -11,6 +11,8 @@ public class ValidationIssue {
 	Severity type;
 	
 	public static final String OPTIMIZATION = "Optimization";
+	public static final String OPTIMIZATION_MISMATCH = "OptimizationMismatch";
+	public static final String REQUIREMENT = "Requirement";
 	
 	public ValidationIssue (String message, String path, String pathType, Severity type, String code, Object data){
 		this.message = message;
