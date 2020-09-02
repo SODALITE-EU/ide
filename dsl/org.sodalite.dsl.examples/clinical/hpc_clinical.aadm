@@ -28,9 +28,9 @@ node_templates:
 			ssh-key: get_input: key-location 
 
 	modak-instance:
-    	type: sodalite.nodes.modak
-      	properties:
-        	endpoint: get_input: modak-endpoint
+		type: sodalite.nodes.modak
+		properties:
+			endpoint: get_input: modak-endpoint
 
 	//image pulling
 
