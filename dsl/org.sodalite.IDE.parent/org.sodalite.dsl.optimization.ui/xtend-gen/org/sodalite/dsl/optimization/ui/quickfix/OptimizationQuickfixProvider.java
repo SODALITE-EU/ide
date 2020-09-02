@@ -53,7 +53,7 @@ public class OptimizationQuickfixProvider extends DefaultQuickfixProvider {
   }
   
   public void createGraph(final EObject entrypoint, final JsonObject graph) {
-    boolean _equals = ((String[])Conversions.unwrapArray(graph.keySet(), String.class))[0].equals("etl");
+    boolean _equals = (((String[])Conversions.unwrapArray(graph.keySet(), String.class))[0]).equals("etl");
     if (_equals) {
       JsonElement _get = graph.get(((String[])Conversions.unwrapArray(graph.keySet(), String.class))[0]);
       this.createETL(((EAITrainingDataImpl) entrypoint), ((JsonObject) _get));
