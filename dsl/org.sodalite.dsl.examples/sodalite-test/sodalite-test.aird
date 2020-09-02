@@ -287,18 +287,17 @@
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_W51P8uxwEeq4SY3LgHnbSw" type="4001" element="_W5f4xexwEeq4SY3LgHnbSw" source="_W5vJUOxwEeq4SY3LgHnbSw" target="_W5lYUOxwEeq4SY3LgHnbSw">
           <children xmi:type="notation:Node" xmi:id="_W513AOxwEeq4SY3LgHnbSw" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W513AexwEeq4SY3LgHnbSw" x="-3" y="-5"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W513AexwEeq4SY3LgHnbSw" x="-3" y="-4"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_W513AuxwEeq4SY3LgHnbSw" type="6002">
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W513A-xwEeq4SY3LgHnbSw" x="6" y="3"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_W513BOxwEeq4SY3LgHnbSw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W513BexwEeq4SY3LgHnbSw" x="5" y="3"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W513BexwEeq4SY3LgHnbSw" x="6" y="2"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_W51P8-xwEeq4SY3LgHnbSw"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_W51P9OxwEeq4SY3LgHnbSw" fontName="Cantarell" fontHeight="12"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_W51P9exwEeq4SY3LgHnbSw" points="[0, -3, -9, 165]$[8, -166, -1, 2]"/>
-          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_W513BuxwEeq4SY3LgHnbSw" id="(0.35714285714285715,0.1)"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_W51P9exwEeq4SY3LgHnbSw" points="[-3, -15, 0, 165]$[-3, -178, 0, 2]"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_W513B-xwEeq4SY3LgHnbSw" id="(0.5429769392033543,0.9875776397515528)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_W513COxwEeq4SY3LgHnbSw" type="4001" element="_W5f4yuxwEeq4SY3LgHnbSw" source="_W5wXcuxwEeq4SY3LgHnbSw" target="_W5lYUOxwEeq4SY3LgHnbSw">
@@ -379,7 +378,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Attributes']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Attributes']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_W5Wu0OxwEeq4SY3LgHnbSw" name="private_address: org.sodalite.dsl.rM.impl.GetInputImpl@4a5f2428">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_W5Wu0OxwEeq4SY3LgHnbSw" name="private_address: org.sodalite.dsl.rM.impl.GetInputImpl@46822ffd">
           <target xmi:type="aADM:EAttributeAssignment" href="sodalite-test.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.0"/>
           <semanticElements xmi:type="aADM:EAttributeAssignment" href="sodalite-test.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_W5Wu0exwEeq4SY3LgHnbSw" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -387,7 +386,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Attributes']/@subNodeMappings[name='Attribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_W5Wu0uxwEeq4SY3LgHnbSw" name="public_address: org.sodalite.dsl.rM.impl.GetInputImpl@28fd0e50">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_W5Wu0uxwEeq4SY3LgHnbSw" name="public_address: org.sodalite.dsl.rM.impl.GetInputImpl@4f21e242">
           <target xmi:type="aADM:EAttributeAssignment" href="sodalite-test.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.1"/>
           <semanticElements xmi:type="aADM:EAttributeAssignment" href="sodalite-test.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.1"/>
           <ownedStyle xmi:type="diagram:Square" uid="_W5Wu0-xwEeq4SY3LgHnbSw" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">

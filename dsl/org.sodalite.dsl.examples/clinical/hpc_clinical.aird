@@ -1529,7 +1529,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Attributes']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Attributes']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_m_TmEOxtEeq4SY3LgHnbSw" name="public_address: org.sodalite.dsl.rM.impl.GetInputImpl@317a78bf">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_m_TmEOxtEeq4SY3LgHnbSw" name="public_address: org.sodalite.dsl.rM.impl.GetInputImpl@5586edf5">
           <target xmi:type="aADM:EAttributeAssignment" href="hpc_clinical.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.0"/>
           <semanticElements xmi:type="aADM:EAttributeAssignment" href="hpc_clinical.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_m_UNIOxtEeq4SY3LgHnbSw" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -1537,7 +1537,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Attributes']/@subNodeMappings[name='Attribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_m_UNIextEeq4SY3LgHnbSw" name="username: org.sodalite.dsl.rM.impl.GetInputImpl@608bb698">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_m_UNIextEeq4SY3LgHnbSw" name="username: org.sodalite.dsl.rM.impl.GetInputImpl@4d77437b">
           <target xmi:type="aADM:EAttributeAssignment" href="hpc_clinical.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.1"/>
           <semanticElements xmi:type="aADM:EAttributeAssignment" href="hpc_clinical.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.1"/>
           <ownedStyle xmi:type="diagram:Square" uid="_m_UNIuxtEeq4SY3LgHnbSw" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
@@ -1545,7 +1545,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Attributes']/@subNodeMappings[name='Attribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_m_U0MOxtEeq4SY3LgHnbSw" name="ssh-key: org.sodalite.dsl.rM.impl.GetInputImpl@7ff40c27">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_m_U0MOxtEeq4SY3LgHnbSw" name="ssh-key: org.sodalite.dsl.rM.impl.GetInputImpl@732ffe03">
           <target xmi:type="aADM:EAttributeAssignment" href="hpc_clinical.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.2"/>
           <semanticElements xmi:type="aADM:EAttributeAssignment" href="hpc_clinical.aadm#//@nodeTemplates/@nodeTemplates.0/@node/@atributes/@attributes.2"/>
           <ownedStyle xmi:type="diagram:Square" uid="_m_U0MextEeq4SY3LgHnbSw" labelSize="12" showIcon="false" labelAlignment="LEFT" borderSize="1" borderSizeComputationExpression="1" labelPosition="node">
