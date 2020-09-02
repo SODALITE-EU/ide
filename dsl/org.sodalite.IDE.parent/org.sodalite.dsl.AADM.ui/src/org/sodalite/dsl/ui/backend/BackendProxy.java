@@ -122,8 +122,8 @@ public class BackendProxy {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
 		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		String iacURI = store.getString(PreferenceConstants.IaC_URI);
+		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
 		System.out.println(
 				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
