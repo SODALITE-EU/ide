@@ -1,0 +1,6 @@
+/target/p2agent/
+/target/targetPlatformRepository/
+/target/category.xml
+/target/local-artifacts.properties
+/target/p2artifacts.xml
+/target/p2content.xml
