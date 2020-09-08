@@ -12,12 +12,14 @@ pipeline {
       	sh('git pull origin master')
       }
     }
-    stage ('Build IDE') {
+    stage ('Build IDE and run Sonar') {
       steps {
-        sh  """ #!/bin/bash
-                cd "dsl/org.sodalite.IDE.parent/"
-                mvn clean verify
-            """
+        withSonarQubeEnv('SonarCloud') {
+          sh  """ #!/bin/bash
+                  cd "dsl/org.sodalite.IDE.parent/"
+                  mvn clean verify sonar:sonar
+              """
+        }
       }
     }
     stage ('Publish update site') {
