@@ -7,9 +7,7 @@ pipeline {
         checkout scm
         sh('git config --global user.email "jesus.gorronogoitia@atos.net"')
 	sh('git config --global user.name "Sodalite Jenkins"')
-      	sh('git stash')
-      	sh('git checkout master')
-      	sh('git pull origin master')
+      	sh('git reset --hard origin/${BRANCH_NAME}')
       }
     }
     stage ('Build IDE and run Sonar') {
