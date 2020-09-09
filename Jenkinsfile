@@ -12,13 +12,24 @@ pipeline {
     }
     stage ('Build IDE and run Sonar') {
       steps {
-        withSonarQubeEnv('SonarCloud') {
           sh  """ #!/bin/bash
                   cd "dsl/org.sodalite.IDE.parent/"
-                  mvn -Dproject.settings=./sonar-project.properties clean verify $SONAR_MAVEN_GOAL
+                  mvn clean verify
               """
-        }
       }
+    }
+    stage('SonarQube analysis'){
+        environment {
+          scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('SonarCloud') {
+                sh  """ #!/bin/bash
+                        cd "dsl/org.sodalite.IDE.parent/"
+                        ${scannerHome}/bin/sonar-scanner
+                    """
+            }
+        }
     }
     stage ('Publish update site') {
       steps {
