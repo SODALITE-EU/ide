@@ -15,7 +15,7 @@ pipeline {
         withSonarQubeEnv('SonarCloud') {
           sh  """ #!/bin/bash
                   cd "dsl/org.sodalite.IDE.parent/"
-                  mvn clean verify sonar:sonar
+                  mvn -Dproject.settings=./sonar-project.properties clean verify $SONAR_MAVEN_GOAL
               """
         }
       }
