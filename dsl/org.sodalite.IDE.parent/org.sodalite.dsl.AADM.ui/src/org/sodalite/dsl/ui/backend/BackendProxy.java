@@ -213,7 +213,11 @@ public class BackendProxy {
 	private Path getAadmPropertiesFile(IFile aadmfile, IProject project) {
 		String filepath = aadmfile.toString();
 		String filename = filepath.substring(filepath.lastIndexOf("/") + 1);
-		String directory = filepath.substring(filepath.indexOf('/', 2) + 1, filepath.lastIndexOf("/"));
+		int index1 = filepath.indexOf('/', 2) + 1;
+		int index2 = filepath.lastIndexOf("/");
+		String directory = "";
+		if (index2 > index1)
+			directory = filepath.substring(index1, index2);
 		IFile propertiesFile = project.getFile(directory + "/." + filename + ".properties");
 		String properties_path = propertiesFile.getLocationURI().toString();
 		properties_path = properties_path.substring(properties_path.indexOf("/"));
