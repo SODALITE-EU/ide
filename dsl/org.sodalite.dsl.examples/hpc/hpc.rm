@@ -7,7 +7,7 @@ relationship_types:
 				operations:
 					add_source:
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/clinical-uc/hpc-clinical-uc/playbooks/torque-job/test.yml"
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/configure.yml"
 					
 node_types:
 	my.nodes.hpc.wm.torque:
@@ -155,15 +155,15 @@ node_types:
 				operations:
 					create:
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/clinical-uc/hpc-clinical-uc/playbooks/torque-job/create.yml"
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create.yml"
                       
 					configure:
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/clinical-uc/hpc-clinical-uc/playbooks/torque-job/configure.yml"
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/configure.yml"
                       
 					start:
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/clinical-uc/hpc-clinical-uc/playbooks/torque-job/start.yml"
+							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/start.yml"
           
 		requirements:
           	host:

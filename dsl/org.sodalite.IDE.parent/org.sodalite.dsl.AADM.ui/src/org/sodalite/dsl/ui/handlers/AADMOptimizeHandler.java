@@ -26,7 +26,8 @@ public class AADMOptimizeHandler implements IHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			backendProxy.processOptimizeAADM(event);
+			if (PlatformUI.getWorkbench().saveAllEditors(true)) //Ask to save model before continue
+				backendProxy.processOptimizeAADM(event);
 		}catch (Exception ex) {
 			ex.printStackTrace();
 			MessageDialog.openError(parent, "Get AADM optimization recommendations error", "There were an error reported by the KB:\n" + ex.getMessage());

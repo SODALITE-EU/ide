@@ -47,6 +47,8 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -60,7 +62,10 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.generator.GeneratorContext;
+import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -133,6 +138,34 @@ public class BackendProxy {
 						kbReasonerURI, iacURI, xoperaURI));
 		return kbclient;
 	}
+	
+	private void generateAADMModel (IFile aadmFile, IProgressMonitor monitor) {
+		try {
+			URI aadmURI = URI.createURI(aadmFile.getFullPath().toPortableString());
+			Injector injector = AADMActivator.getInstance().getInjector(
+					AADMActivator.ORG_SODALITE_DSL_AADM);
+			ResourceSet resourceSet = injector.getInstance(ResourceSet.class);
+			Resource r = resourceSet.getResource(aadmURI, true);
+			r.load(null);
+			IGenerator2 generator = injector.getInstance(IGenerator2.class);
+			EclipseResourceFileSystemAccess2 fsa = injector.getInstance(EclipseResourceFileSystemAccess2.class);
+			SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+			subMonitor.setTaskName("Converting AADM into Turtle");
+			fsa.setMonitor(subMonitor);
+			IProject project = getProject(aadmFile);
+			IFile output = project.getFile("src-gen");
+			fsa.setOutputPath(output.getLocation().toOSString());
+			generator.doGenerate(r, fsa, new GeneratorContext() {
+				@Override
+				public CancelIndicator getCancelIndicator() {
+					return CancelIndicator.NullImpl;
+				}
+			});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void processSaveAADM(ExecutionEvent event) throws IOException, PartInitException {
 		// Return selected resource
@@ -140,9 +173,9 @@ public class BackendProxy {
 		IProject project = getProject(aadmFile);
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFile.getName(), project);
-
-		// Send model to the KB
 		String aadmURI = getAadmURI(aadmFile, project);
+		
+		// Send model to the KB
 		saveAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 
@@ -254,6 +287,9 @@ public class BackendProxy {
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
+				//Generate Model
+				generateAADMModel(aadmFile, monitor);
+				
 				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, false);
 				processValidationIssues(aadmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
@@ -291,6 +327,9 @@ public class BackendProxy {
 	private void optimizeAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Get AADM optimization recommendations", (ICoreRunnable) monitor -> {
 			try {
+				//Generate Model
+				generateAADMModel(aadmFile, monitor);
+				
 				KBOptimizationReportData optimizationReport = getKBReasoner().optimizeAADM(aadmTTL, aadmURI);
 				processOptimizationIssues(aadmFile, optimizationReport, event);
 				if (optimizationReport.getURI() == null && optimizationReport.getErrors() == null) {
@@ -332,6 +371,9 @@ public class BackendProxy {
 				String[] admin_report = new String[2];
 
 				try {
+					//Generate Model
+					generateAADMModel(aadmfile, monitor);
+					
 					// Save the AADM model into the KB
 					subMonitor.setTaskName("Saving AADM");
 					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, true);
