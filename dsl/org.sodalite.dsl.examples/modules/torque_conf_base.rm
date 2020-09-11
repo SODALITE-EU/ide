@@ -14,8 +14,7 @@ node_types:
 				required: true
 			script:
 				type: string
-				description: "Job script that will be wrapped with j2 template to provide a PBS job script, 
-          					Ansible can process it with the template module"
+				description: "Job script that will be wrapped with j2 template to provide a PBS job script, Ansible can process it with the template module"
 				required: true
 			workspace:
 				type: string
