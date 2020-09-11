@@ -24,10 +24,14 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -39,7 +43,10 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.generator.GeneratorContext;
+import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -58,6 +65,7 @@ import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.sodalite.dsl.RM.ui.internal.RMActivator;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
@@ -71,6 +79,7 @@ import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Injector;
 
 public class BackendProxy {
 	private MarkerCreator markerCreator;
@@ -103,6 +112,34 @@ public class BackendProxy {
 		// Send model to the KB
 		String rmUri = getRmURI (rmFile, project);
 		saveRM(rmTTL, rmFile, rmUri, project, event);
+	}
+	
+	private void generateRMModel (IFile rmFile, IProgressMonitor monitor) {
+		try {
+			URI aadmURI = URI.createURI(rmFile.getFullPath().toPortableString());
+			Injector injector = RMActivator.getInstance().getInjector(
+					RMActivator.ORG_SODALITE_DSL_RM);
+			ResourceSet resourceSet = injector.getInstance(ResourceSet.class);
+			Resource r = resourceSet.getResource(aadmURI, true);
+			r.load(null);
+			IGenerator2 generator = injector.getInstance(IGenerator2.class);
+			EclipseResourceFileSystemAccess2 fsa = injector.getInstance(EclipseResourceFileSystemAccess2.class);
+			SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+			subMonitor.setTaskName("Converting RM into Turtle");
+			fsa.setMonitor(subMonitor);
+			IProject project = getProject(rmFile);
+			IFile output = project.getFile("src-gen");
+			fsa.setOutputPath(output.getLocation().toOSString());
+			generator.doGenerate(r, fsa, new GeneratorContext() {
+				@Override
+				public CancelIndicator getCancelIndicator() {
+					return CancelIndicator.NullImpl;
+				}
+			});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private String readTurtle(String filename, IProject project) throws IOException {
@@ -160,6 +197,9 @@ public class BackendProxy {
 	private void saveRM(String rmTTL, IFile rmFile, String rmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save RM", (ICoreRunnable) monitor -> {
 			try {
+				//Generate Model
+				generateRMModel(rmFile, monitor);
+				
 				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI);
 				processValidationIssues(rmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
