@@ -35,13 +35,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
@@ -65,13 +63,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
-import org.eclipse.xtext.builder.MonitorBasedCancelIndicator;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.GeneratorContext;
-import org.eclipse.xtext.generator.GeneratorDelegate;
-import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IGenerator2;
-import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -122,7 +116,6 @@ import org.sodalite.dsl.ui.validation.ValidationIssue;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 public class BackendProxy {
@@ -131,9 +124,6 @@ public class BackendProxy {
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	
-	@Inject
-	private GeneratorDelegate generatorDelegate;
 	
 	private KBReasonerClient getKBReasoner() {
 		// Configure KBReasonerClient endpoint from preference page information
