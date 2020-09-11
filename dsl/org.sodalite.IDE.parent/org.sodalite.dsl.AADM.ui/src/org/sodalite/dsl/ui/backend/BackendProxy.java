@@ -300,7 +300,6 @@ public class BackendProxy {
 				//Generate Model
 				generateAADMModel(aadmFile, monitor);
 				
-				
 				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, false);
 				processValidationIssues(aadmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
