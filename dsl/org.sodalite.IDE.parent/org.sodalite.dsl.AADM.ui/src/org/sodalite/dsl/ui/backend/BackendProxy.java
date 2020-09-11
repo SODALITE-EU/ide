@@ -1,5 +1,8 @@
 package org.sodalite.dsl.ui.backend;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.io.IOException;
 import java.nio.channels.Channels;
@@ -125,7 +128,7 @@ public class BackendProxy {
 		String iacURI = store.getString(PreferenceConstants.IaC_URI);
 		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
-		System.out.println(
+		BackendLogger.log(
 				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
 						kbReasonerURI, iacURI, xoperaURI));
 		return kbclient;
@@ -164,7 +167,7 @@ public class BackendProxy {
 				try {
 					page.openEditor(new FileEditorInput(file), desc.getId());
 				} catch (PartInitException e) {
-					e.printStackTrace();
+					BackendLogger.log("Error open model in editor", e);
 				}
 			}
 		});
@@ -241,6 +244,12 @@ public class BackendProxy {
 			props.store(Channels.newOutputStream(outChannel), "Sodalite Metadata");
 		}
 	}
+	
+	private void pasteInClipboard(String value) {
+		StringSelection stringSelection = new StringSelection(value);
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(stringSelection, null);
+	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
@@ -256,9 +265,11 @@ public class BackendProxy {
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
-						MessageDialog.openInformation(parent, "Save AADM",
-								"The selected AADM model has been successfully store in the KB with URI:\n"
-										+ saveReport.getURI());
+						pasteInClipboard(saveReport.getURI());
+						String message = "The selected AADM model has been successfully store in the KB with URI:\n"
+								+ saveReport.getURI();
+						MessageDialog.openInformation(parent, "Save AADM", message);
+						BackendLogger.log(message);
 					}
 				});
 			} catch (Exception e) {
@@ -267,9 +278,10 @@ public class BackendProxy {
 					public void run() {
 						MessageDialog.openError(parent, "Save AADM",
 								"There were problems to store the AADM into the KB: " + e.getMessage());
+						BackendLogger.log("There were problems to store the AADM into the KB", e);
 					}
 				});
-				e.printStackTrace();
+				BackendLogger.log("There were problems to store the AADM into the KB", e);
 			}
 		});
 		job.setPriority(Job.SHORT);
@@ -303,7 +315,7 @@ public class BackendProxy {
 										+ e.getMessage());
 					}
 				});
-				e.printStackTrace();
+				BackendLogger.log("There were problems during the processing of AADM optimization recommendations from the KB", e);
 			}
 		});
 		job.setPriority(Job.SHORT);
@@ -373,9 +385,11 @@ public class BackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							MessageDialog.openInformation(parent, "Deploy AADM",
-									"The selected AADM model has been successfully deployed into the Sodalite backend with token: "
-											+ admin_report[0]);
+							pasteInClipboard(admin_report[0]);
+							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with token: "
+									+ admin_report[0];
+							MessageDialog.openInformation(parent, "Deploy AADM", message);
+							BackendLogger.log(message);
 						}
 					});
 					subMonitor.worked(-1);
@@ -384,11 +398,13 @@ public class BackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							MessageDialog.openError(parent, "Deploy AADM",
-									"There were problems to deploy the AADM into the infrastructure: " + e.getMessage()
-											+ "\nPlease contact Sodalite administrator and provide her/him this information: "
-											+ "blueprint token: " + admin_report[0] + ", session token: "
-											+ admin_report[1]);
+							pasteInClipboard(admin_report[0]);
+							String message = "There were problems to deploy the AADM into the infrastructure: " + e.getMessage()
+							+ "\nPlease contact Sodalite administrator and provide her/him this information: "
+							+ "blueprint token: " + admin_report[0] + ", session token: "
+							+ admin_report[1];
+							MessageDialog.openError(parent, "Deploy AADM", message);
+							BackendLogger.log(message, e);
 						}
 					});
 					e.printStackTrace();
