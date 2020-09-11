@@ -9,21 +9,18 @@ node_types:
 				required: true
 			script:
 				type: string
-				description: 'Job script that will be wrapped with j2 template to provide a PBS job script, 
-          					Ansible can process it with the template module'
+				description: 'Job script that will be wrapped with j2 template to provide a PBS job script, Ansible can process it with the template module'
 				required: true
 			queue:
 				type: string
-				description:'Select queue for the job.
-          					Infrastructure specific - default and constraints values MUST be provided by Resource Expert'
+				description:'Select queue for the job. Infrastructure specific - default and constraints values MUST be provided by Resource Expert'
 				required: false
 				default: ""
 				constraints:
 					valid_values: [ "batch", "ssd", "gpu", "cpu" ]
 			scratch:
 				type: string
-				description: 'Select scratch (temporary, fast storage) path for the job, if available.
-          				Infrastructure specific - default value MUST be provided by Resource Expert'
+				description: 'Select scratch (temporary, fast storage) path for the job, if available. Infrastructure specific - default value MUST be provided by Resource Expert'
 				required: false
 				default: "/workspace"
 			workspace:
@@ -49,8 +46,7 @@ node_types:
 				default: '0'
 			walltime:
 				type: string
-				description: 'Expected time of execution
-							FORMAT: HH:MM:SS'
+				description: 'Expected time of execution FORMAT: HH:MM:SS'
 				required: true
 			enable_audit:
 				type: boolean
