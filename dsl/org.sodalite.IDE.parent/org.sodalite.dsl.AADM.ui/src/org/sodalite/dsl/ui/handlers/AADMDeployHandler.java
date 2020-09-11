@@ -28,7 +28,8 @@ public class AADMDeployHandler implements IHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			backendProxy.processDeployAADM(event);
+			if (PlatformUI.getWorkbench().saveAllEditors(true)) //Ask to save model before continue
+				backendProxy.processDeployAADM(event);
 		}catch (Exception ex) {
 			ex.printStackTrace();
 			MessageDialog.openError(parent, "Save AADM Error", "There were an error reported by the KB:\n" + ex.getMessage());

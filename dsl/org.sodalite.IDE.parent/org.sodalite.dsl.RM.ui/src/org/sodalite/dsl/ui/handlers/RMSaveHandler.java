@@ -28,7 +28,8 @@ public class RMSaveHandler implements IHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			backendProxy.processSaveRM(event);
+			if (PlatformUI.getWorkbench().saveAllEditors(true)) //Ask to save model before continue
+				backendProxy.processSaveRM(event);
 		}catch (Exception ex) {
 			ex.printStackTrace();
 			MessageDialog.openError(parent, "Save RM Error", "There were an error reported by the KB:\n" + ex.getMessage());
