@@ -9,7 +9,7 @@ This repository contains the Sodalite IDE (based on Eclipse).
 
 ## Requirements
 Install the Eclipse Modeling Tools instance from [here](https://www.eclipse.org/downloads/)
-Note: SODALITE IDE has been tested in the version 2019-09 R (4.13.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2019-12/r/eclipse-modeling-tools)
+Note: SODALITE IDE has been tested in the version 2020-06 R (4.16.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2020-06/r/eclipse-modeling-tools)
 
 ## IDE Installation from the Sodalite IDE update site
 Install the Sodalite IDE into the Eclipse Modeling Tools instance using this [update site](https://raw.githubusercontent.com/SODALITE-EU/ide/master/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository). 
@@ -24,7 +24,7 @@ Make sure that in the *Install software* dialog window, in the *Work with* combo
 Follow the following procedure to download the SODALITE IDE, build and install it into your Eclipse installation:
 
 1. Clone SODALITE IDE repository from GitHub: `git clone https://github.com/SODALITE-EU/ide.git`. This will create a local folder, hereafter referenced as *$IDE_REPO*
-2. Open a CLI and go to *$IDE_REPO/dsl/org.sodalite.IDE.parent* folder. Build the SODALITE IDE Eclipse repository (i.e. update site) using Maven, with this command: `mvn clean verify`
+2. Open a CLI and go to *$IDE_REPO/dsl/org.sodalite.IDE.parent* folder. Build the SODALITE IDE Eclipse repository (i.e. update site) using Maven, with this command: `mvn clean verify -U`
 3. Once complete, open the Eclipse Modeling Tools instance.
 4. Select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and click on the *Local* button. Navigate to the path *$IDE_REPO/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository/*. Then, click on *Add* button. 
 5. Following the same procedure as before add the following external software repositories to your list of software sites:
