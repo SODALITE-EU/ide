@@ -1,37 +1,39 @@
-## Welcome to GitHub Pages
+# [![SODALITE](images/sodalite-logo.png)](https://www.sodalite.eu/) Sodalite project: IDE
 
-You can use the [editor on GitHub](https://github.com/SODALITE-EU/ide/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This repository contains the Sodalite IDE (based on Eclipse).
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Repository structure
 
-### Markdown
+- dsl: This folder contains the Eclipse plugins of the Sodalite IDE: DSL Editor for AADM and Resource Models (RMs)
+- PoCs: This folder contains some PoCs developed to test XText technologies and model Tosca metamodels
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Requirements
+Install the Eclipse Modeling Tools instance from [here](https://www.eclipse.org/downloads/)
+Note: SODALITE IDE has been tested in the version 2020-06 R (4.16.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2020-06/r/eclipse-modeling-tools)
 
-```markdown
-Syntax highlighted code block
+## IDE Installation from the Sodalite IDE update site
+Install the Sodalite IDE into the Eclipse Modeling Tools instance using this [update site](https://raw.githubusercontent.com/SODALITE-EU/ide/master/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository). 
+In Eclipse, select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and the update site location given Above. Then, click on *Add* button. 
+Following the same procedure as before add the following external software repositories to your list of software sites:
+- [Sirius-XText integration](https://altran-mde.github.io/xtext-sirius-integration.io/p2/) 
 
-# Header 1
-## Header 2
-### Header 3
+Make sure that in the *Install software* dialog window, in the *Work with* combo box, you also select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
 
-- Bulleted
-- List
+## IDE Installation from the Sodalite IDE source code
 
-1. Numbered
-2. List
+Follow the following procedure to download the SODALITE IDE, build and install it into your Eclipse installation:
 
-**Bold** and _Italic_ and `Code` text
+1. Clone SODALITE IDE repository from GitHub: `git clone https://github.com/SODALITE-EU/ide.git`. This will create a local folder, hereafter referenced as *$IDE_REPO*
+2. Open a CLI and go to *$IDE_REPO/dsl/org.sodalite.IDE.parent* folder. Build the SODALITE IDE Eclipse repository (i.e. update site) using Maven, with this command: `mvn clean verify -U`
+3. Once complete, open the Eclipse Modeling Tools instance.
+4. Select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and click on the *Local* button. Navigate to the path *$IDE_REPO/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository/*. Then, click on *Add* button. 
+5. Following the same procedure as before add the following external software repositories to your list of software sites:
+- [Sirius-XText integration](https://altran-mde.github.io/xtext-sirius-integration.io/p2/) 
+6. In the former dialog, in the *Work with* combo box, select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
 
-[Link](url) and ![Image](src)
-```
+## IDE Documentation
+[IDE tutorial](https://docs.google.com/document/d/1w6wYJbTZvBbt5LD6sXReXbx1uPDjefYFAU5KEv8X_8w/edit?usp=sharing) for users is available
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Main contact: Jesús Gorroñogoitia <jesus.gorronogoitia@atos.net>
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SODALITE-EU/ide/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+![Project funded by the European Union](images/european.union.logo.png)
