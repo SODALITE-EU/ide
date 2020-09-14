@@ -2,7 +2,7 @@
 <?eclipse version="3.0"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
-		<package 
+		<package
 			uri = "http://www.sodalite.org/dsl/RM"
 			class = "org.sodalite.dsl.rM.RMPackage"
 			genModel = "model/generated/RM.genmodel" />
