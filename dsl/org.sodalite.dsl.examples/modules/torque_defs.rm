@@ -1,9 +1,9 @@
-capability_types:
-	sodalite.capabilities.hpc.ConfiguredJob:
-		derived_from: tosca.capabilities.Root
+// capability_types:
+	// sodalite.capabilities.hpc.ConfiguredJob:
+		// derived_from: tosca.capabilities.Root
 
-	sodalite.capabilities.hpc.StartedJob:
-		derived_from: tosca.capabilities.Root
+	// sodalite.capabilities.hpc.StartedJob:
+		// derived_from: tosca.capabilities.Root
 		
 relationship_types:
 	sodalite.relationships.jobHostedOn: 
