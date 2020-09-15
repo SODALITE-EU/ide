@@ -55,7 +55,8 @@ node_types:
 			host:
 				node: sodalite.nodes.hpc.wm.torque
 				capability: tosca.capabilities.Compute
-				relationship: sodalite.relationships.jobHostedOn
+				// relationship: sodalite.relationships.jobHostedOn
+				relationship: tosca.relationships.HostedOn
 			configured_job:
 				node: sodalite.nodes.hpc.job.torque.configuration
 				// capability: sodalite.capabilities.hpc.ConfiguredJob 
