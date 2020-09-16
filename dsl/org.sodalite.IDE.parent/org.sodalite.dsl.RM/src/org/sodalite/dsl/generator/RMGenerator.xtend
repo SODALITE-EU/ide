@@ -38,6 +38,10 @@ import org.sodalite.dsl.rM.ELessThan
 import org.sodalite.dsl.rM.ELessOrEqual
 import org.sodalite.dsl.rM.ELength
 import org.sodalite.dsl.rM.EMaxLength
+import org.sodalite.dsl.rM.ECapabilityType
+import org.sodalite.dsl.rM.ERelationshipType
+import org.sodalite.dsl.rM.EValidTargetTypes
+import org.sodalite.dsl.rM.ECapabilityTypeRef
 
 /**
  * Generates code from your model files on save.
@@ -51,6 +55,8 @@ class RMGenerator extends AbstractGenerator {
 	var int attribute_counter = 1
 	var int requirement_counter = 1
 	var int capability_counter = 1
+	var int capabilitytype_counter = 1
+	var int relationship_counter = 1
 	var int parameter_counter = 1
 	var int interface_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
@@ -67,6 +73,8 @@ class RMGenerator extends AbstractGenerator {
 		attribute_counter = 1
 		requirement_counter = 1
 		capability_counter = 1
+		capabilitytype_counter = 1
+		relationship_counter = 1
 		parameter_counter = 1
 		interface_counter = 1
 		property_numbers = new HashMap<EPropertyDefinition, Integer>()
@@ -149,6 +157,14 @@ class RMGenerator extends AbstractGenerator {
 	
 	«FOR d:r.allContents.toIterable.filter(EDataType)»
 	«d.compile»
+	«ENDFOR»
+	
+	«FOR c:r.allContents.toIterable.filter(ECapabilityType)»
+	«c.compile»
+	«ENDFOR»
+	
+	«FOR rt:r.allContents.toIterable.filter(ERelationshipType)»
+	«rt.compile»
 	«ENDFOR»
 	'''
 	
@@ -595,9 +611,71 @@ class RMGenerator extends AbstractGenerator {
 	.	
 	'''
 
+	def compile(ECapabilityType c) '''
+	:CapabilityType_«capabilitytype_counter++»
+	  rdf:type exchange:CapabilityType ;
+	  exchange:name "«c.name»" ;
+	  exchange:derivesFrom "«c.capability.superType.name»" ;
+	«IF c.capability.description !== null»
+	exchange:description '«processDescription(c.capability.description)»' ;
+	«ENDIF»
+	«IF c.capability.properties !== null»
+	«FOR p:c.capability.properties.properties»
+	exchange:properties :Property_«property_numbers.get(p)» ; 
+	«ENDFOR»
+	«ENDIF»
+	«IF c.capability.atributes !== null»
+	«FOR a:c.capability.atributes.attributes»
+	exchange:attributes :Attribute_«attribute_numbers.get(a)» ; 
+	«ENDFOR»
+	«ENDIF»
+	.
+	'''
+	
+	def compile(ERelationshipType r) '''
+	
+	«IF r.relationship.valid_target_types !== null»
+	«putParameterNumber(r, "valid_target_types", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "valid_target_types" ;
+	  «FOR entry:(r.relationship.valid_target_types.targetTypes as EObjectContainmentEList<ECapabilityTypeRef>)»
+	  exchange:listValue "«entry.name.name»" ;
+	  «ENDFOR»
+	.
+	«ENDIF»
+	
+	:RelationshipType_«relationship_counter++»
+	  rdf:type exchange:RelationshipType ;
+	  exchange:name "«r.name»" ;
+	  exchange:derivesFrom "«r.relationship.superType.name»" ;
+	  «IF r.relationship.description !== null»
+	  exchange:description '«processDescription(r.relationship.description)»' ;
+	  «ENDIF»
+	  «IF r.relationship.properties !== null»
+	  «FOR p:r.relationship.properties.properties»
+	  exchange:properties :Property_«property_numbers.get(p)» ; 
+	  «ENDFOR»
+	  «ENDIF»
+	  «IF r.relationship.atributes !== null»
+	  «FOR a:r.relationship.atributes.attributes»
+	  exchange:attributes :Attribute_«attribute_numbers.get(a)» ; 
+	  «ENDFOR»
+	  «ENDIF»
+	  «IF r.relationship.interfaces !== null»
+	  «FOR i:r.relationship.interfaces.interfaces»
+	  exchange:interfaces :Interface_«interface_numbers.get(i)» ; 
+	  «ENDFOR»
+	  «ENDIF»
+	  «IF r.relationship.valid_target_types !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "valid_target_types")» ;
+	  «ENDIF»
+	.
+	'''
+
 	def compile(ENodeType n) '''
-	:Node_«node_counter++»
-	  rdf:type exchange:Node ;
+	:NodeType_«node_counter++»
+	  rdf:type exchange:NodeType ;
 	  «IF n.node.description !== null»
 	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
