@@ -1,6 +1,20 @@
 node_types:
 	sodalite.nodes.Compute:
-    	derived_from: tosca.nodes.Compute
-    	properties: 
-      		username:
-        		type: string
+		derived_from: tosca.nodes.Compute
+		properties: 
+			username:
+				type: string
+			docker_ip:
+				type: string
+		interfaces:		
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard				
+				operations:          
+					create: 
+						inputs:
+							docker_ip:
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.Compute.docker_ip
+						implementation:
+							primary:  "/workspace/iac-management/blueprint-samples/blueprints/sodalite-test/modules/vm/playbooks/set_ip.yaml"

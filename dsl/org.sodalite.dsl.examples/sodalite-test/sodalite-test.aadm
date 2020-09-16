@@ -9,9 +9,7 @@ node_templates:
 		type: sodalite.nodes.Compute
 		properties:
 			username:  get_input: username 
-		attributes:
-			private_address: get_input: docker-host-ip  
-			public_address:  get_input: docker-host-ip  
+			docker_ip: get_input: docker-host-ip  
         
 	docker-public-registry:
 		type: sodalite.nodes.DockerRegistry
