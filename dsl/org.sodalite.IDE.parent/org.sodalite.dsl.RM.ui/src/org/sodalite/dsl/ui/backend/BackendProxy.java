@@ -1,6 +1,8 @@
 package org.sodalite.dsl.ui.backend;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -102,10 +104,12 @@ public class BackendProxy {
 		return kbclient;
 	}
 
-	public void processSaveRM(ExecutionEvent event) throws IOException {
+	public void processSaveRM(ExecutionEvent event) throws Exception {
 		// Return selected resource
 		IFile rmFile = getSelectedFile();
-		IProject project = getProject(rmFile);
+		if (rmFile == null)
+			throw new Exception("Selected RM could not be found");
+		IProject project = rmFile.getProject();;
 		// Get serialize AADM model in Turtle
 		String rmTTL = readTurtle(rmFile.getName(), project);
 
@@ -127,7 +131,7 @@ public class BackendProxy {
 			SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
 			subMonitor.setTaskName("Converting RM into Turtle");
 			fsa.setMonitor(subMonitor);
-			IProject project = getProject(rmFile);
+			IProject project = rmFile.getProject();
 			IFile output = project.getFile("src-gen");
 			fsa.setOutputPath(output.getLocation().toOSString());
 			generator.doGenerate(r, fsa, new GeneratorContext() {
@@ -157,8 +161,10 @@ public class BackendProxy {
 		if (Files.exists(path)) {
 			Properties props = new Properties();
 			try(final FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
-			final FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
-				props.load(Channels.newInputStream(channel));
+					final InputStream in = Channels.newInputStream(channel);
+					final FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)
+					) {
+				props.load(in);
 			}
 			uri = props.getProperty("URI");
 		}
@@ -185,12 +191,14 @@ public class BackendProxy {
 		if (!Files.exists(path, LinkOption.NOFOLLOW_LINKS))
 		    Files.createFile(path);
 		try(final FileChannel inChannel = FileChannel.open(path, StandardOpenOption.READ);
-			final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
-				props.load(Channels.newInputStream(inChannel));
+				final InputStream in = Channels.newInputStream(inChannel);
+				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
+				props.load(in);
 			}
 		props.setProperty("URI", uri);
-		try(final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE)) {
-				props.store(Channels.newOutputStream(outChannel), "Sodalite Metadata");
+		try(final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE);
+				final OutputStream out = Channels.newOutputStream(outChannel)) {
+				props.store(out, "Sodalite Metadata");
 			}
 	}
 
@@ -390,21 +398,16 @@ public class BackendProxy {
 		return result;
 	}
 
-	private IProject getProject(IResource resource) {
-		return resource.getProject();
-	}
-
 	private IFile getSelectedFile() {
-		IFile file = null;
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window != null) {
 			IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
 			Object firstElement = selection.getFirstElement();
 			if (firstElement instanceof IAdaptable) {
-				file = (IFile) ((IAdaptable) firstElement).getAdapter(IFile.class);
+				return (IFile) ((IAdaptable) firstElement).getAdapter(IFile.class);
 			}
 		}
-		return file;
+		return null;
 	}
 
 	protected static class ListBasedMarkerAcceptor implements IAcceptor<Issue> {

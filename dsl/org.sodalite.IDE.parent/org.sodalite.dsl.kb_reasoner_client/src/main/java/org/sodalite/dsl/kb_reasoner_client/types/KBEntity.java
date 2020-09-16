@@ -28,4 +28,9 @@ public class KBEntity {
 		return ((KBEntity)o).getUri().equals(this.getUri());
 	}
 	
+	@Override
+	  public int hashCode() {
+		return uri.hashCode();
+	}
+	
 }

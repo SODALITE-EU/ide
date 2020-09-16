@@ -400,14 +400,15 @@ public class KBReasonerClient implements KBReasoner {
 				suggestion.getHierarchyPath().add(node);
 				JsonObject obj = (JsonObject)jsonObj.get(node);
 				JsonArray array = null;
-				while (true) {
+				boolean done = false;
+				while (!done) {
 					String key = obj.keySet().iterator().next();
 					suggestion.getHierarchyPath().add(key);
 					try {
 						obj = (JsonObject) obj.get(key);					
 					}catch (Exception ex){
 						array = obj.getAsJsonArray(key);
-						break;
+						done = true;
 					}
 				}
 				SortedSet<String> suggestions = new Gson().fromJson(array, TreeSet.class);
