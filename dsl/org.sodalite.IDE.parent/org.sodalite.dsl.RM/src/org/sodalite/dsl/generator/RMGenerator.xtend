@@ -41,6 +41,7 @@ import org.sodalite.dsl.rM.EMaxLength
 import org.sodalite.dsl.rM.ECapabilityType
 import org.sodalite.dsl.rM.ERelationshipType
 import org.sodalite.dsl.rM.EValidTargetTypes
+import org.sodalite.dsl.rM.ECapabilityTypeRef
 
 /**
  * Generates code from your model files on save.
@@ -638,10 +639,8 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "valid_target_types" ;
-	  «FOR entry:(r.relationship.valid_target_types as EObjectContainmentEList<EValidTargetTypes>)»
-	  «FOR s:(entry.targetTypes)»
-	  exchange:listValue "«s.name.name»" ;
-	  «ENDFOR»
+	  «FOR entry:(r.relationship.valid_target_types.targetTypes as EObjectContainmentEList<ECapabilityTypeRef>)»
+	  exchange:listValue "«entry.name.name»" ;
 	  «ENDFOR»
 	.
 	«ENDIF»

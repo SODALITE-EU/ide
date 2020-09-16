@@ -1765,19 +1765,14 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"valid_target_types\" ;");
         _builder.newLine();
         {
-          EValidTargetTypes _valid_target_types_1 = r.getRelationship().getValid_target_types();
-          for(final EValidTargetTypes entry : ((EObjectContainmentEList<EValidTargetTypes>) _valid_target_types_1)) {
-            {
-              EList<ECapabilityTypeRef> _targetTypes = entry.getTargetTypes();
-              for(final ECapabilityTypeRef s : _targetTypes) {
-                _builder.append("  ");
-                _builder.append("exchange:listValue \"");
-                String _name = s.getName().getName();
-                _builder.append(_name, "  ");
-                _builder.append("\" ;");
-                _builder.newLineIfNotEmpty();
-              }
-            }
+          EList<ECapabilityTypeRef> _targetTypes = r.getRelationship().getValid_target_types().getTargetTypes();
+          for(final ECapabilityTypeRef entry : ((EObjectContainmentEList<ECapabilityTypeRef>) _targetTypes)) {
+            _builder.append("  ");
+            _builder.append("exchange:listValue \"");
+            String _name = entry.getName().getName();
+            _builder.append(_name, "  ");
+            _builder.append("\" ;");
+            _builder.newLineIfNotEmpty();
           }
         }
         _builder.append(".");
@@ -1868,8 +1863,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EValidTargetTypes _valid_target_types_2 = r.getRelationship().getValid_target_types();
-      boolean _tripleNotEquals_5 = (_valid_target_types_2 != null);
+      EValidTargetTypes _valid_target_types_1 = r.getRelationship().getValid_target_types();
+      boolean _tripleNotEquals_5 = (_valid_target_types_1 != null);
       if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
