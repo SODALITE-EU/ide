@@ -32,5 +32,6 @@ node_types:
 				type: string
 		capabilities:
 			configured_job:
-				type: sodalite.capabilities.hpc.ConfiguredJob
+				// type: sodalite.capabilities.hpc.ConfiguredJob
+				type: tosca.capabilities.Root
 				valid_source_types: [sodalite.nodes.hpc.job.torque]
