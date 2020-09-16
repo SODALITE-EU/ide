@@ -38,6 +38,7 @@ import org.sodalite.dsl.rM.ELessThan
 import org.sodalite.dsl.rM.ELessOrEqual
 import org.sodalite.dsl.rM.ELength
 import org.sodalite.dsl.rM.EMaxLength
+import org.sodalite.dsl.rM.ECapabilityType
 
 /**
  * Generates code from your model files on save.
@@ -51,6 +52,7 @@ class RMGenerator extends AbstractGenerator {
 	var int attribute_counter = 1
 	var int requirement_counter = 1
 	var int capability_counter = 1
+	var int capabilitytype_counter = 1
 	var int parameter_counter = 1
 	var int interface_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
@@ -67,6 +69,7 @@ class RMGenerator extends AbstractGenerator {
 		attribute_counter = 1
 		requirement_counter = 1
 		capability_counter = 1
+		capabilitytype_counter = 1
 		parameter_counter = 1
 		interface_counter = 1
 		property_numbers = new HashMap<EPropertyDefinition, Integer>()
@@ -149,6 +152,10 @@ class RMGenerator extends AbstractGenerator {
 	
 	«FOR d:r.allContents.toIterable.filter(EDataType)»
 	«d.compile»
+	«ENDFOR»
+	
+	«FOR c:r.allContents.toIterable.filter(ECapabilityType)»
+	«c.compile»
 	«ENDFOR»
 	'''
 	
@@ -593,6 +600,11 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "req_cap")» ;
 	  «ENDIF»
 	.	
+	'''
+
+	def compile(ECapabilityType c) '''
+	:Capability_«capabilitytype_counter++»
+	  rdf:type exchange:Capability ;
 	'''
 
 	def compile(ENodeType n) '''

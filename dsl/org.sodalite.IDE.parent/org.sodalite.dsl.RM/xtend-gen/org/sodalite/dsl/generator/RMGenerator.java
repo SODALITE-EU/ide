@@ -79,6 +79,8 @@ public class RMGenerator extends AbstractGenerator {
   
   private int capability_counter = 1;
   
+  private int capabilitytype_counter = 1;
+  
   private int parameter_counter = 1;
   
   private int interface_counter = 1;
@@ -103,6 +105,7 @@ public class RMGenerator extends AbstractGenerator {
     this.attribute_counter = 1;
     this.requirement_counter = 1;
     this.capability_counter = 1;
+    this.capabilitytype_counter = 1;
     this.parameter_counter = 1;
     this.interface_counter = 1;
     HashMap<EPropertyDefinition, Integer> _hashMap = new HashMap<EPropertyDefinition, Integer>();
@@ -271,6 +274,15 @@ public class RMGenerator extends AbstractGenerator {
       for(final EDataType d : _filter_11) {
         CharSequence _compile_11 = this.compile(d);
         _builder.append(_compile_11);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
+    {
+      Iterable<ECapabilityType> _filter_12 = Iterables.<ECapabilityType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ECapabilityType.class);
+      for(final ECapabilityType c_1 : _filter_12) {
+        CharSequence _compile_12 = this.compile(c_1);
+        _builder.append(_compile_12);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -1646,6 +1658,18 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     _builder.append(".\t");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compile(final ECapabilityType c) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(":Capability_");
+    int _plusPlus = this.capabilitytype_counter++;
+    _builder.append(_plusPlus);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Capability ;");
     _builder.newLine();
     return _builder;
   }
