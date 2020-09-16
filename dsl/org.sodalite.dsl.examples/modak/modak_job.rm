@@ -1,6 +1,6 @@
-capability_types:
-	sodalite.capabilities.modak.ModakEndpoint:
-    	derived_from: tosca.capabilities.Root
+// capability_types:
+	// sodalite.capabilities.modak.ModakEndpoint:
+    	// derived_from: tosca.capabilities.Root
 
 node_types:
 	sodalite.nodes.modak:
@@ -10,7 +10,8 @@ node_types:
         		type: string
     	capabilities:
       		modak_endpoint:
-        		type: sodalite.capabilities.modak.ModakEndpoint
+        		// type: sodalite.capabilities.modak.ModakEndpoint
+        		type: tosca.capabilities.Root
         		valid_source_types: [ sodalite.nodes.modak.job ]
 
 
@@ -41,7 +42,8 @@ node_types:
 		requirements:
 			modak_endpoint:
 				node: sodalite.nodes.modak
-				capability: sodalite.capabilities.modak.ModakEndpoint
+				// capability: sodalite.capabilities.modak.ModakEndpoint
+				capability: tosca.capabilities.Root
 				relationship: tosca.relationships.DependsOn
 				occurrences: [ "1", "1" ]
 		interfaces:

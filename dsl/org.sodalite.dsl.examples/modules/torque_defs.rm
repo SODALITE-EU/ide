@@ -1,40 +1,40 @@
-capability_types:
-	sodalite.capabilities.hpc.ConfiguredJob:
-		derived_from: tosca.capabilities.Root
+// capability_types:
+	// sodalite.capabilities.hpc.ConfiguredJob:
+		// derived_from: tosca.capabilities.Root
 
-	sodalite.capabilities.hpc.StartedJob:
-		derived_from: tosca.capabilities.Root
+	// sodalite.capabilities.hpc.StartedJob:
+		// derived_from: tosca.capabilities.Root
 		
-relationship_types:
-	sodalite.relationships.jobHostedOn: 
-		derived_from: tosca.relationships.HostedOn
-		interfaces:
-			Configure:
-				type: tosca.interfaces.relationship.Configure
-				operations:
-					add_source:
-						inputs:
-							wm_public_address: 
-								default: get_attribute: 
-									entity: SELF
-									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
-							wm_username: 
-								default: get_attribute:
-									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
-							wm_keypath: 
-								default: get_attribute: 
-									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
-							job_name: 
-								default: get_property: 
-									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.name
-						implementation:
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/library/torque/torque-job/playbooks/dummy-relation-interface.yml"
+// relationship_types:
+	// sodalite.relationships.jobHostedOn: 
+		// derived_from: tosca.relationships.HostedOn
+		// interfaces:
+			// Configure:
+				// type: tosca.interfaces.relationship.Configure
+				// operations:
+					// add_source:
+						// inputs:
+							// wm_public_address: 
+								// default: get_attribute: 
+									// entity: SELF
+									// attribute: tosca.nodes.Compute.public_address
+									// req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+							// wm_username: 
+								// default: get_attribute:
+									// entity: SELF
+									// attribute: sodalite.nodes.hpc.wm.torque.username
+									// req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+							// wm_keypath: 
+								// default: get_attribute: 
+									// entity: SELF
+									// attribute: sodalite.nodes.hpc.wm.torque.ssh-key
+									// req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+							// job_name: 
+								// default: get_property: 
+									// entity: SELF
+									// property: sodalite.nodes.hpc.job.torque.configuration.name
+						// implementation:
+							// primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/library/torque/torque-job/playbooks/dummy-relation-interface.yml"
 node_types:
 	sodalite.nodes.hpc.job.torque.configuration.node: 
 		description: "torque job configuration"
