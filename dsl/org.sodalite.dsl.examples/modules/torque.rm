@@ -337,7 +337,23 @@ node_types:
 							'/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/templates/preconfigured-job.pbs.j2',
 							"/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/artifacts/job.sh",
 							"/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/artifacts/failed.job.sh"]							
-														
+	
+	sodalite.nodes.hpc.wm.torque: 
+		description: "torque wm, here we can define properties/attributes applicable for torque WM"
+		derived_from: tosca.nodes.Compute
+		attributes:
+			username:
+				type: string
+			ssh-key:
+				type: string
+		capabilities:
+			host:
+				type: tosca.capabilities.Compute
+				valid_source_types: [sodalite.nodes.hpc.job.torque]
+			job_node:
+				type: tosca.capabilities.Compute
+				valid_source_types: [sodalite.nodes.hpc.job.torque]		
+											
 	sodalite.nodes.hpc.job.torque:
 		description: "torque job" 
 		derived_from: tosca.nodes.SoftwareComponent

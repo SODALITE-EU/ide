@@ -217,23 +217,7 @@ node_types:
 			available_memory_kb:
 				type: integer
 				required: false
-				default: "128471284"				
-				
-	sodalite.nodes.hpc.wm.torque: 
-		description: "torque wm, here we can define properties/attributes applicable for torque WM"
-		derived_from: tosca.nodes.Compute
-		attributes:
-			username:
-				type: string
-			ssh-key:
-				type: string
-		capabilities:
-			host:
-				type: tosca.capabilities.Compute
-				valid_source_types: [sodalite.nodes.hpc.job.torque]
-			job_node:
-				type: tosca.capabilities.Compute
-				valid_source_types: [sodalite.nodes.hpc.job.torque]				
+				default: "128471284"		
 				
 				
 				
