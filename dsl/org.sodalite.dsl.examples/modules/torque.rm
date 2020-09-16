@@ -361,10 +361,10 @@ node_types:
 			host:
 				node: sodalite.nodes.hpc.wm.torque
 				capability: tosca.capabilities.Compute
-				relationship: tosca.relationships.HostedOn
+				relationship: sodalite.relationships.jobHostedOn
 			configured_job:
 				node: sodalite.nodes.hpc.job.torque.configuration
-				capability: tosca.capabilities.Root
+				capability: sodalite.capabilities.hpc.ConfiguredJob
 				relationship: tosca.relationships.DependsOn    
 		attributes:
 			job_id:
@@ -447,7 +447,7 @@ node_types:
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/start.yml"
 		capabilities:
 			job:
-				type: tosca.capabilities.Root
+				type: sodalite.capabilities.hpc.StartedJob
 				valid_source_types: [sodalite.nodes.hpc.job.torque.result]
 				
 	sodalite.nodes.hpc.job.torque.result: 
@@ -460,7 +460,7 @@ node_types:
 				relationship: tosca.relationships.HostedOn
 			job:
 				node: sodalite.nodes.hpc.job.torque
-				capability: tosca.capabilities.Root
+				capability: sodalite.capabilities.hpc.StartedJob 
 				relationship: tosca.relationships.DependsOn   
 		properties:
 			monitor_period:
