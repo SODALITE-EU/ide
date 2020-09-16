@@ -287,6 +287,7 @@ public class NewAADMWizard extends BasicNewResourceWizard {
             }
             throw new RuntimeException(e.getCause());
         } catch (final InterruptedException e) {
+        	Thread.currentThread().interrupt();
             throw new RuntimeException(e);
         }
     }

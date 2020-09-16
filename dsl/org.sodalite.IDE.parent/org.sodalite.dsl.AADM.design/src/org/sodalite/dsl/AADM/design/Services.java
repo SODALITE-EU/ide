@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
@@ -110,7 +109,7 @@ public class Services {
     
     public List<String> getInputs(EPropertyAssignment prop){
     	List<String> result = new ArrayList<>();
-    	AADM_Model model = findModel(prop);
+    	AADM_Model model = AADM_Helper.findModel(prop);
     	for (EParameterDefinition input: model.getInputs().getInputs()) {
     		result.add(input.getName());
     	}
@@ -125,27 +124,9 @@ public class Services {
     	return AADMScopeProvider.getDataTypes();	
     }
     
-    private AADM_Model findModel(EObject obj) {
-    	EObject container = obj.eContainer();
-    	while (container != null && !(container instanceof AADM_Model)) {
-    		container = container.eContainer();
-    	}
-    	return (AADM_Model) container;
-	}
-    
     public ENodeTemplate findNode(ERequirementAssignment req) {
     	System.out.println("Invoked findNode with req: " + req);
-    	return findNode (req, req.getNode());
+    	return AADM_Helper.findNode (req, req.getNode());
     }
-
-	private ENodeTemplate findNode(ERequirementAssignment req, String nodeName) {
-		AADM_Model model = findModel(req);
-		for (ENodeTemplate node: model.getNodeTemplates().getNodeTemplates()) {
-			if (node.getName().equals(nodeName)) {
-				return node;
-			}
-		}
-		return null;
-	}
     
 }

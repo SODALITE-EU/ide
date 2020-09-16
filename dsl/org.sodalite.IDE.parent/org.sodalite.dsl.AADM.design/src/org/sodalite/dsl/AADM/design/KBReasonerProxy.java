@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
@@ -33,7 +31,7 @@ import org.sodalite.dsl.ui.preferences.PreferenceConstants;
  */
 public class KBReasonerProxy {
 
-	private KBReasonerClient getKBReasoner() {
+	private static KBReasonerClient getKBReasoner() {
 		// Configure KBReasonerClient endpoint from preference page information
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
@@ -64,7 +62,7 @@ public class KBReasonerProxy {
     public List<String> getAttributes(EAttributeAssignment attr){
     	List<String> result = new ArrayList<>();
 		try {
-			String type = findContainerType(attr);
+			String type = AADM_Helper.findContainerType(attr, getKBReasoner());
 			if (type == null)
 				return result;
 			ReasonerData<Attribute> attributes = getKBReasoner().getAttributes(type);
@@ -84,7 +82,7 @@ public class KBReasonerProxy {
     public List<String> getProperties(EPropertyAssignment prop){
     	List<String> result = new ArrayList<>();
 		try {
-			String type = findContainerType(prop);
+			String type = AADM_Helper.findContainerType(prop, getKBReasoner());
 			if (type == null)
 				return result;
 			ReasonerData<Property> properties = getKBReasoner().getProperties(type);
@@ -104,7 +102,7 @@ public class KBReasonerProxy {
 	public List<String> getCapabilities(ECapabilityAssignment cap){
     	List<String> result = new ArrayList<>();
 		try {
-			String type = findContainerType(cap);
+			String type = AADM_Helper.findContainerType(cap, getKBReasoner());
 			if (type == null)
 				return result;
 			ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(type);
@@ -124,7 +122,7 @@ public class KBReasonerProxy {
     public List<String> getRequirements(ERequirementAssignment req){
     	List<String> result = new ArrayList<>();
 		try {
-			String type = findContainerType(req);
+			String type = AADM_Helper.findContainerType(req, getKBReasoner());
 			if (type == null)
 				return result;
 			ReasonerData<Requirement> requirements = getKBReasoner().getRequirements(type);
@@ -157,7 +155,7 @@ public class KBReasonerProxy {
 		}
 		
 		//Find local nodes that belongs to suggested types
-		List<ENodeTemplate> localnodes = findLocalNodesForTypes(types, req);
+		List<ENodeTemplate> localnodes = AADM_Helper.findLocalNodesForTypes(types, req);
 		for (ENodeTemplate node: localnodes){
 			System.out.println ("Valid requirement local node: " + node.getName());
 			result.add(node.getName());
@@ -169,55 +167,5 @@ public class KBReasonerProxy {
     	//TODO implement it
     	throw new UnsupportedOperationException();
     }
-    
-    private String findContainerType(EObject obj) {
-    	EObject container = obj.eContainer().eContainer();
-    	if (container instanceof ENodeTemplateBody)
-    		return ((ENodeTemplateBody) container).getType();
-    	else if (container instanceof ECapabilityAssignment) {
-    		ECapabilityAssignment cap = (ECapabilityAssignment) container;
-    		return findCapabilityType(cap);
-    	}else
-    		return null;
-	}
-    
-    private String findCapabilityType(ECapabilityAssignment cap){
-    	String result = null;
-		try {
-			String type = findContainerType(cap);
-			if (type == null)
-				return result;
-			ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(type);
-			for (Capability c: capabilities.getElements()){
-				String label = c.getUri().toString().substring(
-						c.getUri().toString().lastIndexOf('/') + 1, 
-						c.getUri().toString().length());
-				if (label.equals(cap.getName()))
-					return c.getType().getLabel();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-    	return result;
-    }
-    
-    private AADM_Model findModel(EObject obj) {
-    	EObject container = obj.eContainer();
-    	while (container != null && !(container instanceof AADM_Model)) {
-    		container = container.eContainer();
-    	}
-    	return (AADM_Model) container;
-	}
-	
-	private List<ENodeTemplate> findLocalNodesForTypes(SortedSet<String> types, EObject reqAssign) {
-		List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
-		AADM_Model model = (AADM_Model) findModel(reqAssign);
-		for (ENodeTemplate node: model.getNodeTemplates().getNodeTemplates()){
-			if (types.contains(node.getNode().getType()))
-				nodes.add(node);
-		}
-		return nodes;
-	}
     
 }

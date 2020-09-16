@@ -5,6 +5,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -152,7 +154,7 @@ public class BackendProxy {
 			SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
 			subMonitor.setTaskName("Converting AADM into Turtle");
 			fsa.setMonitor(subMonitor);
-			IProject project = getProject(aadmFile);
+			IProject project = aadmFile.getProject();
 			IFile output = project.getFile("src-gen");
 			fsa.setOutputPath(output.getLocation().toOSString());
 			generator.doGenerate(r, fsa, new GeneratorContext() {
@@ -167,10 +169,13 @@ public class BackendProxy {
 		}
 	}
 
-	public void processSaveAADM(ExecutionEvent event) throws IOException, PartInitException {
+	public void processSaveAADM(ExecutionEvent event) throws Exception {
 		// Return selected resource
 		IFile aadmFile = getSelectedFile();
-		IProject project = getProject(aadmFile);
+		if (aadmFile == null)
+			throw new Exception("Selected AADM could not be found");
+		
+		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFile.getName(), project);
 		String aadmURI = getAadmURI(aadmFile, project);
@@ -179,10 +184,13 @@ public class BackendProxy {
 		saveAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 
-	public void processOptimizeAADM(ExecutionEvent event) throws IOException, PartInitException {
+	public void processOptimizeAADM(ExecutionEvent event) throws Exception {
 		// Return selected resource
 		IFile aadmFile = getSelectedFile();
-		IProject project = getProject(aadmFile);
+		if (aadmFile == null)
+			throw new Exception("Selected AADM could not be found");
+		
+		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFile.getName(), project);
 
@@ -209,7 +217,9 @@ public class BackendProxy {
 	public void processDeployAADM(ExecutionEvent event) throws Exception {
 		// Return selected resource
 		IFile aadmFile = getSelectedFile();
-		IProject project = getProject(aadmFile);
+		if (aadmFile == null)
+			throw new Exception("Selected AADM could not be found");
+		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFile.getName(), project);
 
@@ -237,8 +247,9 @@ public class BackendProxy {
 		if (Files.exists(path)) {
 			Properties props = new Properties();
 			try (final FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
+					final InputStream in = Channels.newInputStream(channel);
 					final FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
-				props.load(Channels.newInputStream(channel));
+				props.load(in);
 			}
 			uri = props.getProperty("URI");
 		}
@@ -269,12 +280,14 @@ public class BackendProxy {
 		if (!Files.exists(path, LinkOption.NOFOLLOW_LINKS))
 			Files.createFile(path);
 		try (final FileChannel inChannel = FileChannel.open(path, StandardOpenOption.READ);
+				final InputStream in = Channels.newInputStream(inChannel);
 				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
-			props.load(Channels.newInputStream(inChannel));
+			props.load(in);
 		}
 		props.setProperty("URI", uri);
-		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE)) {
-			props.store(Channels.newOutputStream(outChannel), "Sodalite Metadata");
+		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE);
+				final OutputStream out = Channels.newOutputStream(outChannel)) {
+			props.store(out, "Sodalite Metadata");
 		}
 	}
 	
@@ -377,6 +390,9 @@ public class BackendProxy {
 					// Save the AADM model into the KB
 					subMonitor.setTaskName("Saving AADM");
 					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, true);
+					if (saveReport == null)
+						throw new Exception("There was a problem to save the AADM into the KB, please contact Sodalite administrator");
+					
 					processValidationIssues(aadmfile, saveReport, event);
 
 					if (saveReport != null && saveReport.hasErrors())
@@ -549,7 +565,7 @@ public class BackendProxy {
 		return context.substring(context.lastIndexOf('/') + 1);
 	}
 
-	private void openOptimizationModel(String node, AADM_Model aadmModel) throws PartInitException {
+	private void openOptimizationModel(String node, AADM_Model aadmModel) throws Exception {
 		// Find the associated node in the model and read the bound optimization model.
 		ENodeTemplate nodeTemplate = null;
 		for (ENodeTemplate template: aadmModel.getNodeTemplates().getNodeTemplates()) {
@@ -558,6 +574,9 @@ public class BackendProxy {
 				break;
 			}
 		}
+		if (nodeTemplate == null) 
+			throw new Exception ("Associated optimization model could not be opened for node: " + node);
+		
 		// Find the optimization model location
 		Optimization_Model optimizationModel = nodeTemplate.getNode().getOptimization();
 		// Open the optimization model
@@ -740,6 +759,7 @@ public class BackendProxy {
 
 	private String getDependency (List<String> entityHierarchy) {
 		String dependency = null;
+		String result = "";
 		for (String entry: entityHierarchy) {
 			if (entry.contains("requirements")) {
 				int index = entityHierarchy.indexOf(entry) + 1;
@@ -747,7 +767,9 @@ public class BackendProxy {
 				break;
 			}
 		}
-		return dependency.substring(dependency.lastIndexOf('/') + 1);
+		if (dependency != null)
+			result = dependency.substring(dependency.lastIndexOf('/') + 1);
+		return result;
 	}
 	
 	private SortedSet<String> getSuggestedNodes(SortedSet<String> suggestions){
@@ -961,21 +983,16 @@ public class BackendProxy {
 		return req;
 	}
 
-	private IProject getProject(IResource resource) {
-		return resource.getProject();
-	}
-
 	private IFile getSelectedFile() {
-		IFile file = null;
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window != null) {
 			IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
 			Object firstElement = selection.getFirstElement();
 			if (firstElement instanceof IAdaptable) {
-				file = (IFile) ((IAdaptable) firstElement).getAdapter(IFile.class);
+				return (IFile) ((IAdaptable) firstElement).getAdapter(IFile.class);
 			}
 		}
-		return file;
+		return null;
 	}
 
 	protected static class ListBasedMarkerAcceptor implements IAcceptor<Issue> {
@@ -1024,23 +1041,4 @@ public class BackendProxy {
 			return source;
 		}
 	}
-
-//	public static void main(String[] args) throws IOException {
-//		String aadmIri = "0000:1234:1236:4533:6353";
-//		Path path = Paths.get("/home/yosu/.aadm.properties");
-//		Properties props = new Properties();
-//
-//		// Create properties file if it does not exist
-//		if (!Files.exists(path, LinkOption.NOFOLLOW_LINKS))
-//			Files.createFile(path);
-//		try (final FileChannel inChannel = FileChannel.open(path, StandardOpenOption.READ);
-//				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
-//			props.load(Channels.newInputStream(inChannel));
-//		}
-//		props.setProperty("aadmIRI", aadmIri);
-//		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE)) {
-//			props.store(Channels.newOutputStream(outChannel), "AADM Metadata");
-//		}
-//	}
-
 }
