@@ -25,7 +25,12 @@ public class KBEntity {
 	
 	@Override
 	public boolean equals(Object o) {
-		return ((KBEntity)o).getUri().equals(this.getUri());
+		if (o == null)
+			return false;
+		if (this.getClass() != o.getClass())
+			return false;
+		KBEntity entity = (KBEntity)o;
+		return entity.getUri().equals(this.getUri());
 	}
 	
 	@Override

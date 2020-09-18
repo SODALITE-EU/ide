@@ -13,7 +13,7 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 	
-	private volatile ScopedPreferenceStore  myPreferenceStore;
+	private ScopedPreferenceStore  myPreferenceStore;
 	
 	/**
 	 * The constructor
