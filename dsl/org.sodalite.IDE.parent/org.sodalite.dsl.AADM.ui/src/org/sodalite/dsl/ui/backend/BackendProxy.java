@@ -419,14 +419,16 @@ public class BackendProxy {
 					if (iacReport == null || iacReport.getToken().isEmpty())
 						throw new Exception("AADM could not be parsed by IaC Builder");
 					admin_report[0] = iacReport.getToken();
-					System.out.println("IaC Builder blueprint token: " + iacReport.getToken());
+					String message = "IaC Builder blueprint token: " + iacReport.getToken();
+					BackendLogger.log(message);
 					subMonitor.worked(3);
 
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
 					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path, iacReport.getToken());
 					admin_report[1] = depl_report.getSession_token();
-					System.out.println("xOpera session token: " + depl_report.getSession_token());
+					message = "xOpera session token: " + depl_report.getSession_token();
+					BackendLogger.log(message);
 					subMonitor.worked(4);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
@@ -493,7 +495,6 @@ public class BackendProxy {
 		// Put in a readable name for the filter
 		//fileDialog.setFilterNames(new String[] { "Textfiles(*.txt)" });
 		String selected = fileDialog.open();
-		System.out.println("Selected inputs file: " + selected);
 		return selected;
 	}
 
@@ -620,14 +621,12 @@ public class BackendProxy {
 		while (xtextEditor == null) {
 			xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		}
-		System.out.println ("Reading XTextEditor: " + xtextEditor);
 		if (xtextEditor != null) {
 			IValidationIssueProcessor issueProcessor;
 			IXtextDocument xtextDocument = xtextEditor.getDocument();
 			// FIXME Investigate why the model is not always read, returning null
 			int attempt = 0;
 			while (model == null) {
-				System.out.println ("Reading AADM model. Attempt: " + (++attempt));
 				model = (AADM_Model) xtextDocument.readOnly(
 						new IUnitOfWork(){
 						       public AADM_Model exec(Object resource) {
