@@ -35,6 +35,7 @@ pipeline {
     stage ('Publish update site') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'sodalite-jenkins_github_creds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+          sh('mkdir -p site')
     	  sh('scripts/publish_site.sh')
 	}
       }
