@@ -12,7 +12,7 @@ Install the Eclipse Modeling Tools instance from [here](https://www.eclipse.org/
 Note: SODALITE IDE has been tested in the version 2020-06 R (4.16.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2020-06/r/eclipse-modeling-tools)
 
 ## IDE Installation from the Sodalite IDE update site
-Install the Sodalite IDE into the Eclipse Modeling Tools instance using this [update site](https://raw.githubusercontent.com/SODALITE-EU/ide/master/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository). 
+Install the Sodalite IDE into the Eclipse Modeling Tools instance using this [update site](https://sodalite-eu.github.io/ide/). 
 In Eclipse, select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and the update site location given Above. Then, click on *Add* button. 
 Following the same procedure as before add the following external software repositories to your list of software sites:
 - [Sirius-XText integration](https://altran-mde.github.io/xtext-sirius-integration.io/p2/) 

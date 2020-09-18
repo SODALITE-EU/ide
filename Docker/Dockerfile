@@ -12,7 +12,7 @@ RUN ./eclipse/eclipse -application org.eclipse.equinox.p2.director -noSplash -re
 
 RUN ./eclipse/eclipse -application org.eclipse.equinox.p2.director -noSplash -repository https://altran-mde.github.io/xtext-sirius-integration.io/p2/,http://updates.yakindu.com/statecharts/releases/,http://download.eclipse.org/releases/oxygen,http://download.eclipse.org/tools/orbit/downloads/drops/R20170919201930/repository -installIUs com.altran.general.integration.xtextsirius.design.feature.feature.group,com.altran.general.integration.xtextsirius.runtime.feature.feature.group
 #Sodalite IDE
-RUN ./eclipse/eclipse -application org.eclipse.equinox.p2.director -noSplash -repository https://raw.githubusercontent.com/SODALITE-EU/ide/master/dsl/org.sodalite.IDE.parent/org.sodalite.IDE.repository/target/repository -installIUs org.sodalite.dsl.AADM.feature.feature.group,org.sodalite.dsl.optimization.feature.feature.group,org.sodalite.dsl.RM.feature.feature.group
+RUN ./eclipse/eclipse -application org.eclipse.equinox.p2.director -noSplash -repository https://sodalite-eu.github.io/ide/ -installIUs org.sodalite.dsl.AADM.feature.feature.group,org.sodalite.dsl.optimization.feature.feature.group,org.sodalite.dsl.RM.feature.feature.group
 
 #Sodalite workspace
 ADD workspace/ /workspace
