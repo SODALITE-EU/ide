@@ -44,11 +44,9 @@ public class Activator extends AbstractUIPlugin {
 	
 	@Override
 	public IPreferenceStore getPreferenceStore(){
-		if (null == myPreferenceStore) {
-            synchronized (this) {
-                if (null == myPreferenceStore) { 
-                	myPreferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, PLUGIN_ID); 
-                } 
+        synchronized (this) {
+            if (null == myPreferenceStore) { 
+            	myPreferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, PLUGIN_ID); 
             } 
         } 
 		System.out.println("myPreferenceStore: " + myPreferenceStore);
