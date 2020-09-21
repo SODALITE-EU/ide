@@ -36,7 +36,7 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'sodalite-jenkins_github_creds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
           sh('mkdir -p site')
-    	  sh('scripts/publish_site.sh')
+    	  sh('scripts/publish_site.sh ${GIT_USERNAME} ${GIT_PASSWORD}')
 	}
       }
     }
