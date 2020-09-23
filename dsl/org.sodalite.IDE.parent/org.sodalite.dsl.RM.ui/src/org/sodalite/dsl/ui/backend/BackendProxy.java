@@ -1,5 +1,6 @@
 package org.sodalite.dsl.ui.backend;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -111,7 +112,7 @@ public class BackendProxy {
 			throw new Exception("Selected RM could not be found");
 		IProject project = rmFile.getProject();;
 		// Get serialize AADM model in Turtle
-		String rmTTL = readTurtle(rmFile.getName(), project);
+		String rmTTL = readTurtle(rmFile, project);
 
 		// Send model to the KB
 		String rmUri = getRmURI (rmFile, project);
@@ -146,13 +147,15 @@ public class BackendProxy {
 		}
 	}
 
-	private String readTurtle(String filename, IProject project) throws IOException {
-		IFile turtle = project.getFile("src-gen/" + filename + ".ttl");
+	private String readTurtle(IFile modelFile, IProject project) throws IOException {
+		String filename = modelFile.getFullPath().toOSString().substring(
+				modelFile.getFullPath().toOSString().indexOf(File.separator, 1) + 1).replaceFirst(File.separator, ".");
+		IFile turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
 		String turtle_path = turtle.getLocationURI().toString();
-		turtle_path = turtle_path.substring(turtle_path.indexOf("/"));
-		Path aadm_path = FileSystems.getDefault().getPath(turtle_path);
-		String aadmTTL = new String(Files.readAllBytes(aadm_path));
-		return aadmTTL;
+		turtle_path = turtle_path.substring(turtle_path.indexOf(File.separator));
+		Path rm_path = FileSystems.getDefault().getPath(turtle_path);
+		String rmTTL = new String(Files.readAllBytes(rm_path));
+		return rmTTL;
 	}
 	
 	private String getRmURI(IFile rmfile, IProject project) throws IOException {
@@ -174,11 +177,11 @@ public class BackendProxy {
 
 	private Path getRMPropertiesFile(IFile rmfile, IProject project) {
 		String filepath = rmfile.toString();
-		String filename = filepath.substring(filepath.lastIndexOf("/") + 1);
-		String directory = filepath.substring(filepath.indexOf('/', 2) + 1, filepath.lastIndexOf("/"));
-		IFile propertiesFile = project.getFile(directory + "/." + filename + ".properties");
+		String filename = filepath.substring(filepath.lastIndexOf(File.separator) + 1);
+		String directory = filepath.substring(filepath.indexOf(File.separator, 2) + 1, filepath.lastIndexOf(File.separator));
+		IFile propertiesFile = project.getFile(directory + File.separator + "." + filename + ".properties");
 		String properties_path = propertiesFile.getLocationURI().toString();
-		properties_path = properties_path.substring(properties_path.indexOf("/"));
+		properties_path = properties_path.substring(properties_path.indexOf(File.separator));
 		Path path = FileSystems.getDefault().getPath(properties_path);
 		return path;
 	}

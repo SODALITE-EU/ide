@@ -177,7 +177,7 @@ public class BackendProxy {
 		
 		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
-		String aadmTTL = readTurtle(aadmFile.getName(), project);
+		String aadmTTL = readTurtle(aadmFile, project);
 		String aadmURI = getAadmURI(aadmFile, project);
 		
 		// Send model to the KB
@@ -192,7 +192,7 @@ public class BackendProxy {
 		
 		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
-		String aadmTTL = readTurtle(aadmFile.getName(), project);
+		String aadmTTL = readTurtle(aadmFile, project);
 
 		// Send model to the KB
 		String aadmURI = getAadmURI(aadmFile, project);
@@ -221,7 +221,7 @@ public class BackendProxy {
 			throw new Exception("Selected AADM could not be found");
 		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
-		String aadmTTL = readTurtle(aadmFile.getName(), project);
+		String aadmTTL = readTurtle(aadmFile, project);
 
 		// Deploy AADM model
 		String aadmURI = getAadmURI(aadmFile, project);
@@ -232,14 +232,16 @@ public class BackendProxy {
 		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, project, event);
 	}
 
-	private String readTurtle(String filename, IProject project) throws IOException {
-		IFile turtle = project.getFile("src-gen/" + filename + ".ttl");
+	private String readTurtle(IFile modelFile, IProject project) throws IOException {
+		String filename = modelFile.getFullPath().toOSString().substring(
+				modelFile.getFullPath().toOSString().indexOf(File.separator, 1) + 1).replaceFirst(File.separator, ".");
+		IFile turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
 		String turtle_path = turtle.getLocationURI().toString();
-		turtle_path = turtle_path.substring(turtle_path.indexOf("/"));
+		turtle_path = turtle_path.substring(turtle_path.indexOf(File.separator));
 		Path aadm_path = FileSystems.getDefault().getPath(turtle_path);
 		String aadmTTL = new String(Files.readAllBytes(aadm_path));
 		return aadmTTL;
-	}
+	}	
 
 	private String getAadmURI(IFile aadmFile, IProject project) throws IOException {
 		Path path = getAadmPropertiesFile(aadmFile, project);
@@ -259,15 +261,15 @@ public class BackendProxy {
 
 	private Path getAadmPropertiesFile(IFile aadmfile, IProject project) {
 		String filepath = aadmfile.toString();
-		String filename = filepath.substring(filepath.lastIndexOf("/") + 1);
-		int index1 = filepath.indexOf('/', 2) + 1;
-		int index2 = filepath.lastIndexOf("/");
+		String filename = filepath.substring(filepath.lastIndexOf(File.separator) + 1);
+		int index1 = filepath.indexOf(File.separator, 2) + 1;
+		int index2 = filepath.lastIndexOf(File.separator);
 		String directory = "";
 		if (index2 > index1)
 			directory = filepath.substring(index1, index2);
-		IFile propertiesFile = project.getFile(directory + "/." + filename + ".properties");
+		IFile propertiesFile = project.getFile(directory + File.separator + "." + filename + ".properties");
 		String properties_path = propertiesFile.getLocationURI().toString();
-		properties_path = properties_path.substring(properties_path.indexOf("/"));
+		properties_path = properties_path.substring(properties_path.indexOf(File.separator));
 		Path path = FileSystems.getDefault().getPath(properties_path);
 		return path;
 	}
