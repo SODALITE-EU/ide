@@ -42,6 +42,9 @@ import org.sodalite.dsl.rM.ECapabilityType
 import org.sodalite.dsl.rM.ERelationshipType
 import org.sodalite.dsl.rM.EValidTargetTypes
 import org.sodalite.dsl.rM.ECapabilityTypeRef
+import java.util.regex.Pattern
+import java.util.regex.Matcher
+import java.io.File
 
 /**
  * Generates code from your model files on save.
@@ -904,7 +907,9 @@ class RMGenerator extends AbstractGenerator {
 	
 	def getFilename(URI uri) {
 		var filename = uri.toString
-		filename = filename.substring(filename.lastIndexOf('/')+1).concat('.ttl')
+		filename = filename.replace("platform:/resource", "")
+		filename = filename.substring(
+				filename.indexOf(File.separator, 1) + 1).replaceFirst(File.separator, ".") + ".ttl";
 		return filename 
 	}
 		

@@ -4,6 +4,7 @@
 package org.sodalite.dsl.generator;
 
 import com.google.common.collect.Iterables;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -2598,9 +2599,12 @@ public class RMGenerator extends AbstractGenerator {
   
   public String getFilename(final URI uri) {
     String filename = uri.toString();
-    int _lastIndexOf = filename.lastIndexOf("/");
-    int _plus = (_lastIndexOf + 1);
-    filename = filename.substring(_plus).concat(".ttl");
+    filename = filename.replace("platform:/resource", "");
+    int _indexOf = filename.indexOf(File.separator, 1);
+    int _plus = (_indexOf + 1);
+    String _replaceFirst = filename.substring(_plus).replaceFirst(File.separator, ".");
+    String _plus_1 = (_replaceFirst + ".ttl");
+    filename = _plus_1;
     return filename;
   }
   

@@ -39,6 +39,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.IFile
 import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.rM.GetProperty
+import java.io.File
 
 /**
  * Generates code from your model files on save.
@@ -339,10 +340,11 @@ class AADMGenerator extends AbstractGenerator {
 	.
 	'''
 	
-		
 	def getFilename(URI uri) {
 		var filename = uri.toString
-		filename = filename.substring(filename.lastIndexOf('/')+1).concat('.ttl')
+		filename = filename.replace("platform:/resource", "")
+		filename = filename.substring(
+				filename.indexOf(File.separator, 1) + 1).replaceFirst(File.separator, ".") + ".ttl";
 		return filename 
 	}
 		
