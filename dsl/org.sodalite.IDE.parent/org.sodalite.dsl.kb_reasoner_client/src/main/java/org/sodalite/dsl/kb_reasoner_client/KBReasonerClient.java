@@ -13,12 +13,23 @@ package org.sodalite.dsl.kb_reasoner_client;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.net.ssl.SSLContext;
+
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeData;
@@ -47,6 +58,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -67,15 +79,42 @@ import com.google.gson.JsonObject;
 public class KBReasonerClient implements KBReasoner {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private RestTemplate restTemplate;
+	private RestTemplate sslRestTemplate;
 	private String kbReasonerUri;
 	private String iacUri;
 	private String xoperaUri;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String xoperaUri) {
-		restTemplate = new RestTemplate();
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.xoperaUri = xoperaUri;
+	}
+	
+	private RestTemplate getSslRestTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+		if (sslRestTemplate == null) {
+//			CloseableHttpClient httpClient
+//		      = HttpClients.custom()
+//		        .setSSLHostnameVerifier(new NoopHostnameVerifier())
+//		        .build();
+			CloseableHttpClient httpClient = HttpClients.custom()
+		            .setSSLSocketFactory(new SSLConnectionSocketFactory(SSLContexts.custom()
+		                    .loadTrustMaterial(null, new TrustSelfSignedStrategy())
+		                    .build()
+		                )
+		            ).build();
+		    HttpComponentsClientHttpRequestFactory requestFactory 
+		      = new HttpComponentsClientHttpRequestFactory();
+		    requestFactory.setHttpClient(httpClient);
+		    sslRestTemplate = new RestTemplate(requestFactory);
+		}
+	    return sslRestTemplate;
+	 }
+	
+	private RestTemplate getRestTemplate() {
+		if (restTemplate == null) {
+			restTemplate = new RestTemplate();
+		}
+		return restTemplate;
 	}
 
 	public NodeData getNodes() throws Exception {
@@ -439,14 +478,20 @@ public class KBReasonerClient implements KBReasoner {
 	 * 
 	 * @param uri   URI of GET message
 	 * @param clazz Class representing returned object
+	 * @throws NoSuchAlgorithmException 
+	 * @throws KeyStoreException 
+	 * @throws KeyManagementException 
 	 */
-	private <T> ResponseEntity<T> getJSONMessage(URI uri, Class<T> clazz) throws RestClientException {
+	private <T> ResponseEntity<T> getJSONMessage(URI uri, Class<T> clazz) throws Exception {
 		RequestEntity<T> request = (RequestEntity<T>) RequestEntity.get(uri).accept(MediaType.APPLICATION_JSON).build();
-		return restTemplate.exchange(request, clazz);
+		if (uri.getScheme().equals("https"))
+			return getSslRestTemplate().exchange(request, clazz);
+		else
+			return getRestTemplate().exchange(request, clazz);
 	}
 
 
-	private <T> T getJSONObjectForType(Class<T> type, URI uri, HttpStatus expectedStatus) {
+	private <T> T getJSONObjectForType(Class<T> type, URI uri, HttpStatus expectedStatus) throws Exception {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
 			ResponseEntity<T> response = getJSONMessage(uri, type);
@@ -464,7 +509,7 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 	
-	private HttpStatus getStatusOfURI(URI uri) {
+	private HttpStatus getStatusOfURI(URI uri) throws Exception {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
 			return getJSONMessage(uri, String.class).getStatusCode();
@@ -498,7 +543,7 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 	
-	private <T> T sendFormURLEncodedMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts, HttpMethod method) throws HttpStatusCodeException{
+	private <T> T sendFormURLEncodedMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts, HttpMethod method) throws Exception{
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		
@@ -524,15 +569,21 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	private <T> ResponseEntity<T> exchange(URI uri, HttpMethod method,
-			HttpEntity<MultiValueMap<String, Object>> requestEntity, Class<T> clazz) {
-		return restTemplate.exchange(uri, method, requestEntity, clazz);
+			HttpEntity<MultiValueMap<String, Object>> requestEntity, Class<T> clazz) throws Exception {
+		if (uri.getScheme().equals("https"))
+			return getSslRestTemplate().exchange(uri, method, requestEntity, clazz);
+		else
+			return getRestTemplate().exchange(uri, method, requestEntity, clazz);
 	}
 	
-	public <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) {
+	public <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) throws Exception {
 		RequestEntity<S> request = RequestEntity.post(uri)
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(object);
-		return (ResponseEntity<T>) restTemplate.exchange(request, clazz);
+		if (uri.getScheme().equals("https"))
+			return (ResponseEntity<T>) getSslRestTemplate().exchange(request, clazz);
+		else 
+			return (ResponseEntity<T>) getRestTemplate().exchange(request, clazz);
 	}
 
 }
