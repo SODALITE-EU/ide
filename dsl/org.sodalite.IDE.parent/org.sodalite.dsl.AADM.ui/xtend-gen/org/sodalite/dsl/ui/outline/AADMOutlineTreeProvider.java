@@ -3,7 +3,18 @@
  */
 package org.sodalite.dsl.ui.outline;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
+import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.EPropertyAssignment;
+import org.sodalite.dsl.rM.EAssignmentValue;
+import org.sodalite.dsl.rM.EMAP;
+import org.sodalite.dsl.rM.EMapEntry;
+import org.sodalite.dsl.rM.EParameterDefinition;
+import org.sodalite.dsl.rM.ESTRING;
 
 /**
  * Customization of the default outline structure.
@@ -12,4 +23,62 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
  */
 @SuppressWarnings("all")
 public class AADMOutlineTreeProvider extends DefaultOutlineTreeProvider {
+  protected void _createChildren(final DocumentRootNode parentNode, final EParameterDefinition parameter) {
+    final boolean done = true;
+  }
+  
+  @Override
+  protected void _createChildren(final IOutlineNode parentNode, final EObject modelElement) {
+    if ((modelElement instanceof EParameterDefinition)) {
+      return;
+    } else {
+      if ((modelElement instanceof EPropertyAssignment)) {
+        final EPropertyAssignment property = ((EPropertyAssignment) modelElement);
+        EAssignmentValue _value = property.getValue();
+        if ((_value instanceof EMAP)) {
+          EAssignmentValue _value_1 = ((EPropertyAssignment)modelElement).getValue();
+          final EMAP map = ((EMAP) _value_1);
+          EList<EMapEntry> _map = map.getMap();
+          for (final EMapEntry element : _map) {
+            this.createNode(parentNode, element);
+          }
+        } else {
+          EAssignmentValue _value_2 = property.getValue();
+          if ((_value_2 instanceof ESTRING)) {
+            return;
+          } else {
+            super._createChildren(parentNode, modelElement);
+          }
+        }
+      } else {
+        if ((modelElement instanceof EMAP)) {
+          final EMAP map_1 = ((EMAP) modelElement);
+          EList<EMapEntry> _map_1 = map_1.getMap();
+          for (final EMapEntry element_1 : _map_1) {
+            this.createNode(parentNode, element_1);
+          }
+        } else {
+          if ((modelElement instanceof EMapEntry)) {
+            final EMapEntry entry = ((EMapEntry) modelElement);
+            super._createChildren(parentNode, entry.getValue());
+          } else {
+            if ((modelElement instanceof ENodeTemplate)) {
+              final ENodeTemplate template = ((ENodeTemplate) modelElement);
+              super._createChildren(parentNode, template.getNode());
+            } else {
+              super._createChildren(parentNode, modelElement);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @Override
+  public boolean _isLeaf(final EObject modelElement) {
+    if ((modelElement instanceof EParameterDefinition)) {
+      return true;
+    }
+    return super._isLeaf(modelElement);
+  }
 }
