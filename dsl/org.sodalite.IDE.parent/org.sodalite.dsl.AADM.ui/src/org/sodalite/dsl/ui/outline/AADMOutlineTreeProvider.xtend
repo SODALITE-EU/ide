@@ -4,6 +4,17 @@
 package org.sodalite.dsl.ui.outline
 
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
+import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode
+import org.sodalite.dsl.rM.EParameterDefinition
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode
+import org.sodalite.dsl.rM.ELIST
+import org.eclipse.xtext.AbstractElement
+import org.sodalite.dsl.rM.EMAP
+import org.sodalite.dsl.rM.EMapEntry
+import org.sodalite.dsl.aADM.EPropertyAssignment
+import org.sodalite.dsl.rM.ESTRING
+import org.sodalite.dsl.aADM.ENodeTemplate
 
 /**
  * Customization of the default outline structure.
@@ -12,4 +23,45 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
  */
 class AADMOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
+    def protected _createChildren(DocumentRootNode parentNode, EParameterDefinition parameter) {
+    	val done = true
+    }
+
+	override protected _createChildren(IOutlineNode parentNode, EObject modelElement) {
+		if (modelElement instanceof EParameterDefinition) {
+			return //Do not create tree entries for parameters
+		}else if (modelElement instanceof EPropertyAssignment){
+			val property = modelElement as EPropertyAssignment
+			if (property.value instanceof EMAP){
+				val map = modelElement.value as EMAP
+				for (EMapEntry element : map.map) {
+	    			createNode(parentNode, element);
+	  			}
+	  		}else if (property.value instanceof ESTRING){
+	  			return //Do not create tree entries for property string values
+	  		}else{
+	  			super._createChildren(parentNode, modelElement)
+	  		}
+		}else if (modelElement instanceof EMAP){
+			val map = modelElement as EMAP
+			for (EMapEntry element : map.map) {
+    			createNode(parentNode, element);
+  			}
+  		}else if (modelElement instanceof EMapEntry){
+  			val entry = modelElement as EMapEntry
+    		super._createChildren(parentNode, entry.value)
+		}else if (modelElement instanceof ENodeTemplate){
+			val template = modelElement as ENodeTemplate
+			super._createChildren(parentNode, template.node)
+		}else{
+			super._createChildren(parentNode, modelElement)
+		}
+	}
+	
+	override boolean _isLeaf(EObject modelElement) {
+  		if (modelElement instanceof EParameterDefinition) {
+  			return true
+  		}
+  		return super._isLeaf(modelElement)
+	}
 }

@@ -7,6 +7,17 @@ import com.google.inject.Inject
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 import org.sodalite.dsl.aADM.AADM_Model
+import org.sodalite.dsl.rM.EInputs
+import org.sodalite.dsl.aADM.ENodeTemplates
+import org.sodalite.dsl.aADM.EPropertyAssigments
+import org.sodalite.dsl.aADM.EAttributeAssigments
+import org.sodalite.dsl.aADM.ERequirementAssignments
+import org.sodalite.dsl.aADM.ECapabilityAssignments
+import org.sodalite.dsl.rM.EParameterDefinition
+import org.sodalite.dsl.aADM.ENodeTemplate
+import org.sodalite.dsl.aADM.ENodeTemplateBody
+import org.sodalite.dsl.aADM.ERequirementAssignment
+import org.sodalite.dsl.aADM.EPropertyAssignment
 
 /**
  * Provides labels for EObjects.
@@ -21,12 +32,78 @@ class AADMLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	// Labels and icons can be computed like this:
+	def text (AADM_Model model){
+		var name = model.eResource.URI.lastSegment
+		name = name.substring(0, name.lastIndexOf("."))
+		"AADM Model: " + name
+	}
 	
-//	def text(Greeting ele) {
-//		'A greeting to ' + ele.name
-//	}
-//
-//	def image(Greeting ele) {
-//		'Greeting.gif'
-//	}
+	def text (EInputs entry){
+		"inputs"
+	}
+	
+	def image (EInputs entry){
+		"inputs.png"
+	}
+	
+	def image (EParameterDefinition entry){
+		"input.png"
+	}
+	
+	def text (ENodeTemplates entry){
+		"node_templates"
+	}
+	
+	def image (ENodeTemplates entry){
+		"templates.png"
+	}
+	
+	def image (ENodeTemplate entry){
+		"template.png"
+	}
+	
+	def text (ENodeTemplate entry){
+		entry.name + "->" + entry.node.type
+	}
+	
+	def image (EPropertyAssigments entry){
+		"properties.png"
+	}
+	
+	def text (EPropertyAssigments entry){
+		"properties"
+	}
+	
+	def image (EPropertyAssignment entry){
+		"property.png"
+	}
+	
+	def text (EAttributeAssigments entry){
+		"attributes"
+	}
+	
+	def image (EAttributeAssigments entry){
+		"attributes.png"
+	}
+	
+	def text (ERequirementAssignments entry){
+		"requirements"
+	}
+	
+	def image (ERequirementAssignments entry){
+		"requirements.png"
+	}
+	
+	def image (ERequirementAssignment entry){
+		"requirement.png"
+	}
+	
+	def text (ECapabilityAssignments entry){
+		"capabilities"
+	}
+	
+	def image (ECapabilityAssignments entry){
+		"capabilities.png"
+	}
+
 }

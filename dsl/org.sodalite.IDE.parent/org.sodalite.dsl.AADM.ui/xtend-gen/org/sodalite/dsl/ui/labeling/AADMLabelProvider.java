@@ -6,6 +6,17 @@ package org.sodalite.dsl.ui.labeling;
 import com.google.inject.Inject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.sodalite.dsl.aADM.AADM_Model;
+import org.sodalite.dsl.aADM.EAttributeAssigments;
+import org.sodalite.dsl.aADM.ECapabilityAssignments;
+import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.ENodeTemplates;
+import org.sodalite.dsl.aADM.EPropertyAssigments;
+import org.sodalite.dsl.aADM.EPropertyAssignment;
+import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.aADM.ERequirementAssignments;
+import org.sodalite.dsl.rM.EInputs;
+import org.sodalite.dsl.rM.EParameterDefinition;
 
 /**
  * Provides labels for EObjects.
@@ -17,5 +28,86 @@ public class AADMLabelProvider extends DefaultEObjectLabelProvider {
   @Inject
   public AADMLabelProvider(final AdapterFactoryLabelProvider delegate) {
     super(delegate);
+  }
+  
+  public String text(final AADM_Model model) {
+    String _xblockexpression = null;
+    {
+      String name = model.eResource().getURI().lastSegment();
+      name = name.substring(0, name.lastIndexOf("."));
+      _xblockexpression = ("AADM Model: " + name);
+    }
+    return _xblockexpression;
+  }
+  
+  public String text(final EInputs entry) {
+    return "inputs";
+  }
+  
+  public String image(final EInputs entry) {
+    return "inputs.png";
+  }
+  
+  public String image(final EParameterDefinition entry) {
+    return "input.png";
+  }
+  
+  public String text(final ENodeTemplates entry) {
+    return "node_templates";
+  }
+  
+  public String image(final ENodeTemplates entry) {
+    return "templates.png";
+  }
+  
+  public String image(final ENodeTemplate entry) {
+    return "template.png";
+  }
+  
+  public String text(final ENodeTemplate entry) {
+    String _name = entry.getName();
+    String _plus = (_name + "->");
+    String _type = entry.getNode().getType();
+    return (_plus + _type);
+  }
+  
+  public String image(final EPropertyAssigments entry) {
+    return "properties.png";
+  }
+  
+  public String text(final EPropertyAssigments entry) {
+    return "properties";
+  }
+  
+  public String image(final EPropertyAssignment entry) {
+    return "property.png";
+  }
+  
+  public String text(final EAttributeAssigments entry) {
+    return "attributes";
+  }
+  
+  public String image(final EAttributeAssigments entry) {
+    return "attributes.png";
+  }
+  
+  public String text(final ERequirementAssignments entry) {
+    return "requirements";
+  }
+  
+  public String image(final ERequirementAssignments entry) {
+    return "requirements.png";
+  }
+  
+  public String image(final ERequirementAssignment entry) {
+    return "requirement.png";
+  }
+  
+  public String text(final ECapabilityAssignments entry) {
+    return "capabilities";
+  }
+  
+  public String image(final ECapabilityAssignments entry) {
+    return "capabilities.png";
   }
 }
