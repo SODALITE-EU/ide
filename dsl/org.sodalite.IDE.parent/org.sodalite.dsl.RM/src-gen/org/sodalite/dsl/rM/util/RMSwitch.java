@@ -612,6 +612,7 @@ public class RMSwitch<T> extends Switch<T>
       {
         ESingleValue eSingleValue = (ESingleValue)theEObject;
         T result = caseESingleValue(eSingleValue);
+        if (result == null) result = caseEValueExpression(eSingleValue);
         if (result == null) result = caseEAssignmentValue(eSingleValue);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -627,9 +628,9 @@ public class RMSwitch<T> extends Switch<T>
       {
         ESTRING estring = (ESTRING)theEObject;
         T result = caseESTRING(estring);
-        if (result == null) result = caseEValueExpression(estring);
         if (result == null) result = caseESingleValue(estring);
         if (result == null) result = caseEAlphaNumericValue(estring);
+        if (result == null) result = caseEValueExpression(estring);
         if (result == null) result = caseEAssignmentValue(estring);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -639,6 +640,7 @@ public class RMSwitch<T> extends Switch<T>
         EBOOLEAN eboolean = (EBOOLEAN)theEObject;
         T result = caseEBOOLEAN(eboolean);
         if (result == null) result = caseESingleValue(eboolean);
+        if (result == null) result = caseEValueExpression(eboolean);
         if (result == null) result = caseEAssignmentValue(eboolean);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -649,6 +651,7 @@ public class RMSwitch<T> extends Switch<T>
         T result = caseEFLOAT(efloat);
         if (result == null) result = caseESingleValue(efloat);
         if (result == null) result = caseEAlphaNumericValue(efloat);
+        if (result == null) result = caseEValueExpression(efloat);
         if (result == null) result = caseEAssignmentValue(efloat);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -659,6 +662,7 @@ public class RMSwitch<T> extends Switch<T>
         T result = caseESIGNEDINT(esignedint);
         if (result == null) result = caseESingleValue(esignedint);
         if (result == null) result = caseEAlphaNumericValue(esignedint);
+        if (result == null) result = caseEValueExpression(esignedint);
         if (result == null) result = caseEAssignmentValue(esignedint);
         if (result == null) result = defaultCase(theEObject);
         return result;

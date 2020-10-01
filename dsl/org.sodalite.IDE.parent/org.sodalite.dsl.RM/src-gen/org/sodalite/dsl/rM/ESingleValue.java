@@ -14,6 +14,6 @@ package org.sodalite.dsl.rM;
  * @model
  * @generated
  */
-public interface ESingleValue extends EAssignmentValue
+public interface ESingleValue extends EValueExpression, EAssignmentValue
 {
 } // ESingleValue

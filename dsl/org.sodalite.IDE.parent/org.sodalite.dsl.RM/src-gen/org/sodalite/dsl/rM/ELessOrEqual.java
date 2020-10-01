@@ -23,25 +23,25 @@ package org.sodalite.dsl.rM;
 public interface ELessOrEqual extends EConstraint
 {
   /**
-   * Returns the value of the '<em><b>Val</b></em>' attribute.
+   * Returns the value of the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Val</em>' attribute.
-   * @see #setVal(String)
+   * @return the value of the '<em>Val</em>' containment reference.
+   * @see #setVal(EAlphaNumericValue)
    * @see org.sodalite.dsl.rM.RMPackage#getELessOrEqual_Val()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getVal();
+  EAlphaNumericValue getVal();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ELessOrEqual#getVal <em>Val</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ELessOrEqual#getVal <em>Val</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Val</em>' attribute.
+   * @param value the new value of the '<em>Val</em>' containment reference.
    * @see #getVal()
    * @generated
    */
-  void setVal(String value);
+  void setVal(EAlphaNumericValue value);
 
 } // ELessOrEqual

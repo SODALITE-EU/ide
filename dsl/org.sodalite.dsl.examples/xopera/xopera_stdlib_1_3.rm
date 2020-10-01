@@ -84,7 +84,7 @@ data_types:
 	tosca.datatypes.network.PortDef:
 		derived_from: integer
 		constraints:
-			in_range:[ '1', '65535' ]
+			in_range:[ 1, 65535 ]
 		
 	
 	tosca.datatypes.network.PortSpec:
@@ -107,7 +107,7 @@ data_types:
 				type: range
 				required: false
 				constraints:
-					in_range:[ "1", "65535"]
+					in_range:[ 1, 65535]
 				
 			
 			source:
@@ -252,14 +252,14 @@ capability_types:
 				type: integer
 				required: false
 				constraints:
-					greater_or_equal: "1"
+					greater_or_equal: 1
 				
 			
 			num_gpus:
 				type: integer
 				required: false
 				constraints:
-					greater_or_equal: "1"
+					greater_or_equal: 1
 				
 			
 			cpu_frequency:
@@ -345,7 +345,7 @@ capability_types:
 				type: map
 				required: false
 				constraints:
-					min_length: "1"
+					min_length: 1
 				
 				entry_schema: tosca.datatypes.network.PortSpec
 			
@@ -385,9 +385,9 @@ capability_types:
 		properties:
 			secure:
 				type: boolean
-				default: 'true'
+				default: true
 				constraints:
-					equal: "true"
+					equal: true
 				
 			
 		
@@ -423,11 +423,11 @@ capability_types:
 		properties:
 			min_instances:
 				type: integer
-				default: '1'
-			
+				default: 1
+		
 			max_instances:
 				type: integer
-				default: '1'
+				default: 1
 			
 			default_instances:
 				type: integer
@@ -537,7 +537,7 @@ relationship_types:
 			location:
 				type: string
 				constraints:
-					min_length: "1"
+					min_length: 1
 				
 			
 			device:
@@ -639,7 +639,7 @@ node_types:
 				capability: tosca.capabilities.Attachment
 				node: tosca.nodes.Storage.BlockStorage
 				relationship: tosca.relationships.AttachesTo
-				occurrences:["0", "UNBOUNDED"]
+				occurrences:[0, "UNBOUNDED"]
 			
 		
 		
@@ -841,13 +841,13 @@ node_types:
 			client:
 				type: tosca.capabilities.Endpoint.Public
 				description: 'The Floating (IP) clients on the public network can connect to.'
-				occurrences:["0", "UNBOUNDED"]
+				occurrences:[0, "UNBOUNDED"]
 			
 		requirements:
 			application:
 				capability: tosca.capabilities.Endpoint
 				relationship: tosca.relationships.RoutesTo
-				occurrences:["0", "UNBOUNDED"]
+				occurrences:[0, "UNBOUNDED"]
 
 policy_types:
 	tosca.policies.Root:

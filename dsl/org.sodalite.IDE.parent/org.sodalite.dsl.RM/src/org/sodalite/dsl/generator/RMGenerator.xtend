@@ -40,11 +40,13 @@ import org.sodalite.dsl.rM.ELength
 import org.sodalite.dsl.rM.EMaxLength
 import org.sodalite.dsl.rM.ECapabilityType
 import org.sodalite.dsl.rM.ERelationshipType
-import org.sodalite.dsl.rM.EValidTargetTypes
 import org.sodalite.dsl.rM.ECapabilityTypeRef
-import java.util.regex.Pattern
-import java.util.regex.Matcher
 import java.io.File
+import org.sodalite.dsl.rM.ESingleValue
+import org.sodalite.dsl.rM.EAlphaNumericValue
+import org.sodalite.dsl.rM.EFLOAT
+import org.sodalite.dsl.rM.ESIGNEDINT
+import org.sodalite.dsl.rM.EBOOLEAN
 
 /**
  * Generates code from your model files on save.
@@ -512,15 +514,15 @@ class RMGenerator extends AbstractGenerator {
 	  «IF p.parameter.value !== null»
 	  «IF p.parameter.value instanceof EFunction»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "value")» ;
-	  «ELSE»
-	  exchange:value '«p.parameter.value.compile»' ;	  
+	  «ELSEIF p.parameter.value instanceof ESingleValue»
+	  exchange:value '«trim((p.parameter.value as ESingleValue).compile.toString)»' ;	  
 	  «ENDIF»
 	  «ENDIF»
 	  «IF p.parameter.^default !== null»
 	  «IF p.parameter.^default instanceof EFunction»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "default")» ;
-	  «ELSE»
-	  exchange:value '«p.parameter.^default.compile»' ;	  
+	  «ELSEIF p.parameter.^default instanceof ESingleValue»
+	  exchange:value '«trim((p.parameter.^default as ESingleValue).compile.toString)»' ;	  
 	  «ENDIF»	  
 	  «ENDIF»  
 	.	
@@ -756,7 +758,7 @@ class RMGenerator extends AbstractGenerator {
 	  «IF p.property.^default instanceof EFunction»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "default")» ;
 	  «ELSE»
-	  exchange:value '«p.property.^default.compile»' ;	  
+	  exchange:value '«trim((p.property.^default as ESingleValue).compile.toString)»' ;
 	  «ENDIF»	  
 	  «ENDIF» 
 	.
@@ -844,7 +846,7 @@ class RMGenerator extends AbstractGenerator {
 	  «IF a.attribute.^default instanceof EFunction»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "default")» ;
 	  «ELSE»
-	  exchange:value '«a.attribute.^default.compile»' ;	  
+	  exchange:value '«trim((a.attribute.^default as ESingleValue).compile.toString)»' ;
 	  «ENDIF»	  
 	  «ENDIF» 
 	.
@@ -880,8 +882,8 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	  «IF a.attribute.^default !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "default")» ;
-  	  «ENDIF»
-  	  «IF a.attribute.status !== null»
+	  «ENDIF»
+	  «IF a.attribute.status !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "status")» ;
   	  «ENDIF»
 	  «IF a.attribute.entry_schema !== null»
@@ -890,7 +892,40 @@ class RMGenerator extends AbstractGenerator {
 	.
 	'''
 	
-	def compile (EValueExpression ve) '''«(ve as ESTRING).value»'''
+	def compile (EValueExpression ve) '''
+		«(ve as ESTRING).value»
+	'''
+	
+	def compile (ESingleValue v) '''
+	«IF v instanceof ESTRING»
+	  «processStringValue((v as ESTRING).value)»
+	«ELSEIF v instanceof EBOOLEAN»
+	  «(v as EBOOLEAN).value»
+	«ELSEIF v instanceof EFLOAT»
+	  «(v as EFLOAT).value»
+	«ELSEIF v instanceof ESIGNEDINT»
+	  «(v as ESIGNEDINT).value»
+	«ELSE»
+	  null
+	«ENDIF»
+	'''
+	
+	def compile (EAlphaNumericValue v) '''
+	«IF v instanceof ESTRING»
+	  «processStringValue((v as ESTRING).value)»
+	«ELSEIF v instanceof EFLOAT»
+	  «(v as EFLOAT).value»
+	«ELSEIF v instanceof ESIGNEDINT»
+	  «(v as ESIGNEDINT).value»
+	«ELSE»
+	  null
+	«ENDIF»
+	'''
+	
+	def processStringValue(String value) {
+		val processed = value.replaceAll('"', '\\\\"')
+		return processed
+	}
 	
 	def void putParameterNumber (Object entity, String parameterName, Integer number){
 		if (parameter_numbers.get(entity) === null){
@@ -924,5 +959,9 @@ class RMGenerator extends AbstractGenerator {
 	
 	def processDescription (String description){
 		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
+	}
+	
+	def trim (String value) {
+		return value.trim
 	}
 }

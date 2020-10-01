@@ -424,6 +424,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EValueExpression returns EBOOLEAN
 	 *     EAssignmentValue returns EBOOLEAN
 	 *     ESingleValue returns EBOOLEAN
 	 *     EBOOLEAN returns EBOOLEAN
@@ -461,7 +462,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         (type=[ECapabilityType|QUALIFIED_NAME] | description=STRING | properties=EProperties | attributes=EAttributes | valid_source_types+=EValidSourceType)? 
-	 *         (occurrences_start=STRING occurrences_end=STRING)?
+	 *         (occurrences_start=EAlphaNumericValue occurrences_end=EAlphaNumericValue)?
 	 *     )+
 	 */
 	protected void sequence_ECapabilityDefinitionBody(ISerializationContext context, ECapabilityDefinitionBody semanticObject) {
@@ -641,7 +642,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EEqual returns EEqual
 	 *
 	 * Constraint:
-	 *     val=STRING
+	 *     val=ESingleValue
 	 */
 	protected void sequence_EEqual(ISerializationContext context, EEqual semanticObject) {
 		if (errorAcceptor != null) {
@@ -649,13 +650,14 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EEQUAL__VAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEEqualAccess().getValSTRINGTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getEEqualAccess().getValESingleValueParserRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
+	 *     EValueExpression returns EFLOAT
 	 *     EAssignmentValue returns EFLOAT
 	 *     ESingleValue returns EFLOAT
 	 *     EAlphaNumericValue returns EFLOAT
@@ -681,7 +683,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EGreaterOrEqual returns EGreaterOrEqual
 	 *
 	 * Constraint:
-	 *     val=STRING
+	 *     val=EAlphaNumericValue
 	 */
 	protected void sequence_EGreaterOrEqual(ISerializationContext context, EGreaterOrEqual semanticObject) {
 		if (errorAcceptor != null) {
@@ -689,7 +691,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EGREATER_OR_EQUAL__VAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEGreaterOrEqualAccess().getValSTRINGTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getEGreaterOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
@@ -700,7 +702,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EGreaterThan returns EGreaterThan
 	 *
 	 * Constraint:
-	 *     val=STRING
+	 *     val=EAlphaNumericValue
 	 */
 	protected void sequence_EGreaterThan(ISerializationContext context, EGreaterThan semanticObject) {
 		if (errorAcceptor != null) {
@@ -708,7 +710,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EGREATER_THAN__VAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEGreaterThanAccess().getValSTRINGTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getEGreaterThanAccess().getValEAlphaNumericValueParserRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
@@ -731,7 +733,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EInRange returns EInRange
 	 *
 	 * Constraint:
-	 *     (start=STRING end=STRING)
+	 *     (start=EAlphaNumericValue end=EAlphaNumericValue)
 	 */
 	protected void sequence_EInRange(ISerializationContext context, EInRange semanticObject) {
 		if (errorAcceptor != null) {
@@ -741,8 +743,8 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EIN_RANGE__END));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEInRangeAccess().getStartSTRINGTerminalRuleCall_2_0(), semanticObject.getStart());
-		feeder.accept(grammarAccess.getEInRangeAccess().getEndSTRINGTerminalRuleCall_4_0(), semanticObject.getEnd());
+		feeder.accept(grammarAccess.getEInRangeAccess().getStartEAlphaNumericValueParserRuleCall_2_0(), semanticObject.getStart());
+		feeder.accept(grammarAccess.getEInRangeAccess().getEndEAlphaNumericValueParserRuleCall_4_0(), semanticObject.getEnd());
 		feeder.finish();
 	}
 	
@@ -868,7 +870,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ELength returns ELength
 	 *
 	 * Constraint:
-	 *     val=STRING
+	 *     val=EAlphaNumericValue
 	 */
 	protected void sequence_ELength(ISerializationContext context, ELength semanticObject) {
 		if (errorAcceptor != null) {
@@ -876,7 +878,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ELENGTH__VAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getELengthAccess().getValSTRINGTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getELengthAccess().getValEAlphaNumericValueParserRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
@@ -887,7 +889,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ELessOrEqual returns ELessOrEqual
 	 *
 	 * Constraint:
-	 *     val=STRING
+	 *     val=EAlphaNumericValue
 	 */
 	protected void sequence_ELessOrEqual(ISerializationContext context, ELessOrEqual semanticObject) {
 		if (errorAcceptor != null) {
@@ -895,7 +897,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ELESS_OR_EQUAL__VAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getELessOrEqualAccess().getValSTRINGTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getELessOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
@@ -906,7 +908,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ELessThan returns ELessThan
 	 *
 	 * Constraint:
-	 *     val=STRING
+	 *     val=EAlphaNumericValue
 	 */
 	protected void sequence_ELessThan(ISerializationContext context, ELessThan semanticObject) {
 		if (errorAcceptor != null) {
@@ -914,7 +916,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ELESS_THAN__VAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getELessThanAccess().getValSTRINGTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getELessThanAccess().getValEAlphaNumericValueParserRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
@@ -959,7 +961,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EMaxLength returns EMaxLength
 	 *
 	 * Constraint:
-	 *     val=STRING
+	 *     val=EAlphaNumericValue
 	 */
 	protected void sequence_EMaxLength(ISerializationContext context, EMaxLength semanticObject) {
 		if (errorAcceptor != null) {
@@ -967,7 +969,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EMAX_LENGTH__VAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEMaxLengthAccess().getValSTRINGTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getEMaxLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
@@ -978,7 +980,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EMinLength returns EMinLength
 	 *
 	 * Constraint:
-	 *     val=STRING
+	 *     val=EAlphaNumericValue
 	 */
 	protected void sequence_EMinLength(ISerializationContext context, EMinLength semanticObject) {
 		if (errorAcceptor != null) {
@@ -986,7 +988,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EMIN_LENGTH__VAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEMinLengthAccess().getValSTRINGTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getEMinLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
@@ -1311,7 +1313,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *         capability=[ECapabilityType|QUALIFIED_NAME] | 
 	 *         node=[ENodeType|QUALIFIED_NAME] | 
 	 *         relationship=[ERelationshipType|QUALIFIED_NAME] | 
-	 *         (start=STRING end=STRING)
+	 *         (start=EAlphaNumericValue end=EAlphaNumericValue)
 	 *     )+
 	 */
 	protected void sequence_ERequirementDefinitionBody(ISerializationContext context, ERequirementDefinitionBody semanticObject) {
@@ -1355,6 +1357,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EValueExpression returns ESIGNEDINT
 	 *     EAssignmentValue returns ESIGNEDINT
 	 *     ESingleValue returns ESIGNEDINT
 	 *     EAlphaNumericValue returns ESIGNEDINT

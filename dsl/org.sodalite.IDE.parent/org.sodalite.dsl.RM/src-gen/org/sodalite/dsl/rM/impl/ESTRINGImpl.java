@@ -25,7 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  *
  * @generated
  */
-public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
+public class ESTRINGImpl extends ESingleValueImpl implements ESTRING
 {
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.

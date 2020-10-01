@@ -137,7 +137,7 @@ node_types:
 				required: false
 				default: "1"
 				constraints:
-					greater_than: "0"
+					greater_than: 0
 			src_protocol:
 				type: string
 				constraints:

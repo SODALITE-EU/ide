@@ -20,7 +20,7 @@ package org.sodalite.dsl.rM;
  * @model
  * @generated
  */
-public interface ESTRING extends EValueExpression, ESingleValue, EAlphaNumericValue
+public interface ESTRING extends ESingleValue, EAlphaNumericValue
 {
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.

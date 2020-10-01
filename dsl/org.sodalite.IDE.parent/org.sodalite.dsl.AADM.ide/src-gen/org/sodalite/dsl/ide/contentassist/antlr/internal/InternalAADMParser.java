@@ -7513,17 +7513,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValueExpression__Alternatives"
-    // InternalAADMParser.g:2485:1: rule__EValueExpression__Alternatives : ( ( ruleESTRING ) | ( ruleEFunction ) );
+    // InternalAADMParser.g:2485:1: rule__EValueExpression__Alternatives : ( ( ruleESingleValue ) | ( ruleEFunction ) );
     public final void rule__EValueExpression__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:2489:1: ( ( ruleESTRING ) | ( ruleEFunction ) )
+            // InternalAADMParser.g:2489:1: ( ( ruleESingleValue ) | ( ruleEFunction ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==RULE_STRING) ) {
+            if ( ((LA2_0>=HyphenMinus && LA2_0<=FullStop)||LA2_0==RULE_BOOLEAN||(LA2_0>=RULE_INT && LA2_0<=RULE_STRING)) ) {
                 alt2=1;
             }
             else if ( (LA2_0==Get_attribute||LA2_0==Get_property||LA2_0==Get_input) ) {
@@ -7537,18 +7537,18 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalAADMParser.g:2490:2: ( ruleESTRING )
+                    // InternalAADMParser.g:2490:2: ( ruleESingleValue )
                     {
-                    // InternalAADMParser.g:2490:2: ( ruleESTRING )
-                    // InternalAADMParser.g:2491:3: ruleESTRING
+                    // InternalAADMParser.g:2490:2: ( ruleESingleValue )
+                    // InternalAADMParser.g:2491:3: ruleESingleValue
                     {
-                     before(grammarAccess.getEValueExpressionAccess().getESTRINGParserRuleCall_0()); 
+                     before(grammarAccess.getEValueExpressionAccess().getESingleValueParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
-                    ruleESTRING();
+                    ruleESingleValue();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEValueExpressionAccess().getESTRINGParserRuleCall_0()); 
+                     after(grammarAccess.getEValueExpressionAccess().getESingleValueParserRuleCall_0()); 
 
                     }
 
@@ -8137,7 +8137,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                 if ( (LA6_3==FullStop) ) {
                     alt6=3;
                 }
-                else if ( (LA6_3==EOF||LA6_3==RULE_ID||LA6_3==RULE_END) ) {
+                else if ( (LA6_3==EOF||LA6_3==Greater_or_equal||LA6_3==Less_or_equal||LA6_3==Entry_schema||LA6_3==Greater_than||(LA6_3>=Valid_values && LA6_3<=Description)||(LA6_3>=Max_length && LA6_3<=Min_length)||LA6_3==Less_than||LA6_3==In_range||(LA6_3>=Required && LA6_3<=Default)||(LA6_3>=Length && LA6_3<=Value)||LA6_3==Type||LA6_3==RULE_ID||LA6_3==RULE_END) ) {
                     alt6=4;
                 }
                 else {
@@ -8281,7 +8281,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                 if ( (LA7_2==FullStop) ) {
                     alt7=2;
                 }
-                else if ( (LA7_2==EOF||LA7_2==Comma||LA7_2==RightSquareBracket) ) {
+                else if ( (LA7_2==EOF||LA7_2==Greater_or_equal||LA7_2==Less_or_equal||LA7_2==Greater_than||LA7_2==Valid_values||(LA7_2>=Max_length && LA7_2<=Min_length)||LA7_2==Less_than||LA7_2==In_range||LA7_2==Length||LA7_2==Equal||LA7_2==Comma||LA7_2==RightSquareBracket||LA7_2==RULE_END) ) {
                     alt7=3;
                 }
                 else {
@@ -38905,7 +38905,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:13184:1: ( rule__ECapabilityDefinitionBody__Group_5__1__Impl rule__ECapabilityDefinitionBody__Group_5__2 )
             // InternalAADMParser.g:13185:2: rule__ECapabilityDefinitionBody__Group_5__1__Impl rule__ECapabilityDefinitionBody__Group_5__2
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__ECapabilityDefinitionBody__Group_5__1__Impl();
 
             state._fsp--;
@@ -39065,7 +39065,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:13238:1: ( rule__ECapabilityDefinitionBody__Group_5__3__Impl rule__ECapabilityDefinitionBody__Group_5__4 )
             // InternalAADMParser.g:13239:2: rule__ECapabilityDefinitionBody__Group_5__3__Impl rule__ECapabilityDefinitionBody__Group_5__4
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__ECapabilityDefinitionBody__Group_5__3__Impl();
 
             state._fsp--;
@@ -39966,7 +39966,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:13535:1: ( rule__ERequirementDefinition__Group__2__Impl rule__ERequirementDefinition__Group__3 )
             // InternalAADMParser.g:13536:2: rule__ERequirementDefinition__Group__2__Impl rule__ERequirementDefinition__Group__3
             {
-            pushFollow(FOLLOW_45);
+            pushFollow(FOLLOW_46);
             rule__ERequirementDefinition__Group__2__Impl();
 
             state._fsp--;
@@ -40736,7 +40736,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:13805:1: ( rule__ERequirementDefinitionBody__Group_3__1__Impl rule__ERequirementDefinitionBody__Group_3__2 )
             // InternalAADMParser.g:13806:2: rule__ERequirementDefinitionBody__Group_3__1__Impl rule__ERequirementDefinitionBody__Group_3__2
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__ERequirementDefinitionBody__Group_3__1__Impl();
 
             state._fsp--;
@@ -40896,7 +40896,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:13859:1: ( rule__ERequirementDefinitionBody__Group_3__3__Impl rule__ERequirementDefinitionBody__Group_3__4 )
             // InternalAADMParser.g:13860:2: rule__ERequirementDefinitionBody__Group_3__3__Impl rule__ERequirementDefinitionBody__Group_3__4
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__ERequirementDefinitionBody__Group_3__3__Impl();
 
             state._fsp--;
@@ -41253,7 +41253,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalAADMParser.g:13981:3: rule__EConstraints__ConstraintsAssignment_1
             	    {
-            	    pushFollow(FOLLOW_46);
+            	    pushFollow(FOLLOW_47);
             	    rule__EConstraints__ConstraintsAssignment_1();
 
             	    state._fsp--;
@@ -41299,7 +41299,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:13994:1: ( rule__EMaxLength__Group__0__Impl rule__EMaxLength__Group__1 )
             // InternalAADMParser.g:13995:2: rule__EMaxLength__Group__0__Impl rule__EMaxLength__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__EMaxLength__Group__0__Impl();
 
             state._fsp--;
@@ -41454,7 +41454,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14048:1: ( rule__EMinLength__Group__0__Impl rule__EMinLength__Group__1 )
             // InternalAADMParser.g:14049:2: rule__EMinLength__Group__0__Impl rule__EMinLength__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__EMinLength__Group__0__Impl();
 
             state._fsp--;
@@ -41609,7 +41609,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14102:1: ( rule__ELength__Group__0__Impl rule__ELength__Group__1 )
             // InternalAADMParser.g:14103:2: rule__ELength__Group__0__Impl rule__ELength__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__ELength__Group__0__Impl();
 
             state._fsp--;
@@ -41919,7 +41919,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14210:1: ( rule__ELIST__Group__0__Impl rule__ELIST__Group__1 )
             // InternalAADMParser.g:14211:2: rule__ELIST__Group__0__Impl rule__ELIST__Group__1
             {
-            pushFollow(FOLLOW_47);
+            pushFollow(FOLLOW_45);
             rule__ELIST__Group__0__Impl();
 
             state._fsp--;
@@ -42252,7 +42252,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14318:1: ( rule__ELIST__Group_2__0__Impl rule__ELIST__Group_2__1 )
             // InternalAADMParser.g:14319:2: rule__ELIST__Group_2__0__Impl rule__ELIST__Group_2__1
             {
-            pushFollow(FOLLOW_47);
+            pushFollow(FOLLOW_45);
             rule__ELIST__Group_2__0__Impl();
 
             state._fsp--;
@@ -42482,7 +42482,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14399:1: ( rule__EInRange__Group__1__Impl rule__EInRange__Group__2 )
             // InternalAADMParser.g:14400:2: rule__EInRange__Group__1__Impl rule__EInRange__Group__2
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__EInRange__Group__1__Impl();
 
             state._fsp--;
@@ -42642,7 +42642,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14453:1: ( rule__EInRange__Group__3__Impl rule__EInRange__Group__4 )
             // InternalAADMParser.g:14454:2: rule__EInRange__Group__3__Impl rule__EInRange__Group__4
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__EInRange__Group__3__Impl();
 
             state._fsp--;
@@ -42872,7 +42872,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14534:1: ( rule__ELessOrEqual__Group__0__Impl rule__ELessOrEqual__Group__1 )
             // InternalAADMParser.g:14535:2: rule__ELessOrEqual__Group__0__Impl rule__ELessOrEqual__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__ELessOrEqual__Group__0__Impl();
 
             state._fsp--;
@@ -43027,7 +43027,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14588:1: ( rule__ELessThan__Group__0__Impl rule__ELessThan__Group__1 )
             // InternalAADMParser.g:14589:2: rule__ELessThan__Group__0__Impl rule__ELessThan__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__ELessThan__Group__0__Impl();
 
             state._fsp--;
@@ -43182,7 +43182,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14642:1: ( rule__EGreaterOrEqual__Group__0__Impl rule__EGreaterOrEqual__Group__1 )
             // InternalAADMParser.g:14643:2: rule__EGreaterOrEqual__Group__0__Impl rule__EGreaterOrEqual__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__EGreaterOrEqual__Group__0__Impl();
 
             state._fsp--;
@@ -43337,7 +43337,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14696:1: ( rule__EGreaterThan__Group__0__Impl rule__EGreaterThan__Group__1 )
             // InternalAADMParser.g:14697:2: rule__EGreaterThan__Group__0__Impl rule__EGreaterThan__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__EGreaterThan__Group__0__Impl();
 
             state._fsp--;
@@ -43492,7 +43492,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14750:1: ( rule__EEqual__Group__0__Impl rule__EEqual__Group__1 )
             // InternalAADMParser.g:14751:2: rule__EEqual__Group__0__Impl rule__EEqual__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_45);
             rule__EEqual__Group__0__Impl();
 
             state._fsp--;
@@ -44160,7 +44160,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:14973:1: ( rule__SIGNEDINT__Group__0__Impl rule__SIGNEDINT__Group__1 )
             // InternalAADMParser.g:14974:2: rule__SIGNEDINT__Group__0__Impl rule__SIGNEDINT__Group__1
             {
-            pushFollow(FOLLOW_47);
+            pushFollow(FOLLOW_45);
             rule__SIGNEDINT__Group__0__Impl();
 
             state._fsp--;
@@ -60282,21 +60282,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2"
-    // InternalAADMParser.g:19889:1: rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19889:1: rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19893:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19894:2: ( RULE_STRING )
+            // InternalAADMParser.g:19893:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:19894:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:19894:2: ( RULE_STRING )
-            // InternalAADMParser.g:19895:3: RULE_STRING
+            // InternalAADMParser.g:19894:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:19895:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startSTRINGTerminalRuleCall_5_2_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startSTRINGTerminalRuleCall_5_2_0()); 
+             before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0()); 
 
             }
 
@@ -60319,21 +60323,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4"
-    // InternalAADMParser.g:19904:1: rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19904:1: rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19908:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19909:2: ( RULE_STRING )
+            // InternalAADMParser.g:19908:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:19909:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:19909:2: ( RULE_STRING )
-            // InternalAADMParser.g:19910:3: RULE_STRING
+            // InternalAADMParser.g:19909:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:19910:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endSTRINGTerminalRuleCall_5_4_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endSTRINGTerminalRuleCall_5_4_0()); 
+             before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0()); 
 
             }
 
@@ -60737,21 +60745,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__StartAssignment_3_2"
-    // InternalAADMParser.g:20070:1: rule__ERequirementDefinitionBody__StartAssignment_3_2 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20070:1: rule__ERequirementDefinitionBody__StartAssignment_3_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ERequirementDefinitionBody__StartAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20074:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20075:2: ( RULE_STRING )
+            // InternalAADMParser.g:20074:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20075:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20075:2: ( RULE_STRING )
-            // InternalAADMParser.g:20076:3: RULE_STRING
+            // InternalAADMParser.g:20075:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20076:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getERequirementDefinitionBodyAccess().getStartSTRINGTerminalRuleCall_3_2_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getERequirementDefinitionBodyAccess().getStartSTRINGTerminalRuleCall_3_2_0()); 
+             before(grammarAccess.getERequirementDefinitionBodyAccess().getStartEAlphaNumericValueParserRuleCall_3_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getERequirementDefinitionBodyAccess().getStartEAlphaNumericValueParserRuleCall_3_2_0()); 
 
             }
 
@@ -60774,21 +60786,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__EndAssignment_3_4"
-    // InternalAADMParser.g:20085:1: rule__ERequirementDefinitionBody__EndAssignment_3_4 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20085:1: rule__ERequirementDefinitionBody__EndAssignment_3_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ERequirementDefinitionBody__EndAssignment_3_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20089:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20090:2: ( RULE_STRING )
+            // InternalAADMParser.g:20089:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20090:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20090:2: ( RULE_STRING )
-            // InternalAADMParser.g:20091:3: RULE_STRING
+            // InternalAADMParser.g:20090:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20091:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getERequirementDefinitionBodyAccess().getEndSTRINGTerminalRuleCall_3_4_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getERequirementDefinitionBodyAccess().getEndSTRINGTerminalRuleCall_3_4_0()); 
+             before(grammarAccess.getERequirementDefinitionBodyAccess().getEndEAlphaNumericValueParserRuleCall_3_4_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getERequirementDefinitionBodyAccess().getEndEAlphaNumericValueParserRuleCall_3_4_0()); 
 
             }
 
@@ -60852,21 +60868,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMaxLength__ValAssignment_1"
-    // InternalAADMParser.g:20115:1: rule__EMaxLength__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20115:1: rule__EMaxLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EMaxLength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20119:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20120:2: ( RULE_STRING )
+            // InternalAADMParser.g:20119:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20120:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20120:2: ( RULE_STRING )
-            // InternalAADMParser.g:20121:3: RULE_STRING
+            // InternalAADMParser.g:20120:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20121:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEMaxLengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEMaxLengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEMaxLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEMaxLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -60889,21 +60909,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMinLength__ValAssignment_1"
-    // InternalAADMParser.g:20130:1: rule__EMinLength__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20130:1: rule__EMinLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EMinLength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20134:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20135:2: ( RULE_STRING )
+            // InternalAADMParser.g:20134:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20135:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20135:2: ( RULE_STRING )
-            // InternalAADMParser.g:20136:3: RULE_STRING
+            // InternalAADMParser.g:20135:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20136:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEMinLengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEMinLengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEMinLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEMinLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -60926,21 +60950,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELength__ValAssignment_1"
-    // InternalAADMParser.g:20145:1: rule__ELength__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20145:1: rule__ELength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20149:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20150:2: ( RULE_STRING )
+            // InternalAADMParser.g:20149:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20150:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20150:2: ( RULE_STRING )
-            // InternalAADMParser.g:20151:3: RULE_STRING
+            // InternalAADMParser.g:20150:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20151:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getELengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getELengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getELengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getELengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -61086,21 +61114,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInRange__StartAssignment_2"
-    // InternalAADMParser.g:20205:1: rule__EInRange__StartAssignment_2 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20205:1: rule__EInRange__StartAssignment_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EInRange__StartAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20209:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20210:2: ( RULE_STRING )
+            // InternalAADMParser.g:20209:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20210:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20210:2: ( RULE_STRING )
-            // InternalAADMParser.g:20211:3: RULE_STRING
+            // InternalAADMParser.g:20210:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20211:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEInRangeAccess().getStartSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEInRangeAccess().getStartSTRINGTerminalRuleCall_2_0()); 
+             before(grammarAccess.getEInRangeAccess().getStartEAlphaNumericValueParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEInRangeAccess().getStartEAlphaNumericValueParserRuleCall_2_0()); 
 
             }
 
@@ -61123,21 +61155,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInRange__EndAssignment_4"
-    // InternalAADMParser.g:20220:1: rule__EInRange__EndAssignment_4 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20220:1: rule__EInRange__EndAssignment_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EInRange__EndAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20224:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20225:2: ( RULE_STRING )
+            // InternalAADMParser.g:20224:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20225:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20225:2: ( RULE_STRING )
-            // InternalAADMParser.g:20226:3: RULE_STRING
+            // InternalAADMParser.g:20225:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20226:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEInRangeAccess().getEndSTRINGTerminalRuleCall_4_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEInRangeAccess().getEndSTRINGTerminalRuleCall_4_0()); 
+             before(grammarAccess.getEInRangeAccess().getEndEAlphaNumericValueParserRuleCall_4_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEInRangeAccess().getEndEAlphaNumericValueParserRuleCall_4_0()); 
 
             }
 
@@ -61160,21 +61196,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELessOrEqual__ValAssignment_1"
-    // InternalAADMParser.g:20235:1: rule__ELessOrEqual__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20235:1: rule__ELessOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELessOrEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20239:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20240:2: ( RULE_STRING )
+            // InternalAADMParser.g:20239:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20240:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20240:2: ( RULE_STRING )
-            // InternalAADMParser.g:20241:3: RULE_STRING
+            // InternalAADMParser.g:20240:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20241:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getELessOrEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getELessOrEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getELessOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getELessOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -61197,21 +61237,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELessThan__ValAssignment_1"
-    // InternalAADMParser.g:20250:1: rule__ELessThan__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20250:1: rule__ELessThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELessThan__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20254:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20255:2: ( RULE_STRING )
+            // InternalAADMParser.g:20254:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20255:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20255:2: ( RULE_STRING )
-            // InternalAADMParser.g:20256:3: RULE_STRING
+            // InternalAADMParser.g:20255:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20256:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getELessThanAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getELessThanAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getELessThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getELessThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -61234,21 +61278,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EGreaterOrEqual__ValAssignment_1"
-    // InternalAADMParser.g:20265:1: rule__EGreaterOrEqual__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20265:1: rule__EGreaterOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EGreaterOrEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20269:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20270:2: ( RULE_STRING )
+            // InternalAADMParser.g:20269:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20270:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20270:2: ( RULE_STRING )
-            // InternalAADMParser.g:20271:3: RULE_STRING
+            // InternalAADMParser.g:20270:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20271:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEGreaterOrEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEGreaterOrEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEGreaterOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEGreaterOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -61271,21 +61319,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EGreaterThan__ValAssignment_1"
-    // InternalAADMParser.g:20280:1: rule__EGreaterThan__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20280:1: rule__EGreaterThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EGreaterThan__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20284:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20285:2: ( RULE_STRING )
+            // InternalAADMParser.g:20284:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20285:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20285:2: ( RULE_STRING )
-            // InternalAADMParser.g:20286:3: RULE_STRING
+            // InternalAADMParser.g:20285:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20286:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEGreaterThanAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEGreaterThanAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEGreaterThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEGreaterThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -61308,21 +61360,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EEqual__ValAssignment_1"
-    // InternalAADMParser.g:20295:1: rule__EEqual__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20295:1: rule__EEqual__ValAssignment_1 : ( ruleESingleValue ) ;
     public final void rule__EEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20299:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20300:2: ( RULE_STRING )
+            // InternalAADMParser.g:20299:1: ( ( ruleESingleValue ) )
+            // InternalAADMParser.g:20300:2: ( ruleESingleValue )
             {
-            // InternalAADMParser.g:20300:2: ( RULE_STRING )
-            // InternalAADMParser.g:20301:3: RULE_STRING
+            // InternalAADMParser.g:20300:2: ( ruleESingleValue )
+            // InternalAADMParser.g:20301:3: ruleESingleValue
             {
-             before(grammarAccess.getEEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEEqualAccess().getValESingleValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleESingleValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEEqualAccess().getValESingleValueParserRuleCall_1_0()); 
 
             }
 
@@ -61667,9 +61723,9 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0006200000000000L});
     public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0200004070000020L});
     public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x8000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x01000000A1000000L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0050120C04204102L});
-    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x1800000000000000L,0x0000000000000184L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x1800000000000000L,0x0000000000000184L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x01000000A1000000L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0050120C04204102L});
     public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x8400000000000000L});
     public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x1000000000000000L,0x0000000000000080L});
     public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});

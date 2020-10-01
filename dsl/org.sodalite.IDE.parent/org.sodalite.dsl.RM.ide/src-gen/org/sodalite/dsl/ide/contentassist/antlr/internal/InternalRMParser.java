@@ -6662,17 +6662,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValueExpression__Alternatives"
-    // InternalRMParser.g:2208:1: rule__EValueExpression__Alternatives : ( ( ruleESTRING ) | ( ruleEFunction ) );
+    // InternalRMParser.g:2208:1: rule__EValueExpression__Alternatives : ( ( ruleESingleValue ) | ( ruleEFunction ) );
     public final void rule__EValueExpression__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:2212:1: ( ( ruleESTRING ) | ( ruleEFunction ) )
+            // InternalRMParser.g:2212:1: ( ( ruleESingleValue ) | ( ruleEFunction ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==RULE_STRING) ) {
+            if ( ((LA2_0>=HyphenMinus && LA2_0<=FullStop)||LA2_0==RULE_BOOLEAN||(LA2_0>=RULE_INT && LA2_0<=RULE_STRING)) ) {
                 alt2=1;
             }
             else if ( (LA2_0==Get_attribute||LA2_0==Get_property||LA2_0==Get_input) ) {
@@ -6686,18 +6686,18 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalRMParser.g:2213:2: ( ruleESTRING )
+                    // InternalRMParser.g:2213:2: ( ruleESingleValue )
                     {
-                    // InternalRMParser.g:2213:2: ( ruleESTRING )
-                    // InternalRMParser.g:2214:3: ruleESTRING
+                    // InternalRMParser.g:2213:2: ( ruleESingleValue )
+                    // InternalRMParser.g:2214:3: ruleESingleValue
                     {
-                     before(grammarAccess.getEValueExpressionAccess().getESTRINGParserRuleCall_0()); 
+                     before(grammarAccess.getEValueExpressionAccess().getESingleValueParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
-                    ruleESTRING();
+                    ruleESingleValue();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEValueExpressionAccess().getESTRINGParserRuleCall_0()); 
+                     after(grammarAccess.getEValueExpressionAccess().getESingleValueParserRuleCall_0()); 
 
                     }
 
@@ -7286,7 +7286,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
                 if ( (LA6_3==FullStop) ) {
                     alt6=3;
                 }
-                else if ( (LA6_3==EOF||LA6_3==RULE_ID||LA6_3==RULE_END) ) {
+                else if ( (LA6_3==EOF||LA6_3==Greater_or_equal||LA6_3==Less_or_equal||LA6_3==Entry_schema||LA6_3==Greater_than||(LA6_3>=Valid_values && LA6_3<=Description)||(LA6_3>=Max_length && LA6_3<=Min_length)||LA6_3==Less_than||LA6_3==In_range||(LA6_3>=Required && LA6_3<=Default)||(LA6_3>=Length && LA6_3<=Value)||LA6_3==Type||LA6_3==RULE_ID||LA6_3==RULE_END) ) {
                     alt6=4;
                 }
                 else {
@@ -7430,7 +7430,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
                 if ( (LA7_2==FullStop) ) {
                     alt7=2;
                 }
-                else if ( (LA7_2==EOF||LA7_2==Comma||LA7_2==RightSquareBracket) ) {
+                else if ( (LA7_2==EOF||LA7_2==Greater_or_equal||LA7_2==Less_or_equal||LA7_2==Greater_than||LA7_2==Valid_values||(LA7_2>=Max_length && LA7_2<=Min_length)||LA7_2==Less_than||LA7_2==In_range||LA7_2==Length||LA7_2==Equal||LA7_2==Comma||LA7_2==RightSquareBracket||LA7_2==RULE_END) ) {
                     alt7=3;
                 }
                 else {
@@ -34883,7 +34883,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:11847:1: ( rule__ECapabilityDefinitionBody__Group_5__1__Impl rule__ECapabilityDefinitionBody__Group_5__2 )
             // InternalRMParser.g:11848:2: rule__ECapabilityDefinitionBody__Group_5__1__Impl rule__ECapabilityDefinitionBody__Group_5__2
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__ECapabilityDefinitionBody__Group_5__1__Impl();
 
             state._fsp--;
@@ -35043,7 +35043,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:11901:1: ( rule__ECapabilityDefinitionBody__Group_5__3__Impl rule__ECapabilityDefinitionBody__Group_5__4 )
             // InternalRMParser.g:11902:2: rule__ECapabilityDefinitionBody__Group_5__3__Impl rule__ECapabilityDefinitionBody__Group_5__4
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__ECapabilityDefinitionBody__Group_5__3__Impl();
 
             state._fsp--;
@@ -35944,7 +35944,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:12198:1: ( rule__ERequirementDefinition__Group__2__Impl rule__ERequirementDefinition__Group__3 )
             // InternalRMParser.g:12199:2: rule__ERequirementDefinition__Group__2__Impl rule__ERequirementDefinition__Group__3
             {
-            pushFollow(FOLLOW_42);
+            pushFollow(FOLLOW_43);
             rule__ERequirementDefinition__Group__2__Impl();
 
             state._fsp--;
@@ -36714,7 +36714,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:12468:1: ( rule__ERequirementDefinitionBody__Group_3__1__Impl rule__ERequirementDefinitionBody__Group_3__2 )
             // InternalRMParser.g:12469:2: rule__ERequirementDefinitionBody__Group_3__1__Impl rule__ERequirementDefinitionBody__Group_3__2
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__ERequirementDefinitionBody__Group_3__1__Impl();
 
             state._fsp--;
@@ -36874,7 +36874,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:12522:1: ( rule__ERequirementDefinitionBody__Group_3__3__Impl rule__ERequirementDefinitionBody__Group_3__4 )
             // InternalRMParser.g:12523:2: rule__ERequirementDefinitionBody__Group_3__3__Impl rule__ERequirementDefinitionBody__Group_3__4
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__ERequirementDefinitionBody__Group_3__3__Impl();
 
             state._fsp--;
@@ -37231,7 +37231,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalRMParser.g:12644:3: rule__EConstraints__ConstraintsAssignment_1
             	    {
-            	    pushFollow(FOLLOW_43);
+            	    pushFollow(FOLLOW_44);
             	    rule__EConstraints__ConstraintsAssignment_1();
 
             	    state._fsp--;
@@ -37277,7 +37277,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:12657:1: ( rule__EMaxLength__Group__0__Impl rule__EMaxLength__Group__1 )
             // InternalRMParser.g:12658:2: rule__EMaxLength__Group__0__Impl rule__EMaxLength__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__EMaxLength__Group__0__Impl();
 
             state._fsp--;
@@ -37432,7 +37432,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:12711:1: ( rule__EMinLength__Group__0__Impl rule__EMinLength__Group__1 )
             // InternalRMParser.g:12712:2: rule__EMinLength__Group__0__Impl rule__EMinLength__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__EMinLength__Group__0__Impl();
 
             state._fsp--;
@@ -37587,7 +37587,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:12765:1: ( rule__ELength__Group__0__Impl rule__ELength__Group__1 )
             // InternalRMParser.g:12766:2: rule__ELength__Group__0__Impl rule__ELength__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__ELength__Group__0__Impl();
 
             state._fsp--;
@@ -37897,7 +37897,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:12873:1: ( rule__ELIST__Group__0__Impl rule__ELIST__Group__1 )
             // InternalRMParser.g:12874:2: rule__ELIST__Group__0__Impl rule__ELIST__Group__1
             {
-            pushFollow(FOLLOW_44);
+            pushFollow(FOLLOW_42);
             rule__ELIST__Group__0__Impl();
 
             state._fsp--;
@@ -38230,7 +38230,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:12981:1: ( rule__ELIST__Group_2__0__Impl rule__ELIST__Group_2__1 )
             // InternalRMParser.g:12982:2: rule__ELIST__Group_2__0__Impl rule__ELIST__Group_2__1
             {
-            pushFollow(FOLLOW_44);
+            pushFollow(FOLLOW_42);
             rule__ELIST__Group_2__0__Impl();
 
             state._fsp--;
@@ -38460,7 +38460,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:13062:1: ( rule__EInRange__Group__1__Impl rule__EInRange__Group__2 )
             // InternalRMParser.g:13063:2: rule__EInRange__Group__1__Impl rule__EInRange__Group__2
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__EInRange__Group__1__Impl();
 
             state._fsp--;
@@ -38620,7 +38620,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:13116:1: ( rule__EInRange__Group__3__Impl rule__EInRange__Group__4 )
             // InternalRMParser.g:13117:2: rule__EInRange__Group__3__Impl rule__EInRange__Group__4
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__EInRange__Group__3__Impl();
 
             state._fsp--;
@@ -38850,7 +38850,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:13197:1: ( rule__ELessOrEqual__Group__0__Impl rule__ELessOrEqual__Group__1 )
             // InternalRMParser.g:13198:2: rule__ELessOrEqual__Group__0__Impl rule__ELessOrEqual__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__ELessOrEqual__Group__0__Impl();
 
             state._fsp--;
@@ -39005,7 +39005,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:13251:1: ( rule__ELessThan__Group__0__Impl rule__ELessThan__Group__1 )
             // InternalRMParser.g:13252:2: rule__ELessThan__Group__0__Impl rule__ELessThan__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__ELessThan__Group__0__Impl();
 
             state._fsp--;
@@ -39160,7 +39160,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:13305:1: ( rule__EGreaterOrEqual__Group__0__Impl rule__EGreaterOrEqual__Group__1 )
             // InternalRMParser.g:13306:2: rule__EGreaterOrEqual__Group__0__Impl rule__EGreaterOrEqual__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__EGreaterOrEqual__Group__0__Impl();
 
             state._fsp--;
@@ -39315,7 +39315,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:13359:1: ( rule__EGreaterThan__Group__0__Impl rule__EGreaterThan__Group__1 )
             // InternalRMParser.g:13360:2: rule__EGreaterThan__Group__0__Impl rule__EGreaterThan__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__EGreaterThan__Group__0__Impl();
 
             state._fsp--;
@@ -39470,7 +39470,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:13413:1: ( rule__EEqual__Group__0__Impl rule__EEqual__Group__1 )
             // InternalRMParser.g:13414:2: rule__EEqual__Group__0__Impl rule__EEqual__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_42);
             rule__EEqual__Group__0__Impl();
 
             state._fsp--;
@@ -40138,7 +40138,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:13636:1: ( rule__SIGNEDINT__Group__0__Impl rule__SIGNEDINT__Group__1 )
             // InternalRMParser.g:13637:2: rule__SIGNEDINT__Group__0__Impl rule__SIGNEDINT__Group__1
             {
-            pushFollow(FOLLOW_44);
+            pushFollow(FOLLOW_42);
             rule__SIGNEDINT__Group__0__Impl();
 
             state._fsp--;
@@ -55334,21 +55334,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2"
-    // InternalRMParser.g:18210:1: rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18210:1: rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18214:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18215:2: ( RULE_STRING )
+            // InternalRMParser.g:18214:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18215:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18215:2: ( RULE_STRING )
-            // InternalRMParser.g:18216:3: RULE_STRING
+            // InternalRMParser.g:18215:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18216:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startSTRINGTerminalRuleCall_5_2_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startSTRINGTerminalRuleCall_5_2_0()); 
+             before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0()); 
 
             }
 
@@ -55371,21 +55375,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4"
-    // InternalRMParser.g:18225:1: rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18225:1: rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18229:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18230:2: ( RULE_STRING )
+            // InternalRMParser.g:18229:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18230:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18230:2: ( RULE_STRING )
-            // InternalRMParser.g:18231:3: RULE_STRING
+            // InternalRMParser.g:18230:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18231:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endSTRINGTerminalRuleCall_5_4_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endSTRINGTerminalRuleCall_5_4_0()); 
+             before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0()); 
 
             }
 
@@ -55789,21 +55797,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__StartAssignment_3_2"
-    // InternalRMParser.g:18391:1: rule__ERequirementDefinitionBody__StartAssignment_3_2 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18391:1: rule__ERequirementDefinitionBody__StartAssignment_3_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ERequirementDefinitionBody__StartAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18395:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18396:2: ( RULE_STRING )
+            // InternalRMParser.g:18395:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18396:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18396:2: ( RULE_STRING )
-            // InternalRMParser.g:18397:3: RULE_STRING
+            // InternalRMParser.g:18396:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18397:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getERequirementDefinitionBodyAccess().getStartSTRINGTerminalRuleCall_3_2_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getERequirementDefinitionBodyAccess().getStartSTRINGTerminalRuleCall_3_2_0()); 
+             before(grammarAccess.getERequirementDefinitionBodyAccess().getStartEAlphaNumericValueParserRuleCall_3_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getERequirementDefinitionBodyAccess().getStartEAlphaNumericValueParserRuleCall_3_2_0()); 
 
             }
 
@@ -55826,21 +55838,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__EndAssignment_3_4"
-    // InternalRMParser.g:18406:1: rule__ERequirementDefinitionBody__EndAssignment_3_4 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18406:1: rule__ERequirementDefinitionBody__EndAssignment_3_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ERequirementDefinitionBody__EndAssignment_3_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18410:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18411:2: ( RULE_STRING )
+            // InternalRMParser.g:18410:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18411:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18411:2: ( RULE_STRING )
-            // InternalRMParser.g:18412:3: RULE_STRING
+            // InternalRMParser.g:18411:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18412:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getERequirementDefinitionBodyAccess().getEndSTRINGTerminalRuleCall_3_4_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getERequirementDefinitionBodyAccess().getEndSTRINGTerminalRuleCall_3_4_0()); 
+             before(grammarAccess.getERequirementDefinitionBodyAccess().getEndEAlphaNumericValueParserRuleCall_3_4_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getERequirementDefinitionBodyAccess().getEndEAlphaNumericValueParserRuleCall_3_4_0()); 
 
             }
 
@@ -55904,21 +55920,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMaxLength__ValAssignment_1"
-    // InternalRMParser.g:18436:1: rule__EMaxLength__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18436:1: rule__EMaxLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EMaxLength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18440:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18441:2: ( RULE_STRING )
+            // InternalRMParser.g:18440:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18441:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18441:2: ( RULE_STRING )
-            // InternalRMParser.g:18442:3: RULE_STRING
+            // InternalRMParser.g:18441:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18442:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEMaxLengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEMaxLengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEMaxLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEMaxLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -55941,21 +55961,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMinLength__ValAssignment_1"
-    // InternalRMParser.g:18451:1: rule__EMinLength__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18451:1: rule__EMinLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EMinLength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18455:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18456:2: ( RULE_STRING )
+            // InternalRMParser.g:18455:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18456:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18456:2: ( RULE_STRING )
-            // InternalRMParser.g:18457:3: RULE_STRING
+            // InternalRMParser.g:18456:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18457:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEMinLengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEMinLengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEMinLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEMinLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -55978,21 +56002,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELength__ValAssignment_1"
-    // InternalRMParser.g:18466:1: rule__ELength__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18466:1: rule__ELength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18470:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18471:2: ( RULE_STRING )
+            // InternalRMParser.g:18470:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18471:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18471:2: ( RULE_STRING )
-            // InternalRMParser.g:18472:3: RULE_STRING
+            // InternalRMParser.g:18471:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18472:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getELengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getELengthAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getELengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getELengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -56138,21 +56166,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInRange__StartAssignment_2"
-    // InternalRMParser.g:18526:1: rule__EInRange__StartAssignment_2 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18526:1: rule__EInRange__StartAssignment_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EInRange__StartAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18530:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18531:2: ( RULE_STRING )
+            // InternalRMParser.g:18530:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18531:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18531:2: ( RULE_STRING )
-            // InternalRMParser.g:18532:3: RULE_STRING
+            // InternalRMParser.g:18531:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18532:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEInRangeAccess().getStartSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEInRangeAccess().getStartSTRINGTerminalRuleCall_2_0()); 
+             before(grammarAccess.getEInRangeAccess().getStartEAlphaNumericValueParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEInRangeAccess().getStartEAlphaNumericValueParserRuleCall_2_0()); 
 
             }
 
@@ -56175,21 +56207,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInRange__EndAssignment_4"
-    // InternalRMParser.g:18541:1: rule__EInRange__EndAssignment_4 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18541:1: rule__EInRange__EndAssignment_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EInRange__EndAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18545:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18546:2: ( RULE_STRING )
+            // InternalRMParser.g:18545:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18546:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18546:2: ( RULE_STRING )
-            // InternalRMParser.g:18547:3: RULE_STRING
+            // InternalRMParser.g:18546:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18547:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEInRangeAccess().getEndSTRINGTerminalRuleCall_4_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEInRangeAccess().getEndSTRINGTerminalRuleCall_4_0()); 
+             before(grammarAccess.getEInRangeAccess().getEndEAlphaNumericValueParserRuleCall_4_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEInRangeAccess().getEndEAlphaNumericValueParserRuleCall_4_0()); 
 
             }
 
@@ -56212,21 +56248,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELessOrEqual__ValAssignment_1"
-    // InternalRMParser.g:18556:1: rule__ELessOrEqual__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18556:1: rule__ELessOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELessOrEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18560:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18561:2: ( RULE_STRING )
+            // InternalRMParser.g:18560:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18561:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18561:2: ( RULE_STRING )
-            // InternalRMParser.g:18562:3: RULE_STRING
+            // InternalRMParser.g:18561:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18562:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getELessOrEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getELessOrEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getELessOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getELessOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -56249,21 +56289,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELessThan__ValAssignment_1"
-    // InternalRMParser.g:18571:1: rule__ELessThan__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18571:1: rule__ELessThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELessThan__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18575:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18576:2: ( RULE_STRING )
+            // InternalRMParser.g:18575:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18576:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18576:2: ( RULE_STRING )
-            // InternalRMParser.g:18577:3: RULE_STRING
+            // InternalRMParser.g:18576:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18577:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getELessThanAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getELessThanAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getELessThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getELessThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -56286,21 +56330,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EGreaterOrEqual__ValAssignment_1"
-    // InternalRMParser.g:18586:1: rule__EGreaterOrEqual__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18586:1: rule__EGreaterOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EGreaterOrEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18590:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18591:2: ( RULE_STRING )
+            // InternalRMParser.g:18590:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18591:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18591:2: ( RULE_STRING )
-            // InternalRMParser.g:18592:3: RULE_STRING
+            // InternalRMParser.g:18591:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18592:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEGreaterOrEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEGreaterOrEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEGreaterOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEGreaterOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -56323,21 +56371,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EGreaterThan__ValAssignment_1"
-    // InternalRMParser.g:18601:1: rule__EGreaterThan__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18601:1: rule__EGreaterThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EGreaterThan__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18605:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18606:2: ( RULE_STRING )
+            // InternalRMParser.g:18605:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18606:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18606:2: ( RULE_STRING )
-            // InternalRMParser.g:18607:3: RULE_STRING
+            // InternalRMParser.g:18606:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18607:3: ruleEAlphaNumericValue
             {
-             before(grammarAccess.getEGreaterThanAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEGreaterThanAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEGreaterThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEAlphaNumericValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEGreaterThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
 
             }
 
@@ -56360,21 +56412,25 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EEqual__ValAssignment_1"
-    // InternalRMParser.g:18616:1: rule__EEqual__ValAssignment_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18616:1: rule__EEqual__ValAssignment_1 : ( ruleESingleValue ) ;
     public final void rule__EEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18620:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18621:2: ( RULE_STRING )
+            // InternalRMParser.g:18620:1: ( ( ruleESingleValue ) )
+            // InternalRMParser.g:18621:2: ( ruleESingleValue )
             {
-            // InternalRMParser.g:18621:2: ( RULE_STRING )
-            // InternalRMParser.g:18622:3: RULE_STRING
+            // InternalRMParser.g:18621:2: ( ruleESingleValue )
+            // InternalRMParser.g:18622:3: ruleESingleValue
             {
-             before(grammarAccess.getEEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEEqualAccess().getValSTRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getEEqualAccess().getValESingleValueParserRuleCall_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleESingleValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getEEqualAccess().getValESingleValueParserRuleCall_1_0()); 
 
             }
 
@@ -56702,7 +56758,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x4000000000000002L});
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0088300006040000L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000004000081000L,0x0000000000000040L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0600004000081000L,0x0000000000000061L});
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0088200004040000L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0082000800000000L});
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0002000004000800L});
@@ -56716,9 +56772,9 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0001880000000000L});
     public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x008000101C000020L});
     public static final BitSet FOLLOW_41 = new BitSet(new long[]{0xA000000000000000L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0040000028400000L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0014048301102102L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0600000000000000L,0x0000000000000060L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0600000000000000L,0x0000000000000061L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0040000028400000L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0014048301102102L});
     public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x2100000000000000L});
     public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x1600004000081000L,0x0000000000000069L});
     public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0400000000000000L,0x0000000000000020L});

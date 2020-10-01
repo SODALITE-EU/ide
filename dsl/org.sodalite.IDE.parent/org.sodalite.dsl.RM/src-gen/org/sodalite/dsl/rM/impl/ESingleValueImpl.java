@@ -15,7 +15,7 @@ import org.sodalite.dsl.rM.RMPackage;
  *
  * @generated
  */
-public class ESingleValueImpl extends EAssignmentValueImpl implements ESingleValue
+public class ESingleValueImpl extends EValueExpressionImpl implements ESingleValue
 {
   /**
    * <!-- begin-user-doc -->

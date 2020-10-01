@@ -4,11 +4,14 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EMaxLength;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -28,24 +31,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EMaxLengthImpl extends EConstraintImpl implements EMaxLength
 {
   /**
-   * The default value of the '{@link #getVal() <em>Val</em>}' attribute.
+   * The cached value of the '{@link #getVal() <em>Val</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getVal()
    * @generated
    * @ordered
    */
-  protected static final String VAL_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getVal() <em>Val</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getVal()
-   * @generated
-   * @ordered
-   */
-  protected String val = VAL_EDEFAULT;
+  protected EAlphaNumericValue val;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,7 +67,7 @@ public class EMaxLengthImpl extends EConstraintImpl implements EMaxLength
    * @generated
    */
   @Override
-  public String getVal()
+  public EAlphaNumericValue getVal()
   {
     return val;
   }
@@ -84,13 +77,54 @@ public class EMaxLengthImpl extends EConstraintImpl implements EMaxLength
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setVal(String newVal)
+  public NotificationChain basicSetVal(EAlphaNumericValue newVal, NotificationChain msgs)
   {
-    String oldVal = val;
+    EAlphaNumericValue oldVal = val;
     val = newVal;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EMAX_LENGTH__VAL, oldVal, val));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EMAX_LENGTH__VAL, oldVal, newVal);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setVal(EAlphaNumericValue newVal)
+  {
+    if (newVal != val)
+    {
+      NotificationChain msgs = null;
+      if (val != null)
+        msgs = ((InternalEObject)val).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EMAX_LENGTH__VAL, null, msgs);
+      if (newVal != null)
+        msgs = ((InternalEObject)newVal).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EMAX_LENGTH__VAL, null, msgs);
+      msgs = basicSetVal(newVal, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EMAX_LENGTH__VAL, newVal, newVal));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.EMAX_LENGTH__VAL:
+        return basicSetVal(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -120,7 +154,7 @@ public class EMaxLengthImpl extends EConstraintImpl implements EMaxLength
     switch (featureID)
     {
       case RMPackage.EMAX_LENGTH__VAL:
-        setVal((String)newValue);
+        setVal((EAlphaNumericValue)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,7 +171,7 @@ public class EMaxLengthImpl extends EConstraintImpl implements EMaxLength
     switch (featureID)
     {
       case RMPackage.EMAX_LENGTH__VAL:
-        setVal(VAL_EDEFAULT);
+        setVal((EAlphaNumericValue)null);
         return;
     }
     super.eUnset(featureID);
@@ -154,26 +188,9 @@ public class EMaxLengthImpl extends EConstraintImpl implements EMaxLength
     switch (featureID)
     {
       case RMPackage.EMAX_LENGTH__VAL:
-        return VAL_EDEFAULT == null ? val != null : !VAL_EDEFAULT.equals(val);
+        return val != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (val: ");
-    result.append(val);
-    result.append(')');
-    return result.toString();
   }
 
 } //EMaxLengthImpl

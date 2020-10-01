@@ -293,8 +293,10 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valid_source_types" upperBound="-1"
         eType="#//EValidSourceType" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurrences_start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurrences_end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="occurrences_start" eType="#//EAlphaNumericValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="occurrences_end" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValidSourceType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTypes" upperBound="-1"
@@ -317,8 +319,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="capability" eType="#//ECapabilityType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//ENodeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relationship" eType="#//ERelationshipType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="start" eType="#//EAlphaNumericValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EReqOrCap">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -329,13 +333,16 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="EMaxLength" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EMinLength" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ELength" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValid_Values" eSuperTypes="#//EConstraint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//ELIST" containment="true"/>
@@ -345,28 +352,35 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInRange" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="start" eType="#//EAlphaNumericValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ELessOrEqual" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ELessThan" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EGreaterOrEqual" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EGreaterThan" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EEqual" eSuperTypes="#//EConstraint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//ESingleValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EAssignmentValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ESingleValue" eSuperTypes="#//EAssignmentValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ESingleValue" eSuperTypes="#//EValueExpression #//EAssignmentValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="EAlphaNumericValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ESTRING" eSuperTypes="#//EValueExpression #//ESingleValue #//EAlphaNumericValue">
+  <eClassifiers xsi:type="ecore:EClass" name="ESTRING" eSuperTypes="#//ESingleValue #//EAlphaNumericValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBOOLEAN" eSuperTypes="#//ESingleValue">
