@@ -40,11 +40,11 @@ node_templates:
 				knowgo_gateway_ports:  
 					protocol: 'tcp' 
 					remote_ip_prefix: '0.0.0.0/0'
-					port_range_min: '8080' 
-					port_range_max: '8081' 
+					port_range_min: 8080 
+					port_range_max: 8081 
 				knowgo_region-router-port:  
-					port_range_min: '7000' 
-					port_range_max: '7000' 
+					port_range_min: 7000 
+					port_range_max: 7000
 					protocol: 'tcp' 
 					remote_ip_prefix: '0.0.0.0/0' 
 			group_name:  'vehicle-iot-full' 
@@ -133,8 +133,8 @@ node_templates:
 	consul-container-test:
 		type: sodalite.nodes.TestComponent
 		properties:
-			test_port: "8500"
-			test_delay: "5"
+			test_port: 8500
+			test_delay: 5
 		requirements:
 			host: 
 				node: vehicle-iot-vm  
@@ -152,7 +152,7 @@ node_templates:
 			image_name: "adaptant/registrator:latest"
 			command: "-ip {{ public_address }} consul://consul:8500"
 			volumes:["/var/run/docker.sock:/tmp/docker.sock"]
-			sleep: "5"
+			sleep: 5
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 

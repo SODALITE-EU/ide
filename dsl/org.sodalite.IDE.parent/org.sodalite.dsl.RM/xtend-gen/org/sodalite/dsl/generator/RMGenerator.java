@@ -20,6 +20,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.ECapabilities;
@@ -321,8 +322,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"valid_values\" ;");
         _builder.newLine();
         {
-          EList<String> _list = ((EValid_Values)c).getVal().getList();
-          for(final String v : _list) {
+          EList<EAlphaNumericValue> _list = ((EValid_Values)c).getVal().getList();
+          for(final EAlphaNumericValue v : _list) {
             _builder.append("  ");
             _builder.append("exchange:listValue \"");
             _builder.append(v, "  ");
@@ -2573,8 +2574,8 @@ public class RMGenerator extends AbstractGenerator {
   
   public CharSequence compile(final EValueExpression ve) {
     StringConcatenation _builder = new StringConcatenation();
-    String _string = ((ESTRING) ve).getString();
-    _builder.append(_string);
+    String _value = ((ESTRING) ve).getValue();
+    _builder.append(_value);
     return _builder;
   }
   

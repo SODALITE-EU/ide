@@ -59,8 +59,8 @@ node_templates:
 	consul-container-test:
 		type: sodalite.nodes.TestComponent
 		properties:
-			test_port: "8500"
-			test_delay: "5"
+			test_port: 8500
+			test_delay: 5
 		requirements:
 			host: 
 				node: vehicle-iot-vm  
@@ -78,7 +78,7 @@ node_templates:
 			image_name: "adaptant/registrator:latest"
 			command: "-ip {{ public_address }} consul://consul:8500"
 			volumes:["/var/run/docker.sock:/tmp/docker.sock"]
-			sleep: "5"
+			sleep: 5
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
@@ -296,8 +296,8 @@ node_templates:
 	mqtt-broker-container-test:
 		type: sodalite.nodes.TestComponent
 		properties:
-			test_port: "1883"
-			test_delay: "5"
+			test_port: 1883
+			test_delay: 5
 		requirements:
 			host: 
 				node: vehicle-iot-vm       
@@ -329,8 +329,8 @@ node_templates:
 	knowgo-service-registry-container-test:
 		type: sodalite.nodes.TestComponent
 		properties:
-			test_port: "3000"
-			test_delay: "5"
+			test_port: 3000
+			test_delay: 5
 		requirements:
 			host: 
 				node: vehicle-iot-vm 
@@ -366,8 +366,8 @@ node_templates:
 	knowgo-api-gateway-container-test:
 		type: sodalite.nodes.TestComponent
 		properties:
-			test_port: "8081"
-			test_delay: "5"
+			test_port: 8081
+			test_delay: 5
 		requirements:
 			host: 
 				node: vehicle-iot-vm
@@ -407,8 +407,8 @@ node_templates:
 	prometheus-container-test:
 		type: sodalite.nodes.TestComponent
 		properties:
-			test_port: "9091"
-			test_delay: "5"
+			test_port: 9091
+			test_delay: 5
 		requirements:
 			host: 
 				node: vehicle-iot-vm

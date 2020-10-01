@@ -11,10 +11,10 @@ node_templates:
 			host:
 				properties:
 					disk_size: "10 TB"
-					num_cpus: "40"
-					num_gpus: "10"
+					num_cpus: 40
+					num_gpus: 10
 					mem_size: "64 GB"
-					num_nodes: "10"
+					num_nodes: 10
 								
 			os:
 				properties:
@@ -26,12 +26,12 @@ node_templates:
 			name: "hpc-test-1"
 			script_template: "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2"
 			email: "tokmakov@hlrs.de"
-			ppn: "1"
-			nb_nodes: "1"
-			ppn: "1"
+			ppn: 1
+			nb_nodes: 1
+			ppn: 1
 			walltime: "00:02:00"
-			monitor_period: "10"
-			monitor_retries_headroom: "2"
+			monitor_period: 10
+			monitor_retries_headroom: 2
 		optimization: hpc.mpi
 		
 		requirements:
@@ -44,11 +44,11 @@ node_templates:
 			name: "hpc-test-4"
 			script_template: "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2"
 			email: "tokmakov@hlrs.de"
-			nb_nodes: "1"
-			ppn: "1"
+			nb_nodes: 1
+			ppn: 1
 			walltime: "00:02:00"
-			monitor_period: "10"
-			monitor_retries_headroom: "2"
+			monitor_period: 10
+			monitor_retries_headroom: 2
 		
 		requirements:
 			host:
@@ -66,11 +66,11 @@ node_templates:
 			name: "hpc-test-2"
 			script_template: "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2"
 			email: "tokmakov@hlrs.de"
-			nb_nodes: "1"
-			ppn: "1"
+			nb_nodes: 1
+			ppn: 1
 			walltime: "00:02:00"
-			monitor_period: "10"
-			monitor_retries_headroom: "2"
+			monitor_period: 10
+			monitor_retries_headroom: 2
 		
 		requirements:
 			host:
@@ -85,11 +85,11 @@ node_templates:
 			name: "hpc-test-3"
 			script_template: "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2"
 			email: "tokmakov@hlrs.de"
-			nb_nodes: "1"
-			ppn: "1"
+			nb_nodes: 1
+			ppn: 1
 			walltime: "00:02:00"
-			monitor_period: "10"
-			monitor_retries_headroom: "2"
+			monitor_period: 10
+			monitor_retries_headroom: 2
 		
 		requirements:
 			host:

@@ -5,13 +5,13 @@ node_templates:
 		properties:  
 			ports:  
 				component_ports:  
-					port_range_max: "8081" 
+					port_range_max: 8081 
 					remote_ip_prefix: "0.0.0.0/0" 
-					port_range_min: "8080" 
+					port_range_min: 8080 
 					protocol: "tcp" 
 				http_port:  
-					port_range_min: "80" 
-					port_range_max: "80" 
+					port_range_min: 80 
+					port_range_max: 80 
 					protocol: "tcp" 
 					remote_ip_prefix: "0.0.0.0/0" 
 			group_name:  "snow" 

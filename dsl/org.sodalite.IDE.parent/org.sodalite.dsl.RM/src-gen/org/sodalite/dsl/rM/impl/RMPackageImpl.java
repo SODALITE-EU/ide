@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EArtifactType;
 import org.sodalite.dsl.rM.EArtifactTypeBody;
 import org.sodalite.dsl.rM.EArtifactTypes;
@@ -73,6 +74,7 @@ import org.sodalite.dsl.rM.EReqOrCap;
 import org.sodalite.dsl.rM.ERequirementDefinition;
 import org.sodalite.dsl.rM.ERequirementDefinitionBody;
 import org.sodalite.dsl.rM.ERequirements;
+import org.sodalite.dsl.rM.ESingleValue;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.EValidTargetTypes;
 import org.sodalite.dsl.rM.EValid_Values;
@@ -610,7 +612,42 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eSingleValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eAlphaNumericValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass estringEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ebooleanEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass efloatEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass esignedintEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2950,9 +2987,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getELIST_List()
+  public EReference getELIST_List()
   {
-    return (EAttribute)elistEClass.getEStructuralFeatures().get(0);
+    return (EReference)elistEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3115,6 +3152,28 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EClass getESingleValue()
+  {
+    return eSingleValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEAlphaNumericValue()
+  {
+    return eAlphaNumericValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getESTRING()
   {
     return estringEClass;
@@ -3126,9 +3185,75 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getESTRING_String()
+  public EAttribute getESTRING_Value()
   {
     return (EAttribute)estringEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEBOOLEAN()
+  {
+    return ebooleanEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEBOOLEAN_Value()
+  {
+    return (EAttribute)ebooleanEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEFLOAT()
+  {
+    return efloatEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEFLOAT_Value()
+  {
+    return (EAttribute)efloatEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getESIGNEDINT()
+  {
+    return esignedintEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getESIGNEDINT_Value()
+  {
+    return (EAttribute)esignedintEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3487,7 +3612,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eValid_ValuesEClass, EVALID_VALUES__VAL);
 
     elistEClass = createEClass(ELIST);
-    createEAttribute(elistEClass, ELIST__LIST);
+    createEReference(elistEClass, ELIST__LIST);
 
     eInRangeEClass = createEClass(EIN_RANGE);
     createEAttribute(eInRangeEClass, EIN_RANGE__START);
@@ -3510,8 +3635,21 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eAssignmentValueEClass = createEClass(EASSIGNMENT_VALUE);
 
+    eSingleValueEClass = createEClass(ESINGLE_VALUE);
+
+    eAlphaNumericValueEClass = createEClass(EALPHA_NUMERIC_VALUE);
+
     estringEClass = createEClass(ESTRING);
-    createEAttribute(estringEClass, ESTRING__STRING);
+    createEAttribute(estringEClass, ESTRING__VALUE);
+
+    ebooleanEClass = createEClass(EBOOLEAN);
+    createEAttribute(ebooleanEClass, EBOOLEAN__VALUE);
+
+    efloatEClass = createEClass(EFLOAT);
+    createEAttribute(efloatEClass, EFLOAT__VALUE);
+
+    esignedintEClass = createEClass(ESIGNEDINT);
+    createEAttribute(esignedintEClass, ESIGNEDINT__VALUE);
 
     emapEClass = createEClass(EMAP);
     createEReference(emapEClass, EMAP__MAP);
@@ -3568,8 +3706,15 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eGreaterOrEqualEClass.getESuperTypes().add(this.getEConstraint());
     eGreaterThanEClass.getESuperTypes().add(this.getEConstraint());
     eEqualEClass.getESuperTypes().add(this.getEConstraint());
+    eSingleValueEClass.getESuperTypes().add(this.getEAssignmentValue());
     estringEClass.getESuperTypes().add(this.getEValueExpression());
-    estringEClass.getESuperTypes().add(this.getEAssignmentValue());
+    estringEClass.getESuperTypes().add(this.getESingleValue());
+    estringEClass.getESuperTypes().add(this.getEAlphaNumericValue());
+    ebooleanEClass.getESuperTypes().add(this.getESingleValue());
+    efloatEClass.getESuperTypes().add(this.getESingleValue());
+    efloatEClass.getESuperTypes().add(this.getEAlphaNumericValue());
+    esignedintEClass.getESuperTypes().add(this.getESingleValue());
+    esignedintEClass.getESuperTypes().add(this.getEAlphaNumericValue());
     emapEClass.getESuperTypes().add(this.getEAssignmentValue());
 
     // Initialize classes and features; add operations and parameters
@@ -3843,7 +3988,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEValid_Values_Val(), this.getELIST(), null, "val", null, 0, 1, EValid_Values.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(elistEClass, org.sodalite.dsl.rM.ELIST.class, "ELIST", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getELIST_List(), ecorePackage.getEString(), "list", null, 0, -1, org.sodalite.dsl.rM.ELIST.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getELIST_List(), this.getEAlphaNumericValue(), null, "list", null, 0, -1, org.sodalite.dsl.rM.ELIST.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eInRangeEClass, EInRange.class, "EInRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEInRange_Start(), ecorePackage.getEString(), "start", null, 0, 1, EInRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3866,8 +4011,21 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eAssignmentValueEClass, EAssignmentValue.class, "EAssignmentValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(eSingleValueEClass, ESingleValue.class, "ESingleValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eAlphaNumericValueEClass, EAlphaNumericValue.class, "EAlphaNumericValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(estringEClass, org.sodalite.dsl.rM.ESTRING.class, "ESTRING", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getESTRING_String(), ecorePackage.getEString(), "string", null, 0, 1, org.sodalite.dsl.rM.ESTRING.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getESTRING_Value(), ecorePackage.getEString(), "value", null, 0, 1, org.sodalite.dsl.rM.ESTRING.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(ebooleanEClass, org.sodalite.dsl.rM.EBOOLEAN.class, "EBOOLEAN", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEBOOLEAN_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, org.sodalite.dsl.rM.EBOOLEAN.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(efloatEClass, org.sodalite.dsl.rM.EFLOAT.class, "EFLOAT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEFLOAT_Value(), ecorePackage.getEFloat(), "value", null, 0, 1, org.sodalite.dsl.rM.EFLOAT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(esignedintEClass, org.sodalite.dsl.rM.ESIGNEDINT.class, "ESIGNEDINT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getESIGNEDINT_Value(), ecorePackage.getEInt(), "value", null, 0, 1, org.sodalite.dsl.rM.ESIGNEDINT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(emapEClass, org.sodalite.dsl.rM.EMAP.class, "EMAP", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEMAP_Map(), this.getEMapEntry(), null, "map", null, 0, -1, org.sodalite.dsl.rM.EMAP.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -26,12 +26,12 @@ node_templates:
 			job_options:
 				job_name: "solver"
 				wall_time_limit: "1:00:00"
-				node_count: "2"
-				core_count: "40"
-				process_count_per_node: "40"
+				node_count: 2
+				core_count: 40
+				process_count_per_node: 40
 				standard_output_file: "file.out"
 				standard_error_file: "file.err"
-				combine_stdout_stderr: "true"
+				combine_stdout_stderr: true
 				request_event_notification: "abe"
 				email_address: "some@email.com"
 
@@ -41,8 +41,8 @@ node_templates:
 				app_type: "mpi"
 				executable: "${ASTER_ROOT}/14.4/bin/aster "
 				arguments: "${ASTER_ROOT}/14.4/lib/aster/Execution/E_SUPERV.py \\\n-commandes fort.1 --num_job=1432 --mode=interactif \\\n--rep_outils=${ASTER_ROOT}/outils \\\n--rep_mat=${ASTER_ROOT}/14.4/share/aster/materiau \\\n--rep_dex=${ASTER_ROOT}/14.4/share/aster/datg \\\n--numthreads=1 --suivi_batch --memjeveux=8192.0 --tpmax=3600.0"
-				mpi_ranks: "40"
-				threads: "1"
+				mpi_ranks: 40
+				threads: 1
 				build:
 					src: "https://www.code-aster.org/FICHIERS/aster-full-src-14.4.0-1.noarch.tar.gz"
 					build_command: "python3 setup.py install\n"
@@ -52,8 +52,8 @@ node_templates:
 				queue_type: "torque"
 
 			optimisation:
-				enable_opt_build: "true"
-				enable_autotuning: "true"
+				enable_opt_build: true
+				enable_autotuning: true
 				app_type: "hpc"
 				opt_build: 
 					cpu_type: "x86"
@@ -68,8 +68,8 @@ node_templates:
 						location: "L1L2_NonLinear_prepared.tar.gz"
 					parallelisation-mpi: 
 						library: "mpich"
-						version: "3.14"
-					scaling_efficiency: "0.75"
+						version: 3.14
+					scaling_efficiency: 0.75
 
 		requirements:
 			modak_endpoint: 
@@ -87,14 +87,14 @@ node_templates:
 			job_options:
 				job_name: "skyline-extraction-training"
 				wall_time_limit: "12:00:00 "
-				node_count: "1"
-				core_count: "40"
-				request_gpus: "1"
+				node_count: 1
+				core_count: 40
+				request_gpus: 1
 				request_specific_nodes: "ssd"
 				standard_output_file: "skyline-extraction-training.out"
 				standard_error_file: "skyline-extraction-training.err"
-				combine_stdout_stderr: "true"
-				copy_environment: "true"
+				combine_stdout_stderr: true
+				copy_environment: true
 				request_event_notification: "abe"
 				email_address: "some@email.com"
 
@@ -110,8 +110,8 @@ node_templates:
 				queue_type: "torque"
 
 			optimisation:
-				enable_opt_build: "true"
-				enable_autotuning: "true"
+				enable_opt_build: true
+				enable_autotuning: true
 				app_type: "ai_training"
 				opt_build:
 					cpu_type: "x86"
@@ -124,8 +124,8 @@ node_templates:
 						ai_framework: "tensorflow"
 					data: "{}"
 					ai_framework-tensorflow:
-						version: "2.1"
-						xla: "true"
+						version: 2.1
+						xla: true
               
 		requirements:
 			modak_endpoint: 

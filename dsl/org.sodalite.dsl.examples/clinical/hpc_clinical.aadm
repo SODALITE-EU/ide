@@ -75,11 +75,11 @@ node_templates:
 	  	properties:
 	    	job_script: get_input: density-mapping-job-script
 	    	job_options:
-	      		combine_stdout_stderr: 'true'
+	      		combine_stdout_stderr: true
 	      		email_address: "tokmakov@hlrs.de"
 	      		job_name: "density-mapper"
-	      		node_count: '1'
-	      		process_count_per_node: '1'
+	      		node_count: 1
+	      		process_count_per_node: 1
 	      		request_event_notification: "abe"
 	      		standard_error_file: "density-mapper.err"
 	      		standard_output_file: "density-mapper.out"
@@ -104,11 +104,11 @@ node_templates:
 	  	properties:
 	    	job_script: get_input: probabilistic-mapping-job-script
 	    	job_options:
-	      		combine_stdout_stderr: 'true'
+	      		combine_stdout_stderr: true
 	      		email_address: "tokmakov@hlrs.de"
 	      		job_name: "probabilistic-mapper"
-	      		node_count: '2'
-	      		process_count_per_node: '2'
+	      		node_count: 2
+	      		process_count_per_node: 2
 	      		request_event_notification: "abe"
 	      		standard_error_file: "probabilistic-mapper.err"
 	      		standard_output_file: "probabilistic-mapper.out"
@@ -118,8 +118,8 @@ node_templates:
 	      		app_type: "hpc"
 	      		container_runtime: "moduli"
 	      		executable: "bash -c \"cd /workdir/modpy/build/lib/moduli/ && python3 main_mpi.py -s -f $PBS_O_WORKDIR/output/iso/L1L2-iso.dens -o $PBS_O_WORKDIR/output/moduli\""
-	      		mpi_ranks: '4'
-	      		threads: '2'
+	      		mpi_ranks: 4
+	      		threads: 2
 	    	target:
 	      		name: "hlrs_testbed"
 	      		queue_type: "torque"
@@ -136,11 +136,11 @@ node_templates:
 	  	properties:
 	    	job_script: get_input: boundary-conditions-job-script
 	    	job_options:
-	      		combine_stdout_stderr: 'true'
+	      		combine_stdout_stderr: true
 	      		email_address: "tokmakov@hlrs.de"
 	      		job_name: "boundary-conditions"
-	      		node_count: '1'
-	      		process_count_per_node: '1'
+	      		node_count: 1
+	      		process_count_per_node: 1
 	      		request_event_notification: "abe"
 	      		standard_error_file: "boundary-conditions.err"
 	      		standard_output_file: "boundary-conditions.out"
@@ -167,7 +167,7 @@ node_templates:
 			name: "density-mapping"
 			script: get_input: density-mapping-job-script
 			workspace: "~/workflow-modak"
-			enable_audit: "true"
+			enable_audit: true
 			env:
 				SINGULARITY_DIR: "/mnt/nfs/home/kamil/images"
 		requirements:
@@ -182,7 +182,7 @@ node_templates:
 			name: "probabilistic-mapper"
 			script: get_input: probabilistic-mapping-job-script
 			workspace: "~/workflow-modak"
-			enable_audit: "true"
+			enable_audit: true
 			env:
 				SINGULARITY_DIR: "/mnt/nfs/home/kamil/images"
 		requirements:
@@ -197,7 +197,7 @@ node_templates:
 			name: "boundary-conditions"
 			script: get_input: boundary-conditions-job-script
 			workspace: "~/workflow-modak"
-			enable_audit: "true"
+			enable_audit: true
 			env:
 				SINGULARITY_DIR: "/mnt/nfs/home/kamil/images"
 		requirements:

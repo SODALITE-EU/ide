@@ -35,16 +35,16 @@ node_templates:
 
 	snow-security-rules:  
 		type: sodalite.nodes.OpenStack.SecurityRules 
-		properties:  
+		properties:
 			ports:  
-				component_ports:  
-					port_range_max: "8081" 
+				component_ports:
+					port_range_max: 8081 
 					remote_ip_prefix: "0.0.0.0/0" 
-					port_range_min: "8080" 
+					port_range_min: 8080 
 					protocol: "tcp" 
 				http_port:  
-					port_range_min: "80" 
-					port_range_max: "80" 
+					port_range_min: 80 
+					port_range_max: 80 
 					protocol: "tcp" 
 					remote_ip_prefix: "0.0.0.0/0" 
 			group_name:  "snow" 
@@ -190,7 +190,7 @@ node_templates:
 			image_name:  "snow-mysql:latest" 
 			command: "--default-authentication-plugin=mysql_native_password"
 			ports:  ['3306:3306'] 
-			exposed_ports:  ['3306']
+			exposed_ports:  [3306]
 			alias: "mysql"
 			env: get_input: mysql-env
 			registry_url: get_input: docker-registry-url
@@ -310,7 +310,7 @@ node_templates:
 			volumes:  ["/tmp/docker:/tmp"] 
 			image_name:  "snow-skyline-extractor:latest"
 			ports:  ['8080:8080'] 
-			exposed_ports:  ['8080']
+			exposed_ports:  [8080]
 			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
@@ -324,7 +324,7 @@ node_templates:
 			alias: "snow-skyline-alignment"
 			volumes:  ["/tmp/docker:/tmp"] 
 			image_name:  "snow-skyline-alignment:latest"
-			exposed_ports:  ['8080'] 
+			exposed_ports:  [8080] 
 			ports:  ["8081:8080","80:8080"]
 			registry_url: get_input: docker-registry-url
 		requirements:  
@@ -353,7 +353,7 @@ node_templates:
 			image_name:  "snow-webcam-mockup:latest"
 			alias: "snow-webcam-mockup"
 			ports:  ['8080:8080'] 
-			exposed_ports:  ['8080']
+			exposed_ports:  [8080]
 			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  
@@ -403,7 +403,7 @@ node_templates:
 			alias: "snow-nginx"
 			restart_policy: "always"
 			ports: ['80:80'] 
-			exposed_ports: ['80']
+			exposed_ports: [80]
 			registry_url: get_input: docker-registry-url
 		requirements:  
 			host:  

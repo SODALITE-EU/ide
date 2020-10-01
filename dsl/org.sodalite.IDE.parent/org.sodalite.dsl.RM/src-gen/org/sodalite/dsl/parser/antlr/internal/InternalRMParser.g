@@ -6027,19 +6027,20 @@ ruleELIST returns [EObject current=null]
 		}
 		(
 			(
-				lv_list_1_0=RULE_STRING
 				{
-					newLeafNode(lv_list_1_0, grammarAccess.getELISTAccess().getListSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_1_0());
 				}
+				lv_list_1_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getELISTRule());
+						$current = createModelElementForParent(grammarAccess.getELISTRule());
 					}
-					addWithLastConsumed(
+					add(
 						$current,
 						"list",
 						lv_list_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6050,19 +6051,20 @@ ruleELIST returns [EObject current=null]
 			}
 			(
 				(
-					lv_list_3_0=RULE_STRING
 					{
-						newLeafNode(lv_list_3_0, grammarAccess.getELISTAccess().getListSTRINGTerminalRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_1_0());
 					}
+					lv_list_3_0=ruleEAlphaNumericValue
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getELISTRule());
+							$current = createModelElementForParent(grammarAccess.getELISTRule());
 						}
-						addWithLastConsumed(
+						add(
 							$current,
 							"list",
 							lv_list_3_0,
-							"org.eclipse.xtext.common.Terminals.STRING");
+							"org.sodalite.dsl.RM.EAlphaNumericValue");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -6367,11 +6369,11 @@ ruleEAssignmentValue returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getESTRINGParserRuleCall_0());
+			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getESingleValueParserRuleCall_0());
 		}
-		this_ESTRING_0=ruleESTRING
+		this_ESingleValue_0=ruleESingleValue
 		{
-			$current = $this_ESTRING_0.current;
+			$current = $this_ESingleValue_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -6404,6 +6406,105 @@ ruleEAssignmentValue returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleESingleValue
+entryRuleESingleValue returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getESingleValueRule()); }
+	iv_ruleESingleValue=ruleESingleValue
+	{ $current=$iv_ruleESingleValue.current; }
+	EOF;
+
+// Rule ESingleValue
+ruleESingleValue returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getESingleValueAccess().getESTRINGParserRuleCall_0());
+		}
+		this_ESTRING_0=ruleESTRING
+		{
+			$current = $this_ESTRING_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getESingleValueAccess().getEBOOLEANParserRuleCall_1());
+		}
+		this_EBOOLEAN_1=ruleEBOOLEAN
+		{
+			$current = $this_EBOOLEAN_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getESingleValueAccess().getEFLOATParserRuleCall_2());
+		}
+		this_EFLOAT_2=ruleEFLOAT
+		{
+			$current = $this_EFLOAT_2.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getESingleValueAccess().getESIGNEDINTParserRuleCall_3());
+		}
+		this_ESIGNEDINT_3=ruleESIGNEDINT
+		{
+			$current = $this_ESIGNEDINT_3.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleEAlphaNumericValue
+entryRuleEAlphaNumericValue returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEAlphaNumericValueRule()); }
+	iv_ruleEAlphaNumericValue=ruleEAlphaNumericValue
+	{ $current=$iv_ruleEAlphaNumericValue.current; }
+	EOF;
+
+// Rule EAlphaNumericValue
+ruleEAlphaNumericValue returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getEAlphaNumericValueAccess().getESTRINGParserRuleCall_0());
+		}
+		this_ESTRING_0=ruleESTRING
+		{
+			$current = $this_ESTRING_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEAlphaNumericValueAccess().getEFLOATParserRuleCall_1());
+		}
+		this_EFLOAT_1=ruleEFLOAT
+		{
+			$current = $this_EFLOAT_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEAlphaNumericValueAccess().getESIGNEDINTParserRuleCall_2());
+		}
+		this_ESIGNEDINT_2=ruleESIGNEDINT
+		{
+			$current = $this_ESIGNEDINT_2.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
 // Entry rule entryRuleESTRING
 entryRuleESTRING returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getESTRINGRule()); }
@@ -6421,9 +6522,9 @@ ruleESTRING returns [EObject current=null]
 }:
 	(
 		(
-			lv_string_0_0=RULE_STRING
+			lv_value_0_0=RULE_STRING
 			{
-				newLeafNode(lv_string_0_0, grammarAccess.getESTRINGAccess().getStringSTRINGTerminalRuleCall_0());
+				newLeafNode(lv_value_0_0, grammarAccess.getESTRINGAccess().getValueSTRINGTerminalRuleCall_0());
 			}
 			{
 				if ($current==null) {
@@ -6431,9 +6532,116 @@ ruleESTRING returns [EObject current=null]
 				}
 				setWithLastConsumed(
 					$current,
-					"string",
-					lv_string_0_0,
+					"value",
+					lv_value_0_0,
 					"org.eclipse.xtext.common.Terminals.STRING");
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleEBOOLEAN
+entryRuleEBOOLEAN returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEBOOLEANRule()); }
+	iv_ruleEBOOLEAN=ruleEBOOLEAN
+	{ $current=$iv_ruleEBOOLEAN.current; }
+	EOF;
+
+// Rule EBOOLEAN
+ruleEBOOLEAN returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_value_0_0=RULE_BOOLEAN
+			{
+				newLeafNode(lv_value_0_0, grammarAccess.getEBOOLEANAccess().getValueBOOLEANTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getEBOOLEANRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"value",
+					lv_value_0_0,
+					"org.sodalite.dsl.RM.BOOLEAN");
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleEFLOAT
+entryRuleEFLOAT returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEFLOATRule()); }
+	iv_ruleEFLOAT=ruleEFLOAT
+	{ $current=$iv_ruleEFLOAT.current; }
+	EOF;
+
+// Rule EFLOAT
+ruleEFLOAT returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getEFLOATAccess().getValueFLOATParserRuleCall_0());
+			}
+			lv_value_0_0=ruleFLOAT
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getEFLOATRule());
+				}
+				set(
+					$current,
+					"value",
+					lv_value_0_0,
+					"org.sodalite.dsl.RM.FLOAT");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleESIGNEDINT
+entryRuleESIGNEDINT returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getESIGNEDINTRule()); }
+	iv_ruleESIGNEDINT=ruleESIGNEDINT
+	{ $current=$iv_ruleESIGNEDINT.current; }
+	EOF;
+
+// Rule ESIGNEDINT
+ruleESIGNEDINT returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getESIGNEDINTAccess().getValueSIGNEDINTParserRuleCall_0());
+			}
+			lv_value_0_0=ruleSIGNEDINT
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getESIGNEDINTRule());
+				}
+				set(
+					$current,
+					"value",
+					lv_value_0_0,
+					"org.sodalite.dsl.RM.SIGNEDINT");
+				afterParserOrEnumRuleCall();
 			}
 		)
 	)
@@ -6542,5 +6750,78 @@ ruleEMapEntry returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleSIGNEDINT
+entryRuleSIGNEDINT returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getSIGNEDINTRule()); }
+	iv_ruleSIGNEDINT=ruleSIGNEDINT
+	{ $current=$iv_ruleSIGNEDINT.current.getText(); }
+	EOF;
+
+// Rule SIGNEDINT
+ruleSIGNEDINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			kw=HyphenMinus
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getSIGNEDINTAccess().getHyphenMinusKeyword_0());
+			}
+		)?
+		this_INT_1=RULE_INT
+		{
+			$current.merge(this_INT_1);
+		}
+		{
+			newLeafNode(this_INT_1, grammarAccess.getSIGNEDINTAccess().getINTTerminalRuleCall_1());
+		}
+	)
+;
+
+// Entry rule entryRuleFLOAT
+entryRuleFLOAT returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getFLOATRule()); }
+	iv_ruleFLOAT=ruleFLOAT
+	{ $current=$iv_ruleFLOAT.current.getText(); }
+	EOF;
+
+// Rule FLOAT
+ruleFLOAT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			this_INT_0=RULE_INT
+			{
+				$current.merge(this_INT_0);
+			}
+			{
+				newLeafNode(this_INT_0, grammarAccess.getFLOATAccess().getINTTerminalRuleCall_0());
+			}
+		)?
+		kw=FullStop
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getFLOATAccess().getFullStopKeyword_1());
+		}
+		this_INT_2=RULE_INT
+		{
+			$current.merge(this_INT_2);
+		}
+		{
+			newLeafNode(this_INT_2, grammarAccess.getFLOATAccess().getINTTerminalRuleCall_2());
+		}
 	)
 ;

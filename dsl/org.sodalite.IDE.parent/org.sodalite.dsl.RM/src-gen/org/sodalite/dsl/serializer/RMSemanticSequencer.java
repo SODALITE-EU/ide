@@ -20,6 +20,7 @@ import org.sodalite.dsl.rM.EArtifactTypes;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributeDefinitionBody;
 import org.sodalite.dsl.rM.EAttributes;
+import org.sodalite.dsl.rM.EBOOLEAN;
 import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.ECapabilityDefinition;
 import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
@@ -34,6 +35,7 @@ import org.sodalite.dsl.rM.EDataTypes;
 import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EDependencyFiles;
 import org.sodalite.dsl.rM.EEqual;
+import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
 import org.sodalite.dsl.rM.EGreaterThan;
 import org.sodalite.dsl.rM.EImplementation;
@@ -75,6 +77,7 @@ import org.sodalite.dsl.rM.ERelationshipTypes;
 import org.sodalite.dsl.rM.ERequirementDefinition;
 import org.sodalite.dsl.rM.ERequirementDefinitionBody;
 import org.sodalite.dsl.rM.ERequirements;
+import org.sodalite.dsl.rM.ESIGNEDINT;
 import org.sodalite.dsl.rM.ESTRING;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.EValidTargetTypes;
@@ -120,6 +123,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EATTRIBUTES:
 				sequence_EAttributes(context, (EAttributes) semanticObject); 
 				return; 
+			case RMPackage.EBOOLEAN:
+				sequence_EBOOLEAN(context, (EBOOLEAN) semanticObject); 
+				return; 
 			case RMPackage.ECAPABILITIES:
 				sequence_ECapabilities(context, (ECapabilities) semanticObject); 
 				return; 
@@ -161,6 +167,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RMPackage.EEQUAL:
 				sequence_EEqual(context, (EEqual) semanticObject); 
+				return; 
+			case RMPackage.EFLOAT:
+				sequence_EFLOAT(context, (EFLOAT) semanticObject); 
 				return; 
 			case RMPackage.EGREATER_OR_EQUAL:
 				sequence_EGreaterOrEqual(context, (EGreaterOrEqual) semanticObject); 
@@ -285,6 +294,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EREQUIREMENTS:
 				sequence_ERequirements(context, (ERequirements) semanticObject); 
 				return; 
+			case RMPackage.ESIGNEDINT:
+				sequence_ESIGNEDINT(context, (ESIGNEDINT) semanticObject); 
+				return; 
 			case RMPackage.ESTRING:
 				sequence_ESTRING(context, (ESTRING) semanticObject); 
 				return; 
@@ -407,6 +419,26 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_EAttributes(ISerializationContext context, EAttributes semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EAssignmentValue returns EBOOLEAN
+	 *     ESingleValue returns EBOOLEAN
+	 *     EBOOLEAN returns EBOOLEAN
+	 *
+	 * Constraint:
+	 *     value=BOOLEAN
+	 */
+	protected void sequence_EBOOLEAN(ISerializationContext context, EBOOLEAN semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EBOOLEAN__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EBOOLEAN__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEBOOLEANAccess().getValueBOOLEANTerminalRuleCall_0(), semanticObject.isValue());
+		feeder.finish();
 	}
 	
 	
@@ -624,6 +656,27 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EAssignmentValue returns EFLOAT
+	 *     ESingleValue returns EFLOAT
+	 *     EAlphaNumericValue returns EFLOAT
+	 *     EFLOAT returns EFLOAT
+	 *
+	 * Constraint:
+	 *     value=FLOAT
+	 */
+	protected void sequence_EFLOAT(ISerializationContext context, EFLOAT semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EFLOAT__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EFLOAT__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEFLOATAccess().getValueFLOATParserRuleCall_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EConstraint returns EGreaterOrEqual
 	 *     EGreaterOrEqual returns EGreaterOrEqual
 	 *
@@ -802,7 +855,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EAssignmentValue returns ELIST
 	 *
 	 * Constraint:
-	 *     (list+=STRING list+=STRING*)
+	 *     (list+=EAlphaNumericValue list+=EAlphaNumericValue*)
 	 */
 	protected void sequence_ELIST(ISerializationContext context, ELIST semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1302,20 +1355,43 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EAssignmentValue returns ESIGNEDINT
+	 *     ESingleValue returns ESIGNEDINT
+	 *     EAlphaNumericValue returns ESIGNEDINT
+	 *     ESIGNEDINT returns ESIGNEDINT
+	 *
+	 * Constraint:
+	 *     value=SIGNEDINT
+	 */
+	protected void sequence_ESIGNEDINT(ISerializationContext context, ESIGNEDINT semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ESIGNEDINT__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ESIGNEDINT__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getESIGNEDINTAccess().getValueSIGNEDINTParserRuleCall_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EValueExpression returns ESTRING
 	 *     EAssignmentValue returns ESTRING
+	 *     ESingleValue returns ESTRING
+	 *     EAlphaNumericValue returns ESTRING
 	 *     ESTRING returns ESTRING
 	 *
 	 * Constraint:
-	 *     string=STRING
+	 *     value=STRING
 	 */
 	protected void sequence_ESTRING(ISerializationContext context, ESTRING semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ESTRING__STRING) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ESTRING__STRING));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.ESTRING__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ESTRING__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getESTRINGAccess().getStringSTRINGTerminalRuleCall_0(), semanticObject.getString());
+		feeder.accept(grammarAccess.getESTRINGAccess().getValueSTRINGTerminalRuleCall_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	

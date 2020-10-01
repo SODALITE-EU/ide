@@ -441,9 +441,34 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEAssignmentValueAdapter();
       }
       @Override
+      public Adapter caseESingleValue(ESingleValue object)
+      {
+        return createESingleValueAdapter();
+      }
+      @Override
+      public Adapter caseEAlphaNumericValue(EAlphaNumericValue object)
+      {
+        return createEAlphaNumericValueAdapter();
+      }
+      @Override
       public Adapter caseESTRING(ESTRING object)
       {
         return createESTRINGAdapter();
+      }
+      @Override
+      public Adapter caseEBOOLEAN(EBOOLEAN object)
+      {
+        return createEBOOLEANAdapter();
+      }
+      @Override
+      public Adapter caseEFLOAT(EFLOAT object)
+      {
+        return createEFLOATAdapter();
+      }
+      @Override
+      public Adapter caseESIGNEDINT(ESIGNEDINT object)
+      {
+        return createESIGNEDINTAdapter();
       }
       @Override
       public Adapter caseEMAP(EMAP object)
@@ -1573,6 +1598,36 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ESingleValue <em>ESingle Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ESingleValue
+   * @generated
+   */
+  public Adapter createESingleValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EAlphaNumericValue <em>EAlpha Numeric Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EAlphaNumericValue
+   * @generated
+   */
+  public Adapter createEAlphaNumericValueAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ESTRING <em>ESTRING</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1583,6 +1638,51 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createESTRINGAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EBOOLEAN <em>EBOOLEAN</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EBOOLEAN
+   * @generated
+   */
+  public Adapter createEBOOLEANAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EFLOAT <em>EFLOAT</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EFLOAT
+   * @generated
+   */
+  public Adapter createEFLOATAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ESIGNEDINT <em>ESIGNEDINT</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ESIGNEDINT
+   * @generated
+   */
+  public Adapter createESIGNEDINTAdapter()
   {
     return null;
   }

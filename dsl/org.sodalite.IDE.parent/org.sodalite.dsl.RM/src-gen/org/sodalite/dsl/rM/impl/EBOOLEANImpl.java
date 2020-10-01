@@ -9,50 +9,50 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.sodalite.dsl.rM.ESTRING;
+import org.sodalite.dsl.rM.EBOOLEAN;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>ESTRING</b></em>'.
+ * An implementation of the model object '<em><b>EBOOLEAN</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.ESTRINGImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EBOOLEANImpl#isValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
+public class EBOOLEANImpl extends ESingleValueImpl implements EBOOLEAN
 {
   /**
-   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * The default value of the '{@link #isValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue()
+   * @see #isValue()
    * @generated
    * @ordered
    */
-  protected static final String VALUE_EDEFAULT = null;
+  protected static final boolean VALUE_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * The cached value of the '{@link #isValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue()
+   * @see #isValue()
    * @generated
    * @ordered
    */
-  protected String value = VALUE_EDEFAULT;
+  protected boolean value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ESTRINGImpl()
+  protected EBOOLEANImpl()
   {
     super();
   }
@@ -65,7 +65,7 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   @Override
   protected EClass eStaticClass()
   {
-    return RMPackage.Literals.ESTRING;
+    return RMPackage.Literals.EBOOLEAN;
   }
 
   /**
@@ -74,7 +74,7 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * @generated
    */
   @Override
-  public String getValue()
+  public boolean isValue()
   {
     return value;
   }
@@ -85,12 +85,12 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * @generated
    */
   @Override
-  public void setValue(String newValue)
+  public void setValue(boolean newValue)
   {
-    String oldValue = value;
+    boolean oldValue = value;
     value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ESTRING__VALUE, oldValue, value));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EBOOLEAN__VALUE, oldValue, value));
   }
 
   /**
@@ -103,8 +103,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__VALUE:
-        return getValue();
+      case RMPackage.EBOOLEAN__VALUE:
+        return isValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__VALUE:
-        setValue((String)newValue);
+      case RMPackage.EBOOLEAN__VALUE:
+        setValue((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,7 +136,7 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__VALUE:
+      case RMPackage.EBOOLEAN__VALUE:
         setValue(VALUE_EDEFAULT);
         return;
     }
@@ -153,8 +153,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__VALUE:
-        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+      case RMPackage.EBOOLEAN__VALUE:
+        return value != VALUE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -176,4 +176,4 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
     return result.toString();
   }
 
-} //ESTRINGImpl
+} //EBOOLEANImpl

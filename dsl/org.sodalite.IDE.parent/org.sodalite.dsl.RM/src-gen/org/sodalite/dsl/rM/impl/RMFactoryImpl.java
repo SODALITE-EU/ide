@@ -138,7 +138,12 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EGREATER_THAN: return createEGreaterThan();
       case RMPackage.EEQUAL: return createEEqual();
       case RMPackage.EASSIGNMENT_VALUE: return createEAssignmentValue();
+      case RMPackage.ESINGLE_VALUE: return createESingleValue();
+      case RMPackage.EALPHA_NUMERIC_VALUE: return createEAlphaNumericValue();
       case RMPackage.ESTRING: return createESTRING();
+      case RMPackage.EBOOLEAN: return createEBOOLEAN();
+      case RMPackage.EFLOAT: return createEFLOAT();
+      case RMPackage.ESIGNEDINT: return createESIGNEDINT();
       case RMPackage.EMAP: return createEMAP();
       case RMPackage.EMAP_ENTRY: return createEMapEntry();
       default:
@@ -1028,10 +1033,70 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public ESingleValue createESingleValue()
+  {
+    ESingleValueImpl eSingleValue = new ESingleValueImpl();
+    return eSingleValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAlphaNumericValue createEAlphaNumericValue()
+  {
+    EAlphaNumericValueImpl eAlphaNumericValue = new EAlphaNumericValueImpl();
+    return eAlphaNumericValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public ESTRING createESTRING()
   {
     ESTRINGImpl estring = new ESTRINGImpl();
     return estring;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EBOOLEAN createEBOOLEAN()
+  {
+    EBOOLEANImpl eboolean = new EBOOLEANImpl();
+    return eboolean;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EFLOAT createEFLOAT()
+  {
+    EFLOATImpl efloat = new EFLOATImpl();
+    return efloat;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ESIGNEDINT createESIGNEDINT()
+  {
+    ESIGNEDINTImpl esignedint = new ESIGNEDINTImpl();
+    return esignedint;
   }
 
   /**

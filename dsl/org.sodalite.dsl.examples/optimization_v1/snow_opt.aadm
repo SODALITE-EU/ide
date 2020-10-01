@@ -15,14 +15,14 @@ node_templates:
 			ports:
 				http_port:  
 					protocol: 'tcp' 
-					port_range_min: '80'
-					port_range_max: '80'
+					port_range_min: 80
+					port_range_max: 80
 					remote_ip_prefix: "0.0.0.0/0"
 				
 				component_ports:
 					protocol: 'tcp' 
-					port_range_min: '8080'
-					port_range_max: '8081'
+					port_range_min: 8080
+					port_range_max: 8081
 					remote_ip_prefix: "0.0.0.0/0"
 
 	snow-vm:
@@ -44,8 +44,8 @@ node_templates:
 			host:
 				properties:
 					disk_size: "10 GB"
-					num_cpus: "4"
-					num_gpus: "1"
+					num_cpus: 4
+					num_gpus: 1
 					mem_size: "4 GB"
 				
 			os:
@@ -67,7 +67,7 @@ node_templates:
 		 properties:
 		 	image_name: 'snow-skyline-extractor'
 		 	ports: ['8080:8080']
-		 	exposed_ports: ['8080']
+		 	exposed_ports: [8080]
 		 	volumes: "/tmp/docker:/tmp"
 		 	alias: "alias"
 		 	registry_url: "registry_url"
@@ -87,7 +87,7 @@ node_templates:
 		properties:
 			image_name: "snow-skyline-alignment"
 			ports: ["8081:8080", "80:8080"]
-			exposed_ports: ["8080"]
+			exposed_ports: [8080]
 			volumes: "/tmp/docker:/tmp"
 			alias: "alias"
 			registry_url: "registry_url"

@@ -9,23 +9,23 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.sodalite.dsl.rM.ESTRING;
+import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>ESTRING</b></em>'.
+ * An implementation of the model object '<em><b>EFLOAT</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.ESTRINGImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EFLOATImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
+public class EFLOATImpl extends ESingleValueImpl implements EFLOAT
 {
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -35,7 +35,7 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * @generated
    * @ordered
    */
-  protected static final String VALUE_EDEFAULT = null;
+  protected static final float VALUE_EDEFAULT = 0.0F;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -45,14 +45,14 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * @generated
    * @ordered
    */
-  protected String value = VALUE_EDEFAULT;
+  protected float value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ESTRINGImpl()
+  protected EFLOATImpl()
   {
     super();
   }
@@ -65,7 +65,7 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   @Override
   protected EClass eStaticClass()
   {
-    return RMPackage.Literals.ESTRING;
+    return RMPackage.Literals.EFLOAT;
   }
 
   /**
@@ -74,7 +74,7 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * @generated
    */
   @Override
-  public String getValue()
+  public float getValue()
   {
     return value;
   }
@@ -85,12 +85,12 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * @generated
    */
   @Override
-  public void setValue(String newValue)
+  public void setValue(float newValue)
   {
-    String oldValue = value;
+    float oldValue = value;
     value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ESTRING__VALUE, oldValue, value));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EFLOAT__VALUE, oldValue, value));
   }
 
   /**
@@ -103,7 +103,7 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__VALUE:
+      case RMPackage.EFLOAT__VALUE:
         return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -119,8 +119,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__VALUE:
-        setValue((String)newValue);
+      case RMPackage.EFLOAT__VALUE:
+        setValue((Float)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,7 +136,7 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__VALUE:
+      case RMPackage.EFLOAT__VALUE:
         setValue(VALUE_EDEFAULT);
         return;
     }
@@ -153,8 +153,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__VALUE:
-        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+      case RMPackage.EFLOAT__VALUE:
+        return value != VALUE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -176,4 +176,4 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
     return result.toString();
   }
 
-} //ESTRINGImpl
+} //EFLOATImpl

@@ -890,7 +890,7 @@ class RMGenerator extends AbstractGenerator {
 	.
 	'''
 	
-	def compile (EValueExpression ve) '''«(ve as ESTRING).string»'''
+	def compile (EValueExpression ve) '''«(ve as ESTRING).value»'''
 	
 	def void putParameterNumber (Object entity, String parameterName, Integer number){
 		if (parameter_numbers.get(entity) === null){

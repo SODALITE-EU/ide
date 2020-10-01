@@ -416,7 +416,7 @@ EValid_Values:
 	'valid_values:' val=ELIST;
 
 ELIST:
-	'['list+=STRING ("," list+=STRING)* ']'
+	'['list+=EAlphaNumericValue ("," list+=EAlphaNumericValue)* ']'
 ;
 
 EInRange:
@@ -438,11 +438,31 @@ EEqual:
 	'equal:' val=STRING;
 	
 EAssignmentValue:
-	ESTRING | ELIST | EMAP | EFunction
+	ESingleValue | ELIST | EMAP | EFunction
+;
+
+ESingleValue:
+	ESTRING | EBOOLEAN | EFLOAT | ESIGNEDINT 
+;
+
+EAlphaNumericValue:
+	ESTRING | EFLOAT | ESIGNEDINT 
 ;
 
 ESTRING:
-	string = STRING
+	value = STRING
+;
+
+EBOOLEAN:
+	value = BOOLEAN
+;
+
+EFLOAT:
+	value = FLOAT
+;
+
+ESIGNEDINT:
+	value = SIGNEDINT
 ;
 
 EMAP:
@@ -460,6 +480,10 @@ terminal QUALIFIED_NAME: //FIXME convert to data type rule, remove terminal
 
 terminal BOOLEAN returns ecore::EBoolean:
 	'true' | 'false';
+	
+SIGNEDINT returns ecore::EInt: '-'? INT;
+
+FLOAT returns ecore::EFloat: INT? '.' INT;
 
 terminal ENTITY:
 	'SELF' | 'SOURCE' | 'TARGET' | 'HOST';

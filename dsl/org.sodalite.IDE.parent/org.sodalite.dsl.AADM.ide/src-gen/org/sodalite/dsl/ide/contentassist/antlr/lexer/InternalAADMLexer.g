@@ -121,6 +121,10 @@ Type : 'type:';
 
 Comma : ',';
 
+HyphenMinus : '-';
+
+FullStop : '.';
+
 Colon : ':';
 
 LeftSquareBracket : '[';

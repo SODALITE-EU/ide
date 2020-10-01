@@ -341,8 +341,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//ELIST" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ELIST" eSuperTypes="#//EAssignmentValue">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="list" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="list" upperBound="-1" eType="#//EAlphaNumericValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInRange" eSuperTypes="#//EConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -364,8 +364,19 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EAssignmentValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ESTRING" eSuperTypes="#//EValueExpression #//EAssignmentValue">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ESingleValue" eSuperTypes="#//EAssignmentValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EAlphaNumericValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ESTRING" eSuperTypes="#//EValueExpression #//ESingleValue #//EAlphaNumericValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EBOOLEAN" eSuperTypes="#//ESingleValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EFLOAT" eSuperTypes="#//ESingleValue #//EAlphaNumericValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ESIGNEDINT" eSuperTypes="#//ESingleValue #//EAlphaNumericValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EMAP" eSuperTypes="#//EAssignmentValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="map" upperBound="-1" eType="#//EMapEntry"

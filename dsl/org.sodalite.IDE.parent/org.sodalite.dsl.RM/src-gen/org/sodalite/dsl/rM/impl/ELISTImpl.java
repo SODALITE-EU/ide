@@ -5,12 +5,17 @@ package org.sodalite.dsl.rM.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -30,14 +35,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ELISTImpl extends EAssignmentValueImpl implements ELIST
 {
   /**
-   * The cached value of the '{@link #getList() <em>List</em>}' attribute list.
+   * The cached value of the '{@link #getList() <em>List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getList()
    * @generated
    * @ordered
    */
-  protected EList<String> list;
+  protected EList<EAlphaNumericValue> list;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,13 +71,29 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
    * @generated
    */
   @Override
-  public EList<String> getList()
+  public EList<EAlphaNumericValue> getList()
   {
     if (list == null)
     {
-      list = new EDataTypeEList<String>(String.class, this, RMPackage.ELIST__LIST);
+      list = new EObjectContainmentEList<EAlphaNumericValue>(EAlphaNumericValue.class, this, RMPackage.ELIST__LIST);
     }
     return list;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.ELIST__LIST:
+        return ((InternalEList<?>)getList()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -104,7 +125,7 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
     {
       case RMPackage.ELIST__LIST:
         getList().clear();
-        getList().addAll((Collection<? extends String>)newValue);
+        getList().addAll((Collection<? extends EAlphaNumericValue>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,23 +162,6 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
         return list != null && !list.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (list: ");
-    result.append(list);
-    result.append(')');
-    return result.toString();
   }
 
 } //ELISTImpl
