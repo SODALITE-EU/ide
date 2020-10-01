@@ -40,6 +40,11 @@ import org.eclipse.core.resources.IFile
 import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.rM.GetProperty
 import java.io.File
+import org.sodalite.dsl.rM.ESingleValue
+import org.sodalite.dsl.rM.EBOOLEAN
+import org.sodalite.dsl.rM.EFLOAT
+import org.sodalite.dsl.rM.ESIGNEDINT
+import org.sodalite.dsl.rM.EAlphaNumericValue
 
 /**
  * Generates code from your model files on save.
@@ -109,7 +114,7 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDFOR»
 	
 	«FOR e:r.allContents.toIterable.filter(EMapEntry)»
-		«IF  e.value instanceof ESTRING»
+		«IF  e.value instanceof ESingleValue»
 			«e.compile»
 		«ENDIF»
 	«ENDFOR»
@@ -203,12 +208,12 @@ class AADMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile (EMapEntry e) '''
-	«IF  e.value instanceof ESTRING»
+	«IF  e.value instanceof ESingleValue»
 	«putParameterNumber(e, "map", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "«e.key»" ;
-	  exchange:value "«processStringValue((e.value as ESTRING).string)»" ;
+	  exchange:value "«trim((e.value as ESingleValue).compile().toString)»" ;
 	.
 	«ELSEIF e.value instanceof EMAP»
 	«putParameterNumber(e, "map", parameter_counter)»
@@ -263,7 +268,7 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:name "«p.name»" ;
 	  «IF p.value instanceof ELIST»
 	  		«FOR entry:(p.value as ELIST).list»
-	  		exchange:listValue "«entry»" ;
+	  		exchange:listValue "«trim(entry.compile().toString)»" ;
 	  		«ENDFOR»
 	  «ELSEIF p.value instanceof EMAP»
 	    «FOR entry:(p.value as EMAP).map»
@@ -272,14 +277,39 @@ class AADMGenerator extends AbstractGenerator {
 	  «ELSEIF p.value instanceof EFunction»
 	  	«IF p.value instanceof GetInput»
 	  	exchange:value "{ get_input: «(p.value as GetInput).input.name» }" ;
-	  	«ENDIF»
-	  	«IF p.value instanceof GetProperty»
+	  	«ELSEIF p.value instanceof GetProperty»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
 	  	«ENDIF»
-	  «ELSE»
-	  	exchange:value "«processStringValue((p.value as ESTRING).string)»" ;
+	  «ELSEIF p.value instanceof ESingleValue»
+	  	exchange:value "«trim((p.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
 	.
+	'''
+	
+	def compile (ESingleValue v) '''
+	«IF v instanceof ESTRING»
+	  «processStringValue((v as ESTRING).value)»
+	«ELSEIF v instanceof EBOOLEAN»
+	  «(v as EBOOLEAN).value»
+	«ELSEIF v instanceof EFLOAT»
+	  «(v as EFLOAT).value»
+	«ELSEIF v instanceof ESIGNEDINT»
+	  «(v as ESIGNEDINT).value»
+	«ELSE»
+	  null
+	«ENDIF»
+	'''
+	
+	def compile (EAlphaNumericValue v) '''
+	«IF v instanceof ESTRING»
+	  «processStringValue((v as ESTRING).value)»
+	«ELSEIF v instanceof EFLOAT»
+	  «(v as EFLOAT).value»
+	«ELSEIF v instanceof ESIGNEDINT»
+	  «(v as ESIGNEDINT).value»
+	«ELSE»
+	  null
+	«ENDIF»
 	'''
 	
 	def compile (EAttributeAssignment a) '''
@@ -289,7 +319,7 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:name "«a.name»" ;
 	  «IF a.value instanceof ELIST»
 	  		«FOR entry:(a.value as ELIST).list»
-	  		exchange:listValue "«entry»" ;
+	  		exchange:listValue "«trim(entry.compile().toString)»" ;
 	  		«ENDFOR»
 	  «ELSEIF a.value instanceof EMAP»
 	    «FOR entry:(a.value as EMAP).map»
@@ -299,8 +329,8 @@ class AADMGenerator extends AbstractGenerator {
 	  	«IF a.value instanceof GetInput»
 	  	exchange:value "{ get_input: «(a.value as GetInput).input.name» }" ;
 	  	«ENDIF»
-	  «ELSE»
-	  	exchange:value "«processStringValue((a.value as ESTRING).string)»" ;
+	  «ELSEIF a.value instanceof ESingleValue»
+	  	exchange:value "«trim((a.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
 	.
 	'''
@@ -397,4 +427,7 @@ class AADMGenerator extends AbstractGenerator {
 		return processed
 	}
 	
+	def trim (String value) {
+		return value.trim
+	}
 }

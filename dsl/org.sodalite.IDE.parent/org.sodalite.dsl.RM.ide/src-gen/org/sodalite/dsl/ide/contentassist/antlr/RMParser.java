@@ -39,6 +39,8 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEReqOrCapAccess().getAlternatives(), "rule__EReqOrCap__Alternatives");
 			builder.put(grammarAccess.getEConstraintAccess().getAlternatives(), "rule__EConstraint__Alternatives");
 			builder.put(grammarAccess.getEAssignmentValueAccess().getAlternatives(), "rule__EAssignmentValue__Alternatives");
+			builder.put(grammarAccess.getESingleValueAccess().getAlternatives(), "rule__ESingleValue__Alternatives");
+			builder.put(grammarAccess.getEAlphaNumericValueAccess().getAlternatives(), "rule__EAlphaNumericValue__Alternatives");
 			builder.put(grammarAccess.getRM_ModelAccess().getGroup_0(), "rule__RM_Model__Group_0__0");
 			builder.put(grammarAccess.getRM_ModelAccess().getGroup_1(), "rule__RM_Model__Group_1__0");
 			builder.put(grammarAccess.getRM_ModelAccess().getGroup_2(), "rule__RM_Model__Group_2__0");
@@ -181,6 +183,8 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEEqualAccess().getGroup(), "rule__EEqual__Group__0");
 			builder.put(grammarAccess.getEMAPAccess().getGroup(), "rule__EMAP__Group__0");
 			builder.put(grammarAccess.getEMapEntryAccess().getGroup(), "rule__EMapEntry__Group__0");
+			builder.put(grammarAccess.getSIGNEDINTAccess().getGroup(), "rule__SIGNEDINT__Group__0");
+			builder.put(grammarAccess.getFLOATAccess().getGroup(), "rule__FLOAT__Group__0");
 			builder.put(grammarAccess.getRM_ModelAccess().getDataTypesAssignment_0_2(), "rule__RM_Model__DataTypesAssignment_0_2");
 			builder.put(grammarAccess.getRM_ModelAccess().getArtifactTypesAssignment_1_2(), "rule__RM_Model__ArtifactTypesAssignment_1_2");
 			builder.put(grammarAccess.getRM_ModelAccess().getCapabilityTypesAssignment_2_2(), "rule__RM_Model__CapabilityTypesAssignment_2_2");
@@ -331,7 +335,10 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEGreaterOrEqualAccess().getValAssignment_1(), "rule__EGreaterOrEqual__ValAssignment_1");
 			builder.put(grammarAccess.getEGreaterThanAccess().getValAssignment_1(), "rule__EGreaterThan__ValAssignment_1");
 			builder.put(grammarAccess.getEEqualAccess().getValAssignment_1(), "rule__EEqual__ValAssignment_1");
-			builder.put(grammarAccess.getESTRINGAccess().getStringAssignment(), "rule__ESTRING__StringAssignment");
+			builder.put(grammarAccess.getESTRINGAccess().getValueAssignment(), "rule__ESTRING__ValueAssignment");
+			builder.put(grammarAccess.getEBOOLEANAccess().getValueAssignment(), "rule__EBOOLEAN__ValueAssignment");
+			builder.put(grammarAccess.getEFLOATAccess().getValueAssignment(), "rule__EFLOAT__ValueAssignment");
+			builder.put(grammarAccess.getESIGNEDINTAccess().getValueAssignment(), "rule__ESIGNEDINT__ValueAssignment");
 			builder.put(grammarAccess.getEMAPAccess().getMapAssignment_1(), "rule__EMAP__MapAssignment_1");
 			builder.put(grammarAccess.getEMapEntryAccess().getKeyAssignment_0(), "rule__EMapEntry__KeyAssignment_0");
 			builder.put(grammarAccess.getEMapEntryAccess().getValueAssignment_2(), "rule__EMapEntry__ValueAssignment_2");

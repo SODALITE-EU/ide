@@ -47,7 +47,7 @@ node_types:
 				node: tosca.nodes.Compute
 				capability: tosca.capabilities.Compute
 				relationship: tosca.relationships.DependsOn
-				occurrences: ["1", "1"]          
+				occurrences: [1, 1]          
 		interfaces:
 			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard
@@ -138,7 +138,7 @@ node_types:
 				default: '~/'
 			enable_audit:
 				type: boolean
-				default: 'false'
+				default: false
 			env:
 				type: map
 				required: false
@@ -186,23 +186,23 @@ node_types:
 			nb_nodes:
 				type: integer
 				description: 'Number of requested nodes if node name is not specified'
-				default: '1'
+				default: 1
 				required: false
 			ppn:
 				type: integer
 				description: 'Number of processes per node'
-				default: '1'
+				default: 1
 			gpus:
 				type: integer
 				description: 'Number of requested GPUs'
-				default: '0'
+				default: 0
 			walltime:
 				type: string
 				description: 'Expected time of execution FORMAT: HH:MM:SS'
 				required: true
 			enable_audit:
 				type: boolean
-				default: 'false'
+				default: false
 			env:
 				type: map
 				required: false
@@ -466,13 +466,13 @@ node_types:
 		properties:
 			monitor_period:
 				type: integer
-				default: "10"
+				default: 10
 			monitor_retries_headroom:
 				type: integer
-				default: "2"
+				default: 2
 			enable_audit:
 				type: boolean
-				default: "false"
+				default: false
 		attributes:
 			job_id: 
 				type: string

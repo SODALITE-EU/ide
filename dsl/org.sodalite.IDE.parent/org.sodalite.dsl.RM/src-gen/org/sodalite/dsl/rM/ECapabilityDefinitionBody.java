@@ -132,47 +132,47 @@ public interface ECapabilityDefinitionBody extends EObject
   EList<EValidSourceType> getValid_source_types();
 
   /**
-   * Returns the value of the '<em><b>Occurrences start</b></em>' attribute.
+   * Returns the value of the '<em><b>Occurrences start</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Occurrences start</em>' attribute.
-   * @see #setOccurrences_start(String)
+   * @return the value of the '<em>Occurrences start</em>' containment reference.
+   * @see #setOccurrences_start(EAlphaNumericValue)
    * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody_Occurrences_start()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getOccurrences_start();
+  EAlphaNumericValue getOccurrences_start();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_start <em>Occurrences start</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_start <em>Occurrences start</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Occurrences start</em>' attribute.
+   * @param value the new value of the '<em>Occurrences start</em>' containment reference.
    * @see #getOccurrences_start()
    * @generated
    */
-  void setOccurrences_start(String value);
+  void setOccurrences_start(EAlphaNumericValue value);
 
   /**
-   * Returns the value of the '<em><b>Occurrences end</b></em>' attribute.
+   * Returns the value of the '<em><b>Occurrences end</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Occurrences end</em>' attribute.
-   * @see #setOccurrences_end(String)
+   * @return the value of the '<em>Occurrences end</em>' containment reference.
+   * @see #setOccurrences_end(EAlphaNumericValue)
    * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody_Occurrences_end()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getOccurrences_end();
+  EAlphaNumericValue getOccurrences_end();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_end <em>Occurrences end</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_end <em>Occurrences end</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Occurrences end</em>' attribute.
+   * @param value the new value of the '<em>Occurrences end</em>' containment reference.
    * @see #getOccurrences_end()
    * @generated
    */
-  void setOccurrences_end(String value);
+  void setOccurrences_end(EAlphaNumericValue value);
 
 } // ECapabilityDefinitionBody

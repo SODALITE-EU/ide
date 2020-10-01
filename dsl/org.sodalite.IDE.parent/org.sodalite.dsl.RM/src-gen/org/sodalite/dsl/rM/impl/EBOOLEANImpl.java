@@ -3,53 +3,56 @@
  */
 package org.sodalite.dsl.rM.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.sodalite.dsl.rM.EAlphaNumericValue;
-import org.sodalite.dsl.rM.ELIST;
+import org.sodalite.dsl.rM.EBOOLEAN;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>ELIST</b></em>'.
+ * An implementation of the model object '<em><b>EBOOLEAN</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.ELISTImpl#getList <em>List</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EBOOLEANImpl#isValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ELISTImpl extends EAssignmentValueImpl implements ELIST
+public class EBOOLEANImpl extends ESingleValueImpl implements EBOOLEAN
 {
   /**
-   * The cached value of the '{@link #getList() <em>List</em>}' containment reference list.
+   * The default value of the '{@link #isValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getList()
+   * @see #isValue()
    * @generated
    * @ordered
    */
-  protected EList<EAlphaNumericValue> list;
+  protected static final boolean VALUE_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isValue() <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isValue()
+   * @generated
+   * @ordered
+   */
+  protected boolean value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ELISTImpl()
+  protected EBOOLEANImpl()
   {
     super();
   }
@@ -62,7 +65,7 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
   @Override
   protected EClass eStaticClass()
   {
-    return RMPackage.Literals.ELIST;
+    return RMPackage.Literals.EBOOLEAN;
   }
 
   /**
@@ -71,13 +74,9 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
    * @generated
    */
   @Override
-  public EList<EAlphaNumericValue> getList()
+  public boolean isValue()
   {
-    if (list == null)
-    {
-      list = new EObjectContainmentEList<EAlphaNumericValue>(EAlphaNumericValue.class, this, RMPackage.ELIST__LIST);
-    }
-    return list;
+    return value;
   }
 
   /**
@@ -86,14 +85,12 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setValue(boolean newValue)
   {
-    switch (featureID)
-    {
-      case RMPackage.ELIST__LIST:
-        return ((InternalEList<?>)getList()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    boolean oldValue = value;
+    value = newValue;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EBOOLEAN__VALUE, oldValue, value));
   }
 
   /**
@@ -106,8 +103,8 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
   {
     switch (featureID)
     {
-      case RMPackage.ELIST__LIST:
-        return getList();
+      case RMPackage.EBOOLEAN__VALUE:
+        return isValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -117,15 +114,13 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RMPackage.ELIST__LIST:
-        getList().clear();
-        getList().addAll((Collection<? extends EAlphaNumericValue>)newValue);
+      case RMPackage.EBOOLEAN__VALUE:
+        setValue((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +136,8 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
   {
     switch (featureID)
     {
-      case RMPackage.ELIST__LIST:
-        getList().clear();
+      case RMPackage.EBOOLEAN__VALUE:
+        setValue(VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +153,27 @@ public class ELISTImpl extends EAssignmentValueImpl implements ELIST
   {
     switch (featureID)
     {
-      case RMPackage.ELIST__LIST:
-        return list != null && !list.isEmpty();
+      case RMPackage.EBOOLEAN__VALUE:
+        return value != VALUE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
 
-} //ELISTImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (value: ");
+    result.append(value);
+    result.append(')');
+    return result.toString();
+  }
+
+} //EBOOLEANImpl

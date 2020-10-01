@@ -14,14 +14,14 @@ node_templates:
 			ports:
 				http_port: 
 					protocol: 'tcp' 
-					port_range_min: '80'
-					port_range_max: '80'
+					port_range_min: 80
+					port_range_max: 80
 					remote_ip_prefix: "0.0.0.0/0"
 				
 				component_ports:
 					protocol: 'tcp' 
-					port_range_min: '8080'
-					port_range_max: '8081'
+					port_range_min: 8080
+					port_range_max: 8081
 					remote_ip_prefix: "0.0.0.0/0"
 
 	snow-vm:
@@ -65,7 +65,7 @@ node_templates:
 		 properties:
 		 	image_name: 'snow-skyline-extractor'
 		 	ports: ['8080:8080']
-		 	exposed_ports: ['8080']
+		 	exposed_ports: [8080]
 		 	volumes: "/tmp/docker:/tmp"
 		 	
 		 
@@ -79,7 +79,7 @@ node_templates:
 		properties:
 			image_name: "snow-skyline-alignment"
 			ports: ["8081:8080", "80:8080"]
-			exposed_ports: ["8080"]
+			exposed_ports: [8080]
 			volumes: "/tmp/docker:/tmp"
 		
 		

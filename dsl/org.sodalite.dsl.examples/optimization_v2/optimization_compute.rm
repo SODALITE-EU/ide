@@ -6,7 +6,7 @@ capability_types:
 				type: integer
 				required: false
 				constraints:
-					greater_or_equal: "1"				
+					greater_or_equal: 1				
 								
 node_types:
 	sodalite.nodes.optimization.Compute:

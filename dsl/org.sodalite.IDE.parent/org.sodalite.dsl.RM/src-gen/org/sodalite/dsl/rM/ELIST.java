@@ -24,15 +24,15 @@ import org.eclipse.emf.common.util.EList;
 public interface ELIST extends EAssignmentValue
 {
   /**
-   * Returns the value of the '<em><b>List</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
+   * Returns the value of the '<em><b>List</b></em>' containment reference list.
+   * The list contents are of type {@link org.sodalite.dsl.rM.EAlphaNumericValue}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>List</em>' attribute list.
+   * @return the value of the '<em>List</em>' containment reference list.
    * @see org.sodalite.dsl.rM.RMPackage#getELIST_List()
-   * @model unique="false"
+   * @model containment="true"
    * @generated
    */
-  EList<String> getList();
+  EList<EAlphaNumericValue> getList();
 
 } // ELIST

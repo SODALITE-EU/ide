@@ -318,7 +318,7 @@ EParameterDefinitionBody:
 	('default:' default=EValueExpression)?);
 
 EValueExpression:
-	ESTRING | EFunction;
+	ESingleValue | EFunction;
 
 EFunction:
 	GetProperty | GetAttribute | GetInput;
@@ -370,7 +370,7 @@ ECapabilityDefinitionBody:
 	attributes=EAttributes
 	END)? &
 	('valid_source_types:' '[' (valid_source_types+=EValidSourceType)? ']')? &
-	('occurrences:' '[' occurrences_start=STRING ',' occurrences_end=STRING ']')?;
+	('occurrences:' '[' occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 
 EValidSourceType:
 	sourceTypes+=ENodeTypeRef (',' sourceType+=ENodeTypeRef)*;
@@ -391,7 +391,7 @@ ERequirementDefinitionBody:
 	('capability:' capability=[ECapabilityType|QUALIFIED_NAME]) &
 	('node:' node=[ENodeType|QUALIFIED_NAME])? &
 	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? &
-	('occurrences:' '[' start=STRING ',' end=STRING ']')?;
+	('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?;
 
 EReqOrCap:
 	ERequirementDefinition | ECapabilityDefinition;
@@ -404,45 +404,65 @@ EConstraint:
 	EMaxLength;
 
 EMaxLength:
-	'max_length:' val=STRING;
+	'max_length:' val=EAlphaNumericValue;
 
 EMinLength:
-	'min_length:' val=STRING;
+	'min_length:' val=EAlphaNumericValue;
 
 ELength:
-	'length:' val=STRING;
+	'length:' val=EAlphaNumericValue;
 
 EValid_Values:
 	'valid_values:' val=ELIST;
 
 ELIST:
-	'['list+=STRING ("," list+=STRING)* ']'
+	'['list+=EAlphaNumericValue ("," list+=EAlphaNumericValue)* ']'
 ;
 
 EInRange:
-	'in_range:' '[' start=STRING "," end=STRING ']';
+	'in_range:' '[' start=EAlphaNumericValue "," end=EAlphaNumericValue ']';
 
 ELessOrEqual:
-	'less_or_equal:' val=STRING;
+	'less_or_equal:' val=EAlphaNumericValue;
 
 ELessThan:
-	'less_than:' val=STRING;
+	'less_than:' val=EAlphaNumericValue;
 
 EGreaterOrEqual:
-	'greater_or_equal:' val=STRING;
+	'greater_or_equal:' val=EAlphaNumericValue;
 
 EGreaterThan:
-	'greater_than:' val=STRING;
+	'greater_than:' val=EAlphaNumericValue;
 
 EEqual:
-	'equal:' val=STRING;
+	'equal:' val=ESingleValue;
 	
 EAssignmentValue:
-	ESTRING | ELIST | EMAP | EFunction
+	ESingleValue | ELIST | EMAP | EFunction
+;
+
+ESingleValue:
+	ESTRING | EBOOLEAN | EFLOAT | ESIGNEDINT 
+;
+
+EAlphaNumericValue:
+	ESTRING | EFLOAT | ESIGNEDINT 
 ;
 
 ESTRING:
-	string = STRING
+	value = STRING
+;
+
+EBOOLEAN:
+	value = BOOLEAN
+;
+
+EFLOAT:
+	value = FLOAT
+;
+
+ESIGNEDINT:
+	value = SIGNEDINT
 ;
 
 EMAP:
@@ -460,6 +480,10 @@ terminal QUALIFIED_NAME: //FIXME convert to data type rule, remove terminal
 
 terminal BOOLEAN returns ecore::EBoolean:
 	'true' | 'false';
+	
+SIGNEDINT returns ecore::EInt: '-'? INT;
+
+FLOAT returns ecore::EFloat: INT? '.' INT;
 
 terminal ENTITY:
 	'SELF' | 'SOURCE' | 'TARGET' | 'HOST';

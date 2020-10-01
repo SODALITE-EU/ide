@@ -4,6 +4,7 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -11,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.ECapabilityType;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.ERelationshipType;
@@ -67,44 +69,24 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
   protected ERelationshipType relationship;
 
   /**
-   * The default value of the '{@link #getStart() <em>Start</em>}' attribute.
+   * The cached value of the '{@link #getStart() <em>Start</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getStart()
    * @generated
    * @ordered
    */
-  protected static final String START_EDEFAULT = null;
+  protected EAlphaNumericValue start;
 
   /**
-   * The cached value of the '{@link #getStart() <em>Start</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStart()
-   * @generated
-   * @ordered
-   */
-  protected String start = START_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getEnd() <em>End</em>}' attribute.
+   * The cached value of the '{@link #getEnd() <em>End</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getEnd()
    * @generated
    * @ordered
    */
-  protected static final String END_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getEnd() <em>End</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEnd()
-   * @generated
-   * @ordered
-   */
-  protected String end = END_EDEFAULT;
+  protected EAlphaNumericValue end;
 
   /**
    * <!-- begin-user-doc -->
@@ -268,7 +250,7 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public String getStart()
+  public EAlphaNumericValue getStart()
   {
     return start;
   }
@@ -278,13 +260,16 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setStart(String newStart)
+  public NotificationChain basicSetStart(EAlphaNumericValue newStart, NotificationChain msgs)
   {
-    String oldStart = start;
+    EAlphaNumericValue oldStart = start;
     start = newStart;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__START, oldStart, start));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__START, oldStart, newStart);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -293,7 +278,29 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public String getEnd()
+  public void setStart(EAlphaNumericValue newStart)
+  {
+    if (newStart != start)
+    {
+      NotificationChain msgs = null;
+      if (start != null)
+        msgs = ((InternalEObject)start).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__START, null, msgs);
+      if (newStart != null)
+        msgs = ((InternalEObject)newStart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__START, null, msgs);
+      msgs = basicSetStart(newStart, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__START, newStart, newStart));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAlphaNumericValue getEnd()
   {
     return end;
   }
@@ -303,13 +310,56 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setEnd(String newEnd)
+  public NotificationChain basicSetEnd(EAlphaNumericValue newEnd, NotificationChain msgs)
   {
-    String oldEnd = end;
+    EAlphaNumericValue oldEnd = end;
     end = newEnd;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__END, oldEnd, end));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__END, oldEnd, newEnd);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setEnd(EAlphaNumericValue newEnd)
+  {
+    if (newEnd != end)
+    {
+      NotificationChain msgs = null;
+      if (end != null)
+        msgs = ((InternalEObject)end).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__END, null, msgs);
+      if (newEnd != null)
+        msgs = ((InternalEObject)newEnd).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__END, null, msgs);
+      msgs = basicSetEnd(newEnd, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__END, newEnd, newEnd));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
+        return basicSetStart(null, msgs);
+      case RMPackage.EREQUIREMENT_DEFINITION_BODY__END:
+        return basicSetEnd(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -359,10 +409,10 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
         setRelationship((ERelationshipType)newValue);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
-        setStart((String)newValue);
+        setStart((EAlphaNumericValue)newValue);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__END:
-        setEnd((String)newValue);
+        setEnd((EAlphaNumericValue)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -388,10 +438,10 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
         setRelationship((ERelationshipType)null);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
-        setStart(START_EDEFAULT);
+        setStart((EAlphaNumericValue)null);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__END:
-        setEnd(END_EDEFAULT);
+        setEnd((EAlphaNumericValue)null);
         return;
     }
     super.eUnset(featureID);
@@ -414,30 +464,11 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP:
         return relationship != null;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
-        return START_EDEFAULT == null ? start != null : !START_EDEFAULT.equals(start);
+        return start != null;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__END:
-        return END_EDEFAULT == null ? end != null : !END_EDEFAULT.equals(end);
+        return end != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (start: ");
-    result.append(start);
-    result.append(", end: ");
-    result.append(end);
-    result.append(')');
-    return result.toString();
   }
 
 } //ERequirementDefinitionBodyImpl

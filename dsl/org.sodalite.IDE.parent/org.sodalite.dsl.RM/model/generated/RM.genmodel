@@ -230,8 +230,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/valid_source_types"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/occurrences_start"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/occurrences_end"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/occurrences_start"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/occurrences_end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EValidSourceType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidSourceType/sourceTypes"/>
@@ -250,8 +250,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/capability"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/node"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/relationship"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERequirementDefinitionBody/start"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERequirementDefinitionBody/end"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/start"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EReqOrCap">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EReqOrCap/name"/>
@@ -261,42 +261,53 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EConstraint"/>
     <genClasses ecoreClass="RM.ecore#//EMaxLength">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EMaxLength/val"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EMaxLength/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EMinLength">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EMinLength/val"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EMinLength/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ELength">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ELength/val"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ELength/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EValid_Values">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValid_Values/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ELIST">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ELIST/list"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ELIST/list"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInRange">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInRange/start"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInRange/end"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInRange/start"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInRange/end"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ELessOrEqual">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ELessOrEqual/val"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ELessOrEqual/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ELessThan">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ELessThan/val"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ELessThan/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EGreaterOrEqual">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EGreaterOrEqual/val"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EGreaterOrEqual/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EGreaterThan">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EGreaterThan/val"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EGreaterThan/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EEqual">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EEqual/val"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EEqual/val"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EAssignmentValue"/>
+    <genClasses ecoreClass="RM.ecore#//ESingleValue"/>
+    <genClasses ecoreClass="RM.ecore#//EAlphaNumericValue"/>
     <genClasses ecoreClass="RM.ecore#//ESTRING">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ESTRING/string"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ESTRING/value"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EBOOLEAN">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EBOOLEAN/value"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EFLOAT">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EFLOAT/value"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ESIGNEDINT">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ESIGNEDINT/value"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EMAP">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EMAP/map"/>

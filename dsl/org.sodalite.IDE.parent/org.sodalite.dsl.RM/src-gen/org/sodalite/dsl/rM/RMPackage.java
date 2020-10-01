@@ -2182,7 +2182,7 @@ public interface RMPackage extends EPackage
   int ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES = 4;
 
   /**
-   * The feature id for the '<em><b>Occurrences start</b></em>' attribute.
+   * The feature id for the '<em><b>Occurrences start</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2191,7 +2191,7 @@ public interface RMPackage extends EPackage
   int ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START = 5;
 
   /**
-   * The feature id for the '<em><b>Occurrences end</b></em>' attribute.
+   * The feature id for the '<em><b>Occurrences end</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2376,7 +2376,7 @@ public interface RMPackage extends EPackage
   int EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP = 2;
 
   /**
-   * The feature id for the '<em><b>Start</b></em>' attribute.
+   * The feature id for the '<em><b>Start</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2385,7 +2385,7 @@ public interface RMPackage extends EPackage
   int EREQUIREMENT_DEFINITION_BODY__START = 3;
 
   /**
-   * The feature id for the '<em><b>End</b></em>' attribute.
+   * The feature id for the '<em><b>End</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2460,7 +2460,7 @@ public interface RMPackage extends EPackage
   int EMAX_LENGTH = 61;
 
   /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2488,7 +2488,7 @@ public interface RMPackage extends EPackage
   int EMIN_LENGTH = 62;
 
   /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2516,7 +2516,7 @@ public interface RMPackage extends EPackage
   int ELENGTH = 63;
 
   /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2591,7 +2591,7 @@ public interface RMPackage extends EPackage
   int ELIST = 65;
 
   /**
-   * The feature id for the '<em><b>List</b></em>' attribute list.
+   * The feature id for the '<em><b>List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2619,7 +2619,7 @@ public interface RMPackage extends EPackage
   int EIN_RANGE = 66;
 
   /**
-   * The feature id for the '<em><b>Start</b></em>' attribute.
+   * The feature id for the '<em><b>Start</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2628,7 +2628,7 @@ public interface RMPackage extends EPackage
   int EIN_RANGE__START = ECONSTRAINT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>End</b></em>' attribute.
+   * The feature id for the '<em><b>End</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2656,7 +2656,7 @@ public interface RMPackage extends EPackage
   int ELESS_OR_EQUAL = 67;
 
   /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2684,7 +2684,7 @@ public interface RMPackage extends EPackage
   int ELESS_THAN = 68;
 
   /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2712,7 +2712,7 @@ public interface RMPackage extends EPackage
   int EGREATER_OR_EQUAL = 69;
 
   /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2740,7 +2740,7 @@ public interface RMPackage extends EPackage
   int EGREATER_THAN = 70;
 
   /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2768,7 +2768,7 @@ public interface RMPackage extends EPackage
   int EEQUAL = 71;
 
   /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2786,6 +2786,44 @@ public interface RMPackage extends EPackage
   int EEQUAL_FEATURE_COUNT = ECONSTRAINT_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ESingleValueImpl <em>ESingle Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.ESingleValueImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESingleValue()
+   * @generated
+   */
+  int ESINGLE_VALUE = 73;
+
+  /**
+   * The number of structural features of the '<em>ESingle Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESINGLE_VALUE_FEATURE_COUNT = EVALUE_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EAlphaNumericValueImpl <em>EAlpha Numeric Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EAlphaNumericValueImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAlphaNumericValue()
+   * @generated
+   */
+  int EALPHA_NUMERIC_VALUE = 74;
+
+  /**
+   * The number of structural features of the '<em>EAlpha Numeric Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EALPHA_NUMERIC_VALUE_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ESTRINGImpl <em>ESTRING</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2793,16 +2831,16 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESTRING()
    * @generated
    */
-  int ESTRING = 73;
+  int ESTRING = 75;
 
   /**
-   * The feature id for the '<em><b>String</b></em>' attribute.
+   * The feature id for the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ESTRING__STRING = EVALUE_EXPRESSION_FEATURE_COUNT + 0;
+  int ESTRING__VALUE = ESINGLE_VALUE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>ESTRING</em>' class.
@@ -2811,7 +2849,91 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ESTRING_FEATURE_COUNT = EVALUE_EXPRESSION_FEATURE_COUNT + 1;
+  int ESTRING_FEATURE_COUNT = ESINGLE_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EBOOLEANImpl <em>EBOOLEAN</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EBOOLEANImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEBOOLEAN()
+   * @generated
+   */
+  int EBOOLEAN = 76;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBOOLEAN__VALUE = ESINGLE_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>EBOOLEAN</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBOOLEAN_FEATURE_COUNT = ESINGLE_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EFLOATImpl <em>EFLOAT</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EFLOATImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEFLOAT()
+   * @generated
+   */
+  int EFLOAT = 77;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFLOAT__VALUE = ESINGLE_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>EFLOAT</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFLOAT_FEATURE_COUNT = ESINGLE_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ESIGNEDINTImpl <em>ESIGNEDINT</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.ESIGNEDINTImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESIGNEDINT()
+   * @generated
+   */
+  int ESIGNEDINT = 78;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESIGNEDINT__VALUE = ESINGLE_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>ESIGNEDINT</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESIGNEDINT_FEATURE_COUNT = ESINGLE_VALUE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EMAPImpl <em>EMAP</em>}' class.
@@ -2821,7 +2943,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMAP()
    * @generated
    */
-  int EMAP = 74;
+  int EMAP = 79;
 
   /**
    * The feature id for the '<em><b>Map</b></em>' containment reference list.
@@ -2849,7 +2971,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMapEntry()
    * @generated
    */
-  int EMAP_ENTRY = 75;
+  int EMAP_ENTRY = 80;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -4741,26 +4863,26 @@ public interface RMPackage extends EPackage
   EReference getECapabilityDefinitionBody_Valid_source_types();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_start <em>Occurrences start</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_start <em>Occurrences start</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Occurrences start</em>'.
+   * @return the meta object for the containment reference '<em>Occurrences start</em>'.
    * @see org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_start()
    * @see #getECapabilityDefinitionBody()
    * @generated
    */
-  EAttribute getECapabilityDefinitionBody_Occurrences_start();
+  EReference getECapabilityDefinitionBody_Occurrences_start();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_end <em>Occurrences end</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_end <em>Occurrences end</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Occurrences end</em>'.
+   * @return the meta object for the containment reference '<em>Occurrences end</em>'.
    * @see org.sodalite.dsl.rM.ECapabilityDefinitionBody#getOccurrences_end()
    * @see #getECapabilityDefinitionBody()
    * @generated
    */
-  EAttribute getECapabilityDefinitionBody_Occurrences_end();
+  EReference getECapabilityDefinitionBody_Occurrences_end();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EValidSourceType <em>EValid Source Type</em>}'.
@@ -4901,26 +5023,26 @@ public interface RMPackage extends EPackage
   EReference getERequirementDefinitionBody_Relationship();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getStart <em>Start</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getStart <em>Start</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Start</em>'.
+   * @return the meta object for the containment reference '<em>Start</em>'.
    * @see org.sodalite.dsl.rM.ERequirementDefinitionBody#getStart()
    * @see #getERequirementDefinitionBody()
    * @generated
    */
-  EAttribute getERequirementDefinitionBody_Start();
+  EReference getERequirementDefinitionBody_Start();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getEnd <em>End</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getEnd <em>End</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>End</em>'.
+   * @return the meta object for the containment reference '<em>End</em>'.
    * @see org.sodalite.dsl.rM.ERequirementDefinitionBody#getEnd()
    * @see #getERequirementDefinitionBody()
    * @generated
    */
-  EAttribute getERequirementDefinitionBody_End();
+  EReference getERequirementDefinitionBody_End();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EReqOrCap <em>EReq Or Cap</em>}'.
@@ -4985,15 +5107,15 @@ public interface RMPackage extends EPackage
   EClass getEMaxLength();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EMaxLength#getVal <em>Val</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EMaxLength#getVal <em>Val</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Val</em>'.
+   * @return the meta object for the containment reference '<em>Val</em>'.
    * @see org.sodalite.dsl.rM.EMaxLength#getVal()
    * @see #getEMaxLength()
    * @generated
    */
-  EAttribute getEMaxLength_Val();
+  EReference getEMaxLength_Val();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EMinLength <em>EMin Length</em>}'.
@@ -5006,15 +5128,15 @@ public interface RMPackage extends EPackage
   EClass getEMinLength();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EMinLength#getVal <em>Val</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EMinLength#getVal <em>Val</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Val</em>'.
+   * @return the meta object for the containment reference '<em>Val</em>'.
    * @see org.sodalite.dsl.rM.EMinLength#getVal()
    * @see #getEMinLength()
    * @generated
    */
-  EAttribute getEMinLength_Val();
+  EReference getEMinLength_Val();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ELength <em>ELength</em>}'.
@@ -5027,15 +5149,15 @@ public interface RMPackage extends EPackage
   EClass getELength();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ELength#getVal <em>Val</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ELength#getVal <em>Val</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Val</em>'.
+   * @return the meta object for the containment reference '<em>Val</em>'.
    * @see org.sodalite.dsl.rM.ELength#getVal()
    * @see #getELength()
    * @generated
    */
-  EAttribute getELength_Val();
+  EReference getELength_Val();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EValid_Values <em>EValid Values</em>}'.
@@ -5069,15 +5191,15 @@ public interface RMPackage extends EPackage
   EClass getELIST();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.dsl.rM.ELIST#getList <em>List</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.ELIST#getList <em>List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>List</em>'.
+   * @return the meta object for the containment reference list '<em>List</em>'.
    * @see org.sodalite.dsl.rM.ELIST#getList()
    * @see #getELIST()
    * @generated
    */
-  EAttribute getELIST_List();
+  EReference getELIST_List();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EInRange <em>EIn Range</em>}'.
@@ -5090,26 +5212,26 @@ public interface RMPackage extends EPackage
   EClass getEInRange();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EInRange#getStart <em>Start</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EInRange#getStart <em>Start</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Start</em>'.
+   * @return the meta object for the containment reference '<em>Start</em>'.
    * @see org.sodalite.dsl.rM.EInRange#getStart()
    * @see #getEInRange()
    * @generated
    */
-  EAttribute getEInRange_Start();
+  EReference getEInRange_Start();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EInRange#getEnd <em>End</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EInRange#getEnd <em>End</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>End</em>'.
+   * @return the meta object for the containment reference '<em>End</em>'.
    * @see org.sodalite.dsl.rM.EInRange#getEnd()
    * @see #getEInRange()
    * @generated
    */
-  EAttribute getEInRange_End();
+  EReference getEInRange_End();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ELessOrEqual <em>ELess Or Equal</em>}'.
@@ -5122,15 +5244,15 @@ public interface RMPackage extends EPackage
   EClass getELessOrEqual();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ELessOrEqual#getVal <em>Val</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ELessOrEqual#getVal <em>Val</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Val</em>'.
+   * @return the meta object for the containment reference '<em>Val</em>'.
    * @see org.sodalite.dsl.rM.ELessOrEqual#getVal()
    * @see #getELessOrEqual()
    * @generated
    */
-  EAttribute getELessOrEqual_Val();
+  EReference getELessOrEqual_Val();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ELessThan <em>ELess Than</em>}'.
@@ -5143,15 +5265,15 @@ public interface RMPackage extends EPackage
   EClass getELessThan();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ELessThan#getVal <em>Val</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ELessThan#getVal <em>Val</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Val</em>'.
+   * @return the meta object for the containment reference '<em>Val</em>'.
    * @see org.sodalite.dsl.rM.ELessThan#getVal()
    * @see #getELessThan()
    * @generated
    */
-  EAttribute getELessThan_Val();
+  EReference getELessThan_Val();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EGreaterOrEqual <em>EGreater Or Equal</em>}'.
@@ -5164,15 +5286,15 @@ public interface RMPackage extends EPackage
   EClass getEGreaterOrEqual();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EGreaterOrEqual#getVal <em>Val</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EGreaterOrEqual#getVal <em>Val</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Val</em>'.
+   * @return the meta object for the containment reference '<em>Val</em>'.
    * @see org.sodalite.dsl.rM.EGreaterOrEqual#getVal()
    * @see #getEGreaterOrEqual()
    * @generated
    */
-  EAttribute getEGreaterOrEqual_Val();
+  EReference getEGreaterOrEqual_Val();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EGreaterThan <em>EGreater Than</em>}'.
@@ -5185,15 +5307,15 @@ public interface RMPackage extends EPackage
   EClass getEGreaterThan();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EGreaterThan#getVal <em>Val</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EGreaterThan#getVal <em>Val</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Val</em>'.
+   * @return the meta object for the containment reference '<em>Val</em>'.
    * @see org.sodalite.dsl.rM.EGreaterThan#getVal()
    * @see #getEGreaterThan()
    * @generated
    */
-  EAttribute getEGreaterThan_Val();
+  EReference getEGreaterThan_Val();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EEqual <em>EEqual</em>}'.
@@ -5206,15 +5328,15 @@ public interface RMPackage extends EPackage
   EClass getEEqual();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EEqual#getVal <em>Val</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EEqual#getVal <em>Val</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Val</em>'.
+   * @return the meta object for the containment reference '<em>Val</em>'.
    * @see org.sodalite.dsl.rM.EEqual#getVal()
    * @see #getEEqual()
    * @generated
    */
-  EAttribute getEEqual_Val();
+  EReference getEEqual_Val();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EAssignmentValue <em>EAssignment Value</em>}'.
@@ -5227,6 +5349,26 @@ public interface RMPackage extends EPackage
   EClass getEAssignmentValue();
 
   /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.ESingleValue <em>ESingle Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ESingle Value</em>'.
+   * @see org.sodalite.dsl.rM.ESingleValue
+   * @generated
+   */
+  EClass getESingleValue();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EAlphaNumericValue <em>EAlpha Numeric Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EAlpha Numeric Value</em>'.
+   * @see org.sodalite.dsl.rM.EAlphaNumericValue
+   * @generated
+   */
+  EClass getEAlphaNumericValue();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ESTRING <em>ESTRING</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5237,15 +5379,78 @@ public interface RMPackage extends EPackage
   EClass getESTRING();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ESTRING#getString <em>String</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ESTRING#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>String</em>'.
-   * @see org.sodalite.dsl.rM.ESTRING#getString()
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.sodalite.dsl.rM.ESTRING#getValue()
    * @see #getESTRING()
    * @generated
    */
-  EAttribute getESTRING_String();
+  EAttribute getESTRING_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EBOOLEAN <em>EBOOLEAN</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EBOOLEAN</em>'.
+   * @see org.sodalite.dsl.rM.EBOOLEAN
+   * @generated
+   */
+  EClass getEBOOLEAN();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EBOOLEAN#isValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.sodalite.dsl.rM.EBOOLEAN#isValue()
+   * @see #getEBOOLEAN()
+   * @generated
+   */
+  EAttribute getEBOOLEAN_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EFLOAT <em>EFLOAT</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EFLOAT</em>'.
+   * @see org.sodalite.dsl.rM.EFLOAT
+   * @generated
+   */
+  EClass getEFLOAT();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EFLOAT#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.sodalite.dsl.rM.EFLOAT#getValue()
+   * @see #getEFLOAT()
+   * @generated
+   */
+  EAttribute getEFLOAT_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.ESIGNEDINT <em>ESIGNEDINT</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ESIGNEDINT</em>'.
+   * @see org.sodalite.dsl.rM.ESIGNEDINT
+   * @generated
+   */
+  EClass getESIGNEDINT();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ESIGNEDINT#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.sodalite.dsl.rM.ESIGNEDINT#getValue()
+   * @see #getESIGNEDINT()
+   * @generated
+   */
+  EAttribute getESIGNEDINT_Value();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EMAP <em>EMAP</em>}'.
@@ -6822,20 +7027,20 @@ public interface RMPackage extends EPackage
     EReference ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES = eINSTANCE.getECapabilityDefinitionBody_Valid_source_types();
 
     /**
-     * The meta object literal for the '<em><b>Occurrences start</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Occurrences start</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START = eINSTANCE.getECapabilityDefinitionBody_Occurrences_start();
+    EReference ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START = eINSTANCE.getECapabilityDefinitionBody_Occurrences_start();
 
     /**
-     * The meta object literal for the '<em><b>Occurrences end</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Occurrences end</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END = eINSTANCE.getECapabilityDefinitionBody_Occurrences_end();
+    EReference ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END = eINSTANCE.getECapabilityDefinitionBody_Occurrences_end();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EValidSourceTypeImpl <em>EValid Source Type</em>}' class.
@@ -6952,20 +7157,20 @@ public interface RMPackage extends EPackage
     EReference EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP = eINSTANCE.getERequirementDefinitionBody_Relationship();
 
     /**
-     * The meta object literal for the '<em><b>Start</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Start</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EREQUIREMENT_DEFINITION_BODY__START = eINSTANCE.getERequirementDefinitionBody_Start();
+    EReference EREQUIREMENT_DEFINITION_BODY__START = eINSTANCE.getERequirementDefinitionBody_Start();
 
     /**
-     * The meta object literal for the '<em><b>End</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>End</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EREQUIREMENT_DEFINITION_BODY__END = eINSTANCE.getERequirementDefinitionBody_End();
+    EReference EREQUIREMENT_DEFINITION_BODY__END = eINSTANCE.getERequirementDefinitionBody_End();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EReqOrCapImpl <em>EReq Or Cap</em>}' class.
@@ -7024,12 +7229,12 @@ public interface RMPackage extends EPackage
     EClass EMAX_LENGTH = eINSTANCE.getEMaxLength();
 
     /**
-     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EMAX_LENGTH__VAL = eINSTANCE.getEMaxLength_Val();
+    EReference EMAX_LENGTH__VAL = eINSTANCE.getEMaxLength_Val();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EMinLengthImpl <em>EMin Length</em>}' class.
@@ -7042,12 +7247,12 @@ public interface RMPackage extends EPackage
     EClass EMIN_LENGTH = eINSTANCE.getEMinLength();
 
     /**
-     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EMIN_LENGTH__VAL = eINSTANCE.getEMinLength_Val();
+    EReference EMIN_LENGTH__VAL = eINSTANCE.getEMinLength_Val();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ELengthImpl <em>ELength</em>}' class.
@@ -7060,12 +7265,12 @@ public interface RMPackage extends EPackage
     EClass ELENGTH = eINSTANCE.getELength();
 
     /**
-     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ELENGTH__VAL = eINSTANCE.getELength_Val();
+    EReference ELENGTH__VAL = eINSTANCE.getELength_Val();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EValid_ValuesImpl <em>EValid Values</em>}' class.
@@ -7096,12 +7301,12 @@ public interface RMPackage extends EPackage
     EClass ELIST = eINSTANCE.getELIST();
 
     /**
-     * The meta object literal for the '<em><b>List</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ELIST__LIST = eINSTANCE.getELIST_List();
+    EReference ELIST__LIST = eINSTANCE.getELIST_List();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EInRangeImpl <em>EIn Range</em>}' class.
@@ -7114,20 +7319,20 @@ public interface RMPackage extends EPackage
     EClass EIN_RANGE = eINSTANCE.getEInRange();
 
     /**
-     * The meta object literal for the '<em><b>Start</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Start</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EIN_RANGE__START = eINSTANCE.getEInRange_Start();
+    EReference EIN_RANGE__START = eINSTANCE.getEInRange_Start();
 
     /**
-     * The meta object literal for the '<em><b>End</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>End</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EIN_RANGE__END = eINSTANCE.getEInRange_End();
+    EReference EIN_RANGE__END = eINSTANCE.getEInRange_End();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ELessOrEqualImpl <em>ELess Or Equal</em>}' class.
@@ -7140,12 +7345,12 @@ public interface RMPackage extends EPackage
     EClass ELESS_OR_EQUAL = eINSTANCE.getELessOrEqual();
 
     /**
-     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ELESS_OR_EQUAL__VAL = eINSTANCE.getELessOrEqual_Val();
+    EReference ELESS_OR_EQUAL__VAL = eINSTANCE.getELessOrEqual_Val();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ELessThanImpl <em>ELess Than</em>}' class.
@@ -7158,12 +7363,12 @@ public interface RMPackage extends EPackage
     EClass ELESS_THAN = eINSTANCE.getELessThan();
 
     /**
-     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ELESS_THAN__VAL = eINSTANCE.getELessThan_Val();
+    EReference ELESS_THAN__VAL = eINSTANCE.getELessThan_Val();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EGreaterOrEqualImpl <em>EGreater Or Equal</em>}' class.
@@ -7176,12 +7381,12 @@ public interface RMPackage extends EPackage
     EClass EGREATER_OR_EQUAL = eINSTANCE.getEGreaterOrEqual();
 
     /**
-     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EGREATER_OR_EQUAL__VAL = eINSTANCE.getEGreaterOrEqual_Val();
+    EReference EGREATER_OR_EQUAL__VAL = eINSTANCE.getEGreaterOrEqual_Val();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EGreaterThanImpl <em>EGreater Than</em>}' class.
@@ -7194,12 +7399,12 @@ public interface RMPackage extends EPackage
     EClass EGREATER_THAN = eINSTANCE.getEGreaterThan();
 
     /**
-     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EGREATER_THAN__VAL = eINSTANCE.getEGreaterThan_Val();
+    EReference EGREATER_THAN__VAL = eINSTANCE.getEGreaterThan_Val();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EEqualImpl <em>EEqual</em>}' class.
@@ -7212,12 +7417,12 @@ public interface RMPackage extends EPackage
     EClass EEQUAL = eINSTANCE.getEEqual();
 
     /**
-     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EEQUAL__VAL = eINSTANCE.getEEqual_Val();
+    EReference EEQUAL__VAL = eINSTANCE.getEEqual_Val();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EAssignmentValueImpl <em>EAssignment Value</em>}' class.
@@ -7230,6 +7435,26 @@ public interface RMPackage extends EPackage
     EClass EASSIGNMENT_VALUE = eINSTANCE.getEAssignmentValue();
 
     /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ESingleValueImpl <em>ESingle Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.ESingleValueImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESingleValue()
+     * @generated
+     */
+    EClass ESINGLE_VALUE = eINSTANCE.getESingleValue();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EAlphaNumericValueImpl <em>EAlpha Numeric Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EAlphaNumericValueImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAlphaNumericValue()
+     * @generated
+     */
+    EClass EALPHA_NUMERIC_VALUE = eINSTANCE.getEAlphaNumericValue();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ESTRINGImpl <em>ESTRING</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7240,12 +7465,66 @@ public interface RMPackage extends EPackage
     EClass ESTRING = eINSTANCE.getESTRING();
 
     /**
-     * The meta object literal for the '<em><b>String</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ESTRING__STRING = eINSTANCE.getESTRING_String();
+    EAttribute ESTRING__VALUE = eINSTANCE.getESTRING_Value();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EBOOLEANImpl <em>EBOOLEAN</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EBOOLEANImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEBOOLEAN()
+     * @generated
+     */
+    EClass EBOOLEAN = eINSTANCE.getEBOOLEAN();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EBOOLEAN__VALUE = eINSTANCE.getEBOOLEAN_Value();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EFLOATImpl <em>EFLOAT</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EFLOATImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEFLOAT()
+     * @generated
+     */
+    EClass EFLOAT = eINSTANCE.getEFLOAT();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EFLOAT__VALUE = eINSTANCE.getEFLOAT_Value();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ESIGNEDINTImpl <em>ESIGNEDINT</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.ESIGNEDINTImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESIGNEDINT()
+     * @generated
+     */
+    EClass ESIGNEDINT = eINSTANCE.getESIGNEDINT();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESIGNEDINT__VALUE = eINSTANCE.getESIGNEDINT_Value();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EMAPImpl <em>EMAP</em>}' class.

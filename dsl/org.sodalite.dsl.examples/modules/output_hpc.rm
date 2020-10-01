@@ -9,31 +9,31 @@ node_types:
 			gpus:
 				type: integer
 				required: true
-				default: "1"
+				default: 1
 			total_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_cores:
 				type: integer
 				required: true
-				default: "40"  
+				default: 40  
 			available_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_cores:
 				type: integer
 				required: true
-				default: "40"
+				default: 40
 			operating_system:
 				type: string
 				required: false
@@ -41,7 +41,7 @@ node_types:
 			available_memory_kb:
 				type: integer
 				required: false
-				default: "126693628"
+				default: 126693628
 				
 	sodalite.nodes.hpc.resources.node-2.novalocal:
 		derived_from: tosca.nodes.Compute
@@ -53,31 +53,31 @@ node_types:
 			gpus:
 				type: integer
 				required: true
-				default: "1"
+				default: 1
 			total_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_cores:
 				type: integer
 				required: true
-				default: "40"  
+				default: 40  
 			available_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_cores:
 				type: integer
 				required: true
-				default: "40"
+				default: 40
 			operating_system:
 				type: string
 				required: false
@@ -85,7 +85,7 @@ node_types:
 			available_memory_kb:
 				type: integer
 				required: false
-				default: "126754384"
+				default: 126754384
 				
 	sodalite.nodes.hpc.resources.cloud7:
 		derived_from: tosca.nodes.Compute
@@ -97,31 +97,31 @@ node_types:
 			gpus:
 				type: integer
 				required: true
-				default: "1"
+				default: 1
 			total_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_cores:
 				type: integer
 				required: true
-				default: "40"  
+				default: 40  
 			available_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_cores:
 				type: integer
 				required: true
-				default: "40"
+				default: 40
 			operating_system:
 				type: string
 				required: false
@@ -129,7 +129,7 @@ node_types:
 			available_memory_kb:
 				type: integer
 				required: false
-				default: "130850912"				
+				default: 130850912				
 				
 	sodalite.nodes.hpc.resources.cloud8:
 		derived_from: tosca.nodes.Compute
@@ -141,31 +141,31 @@ node_types:
 			gpus:
 				type: integer
 				required: true
-				default: "1"
+				default: 1
 			total_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_cores:
 				type: integer
 				required: true
-				default: "40"  
+				default: 40  
 			available_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_cores:
 				type: integer
 				required: true
-				default: "40"
+				default: 40
 			operating_system:
 				type: string
 				required: false
@@ -173,7 +173,7 @@ node_types:
 			available_memory_kb:
 				type: integer
 				required: false
-				default: "132583840" 				
+				default: 132583840 				
 				
 	sodalite.nodes.hpc.resources.node-6.novalocal:
 		derived_from: tosca.nodes.Compute
@@ -185,31 +185,31 @@ node_types:
 			gpus:
 				type: integer
 				required: true
-				default: "1"
+				default: 1
 			total_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			total_cores:
 				type: integer
 				required: true
-				default: "40"  
+				default: 40  
 			available_sockets:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_numa_nodes:
 				type: integer
 				required: true
-				default: "2"
+				default: 2
 			available_cores:
 				type: integer
 				required: true
-				default: "40"
+				default: 40
 			operating_system:
 				type: string
 				required: false
@@ -217,7 +217,7 @@ node_types:
 			available_memory_kb:
 				type: integer
 				required: false
-				default: "128471284"		
+				default: 128471284		
 				
 				
 				

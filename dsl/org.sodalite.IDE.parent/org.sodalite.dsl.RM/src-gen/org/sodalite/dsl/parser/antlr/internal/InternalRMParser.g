@@ -4465,11 +4465,11 @@ ruleEValueExpression returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getEValueExpressionAccess().getESTRINGParserRuleCall_0());
+			newCompositeNode(grammarAccess.getEValueExpressionAccess().getESingleValueParserRuleCall_0());
 		}
-		this_ESTRING_0=ruleESTRING
+		this_ESingleValue_0=ruleESingleValue
 		{
-			$current = $this_ESTRING_0.current;
+			$current = $this_ESingleValue_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -5244,19 +5244,20 @@ ruleECapabilityDefinitionBody returns [EObject current=null]
 							}
 							(
 								(
-									lv_occurrences_start_19_0=RULE_STRING
 									{
-										newLeafNode(lv_occurrences_start_19_0, grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startSTRINGTerminalRuleCall_5_2_0());
+										newCompositeNode(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0());
 									}
+									lv_occurrences_start_19_0=ruleEAlphaNumericValue
 									{
 										if ($current==null) {
-											$current = createModelElement(grammarAccess.getECapabilityDefinitionBodyRule());
+											$current = createModelElementForParent(grammarAccess.getECapabilityDefinitionBodyRule());
 										}
-										setWithLastConsumed(
+										set(
 											$current,
 											"occurrences_start",
 											lv_occurrences_start_19_0,
-											"org.eclipse.xtext.common.Terminals.STRING");
+											"org.sodalite.dsl.RM.EAlphaNumericValue");
+										afterParserOrEnumRuleCall();
 									}
 								)
 							)
@@ -5266,19 +5267,20 @@ ruleECapabilityDefinitionBody returns [EObject current=null]
 							}
 							(
 								(
-									lv_occurrences_end_21_0=RULE_STRING
 									{
-										newLeafNode(lv_occurrences_end_21_0, grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endSTRINGTerminalRuleCall_5_4_0());
+										newCompositeNode(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0());
 									}
+									lv_occurrences_end_21_0=ruleEAlphaNumericValue
 									{
 										if ($current==null) {
-											$current = createModelElement(grammarAccess.getECapabilityDefinitionBodyRule());
+											$current = createModelElementForParent(grammarAccess.getECapabilityDefinitionBodyRule());
 										}
-										setWithLastConsumed(
+										set(
 											$current,
 											"occurrences_end",
 											lv_occurrences_end_21_0,
-											"org.eclipse.xtext.common.Terminals.STRING");
+											"org.sodalite.dsl.RM.EAlphaNumericValue");
+										afterParserOrEnumRuleCall();
 									}
 								)
 							)
@@ -5629,19 +5631,20 @@ ruleERequirementDefinitionBody returns [EObject current=null]
 							}
 							(
 								(
-									lv_start_9_0=RULE_STRING
 									{
-										newLeafNode(lv_start_9_0, grammarAccess.getERequirementDefinitionBodyAccess().getStartSTRINGTerminalRuleCall_3_2_0());
+										newCompositeNode(grammarAccess.getERequirementDefinitionBodyAccess().getStartEAlphaNumericValueParserRuleCall_3_2_0());
 									}
+									lv_start_9_0=ruleEAlphaNumericValue
 									{
 										if ($current==null) {
-											$current = createModelElement(grammarAccess.getERequirementDefinitionBodyRule());
+											$current = createModelElementForParent(grammarAccess.getERequirementDefinitionBodyRule());
 										}
-										setWithLastConsumed(
+										set(
 											$current,
 											"start",
 											lv_start_9_0,
-											"org.eclipse.xtext.common.Terminals.STRING");
+											"org.sodalite.dsl.RM.EAlphaNumericValue");
+										afterParserOrEnumRuleCall();
 									}
 								)
 							)
@@ -5651,19 +5654,20 @@ ruleERequirementDefinitionBody returns [EObject current=null]
 							}
 							(
 								(
-									lv_end_11_0=RULE_STRING
 									{
-										newLeafNode(lv_end_11_0, grammarAccess.getERequirementDefinitionBodyAccess().getEndSTRINGTerminalRuleCall_3_4_0());
+										newCompositeNode(grammarAccess.getERequirementDefinitionBodyAccess().getEndEAlphaNumericValueParserRuleCall_3_4_0());
 									}
+									lv_end_11_0=ruleEAlphaNumericValue
 									{
 										if ($current==null) {
-											$current = createModelElement(grammarAccess.getERequirementDefinitionBodyRule());
+											$current = createModelElementForParent(grammarAccess.getERequirementDefinitionBodyRule());
 										}
-										setWithLastConsumed(
+										set(
 											$current,
 											"end",
 											lv_end_11_0,
-											"org.eclipse.xtext.common.Terminals.STRING");
+											"org.sodalite.dsl.RM.EAlphaNumericValue");
+										afterParserOrEnumRuleCall();
 									}
 								)
 							)
@@ -5862,19 +5866,20 @@ ruleEMaxLength returns [EObject current=null]
 		}
 		(
 			(
-				lv_val_1_0=RULE_STRING
 				{
-					newLeafNode(lv_val_1_0, grammarAccess.getEMaxLengthAccess().getValSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getEMaxLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0());
 				}
+				lv_val_1_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEMaxLengthRule());
+						$current = createModelElementForParent(grammarAccess.getEMaxLengthRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"val",
 						lv_val_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -5903,19 +5908,20 @@ ruleEMinLength returns [EObject current=null]
 		}
 		(
 			(
-				lv_val_1_0=RULE_STRING
 				{
-					newLeafNode(lv_val_1_0, grammarAccess.getEMinLengthAccess().getValSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getEMinLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0());
 				}
+				lv_val_1_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEMinLengthRule());
+						$current = createModelElementForParent(grammarAccess.getEMinLengthRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"val",
 						lv_val_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -5944,19 +5950,20 @@ ruleELength returns [EObject current=null]
 		}
 		(
 			(
-				lv_val_1_0=RULE_STRING
 				{
-					newLeafNode(lv_val_1_0, grammarAccess.getELengthAccess().getValSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getELengthAccess().getValEAlphaNumericValueParserRuleCall_1_0());
 				}
+				lv_val_1_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getELengthRule());
+						$current = createModelElementForParent(grammarAccess.getELengthRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"val",
 						lv_val_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6027,19 +6034,20 @@ ruleELIST returns [EObject current=null]
 		}
 		(
 			(
-				lv_list_1_0=RULE_STRING
 				{
-					newLeafNode(lv_list_1_0, grammarAccess.getELISTAccess().getListSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_1_0());
 				}
+				lv_list_1_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getELISTRule());
+						$current = createModelElementForParent(grammarAccess.getELISTRule());
 					}
-					addWithLastConsumed(
+					add(
 						$current,
 						"list",
 						lv_list_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6050,19 +6058,20 @@ ruleELIST returns [EObject current=null]
 			}
 			(
 				(
-					lv_list_3_0=RULE_STRING
 					{
-						newLeafNode(lv_list_3_0, grammarAccess.getELISTAccess().getListSTRINGTerminalRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_1_0());
 					}
+					lv_list_3_0=ruleEAlphaNumericValue
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getELISTRule());
+							$current = createModelElementForParent(grammarAccess.getELISTRule());
 						}
-						addWithLastConsumed(
+						add(
 							$current,
 							"list",
 							lv_list_3_0,
-							"org.eclipse.xtext.common.Terminals.STRING");
+							"org.sodalite.dsl.RM.EAlphaNumericValue");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -6100,19 +6109,20 @@ ruleEInRange returns [EObject current=null]
 		}
 		(
 			(
-				lv_start_2_0=RULE_STRING
 				{
-					newLeafNode(lv_start_2_0, grammarAccess.getEInRangeAccess().getStartSTRINGTerminalRuleCall_2_0());
+					newCompositeNode(grammarAccess.getEInRangeAccess().getStartEAlphaNumericValueParserRuleCall_2_0());
 				}
+				lv_start_2_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEInRangeRule());
+						$current = createModelElementForParent(grammarAccess.getEInRangeRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"start",
 						lv_start_2_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6122,19 +6132,20 @@ ruleEInRange returns [EObject current=null]
 		}
 		(
 			(
-				lv_end_4_0=RULE_STRING
 				{
-					newLeafNode(lv_end_4_0, grammarAccess.getEInRangeAccess().getEndSTRINGTerminalRuleCall_4_0());
+					newCompositeNode(grammarAccess.getEInRangeAccess().getEndEAlphaNumericValueParserRuleCall_4_0());
 				}
+				lv_end_4_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEInRangeRule());
+						$current = createModelElementForParent(grammarAccess.getEInRangeRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"end",
 						lv_end_4_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6167,19 +6178,20 @@ ruleELessOrEqual returns [EObject current=null]
 		}
 		(
 			(
-				lv_val_1_0=RULE_STRING
 				{
-					newLeafNode(lv_val_1_0, grammarAccess.getELessOrEqualAccess().getValSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getELessOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0());
 				}
+				lv_val_1_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getELessOrEqualRule());
+						$current = createModelElementForParent(grammarAccess.getELessOrEqualRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"val",
 						lv_val_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6208,19 +6220,20 @@ ruleELessThan returns [EObject current=null]
 		}
 		(
 			(
-				lv_val_1_0=RULE_STRING
 				{
-					newLeafNode(lv_val_1_0, grammarAccess.getELessThanAccess().getValSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getELessThanAccess().getValEAlphaNumericValueParserRuleCall_1_0());
 				}
+				lv_val_1_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getELessThanRule());
+						$current = createModelElementForParent(grammarAccess.getELessThanRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"val",
 						lv_val_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6249,19 +6262,20 @@ ruleEGreaterOrEqual returns [EObject current=null]
 		}
 		(
 			(
-				lv_val_1_0=RULE_STRING
 				{
-					newLeafNode(lv_val_1_0, grammarAccess.getEGreaterOrEqualAccess().getValSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getEGreaterOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0());
 				}
+				lv_val_1_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEGreaterOrEqualRule());
+						$current = createModelElementForParent(grammarAccess.getEGreaterOrEqualRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"val",
 						lv_val_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6290,19 +6304,20 @@ ruleEGreaterThan returns [EObject current=null]
 		}
 		(
 			(
-				lv_val_1_0=RULE_STRING
 				{
-					newLeafNode(lv_val_1_0, grammarAccess.getEGreaterThanAccess().getValSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getEGreaterThanAccess().getValEAlphaNumericValueParserRuleCall_1_0());
 				}
+				lv_val_1_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEGreaterThanRule());
+						$current = createModelElementForParent(grammarAccess.getEGreaterThanRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"val",
 						lv_val_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.EAlphaNumericValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6331,19 +6346,20 @@ ruleEEqual returns [EObject current=null]
 		}
 		(
 			(
-				lv_val_1_0=RULE_STRING
 				{
-					newLeafNode(lv_val_1_0, grammarAccess.getEEqualAccess().getValSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getEEqualAccess().getValESingleValueParserRuleCall_1_0());
 				}
+				lv_val_1_0=ruleESingleValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEEqualRule());
+						$current = createModelElementForParent(grammarAccess.getEEqualRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"val",
 						lv_val_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"org.sodalite.dsl.RM.ESingleValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -6367,11 +6383,11 @@ ruleEAssignmentValue returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getESTRINGParserRuleCall_0());
+			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getESingleValueParserRuleCall_0());
 		}
-		this_ESTRING_0=ruleESTRING
+		this_ESingleValue_0=ruleESingleValue
 		{
-			$current = $this_ESTRING_0.current;
+			$current = $this_ESingleValue_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -6404,6 +6420,105 @@ ruleEAssignmentValue returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleESingleValue
+entryRuleESingleValue returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getESingleValueRule()); }
+	iv_ruleESingleValue=ruleESingleValue
+	{ $current=$iv_ruleESingleValue.current; }
+	EOF;
+
+// Rule ESingleValue
+ruleESingleValue returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getESingleValueAccess().getESTRINGParserRuleCall_0());
+		}
+		this_ESTRING_0=ruleESTRING
+		{
+			$current = $this_ESTRING_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getESingleValueAccess().getEBOOLEANParserRuleCall_1());
+		}
+		this_EBOOLEAN_1=ruleEBOOLEAN
+		{
+			$current = $this_EBOOLEAN_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getESingleValueAccess().getEFLOATParserRuleCall_2());
+		}
+		this_EFLOAT_2=ruleEFLOAT
+		{
+			$current = $this_EFLOAT_2.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getESingleValueAccess().getESIGNEDINTParserRuleCall_3());
+		}
+		this_ESIGNEDINT_3=ruleESIGNEDINT
+		{
+			$current = $this_ESIGNEDINT_3.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleEAlphaNumericValue
+entryRuleEAlphaNumericValue returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEAlphaNumericValueRule()); }
+	iv_ruleEAlphaNumericValue=ruleEAlphaNumericValue
+	{ $current=$iv_ruleEAlphaNumericValue.current; }
+	EOF;
+
+// Rule EAlphaNumericValue
+ruleEAlphaNumericValue returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getEAlphaNumericValueAccess().getESTRINGParserRuleCall_0());
+		}
+		this_ESTRING_0=ruleESTRING
+		{
+			$current = $this_ESTRING_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEAlphaNumericValueAccess().getEFLOATParserRuleCall_1());
+		}
+		this_EFLOAT_1=ruleEFLOAT
+		{
+			$current = $this_EFLOAT_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEAlphaNumericValueAccess().getESIGNEDINTParserRuleCall_2());
+		}
+		this_ESIGNEDINT_2=ruleESIGNEDINT
+		{
+			$current = $this_ESIGNEDINT_2.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
 // Entry rule entryRuleESTRING
 entryRuleESTRING returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getESTRINGRule()); }
@@ -6421,9 +6536,9 @@ ruleESTRING returns [EObject current=null]
 }:
 	(
 		(
-			lv_string_0_0=RULE_STRING
+			lv_value_0_0=RULE_STRING
 			{
-				newLeafNode(lv_string_0_0, grammarAccess.getESTRINGAccess().getStringSTRINGTerminalRuleCall_0());
+				newLeafNode(lv_value_0_0, grammarAccess.getESTRINGAccess().getValueSTRINGTerminalRuleCall_0());
 			}
 			{
 				if ($current==null) {
@@ -6431,9 +6546,116 @@ ruleESTRING returns [EObject current=null]
 				}
 				setWithLastConsumed(
 					$current,
-					"string",
-					lv_string_0_0,
+					"value",
+					lv_value_0_0,
 					"org.eclipse.xtext.common.Terminals.STRING");
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleEBOOLEAN
+entryRuleEBOOLEAN returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEBOOLEANRule()); }
+	iv_ruleEBOOLEAN=ruleEBOOLEAN
+	{ $current=$iv_ruleEBOOLEAN.current; }
+	EOF;
+
+// Rule EBOOLEAN
+ruleEBOOLEAN returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_value_0_0=RULE_BOOLEAN
+			{
+				newLeafNode(lv_value_0_0, grammarAccess.getEBOOLEANAccess().getValueBOOLEANTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getEBOOLEANRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"value",
+					lv_value_0_0,
+					"org.sodalite.dsl.RM.BOOLEAN");
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleEFLOAT
+entryRuleEFLOAT returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEFLOATRule()); }
+	iv_ruleEFLOAT=ruleEFLOAT
+	{ $current=$iv_ruleEFLOAT.current; }
+	EOF;
+
+// Rule EFLOAT
+ruleEFLOAT returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getEFLOATAccess().getValueFLOATParserRuleCall_0());
+			}
+			lv_value_0_0=ruleFLOAT
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getEFLOATRule());
+				}
+				set(
+					$current,
+					"value",
+					lv_value_0_0,
+					"org.sodalite.dsl.RM.FLOAT");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleESIGNEDINT
+entryRuleESIGNEDINT returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getESIGNEDINTRule()); }
+	iv_ruleESIGNEDINT=ruleESIGNEDINT
+	{ $current=$iv_ruleESIGNEDINT.current; }
+	EOF;
+
+// Rule ESIGNEDINT
+ruleESIGNEDINT returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getESIGNEDINTAccess().getValueSIGNEDINTParserRuleCall_0());
+			}
+			lv_value_0_0=ruleSIGNEDINT
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getESIGNEDINTRule());
+				}
+				set(
+					$current,
+					"value",
+					lv_value_0_0,
+					"org.sodalite.dsl.RM.SIGNEDINT");
+				afterParserOrEnumRuleCall();
 			}
 		)
 	)
@@ -6542,5 +6764,78 @@ ruleEMapEntry returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleSIGNEDINT
+entryRuleSIGNEDINT returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getSIGNEDINTRule()); }
+	iv_ruleSIGNEDINT=ruleSIGNEDINT
+	{ $current=$iv_ruleSIGNEDINT.current.getText(); }
+	EOF;
+
+// Rule SIGNEDINT
+ruleSIGNEDINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			kw=HyphenMinus
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getSIGNEDINTAccess().getHyphenMinusKeyword_0());
+			}
+		)?
+		this_INT_1=RULE_INT
+		{
+			$current.merge(this_INT_1);
+		}
+		{
+			newLeafNode(this_INT_1, grammarAccess.getSIGNEDINTAccess().getINTTerminalRuleCall_1());
+		}
+	)
+;
+
+// Entry rule entryRuleFLOAT
+entryRuleFLOAT returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getFLOATRule()); }
+	iv_ruleFLOAT=ruleFLOAT
+	{ $current=$iv_ruleFLOAT.current.getText(); }
+	EOF;
+
+// Rule FLOAT
+ruleFLOAT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			this_INT_0=RULE_INT
+			{
+				$current.merge(this_INT_0);
+			}
+			{
+				newLeafNode(this_INT_0, grammarAccess.getFLOATAccess().getINTTerminalRuleCall_0());
+			}
+		)?
+		kw=FullStop
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getFLOATAccess().getFullStopKeyword_1());
+		}
+		this_INT_2=RULE_INT
+		{
+			$current.merge(this_INT_2);
+		}
+		{
+			newLeafNode(this_INT_2, grammarAccess.getFLOATAccess().getINTTerminalRuleCall_2());
+		}
 	)
 ;

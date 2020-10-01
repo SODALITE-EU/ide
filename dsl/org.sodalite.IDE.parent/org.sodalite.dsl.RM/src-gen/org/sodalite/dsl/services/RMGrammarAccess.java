@@ -2595,18 +2595,18 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	public class EValueExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EValueExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cESTRINGParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cESingleValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEFunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//EValueExpression:
-		//	ESTRING | EFunction;
+		//	ESingleValue | EFunction;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ESTRING | EFunction
+		//ESingleValue | EFunction
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//ESTRING
-		public RuleCall getESTRINGParserRuleCall_0() { return cESTRINGParserRuleCall_0; }
+		//ESingleValue
+		public RuleCall getESingleValueParserRuleCall_0() { return cESingleValueParserRuleCall_0; }
 		
 		//EFunction
 		public RuleCall getEFunctionParserRuleCall_1() { return cEFunctionParserRuleCall_1; }
@@ -2966,10 +2966,10 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Keyword cOccurrencesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Keyword cLeftSquareBracketKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
 		private final Assignment cOccurrences_startAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final RuleCall cOccurrences_startSTRINGTerminalRuleCall_5_2_0 = (RuleCall)cOccurrences_startAssignment_5_2.eContents().get(0);
+		private final RuleCall cOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0 = (RuleCall)cOccurrences_startAssignment_5_2.eContents().get(0);
 		private final Keyword cCommaKeyword_5_3 = (Keyword)cGroup_5.eContents().get(3);
 		private final Assignment cOccurrences_endAssignment_5_4 = (Assignment)cGroup_5.eContents().get(4);
-		private final RuleCall cOccurrences_endSTRINGTerminalRuleCall_5_4_0 = (RuleCall)cOccurrences_endAssignment_5_4.eContents().get(0);
+		private final RuleCall cOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0 = (RuleCall)cOccurrences_endAssignment_5_4.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_5_5 = (Keyword)cGroup_5.eContents().get(5);
 		
 		//ECapabilityDefinitionBody:
@@ -2980,13 +2980,13 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	BEGIN
 		//	attributes=EAttributes
 		//	END)? & ('valid_source_types:' '[' valid_source_types+=EValidSourceType? ']')? & ('occurrences:' '['
-		//	occurrences_start=STRING ',' occurrences_end=STRING ']')?;
+		//	occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'type:' type=[ECapabilityType|QUALIFIED_NAME] & ('description:' description=STRING)? & ('properties:' BEGIN
 		//properties=EProperties END)? & ('attributes:' BEGIN attributes=EAttributes END)? & ('valid_source_types:' '['
-		//valid_source_types+=EValidSourceType? ']')? & ('occurrences:' '[' occurrences_start=STRING ',' occurrences_end=STRING
-		//']')?
+		//valid_source_types+=EValidSourceType? ']')? & ('occurrences:' '[' occurrences_start=EAlphaNumericValue ','
+		//occurrences_end=EAlphaNumericValue ']')?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'type:' type=[ECapabilityType|QUALIFIED_NAME]
@@ -3070,7 +3070,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//']'
 		public Keyword getRightSquareBracketKeyword_4_3() { return cRightSquareBracketKeyword_4_3; }
 		
-		//('occurrences:' '[' occurrences_start=STRING ',' occurrences_end=STRING ']')?
+		//('occurrences:' '[' occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?
 		public Group getGroup_5() { return cGroup_5; }
 		
 		//'occurrences:'
@@ -3079,20 +3079,20 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//'['
 		public Keyword getLeftSquareBracketKeyword_5_1() { return cLeftSquareBracketKeyword_5_1; }
 		
-		//occurrences_start=STRING
+		//occurrences_start=EAlphaNumericValue
 		public Assignment getOccurrences_startAssignment_5_2() { return cOccurrences_startAssignment_5_2; }
 		
-		//STRING
-		public RuleCall getOccurrences_startSTRINGTerminalRuleCall_5_2_0() { return cOccurrences_startSTRINGTerminalRuleCall_5_2_0; }
+		//EAlphaNumericValue
+		public RuleCall getOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0() { return cOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0; }
 		
 		//','
 		public Keyword getCommaKeyword_5_3() { return cCommaKeyword_5_3; }
 		
-		//occurrences_end=STRING
+		//occurrences_end=EAlphaNumericValue
 		public Assignment getOccurrences_endAssignment_5_4() { return cOccurrences_endAssignment_5_4; }
 		
-		//STRING
-		public RuleCall getOccurrences_endSTRINGTerminalRuleCall_5_4_0() { return cOccurrences_endSTRINGTerminalRuleCall_5_4_0; }
+		//EAlphaNumericValue
+		public RuleCall getOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0() { return cOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_5_5() { return cRightSquareBracketKeyword_5_5; }
@@ -3238,21 +3238,21 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Keyword cOccurrencesKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Keyword cLeftSquareBracketKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
 		private final Assignment cStartAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
-		private final RuleCall cStartSTRINGTerminalRuleCall_3_2_0 = (RuleCall)cStartAssignment_3_2.eContents().get(0);
+		private final RuleCall cStartEAlphaNumericValueParserRuleCall_3_2_0 = (RuleCall)cStartAssignment_3_2.eContents().get(0);
 		private final Keyword cCommaKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		private final Assignment cEndAssignment_3_4 = (Assignment)cGroup_3.eContents().get(4);
-		private final RuleCall cEndSTRINGTerminalRuleCall_3_4_0 = (RuleCall)cEndAssignment_3_4.eContents().get(0);
+		private final RuleCall cEndEAlphaNumericValueParserRuleCall_3_4_0 = (RuleCall)cEndAssignment_3_4.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_3_5 = (Keyword)cGroup_3.eContents().get(5);
 		
 		//ERequirementDefinitionBody:
 		//	'capability:' capability=[ECapabilityType|QUALIFIED_NAME] & ('node:' node=[ENodeType|QUALIFIED_NAME])? &
-		//	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? & ('occurrences:' '[' start=STRING ',' end=STRING
-		//	']')?;
+		//	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? & ('occurrences:' '[' start=EAlphaNumericValue ','
+		//	end=EAlphaNumericValue ']')?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'capability:' capability=[ECapabilityType|QUALIFIED_NAME] & ('node:' node=[ENodeType|QUALIFIED_NAME])? &
-		//('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? & ('occurrences:' '[' start=STRING ',' end=STRING
-		//']')?
+		//('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? & ('occurrences:' '[' start=EAlphaNumericValue ','
+		//end=EAlphaNumericValue ']')?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'capability:' capability=[ECapabilityType|QUALIFIED_NAME]
@@ -3300,7 +3300,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//QUALIFIED_NAME
 		public RuleCall getRelationshipERelationshipTypeQUALIFIED_NAMETerminalRuleCall_2_1_0_1() { return cRelationshipERelationshipTypeQUALIFIED_NAMETerminalRuleCall_2_1_0_1; }
 		
-		//('occurrences:' '[' start=STRING ',' end=STRING ']')?
+		//('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'occurrences:'
@@ -3309,20 +3309,20 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//'['
 		public Keyword getLeftSquareBracketKeyword_3_1() { return cLeftSquareBracketKeyword_3_1; }
 		
-		//start=STRING
+		//start=EAlphaNumericValue
 		public Assignment getStartAssignment_3_2() { return cStartAssignment_3_2; }
 		
-		//STRING
-		public RuleCall getStartSTRINGTerminalRuleCall_3_2_0() { return cStartSTRINGTerminalRuleCall_3_2_0; }
+		//EAlphaNumericValue
+		public RuleCall getStartEAlphaNumericValueParserRuleCall_3_2_0() { return cStartEAlphaNumericValueParserRuleCall_3_2_0; }
 		
 		//','
 		public Keyword getCommaKeyword_3_3() { return cCommaKeyword_3_3; }
 		
-		//end=STRING
+		//end=EAlphaNumericValue
 		public Assignment getEndAssignment_3_4() { return cEndAssignment_3_4; }
 		
-		//STRING
-		public RuleCall getEndSTRINGTerminalRuleCall_3_4_0() { return cEndSTRINGTerminalRuleCall_3_4_0; }
+		//EAlphaNumericValue
+		public RuleCall getEndEAlphaNumericValueParserRuleCall_3_4_0() { return cEndEAlphaNumericValueParserRuleCall_3_4_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_3_5() { return cRightSquareBracketKeyword_3_5; }
@@ -3427,69 +3427,69 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cMax_lengthKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValSTRINGTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final RuleCall cValEAlphaNumericValueParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//EMaxLength:
-		//	'max_length:' val=STRING;
+		//	'max_length:' val=EAlphaNumericValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'max_length:' val=STRING
+		//'max_length:' val=EAlphaNumericValue
 		public Group getGroup() { return cGroup; }
 		
 		//'max_length:'
 		public Keyword getMax_lengthKeyword_0() { return cMax_lengthKeyword_0; }
 		
-		//val=STRING
+		//val=EAlphaNumericValue
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 		
-		//STRING
-		public RuleCall getValSTRINGTerminalRuleCall_1_0() { return cValSTRINGTerminalRuleCall_1_0; }
+		//EAlphaNumericValue
+		public RuleCall getValEAlphaNumericValueParserRuleCall_1_0() { return cValEAlphaNumericValueParserRuleCall_1_0; }
 	}
 	public class EMinLengthElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EMinLength");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cMin_lengthKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValSTRINGTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final RuleCall cValEAlphaNumericValueParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//EMinLength:
-		//	'min_length:' val=STRING;
+		//	'min_length:' val=EAlphaNumericValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'min_length:' val=STRING
+		//'min_length:' val=EAlphaNumericValue
 		public Group getGroup() { return cGroup; }
 		
 		//'min_length:'
 		public Keyword getMin_lengthKeyword_0() { return cMin_lengthKeyword_0; }
 		
-		//val=STRING
+		//val=EAlphaNumericValue
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 		
-		//STRING
-		public RuleCall getValSTRINGTerminalRuleCall_1_0() { return cValSTRINGTerminalRuleCall_1_0; }
+		//EAlphaNumericValue
+		public RuleCall getValEAlphaNumericValueParserRuleCall_1_0() { return cValEAlphaNumericValueParserRuleCall_1_0; }
 	}
 	public class ELengthElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ELength");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLengthKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValSTRINGTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final RuleCall cValEAlphaNumericValueParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//ELength:
-		//	'length:' val=STRING;
+		//	'length:' val=EAlphaNumericValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'length:' val=STRING
+		//'length:' val=EAlphaNumericValue
 		public Group getGroup() { return cGroup; }
 		
 		//'length:'
 		public Keyword getLengthKeyword_0() { return cLengthKeyword_0; }
 		
-		//val=STRING
+		//val=EAlphaNumericValue
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 		
-		//STRING
-		public RuleCall getValSTRINGTerminalRuleCall_1_0() { return cValSTRINGTerminalRuleCall_1_0; }
+		//EAlphaNumericValue
+		public RuleCall getValEAlphaNumericValueParserRuleCall_1_0() { return cValEAlphaNumericValueParserRuleCall_1_0; }
 	}
 	public class EValid_ValuesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EValid_Values");
@@ -3519,40 +3519,40 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cListAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cListSTRINGTerminalRuleCall_1_0 = (RuleCall)cListAssignment_1.eContents().get(0);
+		private final RuleCall cListEAlphaNumericValueParserRuleCall_1_0 = (RuleCall)cListAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cListAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cListSTRINGTerminalRuleCall_2_1_0 = (RuleCall)cListAssignment_2_1.eContents().get(0);
+		private final RuleCall cListEAlphaNumericValueParserRuleCall_2_1_0 = (RuleCall)cListAssignment_2_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ELIST:
-		//	'[' list+=STRING ("," list+=STRING)* ']';
+		//	'[' list+=EAlphaNumericValue ("," list+=EAlphaNumericValue)* ']';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' list+=STRING ("," list+=STRING)* ']'
+		//'[' list+=EAlphaNumericValue ("," list+=EAlphaNumericValue)* ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 		
-		//list+=STRING
+		//list+=EAlphaNumericValue
 		public Assignment getListAssignment_1() { return cListAssignment_1; }
 		
-		//STRING
-		public RuleCall getListSTRINGTerminalRuleCall_1_0() { return cListSTRINGTerminalRuleCall_1_0; }
+		//EAlphaNumericValue
+		public RuleCall getListEAlphaNumericValueParserRuleCall_1_0() { return cListEAlphaNumericValueParserRuleCall_1_0; }
 		
-		//("," list+=STRING)*
+		//("," list+=EAlphaNumericValue)*
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//","
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 		
-		//list+=STRING
+		//list+=EAlphaNumericValue
 		public Assignment getListAssignment_2_1() { return cListAssignment_2_1; }
 		
-		//STRING
-		public RuleCall getListSTRINGTerminalRuleCall_2_1_0() { return cListSTRINGTerminalRuleCall_2_1_0; }
+		//EAlphaNumericValue
+		public RuleCall getListEAlphaNumericValueParserRuleCall_2_1_0() { return cListEAlphaNumericValueParserRuleCall_2_1_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
@@ -3563,17 +3563,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Keyword cIn_rangeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cStartAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cStartSTRINGTerminalRuleCall_2_0 = (RuleCall)cStartAssignment_2.eContents().get(0);
+		private final RuleCall cStartEAlphaNumericValueParserRuleCall_2_0 = (RuleCall)cStartAssignment_2.eContents().get(0);
 		private final Keyword cCommaKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cEndAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cEndSTRINGTerminalRuleCall_4_0 = (RuleCall)cEndAssignment_4.eContents().get(0);
+		private final RuleCall cEndEAlphaNumericValueParserRuleCall_4_0 = (RuleCall)cEndAssignment_4.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//EInRange:
-		//	'in_range:' '[' start=STRING "," end=STRING ']';
+		//	'in_range:' '[' start=EAlphaNumericValue "," end=EAlphaNumericValue ']';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'in_range:' '[' start=STRING "," end=STRING ']'
+		//'in_range:' '[' start=EAlphaNumericValue "," end=EAlphaNumericValue ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'in_range:'
@@ -3582,20 +3582,20 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//'['
 		public Keyword getLeftSquareBracketKeyword_1() { return cLeftSquareBracketKeyword_1; }
 		
-		//start=STRING
+		//start=EAlphaNumericValue
 		public Assignment getStartAssignment_2() { return cStartAssignment_2; }
 		
-		//STRING
-		public RuleCall getStartSTRINGTerminalRuleCall_2_0() { return cStartSTRINGTerminalRuleCall_2_0; }
+		//EAlphaNumericValue
+		public RuleCall getStartEAlphaNumericValueParserRuleCall_2_0() { return cStartEAlphaNumericValueParserRuleCall_2_0; }
 		
 		//","
 		public Keyword getCommaKeyword_3() { return cCommaKeyword_3; }
 		
-		//end=STRING
+		//end=EAlphaNumericValue
 		public Assignment getEndAssignment_4() { return cEndAssignment_4; }
 		
-		//STRING
-		public RuleCall getEndSTRINGTerminalRuleCall_4_0() { return cEndSTRINGTerminalRuleCall_4_0; }
+		//EAlphaNumericValue
+		public RuleCall getEndEAlphaNumericValueParserRuleCall_4_0() { return cEndEAlphaNumericValueParserRuleCall_4_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_5() { return cRightSquareBracketKeyword_5; }
@@ -3605,133 +3605,133 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLess_or_equalKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValSTRINGTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final RuleCall cValEAlphaNumericValueParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//ELessOrEqual:
-		//	'less_or_equal:' val=STRING;
+		//	'less_or_equal:' val=EAlphaNumericValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'less_or_equal:' val=STRING
+		//'less_or_equal:' val=EAlphaNumericValue
 		public Group getGroup() { return cGroup; }
 		
 		//'less_or_equal:'
 		public Keyword getLess_or_equalKeyword_0() { return cLess_or_equalKeyword_0; }
 		
-		//val=STRING
+		//val=EAlphaNumericValue
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 		
-		//STRING
-		public RuleCall getValSTRINGTerminalRuleCall_1_0() { return cValSTRINGTerminalRuleCall_1_0; }
+		//EAlphaNumericValue
+		public RuleCall getValEAlphaNumericValueParserRuleCall_1_0() { return cValEAlphaNumericValueParserRuleCall_1_0; }
 	}
 	public class ELessThanElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ELessThan");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLess_thanKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValSTRINGTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final RuleCall cValEAlphaNumericValueParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//ELessThan:
-		//	'less_than:' val=STRING;
+		//	'less_than:' val=EAlphaNumericValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'less_than:' val=STRING
+		//'less_than:' val=EAlphaNumericValue
 		public Group getGroup() { return cGroup; }
 		
 		//'less_than:'
 		public Keyword getLess_thanKeyword_0() { return cLess_thanKeyword_0; }
 		
-		//val=STRING
+		//val=EAlphaNumericValue
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 		
-		//STRING
-		public RuleCall getValSTRINGTerminalRuleCall_1_0() { return cValSTRINGTerminalRuleCall_1_0; }
+		//EAlphaNumericValue
+		public RuleCall getValEAlphaNumericValueParserRuleCall_1_0() { return cValEAlphaNumericValueParserRuleCall_1_0; }
 	}
 	public class EGreaterOrEqualElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EGreaterOrEqual");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cGreater_or_equalKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValSTRINGTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final RuleCall cValEAlphaNumericValueParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//EGreaterOrEqual:
-		//	'greater_or_equal:' val=STRING;
+		//	'greater_or_equal:' val=EAlphaNumericValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'greater_or_equal:' val=STRING
+		//'greater_or_equal:' val=EAlphaNumericValue
 		public Group getGroup() { return cGroup; }
 		
 		//'greater_or_equal:'
 		public Keyword getGreater_or_equalKeyword_0() { return cGreater_or_equalKeyword_0; }
 		
-		//val=STRING
+		//val=EAlphaNumericValue
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 		
-		//STRING
-		public RuleCall getValSTRINGTerminalRuleCall_1_0() { return cValSTRINGTerminalRuleCall_1_0; }
+		//EAlphaNumericValue
+		public RuleCall getValEAlphaNumericValueParserRuleCall_1_0() { return cValEAlphaNumericValueParserRuleCall_1_0; }
 	}
 	public class EGreaterThanElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EGreaterThan");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cGreater_thanKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValSTRINGTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final RuleCall cValEAlphaNumericValueParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//EGreaterThan:
-		//	'greater_than:' val=STRING;
+		//	'greater_than:' val=EAlphaNumericValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'greater_than:' val=STRING
+		//'greater_than:' val=EAlphaNumericValue
 		public Group getGroup() { return cGroup; }
 		
 		//'greater_than:'
 		public Keyword getGreater_thanKeyword_0() { return cGreater_thanKeyword_0; }
 		
-		//val=STRING
+		//val=EAlphaNumericValue
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 		
-		//STRING
-		public RuleCall getValSTRINGTerminalRuleCall_1_0() { return cValSTRINGTerminalRuleCall_1_0; }
+		//EAlphaNumericValue
+		public RuleCall getValEAlphaNumericValueParserRuleCall_1_0() { return cValEAlphaNumericValueParserRuleCall_1_0; }
 	}
 	public class EEqualElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EEqual");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEqualKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValSTRINGTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final RuleCall cValESingleValueParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//EEqual:
-		//	'equal:' val=STRING;
+		//	'equal:' val=ESingleValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'equal:' val=STRING
+		//'equal:' val=ESingleValue
 		public Group getGroup() { return cGroup; }
 		
 		//'equal:'
 		public Keyword getEqualKeyword_0() { return cEqualKeyword_0; }
 		
-		//val=STRING
+		//val=ESingleValue
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 		
-		//STRING
-		public RuleCall getValSTRINGTerminalRuleCall_1_0() { return cValSTRINGTerminalRuleCall_1_0; }
+		//ESingleValue
+		public RuleCall getValESingleValueParserRuleCall_1_0() { return cValESingleValueParserRuleCall_1_0; }
 	}
 	public class EAssignmentValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EAssignmentValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cESTRINGParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cESingleValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cELISTParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cEMAPParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cEFunctionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//EAssignmentValue:
-		//	ESTRING | ELIST | EMAP | EFunction;
+		//	ESingleValue | ELIST | EMAP | EFunction;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ESTRING | ELIST | EMAP | EFunction
+		//ESingleValue | ELIST | EMAP | EFunction
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//ESTRING
-		public RuleCall getESTRINGParserRuleCall_0() { return cESTRINGParserRuleCall_0; }
+		//ESingleValue
+		public RuleCall getESingleValueParserRuleCall_0() { return cESingleValueParserRuleCall_0; }
 		
 		//ELIST
 		public RuleCall getELISTParserRuleCall_1() { return cELISTParserRuleCall_1; }
@@ -3742,20 +3742,115 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//EFunction
 		public RuleCall getEFunctionParserRuleCall_3() { return cEFunctionParserRuleCall_3; }
 	}
-	public class ESTRINGElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ESTRING");
-		private final Assignment cStringAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cStringSTRINGTerminalRuleCall_0 = (RuleCall)cStringAssignment.eContents().get(0);
+	public class ESingleValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ESingleValue");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cESTRINGParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEBOOLEANParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEFLOATParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cESIGNEDINTParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//ESTRING:
-		//	string=STRING;
+		//ESingleValue:
+		//	ESTRING | EBOOLEAN | EFLOAT | ESIGNEDINT;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//string=STRING
-		public Assignment getStringAssignment() { return cStringAssignment; }
+		//ESTRING | EBOOLEAN | EFLOAT | ESIGNEDINT
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ESTRING
+		public RuleCall getESTRINGParserRuleCall_0() { return cESTRINGParserRuleCall_0; }
+		
+		//EBOOLEAN
+		public RuleCall getEBOOLEANParserRuleCall_1() { return cEBOOLEANParserRuleCall_1; }
+		
+		//EFLOAT
+		public RuleCall getEFLOATParserRuleCall_2() { return cEFLOATParserRuleCall_2; }
+		
+		//ESIGNEDINT
+		public RuleCall getESIGNEDINTParserRuleCall_3() { return cESIGNEDINTParserRuleCall_3; }
+	}
+	public class EAlphaNumericValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EAlphaNumericValue");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cESTRINGParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEFLOATParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cESIGNEDINTParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//EAlphaNumericValue:
+		//	ESTRING | EFLOAT | ESIGNEDINT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ESTRING | EFLOAT | ESIGNEDINT
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ESTRING
+		public RuleCall getESTRINGParserRuleCall_0() { return cESTRINGParserRuleCall_0; }
+		
+		//EFLOAT
+		public RuleCall getEFLOATParserRuleCall_1() { return cEFLOATParserRuleCall_1; }
+		
+		//ESIGNEDINT
+		public RuleCall getESIGNEDINTParserRuleCall_2() { return cESIGNEDINTParserRuleCall_2; }
+	}
+	public class ESTRINGElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ESTRING");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValueSTRINGTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		
+		//ESTRING:
+		//	value=STRING;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//value=STRING
+		public Assignment getValueAssignment() { return cValueAssignment; }
 		
 		//STRING
-		public RuleCall getStringSTRINGTerminalRuleCall_0() { return cStringSTRINGTerminalRuleCall_0; }
+		public RuleCall getValueSTRINGTerminalRuleCall_0() { return cValueSTRINGTerminalRuleCall_0; }
+	}
+	public class EBOOLEANElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EBOOLEAN");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValueBOOLEANTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		
+		//EBOOLEAN:
+		//	value=BOOLEAN;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//value=BOOLEAN
+		public Assignment getValueAssignment() { return cValueAssignment; }
+		
+		//BOOLEAN
+		public RuleCall getValueBOOLEANTerminalRuleCall_0() { return cValueBOOLEANTerminalRuleCall_0; }
+	}
+	public class EFLOATElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EFLOAT");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValueFLOATParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		
+		//EFLOAT:
+		//	value=FLOAT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//value=FLOAT
+		public Assignment getValueAssignment() { return cValueAssignment; }
+		
+		//FLOAT
+		public RuleCall getValueFLOATParserRuleCall_0() { return cValueFLOATParserRuleCall_0; }
+	}
+	public class ESIGNEDINTElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ESIGNEDINT");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValueSIGNEDINTParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		
+		//ESIGNEDINT:
+		//	value=SIGNEDINT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//value=SIGNEDINT
+		public Assignment getValueAssignment() { return cValueAssignment; }
+		
+		//SIGNEDINT
+		public RuleCall getValueSIGNEDINTParserRuleCall_0() { return cValueSIGNEDINTParserRuleCall_0; }
 	}
 	public class EMAPElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EMAP");
@@ -3816,6 +3911,48 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		
 		//EAssignmentValue
 		public RuleCall getValueEAssignmentValueParserRuleCall_2_0() { return cValueEAssignmentValueParserRuleCall_2_0; }
+	}
+	public class SIGNEDINTElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.SIGNEDINT");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//SIGNEDINT ecore::EInt:
+		//	'-'? INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'-'? INT
+		public Group getGroup() { return cGroup; }
+		
+		//'-'?
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+	}
+	public class FLOATElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.FLOAT");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		
+		//FLOAT ecore::EFloat:
+		//	INT? '.' INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//INT? '.' INT
+		public Group getGroup() { return cGroup; }
+		
+		//INT?
+		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_2() { return cINTTerminalRuleCall_2; }
 	}
 	
 	
@@ -3893,11 +4030,18 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final EGreaterThanElements pEGreaterThan;
 	private final EEqualElements pEEqual;
 	private final EAssignmentValueElements pEAssignmentValue;
+	private final ESingleValueElements pESingleValue;
+	private final EAlphaNumericValueElements pEAlphaNumericValue;
 	private final ESTRINGElements pESTRING;
+	private final EBOOLEANElements pEBOOLEAN;
+	private final EFLOATElements pEFLOAT;
+	private final ESIGNEDINTElements pESIGNEDINT;
 	private final EMAPElements pEMAP;
 	private final EMapEntryElements pEMapEntry;
 	private final TerminalRule tQUALIFIED_NAME;
 	private final TerminalRule tBOOLEAN;
+	private final SIGNEDINTElements pSIGNEDINT;
+	private final FLOATElements pFLOAT;
 	private final TerminalRule tENTITY;
 	private final TerminalRule tPRIMITIVE_DATA_TYPE;
 	private final TerminalRule tID;
@@ -3987,11 +4131,18 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pEGreaterThan = new EGreaterThanElements();
 		this.pEEqual = new EEqualElements();
 		this.pEAssignmentValue = new EAssignmentValueElements();
+		this.pESingleValue = new ESingleValueElements();
+		this.pEAlphaNumericValue = new EAlphaNumericValueElements();
 		this.pESTRING = new ESTRINGElements();
+		this.pEBOOLEAN = new EBOOLEANElements();
+		this.pEFLOAT = new EFLOATElements();
+		this.pESIGNEDINT = new ESIGNEDINTElements();
 		this.pEMAP = new EMAPElements();
 		this.pEMapEntry = new EMapEntryElements();
 		this.tQUALIFIED_NAME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.QUALIFIED_NAME");
 		this.tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.BOOLEAN");
+		this.pSIGNEDINT = new SIGNEDINTElements();
+		this.pFLOAT = new FLOATElements();
 		this.tENTITY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ENTITY");
 		this.tPRIMITIVE_DATA_TYPE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.PRIMITIVE_DATA_TYPE");
 		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ID");
@@ -4591,7 +4742,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EValueExpression:
-	//	ESTRING | EFunction;
+	//	ESingleValue | EFunction;
 	public EValueExpressionElements getEValueExpressionAccess() {
 		return pEValueExpression;
 	}
@@ -4699,7 +4850,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	//	BEGIN
 	//	attributes=EAttributes
 	//	END)? & ('valid_source_types:' '[' valid_source_types+=EValidSourceType? ']')? & ('occurrences:' '['
-	//	occurrences_start=STRING ',' occurrences_end=STRING ']')?;
+	//	occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 	public ECapabilityDefinitionBodyElements getECapabilityDefinitionBodyAccess() {
 		return pECapabilityDefinitionBody;
 	}
@@ -4753,8 +4904,8 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	
 	//ERequirementDefinitionBody:
 	//	'capability:' capability=[ECapabilityType|QUALIFIED_NAME] & ('node:' node=[ENodeType|QUALIFIED_NAME])? &
-	//	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? & ('occurrences:' '[' start=STRING ',' end=STRING
-	//	']')?;
+	//	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? & ('occurrences:' '[' start=EAlphaNumericValue ','
+	//	end=EAlphaNumericValue ']')?;
 	public ERequirementDefinitionBodyElements getERequirementDefinitionBodyAccess() {
 		return pERequirementDefinitionBody;
 	}
@@ -4795,7 +4946,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EMaxLength:
-	//	'max_length:' val=STRING;
+	//	'max_length:' val=EAlphaNumericValue;
 	public EMaxLengthElements getEMaxLengthAccess() {
 		return pEMaxLength;
 	}
@@ -4805,7 +4956,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EMinLength:
-	//	'min_length:' val=STRING;
+	//	'min_length:' val=EAlphaNumericValue;
 	public EMinLengthElements getEMinLengthAccess() {
 		return pEMinLength;
 	}
@@ -4815,7 +4966,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ELength:
-	//	'length:' val=STRING;
+	//	'length:' val=EAlphaNumericValue;
 	public ELengthElements getELengthAccess() {
 		return pELength;
 	}
@@ -4835,7 +4986,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ELIST:
-	//	'[' list+=STRING ("," list+=STRING)* ']';
+	//	'[' list+=EAlphaNumericValue ("," list+=EAlphaNumericValue)* ']';
 	public ELISTElements getELISTAccess() {
 		return pELIST;
 	}
@@ -4845,7 +4996,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EInRange:
-	//	'in_range:' '[' start=STRING "," end=STRING ']';
+	//	'in_range:' '[' start=EAlphaNumericValue "," end=EAlphaNumericValue ']';
 	public EInRangeElements getEInRangeAccess() {
 		return pEInRange;
 	}
@@ -4855,7 +5006,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ELessOrEqual:
-	//	'less_or_equal:' val=STRING;
+	//	'less_or_equal:' val=EAlphaNumericValue;
 	public ELessOrEqualElements getELessOrEqualAccess() {
 		return pELessOrEqual;
 	}
@@ -4865,7 +5016,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ELessThan:
-	//	'less_than:' val=STRING;
+	//	'less_than:' val=EAlphaNumericValue;
 	public ELessThanElements getELessThanAccess() {
 		return pELessThan;
 	}
@@ -4875,7 +5026,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EGreaterOrEqual:
-	//	'greater_or_equal:' val=STRING;
+	//	'greater_or_equal:' val=EAlphaNumericValue;
 	public EGreaterOrEqualElements getEGreaterOrEqualAccess() {
 		return pEGreaterOrEqual;
 	}
@@ -4885,7 +5036,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EGreaterThan:
-	//	'greater_than:' val=STRING;
+	//	'greater_than:' val=EAlphaNumericValue;
 	public EGreaterThanElements getEGreaterThanAccess() {
 		return pEGreaterThan;
 	}
@@ -4895,7 +5046,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EEqual:
-	//	'equal:' val=STRING;
+	//	'equal:' val=ESingleValue;
 	public EEqualElements getEEqualAccess() {
 		return pEEqual;
 	}
@@ -4905,7 +5056,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EAssignmentValue:
-	//	ESTRING | ELIST | EMAP | EFunction;
+	//	ESingleValue | ELIST | EMAP | EFunction;
 	public EAssignmentValueElements getEAssignmentValueAccess() {
 		return pEAssignmentValue;
 	}
@@ -4914,14 +5065,64 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		return getEAssignmentValueAccess().getRule();
 	}
 	
+	//ESingleValue:
+	//	ESTRING | EBOOLEAN | EFLOAT | ESIGNEDINT;
+	public ESingleValueElements getESingleValueAccess() {
+		return pESingleValue;
+	}
+	
+	public ParserRule getESingleValueRule() {
+		return getESingleValueAccess().getRule();
+	}
+	
+	//EAlphaNumericValue:
+	//	ESTRING | EFLOAT | ESIGNEDINT;
+	public EAlphaNumericValueElements getEAlphaNumericValueAccess() {
+		return pEAlphaNumericValue;
+	}
+	
+	public ParserRule getEAlphaNumericValueRule() {
+		return getEAlphaNumericValueAccess().getRule();
+	}
+	
 	//ESTRING:
-	//	string=STRING;
+	//	value=STRING;
 	public ESTRINGElements getESTRINGAccess() {
 		return pESTRING;
 	}
 	
 	public ParserRule getESTRINGRule() {
 		return getESTRINGAccess().getRule();
+	}
+	
+	//EBOOLEAN:
+	//	value=BOOLEAN;
+	public EBOOLEANElements getEBOOLEANAccess() {
+		return pEBOOLEAN;
+	}
+	
+	public ParserRule getEBOOLEANRule() {
+		return getEBOOLEANAccess().getRule();
+	}
+	
+	//EFLOAT:
+	//	value=FLOAT;
+	public EFLOATElements getEFLOATAccess() {
+		return pEFLOAT;
+	}
+	
+	public ParserRule getEFLOATRule() {
+		return getEFLOATAccess().getRule();
+	}
+	
+	//ESIGNEDINT:
+	//	value=SIGNEDINT;
+	public ESIGNEDINTElements getESIGNEDINTAccess() {
+		return pESIGNEDINT;
+	}
+	
+	public ParserRule getESIGNEDINTRule() {
+		return getESIGNEDINTAccess().getRule();
 	}
 	
 	//EMAP:
@@ -4956,6 +5157,26 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	//	'true' | 'false';
 	public TerminalRule getBOOLEANRule() {
 		return tBOOLEAN;
+	}
+	
+	//SIGNEDINT ecore::EInt:
+	//	'-'? INT;
+	public SIGNEDINTElements getSIGNEDINTAccess() {
+		return pSIGNEDINT;
+	}
+	
+	public ParserRule getSIGNEDINTRule() {
+		return getSIGNEDINTAccess().getRule();
+	}
+	
+	//FLOAT ecore::EFloat:
+	//	INT? '.' INT;
+	public FLOATElements getFLOATAccess() {
+		return pFLOAT;
+	}
+	
+	public ParserRule getFLOATRule() {
+		return getFLOATAccess().getRule();
 	}
 	
 	//terminal ENTITY:

@@ -608,12 +608,62 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.ESINGLE_VALUE:
+      {
+        ESingleValue eSingleValue = (ESingleValue)theEObject;
+        T result = caseESingleValue(eSingleValue);
+        if (result == null) result = caseEValueExpression(eSingleValue);
+        if (result == null) result = caseEAssignmentValue(eSingleValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EALPHA_NUMERIC_VALUE:
+      {
+        EAlphaNumericValue eAlphaNumericValue = (EAlphaNumericValue)theEObject;
+        T result = caseEAlphaNumericValue(eAlphaNumericValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.ESTRING:
       {
         ESTRING estring = (ESTRING)theEObject;
         T result = caseESTRING(estring);
+        if (result == null) result = caseESingleValue(estring);
+        if (result == null) result = caseEAlphaNumericValue(estring);
         if (result == null) result = caseEValueExpression(estring);
         if (result == null) result = caseEAssignmentValue(estring);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EBOOLEAN:
+      {
+        EBOOLEAN eboolean = (EBOOLEAN)theEObject;
+        T result = caseEBOOLEAN(eboolean);
+        if (result == null) result = caseESingleValue(eboolean);
+        if (result == null) result = caseEValueExpression(eboolean);
+        if (result == null) result = caseEAssignmentValue(eboolean);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EFLOAT:
+      {
+        EFLOAT efloat = (EFLOAT)theEObject;
+        T result = caseEFLOAT(efloat);
+        if (result == null) result = caseESingleValue(efloat);
+        if (result == null) result = caseEAlphaNumericValue(efloat);
+        if (result == null) result = caseEValueExpression(efloat);
+        if (result == null) result = caseEAssignmentValue(efloat);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ESIGNEDINT:
+      {
+        ESIGNEDINT esignedint = (ESIGNEDINT)theEObject;
+        T result = caseESIGNEDINT(esignedint);
+        if (result == null) result = caseESingleValue(esignedint);
+        if (result == null) result = caseEAlphaNumericValue(esignedint);
+        if (result == null) result = caseEValueExpression(esignedint);
+        if (result == null) result = caseEAssignmentValue(esignedint);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1805,6 +1855,38 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>ESingle Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ESingle Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseESingleValue(ESingleValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EAlpha Numeric Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EAlpha Numeric Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEAlphaNumericValue(EAlphaNumericValue object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>ESTRING</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1816,6 +1898,54 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseESTRING(ESTRING object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EBOOLEAN</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EBOOLEAN</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEBOOLEAN(EBOOLEAN object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EFLOAT</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EFLOAT</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEFLOAT(EFLOAT object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ESIGNEDINT</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ESIGNEDINT</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseESIGNEDINT(ESIGNEDINT object)
   {
     return null;
   }

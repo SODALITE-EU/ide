@@ -437,7 +437,7 @@ node_types:
 				node: sodalite.nodes.modak
 				capability: sodalite.capabilities.modak.ModakEndpoint
 				relationship: tosca.relationships.DependsOn
-				occurrences: [ "1", "1" ]
+				occurrences: [ 1, 1 ]
 		interfaces:
 			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard

@@ -681,6 +681,24 @@ public interface RMFactory extends EFactory
   EAssignmentValue createEAssignmentValue();
 
   /**
+   * Returns a new object of class '<em>ESingle Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ESingle Value</em>'.
+   * @generated
+   */
+  ESingleValue createESingleValue();
+
+  /**
+   * Returns a new object of class '<em>EAlpha Numeric Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EAlpha Numeric Value</em>'.
+   * @generated
+   */
+  EAlphaNumericValue createEAlphaNumericValue();
+
+  /**
    * Returns a new object of class '<em>ESTRING</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -688,6 +706,33 @@ public interface RMFactory extends EFactory
    * @generated
    */
   ESTRING createESTRING();
+
+  /**
+   * Returns a new object of class '<em>EBOOLEAN</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EBOOLEAN</em>'.
+   * @generated
+   */
+  EBOOLEAN createEBOOLEAN();
+
+  /**
+   * Returns a new object of class '<em>EFLOAT</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EFLOAT</em>'.
+   * @generated
+   */
+  EFLOAT createEFLOAT();
+
+  /**
+   * Returns a new object of class '<em>ESIGNEDINT</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ESIGNEDINT</em>'.
+   * @generated
+   */
+  ESIGNEDINT createESIGNEDINT();
 
   /**
    * Returns a new object of class '<em>EMAP</em>'.

@@ -4,12 +4,15 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.dsl.rM.EEqual;
+import org.sodalite.dsl.rM.ESingleValue;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -28,24 +31,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EEqualImpl extends EConstraintImpl implements EEqual
 {
   /**
-   * The default value of the '{@link #getVal() <em>Val</em>}' attribute.
+   * The cached value of the '{@link #getVal() <em>Val</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getVal()
    * @generated
    * @ordered
    */
-  protected static final String VAL_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getVal() <em>Val</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getVal()
-   * @generated
-   * @ordered
-   */
-  protected String val = VAL_EDEFAULT;
+  protected ESingleValue val;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,7 +67,7 @@ public class EEqualImpl extends EConstraintImpl implements EEqual
    * @generated
    */
   @Override
-  public String getVal()
+  public ESingleValue getVal()
   {
     return val;
   }
@@ -84,13 +77,54 @@ public class EEqualImpl extends EConstraintImpl implements EEqual
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setVal(String newVal)
+  public NotificationChain basicSetVal(ESingleValue newVal, NotificationChain msgs)
   {
-    String oldVal = val;
+    ESingleValue oldVal = val;
     val = newVal;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EEQUAL__VAL, oldVal, val));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EEQUAL__VAL, oldVal, newVal);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setVal(ESingleValue newVal)
+  {
+    if (newVal != val)
+    {
+      NotificationChain msgs = null;
+      if (val != null)
+        msgs = ((InternalEObject)val).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EEQUAL__VAL, null, msgs);
+      if (newVal != null)
+        msgs = ((InternalEObject)newVal).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EEQUAL__VAL, null, msgs);
+      msgs = basicSetVal(newVal, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EEQUAL__VAL, newVal, newVal));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.EEQUAL__VAL:
+        return basicSetVal(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -120,7 +154,7 @@ public class EEqualImpl extends EConstraintImpl implements EEqual
     switch (featureID)
     {
       case RMPackage.EEQUAL__VAL:
-        setVal((String)newValue);
+        setVal((ESingleValue)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,7 +171,7 @@ public class EEqualImpl extends EConstraintImpl implements EEqual
     switch (featureID)
     {
       case RMPackage.EEQUAL__VAL:
-        setVal(VAL_EDEFAULT);
+        setVal((ESingleValue)null);
         return;
     }
     super.eUnset(featureID);
@@ -154,26 +188,9 @@ public class EEqualImpl extends EConstraintImpl implements EEqual
     switch (featureID)
     {
       case RMPackage.EEQUAL__VAL:
-        return VAL_EDEFAULT == null ? val != null : !VAL_EDEFAULT.equals(val);
+        return val != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (val: ");
-    result.append(val);
-    result.append(')');
-    return result.toString();
   }
 
 } //EEqualImpl

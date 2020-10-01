@@ -20,32 +20,32 @@ import org.sodalite.dsl.rM.RMPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.ESTRINGImpl#getString <em>String</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ESTRINGImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
+public class ESTRINGImpl extends ESingleValueImpl implements ESTRING
 {
   /**
-   * The default value of the '{@link #getString() <em>String</em>}' attribute.
+   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getString()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected static final String STRING_EDEFAULT = null;
+  protected static final String VALUE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getString() <em>String</em>}' attribute.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getString()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected String string = STRING_EDEFAULT;
+  protected String value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,9 +74,9 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * @generated
    */
   @Override
-  public String getString()
+  public String getValue()
   {
-    return string;
+    return value;
   }
 
   /**
@@ -85,12 +85,12 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
    * @generated
    */
   @Override
-  public void setString(String newString)
+  public void setValue(String newValue)
   {
-    String oldString = string;
-    string = newString;
+    String oldValue = value;
+    value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ESTRING__STRING, oldString, string));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ESTRING__VALUE, oldValue, value));
   }
 
   /**
@@ -103,8 +103,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__STRING:
-        return getString();
+      case RMPackage.ESTRING__VALUE:
+        return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__STRING:
-        setString((String)newValue);
+      case RMPackage.ESTRING__VALUE:
+        setValue((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__STRING:
-        setString(STRING_EDEFAULT);
+      case RMPackage.ESTRING__VALUE:
+        setValue(VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
   {
     switch (featureID)
     {
-      case RMPackage.ESTRING__STRING:
-        return STRING_EDEFAULT == null ? string != null : !STRING_EDEFAULT.equals(string);
+      case RMPackage.ESTRING__VALUE:
+        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
     }
     return super.eIsSet(featureID);
   }
@@ -170,8 +170,8 @@ public class ESTRINGImpl extends EValueExpressionImpl implements ESTRING
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (string: ");
-    result.append(string);
+    result.append(" (value: ");
+    result.append(value);
     result.append(')');
     return result.toString();
   }

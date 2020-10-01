@@ -13,11 +13,14 @@ import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.ESTRING;
 import org.sodalite.dsl.rM.GetInput;
+import org.sodalite.dsl.rM.RMFactory;
+import org.sodalite.dsl.rM.impl.ESTRINGImpl;
 import org.sodalite.dsl.scoping.AADMScopeProvider;
 
 /**
@@ -29,7 +32,7 @@ public class Services {
     	String result = property.getName();
     	if (property.getValue() instanceof ESTRING) {
     		ESTRING value = (ESTRING) property.getValue();
-    		result += ": " + value.getString();
+    		result += ": " + value.getValue();
     	} else if (property.getValue() instanceof GetInput){
     		GetInput gInput = (GetInput) property.getValue();
     		result += ": getInput(" + gInput.getInput().getName() + ")";
@@ -78,7 +81,9 @@ public class Services {
     public void addItemToPropertyValueList (ELIST list, String item) {
     	System.out.println ("Requested to add item to property list value. List: " +
     		list + ". Item: " + item);
-    	list.getList().add(item);
+    	ESTRING eString = RMFactory.eINSTANCE.createESTRING();
+    	eString.setValue(item);
+    	list.getList().add(eString);
     }
     
     public void cancelAddItemToPropertyValueList (ELIST list, Integer size) {
@@ -99,7 +104,9 @@ public class Services {
     public void editItemInPropertyValueList (ELIST list, Integer index, String newValue, String oldValue) {
     	System.out.println ("Requested to edit an item in a property list value. List: " + list 
     			+ ". Index: " + index + ". NewValue: " + newValue + ". OldValue: " + oldValue);
-    	list.getList().set(index - 1, newValue);
+    	ESTRING eString = RMFactory.eINSTANCE.createESTRING();
+    	eString.setValue(newValue);
+    	list.getList().set(index - 1, eString);
     }
     
     public List<String> getNodes (ERequirementAssignment req){

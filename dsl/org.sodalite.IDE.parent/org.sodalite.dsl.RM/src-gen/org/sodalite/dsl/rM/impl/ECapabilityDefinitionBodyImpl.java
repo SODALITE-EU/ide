@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
 import org.sodalite.dsl.rM.ECapabilityType;
@@ -108,44 +109,24 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
   protected EList<EValidSourceType> valid_source_types;
 
   /**
-   * The default value of the '{@link #getOccurrences_start() <em>Occurrences start</em>}' attribute.
+   * The cached value of the '{@link #getOccurrences_start() <em>Occurrences start</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getOccurrences_start()
    * @generated
    * @ordered
    */
-  protected static final String OCCURRENCES_START_EDEFAULT = null;
+  protected EAlphaNumericValue occurrences_start;
 
   /**
-   * The cached value of the '{@link #getOccurrences_start() <em>Occurrences start</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOccurrences_start()
-   * @generated
-   * @ordered
-   */
-  protected String occurrences_start = OCCURRENCES_START_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getOccurrences_end() <em>Occurrences end</em>}' attribute.
+   * The cached value of the '{@link #getOccurrences_end() <em>Occurrences end</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getOccurrences_end()
    * @generated
    * @ordered
    */
-  protected static final String OCCURRENCES_END_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getOccurrences_end() <em>Occurrences end</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOccurrences_end()
-   * @generated
-   * @ordered
-   */
-  protected String occurrences_end = OCCURRENCES_END_EDEFAULT;
+  protected EAlphaNumericValue occurrences_end;
 
   /**
    * <!-- begin-user-doc -->
@@ -359,7 +340,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public String getOccurrences_start()
+  public EAlphaNumericValue getOccurrences_start()
   {
     return occurrences_start;
   }
@@ -369,13 +350,16 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setOccurrences_start(String newOccurrences_start)
+  public NotificationChain basicSetOccurrences_start(EAlphaNumericValue newOccurrences_start, NotificationChain msgs)
   {
-    String oldOccurrences_start = occurrences_start;
+    EAlphaNumericValue oldOccurrences_start = occurrences_start;
     occurrences_start = newOccurrences_start;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START, oldOccurrences_start, occurrences_start));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START, oldOccurrences_start, newOccurrences_start);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -384,7 +368,29 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public String getOccurrences_end()
+  public void setOccurrences_start(EAlphaNumericValue newOccurrences_start)
+  {
+    if (newOccurrences_start != occurrences_start)
+    {
+      NotificationChain msgs = null;
+      if (occurrences_start != null)
+        msgs = ((InternalEObject)occurrences_start).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START, null, msgs);
+      if (newOccurrences_start != null)
+        msgs = ((InternalEObject)newOccurrences_start).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START, null, msgs);
+      msgs = basicSetOccurrences_start(newOccurrences_start, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START, newOccurrences_start, newOccurrences_start));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAlphaNumericValue getOccurrences_end()
   {
     return occurrences_end;
   }
@@ -394,13 +400,38 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setOccurrences_end(String newOccurrences_end)
+  public NotificationChain basicSetOccurrences_end(EAlphaNumericValue newOccurrences_end, NotificationChain msgs)
   {
-    String oldOccurrences_end = occurrences_end;
+    EAlphaNumericValue oldOccurrences_end = occurrences_end;
     occurrences_end = newOccurrences_end;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END, oldOccurrences_end, occurrences_end));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END, oldOccurrences_end, newOccurrences_end);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setOccurrences_end(EAlphaNumericValue newOccurrences_end)
+  {
+    if (newOccurrences_end != occurrences_end)
+    {
+      NotificationChain msgs = null;
+      if (occurrences_end != null)
+        msgs = ((InternalEObject)occurrences_end).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END, null, msgs);
+      if (newOccurrences_end != null)
+        msgs = ((InternalEObject)newOccurrences_end).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END, null, msgs);
+      msgs = basicSetOccurrences_end(newOccurrences_end, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END, newOccurrences_end, newOccurrences_end));
   }
 
   /**
@@ -419,6 +450,10 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
         return basicSetAttributes(null, msgs);
       case RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES:
         return ((InternalEList<?>)getValid_source_types()).basicRemove(otherEnd, msgs);
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
+        return basicSetOccurrences_start(null, msgs);
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:
+        return basicSetOccurrences_end(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -480,10 +515,10 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
         getValid_source_types().addAll((Collection<? extends EValidSourceType>)newValue);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
-        setOccurrences_start((String)newValue);
+        setOccurrences_start((EAlphaNumericValue)newValue);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:
-        setOccurrences_end((String)newValue);
+        setOccurrences_end((EAlphaNumericValue)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -515,10 +550,10 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
         getValid_source_types().clear();
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
-        setOccurrences_start(OCCURRENCES_START_EDEFAULT);
+        setOccurrences_start((EAlphaNumericValue)null);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:
-        setOccurrences_end(OCCURRENCES_END_EDEFAULT);
+        setOccurrences_end((EAlphaNumericValue)null);
         return;
     }
     super.eUnset(featureID);
@@ -545,9 +580,9 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
       case RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES:
         return valid_source_types != null && !valid_source_types.isEmpty();
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
-        return OCCURRENCES_START_EDEFAULT == null ? occurrences_start != null : !OCCURRENCES_START_EDEFAULT.equals(occurrences_start);
+        return occurrences_start != null;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:
-        return OCCURRENCES_END_EDEFAULT == null ? occurrences_end != null : !OCCURRENCES_END_EDEFAULT.equals(occurrences_end);
+        return occurrences_end != null;
     }
     return super.eIsSet(featureID);
   }
@@ -565,10 +600,6 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (description: ");
     result.append(description);
-    result.append(", occurrences_start: ");
-    result.append(occurrences_start);
-    result.append(", occurrences_end: ");
-    result.append(occurrences_end);
     result.append(')');
     return result.toString();
   }
