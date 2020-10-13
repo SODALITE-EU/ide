@@ -5,8 +5,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
@@ -38,12 +38,15 @@ import org.sodalite.dsl.ui.backend.BackendLogger;
 import com.google.inject.Injector;
 
 public class AADMHelper {
-	public static List<String> readInputsFromAADM(ExecutionEvent event) throws PartInitException {
-		List<String> inputs = new ArrayList<>();
+	public static SortedMap<String, InputDef> readInputsFromAADM(ExecutionEvent event) throws PartInitException {
+		SortedMap<String, InputDef> inputs = new TreeMap<>();
 		IFile aadmFile = getSelectedFile();
 		AADM_Model aadmModel = readAADMModel(aadmFile, event);
-		for (EParameterDefinition parameter: aadmModel.getInputs().getInputs())
-			inputs.add(parameter.getName());
+		AADMHelper helper = new AADMHelper();
+		for (EParameterDefinition parameter: aadmModel.getInputs().getInputs()) {
+			InputDef inDef = helper.new InputDef(parameter.getName(), parameter.getParameter().getType().getName(), parameter.getParameter().getDefault());
+			inputs.put(parameter.getName(), inDef);
+		}
 		
 		return inputs;
 	}
@@ -137,4 +140,31 @@ public class AADMHelper {
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(stringSelection, null);
 	}
+	
+	public class InputDef{
+		String name;
+		String type;
+		Object defaultValue;
+		
+		public InputDef (String name, String type, Object defaultValue) {
+			this.name = name;
+			this.type = type;
+			this.defaultValue = defaultValue;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public Object getDefaultValue() {
+			return defaultValue;
+		}
+		
+	}
 }
+
+

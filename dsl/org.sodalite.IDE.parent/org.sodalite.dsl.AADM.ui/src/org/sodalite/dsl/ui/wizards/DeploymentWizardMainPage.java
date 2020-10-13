@@ -2,10 +2,12 @@ package org.sodalite.dsl.ui.wizards;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
@@ -25,13 +27,14 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
+import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
 
 public class DeploymentWizardMainPage extends WizardPage {
 	private Composite container;
-	private List<String> inputDefs;
+	private SortedMap<String, InputDef> inputDefs;
 	private Map<String, Text> inputWidgets = new HashMap<>();
 
-	protected DeploymentWizardMainPage(List<String> inputDefs) {
+	protected DeploymentWizardMainPage(SortedMap<String, InputDef> inputDefs) {
 		super("AADM Deployment");
 		setTitle("AADM Deployment");
 		setDescription("Provide inputs for the AADM");
@@ -39,8 +42,17 @@ public class DeploymentWizardMainPage extends WizardPage {
 	}
 
 	public Map<String, String> getInputs() {
-		return inputWidgets.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getText().trim()));
+		Map<String, String> inputs = new HashMap<>();
+		for (String key: inputWidgets.keySet()) {
+			String type = inputDefs.get(key).getType();
+			String value = inputWidgets.get(key).getText();
+			if (type!=null && (type.contains("map") || type.contains("list")))
+				value = "\n" + value;
+			inputs.put (key, value);
+		}
+		return inputs;
+//		return inputWidgets.entrySet().stream()
+//				.collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getText()));
 	}
 
 	@Override
@@ -57,6 +69,9 @@ public class DeploymentWizardMainPage extends WizardPage {
 		Button buttonSelectFile = new Button(container, SWT.PUSH);
 		buttonSelectFile.setText("Select...");
 		buttonSelectFile.addListener(SWT.Selection, new Listener() {
+			private String current_key = null;
+			private String current_value = null;
+			
 			public void handleEvent(Event event) {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				FileDialog fileDialog = new FileDialog(shell, SWT.MULTI);
@@ -82,11 +97,26 @@ public class DeploymentWizardMainPage extends WizardPage {
 			private Object processInput(String input) {
 				StringTokenizer st = new StringTokenizer(input, ":");
 				String input_name = st.nextToken();
-				String input_value = st.nextToken();
-				while (st.hasMoreTokens())
-					input_value += ":" + st.nextToken();
-				inputWidgets.get(input_name).setText(input_value);
-
+				if (inputDefs.keySet().contains(input_name)) {
+					current_key = input_name;
+					if (st.hasMoreTokens()) {
+						String input_value = st.nextToken();
+						while (st.hasMoreTokens())
+							input_value += ":" + st.nextToken();
+						inputWidgets.get(current_key).setText(input_value);
+					}
+				}else {
+					if (st.hasMoreTokens()) {
+						String input_value = st.nextToken();
+						while (st.hasMoreTokens())
+							input_value += ":" + st.nextToken();
+						current_value = inputWidgets.get(current_key).getText();
+						
+						inputWidgets.get(current_key).setText(
+								current_value + input_name + ":" + input_value + "\n");
+					}
+				}
+				
 				return input;
 			}
 		});
@@ -105,16 +135,27 @@ public class DeploymentWizardMainPage extends WizardPage {
 		data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
 		inputsLabel.setLayoutData(data);
 
-		for (String input : inputDefs) {
+		for (String input : inputDefs.keySet()) {
 			// Label
 			Label label = new Label(container, SWT.NONE);
 			label.setText(input);
 
 			// Text
-			Text text = new Text(container, SWT.BORDER | SWT.SINGLE);
+			Text text = null;
+			String inputType = inputDefs.get(input).getType();
+			if (inputType!=null && (inputType.contains("map") || inputType.contains("list"))) {
+				int number_lines = 5;
+				text = new Text(container, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL);
+				GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+				gridData.heightHint = number_lines * text.getLineHeight();
+				text.setLayoutData(gridData);
+			} else {
+				text = new Text(container, SWT.BORDER | SWT.SINGLE);
+				GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+				text.setLayoutData(gd);
+			}
 			text.setText("");
-			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-			text.setLayoutData(gd);
+			
 			text.addModifyListener(new ModifyListener() {
 				public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
 					getWizard().getContainer().updateButtons();

@@ -3,6 +3,7 @@ package org.sodalite.dsl.ui.handlers;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.SortedMap;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -14,6 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.ui.backend.BackendProxy;
 import org.sodalite.dsl.ui.helper.AADMHelper;
+import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
 import org.sodalite.dsl.ui.wizards.DeploymentWizard;
 import org.sodalite.dsl.ui.wizards.DeploymentWizardDialog;
 
@@ -43,8 +45,8 @@ public class AADMDeployHandler implements IHandler {
 				
 				// Read input definitions from AADM
 				// Show wizard
-				List<String> inputs = AADMHelper.readInputsFromAADM(event);
-				DeploymentWizardDialog dialog = new DeploymentWizardDialog(shell, new DeploymentWizard(inputs));
+				SortedMap<String, InputDef> inputDefs = AADMHelper.readInputsFromAADM(event);
+				DeploymentWizardDialog dialog = new DeploymentWizardDialog(shell, new DeploymentWizard(inputDefs));
 				
 				if (dialog.OK == dialog.open()) {
 					// Get inputs (file) from Wizard and save them in temporal file
