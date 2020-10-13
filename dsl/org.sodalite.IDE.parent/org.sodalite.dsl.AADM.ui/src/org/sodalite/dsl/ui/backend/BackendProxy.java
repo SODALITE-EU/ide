@@ -111,6 +111,7 @@ import org.sodalite.dsl.optimization.optimization.EAITraining;
 import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 import org.sodalite.dsl.optimization.optimization.Optimization_Model;
+import org.sodalite.dsl.ui.helper.AADMHelper;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
@@ -171,7 +172,7 @@ public class BackendProxy {
 
 	public void processSaveAADM(ExecutionEvent event) throws Exception {
 		// Return selected resource
-		IFile aadmFile = getSelectedFile();
+		IFile aadmFile = AADMHelper.getSelectedFile();
 		if (aadmFile == null)
 			throw new Exception("Selected AADM could not be found");
 		
@@ -186,7 +187,7 @@ public class BackendProxy {
 
 	public void processOptimizeAADM(ExecutionEvent event) throws Exception {
 		// Return selected resource
-		IFile aadmFile = getSelectedFile();
+		IFile aadmFile = AADMHelper.getSelectedFile();
 		if (aadmFile == null)
 			throw new Exception("Selected AADM could not be found");
 		
@@ -198,25 +199,10 @@ public class BackendProxy {
 		String aadmURI = getAadmURI(aadmFile, project);
 		optimizeAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
-
-	private void openFileInEditor(IFile file) throws PartInitException {
-		Display.getDefault().syncExec(new Runnable() {
-			@Override
-			public void run() {
-				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-				IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
-				try {
-					page.openEditor(new FileEditorInput(file), desc.getId());
-				} catch (PartInitException e) {
-					BackendLogger.log("Error open model in editor", e);
-				}
-			}
-		});
-	}
 	
-	public void processDeployAADM(ExecutionEvent event) throws Exception {
+	public void processDeployAADM(ExecutionEvent event, Path inputs_yaml_path) throws Exception {
 		// Return selected resource
-		IFile aadmFile = getSelectedFile();
+		IFile aadmFile = AADMHelper.getSelectedFile();
 		if (aadmFile == null)
 			throw new Exception("Selected AADM could not be found");
 		IProject project = aadmFile.getProject();
@@ -225,10 +211,6 @@ public class BackendProxy {
 
 		// Deploy AADM model
 		String aadmURI = getAadmURI(aadmFile, project);
-		Path inputs_yaml_path = getInputsYamlPath();
-		if (inputs_yaml_path == null)
-			throw new Exception("Invalid inputs file, please select a correct one");
-		
 		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, project, event);
 	}
 
@@ -292,12 +274,6 @@ public class BackendProxy {
 			props.store(out, "Sodalite Metadata");
 		}
 	}
-	
-	private void pasteInClipboard(String value) {
-		StringSelection stringSelection = new StringSelection(value);
-		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		clipboard.setContents(stringSelection, null);
-	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
@@ -316,7 +292,7 @@ public class BackendProxy {
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
-						pasteInClipboard(saveReport.getURI());
+						AADMHelper.pasteInClipboard(saveReport.getURI());
 						String message = "The selected AADM model has been successfully store in the KB with URI:\n"
 								+ saveReport.getURI();
 						MessageDialog.openInformation(parent, "Save AADM", message);
@@ -447,7 +423,7 @@ public class BackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							pasteInClipboard(admin_report[0]);
+							AADMHelper.pasteInClipboard(admin_report[0]);
 							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with token: "
 									+ admin_report[0];
 							MessageDialog.openInformation(parent, "Deploy AADM", message);
@@ -460,7 +436,7 @@ public class BackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							pasteInClipboard(admin_report[0]);
+							AADMHelper.pasteInClipboard(admin_report[0]);
 							String message = "There were problems to deploy the AADM into the infrastructure: " + e.getMessage()
 							+ "\nPlease contact Sodalite administrator and provide her/him this information: "
 							+ "blueprint token: " + admin_report[0] + ", session token: "
@@ -479,32 +455,11 @@ public class BackendProxy {
 		job.schedule();
 	}
 
-	private Path getInputsYamlPath() throws Exception {
-//		Bundle bundle = Platform.getBundle("org.sodalite.dsl.AADM.ui");
-//		URL fileURL = bundle.getEntry("resources/inputs.yaml");
-//		File file = new File(FileLocator.resolve(fileURL).toURI());
-		String selectedInputFile = selectFile("Select the inputs file for app deployment");
-		File file = new File (selectedInputFile);
-		return file.toPath();
-	}
-	
-	protected String selectFile (String dialogText){
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		// File standard dialog
-		FileDialog fileDialog = new FileDialog(shell);
-		fileDialog.setText(dialogText);
-		//fileDialog.setFilterExtensions(new String[] { "*.txt" });
-		// Put in a readable name for the filter
-		//fileDialog.setFilterNames(new String[] { "Textfiles(*.txt)" });
-		String selected = fileDialog.open();
-		return selected;
-	}
-
 	private void processValidationIssues(IFile aadmFile, KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
 		// Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
 			//Open AADM file if not opened to show the errors and warnings
-			openFileInEditor(aadmFile);
+			AADMHelper.openFileInEditor(aadmFile);
 			List<ValidationIssue> issues = readIssuesFromKB(saveReport);
 			manageIssues(event, issues);
 			if (saveReport.hasErrors()) {
@@ -518,7 +473,7 @@ public class BackendProxy {
 		// Check there are not warnings (they do not prevent storage in KB)
 		if (optimizationReport != null && (optimizationReport.hasErrors() || optimizationReport.hasWarnings())) {
 			//Open AADM file if not opened to show the errors and warnings
-			openFileInEditor(aadmFile);
+			AADMHelper.openFileInEditor(aadmFile);
 			
 			List<ValidationIssue> issues = readIssuesFromKB(optimizationReport);
 			manageIssues(event, issues);
@@ -528,7 +483,7 @@ public class BackendProxy {
 		}
 		
 		if (optimizationReport != null && (optimizationReport.hasOptimizationErrors() || optimizationReport.hasOptimizations())) {
-			AADM_Model aadmModel = readAADMModel(aadmFile, event);
+			AADM_Model aadmModel = AADMHelper.readAADMModel(aadmFile, event);
 			// For each optimization model in the list of issues, open the model and process its issues
 			for (String node: getOptimizationNodes (optimizationReport)) {
 				String nodeName = node.substring(node.lastIndexOf('/') + 1);
@@ -584,7 +539,7 @@ public class BackendProxy {
 		Optimization_Model optimizationModel = nodeTemplate.getNode().getOptimization();
 		// Open the optimization model
 		IFile file = getFileFromModel(optimizationModel);
-		openFileInEditor(file);
+		AADMHelper.openFileInEditor(file);
 	}
 
 	private IFile getFileFromModel(Optimization_Model optimizationModel) {
@@ -606,42 +561,6 @@ public class BackendProxy {
 			nodes.add(opt.getNodeTemplate().substring(opt.getNodeTemplate().lastIndexOf('/') + 1));
 		}
 		return nodes;
-	}
-
-	private AADM_Model readAADMModel(IFile aadmFile, ExecutionEvent event) throws PartInitException {
-		openFileInEditor(aadmFile);
-		AADM_Model model = null;
-		Injector injector = AADMActivator.getInstance().getInjector(
-				AADMActivator.ORG_SODALITE_DSL_AADM);
-		XtextResourceSet resourceSet = (XtextResourceSet) injector
-		        .getInstance(XtextResourceSetProvider.class)
-		        .get(aadmFile.getProject());
-		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-
-		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
-		//FIXME Check this behaviour of reading the XTextEditor
-		while (xtextEditor == null) {
-			xtextEditor = EditorUtils.getActiveXtextEditor(event);
-		}
-		if (xtextEditor != null) {
-			IValidationIssueProcessor issueProcessor;
-			IXtextDocument xtextDocument = xtextEditor.getDocument();
-			// FIXME Investigate why the model is not always read, returning null
-			int attempt = 0;
-			while (model == null) {
-				model = (AADM_Model) xtextDocument.readOnly(
-						new IUnitOfWork(){
-						       public AADM_Model exec(Object resource) {
-						    	   AADM_Model model = (AADM_Model) ((XtextResource)resource).getContents().get(0);
-						             return model;
-						       }
-						 });
-			}
-		}
-		//TODO Fix that the optimization models are resolvable
-		if (model != null)
-			EcoreUtil2.resolveAll(model.eResource());
-		return model;
 	}
 
 	private List<ValidationIssue> readIssuesFromKB(KBOptimizationReportData optimizationReport) {
@@ -982,18 +901,6 @@ public class BackendProxy {
 		if (matcher.find())
 			req = matcher.group(1);
 		return req;
-	}
-
-	private IFile getSelectedFile() {
-		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		if (window != null) {
-			IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
-			Object firstElement = selection.getFirstElement();
-			if (firstElement instanceof IAdaptable) {
-				return (IFile) ((IAdaptable) firstElement).getAdapter(IFile.class);
-			}
-		}
-		return null;
 	}
 
 	protected static class ListBasedMarkerAcceptor implements IAcceptor<Issue> {
