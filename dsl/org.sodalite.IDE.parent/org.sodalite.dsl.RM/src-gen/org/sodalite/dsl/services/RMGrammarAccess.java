@@ -29,50 +29,54 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.RM_Model");
 		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
-		private final Keyword cData_typesKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final RuleCall cBEGINTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
-		private final Assignment cDataTypesAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
-		private final RuleCall cDataTypesEDataTypesParserRuleCall_0_2_0 = (RuleCall)cDataTypesAssignment_0_2.eContents().get(0);
-		private final RuleCall cENDTerminalRuleCall_0_3 = (RuleCall)cGroup_0.eContents().get(3);
+		private final Keyword cModuleKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cModuleAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cModuleIDTerminalRuleCall_0_1_0 = (RuleCall)cModuleAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
-		private final Keyword cArtifact_typesKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Keyword cData_typesKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
-		private final Assignment cArtifactTypesAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cArtifactTypesEArtifactTypesParserRuleCall_1_2_0 = (RuleCall)cArtifactTypesAssignment_1_2.eContents().get(0);
+		private final Assignment cDataTypesAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cDataTypesEDataTypesParserRuleCall_1_2_0 = (RuleCall)cDataTypesAssignment_1_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
-		private final Keyword cCapability_typesKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Keyword cArtifact_typesKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
-		private final Assignment cCapabilityTypesAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cCapabilityTypesECapabilityTypesParserRuleCall_2_2_0 = (RuleCall)cCapabilityTypesAssignment_2_2.eContents().get(0);
+		private final Assignment cArtifactTypesAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cArtifactTypesEArtifactTypesParserRuleCall_2_2_0 = (RuleCall)cArtifactTypesAssignment_2_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_2_3 = (RuleCall)cGroup_2.eContents().get(3);
 		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
-		private final Keyword cInterface_typesKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Keyword cCapability_typesKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_3_1 = (RuleCall)cGroup_3.eContents().get(1);
-		private final Assignment cInterfaceTypesAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
-		private final RuleCall cInterfaceTypesEInterfaceTypesParserRuleCall_3_2_0 = (RuleCall)cInterfaceTypesAssignment_3_2.eContents().get(0);
+		private final Assignment cCapabilityTypesAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cCapabilityTypesECapabilityTypesParserRuleCall_3_2_0 = (RuleCall)cCapabilityTypesAssignment_3_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3_3 = (RuleCall)cGroup_3.eContents().get(3);
 		private final Group cGroup_4 = (Group)cUnorderedGroup.eContents().get(4);
-		private final Keyword cRelationship_typesKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Keyword cInterface_typesKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
-		private final Assignment cRelationshipTypesAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
-		private final RuleCall cRelationshipTypesERelationshipTypesParserRuleCall_4_2_0 = (RuleCall)cRelationshipTypesAssignment_4_2.eContents().get(0);
+		private final Assignment cInterfaceTypesAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
+		private final RuleCall cInterfaceTypesEInterfaceTypesParserRuleCall_4_2_0 = (RuleCall)cInterfaceTypesAssignment_4_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_4_3 = (RuleCall)cGroup_4.eContents().get(3);
 		private final Group cGroup_5 = (Group)cUnorderedGroup.eContents().get(5);
-		private final Keyword cNode_typesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Keyword cRelationship_typesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_5_1 = (RuleCall)cGroup_5.eContents().get(1);
-		private final Assignment cNodeTypesAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final RuleCall cNodeTypesENodeTypesParserRuleCall_5_2_0 = (RuleCall)cNodeTypesAssignment_5_2.eContents().get(0);
+		private final Assignment cRelationshipTypesAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
+		private final RuleCall cRelationshipTypesERelationshipTypesParserRuleCall_5_2_0 = (RuleCall)cRelationshipTypesAssignment_5_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_5_3 = (RuleCall)cGroup_5.eContents().get(3);
 		private final Group cGroup_6 = (Group)cUnorderedGroup.eContents().get(6);
-		private final Keyword cPolicy_typesKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cNode_typesKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_6_1 = (RuleCall)cGroup_6.eContents().get(1);
-		private final Assignment cPolicyTypesAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
-		private final RuleCall cPolicyTypesEPolicyTypesParserRuleCall_6_2_0 = (RuleCall)cPolicyTypesAssignment_6_2.eContents().get(0);
+		private final Assignment cNodeTypesAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
+		private final RuleCall cNodeTypesENodeTypesParserRuleCall_6_2_0 = (RuleCall)cNodeTypesAssignment_6_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_6_3 = (RuleCall)cGroup_6.eContents().get(3);
+		private final Group cGroup_7 = (Group)cUnorderedGroup.eContents().get(7);
+		private final Keyword cPolicy_typesKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_7_1 = (RuleCall)cGroup_7.eContents().get(1);
+		private final Assignment cPolicyTypesAssignment_7_2 = (Assignment)cGroup_7.eContents().get(2);
+		private final RuleCall cPolicyTypesEPolicyTypesParserRuleCall_7_2_0 = (RuleCall)cPolicyTypesAssignment_7_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_7_3 = (RuleCall)cGroup_7.eContents().get(3);
 		
 		//RM_Model:
-		//	('data_types:'
+		//	('module:' module=ID)? & ('data_types:'
 		//	BEGIN
 		//	dataTypes=EDataTypes
 		//	END)? & ('artifact_types:'
@@ -96,137 +100,150 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('data_types:' BEGIN dataTypes=EDataTypes END)? & ('artifact_types:' BEGIN artifactTypes=EArtifactTypes END)? &
-		//('capability_types:' BEGIN capabilityTypes=ECapabilityTypes END)? & ('interface_types:' BEGIN
-		//interfaceTypes=EInterfaceTypes END)? & ('relationship_types:' BEGIN relationshipTypes=ERelationshipTypes END)? &
-		//('node_types:' BEGIN nodeTypes=ENodeTypes END)? & ('policy_types:' BEGIN policyTypes=EPolicyTypes END)?
+		//('module:' module=ID)? & ('data_types:' BEGIN dataTypes=EDataTypes END)? & ('artifact_types:' BEGIN
+		//artifactTypes=EArtifactTypes END)? & ('capability_types:' BEGIN capabilityTypes=ECapabilityTypes END)? &
+		//('interface_types:' BEGIN interfaceTypes=EInterfaceTypes END)? & ('relationship_types:' BEGIN
+		//relationshipTypes=ERelationshipTypes END)? & ('node_types:' BEGIN nodeTypes=ENodeTypes END)? & ('policy_types:' BEGIN
+		//policyTypes=EPolicyTypes END)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//('data_types:' BEGIN dataTypes=EDataTypes END)?
+		//('module:' module=ID)?
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//'data_types:'
-		public Keyword getData_typesKeyword_0_0() { return cData_typesKeyword_0_0; }
+		//'module:'
+		public Keyword getModuleKeyword_0_0() { return cModuleKeyword_0_0; }
 		
-		//BEGIN
-		public RuleCall getBEGINTerminalRuleCall_0_1() { return cBEGINTerminalRuleCall_0_1; }
+		//module=ID
+		public Assignment getModuleAssignment_0_1() { return cModuleAssignment_0_1; }
 		
-		//dataTypes=EDataTypes
-		public Assignment getDataTypesAssignment_0_2() { return cDataTypesAssignment_0_2; }
+		//ID
+		public RuleCall getModuleIDTerminalRuleCall_0_1_0() { return cModuleIDTerminalRuleCall_0_1_0; }
 		
-		//EDataTypes
-		public RuleCall getDataTypesEDataTypesParserRuleCall_0_2_0() { return cDataTypesEDataTypesParserRuleCall_0_2_0; }
-		
-		//END
-		public RuleCall getENDTerminalRuleCall_0_3() { return cENDTerminalRuleCall_0_3; }
-		
-		//('artifact_types:' BEGIN artifactTypes=EArtifactTypes END)?
+		//('data_types:' BEGIN dataTypes=EDataTypes END)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//'artifact_types:'
-		public Keyword getArtifact_typesKeyword_1_0() { return cArtifact_typesKeyword_1_0; }
+		//'data_types:'
+		public Keyword getData_typesKeyword_1_0() { return cData_typesKeyword_1_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1_1() { return cBEGINTerminalRuleCall_1_1; }
 		
-		//artifactTypes=EArtifactTypes
-		public Assignment getArtifactTypesAssignment_1_2() { return cArtifactTypesAssignment_1_2; }
+		//dataTypes=EDataTypes
+		public Assignment getDataTypesAssignment_1_2() { return cDataTypesAssignment_1_2; }
 		
-		//EArtifactTypes
-		public RuleCall getArtifactTypesEArtifactTypesParserRuleCall_1_2_0() { return cArtifactTypesEArtifactTypesParserRuleCall_1_2_0; }
+		//EDataTypes
+		public RuleCall getDataTypesEDataTypesParserRuleCall_1_2_0() { return cDataTypesEDataTypesParserRuleCall_1_2_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_1_3() { return cENDTerminalRuleCall_1_3; }
 		
-		//('capability_types:' BEGIN capabilityTypes=ECapabilityTypes END)?
+		//('artifact_types:' BEGIN artifactTypes=EArtifactTypes END)?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//'capability_types:'
-		public Keyword getCapability_typesKeyword_2_0() { return cCapability_typesKeyword_2_0; }
+		//'artifact_types:'
+		public Keyword getArtifact_typesKeyword_2_0() { return cArtifact_typesKeyword_2_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_2_1() { return cBEGINTerminalRuleCall_2_1; }
 		
-		//capabilityTypes=ECapabilityTypes
-		public Assignment getCapabilityTypesAssignment_2_2() { return cCapabilityTypesAssignment_2_2; }
+		//artifactTypes=EArtifactTypes
+		public Assignment getArtifactTypesAssignment_2_2() { return cArtifactTypesAssignment_2_2; }
 		
-		//ECapabilityTypes
-		public RuleCall getCapabilityTypesECapabilityTypesParserRuleCall_2_2_0() { return cCapabilityTypesECapabilityTypesParserRuleCall_2_2_0; }
+		//EArtifactTypes
+		public RuleCall getArtifactTypesEArtifactTypesParserRuleCall_2_2_0() { return cArtifactTypesEArtifactTypesParserRuleCall_2_2_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_2_3() { return cENDTerminalRuleCall_2_3; }
 		
-		//('interface_types:' BEGIN interfaceTypes=EInterfaceTypes END)?
+		//('capability_types:' BEGIN capabilityTypes=ECapabilityTypes END)?
 		public Group getGroup_3() { return cGroup_3; }
 		
-		//'interface_types:'
-		public Keyword getInterface_typesKeyword_3_0() { return cInterface_typesKeyword_3_0; }
+		//'capability_types:'
+		public Keyword getCapability_typesKeyword_3_0() { return cCapability_typesKeyword_3_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_3_1() { return cBEGINTerminalRuleCall_3_1; }
 		
-		//interfaceTypes=EInterfaceTypes
-		public Assignment getInterfaceTypesAssignment_3_2() { return cInterfaceTypesAssignment_3_2; }
+		//capabilityTypes=ECapabilityTypes
+		public Assignment getCapabilityTypesAssignment_3_2() { return cCapabilityTypesAssignment_3_2; }
 		
-		//EInterfaceTypes
-		public RuleCall getInterfaceTypesEInterfaceTypesParserRuleCall_3_2_0() { return cInterfaceTypesEInterfaceTypesParserRuleCall_3_2_0; }
+		//ECapabilityTypes
+		public RuleCall getCapabilityTypesECapabilityTypesParserRuleCall_3_2_0() { return cCapabilityTypesECapabilityTypesParserRuleCall_3_2_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_3_3() { return cENDTerminalRuleCall_3_3; }
 		
-		//('relationship_types:' BEGIN relationshipTypes=ERelationshipTypes END)?
+		//('interface_types:' BEGIN interfaceTypes=EInterfaceTypes END)?
 		public Group getGroup_4() { return cGroup_4; }
 		
-		//'relationship_types:'
-		public Keyword getRelationship_typesKeyword_4_0() { return cRelationship_typesKeyword_4_0; }
+		//'interface_types:'
+		public Keyword getInterface_typesKeyword_4_0() { return cInterface_typesKeyword_4_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_4_1() { return cBEGINTerminalRuleCall_4_1; }
 		
-		//relationshipTypes=ERelationshipTypes
-		public Assignment getRelationshipTypesAssignment_4_2() { return cRelationshipTypesAssignment_4_2; }
+		//interfaceTypes=EInterfaceTypes
+		public Assignment getInterfaceTypesAssignment_4_2() { return cInterfaceTypesAssignment_4_2; }
 		
-		//ERelationshipTypes
-		public RuleCall getRelationshipTypesERelationshipTypesParserRuleCall_4_2_0() { return cRelationshipTypesERelationshipTypesParserRuleCall_4_2_0; }
+		//EInterfaceTypes
+		public RuleCall getInterfaceTypesEInterfaceTypesParserRuleCall_4_2_0() { return cInterfaceTypesEInterfaceTypesParserRuleCall_4_2_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_4_3() { return cENDTerminalRuleCall_4_3; }
 		
-		//('node_types:' BEGIN nodeTypes=ENodeTypes END)?
+		//('relationship_types:' BEGIN relationshipTypes=ERelationshipTypes END)?
 		public Group getGroup_5() { return cGroup_5; }
 		
-		//'node_types:'
-		public Keyword getNode_typesKeyword_5_0() { return cNode_typesKeyword_5_0; }
+		//'relationship_types:'
+		public Keyword getRelationship_typesKeyword_5_0() { return cRelationship_typesKeyword_5_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_5_1() { return cBEGINTerminalRuleCall_5_1; }
 		
-		//nodeTypes=ENodeTypes
-		public Assignment getNodeTypesAssignment_5_2() { return cNodeTypesAssignment_5_2; }
+		//relationshipTypes=ERelationshipTypes
+		public Assignment getRelationshipTypesAssignment_5_2() { return cRelationshipTypesAssignment_5_2; }
 		
-		//ENodeTypes
-		public RuleCall getNodeTypesENodeTypesParserRuleCall_5_2_0() { return cNodeTypesENodeTypesParserRuleCall_5_2_0; }
+		//ERelationshipTypes
+		public RuleCall getRelationshipTypesERelationshipTypesParserRuleCall_5_2_0() { return cRelationshipTypesERelationshipTypesParserRuleCall_5_2_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_5_3() { return cENDTerminalRuleCall_5_3; }
 		
-		//('policy_types:' BEGIN policyTypes=EPolicyTypes END)?
+		//('node_types:' BEGIN nodeTypes=ENodeTypes END)?
 		public Group getGroup_6() { return cGroup_6; }
 		
-		//'policy_types:'
-		public Keyword getPolicy_typesKeyword_6_0() { return cPolicy_typesKeyword_6_0; }
+		//'node_types:'
+		public Keyword getNode_typesKeyword_6_0() { return cNode_typesKeyword_6_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_6_1() { return cBEGINTerminalRuleCall_6_1; }
 		
-		//policyTypes=EPolicyTypes
-		public Assignment getPolicyTypesAssignment_6_2() { return cPolicyTypesAssignment_6_2; }
+		//nodeTypes=ENodeTypes
+		public Assignment getNodeTypesAssignment_6_2() { return cNodeTypesAssignment_6_2; }
 		
-		//EPolicyTypes
-		public RuleCall getPolicyTypesEPolicyTypesParserRuleCall_6_2_0() { return cPolicyTypesEPolicyTypesParserRuleCall_6_2_0; }
+		//ENodeTypes
+		public RuleCall getNodeTypesENodeTypesParserRuleCall_6_2_0() { return cNodeTypesENodeTypesParserRuleCall_6_2_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_6_3() { return cENDTerminalRuleCall_6_3; }
+		
+		//('policy_types:' BEGIN policyTypes=EPolicyTypes END)?
+		public Group getGroup_7() { return cGroup_7; }
+		
+		//'policy_types:'
+		public Keyword getPolicy_typesKeyword_7_0() { return cPolicy_typesKeyword_7_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_7_1() { return cBEGINTerminalRuleCall_7_1; }
+		
+		//policyTypes=EPolicyTypes
+		public Assignment getPolicyTypesAssignment_7_2() { return cPolicyTypesAssignment_7_2; }
+		
+		//EPolicyTypes
+		public RuleCall getPolicyTypesEPolicyTypesParserRuleCall_7_2_0() { return cPolicyTypesEPolicyTypesParserRuleCall_7_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_7_3() { return cENDTerminalRuleCall_7_3; }
 	}
 	public class EDataTypesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EDataTypes");
@@ -4178,7 +4195,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 
 	
 	//RM_Model:
-	//	('data_types:'
+	//	('module:' module=ID)? & ('data_types:'
 	//	BEGIN
 	//	dataTypes=EDataTypes
 	//	END)? & ('artifact_types:'

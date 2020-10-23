@@ -105,6 +105,8 @@ Inputs : 'inputs:';
 
 Length : 'length:';
 
+Module : 'module:';
+
 Status : 'status:';
 
 Equal : 'equal:';

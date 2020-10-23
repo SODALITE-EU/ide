@@ -30,6 +30,7 @@ import org.sodalite.dsl.rM.RM_Model;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.dsl.rM.impl.RM_ModelImpl#getModule <em>Module</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.RM_ModelImpl#getDataTypes <em>Data Types</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.RM_ModelImpl#getArtifactTypes <em>Artifact Types</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.RM_ModelImpl#getCapabilityTypes <em>Capability Types</em>}</li>
@@ -43,6 +44,26 @@ import org.sodalite.dsl.rM.RM_Model;
  */
 public class RM_ModelImpl extends MinimalEObjectImpl.Container implements RM_Model
 {
+  /**
+   * The default value of the '{@link #getModule() <em>Module</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getModule()
+   * @generated
+   * @ordered
+   */
+  protected static final String MODULE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getModule() <em>Module</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getModule()
+   * @generated
+   * @ordered
+   */
+  protected String module = MODULE_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getDataTypes() <em>Data Types</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -132,6 +153,31 @@ public class RM_ModelImpl extends MinimalEObjectImpl.Container implements RM_Mod
   protected EClass eStaticClass()
   {
     return RMPackage.Literals.RM_MODEL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getModule()
+  {
+    return module;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setModule(String newModule)
+  {
+    String oldModule = module;
+    module = newModule;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.RM_MODEL__MODULE, oldModule, module));
   }
 
   /**
@@ -522,6 +568,8 @@ public class RM_ModelImpl extends MinimalEObjectImpl.Container implements RM_Mod
   {
     switch (featureID)
     {
+      case RMPackage.RM_MODEL__MODULE:
+        return getModule();
       case RMPackage.RM_MODEL__DATA_TYPES:
         return getDataTypes();
       case RMPackage.RM_MODEL__ARTIFACT_TYPES:
@@ -550,6 +598,9 @@ public class RM_ModelImpl extends MinimalEObjectImpl.Container implements RM_Mod
   {
     switch (featureID)
     {
+      case RMPackage.RM_MODEL__MODULE:
+        setModule((String)newValue);
+        return;
       case RMPackage.RM_MODEL__DATA_TYPES:
         setDataTypes((EDataTypes)newValue);
         return;
@@ -585,6 +636,9 @@ public class RM_ModelImpl extends MinimalEObjectImpl.Container implements RM_Mod
   {
     switch (featureID)
     {
+      case RMPackage.RM_MODEL__MODULE:
+        setModule(MODULE_EDEFAULT);
+        return;
       case RMPackage.RM_MODEL__DATA_TYPES:
         setDataTypes((EDataTypes)null);
         return;
@@ -620,6 +674,8 @@ public class RM_ModelImpl extends MinimalEObjectImpl.Container implements RM_Mod
   {
     switch (featureID)
     {
+      case RMPackage.RM_MODEL__MODULE:
+        return MODULE_EDEFAULT == null ? module != null : !MODULE_EDEFAULT.equals(module);
       case RMPackage.RM_MODEL__DATA_TYPES:
         return dataTypes != null;
       case RMPackage.RM_MODEL__ARTIFACT_TYPES:
@@ -636,6 +692,23 @@ public class RM_ModelImpl extends MinimalEObjectImpl.Container implements RM_Mod
         return policyTypes != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (module: ");
+    result.append(module);
+    result.append(')');
+    return result.toString();
   }
 
 } //RM_ModelImpl

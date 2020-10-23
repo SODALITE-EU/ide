@@ -7,6 +7,7 @@
   <genPackages prefix="RM" basePackage="org.sodalite.dsl" disposableProviderFactory="true"
       fileExtensions="rm" ecorePackage="RM.ecore#/">
     <genClasses ecoreClass="RM.ecore#//RM_Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//RM_Model/module"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//RM_Model/dataTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//RM_Model/artifactTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//RM_Model/capabilityTypes"/>
