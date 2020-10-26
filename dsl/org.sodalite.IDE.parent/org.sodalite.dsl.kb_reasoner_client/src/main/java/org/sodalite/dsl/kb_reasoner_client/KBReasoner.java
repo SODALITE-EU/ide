@@ -11,6 +11,7 @@
 package org.sodalite.dsl.kb_reasoner_client;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
@@ -18,6 +19,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBModel;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
@@ -40,4 +42,9 @@ public interface KBReasoner {
 	IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json) throws Exception;
 	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token) throws Exception;
 	DeploymentStatus getAADMDeploymentStatus(String session_token) throws Exception;
+	KBModel getModelForResource(String resource, String module) throws Exception;
+	KBModel getModel(String modelId) throws Exception;
+	List<KBModel> getAADMsInModule (String module) throws Exception;
+	List<KBModel> getRMsInModule (String module) throws Exception;
+	void deleteModel(String modelId) throws Exception;
 }

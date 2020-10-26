@@ -40,6 +40,7 @@
 		<module>org.sodalite.dsl.optimization.ide</module>
 		<module>org.sodalite.dsl.optimization.ui</module>
 		<module>org.sodalite.dsl.preferences</module>
+		<module>org.sodalite.ide.ui</module>
 	</modules>
 	<build>
 		<plugins>

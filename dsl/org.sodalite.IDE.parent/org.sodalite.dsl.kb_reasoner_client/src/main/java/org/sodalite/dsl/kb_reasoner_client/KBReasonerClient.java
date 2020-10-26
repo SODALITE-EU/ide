@@ -22,9 +22,6 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.net.ssl.SSLContext;
-
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -39,6 +36,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
+import org.sodalite.dsl.kb_reasoner_client.types.KBModel;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
@@ -63,8 +61,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -363,6 +359,43 @@ public class KBReasonerClient implements KBReasoner {
 		
 		return deploymentStatus;
 	}
+	
+	@Override
+	public KBModel getModelForResource(String resource, String module) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public KBModel getModel(String modelId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<KBModel> getAADMsInModule(String module) throws Exception {
+		return getModelsInModule ("AADM", module);
+	}
+
+	@Override
+	public List<KBModel> getRMsInModule(String module) throws Exception {
+		return getModelsInModule ("RM", module);
+	}
+	
+	private List<KBModel> getModelsInModule(String type, String module) throws Exception {
+		List<KBModel> result = new ArrayList<>();
+		Assert.notNull(module, "Pass a not null module");
+		String url = kbReasonerUri + "models?type=" + type + "&namespace=https://www.sodalite.eu/ontologies/workspace/1/" + module;
+		result = getJSONObjectForType(result.getClass(), new URI(url), HttpStatus.OK);
+		return result;
+	}
+
+	@Override
+	public void deleteModel(String modelId) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	private List<KBError> processErrors(String json) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
@@ -553,7 +586,7 @@ public class KBReasonerClient implements KBReasoner {
 		return response.getBody();
 	}
 	
-	public <T> T sendMultipartFormDataMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts, HttpMethod method, HttpStatus expectedStatus) throws Exception{
+	private <T> T sendMultipartFormDataMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts, HttpMethod method, HttpStatus expectedStatus) throws Exception{
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 		
@@ -576,7 +609,7 @@ public class KBReasonerClient implements KBReasoner {
 			return getRestTemplate().exchange(uri, method, requestEntity, clazz);
 	}
 	
-	public <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) throws Exception {
+	private <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) throws Exception {
 		RequestEntity<S> request = RequestEntity.post(uri)
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(object);
@@ -585,5 +618,6 @@ public class KBReasonerClient implements KBReasoner {
 		else 
 			return (ResponseEntity<T>) getRestTemplate().exchange(request, clazz);
 	}
+
 
 }

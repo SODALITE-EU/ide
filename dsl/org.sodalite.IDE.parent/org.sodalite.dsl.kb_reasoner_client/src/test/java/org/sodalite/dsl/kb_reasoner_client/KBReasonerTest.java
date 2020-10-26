@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +30,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.KBModel;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.Node;
@@ -134,6 +136,12 @@ class KBReasonerTest {
 		KBSaveReportData report = saveRM("", "src/test/resources/snow.rm.ttl");
 		assertFalse (report.hasErrors());
 		assertNotNull (report.getURI());
+	}
+	
+	@Test
+	void testGetRMInModule() throws Exception {
+		List<KBModel> models = kbclient.getRMsInModule("docker");
+		assertFalse (models.isEmpty());
 	}
 
 	private KBSaveReportData saveAADM(String aadmURI, String ttlPath) throws IOException, Exception {
