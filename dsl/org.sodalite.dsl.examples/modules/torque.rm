@@ -1,3 +1,5 @@
+module: hpc
+
 capability_types:
 	sodalite.capabilities.hpc.ConfiguredJob:
 		derived_from: tosca.capabilities.Root

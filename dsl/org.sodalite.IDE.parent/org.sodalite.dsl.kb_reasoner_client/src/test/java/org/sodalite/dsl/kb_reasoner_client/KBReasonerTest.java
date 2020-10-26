@@ -52,7 +52,6 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI);
-		aadmURI = saveAADM(null, "src/test/resources/snow.aadm.ttl").getURI();
 	}
 	
 	@Test
@@ -114,40 +113,47 @@ class KBReasonerTest {
 	
 	@Test
 	void testSaveAADMWithErrors() throws Exception {
-		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/snow_with_errors.ttl");
-		String aadmTTL = new String(Files.readAllBytes (aadm_path));
-		String submissionId = "snow";
+		String aadmURI = "";
+		String namespace = "snow";
 		boolean complete = false;
-		KBSaveReportData report = kbclient.saveAADM(aadmTTL, submissionId, complete);
+		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/optimization.aadm.ttl", "src/test/resources/snow.aadm", namespace, complete);
 		assertTrue(report.hasErrors());
 	}
 	
 	@Test
 	void testSaveAADM() throws Exception {
-		KBSaveReportData report = saveAADM("", "src/test/resources/optimization.aadm.ttl");
-		assertFalse (report.hasErrors());
+		String aadmURI = "";
+		String namespace = "snow";
+		boolean complete = false;
+		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/optimization.aadm.ttl", "src/test/resources/snow.aadm", namespace, complete);
+		assertTrue(report.hasErrors());
 		assertNotNull (report.getURI());
 	}
 	
 	@Test
 	void testSaveRM() throws Exception {
-		KBSaveReportData report = saveRM("", "src/test/resources/snow.rm.ttl");
+		String rmURI = "";
+		String namespace = "docker";
+		KBSaveReportData report = saveRM(rmURI, "src/test/resources/modules.docker_registry.rm.ttl", "src/test/resources/docker_registry.rm", namespace);
 		assertFalse (report.hasErrors());
 		assertNotNull (report.getURI());
 	}
-
-	private KBSaveReportData saveAADM(String aadmURI, String ttlPath) throws IOException, Exception {
-		Path aadm_path = FileSystems.getDefault().getPath(ttlPath);
-		String aadmTTL = new String(Files.readAllBytes (aadm_path));
-		boolean complete = true;
-		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, complete);
+	
+	private KBSaveReportData saveRM(String rmURI, String ttlPath, String dslPath, String namespace) throws IOException, Exception {
+		Path ttl_path = FileSystems.getDefault().getPath(ttlPath);
+		String rmTTL = new String(Files.readAllBytes (ttl_path));
+		Path dsl_path = FileSystems.getDefault().getPath(dslPath);
+		String rmDSL = new String(Files.readAllBytes (dsl_path));
+		KBSaveReportData report = kbclient.saveRM(rmTTL, rmURI, namespace, rmDSL);
 		return report;
 	}
 	
-	private KBSaveReportData saveRM(String rmURI, String ttlPath) throws IOException, Exception {
-		Path rm_path = FileSystems.getDefault().getPath(ttlPath);
-		String rmTTL = new String(Files.readAllBytes (rm_path));
-		KBSaveReportData report = kbclient.saveRM(rmTTL, rmURI);
+	private KBSaveReportData saveAADM(String aadmURI, String ttlPath, String dslPath, String namespace, boolean complete) throws IOException, Exception {
+		Path ttl_path = FileSystems.getDefault().getPath(ttlPath);
+		String aadmTTL = new String(Files.readAllBytes (ttl_path));
+		Path dsl_path = FileSystems.getDefault().getPath(dslPath);
+		String aadmDSL = new String(Files.readAllBytes (dsl_path));
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, namespace, aadmDSL, complete);
 		return report;
 	}
 	

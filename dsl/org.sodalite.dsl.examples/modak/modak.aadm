@@ -1,3 +1,5 @@
+module: modak
+
 inputs:
 	modak-endpoint:
 		type: string

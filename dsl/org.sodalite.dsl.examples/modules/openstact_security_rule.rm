@@ -1,3 +1,5 @@
+module: openstack
+
 data_types:
 	sodalite.datatypes.OpenStack.SecurityRule:  
 		derived_from: tosca.datatypes.Root 

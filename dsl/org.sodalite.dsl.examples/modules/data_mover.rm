@@ -1,3 +1,5 @@
+module: hpc
+
 data_types:
 	//nested datatypes not supported
 	sodalite.datatypes.data.mover.gridftpSpec: 

@@ -267,7 +267,15 @@ public class BackendProxy {
 				//Generate Model
 				generateAADMModel(aadmFile, monitor);
 				
-				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, false);
+				//Read RM DSL as plain text
+				String aadmDSL = AADMHelper.readFile(aadmFile);
+				
+				//Get module (namespace) from RM
+				String namespace = AADMHelper.getAADMModule(aadmFile, event);
+				
+				//TODO Ask user on save model whether to complete the model by KB
+				boolean complete = false;
+				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, namespace, aadmDSL, complete);
 				processValidationIssues(aadmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception(
@@ -353,7 +361,16 @@ public class BackendProxy {
 					
 					// Save the AADM model into the KB
 					subMonitor.setTaskName("Saving AADM");
-					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, true);
+					
+					//Read RM DSL as plain text
+					String aadmDSL = AADMHelper.readFile(aadmfile);
+					
+					//Get module (namespace) from RM
+					String namespace = AADMHelper.getAADMModule(aadmfile, event);
+					
+					boolean complete = true;
+					
+					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, namespace, aadmDSL, complete);
 					if (saveReport == null)
 						throw new Exception("There was a problem to save the AADM into the KB, please contact Sodalite administrator");
 					

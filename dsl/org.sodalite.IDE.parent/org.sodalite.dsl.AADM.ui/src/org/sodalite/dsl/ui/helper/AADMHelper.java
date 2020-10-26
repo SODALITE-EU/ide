@@ -4,6 +4,9 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -33,6 +36,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.rM.EParameterDefinition;
+import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.ui.backend.BackendLogger;
 
 import com.google.inject.Injector;
@@ -133,6 +137,19 @@ public class AADMHelper {
 				}
 			}
 		});
+	}
+	
+	public static String readFile(IFile file) throws IOException {
+		String path = file.getLocationURI().toString();
+		path = path.substring(path.indexOf(File.separator));
+		Path file_path = FileSystems.getDefault().getPath(path);
+		String content = new String(Files.readAllBytes(file_path));
+		return content;
+	}
+	
+	public static String getAADMModule(IFile rmFile, ExecutionEvent event) throws PartInitException {
+		AADM_Model model = readAADMModel (rmFile, event);
+		return model.getModule();
 	}
 	
 	public static void pasteInClipboard(String value) {

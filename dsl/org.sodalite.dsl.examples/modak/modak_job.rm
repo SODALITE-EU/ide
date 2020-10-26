@@ -1,3 +1,5 @@
+module: modak
+
 data_types:
 	//Job options
 	sodalite.datatypes.modak.job_options:

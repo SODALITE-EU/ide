@@ -17,4 +17,4 @@ node_types:
 									entity: SELF
 									property: sodalite.nodes.Compute.docker_ip
 						implementation:
-							primary:  "/workspace/iac-management/blueprint-samples/blueprints/sodalite-test/modules/vm/playbooks/set_ip.yaml"
+							primary:  "/home/yosu/Projects/Sodalite/Git/iac-management/blueprint-samples/blueprints/sodalite-test/modules/vm/playbooks/set_ip.yaml"

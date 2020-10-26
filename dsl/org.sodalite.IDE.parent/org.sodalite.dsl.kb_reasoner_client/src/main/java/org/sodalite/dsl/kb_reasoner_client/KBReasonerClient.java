@@ -22,9 +22,6 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.net.ssl.SSLContext;
-
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -63,8 +60,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -160,19 +155,18 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI, boolean complete) throws Exception{
+	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String namespace, String aadmDSL, boolean complete) throws Exception{
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
+		Assert.isTrue(!aadmDSL.isEmpty(), "AADM DSL content can neither be null nor empty");
 		String url = kbReasonerUri + "saveAADM";
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-		//AADM TTL
 		map.add("aadmTTL", aadmTTL);
-		
-		//AADM TTL
 		map.add("aadmURI", aadmURI);
-		
 		map.add("complete", complete);
+		map.add("namespace", namespace);
+		map.add("aadmDSL", aadmDSL);
 		
 		KBSaveReportData report = new KBSaveReportData();
 		try {
@@ -207,17 +201,16 @@ public class KBReasonerClient implements KBReasoner {
 	}
 	
 	@Override
-	public KBSaveReportData saveRM(String rmTTL, String rmURI) throws Exception{
+	public KBSaveReportData saveRM(String rmTTL, String rmURI, String namespace, String rmDSL) throws Exception{
 		Assert.isTrue(!rmTTL.isEmpty(), "Turtle content for RM can neither be null nor empty");
 		String url = kbReasonerUri + "saveRM";
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-		//AADM TTL
 		map.add("rmTTL", rmTTL);
-		
-		//AADM TTL
 		map.add("rmURI", rmURI);
+		map.add("namespace", namespace);
+		map.add("rmDSL", rmDSL);
 		
 		KBSaveReportData report = new KBSaveReportData();
 		try {

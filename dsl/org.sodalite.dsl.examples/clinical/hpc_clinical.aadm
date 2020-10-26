@@ -1,3 +1,5 @@
+module: clinical
+
 inputs:
     frontend-address:
       type: string

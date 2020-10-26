@@ -1,3 +1,5 @@
+module: hpc
+
 node_templates:
 	//FIXME Allow "-" in IDs
 	hpc_wm_torque: 

@@ -1,3 +1,5 @@
+module: vehicleiot
+
 node_types:
 	sodalite.nodes.PrometheusConfiguration:        
 		derived_from: tosca.nodes.SoftwareComponent

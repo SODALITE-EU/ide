@@ -46,11 +46,13 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
@@ -59,10 +61,12 @@ import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.editor.validation.MarkerIssueProcessor;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
@@ -158,6 +162,14 @@ public class BackendProxy {
 		return rmTTL;
 	}
 	
+	private String readFile(IFile file) throws IOException {
+		String path = file.getLocationURI().toString();
+		path = path.substring(path.indexOf(File.separator));
+		Path file_path = FileSystems.getDefault().getPath(path);
+		String content = new String(Files.readAllBytes(file_path));
+		return content;
+	}
+	
 	private String getRmURI(IFile rmfile, IProject project) throws IOException {
 		Path path = getRMPropertiesFile(rmfile, project);
 		String uri = null;
@@ -211,7 +223,13 @@ public class BackendProxy {
 				//Generate Model
 				generateRMModel(rmFile, monitor);
 				
-				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI);
+				//Read RM DSL as plain text
+				String rmDSL = readFile(rmFile);
+				
+				//Get module (namespace) from RM
+				String namespace = getRMModule(rmFile, event);
+				
+				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI, namespace, rmDSL);
 				processValidationIssues(rmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception("The RM model could not be saved into the KB. Please, contact your Sodalite administrator");
@@ -459,4 +477,46 @@ public class BackendProxy {
 			return source;
 		}
 	}
+	
+	private String getRMModule(IFile rmFile, ExecutionEvent event) throws PartInitException {
+		RM_Model model = readRM (rmFile, event);
+		return model.getModule();
+	}
+	
+	private RM_Model readRM(IFile rmFile, ExecutionEvent event) throws PartInitException {
+		openFileInEditor(rmFile);
+		RM_Model model = null;
+		Injector injector = RMActivator.getInstance().getInjector(
+				RMActivator.ORG_SODALITE_DSL_RM);
+		XtextResourceSet resourceSet = (XtextResourceSet) injector
+		        .getInstance(XtextResourceSetProvider.class)
+		        .get(rmFile.getProject());
+		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+
+		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
+		//FIXME Check this behaviour of reading the XTextEditor
+		while (xtextEditor == null) {
+			xtextEditor = EditorUtils.getActiveXtextEditor(event);
+		}
+		if (xtextEditor != null) {
+			IValidationIssueProcessor issueProcessor;
+			IXtextDocument xtextDocument = xtextEditor.getDocument();
+			// FIXME Investigate why the model is not always read, returning null
+			int attempt = 0;
+			while (model == null) {
+				model = (RM_Model) xtextDocument.readOnly(
+						new IUnitOfWork(){
+						       public RM_Model exec(Object resource) {
+						    	   RM_Model model = (RM_Model) ((XtextResource)resource).getContents().get(0);
+						             return model;
+						       }
+						 });
+			}
+		}
+
+		if (model != null)
+			EcoreUtil2.resolveAll(model.eResource());
+		return model;
+	}
+
 }
