@@ -7,15 +7,21 @@ import javax.inject.Named;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Menu;
 import org.sodalite.ide.ui.views.model.Node;
 
 public class KBView {
@@ -32,6 +38,12 @@ public class KBView {
 		viewerColumn.getColumn().setWidth(300);
 		viewerColumn.getColumn().setText("KB Content");
 		viewerColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new KBLabelProvider()));
+
+		// Menu
+		createContextMenu(viewer);
+
+		// Model
+		// FIXME Retrieve KB tree model (modules, models) from the KB Reasoner
 
 		Node<String> root = new Node<>("KB");
 		Node<String> rms = root.addChild(new Node<String>("RMs"));
@@ -64,6 +76,75 @@ public class KBView {
 
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 
+	}
+
+	private void createContextMenu(TreeViewer viewer) {
+
+		MenuManager menuMgr = new MenuManager();
+		menuMgr.addMenuListener(new IMenuListener() {
+
+			@Override
+			public void menuAboutToShow(IMenuManager manager) {
+
+				// initialize the action to perform
+				manager.removeAll();
+				ISelection selection = viewer.getSelection();
+				if (!selection.isEmpty()) {
+					TreeSelection ts = (TreeSelection) selection;
+					if (ts.toList().size() == 1) {
+						Node fs = (Node) ts.getFirstElement();
+						String data = (String) fs.getData();
+						if (data.contains(".rm") || data.contains(".aadm")) {
+							createModelContextualMenu(manager);
+						} else if (!((data.contains("RMs") || data.contains("AADMs")))) {
+							createModuleContextualMenu(manager);
+						}
+					}
+				}
+			}
+
+			private void createModuleContextualMenu(IMenuManager manager) {
+				Action retrieveAction = new Action() {
+					public void run() {
+						// the action code
+						System.out.println("Retrieve module invoked");
+					}
+				};
+				retrieveAction.setText("Retrieve module ...");
+				manager.add(retrieveAction);
+
+				Action deleteAction = new Action() {
+					public void run() {
+						// the action code
+						System.out.println("Delete module invoked");
+					}
+				};
+				deleteAction.setText("Delete module ...");
+				manager.add(deleteAction);
+			}
+
+			private void createModelContextualMenu(IMenuManager manager) {
+				Action retrieveAction = new Action() {
+					public void run() {
+						// the action code
+						System.out.println("Retrieve model invoked");
+					}
+				};
+				retrieveAction.setText("Retrieve model ...");
+				manager.add(retrieveAction);
+
+				Action deleteAction = new Action() {
+					public void run() {
+						// the action code
+						System.out.println("Delete model invoked");
+					}
+				};
+				deleteAction.setText("Delete model ...");
+				manager.add(deleteAction);
+			}
+		});
+		Menu menu = menuMgr.createContextMenu(viewer.getTree());
+		viewer.getTree().setMenu(menu);
 	}
 
 	@Focus
