@@ -3,24 +3,66 @@ package org.sodalite.ide.ui.views.parts;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.sodalite.ide.ui.views.model.Node;
 
 public class KBView {
 	private Label myLabelInView;
 
 	@PostConstruct
 	public void createPartControl(Composite parent) {
-		System.out.println("Enter in SampleE4View postConstruct");
+		TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL);
+		viewer.setContentProvider(new KBContentProvider());
+		viewer.getTree().setHeaderVisible(true);
+		viewer.getTree().setLinesVisible(true);
 
-		myLabelInView = new Label(parent, SWT.BORDER);
-		myLabelInView.setText("This is a sample E4 view");
+		TreeViewerColumn viewerColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		viewerColumn.getColumn().setWidth(300);
+		viewerColumn.getColumn().setText("KB Content");
+		viewerColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new KBLabelProvider()));
+
+		Node<String> root = new Node<>("KB");
+		Node<String> rms = root.addChild(new Node<String>("RMs"));
+		Node<String> aadms = root.addChild(new Node<String>("AADMs"));
+
+		// RMs
+
+		Node<String> rm_docker_module = rms.addChild(new Node<String>("docker"));
+		Node<String> rm_openstack_module = rms.addChild(new Node<String>("openstack"));
+		Node<String> rm_hpc_module = rms.addChild(new Node<String>("hpc"));
+
+		rm_docker_module.addChild(new Node<String>("docker_certificate.rm"));
+		rm_docker_module.addChild(new Node<String>("docker_registry.rm"));
+		rm_docker_module.addChild(new Node<String>("docker_volume.rm"));
+
+		rm_openstack_module.addChild(new Node<String>("openstack_vm.rm"));
+		rm_openstack_module.addChild(new Node<String>("openstack_security_rule.rm"));
+
+		rm_hpc_module.addChild(new Node<String>("data_mover.rm"));
+		rm_hpc_module.addChild(new Node<String>("docker_registry.rm"));
+
+		// AADMs
+		Node<String> aadm_snow_module = aadms.addChild(new Node<String>("snow"));
+		aadm_snow_module.addChild(new Node<String>("snow.aadm"));
+
+		Node<String> aadm_vehicle_module = aadms.addChild(new Node<String>("vehicleiot"));
+		aadm_vehicle_module.addChild(new Node<String>("vehicleiot.aadm"));
+
+		viewer.setInput(root);
+
+		GridLayoutFactory.fillDefaults().generateLayout(parent);
 
 	}
 
@@ -31,18 +73,17 @@ public class KBView {
 	}
 
 	/**
-	 * This method is kept for E3 compatiblity. You can remove it if you do not
-	 * mix E3 and E4 code. <br/>
-	 * With E4 code you will set directly the selection in ESelectionService and
-	 * you do not receive a ISelection
+	 * This method is kept for E3 compatiblity. You can remove it if you do not mix
+	 * E3 and E4 code. <br/>
+	 * With E4 code you will set directly the selection in ESelectionService and you
+	 * do not receive a ISelection
 	 * 
-	 * @param s
-	 *            the selection received from JFace (E3 mode)
+	 * @param s the selection received from JFace (E3 mode)
 	 */
 	@Inject
 	@Optional
 	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) ISelection s) {
-		if (s==null || s.isEmpty())
+		if (s == null || s.isEmpty())
 			return;
 
 		if (s instanceof IStructuredSelection) {
@@ -55,14 +96,13 @@ public class KBView {
 	}
 
 	/**
-	 * This method manages the selection of your current object. In this example
-	 * we listen to a single Object (even the ISelection already captured in E3
-	 * mode). <br/>
-	 * You should change the parameter type of your received Object to manage
-	 * your specific selection
+	 * This method manages the selection of your current object. In this example we
+	 * listen to a single Object (even the ISelection already captured in E3 mode).
+	 * <br/>
+	 * You should change the parameter type of your received Object to manage your
+	 * specific selection
 	 * 
-	 * @param o
-	 *            : the current object received
+	 * @param o : the current object received
 	 */
 	@Inject
 	@Optional
@@ -79,11 +119,11 @@ public class KBView {
 
 	/**
 	 * This method manages the multiple selection of your current objects. <br/>
-	 * You should change the parameter type of your array of Objects to manage
-	 * your specific selection
+	 * You should change the parameter type of your array of Objects to manage your
+	 * specific selection
 	 * 
-	 * @param o
-	 *            : the current array of objects received in case of multiple selection
+	 * @param o : the current array of objects received in case of multiple
+	 *          selection
 	 */
 	@Inject
 	@Optional
