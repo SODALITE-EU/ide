@@ -14,6 +14,10 @@ import static org.sodalite.dsl.aADM.AADMPackage.Literals.*
 import org.sodalite.dsl.aADM.ENodeTemplateBody
 import org.sodalite.dsl.aADM.EPropertyAssigments
 import org.sodalite.dsl.aADM.EPropertyAssignment
+import org.sodalite.dsl.aADM.EAttributeAssigments
+import org.sodalite.dsl.aADM.EAttributeAssignment
+import org.sodalite.dsl.aADM.ERequirementAssignments
+import org.sodalite.dsl.aADM.ERequirementAssignment
 
 class AADMFormatter extends RMFormatter {
 	
@@ -54,6 +58,12 @@ class AADMFormatter extends RMFormatter {
 		
 		eNodeTemplateBody.regionFor.keyword("properties:").append[newLine]
 		eNodeTemplateBody.properties.surround[indent].format
+		
+		eNodeTemplateBody.regionFor.keyword("attributes:").append[newLine]
+		eNodeTemplateBody.atributes.surround[indent].format
+		
+		eNodeTemplateBody.regionFor.keyword("requirements:").append[newLine]
+		eNodeTemplateBody.requirements.surround[indent].format
 	}
 	
 	def dispatch void format(EPropertyAssigments ePropertyAssigments, extension IFormattableDocument document){
@@ -66,5 +76,32 @@ class AADMFormatter extends RMFormatter {
 		ePropertyAssigment.regionFor.feature(EPROPERTY_ASSIGNMENT__NAME).append[noSpace]
 		ePropertyAssigment.regionFor.keyword(":").append[oneSpace]
 		ePropertyAssigment.value.format.append[newLine]
+	}
+	
+	def dispatch void format(EAttributeAssigments eAttributeAssigments, extension IFormattableDocument document){
+		for (attribute : eAttributeAssigments.attributes) {
+			attribute.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(EAttributeAssignment eAttributeAssigment, extension IFormattableDocument document){
+		eAttributeAssigment.regionFor.feature(EATTRIBUTE_ASSIGNMENT__NAME).append[noSpace]
+		eAttributeAssigment.regionFor.keyword(":").append[oneSpace]
+		eAttributeAssigment.value.format.append[newLine]
+	}
+	
+	def dispatch void format(ERequirementAssignments eRequirementAssigments, extension IFormattableDocument document){
+		for (req : eRequirementAssigments.requirements) {
+			req.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(ERequirementAssignment req, extension IFormattableDocument document){
+		req.regionFor.feature(EREQUIREMENT_ASSIGNMENT__NAME).append[noSpace]
+		req.regionFor.keyword(":").append[newLine]
+		interior(
+	        req.regionFor.keyword("node:"),
+	        req.regionFor.feature(EREQUIREMENT_ASSIGNMENT__NODE)
+	    ) [indent]
 	}
 }
