@@ -30,5 +30,6 @@ Export-Package: org.sodalite.dsl.parser.antlr.internal,
  org.sodalite.dsl.generator,
  org.sodalite.dsl.parser.antlr,
  org.sodalite.dsl.aADM.impl,
- org.sodalite.dsl.parser.antlr.lexer
+ org.sodalite.dsl.parser.antlr.lexer,
+ org.sodalite.dsl.formatting2
 Import-Package: org.apache.log4j
