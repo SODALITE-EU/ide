@@ -14,6 +14,15 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.Keyword
 import org.eclipse.ui.PlatformUI
 import org.eclipse.swt.widgets.FileDialog
+import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
+import org.sodalite.dsl.kb_reasoner_client.KBReasoner
+import org.eclipse.jface.preference.IPreferenceStore
+import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient
+import java.text.MessageFormat
+import org.sodalite.dsl.ui.preferences.PreferenceConstants
+import org.sodalite.dsl.ui.preferences.Activator
+
+
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -33,6 +42,22 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	final String HOST_DESCRIPTION = "A TOSCA orchestrator will interpret this keyword to refer\n" + 
 	"to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship)."
 	
+	
+	def KBReasoner getKBReasoner() {
+		// Configure KBReasonerClient endpoint from preference page information
+		val IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+
+		val String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		val String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		val String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		val KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
+		System.out.println(
+				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
+						kbReasonerURI, iacURI, xoperaURI));
+		return kbclient;
+	}
+	
+	
 	// this override filters the keywords for which to create content assist proposals
 	override void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 		ICompletionProposalAcceptor acceptor) {
@@ -45,6 +70,26 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			getKeywordDisplayString(keyword), getImage(keyword), contentAssistContext);
 		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
 		acceptor.accept(proposal);
+	}
+	
+	override void completeRM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for imports")
+		
+		val ReasonerData<String> modules = getKBReasoner().modules
+		System.out.println ("Modules retrieved from KB:")
+		for (module: modules.elements){
+			System.out.println ("\tModule: " + module)
+			val proposalText = getModule(module)
+			val displayText = proposalText
+			val additionalProposalInfo = null
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeRM_Model_Imports(model, assignment, context, acceptor)
+	}
+	
+	def getModule(String module) {
+		return module.substring(module.lastIndexOf("/", module.length - 2) + 1, module.length - 1)
 	}
 	
 	override void completeENodeType_Name(EObject model, Assignment assignment, ContentAssistContext context,

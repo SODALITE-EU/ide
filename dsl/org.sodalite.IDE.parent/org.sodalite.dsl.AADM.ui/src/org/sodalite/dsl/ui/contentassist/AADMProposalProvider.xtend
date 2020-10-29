@@ -69,34 +69,6 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	//val keywords = #{'node_templates:'}
 	val keywords = #{}
 	val assignments = #{'nodeTemplates'}
-//	KBReasoner kbclient;
-//	new(){
-//		val store = 
-//	        	new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.sodalite.dsl.AADM.ui") as IPreferenceStore;
-//		val kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
-//		val iacURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
-//		val xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI) as String;
-//		kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI) as KBReasoner;
-//		
-//		System.out.println (
-//			MessageFormat.format(
-//				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI)
-//		);
-//	}
-	
-	def KBReasoner getKBReasoner() {
-		// Configure KBReasonerClient endpoint from preference page information
-		val IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-
-		val String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		val String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		val String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		val KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
-		System.out.println(
-				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
-						kbReasonerURI, iacURI, xoperaURI));
-		return kbclient;
-	}
 
 	// this override filters the keywords for which to create content assist proposals
 	override void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
@@ -189,6 +161,22 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val proposalText = node.label
 			val displayText = node.label
 			val additionalProposalInfo = node.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
+	}
+	
+	override void completeAADM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for imports")
+		
+		val ReasonerData<String> modules = getKBReasoner().modules
+		System.out.println ("Modules retrieved from KB:")
+		for (module: modules.elements){
+			System.out.println ("\tModule: " + module)
+			val proposalText = getModule(module)
+			val displayText = proposalText
+			val additionalProposalInfo = null
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
 

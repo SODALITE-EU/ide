@@ -18,7 +18,6 @@ import java.nio.channels.FileLock;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +33,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
@@ -55,8 +53,6 @@ import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
-import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
-import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
 import org.sodalite.dsl.kb_reasoner_client.types.Capability;
 import org.sodalite.dsl.kb_reasoner_client.types.Node;
@@ -68,8 +64,6 @@ import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.ui.contentassist.AbstractAADMProposalProvider;
-import org.sodalite.dsl.ui.preferences.Activator;
-import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -80,17 +74,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   private final Set<Object> keywords = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet());
   
   private final Set<String> assignments = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("nodeTemplates"));
-  
-  public KBReasoner getKBReasoner() {
-    final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-    final String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
-    System.out.println(
-      MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI));
-    return kbclient;
-  }
   
   @Override
   public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
@@ -200,6 +183,28 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           final String displayText = node.getLabel();
           final String additionalProposalInfo = node.getDescription();
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeAADM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for imports");
+      final ReasonerData<String> modules = this.getKBReasoner().getModules();
+      System.out.println("Modules retrieved from KB:");
+      List<String> _elements = modules.getElements();
+      for (final String module : _elements) {
+        {
+          System.out.println(("\tModule: " + module));
+          final String proposalText = this.getModule(module);
+          final String displayText = proposalText;
+          final Object additionalProposalInfo = null;
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
         }
       }
       super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);

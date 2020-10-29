@@ -3,7 +3,10 @@
  */
 package org.sodalite.dsl.ui.contentassist;
 
+import java.text.MessageFormat;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -14,7 +17,13 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
+import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
+import org.sodalite.dsl.ui.preferences.Activator;
+import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -40,6 +49,17 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   private final String HOST_DESCRIPTION = ("A TOSCA orchestrator will interpret this keyword to refer\n" + 
     "to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship).");
   
+  public KBReasoner getKBReasoner() {
+    final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+    final String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
+    System.out.println(
+      MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI));
+    return kbclient;
+  }
+  
   @Override
   public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     this._completeKeyword(keyword, contentAssistContext, acceptor);
@@ -50,6 +70,38 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       this.getKeywordDisplayString(keyword), this.getImage(keyword), contentAssistContext);
     this.getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
     acceptor.accept(proposal);
+  }
+  
+  @Override
+  public void completeRM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for imports");
+      final ReasonerData<String> modules = this.getKBReasoner().getModules();
+      System.out.println("Modules retrieved from KB:");
+      List<String> _elements = modules.getElements();
+      for (final String module : _elements) {
+        {
+          System.out.println(("\tModule: " + module));
+          final String proposalText = this.getModule(module);
+          final String displayText = proposalText;
+          final Object additionalProposalInfo = null;
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
+        }
+      }
+      super.completeRM_Model_Imports(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public String getModule(final String module) {
+    int _length = module.length();
+    int _minus = (_length - 2);
+    int _lastIndexOf = module.lastIndexOf("/", _minus);
+    int _plus = (_lastIndexOf + 1);
+    int _length_1 = module.length();
+    int _minus_1 = (_length_1 - 1);
+    return module.substring(_plus, _minus_1);
   }
   
   @Override
