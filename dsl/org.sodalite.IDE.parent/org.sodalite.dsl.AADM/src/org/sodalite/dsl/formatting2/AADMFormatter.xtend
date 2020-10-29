@@ -100,7 +100,7 @@ class AADMFormatter extends RMFormatter {
 		req.regionFor.feature(EREQUIREMENT_ASSIGNMENT__NAME).append[noSpace]
 		req.regionFor.keyword(":").append[newLine]
 		interior(
-	        req.regionFor.keyword("node:"),
+	        req.regionFor.keyword(":"),
 	        req.regionFor.feature(EREQUIREMENT_ASSIGNMENT__NODE)
 	    ) [indent]
 	}
