@@ -8,6 +8,7 @@
       fileExtensions="aadm" ecorePackage="AADM.ecore#/">
     <genClasses ecoreClass="AADM.ecore#//AADM_Model">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//AADM_Model/module"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//AADM_Model/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/inputs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/nodeTemplates"/>
     </genClasses>

@@ -1536,6 +1536,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         module=ID | 
+	 *         imports+=ID | 
 	 *         dataTypes=EDataTypes | 
 	 *         artifactTypes=EArtifactTypes | 
 	 *         capabilityTypes=ECapabilityTypes | 

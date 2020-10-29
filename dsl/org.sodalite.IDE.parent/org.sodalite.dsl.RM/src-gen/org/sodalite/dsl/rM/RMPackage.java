@@ -77,13 +77,22 @@ public interface RMPackage extends EPackage
   int RM_MODEL__MODULE = 0;
 
   /**
+   * The feature id for the '<em><b>Imports</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RM_MODEL__IMPORTS = 1;
+
+  /**
    * The feature id for the '<em><b>Data Types</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RM_MODEL__DATA_TYPES = 1;
+  int RM_MODEL__DATA_TYPES = 2;
 
   /**
    * The feature id for the '<em><b>Artifact Types</b></em>' containment reference.
@@ -92,7 +101,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__ARTIFACT_TYPES = 2;
+  int RM_MODEL__ARTIFACT_TYPES = 3;
 
   /**
    * The feature id for the '<em><b>Capability Types</b></em>' containment reference.
@@ -101,7 +110,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__CAPABILITY_TYPES = 3;
+  int RM_MODEL__CAPABILITY_TYPES = 4;
 
   /**
    * The feature id for the '<em><b>Interface Types</b></em>' containment reference.
@@ -110,7 +119,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__INTERFACE_TYPES = 4;
+  int RM_MODEL__INTERFACE_TYPES = 5;
 
   /**
    * The feature id for the '<em><b>Relationship Types</b></em>' containment reference.
@@ -119,7 +128,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__RELATIONSHIP_TYPES = 5;
+  int RM_MODEL__RELATIONSHIP_TYPES = 6;
 
   /**
    * The feature id for the '<em><b>Node Types</b></em>' containment reference.
@@ -128,7 +137,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__NODE_TYPES = 6;
+  int RM_MODEL__NODE_TYPES = 7;
 
   /**
    * The feature id for the '<em><b>Policy Types</b></em>' containment reference.
@@ -137,7 +146,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__POLICY_TYPES = 7;
+  int RM_MODEL__POLICY_TYPES = 8;
 
   /**
    * The number of structural features of the '<em>RM Model</em>' class.
@@ -146,7 +155,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL_FEATURE_COUNT = 8;
+  int RM_MODEL_FEATURE_COUNT = 9;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EDataTypesImpl <em>EData Types</em>}' class.
@@ -3032,6 +3041,17 @@ public interface RMPackage extends EPackage
   EAttribute getRM_Model_Module();
 
   /**
+   * Returns the meta object for the attribute list '{@link org.sodalite.dsl.rM.RM_Model#getImports <em>Imports</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Imports</em>'.
+   * @see org.sodalite.dsl.rM.RM_Model#getImports()
+   * @see #getRM_Model()
+   * @generated
+   */
+  EAttribute getRM_Model_Imports();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.RM_Model#getDataTypes <em>Data Types</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5565,6 +5585,14 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EAttribute RM_MODEL__MODULE = eINSTANCE.getRM_Model_Module();
+
+    /**
+     * The meta object literal for the '<em><b>Imports</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RM_MODEL__IMPORTS = eINSTANCE.getRM_Model_Imports();
 
     /**
      * The meta object literal for the '<em><b>Data Types</b></em>' containment reference feature.

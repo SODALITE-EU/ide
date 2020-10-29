@@ -105,6 +105,8 @@ Req_cap : 'req_cap:';
 
 Entity : 'entity:';
 
+Import : 'import:';
+
 Inputs : 'inputs:';
 
 Length : 'length:';
