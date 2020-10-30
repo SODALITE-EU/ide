@@ -87,7 +87,7 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     description=STRING (ambiguity) file_ext=STRING
 	 *     file_ext=STRING (ambiguity) file_ext=STRING
 	 *     mime_type=STRING (ambiguity) file_ext=STRING
-	 *     superType=[EArtifactType|QUALIFIED_NAME] (ambiguity) file_ext=STRING
+	 *     superType=QUALIFIED_NAME (ambiguity) file_ext=STRING
 	 */
 	protected void emit_EArtifactTypeBody_File_extKeyword_1_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

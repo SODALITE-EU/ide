@@ -55,7 +55,7 @@ EDataType:
 	END;
 
 EDataTypeBody:
-	{EDataTypeBody} (('derived_from:' superType=[EDataType|EDataTypeName])? &
+	{EDataTypeBody} (('derived_from:' superType=EDataTypeName)? &
 	('description:' description=STRING)? &
 	('constraints:'
 	BEGIN
@@ -79,7 +79,7 @@ EArtifactType:
 	END;
 
 EArtifactTypeBody:
-	{EArtifactTypeBody} (('derived_from:' superType=[EArtifactType|QUALIFIED_NAME])? &
+	{EArtifactTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? &
 	('description:' description=STRING)? &
 	('mime_type:' mime_type=STRING)? &
 	('file_ext:'+ file_ext=STRING)?);
@@ -94,7 +94,7 @@ ECapabilityType:
 	END;
 
 ECapabilityTypeBody:
-	{ECapabilityTypeBody} (('derived_from:' superType=[ECapabilityType|QUALIFIED_NAME])? &
+	{ECapabilityTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? &
 	('description:' description=STRING)? &
 	('properties:'
 	BEGIN
@@ -115,7 +115,7 @@ EInterfaceType:
 	END;
 
 EInterfaceTypeBody:
-	{EInterfaceTypeBody} (('derived_from:' superType=[EInterfaceType|QUALIFIED_NAME])? &
+	{EInterfaceTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? &
 	('description:' description=STRING)? &
 	('inputs:'
 	BEGIN
@@ -136,7 +136,7 @@ EPolicyType:
 	END;
 
 EPolicyTypeBody:
-	{EPolicyTypeBody} (('derived_from:' superType=[EPolicyType|QUALIFIED_NAME])? &
+	{EPolicyTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? &
 	('description:' description=STRING)?);
 
 ENodeTypes:
@@ -182,7 +182,7 @@ ERelationshipType:
 	END;
 
 ERelationshipTypeBody:
-	{ERelationshipTypeBody} (('derived_from:' superType=[ERelationshipType|QUALIFIED_NAME])? &
+	{ERelationshipTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? &
 	('description:' description=STRING)? &
 	('properties:'
 	BEGIN

@@ -908,9 +908,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEDataTypeBody_SuperType()
+  public EAttribute getEDataTypeBody_SuperType()
   {
-    return (EReference)eDataTypeBodyEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eDataTypeBodyEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1018,9 +1018,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEArtifactTypeBody_SuperType()
+  public EAttribute getEArtifactTypeBody_SuperType()
   {
-    return (EReference)eArtifactTypeBodyEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eArtifactTypeBodyEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1128,9 +1128,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getECapabilityTypeBody_SuperType()
+  public EAttribute getECapabilityTypeBody_SuperType()
   {
-    return (EReference)eCapabilityTypeBodyEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eCapabilityTypeBodyEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1238,9 +1238,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEInterfaceTypeBody_SuperType()
+  public EAttribute getEInterfaceTypeBody_SuperType()
   {
-    return (EReference)eInterfaceTypeBodyEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eInterfaceTypeBodyEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1348,9 +1348,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEPolicyTypeBody_SuperType()
+  public EAttribute getEPolicyTypeBody_SuperType()
   {
-    return (EReference)ePolicyTypeBodyEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)ePolicyTypeBodyEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1579,9 +1579,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getERelationshipTypeBody_SuperType()
+  public EAttribute getERelationshipTypeBody_SuperType()
   {
-    return (EReference)eRelationshipTypeBodyEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eRelationshipTypeBodyEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3383,7 +3383,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eDataTypeEClass, EDATA_TYPE__DATA);
 
     eDataTypeBodyEClass = createEClass(EDATA_TYPE_BODY);
-    createEReference(eDataTypeBodyEClass, EDATA_TYPE_BODY__SUPER_TYPE);
+    createEAttribute(eDataTypeBodyEClass, EDATA_TYPE_BODY__SUPER_TYPE);
     createEAttribute(eDataTypeBodyEClass, EDATA_TYPE_BODY__DESCRIPTION);
     createEReference(eDataTypeBodyEClass, EDATA_TYPE_BODY__CONSTRAINTS);
     createEReference(eDataTypeBodyEClass, EDATA_TYPE_BODY__PROPERTIES);
@@ -3396,7 +3396,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eArtifactTypeEClass, EARTIFACT_TYPE__ARTIFACT);
 
     eArtifactTypeBodyEClass = createEClass(EARTIFACT_TYPE_BODY);
-    createEReference(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__SUPER_TYPE);
+    createEAttribute(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__SUPER_TYPE);
     createEAttribute(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__DESCRIPTION);
     createEAttribute(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__MIME_TYPE);
     createEAttribute(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__FILE_EXT);
@@ -3409,7 +3409,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eCapabilityTypeEClass, ECAPABILITY_TYPE__CAPABILITY);
 
     eCapabilityTypeBodyEClass = createEClass(ECAPABILITY_TYPE_BODY);
-    createEReference(eCapabilityTypeBodyEClass, ECAPABILITY_TYPE_BODY__SUPER_TYPE);
+    createEAttribute(eCapabilityTypeBodyEClass, ECAPABILITY_TYPE_BODY__SUPER_TYPE);
     createEAttribute(eCapabilityTypeBodyEClass, ECAPABILITY_TYPE_BODY__DESCRIPTION);
     createEReference(eCapabilityTypeBodyEClass, ECAPABILITY_TYPE_BODY__PROPERTIES);
     createEReference(eCapabilityTypeBodyEClass, ECAPABILITY_TYPE_BODY__ATRIBUTES);
@@ -3422,7 +3422,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eInterfaceTypeEClass, EINTERFACE_TYPE__INTERFACE);
 
     eInterfaceTypeBodyEClass = createEClass(EINTERFACE_TYPE_BODY);
-    createEReference(eInterfaceTypeBodyEClass, EINTERFACE_TYPE_BODY__SUPER_TYPE);
+    createEAttribute(eInterfaceTypeBodyEClass, EINTERFACE_TYPE_BODY__SUPER_TYPE);
     createEAttribute(eInterfaceTypeBodyEClass, EINTERFACE_TYPE_BODY__DESCRIPTION);
     createEReference(eInterfaceTypeBodyEClass, EINTERFACE_TYPE_BODY__INPUTS);
     createEReference(eInterfaceTypeBodyEClass, EINTERFACE_TYPE_BODY__OPERATIONS);
@@ -3435,7 +3435,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(ePolicyTypeEClass, EPOLICY_TYPE__POLICY);
 
     ePolicyTypeBodyEClass = createEClass(EPOLICY_TYPE_BODY);
-    createEReference(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__SUPER_TYPE);
+    createEAttribute(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__SUPER_TYPE);
     createEAttribute(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__DESCRIPTION);
 
     eNodeTypesEClass = createEClass(ENODE_TYPES);
@@ -3462,7 +3462,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eRelationshipTypeEClass, ERELATIONSHIP_TYPE__RELATIONSHIP);
 
     eRelationshipTypeBodyEClass = createEClass(ERELATIONSHIP_TYPE_BODY);
-    createEReference(eRelationshipTypeBodyEClass, ERELATIONSHIP_TYPE_BODY__SUPER_TYPE);
+    createEAttribute(eRelationshipTypeBodyEClass, ERELATIONSHIP_TYPE_BODY__SUPER_TYPE);
     createEAttribute(eRelationshipTypeBodyEClass, ERELATIONSHIP_TYPE_BODY__DESCRIPTION);
     createEReference(eRelationshipTypeBodyEClass, ERELATIONSHIP_TYPE_BODY__PROPERTIES);
     createEReference(eRelationshipTypeBodyEClass, ERELATIONSHIP_TYPE_BODY__ATRIBUTES);
@@ -3761,7 +3761,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEDataType_Data(), this.getEDataTypeBody(), null, "data", null, 0, 1, EDataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDataTypeBodyEClass, EDataTypeBody.class, "EDataTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEDataTypeBody_SuperType(), this.getEDataType(), null, "superType", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEDataTypeBody_SuperType(), ecorePackage.getEString(), "superType", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEDataTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEDataTypeBody_Constraints(), this.getEConstraints(), null, "constraints", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEDataTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3774,7 +3774,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEArtifactType_Artifact(), this.getEArtifactTypeBody(), null, "artifact", null, 0, 1, EArtifactType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eArtifactTypeBodyEClass, EArtifactTypeBody.class, "EArtifactTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEArtifactTypeBody_SuperType(), this.getEArtifactType(), null, "superType", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEArtifactTypeBody_SuperType(), ecorePackage.getEString(), "superType", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEArtifactTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEArtifactTypeBody_Mime_type(), ecorePackage.getEString(), "mime_type", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEArtifactTypeBody_File_ext(), ecorePackage.getEString(), "file_ext", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3787,7 +3787,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getECapabilityType_Capability(), this.getECapabilityTypeBody(), null, "capability", null, 0, 1, ECapabilityType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eCapabilityTypeBodyEClass, ECapabilityTypeBody.class, "ECapabilityTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getECapabilityTypeBody_SuperType(), this.getECapabilityType(), null, "superType", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getECapabilityTypeBody_SuperType(), ecorePackage.getEString(), "superType", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getECapabilityTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityTypeBody_Atributes(), this.getEAttributes(), null, "atributes", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3800,7 +3800,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEInterfaceType_Interface(), this.getEInterfaceTypeBody(), null, "interface", null, 0, 1, EInterfaceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eInterfaceTypeBodyEClass, EInterfaceTypeBody.class, "EInterfaceTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEInterfaceTypeBody_SuperType(), this.getEInterfaceType(), null, "superType", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEInterfaceTypeBody_SuperType(), ecorePackage.getEString(), "superType", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEInterfaceTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEInterfaceTypeBody_Inputs(), this.getEProperties(), null, "inputs", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEInterfaceTypeBody_Operations(), this.getEOperations(), null, "operations", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3813,7 +3813,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEPolicyType_Policy(), this.getEPolicyTypeBody(), null, "policy", null, 0, 1, EPolicyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePolicyTypeBodyEClass, EPolicyTypeBody.class, "EPolicyTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEPolicyTypeBody_SuperType(), this.getEPolicyType(), null, "superType", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEPolicyTypeBody_SuperType(), ecorePackage.getEString(), "superType", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPolicyTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eNodeTypesEClass, ENodeTypes.class, "ENodeTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3840,7 +3840,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getERelationshipType_Relationship(), this.getERelationshipTypeBody(), null, "relationship", null, 0, 1, ERelationshipType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRelationshipTypeBodyEClass, ERelationshipTypeBody.class, "ERelationshipTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getERelationshipTypeBody_SuperType(), this.getERelationshipType(), null, "superType", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getERelationshipTypeBody_SuperType(), ecorePackage.getEString(), "superType", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getERelationshipTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getERelationshipTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getERelationshipTypeBody_Atributes(), this.getEAttributes(), null, "atributes", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

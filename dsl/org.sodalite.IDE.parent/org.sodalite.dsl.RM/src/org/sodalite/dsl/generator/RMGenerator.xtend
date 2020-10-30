@@ -620,7 +620,7 @@ class RMGenerator extends AbstractGenerator {
 	:CapabilityType_«capabilitytype_counter++»
 	  rdf:type exchange:CapabilityType ;
 	  exchange:name "«c.name»" ;
-	  exchange:derivesFrom "«c.capability.superType.name»" ;
+	  exchange:derivesFrom "«c.capability.superType»" ;
 	«IF c.capability.description !== null»
 	exchange:description '«processDescription(c.capability.description)»' ;
 	«ENDIF»
@@ -653,7 +653,7 @@ class RMGenerator extends AbstractGenerator {
 	:RelationshipType_«relationship_counter++»
 	  rdf:type exchange:RelationshipType ;
 	  exchange:name "«r.name»" ;
-	  exchange:derivesFrom "«r.relationship.superType.name»" ;
+	  exchange:derivesFrom "«r.relationship.superType»" ;
 	  «IF r.relationship.description !== null»
 	  exchange:description '«processDescription(r.relationship.description)»' ;
 	  «ENDIF»
@@ -718,9 +718,8 @@ class RMGenerator extends AbstractGenerator {
 	:DataType_«data_type_counter++»
 	  rdf:type exchange:DataType ;
 	  exchange:name "«d.name»" ;
-	  «IF d.data.superType !== null»
-	  exchange:derivesFrom "«d.data.superType.name»" ;
-	  «ENDIF»
+	  exchange:derivesFrom "«d.data.superType»" ;
+
 	  «IF d.data.description !== null»
 	  exchange:description '«processDescription(d.data.description)»' ;
 	  «ENDIF»

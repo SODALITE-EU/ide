@@ -233,7 +233,7 @@ public interface RMPackage extends EPackage
   int EDATA_TYPE_BODY = 3;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -353,7 +353,7 @@ public interface RMPackage extends EPackage
   int EARTIFACT_TYPE_BODY = 6;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -473,7 +473,7 @@ public interface RMPackage extends EPackage
   int ECAPABILITY_TYPE_BODY = 9;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -593,7 +593,7 @@ public interface RMPackage extends EPackage
   int EINTERFACE_TYPE_BODY = 12;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -713,7 +713,7 @@ public interface RMPackage extends EPackage
   int EPOLICY_TYPE_BODY = 15;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -962,7 +962,7 @@ public interface RMPackage extends EPackage
   int ERELATIONSHIP_TYPE_BODY = 21;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -3192,15 +3192,15 @@ public interface RMPackage extends EPackage
   EClass getEDataTypeBody();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.EDataTypeBody#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EDataTypeBody#getSuperType <em>Super Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @return the meta object for the attribute '<em>Super Type</em>'.
    * @see org.sodalite.dsl.rM.EDataTypeBody#getSuperType()
    * @see #getEDataTypeBody()
    * @generated
    */
-  EReference getEDataTypeBody_SuperType();
+  EAttribute getEDataTypeBody_SuperType();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EDataTypeBody#getDescription <em>Description</em>}'.
@@ -3299,15 +3299,15 @@ public interface RMPackage extends EPackage
   EClass getEArtifactTypeBody();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.EArtifactTypeBody#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EArtifactTypeBody#getSuperType <em>Super Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @return the meta object for the attribute '<em>Super Type</em>'.
    * @see org.sodalite.dsl.rM.EArtifactTypeBody#getSuperType()
    * @see #getEArtifactTypeBody()
    * @generated
    */
-  EReference getEArtifactTypeBody_SuperType();
+  EAttribute getEArtifactTypeBody_SuperType();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EArtifactTypeBody#getDescription <em>Description</em>}'.
@@ -3406,15 +3406,15 @@ public interface RMPackage extends EPackage
   EClass getECapabilityTypeBody();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.ECapabilityTypeBody#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ECapabilityTypeBody#getSuperType <em>Super Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @return the meta object for the attribute '<em>Super Type</em>'.
    * @see org.sodalite.dsl.rM.ECapabilityTypeBody#getSuperType()
    * @see #getECapabilityTypeBody()
    * @generated
    */
-  EReference getECapabilityTypeBody_SuperType();
+  EAttribute getECapabilityTypeBody_SuperType();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ECapabilityTypeBody#getDescription <em>Description</em>}'.
@@ -3513,15 +3513,15 @@ public interface RMPackage extends EPackage
   EClass getEInterfaceTypeBody();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.EInterfaceTypeBody#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EInterfaceTypeBody#getSuperType <em>Super Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @return the meta object for the attribute '<em>Super Type</em>'.
    * @see org.sodalite.dsl.rM.EInterfaceTypeBody#getSuperType()
    * @see #getEInterfaceTypeBody()
    * @generated
    */
-  EReference getEInterfaceTypeBody_SuperType();
+  EAttribute getEInterfaceTypeBody_SuperType();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EInterfaceTypeBody#getDescription <em>Description</em>}'.
@@ -3620,15 +3620,15 @@ public interface RMPackage extends EPackage
   EClass getEPolicyTypeBody();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getSuperType <em>Super Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @return the meta object for the attribute '<em>Super Type</em>'.
    * @see org.sodalite.dsl.rM.EPolicyTypeBody#getSuperType()
    * @see #getEPolicyTypeBody()
    * @generated
    */
-  EReference getEPolicyTypeBody_SuperType();
+  EAttribute getEPolicyTypeBody_SuperType();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getDescription <em>Description</em>}'.
@@ -3845,15 +3845,15 @@ public interface RMPackage extends EPackage
   EClass getERelationshipTypeBody();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.ERelationshipTypeBody#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ERelationshipTypeBody#getSuperType <em>Super Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @return the meta object for the attribute '<em>Super Type</em>'.
    * @see org.sodalite.dsl.rM.ERelationshipTypeBody#getSuperType()
    * @see #getERelationshipTypeBody()
    * @generated
    */
-  EReference getERelationshipTypeBody_SuperType();
+  EAttribute getERelationshipTypeBody_SuperType();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ERelationshipTypeBody#getDescription <em>Description</em>}'.
@@ -5705,12 +5705,12 @@ public interface RMPackage extends EPackage
     EClass EDATA_TYPE_BODY = eINSTANCE.getEDataTypeBody();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Super Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EDATA_TYPE_BODY__SUPER_TYPE = eINSTANCE.getEDataTypeBody_SuperType();
+    EAttribute EDATA_TYPE_BODY__SUPER_TYPE = eINSTANCE.getEDataTypeBody_SuperType();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -5791,12 +5791,12 @@ public interface RMPackage extends EPackage
     EClass EARTIFACT_TYPE_BODY = eINSTANCE.getEArtifactTypeBody();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Super Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EARTIFACT_TYPE_BODY__SUPER_TYPE = eINSTANCE.getEArtifactTypeBody_SuperType();
+    EAttribute EARTIFACT_TYPE_BODY__SUPER_TYPE = eINSTANCE.getEArtifactTypeBody_SuperType();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -5877,12 +5877,12 @@ public interface RMPackage extends EPackage
     EClass ECAPABILITY_TYPE_BODY = eINSTANCE.getECapabilityTypeBody();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Super Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ECAPABILITY_TYPE_BODY__SUPER_TYPE = eINSTANCE.getECapabilityTypeBody_SuperType();
+    EAttribute ECAPABILITY_TYPE_BODY__SUPER_TYPE = eINSTANCE.getECapabilityTypeBody_SuperType();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -5963,12 +5963,12 @@ public interface RMPackage extends EPackage
     EClass EINTERFACE_TYPE_BODY = eINSTANCE.getEInterfaceTypeBody();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Super Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EINTERFACE_TYPE_BODY__SUPER_TYPE = eINSTANCE.getEInterfaceTypeBody_SuperType();
+    EAttribute EINTERFACE_TYPE_BODY__SUPER_TYPE = eINSTANCE.getEInterfaceTypeBody_SuperType();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -6049,12 +6049,12 @@ public interface RMPackage extends EPackage
     EClass EPOLICY_TYPE_BODY = eINSTANCE.getEPolicyTypeBody();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Super Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPOLICY_TYPE_BODY__SUPER_TYPE = eINSTANCE.getEPolicyTypeBody_SuperType();
+    EAttribute EPOLICY_TYPE_BODY__SUPER_TYPE = eINSTANCE.getEPolicyTypeBody_SuperType();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -6229,12 +6229,12 @@ public interface RMPackage extends EPackage
     EClass ERELATIONSHIP_TYPE_BODY = eINSTANCE.getERelationshipTypeBody();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Super Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ERELATIONSHIP_TYPE_BODY__SUPER_TYPE = eINSTANCE.getERelationshipTypeBody_SuperType();
+    EAttribute ERELATIONSHIP_TYPE_BODY__SUPER_TYPE = eINSTANCE.getERelationshipTypeBody_SuperType();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.

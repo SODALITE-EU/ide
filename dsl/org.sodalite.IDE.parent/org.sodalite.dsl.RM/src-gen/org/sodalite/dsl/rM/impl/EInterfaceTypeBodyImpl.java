@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EInterfaceType;
 import org.sodalite.dsl.rM.EInterfaceTypeBody;
 import org.sodalite.dsl.rM.EOperations;
 import org.sodalite.dsl.rM.EProperties;
@@ -37,14 +36,24 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container implements EInterfaceTypeBody
 {
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The default value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getSuperType()
    * @generated
    * @ordered
    */
-  protected EInterfaceType superType;
+  protected static final String SUPER_TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSuperType()
+   * @generated
+   * @ordered
+   */
+  protected String superType = SUPER_TYPE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -113,27 +122,7 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
-  public EInterfaceType getSuperType()
-  {
-    if (superType != null && superType.eIsProxy())
-    {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (EInterfaceType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
-      }
-    }
-    return superType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EInterfaceType basicGetSuperType()
+  public String getSuperType()
   {
     return superType;
   }
@@ -144,9 +133,9 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
-  public void setSuperType(EInterfaceType newSuperType)
+  public void setSuperType(String newSuperType)
   {
-    EInterfaceType oldSuperType = superType;
+    String oldSuperType = superType;
     superType = newSuperType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
@@ -306,8 +295,7 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
+        return getSuperType();
       case RMPackage.EINTERFACE_TYPE_BODY__DESCRIPTION:
         return getDescription();
       case RMPackage.EINTERFACE_TYPE_BODY__INPUTS:
@@ -329,7 +317,7 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EInterfaceType)newValue);
+        setSuperType((String)newValue);
         return;
       case RMPackage.EINTERFACE_TYPE_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -355,7 +343,7 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EInterfaceType)null);
+        setSuperType(SUPER_TYPE_EDEFAULT);
         return;
       case RMPackage.EINTERFACE_TYPE_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -381,7 +369,7 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE:
-        return superType != null;
+        return SUPER_TYPE_EDEFAULT == null ? superType != null : !SUPER_TYPE_EDEFAULT.equals(superType);
       case RMPackage.EINTERFACE_TYPE_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.EINTERFACE_TYPE_BODY__INPUTS:
@@ -403,7 +391,9 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (description: ");
+    result.append(" (superType: ");
+    result.append(superType);
+    result.append(", description: ");
     result.append(description);
     result.append(')');
     return result.toString();

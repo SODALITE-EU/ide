@@ -6,12 +6,10 @@ package org.sodalite.dsl.rM.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EArtifactType;
 import org.sodalite.dsl.rM.EArtifactTypeBody;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -34,14 +32,24 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implements EArtifactTypeBody
 {
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The default value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getSuperType()
    * @generated
    * @ordered
    */
-  protected EArtifactType superType;
+  protected static final String SUPER_TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSuperType()
+   * @generated
+   * @ordered
+   */
+  protected String superType = SUPER_TYPE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -130,27 +138,7 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    */
   @Override
-  public EArtifactType getSuperType()
-  {
-    if (superType != null && superType.eIsProxy())
-    {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (EArtifactType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EARTIFACT_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
-      }
-    }
-    return superType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EArtifactType basicGetSuperType()
+  public String getSuperType()
   {
     return superType;
   }
@@ -161,9 +149,9 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    */
   @Override
-  public void setSuperType(EArtifactType newSuperType)
+  public void setSuperType(String newSuperType)
   {
-    EArtifactType oldSuperType = superType;
+    String oldSuperType = superType;
     superType = newSuperType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
@@ -255,8 +243,7 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case RMPackage.EARTIFACT_TYPE_BODY__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
+        return getSuperType();
       case RMPackage.EARTIFACT_TYPE_BODY__DESCRIPTION:
         return getDescription();
       case RMPackage.EARTIFACT_TYPE_BODY__MIME_TYPE:
@@ -278,7 +265,7 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case RMPackage.EARTIFACT_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EArtifactType)newValue);
+        setSuperType((String)newValue);
         return;
       case RMPackage.EARTIFACT_TYPE_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -304,7 +291,7 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case RMPackage.EARTIFACT_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EArtifactType)null);
+        setSuperType(SUPER_TYPE_EDEFAULT);
         return;
       case RMPackage.EARTIFACT_TYPE_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -330,7 +317,7 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case RMPackage.EARTIFACT_TYPE_BODY__SUPER_TYPE:
-        return superType != null;
+        return SUPER_TYPE_EDEFAULT == null ? superType != null : !SUPER_TYPE_EDEFAULT.equals(superType);
       case RMPackage.EARTIFACT_TYPE_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.EARTIFACT_TYPE_BODY__MIME_TYPE:
@@ -352,7 +339,9 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (description: ");
+    result.append(" (superType: ");
+    result.append(superType);
+    result.append(", description: ");
     result.append(description);
     result.append(", mime_type: ");
     result.append(mime_type);

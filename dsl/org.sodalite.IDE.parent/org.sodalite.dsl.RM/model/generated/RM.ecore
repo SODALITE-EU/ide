@@ -30,7 +30,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDataTypeBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//EDataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="superType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" eType="#//EConstraints"
         containment="true"/>
@@ -47,7 +47,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EArtifactTypeBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//EArtifactType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="superType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mime_type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="file_ext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -62,7 +62,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ECapabilityTypeBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//ECapabilityType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="superType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//EProperties"
         containment="true"/>
@@ -79,7 +79,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInterfaceTypeBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//EInterfaceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="superType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" eType="#//EProperties"
         containment="true"/>
@@ -96,7 +96,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPolicyTypeBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//EPolicyType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="superType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ENodeTypes">
@@ -132,7 +132,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERelationshipTypeBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//ERelationshipType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="superType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//EProperties"
         containment="true"/>

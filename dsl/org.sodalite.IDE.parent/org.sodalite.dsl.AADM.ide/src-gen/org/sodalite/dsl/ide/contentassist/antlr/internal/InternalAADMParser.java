@@ -8282,11 +8282,11 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                 {
                 int LA7_2 = input.LA(2);
 
-                if ( (LA7_2==FullStop) ) {
-                    alt7=2;
-                }
-                else if ( (LA7_2==EOF||LA7_2==Greater_or_equal||LA7_2==Less_or_equal||LA7_2==Greater_than||LA7_2==Valid_values||(LA7_2>=Max_length && LA7_2<=Min_length)||LA7_2==Less_than||LA7_2==In_range||LA7_2==Length||LA7_2==Equal||LA7_2==Comma||LA7_2==RightSquareBracket||LA7_2==RULE_END) ) {
+                if ( (LA7_2==EOF||LA7_2==Greater_or_equal||LA7_2==Less_or_equal||LA7_2==Greater_than||LA7_2==Valid_values||(LA7_2>=Max_length && LA7_2<=Min_length)||LA7_2==Less_than||LA7_2==In_range||LA7_2==Length||LA7_2==Equal||LA7_2==Comma||LA7_2==RightSquareBracket||LA7_2==RULE_END) ) {
                     alt7=3;
+                }
+                else if ( (LA7_2==FullStop) ) {
+                    alt7=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -56170,33 +56170,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EDataTypeBody__SuperTypeAssignment_1_0_1"
-    // InternalAADMParser.g:18279:1: rule__EDataTypeBody__SuperTypeAssignment_1_0_1 : ( ( ruleEDataTypeName ) ) ;
+    // InternalAADMParser.g:18279:1: rule__EDataTypeBody__SuperTypeAssignment_1_0_1 : ( ruleEDataTypeName ) ;
     public final void rule__EDataTypeBody__SuperTypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18283:1: ( ( ( ruleEDataTypeName ) ) )
-            // InternalAADMParser.g:18284:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:18283:1: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:18284:2: ( ruleEDataTypeName )
             {
-            // InternalAADMParser.g:18284:2: ( ( ruleEDataTypeName ) )
-            // InternalAADMParser.g:18285:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:18284:2: ( ruleEDataTypeName )
+            // InternalAADMParser.g:18285:3: ruleEDataTypeName
             {
-             before(grammarAccess.getEDataTypeBodyAccess().getSuperTypeEDataTypeCrossReference_1_0_1_0()); 
-            // InternalAADMParser.g:18286:3: ( ruleEDataTypeName )
-            // InternalAADMParser.g:18287:4: ruleEDataTypeName
-            {
-             before(grammarAccess.getEDataTypeBodyAccess().getSuperTypeEDataTypeEDataTypeNameParserRuleCall_1_0_1_0_1()); 
+             before(grammarAccess.getEDataTypeBodyAccess().getSuperTypeEDataTypeNameParserRuleCall_1_0_1_0()); 
             pushFollow(FOLLOW_2);
             ruleEDataTypeName();
 
             state._fsp--;
 
-             after(grammarAccess.getEDataTypeBodyAccess().getSuperTypeEDataTypeEDataTypeNameParserRuleCall_1_0_1_0_1()); 
-
-            }
-
-             after(grammarAccess.getEDataTypeBodyAccess().getSuperTypeEDataTypeCrossReference_1_0_1_0()); 
+             after(grammarAccess.getEDataTypeBodyAccess().getSuperTypeEDataTypeNameParserRuleCall_1_0_1_0()); 
 
             }
 
@@ -56219,17 +56211,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EDataTypeBody__DescriptionAssignment_1_1_1"
-    // InternalAADMParser.g:18298:1: rule__EDataTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:18294:1: rule__EDataTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
     public final void rule__EDataTypeBody__DescriptionAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18302:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:18303:2: ( RULE_STRING )
+            // InternalAADMParser.g:18298:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:18299:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:18303:2: ( RULE_STRING )
-            // InternalAADMParser.g:18304:3: RULE_STRING
+            // InternalAADMParser.g:18299:2: ( RULE_STRING )
+            // InternalAADMParser.g:18300:3: RULE_STRING
             {
              before(grammarAccess.getEDataTypeBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -56256,17 +56248,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EDataTypeBody__ConstraintsAssignment_1_2_2"
-    // InternalAADMParser.g:18313:1: rule__EDataTypeBody__ConstraintsAssignment_1_2_2 : ( ruleEConstraints ) ;
+    // InternalAADMParser.g:18309:1: rule__EDataTypeBody__ConstraintsAssignment_1_2_2 : ( ruleEConstraints ) ;
     public final void rule__EDataTypeBody__ConstraintsAssignment_1_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18317:1: ( ( ruleEConstraints ) )
-            // InternalAADMParser.g:18318:2: ( ruleEConstraints )
+            // InternalAADMParser.g:18313:1: ( ( ruleEConstraints ) )
+            // InternalAADMParser.g:18314:2: ( ruleEConstraints )
             {
-            // InternalAADMParser.g:18318:2: ( ruleEConstraints )
-            // InternalAADMParser.g:18319:3: ruleEConstraints
+            // InternalAADMParser.g:18314:2: ( ruleEConstraints )
+            // InternalAADMParser.g:18315:3: ruleEConstraints
             {
              before(grammarAccess.getEDataTypeBodyAccess().getConstraintsEConstraintsParserRuleCall_1_2_2_0()); 
             pushFollow(FOLLOW_2);
@@ -56297,17 +56289,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EDataTypeBody__PropertiesAssignment_1_3_2"
-    // InternalAADMParser.g:18328:1: rule__EDataTypeBody__PropertiesAssignment_1_3_2 : ( ruleEProperties ) ;
+    // InternalAADMParser.g:18324:1: rule__EDataTypeBody__PropertiesAssignment_1_3_2 : ( ruleEProperties ) ;
     public final void rule__EDataTypeBody__PropertiesAssignment_1_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18332:1: ( ( ruleEProperties ) )
-            // InternalAADMParser.g:18333:2: ( ruleEProperties )
+            // InternalAADMParser.g:18328:1: ( ( ruleEProperties ) )
+            // InternalAADMParser.g:18329:2: ( ruleEProperties )
             {
-            // InternalAADMParser.g:18333:2: ( ruleEProperties )
-            // InternalAADMParser.g:18334:3: ruleEProperties
+            // InternalAADMParser.g:18329:2: ( ruleEProperties )
+            // InternalAADMParser.g:18330:3: ruleEProperties
             {
              before(grammarAccess.getEDataTypeBodyAccess().getPropertiesEPropertiesParserRuleCall_1_3_2_0()); 
             pushFollow(FOLLOW_2);
@@ -56338,17 +56330,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EArtifactTypes__ArtifactTypesAssignment_1"
-    // InternalAADMParser.g:18343:1: rule__EArtifactTypes__ArtifactTypesAssignment_1 : ( ruleEArtifactType ) ;
+    // InternalAADMParser.g:18339:1: rule__EArtifactTypes__ArtifactTypesAssignment_1 : ( ruleEArtifactType ) ;
     public final void rule__EArtifactTypes__ArtifactTypesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18347:1: ( ( ruleEArtifactType ) )
-            // InternalAADMParser.g:18348:2: ( ruleEArtifactType )
+            // InternalAADMParser.g:18343:1: ( ( ruleEArtifactType ) )
+            // InternalAADMParser.g:18344:2: ( ruleEArtifactType )
             {
-            // InternalAADMParser.g:18348:2: ( ruleEArtifactType )
-            // InternalAADMParser.g:18349:3: ruleEArtifactType
+            // InternalAADMParser.g:18344:2: ( ruleEArtifactType )
+            // InternalAADMParser.g:18345:3: ruleEArtifactType
             {
              before(grammarAccess.getEArtifactTypesAccess().getArtifactTypesEArtifactTypeParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -56379,17 +56371,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EArtifactType__NameAssignment_0"
-    // InternalAADMParser.g:18358:1: rule__EArtifactType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
+    // InternalAADMParser.g:18354:1: rule__EArtifactType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__EArtifactType__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18362:1: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18363:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18358:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18359:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18363:2: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18364:3: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:18359:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18360:3: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getEArtifactTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -56416,17 +56408,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EArtifactType__ArtifactAssignment_3"
-    // InternalAADMParser.g:18373:1: rule__EArtifactType__ArtifactAssignment_3 : ( ruleEArtifactTypeBody ) ;
+    // InternalAADMParser.g:18369:1: rule__EArtifactType__ArtifactAssignment_3 : ( ruleEArtifactTypeBody ) ;
     public final void rule__EArtifactType__ArtifactAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18377:1: ( ( ruleEArtifactTypeBody ) )
-            // InternalAADMParser.g:18378:2: ( ruleEArtifactTypeBody )
+            // InternalAADMParser.g:18373:1: ( ( ruleEArtifactTypeBody ) )
+            // InternalAADMParser.g:18374:2: ( ruleEArtifactTypeBody )
             {
-            // InternalAADMParser.g:18378:2: ( ruleEArtifactTypeBody )
-            // InternalAADMParser.g:18379:3: ruleEArtifactTypeBody
+            // InternalAADMParser.g:18374:2: ( ruleEArtifactTypeBody )
+            // InternalAADMParser.g:18375:3: ruleEArtifactTypeBody
             {
              before(grammarAccess.getEArtifactTypeAccess().getArtifactEArtifactTypeBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -56457,29 +56449,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EArtifactTypeBody__SuperTypeAssignment_1_0_1"
-    // InternalAADMParser.g:18388:1: rule__EArtifactTypeBody__SuperTypeAssignment_1_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:18384:1: rule__EArtifactTypeBody__SuperTypeAssignment_1_0_1 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__EArtifactTypeBody__SuperTypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18392:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:18393:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18388:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18389:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18393:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18394:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18389:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18390:3: RULE_QUALIFIED_NAME
             {
-             before(grammarAccess.getEArtifactTypeBodyAccess().getSuperTypeEArtifactTypeCrossReference_1_0_1_0()); 
-            // InternalAADMParser.g:18395:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18396:4: RULE_QUALIFIED_NAME
-            {
-             before(grammarAccess.getEArtifactTypeBodyAccess().getSuperTypeEArtifactTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
+             before(grammarAccess.getEArtifactTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
-             after(grammarAccess.getEArtifactTypeBodyAccess().getSuperTypeEArtifactTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
-
-            }
-
-             after(grammarAccess.getEArtifactTypeBodyAccess().getSuperTypeEArtifactTypeCrossReference_1_0_1_0()); 
+             after(grammarAccess.getEArtifactTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
 
             }
 
@@ -56502,17 +56486,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EArtifactTypeBody__DescriptionAssignment_1_1_1"
-    // InternalAADMParser.g:18407:1: rule__EArtifactTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:18399:1: rule__EArtifactTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
     public final void rule__EArtifactTypeBody__DescriptionAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18411:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:18412:2: ( RULE_STRING )
+            // InternalAADMParser.g:18403:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:18404:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:18412:2: ( RULE_STRING )
-            // InternalAADMParser.g:18413:3: RULE_STRING
+            // InternalAADMParser.g:18404:2: ( RULE_STRING )
+            // InternalAADMParser.g:18405:3: RULE_STRING
             {
              before(grammarAccess.getEArtifactTypeBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -56539,17 +56523,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EArtifactTypeBody__Mime_typeAssignment_1_2_1"
-    // InternalAADMParser.g:18422:1: rule__EArtifactTypeBody__Mime_typeAssignment_1_2_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:18414:1: rule__EArtifactTypeBody__Mime_typeAssignment_1_2_1 : ( RULE_STRING ) ;
     public final void rule__EArtifactTypeBody__Mime_typeAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18426:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:18427:2: ( RULE_STRING )
+            // InternalAADMParser.g:18418:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:18419:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:18427:2: ( RULE_STRING )
-            // InternalAADMParser.g:18428:3: RULE_STRING
+            // InternalAADMParser.g:18419:2: ( RULE_STRING )
+            // InternalAADMParser.g:18420:3: RULE_STRING
             {
              before(grammarAccess.getEArtifactTypeBodyAccess().getMime_typeSTRINGTerminalRuleCall_1_2_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -56576,17 +56560,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EArtifactTypeBody__File_extAssignment_1_3_1"
-    // InternalAADMParser.g:18437:1: rule__EArtifactTypeBody__File_extAssignment_1_3_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:18429:1: rule__EArtifactTypeBody__File_extAssignment_1_3_1 : ( RULE_STRING ) ;
     public final void rule__EArtifactTypeBody__File_extAssignment_1_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18441:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:18442:2: ( RULE_STRING )
+            // InternalAADMParser.g:18433:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:18434:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:18442:2: ( RULE_STRING )
-            // InternalAADMParser.g:18443:3: RULE_STRING
+            // InternalAADMParser.g:18434:2: ( RULE_STRING )
+            // InternalAADMParser.g:18435:3: RULE_STRING
             {
              before(grammarAccess.getEArtifactTypeBodyAccess().getFile_extSTRINGTerminalRuleCall_1_3_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -56613,17 +56597,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityTypes__CapabilityTypesAssignment_1"
-    // InternalAADMParser.g:18452:1: rule__ECapabilityTypes__CapabilityTypesAssignment_1 : ( ruleECapabilityType ) ;
+    // InternalAADMParser.g:18444:1: rule__ECapabilityTypes__CapabilityTypesAssignment_1 : ( ruleECapabilityType ) ;
     public final void rule__ECapabilityTypes__CapabilityTypesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18456:1: ( ( ruleECapabilityType ) )
-            // InternalAADMParser.g:18457:2: ( ruleECapabilityType )
+            // InternalAADMParser.g:18448:1: ( ( ruleECapabilityType ) )
+            // InternalAADMParser.g:18449:2: ( ruleECapabilityType )
             {
-            // InternalAADMParser.g:18457:2: ( ruleECapabilityType )
-            // InternalAADMParser.g:18458:3: ruleECapabilityType
+            // InternalAADMParser.g:18449:2: ( ruleECapabilityType )
+            // InternalAADMParser.g:18450:3: ruleECapabilityType
             {
              before(grammarAccess.getECapabilityTypesAccess().getCapabilityTypesECapabilityTypeParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -56654,17 +56638,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityType__NameAssignment_0"
-    // InternalAADMParser.g:18467:1: rule__ECapabilityType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
+    // InternalAADMParser.g:18459:1: rule__ECapabilityType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__ECapabilityType__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18471:1: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18472:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18463:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18464:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18472:2: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18473:3: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:18464:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18465:3: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getECapabilityTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -56691,17 +56675,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityType__CapabilityAssignment_3"
-    // InternalAADMParser.g:18482:1: rule__ECapabilityType__CapabilityAssignment_3 : ( ruleECapabilityTypeBody ) ;
+    // InternalAADMParser.g:18474:1: rule__ECapabilityType__CapabilityAssignment_3 : ( ruleECapabilityTypeBody ) ;
     public final void rule__ECapabilityType__CapabilityAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18486:1: ( ( ruleECapabilityTypeBody ) )
-            // InternalAADMParser.g:18487:2: ( ruleECapabilityTypeBody )
+            // InternalAADMParser.g:18478:1: ( ( ruleECapabilityTypeBody ) )
+            // InternalAADMParser.g:18479:2: ( ruleECapabilityTypeBody )
             {
-            // InternalAADMParser.g:18487:2: ( ruleECapabilityTypeBody )
-            // InternalAADMParser.g:18488:3: ruleECapabilityTypeBody
+            // InternalAADMParser.g:18479:2: ( ruleECapabilityTypeBody )
+            // InternalAADMParser.g:18480:3: ruleECapabilityTypeBody
             {
              before(grammarAccess.getECapabilityTypeAccess().getCapabilityECapabilityTypeBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -56732,29 +56716,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityTypeBody__SuperTypeAssignment_1_0_1"
-    // InternalAADMParser.g:18497:1: rule__ECapabilityTypeBody__SuperTypeAssignment_1_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:18489:1: rule__ECapabilityTypeBody__SuperTypeAssignment_1_0_1 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__ECapabilityTypeBody__SuperTypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18501:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:18502:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18493:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18494:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18502:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18503:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18494:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18495:3: RULE_QUALIFIED_NAME
             {
-             before(grammarAccess.getECapabilityTypeBodyAccess().getSuperTypeECapabilityTypeCrossReference_1_0_1_0()); 
-            // InternalAADMParser.g:18504:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18505:4: RULE_QUALIFIED_NAME
-            {
-             before(grammarAccess.getECapabilityTypeBodyAccess().getSuperTypeECapabilityTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
+             before(grammarAccess.getECapabilityTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
-             after(grammarAccess.getECapabilityTypeBodyAccess().getSuperTypeECapabilityTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
-
-            }
-
-             after(grammarAccess.getECapabilityTypeBodyAccess().getSuperTypeECapabilityTypeCrossReference_1_0_1_0()); 
+             after(grammarAccess.getECapabilityTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
 
             }
 
@@ -56777,17 +56753,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityTypeBody__DescriptionAssignment_1_1_1"
-    // InternalAADMParser.g:18516:1: rule__ECapabilityTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:18504:1: rule__ECapabilityTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
     public final void rule__ECapabilityTypeBody__DescriptionAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18520:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:18521:2: ( RULE_STRING )
+            // InternalAADMParser.g:18508:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:18509:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:18521:2: ( RULE_STRING )
-            // InternalAADMParser.g:18522:3: RULE_STRING
+            // InternalAADMParser.g:18509:2: ( RULE_STRING )
+            // InternalAADMParser.g:18510:3: RULE_STRING
             {
              before(grammarAccess.getECapabilityTypeBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -56814,17 +56790,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityTypeBody__PropertiesAssignment_1_2_2"
-    // InternalAADMParser.g:18531:1: rule__ECapabilityTypeBody__PropertiesAssignment_1_2_2 : ( ruleEProperties ) ;
+    // InternalAADMParser.g:18519:1: rule__ECapabilityTypeBody__PropertiesAssignment_1_2_2 : ( ruleEProperties ) ;
     public final void rule__ECapabilityTypeBody__PropertiesAssignment_1_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18535:1: ( ( ruleEProperties ) )
-            // InternalAADMParser.g:18536:2: ( ruleEProperties )
+            // InternalAADMParser.g:18523:1: ( ( ruleEProperties ) )
+            // InternalAADMParser.g:18524:2: ( ruleEProperties )
             {
-            // InternalAADMParser.g:18536:2: ( ruleEProperties )
-            // InternalAADMParser.g:18537:3: ruleEProperties
+            // InternalAADMParser.g:18524:2: ( ruleEProperties )
+            // InternalAADMParser.g:18525:3: ruleEProperties
             {
              before(grammarAccess.getECapabilityTypeBodyAccess().getPropertiesEPropertiesParserRuleCall_1_2_2_0()); 
             pushFollow(FOLLOW_2);
@@ -56855,17 +56831,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityTypeBody__AtributesAssignment_1_3_2"
-    // InternalAADMParser.g:18546:1: rule__ECapabilityTypeBody__AtributesAssignment_1_3_2 : ( ruleEAttributes ) ;
+    // InternalAADMParser.g:18534:1: rule__ECapabilityTypeBody__AtributesAssignment_1_3_2 : ( ruleEAttributes ) ;
     public final void rule__ECapabilityTypeBody__AtributesAssignment_1_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18550:1: ( ( ruleEAttributes ) )
-            // InternalAADMParser.g:18551:2: ( ruleEAttributes )
+            // InternalAADMParser.g:18538:1: ( ( ruleEAttributes ) )
+            // InternalAADMParser.g:18539:2: ( ruleEAttributes )
             {
-            // InternalAADMParser.g:18551:2: ( ruleEAttributes )
-            // InternalAADMParser.g:18552:3: ruleEAttributes
+            // InternalAADMParser.g:18539:2: ( ruleEAttributes )
+            // InternalAADMParser.g:18540:3: ruleEAttributes
             {
              before(grammarAccess.getECapabilityTypeBodyAccess().getAtributesEAttributesParserRuleCall_1_3_2_0()); 
             pushFollow(FOLLOW_2);
@@ -56896,17 +56872,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceTypes__InterfaceTypesAssignment_1"
-    // InternalAADMParser.g:18561:1: rule__EInterfaceTypes__InterfaceTypesAssignment_1 : ( ruleEInterfaceType ) ;
+    // InternalAADMParser.g:18549:1: rule__EInterfaceTypes__InterfaceTypesAssignment_1 : ( ruleEInterfaceType ) ;
     public final void rule__EInterfaceTypes__InterfaceTypesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18565:1: ( ( ruleEInterfaceType ) )
-            // InternalAADMParser.g:18566:2: ( ruleEInterfaceType )
+            // InternalAADMParser.g:18553:1: ( ( ruleEInterfaceType ) )
+            // InternalAADMParser.g:18554:2: ( ruleEInterfaceType )
             {
-            // InternalAADMParser.g:18566:2: ( ruleEInterfaceType )
-            // InternalAADMParser.g:18567:3: ruleEInterfaceType
+            // InternalAADMParser.g:18554:2: ( ruleEInterfaceType )
+            // InternalAADMParser.g:18555:3: ruleEInterfaceType
             {
              before(grammarAccess.getEInterfaceTypesAccess().getInterfaceTypesEInterfaceTypeParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -56937,17 +56913,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceType__NameAssignment_0"
-    // InternalAADMParser.g:18576:1: rule__EInterfaceType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
+    // InternalAADMParser.g:18564:1: rule__EInterfaceType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__EInterfaceType__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18580:1: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18581:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18568:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18569:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18581:2: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18582:3: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:18569:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18570:3: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getEInterfaceTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -56974,17 +56950,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceType__InterfaceAssignment_3"
-    // InternalAADMParser.g:18591:1: rule__EInterfaceType__InterfaceAssignment_3 : ( ruleEInterfaceTypeBody ) ;
+    // InternalAADMParser.g:18579:1: rule__EInterfaceType__InterfaceAssignment_3 : ( ruleEInterfaceTypeBody ) ;
     public final void rule__EInterfaceType__InterfaceAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18595:1: ( ( ruleEInterfaceTypeBody ) )
-            // InternalAADMParser.g:18596:2: ( ruleEInterfaceTypeBody )
+            // InternalAADMParser.g:18583:1: ( ( ruleEInterfaceTypeBody ) )
+            // InternalAADMParser.g:18584:2: ( ruleEInterfaceTypeBody )
             {
-            // InternalAADMParser.g:18596:2: ( ruleEInterfaceTypeBody )
-            // InternalAADMParser.g:18597:3: ruleEInterfaceTypeBody
+            // InternalAADMParser.g:18584:2: ( ruleEInterfaceTypeBody )
+            // InternalAADMParser.g:18585:3: ruleEInterfaceTypeBody
             {
              before(grammarAccess.getEInterfaceTypeAccess().getInterfaceEInterfaceTypeBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -57015,29 +56991,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceTypeBody__SuperTypeAssignment_1_0_1"
-    // InternalAADMParser.g:18606:1: rule__EInterfaceTypeBody__SuperTypeAssignment_1_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:18594:1: rule__EInterfaceTypeBody__SuperTypeAssignment_1_0_1 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__EInterfaceTypeBody__SuperTypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18610:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:18611:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18598:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18599:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18611:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18612:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18599:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18600:3: RULE_QUALIFIED_NAME
             {
-             before(grammarAccess.getEInterfaceTypeBodyAccess().getSuperTypeEInterfaceTypeCrossReference_1_0_1_0()); 
-            // InternalAADMParser.g:18613:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18614:4: RULE_QUALIFIED_NAME
-            {
-             before(grammarAccess.getEInterfaceTypeBodyAccess().getSuperTypeEInterfaceTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
+             before(grammarAccess.getEInterfaceTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
-             after(grammarAccess.getEInterfaceTypeBodyAccess().getSuperTypeEInterfaceTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
-
-            }
-
-             after(grammarAccess.getEInterfaceTypeBodyAccess().getSuperTypeEInterfaceTypeCrossReference_1_0_1_0()); 
+             after(grammarAccess.getEInterfaceTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
 
             }
 
@@ -57060,17 +57028,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceTypeBody__DescriptionAssignment_1_1_1"
-    // InternalAADMParser.g:18625:1: rule__EInterfaceTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:18609:1: rule__EInterfaceTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
     public final void rule__EInterfaceTypeBody__DescriptionAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18629:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:18630:2: ( RULE_STRING )
+            // InternalAADMParser.g:18613:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:18614:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:18630:2: ( RULE_STRING )
-            // InternalAADMParser.g:18631:3: RULE_STRING
+            // InternalAADMParser.g:18614:2: ( RULE_STRING )
+            // InternalAADMParser.g:18615:3: RULE_STRING
             {
              before(grammarAccess.getEInterfaceTypeBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -57097,17 +57065,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceTypeBody__InputsAssignment_1_2_2"
-    // InternalAADMParser.g:18640:1: rule__EInterfaceTypeBody__InputsAssignment_1_2_2 : ( ruleEProperties ) ;
+    // InternalAADMParser.g:18624:1: rule__EInterfaceTypeBody__InputsAssignment_1_2_2 : ( ruleEProperties ) ;
     public final void rule__EInterfaceTypeBody__InputsAssignment_1_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18644:1: ( ( ruleEProperties ) )
-            // InternalAADMParser.g:18645:2: ( ruleEProperties )
+            // InternalAADMParser.g:18628:1: ( ( ruleEProperties ) )
+            // InternalAADMParser.g:18629:2: ( ruleEProperties )
             {
-            // InternalAADMParser.g:18645:2: ( ruleEProperties )
-            // InternalAADMParser.g:18646:3: ruleEProperties
+            // InternalAADMParser.g:18629:2: ( ruleEProperties )
+            // InternalAADMParser.g:18630:3: ruleEProperties
             {
              before(grammarAccess.getEInterfaceTypeBodyAccess().getInputsEPropertiesParserRuleCall_1_2_2_0()); 
             pushFollow(FOLLOW_2);
@@ -57138,17 +57106,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceTypeBody__OperationsAssignment_1_3_2"
-    // InternalAADMParser.g:18655:1: rule__EInterfaceTypeBody__OperationsAssignment_1_3_2 : ( ruleEOperations ) ;
+    // InternalAADMParser.g:18639:1: rule__EInterfaceTypeBody__OperationsAssignment_1_3_2 : ( ruleEOperations ) ;
     public final void rule__EInterfaceTypeBody__OperationsAssignment_1_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18659:1: ( ( ruleEOperations ) )
-            // InternalAADMParser.g:18660:2: ( ruleEOperations )
+            // InternalAADMParser.g:18643:1: ( ( ruleEOperations ) )
+            // InternalAADMParser.g:18644:2: ( ruleEOperations )
             {
-            // InternalAADMParser.g:18660:2: ( ruleEOperations )
-            // InternalAADMParser.g:18661:3: ruleEOperations
+            // InternalAADMParser.g:18644:2: ( ruleEOperations )
+            // InternalAADMParser.g:18645:3: ruleEOperations
             {
              before(grammarAccess.getEInterfaceTypeBodyAccess().getOperationsEOperationsParserRuleCall_1_3_2_0()); 
             pushFollow(FOLLOW_2);
@@ -57179,17 +57147,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPolicyTypes__PolicyTypesAssignment_1"
-    // InternalAADMParser.g:18670:1: rule__EPolicyTypes__PolicyTypesAssignment_1 : ( ruleEPolicyType ) ;
+    // InternalAADMParser.g:18654:1: rule__EPolicyTypes__PolicyTypesAssignment_1 : ( ruleEPolicyType ) ;
     public final void rule__EPolicyTypes__PolicyTypesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18674:1: ( ( ruleEPolicyType ) )
-            // InternalAADMParser.g:18675:2: ( ruleEPolicyType )
+            // InternalAADMParser.g:18658:1: ( ( ruleEPolicyType ) )
+            // InternalAADMParser.g:18659:2: ( ruleEPolicyType )
             {
-            // InternalAADMParser.g:18675:2: ( ruleEPolicyType )
-            // InternalAADMParser.g:18676:3: ruleEPolicyType
+            // InternalAADMParser.g:18659:2: ( ruleEPolicyType )
+            // InternalAADMParser.g:18660:3: ruleEPolicyType
             {
              before(grammarAccess.getEPolicyTypesAccess().getPolicyTypesEPolicyTypeParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -57220,17 +57188,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPolicyType__NameAssignment_0"
-    // InternalAADMParser.g:18685:1: rule__EPolicyType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
+    // InternalAADMParser.g:18669:1: rule__EPolicyType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__EPolicyType__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18689:1: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18690:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18673:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18674:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18690:2: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18691:3: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:18674:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18675:3: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getEPolicyTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -57257,17 +57225,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPolicyType__PolicyAssignment_3"
-    // InternalAADMParser.g:18700:1: rule__EPolicyType__PolicyAssignment_3 : ( ruleEPolicyTypeBody ) ;
+    // InternalAADMParser.g:18684:1: rule__EPolicyType__PolicyAssignment_3 : ( ruleEPolicyTypeBody ) ;
     public final void rule__EPolicyType__PolicyAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18704:1: ( ( ruleEPolicyTypeBody ) )
-            // InternalAADMParser.g:18705:2: ( ruleEPolicyTypeBody )
+            // InternalAADMParser.g:18688:1: ( ( ruleEPolicyTypeBody ) )
+            // InternalAADMParser.g:18689:2: ( ruleEPolicyTypeBody )
             {
-            // InternalAADMParser.g:18705:2: ( ruleEPolicyTypeBody )
-            // InternalAADMParser.g:18706:3: ruleEPolicyTypeBody
+            // InternalAADMParser.g:18689:2: ( ruleEPolicyTypeBody )
+            // InternalAADMParser.g:18690:3: ruleEPolicyTypeBody
             {
              before(grammarAccess.getEPolicyTypeAccess().getPolicyEPolicyTypeBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -57298,29 +57266,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPolicyTypeBody__SuperTypeAssignment_1_0_1"
-    // InternalAADMParser.g:18715:1: rule__EPolicyTypeBody__SuperTypeAssignment_1_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:18699:1: rule__EPolicyTypeBody__SuperTypeAssignment_1_0_1 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__EPolicyTypeBody__SuperTypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18719:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:18720:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18703:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18704:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18720:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18721:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18704:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18705:3: RULE_QUALIFIED_NAME
             {
-             before(grammarAccess.getEPolicyTypeBodyAccess().getSuperTypeEPolicyTypeCrossReference_1_0_1_0()); 
-            // InternalAADMParser.g:18722:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18723:4: RULE_QUALIFIED_NAME
-            {
-             before(grammarAccess.getEPolicyTypeBodyAccess().getSuperTypeEPolicyTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
+             before(grammarAccess.getEPolicyTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
-             after(grammarAccess.getEPolicyTypeBodyAccess().getSuperTypeEPolicyTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
-
-            }
-
-             after(grammarAccess.getEPolicyTypeBodyAccess().getSuperTypeEPolicyTypeCrossReference_1_0_1_0()); 
+             after(grammarAccess.getEPolicyTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
 
             }
 
@@ -57343,17 +57303,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPolicyTypeBody__DescriptionAssignment_1_1_1"
-    // InternalAADMParser.g:18734:1: rule__EPolicyTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:18714:1: rule__EPolicyTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
     public final void rule__EPolicyTypeBody__DescriptionAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18738:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:18739:2: ( RULE_STRING )
+            // InternalAADMParser.g:18718:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:18719:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:18739:2: ( RULE_STRING )
-            // InternalAADMParser.g:18740:3: RULE_STRING
+            // InternalAADMParser.g:18719:2: ( RULE_STRING )
+            // InternalAADMParser.g:18720:3: RULE_STRING
             {
              before(grammarAccess.getEPolicyTypeBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -57380,17 +57340,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTypes__NodeTypesAssignment_1"
-    // InternalAADMParser.g:18749:1: rule__ENodeTypes__NodeTypesAssignment_1 : ( ruleENodeType ) ;
+    // InternalAADMParser.g:18729:1: rule__ENodeTypes__NodeTypesAssignment_1 : ( ruleENodeType ) ;
     public final void rule__ENodeTypes__NodeTypesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18753:1: ( ( ruleENodeType ) )
-            // InternalAADMParser.g:18754:2: ( ruleENodeType )
+            // InternalAADMParser.g:18733:1: ( ( ruleENodeType ) )
+            // InternalAADMParser.g:18734:2: ( ruleENodeType )
             {
-            // InternalAADMParser.g:18754:2: ( ruleENodeType )
-            // InternalAADMParser.g:18755:3: ruleENodeType
+            // InternalAADMParser.g:18734:2: ( ruleENodeType )
+            // InternalAADMParser.g:18735:3: ruleENodeType
             {
              before(grammarAccess.getENodeTypesAccess().getNodeTypesENodeTypeParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -57421,17 +57381,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeType__NameAssignment_0"
-    // InternalAADMParser.g:18764:1: rule__ENodeType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
+    // InternalAADMParser.g:18744:1: rule__ENodeType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__ENodeType__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18768:1: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18769:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18748:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18749:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18769:2: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18770:3: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:18749:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18750:3: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getENodeTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -57458,17 +57418,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeType__NodeAssignment_3"
-    // InternalAADMParser.g:18779:1: rule__ENodeType__NodeAssignment_3 : ( ruleENodeTypeBody ) ;
+    // InternalAADMParser.g:18759:1: rule__ENodeType__NodeAssignment_3 : ( ruleENodeTypeBody ) ;
     public final void rule__ENodeType__NodeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18783:1: ( ( ruleENodeTypeBody ) )
-            // InternalAADMParser.g:18784:2: ( ruleENodeTypeBody )
+            // InternalAADMParser.g:18763:1: ( ( ruleENodeTypeBody ) )
+            // InternalAADMParser.g:18764:2: ( ruleENodeTypeBody )
             {
-            // InternalAADMParser.g:18784:2: ( ruleENodeTypeBody )
-            // InternalAADMParser.g:18785:3: ruleENodeTypeBody
+            // InternalAADMParser.g:18764:2: ( ruleENodeTypeBody )
+            // InternalAADMParser.g:18765:3: ruleENodeTypeBody
             {
              before(grammarAccess.getENodeTypeAccess().getNodeENodeTypeBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -57499,17 +57459,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTypeBody__SuperTypeAssignment_1_0_1"
-    // InternalAADMParser.g:18794:1: rule__ENodeTypeBody__SuperTypeAssignment_1_0_1 : ( RULE_QUALIFIED_NAME ) ;
+    // InternalAADMParser.g:18774:1: rule__ENodeTypeBody__SuperTypeAssignment_1_0_1 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__ENodeTypeBody__SuperTypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18798:1: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18799:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18778:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18779:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18799:2: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18800:3: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:18779:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18780:3: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getENodeTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -57536,17 +57496,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTypeBody__DescriptionAssignment_1_1_1"
-    // InternalAADMParser.g:18809:1: rule__ENodeTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:18789:1: rule__ENodeTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
     public final void rule__ENodeTypeBody__DescriptionAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18813:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:18814:2: ( RULE_STRING )
+            // InternalAADMParser.g:18793:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:18794:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:18814:2: ( RULE_STRING )
-            // InternalAADMParser.g:18815:3: RULE_STRING
+            // InternalAADMParser.g:18794:2: ( RULE_STRING )
+            // InternalAADMParser.g:18795:3: RULE_STRING
             {
              before(grammarAccess.getENodeTypeBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -57573,17 +57533,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTypeBody__PropertiesAssignment_1_2_2"
-    // InternalAADMParser.g:18824:1: rule__ENodeTypeBody__PropertiesAssignment_1_2_2 : ( ruleEProperties ) ;
+    // InternalAADMParser.g:18804:1: rule__ENodeTypeBody__PropertiesAssignment_1_2_2 : ( ruleEProperties ) ;
     public final void rule__ENodeTypeBody__PropertiesAssignment_1_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18828:1: ( ( ruleEProperties ) )
-            // InternalAADMParser.g:18829:2: ( ruleEProperties )
+            // InternalAADMParser.g:18808:1: ( ( ruleEProperties ) )
+            // InternalAADMParser.g:18809:2: ( ruleEProperties )
             {
-            // InternalAADMParser.g:18829:2: ( ruleEProperties )
-            // InternalAADMParser.g:18830:3: ruleEProperties
+            // InternalAADMParser.g:18809:2: ( ruleEProperties )
+            // InternalAADMParser.g:18810:3: ruleEProperties
             {
              before(grammarAccess.getENodeTypeBodyAccess().getPropertiesEPropertiesParserRuleCall_1_2_2_0()); 
             pushFollow(FOLLOW_2);
@@ -57614,17 +57574,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTypeBody__AttributesAssignment_1_3_2"
-    // InternalAADMParser.g:18839:1: rule__ENodeTypeBody__AttributesAssignment_1_3_2 : ( ruleEAttributes ) ;
+    // InternalAADMParser.g:18819:1: rule__ENodeTypeBody__AttributesAssignment_1_3_2 : ( ruleEAttributes ) ;
     public final void rule__ENodeTypeBody__AttributesAssignment_1_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18843:1: ( ( ruleEAttributes ) )
-            // InternalAADMParser.g:18844:2: ( ruleEAttributes )
+            // InternalAADMParser.g:18823:1: ( ( ruleEAttributes ) )
+            // InternalAADMParser.g:18824:2: ( ruleEAttributes )
             {
-            // InternalAADMParser.g:18844:2: ( ruleEAttributes )
-            // InternalAADMParser.g:18845:3: ruleEAttributes
+            // InternalAADMParser.g:18824:2: ( ruleEAttributes )
+            // InternalAADMParser.g:18825:3: ruleEAttributes
             {
              before(grammarAccess.getENodeTypeBodyAccess().getAttributesEAttributesParserRuleCall_1_3_2_0()); 
             pushFollow(FOLLOW_2);
@@ -57655,17 +57615,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTypeBody__InterfacesAssignment_1_4_2"
-    // InternalAADMParser.g:18854:1: rule__ENodeTypeBody__InterfacesAssignment_1_4_2 : ( ruleEInterfaces ) ;
+    // InternalAADMParser.g:18834:1: rule__ENodeTypeBody__InterfacesAssignment_1_4_2 : ( ruleEInterfaces ) ;
     public final void rule__ENodeTypeBody__InterfacesAssignment_1_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18858:1: ( ( ruleEInterfaces ) )
-            // InternalAADMParser.g:18859:2: ( ruleEInterfaces )
+            // InternalAADMParser.g:18838:1: ( ( ruleEInterfaces ) )
+            // InternalAADMParser.g:18839:2: ( ruleEInterfaces )
             {
-            // InternalAADMParser.g:18859:2: ( ruleEInterfaces )
-            // InternalAADMParser.g:18860:3: ruleEInterfaces
+            // InternalAADMParser.g:18839:2: ( ruleEInterfaces )
+            // InternalAADMParser.g:18840:3: ruleEInterfaces
             {
              before(grammarAccess.getENodeTypeBodyAccess().getInterfacesEInterfacesParserRuleCall_1_4_2_0()); 
             pushFollow(FOLLOW_2);
@@ -57696,17 +57656,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTypeBody__CapabilitiesAssignment_1_5_2"
-    // InternalAADMParser.g:18869:1: rule__ENodeTypeBody__CapabilitiesAssignment_1_5_2 : ( ruleECapabilities ) ;
+    // InternalAADMParser.g:18849:1: rule__ENodeTypeBody__CapabilitiesAssignment_1_5_2 : ( ruleECapabilities ) ;
     public final void rule__ENodeTypeBody__CapabilitiesAssignment_1_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18873:1: ( ( ruleECapabilities ) )
-            // InternalAADMParser.g:18874:2: ( ruleECapabilities )
+            // InternalAADMParser.g:18853:1: ( ( ruleECapabilities ) )
+            // InternalAADMParser.g:18854:2: ( ruleECapabilities )
             {
-            // InternalAADMParser.g:18874:2: ( ruleECapabilities )
-            // InternalAADMParser.g:18875:3: ruleECapabilities
+            // InternalAADMParser.g:18854:2: ( ruleECapabilities )
+            // InternalAADMParser.g:18855:3: ruleECapabilities
             {
              before(grammarAccess.getENodeTypeBodyAccess().getCapabilitiesECapabilitiesParserRuleCall_1_5_2_0()); 
             pushFollow(FOLLOW_2);
@@ -57737,17 +57697,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTypeBody__RequirementsAssignment_1_6_2"
-    // InternalAADMParser.g:18884:1: rule__ENodeTypeBody__RequirementsAssignment_1_6_2 : ( ruleERequirements ) ;
+    // InternalAADMParser.g:18864:1: rule__ENodeTypeBody__RequirementsAssignment_1_6_2 : ( ruleERequirements ) ;
     public final void rule__ENodeTypeBody__RequirementsAssignment_1_6_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18888:1: ( ( ruleERequirements ) )
-            // InternalAADMParser.g:18889:2: ( ruleERequirements )
+            // InternalAADMParser.g:18868:1: ( ( ruleERequirements ) )
+            // InternalAADMParser.g:18869:2: ( ruleERequirements )
             {
-            // InternalAADMParser.g:18889:2: ( ruleERequirements )
-            // InternalAADMParser.g:18890:3: ruleERequirements
+            // InternalAADMParser.g:18869:2: ( ruleERequirements )
+            // InternalAADMParser.g:18870:3: ruleERequirements
             {
              before(grammarAccess.getENodeTypeBodyAccess().getRequirementsERequirementsParserRuleCall_1_6_2_0()); 
             pushFollow(FOLLOW_2);
@@ -57778,17 +57738,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERelationshipTypes__RelationshipTypesAssignment_1"
-    // InternalAADMParser.g:18899:1: rule__ERelationshipTypes__RelationshipTypesAssignment_1 : ( ruleERelationshipType ) ;
+    // InternalAADMParser.g:18879:1: rule__ERelationshipTypes__RelationshipTypesAssignment_1 : ( ruleERelationshipType ) ;
     public final void rule__ERelationshipTypes__RelationshipTypesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18903:1: ( ( ruleERelationshipType ) )
-            // InternalAADMParser.g:18904:2: ( ruleERelationshipType )
+            // InternalAADMParser.g:18883:1: ( ( ruleERelationshipType ) )
+            // InternalAADMParser.g:18884:2: ( ruleERelationshipType )
             {
-            // InternalAADMParser.g:18904:2: ( ruleERelationshipType )
-            // InternalAADMParser.g:18905:3: ruleERelationshipType
+            // InternalAADMParser.g:18884:2: ( ruleERelationshipType )
+            // InternalAADMParser.g:18885:3: ruleERelationshipType
             {
              before(grammarAccess.getERelationshipTypesAccess().getRelationshipTypesERelationshipTypeParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -57819,17 +57779,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERelationshipType__NameAssignment_0"
-    // InternalAADMParser.g:18914:1: rule__ERelationshipType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
+    // InternalAADMParser.g:18894:1: rule__ERelationshipType__NameAssignment_0 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__ERelationshipType__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18918:1: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18919:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18898:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18899:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18919:2: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18920:3: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:18899:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18900:3: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getERelationshipTypeAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -57856,17 +57816,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERelationshipType__RelationshipAssignment_3"
-    // InternalAADMParser.g:18929:1: rule__ERelationshipType__RelationshipAssignment_3 : ( ruleERelationshipTypeBody ) ;
+    // InternalAADMParser.g:18909:1: rule__ERelationshipType__RelationshipAssignment_3 : ( ruleERelationshipTypeBody ) ;
     public final void rule__ERelationshipType__RelationshipAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18933:1: ( ( ruleERelationshipTypeBody ) )
-            // InternalAADMParser.g:18934:2: ( ruleERelationshipTypeBody )
+            // InternalAADMParser.g:18913:1: ( ( ruleERelationshipTypeBody ) )
+            // InternalAADMParser.g:18914:2: ( ruleERelationshipTypeBody )
             {
-            // InternalAADMParser.g:18934:2: ( ruleERelationshipTypeBody )
-            // InternalAADMParser.g:18935:3: ruleERelationshipTypeBody
+            // InternalAADMParser.g:18914:2: ( ruleERelationshipTypeBody )
+            // InternalAADMParser.g:18915:3: ruleERelationshipTypeBody
             {
              before(grammarAccess.getERelationshipTypeAccess().getRelationshipERelationshipTypeBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -57897,29 +57857,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERelationshipTypeBody__SuperTypeAssignment_1_0_1"
-    // InternalAADMParser.g:18944:1: rule__ERelationshipTypeBody__SuperTypeAssignment_1_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:18924:1: rule__ERelationshipTypeBody__SuperTypeAssignment_1_0_1 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__ERelationshipTypeBody__SuperTypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18948:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:18949:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18928:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:18929:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalAADMParser.g:18949:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:18950:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18929:2: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:18930:3: RULE_QUALIFIED_NAME
             {
-             before(grammarAccess.getERelationshipTypeBodyAccess().getSuperTypeERelationshipTypeCrossReference_1_0_1_0()); 
-            // InternalAADMParser.g:18951:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:18952:4: RULE_QUALIFIED_NAME
-            {
-             before(grammarAccess.getERelationshipTypeBodyAccess().getSuperTypeERelationshipTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
+             before(grammarAccess.getERelationshipTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
-             after(grammarAccess.getERelationshipTypeBodyAccess().getSuperTypeERelationshipTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); 
-
-            }
-
-             after(grammarAccess.getERelationshipTypeBodyAccess().getSuperTypeERelationshipTypeCrossReference_1_0_1_0()); 
+             after(grammarAccess.getERelationshipTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); 
 
             }
 
@@ -57942,17 +57894,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERelationshipTypeBody__DescriptionAssignment_1_1_1"
-    // InternalAADMParser.g:18963:1: rule__ERelationshipTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:18939:1: rule__ERelationshipTypeBody__DescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
     public final void rule__ERelationshipTypeBody__DescriptionAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18967:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:18968:2: ( RULE_STRING )
+            // InternalAADMParser.g:18943:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:18944:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:18968:2: ( RULE_STRING )
-            // InternalAADMParser.g:18969:3: RULE_STRING
+            // InternalAADMParser.g:18944:2: ( RULE_STRING )
+            // InternalAADMParser.g:18945:3: RULE_STRING
             {
              before(grammarAccess.getERelationshipTypeBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -57979,17 +57931,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERelationshipTypeBody__PropertiesAssignment_1_2_2"
-    // InternalAADMParser.g:18978:1: rule__ERelationshipTypeBody__PropertiesAssignment_1_2_2 : ( ruleEProperties ) ;
+    // InternalAADMParser.g:18954:1: rule__ERelationshipTypeBody__PropertiesAssignment_1_2_2 : ( ruleEProperties ) ;
     public final void rule__ERelationshipTypeBody__PropertiesAssignment_1_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18982:1: ( ( ruleEProperties ) )
-            // InternalAADMParser.g:18983:2: ( ruleEProperties )
+            // InternalAADMParser.g:18958:1: ( ( ruleEProperties ) )
+            // InternalAADMParser.g:18959:2: ( ruleEProperties )
             {
-            // InternalAADMParser.g:18983:2: ( ruleEProperties )
-            // InternalAADMParser.g:18984:3: ruleEProperties
+            // InternalAADMParser.g:18959:2: ( ruleEProperties )
+            // InternalAADMParser.g:18960:3: ruleEProperties
             {
              before(grammarAccess.getERelationshipTypeBodyAccess().getPropertiesEPropertiesParserRuleCall_1_2_2_0()); 
             pushFollow(FOLLOW_2);
@@ -58020,17 +57972,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERelationshipTypeBody__AtributesAssignment_1_3_2"
-    // InternalAADMParser.g:18993:1: rule__ERelationshipTypeBody__AtributesAssignment_1_3_2 : ( ruleEAttributes ) ;
+    // InternalAADMParser.g:18969:1: rule__ERelationshipTypeBody__AtributesAssignment_1_3_2 : ( ruleEAttributes ) ;
     public final void rule__ERelationshipTypeBody__AtributesAssignment_1_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18997:1: ( ( ruleEAttributes ) )
-            // InternalAADMParser.g:18998:2: ( ruleEAttributes )
+            // InternalAADMParser.g:18973:1: ( ( ruleEAttributes ) )
+            // InternalAADMParser.g:18974:2: ( ruleEAttributes )
             {
-            // InternalAADMParser.g:18998:2: ( ruleEAttributes )
-            // InternalAADMParser.g:18999:3: ruleEAttributes
+            // InternalAADMParser.g:18974:2: ( ruleEAttributes )
+            // InternalAADMParser.g:18975:3: ruleEAttributes
             {
              before(grammarAccess.getERelationshipTypeBodyAccess().getAtributesEAttributesParserRuleCall_1_3_2_0()); 
             pushFollow(FOLLOW_2);
@@ -58061,17 +58013,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERelationshipTypeBody__InterfacesAssignment_1_4_2"
-    // InternalAADMParser.g:19008:1: rule__ERelationshipTypeBody__InterfacesAssignment_1_4_2 : ( ruleEInterfaces ) ;
+    // InternalAADMParser.g:18984:1: rule__ERelationshipTypeBody__InterfacesAssignment_1_4_2 : ( ruleEInterfaces ) ;
     public final void rule__ERelationshipTypeBody__InterfacesAssignment_1_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19012:1: ( ( ruleEInterfaces ) )
-            // InternalAADMParser.g:19013:2: ( ruleEInterfaces )
+            // InternalAADMParser.g:18988:1: ( ( ruleEInterfaces ) )
+            // InternalAADMParser.g:18989:2: ( ruleEInterfaces )
             {
-            // InternalAADMParser.g:19013:2: ( ruleEInterfaces )
-            // InternalAADMParser.g:19014:3: ruleEInterfaces
+            // InternalAADMParser.g:18989:2: ( ruleEInterfaces )
+            // InternalAADMParser.g:18990:3: ruleEInterfaces
             {
              before(grammarAccess.getERelationshipTypeBodyAccess().getInterfacesEInterfacesParserRuleCall_1_4_2_0()); 
             pushFollow(FOLLOW_2);
@@ -58102,17 +58054,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERelationshipTypeBody__Valid_target_typesAssignment_1_5_2"
-    // InternalAADMParser.g:19023:1: rule__ERelationshipTypeBody__Valid_target_typesAssignment_1_5_2 : ( ruleEValidTargetTypes ) ;
+    // InternalAADMParser.g:18999:1: rule__ERelationshipTypeBody__Valid_target_typesAssignment_1_5_2 : ( ruleEValidTargetTypes ) ;
     public final void rule__ERelationshipTypeBody__Valid_target_typesAssignment_1_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19027:1: ( ( ruleEValidTargetTypes ) )
-            // InternalAADMParser.g:19028:2: ( ruleEValidTargetTypes )
+            // InternalAADMParser.g:19003:1: ( ( ruleEValidTargetTypes ) )
+            // InternalAADMParser.g:19004:2: ( ruleEValidTargetTypes )
             {
-            // InternalAADMParser.g:19028:2: ( ruleEValidTargetTypes )
-            // InternalAADMParser.g:19029:3: ruleEValidTargetTypes
+            // InternalAADMParser.g:19004:2: ( ruleEValidTargetTypes )
+            // InternalAADMParser.g:19005:3: ruleEValidTargetTypes
             {
              before(grammarAccess.getERelationshipTypeBodyAccess().getValid_target_typesEValidTargetTypesParserRuleCall_1_5_2_0()); 
             pushFollow(FOLLOW_2);
@@ -58143,17 +58095,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValidTargetTypes__TargetTypesAssignment_0"
-    // InternalAADMParser.g:19038:1: rule__EValidTargetTypes__TargetTypesAssignment_0 : ( ruleECapabilityTypeRef ) ;
+    // InternalAADMParser.g:19014:1: rule__EValidTargetTypes__TargetTypesAssignment_0 : ( ruleECapabilityTypeRef ) ;
     public final void rule__EValidTargetTypes__TargetTypesAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19042:1: ( ( ruleECapabilityTypeRef ) )
-            // InternalAADMParser.g:19043:2: ( ruleECapabilityTypeRef )
+            // InternalAADMParser.g:19018:1: ( ( ruleECapabilityTypeRef ) )
+            // InternalAADMParser.g:19019:2: ( ruleECapabilityTypeRef )
             {
-            // InternalAADMParser.g:19043:2: ( ruleECapabilityTypeRef )
-            // InternalAADMParser.g:19044:3: ruleECapabilityTypeRef
+            // InternalAADMParser.g:19019:2: ( ruleECapabilityTypeRef )
+            // InternalAADMParser.g:19020:3: ruleECapabilityTypeRef
             {
              before(grammarAccess.getEValidTargetTypesAccess().getTargetTypesECapabilityTypeRefParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -58184,17 +58136,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValidTargetTypes__SourceTypeAssignment_1_1"
-    // InternalAADMParser.g:19053:1: rule__EValidTargetTypes__SourceTypeAssignment_1_1 : ( ruleECapabilityTypeRef ) ;
+    // InternalAADMParser.g:19029:1: rule__EValidTargetTypes__SourceTypeAssignment_1_1 : ( ruleECapabilityTypeRef ) ;
     public final void rule__EValidTargetTypes__SourceTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19057:1: ( ( ruleECapabilityTypeRef ) )
-            // InternalAADMParser.g:19058:2: ( ruleECapabilityTypeRef )
+            // InternalAADMParser.g:19033:1: ( ( ruleECapabilityTypeRef ) )
+            // InternalAADMParser.g:19034:2: ( ruleECapabilityTypeRef )
             {
-            // InternalAADMParser.g:19058:2: ( ruleECapabilityTypeRef )
-            // InternalAADMParser.g:19059:3: ruleECapabilityTypeRef
+            // InternalAADMParser.g:19034:2: ( ruleECapabilityTypeRef )
+            // InternalAADMParser.g:19035:3: ruleECapabilityTypeRef
             {
              before(grammarAccess.getEValidTargetTypesAccess().getSourceTypeECapabilityTypeRefParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -58225,21 +58177,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityTypeRef__NameAssignment"
-    // InternalAADMParser.g:19068:1: rule__ECapabilityTypeRef__NameAssignment : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:19044:1: rule__ECapabilityTypeRef__NameAssignment : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__ECapabilityTypeRef__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19072:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:19073:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19048:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:19049:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:19073:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:19074:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19049:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19050:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getECapabilityTypeRefAccess().getNameECapabilityTypeCrossReference_0()); 
-            // InternalAADMParser.g:19075:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:19076:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:19051:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19052:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getECapabilityTypeRefAccess().getNameECapabilityTypeQUALIFIED_NAMETerminalRuleCall_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -58270,17 +58222,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EProperties__PropertiesAssignment_1"
-    // InternalAADMParser.g:19087:1: rule__EProperties__PropertiesAssignment_1 : ( ruleEPropertyDefinition ) ;
+    // InternalAADMParser.g:19063:1: rule__EProperties__PropertiesAssignment_1 : ( ruleEPropertyDefinition ) ;
     public final void rule__EProperties__PropertiesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19091:1: ( ( ruleEPropertyDefinition ) )
-            // InternalAADMParser.g:19092:2: ( ruleEPropertyDefinition )
+            // InternalAADMParser.g:19067:1: ( ( ruleEPropertyDefinition ) )
+            // InternalAADMParser.g:19068:2: ( ruleEPropertyDefinition )
             {
-            // InternalAADMParser.g:19092:2: ( ruleEPropertyDefinition )
-            // InternalAADMParser.g:19093:3: ruleEPropertyDefinition
+            // InternalAADMParser.g:19068:2: ( ruleEPropertyDefinition )
+            // InternalAADMParser.g:19069:3: ruleEPropertyDefinition
             {
              before(grammarAccess.getEPropertiesAccess().getPropertiesEPropertyDefinitionParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -58311,17 +58263,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinition__NameAssignment_0"
-    // InternalAADMParser.g:19102:1: rule__EPropertyDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalAADMParser.g:19078:1: rule__EPropertyDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__EPropertyDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19106:1: ( ( RULE_ID ) )
-            // InternalAADMParser.g:19107:2: ( RULE_ID )
+            // InternalAADMParser.g:19082:1: ( ( RULE_ID ) )
+            // InternalAADMParser.g:19083:2: ( RULE_ID )
             {
-            // InternalAADMParser.g:19107:2: ( RULE_ID )
-            // InternalAADMParser.g:19108:3: RULE_ID
+            // InternalAADMParser.g:19083:2: ( RULE_ID )
+            // InternalAADMParser.g:19084:3: RULE_ID
             {
              before(grammarAccess.getEPropertyDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -58348,17 +58300,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinition__PropertyAssignment_3"
-    // InternalAADMParser.g:19117:1: rule__EPropertyDefinition__PropertyAssignment_3 : ( ruleEPropertyDefinitionBody ) ;
+    // InternalAADMParser.g:19093:1: rule__EPropertyDefinition__PropertyAssignment_3 : ( ruleEPropertyDefinitionBody ) ;
     public final void rule__EPropertyDefinition__PropertyAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19121:1: ( ( ruleEPropertyDefinitionBody ) )
-            // InternalAADMParser.g:19122:2: ( ruleEPropertyDefinitionBody )
+            // InternalAADMParser.g:19097:1: ( ( ruleEPropertyDefinitionBody ) )
+            // InternalAADMParser.g:19098:2: ( ruleEPropertyDefinitionBody )
             {
-            // InternalAADMParser.g:19122:2: ( ruleEPropertyDefinitionBody )
-            // InternalAADMParser.g:19123:3: ruleEPropertyDefinitionBody
+            // InternalAADMParser.g:19098:2: ( ruleEPropertyDefinitionBody )
+            // InternalAADMParser.g:19099:3: ruleEPropertyDefinitionBody
             {
              before(grammarAccess.getEPropertyDefinitionAccess().getPropertyEPropertyDefinitionBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -58389,21 +58341,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__TypeAssignment_0_1"
-    // InternalAADMParser.g:19132:1: rule__EPropertyDefinitionBody__TypeAssignment_0_1 : ( ( ruleEDataTypeName ) ) ;
+    // InternalAADMParser.g:19108:1: rule__EPropertyDefinitionBody__TypeAssignment_0_1 : ( ( ruleEDataTypeName ) ) ;
     public final void rule__EPropertyDefinitionBody__TypeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19136:1: ( ( ( ruleEDataTypeName ) ) )
-            // InternalAADMParser.g:19137:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19112:1: ( ( ( ruleEDataTypeName ) ) )
+            // InternalAADMParser.g:19113:2: ( ( ruleEDataTypeName ) )
             {
-            // InternalAADMParser.g:19137:2: ( ( ruleEDataTypeName ) )
-            // InternalAADMParser.g:19138:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19113:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19114:3: ( ruleEDataTypeName )
             {
              before(grammarAccess.getEPropertyDefinitionBodyAccess().getTypeEDataTypeCrossReference_0_1_0()); 
-            // InternalAADMParser.g:19139:3: ( ruleEDataTypeName )
-            // InternalAADMParser.g:19140:4: ruleEDataTypeName
+            // InternalAADMParser.g:19115:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19116:4: ruleEDataTypeName
             {
              before(grammarAccess.getEPropertyDefinitionBodyAccess().getTypeEDataTypeEDataTypeNameParserRuleCall_0_1_0_1()); 
             pushFollow(FOLLOW_2);
@@ -58438,17 +58390,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__DescriptionAssignment_1_1"
-    // InternalAADMParser.g:19151:1: rule__EPropertyDefinitionBody__DescriptionAssignment_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19127:1: rule__EPropertyDefinitionBody__DescriptionAssignment_1_1 : ( RULE_STRING ) ;
     public final void rule__EPropertyDefinitionBody__DescriptionAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19155:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19156:2: ( RULE_STRING )
+            // InternalAADMParser.g:19131:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19132:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19156:2: ( RULE_STRING )
-            // InternalAADMParser.g:19157:3: RULE_STRING
+            // InternalAADMParser.g:19132:2: ( RULE_STRING )
+            // InternalAADMParser.g:19133:3: RULE_STRING
             {
              before(grammarAccess.getEPropertyDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -58475,17 +58427,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__RequiredAssignment_2_1"
-    // InternalAADMParser.g:19166:1: rule__EPropertyDefinitionBody__RequiredAssignment_2_1 : ( RULE_BOOLEAN ) ;
+    // InternalAADMParser.g:19142:1: rule__EPropertyDefinitionBody__RequiredAssignment_2_1 : ( RULE_BOOLEAN ) ;
     public final void rule__EPropertyDefinitionBody__RequiredAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19170:1: ( ( RULE_BOOLEAN ) )
-            // InternalAADMParser.g:19171:2: ( RULE_BOOLEAN )
+            // InternalAADMParser.g:19146:1: ( ( RULE_BOOLEAN ) )
+            // InternalAADMParser.g:19147:2: ( RULE_BOOLEAN )
             {
-            // InternalAADMParser.g:19171:2: ( RULE_BOOLEAN )
-            // InternalAADMParser.g:19172:3: RULE_BOOLEAN
+            // InternalAADMParser.g:19147:2: ( RULE_BOOLEAN )
+            // InternalAADMParser.g:19148:3: RULE_BOOLEAN
             {
              before(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredBOOLEANTerminalRuleCall_2_1_0()); 
             match(input,RULE_BOOLEAN,FOLLOW_2); 
@@ -58512,17 +58464,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__DefaultAssignment_3_1"
-    // InternalAADMParser.g:19181:1: rule__EPropertyDefinitionBody__DefaultAssignment_3_1 : ( ruleEValueExpression ) ;
+    // InternalAADMParser.g:19157:1: rule__EPropertyDefinitionBody__DefaultAssignment_3_1 : ( ruleEValueExpression ) ;
     public final void rule__EPropertyDefinitionBody__DefaultAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19185:1: ( ( ruleEValueExpression ) )
-            // InternalAADMParser.g:19186:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:19161:1: ( ( ruleEValueExpression ) )
+            // InternalAADMParser.g:19162:2: ( ruleEValueExpression )
             {
-            // InternalAADMParser.g:19186:2: ( ruleEValueExpression )
-            // InternalAADMParser.g:19187:3: ruleEValueExpression
+            // InternalAADMParser.g:19162:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:19163:3: ruleEValueExpression
             {
              before(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -58553,17 +58505,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__StatusAssignment_4_1"
-    // InternalAADMParser.g:19196:1: rule__EPropertyDefinitionBody__StatusAssignment_4_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19172:1: rule__EPropertyDefinitionBody__StatusAssignment_4_1 : ( RULE_STRING ) ;
     public final void rule__EPropertyDefinitionBody__StatusAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19200:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19201:2: ( RULE_STRING )
+            // InternalAADMParser.g:19176:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19177:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19201:2: ( RULE_STRING )
-            // InternalAADMParser.g:19202:3: RULE_STRING
+            // InternalAADMParser.g:19177:2: ( RULE_STRING )
+            // InternalAADMParser.g:19178:3: RULE_STRING
             {
              before(grammarAccess.getEPropertyDefinitionBodyAccess().getStatusSTRINGTerminalRuleCall_4_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -58590,17 +58542,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__ConstraintsAssignment_5_2"
-    // InternalAADMParser.g:19211:1: rule__EPropertyDefinitionBody__ConstraintsAssignment_5_2 : ( ruleEConstraints ) ;
+    // InternalAADMParser.g:19187:1: rule__EPropertyDefinitionBody__ConstraintsAssignment_5_2 : ( ruleEConstraints ) ;
     public final void rule__EPropertyDefinitionBody__ConstraintsAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19215:1: ( ( ruleEConstraints ) )
-            // InternalAADMParser.g:19216:2: ( ruleEConstraints )
+            // InternalAADMParser.g:19191:1: ( ( ruleEConstraints ) )
+            // InternalAADMParser.g:19192:2: ( ruleEConstraints )
             {
-            // InternalAADMParser.g:19216:2: ( ruleEConstraints )
-            // InternalAADMParser.g:19217:3: ruleEConstraints
+            // InternalAADMParser.g:19192:2: ( ruleEConstraints )
+            // InternalAADMParser.g:19193:3: ruleEConstraints
             {
              before(grammarAccess.getEPropertyDefinitionBodyAccess().getConstraintsEConstraintsParserRuleCall_5_2_0()); 
             pushFollow(FOLLOW_2);
@@ -58631,21 +58583,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__Entry_schemaAssignment_6_1"
-    // InternalAADMParser.g:19226:1: rule__EPropertyDefinitionBody__Entry_schemaAssignment_6_1 : ( ( ruleEDataTypeName ) ) ;
+    // InternalAADMParser.g:19202:1: rule__EPropertyDefinitionBody__Entry_schemaAssignment_6_1 : ( ( ruleEDataTypeName ) ) ;
     public final void rule__EPropertyDefinitionBody__Entry_schemaAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19230:1: ( ( ( ruleEDataTypeName ) ) )
-            // InternalAADMParser.g:19231:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19206:1: ( ( ( ruleEDataTypeName ) ) )
+            // InternalAADMParser.g:19207:2: ( ( ruleEDataTypeName ) )
             {
-            // InternalAADMParser.g:19231:2: ( ( ruleEDataTypeName ) )
-            // InternalAADMParser.g:19232:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19207:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19208:3: ( ruleEDataTypeName )
             {
              before(grammarAccess.getEPropertyDefinitionBodyAccess().getEntry_schemaEDataTypeCrossReference_6_1_0()); 
-            // InternalAADMParser.g:19233:3: ( ruleEDataTypeName )
-            // InternalAADMParser.g:19234:4: ruleEDataTypeName
+            // InternalAADMParser.g:19209:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19210:4: ruleEDataTypeName
             {
              before(grammarAccess.getEPropertyDefinitionBodyAccess().getEntry_schemaEDataTypeEDataTypeNameParserRuleCall_6_1_0_1()); 
             pushFollow(FOLLOW_2);
@@ -58680,17 +58632,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributes__AttributesAssignment_1"
-    // InternalAADMParser.g:19245:1: rule__EAttributes__AttributesAssignment_1 : ( ruleEAttributeDefinition ) ;
+    // InternalAADMParser.g:19221:1: rule__EAttributes__AttributesAssignment_1 : ( ruleEAttributeDefinition ) ;
     public final void rule__EAttributes__AttributesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19249:1: ( ( ruleEAttributeDefinition ) )
-            // InternalAADMParser.g:19250:2: ( ruleEAttributeDefinition )
+            // InternalAADMParser.g:19225:1: ( ( ruleEAttributeDefinition ) )
+            // InternalAADMParser.g:19226:2: ( ruleEAttributeDefinition )
             {
-            // InternalAADMParser.g:19250:2: ( ruleEAttributeDefinition )
-            // InternalAADMParser.g:19251:3: ruleEAttributeDefinition
+            // InternalAADMParser.g:19226:2: ( ruleEAttributeDefinition )
+            // InternalAADMParser.g:19227:3: ruleEAttributeDefinition
             {
              before(grammarAccess.getEAttributesAccess().getAttributesEAttributeDefinitionParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -58721,17 +58673,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributeDefinition__NameAssignment_0"
-    // InternalAADMParser.g:19260:1: rule__EAttributeDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalAADMParser.g:19236:1: rule__EAttributeDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__EAttributeDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19264:1: ( ( RULE_ID ) )
-            // InternalAADMParser.g:19265:2: ( RULE_ID )
+            // InternalAADMParser.g:19240:1: ( ( RULE_ID ) )
+            // InternalAADMParser.g:19241:2: ( RULE_ID )
             {
-            // InternalAADMParser.g:19265:2: ( RULE_ID )
-            // InternalAADMParser.g:19266:3: RULE_ID
+            // InternalAADMParser.g:19241:2: ( RULE_ID )
+            // InternalAADMParser.g:19242:3: RULE_ID
             {
              before(grammarAccess.getEAttributeDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -58758,17 +58710,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributeDefinition__AttributeAssignment_3"
-    // InternalAADMParser.g:19275:1: rule__EAttributeDefinition__AttributeAssignment_3 : ( ruleEAttributeDefinitionBody ) ;
+    // InternalAADMParser.g:19251:1: rule__EAttributeDefinition__AttributeAssignment_3 : ( ruleEAttributeDefinitionBody ) ;
     public final void rule__EAttributeDefinition__AttributeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19279:1: ( ( ruleEAttributeDefinitionBody ) )
-            // InternalAADMParser.g:19280:2: ( ruleEAttributeDefinitionBody )
+            // InternalAADMParser.g:19255:1: ( ( ruleEAttributeDefinitionBody ) )
+            // InternalAADMParser.g:19256:2: ( ruleEAttributeDefinitionBody )
             {
-            // InternalAADMParser.g:19280:2: ( ruleEAttributeDefinitionBody )
-            // InternalAADMParser.g:19281:3: ruleEAttributeDefinitionBody
+            // InternalAADMParser.g:19256:2: ( ruleEAttributeDefinitionBody )
+            // InternalAADMParser.g:19257:3: ruleEAttributeDefinitionBody
             {
              before(grammarAccess.getEAttributeDefinitionAccess().getAttributeEAttributeDefinitionBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -58799,21 +58751,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributeDefinitionBody__TypeAssignment_0_1"
-    // InternalAADMParser.g:19290:1: rule__EAttributeDefinitionBody__TypeAssignment_0_1 : ( ( ruleEDataTypeName ) ) ;
+    // InternalAADMParser.g:19266:1: rule__EAttributeDefinitionBody__TypeAssignment_0_1 : ( ( ruleEDataTypeName ) ) ;
     public final void rule__EAttributeDefinitionBody__TypeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19294:1: ( ( ( ruleEDataTypeName ) ) )
-            // InternalAADMParser.g:19295:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19270:1: ( ( ( ruleEDataTypeName ) ) )
+            // InternalAADMParser.g:19271:2: ( ( ruleEDataTypeName ) )
             {
-            // InternalAADMParser.g:19295:2: ( ( ruleEDataTypeName ) )
-            // InternalAADMParser.g:19296:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19271:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19272:3: ( ruleEDataTypeName )
             {
              before(grammarAccess.getEAttributeDefinitionBodyAccess().getTypeEDataTypeCrossReference_0_1_0()); 
-            // InternalAADMParser.g:19297:3: ( ruleEDataTypeName )
-            // InternalAADMParser.g:19298:4: ruleEDataTypeName
+            // InternalAADMParser.g:19273:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19274:4: ruleEDataTypeName
             {
              before(grammarAccess.getEAttributeDefinitionBodyAccess().getTypeEDataTypeEDataTypeNameParserRuleCall_0_1_0_1()); 
             pushFollow(FOLLOW_2);
@@ -58848,17 +58800,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributeDefinitionBody__DescriptionAssignment_1_1"
-    // InternalAADMParser.g:19309:1: rule__EAttributeDefinitionBody__DescriptionAssignment_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19285:1: rule__EAttributeDefinitionBody__DescriptionAssignment_1_1 : ( RULE_STRING ) ;
     public final void rule__EAttributeDefinitionBody__DescriptionAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19313:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19314:2: ( RULE_STRING )
+            // InternalAADMParser.g:19289:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19290:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19314:2: ( RULE_STRING )
-            // InternalAADMParser.g:19315:3: RULE_STRING
+            // InternalAADMParser.g:19290:2: ( RULE_STRING )
+            // InternalAADMParser.g:19291:3: RULE_STRING
             {
              before(grammarAccess.getEAttributeDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -58885,17 +58837,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributeDefinitionBody__DefaultAssignment_2_1"
-    // InternalAADMParser.g:19324:1: rule__EAttributeDefinitionBody__DefaultAssignment_2_1 : ( ruleEValueExpression ) ;
+    // InternalAADMParser.g:19300:1: rule__EAttributeDefinitionBody__DefaultAssignment_2_1 : ( ruleEValueExpression ) ;
     public final void rule__EAttributeDefinitionBody__DefaultAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19328:1: ( ( ruleEValueExpression ) )
-            // InternalAADMParser.g:19329:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:19304:1: ( ( ruleEValueExpression ) )
+            // InternalAADMParser.g:19305:2: ( ruleEValueExpression )
             {
-            // InternalAADMParser.g:19329:2: ( ruleEValueExpression )
-            // InternalAADMParser.g:19330:3: ruleEValueExpression
+            // InternalAADMParser.g:19305:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:19306:3: ruleEValueExpression
             {
              before(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -58926,17 +58878,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributeDefinitionBody__StatusAssignment_3_1"
-    // InternalAADMParser.g:19339:1: rule__EAttributeDefinitionBody__StatusAssignment_3_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19315:1: rule__EAttributeDefinitionBody__StatusAssignment_3_1 : ( RULE_STRING ) ;
     public final void rule__EAttributeDefinitionBody__StatusAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19343:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19344:2: ( RULE_STRING )
+            // InternalAADMParser.g:19319:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19320:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19344:2: ( RULE_STRING )
-            // InternalAADMParser.g:19345:3: RULE_STRING
+            // InternalAADMParser.g:19320:2: ( RULE_STRING )
+            // InternalAADMParser.g:19321:3: RULE_STRING
             {
              before(grammarAccess.getEAttributeDefinitionBodyAccess().getStatusSTRINGTerminalRuleCall_3_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -58963,21 +58915,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributeDefinitionBody__Entry_schemaAssignment_4_1"
-    // InternalAADMParser.g:19354:1: rule__EAttributeDefinitionBody__Entry_schemaAssignment_4_1 : ( ( ruleEDataTypeName ) ) ;
+    // InternalAADMParser.g:19330:1: rule__EAttributeDefinitionBody__Entry_schemaAssignment_4_1 : ( ( ruleEDataTypeName ) ) ;
     public final void rule__EAttributeDefinitionBody__Entry_schemaAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19358:1: ( ( ( ruleEDataTypeName ) ) )
-            // InternalAADMParser.g:19359:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19334:1: ( ( ( ruleEDataTypeName ) ) )
+            // InternalAADMParser.g:19335:2: ( ( ruleEDataTypeName ) )
             {
-            // InternalAADMParser.g:19359:2: ( ( ruleEDataTypeName ) )
-            // InternalAADMParser.g:19360:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19335:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19336:3: ( ruleEDataTypeName )
             {
              before(grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaEDataTypeCrossReference_4_1_0()); 
-            // InternalAADMParser.g:19361:3: ( ruleEDataTypeName )
-            // InternalAADMParser.g:19362:4: ruleEDataTypeName
+            // InternalAADMParser.g:19337:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19338:4: ruleEDataTypeName
             {
              before(grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaEDataTypeEDataTypeNameParserRuleCall_4_1_0_1()); 
             pushFollow(FOLLOW_2);
@@ -59012,17 +58964,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaces__InterfacesAssignment_1"
-    // InternalAADMParser.g:19373:1: rule__EInterfaces__InterfacesAssignment_1 : ( ruleEInterfaceDefinition ) ;
+    // InternalAADMParser.g:19349:1: rule__EInterfaces__InterfacesAssignment_1 : ( ruleEInterfaceDefinition ) ;
     public final void rule__EInterfaces__InterfacesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19377:1: ( ( ruleEInterfaceDefinition ) )
-            // InternalAADMParser.g:19378:2: ( ruleEInterfaceDefinition )
+            // InternalAADMParser.g:19353:1: ( ( ruleEInterfaceDefinition ) )
+            // InternalAADMParser.g:19354:2: ( ruleEInterfaceDefinition )
             {
-            // InternalAADMParser.g:19378:2: ( ruleEInterfaceDefinition )
-            // InternalAADMParser.g:19379:3: ruleEInterfaceDefinition
+            // InternalAADMParser.g:19354:2: ( ruleEInterfaceDefinition )
+            // InternalAADMParser.g:19355:3: ruleEInterfaceDefinition
             {
              before(grammarAccess.getEInterfacesAccess().getInterfacesEInterfaceDefinitionParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -59053,17 +59005,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceDefinition__NameAssignment_0"
-    // InternalAADMParser.g:19388:1: rule__EInterfaceDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalAADMParser.g:19364:1: rule__EInterfaceDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__EInterfaceDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19392:1: ( ( RULE_ID ) )
-            // InternalAADMParser.g:19393:2: ( RULE_ID )
+            // InternalAADMParser.g:19368:1: ( ( RULE_ID ) )
+            // InternalAADMParser.g:19369:2: ( RULE_ID )
             {
-            // InternalAADMParser.g:19393:2: ( RULE_ID )
-            // InternalAADMParser.g:19394:3: RULE_ID
+            // InternalAADMParser.g:19369:2: ( RULE_ID )
+            // InternalAADMParser.g:19370:3: RULE_ID
             {
              before(grammarAccess.getEInterfaceDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -59090,17 +59042,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceDefinition__InterfaceAssignment_3"
-    // InternalAADMParser.g:19403:1: rule__EInterfaceDefinition__InterfaceAssignment_3 : ( ruleEInterfaceDefinitionBody ) ;
+    // InternalAADMParser.g:19379:1: rule__EInterfaceDefinition__InterfaceAssignment_3 : ( ruleEInterfaceDefinitionBody ) ;
     public final void rule__EInterfaceDefinition__InterfaceAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19407:1: ( ( ruleEInterfaceDefinitionBody ) )
-            // InternalAADMParser.g:19408:2: ( ruleEInterfaceDefinitionBody )
+            // InternalAADMParser.g:19383:1: ( ( ruleEInterfaceDefinitionBody ) )
+            // InternalAADMParser.g:19384:2: ( ruleEInterfaceDefinitionBody )
             {
-            // InternalAADMParser.g:19408:2: ( ruleEInterfaceDefinitionBody )
-            // InternalAADMParser.g:19409:3: ruleEInterfaceDefinitionBody
+            // InternalAADMParser.g:19384:2: ( ruleEInterfaceDefinitionBody )
+            // InternalAADMParser.g:19385:3: ruleEInterfaceDefinitionBody
             {
              before(grammarAccess.getEInterfaceDefinitionAccess().getInterfaceEInterfaceDefinitionBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -59131,21 +59083,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceDefinitionBody__TypeAssignment_0_1"
-    // InternalAADMParser.g:19418:1: rule__EInterfaceDefinitionBody__TypeAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:19394:1: rule__EInterfaceDefinitionBody__TypeAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__EInterfaceDefinitionBody__TypeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19422:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:19423:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19398:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:19399:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:19423:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:19424:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19399:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19400:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getEInterfaceDefinitionBodyAccess().getTypeEInterfaceTypeCrossReference_0_1_0()); 
-            // InternalAADMParser.g:19425:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:19426:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:19401:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19402:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getEInterfaceDefinitionBodyAccess().getTypeEInterfaceTypeQUALIFIED_NAMETerminalRuleCall_0_1_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -59176,17 +59128,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceDefinitionBody__InputsAssignment_1_2"
-    // InternalAADMParser.g:19437:1: rule__EInterfaceDefinitionBody__InputsAssignment_1_2 : ( ruleEProperties ) ;
+    // InternalAADMParser.g:19413:1: rule__EInterfaceDefinitionBody__InputsAssignment_1_2 : ( ruleEProperties ) ;
     public final void rule__EInterfaceDefinitionBody__InputsAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19441:1: ( ( ruleEProperties ) )
-            // InternalAADMParser.g:19442:2: ( ruleEProperties )
+            // InternalAADMParser.g:19417:1: ( ( ruleEProperties ) )
+            // InternalAADMParser.g:19418:2: ( ruleEProperties )
             {
-            // InternalAADMParser.g:19442:2: ( ruleEProperties )
-            // InternalAADMParser.g:19443:3: ruleEProperties
+            // InternalAADMParser.g:19418:2: ( ruleEProperties )
+            // InternalAADMParser.g:19419:3: ruleEProperties
             {
              before(grammarAccess.getEInterfaceDefinitionBodyAccess().getInputsEPropertiesParserRuleCall_1_2_0()); 
             pushFollow(FOLLOW_2);
@@ -59217,17 +59169,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInterfaceDefinitionBody__OperationsAssignment_2_2"
-    // InternalAADMParser.g:19452:1: rule__EInterfaceDefinitionBody__OperationsAssignment_2_2 : ( ruleEOperations ) ;
+    // InternalAADMParser.g:19428:1: rule__EInterfaceDefinitionBody__OperationsAssignment_2_2 : ( ruleEOperations ) ;
     public final void rule__EInterfaceDefinitionBody__OperationsAssignment_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19456:1: ( ( ruleEOperations ) )
-            // InternalAADMParser.g:19457:2: ( ruleEOperations )
+            // InternalAADMParser.g:19432:1: ( ( ruleEOperations ) )
+            // InternalAADMParser.g:19433:2: ( ruleEOperations )
             {
-            // InternalAADMParser.g:19457:2: ( ruleEOperations )
-            // InternalAADMParser.g:19458:3: ruleEOperations
+            // InternalAADMParser.g:19433:2: ( ruleEOperations )
+            // InternalAADMParser.g:19434:3: ruleEOperations
             {
              before(grammarAccess.getEInterfaceDefinitionBodyAccess().getOperationsEOperationsParserRuleCall_2_2_0()); 
             pushFollow(FOLLOW_2);
@@ -59258,17 +59210,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EOperations__OperationsAssignment_1"
-    // InternalAADMParser.g:19467:1: rule__EOperations__OperationsAssignment_1 : ( ruleEOperationDefinition ) ;
+    // InternalAADMParser.g:19443:1: rule__EOperations__OperationsAssignment_1 : ( ruleEOperationDefinition ) ;
     public final void rule__EOperations__OperationsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19471:1: ( ( ruleEOperationDefinition ) )
-            // InternalAADMParser.g:19472:2: ( ruleEOperationDefinition )
+            // InternalAADMParser.g:19447:1: ( ( ruleEOperationDefinition ) )
+            // InternalAADMParser.g:19448:2: ( ruleEOperationDefinition )
             {
-            // InternalAADMParser.g:19472:2: ( ruleEOperationDefinition )
-            // InternalAADMParser.g:19473:3: ruleEOperationDefinition
+            // InternalAADMParser.g:19448:2: ( ruleEOperationDefinition )
+            // InternalAADMParser.g:19449:3: ruleEOperationDefinition
             {
              before(grammarAccess.getEOperationsAccess().getOperationsEOperationDefinitionParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -59299,17 +59251,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EOperationDefinition__NameAssignment_0"
-    // InternalAADMParser.g:19482:1: rule__EOperationDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalAADMParser.g:19458:1: rule__EOperationDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__EOperationDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19486:1: ( ( RULE_ID ) )
-            // InternalAADMParser.g:19487:2: ( RULE_ID )
+            // InternalAADMParser.g:19462:1: ( ( RULE_ID ) )
+            // InternalAADMParser.g:19463:2: ( RULE_ID )
             {
-            // InternalAADMParser.g:19487:2: ( RULE_ID )
-            // InternalAADMParser.g:19488:3: RULE_ID
+            // InternalAADMParser.g:19463:2: ( RULE_ID )
+            // InternalAADMParser.g:19464:3: RULE_ID
             {
              before(grammarAccess.getEOperationDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -59336,17 +59288,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EOperationDefinition__OperationAssignment_3"
-    // InternalAADMParser.g:19497:1: rule__EOperationDefinition__OperationAssignment_3 : ( ruleEOperationDefinitionBody ) ;
+    // InternalAADMParser.g:19473:1: rule__EOperationDefinition__OperationAssignment_3 : ( ruleEOperationDefinitionBody ) ;
     public final void rule__EOperationDefinition__OperationAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19501:1: ( ( ruleEOperationDefinitionBody ) )
-            // InternalAADMParser.g:19502:2: ( ruleEOperationDefinitionBody )
+            // InternalAADMParser.g:19477:1: ( ( ruleEOperationDefinitionBody ) )
+            // InternalAADMParser.g:19478:2: ( ruleEOperationDefinitionBody )
             {
-            // InternalAADMParser.g:19502:2: ( ruleEOperationDefinitionBody )
-            // InternalAADMParser.g:19503:3: ruleEOperationDefinitionBody
+            // InternalAADMParser.g:19478:2: ( ruleEOperationDefinitionBody )
+            // InternalAADMParser.g:19479:3: ruleEOperationDefinitionBody
             {
              before(grammarAccess.getEOperationDefinitionAccess().getOperationEOperationDefinitionBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -59377,17 +59329,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EOperationDefinitionBody__DescriptionAssignment_1_0_1"
-    // InternalAADMParser.g:19512:1: rule__EOperationDefinitionBody__DescriptionAssignment_1_0_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19488:1: rule__EOperationDefinitionBody__DescriptionAssignment_1_0_1 : ( RULE_STRING ) ;
     public final void rule__EOperationDefinitionBody__DescriptionAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19516:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19517:2: ( RULE_STRING )
+            // InternalAADMParser.g:19492:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19493:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19517:2: ( RULE_STRING )
-            // InternalAADMParser.g:19518:3: RULE_STRING
+            // InternalAADMParser.g:19493:2: ( RULE_STRING )
+            // InternalAADMParser.g:19494:3: RULE_STRING
             {
              before(grammarAccess.getEOperationDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_0_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -59414,17 +59366,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EOperationDefinitionBody__InputsAssignment_1_1_2"
-    // InternalAADMParser.g:19527:1: rule__EOperationDefinitionBody__InputsAssignment_1_1_2 : ( ruleEInputs ) ;
+    // InternalAADMParser.g:19503:1: rule__EOperationDefinitionBody__InputsAssignment_1_1_2 : ( ruleEInputs ) ;
     public final void rule__EOperationDefinitionBody__InputsAssignment_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19531:1: ( ( ruleEInputs ) )
-            // InternalAADMParser.g:19532:2: ( ruleEInputs )
+            // InternalAADMParser.g:19507:1: ( ( ruleEInputs ) )
+            // InternalAADMParser.g:19508:2: ( ruleEInputs )
             {
-            // InternalAADMParser.g:19532:2: ( ruleEInputs )
-            // InternalAADMParser.g:19533:3: ruleEInputs
+            // InternalAADMParser.g:19508:2: ( ruleEInputs )
+            // InternalAADMParser.g:19509:3: ruleEInputs
             {
              before(grammarAccess.getEOperationDefinitionBodyAccess().getInputsEInputsParserRuleCall_1_1_2_0()); 
             pushFollow(FOLLOW_2);
@@ -59455,17 +59407,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EOperationDefinitionBody__ImplementationAssignment_1_2_2"
-    // InternalAADMParser.g:19542:1: rule__EOperationDefinitionBody__ImplementationAssignment_1_2_2 : ( ruleEImplementation ) ;
+    // InternalAADMParser.g:19518:1: rule__EOperationDefinitionBody__ImplementationAssignment_1_2_2 : ( ruleEImplementation ) ;
     public final void rule__EOperationDefinitionBody__ImplementationAssignment_1_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19546:1: ( ( ruleEImplementation ) )
-            // InternalAADMParser.g:19547:2: ( ruleEImplementation )
+            // InternalAADMParser.g:19522:1: ( ( ruleEImplementation ) )
+            // InternalAADMParser.g:19523:2: ( ruleEImplementation )
             {
-            // InternalAADMParser.g:19547:2: ( ruleEImplementation )
-            // InternalAADMParser.g:19548:3: ruleEImplementation
+            // InternalAADMParser.g:19523:2: ( ruleEImplementation )
+            // InternalAADMParser.g:19524:3: ruleEImplementation
             {
              before(grammarAccess.getEOperationDefinitionBodyAccess().getImplementationEImplementationParserRuleCall_1_2_2_0()); 
             pushFollow(FOLLOW_2);
@@ -59496,17 +59448,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EImplementation__PrimaryAssignment_0"
-    // InternalAADMParser.g:19557:1: rule__EImplementation__PrimaryAssignment_0 : ( ruleEPrimary ) ;
+    // InternalAADMParser.g:19533:1: rule__EImplementation__PrimaryAssignment_0 : ( ruleEPrimary ) ;
     public final void rule__EImplementation__PrimaryAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19561:1: ( ( ruleEPrimary ) )
-            // InternalAADMParser.g:19562:2: ( ruleEPrimary )
+            // InternalAADMParser.g:19537:1: ( ( ruleEPrimary ) )
+            // InternalAADMParser.g:19538:2: ( ruleEPrimary )
             {
-            // InternalAADMParser.g:19562:2: ( ruleEPrimary )
-            // InternalAADMParser.g:19563:3: ruleEPrimary
+            // InternalAADMParser.g:19538:2: ( ruleEPrimary )
+            // InternalAADMParser.g:19539:3: ruleEPrimary
             {
              before(grammarAccess.getEImplementationAccess().getPrimaryEPrimaryParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -59537,17 +59489,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EImplementation__DependenciesAssignment_1"
-    // InternalAADMParser.g:19572:1: rule__EImplementation__DependenciesAssignment_1 : ( ruleEDependencies ) ;
+    // InternalAADMParser.g:19548:1: rule__EImplementation__DependenciesAssignment_1 : ( ruleEDependencies ) ;
     public final void rule__EImplementation__DependenciesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19576:1: ( ( ruleEDependencies ) )
-            // InternalAADMParser.g:19577:2: ( ruleEDependencies )
+            // InternalAADMParser.g:19552:1: ( ( ruleEDependencies ) )
+            // InternalAADMParser.g:19553:2: ( ruleEDependencies )
             {
-            // InternalAADMParser.g:19577:2: ( ruleEDependencies )
-            // InternalAADMParser.g:19578:3: ruleEDependencies
+            // InternalAADMParser.g:19553:2: ( ruleEDependencies )
+            // InternalAADMParser.g:19554:3: ruleEDependencies
             {
              before(grammarAccess.getEImplementationAccess().getDependenciesEDependenciesParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -59578,17 +59530,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPrimary__FileAssignment_0_1"
-    // InternalAADMParser.g:19587:1: rule__EPrimary__FileAssignment_0_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19563:1: rule__EPrimary__FileAssignment_0_1 : ( RULE_STRING ) ;
     public final void rule__EPrimary__FileAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19591:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19592:2: ( RULE_STRING )
+            // InternalAADMParser.g:19567:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19568:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19592:2: ( RULE_STRING )
-            // InternalAADMParser.g:19593:3: RULE_STRING
+            // InternalAADMParser.g:19568:2: ( RULE_STRING )
+            // InternalAADMParser.g:19569:3: RULE_STRING
             {
              before(grammarAccess.getEPrimaryAccess().getFileSTRINGTerminalRuleCall_0_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -59615,17 +59567,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPrimary__Relative_pathAssignment_1_2"
-    // InternalAADMParser.g:19602:1: rule__EPrimary__Relative_pathAssignment_1_2 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19578:1: rule__EPrimary__Relative_pathAssignment_1_2 : ( RULE_STRING ) ;
     public final void rule__EPrimary__Relative_pathAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19606:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19607:2: ( RULE_STRING )
+            // InternalAADMParser.g:19582:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19583:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19607:2: ( RULE_STRING )
-            // InternalAADMParser.g:19608:3: RULE_STRING
+            // InternalAADMParser.g:19583:2: ( RULE_STRING )
+            // InternalAADMParser.g:19584:3: RULE_STRING
             {
              before(grammarAccess.getEPrimaryAccess().getRelative_pathSTRINGTerminalRuleCall_1_2_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -59652,17 +59604,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EDependencies__FilesAssignment_2"
-    // InternalAADMParser.g:19617:1: rule__EDependencies__FilesAssignment_2 : ( ruleEDependencyFiles ) ;
+    // InternalAADMParser.g:19593:1: rule__EDependencies__FilesAssignment_2 : ( ruleEDependencyFiles ) ;
     public final void rule__EDependencies__FilesAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19621:1: ( ( ruleEDependencyFiles ) )
-            // InternalAADMParser.g:19622:2: ( ruleEDependencyFiles )
+            // InternalAADMParser.g:19597:1: ( ( ruleEDependencyFiles ) )
+            // InternalAADMParser.g:19598:2: ( ruleEDependencyFiles )
             {
-            // InternalAADMParser.g:19622:2: ( ruleEDependencyFiles )
-            // InternalAADMParser.g:19623:3: ruleEDependencyFiles
+            // InternalAADMParser.g:19598:2: ( ruleEDependencyFiles )
+            // InternalAADMParser.g:19599:3: ruleEDependencyFiles
             {
              before(grammarAccess.getEDependenciesAccess().getFilesEDependencyFilesParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -59693,17 +59645,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EDependencies__Relative_pathAssignment_4_2"
-    // InternalAADMParser.g:19632:1: rule__EDependencies__Relative_pathAssignment_4_2 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19608:1: rule__EDependencies__Relative_pathAssignment_4_2 : ( RULE_STRING ) ;
     public final void rule__EDependencies__Relative_pathAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19636:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19637:2: ( RULE_STRING )
+            // InternalAADMParser.g:19612:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19613:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19637:2: ( RULE_STRING )
-            // InternalAADMParser.g:19638:3: RULE_STRING
+            // InternalAADMParser.g:19613:2: ( RULE_STRING )
+            // InternalAADMParser.g:19614:3: RULE_STRING
             {
              before(grammarAccess.getEDependenciesAccess().getRelative_pathSTRINGTerminalRuleCall_4_2_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -59730,17 +59682,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EDependencyFiles__FilesAssignment_0"
-    // InternalAADMParser.g:19647:1: rule__EDependencyFiles__FilesAssignment_0 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19623:1: rule__EDependencyFiles__FilesAssignment_0 : ( RULE_STRING ) ;
     public final void rule__EDependencyFiles__FilesAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19651:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19652:2: ( RULE_STRING )
+            // InternalAADMParser.g:19627:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19628:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19652:2: ( RULE_STRING )
-            // InternalAADMParser.g:19653:3: RULE_STRING
+            // InternalAADMParser.g:19628:2: ( RULE_STRING )
+            // InternalAADMParser.g:19629:3: RULE_STRING
             {
              before(grammarAccess.getEDependencyFilesAccess().getFilesSTRINGTerminalRuleCall_0_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -59767,17 +59719,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EDependencyFiles__FilesAssignment_1_1"
-    // InternalAADMParser.g:19662:1: rule__EDependencyFiles__FilesAssignment_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19638:1: rule__EDependencyFiles__FilesAssignment_1_1 : ( RULE_STRING ) ;
     public final void rule__EDependencyFiles__FilesAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19666:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19667:2: ( RULE_STRING )
+            // InternalAADMParser.g:19642:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19643:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19667:2: ( RULE_STRING )
-            // InternalAADMParser.g:19668:3: RULE_STRING
+            // InternalAADMParser.g:19643:2: ( RULE_STRING )
+            // InternalAADMParser.g:19644:3: RULE_STRING
             {
              before(grammarAccess.getEDependencyFilesAccess().getFilesSTRINGTerminalRuleCall_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -59804,17 +59756,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInputs__InputsAssignment_1"
-    // InternalAADMParser.g:19677:1: rule__EInputs__InputsAssignment_1 : ( ruleEParameterDefinition ) ;
+    // InternalAADMParser.g:19653:1: rule__EInputs__InputsAssignment_1 : ( ruleEParameterDefinition ) ;
     public final void rule__EInputs__InputsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19681:1: ( ( ruleEParameterDefinition ) )
-            // InternalAADMParser.g:19682:2: ( ruleEParameterDefinition )
+            // InternalAADMParser.g:19657:1: ( ( ruleEParameterDefinition ) )
+            // InternalAADMParser.g:19658:2: ( ruleEParameterDefinition )
             {
-            // InternalAADMParser.g:19682:2: ( ruleEParameterDefinition )
-            // InternalAADMParser.g:19683:3: ruleEParameterDefinition
+            // InternalAADMParser.g:19658:2: ( ruleEParameterDefinition )
+            // InternalAADMParser.g:19659:3: ruleEParameterDefinition
             {
              before(grammarAccess.getEInputsAccess().getInputsEParameterDefinitionParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -59845,17 +59797,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EParameterDefinition__NameAssignment_0"
-    // InternalAADMParser.g:19692:1: rule__EParameterDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalAADMParser.g:19668:1: rule__EParameterDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__EParameterDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19696:1: ( ( RULE_ID ) )
-            // InternalAADMParser.g:19697:2: ( RULE_ID )
+            // InternalAADMParser.g:19672:1: ( ( RULE_ID ) )
+            // InternalAADMParser.g:19673:2: ( RULE_ID )
             {
-            // InternalAADMParser.g:19697:2: ( RULE_ID )
-            // InternalAADMParser.g:19698:3: RULE_ID
+            // InternalAADMParser.g:19673:2: ( RULE_ID )
+            // InternalAADMParser.g:19674:3: RULE_ID
             {
              before(grammarAccess.getEParameterDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -59882,17 +59834,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EParameterDefinition__ParameterAssignment_3"
-    // InternalAADMParser.g:19707:1: rule__EParameterDefinition__ParameterAssignment_3 : ( ruleEParameterDefinitionBody ) ;
+    // InternalAADMParser.g:19683:1: rule__EParameterDefinition__ParameterAssignment_3 : ( ruleEParameterDefinitionBody ) ;
     public final void rule__EParameterDefinition__ParameterAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19711:1: ( ( ruleEParameterDefinitionBody ) )
-            // InternalAADMParser.g:19712:2: ( ruleEParameterDefinitionBody )
+            // InternalAADMParser.g:19687:1: ( ( ruleEParameterDefinitionBody ) )
+            // InternalAADMParser.g:19688:2: ( ruleEParameterDefinitionBody )
             {
-            // InternalAADMParser.g:19712:2: ( ruleEParameterDefinitionBody )
-            // InternalAADMParser.g:19713:3: ruleEParameterDefinitionBody
+            // InternalAADMParser.g:19688:2: ( ruleEParameterDefinitionBody )
+            // InternalAADMParser.g:19689:3: ruleEParameterDefinitionBody
             {
              before(grammarAccess.getEParameterDefinitionAccess().getParameterEParameterDefinitionBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -59923,21 +59875,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EParameterDefinitionBody__TypeAssignment_1_0_1"
-    // InternalAADMParser.g:19722:1: rule__EParameterDefinitionBody__TypeAssignment_1_0_1 : ( ( ruleEDataTypeName ) ) ;
+    // InternalAADMParser.g:19698:1: rule__EParameterDefinitionBody__TypeAssignment_1_0_1 : ( ( ruleEDataTypeName ) ) ;
     public final void rule__EParameterDefinitionBody__TypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19726:1: ( ( ( ruleEDataTypeName ) ) )
-            // InternalAADMParser.g:19727:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19702:1: ( ( ( ruleEDataTypeName ) ) )
+            // InternalAADMParser.g:19703:2: ( ( ruleEDataTypeName ) )
             {
-            // InternalAADMParser.g:19727:2: ( ( ruleEDataTypeName ) )
-            // InternalAADMParser.g:19728:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19703:2: ( ( ruleEDataTypeName ) )
+            // InternalAADMParser.g:19704:3: ( ruleEDataTypeName )
             {
              before(grammarAccess.getEParameterDefinitionBodyAccess().getTypeEDataTypeCrossReference_1_0_1_0()); 
-            // InternalAADMParser.g:19729:3: ( ruleEDataTypeName )
-            // InternalAADMParser.g:19730:4: ruleEDataTypeName
+            // InternalAADMParser.g:19705:3: ( ruleEDataTypeName )
+            // InternalAADMParser.g:19706:4: ruleEDataTypeName
             {
              before(grammarAccess.getEParameterDefinitionBodyAccess().getTypeEDataTypeEDataTypeNameParserRuleCall_1_0_1_0_1()); 
             pushFollow(FOLLOW_2);
@@ -59972,17 +59924,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EParameterDefinitionBody__ValueAssignment_1_1_1"
-    // InternalAADMParser.g:19741:1: rule__EParameterDefinitionBody__ValueAssignment_1_1_1 : ( ruleEValueExpression ) ;
+    // InternalAADMParser.g:19717:1: rule__EParameterDefinitionBody__ValueAssignment_1_1_1 : ( ruleEValueExpression ) ;
     public final void rule__EParameterDefinitionBody__ValueAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19745:1: ( ( ruleEValueExpression ) )
-            // InternalAADMParser.g:19746:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:19721:1: ( ( ruleEValueExpression ) )
+            // InternalAADMParser.g:19722:2: ( ruleEValueExpression )
             {
-            // InternalAADMParser.g:19746:2: ( ruleEValueExpression )
-            // InternalAADMParser.g:19747:3: ruleEValueExpression
+            // InternalAADMParser.g:19722:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:19723:3: ruleEValueExpression
             {
              before(grammarAccess.getEParameterDefinitionBodyAccess().getValueEValueExpressionParserRuleCall_1_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -60013,17 +59965,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EParameterDefinitionBody__DefaultAssignment_1_2_1"
-    // InternalAADMParser.g:19756:1: rule__EParameterDefinitionBody__DefaultAssignment_1_2_1 : ( ruleEValueExpression ) ;
+    // InternalAADMParser.g:19732:1: rule__EParameterDefinitionBody__DefaultAssignment_1_2_1 : ( ruleEValueExpression ) ;
     public final void rule__EParameterDefinitionBody__DefaultAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19760:1: ( ( ruleEValueExpression ) )
-            // InternalAADMParser.g:19761:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:19736:1: ( ( ruleEValueExpression ) )
+            // InternalAADMParser.g:19737:2: ( ruleEValueExpression )
             {
-            // InternalAADMParser.g:19761:2: ( ruleEValueExpression )
-            // InternalAADMParser.g:19762:3: ruleEValueExpression
+            // InternalAADMParser.g:19737:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:19738:3: ruleEValueExpression
             {
              before(grammarAccess.getEParameterDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_1_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -60054,21 +60006,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetInput__InputAssignment_1"
-    // InternalAADMParser.g:19771:1: rule__GetInput__InputAssignment_1 : ( ( RULE_ID ) ) ;
+    // InternalAADMParser.g:19747:1: rule__GetInput__InputAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__GetInput__InputAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19775:1: ( ( ( RULE_ID ) ) )
-            // InternalAADMParser.g:19776:2: ( ( RULE_ID ) )
+            // InternalAADMParser.g:19751:1: ( ( ( RULE_ID ) ) )
+            // InternalAADMParser.g:19752:2: ( ( RULE_ID ) )
             {
-            // InternalAADMParser.g:19776:2: ( ( RULE_ID ) )
-            // InternalAADMParser.g:19777:3: ( RULE_ID )
+            // InternalAADMParser.g:19752:2: ( ( RULE_ID ) )
+            // InternalAADMParser.g:19753:3: ( RULE_ID )
             {
              before(grammarAccess.getGetInputAccess().getInputEParameterDefinitionCrossReference_1_0()); 
-            // InternalAADMParser.g:19778:3: ( RULE_ID )
-            // InternalAADMParser.g:19779:4: RULE_ID
+            // InternalAADMParser.g:19754:3: ( RULE_ID )
+            // InternalAADMParser.g:19755:4: RULE_ID
             {
              before(grammarAccess.getGetInputAccess().getInputEParameterDefinitionIDTerminalRuleCall_1_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -60099,17 +60051,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetAttribute__AttributeAssignment_2"
-    // InternalAADMParser.g:19790:1: rule__GetAttribute__AttributeAssignment_2 : ( ruleGetAttributeBody ) ;
+    // InternalAADMParser.g:19766:1: rule__GetAttribute__AttributeAssignment_2 : ( ruleGetAttributeBody ) ;
     public final void rule__GetAttribute__AttributeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19794:1: ( ( ruleGetAttributeBody ) )
-            // InternalAADMParser.g:19795:2: ( ruleGetAttributeBody )
+            // InternalAADMParser.g:19770:1: ( ( ruleGetAttributeBody ) )
+            // InternalAADMParser.g:19771:2: ( ruleGetAttributeBody )
             {
-            // InternalAADMParser.g:19795:2: ( ruleGetAttributeBody )
-            // InternalAADMParser.g:19796:3: ruleGetAttributeBody
+            // InternalAADMParser.g:19771:2: ( ruleGetAttributeBody )
+            // InternalAADMParser.g:19772:3: ruleGetAttributeBody
             {
              before(grammarAccess.getGetAttributeAccess().getAttributeGetAttributeBodyParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -60140,21 +60092,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetAttributeBody__AttributeAssignment_0_1"
-    // InternalAADMParser.g:19805:1: rule__GetAttributeBody__AttributeAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:19781:1: rule__GetAttributeBody__AttributeAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__GetAttributeBody__AttributeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19809:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:19810:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19785:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:19786:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:19810:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:19811:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19786:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19787:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getGetAttributeBodyAccess().getAttributeEAttributeDefinitionCrossReference_0_1_0()); 
-            // InternalAADMParser.g:19812:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:19813:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:19788:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19789:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getGetAttributeBodyAccess().getAttributeEAttributeDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -60185,17 +60137,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetAttributeBody__EntityAssignment_1_1"
-    // InternalAADMParser.g:19824:1: rule__GetAttributeBody__EntityAssignment_1_1 : ( RULE_ENTITY ) ;
+    // InternalAADMParser.g:19800:1: rule__GetAttributeBody__EntityAssignment_1_1 : ( RULE_ENTITY ) ;
     public final void rule__GetAttributeBody__EntityAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19828:1: ( ( RULE_ENTITY ) )
-            // InternalAADMParser.g:19829:2: ( RULE_ENTITY )
+            // InternalAADMParser.g:19804:1: ( ( RULE_ENTITY ) )
+            // InternalAADMParser.g:19805:2: ( RULE_ENTITY )
             {
-            // InternalAADMParser.g:19829:2: ( RULE_ENTITY )
-            // InternalAADMParser.g:19830:3: RULE_ENTITY
+            // InternalAADMParser.g:19805:2: ( RULE_ENTITY )
+            // InternalAADMParser.g:19806:3: RULE_ENTITY
             {
              before(grammarAccess.getGetAttributeBodyAccess().getEntityENTITYTerminalRuleCall_1_1_0()); 
             match(input,RULE_ENTITY,FOLLOW_2); 
@@ -60222,21 +60174,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetAttributeBody__Req_capAssignment_2_1"
-    // InternalAADMParser.g:19839:1: rule__GetAttributeBody__Req_capAssignment_2_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:19815:1: rule__GetAttributeBody__Req_capAssignment_2_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__GetAttributeBody__Req_capAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19843:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:19844:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19819:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:19820:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:19844:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:19845:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19820:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19821:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getGetAttributeBodyAccess().getReq_capEReqOrCapCrossReference_2_1_0()); 
-            // InternalAADMParser.g:19846:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:19847:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:19822:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19823:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getGetAttributeBodyAccess().getReq_capEReqOrCapQUALIFIED_NAMETerminalRuleCall_2_1_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -60267,17 +60219,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetProperty__PropertyAssignment_2"
-    // InternalAADMParser.g:19858:1: rule__GetProperty__PropertyAssignment_2 : ( ruleGetPropertyBody ) ;
+    // InternalAADMParser.g:19834:1: rule__GetProperty__PropertyAssignment_2 : ( ruleGetPropertyBody ) ;
     public final void rule__GetProperty__PropertyAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19862:1: ( ( ruleGetPropertyBody ) )
-            // InternalAADMParser.g:19863:2: ( ruleGetPropertyBody )
+            // InternalAADMParser.g:19838:1: ( ( ruleGetPropertyBody ) )
+            // InternalAADMParser.g:19839:2: ( ruleGetPropertyBody )
             {
-            // InternalAADMParser.g:19863:2: ( ruleGetPropertyBody )
-            // InternalAADMParser.g:19864:3: ruleGetPropertyBody
+            // InternalAADMParser.g:19839:2: ( ruleGetPropertyBody )
+            // InternalAADMParser.g:19840:3: ruleGetPropertyBody
             {
              before(grammarAccess.getGetPropertyAccess().getPropertyGetPropertyBodyParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -60308,21 +60260,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetPropertyBody__PropertyAssignment_0_1"
-    // InternalAADMParser.g:19873:1: rule__GetPropertyBody__PropertyAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:19849:1: rule__GetPropertyBody__PropertyAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__GetPropertyBody__PropertyAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19877:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:19878:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19853:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:19854:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:19878:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:19879:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19854:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19855:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getGetPropertyBodyAccess().getPropertyEPropertyDefinitionCrossReference_0_1_0()); 
-            // InternalAADMParser.g:19880:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:19881:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:19856:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19857:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getGetPropertyBodyAccess().getPropertyEPropertyDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -60353,17 +60305,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetPropertyBody__EntityAssignment_1_1"
-    // InternalAADMParser.g:19892:1: rule__GetPropertyBody__EntityAssignment_1_1 : ( RULE_ENTITY ) ;
+    // InternalAADMParser.g:19868:1: rule__GetPropertyBody__EntityAssignment_1_1 : ( RULE_ENTITY ) ;
     public final void rule__GetPropertyBody__EntityAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19896:1: ( ( RULE_ENTITY ) )
-            // InternalAADMParser.g:19897:2: ( RULE_ENTITY )
+            // InternalAADMParser.g:19872:1: ( ( RULE_ENTITY ) )
+            // InternalAADMParser.g:19873:2: ( RULE_ENTITY )
             {
-            // InternalAADMParser.g:19897:2: ( RULE_ENTITY )
-            // InternalAADMParser.g:19898:3: RULE_ENTITY
+            // InternalAADMParser.g:19873:2: ( RULE_ENTITY )
+            // InternalAADMParser.g:19874:3: RULE_ENTITY
             {
              before(grammarAccess.getGetPropertyBodyAccess().getEntityENTITYTerminalRuleCall_1_1_0()); 
             match(input,RULE_ENTITY,FOLLOW_2); 
@@ -60390,21 +60342,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetPropertyBody__Req_capAssignment_2_1"
-    // InternalAADMParser.g:19907:1: rule__GetPropertyBody__Req_capAssignment_2_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:19883:1: rule__GetPropertyBody__Req_capAssignment_2_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__GetPropertyBody__Req_capAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19911:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:19912:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19887:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:19888:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:19912:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:19913:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19888:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19889:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getGetPropertyBodyAccess().getReq_capEReqOrCapCrossReference_2_1_0()); 
-            // InternalAADMParser.g:19914:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:19915:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:19890:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19891:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getGetPropertyBodyAccess().getReq_capEReqOrCapQUALIFIED_NAMETerminalRuleCall_2_1_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -60435,17 +60387,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilities__CapabilitiesAssignment_1"
-    // InternalAADMParser.g:19926:1: rule__ECapabilities__CapabilitiesAssignment_1 : ( ruleECapabilityDefinition ) ;
+    // InternalAADMParser.g:19902:1: rule__ECapabilities__CapabilitiesAssignment_1 : ( ruleECapabilityDefinition ) ;
     public final void rule__ECapabilities__CapabilitiesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19930:1: ( ( ruleECapabilityDefinition ) )
-            // InternalAADMParser.g:19931:2: ( ruleECapabilityDefinition )
+            // InternalAADMParser.g:19906:1: ( ( ruleECapabilityDefinition ) )
+            // InternalAADMParser.g:19907:2: ( ruleECapabilityDefinition )
             {
-            // InternalAADMParser.g:19931:2: ( ruleECapabilityDefinition )
-            // InternalAADMParser.g:19932:3: ruleECapabilityDefinition
+            // InternalAADMParser.g:19907:2: ( ruleECapabilityDefinition )
+            // InternalAADMParser.g:19908:3: ruleECapabilityDefinition
             {
              before(grammarAccess.getECapabilitiesAccess().getCapabilitiesECapabilityDefinitionParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -60476,17 +60428,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinition__NameAssignment_0"
-    // InternalAADMParser.g:19941:1: rule__ECapabilityDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalAADMParser.g:19917:1: rule__ECapabilityDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__ECapabilityDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19945:1: ( ( RULE_ID ) )
-            // InternalAADMParser.g:19946:2: ( RULE_ID )
+            // InternalAADMParser.g:19921:1: ( ( RULE_ID ) )
+            // InternalAADMParser.g:19922:2: ( RULE_ID )
             {
-            // InternalAADMParser.g:19946:2: ( RULE_ID )
-            // InternalAADMParser.g:19947:3: RULE_ID
+            // InternalAADMParser.g:19922:2: ( RULE_ID )
+            // InternalAADMParser.g:19923:3: RULE_ID
             {
              before(grammarAccess.getECapabilityDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -60513,17 +60465,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinition__CapabilityAssignment_3"
-    // InternalAADMParser.g:19956:1: rule__ECapabilityDefinition__CapabilityAssignment_3 : ( ruleECapabilityDefinitionBody ) ;
+    // InternalAADMParser.g:19932:1: rule__ECapabilityDefinition__CapabilityAssignment_3 : ( ruleECapabilityDefinitionBody ) ;
     public final void rule__ECapabilityDefinition__CapabilityAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19960:1: ( ( ruleECapabilityDefinitionBody ) )
-            // InternalAADMParser.g:19961:2: ( ruleECapabilityDefinitionBody )
+            // InternalAADMParser.g:19936:1: ( ( ruleECapabilityDefinitionBody ) )
+            // InternalAADMParser.g:19937:2: ( ruleECapabilityDefinitionBody )
             {
-            // InternalAADMParser.g:19961:2: ( ruleECapabilityDefinitionBody )
-            // InternalAADMParser.g:19962:3: ruleECapabilityDefinitionBody
+            // InternalAADMParser.g:19937:2: ( ruleECapabilityDefinitionBody )
+            // InternalAADMParser.g:19938:3: ruleECapabilityDefinitionBody
             {
              before(grammarAccess.getECapabilityDefinitionAccess().getCapabilityECapabilityDefinitionBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -60554,21 +60506,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__TypeAssignment_0_1"
-    // InternalAADMParser.g:19971:1: rule__ECapabilityDefinitionBody__TypeAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:19947:1: rule__ECapabilityDefinitionBody__TypeAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__ECapabilityDefinitionBody__TypeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19975:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:19976:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19951:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:19952:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:19976:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:19977:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19952:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:19953:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getECapabilityDefinitionBodyAccess().getTypeECapabilityTypeCrossReference_0_1_0()); 
-            // InternalAADMParser.g:19978:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:19979:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:19954:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:19955:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getECapabilityDefinitionBodyAccess().getTypeECapabilityTypeQUALIFIED_NAMETerminalRuleCall_0_1_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -60599,17 +60551,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__DescriptionAssignment_1_1"
-    // InternalAADMParser.g:19990:1: rule__ECapabilityDefinitionBody__DescriptionAssignment_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:19966:1: rule__ECapabilityDefinitionBody__DescriptionAssignment_1_1 : ( RULE_STRING ) ;
     public final void rule__ECapabilityDefinitionBody__DescriptionAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:19994:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:19995:2: ( RULE_STRING )
+            // InternalAADMParser.g:19970:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:19971:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:19995:2: ( RULE_STRING )
-            // InternalAADMParser.g:19996:3: RULE_STRING
+            // InternalAADMParser.g:19971:2: ( RULE_STRING )
+            // InternalAADMParser.g:19972:3: RULE_STRING
             {
              before(grammarAccess.getECapabilityDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -60636,17 +60588,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2"
-    // InternalAADMParser.g:20005:1: rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2 : ( ruleEProperties ) ;
+    // InternalAADMParser.g:19981:1: rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2 : ( ruleEProperties ) ;
     public final void rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20009:1: ( ( ruleEProperties ) )
-            // InternalAADMParser.g:20010:2: ( ruleEProperties )
+            // InternalAADMParser.g:19985:1: ( ( ruleEProperties ) )
+            // InternalAADMParser.g:19986:2: ( ruleEProperties )
             {
-            // InternalAADMParser.g:20010:2: ( ruleEProperties )
-            // InternalAADMParser.g:20011:3: ruleEProperties
+            // InternalAADMParser.g:19986:2: ( ruleEProperties )
+            // InternalAADMParser.g:19987:3: ruleEProperties
             {
              before(grammarAccess.getECapabilityDefinitionBodyAccess().getPropertiesEPropertiesParserRuleCall_2_2_0()); 
             pushFollow(FOLLOW_2);
@@ -60677,17 +60629,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__AttributesAssignment_3_2"
-    // InternalAADMParser.g:20020:1: rule__ECapabilityDefinitionBody__AttributesAssignment_3_2 : ( ruleEAttributes ) ;
+    // InternalAADMParser.g:19996:1: rule__ECapabilityDefinitionBody__AttributesAssignment_3_2 : ( ruleEAttributes ) ;
     public final void rule__ECapabilityDefinitionBody__AttributesAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20024:1: ( ( ruleEAttributes ) )
-            // InternalAADMParser.g:20025:2: ( ruleEAttributes )
+            // InternalAADMParser.g:20000:1: ( ( ruleEAttributes ) )
+            // InternalAADMParser.g:20001:2: ( ruleEAttributes )
             {
-            // InternalAADMParser.g:20025:2: ( ruleEAttributes )
-            // InternalAADMParser.g:20026:3: ruleEAttributes
+            // InternalAADMParser.g:20001:2: ( ruleEAttributes )
+            // InternalAADMParser.g:20002:3: ruleEAttributes
             {
              before(grammarAccess.getECapabilityDefinitionBodyAccess().getAttributesEAttributesParserRuleCall_3_2_0()); 
             pushFollow(FOLLOW_2);
@@ -60718,17 +60670,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Valid_source_typesAssignment_4_2"
-    // InternalAADMParser.g:20035:1: rule__ECapabilityDefinitionBody__Valid_source_typesAssignment_4_2 : ( ruleEValidSourceType ) ;
+    // InternalAADMParser.g:20011:1: rule__ECapabilityDefinitionBody__Valid_source_typesAssignment_4_2 : ( ruleEValidSourceType ) ;
     public final void rule__ECapabilityDefinitionBody__Valid_source_typesAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20039:1: ( ( ruleEValidSourceType ) )
-            // InternalAADMParser.g:20040:2: ( ruleEValidSourceType )
+            // InternalAADMParser.g:20015:1: ( ( ruleEValidSourceType ) )
+            // InternalAADMParser.g:20016:2: ( ruleEValidSourceType )
             {
-            // InternalAADMParser.g:20040:2: ( ruleEValidSourceType )
-            // InternalAADMParser.g:20041:3: ruleEValidSourceType
+            // InternalAADMParser.g:20016:2: ( ruleEValidSourceType )
+            // InternalAADMParser.g:20017:3: ruleEValidSourceType
             {
              before(grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesEValidSourceTypeParserRuleCall_4_2_0()); 
             pushFollow(FOLLOW_2);
@@ -60759,17 +60711,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2"
-    // InternalAADMParser.g:20050:1: rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20026:1: rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20054:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20055:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20030:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20031:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20055:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20056:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20031:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20032:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0()); 
             pushFollow(FOLLOW_2);
@@ -60800,17 +60752,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4"
-    // InternalAADMParser.g:20065:1: rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20041:1: rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20069:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20070:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20045:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20046:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20070:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20071:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20046:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20047:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0()); 
             pushFollow(FOLLOW_2);
@@ -60841,17 +60793,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValidSourceType__SourceTypesAssignment_0"
-    // InternalAADMParser.g:20080:1: rule__EValidSourceType__SourceTypesAssignment_0 : ( ruleENodeTypeRef ) ;
+    // InternalAADMParser.g:20056:1: rule__EValidSourceType__SourceTypesAssignment_0 : ( ruleENodeTypeRef ) ;
     public final void rule__EValidSourceType__SourceTypesAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20084:1: ( ( ruleENodeTypeRef ) )
-            // InternalAADMParser.g:20085:2: ( ruleENodeTypeRef )
+            // InternalAADMParser.g:20060:1: ( ( ruleENodeTypeRef ) )
+            // InternalAADMParser.g:20061:2: ( ruleENodeTypeRef )
             {
-            // InternalAADMParser.g:20085:2: ( ruleENodeTypeRef )
-            // InternalAADMParser.g:20086:3: ruleENodeTypeRef
+            // InternalAADMParser.g:20061:2: ( ruleENodeTypeRef )
+            // InternalAADMParser.g:20062:3: ruleENodeTypeRef
             {
              before(grammarAccess.getEValidSourceTypeAccess().getSourceTypesENodeTypeRefParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -60882,17 +60834,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValidSourceType__SourceTypeAssignment_1_1"
-    // InternalAADMParser.g:20095:1: rule__EValidSourceType__SourceTypeAssignment_1_1 : ( ruleENodeTypeRef ) ;
+    // InternalAADMParser.g:20071:1: rule__EValidSourceType__SourceTypeAssignment_1_1 : ( ruleENodeTypeRef ) ;
     public final void rule__EValidSourceType__SourceTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20099:1: ( ( ruleENodeTypeRef ) )
-            // InternalAADMParser.g:20100:2: ( ruleENodeTypeRef )
+            // InternalAADMParser.g:20075:1: ( ( ruleENodeTypeRef ) )
+            // InternalAADMParser.g:20076:2: ( ruleENodeTypeRef )
             {
-            // InternalAADMParser.g:20100:2: ( ruleENodeTypeRef )
-            // InternalAADMParser.g:20101:3: ruleENodeTypeRef
+            // InternalAADMParser.g:20076:2: ( ruleENodeTypeRef )
+            // InternalAADMParser.g:20077:3: ruleENodeTypeRef
             {
              before(grammarAccess.getEValidSourceTypeAccess().getSourceTypeENodeTypeRefParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -60923,21 +60875,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTypeRef__NameAssignment"
-    // InternalAADMParser.g:20110:1: rule__ENodeTypeRef__NameAssignment : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:20086:1: rule__ENodeTypeRef__NameAssignment : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__ENodeTypeRef__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20114:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:20115:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:20090:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:20091:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:20115:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:20116:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:20091:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:20092:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getENodeTypeRefAccess().getNameENodeTypeCrossReference_0()); 
-            // InternalAADMParser.g:20117:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:20118:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:20093:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:20094:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getENodeTypeRefAccess().getNameENodeTypeQUALIFIED_NAMETerminalRuleCall_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -60968,17 +60920,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirements__RequirementsAssignment_1"
-    // InternalAADMParser.g:20129:1: rule__ERequirements__RequirementsAssignment_1 : ( ruleERequirementDefinition ) ;
+    // InternalAADMParser.g:20105:1: rule__ERequirements__RequirementsAssignment_1 : ( ruleERequirementDefinition ) ;
     public final void rule__ERequirements__RequirementsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20133:1: ( ( ruleERequirementDefinition ) )
-            // InternalAADMParser.g:20134:2: ( ruleERequirementDefinition )
+            // InternalAADMParser.g:20109:1: ( ( ruleERequirementDefinition ) )
+            // InternalAADMParser.g:20110:2: ( ruleERequirementDefinition )
             {
-            // InternalAADMParser.g:20134:2: ( ruleERequirementDefinition )
-            // InternalAADMParser.g:20135:3: ruleERequirementDefinition
+            // InternalAADMParser.g:20110:2: ( ruleERequirementDefinition )
+            // InternalAADMParser.g:20111:3: ruleERequirementDefinition
             {
              before(grammarAccess.getERequirementsAccess().getRequirementsERequirementDefinitionParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61009,17 +60961,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinition__NameAssignment_0"
-    // InternalAADMParser.g:20144:1: rule__ERequirementDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalAADMParser.g:20120:1: rule__ERequirementDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__ERequirementDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20148:1: ( ( RULE_ID ) )
-            // InternalAADMParser.g:20149:2: ( RULE_ID )
+            // InternalAADMParser.g:20124:1: ( ( RULE_ID ) )
+            // InternalAADMParser.g:20125:2: ( RULE_ID )
             {
-            // InternalAADMParser.g:20149:2: ( RULE_ID )
-            // InternalAADMParser.g:20150:3: RULE_ID
+            // InternalAADMParser.g:20125:2: ( RULE_ID )
+            // InternalAADMParser.g:20126:3: RULE_ID
             {
              before(grammarAccess.getERequirementDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -61046,17 +60998,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinition__RequirementAssignment_3"
-    // InternalAADMParser.g:20159:1: rule__ERequirementDefinition__RequirementAssignment_3 : ( ruleERequirementDefinitionBody ) ;
+    // InternalAADMParser.g:20135:1: rule__ERequirementDefinition__RequirementAssignment_3 : ( ruleERequirementDefinitionBody ) ;
     public final void rule__ERequirementDefinition__RequirementAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20163:1: ( ( ruleERequirementDefinitionBody ) )
-            // InternalAADMParser.g:20164:2: ( ruleERequirementDefinitionBody )
+            // InternalAADMParser.g:20139:1: ( ( ruleERequirementDefinitionBody ) )
+            // InternalAADMParser.g:20140:2: ( ruleERequirementDefinitionBody )
             {
-            // InternalAADMParser.g:20164:2: ( ruleERequirementDefinitionBody )
-            // InternalAADMParser.g:20165:3: ruleERequirementDefinitionBody
+            // InternalAADMParser.g:20140:2: ( ruleERequirementDefinitionBody )
+            // InternalAADMParser.g:20141:3: ruleERequirementDefinitionBody
             {
              before(grammarAccess.getERequirementDefinitionAccess().getRequirementERequirementDefinitionBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -61087,21 +61039,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__CapabilityAssignment_0_1"
-    // InternalAADMParser.g:20174:1: rule__ERequirementDefinitionBody__CapabilityAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:20150:1: rule__ERequirementDefinitionBody__CapabilityAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__ERequirementDefinitionBody__CapabilityAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20178:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:20179:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:20154:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:20155:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:20179:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:20180:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:20155:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:20156:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getERequirementDefinitionBodyAccess().getCapabilityECapabilityTypeCrossReference_0_1_0()); 
-            // InternalAADMParser.g:20181:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:20182:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:20157:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:20158:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getERequirementDefinitionBodyAccess().getCapabilityECapabilityTypeQUALIFIED_NAMETerminalRuleCall_0_1_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -61132,21 +61084,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__NodeAssignment_1_1"
-    // InternalAADMParser.g:20193:1: rule__ERequirementDefinitionBody__NodeAssignment_1_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:20169:1: rule__ERequirementDefinitionBody__NodeAssignment_1_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__ERequirementDefinitionBody__NodeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20197:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:20198:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:20173:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:20174:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:20198:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:20199:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:20174:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:20175:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getERequirementDefinitionBodyAccess().getNodeENodeTypeCrossReference_1_1_0()); 
-            // InternalAADMParser.g:20200:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:20201:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:20176:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:20177:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getERequirementDefinitionBodyAccess().getNodeENodeTypeQUALIFIED_NAMETerminalRuleCall_1_1_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -61177,21 +61129,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__RelationshipAssignment_2_1"
-    // InternalAADMParser.g:20212:1: rule__ERequirementDefinitionBody__RelationshipAssignment_2_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalAADMParser.g:20188:1: rule__ERequirementDefinitionBody__RelationshipAssignment_2_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
     public final void rule__ERequirementDefinitionBody__RelationshipAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20216:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalAADMParser.g:20217:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:20192:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
+            // InternalAADMParser.g:20193:2: ( ( RULE_QUALIFIED_NAME ) )
             {
-            // InternalAADMParser.g:20217:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalAADMParser.g:20218:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:20193:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalAADMParser.g:20194:3: ( RULE_QUALIFIED_NAME )
             {
              before(grammarAccess.getERequirementDefinitionBodyAccess().getRelationshipERelationshipTypeCrossReference_2_1_0()); 
-            // InternalAADMParser.g:20219:3: ( RULE_QUALIFIED_NAME )
-            // InternalAADMParser.g:20220:4: RULE_QUALIFIED_NAME
+            // InternalAADMParser.g:20195:3: ( RULE_QUALIFIED_NAME )
+            // InternalAADMParser.g:20196:4: RULE_QUALIFIED_NAME
             {
              before(grammarAccess.getERequirementDefinitionBodyAccess().getRelationshipERelationshipTypeQUALIFIED_NAMETerminalRuleCall_2_1_0_1()); 
             match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
@@ -61222,17 +61174,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__StartAssignment_3_2"
-    // InternalAADMParser.g:20231:1: rule__ERequirementDefinitionBody__StartAssignment_3_2 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20207:1: rule__ERequirementDefinitionBody__StartAssignment_3_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ERequirementDefinitionBody__StartAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20235:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20236:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20211:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20212:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20236:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20237:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20212:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20213:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getERequirementDefinitionBodyAccess().getStartEAlphaNumericValueParserRuleCall_3_2_0()); 
             pushFollow(FOLLOW_2);
@@ -61263,17 +61215,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__EndAssignment_3_4"
-    // InternalAADMParser.g:20246:1: rule__ERequirementDefinitionBody__EndAssignment_3_4 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20222:1: rule__ERequirementDefinitionBody__EndAssignment_3_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ERequirementDefinitionBody__EndAssignment_3_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20250:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20251:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20226:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20227:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20251:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20252:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20227:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20228:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getERequirementDefinitionBodyAccess().getEndEAlphaNumericValueParserRuleCall_3_4_0()); 
             pushFollow(FOLLOW_2);
@@ -61304,17 +61256,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EConstraints__ConstraintsAssignment_1"
-    // InternalAADMParser.g:20261:1: rule__EConstraints__ConstraintsAssignment_1 : ( ruleEConstraint ) ;
+    // InternalAADMParser.g:20237:1: rule__EConstraints__ConstraintsAssignment_1 : ( ruleEConstraint ) ;
     public final void rule__EConstraints__ConstraintsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20265:1: ( ( ruleEConstraint ) )
-            // InternalAADMParser.g:20266:2: ( ruleEConstraint )
+            // InternalAADMParser.g:20241:1: ( ( ruleEConstraint ) )
+            // InternalAADMParser.g:20242:2: ( ruleEConstraint )
             {
-            // InternalAADMParser.g:20266:2: ( ruleEConstraint )
-            // InternalAADMParser.g:20267:3: ruleEConstraint
+            // InternalAADMParser.g:20242:2: ( ruleEConstraint )
+            // InternalAADMParser.g:20243:3: ruleEConstraint
             {
              before(grammarAccess.getEConstraintsAccess().getConstraintsEConstraintParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61345,17 +61297,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMaxLength__ValAssignment_1"
-    // InternalAADMParser.g:20276:1: rule__EMaxLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20252:1: rule__EMaxLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EMaxLength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20280:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20281:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20256:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20257:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20281:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20282:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20257:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20258:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getEMaxLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61386,17 +61338,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMinLength__ValAssignment_1"
-    // InternalAADMParser.g:20291:1: rule__EMinLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20267:1: rule__EMinLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EMinLength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20295:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20296:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20271:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20272:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20296:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20297:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20272:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20273:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getEMinLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61427,17 +61379,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELength__ValAssignment_1"
-    // InternalAADMParser.g:20306:1: rule__ELength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20282:1: rule__ELength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20310:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20311:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20286:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20287:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20311:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20312:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20287:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20288:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getELengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61468,17 +61420,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValid_Values__ValAssignment_1"
-    // InternalAADMParser.g:20321:1: rule__EValid_Values__ValAssignment_1 : ( ruleELIST ) ;
+    // InternalAADMParser.g:20297:1: rule__EValid_Values__ValAssignment_1 : ( ruleELIST ) ;
     public final void rule__EValid_Values__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20325:1: ( ( ruleELIST ) )
-            // InternalAADMParser.g:20326:2: ( ruleELIST )
+            // InternalAADMParser.g:20301:1: ( ( ruleELIST ) )
+            // InternalAADMParser.g:20302:2: ( ruleELIST )
             {
-            // InternalAADMParser.g:20326:2: ( ruleELIST )
-            // InternalAADMParser.g:20327:3: ruleELIST
+            // InternalAADMParser.g:20302:2: ( ruleELIST )
+            // InternalAADMParser.g:20303:3: ruleELIST
             {
              before(grammarAccess.getEValid_ValuesAccess().getValELISTParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61509,17 +61461,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELIST__ListAssignment_1"
-    // InternalAADMParser.g:20336:1: rule__ELIST__ListAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20312:1: rule__ELIST__ListAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELIST__ListAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20340:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20341:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20316:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20317:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20341:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20342:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20317:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20318:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61550,17 +61502,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELIST__ListAssignment_2_1"
-    // InternalAADMParser.g:20351:1: rule__ELIST__ListAssignment_2_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20327:1: rule__ELIST__ListAssignment_2_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELIST__ListAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20355:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20356:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20331:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20332:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20356:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20357:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20332:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20333:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61591,17 +61543,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInRange__StartAssignment_2"
-    // InternalAADMParser.g:20366:1: rule__EInRange__StartAssignment_2 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20342:1: rule__EInRange__StartAssignment_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EInRange__StartAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20370:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20371:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20346:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20347:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20371:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20372:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20347:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20348:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getEInRangeAccess().getStartEAlphaNumericValueParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -61632,17 +61584,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInRange__EndAssignment_4"
-    // InternalAADMParser.g:20381:1: rule__EInRange__EndAssignment_4 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20357:1: rule__EInRange__EndAssignment_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EInRange__EndAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20385:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20386:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20361:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20362:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20386:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20387:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20362:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20363:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getEInRangeAccess().getEndEAlphaNumericValueParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -61673,17 +61625,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELessOrEqual__ValAssignment_1"
-    // InternalAADMParser.g:20396:1: rule__ELessOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20372:1: rule__ELessOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELessOrEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20400:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20401:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20376:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20377:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20401:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20402:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20377:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20378:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getELessOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61714,17 +61666,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELessThan__ValAssignment_1"
-    // InternalAADMParser.g:20411:1: rule__ELessThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20387:1: rule__ELessThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELessThan__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20415:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20416:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20391:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20392:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20416:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20417:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20392:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20393:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getELessThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61755,17 +61707,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EGreaterOrEqual__ValAssignment_1"
-    // InternalAADMParser.g:20426:1: rule__EGreaterOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20402:1: rule__EGreaterOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EGreaterOrEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20430:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20431:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20406:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20407:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20431:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20432:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20407:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20408:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getEGreaterOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61796,17 +61748,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EGreaterThan__ValAssignment_1"
-    // InternalAADMParser.g:20441:1: rule__EGreaterThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalAADMParser.g:20417:1: rule__EGreaterThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EGreaterThan__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20445:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalAADMParser.g:20446:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20421:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalAADMParser.g:20422:2: ( ruleEAlphaNumericValue )
             {
-            // InternalAADMParser.g:20446:2: ( ruleEAlphaNumericValue )
-            // InternalAADMParser.g:20447:3: ruleEAlphaNumericValue
+            // InternalAADMParser.g:20422:2: ( ruleEAlphaNumericValue )
+            // InternalAADMParser.g:20423:3: ruleEAlphaNumericValue
             {
              before(grammarAccess.getEGreaterThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61837,17 +61789,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EEqual__ValAssignment_1"
-    // InternalAADMParser.g:20456:1: rule__EEqual__ValAssignment_1 : ( ruleESingleValue ) ;
+    // InternalAADMParser.g:20432:1: rule__EEqual__ValAssignment_1 : ( ruleESingleValue ) ;
     public final void rule__EEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20460:1: ( ( ruleESingleValue ) )
-            // InternalAADMParser.g:20461:2: ( ruleESingleValue )
+            // InternalAADMParser.g:20436:1: ( ( ruleESingleValue ) )
+            // InternalAADMParser.g:20437:2: ( ruleESingleValue )
             {
-            // InternalAADMParser.g:20461:2: ( ruleESingleValue )
-            // InternalAADMParser.g:20462:3: ruleESingleValue
+            // InternalAADMParser.g:20437:2: ( ruleESingleValue )
+            // InternalAADMParser.g:20438:3: ruleESingleValue
             {
              before(grammarAccess.getEEqualAccess().getValESingleValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -61878,17 +61830,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ESTRING__ValueAssignment"
-    // InternalAADMParser.g:20471:1: rule__ESTRING__ValueAssignment : ( RULE_STRING ) ;
+    // InternalAADMParser.g:20447:1: rule__ESTRING__ValueAssignment : ( RULE_STRING ) ;
     public final void rule__ESTRING__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20475:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:20476:2: ( RULE_STRING )
+            // InternalAADMParser.g:20451:1: ( ( RULE_STRING ) )
+            // InternalAADMParser.g:20452:2: ( RULE_STRING )
             {
-            // InternalAADMParser.g:20476:2: ( RULE_STRING )
-            // InternalAADMParser.g:20477:3: RULE_STRING
+            // InternalAADMParser.g:20452:2: ( RULE_STRING )
+            // InternalAADMParser.g:20453:3: RULE_STRING
             {
              before(grammarAccess.getESTRINGAccess().getValueSTRINGTerminalRuleCall_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -61915,17 +61867,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EBOOLEAN__ValueAssignment"
-    // InternalAADMParser.g:20486:1: rule__EBOOLEAN__ValueAssignment : ( RULE_BOOLEAN ) ;
+    // InternalAADMParser.g:20462:1: rule__EBOOLEAN__ValueAssignment : ( RULE_BOOLEAN ) ;
     public final void rule__EBOOLEAN__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20490:1: ( ( RULE_BOOLEAN ) )
-            // InternalAADMParser.g:20491:2: ( RULE_BOOLEAN )
+            // InternalAADMParser.g:20466:1: ( ( RULE_BOOLEAN ) )
+            // InternalAADMParser.g:20467:2: ( RULE_BOOLEAN )
             {
-            // InternalAADMParser.g:20491:2: ( RULE_BOOLEAN )
-            // InternalAADMParser.g:20492:3: RULE_BOOLEAN
+            // InternalAADMParser.g:20467:2: ( RULE_BOOLEAN )
+            // InternalAADMParser.g:20468:3: RULE_BOOLEAN
             {
              before(grammarAccess.getEBOOLEANAccess().getValueBOOLEANTerminalRuleCall_0()); 
             match(input,RULE_BOOLEAN,FOLLOW_2); 
@@ -61952,17 +61904,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EFLOAT__ValueAssignment"
-    // InternalAADMParser.g:20501:1: rule__EFLOAT__ValueAssignment : ( ruleFLOAT ) ;
+    // InternalAADMParser.g:20477:1: rule__EFLOAT__ValueAssignment : ( ruleFLOAT ) ;
     public final void rule__EFLOAT__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20505:1: ( ( ruleFLOAT ) )
-            // InternalAADMParser.g:20506:2: ( ruleFLOAT )
+            // InternalAADMParser.g:20481:1: ( ( ruleFLOAT ) )
+            // InternalAADMParser.g:20482:2: ( ruleFLOAT )
             {
-            // InternalAADMParser.g:20506:2: ( ruleFLOAT )
-            // InternalAADMParser.g:20507:3: ruleFLOAT
+            // InternalAADMParser.g:20482:2: ( ruleFLOAT )
+            // InternalAADMParser.g:20483:3: ruleFLOAT
             {
              before(grammarAccess.getEFLOATAccess().getValueFLOATParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -61993,17 +61945,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ESIGNEDINT__ValueAssignment"
-    // InternalAADMParser.g:20516:1: rule__ESIGNEDINT__ValueAssignment : ( ruleSIGNEDINT ) ;
+    // InternalAADMParser.g:20492:1: rule__ESIGNEDINT__ValueAssignment : ( ruleSIGNEDINT ) ;
     public final void rule__ESIGNEDINT__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20520:1: ( ( ruleSIGNEDINT ) )
-            // InternalAADMParser.g:20521:2: ( ruleSIGNEDINT )
+            // InternalAADMParser.g:20496:1: ( ( ruleSIGNEDINT ) )
+            // InternalAADMParser.g:20497:2: ( ruleSIGNEDINT )
             {
-            // InternalAADMParser.g:20521:2: ( ruleSIGNEDINT )
-            // InternalAADMParser.g:20522:3: ruleSIGNEDINT
+            // InternalAADMParser.g:20497:2: ( ruleSIGNEDINT )
+            // InternalAADMParser.g:20498:3: ruleSIGNEDINT
             {
              before(grammarAccess.getESIGNEDINTAccess().getValueSIGNEDINTParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -62034,17 +61986,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMAP__MapAssignment_1"
-    // InternalAADMParser.g:20531:1: rule__EMAP__MapAssignment_1 : ( ruleEMapEntry ) ;
+    // InternalAADMParser.g:20507:1: rule__EMAP__MapAssignment_1 : ( ruleEMapEntry ) ;
     public final void rule__EMAP__MapAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20535:1: ( ( ruleEMapEntry ) )
-            // InternalAADMParser.g:20536:2: ( ruleEMapEntry )
+            // InternalAADMParser.g:20511:1: ( ( ruleEMapEntry ) )
+            // InternalAADMParser.g:20512:2: ( ruleEMapEntry )
             {
-            // InternalAADMParser.g:20536:2: ( ruleEMapEntry )
-            // InternalAADMParser.g:20537:3: ruleEMapEntry
+            // InternalAADMParser.g:20512:2: ( ruleEMapEntry )
+            // InternalAADMParser.g:20513:3: ruleEMapEntry
             {
              before(grammarAccess.getEMAPAccess().getMapEMapEntryParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -62075,17 +62027,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMapEntry__KeyAssignment_0"
-    // InternalAADMParser.g:20546:1: rule__EMapEntry__KeyAssignment_0 : ( RULE_ID ) ;
+    // InternalAADMParser.g:20522:1: rule__EMapEntry__KeyAssignment_0 : ( RULE_ID ) ;
     public final void rule__EMapEntry__KeyAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20550:1: ( ( RULE_ID ) )
-            // InternalAADMParser.g:20551:2: ( RULE_ID )
+            // InternalAADMParser.g:20526:1: ( ( RULE_ID ) )
+            // InternalAADMParser.g:20527:2: ( RULE_ID )
             {
-            // InternalAADMParser.g:20551:2: ( RULE_ID )
-            // InternalAADMParser.g:20552:3: RULE_ID
+            // InternalAADMParser.g:20527:2: ( RULE_ID )
+            // InternalAADMParser.g:20528:3: RULE_ID
             {
              before(grammarAccess.getEMapEntryAccess().getKeyIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -62112,17 +62064,17 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMapEntry__ValueAssignment_2"
-    // InternalAADMParser.g:20561:1: rule__EMapEntry__ValueAssignment_2 : ( ruleEAssignmentValue ) ;
+    // InternalAADMParser.g:20537:1: rule__EMapEntry__ValueAssignment_2 : ( ruleEAssignmentValue ) ;
     public final void rule__EMapEntry__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:20565:1: ( ( ruleEAssignmentValue ) )
-            // InternalAADMParser.g:20566:2: ( ruleEAssignmentValue )
+            // InternalAADMParser.g:20541:1: ( ( ruleEAssignmentValue ) )
+            // InternalAADMParser.g:20542:2: ( ruleEAssignmentValue )
             {
-            // InternalAADMParser.g:20566:2: ( ruleEAssignmentValue )
-            // InternalAADMParser.g:20567:3: ruleEAssignmentValue
+            // InternalAADMParser.g:20542:2: ( ruleEAssignmentValue )
+            // InternalAADMParser.g:20543:3: ruleEAssignmentValue
             {
              before(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);

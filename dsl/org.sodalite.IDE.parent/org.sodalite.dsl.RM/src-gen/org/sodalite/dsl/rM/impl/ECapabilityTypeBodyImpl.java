@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EAttributes;
-import org.sodalite.dsl.rM.ECapabilityType;
 import org.sodalite.dsl.rM.ECapabilityTypeBody;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.RMPackage;
@@ -37,14 +36,24 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implements ECapabilityTypeBody
 {
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The default value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getSuperType()
    * @generated
    * @ordered
    */
-  protected ECapabilityType superType;
+  protected static final String SUPER_TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSuperType()
+   * @generated
+   * @ordered
+   */
+  protected String superType = SUPER_TYPE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -113,27 +122,7 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * @generated
    */
   @Override
-  public ECapabilityType getSuperType()
-  {
-    if (superType != null && superType.eIsProxy())
-    {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (ECapabilityType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.ECAPABILITY_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
-      }
-    }
-    return superType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ECapabilityType basicGetSuperType()
+  public String getSuperType()
   {
     return superType;
   }
@@ -144,9 +133,9 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
    * @generated
    */
   @Override
-  public void setSuperType(ECapabilityType newSuperType)
+  public void setSuperType(String newSuperType)
   {
-    ECapabilityType oldSuperType = superType;
+    String oldSuperType = superType;
     superType = newSuperType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
@@ -306,8 +295,7 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_TYPE_BODY__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
+        return getSuperType();
       case RMPackage.ECAPABILITY_TYPE_BODY__DESCRIPTION:
         return getDescription();
       case RMPackage.ECAPABILITY_TYPE_BODY__PROPERTIES:
@@ -329,7 +317,7 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_TYPE_BODY__SUPER_TYPE:
-        setSuperType((ECapabilityType)newValue);
+        setSuperType((String)newValue);
         return;
       case RMPackage.ECAPABILITY_TYPE_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -355,7 +343,7 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_TYPE_BODY__SUPER_TYPE:
-        setSuperType((ECapabilityType)null);
+        setSuperType(SUPER_TYPE_EDEFAULT);
         return;
       case RMPackage.ECAPABILITY_TYPE_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -381,7 +369,7 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_TYPE_BODY__SUPER_TYPE:
-        return superType != null;
+        return SUPER_TYPE_EDEFAULT == null ? superType != null : !SUPER_TYPE_EDEFAULT.equals(superType);
       case RMPackage.ECAPABILITY_TYPE_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.ECAPABILITY_TYPE_BODY__PROPERTIES:
@@ -403,7 +391,9 @@ public class ECapabilityTypeBodyImpl extends MinimalEObjectImpl.Container implem
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (description: ");
+    result.append(" (superType: ");
+    result.append(superType);
+    result.append(", description: ");
     result.append(description);
     result.append(')');
     return result.toString();

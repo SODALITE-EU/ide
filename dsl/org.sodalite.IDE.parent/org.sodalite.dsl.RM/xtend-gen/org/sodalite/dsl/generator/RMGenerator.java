@@ -1707,8 +1707,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("exchange:derivesFrom \"");
-    String _name_1 = c.getCapability().getSuperType().getName();
-    _builder.append(_name_1, "  ");
+    String _superType = c.getCapability().getSuperType();
+    _builder.append(_superType, "  ");
     _builder.append("\" ;");
     _builder.newLineIfNotEmpty();
     {
@@ -1809,8 +1809,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("exchange:derivesFrom \"");
-    String _name_2 = r.getRelationship().getSuperType().getName();
-    _builder.append(_name_2, "  ");
+    String _superType = r.getRelationship().getSuperType();
+    _builder.append(_superType, "  ");
     _builder.append("\" ;");
     _builder.newLineIfNotEmpty();
     {
@@ -2031,22 +2031,17 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append(_name, "  ");
     _builder.append("\" ;");
     _builder.newLineIfNotEmpty();
-    {
-      EDataType _superType = d.getData().getSuperType();
-      boolean _tripleNotEquals = (_superType != null);
-      if (_tripleNotEquals) {
-        _builder.append("  ");
-        _builder.append("exchange:derivesFrom \"");
-        String _name_1 = d.getData().getSuperType().getName();
-        _builder.append(_name_1, "  ");
-        _builder.append("\" ;");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    _builder.append("  ");
+    _builder.append("exchange:derivesFrom \"");
+    String _superType = d.getData().getSuperType();
+    _builder.append(_superType, "  ");
+    _builder.append("\" ;");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     {
       String _description = d.getData().getDescription();
-      boolean _tripleNotEquals_1 = (_description != null);
-      if (_tripleNotEquals_1) {
+      boolean _tripleNotEquals = (_description != null);
+      if (_tripleNotEquals) {
         _builder.append("  ");
         _builder.append("exchange:description \'");
         String _processDescription = this.processDescription(d.getData().getDescription());
@@ -2057,8 +2052,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       EProperties _properties = d.getData().getProperties();
-      boolean _tripleNotEquals_2 = (_properties != null);
-      if (_tripleNotEquals_2) {
+      boolean _tripleNotEquals_1 = (_properties != null);
+      if (_tripleNotEquals_1) {
         {
           EList<EPropertyDefinition> _properties_1 = d.getData().getProperties().getProperties();
           for(final EPropertyDefinition p : _properties_1) {
