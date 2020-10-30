@@ -999,7 +999,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         superType=[ENodeType|QUALIFIED_NAME] | 
+	 *         superType=QUALIFIED_NAME | 
 	 *         description=STRING | 
 	 *         properties=EProperties | 
 	 *         attributes=EAttributes | 

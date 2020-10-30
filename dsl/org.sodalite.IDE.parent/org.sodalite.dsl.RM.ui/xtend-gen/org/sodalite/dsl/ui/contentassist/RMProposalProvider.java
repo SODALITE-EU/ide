@@ -3,8 +3,11 @@
  */
 package org.sodalite.dsl.ui.contentassist;
 
+import com.google.common.base.Objects;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -20,7 +23,10 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
+import org.sodalite.dsl.rM.ENodeType;
+import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
@@ -82,7 +88,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       for (final String module : _elements) {
         {
           System.out.println(("\tModule: " + module));
-          final String proposalText = this.getModule(module);
+          final String proposalText = this.extractModule(module);
           final String displayText = proposalText;
           final Object additionalProposalInfo = null;
           this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
@@ -94,7 +100,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  public String getModule(final String module) {
+  public String extractModule(final String module) {
     int _length = module.length();
     int _minus = (_length - 2);
     int _lastIndexOf = module.lastIndexOf("/", _minus);
@@ -111,6 +117,102 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String displayText = "tosca.types.id";
     final String additionalProposalInfo = "The required id of the node type";
     this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeENodeTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for NodeTemplate::type property");
+      final List<String> importedModules = this.getImportedModules(model);
+      final ReasonerData<Node> nodes = this.getKBReasoner().getNodes(importedModules);
+      System.out.println("Nodes retrieved from KB:");
+      List<Node> _elements = nodes.getElements();
+      for (final Node node : _elements) {
+        {
+          String _label = node.getLabel();
+          String _plus = ("\tNode: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = node.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _module_1 = node.getModule();
+            String _plus_1 = (_module_1 + "/");
+            String _label_1 = node.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = node.getLabel();
+          }
+          final String proposalText = _xifexpression;
+          String _xifexpression_1 = null;
+          String _module_2 = node.getModule();
+          boolean _tripleNotEquals_1 = (_module_2 != null);
+          if (_tripleNotEquals_1) {
+            String _module_3 = node.getModule();
+            String _plus_2 = (_module_3 + "/");
+            String _label_2 = node.getLabel();
+            _xifexpression_1 = (_plus_2 + _label_2);
+          } else {
+            _xifexpression_1 = node.getLabel();
+          }
+          final String displayText = _xifexpression_1;
+          final String additionalProposalInfo = node.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      final String module = this.getModule(model);
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<ENodeType> _nodeTypes = rootModel.getNodeTypes().getNodeTypes();
+      for (final ENodeType nodeType : _nodeTypes) {
+        {
+          String _name = nodeType.getName();
+          String _plus = ("\tLocal node: " + _name);
+          System.out.println(_plus);
+          String _name_1 = nodeType.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = nodeType.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = nodeType.getNode().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public String getModule(final EObject object) {
+    Object _findModel = this.findModel(object);
+    final RM_Model model = ((RM_Model) _findModel);
+    return model.getModule();
+  }
+  
+  public List<String> getImportedModules(final EObject object) {
+    final List<String> modules = new ArrayList<String>();
+    Object _findModel = this.findModel(object);
+    final RM_Model model = ((RM_Model) _findModel);
+    EList<String> _imports = model.getImports();
+    for (final String import_ : _imports) {
+      modules.add(import_);
+    }
+    return modules;
+  }
+  
+  public Object findModel(final EObject object) {
+    EObject _eContainer = object.eContainer();
+    boolean _equals = Objects.equal(_eContainer, null);
+    if (_equals) {
+      return null;
+    } else {
+      EObject _eContainer_1 = object.eContainer();
+      if ((_eContainer_1 instanceof RM_Model)) {
+        return object.eContainer();
+      } else {
+        return this.findModel(object.eContainer());
+      }
+    }
   }
   
   @Override

@@ -1160,8 +1160,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_1_0 = (Group)cUnorderedGroup_1.eContents().get(0);
 		private final Keyword cDerived_fromKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final CrossReference cSuperTypeENodeTypeCrossReference_1_0_1_0 = (CrossReference)cSuperTypeAssignment_1_0_1.eContents().get(0);
-		private final RuleCall cSuperTypeENodeTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1 = (RuleCall)cSuperTypeENodeTypeCrossReference_1_0_1_0.eContents().get(1);
+		private final RuleCall cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cUnorderedGroup_1.eContents().get(1);
 		private final Keyword cDescriptionKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -1198,8 +1197,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cENDTerminalRuleCall_1_6_3 = (RuleCall)cGroup_1_6.eContents().get(3);
 		
 		//ENodeTypeBody:
-		//	{ENodeTypeBody} (('derived_from:' superType=[ENodeType|QUALIFIED_NAME])? & ('description:' description=STRING)? &
-		//	('properties:'
+		//	{ENodeTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:'
 		//	BEGIN
 		//	properties=EProperties
 		//	END)? & ('attributes:'
@@ -1217,35 +1215,32 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	END)?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ENodeTypeBody} (('derived_from:' superType=[ENodeType|QUALIFIED_NAME])? & ('description:' description=STRING)? &
-		//('properties:' BEGIN properties=EProperties END)? & ('attributes:' BEGIN attributes=EAttributes END)? & ('interfaces:'
-		//BEGIN interfaces=EInterfaces END)? & ('capabilities:' BEGIN capabilities=ECapabilities END)? & ('requirements:' BEGIN
+		//{ENodeTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:'
+		//BEGIN properties=EProperties END)? & ('attributes:' BEGIN attributes=EAttributes END)? & ('interfaces:' BEGIN
+		//interfaces=EInterfaces END)? & ('capabilities:' BEGIN capabilities=ECapabilities END)? & ('requirements:' BEGIN
 		//requirements=ERequirements END)?)
 		public Group getGroup() { return cGroup; }
 		
 		//{ENodeTypeBody}
 		public Action getENodeTypeBodyAction_0() { return cENodeTypeBodyAction_0; }
 		
-		//(('derived_from:' superType=[ENodeType|QUALIFIED_NAME])? & ('description:' description=STRING)? & ('properties:' BEGIN
+		//(('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:' BEGIN
 		//properties=EProperties END)? & ('attributes:' BEGIN attributes=EAttributes END)? & ('interfaces:' BEGIN
 		//interfaces=EInterfaces END)? & ('capabilities:' BEGIN capabilities=ECapabilities END)? & ('requirements:' BEGIN
 		//requirements=ERequirements END)?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
-		//('derived_from:' superType=[ENodeType|QUALIFIED_NAME])?
+		//('derived_from:' superType=QUALIFIED_NAME)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//'derived_from:'
 		public Keyword getDerived_fromKeyword_1_0_0() { return cDerived_fromKeyword_1_0_0; }
 		
-		//superType=[ENodeType|QUALIFIED_NAME]
+		//superType=QUALIFIED_NAME
 		public Assignment getSuperTypeAssignment_1_0_1() { return cSuperTypeAssignment_1_0_1; }
 		
-		//[ENodeType|QUALIFIED_NAME]
-		public CrossReference getSuperTypeENodeTypeCrossReference_1_0_1_0() { return cSuperTypeENodeTypeCrossReference_1_0_1_0; }
-		
 		//QUALIFIED_NAME
-		public RuleCall getSuperTypeENodeTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1() { return cSuperTypeENodeTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1; }
+		public RuleCall getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0() { return cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0; }
 		
 		//('description:' description=STRING)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -4462,8 +4457,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ENodeTypeBody:
-	//	{ENodeTypeBody} (('derived_from:' superType=[ENodeType|QUALIFIED_NAME])? & ('description:' description=STRING)? &
-	//	('properties:'
+	//	{ENodeTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:'
 	//	BEGIN
 	//	properties=EProperties
 	//	END)? & ('attributes:'

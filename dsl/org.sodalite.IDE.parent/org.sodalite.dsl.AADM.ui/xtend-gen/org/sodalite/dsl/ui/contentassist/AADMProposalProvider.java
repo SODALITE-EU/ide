@@ -171,8 +171,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   public void completeENodeTemplateBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
-      final List<String> modules = this.getModules(model);
-      final ReasonerData<Node> nodes = this.getKBReasoner().getNodes(modules);
+      final List<String> importedModules = this.getImportedModules(model);
+      final ReasonerData<Node> nodes = this.getKBReasoner().getNodes(importedModules);
       System.out.println("Nodes retrieved from KB:");
       List<Node> _elements = nodes.getElements();
       for (final Node node : _elements) {
@@ -180,8 +180,30 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           String _label = node.getLabel();
           String _plus = ("\tNode: " + _label);
           System.out.println(_plus);
-          final String proposalText = node.getLabel();
-          final String displayText = node.getLabel();
+          String _xifexpression = null;
+          String _module = node.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _module_1 = node.getModule();
+            String _plus_1 = (_module_1 + "/");
+            String _label_1 = node.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = node.getLabel();
+          }
+          final String proposalText = _xifexpression;
+          String _xifexpression_1 = null;
+          String _module_2 = node.getModule();
+          boolean _tripleNotEquals_1 = (_module_2 != null);
+          if (_tripleNotEquals_1) {
+            String _module_3 = node.getModule();
+            String _plus_2 = (_module_3 + "/");
+            String _label_2 = node.getLabel();
+            _xifexpression_1 = (_plus_2 + _label_2);
+          } else {
+            _xifexpression_1 = node.getLabel();
+          }
+          final String displayText = _xifexpression_1;
           final String additionalProposalInfo = node.getDescription();
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
@@ -192,7 +214,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  public List<String> getModules(final EObject object) {
+  @Override
+  public List<String> getImportedModules(final EObject object) {
     final List<String> modules = new ArrayList<String>();
     Object _findModel = this.findModel(object);
     final AADM_Model model = ((AADM_Model) _findModel);
@@ -213,7 +236,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       for (final String module : _elements) {
         {
           System.out.println(("\tModule: " + module));
-          final String proposalText = this.getModule(module);
+          final String proposalText = this.extractModule(module);
           final String displayText = proposalText;
           final Object additionalProposalInfo = null;
           this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
@@ -641,6 +664,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     return nodes;
   }
   
+  @Override
   public Object findModel(final EObject object) {
     EObject _eContainer = object.eContainer();
     boolean _equals = Objects.equal(_eContainer, null);

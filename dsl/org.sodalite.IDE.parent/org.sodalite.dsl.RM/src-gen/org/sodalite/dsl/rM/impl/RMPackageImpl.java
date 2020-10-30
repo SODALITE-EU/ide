@@ -1436,9 +1436,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getENodeTypeBody_SuperType()
+  public EAttribute getENodeTypeBody_SuperType()
   {
-    return (EReference)eNodeTypeBodyEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eNodeTypeBodyEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3446,7 +3446,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eNodeTypeEClass, ENODE_TYPE__NODE);
 
     eNodeTypeBodyEClass = createEClass(ENODE_TYPE_BODY);
-    createEReference(eNodeTypeBodyEClass, ENODE_TYPE_BODY__SUPER_TYPE);
+    createEAttribute(eNodeTypeBodyEClass, ENODE_TYPE_BODY__SUPER_TYPE);
     createEAttribute(eNodeTypeBodyEClass, ENODE_TYPE_BODY__DESCRIPTION);
     createEReference(eNodeTypeBodyEClass, ENODE_TYPE_BODY__PROPERTIES);
     createEReference(eNodeTypeBodyEClass, ENODE_TYPE_BODY__ATTRIBUTES);
@@ -3824,7 +3824,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getENodeType_Node(), this.getENodeTypeBody(), null, "node", null, 0, 1, ENodeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eNodeTypeBodyEClass, ENodeTypeBody.class, "ENodeTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getENodeTypeBody_SuperType(), this.getENodeType(), null, "superType", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getENodeTypeBody_SuperType(), ecorePackage.getEString(), "superType", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getENodeTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getENodeTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getENodeTypeBody_Attributes(), this.getEAttributes(), null, "attributes", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

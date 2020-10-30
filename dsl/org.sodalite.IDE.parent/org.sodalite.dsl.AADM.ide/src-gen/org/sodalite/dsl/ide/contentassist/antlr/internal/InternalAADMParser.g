@@ -18797,13 +18797,9 @@ rule__ENodeTypeBody__SuperTypeAssignment_1_0_1
 	}
 :
 	(
-		{ before(grammarAccess.getENodeTypeBodyAccess().getSuperTypeENodeTypeCrossReference_1_0_1_0()); }
-		(
-			{ before(grammarAccess.getENodeTypeBodyAccess().getSuperTypeENodeTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); }
-			RULE_QUALIFIED_NAME
-			{ after(grammarAccess.getENodeTypeBodyAccess().getSuperTypeENodeTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0_1()); }
-		)
-		{ after(grammarAccess.getENodeTypeBodyAccess().getSuperTypeENodeTypeCrossReference_1_0_1_0()); }
+		{ before(grammarAccess.getENodeTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); }
+		RULE_QUALIFIED_NAME
+		{ after(grammarAccess.getENodeTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0()); }
 	)
 ;
 finally {

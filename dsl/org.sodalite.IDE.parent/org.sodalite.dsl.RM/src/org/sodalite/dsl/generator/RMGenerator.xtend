@@ -685,7 +685,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
-	  exchange:derivesFrom "«n.node.superType.name»" ;
+	  exchange:derivesFrom "«n.node.superType»" ;
 	  «IF n.node.properties !== null»
 	  «FOR p:n.node.properties.properties»
 	  exchange:properties :Property_«property_numbers.get(p)» ; 

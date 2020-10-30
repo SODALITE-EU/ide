@@ -2026,14 +2026,19 @@ ruleENodeTypeBody returns [EObject current=null]
 								}
 								(
 									(
+										lv_superType_3_0=RULE_QUALIFIED_NAME
+										{
+											newLeafNode(lv_superType_3_0, grammarAccess.getENodeTypeBodyAccess().getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0());
+										}
 										{
 											if ($current==null) {
 												$current = createModelElement(grammarAccess.getENodeTypeBodyRule());
 											}
-										}
-										otherlv_3=RULE_QUALIFIED_NAME
-										{
-											newLeafNode(otherlv_3, grammarAccess.getENodeTypeBodyAccess().getSuperTypeENodeTypeCrossReference_1_0_1_0());
+											setWithLastConsumed(
+												$current,
+												"superType",
+												lv_superType_3_0,
+												"org.sodalite.dsl.RM.QUALIFIED_NAME");
 										}
 									)
 								)

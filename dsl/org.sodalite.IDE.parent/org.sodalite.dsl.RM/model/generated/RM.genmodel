@@ -88,7 +88,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeType/node"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ENodeTypeBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ENodeTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ENodeTypeBody/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/attributes"/>

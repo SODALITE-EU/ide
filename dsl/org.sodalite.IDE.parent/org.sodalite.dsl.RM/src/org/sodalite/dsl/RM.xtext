@@ -149,7 +149,7 @@ ENodeType:
 	END;
 
 ENodeTypeBody:
-	{ENodeTypeBody} (('derived_from:' superType=[ENodeType|QUALIFIED_NAME])? &
+	{ENodeTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? &
 	('description:' description=STRING)? &
 	('properties:'
 	BEGIN

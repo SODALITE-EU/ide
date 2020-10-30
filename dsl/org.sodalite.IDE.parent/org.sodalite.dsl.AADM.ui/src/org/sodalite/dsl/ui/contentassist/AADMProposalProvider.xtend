@@ -154,15 +154,15 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for NodeTemplate::type property")
 		
-		//FIXME Get modules from model
-		val List<String> modules = getModules(model)
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
 		
-		val ReasonerData<Node> nodes = getKBReasoner().getNodes(modules)
+		val ReasonerData<Node> nodes = getKBReasoner().getNodes(importedModules)
 		System.out.println ("Nodes retrieved from KB:")
 		for (node: nodes.elements){
 			System.out.println ("\tNode: " + node.label)
-			val proposalText = node.label //FIXME: Prefix with module
-			val displayText = node.label
+			val proposalText = node.module !== null ?node.module + '/' + node.label:node.label 
+			val displayText = node.module !== null ?node.module + '/' + node.label:node.label
 			val additionalProposalInfo = node.description
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
@@ -170,7 +170,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
 	}
 		
-	def getModules(EObject object) {
+	override def getImportedModules(EObject object) {
 		val List<String> modules = new ArrayList()
 		val AADM_Model model = findModel(object) as AADM_Model
 		for (import: model.imports)
@@ -186,7 +186,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		System.out.println ("Modules retrieved from KB:")
 		for (module: modules.elements){
 			System.out.println ("\tModule: " + module)
-			val proposalText = getModule(module)
+			val proposalText = extractModule(module)
 			val displayText = proposalText
 			val additionalProposalInfo = null
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
@@ -434,7 +434,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		return nodes
 	}
 		
-	def findModel(EObject object) {
+	override def findModel(EObject object) {
 		if (object.eContainer == null)
 			return null
 		else if (object.eContainer instanceof AADM_Model)

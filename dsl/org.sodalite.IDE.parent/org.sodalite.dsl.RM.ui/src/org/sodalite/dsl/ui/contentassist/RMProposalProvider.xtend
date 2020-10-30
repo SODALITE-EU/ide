@@ -21,8 +21,10 @@ import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient
 import java.text.MessageFormat
 import org.sodalite.dsl.ui.preferences.PreferenceConstants
 import org.sodalite.dsl.ui.preferences.Activator
-
-
+import java.util.List
+import java.util.ArrayList
+import org.sodalite.dsl.rM.RM_Model
+import org.sodalite.dsl.kb_reasoner_client.types.Node
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -79,7 +81,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		System.out.println ("Modules retrieved from KB:")
 		for (module: modules.elements){
 			System.out.println ("\tModule: " + module)
-			val proposalText = getModule(module)
+			val proposalText = extractModule(module)
 			val displayText = proposalText
 			val additionalProposalInfo = null
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
@@ -88,7 +90,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		super.completeRM_Model_Imports(model, assignment, context, acceptor)
 	}
 	
-	def getModule(String module) {
+	def extractModule(String module) {
 		return module.substring(module.lastIndexOf("/", module.length - 2) + 1, module.length - 1)
 	}
 	
@@ -100,6 +102,60 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String additionalProposalInfo = "The required id of the node type"
 
 		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeENodeTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for NodeTemplate::type property")
+		
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		
+		val ReasonerData<Node> nodes = getKBReasoner().getNodes(importedModules)
+		System.out.println ("Nodes retrieved from KB:")
+		for (node: nodes.elements){
+			System.out.println ("\tNode: " + node.label)
+			val proposalText = node.module !== null ?node.module + '/' + node.label:node.label 
+			val displayText = node.module !== null ?node.module + '/' + node.label:node.label
+			val additionalProposalInfo = node.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+		
+		//FIXME Add other nodes defined locally in the model
+		val String module = getModule(model)
+		val rootModel = findModel(model) as RM_Model
+		
+		for (nodeType: rootModel.nodeTypes.nodeTypes){
+			System.out.println ("\tLocal node: " + nodeType.name)
+			val proposalText = module + "/" + nodeType.name 
+			val displayText = module + "/" + nodeType.name 
+			val additionalProposalInfo = nodeType.node.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	def getModule(EObject object) {
+		val RM_Model model = findModel(object) as RM_Model
+		return model.module
+	}
+	
+	def getImportedModules(EObject object) {
+		val List<String> modules = new ArrayList()
+		val RM_Model model = findModel(object) as RM_Model
+		for (import: model.imports)
+			modules.add(import)
+		
+		return modules
+	}
+	
+	def findModel(EObject object) {
+		if (object.eContainer == null)
+			return null
+		else if (object.eContainer instanceof RM_Model)
+			return object.eContainer
+		else
+			return findModel(object.eContainer)
 	}
 	
 	override void completeEDataType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

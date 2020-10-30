@@ -1922,8 +1922,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("exchange:derivesFrom \"");
-    String _name_1 = n.getNode().getSuperType().getName();
-    _builder.append(_name_1, "  ");
+    String _superType = n.getNode().getSuperType();
+    _builder.append(_superType, "  ");
     _builder.append("\" ;");
     _builder.newLineIfNotEmpty();
     {

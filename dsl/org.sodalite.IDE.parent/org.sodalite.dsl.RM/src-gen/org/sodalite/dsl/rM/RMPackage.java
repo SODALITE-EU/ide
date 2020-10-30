@@ -815,7 +815,7 @@ public interface RMPackage extends EPackage
   int ENODE_TYPE_BODY = 18;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -3705,15 +3705,15 @@ public interface RMPackage extends EPackage
   EClass getENodeTypeBody();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.ENodeTypeBody#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ENodeTypeBody#getSuperType <em>Super Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @return the meta object for the attribute '<em>Super Type</em>'.
    * @see org.sodalite.dsl.rM.ENodeTypeBody#getSuperType()
    * @see #getENodeTypeBody()
    * @generated
    */
-  EReference getENodeTypeBody_SuperType();
+  EAttribute getENodeTypeBody_SuperType();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ENodeTypeBody#getDescription <em>Description</em>}'.
@@ -6119,12 +6119,12 @@ public interface RMPackage extends EPackage
     EClass ENODE_TYPE_BODY = eINSTANCE.getENodeTypeBody();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Super Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ENODE_TYPE_BODY__SUPER_TYPE = eINSTANCE.getENodeTypeBody_SuperType();
+    EAttribute ENODE_TYPE_BODY__SUPER_TYPE = eINSTANCE.getENodeTypeBody_SuperType();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
