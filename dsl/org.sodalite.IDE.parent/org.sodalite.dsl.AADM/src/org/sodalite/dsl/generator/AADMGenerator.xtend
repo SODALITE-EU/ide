@@ -197,7 +197,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value "«p.parameter.type.name»" ;
+	  exchange:value "«p.parameter.type»" ;
 	.
 	:Input_«input_counter++»
 	  rdf:type exchange:Input ;

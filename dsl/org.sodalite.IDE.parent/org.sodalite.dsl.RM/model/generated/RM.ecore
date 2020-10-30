@@ -162,7 +162,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPropertyDefinitionBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EDataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//EValueExpression"
@@ -170,7 +170,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" eType="#//EConstraints"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="entry_schema" eType="#//EDataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entry_schema" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EAttributes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
@@ -182,12 +182,12 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EAttributeDefinitionBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EDataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//EValueExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="entry_schema" eType="#//EDataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entry_schema" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInterfaces">
     <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" upperBound="-1"
@@ -199,7 +199,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInterfaceDefinitionBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EInterfaceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" eType="#//EProperties"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" eType="#//EOperations"
@@ -250,7 +250,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EParameterDefinitionBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EDataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EValueExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//EValueExpression"
@@ -288,7 +288,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ECapabilityDefinitionBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ECapabilityType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//EProperties"
         containment="true"/>
@@ -308,7 +308,7 @@
         eType="#//ENodeTypeRef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ENodeTypeRef">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//ENodeType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERequirements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
@@ -319,9 +319,9 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERequirementDefinitionBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="capability" eType="#//ECapabilityType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//ENodeType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relationship" eType="#//ERelationshipType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="capability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="node" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationship" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="start" eType="#//EAlphaNumericValue"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//EAlphaNumericValue"

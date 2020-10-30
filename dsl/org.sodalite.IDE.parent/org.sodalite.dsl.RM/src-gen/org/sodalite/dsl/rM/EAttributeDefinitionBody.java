@@ -28,26 +28,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface EAttributeDefinitionBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(EDataType)
+   * @return the value of the '<em>Type</em>' attribute.
+   * @see #setType(String)
    * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinitionBody_Type()
    * @model
    * @generated
    */
-  EDataType getType();
+  String getType();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getType <em>Type</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getType <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
+   * @param value the new value of the '<em>Type</em>' attribute.
    * @see #getType()
    * @generated
    */
-  void setType(EDataType value);
+  void setType(String value);
 
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.
@@ -116,25 +116,25 @@ public interface EAttributeDefinitionBody extends EObject
   void setStatus(String value);
 
   /**
-   * Returns the value of the '<em><b>Entry schema</b></em>' reference.
+   * Returns the value of the '<em><b>Entry schema</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Entry schema</em>' reference.
-   * @see #setEntry_schema(EDataType)
+   * @return the value of the '<em>Entry schema</em>' attribute.
+   * @see #setEntry_schema(String)
    * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinitionBody_Entry_schema()
    * @model
    * @generated
    */
-  EDataType getEntry_schema();
+  String getEntry_schema();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getEntry_schema <em>Entry schema</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getEntry_schema <em>Entry schema</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entry schema</em>' reference.
+   * @param value the new value of the '<em>Entry schema</em>' attribute.
    * @see #getEntry_schema()
    * @generated
    */
-  void setEntry_schema(EDataType value);
+  void setEntry_schema(String value);
 
 } // EAttributeDefinitionBody

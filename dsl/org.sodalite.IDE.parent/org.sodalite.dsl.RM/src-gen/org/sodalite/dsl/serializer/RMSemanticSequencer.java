@@ -382,7 +382,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EAttributeDefinitionBody returns EAttributeDefinitionBody
 	 *
 	 * Constraint:
-	 *     (type=[EDataType|EDataTypeName] | description=STRING | default=EValueExpression | status=STRING | entry_schema=[EDataType|EDataTypeName])+
+	 *     (type=EDataTypeName | description=STRING | default=EValueExpression | status=STRING | entry_schema=EDataTypeName)+
 	 */
 	protected void sequence_EAttributeDefinitionBody(ISerializationContext context, EAttributeDefinitionBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -461,7 +461,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         (type=[ECapabilityType|QUALIFIED_NAME] | description=STRING | properties=EProperties | attributes=EAttributes | valid_source_types+=EValidSourceType)? 
+	 *         (type=QUALIFIED_NAME | description=STRING | properties=EProperties | attributes=EAttributes | valid_source_types+=EValidSourceType)? 
 	 *         (occurrences_start=EAlphaNumericValue occurrences_end=EAlphaNumericValue)?
 	 *     )+
 	 */
@@ -766,7 +766,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EInterfaceDefinitionBody returns EInterfaceDefinitionBody
 	 *
 	 * Constraint:
-	 *     (type=[EInterfaceType|QUALIFIED_NAME] | inputs=EProperties | operations=EOperations)+
+	 *     (type=QUALIFIED_NAME | inputs=EProperties | operations=EOperations)+
 	 */
 	protected void sequence_EInterfaceDefinitionBody(ISerializationContext context, EInterfaceDefinitionBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1018,7 +1018,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ENodeTypeRef returns ENodeTypeRef
 	 *
 	 * Constraint:
-	 *     name=[ENodeType|QUALIFIED_NAME]
+	 *     name=QUALIFIED_NAME
 	 */
 	protected void sequence_ENodeTypeRef(ISerializationContext context, ENodeTypeRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -1026,7 +1026,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.ENODE_TYPE_REF__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getENodeTypeRefAccess().getNameENodeTypeQUALIFIED_NAMETerminalRuleCall_0_1(), semanticObject.eGet(RMPackage.Literals.ENODE_TYPE_REF__NAME, false));
+		feeder.accept(grammarAccess.getENodeTypeRefAccess().getNameQUALIFIED_NAMETerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -1114,7 +1114,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EParameterDefinitionBody returns EParameterDefinitionBody
 	 *
 	 * Constraint:
-	 *     (type=[EDataType|EDataTypeName] | value=EValueExpression | default=EValueExpression)*
+	 *     (type=EDataTypeName | value=EValueExpression | default=EValueExpression)*
 	 */
 	protected void sequence_EParameterDefinitionBody(ISerializationContext context, EParameterDefinitionBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1217,13 +1217,13 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         type=[EDataType|EDataTypeName] | 
+	 *         type=EDataTypeName | 
 	 *         description=STRING | 
 	 *         required=BOOLEAN | 
 	 *         default=EValueExpression | 
 	 *         status=STRING | 
 	 *         constraints=EConstraints | 
-	 *         entry_schema=[EDataType|EDataTypeName]
+	 *         entry_schema=EDataTypeName
 	 *     )+
 	 */
 	protected void sequence_EPropertyDefinitionBody(ISerializationContext context, EPropertyDefinitionBody semanticObject) {
@@ -1309,12 +1309,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ERequirementDefinitionBody returns ERequirementDefinitionBody
 	 *
 	 * Constraint:
-	 *     (
-	 *         capability=[ECapabilityType|QUALIFIED_NAME] | 
-	 *         node=[ENodeType|QUALIFIED_NAME] | 
-	 *         relationship=[ERelationshipType|QUALIFIED_NAME] | 
-	 *         (start=EAlphaNumericValue end=EAlphaNumericValue)
-	 *     )+
+	 *     (capability=QUALIFIED_NAME | node=QUALIFIED_NAME | relationship=QUALIFIED_NAME | (start=EAlphaNumericValue end=EAlphaNumericValue))+
 	 */
 	protected void sequence_ERequirementDefinitionBody(ISerializationContext context, ERequirementDefinitionBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -214,7 +214,7 @@ EPropertyDefinition:
 	END;
 
 EPropertyDefinitionBody:
-	('type:' type=[EDataType|EDataTypeName]) &
+	('type:' type=EDataTypeName) &
 	('description:' description=STRING)? &
 	('required:' required=BOOLEAN)? &
 	('default:' default=EValueExpression)? &
@@ -223,7 +223,7 @@ EPropertyDefinitionBody:
 	BEGIN
 	constraints=EConstraints
 	END)? &
-	('entry_schema:' entry_schema=[EDataType|EDataTypeName])?;
+	('entry_schema:' entry_schema=EDataTypeName)?;
 
 EAttributes:
 	{EAttributes} (attributes+=EAttributeDefinition)*;
@@ -235,11 +235,11 @@ EAttributeDefinition:
 	END;
 
 EAttributeDefinitionBody:
-	('type:' type=[EDataType|EDataTypeName]) &
+	('type:' type=EDataTypeName) &
 	('description:' description=STRING)? &
 	('default:' default=EValueExpression)? &
 	('status:' status=STRING)? &
-	('entry_schema:' entry_schema=[EDataType|EDataTypeName])?;
+	('entry_schema:' entry_schema=EDataTypeName)?;
 
 EInterfaces:
 	{EInterfaces} (interfaces+=EInterfaceDefinition)*;
@@ -251,7 +251,7 @@ EInterfaceDefinition:
 	END;
 
 EInterfaceDefinitionBody:
-	'type:' type=[EInterfaceType|QUALIFIED_NAME] &
+	'type:' type=QUALIFIED_NAME &
 	('inputs:'
 	BEGIN
 	inputs=EProperties
@@ -315,7 +315,7 @@ EParameterDefinition:
 
 EParameterDefinitionBody:
 	{EParameterDefinitionBody} (
-	('type:' type=[EDataType|EDataTypeName])? &
+	('type:' type=EDataTypeName)? &
 	('value:' value=EValueExpression)? &
 	('default:' default=EValueExpression)?);
 
@@ -361,7 +361,7 @@ ECapabilityDefinition:
 	END;
 
 ECapabilityDefinitionBody:
-	('type:' type=[ECapabilityType|QUALIFIED_NAME]) &
+	('type:' type=QUALIFIED_NAME) &
 	('description:' description=STRING)? &
 	('properties:'
 	BEGIN
@@ -378,7 +378,7 @@ EValidSourceType:
 	sourceTypes+=ENodeTypeRef (',' sourceType+=ENodeTypeRef)*;
 
 ENodeTypeRef:
-	name=[ENodeType|QUALIFIED_NAME];
+	name=QUALIFIED_NAME;
 
 ERequirements:
 	{ERequirements} (requirements+=ERequirementDefinition)*;
@@ -390,9 +390,9 @@ ERequirementDefinition:
 	END;
 
 ERequirementDefinitionBody:
-	('capability:' capability=[ECapabilityType|QUALIFIED_NAME]) &
-	('node:' node=[ENodeType|QUALIFIED_NAME])? &
-	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? &
+	('capability:' capability=QUALIFIED_NAME) &
+	('node:' node=QUALIFIED_NAME)? &
+	('relationship:' relationship=QUALIFIED_NAME)? &
 	('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?;
 
 EReqOrCap:

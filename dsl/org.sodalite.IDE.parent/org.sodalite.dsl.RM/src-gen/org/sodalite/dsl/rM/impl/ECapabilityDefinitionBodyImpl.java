@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
-import org.sodalite.dsl.rM.ECapabilityType;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.RMPackage;
@@ -49,14 +48,24 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container implements ECapabilityDefinitionBody
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected ECapabilityType type;
+  protected static final String TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected String type = TYPE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -155,27 +164,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public ECapabilityType getType()
-  {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (ECapabilityType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE, oldType, type));
-      }
-    }
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ECapabilityType basicGetType()
+  public String getType()
   {
     return type;
   }
@@ -186,9 +175,9 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public void setType(ECapabilityType newType)
+  public void setType(String newType)
   {
-    ECapabilityType oldType = type;
+    String oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE, oldType, type));
@@ -469,8 +458,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+        return getType();
       case RMPackage.ECAPABILITY_DEFINITION_BODY__DESCRIPTION:
         return getDescription();
       case RMPackage.ECAPABILITY_DEFINITION_BODY__PROPERTIES:
@@ -499,7 +487,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE:
-        setType((ECapabilityType)newValue);
+        setType((String)newValue);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -535,7 +523,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE:
-        setType((ECapabilityType)null);
+        setType(TYPE_EDEFAULT);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -570,7 +558,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE:
-        return type != null;
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case RMPackage.ECAPABILITY_DEFINITION_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.ECAPABILITY_DEFINITION_BODY__PROPERTIES:
@@ -598,7 +586,9 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (description: ");
+    result.append(" (type: ");
+    result.append(type);
+    result.append(", description: ");
     result.append(description);
     result.append(')');
     return result.toString();

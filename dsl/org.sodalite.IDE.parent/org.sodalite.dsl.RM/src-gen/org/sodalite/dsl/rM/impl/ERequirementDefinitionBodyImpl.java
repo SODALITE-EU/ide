@@ -13,9 +13,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EAlphaNumericValue;
-import org.sodalite.dsl.rM.ECapabilityType;
-import org.sodalite.dsl.rM.ENodeType;
-import org.sodalite.dsl.rM.ERelationshipType;
 import org.sodalite.dsl.rM.ERequirementDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -39,34 +36,64 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container implements ERequirementDefinitionBody
 {
   /**
-   * The cached value of the '{@link #getCapability() <em>Capability</em>}' reference.
+   * The default value of the '{@link #getCapability() <em>Capability</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getCapability()
    * @generated
    * @ordered
    */
-  protected ECapabilityType capability;
+  protected static final String CAPABILITY_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getNode() <em>Node</em>}' reference.
+   * The cached value of the '{@link #getCapability() <em>Capability</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCapability()
+   * @generated
+   * @ordered
+   */
+  protected String capability = CAPABILITY_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getNode() <em>Node</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getNode()
    * @generated
    * @ordered
    */
-  protected ENodeType node;
+  protected static final String NODE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getRelationship() <em>Relationship</em>}' reference.
+   * The cached value of the '{@link #getNode() <em>Node</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNode()
+   * @generated
+   * @ordered
+   */
+  protected String node = NODE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getRelationship() <em>Relationship</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getRelationship()
    * @generated
    * @ordered
    */
-  protected ERelationshipType relationship;
+  protected static final String RELATIONSHIP_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getRelationship() <em>Relationship</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRelationship()
+   * @generated
+   * @ordered
+   */
+  protected String relationship = RELATIONSHIP_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getStart() <em>Start</em>}' containment reference.
@@ -115,27 +142,7 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public ECapabilityType getCapability()
-  {
-    if (capability != null && capability.eIsProxy())
-    {
-      InternalEObject oldCapability = (InternalEObject)capability;
-      capability = (ECapabilityType)eResolveProxy(oldCapability);
-      if (capability != oldCapability)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY, oldCapability, capability));
-      }
-    }
-    return capability;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ECapabilityType basicGetCapability()
+  public String getCapability()
   {
     return capability;
   }
@@ -146,9 +153,9 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public void setCapability(ECapabilityType newCapability)
+  public void setCapability(String newCapability)
   {
-    ECapabilityType oldCapability = capability;
+    String oldCapability = capability;
     capability = newCapability;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY, oldCapability, capability));
@@ -160,27 +167,7 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public ENodeType getNode()
-  {
-    if (node != null && node.eIsProxy())
-    {
-      InternalEObject oldNode = (InternalEObject)node;
-      node = (ENodeType)eResolveProxy(oldNode);
-      if (node != oldNode)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE, oldNode, node));
-      }
-    }
-    return node;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ENodeType basicGetNode()
+  public String getNode()
   {
     return node;
   }
@@ -191,9 +178,9 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public void setNode(ENodeType newNode)
+  public void setNode(String newNode)
   {
-    ENodeType oldNode = node;
+    String oldNode = node;
     node = newNode;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE, oldNode, node));
@@ -205,27 +192,7 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public ERelationshipType getRelationship()
-  {
-    if (relationship != null && relationship.eIsProxy())
-    {
-      InternalEObject oldRelationship = (InternalEObject)relationship;
-      relationship = (ERelationshipType)eResolveProxy(oldRelationship);
-      if (relationship != oldRelationship)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP, oldRelationship, relationship));
-      }
-    }
-    return relationship;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ERelationshipType basicGetRelationship()
+  public String getRelationship()
   {
     return relationship;
   }
@@ -236,9 +203,9 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public void setRelationship(ERelationshipType newRelationship)
+  public void setRelationship(String newRelationship)
   {
-    ERelationshipType oldRelationship = relationship;
+    String oldRelationship = relationship;
     relationship = newRelationship;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP, oldRelationship, relationship));
@@ -373,14 +340,11 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
     switch (featureID)
     {
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY:
-        if (resolve) return getCapability();
-        return basicGetCapability();
+        return getCapability();
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE:
-        if (resolve) return getNode();
-        return basicGetNode();
+        return getNode();
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP:
-        if (resolve) return getRelationship();
-        return basicGetRelationship();
+        return getRelationship();
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
         return getStart();
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__END:
@@ -400,13 +364,13 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
     switch (featureID)
     {
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY:
-        setCapability((ECapabilityType)newValue);
+        setCapability((String)newValue);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE:
-        setNode((ENodeType)newValue);
+        setNode((String)newValue);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP:
-        setRelationship((ERelationshipType)newValue);
+        setRelationship((String)newValue);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
         setStart((EAlphaNumericValue)newValue);
@@ -429,13 +393,13 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
     switch (featureID)
     {
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY:
-        setCapability((ECapabilityType)null);
+        setCapability(CAPABILITY_EDEFAULT);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE:
-        setNode((ENodeType)null);
+        setNode(NODE_EDEFAULT);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP:
-        setRelationship((ERelationshipType)null);
+        setRelationship(RELATIONSHIP_EDEFAULT);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
         setStart((EAlphaNumericValue)null);
@@ -458,17 +422,38 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
     switch (featureID)
     {
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY:
-        return capability != null;
+        return CAPABILITY_EDEFAULT == null ? capability != null : !CAPABILITY_EDEFAULT.equals(capability);
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE:
-        return node != null;
+        return NODE_EDEFAULT == null ? node != null : !NODE_EDEFAULT.equals(node);
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP:
-        return relationship != null;
+        return RELATIONSHIP_EDEFAULT == null ? relationship != null : !RELATIONSHIP_EDEFAULT.equals(relationship);
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
         return start != null;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__END:
         return end != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (capability: ");
+    result.append(capability);
+    result.append(", node: ");
+    result.append(node);
+    result.append(", relationship: ");
+    result.append(relationship);
+    result.append(')');
+    return result.toString();
   }
 
 } //ERequirementDefinitionBodyImpl

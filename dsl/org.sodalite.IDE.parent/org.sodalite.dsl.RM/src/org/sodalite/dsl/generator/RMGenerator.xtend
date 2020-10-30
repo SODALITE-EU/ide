@@ -256,7 +256,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "capability" ;
-	  exchange:value '«r.requirement.capability.name»' ;
+	  exchange:value '«r.requirement.capability»' ;
 	.
 	«ENDIF»
 	
@@ -265,7 +265,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "node" ;
-	  exchange:value '«r.requirement.node.name»' ;
+	  exchange:value '«r.requirement.node»' ;
 	.
 	«ENDIF»
 	
@@ -274,7 +274,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "relationship" ;	  
-	  exchange:value '«r.requirement.relationship.name»' ;
+	  exchange:value '«r.requirement.relationship»' ;
 	.
 	«ENDIF»
 	
@@ -300,7 +300,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«c.capability.type.name»' ;
+	  exchange:value '«c.capability.type»' ;
 	.
 	«ENDIF»
 	
@@ -311,7 +311,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "valid_source_types" ;
 	  «FOR entry:(c.capability.valid_source_types as EObjectContainmentEList<EValidSourceType>)»
 	  «FOR s:(entry.sourceTypes)»
-	  exchange:listValue "«s.name.name»" ;
+	  exchange:listValue "«s.name»" ;
 	  «ENDFOR»
 	  «ENDFOR»
 	.
@@ -339,7 +339,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«i.interface.type.name»' ;
+	  exchange:value '«i.interface.type»' ;
 	.
 	«ENDIF»
 	
@@ -509,7 +509,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "«p.name»" ;
 	  «IF p.parameter.type !== null»
-	  exchange:value '«p.parameter.type.name»' ;
+	  exchange:value '«p.parameter.type»' ;
 	  «ENDIF»
 	  «IF p.parameter.value !== null»
 	  «IF p.parameter.value instanceof EFunction»
@@ -737,7 +737,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«p.property.type.name»' ;
+	  exchange:value '«p.property.type»' ;
 	.
 	«ENDIF»
 	
@@ -777,7 +777,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«p.property.entry_schema.name»' ;
+	  exchange:value '«p.property.entry_schema»' ;
 	.
 	
 	«putParameterNumber(p, "entry_schema", parameter_counter)»
@@ -832,7 +832,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«a.attribute.type.name»' ;
+	  exchange:value '«a.attribute.type»' ;
 	.
 	«ENDIF»
 	
@@ -865,7 +865,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entry_schema" ;
-	  exchange:value '«a.attribute.entry_schema.name»' ;
+	  exchange:value '«a.attribute.entry_schema»' ;
 	.
 	«ENDIF»
 	

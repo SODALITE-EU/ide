@@ -24,25 +24,25 @@ import org.eclipse.emf.ecore.EObject;
 public interface ENodeTypeRef extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' reference.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' reference.
-   * @see #setName(ENodeType)
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
    * @see org.sodalite.dsl.rM.RMPackage#getENodeTypeRef_Name()
    * @model
    * @generated
    */
-  ENodeType getName();
+  String getName();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeTypeRef#getName <em>Name</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ENodeTypeRef#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' reference.
+   * @param value the new value of the '<em>Name</em>' attribute.
    * @see #getName()
    * @generated
    */
-  void setName(ENodeType value);
+  void setName(String value);
 
 } // ENodeTypeRef

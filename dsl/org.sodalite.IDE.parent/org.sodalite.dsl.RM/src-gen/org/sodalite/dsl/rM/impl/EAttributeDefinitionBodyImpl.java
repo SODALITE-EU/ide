@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EAttributeDefinitionBody;
-import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -37,14 +36,24 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container implements EAttributeDefinitionBody
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected EDataType type;
+  protected static final String TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected String type = TYPE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -97,14 +106,24 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
   protected String status = STATUS_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getEntry_schema() <em>Entry schema</em>}' reference.
+   * The default value of the '{@link #getEntry_schema() <em>Entry schema</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getEntry_schema()
    * @generated
    * @ordered
    */
-  protected EDataType entry_schema;
+  protected static final String ENTRY_SCHEMA_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getEntry_schema() <em>Entry schema</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEntry_schema()
+   * @generated
+   * @ordered
+   */
+  protected String entry_schema = ENTRY_SCHEMA_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -133,27 +152,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public EDataType getType()
-  {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (EDataType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EATTRIBUTE_DEFINITION_BODY__TYPE, oldType, type));
-      }
-    }
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EDataType basicGetType()
+  public String getType()
   {
     return type;
   }
@@ -164,9 +163,9 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public void setType(EDataType newType)
+  public void setType(String newType)
   {
-    EDataType oldType = type;
+    String oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EATTRIBUTE_DEFINITION_BODY__TYPE, oldType, type));
@@ -278,27 +277,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public EDataType getEntry_schema()
-  {
-    if (entry_schema != null && entry_schema.eIsProxy())
-    {
-      InternalEObject oldEntry_schema = (InternalEObject)entry_schema;
-      entry_schema = (EDataType)eResolveProxy(oldEntry_schema);
-      if (entry_schema != oldEntry_schema)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EATTRIBUTE_DEFINITION_BODY__ENTRY_SCHEMA, oldEntry_schema, entry_schema));
-      }
-    }
-    return entry_schema;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EDataType basicGetEntry_schema()
+  public String getEntry_schema()
   {
     return entry_schema;
   }
@@ -309,9 +288,9 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public void setEntry_schema(EDataType newEntry_schema)
+  public void setEntry_schema(String newEntry_schema)
   {
-    EDataType oldEntry_schema = entry_schema;
+    String oldEntry_schema = entry_schema;
     entry_schema = newEntry_schema;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EATTRIBUTE_DEFINITION_BODY__ENTRY_SCHEMA, oldEntry_schema, entry_schema));
@@ -344,8 +323,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+        return getType();
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__DESCRIPTION:
         return getDescription();
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__DEFAULT:
@@ -353,8 +331,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__STATUS:
         return getStatus();
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__ENTRY_SCHEMA:
-        if (resolve) return getEntry_schema();
-        return basicGetEntry_schema();
+        return getEntry_schema();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -370,7 +347,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__TYPE:
-        setType((EDataType)newValue);
+        setType((String)newValue);
         return;
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -382,7 +359,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
         setStatus((String)newValue);
         return;
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__ENTRY_SCHEMA:
-        setEntry_schema((EDataType)newValue);
+        setEntry_schema((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -399,7 +376,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__TYPE:
-        setType((EDataType)null);
+        setType(TYPE_EDEFAULT);
         return;
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -411,7 +388,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
         setStatus(STATUS_EDEFAULT);
         return;
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__ENTRY_SCHEMA:
-        setEntry_schema((EDataType)null);
+        setEntry_schema(ENTRY_SCHEMA_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -428,7 +405,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__TYPE:
-        return type != null;
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__DEFAULT:
@@ -436,7 +413,7 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__STATUS:
         return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
       case RMPackage.EATTRIBUTE_DEFINITION_BODY__ENTRY_SCHEMA:
-        return entry_schema != null;
+        return ENTRY_SCHEMA_EDEFAULT == null ? entry_schema != null : !ENTRY_SCHEMA_EDEFAULT.equals(entry_schema);
     }
     return super.eIsSet(featureID);
   }
@@ -452,10 +429,14 @@ public class EAttributeDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (description: ");
+    result.append(" (type: ");
+    result.append(type);
+    result.append(", description: ");
     result.append(description);
     result.append(", status: ");
     result.append(status);
+    result.append(", entry_schema: ");
+    result.append(entry_schema);
     result.append(')');
     return result.toString();
   }

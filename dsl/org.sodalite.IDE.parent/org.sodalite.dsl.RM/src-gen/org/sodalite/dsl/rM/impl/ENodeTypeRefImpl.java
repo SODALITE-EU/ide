@@ -6,12 +6,10 @@ package org.sodalite.dsl.rM.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.ENodeTypeRef;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -31,14 +29,24 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ENodeTypeRefImpl extends MinimalEObjectImpl.Container implements ENodeTypeRef
 {
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' reference.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getName()
    * @generated
    * @ordered
    */
-  protected ENodeType name;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,27 +75,7 @@ public class ENodeTypeRefImpl extends MinimalEObjectImpl.Container implements EN
    * @generated
    */
   @Override
-  public ENodeType getName()
-  {
-    if (name != null && name.eIsProxy())
-    {
-      InternalEObject oldName = (InternalEObject)name;
-      name = (ENodeType)eResolveProxy(oldName);
-      if (name != oldName)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.ENODE_TYPE_REF__NAME, oldName, name));
-      }
-    }
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ENodeType basicGetName()
+  public String getName()
   {
     return name;
   }
@@ -98,9 +86,9 @@ public class ENodeTypeRefImpl extends MinimalEObjectImpl.Container implements EN
    * @generated
    */
   @Override
-  public void setName(ENodeType newName)
+  public void setName(String newName)
   {
-    ENodeType oldName = name;
+    String oldName = name;
     name = newName;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE_REF__NAME, oldName, name));
@@ -117,8 +105,7 @@ public class ENodeTypeRefImpl extends MinimalEObjectImpl.Container implements EN
     switch (featureID)
     {
       case RMPackage.ENODE_TYPE_REF__NAME:
-        if (resolve) return getName();
-        return basicGetName();
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -134,7 +121,7 @@ public class ENodeTypeRefImpl extends MinimalEObjectImpl.Container implements EN
     switch (featureID)
     {
       case RMPackage.ENODE_TYPE_REF__NAME:
-        setName((ENodeType)newValue);
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +138,7 @@ public class ENodeTypeRefImpl extends MinimalEObjectImpl.Container implements EN
     switch (featureID)
     {
       case RMPackage.ENODE_TYPE_REF__NAME:
-        setName((ENodeType)null);
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -168,9 +155,26 @@ public class ENodeTypeRefImpl extends MinimalEObjectImpl.Container implements EN
     switch (featureID)
     {
       case RMPackage.ENODE_TYPE_REF__NAME:
-        return name != null;
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //ENodeTypeRefImpl

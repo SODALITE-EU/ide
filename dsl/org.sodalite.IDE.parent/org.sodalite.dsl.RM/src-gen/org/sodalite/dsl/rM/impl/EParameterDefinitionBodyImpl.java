@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.RMPackage;
@@ -35,14 +34,24 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container implements EParameterDefinitionBody
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected EDataType type;
+  protected static final String TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected String type = TYPE_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -91,27 +100,7 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public EDataType getType()
-  {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (EDataType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, oldType, type));
-      }
-    }
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EDataType basicGetType()
+  public String getType()
   {
     return type;
   }
@@ -122,9 +111,9 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public void setType(EDataType newType)
+  public void setType(String newType)
   {
-    EDataType oldType = type;
+    String oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, oldType, type));
@@ -259,8 +248,7 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+        return getType();
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         return getValue();
       case RMPackage.EPARAMETER_DEFINITION_BODY__DEFAULT:
@@ -280,7 +268,7 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
-        setType((EDataType)newValue);
+        setType((String)newValue);
         return;
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         setValue((EValueExpression)newValue);
@@ -303,7 +291,7 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
-        setType((EDataType)null);
+        setType(TYPE_EDEFAULT);
         return;
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         setValue((EValueExpression)null);
@@ -326,13 +314,30 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
-        return type != null;
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         return value != null;
       case RMPackage.EPARAMETER_DEFINITION_BODY__DEFAULT:
         return default_ != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (type: ");
+    result.append(type);
+    result.append(')');
+    return result.toString();
   }
 
 } //EParameterDefinitionBodyImpl

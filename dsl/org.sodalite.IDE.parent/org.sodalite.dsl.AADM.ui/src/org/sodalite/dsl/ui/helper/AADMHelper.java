@@ -36,7 +36,6 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.rM.EParameterDefinition;
-import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.ui.backend.BackendLogger;
 
 import com.google.inject.Injector;
@@ -47,14 +46,15 @@ public class AADMHelper {
 		IFile aadmFile = getSelectedFile();
 		AADM_Model aadmModel = readAADMModel(aadmFile, event);
 		AADMHelper helper = new AADMHelper();
-		for (EParameterDefinition parameter: aadmModel.getInputs().getInputs()) {
-			InputDef inDef = helper.new InputDef(parameter.getName(), parameter.getParameter().getType().getName(), parameter.getParameter().getDefault());
+		for (EParameterDefinition parameter : aadmModel.getInputs().getInputs()) {
+			InputDef inDef = helper.new InputDef(parameter.getName(), parameter.getParameter().getType(),
+					parameter.getParameter().getDefault());
 			inputs.put(parameter.getName(), inDef);
 		}
-		
+
 		return inputs;
 	}
-	
+
 	public static IFile getSelectedFile() {
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window != null) {
@@ -72,34 +72,32 @@ public class AADMHelper {
 //		URL fileURL = bundle.getEntry("resources/inputs.yaml");
 //		File file = new File(FileLocator.resolve(fileURL).toURI());
 		String selectedInputFile = selectFile("Select the inputs file for app deployment");
-		File file = new File (selectedInputFile);
+		File file = new File(selectedInputFile);
 		return file.toPath();
 	}
-	
-	public static String selectFile (String dialogText){
+
+	public static String selectFile(String dialogText) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		// File standard dialog
 		FileDialog fileDialog = new FileDialog(shell);
 		fileDialog.setText(dialogText);
-		//fileDialog.setFilterExtensions(new String[] { "*.txt" });
+		// fileDialog.setFilterExtensions(new String[] { "*.txt" });
 		// Put in a readable name for the filter
-		//fileDialog.setFilterNames(new String[] { "Textfiles(*.txt)" });
+		// fileDialog.setFilterNames(new String[] { "Textfiles(*.txt)" });
 		String selected = fileDialog.open();
 		return selected;
 	}
-	
+
 	public static AADM_Model readAADMModel(IFile aadmFile, ExecutionEvent event) throws PartInitException {
 		openFileInEditor(aadmFile);
 		AADM_Model model = null;
-		Injector injector = AADMActivator.getInstance().getInjector(
-				AADMActivator.ORG_SODALITE_DSL_AADM);
-		XtextResourceSet resourceSet = (XtextResourceSet) injector
-		        .getInstance(XtextResourceSetProvider.class)
-		        .get(aadmFile.getProject());
+		Injector injector = AADMActivator.getInstance().getInjector(AADMActivator.ORG_SODALITE_DSL_AADM);
+		XtextResourceSet resourceSet = (XtextResourceSet) injector.getInstance(XtextResourceSetProvider.class)
+				.get(aadmFile.getProject());
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
-		//FIXME Check this behaviour of reading the XTextEditor
+		// FIXME Check this behaviour of reading the XTextEditor
 		while (xtextEditor == null) {
 			xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		}
@@ -109,21 +107,20 @@ public class AADMHelper {
 			// FIXME Investigate why the model is not always read, returning null
 			int attempt = 0;
 			while (model == null) {
-				model = (AADM_Model) xtextDocument.readOnly(
-						new IUnitOfWork(){
-						       public AADM_Model exec(Object resource) {
-						    	   AADM_Model model = (AADM_Model) ((XtextResource)resource).getContents().get(0);
-						             return model;
-						       }
-						 });
+				model = (AADM_Model) xtextDocument.readOnly(new IUnitOfWork() {
+					public AADM_Model exec(Object resource) {
+						AADM_Model model = (AADM_Model) ((XtextResource) resource).getContents().get(0);
+						return model;
+					}
+				});
 			}
 		}
-		//TODO Fix that the optimization models are resolvable
+		// TODO Fix that the optimization models are resolvable
 		if (model != null)
 			EcoreUtil2.resolveAll(model.eResource());
 		return model;
 	}
-	
+
 	public static void openFileInEditor(IFile file) throws PartInitException {
 		Display.getDefault().syncExec(new Runnable() {
 			@Override
@@ -138,7 +135,7 @@ public class AADMHelper {
 			}
 		});
 	}
-	
+
 	public static String readFile(IFile file) throws IOException {
 		String path = file.getLocationURI().toString();
 		path = path.substring(path.indexOf(File.separator));
@@ -146,24 +143,24 @@ public class AADMHelper {
 		String content = new String(Files.readAllBytes(file_path));
 		return content;
 	}
-	
+
 	public static String getAADMModule(IFile rmFile, ExecutionEvent event) throws PartInitException {
-		AADM_Model model = readAADMModel (rmFile, event);
+		AADM_Model model = readAADMModel(rmFile, event);
 		return model.getModule();
 	}
-	
+
 	public static void pasteInClipboard(String value) {
 		StringSelection stringSelection = new StringSelection(value);
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(stringSelection, null);
 	}
-	
-	public class InputDef{
+
+	public class InputDef {
 		String name;
 		String type;
 		Object defaultValue;
-		
-		public InputDef (String name, String type, Object defaultValue) {
+
+		public InputDef(String name, String type, Object defaultValue) {
 			this.name = name;
 			this.type = type;
 			this.defaultValue = defaultValue;
@@ -180,8 +177,6 @@ public class AADMHelper {
 		public Object getDefaultValue() {
 			return defaultValue;
 		}
-		
+
 	}
 }
-
-
