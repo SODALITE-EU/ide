@@ -154,17 +154,29 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for NodeTemplate::type property")
 		
-		val ReasonerData<Node> nodes = getKBReasoner().getNodes()
+		//FIXME Get modules from model
+		val List<String> modules = getModules(model)
+		
+		val ReasonerData<Node> nodes = getKBReasoner().getNodes(modules)
 		System.out.println ("Nodes retrieved from KB:")
 		for (node: nodes.elements){
 			System.out.println ("\tNode: " + node.label)
-			val proposalText = node.label
+			val proposalText = node.label //FIXME: Prefix with module
 			val displayText = node.label
 			val additionalProposalInfo = node.description
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
 
 		super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
+	}
+		
+	def getModules(EObject object) {
+		val List<String> modules = new ArrayList()
+		val AADM_Model model = findModel(object) as AADM_Model
+		for (import: model.imports)
+			modules.add(import)
+		
+		return modules
 	}
 	
 	override void completeAADM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

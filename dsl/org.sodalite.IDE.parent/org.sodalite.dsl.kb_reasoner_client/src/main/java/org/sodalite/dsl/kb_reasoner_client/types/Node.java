@@ -13,28 +13,41 @@ package org.sodalite.dsl.kb_reasoner_client.types;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Node extends KBEntity{
+public class Node extends KBEntity {
 	String label;
 	String description;
-	Type type; 
-	
+	Type type;
+	String module;
+
 	public String getLabel() {
 		return label;
 	}
+
 	public void setLabel(String label) {
 		this.label = label;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Type getType() {
 		return type;
 	}
-	
-	//@JsonDeserialize(using = TypeJsonDeserializer.class)
+
+	public String getModule() {
+		return module;
+	}
+
+	public void setModule(String module) {
+		this.module = module;
+	}
+
+	// @JsonDeserialize(using = TypeJsonDeserializer.class)
 	public void setType(Type type) {
 		this.type = type;
 	}

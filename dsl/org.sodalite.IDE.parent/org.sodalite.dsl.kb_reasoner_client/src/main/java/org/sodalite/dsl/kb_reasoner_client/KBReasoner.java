@@ -11,6 +11,7 @@
 package org.sodalite.dsl.kb_reasoner_client;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
@@ -27,7 +28,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 
 public interface KBReasoner {
-	NodeData getNodes() throws Exception;
+	NodeData getNodes(List<String> modules) throws Exception;
 
 	ModuleData getModules() throws Exception;
 

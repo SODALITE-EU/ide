@@ -171,7 +171,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   public void completeENodeTemplateBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
-      final ReasonerData<Node> nodes = this.getKBReasoner().getNodes();
+      final List<String> modules = this.getModules(model);
+      final ReasonerData<Node> nodes = this.getKBReasoner().getNodes(modules);
       System.out.println("Nodes retrieved from KB:");
       List<Node> _elements = nodes.getElements();
       for (final Node node : _elements) {
@@ -189,6 +190,17 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public List<String> getModules(final EObject object) {
+    final List<String> modules = new ArrayList<String>();
+    Object _findModel = this.findModel(object);
+    final AADM_Model model = ((AADM_Model) _findModel);
+    EList<String> _imports = model.getImports();
+    for (final String import_ : _imports) {
+      modules.add(import_);
+    }
+    return modules;
   }
   
   @Override

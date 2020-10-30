@@ -2,6 +2,7 @@ package org.sodalite.dsl.AADM.design;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -44,128 +45,125 @@ public class KBReasonerProxy {
 						kbReasonerURI, iacURI, xoperaURI));
 		return kbclient;
 	}
-    
-    public List<String> getTypes(ENodeTemplate node){
-    	List<String> types = new ArrayList<>();
+
+	public List<String> getTypes(ENodeTemplate node) {
+		List<String> types = new ArrayList<>();
 		try {
-			ReasonerData<Node> nodes = getKBReasoner().getNodes();
-			for (Node n: nodes.getElements()){
+			// FIXME Support searching based on modules (namespaces)
+			List<String> modules = Arrays.asList();
+			ReasonerData<Node> nodes = getKBReasoner().getNodes(modules);
+			for (Node n : nodes.getElements()) {
 				types.add(n.getLabel());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-    	return types;
-    }
-    
-    public List<String> getAttributes(EAttributeAssignment attr){
-    	List<String> result = new ArrayList<>();
+
+		return types;
+	}
+
+	public List<String> getAttributes(EAttributeAssignment attr) {
+		List<String> result = new ArrayList<>();
 		try {
 			String type = AADM_Helper.findContainerType(attr, getKBReasoner());
 			if (type == null)
 				return result;
 			ReasonerData<Attribute> attributes = getKBReasoner().getAttributes(type);
-			for (Attribute a: attributes.getElements()){
-				String label = a.getUri().toString().substring(
-						a.getUri().toString().lastIndexOf('/') + 1, 
+			for (Attribute a : attributes.getElements()) {
+				String label = a.getUri().toString().substring(a.getUri().toString().lastIndexOf('/') + 1,
 						a.getUri().toString().length());
 				result.add(label);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-    	return result;
-    }
-    
-    public List<String> getProperties(EPropertyAssignment prop){
-    	List<String> result = new ArrayList<>();
+
+		return result;
+	}
+
+	public List<String> getProperties(EPropertyAssignment prop) {
+		List<String> result = new ArrayList<>();
 		try {
 			String type = AADM_Helper.findContainerType(prop, getKBReasoner());
 			if (type == null)
 				return result;
 			ReasonerData<Property> properties = getKBReasoner().getProperties(type);
-			for (Property p: properties.getElements()){
-				String label = p.getUri().toString().substring(
-						p.getUri().toString().lastIndexOf('/') + 1, 
+			for (Property p : properties.getElements()) {
+				String label = p.getUri().toString().substring(p.getUri().toString().lastIndexOf('/') + 1,
 						p.getUri().toString().length());
 				result.add(label);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-    	return result;
-    }
 
-	public List<String> getCapabilities(ECapabilityAssignment cap){
-    	List<String> result = new ArrayList<>();
+		return result;
+	}
+
+	public List<String> getCapabilities(ECapabilityAssignment cap) {
+		List<String> result = new ArrayList<>();
 		try {
 			String type = AADM_Helper.findContainerType(cap, getKBReasoner());
 			if (type == null)
 				return result;
 			ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(type);
-			for (Capability c: capabilities.getElements()){
-				String label = c.getUri().toString().substring(
-						c.getUri().toString().lastIndexOf('/') + 1, 
+			for (Capability c : capabilities.getElements()) {
+				String label = c.getUri().toString().substring(c.getUri().toString().lastIndexOf('/') + 1,
 						c.getUri().toString().length());
 				result.add(label);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-    	return result;
-    }
-    
-    public List<String> getRequirements(ERequirementAssignment req){
-    	List<String> result = new ArrayList<>();
+
+		return result;
+	}
+
+	public List<String> getRequirements(ERequirementAssignment req) {
+		List<String> result = new ArrayList<>();
 		try {
 			String type = AADM_Helper.findContainerType(req, getKBReasoner());
 			if (type == null)
 				return result;
 			ReasonerData<Requirement> requirements = getKBReasoner().getRequirements(type);
-			for (Requirement r: requirements.getElements()){
-				String label = r.getUri().toString().substring(
-						r.getUri().toString().lastIndexOf('/') + 1, 
+			for (Requirement r : requirements.getElements()) {
+				String label = r.getUri().toString().substring(r.getUri().toString().lastIndexOf('/') + 1,
 						r.getUri().toString().length());
 				result.add(label);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-    	return result;
-    }
-    
-    
-    public SortedSet<String> getRequirementNodes(ERequirementAssignment req) throws Exception{
-    	SortedSet<String> result = new TreeSet<String>();
-    	SortedSet<String> types = new TreeSet<String>();
-    	String nodeType = ((ENodeTemplateBody)req.eContainer().eContainer()).getType();
-    	ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(req.getName(), nodeType);
-		if (vrnd != null){
-			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + req.getName());
-			for (ValidRequirementNode vrn: vrnd.getElements()){
+
+		return result;
+	}
+
+	public SortedSet<String> getRequirementNodes(ERequirementAssignment req) throws Exception {
+		SortedSet<String> result = new TreeSet<String>();
+		SortedSet<String> types = new TreeSet<String>();
+		String nodeType = ((ENodeTemplateBody) req.eContainer().eContainer()).getType();
+		ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(req.getName(), nodeType);
+		if (vrnd != null) {
+			System.out.println("Valid requirement nodes retrieved from KB for requirement: " + req.getName());
+			for (ValidRequirementNode vrn : vrnd.getElements()) {
 				types.add(vrn.getType().getLabel());
-				System.out.println ("Valid requirement node: " + vrn.getLabel());
-				result.add (vrn.getLabel());
+				System.out.println("Valid requirement node: " + vrn.getLabel());
+				result.add(vrn.getLabel());
 			}
 		}
-		
-		//Find local nodes that belongs to suggested types
+
+		// Find local nodes that belongs to suggested types
 		List<ENodeTemplate> localnodes = AADM_Helper.findLocalNodesForTypes(types, req);
-		for (ENodeTemplate node: localnodes){
-			System.out.println ("Valid requirement local node: " + node.getName());
+		for (ENodeTemplate node : localnodes) {
+			System.out.println("Valid requirement local node: " + node.getName());
 			result.add(node.getName());
 		}
 		return result;
-    }
-    
-    public List<String> getDataTypes(EParameterDefinition par){
-    	//TODO implement it
-    	throw new UnsupportedOperationException();
-    }
-    
+	}
+
+	public List<String> getDataTypes(EParameterDefinition par) {
+		// TODO implement it
+		throw new UnsupportedOperationException();
+	}
+
 }

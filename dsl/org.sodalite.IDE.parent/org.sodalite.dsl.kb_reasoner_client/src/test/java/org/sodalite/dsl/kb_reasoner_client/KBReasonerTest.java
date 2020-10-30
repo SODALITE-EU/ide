@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,7 +59,8 @@ class KBReasonerTest {
 
 	@Test
 	void testGetNodes() throws Exception {
-		ReasonerData<Node> nodes = kbclient.getNodes();
+		List<String> modules = Arrays.asList("snow", "docker");
+		ReasonerData<Node> nodes = kbclient.getNodes(modules);
 		assertFalse(nodes.getElements().isEmpty());
 		nodes.getElements().stream().forEach(node -> System.out.println("Node: " + node));
 	}

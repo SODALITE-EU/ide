@@ -112,8 +112,11 @@ public class KBReasonerClient implements KBReasoner {
 		return restTemplate;
 	}
 
-	public NodeData getNodes() throws Exception {
+	public NodeData getNodes(List<String> modules) throws Exception {
+		Assert.notNull(modules, "Pass a not null modules");
 		String url = kbReasonerUri + "nodes";
+		for (String module : modules)
+			url += ";imports=" + module;
 		return getJSONObjectForType(NodeData.class, new URI(url), HttpStatus.OK);
 	}
 
