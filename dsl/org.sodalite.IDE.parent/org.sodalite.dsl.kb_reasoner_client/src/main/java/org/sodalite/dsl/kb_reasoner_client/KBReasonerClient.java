@@ -163,8 +163,8 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String namespace, String aadmDSL, boolean complete)
-			throws Exception {
+	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String name, String namespace, String aadmDSL,
+			boolean complete) throws Exception {
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		Assert.isTrue(!aadmDSL.isEmpty(), "AADM DSL content can neither be null nor empty");
 		String url = kbReasonerUri + "saveAADM";
@@ -174,6 +174,7 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("aadmTTL", aadmTTL);
 		map.add("aadmURI", aadmURI);
 		map.add("complete", complete);
+		map.add("name", name);
 		map.add("namespace", namespace);
 		map.add("aadmDSL", aadmDSL);
 
@@ -210,7 +211,8 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public KBSaveReportData saveRM(String rmTTL, String rmURI, String namespace, String rmDSL) throws Exception {
+	public KBSaveReportData saveRM(String rmTTL, String rmURI, String name, String namespace, String rmDSL)
+			throws Exception {
 		Assert.isTrue(!rmTTL.isEmpty(), "Turtle content for RM can neither be null nor empty");
 		String url = kbReasonerUri + "saveRM";
 
@@ -219,6 +221,7 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("rmTTL", rmTTL);
 		map.add("rmURI", rmURI);
 		map.add("namespace", namespace);
+		map.add("name", name);
 		map.add("rmDSL", rmDSL);
 
 		KBSaveReportData report = new KBSaveReportData();

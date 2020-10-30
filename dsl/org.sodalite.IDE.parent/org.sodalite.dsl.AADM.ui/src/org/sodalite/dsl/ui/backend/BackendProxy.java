@@ -1,6 +1,5 @@
 package org.sodalite.dsl.ui.backend;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -113,7 +112,7 @@ public class BackendProxy {
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	
+
 	private KBReasonerClient getKBReasoner() {
 		// Configure KBReasonerClient endpoint from preference page information
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
@@ -127,12 +126,11 @@ public class BackendProxy {
 						kbReasonerURI, iacURI, xoperaURI));
 		return kbclient;
 	}
-	
-	private void generateAADMModel (IFile aadmFile, IProgressMonitor monitor) {
+
+	private void generateAADMModel(IFile aadmFile, IProgressMonitor monitor) {
 		try {
 			URI aadmURI = URI.createURI(aadmFile.getFullPath().toPortableString());
-			Injector injector = AADMActivator.getInstance().getInjector(
-					AADMActivator.ORG_SODALITE_DSL_AADM);
+			Injector injector = AADMActivator.getInstance().getInjector(AADMActivator.ORG_SODALITE_DSL_AADM);
 			ResourceSet resourceSet = injector.getInstance(ResourceSet.class);
 			Resource r = resourceSet.getResource(aadmURI, true);
 			r.load(null);
@@ -161,12 +159,12 @@ public class BackendProxy {
 		IFile aadmFile = AADMHelper.getSelectedFile();
 		if (aadmFile == null)
 			throw new Exception("Selected AADM could not be found");
-		
+
 		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFile, project);
 		String aadmURI = getAadmURI(aadmFile, project);
-		
+
 		// Send model to the KB
 		saveAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
@@ -176,7 +174,7 @@ public class BackendProxy {
 		IFile aadmFile = AADMHelper.getSelectedFile();
 		if (aadmFile == null)
 			throw new Exception("Selected AADM could not be found");
-		
+
 		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFile, project);
@@ -185,7 +183,7 @@ public class BackendProxy {
 		String aadmURI = getAadmURI(aadmFile, project);
 		optimizeAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
-	
+
 	public void processDeployAADM(ExecutionEvent event, Path inputs_yaml_path) throws Exception {
 		// Return selected resource
 		IFile aadmFile = AADMHelper.getSelectedFile();
@@ -201,15 +199,16 @@ public class BackendProxy {
 	}
 
 	private String readTurtle(IFile modelFile, IProject project) throws IOException {
-		String filename = modelFile.getFullPath().toOSString().substring(
-				modelFile.getFullPath().toOSString().indexOf(File.separator, 1) + 1).replaceFirst(File.separator, ".");
+		String filename = modelFile.getFullPath().toOSString()
+				.substring(modelFile.getFullPath().toOSString().indexOf(File.separator, 1) + 1)
+				.replaceFirst(File.separator, ".");
 		IFile turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
 		String turtle_path = turtle.getLocationURI().toString();
 		turtle_path = turtle_path.substring(turtle_path.indexOf(File.separator));
 		Path aadm_path = FileSystems.getDefault().getPath(turtle_path);
 		String aadmTTL = new String(Files.readAllBytes(aadm_path));
 		return aadmTTL;
-	}	
+	}
 
 	private String getAadmURI(IFile aadmFile, IProject project) throws IOException {
 		Path path = getAadmPropertiesFile(aadmFile, project);
@@ -264,18 +263,21 @@ public class BackendProxy {
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
-				//Generate Model
+				// Generate Model
 				generateAADMModel(aadmFile, monitor);
-				
-				//Read RM DSL as plain text
+
+				// Read RM DSL as plain text
 				String aadmDSL = AADMHelper.readFile(aadmFile);
-				
-				//Get module (namespace) from RM
+
+				// Get module (namespace) from RM
 				String namespace = AADMHelper.getAADMModule(aadmFile, event);
-				
-				//TODO Ask user on save model whether to complete the model by KB
+
+				// TODO Ask user on save model whether to complete the model by KB
 				boolean complete = false;
-				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, namespace, aadmDSL, complete);
+				String name = aadmFile.getName();
+
+				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL,
+						complete);
 				processValidationIssues(aadmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception(
@@ -312,9 +314,9 @@ public class BackendProxy {
 	private void optimizeAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Get AADM optimization recommendations", (ICoreRunnable) monitor -> {
 			try {
-				//Generate Model
+				// Generate Model
 				generateAADMModel(aadmFile, monitor);
-				
+
 				KBOptimizationReportData optimizationReport = getKBReasoner().optimizeAADM(aadmTTL, aadmURI);
 				processOptimizationIssues(aadmFile, optimizationReport, event);
 				if (optimizationReport.getURI() == null && optimizationReport.getErrors() == null) {
@@ -339,14 +341,17 @@ public class BackendProxy {
 										+ e.getMessage());
 					}
 				});
-				BackendLogger.log("There were problems during the processing of AADM optimization recommendations from the KB", e);
+				BackendLogger.log(
+						"There were problems during the processing of AADM optimization recommendations from the KB",
+						e);
 			}
 		});
 		job.setPriority(Job.SHORT);
 		job.schedule();
 	}
 
-	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path, IProject project, ExecutionEvent event) {
+	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path, IProject project,
+			ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -356,24 +361,27 @@ public class BackendProxy {
 				String[] admin_report = new String[2];
 
 				try {
-					//Generate Model
+					// Generate Model
 					generateAADMModel(aadmfile, monitor);
-					
+
 					// Save the AADM model into the KB
 					subMonitor.setTaskName("Saving AADM");
-					
-					//Read RM DSL as plain text
+
+					// Read RM DSL as plain text
 					String aadmDSL = AADMHelper.readFile(aadmfile);
-					
-					//Get module (namespace) from RM
+
+					// Get module (namespace) from RM
 					String namespace = AADMHelper.getAADMModule(aadmfile, event);
-					
+
 					boolean complete = true;
-					
-					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, namespace, aadmDSL, complete);
+					String name = aadmfile.getName();
+
+					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL,
+							complete);
 					if (saveReport == null)
-						throw new Exception("There was a problem to save the AADM into the KB, please contact Sodalite administrator");
-					
+						throw new Exception(
+								"There was a problem to save the AADM into the KB, please contact Sodalite administrator");
+
 					processValidationIssues(aadmfile, saveReport, event);
 
 					if (saveReport != null && saveReport.hasErrors())
@@ -440,10 +448,10 @@ public class BackendProxy {
 						@Override
 						public void run() {
 							AADMHelper.pasteInClipboard(admin_report[0]);
-							String message = "There were problems to deploy the AADM into the infrastructure: " + e.getMessage()
-							+ "\nPlease contact Sodalite administrator and provide her/him this information: "
-							+ "blueprint token: " + admin_report[0] + ", session token: "
-							+ admin_report[1];
+							String message = "There were problems to deploy the AADM into the infrastructure: "
+									+ e.getMessage()
+									+ "\nPlease contact Sodalite administrator and provide her/him this information: "
+									+ "blueprint token: " + admin_report[0] + ", session token: " + admin_report[1];
 							MessageDialog.openError(parent, "Deploy AADM", message);
 							BackendLogger.log(message, e);
 						}
@@ -458,10 +466,11 @@ public class BackendProxy {
 		job.schedule();
 	}
 
-	private void processValidationIssues(IFile aadmFile, KBSaveReportData saveReport, ExecutionEvent event) throws Exception {
+	private void processValidationIssues(IFile aadmFile, KBSaveReportData saveReport, ExecutionEvent event)
+			throws Exception {
 		// Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
-			//Open AADM file if not opened to show the errors and warnings
+			// Open AADM file if not opened to show the errors and warnings
 			AADMHelper.openFileInEditor(aadmFile);
 			List<ValidationIssue> issues = readIssuesFromKB(saveReport);
 			manageIssues(event, issues);
@@ -471,40 +480,45 @@ public class BackendProxy {
 		}
 	}
 
-	private void processOptimizationIssues(IFile aadmFile, KBOptimizationReportData optimizationReport, ExecutionEvent event)
-			throws Exception {
+	private void processOptimizationIssues(IFile aadmFile, KBOptimizationReportData optimizationReport,
+			ExecutionEvent event) throws Exception {
 		// Check there are not warnings (they do not prevent storage in KB)
 		if (optimizationReport != null && (optimizationReport.hasErrors() || optimizationReport.hasWarnings())) {
-			//Open AADM file if not opened to show the errors and warnings
+			// Open AADM file if not opened to show the errors and warnings
 			AADMHelper.openFileInEditor(aadmFile);
-			
+
 			List<ValidationIssue> issues = readIssuesFromKB(optimizationReport);
 			manageIssues(event, issues);
 			if (optimizationReport.hasErrors()) {
-				throw new Exception("There are detected validation issues in the associated optimization models, please fix them");
+				throw new Exception(
+						"There are detected validation issues in the associated optimization models, please fix them");
 			}
 		}
-		
-		if (optimizationReport != null && (optimizationReport.hasOptimizationErrors() || optimizationReport.hasOptimizations())) {
+
+		if (optimizationReport != null
+				&& (optimizationReport.hasOptimizationErrors() || optimizationReport.hasOptimizations())) {
 			AADM_Model aadmModel = AADMHelper.readAADMModel(aadmFile, event);
-			// For each optimization model in the list of issues, open the model and process its issues
-			for (String node: getOptimizationNodes (optimizationReport)) {
+			// For each optimization model in the list of issues, open the model and process
+			// its issues
+			for (String node : getOptimizationNodes(optimizationReport)) {
 				String nodeName = node.substring(node.lastIndexOf('/') + 1);
 				openOptimizationModel(nodeName, aadmModel);
-				List<ValidationIssue> issues = readOptimizationIssuesFromKB(getIssuesForModel (optimizationReport, node));
+				List<ValidationIssue> issues = readOptimizationIssuesFromKB(
+						getIssuesForModel(optimizationReport, node));
 				manageOptimizationIssues(event, issues);
 			}
-			
-			if (optimizationReport.hasOptimizationErrors() ) {
-				throw new Exception("There are detected validation issues in the associated optimization models, please fix them");
+
+			if (optimizationReport.hasOptimizationErrors()) {
+				throw new Exception(
+						"There are detected validation issues in the associated optimization models, please fix them");
 			}
 		}
 	}
-	
+
 	private KBOptimizationReportData getIssuesForModel(KBOptimizationReportData optimizationReport, String node) {
 		KBOptimizationReportData result = new KBOptimizationReportData();
 		List<KBError> errors = new ArrayList<>();
-		for (KBError error:optimizationReport.getOptimizationErrors()) {
+		for (KBError error : optimizationReport.getOptimizationErrors()) {
 			if (error instanceof KBOptimizationError) {
 				if (getNodeFromContext(error.getContext()).equals(node)) {
 					errors.add(error);
@@ -513,7 +527,7 @@ public class BackendProxy {
 		}
 		result.setErrors(errors);
 		List<KBOptimization> optimizations = new ArrayList<>();
-		for (KBOptimization opt: optimizationReport.getOptimizations()) {
+		for (KBOptimization opt : optimizationReport.getOptimizations()) {
 			if (opt.getNodeTemplate().contains(node)) {
 				optimizations.add(opt);
 			}
@@ -529,15 +543,15 @@ public class BackendProxy {
 	private void openOptimizationModel(String node, AADM_Model aadmModel) throws Exception {
 		// Find the associated node in the model and read the bound optimization model.
 		ENodeTemplate nodeTemplate = null;
-		for (ENodeTemplate template: aadmModel.getNodeTemplates().getNodeTemplates()) {
+		for (ENodeTemplate template : aadmModel.getNodeTemplates().getNodeTemplates()) {
 			if (template.getName().equals(node)) {
 				nodeTemplate = template;
 				break;
 			}
 		}
-		if (nodeTemplate == null) 
-			throw new Exception ("Associated optimization model could not be opened for node: " + node);
-		
+		if (nodeTemplate == null)
+			throw new Exception("Associated optimization model could not be opened for node: " + node);
+
 		// Find the optimization model location
 		Optimization_Model optimizationModel = nodeTemplate.getNode().getOptimization();
 		// Open the optimization model
@@ -556,11 +570,11 @@ public class BackendProxy {
 
 	private Set<String> getOptimizationNodes(KBOptimizationReportData optimizationReport) {
 		Set<String> nodes = new HashSet<>();
-		for (KBError error: optimizationReport.getOptimizationErrors()) {
+		for (KBError error : optimizationReport.getOptimizationErrors()) {
 			KBOptimizationError optError = (KBOptimizationError) error;
 			nodes.add(optError.getContext().substring(optError.getContext().lastIndexOf('/') + 1));
 		}
-		for (KBOptimization opt: optimizationReport.getOptimizations()) {
+		for (KBOptimization opt : optimizationReport.getOptimizations()) {
 			nodes.add(opt.getNodeTemplate().substring(opt.getNodeTemplate().lastIndexOf('/') + 1));
 		}
 		return nodes;
@@ -591,7 +605,7 @@ public class BackendProxy {
 		}
 		return issues;
 	}
-	
+
 	private List<ValidationIssue> readOptimizationIssuesFromKB(KBOptimizationReportData optimizationReport) {
 		List<ValidationIssue> issues = new ArrayList<>();
 
@@ -609,9 +623,8 @@ public class BackendProxy {
 
 		if (optimizationReport.hasOptimizations()) {
 			for (KBOptimization optimization : optimizationReport.getOptimizations()) {
-				for (KBIssue issue: optimization.getIssues()) {
-					String message = "Suggested optimization recommendation: " + 
-							beautifySuggestion(issue.getValue());
+				for (KBIssue issue : optimization.getIssues()) {
+					String message = "Suggested optimization recommendation: " + beautifySuggestion(issue.getValue());
 					String path = issue.getPath();
 					String path_type = "Optimization";
 					String data = issue.toString();
@@ -652,15 +665,14 @@ public class BackendProxy {
 			}
 		}
 
-		//Suggestions are not shown in model
+		// Suggestions are not shown in model
 		if (saveReport.hasSuggestions()) {
 			for (KBSuggestion suggestion : saveReport.getSuggestions()) {
-				String message = MessageFormat.format(
-					"The following nodes can satisfy the requirement {0}: {1}", 
-					getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
+				String message = MessageFormat.format("The following nodes can satisfy the requirement {0}: {1}",
+						getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
 				String path = createPath(suggestion.getHierarchyPath());
 				String pathType = getPathType(suggestion.getHierarchyPath());
-				String code = getCode (suggestion.getHierarchyPath());
+				String code = getCode(suggestion.getHierarchyPath());
 				Map<String, SortedSet<String>> data = new HashMap<>();
 				data.put(path, suggestion.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
@@ -673,17 +685,17 @@ public class BackendProxy {
 	private String getCode(List<String> hierarchyPath) {
 		// Assigns a suggestion code based in the issue hierarchy path
 		String code = "Suggestion";
-		if (hierarchyPath.contains("requirements")){
+		if (hierarchyPath.contains("requirements")) {
 			code = ValidationIssue.REQUIREMENT;
 		}
-		
+
 		return code;
 	}
 
-	private String getDependency (List<String> entityHierarchy) {
+	private String getDependency(List<String> entityHierarchy) {
 		String dependency = null;
 		String result = "";
-		for (String entry: entityHierarchy) {
+		for (String entry : entityHierarchy) {
 			if (entry.contains("requirements")) {
 				int index = entityHierarchy.indexOf(entry) + 1;
 				dependency = entityHierarchy.get(index);
@@ -694,9 +706,10 @@ public class BackendProxy {
 			result = dependency.substring(dependency.lastIndexOf('/') + 1);
 		return result;
 	}
-	
-	private SortedSet<String> getSuggestedNodes(SortedSet<String> suggestions){
-		return suggestions.stream().map(s->s.substring(s.lastIndexOf('/') + 1)).collect(Collectors.toCollection(TreeSet::new));
+
+	private SortedSet<String> getSuggestedNodes(SortedSet<String> suggestions) {
+		return suggestions.stream().map(s -> s.substring(s.lastIndexOf('/') + 1))
+				.collect(Collectors.toCollection(TreeSet::new));
 	}
 
 	private String getPathType(List<String> entityHierarchy) {
@@ -717,9 +730,8 @@ public class BackendProxy {
 
 		return sb.toString();
 	}
-	
-	
-	//TODO Fix this code
+
+	// TODO Fix this code
 	private void manageOptimizationIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {
@@ -824,10 +836,10 @@ public class BackendProxy {
 		ValidationSourceFeature result = null;
 		if (resource.getAllContents().hasNext()) {
 			EObject eobject = resource.getAllContents().next();
-			if(eobject instanceof AADM_Model) {
+			if (eobject instanceof AADM_Model) {
 				AADM_Model model = (AADM_Model) eobject;
 				result = getAADMIssueFeature(model, path, path_type, st);
-			}else if (eobject instanceof Optimization_Model) {
+			} else if (eobject instanceof Optimization_Model) {
 				Optimization_Model model = (Optimization_Model) eobject;
 				result = getOptimizationIssueFeature(model, path, path_type);
 			}
@@ -855,20 +867,23 @@ public class BackendProxy {
 													AADMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
 										}
 									}
-								}else if ("requirements".equals(path_type)) {
+								} else if ("requirements".equals(path_type)) {
 									boolean req_found = false;
-									if (node.getNode().getRequirements()!=null) {
-										for (ERequirementAssignment req: node.getNode().getRequirements().getRequirements()) {
-											//Target requirement found
+									if (node.getNode().getRequirements() != null) {
+										for (ERequirementAssignment req : node.getNode().getRequirements()
+												.getRequirements()) {
+											// Target requirement found
 											if (req.getName().contentEquals(getRequirement(path))) {
 												req_found = true;
 												result = new ValidationSourceFeature(req,
 														AADMPackage.Literals.EREQUIREMENT_ASSIGNMENT__NAME);
 											}
-										}										}
+										}
+									}
 									if (!req_found)
-										result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
-									
+										result = new ValidationSourceFeature(node,
+												AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+
 								}
 							}
 						}
@@ -878,25 +893,28 @@ public class BackendProxy {
 		}
 		return result;
 	}
-	
-	private ValidationSourceFeature getOptimizationIssueFeature(Optimization_Model model, String path, String path_type) {
+
+	private ValidationSourceFeature getOptimizationIssueFeature(Optimization_Model model, String path,
+			String path_type) {
 		ValidationSourceFeature result = null;
 		JsonObject pathObject = new Gson().fromJson(path, JsonObject.class);
 		if (pathObject.has("app_type-ai_training")) {
 			EAITrainingCase aiTrainingCase = (EAITrainingCase) model.getOptimization().getApp_optimization();
-			result = new ValidationSourceFeature(aiTrainingCase, OptimizationPackage.Literals.EAI_TRAINING_CASE__AI_TRAINING);
+			result = new ValidationSourceFeature(aiTrainingCase,
+					OptimizationPackage.Literals.EAI_TRAINING_CASE__AI_TRAINING);
 			JsonObject aiTrainingObject = pathObject.get("app_type-ai_training").getAsJsonObject();
 			if (aiTrainingObject.has("data")) {
 				EAITraining aiTraining = aiTrainingCase.getAi_training();
 				result = new ValidationSourceFeature(aiTraining, OptimizationPackage.Literals.EAI_TRAINING__DATA);
-			}else if (aiTrainingObject.has("ai_framework-tensorflow")) {
+			} else if (aiTrainingObject.has("ai_framework-tensorflow")) {
 				EAITraining aiTraining = aiTrainingCase.getAi_training();
-				result = new ValidationSourceFeature(aiTraining, OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE);
+				result = new ValidationSourceFeature(aiTraining,
+						OptimizationPackage.Literals.EAI_TRAINING__AITRAININGCASE);
 			}
 		}
 		return result;
 	}
-	
+
 	private String getRequirement(String path) {
 		String req = null;
 		Pattern pattern = Pattern.compile("requirements/(.*?)/");
