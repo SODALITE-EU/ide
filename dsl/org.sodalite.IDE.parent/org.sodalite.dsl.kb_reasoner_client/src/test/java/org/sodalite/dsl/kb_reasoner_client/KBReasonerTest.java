@@ -94,6 +94,15 @@ class KBReasonerTest {
 	}
 
 	@Test
+	void testGetInteraceTypes() throws Exception {
+		List<String> modules = Arrays.asList("snow", "docker");
+		ReasonerData<Type> interaceTypes = kbclient.getInterfaceTypes(modules);
+		assertFalse(interaceTypes.getElements().isEmpty());
+		interaceTypes.getElements().stream().forEach(type -> System.out
+				.println("Interface type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
+	}
+
+	@Test
 	void testGetModules() throws Exception {
 		ModuleData modules = kbclient.getModules();
 		assertFalse(modules.getElements().isEmpty());

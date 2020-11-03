@@ -22,9 +22,9 @@ import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
-import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 
 public interface KBReasoner {
@@ -35,6 +35,8 @@ public interface KBReasoner {
 	TypeData getCapabilityTypes(List<String> modules) throws Exception;
 
 	TypeData getRelationshipTypes(List<String> modules) throws Exception;
+
+	TypeData getInterfaceTypes(List<String> modules) throws Exception;
 
 	ModuleData getModules() throws Exception;
 

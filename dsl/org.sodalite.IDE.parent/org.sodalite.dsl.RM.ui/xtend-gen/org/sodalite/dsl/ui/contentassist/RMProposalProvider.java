@@ -30,6 +30,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.rM.ECapabilityType;
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDataTypeName;
+import org.sodalite.dsl.rM.EInterfaceType;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.ERelationshipType;
@@ -394,6 +395,70 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   @Override
+  public void completeEInterfaceDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for InterfaceDefinition::type property");
+      final List<String> importedModules = this.getImportedModules(model);
+      final ReasonerData<Type> interfaces = this.getKBReasoner().getInterfaceTypes(importedModules);
+      System.out.println("Interfaces retrieved from KB:");
+      List<Type> _elements = interfaces.getElements();
+      for (final Type interface_ : _elements) {
+        {
+          String _label = interface_.getLabel();
+          String _plus = ("\tCapability: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = interface_.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _module_1 = interface_.getModule();
+            String _plus_1 = (_module_1 + "/");
+            String _label_1 = interface_.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = interface_.getLabel();
+          }
+          final String proposalText = _xifexpression;
+          String _xifexpression_1 = null;
+          String _module_2 = interface_.getModule();
+          boolean _tripleNotEquals_1 = (_module_2 != null);
+          if (_tripleNotEquals_1) {
+            String _module_3 = interface_.getModule();
+            String _plus_2 = (_module_3 + "/");
+            String _label_2 = interface_.getLabel();
+            _xifexpression_1 = (_plus_2 + _label_2);
+          } else {
+            _xifexpression_1 = interface_.getLabel();
+          }
+          final String displayText = _xifexpression_1;
+          final String additionalProposalInfo = interface_.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      final String module = this.getModule(model);
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
+      for (final EInterfaceType interface__1 : _interfaceTypes) {
+        {
+          String _name = interface__1.getName();
+          String _plus = ("\tLocal interface type: " + _name);
+          System.out.println(_plus);
+          String _name_1 = interface__1.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = interface__1.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = interface__1.getInterface().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
   public void completeEPropertyDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
   }
@@ -416,6 +481,14 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   @Override
   public void completeEAttributeDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeGetAttributeBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  }
+  
+  @Override
+  public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
   }
   
   public String getModule(final EObject object) {

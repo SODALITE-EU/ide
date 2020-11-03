@@ -241,6 +241,38 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)	
 	}
 	
+	override void completeEInterfaceDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for InterfaceDefinition::type property")
+		
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		
+		val ReasonerData<Type> interfaces = getKBReasoner().getInterfaceTypes(importedModules)
+		System.out.println ("Interfaces retrieved from KB:")
+		for (interface: interfaces.elements){
+			System.out.println ("\tCapability: " + interface.label)
+			val proposalText = interface.module !== null ?interface.module + '/' + interface.label:interface.label 
+			val displayText = interface.module !== null ?interface.module + '/' + interface.label:interface.label
+			val additionalProposalInfo = interface.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+		
+		//Add other interfaces defined locally in the model
+		val String module = getModule(model)
+		val rootModel = findModel(model) as RM_Model
+		
+		for (interface: rootModel.interfaceTypes.interfaceTypes){
+			System.out.println ("\tLocal interface type: " + interface.name)
+			val proposalText = module + "/" + interface.name 
+			val displayText = module + "/" + interface.name 
+			val additionalProposalInfo = interface.interface.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	
+	}
+	
 	override void completeEPropertyDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeEDataTypeBody_SuperType(model, assignment, context, acceptor)
 	}
@@ -259,6 +291,16 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeEAttributeDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeEDataTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeGetAttributeBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		//TODO
+	
+	}
+	
+	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		//TODO
+
 	}
 	
 	def getModule(EObject object) {

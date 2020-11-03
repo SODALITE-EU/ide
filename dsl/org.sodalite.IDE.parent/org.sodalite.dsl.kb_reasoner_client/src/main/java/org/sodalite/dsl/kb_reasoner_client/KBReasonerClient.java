@@ -129,6 +129,10 @@ public class KBReasonerClient implements KBReasoner {
 		return getTypes(modules, TypeKind.RELATIONSHIP_TYPE);
 	}
 
+	public TypeData getInterfaceTypes(List<String> modules) throws Exception {
+		return getTypes(modules, TypeKind.INTERFACE_TYPE);
+	}
+
 	private TypeData getTypes(List<String> modules, TypeKind kind) throws Exception {
 		Assert.notNull(modules, "Pass a not null modules");
 		Assert.notNull(kind, "Pass a not null type kind");
