@@ -30,7 +30,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypeBody/constraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypeBody/properties"/>
     </genClasses>
-    <genClasses ecoreClass="RM.ecore#//EDataTypeName"/>
+    <genClasses ecoreClass="RM.ecore#//EDataTypeName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EDataTypeName/type"/>
+    </genClasses>
     <genClasses ecoreClass="RM.ecore#//EArtifactTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactTypes/artifactTypes"/>
     </genClasses>
@@ -318,7 +320,7 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EPREFIX_TYPE">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_TYPE/module"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_TYPE/type"/>
     </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EPRIMITIVE_TYPE"/>
   </genPackages>
 </genmodel:GenModel>

@@ -31,7 +31,6 @@ import org.sodalite.dsl.rM.ECapabilityTypes;
 import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDataTypeBody;
-import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EDataTypes;
 import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EDependencyFiles;
@@ -63,6 +62,7 @@ import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EOperationDefinitionBody;
 import org.sodalite.dsl.rM.EOperations;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.EPolicyType;
@@ -157,9 +157,6 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EDATA_TYPE_BODY:
 				sequence_EDataTypeBody(context, (EDataTypeBody) semanticObject); 
 				return; 
-			case RMPackage.EDATA_TYPE_NAME:
-				sequence_EDataTypeName(context, (EDataTypeName) semanticObject); 
-				return; 
 			case RMPackage.EDATA_TYPES:
 				sequence_EDataTypes(context, (EDataTypes) semanticObject); 
 				return; 
@@ -252,6 +249,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RMPackage.EPREFIX_TYPE:
 				sequence_EPREFIX_TYPE(context, (EPREFIX_TYPE) semanticObject); 
+				return; 
+			case RMPackage.EPRIMITIVE_TYPE:
+				sequence_EPRIMITIVE_TYPE(context, (EPRIMITIVE_TYPE) semanticObject); 
 				return; 
 			case RMPackage.EPARAMETER_DEFINITION:
 				sequence_EParameterDefinition(context, (EParameterDefinition) semanticObject); 
@@ -579,18 +579,6 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (superType=EDataTypeName | description=STRING | constraints=EConstraints | properties=EProperties)*
 	 */
 	protected void sequence_EDataTypeBody(ISerializationContext context, EDataTypeBody semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     EDataTypeName returns EDataTypeName
-	 *
-	 * Constraint:
-	 *     {EDataTypeName}
-	 */
-	protected void sequence_EDataTypeName(ISerializationContext context, EDataTypeName semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1117,6 +1105,25 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_EPREFIX_TYPE(ISerializationContext context, EPREFIX_TYPE semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EDataTypeName returns EPRIMITIVE_TYPE
+	 *     EPRIMITIVE_TYPE returns EPRIMITIVE_TYPE
+	 *
+	 * Constraint:
+	 *     type=ID
+	 */
+	protected void sequence_EPRIMITIVE_TYPE(ISerializationContext context, EPRIMITIVE_TYPE semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EDATA_TYPE_NAME__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EDATA_TYPE_NAME__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEPRIMITIVE_TYPEAccess().getTypeIDTerminalRuleCall_0(), semanticObject.getType());
+		feeder.finish();
 	}
 	
 	

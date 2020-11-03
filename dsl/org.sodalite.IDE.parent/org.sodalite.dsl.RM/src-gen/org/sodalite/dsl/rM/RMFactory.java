@@ -762,6 +762,15 @@ public interface RMFactory extends EFactory
   EPREFIX_TYPE createEPREFIX_TYPE();
 
   /**
+   * Returns a new object of class '<em>EPRIMITIVE TYPE</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EPRIMITIVE TYPE</em>'.
+   * @generated
+   */
+  EPRIMITIVE_TYPE createEPRIMITIVE_TYPE();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

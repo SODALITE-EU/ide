@@ -132,18 +132,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val displayText = module + "/" + ePrefixType.type 
 			val additionalProposalInfo = dataType.data.description
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-		
-		// Add primitive types
-		val primitiveTypes = #['string', 'integer', 'float', 'boolean', 'map', 'list', 'range', 'timestamp', 'scalar-unit.frequency', 'scalar-unit.size', 'version-type']
-		
-		for (primitiveType: primitiveTypes){
-			val proposalText = primitiveType 
-			val displayText = primitiveType
-			val additionalProposalInfo = primitiveType + " primitive type"
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-		
+		}		
 
 		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 	}

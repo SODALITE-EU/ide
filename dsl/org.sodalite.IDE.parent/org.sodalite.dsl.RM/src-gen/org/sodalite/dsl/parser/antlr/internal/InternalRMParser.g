@@ -774,19 +774,14 @@ ruleEDataTypeName returns [EObject current=null]
 			afterParserOrEnumRuleCall();
 		}
 		    |
-		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getEDataTypeNameAccess().getEDataTypeNameAction_1_0(),
-						$current);
-				}
-			)
-			this_PRIMITIVE_DATA_TYPE_2=RULE_PRIMITIVE_DATA_TYPE
-			{
-				newLeafNode(this_PRIMITIVE_DATA_TYPE_2, grammarAccess.getEDataTypeNameAccess().getPRIMITIVE_DATA_TYPETerminalRuleCall_1_1());
-			}
-		)
+		{
+			newCompositeNode(grammarAccess.getEDataTypeNameAccess().getEPRIMITIVE_TYPEParserRuleCall_1());
+		}
+		this_EPRIMITIVE_TYPE_1=ruleEPRIMITIVE_TYPE
+		{
+			$current = $this_EPRIMITIVE_TYPE_1.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -6969,6 +6964,41 @@ ruleEPREFIX_TYPE returns [EObject current=null]
 						"org.sodalite.dsl.RM.QUALIFIED_NAME");
 				}
 			)
+		)
+	)
+;
+
+// Entry rule entryRuleEPRIMITIVE_TYPE
+entryRuleEPRIMITIVE_TYPE returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEPRIMITIVE_TYPERule()); }
+	iv_ruleEPRIMITIVE_TYPE=ruleEPRIMITIVE_TYPE
+	{ $current=$iv_ruleEPRIMITIVE_TYPE.current; }
+	EOF;
+
+// Rule EPRIMITIVE_TYPE
+ruleEPRIMITIVE_TYPE returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_type_0_0=RULE_ID
+			{
+				newLeafNode(lv_type_0_0, grammarAccess.getEPRIMITIVE_TYPEAccess().getTypeIDTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getEPRIMITIVE_TYPERule());
+				}
+				setWithLastConsumed(
+					$current,
+					"type",
+					lv_type_0_0,
+					"org.sodalite.dsl.RM.ID");
+			}
 		)
 	)
 ;

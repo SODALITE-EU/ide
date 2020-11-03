@@ -437,28 +437,20 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EDataTypeName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEPREFIX_TYPEParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Action cEDataTypeNameAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final RuleCall cPRIMITIVE_DATA_TYPETerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		private final RuleCall cEPRIMITIVE_TYPEParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//EDataTypeName:
-		//	EPREFIX_TYPE | {EDataTypeName} PRIMITIVE_DATA_TYPE;
+		//	EPREFIX_TYPE | EPRIMITIVE_TYPE;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EPREFIX_TYPE | {EDataTypeName} PRIMITIVE_DATA_TYPE
+		//EPREFIX_TYPE | EPRIMITIVE_TYPE
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//EPREFIX_TYPE
 		public RuleCall getEPREFIX_TYPEParserRuleCall_0() { return cEPREFIX_TYPEParserRuleCall_0; }
 		
-		//{EDataTypeName} PRIMITIVE_DATA_TYPE
-		public Group getGroup_1() { return cGroup_1; }
-		
-		//{EDataTypeName}
-		public Action getEDataTypeNameAction_1_0() { return cEDataTypeNameAction_1_0; }
-		
-		//PRIMITIVE_DATA_TYPE
-		public RuleCall getPRIMITIVE_DATA_TYPETerminalRuleCall_1_1() { return cPRIMITIVE_DATA_TYPETerminalRuleCall_1_1; }
+		//EPRIMITIVE_TYPE
+		public RuleCall getEPRIMITIVE_TYPEParserRuleCall_1() { return cEPRIMITIVE_TYPEParserRuleCall_1; }
 	}
 	public class EArtifactTypesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EArtifactTypes");
@@ -3881,6 +3873,21 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//QUALIFIED_NAME
 		public RuleCall getTypeQUALIFIED_NAMETerminalRuleCall_1_0() { return cTypeQUALIFIED_NAMETerminalRuleCall_1_0; }
 	}
+	public class EPRIMITIVE_TYPEElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EPRIMITIVE_TYPE");
+		private final Assignment cTypeAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cTypeIDTerminalRuleCall_0 = (RuleCall)cTypeAssignment.eContents().get(0);
+		
+		//EPRIMITIVE_TYPE:
+		//	type=ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//type=ID
+		public Assignment getTypeAssignment() { return cTypeAssignment; }
+		
+		//ID
+		public RuleCall getTypeIDTerminalRuleCall_0() { return cTypeIDTerminalRuleCall_0; }
+	}
 	public class SIGNEDINTElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.SIGNEDINT");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -4007,12 +4014,12 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final EMAPElements pEMAP;
 	private final EMapEntryElements pEMapEntry;
 	private final EPREFIX_TYPEElements pEPREFIX_TYPE;
+	private final EPRIMITIVE_TYPEElements pEPRIMITIVE_TYPE;
 	private final TerminalRule tQUALIFIED_NAME;
 	private final TerminalRule tBOOLEAN;
 	private final SIGNEDINTElements pSIGNEDINT;
 	private final FLOATElements pFLOAT;
 	private final TerminalRule tENTITY;
-	private final TerminalRule tPRIMITIVE_DATA_TYPE;
 	private final TerminalRule tID;
 	private final TerminalRule tBEGIN;
 	private final TerminalRule tEND;
@@ -4108,12 +4115,12 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pEMAP = new EMAPElements();
 		this.pEMapEntry = new EMapEntryElements();
 		this.pEPREFIX_TYPE = new EPREFIX_TYPEElements();
+		this.pEPRIMITIVE_TYPE = new EPRIMITIVE_TYPEElements();
 		this.tQUALIFIED_NAME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.QUALIFIED_NAME");
 		this.tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.BOOLEAN");
 		this.pSIGNEDINT = new SIGNEDINTElements();
 		this.pFLOAT = new FLOATElements();
 		this.tENTITY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ENTITY");
-		this.tPRIMITIVE_DATA_TYPE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.PRIMITIVE_DATA_TYPE");
 		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ID");
 		this.tBEGIN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.BEGIN");
 		this.tEND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.END");
@@ -4217,7 +4224,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EDataTypeName:
-	//	EPREFIX_TYPE | {EDataTypeName} PRIMITIVE_DATA_TYPE;
+	//	EPREFIX_TYPE | EPRIMITIVE_TYPE;
 	public EDataTypeNameElements getEDataTypeNameAccess() {
 		return pEDataTypeName;
 	}
@@ -5112,6 +5119,16 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		return getEPREFIX_TYPEAccess().getRule();
 	}
 	
+	//EPRIMITIVE_TYPE:
+	//	type=ID;
+	public EPRIMITIVE_TYPEElements getEPRIMITIVE_TYPEAccess() {
+		return pEPRIMITIVE_TYPE;
+	}
+	
+	public ParserRule getEPRIMITIVE_TYPERule() {
+		return getEPRIMITIVE_TYPEAccess().getRule();
+	}
+	
 	//terminal QUALIFIED_NAME:
 	//	ID ('.' ID)+;
 	public TerminalRule getQUALIFIED_NAMERule() {
@@ -5148,13 +5165,6 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	//	'SELF' | 'SOURCE' | 'TARGET' | 'HOST';
 	public TerminalRule getENTITYRule() {
 		return tENTITY;
-	}
-	
-	//terminal PRIMITIVE_DATA_TYPE:
-	//	'string' | 'integer' | 'float' | 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' |
-	//	'scalar-unit.size' | 'version-type';
-	public TerminalRule getPRIMITIVE_DATA_TYPERule() {
-		return tPRIMITIVE_DATA_TYPE;
 	}
 	
 	//@Override

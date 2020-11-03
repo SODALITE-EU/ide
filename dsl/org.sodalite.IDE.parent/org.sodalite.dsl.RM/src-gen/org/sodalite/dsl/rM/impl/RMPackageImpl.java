@@ -671,6 +671,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
   private EClass eprefiX_TYPEEClass = null;
 
   /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eprimitivE_TYPEEClass = null;
+
+  /**
    * Creates an instance of the model <b>Package</b>, registered with
    * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
    * package URI value.
@@ -962,6 +969,17 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
   public EClass getEDataTypeName()
   {
     return eDataTypeNameEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEDataTypeName_Type()
+  {
+    return (EAttribute)eDataTypeNameEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3357,9 +3375,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getEPREFIX_TYPE_Type()
+  public EClass getEPRIMITIVE_TYPE()
   {
-    return (EAttribute)eprefiX_TYPEEClass.getEStructuralFeatures().get(1);
+    return eprimitivE_TYPEEClass;
   }
 
   /**
@@ -3418,6 +3436,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eDataTypeBodyEClass, EDATA_TYPE_BODY__PROPERTIES);
 
     eDataTypeNameEClass = createEClass(EDATA_TYPE_NAME);
+    createEAttribute(eDataTypeNameEClass, EDATA_TYPE_NAME__TYPE);
 
     eArtifactTypesEClass = createEClass(EARTIFACT_TYPES);
     createEReference(eArtifactTypesEClass, EARTIFACT_TYPES__ARTIFACT_TYPES);
@@ -3712,7 +3731,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eprefiX_TYPEEClass = createEClass(EPREFIX_TYPE);
     createEAttribute(eprefiX_TYPEEClass, EPREFIX_TYPE__MODULE);
-    createEAttribute(eprefiX_TYPEEClass, EPREFIX_TYPE__TYPE);
+
+    eprimitivE_TYPEEClass = createEClass(EPRIMITIVE_TYPE);
   }
 
   /**
@@ -3773,6 +3793,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     esignedintEClass.getESuperTypes().add(this.getEAlphaNumericValue());
     emapEClass.getESuperTypes().add(this.getEAssignmentValue());
     eprefiX_TYPEEClass.getESuperTypes().add(this.getEDataTypeName());
+    eprimitivE_TYPEEClass.getESuperTypes().add(this.getEDataTypeName());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rM_ModelEClass, RM_Model.class, "RM_Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3800,6 +3821,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEDataTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDataTypeNameEClass, EDataTypeName.class, "EDataTypeName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEDataTypeName_Type(), ecorePackage.getEString(), "type", null, 0, 1, EDataTypeName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eArtifactTypesEClass, EArtifactTypes.class, "EArtifactTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEArtifactTypes_ArtifactTypes(), this.getEArtifactType(), null, "artifactTypes", null, 0, -1, EArtifactTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4094,7 +4116,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eprefiX_TYPEEClass, org.sodalite.dsl.rM.EPREFIX_TYPE.class, "EPREFIX_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPREFIX_TYPE_Module(), ecorePackage.getEString(), "module", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_TYPE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEPREFIX_TYPE_Type(), ecorePackage.getEString(), "type", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_TYPE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eprimitivE_TYPEEClass, org.sodalite.dsl.rM.EPRIMITIVE_TYPE.class, "EPRIMITIVE_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

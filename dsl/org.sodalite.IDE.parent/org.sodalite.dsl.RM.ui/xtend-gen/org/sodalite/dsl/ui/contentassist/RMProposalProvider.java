@@ -6,7 +6,6 @@ package org.sodalite.dsl.ui.contentassist;
 import com.google.common.base.Objects;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -21,7 +20,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
@@ -184,15 +182,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           String _type_2 = ePrefixType.getType();
           final String displayText = ((module + "/") + _type_2);
           final String additionalProposalInfo = dataType.getData().getDescription();
-          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
-        }
-      }
-      final List<String> primitiveTypes = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("string", "integer", "float", "boolean", "map", "list", "range", "timestamp", "scalar-unit.frequency", "scalar-unit.size", "version-type"));
-      for (final String primitiveType : primitiveTypes) {
-        {
-          final String proposalText = primitiveType;
-          final String displayText = primitiveType;
-          final String additionalProposalInfo = (primitiveType + " primitive type");
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
       }

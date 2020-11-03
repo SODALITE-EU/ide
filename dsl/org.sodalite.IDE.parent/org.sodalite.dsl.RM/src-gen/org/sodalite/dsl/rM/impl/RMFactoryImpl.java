@@ -147,6 +147,7 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EMAP: return createEMAP();
       case RMPackage.EMAP_ENTRY: return createEMapEntry();
       case RMPackage.EPREFIX_TYPE: return createEPREFIX_TYPE();
+      case RMPackage.EPRIMITIVE_TYPE: return createEPRIMITIVE_TYPE();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -1134,6 +1135,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EPREFIX_TYPEImpl eprefiX_TYPE = new EPREFIX_TYPEImpl();
     return eprefiX_TYPE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPRIMITIVE_TYPE createEPRIMITIVE_TYPE()
+  {
+    EPRIMITIVE_TYPEImpl eprimitivE_TYPE = new EPRIMITIVE_TYPEImpl();
+    return eprimitivE_TYPE;
   }
 
   /**

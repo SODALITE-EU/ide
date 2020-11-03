@@ -47,6 +47,8 @@ import org.sodalite.dsl.rM.EAlphaNumericValue
 import org.sodalite.dsl.rM.EFLOAT
 import org.sodalite.dsl.rM.ESIGNEDINT
 import org.sodalite.dsl.rM.EBOOLEAN
+import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
+import org.sodalite.dsl.rM.EPREFIX_TYPE
 
 /**
  * Generates code from your model files on save.
@@ -256,7 +258,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "capability" ;
-	  exchange:value '«r.requirement.capability»' ;
+	  «IF r.requirement.capability.module !== null»
+	  exchange:value '«r.requirement.capability.module»/«r.requirement.capability.type»' ;  
+	  «ELSE»
+	  exchange:value '«r.requirement.capability.type»' ;  
+	  «ENDIF»
 	.
 	«ENDIF»
 	
@@ -265,7 +271,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "node" ;
-	  exchange:value '«r.requirement.node»' ;
+	  «IF r.requirement.node.module !== null»
+	  exchange:value '«r.requirement.node.module»/«r.requirement.node.type»' ;  
+	  «ELSE»
+	  exchange:value '«r.requirement.node.type»' ;  
+	  «ENDIF»
 	.
 	«ENDIF»
 	
@@ -274,7 +284,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "relationship" ;	  
-	  exchange:value '«r.requirement.relationship»' ;
+	  «IF r.requirement.relationship.module !== null»
+	  exchange:value '«r.requirement.relationship.module»/«r.requirement.relationship.type»' ;  
+	  «ELSE»
+	  exchange:value '«r.requirement.relationship.type»' ;  
+	  «ENDIF»
 	.
 	«ENDIF»
 	
@@ -300,7 +314,17 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«c.capability.type»' ;
+	  «IF c.capability.type !== null»
+	  «IF c.capability.type instanceof EPRIMITIVE_TYPE»
+	  exchange:value '«(c.capability.type as EPRIMITIVE_TYPE).type»' ;
+	  «ELSEIF c.capability.type instanceof EPREFIX_TYPE»
+	  «IF (c.capability.type as EPREFIX_TYPE).module !== null»
+	  exchange:value '«(c.capability.type as EPREFIX_TYPE).module»/«(c.capability.type as EPREFIX_TYPE).type»' ;  
+	  «ELSE»
+	  exchange:value '«(c.capability.type as EPREFIX_TYPE).type»' ;  
+	  «ENDIF»
+	  «ENDIF»
+	  «ENDIF»
 	.
 	«ENDIF»
 	
@@ -343,7 +367,17 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«i.interface.type»' ;
+	  «IF i.interface.type !== null»
+	  «IF i.interface.type instanceof EPRIMITIVE_TYPE»
+	  exchange:value '«(i.interface.type as EPRIMITIVE_TYPE).type»' ;
+	  «ELSEIF i.interface.type instanceof EPREFIX_TYPE»
+	  «IF (i.interface.type as EPREFIX_TYPE).module !== null»
+	  exchange:value '«(i.interface.type as EPREFIX_TYPE).module»/«(i.interface.type as EPREFIX_TYPE).type»' ;  
+	  «ELSE»
+	  exchange:value '«(i.interface.type as EPREFIX_TYPE).type»' ;  
+	  «ENDIF»
+	  «ENDIF»
+	  «ENDIF»
 	.
 	«ENDIF»
 	
@@ -556,7 +590,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	«IF p.property.req_cap.module !== null»
+	  «IF p.property.req_cap.module !== null»
 	  exchange:value '«p.property.req_cap.module»/«p.property.req_cap.type»' ; 
 	«ELSE»
 	  exchange:value '«p.property.req_cap.type»' ; 
@@ -632,7 +666,12 @@ class RMGenerator extends AbstractGenerator {
 	:CapabilityType_«capabilitytype_counter++»
 	  rdf:type exchange:CapabilityType ;
 	  exchange:name "«c.name»" ;
-	  exchange:derivesFrom "«c.capability.superType»" ;
+	  «IF c.capability.superType.module !== null»
+	  exchange:derivesFrom '«c.capability.superType.module»/«c.capability.superType.type»' ;  
+	  «ELSE»
+	  exchange:derivesFrom '«c.capability.superType.type»' ;  
+	  «ENDIF»	  
+	  
 	«IF c.capability.description !== null»
 	exchange:description '«processDescription(c.capability.description)»' ;
 	«ENDIF»
@@ -669,7 +708,11 @@ class RMGenerator extends AbstractGenerator {
 	:RelationshipType_«relationship_counter++»
 	  rdf:type exchange:RelationshipType ;
 	  exchange:name "«r.name»" ;
-	  exchange:derivesFrom "«r.relationship.superType»" ;
+	  «IF r.relationship.superType.module !== null»
+	  exchange:derivesFrom '«r.relationship.superType.module»/«r.relationship.superType.type»' ;  
+	  «ELSE»
+	  exchange:derivesFrom '«r.relationship.superType.type»' ;  
+	  «ENDIF»	  
 	  «IF r.relationship.description !== null»
 	  exchange:description '«processDescription(r.relationship.description)»' ;
 	  «ENDIF»
@@ -701,7 +744,11 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
-	  exchange:derivesFrom "«n.node.superType»" ;
+	  «IF n.node.superType.module !== null»
+	  exchange:derivesFrom '«n.node.superType.module»/«n.node.superType.type»' ;  
+	  «ELSE»
+	  exchange:derivesFrom '«n.node.superType.type»' ;  
+	  «ENDIF»
 	  «IF n.node.properties !== null»
 	  «FOR p:n.node.properties.properties»
 	  exchange:properties :Property_«property_numbers.get(p)» ; 
@@ -734,8 +781,15 @@ class RMGenerator extends AbstractGenerator {
 	:DataType_«data_type_counter++»
 	  rdf:type exchange:DataType ;
 	  exchange:name "«d.name»" ;
-	  exchange:derivesFrom "«d.data.superType»" ;
-
+	  «IF d.data.superType instanceof EPRIMITIVE_TYPE»
+	  exchange:derivesFrom '«(d.data.superType as EPRIMITIVE_TYPE).type»' ;
+	  «ELSEIF d.data.superType instanceof EPREFIX_TYPE»
+	  «IF (d.data.superType as EPREFIX_TYPE).module !== null»
+	  exchange:derivesFrom '«(d.data.superType as EPREFIX_TYPE).module»/«(d.data.superType as EPREFIX_TYPE).type»' ;  
+	  «ELSE»
+	  exchange:derivesFrom '«(d.data.superType as EPREFIX_TYPE).type»' ;  
+	  «ENDIF»
+	  «ENDIF»
 	  «IF d.data.description !== null»
 	  exchange:description '«processDescription(d.data.description)»' ;
 	  «ENDIF»
@@ -753,7 +807,17 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«p.property.type»' ;
+	  «IF p.property.type !== null»
+	  «IF p.property.type instanceof EPRIMITIVE_TYPE»
+	  exchange:value '«(p.property.type as EPRIMITIVE_TYPE).type»' ;
+	  «ELSEIF p.property.type instanceof EPREFIX_TYPE»
+	  «IF (p.property.type as EPREFIX_TYPE).module !== null»
+	  exchange:value '«(p.property.type as EPREFIX_TYPE).module»/«(p.property.type as EPREFIX_TYPE).type»' ;  
+	  «ELSE»
+	  exchange:value '«(p.property.type as EPREFIX_TYPE).type»' ;  
+	  «ENDIF»
+	  «ENDIF»
+	  «ENDIF»	  
 	.
 	«ENDIF»
 	
@@ -848,7 +912,17 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«a.attribute.type»' ;
+	  «IF a.attribute.type !== null»
+	  «IF a.attribute.type instanceof EPRIMITIVE_TYPE»
+	  exchange:value '«(a.attribute.type as EPRIMITIVE_TYPE).type»' ;
+	  «ELSEIF a.attribute.type instanceof EPREFIX_TYPE»
+	  «IF (a.attribute.type as EPREFIX_TYPE).module !== null»
+	  exchange:value '«(a.attribute.type as EPREFIX_TYPE).module»/«(a.attribute.type as EPREFIX_TYPE).type»' ;  
+	  «ELSE»
+	  exchange:value '«(a.attribute.type as EPREFIX_TYPE).type»' ;  
+	  «ENDIF»
+	  «ENDIF»
+	  «ENDIF»
 	.
 	«ENDIF»
 	

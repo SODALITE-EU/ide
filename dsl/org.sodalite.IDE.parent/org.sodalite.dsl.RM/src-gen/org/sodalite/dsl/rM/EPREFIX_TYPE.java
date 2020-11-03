@@ -14,7 +14,6 @@ package org.sodalite.dsl.rM;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EPREFIX_TYPE#getModule <em>Module</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPREFIX_TYPE#getType <em>Type</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEPREFIX_TYPE()
@@ -44,27 +43,5 @@ public interface EPREFIX_TYPE extends EDataTypeName
    * @generated
    */
   void setModule(String value);
-
-  /**
-   * Returns the value of the '<em><b>Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' attribute.
-   * @see #setType(String)
-   * @see org.sodalite.dsl.rM.RMPackage#getEPREFIX_TYPE_Type()
-   * @model
-   * @generated
-   */
-  String getType();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPREFIX_TYPE#getType <em>Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' attribute.
-   * @see #getType()
-   * @generated
-   */
-  void setType(String value);
 
 } // EPREFIX_TYPE

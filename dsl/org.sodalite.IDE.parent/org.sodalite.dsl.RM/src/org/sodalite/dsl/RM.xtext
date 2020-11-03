@@ -67,7 +67,7 @@ EDataTypeBody:
 	END)?);
 
 EDataTypeName:
-	EPREFIX_TYPE | {EDataTypeName} PRIMITIVE_DATA_TYPE;
+	EPREFIX_TYPE | EPRIMITIVE_TYPE;
 
 EArtifactTypes:
 	{EArtifactTypes} (artifactTypes+=EArtifactType)+;
@@ -478,6 +478,10 @@ EPREFIX_TYPE:
 	(module=ID '/')? type=QUALIFIED_NAME
 ;
 
+EPRIMITIVE_TYPE:
+	type=ID
+;
+
 terminal QUALIFIED_NAME: //FIXME convert to data type rule, remove terminal
 	ID ('.' ID)+;
 
@@ -490,10 +494,6 @@ FLOAT returns ecore::EFloat: INT? '.' INT;
 
 terminal ENTITY:
 	'SELF' | 'SOURCE' | 'TARGET' | 'HOST';
-
-terminal PRIMITIVE_DATA_TYPE:
-	'string' | 'integer' | 'float'| 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' |
-	'scalar-unit.size' | 'version-type';
 
 @Override
 terminal ID:

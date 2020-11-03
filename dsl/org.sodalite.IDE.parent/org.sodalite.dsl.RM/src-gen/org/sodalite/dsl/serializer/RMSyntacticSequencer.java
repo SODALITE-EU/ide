@@ -43,8 +43,6 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 			return getBEGINToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getENDRule())
 			return getENDToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getPRIMITIVE_DATA_TYPERule())
-			return getPRIMITIVE_DATA_TYPEToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
@@ -59,17 +57,6 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * Defaults to the empty string.
 	 */
 	protected String getENDToken(EObject semanticObject, RuleCall ruleCall, INode node) { return ""; }
-	
-	/**
-	 * terminal PRIMITIVE_DATA_TYPE:
-	 * 	'string' | 'integer' | 'float'| 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' |
-	 * 	'scalar-unit.size' | 'version-type';
-	 */
-	protected String getPRIMITIVE_DATA_TYPEToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "string";
-	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {

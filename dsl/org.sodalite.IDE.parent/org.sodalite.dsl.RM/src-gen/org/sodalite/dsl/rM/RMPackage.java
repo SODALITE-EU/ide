@@ -288,13 +288,22 @@ public interface RMPackage extends EPackage
   int EDATA_TYPE_NAME = 4;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDATA_TYPE_NAME__TYPE = 0;
+
+  /**
    * The number of structural features of the '<em>EData Type Name</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EDATA_TYPE_NAME_FEATURE_COUNT = 0;
+  int EDATA_TYPE_NAME_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EArtifactTypesImpl <em>EArtifact Types</em>}' class.
@@ -3020,6 +3029,15 @@ public interface RMPackage extends EPackage
   int EPREFIX_TYPE = 81;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPREFIX_TYPE__TYPE = EDATA_TYPE_NAME__TYPE;
+
+  /**
    * The feature id for the '<em><b>Module</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3029,22 +3047,41 @@ public interface RMPackage extends EPackage
   int EPREFIX_TYPE__MODULE = EDATA_TYPE_NAME_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPREFIX_TYPE__TYPE = EDATA_TYPE_NAME_FEATURE_COUNT + 1;
-
-  /**
    * The number of structural features of the '<em>EPREFIX TYPE</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPREFIX_TYPE_FEATURE_COUNT = EDATA_TYPE_NAME_FEATURE_COUNT + 2;
+  int EPREFIX_TYPE_FEATURE_COUNT = EDATA_TYPE_NAME_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EPRIMITIVE_TYPEImpl <em>EPRIMITIVE TYPE</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EPRIMITIVE_TYPEImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPRIMITIVE_TYPE()
+   * @generated
+   */
+  int EPRIMITIVE_TYPE = 82;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPRIMITIVE_TYPE__TYPE = EDATA_TYPE_NAME__TYPE;
+
+  /**
+   * The number of structural features of the '<em>EPRIMITIVE TYPE</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPRIMITIVE_TYPE_FEATURE_COUNT = EDATA_TYPE_NAME_FEATURE_COUNT + 0;
 
 
   /**
@@ -3272,6 +3309,17 @@ public interface RMPackage extends EPackage
    * @generated
    */
   EClass getEDataTypeName();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EDataTypeName#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.sodalite.dsl.rM.EDataTypeName#getType()
+   * @see #getEDataTypeName()
+   * @generated
+   */
+  EAttribute getEDataTypeName_Type();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EArtifactTypes <em>EArtifact Types</em>}'.
@@ -5584,15 +5632,14 @@ public interface RMPackage extends EPackage
   EAttribute getEPREFIX_TYPE_Module();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EPREFIX_TYPE#getType <em>Type</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EPRIMITIVE_TYPE <em>EPRIMITIVE TYPE</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
-   * @see org.sodalite.dsl.rM.EPREFIX_TYPE#getType()
-   * @see #getEPREFIX_TYPE()
+   * @return the meta object for class '<em>EPRIMITIVE TYPE</em>'.
+   * @see org.sodalite.dsl.rM.EPRIMITIVE_TYPE
    * @generated
    */
-  EAttribute getEPREFIX_TYPE_Type();
+  EClass getEPRIMITIVE_TYPE();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -5794,6 +5841,14 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EClass EDATA_TYPE_NAME = eINSTANCE.getEDataTypeName();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EDATA_TYPE_NAME__TYPE = eINSTANCE.getEDataTypeName_Type();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EArtifactTypesImpl <em>EArtifact Types</em>}' class.
@@ -7686,12 +7741,14 @@ public interface RMPackage extends EPackage
     EAttribute EPREFIX_TYPE__MODULE = eINSTANCE.getEPREFIX_TYPE_Module();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EPRIMITIVE_TYPEImpl <em>EPRIMITIVE TYPE</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EPRIMITIVE_TYPEImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPRIMITIVE_TYPE()
      * @generated
      */
-    EAttribute EPREFIX_TYPE__TYPE = eINSTANCE.getEPREFIX_TYPE_Type();
+    EClass EPRIMITIVE_TYPE = eINSTANCE.getEPRIMITIVE_TYPE();
 
   }
 

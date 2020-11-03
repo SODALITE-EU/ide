@@ -39,7 +39,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//EProperties"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EDataTypeName"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EDataTypeName">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EArtifactTypes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="artifactTypes" upperBound="-1"
         eType="#//EArtifactType" containment="true"/>
@@ -425,6 +427,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_TYPE" eSuperTypes="#//EDataTypeName">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="module" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPRIMITIVE_TYPE" eSuperTypes="#//EDataTypeName"/>
 </ecore:EPackage>
