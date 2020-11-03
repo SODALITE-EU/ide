@@ -23,7 +23,7 @@ import org.eclipse.xtext.impl.KeywordImpl
 import org.eclipse.xtext.ParserRule
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
-import org.sodalite.dsl.kb_reasoner_client.types.Node
+import org.sodalite.dsl.kb_reasoner_client.types.Type
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute
 import org.sodalite.dsl.kb_reasoner_client.types.Property
@@ -157,7 +157,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		//Get modules from model
 		val List<String> importedModules = getImportedModules(model)
 		
-		val ReasonerData<Node> nodes = getKBReasoner().getNodes(importedModules)
+		val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
 		System.out.println ("Nodes retrieved from KB:")
 		for (node: nodes.elements){
 			System.out.println ("\tNode: " + node.label)
@@ -216,7 +216,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					var attribute_label = attribute.uri.toString.substring(attribute.uri.toString.lastIndexOf('/') + 1, attribute.uri.toString.length)
 					proposalText = attribute_label
 					displayText = attribute_label
-					additionalProposalInfo = attribute.type.label!==null?"Type: " + attribute.type.label:""
+					additionalProposalInfo = attribute.type.getLabel!==null?"Type: " + attribute.type.getLabel:""
 					additionalProposalInfo += attribute.description!==null?"\nDescription: " + attribute.description:""
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 				}
@@ -250,7 +250,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				 	var property_label = property.uri.toString.substring(property.uri.toString.lastIndexOf('/') + 1, property.uri.toString.length)
 					proposalText = property_label
 					displayText = property_label
-					additionalProposalInfo = (property.type.label!==null?"Type: " + property.type.label:"") 
+					additionalProposalInfo = (property.type.getLabel!==null?"Type: " + property.type.getLabel:"") 
 					additionalProposalInfo += property.description!==null?"\nDescription: " + property.description:""
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 				 }
@@ -287,7 +287,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					displayText = property_label
 					additionalProposalInfo = ""
 					if (capability.type !== null)
-						additionalProposalInfo += "\nType: " + capability.type.label
+						additionalProposalInfo += "\nType: " + capability.type.getLabel
 					if (capability.valid_source_types !== null)
 						additionalProposalInfo += "\nValid source types:" + capability.valid_source_types 
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
@@ -324,9 +324,9 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					displayText = property_label
 					additionalProposalInfo = ""
 					if (requirement.capability !== null)
-						additionalProposalInfo += "\nCapability: " + requirement.capability.label
+						additionalProposalInfo += "\nCapability: " + requirement.capability.getLabel
 					if (requirement.node !== null)
-						additionalProposalInfo += "\nNode: " + requirement.node.label
+						additionalProposalInfo += "\nNode: " + requirement.node.getLabel
 					if (requirement.occurrences !== null)
 						additionalProposalInfo += "\nOccurrences: [" + requirement.occurrences.min + ", " + requirement.occurrences.max + "]"
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
@@ -357,7 +357,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		if (vrnd !== null){
 			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
 			for (ValidRequirementNode vrn: vrnd.elements){
-				types.add(vrn.type.label)
+				types.add(vrn.type.getLabel)
 				System.out.println ("Valid requirement node: " + vrn.label)
 			 	val property_label = vrn.label
 			 	displayText = property_label
@@ -368,7 +368,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					displayText += " <in KB>"
 				}
 				
-				additionalProposalInfo = "Node " + vrn.label + " of type " + vrn.type.label + " is available in the KB"
+				additionalProposalInfo = "Node " + vrn.label + " of type " + vrn.type.getLabel + " is available in the KB"
 				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 			}
 		}

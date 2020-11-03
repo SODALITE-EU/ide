@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = PropertyJsonDeserializer.class)
 public class Property extends KBEntity{
 	String description;
-	Type type; 
+	SuperType type; 
 	boolean required;
 	
 	public String getDescription() {
@@ -28,10 +28,10 @@ public class Property extends KBEntity{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Type getType() {
+	public SuperType getType() {
 		return type;
 	}
-	public void setType(Type type) {
+	public void setType(SuperType type) {
 		this.type = type;
 	}
 	public boolean isRequired() {

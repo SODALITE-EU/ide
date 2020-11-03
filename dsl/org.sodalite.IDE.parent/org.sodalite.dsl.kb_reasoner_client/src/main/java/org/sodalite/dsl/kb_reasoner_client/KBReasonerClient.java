@@ -44,9 +44,10 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
-import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
+import org.sodalite.dsl.kb_reasoner_client.types.TypeKind;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -112,12 +113,30 @@ public class KBReasonerClient implements KBReasoner {
 		return restTemplate;
 	}
 
-	public NodeData getNodes(List<String> modules) throws Exception {
+	public TypeData getNodeTypes(List<String> modules) throws Exception {
+		return getTypes(modules, TypeKind.NODETYPE);
+	}
+
+	public TypeData getDataTypes(List<String> modules) throws Exception {
+		return getTypes(modules, TypeKind.DATATYPE);
+	}
+
+	public TypeData getCapabilityTypes(List<String> modules) throws Exception {
+		return getTypes(modules, TypeKind.CAPABILITY_TYPE);
+	}
+
+	public TypeData getRelationshipTypes(List<String> modules) throws Exception {
+		return getTypes(modules, TypeKind.RELATIONSHIP_TYPE);
+	}
+
+	private TypeData getTypes(List<String> modules, TypeKind kind) throws Exception {
 		Assert.notNull(modules, "Pass a not null modules");
-		String url = kbReasonerUri + "nodes";
+		Assert.notNull(kind, "Pass a not null type kind");
+		String url = kbReasonerUri + "types";
 		for (String module : modules)
 			url += ";imports=" + module;
-		return getJSONObjectForType(NodeData.class, new URI(url), HttpStatus.OK);
+		url += ";type=" + kind.getLabel();
+		return getJSONObjectForType(TypeData.class, new URI(url), HttpStatus.OK);
 	}
 
 	public ModuleData getModules() throws Exception {

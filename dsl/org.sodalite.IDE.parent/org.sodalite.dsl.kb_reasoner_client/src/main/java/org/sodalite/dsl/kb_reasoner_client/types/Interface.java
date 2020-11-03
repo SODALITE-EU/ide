@@ -17,14 +17,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = InterfaceJsonDeserializer.class)
-public class Interface extends KBEntity{
-	Type type;
+public class Interface extends KBEntity {
+	SuperType type;
 
-	public Type getType() {
+	public SuperType getType() {
 		return type;
 	}
 
-	public void setType(Type type) {
+	public void setType(SuperType type) {
 		this.type = type;
-	} 
+	}
 }

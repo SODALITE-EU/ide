@@ -129,6 +129,8 @@ HyphenMinus : '-';
 
 FullStop : '.';
 
+Solidus : '/';
+
 Colon : ':';
 
 LeftSquareBracket : '[';

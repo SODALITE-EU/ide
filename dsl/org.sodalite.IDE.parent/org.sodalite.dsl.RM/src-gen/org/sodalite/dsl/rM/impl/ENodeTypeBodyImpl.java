@@ -16,6 +16,7 @@ import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.EInterfaces;
 import org.sodalite.dsl.rM.ENodeTypeBody;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.ERequirements;
 import org.sodalite.dsl.rM.RMPackage;
@@ -42,24 +43,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements ENodeTypeBody
 {
   /**
-   * The default value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
+   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getSuperType()
    * @generated
    * @ordered
    */
-  protected static final String SUPER_TYPE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSuperType()
-   * @generated
-   * @ordered
-   */
-  protected String superType = SUPER_TYPE_EDEFAULT;
+  protected EPREFIX_TYPE superType;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -158,7 +149,7 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
-  public String getSuperType()
+  public EPREFIX_TYPE getSuperType()
   {
     return superType;
   }
@@ -168,13 +159,38 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setSuperType(String newSuperType)
+  public NotificationChain basicSetSuperType(EPREFIX_TYPE newSuperType, NotificationChain msgs)
   {
-    String oldSuperType = superType;
+    EPREFIX_TYPE oldSuperType = superType;
     superType = newSuperType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE_BODY__SUPER_TYPE, oldSuperType, newSuperType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSuperType(EPREFIX_TYPE newSuperType)
+  {
+    if (newSuperType != superType)
+    {
+      NotificationChain msgs = null;
+      if (superType != null)
+        msgs = ((InternalEObject)superType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE_BODY__SUPER_TYPE, null, msgs);
+      if (newSuperType != null)
+        msgs = ((InternalEObject)newSuperType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE_BODY__SUPER_TYPE, null, msgs);
+      msgs = basicSetSuperType(newSuperType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE_BODY__SUPER_TYPE, newSuperType, newSuperType));
   }
 
   /**
@@ -462,6 +478,8 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
+      case RMPackage.ENODE_TYPE_BODY__SUPER_TYPE:
+        return basicSetSuperType(null, msgs);
       case RMPackage.ENODE_TYPE_BODY__PROPERTIES:
         return basicSetProperties(null, msgs);
       case RMPackage.ENODE_TYPE_BODY__ATTRIBUTES:
@@ -515,7 +533,7 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
     switch (featureID)
     {
       case RMPackage.ENODE_TYPE_BODY__SUPER_TYPE:
-        setSuperType((String)newValue);
+        setSuperType((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.ENODE_TYPE_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -550,7 +568,7 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
     switch (featureID)
     {
       case RMPackage.ENODE_TYPE_BODY__SUPER_TYPE:
-        setSuperType(SUPER_TYPE_EDEFAULT);
+        setSuperType((EPREFIX_TYPE)null);
         return;
       case RMPackage.ENODE_TYPE_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -585,7 +603,7 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
     switch (featureID)
     {
       case RMPackage.ENODE_TYPE_BODY__SUPER_TYPE:
-        return SUPER_TYPE_EDEFAULT == null ? superType != null : !SUPER_TYPE_EDEFAULT.equals(superType);
+        return superType != null;
       case RMPackage.ENODE_TYPE_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.ENODE_TYPE_BODY__PROPERTIES:
@@ -613,9 +631,7 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (superType: ");
-    result.append(superType);
-    result.append(", description: ");
+    result.append(" (description: ");
     result.append(description);
     result.append(')');
     return result.toString();

@@ -32,26 +32,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface ECapabilityDefinitionBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Type</b></em>' attribute.
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' attribute.
-   * @see #setType(String)
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody_Type()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getType();
+  EPREFIX_TYPE getType();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getType <em>Type</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getType <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' attribute.
+   * @param value the new value of the '<em>Type</em>' containment reference.
    * @see #getType()
    * @generated
    */
-  void setType(String value);
+  void setType(EPREFIX_TYPE value);
 
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.

@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EAlphaNumericValue;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.ERequirementDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -36,64 +37,34 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container implements ERequirementDefinitionBody
 {
   /**
-   * The default value of the '{@link #getCapability() <em>Capability</em>}' attribute.
+   * The cached value of the '{@link #getCapability() <em>Capability</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getCapability()
    * @generated
    * @ordered
    */
-  protected static final String CAPABILITY_EDEFAULT = null;
+  protected EPREFIX_TYPE capability;
 
   /**
-   * The cached value of the '{@link #getCapability() <em>Capability</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCapability()
-   * @generated
-   * @ordered
-   */
-  protected String capability = CAPABILITY_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getNode() <em>Node</em>}' attribute.
+   * The cached value of the '{@link #getNode() <em>Node</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getNode()
    * @generated
    * @ordered
    */
-  protected static final String NODE_EDEFAULT = null;
+  protected EPREFIX_TYPE node;
 
   /**
-   * The cached value of the '{@link #getNode() <em>Node</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNode()
-   * @generated
-   * @ordered
-   */
-  protected String node = NODE_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getRelationship() <em>Relationship</em>}' attribute.
+   * The cached value of the '{@link #getRelationship() <em>Relationship</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getRelationship()
    * @generated
    * @ordered
    */
-  protected static final String RELATIONSHIP_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getRelationship() <em>Relationship</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRelationship()
-   * @generated
-   * @ordered
-   */
-  protected String relationship = RELATIONSHIP_EDEFAULT;
+  protected EPREFIX_TYPE relationship;
 
   /**
    * The cached value of the '{@link #getStart() <em>Start</em>}' containment reference.
@@ -142,7 +113,7 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public String getCapability()
+  public EPREFIX_TYPE getCapability()
   {
     return capability;
   }
@@ -152,13 +123,16 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setCapability(String newCapability)
+  public NotificationChain basicSetCapability(EPREFIX_TYPE newCapability, NotificationChain msgs)
   {
-    String oldCapability = capability;
+    EPREFIX_TYPE oldCapability = capability;
     capability = newCapability;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY, oldCapability, capability));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY, oldCapability, newCapability);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -167,7 +141,29 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public String getNode()
+  public void setCapability(EPREFIX_TYPE newCapability)
+  {
+    if (newCapability != capability)
+    {
+      NotificationChain msgs = null;
+      if (capability != null)
+        msgs = ((InternalEObject)capability).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY, null, msgs);
+      if (newCapability != null)
+        msgs = ((InternalEObject)newCapability).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY, null, msgs);
+      msgs = basicSetCapability(newCapability, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY, newCapability, newCapability));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPREFIX_TYPE getNode()
   {
     return node;
   }
@@ -177,13 +173,16 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setNode(String newNode)
+  public NotificationChain basicSetNode(EPREFIX_TYPE newNode, NotificationChain msgs)
   {
-    String oldNode = node;
+    EPREFIX_TYPE oldNode = node;
     node = newNode;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE, oldNode, node));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE, oldNode, newNode);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -192,7 +191,29 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public String getRelationship()
+  public void setNode(EPREFIX_TYPE newNode)
+  {
+    if (newNode != node)
+    {
+      NotificationChain msgs = null;
+      if (node != null)
+        msgs = ((InternalEObject)node).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE, null, msgs);
+      if (newNode != null)
+        msgs = ((InternalEObject)newNode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE, null, msgs);
+      msgs = basicSetNode(newNode, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE, newNode, newNode));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPREFIX_TYPE getRelationship()
   {
     return relationship;
   }
@@ -202,13 +223,38 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setRelationship(String newRelationship)
+  public NotificationChain basicSetRelationship(EPREFIX_TYPE newRelationship, NotificationChain msgs)
   {
-    String oldRelationship = relationship;
+    EPREFIX_TYPE oldRelationship = relationship;
     relationship = newRelationship;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP, oldRelationship, relationship));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP, oldRelationship, newRelationship);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRelationship(EPREFIX_TYPE newRelationship)
+  {
+    if (newRelationship != relationship)
+    {
+      NotificationChain msgs = null;
+      if (relationship != null)
+        msgs = ((InternalEObject)relationship).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP, null, msgs);
+      if (newRelationship != null)
+        msgs = ((InternalEObject)newRelationship).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP, null, msgs);
+      msgs = basicSetRelationship(newRelationship, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP, newRelationship, newRelationship));
   }
 
   /**
@@ -321,6 +367,12 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
   {
     switch (featureID)
     {
+      case RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY:
+        return basicSetCapability(null, msgs);
+      case RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE:
+        return basicSetNode(null, msgs);
+      case RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP:
+        return basicSetRelationship(null, msgs);
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
         return basicSetStart(null, msgs);
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__END:
@@ -364,13 +416,13 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
     switch (featureID)
     {
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY:
-        setCapability((String)newValue);
+        setCapability((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE:
-        setNode((String)newValue);
+        setNode((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP:
-        setRelationship((String)newValue);
+        setRelationship((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
         setStart((EAlphaNumericValue)newValue);
@@ -393,13 +445,13 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
     switch (featureID)
     {
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY:
-        setCapability(CAPABILITY_EDEFAULT);
+        setCapability((EPREFIX_TYPE)null);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE:
-        setNode(NODE_EDEFAULT);
+        setNode((EPREFIX_TYPE)null);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP:
-        setRelationship(RELATIONSHIP_EDEFAULT);
+        setRelationship((EPREFIX_TYPE)null);
         return;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
         setStart((EAlphaNumericValue)null);
@@ -422,38 +474,17 @@ public class ERequirementDefinitionBodyImpl extends MinimalEObjectImpl.Container
     switch (featureID)
     {
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__CAPABILITY:
-        return CAPABILITY_EDEFAULT == null ? capability != null : !CAPABILITY_EDEFAULT.equals(capability);
+        return capability != null;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__NODE:
-        return NODE_EDEFAULT == null ? node != null : !NODE_EDEFAULT.equals(node);
+        return node != null;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__RELATIONSHIP:
-        return RELATIONSHIP_EDEFAULT == null ? relationship != null : !RELATIONSHIP_EDEFAULT.equals(relationship);
+        return relationship != null;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__START:
         return start != null;
       case RMPackage.EREQUIREMENT_DEFINITION_BODY__END:
         return end != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (capability: ");
-    result.append(capability);
-    result.append(", node: ");
-    result.append(node);
-    result.append(", relationship: ");
-    result.append(relationship);
-    result.append(')');
-    return result.toString();
   }
 
 } //ERequirementDefinitionBodyImpl

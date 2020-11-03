@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.EOperations;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -35,24 +36,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container implements EInterfaceDefinitionBody
 {
   /**
-   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected static final String TYPE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected String type = TYPE_EDEFAULT;
+  protected EPREFIX_TYPE type;
 
   /**
    * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference.
@@ -101,7 +92,7 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public String getType()
+  public EPREFIX_TYPE getType()
   {
     return type;
   }
@@ -111,13 +102,38 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setType(String newType)
+  public NotificationChain basicSetType(EPREFIX_TYPE newType, NotificationChain msgs)
   {
-    String oldType = type;
+    EPREFIX_TYPE oldType = type;
     type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION_BODY__TYPE, oldType, type));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION_BODY__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setType(EPREFIX_TYPE newType)
+  {
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_DEFINITION_BODY__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_DEFINITION_BODY__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_DEFINITION_BODY__TYPE, newType, newType));
   }
 
   /**
@@ -230,6 +246,8 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
+      case RMPackage.EINTERFACE_DEFINITION_BODY__TYPE:
+        return basicSetType(null, msgs);
       case RMPackage.EINTERFACE_DEFINITION_BODY__INPUTS:
         return basicSetInputs(null, msgs);
       case RMPackage.EINTERFACE_DEFINITION_BODY__OPERATIONS:
@@ -269,7 +287,7 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EINTERFACE_DEFINITION_BODY__TYPE:
-        setType((String)newValue);
+        setType((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.EINTERFACE_DEFINITION_BODY__INPUTS:
         setInputs((EProperties)newValue);
@@ -292,7 +310,7 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EINTERFACE_DEFINITION_BODY__TYPE:
-        setType(TYPE_EDEFAULT);
+        setType((EPREFIX_TYPE)null);
         return;
       case RMPackage.EINTERFACE_DEFINITION_BODY__INPUTS:
         setInputs((EProperties)null);
@@ -315,30 +333,13 @@ public class EInterfaceDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EINTERFACE_DEFINITION_BODY__TYPE:
-        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+        return type != null;
       case RMPackage.EINTERFACE_DEFINITION_BODY__INPUTS:
         return inputs != null;
       case RMPackage.EINTERFACE_DEFINITION_BODY__OPERATIONS:
         return operations != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (type: ");
-    result.append(type);
-    result.append(')');
-    return result.toString();
   }
 
 } //EInterfaceDefinitionBodyImpl

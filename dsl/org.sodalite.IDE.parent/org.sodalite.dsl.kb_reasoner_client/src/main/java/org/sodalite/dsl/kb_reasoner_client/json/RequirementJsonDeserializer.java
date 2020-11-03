@@ -15,7 +15,7 @@ import java.io.IOException;
 import org.sodalite.dsl.kb_reasoner_client.types.Occurrences;
 import org.sodalite.dsl.kb_reasoner_client.types.Property;
 import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
-import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,21 +42,21 @@ public class RequirementJsonDeserializer extends JsonDeserializer<Requirement> {
         ObjectNode objectNode = (ObjectNode) jsonNode;
         Requirement requirement = new Requirement();
 		
-		JavaType typeType = TypeFactory.defaultInstance().constructType(Type.class);
+		JavaType typeType = TypeFactory.defaultInstance().constructType(SuperType.class);
 		JavaType occurrencesType = TypeFactory.defaultInstance().constructType(Occurrences.class);
 		
 		if (objectNode.get("specification") != null) {
 			JsonNode spec = objectNode.get("specification");
 			if (spec.get("node")!=null) {
-				Type node = mapper.readerFor(typeType).readValue(spec.get("node"));
+				SuperType node = mapper.readerFor(typeType).readValue(spec.get("node"));
 				requirement.setNode(node);
 			}
 			if (spec.get("relationship")!=null) {
-				Type relationship = mapper.readerFor(typeType).readValue(spec.get("relationship"));
+				SuperType relationship = mapper.readerFor(typeType).readValue(spec.get("relationship"));
 				requirement.setRelationship(relationship);
 			}
 			if (spec.get("capability")!=null) {
-				Type capability = mapper.readerFor(typeType).readValue(spec.get("capability"));
+				SuperType capability = mapper.readerFor(typeType).readValue(spec.get("capability"));
 				requirement.setCapability(capability);
 			}
 			if (spec.get("occurrences")!=null) {

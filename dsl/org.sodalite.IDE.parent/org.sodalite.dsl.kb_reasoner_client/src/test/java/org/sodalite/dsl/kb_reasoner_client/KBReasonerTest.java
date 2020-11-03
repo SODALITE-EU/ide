@@ -34,10 +34,10 @@ import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
-import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
+import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 
 class KBReasonerTest {
@@ -58,11 +58,39 @@ class KBReasonerTest {
 	}
 
 	@Test
-	void testGetNodes() throws Exception {
+	void testGetNodeTypes() throws Exception {
 		List<String> modules = Arrays.asList("snow", "docker");
-		ReasonerData<Node> nodes = kbclient.getNodes(modules);
-		assertFalse(nodes.getElements().isEmpty());
-		nodes.getElements().stream().forEach(node -> System.out.println("Node: " + node));
+		ReasonerData<Type> nodeTypes = kbclient.getNodeTypes(modules);
+		assertFalse(nodeTypes.getElements().isEmpty());
+		nodeTypes.getElements().stream().forEach(type -> System.out
+				.println("Node type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
+	}
+
+	@Test
+	void testGetDataTypes() throws Exception {
+		List<String> modules = Arrays.asList("snow", "docker");
+		ReasonerData<Type> dataTypes = kbclient.getDataTypes(modules);
+		assertFalse(dataTypes.getElements().isEmpty());
+		dataTypes.getElements().stream().forEach(type -> System.out
+				.println("Data type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
+	}
+
+	@Test
+	void testGetCapabilityTypes() throws Exception {
+		List<String> modules = Arrays.asList("snow", "docker");
+		ReasonerData<Type> capabilityTypes = kbclient.getCapabilityTypes(modules);
+		assertFalse(capabilityTypes.getElements().isEmpty());
+		capabilityTypes.getElements().stream().forEach(type -> System.out
+				.println("Capability type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
+	}
+
+	@Test
+	void testGetRelationshipTypes() throws Exception {
+		List<String> modules = Arrays.asList("snow", "docker");
+		ReasonerData<Type> relationshipTypes = kbclient.getRelationshipTypes(modules);
+		assertFalse(relationshipTypes.getElements().isEmpty());
+		relationshipTypes.getElements().stream().forEach(type -> System.out
+				.println("Relationship type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
 	}
 
 	@Test

@@ -69,6 +69,7 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EDATA_TYPES: return createEDataTypes();
       case RMPackage.EDATA_TYPE: return createEDataType();
       case RMPackage.EDATA_TYPE_BODY: return createEDataTypeBody();
+      case RMPackage.EDATA_TYPE_NAME: return createEDataTypeName();
       case RMPackage.EARTIFACT_TYPES: return createEArtifactTypes();
       case RMPackage.EARTIFACT_TYPE: return createEArtifactType();
       case RMPackage.EARTIFACT_TYPE_BODY: return createEArtifactTypeBody();
@@ -119,7 +120,6 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.ECAPABILITY_DEFINITION: return createECapabilityDefinition();
       case RMPackage.ECAPABILITY_DEFINITION_BODY: return createECapabilityDefinitionBody();
       case RMPackage.EVALID_SOURCE_TYPE: return createEValidSourceType();
-      case RMPackage.ENODE_TYPE_REF: return createENodeTypeRef();
       case RMPackage.EREQUIREMENTS: return createERequirements();
       case RMPackage.EREQUIREMENT_DEFINITION: return createERequirementDefinition();
       case RMPackage.EREQUIREMENT_DEFINITION_BODY: return createERequirementDefinitionBody();
@@ -146,6 +146,7 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.ESIGNEDINT: return createESIGNEDINT();
       case RMPackage.EMAP: return createEMAP();
       case RMPackage.EMAP_ENTRY: return createEMapEntry();
+      case RMPackage.EPREFIX_TYPE: return createEPREFIX_TYPE();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -197,6 +198,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EDataTypeBodyImpl eDataTypeBody = new EDataTypeBodyImpl();
     return eDataTypeBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDataTypeName createEDataTypeName()
+  {
+    EDataTypeNameImpl eDataTypeName = new EDataTypeNameImpl();
+    return eDataTypeName;
   }
 
   /**
@@ -805,18 +818,6 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
-  public ENodeTypeRef createENodeTypeRef()
-  {
-    ENodeTypeRefImpl eNodeTypeRef = new ENodeTypeRefImpl();
-    return eNodeTypeRef;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public ERequirements createERequirements()
   {
     ERequirementsImpl eRequirements = new ERequirementsImpl();
@@ -1121,6 +1122,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EMapEntryImpl eMapEntry = new EMapEntryImpl();
     return eMapEntry;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPREFIX_TYPE createEPREFIX_TYPE()
+  {
+    EPREFIX_TYPEImpl eprefiX_TYPE = new EPREFIX_TYPEImpl();
+    return eprefiX_TYPE;
   }
 
   /**

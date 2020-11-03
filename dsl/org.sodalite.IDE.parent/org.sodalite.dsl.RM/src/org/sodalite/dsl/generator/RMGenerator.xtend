@@ -311,7 +311,11 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "valid_source_types" ;
 	  «FOR entry:(c.capability.valid_source_types as EObjectContainmentEList<EValidSourceType>)»
 	  «FOR s:(entry.sourceTypes)»
-	  exchange:listValue "«s.name»" ;
+	  «IF s.module !== null»
+	  exchange:listValue "«s.module»/«s.type»" ;
+	  «ELSE»
+	  exchange:listValue "«s.type»" ;
+	  «ENDIF»
 	  «ENDFOR»
 	  «ENDFOR»
 	.
@@ -552,7 +556,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«p.property.req_cap.name»' ; 
+	«IF p.property.req_cap.module !== null»
+	  exchange:value '«p.property.req_cap.module»/«p.property.req_cap.type»' ; 
+	«ELSE»
+	  exchange:value '«p.property.req_cap.type»' ; 
+	«ENDIF»
 	.
 	«ENDIF»		
 	
@@ -596,7 +604,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«a.attribute.req_cap.name»' ; 
+	  «IF a.attribute.req_cap.module !== null»
+	  exchange:value '«a.attribute.req_cap.module»/«a.attribute.req_cap.type»' ; 
+	«ELSE»
+	  exchange:value '«a.attribute.req_cap.type»' ; 
+	«ENDIF»
 	.
 	«ENDIF»		
 	
@@ -645,7 +657,11 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "valid_target_types" ;
 	  «FOR entry:(r.relationship.valid_target_types.targetTypes as EObjectContainmentEList<ECapabilityTypeRef>)»
-	  exchange:listValue "«entry.name.name»" ;
+	  «IF entry.name.module !== null»
+	  exchange:listValue '«entry.name.module»/«entry.name.type»' ; 
+	  «ELSE»
+	  exchange:listValue "«entry.name.type»" ; 
+	  «ENDIF»
 	  «ENDFOR»
 	.
 	«ENDIF»

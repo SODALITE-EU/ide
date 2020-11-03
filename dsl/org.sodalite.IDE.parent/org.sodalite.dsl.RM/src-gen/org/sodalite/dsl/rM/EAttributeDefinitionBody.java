@@ -28,26 +28,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface EAttributeDefinitionBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Type</b></em>' attribute.
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' attribute.
-   * @see #setType(String)
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(EDataTypeName)
    * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinitionBody_Type()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getType();
+  EDataTypeName getType();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getType <em>Type</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getType <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' attribute.
+   * @param value the new value of the '<em>Type</em>' containment reference.
    * @see #getType()
    * @generated
    */
-  void setType(String value);
+  void setType(EDataTypeName value);
 
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.
@@ -116,25 +116,25 @@ public interface EAttributeDefinitionBody extends EObject
   void setStatus(String value);
 
   /**
-   * Returns the value of the '<em><b>Entry schema</b></em>' attribute.
+   * Returns the value of the '<em><b>Entry schema</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Entry schema</em>' attribute.
-   * @see #setEntry_schema(String)
+   * @return the value of the '<em>Entry schema</em>' containment reference.
+   * @see #setEntry_schema(EDataTypeName)
    * @see org.sodalite.dsl.rM.RMPackage#getEAttributeDefinitionBody_Entry_schema()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getEntry_schema();
+  EDataTypeName getEntry_schema();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getEntry_schema <em>Entry schema</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EAttributeDefinitionBody#getEntry_schema <em>Entry schema</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entry schema</em>' attribute.
+   * @param value the new value of the '<em>Entry schema</em>' containment reference.
    * @see #getEntry_schema()
    * @generated
    */
-  void setEntry_schema(String value);
+  void setEntry_schema(EDataTypeName value);
 
 } // EAttributeDefinitionBody

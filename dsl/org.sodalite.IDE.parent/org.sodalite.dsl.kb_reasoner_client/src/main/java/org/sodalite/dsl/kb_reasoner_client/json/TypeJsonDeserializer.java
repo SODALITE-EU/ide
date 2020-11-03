@@ -15,7 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map.Entry;
 
-import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,13 +26,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class TypeJsonDeserializer extends JsonDeserializer<Type> {
+public class TypeJsonDeserializer extends JsonDeserializer<SuperType> {
     private static final ObjectMapper mapper = new ObjectMapper();
     protected JavaType nodeType;
-    protected Type type;
+    protected SuperType type;
 
 	@Override
-	public Type deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+	public SuperType deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
 			throws IOException, JsonProcessingException {
         JsonNode node = mapper.readTree(jsonParser);
     	
@@ -40,9 +40,9 @@ public class TypeJsonDeserializer extends JsonDeserializer<Type> {
     		return null;
     	
         ObjectNode objectNode = (ObjectNode) node;
-        Type type = null;
+        SuperType type = null;
 		try {
-			type = new Type();
+			type = new SuperType();
 			if (objectNode.fields().hasNext()) {
 				Entry<String, JsonNode> entry = objectNode.fields().next();
 				if (entry.getKey()!=null) {

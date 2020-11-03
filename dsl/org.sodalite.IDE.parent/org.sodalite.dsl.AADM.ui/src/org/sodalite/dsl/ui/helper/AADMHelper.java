@@ -35,6 +35,8 @@ import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADM_Model;
+import org.sodalite.dsl.rM.EDataTypeName;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.ui.backend.BackendLogger;
 
@@ -46,9 +48,10 @@ public class AADMHelper {
 		IFile aadmFile = getSelectedFile();
 		AADM_Model aadmModel = readAADMModel(aadmFile, event);
 		AADMHelper helper = new AADMHelper();
+
 		for (EParameterDefinition parameter : aadmModel.getInputs().getInputs()) {
-			InputDef inDef = helper.new InputDef(parameter.getName(), parameter.getParameter().getType(),
-					parameter.getParameter().getDefault());
+			String type = convertType(parameter.getParameter().getType());
+			InputDef inDef = helper.new InputDef(parameter.getName(), type, parameter.getParameter().getDefault());
 			inputs.put(parameter.getName(), inDef);
 		}
 
@@ -176,6 +179,15 @@ public class AADMHelper {
 
 		public Object getDefaultValue() {
 			return defaultValue;
+		}
+	}
+
+	public static String convertType(EDataTypeName eDataTypeName) {
+		if (eDataTypeName instanceof EPREFIX_TYPE) {
+			EPREFIX_TYPE ePrefix_Type = (EPREFIX_TYPE) eDataTypeName;
+			return ePrefix_Type.getModule() + '/' + ePrefix_Type.getType();
+		} else {
+			return eDataTypeName.toString();
 		}
 
 	}

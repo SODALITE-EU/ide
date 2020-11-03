@@ -55,11 +55,11 @@ import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
 import org.sodalite.dsl.kb_reasoner_client.types.Capability;
-import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.Occurrences;
 import org.sodalite.dsl.kb_reasoner_client.types.Property;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
+import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
@@ -172,10 +172,10 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
       final List<String> importedModules = this.getImportedModules(model);
-      final ReasonerData<Node> nodes = this.getKBReasoner().getNodes(importedModules);
+      final ReasonerData<Type> nodes = this.getKBReasoner().getNodeTypes(importedModules);
       System.out.println("Nodes retrieved from KB:");
-      List<Node> _elements = nodes.getElements();
-      for (final Node node : _elements) {
+      List<Type> _elements = nodes.getElements();
+      for (final Type node : _elements) {
         {
           String _label = node.getLabel();
           String _plus = ("\tNode: " + _label);
@@ -415,7 +415,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
               proposalText = property_label;
               displayText = property_label;
               additionalProposalInfo = "";
-              Type _type = capability.getType();
+              SuperType _type = capability.getType();
               boolean _tripleNotEquals = (_type != null);
               if (_tripleNotEquals) {
                 String _additionalProposalInfo = additionalProposalInfo;
@@ -478,7 +478,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
               proposalText = property_label;
               displayText = property_label;
               additionalProposalInfo = "";
-              Type _capability = requirement.getCapability();
+              SuperType _capability = requirement.getCapability();
               boolean _tripleNotEquals = (_capability != null);
               if (_tripleNotEquals) {
                 String _additionalProposalInfo = additionalProposalInfo;
@@ -486,7 +486,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                 String _plus_2 = ("\nCapability: " + _label);
                 additionalProposalInfo = (_additionalProposalInfo + _plus_2);
               }
-              Type _node = requirement.getNode();
+              SuperType _node = requirement.getNode();
               boolean _tripleNotEquals_1 = (_node != null);
               if (_tripleNotEquals_1) {
                 String _additionalProposalInfo_1 = additionalProposalInfo;

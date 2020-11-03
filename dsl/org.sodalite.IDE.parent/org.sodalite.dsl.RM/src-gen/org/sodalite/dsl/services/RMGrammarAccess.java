@@ -436,21 +436,29 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	public class EDataTypeNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EDataTypeName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cQUALIFIED_NAMETerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cPRIMITIVE_DATA_TYPETerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEPREFIX_TYPEParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cEDataTypeNameAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final RuleCall cPRIMITIVE_DATA_TYPETerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//EDataTypeName:
-		//	QUALIFIED_NAME | PRIMITIVE_DATA_TYPE;
+		//	EPREFIX_TYPE | {EDataTypeName} PRIMITIVE_DATA_TYPE;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//QUALIFIED_NAME | PRIMITIVE_DATA_TYPE
+		//EPREFIX_TYPE | {EDataTypeName} PRIMITIVE_DATA_TYPE
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getQUALIFIED_NAMETerminalRuleCall_0() { return cQUALIFIED_NAMETerminalRuleCall_0; }
+		//EPREFIX_TYPE
+		public RuleCall getEPREFIX_TYPEParserRuleCall_0() { return cEPREFIX_TYPEParserRuleCall_0; }
+		
+		//{EDataTypeName} PRIMITIVE_DATA_TYPE
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{EDataTypeName}
+		public Action getEDataTypeNameAction_1_0() { return cEDataTypeNameAction_1_0; }
 		
 		//PRIMITIVE_DATA_TYPE
-		public RuleCall getPRIMITIVE_DATA_TYPETerminalRuleCall_1() { return cPRIMITIVE_DATA_TYPETerminalRuleCall_1; }
+		public RuleCall getPRIMITIVE_DATA_TYPETerminalRuleCall_1_1() { return cPRIMITIVE_DATA_TYPETerminalRuleCall_1_1; }
 	}
 	public class EArtifactTypesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EArtifactTypes");
@@ -525,7 +533,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_1_0 = (Group)cUnorderedGroup_1.eContents().get(0);
 		private final Keyword cDerived_fromKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
+		private final RuleCall cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cUnorderedGroup_1.eContents().get(1);
 		private final Keyword cDescriptionKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -540,32 +548,32 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cFile_extSTRINGTerminalRuleCall_1_3_1_0 = (RuleCall)cFile_extAssignment_1_3_1.eContents().get(0);
 		
 		//EArtifactTypeBody:
-		//	{EArtifactTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? &
-		//	('mime_type:' mime_type=STRING)? & ('file_ext:'+ file_ext=STRING)?);
+		//	{EArtifactTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('mime_type:'
+		//	mime_type=STRING)? & ('file_ext:'+ file_ext=STRING)?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{EArtifactTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('mime_type:'
+		//{EArtifactTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('mime_type:'
 		//mime_type=STRING)? & ('file_ext:'+ file_ext=STRING)?)
 		public Group getGroup() { return cGroup; }
 		
 		//{EArtifactTypeBody}
 		public Action getEArtifactTypeBodyAction_0() { return cEArtifactTypeBodyAction_0; }
 		
-		//(('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('mime_type:' mime_type=STRING)? &
+		//(('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('mime_type:' mime_type=STRING)? &
 		//('file_ext:'+ file_ext=STRING)?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
-		//('derived_from:' superType=QUALIFIED_NAME)?
+		//('derived_from:' superType=EPREFIX_TYPE)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//'derived_from:'
 		public Keyword getDerived_fromKeyword_1_0_0() { return cDerived_fromKeyword_1_0_0; }
 		
-		//superType=QUALIFIED_NAME
+		//superType=EPREFIX_TYPE
 		public Assignment getSuperTypeAssignment_1_0_1() { return cSuperTypeAssignment_1_0_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0() { return cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0() { return cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0; }
 		
 		//('description:' description=STRING)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -676,7 +684,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_1_0 = (Group)cUnorderedGroup_1.eContents().get(0);
 		private final Keyword cDerived_fromKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
+		private final RuleCall cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cUnorderedGroup_1.eContents().get(1);
 		private final Keyword cDescriptionKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -695,7 +703,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cENDTerminalRuleCall_1_3_3 = (RuleCall)cGroup_1_3.eContents().get(3);
 		
 		//ECapabilityTypeBody:
-		//	{ECapabilityTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? &
+		//	{ECapabilityTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? &
 		//	('properties:'
 		//	BEGIN
 		//	properties=EProperties
@@ -705,28 +713,28 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	END)?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ECapabilityTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? &
-		//('properties:' BEGIN properties=EProperties END)? & ('attributes:' BEGIN atributes=EAttributes END)?)
+		//{ECapabilityTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('properties:'
+		//BEGIN properties=EProperties END)? & ('attributes:' BEGIN atributes=EAttributes END)?)
 		public Group getGroup() { return cGroup; }
 		
 		//{ECapabilityTypeBody}
 		public Action getECapabilityTypeBodyAction_0() { return cECapabilityTypeBodyAction_0; }
 		
-		//(('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:' BEGIN
+		//(('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('properties:' BEGIN
 		//properties=EProperties END)? & ('attributes:' BEGIN atributes=EAttributes END)?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
-		//('derived_from:' superType=QUALIFIED_NAME)?
+		//('derived_from:' superType=EPREFIX_TYPE)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//'derived_from:'
 		public Keyword getDerived_fromKeyword_1_0_0() { return cDerived_fromKeyword_1_0_0; }
 		
-		//superType=QUALIFIED_NAME
+		//superType=EPREFIX_TYPE
 		public Assignment getSuperTypeAssignment_1_0_1() { return cSuperTypeAssignment_1_0_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0() { return cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0() { return cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0; }
 		
 		//('description:' description=STRING)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -849,7 +857,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_1_0 = (Group)cUnorderedGroup_1.eContents().get(0);
 		private final Keyword cDerived_fromKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
+		private final RuleCall cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cUnorderedGroup_1.eContents().get(1);
 		private final Keyword cDescriptionKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -868,7 +876,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cENDTerminalRuleCall_1_3_3 = (RuleCall)cGroup_1_3.eContents().get(3);
 		
 		//EInterfaceTypeBody:
-		//	{EInterfaceTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('inputs:'
+		//	{EInterfaceTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('inputs:'
 		//	BEGIN
 		//	inputs=EProperties
 		//	END)? & ('operations:'
@@ -877,28 +885,28 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	END)?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{EInterfaceTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('inputs:'
+		//{EInterfaceTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('inputs:'
 		//BEGIN inputs=EProperties END)? & ('operations:' BEGIN operations=EOperations END)?)
 		public Group getGroup() { return cGroup; }
 		
 		//{EInterfaceTypeBody}
 		public Action getEInterfaceTypeBodyAction_0() { return cEInterfaceTypeBodyAction_0; }
 		
-		//(('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('inputs:' BEGIN
-		//inputs=EProperties END)? & ('operations:' BEGIN operations=EOperations END)?)
+		//(('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('inputs:' BEGIN inputs=EProperties
+		//END)? & ('operations:' BEGIN operations=EOperations END)?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
-		//('derived_from:' superType=QUALIFIED_NAME)?
+		//('derived_from:' superType=EPREFIX_TYPE)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//'derived_from:'
 		public Keyword getDerived_fromKeyword_1_0_0() { return cDerived_fromKeyword_1_0_0; }
 		
-		//superType=QUALIFIED_NAME
+		//superType=EPREFIX_TYPE
 		public Assignment getSuperTypeAssignment_1_0_1() { return cSuperTypeAssignment_1_0_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0() { return cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0() { return cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0; }
 		
 		//('description:' description=STRING)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -1021,36 +1029,36 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_1_0 = (Group)cUnorderedGroup_1.eContents().get(0);
 		private final Keyword cDerived_fromKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
+		private final RuleCall cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cUnorderedGroup_1.eContents().get(1);
 		private final Keyword cDescriptionKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cDescriptionAssignment_1_1_1.eContents().get(0);
 		
 		//EPolicyTypeBody:
-		//	{EPolicyTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)?);
+		//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{EPolicyTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)?)
+		//{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?)
 		public Group getGroup() { return cGroup; }
 		
 		//{EPolicyTypeBody}
 		public Action getEPolicyTypeBodyAction_0() { return cEPolicyTypeBodyAction_0; }
 		
-		//(('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)?)
+		//(('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
-		//('derived_from:' superType=QUALIFIED_NAME)?
+		//('derived_from:' superType=EPREFIX_TYPE)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//'derived_from:'
 		public Keyword getDerived_fromKeyword_1_0_0() { return cDerived_fromKeyword_1_0_0; }
 		
-		//superType=QUALIFIED_NAME
+		//superType=EPREFIX_TYPE
 		public Assignment getSuperTypeAssignment_1_0_1() { return cSuperTypeAssignment_1_0_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0() { return cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0() { return cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0; }
 		
 		//('description:' description=STRING)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -1137,7 +1145,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_1_0 = (Group)cUnorderedGroup_1.eContents().get(0);
 		private final Keyword cDerived_fromKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
+		private final RuleCall cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cUnorderedGroup_1.eContents().get(1);
 		private final Keyword cDescriptionKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -1174,7 +1182,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cENDTerminalRuleCall_1_6_3 = (RuleCall)cGroup_1_6.eContents().get(3);
 		
 		//ENodeTypeBody:
-		//	{ENodeTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:'
+		//	{ENodeTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('properties:'
 		//	BEGIN
 		//	properties=EProperties
 		//	END)? & ('attributes:'
@@ -1192,8 +1200,8 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	END)?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ENodeTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:'
-		//BEGIN properties=EProperties END)? & ('attributes:' BEGIN attributes=EAttributes END)? & ('interfaces:' BEGIN
+		//{ENodeTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('properties:' BEGIN
+		//properties=EProperties END)? & ('attributes:' BEGIN attributes=EAttributes END)? & ('interfaces:' BEGIN
 		//interfaces=EInterfaces END)? & ('capabilities:' BEGIN capabilities=ECapabilities END)? & ('requirements:' BEGIN
 		//requirements=ERequirements END)?)
 		public Group getGroup() { return cGroup; }
@@ -1201,23 +1209,23 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//{ENodeTypeBody}
 		public Action getENodeTypeBodyAction_0() { return cENodeTypeBodyAction_0; }
 		
-		//(('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:' BEGIN
+		//(('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('properties:' BEGIN
 		//properties=EProperties END)? & ('attributes:' BEGIN attributes=EAttributes END)? & ('interfaces:' BEGIN
 		//interfaces=EInterfaces END)? & ('capabilities:' BEGIN capabilities=ECapabilities END)? & ('requirements:' BEGIN
 		//requirements=ERequirements END)?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
-		//('derived_from:' superType=QUALIFIED_NAME)?
+		//('derived_from:' superType=EPREFIX_TYPE)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//'derived_from:'
 		public Keyword getDerived_fromKeyword_1_0_0() { return cDerived_fromKeyword_1_0_0; }
 		
-		//superType=QUALIFIED_NAME
+		//superType=EPREFIX_TYPE
 		public Assignment getSuperTypeAssignment_1_0_1() { return cSuperTypeAssignment_1_0_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0() { return cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0() { return cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0; }
 		
 		//('description:' description=STRING)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -1394,7 +1402,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_1_0 = (Group)cUnorderedGroup_1.eContents().get(0);
 		private final Keyword cDerived_fromKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
+		private final RuleCall cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0 = (RuleCall)cSuperTypeAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cUnorderedGroup_1.eContents().get(1);
 		private final Keyword cDescriptionKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -1425,7 +1433,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Keyword cRightSquareBracketKeyword_1_5_3 = (Keyword)cGroup_1_5.eContents().get(3);
 		
 		//ERelationshipTypeBody:
-		//	{ERelationshipTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? &
+		//	{ERelationshipTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? &
 		//	('properties:'
 		//	BEGIN
 		//	properties=EProperties
@@ -1438,7 +1446,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	END)? & ('valid_target_types:' '[' valid_target_types=EValidTargetTypes "]")?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ERelationshipTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? &
+		//{ERelationshipTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? &
 		//('properties:' BEGIN properties=EProperties END)? & ('attributes:' BEGIN atributes=EAttributes END)? & ('interfaces:'
 		//BEGIN interfaces=EInterfaces END)? & ('valid_target_types:' '[' valid_target_types=EValidTargetTypes "]")?)
 		public Group getGroup() { return cGroup; }
@@ -1446,22 +1454,22 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//{ERelationshipTypeBody}
 		public Action getERelationshipTypeBodyAction_0() { return cERelationshipTypeBodyAction_0; }
 		
-		//(('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:' BEGIN
+		//(('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('properties:' BEGIN
 		//properties=EProperties END)? & ('attributes:' BEGIN atributes=EAttributes END)? & ('interfaces:' BEGIN
 		//interfaces=EInterfaces END)? & ('valid_target_types:' '[' valid_target_types=EValidTargetTypes "]")?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
-		//('derived_from:' superType=QUALIFIED_NAME)?
+		//('derived_from:' superType=EPREFIX_TYPE)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//'derived_from:'
 		public Keyword getDerived_fromKeyword_1_0_0() { return cDerived_fromKeyword_1_0_0; }
 		
-		//superType=QUALIFIED_NAME
+		//superType=EPREFIX_TYPE
 		public Assignment getSuperTypeAssignment_1_0_1() { return cSuperTypeAssignment_1_0_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0() { return cSuperTypeQUALIFIED_NAMETerminalRuleCall_1_0_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0() { return cSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0; }
 		
 		//('description:' description=STRING)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -1585,21 +1593,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	public class ECapabilityTypeRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ECapabilityTypeRef");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cNameECapabilityTypeCrossReference_0 = (CrossReference)cNameAssignment.eContents().get(0);
-		private final RuleCall cNameECapabilityTypeQUALIFIED_NAMETerminalRuleCall_0_1 = (RuleCall)cNameECapabilityTypeCrossReference_0.eContents().get(1);
+		private final RuleCall cNameEPREFIX_TYPEParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//ECapabilityTypeRef:
-		//	name=[ECapabilityType|QUALIFIED_NAME];
+		//	name=EPREFIX_TYPE;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=[ECapabilityType|QUALIFIED_NAME]
+		//name=EPREFIX_TYPE
 		public Assignment getNameAssignment() { return cNameAssignment; }
 		
-		//[ECapabilityType|QUALIFIED_NAME]
-		public CrossReference getNameECapabilityTypeCrossReference_0() { return cNameECapabilityTypeCrossReference_0; }
-		
-		//QUALIFIED_NAME
-		public RuleCall getNameECapabilityTypeQUALIFIED_NAMETerminalRuleCall_0_1() { return cNameECapabilityTypeQUALIFIED_NAMETerminalRuleCall_0_1; }
+		//EPREFIX_TYPE
+		public RuleCall getNameEPREFIX_TYPEParserRuleCall_0() { return cNameEPREFIX_TYPEParserRuleCall_0; }
 	}
 	public class EPropertiesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EProperties");
@@ -2032,7 +2036,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
 		private final Keyword cTypeKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cTypeAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cTypeQUALIFIED_NAMETerminalRuleCall_0_1_0 = (RuleCall)cTypeAssignment_0_1.eContents().get(0);
+		private final RuleCall cTypeEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cTypeAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cInputsKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
@@ -2047,7 +2051,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cENDTerminalRuleCall_2_3 = (RuleCall)cGroup_2.eContents().get(3);
 		
 		//EInterfaceDefinitionBody:
-		//	'type:' type=QUALIFIED_NAME & ('inputs:'
+		//	'type:' type=EPREFIX_TYPE & ('inputs:'
 		//	BEGIN
 		//	inputs=EProperties
 		//	END)? & ('operations:'
@@ -2056,21 +2060,21 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type:' type=QUALIFIED_NAME & ('inputs:' BEGIN inputs=EProperties END)? & ('operations:' BEGIN operations=EOperations
+		//'type:' type=EPREFIX_TYPE & ('inputs:' BEGIN inputs=EProperties END)? & ('operations:' BEGIN operations=EOperations
 		//END)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//'type:' type=QUALIFIED_NAME
+		//'type:' type=EPREFIX_TYPE
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'type:'
 		public Keyword getTypeKeyword_0_0() { return cTypeKeyword_0_0; }
 		
-		//type=QUALIFIED_NAME
+		//type=EPREFIX_TYPE
 		public Assignment getTypeAssignment_0_1() { return cTypeAssignment_0_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getTypeQUALIFIED_NAMETerminalRuleCall_0_1_0() { return cTypeQUALIFIED_NAMETerminalRuleCall_0_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getTypeEPREFIX_TYPEParserRuleCall_0_1_0() { return cTypeEPREFIX_TYPEParserRuleCall_0_1_0; }
 		
 		//('inputs:' BEGIN inputs=EProperties END)?
 		public Group getGroup_1() { return cGroup_1; }
@@ -2685,16 +2689,15 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
 		private final Keyword cReq_capKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cReq_capAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cReq_capEReqOrCapCrossReference_2_1_0 = (CrossReference)cReq_capAssignment_2_1.eContents().get(0);
-		private final RuleCall cReq_capEReqOrCapQUALIFIED_NAMETerminalRuleCall_2_1_0_1 = (RuleCall)cReq_capEReqOrCapCrossReference_2_1_0.eContents().get(1);
+		private final RuleCall cReq_capEPREFIX_TYPEParserRuleCall_2_1_0 = (RuleCall)cReq_capAssignment_2_1.eContents().get(0);
 		
 		//GetAttributeBody:
 		//	'attribute:' attribute=[EAttributeDefinition|QUALIFIED_NAME] & 'entity:' entity=ENTITY & ('req_cap:'
-		//	req_cap=[EReqOrCap|QUALIFIED_NAME])?;
+		//	req_cap=EPREFIX_TYPE)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'attribute:' attribute=[EAttributeDefinition|QUALIFIED_NAME] & 'entity:' entity=ENTITY & ('req_cap:'
-		//req_cap=[EReqOrCap|QUALIFIED_NAME])?
+		//req_cap=EPREFIX_TYPE)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'attribute:' attribute=[EAttributeDefinition|QUALIFIED_NAME]
@@ -2712,6 +2715,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//QUALIFIED_NAME
 		public RuleCall getAttributeEAttributeDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1() { return cAttributeEAttributeDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1; }
 		
+		////FIXME Get reference from KB
 		//'entity:' entity=ENTITY
 		public Group getGroup_1() { return cGroup_1; }
 		
@@ -2724,20 +2728,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//ENTITY
 		public RuleCall getEntityENTITYTerminalRuleCall_1_1_0() { return cEntityENTITYTerminalRuleCall_1_1_0; }
 		
-		//('req_cap:' req_cap=[EReqOrCap|QUALIFIED_NAME])?
+		//('req_cap:' req_cap=EPREFIX_TYPE)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'req_cap:'
 		public Keyword getReq_capKeyword_2_0() { return cReq_capKeyword_2_0; }
 		
-		//req_cap=[EReqOrCap|QUALIFIED_NAME]
+		//req_cap=EPREFIX_TYPE
 		public Assignment getReq_capAssignment_2_1() { return cReq_capAssignment_2_1; }
 		
-		//[EReqOrCap|QUALIFIED_NAME]
-		public CrossReference getReq_capEReqOrCapCrossReference_2_1_0() { return cReq_capEReqOrCapCrossReference_2_1_0; }
-		
-		//QUALIFIED_NAME
-		public RuleCall getReq_capEReqOrCapQUALIFIED_NAMETerminalRuleCall_2_1_0_1() { return cReq_capEReqOrCapQUALIFIED_NAMETerminalRuleCall_2_1_0_1; }
+		//EPREFIX_TYPE
+		public RuleCall getReq_capEPREFIX_TYPEParserRuleCall_2_1_0() { return cReq_capEPREFIX_TYPEParserRuleCall_2_1_0; }
 	}
 	public class GetPropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.GetProperty");
@@ -2788,16 +2789,14 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
 		private final Keyword cReq_capKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cReq_capAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cReq_capEReqOrCapCrossReference_2_1_0 = (CrossReference)cReq_capAssignment_2_1.eContents().get(0);
-		private final RuleCall cReq_capEReqOrCapQUALIFIED_NAMETerminalRuleCall_2_1_0_1 = (RuleCall)cReq_capEReqOrCapCrossReference_2_1_0.eContents().get(1);
+		private final RuleCall cReq_capEPREFIX_TYPEParserRuleCall_2_1_0 = (RuleCall)cReq_capAssignment_2_1.eContents().get(0);
 		
 		//GetPropertyBody:
 		//	'property:' property=[EPropertyDefinition|QUALIFIED_NAME] & 'entity:' entity=ENTITY & ('req_cap:'
-		//	req_cap=[EReqOrCap|QUALIFIED_NAME])?;
+		//	req_cap=EPREFIX_TYPE)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'property:' property=[EPropertyDefinition|QUALIFIED_NAME] & 'entity:' entity=ENTITY & ('req_cap:'
-		//req_cap=[EReqOrCap|QUALIFIED_NAME])?
+		//'property:' property=[EPropertyDefinition|QUALIFIED_NAME] & 'entity:' entity=ENTITY & ('req_cap:' req_cap=EPREFIX_TYPE)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'property:' property=[EPropertyDefinition|QUALIFIED_NAME]
@@ -2815,6 +2814,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//QUALIFIED_NAME
 		public RuleCall getPropertyEPropertyDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1() { return cPropertyEPropertyDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1; }
 		
+		////FIXME Get reference from KB
 		//'entity:' entity=ENTITY
 		public Group getGroup_1() { return cGroup_1; }
 		
@@ -2827,20 +2827,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//ENTITY
 		public RuleCall getEntityENTITYTerminalRuleCall_1_1_0() { return cEntityENTITYTerminalRuleCall_1_1_0; }
 		
-		//('req_cap:' req_cap=[EReqOrCap|QUALIFIED_NAME])?
+		//('req_cap:' req_cap=EPREFIX_TYPE)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'req_cap:'
 		public Keyword getReq_capKeyword_2_0() { return cReq_capKeyword_2_0; }
 		
-		//req_cap=[EReqOrCap|QUALIFIED_NAME]
+		//req_cap=EPREFIX_TYPE
 		public Assignment getReq_capAssignment_2_1() { return cReq_capAssignment_2_1; }
 		
-		//[EReqOrCap|QUALIFIED_NAME]
-		public CrossReference getReq_capEReqOrCapCrossReference_2_1_0() { return cReq_capEReqOrCapCrossReference_2_1_0; }
-		
-		//QUALIFIED_NAME
-		public RuleCall getReq_capEReqOrCapQUALIFIED_NAMETerminalRuleCall_2_1_0_1() { return cReq_capEReqOrCapQUALIFIED_NAMETerminalRuleCall_2_1_0_1; }
+		//EPREFIX_TYPE
+		public RuleCall getReq_capEPREFIX_TYPEParserRuleCall_2_1_0() { return cReq_capEPREFIX_TYPEParserRuleCall_2_1_0; }
 	}
 	public class ECapabilitiesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ECapabilities");
@@ -2913,7 +2910,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
 		private final Keyword cTypeKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cTypeAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cTypeQUALIFIED_NAMETerminalRuleCall_0_1_0 = (RuleCall)cTypeAssignment_0_1.eContents().get(0);
+		private final RuleCall cTypeEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cTypeAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cDescriptionKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -2947,7 +2944,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Keyword cRightSquareBracketKeyword_5_5 = (Keyword)cGroup_5.eContents().get(5);
 		
 		//ECapabilityDefinitionBody:
-		//	'type:' type=QUALIFIED_NAME & ('description:' description=STRING)? & ('properties:'
+		//	'type:' type=EPREFIX_TYPE & ('description:' description=STRING)? & ('properties:'
 		//	BEGIN
 		//	properties=EProperties
 		//	END)? & ('attributes:'
@@ -2957,22 +2954,22 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type:' type=QUALIFIED_NAME & ('description:' description=STRING)? & ('properties:' BEGIN properties=EProperties END)? &
+		//'type:' type=EPREFIX_TYPE & ('description:' description=STRING)? & ('properties:' BEGIN properties=EProperties END)? &
 		//('attributes:' BEGIN attributes=EAttributes END)? & ('valid_source_types:' '[' valid_source_types+=EValidSourceType?
 		//']')? & ('occurrences:' '[' occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//'type:' type=QUALIFIED_NAME
+		//'type:' type=EPREFIX_TYPE
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'type:'
 		public Keyword getTypeKeyword_0_0() { return cTypeKeyword_0_0; }
 		
-		//type=QUALIFIED_NAME
+		//type=EPREFIX_TYPE
 		public Assignment getTypeAssignment_0_1() { return cTypeAssignment_0_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getTypeQUALIFIED_NAMETerminalRuleCall_0_1_0() { return cTypeQUALIFIED_NAMETerminalRuleCall_0_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getTypeEPREFIX_TYPEParserRuleCall_0_1_0() { return cTypeEPREFIX_TYPEParserRuleCall_0_1_0; }
 		
 		//('description:' description=STRING)?
 		public Group getGroup_1() { return cGroup_1; }
@@ -3071,51 +3068,36 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EValidSourceType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cSourceTypesAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cSourceTypesENodeTypeRefParserRuleCall_0_0 = (RuleCall)cSourceTypesAssignment_0.eContents().get(0);
+		private final RuleCall cSourceTypesEPREFIX_TYPEParserRuleCall_0_0 = (RuleCall)cSourceTypesAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cSourceTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cSourceTypeENodeTypeRefParserRuleCall_1_1_0 = (RuleCall)cSourceTypeAssignment_1_1.eContents().get(0);
+		private final RuleCall cSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0 = (RuleCall)cSourceTypeAssignment_1_1.eContents().get(0);
 		
 		//EValidSourceType:
-		//	sourceTypes+=ENodeTypeRef (',' sourceType+=ENodeTypeRef)*;
+		//	sourceTypes+=EPREFIX_TYPE (',' sourceType+=EPREFIX_TYPE)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//sourceTypes+=ENodeTypeRef (',' sourceType+=ENodeTypeRef)*
+		//sourceTypes+=EPREFIX_TYPE (',' sourceType+=EPREFIX_TYPE)*
 		public Group getGroup() { return cGroup; }
 		
-		//sourceTypes+=ENodeTypeRef
+		//sourceTypes+=EPREFIX_TYPE
 		public Assignment getSourceTypesAssignment_0() { return cSourceTypesAssignment_0; }
 		
-		//ENodeTypeRef
-		public RuleCall getSourceTypesENodeTypeRefParserRuleCall_0_0() { return cSourceTypesENodeTypeRefParserRuleCall_0_0; }
+		//EPREFIX_TYPE
+		public RuleCall getSourceTypesEPREFIX_TYPEParserRuleCall_0_0() { return cSourceTypesEPREFIX_TYPEParserRuleCall_0_0; }
 		
-		//(',' sourceType+=ENodeTypeRef)*
+		//(',' sourceType+=EPREFIX_TYPE)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//','
 		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
 		
-		//sourceType+=ENodeTypeRef
+		//sourceType+=EPREFIX_TYPE
 		public Assignment getSourceTypeAssignment_1_1() { return cSourceTypeAssignment_1_1; }
 		
-		//ENodeTypeRef
-		public RuleCall getSourceTypeENodeTypeRefParserRuleCall_1_1_0() { return cSourceTypeENodeTypeRefParserRuleCall_1_1_0; }
-	}
-	public class ENodeTypeRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ENodeTypeRef");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameQUALIFIED_NAMETerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//ENodeTypeRef:
-		//	name=QUALIFIED_NAME;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//name=QUALIFIED_NAME
-		public Assignment getNameAssignment() { return cNameAssignment; }
-		
-		//QUALIFIED_NAME
-		public RuleCall getNameQUALIFIED_NAMETerminalRuleCall_0() { return cNameQUALIFIED_NAMETerminalRuleCall_0; }
+		//EPREFIX_TYPE
+		public RuleCall getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0() { return cSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0; }
 	}
 	public class ERequirementsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ERequirements");
@@ -3188,15 +3170,15 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
 		private final Keyword cCapabilityKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cCapabilityAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cCapabilityQUALIFIED_NAMETerminalRuleCall_0_1_0 = (RuleCall)cCapabilityAssignment_0_1.eContents().get(0);
+		private final RuleCall cCapabilityEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cCapabilityAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cNodeKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cNodeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cNodeQUALIFIED_NAMETerminalRuleCall_1_1_0 = (RuleCall)cNodeAssignment_1_1.eContents().get(0);
+		private final RuleCall cNodeEPREFIX_TYPEParserRuleCall_1_1_0 = (RuleCall)cNodeAssignment_1_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
 		private final Keyword cRelationshipKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cRelationshipAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cRelationshipQUALIFIED_NAMETerminalRuleCall_2_1_0 = (RuleCall)cRelationshipAssignment_2_1.eContents().get(0);
+		private final RuleCall cRelationshipEPREFIX_TYPEParserRuleCall_2_1_0 = (RuleCall)cRelationshipAssignment_2_1.eContents().get(0);
 		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
 		private final Keyword cOccurrencesKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Keyword cLeftSquareBracketKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
@@ -3208,49 +3190,49 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Keyword cRightSquareBracketKeyword_3_5 = (Keyword)cGroup_3.eContents().get(5);
 		
 		//ERequirementDefinitionBody:
-		//	'capability:' capability=QUALIFIED_NAME & ('node:' node=QUALIFIED_NAME)? & ('relationship:'
-		//	relationship=QUALIFIED_NAME)? & ('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?;
+		//	'capability:' capability=EPREFIX_TYPE & ('node:' node=EPREFIX_TYPE)? & ('relationship:' relationship=EPREFIX_TYPE)? &
+		//	('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'capability:' capability=QUALIFIED_NAME & ('node:' node=QUALIFIED_NAME)? & ('relationship:'
-		//relationship=QUALIFIED_NAME)? & ('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?
+		//'capability:' capability=EPREFIX_TYPE & ('node:' node=EPREFIX_TYPE)? & ('relationship:' relationship=EPREFIX_TYPE)? &
+		//('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//'capability:' capability=QUALIFIED_NAME
+		//'capability:' capability=EPREFIX_TYPE
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'capability:'
 		public Keyword getCapabilityKeyword_0_0() { return cCapabilityKeyword_0_0; }
 		
-		//capability=QUALIFIED_NAME
+		//capability=EPREFIX_TYPE
 		public Assignment getCapabilityAssignment_0_1() { return cCapabilityAssignment_0_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getCapabilityQUALIFIED_NAMETerminalRuleCall_0_1_0() { return cCapabilityQUALIFIED_NAMETerminalRuleCall_0_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getCapabilityEPREFIX_TYPEParserRuleCall_0_1_0() { return cCapabilityEPREFIX_TYPEParserRuleCall_0_1_0; }
 		
-		//('node:' node=QUALIFIED_NAME)?
+		//('node:' node=EPREFIX_TYPE)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'node:'
 		public Keyword getNodeKeyword_1_0() { return cNodeKeyword_1_0; }
 		
-		//node=QUALIFIED_NAME
+		//node=EPREFIX_TYPE
 		public Assignment getNodeAssignment_1_1() { return cNodeAssignment_1_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getNodeQUALIFIED_NAMETerminalRuleCall_1_1_0() { return cNodeQUALIFIED_NAMETerminalRuleCall_1_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getNodeEPREFIX_TYPEParserRuleCall_1_1_0() { return cNodeEPREFIX_TYPEParserRuleCall_1_1_0; }
 		
-		//('relationship:' relationship=QUALIFIED_NAME)?
+		//('relationship:' relationship=EPREFIX_TYPE)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'relationship:'
 		public Keyword getRelationshipKeyword_2_0() { return cRelationshipKeyword_2_0; }
 		
-		//relationship=QUALIFIED_NAME
+		//relationship=EPREFIX_TYPE
 		public Assignment getRelationshipAssignment_2_1() { return cRelationshipAssignment_2_1; }
 		
-		//QUALIFIED_NAME
-		public RuleCall getRelationshipQUALIFIED_NAMETerminalRuleCall_2_1_0() { return cRelationshipQUALIFIED_NAMETerminalRuleCall_2_1_0; }
+		//EPREFIX_TYPE
+		public RuleCall getRelationshipEPREFIX_TYPEParserRuleCall_2_1_0() { return cRelationshipEPREFIX_TYPEParserRuleCall_2_1_0; }
 		
 		//('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?
 		public Group getGroup_3() { return cGroup_3; }
@@ -3864,6 +3846,41 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//EAssignmentValue
 		public RuleCall getValueEAssignmentValueParserRuleCall_2_0() { return cValueEAssignmentValueParserRuleCall_2_0; }
 	}
+	public class EPREFIX_TYPEElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EPREFIX_TYPE");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Assignment cModuleAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cModuleIDTerminalRuleCall_0_0_0 = (RuleCall)cModuleAssignment_0_0.eContents().get(0);
+		private final Keyword cSolidusKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeQUALIFIED_NAMETerminalRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		
+		//EPREFIX_TYPE:
+		//	(module=ID '/')? type=QUALIFIED_NAME;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//(module=ID '/')? type=QUALIFIED_NAME
+		public Group getGroup() { return cGroup; }
+		
+		//(module=ID '/')?
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//module=ID
+		public Assignment getModuleAssignment_0_0() { return cModuleAssignment_0_0; }
+		
+		//ID
+		public RuleCall getModuleIDTerminalRuleCall_0_0_0() { return cModuleIDTerminalRuleCall_0_0_0; }
+		
+		//'/'
+		public Keyword getSolidusKeyword_0_1() { return cSolidusKeyword_0_1; }
+		
+		//type=QUALIFIED_NAME
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		
+		//QUALIFIED_NAME
+		public RuleCall getTypeQUALIFIED_NAMETerminalRuleCall_1_0() { return cTypeQUALIFIED_NAMETerminalRuleCall_1_0; }
+	}
 	public class SIGNEDINTElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.SIGNEDINT");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -3963,7 +3980,6 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final ECapabilityDefinitionElements pECapabilityDefinition;
 	private final ECapabilityDefinitionBodyElements pECapabilityDefinitionBody;
 	private final EValidSourceTypeElements pEValidSourceType;
-	private final ENodeTypeRefElements pENodeTypeRef;
 	private final ERequirementsElements pERequirements;
 	private final ERequirementDefinitionElements pERequirementDefinition;
 	private final ERequirementDefinitionBodyElements pERequirementDefinitionBody;
@@ -3990,6 +4006,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final ESIGNEDINTElements pESIGNEDINT;
 	private final EMAPElements pEMAP;
 	private final EMapEntryElements pEMapEntry;
+	private final EPREFIX_TYPEElements pEPREFIX_TYPE;
 	private final TerminalRule tQUALIFIED_NAME;
 	private final TerminalRule tBOOLEAN;
 	private final SIGNEDINTElements pSIGNEDINT;
@@ -4064,7 +4081,6 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pECapabilityDefinition = new ECapabilityDefinitionElements();
 		this.pECapabilityDefinitionBody = new ECapabilityDefinitionBodyElements();
 		this.pEValidSourceType = new EValidSourceTypeElements();
-		this.pENodeTypeRef = new ENodeTypeRefElements();
 		this.pERequirements = new ERequirementsElements();
 		this.pERequirementDefinition = new ERequirementDefinitionElements();
 		this.pERequirementDefinitionBody = new ERequirementDefinitionBodyElements();
@@ -4091,6 +4107,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pESIGNEDINT = new ESIGNEDINTElements();
 		this.pEMAP = new EMAPElements();
 		this.pEMapEntry = new EMapEntryElements();
+		this.pEPREFIX_TYPE = new EPREFIX_TYPEElements();
 		this.tQUALIFIED_NAME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.QUALIFIED_NAME");
 		this.tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.BOOLEAN");
 		this.pSIGNEDINT = new SIGNEDINTElements();
@@ -4200,7 +4217,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EDataTypeName:
-	//	QUALIFIED_NAME | PRIMITIVE_DATA_TYPE;
+	//	EPREFIX_TYPE | {EDataTypeName} PRIMITIVE_DATA_TYPE;
 	public EDataTypeNameElements getEDataTypeNameAccess() {
 		return pEDataTypeName;
 	}
@@ -4233,8 +4250,8 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EArtifactTypeBody:
-	//	{EArtifactTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? &
-	//	('mime_type:' mime_type=STRING)? & ('file_ext:'+ file_ext=STRING)?);
+	//	{EArtifactTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('mime_type:'
+	//	mime_type=STRING)? & ('file_ext:'+ file_ext=STRING)?);
 	public EArtifactTypeBodyElements getEArtifactTypeBodyAccess() {
 		return pEArtifactTypeBody;
 	}
@@ -4267,7 +4284,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ECapabilityTypeBody:
-	//	{ECapabilityTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? &
+	//	{ECapabilityTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? &
 	//	('properties:'
 	//	BEGIN
 	//	properties=EProperties
@@ -4307,7 +4324,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EInterfaceTypeBody:
-	//	{EInterfaceTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('inputs:'
+	//	{EInterfaceTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('inputs:'
 	//	BEGIN
 	//	inputs=EProperties
 	//	END)? & ('operations:'
@@ -4346,7 +4363,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EPolicyTypeBody:
-	//	{EPolicyTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)?);
+	//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?);
 	public EPolicyTypeBodyElements getEPolicyTypeBodyAccess() {
 		return pEPolicyTypeBody;
 	}
@@ -4379,7 +4396,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ENodeTypeBody:
-	//	{ENodeTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? & ('properties:'
+	//	{ENodeTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('properties:'
 	//	BEGIN
 	//	properties=EProperties
 	//	END)? & ('attributes:'
@@ -4427,7 +4444,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ERelationshipTypeBody:
-	//	{ERelationshipTypeBody} (('derived_from:' superType=QUALIFIED_NAME)? & ('description:' description=STRING)? &
+	//	{ERelationshipTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? &
 	//	('properties:'
 	//	BEGIN
 	//	properties=EProperties
@@ -4457,7 +4474,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ECapabilityTypeRef:
-	//	name=[ECapabilityType|QUALIFIED_NAME];
+	//	name=EPREFIX_TYPE;
 	public ECapabilityTypeRefElements getECapabilityTypeRefAccess() {
 		return pECapabilityTypeRef;
 	}
@@ -4561,7 +4578,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EInterfaceDefinitionBody:
-	//	'type:' type=QUALIFIED_NAME & ('inputs:'
+	//	'type:' type=EPREFIX_TYPE & ('inputs:'
 	//	BEGIN
 	//	inputs=EProperties
 	//	END)? & ('operations:'
@@ -4735,7 +4752,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	
 	//GetAttributeBody:
 	//	'attribute:' attribute=[EAttributeDefinition|QUALIFIED_NAME] & 'entity:' entity=ENTITY & ('req_cap:'
-	//	req_cap=[EReqOrCap|QUALIFIED_NAME])?;
+	//	req_cap=EPREFIX_TYPE)?;
 	public GetAttributeBodyElements getGetAttributeBodyAccess() {
 		return pGetAttributeBody;
 	}
@@ -4759,7 +4776,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	
 	//GetPropertyBody:
 	//	'property:' property=[EPropertyDefinition|QUALIFIED_NAME] & 'entity:' entity=ENTITY & ('req_cap:'
-	//	req_cap=[EReqOrCap|QUALIFIED_NAME])?;
+	//	req_cap=EPREFIX_TYPE)?;
 	public GetPropertyBodyElements getGetPropertyBodyAccess() {
 		return pGetPropertyBody;
 	}
@@ -4792,7 +4809,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ECapabilityDefinitionBody:
-	//	'type:' type=QUALIFIED_NAME & ('description:' description=STRING)? & ('properties:'
+	//	'type:' type=EPREFIX_TYPE & ('description:' description=STRING)? & ('properties:'
 	//	BEGIN
 	//	properties=EProperties
 	//	END)? & ('attributes:'
@@ -4809,23 +4826,13 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EValidSourceType:
-	//	sourceTypes+=ENodeTypeRef (',' sourceType+=ENodeTypeRef)*;
+	//	sourceTypes+=EPREFIX_TYPE (',' sourceType+=EPREFIX_TYPE)*;
 	public EValidSourceTypeElements getEValidSourceTypeAccess() {
 		return pEValidSourceType;
 	}
 	
 	public ParserRule getEValidSourceTypeRule() {
 		return getEValidSourceTypeAccess().getRule();
-	}
-	
-	//ENodeTypeRef:
-	//	name=QUALIFIED_NAME;
-	public ENodeTypeRefElements getENodeTypeRefAccess() {
-		return pENodeTypeRef;
-	}
-	
-	public ParserRule getENodeTypeRefRule() {
-		return getENodeTypeRefAccess().getRule();
 	}
 	
 	//ERequirements:
@@ -4852,8 +4859,8 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ERequirementDefinitionBody:
-	//	'capability:' capability=QUALIFIED_NAME & ('node:' node=QUALIFIED_NAME)? & ('relationship:'
-	//	relationship=QUALIFIED_NAME)? & ('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?;
+	//	'capability:' capability=EPREFIX_TYPE & ('node:' node=EPREFIX_TYPE)? & ('relationship:' relationship=EPREFIX_TYPE)? &
+	//	('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?;
 	public ERequirementDefinitionBodyElements getERequirementDefinitionBodyAccess() {
 		return pERequirementDefinitionBody;
 	}
@@ -5093,6 +5100,16 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	
 	public ParserRule getEMapEntryRule() {
 		return getEMapEntryAccess().getRule();
+	}
+	
+	//EPREFIX_TYPE:
+	//	(module=ID '/')? type=QUALIFIED_NAME;
+	public EPREFIX_TYPEElements getEPREFIX_TYPEAccess() {
+		return pEPREFIX_TYPE;
+	}
+	
+	public ParserRule getEPREFIX_TYPERule() {
+		return getEPREFIX_TYPEAccess().getRule();
 	}
 	
 	//terminal QUALIFIED_NAME:

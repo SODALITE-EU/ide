@@ -70,25 +70,25 @@ public interface GetAttributeBody extends EObject
   void setEntity(String value);
 
   /**
-   * Returns the value of the '<em><b>Req cap</b></em>' reference.
+   * Returns the value of the '<em><b>Req cap</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Req cap</em>' reference.
-   * @see #setReq_cap(EReqOrCap)
+   * @return the value of the '<em>Req cap</em>' containment reference.
+   * @see #setReq_cap(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getGetAttributeBody_Req_cap()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EReqOrCap getReq_cap();
+  EPREFIX_TYPE getReq_cap();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getReq_cap <em>Req cap</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getReq_cap <em>Req cap</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Req cap</em>' reference.
+   * @param value the new value of the '<em>Req cap</em>' containment reference.
    * @see #getReq_cap()
    * @generated
    */
-  void setReq_cap(EReqOrCap value);
+  void setReq_cap(EPREFIX_TYPE value);
 
 } // GetAttributeBody

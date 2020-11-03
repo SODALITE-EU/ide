@@ -25,26 +25,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface EDataType extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Name</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
+   * @return the value of the '<em>Name</em>' containment reference.
+   * @see #setName(EDataTypeName)
    * @see org.sodalite.dsl.rM.RMPackage#getEDataType_Name()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getName();
+  EDataTypeName getName();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EDataType#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EDataType#getName <em>Name</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
+   * @param value the new value of the '<em>Name</em>' containment reference.
    * @see #getName()
    * @generated
    */
-  void setName(String value);
+  void setName(EDataTypeName value);
 
   /**
    * Returns the value of the '<em><b>Data</b></em>' containment reference.

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.sodalite.dsl.kb_reasoner_client.types.KBEntity;
-import org.sodalite.dsl.kb_reasoner_client.types.Node;
+import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -60,7 +60,7 @@ public abstract class ReasonerDataJsonDeserializer<T extends KBEntity> extends J
 				JsonNode value = ((ObjectNode) node).get(key);
 				URI uri = new URI(key);
 				if (value.get("namespace") != null)
-					((Node) entity).setModule(value.get("namespace").asText());
+					((Type) entity).setModule(value.get("namespace").asText());
 				entity.setUri(uri);
 				if (!nodes.contains(entity))
 					nodes.add(entity);

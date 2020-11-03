@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EConstraints;
+import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EPropertyDefinitionBody;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.RMPackage;
@@ -39,24 +40,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container implements EPropertyDefinitionBody
 {
   /**
-   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected static final String TYPE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected String type = TYPE_EDEFAULT;
+  protected EDataTypeName type;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -139,24 +130,14 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
   protected EConstraints constraints;
 
   /**
-   * The default value of the '{@link #getEntry_schema() <em>Entry schema</em>}' attribute.
+   * The cached value of the '{@link #getEntry_schema() <em>Entry schema</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getEntry_schema()
    * @generated
    * @ordered
    */
-  protected static final String ENTRY_SCHEMA_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getEntry_schema() <em>Entry schema</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEntry_schema()
-   * @generated
-   * @ordered
-   */
-  protected String entry_schema = ENTRY_SCHEMA_EDEFAULT;
+  protected EDataTypeName entry_schema;
 
   /**
    * <!-- begin-user-doc -->
@@ -185,7 +166,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * @generated
    */
   @Override
-  public String getType()
+  public EDataTypeName getType()
   {
     return type;
   }
@@ -195,13 +176,38 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setType(String newType)
+  public NotificationChain basicSetType(EDataTypeName newType, NotificationChain msgs)
   {
-    String oldType = type;
+    EDataTypeName oldType = type;
     type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION_BODY__TYPE, oldType, type));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION_BODY__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setType(EDataTypeName newType)
+  {
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION_BODY__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION_BODY__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION_BODY__TYPE, newType, newType));
   }
 
   /**
@@ -385,7 +391,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * @generated
    */
   @Override
-  public String getEntry_schema()
+  public EDataTypeName getEntry_schema()
   {
     return entry_schema;
   }
@@ -395,13 +401,38 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setEntry_schema(String newEntry_schema)
+  public NotificationChain basicSetEntry_schema(EDataTypeName newEntry_schema, NotificationChain msgs)
   {
-    String oldEntry_schema = entry_schema;
+    EDataTypeName oldEntry_schema = entry_schema;
     entry_schema = newEntry_schema;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION_BODY__ENTRY_SCHEMA, oldEntry_schema, entry_schema));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION_BODY__ENTRY_SCHEMA, oldEntry_schema, newEntry_schema);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setEntry_schema(EDataTypeName newEntry_schema)
+  {
+    if (newEntry_schema != entry_schema)
+    {
+      NotificationChain msgs = null;
+      if (entry_schema != null)
+        msgs = ((InternalEObject)entry_schema).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION_BODY__ENTRY_SCHEMA, null, msgs);
+      if (newEntry_schema != null)
+        msgs = ((InternalEObject)newEntry_schema).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION_BODY__ENTRY_SCHEMA, null, msgs);
+      msgs = basicSetEntry_schema(newEntry_schema, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION_BODY__ENTRY_SCHEMA, newEntry_schema, newEntry_schema));
   }
 
   /**
@@ -414,10 +445,14 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
   {
     switch (featureID)
     {
+      case RMPackage.EPROPERTY_DEFINITION_BODY__TYPE:
+        return basicSetType(null, msgs);
       case RMPackage.EPROPERTY_DEFINITION_BODY__DEFAULT:
         return basicSetDefault(null, msgs);
       case RMPackage.EPROPERTY_DEFINITION_BODY__CONSTRAINTS:
         return basicSetConstraints(null, msgs);
+      case RMPackage.EPROPERTY_DEFINITION_BODY__ENTRY_SCHEMA:
+        return basicSetEntry_schema(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -461,7 +496,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
     switch (featureID)
     {
       case RMPackage.EPROPERTY_DEFINITION_BODY__TYPE:
-        setType((String)newValue);
+        setType((EDataTypeName)newValue);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -479,7 +514,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
         setConstraints((EConstraints)newValue);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__ENTRY_SCHEMA:
-        setEntry_schema((String)newValue);
+        setEntry_schema((EDataTypeName)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -496,7 +531,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
     switch (featureID)
     {
       case RMPackage.EPROPERTY_DEFINITION_BODY__TYPE:
-        setType(TYPE_EDEFAULT);
+        setType((EDataTypeName)null);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -514,7 +549,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
         setConstraints((EConstraints)null);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__ENTRY_SCHEMA:
-        setEntry_schema(ENTRY_SCHEMA_EDEFAULT);
+        setEntry_schema((EDataTypeName)null);
         return;
     }
     super.eUnset(featureID);
@@ -531,7 +566,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
     switch (featureID)
     {
       case RMPackage.EPROPERTY_DEFINITION_BODY__TYPE:
-        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+        return type != null;
       case RMPackage.EPROPERTY_DEFINITION_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED:
@@ -543,7 +578,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
       case RMPackage.EPROPERTY_DEFINITION_BODY__CONSTRAINTS:
         return constraints != null;
       case RMPackage.EPROPERTY_DEFINITION_BODY__ENTRY_SCHEMA:
-        return ENTRY_SCHEMA_EDEFAULT == null ? entry_schema != null : !ENTRY_SCHEMA_EDEFAULT.equals(entry_schema);
+        return entry_schema != null;
     }
     return super.eIsSet(featureID);
   }
@@ -559,16 +594,12 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (type: ");
-    result.append(type);
-    result.append(", description: ");
+    result.append(" (description: ");
     result.append(description);
     result.append(", required: ");
     result.append(required);
     result.append(", status: ");
     result.append(status);
-    result.append(", entry_schema: ");
-    result.append(entry_schema);
     result.append(')');
     return result.toString();
   }

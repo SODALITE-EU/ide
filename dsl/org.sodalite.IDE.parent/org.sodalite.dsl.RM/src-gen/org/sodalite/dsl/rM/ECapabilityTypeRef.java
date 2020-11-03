@@ -24,25 +24,25 @@ import org.eclipse.emf.ecore.EObject;
 public interface ECapabilityTypeRef extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' reference.
+   * Returns the value of the '<em><b>Name</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' reference.
-   * @see #setName(ECapabilityType)
+   * @return the value of the '<em>Name</em>' containment reference.
+   * @see #setName(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getECapabilityTypeRef_Name()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  ECapabilityType getName();
+  EPREFIX_TYPE getName();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityTypeRef#getName <em>Name</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityTypeRef#getName <em>Name</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' reference.
+   * @param value the new value of the '<em>Name</em>' containment reference.
    * @see #getName()
    * @generated
    */
-  void setName(ECapabilityType value);
+  void setName(EPREFIX_TYPE value);
 
 } // ECapabilityTypeRef

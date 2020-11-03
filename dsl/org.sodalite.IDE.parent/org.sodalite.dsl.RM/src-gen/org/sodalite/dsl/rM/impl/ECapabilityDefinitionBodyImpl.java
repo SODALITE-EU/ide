@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.RMPackage;
@@ -48,24 +49,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container implements ECapabilityDefinitionBody
 {
   /**
-   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected static final String TYPE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected String type = TYPE_EDEFAULT;
+  protected EPREFIX_TYPE type;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -164,7 +155,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public String getType()
+  public EPREFIX_TYPE getType()
   {
     return type;
   }
@@ -174,13 +165,38 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setType(String newType)
+  public NotificationChain basicSetType(EPREFIX_TYPE newType, NotificationChain msgs)
   {
-    String oldType = type;
+    EPREFIX_TYPE oldType = type;
     type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE, oldType, type));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setType(EPREFIX_TYPE newType)
+  {
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE, newType, newType));
   }
 
   /**
@@ -433,6 +449,8 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
+      case RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE:
+        return basicSetType(null, msgs);
       case RMPackage.ECAPABILITY_DEFINITION_BODY__PROPERTIES:
         return basicSetProperties(null, msgs);
       case RMPackage.ECAPABILITY_DEFINITION_BODY__ATTRIBUTES:
@@ -487,7 +505,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE:
-        setType((String)newValue);
+        setType((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -523,7 +541,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE:
-        setType(TYPE_EDEFAULT);
+        setType((EPREFIX_TYPE)null);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -558,7 +576,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     switch (featureID)
     {
       case RMPackage.ECAPABILITY_DEFINITION_BODY__TYPE:
-        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+        return type != null;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.ECAPABILITY_DEFINITION_BODY__PROPERTIES:
@@ -586,9 +604,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (type: ");
-    result.append(type);
-    result.append(", description: ");
+    result.append(" (description: ");
     result.append(description);
     result.append(')');
     return result.toString();

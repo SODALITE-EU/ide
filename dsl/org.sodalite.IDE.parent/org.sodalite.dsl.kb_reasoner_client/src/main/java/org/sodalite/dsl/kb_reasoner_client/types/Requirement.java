@@ -18,27 +18,27 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = RequirementJsonDeserializer.class)
 public class Requirement extends KBEntity{
-	Type node;
-	Type relationship; 
-	Type capability;
+	SuperType node;
+	SuperType relationship; 
+	SuperType capability;
 	Occurrences occurrences;
 	
-	public Type getNode() {
+	public SuperType getNode() {
 		return node;
 	}
-	public void setNode(Type node) {
+	public void setNode(SuperType node) {
 		this.node = node;
 	}
-	public Type getRelationship() {
+	public SuperType getRelationship() {
 		return relationship;
 	}
-	public void setRelationship(Type relationship) {
+	public void setRelationship(SuperType relationship) {
 		this.relationship = relationship;
 	}
-	public Type getCapability() {
+	public SuperType getCapability() {
 		return capability;
 	}
-	public void setCapability(Type capability) {
+	public void setCapability(SuperType capability) {
 		this.capability = capability;
 	}
 	public Occurrences getOccurrences() {

@@ -17,10 +17,10 @@ import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
 import org.sodalite.dsl.kb_reasoner_client.types.Capability;
-import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.Property;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
+import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EParameterDefinition;
@@ -51,8 +51,8 @@ public class KBReasonerProxy {
 		try {
 			// FIXME Support searching based on modules (namespaces)
 			List<String> modules = Arrays.asList();
-			ReasonerData<Node> nodes = getKBReasoner().getNodes(modules);
-			for (Node n : nodes.getElements()) {
+			ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(modules);
+			for (Type n : nodes.getElements()) {
 				types.add(n.getLabel());
 			}
 		} catch (Exception e) {

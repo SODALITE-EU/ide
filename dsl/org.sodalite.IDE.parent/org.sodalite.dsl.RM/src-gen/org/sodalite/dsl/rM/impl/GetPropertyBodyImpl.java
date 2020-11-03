@@ -4,6 +4,7 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -11,8 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPropertyDefinition;
-import org.sodalite.dsl.rM.EReqOrCap;
 import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -64,14 +65,14 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
   protected String entity = ENTITY_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getReq_cap() <em>Req cap</em>}' reference.
+   * The cached value of the '{@link #getReq_cap() <em>Req cap</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getReq_cap()
    * @generated
    * @ordered
    */
-  protected EReqOrCap req_cap;
+  protected EPREFIX_TYPE req_cap;
 
   /**
    * <!-- begin-user-doc -->
@@ -170,18 +171,8 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EReqOrCap getReq_cap()
+  public EPREFIX_TYPE getReq_cap()
   {
-    if (req_cap != null && req_cap.eIsProxy())
-    {
-      InternalEObject oldReq_cap = (InternalEObject)req_cap;
-      req_cap = (EReqOrCap)eResolveProxy(oldReq_cap);
-      if (req_cap != oldReq_cap)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.GET_PROPERTY_BODY__REQ_CAP, oldReq_cap, req_cap));
-      }
-    }
     return req_cap;
   }
 
@@ -190,9 +181,16 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReqOrCap basicGetReq_cap()
+  public NotificationChain basicSetReq_cap(EPREFIX_TYPE newReq_cap, NotificationChain msgs)
   {
-    return req_cap;
+    EPREFIX_TYPE oldReq_cap = req_cap;
+    req_cap = newReq_cap;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__REQ_CAP, oldReq_cap, newReq_cap);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -201,12 +199,36 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setReq_cap(EReqOrCap newReq_cap)
+  public void setReq_cap(EPREFIX_TYPE newReq_cap)
   {
-    EReqOrCap oldReq_cap = req_cap;
-    req_cap = newReq_cap;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__REQ_CAP, oldReq_cap, req_cap));
+    if (newReq_cap != req_cap)
+    {
+      NotificationChain msgs = null;
+      if (req_cap != null)
+        msgs = ((InternalEObject)req_cap).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__REQ_CAP, null, msgs);
+      if (newReq_cap != null)
+        msgs = ((InternalEObject)newReq_cap).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__REQ_CAP, null, msgs);
+      msgs = basicSetReq_cap(newReq_cap, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__REQ_CAP, newReq_cap, newReq_cap));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
+        return basicSetReq_cap(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -225,8 +247,7 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
       case RMPackage.GET_PROPERTY_BODY__ENTITY:
         return getEntity();
       case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
-        if (resolve) return getReq_cap();
-        return basicGetReq_cap();
+        return getReq_cap();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -248,7 +269,7 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
         setEntity((String)newValue);
         return;
       case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
-        setReq_cap((EReqOrCap)newValue);
+        setReq_cap((EPREFIX_TYPE)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -271,7 +292,7 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
         setEntity(ENTITY_EDEFAULT);
         return;
       case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
-        setReq_cap((EReqOrCap)null);
+        setReq_cap((EPREFIX_TYPE)null);
         return;
     }
     super.eUnset(featureID);
