@@ -330,7 +330,8 @@ public class RMGenerator extends AbstractGenerator {
           for(final EAlphaNumericValue v : _list) {
             _builder.append("  ");
             _builder.append("exchange:listValue \"");
-            _builder.append(v, "  ");
+            String _trim = this.trim(this.compile(v));
+            _builder.append(_trim, "  ");
             _builder.append("\" ;");
             _builder.newLineIfNotEmpty();
           }
@@ -355,8 +356,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \"");
-        EAlphaNumericValue _val = ((EMinLength)c).getVal();
-        _builder.append(_val, "  ");
+        String _trim_1 = this.trim(this.compile(((EMinLength)c).getVal()));
+        _builder.append(_trim_1, "  ");
         _builder.append("\" ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".\t\t");
@@ -379,8 +380,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \"");
-        EAlphaNumericValue _val_1 = ((EGreaterThan)c).getVal();
-        _builder.append(_val_1, "  ");
+        String _trim_2 = this.trim(this.compile(((EGreaterThan)c).getVal()));
+        _builder.append(_trim_2, "  ");
         _builder.append("\" ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".\t\t");
@@ -403,8 +404,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \"");
-        ESingleValue _val_2 = ((EEqual)c).getVal();
-        _builder.append(_val_2, "  ");
+        String _trim_3 = this.trim(this.compile(((EEqual)c).getVal()));
+        _builder.append(_trim_3, "  ");
         _builder.append("\" ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".\t\t");
@@ -427,8 +428,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \"");
-        EAlphaNumericValue _val_3 = ((EGreaterOrEqual)c).getVal();
-        _builder.append(_val_3, "  ");
+        String _trim_4 = this.trim(this.compile(((EGreaterOrEqual)c).getVal()));
+        _builder.append(_trim_4, "  ");
         _builder.append("\" ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".\t\t");
@@ -451,8 +452,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \"");
-        EAlphaNumericValue _val_4 = ((ELessThan)c).getVal();
-        _builder.append(_val_4, "  ");
+        String _trim_5 = this.trim(this.compile(((ELessThan)c).getVal()));
+        _builder.append(_trim_5, "  ");
         _builder.append("\" ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".\t\t");
@@ -475,8 +476,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \"");
-        EAlphaNumericValue _val_5 = ((ELessOrEqual)c).getVal();
-        _builder.append(_val_5, "  ");
+        String _trim_6 = this.trim(this.compile(((ELessOrEqual)c).getVal()));
+        _builder.append(_trim_6, "  ");
         _builder.append("\" ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".\t\t");
@@ -499,8 +500,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \"");
-        EAlphaNumericValue _val_6 = ((ELength)c).getVal();
-        _builder.append(_val_6, "  ");
+        String _trim_7 = this.trim(this.compile(((ELength)c).getVal()));
+        _builder.append(_trim_7, "  ");
         _builder.append("\" ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".\t\t");
@@ -523,8 +524,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \"");
-        EAlphaNumericValue _val_7 = ((EMaxLength)c).getVal();
-        _builder.append(_val_7, "  ");
+        String _trim_8 = this.trim(this.compile(((EMaxLength)c).getVal()));
+        _builder.append(_trim_8, "  ");
         _builder.append("\" ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".\t\t");
@@ -740,54 +741,12 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"type\" ;");
         _builder.newLine();
-        {
-          EPREFIX_TYPE _type_1 = c.getCapability().getType();
-          boolean _tripleNotEquals_1 = (_type_1 != null);
-          if (_tripleNotEquals_1) {
-            {
-              EPREFIX_TYPE _type_2 = c.getCapability().getType();
-              if ((_type_2 instanceof EPRIMITIVE_TYPE)) {
-                _builder.append("  ");
-                _builder.append("exchange:value \'");
-                EPREFIX_TYPE _type_3 = c.getCapability().getType();
-                String _type_4 = ((EPRIMITIVE_TYPE) _type_3).getType();
-                _builder.append(_type_4, "  ");
-                _builder.append("\' ;");
-                _builder.newLineIfNotEmpty();
-              } else {
-                EPREFIX_TYPE _type_5 = c.getCapability().getType();
-                if ((_type_5 instanceof EPREFIX_TYPE)) {
-                  {
-                    EPREFIX_TYPE _type_6 = c.getCapability().getType();
-                    String _module = ((EPREFIX_TYPE) _type_6).getModule();
-                    boolean _tripleNotEquals_2 = (_module != null);
-                    if (_tripleNotEquals_2) {
-                      _builder.append("  ");
-                      _builder.append("exchange:value \'");
-                      EPREFIX_TYPE _type_7 = c.getCapability().getType();
-                      String _module_1 = ((EPREFIX_TYPE) _type_7).getModule();
-                      _builder.append(_module_1, "  ");
-                      _builder.append("/");
-                      EPREFIX_TYPE _type_8 = c.getCapability().getType();
-                      String _type_9 = ((EPREFIX_TYPE) _type_8).getType();
-                      _builder.append(_type_9, "  ");
-                      _builder.append("\' ;  ");
-                      _builder.newLineIfNotEmpty();
-                    } else {
-                      _builder.append("  ");
-                      _builder.append("exchange:value \'");
-                      EPREFIX_TYPE _type_10 = c.getCapability().getType();
-                      String _type_11 = ((EPREFIX_TYPE) _type_10).getType();
-                      _builder.append(_type_11, "  ");
-                      _builder.append("\' ;  ");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim = this.trim(this.compile(c.getCapability().getType()));
+        _builder.append(_trim, "  ");
+        _builder.append("\' ;");
+        _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
       }
@@ -795,8 +754,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EList<EValidSourceType> _valid_source_types = c.getCapability().getValid_source_types();
-      boolean _tripleNotEquals_3 = (_valid_source_types != null);
-      if (_tripleNotEquals_3) {
+      boolean _tripleNotEquals_1 = (_valid_source_types != null);
+      if (_tripleNotEquals_1) {
         this.putParameterNumber(c, "valid_source_types", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -816,23 +775,23 @@ public class RMGenerator extends AbstractGenerator {
               EList<EPREFIX_TYPE> _sourceTypes = entry.getSourceTypes();
               for(final EPREFIX_TYPE s : _sourceTypes) {
                 {
-                  String _module_2 = s.getModule();
-                  boolean _tripleNotEquals_4 = (_module_2 != null);
-                  if (_tripleNotEquals_4) {
+                  String _module = s.getModule();
+                  boolean _tripleNotEquals_2 = (_module != null);
+                  if (_tripleNotEquals_2) {
                     _builder.append("  ");
                     _builder.append("exchange:listValue \"");
-                    String _module_3 = s.getModule();
-                    _builder.append(_module_3, "  ");
+                    String _module_1 = s.getModule();
+                    _builder.append(_module_1, "  ");
                     _builder.append("/");
-                    String _type_12 = s.getType();
-                    _builder.append(_type_12, "  ");
+                    String _type_1 = s.getType();
+                    _builder.append(_type_1, "  ");
                     _builder.append("\" ;");
                     _builder.newLineIfNotEmpty();
                   } else {
                     _builder.append("  ");
                     _builder.append("exchange:listValue \"");
-                    String _type_13 = s.getType();
-                    _builder.append(_type_13, "  ");
+                    String _type_2 = s.getType();
+                    _builder.append(_type_2, "  ");
                     _builder.append("\" ;");
                     _builder.newLineIfNotEmpty();
                   }
@@ -865,8 +824,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     {
       String _description = c.getCapability().getDescription();
-      boolean _tripleNotEquals_5 = (_description != null);
-      if (_tripleNotEquals_5) {
+      boolean _tripleNotEquals_3 = (_description != null);
+      if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:description \'");
         String _processDescription = this.processDescription(c.getCapability().getDescription());
@@ -876,9 +835,9 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EPREFIX_TYPE _type_14 = c.getCapability().getType();
-      boolean _tripleNotEquals_6 = (_type_14 != null);
-      if (_tripleNotEquals_6) {
+      EPREFIX_TYPE _type_3 = c.getCapability().getType();
+      boolean _tripleNotEquals_4 = (_type_3 != null);
+      if (_tripleNotEquals_4) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber = this.getParameterNumber(c, "type");
@@ -889,8 +848,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       EList<EValidSourceType> _valid_source_types_2 = c.getCapability().getValid_source_types();
-      boolean _tripleNotEquals_7 = (_valid_source_types_2 != null);
-      if (_tripleNotEquals_7) {
+      boolean _tripleNotEquals_5 = (_valid_source_types_2 != null);
+      if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_1 = this.getParameterNumber(c, "valid_source_types");
@@ -922,54 +881,12 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"type\" ;");
         _builder.newLine();
-        {
-          EPREFIX_TYPE _type_1 = i.getInterface().getType();
-          boolean _tripleNotEquals_1 = (_type_1 != null);
-          if (_tripleNotEquals_1) {
-            {
-              EPREFIX_TYPE _type_2 = i.getInterface().getType();
-              if ((_type_2 instanceof EPRIMITIVE_TYPE)) {
-                _builder.append("  ");
-                _builder.append("exchange:value \'");
-                EPREFIX_TYPE _type_3 = i.getInterface().getType();
-                String _type_4 = ((EPRIMITIVE_TYPE) _type_3).getType();
-                _builder.append(_type_4, "  ");
-                _builder.append("\' ;");
-                _builder.newLineIfNotEmpty();
-              } else {
-                EPREFIX_TYPE _type_5 = i.getInterface().getType();
-                if ((_type_5 instanceof EPREFIX_TYPE)) {
-                  {
-                    EPREFIX_TYPE _type_6 = i.getInterface().getType();
-                    String _module = ((EPREFIX_TYPE) _type_6).getModule();
-                    boolean _tripleNotEquals_2 = (_module != null);
-                    if (_tripleNotEquals_2) {
-                      _builder.append("  ");
-                      _builder.append("exchange:value \'");
-                      EPREFIX_TYPE _type_7 = i.getInterface().getType();
-                      String _module_1 = ((EPREFIX_TYPE) _type_7).getModule();
-                      _builder.append(_module_1, "  ");
-                      _builder.append("/");
-                      EPREFIX_TYPE _type_8 = i.getInterface().getType();
-                      String _type_9 = ((EPREFIX_TYPE) _type_8).getType();
-                      _builder.append(_type_9, "  ");
-                      _builder.append("\' ;  ");
-                      _builder.newLineIfNotEmpty();
-                    } else {
-                      _builder.append("  ");
-                      _builder.append("exchange:value \'");
-                      EPREFIX_TYPE _type_10 = i.getInterface().getType();
-                      String _type_11 = ((EPREFIX_TYPE) _type_10).getType();
-                      _builder.append(_type_11, "  ");
-                      _builder.append("\' ;  ");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim = this.trim(this.compile(i.getInterface().getType()));
+        _builder.append(_trim, "  ");
+        _builder.append("\' ;");
+        _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
       }
@@ -977,8 +894,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EOperations _operations = i.getInterface().getOperations();
-      boolean _tripleNotEquals_3 = (_operations != null);
-      if (_tripleNotEquals_3) {
+      boolean _tripleNotEquals_1 = (_operations != null);
+      if (_tripleNotEquals_1) {
         this.putParameterNumber(i, "operations", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -1024,9 +941,9 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("\" ;");
     _builder.newLineIfNotEmpty();
     {
-      EPREFIX_TYPE _type_12 = i.getInterface().getType();
-      boolean _tripleNotEquals_4 = (_type_12 != null);
-      if (_tripleNotEquals_4) {
+      EPREFIX_TYPE _type_1 = i.getInterface().getType();
+      boolean _tripleNotEquals_2 = (_type_1 != null);
+      if (_tripleNotEquals_2) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_1 = this.getParameterNumber(i, "type");
@@ -1037,8 +954,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       EOperations _operations_2 = i.getInterface().getOperations();
-      boolean _tripleNotEquals_5 = (_operations_2 != null);
-      if (_tripleNotEquals_5) {
+      boolean _tripleNotEquals_3 = (_operations_2 != null);
+      if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_2 = this.getParameterNumber(i, "operations");
@@ -1569,7 +1486,7 @@ public class RMGenerator extends AbstractGenerator {
   public CharSequence compile(final GetProperty p) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EPropertyDefinition _property = p.getProperty().getProperty();
+      EPREFIX_TYPE _property = p.getProperty().getProperty();
       boolean _tripleNotEquals = (_property != null);
       if (_tripleNotEquals) {
         this.putParameterNumber(p, "property", Integer.valueOf(this.parameter_counter));
@@ -1586,8 +1503,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _name = p.getProperty().getProperty().getName();
-        _builder.append(_name, "  ");
+        String _lastSegment = this.lastSegment(p.getProperty().getProperty().getType(), ".");
+        _builder.append(_lastSegment, "  ");
         _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -1678,7 +1595,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"get_property\" ;");
     _builder.newLine();
     {
-      EPropertyDefinition _property_1 = p.getProperty().getProperty();
+      EPREFIX_TYPE _property_1 = p.getProperty().getProperty();
       boolean _tripleNotEquals_4 = (_property_1 != null);
       if (_tripleNotEquals_4) {
         _builder.append("  ");
@@ -1721,7 +1638,7 @@ public class RMGenerator extends AbstractGenerator {
   public CharSequence compile(final GetAttribute a) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EAttributeDefinition _attribute = a.getAttribute().getAttribute();
+      EPREFIX_TYPE _attribute = a.getAttribute().getAttribute();
       boolean _tripleNotEquals = (_attribute != null);
       if (_tripleNotEquals) {
         this.putParameterNumber(a, "attribute", Integer.valueOf(this.parameter_counter));
@@ -1738,8 +1655,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _name = a.getAttribute().getAttribute().getName();
-        _builder.append(_name, "  ");
+        String _lastSegment = this.lastSegment(a.getAttribute().getAttribute().getType(), ".");
+        _builder.append(_lastSegment, "  ");
         _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -1830,7 +1747,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"get_attribute\" ;");
     _builder.newLine();
     {
-      EAttributeDefinition _attribute_1 = a.getAttribute().getAttribute();
+      EPREFIX_TYPE _attribute_1 = a.getAttribute().getAttribute();
       boolean _tripleNotEquals_4 = (_attribute_1 != null);
       if (_tripleNotEquals_4) {
         _builder.append("  ");
@@ -2273,56 +2190,20 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("exchange:name \"");
-    EDataTypeName _name = d.getName();
-    _builder.append(_name, "  ");
+    String _trim = this.trim(this.compile(d.getName()));
+    _builder.append(_trim, "  ");
     _builder.append("\" ;");
     _builder.newLineIfNotEmpty();
-    {
-      EDataTypeName _superType = d.getData().getSuperType();
-      if ((_superType instanceof EPRIMITIVE_TYPE)) {
-        _builder.append("  ");
-        _builder.append("exchange:derivesFrom \'");
-        EDataTypeName _superType_1 = d.getData().getSuperType();
-        String _type = ((EPRIMITIVE_TYPE) _superType_1).getType();
-        _builder.append(_type, "  ");
-        _builder.append("\' ;");
-        _builder.newLineIfNotEmpty();
-      } else {
-        EDataTypeName _superType_2 = d.getData().getSuperType();
-        if ((_superType_2 instanceof EPREFIX_TYPE)) {
-          {
-            EDataTypeName _superType_3 = d.getData().getSuperType();
-            String _module = ((EPREFIX_TYPE) _superType_3).getModule();
-            boolean _tripleNotEquals = (_module != null);
-            if (_tripleNotEquals) {
-              _builder.append("  ");
-              _builder.append("exchange:derivesFrom \'");
-              EDataTypeName _superType_4 = d.getData().getSuperType();
-              String _module_1 = ((EPREFIX_TYPE) _superType_4).getModule();
-              _builder.append(_module_1, "  ");
-              _builder.append("/");
-              EDataTypeName _superType_5 = d.getData().getSuperType();
-              String _type_1 = ((EPREFIX_TYPE) _superType_5).getType();
-              _builder.append(_type_1, "  ");
-              _builder.append("\' ;  ");
-              _builder.newLineIfNotEmpty();
-            } else {
-              _builder.append("  ");
-              _builder.append("exchange:derivesFrom \'");
-              EDataTypeName _superType_6 = d.getData().getSuperType();
-              String _type_2 = ((EPREFIX_TYPE) _superType_6).getType();
-              _builder.append(_type_2, "  ");
-              _builder.append("\' ;  ");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-        }
-      }
-    }
+    _builder.append("  ");
+    _builder.append("exchange:derivesFrom \'");
+    String _trim_1 = this.trim(this.compile(d.getData().getSuperType()));
+    _builder.append(_trim_1, "  ");
+    _builder.append("\' ;");
+    _builder.newLineIfNotEmpty();
     {
       String _description = d.getData().getDescription();
-      boolean _tripleNotEquals_1 = (_description != null);
-      if (_tripleNotEquals_1) {
+      boolean _tripleNotEquals = (_description != null);
+      if (_tripleNotEquals) {
         _builder.append("  ");
         _builder.append("exchange:description \'");
         String _processDescription = this.processDescription(d.getData().getDescription());
@@ -2333,8 +2214,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       EProperties _properties = d.getData().getProperties();
-      boolean _tripleNotEquals_2 = (_properties != null);
-      if (_tripleNotEquals_2) {
+      boolean _tripleNotEquals_1 = (_properties != null);
+      if (_tripleNotEquals_1) {
         {
           EList<EPropertyDefinition> _properties_1 = d.getData().getProperties().getProperties();
           for(final EPropertyDefinition p : _properties_1) {
@@ -2371,54 +2252,12 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"type\" ;");
         _builder.newLine();
-        {
-          EDataTypeName _type_1 = p.getProperty().getType();
-          boolean _tripleNotEquals_1 = (_type_1 != null);
-          if (_tripleNotEquals_1) {
-            {
-              EDataTypeName _type_2 = p.getProperty().getType();
-              if ((_type_2 instanceof EPRIMITIVE_TYPE)) {
-                _builder.append("  ");
-                _builder.append("exchange:value \'");
-                EDataTypeName _type_3 = p.getProperty().getType();
-                String _type_4 = ((EPRIMITIVE_TYPE) _type_3).getType();
-                _builder.append(_type_4, "  ");
-                _builder.append("\' ;");
-                _builder.newLineIfNotEmpty();
-              } else {
-                EDataTypeName _type_5 = p.getProperty().getType();
-                if ((_type_5 instanceof EPREFIX_TYPE)) {
-                  {
-                    EDataTypeName _type_6 = p.getProperty().getType();
-                    String _module = ((EPREFIX_TYPE) _type_6).getModule();
-                    boolean _tripleNotEquals_2 = (_module != null);
-                    if (_tripleNotEquals_2) {
-                      _builder.append("  ");
-                      _builder.append("exchange:value \'");
-                      EDataTypeName _type_7 = p.getProperty().getType();
-                      String _module_1 = ((EPREFIX_TYPE) _type_7).getModule();
-                      _builder.append(_module_1, "  ");
-                      _builder.append("/");
-                      EDataTypeName _type_8 = p.getProperty().getType();
-                      String _type_9 = ((EPREFIX_TYPE) _type_8).getType();
-                      _builder.append(_type_9, "  ");
-                      _builder.append("\' ;  ");
-                      _builder.newLineIfNotEmpty();
-                    } else {
-                      _builder.append("  ");
-                      _builder.append("exchange:value \'");
-                      EDataTypeName _type_10 = p.getProperty().getType();
-                      String _type_11 = ((EPREFIX_TYPE) _type_10).getType();
-                      _builder.append(_type_11, "  ");
-                      _builder.append("\' ;  ");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim = this.trim(this.compile(p.getProperty().getType()));
+        _builder.append(_trim, "  ");
+        _builder.append("\' ;  ");
+        _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
       }
@@ -2447,8 +2286,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EValueExpression _default = p.getProperty().getDefault();
-      boolean _tripleNotEquals_3 = (_default != null);
-      if (_tripleNotEquals_3) {
+      boolean _tripleNotEquals_1 = (_default != null);
+      if (_tripleNotEquals_1) {
         this.putParameterNumber(p, "default", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -2463,8 +2302,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         {
           EValueExpression _default_1 = p.getProperty().getDefault();
-          boolean _tripleNotEquals_4 = (_default_1 != null);
-          if (_tripleNotEquals_4) {
+          boolean _tripleNotEquals_2 = (_default_1 != null);
+          if (_tripleNotEquals_2) {
             {
               EValueExpression _default_2 = p.getProperty().getDefault();
               if ((_default_2 instanceof EFunction)) {
@@ -2478,8 +2317,8 @@ public class RMGenerator extends AbstractGenerator {
                 _builder.append("  ");
                 _builder.append("exchange:value \'");
                 EValueExpression _default_3 = p.getProperty().getDefault();
-                String _trim = this.trim(this.compile(((ESingleValue) _default_3)).toString());
-                _builder.append(_trim, "  ");
+                String _trim_1 = this.trim(this.compile(((ESingleValue) _default_3)).toString());
+                _builder.append(_trim_1, "  ");
                 _builder.append("\' ;");
                 _builder.newLineIfNotEmpty();
               }
@@ -2493,8 +2332,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       String _status = p.getProperty().getStatus();
-      boolean _tripleNotEquals_5 = (_status != null);
-      if (_tripleNotEquals_5) {
+      boolean _tripleNotEquals_3 = (_status != null);
+      if (_tripleNotEquals_3) {
         this.putParameterNumber(p, "status", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -2520,8 +2359,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EDataTypeName _entry_schema = p.getProperty().getEntry_schema();
-      boolean _tripleNotEquals_6 = (_entry_schema != null);
-      if (_tripleNotEquals_6) {
+      boolean _tripleNotEquals_4 = (_entry_schema != null);
+      if (_tripleNotEquals_4) {
         _builder.append(":Parameter_");
         int _plusPlus_4 = this.parameter_counter++;
         _builder.append(_plusPlus_4);
@@ -2564,8 +2403,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EConstraints _constraints = p.getProperty().getConstraints();
-      boolean _tripleNotEquals_7 = (_constraints != null);
-      if (_tripleNotEquals_7) {
+      boolean _tripleNotEquals_5 = (_constraints != null);
+      if (_tripleNotEquals_5) {
         this.putParameterNumber(p, "constraints", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -2613,8 +2452,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     {
       String _description = p.getProperty().getDescription();
-      boolean _tripleNotEquals_8 = (_description != null);
-      if (_tripleNotEquals_8) {
+      boolean _tripleNotEquals_6 = (_description != null);
+      if (_tripleNotEquals_6) {
         _builder.append("  ");
         _builder.append("exchange:description \'");
         String _processDescription = this.processDescription(p.getProperty().getDescription());
@@ -2624,9 +2463,9 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EDataTypeName _type_12 = p.getProperty().getType();
-      boolean _tripleNotEquals_9 = (_type_12 != null);
-      if (_tripleNotEquals_9) {
+      EDataTypeName _type_1 = p.getProperty().getType();
+      boolean _tripleNotEquals_7 = (_type_1 != null);
+      if (_tripleNotEquals_7) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_2 = this.getParameterNumber(p, "type");
@@ -2643,8 +2482,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     {
       EValueExpression _default_4 = p.getProperty().getDefault();
-      boolean _tripleNotEquals_10 = (_default_4 != null);
-      if (_tripleNotEquals_10) {
+      boolean _tripleNotEquals_8 = (_default_4 != null);
+      if (_tripleNotEquals_8) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_4 = this.getParameterNumber(p, "default");
@@ -2655,8 +2494,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       String _status_2 = p.getProperty().getStatus();
-      boolean _tripleNotEquals_11 = (_status_2 != null);
-      if (_tripleNotEquals_11) {
+      boolean _tripleNotEquals_9 = (_status_2 != null);
+      if (_tripleNotEquals_9) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_5 = this.getParameterNumber(p, "status");
@@ -2667,8 +2506,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       EDataTypeName _entry_schema_2 = p.getProperty().getEntry_schema();
-      boolean _tripleNotEquals_12 = (_entry_schema_2 != null);
-      if (_tripleNotEquals_12) {
+      boolean _tripleNotEquals_10 = (_entry_schema_2 != null);
+      if (_tripleNotEquals_10) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_6 = this.getParameterNumber(p, "entry_schema");
@@ -2679,8 +2518,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       EConstraints _constraints_2 = p.getProperty().getConstraints();
-      boolean _tripleNotEquals_13 = (_constraints_2 != null);
-      if (_tripleNotEquals_13) {
+      boolean _tripleNotEquals_11 = (_constraints_2 != null);
+      if (_tripleNotEquals_11) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_7 = this.getParameterNumber(p, "constraints");
@@ -2712,54 +2551,12 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"type\" ;");
         _builder.newLine();
-        {
-          EDataTypeName _type_1 = a.getAttribute().getType();
-          boolean _tripleNotEquals_1 = (_type_1 != null);
-          if (_tripleNotEquals_1) {
-            {
-              EDataTypeName _type_2 = a.getAttribute().getType();
-              if ((_type_2 instanceof EPRIMITIVE_TYPE)) {
-                _builder.append("  ");
-                _builder.append("exchange:value \'");
-                EDataTypeName _type_3 = a.getAttribute().getType();
-                String _type_4 = ((EPRIMITIVE_TYPE) _type_3).getType();
-                _builder.append(_type_4, "  ");
-                _builder.append("\' ;");
-                _builder.newLineIfNotEmpty();
-              } else {
-                EDataTypeName _type_5 = a.getAttribute().getType();
-                if ((_type_5 instanceof EPREFIX_TYPE)) {
-                  {
-                    EDataTypeName _type_6 = a.getAttribute().getType();
-                    String _module = ((EPREFIX_TYPE) _type_6).getModule();
-                    boolean _tripleNotEquals_2 = (_module != null);
-                    if (_tripleNotEquals_2) {
-                      _builder.append("  ");
-                      _builder.append("exchange:value \'");
-                      EDataTypeName _type_7 = a.getAttribute().getType();
-                      String _module_1 = ((EPREFIX_TYPE) _type_7).getModule();
-                      _builder.append(_module_1, "  ");
-                      _builder.append("/");
-                      EDataTypeName _type_8 = a.getAttribute().getType();
-                      String _type_9 = ((EPREFIX_TYPE) _type_8).getType();
-                      _builder.append(_type_9, "  ");
-                      _builder.append("\' ;  ");
-                      _builder.newLineIfNotEmpty();
-                    } else {
-                      _builder.append("  ");
-                      _builder.append("exchange:value \'");
-                      EDataTypeName _type_10 = a.getAttribute().getType();
-                      String _type_11 = ((EPREFIX_TYPE) _type_10).getType();
-                      _builder.append(_type_11, "  ");
-                      _builder.append("\' ;  ");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim = this.trim(this.compile(a.getAttribute().getType()));
+        _builder.append(_trim, "  ");
+        _builder.append("\' ;");
+        _builder.newLineIfNotEmpty();
         _builder.append(".");
         _builder.newLine();
       }
@@ -2767,8 +2564,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EValueExpression _default = a.getAttribute().getDefault();
-      boolean _tripleNotEquals_3 = (_default != null);
-      if (_tripleNotEquals_3) {
+      boolean _tripleNotEquals_1 = (_default != null);
+      if (_tripleNotEquals_1) {
         this.putParameterNumber(a, "default", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -2783,8 +2580,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         {
           EValueExpression _default_1 = a.getAttribute().getDefault();
-          boolean _tripleNotEquals_4 = (_default_1 != null);
-          if (_tripleNotEquals_4) {
+          boolean _tripleNotEquals_2 = (_default_1 != null);
+          if (_tripleNotEquals_2) {
             {
               EValueExpression _default_2 = a.getAttribute().getDefault();
               if ((_default_2 instanceof EFunction)) {
@@ -2798,8 +2595,8 @@ public class RMGenerator extends AbstractGenerator {
                 _builder.append("  ");
                 _builder.append("exchange:value \'");
                 EValueExpression _default_3 = a.getAttribute().getDefault();
-                String _trim = this.trim(this.compile(((ESingleValue) _default_3)).toString());
-                _builder.append(_trim, "  ");
+                String _trim_1 = this.trim(this.compile(((ESingleValue) _default_3)).toString());
+                _builder.append(_trim_1, "  ");
                 _builder.append("\' ;");
                 _builder.newLineIfNotEmpty();
               }
@@ -2814,8 +2611,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       String _status = a.getAttribute().getStatus();
-      boolean _tripleNotEquals_5 = (_status != null);
-      if (_tripleNotEquals_5) {
+      boolean _tripleNotEquals_3 = (_status != null);
+      if (_tripleNotEquals_3) {
         this.putParameterNumber(a, "status", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -2841,8 +2638,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EDataTypeName _entry_schema = a.getAttribute().getEntry_schema();
-      boolean _tripleNotEquals_6 = (_entry_schema != null);
-      if (_tripleNotEquals_6) {
+      boolean _tripleNotEquals_4 = (_entry_schema != null);
+      if (_tripleNotEquals_4) {
         this.putParameterNumber(a, "entry_schema", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -2884,8 +2681,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     {
       String _description = a.getAttribute().getDescription();
-      boolean _tripleNotEquals_7 = (_description != null);
-      if (_tripleNotEquals_7) {
+      boolean _tripleNotEquals_5 = (_description != null);
+      if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:description \'");
         String _processDescription = this.processDescription(a.getAttribute().getDescription());
@@ -2895,9 +2692,9 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EDataTypeName _type_12 = a.getAttribute().getType();
-      boolean _tripleNotEquals_8 = (_type_12 != null);
-      if (_tripleNotEquals_8) {
+      EDataTypeName _type_1 = a.getAttribute().getType();
+      boolean _tripleNotEquals_6 = (_type_1 != null);
+      if (_tripleNotEquals_6) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_1 = this.getParameterNumber(a, "type");
@@ -2908,8 +2705,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       EValueExpression _default_4 = a.getAttribute().getDefault();
-      boolean _tripleNotEquals_9 = (_default_4 != null);
-      if (_tripleNotEquals_9) {
+      boolean _tripleNotEquals_7 = (_default_4 != null);
+      if (_tripleNotEquals_7) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_2 = this.getParameterNumber(a, "default");
@@ -2920,8 +2717,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       String _status_2 = a.getAttribute().getStatus();
-      boolean _tripleNotEquals_10 = (_status_2 != null);
-      if (_tripleNotEquals_10) {
+      boolean _tripleNotEquals_8 = (_status_2 != null);
+      if (_tripleNotEquals_8) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_3 = this.getParameterNumber(a, "status");
@@ -2932,8 +2729,8 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       EDataTypeName _entry_schema_2 = a.getAttribute().getEntry_schema();
-      boolean _tripleNotEquals_11 = (_entry_schema_2 != null);
-      if (_tripleNotEquals_11) {
+      boolean _tripleNotEquals_9 = (_entry_schema_2 != null);
+      if (_tripleNotEquals_9) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_4 = this.getParameterNumber(a, "entry_schema");
@@ -3015,6 +2812,55 @@ public class RMGenerator extends AbstractGenerator {
     return _builder;
   }
   
+  public CharSequence compile(final EDataTypeName t) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((t instanceof EPREFIX_TYPE)) {
+        CharSequence _compile = this.compile(((EPREFIX_TYPE) t));
+        _builder.append(_compile);
+        _builder.append("  ");
+        _builder.newLineIfNotEmpty();
+      } else {
+        if ((t instanceof EPRIMITIVE_TYPE)) {
+          CharSequence _compile_1 = this.compile(((EPRIMITIVE_TYPE) t));
+          _builder.append(_compile_1);
+          _builder.newLineIfNotEmpty();
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compile(final EPRIMITIVE_TYPE t) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _type = t.getType();
+    _builder.append(_type);
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public CharSequence compile(final EPREFIX_TYPE t) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      String _module = t.getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = t.getModule();
+        _builder.append(_module_1);
+        _builder.append("/");
+        String _type = t.getType();
+        _builder.append(_type);
+        _builder.append("  ");
+        _builder.newLineIfNotEmpty();
+      } else {
+        String _type_1 = t.getType();
+        _builder.append(_type_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
   public String processStringValue(final String value) {
     final String processed = value.replaceAll("\"", "\\\\\"");
     return processed;
@@ -3070,5 +2916,15 @@ public class RMGenerator extends AbstractGenerator {
   
   public String trim(final String value) {
     return value.trim();
+  }
+  
+  public String trim(final CharSequence value) {
+    return value.toString().trim();
+  }
+  
+  public String lastSegment(final String string, final String delimiter) {
+    int _lastIndexOf = string.lastIndexOf(delimiter);
+    int _plus = (_lastIndexOf + 1);
+    return string.substring(_plus);
   }
 }

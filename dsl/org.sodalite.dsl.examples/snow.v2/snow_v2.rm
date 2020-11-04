@@ -1,4 +1,5 @@
 module: snow
+import: openstack
 
 node_types:
 	sodalite.nodes.ConfigurationDemo:        
@@ -11,7 +12,7 @@ node_types:
 		requirements:
 			remote_server:  
 				capability: tosca.capabilities.Compute 
-				node: sodalite.nodes.OpenStack.VM
+				node: openstack/sodalite.nodes.OpenStack.VM
 				relationship: tosca.relationships.DependsOn
 		interfaces:
 			Standard:
@@ -23,10 +24,10 @@ node_types:
 								default: get_attribute:
 									attribute: tosca.nodes.Compute.public_address
 									entity: SELF
-									req_cap: sodalite.nodes.ConfigurationDemo.remote_server
+									req_cap: snow/sodalite.nodes.ConfigurationDemo.remote_server
 							mysql_db_pass:
 								default: get_property:
-									property: sodalite.nodes.ConfigurationDemo.mysql_db_pass
+									property: snow/sodalite.nodes.ConfigurationDemo.mysql_db_pass
 									entity: SELF
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/snow-uc/snow-demo/playbooks/configure_demo.yml"

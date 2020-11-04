@@ -57,7 +57,7 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 					}
 					val ENodeTemplatesImpl model = nodeTemplate.eContainer as ENodeTemplatesImpl
 					System.out.println ("Applying targetNode: " + targetNode)
-					req.node = targetNode
+					req.node.id = targetNode //FIXME Check creation of node with namespace/id
 				]
 			}
 	}

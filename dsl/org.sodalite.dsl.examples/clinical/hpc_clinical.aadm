@@ -1,5 +1,8 @@
 module: clinical
 
+import: hpc
+import: modak
+
 inputs:
     frontend-address:
       type: string
@@ -23,14 +26,14 @@ inputs:
 node_templates:
 
 	hpc-wm-torque:
-		type: sodalite.nodes.hpc.wm.torque
+		type: hpc/sodalite.nodes.hpc.wm.torque
 		attributes:
 			public_address: get_input: frontend-address
 			username: get_input: user 		
 			ssh-key: get_input: key-location 
 
 	modak-instance:
-		type: sodalite.nodes.modak
+		type: modak/sodalite.nodes.modak
 		properties:
 			endpoint: get_input: modak-endpoint
 

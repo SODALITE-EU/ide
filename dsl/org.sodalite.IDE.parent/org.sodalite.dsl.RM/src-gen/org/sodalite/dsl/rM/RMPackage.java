@@ -1970,7 +1970,7 @@ public interface RMPackage extends EPackage
   int GET_ATTRIBUTE_BODY = 48;
 
   /**
-   * The feature id for the '<em><b>Attribute</b></em>' reference.
+   * The feature id for the '<em><b>Attribute</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2044,7 +2044,7 @@ public interface RMPackage extends EPackage
   int GET_PROPERTY_BODY = 50;
 
   /**
-   * The feature id for the '<em><b>Property</b></em>' reference.
+   * The feature id for the '<em><b>Property</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -3056,6 +3056,43 @@ public interface RMPackage extends EPackage
   int EPREFIX_TYPE_FEATURE_COUNT = EDATA_TYPE_NAME_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EPREFIX_IDImpl <em>EPREFIX ID</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EPREFIX_IDImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPREFIX_ID()
+   * @generated
+   */
+  int EPREFIX_ID = 82;
+
+  /**
+   * The feature id for the '<em><b>Module</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPREFIX_ID__MODULE = 0;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPREFIX_ID__ID = 1;
+
+  /**
+   * The number of structural features of the '<em>EPREFIX ID</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPREFIX_ID_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EPRIMITIVE_TYPEImpl <em>EPRIMITIVE TYPE</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3063,7 +3100,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPRIMITIVE_TYPE()
    * @generated
    */
-  int EPRIMITIVE_TYPE = 82;
+  int EPRIMITIVE_TYPE = 83;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -4785,10 +4822,10 @@ public interface RMPackage extends EPackage
   EClass getGetAttributeBody();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.GetAttributeBody#getAttribute <em>Attribute</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.GetAttributeBody#getAttribute <em>Attribute</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Attribute</em>'.
+   * @return the meta object for the containment reference '<em>Attribute</em>'.
    * @see org.sodalite.dsl.rM.GetAttributeBody#getAttribute()
    * @see #getGetAttributeBody()
    * @generated
@@ -4849,10 +4886,10 @@ public interface RMPackage extends EPackage
   EClass getGetPropertyBody();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.dsl.rM.GetPropertyBody#getProperty <em>Property</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.GetPropertyBody#getProperty <em>Property</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Property</em>'.
+   * @return the meta object for the containment reference '<em>Property</em>'.
    * @see org.sodalite.dsl.rM.GetPropertyBody#getProperty()
    * @see #getGetPropertyBody()
    * @generated
@@ -5630,6 +5667,38 @@ public interface RMPackage extends EPackage
    * @generated
    */
   EAttribute getEPREFIX_TYPE_Module();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EPREFIX_ID <em>EPREFIX ID</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EPREFIX ID</em>'.
+   * @see org.sodalite.dsl.rM.EPREFIX_ID
+   * @generated
+   */
+  EClass getEPREFIX_ID();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EPREFIX_ID#getModule <em>Module</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Module</em>'.
+   * @see org.sodalite.dsl.rM.EPREFIX_ID#getModule()
+   * @see #getEPREFIX_ID()
+   * @generated
+   */
+  EAttribute getEPREFIX_ID_Module();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EPREFIX_ID#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Id</em>'.
+   * @see org.sodalite.dsl.rM.EPREFIX_ID#getId()
+   * @see #getEPREFIX_ID()
+   * @generated
+   */
+  EAttribute getEPREFIX_ID_Id();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EPRIMITIVE_TYPE <em>EPRIMITIVE TYPE</em>}'.
@@ -7035,7 +7104,7 @@ public interface RMPackage extends EPackage
     EClass GET_ATTRIBUTE_BODY = eINSTANCE.getGetAttributeBody();
 
     /**
-     * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Attribute</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -7087,7 +7156,7 @@ public interface RMPackage extends EPackage
     EClass GET_PROPERTY_BODY = eINSTANCE.getGetPropertyBody();
 
     /**
-     * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Property</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -7739,6 +7808,32 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EAttribute EPREFIX_TYPE__MODULE = eINSTANCE.getEPREFIX_TYPE_Module();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EPREFIX_IDImpl <em>EPREFIX ID</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EPREFIX_IDImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPREFIX_ID()
+     * @generated
+     */
+    EClass EPREFIX_ID = eINSTANCE.getEPREFIX_ID();
+
+    /**
+     * The meta object literal for the '<em><b>Module</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EPREFIX_ID__MODULE = eINSTANCE.getEPREFIX_ID_Module();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EPREFIX_ID__ID = eINSTANCE.getEPREFIX_ID_Id();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EPRIMITIVE_TYPEImpl <em>EPRIMITIVE TYPE</em>}' class.

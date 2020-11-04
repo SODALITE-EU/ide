@@ -43,7 +43,7 @@ node_types:
 
 	sodalite.nodes.hpc.job.torque.configuration.node: 
 		description: "torque job configuration"
-		derived_from: sodalite.nodes.hpc.job.torque.configuration
+		derived_from: hpc/sodalite.nodes.hpc.job.torque.configuration
 		requirements:
 			job_node:
 				node: tosca.nodes.Compute
@@ -60,54 +60,54 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_username: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.username
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_keypath: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							job_name: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.name
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.name
 							job_script: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.script
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.script
 							job_workspace: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.workspace
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.workspace
 							job_email: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.email
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.email
 							job_node_name: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.name
-									req_cap: sodalite.nodes.hpc.wm.torque.job_node
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.name
+									req_cap: hpc/sodalite.nodes.hpc.wm.torque.job_node
 							job_ppn: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.ppn
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.ppn
 							job_gpus: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.gpus
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.gpus
 							job_walltime: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.walltime
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.walltime
 							job_enable_audit: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.enable_audit		
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.enable_audit		
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create.yml"
 							dependencies: [
@@ -122,7 +122,7 @@ node_types:
 		derived_from: tosca.nodes.SoftwareComponent
 		requirements:
 			host:
-				node: sodalite.nodes.hpc.wm.torque
+				node: hpc/sodalite.nodes.hpc.wm.torque
 				capability: tosca.capabilities.Compute
 				relationship: tosca.relationships.HostedOn
 		properties:
@@ -151,11 +151,11 @@ node_types:
 		capabilities:
 			configured_job:
 				type: tosca.capabilities.Root
-				valid_source_types: [sodalite.nodes.hpc.job.torque]
+				valid_source_types: [hpc/sodalite.nodes.hpc.job.torque]
 	
 	sodalite.nodes.hpc.job.torque.configuration: 
 		description: 'torque job configuration'
-		derived_from: sodalite.nodes.hpc.job.torque.configuration.base
+		derived_from: hpc/sodalite.nodes.hpc.job.torque.configuration.base
 		properties:
 			name:
 				type: string
@@ -224,63 +224,63 @@ node_types:
               				wm_public_address: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.OpenStack.VM.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.OpenStack.VM.public_address
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_username: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.username	
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.username	
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_keypath: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.ssh-key	
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.ssh-key	
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							// Conditionals or default values will help to get rid of properties that are not used in playbooks
 							job_name: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.name
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.name
 							job_script: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.script
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.script
 							job_queue: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.queue
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.queue
 							job_scratch: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.scratch
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.scratch
 							job_workspace: 
 								default: get_property:
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.workspace
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.workspace
 							job_email: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.email
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.email
 							job_nb_nodes: 
 								default: get_property:
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.nb_nodes
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.nb_nodes
 							job_ppn: 
 								default: get_property:
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.ppn
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.ppn
 							job_gpus: 
 								default: get_property:
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.gpus
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.gpus
 							job_walltime: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.walltime
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.walltime
 							job_enable_audit: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.enable_audit
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.enable_audit
 						implementation: 
 							primary: '/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create.yml'
 							dependencies: [
@@ -293,7 +293,7 @@ node_types:
 							
 	sodalite.nodes.hpc.job.torque.preconfigured:
 		description: 'torque job configuration'
-		derived_from: sodalite.nodes.hpc.job.torque.configuration.base
+		derived_from: hpc/sodalite.nodes.hpc.job.torque.configuration.base
 		interfaces:
 			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard
@@ -305,34 +305,34 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_username: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.username
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_keypath: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							// Conditionals or default values will help to get rid of properties that are not used in playbooks
 							job_name: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.base.name
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.base.name
 							job_script: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.base.script
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.base.script
 							job_workspace: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.base.workspace
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.base.workspace
 							job_enable_audit: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.base.enable_audit
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.base.enable_audit
 						implementation: 
 							primary: '/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create-preconfigured.yml'
 							dependencies: ['/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/templates/audit.sh.j2',
@@ -351,23 +351,23 @@ node_types:
 		capabilities:
 			host:
 				type: tosca.capabilities.Compute
-				valid_source_types: [sodalite.nodes.hpc.job.torque]
+				valid_source_types: [hpc/sodalite.nodes.hpc.job.torque]
 			job_node:
 				type: tosca.capabilities.Compute
-				valid_source_types: [sodalite.nodes.hpc.job.torque]		
+				valid_source_types: [hpc/sodalite.nodes.hpc.job.torque]		
 											
 	sodalite.nodes.hpc.job.torque:
 		description: "torque job" 
 		derived_from: tosca.nodes.SoftwareComponent
 		requirements:
 			host:
-				node: sodalite.nodes.hpc.wm.torque
+				node: hpc/sodalite.nodes.hpc.wm.torque
 				capability: tosca.capabilities.Compute
 				// relationship: sodalite.relationships.jobHostedOn
 				relationship: tosca.relationships.HostedOn
 			configured_job:
-				node: sodalite.nodes.hpc.job.torque.configuration
-				capability: sodalite.capabilities.hpc.ConfiguredJob
+				node: hpc/sodalite.nodes.hpc.job.torque.configuration
+				capability: hpc/sodalite.capabilities.hpc.ConfiguredJob
 				relationship: tosca.relationships.DependsOn    
 		attributes:
 			job_id:
@@ -390,22 +390,22 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_username: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.username
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_keypath: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							job_workspace: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.workspace
-									req_cap: sodalite.nodes.hpc.job.torque.configured_job
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.workspace
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configured_job
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/configure.yml"
 								
@@ -415,55 +415,55 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_username: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.username
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_keypath: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							job_name: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.name
-									req_cap: sodalite.nodes.hpc.job.torque.configured_job
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.name
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configured_job
 							job_workspace: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.workspace
-									req_cap: sodalite.nodes.hpc.job.torque.configured_job
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.workspace
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configured_job
 							job_env: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.env
-									req_cap: sodalite.nodes.hpc.job.torque.configured_job
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.env
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configured_job
 							job_enable_audit: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.hpc.job.torque.configuration.enable_audit
-									req_cap: sodalite.nodes.hpc.job.torque.configured_job
+									property: hpc/sodalite.nodes.hpc.job.torque.configuration.enable_audit
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configured_job
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/start.yml"
 		capabilities:
 			job:
-				type: sodalite.capabilities.hpc.StartedJob
-				valid_source_types: [sodalite.nodes.hpc.job.torque.result]
+				type: hpc/sodalite.capabilities.hpc.StartedJob
+				valid_source_types: [hpc/sodalite.nodes.hpc.job.torque.result]
 				
 	sodalite.nodes.hpc.job.torque.result: 
 		description: "torque job result"
 		derived_from: tosca.nodes.SoftwareComponent
 		requirements:
 			host:
-				node: sodalite.nodes.hpc.wm.torque
+				node: hpc/sodalite.nodes.hpc.wm.torque
 				capability: tosca.capabilities.Compute
 				relationship: tosca.relationships.HostedOn
 			job:
-				node: sodalite.nodes.hpc.job.torque
-				capability: sodalite.capabilities.hpc.StartedJob 
+				node: hpc/sodalite.nodes.hpc.job.torque
+				capability: hpc/sodalite.capabilities.hpc.StartedJob 
 				relationship: tosca.relationships.DependsOn   
 		properties:
 			monitor_period:
@@ -492,50 +492,50 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_username: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.username
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							wm_keypath: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							job_id: 
 								default: get_attribute:
 									entity: SELF
-									attribute: sodalite.nodes.hpc.job.torque.job_id
-									req_cap: sodalite.nodes.hpc.job.torque.job
+									attribute: hpc/sodalite.nodes.hpc.job.torque.job_id
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.job
 							job_name: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.job.torque.job_name
-									req_cap: sodalite.nodes.hpc.job.torque.job
+									attribute: hpc/sodalite.nodes.hpc.job.torque.job_name
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.job
 							job_workspace: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.job.torque.job_workspace
-									req_cap: sodalite.nodes.hpc.job.torque.job
+									attribute: hpc/sodalite.nodes.hpc.job.torque.job_workspace
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.job
 							job_walltime: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.job.torque.job_walltime
-									req_cap: sodalite.nodes.hpc.job.torque.job
+									attribute: hpc/sodalite.nodes.hpc.job.torque.job_walltime
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.job
 							job_monitor_period: 
 								default: get_property: 
 									entity: SELF
-									property: my.nodes.hpc.job.torque.monitor_period
+									property: hpc/sodalite.nodes.hpc.job.torque.result.monitor_period
 							job_monitor_retries_headroom: 
 								default: get_property: 
 									entity: SELF
-									property: my.nodes.hpc.job.torque.monitor_retries_headroom
+									property: hpc/sodalite.nodes.hpc.job.torque.result.monitor_retries_headroom
 							job_enable_audit: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.job.torque.job_enable_audit
-									req_cap: sodalite.nodes.hpc.job.torque.job		
+									attribute: hpc/sodalite.nodes.hpc.job.torque.job_enable_audit
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.job		
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/check.yml"    		
 		

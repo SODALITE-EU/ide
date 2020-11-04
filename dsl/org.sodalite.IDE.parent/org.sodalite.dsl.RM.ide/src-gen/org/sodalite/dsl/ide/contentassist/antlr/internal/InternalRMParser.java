@@ -7359,11 +7359,11 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             if ( (LA1_0==RULE_ID) ) {
                 int LA1_1 = input.LA(2);
 
-                if ( (LA1_1==Solidus) ) {
-                    alt1=1;
-                }
-                else if ( (LA1_1==EOF||(LA1_1>=Derived_from && LA1_1<=Entry_schema)||(LA1_1>=Constraints && LA1_1<=Description)||LA1_1==Properties||(LA1_1>=Required && LA1_1<=Default)||LA1_1==Status||LA1_1==Value||LA1_1==Type||LA1_1==Colon||LA1_1==RULE_END) ) {
+                if ( (LA1_1==EOF||(LA1_1>=Derived_from && LA1_1<=Entry_schema)||(LA1_1>=Constraints && LA1_1<=Description)||LA1_1==Properties||(LA1_1>=Required && LA1_1<=Default)||LA1_1==Status||LA1_1==Value||LA1_1==Type||LA1_1==Colon||LA1_1==RULE_END) ) {
                     alt1=2;
+                }
+                else if ( (LA1_1==Solidus) ) {
+                    alt1=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -8149,11 +8149,11 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
                 {
                 int LA6_3 = input.LA(2);
 
-                if ( (LA6_3==FullStop) ) {
-                    alt6=3;
-                }
-                else if ( (LA6_3==EOF||LA6_3==Greater_or_equal||LA6_3==Less_or_equal||LA6_3==Entry_schema||LA6_3==Greater_than||(LA6_3>=Valid_values && LA6_3<=Description)||(LA6_3>=Max_length && LA6_3<=Min_length)||LA6_3==Less_than||LA6_3==In_range||(LA6_3>=Required && LA6_3<=Default)||LA6_3==Length||(LA6_3>=Status && LA6_3<=Value)||LA6_3==Type||LA6_3==RULE_ID||LA6_3==RULE_END) ) {
+                if ( (LA6_3==EOF||LA6_3==Greater_or_equal||LA6_3==Less_or_equal||LA6_3==Entry_schema||LA6_3==Greater_than||(LA6_3>=Valid_values && LA6_3<=Description)||(LA6_3>=Max_length && LA6_3<=Min_length)||LA6_3==Less_than||LA6_3==In_range||(LA6_3>=Required && LA6_3<=Default)||LA6_3==Length||(LA6_3>=Status && LA6_3<=Value)||LA6_3==Type||LA6_3==RULE_ID||LA6_3==RULE_END) ) {
                     alt6=4;
+                }
+                else if ( (LA6_3==FullStop) ) {
+                    alt6=3;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -34258,7 +34258,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:10903:1: ( rule__GetAttributeBody__Group_0__0__Impl rule__GetAttributeBody__Group_0__1 )
             // InternalRMParser.g:10904:2: rule__GetAttributeBody__Group_0__0__Impl rule__GetAttributeBody__Group_0__1
             {
-            pushFollow(FOLLOW_7);
+            pushFollow(FOLLOW_5);
             rule__GetAttributeBody__Group_0__0__Impl();
 
             state._fsp--;
@@ -35068,7 +35068,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:11173:1: ( rule__GetPropertyBody__Group_0__0__Impl rule__GetPropertyBody__Group_0__1 )
             // InternalRMParser.g:11174:2: rule__GetPropertyBody__Group_0__0__Impl rule__GetPropertyBody__Group_0__1
             {
-            pushFollow(FOLLOW_7);
+            pushFollow(FOLLOW_5);
             rule__GetPropertyBody__Group_0__0__Impl();
 
             state._fsp--;
@@ -58603,36 +58603,28 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetAttributeBody__AttributeAssignment_0_1"
-    // InternalRMParser.g:18244:1: rule__GetAttributeBody__AttributeAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalRMParser.g:18244:1: rule__GetAttributeBody__AttributeAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__GetAttributeBody__AttributeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18248:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalRMParser.g:18249:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalRMParser.g:18248:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18249:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18249:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalRMParser.g:18250:3: ( RULE_QUALIFIED_NAME )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getGetAttributeBodyAccess().getAttributeEAttributeDefinitionCrossReference_0_1_0()); 
-            }
-            // InternalRMParser.g:18251:3: ( RULE_QUALIFIED_NAME )
-            // InternalRMParser.g:18252:4: RULE_QUALIFIED_NAME
+            // InternalRMParser.g:18249:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18250:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getGetAttributeBodyAccess().getAttributeEAttributeDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1()); 
+               before(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_TYPEParserRuleCall_0_1_0()); 
             }
-            match(input,RULE_QUALIFIED_NAME,FOLLOW_2); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getGetAttributeBodyAccess().getAttributeEAttributeDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1()); 
-            }
+            pushFollow(FOLLOW_2);
+            ruleEPREFIX_TYPE();
 
-            }
-
+            state._fsp--;
+            if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getGetAttributeBodyAccess().getAttributeEAttributeDefinitionCrossReference_0_1_0()); 
+               after(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_TYPEParserRuleCall_0_1_0()); 
             }
 
             }
@@ -58656,17 +58648,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetAttributeBody__EntityAssignment_1_1"
-    // InternalRMParser.g:18263:1: rule__GetAttributeBody__EntityAssignment_1_1 : ( RULE_ENTITY ) ;
+    // InternalRMParser.g:18259:1: rule__GetAttributeBody__EntityAssignment_1_1 : ( RULE_ENTITY ) ;
     public final void rule__GetAttributeBody__EntityAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18267:1: ( ( RULE_ENTITY ) )
-            // InternalRMParser.g:18268:2: ( RULE_ENTITY )
+            // InternalRMParser.g:18263:1: ( ( RULE_ENTITY ) )
+            // InternalRMParser.g:18264:2: ( RULE_ENTITY )
             {
-            // InternalRMParser.g:18268:2: ( RULE_ENTITY )
-            // InternalRMParser.g:18269:3: RULE_ENTITY
+            // InternalRMParser.g:18264:2: ( RULE_ENTITY )
+            // InternalRMParser.g:18265:3: RULE_ENTITY
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getGetAttributeBodyAccess().getEntityENTITYTerminalRuleCall_1_1_0()); 
@@ -58697,17 +58689,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetAttributeBody__Req_capAssignment_2_1"
-    // InternalRMParser.g:18278:1: rule__GetAttributeBody__Req_capAssignment_2_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalRMParser.g:18274:1: rule__GetAttributeBody__Req_capAssignment_2_1 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__GetAttributeBody__Req_capAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18282:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:18283:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18278:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18279:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18283:2: ( ruleEPREFIX_TYPE )
-            // InternalRMParser.g:18284:3: ruleEPREFIX_TYPE
+            // InternalRMParser.g:18279:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18280:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); 
@@ -58742,17 +58734,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetProperty__PropertyAssignment_2"
-    // InternalRMParser.g:18293:1: rule__GetProperty__PropertyAssignment_2 : ( ruleGetPropertyBody ) ;
+    // InternalRMParser.g:18289:1: rule__GetProperty__PropertyAssignment_2 : ( ruleGetPropertyBody ) ;
     public final void rule__GetProperty__PropertyAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18297:1: ( ( ruleGetPropertyBody ) )
-            // InternalRMParser.g:18298:2: ( ruleGetPropertyBody )
+            // InternalRMParser.g:18293:1: ( ( ruleGetPropertyBody ) )
+            // InternalRMParser.g:18294:2: ( ruleGetPropertyBody )
             {
-            // InternalRMParser.g:18298:2: ( ruleGetPropertyBody )
-            // InternalRMParser.g:18299:3: ruleGetPropertyBody
+            // InternalRMParser.g:18294:2: ( ruleGetPropertyBody )
+            // InternalRMParser.g:18295:3: ruleGetPropertyBody
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getGetPropertyAccess().getPropertyGetPropertyBodyParserRuleCall_2_0()); 
@@ -58787,36 +58779,28 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetPropertyBody__PropertyAssignment_0_1"
-    // InternalRMParser.g:18308:1: rule__GetPropertyBody__PropertyAssignment_0_1 : ( ( RULE_QUALIFIED_NAME ) ) ;
+    // InternalRMParser.g:18304:1: rule__GetPropertyBody__PropertyAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__GetPropertyBody__PropertyAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18312:1: ( ( ( RULE_QUALIFIED_NAME ) ) )
-            // InternalRMParser.g:18313:2: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalRMParser.g:18308:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18309:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18313:2: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalRMParser.g:18314:3: ( RULE_QUALIFIED_NAME )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getGetPropertyBodyAccess().getPropertyEPropertyDefinitionCrossReference_0_1_0()); 
-            }
-            // InternalRMParser.g:18315:3: ( RULE_QUALIFIED_NAME )
-            // InternalRMParser.g:18316:4: RULE_QUALIFIED_NAME
+            // InternalRMParser.g:18309:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18310:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getGetPropertyBodyAccess().getPropertyEPropertyDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1()); 
+               before(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_TYPEParserRuleCall_0_1_0()); 
             }
-            match(input,RULE_QUALIFIED_NAME,FOLLOW_2); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getGetPropertyBodyAccess().getPropertyEPropertyDefinitionQUALIFIED_NAMETerminalRuleCall_0_1_0_1()); 
-            }
+            pushFollow(FOLLOW_2);
+            ruleEPREFIX_TYPE();
 
-            }
-
+            state._fsp--;
+            if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getGetPropertyBodyAccess().getPropertyEPropertyDefinitionCrossReference_0_1_0()); 
+               after(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_TYPEParserRuleCall_0_1_0()); 
             }
 
             }
@@ -58840,17 +58824,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetPropertyBody__EntityAssignment_1_1"
-    // InternalRMParser.g:18327:1: rule__GetPropertyBody__EntityAssignment_1_1 : ( RULE_ENTITY ) ;
+    // InternalRMParser.g:18319:1: rule__GetPropertyBody__EntityAssignment_1_1 : ( RULE_ENTITY ) ;
     public final void rule__GetPropertyBody__EntityAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18331:1: ( ( RULE_ENTITY ) )
-            // InternalRMParser.g:18332:2: ( RULE_ENTITY )
+            // InternalRMParser.g:18323:1: ( ( RULE_ENTITY ) )
+            // InternalRMParser.g:18324:2: ( RULE_ENTITY )
             {
-            // InternalRMParser.g:18332:2: ( RULE_ENTITY )
-            // InternalRMParser.g:18333:3: RULE_ENTITY
+            // InternalRMParser.g:18324:2: ( RULE_ENTITY )
+            // InternalRMParser.g:18325:3: RULE_ENTITY
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getGetPropertyBodyAccess().getEntityENTITYTerminalRuleCall_1_1_0()); 
@@ -58881,17 +58865,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetPropertyBody__Req_capAssignment_2_1"
-    // InternalRMParser.g:18342:1: rule__GetPropertyBody__Req_capAssignment_2_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalRMParser.g:18334:1: rule__GetPropertyBody__Req_capAssignment_2_1 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__GetPropertyBody__Req_capAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18346:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:18347:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18338:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18339:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18347:2: ( ruleEPREFIX_TYPE )
-            // InternalRMParser.g:18348:3: ruleEPREFIX_TYPE
+            // InternalRMParser.g:18339:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18340:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); 
@@ -58926,17 +58910,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilities__CapabilitiesAssignment_1"
-    // InternalRMParser.g:18357:1: rule__ECapabilities__CapabilitiesAssignment_1 : ( ruleECapabilityDefinition ) ;
+    // InternalRMParser.g:18349:1: rule__ECapabilities__CapabilitiesAssignment_1 : ( ruleECapabilityDefinition ) ;
     public final void rule__ECapabilities__CapabilitiesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18361:1: ( ( ruleECapabilityDefinition ) )
-            // InternalRMParser.g:18362:2: ( ruleECapabilityDefinition )
+            // InternalRMParser.g:18353:1: ( ( ruleECapabilityDefinition ) )
+            // InternalRMParser.g:18354:2: ( ruleECapabilityDefinition )
             {
-            // InternalRMParser.g:18362:2: ( ruleECapabilityDefinition )
-            // InternalRMParser.g:18363:3: ruleECapabilityDefinition
+            // InternalRMParser.g:18354:2: ( ruleECapabilityDefinition )
+            // InternalRMParser.g:18355:3: ruleECapabilityDefinition
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilitiesAccess().getCapabilitiesECapabilityDefinitionParserRuleCall_1_0()); 
@@ -58971,17 +58955,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinition__NameAssignment_0"
-    // InternalRMParser.g:18372:1: rule__ECapabilityDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalRMParser.g:18364:1: rule__ECapabilityDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__ECapabilityDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18376:1: ( ( RULE_ID ) )
-            // InternalRMParser.g:18377:2: ( RULE_ID )
+            // InternalRMParser.g:18368:1: ( ( RULE_ID ) )
+            // InternalRMParser.g:18369:2: ( RULE_ID )
             {
-            // InternalRMParser.g:18377:2: ( RULE_ID )
-            // InternalRMParser.g:18378:3: RULE_ID
+            // InternalRMParser.g:18369:2: ( RULE_ID )
+            // InternalRMParser.g:18370:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilityDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
@@ -59012,17 +58996,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinition__CapabilityAssignment_3"
-    // InternalRMParser.g:18387:1: rule__ECapabilityDefinition__CapabilityAssignment_3 : ( ruleECapabilityDefinitionBody ) ;
+    // InternalRMParser.g:18379:1: rule__ECapabilityDefinition__CapabilityAssignment_3 : ( ruleECapabilityDefinitionBody ) ;
     public final void rule__ECapabilityDefinition__CapabilityAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18391:1: ( ( ruleECapabilityDefinitionBody ) )
-            // InternalRMParser.g:18392:2: ( ruleECapabilityDefinitionBody )
+            // InternalRMParser.g:18383:1: ( ( ruleECapabilityDefinitionBody ) )
+            // InternalRMParser.g:18384:2: ( ruleECapabilityDefinitionBody )
             {
-            // InternalRMParser.g:18392:2: ( ruleECapabilityDefinitionBody )
-            // InternalRMParser.g:18393:3: ruleECapabilityDefinitionBody
+            // InternalRMParser.g:18384:2: ( ruleECapabilityDefinitionBody )
+            // InternalRMParser.g:18385:3: ruleECapabilityDefinitionBody
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilityDefinitionAccess().getCapabilityECapabilityDefinitionBodyParserRuleCall_3_0()); 
@@ -59057,17 +59041,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__TypeAssignment_0_1"
-    // InternalRMParser.g:18402:1: rule__ECapabilityDefinitionBody__TypeAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalRMParser.g:18394:1: rule__ECapabilityDefinitionBody__TypeAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__ECapabilityDefinitionBody__TypeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18406:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:18407:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18398:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18399:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18407:2: ( ruleEPREFIX_TYPE )
-            // InternalRMParser.g:18408:3: ruleEPREFIX_TYPE
+            // InternalRMParser.g:18399:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18400:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilityDefinitionBodyAccess().getTypeEPREFIX_TYPEParserRuleCall_0_1_0()); 
@@ -59102,17 +59086,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__DescriptionAssignment_1_1"
-    // InternalRMParser.g:18417:1: rule__ECapabilityDefinitionBody__DescriptionAssignment_1_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:18409:1: rule__ECapabilityDefinitionBody__DescriptionAssignment_1_1 : ( RULE_STRING ) ;
     public final void rule__ECapabilityDefinitionBody__DescriptionAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18421:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18422:2: ( RULE_STRING )
+            // InternalRMParser.g:18413:1: ( ( RULE_STRING ) )
+            // InternalRMParser.g:18414:2: ( RULE_STRING )
             {
-            // InternalRMParser.g:18422:2: ( RULE_STRING )
-            // InternalRMParser.g:18423:3: RULE_STRING
+            // InternalRMParser.g:18414:2: ( RULE_STRING )
+            // InternalRMParser.g:18415:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilityDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_0()); 
@@ -59143,17 +59127,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2"
-    // InternalRMParser.g:18432:1: rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2 : ( ruleEProperties ) ;
+    // InternalRMParser.g:18424:1: rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2 : ( ruleEProperties ) ;
     public final void rule__ECapabilityDefinitionBody__PropertiesAssignment_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18436:1: ( ( ruleEProperties ) )
-            // InternalRMParser.g:18437:2: ( ruleEProperties )
+            // InternalRMParser.g:18428:1: ( ( ruleEProperties ) )
+            // InternalRMParser.g:18429:2: ( ruleEProperties )
             {
-            // InternalRMParser.g:18437:2: ( ruleEProperties )
-            // InternalRMParser.g:18438:3: ruleEProperties
+            // InternalRMParser.g:18429:2: ( ruleEProperties )
+            // InternalRMParser.g:18430:3: ruleEProperties
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilityDefinitionBodyAccess().getPropertiesEPropertiesParserRuleCall_2_2_0()); 
@@ -59188,17 +59172,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__AttributesAssignment_3_2"
-    // InternalRMParser.g:18447:1: rule__ECapabilityDefinitionBody__AttributesAssignment_3_2 : ( ruleEAttributes ) ;
+    // InternalRMParser.g:18439:1: rule__ECapabilityDefinitionBody__AttributesAssignment_3_2 : ( ruleEAttributes ) ;
     public final void rule__ECapabilityDefinitionBody__AttributesAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18451:1: ( ( ruleEAttributes ) )
-            // InternalRMParser.g:18452:2: ( ruleEAttributes )
+            // InternalRMParser.g:18443:1: ( ( ruleEAttributes ) )
+            // InternalRMParser.g:18444:2: ( ruleEAttributes )
             {
-            // InternalRMParser.g:18452:2: ( ruleEAttributes )
-            // InternalRMParser.g:18453:3: ruleEAttributes
+            // InternalRMParser.g:18444:2: ( ruleEAttributes )
+            // InternalRMParser.g:18445:3: ruleEAttributes
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilityDefinitionBodyAccess().getAttributesEAttributesParserRuleCall_3_2_0()); 
@@ -59233,17 +59217,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Valid_source_typesAssignment_4_2"
-    // InternalRMParser.g:18462:1: rule__ECapabilityDefinitionBody__Valid_source_typesAssignment_4_2 : ( ruleEValidSourceType ) ;
+    // InternalRMParser.g:18454:1: rule__ECapabilityDefinitionBody__Valid_source_typesAssignment_4_2 : ( ruleEValidSourceType ) ;
     public final void rule__ECapabilityDefinitionBody__Valid_source_typesAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18466:1: ( ( ruleEValidSourceType ) )
-            // InternalRMParser.g:18467:2: ( ruleEValidSourceType )
+            // InternalRMParser.g:18458:1: ( ( ruleEValidSourceType ) )
+            // InternalRMParser.g:18459:2: ( ruleEValidSourceType )
             {
-            // InternalRMParser.g:18467:2: ( ruleEValidSourceType )
-            // InternalRMParser.g:18468:3: ruleEValidSourceType
+            // InternalRMParser.g:18459:2: ( ruleEValidSourceType )
+            // InternalRMParser.g:18460:3: ruleEValidSourceType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesEValidSourceTypeParserRuleCall_4_2_0()); 
@@ -59278,17 +59262,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2"
-    // InternalRMParser.g:18477:1: rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18469:1: rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ECapabilityDefinitionBody__Occurrences_startAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18481:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18482:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18473:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18474:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18482:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18483:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18474:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18475:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0()); 
@@ -59323,17 +59307,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4"
-    // InternalRMParser.g:18492:1: rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18484:1: rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ECapabilityDefinitionBody__Occurrences_endAssignment_5_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18496:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18497:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18488:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18489:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18497:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18498:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18489:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18490:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0()); 
@@ -59368,17 +59352,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValidSourceType__SourceTypesAssignment_0"
-    // InternalRMParser.g:18507:1: rule__EValidSourceType__SourceTypesAssignment_0 : ( ruleEPREFIX_TYPE ) ;
+    // InternalRMParser.g:18499:1: rule__EValidSourceType__SourceTypesAssignment_0 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__EValidSourceType__SourceTypesAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18511:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:18512:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18503:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18504:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18512:2: ( ruleEPREFIX_TYPE )
-            // InternalRMParser.g:18513:3: ruleEPREFIX_TYPE
+            // InternalRMParser.g:18504:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18505:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_0_0()); 
@@ -59413,17 +59397,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValidSourceType__SourceTypeAssignment_1_1"
-    // InternalRMParser.g:18522:1: rule__EValidSourceType__SourceTypeAssignment_1_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalRMParser.g:18514:1: rule__EValidSourceType__SourceTypeAssignment_1_1 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__EValidSourceType__SourceTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18526:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:18527:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18518:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18519:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18527:2: ( ruleEPREFIX_TYPE )
-            // InternalRMParser.g:18528:3: ruleEPREFIX_TYPE
+            // InternalRMParser.g:18519:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18520:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0()); 
@@ -59458,17 +59442,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirements__RequirementsAssignment_1"
-    // InternalRMParser.g:18537:1: rule__ERequirements__RequirementsAssignment_1 : ( ruleERequirementDefinition ) ;
+    // InternalRMParser.g:18529:1: rule__ERequirements__RequirementsAssignment_1 : ( ruleERequirementDefinition ) ;
     public final void rule__ERequirements__RequirementsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18541:1: ( ( ruleERequirementDefinition ) )
-            // InternalRMParser.g:18542:2: ( ruleERequirementDefinition )
+            // InternalRMParser.g:18533:1: ( ( ruleERequirementDefinition ) )
+            // InternalRMParser.g:18534:2: ( ruleERequirementDefinition )
             {
-            // InternalRMParser.g:18542:2: ( ruleERequirementDefinition )
-            // InternalRMParser.g:18543:3: ruleERequirementDefinition
+            // InternalRMParser.g:18534:2: ( ruleERequirementDefinition )
+            // InternalRMParser.g:18535:3: ruleERequirementDefinition
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getERequirementsAccess().getRequirementsERequirementDefinitionParserRuleCall_1_0()); 
@@ -59503,17 +59487,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinition__NameAssignment_0"
-    // InternalRMParser.g:18552:1: rule__ERequirementDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalRMParser.g:18544:1: rule__ERequirementDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__ERequirementDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18556:1: ( ( RULE_ID ) )
-            // InternalRMParser.g:18557:2: ( RULE_ID )
+            // InternalRMParser.g:18548:1: ( ( RULE_ID ) )
+            // InternalRMParser.g:18549:2: ( RULE_ID )
             {
-            // InternalRMParser.g:18557:2: ( RULE_ID )
-            // InternalRMParser.g:18558:3: RULE_ID
+            // InternalRMParser.g:18549:2: ( RULE_ID )
+            // InternalRMParser.g:18550:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getERequirementDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
@@ -59544,17 +59528,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinition__RequirementAssignment_3"
-    // InternalRMParser.g:18567:1: rule__ERequirementDefinition__RequirementAssignment_3 : ( ruleERequirementDefinitionBody ) ;
+    // InternalRMParser.g:18559:1: rule__ERequirementDefinition__RequirementAssignment_3 : ( ruleERequirementDefinitionBody ) ;
     public final void rule__ERequirementDefinition__RequirementAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18571:1: ( ( ruleERequirementDefinitionBody ) )
-            // InternalRMParser.g:18572:2: ( ruleERequirementDefinitionBody )
+            // InternalRMParser.g:18563:1: ( ( ruleERequirementDefinitionBody ) )
+            // InternalRMParser.g:18564:2: ( ruleERequirementDefinitionBody )
             {
-            // InternalRMParser.g:18572:2: ( ruleERequirementDefinitionBody )
-            // InternalRMParser.g:18573:3: ruleERequirementDefinitionBody
+            // InternalRMParser.g:18564:2: ( ruleERequirementDefinitionBody )
+            // InternalRMParser.g:18565:3: ruleERequirementDefinitionBody
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getERequirementDefinitionAccess().getRequirementERequirementDefinitionBodyParserRuleCall_3_0()); 
@@ -59589,17 +59573,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__CapabilityAssignment_0_1"
-    // InternalRMParser.g:18582:1: rule__ERequirementDefinitionBody__CapabilityAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalRMParser.g:18574:1: rule__ERequirementDefinitionBody__CapabilityAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__ERequirementDefinitionBody__CapabilityAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18586:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:18587:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18578:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18579:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18587:2: ( ruleEPREFIX_TYPE )
-            // InternalRMParser.g:18588:3: ruleEPREFIX_TYPE
+            // InternalRMParser.g:18579:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18580:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getERequirementDefinitionBodyAccess().getCapabilityEPREFIX_TYPEParserRuleCall_0_1_0()); 
@@ -59634,17 +59618,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__NodeAssignment_1_1"
-    // InternalRMParser.g:18597:1: rule__ERequirementDefinitionBody__NodeAssignment_1_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalRMParser.g:18589:1: rule__ERequirementDefinitionBody__NodeAssignment_1_1 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__ERequirementDefinitionBody__NodeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18601:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:18602:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18593:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18594:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18602:2: ( ruleEPREFIX_TYPE )
-            // InternalRMParser.g:18603:3: ruleEPREFIX_TYPE
+            // InternalRMParser.g:18594:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18595:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getERequirementDefinitionBodyAccess().getNodeEPREFIX_TYPEParserRuleCall_1_1_0()); 
@@ -59679,17 +59663,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__RelationshipAssignment_2_1"
-    // InternalRMParser.g:18612:1: rule__ERequirementDefinitionBody__RelationshipAssignment_2_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalRMParser.g:18604:1: rule__ERequirementDefinitionBody__RelationshipAssignment_2_1 : ( ruleEPREFIX_TYPE ) ;
     public final void rule__ERequirementDefinitionBody__RelationshipAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18616:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:18617:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18608:1: ( ( ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:18609:2: ( ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:18617:2: ( ruleEPREFIX_TYPE )
-            // InternalRMParser.g:18618:3: ruleEPREFIX_TYPE
+            // InternalRMParser.g:18609:2: ( ruleEPREFIX_TYPE )
+            // InternalRMParser.g:18610:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getERequirementDefinitionBodyAccess().getRelationshipEPREFIX_TYPEParserRuleCall_2_1_0()); 
@@ -59724,17 +59708,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__StartAssignment_3_2"
-    // InternalRMParser.g:18627:1: rule__ERequirementDefinitionBody__StartAssignment_3_2 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18619:1: rule__ERequirementDefinitionBody__StartAssignment_3_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ERequirementDefinitionBody__StartAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18631:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18632:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18623:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18624:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18632:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18633:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18624:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18625:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getERequirementDefinitionBodyAccess().getStartEAlphaNumericValueParserRuleCall_3_2_0()); 
@@ -59769,17 +59753,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ERequirementDefinitionBody__EndAssignment_3_4"
-    // InternalRMParser.g:18642:1: rule__ERequirementDefinitionBody__EndAssignment_3_4 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18634:1: rule__ERequirementDefinitionBody__EndAssignment_3_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ERequirementDefinitionBody__EndAssignment_3_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18646:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18647:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18638:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18639:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18647:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18648:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18639:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18640:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getERequirementDefinitionBodyAccess().getEndEAlphaNumericValueParserRuleCall_3_4_0()); 
@@ -59814,17 +59798,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EConstraints__ConstraintsAssignment_1"
-    // InternalRMParser.g:18657:1: rule__EConstraints__ConstraintsAssignment_1 : ( ruleEConstraint ) ;
+    // InternalRMParser.g:18649:1: rule__EConstraints__ConstraintsAssignment_1 : ( ruleEConstraint ) ;
     public final void rule__EConstraints__ConstraintsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18661:1: ( ( ruleEConstraint ) )
-            // InternalRMParser.g:18662:2: ( ruleEConstraint )
+            // InternalRMParser.g:18653:1: ( ( ruleEConstraint ) )
+            // InternalRMParser.g:18654:2: ( ruleEConstraint )
             {
-            // InternalRMParser.g:18662:2: ( ruleEConstraint )
-            // InternalRMParser.g:18663:3: ruleEConstraint
+            // InternalRMParser.g:18654:2: ( ruleEConstraint )
+            // InternalRMParser.g:18655:3: ruleEConstraint
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEConstraintsAccess().getConstraintsEConstraintParserRuleCall_1_0()); 
@@ -59859,17 +59843,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMaxLength__ValAssignment_1"
-    // InternalRMParser.g:18672:1: rule__EMaxLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18664:1: rule__EMaxLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EMaxLength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18676:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18677:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18668:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18669:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18677:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18678:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18669:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18670:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEMaxLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
@@ -59904,17 +59888,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMinLength__ValAssignment_1"
-    // InternalRMParser.g:18687:1: rule__EMinLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18679:1: rule__EMinLength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EMinLength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18691:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18692:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18683:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18684:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18692:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18693:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18684:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18685:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEMinLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
@@ -59949,17 +59933,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELength__ValAssignment_1"
-    // InternalRMParser.g:18702:1: rule__ELength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18694:1: rule__ELength__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELength__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18706:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18707:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18698:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18699:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18707:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18708:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18699:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18700:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getELengthAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
@@ -59994,17 +59978,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValid_Values__ValAssignment_1"
-    // InternalRMParser.g:18717:1: rule__EValid_Values__ValAssignment_1 : ( ruleELIST ) ;
+    // InternalRMParser.g:18709:1: rule__EValid_Values__ValAssignment_1 : ( ruleELIST ) ;
     public final void rule__EValid_Values__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18721:1: ( ( ruleELIST ) )
-            // InternalRMParser.g:18722:2: ( ruleELIST )
+            // InternalRMParser.g:18713:1: ( ( ruleELIST ) )
+            // InternalRMParser.g:18714:2: ( ruleELIST )
             {
-            // InternalRMParser.g:18722:2: ( ruleELIST )
-            // InternalRMParser.g:18723:3: ruleELIST
+            // InternalRMParser.g:18714:2: ( ruleELIST )
+            // InternalRMParser.g:18715:3: ruleELIST
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEValid_ValuesAccess().getValELISTParserRuleCall_1_0()); 
@@ -60039,17 +60023,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELIST__ListAssignment_1"
-    // InternalRMParser.g:18732:1: rule__ELIST__ListAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18724:1: rule__ELIST__ListAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELIST__ListAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18736:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18737:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18728:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18729:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18737:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18738:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18729:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18730:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_1_0()); 
@@ -60084,17 +60068,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELIST__ListAssignment_2_1"
-    // InternalRMParser.g:18747:1: rule__ELIST__ListAssignment_2_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18739:1: rule__ELIST__ListAssignment_2_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELIST__ListAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18751:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18752:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18743:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18744:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18752:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18753:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18744:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18745:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_1_0()); 
@@ -60129,17 +60113,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInRange__StartAssignment_2"
-    // InternalRMParser.g:18762:1: rule__EInRange__StartAssignment_2 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18754:1: rule__EInRange__StartAssignment_2 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EInRange__StartAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18766:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18767:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18758:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18759:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18767:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18768:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18759:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18760:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEInRangeAccess().getStartEAlphaNumericValueParserRuleCall_2_0()); 
@@ -60174,17 +60158,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInRange__EndAssignment_4"
-    // InternalRMParser.g:18777:1: rule__EInRange__EndAssignment_4 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18769:1: rule__EInRange__EndAssignment_4 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EInRange__EndAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18781:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18782:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18773:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18774:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18782:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18783:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18774:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18775:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEInRangeAccess().getEndEAlphaNumericValueParserRuleCall_4_0()); 
@@ -60219,17 +60203,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELessOrEqual__ValAssignment_1"
-    // InternalRMParser.g:18792:1: rule__ELessOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18784:1: rule__ELessOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELessOrEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18796:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18797:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18788:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18789:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18797:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18798:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18789:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18790:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getELessOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
@@ -60264,17 +60248,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ELessThan__ValAssignment_1"
-    // InternalRMParser.g:18807:1: rule__ELessThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18799:1: rule__ELessThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__ELessThan__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18811:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18812:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18803:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18804:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18812:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18813:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18804:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18805:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getELessThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
@@ -60309,17 +60293,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EGreaterOrEqual__ValAssignment_1"
-    // InternalRMParser.g:18822:1: rule__EGreaterOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18814:1: rule__EGreaterOrEqual__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EGreaterOrEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18826:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18827:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18818:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18819:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18827:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18828:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18819:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18820:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEGreaterOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
@@ -60354,17 +60338,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EGreaterThan__ValAssignment_1"
-    // InternalRMParser.g:18837:1: rule__EGreaterThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
+    // InternalRMParser.g:18829:1: rule__EGreaterThan__ValAssignment_1 : ( ruleEAlphaNumericValue ) ;
     public final void rule__EGreaterThan__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18841:1: ( ( ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:18842:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18833:1: ( ( ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:18834:2: ( ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:18842:2: ( ruleEAlphaNumericValue )
-            // InternalRMParser.g:18843:3: ruleEAlphaNumericValue
+            // InternalRMParser.g:18834:2: ( ruleEAlphaNumericValue )
+            // InternalRMParser.g:18835:3: ruleEAlphaNumericValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEGreaterThanAccess().getValEAlphaNumericValueParserRuleCall_1_0()); 
@@ -60399,17 +60383,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EEqual__ValAssignment_1"
-    // InternalRMParser.g:18852:1: rule__EEqual__ValAssignment_1 : ( ruleESingleValue ) ;
+    // InternalRMParser.g:18844:1: rule__EEqual__ValAssignment_1 : ( ruleESingleValue ) ;
     public final void rule__EEqual__ValAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18856:1: ( ( ruleESingleValue ) )
-            // InternalRMParser.g:18857:2: ( ruleESingleValue )
+            // InternalRMParser.g:18848:1: ( ( ruleESingleValue ) )
+            // InternalRMParser.g:18849:2: ( ruleESingleValue )
             {
-            // InternalRMParser.g:18857:2: ( ruleESingleValue )
-            // InternalRMParser.g:18858:3: ruleESingleValue
+            // InternalRMParser.g:18849:2: ( ruleESingleValue )
+            // InternalRMParser.g:18850:3: ruleESingleValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEEqualAccess().getValESingleValueParserRuleCall_1_0()); 
@@ -60444,17 +60428,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ESTRING__ValueAssignment"
-    // InternalRMParser.g:18867:1: rule__ESTRING__ValueAssignment : ( RULE_STRING ) ;
+    // InternalRMParser.g:18859:1: rule__ESTRING__ValueAssignment : ( RULE_STRING ) ;
     public final void rule__ESTRING__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18871:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:18872:2: ( RULE_STRING )
+            // InternalRMParser.g:18863:1: ( ( RULE_STRING ) )
+            // InternalRMParser.g:18864:2: ( RULE_STRING )
             {
-            // InternalRMParser.g:18872:2: ( RULE_STRING )
-            // InternalRMParser.g:18873:3: RULE_STRING
+            // InternalRMParser.g:18864:2: ( RULE_STRING )
+            // InternalRMParser.g:18865:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getESTRINGAccess().getValueSTRINGTerminalRuleCall_0()); 
@@ -60485,17 +60469,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EBOOLEAN__ValueAssignment"
-    // InternalRMParser.g:18882:1: rule__EBOOLEAN__ValueAssignment : ( RULE_BOOLEAN ) ;
+    // InternalRMParser.g:18874:1: rule__EBOOLEAN__ValueAssignment : ( RULE_BOOLEAN ) ;
     public final void rule__EBOOLEAN__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18886:1: ( ( RULE_BOOLEAN ) )
-            // InternalRMParser.g:18887:2: ( RULE_BOOLEAN )
+            // InternalRMParser.g:18878:1: ( ( RULE_BOOLEAN ) )
+            // InternalRMParser.g:18879:2: ( RULE_BOOLEAN )
             {
-            // InternalRMParser.g:18887:2: ( RULE_BOOLEAN )
-            // InternalRMParser.g:18888:3: RULE_BOOLEAN
+            // InternalRMParser.g:18879:2: ( RULE_BOOLEAN )
+            // InternalRMParser.g:18880:3: RULE_BOOLEAN
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEBOOLEANAccess().getValueBOOLEANTerminalRuleCall_0()); 
@@ -60526,17 +60510,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EFLOAT__ValueAssignment"
-    // InternalRMParser.g:18897:1: rule__EFLOAT__ValueAssignment : ( ruleFLOAT ) ;
+    // InternalRMParser.g:18889:1: rule__EFLOAT__ValueAssignment : ( ruleFLOAT ) ;
     public final void rule__EFLOAT__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18901:1: ( ( ruleFLOAT ) )
-            // InternalRMParser.g:18902:2: ( ruleFLOAT )
+            // InternalRMParser.g:18893:1: ( ( ruleFLOAT ) )
+            // InternalRMParser.g:18894:2: ( ruleFLOAT )
             {
-            // InternalRMParser.g:18902:2: ( ruleFLOAT )
-            // InternalRMParser.g:18903:3: ruleFLOAT
+            // InternalRMParser.g:18894:2: ( ruleFLOAT )
+            // InternalRMParser.g:18895:3: ruleFLOAT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEFLOATAccess().getValueFLOATParserRuleCall_0()); 
@@ -60571,17 +60555,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ESIGNEDINT__ValueAssignment"
-    // InternalRMParser.g:18912:1: rule__ESIGNEDINT__ValueAssignment : ( ruleSIGNEDINT ) ;
+    // InternalRMParser.g:18904:1: rule__ESIGNEDINT__ValueAssignment : ( ruleSIGNEDINT ) ;
     public final void rule__ESIGNEDINT__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18916:1: ( ( ruleSIGNEDINT ) )
-            // InternalRMParser.g:18917:2: ( ruleSIGNEDINT )
+            // InternalRMParser.g:18908:1: ( ( ruleSIGNEDINT ) )
+            // InternalRMParser.g:18909:2: ( ruleSIGNEDINT )
             {
-            // InternalRMParser.g:18917:2: ( ruleSIGNEDINT )
-            // InternalRMParser.g:18918:3: ruleSIGNEDINT
+            // InternalRMParser.g:18909:2: ( ruleSIGNEDINT )
+            // InternalRMParser.g:18910:3: ruleSIGNEDINT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getESIGNEDINTAccess().getValueSIGNEDINTParserRuleCall_0()); 
@@ -60616,17 +60600,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMAP__MapAssignment_1"
-    // InternalRMParser.g:18927:1: rule__EMAP__MapAssignment_1 : ( ruleEMapEntry ) ;
+    // InternalRMParser.g:18919:1: rule__EMAP__MapAssignment_1 : ( ruleEMapEntry ) ;
     public final void rule__EMAP__MapAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18931:1: ( ( ruleEMapEntry ) )
-            // InternalRMParser.g:18932:2: ( ruleEMapEntry )
+            // InternalRMParser.g:18923:1: ( ( ruleEMapEntry ) )
+            // InternalRMParser.g:18924:2: ( ruleEMapEntry )
             {
-            // InternalRMParser.g:18932:2: ( ruleEMapEntry )
-            // InternalRMParser.g:18933:3: ruleEMapEntry
+            // InternalRMParser.g:18924:2: ( ruleEMapEntry )
+            // InternalRMParser.g:18925:3: ruleEMapEntry
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEMAPAccess().getMapEMapEntryParserRuleCall_1_0()); 
@@ -60661,17 +60645,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMapEntry__KeyAssignment_0"
-    // InternalRMParser.g:18942:1: rule__EMapEntry__KeyAssignment_0 : ( RULE_ID ) ;
+    // InternalRMParser.g:18934:1: rule__EMapEntry__KeyAssignment_0 : ( RULE_ID ) ;
     public final void rule__EMapEntry__KeyAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18946:1: ( ( RULE_ID ) )
-            // InternalRMParser.g:18947:2: ( RULE_ID )
+            // InternalRMParser.g:18938:1: ( ( RULE_ID ) )
+            // InternalRMParser.g:18939:2: ( RULE_ID )
             {
-            // InternalRMParser.g:18947:2: ( RULE_ID )
-            // InternalRMParser.g:18948:3: RULE_ID
+            // InternalRMParser.g:18939:2: ( RULE_ID )
+            // InternalRMParser.g:18940:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEMapEntryAccess().getKeyIDTerminalRuleCall_0_0()); 
@@ -60702,17 +60686,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EMapEntry__ValueAssignment_2"
-    // InternalRMParser.g:18957:1: rule__EMapEntry__ValueAssignment_2 : ( ruleEAssignmentValue ) ;
+    // InternalRMParser.g:18949:1: rule__EMapEntry__ValueAssignment_2 : ( ruleEAssignmentValue ) ;
     public final void rule__EMapEntry__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18961:1: ( ( ruleEAssignmentValue ) )
-            // InternalRMParser.g:18962:2: ( ruleEAssignmentValue )
+            // InternalRMParser.g:18953:1: ( ( ruleEAssignmentValue ) )
+            // InternalRMParser.g:18954:2: ( ruleEAssignmentValue )
             {
-            // InternalRMParser.g:18962:2: ( ruleEAssignmentValue )
-            // InternalRMParser.g:18963:3: ruleEAssignmentValue
+            // InternalRMParser.g:18954:2: ( ruleEAssignmentValue )
+            // InternalRMParser.g:18955:3: ruleEAssignmentValue
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0()); 
@@ -60747,17 +60731,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPREFIX_TYPE__ModuleAssignment_0_0"
-    // InternalRMParser.g:18972:1: rule__EPREFIX_TYPE__ModuleAssignment_0_0 : ( RULE_ID ) ;
+    // InternalRMParser.g:18964:1: rule__EPREFIX_TYPE__ModuleAssignment_0_0 : ( RULE_ID ) ;
     public final void rule__EPREFIX_TYPE__ModuleAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18976:1: ( ( RULE_ID ) )
-            // InternalRMParser.g:18977:2: ( RULE_ID )
+            // InternalRMParser.g:18968:1: ( ( RULE_ID ) )
+            // InternalRMParser.g:18969:2: ( RULE_ID )
             {
-            // InternalRMParser.g:18977:2: ( RULE_ID )
-            // InternalRMParser.g:18978:3: RULE_ID
+            // InternalRMParser.g:18969:2: ( RULE_ID )
+            // InternalRMParser.g:18970:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEPREFIX_TYPEAccess().getModuleIDTerminalRuleCall_0_0_0()); 
@@ -60788,17 +60772,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPREFIX_TYPE__TypeAssignment_1"
-    // InternalRMParser.g:18987:1: rule__EPREFIX_TYPE__TypeAssignment_1 : ( RULE_QUALIFIED_NAME ) ;
+    // InternalRMParser.g:18979:1: rule__EPREFIX_TYPE__TypeAssignment_1 : ( RULE_QUALIFIED_NAME ) ;
     public final void rule__EPREFIX_TYPE__TypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:18991:1: ( ( RULE_QUALIFIED_NAME ) )
-            // InternalRMParser.g:18992:2: ( RULE_QUALIFIED_NAME )
+            // InternalRMParser.g:18983:1: ( ( RULE_QUALIFIED_NAME ) )
+            // InternalRMParser.g:18984:2: ( RULE_QUALIFIED_NAME )
             {
-            // InternalRMParser.g:18992:2: ( RULE_QUALIFIED_NAME )
-            // InternalRMParser.g:18993:3: RULE_QUALIFIED_NAME
+            // InternalRMParser.g:18984:2: ( RULE_QUALIFIED_NAME )
+            // InternalRMParser.g:18985:3: RULE_QUALIFIED_NAME
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEPREFIX_TYPEAccess().getTypeQUALIFIED_NAMETerminalRuleCall_1_0()); 
@@ -60829,17 +60813,17 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPRIMITIVE_TYPE__TypeAssignment"
-    // InternalRMParser.g:19002:1: rule__EPRIMITIVE_TYPE__TypeAssignment : ( RULE_ID ) ;
+    // InternalRMParser.g:18994:1: rule__EPRIMITIVE_TYPE__TypeAssignment : ( RULE_ID ) ;
     public final void rule__EPRIMITIVE_TYPE__TypeAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:19006:1: ( ( RULE_ID ) )
-            // InternalRMParser.g:19007:2: ( RULE_ID )
+            // InternalRMParser.g:18998:1: ( ( RULE_ID ) )
+            // InternalRMParser.g:18999:2: ( RULE_ID )
             {
-            // InternalRMParser.g:19007:2: ( RULE_ID )
-            // InternalRMParser.g:19008:3: RULE_ID
+            // InternalRMParser.g:18999:2: ( RULE_ID )
+            // InternalRMParser.g:19000:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEPRIMITIVE_TYPEAccess().getTypeIDTerminalRuleCall_0()); 

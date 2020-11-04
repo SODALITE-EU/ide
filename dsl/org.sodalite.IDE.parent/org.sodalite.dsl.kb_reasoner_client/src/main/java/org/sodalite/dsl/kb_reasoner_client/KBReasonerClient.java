@@ -140,49 +140,90 @@ public class KBReasonerClient implements KBReasoner {
 		for (String module : modules)
 			url += ";imports=" + module;
 		url += ";type=" + kind.getLabel();
-		return getJSONObjectForType(TypeData.class, new URI(url), HttpStatus.OK);
+		TypeData data = getJSONObjectForType(TypeData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new TypeData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
 	}
 
 	public ModuleData getModules() throws Exception {
 		String url = kbReasonerUri + "namespaces";
-		return getJSONObjectForType(ModuleData.class, new URI(url), HttpStatus.OK);
+		ModuleData data = getJSONObjectForType(ModuleData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new ModuleData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
 	}
 
 	public AttributeData getAttributes(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "attributes?resource=" + resourceId;
-		return getJSONObjectForType(AttributeData.class, new URI(url), HttpStatus.OK);
+		AttributeData data = getJSONObjectForType(AttributeData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new AttributeData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
 	}
 
 	public CapabilityData getCapabilities(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "capabilities?resource=" + resourceId;
-		return getJSONObjectForType(CapabilityData.class, new URI(url), HttpStatus.OK);
+		CapabilityData data = getJSONObjectForType(CapabilityData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new CapabilityData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
 	}
 
 	public InterfaceData getInterfaces(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "interfaces?resource=" + resourceId;
-		return getJSONObjectForType(InterfaceData.class, new URI(url), HttpStatus.OK);
+		InterfaceData data = getJSONObjectForType(InterfaceData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new InterfaceData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
 	}
 
 	public PropertyData getProperties(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "properties?resource=" + resourceId;
-		return getJSONObjectForType(PropertyData.class, new URI(url), HttpStatus.OK);
+		PropertyData data = getJSONObjectForType(PropertyData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new PropertyData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
 	}
 
 	public RequirementData getRequirements(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "requirements?resource=" + resourceId;
-		return getJSONObjectForType(RequirementData.class, new URI(url), HttpStatus.OK);
+		RequirementData data = getJSONObjectForType(RequirementData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new RequirementData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
 	}
 
 	public ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception {
 		Assert.notNull(requirementId, "Pass a not null requirementId");
 		Assert.notNull(nodeType, "Pass a not null nodeType");
 		String url = kbReasonerUri + "valid-requirement-nodes?requirement=" + requirementId + "&nodeType=" + nodeType;
-		return getJSONObjectForType(ValidRequirementNodeData.class, new URI(url), HttpStatus.OK);
+		ValidRequirementNodeData data = getJSONObjectForType(ValidRequirementNodeData.class, new URI(url),
+				HttpStatus.OK);
+		if (data == null) {
+			data = new ValidRequirementNodeData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
 	}
 
 	@Override
@@ -528,7 +569,7 @@ public class KBReasonerClient implements KBReasoner {
 			if (response.getStatusCode().equals(expectedStatus)) {
 				log.info("Located " + type + " JSON object: " + object);
 			} else {
-				log.info("There was a problem getting JSON object in uri: " + uri);
+				throw new Exception("There was a problem getting JSON object in uri: " + uri);
 			}
 			return object;
 		} catch (Exception e) {
@@ -546,7 +587,7 @@ public class KBReasonerClient implements KBReasoner {
 			if (response.getStatusCode().equals(expectedStatus)) {
 				log.info("Located " + objects.length + " JSON object(s) for type " + type);
 			} else {
-				log.info("There was a problem getting JSON object(s) in uri: " + uri);
+				throw new Exception("There was a problem getting JSON object(s) in uri: " + uri);
 			}
 			return (List<T>) Arrays.asList(objects);
 		} catch (Exception e) {
@@ -579,8 +620,7 @@ public class KBReasonerClient implements KBReasoner {
 				log.info("Successfully inserted JSON object " + object);
 				log.info("Result obtained: " + result);
 			} else {
-				log.info("There was a problem inserting JSON object " + object + " in URI: " + uri);
-				result = null;
+				throw new Exception("There was a problem inserting JSON object " + object + " in URI: " + uri);
 			}
 			return result;
 		} catch (Exception e) {

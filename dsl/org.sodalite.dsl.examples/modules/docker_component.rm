@@ -6,12 +6,12 @@ node_types:
 		properties:
 			name:
 				type: string
-				description: "The name of the network"
+				description: "The name of the network" 
 				required: true
 		capabilities:
 			network:
 				type: tosca.capabilities.Network
-				valid_source_types:[ sodalite.nodes.DockerizedComponent ]
+				valid_source_types:[ docker/sodalite.nodes.DockerizedComponent ]
 		interfaces:
 			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard
@@ -42,7 +42,7 @@ node_types:
 		capabilities:  
 			host:  
 				type: tosca.capabilities.Node
-				valid_source_types:[sodalite.nodes.DockerizedComponent] 
+				valid_source_types:[docker/sodalite.nodes.DockerizedComponent] 
 		interfaces:  
 			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard 
@@ -52,8 +52,8 @@ node_types:
 							host_public_address:
 								default: get_attribute:
 									entity: SELF
-									attribute: sodalite.nodes.DockerHost.public_address
-									req_cap: sodalite.nodes.DockerHost.host
+									attribute: docker/sodalite.nodes.DockerHost.public_address
+									req_cap: docker/sodalites.nodes.DockerHost.host
 						implementation:  
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/create_docker_host.yml"
 					delete:  
@@ -62,8 +62,8 @@ node_types:
 
 	sodalite.nodes.DockerizedComponent:  
 		derived_from: tosca.nodes.SoftwareComponent 
-		properties:  
-			registry_url:  
+		properties:
+			registry_url: 
 				description: "The URL of the registry containing images"
 				required: true 
 				type: string     
@@ -71,11 +71,11 @@ node_types:
 				description: "Commands list for starting the container" 
 				default: ""  
 				type: list 
-				required: false 
+				required: false
 			volumes:  
 				description: 'A list of mounted volumes for the docker container "host_path:container_path" like "/tmp/docker:/tmp"'
 				type: list 
-				default: "[]" 
+				default: "[]"
 				required: false 
 			ports:
 				type: list
@@ -108,7 +108,7 @@ node_types:
 			alias:  
 				description: "Alias name for docker container" 
 				type: string 
-				required: true 
+				required: true
 			sleep:
 				type: integer
 				description: "Sleep after image is deployed"
@@ -120,17 +120,17 @@ node_types:
 				required: false  
 				default: ""
 		requirements:  
-			network:
+			network: 
 				capability: tosca.capabilities.Network
-				node: sodalite.nodes.DockerNetwork    
+				node: docker/sodalite.nodes.DockerNetwork    
 				relationship: tosca.relationships.DependsOn
 				occurrences:[ 0, 1 ]
 			registry:
 				capability: tosca.capabilities.Node
-				node: sodalite.nodes.DockerRegistry    
+				node: docker/sodalite.nodes.DockerRegistry    
 				relationship: tosca.relationships.DependsOn
 				occurrences:[ 1, 1 ]          
-		interfaces:  
+		interfaces: 
 			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard   
 				operations:
@@ -139,7 +139,7 @@ node_types:
 							env:                  
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.DockerizedComponent.env
+									property: docker/sodalite.nodes.DockerizedComponent.env
 							ports:                
 								default: get_property: 
 									entity: SELF
@@ -163,7 +163,7 @@ node_types:
 							registry_url:         
 								default: get_property: 
 									entity: SELF
-									req_cap: sodalite.nodes.DockerizedComponent.registry
+									req_cap: docker/sodalite.nodes.DockerizedComponent.registry
 									property: sodalite.nodes.DockerRegistry.docker_registry_url
 							volumes:              
 								default: get_property: 
@@ -185,7 +185,7 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: sodalite.nodes.OpenStack.VM.public_address
-									req_cap: sodalite.nodes.DockerHost.host
+									req_cap: docker/sodalite.nodes.DockerHost.host
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_container.yml"
 					delete:  
@@ -217,7 +217,7 @@ node_types:
 								default: get_attribute:
 									entity: SELF
 									attribute: tosca.nodes.Root.tosca_name
-									req_cap: sodalite.nodes.TestComponent.tested_component
+									req_cap: docker/sodalite.nodes.TestComponent.tested_component
 							test_delay: 
 								default: get_property: 
 									entity: SELF

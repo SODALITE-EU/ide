@@ -34,7 +34,7 @@ node_types:
 				constraints:  
 					min_length: "1" 
 				type: map 
-				entry_schema:  sodalite.datatypes.OpenStack.SecurityRule 
+				entry_schema:  openstack/sodalite.datatypes.OpenStack.SecurityRule 
 			group_description:  
 				description: "Description of the security group in openstack"
 				required: true 
@@ -51,16 +51,16 @@ node_types:
 							ports: 
 								default: get_property:
 									entity: SELF
-									property: sodalite.nodes.OpenStack.SecurityRules.ports
+									property: openstack/sodalite.nodes.OpenStack.SecurityRules.ports
 									
 							group_name:
 								default: get_property:
 									entity: SELF
-									property: sodalite.nodes.OpenStack.SecurityRules.group_name
+									property: openstack/sodalite.nodes.OpenStack.SecurityRules.group_name
 							group_description: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.SecurityRules.group_description
+									property: openstack/sodalite.nodes.OpenStack.SecurityRules.group_description
 					delete:  
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
@@ -69,5 +69,5 @@ node_types:
 							group_name: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.SecurityRules.group_name
+									property: openstack/sodalite.nodes.OpenStack.SecurityRules.group_name
  

@@ -762,6 +762,15 @@ public interface RMFactory extends EFactory
   EPREFIX_TYPE createEPREFIX_TYPE();
 
   /**
+   * Returns a new object of class '<em>EPREFIX ID</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EPREFIX ID</em>'.
+   * @generated
+   */
+  EPREFIX_ID createEPREFIX_ID();
+
+  /**
    * Returns a new object of class '<em>EPRIMITIVE TYPE</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

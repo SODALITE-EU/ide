@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
-import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -35,14 +34,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements GetPropertyBody
 {
   /**
-   * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
+   * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getProperty()
    * @generated
    * @ordered
    */
-  protected EPropertyDefinition property;
+  protected EPREFIX_TYPE property;
 
   /**
    * The default value of the '{@link #getEntity() <em>Entity</em>}' attribute.
@@ -101,18 +100,8 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EPropertyDefinition getProperty()
+  public EPREFIX_TYPE getProperty()
   {
-    if (property != null && property.eIsProxy())
-    {
-      InternalEObject oldProperty = (InternalEObject)property;
-      property = (EPropertyDefinition)eResolveProxy(oldProperty);
-      if (property != oldProperty)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.GET_PROPERTY_BODY__PROPERTY, oldProperty, property));
-      }
-    }
     return property;
   }
 
@@ -121,9 +110,16 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EPropertyDefinition basicGetProperty()
+  public NotificationChain basicSetProperty(EPREFIX_TYPE newProperty, NotificationChain msgs)
   {
-    return property;
+    EPREFIX_TYPE oldProperty = property;
+    property = newProperty;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__PROPERTY, oldProperty, newProperty);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -132,12 +128,20 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setProperty(EPropertyDefinition newProperty)
+  public void setProperty(EPREFIX_TYPE newProperty)
   {
-    EPropertyDefinition oldProperty = property;
-    property = newProperty;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__PROPERTY, oldProperty, property));
+    if (newProperty != property)
+    {
+      NotificationChain msgs = null;
+      if (property != null)
+        msgs = ((InternalEObject)property).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__PROPERTY, null, msgs);
+      if (newProperty != null)
+        msgs = ((InternalEObject)newProperty).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__PROPERTY, null, msgs);
+      msgs = basicSetProperty(newProperty, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__PROPERTY, newProperty, newProperty));
   }
 
   /**
@@ -225,6 +229,8 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
+      case RMPackage.GET_PROPERTY_BODY__PROPERTY:
+        return basicSetProperty(null, msgs);
       case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
         return basicSetReq_cap(null, msgs);
     }
@@ -242,8 +248,7 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case RMPackage.GET_PROPERTY_BODY__PROPERTY:
-        if (resolve) return getProperty();
-        return basicGetProperty();
+        return getProperty();
       case RMPackage.GET_PROPERTY_BODY__ENTITY:
         return getEntity();
       case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
@@ -263,7 +268,7 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case RMPackage.GET_PROPERTY_BODY__PROPERTY:
-        setProperty((EPropertyDefinition)newValue);
+        setProperty((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.GET_PROPERTY_BODY__ENTITY:
         setEntity((String)newValue);
@@ -286,7 +291,7 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case RMPackage.GET_PROPERTY_BODY__PROPERTY:
-        setProperty((EPropertyDefinition)null);
+        setProperty((EPREFIX_TYPE)null);
         return;
       case RMPackage.GET_PROPERTY_BODY__ENTITY:
         setEntity(ENTITY_EDEFAULT);

@@ -23,6 +23,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
@@ -141,8 +142,9 @@ public class KBReasonerProxy {
 	public SortedSet<String> getRequirementNodes(ERequirementAssignment req) throws Exception {
 		SortedSet<String> result = new TreeSet<String>();
 		SortedSet<String> types = new TreeSet<String>();
-		String nodeType = ((ENodeTemplateBody) req.eContainer().eContainer()).getType();
-		ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(req.getName(), nodeType);
+		EPREFIX_TYPE nodeType = ((ENodeTemplateBody) req.eContainer().eContainer()).getType();
+		String resourceId = (nodeType.getModule() != null ? nodeType.getModule() + "/" : "") + nodeType.getType();
+		ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(req.getName(), resourceId);
 		if (vrnd != null) {
 			System.out.println("Valid requirement nodes retrieved from KB for requirement: " + req.getName());
 			for (ValidRequirementNode vrn : vrnd.getElements()) {

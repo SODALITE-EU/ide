@@ -43,41 +43,41 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_username: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.username
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_keypath: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							output:
 								default: get_property:
 									entity: SELF
-									property: sodalite.image_puller.singularity.output
+									property: hpc/sodalite.image_puller.singularity.output
 							registry: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.registry
+									property: hpc/sodalite.image_puller.singularity.registry
 							certs_location: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.certs_location
+									property: hpc/sodalite.image_puller.singularity.certs_location
 							images_location: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.images_location
+									property: hpc/sodalite.image_puller.singularity.images_location
 							puller_image: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.puller_image
+									property: hpc/sodalite.image_puller.singularity.puller_image
 							puller_image_remote: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.puller_image_remote
+									property: hpc/sodalite.image_puller.singularity.puller_image_remote
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/image-puller/playbooks/configure-puller.yml"
 					start:
@@ -86,41 +86,41 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_username: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.username
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.username
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							remote_host_keypath: 
 								default: get_attribute: 
 									entity: SELF
-									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
-									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
+									attribute: hpc/sodalite.nodes.hpc.wm.torque.ssh-key
+									req_cap: hpc/sodalite.nodes.hpc.job.torque.configuration.base.host
 							image: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.image
+									property: hpc/sodalite.image_puller.singularity.image
 							output: 
 								default: get_property:
 									entity: SELF
-									property: sodalite.image_puller.singularity.output 								
+									property: hpc/sodalite.image_puller.singularity.output 								
 							registry: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.registry
+									property: hpc/sodalite.image_puller.singularity.registry
 							certs_location: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.certs_location
+									property: hpc/sodalite.image_puller.singularity.certs_location
 							images_location: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.images_location
+									property: hpc/sodalite.image_puller.singularity.images_location
 							puller_image: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.image_puller.singularity.puller_image
+									property: hpc/sodalite.image_puller.singularity.puller_image
  		
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/image-puller/playbooks/start-puller.yml"

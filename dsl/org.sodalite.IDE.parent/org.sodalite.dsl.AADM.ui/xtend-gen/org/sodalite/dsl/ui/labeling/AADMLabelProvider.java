@@ -16,6 +16,7 @@ import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.rM.EInputs;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 
 /**
@@ -67,7 +68,7 @@ public class AADMLabelProvider extends DefaultEObjectLabelProvider {
   public String text(final ENodeTemplate entry) {
     String _name = entry.getName();
     String _plus = (_name + "->");
-    String _type = entry.getNode().getType();
+    EPREFIX_TYPE _type = entry.getNode().getType();
     return (_plus + _type);
   }
   

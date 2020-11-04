@@ -284,7 +284,8 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GetAttributeBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//EAttributeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//EPREFIX_TYPE"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="entity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="req_cap" eType="#//EPREFIX_TYPE"
         containment="true"/>
@@ -294,7 +295,8 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GetPropertyBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" eType="#//EPropertyDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" eType="#//EPREFIX_TYPE"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="entity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="req_cap" eType="#//EPREFIX_TYPE"
         containment="true"/>
@@ -427,6 +429,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_TYPE" eSuperTypes="#//EDataTypeName">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="module" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_ID">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="module" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPRIMITIVE_TYPE" eSuperTypes="#//EDataTypeName"/>
 </ecore:EPackage>

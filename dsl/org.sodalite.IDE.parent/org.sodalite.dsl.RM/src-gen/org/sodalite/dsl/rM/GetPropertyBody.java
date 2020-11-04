@@ -26,26 +26,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface GetPropertyBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Property</b></em>' reference.
+   * Returns the value of the '<em><b>Property</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Property</em>' reference.
-   * @see #setProperty(EPropertyDefinition)
+   * @return the value of the '<em>Property</em>' containment reference.
+   * @see #setProperty(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getGetPropertyBody_Property()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EPropertyDefinition getProperty();
+  EPREFIX_TYPE getProperty();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.GetPropertyBody#getProperty <em>Property</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.GetPropertyBody#getProperty <em>Property</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Property</em>' reference.
+   * @param value the new value of the '<em>Property</em>' containment reference.
    * @see #getProperty()
    * @generated
    */
-  void setProperty(EPropertyDefinition value);
+  void setProperty(EPREFIX_TYPE value);
 
   /**
    * Returns the value of the '<em><b>Entity</b></em>' attribute.

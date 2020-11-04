@@ -45,6 +45,8 @@ import org.sodalite.dsl.rM.EBOOLEAN
 import org.sodalite.dsl.rM.EFLOAT
 import org.sodalite.dsl.rM.ESIGNEDINT
 import org.sodalite.dsl.rM.EAlphaNumericValue
+import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
+import org.sodalite.dsl.rM.EPREFIX_TYPE
 
 /**
  * Generates code from your model files on save.
@@ -152,8 +154,8 @@ class AADMGenerator extends AbstractGenerator {
 	«putParameterNumber(p, "property", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "property" ;  
-	  exchange:value '«p.property.property.name»' ; 
+	  exchange:name "property" ;
+	  exchange:value '«p.property.property.type»' ; 
 	.
 	«ENDIF»	
 	
@@ -201,7 +203,15 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value "«p.parameter.type»" ;
+	  «IF p.parameter.type instanceof EPRIMITIVE_TYPE»
+	  exchange:value '«(p.parameter.type as EPRIMITIVE_TYPE).type»' ;
+	  «ELSEIF p.parameter.type instanceof EPREFIX_TYPE»
+	  «IF (p.parameter.type as EPREFIX_TYPE).module !== null»
+	  exchange:value '«(p.parameter.type as EPREFIX_TYPE).module»/«(p.parameter.type as EPREFIX_TYPE).type»' ;  
+	  «ELSE»
+	  exchange:value '«(p.parameter.type as EPREFIX_TYPE).type»' ;  
+	«ENDIF»
+	«ENDIF»   
 	.
 	:Input_«input_counter++»
 	  rdf:type exchange:Input ;
@@ -238,7 +248,12 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
-	  exchange:type "«n.node.type»" ;
+	  «IF n.node.type.module !== null»
+	  exchange:type '«n.node.type.module»/«n.node.type.type»' ;  
+	  «ELSE»
+	  exchange:type '«n.node.type.type»' ;  
+	  «ENDIF»
+	  
 	  «IF n.node.optimization !== null»
 	  	  exchange:optimization '«readOptimization(n.node.optimization)»' ;
 	  «ENDIF»
@@ -357,7 +372,11 @@ class AADMGenerator extends AbstractGenerator {
 	:Requirement_«requirement_counter++»
 	  rdf:type exchange:Requirement ;
 	  exchange:name "«r.name»" ;
-	  exchange:value "«r.node»" ;
+	  «IF r.node.module !== null»
+	  exchange:value '«r.node.module»/«r.node.id»' ;  
+	  «ELSE»
+	  exchange:value '«r.node.id»' ;  
+	  «ENDIF»  
 	.
 	'''
 	

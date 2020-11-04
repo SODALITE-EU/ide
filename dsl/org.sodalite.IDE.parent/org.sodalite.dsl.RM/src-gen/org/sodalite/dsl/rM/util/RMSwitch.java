@@ -690,6 +690,13 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EPREFIX_ID:
+      {
+        EPREFIX_ID eprefiX_ID = (EPREFIX_ID)theEObject;
+        T result = caseEPREFIX_ID(eprefiX_ID);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EPRIMITIVE_TYPE:
       {
         EPRIMITIVE_TYPE eprimitivE_TYPE = (EPRIMITIVE_TYPE)theEObject;
@@ -2010,6 +2017,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEPREFIX_TYPE(EPREFIX_TYPE object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EPREFIX ID</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EPREFIX ID</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPREFIX_ID(EPREFIX_ID object)
   {
     return null;
   }

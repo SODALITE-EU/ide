@@ -326,7 +326,7 @@ EFunction:
 	GetProperty | GetAttribute | GetInput;
 
 GetInput:
-	'get_input:' input=[EParameterDefinition]
+	'get_input:' input=[EParameterDefinition] //FIXME do not use cross-reference
 ;
 
 GetAttribute:
@@ -336,7 +336,7 @@ GetAttribute:
 	END;
 
 GetAttributeBody:
-	('attribute:' attribute=[EAttributeDefinition|QUALIFIED_NAME]) & //FIXME Get reference from KB
+	('attribute:' attribute=EPREFIX_TYPE) &
 	('entity:' entity=ENTITY) &
 	('req_cap:' req_cap=EPREFIX_TYPE)?;
 
@@ -347,7 +347,7 @@ GetProperty:
 	END;
 
 GetPropertyBody:
-	('property:' property=[EPropertyDefinition|QUALIFIED_NAME]) & //FIXME Get reference from KB
+	('property:' property=EPREFIX_TYPE) &
 	('entity:' entity=ENTITY) &
 	('req_cap:' req_cap=EPREFIX_TYPE)?;
 
@@ -477,6 +477,11 @@ EMapEntry:
 EPREFIX_TYPE:
 	(module=ID '/')? type=QUALIFIED_NAME
 ;
+
+EPREFIX_ID:
+	(module=ID '/')? id=ID
+;
+
 
 EPRIMITIVE_TYPE:
 	type=ID

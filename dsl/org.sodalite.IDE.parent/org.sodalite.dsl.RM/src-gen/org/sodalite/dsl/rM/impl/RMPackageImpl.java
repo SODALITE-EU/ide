@@ -675,6 +675,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eprefiX_IDEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eprimitivE_TYPEEClass = null;
 
   /**
@@ -3375,6 +3382,39 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EClass getEPREFIX_ID()
+  {
+    return eprefiX_IDEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEPREFIX_ID_Module()
+  {
+    return (EAttribute)eprefiX_IDEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEPREFIX_ID_Id()
+  {
+    return (EAttribute)eprefiX_IDEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEPRIMITIVE_TYPE()
   {
     return eprimitivE_TYPEEClass;
@@ -3732,6 +3772,10 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eprefiX_TYPEEClass = createEClass(EPREFIX_TYPE);
     createEAttribute(eprefiX_TYPEEClass, EPREFIX_TYPE__MODULE);
 
+    eprefiX_IDEClass = createEClass(EPREFIX_ID);
+    createEAttribute(eprefiX_IDEClass, EPREFIX_ID__MODULE);
+    createEAttribute(eprefiX_IDEClass, EPREFIX_ID__ID);
+
     eprimitivE_TYPEEClass = createEClass(EPRIMITIVE_TYPE);
   }
 
@@ -4003,7 +4047,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getGetAttribute_Attribute(), this.getGetAttributeBody(), null, "attribute", null, 0, 1, GetAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getAttributeBodyEClass, GetAttributeBody.class, "GetAttributeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGetAttributeBody_Attribute(), this.getEAttributeDefinition(), null, "attribute", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetAttributeBody_Attribute(), this.getEPREFIX_TYPE(), null, "attribute", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGetAttributeBody_Entity(), ecorePackage.getEString(), "entity", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGetAttributeBody_Req_cap(), this.getEPREFIX_TYPE(), null, "req_cap", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4011,7 +4055,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getGetProperty_Property(), this.getGetPropertyBody(), null, "property", null, 0, 1, GetProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getPropertyBodyEClass, GetPropertyBody.class, "GetPropertyBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGetPropertyBody_Property(), this.getEPropertyDefinition(), null, "property", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetPropertyBody_Property(), this.getEPREFIX_TYPE(), null, "property", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGetPropertyBody_Entity(), ecorePackage.getEString(), "entity", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGetPropertyBody_Req_cap(), this.getEPREFIX_TYPE(), null, "req_cap", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4116,6 +4160,10 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eprefiX_TYPEEClass, org.sodalite.dsl.rM.EPREFIX_TYPE.class, "EPREFIX_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPREFIX_TYPE_Module(), ecorePackage.getEString(), "module", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_TYPE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eprefiX_IDEClass, org.sodalite.dsl.rM.EPREFIX_ID.class, "EPREFIX_ID", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEPREFIX_ID_Module(), ecorePackage.getEString(), "module", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_ID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEPREFIX_ID_Id(), ecorePackage.getEString(), "id", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_ID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eprimitivE_TYPEEClass, org.sodalite.dsl.rM.EPRIMITIVE_TYPE.class, "EPRIMITIVE_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -26,26 +26,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface GetAttributeBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Attribute</b></em>' reference.
+   * Returns the value of the '<em><b>Attribute</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Attribute</em>' reference.
-   * @see #setAttribute(EAttributeDefinition)
+   * @return the value of the '<em>Attribute</em>' containment reference.
+   * @see #setAttribute(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getGetAttributeBody_Attribute()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EAttributeDefinition getAttribute();
+  EPREFIX_TYPE getAttribute();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getAttribute <em>Attribute</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getAttribute <em>Attribute</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Attribute</em>' reference.
+   * @param value the new value of the '<em>Attribute</em>' containment reference.
    * @see #getAttribute()
    * @generated
    */
-  void setAttribute(EAttributeDefinition value);
+  void setAttribute(EPREFIX_TYPE value);
 
   /**
    * Returns the value of the '<em><b>Entity</b></em>' attribute.

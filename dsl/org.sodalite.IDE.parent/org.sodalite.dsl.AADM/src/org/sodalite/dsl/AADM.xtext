@@ -40,7 +40,7 @@ ENodeTemplate:
 ;
 
 ENodeTemplateBody:
-	('type:' type=QUALIFIED_NAME) &
+	('type:' type=EPREFIX_TYPE) &
 	('description:' description=STRING)? &
 	('optimization:' optimization=[opt::Optimization_Model|QUALIFIED_NAME])? &
 	('properties:'
@@ -67,7 +67,7 @@ ERequirementAssignments:
 ERequirementAssignment:
 	name = ID ':'
 	BEGIN
-		('node:' node=ID)
+		('node:' node=EPREFIX_ID)
 	END;
 
 ECapabilityAssignments:

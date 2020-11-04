@@ -56,9 +56,9 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
-import org.sodalite.dsl.ui.preferences.Activator
 import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl
 import org.sodalite.dsl.kb_reasoner_client.types.Capability
+import org.sodalite.dsl.rM.EPREFIX_TYPE
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -202,10 +202,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var String additionalProposalInfo = ""
 		
 		var resourceId = ""
+		var EPREFIX_TYPE type = null
 		if (model instanceof ENodeTemplateBodyImpl)
-			resourceId = (model as ENodeTemplateBodyImpl).type
+			type = (model as ENodeTemplateBodyImpl).type
+			 
 		else if (model instanceof EAttributeAssigmentsImpl)
-			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
+			type = (model.eContainer as ENodeTemplateBodyImpl).type
+			
+		resourceId = type.module !== null? type.module + '/':'' + type.type
 
 		if (resourceId !== null){
 			val ReasonerData<Attribute> attributes = getKBReasoner().getAttributes(resourceId)
@@ -236,10 +240,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var String additionalProposalInfo = ""
 		
 		var resourceId = ""
+		var EPREFIX_TYPE type = null
+		
 		if (model instanceof ENodeTemplateBodyImpl)
-			resourceId = (model as ENodeTemplateBodyImpl).type
+			type = (model as ENodeTemplateBodyImpl).type
 		else if (model instanceof EPropertyAssigmentsImpl)
-			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
+			type = (model.eContainer as ENodeTemplateBodyImpl).type
+			
+		resourceId = type.module !== null? type.module + '/':'' + type.type
 		
 		if (resourceId !== null){
 			val ReasonerData<Property> properties = getKBReasoner().getProperties(resourceId)
@@ -271,10 +279,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var String additionalProposalInfo = ""
 		
 		var resourceId = ""
+		var EPREFIX_TYPE type = null
+		
 		if (model instanceof ENodeTemplateBodyImpl)
-			resourceId = (model as ENodeTemplateBodyImpl).type
+			type = (model as ENodeTemplateBodyImpl).type
 		else if (model instanceof ECapabilityAssignmentsImpl)
-			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
+			type = (model.eContainer as ENodeTemplateBodyImpl).type
+			
+		resourceId = type.module !== null? type.module + '/':'' + type.type
 		
 		if (resourceId !== null){
 			val ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(resourceId)
@@ -308,10 +320,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var String additionalProposalInfo = ""
 		
 		var resourceId = ""
+		var EPREFIX_TYPE type = null
+		
 		if (model instanceof ENodeTemplateBodyImpl)
-			resourceId = (model as ENodeTemplateBodyImpl).type
+			type = (model as ENodeTemplateBodyImpl).type
 		else if (model instanceof ERequirementAssignmentsImpl)
-			resourceId = (model.eContainer as ENodeTemplateBodyImpl).type
+			type = (model.eContainer as ENodeTemplateBodyImpl).type
+			
+		resourceId = type.module !== null? type.module + '/':'' + type.type
 		
 		if (resourceId !== null){
 			val ReasonerData<Requirement> requirements = getKBReasoner().getRequirements(resourceId)
@@ -347,15 +363,17 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var String additionalProposalInfo = ""
 		val requirementId = (model as ERequirementAssignmentImpl).name
 		val nodeType = (model.eContainer.eContainer as ENodeTemplateBodyImpl).type
+		val resourceId = nodeType.module !== null? nodeType.module + '/':'' + nodeType.type
 		
 		val AADM_Model rootModel = findModel(model) as AADM_Model
 		val String aadmURI = getAADMURI (rootModel); //TODO Use aadmURI to determine if KB suggestion belongs to the local model
 		
 		//Get valid requirement nodes from KB
-		var SortedSet<String> types = new TreeSet<String>()
-		val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, nodeType);
-		if (vrnd !== null){
+		
+		val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId);
+		if (!vrnd.elements.empty){
 			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
+			var SortedSet<String> types = new TreeSet<String>()
 			for (ValidRequirementNode vrn: vrnd.elements){
 				types.add(vrn.type.getLabel)
 				System.out.println ("Valid requirement node: " + vrn.label)
@@ -371,19 +389,18 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				additionalProposalInfo = "Node " + vrn.label + " of type " + vrn.type.getLabel + " is available in the KB"
 				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 			}
-		}
 		
-		//Find local nodes that belongs to suggested types
-		val List<ENodeTemplate> localnodes = findLocalNodesForTypes(types, model)
-		for (ENodeTemplate node: localnodes){
-			System.out.println ("Valid requirement local node: " + node.name)
-		 	val property_label = node.name
-			proposalText = property_label
-			displayText = property_label + " <local>"
-			additionalProposalInfo = "Node " + node.name + " of type " + node.node.type + " is available in this AADM model"
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+			//Find local nodes that belongs to suggested types
+			val List<ENodeTemplate> localnodes = findLocalNodesForTypes(types, model)
+			for (ENodeTemplate node: localnodes){
+				System.out.println ("Valid requirement local node: " + node.name)
+			 	val property_label = node.name
+				proposalText = property_label
+				displayText = property_label + " <local>"
+				additionalProposalInfo = "Node " + node.name + " of type " + node.node.type + " is available in this AADM model"
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+			}
 		}
-	
 	}
 		
 	def existsInAadm(String nodeUri, String aadmUri) {
@@ -426,9 +443,12 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		
 	def findLocalNodesForTypes(SortedSet<String> types, EObject reqAssign) {
 		val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
+		if (types.isEmpty)
+			return nodes
 		val AADM_Model model = findModel(reqAssign) as AADM_Model
 		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
-			if (types.contains(node.node.type))
+			val node_id = (node.node.type.module !== null? node.node.type.module + '/') + node.node.type.type
+			if (types.contains(node_id))
 				nodes.add(node)
 		}
 		return nodes

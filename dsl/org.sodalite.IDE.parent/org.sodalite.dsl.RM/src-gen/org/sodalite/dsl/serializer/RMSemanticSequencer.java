@@ -61,6 +61,7 @@ import org.sodalite.dsl.rM.ENodeTypes;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EOperationDefinitionBody;
 import org.sodalite.dsl.rM.EOperations;
+import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
@@ -246,6 +247,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RMPackage.EOPERATIONS:
 				sequence_EOperations(context, (EOperations) semanticObject); 
+				return; 
+			case RMPackage.EPREFIX_ID:
+				sequence_EPREFIX_ID(context, (EPREFIX_ID) semanticObject); 
 				return; 
 			case RMPackage.EPREFIX_TYPE:
 				sequence_EPREFIX_TYPE(context, (EPREFIX_TYPE) semanticObject); 
@@ -1097,6 +1101,18 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EPREFIX_ID returns EPREFIX_ID
+	 *
+	 * Constraint:
+	 *     (module=ID? id=ID)
+	 */
+	protected void sequence_EPREFIX_ID(ISerializationContext context, EPREFIX_ID semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EDataTypeName returns EPREFIX_TYPE
 	 *     EPREFIX_TYPE returns EPREFIX_TYPE
 	 *
@@ -1460,7 +1476,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     GetAttributeBody returns GetAttributeBody
 	 *
 	 * Constraint:
-	 *     (attribute=[EAttributeDefinition|QUALIFIED_NAME] | entity=ENTITY | req_cap=EPREFIX_TYPE)+
+	 *     (attribute=EPREFIX_TYPE | entity=ENTITY | req_cap=EPREFIX_TYPE)+
 	 */
 	protected void sequence_GetAttributeBody(ISerializationContext context, GetAttributeBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1514,7 +1530,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     GetPropertyBody returns GetPropertyBody
 	 *
 	 * Constraint:
-	 *     (property=[EPropertyDefinition|QUALIFIED_NAME] | entity=ENTITY | req_cap=EPREFIX_TYPE)+
+	 *     (property=EPREFIX_TYPE | entity=ENTITY | req_cap=EPREFIX_TYPE)+
 	 */
 	protected void sequence_GetPropertyBody(ISerializationContext context, GetPropertyBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

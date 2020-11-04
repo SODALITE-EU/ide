@@ -19,11 +19,11 @@ node_types:
 							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/prometheus.yml.tmpl"]
 							
 	sodalite.nodes.PrometheusDockerizedComponent:  
-		derived_from: sodalite.nodes.DockerizedComponent
+		derived_from: docker/sodalite.nodes.DockerizedComponent
 		requirements:  
 			configuration:
 				capability: tosca.capabilities.Node
-				node: sodalite.nodes.PrometheusConfiguration    
+				node: vehicleiot/sodalite.nodes.PrometheusConfiguration    
 				relationship: tosca.relationships.DependsOn
 				
 relationship_types:

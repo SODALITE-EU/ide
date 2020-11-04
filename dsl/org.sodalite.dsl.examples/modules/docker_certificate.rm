@@ -31,19 +31,19 @@ node_types:
 							registry_ip:              
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.DockerHost.registry_ip
+									property: docker/sodalite.nodes.DockerHost.registry_ip
 							country_name:             
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.RegistryCertificate.country_name
+									property: docker/sodalite.nodes.RegistryCertificate.country_name
 							organization_name:        
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.RegistryCertificate.organization_name
+									property: docker/sodalite.nodes.RegistryCertificate.organization_name
 							email_address:            
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.RegistryCertificate.email_address
+									property: docker/sodalite.nodes.RegistryCertificate.email_address
 							public_ipv4_address:     
 								default: get_attribute: 
 									entity: SELF
@@ -60,7 +60,7 @@ node_types:
 							registry_ip:              
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.RegistryCertificate.registry_ip
+									property: docker/sodalite.nodes.RegistryCertificate.registry_ip
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_cert.yml"
               

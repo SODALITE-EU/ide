@@ -89,9 +89,11 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     try {
       System.out.println("Invoking content assist for imports");
       final ReasonerData<String> modules = this.getKBReasoner().getModules();
-      System.out.println("Modules retrieved from KB:");
       List<String> _elements = modules.getElements();
-      for (final String module : _elements) {
+      String _plus = ("Modules retrieved from KB: " + _elements);
+      System.out.println(_plus);
+      List<String> _elements_1 = modules.getElements();
+      for (final String module : _elements_1) {
         {
           System.out.println(("\tModule: " + module));
           final String proposalText = this.extractModule(module);

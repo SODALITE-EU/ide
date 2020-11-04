@@ -486,6 +486,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEPREFIX_TYPEAdapter();
       }
       @Override
+      public Adapter caseEPREFIX_ID(EPREFIX_ID object)
+      {
+        return createEPREFIX_IDAdapter();
+      }
+      @Override
       public Adapter caseEPRIMITIVE_TYPE(EPRIMITIVE_TYPE object)
       {
         return createEPRIMITIVE_TYPEAdapter();
@@ -1738,6 +1743,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEPREFIX_TYPEAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPREFIX_ID <em>EPREFIX ID</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPREFIX_ID
+   * @generated
+   */
+  public Adapter createEPREFIX_IDAdapter()
   {
     return null;
   }

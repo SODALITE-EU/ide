@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.GetAttributeBody;
 import org.sodalite.dsl.rM.RMPackage;
@@ -35,14 +34,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implements GetAttributeBody
 {
   /**
-   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
+   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getAttribute()
    * @generated
    * @ordered
    */
-  protected EAttributeDefinition attribute;
+  protected EPREFIX_TYPE attribute;
 
   /**
    * The default value of the '{@link #getEntity() <em>Entity</em>}' attribute.
@@ -101,18 +100,8 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public EAttributeDefinition getAttribute()
+  public EPREFIX_TYPE getAttribute()
   {
-    if (attribute != null && attribute.eIsProxy())
-    {
-      InternalEObject oldAttribute = (InternalEObject)attribute;
-      attribute = (EAttributeDefinition)eResolveProxy(oldAttribute);
-      if (attribute != oldAttribute)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE, oldAttribute, attribute));
-      }
-    }
     return attribute;
   }
 
@@ -121,9 +110,16 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttributeDefinition basicGetAttribute()
+  public NotificationChain basicSetAttribute(EPREFIX_TYPE newAttribute, NotificationChain msgs)
   {
-    return attribute;
+    EPREFIX_TYPE oldAttribute = attribute;
+    attribute = newAttribute;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE, oldAttribute, newAttribute);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -132,12 +128,20 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public void setAttribute(EAttributeDefinition newAttribute)
+  public void setAttribute(EPREFIX_TYPE newAttribute)
   {
-    EAttributeDefinition oldAttribute = attribute;
-    attribute = newAttribute;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE, oldAttribute, attribute));
+    if (newAttribute != attribute)
+    {
+      NotificationChain msgs = null;
+      if (attribute != null)
+        msgs = ((InternalEObject)attribute).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE, null, msgs);
+      if (newAttribute != null)
+        msgs = ((InternalEObject)newAttribute).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE, null, msgs);
+      msgs = basicSetAttribute(newAttribute, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE, newAttribute, newAttribute));
   }
 
   /**
@@ -225,6 +229,8 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
+      case RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE:
+        return basicSetAttribute(null, msgs);
       case RMPackage.GET_ATTRIBUTE_BODY__REQ_CAP:
         return basicSetReq_cap(null, msgs);
     }
@@ -242,8 +248,7 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
     switch (featureID)
     {
       case RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE:
-        if (resolve) return getAttribute();
-        return basicGetAttribute();
+        return getAttribute();
       case RMPackage.GET_ATTRIBUTE_BODY__ENTITY:
         return getEntity();
       case RMPackage.GET_ATTRIBUTE_BODY__REQ_CAP:
@@ -263,7 +268,7 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
     switch (featureID)
     {
       case RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE:
-        setAttribute((EAttributeDefinition)newValue);
+        setAttribute((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.GET_ATTRIBUTE_BODY__ENTITY:
         setEntity((String)newValue);
@@ -286,7 +291,7 @@ public class GetAttributeBodyImpl extends MinimalEObjectImpl.Container implement
     switch (featureID)
     {
       case RMPackage.GET_ATTRIBUTE_BODY__ATTRIBUTE:
-        setAttribute((EAttributeDefinition)null);
+        setAttribute((EPREFIX_TYPE)null);
         return;
       case RMPackage.GET_ATTRIBUTE_BODY__ENTITY:
         setEntity(ENTITY_EDEFAULT);

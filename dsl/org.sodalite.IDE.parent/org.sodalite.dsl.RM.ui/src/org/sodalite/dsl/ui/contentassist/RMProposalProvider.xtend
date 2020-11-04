@@ -79,7 +79,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		System.out.println("Invoking content assist for imports")
 		
 		val ReasonerData<String> modules = getKBReasoner().modules
-		System.out.println ("Modules retrieved from KB:")
+			
+		System.out.println ("Modules retrieved from KB: " + modules.elements)
 		for (module: modules.elements){
 			System.out.println ("\tModule: " + module)
 			val proposalText = extractModule(module)
