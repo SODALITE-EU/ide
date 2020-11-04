@@ -20,7 +20,9 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
@@ -132,6 +134,8 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     try {
       System.out.println("Invoking content assist for EDataType::supertype property");
       final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
       final ReasonerData<Type> types = this.getKBReasoner().getDataTypes(importedModules);
       System.out.println("Data types retrieved from KB:");
       List<Type> _elements = types.getElements();
@@ -144,31 +148,20 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           String _module = type.getModule();
           boolean _tripleNotEquals = (_module != null);
           if (_tripleNotEquals) {
-            String _module_1 = type.getModule();
-            String _plus_1 = (_module_1 + "/");
+            String _lastSegment = this.getLastSegment(type.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
             String _label_1 = type.getLabel();
             _xifexpression = (_plus_1 + _label_1);
           } else {
             _xifexpression = type.getLabel();
           }
-          final String proposalText = _xifexpression;
-          String _xifexpression_1 = null;
-          String _module_2 = type.getModule();
-          boolean _tripleNotEquals_1 = (_module_2 != null);
-          if (_tripleNotEquals_1) {
-            String _module_3 = type.getModule();
-            String _plus_2 = (_module_3 + "/");
-            String _label_2 = type.getLabel();
-            _xifexpression_1 = (_plus_2 + _label_2);
-          } else {
-            _xifexpression_1 = type.getLabel();
-          }
-          final String displayText = _xifexpression_1;
+          final String qtype = _xifexpression;
+          final String proposalText = qtype;
+          final String displayText = qtype;
           final String additionalProposalInfo = type.getDescription();
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
       }
-      final String module = this.getModule(model);
       Object _findModel = this.findModel(model);
       final RM_Model rootModel = ((RM_Model) _findModel);
       EList<EDataType> _dataTypes = rootModel.getDataTypes().getDataTypes();
@@ -198,6 +191,8 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     try {
       System.out.println("Invoking content assist for NodeType::superType property");
       final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
       final ReasonerData<Type> nodes = this.getKBReasoner().getNodeTypes(importedModules);
       System.out.println("Nodes retrieved from KB:");
       List<Type> _elements = nodes.getElements();
@@ -210,31 +205,20 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           String _module = node.getModule();
           boolean _tripleNotEquals = (_module != null);
           if (_tripleNotEquals) {
-            String _module_1 = node.getModule();
-            String _plus_1 = (_module_1 + "/");
+            String _lastSegment = this.getLastSegment(node.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
             String _label_1 = node.getLabel();
             _xifexpression = (_plus_1 + _label_1);
           } else {
             _xifexpression = node.getLabel();
           }
-          final String proposalText = _xifexpression;
-          String _xifexpression_1 = null;
-          String _module_2 = node.getModule();
-          boolean _tripleNotEquals_1 = (_module_2 != null);
-          if (_tripleNotEquals_1) {
-            String _module_3 = node.getModule();
-            String _plus_2 = (_module_3 + "/");
-            String _label_2 = node.getLabel();
-            _xifexpression_1 = (_plus_2 + _label_2);
-          } else {
-            _xifexpression_1 = node.getLabel();
-          }
-          final String displayText = _xifexpression_1;
+          final String qnode = _xifexpression;
+          final String proposalText = qnode;
+          final String displayText = qnode;
           final String additionalProposalInfo = node.getDescription();
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
       }
-      final String module = this.getModule(model);
       Object _findModel = this.findModel(model);
       final RM_Model rootModel = ((RM_Model) _findModel);
       EList<ENodeType> _nodeTypes = rootModel.getNodeTypes().getNodeTypes();
@@ -257,11 +241,17 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
+  public String getLastSegment(final String string, final String delimiter) {
+    return IterableExtensions.<String>last(((Iterable<String>)Conversions.doWrapArray(string.split(delimiter))));
+  }
+  
   @Override
   public void completeERelationshipTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for RelationshipType::supertype property");
       final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
       final ReasonerData<Type> relationships = this.getKBReasoner().getRelationshipTypes(importedModules);
       System.out.println("Relationships retrieved from KB:");
       List<Type> _elements = relationships.getElements();
@@ -274,31 +264,20 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           String _module = relationship.getModule();
           boolean _tripleNotEquals = (_module != null);
           if (_tripleNotEquals) {
-            String _module_1 = relationship.getModule();
-            String _plus_1 = (_module_1 + "/");
+            String _lastSegment = this.getLastSegment(relationship.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
             String _label_1 = relationship.getLabel();
             _xifexpression = (_plus_1 + _label_1);
           } else {
             _xifexpression = relationship.getLabel();
           }
-          final String proposalText = _xifexpression;
-          String _xifexpression_1 = null;
-          String _module_2 = relationship.getModule();
-          boolean _tripleNotEquals_1 = (_module_2 != null);
-          if (_tripleNotEquals_1) {
-            String _module_3 = relationship.getModule();
-            String _plus_2 = (_module_3 + "/");
-            String _label_2 = relationship.getLabel();
-            _xifexpression_1 = (_plus_2 + _label_2);
-          } else {
-            _xifexpression_1 = relationship.getLabel();
-          }
-          final String displayText = _xifexpression_1;
+          final String qrelationship = _xifexpression;
+          final String proposalText = qrelationship;
+          final String displayText = qrelationship;
           final String additionalProposalInfo = relationship.getDescription();
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
       }
-      final String module = this.getModule(model);
       Object _findModel = this.findModel(model);
       final RM_Model rootModel = ((RM_Model) _findModel);
       EList<ERelationshipType> _relationshipTypes = rootModel.getRelationshipTypes().getRelationshipTypes();
@@ -326,6 +305,8 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     try {
       System.out.println("Invoking content assist for CapabilityType::supertype property");
       final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
       final ReasonerData<Type> capabilitiess = this.getKBReasoner().getCapabilityTypes(importedModules);
       System.out.println("Capabilities retrieved from KB:");
       List<Type> _elements = capabilitiess.getElements();
@@ -338,31 +319,20 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           String _module = cap.getModule();
           boolean _tripleNotEquals = (_module != null);
           if (_tripleNotEquals) {
-            String _module_1 = cap.getModule();
-            String _plus_1 = (_module_1 + "/");
+            String _lastSegment = this.getLastSegment(cap.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
             String _label_1 = cap.getLabel();
             _xifexpression = (_plus_1 + _label_1);
           } else {
             _xifexpression = cap.getLabel();
           }
-          final String proposalText = _xifexpression;
-          String _xifexpression_1 = null;
-          String _module_2 = cap.getModule();
-          boolean _tripleNotEquals_1 = (_module_2 != null);
-          if (_tripleNotEquals_1) {
-            String _module_3 = cap.getModule();
-            String _plus_2 = (_module_3 + "/");
-            String _label_2 = cap.getLabel();
-            _xifexpression_1 = (_plus_2 + _label_2);
-          } else {
-            _xifexpression_1 = cap.getLabel();
-          }
-          final String displayText = _xifexpression_1;
+          final String qcap = _xifexpression;
+          final String proposalText = qcap;
+          final String displayText = qcap;
           final String additionalProposalInfo = cap.getDescription();
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
       }
-      final String module = this.getModule(model);
       Object _findModel = this.findModel(model);
       final RM_Model rootModel = ((RM_Model) _findModel);
       EList<ECapabilityType> _capabilityTypes = rootModel.getCapabilityTypes().getCapabilityTypes();
@@ -390,6 +360,8 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     try {
       System.out.println("Invoking content assist for InterfaceDefinition::type property");
       final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
       final ReasonerData<Type> interfaces = this.getKBReasoner().getInterfaceTypes(importedModules);
       System.out.println("Interfaces retrieved from KB:");
       List<Type> _elements = interfaces.getElements();
@@ -402,31 +374,20 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           String _module = interface_.getModule();
           boolean _tripleNotEquals = (_module != null);
           if (_tripleNotEquals) {
-            String _module_1 = interface_.getModule();
-            String _plus_1 = (_module_1 + "/");
+            String _lastSegment = this.getLastSegment(interface_.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
             String _label_1 = interface_.getLabel();
             _xifexpression = (_plus_1 + _label_1);
           } else {
             _xifexpression = interface_.getLabel();
           }
-          final String proposalText = _xifexpression;
-          String _xifexpression_1 = null;
-          String _module_2 = interface_.getModule();
-          boolean _tripleNotEquals_1 = (_module_2 != null);
-          if (_tripleNotEquals_1) {
-            String _module_3 = interface_.getModule();
-            String _plus_2 = (_module_3 + "/");
-            String _label_2 = interface_.getLabel();
-            _xifexpression_1 = (_plus_2 + _label_2);
-          } else {
-            _xifexpression_1 = interface_.getLabel();
-          }
-          final String displayText = _xifexpression_1;
+          final String qinterface = _xifexpression;
+          final String proposalText = qinterface;
+          final String displayText = qinterface;
           final String additionalProposalInfo = interface_.getDescription();
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
       }
-      final String module = this.getModule(model);
       Object _findModel = this.findModel(model);
       final RM_Model rootModel = ((RM_Model) _findModel);
       EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();

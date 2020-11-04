@@ -111,19 +111,22 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		
 		//Get modules from model
 		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
 		
 		val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
 		System.out.println ("Data types retrieved from KB:")
 		for (type: types.elements){
 			System.out.println ("\tData type: " + type.label)
-			val proposalText = type.module !== null ?type.module + '/' + type.label:type.label 
-			val displayText = type.module !== null ?type.module + '/' + type.label:type.label
+			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+			val proposalText = qtype
+			val displayText = qtype
 			val additionalProposalInfo = type.description
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
 		
 		//Add other data types defined locally in the model
-		val String module = getModule(model)
 		val rootModel = findModel(model) as RM_Model
 		
 		for (dataType: rootModel.dataTypes.dataTypes){
@@ -143,19 +146,22 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		
 		//Get modules from model
 		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
 		
 		val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
 		System.out.println ("Nodes retrieved from KB:")
 		for (node: nodes.elements){
 			System.out.println ("\tNode: " + node.label)
-			val proposalText = node.module !== null ?node.module + '/' + node.label:node.label 
-			val displayText = node.module !== null ?node.module + '/' + node.label:node.label
+			val qnode = node.module !== null ?getLastSegment(node.module, '/') + '/' + node.label:node.label
+			val proposalText = qnode
+			val displayText = qnode
 			val additionalProposalInfo = node.description
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
 		
 		//Add other nodes defined locally in the model
-		val String module = getModule(model)
 		val rootModel = findModel(model) as RM_Model
 		
 		for (nodeType: rootModel.nodeTypes.nodeTypes){
@@ -169,24 +175,31 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 	}
 	
+	def getLastSegment(String string, String delimiter) {
+		return string.split(delimiter).last
+	}
+	
 	override void completeERelationshipTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for RelationshipType::supertype property")
 		
 		//Get modules from model
 		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
 		
 		val ReasonerData<Type> relationships = getKBReasoner().getRelationshipTypes(importedModules)
 		System.out.println ("Relationships retrieved from KB:")
 		for (relationship: relationships.elements){
 			System.out.println ("\tRelationship: " + relationship.label)
-			val proposalText = relationship.module !== null ?relationship.module + '/' + relationship.label:relationship.label 
-			val displayText = relationship.module !== null ?relationship.module + '/' + relationship.label:relationship.label
+			val qrelationship = relationship.module !== null ?getLastSegment(relationship.module, '/') + '/' + relationship.label:relationship.label
+			val proposalText = qrelationship
+			val displayText = qrelationship
 			val additionalProposalInfo = relationship.description
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
 		
 		//Add other relationships defined locally in the model
-		val String module = getModule(model)
 		val rootModel = findModel(model) as RM_Model
 		
 		for (relationshipType: rootModel.relationshipTypes.relationshipTypes){
@@ -205,19 +218,22 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		
 		//Get modules from model
 		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
 		
 		val ReasonerData<Type> capabilitiess = getKBReasoner().getCapabilityTypes(importedModules)
 		System.out.println ("Capabilities retrieved from KB:")
 		for (cap: capabilitiess.elements){
 			System.out.println ("\tCapability: " + cap.label)
-			val proposalText = cap.module !== null ?cap.module + '/' + cap.label:cap.label 
-			val displayText = cap.module !== null ?cap.module + '/' + cap.label:cap.label
+			val qcap = cap.module !== null ?getLastSegment(cap.module, '/') + '/' + cap.label:cap.label
+			val proposalText = qcap
+			val displayText = qcap
 			val additionalProposalInfo = cap.description
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
 		
 		//Add other capabilities defined locally in the model
-		val String module = getModule(model)
 		val rootModel = findModel(model) as RM_Model
 		
 		for (cap: rootModel.capabilityTypes.capabilityTypes){
@@ -236,19 +252,22 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		
 		//Get modules from model
 		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
 		
 		val ReasonerData<Type> interfaces = getKBReasoner().getInterfaceTypes(importedModules)
 		System.out.println ("Interfaces retrieved from KB:")
 		for (interface: interfaces.elements){
 			System.out.println ("\tCapability: " + interface.label)
-			val proposalText = interface.module !== null ?interface.module + '/' + interface.label:interface.label 
-			val displayText = interface.module !== null ?interface.module + '/' + interface.label:interface.label
+			val qinterface = interface.module !== null ?getLastSegment(interface.module, '/') + '/' + interface.label:interface.label
+			val proposalText = qinterface
+			val displayText = qinterface
 			val additionalProposalInfo = interface.description
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
 		
 		//Add other interfaces defined locally in the model
-		val String module = getModule(model)
 		val rootModel = findModel(model) as RM_Model
 		
 		for (interface: rootModel.interfaceTypes.interfaceTypes){

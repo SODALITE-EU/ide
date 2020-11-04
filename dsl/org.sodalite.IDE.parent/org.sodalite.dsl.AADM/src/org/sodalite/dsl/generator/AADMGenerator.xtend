@@ -227,7 +227,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "«e.key»" ;
-	  exchange:value "«trim((e.value as ESingleValue).compile().toString)»" ;
+	  exchange:value "«trim(processMultilineStringValue((e.value as ESingleValue).compile().toString))»" ;
 	.
 	«ELSEIF e.value instanceof EMAP»
 	«putParameterNumber(e, "map", parameter_counter)»
@@ -442,6 +442,10 @@ class AADMGenerator extends AbstractGenerator {
 	}
 	
 	def processDescription (String description){
+		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
+	}
+	
+	def processMultilineStringValue (String description){
 		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
 	}
 	

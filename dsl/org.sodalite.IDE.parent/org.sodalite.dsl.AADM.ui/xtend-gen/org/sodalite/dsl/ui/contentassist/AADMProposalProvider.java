@@ -173,6 +173,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
       final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
       final ReasonerData<Type> nodes = this.getKBReasoner().getNodeTypes(importedModules);
       System.out.println("Nodes retrieved from KB:");
       List<Type> _elements = nodes.getElements();
@@ -185,26 +187,16 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           String _module = node.getModule();
           boolean _tripleNotEquals = (_module != null);
           if (_tripleNotEquals) {
-            String _module_1 = node.getModule();
-            String _plus_1 = (_module_1 + "/");
+            String _lastSegment = this.getLastSegment(node.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
             String _label_1 = node.getLabel();
             _xifexpression = (_plus_1 + _label_1);
           } else {
             _xifexpression = node.getLabel();
           }
-          final String proposalText = _xifexpression;
-          String _xifexpression_1 = null;
-          String _module_2 = node.getModule();
-          boolean _tripleNotEquals_1 = (_module_2 != null);
-          if (_tripleNotEquals_1) {
-            String _module_3 = node.getModule();
-            String _plus_2 = (_module_3 + "/");
-            String _label_2 = node.getLabel();
-            _xifexpression_1 = (_plus_2 + _label_2);
-          } else {
-            _xifexpression_1 = node.getLabel();
-          }
-          final String displayText = _xifexpression_1;
+          final String qnode = _xifexpression;
+          final String proposalText = qnode;
+          final String displayText = qnode;
           final String additionalProposalInfo = node.getDescription();
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
@@ -213,6 +205,13 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Override
+  public String getModule(final EObject object) {
+    Object _findModel = this.findModel(object);
+    final AADM_Model model = ((AADM_Model) _findModel);
+    return model.getModule();
   }
   
   @Override

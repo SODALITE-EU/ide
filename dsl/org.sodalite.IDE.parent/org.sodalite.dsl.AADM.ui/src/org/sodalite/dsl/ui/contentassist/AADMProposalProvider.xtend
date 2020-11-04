@@ -156,18 +156,27 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		
 		//Get modules from model
 		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
 		
 		val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
 		System.out.println ("Nodes retrieved from KB:")
 		for (node: nodes.elements){
 			System.out.println ("\tNode: " + node.label)
-			val proposalText = node.module !== null ?node.module + '/' + node.label:node.label 
-			val displayText = node.module !== null ?node.module + '/' + node.label:node.label
+			val qnode = node.module !== null ?getLastSegment(node.module, '/') + '/' + node.label:node.label
+			val proposalText = qnode
+			val displayText = qnode
 			val additionalProposalInfo = node.description
 			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
 		}
 
 		super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
+	}
+		
+	override def getModule(EObject object) {
+		val AADM_Model model = findModel(object) as AADM_Model
+		return model.module
 	}
 		
 	override def getImportedModules(EObject object) {
@@ -183,6 +192,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		System.out.println("Invoking content assist for imports")
 		
 		val ReasonerData<String> modules = getKBReasoner().modules
+		
 		System.out.println ("Modules retrieved from KB:")
 		for (module: modules.elements){
 			System.out.println ("\tModule: " + module)
