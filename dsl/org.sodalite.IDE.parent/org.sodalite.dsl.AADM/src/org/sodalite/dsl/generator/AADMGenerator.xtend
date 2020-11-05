@@ -45,8 +45,9 @@ import org.sodalite.dsl.rM.EBOOLEAN
 import org.sodalite.dsl.rM.EFLOAT
 import org.sodalite.dsl.rM.ESIGNEDINT
 import org.sodalite.dsl.rM.EAlphaNumericValue
-import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
+import org.sodalite.dsl.rM.EDataTypeName
 import org.sodalite.dsl.rM.EPREFIX_TYPE
+import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
 
 /**
  * Generates code from your model files on save.
@@ -116,15 +117,7 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDFOR»
 	
 	«FOR e:r.allContents.toIterable.filter(EMapEntry)»
-		«IF  e.value instanceof ESingleValue»
-			«e.compile»
-		«ENDIF»
-	«ENDFOR»
-	
-	«FOR e:r.allContents.toIterable.filter(EMapEntry)»
-		«IF  e.value instanceof EMAP»
-			«e.compile»
-		«ENDIF»	
+		«e.compile»
 	«ENDFOR»
 
  	«FOR p:r.allContents.toIterable.filter(EPropertyAssignment)»
@@ -203,16 +196,9 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  «IF p.parameter.type instanceof EPRIMITIVE_TYPE»
-	  exchange:value '«(p.parameter.type as EPRIMITIVE_TYPE).type»' ;
-	  «ELSEIF p.parameter.type instanceof EPREFIX_TYPE»
-	  «IF (p.parameter.type as EPREFIX_TYPE).module !== null»
-	  exchange:value '«(p.parameter.type as EPREFIX_TYPE).module»/«(p.parameter.type as EPREFIX_TYPE).type»' ;  
-	  «ELSE»
-	  exchange:value '«(p.parameter.type as EPREFIX_TYPE).type»' ;  
-	«ENDIF»
-	«ENDIF»   
+	  exchange:value '«trim(p.parameter.type.compile.toString)»' ;
 	.
+	
 	:Input_«input_counter++»
 	  rdf:type exchange:Input ;
 	  exchange:name "«p.name»" ;
@@ -222,14 +208,24 @@ class AADMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile (EMapEntry e) '''
-	«IF  e.value instanceof ESingleValue»
+	«IF !(e.value instanceof EMAP)»
 	«putParameterNumber(e, "map", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "«e.key»" ;
+	  «IF e.value instanceof ESingleValue»
 	  exchange:value "«trim(processMultilineStringValue((e.value as ESingleValue).compile().toString))»" ;
+	  «ELSEIF e.value instanceof EFunction»
+	  
+	  «ELSEIF e.value instanceof ELIST»
+	  
+	  «ENDIF»
 	.
-	«ELSEIF e.value instanceof EMAP»
+	
+	«ELSE»
+	«FOR me:(e.value as EMAP).map»
+	«me.compile»
+	«ENDFOR»
 	«putParameterNumber(e, "map", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
@@ -328,6 +324,26 @@ class AADMGenerator extends AbstractGenerator {
 	  «(v as ESIGNEDINT).value»
 	«ELSE»
 	  null
+	«ENDIF»
+	'''
+	
+	def compile (EDataTypeName t) '''
+	«IF t instanceof EPREFIX_TYPE»
+	  «(t as EPREFIX_TYPE).compile»  
+	«ELSEIF t instanceof EPRIMITIVE_TYPE»
+	  «(t as EPRIMITIVE_TYPE).compile»
+	«ENDIF»
+	'''
+	
+	def compile (EPRIMITIVE_TYPE t) '''
+	  «t.type»
+	'''
+	
+	def compile (EPREFIX_TYPE t) '''
+	«IF t.module !== null»
+	  «t.module»/«t.type»  
+	«ELSE»
+	  «t.type»
 	«ENDIF»
 	'''
 	
@@ -445,8 +461,12 @@ class AADMGenerator extends AbstractGenerator {
 		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
 	}
 	
-	def processMultilineStringValue (String description){
-		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
+	def processMultilineStringValue (String value){
+		var processed_value = value.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
+		//removing last \n
+		if(processed_value.endsWith('\\n'))
+			processed_value= processed_value.substring(0, processed_value.length() - "\\n".length);
+		return processed_value		
 	}
 	
 	def processStringValue(String value) {

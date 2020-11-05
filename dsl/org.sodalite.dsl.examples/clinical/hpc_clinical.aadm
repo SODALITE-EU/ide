@@ -76,7 +76,7 @@ node_templates:
 
 	//modak job parameters
 	density-mapping-modak-job:
-	  	type: hpc/sodalite.nodes.modak.job
+	  	type: modak/sodalite.nodes.modak.job
 	  	properties:
 	    	job_script: get_input: density-mapping-job-script
 	    	job_options:
@@ -105,7 +105,7 @@ node_templates:
 	    		node: cadt-image
 
 	probabilistic-mapping-modak-job: 
-	  	type: hpc/sodalite.nodes.modak.job
+	  	type: modak/sodalite.nodes.modak.job
 	  	properties:
 	    	job_script: get_input: probabilistic-mapping-job-script
 	    	job_options:
@@ -137,7 +137,7 @@ node_templates:
 
 
 	boundary-conditions-modak-job:
-	  	type: hpc/sodalite.nodes.modak.job
+	  	type: modak/sodalite.nodes.modak.job
 	  	properties:
 	    	job_script: get_input: boundary-conditions-job-script
 	    	job_options:
