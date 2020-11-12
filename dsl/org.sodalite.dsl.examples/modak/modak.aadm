@@ -6,13 +6,6 @@ inputs:
 		
 node_templates:
 
-	//Common target: HLRS testbed
-	hlrs-testbed-target:
-		type: modak/sodalite.nodes.modak.target
-		properties:
-			name: "hlrs_testbed"
-			queue_type: "torque"
-
 	//MODAK instance
 	modak-instance:
 		type: modak/sodalite.nodes.modak
@@ -80,8 +73,6 @@ node_templates:
 		requirements:
 			modak_endpoint: 
 				node: modak/modak-instance
-			target: 
-				node: hlrs-testbed-target
 		
 	//TensorFlow-GPU SNOW JOB
 	tf-snow-job:
@@ -136,8 +127,6 @@ node_templates:
 		requirements:
 			modak_endpoint: 
 				node: modak/modak-instance
-			target: 
-				node: hlrs-testbed-target	
 
 
 

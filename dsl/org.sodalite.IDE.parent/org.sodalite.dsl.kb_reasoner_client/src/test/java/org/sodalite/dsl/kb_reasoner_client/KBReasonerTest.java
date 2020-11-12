@@ -23,7 +23,6 @@ import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
@@ -150,9 +149,9 @@ class KBReasonerTest {
 		requirements.getElements().stream().forEach(node -> System.out.println("Requirement: " + node));
 	}
 
-	@Disabled
 	@Test
 	void testGetValidRequirementNodes() throws Exception {
+		String nodeType = "openstack/sodalite.nodes.DockerizedComponent";
 		ValidRequirementNodeData valid_requirement_nodes = kbclient.getValidRequirementNodes(requirementId, nodeType);
 		assertFalse(valid_requirement_nodes.getElements().isEmpty());
 		System.out.println("ValidRequirementNodes for resource: " + resourceId);

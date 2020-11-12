@@ -27,36 +27,38 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class TypeJsonDeserializer extends JsonDeserializer<SuperType> {
-    private static final ObjectMapper mapper = new ObjectMapper();
-    protected JavaType nodeType;
-    protected SuperType type;
+	private static final ObjectMapper mapper = new ObjectMapper();
+	protected JavaType nodeType;
+	protected SuperType type;
 
 	@Override
 	public SuperType deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
 			throws IOException, JsonProcessingException {
-        JsonNode node = mapper.readTree(jsonParser);
-    	
-    	if (! (node instanceof ObjectNode))
-    		return null;
-    	
-        ObjectNode objectNode = (ObjectNode) node;
-        SuperType type = null;
+		JsonNode node = mapper.readTree(jsonParser);
+
+		if (!(node instanceof ObjectNode))
+			return null;
+
+		ObjectNode objectNode = (ObjectNode) node;
+		SuperType type = null;
 		try {
 			type = new SuperType();
 			if (objectNode.fields().hasNext()) {
 				Entry<String, JsonNode> entry = objectNode.fields().next();
-				if (entry.getKey()!=null) {
+				if (entry.getKey() != null) {
 					type.setUri(new URI(entry.getKey()));
 				}
-				if (entry.getValue()!=null && entry.getValue().get("label")!=null) {
+				if (entry.getValue() != null && entry.getValue().get("label") != null) {
 					type.setLabel(entry.getValue().get("label").asText());
 				}
+				if (entry.getValue() != null && entry.getValue().get("namespace") != null)
+					type.setModule(entry.getValue().get("namespace").asText());
 			}
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-        
-        return type;
+
+		return type;
 	}
 
 }

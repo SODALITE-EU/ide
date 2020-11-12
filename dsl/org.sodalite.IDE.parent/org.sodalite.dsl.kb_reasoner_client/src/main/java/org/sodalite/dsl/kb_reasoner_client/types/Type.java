@@ -17,7 +17,6 @@ public class Type extends KBEntity {
 	String label;
 	String description;
 	SuperType type;
-	String module;
 
 	public String getLabel() {
 		return label;
@@ -37,14 +36,6 @@ public class Type extends KBEntity {
 
 	public SuperType getType() {
 		return type;
-	}
-
-	public String getModule() {
-		return module;
-	}
-
-	public void setModule(String module) {
-		this.module = module;
 	}
 
 	// @JsonDeserialize(using = TypeJsonDeserializer.class)
