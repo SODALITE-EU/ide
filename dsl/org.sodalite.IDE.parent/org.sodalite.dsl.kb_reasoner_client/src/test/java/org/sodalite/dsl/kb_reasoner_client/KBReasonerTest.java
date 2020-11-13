@@ -37,6 +37,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 
 class KBReasonerTest {
@@ -156,6 +157,32 @@ class KBReasonerTest {
 		assertFalse(valid_requirement_nodes.getElements().isEmpty());
 		System.out.println("ValidRequirementNodes for resource: " + resourceId);
 		valid_requirement_nodes.getElements().stream().forEach(node -> System.out.println("Requirement: " + node));
+	}
+
+	@Test
+	void testGetTypeOfValidRequirementNodes() throws Exception {
+		String requirementId = "host";
+		String nodeType = "docker/sodalite.nodes.DockerHost";
+		TypeData typedata = kbclient.getTypeOfValidRequirementNodes(requirementId, nodeType);
+		assertFalse(typedata.getElements().isEmpty());
+		System.out.println("TypeOfValidRequirementNodes for resource: " + resourceId + " is "
+				+ typedata.getElements().get(0).getLabel());
+	}
+
+	@Test
+	void testIsSubClassOf() throws Exception {
+		String subclass = "openstack/sodalite.nodes.OpenStack.VM";
+		String superclass = "tosca.nodes.Compute";
+		Boolean result = kbclient.isSubClassOf(subclass, superclass);
+		assertTrue(result);
+	}
+
+	@Test
+	void testGetSubClassesOf() throws Exception {
+		List<String> subclasses = Arrays.asList("openstack/sodalite.nodes.OpenStack.VM", "tosca.nodes.Compute");
+		String superclass = "tosca.nodes.Compute";
+		List<String> result = kbclient.getSubClassesOf(subclasses, superclass);
+		assertFalse(result.isEmpty());
 	}
 
 	@Test

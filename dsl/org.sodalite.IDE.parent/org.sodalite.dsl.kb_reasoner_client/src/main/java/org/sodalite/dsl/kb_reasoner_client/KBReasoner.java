@@ -52,6 +52,12 @@ public interface KBReasoner {
 
 	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception;
 
+	TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType) throws Exception;
+
+	Boolean isSubClassOf(String subclass, String superclass) throws Exception;
+
+	List<String> getSubClassesOf(List<String> subclasses, String superclass) throws Exception;
+
 	KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String name, String namespace, String aadmDSL,
 			boolean complete) throws Exception;
 

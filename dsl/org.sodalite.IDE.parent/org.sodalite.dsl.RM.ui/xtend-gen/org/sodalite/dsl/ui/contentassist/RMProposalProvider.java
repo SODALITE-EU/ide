@@ -436,6 +436,11 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   @Override
+  public void completeEParameterDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
   public void completeGetAttributeBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
   }
   

@@ -59,6 +59,9 @@ import org.eclipse.core.resources.IResource
 import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl
 import org.sodalite.dsl.kb_reasoner_client.types.Capability
 import org.sodalite.dsl.rM.EPREFIX_TYPE
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData
+import java.util.HashMap
+import java.util.Map
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -381,13 +384,12 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		//Get valid requirement nodes from KB
 		
 		val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId);
+		val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId);
 		if (!vrnd.elements.empty){
 			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
-			var SortedSet<String> types = new TreeSet<String>()
 			for (ValidRequirementNode vrn: vrnd.elements){
 				val qtype = vrn.type.module !== null ?getLastSegment(vrn.type.module, '/') + '/' + vrn.type.label:vrn.type.label
 				val qnode = vrn.module !== null ?getLastSegment(vrn.module, '/') + '/' + vrn.label:vrn.label
-				types.add(qtype)
 				System.out.println ("Valid requirement node: " + qnode)
 			 	displayText = qnode
 				proposalText = qnode
@@ -404,8 +406,12 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			}
 		
 			//Find local nodes that belongs to suggested types
-			val List<ENodeTemplate> localnodes = findLocalNodesForTypes(types, model)
-			val String module = getModule(model)
+			if (tovrnd.elements.isEmpty)
+				throw new Exception ("Type of valid nodes satisfying the requirement not found");
+			val Type superType = tovrnd.elements.get(0)
+			val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
+			val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
+			val String module = getModule(model) 
 			for (ENodeTemplate node: localnodes){
 				System.out.println ("Valid requirement local node: " + node.name)
 			 	val qnode = module != null? module + '/' + node.name: node.name
@@ -465,6 +471,25 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val node_id = (node.node.type.module !== null? node.node.type.module + '/') + node.node.type.type
 			if (types.contains(node_id))
 				nodes.add(node)
+		}
+		return nodes
+	}
+	
+	def findLocalNodesForType(String type, EObject reqAssign) {
+		val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
+		val Map<String, ENodeTemplate> candidateNodes = new HashMap<String, ENodeTemplate>()
+		val AADM_Model model = findModel(reqAssign) as AADM_Model
+		
+		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
+			val node_id = (node.node.type.module !== null? node.node.type.module + '/') + node.node.type.type
+			candidateNodes.put(node_id, node)
+		}
+		
+		val List<String> keys = new ArrayList<String>(candidateNodes.keySet)
+		val List<String> validSubClasses = getKBReasoner().getSubClassesOf(keys, type)
+		
+		for (String validClass: validSubClasses){
+			nodes.add (candidateNodes.get(validClass))
 		}
 		return nodes
 	}

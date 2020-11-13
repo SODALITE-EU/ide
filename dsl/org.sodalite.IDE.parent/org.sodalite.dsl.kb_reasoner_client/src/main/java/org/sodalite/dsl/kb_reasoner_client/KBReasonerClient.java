@@ -10,7 +10,10 @@
  *******************************************************************************/
 package org.sodalite.dsl.kb_reasoner_client;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.KeyManagementException;
@@ -43,6 +46,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
+import org.sodalite.dsl.kb_reasoner_client.types.StringData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
@@ -224,6 +228,43 @@ public class KBReasonerClient implements KBReasoner {
 			data.setElements(new ArrayList<>());
 		}
 		return data;
+	}
+
+	@Override
+	public TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType) throws Exception {
+		Assert.notNull(requirementId, "Pass a not null requirementId");
+		Assert.notNull(nodeType, "Pass a not null nodeType");
+		String url = kbReasonerUri + "valid-requirement-nodes-type?requirement=" + requirementId + "&nodeType="
+				+ nodeType;
+		TypeData data = getJSONObjectForType(TypeData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new TypeData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
+	}
+
+	@Override
+	public Boolean isSubClassOf(String subclass, String superclass) throws Exception {
+		Assert.notNull(subclass, "Pass a not null subclass");
+		Assert.notNull(superclass, "Pass a not null superclass");
+		String url = kbReasonerUri + "is-subclass-of;nodeTypes=" + encodeValue(subclass) + ";superNodeType="
+				+ encodeValue(superclass);
+		StringData data = getJSONObjectForType(StringData.class, new URI(url), HttpStatus.OK);
+		return data.getElements().contains(subclass);
+	}
+
+	@Override
+	public List<String> getSubClassesOf(List<String> subclasses, String superclass) throws Exception {
+		Assert.notNull(subclasses, "Pass a not null subclasses");
+		Assert.notEmpty(subclasses, "Pass a not empty subclasses");
+		Assert.notNull(superclass, "Pass a not null superclass");
+		String url = kbReasonerUri + "is-subclass-of";
+		for (String subclass : subclasses)
+			url += ";nodeTypes=" + encodeValue(subclass);
+		url += ";superNodeType=" + encodeValue(superclass);
+		StringData data = getJSONObjectForType(StringData.class, new URI(url), HttpStatus.OK);
+		return data.getElements();
 	}
 
 	@Override
@@ -671,6 +712,14 @@ public class KBReasonerClient implements KBReasoner {
 			return (ResponseEntity<T>) getSslRestTemplate().exchange(request, clazz);
 		else
 			return (ResponseEntity<T>) getRestTemplate().exchange(request, clazz);
+	}
+
+	private static String encodeValue(String value) {
+		try {
+			return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+		} catch (UnsupportedEncodingException ex) {
+			throw new RuntimeException(ex.getCause());
+		}
 	}
 
 }
