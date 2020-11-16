@@ -1,3 +1,5 @@
+module: hpc
+
 relationship_types:
 	my.relationships.jobHostedOn:
 		derived_from: tosca.relationships.HostedOn

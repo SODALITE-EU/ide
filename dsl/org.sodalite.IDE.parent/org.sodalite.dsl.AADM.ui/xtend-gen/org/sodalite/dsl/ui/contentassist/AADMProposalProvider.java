@@ -18,14 +18,14 @@ import java.nio.channels.FileLock;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeSet;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -34,7 +34,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
@@ -55,21 +54,19 @@ import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
-import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
-import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
 import org.sodalite.dsl.kb_reasoner_client.types.Capability;
-import org.sodalite.dsl.kb_reasoner_client.types.Node;
 import org.sodalite.dsl.kb_reasoner_client.types.Occurrences;
 import org.sodalite.dsl.kb_reasoner_client.types.Property;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
+import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.ui.contentassist.AbstractAADMProposalProvider;
-import org.sodalite.dsl.ui.preferences.Activator;
-import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -80,17 +77,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   private final Set<Object> keywords = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet());
   
   private final Set<String> assignments = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("nodeTemplates"));
-  
-  public KBReasoner getKBReasoner() {
-    final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-    final String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
-    System.out.println(
-      MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI));
-    return kbclient;
-  }
   
   @Override
   public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
@@ -188,18 +174,74 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   public void completeENodeTemplateBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
-      final ReasonerData<Node> nodes = this.getKBReasoner().getNodes();
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ReasonerData<Type> nodes = this.getKBReasoner().getNodeTypes(importedModules);
       System.out.println("Nodes retrieved from KB:");
-      List<Node> _elements = nodes.getElements();
-      for (final Node node : _elements) {
+      List<Type> _elements = nodes.getElements();
+      for (final Type node : _elements) {
         {
           String _label = node.getLabel();
           String _plus = ("\tNode: " + _label);
           System.out.println(_plus);
-          final String proposalText = node.getLabel();
-          final String displayText = node.getLabel();
+          String _xifexpression = null;
+          String _module = node.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(node.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = node.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = node.getLabel();
+          }
+          final String qnode = _xifexpression;
+          final String proposalText = qnode;
+          final String displayText = qnode;
           final String additionalProposalInfo = node.getDescription();
           this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public String getModule(final EObject object) {
+    Object _findModel = this.findModel(object);
+    final AADM_Model model = ((AADM_Model) _findModel);
+    return model.getModule();
+  }
+  
+  @Override
+  public List<String> getImportedModules(final EObject object) {
+    final List<String> modules = new ArrayList<String>();
+    Object _findModel = this.findModel(object);
+    final AADM_Model model = ((AADM_Model) _findModel);
+    EList<String> _imports = model.getImports();
+    for (final String import_ : _imports) {
+      modules.add(import_);
+    }
+    return modules;
+  }
+  
+  @Override
+  public void completeAADM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for imports");
+      final ReasonerData<String> modules = this.getKBReasoner().getModules();
+      System.out.println("Modules retrieved from KB:");
+      List<String> _elements = modules.getElements();
+      for (final String module : _elements) {
+        {
+          System.out.println(("\tModule: " + module));
+          final String proposalText = this.extractModule(module);
+          final String displayText = proposalText;
+          final Object additionalProposalInfo = null;
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
         }
       }
       super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
@@ -216,14 +258,27 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String displayText = "";
       String additionalProposalInfo = "";
       String resourceId = "";
+      EPREFIX_TYPE type = null;
       if ((model instanceof ENodeTemplateBodyImpl)) {
-        resourceId = ((ENodeTemplateBodyImpl) model).getType();
+        type = ((ENodeTemplateBodyImpl) model).getType();
       } else {
         if ((model instanceof EAttributeAssigmentsImpl)) {
           EObject _eContainer = ((EAttributeAssigmentsImpl)model).eContainer();
-          resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
+          type = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
+      String _xifexpression = null;
+      String _module = type.getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = type.getModule();
+        _xifexpression = (_module_1 + "/");
+      } else {
+        _xifexpression = "";
+      }
+      String _type = type.getType();
+      String _plus = (_xifexpression + _type);
+      resourceId = _plus;
       if ((resourceId != null)) {
         final ReasonerData<Attribute> attributes = this.getKBReasoner().getAttributes(resourceId);
         if ((attributes != null)) {
@@ -233,35 +288,35 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         for (final Attribute attribute : _elements) {
           {
             URI _uri = attribute.getUri();
-            String _plus = ("\tAttribute: " + _uri);
-            System.out.println(_plus);
+            String _plus_1 = ("\tAttribute: " + _uri);
+            System.out.println(_plus_1);
             String _string = attribute.getUri().toString();
             int _lastIndexOf = attribute.getUri().toString().lastIndexOf("/");
-            int _plus_1 = (_lastIndexOf + 1);
-            String attribute_label = _string.substring(_plus_1, attribute.getUri().toString().length());
+            int _plus_2 = (_lastIndexOf + 1);
+            String attribute_label = _string.substring(_plus_2, attribute.getUri().toString().length());
             proposalText = attribute_label;
             displayText = attribute_label;
-            String _xifexpression = null;
-            String _label = attribute.getType().getLabel();
-            boolean _tripleNotEquals = (_label != null);
-            if (_tripleNotEquals) {
-              String _label_1 = attribute.getType().getLabel();
-              _xifexpression = ("Type: " + _label_1);
-            } else {
-              _xifexpression = "";
-            }
-            additionalProposalInfo = _xifexpression;
-            String _additionalProposalInfo = additionalProposalInfo;
             String _xifexpression_1 = null;
-            String _description = attribute.getDescription();
-            boolean _tripleNotEquals_1 = (_description != null);
+            String _label = attribute.getType().getLabel();
+            boolean _tripleNotEquals_1 = (_label != null);
             if (_tripleNotEquals_1) {
-              String _description_1 = attribute.getDescription();
-              _xifexpression_1 = ("\nDescription: " + _description_1);
+              String _label_1 = attribute.getType().getLabel();
+              _xifexpression_1 = ("Type: " + _label_1);
             } else {
               _xifexpression_1 = "";
             }
-            additionalProposalInfo = (_additionalProposalInfo + _xifexpression_1);
+            additionalProposalInfo = _xifexpression_1;
+            String _additionalProposalInfo = additionalProposalInfo;
+            String _xifexpression_2 = null;
+            String _description = attribute.getDescription();
+            boolean _tripleNotEquals_2 = (_description != null);
+            if (_tripleNotEquals_2) {
+              String _description_1 = attribute.getDescription();
+              _xifexpression_2 = ("\nDescription: " + _description_1);
+            } else {
+              _xifexpression_2 = "";
+            }
+            additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
             this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
           }
         }
@@ -283,14 +338,27 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String displayText = "";
       String additionalProposalInfo = "";
       String resourceId = "";
+      EPREFIX_TYPE type = null;
       if ((model instanceof ENodeTemplateBodyImpl)) {
-        resourceId = ((ENodeTemplateBodyImpl) model).getType();
+        type = ((ENodeTemplateBodyImpl) model).getType();
       } else {
         if ((model instanceof EPropertyAssigmentsImpl)) {
           EObject _eContainer = ((EPropertyAssigmentsImpl)model).eContainer();
-          resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
+          type = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
+      String _xifexpression = null;
+      String _module = type.getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = type.getModule();
+        _xifexpression = (_module_1 + "/");
+      } else {
+        _xifexpression = "";
+      }
+      String _type = type.getType();
+      String _plus = (_xifexpression + _type);
+      resourceId = _plus;
       if ((resourceId != null)) {
         final ReasonerData<Property> properties = this.getKBReasoner().getProperties(resourceId);
         if ((properties != null)) {
@@ -299,35 +367,35 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           for (final Property property : _elements) {
             {
               URI _uri = property.getUri();
-              String _plus = ("\tProperty: " + _uri);
-              System.out.println(_plus);
+              String _plus_1 = ("\tProperty: " + _uri);
+              System.out.println(_plus_1);
               String _string = property.getUri().toString();
               int _lastIndexOf = property.getUri().toString().lastIndexOf("/");
-              int _plus_1 = (_lastIndexOf + 1);
-              String property_label = _string.substring(_plus_1, property.getUri().toString().length());
+              int _plus_2 = (_lastIndexOf + 1);
+              String property_label = _string.substring(_plus_2, property.getUri().toString().length());
               proposalText = property_label;
               displayText = property_label;
-              String _xifexpression = null;
-              String _label = property.getType().getLabel();
-              boolean _tripleNotEquals = (_label != null);
-              if (_tripleNotEquals) {
-                String _label_1 = property.getType().getLabel();
-                _xifexpression = ("Type: " + _label_1);
-              } else {
-                _xifexpression = "";
-              }
-              additionalProposalInfo = _xifexpression;
-              String _additionalProposalInfo = additionalProposalInfo;
               String _xifexpression_1 = null;
-              String _description = property.getDescription();
-              boolean _tripleNotEquals_1 = (_description != null);
+              String _label = property.getType().getLabel();
+              boolean _tripleNotEquals_1 = (_label != null);
               if (_tripleNotEquals_1) {
-                String _description_1 = property.getDescription();
-                _xifexpression_1 = ("\nDescription: " + _description_1);
+                String _label_1 = property.getType().getLabel();
+                _xifexpression_1 = ("Type: " + _label_1);
               } else {
                 _xifexpression_1 = "";
               }
-              additionalProposalInfo = (_additionalProposalInfo + _xifexpression_1);
+              additionalProposalInfo = _xifexpression_1;
+              String _additionalProposalInfo = additionalProposalInfo;
+              String _xifexpression_2 = null;
+              String _description = property.getDescription();
+              boolean _tripleNotEquals_2 = (_description != null);
+              if (_tripleNotEquals_2) {
+                String _description_1 = property.getDescription();
+                _xifexpression_2 = ("\nDescription: " + _description_1);
+              } else {
+                _xifexpression_2 = "";
+              }
+              additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
               this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
             }
           }
@@ -350,14 +418,27 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String displayText = "";
       String additionalProposalInfo = "";
       String resourceId = "";
+      EPREFIX_TYPE type = null;
       if ((model instanceof ENodeTemplateBodyImpl)) {
-        resourceId = ((ENodeTemplateBodyImpl) model).getType();
+        type = ((ENodeTemplateBodyImpl) model).getType();
       } else {
         if ((model instanceof ECapabilityAssignmentsImpl)) {
           EObject _eContainer = ((ECapabilityAssignmentsImpl)model).eContainer();
-          resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
+          type = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
+      String _xifexpression = null;
+      String _module = type.getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = type.getModule();
+        _xifexpression = (_module_1 + "/");
+      } else {
+        _xifexpression = "";
+      }
+      String _type = type.getType();
+      String _plus = (_xifexpression + _type);
+      resourceId = _plus;
       if ((resourceId != null)) {
         final ReasonerData<Capability> capabilities = this.getKBReasoner().getCapabilities(resourceId);
         if ((capabilities != null)) {
@@ -366,30 +447,30 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           for (final Capability capability : _elements) {
             {
               URI _uri = capability.getUri();
-              String _plus = ("\nCapability: " + _uri);
-              System.out.println(_plus);
+              String _plus_1 = ("\nCapability: " + _uri);
+              System.out.println(_plus_1);
               String _string = capability.getUri().toString();
               int _lastIndexOf = capability.getUri().toString().lastIndexOf("/");
-              int _plus_1 = (_lastIndexOf + 1);
-              String property_label = _string.substring(_plus_1, capability.getUri().toString().length());
+              int _plus_2 = (_lastIndexOf + 1);
+              String property_label = _string.substring(_plus_2, capability.getUri().toString().length());
               proposalText = property_label;
               displayText = property_label;
               additionalProposalInfo = "";
-              Type _type = capability.getType();
-              boolean _tripleNotEquals = (_type != null);
-              if (_tripleNotEquals) {
+              SuperType _type_1 = capability.getType();
+              boolean _tripleNotEquals_1 = (_type_1 != null);
+              if (_tripleNotEquals_1) {
                 String _additionalProposalInfo = additionalProposalInfo;
                 String _label = capability.getType().getLabel();
-                String _plus_2 = ("\nType: " + _label);
-                additionalProposalInfo = (_additionalProposalInfo + _plus_2);
+                String _plus_3 = ("\nType: " + _label);
+                additionalProposalInfo = (_additionalProposalInfo + _plus_3);
               }
               List<String> _valid_source_types = capability.getValid_source_types();
-              boolean _tripleNotEquals_1 = (_valid_source_types != null);
-              if (_tripleNotEquals_1) {
+              boolean _tripleNotEquals_2 = (_valid_source_types != null);
+              if (_tripleNotEquals_2) {
                 String _additionalProposalInfo_1 = additionalProposalInfo;
                 List<String> _valid_source_types_1 = capability.getValid_source_types();
-                String _plus_3 = ("\nValid source types:" + _valid_source_types_1);
-                additionalProposalInfo = (_additionalProposalInfo_1 + _plus_3);
+                String _plus_4 = ("\nValid source types:" + _valid_source_types_1);
+                additionalProposalInfo = (_additionalProposalInfo_1 + _plus_4);
               }
               this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
             }
@@ -413,14 +494,27 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String displayText = "";
       String additionalProposalInfo = "";
       String resourceId = "";
+      EPREFIX_TYPE type = null;
       if ((model instanceof ENodeTemplateBodyImpl)) {
-        resourceId = ((ENodeTemplateBodyImpl) model).getType();
+        type = ((ENodeTemplateBodyImpl) model).getType();
       } else {
         if ((model instanceof ERequirementAssignmentsImpl)) {
           EObject _eContainer = ((ERequirementAssignmentsImpl)model).eContainer();
-          resourceId = ((ENodeTemplateBodyImpl) _eContainer).getType();
+          type = ((ENodeTemplateBodyImpl) _eContainer).getType();
         }
       }
+      String _xifexpression = null;
+      String _module = type.getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = type.getModule();
+        _xifexpression = (_module_1 + "/");
+      } else {
+        _xifexpression = "";
+      }
+      String _type = type.getType();
+      String _plus = (_xifexpression + _type);
+      resourceId = _plus;
       if ((resourceId != null)) {
         final ReasonerData<Requirement> requirements = this.getKBReasoner().getRequirements(resourceId);
         if ((requirements != null)) {
@@ -429,42 +523,42 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           for (final Requirement requirement : _elements) {
             {
               URI _uri = requirement.getUri();
-              String _plus = ("\tRequirement: " + _uri);
-              System.out.println(_plus);
+              String _plus_1 = ("\tRequirement: " + _uri);
+              System.out.println(_plus_1);
               String _string = requirement.getUri().toString();
               int _lastIndexOf = requirement.getUri().toString().lastIndexOf("/");
-              int _plus_1 = (_lastIndexOf + 1);
-              String property_label = _string.substring(_plus_1, requirement.getUri().toString().length());
+              int _plus_2 = (_lastIndexOf + 1);
+              String property_label = _string.substring(_plus_2, requirement.getUri().toString().length());
               proposalText = property_label;
               displayText = property_label;
               additionalProposalInfo = "";
-              Type _capability = requirement.getCapability();
-              boolean _tripleNotEquals = (_capability != null);
-              if (_tripleNotEquals) {
+              SuperType _capability = requirement.getCapability();
+              boolean _tripleNotEquals_1 = (_capability != null);
+              if (_tripleNotEquals_1) {
                 String _additionalProposalInfo = additionalProposalInfo;
                 String _label = requirement.getCapability().getLabel();
-                String _plus_2 = ("\nCapability: " + _label);
-                additionalProposalInfo = (_additionalProposalInfo + _plus_2);
+                String _plus_3 = ("\nCapability: " + _label);
+                additionalProposalInfo = (_additionalProposalInfo + _plus_3);
               }
-              Type _node = requirement.getNode();
-              boolean _tripleNotEquals_1 = (_node != null);
-              if (_tripleNotEquals_1) {
+              SuperType _node = requirement.getNode();
+              boolean _tripleNotEquals_2 = (_node != null);
+              if (_tripleNotEquals_2) {
                 String _additionalProposalInfo_1 = additionalProposalInfo;
                 String _label_1 = requirement.getNode().getLabel();
-                String _plus_3 = ("\nNode: " + _label_1);
-                additionalProposalInfo = (_additionalProposalInfo_1 + _plus_3);
+                String _plus_4 = ("\nNode: " + _label_1);
+                additionalProposalInfo = (_additionalProposalInfo_1 + _plus_4);
               }
               Occurrences _occurrences = requirement.getOccurrences();
-              boolean _tripleNotEquals_2 = (_occurrences != null);
-              if (_tripleNotEquals_2) {
+              boolean _tripleNotEquals_3 = (_occurrences != null);
+              if (_tripleNotEquals_3) {
                 String _additionalProposalInfo_2 = additionalProposalInfo;
                 String _min = requirement.getOccurrences().getMin();
-                String _plus_4 = ("\nOccurrences: [" + _min);
-                String _plus_5 = (_plus_4 + ", ");
+                String _plus_5 = ("\nOccurrences: [" + _min);
+                String _plus_6 = (_plus_5 + ", ");
                 String _max = requirement.getOccurrences().getMax();
-                String _plus_6 = (_plus_5 + _max);
-                String _plus_7 = (_plus_6 + "]");
-                additionalProposalInfo = (_additionalProposalInfo_2 + _plus_7);
+                String _plus_7 = (_plus_6 + _max);
+                String _plus_8 = (_plus_7 + "]");
+                additionalProposalInfo = (_additionalProposalInfo_2 + _plus_8);
               }
               this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
             }
@@ -489,70 +583,116 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String additionalProposalInfo = "";
       final String requirementId = ((ERequirementAssignmentImpl) model).getName();
       EObject _eContainer = model.eContainer().eContainer();
-      final String nodeType = ((ENodeTemplateBodyImpl) _eContainer).getType();
+      final EPREFIX_TYPE nodeType = ((ENodeTemplateBodyImpl) _eContainer).getType();
+      String _xifexpression = null;
+      String _module = nodeType.getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = nodeType.getModule();
+        _xifexpression = (_module_1 + "/");
+      } else {
+        _xifexpression = "";
+      }
+      String _type = nodeType.getType();
+      final String resourceId = (_xifexpression + _type);
       Object _findModel = this.findModel(model);
       final AADM_Model rootModel = ((AADM_Model) _findModel);
       final String aadmURI = this.getAADMURI(rootModel);
-      SortedSet<String> types = new TreeSet<String>();
-      final ValidRequirementNodeData vrnd = this.getKBReasoner().getValidRequirementNodes(requirementId, nodeType);
-      if ((vrnd != null)) {
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ValidRequirementNodeData vrnd = this.getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
+      final TypeData tovrnd = this.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId);
+      boolean _isEmpty = vrnd.getElements().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
         System.out.println(("Valid requirement nodes retrieved from KB for requirement: " + requirementId));
         List<ValidRequirementNode> _elements = vrnd.getElements();
         for (final ValidRequirementNode vrn : _elements) {
           {
-            types.add(vrn.getType().getLabel());
-            String _label = vrn.getLabel();
-            String _plus = ("Valid requirement node: " + _label);
-            System.out.println(_plus);
-            final String property_label = vrn.getLabel();
-            displayText = property_label;
-            proposalText = property_label;
-            boolean _existsInAadm = this.existsInAadm(vrn.getUri().toString(), aadmURI);
-            if (_existsInAadm) {
-              String _displayText = displayText;
-              displayText = (_displayText + " <local>");
+            String _xifexpression_1 = null;
+            String _module_2 = vrn.getType().getModule();
+            boolean _tripleNotEquals_1 = (_module_2 != null);
+            if (_tripleNotEquals_1) {
+              String _lastSegment = this.getLastSegment(vrn.getType().getModule(), "/");
+              String _plus = (_lastSegment + "/");
+              String _label = vrn.getType().getLabel();
+              _xifexpression_1 = (_plus + _label);
             } else {
-              String _displayText_1 = displayText;
-              displayText = (_displayText_1 + " <in KB>");
+              _xifexpression_1 = vrn.getType().getLabel();
             }
-            String _label_1 = vrn.getLabel();
-            String _plus_1 = ("Node " + _label_1);
-            String _plus_2 = (_plus_1 + " of type ");
-            String _label_2 = vrn.getType().getLabel();
-            String _plus_3 = (_plus_2 + _label_2);
-            String _plus_4 = (_plus_3 + " is available in the KB");
-            additionalProposalInfo = _plus_4;
+            final String qtype = _xifexpression_1;
+            String _xifexpression_2 = null;
+            String _module_3 = vrn.getModule();
+            boolean _tripleNotEquals_2 = (_module_3 != null);
+            if (_tripleNotEquals_2) {
+              String _lastSegment_1 = this.getLastSegment(vrn.getModule(), "/");
+              String _plus_1 = (_lastSegment_1 + "/");
+              String _label_1 = vrn.getLabel();
+              _xifexpression_2 = (_plus_1 + _label_1);
+            } else {
+              _xifexpression_2 = vrn.getLabel();
+            }
+            final String qnode = _xifexpression_2;
+            System.out.println(("Valid requirement node: " + qnode));
+            displayText = qnode;
+            proposalText = qnode;
             this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
           }
         }
-      }
-      final List<ENodeTemplate> localnodes = this.findLocalNodesForTypes(types, model);
-      for (final ENodeTemplate node : localnodes) {
-        {
-          String _name = node.getName();
-          String _plus = ("Valid requirement local node: " + _name);
-          System.out.println(_plus);
-          final String property_label = node.getName();
-          proposalText = property_label;
-          displayText = (property_label + " <local>");
-          String _name_1 = node.getName();
-          String _plus_1 = ("Node " + _name_1);
-          String _plus_2 = (_plus_1 + " of type ");
-          String _type = node.getNode().getType();
-          String _plus_3 = (_plus_2 + _type);
-          String _plus_4 = (_plus_3 + " is available in this AADM model");
-          additionalProposalInfo = _plus_4;
-          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        boolean _isEmpty_1 = tovrnd.getElements().isEmpty();
+        if (_isEmpty_1) {
+          throw new Exception("Type of valid nodes satisfying the requirement not found");
+        }
+        final Type superType = tovrnd.getElements().get(0);
+        String _xifexpression_1 = null;
+        String _module_2 = superType.getModule();
+        boolean _tripleNotEquals_1 = (_module_2 != null);
+        if (_tripleNotEquals_1) {
+          String _lastSegment = this.getLastSegment(superType.getModule(), "/");
+          String _plus = (_lastSegment + "/");
+          String _label = superType.getLabel();
+          _xifexpression_1 = (_plus + _label);
+        } else {
+          _xifexpression_1 = superType.getLabel();
+        }
+        final String qsuperType = _xifexpression_1;
+        final List<ENodeTemplate> localnodes = this.findLocalNodesForType(qsuperType, model);
+        for (final ENodeTemplate node : localnodes) {
+          {
+            String _name = node.getName();
+            String _plus_1 = ("Valid requirement local node: " + _name);
+            System.out.println(_plus_1);
+            String _xifexpression_2 = null;
+            boolean _notEquals = (!Objects.equal(module, null));
+            if (_notEquals) {
+              String _name_1 = node.getName();
+              _xifexpression_2 = ((module + "/") + _name_1);
+            } else {
+              _xifexpression_2 = node.getName();
+            }
+            final String qnode = _xifexpression_2;
+            String _xifexpression_3 = null;
+            String _module_3 = node.getNode().getType().getModule();
+            boolean _notEquals_1 = (!Objects.equal(_module_3, null));
+            if (_notEquals_1) {
+              String _module_4 = node.getNode().getType().getModule();
+              String _plus_2 = (_module_4 + "/");
+              String _type_1 = node.getNode().getType().getType();
+              _xifexpression_3 = (_plus_2 + _type_1);
+            } else {
+              _xifexpression_3 = node.getNode().getType().getType();
+            }
+            final String qtype = _xifexpression_3;
+            proposalText = qnode;
+            displayText = qnode;
+            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+          }
         }
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  public boolean existsInAadm(final String nodeUri, final String aadmUri) {
-    return nodeUri.substring(0, nodeUri.lastIndexOf("/")).equals(
-      aadmUri.substring(0, aadmUri.lastIndexOf("/")));
   }
   
   public String getAADMURI(final AADM_Model model) {
@@ -612,18 +752,67 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   
   public List<ENodeTemplate> findLocalNodesForTypes(final SortedSet<String> types, final EObject reqAssign) {
     final List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
+    boolean _isEmpty = types.isEmpty();
+    if (_isEmpty) {
+      return nodes;
+    }
     Object _findModel = this.findModel(reqAssign);
     final AADM_Model model = ((AADM_Model) _findModel);
     EList<ENodeTemplate> _nodeTemplates = model.getNodeTemplates().getNodeTemplates();
     for (final ENodeTemplate node : _nodeTemplates) {
-      boolean _contains = types.contains(node.getNode().getType());
-      if (_contains) {
-        nodes.add(node);
+      {
+        String _xifexpression = null;
+        String _module = node.getNode().getType().getModule();
+        boolean _tripleNotEquals = (_module != null);
+        if (_tripleNotEquals) {
+          String _module_1 = node.getNode().getType().getModule();
+          _xifexpression = (_module_1 + "/");
+        }
+        String _type = node.getNode().getType().getType();
+        final String node_id = (_xifexpression + _type);
+        boolean _contains = types.contains(node_id);
+        if (_contains) {
+          nodes.add(node);
+        }
       }
     }
     return nodes;
   }
   
+  public List<ENodeTemplate> findLocalNodesForType(final String type, final EObject reqAssign) {
+    try {
+      final List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
+      final Map<String, ENodeTemplate> candidateNodes = new HashMap<String, ENodeTemplate>();
+      Object _findModel = this.findModel(reqAssign);
+      final AADM_Model model = ((AADM_Model) _findModel);
+      EList<ENodeTemplate> _nodeTemplates = model.getNodeTemplates().getNodeTemplates();
+      for (final ENodeTemplate node : _nodeTemplates) {
+        {
+          String _xifexpression = null;
+          String _module = node.getNode().getType().getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _module_1 = node.getNode().getType().getModule();
+            _xifexpression = (_module_1 + "/");
+          }
+          String _type = node.getNode().getType().getType();
+          final String node_id = (_xifexpression + _type);
+          candidateNodes.put(node_id, node);
+        }
+      }
+      Set<String> _keySet = candidateNodes.keySet();
+      final List<String> keys = new ArrayList<String>(_keySet);
+      final List<String> validSubClasses = this.getKBReasoner().getSubClassesOf(keys, type);
+      for (final String validClass : validSubClasses) {
+        nodes.add(candidateNodes.get(validClass));
+      }
+      return nodes;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
   public Object findModel(final EObject object) {
     EObject _eContainer = object.eContainer();
     boolean _equals = Objects.equal(_eContainer, null);

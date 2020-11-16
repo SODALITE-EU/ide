@@ -45,6 +45,9 @@ import org.sodalite.dsl.rM.EBOOLEAN
 import org.sodalite.dsl.rM.EFLOAT
 import org.sodalite.dsl.rM.ESIGNEDINT
 import org.sodalite.dsl.rM.EAlphaNumericValue
+import org.sodalite.dsl.rM.EDataTypeName
+import org.sodalite.dsl.rM.EPREFIX_TYPE
+import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
 
 /**
  * Generates code from your model files on save.
@@ -114,15 +117,7 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDFOR»
 	
 	«FOR e:r.allContents.toIterable.filter(EMapEntry)»
-		«IF  e.value instanceof ESingleValue»
-			«e.compile»
-		«ENDIF»
-	«ENDFOR»
-	
-	«FOR e:r.allContents.toIterable.filter(EMapEntry)»
-		«IF  e.value instanceof EMAP»
-			«e.compile»
-		«ENDIF»	
+		«e.compile»
 	«ENDFOR»
 
  	«FOR p:r.allContents.toIterable.filter(EPropertyAssignment)»
@@ -152,8 +147,8 @@ class AADMGenerator extends AbstractGenerator {
 	«putParameterNumber(p, "property", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "property" ;  
-	  exchange:value '«p.property.property.name»' ; 
+	  exchange:name "property" ;
+	  exchange:value '«p.property.property.type»' ; 
 	.
 	«ENDIF»	
 	
@@ -171,7 +166,11 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«p.property.req_cap.name»' ; 
+	  «IF p.property.req_cap.module !== null»
+	  exchange:listValue '«p.property.req_cap.module»/«p.property.req_cap.type»' ; 
+	  «ELSE»
+	  exchange:listValue "«p.property.req_cap.type»" ; 
+	  «ENDIF» 
 	.
 	«ENDIF»		
 	
@@ -197,8 +196,9 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value "«p.parameter.type.name»" ;
+	  exchange:value '«trim(p.parameter.type.compile.toString)»' ;
 	.
+	
 	:Input_«input_counter++»
 	  rdf:type exchange:Input ;
 	  exchange:name "«p.name»" ;
@@ -208,14 +208,24 @@ class AADMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile (EMapEntry e) '''
-	«IF  e.value instanceof ESingleValue»
+	«IF !(e.value instanceof EMAP)»
 	«putParameterNumber(e, "map", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "«e.key»" ;
-	  exchange:value "«trim((e.value as ESingleValue).compile().toString)»" ;
+	  «IF e.value instanceof ESingleValue»
+	  exchange:value "«trim(processMultilineStringValue((e.value as ESingleValue).compile().toString))»" ;
+	  «ELSEIF e.value instanceof EFunction»
+	  
+	  «ELSEIF e.value instanceof ELIST»
+	  
+	  «ENDIF»
 	.
-	«ELSEIF e.value instanceof EMAP»
+	
+	«ELSE»
+	«FOR me:(e.value as EMAP).map»
+	«me.compile»
+	«ENDFOR»
 	«putParameterNumber(e, "map", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
@@ -234,7 +244,12 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
-	  exchange:type "«n.node.type»" ;
+	  «IF n.node.type.module !== null»
+	  exchange:type '«n.node.type.module»/«n.node.type.type»' ;  
+	  «ELSE»
+	  exchange:type '«n.node.type.type»' ;  
+	  «ENDIF»
+	  
 	  «IF n.node.optimization !== null»
 	  	  exchange:optimization '«readOptimization(n.node.optimization)»' ;
 	  «ENDIF»
@@ -312,6 +327,26 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDIF»
 	'''
 	
+	def compile (EDataTypeName t) '''
+	«IF t instanceof EPREFIX_TYPE»
+	  «(t as EPREFIX_TYPE).compile»  
+	«ELSEIF t instanceof EPRIMITIVE_TYPE»
+	  «(t as EPRIMITIVE_TYPE).compile»
+	«ENDIF»
+	'''
+	
+	def compile (EPRIMITIVE_TYPE t) '''
+	  «t.type»
+	'''
+	
+	def compile (EPREFIX_TYPE t) '''
+	«IF t.module !== null»
+	  «t.module»/«t.type»  
+	«ELSE»
+	  «t.type»
+	«ENDIF»
+	'''
+	
 	def compile (EAttributeAssignment a) '''
 	«attribute_numbers.put(a, attribute_counter)»
 	:Attribute_«attribute_counter++»
@@ -353,7 +388,11 @@ class AADMGenerator extends AbstractGenerator {
 	:Requirement_«requirement_counter++»
 	  rdf:type exchange:Requirement ;
 	  exchange:name "«r.name»" ;
-	  exchange:value "«r.node»" ;
+	  «IF r.node.module !== null»
+	  exchange:value '«r.node.module»/«r.node.id»' ;  
+	  «ELSE»
+	  exchange:value '«r.node.id»' ;  
+	  «ENDIF»  
 	.
 	'''
 	
@@ -420,6 +459,14 @@ class AADMGenerator extends AbstractGenerator {
 	
 	def processDescription (String description){
 		return description.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
+	}
+	
+	def processMultilineStringValue (String value){
+		var processed_value = value.replaceAll("'", "\\\\'").replaceAll("[\\n\\r]+","\\\\n")
+		//removing last \n
+		if(processed_value.endsWith('\\n'))
+			processed_value= processed_value.substring(0, processed_value.length() - "\\n".length);
+		return processed_value		
 	}
 	
 	def processStringValue(String value) {

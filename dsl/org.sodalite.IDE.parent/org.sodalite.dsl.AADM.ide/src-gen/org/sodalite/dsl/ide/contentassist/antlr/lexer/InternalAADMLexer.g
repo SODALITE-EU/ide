@@ -105,9 +105,13 @@ Req_cap : 'req_cap:';
 
 Entity : 'entity:';
 
+Import : 'import:';
+
 Inputs : 'inputs:';
 
 Length : 'length:';
+
+Module : 'module:';
 
 Status : 'status:';
 
@@ -125,6 +129,8 @@ HyphenMinus : '-';
 
 FullStop : '.';
 
+Solidus : '/';
+
 Colon : ':';
 
 LeftSquareBracket : '[';
@@ -136,8 +142,6 @@ RULE_QUALIFIED_NAME : RULE_ID ('.' RULE_ID)+;
 RULE_BOOLEAN : ('true'|'false');
 
 RULE_ENTITY : ('SELF'|'SOURCE'|'TARGET'|'HOST');
-
-RULE_PRIMITIVE_DATA_TYPE : ('string'|'integer'|'float'|'boolean'|'map'|'list'|'range'|'timestamp'|'scalar-unit.frequency'|'scalar-unit.size'|'version-type');
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
 

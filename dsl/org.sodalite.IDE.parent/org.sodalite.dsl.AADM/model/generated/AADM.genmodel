@@ -7,6 +7,8 @@
   <genPackages prefix="AADM" basePackage="org.sodalite.dsl" disposableProviderFactory="true"
       fileExtensions="aadm" ecorePackage="AADM.ecore#/">
     <genClasses ecoreClass="AADM.ecore#//AADM_Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//AADM_Model/module"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//AADM_Model/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/inputs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/nodeTemplates"/>
     </genClasses>
@@ -18,7 +20,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplate/node"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ENodeTemplateBody">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ENodeTemplateBody/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ENodeTemplateBody/description"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/optimization"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/properties"/>
@@ -31,7 +33,7 @@
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ERequirementAssignment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ERequirementAssignment/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ERequirementAssignment/node"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ERequirementAssignment/node"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ECapabilityAssignments">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ECapabilityAssignments/capabilities"/>

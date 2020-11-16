@@ -20,13 +20,13 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = CapabilityJsonDeserializer.class)
 public class Capability extends KBEntity{
-	Type type;
+	SuperType type;
 	List<String> valid_source_types;
 
-	public Type getType() {
+	public SuperType getType() {
 		return type;
 	}
-	public void setType(Type type) {
+	public void setType(SuperType type) {
 		this.type = type;
 	}
 	public List<String> getValid_source_types() {

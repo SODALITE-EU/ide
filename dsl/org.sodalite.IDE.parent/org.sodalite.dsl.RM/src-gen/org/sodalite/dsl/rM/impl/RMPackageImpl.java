@@ -29,9 +29,12 @@ import org.sodalite.dsl.rM.EConstraint;
 import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDataTypeBody;
+import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EDataTypes;
 import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EDependencyFiles;
+import org.sodalite.dsl.rM.EEntity;
+import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EEqual;
 import org.sodalite.dsl.rM.EFunction;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
@@ -53,7 +56,6 @@ import org.sodalite.dsl.rM.EMaxLength;
 import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.ENodeTypeBody;
-import org.sodalite.dsl.rM.ENodeTypeRef;
 import org.sodalite.dsl.rM.ENodeTypes;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EOperationDefinitionBody;
@@ -123,6 +125,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   private EClass eDataTypeBodyEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eDataTypeNameEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -479,13 +488,6 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eNodeTypeRefEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass eRequirementsEClass = null;
 
   /**
@@ -664,6 +666,41 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
   private EClass eMapEntryEClass = null;
 
   /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eEntityReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eprefiX_TYPEEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eprefiX_IDEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eprimitivE_TYPEEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eEntityEClass = null;
+
+  /**
    * Creates an instance of the model <b>Package</b>, registered with
    * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
    * package URI value.
@@ -743,29 +780,29 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EAttribute getRM_Model_Module()
+  {
+    return (EAttribute)rM_ModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getRM_Model_Imports()
+  {
+    return (EAttribute)rM_ModelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getRM_Model_DataTypes()
-  {
-    return (EReference)rM_ModelEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getRM_Model_ArtifactTypes()
-  {
-    return (EReference)rM_ModelEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getRM_Model_CapabilityTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(2);
   }
@@ -776,7 +813,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_InterfaceTypes()
+  public EReference getRM_Model_ArtifactTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(3);
   }
@@ -787,7 +824,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_RelationshipTypes()
+  public EReference getRM_Model_CapabilityTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(4);
   }
@@ -798,7 +835,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_NodeTypes()
+  public EReference getRM_Model_InterfaceTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(5);
   }
@@ -809,9 +846,31 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_PolicyTypes()
+  public EReference getRM_Model_RelationshipTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getRM_Model_NodeTypes()
+  {
+    return (EReference)rM_ModelEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getRM_Model_PolicyTypes()
+  {
+    return (EReference)rM_ModelEClass.getEStructuralFeatures().get(8);
   }
 
   /**
@@ -853,9 +912,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getEDataType_Name()
+  public EReference getEDataType_Name()
   {
-    return (EAttribute)eDataTypeEClass.getEStructuralFeatures().get(0);
+    return (EReference)eDataTypeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -922,6 +981,28 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
   public EReference getEDataTypeBody_Properties()
   {
     return (EReference)eDataTypeBodyEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEDataTypeName()
+  {
+    return eDataTypeNameEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEDataTypeName_Type()
+  {
+    return (EAttribute)eDataTypeNameEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2448,9 +2529,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getGetAttributeBody_Entity()
+  public EReference getGetAttributeBody_Entity()
   {
-    return (EAttribute)getAttributeBodyEClass.getEStructuralFeatures().get(1);
+    return (EReference)getAttributeBodyEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2514,9 +2595,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getGetPropertyBody_Entity()
+  public EReference getGetPropertyBody_Entity()
   {
-    return (EAttribute)getPropertyBodyEClass.getEStructuralFeatures().get(1);
+    return (EReference)getPropertyBodyEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2693,28 +2774,6 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
   public EReference getEValidSourceType_SourceType()
   {
     return (EReference)eValidSourceTypeEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getENodeTypeRef()
-  {
-    return eNodeTypeRefEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getENodeTypeRef_Name()
-  {
-    return (EReference)eNodeTypeRefEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3317,6 +3376,105 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EClass getEEntityReference()
+  {
+    return eEntityReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEPREFIX_TYPE()
+  {
+    return eprefiX_TYPEEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEPREFIX_TYPE_Module()
+  {
+    return (EAttribute)eprefiX_TYPEEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEPREFIX_ID()
+  {
+    return eprefiX_IDEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEPREFIX_ID_Module()
+  {
+    return (EAttribute)eprefiX_IDEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEPREFIX_ID_Id()
+  {
+    return (EAttribute)eprefiX_IDEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEPRIMITIVE_TYPE()
+  {
+    return eprimitivE_TYPEEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEEntity()
+  {
+    return eEntityEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEEntity_Entity()
+  {
+    return (EAttribute)eEntityEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public RMFactory getRMFactory()
   {
     return (RMFactory)getEFactoryInstance();
@@ -3343,6 +3501,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     // Create classes and their features
     rM_ModelEClass = createEClass(RM_MODEL);
+    createEAttribute(rM_ModelEClass, RM_MODEL__MODULE);
+    createEAttribute(rM_ModelEClass, RM_MODEL__IMPORTS);
     createEReference(rM_ModelEClass, RM_MODEL__DATA_TYPES);
     createEReference(rM_ModelEClass, RM_MODEL__ARTIFACT_TYPES);
     createEReference(rM_ModelEClass, RM_MODEL__CAPABILITY_TYPES);
@@ -3355,7 +3515,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eDataTypesEClass, EDATA_TYPES__DATA_TYPES);
 
     eDataTypeEClass = createEClass(EDATA_TYPE);
-    createEAttribute(eDataTypeEClass, EDATA_TYPE__NAME);
+    createEReference(eDataTypeEClass, EDATA_TYPE__NAME);
     createEReference(eDataTypeEClass, EDATA_TYPE__DATA);
 
     eDataTypeBodyEClass = createEClass(EDATA_TYPE_BODY);
@@ -3363,6 +3523,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEAttribute(eDataTypeBodyEClass, EDATA_TYPE_BODY__DESCRIPTION);
     createEReference(eDataTypeBodyEClass, EDATA_TYPE_BODY__CONSTRAINTS);
     createEReference(eDataTypeBodyEClass, EDATA_TYPE_BODY__PROPERTIES);
+
+    eDataTypeNameEClass = createEClass(EDATA_TYPE_NAME);
+    createEAttribute(eDataTypeNameEClass, EDATA_TYPE_NAME__TYPE);
 
     eArtifactTypesEClass = createEClass(EARTIFACT_TYPES);
     createEReference(eArtifactTypesEClass, EARTIFACT_TYPES__ARTIFACT_TYPES);
@@ -3545,7 +3708,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     getAttributeBodyEClass = createEClass(GET_ATTRIBUTE_BODY);
     createEReference(getAttributeBodyEClass, GET_ATTRIBUTE_BODY__ATTRIBUTE);
-    createEAttribute(getAttributeBodyEClass, GET_ATTRIBUTE_BODY__ENTITY);
+    createEReference(getAttributeBodyEClass, GET_ATTRIBUTE_BODY__ENTITY);
     createEReference(getAttributeBodyEClass, GET_ATTRIBUTE_BODY__REQ_CAP);
 
     getPropertyEClass = createEClass(GET_PROPERTY);
@@ -3553,7 +3716,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     getPropertyBodyEClass = createEClass(GET_PROPERTY_BODY);
     createEReference(getPropertyBodyEClass, GET_PROPERTY_BODY__PROPERTY);
-    createEAttribute(getPropertyBodyEClass, GET_PROPERTY_BODY__ENTITY);
+    createEReference(getPropertyBodyEClass, GET_PROPERTY_BODY__ENTITY);
     createEReference(getPropertyBodyEClass, GET_PROPERTY_BODY__REQ_CAP);
 
     eCapabilitiesEClass = createEClass(ECAPABILITIES);
@@ -3574,9 +3737,6 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eValidSourceTypeEClass = createEClass(EVALID_SOURCE_TYPE);
     createEReference(eValidSourceTypeEClass, EVALID_SOURCE_TYPE__SOURCE_TYPES);
     createEReference(eValidSourceTypeEClass, EVALID_SOURCE_TYPE__SOURCE_TYPE);
-
-    eNodeTypeRefEClass = createEClass(ENODE_TYPE_REF);
-    createEReference(eNodeTypeRefEClass, ENODE_TYPE_REF__NAME);
 
     eRequirementsEClass = createEClass(EREQUIREMENTS);
     createEReference(eRequirementsEClass, EREQUIREMENTS__REQUIREMENTS);
@@ -3657,6 +3817,20 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eMapEntryEClass = createEClass(EMAP_ENTRY);
     createEAttribute(eMapEntryEClass, EMAP_ENTRY__KEY);
     createEReference(eMapEntryEClass, EMAP_ENTRY__VALUE);
+
+    eEntityReferenceEClass = createEClass(EENTITY_REFERENCE);
+
+    eprefiX_TYPEEClass = createEClass(EPREFIX_TYPE);
+    createEAttribute(eprefiX_TYPEEClass, EPREFIX_TYPE__MODULE);
+
+    eprefiX_IDEClass = createEClass(EPREFIX_ID);
+    createEAttribute(eprefiX_IDEClass, EPREFIX_ID__MODULE);
+    createEAttribute(eprefiX_IDEClass, EPREFIX_ID__ID);
+
+    eprimitivE_TYPEEClass = createEClass(EPRIMITIVE_TYPE);
+
+    eEntityEClass = createEClass(EENTITY);
+    createEAttribute(eEntityEClass, EENTITY__ENTITY);
   }
 
   /**
@@ -3716,9 +3890,16 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     esignedintEClass.getESuperTypes().add(this.getESingleValue());
     esignedintEClass.getESuperTypes().add(this.getEAlphaNumericValue());
     emapEClass.getESuperTypes().add(this.getEAssignmentValue());
+    eprefiX_TYPEEClass.getESuperTypes().add(this.getEDataTypeName());
+    eprefiX_TYPEEClass.getESuperTypes().add(this.getEEntityReference());
+    eprefiX_IDEClass.getESuperTypes().add(this.getEEntityReference());
+    eprimitivE_TYPEEClass.getESuperTypes().add(this.getEDataTypeName());
+    eEntityEClass.getESuperTypes().add(this.getEEntityReference());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rM_ModelEClass, RM_Model.class, "RM_Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRM_Model_Module(), ecorePackage.getEString(), "module", null, 0, 1, RM_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRM_Model_Imports(), ecorePackage.getEString(), "imports", null, 0, -1, RM_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRM_Model_DataTypes(), this.getEDataTypes(), null, "dataTypes", null, 0, 1, RM_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRM_Model_ArtifactTypes(), this.getEArtifactTypes(), null, "artifactTypes", null, 0, 1, RM_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRM_Model_CapabilityTypes(), this.getECapabilityTypes(), null, "capabilityTypes", null, 0, 1, RM_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3731,14 +3912,17 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEDataTypes_DataTypes(), this.getEDataType(), null, "dataTypes", null, 0, -1, EDataTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDataTypeEClass, EDataType.class, "EDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEDataType_Name(), ecorePackage.getEString(), "name", null, 0, 1, EDataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEDataType_Name(), this.getEDataTypeName(), null, "name", null, 0, 1, EDataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEDataType_Data(), this.getEDataTypeBody(), null, "data", null, 0, 1, EDataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDataTypeBodyEClass, EDataTypeBody.class, "EDataTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEDataTypeBody_SuperType(), this.getEDataType(), null, "superType", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEDataTypeBody_SuperType(), this.getEDataTypeName(), null, "superType", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEDataTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEDataTypeBody_Constraints(), this.getEConstraints(), null, "constraints", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEDataTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, EDataTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eDataTypeNameEClass, EDataTypeName.class, "EDataTypeName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEDataTypeName_Type(), ecorePackage.getEString(), "type", null, 0, 1, EDataTypeName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eArtifactTypesEClass, EArtifactTypes.class, "EArtifactTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEArtifactTypes_ArtifactTypes(), this.getEArtifactType(), null, "artifactTypes", null, 0, -1, EArtifactTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3748,7 +3932,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEArtifactType_Artifact(), this.getEArtifactTypeBody(), null, "artifact", null, 0, 1, EArtifactType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eArtifactTypeBodyEClass, EArtifactTypeBody.class, "EArtifactTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEArtifactTypeBody_SuperType(), this.getEArtifactType(), null, "superType", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEArtifactTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEArtifactTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEArtifactTypeBody_Mime_type(), ecorePackage.getEString(), "mime_type", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEArtifactTypeBody_File_ext(), ecorePackage.getEString(), "file_ext", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3761,7 +3945,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getECapabilityType_Capability(), this.getECapabilityTypeBody(), null, "capability", null, 0, 1, ECapabilityType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eCapabilityTypeBodyEClass, ECapabilityTypeBody.class, "ECapabilityTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getECapabilityTypeBody_SuperType(), this.getECapabilityType(), null, "superType", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getECapabilityTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getECapabilityTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityTypeBody_Atributes(), this.getEAttributes(), null, "atributes", null, 0, 1, ECapabilityTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3774,7 +3958,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEInterfaceType_Interface(), this.getEInterfaceTypeBody(), null, "interface", null, 0, 1, EInterfaceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eInterfaceTypeBodyEClass, EInterfaceTypeBody.class, "EInterfaceTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEInterfaceTypeBody_SuperType(), this.getEInterfaceType(), null, "superType", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEInterfaceTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEInterfaceTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEInterfaceTypeBody_Inputs(), this.getEProperties(), null, "inputs", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEInterfaceTypeBody_Operations(), this.getEOperations(), null, "operations", null, 0, 1, EInterfaceTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3787,7 +3971,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEPolicyType_Policy(), this.getEPolicyTypeBody(), null, "policy", null, 0, 1, EPolicyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePolicyTypeBodyEClass, EPolicyTypeBody.class, "EPolicyTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEPolicyTypeBody_SuperType(), this.getEPolicyType(), null, "superType", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPolicyTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPolicyTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eNodeTypesEClass, ENodeTypes.class, "ENodeTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3798,7 +3982,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getENodeType_Node(), this.getENodeTypeBody(), null, "node", null, 0, 1, ENodeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eNodeTypeBodyEClass, ENodeTypeBody.class, "ENodeTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getENodeTypeBody_SuperType(), this.getENodeType(), null, "superType", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getENodeTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getENodeTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getENodeTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getENodeTypeBody_Attributes(), this.getEAttributes(), null, "attributes", null, 0, 1, ENodeTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3814,7 +3998,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getERelationshipType_Relationship(), this.getERelationshipTypeBody(), null, "relationship", null, 0, 1, ERelationshipType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRelationshipTypeBodyEClass, ERelationshipTypeBody.class, "ERelationshipTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getERelationshipTypeBody_SuperType(), this.getERelationshipType(), null, "superType", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getERelationshipTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getERelationshipTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getERelationshipTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getERelationshipTypeBody_Atributes(), this.getEAttributes(), null, "atributes", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3826,7 +4010,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEValidTargetTypes_SourceType(), this.getECapabilityTypeRef(), null, "sourceType", null, 0, -1, EValidTargetTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eCapabilityTypeRefEClass, ECapabilityTypeRef.class, "ECapabilityTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getECapabilityTypeRef_Name(), this.getECapabilityType(), null, "name", null, 0, 1, ECapabilityTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getECapabilityTypeRef_Name(), this.getEPREFIX_TYPE(), null, "name", null, 0, 1, ECapabilityTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePropertiesEClass, EProperties.class, "EProperties", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEProperties_Properties(), this.getEPropertyDefinition(), null, "properties", null, 0, -1, EProperties.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3836,13 +4020,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEPropertyDefinition_Property(), this.getEPropertyDefinitionBody(), null, "property", null, 0, 1, EPropertyDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePropertyDefinitionBodyEClass, EPropertyDefinitionBody.class, "EPropertyDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEPropertyDefinitionBody_Type(), this.getEDataType(), null, "type", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPropertyDefinitionBody_Type(), this.getEDataTypeName(), null, "type", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPropertyDefinitionBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPropertyDefinitionBody_Required(), ecorePackage.getEBoolean(), "required", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPropertyDefinitionBody_Default(), this.getEValueExpression(), null, "default", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPropertyDefinitionBody_Status(), ecorePackage.getEString(), "status", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPropertyDefinitionBody_Constraints(), this.getEConstraints(), null, "constraints", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPropertyDefinitionBody_Entry_schema(), this.getEDataType(), null, "entry_schema", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPropertyDefinitionBody_Entry_schema(), this.getEDataTypeName(), null, "entry_schema", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eAttributesEClass, EAttributes.class, "EAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEAttributes_Attributes(), this.getEAttributeDefinition(), null, "attributes", null, 0, -1, EAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3852,11 +4036,11 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEAttributeDefinition_Attribute(), this.getEAttributeDefinitionBody(), null, "attribute", null, 0, 1, EAttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eAttributeDefinitionBodyEClass, EAttributeDefinitionBody.class, "EAttributeDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEAttributeDefinitionBody_Type(), this.getEDataType(), null, "type", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEAttributeDefinitionBody_Type(), this.getEDataTypeName(), null, "type", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEAttributeDefinitionBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEAttributeDefinitionBody_Default(), this.getEValueExpression(), null, "default", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEAttributeDefinitionBody_Status(), ecorePackage.getEString(), "status", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEAttributeDefinitionBody_Entry_schema(), this.getEDataType(), null, "entry_schema", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEAttributeDefinitionBody_Entry_schema(), this.getEDataTypeName(), null, "entry_schema", null, 0, 1, EAttributeDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eInterfacesEClass, EInterfaces.class, "EInterfaces", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEInterfaces_Interfaces(), this.getEInterfaceDefinition(), null, "interfaces", null, 0, -1, EInterfaces.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3866,7 +4050,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEInterfaceDefinition_Interface(), this.getEInterfaceDefinitionBody(), null, "interface", null, 0, 1, EInterfaceDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eInterfaceDefinitionBodyEClass, EInterfaceDefinitionBody.class, "EInterfaceDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEInterfaceDefinitionBody_Type(), this.getEInterfaceType(), null, "type", null, 0, 1, EInterfaceDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEInterfaceDefinitionBody_Type(), this.getEPREFIX_TYPE(), null, "type", null, 0, 1, EInterfaceDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEInterfaceDefinitionBody_Inputs(), this.getEProperties(), null, "inputs", null, 0, 1, EInterfaceDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEInterfaceDefinitionBody_Operations(), this.getEOperations(), null, "operations", null, 0, 1, EInterfaceDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3905,7 +4089,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEParameterDefinition_Parameter(), this.getEParameterDefinitionBody(), null, "parameter", null, 0, 1, EParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eParameterDefinitionBodyEClass, EParameterDefinitionBody.class, "EParameterDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEParameterDefinitionBody_Type(), this.getEDataType(), null, "type", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEParameterDefinitionBody_Type(), this.getEDataTypeName(), null, "type", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParameterDefinitionBody_Value(), this.getEValueExpression(), null, "value", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParameterDefinitionBody_Default(), this.getEValueExpression(), null, "default", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3920,17 +4104,17 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getGetAttribute_Attribute(), this.getGetAttributeBody(), null, "attribute", null, 0, 1, GetAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getAttributeBodyEClass, GetAttributeBody.class, "GetAttributeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGetAttributeBody_Attribute(), this.getEAttributeDefinition(), null, "attribute", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGetAttributeBody_Entity(), ecorePackage.getEString(), "entity", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getGetAttributeBody_Req_cap(), this.getEReqOrCap(), null, "req_cap", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetAttributeBody_Attribute(), this.getEPREFIX_TYPE(), null, "attribute", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetAttributeBody_Entity(), this.getEEntityReference(), null, "entity", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetAttributeBody_Req_cap(), this.getEPREFIX_TYPE(), null, "req_cap", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getPropertyEClass, GetProperty.class, "GetProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGetProperty_Property(), this.getGetPropertyBody(), null, "property", null, 0, 1, GetProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getPropertyBodyEClass, GetPropertyBody.class, "GetPropertyBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGetPropertyBody_Property(), this.getEPropertyDefinition(), null, "property", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGetPropertyBody_Entity(), ecorePackage.getEString(), "entity", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getGetPropertyBody_Req_cap(), this.getEReqOrCap(), null, "req_cap", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetPropertyBody_Property(), this.getEPREFIX_TYPE(), null, "property", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetPropertyBody_Entity(), this.getEEntityReference(), null, "entity", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetPropertyBody_Req_cap(), this.getEPREFIX_TYPE(), null, "req_cap", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eCapabilitiesEClass, ECapabilities.class, "ECapabilities", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getECapabilities_Capabilities(), this.getECapabilityDefinition(), null, "capabilities", null, 0, -1, ECapabilities.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3939,7 +4123,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getECapabilityDefinition_Capability(), this.getECapabilityDefinitionBody(), null, "capability", null, 0, 1, ECapabilityDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eCapabilityDefinitionBodyEClass, ECapabilityDefinitionBody.class, "ECapabilityDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getECapabilityDefinitionBody_Type(), this.getECapabilityType(), null, "type", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getECapabilityDefinitionBody_Type(), this.getEPREFIX_TYPE(), null, "type", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getECapabilityDefinitionBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityDefinitionBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityDefinitionBody_Attributes(), this.getEAttributes(), null, "attributes", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3948,11 +4132,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getECapabilityDefinitionBody_Occurrences_end(), this.getEAlphaNumericValue(), null, "occurrences_end", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eValidSourceTypeEClass, EValidSourceType.class, "EValidSourceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEValidSourceType_SourceTypes(), this.getENodeTypeRef(), null, "sourceTypes", null, 0, -1, EValidSourceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEValidSourceType_SourceType(), this.getENodeTypeRef(), null, "sourceType", null, 0, -1, EValidSourceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eNodeTypeRefEClass, ENodeTypeRef.class, "ENodeTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getENodeTypeRef_Name(), this.getENodeType(), null, "name", null, 0, 1, ENodeTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEValidSourceType_SourceTypes(), this.getEPREFIX_TYPE(), null, "sourceTypes", null, 0, -1, EValidSourceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEValidSourceType_SourceType(), this.getEPREFIX_TYPE(), null, "sourceType", null, 0, -1, EValidSourceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRequirementsEClass, ERequirements.class, "ERequirements", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getERequirements_Requirements(), this.getERequirementDefinition(), null, "requirements", null, 0, -1, ERequirements.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3961,9 +4142,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getERequirementDefinition_Requirement(), this.getERequirementDefinitionBody(), null, "requirement", null, 0, 1, ERequirementDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRequirementDefinitionBodyEClass, ERequirementDefinitionBody.class, "ERequirementDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getERequirementDefinitionBody_Capability(), this.getECapabilityType(), null, "capability", null, 0, 1, ERequirementDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERequirementDefinitionBody_Node(), this.getENodeType(), null, "node", null, 0, 1, ERequirementDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERequirementDefinitionBody_Relationship(), this.getERelationshipType(), null, "relationship", null, 0, 1, ERequirementDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getERequirementDefinitionBody_Capability(), this.getEPREFIX_TYPE(), null, "capability", null, 0, 1, ERequirementDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getERequirementDefinitionBody_Node(), this.getEPREFIX_TYPE(), null, "node", null, 0, 1, ERequirementDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getERequirementDefinitionBody_Relationship(), this.getEPREFIX_TYPE(), null, "relationship", null, 0, 1, ERequirementDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getERequirementDefinitionBody_Start(), this.getEAlphaNumericValue(), null, "start", null, 0, 1, ERequirementDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getERequirementDefinitionBody_End(), this.getEAlphaNumericValue(), null, "end", null, 0, 1, ERequirementDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4033,6 +4214,20 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEClass(eMapEntryEClass, EMapEntry.class, "EMapEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEMapEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEMapEntry_Value(), this.getEAssignmentValue(), null, "value", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eEntityReferenceEClass, EEntityReference.class, "EEntityReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eprefiX_TYPEEClass, org.sodalite.dsl.rM.EPREFIX_TYPE.class, "EPREFIX_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEPREFIX_TYPE_Module(), ecorePackage.getEString(), "module", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_TYPE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eprefiX_IDEClass, org.sodalite.dsl.rM.EPREFIX_ID.class, "EPREFIX_ID", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEPREFIX_ID_Module(), ecorePackage.getEString(), "module", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_ID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEPREFIX_ID_Id(), ecorePackage.getEString(), "id", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_ID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eprimitivE_TYPEEClass, org.sodalite.dsl.rM.EPRIMITIVE_TYPE.class, "EPRIMITIVE_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eEntityEClass, EEntity.class, "EEntity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEEntity_Entity(), ecorePackage.getEString(), "entity", null, 0, 1, EEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

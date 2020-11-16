@@ -1,3 +1,8 @@
+module: vehicleiot
+
+import: openstack
+import: docker
+
 inputs:
 	docker-registry-ip:  
 		type: string 
@@ -34,7 +39,7 @@ inputs:
 		
 node_templates:
 	security-rules-vehicle-iot-full:  
-		type: sodalite.nodes.OpenStack.SecurityRules 
+		type: openstack/sodalite.nodes.OpenStack.SecurityRules 
 		properties:  
 			ports:  
 				knowgo_gateway_ports:  
@@ -51,7 +56,7 @@ node_templates:
 			group_description:  'Vehicle IoT Full - security group' 
 
 	vehicle-iot-vm:  
-		type: sodalite.nodes.OpenStack.VM 
+		type: openstack/sodalite.nodes.OpenStack.VM 
 		properties:  
 			name:  "vehicle-iot-demo"
 			key_name: get_input: ssh-key-name  
@@ -62,16 +67,16 @@ node_templates:
 			username:  'centos'
 		requirements:
 			protected_by: 
-				node: security-rules-vehicle-iot-full
-
+				node: vehicleiot/security-rules-vehicle-iot-full
+ 
 	vehicle-docker-host:
-		type: sodalite.nodes.DockerHost
+		type: docker/sodalite.nodes.DockerHost
 		requirements:
 			host: 
-				node: vehicle-iot-vm
+				node: vehicleiot/vehicle-iot-vm
 				
 	docker-registry-certificate-vehicle:
-		type: sodalite.nodes.RegistryCertificate
+		type: docker/sodalite.nodes.RegistryCertificate
 		properties:  
 			registry_ip: get_input: docker-registry-ip 
 			country_name: get_input: docker-registry-cert-country-name
@@ -79,41 +84,41 @@ node_templates:
 			email_address: get_input: docker-registry-cert-email-address
 		requirements:
 			host: 
-				node: vehicle-iot-vm 
+				node: vehicleiot/vehicle-iot-vm 
 			dependency: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 	
 	vehicle-docker-registry:
-		type: sodalite.nodes.DockerRegistry
+		type: docker/sodalite.nodes.DockerRegistry
 		properties:  
 			docker_registry_url: get_input: docker-registry-url 
 			docker_user:  get_input: dockerhub-user 
 			docker_pass:  get_input: dockerhub-pass 
 		requirements:
 			host: 
-				node: vehicle-iot-vm
+				node: vehicleiot/vehicle-iot-vm
 			dependency: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			dependency:
-				node: docker-registry-certificate-vehicle
+				node: vehicleiot/docker-registry-certificate-vehicle
 				
 	vehicle-docker-network:
-		type: sodalite.nodes.DockerNetwork
+		type: docker/sodalite.nodes.DockerNetwork
 		properties:  
 			name: get_input: docker-network
 		requirements:
 			host: 
-				node: vehicle-iot-vm 
+				node: vehicleiot/vehicle-iot-vm 
 			dependency: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 						
 	consul-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name: get_property: 
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network
 			alias: "consul"
 			image_name: "library/consul"
 			hostname: "consul"
@@ -124,30 +129,30 @@ node_templates:
 			registry_url: "provide_this_registry_url"      
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network  
+				node: vehicleiot/vehicle-docker-network  
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
 	
 	consul-container-test:
-		type: sodalite.nodes.TestComponent
+		type: docker/sodalite.nodes.TestComponent
 		properties:
 			test_port: 8500
 			test_delay: 5
 		requirements:
 			host: 
-				node: vehicle-iot-vm  
+				node: vehicleiot/vehicle-iot-vm  
 			tested_component: 
-				node: consul-container
+				node: vehicleiot/consul-container
 	
 	registrator-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network
 			alias: "registrator"
 			image_name: "adaptant/registrator:latest"
 			command: "-ip {{ public_address }} consul://consul:8500"
@@ -156,19 +161,19 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
- 				node: vehicle-docker-network 
+ 				node: vehicleiot/vehicle-docker-network 
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
 	
 	kafka-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network
 			alias: "kafka"
 			image_name: "adaptant/kafka-zookeeper"
 			ports: ["9092:9092"]
@@ -179,19 +184,19 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network     
+				node: vehicleiot/vehicle-docker-network     
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
 	
 	mysql-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network         
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network         
 			alias: "knowgo-mysql"
 			image_name: "library/mysql:latest"
 			command: "--default-authentication-plugin=mysql_native_password"
@@ -206,19 +211,19 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network  
+				node: vehicleiot/vehicle-docker-network  
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
 	
 	vin-decoder-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network         
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network         
 			alias: "vin-decoder"
 			image_name: "adaptant/vin-decoder-service:latest"
 			command: "--consul-agent consul:8500"
@@ -230,19 +235,19 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network 
+				node: vehicleiot/vehicle-docker-network 
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
 	
 	reverse-geocoder-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network         
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network         
 			alias: "reverse-geocoder"
 			image_name: "adaptant/reverse-geocoding-service:latest"
 			command: "--consul-agent consul:8500"
@@ -252,19 +257,19 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network 
+				node: vehicleiot/vehicle-docker-network 
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
 	
 	licenseplate-recognition-service-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network         
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network         
 			alias: "licenseplate-recognition-service"
 			image_name: "adaptant/licenseplate-recognition-service:latest"
 			command: "--consul-agent consul:8500"
@@ -274,19 +279,19 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network 
+				node: vehicleiot/vehicle-docker-network 
 			registry: 
-				node: vehicle-docker-registry			
+				node: vehicleiot/vehicle-docker-registry			
 				
 	knowgo-score-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network        
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network        
 			alias: "knowgo-score"
 			image_name: "adaptant/knowgo-score:latest"
 			command: "--consul-agent consul:8500"
@@ -296,19 +301,19 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network 
+				node: vehicleiot/vehicle-docker-network 
 			registry: 
-				node: vehicle-docker-registry			
+				node: vehicleiot/vehicle-docker-registry			
 				
 	openpolicyagent-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network        
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network        
 			alias: "opa"
 			image_name: "openpolicyagent/opa"
 			command: "run --server"
@@ -318,19 +323,19 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network 
+				node: vehicleiot/vehicle-docker-network 
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
         
 	region-router-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network          
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network          
 			alias: "region-router"
 			image_name: "adaptant/go-region-router:latest"
 			command: "--consul-agent consul:8500"
@@ -340,19 +345,19 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network 
+				node: vehicleiot/vehicle-docker-network 
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
         
 	mqtt-broker-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network         
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network         
 			alias: "mqtt-broker"
 			image_name: "library/eclipse-mosquitto:latest"
 			env:
@@ -361,30 +366,30 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network  
+				node: vehicleiot/vehicle-docker-network  
 			registry: 
-				node: vehicle-docker-registry 
+				node: vehicleiot/vehicle-docker-registry 
         
 	mqtt-broker-container-test:
-		type: sodalite.nodes.TestComponent
+		type: docker/sodalite.nodes.TestComponent
 		properties:
 			test_port: "1883"
 			test_delay: "5"
 		requirements:
 			host: 
-				node: vehicle-iot-vm       
+				node: vehicleiot/vehicle-iot-vm       
 			tested_component: 
-				node: mqtt-broker-container   
+				node: vehicleiot/mqtt-broker-container   
 				
 	knowgo-service-registry-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network         
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network         
 			alias: "knowgo-service-registry"
 			image_name: "adaptant/knowgo-service-registry:latest"
 			command: "--consul-agent consul:8500"
@@ -394,30 +399,30 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network 
+				node: vehicleiot/vehicle-docker-network 
 			registry: 
-				node: vehicle-docker-registry			
+				node: vehicleiot/vehicle-docker-registry			
 	
 	knowgo-service-registry-container-test:
-		type: sodalite.nodes.TestComponent
+		type: docker/sodalite.nodes.TestComponent
 		properties:
 			test_port: "3000"
 			test_delay: "5"
 		requirements:
 			host: 
-				node: vehicle-iot-vm 
+				node: vehicleiot/vehicle-iot-vm 
 			tested_component: 
-				node: knowgo-service-registry-container			
+				node: vehicleiot/knowgo-service-registry-container			
 				
 	knowgo-api-gateway-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network         
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network         
 			alias: "knowgo-api-gateway"
 			image_name: "adaptant/knowgo-api-gateway:latest"
 			command: "run --server"
@@ -431,36 +436,36 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network
+				node: vehicleiot/vehicle-docker-network
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
 	
 	knowgo-api-gateway-container-test:
-		type: sodalite.nodes.TestComponent
+		type: docker/sodalite.nodes.TestComponent
 		properties:
 			test_port: "8081"
 			test_delay: "5"
 		requirements:
 			host: 
-				node: vehicle-iot-vm
+				node: vehicleiot/vehicle-iot-vm
 			tested_component: 
-				node: knowgo-api-gateway-container			
+				node: vehicleiot/knowgo-api-gateway-container			
 				
 	prometheus-configuration:
-		type: sodalite.nodes.PrometheusConfiguration     
+		type: vehicleiot/sodalite.nodes.PrometheusConfiguration     
 		requirements:
 			host: 
-				node: vehicle-iot-vm
+				node: vehicleiot/vehicle-iot-vm
 				
 	prometheus-container:
-		type: sodalite.nodes.PrometheusDockerizedComponent
+		type: vehicleiot/sodalite.nodes.PrometheusDockerizedComponent
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network        
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network        
 			alias: "prometheus"
 			image_name: "prom/prometheus:latest"
 			volumes:["{{ lookup('env','HOME') }}/.knowgo/conf/prometheus:/etc/prometheus"]
@@ -470,32 +475,32 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network 
+				node: vehicleiot/vehicle-docker-network 
 			configuration: 
-				node: prometheus-configuration
+				node: vehicleiot/prometheus-configuration
 			registry: 
-				node: vehicle-docker-registry
+				node: vehicleiot/vehicle-docker-registry
 	
 	prometheus-container-test:
-		type: sodalite.nodes.TestComponent
+		type: docker/sodalite.nodes.TestComponent
 		properties:
 			test_port: "9091"
 			test_delay: "5"
 		requirements:
 			host: 
-				node: vehicle-iot-vm
+				node: vehicleiot/vehicle-iot-vm
 			tested_component: 
-				node: prometheus-container
+				node: vehicleiot/prometheus-container
 	
 	grafana-container:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: sodalite.nodes.DockerNetwork.name
-				req_cap: sodalite.nodes.DockerNetwork.network          
+				property: docker/sodalite.nodes.DockerNetwork.name
+				req_cap: docker/sodalite.nodes.DockerNetwork.network          
 			alias: "grafana"
 			image_name: "grafana/grafana:latest"
 			env:
@@ -505,11 +510,11 @@ node_templates:
 			registry_url: "provide_this_registry_url"
 		requirements:
 			host: 
-				node: vehicle-docker-host
+				node: vehicleiot/vehicle-docker-host
 			network: 
-				node: vehicle-docker-network 
+				node: vehicleiot/vehicle-docker-network 
 			registry: 
-				node: vehicle-docker-registry			
+				node: vehicleiot/vehicle-docker-registry			
 				
 				
 	

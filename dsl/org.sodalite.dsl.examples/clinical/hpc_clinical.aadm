@@ -1,3 +1,8 @@
+module: clinical
+
+import: hpc
+import: modak
+
 inputs:
     frontend-address:
       type: string
@@ -21,21 +26,21 @@ inputs:
 node_templates:
 
 	hpc-wm-torque:
-		type: sodalite.nodes.hpc.wm.torque
+		type: hpc/sodalite.nodes.hpc.wm.torque
 		attributes:
 			public_address: get_input: frontend-address
 			username: get_input: user 		
 			ssh-key: get_input: key-location 
 
 	modak-instance:
-		type: sodalite.nodes.modak
+		type: modak/sodalite.nodes.modak
 		properties:
 			endpoint: get_input: modak-endpoint
 
 	//image pulling
 
 	cadt-image:
-		type: sodalite.image_puller.singularity
+		type: hpc/sodalite.image_puller.singularity
 		properties:
 			output: "cadt.sif"
 			image: "cadt:1.0.0"
@@ -47,7 +52,7 @@ node_templates:
 				node: hpc-wm-torque
 				
 	moduli-image:
-		type: sodalite.image_puller.singularity
+		type: hpc/sodalite.image_puller.singularity
 		properties:
 			output: "moduli.sif"
 			image: "moduli:1.0.0"
@@ -59,7 +64,7 @@ node_templates:
 				node: hpc-wm-torque
 				
 	code-aster-image:
-		type: sodalite.image_puller.singularity
+		type: hpc/sodalite.image_puller.singularity
 		properties:
 			output: "code-aster.sif"
 			image: "quay.io/tianyikillua/code_aster"
@@ -71,7 +76,7 @@ node_templates:
 
 	//modak job parameters
 	density-mapping-modak-job:
-	  	type: sodalite.nodes.modak.job
+	  	type: modak/sodalite.nodes.modak.job
 	  	properties:
 	    	job_script: get_input: density-mapping-job-script
 	    	job_options:
@@ -100,7 +105,7 @@ node_templates:
 	    		node: cadt-image
 
 	probabilistic-mapping-modak-job: 
-	  	type: sodalite.nodes.modak.job
+	  	type: modak/sodalite.nodes.modak.job
 	  	properties:
 	    	job_script: get_input: probabilistic-mapping-job-script
 	    	job_options:
@@ -132,7 +137,7 @@ node_templates:
 
 
 	boundary-conditions-modak-job:
-	  	type: sodalite.nodes.modak.job
+	  	type: modak/sodalite.nodes.modak.job
 	  	properties:
 	    	job_script: get_input: boundary-conditions-job-script
 	    	job_options:
@@ -162,7 +167,7 @@ node_templates:
 				
 	//job configs
 	density-mapping-job-config: 
-		type: sodalite.nodes.hpc.job.torque.preconfigured
+		type: hpc/sodalite.nodes.hpc.job.torque.preconfigured
 		properties:
 			name: "density-mapping"
 			script: get_input: density-mapping-job-script
@@ -177,7 +182,7 @@ node_templates:
 	    		node: density-mapping-modak-job
 				
 	probabilistic-mapping-job-config:
-		type: sodalite.nodes.hpc.job.torque.preconfigured
+		type: hpc/sodalite.nodes.hpc.job.torque.preconfigured
 		properties:
 			name: "probabilistic-mapper"
 			script: get_input: probabilistic-mapping-job-script
@@ -192,7 +197,7 @@ node_templates:
 	    		node: probabilistic-mapping-modak-job
 				
 	boundary-conditions-job-config:
-		type: sodalite.nodes.hpc.job.torque.preconfigured
+		type: hpc/sodalite.nodes.hpc.job.torque.preconfigured
 		properties:
 			name: "boundary-conditions"
 			script: get_input: boundary-conditions-job-script
@@ -209,7 +214,7 @@ node_templates:
 	//job workflow
 
 	density-mapping-job:
-		type: sodalite.nodes.hpc.job.torque
+		type: hpc/sodalite.nodes.hpc.job.torque
 		requirements:
 			host: 
 				node: hpc-wm-torque
@@ -217,7 +222,7 @@ node_templates:
 				node: density-mapping-job-config
 
 	probabilistic-mapping-job:
-		type: sodalite.nodes.hpc.job.torque
+		type: hpc/sodalite.nodes.hpc.job.torque
 		requirements:
 			host: 
 				node: hpc-wm-torque
@@ -227,7 +232,7 @@ node_templates:
 				node: density-mapping-job-result
 
 	boundary-conditions-job:
-		type: sodalite.nodes.hpc.job.torque
+		type: hpc/sodalite.nodes.hpc.job.torque
 		requirements:
 			host: 
 				node: hpc-wm-torque
@@ -239,7 +244,7 @@ node_templates:
 	//job result
 
 	density-mapping-job-result:
-		type: sodalite.nodes.hpc.job.torque.result
+		type: hpc/sodalite.nodes.hpc.job.torque.result
 		requirements:
 			host: 
 				node: hpc-wm-torque
@@ -247,7 +252,7 @@ node_templates:
 				node: density-mapping-job
 
 	probabilistic-mapping-job-result:
-		type: sodalite.nodes.hpc.job.torque.result
+		type: hpc/sodalite.nodes.hpc.job.torque.result
 		requirements:
 			host: 
 				node: hpc-wm-torque
@@ -255,7 +260,7 @@ node_templates:
 				node: probabilistic-mapping-job
 
 	boundary-conditions-job-result:
-		type: sodalite.nodes.hpc.job.torque.result
+		type: hpc/sodalite.nodes.hpc.job.torque.result
 		requirements:
 			host: 
 				node: hpc-wm-torque

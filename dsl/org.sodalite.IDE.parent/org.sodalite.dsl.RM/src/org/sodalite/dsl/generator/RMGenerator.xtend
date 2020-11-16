@@ -47,6 +47,12 @@ import org.sodalite.dsl.rM.EAlphaNumericValue
 import org.sodalite.dsl.rM.EFLOAT
 import org.sodalite.dsl.rM.ESIGNEDINT
 import org.sodalite.dsl.rM.EBOOLEAN
+import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
+import org.sodalite.dsl.rM.EPREFIX_TYPE
+import org.sodalite.dsl.rM.EDataTypeName
+import org.sodalite.dsl.rM.EEntityReference
+import org.sodalite.dsl.rM.EEntity
+import org.sodalite.dsl.rM.EPREFIX_ID
 
 /**
  * Generates code from your model files on save.
@@ -180,7 +186,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "valid_values" ;
 	  «FOR v:(c.^val.list)»
-	  exchange:listValue "«v»" ;
+	  exchange:listValue "«trim(v.compile)»" ;
 	  «ENDFOR»
 	.		
 	«ENDIF»
@@ -189,7 +195,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "min_length" ;
-	  exchange:value "«c.^val»" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
 	.		
 	«ENDIF»
 	«IF c instanceof EGreaterThan»
@@ -197,7 +203,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "greater_than" ;
-	  exchange:value "«c.^val»" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
 	.		
 	«ENDIF»
 	«IF c instanceof EEqual»
@@ -205,7 +211,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "equal" ;
-	  exchange:value "«c.^val»" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
 	.		
 	«ENDIF»
 	«IF c instanceof EGreaterOrEqual»
@@ -213,7 +219,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "greater_or_equal" ;
-	  exchange:value "«c.^val»" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
 	.		
 	«ENDIF»
 	«IF c instanceof ELessThan»
@@ -221,7 +227,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "less_than" ;
-	  exchange:value "«c.^val»" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
 	.		
 	«ENDIF»
 	«IF c instanceof ELessOrEqual»
@@ -229,7 +235,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "less_or_equal" ;
-	  exchange:value "«c.^val»" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
 	.		
 	«ENDIF»
 	«IF c instanceof ELength»
@@ -237,7 +243,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "length" ;
-	  exchange:value "«c.^val»" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
 	.		
 	«ENDIF»
 	«IF c instanceof EMaxLength»
@@ -245,7 +251,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "max_length" ;
-	  exchange:value "«c.^val»" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
 	.		
 	«ENDIF»
 	'''
@@ -256,7 +262,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "capability" ;
-	  exchange:value '«r.requirement.capability.name»' ;
+	  «IF r.requirement.capability.module !== null»
+	  exchange:value '«r.requirement.capability.module»/«r.requirement.capability.type»' ;  
+	  «ELSE»
+	  exchange:value '«r.requirement.capability.type»' ;  
+	  «ENDIF»
 	.
 	«ENDIF»
 	
@@ -265,7 +275,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "node" ;
-	  exchange:value '«r.requirement.node.name»' ;
+	  «IF r.requirement.node.module !== null»
+	  exchange:value '«r.requirement.node.module»/«r.requirement.node.type»' ;  
+	  «ELSE»
+	  exchange:value '«r.requirement.node.type»' ;  
+	  «ENDIF»
 	.
 	«ENDIF»
 	
@@ -274,7 +288,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "relationship" ;	  
-	  exchange:value '«r.requirement.relationship.name»' ;
+	  «IF r.requirement.relationship.module !== null»
+	  exchange:value '«r.requirement.relationship.module»/«r.requirement.relationship.type»' ;  
+	  «ELSE»
+	  exchange:value '«r.requirement.relationship.type»' ;  
+	  «ENDIF»
 	.
 	«ENDIF»
 	
@@ -300,7 +318,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«c.capability.type.name»' ;
+	  exchange:value '«trim(c.capability.type.compile)»' ;
 	.
 	«ENDIF»
 	
@@ -311,7 +329,11 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "valid_source_types" ;
 	  «FOR entry:(c.capability.valid_source_types as EObjectContainmentEList<EValidSourceType>)»
 	  «FOR s:(entry.sourceTypes)»
-	  exchange:listValue "«s.name.name»" ;
+	  «IF s.module !== null»
+	  exchange:listValue "«s.module»/«s.type»" ;
+	  «ELSE»
+	  exchange:listValue "«s.type»" ;
+	  «ENDIF»
 	  «ENDFOR»
 	  «ENDFOR»
 	.
@@ -339,7 +361,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«i.interface.type.name»' ;
+	  exchange:value '«trim(i.interface.type.compile)»' ;
 	.
 	«ENDIF»
 	
@@ -509,7 +531,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "«p.name»" ;
 	  «IF p.parameter.type !== null»
-	  exchange:value '«p.parameter.type.name»' ;
+	  exchange:value '«p.parameter.type»' ;
 	  «ENDIF»
 	  «IF p.parameter.value !== null»
 	  «IF p.parameter.value instanceof EFunction»
@@ -534,7 +556,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "property" ;  
-	  exchange:value '«p.property.property.name»' ; 
+	  exchange:value '«lastSegment(p.property.property.type, ".")»' ; 
 	.
 	«ENDIF»	
 	
@@ -543,7 +565,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entity" ;  
-	  exchange:value '«p.property.entity»' ; 
+	  exchange:value '«trim(p.property.entity.compile())»' ; 
 	.
 	«ENDIF»	
 	
@@ -552,7 +574,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«p.property.req_cap.name»' ; 
+	  «IF p.property.req_cap.module !== null»
+	  exchange:value '«p.property.req_cap.module»/«p.property.req_cap.type»' ; 
+	  «ELSE»
+	  exchange:value '«p.property.req_cap.type»' ; 
+	  «ENDIF»
 	.
 	«ENDIF»		
 	
@@ -578,7 +604,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "attribute" ;  
-	  exchange:value '«a.attribute.attribute.name»' ; 
+	  exchange:value '«lastSegment(a.attribute.attribute.type, ".")»' ; 
 	.
 	«ENDIF»	
 	
@@ -587,7 +613,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entity" ;  
-	  exchange:value '«a.attribute.entity»' ; 
+	  exchange:value '«trim(a.attribute.entity.compile())»' ; 
 	.
 	«ENDIF»	
 	
@@ -596,7 +622,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«a.attribute.req_cap.name»' ; 
+	  «IF a.attribute.req_cap.module !== null»
+	  exchange:value '«a.attribute.req_cap.module»/«a.attribute.req_cap.type»' ; 
+	  «ELSE»
+	  exchange:value '«a.attribute.req_cap.type»' ; 
+	  «ENDIF»
 	.
 	«ENDIF»		
 	
@@ -620,7 +650,12 @@ class RMGenerator extends AbstractGenerator {
 	:CapabilityType_«capabilitytype_counter++»
 	  rdf:type exchange:CapabilityType ;
 	  exchange:name "«c.name»" ;
-	  exchange:derivesFrom "«c.capability.superType.name»" ;
+	  «IF c.capability.superType.module !== null»
+	  exchange:derivesFrom '«c.capability.superType.module»/«c.capability.superType.type»' ;  
+	  «ELSE»
+	  exchange:derivesFrom '«c.capability.superType.type»' ;  
+	  «ENDIF»	  
+	  
 	«IF c.capability.description !== null»
 	exchange:description '«processDescription(c.capability.description)»' ;
 	«ENDIF»
@@ -645,7 +680,11 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "valid_target_types" ;
 	  «FOR entry:(r.relationship.valid_target_types.targetTypes as EObjectContainmentEList<ECapabilityTypeRef>)»
-	  exchange:listValue "«entry.name.name»" ;
+	  «IF entry.name.module !== null»
+	  exchange:listValue '«entry.name.module»/«entry.name.type»' ; 
+	  «ELSE»
+	  exchange:listValue "«entry.name.type»" ; 
+	  «ENDIF»
 	  «ENDFOR»
 	.
 	«ENDIF»
@@ -653,7 +692,11 @@ class RMGenerator extends AbstractGenerator {
 	:RelationshipType_«relationship_counter++»
 	  rdf:type exchange:RelationshipType ;
 	  exchange:name "«r.name»" ;
-	  exchange:derivesFrom "«r.relationship.superType.name»" ;
+	  «IF r.relationship.superType.module !== null»
+	  exchange:derivesFrom '«r.relationship.superType.module»/«r.relationship.superType.type»' ;  
+	  «ELSE»
+	  exchange:derivesFrom '«r.relationship.superType.type»' ;  
+	  «ENDIF»	  
 	  «IF r.relationship.description !== null»
 	  exchange:description '«processDescription(r.relationship.description)»' ;
 	  «ENDIF»
@@ -685,7 +728,11 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
-	  exchange:derivesFrom "«n.node.superType.name»" ;
+	  «IF n.node.superType.module !== null»
+	  exchange:derivesFrom '«n.node.superType.module»/«n.node.superType.type»' ;  
+	  «ELSE»
+	  exchange:derivesFrom '«n.node.superType.type»' ;  
+	  «ENDIF»
 	  «IF n.node.properties !== null»
 	  «FOR p:n.node.properties.properties»
 	  exchange:properties :Property_«property_numbers.get(p)» ; 
@@ -717,10 +764,8 @@ class RMGenerator extends AbstractGenerator {
 	def compile(EDataType d) '''
 	:DataType_«data_type_counter++»
 	  rdf:type exchange:DataType ;
-	  exchange:name "«d.name»" ;
-	  «IF d.data.superType !== null»
-	  exchange:derivesFrom "«d.data.superType.name»" ;
-	  «ENDIF»
+	  exchange:name "«trim(d.name.compile)»" ;
+	  exchange:derivesFrom '«trim(d.data.superType.compile)»' ;
 	  «IF d.data.description !== null»
 	  exchange:description '«processDescription(d.data.description)»' ;
 	  «ENDIF»
@@ -738,7 +783,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«p.property.type.name»' ;
+	  exchange:value '«trim(p.property.type.compile)»' ;  
 	.
 	«ENDIF»
 	
@@ -778,7 +823,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«p.property.entry_schema.name»' ;
+	  exchange:value '«p.property.entry_schema»' ;
 	.
 	
 	«putParameterNumber(p, "entry_schema", parameter_counter)»
@@ -833,7 +878,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«a.attribute.type.name»' ;
+	  exchange:value '«trim(a.attribute.type.compile)»' ;
 	.
 	«ENDIF»
 	
@@ -866,7 +911,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entry_schema" ;
-	  exchange:value '«a.attribute.entry_schema.name»' ;
+	  exchange:value '«a.attribute.entry_schema»' ;
 	.
 	«ENDIF»
 	
@@ -922,6 +967,36 @@ class RMGenerator extends AbstractGenerator {
 	«ENDIF»
 	'''
 	
+	def compile (EDataTypeName t) '''
+	«IF t instanceof EPREFIX_TYPE»
+	  «(t as EPREFIX_TYPE).compile»  
+	«ELSEIF t instanceof EPRIMITIVE_TYPE»
+	  «(t as EPRIMITIVE_TYPE).compile»
+	«ENDIF»
+	'''
+	
+	def compile (EEntityReference t) '''
+	«IF t instanceof EPREFIX_TYPE»
+	  «(t as EPREFIX_TYPE).compile»
+	«ELSEIF t instanceof EPREFIX_ID»
+	  «(t as EPREFIX_ID).id»
+	«ELSEIF t instanceof EEntity»
+	  «(t as EEntity).entity»
+	«ENDIF»
+	'''
+	
+	def compile (EPRIMITIVE_TYPE t) '''
+	  «t.type»
+	'''
+	
+	def compile (EPREFIX_TYPE t) '''
+	«IF t.module !== null»
+	  «t.module»/«t.type»  
+	«ELSE»
+	  «t.type»
+	«ENDIF»
+	'''
+	
 	def processStringValue(String value) {
 		val processed = value.replaceAll('"', '\\\\"')
 		return processed
@@ -963,5 +1038,13 @@ class RMGenerator extends AbstractGenerator {
 	
 	def trim (String value) {
 		return value.trim
+	}
+	
+	def trim (CharSequence value) {
+		return value.toString.trim
+	}
+	
+	def lastSegment(String string, String delimiter){
+		return string.substring(string.lastIndexOf(delimiter) + 1)
 	}
 }

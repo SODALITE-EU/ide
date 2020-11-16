@@ -3,6 +3,8 @@
  */
 package org.sodalite.dsl.rM;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.dsl.rM.RM_Model#getModule <em>Module</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.RM_Model#getImports <em>Imports</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.RM_Model#getDataTypes <em>Data Types</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.RM_Model#getArtifactTypes <em>Artifact Types</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.RM_Model#getCapabilityTypes <em>Capability Types</em>}</li>
@@ -29,6 +33,40 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface RM_Model extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Module</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Module</em>' attribute.
+   * @see #setModule(String)
+   * @see org.sodalite.dsl.rM.RMPackage#getRM_Model_Module()
+   * @model
+   * @generated
+   */
+  String getModule();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.RM_Model#getModule <em>Module</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Module</em>' attribute.
+   * @see #getModule()
+   * @generated
+   */
+  void setModule(String value);
+
+  /**
+   * Returns the value of the '<em><b>Imports</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Imports</em>' attribute list.
+   * @see org.sodalite.dsl.rM.RMPackage#getRM_Model_Imports()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getImports();
+
   /**
    * Returns the value of the '<em><b>Data Types</b></em>' containment reference.
    * <!-- begin-user-doc -->

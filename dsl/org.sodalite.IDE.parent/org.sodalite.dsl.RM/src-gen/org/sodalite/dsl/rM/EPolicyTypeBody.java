@@ -25,26 +25,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface EPolicyTypeBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Super Type</b></em>' reference.
+   * Returns the value of the '<em><b>Super Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Type</em>' reference.
-   * @see #setSuperType(EPolicyType)
+   * @return the value of the '<em>Super Type</em>' containment reference.
+   * @see #setSuperType(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getEPolicyTypeBody_SuperType()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EPolicyType getSuperType();
+  EPREFIX_TYPE getSuperType();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getSuperType <em>Super Type</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getSuperType <em>Super Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Type</em>' reference.
+   * @param value the new value of the '<em>Super Type</em>' containment reference.
    * @see #getSuperType()
    * @generated
    */
-  void setSuperType(EPolicyType value);
+  void setSuperType(EPREFIX_TYPE value);
 
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.

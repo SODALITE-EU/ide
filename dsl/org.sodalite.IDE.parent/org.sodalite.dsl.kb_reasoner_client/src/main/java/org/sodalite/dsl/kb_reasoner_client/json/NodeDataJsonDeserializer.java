@@ -10,11 +10,11 @@
  *******************************************************************************/
 package org.sodalite.dsl.kb_reasoner_client.json;
 
-import org.sodalite.dsl.kb_reasoner_client.types.Node;
-import org.sodalite.dsl.kb_reasoner_client.types.NodeData;
+import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 
-public class NodeDataJsonDeserializer extends ReasonerDataJsonDeserializer<Node> {    
+public class NodeDataJsonDeserializer extends ReasonerDataJsonDeserializer<Type> {    
 	public NodeDataJsonDeserializer() {
-		super(new NodeData(), Node.class);
+		super(new TypeData(), Type.class);
 	}
 }

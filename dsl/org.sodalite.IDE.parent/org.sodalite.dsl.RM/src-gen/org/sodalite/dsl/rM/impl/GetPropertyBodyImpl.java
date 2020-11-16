@@ -4,6 +4,7 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -11,8 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EPropertyDefinition;
-import org.sodalite.dsl.rM.EReqOrCap;
+import org.sodalite.dsl.rM.EEntityReference;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -34,44 +35,34 @@ import org.sodalite.dsl.rM.RMPackage;
 public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements GetPropertyBody
 {
   /**
-   * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
+   * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getProperty()
    * @generated
    * @ordered
    */
-  protected EPropertyDefinition property;
+  protected EPREFIX_TYPE property;
 
   /**
-   * The default value of the '{@link #getEntity() <em>Entity</em>}' attribute.
+   * The cached value of the '{@link #getEntity() <em>Entity</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getEntity()
    * @generated
    * @ordered
    */
-  protected static final String ENTITY_EDEFAULT = null;
+  protected EEntityReference entity;
 
   /**
-   * The cached value of the '{@link #getEntity() <em>Entity</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEntity()
-   * @generated
-   * @ordered
-   */
-  protected String entity = ENTITY_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getReq_cap() <em>Req cap</em>}' reference.
+   * The cached value of the '{@link #getReq_cap() <em>Req cap</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getReq_cap()
    * @generated
    * @ordered
    */
-  protected EReqOrCap req_cap;
+  protected EPREFIX_TYPE req_cap;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,27 +91,7 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EPropertyDefinition getProperty()
-  {
-    if (property != null && property.eIsProxy())
-    {
-      InternalEObject oldProperty = (InternalEObject)property;
-      property = (EPropertyDefinition)eResolveProxy(oldProperty);
-      if (property != oldProperty)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.GET_PROPERTY_BODY__PROPERTY, oldProperty, property));
-      }
-    }
-    return property;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EPropertyDefinition basicGetProperty()
+  public EPREFIX_TYPE getProperty()
   {
     return property;
   }
@@ -130,13 +101,16 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setProperty(EPropertyDefinition newProperty)
+  public NotificationChain basicSetProperty(EPREFIX_TYPE newProperty, NotificationChain msgs)
   {
-    EPropertyDefinition oldProperty = property;
+    EPREFIX_TYPE oldProperty = property;
     property = newProperty;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__PROPERTY, oldProperty, property));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__PROPERTY, oldProperty, newProperty);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -145,7 +119,29 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public String getEntity()
+  public void setProperty(EPREFIX_TYPE newProperty)
+  {
+    if (newProperty != property)
+    {
+      NotificationChain msgs = null;
+      if (property != null)
+        msgs = ((InternalEObject)property).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__PROPERTY, null, msgs);
+      if (newProperty != null)
+        msgs = ((InternalEObject)newProperty).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__PROPERTY, null, msgs);
+      msgs = basicSetProperty(newProperty, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__PROPERTY, newProperty, newProperty));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEntityReference getEntity()
   {
     return entity;
   }
@@ -155,44 +151,16 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setEntity(String newEntity)
+  public NotificationChain basicSetEntity(EEntityReference newEntity, NotificationChain msgs)
   {
-    String oldEntity = entity;
+    EEntityReference oldEntity = entity;
     entity = newEntity;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__ENTITY, oldEntity, entity));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReqOrCap getReq_cap()
-  {
-    if (req_cap != null && req_cap.eIsProxy())
     {
-      InternalEObject oldReq_cap = (InternalEObject)req_cap;
-      req_cap = (EReqOrCap)eResolveProxy(oldReq_cap);
-      if (req_cap != oldReq_cap)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.GET_PROPERTY_BODY__REQ_CAP, oldReq_cap, req_cap));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__ENTITY, oldEntity, newEntity);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return req_cap;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReqOrCap basicGetReq_cap()
-  {
-    return req_cap;
+    return msgs;
   }
 
   /**
@@ -201,12 +169,90 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setReq_cap(EReqOrCap newReq_cap)
+  public void setEntity(EEntityReference newEntity)
   {
-    EReqOrCap oldReq_cap = req_cap;
+    if (newEntity != entity)
+    {
+      NotificationChain msgs = null;
+      if (entity != null)
+        msgs = ((InternalEObject)entity).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__ENTITY, null, msgs);
+      if (newEntity != null)
+        msgs = ((InternalEObject)newEntity).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__ENTITY, null, msgs);
+      msgs = basicSetEntity(newEntity, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__ENTITY, newEntity, newEntity));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPREFIX_TYPE getReq_cap()
+  {
+    return req_cap;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetReq_cap(EPREFIX_TYPE newReq_cap, NotificationChain msgs)
+  {
+    EPREFIX_TYPE oldReq_cap = req_cap;
     req_cap = newReq_cap;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__REQ_CAP, oldReq_cap, req_cap));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__REQ_CAP, oldReq_cap, newReq_cap);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setReq_cap(EPREFIX_TYPE newReq_cap)
+  {
+    if (newReq_cap != req_cap)
+    {
+      NotificationChain msgs = null;
+      if (req_cap != null)
+        msgs = ((InternalEObject)req_cap).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__REQ_CAP, null, msgs);
+      if (newReq_cap != null)
+        msgs = ((InternalEObject)newReq_cap).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.GET_PROPERTY_BODY__REQ_CAP, null, msgs);
+      msgs = basicSetReq_cap(newReq_cap, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.GET_PROPERTY_BODY__REQ_CAP, newReq_cap, newReq_cap));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.GET_PROPERTY_BODY__PROPERTY:
+        return basicSetProperty(null, msgs);
+      case RMPackage.GET_PROPERTY_BODY__ENTITY:
+        return basicSetEntity(null, msgs);
+      case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
+        return basicSetReq_cap(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -220,13 +266,11 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case RMPackage.GET_PROPERTY_BODY__PROPERTY:
-        if (resolve) return getProperty();
-        return basicGetProperty();
+        return getProperty();
       case RMPackage.GET_PROPERTY_BODY__ENTITY:
         return getEntity();
       case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
-        if (resolve) return getReq_cap();
-        return basicGetReq_cap();
+        return getReq_cap();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -242,13 +286,13 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case RMPackage.GET_PROPERTY_BODY__PROPERTY:
-        setProperty((EPropertyDefinition)newValue);
+        setProperty((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.GET_PROPERTY_BODY__ENTITY:
-        setEntity((String)newValue);
+        setEntity((EEntityReference)newValue);
         return;
       case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
-        setReq_cap((EReqOrCap)newValue);
+        setReq_cap((EPREFIX_TYPE)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -265,13 +309,13 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case RMPackage.GET_PROPERTY_BODY__PROPERTY:
-        setProperty((EPropertyDefinition)null);
+        setProperty((EPREFIX_TYPE)null);
         return;
       case RMPackage.GET_PROPERTY_BODY__ENTITY:
-        setEntity(ENTITY_EDEFAULT);
+        setEntity((EEntityReference)null);
         return;
       case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
-        setReq_cap((EReqOrCap)null);
+        setReq_cap((EPREFIX_TYPE)null);
         return;
     }
     super.eUnset(featureID);
@@ -290,28 +334,11 @@ public class GetPropertyBodyImpl extends MinimalEObjectImpl.Container implements
       case RMPackage.GET_PROPERTY_BODY__PROPERTY:
         return property != null;
       case RMPackage.GET_PROPERTY_BODY__ENTITY:
-        return ENTITY_EDEFAULT == null ? entity != null : !ENTITY_EDEFAULT.equals(entity);
+        return entity != null;
       case RMPackage.GET_PROPERTY_BODY__REQ_CAP:
         return req_cap != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (entity: ");
-    result.append(entity);
-    result.append(')');
-    return result.toString();
   }
 
 } //GetPropertyBodyImpl

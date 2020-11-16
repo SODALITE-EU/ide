@@ -1,3 +1,5 @@
+module: modak
+
 data_types:
 	//Job options
 	sodalite.datatypes.modak.job_options:
@@ -121,7 +123,7 @@ data_types:
 				type: map
 				required: false
 				default: "null"
-				entry_schema: sodalite.datatypes.modak.build				
+				entry_schema: modak/sodalite.datatypes.modak.build				
 				
 	//Target
 	sodalite.datatypes.modak.target:
@@ -196,7 +198,7 @@ data_types:
 				type: integer
 			etl:
 				type: map
-				entry_schema: sodalite.datatypes.modak.optimisation.ai_training.data.etl							
+				entry_schema: modak/sodalite.datatypes.modak.optimisation.ai_training.data.etl							
 
 	sodalite.datatypes.modak.optimisation.ai_training.ai_framework-keras:
 		derived_from: tosca.datatypes.Root
@@ -229,19 +231,19 @@ data_types:
 		properties:
 			config:
 				type: map
-				entry_schema: sodalite.datatypes.modak.optimisation.ai_training.config
+				entry_schema: modak/sodalite.datatypes.modak.optimisation.ai_training.config
 			data:
 				type: map
-				entry_schema: sodalite.datatypes.modak.optimisation.ai_training.data
+				entry_schema: modak/sodalite.datatypes.modak.optimisation.ai_training.data
 			ai_framework-keras:
 				type: map
-				entry_schema: sodalite.datatypes.modak.optimisation.ai_training.ai_framework-keras
+				entry_schema: modak/sodalite.datatypes.modak.optimisation.ai_training.ai_framework-keras
 			ai_framework-tensorflow:
 				type: map
-				entry_schema: sodalite.datatypes.modak.optimisation.ai_training.ai_framework-tensorflow
+				entry_schema: modak/sodalite.datatypes.modak.optimisation.ai_training.ai_framework-tensorflow
 			ai_framework-pytorch:
 				type: map
-				entry_schema: sodalite.datatypes.modak.optimisation.ai_training.ai_framework-pytorch       
+				entry_schema: modak/sodalite.datatypes.modak.optimisation.ai_training.ai_framework-pytorch       
 
 	//Optimization HPC	
 	sodalite.datatypes.modak.optimisation.hpc.config:
@@ -275,7 +277,7 @@ data_types:
 				type: integer
 			etl:
 				type: map
-				entry_schema: sodalite.datatypes.modak.optimisation.hpc.data.etl 
+				entry_schema: modak/sodalite.datatypes.modak.optimisation.hpc.data.etl 
        
 	sodalite.datatypes.modak.optimisation.hpc.parallelisation-mpi:
 		derived_from: tosca.datatypes.Root
@@ -336,22 +338,22 @@ data_types:
     	properties:
       		config:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.hpc.config
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.hpc.config
       		data:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.hpc.data
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.hpc.data
       		parallelisation-mpi:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.hpc.parallelisation-mpi
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.hpc.parallelisation-mpi
       		parallelisation-openmp:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.hpc.parallelisation-openmp
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.hpc.parallelisation-openmp
       		parallelisation-opencc:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.hpc.parallelisation-opencc
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.hpc.parallelisation-opencc
       		parallelisation-opencl:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.hpc.parallelisation-opencl
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.hpc.parallelisation-opencl
 
 	//TODO: Optimization Big Data
 	sodalite.datatypes.modak.optimisation.big_data:
@@ -375,22 +377,22 @@ data_types:
          			valid_values: [ "ai_training", "hpc", "big_data", "ai_inference" ]
       		opt_build:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.opt_build
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.opt_build
       		autotuning:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.autotuning
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.autotuning
       		app_type-ai_training:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.ai_training
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.ai_training
       		app_type-hpc:
 				type: map
-				entry_schema: sodalite.datatypes.modak.optimisation.hpc
+				entry_schema: modak/sodalite.datatypes.modak.optimisation.hpc
       		app_type-big_data:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.big_data
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.big_data
       		app_type-ai_inference:
         		type: map
-        		entry_schema: sodalite.datatypes.modak.optimisation.ai_inference       		
+        		entry_schema: modak/sodalite.datatypes.modak.optimisation.ai_inference       		
 
 capability_types:
 	 sodalite.capabilities.modak.ModakEndpoint:
@@ -404,8 +406,8 @@ node_types:
         		type: string
     	capabilities:
       		modak_endpoint:
-        		type: sodalite.capabilities.modak.ModakEndpoint
-        		valid_source_types: [ sodalite.nodes.modak.job ]
+        		type: modak/sodalite.capabilities.modak.ModakEndpoint
+        		valid_source_types: [ modak/sodalite.nodes.modak.job ]
 
 
 	// here we can have the playbook that directly interfaces MODAK (src/docker)
@@ -417,16 +419,16 @@ node_types:
 				type: string
 			job_options:
 				type: map
-				entry_schema: sodalite.datatypes.modak.job_options
+				entry_schema: modak/sodalite.datatypes.modak.job_options
 			application:
 				type: map
-				entry_schema: sodalite.datatypes.modak.application
+				entry_schema: modak/sodalite.datatypes.modak.application
 			target:
 				type: map
-				entry_schema: sodalite.datatypes.modak.target
+				entry_schema: modak/sodalite.datatypes.modak.target
 			optimisation:
 				type: map
-				entry_schema: sodalite.datatypes.modak.optimisation
+				entry_schema: modak/sodalite.datatypes.modak.optimisation
 		attributes:
 			artifact_url:
 				type: string
@@ -434,8 +436,8 @@ node_types:
 				type: string
 		requirements:
 			modak_endpoint:
-				node: sodalite.nodes.modak
-				capability: sodalite.capabilities.modak.ModakEndpoint
+				node: modak/sodalite.nodes.modak
+				capability: modak/sodalite.capabilities.modak.ModakEndpoint
 				relationship: tosca.relationships.DependsOn
 				occurrences: [ 1, 1 ]
 		interfaces:
@@ -448,32 +450,32 @@ node_types:
 							job_script: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.modak.job.job_script
+									property: modak/sodalite.nodes.modak.job.job_script
 							//modak_endpoint properties
 							modak_endpoint: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.modak.endpoint
-									req_cap: sodalite.nodes.modak.job.modak_endpoint
+									property: modak/sodalite.nodes.modak.endpoint
+									req_cap: modak/sodalite.nodes.modak.job.modak_endpoint
 							//job_options properties
 							job_options: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.modak.job.job_options
+									property: modak/sodalite.nodes.modak.job.job_options
 							//application properties
 							application: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.modak.job.application
+									property: modak/sodalite.nodes.modak.job.application
 							//target properties
 							target: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.modak.job.target
+									property: modak/sodalite.nodes.modak.job.target
 							//optimisation properties
 							optimisation: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.modak.job.optimisation
+									property: modak/sodalite.nodes.modak.job.optimisation
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/modak/job/playbooks/create-modak-job.yml"	

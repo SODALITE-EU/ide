@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
 import java.util.Map.Entry;
 
 import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
-import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -44,13 +44,13 @@ public class AttributeJsonDeserializer extends JsonDeserializer<Attribute> {
         Attribute attribute = new Attribute();
 		if (objectNode.get("description")!=null)
 			attribute.setDescription(objectNode.get("description").asText());
-		JavaType javaType = TypeFactory.defaultInstance().constructType(Type.class);
+		JavaType javaType = TypeFactory.defaultInstance().constructType(SuperType.class);
 		if (objectNode.get("specification") != null) {
 			JsonNode spec = objectNode.get("specification");
 			if (spec.get("type")!=null) {
-				Type type = null;
+				SuperType type = null;
 				if (!spec.get("type").isContainerNode()){ //single type
-					type = new Type();
+					type = new SuperType();
 					type.setLabel(spec.get("type").asText());
 				}else {
 					type = mapper.readerFor(javaType).readValue(spec.get("type"));

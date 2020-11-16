@@ -20,6 +20,7 @@ import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.aADM.impl.ENodeTemplatesImpl;
+import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 
 /**
@@ -67,7 +68,8 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
           EObject _eContainer = nodeTemplate.eContainer();
           final ENodeTemplatesImpl model = ((ENodeTemplatesImpl) _eContainer);
           System.out.println(("Applying targetNode: " + targetNode));
-          req.setNode(targetNode);
+          EPREFIX_ID _node_1 = req.getNode();
+          _node_1.setId(targetNode);
         };
         acceptor.accept(issue, message, sub_message, "", _function);
       }

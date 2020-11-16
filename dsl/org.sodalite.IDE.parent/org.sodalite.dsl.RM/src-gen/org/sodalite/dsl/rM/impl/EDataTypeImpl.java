@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDataTypeBody;
+import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -33,24 +34,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EDataType
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected EDataTypeName name;
 
   /**
    * The cached value of the '{@link #getData() <em>Data</em>}' containment reference.
@@ -89,7 +80,7 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
    * @generated
    */
   @Override
-  public String getName()
+  public EDataTypeName getName()
   {
     return name;
   }
@@ -99,13 +90,38 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setName(String newName)
+  public NotificationChain basicSetName(EDataTypeName newName, NotificationChain msgs)
   {
-    String oldName = name;
+    EDataTypeName oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__NAME, oldName, name));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__NAME, oldName, newName);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(EDataTypeName newName)
+  {
+    if (newName != name)
+    {
+      NotificationChain msgs = null;
+      if (name != null)
+        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE__NAME, null, msgs);
+      if (newName != null)
+        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE__NAME, null, msgs);
+      msgs = basicSetName(newName, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE__NAME, newName, newName));
   }
 
   /**
@@ -168,6 +184,8 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
   {
     switch (featureID)
     {
+      case RMPackage.EDATA_TYPE__NAME:
+        return basicSetName(null, msgs);
       case RMPackage.EDATA_TYPE__DATA:
         return basicSetData(null, msgs);
     }
@@ -203,7 +221,7 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
     switch (featureID)
     {
       case RMPackage.EDATA_TYPE__NAME:
-        setName((String)newValue);
+        setName((EDataTypeName)newValue);
         return;
       case RMPackage.EDATA_TYPE__DATA:
         setData((EDataTypeBody)newValue);
@@ -223,7 +241,7 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
     switch (featureID)
     {
       case RMPackage.EDATA_TYPE__NAME:
-        setName(NAME_EDEFAULT);
+        setName((EDataTypeName)null);
         return;
       case RMPackage.EDATA_TYPE__DATA:
         setData((EDataTypeBody)null);
@@ -243,28 +261,11 @@ public class EDataTypeImpl extends MinimalEObjectImpl.Container implements EData
     switch (featureID)
     {
       case RMPackage.EDATA_TYPE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+        return name != null;
       case RMPackage.EDATA_TYPE__DATA:
         return data != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //EDataTypeImpl

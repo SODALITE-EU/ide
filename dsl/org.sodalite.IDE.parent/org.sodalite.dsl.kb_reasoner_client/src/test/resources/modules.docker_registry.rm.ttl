@@ -1,0 +1,350 @@
+# baseURI: https://www.sodalite.eu/ontologies/exchange/rm/
+# imports: https://www.sodalite.eu/ontologies/exchange/
+
+@prefix : <https://www.sodalite.eu/ontologies/exchange/rm/> .
+@prefix exchange: <https://www.sodalite.eu/ontologies/exchange/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:
+  rdf:type owl:Ontology ;
+  owl:imports exchange: ;
+  owl:versionInfo "Created by the SODALITE IDE" ;
+.
+
+:RM_1
+  rdf:type exchange:RM ;
+  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
+.
+
+	
+:Parameter_1
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'docker_registry_url' ; 
+.
+
+:Parameter_2
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_3
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_1 ;
+  exchange:hasParameter :Parameter_2 ;
+.	
+:Parameter_4
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'docker_user' ; 
+.
+
+:Parameter_5
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_6
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_4 ;
+  exchange:hasParameter :Parameter_5 ;
+.	
+:Parameter_7
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'docker_pass' ; 
+.
+
+:Parameter_8
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_9
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_7 ;
+  exchange:hasParameter :Parameter_8 ;
+.	
+:Parameter_10
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'docker_registry_url' ; 
+.
+
+:Parameter_11
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_12
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_10 ;
+  exchange:hasParameter :Parameter_11 ;
+.	
+
+
+
+:Parameter_13
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_3 ; 
+.
+
+:Parameter_14
+  rdf:type exchange:Parameter ;
+  exchange:name "docker_registry_url" ;
+  exchange:hasParameter :Parameter_13 ;
+.	
+
+:Parameter_15
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_6 ; 
+.
+
+:Parameter_16
+  rdf:type exchange:Parameter ;
+  exchange:name "docker_user" ;
+  exchange:hasParameter :Parameter_15 ;
+.	
+
+:Parameter_17
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_9 ; 
+.
+
+:Parameter_18
+  rdf:type exchange:Parameter ;
+  exchange:name "docker_pass" ;
+  exchange:hasParameter :Parameter_17 ;
+.	
+
+:Parameter_19
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_12 ; 
+.
+
+:Parameter_20
+  rdf:type exchange:Parameter ;
+  exchange:name "docker_registry_url" ;
+  exchange:hasParameter :Parameter_19 ;
+.	
+
+:Parameter_21
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_14 ;
+  exchange:hasParameter :Parameter_16 ;
+  exchange:hasParameter :Parameter_18 ;
+.
+
+:Parameter_22
+  rdf:type exchange:Parameter ;
+  exchange:name "path" ;
+  exchange:value '/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/login_user.yml' ;
+.
+
+:Parameter_23
+  rdf:type exchange:Parameter ;
+  exchange:name "content" ;
+  exchange:value '---\n- hosts: all\n  become_user: root\n  become: yes\n  tasks:\n  - name: logging into Docker Registry\n    docker_login:\n      registry: "{{ docker_registry_url }}"\n      username: "{{ docker_user }}"\n      password: "{{ docker_pass }}"\n    when: docker_user != ""      \n  ' ;
+.
+
+
+:Parameter_24
+  rdf:type exchange:Parameter ;
+  exchange:name "primary" ;
+  exchange:hasParameter :Parameter_22 ;
+  exchange:hasParameter :Parameter_23 ;
+.
+
+
+:Parameter_25
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:hasParameter :Parameter_24 ;
+.
+
+:Parameter_26
+  rdf:type exchange:Parameter ;
+  exchange:name "create" ;
+  exchange:hasParameter :Parameter_21 ;
+  exchange:hasParameter :Parameter_25 ;
+.
+:Parameter_27
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_20 ;
+.
+
+:Parameter_28
+  rdf:type exchange:Parameter ;
+  exchange:name "path" ;
+  exchange:value '/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/logout_user.yml' ;
+.
+
+:Parameter_29
+  rdf:type exchange:Parameter ;
+  exchange:name "content" ;
+  exchange:value '---\n- hosts: all\n  become_user: root\n  become: yes\n  tasks:\n  - name: logging into Docker Hub\n    docker_login:\n      registry: "{{ docker_registry_url }}"\n      state: "absent"\n' ;
+.
+
+
+:Parameter_30
+  rdf:type exchange:Parameter ;
+  exchange:name "primary" ;
+  exchange:hasParameter :Parameter_28 ;
+  exchange:hasParameter :Parameter_29 ;
+.
+
+
+:Parameter_31
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:hasParameter :Parameter_30 ;
+.
+
+:Parameter_32
+  rdf:type exchange:Parameter ;
+  exchange:name "delete" ;
+  exchange:hasParameter :Parameter_27 ;
+  exchange:hasParameter :Parameter_31 ;
+.
+
+:Parameter_33
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_34
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'false' ;
+.
+
+
+
+
+
+
+:Property_1
+  rdf:type exchange:Property ;
+  exchange:name "docker_registry_url" ;
+  exchange:description 'Docker Hub login' ;
+  exchange:hasParameter :Parameter_33 ;
+  exchange:hasParameter :Parameter_34 ;
+.
+:Parameter_35
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_36
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'false' ;
+.
+
+:Parameter_37
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;
+  exchange:value '' ;
+.
+
+
+
+
+
+:Property_2
+  rdf:type exchange:Property ;
+  exchange:name "docker_user" ;
+  exchange:description 'Docker Hub login' ;
+  exchange:hasParameter :Parameter_35 ;
+  exchange:hasParameter :Parameter_36 ;
+  exchange:hasParameter :Parameter_37 ;
+.
+:Parameter_38
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;
+.
+
+:Parameter_39
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'false' ;
+.
+
+:Parameter_40
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;
+  exchange:value '' ;
+.
+
+
+
+
+
+:Property_3
+  rdf:type exchange:Property ;
+  exchange:name "docker_pass" ;
+  exchange:description 'Docker Hub password' ;
+  exchange:hasParameter :Parameter_38 ;
+  exchange:hasParameter :Parameter_39 ;
+  exchange:hasParameter :Parameter_40 ;
+.
+
+
+:Parameter_41
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'tosca.interfaces.node.lifecycle.Standard' ;
+.
+
+:Parameter_42
+  rdf:type exchange:Parameter ;
+  exchange:name "operations" ;
+  exchange:hasParameter :Parameter_26 ;
+  exchange:hasParameter :Parameter_32 ;
+.
+
+:Interface_1
+  rdf:type exchange:Interface ;
+  exchange:name "Standard" ;
+  exchange:hasParameter :Parameter_41 ;
+  exchange:hasParameter :Parameter_42 ;
+.
+
+
+
+:NodeType_1
+  rdf:type exchange:NodeType ;
+  exchange:name "sodalite.nodes.DockerRegistry" ;
+  exchange:derivesFrom "tosca.nodes.SoftwareComponent" ;
+  exchange:properties :Property_1 ; 
+  exchange:properties :Property_2 ; 
+  exchange:properties :Property_3 ; 
+  exchange:interfaces :Interface_1 ; 
+.  
+
+
+

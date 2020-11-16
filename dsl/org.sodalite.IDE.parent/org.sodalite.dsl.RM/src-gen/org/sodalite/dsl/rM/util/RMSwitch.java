@@ -101,6 +101,13 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EDATA_TYPE_NAME:
+      {
+        EDataTypeName eDataTypeName = (EDataTypeName)theEObject;
+        T result = caseEDataTypeName(eDataTypeName);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EARTIFACT_TYPES:
       {
         EArtifactTypes eArtifactTypes = (EArtifactTypes)theEObject;
@@ -463,13 +470,6 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RMPackage.ENODE_TYPE_REF:
-      {
-        ENodeTypeRef eNodeTypeRef = (ENodeTypeRef)theEObject;
-        T result = caseENodeTypeRef(eNodeTypeRef);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case RMPackage.EREQUIREMENTS:
       {
         ERequirements eRequirements = (ERequirements)theEObject;
@@ -682,6 +682,46 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EENTITY_REFERENCE:
+      {
+        EEntityReference eEntityReference = (EEntityReference)theEObject;
+        T result = caseEEntityReference(eEntityReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EPREFIX_TYPE:
+      {
+        EPREFIX_TYPE eprefiX_TYPE = (EPREFIX_TYPE)theEObject;
+        T result = caseEPREFIX_TYPE(eprefiX_TYPE);
+        if (result == null) result = caseEDataTypeName(eprefiX_TYPE);
+        if (result == null) result = caseEEntityReference(eprefiX_TYPE);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EPREFIX_ID:
+      {
+        EPREFIX_ID eprefiX_ID = (EPREFIX_ID)theEObject;
+        T result = caseEPREFIX_ID(eprefiX_ID);
+        if (result == null) result = caseEEntityReference(eprefiX_ID);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EPRIMITIVE_TYPE:
+      {
+        EPRIMITIVE_TYPE eprimitivE_TYPE = (EPRIMITIVE_TYPE)theEObject;
+        T result = caseEPRIMITIVE_TYPE(eprimitivE_TYPE);
+        if (result == null) result = caseEDataTypeName(eprimitivE_TYPE);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EENTITY:
+      {
+        EEntity eEntity = (EEntity)theEObject;
+        T result = caseEEntity(eEntity);
+        if (result == null) result = caseEEntityReference(eEntity);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -746,6 +786,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEDataTypeBody(EDataTypeBody object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EData Type Name</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EData Type Name</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEDataTypeName(EDataTypeName object)
   {
     return null;
   }
@@ -1551,22 +1607,6 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>ENode Type Ref</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ENode Type Ref</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseENodeTypeRef(ENodeTypeRef object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>ERequirements</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1978,6 +2018,86 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEMapEntry(EMapEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EEntity Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EEntity Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEEntityReference(EEntityReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EPREFIX TYPE</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EPREFIX TYPE</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPREFIX_TYPE(EPREFIX_TYPE object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EPREFIX ID</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EPREFIX ID</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPREFIX_ID(EPREFIX_ID object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EPRIMITIVE TYPE</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EPRIMITIVE TYPE</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPRIMITIVE_TYPE(EPRIMITIVE_TYPE object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EEntity</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EEntity</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEEntity(EEntity object)
   {
     return null;
   }

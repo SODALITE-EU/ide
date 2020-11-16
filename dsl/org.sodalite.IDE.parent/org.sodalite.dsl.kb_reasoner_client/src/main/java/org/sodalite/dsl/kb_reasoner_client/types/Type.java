@@ -10,20 +10,36 @@
  *******************************************************************************/
 package org.sodalite.dsl.kb_reasoner_client.types;
 
-import org.sodalite.dsl.kb_reasoner_client.json.TypeJsonDeserializer;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(using = TypeJsonDeserializer.class)
-public class Type extends KBEntity{
+public class Type extends KBEntity {
 	String label;
+	String description;
+	SuperType type;
 
 	public String getLabel() {
 		return label;
 	}
+
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public SuperType getType() {
+		return type;
+	}
+
+	// @JsonDeserialize(using = TypeJsonDeserializer.class)
+	public void setType(SuperType type) {
+		this.type = type;
 	}
 }

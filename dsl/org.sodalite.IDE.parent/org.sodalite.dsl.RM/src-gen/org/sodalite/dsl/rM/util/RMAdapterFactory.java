@@ -96,6 +96,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEDataTypeBodyAdapter();
       }
       @Override
+      public Adapter caseEDataTypeName(EDataTypeName object)
+      {
+        return createEDataTypeNameAdapter();
+      }
+      @Override
       public Adapter caseEArtifactTypes(EArtifactTypes object)
       {
         return createEArtifactTypesAdapter();
@@ -346,11 +351,6 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEValidSourceTypeAdapter();
       }
       @Override
-      public Adapter caseENodeTypeRef(ENodeTypeRef object)
-      {
-        return createENodeTypeRefAdapter();
-      }
-      @Override
       public Adapter caseERequirements(ERequirements object)
       {
         return createERequirementsAdapter();
@@ -481,6 +481,31 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEMapEntryAdapter();
       }
       @Override
+      public Adapter caseEEntityReference(EEntityReference object)
+      {
+        return createEEntityReferenceAdapter();
+      }
+      @Override
+      public Adapter caseEPREFIX_TYPE(EPREFIX_TYPE object)
+      {
+        return createEPREFIX_TYPEAdapter();
+      }
+      @Override
+      public Adapter caseEPREFIX_ID(EPREFIX_ID object)
+      {
+        return createEPREFIX_IDAdapter();
+      }
+      @Override
+      public Adapter caseEPRIMITIVE_TYPE(EPRIMITIVE_TYPE object)
+      {
+        return createEPRIMITIVE_TYPEAdapter();
+      }
+      @Override
+      public Adapter caseEEntity(EEntity object)
+      {
+        return createEEntityAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -558,6 +583,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEDataTypeBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EDataTypeName <em>EData Type Name</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EDataTypeName
+   * @generated
+   */
+  public Adapter createEDataTypeNameAdapter()
   {
     return null;
   }
@@ -1313,21 +1353,6 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ENodeTypeRef <em>ENode Type Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.dsl.rM.ENodeTypeRef
-   * @generated
-   */
-  public Adapter createENodeTypeRefAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ERequirements <em>ERequirements</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1713,6 +1738,81 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEMapEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EEntityReference <em>EEntity Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EEntityReference
+   * @generated
+   */
+  public Adapter createEEntityReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPREFIX_TYPE <em>EPREFIX TYPE</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPREFIX_TYPE
+   * @generated
+   */
+  public Adapter createEPREFIX_TYPEAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPREFIX_ID <em>EPREFIX ID</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPREFIX_ID
+   * @generated
+   */
+  public Adapter createEPREFIX_IDAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPRIMITIVE_TYPE <em>EPRIMITIVE TYPE</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPRIMITIVE_TYPE
+   * @generated
+   */
+  public Adapter createEPRIMITIVE_TYPEAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EEntity <em>EEntity</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EEntity
+   * @generated
+   */
+  public Adapter createEEntityAdapter()
   {
     return null;
   }

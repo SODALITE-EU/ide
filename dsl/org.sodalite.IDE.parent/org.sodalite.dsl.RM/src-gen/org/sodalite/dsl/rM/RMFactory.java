@@ -60,6 +60,15 @@ public interface RMFactory extends EFactory
   EDataTypeBody createEDataTypeBody();
 
   /**
+   * Returns a new object of class '<em>EData Type Name</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EData Type Name</em>'.
+   * @generated
+   */
+  EDataTypeName createEDataTypeName();
+
+  /**
    * Returns a new object of class '<em>EArtifact Types</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -510,15 +519,6 @@ public interface RMFactory extends EFactory
   EValidSourceType createEValidSourceType();
 
   /**
-   * Returns a new object of class '<em>ENode Type Ref</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>ENode Type Ref</em>'.
-   * @generated
-   */
-  ENodeTypeRef createENodeTypeRef();
-
-  /**
    * Returns a new object of class '<em>ERequirements</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -751,6 +751,51 @@ public interface RMFactory extends EFactory
    * @generated
    */
   EMapEntry createEMapEntry();
+
+  /**
+   * Returns a new object of class '<em>EEntity Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EEntity Reference</em>'.
+   * @generated
+   */
+  EEntityReference createEEntityReference();
+
+  /**
+   * Returns a new object of class '<em>EPREFIX TYPE</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EPREFIX TYPE</em>'.
+   * @generated
+   */
+  EPREFIX_TYPE createEPREFIX_TYPE();
+
+  /**
+   * Returns a new object of class '<em>EPREFIX ID</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EPREFIX ID</em>'.
+   * @generated
+   */
+  EPREFIX_ID createEPREFIX_ID();
+
+  /**
+   * Returns a new object of class '<em>EPRIMITIVE TYPE</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EPRIMITIVE TYPE</em>'.
+   * @generated
+   */
+  EPRIMITIVE_TYPE createEPRIMITIVE_TYPE();
+
+  /**
+   * Returns a new object of class '<em>EEntity</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EEntity</em>'.
+   * @generated
+   */
+  EEntity createEEntity();
 
   /**
    * Returns the package supported by this factory.

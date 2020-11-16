@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EConstraints;
-import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDataTypeBody;
+import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -37,14 +37,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements EDataTypeBody
 {
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getSuperType()
    * @generated
    * @ordered
    */
-  protected EDataType superType;
+  protected EDataTypeName superType;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -113,18 +113,8 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
-  public EDataType getSuperType()
+  public EDataTypeName getSuperType()
   {
-    if (superType != null && superType.eIsProxy())
-    {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (EDataType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EDATA_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
-      }
-    }
     return superType;
   }
 
@@ -133,9 +123,16 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  public EDataType basicGetSuperType()
+  public NotificationChain basicSetSuperType(EDataTypeName newSuperType, NotificationChain msgs)
   {
-    return superType;
+    EDataTypeName oldSuperType = superType;
+    superType = newSuperType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE_BODY__SUPER_TYPE, oldSuperType, newSuperType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -144,12 +141,20 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
-  public void setSuperType(EDataType newSuperType)
+  public void setSuperType(EDataTypeName newSuperType)
   {
-    EDataType oldSuperType = superType;
-    superType = newSuperType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
+    if (newSuperType != superType)
+    {
+      NotificationChain msgs = null;
+      if (superType != null)
+        msgs = ((InternalEObject)superType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE_BODY__SUPER_TYPE, null, msgs);
+      if (newSuperType != null)
+        msgs = ((InternalEObject)newSuperType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EDATA_TYPE_BODY__SUPER_TYPE, null, msgs);
+      msgs = basicSetSuperType(newSuperType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EDATA_TYPE_BODY__SUPER_TYPE, newSuperType, newSuperType));
   }
 
   /**
@@ -287,6 +292,8 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
+      case RMPackage.EDATA_TYPE_BODY__SUPER_TYPE:
+        return basicSetSuperType(null, msgs);
       case RMPackage.EDATA_TYPE_BODY__CONSTRAINTS:
         return basicSetConstraints(null, msgs);
       case RMPackage.EDATA_TYPE_BODY__PROPERTIES:
@@ -306,8 +313,7 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
     switch (featureID)
     {
       case RMPackage.EDATA_TYPE_BODY__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
+        return getSuperType();
       case RMPackage.EDATA_TYPE_BODY__DESCRIPTION:
         return getDescription();
       case RMPackage.EDATA_TYPE_BODY__CONSTRAINTS:
@@ -329,7 +335,7 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
     switch (featureID)
     {
       case RMPackage.EDATA_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EDataType)newValue);
+        setSuperType((EDataTypeName)newValue);
         return;
       case RMPackage.EDATA_TYPE_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -355,7 +361,7 @@ public class EDataTypeBodyImpl extends MinimalEObjectImpl.Container implements E
     switch (featureID)
     {
       case RMPackage.EDATA_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EDataType)null);
+        setSuperType((EDataTypeName)null);
         return;
       case RMPackage.EDATA_TYPE_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);

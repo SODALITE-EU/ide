@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EInterfaceType;
 import org.sodalite.dsl.rM.EInterfaceTypeBody;
 import org.sodalite.dsl.rM.EOperations;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -37,14 +37,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container implements EInterfaceTypeBody
 {
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getSuperType()
    * @generated
    * @ordered
    */
-  protected EInterfaceType superType;
+  protected EPREFIX_TYPE superType;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -113,18 +113,8 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
-  public EInterfaceType getSuperType()
+  public EPREFIX_TYPE getSuperType()
   {
-    if (superType != null && superType.eIsProxy())
-    {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (EInterfaceType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
-      }
-    }
     return superType;
   }
 
@@ -133,9 +123,16 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public EInterfaceType basicGetSuperType()
+  public NotificationChain basicSetSuperType(EPREFIX_TYPE newSuperType, NotificationChain msgs)
   {
-    return superType;
+    EPREFIX_TYPE oldSuperType = superType;
+    superType = newSuperType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE, oldSuperType, newSuperType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -144,12 +141,20 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
-  public void setSuperType(EInterfaceType newSuperType)
+  public void setSuperType(EPREFIX_TYPE newSuperType)
   {
-    EInterfaceType oldSuperType = superType;
-    superType = newSuperType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
+    if (newSuperType != superType)
+    {
+      NotificationChain msgs = null;
+      if (superType != null)
+        msgs = ((InternalEObject)superType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE, null, msgs);
+      if (newSuperType != null)
+        msgs = ((InternalEObject)newSuperType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE, null, msgs);
+      msgs = basicSetSuperType(newSuperType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE, newSuperType, newSuperType));
   }
 
   /**
@@ -287,6 +292,8 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE:
+        return basicSetSuperType(null, msgs);
       case RMPackage.EINTERFACE_TYPE_BODY__INPUTS:
         return basicSetInputs(null, msgs);
       case RMPackage.EINTERFACE_TYPE_BODY__OPERATIONS:
@@ -306,8 +313,7 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
+        return getSuperType();
       case RMPackage.EINTERFACE_TYPE_BODY__DESCRIPTION:
         return getDescription();
       case RMPackage.EINTERFACE_TYPE_BODY__INPUTS:
@@ -329,7 +335,7 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EInterfaceType)newValue);
+        setSuperType((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.EINTERFACE_TYPE_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -355,7 +361,7 @@ public class EInterfaceTypeBodyImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case RMPackage.EINTERFACE_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EInterfaceType)null);
+        setSuperType((EPREFIX_TYPE)null);
         return;
       case RMPackage.EINTERFACE_TYPE_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);

@@ -7,6 +7,8 @@
   <genPackages prefix="RM" basePackage="org.sodalite.dsl" disposableProviderFactory="true"
       fileExtensions="rm" ecorePackage="RM.ecore#/">
     <genClasses ecoreClass="RM.ecore#//RM_Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//RM_Model/module"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//RM_Model/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//RM_Model/dataTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//RM_Model/artifactTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//RM_Model/capabilityTypes"/>
@@ -19,14 +21,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypes/dataTypes"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EDataType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EDataType/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataType/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataType/data"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EDataTypeBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypeBody/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EDataTypeBody/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypeBody/constraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EDataTypeBody/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EDataTypeName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EDataTypeName/type"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EArtifactTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactTypes/artifactTypes"/>
@@ -36,7 +41,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactType/artifact"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EArtifactTypeBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactTypeBody/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactTypeBody/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactTypeBody/mime_type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactTypeBody/file_ext"/>
@@ -49,7 +54,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityType/capability"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilityTypeBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeBody/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityTypeBody/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeBody/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeBody/atributes"/>
@@ -62,7 +67,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceType/interface"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInterfaceTypeBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceTypeBody/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EInterfaceTypeBody/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceTypeBody/inputs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceTypeBody/operations"/>
@@ -75,7 +80,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyType/policy"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EPolicyTypeBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPolicyTypeBody/description"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ENodeTypes">
@@ -86,7 +91,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeType/node"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ENodeTypeBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ENodeTypeBody/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/attributes"/>
@@ -102,7 +107,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipType/relationship"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERelationshipTypeBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypeBody/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ERelationshipTypeBody/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypeBody/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypeBody/atributes"/>
@@ -114,7 +119,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidTargetTypes/sourceType"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilityTypeRef">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeRef/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeRef/name"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EProperties">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EProperties/properties"/>
@@ -124,13 +129,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinition/property"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EPropertyDefinitionBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinitionBody/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinitionBody/required"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/default"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinitionBody/status"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/constraints"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/entry_schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/entry_schema"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EAttributes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributes/attributes"/>
@@ -140,11 +145,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinition/attribute"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EAttributeDefinitionBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinitionBody/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinitionBody/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EAttributeDefinitionBody/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinitionBody/default"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EAttributeDefinitionBody/status"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinitionBody/entry_schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EAttributeDefinitionBody/entry_schema"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInterfaces">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaces/interfaces"/>
@@ -154,7 +159,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinition/interface"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInterfaceDefinitionBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinitionBody/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinitionBody/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinitionBody/inputs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInterfaceDefinitionBody/operations"/>
     </genClasses>
@@ -193,7 +198,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinition/parameter"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EParameterDefinitionBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/default"/>
     </genClasses>
@@ -206,17 +211,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttribute/attribute"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//GetAttributeBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/attribute"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//GetAttributeBody/entity"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/req_cap"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/entity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/req_cap"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//GetProperty">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetProperty/property"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//GetPropertyBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/property"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//GetPropertyBody/entity"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/req_cap"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/property"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/entity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/req_cap"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilities">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilities/capabilities"/>
@@ -225,7 +230,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinition/capability"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilityDefinitionBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ECapabilityDefinitionBody/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityDefinitionBody/attributes"/>
@@ -237,9 +242,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidSourceType/sourceTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidSourceType/sourceType"/>
     </genClasses>
-    <genClasses ecoreClass="RM.ecore#//ENodeTypeRef">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeRef/name"/>
-    </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERequirements">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirements/requirements"/>
     </genClasses>
@@ -247,9 +249,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinition/requirement"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERequirementDefinitionBody">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/capability"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/node"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/relationship"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/capability"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/node"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/relationship"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/start"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/end"/>
     </genClasses>
@@ -315,6 +317,18 @@
     <genClasses ecoreClass="RM.ecore#//EMapEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EMapEntry/key"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EMapEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EEntityReference"/>
+    <genClasses ecoreClass="RM.ecore#//EPREFIX_TYPE">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_TYPE/module"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EPREFIX_ID">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_ID/module"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_ID/id"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EPRIMITIVE_TYPE"/>
+    <genClasses ecoreClass="RM.ecore#//EEntity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EEntity/entity"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

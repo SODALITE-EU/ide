@@ -1,3 +1,5 @@
+module: hpc
+
 data_types:
 	//nested datatypes not supported
 	sodalite.datatypes.data.mover.gridftpSpec: 
@@ -78,7 +80,7 @@ node_types:
 	sodalite.data.mover.url:
 		description: 'Moves data from "src" url to "dst" location on the "host".
       				 "dst" can be either absolute path or relative. "dst" is relative to $HOME directory'
-		derived_from: sodalite.data.mover
+		derived_from: hpc/sodalite.data.mover
 		properties:
 			src:
 				type: string

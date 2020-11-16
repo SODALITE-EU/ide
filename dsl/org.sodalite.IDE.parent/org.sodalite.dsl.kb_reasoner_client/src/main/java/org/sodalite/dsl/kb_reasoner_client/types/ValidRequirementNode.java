@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ValidRequirementNode extends KBEntity{
 	String label;
-	Type type;
+	SuperType type;
 	
 	public String getLabel() {
 		return label;
@@ -23,10 +23,10 @@ public class ValidRequirementNode extends KBEntity{
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	public Type getType() {
+	public SuperType getType() {
 		return type;
 	}
-	public void setType(Type type) {
+	public void setType(SuperType type) {
 		this.type = type;
 	}
 }

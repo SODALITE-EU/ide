@@ -87,7 +87,7 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     description=STRING (ambiguity) file_ext=STRING
 	 *     file_ext=STRING (ambiguity) file_ext=STRING
 	 *     mime_type=STRING (ambiguity) file_ext=STRING
-	 *     superType=[EArtifactType|QUALIFIED_NAME] (ambiguity) file_ext=STRING
+	 *     superType=EPREFIX_TYPE (ambiguity) file_ext=STRING
 	 */
 	protected void emit_EArtifactTypeBody_File_extKeyword_1_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -103,7 +103,7 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     description=STRING 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
 	 *     occurrences_end=EAlphaNumericValue ']' 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
 	 *     properties=EProperties END 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
-	 *     type=[ECapabilityType|QUALIFIED_NAME] 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
+	 *     type=EPREFIX_TYPE 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
 	 */
 	protected void emit_ECapabilityDefinitionBody___RightSquareBracketKeyword_4_3_Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -129,43 +129,43 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) 'description:' description=STRING
 	 *     (rule start) (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
 	 *     (rule start) (ambiguity) 'properties:' BEGIN properties=EProperties
-	 *     (rule start) (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     (rule start) (ambiguity) 'type:' type=EPREFIX_TYPE
 	 *     (rule start) (ambiguity) (rule start)
 	 *     attributes=EAttributes END (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     attributes=EAttributes END (ambiguity) 'description:' description=STRING
 	 *     attributes=EAttributes END (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
 	 *     attributes=EAttributes END (ambiguity) 'properties:' BEGIN properties=EProperties
-	 *     attributes=EAttributes END (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     attributes=EAttributes END (ambiguity) 'type:' type=EPREFIX_TYPE
 	 *     attributes=EAttributes END (ambiguity) (rule end)
 	 *     description=STRING (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     description=STRING (ambiguity) 'description:' description=STRING
 	 *     description=STRING (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
 	 *     description=STRING (ambiguity) 'properties:' BEGIN properties=EProperties
-	 *     description=STRING (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     description=STRING (ambiguity) 'type:' type=EPREFIX_TYPE
 	 *     description=STRING (ambiguity) (rule end)
 	 *     occurrences_end=EAlphaNumericValue ']' (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     occurrences_end=EAlphaNumericValue ']' (ambiguity) 'description:' description=STRING
 	 *     occurrences_end=EAlphaNumericValue ']' (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
 	 *     occurrences_end=EAlphaNumericValue ']' (ambiguity) 'properties:' BEGIN properties=EProperties
-	 *     occurrences_end=EAlphaNumericValue ']' (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     occurrences_end=EAlphaNumericValue ']' (ambiguity) 'type:' type=EPREFIX_TYPE
 	 *     occurrences_end=EAlphaNumericValue ']' (ambiguity) (rule end)
 	 *     properties=EProperties END (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     properties=EProperties END (ambiguity) 'description:' description=STRING
 	 *     properties=EProperties END (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
 	 *     properties=EProperties END (ambiguity) 'properties:' BEGIN properties=EProperties
-	 *     properties=EProperties END (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     properties=EProperties END (ambiguity) 'type:' type=EPREFIX_TYPE
 	 *     properties=EProperties END (ambiguity) (rule end)
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'attributes:' BEGIN attributes=EAttributes
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'description:' description=STRING
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'properties:' BEGIN properties=EProperties
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
-	 *     type=[ECapabilityType|QUALIFIED_NAME] (ambiguity) (rule end)
+	 *     type=EPREFIX_TYPE (ambiguity) 'attributes:' BEGIN attributes=EAttributes
+	 *     type=EPREFIX_TYPE (ambiguity) 'description:' description=STRING
+	 *     type=EPREFIX_TYPE (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
+	 *     type=EPREFIX_TYPE (ambiguity) 'properties:' BEGIN properties=EProperties
+	 *     type=EPREFIX_TYPE (ambiguity) 'type:' type=EPREFIX_TYPE
+	 *     type=EPREFIX_TYPE (ambiguity) (rule end)
 	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'attributes:' BEGIN attributes=EAttributes
 	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'description:' description=STRING
 	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
 	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'properties:' BEGIN properties=EProperties
-	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'type:' type=[ECapabilityType|QUALIFIED_NAME]
+	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'type:' type=EPREFIX_TYPE
 	 *     valid_source_types+=EValidSourceType ']' (ambiguity) (rule end)
 	 */
 	protected void emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {

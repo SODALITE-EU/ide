@@ -4,6 +4,7 @@
 package org.sodalite.dsl.rM.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -11,7 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EPolicyType;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPolicyTypeBody;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -32,14 +33,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements EPolicyTypeBody
 {
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getSuperType()
    * @generated
    * @ordered
    */
-  protected EPolicyType superType;
+  protected EPREFIX_TYPE superType;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -88,18 +89,8 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EPolicyType getSuperType()
+  public EPREFIX_TYPE getSuperType()
   {
-    if (superType != null && superType.eIsProxy())
-    {
-      InternalEObject oldSuperType = (InternalEObject)superType;
-      superType = (EPolicyType)eResolveProxy(oldSuperType);
-      if (superType != oldSuperType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
-      }
-    }
     return superType;
   }
 
@@ -108,9 +99,16 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EPolicyType basicGetSuperType()
+  public NotificationChain basicSetSuperType(EPREFIX_TYPE newSuperType, NotificationChain msgs)
   {
-    return superType;
+    EPREFIX_TYPE oldSuperType = superType;
+    superType = newSuperType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE, oldSuperType, newSuperType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -119,12 +117,20 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setSuperType(EPolicyType newSuperType)
+  public void setSuperType(EPREFIX_TYPE newSuperType)
   {
-    EPolicyType oldSuperType = superType;
-    superType = newSuperType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE, oldSuperType, superType));
+    if (newSuperType != superType)
+    {
+      NotificationChain msgs = null;
+      if (superType != null)
+        msgs = ((InternalEObject)superType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE, null, msgs);
+      if (newSuperType != null)
+        msgs = ((InternalEObject)newSuperType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE, null, msgs);
+      msgs = basicSetSuperType(newSuperType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE, newSuperType, newSuperType));
   }
 
   /**
@@ -158,13 +164,28 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE:
+        return basicSetSuperType(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE:
-        if (resolve) return getSuperType();
-        return basicGetSuperType();
+        return getSuperType();
       case RMPackage.EPOLICY_TYPE_BODY__DESCRIPTION:
         return getDescription();
     }
@@ -182,7 +203,7 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EPolicyType)newValue);
+        setSuperType((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.EPOLICY_TYPE_BODY__DESCRIPTION:
         setDescription((String)newValue);
@@ -202,7 +223,7 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE:
-        setSuperType((EPolicyType)null);
+        setSuperType((EPREFIX_TYPE)null);
         return;
       case RMPackage.EPOLICY_TYPE_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);

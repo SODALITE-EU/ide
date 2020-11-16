@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.sodalite.dsl.kb_reasoner_client.types.Capability;
-import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -43,7 +43,7 @@ public class CapabilityJsonDeserializer extends JsonDeserializer<Capability> {
         ObjectNode objectNode = (ObjectNode) node;
         Capability capability = new Capability();
         
-		JavaType javaType = TypeFactory.defaultInstance().constructType(Type.class);
+		JavaType javaType = TypeFactory.defaultInstance().constructType(SuperType.class);
 		if (objectNode.get("specification") != null) {
 			JsonNode spec = objectNode.get("specification");
 			
@@ -53,7 +53,7 @@ public class CapabilityJsonDeserializer extends JsonDeserializer<Capability> {
 			}
 			
 			if (spec.get("type")!=null) {
-				Type type = mapper.readerFor(javaType).readValue(spec.get("type"));
+				SuperType type = mapper.readerFor(javaType).readValue(spec.get("type"));
 				capability.setType(type);
 			}
 		}

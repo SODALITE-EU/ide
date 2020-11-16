@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.sodalite.dsl.rM.ENodeTypeRef;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -45,7 +45,7 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
    * @generated
    * @ordered
    */
-  protected EList<ENodeTypeRef> sourceTypes;
+  protected EList<EPREFIX_TYPE> sourceTypes;
 
   /**
    * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' containment reference list.
@@ -55,7 +55,7 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
    * @generated
    * @ordered
    */
-  protected EList<ENodeTypeRef> sourceType;
+  protected EList<EPREFIX_TYPE> sourceType;
 
   /**
    * <!-- begin-user-doc -->
@@ -84,11 +84,11 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public EList<ENodeTypeRef> getSourceTypes()
+  public EList<EPREFIX_TYPE> getSourceTypes()
   {
     if (sourceTypes == null)
     {
-      sourceTypes = new EObjectContainmentEList<ENodeTypeRef>(ENodeTypeRef.class, this, RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPES);
+      sourceTypes = new EObjectContainmentEList<EPREFIX_TYPE>(EPREFIX_TYPE.class, this, RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPES);
     }
     return sourceTypes;
   }
@@ -99,11 +99,11 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public EList<ENodeTypeRef> getSourceType()
+  public EList<EPREFIX_TYPE> getSourceType()
   {
     if (sourceType == null)
     {
-      sourceType = new EObjectContainmentEList<ENodeTypeRef>(ENodeTypeRef.class, this, RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPE);
+      sourceType = new EObjectContainmentEList<EPREFIX_TYPE>(EPREFIX_TYPE.class, this, RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPE);
     }
     return sourceType;
   }
@@ -157,11 +157,11 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
     {
       case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPES:
         getSourceTypes().clear();
-        getSourceTypes().addAll((Collection<? extends ENodeTypeRef>)newValue);
+        getSourceTypes().addAll((Collection<? extends EPREFIX_TYPE>)newValue);
         return;
       case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPE:
         getSourceType().clear();
-        getSourceType().addAll((Collection<? extends ENodeTypeRef>)newValue);
+        getSourceType().addAll((Collection<? extends EPREFIX_TYPE>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

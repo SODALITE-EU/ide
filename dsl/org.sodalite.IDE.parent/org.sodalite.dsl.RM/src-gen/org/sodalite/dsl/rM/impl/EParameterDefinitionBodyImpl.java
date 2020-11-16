@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EDataType;
+import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.RMPackage;
@@ -35,14 +35,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container implements EParameterDefinitionBody
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected EDataType type;
+  protected EDataTypeName type;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -91,18 +91,8 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public EDataType getType()
+  public EDataTypeName getType()
   {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (EDataType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, oldType, type));
-      }
-    }
     return type;
   }
 
@@ -111,9 +101,16 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  public EDataType basicGetType()
+  public NotificationChain basicSetType(EDataTypeName newType, NotificationChain msgs)
   {
-    return type;
+    EDataTypeName oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -122,12 +119,20 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public void setType(EDataType newType)
+  public void setType(EDataTypeName newType)
   {
-    EDataType oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, oldType, type));
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, newType, newType));
   }
 
   /**
@@ -240,6 +245,8 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
+      case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
+        return basicSetType(null, msgs);
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         return basicSetValue(null, msgs);
       case RMPackage.EPARAMETER_DEFINITION_BODY__DEFAULT:
@@ -259,8 +266,7 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+        return getType();
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         return getValue();
       case RMPackage.EPARAMETER_DEFINITION_BODY__DEFAULT:
@@ -280,7 +286,7 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
-        setType((EDataType)newValue);
+        setType((EDataTypeName)newValue);
         return;
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         setValue((EValueExpression)newValue);
@@ -303,7 +309,7 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
-        setType((EDataType)null);
+        setType((EDataTypeName)null);
         return;
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         setValue((EValueExpression)null);

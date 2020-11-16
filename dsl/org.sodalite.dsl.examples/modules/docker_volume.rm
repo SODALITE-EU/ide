@@ -1,3 +1,5 @@
+module: docker
+
 node_types:
 	sodalite.nodes.DockerVolume:
 		derived_from: tosca.nodes.SoftwareComponent
@@ -15,7 +17,7 @@ node_types:
 							volume_name:    
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.DockerVolume.name
+									property: docker/sodalite.nodes.DockerVolume.name
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_volume.yml"
 					delete:
@@ -23,6 +25,6 @@ node_types:
 							volume_name:    
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.DockerVolume.name
+									property: docker/sodalite.nodes.DockerVolume.name
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_volume.yml"

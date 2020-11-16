@@ -29,26 +29,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface ERelationshipTypeBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Super Type</b></em>' reference.
+   * Returns the value of the '<em><b>Super Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Type</em>' reference.
-   * @see #setSuperType(ERelationshipType)
+   * @return the value of the '<em>Super Type</em>' containment reference.
+   * @see #setSuperType(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getERelationshipTypeBody_SuperType()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  ERelationshipType getSuperType();
+  EPREFIX_TYPE getSuperType();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ERelationshipTypeBody#getSuperType <em>Super Type</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ERelationshipTypeBody#getSuperType <em>Super Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Type</em>' reference.
+   * @param value the new value of the '<em>Super Type</em>' containment reference.
    * @see #getSuperType()
    * @generated
    */
-  void setSuperType(ERelationshipType value);
+  void setSuperType(EPREFIX_TYPE value);
 
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.

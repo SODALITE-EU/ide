@@ -26,26 +26,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface EInterfaceDefinitionBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(EInterfaceType)
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getEInterfaceDefinitionBody_Type()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EInterfaceType getType();
+  EPREFIX_TYPE getType();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EInterfaceDefinitionBody#getType <em>Type</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EInterfaceDefinitionBody#getType <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
+   * @param value the new value of the '<em>Type</em>' containment reference.
    * @see #getType()
    * @generated
    */
-  void setType(EInterfaceType value);
+  void setType(EPREFIX_TYPE value);
 
   /**
    * Returns the value of the '<em><b>Inputs</b></em>' containment reference.

@@ -28,7 +28,7 @@ public interface EValidSourceType extends EObject
 {
   /**
    * Returns the value of the '<em><b>Source Types</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.dsl.rM.ENodeTypeRef}.
+   * The list contents are of type {@link org.sodalite.dsl.rM.EPREFIX_TYPE}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Source Types</em>' containment reference list.
@@ -36,11 +36,11 @@ public interface EValidSourceType extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<ENodeTypeRef> getSourceTypes();
+  EList<EPREFIX_TYPE> getSourceTypes();
 
   /**
    * Returns the value of the '<em><b>Source Type</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.dsl.rM.ENodeTypeRef}.
+   * The list contents are of type {@link org.sodalite.dsl.rM.EPREFIX_TYPE}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Source Type</em>' containment reference list.
@@ -48,6 +48,6 @@ public interface EValidSourceType extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<ENodeTypeRef> getSourceType();
+  EList<EPREFIX_TYPE> getSourceType();
 
 } // EValidSourceType

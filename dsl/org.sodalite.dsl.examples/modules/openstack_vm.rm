@@ -1,3 +1,5 @@
+module: openstack
+
 node_types:
 	sodalite.nodes.OpenStack.VM:  
 		derived_from: tosca.nodes.Compute 
@@ -53,7 +55,7 @@ node_types:
 		requirements:  
 			protected_by:  
 				relationship: tosca.relationships.DependsOn 
-				node: sodalite.nodes.OpenStack.SecurityRules 
+				node: openstack/sodalite.nodes.OpenStack.SecurityRules 
 				capability: tosca.capabilities.Node 
 		capabilities:  
 			feature:  
@@ -67,47 +69,47 @@ node_types:
 							network: 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.network
+									property: openstack/sodalite.nodes.OpenStack.VM.network
 							flavor: 	
 								default: get_property:
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.flavor
+									property: openstack/sodalite.nodes.OpenStack.VM.flavor
 							key_name:                 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.key_name
+									property: openstack/sodalite.nodes.OpenStack.VM.key_name
 							image:                    
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.image
+									property: openstack/sodalite.nodes.OpenStack.VM.image
 							security_groups:          
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.security_groups								
+									property: openstack/sodalite.nodes.OpenStack.VM.security_groups								
 							vm_name:                  
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.name
+									property: openstack/sodalite.nodes.OpenStack.VM.name
 							ansible_user:             
 								default: get_property:
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.username
+									property: openstack/sodalite.nodes.OpenStack.VM.username
 							include_exporter:         
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.include_exporter
+									property: openstack/sodalite.nodes.OpenStack.VM.include_exporter
 							timeout:                  
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.timeout
+									property: openstack/sodalite.nodes.OpenStack.VM.timeout
 							floating_ip_pools:        
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.floating_ip_pools
+									property: openstack/sodalite.nodes.OpenStack.VM.floating_ip_pools
 							userdata:                 
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.OpenStack.VM.userdata
+									property: openstack/sodalite.nodes.OpenStack.VM.userdata
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
 							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
@@ -116,7 +118,7 @@ node_types:
 							id:                       
 								default: get_attribute:
 									entity: SELF
-									attribute: sodalite.nodes.OpenStack.VM.id
+									attribute: openstack/sodalite.nodes.OpenStack.VM.id
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
 							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]

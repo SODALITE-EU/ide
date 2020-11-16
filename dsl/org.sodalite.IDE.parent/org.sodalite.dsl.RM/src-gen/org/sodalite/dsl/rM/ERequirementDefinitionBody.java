@@ -28,70 +28,70 @@ import org.eclipse.emf.ecore.EObject;
 public interface ERequirementDefinitionBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Capability</b></em>' reference.
+   * Returns the value of the '<em><b>Capability</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Capability</em>' reference.
-   * @see #setCapability(ECapabilityType)
+   * @return the value of the '<em>Capability</em>' containment reference.
+   * @see #setCapability(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getERequirementDefinitionBody_Capability()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  ECapabilityType getCapability();
+  EPREFIX_TYPE getCapability();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getCapability <em>Capability</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getCapability <em>Capability</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Capability</em>' reference.
+   * @param value the new value of the '<em>Capability</em>' containment reference.
    * @see #getCapability()
    * @generated
    */
-  void setCapability(ECapabilityType value);
+  void setCapability(EPREFIX_TYPE value);
 
   /**
-   * Returns the value of the '<em><b>Node</b></em>' reference.
+   * Returns the value of the '<em><b>Node</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Node</em>' reference.
-   * @see #setNode(ENodeType)
+   * @return the value of the '<em>Node</em>' containment reference.
+   * @see #setNode(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getERequirementDefinitionBody_Node()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  ENodeType getNode();
+  EPREFIX_TYPE getNode();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getNode <em>Node</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getNode <em>Node</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Node</em>' reference.
+   * @param value the new value of the '<em>Node</em>' containment reference.
    * @see #getNode()
    * @generated
    */
-  void setNode(ENodeType value);
+  void setNode(EPREFIX_TYPE value);
 
   /**
-   * Returns the value of the '<em><b>Relationship</b></em>' reference.
+   * Returns the value of the '<em><b>Relationship</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Relationship</em>' reference.
-   * @see #setRelationship(ERelationshipType)
+   * @return the value of the '<em>Relationship</em>' containment reference.
+   * @see #setRelationship(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getERequirementDefinitionBody_Relationship()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  ERelationshipType getRelationship();
+  EPREFIX_TYPE getRelationship();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getRelationship <em>Relationship</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ERequirementDefinitionBody#getRelationship <em>Relationship</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Relationship</em>' reference.
+   * @param value the new value of the '<em>Relationship</em>' containment reference.
    * @see #getRelationship()
    * @generated
    */
-  void setRelationship(ERelationshipType value);
+  void setRelationship(EPREFIX_TYPE value);
 
   /**
    * Returns the value of the '<em><b>Start</b></em>' containment reference.

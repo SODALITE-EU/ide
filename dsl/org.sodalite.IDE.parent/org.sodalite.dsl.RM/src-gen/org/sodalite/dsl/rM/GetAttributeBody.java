@@ -26,69 +26,69 @@ import org.eclipse.emf.ecore.EObject;
 public interface GetAttributeBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Attribute</b></em>' reference.
+   * Returns the value of the '<em><b>Attribute</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Attribute</em>' reference.
-   * @see #setAttribute(EAttributeDefinition)
+   * @return the value of the '<em>Attribute</em>' containment reference.
+   * @see #setAttribute(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getGetAttributeBody_Attribute()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EAttributeDefinition getAttribute();
+  EPREFIX_TYPE getAttribute();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getAttribute <em>Attribute</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getAttribute <em>Attribute</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Attribute</em>' reference.
+   * @param value the new value of the '<em>Attribute</em>' containment reference.
    * @see #getAttribute()
    * @generated
    */
-  void setAttribute(EAttributeDefinition value);
+  void setAttribute(EPREFIX_TYPE value);
 
   /**
-   * Returns the value of the '<em><b>Entity</b></em>' attribute.
+   * Returns the value of the '<em><b>Entity</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Entity</em>' attribute.
-   * @see #setEntity(String)
+   * @return the value of the '<em>Entity</em>' containment reference.
+   * @see #setEntity(EEntityReference)
    * @see org.sodalite.dsl.rM.RMPackage#getGetAttributeBody_Entity()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getEntity();
+  EEntityReference getEntity();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getEntity <em>Entity</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getEntity <em>Entity</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entity</em>' attribute.
+   * @param value the new value of the '<em>Entity</em>' containment reference.
    * @see #getEntity()
    * @generated
    */
-  void setEntity(String value);
+  void setEntity(EEntityReference value);
 
   /**
-   * Returns the value of the '<em><b>Req cap</b></em>' reference.
+   * Returns the value of the '<em><b>Req cap</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Req cap</em>' reference.
-   * @see #setReq_cap(EReqOrCap)
+   * @return the value of the '<em>Req cap</em>' containment reference.
+   * @see #setReq_cap(EPREFIX_TYPE)
    * @see org.sodalite.dsl.rM.RMPackage#getGetAttributeBody_Req_cap()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EReqOrCap getReq_cap();
+  EPREFIX_TYPE getReq_cap();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getReq_cap <em>Req cap</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getReq_cap <em>Req cap</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Req cap</em>' reference.
+   * @param value the new value of the '<em>Req cap</em>' containment reference.
    * @see #getReq_cap()
    * @generated
    */
-  void setReq_cap(EReqOrCap value);
+  void setReq_cap(EPREFIX_TYPE value);
 
 } // GetAttributeBody

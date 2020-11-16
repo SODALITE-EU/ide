@@ -1,25 +1,20 @@
+module: modak
+
 inputs:
 	modak-endpoint:
 		type: string
 		
 node_templates:
 
-	//Common target: HLRS testbed
-	hlrs-testbed-target:
-		type: sodalite.nodes.modak.target
-		properties:
-			name: "hlrs_testbed"
-			queue_type: "torque"
-
 	//MODAK instance
 	modak-instance:
-		type: sodalite.nodes.modak
+		type: modak/sodalite.nodes.modak
 		properties:
 			endpoint: get_input: modak-endpoint
 			
 	//SOLVER JOB
 	solver-job:
-		type: sodalite.nodes.modak.job
+		type: modak/sodalite.nodes.modak.job
 		properties:
 			job_script: "/tmp/solver-job-timestamp.sh"
 
@@ -40,7 +35,11 @@ node_templates:
 				container_runtime: "ethcscs/mpich:ub1804_cuda101_mpi314_gnugprof"
 				app_type: "mpi"
 				executable: "${ASTER_ROOT}/14.4/bin/aster "
-				arguments: "${ASTER_ROOT}/14.4/lib/aster/Execution/E_SUPERV.py \\\n-commandes fort.1 --num_job=1432 --mode=interactif \\\n--rep_outils=${ASTER_ROOT}/outils \\\n--rep_mat=${ASTER_ROOT}/14.4/share/aster/materiau \\\n--rep_dex=${ASTER_ROOT}/14.4/share/aster/datg \\\n--numthreads=1 --suivi_batch --memjeveux=8192.0 --tpmax=3600.0"
+				arguments: "${ASTER_ROOT}/14.4/lib/aster/Execution/E_SUPERV.py 
+					-commandes fort.1 --num_job=1432 --mode=interactif --rep_outils=${ASTER_ROOT}/outils 
+					--rep_mat=${ASTER_ROOT}/14.4/share/aster/materiau 
+					--rep_dex=${ASTER_ROOT}/14.4/share/aster/datg 
+					--numthreads=1 --suivi_batch --memjeveux=8192.0 --tpmax=3600.0"
 				mpi_ranks: 40
 				threads: 1
 				build:
@@ -73,13 +72,11 @@ node_templates:
 
 		requirements:
 			modak_endpoint: 
-				node: modak-instance
-			target: 
-				node: hlrs-testbed-target
+				node: modak/modak-instance
 		
 	//TensorFlow-GPU SNOW JOB
 	tf-snow-job:
-		type: sodalite.nodes.modak.job
+		type: modak/sodalite.nodes.modak.job
 		properties:
 
 			ob_script: "/tmp/tf-snow-job-timestamp.sh"
@@ -129,9 +126,7 @@ node_templates:
               
 		requirements:
 			modak_endpoint: 
-				node: modak-instance
-			target: 
-				node: hlrs-testbed-target	
+				node: modak/modak-instance
 
 
 

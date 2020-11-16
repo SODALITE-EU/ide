@@ -13,7 +13,7 @@ package org.sodalite.dsl.kb_reasoner_client.json;
 import java.io.IOException;
 
 import org.sodalite.dsl.kb_reasoner_client.types.Property;
-import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -41,13 +41,13 @@ public class PropertyJsonDeserializer extends JsonDeserializer<Property> {
         Property property = new Property();
 		if (objectNode.get("description")!=null)
 			property.setDescription(objectNode.get("description").asText());
-		JavaType javaType = TypeFactory.defaultInstance().constructType(Type.class);
+		JavaType javaType = TypeFactory.defaultInstance().constructType(SuperType.class);
 		if (objectNode.get("specification") != null) {
 			JsonNode spec = objectNode.get("specification");
 			if (spec.get("type")!=null) {
-				Type type = null;
+				SuperType type = null;
 				if (!spec.get("type").isContainerNode()){ //single type
-					type = new Type();
+					type = new SuperType();
 					type.setLabel(spec.get("type").asText());
 				}else {
 					type = mapper.readerFor(javaType).readValue(spec.get("type"));

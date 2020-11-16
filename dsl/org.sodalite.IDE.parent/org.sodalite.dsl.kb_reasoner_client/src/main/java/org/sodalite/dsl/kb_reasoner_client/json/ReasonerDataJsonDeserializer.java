@@ -31,41 +31,44 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 public abstract class ReasonerDataJsonDeserializer<T extends KBEntity> extends JsonDeserializer<ReasonerData<T>> {
 	private static final String DATA = "data";
-    private static final ObjectMapper mapper = new ObjectMapper();
-    protected JavaType nodeType;
-    protected ReasonerData<T> rd;
-    
-    public ReasonerDataJsonDeserializer(ReasonerData<T> rd, Class<T> type) {
-    	this.nodeType = TypeFactory.defaultInstance().constructType(type);
-    	this.rd = rd;
-    }
+	private static final ObjectMapper mapper = new ObjectMapper();
+	protected JavaType nodeType;
+	protected ReasonerData<T> rd;
+
+	public ReasonerDataJsonDeserializer(ReasonerData<T> rd, Class<T> type) {
+		this.nodeType = TypeFactory.defaultInstance().constructType(type);
+		this.rd = rd;
+	}
 
 	@Override
 	public ReasonerData<T> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
 			throws IOException, JsonProcessingException {
 		ObjectNode objectNode = mapper.readTree(jsonParser);
-        JsonNode nodeData = objectNode.get(DATA);
+		JsonNode nodeData = objectNode.get(DATA);
 
-        if (null == nodeData                     // if no data node could be found
-                || !nodeData.isArray()           // or data node is not an array
-                || !nodeData.elements().hasNext())   // or data node doesn't contain any entry
-            return null;
+		if (null == nodeData // if no data node could be found
+				|| !nodeData.isArray() // or data node is not an array
+				|| !nodeData.elements().hasNext()) // or data node doesn't contain any entry
+			return null;
 
-        List<T> nodes = new ArrayList<>();
-        nodeData.forEach(node->{
-				try {
-					T entity = mapper.readerFor(nodeType).readValue(node.elements().next());
-					URI uri = new URI(((ObjectNode)node).fields().next().getKey());
-					entity.setUri(uri);
-					if (!nodes.contains(entity))
-						nodes.add(entity);
-				} catch (IOException | URISyntaxException e) {
-					e.printStackTrace();
-				}
+		List<T> nodes = new ArrayList<>();
+		nodeData.forEach(node -> {
+			try {
+				T entity = mapper.readerFor(nodeType).readValue(node.elements().next());
+				String key = ((ObjectNode) node).fields().next().getKey();
+				JsonNode value = ((ObjectNode) node).get(key);
+				URI uri = new URI(key);
+				if (value.get("namespace") != null)
+					entity.setModule(value.get("namespace").asText());
+				entity.setUri(uri);
+				if (!nodes.contains(entity))
+					nodes.add(entity);
+			} catch (IOException | URISyntaxException e) {
+				e.printStackTrace();
 			}
-        );
-        rd.setElements(nodes);
-        return rd;
+		});
+		rd.setElements(nodes);
+		return rd;
 	}
 
 }

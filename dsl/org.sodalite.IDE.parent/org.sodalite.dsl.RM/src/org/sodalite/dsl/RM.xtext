@@ -14,6 +14,8 @@ generate rM "http://www.sodalite.org/dsl/RM"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 RM_Model:
+	('module:' module=ID)? &
+	('import:' imports+=ID)* &
 	('data_types:'
 	BEGIN
 	dataTypes=EDataTypes
@@ -53,7 +55,7 @@ EDataType:
 	END;
 
 EDataTypeBody:
-	{EDataTypeBody} (('derived_from:' superType=[EDataType|EDataTypeName])? &
+	{EDataTypeBody} (('derived_from:' superType=EDataTypeName)? &
 	('description:' description=STRING)? &
 	('constraints:'
 	BEGIN
@@ -65,7 +67,7 @@ EDataTypeBody:
 	END)?);
 
 EDataTypeName:
-	QUALIFIED_NAME | PRIMITIVE_DATA_TYPE;
+	EPREFIX_TYPE | EPRIMITIVE_TYPE;
 
 EArtifactTypes:
 	{EArtifactTypes} (artifactTypes+=EArtifactType)+;
@@ -77,7 +79,7 @@ EArtifactType:
 	END;
 
 EArtifactTypeBody:
-	{EArtifactTypeBody} (('derived_from:' superType=[EArtifactType|QUALIFIED_NAME])? &
+	{EArtifactTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
 	('description:' description=STRING)? &
 	('mime_type:' mime_type=STRING)? &
 	('file_ext:'+ file_ext=STRING)?);
@@ -92,7 +94,7 @@ ECapabilityType:
 	END;
 
 ECapabilityTypeBody:
-	{ECapabilityTypeBody} (('derived_from:' superType=[ECapabilityType|QUALIFIED_NAME])? &
+	{ECapabilityTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
 	('description:' description=STRING)? &
 	('properties:'
 	BEGIN
@@ -113,7 +115,7 @@ EInterfaceType:
 	END;
 
 EInterfaceTypeBody:
-	{EInterfaceTypeBody} (('derived_from:' superType=[EInterfaceType|QUALIFIED_NAME])? &
+	{EInterfaceTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
 	('description:' description=STRING)? &
 	('inputs:'
 	BEGIN
@@ -134,7 +136,7 @@ EPolicyType:
 	END;
 
 EPolicyTypeBody:
-	{EPolicyTypeBody} (('derived_from:' superType=[EPolicyType|QUALIFIED_NAME])? &
+	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
 	('description:' description=STRING)?);
 
 ENodeTypes:
@@ -147,7 +149,7 @@ ENodeType:
 	END;
 
 ENodeTypeBody:
-	{ENodeTypeBody} (('derived_from:' superType=[ENodeType|QUALIFIED_NAME])? &
+	{ENodeTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
 	('description:' description=STRING)? &
 	('properties:'
 	BEGIN
@@ -180,7 +182,7 @@ ERelationshipType:
 	END;
 
 ERelationshipTypeBody:
-	{ERelationshipTypeBody} (('derived_from:' superType=[ERelationshipType|QUALIFIED_NAME])? &
+	{ERelationshipTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
 	('description:' description=STRING)? &
 	('properties:'
 	BEGIN
@@ -200,7 +202,7 @@ EValidTargetTypes:
 	targetTypes+=ECapabilityTypeRef (',' sourceType+=ECapabilityTypeRef)*;
 
 ECapabilityTypeRef:
-	name=[ECapabilityType|QUALIFIED_NAME];
+	name=EPREFIX_TYPE;
 
 EProperties:
 	{EProperties} (properties+=EPropertyDefinition)*;
@@ -212,7 +214,7 @@ EPropertyDefinition:
 	END;
 
 EPropertyDefinitionBody:
-	('type:' type=[EDataType|EDataTypeName]) &
+	('type:' type=EDataTypeName) &
 	('description:' description=STRING)? &
 	('required:' required=BOOLEAN)? &
 	('default:' default=EValueExpression)? &
@@ -221,7 +223,7 @@ EPropertyDefinitionBody:
 	BEGIN
 	constraints=EConstraints
 	END)? &
-	('entry_schema:' entry_schema=[EDataType|EDataTypeName])?;
+	('entry_schema:' entry_schema=EDataTypeName)?;
 
 EAttributes:
 	{EAttributes} (attributes+=EAttributeDefinition)*;
@@ -233,11 +235,11 @@ EAttributeDefinition:
 	END;
 
 EAttributeDefinitionBody:
-	('type:' type=[EDataType|EDataTypeName]) &
+	('type:' type=EDataTypeName) &
 	('description:' description=STRING)? &
 	('default:' default=EValueExpression)? &
 	('status:' status=STRING)? &
-	('entry_schema:' entry_schema=[EDataType|EDataTypeName])?;
+	('entry_schema:' entry_schema=EDataTypeName)?;
 
 EInterfaces:
 	{EInterfaces} (interfaces+=EInterfaceDefinition)*;
@@ -249,7 +251,7 @@ EInterfaceDefinition:
 	END;
 
 EInterfaceDefinitionBody:
-	'type:' type=[EInterfaceType|QUALIFIED_NAME] &
+	'type:' type=EPREFIX_TYPE &
 	('inputs:'
 	BEGIN
 	inputs=EProperties
@@ -313,7 +315,7 @@ EParameterDefinition:
 
 EParameterDefinitionBody:
 	{EParameterDefinitionBody} (
-	('type:' type=[EDataType|EDataTypeName])? &
+	('type:' type=EDataTypeName)? &
 	('value:' value=EValueExpression)? &
 	('default:' default=EValueExpression)?);
 
@@ -324,7 +326,7 @@ EFunction:
 	GetProperty | GetAttribute | GetInput;
 
 GetInput:
-	'get_input:' input=[EParameterDefinition]
+	'get_input:' input=[EParameterDefinition] //FIXME do not use cross-reference
 ;
 
 GetAttribute:
@@ -334,9 +336,9 @@ GetAttribute:
 	END;
 
 GetAttributeBody:
-	('attribute:' attribute=[EAttributeDefinition|QUALIFIED_NAME]) &
-	('entity:' entity=ENTITY) &
-	('req_cap:' req_cap=[EReqOrCap|QUALIFIED_NAME])?;
+	('attribute:' attribute=EPREFIX_TYPE) &
+	('entity:' entity=EEntityReference) &
+	('req_cap:' req_cap=EPREFIX_TYPE)?;
 
 GetProperty:
 	'get_property:'
@@ -345,9 +347,9 @@ GetProperty:
 	END;
 
 GetPropertyBody:
-	('property:' property=[EPropertyDefinition|QUALIFIED_NAME]) &
-	('entity:' entity=ENTITY) &
-	('req_cap:' req_cap=[EReqOrCap|QUALIFIED_NAME])?;
+	('property:' property=EPREFIX_TYPE) &
+	('entity:' entity=EEntityReference) &
+	('req_cap:' req_cap=EPREFIX_TYPE)?;
 
 ECapabilities:
 	{ECapabilities} (capabilities+=ECapabilityDefinition)*;
@@ -359,7 +361,7 @@ ECapabilityDefinition:
 	END;
 
 ECapabilityDefinitionBody:
-	('type:' type=[ECapabilityType|QUALIFIED_NAME]) &
+	('type:' type=EPREFIX_TYPE) &
 	('description:' description=STRING)? &
 	('properties:'
 	BEGIN
@@ -373,10 +375,7 @@ ECapabilityDefinitionBody:
 	('occurrences:' '[' occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 
 EValidSourceType:
-	sourceTypes+=ENodeTypeRef (',' sourceType+=ENodeTypeRef)*;
-
-ENodeTypeRef:
-	name=[ENodeType|QUALIFIED_NAME];
+	sourceTypes+=EPREFIX_TYPE (',' sourceType+=EPREFIX_TYPE)*;
 
 ERequirements:
 	{ERequirements} (requirements+=ERequirementDefinition)*;
@@ -388,9 +387,9 @@ ERequirementDefinition:
 	END;
 
 ERequirementDefinitionBody:
-	('capability:' capability=[ECapabilityType|QUALIFIED_NAME]) &
-	('node:' node=[ENodeType|QUALIFIED_NAME])? &
-	('relationship:' relationship=[ERelationshipType|QUALIFIED_NAME])? &
+	('capability:' capability=EPREFIX_TYPE) &
+	('node:' node=EPREFIX_TYPE)? &
+	('relationship:' relationship=EPREFIX_TYPE)? &
 	('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?;
 
 EReqOrCap:
@@ -475,6 +474,27 @@ EMapEntry:
 	key=ID ":" value=EAssignmentValue
 ;
 
+EEntityReference:
+	EEntity | EPREFIX_TYPE | EPREFIX_ID
+;
+
+EPREFIX_TYPE:
+	(module=ID '/')? type=QUALIFIED_NAME
+;
+
+EPREFIX_ID:
+	(module=ID '/')? id=ID
+;
+
+EPRIMITIVE_TYPE:
+	type=ID
+;
+
+EEntity:
+	entity=ENTITY
+;
+
+
 terminal QUALIFIED_NAME: //FIXME convert to data type rule, remove terminal
 	ID ('.' ID)+;
 
@@ -487,10 +507,6 @@ FLOAT returns ecore::EFloat: INT? '.' INT;
 
 terminal ENTITY:
 	'SELF' | 'SOURCE' | 'TARGET' | 'HOST';
-
-terminal PRIMITIVE_DATA_TYPE:
-	'string' | 'integer' | 'float'| 'boolean' | 'map' | 'list' | 'range' | 'timestamp' | 'scalar-unit.frequency' |
-	'scalar-unit.size' | 'version-type';
 
 @Override
 terminal ID:

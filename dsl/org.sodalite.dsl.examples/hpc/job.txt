@@ -1,0 +1,21 @@
+	hpc_job_torque_4:
+		type: my.nodes.hpc.job.torque
+		properties:
+			name: "hpc-test-4"
+			script_template: "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2"
+			email: "tokmakov@hlrs.de"
+			nb_nodes: "1"
+			ppn: "1"
+			walltime: "00:02:00"
+			monitor_period: "10"
+			monitor_retries_headroom: "2"
+		
+		requirements:
+			host:
+				node: hpc_wm_torque
+			
+			dependency:
+				node: hpc_job_torque_3
+			
+			dependency:
+				node: hpc_job_torque_2

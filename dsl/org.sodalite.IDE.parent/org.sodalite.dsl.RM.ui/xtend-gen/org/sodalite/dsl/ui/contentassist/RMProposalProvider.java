@@ -3,7 +3,13 @@
  */
 package org.sodalite.dsl.ui.contentassist;
 
+import com.google.common.base.Objects;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -14,7 +20,24 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
+import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
+import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.rM.ECapabilityType;
+import org.sodalite.dsl.rM.EDataType;
+import org.sodalite.dsl.rM.EDataTypeName;
+import org.sodalite.dsl.rM.EInterfaceType;
+import org.sodalite.dsl.rM.ENodeType;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.ERelationshipType;
+import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
+import org.sodalite.dsl.ui.preferences.Activator;
+import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -40,6 +63,17 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   private final String HOST_DESCRIPTION = ("A TOSCA orchestrator will interpret this keyword to refer\n" + 
     "to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship).");
   
+  public KBReasoner getKBReasoner() {
+    final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+    final String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+    final KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
+    System.out.println(
+      MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI));
+    return kbclient;
+  }
+  
   @Override
   public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     this._completeKeyword(keyword, contentAssistContext, acceptor);
@@ -53,12 +87,397 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   @Override
+  public void completeRM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for imports");
+      final ReasonerData<String> modules = this.getKBReasoner().getModules();
+      List<String> _elements = modules.getElements();
+      String _plus = ("Modules retrieved from KB: " + _elements);
+      System.out.println(_plus);
+      List<String> _elements_1 = modules.getElements();
+      for (final String module : _elements_1) {
+        {
+          System.out.println(("\tModule: " + module));
+          final String proposalText = this.extractModule(module);
+          final String displayText = proposalText;
+          final Object additionalProposalInfo = null;
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
+        }
+      }
+      super.completeRM_Model_Imports(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public String extractModule(final String module) {
+    int _length = module.length();
+    int _minus = (_length - 2);
+    int _lastIndexOf = module.lastIndexOf("/", _minus);
+    int _plus = (_lastIndexOf + 1);
+    int _length_1 = module.length();
+    int _minus_1 = (_length_1 - 1);
+    return module.substring(_plus, _minus_1);
+  }
+  
+  @Override
   public void completeENodeType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ENodeType::name property");
     final String proposalText = "tosca.types.id";
     final String displayText = "tosca.types.id";
     final String additionalProposalInfo = "The required id of the node type";
     this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void completeEDataTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for EDataType::supertype property");
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ReasonerData<Type> types = this.getKBReasoner().getDataTypes(importedModules);
+      System.out.println("Data types retrieved from KB:");
+      List<Type> _elements = types.getElements();
+      for (final Type type : _elements) {
+        {
+          String _label = type.getLabel();
+          String _plus = ("\tData type: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = type.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(type.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = type.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = type.getLabel();
+          }
+          final String qtype = _xifexpression;
+          final String proposalText = qtype;
+          final String displayText = qtype;
+          final String additionalProposalInfo = type.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<EDataType> _dataTypes = rootModel.getDataTypes().getDataTypes();
+      for (final EDataType dataType : _dataTypes) {
+        {
+          EDataTypeName _name = dataType.getName();
+          final EPREFIX_TYPE ePrefixType = ((EPREFIX_TYPE) _name);
+          String _type = ePrefixType.getType();
+          String _plus = ("\tLocal node: " + _type);
+          System.out.println(_plus);
+          String _type_1 = ePrefixType.getType();
+          final String proposalText = ((module + "/") + _type_1);
+          String _type_2 = ePrefixType.getType();
+          final String displayText = ((module + "/") + _type_2);
+          final String additionalProposalInfo = dataType.getData().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeENodeTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for NodeType::superType property");
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ReasonerData<Type> nodes = this.getKBReasoner().getNodeTypes(importedModules);
+      System.out.println("Nodes retrieved from KB:");
+      List<Type> _elements = nodes.getElements();
+      for (final Type node : _elements) {
+        {
+          String _label = node.getLabel();
+          String _plus = ("\tNode: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = node.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(node.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = node.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = node.getLabel();
+          }
+          final String qnode = _xifexpression;
+          final String proposalText = qnode;
+          final String displayText = qnode;
+          final String additionalProposalInfo = node.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<ENodeType> _nodeTypes = rootModel.getNodeTypes().getNodeTypes();
+      for (final ENodeType nodeType : _nodeTypes) {
+        {
+          String _name = nodeType.getName();
+          String _plus = ("\tLocal node: " + _name);
+          System.out.println(_plus);
+          String _name_1 = nodeType.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = nodeType.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = nodeType.getNode().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public String getLastSegment(final String string, final String delimiter) {
+    return IterableExtensions.<String>last(((Iterable<String>)Conversions.doWrapArray(string.split(delimiter))));
+  }
+  
+  @Override
+  public void completeERelationshipTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for RelationshipType::supertype property");
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ReasonerData<Type> relationships = this.getKBReasoner().getRelationshipTypes(importedModules);
+      System.out.println("Relationships retrieved from KB:");
+      List<Type> _elements = relationships.getElements();
+      for (final Type relationship : _elements) {
+        {
+          String _label = relationship.getLabel();
+          String _plus = ("\tRelationship: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = relationship.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(relationship.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = relationship.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = relationship.getLabel();
+          }
+          final String qrelationship = _xifexpression;
+          final String proposalText = qrelationship;
+          final String displayText = qrelationship;
+          final String additionalProposalInfo = relationship.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<ERelationshipType> _relationshipTypes = rootModel.getRelationshipTypes().getRelationshipTypes();
+      for (final ERelationshipType relationshipType : _relationshipTypes) {
+        {
+          String _name = relationshipType.getName();
+          String _plus = ("\tLocal relationship type: " + _name);
+          System.out.println(_plus);
+          String _name_1 = relationshipType.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = relationshipType.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = relationshipType.getRelationship().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeECapabilityTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for CapabilityType::supertype property");
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ReasonerData<Type> capabilitiess = this.getKBReasoner().getCapabilityTypes(importedModules);
+      System.out.println("Capabilities retrieved from KB:");
+      List<Type> _elements = capabilitiess.getElements();
+      for (final Type cap : _elements) {
+        {
+          String _label = cap.getLabel();
+          String _plus = ("\tCapability: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = cap.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(cap.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = cap.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = cap.getLabel();
+          }
+          final String qcap = _xifexpression;
+          final String proposalText = qcap;
+          final String displayText = qcap;
+          final String additionalProposalInfo = cap.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<ECapabilityType> _capabilityTypes = rootModel.getCapabilityTypes().getCapabilityTypes();
+      for (final ECapabilityType cap_1 : _capabilityTypes) {
+        {
+          String _name = cap_1.getName();
+          String _plus = ("\tLocal capability type: " + _name);
+          System.out.println(_plus);
+          String _name_1 = cap_1.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = cap_1.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = cap_1.getCapability().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeEInterfaceDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for InterfaceDefinition::type property");
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ReasonerData<Type> interfaces = this.getKBReasoner().getInterfaceTypes(importedModules);
+      System.out.println("Interfaces retrieved from KB:");
+      List<Type> _elements = interfaces.getElements();
+      for (final Type interface_ : _elements) {
+        {
+          String _label = interface_.getLabel();
+          String _plus = ("\tCapability: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = interface_.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(interface_.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = interface_.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = interface_.getLabel();
+          }
+          final String qinterface = _xifexpression;
+          final String proposalText = qinterface;
+          final String displayText = qinterface;
+          final String additionalProposalInfo = interface_.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
+      for (final EInterfaceType interface__1 : _interfaceTypes) {
+        {
+          String _name = interface__1.getName();
+          String _plus = ("\tLocal interface type: " + _name);
+          System.out.println(_plus);
+          String _name_1 = interface__1.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = interface__1.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = interface__1.getInterface().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeEPropertyDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeERequirementDefinitionBody_Capability(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeECapabilityTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeERequirementDefinitionBody_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeERequirementDefinitionBody_Relationship(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeERelationshipTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeEAttributeDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeEParameterDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeGetAttributeBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  }
+  
+  @Override
+  public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  }
+  
+  public String getModule(final EObject object) {
+    Object _findModel = this.findModel(object);
+    final RM_Model model = ((RM_Model) _findModel);
+    return model.getModule();
+  }
+  
+  public List<String> getImportedModules(final EObject object) {
+    final List<String> modules = new ArrayList<String>();
+    Object _findModel = this.findModel(object);
+    final RM_Model model = ((RM_Model) _findModel);
+    EList<String> _imports = model.getImports();
+    for (final String import_ : _imports) {
+      modules.add(import_);
+    }
+    return modules;
+  }
+  
+  public Object findModel(final EObject object) {
+    EObject _eContainer = object.eContainer();
+    boolean _equals = Objects.equal(_eContainer, null);
+    if (_equals) {
+      return null;
+    } else {
+      EObject _eContainer_1 = object.eContainer();
+      if ((_eContainer_1 instanceof RM_Model)) {
+        return object.eContainer();
+      } else {
+        return this.findModel(object.eContainer());
+      }
+    }
   }
   
   @Override

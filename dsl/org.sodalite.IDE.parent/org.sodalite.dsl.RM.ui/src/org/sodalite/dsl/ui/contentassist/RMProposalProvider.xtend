@@ -7,13 +7,25 @@ package org.sodalite.dsl.ui.contentassist
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.Assignment
-import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
-import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.Keyword
+import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
+import org.sodalite.dsl.kb_reasoner_client.KBReasoner
+import org.eclipse.jface.preference.IPreferenceStore
+import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient
+import java.text.MessageFormat
+import org.sodalite.dsl.ui.preferences.PreferenceConstants
+import org.sodalite.dsl.ui.preferences.Activator
+import java.util.List
+import org.sodalite.dsl.kb_reasoner_client.types.Type
+import org.sodalite.dsl.rM.RM_Model
+import java.util.ArrayList
+import org.eclipse.xtext.RuleCall
 import org.eclipse.ui.PlatformUI
 import org.eclipse.swt.widgets.FileDialog
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
+import org.sodalite.dsl.rM.EPREFIX_TYPE
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -33,6 +45,22 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	final String HOST_DESCRIPTION = "A TOSCA orchestrator will interpret this keyword to refer\n" + 
 	"to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship)."
 	
+	
+	def KBReasoner getKBReasoner() {
+		// Configure KBReasonerClient endpoint from preference page information
+		val IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+
+		val String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		val String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		val String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		val KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
+		System.out.println(
+				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
+						kbReasonerURI, iacURI, xoperaURI));
+		return kbclient;
+	}
+	
+	
 	// this override filters the keywords for which to create content assist proposals
 	override void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 		ICompletionProposalAcceptor acceptor) {
@@ -47,6 +75,27 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		acceptor.accept(proposal);
 	}
 	
+	override void completeRM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for imports")
+		
+		val ReasonerData<String> modules = getKBReasoner().modules
+			
+		System.out.println ("Modules retrieved from KB: " + modules.elements)
+		for (module: modules.elements){
+			System.out.println ("\tModule: " + module)
+			val proposalText = extractModule(module)
+			val displayText = proposalText
+			val additionalProposalInfo = null
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeRM_Model_Imports(model, assignment, context, acceptor)
+	}
+	
+	def extractModule(String module) {
+		return module.substring(module.lastIndexOf("/", module.length - 2) + 1, module.length - 1)
+	}
+	
 	override void completeENodeType_Name(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for ENodeType::name property")
@@ -55,6 +104,239 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String additionalProposalInfo = "The required id of the node type"
 
 		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+	}
+	
+	override void completeEDataTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EDataType::supertype property")
+		
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
+		
+		val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
+		System.out.println ("Data types retrieved from KB:")
+		for (type: types.elements){
+			System.out.println ("\tData type: " + type.label)
+			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+			val proposalText = qtype
+			val displayText = qtype
+			val additionalProposalInfo = type.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+		
+		//Add other data types defined locally in the model
+		val rootModel = findModel(model) as RM_Model
+		
+		for (dataType: rootModel.dataTypes.dataTypes){
+			val EPREFIX_TYPE ePrefixType = dataType.name as EPREFIX_TYPE
+			System.out.println ("\tLocal node: " + ePrefixType.type)
+			val proposalText = module + "/" + ePrefixType.type 
+			val displayText = module + "/" + ePrefixType.type 
+			val additionalProposalInfo = dataType.data.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}		
+
+		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeENodeTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for NodeType::superType property")
+		
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
+		
+		val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
+		System.out.println ("Nodes retrieved from KB:")
+		for (node: nodes.elements){
+			System.out.println ("\tNode: " + node.label)
+			val qnode = node.module !== null ?getLastSegment(node.module, '/') + '/' + node.label:node.label
+			val proposalText = qnode
+			val displayText = qnode
+			val additionalProposalInfo = node.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+		
+		//Add other nodes defined locally in the model
+		val rootModel = findModel(model) as RM_Model
+		
+		for (nodeType: rootModel.nodeTypes.nodeTypes){
+			System.out.println ("\tLocal node: " + nodeType.name)
+			val proposalText = module + "/" + nodeType.name 
+			val displayText = module + "/" + nodeType.name 
+			val additionalProposalInfo = nodeType.node.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	def getLastSegment(String string, String delimiter) {
+		return string.split(delimiter).last
+	}
+	
+	override void completeERelationshipTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for RelationshipType::supertype property")
+		
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
+		
+		val ReasonerData<Type> relationships = getKBReasoner().getRelationshipTypes(importedModules)
+		System.out.println ("Relationships retrieved from KB:")
+		for (relationship: relationships.elements){
+			System.out.println ("\tRelationship: " + relationship.label)
+			val qrelationship = relationship.module !== null ?getLastSegment(relationship.module, '/') + '/' + relationship.label:relationship.label
+			val proposalText = qrelationship
+			val displayText = qrelationship
+			val additionalProposalInfo = relationship.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+		
+		//Add other relationships defined locally in the model
+		val rootModel = findModel(model) as RM_Model
+		
+		for (relationshipType: rootModel.relationshipTypes.relationshipTypes){
+			System.out.println ("\tLocal relationship type: " + relationshipType.name)
+			val proposalText = module + "/" + relationshipType.name 
+			val displayText = module + "/" + relationshipType.name 
+			val additionalProposalInfo = relationshipType.relationship.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeECapabilityTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for CapabilityType::supertype property")
+		
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
+		
+		val ReasonerData<Type> capabilitiess = getKBReasoner().getCapabilityTypes(importedModules)
+		System.out.println ("Capabilities retrieved from KB:")
+		for (cap: capabilitiess.elements){
+			System.out.println ("\tCapability: " + cap.label)
+			val qcap = cap.module !== null ?getLastSegment(cap.module, '/') + '/' + cap.label:cap.label
+			val proposalText = qcap
+			val displayText = qcap
+			val additionalProposalInfo = cap.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+		
+		//Add other capabilities defined locally in the model
+		val rootModel = findModel(model) as RM_Model
+		
+		for (cap: rootModel.capabilityTypes.capabilityTypes){
+			System.out.println ("\tLocal capability type: " + cap.name)
+			val proposalText = module + "/" + cap.name 
+			val displayText = module + "/" + cap.name 
+			val additionalProposalInfo = cap.capability.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)	
+	}
+	
+	override void completeEInterfaceDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for InterfaceDefinition::type property")
+		
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
+		
+		val ReasonerData<Type> interfaces = getKBReasoner().getInterfaceTypes(importedModules)
+		System.out.println ("Interfaces retrieved from KB:")
+		for (interface: interfaces.elements){
+			System.out.println ("\tCapability: " + interface.label)
+			val qinterface = interface.module !== null ?getLastSegment(interface.module, '/') + '/' + interface.label:interface.label
+			val proposalText = qinterface
+			val displayText = qinterface
+			val additionalProposalInfo = interface.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+		
+		//Add other interfaces defined locally in the model
+		val rootModel = findModel(model) as RM_Model
+		
+		for (interface: rootModel.interfaceTypes.interfaceTypes){
+			System.out.println ("\tLocal interface type: " + interface.name)
+			val proposalText = module + "/" + interface.name 
+			val displayText = module + "/" + interface.name 
+			val additionalProposalInfo = interface.interface.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	
+	}
+	
+	override void completeEPropertyDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeEDataTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeERequirementDefinitionBody_Capability(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeECapabilityTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeERequirementDefinitionBody_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeERequirementDefinitionBody_Relationship(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeERelationshipTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeEAttributeDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeEDataTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeEParameterDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeEDataTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeGetAttributeBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		//TODO
+	
+	}
+	
+	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		//TODO
+
+	}
+	
+	def getModule(EObject object) {
+		val RM_Model model = findModel(object) as RM_Model
+		return model.module
+	}
+	
+	def getImportedModules(EObject object) {
+		val List<String> modules = new ArrayList()
+		val RM_Model model = findModel(object) as RM_Model
+		for (import: model.imports)
+			modules.add(import)
+		
+		return modules
+	}
+	
+	def findModel(EObject object) {
+		if (object.eContainer == null)
+			return null
+		else if (object.eContainer instanceof RM_Model)
+			return object.eContainer
+		else
+			return findModel(object.eContainer)
 	}
 	
 	override void completeEDataType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

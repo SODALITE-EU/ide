@@ -1,3 +1,5 @@
+module: docker
+
 node_types:
 	sodalite.nodes.DockerRegistry:
 		derived_from: tosca.nodes.SoftwareComponent
@@ -22,15 +24,15 @@ node_types:
 							docker_registry_url:      
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.DockerRegistry.docker_registry_url
+									property: docker/sodalite.nodes.DockerRegistry.docker_registry_url
 							docker_user:              
 								default: get_property:
 									entity: SELF
-									property: sodalite.nodes.DockerRegistry.docker_user
+									property: docker/sodalite.nodes.DockerRegistry.docker_user
 							docker_pass:             
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.DockerRegistry.docker_pass
+									property: docker/sodalite.nodes.DockerRegistry.docker_pass
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/login_user.yml"
 					delete:
@@ -38,7 +40,7 @@ node_types:
 							docker_registry_url:      
 								default: get_property: 
 									entity: SELF
-									property: sodalite.nodes.DockerRegistry.docker_registry_url
+									property: docker/sodalite.nodes.DockerRegistry.docker_registry_url
 						implementation: 
 							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/logout_user.yml"
               
