@@ -144,7 +144,9 @@ public class KBReasonerProxy {
 		SortedSet<String> types = new TreeSet<String>();
 		EPREFIX_TYPE nodeType = ((ENodeTemplateBody) req.eContainer().eContainer()).getType();
 		String resourceId = (nodeType.getModule() != null ? nodeType.getModule() + "/" : "") + nodeType.getType();
-		ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(req.getName(), resourceId);
+		// FIXME Support searching based on modules (namespaces)
+		List<String> modules = Arrays.asList();
+		ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(req.getName(), resourceId, modules);
 		if (vrnd != null) {
 			System.out.println("Valid requirement nodes retrieved from KB for requirement: " + req.getName());
 			for (ValidRequirementNode vrn : vrnd.getElements()) {

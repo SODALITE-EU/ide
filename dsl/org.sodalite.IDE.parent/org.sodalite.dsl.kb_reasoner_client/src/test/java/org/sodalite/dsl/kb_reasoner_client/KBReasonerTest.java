@@ -152,8 +152,10 @@ class KBReasonerTest {
 
 	@Test
 	void testGetValidRequirementNodes() throws Exception {
-		String nodeType = "openstack/sodalite.nodes.DockerizedComponent";
-		ValidRequirementNodeData valid_requirement_nodes = kbclient.getValidRequirementNodes(requirementId, nodeType);
+		String nodeType = "docker/sodalite.nodes.DockerizedComponent";
+		List<String> modules = Arrays.asList("snow", "clinical");
+		ValidRequirementNodeData valid_requirement_nodes = kbclient.getValidRequirementNodes(requirementId, nodeType,
+				modules);
 		assertFalse(valid_requirement_nodes.getElements().isEmpty());
 		System.out.println("ValidRequirementNodes for resource: " + resourceId);
 		valid_requirement_nodes.getElements().stream().forEach(node -> System.out.println("Requirement: " + node));

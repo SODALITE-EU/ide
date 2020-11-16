@@ -8,7 +8,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.RMPackage;
@@ -27,7 +26,7 @@ import org.sodalite.dsl.rM.RMPackage;
  *
  * @generated
  */
-public class EPREFIX_IDImpl extends MinimalEObjectImpl.Container implements EPREFIX_ID
+public class EPREFIX_IDImpl extends EEntityReferenceImpl implements EPREFIX_ID
 {
   /**
    * The default value of the '{@link #getModule() <em>Module</em>}' attribute.

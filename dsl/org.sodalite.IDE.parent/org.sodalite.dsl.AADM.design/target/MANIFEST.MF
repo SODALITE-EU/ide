@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.sodalite.dsl.AADM.design
+Bundle-SymbolicName: org.sodalite.dsl.AADM.design;singleton:=true
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.co
+ re.resources,org.eclipse.sirius,org.eclipse.sirius.common.acceleo.aql
+ ,com.google.guava;bundle-version="27.1.0",com.google.inject;bundle-ve
+ rsion="3.0.0",com.altran.general.integration.xtextsirius.runtime;bund
+ le-version="0.18.0",org.sodalite.dsl.AADM;bundle-version="1.0.0",org.
+ sodalite.dsl.AADM.ui;bundle-version="1.0.0",org.eclipse.sirius.ext.em
+ f.edit;bundle-version="6.2.3",org.sodalite.dsl.RM,org.sodalite.dsl.pr
+ eferences;bundle-version="1.0.0"
+Bundle-ManifestVersion: 2
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Vendor: %providerName
+Export-Package: org.sodalite.dsl.AADM.design
+Bundle-Name: %pluginName
+Bundle-Version: 1.0.0.202009181201
+Bundle-Localization: plugin
+Bundle-ClassPath: lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-depende
+ ncies.jar,.
+Bundle-Activator: org.sodalite.dsl.AADM.design.Activator
+

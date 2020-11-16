@@ -46,10 +46,10 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
-import org.sodalite.dsl.kb_reasoner_client.types.StringData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
+import org.sodalite.dsl.kb_reasoner_client.types.StringData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeKind;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
@@ -217,10 +217,14 @@ public class KBReasonerClient implements KBReasoner {
 		return data;
 	}
 
-	public ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception {
+	public ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType,
+			List<String> modules) throws Exception {
 		Assert.notNull(requirementId, "Pass a not null requirementId");
 		Assert.notNull(nodeType, "Pass a not null nodeType");
-		String url = kbReasonerUri + "valid-requirement-nodes?requirement=" + requirementId + "&nodeType=" + nodeType;
+		String url = kbReasonerUri + "valid-requirement-nodes;requirement=" + requirementId + ";nodeType="
+				+ encodeValue(nodeType);
+		for (String module : modules)
+			url += ";imports=" + module;
 		ValidRequirementNodeData data = getJSONObjectForType(ValidRequirementNodeData.class, new URI(url),
 				HttpStatus.OK);
 		if (data == null) {

@@ -382,8 +382,13 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		val String aadmURI = getAADMURI (rootModel); //TODO Use aadmURI to determine if KB suggestion belongs to the local model
 		
 		//Get valid requirement nodes from KB
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
 		
-		val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId);
+		val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
 		val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId);
 		if (!vrnd.elements.empty){
 			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
@@ -393,15 +398,6 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				System.out.println ("Valid requirement node: " + qnode)
 			 	displayText = qnode
 				proposalText = qnode
-				val local = existsInAadm(vrn.uri.toString, aadmURI)
-				if (local){
-					displayText += " <local>"
-					additionalProposalInfo = "Node " + qnode + " of type " + qtype + " is available in the AADM"
-				}else{
-					displayText += " <in KB>"
-					additionalProposalInfo = "Node " + qnode + " of type " + qtype + " is available in the KB"
-				}
-				
 				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 			}
 		
@@ -411,24 +407,22 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val Type superType = tovrnd.elements.get(0)
 			val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
 			val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
-			val String module = getModule(model) 
 			for (ENodeTemplate node: localnodes){
 				System.out.println ("Valid requirement local node: " + node.name)
 			 	val qnode = module != null? module + '/' + node.name: node.name
 			 	val qtype = node.node.type.module != null? node.node.type.module + '/' + node.node.type.type: node.node.type.type
 				proposalText = qnode
-				displayText = qnode + " <local>"
-				additionalProposalInfo = "Node " + qnode + " of type " + qtype + " is available in this AADM model"
+				displayText = qnode
 				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 			}
 		}
 	}
 		
-	def existsInAadm(String nodeUri, String aadmUri) {
-		return nodeUri.substring(0, nodeUri.lastIndexOf('/')).equals(
-			aadmUri.substring(0, aadmUri.lastIndexOf('/'))
-		)
-	}
+//	def existsInAadm(String nodeUri, String aadmUri) {
+//		return nodeUri.substring(0, nodeUri.lastIndexOf('/')).equals(
+//			aadmUri.substring(0, aadmUri.lastIndexOf('/'))
+//		)
+//	}
 		
 	def getAADMURI(AADM_Model model) {
 		//val String filename = model.eResource.URI.lastSegment

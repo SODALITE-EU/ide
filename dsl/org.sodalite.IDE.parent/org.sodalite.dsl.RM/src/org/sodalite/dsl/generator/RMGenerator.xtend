@@ -50,6 +50,9 @@ import org.sodalite.dsl.rM.EBOOLEAN
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
 import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.rM.EDataTypeName
+import org.sodalite.dsl.rM.EEntityReference
+import org.sodalite.dsl.rM.EEntity
+import org.sodalite.dsl.rM.EPREFIX_ID
 
 /**
  * Generates code from your model files on save.
@@ -562,7 +565,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entity" ;  
-	  exchange:value '«p.property.entity»' ; 
+	  exchange:value '«trim(p.property.entity.compile())»' ; 
 	.
 	«ENDIF»	
 	
@@ -610,7 +613,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entity" ;  
-	  exchange:value '«a.attribute.entity»' ; 
+	  exchange:value '«trim(a.attribute.entity.compile())»' ; 
 	.
 	«ENDIF»	
 	
@@ -969,6 +972,16 @@ class RMGenerator extends AbstractGenerator {
 	  «(t as EPREFIX_TYPE).compile»  
 	«ELSEIF t instanceof EPRIMITIVE_TYPE»
 	  «(t as EPRIMITIVE_TYPE).compile»
+	«ENDIF»
+	'''
+	
+	def compile (EEntityReference t) '''
+	«IF t instanceof EPREFIX_TYPE»
+	  «(t as EPREFIX_TYPE).compile»
+	«ELSEIF t instanceof EPREFIX_ID»
+	  «(t as EPREFIX_ID).id»
+	«ELSEIF t instanceof EEntity»
+	  «(t as EEntity).entity»
 	«ENDIF»
 	'''
 	

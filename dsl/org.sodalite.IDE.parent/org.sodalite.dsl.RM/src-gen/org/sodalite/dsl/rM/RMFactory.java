@@ -753,6 +753,15 @@ public interface RMFactory extends EFactory
   EMapEntry createEMapEntry();
 
   /**
+   * Returns a new object of class '<em>EEntity Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EEntity Reference</em>'.
+   * @generated
+   */
+  EEntityReference createEEntityReference();
+
+  /**
    * Returns a new object of class '<em>EPREFIX TYPE</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -778,6 +787,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   EPRIMITIVE_TYPE createEPRIMITIVE_TYPE();
+
+  /**
+   * Returns a new object of class '<em>EEntity</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EEntity</em>'.
+   * @generated
+   */
+  EEntity createEEntity();
 
   /**
    * Returns the package supported by this factory.

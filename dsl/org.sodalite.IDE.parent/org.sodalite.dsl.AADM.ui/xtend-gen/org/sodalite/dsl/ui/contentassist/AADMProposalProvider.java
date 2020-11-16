@@ -598,7 +598,10 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       Object _findModel = this.findModel(model);
       final AADM_Model rootModel = ((AADM_Model) _findModel);
       final String aadmURI = this.getAADMURI(rootModel);
-      final ValidRequirementNodeData vrnd = this.getKBReasoner().getValidRequirementNodes(requirementId, resourceId);
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ValidRequirementNodeData vrnd = this.getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
       final TypeData tovrnd = this.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId);
       boolean _isEmpty = vrnd.getElements().isEmpty();
       boolean _not = (!_isEmpty);
@@ -634,16 +637,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             System.out.println(("Valid requirement node: " + qnode));
             displayText = qnode;
             proposalText = qnode;
-            final boolean local = this.existsInAadm(vrn.getUri().toString(), aadmURI);
-            if (local) {
-              String _displayText = displayText;
-              displayText = (_displayText + " <local>");
-              additionalProposalInfo = (((("Node " + qnode) + " of type ") + qtype) + " is available in the AADM");
-            } else {
-              String _displayText_1 = displayText;
-              displayText = (_displayText_1 + " <in KB>");
-              additionalProposalInfo = (((("Node " + qnode) + " of type ") + qtype) + " is available in the KB");
-            }
             this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
           }
         }
@@ -665,7 +658,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
         final String qsuperType = _xifexpression_1;
         final List<ENodeTemplate> localnodes = this.findLocalNodesForType(qsuperType, model);
-        final String module = this.getModule(model);
         for (final ENodeTemplate node : localnodes) {
           {
             String _name = node.getName();
@@ -693,8 +685,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             }
             final String qtype = _xifexpression_3;
             proposalText = qnode;
-            displayText = (qnode + " <local>");
-            additionalProposalInfo = (((("Node " + qnode) + " of type ") + qtype) + " is available in this AADM model");
+            displayText = qnode;
             this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
           }
         }
@@ -702,11 +693,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  public boolean existsInAadm(final String nodeUri, final String aadmUri) {
-    return nodeUri.substring(0, nodeUri.lastIndexOf("/")).equals(
-      aadmUri.substring(0, aadmUri.lastIndexOf("/")));
   }
   
   public String getAADMURI(final AADM_Model model) {

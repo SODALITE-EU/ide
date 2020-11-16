@@ -337,7 +337,7 @@ GetAttribute:
 
 GetAttributeBody:
 	('attribute:' attribute=EPREFIX_TYPE) &
-	('entity:' entity=ENTITY) &
+	('entity:' entity=EEntityReference) &
 	('req_cap:' req_cap=EPREFIX_TYPE)?;
 
 GetProperty:
@@ -348,7 +348,7 @@ GetProperty:
 
 GetPropertyBody:
 	('property:' property=EPREFIX_TYPE) &
-	('entity:' entity=ENTITY) &
+	('entity:' entity=EEntityReference) &
 	('req_cap:' req_cap=EPREFIX_TYPE)?;
 
 ECapabilities:
@@ -474,6 +474,10 @@ EMapEntry:
 	key=ID ":" value=EAssignmentValue
 ;
 
+EEntityReference:
+	EEntity | EPREFIX_TYPE | EPREFIX_ID
+;
+
 EPREFIX_TYPE:
 	(module=ID '/')? type=QUALIFIED_NAME
 ;
@@ -482,10 +486,14 @@ EPREFIX_ID:
 	(module=ID '/')? id=ID
 ;
 
-
 EPRIMITIVE_TYPE:
 	type=ID
 ;
+
+EEntity:
+	entity=ENTITY
+;
+
 
 terminal QUALIFIED_NAME: //FIXME convert to data type rule, remove terminal
 	ID ('.' ID)+;

@@ -50,7 +50,8 @@ public interface KBReasoner {
 
 	RequirementData getRequirements(String resourceId) throws Exception;
 
-	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType) throws Exception;
+	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType, List<String> modules)
+			throws Exception;
 
 	TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType) throws Exception;
 

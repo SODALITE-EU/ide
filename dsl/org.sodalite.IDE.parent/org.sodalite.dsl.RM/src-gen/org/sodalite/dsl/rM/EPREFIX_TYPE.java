@@ -20,7 +20,7 @@ package org.sodalite.dsl.rM;
  * @model
  * @generated
  */
-public interface EPREFIX_TYPE extends EDataTypeName
+public interface EPREFIX_TYPE extends EDataTypeName, EEntityReference
 {
   /**
    * Returns the value of the '<em><b>Module</b></em>' attribute.

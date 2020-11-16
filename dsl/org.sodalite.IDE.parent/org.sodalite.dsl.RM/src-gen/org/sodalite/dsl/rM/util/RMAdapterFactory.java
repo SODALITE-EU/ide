@@ -481,6 +481,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEMapEntryAdapter();
       }
       @Override
+      public Adapter caseEEntityReference(EEntityReference object)
+      {
+        return createEEntityReferenceAdapter();
+      }
+      @Override
       public Adapter caseEPREFIX_TYPE(EPREFIX_TYPE object)
       {
         return createEPREFIX_TYPEAdapter();
@@ -494,6 +499,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEPRIMITIVE_TYPE(EPRIMITIVE_TYPE object)
       {
         return createEPRIMITIVE_TYPEAdapter();
+      }
+      @Override
+      public Adapter caseEEntity(EEntity object)
+      {
+        return createEEntityAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -1733,6 +1743,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EEntityReference <em>EEntity Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EEntityReference
+   * @generated
+   */
+  public Adapter createEEntityReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPREFIX_TYPE <em>EPREFIX TYPE</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1773,6 +1798,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEPRIMITIVE_TYPEAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EEntity <em>EEntity</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EEntity
+   * @generated
+   */
+  public Adapter createEEntityAdapter()
   {
     return null;
   }

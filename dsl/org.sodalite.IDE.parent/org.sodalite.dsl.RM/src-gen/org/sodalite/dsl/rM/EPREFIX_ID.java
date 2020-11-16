@@ -3,7 +3,6 @@
  */
 package org.sodalite.dsl.rM;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface EPREFIX_ID extends EObject
+public interface EPREFIX_ID extends EEntityReference
 {
   /**
    * Returns the value of the '<em><b>Module</b></em>' attribute.

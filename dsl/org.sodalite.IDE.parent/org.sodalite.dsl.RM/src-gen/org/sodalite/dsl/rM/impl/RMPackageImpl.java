@@ -33,6 +33,8 @@ import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EDataTypes;
 import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EDependencyFiles;
+import org.sodalite.dsl.rM.EEntity;
+import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EEqual;
 import org.sodalite.dsl.rM.EFunction;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
@@ -668,6 +670,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eEntityReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eprefiX_TYPEEClass = null;
 
   /**
@@ -683,6 +692,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   private EClass eprimitivE_TYPEEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eEntityEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -2513,9 +2529,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getGetAttributeBody_Entity()
+  public EReference getGetAttributeBody_Entity()
   {
-    return (EAttribute)getAttributeBodyEClass.getEStructuralFeatures().get(1);
+    return (EReference)getAttributeBodyEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2579,9 +2595,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getGetPropertyBody_Entity()
+  public EReference getGetPropertyBody_Entity()
   {
-    return (EAttribute)getPropertyBodyEClass.getEStructuralFeatures().get(1);
+    return (EReference)getPropertyBodyEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3360,6 +3376,17 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EClass getEEntityReference()
+  {
+    return eEntityReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEPREFIX_TYPE()
   {
     return eprefiX_TYPEEClass;
@@ -3418,6 +3445,28 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
   public EClass getEPRIMITIVE_TYPE()
   {
     return eprimitivE_TYPEEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEEntity()
+  {
+    return eEntityEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEEntity_Entity()
+  {
+    return (EAttribute)eEntityEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3659,7 +3708,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     getAttributeBodyEClass = createEClass(GET_ATTRIBUTE_BODY);
     createEReference(getAttributeBodyEClass, GET_ATTRIBUTE_BODY__ATTRIBUTE);
-    createEAttribute(getAttributeBodyEClass, GET_ATTRIBUTE_BODY__ENTITY);
+    createEReference(getAttributeBodyEClass, GET_ATTRIBUTE_BODY__ENTITY);
     createEReference(getAttributeBodyEClass, GET_ATTRIBUTE_BODY__REQ_CAP);
 
     getPropertyEClass = createEClass(GET_PROPERTY);
@@ -3667,7 +3716,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     getPropertyBodyEClass = createEClass(GET_PROPERTY_BODY);
     createEReference(getPropertyBodyEClass, GET_PROPERTY_BODY__PROPERTY);
-    createEAttribute(getPropertyBodyEClass, GET_PROPERTY_BODY__ENTITY);
+    createEReference(getPropertyBodyEClass, GET_PROPERTY_BODY__ENTITY);
     createEReference(getPropertyBodyEClass, GET_PROPERTY_BODY__REQ_CAP);
 
     eCapabilitiesEClass = createEClass(ECAPABILITIES);
@@ -3769,6 +3818,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEAttribute(eMapEntryEClass, EMAP_ENTRY__KEY);
     createEReference(eMapEntryEClass, EMAP_ENTRY__VALUE);
 
+    eEntityReferenceEClass = createEClass(EENTITY_REFERENCE);
+
     eprefiX_TYPEEClass = createEClass(EPREFIX_TYPE);
     createEAttribute(eprefiX_TYPEEClass, EPREFIX_TYPE__MODULE);
 
@@ -3777,6 +3828,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEAttribute(eprefiX_IDEClass, EPREFIX_ID__ID);
 
     eprimitivE_TYPEEClass = createEClass(EPRIMITIVE_TYPE);
+
+    eEntityEClass = createEClass(EENTITY);
+    createEAttribute(eEntityEClass, EENTITY__ENTITY);
   }
 
   /**
@@ -3837,7 +3891,10 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     esignedintEClass.getESuperTypes().add(this.getEAlphaNumericValue());
     emapEClass.getESuperTypes().add(this.getEAssignmentValue());
     eprefiX_TYPEEClass.getESuperTypes().add(this.getEDataTypeName());
+    eprefiX_TYPEEClass.getESuperTypes().add(this.getEEntityReference());
+    eprefiX_IDEClass.getESuperTypes().add(this.getEEntityReference());
     eprimitivE_TYPEEClass.getESuperTypes().add(this.getEDataTypeName());
+    eEntityEClass.getESuperTypes().add(this.getEEntityReference());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rM_ModelEClass, RM_Model.class, "RM_Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4048,7 +4105,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(getAttributeBodyEClass, GetAttributeBody.class, "GetAttributeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGetAttributeBody_Attribute(), this.getEPREFIX_TYPE(), null, "attribute", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGetAttributeBody_Entity(), ecorePackage.getEString(), "entity", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetAttributeBody_Entity(), this.getEEntityReference(), null, "entity", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGetAttributeBody_Req_cap(), this.getEPREFIX_TYPE(), null, "req_cap", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getPropertyEClass, GetProperty.class, "GetProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4056,7 +4113,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(getPropertyBodyEClass, GetPropertyBody.class, "GetPropertyBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGetPropertyBody_Property(), this.getEPREFIX_TYPE(), null, "property", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGetPropertyBody_Entity(), ecorePackage.getEString(), "entity", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetPropertyBody_Entity(), this.getEEntityReference(), null, "entity", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGetPropertyBody_Req_cap(), this.getEPREFIX_TYPE(), null, "req_cap", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eCapabilitiesEClass, ECapabilities.class, "ECapabilities", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4158,6 +4215,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEAttribute(getEMapEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEMapEntry_Value(), this.getEAssignmentValue(), null, "value", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(eEntityReferenceEClass, EEntityReference.class, "EEntityReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(eprefiX_TYPEEClass, org.sodalite.dsl.rM.EPREFIX_TYPE.class, "EPREFIX_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPREFIX_TYPE_Module(), ecorePackage.getEString(), "module", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_TYPE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4166,6 +4225,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEAttribute(getEPREFIX_ID_Id(), ecorePackage.getEString(), "id", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_ID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eprimitivE_TYPEEClass, org.sodalite.dsl.rM.EPRIMITIVE_TYPE.class, "EPRIMITIVE_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eEntityEClass, EEntity.class, "EEntity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEEntity_Entity(), ecorePackage.getEString(), "entity", null, 0, 1, EEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

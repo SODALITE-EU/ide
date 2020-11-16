@@ -33,6 +33,8 @@ import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EDependencies;
+import org.sodalite.dsl.rM.EEntity;
+import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EEqual;
 import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.EFunction;
@@ -50,6 +52,7 @@ import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EOperations;
+import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
@@ -1513,7 +1516,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      String _entity = p.getProperty().getEntity();
+      EEntityReference _entity = p.getProperty().getEntity();
       boolean _tripleNotEquals_1 = (_entity != null);
       if (_tripleNotEquals_1) {
         this.putParameterNumber(p, "entity", Integer.valueOf(this.parameter_counter));
@@ -1530,8 +1533,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _entity_1 = p.getProperty().getEntity();
-        _builder.append(_entity_1, "  ");
+        String _trim = this.trim(this.compile(p.getProperty().getEntity()));
+        _builder.append(_trim, "  ");
         _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -1607,8 +1610,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      String _entity_2 = p.getProperty().getEntity();
-      boolean _tripleNotEquals_5 = (_entity_2 != null);
+      EEntityReference _entity_1 = p.getProperty().getEntity();
+      boolean _tripleNotEquals_5 = (_entity_1 != null);
       if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -1665,7 +1668,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      String _entity = a.getAttribute().getEntity();
+      EEntityReference _entity = a.getAttribute().getEntity();
       boolean _tripleNotEquals_1 = (_entity != null);
       if (_tripleNotEquals_1) {
         this.putParameterNumber(a, "entity", Integer.valueOf(this.parameter_counter));
@@ -1682,8 +1685,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _entity_1 = a.getAttribute().getEntity();
-        _builder.append(_entity_1, "  ");
+        String _trim = this.trim(this.compile(a.getAttribute().getEntity()));
+        _builder.append(_trim, "  ");
         _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -1759,8 +1762,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      String _entity_2 = a.getAttribute().getEntity();
-      boolean _tripleNotEquals_5 = (_entity_2 != null);
+      EEntityReference _entity_1 = a.getAttribute().getEntity();
+      boolean _tripleNotEquals_5 = (_entity_1 != null);
       if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -2825,6 +2828,30 @@ public class RMGenerator extends AbstractGenerator {
           CharSequence _compile_1 = this.compile(((EPRIMITIVE_TYPE) t));
           _builder.append(_compile_1);
           _builder.newLineIfNotEmpty();
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compile(final EEntityReference t) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((t instanceof EPREFIX_TYPE)) {
+        CharSequence _compile = this.compile(((EPREFIX_TYPE) t));
+        _builder.append(_compile);
+        _builder.newLineIfNotEmpty();
+      } else {
+        if ((t instanceof EPREFIX_ID)) {
+          String _id = ((EPREFIX_ID) t).getId();
+          _builder.append(_id);
+          _builder.newLineIfNotEmpty();
+        } else {
+          if ((t instanceof EEntity)) {
+            String _entity = ((EEntity) t).getEntity();
+            _builder.append(_entity);
+            _builder.newLineIfNotEmpty();
+          }
         }
       }
     }

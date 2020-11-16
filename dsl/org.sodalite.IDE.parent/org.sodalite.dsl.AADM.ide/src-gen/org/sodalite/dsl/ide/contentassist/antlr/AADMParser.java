@@ -41,6 +41,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEAssignmentValueAccess().getAlternatives(), "rule__EAssignmentValue__Alternatives");
 			builder.put(grammarAccess.getESingleValueAccess().getAlternatives(), "rule__ESingleValue__Alternatives");
 			builder.put(grammarAccess.getEAlphaNumericValueAccess().getAlternatives(), "rule__EAlphaNumericValue__Alternatives");
+			builder.put(grammarAccess.getEEntityReferenceAccess().getAlternatives(), "rule__EEntityReference__Alternatives");
 			builder.put(grammarAccess.getAADM_ModelAccess().getGroup(), "rule__AADM_Model__Group__0");
 			builder.put(grammarAccess.getAADM_ModelAccess().getGroup_0(), "rule__AADM_Model__Group_0__0");
 			builder.put(grammarAccess.getAADM_ModelAccess().getGroup_1(), "rule__AADM_Model__Group_1__0");
@@ -404,6 +405,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPREFIX_IDAccess().getModuleAssignment_0_0(), "rule__EPREFIX_ID__ModuleAssignment_0_0");
 			builder.put(grammarAccess.getEPREFIX_IDAccess().getIdAssignment_1(), "rule__EPREFIX_ID__IdAssignment_1");
 			builder.put(grammarAccess.getEPRIMITIVE_TYPEAccess().getTypeAssignment(), "rule__EPRIMITIVE_TYPE__TypeAssignment");
+			builder.put(grammarAccess.getEEntityAccess().getEntityAssignment(), "rule__EEntity__EntityAssignment");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getUnorderedGroup(), "rule__ENodeTemplateBody__UnorderedGroup");
 			builder.put(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), "rule__RM_Model__UnorderedGroup");
 			builder.put(grammarAccess.getEDataTypeBodyAccess().getUnorderedGroup_1(), "rule__EDataTypeBody__UnorderedGroup_1");

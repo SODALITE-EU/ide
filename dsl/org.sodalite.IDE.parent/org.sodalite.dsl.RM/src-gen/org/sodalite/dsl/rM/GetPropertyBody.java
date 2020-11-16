@@ -48,26 +48,26 @@ public interface GetPropertyBody extends EObject
   void setProperty(EPREFIX_TYPE value);
 
   /**
-   * Returns the value of the '<em><b>Entity</b></em>' attribute.
+   * Returns the value of the '<em><b>Entity</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Entity</em>' attribute.
-   * @see #setEntity(String)
+   * @return the value of the '<em>Entity</em>' containment reference.
+   * @see #setEntity(EEntityReference)
    * @see org.sodalite.dsl.rM.RMPackage#getGetPropertyBody_Entity()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getEntity();
+  EEntityReference getEntity();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.GetPropertyBody#getEntity <em>Entity</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.GetPropertyBody#getEntity <em>Entity</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entity</em>' attribute.
+   * @param value the new value of the '<em>Entity</em>' containment reference.
    * @see #getEntity()
    * @generated
    */
-  void setEntity(String value);
+  void setEntity(EEntityReference value);
 
   /**
    * Returns the value of the '<em><b>Req cap</b></em>' containment reference.

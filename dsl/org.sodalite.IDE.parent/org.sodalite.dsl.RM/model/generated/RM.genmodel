@@ -212,7 +212,7 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//GetAttributeBody">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/attribute"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//GetAttributeBody/entity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/entity"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetAttributeBody/req_cap"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//GetProperty">
@@ -220,7 +220,7 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//GetPropertyBody">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/property"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//GetPropertyBody/entity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/entity"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/req_cap"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilities">
@@ -318,6 +318,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EMapEntry/key"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EMapEntry/value"/>
     </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EEntityReference"/>
     <genClasses ecoreClass="RM.ecore#//EPREFIX_TYPE">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_TYPE/module"/>
     </genClasses>
@@ -326,5 +327,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_ID/id"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EPRIMITIVE_TYPE"/>
+    <genClasses ecoreClass="RM.ecore#//EEntity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EEntity/entity"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

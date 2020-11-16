@@ -146,9 +146,11 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.ESIGNEDINT: return createESIGNEDINT();
       case RMPackage.EMAP: return createEMAP();
       case RMPackage.EMAP_ENTRY: return createEMapEntry();
+      case RMPackage.EENTITY_REFERENCE: return createEEntityReference();
       case RMPackage.EPREFIX_TYPE: return createEPREFIX_TYPE();
       case RMPackage.EPREFIX_ID: return createEPREFIX_ID();
       case RMPackage.EPRIMITIVE_TYPE: return createEPRIMITIVE_TYPE();
+      case RMPackage.EENTITY: return createEEntity();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -1132,6 +1134,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public EEntityReference createEEntityReference()
+  {
+    EEntityReferenceImpl eEntityReference = new EEntityReferenceImpl();
+    return eEntityReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EPREFIX_TYPE createEPREFIX_TYPE()
   {
     EPREFIX_TYPEImpl eprefiX_TYPE = new EPREFIX_TYPEImpl();
@@ -1160,6 +1174,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EPRIMITIVE_TYPEImpl eprimitivE_TYPE = new EPRIMITIVE_TYPEImpl();
     return eprimitivE_TYPE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEntity createEEntity()
+  {
+    EEntityImpl eEntity = new EEntityImpl();
+    return eEntity;
   }
 
   /**

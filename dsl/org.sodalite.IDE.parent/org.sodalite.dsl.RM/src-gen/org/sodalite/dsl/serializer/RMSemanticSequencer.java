@@ -34,6 +34,7 @@ import org.sodalite.dsl.rM.EDataTypeBody;
 import org.sodalite.dsl.rM.EDataTypes;
 import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EDependencyFiles;
+import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEqual;
 import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
@@ -166,6 +167,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RMPackage.EDEPENDENCY_FILES:
 				sequence_EDependencyFiles(context, (EDependencyFiles) semanticObject); 
+				return; 
+			case RMPackage.EENTITY:
+				sequence_EEntity(context, (EEntity) semanticObject); 
 				return; 
 			case RMPackage.EEQUAL:
 				sequence_EEqual(context, (EEqual) semanticObject); 
@@ -646,6 +650,25 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EEntityReference returns EEntity
+	 *     EEntity returns EEntity
+	 *
+	 * Constraint:
+	 *     entity=ENTITY
+	 */
+	protected void sequence_EEntity(ISerializationContext context, EEntity semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EENTITY__ENTITY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EENTITY__ENTITY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEEntityAccess().getEntityENTITYTerminalRuleCall_0(), semanticObject.getEntity());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EConstraint returns EEqual
 	 *     EEqual returns EEqual
 	 *
@@ -1101,6 +1124,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EEntityReference returns EPREFIX_ID
 	 *     EPREFIX_ID returns EPREFIX_ID
 	 *
 	 * Constraint:
@@ -1114,6 +1138,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * Contexts:
 	 *     EDataTypeName returns EPREFIX_TYPE
+	 *     EEntityReference returns EPREFIX_TYPE
 	 *     EPREFIX_TYPE returns EPREFIX_TYPE
 	 *
 	 * Constraint:
@@ -1476,7 +1501,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     GetAttributeBody returns GetAttributeBody
 	 *
 	 * Constraint:
-	 *     (attribute=EPREFIX_TYPE | entity=ENTITY | req_cap=EPREFIX_TYPE)+
+	 *     (attribute=EPREFIX_TYPE | entity=EEntityReference | req_cap=EPREFIX_TYPE)+
 	 */
 	protected void sequence_GetAttributeBody(ISerializationContext context, GetAttributeBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1530,7 +1555,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     GetPropertyBody returns GetPropertyBody
 	 *
 	 * Constraint:
-	 *     (property=EPREFIX_TYPE | entity=ENTITY | req_cap=EPREFIX_TYPE)+
+	 *     (property=EPREFIX_TYPE | entity=EEntityReference | req_cap=EPREFIX_TYPE)+
 	 */
 	protected void sequence_GetPropertyBody(ISerializationContext context, GetPropertyBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
