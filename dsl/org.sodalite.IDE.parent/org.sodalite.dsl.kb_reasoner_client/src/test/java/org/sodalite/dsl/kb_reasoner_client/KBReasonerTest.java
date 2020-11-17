@@ -32,6 +32,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationRepor
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
+import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
@@ -239,6 +240,30 @@ class KBReasonerTest {
 		String aadmDSL = new String(Files.readAllBytes(dsl_path));
 		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete);
 		return report;
+	}
+
+	@Test
+	void testGetRMsInModule() throws Exception {
+		String module = "docker";
+		ModelData models = kbclient.getRMsInModule(module);
+		assertNotNull(models);
+	}
+
+	@Test
+	void testGetModelForResource() throws Exception {
+		String module = "docker";
+		String resource = "sodalite.nodes.DockerNetwork";
+		ModelData model = kbclient.getModelForResource(resource, module);
+		assertNotNull(model);
+	}
+
+	@Test
+	void testGetModel() throws Exception {
+		String module = "docker";
+		ModelData models = kbclient.getRMsInModule(module);
+		assertNotNull(models);
+		ModelData model = kbclient.getModel(models.getElements().get(0).getUri().toASCIIString());
+		assertNotNull(model);
 	}
 
 	@Test

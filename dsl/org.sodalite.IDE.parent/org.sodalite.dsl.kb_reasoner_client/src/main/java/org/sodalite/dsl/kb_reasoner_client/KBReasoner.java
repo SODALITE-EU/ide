@@ -21,6 +21,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationRepor
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
+import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
@@ -28,6 +29,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 
 public interface KBReasoner {
+
 	TypeData getNodeTypes(List<String> modules) throws Exception;
 
 	TypeData getDataTypes(List<String> modules) throws Exception;
@@ -73,4 +75,14 @@ public interface KBReasoner {
 	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token) throws Exception;
 
 	DeploymentStatus getAADMDeploymentStatus(String session_token) throws Exception;
+
+	ModelData getModelForResource(String resource, String module) throws Exception;
+
+	ModelData getModel(String modelId) throws Exception;
+
+	ModelData getAADMsInModule(String module) throws Exception;
+
+	ModelData getRMsInModule(String module) throws Exception;
+
+	void deleteModel(String modelId) throws Exception;
 }

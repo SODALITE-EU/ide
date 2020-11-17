@@ -46,6 +46,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
+import org.sodalite.dsl.kb_reasoner_client.types.Model;
+import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
@@ -476,6 +478,53 @@ public class KBReasonerClient implements KBReasoner {
 		return deploymentStatus;
 	}
 
+	@Override
+	public ModelData getModelForResource(String resource, String module) throws Exception {
+		Assert.notNull(resource, "Pass a not null resource");
+		Assert.notNull(module, "Pass a not null module");
+		String url = kbReasonerUri + "model?resource=" + resource
+				+ "&namespace=https://www.sodalite.eu/ontologies/workspace/1/" + module + "/";
+		return getJSONObjectForType(ModelData.class, new URI(url), HttpStatus.OK);
+	}
+
+	@Override
+	public ModelData getModel(String modelId) throws Exception {
+		Assert.notNull(modelId, "Pass a not null modelId");
+		String url = kbReasonerUri + "model?uri=" + modelId;
+		return getJSONObjectForType(ModelData.class, new URI(url), HttpStatus.OK);
+	}
+
+	@Override
+	public ModelData getAADMsInModule(String module) throws Exception {
+		return getModelsInModule("AADM", module);
+	}
+
+	@Override
+	public ModelData getRMsInModule(String module) throws Exception {
+		return getModelsInModule("RM", module);
+	}
+
+	private ModelData getModelsInModule(String type, String module) throws Exception {
+		String url = kbReasonerUri + "models?type=" + type;
+		if (module != null && !module.isEmpty())
+			url += "&namespace=https://www.sodalite.eu/ontologies/workspace/1/" + module + "/";
+		ModelData data = getJSONObjectForType(ModelData.class, new URI(url), HttpStatus.OK);
+		// Setting module
+		if (data == null) { // No found models
+			data = new ModelData();
+			data.setElements(new ArrayList<Model>());
+		}
+		data.getElements().forEach(model -> model.setNamespace(module));
+		return data;
+	}
+
+	@Override
+	public void deleteModel(String modelId) throws Exception {
+		Assert.notNull(modelId, "Pass a not null modelId");
+		String url = kbReasonerUri + "delete?uri=" + modelId;
+		deleteUriResource(new URI(url), HttpStatus.OK);
+	}
+
 	private List<KBError> processErrors(String json) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		List<KBError> errors = mapper.readValue(json, new TypeReference<List<KBError>>() {
@@ -724,6 +773,32 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (UnsupportedEncodingException ex) {
 			throw new RuntimeException(ex.getCause());
 		}
+	}
+
+	public boolean deleteUriResource(URI uri, HttpStatus expectedStatus) throws Exception {
+		boolean result = false;
+		try {
+			Assert.notNull(uri, "Provide a valid uri");
+			ResponseEntity<String> response = deleteJsonMessage(uri);
+			if (response.getStatusCode().equals(expectedStatus)) {
+				log.info("Successfully delete in uri " + uri);
+				result = true;
+			} else {
+				log.info("There was a problem deleting in URI: " + uri);
+			}
+			return result;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			return false;
+		}
+	}
+
+	public ResponseEntity<String> deleteJsonMessage(URI uri) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json");
+		headers.add("Accept", "*/*");
+		HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
+		return restTemplate.exchange(uri, HttpMethod.DELETE, requestEntity, String.class);
 	}
 
 }
