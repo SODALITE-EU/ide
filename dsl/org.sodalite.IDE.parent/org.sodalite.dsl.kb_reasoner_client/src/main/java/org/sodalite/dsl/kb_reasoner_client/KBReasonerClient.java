@@ -514,7 +514,7 @@ public class KBReasonerClient implements KBReasoner {
 			data = new ModelData();
 			data.setElements(new ArrayList<Model>());
 		}
-		data.getElements().forEach(model -> model.setNamespace(module));
+		data.getElements().forEach(model -> model.setModule(module));
 		return data;
 	}
 

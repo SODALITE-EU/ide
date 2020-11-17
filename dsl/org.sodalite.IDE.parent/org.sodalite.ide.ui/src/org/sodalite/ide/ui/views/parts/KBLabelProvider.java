@@ -15,6 +15,7 @@ import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.sodalite.ide.ui.views.model.Node;
+import org.sodalite.ide.ui.views.model.TreeNode;
 
 public class KBLabelProvider extends LabelProvider implements IStyledLabelProvider {
 
@@ -33,24 +34,24 @@ public class KBLabelProvider extends LabelProvider implements IStyledLabelProvid
 
 	@Override
 	public StyledString getStyledText(Object element) {
-		Node<String> node = (Node<String>) element;
-		StyledString styledString = new StyledString(node.getData());
+		TreeNode<Node> node = (TreeNode<Node>) element;
+		StyledString styledString = new StyledString(node.getData().getLabel());
 		if (node.getData().equals("RMs") || node.getData().equals("AADMs")) {
-			styledString = new StyledString(node.getData(), StyledString.QUALIFIER_STYLER);
+			styledString = new StyledString(node.getData().getLabel(), StyledString.QUALIFIER_STYLER);
 		}
 		return styledString;
 	}
 
 	@Override
 	public Image getImage(Object element) {
-		Node<String> node = (Node<String>) element;
+		TreeNode<Node> node = (TreeNode<Node>) element;
 		if (node.getData().equals("RMs")) {
 			return getResourceManager().createImage(kbImage);
 		} else if (node.getData().equals("AADMs")) {
 			return getResourceManager().createImage(kbImage);
-		} else if (node.getData().contains(".rm")) {
+		} else if (node.getData().getLabel().contains(".rm")) {
 			return getResourceManager().createImage(rmImage);
-		} else if (node.getData().contains(".aadm")) {
+		} else if (node.getData().getLabel().contains(".aadm")) {
 			return getResourceManager().createImage(aadmImage);
 		} else {
 			return getResourceManager().createImage(moduleImage);

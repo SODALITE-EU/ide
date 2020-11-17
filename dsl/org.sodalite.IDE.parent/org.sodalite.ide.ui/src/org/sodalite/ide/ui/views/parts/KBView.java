@@ -1,9 +1,21 @@
 package org.sodalite.ide.ui.views.parts;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.text.MessageFormat;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -11,7 +23,9 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -22,13 +36,25 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.types.Model;
+import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
+import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.ui.preferences.Activator;
+import org.sodalite.dsl.ui.preferences.PreferenceConstants;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.ide.ui.views.model.Node;
+import org.sodalite.ide.ui.views.model.TreeNode;
 
 public class KBView {
 	private Label myLabelInView;
+	private Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
 	@PostConstruct
-	public void createPartControl(Composite parent) {
+	public void createPartControl(Composite parent) throws Exception {
 		TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL);
 		viewer.setContentProvider(new KBContentProvider());
 		viewer.getTree().setHeaderVisible(true);
@@ -43,39 +69,69 @@ public class KBView {
 		createContextMenu(viewer);
 
 		// Model
-		// FIXME Retrieve KB tree model (modules, models) from the KB Reasoner
-
-		Node<String> root = new Node<>("KB");
-		Node<String> rms = root.addChild(new Node<String>("RMs"));
-		Node<String> aadms = root.addChild(new Node<String>("AADMs"));
-
-		// RMs
-
-		Node<String> rm_docker_module = rms.addChild(new Node<String>("docker"));
-		Node<String> rm_openstack_module = rms.addChild(new Node<String>("openstack"));
-		Node<String> rm_hpc_module = rms.addChild(new Node<String>("hpc"));
-
-		rm_docker_module.addChild(new Node<String>("docker_certificate.rm"));
-		rm_docker_module.addChild(new Node<String>("docker_registry.rm"));
-		rm_docker_module.addChild(new Node<String>("docker_volume.rm"));
-
-		rm_openstack_module.addChild(new Node<String>("openstack_vm.rm"));
-		rm_openstack_module.addChild(new Node<String>("openstack_security_rule.rm"));
-
-		rm_hpc_module.addChild(new Node<String>("data_mover.rm"));
-		rm_hpc_module.addChild(new Node<String>("docker_registry.rm"));
-
-		// AADMs
-		Node<String> aadm_snow_module = aadms.addChild(new Node<String>("snow"));
-		aadm_snow_module.addChild(new Node<String>("snow.aadm"));
-
-		Node<String> aadm_vehicle_module = aadms.addChild(new Node<String>("vehicleiot"));
-		aadm_vehicle_module.addChild(new Node<String>("vehicleiot.aadm"));
+		TreeNode<Node> root = populateKBContent();
 
 		viewer.setInput(root);
 
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 
+	}
+
+	private TreeNode<Node> populateKBContent() throws Exception {
+		// FIXME Retrieve KB tree model (modules, models) from the KB Reasoner
+
+		TreeNode<Node> root = new TreeNode<>(new Node("KB"));
+		TreeNode<Node> rms = root.addChild(new TreeNode<Node>(new Node("RMs")));
+		TreeNode<Node> aadms = root.addChild(new TreeNode<Node>(new Node("AADMs")));
+
+		// RMs
+
+		ModuleData moduleData = getKBReasoner().getModules();
+		for (String module : moduleData.getElements()) {
+			module = parseModule(module);
+			// RMs
+			ModelData rmModelData = getKBReasoner().getRMsInModule(module);
+			if (!rmModelData.getElements().isEmpty()) {
+				TreeNode<Node> moduleNode = rms.addChild(new TreeNode<Node>(new Node(module, module)));
+				for (Model model : rmModelData.getElements()) {
+					moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
+				}
+			}
+
+			// AADMs
+			ModelData aadmModelData = getKBReasoner().getAADMsInModule(module);
+			if (!aadmModelData.getElements().isEmpty()) {
+				TreeNode<Node> moduleNode = aadms.addChild(new TreeNode<Node>(new Node(module, module)));
+				for (Model model : aadmModelData.getElements()) {
+					moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
+				}
+			}
+
+		}
+		return root;
+	}
+
+	private String parseModule(String module) {
+		return getLastSegment(module, "/");
+	}
+
+	private String getLastSegment(String string, String delimiter) {
+		String[] splits = string.split(delimiter);
+		return splits[splits.length - 1];
+	}
+
+	private KBReasonerClient getKBReasoner() {
+		// Configure KBReasonerClient endpoint from preference page information
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+
+		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		String iacURI = store.getString(PreferenceConstants.IaC_URI);
+		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
+		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
+		SodaliteLogger.log(
+				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
+						kbReasonerURI, iacURI, xoperaURI));
+		return kbclient;
 	}
 
 	private void createContextMenu(TreeViewer viewer) {
@@ -92,18 +148,18 @@ public class KBView {
 				if (!selection.isEmpty()) {
 					TreeSelection ts = (TreeSelection) selection;
 					if (ts.toList().size() == 1) {
-						Node fs = (Node) ts.getFirstElement();
-						String data = (String) fs.getData();
-						if (data.contains(".rm") || data.contains(".aadm")) {
-							createModelContextualMenu(manager);
-						} else if (!((data.contains("RMs") || data.contains("AADMs")))) {
-							createModuleContextualMenu(manager);
+						TreeNode fs = (TreeNode) ts.getFirstElement();
+						Node node = (Node) fs.getData();
+						if (node.isModule()) {
+							createModuleContextualMenu(manager, node);
+						} else if (node.isModel()) {
+							createModelContextualMenu(manager, node);
 						}
 					}
 				}
 			}
 
-			private void createModuleContextualMenu(IMenuManager manager) {
+			private void createModuleContextualMenu(IMenuManager manager, Node node) {
 				Action retrieveAction = new Action() {
 					public void run() {
 						// the action code
@@ -123,11 +179,41 @@ public class KBView {
 				manager.add(deleteAction);
 			}
 
-			private void createModelContextualMenu(IMenuManager manager) {
+			private void createModelContextualMenu(IMenuManager manager, Node node) {
 				Action retrieveAction = new Action() {
 					public void run() {
 						// the action code
 						System.out.println("Retrieve model invoked");
+						// Show Dialog to select workspace folder where to copy the model
+						IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+						IContainer root = workspaceRoot.getContainerForLocation(workspaceRoot.getLocation());
+						String msg = "Select a workspace folder where to upload the selected model";
+						ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
+						int return_code = dialog.open();
+						if (return_code == dialog.OK) {
+							Object[] result = dialog.getResult();
+							// TODO Copy model content into target folder
+							if (result.length == 0)
+								return;
+							IPath path = (IPath) result[0];
+							IFolder targetFolder = root.getFolder(path);
+							IFile targetFile = targetFolder.getFile(node.getModel().getName());
+							if (!targetFile.exists()) {
+								saveContentInFile(node.getModel().getDsl(), targetFile);
+							} else {
+								boolean confirmed = MessageDialog.openConfirm(shell, "Target File exists",
+										"Do you want to override target file " + targetFile.getName());
+								if (confirmed) {
+									try {
+										targetFile.delete(true, null);
+										saveContentInFile(node.getModel().getDsl(), targetFile);
+									} catch (CoreException e) {
+										e.printStackTrace();
+									}
+
+								}
+							}
+						}
 					}
 				};
 				retrieveAction.setText("Retrieve model ...");
@@ -137,6 +223,18 @@ public class KBView {
 					public void run() {
 						// the action code
 						System.out.println("Delete model invoked");
+
+						boolean confirmed = MessageDialog.openConfirm(shell, "Delete model",
+								"Do you want to delete model " + node.getModel().getName());
+						if (confirmed) {
+							try {
+								getKBReasoner().deleteModel(node.getModel().getUri().toString());
+								// TODO Refresh KB View
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+						}
 					}
 				};
 				deleteAction.setText("Delete model ...");
@@ -145,6 +243,16 @@ public class KBView {
 		});
 		Menu menu = menuMgr.createContextMenu(viewer.getTree());
 		viewer.getTree().setMenu(menu);
+	}
+
+	private void saveContentInFile(String content, IFile targetFile) {
+		try {
+			byte[] bytes = content.getBytes();
+			InputStream source = new ByteArrayInputStream(bytes);
+			targetFile.create(source, IResource.NONE, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Focus
