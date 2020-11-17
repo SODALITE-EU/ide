@@ -19,19 +19,6 @@ pipeline {
               """
       }
     }
-    stage('SonarQube analysis'){
-        environment {
-          scannerHome = tool 'SonarQubeScanner'
-        }
-        steps {
-            withSonarQubeEnv('SonarCloud') {
-                sh  """ #!/bin/bash
-                        cd "dsl/org.sodalite.IDE.parent/"
-                        ${scannerHome}/bin/sonar-scanner
-                    """
-            }
-        }
-    }
     stage ('Publish update site') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'sodalite-jenkins_github_creds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
