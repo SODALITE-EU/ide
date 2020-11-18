@@ -74,11 +74,10 @@ public class KBView {
 		viewer.setInput(root);
 
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
-
 	}
 
 	private TreeNode<Node> populateKBContent() throws Exception {
-		// FIXME Retrieve KB tree model (modules, models) from the KB Reasoner
+		// Retrieve KB tree model (modules, models) from the KB Reasoner
 
 		TreeNode<Node> root = new TreeNode<>(new Node("KB"));
 		TreeNode<Node> rms = root.addChild(new TreeNode<Node>(new Node("RMs")));
@@ -150,6 +149,7 @@ public class KBView {
 					if (ts.toList().size() == 1) {
 						TreeNode tn = (TreeNode) ts.getFirstElement();
 						Node node = (Node) tn.getData();
+						createGeneralContextualMenu(manager, tn);
 						if (node.isModule()) {
 							createModuleContextualMenu(manager, tn);
 						} else if (node.isModel()) {
@@ -157,6 +157,26 @@ public class KBView {
 						}
 					}
 				}
+			}
+
+			private void createGeneralContextualMenu(IMenuManager manager, TreeNode<Node> tn) {
+				// ACTION: Refresh KB
+				// workspace)
+				Action refreshAction = new Action() {
+					public void run() {
+
+						try {
+							System.out.println("Refresh KB invoked");
+							TreeNode<Node> root = populateKBContent();
+							viewer.setInput(root);
+							viewer.refresh();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				};
+				refreshAction.setText("Refresh KB");
+				manager.add(refreshAction);
 			}
 
 			private void createModuleContextualMenu(IMenuManager manager, TreeNode<Node> tn) {
