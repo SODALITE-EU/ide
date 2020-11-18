@@ -514,7 +514,7 @@ public class KBReasonerClient implements KBReasoner {
 			data = new ModelData();
 			data.setElements(new ArrayList<Model>());
 		}
-		data.getElements().forEach(model -> model.setNamespace(module));
+		data.getElements().forEach(model -> model.setModule(module));
 		return data;
 	}
 
@@ -522,7 +522,8 @@ public class KBReasonerClient implements KBReasoner {
 	public void deleteModel(String modelId) throws Exception {
 		Assert.notNull(modelId, "Pass a not null modelId");
 		String url = kbReasonerUri + "delete?uri=" + modelId;
-		deleteUriResource(new URI(url), HttpStatus.OK);
+
+		deleteUriResourceWithGet(new URI(url), HttpStatus.OK);
 	}
 
 	private List<KBError> processErrors(String json) throws Exception {
@@ -793,12 +794,38 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
+	public boolean deleteUriResourceWithGet(URI uri, HttpStatus expectedStatus) throws Exception {
+		boolean result = false;
+		try {
+			Assert.notNull(uri, "Provide a valid uri");
+			ResponseEntity<String> response = getJsonMessage(uri);
+			if (response.getStatusCode().equals(expectedStatus)) {
+				log.info("Successfully delete in uri " + uri);
+				result = true;
+			} else {
+				log.info("There was a problem deleting in URI: " + uri);
+			}
+			return result;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			return false;
+		}
+	}
+
+	public ResponseEntity<String> getJsonMessage(URI uri) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json");
+		headers.add("Accept", "*/*");
+		HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
+		return getRestTemplate().exchange(uri, HttpMethod.GET, requestEntity, String.class);
+	}
+
 	public ResponseEntity<String> deleteJsonMessage(URI uri) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
 		headers.add("Accept", "*/*");
 		HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
-		return restTemplate.exchange(uri, HttpMethod.DELETE, requestEntity, String.class);
+		return getRestTemplate().exchange(uri, HttpMethod.DELETE, requestEntity, String.class);
 	}
 
 }

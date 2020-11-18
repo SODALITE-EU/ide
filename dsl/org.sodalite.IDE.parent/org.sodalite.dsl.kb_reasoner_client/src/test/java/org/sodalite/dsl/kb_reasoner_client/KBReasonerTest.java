@@ -250,6 +250,13 @@ class KBReasonerTest {
 	}
 
 	@Test
+	void testGetAADMsInModule() throws Exception {
+		String module = "snow";
+		ModelData models = kbclient.getAADMsInModule(module);
+		assertNotNull(models);
+	}
+
+	@Test
 	void testGetModelForResource() throws Exception {
 		String module = "docker";
 		String resource = "sodalite.nodes.DockerNetwork";

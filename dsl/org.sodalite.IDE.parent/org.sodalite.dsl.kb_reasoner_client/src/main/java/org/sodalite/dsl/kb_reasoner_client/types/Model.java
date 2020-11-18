@@ -4,19 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Model extends KBEntity {
-	String namespace;
 	String name;
 	String createdBy;
 	String createdAt;
 	String dsl;
-
-	public String getNamespace() {
-		return namespace;
-	}
-
-	public void setNamespace(String namespace) {
-		this.namespace = namespace;
-	}
 
 	public String getName() {
 		return name;
@@ -32,5 +23,21 @@ public class Model extends KBEntity {
 
 	public String getDsl() {
 		return dsl;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public void setDsl(String dsl) {
+		this.dsl = dsl;
 	}
 }

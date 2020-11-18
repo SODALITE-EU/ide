@@ -1,54 +1,70 @@
 package org.sodalite.ide.ui.views.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.sodalite.dsl.kb_reasoner_client.types.Model;
 
-public class Node<T> {
+public class Node {
+	private String label;
+	private String module;
+	private Model model;
 
-	private T data = null;
-
-	private List<Node<T>> children = new ArrayList<>();
-
-	private Node<T> parent = null;
-
-	public Node(T data) {
-		this.data = data;
+	public Node(String label) {
+		this(label, null, null);
 	}
 
-	public Node<T> addChild(Node<T> child) {
-		child.setParent(this);
-		this.children.add(child);
-		return child;
+	public Node(String label, String module) {
+		this(label, module, null);
 	}
 
-	public void addChildren(List<Node<T>> children) {
-		children.forEach(each -> each.setParent(this));
-		this.children.addAll(children);
+	public Node(String label, String module, Model model) {
+		this.label = label;
+		this.module = module;
+		this.model = model;
 	}
 
-	public List<Node<T>> getChildren() {
-		return children;
+	public String getModule() {
+		return module;
 	}
 
-	public T getData() {
-		return data;
+	public Model getModel() {
+		return model;
 	}
 
-	public void setData(T data) {
-		this.data = data;
+	public String getLabel() {
+		return label;
 	}
 
-	private void setParent(Node<T> parent) {
-		this.parent = parent;
+	public boolean isModule() {
+		return module != null && model == null;
 	}
 
-	public Node<T> getParent() {
-		return parent;
+	public boolean isModel() {
+		return module != null && model != null;
+	}
+
+	// These methods are required for the TreeViewer to learn how to refresh the
+	// view without collapsing it.
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((toString() == null) ? 0 : toString().hashCode());
+		return result;
 	}
 
 	@Override
-	public String toString() {
-		return this.data.toString();
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Node other = (Node) obj;
+		if (toString() == null) {
+			if (other.toString() != null)
+				return false;
+		} else if (!toString().equals(other.toString()))
+			return false;
+		return true;
 	}
-
 }
