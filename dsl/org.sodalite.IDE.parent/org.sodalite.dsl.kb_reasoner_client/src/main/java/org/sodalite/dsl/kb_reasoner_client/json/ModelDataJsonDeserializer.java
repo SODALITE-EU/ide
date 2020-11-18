@@ -51,7 +51,7 @@ public class ModelDataJsonDeserializer extends JsonDeserializer<ReasonerData<Mod
 			try {
 				Model model = mapper.readerFor(nodeType).readValue(node);
 				model.setName(model.getName().replaceAll("\"", "")); // Removing wrapping quotes in name
-				model.setDsl(model.getDsl().substring(1, model.getDsl().length() - 2)); // Removing wrapping quotes in
+				model.setDsl(model.getDsl().substring(1, model.getDsl().length() - 1)); // Removing wrapping quotes in
 																						// DSL
 				if (!models.contains(model))
 					models.add(model);

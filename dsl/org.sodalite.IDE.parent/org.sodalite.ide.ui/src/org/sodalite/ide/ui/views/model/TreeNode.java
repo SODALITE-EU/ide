@@ -21,6 +21,16 @@ public class TreeNode<T> {
 		return child;
 	}
 
+	public TreeNode<T> removeChild(TreeNode<T> child) {
+		if (this.children.contains(child)) {
+			child.setParent(null);
+			this.children.remove(child);
+			return child;
+		} else {
+			return null;
+		}
+	}
+
 	public void addChildren(List<TreeNode<T>> children) {
 		children.forEach(each -> each.setParent(this));
 		this.children.addAll(children);

@@ -17,7 +17,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
@@ -52,10 +51,11 @@ import org.sodalite.ide.ui.views.model.TreeNode;
 public class KBView {
 	private Label myLabelInView;
 	private Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+	private TreeViewer viewer = null;
 
 	@PostConstruct
 	public void createPartControl(Composite parent) throws Exception {
-		TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL);
+		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL);
 		viewer.setContentProvider(new KBContentProvider());
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
@@ -148,77 +148,139 @@ public class KBView {
 				if (!selection.isEmpty()) {
 					TreeSelection ts = (TreeSelection) selection;
 					if (ts.toList().size() == 1) {
-						TreeNode fs = (TreeNode) ts.getFirstElement();
-						Node node = (Node) fs.getData();
+						TreeNode tn = (TreeNode) ts.getFirstElement();
+						Node node = (Node) tn.getData();
 						if (node.isModule()) {
-							createModuleContextualMenu(manager, node);
+							createModuleContextualMenu(manager, tn);
 						} else if (node.isModel()) {
-							createModelContextualMenu(manager, node);
+							createModelContextualMenu(manager, tn);
 						}
 					}
 				}
 			}
 
-			private void createModuleContextualMenu(IMenuManager manager, Node node) {
+			private void createModuleContextualMenu(IMenuManager manager, TreeNode<Node> tn) {
+				Node node = (Node) tn.getData();
+
+				// ACTION: Retrieve all models in a module from KB (upload them into the
+				// workspace)
 				Action retrieveAction = new Action() {
 					public void run() {
-						// the action code
 						System.out.println("Retrieve module invoked");
+
+						// Get models in module
+						try {
+							String module = node.getModule();
+							ModelData modelData = null;
+							if (tn.getParent().getData().getLabel().contains("RMs")) {
+								modelData = getKBReasoner().getRMsInModule(module);
+							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
+								modelData = getKBReasoner().getAADMsInModule(module);
+							}
+							if (!modelData.getElements().isEmpty()) {
+								// Prompt user to select the target folder
+								IContainer root = getWorkspaceRoot();
+								String msg = "Select a workspace folder where to upload the models of the selected module";
+								ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
+								int return_code = dialog.open();
+								if (return_code == ContainerSelectionDialog.OK) {
+									Object[] result = dialog.getResult();
+									// Create a folder with module name in target folder
+									if (result.length == 0)
+										return;
+									IPath path = (IPath) result[0];
+									IFolder targetFolder = root.getFolder(path);
+									targetFolder = targetFolder.getFolder(module);
+									if (!targetFolder.exists()) {
+										targetFolder.create(false, false, null);
+									}
+									// For each model in module, copy it into the target module folder
+									for (Model model : modelData.getElements()) {
+										saveFileInFolder(model.getName(), model.getDsl(), targetFolder);
+									}
+									MessageDialog.openInformation(shell, "Retrieve module", "Models in module " + module
+											+ " successfully copied into " + targetFolder.getName() + " folder");
+								}
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
 					}
 				};
 				retrieveAction.setText("Retrieve module ...");
 				manager.add(retrieveAction);
 
+				// ACTION: Delete all models in a module from KB
 				Action deleteAction = new Action() {
 					public void run() {
-						// the action code
-						System.out.println("Delete module invoked");
+						try {
+							System.out.println("Delete module invoked");
+							String module = node.getModule();
+							ModelData modelData = null;
+							if (tn.getParent().getData().getLabel().contains("RMs")) {
+								modelData = getKBReasoner().getRMsInModule(module);
+							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
+								modelData = getKBReasoner().getAADMsInModule(module);
+							}
+							if (!modelData.getElements().isEmpty()) {
+								boolean confirmed = MessageDialog.openConfirm(shell, "Delete models in module",
+										"Do you want to delete all the models in module " + module);
+								if (confirmed) {
+									try {
+										// For each model in module, delete it
+										for (Model model : modelData.getElements()) {
+											getKBReasoner().deleteModel(model.getUri().toString());
+										}
+
+										// Refresh KB View
+										tn.getParent().removeChild(tn);
+										viewer.refresh();
+
+										MessageDialog.openInformation(shell, "Delete model",
+												"Models in module " + module + " successfully deleted");
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
 					}
 				};
 				deleteAction.setText("Delete module ...");
 				manager.add(deleteAction);
 			}
 
-			private void createModelContextualMenu(IMenuManager manager, Node node) {
+			private void createModelContextualMenu(IMenuManager manager, TreeNode<Node> tn) {
+				Node node = (Node) tn.getData();
+
+				// ACTION: Retrieve model from KB (upload it into the workspace)
 				Action retrieveAction = new Action() {
 					public void run() {
-						// the action code
 						System.out.println("Retrieve model invoked");
 						// Show Dialog to select workspace folder where to copy the model
-						IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-						IContainer root = workspaceRoot.getContainerForLocation(workspaceRoot.getLocation());
+						IContainer root = getWorkspaceRoot();
 						String msg = "Select a workspace folder where to upload the selected model";
 						ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
 						int return_code = dialog.open();
-						if (return_code == dialog.OK) {
+						if (return_code == ContainerSelectionDialog.OK) {
 							Object[] result = dialog.getResult();
-							// TODO Copy model content into target folder
+							// Copy model content into target folder
 							if (result.length == 0)
 								return;
 							IPath path = (IPath) result[0];
 							IFolder targetFolder = root.getFolder(path);
-							IFile targetFile = targetFolder.getFile(node.getModel().getName());
-							if (!targetFile.exists()) {
-								saveContentInFile(node.getModel().getDsl(), targetFile);
-							} else {
-								boolean confirmed = MessageDialog.openConfirm(shell, "Target File exists",
-										"Do you want to override target file " + targetFile.getName());
-								if (confirmed) {
-									try {
-										targetFile.delete(true, null);
-										saveContentInFile(node.getModel().getDsl(), targetFile);
-									} catch (CoreException e) {
-										e.printStackTrace();
-									}
-
-								}
-							}
+							saveFileInFolder(node.getModel().getName(), node.getModel().getDsl(), targetFolder);
+							MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
+									+ " successfully copied into " + targetFolder.getName() + " folder");
 						}
 					}
 				};
 				retrieveAction.setText("Retrieve model ...");
 				manager.add(retrieveAction);
 
+				// ACTION: Delete model from KB
 				Action deleteAction = new Action() {
 					public void run() {
 						// the action code
@@ -229,11 +291,15 @@ public class KBView {
 						if (confirmed) {
 							try {
 								getKBReasoner().deleteModel(node.getModel().getUri().toString());
-								// TODO Refresh KB View
+								// Refresh KB View
+								tn.getParent().removeChild(tn);
+								viewer.refresh();
+
+								MessageDialog.openInformation(shell, "Delete model",
+										"Model " + node.getModel().getName() + " successfully deleted");
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-
 						}
 					}
 				};
@@ -243,6 +309,26 @@ public class KBView {
 		});
 		Menu menu = menuMgr.createContextMenu(viewer.getTree());
 		viewer.getTree().setMenu(menu);
+	}
+
+	private void saveFileInFolder(String filename, String filecontent, IFolder targetFolder) {
+		IFile targetFile = targetFolder.getFile(filename);
+		if (!targetFile.exists()) {
+			saveContentInFile(filecontent, targetFile);
+		} else {
+			boolean confirmed = MessageDialog.openConfirm(shell,
+					"Target file exists in folder " + targetFolder.getName(),
+					"Do you want to override target file " + targetFile.getName());
+			if (confirmed) {
+				try {
+					targetFile.delete(false, null);
+					saveContentInFile(filecontent, targetFile);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
 	}
 
 	private void saveContentInFile(String content, IFile targetFile) {
@@ -255,11 +341,16 @@ public class KBView {
 		}
 	}
 
-	@Focus
-	public void setFocus() {
-		myLabelInView.setFocus();
-
+	private IContainer getWorkspaceRoot() {
+		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IContainer root = workspaceRoot.getContainerForLocation(workspaceRoot.getLocation());
+		return root;
 	}
+
+//	@Focus
+//	public void setFocus() {
+//		myLabelInView.setFocus();
+//	}
 
 	/**
 	 * This method is kept for E3 compatiblity. You can remove it if you do not mix

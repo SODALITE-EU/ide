@@ -40,4 +40,31 @@ public class Node {
 	public boolean isModel() {
 		return module != null && model != null;
 	}
+
+	// These methods are required for the TreeViewer to learn how to refresh the
+	// view without collapsing it.
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((toString() == null) ? 0 : toString().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Node other = (Node) obj;
+		if (toString() == null) {
+			if (other.toString() != null)
+				return false;
+		} else if (!toString().equals(other.toString()))
+			return false;
+		return true;
+	}
 }
