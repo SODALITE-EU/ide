@@ -523,7 +523,7 @@ public class KBReasonerClient implements KBReasoner {
 		Assert.notNull(modelId, "Pass a not null modelId");
 		String url = kbReasonerUri + "delete?uri=" + modelId;
 
-		deleteUriResourceWithGet(new URI(url), HttpStatus.OK);
+		deleteUriResource(new URI(url), HttpStatus.OK);
 	}
 
 	private List<KBError> processErrors(String json) throws Exception {
@@ -781,24 +781,6 @@ public class KBReasonerClient implements KBReasoner {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
 			ResponseEntity<String> response = deleteJsonMessage(uri);
-			if (response.getStatusCode().equals(expectedStatus)) {
-				log.info("Successfully delete in uri " + uri);
-				result = true;
-			} else {
-				log.info("There was a problem deleting in URI: " + uri);
-			}
-			return result;
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			return false;
-		}
-	}
-
-	public boolean deleteUriResourceWithGet(URI uri, HttpStatus expectedStatus) throws Exception {
-		boolean result = false;
-		try {
-			Assert.notNull(uri, "Provide a valid uri");
-			ResponseEntity<String> response = getJsonMessage(uri);
 			if (response.getStatusCode().equals(expectedStatus)) {
 				log.info("Successfully delete in uri " + uri);
 				result = true;
