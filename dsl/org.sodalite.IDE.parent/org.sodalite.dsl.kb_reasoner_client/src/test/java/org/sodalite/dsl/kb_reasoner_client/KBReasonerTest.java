@@ -24,19 +24,22 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
-import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
+import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
-import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
-import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
+import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
-import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
@@ -110,45 +113,72 @@ class KBReasonerTest {
 	}
 
 	@Test
-	void testGetProperties() throws Exception {
-		PropertyData properties = kbclient.getProperties(nodeType);
+	void testGetTypeProperties() throws Exception {
+		PropertyDefinitionData properties = kbclient.getTypeProperties(nodeType);
 		assertFalse(properties.getElements().isEmpty());
 		System.out.println("Properties for resource: " + nodeType);
-		properties.getElements().stream().forEach(node -> System.out.println("Property: " + node));
+		properties.getElements().stream().forEach(node -> System.out.println("Property: " + node.getUri()));
 	}
 
 	@Test
-	void testGetAttributes() throws Exception {
-		ReasonerData<Attribute> attributes = kbclient.getAttributes(resourceId);
+	void testGetTypeAttributes() throws Exception {
+		ReasonerData<AttributeDefinition> attributes = kbclient.getTypeAttributes(resourceId);
 		assertFalse(attributes.getElements().isEmpty());
 		System.out.println("Attributes for resource: " + resourceId);
 		attributes.getElements().stream().forEach(node -> System.out.println("Attribute: " + node));
 	}
 
 	@Test
-	void testGetInterfaces() throws Exception {
-		InterfaceData interfaces = kbclient.getInterfaces(resourceId);
+	void testGetTypeInterfaces() throws Exception {
+		InterfaceDefinitionData interfaces = kbclient.getTypeInterfaces(resourceId);
 		assertFalse(interfaces.getElements().isEmpty());
 		System.out.println("Interfaces for resource: " + resourceId);
 		interfaces.getElements().stream().forEach(node -> System.out.println("Interface: " + node));
 	}
 
 	@Test
-	void testGetCapabilities() throws Exception {
+	void testGetTypeCapabilities() throws Exception {
 		String resourceId = "sodalite.nodes.OpenStack.VM";
-		CapabilityData capabilities = kbclient.getCapabilities(resourceId);
+		CapabilityDefinitionData capabilities = kbclient.getTypeCapabilities(resourceId);
 		assertFalse(capabilities.getElements().isEmpty());
 		System.out.println("Capabilities for resource: " + resourceId);
-		capabilities.getElements().stream().forEach(node -> System.out.println("Capability: " + node));
+		capabilities.getElements().stream().forEach(cap -> System.out.println("Capability: " + cap));
 	}
 
 	@Test
-	void testGetRequirements() throws Exception {
-		String resourceId = "sodalite.nodes.OpenStack.VM";
-		RequirementData requirements = kbclient.getRequirements(resourceId);
+	void testGetTypeRequirements() throws Exception {
+		String resourceId = "openstack/sodalite.nodes.OpenStack.VM";
+		RequirementDefinitionData requirements = kbclient.getTypeRequirements(resourceId);
 		assertFalse(requirements.getElements().isEmpty());
 		System.out.println("Requirements for resource: " + resourceId);
-		requirements.getElements().stream().forEach(node -> System.out.println("Requirement: " + node));
+		requirements.getElements().stream().forEach(req -> System.out.println("Requirement: " + req));
+	}
+
+	@Test
+	void testGetTemplateRequirements() throws Exception {
+		String resourceId = "clinical/probabilistic-mapping-modak-job";
+		RequirementAssignmentData requirements = kbclient.getTemplateRequirements(resourceId);
+		assertFalse(requirements.getElements().isEmpty());
+		System.out.println("Requirements for resource: " + resourceId);
+		requirements.getElements().stream().forEach(req -> System.out.println("Requirement: " + req));
+	}
+
+	@Test
+	void testGetTemplateProperties() throws Exception {
+		String resourceId = "clinical/probabilistic-mapping-modak-job";
+		PropertyAssignmentData properties = kbclient.getTemplateProperties(resourceId);
+		assertFalse(properties.getElements().isEmpty());
+		System.out.println("Properties for resource: " + resourceId);
+		properties.getElements().stream().forEach(prop -> System.out.println("Requirement: " + prop));
+	}
+
+	@Test
+	void testGetTemplateAttributes() throws Exception {
+		String resourceId = "clinical/hpc-wm-torque";
+		AttributeAssignmentData attrs = kbclient.getTemplateAttributes(resourceId);
+		assertFalse(attrs.getElements().isEmpty());
+		System.out.println("Attributes for resource: " + resourceId);
+		attrs.getElements().stream().forEach(attr -> System.out.println("Attributte: " + attr));
 	}
 
 	@Test

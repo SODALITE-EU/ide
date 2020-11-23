@@ -33,12 +33,15 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sodalite.dsl.kb_reasoner_client.types.AttributeData;
-import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
+import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
-import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.InterfaceAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationError;
@@ -49,8 +52,10 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
-import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
-import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
+import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.StringData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeKind;
@@ -164,56 +169,119 @@ public class KBReasonerClient implements KBReasoner {
 		return data;
 	}
 
-	public AttributeData getAttributes(String resourceId) throws Exception {
+	// Type entities
+
+	public AttributeDefinitionData getTypeAttributes(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "attributes?resource=" + resourceId;
-		AttributeData data = getJSONObjectForType(AttributeData.class, new URI(url), HttpStatus.OK);
+		AttributeDefinitionData data = getJSONObjectForType(AttributeDefinitionData.class, new URI(url), HttpStatus.OK);
 		if (data == null) {
-			data = new AttributeData();
+			data = new AttributeDefinitionData();
 			data.setElements(new ArrayList<>());
 		}
 		return data;
 	}
 
-	public CapabilityData getCapabilities(String resourceId) throws Exception {
+	public CapabilityDefinitionData getTypeCapabilities(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "capabilities?resource=" + resourceId;
-		CapabilityData data = getJSONObjectForType(CapabilityData.class, new URI(url), HttpStatus.OK);
+		CapabilityDefinitionData data = getJSONObjectForType(CapabilityDefinitionData.class, new URI(url),
+				HttpStatus.OK);
 		if (data == null) {
-			data = new CapabilityData();
+			data = new CapabilityDefinitionData();
 			data.setElements(new ArrayList<>());
 		}
 		return data;
 	}
 
-	public InterfaceData getInterfaces(String resourceId) throws Exception {
+	public InterfaceDefinitionData getTypeInterfaces(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "interfaces?resource=" + resourceId;
-		InterfaceData data = getJSONObjectForType(InterfaceData.class, new URI(url), HttpStatus.OK);
+		InterfaceDefinitionData data = getJSONObjectForType(InterfaceDefinitionData.class, new URI(url), HttpStatus.OK);
 		if (data == null) {
-			data = new InterfaceData();
+			data = new InterfaceDefinitionData();
 			data.setElements(new ArrayList<>());
 		}
 		return data;
 	}
 
-	public PropertyData getProperties(String resourceId) throws Exception {
+	public PropertyDefinitionData getTypeProperties(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "properties?resource=" + resourceId;
-		PropertyData data = getJSONObjectForType(PropertyData.class, new URI(url), HttpStatus.OK);
+		PropertyDefinitionData data = getJSONObjectForType(PropertyDefinitionData.class, new URI(url), HttpStatus.OK);
 		if (data == null) {
-			data = new PropertyData();
+			data = new PropertyDefinitionData();
 			data.setElements(new ArrayList<>());
 		}
 		return data;
 	}
 
-	public RequirementData getRequirements(String resourceId) throws Exception {
+	public RequirementDefinitionData getTypeRequirements(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "requirements?resource=" + resourceId;
-		RequirementData data = getJSONObjectForType(RequirementData.class, new URI(url), HttpStatus.OK);
+		RequirementDefinitionData data = getJSONObjectForType(RequirementDefinitionData.class, new URI(url),
+				HttpStatus.OK);
 		if (data == null) {
-			data = new RequirementData();
+			data = new RequirementDefinitionData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
+	}
+
+	// Template entities
+
+	public AttributeAssignmentData getTemplateAttributes(String resourceId) throws Exception {
+		Assert.notNull(resourceId, "Pass a not null resourceId");
+		String url = kbReasonerUri + "prop-attr-names?resource=" + resourceId + "&element=attr";
+		AttributeAssignmentData data = getJSONObjectForType(AttributeAssignmentData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new AttributeAssignmentData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
+	}
+
+	public CapabilityAssignmentData getTemplateCapabilities(String resourceId) throws Exception {
+		Assert.notNull(resourceId, "Pass a not null resourceId");
+		String url = kbReasonerUri + "capabilities?resource=" + resourceId + "&template=true";
+		CapabilityAssignmentData data = getJSONObjectForType(CapabilityAssignmentData.class, new URI(url),
+				HttpStatus.OK);
+		if (data == null) {
+			data = new CapabilityAssignmentData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
+	}
+
+	public InterfaceAssignmentData getTemplateInterfaces(String resourceId) throws Exception {
+		Assert.notNull(resourceId, "Pass a not null resourceId");
+		String url = kbReasonerUri + "interfaces?resource=" + resourceId + "&template=true";
+		InterfaceAssignmentData data = getJSONObjectForType(InterfaceAssignmentData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new InterfaceAssignmentData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
+	}
+
+	public PropertyAssignmentData getTemplateProperties(String resourceId) throws Exception {
+		Assert.notNull(resourceId, "Pass a not null resourceId");
+		String url = kbReasonerUri + "prop-attr-names?resource=" + resourceId + "&element=prop";
+		PropertyAssignmentData data = getJSONObjectForType(PropertyAssignmentData.class, new URI(url), HttpStatus.OK);
+		if (data == null) {
+			data = new PropertyAssignmentData();
+			data.setElements(new ArrayList<>());
+		}
+		return data;
+	}
+
+	public RequirementAssignmentData getTemplateRequirements(String resourceId) throws Exception {
+		Assert.notNull(resourceId, "Pass a not null resourceId");
+		String url = kbReasonerUri + "requirements?resource=" + resourceId + "&template=true";
+		RequirementAssignmentData data = getJSONObjectForType(RequirementAssignmentData.class, new URI(url),
+				HttpStatus.OK);
+		if (data == null) {
+			data = new RequirementAssignmentData();
 			data.setElements(new ArrayList<>());
 		}
 		return data;

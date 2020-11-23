@@ -13,18 +13,23 @@ package org.sodalite.dsl.kb_reasoner_client;
 import java.nio.file.Path;
 import java.util.List;
 
-import org.sodalite.dsl.kb_reasoner_client.types.AttributeData;
-import org.sodalite.dsl.kb_reasoner_client.types.CapabilityData;
+import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
-import org.sodalite.dsl.kb_reasoner_client.types.InterfaceData;
+import org.sodalite.dsl.kb_reasoner_client.types.InterfaceAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
-import org.sodalite.dsl.kb_reasoner_client.types.PropertyData;
-import org.sodalite.dsl.kb_reasoner_client.types.RequirementData;
+import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 
@@ -42,15 +47,25 @@ public interface KBReasoner {
 
 	ModuleData getModules() throws Exception;
 
-	AttributeData getAttributes(String resourceId) throws Exception;
+	AttributeDefinitionData getTypeAttributes(String resourceId) throws Exception;
 
-	CapabilityData getCapabilities(String resourceId) throws Exception;
+	CapabilityDefinitionData getTypeCapabilities(String resourceId) throws Exception;
 
-	InterfaceData getInterfaces(String resourceId) throws Exception;
+	InterfaceDefinitionData getTypeInterfaces(String resourceId) throws Exception;
 
-	PropertyData getProperties(String resourceId) throws Exception;
+	PropertyDefinitionData getTypeProperties(String resourceId) throws Exception;
 
-	RequirementData getRequirements(String resourceId) throws Exception;
+	RequirementDefinitionData getTypeRequirements(String resourceId) throws Exception;
+
+	AttributeAssignmentData getTemplateAttributes(String resourceId) throws Exception;
+
+	CapabilityAssignmentData getTemplateCapabilities(String resourceId) throws Exception;
+
+	InterfaceAssignmentData getTemplateInterfaces(String resourceId) throws Exception;
+
+	PropertyAssignmentData getTemplateProperties(String resourceId) throws Exception;
+
+	RequirementAssignmentData getTemplateRequirements(String resourceId) throws Exception;
 
 	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType, List<String> modules)
 			throws Exception;

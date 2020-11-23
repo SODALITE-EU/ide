@@ -54,12 +54,12 @@ import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
-import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
-import org.sodalite.dsl.kb_reasoner_client.types.Capability;
+import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.Occurrences;
-import org.sodalite.dsl.kb_reasoner_client.types.Property;
+import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
-import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
@@ -280,12 +280,12 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String _plus = (_xifexpression + _type);
       resourceId = _plus;
       if ((resourceId != null)) {
-        final ReasonerData<Attribute> attributes = this.getKBReasoner().getAttributes(resourceId);
+        final ReasonerData<AttributeDefinition> attributes = this.getKBReasoner().getTypeAttributes(resourceId);
         if ((attributes != null)) {
         }
         System.out.println(("Attributes retrieved from KB for resource: " + resourceId));
-        List<Attribute> _elements = attributes.getElements();
-        for (final Attribute attribute : _elements) {
+        List<AttributeDefinition> _elements = attributes.getElements();
+        for (final AttributeDefinition attribute : _elements) {
           {
             URI _uri = attribute.getUri();
             String _plus_1 = ("\tAttribute: " + _uri);
@@ -360,11 +360,11 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String _plus = (_xifexpression + _type);
       resourceId = _plus;
       if ((resourceId != null)) {
-        final ReasonerData<Property> properties = this.getKBReasoner().getProperties(resourceId);
+        final ReasonerData<PropertyDefinition> properties = this.getKBReasoner().getTypeProperties(resourceId);
         if ((properties != null)) {
           System.out.println(("Properties retrieved from KB for resource: " + resourceId));
-          List<Property> _elements = properties.getElements();
-          for (final Property property : _elements) {
+          List<PropertyDefinition> _elements = properties.getElements();
+          for (final PropertyDefinition property : _elements) {
             {
               URI _uri = property.getUri();
               String _plus_1 = ("\tProperty: " + _uri);
@@ -440,11 +440,11 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String _plus = (_xifexpression + _type);
       resourceId = _plus;
       if ((resourceId != null)) {
-        final ReasonerData<Capability> capabilities = this.getKBReasoner().getCapabilities(resourceId);
+        final ReasonerData<CapabilityDefinition> capabilities = this.getKBReasoner().getTypeCapabilities(resourceId);
         if ((capabilities != null)) {
           System.out.println(("Capabilities retrieved from KB for resource: " + resourceId));
-          List<Capability> _elements = capabilities.getElements();
-          for (final Capability capability : _elements) {
+          List<CapabilityDefinition> _elements = capabilities.getElements();
+          for (final CapabilityDefinition capability : _elements) {
             {
               URI _uri = capability.getUri();
               String _plus_1 = ("\nCapability: " + _uri);
@@ -516,11 +516,11 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String _plus = (_xifexpression + _type);
       resourceId = _plus;
       if ((resourceId != null)) {
-        final ReasonerData<Requirement> requirements = this.getKBReasoner().getRequirements(resourceId);
+        final ReasonerData<RequirementDefinition> requirements = this.getKBReasoner().getTypeRequirements(resourceId);
         if ((requirements != null)) {
           System.out.println(("Requirements retrieved from KB for resource: " + resourceId));
-          List<Requirement> _elements = requirements.getElements();
-          for (final Requirement requirement : _elements) {
+          List<RequirementDefinition> _elements = requirements.getElements();
+          for (final RequirementDefinition requirement : _elements) {
             {
               URI _uri = requirement.getUri();
               String _plus_1 = ("\tRequirement: " + _uri);

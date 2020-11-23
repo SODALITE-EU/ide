@@ -11,7 +11,7 @@ import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
-import org.sodalite.dsl.kb_reasoner_client.types.Capability;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 
@@ -37,8 +37,8 @@ public class AADM_Helper {
 			String type = findContainerType(cap, reasoner);
 			if (type == null)
 				return result;
-			ReasonerData<Capability> capabilities = reasoner.getCapabilities(type);
-			for (Capability c : capabilities.getElements()) {
+			ReasonerData<CapabilityDefinition> capabilities = reasoner.getTypeCapabilities(type);
+			for (CapabilityDefinition c : capabilities.getElements()) {
 				String label = c.getUri().toString().substring(c.getUri().toString().lastIndexOf('/') + 1,
 						c.getUri().toString().length());
 				if (label.equals(cap.getName()))
@@ -83,5 +83,15 @@ public class AADM_Helper {
 			}
 		}
 		return null;
+	}
+
+	public static String getModule(EObject obj) {
+		AADM_Model model = findModel(obj);
+		return model.getModule();
+	}
+
+	public static List<String> getImports(EObject obj) {
+		AADM_Model model = findModel(obj);
+		return model.getImports();
 	}
 }

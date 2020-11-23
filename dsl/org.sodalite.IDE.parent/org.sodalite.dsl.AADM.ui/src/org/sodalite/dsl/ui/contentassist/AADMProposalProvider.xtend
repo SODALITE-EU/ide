@@ -25,9 +25,6 @@ import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
 import org.sodalite.dsl.kb_reasoner_client.types.Type
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner
-import org.sodalite.dsl.kb_reasoner_client.types.Attribute
-import org.sodalite.dsl.kb_reasoner_client.types.Property
-import org.sodalite.dsl.kb_reasoner_client.types.Requirement
 import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl
 import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl
@@ -57,11 +54,14 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
 import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl
-import org.sodalite.dsl.kb_reasoner_client.types.Capability
 import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData
 import java.util.HashMap
 import java.util.Map
+import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition
+import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -225,7 +225,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		resourceId = (type.module !== null? type.module + '/':'') + type.type
 
 		if (resourceId !== null){
-			val ReasonerData<Attribute> attributes = getKBReasoner().getAttributes(resourceId)
+			val ReasonerData<AttributeDefinition> attributes = getKBReasoner().getTypeAttributes(resourceId)
 			if (attributes !== null){}
 				System.out.println ("Attributes retrieved from KB for resource: " + resourceId)
 				for (attribute: attributes.elements){
@@ -233,8 +233,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					var attribute_label = attribute.uri.toString.substring(attribute.uri.toString.lastIndexOf('/') + 1, attribute.uri.toString.length)
 					proposalText = attribute_label
 					displayText = attribute_label
-					additionalProposalInfo = attribute.type.getLabel!==null?"Type: " + attribute.type.getLabel:""
-					additionalProposalInfo += attribute.description!==null?"\nDescription: " + attribute.description:""
+					additionalProposalInfo = attribute.getType.getLabel!==null?"Type: " + attribute.getType.getLabel:""
+					additionalProposalInfo += attribute.getDescription!==null?"\nDescription: " + attribute.getDescription:""
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 				}
 		}
@@ -263,7 +263,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		resourceId = (type.module !== null? type.module + '/':'') + type.type
 		
 		if (resourceId !== null){
-			val ReasonerData<Property> properties = getKBReasoner().getProperties(resourceId)
+			val ReasonerData<PropertyDefinition> properties = getKBReasoner().getTypeProperties(resourceId)
 			if (properties !== null){
 				System.out.println ("Properties retrieved from KB for resource: " + resourceId)
 				for (property: properties.elements){
@@ -271,8 +271,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				 	var property_label = property.uri.toString.substring(property.uri.toString.lastIndexOf('/') + 1, property.uri.toString.length)
 					proposalText = property_label
 					displayText = property_label
-					additionalProposalInfo = (property.type.getLabel!==null?"Type: " + property.type.getLabel:"") 
-					additionalProposalInfo += property.description!==null?"\nDescription: " + property.description:""
+					additionalProposalInfo = (property.getType.getLabel!==null?"Type: " + property.getType.getLabel:"") 
+					additionalProposalInfo += property.getDescription!==null?"\nDescription: " + property.getDescription:""
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 				 }
 			}
@@ -302,7 +302,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		resourceId = (type.module !== null? type.module + '/':'') + type.type
 		
 		if (resourceId !== null){
-			val ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(resourceId)
+			val ReasonerData<CapabilityDefinition> capabilities = getKBReasoner().getTypeCapabilities(resourceId)
 			if (capabilities !== null){
 				System.out.println ("Capabilities retrieved from KB for resource: " + resourceId)
 				for (capability: capabilities.elements){
@@ -311,10 +311,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					proposalText = property_label
 					displayText = property_label
 					additionalProposalInfo = ""
-					if (capability.type !== null)
-						additionalProposalInfo += "\nType: " + capability.type.getLabel
-					if (capability.valid_source_types !== null)
-						additionalProposalInfo += "\nValid source types:" + capability.valid_source_types 
+					if (capability.getType !== null)
+						additionalProposalInfo += "\nType: " + capability.getType.getLabel
+					if (capability.getValid_source_types !== null)
+						additionalProposalInfo += "\nValid source types:" + capability.getValid_source_types 
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 				}
 			}
@@ -343,7 +343,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		resourceId = (type.module !== null? type.module + '/':'') + type.type
 		
 		if (resourceId !== null){
-			val ReasonerData<Requirement> requirements = getKBReasoner().getRequirements(resourceId)
+			val ReasonerData<RequirementDefinition> requirements = getKBReasoner().getTypeRequirements(resourceId)
 			if (requirements !== null){
 				System.out.println ("Requirements retrieved from KB for resource: " + resourceId)
 				for (requirement: requirements.elements){
@@ -352,12 +352,12 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					proposalText = property_label
 					displayText = property_label
 					additionalProposalInfo = ""
-					if (requirement.capability !== null)
-						additionalProposalInfo += "\nCapability: " + requirement.capability.getLabel
-					if (requirement.node !== null)
-						additionalProposalInfo += "\nNode: " + requirement.node.getLabel
-					if (requirement.occurrences !== null)
-						additionalProposalInfo += "\nOccurrences: [" + requirement.occurrences.min + ", " + requirement.occurrences.max + "]"
+					if (requirement.getCapability !== null)
+						additionalProposalInfo += "\nCapability: " + requirement.getCapability.getLabel
+					if (requirement.getNode !== null)
+						additionalProposalInfo += "\nNode: " + requirement.getNode.getLabel
+					if (requirement.getOccurrences !== null)
+						additionalProposalInfo += "\nOccurrences: [" + requirement.getOccurrences.min + ", " + requirement.getOccurrences.max + "]"
 					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 				}
 			}

@@ -2,7 +2,6 @@ package org.sodalite.dsl.AADM.design;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -15,11 +14,11 @@ import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
-import org.sodalite.dsl.kb_reasoner_client.types.Attribute;
-import org.sodalite.dsl.kb_reasoner_client.types.Capability;
-import org.sodalite.dsl.kb_reasoner_client.types.Property;
+import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
-import org.sodalite.dsl.kb_reasoner_client.types.Requirement;
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
@@ -50,11 +49,12 @@ public class KBReasonerProxy {
 	public List<String> getTypes(ENodeTemplate node) {
 		List<String> types = new ArrayList<>();
 		try {
-			// FIXME Support searching based on modules (namespaces)
-			List<String> modules = Arrays.asList();
+			List<String> modules = new ArrayList<>();
+			modules.add(AADM_Helper.getModule(node));
+			modules.addAll(AADM_Helper.getImports(node));
 			ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(modules);
 			for (Type n : nodes.getElements()) {
-				types.add(n.getLabel());
+				types.add(renderType(n));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,14 +63,23 @@ public class KBReasonerProxy {
 		return types;
 	}
 
+	private String renderType(Type type) {
+		return (type.getModule() != null ? renderModule(type.getModule()) + "/" : "") + type.getLabel();
+	}
+
+	private String renderModule(String module) {
+		String[] split = module.split("/");
+		return split[split.length - 1];
+	}
+
 	public List<String> getAttributes(EAttributeAssignment attr) {
 		List<String> result = new ArrayList<>();
 		try {
 			String type = AADM_Helper.findContainerType(attr, getKBReasoner());
 			if (type == null)
 				return result;
-			ReasonerData<Attribute> attributes = getKBReasoner().getAttributes(type);
-			for (Attribute a : attributes.getElements()) {
+			ReasonerData<AttributeDefinition> attributes = getKBReasoner().getTypeAttributes(type);
+			for (AttributeDefinition a : attributes.getElements()) {
 				String label = a.getUri().toString().substring(a.getUri().toString().lastIndexOf('/') + 1,
 						a.getUri().toString().length());
 				result.add(label);
@@ -88,8 +97,8 @@ public class KBReasonerProxy {
 			String type = AADM_Helper.findContainerType(prop, getKBReasoner());
 			if (type == null)
 				return result;
-			ReasonerData<Property> properties = getKBReasoner().getProperties(type);
-			for (Property p : properties.getElements()) {
+			ReasonerData<PropertyDefinition> properties = getKBReasoner().getTypeProperties(type);
+			for (PropertyDefinition p : properties.getElements()) {
 				String label = p.getUri().toString().substring(p.getUri().toString().lastIndexOf('/') + 1,
 						p.getUri().toString().length());
 				result.add(label);
@@ -107,8 +116,8 @@ public class KBReasonerProxy {
 			String type = AADM_Helper.findContainerType(cap, getKBReasoner());
 			if (type == null)
 				return result;
-			ReasonerData<Capability> capabilities = getKBReasoner().getCapabilities(type);
-			for (Capability c : capabilities.getElements()) {
+			ReasonerData<CapabilityDefinition> capabilities = getKBReasoner().getTypeCapabilities(type);
+			for (CapabilityDefinition c : capabilities.getElements()) {
 				String label = c.getUri().toString().substring(c.getUri().toString().lastIndexOf('/') + 1,
 						c.getUri().toString().length());
 				result.add(label);
@@ -126,8 +135,8 @@ public class KBReasonerProxy {
 			String type = AADM_Helper.findContainerType(req, getKBReasoner());
 			if (type == null)
 				return result;
-			ReasonerData<Requirement> requirements = getKBReasoner().getRequirements(type);
-			for (Requirement r : requirements.getElements()) {
+			ReasonerData<RequirementDefinition> requirements = getKBReasoner().getTypeRequirements(type);
+			for (RequirementDefinition r : requirements.getElements()) {
 				String label = r.getUri().toString().substring(r.getUri().toString().lastIndexOf('/') + 1,
 						r.getUri().toString().length());
 				result.add(label);
@@ -144,8 +153,9 @@ public class KBReasonerProxy {
 		SortedSet<String> types = new TreeSet<String>();
 		EPREFIX_TYPE nodeType = ((ENodeTemplateBody) req.eContainer().eContainer()).getType();
 		String resourceId = (nodeType.getModule() != null ? nodeType.getModule() + "/" : "") + nodeType.getType();
-		// FIXME Support searching based on modules (namespaces)
-		List<String> modules = Arrays.asList();
+		List<String> modules = new ArrayList<>();
+		modules.add(AADM_Helper.getModule(req));
+		modules.addAll(AADM_Helper.getImports(req));
 		ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(req.getName(), resourceId, modules);
 		if (vrnd != null) {
 			System.out.println("Valid requirement nodes retrieved from KB for requirement: " + req.getName());
