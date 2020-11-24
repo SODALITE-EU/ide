@@ -56,6 +56,7 @@ import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
+import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl;
 import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
@@ -531,6 +532,10 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         if ((model instanceof EPropertyAssigmentsImpl)) {
           EObject _eContainer = ((EPropertyAssigmentsImpl)model).eContainer();
           type = ((ENodeTemplateBodyImpl) _eContainer).getType();
+        } else {
+          if ((model instanceof ENodeTemplateImpl)) {
+            type = ((ENodeTemplateImpl) model).getNode().getType();
+          }
         }
       }
       String _xifexpression = null;

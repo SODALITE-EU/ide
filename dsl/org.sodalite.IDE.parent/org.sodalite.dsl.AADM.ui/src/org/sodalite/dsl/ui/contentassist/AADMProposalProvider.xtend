@@ -60,6 +60,7 @@ import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl
 import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EEntity
 import org.sodalite.dsl.aADM.ECapabilityAssignment
+import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -389,6 +390,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			type = (model as ENodeTemplateBodyImpl).type
 		else if (model instanceof EPropertyAssigmentsImpl)
 			type = (model.eContainer as ENodeTemplateBodyImpl).type
+		else if (model instanceof ENodeTemplateImpl)
+			type = (model as ENodeTemplateImpl).node.type
 			
 		resourceId = (type.module !== null? type.module + '/':'') + type.type
 		
