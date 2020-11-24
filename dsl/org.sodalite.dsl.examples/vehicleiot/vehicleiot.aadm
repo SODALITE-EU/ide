@@ -117,8 +117,8 @@ node_templates:
 		properties:
 			docker_network_name: get_property: 
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/consul-container.network
 			alias: "consul"
 			image_name: "library/consul"
 			hostname: "consul"
@@ -151,8 +151,8 @@ node_templates:
 		properties:
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/registrator-container.network
 			alias: "registrator"
 			image_name: "adaptant/registrator:latest"
 			command: "-ip {{ public_address }} consul://consul:8500"
@@ -172,8 +172,8 @@ node_templates:
 		properties:
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/kafka-container.network
 			alias: "kafka"
 			image_name: "adaptant/kafka-zookeeper"
 			ports: ["9092:9092"]
@@ -195,8 +195,8 @@ node_templates:
 		properties:
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network         
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/mysql-container.network       
 			alias: "knowgo-mysql"
 			image_name: "library/mysql:latest"
 			command: "--default-authentication-plugin=mysql_native_password"
@@ -222,8 +222,8 @@ node_templates:
 		properties:
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network         
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/vin-decoder-container.network       
 			alias: "vin-decoder"
 			image_name: "adaptant/vin-decoder-service:latest"
 			command: "--consul-agent consul:8500"
@@ -246,8 +246,8 @@ node_templates:
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network         
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/reverse-geocoder-container.network    
 			alias: "reverse-geocoder"
 			image_name: "adaptant/reverse-geocoding-service:latest"
 			command: "--consul-agent consul:8500"
@@ -268,8 +268,8 @@ node_templates:
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network         
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/licenseplate-recognition-service-container.network   
 			alias: "licenseplate-recognition-service"
 			image_name: "adaptant/licenseplate-recognition-service:latest"
 			command: "--consul-agent consul:8500"
@@ -290,8 +290,8 @@ node_templates:
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network        
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/knowgo-score-container.network    
 			alias: "knowgo-score"
 			image_name: "adaptant/knowgo-score:latest"
 			command: "--consul-agent consul:8500"
@@ -312,8 +312,8 @@ node_templates:
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network        
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/openpolicyagent-container.network       
 			alias: "opa"
 			image_name: "openpolicyagent/opa"
 			command: "run --server"
@@ -334,8 +334,8 @@ node_templates:
 		properties:
 			docker_network_name:  get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network          
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/region-router-container.network          
 			alias: "region-router"
 			image_name: "adaptant/go-region-router:latest"
 			command: "--consul-agent consul:8500"
@@ -356,8 +356,8 @@ node_templates:
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network         
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/mqtt-broker-container.network     
 			alias: "mqtt-broker"
 			image_name: "library/eclipse-mosquitto:latest"
 			env:
@@ -388,8 +388,8 @@ node_templates:
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network         
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/knowgo-service-registry-container.network     
 			alias: "knowgo-service-registry"
 			image_name: "adaptant/knowgo-service-registry:latest"
 			command: "--consul-agent consul:8500"
@@ -421,8 +421,8 @@ node_templates:
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network         
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/knowgo-api-gateway-container.network      
 			alias: "knowgo-api-gateway"
 			image_name: "adaptant/knowgo-api-gateway:latest"
 			command: "run --server"
@@ -464,8 +464,8 @@ node_templates:
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network        
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/prometheus-container.network     
 			alias: "prometheus"
 			image_name: "prom/prometheus:latest"
 			volumes:["{{ lookup('env','HOME') }}/.knowgo/conf/prometheus:/etc/prometheus"]
@@ -499,8 +499,8 @@ node_templates:
 		properties:
 			docker_network_name: get_property:
 				entity: SELF
-				property: docker/sodalite.nodes.DockerNetwork.name
-				req_cap: docker/sodalite.nodes.DockerNetwork.network          
+				property: vehicleiot/vehicle-docker-network.name
+				req_cap: vehicleiot/grafana-container.network        
 			alias: "grafana"
 			image_name: "grafana/grafana:latest"
 			env:

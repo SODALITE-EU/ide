@@ -49,7 +49,7 @@ node_templates:
 			images_location: "/mnt/nfs/home/kamil/images"
 		requirements:
 			host: 
-				node: hpc-wm-torque
+				node: clinical/hpc-wm-torque
 				
 	moduli-image:
 		type: hpc/sodalite.image_puller.singularity
@@ -61,7 +61,7 @@ node_templates:
 			images_location: "/mnt/nfs/home/kamil/images"
 		requirements:
 			host: 
-				node: hpc-wm-torque
+				node: clinical/hpc-wm-torque
 				
 	code-aster-image:
 		type: hpc/sodalite.image_puller.singularity
@@ -72,7 +72,7 @@ node_templates:
 			images_location: "/mnt/nfs/home/kamil/images"
 		requirements:
 			host: 
-				node: hpc-wm-torque				
+				node: clinical/hpc-wm-torque				
 
 	//modak job parameters
 	density-mapping-modak-job:
@@ -100,9 +100,9 @@ node_templates:
 	    	optimisation: '{}'
 	  	requirements:
 	    	modak_endpoint:
-	    		node: modak-instance
+	    		node: clinical/modak-instance
 	    	dependency:
-	    		node: cadt-image
+	    		node: clinical/cadt-image
 
 	probabilistic-mapping-modak-job: 
 	  	type: modak/sodalite.nodes.modak.job
@@ -131,9 +131,9 @@ node_templates:
 	    	optimisation: '{}'
 	  	requirements:
 	    	modak_endpoint:
-	    		node: modak-instance
+	    		node: clinical/modak-instance
 	    	dependency:
-	    		node: moduli-image
+	    		node: clinical/moduli-image
 
 
 	boundary-conditions-modak-job:
@@ -161,9 +161,9 @@ node_templates:
 	    	optimisation: '{}'
 	  	requirements:
 	    	modak_endpoint:
-	    		node: modak-instance
+	    		node: clinical/modak-instance
 	    	dependency:
-	    		node: cadt-image
+	    		node: clinical/cadt-image
 				
 	//job configs
 	density-mapping-job-config: 
@@ -177,9 +177,9 @@ node_templates:
 				SINGULARITY_DIR: "/mnt/nfs/home/kamil/images"
 		requirements:
 			host: 
-				node: hpc-wm-torque
+				node: clinical/hpc-wm-torque
 			dependency:
-	    		node: density-mapping-modak-job
+	    		node: clinical/density-mapping-modak-job
 				
 	probabilistic-mapping-job-config:
 		type: hpc/sodalite.nodes.hpc.job.torque.preconfigured
@@ -192,9 +192,9 @@ node_templates:
 				SINGULARITY_DIR: "/mnt/nfs/home/kamil/images"
 		requirements:
 			host: 
-				node: hpc-wm-torque		
+				node: clinical/hpc-wm-torque		
 			dependency:
-	    		node: probabilistic-mapping-modak-job
+	    		node: clinical/probabilistic-mapping-modak-job
 				
 	boundary-conditions-job-config:
 		type: hpc/sodalite.nodes.hpc.job.torque.preconfigured
@@ -207,9 +207,9 @@ node_templates:
 				SINGULARITY_DIR: "/mnt/nfs/home/kamil/images"
 		requirements:
   			host: 
-  				node: hpc-wm-torque	
+  				node: clinical/hpc-wm-torque	
   			dependency:
-	    		node: boundary-conditions-modak-job
+	    		node: clinical/boundary-conditions-modak-job
 				
 	//job workflow
 
@@ -217,29 +217,31 @@ node_templates:
 		type: hpc/sodalite.nodes.hpc.job.torque
 		requirements:
 			host: 
-				node: hpc-wm-torque
+				node: clinical/hpc-wm-torque
 			configured_job: 
-				node: density-mapping-job-config
+				node: clinical/density-mapping-job-config
 
 	probabilistic-mapping-job:
 		type: hpc/sodalite.nodes.hpc.job.torque
 		requirements:
 			host: 
-				node: hpc-wm-torque
+				node: clinical/hpc-wm-torque
 			configured_job: 
-				node: probabilistic-mapping-job-config
+				//FIXME Content assistance
+				node: clinical/probabilistic-mapping-job-config	
 			dependency: 
-				node: density-mapping-job-result
+				node: clinical/density-mapping-job-result
 
 	boundary-conditions-job:
 		type: hpc/sodalite.nodes.hpc.job.torque
 		requirements:
 			host: 
-				node: hpc-wm-torque
+				node: clinical/hpc-wm-torque
 			configured_job: 
-				node: boundary-conditions-job-config
+				//FIXME Content assistance
+				node: clinical/boundary-conditions-job-config
 			dependency: 
-				node: probabilistic-mapping-job-result				
+				node: clinical/probabilistic-mapping-job-result				
 				
 	//job result
 
@@ -247,23 +249,23 @@ node_templates:
 		type: hpc/sodalite.nodes.hpc.job.torque.result
 		requirements:
 			host: 
-				node: hpc-wm-torque
+				node: clinical/hpc-wm-torque
 			job: 
-				node: density-mapping-job
+				node: clinical/density-mapping-job
 
 	probabilistic-mapping-job-result:
 		type: hpc/sodalite.nodes.hpc.job.torque.result
 		requirements:
 			host: 
-				node: hpc-wm-torque
+				node: clinical/hpc-wm-torque
 			job: 
-				node: probabilistic-mapping-job
+				node: clinical/probabilistic-mapping-job
 
 	boundary-conditions-job-result:
 		type: hpc/sodalite.nodes.hpc.job.torque.result
 		requirements:
 			host: 
-				node: hpc-wm-torque
+				node: clinical/hpc-wm-torque
 			job: 
-				node: boundary-conditions-job
+				node: clinical/boundary-conditions-job
 	

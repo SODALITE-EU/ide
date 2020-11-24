@@ -184,13 +184,13 @@ node_templates:
 			remote_server: 
 				node: snow/snow-vm-2
 				
-	snow-mysql:
+	snow-mysql: 
 		type: docker/sodalite.nodes.DockerizedComponent 
 		properties:  
 			docker_network_name: get_property:
 				entity: SELF
-				property: tosca.capabilities.Network.name
-				req_cap: tosca.nodes.Container.Application.network
+				property: snow/snow-docker-network.name
+				req_cap: snow/snow-mysql.network
 			image_name:  "snow-mysql:latest" 
 			command: "--default-authentication-plugin=mysql_native_password"
 			ports:  ['3306:3306'] 
@@ -211,8 +211,8 @@ node_templates:
 		properties:  
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: tosca.capabilities.Network.name
-				req_cap: tosca.nodes.Container.Application.network
+				property: snow/snow-docker-network.name
+				req_cap: snow/snow-webcam-crawler.network
 			volumes: [
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/WebCamCrawler/config.json", 
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
@@ -241,8 +241,8 @@ node_templates:
 		properties:  
 			docker_network_name:  get_property: 
 				entity: SELF
-				property: tosca.capabilities.Network.name
-				req_cap: tosca.nodes.Container.Application.network
+				property: snow/snow-docker-network.name
+				req_cap: snow/snow-weather-condition-filter.network
 			volumes: [
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json", 
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
@@ -278,8 +278,8 @@ node_templates:
 		properties:  
 			docker_network_name:  get_property:
 				entity: SELF
-				property: tosca.capabilities.Network.name
-				req_cap: tosca.nodes.Container.Application.network
+				property: snow/snow-docker-network.name
+				req_cap: snow/snow-daily-median-aggregator.network
 			volumes:  [
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json", 
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
@@ -352,8 +352,8 @@ node_templates:
 		properties:  
 			docker_network_name:  get_property:
 				entity: SELF
-				property: tosca.capabilities.Network.name
-				req_cap: tosca.nodes.Container.Application.network 
+				property: snow/snow-docker-network.name
+				req_cap: snow/snow-webcam-mockup.network
 			image_name:  "snow-webcam-mockup:latest"
 			alias: "snow-webcam-mockup"
 			ports:  ['8080:8080'] 
@@ -372,8 +372,8 @@ node_templates:
 		properties:  
 			docker_network_name: get_property:
 				entity: SELF
-				property: tosca.capabilities.Network.name
-				req_cap: tosca.nodes.Container.Application.network 
+				req_cap: snow/snow-demo.network
+				property: snow/snow-docker-network.name
 			volumes: [
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json",  
 			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots", 

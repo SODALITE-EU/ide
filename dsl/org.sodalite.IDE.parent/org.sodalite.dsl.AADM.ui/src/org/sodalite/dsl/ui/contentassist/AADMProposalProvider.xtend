@@ -21,22 +21,16 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.eclipse.xtext.impl.KeywordImpl
 import org.eclipse.xtext.ParserRule
-import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
 import org.sodalite.dsl.kb_reasoner_client.types.Type
-import org.sodalite.dsl.kb_reasoner_client.KBReasoner
 import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl
 import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl
-import org.eclipse.jface.preference.IPreferenceStore
-import org.sodalite.dsl.ui.preferences.PreferenceConstants
-import java.text.MessageFormat
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode
 import java.util.SortedSet
-import java.util.TreeSet
 import java.util.List
 import org.sodalite.dsl.aADM.ENodeTemplate
 import java.util.ArrayList
@@ -62,6 +56,10 @@ import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition
+import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl
+import org.sodalite.dsl.rM.EEntityReference
+import org.sodalite.dsl.rM.EEntity
+import org.sodalite.dsl.aADM.ECapabilityAssignment
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -90,6 +88,138 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		proposal.additionalProposalInfo = getAdditionalProposalInfo(keyword)
 		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
 		acceptor.accept(proposal);
+	}
+	
+	override void completeGetPropertyBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetPropertyBody::entity property")
+		//TODO Populate as well with existing templates in scope (local, KB)
+		createEntityProposals (context, acceptor);
+	}
+	
+	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetPropertyBody::req_cap property")
+		val String module = getModule(model)
+		//TODO Get entity in this GetProperty body. If null, return
+		val GetPropertyBodyImpl body = model as GetPropertyBodyImpl
+		val EEntityReference eEntityReference = body.entity
+		var ENodeTemplate node = null
+		if (eEntityReference instanceof EEntity){
+			val EEntity eEntity = eEntityReference as EEntity
+			if (eEntity.entity.equals('SELF')){
+				node = getNodeTemplate(model) as ENodeTemplate
+			}
+		} else {
+			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
+		}
+		
+		if (node === null)
+			return
+		
+		var List<String> proposals = new ArrayList<String>()
+		//Find requirements and capability assignments defined within the entity
+		if (node.node.requirements !== null)
+			for (req: node.node.requirements.requirements){
+				proposals.add (module + '/' + node.name + '.' + req.name)
+			}
+		
+		if (node.node.capabilities !== null)
+			for (cap: node.node.capabilities.capabilities){
+				proposals.add (module + '/' + node.name + '.' + cap.name)
+			}
+		
+		//Create proposals for each req or cap.
+		for (proposal: proposals){
+			createEditableCompletionProposal(proposal, proposal, context, null, acceptor);
+		}
+	}
+	
+	override void completeGetPropertyBody_Property(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetPropertyBody::property property")
+		val String module = getModule(model)
+		//TODO Get entity in this GetProperty body.
+		val GetPropertyBodyImpl body = model as GetPropertyBodyImpl
+		val EEntityReference eEntityReference = body.entity
+		var ENodeTemplate node = null
+		if (eEntityReference instanceof EEntity){
+			val EEntity eEntity = eEntityReference as EEntity
+			if (eEntity.entity.equals('SELF')){
+				node = getNodeTemplate(model) as ENodeTemplate
+			}
+		} else {
+			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
+		}
+		
+		if (node === null)
+			return
+			
+		var List<String> proposals = new ArrayList<String>()
+		// Get the properties defined within the selected node requirements or capabilities
+		if (body.req_cap !== null){
+			val req_cap_name = getLastSegment(body.req_cap.type, '.')
+			val ENodeTemplate req_node = findRequirementNodeInTemplate(req_cap_name, node)
+			if (req_node !== null)
+				for (prop:req_node.node.properties.properties)
+					proposals.add(module + '/' + req_node.name + "." + prop.name)
+			//else
+				//TODO Find requirement node in KB
+			val ECapabilityAssignment cap = findCapabilityInTemplate(req_cap_name, node)
+			if (cap !== null)
+				for (prop:cap.properties.properties)
+					proposals.add(prop.name)
+		}else{
+			//Get the properties defined within the entity
+			for (prop:node.node.properties.properties)
+					proposals.add(prop.name)
+		}
+		
+		//Create proposals for each found property. Prefix property with req|cap name when applies
+		for (proposal: proposals){
+			createEditableCompletionProposal(proposal, proposal, context, null, acceptor);
+		}
+	}
+	
+	override def getLastSegment(String string, String delimiter) {
+		var newString = string
+		if (string.endsWith(delimiter))
+			newString = string.substring(0, string.length - delimiter.length)
+		return newString.substring(newString.lastIndexOf(delimiter) + 1)
+	}
+		
+	def findRequirementNodeInTemplate(String requirement, ENodeTemplate template) {
+		var ENodeTemplate node = null
+		if (template.node.requirements === null)
+			return node
+		for (req: template.node.requirements.requirements){
+			if (req.name.equals(requirement)){
+				val AADM_Model model = findModel(template) as AADM_Model
+				val module = model.module
+				if (req.node.module.equals(module)){
+					node = findNode(model, req.node.id)						
+				}else{
+					//TODO Find node in KB
+				} 
+			}
+		}
+		return node
+	}
+	
+	def findCapabilityInTemplate(String capabilityName, ENodeTemplate template) {
+		var ECapabilityAssignment capability = null
+		if (template.node.capabilities === null)
+			return capability
+		for (cap: template.node.capabilities.capabilities){
+			if (cap.name.equals(capabilityName))
+				capability = cap
+		}
+		return capability
+	}
+		
+	def findNode(AADM_Model model, String nodeName) {
+		for (node: model.nodeTemplates.nodeTemplates){
+			if (node.name.equals(nodeName))
+				return node
+		}
+		return null
 	}
 
 	def setAdditionalProposalInfo(ICompletionProposal proposal, String info) {
@@ -417,6 +547,29 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			}
 		}
 	}
+	
+	override void completeEDataTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for EDataType::supertype property")
+		
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
+		
+		val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
+		System.out.println ("Data types retrieved from KB:")
+		for (type: types.elements){
+			System.out.println ("\tData type: " + type.label)
+			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+			val proposalText = qtype
+			val displayText = qtype
+			val additionalProposalInfo = type.description
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		}
+
+		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
 		
 //	def existsInAadm(String nodeUri, String aadmUri) {
 //		return nodeUri.substring(0, nodeUri.lastIndexOf('/')).equals(
@@ -495,6 +648,15 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			return object.eContainer
 		else
 			return findModel(object.eContainer)
+	}
+
+	def getNodeTemplate(EObject object) {
+		if (object.eContainer == null)
+			return null
+		else if (object.eContainer instanceof ENodeTemplate)
+			return object.eContainer
+		else
+			return getNodeTemplate(object.eContainer)
 	}
 
 	// Keywords

@@ -48,6 +48,9 @@ import org.sodalite.dsl.rM.EAlphaNumericValue
 import org.sodalite.dsl.rM.EDataTypeName
 import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
+import org.sodalite.dsl.rM.EEntityReference
+import org.sodalite.dsl.rM.EPREFIX_ID
+import org.sodalite.dsl.rM.EEntity
 
 /**
  * Generates code from your model files on save.
@@ -148,7 +151,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "property" ;
-	  exchange:value '«p.property.property.type»' ; 
+	  exchange:value '«lastSegment(p.property.property.type, '.')»' ; 
 	.
 	«ENDIF»	
 	
@@ -157,7 +160,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entity" ;  
-	  exchange:value '«p.property.entity»' ; 
+	  exchange:value '«trim(p.property.entity.compile())»' ; 
 	.
 	«ENDIF»	
 	
@@ -167,7 +170,7 @@ class AADMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
 	  «IF p.property.req_cap.module !== null»
-	  exchange:listValue '«p.property.req_cap.module»/«p.property.req_cap.type»' ; 
+	  exchange:listValue '«lastSegment(p.property.req_cap.type, '.')»' ; 
 	  «ELSE»
 	  exchange:listValue "«p.property.req_cap.type»" ; 
 	  «ENDIF» 
@@ -409,6 +412,16 @@ class AADMGenerator extends AbstractGenerator {
 	.
 	'''
 	
+	def compile (EEntityReference t) '''
+	«IF t instanceof EPREFIX_TYPE»
+	  «(t as EPREFIX_TYPE).compile»
+	«ELSEIF t instanceof EPREFIX_ID»
+	  «(t as EPREFIX_ID).id»
+	«ELSEIF t instanceof EEntity»
+	  «(t as EEntity).entity»
+	«ENDIF»
+	'''
+	
 	def getFilename(URI uri) {
 		var filename = uri.toString
 		filename = filename.replace("platform:/resource", "")
@@ -476,5 +489,13 @@ class AADMGenerator extends AbstractGenerator {
 	
 	def trim (String value) {
 		return value.trim
+	}
+	
+	def trim (CharSequence value) {
+		return value.toString.trim
+	}
+	
+	def lastSegment(String string, String delimiter){
+		return string.substring(string.lastIndexOf(delimiter) + 1)
 	}
 }
