@@ -1,3 +1,8 @@
+module: optimization
+
+import: openstack
+import: docker
+
 inputs:
 	ssh-key-name:  
 		type: string 
@@ -32,7 +37,7 @@ inputs:
 node_templates:
 
 	optimization-security-rules:  
-		type: sodalite.nodes.OpenStack.SecurityRules 
+		type: openstack/sodalite.nodes.OpenStack.SecurityRules 
 		properties:  
 			ports:  
 				component_ports:  
@@ -49,7 +54,7 @@ node_templates:
 			group_description:  "Optimization UC security group"
 	
 	optimization-vm:  
-		type: sodalite.nodes.optimization.VM
+		type: openstack/sodalite.nodes.OpenStack.VM
 		properties:  
 			key_name:  get_input: ssh-key-name 
 			image: get_input: image-name 
@@ -59,7 +64,7 @@ node_templates:
 			flavor:  get_input: flavor-name
 		requirements:  
 			protected_by: 
-				node: optimization-security-rules
+				node: optimization-security-rulesoptimization-security-rules
 		capabilities:
 			host:
 				properties:
@@ -72,23 +77,23 @@ node_templates:
 					architecture: "x86_64"
 					
 	optimization-docker-host:  
-		type: sodalite.nodes.DockerHost 
+		type: docker/sodalite.nodes.DockerHost
 		requirements:
 			host:  
-				node: optimization-vm	
+				node: optimization/optimization-vm	
 				
 	optimization-docker-registry1:
-		type: sodalite.nodes.DockerRegistry
+		type: docker/sodalite.nodes.DockerRegistry
 		properties:  
 			docker_registry_url: get_input: docker-registry-url 
 		requirements:
 			host: 
-				node: optimization-vm
+				node: optimization/optimization-vm
 			dependency: 
-				node: optimization-docker-host 
+				node: optimization/optimization-docker-host 
 
 	optimization-skyline-extractor:  
-		type: sodalite.nodes.DockerizedComponent 
+		type: docker/sodalite.nodes.DockerizedComponent
 		optimization: ai_training.tensor_flow
 		properties:  
 			alias: "optimization-skyline-extractor"
@@ -99,7 +104,7 @@ node_templates:
 			registry_url: get_input: docker-registry-url
 		requirements:  
 			registry: 
-				node: optimization-docker-registry1
+				node: optimization/optimization-docker-registry1
 			host:
-				node: optimization-vm
+				node: optimization/optimization-vm
 			

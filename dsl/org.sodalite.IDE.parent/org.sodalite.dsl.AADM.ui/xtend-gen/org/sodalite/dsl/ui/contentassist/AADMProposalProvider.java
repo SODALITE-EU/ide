@@ -119,18 +119,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::req_cap property");
     final String module = this.getModule(model);
-    final GetPropertyBodyImpl body = ((GetPropertyBodyImpl) model);
-    final EEntityReference eEntityReference = body.getEntity();
-    ENodeTemplate node = null;
-    if ((eEntityReference instanceof EEntity)) {
-      final EEntity eEntity = ((EEntity) eEntityReference);
-      boolean _equals = eEntity.getEntity().equals("SELF");
-      if (_equals) {
-        Object _nodeTemplate = this.getNodeTemplate(model);
-        node = ((ENodeTemplate) _nodeTemplate);
-      }
-    } else {
-    }
+    final ENodeTemplate node = this.getEntity(((GetPropertyBodyImpl) model));
     if ((node == null)) {
       return;
     }
@@ -166,22 +155,39 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
+  public ENodeTemplate getEntity(final GetPropertyBodyImpl body) {
+    ENodeTemplate _xblockexpression = null;
+    {
+      final EEntityReference eEntityReference = body.getEntity();
+      ENodeTemplate node = null;
+      ENodeTemplate _xifexpression = null;
+      if ((eEntityReference instanceof EEntity)) {
+        ENodeTemplate _xblockexpression_1 = null;
+        {
+          final EEntity eEntity = ((EEntity) eEntityReference);
+          ENodeTemplate _xifexpression_1 = null;
+          boolean _equals = eEntity.getEntity().equals("SELF");
+          if (_equals) {
+            Object _nodeTemplate = this.getNodeTemplate(body);
+            _xifexpression_1 = node = ((ENodeTemplate) _nodeTemplate);
+          }
+          _xblockexpression_1 = _xifexpression_1;
+        }
+        _xifexpression = _xblockexpression_1;
+      } else {
+        _xifexpression = null;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
   @Override
   public void completeGetPropertyBody_Property(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::property property");
     final String module = this.getModule(model);
     final GetPropertyBodyImpl body = ((GetPropertyBodyImpl) model);
-    final EEntityReference eEntityReference = body.getEntity();
-    ENodeTemplate node = null;
-    if ((eEntityReference instanceof EEntity)) {
-      final EEntity eEntity = ((EEntity) eEntityReference);
-      boolean _equals = eEntity.getEntity().equals("SELF");
-      if (_equals) {
-        Object _nodeTemplate = this.getNodeTemplate(model);
-        node = ((ENodeTemplate) _nodeTemplate);
-      }
-    } else {
-    }
+    final ENodeTemplate node = this.getEntity(body);
     if ((node == null)) {
       return;
     }
@@ -831,54 +837,54 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
           }
         }
-        boolean _isEmpty_1 = tovrnd.getElements().isEmpty();
-        if (_isEmpty_1) {
-          throw new Exception("Type of valid nodes satisfying the requirement not found");
-        }
-        final Type superType = tovrnd.getElements().get(0);
-        String _xifexpression_1 = null;
-        String _module_2 = superType.getModule();
-        boolean _tripleNotEquals_1 = (_module_2 != null);
-        if (_tripleNotEquals_1) {
-          String _lastSegment = this.getLastSegment(superType.getModule(), "/");
-          String _plus = (_lastSegment + "/");
-          String _label = superType.getLabel();
-          _xifexpression_1 = (_plus + _label);
-        } else {
-          _xifexpression_1 = superType.getLabel();
-        }
-        final String qsuperType = _xifexpression_1;
-        final List<ENodeTemplate> localnodes = this.findLocalNodesForType(qsuperType, model);
-        for (final ENodeTemplate node : localnodes) {
-          {
-            String _name = node.getName();
-            String _plus_1 = ("Valid requirement local node: " + _name);
-            System.out.println(_plus_1);
-            String _xifexpression_2 = null;
-            boolean _notEquals = (!Objects.equal(module, null));
-            if (_notEquals) {
-              String _name_1 = node.getName();
-              _xifexpression_2 = ((module + "/") + _name_1);
-            } else {
-              _xifexpression_2 = node.getName();
-            }
-            final String qnode = _xifexpression_2;
-            String _xifexpression_3 = null;
-            String _module_3 = node.getNode().getType().getModule();
-            boolean _notEquals_1 = (!Objects.equal(_module_3, null));
-            if (_notEquals_1) {
-              String _module_4 = node.getNode().getType().getModule();
-              String _plus_2 = (_module_4 + "/");
-              String _type_1 = node.getNode().getType().getType();
-              _xifexpression_3 = (_plus_2 + _type_1);
-            } else {
-              _xifexpression_3 = node.getNode().getType().getType();
-            }
-            final String qtype = _xifexpression_3;
-            proposalText = qnode;
-            displayText = qnode;
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+      }
+      boolean _isEmpty_1 = tovrnd.getElements().isEmpty();
+      if (_isEmpty_1) {
+        throw new Exception("Type of valid nodes satisfying the requirement not found");
+      }
+      final Type superType = tovrnd.getElements().get(0);
+      String _xifexpression_1 = null;
+      String _module_2 = superType.getModule();
+      boolean _tripleNotEquals_1 = (_module_2 != null);
+      if (_tripleNotEquals_1) {
+        String _lastSegment = this.getLastSegment(superType.getModule(), "/");
+        String _plus = (_lastSegment + "/");
+        String _label = superType.getLabel();
+        _xifexpression_1 = (_plus + _label);
+      } else {
+        _xifexpression_1 = superType.getLabel();
+      }
+      final String qsuperType = _xifexpression_1;
+      final List<ENodeTemplate> localnodes = this.findLocalNodesForType(qsuperType, model);
+      for (final ENodeTemplate node : localnodes) {
+        {
+          String _name = node.getName();
+          String _plus_1 = ("Valid requirement local node: " + _name);
+          System.out.println(_plus_1);
+          String _xifexpression_2 = null;
+          boolean _notEquals = (!Objects.equal(module, null));
+          if (_notEquals) {
+            String _name_1 = node.getName();
+            _xifexpression_2 = ((module + "/") + _name_1);
+          } else {
+            _xifexpression_2 = node.getName();
           }
+          final String qnode = _xifexpression_2;
+          String _xifexpression_3 = null;
+          String _module_3 = node.getNode().getType().getModule();
+          boolean _notEquals_1 = (!Objects.equal(_module_3, null));
+          if (_notEquals_1) {
+            String _module_4 = node.getNode().getType().getModule();
+            String _plus_2 = (_module_4 + "/");
+            String _type_1 = node.getNode().getType().getType();
+            _xifexpression_3 = (_plus_2 + _type_1);
+          } else {
+            _xifexpression_3 = node.getNode().getType().getType();
+          }
+          final String qtype = _xifexpression_3;
+          proposalText = qnode;
+          displayText = qnode;
+          this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
         }
       }
     } catch (Throwable _e) {

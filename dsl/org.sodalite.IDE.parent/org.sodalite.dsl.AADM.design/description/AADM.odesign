@@ -161,7 +161,7 @@
   </ownedViewpoints>
   <extensions xsi:type="properties:ViewExtensionDescription" name="AADM Forms">
     <categories name="Default Category">
-      <pages name="Property Default Page" labelExpression="General" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3"/>
+      <pages name="Property Default Page" labelExpression="General" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3 //@extensions.0/@categories.0/@groups.9"/>
       <pages name="Node Template Default Page" labelExpression="General" domainClass="aADM::ENodeTemplate" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.4"/>
       <pages name="Capability Default Page" labelExpression="General" domainClass="aADM::ECapabilityAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.5"/>
       <pages name="Requirement Default Page" labelExpression="General" domainClass="aADM::ERequirementAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.6"/>
@@ -175,7 +175,7 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:TextDescription" name="SingleStringValue" labelExpression="Value" valueExpression="aql:self.value.oclAsType(rM::ESTRING).string">
+        <controls xsi:type="properties:TextDescription" name="SingleStringValue" labelExpression="Value" valueExpression="aql:self.value.oclAsType(rM::ESTRING).value">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ESTRING)">
               <subModelOperations xsi:type="tool:SetValue" featureName="string" valueExpression="var:newValue"/>
@@ -191,7 +191,7 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:ListDescription" name="Values List" labelExpression="List of values" valueExpression="aql:self.value.oclAsType(rM::ELIST).list" displayExpression="aql:value">
+        <controls xsi:type="properties:ListDescription" name="Values List" labelExpression="List of values" valueExpression="aql:self.value.oclAsType(rM::ELIST).list" displayExpression="service:renderListItem(value)">
           <actions labelExpression="Add list item">
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
@@ -307,7 +307,7 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="aql:self.node.type->toString()" candidatesExpression="service:getTypes()" candidateDisplayExpression="aql:candidate">
+        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="service:renderNodeType()" candidatesExpression="service:getTypes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
               <subModelOperations xsi:type="tool:SetValue" featureName="type" valueExpression="var:newValue"/>
@@ -346,7 +346,7 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:SelectDescription" name="Node" labelExpression="Node" valueExpression="aql:self.node" candidatesExpression="service:getRequirementNodes()" candidateDisplayExpression="aql:candidate">
+        <controls xsi:type="properties:SelectDescription" name="Node" labelExpression="Node" valueExpression="service:renderRequirementNode()" candidatesExpression="service:getRequirementNodes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="node" valueExpression="var:newValue"/>
@@ -362,7 +362,7 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="aql:self.parameter.type.name" candidatesExpression="service:getDataTypes()" candidateDisplayExpression="aql:candidate">
+        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="aql:self.parameter.type->toString()" candidatesExpression="service:getDataTypes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
           </initialOperation>
@@ -381,6 +381,28 @@
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="var:newValue"/>
             </firstModelOperations>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="GetPropertyValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::GetProperty)">
+        <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="Entity" labelExpression="Entity" valueExpression="aql:self.value.oclAsType(rM::GetProperty).property.entity.oclAsType(rM::EEntity).entity" candidatesExpression="service:getPropertyEntities()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="Req_Cap" labelExpression="Req_Cap" valueExpression="service:renderGetPropertyReq_Cap()" candidatesExpression="service:getPropertyReq_Cap()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="Property" labelExpression="Property" valueExpression="service:renderGetPropertyProperty()" candidatesExpression="service:getPropertyProperty()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
           </initialOperation>
         </controls>
       </groups>
