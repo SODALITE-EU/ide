@@ -1,0 +1,422 @@
+grammar org.sodalite.sdl.ansible.AnsibleDsl with org.eclipse.xtext.common.Terminals
+
+generate ansibleDsl "http://www.sodalite.org/sdl/ansible/AnsibleDsl"
+
+Model:
+	EPlaybook | ERole
+;
+
+EPlaybook:
+	'playbook{'
+		'playbook_name:' name=STRING
+		'plays{'
+			('play{'
+				plays+=EPlay
+			'}')+
+		'}'
+	'}'
+;
+
+EBase:
+	EPlay | EExecution
+;
+
+EExecution:
+	EBlock | ETaskHandler
+;
+
+EBlockTask:
+	EBlock | ETask
+;
+
+ETaskHandler:
+	ETask | EHandler
+;
+
+EPlay:
+	('play_name:' name=STRING)?
+	'base_settings{'
+		base_common_keywords=EBaseCommonKeywords
+	'}'
+	('play_exe_settings{'
+		play_exe_settings=EPlayExeSettings
+	'}')? &
+	('error_handling{'
+		error_handling=EPlayErrorHandling
+	'}')? &
+	(facts_settings=EFactsSettings)? &
+	('vars_files:' vars_files=EList)? &
+	('vars_prompt:' vars_prompt=EList)? &
+	('force_handlers:' force_handlers=BOOLEAN)? &
+	('pre_tasks{'
+		(pre_tasks_list+=EBlockTask)+
+	'}')? &
+	(roles=ERoleCalls)? &
+	'tasks_list{'
+		(tasks_list+=EBlockTask)+
+	'}'
+	('post_tasks{'
+		(post_tasks_list+=EBlockTask)+
+	'}')?
+	('handlers{'
+		(handlers+=EHandler)+
+	'}')?
+;
+
+EBlock:
+	'block{'
+		('block_name:' name=STRING)?
+		'base_settings{'
+			base_common_keywords=EBaseCommonKeywords
+		'}'
+		'execution_settings{'
+			exe_common_keywords=EExecutionCommonKeywords
+		'}'
+		('errror_handling{'
+			error_handling=EBlockErrorHandling
+		'}')?
+		'tasks{'
+			(tasks+=ETask)+
+		'}'
+		('rescue_tasks{'
+			(rescue_tasks+=ETask)+
+		'}')?
+		('always_tasks{'
+			(always_tasks+=ETask)+
+		'}')?
+	'}'
+;
+
+ETask:
+	'task{'
+		('task_name:' name=STRING)?
+		'base_settings{'
+			base_common_keywords=EBaseCommonKeywords
+		'}'
+		'execution_settings{'
+			exe_common_keywords=EExecutionCommonKeywords
+		'}'
+		'task_settings{'
+			task_handler_common_keywords=ETaskHandlerCommonKeywords
+		'}'
+	'}'
+;
+
+EHandler:
+	'handler{'
+		('handler_name:' name=STRING)?
+		'base_settings{'
+			base_common_keywords=EBaseCommonKeywords
+		'}'
+		'execution_settings{'
+			exe_common_keywords=EExecutionCommonKeywords
+		'}'
+		'task_settings{'
+			task_handler_common_keywords=ETaskHandlerCommonKeywords
+		'}'
+		('listen:' listen_to=[ENotifiedTopic|STRING])?
+	'}'
+;
+
+EExecutionCommonKeywords:
+	{EExecutionCommonKeywords}
+	('exe_settings{'
+		exe_settings=EExecutionExeSettings
+	'}')?
+	(delegation=EDelegation)?
+	('when:' when_expression=EConditionalExpression)?
+;
+
+ETaskHandlerCommonKeywords:
+	{ETaskHandlerCommonKeywords}
+	('error_handling{'
+		error_handling=ETaskHandlerErrorHandling
+	'}')?
+	('action:' action=STRING)?
+	('asynchronous_settings{'
+		asynchronous_settings=EAsynchronousSettings
+	'}')?
+	('args:' args=EDictionary)?
+	'module_call{'
+		module=EModuleCall
+	'}'
+	('notify:' notifiable=ENotifiable)?
+	(loop=ELoop)?
+	(register=ERegisterVariable)?
+;
+
+EModuleCall:
+	'module_name:' name=ID
+	'parameters{'
+		parameters=EParameters
+	'}'
+;
+
+EParameters:
+	{EParameters} (parameters+=EParameter)*
+;
+
+EParameter:
+	name=ID ':' value_passed=EValuePassed
+;
+
+EConditionalExpression:
+	left_term=EValuePassed (('==' | '!=' | '<' | '>' | '<=' | '>=') right_term=EValuePassed |
+		'is' ('not')? ('skipped' | 'failed' | 'succeeded' | 'fail' | 'success' | 'defined' | 'undefined')
+	)
+	| formula=EConditionalFormula
+	| is_true=BOOLEAN
+;
+
+EConditionalFormula:
+	'(' left_expression=EConditionalExpression ')' ('and' | 'or') '(' right_expression=EConditionalExpression ')'
+	| 'not' '(' negated_expression=EConditionalExpression ')'
+;
+
+ERoleCalls:
+	'roles{'
+		roles+=[ERole|STRING] (',' roles+=[ERole|STRING])*
+	'}'
+;
+
+ERole:
+	'role{'
+		'role_name:' name=STRING
+		('tasks_list{'
+			(tasks_list+=(ETask | EBlock))+
+		'}')?
+		('handlers{'
+			(handlers+=EHandler)+
+		'}')?
+		('vars{'
+			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		'}')?
+		('files_names:' files_names_list=EList)? //for example "tomcat-initscript.sh", like in https://github.com/ansible/ansible-examples/tree/master/tomcat-standalone/roles/tomcat/files
+		('templates_names:' templates_names_list=EList)? //for example "server.xml", like in https://github.com/ansible/ansible-examples/blob/master/tomcat-standalone/roles/tomcat/templates/server.xml
+		(metadata=ERoleMetadata)?
+	'}'
+;
+
+ERoleMetadata:
+	{ERoleMetadata}
+	'metadata{'
+		('allow_duplicates:' allow_duplicates=BOOLEAN)?
+		('dependencies:' dependencies=EList)?
+		('galaxy_info:' galaxy_tags=ERoleMetadataGalaxy)?
+	'}'
+;
+
+ERoleMetadataGalaxy:
+	'galaxy_info{'
+		'author:' author=STRING
+		'description:' description=STRING
+		'company:' company=STRING
+		('issue_tracker_url:' issue_tracker_url=STRING)?
+		'license:' license=STRING
+		'min_ansible_version:' min_ansible_version=STRING
+		('min_ansible_container_version:' min_ansible_container_version=STRING)?
+		('github_branch:' githhub_branch=STRING)?
+		'platforms:' platforms=EList
+		('cloud_platforms:' cloud_platforms=EList)?
+		('galaxy_tags:' galaxy_tags=EList)?
+	'}'
+;
+
+ELoop:
+	ELoopOverList | EUntil
+;
+
+ELoopOverList:
+	'loop:' loop_list=ELoopList
+	(loop_control=ELoopControl)?
+;
+
+ELoopList:
+	EList | EFilteredVariable
+;
+
+ELoopControl:
+	{ELoopControl}
+	'loop_control{'
+		('label:' label=EValuePassed)?
+		('pause:' pause=INT)? //number of seconds
+		('index_var:' index_var=ID)?
+		('loop_var:' loop_var=ID)?
+		('extended:' extended=BOOLEAN)?
+	'}'
+;
+
+EUntil:
+	'until:' until=EConditionalExpression &
+	'retries:' retries=INT &
+	'delay:' delay=INT //number of seconds
+;
+
+EPrivilageEscalation:
+	{EPrivilageEscalation}
+	'privilage_escalation{'
+		('become:' become=BOOLEAN)?
+		('become_exe:' become_exe=STRING)?
+		('become_flags:' become_flags=STRING)?
+		('become_method:' become_method=STRING)?
+		('become_user:' become_user=STRING)?
+	'}'
+;
+
+EValidationMode:
+	{EValidationMode}
+	'validation_mode{'
+		('check_mode:' check_mode=BOOLEAN)?
+		('diff:' diff=BOOLEAN)?
+	'}'
+;
+
+EConnection:
+	{EConnection}
+	'connection_info{'
+		('connection:' connection=STRING)?
+		('port:' port=INT)?
+		('remote_user:' remote_user=STRING)?
+	'}'
+;
+
+EExeSettings:
+	EExecutionExeSettings | EPlayExeSettings
+;
+
+EPlayExeSettings:
+	{EPlayExeSettings}
+	('strategy:' strategy=STRING)?
+	('serial:' serial_list=EList)?
+	('order:' order=STRING)?
+	('throttle:' throttle=INT)?
+	('run_once:' run_once=BOOLEAN)?
+;
+
+EExecutionExeSettings:
+	{EExecutionExeSettings}
+	('throttle:' throttle=INT)?
+	('run_once:' run_once=BOOLEAN)?
+;
+
+EErrorHandling:
+	EBlockErrorHandling | EPlayErrorHandling | ETaskHandlerErrorHandling
+;
+
+EBlockErrorHandling:
+	{EBlockErrorHandling}
+	('any_errors_fatal:' any_errors_fatal=BOOLEAN)?
+	('ignore_errors:' ignore_errors=BOOLEAN)?
+	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
+;
+
+EPlayErrorHandling:
+	{EPlayErrorHandling}
+	('max_fail_percentage:' max_fail_percentage=INT)?
+	('any_errors_fatal:' any_errors_fatal=BOOLEAN)?
+	('ignore_errors:' ignore_errors=BOOLEAN)?
+	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
+;
+
+ETaskHandlerErrorHandling:
+	{ETaskHandlerErrorHandling}
+	('changed_when:' changed_when=EConditionalExpression)?
+	('failed_when:' failed_when=EConditionalExpression)?
+	('any_errors_fatal:' any_errors_fatal=BOOLEAN)?
+	('ignore_errors:' ignore_errors=BOOLEAN)?
+	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
+;
+
+EBaseCommonKeywords:
+	{EBaseCommonKeywords}
+	(privilage_escalation=EPrivilageEscalation)?
+	(validation_mode=EValidationMode)?
+	(connection=EConnection)?
+	('no_log:' no_log=BOOLEAN)?
+	('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
+	('module_defaults:' module_defaults=EList)?
+	('environment:' environment=EList)?
+	('collections:' collections=EList)?
+	('tags:' tags=EList)?
+	('vars{'
+		variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+	'}')?
+;
+
+EFactsSettings:
+	{EFactsSettings}
+	'facts_setttings{'
+		('gather_facts:' gather_facts=BOOLEAN)?
+		('gather_subset:' gather_subset=EList)?
+		('gather_timeout:'gather_timeout=INT)?
+		('fact_path:' fact_path=STRING)?
+	'}'
+;
+
+EDelegation:
+	'delegation{'
+		('delegate_to:' delegate_to=STRING)
+		('delegate_facts:' delegate_facts=BOOLEAN)?
+	'}'
+;
+
+EAsynchronousSettings:
+	('async:' async=INT) &
+	('poll:' poll=INT)
+;
+
+ENotifiable:
+	ENotifiedHandler | ENotifiedTopic
+;
+
+ENotifiedHandler:
+	name=[EHandler|STRING]
+;
+
+ENotifiedTopic:
+	'topic:' name=STRING
+;
+
+EValuePassed:
+	EValue | EFilteredVariable
+;
+
+EValue:
+	EDictionary | {EValue} STRING | EList | {EValue} BOOLEAN | {EValue} NULL | {EValue} INT
+;
+
+EFilteredVariable:
+	variable=[EDeclaredVariable|ID] ('|' filter_commands+=STRING)*
+;
+
+EDeclaredVariable:
+	EVariableDeclaration | ERegisterVariable
+;
+
+EVariableDeclaration:
+	name=ID ':' value=EValue
+;
+
+ERegisterVariable:
+	'register:' name=ID
+;
+
+EDictionary:
+	'{' dictionary_pairs+=EDictionaryPair (',' dictionary_pairs+=EDictionaryPair)* '}'
+;
+
+EDictionaryPair:
+	key=ID ':' value=EValue
+;
+
+EList:
+	'[' elements+=EValue (',' elements+=EValue)* ']'
+;
+
+terminal BOOLEAN:
+	'yes' | 'no'
+;
+
+terminal NULL:
+	'Null'
+;
