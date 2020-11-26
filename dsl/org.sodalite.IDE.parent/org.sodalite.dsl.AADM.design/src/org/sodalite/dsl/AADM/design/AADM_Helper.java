@@ -14,8 +14,10 @@ import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
 
 public class AADM_Helper {
 
@@ -77,6 +79,15 @@ public class AADM_Helper {
 
 	public static String renderType(EPREFIX_TYPE type) {
 		return (type.getModule() != null ? renderModule(type.getModule()) + "/" : "") + type.getType();
+	}
+
+	public static String renderType(EDataTypeName type) {
+		if (type instanceof EPREFIX_TYPE)
+			return renderType((EPREFIX_TYPE) type);
+		else if (type instanceof EPRIMITIVE_TYPE)
+			return ((EPRIMITIVE_TYPE) type).getType();
+		else
+			return null;
 	}
 
 	public static String renderPrefixId(EPREFIX_ID id) {

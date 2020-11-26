@@ -18,6 +18,7 @@ import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EFLOAT;
@@ -25,6 +26,7 @@ import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
+import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.ESIGNEDINT;
 import org.sodalite.dsl.rM.ESTRING;
 import org.sodalite.dsl.rM.GetInput;
@@ -151,8 +153,11 @@ public class Services {
 		return AADMScopeProvider.getOptimizationModels();
 	}
 
-	public Set<String> getDataTypes(EParameterDefinition par) {
-		return AADMScopeProvider.getDataTypes();
+	public String getOptimization(ENodeTemplate node) {
+		if (node.getNode().getOptimization() != null)
+			return node.getNode().getOptimization().getName();
+		else
+			return "";
 	}
 
 	public ENodeTemplate findNode(ERequirementAssignment req) {
@@ -166,6 +171,10 @@ public class Services {
 
 	public String renderNodeType(ENodeTemplate node) throws Exception {
 		return AADM_Helper.renderType(node.getNode().getType());
+	}
+
+	public String renderParameterType(EParameterDefinition par) throws Exception {
+		return AADM_Helper.renderType(par.getParameter().getType());
 	}
 
 	public String renderListItem(EObject object, EObject item) throws Exception {
@@ -189,6 +198,11 @@ public class Services {
 	public String renderGetPropertyProperty(EPropertyAssignment property) {
 		EPREFIX_TYPE prop = ((GetProperty) property.getValue()).getProperty().getProperty();
 		return AADM_Helper.renderType(prop);
+	}
+
+	public String renderParameterType(EParameterDefinitionBody parameter) {
+		EDataTypeName type = parameter.getType();
+		return "type: " + AADM_Helper.renderType(type);
 	}
 
 	public SortedSet<String> getPropertyReq_Cap(EPropertyAssignment property) {

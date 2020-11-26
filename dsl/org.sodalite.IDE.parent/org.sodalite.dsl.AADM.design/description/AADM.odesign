@@ -131,7 +131,7 @@
         <containerMappings name="Inputs" semanticCandidatesExpression="feature:inputs" domainClass="EInputs" childrenPresentation="VerticalStack">
           <subContainerMappings name="Input" semanticCandidatesExpression="feature:inputs" domainClass="EParameterDefinition" childrenPresentation="List">
             <subNodeMappings name="Type" semanticCandidatesExpression="feature:parameter" domainClass="EParameterDefinitionBody">
-              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:'type: '+self.type.name" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:renderParameterType()" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
                 <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                 <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                 <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
@@ -321,7 +321,7 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:SelectDescription" name="Optimization" labelExpression="Optimization" valueExpression="aql:self.node.optimization.name" candidatesExpression="service:getOptimizations()" candidateDisplayExpression="aql:candidate">
+        <controls xsi:type="properties:SelectDescription" name="Optimization" labelExpression="Optimization" valueExpression="service:getOptimization" candidatesExpression="service:getOptimizations()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
               <subModelOperations xsi:type="tool:SetValue" featureName="optimization" valueExpression="var:newValue"/>
@@ -354,7 +354,7 @@
           </initialOperation>
         </controls>
       </groups>
-      <groups name="ParameterDefinition" labelExpression="Group" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self">
+      <groups name="ParameterDefinition" labelExpression="Input" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
@@ -362,7 +362,7 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="aql:self.parameter.type->toString()" candidatesExpression="service:getDataTypes()" candidateDisplayExpression="aql:candidate">
+        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="service:renderParameterType()" candidatesExpression="service:getDataTypes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
           </initialOperation>
