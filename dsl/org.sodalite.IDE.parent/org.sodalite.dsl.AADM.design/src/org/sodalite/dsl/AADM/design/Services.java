@@ -18,6 +18,9 @@ import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.rM.EAlphaNumericValue;
+import org.sodalite.dsl.rM.EAssignmentValue;
+import org.sodalite.dsl.rM.EBOOLEAN;
 import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
@@ -107,9 +110,8 @@ public class Services {
 
 	public void addItemToPropertyValueList(ELIST list, String item) {
 		System.out.println("Requested to add item to property list value. List: " + list + ". Item: " + item);
-		ESTRING eString = RMFactory.eINSTANCE.createESTRING();
-		eString.setValue(item);
-		list.getList().add(eString);
+		EAlphaNumericValue value = (EAlphaNumericValue) createValue(item);
+		list.getList().add(value);
 	}
 
 	public void cancelAddItemToPropertyValueList(ELIST list, Integer size) {
@@ -119,20 +121,17 @@ public class Services {
 			list.getList().remove(size);
 	}
 
-	public void removeItemFromPropertyValueList(EPropertyAssignment prop, String item) {
-		System.out.println(
-				"Requested to remove item from property list value. Property: " + prop.getName() + " Item: " + item);
-		if (prop.getValue() instanceof ELIST) {
-			((ELIST) prop.getValue()).getList().remove(item);
-		}
+	public void removeItemFromPropertyValueList(EObject item) {
+		System.out.println("Requested to remove item: " + item);
+		ELIST list = (ELIST) item.eContainer();
+		list.getList().remove(item);
 	}
 
-	public void editItemInPropertyValueList(ELIST list, Integer index, String newValue, String oldValue) {
+	public void editItemInPropertyValueList(ELIST list, Integer index, EAlphaNumericValue oldValue, String newValue) {
 		System.out.println("Requested to edit an item in a property list value. List: " + list + ". Index: " + index
 				+ ". NewValue: " + newValue + ". OldValue: " + oldValue);
-		ESTRING eString = RMFactory.eINSTANCE.createESTRING();
-		eString.setValue(newValue);
-		list.getList().set(index - 1, eString);
+		EAlphaNumericValue value = (EAlphaNumericValue) createValue(newValue);
+		list.getList().set(index - 1, value);
 	}
 
 	public List<String> getNodes(ERequirementAssignment req) {
@@ -270,5 +269,79 @@ public class Services {
 			// TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
 		}
 		return entity;
+	}
+
+	public void setValue(EPropertyAssignment prop, String value) {
+		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
+		prop.setValue(newValue);
+	}
+
+	private EObject createValue(String value) {
+		// Try boolean value
+		if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
+			return createBooleanValue(value);
+		}
+
+		// Try integer or float
+		try {
+			ESIGNEDINT eInt = createIntegerValue(value);
+			return eInt;
+		} catch (NumberFormatException ex1) {
+			try {
+				EFLOAT eFloat = createFloatValue(value);
+				return eFloat;
+			} catch (NumberFormatException ex2) {
+				// String value
+				ESTRING eString = createStringValue(value);
+				return eString;
+			}
+		}
+	}
+
+	private EBOOLEAN createBooleanValue(String value) {
+		EBOOLEAN eBoolean = RMFactory.eINSTANCE.createEBOOLEAN();
+		eBoolean.setValue(Boolean.valueOf(value));
+		return eBoolean;
+	}
+
+	private ESTRING createStringValue(String value) {
+		ESTRING eString = RMFactory.eINSTANCE.createESTRING();
+		eString.setValue(value);
+		return eString;
+	}
+
+	private ESIGNEDINT createIntegerValue(String value) {
+		ESIGNEDINT eInt = RMFactory.eINSTANCE.createESIGNEDINT();
+		eInt.setValue(Integer.valueOf(value));
+		return eInt;
+	}
+
+	private EFLOAT createFloatValue(String value) {
+		EFLOAT eInt = RMFactory.eINSTANCE.createEFLOAT();
+		eInt.setValue(Float.valueOf(value));
+		return eInt;
+	}
+
+	public void setNodeType(ENodeTemplate node, String value) {
+		String module = parseModule(value);
+		String type = parseType(value);
+		node.getNode().getType().setModule(module);
+		node.getNode().getType().setType(type);
+	}
+
+	private String parseModule(String value) {
+		String[] split = value.split("/");
+		if (split.length > 1)
+			return split[0];
+		else
+			return null;
+	}
+
+	private String parseType(String value) {
+		String[] split = value.split("/");
+		if (split.length > 1)
+			return split[1];
+		else
+			return split[0];
 	}
 }

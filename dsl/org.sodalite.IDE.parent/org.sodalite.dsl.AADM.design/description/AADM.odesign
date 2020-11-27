@@ -177,9 +177,7 @@
         </controls>
         <controls xsi:type="properties:TextDescription" name="SingleStringValue" labelExpression="Value" valueExpression="aql:self.value.oclAsType(rM::ESTRING).value">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ESTRING)">
-              <subModelOperations xsi:type="tool:SetValue" featureName="string" valueExpression="var:newValue"/>
-            </firstModelOperations>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setValue(newValue)"/>
           </initialOperation>
         </controls>
       </groups>
@@ -234,16 +232,18 @@
                         <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
                           <initialOperation/>
                         </buttons>
-                        <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                        <buttons labelExpression="OK" isEnabledExpression="service:" default="true" closeDialogOnClick="true">
                           <initialOperation/>
                         </buttons>
                         <page name="Default Page" labelExpression="Edit Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1/@controls.1/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
                         <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
-                          <controls xsi:type="properties:TextDescription" name="editItem" labelExpression="Item value:" valueExpression="aql:selection->first()">
+                          <controls xsi:type="properties:TextDescription" name="editItem" labelExpression="Item value:" valueExpression="service:renderListItem(oldValue)">
                             <initialOperation>
                               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ELIST)">
-                                <subModelOperations xsi:type="tool:Let" valueExpression="var:newValue">
-                                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:editItemInPropertyValueList(index, instance, oldValue)"/>
+                                <subModelOperations xsi:type="tool:Let" variableName="oldValue" valueExpression="aql:selection->first()">
+                                  <subModelOperations xsi:type="tool:Let" valueExpression="var:newValue">
+                                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:editItemInPropertyValueList(index, oldValue, instance)"/>
+                                  </subModelOperations>
                                 </subModelOperations>
                               </firstModelOperations>
                             </initialOperation>
@@ -260,7 +260,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ELIST).list">
                 <subModelOperations xsi:type="tool:For" expression="var:selection" iteratorName="item">
-                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:removeItemFromPropertyValueList(item)"/>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:removeItemFromPropertyValueList()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -309,9 +309,7 @@
         </controls>
         <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="service:renderNodeType()" candidatesExpression="service:getTypes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
-              <subModelOperations xsi:type="tool:SetValue" featureName="type" valueExpression="var:newValue"/>
-            </firstModelOperations>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setNodeType(newValue)"/>
           </initialOperation>
         </controls>
         <controls xsi:type="properties:TextDescription" name="Description" labelExpression="Description" valueExpression="aql:self.node.description">
