@@ -210,9 +210,7 @@
                       <controls xsi:type="properties:TextDescription" name="newItem" labelExpression="Item value:">
                         <initialOperation>
                           <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ELIST)">
-                            <subModelOperations xsi:type="tool:Let" valueExpression="var:newValue">
-                              <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:addItemToPropertyValueList(instance)"/>
-                            </subModelOperations>
+                            <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:addItemToPropertyValueList(newValue)"/>
                           </firstModelOperations>
                         </initialOperation>
                       </controls>
@@ -240,11 +238,7 @@
                           <controls xsi:type="properties:TextDescription" name="editItem" labelExpression="Item value:" valueExpression="service:renderListItem(oldValue)">
                             <initialOperation>
                               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ELIST)">
-                                <subModelOperations xsi:type="tool:Let" variableName="oldValue" valueExpression="aql:selection->first()">
-                                  <subModelOperations xsi:type="tool:Let" valueExpression="var:newValue">
-                                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:editItemInPropertyValueList(index, oldValue, instance)"/>
-                                  </subModelOperations>
-                                </subModelOperations>
+                                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:editItemInPropertyValueList(index, oldValue, newValue)"/>
                               </firstModelOperations>
                             </initialOperation>
                           </controls>
@@ -277,8 +271,8 @@
         </controls>
         <controls xsi:type="properties:SelectDescription" name="GetInputValue" labelExpression="Get input" valueExpression="aql:self.value.oclAsType(rM::GetInput).input.oclAsType(rM::EParameterDefinition).name" candidatesExpression="service:getInputs()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
-              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::GetInput)">
+              <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setInput(newValue)"/>
             </firstModelOperations>
           </initialOperation>
         </controls>
@@ -346,9 +340,7 @@
         </controls>
         <controls xsi:type="properties:SelectDescription" name="Node" labelExpression="Node" valueExpression="service:renderRequirementNode()" candidatesExpression="service:getRequirementNodes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self">
-              <subModelOperations xsi:type="tool:SetValue" featureName="node" valueExpression="var:newValue"/>
-            </firstModelOperations>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setRequirementNode(newValue)"/>
           </initialOperation>
         </controls>
       </groups>

@@ -46,8 +46,8 @@ public class KBReasonerProxy {
 		return kbclient;
 	}
 
-	public List<String> getTypes(ENodeTemplate node) {
-		List<String> types = new ArrayList<>();
+	public SortedSet<String> getTypes(ENodeTemplate node) {
+		SortedSet<String> types = new TreeSet<String>();
 		try {
 			List<String> modules = new ArrayList<>();
 			modules.add(AADM_Helper.getModule(node));
@@ -71,8 +71,8 @@ public class KBReasonerProxy {
 		return (node.getModule() != null ? AADM_Helper.renderModule(node.getModule()) + "/" : "") + node.getLabel();
 	}
 
-	public List<String> getAttributes(EAttributeAssignment attr) {
-		List<String> result = new ArrayList<>();
+	public SortedSet<String> getAttributes(EAttributeAssignment attr) {
+		SortedSet<String> result = new TreeSet<String>();
 		try {
 			String type = AADM_Helper.findContainerType(attr, getKBReasoner());
 			if (type == null)
@@ -90,8 +90,8 @@ public class KBReasonerProxy {
 		return result;
 	}
 
-	public List<String> getProperties(EPropertyAssignment prop) {
-		List<String> result = new ArrayList<>();
+	public SortedSet<String> getProperties(EPropertyAssignment prop) {
+		SortedSet<String> result = new TreeSet<String>();
 		try {
 			String type = AADM_Helper.findContainerType(prop, getKBReasoner());
 			if (type == null)
@@ -109,8 +109,8 @@ public class KBReasonerProxy {
 		return result;
 	}
 
-	public List<String> getCapabilities(ECapabilityAssignment cap) {
-		List<String> result = new ArrayList<>();
+	public SortedSet<String> getCapabilities(ECapabilityAssignment cap) {
+		SortedSet<String> result = new TreeSet<String>();
 		try {
 			String type = AADM_Helper.findContainerType(cap, getKBReasoner());
 			if (type == null)
@@ -128,8 +128,8 @@ public class KBReasonerProxy {
 		return result;
 	}
 
-	public List<String> getRequirements(ERequirementAssignment req) {
-		List<String> result = new ArrayList<>();
+	public SortedSet<String> getRequirements(ERequirementAssignment req) {
+		SortedSet<String> result = new TreeSet<String>();
 		try {
 			String type = AADM_Helper.findContainerType(req, getKBReasoner());
 			if (type == null)
@@ -174,8 +174,8 @@ public class KBReasonerProxy {
 		return result;
 	}
 
-	public List<String> getDataTypes(EObject par) {
-		List<String> types = new ArrayList<>();
+	public SortedSet<String> getDataTypes(EObject par) {
+		SortedSet<String> types = new TreeSet<String>();
 		try {
 			List<String> modules = new ArrayList<>();
 			modules.add(AADM_Helper.getModule(par));

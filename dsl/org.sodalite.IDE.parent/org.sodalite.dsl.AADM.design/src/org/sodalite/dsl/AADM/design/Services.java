@@ -1,8 +1,6 @@
 package org.sodalite.dsl.AADM.design;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -27,6 +25,7 @@ import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EMAP;
+import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
@@ -134,18 +133,30 @@ public class Services {
 		list.getList().set(index - 1, value);
 	}
 
-	public List<String> getNodes(ERequirementAssignment req) {
+	public SortedSet<String> getNodes(ERequirementAssignment req) {
 		ENodeTemplates container = (ENodeTemplates) req.eContainer().eContainer().eContainer().eContainer();
-		return container.getNodeTemplates().stream().map(ENodeTemplate::getName).collect(Collectors.toList());
+		Set<String> nodes = container.getNodeTemplates().stream().map(ENodeTemplate::getName)
+				.collect(Collectors.toSet());
+		return new TreeSet<String>(nodes);
 	}
 
-	public List<String> getInputs(EPropertyAssignment prop) {
-		List<String> result = new ArrayList<>();
+	public SortedSet<String> getInputs(EPropertyAssignment prop) {
+		SortedSet<String> result = new TreeSet<String>();
 		AADM_Model model = AADM_Helper.findModel(prop);
 		for (EParameterDefinition input : model.getInputs().getInputs()) {
 			result.add(input.getName());
 		}
 		return result;
+	}
+
+	public void setInput(GetInput gInput, String input) {
+		AADM_Model model = AADM_Helper.findModel(gInput);
+		for (EParameterDefinition pd : model.getInputs().getInputs()) {
+			if (input.equals(pd.getName())) {
+				gInput.setInput(pd);
+				break;
+			}
+		}
 	}
 
 	public Set<String> getOptimizations(ENodeTemplate node) {
@@ -322,11 +333,22 @@ public class Services {
 		return eInt;
 	}
 
+	private EPREFIX_ID createNodeRef(String value) {
+		EPREFIX_ID nodeRed = RMFactory.eINSTANCE.createEPREFIX_ID();
+		nodeRed.setModule(parseModule(value));
+		nodeRed.setId(parseType(value));
+		return nodeRed;
+	}
+
 	public void setNodeType(ENodeTemplate node, String value) {
 		String module = parseModule(value);
 		String type = parseType(value);
 		node.getNode().getType().setModule(module);
 		node.getNode().getType().setType(type);
+	}
+
+	public void setRequirementNode(ERequirementAssignment req, String node) {
+		req.setNode(createNodeRef(node));
 	}
 
 	private String parseModule(String value) {
