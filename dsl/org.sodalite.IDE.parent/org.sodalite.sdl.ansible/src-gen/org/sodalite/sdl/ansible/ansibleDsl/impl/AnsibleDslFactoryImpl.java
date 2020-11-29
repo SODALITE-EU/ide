@@ -78,7 +78,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EEXECUTION_COMMON_KEYWORDS: return createEExecutionCommonKeywords();
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS: return createETaskHandlerCommonKeywords();
       case AnsibleDslPackage.EMODULE_CALL: return createEModuleCall();
-      case AnsibleDslPackage.EPARAMETERS: return createEParameters();
       case AnsibleDslPackage.EPARAMETER: return createEParameter();
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION: return createEConditionalExpression();
       case AnsibleDslPackage.ECONDITIONAL_FORMULA: return createEConditionalFormula();
@@ -276,18 +275,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EModuleCallImpl eModuleCall = new EModuleCallImpl();
     return eModuleCall;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EParameters createEParameters()
-  {
-    EParametersImpl eParameters = new EParametersImpl();
-    return eParameters;
   }
 
   /**

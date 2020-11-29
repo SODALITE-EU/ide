@@ -43,7 +43,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
-import org.sodalite.sdl.ansible.ansibleDsl.EParameters;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
@@ -163,13 +162,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eModuleCallEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eParametersEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -968,7 +960,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getETaskHandlerCommonKeywords_Notifiable()
+  public EReference getETaskHandlerCommonKeywords_Notifiables()
   {
     return (EReference)eTaskHandlerCommonKeywordsEClass.getEStructuralFeatures().get(5);
   }
@@ -1034,28 +1026,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEParameters()
-  {
-    return eParametersEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEParameters_Parameters()
-  {
-    return (EReference)eParametersEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getEParameter()
   {
     return eParameterEClass;
@@ -1111,9 +1081,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEConditionalExpression_Right_term()
+  public EAttribute getEConditionalExpression_Equality_term()
   {
-    return (EReference)eConditionalExpressionEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)eConditionalExpressionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1122,7 +1092,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEConditionalExpression_Formula()
+  public EReference getEConditionalExpression_Right_term()
   {
     return (EReference)eConditionalExpressionEClass.getEStructuralFeatures().get(2);
   }
@@ -1133,9 +1103,42 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEConditionalExpression_Is_true()
+  public EAttribute getEConditionalExpression_Is_not()
   {
     return (EAttribute)eConditionalExpressionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEConditionalExpression_Status()
+  {
+    return (EAttribute)eConditionalExpressionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEConditionalExpression_Formula()
+  {
+    return (EReference)eConditionalExpressionEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEConditionalExpression_Is_true()
+  {
+    return (EAttribute)eConditionalExpressionEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -1166,9 +1169,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EAttribute getEConditionalFormula_And_or()
+  {
+    return (EAttribute)eConditionalFormulaEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getEConditionalFormula_Right_expression()
   {
-    return (EReference)eConditionalFormulaEClass.getEStructuralFeatures().get(1);
+    return (EReference)eConditionalFormulaEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1179,7 +1193,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getEConditionalFormula_Negated_expression()
   {
-    return (EReference)eConditionalFormulaEClass.getEStructuralFeatures().get(2);
+    return (EReference)eConditionalFormulaEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -2288,6 +2302,28 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EAttribute getEValue_Value_string()
+  {
+    return (EAttribute)eValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEValue_Value_int()
+  {
+    return (EAttribute)eValueEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEFilteredVariable()
   {
     return eFilteredVariableEClass;
@@ -2354,7 +2390,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEVariableDeclaration_Value()
+  public EReference getEVariableDeclaration_Value_passed()
   {
     return (EReference)eVariableDeclarationEClass.getEStructuralFeatures().get(0);
   }
@@ -2531,7 +2567,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__ASYNCHRONOUS_SETTINGS);
     createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__ARGS);
     createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__MODULE);
-    createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE);
+    createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLES);
     createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__LOOP);
     createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__REGISTER);
 
@@ -2539,21 +2575,22 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEAttribute(eModuleCallEClass, EMODULE_CALL__NAME);
     createEReference(eModuleCallEClass, EMODULE_CALL__PARAMETERS);
 
-    eParametersEClass = createEClass(EPARAMETERS);
-    createEReference(eParametersEClass, EPARAMETERS__PARAMETERS);
-
     eParameterEClass = createEClass(EPARAMETER);
     createEAttribute(eParameterEClass, EPARAMETER__NAME);
     createEReference(eParameterEClass, EPARAMETER__VALUE_PASSED);
 
     eConditionalExpressionEClass = createEClass(ECONDITIONAL_EXPRESSION);
     createEReference(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__LEFT_TERM);
+    createEAttribute(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__EQUALITY_TERM);
     createEReference(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__RIGHT_TERM);
+    createEAttribute(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__IS_NOT);
+    createEAttribute(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__STATUS);
     createEReference(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__FORMULA);
     createEAttribute(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__IS_TRUE);
 
     eConditionalFormulaEClass = createEClass(ECONDITIONAL_FORMULA);
     createEReference(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__LEFT_EXPRESSION);
+    createEAttribute(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__AND_OR);
     createEReference(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__RIGHT_EXPRESSION);
     createEReference(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__NEGATED_EXPRESSION);
 
@@ -2684,6 +2721,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eValuePassedEClass = createEClass(EVALUE_PASSED);
 
     eValueEClass = createEClass(EVALUE);
+    createEAttribute(eValueEClass, EVALUE__VALUE_STRING);
+    createEAttribute(eValueEClass, EVALUE__VALUE_INT);
 
     eFilteredVariableEClass = createEClass(EFILTERED_VARIABLE);
     createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__VARIABLE);
@@ -2693,7 +2732,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEAttribute(eDeclaredVariableEClass, EDECLARED_VARIABLE__NAME);
 
     eVariableDeclarationEClass = createEClass(EVARIABLE_DECLARATION);
-    createEReference(eVariableDeclarationEClass, EVARIABLE_DECLARATION__VALUE);
+    createEReference(eVariableDeclarationEClass, EVARIABLE_DECLARATION__VALUE_PASSED);
 
     eRegisterVariableEClass = createEClass(EREGISTER_VARIABLE);
 
@@ -2806,7 +2845,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eTaskEClass, ETask.class, "ETask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eHandlerEClass, EHandler.class, "EHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEHandler_Listen_to(), this.getENotifiedTopic(), null, "listen_to", null, 0, 1, EHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEHandler_Listen_to(), this.getENotifiedTopic(), null, "listen_to", null, 0, -1, EHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eExecutionCommonKeywordsEClass, EExecutionCommonKeywords.class, "EExecutionCommonKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEExecutionCommonKeywords_Exe_settings(), this.getEExecutionExeSettings(), null, "exe_settings", null, 0, 1, EExecutionCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2819,16 +2858,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getETaskHandlerCommonKeywords_Asynchronous_settings(), this.getEAsynchronousSettings(), null, "asynchronous_settings", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerCommonKeywords_Args(), this.getEDictionary(), null, "args", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerCommonKeywords_Module(), this.getEModuleCall(), null, "module", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerCommonKeywords_Notifiable(), this.getENotifiable(), null, "notifiable", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerCommonKeywords_Notifiables(), this.getENotifiable(), null, "notifiables", null, 0, -1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerCommonKeywords_Loop(), this.getELoop(), null, "loop", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerCommonKeywords_Register(), this.getERegisterVariable(), null, "register", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eModuleCallEClass, EModuleCall.class, "EModuleCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEModuleCall_Name(), ecorePackage.getEString(), "name", null, 0, 1, EModuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEModuleCall_Parameters(), this.getEParameters(), null, "parameters", null, 0, 1, EModuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eParametersEClass, EParameters.class, "EParameters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEParameters_Parameters(), this.getEParameter(), null, "parameters", null, 0, -1, EParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEModuleCall_Parameters(), this.getEParameter(), null, "parameters", null, 0, -1, EModuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eParameterEClass, EParameter.class, "EParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, EParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2836,12 +2872,16 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eConditionalExpressionEClass, EConditionalExpression.class, "EConditionalExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEConditionalExpression_Left_term(), this.getEValuePassed(), null, "left_term", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEConditionalExpression_Equality_term(), ecorePackage.getEString(), "equality_term", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEConditionalExpression_Right_term(), this.getEValuePassed(), null, "right_term", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEConditionalExpression_Is_not(), ecorePackage.getEString(), "is_not", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEConditionalExpression_Status(), ecorePackage.getEString(), "status", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEConditionalExpression_Formula(), this.getEConditionalFormula(), null, "formula", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEConditionalExpression_Is_true(), ecorePackage.getEString(), "is_true", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eConditionalFormulaEClass, EConditionalFormula.class, "EConditionalFormula", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEConditionalFormula_Left_expression(), this.getEConditionalExpression(), null, "left_expression", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEConditionalFormula_And_or(), ecorePackage.getEString(), "and_or", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEConditionalFormula_Right_expression(), this.getEConditionalExpression(), null, "right_expression", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEConditionalFormula_Negated_expression(), this.getEConditionalExpression(), null, "negated_expression", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2972,6 +3012,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eValuePassedEClass, EValuePassed.class, "EValuePassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eValueEClass, EValue.class, "EValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEValue_Value_string(), ecorePackage.getEString(), "value_string", null, 0, 1, EValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEValue_Value_int(), ecorePackage.getEInt(), "value_int", null, 0, 1, EValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eFilteredVariableEClass, EFilteredVariable.class, "EFilteredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEFilteredVariable_Variable(), this.getEDeclaredVariable(), null, "variable", null, 0, 1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2981,7 +3023,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEAttribute(getEDeclaredVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, EDeclaredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eVariableDeclarationEClass, EVariableDeclaration.class, "EVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEVariableDeclaration_Value(), this.getEValue(), null, "value", null, 0, 1, EVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEVariableDeclaration_Value_passed(), this.getEValue(), null, "value_passed", null, 0, 1, EVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRegisterVariableEClass, ERegisterVariable.class, "ERegisterVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

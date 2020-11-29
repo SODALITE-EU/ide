@@ -57,7 +57,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/asynchronous_settings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/args"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/module"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/notifiable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/notifiables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/loop"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/register"/>
     </genClasses>
@@ -65,21 +65,22 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EModuleCall/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EModuleCall/parameters"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EParameters">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParameters/parameters"/>
-    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EParameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EParameter/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParameter/value_passed"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EConditionalExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EConditionalExpression/left_term"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EConditionalExpression/equality_term"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EConditionalExpression/right_term"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EConditionalExpression/is_not"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EConditionalExpression/status"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EConditionalExpression/formula"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EConditionalExpression/is_true"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EConditionalFormula">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EConditionalFormula/left_expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EConditionalFormula/and_or"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EConditionalFormula/right_expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EConditionalFormula/negated_expression"/>
     </genClasses>
@@ -203,7 +204,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENotifiedTopic/name"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EValuePassed"/>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EValue"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EValue/value_string"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EValue/value_int"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFilteredVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredVariable/variable"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFilteredVariable/filter_commands"/>
@@ -212,7 +216,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDeclaredVariable/name"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableDeclaration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EVariableDeclaration/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EVariableDeclaration/value_passed"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERegisterVariable"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionary">

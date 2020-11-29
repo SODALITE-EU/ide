@@ -26,7 +26,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl#getLeft_term <em>Left term</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl#getEquality_term <em>Equality term</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl#getRight_term <em>Right term</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl#getIs_not <em>Is not</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl#getFormula <em>Formula</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl#getIs_true <em>Is true</em>}</li>
  * </ul>
@@ -46,6 +49,26 @@ public class EConditionalExpressionImpl extends MinimalEObjectImpl.Container imp
   protected EValuePassed left_term;
 
   /**
+   * The default value of the '{@link #getEquality_term() <em>Equality term</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEquality_term()
+   * @generated
+   * @ordered
+   */
+  protected static final String EQUALITY_TERM_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getEquality_term() <em>Equality term</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEquality_term()
+   * @generated
+   * @ordered
+   */
+  protected String equality_term = EQUALITY_TERM_EDEFAULT;
+
+  /**
    * The cached value of the '{@link #getRight_term() <em>Right term</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -54,6 +77,46 @@ public class EConditionalExpressionImpl extends MinimalEObjectImpl.Container imp
    * @ordered
    */
   protected EValuePassed right_term;
+
+  /**
+   * The default value of the '{@link #getIs_not() <em>Is not</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIs_not()
+   * @generated
+   * @ordered
+   */
+  protected static final String IS_NOT_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getIs_not() <em>Is not</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIs_not()
+   * @generated
+   * @ordered
+   */
+  protected String is_not = IS_NOT_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStatus()
+   * @generated
+   * @ordered
+   */
+  protected static final String STATUS_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStatus()
+   * @generated
+   * @ordered
+   */
+  protected String status = STATUS_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getFormula() <em>Formula</em>}' containment reference.
@@ -162,6 +225,31 @@ public class EConditionalExpressionImpl extends MinimalEObjectImpl.Container imp
    * @generated
    */
   @Override
+  public String getEquality_term()
+  {
+    return equality_term;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setEquality_term(String newEquality_term)
+  {
+    String oldEquality_term = equality_term;
+    equality_term = newEquality_term;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONDITIONAL_EXPRESSION__EQUALITY_TERM, oldEquality_term, equality_term));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EValuePassed getRight_term()
   {
     return right_term;
@@ -204,6 +292,56 @@ public class EConditionalExpressionImpl extends MinimalEObjectImpl.Container imp
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONDITIONAL_EXPRESSION__RIGHT_TERM, newRight_term, newRight_term));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getIs_not()
+  {
+    return is_not;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setIs_not(String newIs_not)
+  {
+    String oldIs_not = is_not;
+    is_not = newIs_not;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONDITIONAL_EXPRESSION__IS_NOT, oldIs_not, is_not));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getStatus()
+  {
+    return status;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setStatus(String newStatus)
+  {
+    String oldStatus = status;
+    status = newStatus;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONDITIONAL_EXPRESSION__STATUS, oldStatus, status));
   }
 
   /**
@@ -313,8 +451,14 @@ public class EConditionalExpressionImpl extends MinimalEObjectImpl.Container imp
     {
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__LEFT_TERM:
         return getLeft_term();
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__EQUALITY_TERM:
+        return getEquality_term();
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__RIGHT_TERM:
         return getRight_term();
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__IS_NOT:
+        return getIs_not();
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__STATUS:
+        return getStatus();
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__FORMULA:
         return getFormula();
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__IS_TRUE:
@@ -336,8 +480,17 @@ public class EConditionalExpressionImpl extends MinimalEObjectImpl.Container imp
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__LEFT_TERM:
         setLeft_term((EValuePassed)newValue);
         return;
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__EQUALITY_TERM:
+        setEquality_term((String)newValue);
+        return;
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__RIGHT_TERM:
         setRight_term((EValuePassed)newValue);
+        return;
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__IS_NOT:
+        setIs_not((String)newValue);
+        return;
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__STATUS:
+        setStatus((String)newValue);
         return;
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__FORMULA:
         setFormula((EConditionalFormula)newValue);
@@ -362,8 +515,17 @@ public class EConditionalExpressionImpl extends MinimalEObjectImpl.Container imp
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__LEFT_TERM:
         setLeft_term((EValuePassed)null);
         return;
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__EQUALITY_TERM:
+        setEquality_term(EQUALITY_TERM_EDEFAULT);
+        return;
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__RIGHT_TERM:
         setRight_term((EValuePassed)null);
+        return;
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__IS_NOT:
+        setIs_not(IS_NOT_EDEFAULT);
+        return;
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__STATUS:
+        setStatus(STATUS_EDEFAULT);
         return;
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__FORMULA:
         setFormula((EConditionalFormula)null);
@@ -387,8 +549,14 @@ public class EConditionalExpressionImpl extends MinimalEObjectImpl.Container imp
     {
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__LEFT_TERM:
         return left_term != null;
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__EQUALITY_TERM:
+        return EQUALITY_TERM_EDEFAULT == null ? equality_term != null : !EQUALITY_TERM_EDEFAULT.equals(equality_term);
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__RIGHT_TERM:
         return right_term != null;
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__IS_NOT:
+        return IS_NOT_EDEFAULT == null ? is_not != null : !IS_NOT_EDEFAULT.equals(is_not);
+      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__STATUS:
+        return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__FORMULA:
         return formula != null;
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION__IS_TRUE:
@@ -408,7 +576,13 @@ public class EConditionalExpressionImpl extends MinimalEObjectImpl.Container imp
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (is_true: ");
+    result.append(" (equality_term: ");
+    result.append(equality_term);
+    result.append(", is_not: ");
+    result.append(is_not);
+    result.append(", status: ");
+    result.append(status);
+    result.append(", is_true: ");
     result.append(is_true);
     result.append(')');
     return result.toString();

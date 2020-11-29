@@ -58,7 +58,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ETask" eSuperTypes="#//EBlockTask #//ETaskHandler"/>
   <eClassifiers xsi:type="ecore:EClass" name="EHandler" eSuperTypes="#//ETaskHandler">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="listen_to" eType="#//ENotifiedTopic"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listen_to" unique="false"
+        upperBound="-1" eType="#//ENotifiedTopic"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EExecutionCommonKeywords">
     <eStructuralFeatures xsi:type="ecore:EReference" name="exe_settings" eType="#//EExecutionExeSettings"
@@ -78,8 +79,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="module" eType="#//EModuleCall"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="notifiable" eType="#//ENotifiable"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notifiables" upperBound="-1"
+        eType="#//ENotifiable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="loop" eType="#//ELoop"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="register" eType="#//ERegisterVariable"
@@ -87,10 +88,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EModuleCall">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" eType="#//EParameters"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EParameters">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//EParameter" containment="true"/>
   </eClassifiers>
@@ -102,8 +99,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="EConditionalExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left_term" eType="#//EValuePassed"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="equality_term" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="right_term" eType="#//EValuePassed"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_not" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="formula" eType="#//EConditionalFormula"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_true" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -111,6 +111,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EConditionalFormula">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left_expression" eType="#//EConditionalExpression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="and_or" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="right_expression" eType="#//EConditionalExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="negated_expression" eType="#//EConditionalExpression"
@@ -265,7 +266,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassed"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EValue" eSuperTypes="#//EValuePassed"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EValue" eSuperTypes="#//EValuePassed">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value_string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value_int" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFilteredVariable" eSuperTypes="#//ELoopList #//EValuePassed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//EDeclaredVariable"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter_commands" unique="false"
@@ -275,7 +279,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EVariableDeclaration" eSuperTypes="#//EDeclaredVariable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EValue"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value_passed" eType="#//EValue"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERegisterVariable" eSuperTypes="#//EDeclaredVariable"/>

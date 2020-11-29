@@ -15,7 +15,10 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getLeft_term <em>Left term</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getEquality_term <em>Equality term</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getRight_term <em>Right term</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getIs_not <em>Is not</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getStatus <em>Status</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getFormula <em>Formula</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getIs_true <em>Is true</em>}</li>
  * </ul>
@@ -49,6 +52,28 @@ public interface EConditionalExpression extends EObject
   void setLeft_term(EValuePassed value);
 
   /**
+   * Returns the value of the '<em><b>Equality term</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Equality term</em>' attribute.
+   * @see #setEquality_term(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConditionalExpression_Equality_term()
+   * @model
+   * @generated
+   */
+  String getEquality_term();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getEquality_term <em>Equality term</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Equality term</em>' attribute.
+   * @see #getEquality_term()
+   * @generated
+   */
+  void setEquality_term(String value);
+
+  /**
    * Returns the value of the '<em><b>Right term</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -69,6 +94,50 @@ public interface EConditionalExpression extends EObject
    * @generated
    */
   void setRight_term(EValuePassed value);
+
+  /**
+   * Returns the value of the '<em><b>Is not</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Is not</em>' attribute.
+   * @see #setIs_not(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConditionalExpression_Is_not()
+   * @model
+   * @generated
+   */
+  String getIs_not();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getIs_not <em>Is not</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Is not</em>' attribute.
+   * @see #getIs_not()
+   * @generated
+   */
+  void setIs_not(String value);
+
+  /**
+   * Returns the value of the '<em><b>Status</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Status</em>' attribute.
+   * @see #setStatus(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConditionalExpression_Status()
+   * @model
+   * @generated
+   */
+  String getStatus();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getStatus <em>Status</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Status</em>' attribute.
+   * @see #getStatus()
+   * @generated
+   */
+  void setStatus(String value);
 
   /**
    * Returns the value of the '<em><b>Formula</b></em>' containment reference.

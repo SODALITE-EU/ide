@@ -7,6 +7,31 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook
+import org.sodalite.sdl.ansible.ansibleDsl.EPlay
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionary
+import org.sodalite.sdl.ansible.ansibleDsl.EBaseCommonKeywords
+import org.sodalite.sdl.ansible.ansibleDsl.EValue
+import org.sodalite.sdl.ansible.ansibleDsl.EList
+import java.util.ArrayList
+import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings
+import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling
+import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask
+import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler
+import org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords
+import org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression
+import org.sodalite.sdl.ansible.ansibleDsl.EBlock
+import org.sodalite.sdl.ansible.ansibleDsl.ETask
+import org.sodalite.sdl.ansible.ansibleDsl.EBase
+import org.sodalite.sdl.ansible.ansibleDsl.EExecution
+import org.sodalite.sdl.ansible.ansibleDsl.EHandler
+import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable
+import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic
+import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler
+import org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula
 
 /**
  * Generates code from your model files on save.
@@ -16,10 +41,437 @@ import org.eclipse.xtext.generator.IGeneratorContext
 class AnsibleDslGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		for (e : resource.allContents.toIterable.filter(EPlaybook)){
+			fsa.generateFile(e.name + '.yaml', compilePlays(e))
+		}
 //		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 //			resource.allContents
 //				.filter(Greeting)
 //				.map[name]
 //				.join(', '))
+	}
+	
+	def compilePlays(EPlaybook playbook) '''
+		«FOR play : playbook.plays»
+			«compileBase(play, '')»
+		«ENDFOR»
+	'''
+	
+	def compileBase(EBase base, String space) '''
+		«IF base.name !== null»
+			«space»- name: «base.name»
+		«ENDIF»
+		«IF base instanceof EPlay»
+			«space.concat('  ')»hosts: all
+		«ENDIF»
+		«IF base instanceof EBlock»
+			«space.concat('  ')»block:
+		«ENDIF»
+		«IF base.base_common_keywords !== null»
+			«compileBaseCommonKeywords(base.base_common_keywords, space.concat('  '))»
+		«ENDIF»
+		«IF base instanceof EPlay»
+			«compilePlay(base, space.concat('  '))»
+		«ENDIF»
+		«IF base instanceof EExecution»
+			«compileExecution(base, space.concat('  '))»
+		«ENDIF»		
+	'''
+	
+	def compilePlay(EPlay play, String space) '''
+		«IF play.play_exe_settings !== null»
+			«compilePlayExeSettings(play.play_exe_settings, space)»
+		«ENDIF»
+		«IF play.error_handling !== null»
+			«compilePlayErrorHandling(play.error_handling, space)»
+		«ENDIF»
+		«IF play.facts_settings !== null»
+			«compileFactsSettings(play.facts_settings, space)»
+		«ENDIF»
+		«IF play.vars_files !== null»
+			«space»vars_files: «play.vars_files.compileList»
+		«ENDIF»
+		«IF play.vars_prompt !== null»
+			«space»vars_prompt: «play.vars_prompt.compileList»
+		«ENDIF»
+		«IF play.force_handlers !== null»
+			«space»force_handlers: «play.force_handlers»
+		«ENDIF»
+		«IF play.pre_tasks_list.size !== 0»
+			«space»pre_tasks:
+			«FOR blockTask: play.pre_tasks_list»
+				«compileBlockTask(blockTask, space.concat('  '))»
+			«ENDFOR»
+		«ENDIF»
+		«IF play.tasks_list.size !== 0»
+			«space»tasks:
+			«FOR blockTask: play.tasks_list»
+				«compileBlockTask(blockTask, space.concat('  '))»
+			«ENDFOR»
+		«ENDIF»
+		«IF play.post_tasks_list.size !== 0»
+			«space»post_tasks:
+			«FOR blockTask: play.post_tasks_list»
+				«compileBlockTask(blockTask, space.concat('  '))»
+			«ENDFOR»
+		«ENDIF»
+		«IF play.handlers.size !== 0»
+			«space»handlers:
+			«FOR handler: play.handlers»
+				«compileBase(handler, space.concat('  '))»
+			«ENDFOR»
+		«ENDIF»
+	'''
+
+	def compileExecution(EExecution execution, String space) '''
+		«IF execution.exe_common_keywords !== null»
+			«compileExecutionCommonKeywords(execution.exe_common_keywords, space)»
+		«ENDIF»
+		«IF execution instanceof EBlock»
+			«compileBlock(execution, space)»
+		«ENDIF»
+		«IF execution instanceof ETaskHandler»
+			«compileTaskHandler(execution, space)»
+		«ENDIF»
+	'''
+	
+	def compileBaseCommonKeywords(EBaseCommonKeywords baseCommonKeywords, String space) '''
+		«IF baseCommonKeywords.privilage_escalation !== null»
+			«IF baseCommonKeywords.privilage_escalation.become !== null»
+				«space»become: «baseCommonKeywords.privilage_escalation.become»
+			«ENDIF»
+			«IF baseCommonKeywords.privilage_escalation.become_exe !== null»
+				«space»become_exe: «baseCommonKeywords.privilage_escalation.become_exe»
+			«ENDIF»
+			«IF baseCommonKeywords.privilage_escalation.become_flags !== null»
+				«space»become_flags: «baseCommonKeywords.privilage_escalation.become_flags»
+			«ENDIF»
+			«IF baseCommonKeywords.privilage_escalation.become_method !== null»
+				«space»become_method: «baseCommonKeywords.privilage_escalation.become_method»
+			«ENDIF»
+			«IF baseCommonKeywords.privilage_escalation.become_user !== null»
+				«space»become_user: «baseCommonKeywords.privilage_escalation.become_user»
+			«ENDIF»
+		«ENDIF»
+		«IF baseCommonKeywords.validation_mode !== null»
+			«IF baseCommonKeywords.validation_mode.check_mode !== null»
+				«space»check_moode: «baseCommonKeywords.validation_mode.check_mode»
+			«ENDIF»
+			«IF baseCommonKeywords.validation_mode.diff !== null»
+				«space»diff: «baseCommonKeywords.validation_mode.diff»
+			«ENDIF»
+		«ENDIF»
+		«IF baseCommonKeywords.connection !== null»
+			«IF baseCommonKeywords.connection.connection !== null»
+				«space»connection: «baseCommonKeywords.connection.connection»
+			«ENDIF»
+			«IF baseCommonKeywords.connection.port.toString() !== null»
+				«space»port: «baseCommonKeywords.connection.port»
+			«ENDIF»
+			«IF baseCommonKeywords.connection.remote_user !== null»
+				«space»remote_user: «baseCommonKeywords.connection.remote_user»
+			«ENDIF»
+		«ENDIF»
+		«IF baseCommonKeywords.no_log !== null»
+			«space»no_log: «baseCommonKeywords.no_log»
+		«ENDIF»
+		«IF baseCommonKeywords.debugger !== null»
+			«space»debugger: «baseCommonKeywords.debugger»
+		«ENDIF»
+		«IF baseCommonKeywords.module_defaults !== null»
+			«space»module_defaults: «baseCommonKeywords.module_defaults.compileList»
+		«ENDIF»
+		«IF baseCommonKeywords.environment !== null»
+			«space»environment: «baseCommonKeywords.environment.compileList»
+		«ENDIF»
+		«IF baseCommonKeywords.collections !== null»
+			«space»collections: «baseCommonKeywords.collections.compileList»
+		«ENDIF»
+		«IF baseCommonKeywords.tags !== null»
+			«space»tags: «baseCommonKeywords.tags.compileList »
+		«ENDIF»
+		«IF baseCommonKeywords.variable_declarations.size !== 0»
+			«space»vars: «baseCommonKeywords.compileVariableDeclarations»
+		«ENDIF»
+	'''
+	
+	def compilePlayExeSettings(EPlayExeSettings playExeSettings, String space) '''
+		«IF playExeSettings.strategy !== null»
+			«space»strategy: «playExeSettings.strategy»
+		«ENDIF»
+		«IF playExeSettings.serial_list !== null»
+			«space»serial: «playExeSettings.serial_list.compileList»
+		«ENDIF»
+		«IF playExeSettings.order !== null»
+			«space»order: «playExeSettings.order»
+		«ENDIF»
+		«IF playExeSettings.throttle !== 0»
+			«space»throttle: «playExeSettings.throttle»
+		«ENDIF»
+		«IF playExeSettings.run_once !== null»
+			«space»run_once: «playExeSettings.run_once»
+		«ENDIF»
+	'''
+	
+	def compilePlayErrorHandling(EPlayErrorHandling playErrorHandling, String space) '''
+		«IF playErrorHandling.max_fail_percentage !== 0»
+			«space»max_fail_percentage: «playErrorHandling.max_fail_percentage»
+		«ENDIF»
+		«IF playErrorHandling.any_errors_fatal !== null»
+			«space»any_errors_fatal: «playErrorHandling.any_errors_fatal»
+		«ENDIF»
+		«IF playErrorHandling.ignore_errors !== null»
+			«space»ignore_errors: «playErrorHandling.ignore_errors»
+		«ENDIF»
+		«IF playErrorHandling.ignore_unreachable !== null»
+			«space»ignore_unreachable: «playErrorHandling.ignore_unreachable»
+		«ENDIF»
+	'''
+	
+	def compileFactsSettings(EFactsSettings factsSettings, String space) '''
+		«IF factsSettings.gather_facts !== null»
+			«space»gather_facts: «factsSettings.gather_facts»
+		«ENDIF»
+		«IF factsSettings.gather_subset !== null»
+			«space»gather_subset: «factsSettings.gather_subset.compileList»
+		«ENDIF»
+		«IF factsSettings.gather_timeout !== 0»
+			«space»gather_timeout: «factsSettings.gather_timeout»
+		«ENDIF»
+		«IF factsSettings.fact_path !== null»
+			«space»fact_path: «factsSettings.fact_path»
+		«ENDIF»
+	'''
+	
+	def compileBlockTask(EBlockTask blockTask, String space) '''
+		«val newSpace = space.concat('  ')»
+		«val newSpaceIndented = newSpace.concat('  ')»
+		«IF blockTask instanceof EBlock»
+			«IF blockTask.name !== null»
+				«space»- name: «blockTask.name»
+			«ENDIF»
+			«newSpace»block: 
+			«IF blockTask.base_common_keywords !== null»
+				«compileBaseCommonKeywords(blockTask.base_common_keywords, newSpaceIndented)»
+			«ENDIF»
+			«IF blockTask.exe_common_keywords !== null»
+				«compileExecutionCommonKeywords(blockTask.exe_common_keywords, newSpaceIndented)»
+			«ENDIF»
+			«compileBlock(blockTask, newSpaceIndented)»			
+		«ENDIF»
+		«IF blockTask instanceof ETask»
+			«IF blockTask.name !== null»
+				«space»- name: «blockTask.name»
+			«ENDIF»
+			«IF blockTask.base_common_keywords !== null»
+				«compileBaseCommonKeywords(blockTask.base_common_keywords, newSpace)»
+			«ENDIF»
+			«IF blockTask.exe_common_keywords !== null»
+				«compileExecutionCommonKeywords(blockTask.exe_common_keywords, newSpace)»
+			«ENDIF»
+			«IF blockTask.task_handler_common_keywords !== null»
+				«compileTaskHandlerCommonKeywords(blockTask.task_handler_common_keywords, newSpace)»
+			«ENDIF»
+		«ENDIF»
+	'''
+	
+	def compileBlock(EBlock block, String space) '''
+		«IF block.error_handling !== null»
+			«IF block.error_handling.any_errors_fatal !== null»
+				«space»any_errors_fatal: «block.error_handling.any_errors_fatal»
+			«ENDIF»
+			«IF block.error_handling.ignore_errors !== null»
+				«space»ignore_errors: «block.error_handling.ignore_errors»
+			«ENDIF»
+			«IF block.error_handling.ignore_unreachable !== null»
+				«space»ignore_unreachable: «block.error_handling.ignore_unreachable»
+			«ENDIF»
+		«ENDIF»
+		«IF block.tasks.size !== 0»
+			«FOR task: block.tasks»
+				«compileBase(task, space)»
+			«ENDFOR»
+		«ENDIF»
+		«IF block.rescue_tasks.size !== 0»
+			«space»rescue: 
+			«FOR task: block.rescue_tasks»
+				«compileBase(task, space)»
+			«ENDFOR»
+		«ENDIF»
+		«IF block.always_tasks.size !== 0»
+			«space»always: 
+			«FOR task: block.always_tasks»
+				«compileBase(task, space)»
+			«ENDFOR»
+		«ENDIF»
+	'''
+	
+	def compileExecutionCommonKeywords(EExecutionCommonKeywords executionCommonKeywords, String space) '''
+		«IF executionCommonKeywords.exe_settings !== null»
+			«IF executionCommonKeywords.exe_settings.throttle != 0»
+				«space»throttle: «executionCommonKeywords.exe_settings.throttle»
+			«ENDIF»
+			«IF executionCommonKeywords.exe_settings.run_once !== null»
+				«space»run_once: «executionCommonKeywords.exe_settings.run_once»
+			«ENDIF»
+		«ENDIF»
+		«IF executionCommonKeywords.delegation !== null»
+			«IF executionCommonKeywords.delegation.delegate_to !== null»
+				«space»delegate_to: «executionCommonKeywords.delegation.delegate_to»
+			«ENDIF»
+			«IF executionCommonKeywords.delegation.delegate_facts !== null»
+				«space»delegate_facts: «executionCommonKeywords.delegation.delegate_facts»
+			«ENDIF»
+		«ENDIF»
+		«IF executionCommonKeywords.when_expression !== null»
+			«space»when: «executionCommonKeywords.when_expression.compileConditionalExpression»
+		«ENDIF»
+	'''
+	
+	def compileTaskHandler(ETaskHandler taskHandler, String space) '''
+		«IF taskHandler.task_handler_common_keywords !== null»
+			«compileTaskHandlerCommonKeywords(taskHandler.task_handler_common_keywords, space)»
+		«ENDIF»
+		«IF taskHandler instanceof EHandler»
+			«IF taskHandler.listen_to !== null»
+				«space»listen: «compileNotifiedTopics(taskHandler)»
+			«ENDIF»
+		«ENDIF»
+	'''
+	
+	def compileTaskHandlerCommonKeywords(ETaskHandlerCommonKeywords taskHandlerCommonKeywords, String space) '''
+		«IF taskHandlerCommonKeywords.error_handling !== null»
+			«IF taskHandlerCommonKeywords.error_handling.changed_when !== null»
+				«space»change_when: «taskHandlerCommonKeywords.error_handling.changed_when /*TODO*/»
+			«ENDIF»
+			«IF taskHandlerCommonKeywords.error_handling.failed_when !== null»
+				«space»failed_when: «taskHandlerCommonKeywords.error_handling.failed_when /*TODO*/»
+			«ENDIF»
+			«IF taskHandlerCommonKeywords.error_handling.any_errors_fatal !== null»
+				«space»any_errors_fatal: «taskHandlerCommonKeywords.error_handling.any_errors_fatal»
+			«ENDIF»
+			«IF taskHandlerCommonKeywords.error_handling.ignore_errors !== null»
+				«space»ignore_errors: «taskHandlerCommonKeywords.error_handling.ignore_errors»
+			«ENDIF»
+			«IF taskHandlerCommonKeywords.error_handling.ignore_unreachable !== null»
+				«space»ignore_unreachable: «taskHandlerCommonKeywords.error_handling.ignore_unreachable»
+			«ENDIF»
+		«ENDIF»
+		«IF taskHandlerCommonKeywords.action !== null»
+			«space»action: «taskHandlerCommonKeywords.action»
+		«ENDIF»
+		«IF taskHandlerCommonKeywords.asynchronous_settings !== null»
+			«IF taskHandlerCommonKeywords.asynchronous_settings.async !== 0»
+				«space»async: «taskHandlerCommonKeywords.asynchronous_settings.async»
+			«ENDIF»
+			«IF taskHandlerCommonKeywords.asynchronous_settings.poll !== 0»
+				«space»poll: «taskHandlerCommonKeywords.asynchronous_settings.poll»
+			«ENDIF»
+		«ENDIF»
+		«IF taskHandlerCommonKeywords.args !== null»
+			«space»args: «taskHandlerCommonKeywords.args.compileValue»
+		«ENDIF»
+		«IF taskHandlerCommonKeywords.module !== null»
+			«space»«taskHandlerCommonKeywords.module.name»:
+			«FOR parameter: taskHandlerCommonKeywords.module.parameters»
+				«space.concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
+			«ENDFOR»
+		«ENDIF»
+		«IF taskHandlerCommonKeywords.notifiables.size !== 0»
+			«space»notify: «compileNotifiables(taskHandlerCommonKeywords)»
+		«ENDIF»
+		«IF taskHandlerCommonKeywords.loop !== null»
+			«/*TODO*/»
+		«ENDIF»
+		«IF taskHandlerCommonKeywords.register !== null»
+			«space»register: «taskHandlerCommonKeywords.register.name»
+		«ENDIF»
+	'''
+	
+	def compileNotifiables(ETaskHandlerCommonKeywords taskHandlerCommonKeywords){
+		var newList = new ArrayList()
+		for (notifiable : taskHandlerCommonKeywords.notifiables){
+			if (notifiable instanceof ENotifiedTopic){
+				newList.add("\"".concat(notifiable.name).concat("\""))	
+			}
+			else if (notifiable instanceof ENotifiedHandler){
+				newList.add(notifiable.name.name)
+			}
+		}
+		return newList
+	}
+	
+	def compileNotifiedTopics(EHandler handler){
+		var newList = new ArrayList()
+		for (listenedTopic : handler.listen_to){
+			newList.add("\"".concat(listenedTopic.name).concat("\""))
+		}
+		return newList
+	}
+	
+	def compileConditionalExpression(EConditionalExpression conditionalExpression){
+		if (conditionalExpression.left_term !== null && conditionalExpression.equality_term !== null && conditionalExpression.right_term !== null){
+			return compileValuePassed(conditionalExpression.left_term).concat(" ").concat(conditionalExpression.equality_term).concat(" ").concat(compileValuePassed(conditionalExpression.right_term))
+		}
+		else if (conditionalExpression.left_term !== null && conditionalExpression.status !== null){
+			if (conditionalExpression.is_not !== null) return compileValuePassed(conditionalExpression.left_term).concat(" is not ").concat(conditionalExpression.status)
+			else return compileValuePassed(conditionalExpression.left_term).concat(" is ").concat(conditionalExpression.status)
+		}
+		else if (conditionalExpression.formula !== null) return compileConditionalFormula(conditionalExpression.formula)
+		else if (conditionalExpression.is_true !== null) return conditionalExpression.is_true
+	}
+	
+	def compileConditionalFormula(EConditionalFormula conditionalFormula){
+		if (conditionalFormula.left_expression !== null && conditionalFormula.and_or !== null && conditionalFormula.right_expression !== null){
+			return "(".concat(compileConditionalExpression(conditionalFormula.left_expression) as String).concat(") ").concat(conditionalFormula.and_or).concat(" (").concat(compileConditionalExpression(conditionalFormula.right_expression) as String).concat(")")
+		}
+		else if (conditionalFormula.negated_expression !== null){
+			return "not (".concat(compileConditionalExpression(conditionalFormula.negated_expression) as String).concat(")")
+		}
+	}
+	
+	def compileList(EList list){
+		var newList = new ArrayList()
+		for (element: list.elements){
+			newList.add(element.compileValue)
+		}
+		return newList
+	}
+	
+	def compileValuePassed(EValuePassed valuePassed){
+		if (valuePassed instanceof EValue) return compileValue(valuePassed).toString()
+		else if (valuePassed instanceof EFilteredVariable){
+			var filteredVariableString = "\"{{ ".concat(valuePassed.variable.name)
+			for (filterCommand : valuePassed.filter_commands){
+				filteredVariableString.concat("| ").concat(filterCommand)
+			}
+			filteredVariableString = filteredVariableString.concat(" }}\"")
+			return filteredVariableString
+		}
+	}
+	
+	def compileValue(EValue value){
+		if (value instanceof EDictionary){
+			var dictionaryString = '{'
+			for (dictionary_pair : value.dictionary_pairs){
+				dictionaryString = dictionaryString.concat(dictionary_pair.key).concat(': ').concat(compileValue(dictionary_pair.value).toString()).concat(', ')
+			}
+			dictionaryString = dictionaryString.substring(0, dictionaryString.length() - 2)
+			dictionaryString = dictionaryString.concat('}')
+			return dictionaryString
+		}
+		else if (value instanceof EList) return compileList(value)
+		else if (value.value_string !== null) return value.value_string
+		else return value.value_int
+	}
+	
+	def compileVariableDeclarations(EBaseCommonKeywords baseCommonKeywords){
+		var variableDeclarationsString = '{'
+		for (variable_declaration : baseCommonKeywords.variable_declarations){
+			variableDeclarationsString = variableDeclarationsString.concat(variable_declaration.name).concat(': ').concat(compileValue(variable_declaration.value_passed).toString()).concat(', ')
+		}
+		variableDeclarationsString = variableDeclarationsString.substring(0, variableDeclarationsString.length() - 2)
+			variableDeclarationsString = variableDeclarationsString.concat('}')
+			return variableDeclarationsString
 	}
 }

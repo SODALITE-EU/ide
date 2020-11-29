@@ -3,12 +3,13 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
@@ -30,14 +31,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
 public class EHandlerImpl extends ETaskHandlerImpl implements EHandler
 {
   /**
-   * The cached value of the '{@link #getListen_to() <em>Listen to</em>}' reference.
+   * The cached value of the '{@link #getListen_to() <em>Listen to</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getListen_to()
    * @generated
    * @ordered
    */
-  protected ENotifiedTopic listen_to;
+  protected EList<ENotifiedTopic> listen_to;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,43 +67,13 @@ public class EHandlerImpl extends ETaskHandlerImpl implements EHandler
    * @generated
    */
   @Override
-  public ENotifiedTopic getListen_to()
+  public EList<ENotifiedTopic> getListen_to()
   {
-    if (listen_to != null && listen_to.eIsProxy())
+    if (listen_to == null)
     {
-      InternalEObject oldListen_to = (InternalEObject)listen_to;
-      listen_to = (ENotifiedTopic)eResolveProxy(oldListen_to);
-      if (listen_to != oldListen_to)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EHANDLER__LISTEN_TO, oldListen_to, listen_to));
-      }
+      listen_to = new EObjectResolvingEList<ENotifiedTopic>(ENotifiedTopic.class, this, AnsibleDslPackage.EHANDLER__LISTEN_TO);
     }
     return listen_to;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ENotifiedTopic basicGetListen_to()
-  {
-    return listen_to;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setListen_to(ENotifiedTopic newListen_to)
-  {
-    ENotifiedTopic oldListen_to = listen_to;
-    listen_to = newListen_to;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EHANDLER__LISTEN_TO, oldListen_to, listen_to));
   }
 
   /**
@@ -116,8 +87,7 @@ public class EHandlerImpl extends ETaskHandlerImpl implements EHandler
     switch (featureID)
     {
       case AnsibleDslPackage.EHANDLER__LISTEN_TO:
-        if (resolve) return getListen_to();
-        return basicGetListen_to();
+        return getListen_to();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -127,13 +97,15 @@ public class EHandlerImpl extends ETaskHandlerImpl implements EHandler
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
       case AnsibleDslPackage.EHANDLER__LISTEN_TO:
-        setListen_to((ENotifiedTopic)newValue);
+        getListen_to().clear();
+        getListen_to().addAll((Collection<? extends ENotifiedTopic>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -150,7 +122,7 @@ public class EHandlerImpl extends ETaskHandlerImpl implements EHandler
     switch (featureID)
     {
       case AnsibleDslPackage.EHANDLER__LISTEN_TO:
-        setListen_to((ENotifiedTopic)null);
+        getListen_to().clear();
         return;
     }
     super.eUnset(featureID);
@@ -167,7 +139,7 @@ public class EHandlerImpl extends ETaskHandlerImpl implements EHandler
     switch (featureID)
     {
       case AnsibleDslPackage.EHANDLER__LISTEN_TO:
-        return listen_to != null;
+        return listen_to != null && !listen_to.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -3,6 +3,7 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,25 +24,15 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 public interface EHandler extends ETaskHandler
 {
   /**
-   * Returns the value of the '<em><b>Listen to</b></em>' reference.
+   * Returns the value of the '<em><b>Listen to</b></em>' reference list.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Listen to</em>' reference.
-   * @see #setListen_to(ENotifiedTopic)
+   * @return the value of the '<em>Listen to</em>' reference list.
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEHandler_Listen_to()
    * @model
    * @generated
    */
-  ENotifiedTopic getListen_to();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EHandler#getListen_to <em>Listen to</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Listen to</em>' reference.
-   * @see #getListen_to()
-   * @generated
-   */
-  void setListen_to(ENotifiedTopic value);
+  EList<ENotifiedTopic> getListen_to();
 
 } // EHandler

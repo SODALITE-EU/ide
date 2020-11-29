@@ -3,8 +3,12 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,9 +16,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
-import org.sodalite.sdl.ansible.ansibleDsl.EParameters;
+import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,14 +60,14 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference.
+   * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getParameters()
    * @generated
    * @ordered
    */
-  protected EParameters parameters;
+  protected EList<EParameter> parameters;
 
   /**
    * <!-- begin-user-doc -->
@@ -114,48 +121,13 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
    * @generated
    */
   @Override
-  public EParameters getParameters()
+  public EList<EParameter> getParameters()
   {
+    if (parameters == null)
+    {
+      parameters = new EObjectContainmentEList<EParameter>(EParameter.class, this, AnsibleDslPackage.EMODULE_CALL__PARAMETERS);
+    }
     return parameters;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetParameters(EParameters newParameters, NotificationChain msgs)
-  {
-    EParameters oldParameters = parameters;
-    parameters = newParameters;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__PARAMETERS, oldParameters, newParameters);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setParameters(EParameters newParameters)
-  {
-    if (newParameters != parameters)
-    {
-      NotificationChain msgs = null;
-      if (parameters != null)
-        msgs = ((InternalEObject)parameters).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__PARAMETERS, null, msgs);
-      if (newParameters != null)
-        msgs = ((InternalEObject)newParameters).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__PARAMETERS, null, msgs);
-      msgs = basicSetParameters(newParameters, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__PARAMETERS, newParameters, newParameters));
   }
 
   /**
@@ -169,7 +141,7 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
     switch (featureID)
     {
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
-        return basicSetParameters(null, msgs);
+        return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -197,6 +169,7 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -206,7 +179,8 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
         setName((String)newValue);
         return;
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
-        setParameters((EParameters)newValue);
+        getParameters().clear();
+        getParameters().addAll((Collection<? extends EParameter>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -226,7 +200,7 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
         setName(NAME_EDEFAULT);
         return;
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
-        setParameters((EParameters)null);
+        getParameters().clear();
         return;
     }
     super.eUnset(featureID);
@@ -245,7 +219,7 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
       case AnsibleDslPackage.EMODULE_CALL__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
-        return parameters != null;
+        return parameters != null && !parameters.isEmpty();
     }
     return super.eIsSet(featureID);
   }

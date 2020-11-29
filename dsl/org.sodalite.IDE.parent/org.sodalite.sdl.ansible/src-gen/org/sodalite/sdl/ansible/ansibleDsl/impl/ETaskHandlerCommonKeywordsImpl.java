@@ -3,14 +3,21 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
@@ -35,7 +42,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerCommonKeywordsImpl#getAsynchronous_settings <em>Asynchronous settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerCommonKeywordsImpl#getArgs <em>Args</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerCommonKeywordsImpl#getModule <em>Module</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerCommonKeywordsImpl#getNotifiable <em>Notifiable</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerCommonKeywordsImpl#getNotifiables <em>Notifiables</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerCommonKeywordsImpl#getLoop <em>Loop</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerCommonKeywordsImpl#getRegister <em>Register</em>}</li>
  * </ul>
@@ -105,14 +112,14 @@ public class ETaskHandlerCommonKeywordsImpl extends MinimalEObjectImpl.Container
   protected EModuleCall module;
 
   /**
-   * The cached value of the '{@link #getNotifiable() <em>Notifiable</em>}' containment reference.
+   * The cached value of the '{@link #getNotifiables() <em>Notifiables</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNotifiable()
+   * @see #getNotifiables()
    * @generated
    * @ordered
    */
-  protected ENotifiable notifiable;
+  protected EList<ENotifiable> notifiables;
 
   /**
    * The cached value of the '{@link #getLoop() <em>Loop</em>}' containment reference.
@@ -386,48 +393,13 @@ public class ETaskHandlerCommonKeywordsImpl extends MinimalEObjectImpl.Container
    * @generated
    */
   @Override
-  public ENotifiable getNotifiable()
+  public EList<ENotifiable> getNotifiables()
   {
-    return notifiable;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetNotifiable(ENotifiable newNotifiable, NotificationChain msgs)
-  {
-    ENotifiable oldNotifiable = notifiable;
-    notifiable = newNotifiable;
-    if (eNotificationRequired())
+    if (notifiables == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE, oldNotifiable, newNotifiable);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      notifiables = new EObjectContainmentEList<ENotifiable>(ENotifiable.class, this, AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLES);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setNotifiable(ENotifiable newNotifiable)
-  {
-    if (newNotifiable != notifiable)
-    {
-      NotificationChain msgs = null;
-      if (notifiable != null)
-        msgs = ((InternalEObject)notifiable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE, null, msgs);
-      if (newNotifiable != null)
-        msgs = ((InternalEObject)newNotifiable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE, null, msgs);
-      msgs = basicSetNotifiable(newNotifiable, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE, newNotifiable, newNotifiable));
+    return notifiables;
   }
 
   /**
@@ -548,8 +520,8 @@ public class ETaskHandlerCommonKeywordsImpl extends MinimalEObjectImpl.Container
         return basicSetArgs(null, msgs);
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__MODULE:
         return basicSetModule(null, msgs);
-      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE:
-        return basicSetNotifiable(null, msgs);
+      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLES:
+        return ((InternalEList<?>)getNotifiables()).basicRemove(otherEnd, msgs);
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__LOOP:
         return basicSetLoop(null, msgs);
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__REGISTER:
@@ -578,8 +550,8 @@ public class ETaskHandlerCommonKeywordsImpl extends MinimalEObjectImpl.Container
         return getArgs();
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__MODULE:
         return getModule();
-      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE:
-        return getNotifiable();
+      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLES:
+        return getNotifiables();
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__LOOP:
         return getLoop();
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__REGISTER:
@@ -593,6 +565,7 @@ public class ETaskHandlerCommonKeywordsImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -613,8 +586,9 @@ public class ETaskHandlerCommonKeywordsImpl extends MinimalEObjectImpl.Container
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__MODULE:
         setModule((EModuleCall)newValue);
         return;
-      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE:
-        setNotifiable((ENotifiable)newValue);
+      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLES:
+        getNotifiables().clear();
+        getNotifiables().addAll((Collection<? extends ENotifiable>)newValue);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__LOOP:
         setLoop((ELoop)newValue);
@@ -651,8 +625,8 @@ public class ETaskHandlerCommonKeywordsImpl extends MinimalEObjectImpl.Container
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__MODULE:
         setModule((EModuleCall)null);
         return;
-      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE:
-        setNotifiable((ENotifiable)null);
+      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLES:
+        getNotifiables().clear();
         return;
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__LOOP:
         setLoop((ELoop)null);
@@ -684,8 +658,8 @@ public class ETaskHandlerCommonKeywordsImpl extends MinimalEObjectImpl.Container
         return args != null;
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__MODULE:
         return module != null;
-      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLE:
-        return notifiable != null;
+      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLES:
+        return notifiables != null && !notifiables.isEmpty();
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__LOOP:
         return loop != null;
       case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS__REGISTER:

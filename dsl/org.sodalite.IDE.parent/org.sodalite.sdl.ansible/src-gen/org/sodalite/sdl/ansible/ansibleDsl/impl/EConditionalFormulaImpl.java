@@ -25,6 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalFormulaImpl#getLeft_expression <em>Left expression</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalFormulaImpl#getAnd_or <em>And or</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalFormulaImpl#getRight_expression <em>Right expression</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalFormulaImpl#getNegated_expression <em>Negated expression</em>}</li>
  * </ul>
@@ -42,6 +43,26 @@ public class EConditionalFormulaImpl extends MinimalEObjectImpl.Container implem
    * @ordered
    */
   protected EConditionalExpression left_expression;
+
+  /**
+   * The default value of the '{@link #getAnd_or() <em>And or</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnd_or()
+   * @generated
+   * @ordered
+   */
+  protected static final String AND_OR_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getAnd_or() <em>And or</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnd_or()
+   * @generated
+   * @ordered
+   */
+  protected String and_or = AND_OR_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getRight_expression() <em>Right expression</em>}' containment reference.
@@ -132,6 +153,31 @@ public class EConditionalFormulaImpl extends MinimalEObjectImpl.Container implem
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONDITIONAL_FORMULA__LEFT_EXPRESSION, newLeft_expression, newLeft_expression));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getAnd_or()
+  {
+    return and_or;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAnd_or(String newAnd_or)
+  {
+    String oldAnd_or = and_or;
+    and_or = newAnd_or;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONDITIONAL_FORMULA__AND_OR, oldAnd_or, and_or));
   }
 
   /**
@@ -266,6 +312,8 @@ public class EConditionalFormulaImpl extends MinimalEObjectImpl.Container implem
     {
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__LEFT_EXPRESSION:
         return getLeft_expression();
+      case AnsibleDslPackage.ECONDITIONAL_FORMULA__AND_OR:
+        return getAnd_or();
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__RIGHT_EXPRESSION:
         return getRight_expression();
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__NEGATED_EXPRESSION:
@@ -286,6 +334,9 @@ public class EConditionalFormulaImpl extends MinimalEObjectImpl.Container implem
     {
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__LEFT_EXPRESSION:
         setLeft_expression((EConditionalExpression)newValue);
+        return;
+      case AnsibleDslPackage.ECONDITIONAL_FORMULA__AND_OR:
+        setAnd_or((String)newValue);
         return;
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__RIGHT_EXPRESSION:
         setRight_expression((EConditionalExpression)newValue);
@@ -310,6 +361,9 @@ public class EConditionalFormulaImpl extends MinimalEObjectImpl.Container implem
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__LEFT_EXPRESSION:
         setLeft_expression((EConditionalExpression)null);
         return;
+      case AnsibleDslPackage.ECONDITIONAL_FORMULA__AND_OR:
+        setAnd_or(AND_OR_EDEFAULT);
+        return;
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__RIGHT_EXPRESSION:
         setRight_expression((EConditionalExpression)null);
         return;
@@ -332,12 +386,31 @@ public class EConditionalFormulaImpl extends MinimalEObjectImpl.Container implem
     {
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__LEFT_EXPRESSION:
         return left_expression != null;
+      case AnsibleDslPackage.ECONDITIONAL_FORMULA__AND_OR:
+        return AND_OR_EDEFAULT == null ? and_or != null : !AND_OR_EDEFAULT.equals(and_or);
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__RIGHT_EXPRESSION:
         return right_expression != null;
       case AnsibleDslPackage.ECONDITIONAL_FORMULA__NEGATED_EXPRESSION:
         return negated_expression != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (and_or: ");
+    result.append(and_or);
+    result.append(')');
+    return result.toString();
   }
 
 } //EConditionalFormulaImpl

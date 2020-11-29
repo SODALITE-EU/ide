@@ -179,13 +179,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EPARAMETERS:
-      {
-        EParameters eParameters = (EParameters)theEObject;
-        T result = caseEParameters(eParameters);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AnsibleDslPackage.EPARAMETER:
       {
         EParameter eParameter = (EParameter)theEObject;
@@ -680,22 +673,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEModuleCall(EModuleCall object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EParameters</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EParameters</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEParameters(EParameters object)
   {
     return null;
   }

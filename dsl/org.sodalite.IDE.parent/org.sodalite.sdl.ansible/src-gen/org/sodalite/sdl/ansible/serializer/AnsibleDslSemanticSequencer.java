@@ -37,7 +37,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
-import org.sodalite.sdl.ansible.ansibleDsl.EParameters;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
@@ -136,9 +135,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EPARAMETER:
 				sequence_EParameter(context, (EParameter) semanticObject); 
-				return; 
-			case AnsibleDslPackage.EPARAMETERS:
-				sequence_EParameters(context, (EParameters) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EPLAY:
 				sequence_EPlay(context, (EPlay) semanticObject); 
@@ -272,7 +268,38 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EConditionalExpression returns EConditionalExpression
 	 *
 	 * Constraint:
-	 *     ((left_term=EValuePassed right_term=EValuePassed?) | formula=EConditionalFormula | is_true=BOOLEAN)
+	 *     (
+	 *         (
+	 *             left_term=EValuePassed 
+	 *             (
+	 *                 (
+	 *                     (
+	 *                         equality_term='==' | 
+	 *                         equality_term='!=' | 
+	 *                         equality_term='<' | 
+	 *                         equality_term='>' | 
+	 *                         equality_term='<=' | 
+	 *                         equality_term='>='
+	 *                     ) 
+	 *                     right_term=EValuePassed
+	 *                 ) | 
+	 *                 (
+	 *                     is_not='not'? 
+	 *                     (
+	 *                         status='skipped' | 
+	 *                         status='failed' | 
+	 *                         status='succeeded' | 
+	 *                         status='fail' | 
+	 *                         status='success' | 
+	 *                         status='defined' | 
+	 *                         status='undefined'
+	 *                     )
+	 *                 )
+	 *             )
+	 *         ) | 
+	 *         formula=EConditionalFormula | 
+	 *         is_true=BOOLEAN
+	 *     )
 	 */
 	protected void sequence_EConditionalExpression(ISerializationContext context, EConditionalExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -284,7 +311,10 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EConditionalFormula returns EConditionalFormula
 	 *
 	 * Constraint:
-	 *     ((left_expression=EConditionalExpression right_expression=EConditionalExpression) | negated_expression=EConditionalExpression)
+	 *     (
+	 *         (left_expression=EConditionalExpression (and_or='and' | and_or='or') right_expression=EConditionalExpression) | 
+	 *         negated_expression=EConditionalExpression
+	 *     )
 	 */
 	protected void sequence_EConditionalFormula(ISerializationContext context, EConditionalFormula semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -414,7 +444,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         base_common_keywords=EBaseCommonKeywords 
 	 *         exe_common_keywords=EExecutionCommonKeywords 
 	 *         task_handler_common_keywords=ETaskHandlerCommonKeywords 
-	 *         listen_to=[ENotifiedTopic|STRING]?
+	 *         listen_to+=[ENotifiedTopic|STRING]*
 	 *     )
 	 */
 	protected void sequence_EHandler(ISerializationContext context, EHandler semanticObject) {
@@ -467,19 +497,10 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EModuleCall returns EModuleCall
 	 *
 	 * Constraint:
-	 *     (name=ID parameters=EParameters)
+	 *     (name=ID parameters+=EParameter*)
 	 */
 	protected void sequence_EModuleCall(ISerializationContext context, EModuleCall semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EMODULE_CALL__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EMODULE_CALL__NAME));
-			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EMODULE_CALL__PARAMETERS) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EMODULE_CALL__PARAMETERS));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEModuleCallAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEModuleCallAccess().getParametersEParametersParserRuleCall_3_0(), semanticObject.getParameters());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -539,18 +560,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 		feeder.accept(grammarAccess.getEParameterAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getEParameterAccess().getValue_passedEValuePassedParserRuleCall_2_0(), semanticObject.getValue_passed());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     EParameters returns EParameters
-	 *
-	 * Constraint:
-	 *     parameters+=EParameter*
-	 */
-	protected void sequence_EParameters(ISerializationContext context, EParameters semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -727,7 +736,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         asynchronous_settings=EAsynchronousSettings? 
 	 *         args=EDictionary? 
 	 *         module=EModuleCall 
-	 *         notifiable=ENotifiable? 
+	 *         notifiables+=ENotifiable* 
 	 *         loop=ELoop? 
 	 *         register=ERegisterVariable?
 	 *     )
@@ -808,7 +817,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EValue returns EValue
 	 *
 	 * Constraint:
-	 *     {EValue}
+	 *     (value_string=STRING | value_string=BOOLEAN | value_string=NULL | value_int=INT)
 	 */
 	protected void sequence_EValue(ISerializationContext context, EValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -821,18 +830,18 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EVariableDeclaration returns EVariableDeclaration
 	 *
 	 * Constraint:
-	 *     (name=ID value=EValue)
+	 *     (name=ID value_passed=EValue)
 	 */
 	protected void sequence_EVariableDeclaration(ISerializationContext context, EVariableDeclaration semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EDECLARED_VARIABLE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EDECLARED_VARIABLE__NAME));
-			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION__VALUE));
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION__VALUE_PASSED) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION__VALUE_PASSED));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEVariableDeclarationAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEVariableDeclarationAccess().getValueEValueParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getEVariableDeclarationAccess().getValue_passedEValueParserRuleCall_2_0(), semanticObject.getValue_passed());
 		feeder.finish();
 	}
 	

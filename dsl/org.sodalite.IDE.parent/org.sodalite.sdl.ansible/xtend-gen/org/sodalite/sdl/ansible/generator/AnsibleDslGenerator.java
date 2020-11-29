@@ -3,10 +3,54 @@
  */
 package org.sodalite.sdl.ansible.generator;
 
+import com.google.common.collect.Iterables;
+import java.util.ArrayList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EBase;
+import org.sodalite.sdl.ansible.ansibleDsl.EBaseCommonKeywords;
+import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
+import org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula;
+import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
+import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
+import org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords;
+import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
+import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
+import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
+import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
+import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
+import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
+import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
+import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
+import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
+import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
+import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.ETask;
+import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
+import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords;
+import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
+import org.sodalite.sdl.ansible.ansibleDsl.EValue;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 
 /**
  * Generates code from your model files on save.
@@ -17,5 +61,1197 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class AnsibleDslGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    Iterable<EPlaybook> _filter = Iterables.<EPlaybook>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), EPlaybook.class);
+    for (final EPlaybook e : _filter) {
+      String _name = e.getName();
+      String _plus = (_name + ".yaml");
+      fsa.generateFile(_plus, this.compilePlays(e));
+    }
+  }
+  
+  public CharSequence compilePlays(final EPlaybook playbook) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<EPlay> _plays = playbook.getPlays();
+      for(final EPlay play : _plays) {
+        CharSequence _compileBase = this.compileBase(play, "");
+        _builder.append(_compileBase);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileBase(final EBase base, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      String _name = base.getName();
+      boolean _tripleNotEquals = (_name != null);
+      if (_tripleNotEquals) {
+        _builder.append(space);
+        _builder.append("- name: ");
+        String _name_1 = base.getName();
+        _builder.append(_name_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((base instanceof EPlay)) {
+        String _concat = space.concat("  ");
+        _builder.append(_concat);
+        _builder.append("hosts: all");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((base instanceof EBlock)) {
+        String _concat_1 = space.concat("  ");
+        _builder.append(_concat_1);
+        _builder.append("block:");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EBaseCommonKeywords _base_common_keywords = base.getBase_common_keywords();
+      boolean _tripleNotEquals_1 = (_base_common_keywords != null);
+      if (_tripleNotEquals_1) {
+        CharSequence _compileBaseCommonKeywords = this.compileBaseCommonKeywords(base.getBase_common_keywords(), space.concat("  "));
+        _builder.append(_compileBaseCommonKeywords);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((base instanceof EPlay)) {
+        CharSequence _compilePlay = this.compilePlay(((EPlay)base), space.concat("  "));
+        _builder.append(_compilePlay);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((base instanceof EExecution)) {
+        CharSequence _compileExecution = this.compileExecution(((EExecution)base), space.concat("  "));
+        _builder.append(_compileExecution);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compilePlay(final EPlay play, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EPlayExeSettings _play_exe_settings = play.getPlay_exe_settings();
+      boolean _tripleNotEquals = (_play_exe_settings != null);
+      if (_tripleNotEquals) {
+        CharSequence _compilePlayExeSettings = this.compilePlayExeSettings(play.getPlay_exe_settings(), space);
+        _builder.append(_compilePlayExeSettings);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EPlayErrorHandling _error_handling = play.getError_handling();
+      boolean _tripleNotEquals_1 = (_error_handling != null);
+      if (_tripleNotEquals_1) {
+        CharSequence _compilePlayErrorHandling = this.compilePlayErrorHandling(play.getError_handling(), space);
+        _builder.append(_compilePlayErrorHandling);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EFactsSettings _facts_settings = play.getFacts_settings();
+      boolean _tripleNotEquals_2 = (_facts_settings != null);
+      if (_tripleNotEquals_2) {
+        CharSequence _compileFactsSettings = this.compileFactsSettings(play.getFacts_settings(), space);
+        _builder.append(_compileFactsSettings);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      org.sodalite.sdl.ansible.ansibleDsl.EList _vars_files = play.getVars_files();
+      boolean _tripleNotEquals_3 = (_vars_files != null);
+      if (_tripleNotEquals_3) {
+        _builder.append(space);
+        _builder.append("vars_files: ");
+        ArrayList<Object> _compileList = this.compileList(play.getVars_files());
+        _builder.append(_compileList);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      org.sodalite.sdl.ansible.ansibleDsl.EList _vars_prompt = play.getVars_prompt();
+      boolean _tripleNotEquals_4 = (_vars_prompt != null);
+      if (_tripleNotEquals_4) {
+        _builder.append(space);
+        _builder.append("vars_prompt: ");
+        ArrayList<Object> _compileList_1 = this.compileList(play.getVars_prompt());
+        _builder.append(_compileList_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _force_handlers = play.getForce_handlers();
+      boolean _tripleNotEquals_5 = (_force_handlers != null);
+      if (_tripleNotEquals_5) {
+        _builder.append(space);
+        _builder.append("force_handlers: ");
+        String _force_handlers_1 = play.getForce_handlers();
+        _builder.append(_force_handlers_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      int _size = play.getPre_tasks_list().size();
+      boolean _tripleNotEquals_6 = (_size != 0);
+      if (_tripleNotEquals_6) {
+        _builder.append(space);
+        _builder.append("pre_tasks:");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<EBlockTask> _pre_tasks_list = play.getPre_tasks_list();
+          for(final EBlockTask blockTask : _pre_tasks_list) {
+            CharSequence _compileBlockTask = this.compileBlockTask(blockTask, space.concat("  "));
+            _builder.append(_compileBlockTask);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      int _size_1 = play.getTasks_list().size();
+      boolean _tripleNotEquals_7 = (_size_1 != 0);
+      if (_tripleNotEquals_7) {
+        _builder.append(space);
+        _builder.append("tasks:");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<EBlockTask> _tasks_list = play.getTasks_list();
+          for(final EBlockTask blockTask_1 : _tasks_list) {
+            CharSequence _compileBlockTask_1 = this.compileBlockTask(blockTask_1, space.concat("  "));
+            _builder.append(_compileBlockTask_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      int _size_2 = play.getPost_tasks_list().size();
+      boolean _tripleNotEquals_8 = (_size_2 != 0);
+      if (_tripleNotEquals_8) {
+        _builder.append(space);
+        _builder.append("post_tasks:");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<EBlockTask> _post_tasks_list = play.getPost_tasks_list();
+          for(final EBlockTask blockTask_2 : _post_tasks_list) {
+            CharSequence _compileBlockTask_2 = this.compileBlockTask(blockTask_2, space.concat("  "));
+            _builder.append(_compileBlockTask_2);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      int _size_3 = play.getHandlers().size();
+      boolean _tripleNotEquals_9 = (_size_3 != 0);
+      if (_tripleNotEquals_9) {
+        _builder.append(space);
+        _builder.append("handlers:");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<EHandler> _handlers = play.getHandlers();
+          for(final EHandler handler : _handlers) {
+            Object _compileBase = this.compileBase(handler, space.concat("  "));
+            _builder.append(_compileBase);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileExecution(final EExecution execution, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EExecutionCommonKeywords _exe_common_keywords = execution.getExe_common_keywords();
+      boolean _tripleNotEquals = (_exe_common_keywords != null);
+      if (_tripleNotEquals) {
+        CharSequence _compileExecutionCommonKeywords = this.compileExecutionCommonKeywords(execution.getExe_common_keywords(), space);
+        _builder.append(_compileExecutionCommonKeywords);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((execution instanceof EBlock)) {
+        CharSequence _compileBlock = this.compileBlock(((EBlock)execution), space);
+        _builder.append(_compileBlock);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((execution instanceof ETaskHandler)) {
+        CharSequence _compileTaskHandler = this.compileTaskHandler(((ETaskHandler)execution), space);
+        _builder.append(_compileTaskHandler);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileBaseCommonKeywords(final EBaseCommonKeywords baseCommonKeywords, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EPrivilageEscalation _privilage_escalation = baseCommonKeywords.getPrivilage_escalation();
+      boolean _tripleNotEquals = (_privilage_escalation != null);
+      if (_tripleNotEquals) {
+        {
+          String _become = baseCommonKeywords.getPrivilage_escalation().getBecome();
+          boolean _tripleNotEquals_1 = (_become != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(space);
+            _builder.append("become: ");
+            String _become_1 = baseCommonKeywords.getPrivilage_escalation().getBecome();
+            _builder.append(_become_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _become_exe = baseCommonKeywords.getPrivilage_escalation().getBecome_exe();
+          boolean _tripleNotEquals_2 = (_become_exe != null);
+          if (_tripleNotEquals_2) {
+            _builder.append(space);
+            _builder.append("become_exe: ");
+            String _become_exe_1 = baseCommonKeywords.getPrivilage_escalation().getBecome_exe();
+            _builder.append(_become_exe_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _become_flags = baseCommonKeywords.getPrivilage_escalation().getBecome_flags();
+          boolean _tripleNotEquals_3 = (_become_flags != null);
+          if (_tripleNotEquals_3) {
+            _builder.append(space);
+            _builder.append("become_flags: ");
+            String _become_flags_1 = baseCommonKeywords.getPrivilage_escalation().getBecome_flags();
+            _builder.append(_become_flags_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _become_method = baseCommonKeywords.getPrivilage_escalation().getBecome_method();
+          boolean _tripleNotEquals_4 = (_become_method != null);
+          if (_tripleNotEquals_4) {
+            _builder.append(space);
+            _builder.append("become_method: ");
+            String _become_method_1 = baseCommonKeywords.getPrivilage_escalation().getBecome_method();
+            _builder.append(_become_method_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _become_user = baseCommonKeywords.getPrivilage_escalation().getBecome_user();
+          boolean _tripleNotEquals_5 = (_become_user != null);
+          if (_tripleNotEquals_5) {
+            _builder.append(space);
+            _builder.append("become_user: ");
+            String _become_user_1 = baseCommonKeywords.getPrivilage_escalation().getBecome_user();
+            _builder.append(_become_user_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      EValidationMode _validation_mode = baseCommonKeywords.getValidation_mode();
+      boolean _tripleNotEquals_6 = (_validation_mode != null);
+      if (_tripleNotEquals_6) {
+        {
+          String _check_mode = baseCommonKeywords.getValidation_mode().getCheck_mode();
+          boolean _tripleNotEquals_7 = (_check_mode != null);
+          if (_tripleNotEquals_7) {
+            _builder.append(space);
+            _builder.append("check_moode: ");
+            String _check_mode_1 = baseCommonKeywords.getValidation_mode().getCheck_mode();
+            _builder.append(_check_mode_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _diff = baseCommonKeywords.getValidation_mode().getDiff();
+          boolean _tripleNotEquals_8 = (_diff != null);
+          if (_tripleNotEquals_8) {
+            _builder.append(space);
+            _builder.append("diff: ");
+            String _diff_1 = baseCommonKeywords.getValidation_mode().getDiff();
+            _builder.append(_diff_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      EConnection _connection = baseCommonKeywords.getConnection();
+      boolean _tripleNotEquals_9 = (_connection != null);
+      if (_tripleNotEquals_9) {
+        {
+          String _connection_1 = baseCommonKeywords.getConnection().getConnection();
+          boolean _tripleNotEquals_10 = (_connection_1 != null);
+          if (_tripleNotEquals_10) {
+            _builder.append(space);
+            _builder.append("connection: ");
+            String _connection_2 = baseCommonKeywords.getConnection().getConnection();
+            _builder.append(_connection_2);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _string = Integer.valueOf(baseCommonKeywords.getConnection().getPort()).toString();
+          boolean _tripleNotEquals_11 = (_string != null);
+          if (_tripleNotEquals_11) {
+            _builder.append(space);
+            _builder.append("port: ");
+            int _port = baseCommonKeywords.getConnection().getPort();
+            _builder.append(_port);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _remote_user = baseCommonKeywords.getConnection().getRemote_user();
+          boolean _tripleNotEquals_12 = (_remote_user != null);
+          if (_tripleNotEquals_12) {
+            _builder.append(space);
+            _builder.append("remote_user: ");
+            String _remote_user_1 = baseCommonKeywords.getConnection().getRemote_user();
+            _builder.append(_remote_user_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      String _no_log = baseCommonKeywords.getNo_log();
+      boolean _tripleNotEquals_13 = (_no_log != null);
+      if (_tripleNotEquals_13) {
+        _builder.append(space);
+        _builder.append("no_log: ");
+        String _no_log_1 = baseCommonKeywords.getNo_log();
+        _builder.append(_no_log_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _debugger = baseCommonKeywords.getDebugger();
+      boolean _tripleNotEquals_14 = (_debugger != null);
+      if (_tripleNotEquals_14) {
+        _builder.append(space);
+        _builder.append("debugger: ");
+        String _debugger_1 = baseCommonKeywords.getDebugger();
+        _builder.append(_debugger_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      org.sodalite.sdl.ansible.ansibleDsl.EList _module_defaults = baseCommonKeywords.getModule_defaults();
+      boolean _tripleNotEquals_15 = (_module_defaults != null);
+      if (_tripleNotEquals_15) {
+        _builder.append(space);
+        _builder.append("module_defaults: ");
+        ArrayList<Object> _compileList = this.compileList(baseCommonKeywords.getModule_defaults());
+        _builder.append(_compileList);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      org.sodalite.sdl.ansible.ansibleDsl.EList _environment = baseCommonKeywords.getEnvironment();
+      boolean _tripleNotEquals_16 = (_environment != null);
+      if (_tripleNotEquals_16) {
+        _builder.append(space);
+        _builder.append("environment: ");
+        ArrayList<Object> _compileList_1 = this.compileList(baseCommonKeywords.getEnvironment());
+        _builder.append(_compileList_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      org.sodalite.sdl.ansible.ansibleDsl.EList _collections = baseCommonKeywords.getCollections();
+      boolean _tripleNotEquals_17 = (_collections != null);
+      if (_tripleNotEquals_17) {
+        _builder.append(space);
+        _builder.append("collections: ");
+        ArrayList<Object> _compileList_2 = this.compileList(baseCommonKeywords.getCollections());
+        _builder.append(_compileList_2);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      org.sodalite.sdl.ansible.ansibleDsl.EList _tags = baseCommonKeywords.getTags();
+      boolean _tripleNotEquals_18 = (_tags != null);
+      if (_tripleNotEquals_18) {
+        _builder.append(space);
+        _builder.append("tags: ");
+        ArrayList<Object> _compileList_3 = this.compileList(baseCommonKeywords.getTags());
+        _builder.append(_compileList_3);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      int _size = baseCommonKeywords.getVariable_declarations().size();
+      boolean _tripleNotEquals_19 = (_size != 0);
+      if (_tripleNotEquals_19) {
+        _builder.append(space);
+        _builder.append("vars: ");
+        String _compileVariableDeclarations = this.compileVariableDeclarations(baseCommonKeywords);
+        _builder.append(_compileVariableDeclarations);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compilePlayExeSettings(final EPlayExeSettings playExeSettings, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      String _strategy = playExeSettings.getStrategy();
+      boolean _tripleNotEquals = (_strategy != null);
+      if (_tripleNotEquals) {
+        _builder.append(space);
+        _builder.append("strategy: ");
+        String _strategy_1 = playExeSettings.getStrategy();
+        _builder.append(_strategy_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      org.sodalite.sdl.ansible.ansibleDsl.EList _serial_list = playExeSettings.getSerial_list();
+      boolean _tripleNotEquals_1 = (_serial_list != null);
+      if (_tripleNotEquals_1) {
+        _builder.append(space);
+        _builder.append("serial: ");
+        ArrayList<Object> _compileList = this.compileList(playExeSettings.getSerial_list());
+        _builder.append(_compileList);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _order = playExeSettings.getOrder();
+      boolean _tripleNotEquals_2 = (_order != null);
+      if (_tripleNotEquals_2) {
+        _builder.append(space);
+        _builder.append("order: ");
+        String _order_1 = playExeSettings.getOrder();
+        _builder.append(_order_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      int _throttle = playExeSettings.getThrottle();
+      boolean _tripleNotEquals_3 = (_throttle != 0);
+      if (_tripleNotEquals_3) {
+        _builder.append(space);
+        _builder.append("throttle: ");
+        int _throttle_1 = playExeSettings.getThrottle();
+        _builder.append(_throttle_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _run_once = playExeSettings.getRun_once();
+      boolean _tripleNotEquals_4 = (_run_once != null);
+      if (_tripleNotEquals_4) {
+        _builder.append(space);
+        _builder.append("run_once: ");
+        String _run_once_1 = playExeSettings.getRun_once();
+        _builder.append(_run_once_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compilePlayErrorHandling(final EPlayErrorHandling playErrorHandling, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      int _max_fail_percentage = playErrorHandling.getMax_fail_percentage();
+      boolean _tripleNotEquals = (_max_fail_percentage != 0);
+      if (_tripleNotEquals) {
+        _builder.append(space);
+        _builder.append("max_fail_percentage: ");
+        int _max_fail_percentage_1 = playErrorHandling.getMax_fail_percentage();
+        _builder.append(_max_fail_percentage_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _any_errors_fatal = playErrorHandling.getAny_errors_fatal();
+      boolean _tripleNotEquals_1 = (_any_errors_fatal != null);
+      if (_tripleNotEquals_1) {
+        _builder.append(space);
+        _builder.append("any_errors_fatal: ");
+        String _any_errors_fatal_1 = playErrorHandling.getAny_errors_fatal();
+        _builder.append(_any_errors_fatal_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _ignore_errors = playErrorHandling.getIgnore_errors();
+      boolean _tripleNotEquals_2 = (_ignore_errors != null);
+      if (_tripleNotEquals_2) {
+        _builder.append(space);
+        _builder.append("ignore_errors: ");
+        String _ignore_errors_1 = playErrorHandling.getIgnore_errors();
+        _builder.append(_ignore_errors_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _ignore_unreachable = playErrorHandling.getIgnore_unreachable();
+      boolean _tripleNotEquals_3 = (_ignore_unreachable != null);
+      if (_tripleNotEquals_3) {
+        _builder.append(space);
+        _builder.append("ignore_unreachable: ");
+        String _ignore_unreachable_1 = playErrorHandling.getIgnore_unreachable();
+        _builder.append(_ignore_unreachable_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileFactsSettings(final EFactsSettings factsSettings, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      String _gather_facts = factsSettings.getGather_facts();
+      boolean _tripleNotEquals = (_gather_facts != null);
+      if (_tripleNotEquals) {
+        _builder.append(space);
+        _builder.append("gather_facts: ");
+        String _gather_facts_1 = factsSettings.getGather_facts();
+        _builder.append(_gather_facts_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      org.sodalite.sdl.ansible.ansibleDsl.EList _gather_subset = factsSettings.getGather_subset();
+      boolean _tripleNotEquals_1 = (_gather_subset != null);
+      if (_tripleNotEquals_1) {
+        _builder.append(space);
+        _builder.append("gather_subset: ");
+        ArrayList<Object> _compileList = this.compileList(factsSettings.getGather_subset());
+        _builder.append(_compileList);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      int _gather_timeout = factsSettings.getGather_timeout();
+      boolean _tripleNotEquals_2 = (_gather_timeout != 0);
+      if (_tripleNotEquals_2) {
+        _builder.append(space);
+        _builder.append("gather_timeout: ");
+        int _gather_timeout_1 = factsSettings.getGather_timeout();
+        _builder.append(_gather_timeout_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _fact_path = factsSettings.getFact_path();
+      boolean _tripleNotEquals_3 = (_fact_path != null);
+      if (_tripleNotEquals_3) {
+        _builder.append(space);
+        _builder.append("fact_path: ");
+        String _fact_path_1 = factsSettings.getFact_path();
+        _builder.append(_fact_path_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileBlockTask(final EBlockTask blockTask, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    final String newSpace = space.concat("  ");
+    _builder.newLineIfNotEmpty();
+    final String newSpaceIndented = newSpace.concat("  ");
+    _builder.newLineIfNotEmpty();
+    {
+      if ((blockTask instanceof EBlock)) {
+        {
+          String _name = ((EBlock)blockTask).getName();
+          boolean _tripleNotEquals = (_name != null);
+          if (_tripleNotEquals) {
+            _builder.append(space);
+            _builder.append("- name: ");
+            String _name_1 = ((EBlock)blockTask).getName();
+            _builder.append(_name_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append(newSpace);
+        _builder.append("block: ");
+        _builder.newLineIfNotEmpty();
+        {
+          EBaseCommonKeywords _base_common_keywords = ((EBlock)blockTask).getBase_common_keywords();
+          boolean _tripleNotEquals_1 = (_base_common_keywords != null);
+          if (_tripleNotEquals_1) {
+            CharSequence _compileBaseCommonKeywords = this.compileBaseCommonKeywords(((EBlock)blockTask).getBase_common_keywords(), newSpaceIndented);
+            _builder.append(_compileBaseCommonKeywords);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EExecutionCommonKeywords _exe_common_keywords = ((EBlock)blockTask).getExe_common_keywords();
+          boolean _tripleNotEquals_2 = (_exe_common_keywords != null);
+          if (_tripleNotEquals_2) {
+            CharSequence _compileExecutionCommonKeywords = this.compileExecutionCommonKeywords(((EBlock)blockTask).getExe_common_keywords(), newSpaceIndented);
+            _builder.append(_compileExecutionCommonKeywords);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        CharSequence _compileBlock = this.compileBlock(((EBlock)blockTask), newSpaceIndented);
+        _builder.append(_compileBlock);
+        _builder.append("\t\t\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((blockTask instanceof ETask)) {
+        {
+          String _name_2 = ((ETask)blockTask).getName();
+          boolean _tripleNotEquals_3 = (_name_2 != null);
+          if (_tripleNotEquals_3) {
+            _builder.append(space);
+            _builder.append("- name: ");
+            String _name_3 = ((ETask)blockTask).getName();
+            _builder.append(_name_3);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EBaseCommonKeywords _base_common_keywords_1 = ((ETask)blockTask).getBase_common_keywords();
+          boolean _tripleNotEquals_4 = (_base_common_keywords_1 != null);
+          if (_tripleNotEquals_4) {
+            CharSequence _compileBaseCommonKeywords_1 = this.compileBaseCommonKeywords(((ETask)blockTask).getBase_common_keywords(), newSpace);
+            _builder.append(_compileBaseCommonKeywords_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EExecutionCommonKeywords _exe_common_keywords_1 = ((ETask)blockTask).getExe_common_keywords();
+          boolean _tripleNotEquals_5 = (_exe_common_keywords_1 != null);
+          if (_tripleNotEquals_5) {
+            CharSequence _compileExecutionCommonKeywords_1 = this.compileExecutionCommonKeywords(((ETask)blockTask).getExe_common_keywords(), newSpace);
+            _builder.append(_compileExecutionCommonKeywords_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          ETaskHandlerCommonKeywords _task_handler_common_keywords = ((ETask)blockTask).getTask_handler_common_keywords();
+          boolean _tripleNotEquals_6 = (_task_handler_common_keywords != null);
+          if (_tripleNotEquals_6) {
+            CharSequence _compileTaskHandlerCommonKeywords = this.compileTaskHandlerCommonKeywords(((ETask)blockTask).getTask_handler_common_keywords(), newSpace);
+            _builder.append(_compileTaskHandlerCommonKeywords);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileBlock(final EBlock block, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EBlockErrorHandling _error_handling = block.getError_handling();
+      boolean _tripleNotEquals = (_error_handling != null);
+      if (_tripleNotEquals) {
+        {
+          String _any_errors_fatal = block.getError_handling().getAny_errors_fatal();
+          boolean _tripleNotEquals_1 = (_any_errors_fatal != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(space);
+            _builder.append("any_errors_fatal: ");
+            String _any_errors_fatal_1 = block.getError_handling().getAny_errors_fatal();
+            _builder.append(_any_errors_fatal_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _ignore_errors = block.getError_handling().getIgnore_errors();
+          boolean _tripleNotEquals_2 = (_ignore_errors != null);
+          if (_tripleNotEquals_2) {
+            _builder.append(space);
+            _builder.append("ignore_errors: ");
+            String _ignore_errors_1 = block.getError_handling().getIgnore_errors();
+            _builder.append(_ignore_errors_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _ignore_unreachable = block.getError_handling().getIgnore_unreachable();
+          boolean _tripleNotEquals_3 = (_ignore_unreachable != null);
+          if (_tripleNotEquals_3) {
+            _builder.append(space);
+            _builder.append("ignore_unreachable: ");
+            String _ignore_unreachable_1 = block.getError_handling().getIgnore_unreachable();
+            _builder.append(_ignore_unreachable_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      int _size = block.getTasks().size();
+      boolean _tripleNotEquals_4 = (_size != 0);
+      if (_tripleNotEquals_4) {
+        {
+          EList<ETask> _tasks = block.getTasks();
+          for(final ETask task : _tasks) {
+            Object _compileBase = this.compileBase(task, space);
+            _builder.append(_compileBase);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      int _size_1 = block.getRescue_tasks().size();
+      boolean _tripleNotEquals_5 = (_size_1 != 0);
+      if (_tripleNotEquals_5) {
+        _builder.append(space);
+        _builder.append("rescue: ");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<ETask> _rescue_tasks = block.getRescue_tasks();
+          for(final ETask task_1 : _rescue_tasks) {
+            Object _compileBase_1 = this.compileBase(task_1, space);
+            _builder.append(_compileBase_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      int _size_2 = block.getAlways_tasks().size();
+      boolean _tripleNotEquals_6 = (_size_2 != 0);
+      if (_tripleNotEquals_6) {
+        _builder.append(space);
+        _builder.append("always: ");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<ETask> _always_tasks = block.getAlways_tasks();
+          for(final ETask task_2 : _always_tasks) {
+            Object _compileBase_2 = this.compileBase(task_2, space);
+            _builder.append(_compileBase_2);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileExecutionCommonKeywords(final EExecutionCommonKeywords executionCommonKeywords, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EExecutionExeSettings _exe_settings = executionCommonKeywords.getExe_settings();
+      boolean _tripleNotEquals = (_exe_settings != null);
+      if (_tripleNotEquals) {
+        {
+          int _throttle = executionCommonKeywords.getExe_settings().getThrottle();
+          boolean _notEquals = (_throttle != 0);
+          if (_notEquals) {
+            _builder.append(space);
+            _builder.append("throttle: ");
+            int _throttle_1 = executionCommonKeywords.getExe_settings().getThrottle();
+            _builder.append(_throttle_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _run_once = executionCommonKeywords.getExe_settings().getRun_once();
+          boolean _tripleNotEquals_1 = (_run_once != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(space);
+            _builder.append("run_once: ");
+            String _run_once_1 = executionCommonKeywords.getExe_settings().getRun_once();
+            _builder.append(_run_once_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      EDelegation _delegation = executionCommonKeywords.getDelegation();
+      boolean _tripleNotEquals_2 = (_delegation != null);
+      if (_tripleNotEquals_2) {
+        {
+          String _delegate_to = executionCommonKeywords.getDelegation().getDelegate_to();
+          boolean _tripleNotEquals_3 = (_delegate_to != null);
+          if (_tripleNotEquals_3) {
+            _builder.append(space);
+            _builder.append("delegate_to: ");
+            String _delegate_to_1 = executionCommonKeywords.getDelegation().getDelegate_to();
+            _builder.append(_delegate_to_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _delegate_facts = executionCommonKeywords.getDelegation().getDelegate_facts();
+          boolean _tripleNotEquals_4 = (_delegate_facts != null);
+          if (_tripleNotEquals_4) {
+            _builder.append(space);
+            _builder.append("delegate_facts: ");
+            String _delegate_facts_1 = executionCommonKeywords.getDelegation().getDelegate_facts();
+            _builder.append(_delegate_facts_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      EConditionalExpression _when_expression = executionCommonKeywords.getWhen_expression();
+      boolean _tripleNotEquals_5 = (_when_expression != null);
+      if (_tripleNotEquals_5) {
+        _builder.append(space);
+        _builder.append("when: ");
+        String _compileConditionalExpression = this.compileConditionalExpression(executionCommonKeywords.getWhen_expression());
+        _builder.append(_compileConditionalExpression);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileTaskHandler(final ETaskHandler taskHandler, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      ETaskHandlerCommonKeywords _task_handler_common_keywords = taskHandler.getTask_handler_common_keywords();
+      boolean _tripleNotEquals = (_task_handler_common_keywords != null);
+      if (_tripleNotEquals) {
+        CharSequence _compileTaskHandlerCommonKeywords = this.compileTaskHandlerCommonKeywords(taskHandler.getTask_handler_common_keywords(), space);
+        _builder.append(_compileTaskHandlerCommonKeywords);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((taskHandler instanceof EHandler)) {
+        {
+          EList<ENotifiedTopic> _listen_to = ((EHandler)taskHandler).getListen_to();
+          boolean _tripleNotEquals_1 = (_listen_to != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(space);
+            _builder.append("listen: ");
+            ArrayList<String> _compileNotifiedTopics = this.compileNotifiedTopics(((EHandler)taskHandler));
+            _builder.append(_compileNotifiedTopics);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileTaskHandlerCommonKeywords(final ETaskHandlerCommonKeywords taskHandlerCommonKeywords, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      ETaskHandlerErrorHandling _error_handling = taskHandlerCommonKeywords.getError_handling();
+      boolean _tripleNotEquals = (_error_handling != null);
+      if (_tripleNotEquals) {
+        {
+          EConditionalExpression _changed_when = taskHandlerCommonKeywords.getError_handling().getChanged_when();
+          boolean _tripleNotEquals_1 = (_changed_when != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(space);
+            _builder.append("change_when: ");
+            EConditionalExpression _changed_when_1 = taskHandlerCommonKeywords.getError_handling().getChanged_when();
+            _builder.append(_changed_when_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EConditionalExpression _failed_when = taskHandlerCommonKeywords.getError_handling().getFailed_when();
+          boolean _tripleNotEquals_2 = (_failed_when != null);
+          if (_tripleNotEquals_2) {
+            _builder.append(space);
+            _builder.append("failed_when: ");
+            EConditionalExpression _failed_when_1 = taskHandlerCommonKeywords.getError_handling().getFailed_when();
+            _builder.append(_failed_when_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _any_errors_fatal = taskHandlerCommonKeywords.getError_handling().getAny_errors_fatal();
+          boolean _tripleNotEquals_3 = (_any_errors_fatal != null);
+          if (_tripleNotEquals_3) {
+            _builder.append(space);
+            _builder.append("any_errors_fatal: ");
+            String _any_errors_fatal_1 = taskHandlerCommonKeywords.getError_handling().getAny_errors_fatal();
+            _builder.append(_any_errors_fatal_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _ignore_errors = taskHandlerCommonKeywords.getError_handling().getIgnore_errors();
+          boolean _tripleNotEquals_4 = (_ignore_errors != null);
+          if (_tripleNotEquals_4) {
+            _builder.append(space);
+            _builder.append("ignore_errors: ");
+            String _ignore_errors_1 = taskHandlerCommonKeywords.getError_handling().getIgnore_errors();
+            _builder.append(_ignore_errors_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _ignore_unreachable = taskHandlerCommonKeywords.getError_handling().getIgnore_unreachable();
+          boolean _tripleNotEquals_5 = (_ignore_unreachable != null);
+          if (_tripleNotEquals_5) {
+            _builder.append(space);
+            _builder.append("ignore_unreachable: ");
+            String _ignore_unreachable_1 = taskHandlerCommonKeywords.getError_handling().getIgnore_unreachable();
+            _builder.append(_ignore_unreachable_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      String _action = taskHandlerCommonKeywords.getAction();
+      boolean _tripleNotEquals_6 = (_action != null);
+      if (_tripleNotEquals_6) {
+        _builder.append(space);
+        _builder.append("action: ");
+        String _action_1 = taskHandlerCommonKeywords.getAction();
+        _builder.append(_action_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EAsynchronousSettings _asynchronous_settings = taskHandlerCommonKeywords.getAsynchronous_settings();
+      boolean _tripleNotEquals_7 = (_asynchronous_settings != null);
+      if (_tripleNotEquals_7) {
+        {
+          int _async = taskHandlerCommonKeywords.getAsynchronous_settings().getAsync();
+          boolean _tripleNotEquals_8 = (_async != 0);
+          if (_tripleNotEquals_8) {
+            _builder.append(space);
+            _builder.append("async: ");
+            int _async_1 = taskHandlerCommonKeywords.getAsynchronous_settings().getAsync();
+            _builder.append(_async_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          int _poll = taskHandlerCommonKeywords.getAsynchronous_settings().getPoll();
+          boolean _tripleNotEquals_9 = (_poll != 0);
+          if (_tripleNotEquals_9) {
+            _builder.append(space);
+            _builder.append("poll: ");
+            int _poll_1 = taskHandlerCommonKeywords.getAsynchronous_settings().getPoll();
+            _builder.append(_poll_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      EDictionary _args = taskHandlerCommonKeywords.getArgs();
+      boolean _tripleNotEquals_10 = (_args != null);
+      if (_tripleNotEquals_10) {
+        _builder.append(space);
+        _builder.append("args: ");
+        Object _compileValue = this.compileValue(taskHandlerCommonKeywords.getArgs());
+        _builder.append(_compileValue);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EModuleCall _module = taskHandlerCommonKeywords.getModule();
+      boolean _tripleNotEquals_11 = (_module != null);
+      if (_tripleNotEquals_11) {
+        _builder.append(space);
+        String _name = taskHandlerCommonKeywords.getModule().getName();
+        _builder.append(_name);
+        _builder.append(":");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<EParameter> _parameters = taskHandlerCommonKeywords.getModule().getParameters();
+          for(final EParameter parameter : _parameters) {
+            String _concat = space.concat("  ");
+            _builder.append(_concat);
+            String _name_1 = parameter.getName();
+            _builder.append(_name_1);
+            _builder.append(": ");
+            String _compileValuePassed = this.compileValuePassed(parameter.getValue_passed());
+            _builder.append(_compileValuePassed);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      int _size = taskHandlerCommonKeywords.getNotifiables().size();
+      boolean _tripleNotEquals_12 = (_size != 0);
+      if (_tripleNotEquals_12) {
+        _builder.append(space);
+        _builder.append("notify: ");
+        ArrayList<String> _compileNotifiables = this.compileNotifiables(taskHandlerCommonKeywords);
+        _builder.append(_compileNotifiables);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      ELoop _loop = taskHandlerCommonKeywords.getLoop();
+      boolean _tripleNotEquals_13 = (_loop != null);
+      if (_tripleNotEquals_13) {
+        _builder.append("\t");
+        _builder.newLine();
+      }
+    }
+    {
+      ERegisterVariable _register = taskHandlerCommonKeywords.getRegister();
+      boolean _tripleNotEquals_14 = (_register != null);
+      if (_tripleNotEquals_14) {
+        _builder.append(space);
+        _builder.append("register: ");
+        String _name_2 = taskHandlerCommonKeywords.getRegister().getName();
+        _builder.append(_name_2);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public ArrayList<String> compileNotifiables(final ETaskHandlerCommonKeywords taskHandlerCommonKeywords) {
+    ArrayList<String> newList = new ArrayList<String>();
+    EList<ENotifiable> _notifiables = taskHandlerCommonKeywords.getNotifiables();
+    for (final ENotifiable notifiable : _notifiables) {
+      if ((notifiable instanceof ENotifiedTopic)) {
+        newList.add("\"".concat(((ENotifiedTopic)notifiable).getName()).concat("\""));
+      } else {
+        if ((notifiable instanceof ENotifiedHandler)) {
+          newList.add(((ENotifiedHandler)notifiable).getName().getName());
+        }
+      }
+    }
+    return newList;
+  }
+  
+  public ArrayList<String> compileNotifiedTopics(final EHandler handler) {
+    ArrayList<String> newList = new ArrayList<String>();
+    EList<ENotifiedTopic> _listen_to = handler.getListen_to();
+    for (final ENotifiedTopic listenedTopic : _listen_to) {
+      newList.add("\"".concat(listenedTopic.getName()).concat("\""));
+    }
+    return newList;
+  }
+  
+  public String compileConditionalExpression(final EConditionalExpression conditionalExpression) {
+    if ((((conditionalExpression.getLeft_term() != null) && (conditionalExpression.getEquality_term() != null)) && (conditionalExpression.getRight_term() != null))) {
+      return this.compileValuePassed(conditionalExpression.getLeft_term()).concat(" ").concat(conditionalExpression.getEquality_term()).concat(" ").concat(this.compileValuePassed(conditionalExpression.getRight_term()));
+    } else {
+      if (((conditionalExpression.getLeft_term() != null) && (conditionalExpression.getStatus() != null))) {
+        String _is_not = conditionalExpression.getIs_not();
+        boolean _tripleNotEquals = (_is_not != null);
+        if (_tripleNotEquals) {
+          return this.compileValuePassed(conditionalExpression.getLeft_term()).concat(" is not ").concat(conditionalExpression.getStatus());
+        } else {
+          return this.compileValuePassed(conditionalExpression.getLeft_term()).concat(" is ").concat(conditionalExpression.getStatus());
+        }
+      } else {
+        EConditionalFormula _formula = conditionalExpression.getFormula();
+        boolean _tripleNotEquals_1 = (_formula != null);
+        if (_tripleNotEquals_1) {
+          return this.compileConditionalFormula(conditionalExpression.getFormula());
+        } else {
+          String _is_true = conditionalExpression.getIs_true();
+          boolean _tripleNotEquals_2 = (_is_true != null);
+          if (_tripleNotEquals_2) {
+            return conditionalExpression.getIs_true();
+          }
+        }
+      }
+    }
+    return null;
+  }
+  
+  public String compileConditionalFormula(final EConditionalFormula conditionalFormula) {
+    if ((((conditionalFormula.getLeft_expression() != null) && (conditionalFormula.getAnd_or() != null)) && (conditionalFormula.getRight_expression() != null))) {
+      Object _compileConditionalExpression = this.compileConditionalExpression(conditionalFormula.getLeft_expression());
+      Object _compileConditionalExpression_1 = this.compileConditionalExpression(conditionalFormula.getRight_expression());
+      return "(".concat(((String) _compileConditionalExpression)).concat(") ").concat(conditionalFormula.getAnd_or()).concat(" (").concat(((String) _compileConditionalExpression_1)).concat(")");
+    } else {
+      EConditionalExpression _negated_expression = conditionalFormula.getNegated_expression();
+      boolean _tripleNotEquals = (_negated_expression != null);
+      if (_tripleNotEquals) {
+        Object _compileConditionalExpression_2 = this.compileConditionalExpression(conditionalFormula.getNegated_expression());
+        return "not (".concat(((String) _compileConditionalExpression_2)).concat(")");
+      }
+    }
+    return null;
+  }
+  
+  public ArrayList<Object> compileList(final org.sodalite.sdl.ansible.ansibleDsl.EList list) {
+    ArrayList<Object> newList = new ArrayList<Object>();
+    EList<EValue> _elements = list.getElements();
+    for (final EValue element : _elements) {
+      newList.add(this.compileValue(element));
+    }
+    return newList;
+  }
+  
+  public String compileValuePassed(final EValuePassed valuePassed) {
+    if ((valuePassed instanceof EValue)) {
+      return this.compileValue(((EValue)valuePassed)).toString();
+    } else {
+      if ((valuePassed instanceof EFilteredVariable)) {
+        String filteredVariableString = "\"{{ ".concat(((EFilteredVariable)valuePassed).getVariable().getName());
+        EList<String> _filter_commands = ((EFilteredVariable)valuePassed).getFilter_commands();
+        for (final String filterCommand : _filter_commands) {
+          filteredVariableString.concat("| ").concat(filterCommand);
+        }
+        filteredVariableString = filteredVariableString.concat(" }}\"");
+        return filteredVariableString;
+      }
+    }
+    return null;
+  }
+  
+  public Object compileValue(final EValue value) {
+    if ((value instanceof EDictionary)) {
+      String dictionaryString = "{";
+      EList<EDictionaryPair> _dictionary_pairs = ((EDictionary)value).getDictionary_pairs();
+      for (final EDictionaryPair dictionary_pair : _dictionary_pairs) {
+        dictionaryString = dictionaryString.concat(dictionary_pair.getKey()).concat(": ").concat(this.compileValue(dictionary_pair.getValue()).toString()).concat(", ");
+      }
+      int _length = dictionaryString.length();
+      int _minus = (_length - 2);
+      dictionaryString = dictionaryString.substring(0, _minus);
+      dictionaryString = dictionaryString.concat("}");
+      return dictionaryString;
+    } else {
+      if ((value instanceof org.sodalite.sdl.ansible.ansibleDsl.EList)) {
+        return this.compileList(((org.sodalite.sdl.ansible.ansibleDsl.EList)value));
+      } else {
+        String _value_string = value.getValue_string();
+        boolean _tripleNotEquals = (_value_string != null);
+        if (_tripleNotEquals) {
+          return value.getValue_string();
+        } else {
+          return Integer.valueOf(value.getValue_int());
+        }
+      }
+    }
+  }
+  
+  public String compileVariableDeclarations(final EBaseCommonKeywords baseCommonKeywords) {
+    String variableDeclarationsString = "{";
+    EList<EVariableDeclaration> _variable_declarations = baseCommonKeywords.getVariable_declarations();
+    for (final EVariableDeclaration variable_declaration : _variable_declarations) {
+      variableDeclarationsString = variableDeclarationsString.concat(variable_declaration.getName()).concat(": ").concat(this.compileValue(variable_declaration.getValue_passed()).toString()).concat(", ");
+    }
+    int _length = variableDeclarationsString.length();
+    int _minus = (_length - 2);
+    variableDeclarationsString = variableDeclarationsString.substring(0, _minus);
+    variableDeclarationsString = variableDeclarationsString.concat("}");
+    return variableDeclarationsString;
   }
 }

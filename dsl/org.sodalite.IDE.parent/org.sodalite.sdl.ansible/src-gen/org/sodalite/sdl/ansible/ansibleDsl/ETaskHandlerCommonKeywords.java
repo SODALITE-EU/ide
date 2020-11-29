@@ -3,6 +3,8 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -19,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords#getAsynchronous_settings <em>Asynchronous settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords#getArgs <em>Args</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords#getModule <em>Module</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords#getNotifiable <em>Notifiable</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords#getNotifiables <em>Notifiables</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords#getLoop <em>Loop</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords#getRegister <em>Register</em>}</li>
  * </ul>
@@ -141,26 +143,16 @@ public interface ETaskHandlerCommonKeywords extends EObject
   void setModule(EModuleCall value);
 
   /**
-   * Returns the value of the '<em><b>Notifiable</b></em>' containment reference.
+   * Returns the value of the '<em><b>Notifiables</b></em>' containment reference list.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.ENotifiable}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Notifiable</em>' containment reference.
-   * @see #setNotifiable(ENotifiable)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETaskHandlerCommonKeywords_Notifiable()
+   * @return the value of the '<em>Notifiables</em>' containment reference list.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETaskHandlerCommonKeywords_Notifiables()
    * @model containment="true"
    * @generated
    */
-  ENotifiable getNotifiable();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords#getNotifiable <em>Notifiable</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Notifiable</em>' containment reference.
-   * @see #getNotifiable()
-   * @generated
-   */
-  void setNotifiable(ENotifiable value);
+  EList<ENotifiable> getNotifiables();
 
   /**
    * Returns the value of the '<em><b>Loop</b></em>' containment reference.

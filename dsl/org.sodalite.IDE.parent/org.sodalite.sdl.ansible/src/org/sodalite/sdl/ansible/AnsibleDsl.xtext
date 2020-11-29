@@ -72,7 +72,7 @@ EBlock:
 		'execution_settings{'
 			exe_common_keywords=EExecutionCommonKeywords
 		'}'
-		('errror_handling{'
+		('error_handling{'
 			error_handling=EBlockErrorHandling
 		'}')?
 		'tasks{'
@@ -114,7 +114,7 @@ EHandler:
 		'task_settings{'
 			task_handler_common_keywords=ETaskHandlerCommonKeywords
 		'}'
-		('listen:' listen_to=[ENotifiedTopic|STRING])?
+		('listen:' (listen_to+=[ENotifiedTopic|STRING])+)?
 	'}'
 ;
 
@@ -140,7 +140,7 @@ ETaskHandlerCommonKeywords:
 	'module_call{'
 		module=EModuleCall
 	'}'
-	('notify:' notifiable=ENotifiable)?
+	('notify:' (notifiables+=ENotifiable)+)?
 	(loop=ELoop)?
 	(register=ERegisterVariable)?
 ;
@@ -148,12 +148,8 @@ ETaskHandlerCommonKeywords:
 EModuleCall:
 	'module_name:' name=ID
 	'parameters{'
-		parameters=EParameters
+		(parameters+=EParameter)*
 	'}'
-;
-
-EParameters:
-	{EParameters} (parameters+=EParameter)*
 ;
 
 EParameter:
@@ -161,15 +157,15 @@ EParameter:
 ;
 
 EConditionalExpression:
-	left_term=EValuePassed (('==' | '!=' | '<' | '>' | '<=' | '>=') right_term=EValuePassed |
-		'is' ('not')? ('skipped' | 'failed' | 'succeeded' | 'fail' | 'success' | 'defined' | 'undefined')
+	left_term=EValuePassed (equality_term=('==' | '!=' | '<' | '>' | '<=' | '>=') right_term=EValuePassed |
+		'is' (is_not='not')? status=('skipped' | 'failed' | 'succeeded' | 'fail' | 'success' | 'defined' | 'undefined')
 	)
 	| formula=EConditionalFormula
 	| is_true=BOOLEAN
 ;
 
 EConditionalFormula:
-	'(' left_expression=EConditionalExpression ')' ('and' | 'or') '(' right_expression=EConditionalExpression ')'
+	'(' left_expression=EConditionalExpression ')' and_or=('and' | 'or') '(' right_expression=EConditionalExpression ')'
 	| 'not' '(' negated_expression=EConditionalExpression ')'
 ;
 
@@ -382,7 +378,7 @@ EValuePassed:
 ;
 
 EValue:
-	EDictionary | {EValue} STRING | EList | {EValue} BOOLEAN | {EValue} NULL | {EValue} INT
+	EDictionary | EList | value_string=STRING | value_string=BOOLEAN | value_string=NULL | value_int=INT
 ;
 
 EFilteredVariable:
@@ -394,7 +390,7 @@ EDeclaredVariable:
 ;
 
 EVariableDeclaration:
-	name=ID ':' value=EValue
+	name=ID ':' value_passed=EValue
 ;
 
 ERegisterVariable:

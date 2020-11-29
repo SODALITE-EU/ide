@@ -23,7 +23,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl#getValue_passed <em>Value passed</em>}</li>
  * </ul>
  *
  * @generated
@@ -31,14 +31,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements EVariableDeclaration
 {
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+   * The cached value of the '{@link #getValue_passed() <em>Value passed</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue()
+   * @see #getValue_passed()
    * @generated
    * @ordered
    */
-  protected EValue value;
+  protected EValue value_passed;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,9 +67,9 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
    * @generated
    */
   @Override
-  public EValue getValue()
+  public EValue getValue_passed()
   {
-    return value;
+    return value_passed;
   }
 
   /**
@@ -77,13 +77,13 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(EValue newValue, NotificationChain msgs)
+  public NotificationChain basicSetValue_passed(EValue newValue_passed, NotificationChain msgs)
   {
-    EValue oldValue = value;
-    value = newValue;
+    EValue oldValue_passed = value_passed;
+    value_passed = newValue_passed;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE, oldValue, newValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED, oldValue_passed, newValue_passed);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -95,20 +95,20 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
    * @generated
    */
   @Override
-  public void setValue(EValue newValue)
+  public void setValue_passed(EValue newValue_passed)
   {
-    if (newValue != value)
+    if (newValue_passed != value_passed)
     {
       NotificationChain msgs = null;
-      if (value != null)
-        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE, null, msgs);
-      if (newValue != null)
-        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE, null, msgs);
-      msgs = basicSetValue(newValue, msgs);
+      if (value_passed != null)
+        msgs = ((InternalEObject)value_passed).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED, null, msgs);
+      if (newValue_passed != null)
+        msgs = ((InternalEObject)newValue_passed).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED, null, msgs);
+      msgs = basicSetValue_passed(newValue_passed, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE, newValue, newValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED, newValue_passed, newValue_passed));
   }
 
   /**
@@ -121,8 +121,8 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE:
-        return basicSetValue(null, msgs);
+      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
+        return basicSetValue_passed(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +137,8 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE:
-        return getValue();
+      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
+        return getValue_passed();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -153,8 +153,8 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE:
-        setValue((EValue)newValue);
+      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
+        setValue_passed((EValue)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,8 +170,8 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE:
-        setValue((EValue)null);
+      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
+        setValue_passed((EValue)null);
         return;
     }
     super.eUnset(featureID);
@@ -187,8 +187,8 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE:
-        return value != null;
+      case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
+        return value_passed != null;
     }
     return super.eIsSet(featureID);
   }

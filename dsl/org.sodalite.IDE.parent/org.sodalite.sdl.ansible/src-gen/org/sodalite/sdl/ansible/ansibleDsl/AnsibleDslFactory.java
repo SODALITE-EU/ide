@@ -141,15 +141,6 @@ public interface AnsibleDslFactory extends EFactory
   EModuleCall createEModuleCall();
 
   /**
-   * Returns a new object of class '<em>EParameters</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EParameters</em>'.
-   * @generated
-   */
-  EParameters createEParameters();
-
-  /**
    * Returns a new object of class '<em>EParameter</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

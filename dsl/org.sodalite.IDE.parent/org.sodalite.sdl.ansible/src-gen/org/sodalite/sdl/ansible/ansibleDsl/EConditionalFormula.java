@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getLeft_expression <em>Left expression</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getAnd_or <em>And or</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getRight_expression <em>Right expression</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getNegated_expression <em>Negated expression</em>}</li>
  * </ul>
@@ -46,6 +47,28 @@ public interface EConditionalFormula extends EObject
    * @generated
    */
   void setLeft_expression(EConditionalExpression value);
+
+  /**
+   * Returns the value of the '<em><b>And or</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>And or</em>' attribute.
+   * @see #setAnd_or(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConditionalFormula_And_or()
+   * @model
+   * @generated
+   */
+  String getAnd_or();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getAnd_or <em>And or</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>And or</em>' attribute.
+   * @see #getAnd_or()
+   * @generated
+   */
+  void setAnd_or(String value);
 
   /**
    * Returns the value of the '<em><b>Right expression</b></em>' containment reference.

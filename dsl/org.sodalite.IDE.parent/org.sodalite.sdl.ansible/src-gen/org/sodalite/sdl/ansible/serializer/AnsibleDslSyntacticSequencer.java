@@ -10,7 +10,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
@@ -22,81 +21,21 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected AnsibleDslGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_EConditionalExpression_DefinedKeyword_0_1_1_2_5_or_FailKeyword_0_1_1_2_3_or_FailedKeyword_0_1_1_2_1_or_SkippedKeyword_0_1_1_2_0_or_SucceededKeyword_0_1_1_2_2_or_SuccessKeyword_0_1_1_2_4_or_UndefinedKeyword_0_1_1_2_6;
-	protected AbstractElementAlias match_EConditionalExpression_EqualsSignEqualsSignKeyword_0_1_0_0_0_or_ExclamationMarkEqualsSignKeyword_0_1_0_0_1_or_GreaterThanSignEqualsSignKeyword_0_1_0_0_5_or_GreaterThanSignKeyword_0_1_0_0_3_or_LessThanSignEqualsSignKeyword_0_1_0_0_4_or_LessThanSignKeyword_0_1_0_0_2;
-	protected AbstractElementAlias match_EConditionalExpression_NotKeyword_0_1_1_1_q;
-	protected AbstractElementAlias match_EConditionalFormula_AndKeyword_0_3_0_or_OrKeyword_0_3_1;
 	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q;
 	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q;
-	protected AbstractElementAlias match_EValue_BOOLEANTerminalRuleCall_3_1_or_INTTerminalRuleCall_5_1_or_NULLTerminalRuleCall_4_1_or_STRINGTerminalRuleCall_1_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (AnsibleDslGrammarAccess) access;
-		match_EConditionalExpression_DefinedKeyword_0_1_1_2_5_or_FailKeyword_0_1_1_2_3_or_FailedKeyword_0_1_1_2_1_or_SkippedKeyword_0_1_1_2_0_or_SucceededKeyword_0_1_1_2_2_or_SuccessKeyword_0_1_1_2_4_or_UndefinedKeyword_0_1_1_2_6 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getDefinedKeyword_0_1_1_2_5()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getFailKeyword_0_1_1_2_3()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getFailedKeyword_0_1_1_2_1()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getSkippedKeyword_0_1_1_2_0()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getSucceededKeyword_0_1_1_2_2()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getSuccessKeyword_0_1_1_2_4()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getUndefinedKeyword_0_1_1_2_6()));
-		match_EConditionalExpression_EqualsSignEqualsSignKeyword_0_1_0_0_0_or_ExclamationMarkEqualsSignKeyword_0_1_0_0_1_or_GreaterThanSignEqualsSignKeyword_0_1_0_0_5_or_GreaterThanSignKeyword_0_1_0_0_3_or_LessThanSignEqualsSignKeyword_0_1_0_0_4_or_LessThanSignKeyword_0_1_0_0_2 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getEqualsSignEqualsSignKeyword_0_1_0_0_0()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getExclamationMarkEqualsSignKeyword_0_1_0_0_1()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getGreaterThanSignEqualsSignKeyword_0_1_0_0_5()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getGreaterThanSignKeyword_0_1_0_0_3()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getLessThanSignEqualsSignKeyword_0_1_0_0_4()), new TokenAlias(false, false, grammarAccess.getEConditionalExpressionAccess().getLessThanSignKeyword_0_1_0_0_2()));
-		match_EConditionalExpression_NotKeyword_0_1_1_1_q = new TokenAlias(false, true, grammarAccess.getEConditionalExpressionAccess().getNotKeyword_0_1_1_1());
-		match_EConditionalFormula_AndKeyword_0_3_0_or_OrKeyword_0_3_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getEConditionalFormulaAccess().getAndKeyword_0_3_0()), new TokenAlias(false, false, grammarAccess.getEConditionalFormulaAccess().getOrKeyword_0_3_1()));
 		match_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_6_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getPre_tasksKeyword_6_0()));
 		match_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_8_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getTasks_listKeyword_8_0()));
-		match_EValue_BOOLEANTerminalRuleCall_3_1_or_INTTerminalRuleCall_5_1_or_NULLTerminalRuleCall_4_1_or_STRINGTerminalRuleCall_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getEValueAccess().getBOOLEANTerminalRuleCall_3_1()), new TokenAlias(false, false, grammarAccess.getEValueAccess().getINTTerminalRuleCall_5_1()), new TokenAlias(false, false, grammarAccess.getEValueAccess().getNULLTerminalRuleCall_4_1()), new TokenAlias(false, false, grammarAccess.getEValueAccess().getSTRINGTerminalRuleCall_1_1()));
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getBOOLEANRule())
-			return getBOOLEANToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getINTRule())
-			return getINTToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getNULLRule())
-			return getNULLToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getSTRINGRule())
-			return getSTRINGToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	/**
-	 * terminal BOOLEAN:
-	 * 	'yes' | 'no'
-	 * ;
-	 */
-	protected String getBOOLEANToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "yes";
-	}
-	
-	/**
-	 * terminal INT returns ecore::EInt: ('0'..'9')+;
-	 */
-	protected String getINTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "";
-	}
-	
-	/**
-	 * terminal NULL:
-	 * 	'Null'
-	 * ;
-	 */
-	protected String getNULLToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "Null";
-	}
-	
-	/**
-	 * terminal STRING:
-	 * 			'"' ( '\\' .  | !('\\'|'"') )* '"' |
-	 * 			"'" ( '\\' .  | !('\\'|"'") )* "'"
-	 * 		;
-	 */
-	protected String getSTRINGToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "\"\"";
-	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -104,83 +43,14 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_EConditionalExpression_DefinedKeyword_0_1_1_2_5_or_FailKeyword_0_1_1_2_3_or_FailedKeyword_0_1_1_2_1_or_SkippedKeyword_0_1_1_2_0_or_SucceededKeyword_0_1_1_2_2_or_SuccessKeyword_0_1_1_2_4_or_UndefinedKeyword_0_1_1_2_6.equals(syntax))
-				emit_EConditionalExpression_DefinedKeyword_0_1_1_2_5_or_FailKeyword_0_1_1_2_3_or_FailedKeyword_0_1_1_2_1_or_SkippedKeyword_0_1_1_2_0_or_SucceededKeyword_0_1_1_2_2_or_SuccessKeyword_0_1_1_2_4_or_UndefinedKeyword_0_1_1_2_6(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EConditionalExpression_EqualsSignEqualsSignKeyword_0_1_0_0_0_or_ExclamationMarkEqualsSignKeyword_0_1_0_0_1_or_GreaterThanSignEqualsSignKeyword_0_1_0_0_5_or_GreaterThanSignKeyword_0_1_0_0_3_or_LessThanSignEqualsSignKeyword_0_1_0_0_4_or_LessThanSignKeyword_0_1_0_0_2.equals(syntax))
-				emit_EConditionalExpression_EqualsSignEqualsSignKeyword_0_1_0_0_0_or_ExclamationMarkEqualsSignKeyword_0_1_0_0_1_or_GreaterThanSignEqualsSignKeyword_0_1_0_0_5_or_GreaterThanSignKeyword_0_1_0_0_3_or_LessThanSignEqualsSignKeyword_0_1_0_0_4_or_LessThanSignKeyword_0_1_0_0_2(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EConditionalExpression_NotKeyword_0_1_1_1_q.equals(syntax))
-				emit_EConditionalExpression_NotKeyword_0_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EConditionalFormula_AndKeyword_0_3_0_or_OrKeyword_0_3_1.equals(syntax))
-				emit_EConditionalFormula_AndKeyword_0_3_0_or_OrKeyword_0_3_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q.equals(syntax))
+			if (match_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q.equals(syntax))
 				emit_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q.equals(syntax))
 				emit_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EValue_BOOLEANTerminalRuleCall_3_1_or_INTTerminalRuleCall_5_1_or_NULLTerminalRuleCall_4_1_or_STRINGTerminalRuleCall_1_1.equals(syntax))
-				emit_EValue_BOOLEANTerminalRuleCall_3_1_or_INTTerminalRuleCall_5_1_or_NULLTerminalRuleCall_4_1_or_STRINGTerminalRuleCall_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
-	/**
-	 * Ambiguous syntax:
-	 *     (
-	  *         'skipped' | 
-	  *         'failed' | 
-	  *         'succeeded' | 
-	  *         'fail' | 
-	  *         'success' | 
-	  *         'defined' | 
-	  *         'undefined'
-	  *     )
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     left_term=EValuePassed 'is' 'not'? (ambiguity) (rule end)
-	 */
-	protected void emit_EConditionalExpression_DefinedKeyword_0_1_1_2_5_or_FailKeyword_0_1_1_2_3_or_FailedKeyword_0_1_1_2_1_or_SkippedKeyword_0_1_1_2_0_or_SucceededKeyword_0_1_1_2_2_or_SuccessKeyword_0_1_1_2_4_or_UndefinedKeyword_0_1_1_2_6(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     (
-	  *         '==' | 
-	  *         '!=' | 
-	  *         '<' | 
-	  *         '>' | 
-	  *         '<=' | 
-	  *         '>='
-	  *     )
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     left_term=EValuePassed (ambiguity) right_term=EValuePassed
-	 */
-	protected void emit_EConditionalExpression_EqualsSignEqualsSignKeyword_0_1_0_0_0_or_ExclamationMarkEqualsSignKeyword_0_1_0_0_1_or_GreaterThanSignEqualsSignKeyword_0_1_0_0_5_or_GreaterThanSignKeyword_0_1_0_0_3_or_LessThanSignEqualsSignKeyword_0_1_0_0_4_or_LessThanSignKeyword_0_1_0_0_2(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     'not'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     left_term=EValuePassed 'is' (ambiguity) ('skipped' | 'failed' | 'succeeded' | 'fail' | 'success' | 'defined' | 'undefined') (rule end)
-	 */
-	protected void emit_EConditionalExpression_NotKeyword_0_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     'and' | 'or'
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     left_expression=EConditionalExpression ')' (ambiguity) '(' right_expression=EConditionalExpression
-	 */
-	protected void emit_EConditionalFormula_AndKeyword_0_3_0_or_OrKeyword_0_3_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 	/**
 	 * Ambiguous syntax:
 	 *     ('}' 'pre_tasks{')?
@@ -200,17 +70,6 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     tasks_list+=EBlockTask (ambiguity) tasks_list+=EBlockTask
 	 */
 	protected void emit_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     STRING | BOOLEAN | NULL | INT
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) (rule start)
-	 */
-	protected void emit_EValue_BOOLEANTerminalRuleCall_3_1_or_INTTerminalRuleCall_5_1_or_NULLTerminalRuleCall_4_1_or_STRINGTerminalRuleCall_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
