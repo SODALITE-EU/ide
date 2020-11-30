@@ -110,6 +110,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
       case AnsibleDslPackage.EVALUE: return createEValue();
       case AnsibleDslPackage.EFILTERED_VARIABLE: return createEFilteredVariable();
+      case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE: return createEDictionaryPairReference();
       case AnsibleDslPackage.EDECLARED_VARIABLE: return createEDeclaredVariable();
       case AnsibleDslPackage.EVARIABLE_DECLARATION: return createEVariableDeclaration();
       case AnsibleDslPackage.EREGISTER_VARIABLE: return createERegisterVariable();
@@ -659,6 +660,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EFilteredVariableImpl eFilteredVariable = new EFilteredVariableImpl();
     return eFilteredVariable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDictionaryPairReference createEDictionaryPairReference()
+  {
+    EDictionaryPairReferenceImpl eDictionaryPairReference = new EDictionaryPairReferenceImpl();
+    return eDictionaryPairReference;
   }
 
   /**

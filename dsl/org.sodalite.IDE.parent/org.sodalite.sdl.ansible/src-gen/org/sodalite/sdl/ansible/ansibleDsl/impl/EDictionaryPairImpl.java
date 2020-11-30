@@ -24,7 +24,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValue;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairImpl#getKey <em>Key</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -33,24 +33,24 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements EDictionaryPair
 {
   /**
-   * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getKey()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String KEY_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getKey()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String key = KEY_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -89,9 +89,9 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public String getKey()
+  public String getName()
   {
-    return key;
+    return name;
   }
 
   /**
@@ -100,12 +100,12 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setKey(String newKey)
+  public void setName(String newName)
   {
-    String oldKey = key;
-    key = newKey;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EDICTIONARY_PAIR__KEY, oldKey, key));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EDICTIONARY_PAIR__NAME, oldName, name));
   }
 
   /**
@@ -184,8 +184,8 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EDICTIONARY_PAIR__KEY:
-        return getKey();
+      case AnsibleDslPackage.EDICTIONARY_PAIR__NAME:
+        return getName();
       case AnsibleDslPackage.EDICTIONARY_PAIR__VALUE:
         return getValue();
     }
@@ -202,8 +202,8 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EDICTIONARY_PAIR__KEY:
-        setKey((String)newValue);
+      case AnsibleDslPackage.EDICTIONARY_PAIR__NAME:
+        setName((String)newValue);
         return;
       case AnsibleDslPackage.EDICTIONARY_PAIR__VALUE:
         setValue((EValue)newValue);
@@ -222,8 +222,8 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EDICTIONARY_PAIR__KEY:
-        setKey(KEY_EDEFAULT);
+      case AnsibleDslPackage.EDICTIONARY_PAIR__NAME:
+        setName(NAME_EDEFAULT);
         return;
       case AnsibleDslPackage.EDICTIONARY_PAIR__VALUE:
         setValue((EValue)null);
@@ -242,8 +242,8 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EDICTIONARY_PAIR__KEY:
-        return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
+      case AnsibleDslPackage.EDICTIONARY_PAIR__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AnsibleDslPackage.EDICTIONARY_PAIR__VALUE:
         return value != null;
     }
@@ -261,8 +261,8 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (key: ");
-    result.append(key);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

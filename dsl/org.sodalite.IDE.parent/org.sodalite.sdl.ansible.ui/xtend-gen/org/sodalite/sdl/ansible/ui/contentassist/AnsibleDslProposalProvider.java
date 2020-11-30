@@ -11,11 +11,18 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERole;
+import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ui.contentassist.AbstractAnsibleDslProposalProvider;
 
 /**
@@ -60,6 +67,38 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
       final List<EDeclaredVariableImpl> candidates_1 = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootRole, EDeclaredVariableImpl.class);
       for (final EDeclaredVariableImpl candidate_1 : candidates_1) {
         acceptor.accept(this.createCompletionProposal(candidate_1.getName(), context));
+      }
+    }
+  }
+  
+  @Override
+  public void completeEDictionaryPairReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EFilteredVariableImpl filteredVariable = EcoreUtil2.<EFilteredVariableImpl>getContainerOfType(model, EFilteredVariableImpl.class);
+    final EList<EDictionaryPairReference> tail = filteredVariable.getTail();
+    final int index = tail.indexOf(model);
+    if ((index > 0)) {
+      final EDictionaryPair previousDictionaryPair = tail.get((index - 1)).getName();
+      EValue _value = previousDictionaryPair.getValue();
+      if ((_value instanceof EDictionaryImpl)) {
+        EValue _value_1 = previousDictionaryPair.getValue();
+        EList<EDictionaryPair> _dictionary_pairs = ((EDictionaryImpl) _value_1).getDictionary_pairs();
+        for (final EDictionaryPair dictionaryPair : _dictionary_pairs) {
+          acceptor.accept(this.createCompletionProposal(dictionaryPair.getName(), context));
+        }
+      }
+    } else {
+      EDeclaredVariable _variable = filteredVariable.getVariable();
+      if ((_variable instanceof EVariableDeclarationImpl)) {
+        EDeclaredVariable _variable_1 = filteredVariable.getVariable();
+        EValue _value_passed = ((EVariableDeclarationImpl) _variable_1).getValue_passed();
+        if ((_value_passed instanceof EDictionaryImpl)) {
+          EDeclaredVariable _variable_2 = filteredVariable.getVariable();
+          EValue _value_passed_1 = ((EVariableDeclarationImpl) _variable_2).getValue_passed();
+          EList<EDictionaryPair> _dictionary_pairs_1 = ((EDictionaryImpl) _value_passed_1).getDictionary_pairs();
+          for (final EDictionaryPair dictionaryPair_1 : _dictionary_pairs_1) {
+            acceptor.accept(this.createCompletionProposal(dictionaryPair_1.getName(), context));
+          }
+        }
       }
     }
   }

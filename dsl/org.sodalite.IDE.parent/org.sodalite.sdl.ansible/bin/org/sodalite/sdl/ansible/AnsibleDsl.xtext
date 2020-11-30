@@ -382,7 +382,11 @@ EValue:
 ;
 
 EFilteredVariable:
-	variable=[EDeclaredVariable|ID] ('|' filter_commands+=STRING)*
+	variable=[EDeclaredVariable|ID] ( "." tail+=EDictionaryPairReference)* ('|' filter_commands+=STRING)*
+;
+
+EDictionaryPairReference:
+	name=[EDictionaryPair|ID]
 ;
 
 EDeclaredVariable:
@@ -402,7 +406,7 @@ EDictionary:
 ;
 
 EDictionaryPair:
-	key=ID ':' value=EValue
+	name=ID ':' value=EValue
 ;
 
 EList:

@@ -416,6 +416,13 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE:
+      {
+        EDictionaryPairReference eDictionaryPairReference = (EDictionaryPairReference)theEObject;
+        T result = caseEDictionaryPairReference(eDictionaryPairReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.EDECLARED_VARIABLE:
       {
         EDeclaredVariable eDeclaredVariable = (EDeclaredVariable)theEObject;
@@ -1185,6 +1192,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEFilteredVariable(EFilteredVariable object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EDictionary Pair Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EDictionary Pair Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEDictionaryPairReference(EDictionaryPairReference object)
   {
     return null;
   }

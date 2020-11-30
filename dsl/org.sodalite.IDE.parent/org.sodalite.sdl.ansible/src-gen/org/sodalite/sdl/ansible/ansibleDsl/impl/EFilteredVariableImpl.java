@@ -6,6 +6,7 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -15,9 +16,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
 
 /**
@@ -29,6 +33,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl#getTail <em>Tail</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl#getFilter_commands <em>Filter commands</em>}</li>
  * </ul>
  *
@@ -45,6 +50,16 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
    * @ordered
    */
   protected EDeclaredVariable variable;
+
+  /**
+   * The cached value of the '{@link #getTail() <em>Tail</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTail()
+   * @generated
+   * @ordered
+   */
+  protected EList<EDictionaryPairReference> tail;
 
   /**
    * The cached value of the '{@link #getFilter_commands() <em>Filter commands</em>}' attribute list.
@@ -128,6 +143,21 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
    * @generated
    */
   @Override
+  public EList<EDictionaryPairReference> getTail()
+  {
+    if (tail == null)
+    {
+      tail = new EObjectContainmentEList<EDictionaryPairReference>(EDictionaryPairReference.class, this, AnsibleDslPackage.EFILTERED_VARIABLE__TAIL);
+    }
+    return tail;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<String> getFilter_commands()
   {
     if (filter_commands == null)
@@ -143,6 +173,22 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
    * @generated
    */
   @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.EFILTERED_VARIABLE__TAIL:
+        return ((InternalEList<?>)getTail()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -150,6 +196,8 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
       case AnsibleDslPackage.EFILTERED_VARIABLE__VARIABLE:
         if (resolve) return getVariable();
         return basicGetVariable();
+      case AnsibleDslPackage.EFILTERED_VARIABLE__TAIL:
+        return getTail();
       case AnsibleDslPackage.EFILTERED_VARIABLE__FILTER_COMMANDS:
         return getFilter_commands();
     }
@@ -169,6 +217,10 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
     {
       case AnsibleDslPackage.EFILTERED_VARIABLE__VARIABLE:
         setVariable((EDeclaredVariable)newValue);
+        return;
+      case AnsibleDslPackage.EFILTERED_VARIABLE__TAIL:
+        getTail().clear();
+        getTail().addAll((Collection<? extends EDictionaryPairReference>)newValue);
         return;
       case AnsibleDslPackage.EFILTERED_VARIABLE__FILTER_COMMANDS:
         getFilter_commands().clear();
@@ -191,6 +243,9 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
       case AnsibleDslPackage.EFILTERED_VARIABLE__VARIABLE:
         setVariable((EDeclaredVariable)null);
         return;
+      case AnsibleDslPackage.EFILTERED_VARIABLE__TAIL:
+        getTail().clear();
+        return;
       case AnsibleDslPackage.EFILTERED_VARIABLE__FILTER_COMMANDS:
         getFilter_commands().clear();
         return;
@@ -210,6 +265,8 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
     {
       case AnsibleDslPackage.EFILTERED_VARIABLE__VARIABLE:
         return variable != null;
+      case AnsibleDslPackage.EFILTERED_VARIABLE__TAIL:
+        return tail != null && !tail.isEmpty();
       case AnsibleDslPackage.EFILTERED_VARIABLE__FILTER_COMMANDS:
         return filter_commands != null && !filter_commands.isEmpty();
     }

@@ -3243,15 +3243,19 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final CrossReference cVariableEDeclaredVariableCrossReference_0_0 = (CrossReference)cVariableAssignment_0.eContents().get(0);
 		private final RuleCall cVariableEDeclaredVariableIDTerminalRuleCall_0_0_1 = (RuleCall)cVariableEDeclaredVariableCrossReference_0_0.eContents().get(1);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cVerticalLineKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cFilter_commandsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cFilter_commandsSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cFilter_commandsAssignment_1_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cTailAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cTailEDictionaryPairReferenceParserRuleCall_1_1_0 = (RuleCall)cTailAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cVerticalLineKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cFilter_commandsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cFilter_commandsSTRINGTerminalRuleCall_2_1_0 = (RuleCall)cFilter_commandsAssignment_2_1.eContents().get(0);
 		
 		//EFilteredVariable:
-		//	variable=[EDeclaredVariable] ('|' filter_commands+=STRING)*;
+		//	variable=[EDeclaredVariable] ("." tail+=EDictionaryPairReference)* ('|' filter_commands+=STRING)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//variable=[EDeclaredVariable] ('|' filter_commands+=STRING)*
+		//variable=[EDeclaredVariable] ("." tail+=EDictionaryPairReference)* ('|' filter_commands+=STRING)*
 		public Group getGroup() { return cGroup; }
 		
 		//variable=[EDeclaredVariable]
@@ -3263,17 +3267,48 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//ID
 		public RuleCall getVariableEDeclaredVariableIDTerminalRuleCall_0_0_1() { return cVariableEDeclaredVariableIDTerminalRuleCall_0_0_1; }
 		
-		//('|' filter_commands+=STRING)*
+		//("." tail+=EDictionaryPairReference)*
 		public Group getGroup_1() { return cGroup_1; }
 		
+		//"."
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
+		
+		//tail+=EDictionaryPairReference
+		public Assignment getTailAssignment_1_1() { return cTailAssignment_1_1; }
+		
+		//EDictionaryPairReference
+		public RuleCall getTailEDictionaryPairReferenceParserRuleCall_1_1_0() { return cTailEDictionaryPairReferenceParserRuleCall_1_1_0; }
+		
+		//('|' filter_commands+=STRING)*
+		public Group getGroup_2() { return cGroup_2; }
+		
 		//'|'
-		public Keyword getVerticalLineKeyword_1_0() { return cVerticalLineKeyword_1_0; }
+		public Keyword getVerticalLineKeyword_2_0() { return cVerticalLineKeyword_2_0; }
 		
 		//filter_commands+=STRING
-		public Assignment getFilter_commandsAssignment_1_1() { return cFilter_commandsAssignment_1_1; }
+		public Assignment getFilter_commandsAssignment_2_1() { return cFilter_commandsAssignment_2_1; }
 		
 		//STRING
-		public RuleCall getFilter_commandsSTRINGTerminalRuleCall_1_1_0() { return cFilter_commandsSTRINGTerminalRuleCall_1_1_0; }
+		public RuleCall getFilter_commandsSTRINGTerminalRuleCall_2_1_0() { return cFilter_commandsSTRINGTerminalRuleCall_2_1_0; }
+	}
+	public class EDictionaryPairReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EDictionaryPairReference");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cNameEDictionaryPairCrossReference_0 = (CrossReference)cNameAssignment.eContents().get(0);
+		private final RuleCall cNameEDictionaryPairIDTerminalRuleCall_0_1 = (RuleCall)cNameEDictionaryPairCrossReference_0.eContents().get(1);
+		
+		//EDictionaryPairReference:
+		//	name=[EDictionaryPair];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=[EDictionaryPair]
+		public Assignment getNameAssignment() { return cNameAssignment; }
+		
+		//[EDictionaryPair]
+		public CrossReference getNameEDictionaryPairCrossReference_0() { return cNameEDictionaryPairCrossReference_0; }
+		
+		//ID
+		public RuleCall getNameEDictionaryPairIDTerminalRuleCall_0_1() { return cNameEDictionaryPairIDTerminalRuleCall_0_1; }
 	}
 	public class EDeclaredVariableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EDeclaredVariable");
@@ -3394,24 +3429,24 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	public class EDictionaryPairElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EDictionaryPair");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cKeyAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cKeyIDTerminalRuleCall_0_0 = (RuleCall)cKeyAssignment_0.eContents().get(0);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cValueEValueParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//EDictionaryPair:
-		//	key=ID ':' value=EValue;
+		//	name=ID ':' value=EValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//key=ID ':' value=EValue
+		//name=ID ':' value=EValue
 		public Group getGroup() { return cGroup; }
 		
-		//key=ID
-		public Assignment getKeyAssignment_0() { return cKeyAssignment_0; }
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 		
 		//ID
-		public RuleCall getKeyIDTerminalRuleCall_0_0() { return cKeyIDTerminalRuleCall_0_0; }
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 		
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
@@ -3512,6 +3547,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final EValuePassedElements pEValuePassed;
 	private final EValueElements pEValue;
 	private final EFilteredVariableElements pEFilteredVariable;
+	private final EDictionaryPairReferenceElements pEDictionaryPairReference;
 	private final EDeclaredVariableElements pEDeclaredVariable;
 	private final EVariableDeclarationElements pEVariableDeclaration;
 	private final ERegisterVariableElements pERegisterVariable;
@@ -3575,6 +3611,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pEValuePassed = new EValuePassedElements();
 		this.pEValue = new EValueElements();
 		this.pEFilteredVariable = new EFilteredVariableElements();
+		this.pEDictionaryPairReference = new EDictionaryPairReferenceElements();
 		this.pEDeclaredVariable = new EDeclaredVariableElements();
 		this.pEVariableDeclaration = new EVariableDeclarationElements();
 		this.pERegisterVariable = new ERegisterVariableElements();
@@ -4183,13 +4220,23 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EFilteredVariable:
-	//	variable=[EDeclaredVariable] ('|' filter_commands+=STRING)*;
+	//	variable=[EDeclaredVariable] ("." tail+=EDictionaryPairReference)* ('|' filter_commands+=STRING)*;
 	public EFilteredVariableElements getEFilteredVariableAccess() {
 		return pEFilteredVariable;
 	}
 	
 	public ParserRule getEFilteredVariableRule() {
 		return getEFilteredVariableAccess().getRule();
+	}
+	
+	//EDictionaryPairReference:
+	//	name=[EDictionaryPair];
+	public EDictionaryPairReferenceElements getEDictionaryPairReferenceAccess() {
+		return pEDictionaryPairReference;
+	}
+	
+	public ParserRule getEDictionaryPairReferenceRule() {
+		return getEDictionaryPairReferenceAccess().getRule();
 	}
 	
 	//EDeclaredVariable:
@@ -4233,7 +4280,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EDictionaryPair:
-	//	key=ID ':' value=EValue;
+	//	name=ID ':' value=EValue;
 	public EDictionaryPairElements getEDictionaryPairAccess() {
 		return pEDictionaryPair;
 	}

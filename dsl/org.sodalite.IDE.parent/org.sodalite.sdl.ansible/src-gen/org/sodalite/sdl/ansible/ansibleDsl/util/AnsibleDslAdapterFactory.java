@@ -301,6 +301,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEFilteredVariableAdapter();
       }
       @Override
+      public Adapter caseEDictionaryPairReference(EDictionaryPairReference object)
+      {
+        return createEDictionaryPairReferenceAdapter();
+      }
+      @Override
       public Adapter caseEDeclaredVariable(EDeclaredVariable object)
       {
         return createEDeclaredVariableAdapter();
@@ -1023,6 +1028,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEFilteredVariableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference <em>EDictionary Pair Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference
+   * @generated
+   */
+  public Adapter createEDictionaryPairReferenceAdapter()
   {
     return null;
   }

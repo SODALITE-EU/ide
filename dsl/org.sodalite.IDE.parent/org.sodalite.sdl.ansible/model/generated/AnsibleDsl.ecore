@@ -272,8 +272,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFilteredVariable" eSuperTypes="#//ELoopList #//EValuePassed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//EDeclaredVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//EDictionaryPairReference"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter_commands" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPairReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EDictionaryPair"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDeclaredVariable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -288,7 +293,7 @@
         eType="#//EDictionaryPair" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPair">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EValue"
         containment="true"/>
   </eClassifiers>

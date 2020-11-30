@@ -13,6 +13,9 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl
 import org.eclipse.xtext.Assignment
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl
 
 /** 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -57,26 +60,27 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			}
 		}	
 	}
-	
-	/*//given the model, find the play in which it's defined
-	def EObject findCurrentPlay(EObject model){
-		if (model instanceof EPlayImpl) return model
-		else return findCurrentPlay(model.eContainer)
-	}
-	
-	def getVariablesInPlay(EPlayImpl play){
-		val variablesIDs = newArrayList(); 
-		val variablesDeclarationsInPlay = play.base_common_keywards.variables_declaration.variable_declarations
-		for (variableDeclaration: variablesDeclarationsInPlay){
-			variablesIDs.add(variableDeclaration.name)
-		}
-		
-		for (execution: play.tasks_list_play.tasks_list){
-			val variablesDeclarationsInExecution = execution.base_common_keywards.variables_declaration.variable_declarations
-			for (variableDeclaration: variablesDeclarationsInExecution){
-				variablesIDs.add(variableDeclaration.name)
+
+	override void completeEDictionaryPairReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val filteredVariable = EcoreUtil2.getContainerOfType(model, EFilteredVariableImpl)
+		val tail = filteredVariable.tail
+		val index = tail.indexOf(model)
+		if (index > 0){
+			val previousDictionaryPair = tail.get(index - 1).name
+			if (previousDictionaryPair.value instanceof EDictionaryImpl){
+				for (dictionaryPair : (previousDictionaryPair.value as EDictionaryImpl).dictionary_pairs){
+					acceptor.accept(createCompletionProposal(dictionaryPair.name, context))
+				}
 			}
 		}
-	}*/
-
+		else {
+			if (filteredVariable.variable instanceof EVariableDeclarationImpl){
+				if ((filteredVariable.variable as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
+					for (dictionaryPair : (((filteredVariable.variable as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
+						acceptor.accept(createCompletionProposal(dictionaryPair.name, context))
+					}
+				}
+			}
+		}
+	}
 }

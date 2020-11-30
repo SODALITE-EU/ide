@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getTail <em>Tail</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getFilter_commands <em>Filter commands</em>}</li>
  * </ul>
  *
@@ -45,6 +46,18 @@ public interface EFilteredVariable extends ELoopList, EValuePassed
    * @generated
    */
   void setVariable(EDeclaredVariable value);
+
+  /**
+   * Returns the value of the '<em><b>Tail</b></em>' containment reference list.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Tail</em>' containment reference list.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFilteredVariable_Tail()
+   * @model containment="true"
+   * @generated
+   */
+  EList<EDictionaryPairReference> getTail();
 
   /**
    * Returns the value of the '<em><b>Filter commands</b></em>' attribute list.

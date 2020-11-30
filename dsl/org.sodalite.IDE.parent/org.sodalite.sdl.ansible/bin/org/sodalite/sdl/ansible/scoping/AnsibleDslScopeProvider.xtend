@@ -14,6 +14,11 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
+import java.util.ArrayList
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
 
 /** 
  * This class contains custom scoping description.
@@ -47,6 +52,32 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 			}
 			
 		}
+		
+		if (context instanceof EDictionaryPairReferenceImpl && reference == AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME){
+			val filteredVariable = EcoreUtil2.getContainerOfType(context, EFilteredVariableImpl)
+			val tail = filteredVariable.tail
+			val index = tail.indexOf(context)
+			var candidatesOfDictionary = new ArrayList<EDictionaryPair>
+			if (index > 0){
+				val previousDictionaryPair = tail.get(index - 1).name
+				if (previousDictionaryPair.value instanceof EDictionaryImpl){
+					for (dictionaryPair : (previousDictionaryPair.value as EDictionaryImpl).dictionary_pairs){
+						candidatesOfDictionary.add(dictionaryPair)
+					}
+				}
+			}
+			else {
+				if (filteredVariable.variable instanceof EVariableDeclarationImpl){
+					if ((filteredVariable.variable as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
+						for (dictionaryPair : (((filteredVariable.variable as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
+							candidatesOfDictionary.add(dictionaryPair)
+						}
+					}
+				}
+			}
+			return Scopes.scopeFor(candidatesOfDictionary)
+		}
+		
 		return super.getScope(context, reference);
 	}
 }

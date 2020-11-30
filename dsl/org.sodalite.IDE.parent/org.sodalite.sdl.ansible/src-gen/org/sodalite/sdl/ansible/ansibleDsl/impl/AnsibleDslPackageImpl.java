@@ -25,6 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
@@ -386,6 +387,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eFilteredVariableEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eDictionaryPairReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2346,9 +2354,42 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EReference getEFilteredVariable_Tail()
+  {
+    return (EReference)eFilteredVariableEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EAttribute getEFilteredVariable_Filter_commands()
   {
-    return (EAttribute)eFilteredVariableEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)eFilteredVariableEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEDictionaryPairReference()
+  {
+    return eDictionaryPairReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEDictionaryPairReference_Name()
+  {
+    return (EReference)eDictionaryPairReferenceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2445,7 +2486,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEDictionaryPair_Key()
+  public EAttribute getEDictionaryPair_Name()
   {
     return (EAttribute)eDictionaryPairEClass.getEStructuralFeatures().get(0);
   }
@@ -2726,7 +2767,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eFilteredVariableEClass = createEClass(EFILTERED_VARIABLE);
     createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__VARIABLE);
+    createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__TAIL);
     createEAttribute(eFilteredVariableEClass, EFILTERED_VARIABLE__FILTER_COMMANDS);
+
+    eDictionaryPairReferenceEClass = createEClass(EDICTIONARY_PAIR_REFERENCE);
+    createEReference(eDictionaryPairReferenceEClass, EDICTIONARY_PAIR_REFERENCE__NAME);
 
     eDeclaredVariableEClass = createEClass(EDECLARED_VARIABLE);
     createEAttribute(eDeclaredVariableEClass, EDECLARED_VARIABLE__NAME);
@@ -2740,7 +2785,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eDictionaryEClass, EDICTIONARY__DICTIONARY_PAIRS);
 
     eDictionaryPairEClass = createEClass(EDICTIONARY_PAIR);
-    createEAttribute(eDictionaryPairEClass, EDICTIONARY_PAIR__KEY);
+    createEAttribute(eDictionaryPairEClass, EDICTIONARY_PAIR__NAME);
     createEReference(eDictionaryPairEClass, EDICTIONARY_PAIR__VALUE);
 
     eListEClass = createEClass(ELIST);
@@ -3017,7 +3062,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eFilteredVariableEClass, EFilteredVariable.class, "EFilteredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEFilteredVariable_Variable(), this.getEDeclaredVariable(), null, "variable", null, 0, 1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFilteredVariable_Tail(), this.getEDictionaryPairReference(), null, "tail", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEFilteredVariable_Filter_commands(), ecorePackage.getEString(), "filter_commands", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eDictionaryPairReferenceEClass, EDictionaryPairReference.class, "EDictionaryPairReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEDictionaryPairReference_Name(), this.getEDictionaryPair(), null, "name", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDeclaredVariableEClass, EDeclaredVariable.class, "EDeclaredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEDeclaredVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, EDeclaredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3031,7 +3080,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEDictionary_Dictionary_pairs(), this.getEDictionaryPair(), null, "dictionary_pairs", null, 0, -1, EDictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDictionaryPairEClass, EDictionaryPair.class, "EDictionaryPair", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEDictionaryPair_Key(), ecorePackage.getEString(), "key", null, 0, 1, EDictionaryPair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEDictionaryPair_Name(), ecorePackage.getEString(), "name", null, 0, 1, EDictionaryPair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEDictionaryPair_Value(), this.getEValue(), null, "value", null, 0, 1, EDictionaryPair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eListEClass, EList.class, "EList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

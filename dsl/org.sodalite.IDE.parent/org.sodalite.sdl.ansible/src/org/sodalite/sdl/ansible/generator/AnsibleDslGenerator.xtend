@@ -53,7 +53,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compilePlays(EPlaybook playbook) '''
 		«FOR play : playbook.plays»
-			«compileBase(play, '')»
+			«compilePlay(play, '  ')»
 		«ENDFOR»
 	'''
 	
@@ -79,6 +79,13 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compilePlay(EPlay play, String space) '''
+		«IF play.name !== null»
+			- name: «play.name»
+		«ENDIF»
+		«space»hosts: all
+		«IF play.base_common_keywords !== null»
+			«compileBaseCommonKeywords(play.base_common_keywords, space)»
+		«ENDIF»
 		«IF play.play_exe_settings !== null»
 			«compilePlayExeSettings(play.play_exe_settings, space)»
 		«ENDIF»
@@ -118,15 +125,12 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«IF play.handlers.size !== 0»
 			«space»handlers:
 			«FOR handler: play.handlers»
-				«compileBase(handler, space.concat('  '))»
+				«compileTaskHandler(handler, space.concat('  '))»
 			«ENDFOR»
 		«ENDIF»
 	'''
 
 	def compileExecution(EExecution execution, String space) '''
-		«IF execution.exe_common_keywords !== null»
-			«compileExecutionCommonKeywords(execution.exe_common_keywords, space)»
-		«ENDIF»
 		«IF execution instanceof EBlock»
 			«compileBlock(execution, space)»
 		«ENDIF»
@@ -244,65 +248,52 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileBlockTask(EBlockTask blockTask, String space) '''
-		«val newSpace = space.concat('  ')»
-		«val newSpaceIndented = newSpace.concat('  ')»
 		«IF blockTask instanceof EBlock»
-			«IF blockTask.name !== null»
-				«space»- name: «blockTask.name»
-			«ENDIF»
-			«newSpace»block: 
-			«IF blockTask.base_common_keywords !== null»
-				«compileBaseCommonKeywords(blockTask.base_common_keywords, newSpaceIndented)»
-			«ENDIF»
-			«IF blockTask.exe_common_keywords !== null»
-				«compileExecutionCommonKeywords(blockTask.exe_common_keywords, newSpaceIndented)»
-			«ENDIF»
-			«compileBlock(blockTask, newSpaceIndented)»			
+			«compileBlock(blockTask, space)»
 		«ENDIF»
 		«IF blockTask instanceof ETask»
-			«IF blockTask.name !== null»
-				«space»- name: «blockTask.name»
-			«ENDIF»
-			«IF blockTask.base_common_keywords !== null»
-				«compileBaseCommonKeywords(blockTask.base_common_keywords, newSpace)»
-			«ENDIF»
-			«IF blockTask.exe_common_keywords !== null»
-				«compileExecutionCommonKeywords(blockTask.exe_common_keywords, newSpace)»
-			«ENDIF»
-			«IF blockTask.task_handler_common_keywords !== null»
-				«compileTaskHandlerCommonKeywords(blockTask.task_handler_common_keywords, newSpace)»
-			«ENDIF»
+			«compileTaskHandler(blockTask, space)»
 		«ENDIF»
 	'''
 	
 	def compileBlock(EBlock block, String space) '''
-		«IF block.error_handling !== null»
-			«IF block.error_handling.any_errors_fatal !== null»
-				«space»any_errors_fatal: «block.error_handling.any_errors_fatal»
-			«ENDIF»
-			«IF block.error_handling.ignore_errors !== null»
-				«space»ignore_errors: «block.error_handling.ignore_errors»
-			«ENDIF»
-			«IF block.error_handling.ignore_unreachable !== null»
-				«space»ignore_unreachable: «block.error_handling.ignore_unreachable»
-			«ENDIF»
-		«ENDIF»
+		«IF block.name !== null»
+			«space»- name: «block.name»
+		«ENDIF»		
+		«space.concat('  ')»block:
 		«IF block.tasks.size !== 0»
 			«FOR task: block.tasks»
-				«compileBase(task, space)»
+				«compileTaskHandler(task, space.concat('  ').concat('  '))»
 			«ENDFOR»
 		«ENDIF»
 		«IF block.rescue_tasks.size !== 0»
-			«space»rescue: 
+			«space.concat('  ')»rescue: 
 			«FOR task: block.rescue_tasks»
-				«compileBase(task, space)»
+				«compileTaskHandler(task, space.concat('  ').concat('  '))»
 			«ENDFOR»
 		«ENDIF»
 		«IF block.always_tasks.size !== 0»
-			«space»always: 
+			«space.concat('  ')»always: 
 			«FOR task: block.always_tasks»
-				«compileBase(task, space)»
+				«compileTaskHandler(task, space.concat('  ').concat('  '))»
 			«ENDFOR»
+		«ENDIF»
+		«IF block.base_common_keywords !== null»
+			«compileBaseCommonKeywords(block.base_common_keywords, space.concat('  '))»
+		«ENDIF»
+		«IF block.exe_common_keywords !== null»
+			«compileExecutionCommonKeywords(block.exe_common_keywords, space.concat('  '))»
+		«ENDIF»
+		«IF block.error_handling !== null»
+			«IF block.error_handling.any_errors_fatal !== null»
+				«space.concat('  ')»any_errors_fatal: «block.error_handling.any_errors_fatal»
+			«ENDIF»
+			«IF block.error_handling.ignore_errors !== null»
+				«space.concat('  ')»ignore_errors: «block.error_handling.ignore_errors»
+			«ENDIF»
+			«IF block.error_handling.ignore_unreachable !== null»
+				«space.concat('  ')»ignore_unreachable: «block.error_handling.ignore_unreachable»
+			«ENDIF»
 		«ENDIF»
 	'''
 	
@@ -329,12 +320,29 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileTaskHandler(ETaskHandler taskHandler, String space) '''
+		«IF taskHandler.name !== null»
+			«space»- name: «taskHandler.name»
+		«ENDIF»
 		«IF taskHandler.task_handler_common_keywords !== null»
-			«compileTaskHandlerCommonKeywords(taskHandler.task_handler_common_keywords, space)»
+			«IF taskHandler.task_handler_common_keywords.module !== null»
+				«space.concat('  ')»«taskHandler.task_handler_common_keywords.module.name»:
+				«FOR parameter: taskHandler.task_handler_common_keywords.module.parameters»
+					«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
+				«ENDFOR»
+			«ENDIF»
+		«ENDIF»
+		«IF taskHandler.base_common_keywords !== null»
+			«compileBaseCommonKeywords(taskHandler.base_common_keywords, space.concat('  '))»
+		«ENDIF»
+		«IF taskHandler.exe_common_keywords !== null»
+			«compileExecutionCommonKeywords(taskHandler.exe_common_keywords, space.concat('  '))»
+		«ENDIF»
+		«IF taskHandler.task_handler_common_keywords !== null»
+			«compileTaskHandlerCommonKeywords(taskHandler.task_handler_common_keywords, space.concat('  '))»
 		«ENDIF»
 		«IF taskHandler instanceof EHandler»
 			«IF taskHandler.listen_to !== null»
-				«space»listen: «compileNotifiedTopics(taskHandler)»
+				«space.concat('  ')»listen: «compileNotifiedTopics(taskHandler)»
 			«ENDIF»
 		«ENDIF»
 	'''
@@ -370,12 +378,6 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 		«IF taskHandlerCommonKeywords.args !== null»
 			«space»args: «taskHandlerCommonKeywords.args.compileValue»
-		«ENDIF»
-		«IF taskHandlerCommonKeywords.module !== null»
-			«space»«taskHandlerCommonKeywords.module.name»:
-			«FOR parameter: taskHandlerCommonKeywords.module.parameters»
-				«space.concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
-			«ENDFOR»
 		«ENDIF»
 		«IF taskHandlerCommonKeywords.notifiables.size !== 0»
 			«space»notify: «compileNotifiables(taskHandlerCommonKeywords)»
@@ -454,7 +456,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		if (value instanceof EDictionary){
 			var dictionaryString = '{'
 			for (dictionary_pair : value.dictionary_pairs){
-				dictionaryString = dictionaryString.concat(dictionary_pair.key).concat(': ').concat(compileValue(dictionary_pair.value).toString()).concat(', ')
+				dictionaryString = dictionaryString.concat(dictionary_pair.name).concat(': ').concat(compileValue(dictionary_pair.value).toString()).concat(', ')
 			}
 			dictionaryString = dictionaryString.substring(0, dictionaryString.length() - 2)
 			dictionaryString = dictionaryString.concat('}')

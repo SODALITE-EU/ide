@@ -5070,15 +5070,40 @@ ruleEFilteredVariable returns [EObject current=null]
 			)
 		)
 		(
-			otherlv_1='|'
+			otherlv_1='.'
 			{
-				newLeafNode(otherlv_1, grammarAccess.getEFilteredVariableAccess().getVerticalLineKeyword_1_0());
+				newLeafNode(otherlv_1, grammarAccess.getEFilteredVariableAccess().getFullStopKeyword_1_0());
 			}
 			(
 				(
-					lv_filter_commands_2_0=RULE_STRING
 					{
-						newLeafNode(lv_filter_commands_2_0, grammarAccess.getEFilteredVariableAccess().getFilter_commandsSTRINGTerminalRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getEFilteredVariableAccess().getTailEDictionaryPairReferenceParserRuleCall_1_1_0());
+					}
+					lv_tail_2_0=ruleEDictionaryPairReference
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEFilteredVariableRule());
+						}
+						add(
+							$current,
+							"tail",
+							lv_tail_2_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EDictionaryPairReference");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+		(
+			otherlv_3='|'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getEFilteredVariableAccess().getVerticalLineKeyword_2_0());
+			}
+			(
+				(
+					lv_filter_commands_4_0=RULE_STRING
+					{
+						newLeafNode(lv_filter_commands_4_0, grammarAccess.getEFilteredVariableAccess().getFilter_commandsSTRINGTerminalRuleCall_2_1_0());
 					}
 					{
 						if ($current==null) {
@@ -5087,12 +5112,42 @@ ruleEFilteredVariable returns [EObject current=null]
 						addWithLastConsumed(
 							$current,
 							"filter_commands",
-							lv_filter_commands_2_0,
+							lv_filter_commands_4_0,
 							"org.eclipse.xtext.common.Terminals.STRING");
 					}
 				)
 			)
 		)*
+	)
+;
+
+// Entry rule entryRuleEDictionaryPairReference
+entryRuleEDictionaryPairReference returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEDictionaryPairReferenceRule()); }
+	iv_ruleEDictionaryPairReference=ruleEDictionaryPairReference
+	{ $current=$iv_ruleEDictionaryPairReference.current; }
+	EOF;
+
+// Rule EDictionaryPairReference
+ruleEDictionaryPairReference returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getEDictionaryPairReferenceRule());
+				}
+			}
+			otherlv_0=RULE_ID
+			{
+				newLeafNode(otherlv_0, grammarAccess.getEDictionaryPairReferenceAccess().getNameEDictionaryPairCrossReference_0());
+			}
+		)
 	)
 ;
 
@@ -5286,9 +5341,9 @@ ruleEDictionaryPair returns [EObject current=null]
 	(
 		(
 			(
-				lv_key_0_0=RULE_ID
+				lv_name_0_0=RULE_ID
 				{
-					newLeafNode(lv_key_0_0, grammarAccess.getEDictionaryPairAccess().getKeyIDTerminalRuleCall_0_0());
+					newLeafNode(lv_name_0_0, grammarAccess.getEDictionaryPairAccess().getNameIDTerminalRuleCall_0_0());
 				}
 				{
 					if ($current==null) {
@@ -5296,8 +5351,8 @@ ruleEDictionaryPair returns [EObject current=null]
 					}
 					setWithLastConsumed(
 						$current,
-						"key",
-						lv_key_0_0,
+						"name",
+						lv_name_0_0,
 						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)

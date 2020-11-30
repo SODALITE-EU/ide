@@ -179,6 +179,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENotifiedTopicAccess().getGroup(), "rule__ENotifiedTopic__Group__0");
 			builder.put(grammarAccess.getEFilteredVariableAccess().getGroup(), "rule__EFilteredVariable__Group__0");
 			builder.put(grammarAccess.getEFilteredVariableAccess().getGroup_1(), "rule__EFilteredVariable__Group_1__0");
+			builder.put(grammarAccess.getEFilteredVariableAccess().getGroup_2(), "rule__EFilteredVariable__Group_2__0");
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getGroup(), "rule__EVariableDeclaration__Group__0");
 			builder.put(grammarAccess.getERegisterVariableAccess().getGroup(), "rule__ERegisterVariable__Group__0");
 			builder.put(grammarAccess.getEDictionaryAccess().getGroup(), "rule__EDictionary__Group__0");
@@ -332,13 +333,15 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEValueAccess().getValue_stringAssignment_4(), "rule__EValue__Value_stringAssignment_4");
 			builder.put(grammarAccess.getEValueAccess().getValue_intAssignment_5(), "rule__EValue__Value_intAssignment_5");
 			builder.put(grammarAccess.getEFilteredVariableAccess().getVariableAssignment_0(), "rule__EFilteredVariable__VariableAssignment_0");
-			builder.put(grammarAccess.getEFilteredVariableAccess().getFilter_commandsAssignment_1_1(), "rule__EFilteredVariable__Filter_commandsAssignment_1_1");
+			builder.put(grammarAccess.getEFilteredVariableAccess().getTailAssignment_1_1(), "rule__EFilteredVariable__TailAssignment_1_1");
+			builder.put(grammarAccess.getEFilteredVariableAccess().getFilter_commandsAssignment_2_1(), "rule__EFilteredVariable__Filter_commandsAssignment_2_1");
+			builder.put(grammarAccess.getEDictionaryPairReferenceAccess().getNameAssignment(), "rule__EDictionaryPairReference__NameAssignment");
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getNameAssignment_0(), "rule__EVariableDeclaration__NameAssignment_0");
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getValue_passedAssignment_2(), "rule__EVariableDeclaration__Value_passedAssignment_2");
 			builder.put(grammarAccess.getERegisterVariableAccess().getNameAssignment_1(), "rule__ERegisterVariable__NameAssignment_1");
 			builder.put(grammarAccess.getEDictionaryAccess().getDictionary_pairsAssignment_1(), "rule__EDictionary__Dictionary_pairsAssignment_1");
 			builder.put(grammarAccess.getEDictionaryAccess().getDictionary_pairsAssignment_2_1(), "rule__EDictionary__Dictionary_pairsAssignment_2_1");
-			builder.put(grammarAccess.getEDictionaryPairAccess().getKeyAssignment_0(), "rule__EDictionaryPair__KeyAssignment_0");
+			builder.put(grammarAccess.getEDictionaryPairAccess().getNameAssignment_0(), "rule__EDictionaryPair__NameAssignment_0");
 			builder.put(grammarAccess.getEDictionaryPairAccess().getValueAssignment_2(), "rule__EDictionaryPair__ValueAssignment_2");
 			builder.put(grammarAccess.getEListAccess().getElementsAssignment_1(), "rule__EList__ElementsAssignment_1");
 			builder.put(grammarAccess.getEListAccess().getElementsAssignment_2_1(), "rule__EList__ElementsAssignment_2_1");

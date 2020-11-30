@@ -429,6 +429,15 @@ public interface AnsibleDslFactory extends EFactory
   EFilteredVariable createEFilteredVariable();
 
   /**
+   * Returns a new object of class '<em>EDictionary Pair Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDictionary Pair Reference</em>'.
+   * @generated
+   */
+  EDictionaryPairReference createEDictionaryPairReference();
+
+  /**
    * Returns a new object of class '<em>EDeclared Variable</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

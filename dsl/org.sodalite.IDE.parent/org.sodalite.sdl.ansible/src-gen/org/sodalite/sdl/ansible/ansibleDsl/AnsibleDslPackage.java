@@ -2308,13 +2308,22 @@ public interface AnsibleDslPackage extends EPackage
   int EFILTERED_VARIABLE__VARIABLE = ELOOP_LIST_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Tail</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFILTERED_VARIABLE__TAIL = ELOOP_LIST_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Filter commands</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EFILTERED_VARIABLE__FILTER_COMMANDS = ELOOP_LIST_FEATURE_COUNT + 1;
+  int EFILTERED_VARIABLE__FILTER_COMMANDS = ELOOP_LIST_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>EFiltered Variable</em>' class.
@@ -2323,7 +2332,35 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFILTERED_VARIABLE_FEATURE_COUNT = ELOOP_LIST_FEATURE_COUNT + 2;
+  int EFILTERED_VARIABLE_FEATURE_COUNT = ELOOP_LIST_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl <em>EDictionary Pair Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairReference()
+   * @generated
+   */
+  int EDICTIONARY_PAIR_REFERENCE = 45;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDICTIONARY_PAIR_REFERENCE__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>EDictionary Pair Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDICTIONARY_PAIR_REFERENCE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl <em>EDeclared Variable</em>}' class.
@@ -2333,7 +2370,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariable()
    * @generated
    */
-  int EDECLARED_VARIABLE = 45;
+  int EDECLARED_VARIABLE = 46;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2361,7 +2398,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclaration()
    * @generated
    */
-  int EVARIABLE_DECLARATION = 46;
+  int EVARIABLE_DECLARATION = 47;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2398,7 +2435,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariable()
    * @generated
    */
-  int EREGISTER_VARIABLE = 47;
+  int EREGISTER_VARIABLE = 48;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2426,7 +2463,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 48;
+  int EDICTIONARY = 49;
 
   /**
    * The feature id for the '<em><b>Value string</b></em>' attribute.
@@ -2472,16 +2509,16 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 49;
+  int EDICTIONARY_PAIR = 50;
 
   /**
-   * The feature id for the '<em><b>Key</b></em>' attribute.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EDICTIONARY_PAIR__KEY = 0;
+  int EDICTIONARY_PAIR__NAME = 0;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -2509,7 +2546,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 50;
+  int ELIST = 51;
 
   /**
    * The feature id for the '<em><b>Value string</b></em>' attribute.
@@ -4352,6 +4389,17 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEFilteredVariable_Variable();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getTail <em>Tail</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tail</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getTail()
+   * @see #getEFilteredVariable()
+   * @generated
+   */
+  EReference getEFilteredVariable_Tail();
+
+  /**
    * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getFilter_commands <em>Filter commands</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4361,6 +4409,27 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EAttribute getEFilteredVariable_Filter_commands();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference <em>EDictionary Pair Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EDictionary Pair Reference</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference
+   * @generated
+   */
+  EClass getEDictionaryPairReference();
+
+  /**
+   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Name</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getName()
+   * @see #getEDictionaryPairReference()
+   * @generated
+   */
+  EReference getEDictionaryPairReference_Name();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable <em>EDeclared Variable</em>}'.
@@ -4446,15 +4515,15 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEDictionaryPair();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair#getKey <em>Key</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Key</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair#getKey()
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair#getName()
    * @see #getEDictionaryPair()
    * @generated
    */
-  EAttribute getEDictionaryPair_Key();
+  EAttribute getEDictionaryPair_Name();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair#getValue <em>Value</em>}'.
@@ -5946,12 +6015,38 @@ public interface AnsibleDslPackage extends EPackage
     EReference EFILTERED_VARIABLE__VARIABLE = eINSTANCE.getEFilteredVariable_Variable();
 
     /**
+     * The meta object literal for the '<em><b>Tail</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EFILTERED_VARIABLE__TAIL = eINSTANCE.getEFilteredVariable_Tail();
+
+    /**
      * The meta object literal for the '<em><b>Filter commands</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute EFILTERED_VARIABLE__FILTER_COMMANDS = eINSTANCE.getEFilteredVariable_Filter_commands();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl <em>EDictionary Pair Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairReference()
+     * @generated
+     */
+    EClass EDICTIONARY_PAIR_REFERENCE = eINSTANCE.getEDictionaryPairReference();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EDICTIONARY_PAIR_REFERENCE__NAME = eINSTANCE.getEDictionaryPairReference_Name();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl <em>EDeclared Variable</em>}' class.
@@ -6028,12 +6123,12 @@ public interface AnsibleDslPackage extends EPackage
     EClass EDICTIONARY_PAIR = eINSTANCE.getEDictionaryPair();
 
     /**
-     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EDICTIONARY_PAIR__KEY = eINSTANCE.getEDictionaryPair_Key();
+    EAttribute EDICTIONARY_PAIR__NAME = eINSTANCE.getEDictionaryPair_Name();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.

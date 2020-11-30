@@ -25,6 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
@@ -99,6 +100,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EDICTIONARY_PAIR:
 				sequence_EDictionaryPair(context, (EDictionaryPair) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE:
+				sequence_EDictionaryPairReference(context, (EDictionaryPairReference) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EEXECUTION_COMMON_KEYWORDS:
 				sequence_EExecutionCommonKeywords(context, (EExecutionCommonKeywords) semanticObject); 
@@ -347,20 +351,38 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     EDictionaryPairReference returns EDictionaryPairReference
+	 *
+	 * Constraint:
+	 *     name=[EDictionaryPair|ID]
+	 */
+	protected void sequence_EDictionaryPairReference(ISerializationContext context, EDictionaryPairReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEDictionaryPairReferenceAccess().getNameEDictionaryPairIDTerminalRuleCall_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EDictionaryPair returns EDictionaryPair
 	 *
 	 * Constraint:
-	 *     (key=ID value=EValue)
+	 *     (name=ID value=EValue)
 	 */
 	protected void sequence_EDictionaryPair(ISerializationContext context, EDictionaryPair semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EDICTIONARY_PAIR__KEY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EDICTIONARY_PAIR__KEY));
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EDICTIONARY_PAIR__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EDICTIONARY_PAIR__NAME));
 			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEDictionaryPairAccess().getKeyIDTerminalRuleCall_0_0(), semanticObject.getKey());
+		feeder.accept(grammarAccess.getEDictionaryPairAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getEDictionaryPairAccess().getValueEValueParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
@@ -424,7 +446,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EFilteredVariable returns EFilteredVariable
 	 *
 	 * Constraint:
-	 *     (variable=[EDeclaredVariable|ID] filter_commands+=STRING*)
+	 *     (variable=[EDeclaredVariable|ID] tail+=EDictionaryPairReference* filter_commands+=STRING*)
 	 */
 	protected void sequence_EFilteredVariable(ISerializationContext context, EFilteredVariable semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
