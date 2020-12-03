@@ -75,7 +75,8 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   public void completeEDictionaryPairReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final EFilteredVariableImpl filteredVariable = EcoreUtil2.<EFilteredVariableImpl>getContainerOfType(model, EFilteredVariableImpl.class);
     final EList<EDictionaryPairReference> tail = filteredVariable.getTail();
-    final int index = tail.indexOf(model);
+    int _size = tail.size();
+    final int index = (_size - 1);
     if ((index > 0)) {
       final EDictionaryPair previousDictionaryPair = tail.get((index - 1)).getName();
       EValue _value = previousDictionaryPair.getValue();

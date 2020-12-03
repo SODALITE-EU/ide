@@ -213,6 +213,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredVariable/tail"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFilteredVariable/filter_commands"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EFilteredVariableOrString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFilteredVariableOrString/string"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EFilteredVariablesAndString">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredVariablesAndString/variable_and_string"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryPairReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionaryPairReference/name"/>
     </genClasses>
@@ -223,6 +229,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EVariableDeclaration/value_passed"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERegisterVariable"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EFactGathered">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFactGathered/tail"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionary">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionary/dictionary_pairs"/>
     </genClasses>

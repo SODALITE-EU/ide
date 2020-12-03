@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface EFilteredVariable extends ELoopList, EValuePassed
+public interface EFilteredVariable extends ELoopList, EFilteredVariableOrString
 {
   /**
    * Returns the value of the '<em><b>Variable</b></em>' reference.

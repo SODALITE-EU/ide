@@ -429,6 +429,24 @@ public interface AnsibleDslFactory extends EFactory
   EFilteredVariable createEFilteredVariable();
 
   /**
+   * Returns a new object of class '<em>EFiltered Variable Or String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EFiltered Variable Or String</em>'.
+   * @generated
+   */
+  EFilteredVariableOrString createEFilteredVariableOrString();
+
+  /**
+   * Returns a new object of class '<em>EFiltered Variables And String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EFiltered Variables And String</em>'.
+   * @generated
+   */
+  EFilteredVariablesAndString createEFilteredVariablesAndString();
+
+  /**
    * Returns a new object of class '<em>EDictionary Pair Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -463,6 +481,15 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   ERegisterVariable createERegisterVariable();
+
+  /**
+   * Returns a new object of class '<em>EFact Gathered</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EFact Gathered</em>'.
+   * @generated
+   */
+  EFactGathered createEFactGathered();
 
   /**
    * Returns a new object of class '<em>EDictionary</em>'.

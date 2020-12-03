@@ -2862,9 +2862,9 @@ ruleELoopOverList returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getELoopOverListAccess().getLoop_listELoopListParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getELoopOverListAccess().getLoop_listEValuePassedParserRuleCall_1_0());
 				}
-				lv_loop_list_1_0=ruleELoopList
+				lv_loop_list_1_0=ruleEValuePassed
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getELoopOverListRule());
@@ -2873,7 +2873,7 @@ ruleELoopOverList returns [EObject current=null]
 						$current,
 						"loop_list",
 						lv_loop_list_1_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.ELoopList");
+						"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -2897,42 +2897,6 @@ ruleELoopOverList returns [EObject current=null]
 				}
 			)
 		)?
-	)
-;
-
-// Entry rule entryRuleELoopList
-entryRuleELoopList returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getELoopListRule()); }
-	iv_ruleELoopList=ruleELoopList
-	{ $current=$iv_ruleELoopList.current; }
-	EOF;
-
-// Rule ELoopList
-ruleELoopList returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		{
-			newCompositeNode(grammarAccess.getELoopListAccess().getEListParserRuleCall_0());
-		}
-		this_EList_0=ruleEList
-		{
-			$current = $this_EList_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getELoopListAccess().getEFilteredVariableParserRuleCall_1());
-		}
-		this_EFilteredVariable_1=ruleEFilteredVariable
-		{
-			$current = $this_EFilteredVariable_1.current;
-			afterParserOrEnumRuleCall();
-		}
 	)
 ;
 
@@ -4918,11 +4882,11 @@ ruleEValuePassed returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getEValuePassedAccess().getEFilteredVariableParserRuleCall_1());
+			newCompositeNode(grammarAccess.getEValuePassedAccess().getEFactGatheredParserRuleCall_1());
 		}
-		this_EFilteredVariable_1=ruleEFilteredVariable
+		this_EFactGathered_1=ruleEFactGathered
 		{
-			$current = $this_EFilteredVariable_1.current;
+			$current = $this_EFactGathered_1.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -4962,24 +4926,14 @@ ruleEValue returns [EObject current=null]
 			afterParserOrEnumRuleCall();
 		}
 		    |
-		(
-			(
-				lv_value_string_2_0=RULE_STRING
-				{
-					newLeafNode(lv_value_string_2_0, grammarAccess.getEValueAccess().getValue_stringSTRINGTerminalRuleCall_2_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEValueRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"value_string",
-						lv_value_string_2_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
-			)
-		)
+		{
+			newCompositeNode(grammarAccess.getEValueAccess().getEFilteredVariablesAndStringParserRuleCall_2());
+		}
+		this_EFilteredVariablesAndString_2=ruleEFilteredVariablesAndString
+		{
+			$current = $this_EFilteredVariablesAndString_2.current;
+			afterParserOrEnumRuleCall();
+		}
 		    |
 		(
 			(
@@ -5056,6 +5010,10 @@ ruleEFilteredVariable returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='{{'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getEFilteredVariableAccess().getLeftCurlyBracketLeftCurlyBracketKeyword_0());
+		}
 		(
 			(
 				{
@@ -5063,23 +5021,23 @@ ruleEFilteredVariable returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getEFilteredVariableRule());
 					}
 				}
-				otherlv_0=RULE_ID
+				otherlv_1=RULE_ID
 				{
-					newLeafNode(otherlv_0, grammarAccess.getEFilteredVariableAccess().getVariableEDeclaredVariableCrossReference_0_0());
+					newLeafNode(otherlv_1, grammarAccess.getEFilteredVariableAccess().getVariableEDeclaredVariableCrossReference_1_0());
 				}
 			)
 		)
 		(
-			otherlv_1='.'
+			otherlv_2='.'
 			{
-				newLeafNode(otherlv_1, grammarAccess.getEFilteredVariableAccess().getFullStopKeyword_1_0());
+				newLeafNode(otherlv_2, grammarAccess.getEFilteredVariableAccess().getFullStopKeyword_2_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEFilteredVariableAccess().getTailEDictionaryPairReferenceParserRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getEFilteredVariableAccess().getTailEDictionaryPairReferenceParserRuleCall_2_1_0());
 					}
-					lv_tail_2_0=ruleEDictionaryPairReference
+					lv_tail_3_0=ruleEDictionaryPairReference
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEFilteredVariableRule());
@@ -5087,7 +5045,7 @@ ruleEFilteredVariable returns [EObject current=null]
 						add(
 							$current,
 							"tail",
-							lv_tail_2_0,
+							lv_tail_3_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.EDictionaryPairReference");
 						afterParserOrEnumRuleCall();
 					}
@@ -5095,15 +5053,15 @@ ruleEFilteredVariable returns [EObject current=null]
 			)
 		)*
 		(
-			otherlv_3='|'
+			otherlv_4='|'
 			{
-				newLeafNode(otherlv_3, grammarAccess.getEFilteredVariableAccess().getVerticalLineKeyword_2_0());
+				newLeafNode(otherlv_4, grammarAccess.getEFilteredVariableAccess().getVerticalLineKeyword_3_0());
 			}
 			(
 				(
-					lv_filter_commands_4_0=RULE_STRING
+					lv_filter_commands_5_0=RULE_STRING
 					{
-						newLeafNode(lv_filter_commands_4_0, grammarAccess.getEFilteredVariableAccess().getFilter_commandsSTRINGTerminalRuleCall_2_1_0());
+						newLeafNode(lv_filter_commands_5_0, grammarAccess.getEFilteredVariableAccess().getFilter_commandsSTRINGTerminalRuleCall_3_1_0());
 					}
 					{
 						if ($current==null) {
@@ -5112,10 +5070,117 @@ ruleEFilteredVariable returns [EObject current=null]
 						addWithLastConsumed(
 							$current,
 							"filter_commands",
-							lv_filter_commands_4_0,
+							lv_filter_commands_5_0,
 							"org.eclipse.xtext.common.Terminals.STRING");
 					}
 				)
+			)
+		)*
+		otherlv_6='}}'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getEFilteredVariableAccess().getRightCurlyBracketRightCurlyBracketKeyword_4());
+		}
+	)
+;
+
+// Entry rule entryRuleEFilteredVariableOrString
+entryRuleEFilteredVariableOrString returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEFilteredVariableOrStringRule()); }
+	iv_ruleEFilteredVariableOrString=ruleEFilteredVariableOrString
+	{ $current=$iv_ruleEFilteredVariableOrString.current; }
+	EOF;
+
+// Rule EFilteredVariableOrString
+ruleEFilteredVariableOrString returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getEFilteredVariableOrStringAccess().getEFilteredVariableParserRuleCall_0());
+		}
+		this_EFilteredVariable_0=ruleEFilteredVariable
+		{
+			$current = $this_EFilteredVariable_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		(
+			(
+				lv_string_1_0=RULE_STRING
+				{
+					newLeafNode(lv_string_1_0, grammarAccess.getEFilteredVariableOrStringAccess().getStringSTRINGTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEFilteredVariableOrStringRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"string",
+						lv_string_1_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleEFilteredVariablesAndString
+entryRuleEFilteredVariablesAndString returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEFilteredVariablesAndStringRule()); }
+	iv_ruleEFilteredVariablesAndString=ruleEFilteredVariablesAndString
+	{ $current=$iv_ruleEFilteredVariablesAndString.current; }
+	EOF;
+
+// Rule EFilteredVariablesAndString
+ruleEFilteredVariablesAndString returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEFilteredVariablesAndStringAccess().getVariable_and_stringEFilteredVariableOrStringParserRuleCall_0_0());
+				}
+				lv_variable_and_string_0_0=ruleEFilteredVariableOrString
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEFilteredVariablesAndStringRule());
+					}
+					add(
+						$current,
+						"variable_and_string",
+						lv_variable_and_string_0_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredVariableOrString");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEFilteredVariablesAndStringAccess().getVariable_and_stringEFilteredVariableOrStringParserRuleCall_1_0());
+				}
+				lv_variable_and_string_1_0=ruleEFilteredVariableOrString
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEFilteredVariablesAndStringRule());
+					}
+					add(
+						$current,
+						"variable_and_string",
+						lv_variable_and_string_1_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredVariableOrString");
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)*
 	)
@@ -5249,6 +5314,60 @@ ruleERegisterVariable returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleEFactGathered
+entryRuleEFactGathered returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEFactGatheredRule()); }
+	iv_ruleEFactGathered=ruleEFactGathered
+	{ $current=$iv_ruleEFactGathered.current; }
+	EOF;
+
+// Rule EFactGathered
+ruleEFactGathered returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getEFactGatheredAccess().getEFactGatheredAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='ansible_facts'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getEFactGatheredAccess().getAnsible_factsKeyword_1());
+		}
+		(
+			otherlv_2='.'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getEFactGatheredAccess().getFullStopKeyword_2_0());
+			}
+			(
+				(
+					lv_tail_3_0=RULE_ID
+					{
+						newLeafNode(lv_tail_3_0, grammarAccess.getEFactGatheredAccess().getTailIDTerminalRuleCall_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEFactGatheredRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"tail",
+							lv_tail_3_0,
+							"org.eclipse.xtext.common.Terminals.ID");
+					}
+				)
+			)
+		)*
 	)
 ;
 

@@ -25,13 +25,19 @@ import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
+import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
+import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
@@ -47,6 +53,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
@@ -147,11 +154,14 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         String _name_1 = play.getName();
         _builder.append(_name_1);
         _builder.newLineIfNotEmpty();
+        _builder.append(space);
+        _builder.append("hosts: all");
+        _builder.newLineIfNotEmpty();
+      } else {
+        _builder.append("- hosts: all");
+        _builder.newLine();
       }
     }
-    _builder.append(space);
-    _builder.append("hosts: all");
-    _builder.newLineIfNotEmpty();
     {
       EBaseCommonKeywords _base_common_keywords = play.getBase_common_keywords();
       boolean _tripleNotEquals_1 = (_base_common_keywords != null);
@@ -225,12 +235,14 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       int _size = play.getPre_tasks_list().size();
       boolean _tripleNotEquals_8 = (_size != 0);
       if (_tripleNotEquals_8) {
+        _builder.newLine();
         _builder.append(space);
         _builder.append("pre_tasks:");
         _builder.newLineIfNotEmpty();
         {
           EList<EBlockTask> _pre_tasks_list = play.getPre_tasks_list();
           for(final EBlockTask blockTask : _pre_tasks_list) {
+            _builder.newLine();
             CharSequence _compileBlockTask = this.compileBlockTask(blockTask, space.concat("  "));
             _builder.append(_compileBlockTask);
             _builder.newLineIfNotEmpty();
@@ -242,12 +254,14 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       int _size_1 = play.getTasks_list().size();
       boolean _tripleNotEquals_9 = (_size_1 != 0);
       if (_tripleNotEquals_9) {
+        _builder.newLine();
         _builder.append(space);
         _builder.append("tasks:");
         _builder.newLineIfNotEmpty();
         {
           EList<EBlockTask> _tasks_list = play.getTasks_list();
           for(final EBlockTask blockTask_1 : _tasks_list) {
+            _builder.newLine();
             CharSequence _compileBlockTask_1 = this.compileBlockTask(blockTask_1, space.concat("  "));
             _builder.append(_compileBlockTask_1);
             _builder.newLineIfNotEmpty();
@@ -259,12 +273,14 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       int _size_2 = play.getPost_tasks_list().size();
       boolean _tripleNotEquals_10 = (_size_2 != 0);
       if (_tripleNotEquals_10) {
+        _builder.newLine();
         _builder.append(space);
         _builder.append("post_tasks:");
         _builder.newLineIfNotEmpty();
         {
           EList<EBlockTask> _post_tasks_list = play.getPost_tasks_list();
           for(final EBlockTask blockTask_2 : _post_tasks_list) {
+            _builder.newLine();
             CharSequence _compileBlockTask_2 = this.compileBlockTask(blockTask_2, space.concat("  "));
             _builder.append(_compileBlockTask_2);
             _builder.newLineIfNotEmpty();
@@ -276,12 +292,14 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       int _size_3 = play.getHandlers().size();
       boolean _tripleNotEquals_11 = (_size_3 != 0);
       if (_tripleNotEquals_11) {
+        _builder.newLine();
         _builder.append(space);
         _builder.append("handlers:");
         _builder.newLineIfNotEmpty();
         {
           EList<EHandler> _handlers = play.getHandlers();
           for(final EHandler handler : _handlers) {
+            _builder.newLine();
             CharSequence _compileTaskHandler = this.compileTaskHandler(handler, space.concat("  "));
             _builder.append(_compileTaskHandler);
             _builder.newLineIfNotEmpty();
@@ -709,12 +727,16 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         String _name_1 = block.getName();
         _builder.append(_name_1);
         _builder.newLineIfNotEmpty();
+        String _concat = space.concat("  ");
+        _builder.append(_concat);
+        _builder.append("block:");
+        _builder.newLineIfNotEmpty();
+      } else {
+        _builder.append(space);
+        _builder.append("- block:");
+        _builder.newLineIfNotEmpty();
       }
     }
-    String _concat = space.concat("  ");
-    _builder.append(_concat);
-    _builder.append("block:");
-    _builder.newLineIfNotEmpty();
     {
       int _size = block.getTasks().size();
       boolean _tripleNotEquals_1 = (_size != 0);
@@ -911,33 +933,65 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         String _name_1 = taskHandler.getName();
         _builder.append(_name_1);
         _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      ETaskHandlerCommonKeywords _task_handler_common_keywords = taskHandler.getTask_handler_common_keywords();
-      boolean _tripleNotEquals_1 = (_task_handler_common_keywords != null);
-      if (_tripleNotEquals_1) {
         {
-          EModuleCall _module = taskHandler.getTask_handler_common_keywords().getModule();
-          boolean _tripleNotEquals_2 = (_module != null);
-          if (_tripleNotEquals_2) {
-            String _concat = space.concat("  ");
-            _builder.append(_concat);
-            String _name_2 = taskHandler.getTask_handler_common_keywords().getModule().getName();
-            _builder.append(_name_2);
-            _builder.append(":");
-            _builder.newLineIfNotEmpty();
+          ETaskHandlerCommonKeywords _task_handler_common_keywords = taskHandler.getTask_handler_common_keywords();
+          boolean _tripleNotEquals_1 = (_task_handler_common_keywords != null);
+          if (_tripleNotEquals_1) {
             {
-              EList<EParameter> _parameters = taskHandler.getTask_handler_common_keywords().getModule().getParameters();
-              for(final EParameter parameter : _parameters) {
-                String _concat_1 = space.concat("  ").concat("  ");
-                _builder.append(_concat_1);
-                String _name_3 = parameter.getName();
-                _builder.append(_name_3);
-                _builder.append(": ");
-                String _compileValuePassed = this.compileValuePassed(parameter.getValue_passed());
-                _builder.append(_compileValuePassed);
+              EModuleCall _module = taskHandler.getTask_handler_common_keywords().getModule();
+              boolean _tripleNotEquals_2 = (_module != null);
+              if (_tripleNotEquals_2) {
+                String _concat = space.concat("  ");
+                _builder.append(_concat);
+                String _name_2 = taskHandler.getTask_handler_common_keywords().getModule().getName();
+                _builder.append(_name_2);
+                _builder.append(":");
                 _builder.newLineIfNotEmpty();
+                {
+                  EList<EParameter> _parameters = taskHandler.getTask_handler_common_keywords().getModule().getParameters();
+                  for(final EParameter parameter : _parameters) {
+                    String _concat_1 = space.concat("  ").concat("  ");
+                    _builder.append(_concat_1);
+                    String _name_3 = parameter.getName();
+                    _builder.append(_name_3);
+                    _builder.append(": ");
+                    String _compileValuePassed = this.compileValuePassed(parameter.getValue_passed());
+                    _builder.append(_compileValuePassed);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+              }
+            }
+          }
+        }
+      } else {
+        {
+          ETaskHandlerCommonKeywords _task_handler_common_keywords_1 = taskHandler.getTask_handler_common_keywords();
+          boolean _tripleNotEquals_3 = (_task_handler_common_keywords_1 != null);
+          if (_tripleNotEquals_3) {
+            {
+              EModuleCall _module_1 = taskHandler.getTask_handler_common_keywords().getModule();
+              boolean _tripleNotEquals_4 = (_module_1 != null);
+              if (_tripleNotEquals_4) {
+                _builder.append(space);
+                _builder.append("- ");
+                String _name_4 = taskHandler.getTask_handler_common_keywords().getModule().getName();
+                _builder.append(_name_4);
+                _builder.append(":");
+                _builder.newLineIfNotEmpty();
+                {
+                  EList<EParameter> _parameters_1 = taskHandler.getTask_handler_common_keywords().getModule().getParameters();
+                  for(final EParameter parameter_1 : _parameters_1) {
+                    String _concat_2 = space.concat("  ").concat("  ");
+                    _builder.append(_concat_2);
+                    String _name_5 = parameter_1.getName();
+                    _builder.append(_name_5);
+                    _builder.append(": ");
+                    String _compileValuePassed_1 = this.compileValuePassed(parameter_1.getValue_passed());
+                    _builder.append(_compileValuePassed_1);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
               }
             }
           }
@@ -946,8 +1000,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EBaseCommonKeywords _base_common_keywords = taskHandler.getBase_common_keywords();
-      boolean _tripleNotEquals_3 = (_base_common_keywords != null);
-      if (_tripleNotEquals_3) {
+      boolean _tripleNotEquals_5 = (_base_common_keywords != null);
+      if (_tripleNotEquals_5) {
         CharSequence _compileBaseCommonKeywords = this.compileBaseCommonKeywords(taskHandler.getBase_common_keywords(), space.concat("  "));
         _builder.append(_compileBaseCommonKeywords);
         _builder.newLineIfNotEmpty();
@@ -955,17 +1009,17 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EExecutionCommonKeywords _exe_common_keywords = taskHandler.getExe_common_keywords();
-      boolean _tripleNotEquals_4 = (_exe_common_keywords != null);
-      if (_tripleNotEquals_4) {
+      boolean _tripleNotEquals_6 = (_exe_common_keywords != null);
+      if (_tripleNotEquals_6) {
         CharSequence _compileExecutionCommonKeywords = this.compileExecutionCommonKeywords(taskHandler.getExe_common_keywords(), space.concat("  "));
         _builder.append(_compileExecutionCommonKeywords);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      ETaskHandlerCommonKeywords _task_handler_common_keywords_1 = taskHandler.getTask_handler_common_keywords();
-      boolean _tripleNotEquals_5 = (_task_handler_common_keywords_1 != null);
-      if (_tripleNotEquals_5) {
+      ETaskHandlerCommonKeywords _task_handler_common_keywords_2 = taskHandler.getTask_handler_common_keywords();
+      boolean _tripleNotEquals_7 = (_task_handler_common_keywords_2 != null);
+      if (_tripleNotEquals_7) {
         CharSequence _compileTaskHandlerCommonKeywords = this.compileTaskHandlerCommonKeywords(taskHandler.getTask_handler_common_keywords(), space.concat("  "));
         _builder.append(_compileTaskHandlerCommonKeywords);
         _builder.newLineIfNotEmpty();
@@ -975,10 +1029,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       if ((taskHandler instanceof EHandler)) {
         {
           EList<ENotifiedTopic> _listen_to = ((EHandler)taskHandler).getListen_to();
-          boolean _tripleNotEquals_6 = (_listen_to != null);
-          if (_tripleNotEquals_6) {
-            String _concat_2 = space.concat("  ");
-            _builder.append(_concat_2);
+          boolean _tripleNotEquals_8 = (_listen_to != null);
+          if (_tripleNotEquals_8) {
+            String _concat_3 = space.concat("  ");
+            _builder.append(_concat_3);
             _builder.append("listen: ");
             ArrayList<String> _compileNotifiedTopics = this.compileNotifiedTopics(((EHandler)taskHandler));
             _builder.append(_compileNotifiedTopics);
@@ -1002,8 +1056,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           if (_tripleNotEquals_1) {
             _builder.append(space);
             _builder.append("change_when: ");
-            EConditionalExpression _changed_when_1 = taskHandlerCommonKeywords.getError_handling().getChanged_when();
-            _builder.append(_changed_when_1);
+            String _compileConditionalExpression = this.compileConditionalExpression(taskHandlerCommonKeywords.getError_handling().getChanged_when());
+            _builder.append(_compileConditionalExpression);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -1013,8 +1067,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           if (_tripleNotEquals_2) {
             _builder.append(space);
             _builder.append("failed_when: ");
-            EConditionalExpression _failed_when_1 = taskHandlerCommonKeywords.getError_handling().getFailed_when();
-            _builder.append(_failed_when_1);
+            String _compileConditionalExpression_1 = this.compileConditionalExpression(taskHandlerCommonKeywords.getError_handling().getFailed_when());
+            _builder.append(_compileConditionalExpression_1);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -1118,14 +1172,139 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       ELoop _loop = taskHandlerCommonKeywords.getLoop();
       boolean _tripleNotEquals_12 = (_loop != null);
       if (_tripleNotEquals_12) {
-        _builder.append("\t");
-        _builder.newLine();
+        {
+          ELoop _loop_1 = taskHandlerCommonKeywords.getLoop();
+          if ((_loop_1 instanceof ELoopOverList)) {
+            _builder.append(space);
+            _builder.append("loop: ");
+            ELoop _loop_2 = taskHandlerCommonKeywords.getLoop();
+            String _compileLoopList = this.compileLoopList(((ELoopOverList) _loop_2).getLoop_list());
+            _builder.append(_compileLoopList);
+            _builder.newLineIfNotEmpty();
+            {
+              ELoop _loop_3 = taskHandlerCommonKeywords.getLoop();
+              ELoopControl _loop_control = ((ELoopOverList) _loop_3).getLoop_control();
+              boolean _tripleNotEquals_13 = (_loop_control != null);
+              if (_tripleNotEquals_13) {
+                {
+                  ELoop _loop_4 = taskHandlerCommonKeywords.getLoop();
+                  EValuePassed _label = ((ELoopOverList) _loop_4).getLoop_control().getLabel();
+                  boolean _tripleNotEquals_14 = (_label != null);
+                  if (_tripleNotEquals_14) {
+                    _builder.append(space);
+                    _builder.append("label: ");
+                    ELoop _loop_5 = taskHandlerCommonKeywords.getLoop();
+                    String _compileValuePassed = this.compileValuePassed(((ELoopOverList) _loop_5).getLoop_control().getLabel());
+                    _builder.append(_compileValuePassed);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+                {
+                  ELoop _loop_6 = taskHandlerCommonKeywords.getLoop();
+                  int _pause = ((ELoopOverList) _loop_6).getLoop_control().getPause();
+                  boolean _tripleNotEquals_15 = (_pause != 0);
+                  if (_tripleNotEquals_15) {
+                    _builder.append(space);
+                    _builder.append("pause: ");
+                    ELoop _loop_7 = taskHandlerCommonKeywords.getLoop();
+                    int _pause_1 = ((ELoopOverList) _loop_7).getLoop_control().getPause();
+                    _builder.append(_pause_1);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+                {
+                  ELoop _loop_8 = taskHandlerCommonKeywords.getLoop();
+                  String _index_var = ((ELoopOverList) _loop_8).getLoop_control().getIndex_var();
+                  boolean _tripleNotEquals_16 = (_index_var != null);
+                  if (_tripleNotEquals_16) {
+                    _builder.append(space);
+                    _builder.append("index_var: ");
+                    ELoop _loop_9 = taskHandlerCommonKeywords.getLoop();
+                    String _index_var_1 = ((ELoopOverList) _loop_9).getLoop_control().getIndex_var();
+                    _builder.append(_index_var_1);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+                {
+                  ELoop _loop_10 = taskHandlerCommonKeywords.getLoop();
+                  String _loop_var = ((ELoopOverList) _loop_10).getLoop_control().getLoop_var();
+                  boolean _tripleNotEquals_17 = (_loop_var != null);
+                  if (_tripleNotEquals_17) {
+                    _builder.append(space);
+                    _builder.append("loop_var: ");
+                    ELoop _loop_11 = taskHandlerCommonKeywords.getLoop();
+                    String _loop_var_1 = ((ELoopOverList) _loop_11).getLoop_control().getLoop_var();
+                    _builder.append(_loop_var_1);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+                {
+                  ELoop _loop_12 = taskHandlerCommonKeywords.getLoop();
+                  String _extended = ((ELoopOverList) _loop_12).getLoop_control().getExtended();
+                  boolean _tripleNotEquals_18 = (_extended != null);
+                  if (_tripleNotEquals_18) {
+                    _builder.append(space);
+                    _builder.append("extended: ");
+                    ELoop _loop_13 = taskHandlerCommonKeywords.getLoop();
+                    String _extended_1 = ((ELoopOverList) _loop_13).getLoop_control().getExtended();
+                    _builder.append(_extended_1);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+              }
+            }
+          }
+        }
+        {
+          ELoop _loop_14 = taskHandlerCommonKeywords.getLoop();
+          if ((_loop_14 instanceof EUntil)) {
+            {
+              ELoop _loop_15 = taskHandlerCommonKeywords.getLoop();
+              EConditionalExpression _until = ((EUntil) _loop_15).getUntil();
+              boolean _tripleNotEquals_19 = (_until != null);
+              if (_tripleNotEquals_19) {
+                _builder.append(space);
+                _builder.append("until: ");
+                ELoop _loop_16 = taskHandlerCommonKeywords.getLoop();
+                String _compileConditionalExpression_2 = this.compileConditionalExpression(((EUntil) _loop_16).getUntil());
+                _builder.append(_compileConditionalExpression_2);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              ELoop _loop_17 = taskHandlerCommonKeywords.getLoop();
+              int _retries = ((EUntil) _loop_17).getRetries();
+              boolean _tripleNotEquals_20 = (_retries != 0);
+              if (_tripleNotEquals_20) {
+                _builder.append(space);
+                _builder.append("retries: ");
+                ELoop _loop_18 = taskHandlerCommonKeywords.getLoop();
+                int _retries_1 = ((EUntil) _loop_18).getRetries();
+                _builder.append(_retries_1);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              ELoop _loop_19 = taskHandlerCommonKeywords.getLoop();
+              int _delay = ((EUntil) _loop_19).getDelay();
+              boolean _tripleNotEquals_21 = (_delay != 0);
+              if (_tripleNotEquals_21) {
+                _builder.append(space);
+                _builder.append("delay: ");
+                ELoop _loop_20 = taskHandlerCommonKeywords.getLoop();
+                int _delay_1 = ((EUntil) _loop_20).getDelay();
+                _builder.append(_delay_1);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
       }
     }
     {
       ERegisterVariable _register = taskHandlerCommonKeywords.getRegister();
-      boolean _tripleNotEquals_13 = (_register != null);
-      if (_tripleNotEquals_13) {
+      boolean _tripleNotEquals_22 = (_register != null);
+      if (_tripleNotEquals_22) {
         _builder.append(space);
         _builder.append("register: ");
         String _name = taskHandlerCommonKeywords.getRegister().getName();
@@ -1218,17 +1397,24 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     if ((valuePassed instanceof EValue)) {
       return this.compileValue(((EValue)valuePassed)).toString();
     } else {
-      if ((valuePassed instanceof EFilteredVariable)) {
-        String filteredVariableString = "\"{{ ".concat(((EFilteredVariable)valuePassed).getVariable().getName());
-        EList<String> _filter_commands = ((EFilteredVariable)valuePassed).getFilter_commands();
-        for (final String filterCommand : _filter_commands) {
-          filteredVariableString.concat("| ").concat(filterCommand);
+      if ((valuePassed instanceof EFactGathered)) {
+        String factString = "ansible_facts";
+        EList<String> _tail = ((EFactGathered)valuePassed).getTail();
+        for (final String field : _tail) {
+          factString = factString.concat(".").concat("field");
         }
-        filteredVariableString = filteredVariableString.concat(" }}\"");
-        return filteredVariableString;
+        return factString;
       }
     }
     return null;
+  }
+  
+  public String compileLoopList(final EValuePassed loopList) {
+    if ((((loopList instanceof EFilteredVariablesAndString) || (loopList instanceof EFactGathered)) || (loopList instanceof org.sodalite.sdl.ansible.ansibleDsl.EList))) {
+      return this.compileValuePassed(loopList);
+    } else {
+      return "[".concat(this.compileValuePassed(loopList)).concat("]");
+    }
   }
   
   public Object compileValue(final EValue value) {
@@ -1247,12 +1433,34 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       if ((value instanceof org.sodalite.sdl.ansible.ansibleDsl.EList)) {
         return this.compileList(((org.sodalite.sdl.ansible.ansibleDsl.EList)value));
       } else {
-        String _value_string = value.getValue_string();
-        boolean _tripleNotEquals = (_value_string != null);
-        if (_tripleNotEquals) {
-          return value.getValue_string();
+        if ((value instanceof EFilteredVariablesAndString)) {
+          String variablesAndString = "\"";
+          EList<EFilteredVariableOrString> _variable_and_string = ((EFilteredVariablesAndString)value).getVariable_and_string();
+          for (final EFilteredVariableOrString variable_or_string : _variable_and_string) {
+            if ((variable_or_string instanceof EFilteredVariable)) {
+              variablesAndString = variablesAndString.concat("{{ ".concat(((EFilteredVariable)variable_or_string).getVariable().getName()));
+              EList<EDictionaryPairReference> _tail = ((EFilteredVariable)variable_or_string).getTail();
+              for (final EDictionaryPairReference dictionaryPairReference : _tail) {
+                variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.getName().getName());
+              }
+              EList<String> _filter_commands = ((EFilteredVariable)variable_or_string).getFilter_commands();
+              for (final String filterCommand : _filter_commands) {
+                variablesAndString = variablesAndString.concat(" | ").concat(filterCommand);
+              }
+              variablesAndString = variablesAndString.concat(" }}");
+            } else {
+              variablesAndString = variablesAndString.concat(variable_or_string.getString());
+            }
+          }
+          return variablesAndString.concat("\"");
         } else {
-          return Integer.valueOf(value.getValue_int());
+          String _value_string = value.getValue_string();
+          boolean _tripleNotEquals = (_value_string != null);
+          if (_tripleNotEquals) {
+            return value.getValue_string();
+          } else {
+            return Integer.valueOf(value.getValue_int());
+          }
         }
       }
     }

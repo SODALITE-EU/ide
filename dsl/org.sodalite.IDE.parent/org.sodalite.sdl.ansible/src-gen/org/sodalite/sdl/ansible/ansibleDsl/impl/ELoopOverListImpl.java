@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
-import org.sodalite.sdl.ansible.ansibleDsl.ELoopList;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class ELoopOverListImpl extends ELoopImpl implements ELoopOverList
    * @generated
    * @ordered
    */
-  protected ELoopList loop_list;
+  protected EValuePassed loop_list;
 
   /**
    * The cached value of the '{@link #getLoop_control() <em>Loop control</em>}' containment reference.
@@ -79,7 +79,7 @@ public class ELoopOverListImpl extends ELoopImpl implements ELoopOverList
    * @generated
    */
   @Override
-  public ELoopList getLoop_list()
+  public EValuePassed getLoop_list()
   {
     return loop_list;
   }
@@ -89,9 +89,9 @@ public class ELoopOverListImpl extends ELoopImpl implements ELoopOverList
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetLoop_list(ELoopList newLoop_list, NotificationChain msgs)
+  public NotificationChain basicSetLoop_list(EValuePassed newLoop_list, NotificationChain msgs)
   {
-    ELoopList oldLoop_list = loop_list;
+    EValuePassed oldLoop_list = loop_list;
     loop_list = newLoop_list;
     if (eNotificationRequired())
     {
@@ -107,7 +107,7 @@ public class ELoopOverListImpl extends ELoopImpl implements ELoopOverList
    * @generated
    */
   @Override
-  public void setLoop_list(ELoopList newLoop_list)
+  public void setLoop_list(EValuePassed newLoop_list)
   {
     if (newLoop_list != loop_list)
     {
@@ -220,7 +220,7 @@ public class ELoopOverListImpl extends ELoopImpl implements ELoopOverList
     switch (featureID)
     {
       case AnsibleDslPackage.ELOOP_OVER_LIST__LOOP_LIST:
-        setLoop_list((ELoopList)newValue);
+        setLoop_list((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.ELOOP_OVER_LIST__LOOP_CONTROL:
         setLoop_control((ELoopControl)newValue);
@@ -240,7 +240,7 @@ public class ELoopOverListImpl extends ELoopImpl implements ELoopOverList
     switch (featureID)
     {
       case AnsibleDslPackage.ELOOP_OVER_LIST__LOOP_LIST:
-        setLoop_list((ELoopList)null);
+        setLoop_list((EValuePassed)null);
         return;
       case AnsibleDslPackage.ELOOP_OVER_LIST__LOOP_CONTROL:
         setLoop_control((ELoopControl)null);

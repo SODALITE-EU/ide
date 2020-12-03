@@ -28,8 +28,11 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EList;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
@@ -110,11 +113,20 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EEXECUTION_EXE_SETTINGS:
 				sequence_EExecutionExeSettings(context, (EExecutionExeSettings) semanticObject); 
 				return; 
+			case AnsibleDslPackage.EFACT_GATHERED:
+				sequence_EFactGathered(context, (EFactGathered) semanticObject); 
+				return; 
 			case AnsibleDslPackage.EFACTS_SETTINGS:
 				sequence_EFactsSettings(context, (EFactsSettings) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EFILTERED_VARIABLE:
 				sequence_EFilteredVariable(context, (EFilteredVariable) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING:
+				sequence_EFilteredVariableOrString(context, (EFilteredVariableOrString) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EFILTERED_VARIABLES_AND_STRING:
+				sequence_EFilteredVariablesAndString(context, (EFilteredVariablesAndString) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EHANDLER:
 				sequence_EHandler(context, (EHandler) semanticObject); 
@@ -429,6 +441,20 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     ELoopList returns EFactGathered
+	 *     EValuePassed returns EFactGathered
+	 *     EFactGathered returns EFactGathered
+	 *
+	 * Constraint:
+	 *     tail+=ID*
+	 */
+	protected void sequence_EFactGathered(ISerializationContext context, EFactGathered semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EFactsSettings returns EFactsSettings
 	 *
 	 * Constraint:
@@ -441,14 +467,46 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     EFilteredVariableOrString returns EFilteredVariableOrString
+	 *
+	 * Constraint:
+	 *     string=STRING
+	 */
+	protected void sequence_EFilteredVariableOrString(ISerializationContext context, EFilteredVariableOrString semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EFILTERED_VARIABLE_OR_STRING__STRING) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EFILTERED_VARIABLE_OR_STRING__STRING));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEFilteredVariableOrStringAccess().getStringSTRINGTerminalRuleCall_1_0(), semanticObject.getString());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ELoopList returns EFilteredVariable
-	 *     EValuePassed returns EFilteredVariable
 	 *     EFilteredVariable returns EFilteredVariable
+	 *     EFilteredVariableOrString returns EFilteredVariable
 	 *
 	 * Constraint:
 	 *     (variable=[EDeclaredVariable|ID] tail+=EDictionaryPairReference* filter_commands+=STRING*)
 	 */
 	protected void sequence_EFilteredVariable(ISerializationContext context, EFilteredVariable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EValuePassed returns EFilteredVariablesAndString
+	 *     EValue returns EFilteredVariablesAndString
+	 *     EFilteredVariablesAndString returns EFilteredVariablesAndString
+	 *
+	 * Constraint:
+	 *     (variable_and_string+=EFilteredVariableOrString variable_and_string+=EFilteredVariableOrString*)
+	 */
+	protected void sequence_EFilteredVariablesAndString(ISerializationContext context, EFilteredVariablesAndString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -507,7 +565,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ELoopOverList returns ELoopOverList
 	 *
 	 * Constraint:
-	 *     (loop_list=ELoopList loop_control=ELoopControl?)
+	 *     (loop_list=EValuePassed loop_control=ELoopControl?)
 	 */
 	protected void sequence_ELoopOverList(ISerializationContext context, ELoopOverList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -839,7 +897,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EValue returns EValue
 	 *
 	 * Constraint:
-	 *     (value_string=STRING | value_string=BOOLEAN | value_string=NULL | value_int=INT)
+	 *     (value_string=BOOLEAN | value_string=NULL | value_int=INT)
 	 */
 	protected void sequence_EValue(ISerializationContext context, EValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

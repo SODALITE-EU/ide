@@ -23,6 +23,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,6 +33,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl#getString <em>String</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl#getVariable <em>Variable</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl#getTail <em>Tail</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl#getFilter_commands <em>Filter commands</em>}</li>
@@ -41,6 +43,26 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
  */
 public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVariable
 {
+  /**
+   * The default value of the '{@link #getString() <em>String</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getString()
+   * @generated
+   * @ordered
+   */
+  protected static final String STRING_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getString() <em>String</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getString()
+   * @generated
+   * @ordered
+   */
+  protected String string = STRING_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
    * <!-- begin-user-doc -->
@@ -90,6 +112,31 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.EFILTERED_VARIABLE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getString()
+  {
+    return string;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setString(String newString)
+  {
+    String oldString = string;
+    string = newString;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFILTERED_VARIABLE__STRING, oldString, string));
   }
 
   /**
@@ -193,6 +240,8 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EFILTERED_VARIABLE__STRING:
+        return getString();
       case AnsibleDslPackage.EFILTERED_VARIABLE__VARIABLE:
         if (resolve) return getVariable();
         return basicGetVariable();
@@ -215,6 +264,9 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EFILTERED_VARIABLE__STRING:
+        setString((String)newValue);
+        return;
       case AnsibleDslPackage.EFILTERED_VARIABLE__VARIABLE:
         setVariable((EDeclaredVariable)newValue);
         return;
@@ -240,6 +292,9 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EFILTERED_VARIABLE__STRING:
+        setString(STRING_EDEFAULT);
+        return;
       case AnsibleDslPackage.EFILTERED_VARIABLE__VARIABLE:
         setVariable((EDeclaredVariable)null);
         return;
@@ -263,6 +318,8 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EFILTERED_VARIABLE__STRING:
+        return STRING_EDEFAULT == null ? string != null : !STRING_EDEFAULT.equals(string);
       case AnsibleDslPackage.EFILTERED_VARIABLE__VARIABLE:
         return variable != null;
       case AnsibleDslPackage.EFILTERED_VARIABLE__TAIL:
@@ -279,12 +336,52 @@ public class EFilteredVariableImpl extends ELoopListImpl implements EFilteredVar
    * @generated
    */
   @Override
+  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == EFilteredVariableOrString.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case AnsibleDslPackage.EFILTERED_VARIABLE__STRING: return AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING__STRING;
+        default: return -1;
+      }
+    }
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == EFilteredVariableOrString.class)
+    {
+      switch (baseFeatureID)
+      {
+        case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING__STRING: return AnsibleDslPackage.EFILTERED_VARIABLE__STRING;
+        default: return -1;
+      }
+    }
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public String toString()
   {
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (filter_commands: ");
+    result.append(" (string: ");
+    result.append(string);
+    result.append(", filter_commands: ");
     result.append(filter_commands);
     result.append(')');
     return result.toString();

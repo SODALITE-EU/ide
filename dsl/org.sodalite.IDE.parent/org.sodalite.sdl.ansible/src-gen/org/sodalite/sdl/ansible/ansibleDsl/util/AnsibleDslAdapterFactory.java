@@ -301,6 +301,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEFilteredVariableAdapter();
       }
       @Override
+      public Adapter caseEFilteredVariableOrString(EFilteredVariableOrString object)
+      {
+        return createEFilteredVariableOrStringAdapter();
+      }
+      @Override
+      public Adapter caseEFilteredVariablesAndString(EFilteredVariablesAndString object)
+      {
+        return createEFilteredVariablesAndStringAdapter();
+      }
+      @Override
       public Adapter caseEDictionaryPairReference(EDictionaryPairReference object)
       {
         return createEDictionaryPairReferenceAdapter();
@@ -319,6 +329,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseERegisterVariable(ERegisterVariable object)
       {
         return createERegisterVariableAdapter();
+      }
+      @Override
+      public Adapter caseEFactGathered(EFactGathered object)
+      {
+        return createEFactGatheredAdapter();
       }
       @Override
       public Adapter caseEDictionary(EDictionary object)
@@ -1033,6 +1048,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString <em>EFiltered Variable Or String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString
+   * @generated
+   */
+  public Adapter createEFilteredVariableOrStringAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString <em>EFiltered Variables And String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString
+   * @generated
+   */
+  public Adapter createEFilteredVariablesAndStringAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference <em>EDictionary Pair Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1088,6 +1133,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createERegisterVariableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactGathered <em>EFact Gathered</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFactGathered
+   * @generated
+   */
+  public Adapter createEFactGatheredAdapter()
   {
     return null;
   }

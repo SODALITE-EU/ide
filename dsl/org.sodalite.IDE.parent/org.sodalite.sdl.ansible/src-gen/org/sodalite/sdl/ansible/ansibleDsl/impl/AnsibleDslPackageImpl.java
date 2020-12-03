@@ -31,8 +31,11 @@ import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EList;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
@@ -393,6 +396,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eFilteredVariableOrStringEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eFilteredVariablesAndStringEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eDictionaryPairReferenceEClass = null;
 
   /**
@@ -415,6 +432,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eRegisterVariableEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eFactGatheredEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2376,6 +2400,50 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getEFilteredVariableOrString()
+  {
+    return eFilteredVariableOrStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEFilteredVariableOrString_String()
+  {
+    return (EAttribute)eFilteredVariableOrStringEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEFilteredVariablesAndString()
+  {
+    return eFilteredVariablesAndStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEFilteredVariablesAndString_Variable_and_string()
+  {
+    return (EReference)eFilteredVariablesAndStringEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEDictionaryPairReference()
   {
     return eDictionaryPairReferenceEClass;
@@ -2445,6 +2513,28 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EClass getERegisterVariable()
   {
     return eRegisterVariableEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEFactGathered()
+  {
+    return eFactGatheredEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEFactGathered_Tail()
+  {
+    return (EAttribute)eFactGatheredEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2770,6 +2860,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__TAIL);
     createEAttribute(eFilteredVariableEClass, EFILTERED_VARIABLE__FILTER_COMMANDS);
 
+    eFilteredVariableOrStringEClass = createEClass(EFILTERED_VARIABLE_OR_STRING);
+    createEAttribute(eFilteredVariableOrStringEClass, EFILTERED_VARIABLE_OR_STRING__STRING);
+
+    eFilteredVariablesAndStringEClass = createEClass(EFILTERED_VARIABLES_AND_STRING);
+    createEReference(eFilteredVariablesAndStringEClass, EFILTERED_VARIABLES_AND_STRING__VARIABLE_AND_STRING);
+
     eDictionaryPairReferenceEClass = createEClass(EDICTIONARY_PAIR_REFERENCE);
     createEReference(eDictionaryPairReferenceEClass, EDICTIONARY_PAIR_REFERENCE__NAME);
 
@@ -2780,6 +2876,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eVariableDeclarationEClass, EVARIABLE_DECLARATION__VALUE_PASSED);
 
     eRegisterVariableEClass = createEClass(EREGISTER_VARIABLE);
+
+    eFactGatheredEClass = createEClass(EFACT_GATHERED);
+    createEAttribute(eFactGatheredEClass, EFACT_GATHERED__TAIL);
 
     eDictionaryEClass = createEClass(EDICTIONARY);
     createEReference(eDictionaryEClass, EDICTIONARY__DICTIONARY_PAIRS);
@@ -2842,9 +2941,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eNotifiedTopicEClass.getESuperTypes().add(this.getENotifiable());
     eValueEClass.getESuperTypes().add(this.getEValuePassed());
     eFilteredVariableEClass.getESuperTypes().add(this.getELoopList());
-    eFilteredVariableEClass.getESuperTypes().add(this.getEValuePassed());
+    eFilteredVariableEClass.getESuperTypes().add(this.getEFilteredVariableOrString());
+    eFilteredVariablesAndStringEClass.getESuperTypes().add(this.getEValue());
     eVariableDeclarationEClass.getESuperTypes().add(this.getEDeclaredVariable());
     eRegisterVariableEClass.getESuperTypes().add(this.getEDeclaredVariable());
+    eFactGatheredEClass.getESuperTypes().add(this.getELoopList());
+    eFactGatheredEClass.getESuperTypes().add(this.getEValuePassed());
     eDictionaryEClass.getESuperTypes().add(this.getEValue());
     eListEClass.getESuperTypes().add(this.getELoopList());
     eListEClass.getESuperTypes().add(this.getEValue());
@@ -2962,7 +3064,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eLoopEClass, ELoop.class, "ELoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eLoopOverListEClass, ELoopOverList.class, "ELoopOverList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getELoopOverList_Loop_list(), this.getELoopList(), null, "loop_list", null, 0, 1, ELoopOverList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getELoopOverList_Loop_list(), this.getEValuePassed(), null, "loop_list", null, 0, 1, ELoopOverList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getELoopOverList_Loop_control(), this.getELoopControl(), null, "loop_control", null, 0, 1, ELoopOverList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eLoopListEClass, ELoopList.class, "ELoopList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3065,6 +3167,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEFilteredVariable_Tail(), this.getEDictionaryPairReference(), null, "tail", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEFilteredVariable_Filter_commands(), ecorePackage.getEString(), "filter_commands", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(eFilteredVariableOrStringEClass, EFilteredVariableOrString.class, "EFilteredVariableOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEFilteredVariableOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EFilteredVariableOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eFilteredVariablesAndStringEClass, EFilteredVariablesAndString.class, "EFilteredVariablesAndString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEFilteredVariablesAndString_Variable_and_string(), this.getEFilteredVariableOrString(), null, "variable_and_string", null, 0, -1, EFilteredVariablesAndString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(eDictionaryPairReferenceEClass, EDictionaryPairReference.class, "EDictionaryPairReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEDictionaryPairReference_Name(), this.getEDictionaryPair(), null, "name", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3075,6 +3183,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEVariableDeclaration_Value_passed(), this.getEValue(), null, "value_passed", null, 0, 1, EVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRegisterVariableEClass, ERegisterVariable.class, "ERegisterVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eFactGatheredEClass, EFactGathered.class, "EFactGathered", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEFactGathered_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, EFactGathered.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDictionaryEClass, EDictionary.class, "EDictionary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEDictionary_Dictionary_pairs(), this.getEDictionaryPair(), null, "dictionary_pairs", null, 0, -1, EDictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -110,10 +110,13 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
       case AnsibleDslPackage.EVALUE: return createEValue();
       case AnsibleDslPackage.EFILTERED_VARIABLE: return createEFilteredVariable();
+      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING: return createEFilteredVariableOrString();
+      case AnsibleDslPackage.EFILTERED_VARIABLES_AND_STRING: return createEFilteredVariablesAndString();
       case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE: return createEDictionaryPairReference();
       case AnsibleDslPackage.EDECLARED_VARIABLE: return createEDeclaredVariable();
       case AnsibleDslPackage.EVARIABLE_DECLARATION: return createEVariableDeclaration();
       case AnsibleDslPackage.EREGISTER_VARIABLE: return createERegisterVariable();
+      case AnsibleDslPackage.EFACT_GATHERED: return createEFactGathered();
       case AnsibleDslPackage.EDICTIONARY: return createEDictionary();
       case AnsibleDslPackage.EDICTIONARY_PAIR: return createEDictionaryPair();
       case AnsibleDslPackage.ELIST: return createEList();
@@ -668,6 +671,30 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
+  public EFilteredVariableOrString createEFilteredVariableOrString()
+  {
+    EFilteredVariableOrStringImpl eFilteredVariableOrString = new EFilteredVariableOrStringImpl();
+    return eFilteredVariableOrString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EFilteredVariablesAndString createEFilteredVariablesAndString()
+  {
+    EFilteredVariablesAndStringImpl eFilteredVariablesAndString = new EFilteredVariablesAndStringImpl();
+    return eFilteredVariablesAndString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EDictionaryPairReference createEDictionaryPairReference()
   {
     EDictionaryPairReferenceImpl eDictionaryPairReference = new EDictionaryPairReferenceImpl();
@@ -708,6 +735,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     ERegisterVariableImpl eRegisterVariable = new ERegisterVariableImpl();
     return eRegisterVariable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EFactGathered createEFactGathered()
+  {
+    EFactGatheredImpl eFactGathered = new EFactGatheredImpl();
+    return eFactGathered;
   }
 
   /**

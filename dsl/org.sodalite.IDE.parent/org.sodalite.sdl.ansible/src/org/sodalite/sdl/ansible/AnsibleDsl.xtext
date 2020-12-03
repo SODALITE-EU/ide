@@ -223,12 +223,12 @@ ELoop:
 ;
 
 ELoopOverList:
-	'loop:' loop_list=ELoopList
+	'loop:' loop_list=EValuePassed
 	(loop_control=ELoopControl)?
 ;
 
 ELoopList:
-	EList | EFilteredVariable
+	EList | EFilteredVariable | EFactGathered
 ;
 
 ELoopControl:
@@ -374,15 +374,23 @@ ENotifiedTopic:
 ;
 
 EValuePassed:
-	EValue | EFilteredVariable
+	EValue | EFactGathered
 ;
 
 EValue:
-	EDictionary | EList | value_string=STRING | value_string=BOOLEAN | value_string=NULL | value_int=INT
+	EDictionary | EList | EFilteredVariablesAndString | value_string=BOOLEAN | value_string=NULL | value_int=INT
 ;
 
 EFilteredVariable:
-	variable=[EDeclaredVariable|ID] ( "." tail+=EDictionaryPairReference)* ('|' filter_commands+=STRING)*
+	'{{' variable=[EDeclaredVariable|ID] ( "." tail+=EDictionaryPairReference)* ('|' filter_commands+=STRING)* '}}'
+;
+
+EFilteredVariableOrString:
+	EFilteredVariable | string=STRING
+;
+
+EFilteredVariablesAndString:
+	(variable_and_string+=EFilteredVariableOrString) (variable_and_string+=EFilteredVariableOrString)*
 ;
 
 EDictionaryPairReference:
@@ -399,6 +407,11 @@ EVariableDeclaration:
 
 ERegisterVariable:
 	'register:' name=ID
+;
+
+EFactGathered:
+	{EFactGathered}
+	'ansible_facts' ("." tail+=ID)*
 ;
 
 EDictionary:

@@ -32,6 +32,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler
 import org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula
+import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList
+import org.sodalite.sdl.ansible.ansibleDsl.EUntil
+import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString
 
 /**
  * Generates code from your model files on save.
@@ -81,8 +85,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compilePlay(EPlay play, String space) '''
 		«IF play.name !== null»
 			- name: «play.name»
+			«space»hosts: all
+		«ELSE»
+			- hosts: all
 		«ENDIF»
-		«space»hosts: all
 		«IF play.base_common_keywords !== null»
 			«compileBaseCommonKeywords(play.base_common_keywords, space)»
 		«ENDIF»
@@ -105,26 +111,34 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»force_handlers: «play.force_handlers»
 		«ENDIF»
 		«IF play.pre_tasks_list.size !== 0»
+			
 			«space»pre_tasks:
 			«FOR blockTask: play.pre_tasks_list»
+				
 				«compileBlockTask(blockTask, space.concat('  '))»
 			«ENDFOR»
 		«ENDIF»
 		«IF play.tasks_list.size !== 0»
+			
 			«space»tasks:
 			«FOR blockTask: play.tasks_list»
+				
 				«compileBlockTask(blockTask, space.concat('  '))»
 			«ENDFOR»
 		«ENDIF»
 		«IF play.post_tasks_list.size !== 0»
+			
 			«space»post_tasks:
 			«FOR blockTask: play.post_tasks_list»
+				
 				«compileBlockTask(blockTask, space.concat('  '))»
 			«ENDFOR»
 		«ENDIF»
 		«IF play.handlers.size !== 0»
+			
 			«space»handlers:
 			«FOR handler: play.handlers»
+				
 				«compileTaskHandler(handler, space.concat('  '))»
 			«ENDFOR»
 		«ENDIF»
@@ -259,8 +273,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileBlock(EBlock block, String space) '''
 		«IF block.name !== null»
 			«space»- name: «block.name»
-		«ENDIF»		
-		«space.concat('  ')»block:
+			«space.concat('  ')»block:
+		«ELSE»
+			«space»- block:
+		«ENDIF»
 		«IF block.tasks.size !== 0»
 			«FOR task: block.tasks»
 				«compileTaskHandler(task, space.concat('  ').concat('  '))»
@@ -322,13 +338,22 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileTaskHandler(ETaskHandler taskHandler, String space) '''
 		«IF taskHandler.name !== null»
 			«space»- name: «taskHandler.name»
-		«ENDIF»
-		«IF taskHandler.task_handler_common_keywords !== null»
-			«IF taskHandler.task_handler_common_keywords.module !== null»
-				«space.concat('  ')»«taskHandler.task_handler_common_keywords.module.name»:
-				«FOR parameter: taskHandler.task_handler_common_keywords.module.parameters»
-					«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
-				«ENDFOR»
+			«IF taskHandler.task_handler_common_keywords !== null»
+				«IF taskHandler.task_handler_common_keywords.module !== null»
+					«space.concat('  ')»«taskHandler.task_handler_common_keywords.module.name»:
+					«FOR parameter: taskHandler.task_handler_common_keywords.module.parameters»
+						«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
+					«ENDFOR»
+				«ENDIF»
+			«ENDIF»
+		«ELSE»
+			«IF taskHandler.task_handler_common_keywords !== null»
+				«IF taskHandler.task_handler_common_keywords.module !== null»
+					«space»- «taskHandler.task_handler_common_keywords.module.name»:
+					«FOR parameter: taskHandler.task_handler_common_keywords.module.parameters»
+						«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
+					«ENDFOR»
+				«ENDIF»
 			«ENDIF»
 		«ENDIF»
 		«IF taskHandler.base_common_keywords !== null»
@@ -350,10 +375,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileTaskHandlerCommonKeywords(ETaskHandlerCommonKeywords taskHandlerCommonKeywords, String space) '''
 		«IF taskHandlerCommonKeywords.error_handling !== null»
 			«IF taskHandlerCommonKeywords.error_handling.changed_when !== null»
-				«space»change_when: «taskHandlerCommonKeywords.error_handling.changed_when /*TODO*/»
+				«space»change_when: «compileConditionalExpression(taskHandlerCommonKeywords.error_handling.changed_when)»
 			«ENDIF»
 			«IF taskHandlerCommonKeywords.error_handling.failed_when !== null»
-				«space»failed_when: «taskHandlerCommonKeywords.error_handling.failed_when /*TODO*/»
+				«space»failed_when: «compileConditionalExpression(taskHandlerCommonKeywords.error_handling.failed_when)»
 			«ENDIF»
 			«IF taskHandlerCommonKeywords.error_handling.any_errors_fatal !== null»
 				«space»any_errors_fatal: «taskHandlerCommonKeywords.error_handling.any_errors_fatal»
@@ -383,7 +408,37 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»notify: «compileNotifiables(taskHandlerCommonKeywords)»
 		«ENDIF»
 		«IF taskHandlerCommonKeywords.loop !== null»
-			«/*TODO*/»
+			«IF taskHandlerCommonKeywords.loop instanceof ELoopOverList»
+				«space»loop: «compileLoopList((taskHandlerCommonKeywords.loop as ELoopOverList).loop_list)»
+				«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control !== null»
+					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.label !== null»
+						«space»label: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.label.compileValuePassed»
+					«ENDIF»
+					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.pause !== 0»
+						«space»pause: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.pause»
+					«ENDIF»
+					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.index_var !== null»
+						«space»index_var: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.index_var»
+					«ENDIF»
+					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.loop_var !== null»
+						«space»loop_var: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.loop_var»
+					«ENDIF»
+					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.extended !== null»
+						«space»extended: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.extended»
+					«ENDIF»
+				«ENDIF»
+			«ENDIF»
+			«IF taskHandlerCommonKeywords.loop instanceof EUntil»
+				«IF (taskHandlerCommonKeywords.loop as EUntil).until !== null»
+					«space»until: «(taskHandlerCommonKeywords.loop as EUntil).until.compileConditionalExpression»
+				«ENDIF»
+				«IF (taskHandlerCommonKeywords.loop as EUntil).retries !== 0»
+					«space»retries: «(taskHandlerCommonKeywords.loop as EUntil).retries»
+				«ENDIF»
+				«IF (taskHandlerCommonKeywords.loop as EUntil).delay !== 0»
+					«space»delay: «(taskHandlerCommonKeywords.loop as EUntil).delay»
+				«ENDIF»
+			«ENDIF»
 		«ENDIF»
 		«IF taskHandlerCommonKeywords.register !== null»
 			«space»register: «taskHandlerCommonKeywords.register.name»
@@ -442,14 +497,18 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileValuePassed(EValuePassed valuePassed){
 		if (valuePassed instanceof EValue) return compileValue(valuePassed).toString()
-		else if (valuePassed instanceof EFilteredVariable){
-			var filteredVariableString = "\"{{ ".concat(valuePassed.variable.name)
-			for (filterCommand : valuePassed.filter_commands){
-				filteredVariableString.concat("| ").concat(filterCommand)
+		else if (valuePassed instanceof EFactGathered){
+			var factString = "ansible_facts"
+			for (field : valuePassed.tail){
+				factString = factString.concat(".").concat("field")
 			}
-			filteredVariableString = filteredVariableString.concat(" }}\"")
-			return filteredVariableString
+			return factString
 		}
+	}
+	
+	def compileLoopList(EValuePassed loopList){
+		if (loopList instanceof EFilteredVariablesAndString || loopList instanceof EFactGathered || loopList instanceof EList) return compileValuePassed(loopList)
+		else return "[".concat(loopList.compileValuePassed).concat("]")
 	}
 	
 	def compileValue(EValue value){
@@ -463,6 +522,25 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			return dictionaryString
 		}
 		else if (value instanceof EList) return compileList(value)
+		else if (value instanceof EFilteredVariablesAndString){
+			var variablesAndString = "\""
+			for (variable_or_string : value.variable_and_string){
+				if (variable_or_string instanceof EFilteredVariable){
+					variablesAndString = variablesAndString.concat("{{ ".concat(variable_or_string.variable.name))
+					for (dictionaryPairReference : variable_or_string.tail){
+						variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.name.name)
+					}
+					for (filterCommand : variable_or_string.filter_commands){
+						variablesAndString = variablesAndString.concat(" | ").concat(filterCommand)
+					}
+					variablesAndString = variablesAndString.concat(" }}")
+				}
+				else {
+					variablesAndString = variablesAndString.concat(variable_or_string.string)
+				}
+			}
+			return variablesAndString.concat("\"")
+		}
 		else if (value.value_string !== null) return value.value_string
 		else return value.value_int
 	}

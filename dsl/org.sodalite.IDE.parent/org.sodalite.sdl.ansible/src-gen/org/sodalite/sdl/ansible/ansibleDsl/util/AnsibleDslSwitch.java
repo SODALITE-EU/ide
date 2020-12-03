@@ -412,7 +412,23 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         EFilteredVariable eFilteredVariable = (EFilteredVariable)theEObject;
         T result = caseEFilteredVariable(eFilteredVariable);
         if (result == null) result = caseELoopList(eFilteredVariable);
-        if (result == null) result = caseEValuePassed(eFilteredVariable);
+        if (result == null) result = caseEFilteredVariableOrString(eFilteredVariable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING:
+      {
+        EFilteredVariableOrString eFilteredVariableOrString = (EFilteredVariableOrString)theEObject;
+        T result = caseEFilteredVariableOrString(eFilteredVariableOrString);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EFILTERED_VARIABLES_AND_STRING:
+      {
+        EFilteredVariablesAndString eFilteredVariablesAndString = (EFilteredVariablesAndString)theEObject;
+        T result = caseEFilteredVariablesAndString(eFilteredVariablesAndString);
+        if (result == null) result = caseEValue(eFilteredVariablesAndString);
+        if (result == null) result = caseEValuePassed(eFilteredVariablesAndString);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -443,6 +459,15 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         ERegisterVariable eRegisterVariable = (ERegisterVariable)theEObject;
         T result = caseERegisterVariable(eRegisterVariable);
         if (result == null) result = caseEDeclaredVariable(eRegisterVariable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EFACT_GATHERED:
+      {
+        EFactGathered eFactGathered = (EFactGathered)theEObject;
+        T result = caseEFactGathered(eFactGathered);
+        if (result == null) result = caseELoopList(eFactGathered);
+        if (result == null) result = caseEValuePassed(eFactGathered);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1197,6 +1222,38 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EFiltered Variable Or String</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EFiltered Variable Or String</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEFilteredVariableOrString(EFilteredVariableOrString object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EFiltered Variables And String</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EFiltered Variables And String</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEFilteredVariablesAndString(EFilteredVariablesAndString object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EDictionary Pair Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1256,6 +1313,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseERegisterVariable(ERegisterVariable object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EFact Gathered</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EFact Gathered</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEFactGathered(EFactGathered object)
   {
     return null;
   }

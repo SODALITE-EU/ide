@@ -28,12 +28,12 @@ public interface ELoopOverList extends ELoop
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Loop list</em>' containment reference.
-   * @see #setLoop_list(ELoopList)
+   * @see #setLoop_list(EValuePassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getELoopOverList_Loop_list()
    * @model containment="true"
    * @generated
    */
-  ELoopList getLoop_list();
+  EValuePassed getLoop_list();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList#getLoop_list <em>Loop list</em>}' containment reference.
@@ -43,7 +43,7 @@ public interface ELoopOverList extends ELoop
    * @see #getLoop_list()
    * @generated
    */
-  void setLoop_list(ELoopList value);
+  void setLoop_list(EValuePassed value);
 
   /**
    * Returns the value of the '<em><b>Loop control</b></em>' containment reference.

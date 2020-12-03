@@ -64,7 +64,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	override void completeEDictionaryPairReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val filteredVariable = EcoreUtil2.getContainerOfType(model, EFilteredVariableImpl)
 		val tail = filteredVariable.tail
-		val index = tail.indexOf(model)
+		val index = tail.size - 1
 		if (index > 0){
 			val previousDictionaryPair = tail.get(index - 1).name
 			if (previousDictionaryPair.value instanceof EDictionaryImpl){
