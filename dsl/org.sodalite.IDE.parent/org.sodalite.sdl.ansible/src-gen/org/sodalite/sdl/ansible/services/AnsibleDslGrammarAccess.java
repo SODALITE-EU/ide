@@ -27,22 +27,14 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.Model");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cEPlaybookParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cERoleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEPlaybookParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Model:
-		//	EPlaybook | ERole;
+		//	EPlaybook;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EPlaybook | ERole
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
 		//EPlaybook
-		public RuleCall getEPlaybookParserRuleCall_0() { return cEPlaybookParserRuleCall_0; }
-		
-		//ERole
-		public RuleCall getERoleParserRuleCall_1() { return cERoleParserRuleCall_1; }
+		public RuleCall getEPlaybookParserRuleCall() { return cEPlaybookParserRuleCall; }
 	}
 	public class EPlaybookElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EPlaybook");
@@ -133,12 +125,13 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEBlockParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cETaskHandlerParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cERoleInclusionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//EExecution:
-		//	EBlock | ETaskHandler;
+		//	EBlock | ETaskHandler | ERoleInclusion;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EBlock | ETaskHandler
+		//EBlock | ETaskHandler | ERoleInclusion
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//EBlock
@@ -146,6 +139,9 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//ETaskHandler
 		public RuleCall getETaskHandlerParserRuleCall_1() { return cETaskHandlerParserRuleCall_1; }
+		
+		//ERoleInclusion
+		public RuleCall getERoleInclusionParserRuleCall_2() { return cERoleInclusionParserRuleCall_2; }
 	}
 	public class EBlockTaskElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EBlockTask");
@@ -226,8 +222,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Assignment cPre_tasks_listAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
 		private final RuleCall cPre_tasks_listEBlockTaskParserRuleCall_6_1_0 = (RuleCall)cPre_tasks_listAssignment_6_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6_2 = (Keyword)cGroup_6.eContents().get(2);
-		private final Assignment cRolesAssignment_7 = (Assignment)cUnorderedGroup.eContents().get(7);
-		private final RuleCall cRolesERoleCallsParserRuleCall_7_0 = (RuleCall)cRolesAssignment_7.eContents().get(0);
+		private final Assignment cRoles_inclusionsAssignment_7 = (Assignment)cUnorderedGroup.eContents().get(7);
+		private final RuleCall cRoles_inclusionsERoleInclusionsParserRuleCall_7_0 = (RuleCall)cRoles_inclusionsAssignment_7.eContents().get(0);
 		private final Group cGroup_8 = (Group)cUnorderedGroup.eContents().get(8);
 		private final Keyword cTasks_listKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
 		private final Assignment cTasks_listAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
@@ -255,7 +251,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	'}')? & facts_settings=EFactsSettings? & ('vars_files:' vars_files=EList)? & ('vars_prompt:' vars_prompt=EList)? &
 		//	('force_handlers:' force_handlers=BOOLEAN)? & ('pre_tasks{'
 		//	pre_tasks_list+=EBlockTask+
-		//	'}')? & roles=ERoleCalls? &
+		//	'}')? & roles_inclusions=ERoleInclusions? &
 		//	'tasks_list{'
 		//	tasks_list+=EBlockTask+
 		//	'}' ('post_tasks{'
@@ -268,9 +264,9 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//('play_name:' name=STRING)? 'base_settings{' base_common_keywords=EBaseCommonKeywords '}' ('play_exe_settings{'
 		//play_exe_settings=EPlayExeSettings '}')? & ('error_handling{' error_handling=EPlayErrorHandling '}')? &
 		//facts_settings=EFactsSettings? & ('vars_files:' vars_files=EList)? & ('vars_prompt:' vars_prompt=EList)? &
-		//('force_handlers:' force_handlers=BOOLEAN)? & ('pre_tasks{' pre_tasks_list+=EBlockTask+ '}')? & roles=ERoleCalls? &
-		//'tasks_list{' tasks_list+=EBlockTask+ '}' ('post_tasks{' post_tasks_list+=EBlockTask+ '}')? ('handlers{'
-		//handlers+=EHandler+ '}')?
+		//('force_handlers:' force_handlers=BOOLEAN)? & ('pre_tasks{' pre_tasks_list+=EBlockTask+ '}')? &
+		//roles_inclusions=ERoleInclusions? & 'tasks_list{' tasks_list+=EBlockTask+ '}' ('post_tasks{'
+		//post_tasks_list+=EBlockTask+ '}')? ('handlers{' handlers+=EHandler+ '}')?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//('play_name:' name=STRING)? 'base_settings{' base_common_keywords=EBaseCommonKeywords '}' ('play_exe_settings{'
@@ -388,11 +384,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6_2() { return cRightCurlyBracketKeyword_6_2; }
 		
-		//roles=ERoleCalls?
-		public Assignment getRolesAssignment_7() { return cRolesAssignment_7; }
+		//roles_inclusions=ERoleInclusions?
+		public Assignment getRoles_inclusionsAssignment_7() { return cRoles_inclusionsAssignment_7; }
 		
-		//ERoleCalls
-		public RuleCall getRolesERoleCallsParserRuleCall_7_0() { return cRolesERoleCallsParserRuleCall_7_0; }
+		//ERoleInclusions
+		public RuleCall getRoles_inclusionsERoleInclusionsParserRuleCall_7_0() { return cRoles_inclusionsERoleInclusionsParserRuleCall_7_0; }
 		
 		//'tasks_list{' tasks_list+=EBlockTask+ '}' ('post_tasks{' post_tasks_list+=EBlockTask+ '}')? ('handlers{'
 		//handlers+=EHandler+ '}')?
@@ -1330,483 +1326,117 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//')'
 		public Keyword getRightParenthesisKeyword_1_3() { return cRightParenthesisKeyword_1_3; }
 	}
-	public class ERoleCallsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ERoleCalls");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cRolesKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cRolesAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cRolesERoleCrossReference_1_0 = (CrossReference)cRolesAssignment_1.eContents().get(0);
-		private final RuleCall cRolesERoleSTRINGTerminalRuleCall_1_0_1 = (RuleCall)cRolesERoleCrossReference_1_0.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cRolesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cRolesERoleCrossReference_2_1_0 = (CrossReference)cRolesAssignment_2_1.eContents().get(0);
-		private final RuleCall cRolesERoleSTRINGTerminalRuleCall_2_1_0_1 = (RuleCall)cRolesERoleCrossReference_2_1_0.eContents().get(1);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//ERoleCalls:
-		//	'roles{'
-		//	roles+=[ERole|STRING] (',' roles+=[ERole|STRING])*
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'roles{' roles+=[ERole|STRING] (',' roles+=[ERole|STRING])* '}'
-		public Group getGroup() { return cGroup; }
-		
-		//'roles{'
-		public Keyword getRolesKeyword_0() { return cRolesKeyword_0; }
-		
-		//roles+=[ERole|STRING]
-		public Assignment getRolesAssignment_1() { return cRolesAssignment_1; }
-		
-		//[ERole|STRING]
-		public CrossReference getRolesERoleCrossReference_1_0() { return cRolesERoleCrossReference_1_0; }
-		
-		//STRING
-		public RuleCall getRolesERoleSTRINGTerminalRuleCall_1_0_1() { return cRolesERoleSTRINGTerminalRuleCall_1_0_1; }
-		
-		//(',' roles+=[ERole|STRING])*
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//','
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
-		
-		//roles+=[ERole|STRING]
-		public Assignment getRolesAssignment_2_1() { return cRolesAssignment_2_1; }
-		
-		//[ERole|STRING]
-		public CrossReference getRolesERoleCrossReference_2_1_0() { return cRolesERoleCrossReference_2_1_0; }
-		
-		//STRING
-		public RuleCall getRolesERoleSTRINGTerminalRuleCall_2_1_0_1() { return cRolesERoleSTRINGTerminalRuleCall_2_1_0_1; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
-	}
-	public class ERoleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ERole");
+	public class ERoleInclusionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ERoleInclusion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRoleKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cRole_nameKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameSTRINGTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cTasks_listKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cTasks_listAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final Alternatives cTasks_listAlternatives_3_1_0 = (Alternatives)cTasks_listAssignment_3_1.eContents().get(0);
-		private final RuleCall cTasks_listETaskParserRuleCall_3_1_0_0 = (RuleCall)cTasks_listAlternatives_3_1_0.eContents().get(0);
-		private final RuleCall cTasks_listEBlockParserRuleCall_3_1_0_1 = (RuleCall)cTasks_listAlternatives_3_1_0.eContents().get(1);
-		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cHandlersKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cHandlersAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cHandlersEHandlerParserRuleCall_4_1_0 = (RuleCall)cHandlersAssignment_4_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cVarsKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cVariable_declarationsAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cVariable_declarationsEVariableDeclarationParserRuleCall_5_1_0 = (RuleCall)cVariable_declarationsAssignment_5_1.eContents().get(0);
-		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
-		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
-		private final Assignment cVariable_declarationsAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
-		private final RuleCall cVariable_declarationsEVariableDeclarationParserRuleCall_5_2_1_0 = (RuleCall)cVariable_declarationsAssignment_5_2_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5_3 = (Keyword)cGroup_5.eContents().get(3);
-		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cFiles_namesKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
-		private final Assignment cFiles_names_listAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
-		private final RuleCall cFiles_names_listEListParserRuleCall_6_1_0 = (RuleCall)cFiles_names_listAssignment_6_1.eContents().get(0);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cTemplates_namesKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cTemplates_names_listAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final RuleCall cTemplates_names_listEListParserRuleCall_7_1_0 = (RuleCall)cTemplates_names_listAssignment_7_1.eContents().get(0);
-		private final Assignment cMetadataAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cMetadataERoleMetadataParserRuleCall_8_0 = (RuleCall)cMetadataAssignment_8.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cRole_nameKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cNameAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cNameSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cNameAssignment_1_1.eContents().get(0);
+		private final Keyword cBase_settingsKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cBase_common_keywordsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cBase_common_keywordsEBaseCommonKeywordsParserRuleCall_3_0 = (RuleCall)cBase_common_keywordsAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cExecution_settingsKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cExe_common_keywordsAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cExe_common_keywordsEExecutionCommonKeywordsParserRuleCall_6_0 = (RuleCall)cExe_common_keywordsAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
-		//ERole:
-		//	'role{'
-		//	'role_name:' name=STRING ('tasks_list{'
-		//	tasks_list+=(ETask | EBlock)+
-		//	'}')? ('handlers{'
-		//	handlers+=EHandler+
-		//	'}')? ('vars{'
-		//	variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
-		//	'}')? ('files_names:' files_names_list=EList)? ('templates_names:' templates_names_list=EList)? //for example "server.xml", like in https://github.com/ansible/ansible-examples/blob/master/tomcat-standalone/roles/tomcat/templates/server.xml
-		//	metadata=ERoleMetadata?
+		//ERoleInclusion:
+		//	'role{' ('role_name:' name=STRING)?
+		//	'base_settings{'
+		//	base_common_keywords=EBaseCommonKeywords
+		//	'}'
+		//	'execution_settings{'
+		//	exe_common_keywords=EExecutionCommonKeywords
+		//	'}'
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'role{' 'role_name:' name=STRING ('tasks_list{' tasks_list+=(ETask | EBlock)+ '}')? ('handlers{' handlers+=EHandler+
-		//'}')? ('vars{' variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)* '}')?
-		//('files_names:' files_names_list=EList)? ('templates_names:' templates_names_list=EList)? //for example "server.xml", like in https://github.com/ansible/ansible-examples/blob/master/tomcat-standalone/roles/tomcat/templates/server.xml
-		//metadata=ERoleMetadata? '}'
+		//'role{' ('role_name:' name=STRING)? 'base_settings{' base_common_keywords=EBaseCommonKeywords '}' 'execution_settings{'
+		//exe_common_keywords=EExecutionCommonKeywords '}' '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'role{'
 		public Keyword getRoleKeyword_0() { return cRoleKeyword_0; }
 		
+		//('role_name:' name=STRING)?
+		public Group getGroup_1() { return cGroup_1; }
+		
 		//'role_name:'
-		public Keyword getRole_nameKeyword_1() { return cRole_nameKeyword_1; }
+		public Keyword getRole_nameKeyword_1_0() { return cRole_nameKeyword_1_0; }
 		
 		//name=STRING
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		public Assignment getNameAssignment_1_1() { return cNameAssignment_1_1; }
 		
 		//STRING
-		public RuleCall getNameSTRINGTerminalRuleCall_2_0() { return cNameSTRINGTerminalRuleCall_2_0; }
+		public RuleCall getNameSTRINGTerminalRuleCall_1_1_0() { return cNameSTRINGTerminalRuleCall_1_1_0; }
 		
-		//('tasks_list{' tasks_list+=(ETask | EBlock)+ '}')?
-		public Group getGroup_3() { return cGroup_3; }
+		//'base_settings{'
+		public Keyword getBase_settingsKeyword_2() { return cBase_settingsKeyword_2; }
 		
-		//'tasks_list{'
-		public Keyword getTasks_listKeyword_3_0() { return cTasks_listKeyword_3_0; }
+		//base_common_keywords=EBaseCommonKeywords
+		public Assignment getBase_common_keywordsAssignment_3() { return cBase_common_keywordsAssignment_3; }
 		
-		//tasks_list+=(ETask | EBlock)+
-		public Assignment getTasks_listAssignment_3_1() { return cTasks_listAssignment_3_1; }
-		
-		//(ETask | EBlock)
-		public Alternatives getTasks_listAlternatives_3_1_0() { return cTasks_listAlternatives_3_1_0; }
-		
-		//ETask
-		public RuleCall getTasks_listETaskParserRuleCall_3_1_0_0() { return cTasks_listETaskParserRuleCall_3_1_0_0; }
-		
-		//EBlock
-		public RuleCall getTasks_listEBlockParserRuleCall_3_1_0_1() { return cTasks_listEBlockParserRuleCall_3_1_0_1; }
+		//EBaseCommonKeywords
+		public RuleCall getBase_common_keywordsEBaseCommonKeywordsParserRuleCall_3_0() { return cBase_common_keywordsEBaseCommonKeywordsParserRuleCall_3_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 		
-		//('handlers{' handlers+=EHandler+ '}')?
-		public Group getGroup_4() { return cGroup_4; }
+		//'execution_settings{'
+		public Keyword getExecution_settingsKeyword_5() { return cExecution_settingsKeyword_5; }
 		
-		//'handlers{'
-		public Keyword getHandlersKeyword_4_0() { return cHandlersKeyword_4_0; }
+		//exe_common_keywords=EExecutionCommonKeywords
+		public Assignment getExe_common_keywordsAssignment_6() { return cExe_common_keywordsAssignment_6; }
 		
-		//handlers+=EHandler+
-		public Assignment getHandlersAssignment_4_1() { return cHandlersAssignment_4_1; }
-		
-		//EHandler
-		public RuleCall getHandlersEHandlerParserRuleCall_4_1_0() { return cHandlersEHandlerParserRuleCall_4_1_0; }
+		//EExecutionCommonKeywords
+		public RuleCall getExe_common_keywordsEExecutionCommonKeywordsParserRuleCall_6_0() { return cExe_common_keywordsEExecutionCommonKeywordsParserRuleCall_6_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_4_2() { return cRightCurlyBracketKeyword_4_2; }
-		
-		//('vars{' variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)* '}')?
-		public Group getGroup_5() { return cGroup_5; }
-		
-		//'vars{'
-		public Keyword getVarsKeyword_5_0() { return cVarsKeyword_5_0; }
-		
-		//variable_declarations+=EVariableDeclaration
-		public Assignment getVariable_declarationsAssignment_5_1() { return cVariable_declarationsAssignment_5_1; }
-		
-		//EVariableDeclaration
-		public RuleCall getVariable_declarationsEVariableDeclarationParserRuleCall_5_1_0() { return cVariable_declarationsEVariableDeclarationParserRuleCall_5_1_0; }
-		
-		//(',' variable_declarations+=EVariableDeclaration)*
-		public Group getGroup_5_2() { return cGroup_5_2; }
-		
-		//','
-		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
-		
-		//variable_declarations+=EVariableDeclaration
-		public Assignment getVariable_declarationsAssignment_5_2_1() { return cVariable_declarationsAssignment_5_2_1; }
-		
-		//EVariableDeclaration
-		public RuleCall getVariable_declarationsEVariableDeclarationParserRuleCall_5_2_1_0() { return cVariable_declarationsEVariableDeclarationParserRuleCall_5_2_1_0; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5_3() { return cRightCurlyBracketKeyword_5_3; }
-		
-		//('files_names:' files_names_list=EList)?
-		public Group getGroup_6() { return cGroup_6; }
-		
-		//'files_names:'
-		public Keyword getFiles_namesKeyword_6_0() { return cFiles_namesKeyword_6_0; }
-		
-		//files_names_list=EList
-		public Assignment getFiles_names_listAssignment_6_1() { return cFiles_names_listAssignment_6_1; }
-		
-		//EList
-		public RuleCall getFiles_names_listEListParserRuleCall_6_1_0() { return cFiles_names_listEListParserRuleCall_6_1_0; }
-		
-		//('templates_names:' templates_names_list=EList)?
-		public Group getGroup_7() { return cGroup_7; }
-		
-		//'templates_names:'
-		public Keyword getTemplates_namesKeyword_7_0() { return cTemplates_namesKeyword_7_0; }
-		
-		//templates_names_list=EList
-		public Assignment getTemplates_names_listAssignment_7_1() { return cTemplates_names_listAssignment_7_1; }
-		
-		//EList
-		public RuleCall getTemplates_names_listEListParserRuleCall_7_1_0() { return cTemplates_names_listEListParserRuleCall_7_1_0; }
-		
-		////for example "server.xml", like in https://github.com/ansible/ansible-examples/blob/master/tomcat-standalone/roles/tomcat/templates/server.xml
-		//metadata=ERoleMetadata?
-		public Assignment getMetadataAssignment_8() { return cMetadataAssignment_8; }
-		
-		//ERoleMetadata
-		public RuleCall getMetadataERoleMetadataParserRuleCall_8_0() { return cMetadataERoleMetadataParserRuleCall_8_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
-	public class ERoleMetadataElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ERoleMetadata");
+	public class ERoleInclusionsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ERoleInclusions");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cERoleMetadataAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cMetadataKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cAllow_duplicatesKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cAllow_duplicatesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cAllow_duplicatesBOOLEANTerminalRuleCall_2_1_0 = (RuleCall)cAllow_duplicatesAssignment_2_1.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cDependenciesKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cDependenciesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cDependenciesEListParserRuleCall_3_1_0 = (RuleCall)cDependenciesAssignment_3_1.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cGalaxy_infoKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cGalaxy_tagsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cGalaxy_tagsERoleMetadataGalaxyParserRuleCall_4_1_0 = (RuleCall)cGalaxy_tagsAssignment_4_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cRoles_inclusionsKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRolesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cRolesERoleInclusionParserRuleCall_1_0 = (RuleCall)cRolesAssignment_1.eContents().get(0);
+		private final Assignment cRolesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cRolesERoleInclusionParserRuleCall_2_0 = (RuleCall)cRolesAssignment_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//ERoleMetadata:
-		//	{ERoleMetadata}
-		//	'metadata{' ('allow_duplicates:' allow_duplicates=BOOLEAN)? ('dependencies:' dependencies=EList)? ('galaxy_info:'
-		//	galaxy_tags=ERoleMetadataGalaxy)?
+		//ERoleInclusions:
+		//	'roles_inclusions{'
+		//	roles+=ERoleInclusion roles+=ERoleInclusion*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ERoleMetadata} 'metadata{' ('allow_duplicates:' allow_duplicates=BOOLEAN)? ('dependencies:' dependencies=EList)?
-		//('galaxy_info:' galaxy_tags=ERoleMetadataGalaxy)? '}'
+		//'roles_inclusions{' roles+=ERoleInclusion roles+=ERoleInclusion* '}'
 		public Group getGroup() { return cGroup; }
 		
-		//{ERoleMetadata}
-		public Action getERoleMetadataAction_0() { return cERoleMetadataAction_0; }
+		//'roles_inclusions{'
+		public Keyword getRoles_inclusionsKeyword_0() { return cRoles_inclusionsKeyword_0; }
 		
-		//'metadata{'
-		public Keyword getMetadataKeyword_1() { return cMetadataKeyword_1; }
+		//roles+=ERoleInclusion
+		public Assignment getRolesAssignment_1() { return cRolesAssignment_1; }
 		
-		//('allow_duplicates:' allow_duplicates=BOOLEAN)?
-		public Group getGroup_2() { return cGroup_2; }
+		//ERoleInclusion
+		public RuleCall getRolesERoleInclusionParserRuleCall_1_0() { return cRolesERoleInclusionParserRuleCall_1_0; }
 		
-		//'allow_duplicates:'
-		public Keyword getAllow_duplicatesKeyword_2_0() { return cAllow_duplicatesKeyword_2_0; }
+		//roles+=ERoleInclusion*
+		public Assignment getRolesAssignment_2() { return cRolesAssignment_2; }
 		
-		//allow_duplicates=BOOLEAN
-		public Assignment getAllow_duplicatesAssignment_2_1() { return cAllow_duplicatesAssignment_2_1; }
-		
-		//BOOLEAN
-		public RuleCall getAllow_duplicatesBOOLEANTerminalRuleCall_2_1_0() { return cAllow_duplicatesBOOLEANTerminalRuleCall_2_1_0; }
-		
-		//('dependencies:' dependencies=EList)?
-		public Group getGroup_3() { return cGroup_3; }
-		
-		//'dependencies:'
-		public Keyword getDependenciesKeyword_3_0() { return cDependenciesKeyword_3_0; }
-		
-		//dependencies=EList
-		public Assignment getDependenciesAssignment_3_1() { return cDependenciesAssignment_3_1; }
-		
-		//EList
-		public RuleCall getDependenciesEListParserRuleCall_3_1_0() { return cDependenciesEListParserRuleCall_3_1_0; }
-		
-		//('galaxy_info:' galaxy_tags=ERoleMetadataGalaxy)?
-		public Group getGroup_4() { return cGroup_4; }
-		
-		//'galaxy_info:'
-		public Keyword getGalaxy_infoKeyword_4_0() { return cGalaxy_infoKeyword_4_0; }
-		
-		//galaxy_tags=ERoleMetadataGalaxy
-		public Assignment getGalaxy_tagsAssignment_4_1() { return cGalaxy_tagsAssignment_4_1; }
-		
-		//ERoleMetadataGalaxy
-		public RuleCall getGalaxy_tagsERoleMetadataGalaxyParserRuleCall_4_1_0() { return cGalaxy_tagsERoleMetadataGalaxyParserRuleCall_4_1_0; }
+		//ERoleInclusion
+		public RuleCall getRolesERoleInclusionParserRuleCall_2_0() { return cRolesERoleInclusionParserRuleCall_2_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
-	}
-	public class ERoleMetadataGalaxyElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ERoleMetadataGalaxy");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cGalaxy_infoKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cAuthorKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cAuthorAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAuthorSTRINGTerminalRuleCall_2_0 = (RuleCall)cAuthorAssignment_2.eContents().get(0);
-		private final Keyword cDescriptionKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cDescriptionAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cDescriptionSTRINGTerminalRuleCall_4_0 = (RuleCall)cDescriptionAssignment_4.eContents().get(0);
-		private final Keyword cCompanyKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cCompanyAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cCompanySTRINGTerminalRuleCall_6_0 = (RuleCall)cCompanyAssignment_6.eContents().get(0);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cIssue_tracker_urlKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cIssue_tracker_urlAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final RuleCall cIssue_tracker_urlSTRINGTerminalRuleCall_7_1_0 = (RuleCall)cIssue_tracker_urlAssignment_7_1.eContents().get(0);
-		private final Keyword cLicenseKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cLicenseAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cLicenseSTRINGTerminalRuleCall_9_0 = (RuleCall)cLicenseAssignment_9.eContents().get(0);
-		private final Keyword cMin_ansible_versionKeyword_10 = (Keyword)cGroup.eContents().get(10);
-		private final Assignment cMin_ansible_versionAssignment_11 = (Assignment)cGroup.eContents().get(11);
-		private final RuleCall cMin_ansible_versionSTRINGTerminalRuleCall_11_0 = (RuleCall)cMin_ansible_versionAssignment_11.eContents().get(0);
-		private final Group cGroup_12 = (Group)cGroup.eContents().get(12);
-		private final Keyword cMin_ansible_container_versionKeyword_12_0 = (Keyword)cGroup_12.eContents().get(0);
-		private final Assignment cMin_ansible_container_versionAssignment_12_1 = (Assignment)cGroup_12.eContents().get(1);
-		private final RuleCall cMin_ansible_container_versionSTRINGTerminalRuleCall_12_1_0 = (RuleCall)cMin_ansible_container_versionAssignment_12_1.eContents().get(0);
-		private final Group cGroup_13 = (Group)cGroup.eContents().get(13);
-		private final Keyword cGithub_branchKeyword_13_0 = (Keyword)cGroup_13.eContents().get(0);
-		private final Assignment cGithhub_branchAssignment_13_1 = (Assignment)cGroup_13.eContents().get(1);
-		private final RuleCall cGithhub_branchSTRINGTerminalRuleCall_13_1_0 = (RuleCall)cGithhub_branchAssignment_13_1.eContents().get(0);
-		private final Keyword cPlatformsKeyword_14 = (Keyword)cGroup.eContents().get(14);
-		private final Assignment cPlatformsAssignment_15 = (Assignment)cGroup.eContents().get(15);
-		private final RuleCall cPlatformsEListParserRuleCall_15_0 = (RuleCall)cPlatformsAssignment_15.eContents().get(0);
-		private final Group cGroup_16 = (Group)cGroup.eContents().get(16);
-		private final Keyword cCloud_platformsKeyword_16_0 = (Keyword)cGroup_16.eContents().get(0);
-		private final Assignment cCloud_platformsAssignment_16_1 = (Assignment)cGroup_16.eContents().get(1);
-		private final RuleCall cCloud_platformsEListParserRuleCall_16_1_0 = (RuleCall)cCloud_platformsAssignment_16_1.eContents().get(0);
-		private final Group cGroup_17 = (Group)cGroup.eContents().get(17);
-		private final Keyword cGalaxy_tagsKeyword_17_0 = (Keyword)cGroup_17.eContents().get(0);
-		private final Assignment cGalaxy_tagsAssignment_17_1 = (Assignment)cGroup_17.eContents().get(1);
-		private final RuleCall cGalaxy_tagsEListParserRuleCall_17_1_0 = (RuleCall)cGalaxy_tagsAssignment_17_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_18 = (Keyword)cGroup.eContents().get(18);
-		
-		//ERoleMetadataGalaxy:
-		//	'galaxy_info{'
-		//	'author:' author=STRING
-		//	'description:' description=STRING
-		//	'company:' company=STRING ('issue_tracker_url:' issue_tracker_url=STRING)?
-		//	'license:' license=STRING
-		//	'min_ansible_version:' min_ansible_version=STRING ('min_ansible_container_version:'
-		//	min_ansible_container_version=STRING)? ('github_branch:' githhub_branch=STRING)?
-		//	'platforms:' platforms=EList ('cloud_platforms:' cloud_platforms=EList)? ('galaxy_tags:' galaxy_tags=EList)?
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'galaxy_info{' 'author:' author=STRING 'description:' description=STRING 'company:' company=STRING ('issue_tracker_url:'
-		//issue_tracker_url=STRING)? 'license:' license=STRING 'min_ansible_version:' min_ansible_version=STRING
-		//('min_ansible_container_version:' min_ansible_container_version=STRING)? ('github_branch:' githhub_branch=STRING)?
-		//'platforms:' platforms=EList ('cloud_platforms:' cloud_platforms=EList)? ('galaxy_tags:' galaxy_tags=EList)? '}'
-		public Group getGroup() { return cGroup; }
-		
-		//'galaxy_info{'
-		public Keyword getGalaxy_infoKeyword_0() { return cGalaxy_infoKeyword_0; }
-		
-		//'author:'
-		public Keyword getAuthorKeyword_1() { return cAuthorKeyword_1; }
-		
-		//author=STRING
-		public Assignment getAuthorAssignment_2() { return cAuthorAssignment_2; }
-		
-		//STRING
-		public RuleCall getAuthorSTRINGTerminalRuleCall_2_0() { return cAuthorSTRINGTerminalRuleCall_2_0; }
-		
-		//'description:'
-		public Keyword getDescriptionKeyword_3() { return cDescriptionKeyword_3; }
-		
-		//description=STRING
-		public Assignment getDescriptionAssignment_4() { return cDescriptionAssignment_4; }
-		
-		//STRING
-		public RuleCall getDescriptionSTRINGTerminalRuleCall_4_0() { return cDescriptionSTRINGTerminalRuleCall_4_0; }
-		
-		//'company:'
-		public Keyword getCompanyKeyword_5() { return cCompanyKeyword_5; }
-		
-		//company=STRING
-		public Assignment getCompanyAssignment_6() { return cCompanyAssignment_6; }
-		
-		//STRING
-		public RuleCall getCompanySTRINGTerminalRuleCall_6_0() { return cCompanySTRINGTerminalRuleCall_6_0; }
-		
-		//('issue_tracker_url:' issue_tracker_url=STRING)?
-		public Group getGroup_7() { return cGroup_7; }
-		
-		//'issue_tracker_url:'
-		public Keyword getIssue_tracker_urlKeyword_7_0() { return cIssue_tracker_urlKeyword_7_0; }
-		
-		//issue_tracker_url=STRING
-		public Assignment getIssue_tracker_urlAssignment_7_1() { return cIssue_tracker_urlAssignment_7_1; }
-		
-		//STRING
-		public RuleCall getIssue_tracker_urlSTRINGTerminalRuleCall_7_1_0() { return cIssue_tracker_urlSTRINGTerminalRuleCall_7_1_0; }
-		
-		//'license:'
-		public Keyword getLicenseKeyword_8() { return cLicenseKeyword_8; }
-		
-		//license=STRING
-		public Assignment getLicenseAssignment_9() { return cLicenseAssignment_9; }
-		
-		//STRING
-		public RuleCall getLicenseSTRINGTerminalRuleCall_9_0() { return cLicenseSTRINGTerminalRuleCall_9_0; }
-		
-		//'min_ansible_version:'
-		public Keyword getMin_ansible_versionKeyword_10() { return cMin_ansible_versionKeyword_10; }
-		
-		//min_ansible_version=STRING
-		public Assignment getMin_ansible_versionAssignment_11() { return cMin_ansible_versionAssignment_11; }
-		
-		//STRING
-		public RuleCall getMin_ansible_versionSTRINGTerminalRuleCall_11_0() { return cMin_ansible_versionSTRINGTerminalRuleCall_11_0; }
-		
-		//('min_ansible_container_version:' min_ansible_container_version=STRING)?
-		public Group getGroup_12() { return cGroup_12; }
-		
-		//'min_ansible_container_version:'
-		public Keyword getMin_ansible_container_versionKeyword_12_0() { return cMin_ansible_container_versionKeyword_12_0; }
-		
-		//min_ansible_container_version=STRING
-		public Assignment getMin_ansible_container_versionAssignment_12_1() { return cMin_ansible_container_versionAssignment_12_1; }
-		
-		//STRING
-		public RuleCall getMin_ansible_container_versionSTRINGTerminalRuleCall_12_1_0() { return cMin_ansible_container_versionSTRINGTerminalRuleCall_12_1_0; }
-		
-		//('github_branch:' githhub_branch=STRING)?
-		public Group getGroup_13() { return cGroup_13; }
-		
-		//'github_branch:'
-		public Keyword getGithub_branchKeyword_13_0() { return cGithub_branchKeyword_13_0; }
-		
-		//githhub_branch=STRING
-		public Assignment getGithhub_branchAssignment_13_1() { return cGithhub_branchAssignment_13_1; }
-		
-		//STRING
-		public RuleCall getGithhub_branchSTRINGTerminalRuleCall_13_1_0() { return cGithhub_branchSTRINGTerminalRuleCall_13_1_0; }
-		
-		//'platforms:'
-		public Keyword getPlatformsKeyword_14() { return cPlatformsKeyword_14; }
-		
-		//platforms=EList
-		public Assignment getPlatformsAssignment_15() { return cPlatformsAssignment_15; }
-		
-		//EList
-		public RuleCall getPlatformsEListParserRuleCall_15_0() { return cPlatformsEListParserRuleCall_15_0; }
-		
-		//('cloud_platforms:' cloud_platforms=EList)?
-		public Group getGroup_16() { return cGroup_16; }
-		
-		//'cloud_platforms:'
-		public Keyword getCloud_platformsKeyword_16_0() { return cCloud_platformsKeyword_16_0; }
-		
-		//cloud_platforms=EList
-		public Assignment getCloud_platformsAssignment_16_1() { return cCloud_platformsAssignment_16_1; }
-		
-		//EList
-		public RuleCall getCloud_platformsEListParserRuleCall_16_1_0() { return cCloud_platformsEListParserRuleCall_16_1_0; }
-		
-		//('galaxy_tags:' galaxy_tags=EList)?
-		public Group getGroup_17() { return cGroup_17; }
-		
-		//'galaxy_tags:'
-		public Keyword getGalaxy_tagsKeyword_17_0() { return cGalaxy_tagsKeyword_17_0; }
-		
-		//galaxy_tags=EList
-		public Assignment getGalaxy_tagsAssignment_17_1() { return cGalaxy_tagsAssignment_17_1; }
-		
-		//EList
-		public RuleCall getGalaxy_tagsEListParserRuleCall_17_1_0() { return cGalaxy_tagsEListParserRuleCall_17_1_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_18() { return cRightCurlyBracketKeyword_18; }
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 	public class ELoopElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ELoop");
@@ -3612,10 +3242,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final EParameterElements pEParameter;
 	private final EConditionalExpressionElements pEConditionalExpression;
 	private final EConditionalFormulaElements pEConditionalFormula;
-	private final ERoleCallsElements pERoleCalls;
-	private final ERoleElements pERole;
-	private final ERoleMetadataElements pERoleMetadata;
-	private final ERoleMetadataGalaxyElements pERoleMetadataGalaxy;
+	private final ERoleInclusionElements pERoleInclusion;
+	private final ERoleInclusionsElements pERoleInclusions;
 	private final ELoopElements pELoop;
 	private final ELoopOverListElements pELoopOverList;
 	private final ELoopListElements pELoopList;
@@ -3679,10 +3307,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pEParameter = new EParameterElements();
 		this.pEConditionalExpression = new EConditionalExpressionElements();
 		this.pEConditionalFormula = new EConditionalFormulaElements();
-		this.pERoleCalls = new ERoleCallsElements();
-		this.pERole = new ERoleElements();
-		this.pERoleMetadata = new ERoleMetadataElements();
-		this.pERoleMetadataGalaxy = new ERoleMetadataGalaxyElements();
+		this.pERoleInclusion = new ERoleInclusionElements();
+		this.pERoleInclusions = new ERoleInclusionsElements();
 		this.pELoop = new ELoopElements();
 		this.pELoopOverList = new ELoopOverListElements();
 		this.pELoopList = new ELoopListElements();
@@ -3750,7 +3376,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 
 	
 	//Model:
-	//	EPlaybook | ERole;
+	//	EPlaybook;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -3786,7 +3412,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EExecution:
-	//	EBlock | ETaskHandler;
+	//	EBlock | ETaskHandler | ERoleInclusion;
 	public EExecutionElements getEExecutionAccess() {
 		return pEExecution;
 	}
@@ -3826,7 +3452,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//	'}')? & facts_settings=EFactsSettings? & ('vars_files:' vars_files=EList)? & ('vars_prompt:' vars_prompt=EList)? &
 	//	('force_handlers:' force_handlers=BOOLEAN)? & ('pre_tasks{'
 	//	pre_tasks_list+=EBlockTask+
-	//	'}')? & roles=ERoleCalls? &
+	//	'}')? & roles_inclusions=ERoleInclusions? &
 	//	'tasks_list{'
 	//	tasks_list+=EBlockTask+
 	//	'}' ('post_tasks{'
@@ -3987,66 +3613,33 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		return getEConditionalFormulaAccess().getRule();
 	}
 	
-	//ERoleCalls:
-	//	'roles{'
-	//	roles+=[ERole|STRING] (',' roles+=[ERole|STRING])*
+	//ERoleInclusion:
+	//	'role{' ('role_name:' name=STRING)?
+	//	'base_settings{'
+	//	base_common_keywords=EBaseCommonKeywords
+	//	'}'
+	//	'execution_settings{'
+	//	exe_common_keywords=EExecutionCommonKeywords
+	//	'}'
 	//	'}';
-	public ERoleCallsElements getERoleCallsAccess() {
-		return pERoleCalls;
+	public ERoleInclusionElements getERoleInclusionAccess() {
+		return pERoleInclusion;
 	}
 	
-	public ParserRule getERoleCallsRule() {
-		return getERoleCallsAccess().getRule();
+	public ParserRule getERoleInclusionRule() {
+		return getERoleInclusionAccess().getRule();
 	}
 	
-	//ERole:
-	//	'role{'
-	//	'role_name:' name=STRING ('tasks_list{'
-	//	tasks_list+=(ETask | EBlock)+
-	//	'}')? ('handlers{'
-	//	handlers+=EHandler+
-	//	'}')? ('vars{'
-	//	variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
-	//	'}')? ('files_names:' files_names_list=EList)? ('templates_names:' templates_names_list=EList)? //for example "server.xml", like in https://github.com/ansible/ansible-examples/blob/master/tomcat-standalone/roles/tomcat/templates/server.xml
-	//	metadata=ERoleMetadata?
+	//ERoleInclusions:
+	//	'roles_inclusions{'
+	//	roles+=ERoleInclusion roles+=ERoleInclusion*
 	//	'}';
-	public ERoleElements getERoleAccess() {
-		return pERole;
+	public ERoleInclusionsElements getERoleInclusionsAccess() {
+		return pERoleInclusions;
 	}
 	
-	public ParserRule getERoleRule() {
-		return getERoleAccess().getRule();
-	}
-	
-	//ERoleMetadata:
-	//	{ERoleMetadata}
-	//	'metadata{' ('allow_duplicates:' allow_duplicates=BOOLEAN)? ('dependencies:' dependencies=EList)? ('galaxy_info:'
-	//	galaxy_tags=ERoleMetadataGalaxy)?
-	//	'}';
-	public ERoleMetadataElements getERoleMetadataAccess() {
-		return pERoleMetadata;
-	}
-	
-	public ParserRule getERoleMetadataRule() {
-		return getERoleMetadataAccess().getRule();
-	}
-	
-	//ERoleMetadataGalaxy:
-	//	'galaxy_info{'
-	//	'author:' author=STRING
-	//	'description:' description=STRING
-	//	'company:' company=STRING ('issue_tracker_url:' issue_tracker_url=STRING)?
-	//	'license:' license=STRING
-	//	'min_ansible_version:' min_ansible_version=STRING ('min_ansible_container_version:'
-	//	min_ansible_container_version=STRING)? ('github_branch:' githhub_branch=STRING)?
-	//	'platforms:' platforms=EList ('cloud_platforms:' cloud_platforms=EList)? ('galaxy_tags:' galaxy_tags=EList)?
-	//	'}';
-	public ERoleMetadataGalaxyElements getERoleMetadataGalaxyAccess() {
-		return pERoleMetadataGalaxy;
-	}
-	
-	public ParserRule getERoleMetadataGalaxyRule() {
-		return getERoleMetadataGalaxyAccess().getRule();
+	public ParserRule getERoleInclusionsRule() {
+		return getERoleInclusionsAccess().getRule();
 	}
 	
 	//ELoop:

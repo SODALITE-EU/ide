@@ -16,15 +16,12 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
-import org.sodalite.sdl.ansible.ansibleDsl.ERole;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.scoping.AbstractAnsibleDslScopeProvider;
 
@@ -41,23 +38,7 @@ public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
       final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(context, EPlayImpl.class);
       if ((rootPlay != null)) {
         final List<EDeclaredVariableImpl> candidates = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootPlay, EDeclaredVariableImpl.class);
-        final List<ERoleCallsImpl> roleCalls = EcoreUtil2.<ERoleCallsImpl>getAllContentsOfType(rootPlay, ERoleCallsImpl.class);
-        for (final ERoleCallsImpl roleCall : roleCalls) {
-          EList<ERole> _roles = roleCall.getRoles();
-          for (final ERole role : _roles) {
-            {
-              final List<EDeclaredVariableImpl> candidatesRole = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(role, EDeclaredVariableImpl.class);
-              for (final EDeclaredVariableImpl candidateRole : candidatesRole) {
-                candidates.add(candidateRole);
-              }
-            }
-          }
-        }
         return Scopes.scopeFor(candidates);
-      } else {
-        final ERoleImpl rootRole = EcoreUtil2.<ERoleImpl>getContainerOfType(context, ERoleImpl.class);
-        final List<EDeclaredVariableImpl> candidates_1 = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootRole, EDeclaredVariableImpl.class);
-        return Scopes.scopeFor(candidates_1);
       }
     }
     if (((context instanceof EDictionaryPairReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME))) {

@@ -168,40 +168,22 @@ public interface AnsibleDslFactory extends EFactory
   EConditionalFormula createEConditionalFormula();
 
   /**
-   * Returns a new object of class '<em>ERole Calls</em>'.
+   * Returns a new object of class '<em>ERole Inclusion</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>ERole Calls</em>'.
+   * @return a new object of class '<em>ERole Inclusion</em>'.
    * @generated
    */
-  ERoleCalls createERoleCalls();
+  ERoleInclusion createERoleInclusion();
 
   /**
-   * Returns a new object of class '<em>ERole</em>'.
+   * Returns a new object of class '<em>ERole Inclusions</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>ERole</em>'.
+   * @return a new object of class '<em>ERole Inclusions</em>'.
    * @generated
    */
-  ERole createERole();
-
-  /**
-   * Returns a new object of class '<em>ERole Metadata</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>ERole Metadata</em>'.
-   * @generated
-   */
-  ERoleMetadata createERoleMetadata();
-
-  /**
-   * Returns a new object of class '<em>ERole Metadata Galaxy</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>ERole Metadata Galaxy</em>'.
-   * @generated
-   */
-  ERoleMetadataGalaxy createERoleMetadataGalaxy();
+  ERoleInclusions createERoleInclusions();
 
   /**
    * Returns a new object of class '<em>ELoop</em>'.

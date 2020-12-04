@@ -47,10 +47,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
-import org.sodalite.sdl.ansible.ansibleDsl.ERole;
-import org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls;
-import org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata;
-import org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
@@ -170,17 +168,11 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EREGISTER_VARIABLE:
 				sequence_ERegisterVariable(context, (ERegisterVariable) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EROLE:
-				sequence_ERole(context, (ERole) semanticObject); 
+			case AnsibleDslPackage.EROLE_INCLUSION:
+				sequence_ERoleInclusion(context, (ERoleInclusion) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EROLE_CALLS:
-				sequence_ERoleCalls(context, (ERoleCalls) semanticObject); 
-				return; 
-			case AnsibleDslPackage.EROLE_METADATA:
-				sequence_ERoleMetadata(context, (ERoleMetadata) semanticObject); 
-				return; 
-			case AnsibleDslPackage.EROLE_METADATA_GALAXY:
-				sequence_ERoleMetadataGalaxy(context, (ERoleMetadataGalaxy) semanticObject); 
+			case AnsibleDslPackage.EROLE_INCLUSIONS:
+				sequence_ERoleInclusions(context, (ERoleInclusions) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ETASK:
 				sequence_ETask(context, (ETask) semanticObject); 
@@ -683,7 +675,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         vars_prompt=EList | 
 	 *         force_handlers=BOOLEAN | 
 	 *         pre_tasks_list+=EBlockTask | 
-	 *         roles=ERoleCalls | 
+	 *         roles_inclusions=ERoleInclusions | 
 	 *         (tasks_list+=EBlockTask post_tasks_list+=EBlockTask* handlers+=EHandler*)
 	 *     )+
 	 */
@@ -738,69 +730,26 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     ERoleCalls returns ERoleCalls
+	 *     EBase returns ERoleInclusion
+	 *     EExecution returns ERoleInclusion
+	 *     ERoleInclusion returns ERoleInclusion
 	 *
 	 * Constraint:
-	 *     (roles+=[ERole|STRING] roles+=[ERole|STRING]*)
+	 *     (name=STRING? base_common_keywords=EBaseCommonKeywords exe_common_keywords=EExecutionCommonKeywords)
 	 */
-	protected void sequence_ERoleCalls(ISerializationContext context, ERoleCalls semanticObject) {
+	protected void sequence_ERoleInclusion(ISerializationContext context, ERoleInclusion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     ERoleMetadataGalaxy returns ERoleMetadataGalaxy
+	 *     ERoleInclusions returns ERoleInclusions
 	 *
 	 * Constraint:
-	 *     (
-	 *         author=STRING 
-	 *         description=STRING 
-	 *         company=STRING 
-	 *         issue_tracker_url=STRING? 
-	 *         license=STRING 
-	 *         min_ansible_version=STRING 
-	 *         min_ansible_container_version=STRING? 
-	 *         githhub_branch=STRING? 
-	 *         platforms=EList 
-	 *         cloud_platforms=EList? 
-	 *         galaxy_tags=EList?
-	 *     )
+	 *     (roles+=ERoleInclusion roles+=ERoleInclusion*)
 	 */
-	protected void sequence_ERoleMetadataGalaxy(ISerializationContext context, ERoleMetadataGalaxy semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     ERoleMetadata returns ERoleMetadata
-	 *
-	 * Constraint:
-	 *     (allow_duplicates=BOOLEAN? dependencies=EList? galaxy_tags=ERoleMetadataGalaxy?)
-	 */
-	protected void sequence_ERoleMetadata(ISerializationContext context, ERoleMetadata semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Model returns ERole
-	 *     ERole returns ERole
-	 *
-	 * Constraint:
-	 *     (
-	 *         name=STRING 
-	 *         (tasks_list+=ETask | tasks_list+=EBlock)* 
-	 *         handlers+=EHandler* 
-	 *         (variable_declarations+=EVariableDeclaration variable_declarations+=EVariableDeclaration*)? 
-	 *         files_names_list=EList? 
-	 *         templates_names_list=EList? 
-	 *         metadata=ERoleMetadata?
-	 *     )
-	 */
-	protected void sequence_ERole(ISerializationContext context, ERole semanticObject) {
+	protected void sequence_ERoleInclusions(ISerializationContext context, ERoleInclusions semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

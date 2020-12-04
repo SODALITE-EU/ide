@@ -14,14 +14,11 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
-import org.sodalite.sdl.ansible.ansibleDsl.ERole;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ui.contentassist.AbstractAnsibleDslProposalProvider;
 
@@ -47,26 +44,8 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
     if ((rootPlay != null)) {
       final List<EDeclaredVariableImpl> candidates = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootPlay, EDeclaredVariableImpl.class);
-      final List<ERoleCallsImpl> roleCalls = EcoreUtil2.<ERoleCallsImpl>getAllContentsOfType(rootPlay, ERoleCallsImpl.class);
-      for (final ERoleCallsImpl roleCall : roleCalls) {
-        EList<ERole> _roles = roleCall.getRoles();
-        for (final ERole role : _roles) {
-          {
-            final List<EDeclaredVariableImpl> candidatesRole = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(role, EDeclaredVariableImpl.class);
-            for (final EDeclaredVariableImpl candidateRole : candidatesRole) {
-              candidates.add(candidateRole);
-            }
-          }
-        }
-      }
       for (final EDeclaredVariableImpl candidate : candidates) {
         acceptor.accept(this.createCompletionProposal(candidate.getName(), context));
-      }
-    } else {
-      final ERoleImpl rootRole = EcoreUtil2.<ERoleImpl>getContainerOfType(model, ERoleImpl.class);
-      final List<EDeclaredVariableImpl> candidates_1 = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootRole, EDeclaredVariableImpl.class);
-      for (final EDeclaredVariableImpl candidate_1 : candidates_1) {
-        acceptor.accept(this.createCompletionProposal(candidate_1.getName(), context));
       }
     }
   }

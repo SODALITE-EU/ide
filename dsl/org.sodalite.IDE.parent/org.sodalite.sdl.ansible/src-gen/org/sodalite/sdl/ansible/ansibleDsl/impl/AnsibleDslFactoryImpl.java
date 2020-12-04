@@ -81,10 +81,8 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EPARAMETER: return createEParameter();
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION: return createEConditionalExpression();
       case AnsibleDslPackage.ECONDITIONAL_FORMULA: return createEConditionalFormula();
-      case AnsibleDslPackage.EROLE_CALLS: return createERoleCalls();
-      case AnsibleDslPackage.EROLE: return createERole();
-      case AnsibleDslPackage.EROLE_METADATA: return createERoleMetadata();
-      case AnsibleDslPackage.EROLE_METADATA_GALAXY: return createERoleMetadataGalaxy();
+      case AnsibleDslPackage.EROLE_INCLUSION: return createERoleInclusion();
+      case AnsibleDslPackage.EROLE_INCLUSIONS: return createERoleInclusions();
       case AnsibleDslPackage.ELOOP: return createELoop();
       case AnsibleDslPackage.ELOOP_OVER_LIST: return createELoopOverList();
       case AnsibleDslPackage.ELOOP_LIST: return createELoopList();
@@ -323,10 +321,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public ERoleCalls createERoleCalls()
+  public ERoleInclusion createERoleInclusion()
   {
-    ERoleCallsImpl eRoleCalls = new ERoleCallsImpl();
-    return eRoleCalls;
+    ERoleInclusionImpl eRoleInclusion = new ERoleInclusionImpl();
+    return eRoleInclusion;
   }
 
   /**
@@ -335,34 +333,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public ERole createERole()
+  public ERoleInclusions createERoleInclusions()
   {
-    ERoleImpl eRole = new ERoleImpl();
-    return eRole;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ERoleMetadata createERoleMetadata()
-  {
-    ERoleMetadataImpl eRoleMetadata = new ERoleMetadataImpl();
-    return eRoleMetadata;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ERoleMetadataGalaxy createERoleMetadataGalaxy()
-  {
-    ERoleMetadataGalaxyImpl eRoleMetadataGalaxy = new ERoleMetadataGalaxyImpl();
-    return eRoleMetadataGalaxy;
+    ERoleInclusionsImpl eRoleInclusions = new ERoleInclusionsImpl();
+    return eRoleInclusions;
   }
 
   /**

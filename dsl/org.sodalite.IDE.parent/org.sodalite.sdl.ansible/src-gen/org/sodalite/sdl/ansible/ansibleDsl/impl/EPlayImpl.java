@@ -24,7 +24,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EList;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls;
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getVars_prompt <em>Vars prompt</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getForce_handlers <em>Force handlers</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPre_tasks_list <em>Pre tasks list</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getRoles <em>Roles</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getRoles_inclusions <em>Roles inclusions</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getTasks_list <em>Tasks list</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPost_tasks_list <em>Post tasks list</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getHandlers <em>Handlers</em>}</li>
@@ -132,14 +132,14 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   protected org.eclipse.emf.common.util.EList<EBlockTask> pre_tasks_list;
 
   /**
-   * The cached value of the '{@link #getRoles() <em>Roles</em>}' containment reference.
+   * The cached value of the '{@link #getRoles_inclusions() <em>Roles inclusions</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRoles()
+   * @see #getRoles_inclusions()
    * @generated
    * @ordered
    */
-  protected ERoleCalls roles;
+  protected ERoleInclusions roles_inclusions;
 
   /**
    * The cached value of the '{@link #getTasks_list() <em>Tasks list</em>}' containment reference list.
@@ -488,9 +488,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public ERoleCalls getRoles()
+  public ERoleInclusions getRoles_inclusions()
   {
-    return roles;
+    return roles_inclusions;
   }
 
   /**
@@ -498,13 +498,13 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetRoles(ERoleCalls newRoles, NotificationChain msgs)
+  public NotificationChain basicSetRoles_inclusions(ERoleInclusions newRoles_inclusions, NotificationChain msgs)
   {
-    ERoleCalls oldRoles = roles;
-    roles = newRoles;
+    ERoleInclusions oldRoles_inclusions = roles_inclusions;
+    roles_inclusions = newRoles_inclusions;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__ROLES, oldRoles, newRoles);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS, oldRoles_inclusions, newRoles_inclusions);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -516,20 +516,20 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public void setRoles(ERoleCalls newRoles)
+  public void setRoles_inclusions(ERoleInclusions newRoles_inclusions)
   {
-    if (newRoles != roles)
+    if (newRoles_inclusions != roles_inclusions)
     {
       NotificationChain msgs = null;
-      if (roles != null)
-        msgs = ((InternalEObject)roles).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__ROLES, null, msgs);
-      if (newRoles != null)
-        msgs = ((InternalEObject)newRoles).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__ROLES, null, msgs);
-      msgs = basicSetRoles(newRoles, msgs);
+      if (roles_inclusions != null)
+        msgs = ((InternalEObject)roles_inclusions).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS, null, msgs);
+      if (newRoles_inclusions != null)
+        msgs = ((InternalEObject)newRoles_inclusions).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS, null, msgs);
+      msgs = basicSetRoles_inclusions(newRoles_inclusions, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__ROLES, newRoles, newRoles));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS, newRoles_inclusions, newRoles_inclusions));
   }
 
   /**
@@ -599,8 +599,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return basicSetVars_prompt(null, msgs);
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return ((InternalEList<?>)getPre_tasks_list()).basicRemove(otherEnd, msgs);
-      case AnsibleDslPackage.EPLAY__ROLES:
-        return basicSetRoles(null, msgs);
+      case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
+        return basicSetRoles_inclusions(null, msgs);
       case AnsibleDslPackage.EPLAY__TASKS_LIST:
         return ((InternalEList<?>)getTasks_list()).basicRemove(otherEnd, msgs);
       case AnsibleDslPackage.EPLAY__POST_TASKS_LIST:
@@ -635,8 +635,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return getForce_handlers();
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return getPre_tasks_list();
-      case AnsibleDslPackage.EPLAY__ROLES:
-        return getRoles();
+      case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
+        return getRoles_inclusions();
       case AnsibleDslPackage.EPLAY__TASKS_LIST:
         return getTasks_list();
       case AnsibleDslPackage.EPLAY__POST_TASKS_LIST:
@@ -680,8 +680,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         getPre_tasks_list().clear();
         getPre_tasks_list().addAll((Collection<? extends EBlockTask>)newValue);
         return;
-      case AnsibleDslPackage.EPLAY__ROLES:
-        setRoles((ERoleCalls)newValue);
+      case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
+        setRoles_inclusions((ERoleInclusions)newValue);
         return;
       case AnsibleDslPackage.EPLAY__TASKS_LIST:
         getTasks_list().clear();
@@ -730,8 +730,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         getPre_tasks_list().clear();
         return;
-      case AnsibleDslPackage.EPLAY__ROLES:
-        setRoles((ERoleCalls)null);
+      case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
+        setRoles_inclusions((ERoleInclusions)null);
         return;
       case AnsibleDslPackage.EPLAY__TASKS_LIST:
         getTasks_list().clear();
@@ -770,8 +770,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return FORCE_HANDLERS_EDEFAULT == null ? force_handlers != null : !FORCE_HANDLERS_EDEFAULT.equals(force_handlers);
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return pre_tasks_list != null && !pre_tasks_list.isEmpty();
-      case AnsibleDslPackage.EPLAY__ROLES:
-        return roles != null;
+      case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
+        return roles_inclusions != null;
       case AnsibleDslPackage.EPLAY__TASKS_LIST:
         return tasks_list != null && !tasks_list.isEmpty();
       case AnsibleDslPackage.EPLAY__POST_TASKS_LIST:

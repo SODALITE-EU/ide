@@ -2,10 +2,9 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ansibleDsl" nsURI="http://www.sodalite.org/sdl/ansible/AnsibleDsl"
     nsPrefix="ansibleDsl">
-  <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model"/>
   <eClassifiers xsi:type="ecore:EClass" name="EPlaybook" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="plays" upperBound="-1"
         eType="#//EPlay" containment="true"/>
   </eClassifiers>
@@ -37,7 +36,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="force_handlers" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pre_tasks_list" upperBound="-1"
         eType="#//EBlockTask" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" eType="#//ERoleCalls"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles_inclusions" eType="#//ERoleInclusions"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tasks_list" upperBound="-1"
         eType="#//EBlockTask" containment="true"/>
@@ -117,47 +116,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="negated_expression" eType="#//EConditionalExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ERoleCalls">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" unique="false" upperBound="-1"
-        eType="#//ERole"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ERole" eSuperTypes="#//Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks_list" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="handlers" upperBound="-1"
-        eType="#//EHandler" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable_declarations"
-        upperBound="-1" eType="#//EVariableDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="files_names_list" eType="#//EList"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="templates_names_list" eType="#//EList"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="metadata" eType="#//ERoleMetadata"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ERoleMetadata">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allow_duplicates" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" eType="#//EList"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="galaxy_tags" eType="#//ERoleMetadataGalaxy"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ERoleMetadataGalaxy">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="author" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="company" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="issue_tracker_url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="license" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_ansible_version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_ansible_container_version"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="githhub_branch" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="platforms" eType="#//EList"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cloud_platforms" eType="#//EList"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="galaxy_tags" eType="#//EList"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusion" eSuperTypes="#//EExecution"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
+        eType="#//ERoleInclusion" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ELoop"/>
   <eClassifiers xsi:type="ecore:EClass" name="ELoopOverList" eSuperTypes="#//ELoop">

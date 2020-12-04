@@ -156,24 +156,14 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEConditionalFormulaAdapter();
       }
       @Override
-      public Adapter caseERoleCalls(ERoleCalls object)
+      public Adapter caseERoleInclusion(ERoleInclusion object)
       {
-        return createERoleCallsAdapter();
+        return createERoleInclusionAdapter();
       }
       @Override
-      public Adapter caseERole(ERole object)
+      public Adapter caseERoleInclusions(ERoleInclusions object)
       {
-        return createERoleAdapter();
-      }
-      @Override
-      public Adapter caseERoleMetadata(ERoleMetadata object)
-      {
-        return createERoleMetadataAdapter();
-      }
-      @Override
-      public Adapter caseERoleMetadataGalaxy(ERoleMetadataGalaxy object)
-      {
-        return createERoleMetadataGalaxyAdapter();
+        return createERoleInclusionsAdapter();
       }
       @Override
       public Adapter caseELoop(ELoop object)
@@ -613,61 +603,31 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls <em>ERole Calls</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion <em>ERole Inclusion</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
    * @generated
    */
-  public Adapter createERoleCallsAdapter()
+  public Adapter createERoleInclusionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERole <em>ERole</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions <em>ERole Inclusions</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERole
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions
    * @generated
    */
-  public Adapter createERoleAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata <em>ERole Metadata</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata
-   * @generated
-   */
-  public Adapter createERoleMetadataAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy <em>ERole Metadata Galaxy</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy
-   * @generated
-   */
-  public Adapter createERoleMetadataGalaxyAdapter()
+  public Adapter createERoleInclusionsAdapter()
   {
     return null;
   }

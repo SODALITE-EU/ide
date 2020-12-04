@@ -3,7 +3,7 @@ grammar org.sodalite.sdl.ansible.AnsibleDsl with org.eclipse.xtext.common.Termin
 generate ansibleDsl "http://www.sodalite.org/sdl/ansible/AnsibleDsl"
 
 Model:
-	EPlaybook | ERole
+	EPlaybook
 ;
 
 EPlaybook:
@@ -22,7 +22,7 @@ EBase:
 ;
 
 EExecution:
-	EBlock | ETaskHandler
+	EBlock | ETaskHandler | ERoleInclusion
 ;
 
 EBlockTask:
@@ -51,7 +51,7 @@ EPlay:
 	('pre_tasks{'
 		(pre_tasks_list+=EBlockTask)+
 	'}')? &
-	(roles=ERoleCalls)? &
+	(roles_inclusions=ERoleInclusions)? &
 	'tasks_list{'
 		(tasks_list+=EBlockTask)+
 	'}'
@@ -169,52 +169,21 @@ EConditionalFormula:
 	| 'not' '(' negated_expression=EConditionalExpression ')'
 ;
 
-ERoleCalls:
-	'roles{'
-		roles+=[ERole|STRING] (',' roles+=[ERole|STRING])*
-	'}'
-;
-
-ERole:
+ERoleInclusion:
 	'role{'
-		'role_name:' name=STRING
-		('tasks_list{'
-			(tasks_list+=(ETask | EBlock))+
-		'}')?
-		('handlers{'
-			(handlers+=EHandler)+
-		'}')?
-		('vars{'
-			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
-		'}')?
-		('files_names:' files_names_list=EList)? //for example "tomcat-initscript.sh", like in https://github.com/ansible/ansible-examples/tree/master/tomcat-standalone/roles/tomcat/files
-		('templates_names:' templates_names_list=EList)? //for example "server.xml", like in https://github.com/ansible/ansible-examples/blob/master/tomcat-standalone/roles/tomcat/templates/server.xml
-		(metadata=ERoleMetadata)?
+		('role_name:' name=STRING)?
+		'base_settings{'
+			base_common_keywords=EBaseCommonKeywords
+		'}'
+		'execution_settings{'
+			exe_common_keywords=EExecutionCommonKeywords
+		'}'
 	'}'
 ;
 
-ERoleMetadata:
-	{ERoleMetadata}
-	'metadata{'
-		('allow_duplicates:' allow_duplicates=BOOLEAN)?
-		('dependencies:' dependencies=EList)?
-		('galaxy_info:' galaxy_tags=ERoleMetadataGalaxy)?
-	'}'
-;
-
-ERoleMetadataGalaxy:
-	'galaxy_info{'
-		'author:' author=STRING
-		'description:' description=STRING
-		'company:' company=STRING
-		('issue_tracker_url:' issue_tracker_url=STRING)?
-		'license:' license=STRING
-		'min_ansible_version:' min_ansible_version=STRING
-		('min_ansible_container_version:' min_ansible_container_version=STRING)?
-		('github_branch:' githhub_branch=STRING)?
-		'platforms:' platforms=EList
-		('cloud_platforms:' cloud_platforms=EList)?
-		('galaxy_tags:' galaxy_tags=EList)?
+ERoleInclusions:
+	'roles_inclusions{'
+		roles+=ERoleInclusion (roles+=ERoleInclusion)*
 	'}'
 ;
 

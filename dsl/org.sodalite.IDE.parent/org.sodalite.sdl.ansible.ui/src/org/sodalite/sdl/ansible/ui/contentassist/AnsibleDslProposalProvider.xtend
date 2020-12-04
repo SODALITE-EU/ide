@@ -11,8 +11,6 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.EcoreUtil2
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl
 import org.eclipse.xtext.Assignment
-import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl
-import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl
@@ -38,7 +36,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		if (rootPlay !== null){
 			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EDeclaredVariableImpl)
 			//also the variables declared in the imported roles must be scoped
-			val roleCalls = EcoreUtil2.getAllContentsOfType(rootPlay, ERoleCallsImpl)
+			/*val roleCalls = EcoreUtil2.getAllContentsOfType(rootPlay, ERoleCallsImpl)
 			for (roleCall: roleCalls){
 				for (role: roleCall.roles){
 					val candidatesRole = EcoreUtil2.getAllContentsOfType(role, EDeclaredVariableImpl)
@@ -46,19 +44,19 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 						candidates.add(candidateRole)
 					}
 				}
-			}
+			}*/
 			for (candidate: candidates){
 				acceptor.accept(createCompletionProposal(candidate.name, context))
 			}
 		}
 		//this else is entered it we are in a role
-		else {
+		/*else {
 			val rootRole = EcoreUtil2.getContainerOfType(model, ERoleImpl)
 			val candidates = EcoreUtil2.getAllContentsOfType(rootRole, EDeclaredVariableImpl)
 			for (candidate: candidates){
 				acceptor.accept(createCompletionProposal(candidate.name, context))
 			}
-		}	
+		}*/
 	}
 
 	override void completeEDictionaryPairReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

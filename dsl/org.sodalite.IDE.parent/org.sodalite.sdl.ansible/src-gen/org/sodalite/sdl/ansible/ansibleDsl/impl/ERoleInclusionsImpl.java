@@ -5,49 +5,53 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.ERole;
-import org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>ERole Calls</b></em>'.
+ * An implementation of the model object '<em><b>ERole Inclusions</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl#getRoles <em>Roles</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionsImpl#getRoles <em>Roles</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ERoleCallsImpl extends MinimalEObjectImpl.Container implements ERoleCalls
+public class ERoleInclusionsImpl extends MinimalEObjectImpl.Container implements ERoleInclusions
 {
   /**
-   * The cached value of the '{@link #getRoles() <em>Roles</em>}' reference list.
+   * The cached value of the '{@link #getRoles() <em>Roles</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getRoles()
    * @generated
    * @ordered
    */
-  protected EList<ERole> roles;
+  protected EList<ERoleInclusion> roles;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ERoleCallsImpl()
+  protected ERoleInclusionsImpl()
   {
     super();
   }
@@ -60,7 +64,7 @@ public class ERoleCallsImpl extends MinimalEObjectImpl.Container implements ERol
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EROLE_CALLS;
+    return AnsibleDslPackage.Literals.EROLE_INCLUSIONS;
   }
 
   /**
@@ -69,13 +73,29 @@ public class ERoleCallsImpl extends MinimalEObjectImpl.Container implements ERol
    * @generated
    */
   @Override
-  public EList<ERole> getRoles()
+  public EList<ERoleInclusion> getRoles()
   {
     if (roles == null)
     {
-      roles = new EObjectResolvingEList<ERole>(ERole.class, this, AnsibleDslPackage.EROLE_CALLS__ROLES);
+      roles = new EObjectContainmentEList<ERoleInclusion>(ERoleInclusion.class, this, AnsibleDslPackage.EROLE_INCLUSIONS__ROLES);
     }
     return roles;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.EROLE_INCLUSIONS__ROLES:
+        return ((InternalEList<?>)getRoles()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -88,7 +108,7 @@ public class ERoleCallsImpl extends MinimalEObjectImpl.Container implements ERol
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EROLE_CALLS__ROLES:
+      case AnsibleDslPackage.EROLE_INCLUSIONS__ROLES:
         return getRoles();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -105,9 +125,9 @@ public class ERoleCallsImpl extends MinimalEObjectImpl.Container implements ERol
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EROLE_CALLS__ROLES:
+      case AnsibleDslPackage.EROLE_INCLUSIONS__ROLES:
         getRoles().clear();
-        getRoles().addAll((Collection<? extends ERole>)newValue);
+        getRoles().addAll((Collection<? extends ERoleInclusion>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -123,7 +143,7 @@ public class ERoleCallsImpl extends MinimalEObjectImpl.Container implements ERol
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EROLE_CALLS__ROLES:
+      case AnsibleDslPackage.EROLE_INCLUSIONS__ROLES:
         getRoles().clear();
         return;
     }
@@ -140,10 +160,10 @@ public class ERoleCallsImpl extends MinimalEObjectImpl.Container implements ERol
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EROLE_CALLS__ROLES:
+      case AnsibleDslPackage.EROLE_INCLUSIONS__ROLES:
         return roles != null && !roles.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ERoleCallsImpl
+} //ERoleInclusionsImpl

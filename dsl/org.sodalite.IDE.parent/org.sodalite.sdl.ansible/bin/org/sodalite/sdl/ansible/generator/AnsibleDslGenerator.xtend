@@ -36,6 +36,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil
 import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
 
 /**
  * Generates code from your model files on save.
@@ -110,6 +111,12 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«IF play.force_handlers !== null»
 			«space»force_handlers: «play.force_handlers»
 		«ENDIF»
+		«IF play.roles_inclusions !== null»
+			«space»roles:
+			«FOR role: play.roles_inclusions.roles»
+				«compileRoleInclusion(role, space.concat('  '))»
+			«ENDFOR»
+		«ENDIF»
 		«IF play.pre_tasks_list.size !== 0»
 			
 			«space»pre_tasks:
@@ -150,6 +157,19 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 		«IF execution instanceof ETaskHandler»
 			«compileTaskHandler(execution, space)»
+		«ENDIF»
+		«IF execution instanceof ERoleInclusion»
+			«compileRoleInclusion(execution, space)»
+		«ENDIF»
+	'''
+	
+	def compileRoleInclusion(ERoleInclusion roleInclusion, String space)'''
+		«space»- role: «roleInclusion.name»
+		«IF roleInclusion.base_common_keywords !== null»
+			«compileBaseCommonKeywords(roleInclusion.base_common_keywords, space.concat('  '))»
+		«ENDIF»
+		«IF roleInclusion.exe_common_keywords !== null»
+			«compileExecutionCommonKeywords(roleInclusion.exe_common_keywords, space.concat('  '))»
 		«ENDIF»
 	'''
 	

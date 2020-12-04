@@ -200,32 +200,19 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EROLE_CALLS:
+      case AnsibleDslPackage.EROLE_INCLUSION:
       {
-        ERoleCalls eRoleCalls = (ERoleCalls)theEObject;
-        T result = caseERoleCalls(eRoleCalls);
+        ERoleInclusion eRoleInclusion = (ERoleInclusion)theEObject;
+        T result = caseERoleInclusion(eRoleInclusion);
+        if (result == null) result = caseEExecution(eRoleInclusion);
+        if (result == null) result = caseEBase(eRoleInclusion);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EROLE:
+      case AnsibleDslPackage.EROLE_INCLUSIONS:
       {
-        ERole eRole = (ERole)theEObject;
-        T result = caseERole(eRole);
-        if (result == null) result = caseModel(eRole);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AnsibleDslPackage.EROLE_METADATA:
-      {
-        ERoleMetadata eRoleMetadata = (ERoleMetadata)theEObject;
-        T result = caseERoleMetadata(eRoleMetadata);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AnsibleDslPackage.EROLE_METADATA_GALAXY:
-      {
-        ERoleMetadataGalaxy eRoleMetadataGalaxy = (ERoleMetadataGalaxy)theEObject;
-        T result = caseERoleMetadataGalaxy(eRoleMetadataGalaxy);
+        ERoleInclusions eRoleInclusions = (ERoleInclusions)theEObject;
+        T result = caseERoleInclusions(eRoleInclusions);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -758,65 +745,33 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>ERole Calls</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>ERole Inclusion</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ERole Calls</em>'.
+   * @return the result of interpreting the object as an instance of '<em>ERole Inclusion</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseERoleCalls(ERoleCalls object)
+  public T caseERoleInclusion(ERoleInclusion object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>ERole</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>ERole Inclusions</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ERole</em>'.
+   * @return the result of interpreting the object as an instance of '<em>ERole Inclusions</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseERole(ERole object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>ERole Metadata</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ERole Metadata</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseERoleMetadata(ERoleMetadata object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>ERole Metadata Galaxy</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ERole Metadata Galaxy</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseERoleMetadataGalaxy(ERoleMetadataGalaxy object)
+  public T caseERoleInclusions(ERoleInclusions object)
   {
     return null;
   }

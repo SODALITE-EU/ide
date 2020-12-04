@@ -6,10 +6,9 @@
     complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.20">
   <genPackages prefix="AnsibleDsl" basePackage="org.sodalite.sdl.ansible" disposableProviderFactory="true"
       fileExtensions="ans" ecorePackage="AnsibleDsl.ecore#/">
-    <genClasses ecoreClass="AnsibleDsl.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//Model/name"/>
-    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//Model"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EPlaybook">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EPlaybook/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlaybook/plays"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBase">
@@ -31,7 +30,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/vars_prompt"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EPlay/force_handlers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/pre_tasks_list"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/roles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/roles_inclusions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/tasks_list"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/post_tasks_list"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/handlers"/>
@@ -84,34 +83,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EConditionalFormula/right_expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EConditionalFormula/negated_expression"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleCalls">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleCalls/roles"/>
-    </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//ERole">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERole/tasks_list"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERole/handlers"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERole/variable_declarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERole/files_names_list"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERole/templates_names_list"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERole/metadata"/>
-    </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleMetadata">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERoleMetadata/allow_duplicates"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleMetadata/dependencies"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleMetadata/galaxy_tags"/>
-    </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleMetadataGalaxy">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERoleMetadataGalaxy/author"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERoleMetadataGalaxy/description"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERoleMetadataGalaxy/company"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERoleMetadataGalaxy/issue_tracker_url"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERoleMetadataGalaxy/license"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERoleMetadataGalaxy/min_ansible_version"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERoleMetadataGalaxy/min_ansible_container_version"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERoleMetadataGalaxy/githhub_branch"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleMetadataGalaxy/platforms"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleMetadataGalaxy/cloud_platforms"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleMetadataGalaxy/galaxy_tags"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleInclusion"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleInclusions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleInclusions/roles"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ELoop"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ELoopOverList">

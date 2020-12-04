@@ -49,6 +49,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords;
@@ -232,9 +234,26 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      int _size = play.getPre_tasks_list().size();
-      boolean _tripleNotEquals_8 = (_size != 0);
+      ERoleInclusions _roles_inclusions = play.getRoles_inclusions();
+      boolean _tripleNotEquals_8 = (_roles_inclusions != null);
       if (_tripleNotEquals_8) {
+        _builder.append(space);
+        _builder.append("roles:");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<ERoleInclusion> _roles = play.getRoles_inclusions().getRoles();
+          for(final ERoleInclusion role : _roles) {
+            CharSequence _compileRoleInclusion = this.compileRoleInclusion(role, space.concat("  "));
+            _builder.append(_compileRoleInclusion);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      int _size = play.getPre_tasks_list().size();
+      boolean _tripleNotEquals_9 = (_size != 0);
+      if (_tripleNotEquals_9) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("pre_tasks:");
@@ -252,8 +271,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size_1 = play.getTasks_list().size();
-      boolean _tripleNotEquals_9 = (_size_1 != 0);
-      if (_tripleNotEquals_9) {
+      boolean _tripleNotEquals_10 = (_size_1 != 0);
+      if (_tripleNotEquals_10) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("tasks:");
@@ -271,8 +290,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size_2 = play.getPost_tasks_list().size();
-      boolean _tripleNotEquals_10 = (_size_2 != 0);
-      if (_tripleNotEquals_10) {
+      boolean _tripleNotEquals_11 = (_size_2 != 0);
+      if (_tripleNotEquals_11) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("post_tasks:");
@@ -290,8 +309,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size_3 = play.getHandlers().size();
-      boolean _tripleNotEquals_11 = (_size_3 != 0);
-      if (_tripleNotEquals_11) {
+      boolean _tripleNotEquals_12 = (_size_3 != 0);
+      if (_tripleNotEquals_12) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("handlers:");
@@ -323,6 +342,41 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       if ((execution instanceof ETaskHandler)) {
         CharSequence _compileTaskHandler = this.compileTaskHandler(((ETaskHandler)execution), space);
         _builder.append(_compileTaskHandler);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((execution instanceof ERoleInclusion)) {
+        CharSequence _compileRoleInclusion = this.compileRoleInclusion(((ERoleInclusion)execution), space);
+        _builder.append(_compileRoleInclusion);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileRoleInclusion(final ERoleInclusion roleInclusion, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(space);
+    _builder.append("- role: ");
+    String _name = roleInclusion.getName();
+    _builder.append(_name);
+    _builder.newLineIfNotEmpty();
+    {
+      EBaseCommonKeywords _base_common_keywords = roleInclusion.getBase_common_keywords();
+      boolean _tripleNotEquals = (_base_common_keywords != null);
+      if (_tripleNotEquals) {
+        CharSequence _compileBaseCommonKeywords = this.compileBaseCommonKeywords(roleInclusion.getBase_common_keywords(), space.concat("  "));
+        _builder.append(_compileBaseCommonKeywords);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EExecutionCommonKeywords _exe_common_keywords = roleInclusion.getExe_common_keywords();
+      boolean _tripleNotEquals_1 = (_exe_common_keywords != null);
+      if (_tripleNotEquals_1) {
+        CharSequence _compileExecutionCommonKeywords = this.compileExecutionCommonKeywords(roleInclusion.getExe_common_keywords(), space.concat("  "));
+        _builder.append(_compileExecutionCommonKeywords);
         _builder.newLineIfNotEmpty();
       }
     }

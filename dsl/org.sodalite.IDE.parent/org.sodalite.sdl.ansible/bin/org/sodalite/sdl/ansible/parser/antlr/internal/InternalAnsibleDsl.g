@@ -75,25 +75,14 @@ ruleModel returns [EObject current=null]
 @after {
 	leaveRule();
 }:
-	(
-		{
-			newCompositeNode(grammarAccess.getModelAccess().getEPlaybookParserRuleCall_0());
-		}
-		this_EPlaybook_0=ruleEPlaybook
-		{
-			$current = $this_EPlaybook_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getModelAccess().getERoleParserRuleCall_1());
-		}
-		this_ERole_1=ruleERole
-		{
-			$current = $this_ERole_1.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
+	{
+		newCompositeNode(grammarAccess.getModelAccess().getEPlaybookParserRuleCall());
+	}
+	this_EPlaybook_0=ruleEPlaybook
+	{
+		$current = $this_EPlaybook_0.current;
+		afterParserOrEnumRuleCall();
+	}
 ;
 
 // Entry rule entryRuleEPlaybook
@@ -213,6 +202,15 @@ ruleEExecution returns [EObject current=null]
 		this_ETaskHandler_1=ruleETaskHandler
 		{
 			$current = $this_ETaskHandler_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEExecutionAccess().getERoleInclusionParserRuleCall_2());
+		}
+		this_ERoleInclusion_2=ruleERoleInclusion
+		{
+			$current = $this_ERoleInclusion_2.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -615,18 +613,18 @@ ruleEPlay returns [EObject current=null]
 				}
 							({true}?=>((
 								{
-									newCompositeNode(grammarAccess.getEPlayAccess().getRolesERoleCallsParserRuleCall_7_0());
+									newCompositeNode(grammarAccess.getEPlayAccess().getRoles_inclusionsERoleInclusionsParserRuleCall_7_0());
 								}
-								lv_roles_22_0=ruleERoleCalls
+								lv_roles_inclusions_22_0=ruleERoleInclusions
 								{
 									if ($current==null) {
 										$current = createModelElementForParent(grammarAccess.getEPlayRule());
 									}
 									set(
 										$current,
-										"roles",
-										lv_roles_22_0,
-										"org.sodalite.sdl.ansible.AnsibleDsl.ERoleCalls");
+										"roles_inclusions",
+										lv_roles_inclusions_22_0,
+										"org.sodalite.sdl.ansible.AnsibleDsl.ERoleInclusions");
 									afterParserOrEnumRuleCall();
 								}
 							)
@@ -2106,74 +2104,15 @@ ruleEConditionalFormula returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleERoleCalls
-entryRuleERoleCalls returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getERoleCallsRule()); }
-	iv_ruleERoleCalls=ruleERoleCalls
-	{ $current=$iv_ruleERoleCalls.current; }
+// Entry rule entryRuleERoleInclusion
+entryRuleERoleInclusion returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getERoleInclusionRule()); }
+	iv_ruleERoleInclusion=ruleERoleInclusion
+	{ $current=$iv_ruleERoleInclusion.current; }
 	EOF;
 
-// Rule ERoleCalls
-ruleERoleCalls returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='roles{'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getERoleCallsAccess().getRolesKeyword_0());
-		}
-		(
-			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getERoleCallsRule());
-					}
-				}
-				otherlv_1=RULE_STRING
-				{
-					newLeafNode(otherlv_1, grammarAccess.getERoleCallsAccess().getRolesERoleCrossReference_1_0());
-				}
-			)
-		)
-		(
-			otherlv_2=','
-			{
-				newLeafNode(otherlv_2, grammarAccess.getERoleCallsAccess().getCommaKeyword_2_0());
-			}
-			(
-				(
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getERoleCallsRule());
-						}
-					}
-					otherlv_3=RULE_STRING
-					{
-						newLeafNode(otherlv_3, grammarAccess.getERoleCallsAccess().getRolesERoleCrossReference_2_1_0());
-					}
-				)
-			)
-		)*
-		otherlv_4='}'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getERoleCallsAccess().getRightCurlyBracketKeyword_3());
-		}
-	)
-;
-
-// Entry rule entryRuleERole
-entryRuleERole returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getERoleRule()); }
-	iv_ruleERole=ruleERole
-	{ $current=$iv_ruleERole.current; }
-	EOF;
-
-// Rule ERole
-ruleERole returns [EObject current=null]
+// Rule ERoleInclusion
+ruleERoleInclusion returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -2183,353 +2122,102 @@ ruleERole returns [EObject current=null]
 	(
 		otherlv_0='role{'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getERoleAccess().getRoleKeyword_0());
-		}
-		otherlv_1='role_name:'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getERoleAccess().getRole_nameKeyword_1());
+			newLeafNode(otherlv_0, grammarAccess.getERoleInclusionAccess().getRoleKeyword_0());
 		}
 		(
-			(
-				lv_name_2_0=RULE_STRING
-				{
-					newLeafNode(lv_name_2_0, grammarAccess.getERoleAccess().getNameSTRINGTerminalRuleCall_2_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getERoleRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_2_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
-			)
-		)
-		(
-			otherlv_3='tasks_list{'
+			otherlv_1='role_name:'
 			{
-				newLeafNode(otherlv_3, grammarAccess.getERoleAccess().getTasks_listKeyword_3_0());
+				newLeafNode(otherlv_1, grammarAccess.getERoleInclusionAccess().getRole_nameKeyword_1_0());
 			}
 			(
 				(
-					(
-						{
-							newCompositeNode(grammarAccess.getERoleAccess().getTasks_listETaskParserRuleCall_3_1_0_0());
-						}
-						lv_tasks_list_4_1=ruleETask
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getERoleRule());
-							}
-							add(
-								$current,
-								"tasks_list",
-								lv_tasks_list_4_1,
-								"org.sodalite.sdl.ansible.AnsibleDsl.ETask");
-							afterParserOrEnumRuleCall();
-						}
-						    |
-						{
-							newCompositeNode(grammarAccess.getERoleAccess().getTasks_listEBlockParserRuleCall_3_1_0_1());
-						}
-						lv_tasks_list_4_2=ruleEBlock
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getERoleRule());
-							}
-							add(
-								$current,
-								"tasks_list",
-								lv_tasks_list_4_2,
-								"org.sodalite.sdl.ansible.AnsibleDsl.EBlock");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)+
-			otherlv_5='}'
-			{
-				newLeafNode(otherlv_5, grammarAccess.getERoleAccess().getRightCurlyBracketKeyword_3_2());
-			}
-		)?
-		(
-			otherlv_6='handlers{'
-			{
-				newLeafNode(otherlv_6, grammarAccess.getERoleAccess().getHandlersKeyword_4_0());
-			}
-			(
-				(
+					lv_name_2_0=RULE_STRING
 					{
-						newCompositeNode(grammarAccess.getERoleAccess().getHandlersEHandlerParserRuleCall_4_1_0());
-					}
-					lv_handlers_7_0=ruleEHandler
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getERoleRule());
-						}
-						add(
-							$current,
-							"handlers",
-							lv_handlers_7_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EHandler");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)+
-			otherlv_8='}'
-			{
-				newLeafNode(otherlv_8, grammarAccess.getERoleAccess().getRightCurlyBracketKeyword_4_2());
-			}
-		)?
-		(
-			otherlv_9='vars{'
-			{
-				newLeafNode(otherlv_9, grammarAccess.getERoleAccess().getVarsKeyword_5_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getERoleAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_5_1_0());
-					}
-					lv_variable_declarations_10_0=ruleEVariableDeclaration
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getERoleRule());
-						}
-						add(
-							$current,
-							"variable_declarations",
-							lv_variable_declarations_10_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-			(
-				otherlv_11=','
-				{
-					newLeafNode(otherlv_11, grammarAccess.getERoleAccess().getCommaKeyword_5_2_0());
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getERoleAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_5_2_1_0());
-						}
-						lv_variable_declarations_12_0=ruleEVariableDeclaration
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getERoleRule());
-							}
-							add(
-								$current,
-								"variable_declarations",
-								lv_variable_declarations_12_0,
-								"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)*
-			otherlv_13='}'
-			{
-				newLeafNode(otherlv_13, grammarAccess.getERoleAccess().getRightCurlyBracketKeyword_5_3());
-			}
-		)?
-		(
-			otherlv_14='files_names:'
-			{
-				newLeafNode(otherlv_14, grammarAccess.getERoleAccess().getFiles_namesKeyword_6_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getERoleAccess().getFiles_names_listEListParserRuleCall_6_1_0());
-					}
-					lv_files_names_list_15_0=ruleEList
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getERoleRule());
-						}
-						set(
-							$current,
-							"files_names_list",
-							lv_files_names_list_15_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			otherlv_16='templates_names:'
-			{
-				newLeafNode(otherlv_16, grammarAccess.getERoleAccess().getTemplates_namesKeyword_7_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getERoleAccess().getTemplates_names_listEListParserRuleCall_7_1_0());
-					}
-					lv_templates_names_list_17_0=ruleEList
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getERoleRule());
-						}
-						set(
-							$current,
-							"templates_names_list",
-							lv_templates_names_list_17_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getERoleAccess().getMetadataERoleMetadataParserRuleCall_8_0());
-				}
-				lv_metadata_18_0=ruleERoleMetadata
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getERoleRule());
-					}
-					set(
-						$current,
-						"metadata",
-						lv_metadata_18_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.ERoleMetadata");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-		otherlv_19='}'
-		{
-			newLeafNode(otherlv_19, grammarAccess.getERoleAccess().getRightCurlyBracketKeyword_9());
-		}
-	)
-;
-
-// Entry rule entryRuleERoleMetadata
-entryRuleERoleMetadata returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getERoleMetadataRule()); }
-	iv_ruleERoleMetadata=ruleERoleMetadata
-	{ $current=$iv_ruleERoleMetadata.current; }
-	EOF;
-
-// Rule ERoleMetadata
-ruleERoleMetadata returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getERoleMetadataAccess().getERoleMetadataAction_0(),
-					$current);
-			}
-		)
-		otherlv_1='metadata{'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getERoleMetadataAccess().getMetadataKeyword_1());
-		}
-		(
-			otherlv_2='allow_duplicates:'
-			{
-				newLeafNode(otherlv_2, grammarAccess.getERoleMetadataAccess().getAllow_duplicatesKeyword_2_0());
-			}
-			(
-				(
-					lv_allow_duplicates_3_0=RULE_BOOLEAN
-					{
-						newLeafNode(lv_allow_duplicates_3_0, grammarAccess.getERoleMetadataAccess().getAllow_duplicatesBOOLEANTerminalRuleCall_2_1_0());
+						newLeafNode(lv_name_2_0, grammarAccess.getERoleInclusionAccess().getNameSTRINGTerminalRuleCall_1_1_0());
 					}
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getERoleMetadataRule());
+							$current = createModelElement(grammarAccess.getERoleInclusionRule());
 						}
 						setWithLastConsumed(
 							$current,
-							"allow_duplicates",
-							lv_allow_duplicates_3_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
+							"name",
+							lv_name_2_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
 					}
 				)
 			)
 		)?
+		otherlv_3='base_settings{'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getERoleInclusionAccess().getBase_settingsKeyword_2());
+		}
 		(
-			otherlv_4='dependencies:'
-			{
-				newLeafNode(otherlv_4, grammarAccess.getERoleMetadataAccess().getDependenciesKeyword_3_0());
-			}
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getERoleMetadataAccess().getDependenciesEListParserRuleCall_3_1_0());
+				{
+					newCompositeNode(grammarAccess.getERoleInclusionAccess().getBase_common_keywordsEBaseCommonKeywordsParserRuleCall_3_0());
+				}
+				lv_base_common_keywords_4_0=ruleEBaseCommonKeywords
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
 					}
-					lv_dependencies_5_0=ruleEList
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getERoleMetadataRule());
-						}
-						set(
-							$current,
-							"dependencies",
-							lv_dependencies_5_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
-						afterParserOrEnumRuleCall();
-					}
-				)
+					set(
+						$current,
+						"base_common_keywords",
+						lv_base_common_keywords_4_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EBaseCommonKeywords");
+					afterParserOrEnumRuleCall();
+				}
 			)
-		)?
+		)
+		otherlv_5='}'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_4());
+		}
+		otherlv_6='execution_settings{'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getERoleInclusionAccess().getExecution_settingsKeyword_5());
+		}
 		(
-			otherlv_6='galaxy_info:'
-			{
-				newLeafNode(otherlv_6, grammarAccess.getERoleMetadataAccess().getGalaxy_infoKeyword_4_0());
-			}
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getERoleMetadataAccess().getGalaxy_tagsERoleMetadataGalaxyParserRuleCall_4_1_0());
+				{
+					newCompositeNode(grammarAccess.getERoleInclusionAccess().getExe_common_keywordsEExecutionCommonKeywordsParserRuleCall_6_0());
+				}
+				lv_exe_common_keywords_7_0=ruleEExecutionCommonKeywords
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
 					}
-					lv_galaxy_tags_7_0=ruleERoleMetadataGalaxy
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getERoleMetadataRule());
-						}
-						set(
-							$current,
-							"galaxy_tags",
-							lv_galaxy_tags_7_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.ERoleMetadataGalaxy");
-						afterParserOrEnumRuleCall();
-					}
-				)
+					set(
+						$current,
+						"exe_common_keywords",
+						lv_exe_common_keywords_7_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EExecutionCommonKeywords");
+					afterParserOrEnumRuleCall();
+				}
 			)
-		)?
+		)
 		otherlv_8='}'
 		{
-			newLeafNode(otherlv_8, grammarAccess.getERoleMetadataAccess().getRightCurlyBracketKeyword_5());
+			newLeafNode(otherlv_8, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_7());
+		}
+		otherlv_9='}'
+		{
+			newLeafNode(otherlv_9, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_8());
 		}
 	)
 ;
 
-// Entry rule entryRuleERoleMetadataGalaxy
-entryRuleERoleMetadataGalaxy returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getERoleMetadataGalaxyRule()); }
-	iv_ruleERoleMetadataGalaxy=ruleERoleMetadataGalaxy
-	{ $current=$iv_ruleERoleMetadataGalaxy.current; }
+// Entry rule entryRuleERoleInclusions
+entryRuleERoleInclusions returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getERoleInclusionsRule()); }
+	iv_ruleERoleInclusions=ruleERoleInclusions
+	{ $current=$iv_ruleERoleInclusions.current; }
 	EOF;
 
-// Rule ERoleMetadataGalaxy
-ruleERoleMetadataGalaxy returns [EObject current=null]
+// Rule ERoleInclusions
+ruleERoleInclusions returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -2537,268 +2225,51 @@ ruleERoleMetadataGalaxy returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='galaxy_info{'
+		otherlv_0='roles_inclusions{'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getERoleMetadataGalaxyAccess().getGalaxy_infoKeyword_0());
-		}
-		otherlv_1='author:'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getERoleMetadataGalaxyAccess().getAuthorKeyword_1());
+			newLeafNode(otherlv_0, grammarAccess.getERoleInclusionsAccess().getRoles_inclusionsKeyword_0());
 		}
 		(
 			(
-				lv_author_2_0=RULE_STRING
 				{
-					newLeafNode(lv_author_2_0, grammarAccess.getERoleMetadataGalaxyAccess().getAuthorSTRINGTerminalRuleCall_2_0());
+					newCompositeNode(grammarAccess.getERoleInclusionsAccess().getRolesERoleInclusionParserRuleCall_1_0());
 				}
+				lv_roles_1_0=ruleERoleInclusion
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getERoleMetadataGalaxyRule());
+						$current = createModelElementForParent(grammarAccess.getERoleInclusionsRule());
 					}
-					setWithLastConsumed(
+					add(
 						$current,
-						"author",
-						lv_author_2_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
-			)
-		)
-		otherlv_3='description:'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getERoleMetadataGalaxyAccess().getDescriptionKeyword_3());
-		}
-		(
-			(
-				lv_description_4_0=RULE_STRING
-				{
-					newLeafNode(lv_description_4_0, grammarAccess.getERoleMetadataGalaxyAccess().getDescriptionSTRINGTerminalRuleCall_4_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getERoleMetadataGalaxyRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"description",
-						lv_description_4_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
-			)
-		)
-		otherlv_5='company:'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getERoleMetadataGalaxyAccess().getCompanyKeyword_5());
-		}
-		(
-			(
-				lv_company_6_0=RULE_STRING
-				{
-					newLeafNode(lv_company_6_0, grammarAccess.getERoleMetadataGalaxyAccess().getCompanySTRINGTerminalRuleCall_6_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getERoleMetadataGalaxyRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"company",
-						lv_company_6_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
-			)
-		)
-		(
-			otherlv_7='issue_tracker_url:'
-			{
-				newLeafNode(otherlv_7, grammarAccess.getERoleMetadataGalaxyAccess().getIssue_tracker_urlKeyword_7_0());
-			}
-			(
-				(
-					lv_issue_tracker_url_8_0=RULE_STRING
-					{
-						newLeafNode(lv_issue_tracker_url_8_0, grammarAccess.getERoleMetadataGalaxyAccess().getIssue_tracker_urlSTRINGTerminalRuleCall_7_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getERoleMetadataGalaxyRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"issue_tracker_url",
-							lv_issue_tracker_url_8_0,
-							"org.eclipse.xtext.common.Terminals.STRING");
-					}
-				)
-			)
-		)?
-		otherlv_9='license:'
-		{
-			newLeafNode(otherlv_9, grammarAccess.getERoleMetadataGalaxyAccess().getLicenseKeyword_8());
-		}
-		(
-			(
-				lv_license_10_0=RULE_STRING
-				{
-					newLeafNode(lv_license_10_0, grammarAccess.getERoleMetadataGalaxyAccess().getLicenseSTRINGTerminalRuleCall_9_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getERoleMetadataGalaxyRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"license",
-						lv_license_10_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
-			)
-		)
-		otherlv_11='min_ansible_version:'
-		{
-			newLeafNode(otherlv_11, grammarAccess.getERoleMetadataGalaxyAccess().getMin_ansible_versionKeyword_10());
-		}
-		(
-			(
-				lv_min_ansible_version_12_0=RULE_STRING
-				{
-					newLeafNode(lv_min_ansible_version_12_0, grammarAccess.getERoleMetadataGalaxyAccess().getMin_ansible_versionSTRINGTerminalRuleCall_11_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getERoleMetadataGalaxyRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"min_ansible_version",
-						lv_min_ansible_version_12_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
-			)
-		)
-		(
-			otherlv_13='min_ansible_container_version:'
-			{
-				newLeafNode(otherlv_13, grammarAccess.getERoleMetadataGalaxyAccess().getMin_ansible_container_versionKeyword_12_0());
-			}
-			(
-				(
-					lv_min_ansible_container_version_14_0=RULE_STRING
-					{
-						newLeafNode(lv_min_ansible_container_version_14_0, grammarAccess.getERoleMetadataGalaxyAccess().getMin_ansible_container_versionSTRINGTerminalRuleCall_12_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getERoleMetadataGalaxyRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"min_ansible_container_version",
-							lv_min_ansible_container_version_14_0,
-							"org.eclipse.xtext.common.Terminals.STRING");
-					}
-				)
-			)
-		)?
-		(
-			otherlv_15='github_branch:'
-			{
-				newLeafNode(otherlv_15, grammarAccess.getERoleMetadataGalaxyAccess().getGithub_branchKeyword_13_0());
-			}
-			(
-				(
-					lv_githhub_branch_16_0=RULE_STRING
-					{
-						newLeafNode(lv_githhub_branch_16_0, grammarAccess.getERoleMetadataGalaxyAccess().getGithhub_branchSTRINGTerminalRuleCall_13_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getERoleMetadataGalaxyRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"githhub_branch",
-							lv_githhub_branch_16_0,
-							"org.eclipse.xtext.common.Terminals.STRING");
-					}
-				)
-			)
-		)?
-		otherlv_17='platforms:'
-		{
-			newLeafNode(otherlv_17, grammarAccess.getERoleMetadataGalaxyAccess().getPlatformsKeyword_14());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getERoleMetadataGalaxyAccess().getPlatformsEListParserRuleCall_15_0());
-				}
-				lv_platforms_18_0=ruleEList
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getERoleMetadataGalaxyRule());
-					}
-					set(
-						$current,
-						"platforms",
-						lv_platforms_18_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						"roles",
+						lv_roles_1_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.ERoleInclusion");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
-			otherlv_19='cloud_platforms:'
-			{
-				newLeafNode(otherlv_19, grammarAccess.getERoleMetadataGalaxyAccess().getCloud_platformsKeyword_16_0());
-			}
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getERoleMetadataGalaxyAccess().getCloud_platformsEListParserRuleCall_16_1_0());
+				{
+					newCompositeNode(grammarAccess.getERoleInclusionsAccess().getRolesERoleInclusionParserRuleCall_2_0());
+				}
+				lv_roles_2_0=ruleERoleInclusion
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getERoleInclusionsRule());
 					}
-					lv_cloud_platforms_20_0=ruleEList
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getERoleMetadataGalaxyRule());
-						}
-						set(
-							$current,
-							"cloud_platforms",
-							lv_cloud_platforms_20_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
-						afterParserOrEnumRuleCall();
-					}
-				)
+					add(
+						$current,
+						"roles",
+						lv_roles_2_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.ERoleInclusion");
+					afterParserOrEnumRuleCall();
+				}
 			)
-		)?
-		(
-			otherlv_21='galaxy_tags:'
-			{
-				newLeafNode(otherlv_21, grammarAccess.getERoleMetadataGalaxyAccess().getGalaxy_tagsKeyword_17_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getERoleMetadataGalaxyAccess().getGalaxy_tagsEListParserRuleCall_17_1_0());
-					}
-					lv_galaxy_tags_22_0=ruleEList
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getERoleMetadataGalaxyRule());
-						}
-						set(
-							$current,
-							"galaxy_tags",
-							lv_galaxy_tags_22_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		otherlv_23='}'
+		)*
+		otherlv_3='}'
 		{
-			newLeafNode(otherlv_23, grammarAccess.getERoleMetadataGalaxyAccess().getRightCurlyBracketKeyword_18());
+			newLeafNode(otherlv_3, grammarAccess.getERoleInclusionsAccess().getRightCurlyBracketKeyword_3());
 		}
 	)
 ;

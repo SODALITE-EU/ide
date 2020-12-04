@@ -53,10 +53,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
-import org.sodalite.sdl.ansible.ansibleDsl.ERole;
-import org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls;
-import org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata;
-import org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords;
@@ -193,28 +191,14 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eRoleCallsEClass = null;
+  private EClass eRoleInclusionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eRoleEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eRoleMetadataEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eRoleMetadataGalaxyEClass = null;
+  private EClass eRoleInclusionsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -541,17 +525,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getModel_Name()
-  {
-    return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getEPlaybook()
   {
     return ePlaybookEClass;
@@ -563,9 +536,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EAttribute getEPlaybook_Name()
+  {
+    return (EAttribute)ePlaybookEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getEPlaybook_Plays()
   {
-    return (EReference)ePlaybookEClass.getEStructuralFeatures().get(0);
+    return (EReference)ePlaybookEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -750,7 +734,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Roles()
+  public EReference getEPlay_Roles_inclusions()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(7);
   }
@@ -1234,9 +1218,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getERoleCalls()
+  public EClass getERoleInclusion()
   {
-    return eRoleCallsEClass;
+    return eRoleInclusionEClass;
   }
 
   /**
@@ -1245,9 +1229,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getERoleCalls_Roles()
+  public EClass getERoleInclusions()
   {
-    return (EReference)eRoleCallsEClass.getEStructuralFeatures().get(0);
+    return eRoleInclusionsEClass;
   }
 
   /**
@@ -1256,251 +1240,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getERole()
+  public EReference getERoleInclusions_Roles()
   {
-    return eRoleEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERole_Tasks_list()
-  {
-    return (EReference)eRoleEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERole_Handlers()
-  {
-    return (EReference)eRoleEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERole_Variable_declarations()
-  {
-    return (EReference)eRoleEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERole_Files_names_list()
-  {
-    return (EReference)eRoleEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERole_Templates_names_list()
-  {
-    return (EReference)eRoleEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERole_Metadata()
-  {
-    return (EReference)eRoleEClass.getEStructuralFeatures().get(5);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getERoleMetadata()
-  {
-    return eRoleMetadataEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getERoleMetadata_Allow_duplicates()
-  {
-    return (EAttribute)eRoleMetadataEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERoleMetadata_Dependencies()
-  {
-    return (EReference)eRoleMetadataEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERoleMetadata_Galaxy_tags()
-  {
-    return (EReference)eRoleMetadataEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getERoleMetadataGalaxy()
-  {
-    return eRoleMetadataGalaxyEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getERoleMetadataGalaxy_Author()
-  {
-    return (EAttribute)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getERoleMetadataGalaxy_Description()
-  {
-    return (EAttribute)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getERoleMetadataGalaxy_Company()
-  {
-    return (EAttribute)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getERoleMetadataGalaxy_Issue_tracker_url()
-  {
-    return (EAttribute)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getERoleMetadataGalaxy_License()
-  {
-    return (EAttribute)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getERoleMetadataGalaxy_Min_ansible_version()
-  {
-    return (EAttribute)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(5);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getERoleMetadataGalaxy_Min_ansible_container_version()
-  {
-    return (EAttribute)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(6);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getERoleMetadataGalaxy_Githhub_branch()
-  {
-    return (EAttribute)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(7);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERoleMetadataGalaxy_Platforms()
-  {
-    return (EReference)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(8);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERoleMetadataGalaxy_Cloud_platforms()
-  {
-    return (EReference)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(9);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getERoleMetadataGalaxy_Galaxy_tags()
-  {
-    return (EReference)eRoleMetadataGalaxyEClass.getEStructuralFeatures().get(10);
+    return (EReference)eRoleInclusionsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2646,9 +2388,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
-    createEAttribute(modelEClass, MODEL__NAME);
 
     ePlaybookEClass = createEClass(EPLAYBOOK);
+    createEAttribute(ePlaybookEClass, EPLAYBOOK__NAME);
     createEReference(ePlaybookEClass, EPLAYBOOK__PLAYS);
 
     eBaseEClass = createEClass(EBASE);
@@ -2671,7 +2413,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(ePlayEClass, EPLAY__VARS_PROMPT);
     createEAttribute(ePlayEClass, EPLAY__FORCE_HANDLERS);
     createEReference(ePlayEClass, EPLAY__PRE_TASKS_LIST);
-    createEReference(ePlayEClass, EPLAY__ROLES);
+    createEReference(ePlayEClass, EPLAY__ROLES_INCLUSIONS);
     createEReference(ePlayEClass, EPLAY__TASKS_LIST);
     createEReference(ePlayEClass, EPLAY__POST_TASKS_LIST);
     createEReference(ePlayEClass, EPLAY__HANDLERS);
@@ -2725,34 +2467,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__RIGHT_EXPRESSION);
     createEReference(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__NEGATED_EXPRESSION);
 
-    eRoleCallsEClass = createEClass(EROLE_CALLS);
-    createEReference(eRoleCallsEClass, EROLE_CALLS__ROLES);
+    eRoleInclusionEClass = createEClass(EROLE_INCLUSION);
 
-    eRoleEClass = createEClass(EROLE);
-    createEReference(eRoleEClass, EROLE__TASKS_LIST);
-    createEReference(eRoleEClass, EROLE__HANDLERS);
-    createEReference(eRoleEClass, EROLE__VARIABLE_DECLARATIONS);
-    createEReference(eRoleEClass, EROLE__FILES_NAMES_LIST);
-    createEReference(eRoleEClass, EROLE__TEMPLATES_NAMES_LIST);
-    createEReference(eRoleEClass, EROLE__METADATA);
-
-    eRoleMetadataEClass = createEClass(EROLE_METADATA);
-    createEAttribute(eRoleMetadataEClass, EROLE_METADATA__ALLOW_DUPLICATES);
-    createEReference(eRoleMetadataEClass, EROLE_METADATA__DEPENDENCIES);
-    createEReference(eRoleMetadataEClass, EROLE_METADATA__GALAXY_TAGS);
-
-    eRoleMetadataGalaxyEClass = createEClass(EROLE_METADATA_GALAXY);
-    createEAttribute(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__AUTHOR);
-    createEAttribute(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__DESCRIPTION);
-    createEAttribute(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__COMPANY);
-    createEAttribute(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__ISSUE_TRACKER_URL);
-    createEAttribute(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__LICENSE);
-    createEAttribute(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__MIN_ANSIBLE_VERSION);
-    createEAttribute(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__MIN_ANSIBLE_CONTAINER_VERSION);
-    createEAttribute(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__GITHHUB_BRANCH);
-    createEReference(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__PLATFORMS);
-    createEReference(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__CLOUD_PLATFORMS);
-    createEReference(eRoleMetadataGalaxyEClass, EROLE_METADATA_GALAXY__GALAXY_TAGS);
+    eRoleInclusionsEClass = createEClass(EROLE_INCLUSIONS);
+    createEReference(eRoleInclusionsEClass, EROLE_INCLUSIONS__ROLES);
 
     eLoopEClass = createEClass(ELOOP);
 
@@ -2929,7 +2647,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eTaskEClass.getESuperTypes().add(this.getEBlockTask());
     eTaskEClass.getESuperTypes().add(this.getETaskHandler());
     eHandlerEClass.getESuperTypes().add(this.getETaskHandler());
-    eRoleEClass.getESuperTypes().add(this.getModel());
+    eRoleInclusionEClass.getESuperTypes().add(this.getEExecution());
     eLoopOverListEClass.getESuperTypes().add(this.getELoop());
     eUntilEClass.getESuperTypes().add(this.getELoop());
     ePlayExeSettingsEClass.getESuperTypes().add(this.getEExeSettings());
@@ -2953,9 +2671,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePlaybookEClass, EPlaybook.class, "EPlaybook", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEPlaybook_Name(), ecorePackage.getEString(), "name", null, 0, 1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlaybook_Plays(), this.getEPlay(), null, "plays", null, 0, -1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBaseEClass, EBase.class, "EBase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2978,7 +2696,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEPlay_Vars_prompt(), this.getEList(), null, "vars_prompt", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPlay_Force_handlers(), ecorePackage.getEString(), "force_handlers", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Pre_tasks_list(), this.getEBlockTask(), null, "pre_tasks_list", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlay_Roles(), this.getERoleCalls(), null, "roles", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_Roles_inclusions(), this.getERoleInclusions(), null, "roles_inclusions", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Tasks_list(), this.getEBlockTask(), null, "tasks_list", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Post_tasks_list(), this.getEBlockTask(), null, "post_tasks_list", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Handlers(), this.getEHandler(), null, "handlers", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3032,34 +2750,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEConditionalFormula_Right_expression(), this.getEConditionalExpression(), null, "right_expression", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEConditionalFormula_Negated_expression(), this.getEConditionalExpression(), null, "negated_expression", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eRoleCallsEClass, ERoleCalls.class, "ERoleCalls", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getERoleCalls_Roles(), this.getERole(), null, "roles", null, 0, -1, ERoleCalls.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eRoleInclusionEClass, ERoleInclusion.class, "ERoleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(eRoleEClass, ERole.class, "ERole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getERole_Tasks_list(), ecorePackage.getEObject(), null, "tasks_list", null, 0, -1, ERole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERole_Handlers(), this.getEHandler(), null, "handlers", null, 0, -1, ERole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERole_Variable_declarations(), this.getEVariableDeclaration(), null, "variable_declarations", null, 0, -1, ERole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERole_Files_names_list(), this.getEList(), null, "files_names_list", null, 0, 1, ERole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERole_Templates_names_list(), this.getEList(), null, "templates_names_list", null, 0, 1, ERole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERole_Metadata(), this.getERoleMetadata(), null, "metadata", null, 0, 1, ERole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eRoleMetadataEClass, ERoleMetadata.class, "ERoleMetadata", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getERoleMetadata_Allow_duplicates(), ecorePackage.getEString(), "allow_duplicates", null, 0, 1, ERoleMetadata.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERoleMetadata_Dependencies(), this.getEList(), null, "dependencies", null, 0, 1, ERoleMetadata.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERoleMetadata_Galaxy_tags(), this.getERoleMetadataGalaxy(), null, "galaxy_tags", null, 0, 1, ERoleMetadata.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eRoleMetadataGalaxyEClass, ERoleMetadataGalaxy.class, "ERoleMetadataGalaxy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getERoleMetadataGalaxy_Author(), ecorePackage.getEString(), "author", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getERoleMetadataGalaxy_Description(), ecorePackage.getEString(), "description", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getERoleMetadataGalaxy_Company(), ecorePackage.getEString(), "company", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getERoleMetadataGalaxy_Issue_tracker_url(), ecorePackage.getEString(), "issue_tracker_url", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getERoleMetadataGalaxy_License(), ecorePackage.getEString(), "license", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getERoleMetadataGalaxy_Min_ansible_version(), ecorePackage.getEString(), "min_ansible_version", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getERoleMetadataGalaxy_Min_ansible_container_version(), ecorePackage.getEString(), "min_ansible_container_version", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getERoleMetadataGalaxy_Githhub_branch(), ecorePackage.getEString(), "githhub_branch", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERoleMetadataGalaxy_Platforms(), this.getEList(), null, "platforms", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERoleMetadataGalaxy_Cloud_platforms(), this.getEList(), null, "cloud_platforms", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getERoleMetadataGalaxy_Galaxy_tags(), this.getEList(), null, "galaxy_tags", null, 0, 1, ERoleMetadataGalaxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eRoleInclusionsEClass, ERoleInclusions.class, "ERoleInclusions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getERoleInclusions_Roles(), this.getERoleInclusion(), null, "roles", null, 0, -1, ERoleInclusions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eLoopEClass, ELoop.class, "ELoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -12,8 +12,6 @@ import org.eclipse.xtext.scoping.Scopes
 import org.eclipse.xtext.EcoreUtil2
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl
-import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl
-import org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import java.util.ArrayList
@@ -33,7 +31,7 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 			if (rootPlay !== null){
 				val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EDeclaredVariableImpl)
 				//also the variables declared in the imported roles must be scoped
-				val roleCalls = EcoreUtil2.getAllContentsOfType(rootPlay, ERoleCallsImpl)
+				/*val roleCalls = EcoreUtil2.getAllContentsOfType(rootPlay, ERoleCallsImpl)
 				for (roleCall: roleCalls){
 					for (role: roleCall.roles){
 						val candidatesRole = EcoreUtil2.getAllContentsOfType(role, EDeclaredVariableImpl)
@@ -41,15 +39,15 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 							candidates.add(candidateRole)
 						}
 					}
-				}
+				}*/
 				return Scopes.scopeFor(candidates)
 			}
 			//this else is entered it we are in a role
-			else {
+			/*else {
 				val rootRole = EcoreUtil2.getContainerOfType(context, ERoleImpl)
 				val candidates = EcoreUtil2.getAllContentsOfType(rootRole, EDeclaredVariableImpl)
 				return Scopes.scopeFor(candidates)
-			}
+			}*/
 			
 		}
 		

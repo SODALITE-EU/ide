@@ -5,12 +5,15 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -27,6 +30,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getPlays <em>Plays</em>}</li>
  * </ul>
  *
@@ -34,6 +38,26 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
  */
 public class EPlaybookImpl extends ModelImpl implements EPlaybook
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getPlays() <em>Plays</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -63,6 +87,31 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.EPLAYBOOK;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAYBOOK__NAME, oldName, name));
   }
 
   /**
@@ -106,6 +155,8 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAYBOOK__NAME:
+        return getName();
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         return getPlays();
     }
@@ -123,6 +174,9 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAYBOOK__NAME:
+        setName((String)newValue);
+        return;
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         getPlays().clear();
         getPlays().addAll((Collection<? extends EPlay>)newValue);
@@ -141,6 +195,9 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAYBOOK__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         getPlays().clear();
         return;
@@ -158,10 +215,29 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAYBOOK__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         return plays != null && !plays.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //EPlaybookImpl

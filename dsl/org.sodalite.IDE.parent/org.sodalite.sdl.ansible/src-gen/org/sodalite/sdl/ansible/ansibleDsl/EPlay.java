@@ -20,7 +20,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getVars_prompt <em>Vars prompt</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getForce_handlers <em>Force handlers</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPre_tasks_list <em>Pre tasks list</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles <em>Roles</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles_inclusions <em>Roles inclusions</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getTasks_list <em>Tasks list</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPost_tasks_list <em>Post tasks list</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getHandlers <em>Handlers</em>}</li>
@@ -177,26 +177,26 @@ public interface EPlay extends EBase
   org.eclipse.emf.common.util.EList<EBlockTask> getPre_tasks_list();
 
   /**
-   * Returns the value of the '<em><b>Roles</b></em>' containment reference.
+   * Returns the value of the '<em><b>Roles inclusions</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Roles</em>' containment reference.
-   * @see #setRoles(ERoleCalls)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Roles()
+   * @return the value of the '<em>Roles inclusions</em>' containment reference.
+   * @see #setRoles_inclusions(ERoleInclusions)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Roles_inclusions()
    * @model containment="true"
    * @generated
    */
-  ERoleCalls getRoles();
+  ERoleInclusions getRoles_inclusions();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles <em>Roles</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles_inclusions <em>Roles inclusions</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Roles</em>' containment reference.
-   * @see #getRoles()
+   * @param value the new value of the '<em>Roles inclusions</em>' containment reference.
+   * @see #getRoles_inclusions()
    * @generated
    */
-  void setRoles(ERoleCalls value);
+  void setRoles_inclusions(ERoleInclusions value);
 
   /**
    * Returns the value of the '<em><b>Tasks list</b></em>' containment reference list.

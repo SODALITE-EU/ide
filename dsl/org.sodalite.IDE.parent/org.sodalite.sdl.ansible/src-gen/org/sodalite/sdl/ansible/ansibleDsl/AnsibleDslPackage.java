@@ -68,22 +68,13 @@ public interface AnsibleDslPackage extends EPackage
   int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MODEL__NAME = 0;
-
-  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 1;
+  int MODEL_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl <em>EPlaybook</em>}' class.
@@ -102,7 +93,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPLAYBOOK__NAME = MODEL__NAME;
+  int EPLAYBOOK__NAME = MODEL_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Plays</b></em>' containment reference list.
@@ -111,7 +102,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPLAYBOOK__PLAYS = MODEL_FEATURE_COUNT + 0;
+  int EPLAYBOOK__PLAYS = MODEL_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>EPlaybook</em>' class.
@@ -120,7 +111,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPLAYBOOK_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+  int EPLAYBOOK_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl <em>EBase</em>}' class.
@@ -371,13 +362,13 @@ public interface AnsibleDslPackage extends EPackage
   int EPLAY__PRE_TASKS_LIST = EBASE_FEATURE_COUNT + 6;
 
   /**
-   * The feature id for the '<em><b>Roles</b></em>' containment reference.
+   * The feature id for the '<em><b>Roles inclusions</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPLAY__ROLES = EBASE_FEATURE_COUNT + 7;
+  int EPLAY__ROLES_INCLUSIONS = EBASE_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Tasks list</b></em>' containment reference list.
@@ -965,42 +956,14 @@ public interface AnsibleDslPackage extends EPackage
   int ECONDITIONAL_FORMULA_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl <em>ERole Calls</em>}' class.
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionImpl <em>ERole Inclusion</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleCalls()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleInclusion()
    * @generated
    */
-  int EROLE_CALLS = 16;
-
-  /**
-   * The feature id for the '<em><b>Roles</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_CALLS__ROLES = 0;
-
-  /**
-   * The number of structural features of the '<em>ERole Calls</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_CALLS_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl <em>ERole</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERole()
-   * @generated
-   */
-  int EROLE = 17;
+  int EROLE_INCLUSION = 16;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1009,234 +972,62 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EROLE__NAME = MODEL__NAME;
+  int EROLE_INCLUSION__NAME = EEXECUTION__NAME;
 
   /**
-   * The feature id for the '<em><b>Tasks list</b></em>' containment reference list.
+   * The feature id for the '<em><b>Base common keywords</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EROLE__TASKS_LIST = MODEL_FEATURE_COUNT + 0;
+  int EROLE_INCLUSION__BASE_COMMON_KEYWORDS = EEXECUTION__BASE_COMMON_KEYWORDS;
 
   /**
-   * The feature id for the '<em><b>Handlers</b></em>' containment reference list.
+   * The feature id for the '<em><b>Exe common keywords</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EROLE__HANDLERS = MODEL_FEATURE_COUNT + 1;
+  int EROLE_INCLUSION__EXE_COMMON_KEYWORDS = EEXECUTION__EXE_COMMON_KEYWORDS;
 
   /**
-   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
+   * The number of structural features of the '<em>ERole Inclusion</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EROLE__VARIABLE_DECLARATIONS = MODEL_FEATURE_COUNT + 2;
+  int EROLE_INCLUSION_FEATURE_COUNT = EEXECUTION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Files names list</b></em>' containment reference.
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionsImpl <em>ERole Inclusions</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionsImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleInclusions()
+   * @generated
+   */
+  int EROLE_INCLUSIONS = 17;
+
+  /**
+   * The feature id for the '<em><b>Roles</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EROLE__FILES_NAMES_LIST = MODEL_FEATURE_COUNT + 3;
+  int EROLE_INCLUSIONS__ROLES = 0;
 
   /**
-   * The feature id for the '<em><b>Templates names list</b></em>' containment reference.
+   * The number of structural features of the '<em>ERole Inclusions</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EROLE__TEMPLATES_NAMES_LIST = MODEL_FEATURE_COUNT + 4;
-
-  /**
-   * The feature id for the '<em><b>Metadata</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE__METADATA = MODEL_FEATURE_COUNT + 5;
-
-  /**
-   * The number of structural features of the '<em>ERole</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_FEATURE_COUNT = MODEL_FEATURE_COUNT + 6;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleMetadataImpl <em>ERole Metadata</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleMetadataImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleMetadata()
-   * @generated
-   */
-  int EROLE_METADATA = 18;
-
-  /**
-   * The feature id for the '<em><b>Allow duplicates</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA__ALLOW_DUPLICATES = 0;
-
-  /**
-   * The feature id for the '<em><b>Dependencies</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA__DEPENDENCIES = 1;
-
-  /**
-   * The feature id for the '<em><b>Galaxy tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA__GALAXY_TAGS = 2;
-
-  /**
-   * The number of structural features of the '<em>ERole Metadata</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_FEATURE_COUNT = 3;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleMetadataGalaxyImpl <em>ERole Metadata Galaxy</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleMetadataGalaxyImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleMetadataGalaxy()
-   * @generated
-   */
-  int EROLE_METADATA_GALAXY = 19;
-
-  /**
-   * The feature id for the '<em><b>Author</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__AUTHOR = 0;
-
-  /**
-   * The feature id for the '<em><b>Description</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__DESCRIPTION = 1;
-
-  /**
-   * The feature id for the '<em><b>Company</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__COMPANY = 2;
-
-  /**
-   * The feature id for the '<em><b>Issue tracker url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__ISSUE_TRACKER_URL = 3;
-
-  /**
-   * The feature id for the '<em><b>License</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__LICENSE = 4;
-
-  /**
-   * The feature id for the '<em><b>Min ansible version</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__MIN_ANSIBLE_VERSION = 5;
-
-  /**
-   * The feature id for the '<em><b>Min ansible container version</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__MIN_ANSIBLE_CONTAINER_VERSION = 6;
-
-  /**
-   * The feature id for the '<em><b>Githhub branch</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__GITHHUB_BRANCH = 7;
-
-  /**
-   * The feature id for the '<em><b>Platforms</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__PLATFORMS = 8;
-
-  /**
-   * The feature id for the '<em><b>Cloud platforms</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__CLOUD_PLATFORMS = 9;
-
-  /**
-   * The feature id for the '<em><b>Galaxy tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY__GALAXY_TAGS = 10;
-
-  /**
-   * The number of structural features of the '<em>ERole Metadata Galaxy</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_METADATA_GALAXY_FEATURE_COUNT = 11;
+  int EROLE_INCLUSIONS_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopImpl <em>ELoop</em>}' class.
@@ -1246,7 +1037,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoop()
    * @generated
    */
-  int ELOOP = 20;
+  int ELOOP = 18;
 
   /**
    * The number of structural features of the '<em>ELoop</em>' class.
@@ -1265,7 +1056,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoopOverList()
    * @generated
    */
-  int ELOOP_OVER_LIST = 21;
+  int ELOOP_OVER_LIST = 19;
 
   /**
    * The feature id for the '<em><b>Loop list</b></em>' containment reference.
@@ -1302,7 +1093,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoopList()
    * @generated
    */
-  int ELOOP_LIST = 22;
+  int ELOOP_LIST = 20;
 
   /**
    * The number of structural features of the '<em>ELoop List</em>' class.
@@ -1321,7 +1112,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoopControl()
    * @generated
    */
-  int ELOOP_CONTROL = 23;
+  int ELOOP_CONTROL = 21;
 
   /**
    * The feature id for the '<em><b>Label</b></em>' containment reference.
@@ -1385,7 +1176,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEUntil()
    * @generated
    */
-  int EUNTIL = 24;
+  int EUNTIL = 22;
 
   /**
    * The feature id for the '<em><b>Until</b></em>' containment reference.
@@ -1431,7 +1222,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPrivilageEscalation()
    * @generated
    */
-  int EPRIVILAGE_ESCALATION = 25;
+  int EPRIVILAGE_ESCALATION = 23;
 
   /**
    * The feature id for the '<em><b>Become</b></em>' attribute.
@@ -1495,7 +1286,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValidationMode()
    * @generated
    */
-  int EVALIDATION_MODE = 26;
+  int EVALIDATION_MODE = 24;
 
   /**
    * The feature id for the '<em><b>Check mode</b></em>' attribute.
@@ -1532,7 +1323,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEConnection()
    * @generated
    */
-  int ECONNECTION = 27;
+  int ECONNECTION = 25;
 
   /**
    * The feature id for the '<em><b>Connection</b></em>' attribute.
@@ -1578,7 +1369,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExeSettings()
    * @generated
    */
-  int EEXE_SETTINGS = 28;
+  int EEXE_SETTINGS = 26;
 
   /**
    * The feature id for the '<em><b>Throttle</b></em>' attribute.
@@ -1615,7 +1406,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPlayExeSettings()
    * @generated
    */
-  int EPLAY_EXE_SETTINGS = 29;
+  int EPLAY_EXE_SETTINGS = 27;
 
   /**
    * The feature id for the '<em><b>Throttle</b></em>' attribute.
@@ -1679,7 +1470,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExecutionExeSettings()
    * @generated
    */
-  int EEXECUTION_EXE_SETTINGS = 30;
+  int EEXECUTION_EXE_SETTINGS = 28;
 
   /**
    * The feature id for the '<em><b>Throttle</b></em>' attribute.
@@ -1716,7 +1507,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEErrorHandling()
    * @generated
    */
-  int EERROR_HANDLING = 31;
+  int EERROR_HANDLING = 29;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -1762,7 +1553,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBlockErrorHandling()
    * @generated
    */
-  int EBLOCK_ERROR_HANDLING = 32;
+  int EBLOCK_ERROR_HANDLING = 30;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -1808,7 +1599,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPlayErrorHandling()
    * @generated
    */
-  int EPLAY_ERROR_HANDLING = 33;
+  int EPLAY_ERROR_HANDLING = 31;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -1863,7 +1654,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETaskHandlerErrorHandling()
    * @generated
    */
-  int ETASK_HANDLER_ERROR_HANDLING = 34;
+  int ETASK_HANDLER_ERROR_HANDLING = 32;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -1927,7 +1718,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBaseCommonKeywords()
    * @generated
    */
-  int EBASE_COMMON_KEYWORDS = 35;
+  int EBASE_COMMON_KEYWORDS = 33;
 
   /**
    * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
@@ -2036,7 +1827,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFactsSettings()
    * @generated
    */
-  int EFACTS_SETTINGS = 36;
+  int EFACTS_SETTINGS = 34;
 
   /**
    * The feature id for the '<em><b>Gather facts</b></em>' attribute.
@@ -2091,7 +1882,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDelegation()
    * @generated
    */
-  int EDELEGATION = 37;
+  int EDELEGATION = 35;
 
   /**
    * The feature id for the '<em><b>Delegate to</b></em>' attribute.
@@ -2128,7 +1919,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEAsynchronousSettings()
    * @generated
    */
-  int EASYNCHRONOUS_SETTINGS = 38;
+  int EASYNCHRONOUS_SETTINGS = 36;
 
   /**
    * The feature id for the '<em><b>Async</b></em>' attribute.
@@ -2165,7 +1956,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENotifiable()
    * @generated
    */
-  int ENOTIFIABLE = 39;
+  int ENOTIFIABLE = 37;
 
   /**
    * The number of structural features of the '<em>ENotifiable</em>' class.
@@ -2184,7 +1975,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENotifiedHandler()
    * @generated
    */
-  int ENOTIFIED_HANDLER = 40;
+  int ENOTIFIED_HANDLER = 38;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -2212,7 +2003,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENotifiedTopic()
    * @generated
    */
-  int ENOTIFIED_TOPIC = 41;
+  int ENOTIFIED_TOPIC = 39;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2240,7 +2031,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValuePassed()
    * @generated
    */
-  int EVALUE_PASSED = 42;
+  int EVALUE_PASSED = 40;
 
   /**
    * The number of structural features of the '<em>EValue Passed</em>' class.
@@ -2259,7 +2050,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValue()
    * @generated
    */
-  int EVALUE = 43;
+  int EVALUE = 41;
 
   /**
    * The feature id for the '<em><b>Value string</b></em>' attribute.
@@ -2296,7 +2087,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariable()
    * @generated
    */
-  int EFILTERED_VARIABLE = 44;
+  int EFILTERED_VARIABLE = 42;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -2351,7 +2142,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariableOrString()
    * @generated
    */
-  int EFILTERED_VARIABLE_OR_STRING = 45;
+  int EFILTERED_VARIABLE_OR_STRING = 43;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -2379,7 +2170,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariablesAndString()
    * @generated
    */
-  int EFILTERED_VARIABLES_AND_STRING = 46;
+  int EFILTERED_VARIABLES_AND_STRING = 44;
 
   /**
    * The feature id for the '<em><b>Value string</b></em>' attribute.
@@ -2425,7 +2216,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairReference()
    * @generated
    */
-  int EDICTIONARY_PAIR_REFERENCE = 47;
+  int EDICTIONARY_PAIR_REFERENCE = 45;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -2453,7 +2244,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariable()
    * @generated
    */
-  int EDECLARED_VARIABLE = 48;
+  int EDECLARED_VARIABLE = 46;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2481,7 +2272,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclaration()
    * @generated
    */
-  int EVARIABLE_DECLARATION = 49;
+  int EVARIABLE_DECLARATION = 47;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2518,7 +2309,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariable()
    * @generated
    */
-  int EREGISTER_VARIABLE = 50;
+  int EREGISTER_VARIABLE = 48;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2546,7 +2337,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFactGathered()
    * @generated
    */
-  int EFACT_GATHERED = 51;
+  int EFACT_GATHERED = 49;
 
   /**
    * The feature id for the '<em><b>Tail</b></em>' attribute list.
@@ -2574,7 +2365,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 52;
+  int EDICTIONARY = 50;
 
   /**
    * The feature id for the '<em><b>Value string</b></em>' attribute.
@@ -2620,7 +2411,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 53;
+  int EDICTIONARY_PAIR = 51;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2657,7 +2448,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 54;
+  int ELIST = 52;
 
   /**
    * The feature id for the '<em><b>Value string</b></em>' attribute.
@@ -2707,17 +2498,6 @@ public interface AnsibleDslPackage extends EPackage
   EClass getModel();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.Model#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.Model#getName()
-   * @see #getModel()
-   * @generated
-   */
-  EAttribute getModel_Name();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook <em>EPlaybook</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2726,6 +2506,17 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EClass getEPlaybook();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getName()
+   * @see #getEPlaybook()
+   * @generated
+   */
+  EAttribute getEPlaybook_Name();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getPlays <em>Plays</em>}'.
@@ -2910,15 +2701,15 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEPlay_Pre_tasks_list();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles <em>Roles</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles_inclusions <em>Roles inclusions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Roles</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles()
+   * @return the meta object for the containment reference '<em>Roles inclusions</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles_inclusions()
    * @see #getEPlay()
    * @generated
    */
-  EReference getEPlay_Roles();
+  EReference getEPlay_Roles_inclusions();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getTasks_list <em>Tasks list</em>}'.
@@ -3385,275 +3176,35 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEConditionalFormula_Negated_expression();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls <em>ERole Calls</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion <em>ERole Inclusion</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>ERole Calls</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls
+   * @return the meta object for class '<em>ERole Inclusion</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
    * @generated
    */
-  EClass getERoleCalls();
+  EClass getERoleInclusion();
 
   /**
-   * Returns the meta object for the reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls#getRoles <em>Roles</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions <em>ERole Inclusions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Roles</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleCalls#getRoles()
-   * @see #getERoleCalls()
+   * @return the meta object for class '<em>ERole Inclusions</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions
    * @generated
    */
-  EReference getERoleCalls_Roles();
+  EClass getERoleInclusions();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERole <em>ERole</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions#getRoles <em>Roles</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>ERole</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERole
+   * @return the meta object for the containment reference list '<em>Roles</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions#getRoles()
+   * @see #getERoleInclusions()
    * @generated
    */
-  EClass getERole();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.ERole#getTasks_list <em>Tasks list</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Tasks list</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERole#getTasks_list()
-   * @see #getERole()
-   * @generated
-   */
-  EReference getERole_Tasks_list();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.ERole#getHandlers <em>Handlers</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Handlers</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERole#getHandlers()
-   * @see #getERole()
-   * @generated
-   */
-  EReference getERole_Handlers();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.ERole#getVariable_declarations <em>Variable declarations</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Variable declarations</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERole#getVariable_declarations()
-   * @see #getERole()
-   * @generated
-   */
-  EReference getERole_Variable_declarations();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ERole#getFiles_names_list <em>Files names list</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Files names list</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERole#getFiles_names_list()
-   * @see #getERole()
-   * @generated
-   */
-  EReference getERole_Files_names_list();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ERole#getTemplates_names_list <em>Templates names list</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Templates names list</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERole#getTemplates_names_list()
-   * @see #getERole()
-   * @generated
-   */
-  EReference getERole_Templates_names_list();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ERole#getMetadata <em>Metadata</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Metadata</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERole#getMetadata()
-   * @see #getERole()
-   * @generated
-   */
-  EReference getERole_Metadata();
-
-  /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata <em>ERole Metadata</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>ERole Metadata</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata
-   * @generated
-   */
-  EClass getERoleMetadata();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata#getAllow_duplicates <em>Allow duplicates</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Allow duplicates</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata#getAllow_duplicates()
-   * @see #getERoleMetadata()
-   * @generated
-   */
-  EAttribute getERoleMetadata_Allow_duplicates();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata#getDependencies <em>Dependencies</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Dependencies</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata#getDependencies()
-   * @see #getERoleMetadata()
-   * @generated
-   */
-  EReference getERoleMetadata_Dependencies();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata#getGalaxy_tags <em>Galaxy tags</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Galaxy tags</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadata#getGalaxy_tags()
-   * @see #getERoleMetadata()
-   * @generated
-   */
-  EReference getERoleMetadata_Galaxy_tags();
-
-  /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy <em>ERole Metadata Galaxy</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>ERole Metadata Galaxy</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy
-   * @generated
-   */
-  EClass getERoleMetadataGalaxy();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getAuthor <em>Author</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Author</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getAuthor()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EAttribute getERoleMetadataGalaxy_Author();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getDescription <em>Description</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Description</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getDescription()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EAttribute getERoleMetadataGalaxy_Description();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getCompany <em>Company</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Company</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getCompany()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EAttribute getERoleMetadataGalaxy_Company();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getIssue_tracker_url <em>Issue tracker url</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Issue tracker url</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getIssue_tracker_url()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EAttribute getERoleMetadataGalaxy_Issue_tracker_url();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getLicense <em>License</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>License</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getLicense()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EAttribute getERoleMetadataGalaxy_License();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getMin_ansible_version <em>Min ansible version</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Min ansible version</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getMin_ansible_version()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EAttribute getERoleMetadataGalaxy_Min_ansible_version();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getMin_ansible_container_version <em>Min ansible container version</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Min ansible container version</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getMin_ansible_container_version()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EAttribute getERoleMetadataGalaxy_Min_ansible_container_version();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getGithhub_branch <em>Githhub branch</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Githhub branch</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getGithhub_branch()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EAttribute getERoleMetadataGalaxy_Githhub_branch();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getPlatforms <em>Platforms</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Platforms</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getPlatforms()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EReference getERoleMetadataGalaxy_Platforms();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getCloud_platforms <em>Cloud platforms</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Cloud platforms</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getCloud_platforms()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EReference getERoleMetadataGalaxy_Cloud_platforms();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getGalaxy_tags <em>Galaxy tags</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Galaxy tags</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleMetadataGalaxy#getGalaxy_tags()
-   * @see #getERoleMetadataGalaxy()
-   * @generated
-   */
-  EReference getERoleMetadataGalaxy_Galaxy_tags();
+  EReference getERoleInclusions_Roles();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoop <em>ELoop</em>}'.
@@ -4765,14 +4316,6 @@ public interface AnsibleDslPackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MODEL__NAME = eINSTANCE.getModel_Name();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl <em>EPlaybook</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4781,6 +4324,14 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EClass EPLAYBOOK = eINSTANCE.getEPlaybook();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EPLAYBOOK__NAME = eINSTANCE.getEPlaybook_Name();
 
     /**
      * The meta object literal for the '<em><b>Plays</b></em>' containment reference list feature.
@@ -4929,12 +4480,12 @@ public interface AnsibleDslPackage extends EPackage
     EReference EPLAY__PRE_TASKS_LIST = eINSTANCE.getEPlay_Pre_tasks_list();
 
     /**
-     * The meta object literal for the '<em><b>Roles</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Roles inclusions</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPLAY__ROLES = eINSTANCE.getEPlay_Roles();
+    EReference EPLAY__ROLES_INCLUSIONS = eINSTANCE.getEPlay_Roles_inclusions();
 
     /**
      * The meta object literal for the '<em><b>Tasks list</b></em>' containment reference list feature.
@@ -5299,212 +4850,32 @@ public interface AnsibleDslPackage extends EPackage
     EReference ECONDITIONAL_FORMULA__NEGATED_EXPRESSION = eINSTANCE.getEConditionalFormula_Negated_expression();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl <em>ERole Calls</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionImpl <em>ERole Inclusion</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleCallsImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleCalls()
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleInclusion()
      * @generated
      */
-    EClass EROLE_CALLS = eINSTANCE.getERoleCalls();
+    EClass EROLE_INCLUSION = eINSTANCE.getERoleInclusion();
 
     /**
-     * The meta object literal for the '<em><b>Roles</b></em>' reference list feature.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionsImpl <em>ERole Inclusions</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionsImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleInclusions()
      * @generated
      */
-    EReference EROLE_CALLS__ROLES = eINSTANCE.getERoleCalls_Roles();
+    EClass EROLE_INCLUSIONS = eINSTANCE.getERoleInclusions();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl <em>ERole</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERole()
-     * @generated
-     */
-    EClass EROLE = eINSTANCE.getERole();
-
-    /**
-     * The meta object literal for the '<em><b>Tasks list</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Roles</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EROLE__TASKS_LIST = eINSTANCE.getERole_Tasks_list();
-
-    /**
-     * The meta object literal for the '<em><b>Handlers</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE__HANDLERS = eINSTANCE.getERole_Handlers();
-
-    /**
-     * The meta object literal for the '<em><b>Variable declarations</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE__VARIABLE_DECLARATIONS = eINSTANCE.getERole_Variable_declarations();
-
-    /**
-     * The meta object literal for the '<em><b>Files names list</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE__FILES_NAMES_LIST = eINSTANCE.getERole_Files_names_list();
-
-    /**
-     * The meta object literal for the '<em><b>Templates names list</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE__TEMPLATES_NAMES_LIST = eINSTANCE.getERole_Templates_names_list();
-
-    /**
-     * The meta object literal for the '<em><b>Metadata</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE__METADATA = eINSTANCE.getERole_Metadata();
-
-    /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleMetadataImpl <em>ERole Metadata</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleMetadataImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleMetadata()
-     * @generated
-     */
-    EClass EROLE_METADATA = eINSTANCE.getERoleMetadata();
-
-    /**
-     * The meta object literal for the '<em><b>Allow duplicates</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EROLE_METADATA__ALLOW_DUPLICATES = eINSTANCE.getERoleMetadata_Allow_duplicates();
-
-    /**
-     * The meta object literal for the '<em><b>Dependencies</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE_METADATA__DEPENDENCIES = eINSTANCE.getERoleMetadata_Dependencies();
-
-    /**
-     * The meta object literal for the '<em><b>Galaxy tags</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE_METADATA__GALAXY_TAGS = eINSTANCE.getERoleMetadata_Galaxy_tags();
-
-    /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleMetadataGalaxyImpl <em>ERole Metadata Galaxy</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleMetadataGalaxyImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleMetadataGalaxy()
-     * @generated
-     */
-    EClass EROLE_METADATA_GALAXY = eINSTANCE.getERoleMetadataGalaxy();
-
-    /**
-     * The meta object literal for the '<em><b>Author</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EROLE_METADATA_GALAXY__AUTHOR = eINSTANCE.getERoleMetadataGalaxy_Author();
-
-    /**
-     * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EROLE_METADATA_GALAXY__DESCRIPTION = eINSTANCE.getERoleMetadataGalaxy_Description();
-
-    /**
-     * The meta object literal for the '<em><b>Company</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EROLE_METADATA_GALAXY__COMPANY = eINSTANCE.getERoleMetadataGalaxy_Company();
-
-    /**
-     * The meta object literal for the '<em><b>Issue tracker url</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EROLE_METADATA_GALAXY__ISSUE_TRACKER_URL = eINSTANCE.getERoleMetadataGalaxy_Issue_tracker_url();
-
-    /**
-     * The meta object literal for the '<em><b>License</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EROLE_METADATA_GALAXY__LICENSE = eINSTANCE.getERoleMetadataGalaxy_License();
-
-    /**
-     * The meta object literal for the '<em><b>Min ansible version</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EROLE_METADATA_GALAXY__MIN_ANSIBLE_VERSION = eINSTANCE.getERoleMetadataGalaxy_Min_ansible_version();
-
-    /**
-     * The meta object literal for the '<em><b>Min ansible container version</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EROLE_METADATA_GALAXY__MIN_ANSIBLE_CONTAINER_VERSION = eINSTANCE.getERoleMetadataGalaxy_Min_ansible_container_version();
-
-    /**
-     * The meta object literal for the '<em><b>Githhub branch</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EROLE_METADATA_GALAXY__GITHHUB_BRANCH = eINSTANCE.getERoleMetadataGalaxy_Githhub_branch();
-
-    /**
-     * The meta object literal for the '<em><b>Platforms</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE_METADATA_GALAXY__PLATFORMS = eINSTANCE.getERoleMetadataGalaxy_Platforms();
-
-    /**
-     * The meta object literal for the '<em><b>Cloud platforms</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE_METADATA_GALAXY__CLOUD_PLATFORMS = eINSTANCE.getERoleMetadataGalaxy_Cloud_platforms();
-
-    /**
-     * The meta object literal for the '<em><b>Galaxy tags</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EROLE_METADATA_GALAXY__GALAXY_TAGS = eINSTANCE.getERoleMetadataGalaxy_Galaxy_tags();
+    EReference EROLE_INCLUSIONS__ROLES = eINSTANCE.getERoleInclusions_Roles();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopImpl <em>ELoop</em>}' class.
