@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
@@ -23,7 +24,6 @@ import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
-import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
@@ -46,8 +46,8 @@ public class KBReasonerProxy {
 		return kbclient;
 	}
 
-	public List<String> getTypes(ENodeTemplate node) {
-		List<String> types = new ArrayList<>();
+	public SortedSet<String> getTypes(ENodeTemplate node) {
+		SortedSet<String> types = new TreeSet<String>();
 		try {
 			List<String> modules = new ArrayList<>();
 			modules.add(AADM_Helper.getModule(node));
@@ -64,16 +64,15 @@ public class KBReasonerProxy {
 	}
 
 	private String renderType(Type type) {
-		return (type.getModule() != null ? renderModule(type.getModule()) + "/" : "") + type.getLabel();
+		return (type.getModule() != null ? AADM_Helper.renderModule(type.getModule()) + "/" : "") + type.getLabel();
 	}
 
-	private String renderModule(String module) {
-		String[] split = module.split("/");
-		return split[split.length - 1];
+	private String renderNode(ValidRequirementNode node) {
+		return (node.getModule() != null ? AADM_Helper.renderModule(node.getModule()) + "/" : "") + node.getLabel();
 	}
 
-	public List<String> getAttributes(EAttributeAssignment attr) {
-		List<String> result = new ArrayList<>();
+	public SortedSet<String> getAttributes(EAttributeAssignment attr) {
+		SortedSet<String> result = new TreeSet<String>();
 		try {
 			String type = AADM_Helper.findContainerType(attr, getKBReasoner());
 			if (type == null)
@@ -91,8 +90,8 @@ public class KBReasonerProxy {
 		return result;
 	}
 
-	public List<String> getProperties(EPropertyAssignment prop) {
-		List<String> result = new ArrayList<>();
+	public SortedSet<String> getProperties(EPropertyAssignment prop) {
+		SortedSet<String> result = new TreeSet<String>();
 		try {
 			String type = AADM_Helper.findContainerType(prop, getKBReasoner());
 			if (type == null)
@@ -110,8 +109,8 @@ public class KBReasonerProxy {
 		return result;
 	}
 
-	public List<String> getCapabilities(ECapabilityAssignment cap) {
-		List<String> result = new ArrayList<>();
+	public SortedSet<String> getCapabilities(ECapabilityAssignment cap) {
+		SortedSet<String> result = new TreeSet<String>();
 		try {
 			String type = AADM_Helper.findContainerType(cap, getKBReasoner());
 			if (type == null)
@@ -129,8 +128,8 @@ public class KBReasonerProxy {
 		return result;
 	}
 
-	public List<String> getRequirements(ERequirementAssignment req) {
-		List<String> result = new ArrayList<>();
+	public SortedSet<String> getRequirements(ERequirementAssignment req) {
+		SortedSet<String> result = new TreeSet<String>();
 		try {
 			String type = AADM_Helper.findContainerType(req, getKBReasoner());
 			if (type == null)
@@ -162,7 +161,7 @@ public class KBReasonerProxy {
 			for (ValidRequirementNode vrn : vrnd.getElements()) {
 				types.add(vrn.getType().getLabel());
 				System.out.println("Valid requirement node: " + vrn.getLabel());
-				result.add(vrn.getLabel());
+				result.add(renderNode(vrn));
 			}
 		}
 
@@ -170,14 +169,26 @@ public class KBReasonerProxy {
 		List<ENodeTemplate> localnodes = AADM_Helper.findLocalNodesForTypes(types, req);
 		for (ENodeTemplate node : localnodes) {
 			System.out.println("Valid requirement local node: " + node.getName());
-			result.add(node.getName());
+			result.add(AADM_Helper.renderTemplate(node));
 		}
 		return result;
 	}
 
-	public List<String> getDataTypes(EParameterDefinition par) {
-		// TODO implement it
-		throw new UnsupportedOperationException();
+	public SortedSet<String> getDataTypes(EObject par) {
+		SortedSet<String> types = new TreeSet<String>();
+		try {
+			List<String> modules = new ArrayList<>();
+			modules.add(AADM_Helper.getModule(par));
+			modules.addAll(AADM_Helper.getImports(par));
+			ReasonerData<Type> dataTypes = getKBReasoner().getDataTypes(modules);
+			for (Type dt : dataTypes.getElements()) {
+				types.add(renderType(dt));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return types;
 	}
 
 }

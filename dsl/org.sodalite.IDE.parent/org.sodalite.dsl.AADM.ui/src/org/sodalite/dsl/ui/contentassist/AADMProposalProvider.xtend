@@ -100,18 +100,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::req_cap property")
 		val String module = getModule(model)
-		//TODO Get entity in this GetProperty body. If null, return
-		val GetPropertyBodyImpl body = model as GetPropertyBodyImpl
-		val EEntityReference eEntityReference = body.entity
-		var ENodeTemplate node = null
-		if (eEntityReference instanceof EEntity){
-			val EEntity eEntity = eEntityReference as EEntity
-			if (eEntity.entity.equals('SELF')){
-				node = getNodeTemplate(model) as ENodeTemplate
-			}
-		} else {
-			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
-		}
+		//Get entity in this GetProperty body. If null, return
+		val node = getEntity(model as GetPropertyBodyImpl)
 		
 		if (node === null)
 			return
@@ -134,21 +124,25 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 	
-	override void completeGetPropertyBody_Property(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("Invoking content assist for GetPropertyBody::property property")
-		val String module = getModule(model)
-		//TODO Get entity in this GetProperty body.
-		val GetPropertyBodyImpl body = model as GetPropertyBodyImpl
+	def getEntity (GetPropertyBodyImpl body){
 		val EEntityReference eEntityReference = body.entity
 		var ENodeTemplate node = null
 		if (eEntityReference instanceof EEntity){
 			val EEntity eEntity = eEntityReference as EEntity
 			if (eEntity.entity.equals('SELF')){
-				node = getNodeTemplate(model) as ENodeTemplate
+				node = getNodeTemplate(body) as ENodeTemplate
 			}
 		} else {
 			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
 		}
+	}
+	
+	override void completeGetPropertyBody_Property(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetPropertyBody::property property")
+		val String module = getModule(model)
+		//Get entity in this GetProperty body. If null, return
+		val body = model as GetPropertyBodyImpl
+		val node = getEntity(body)
 		
 		if (node === null)
 			return
@@ -533,21 +527,21 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				proposalText = qnode
 				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 			}
+		}
 		
-			//Find local nodes that belongs to suggested types
-			if (tovrnd.elements.isEmpty)
-				throw new Exception ("Type of valid nodes satisfying the requirement not found");
-			val Type superType = tovrnd.elements.get(0)
-			val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
-			val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
-			for (ENodeTemplate node: localnodes){
-				System.out.println ("Valid requirement local node: " + node.name)
-			 	val qnode = module != null? module + '/' + node.name: node.name
-			 	val qtype = node.node.type.module != null? node.node.type.module + '/' + node.node.type.type: node.node.type.type
-				proposalText = qnode
-				displayText = qnode
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
-			}
+		//Find local nodes that belongs to suggested types
+		if (tovrnd.elements.isEmpty)
+			throw new Exception ("Type of valid nodes satisfying the requirement not found");
+		val Type superType = tovrnd.elements.get(0)
+		val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
+		val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
+		for (ENodeTemplate node: localnodes){
+			System.out.println ("Valid requirement local node: " + node.name)
+		 	val qnode = module != null? module + '/' + node.name: node.name
+		 	val qtype = node.node.type.module != null? node.node.type.module + '/' + node.node.type.type: node.node.type.type
+			proposalText = qnode
+			displayText = qnode
+			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 		}
 	}
 	

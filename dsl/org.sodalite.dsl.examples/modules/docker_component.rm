@@ -41,7 +41,7 @@ node_types:
 				type: string
 		capabilities:  
 			host:  
-				type: tosca.capabilities.Node
+				type: tosca.capabilities.Compute
 				valid_source_types:[docker/sodalite.nodes.DockerizedComponent] 
 		interfaces:  
 			Standard:
