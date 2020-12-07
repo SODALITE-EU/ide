@@ -34,10 +34,19 @@ ETaskHandler:
 ;
 
 EPlay:
-	('play_name:' name=STRING)?
-	'base_settings{'
-		base_common_keywords=EBaseCommonKeywords
-	'}'
+	('play_name:' name=STRING)
+	(privilage_escalation=EPrivilageEscalation)?
+	(validation_mode=EValidationMode)?
+	(connection=EConnection)?
+	('no_log:' no_log=BOOLEAN)?
+	('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
+	('module_defaults:' module_defaults=EList)?
+	('environment:' environment=EList)?
+	('collections:' collections=EList)?
+	('tags:' tags=EList)?
+	('vars{'
+		variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+	'}')?
 	('play_exe_settings{'
 		play_exe_settings=EPlayExeSettings
 	'}')? &
@@ -65,13 +74,24 @@ EPlay:
 
 EBlock:
 	'block{'
-		('block_name:' name=STRING)?
-		'base_settings{'
-			base_common_keywords=EBaseCommonKeywords
-		'}'
-		'execution_settings{'
-			exe_common_keywords=EExecutionCommonKeywords
-		'}'
+		('block_name:' name=STRING)
+		(privilage_escalation=EPrivilageEscalation)?
+		(validation_mode=EValidationMode)?
+		(connection=EConnection)?
+		('no_log:' no_log=BOOLEAN)?
+		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
+		('module_defaults:' module_defaults=EList)?
+		('environment:' environment=EList)?
+		('collections:' collections=EList)?
+		('tags:' tags=EList)?
+		('vars{'
+			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		'}')?
+		('exe_settings{'
+			exe_settings=EExecutionExeSettings
+		'}')?
+		(delegation=EDelegation)?
+		('when:' when_expression=EConditionalExpression)?
 		('error_handling{'
 			error_handling=EBlockErrorHandling
 		'}')?
@@ -89,60 +109,77 @@ EBlock:
 
 ETask:
 	'task{'
-		('task_name:' name=STRING)?
-		'base_settings{'
-			base_common_keywords=EBaseCommonKeywords
+		('task_name:' name=STRING)
+		(privilage_escalation=EPrivilageEscalation)?
+		(validation_mode=EValidationMode)?
+		(connection=EConnection)?
+		('no_log:' no_log=BOOLEAN)?
+		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
+		('module_defaults:' module_defaults=EList)?
+		('environment:' environment=EList)?
+		('collections:' collections=EList)?
+		('tags:' tags=EList)?
+		('vars{'
+			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		'}')?
+		('exe_settings{'
+			exe_settings=EExecutionExeSettings
+		'}')?
+		(delegation=EDelegation)?
+		('when:' when_expression=EConditionalExpression)?
+		('error_handling{'
+			error_handling=ETaskHandlerErrorHandling
+		'}')?
+		('action:' action=STRING)?
+		('asynchronous_settings{'
+			asynchronous_settings=EAsynchronousSettings
+		'}')?
+		('args:' args=EDictionary)?
+		'module_call{'
+			module=EModuleCall
 		'}'
-		'execution_settings{'
-			exe_common_keywords=EExecutionCommonKeywords
-		'}'
-		'task_settings{'
-			task_handler_common_keywords=ETaskHandlerCommonKeywords
-		'}'
+		('notify:' (notifiables+=ENotifiable)+)?
+		(loop=ELoop)?
+		(register=ERegisterVariable)?
 	'}'
 ;
 
 EHandler:
 	'handler{'
-		('handler_name:' name=STRING)?
-		'base_settings{'
-			base_common_keywords=EBaseCommonKeywords
+		('handler_name:' name=STRING)
+		(privilage_escalation=EPrivilageEscalation)?
+		(validation_mode=EValidationMode)?
+		(connection=EConnection)?
+		('no_log:' no_log=BOOLEAN)?
+		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
+		('module_defaults:' module_defaults=EList)?
+		('environment:' environment=EList)?
+		('collections:' collections=EList)?
+		('tags:' tags=EList)?
+		('vars{'
+			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		'}')?
+		('exe_settings{'
+			exe_settings=EExecutionExeSettings
+		'}')?
+		(delegation=EDelegation)?
+		('when:' when_expression=EConditionalExpression)?
+		('error_handling{'
+			error_handling=ETaskHandlerErrorHandling
+		'}')?
+		('action:' action=STRING)?
+		('asynchronous_settings{'
+			asynchronous_settings=EAsynchronousSettings
+		'}')?
+		('args:' args=EDictionary)?
+		'module_call{'
+			module=EModuleCall
 		'}'
-		'execution_settings{'
-			exe_common_keywords=EExecutionCommonKeywords
-		'}'
-		'task_settings{'
-			task_handler_common_keywords=ETaskHandlerCommonKeywords
-		'}'
+		('notify:' (notifiables+=ENotifiable)+)?
+		(loop=ELoop)?
+		(register=ERegisterVariable)?
 		('listen:' (listen_to+=[ENotifiedTopic|STRING])+)?
 	'}'
-;
-
-EExecutionCommonKeywords:
-	{EExecutionCommonKeywords}
-	('exe_settings{'
-		exe_settings=EExecutionExeSettings
-	'}')?
-	(delegation=EDelegation)?
-	('when:' when_expression=EConditionalExpression)?
-;
-
-ETaskHandlerCommonKeywords:
-	{ETaskHandlerCommonKeywords}
-	('error_handling{'
-		error_handling=ETaskHandlerErrorHandling
-	'}')?
-	('action:' action=STRING)?
-	('asynchronous_settings{'
-		asynchronous_settings=EAsynchronousSettings
-	'}')?
-	('args:' args=EDictionary)?
-	'module_call{'
-		module=EModuleCall
-	'}'
-	('notify:' (notifiables+=ENotifiable)+)?
-	(loop=ELoop)?
-	(register=ERegisterVariable)?
 ;
 
 EModuleCall:
@@ -171,13 +208,24 @@ EConditionalFormula:
 
 ERoleInclusion:
 	'role{'
-		('role_name:' name=STRING)?
-		'base_settings{'
-			base_common_keywords=EBaseCommonKeywords
-		'}'
-		'execution_settings{'
-			exe_common_keywords=EExecutionCommonKeywords
-		'}'
+		('role_name:' name=STRING)
+		(privilage_escalation=EPrivilageEscalation)?
+		(validation_mode=EValidationMode)?
+		(connection=EConnection)?
+		('no_log:' no_log=BOOLEAN)?
+		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
+		('module_defaults:' module_defaults=EList)?
+		('environment:' environment=EList)?
+		('collections:' collections=EList)?
+		('tags:' tags=EList)?
+		('vars{'
+			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		'}')?
+		('exe_settings{'
+			exe_settings=EExecutionExeSettings
+		'}')?
+		(delegation=EDelegation)?
+		('when:' when_expression=EConditionalExpression)?
 	'}'
 ;
 
@@ -292,22 +340,6 @@ ETaskHandlerErrorHandling:
 	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
 ;
 
-EBaseCommonKeywords:
-	{EBaseCommonKeywords}
-	(privilage_escalation=EPrivilageEscalation)?
-	(validation_mode=EValidationMode)?
-	(connection=EConnection)?
-	('no_log:' no_log=BOOLEAN)?
-	('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
-	('module_defaults:' module_defaults=EList)?
-	('environment:' environment=EList)?
-	('collections:' collections=EList)?
-	('tags:' tags=EList)?
-	('vars{'
-		variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
-	'}')?
-;
-
 EFactsSettings:
 	{EFactsSettings}
 	'facts_setttings{'
@@ -343,15 +375,20 @@ ENotifiedTopic:
 ;
 
 EValuePassed:
-	EValue | EFactGathered
+	EValue | EFactGathered | EItem
 ;
 
 EValue:
 	EDictionary | EList | EFilteredVariablesAndString | value_string=BOOLEAN | value_string=NULL | value_int=INT
 ;
 
+EItem:
+	{EItem}
+	'{{' 'item' ( "." tail+=ID)* ('|' filter_commands+=STRING)* '}}'
+;
+
 EFilteredVariable:
-	'{{' variable=[EDeclaredVariable|ID] ( "." tail+=EDictionaryPairReference)* ('|' filter_commands+=STRING)* '}}'
+	'{{' variable=[EDeclaredVariable|ID]  ('[' index=INT ']')? ( "." tail+=EDictionaryPairReference)* ('|' filter_commands+=STRING)* '}}'
 ;
 
 EFilteredVariableOrString:
@@ -363,7 +400,7 @@ EFilteredVariablesAndString:
 ;
 
 EDictionaryPairReference:
-	name=[EDictionaryPair|ID]
+	name=[EDictionaryPair|ID] ('[' index=INT ']')?
 ;
 
 EDeclaredVariable:

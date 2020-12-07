@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getIndex <em>Index</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getTail <em>Tail</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getFilter_commands <em>Filter commands</em>}</li>
  * </ul>
@@ -46,6 +47,28 @@ public interface EFilteredVariable extends ELoopList, EFilteredVariableOrString
    * @generated
    */
   void setVariable(EDeclaredVariable value);
+
+  /**
+   * Returns the value of the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Index</em>' attribute.
+   * @see #setIndex(int)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFilteredVariable_Index()
+   * @model
+   * @generated
+   */
+  int getIndex();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getIndex <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Index</em>' attribute.
+   * @see #getIndex()
+   * @generated
+   */
+  void setIndex(int value);
 
   /**
    * Returns the value of the '<em><b>Tail</b></em>' containment reference list.

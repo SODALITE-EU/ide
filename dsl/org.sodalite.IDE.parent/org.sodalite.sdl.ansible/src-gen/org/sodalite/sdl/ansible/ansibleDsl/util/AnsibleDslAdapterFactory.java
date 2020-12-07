@@ -126,16 +126,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEHandlerAdapter();
       }
       @Override
-      public Adapter caseEExecutionCommonKeywords(EExecutionCommonKeywords object)
-      {
-        return createEExecutionCommonKeywordsAdapter();
-      }
-      @Override
-      public Adapter caseETaskHandlerCommonKeywords(ETaskHandlerCommonKeywords object)
-      {
-        return createETaskHandlerCommonKeywordsAdapter();
-      }
-      @Override
       public Adapter caseEModuleCall(EModuleCall object)
       {
         return createEModuleCallAdapter();
@@ -241,11 +231,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createETaskHandlerErrorHandlingAdapter();
       }
       @Override
-      public Adapter caseEBaseCommonKeywords(EBaseCommonKeywords object)
-      {
-        return createEBaseCommonKeywordsAdapter();
-      }
-      @Override
       public Adapter caseEFactsSettings(EFactsSettings object)
       {
         return createEFactsSettingsAdapter();
@@ -284,6 +269,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEValue(EValue object)
       {
         return createEValueAdapter();
+      }
+      @Override
+      public Adapter caseEItem(EItem object)
+      {
+        return createEItemAdapter();
       }
       @Override
       public Adapter caseEFilteredVariable(EFilteredVariable object)
@@ -508,36 +498,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEHandlerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords <em>EExecution Common Keywords</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords
-   * @generated
-   */
-  public Adapter createEExecutionCommonKeywordsAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords <em>ETask Handler Common Keywords</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords
-   * @generated
-   */
-  public Adapter createETaskHandlerCommonKeywordsAdapter()
   {
     return null;
   }
@@ -858,21 +818,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseCommonKeywords <em>EBase Common Keywords</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseCommonKeywords
-   * @generated
-   */
-  public Adapter createEBaseCommonKeywordsAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings <em>EFacts Settings</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -988,6 +933,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EItem <em>EItem</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EItem
+   * @generated
+   */
+  public Adapter createEItemAdapter()
   {
     return null;
   }

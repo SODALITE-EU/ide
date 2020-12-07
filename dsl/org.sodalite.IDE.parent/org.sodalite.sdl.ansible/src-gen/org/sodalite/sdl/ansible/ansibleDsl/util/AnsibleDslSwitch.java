@@ -158,20 +158,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EEXECUTION_COMMON_KEYWORDS:
-      {
-        EExecutionCommonKeywords eExecutionCommonKeywords = (EExecutionCommonKeywords)theEObject;
-        T result = caseEExecutionCommonKeywords(eExecutionCommonKeywords);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS:
-      {
-        ETaskHandlerCommonKeywords eTaskHandlerCommonKeywords = (ETaskHandlerCommonKeywords)theEObject;
-        T result = caseETaskHandlerCommonKeywords(eTaskHandlerCommonKeywords);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AnsibleDslPackage.EMODULE_CALL:
       {
         EModuleCall eModuleCall = (EModuleCall)theEObject;
@@ -328,13 +314,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EBASE_COMMON_KEYWORDS:
-      {
-        EBaseCommonKeywords eBaseCommonKeywords = (EBaseCommonKeywords)theEObject;
-        T result = caseEBaseCommonKeywords(eBaseCommonKeywords);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AnsibleDslPackage.EFACTS_SETTINGS:
       {
         EFactsSettings eFactsSettings = (EFactsSettings)theEObject;
@@ -391,6 +370,14 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         EValue eValue = (EValue)theEObject;
         T result = caseEValue(eValue);
         if (result == null) result = caseEValuePassed(eValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EITEM:
+      {
+        EItem eItem = (EItem)theEObject;
+        T result = caseEItem(eItem);
+        if (result == null) result = caseEValuePassed(eItem);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -644,38 +631,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEHandler(EHandler object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EExecution Common Keywords</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EExecution Common Keywords</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEExecutionCommonKeywords(EExecutionCommonKeywords object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>ETask Handler Common Keywords</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ETask Handler Common Keywords</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseETaskHandlerCommonKeywords(ETaskHandlerCommonKeywords object)
   {
     return null;
   }
@@ -1017,22 +972,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EBase Common Keywords</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EBase Common Keywords</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEBaseCommonKeywords(EBaseCommonKeywords object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>EFacts Settings</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1156,6 +1095,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEValue(EValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EItem</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EItem</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEItem(EItem object)
   {
     return null;
   }

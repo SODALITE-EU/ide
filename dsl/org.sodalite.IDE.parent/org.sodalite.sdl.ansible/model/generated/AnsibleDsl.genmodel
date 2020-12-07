@@ -13,14 +13,32 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBase">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBase/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/base_common_keywords"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/privilage_escalation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/validation_mode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/connection"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBase/no_log"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBase/debugger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/module_defaults"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/environment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/collections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/tags"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/variable_declarations"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EExecution">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EExecution/exe_common_keywords"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EExecution/exe_settings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EExecution/delegation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EExecution/when_expression"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBlockTask"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ETaskHandler">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandler/task_handler_common_keywords"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandler/error_handling"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ETaskHandler/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandler/asynchronous_settings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandler/args"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandler/module"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandler/notifiables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandler/loop"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandler/register"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EPlay">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/play_exe_settings"/>
@@ -44,21 +62,6 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//ETask"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EHandler">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EHandler/listen_to"/>
-    </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EExecutionCommonKeywords">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EExecutionCommonKeywords/exe_settings"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EExecutionCommonKeywords/delegation"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EExecutionCommonKeywords/when_expression"/>
-    </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//ETaskHandlerCommonKeywords">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/error_handling"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/action"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/asynchronous_settings"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/args"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/module"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/notifiables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/loop"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerCommonKeywords/register"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EModuleCall">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EModuleCall/name"/>
@@ -144,18 +147,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerErrorHandling/changed_when"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandlerErrorHandling/failed_when"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EBaseCommonKeywords">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBaseCommonKeywords/privilage_escalation"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBaseCommonKeywords/validation_mode"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBaseCommonKeywords/connection"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBaseCommonKeywords/no_log"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBaseCommonKeywords/debugger"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBaseCommonKeywords/module_defaults"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBaseCommonKeywords/environment"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBaseCommonKeywords/collections"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBaseCommonKeywords/tags"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBaseCommonKeywords/variable_declarations"/>
-    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFactsSettings">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFactsSettings/gather_facts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFactsSettings/gather_subset"/>
@@ -182,8 +173,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EValue/value_string"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EValue/value_int"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EItem/tail"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EItem/filter_commands"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFilteredVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredVariable/variable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFilteredVariable/index"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredVariable/tail"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFilteredVariable/filter_commands"/>
     </genClasses>
@@ -195,6 +191,7 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryPairReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionaryPairReference/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDictionaryPairReference/index"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDeclaredVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDeclaredVariable/name"/>

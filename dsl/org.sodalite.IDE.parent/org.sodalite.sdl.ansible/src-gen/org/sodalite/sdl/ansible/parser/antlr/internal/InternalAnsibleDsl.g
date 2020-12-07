@@ -338,45 +338,319 @@ ruleEPlay returns [EObject current=null]
 										}
 									)
 								)
-							)?
-							otherlv_3='base_settings{'
-							{
-								newLeafNode(otherlv_3, grammarAccess.getEPlayAccess().getBase_settingsKeyword_0_1());
-							}
+							)
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getEPlayAccess().getBase_common_keywordsEBaseCommonKeywordsParserRuleCall_0_2_0());
+										newCompositeNode(grammarAccess.getEPlayAccess().getPrivilage_escalationEPrivilageEscalationParserRuleCall_0_1_0());
 									}
-									lv_base_common_keywords_4_0=ruleEBaseCommonKeywords
+									lv_privilage_escalation_3_0=ruleEPrivilageEscalation
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEPlayRule());
 										}
 										set(
 											$current,
-											"base_common_keywords",
-											lv_base_common_keywords_4_0,
-											"org.sodalite.sdl.ansible.AnsibleDsl.EBaseCommonKeywords");
+											"privilage_escalation",
+											lv_privilage_escalation_3_0,
+											"org.sodalite.sdl.ansible.AnsibleDsl.EPrivilageEscalation");
 										afterParserOrEnumRuleCall();
 									}
 								)
-							)
-							otherlv_5='}'
-							{
-								newLeafNode(otherlv_5, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_0_3());
-							}
+							)?
 							(
-								otherlv_6='play_exe_settings{'
+								(
+									{
+										newCompositeNode(grammarAccess.getEPlayAccess().getValidation_modeEValidationModeParserRuleCall_0_2_0());
+									}
+									lv_validation_mode_4_0=ruleEValidationMode
+									{
+										if ($current==null) {
+											$current = createModelElementForParent(grammarAccess.getEPlayRule());
+										}
+										set(
+											$current,
+											"validation_mode",
+											lv_validation_mode_4_0,
+											"org.sodalite.sdl.ansible.AnsibleDsl.EValidationMode");
+										afterParserOrEnumRuleCall();
+									}
+								)
+							)?
+							(
+								(
+									{
+										newCompositeNode(grammarAccess.getEPlayAccess().getConnectionEConnectionParserRuleCall_0_3_0());
+									}
+									lv_connection_5_0=ruleEConnection
+									{
+										if ($current==null) {
+											$current = createModelElementForParent(grammarAccess.getEPlayRule());
+										}
+										set(
+											$current,
+											"connection",
+											lv_connection_5_0,
+											"org.sodalite.sdl.ansible.AnsibleDsl.EConnection");
+										afterParserOrEnumRuleCall();
+									}
+								)
+							)?
+							(
+								otherlv_6='no_log:'
 								{
-									newLeafNode(otherlv_6, grammarAccess.getEPlayAccess().getPlay_exe_settingsKeyword_0_4_0());
+									newLeafNode(otherlv_6, grammarAccess.getEPlayAccess().getNo_logKeyword_0_4_0());
+								}
+								(
+									(
+										lv_no_log_7_0=RULE_BOOLEAN
+										{
+											newLeafNode(lv_no_log_7_0, grammarAccess.getEPlayAccess().getNo_logBOOLEANTerminalRuleCall_0_4_1_0());
+										}
+										{
+											if ($current==null) {
+												$current = createModelElement(grammarAccess.getEPlayRule());
+											}
+											setWithLastConsumed(
+												$current,
+												"no_log",
+												lv_no_log_7_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
+										}
+									)
+								)
+							)?
+							(
+								otherlv_8='debugger:'
+								{
+									newLeafNode(otherlv_8, grammarAccess.getEPlayAccess().getDebuggerKeyword_0_5_0());
+								}
+								(
+									(
+										(
+											lv_debugger_9_1='always'
+											{
+												newLeafNode(lv_debugger_9_1, grammarAccess.getEPlayAccess().getDebuggerAlwaysKeyword_0_5_1_0_0());
+											}
+											{
+												if ($current==null) {
+													$current = createModelElement(grammarAccess.getEPlayRule());
+												}
+												setWithLastConsumed($current, "debugger", lv_debugger_9_1, null);
+											}
+											    |
+											lv_debugger_9_2='never'
+											{
+												newLeafNode(lv_debugger_9_2, grammarAccess.getEPlayAccess().getDebuggerNeverKeyword_0_5_1_0_1());
+											}
+											{
+												if ($current==null) {
+													$current = createModelElement(grammarAccess.getEPlayRule());
+												}
+												setWithLastConsumed($current, "debugger", lv_debugger_9_2, null);
+											}
+											    |
+											lv_debugger_9_3='on_failed'
+											{
+												newLeafNode(lv_debugger_9_3, grammarAccess.getEPlayAccess().getDebuggerOn_failedKeyword_0_5_1_0_2());
+											}
+											{
+												if ($current==null) {
+													$current = createModelElement(grammarAccess.getEPlayRule());
+												}
+												setWithLastConsumed($current, "debugger", lv_debugger_9_3, null);
+											}
+											    |
+											lv_debugger_9_4='on_unreachable'
+											{
+												newLeafNode(lv_debugger_9_4, grammarAccess.getEPlayAccess().getDebuggerOn_unreachableKeyword_0_5_1_0_3());
+											}
+											{
+												if ($current==null) {
+													$current = createModelElement(grammarAccess.getEPlayRule());
+												}
+												setWithLastConsumed($current, "debugger", lv_debugger_9_4, null);
+											}
+											    |
+											lv_debugger_9_5='on_skipped'
+											{
+												newLeafNode(lv_debugger_9_5, grammarAccess.getEPlayAccess().getDebuggerOn_skippedKeyword_0_5_1_0_4());
+											}
+											{
+												if ($current==null) {
+													$current = createModelElement(grammarAccess.getEPlayRule());
+												}
+												setWithLastConsumed($current, "debugger", lv_debugger_9_5, null);
+											}
+										)
+									)
+								)
+							)?
+							(
+								otherlv_10='module_defaults:'
+								{
+									newLeafNode(otherlv_10, grammarAccess.getEPlayAccess().getModule_defaultsKeyword_0_6_0());
 								}
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEPlayAccess().getPlay_exe_settingsEPlayExeSettingsParserRuleCall_0_4_1_0());
+											newCompositeNode(grammarAccess.getEPlayAccess().getModule_defaultsEListParserRuleCall_0_6_1_0());
 										}
-										lv_play_exe_settings_7_0=ruleEPlayExeSettings
+										lv_module_defaults_11_0=ruleEList
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEPlayRule());
+											}
+											set(
+												$current,
+												"module_defaults",
+												lv_module_defaults_11_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+											afterParserOrEnumRuleCall();
+										}
+									)
+								)
+							)?
+							(
+								otherlv_12='environment:'
+								{
+									newLeafNode(otherlv_12, grammarAccess.getEPlayAccess().getEnvironmentKeyword_0_7_0());
+								}
+								(
+									(
+										{
+											newCompositeNode(grammarAccess.getEPlayAccess().getEnvironmentEListParserRuleCall_0_7_1_0());
+										}
+										lv_environment_13_0=ruleEList
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEPlayRule());
+											}
+											set(
+												$current,
+												"environment",
+												lv_environment_13_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+											afterParserOrEnumRuleCall();
+										}
+									)
+								)
+							)?
+							(
+								otherlv_14='collections:'
+								{
+									newLeafNode(otherlv_14, grammarAccess.getEPlayAccess().getCollectionsKeyword_0_8_0());
+								}
+								(
+									(
+										{
+											newCompositeNode(grammarAccess.getEPlayAccess().getCollectionsEListParserRuleCall_0_8_1_0());
+										}
+										lv_collections_15_0=ruleEList
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEPlayRule());
+											}
+											set(
+												$current,
+												"collections",
+												lv_collections_15_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+											afterParserOrEnumRuleCall();
+										}
+									)
+								)
+							)?
+							(
+								otherlv_16='tags:'
+								{
+									newLeafNode(otherlv_16, grammarAccess.getEPlayAccess().getTagsKeyword_0_9_0());
+								}
+								(
+									(
+										{
+											newCompositeNode(grammarAccess.getEPlayAccess().getTagsEListParserRuleCall_0_9_1_0());
+										}
+										lv_tags_17_0=ruleEList
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEPlayRule());
+											}
+											set(
+												$current,
+												"tags",
+												lv_tags_17_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+											afterParserOrEnumRuleCall();
+										}
+									)
+								)
+							)?
+							(
+								otherlv_18='vars{'
+								{
+									newLeafNode(otherlv_18, grammarAccess.getEPlayAccess().getVarsKeyword_0_10_0());
+								}
+								(
+									(
+										{
+											newCompositeNode(grammarAccess.getEPlayAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_0_10_1_0());
+										}
+										lv_variable_declarations_19_0=ruleEVariableDeclaration
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEPlayRule());
+											}
+											add(
+												$current,
+												"variable_declarations",
+												lv_variable_declarations_19_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+											afterParserOrEnumRuleCall();
+										}
+									)
+								)
+								(
+									otherlv_20=','
+									{
+										newLeafNode(otherlv_20, grammarAccess.getEPlayAccess().getCommaKeyword_0_10_2_0());
+									}
+									(
+										(
+											{
+												newCompositeNode(grammarAccess.getEPlayAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_0_10_2_1_0());
+											}
+											lv_variable_declarations_21_0=ruleEVariableDeclaration
+											{
+												if ($current==null) {
+													$current = createModelElementForParent(grammarAccess.getEPlayRule());
+												}
+												add(
+													$current,
+													"variable_declarations",
+													lv_variable_declarations_21_0,
+													"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+												afterParserOrEnumRuleCall();
+											}
+										)
+									)
+								)*
+								otherlv_22='}'
+								{
+									newLeafNode(otherlv_22, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_0_10_3());
+								}
+							)?
+							(
+								otherlv_23='play_exe_settings{'
+								{
+									newLeafNode(otherlv_23, grammarAccess.getEPlayAccess().getPlay_exe_settingsKeyword_0_11_0());
+								}
+								(
+									(
+										{
+											newCompositeNode(grammarAccess.getEPlayAccess().getPlay_exe_settingsEPlayExeSettingsParserRuleCall_0_11_1_0());
+										}
+										lv_play_exe_settings_24_0=ruleEPlayExeSettings
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -384,15 +658,15 @@ ruleEPlay returns [EObject current=null]
 											set(
 												$current,
 												"play_exe_settings",
-												lv_play_exe_settings_7_0,
+												lv_play_exe_settings_24_0,
 												"org.sodalite.sdl.ansible.AnsibleDsl.EPlayExeSettings");
 											afterParserOrEnumRuleCall();
 										}
 									)
 								)
-								otherlv_8='}'
+								otherlv_25='}'
 								{
-									newLeafNode(otherlv_8, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_0_4_2());
+									newLeafNode(otherlv_25, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_0_11_2());
 								}
 							)?
 							))
@@ -406,16 +680,16 @@ ruleEPlay returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getEPlayAccess().getUnorderedGroup(), 1);
 				}
-							({true}?=>(otherlv_9='error_handling{'
+							({true}?=>(otherlv_26='error_handling{'
 							{
-								newLeafNode(otherlv_9, grammarAccess.getEPlayAccess().getError_handlingKeyword_1_0());
+								newLeafNode(otherlv_26, grammarAccess.getEPlayAccess().getError_handlingKeyword_1_0());
 							}
 							(
 								(
 									{
 										newCompositeNode(grammarAccess.getEPlayAccess().getError_handlingEPlayErrorHandlingParserRuleCall_1_1_0());
 									}
-									lv_error_handling_10_0=ruleEPlayErrorHandling
+									lv_error_handling_27_0=ruleEPlayErrorHandling
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -423,15 +697,15 @@ ruleEPlay returns [EObject current=null]
 										set(
 											$current,
 											"error_handling",
-											lv_error_handling_10_0,
+											lv_error_handling_27_0,
 											"org.sodalite.sdl.ansible.AnsibleDsl.EPlayErrorHandling");
 										afterParserOrEnumRuleCall();
 									}
 								)
 							)
-							otherlv_11='}'
+							otherlv_28='}'
 							{
-								newLeafNode(otherlv_11, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_1_2());
+								newLeafNode(otherlv_28, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_1_2());
 							}
 							))
 				{ 
@@ -448,7 +722,7 @@ ruleEPlay returns [EObject current=null]
 								{
 									newCompositeNode(grammarAccess.getEPlayAccess().getFacts_settingsEFactsSettingsParserRuleCall_2_0());
 								}
-								lv_facts_settings_12_0=ruleEFactsSettings
+								lv_facts_settings_29_0=ruleEFactsSettings
 								{
 									if ($current==null) {
 										$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -456,7 +730,7 @@ ruleEPlay returns [EObject current=null]
 									set(
 										$current,
 										"facts_settings",
-										lv_facts_settings_12_0,
+										lv_facts_settings_29_0,
 										"org.sodalite.sdl.ansible.AnsibleDsl.EFactsSettings");
 									afterParserOrEnumRuleCall();
 								}
@@ -472,16 +746,16 @@ ruleEPlay returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getEPlayAccess().getUnorderedGroup(), 3);
 				}
-							({true}?=>(otherlv_13='vars_files:'
+							({true}?=>(otherlv_30='vars_files:'
 							{
-								newLeafNode(otherlv_13, grammarAccess.getEPlayAccess().getVars_filesKeyword_3_0());
+								newLeafNode(otherlv_30, grammarAccess.getEPlayAccess().getVars_filesKeyword_3_0());
 							}
 							(
 								(
 									{
 										newCompositeNode(grammarAccess.getEPlayAccess().getVars_filesEListParserRuleCall_3_1_0());
 									}
-									lv_vars_files_14_0=ruleEList
+									lv_vars_files_31_0=ruleEList
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -489,7 +763,7 @@ ruleEPlay returns [EObject current=null]
 										set(
 											$current,
 											"vars_files",
-											lv_vars_files_14_0,
+											lv_vars_files_31_0,
 											"org.sodalite.sdl.ansible.AnsibleDsl.EList");
 										afterParserOrEnumRuleCall();
 									}
@@ -506,16 +780,16 @@ ruleEPlay returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getEPlayAccess().getUnorderedGroup(), 4);
 				}
-							({true}?=>(otherlv_15='vars_prompt:'
+							({true}?=>(otherlv_32='vars_prompt:'
 							{
-								newLeafNode(otherlv_15, grammarAccess.getEPlayAccess().getVars_promptKeyword_4_0());
+								newLeafNode(otherlv_32, grammarAccess.getEPlayAccess().getVars_promptKeyword_4_0());
 							}
 							(
 								(
 									{
 										newCompositeNode(grammarAccess.getEPlayAccess().getVars_promptEListParserRuleCall_4_1_0());
 									}
-									lv_vars_prompt_16_0=ruleEList
+									lv_vars_prompt_33_0=ruleEList
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -523,7 +797,7 @@ ruleEPlay returns [EObject current=null]
 										set(
 											$current,
 											"vars_prompt",
-											lv_vars_prompt_16_0,
+											lv_vars_prompt_33_0,
 											"org.sodalite.sdl.ansible.AnsibleDsl.EList");
 										afterParserOrEnumRuleCall();
 									}
@@ -540,15 +814,15 @@ ruleEPlay returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getEPlayAccess().getUnorderedGroup(), 5);
 				}
-							({true}?=>(otherlv_17='force_handlers:'
+							({true}?=>(otherlv_34='force_handlers:'
 							{
-								newLeafNode(otherlv_17, grammarAccess.getEPlayAccess().getForce_handlersKeyword_5_0());
+								newLeafNode(otherlv_34, grammarAccess.getEPlayAccess().getForce_handlersKeyword_5_0());
 							}
 							(
 								(
-									lv_force_handlers_18_0=RULE_BOOLEAN
+									lv_force_handlers_35_0=RULE_BOOLEAN
 									{
-										newLeafNode(lv_force_handlers_18_0, grammarAccess.getEPlayAccess().getForce_handlersBOOLEANTerminalRuleCall_5_1_0());
+										newLeafNode(lv_force_handlers_35_0, grammarAccess.getEPlayAccess().getForce_handlersBOOLEANTerminalRuleCall_5_1_0());
 									}
 									{
 										if ($current==null) {
@@ -557,7 +831,7 @@ ruleEPlay returns [EObject current=null]
 										setWithLastConsumed(
 											$current,
 											"force_handlers",
-											lv_force_handlers_18_0,
+											lv_force_handlers_35_0,
 											"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
 									}
 								)
@@ -573,16 +847,16 @@ ruleEPlay returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getEPlayAccess().getUnorderedGroup(), 6);
 				}
-							({true}?=>(otherlv_19='pre_tasks{'
+							({true}?=>(otherlv_36='pre_tasks{'
 							{
-								newLeafNode(otherlv_19, grammarAccess.getEPlayAccess().getPre_tasksKeyword_6_0());
+								newLeafNode(otherlv_36, grammarAccess.getEPlayAccess().getPre_tasksKeyword_6_0());
 							}
 							(
 								(
 									{
 										newCompositeNode(grammarAccess.getEPlayAccess().getPre_tasks_listEBlockTaskParserRuleCall_6_1_0());
 									}
-									lv_pre_tasks_list_20_0=ruleEBlockTask
+									lv_pre_tasks_list_37_0=ruleEBlockTask
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -590,15 +864,15 @@ ruleEPlay returns [EObject current=null]
 										add(
 											$current,
 											"pre_tasks_list",
-											lv_pre_tasks_list_20_0,
+											lv_pre_tasks_list_37_0,
 											"org.sodalite.sdl.ansible.AnsibleDsl.EBlockTask");
 										afterParserOrEnumRuleCall();
 									}
 								)
 							)+
-							otherlv_21='}'
+							otherlv_38='}'
 							{
-								newLeafNode(otherlv_21, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_6_2());
+								newLeafNode(otherlv_38, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_6_2());
 							}
 							))
 				{ 
@@ -615,7 +889,7 @@ ruleEPlay returns [EObject current=null]
 								{
 									newCompositeNode(grammarAccess.getEPlayAccess().getRoles_inclusionsERoleInclusionsParserRuleCall_7_0());
 								}
-								lv_roles_inclusions_22_0=ruleERoleInclusions
+								lv_roles_inclusions_39_0=ruleERoleInclusions
 								{
 									if ($current==null) {
 										$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -623,7 +897,7 @@ ruleEPlay returns [EObject current=null]
 									set(
 										$current,
 										"roles_inclusions",
-										lv_roles_inclusions_22_0,
+										lv_roles_inclusions_39_0,
 										"org.sodalite.sdl.ansible.AnsibleDsl.ERoleInclusions");
 									afterParserOrEnumRuleCall();
 								}
@@ -639,16 +913,16 @@ ruleEPlay returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getEPlayAccess().getUnorderedGroup(), 8);
 				}
-							({true}?=>(otherlv_23='tasks_list{'
+							({true}?=>(otherlv_40='tasks_list{'
 							{
-								newLeafNode(otherlv_23, grammarAccess.getEPlayAccess().getTasks_listKeyword_8_0());
+								newLeafNode(otherlv_40, grammarAccess.getEPlayAccess().getTasks_listKeyword_8_0());
 							}
 							(
 								(
 									{
 										newCompositeNode(grammarAccess.getEPlayAccess().getTasks_listEBlockTaskParserRuleCall_8_1_0());
 									}
-									lv_tasks_list_24_0=ruleEBlockTask
+									lv_tasks_list_41_0=ruleEBlockTask
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -656,27 +930,27 @@ ruleEPlay returns [EObject current=null]
 										add(
 											$current,
 											"tasks_list",
-											lv_tasks_list_24_0,
+											lv_tasks_list_41_0,
 											"org.sodalite.sdl.ansible.AnsibleDsl.EBlockTask");
 										afterParserOrEnumRuleCall();
 									}
 								)
 							)+
-							otherlv_25='}'
+							otherlv_42='}'
 							{
-								newLeafNode(otherlv_25, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_8_2());
+								newLeafNode(otherlv_42, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_8_2());
 							}
 							(
-								otherlv_26='post_tasks{'
+								otherlv_43='post_tasks{'
 								{
-									newLeafNode(otherlv_26, grammarAccess.getEPlayAccess().getPost_tasksKeyword_8_3_0());
+									newLeafNode(otherlv_43, grammarAccess.getEPlayAccess().getPost_tasksKeyword_8_3_0());
 								}
 								(
 									(
 										{
 											newCompositeNode(grammarAccess.getEPlayAccess().getPost_tasks_listEBlockTaskParserRuleCall_8_3_1_0());
 										}
-										lv_post_tasks_list_27_0=ruleEBlockTask
+										lv_post_tasks_list_44_0=ruleEBlockTask
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -684,28 +958,28 @@ ruleEPlay returns [EObject current=null]
 											add(
 												$current,
 												"post_tasks_list",
-												lv_post_tasks_list_27_0,
+												lv_post_tasks_list_44_0,
 												"org.sodalite.sdl.ansible.AnsibleDsl.EBlockTask");
 											afterParserOrEnumRuleCall();
 										}
 									)
 								)+
-								otherlv_28='}'
+								otherlv_45='}'
 								{
-									newLeafNode(otherlv_28, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_8_3_2());
+									newLeafNode(otherlv_45, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_8_3_2());
 								}
 							)?
 							(
-								otherlv_29='handlers{'
+								otherlv_46='handlers{'
 								{
-									newLeafNode(otherlv_29, grammarAccess.getEPlayAccess().getHandlersKeyword_8_4_0());
+									newLeafNode(otherlv_46, grammarAccess.getEPlayAccess().getHandlersKeyword_8_4_0());
 								}
 								(
 									(
 										{
 											newCompositeNode(grammarAccess.getEPlayAccess().getHandlersEHandlerParserRuleCall_8_4_1_0());
 										}
-										lv_handlers_30_0=ruleEHandler
+										lv_handlers_47_0=ruleEHandler
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEPlayRule());
@@ -713,15 +987,15 @@ ruleEPlay returns [EObject current=null]
 											add(
 												$current,
 												"handlers",
-												lv_handlers_30_0,
+												lv_handlers_47_0,
 												"org.sodalite.sdl.ansible.AnsibleDsl.EHandler");
 											afterParserOrEnumRuleCall();
 										}
 									)
 								)+
-								otherlv_31='}'
+								otherlv_48='}'
 								{
-									newLeafNode(otherlv_31, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_8_4_2());
+									newLeafNode(otherlv_48, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_8_4_2());
 								}
 							)?
 							))
@@ -783,72 +1057,392 @@ ruleEBlock returns [EObject current=null]
 					}
 				)
 			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEBlockAccess().getPrivilage_escalationEPrivilageEscalationParserRuleCall_2_0());
+				}
+				lv_privilage_escalation_3_0=ruleEPrivilageEscalation
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEBlockRule());
+					}
+					set(
+						$current,
+						"privilage_escalation",
+						lv_privilage_escalation_3_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EPrivilageEscalation");
+					afterParserOrEnumRuleCall();
+				}
+			)
 		)?
-		otherlv_3='base_settings{'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getEBlockAccess().getBase_settingsKeyword_2());
-		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEBlockAccess().getBase_common_keywordsEBaseCommonKeywordsParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getEBlockAccess().getValidation_modeEValidationModeParserRuleCall_3_0());
 				}
-				lv_base_common_keywords_4_0=ruleEBaseCommonKeywords
+				lv_validation_mode_4_0=ruleEValidationMode
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEBlockRule());
 					}
 					set(
 						$current,
-						"base_common_keywords",
-						lv_base_common_keywords_4_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EBaseCommonKeywords");
+						"validation_mode",
+						lv_validation_mode_4_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EValidationMode");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		otherlv_5='}'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_4());
-		}
-		otherlv_6='execution_settings{'
-		{
-			newLeafNode(otherlv_6, grammarAccess.getEBlockAccess().getExecution_settingsKeyword_5());
-		}
+		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEBlockAccess().getExe_common_keywordsEExecutionCommonKeywordsParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getEBlockAccess().getConnectionEConnectionParserRuleCall_4_0());
 				}
-				lv_exe_common_keywords_7_0=ruleEExecutionCommonKeywords
+				lv_connection_5_0=ruleEConnection
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEBlockRule());
 					}
 					set(
 						$current,
-						"exe_common_keywords",
-						lv_exe_common_keywords_7_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EExecutionCommonKeywords");
+						"connection",
+						lv_connection_5_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EConnection");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		otherlv_8='}'
-		{
-			newLeafNode(otherlv_8, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_7());
-		}
+		)?
 		(
-			otherlv_9='error_handling{'
+			otherlv_6='no_log:'
 			{
-				newLeafNode(otherlv_9, grammarAccess.getEBlockAccess().getError_handlingKeyword_8_0());
+				newLeafNode(otherlv_6, grammarAccess.getEBlockAccess().getNo_logKeyword_5_0());
+			}
+			(
+				(
+					lv_no_log_7_0=RULE_BOOLEAN
+					{
+						newLeafNode(lv_no_log_7_0, grammarAccess.getEBlockAccess().getNo_logBOOLEANTerminalRuleCall_5_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEBlockRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"no_log",
+							lv_no_log_7_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
+					}
+				)
+			)
+		)?
+		(
+			otherlv_8='debugger:'
+			{
+				newLeafNode(otherlv_8, grammarAccess.getEBlockAccess().getDebuggerKeyword_6_0());
+			}
+			(
+				(
+					(
+						lv_debugger_9_1='always'
+						{
+							newLeafNode(lv_debugger_9_1, grammarAccess.getEBlockAccess().getDebuggerAlwaysKeyword_6_1_0_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEBlockRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_1, null);
+						}
+						    |
+						lv_debugger_9_2='never'
+						{
+							newLeafNode(lv_debugger_9_2, grammarAccess.getEBlockAccess().getDebuggerNeverKeyword_6_1_0_1());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEBlockRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_2, null);
+						}
+						    |
+						lv_debugger_9_3='on_failed'
+						{
+							newLeafNode(lv_debugger_9_3, grammarAccess.getEBlockAccess().getDebuggerOn_failedKeyword_6_1_0_2());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEBlockRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_3, null);
+						}
+						    |
+						lv_debugger_9_4='on_unreachable'
+						{
+							newLeafNode(lv_debugger_9_4, grammarAccess.getEBlockAccess().getDebuggerOn_unreachableKeyword_6_1_0_3());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEBlockRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_4, null);
+						}
+						    |
+						lv_debugger_9_5='on_skipped'
+						{
+							newLeafNode(lv_debugger_9_5, grammarAccess.getEBlockAccess().getDebuggerOn_skippedKeyword_6_1_0_4());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEBlockRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_5, null);
+						}
+					)
+				)
+			)
+		)?
+		(
+			otherlv_10='module_defaults:'
+			{
+				newLeafNode(otherlv_10, grammarAccess.getEBlockAccess().getModule_defaultsKeyword_7_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEBlockAccess().getError_handlingEBlockErrorHandlingParserRuleCall_8_1_0());
+						newCompositeNode(grammarAccess.getEBlockAccess().getModule_defaultsEListParserRuleCall_7_1_0());
 					}
-					lv_error_handling_10_0=ruleEBlockErrorHandling
+					lv_module_defaults_11_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEBlockRule());
+						}
+						set(
+							$current,
+							"module_defaults",
+							lv_module_defaults_11_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_12='environment:'
+			{
+				newLeafNode(otherlv_12, grammarAccess.getEBlockAccess().getEnvironmentKeyword_8_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEBlockAccess().getEnvironmentEListParserRuleCall_8_1_0());
+					}
+					lv_environment_13_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEBlockRule());
+						}
+						set(
+							$current,
+							"environment",
+							lv_environment_13_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_14='collections:'
+			{
+				newLeafNode(otherlv_14, grammarAccess.getEBlockAccess().getCollectionsKeyword_9_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEBlockAccess().getCollectionsEListParserRuleCall_9_1_0());
+					}
+					lv_collections_15_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEBlockRule());
+						}
+						set(
+							$current,
+							"collections",
+							lv_collections_15_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_16='tags:'
+			{
+				newLeafNode(otherlv_16, grammarAccess.getEBlockAccess().getTagsKeyword_10_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEBlockAccess().getTagsEListParserRuleCall_10_1_0());
+					}
+					lv_tags_17_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEBlockRule());
+						}
+						set(
+							$current,
+							"tags",
+							lv_tags_17_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_18='vars{'
+			{
+				newLeafNode(otherlv_18, grammarAccess.getEBlockAccess().getVarsKeyword_11_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEBlockAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_11_1_0());
+					}
+					lv_variable_declarations_19_0=ruleEVariableDeclaration
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEBlockRule());
+						}
+						add(
+							$current,
+							"variable_declarations",
+							lv_variable_declarations_19_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_20=','
+				{
+					newLeafNode(otherlv_20, grammarAccess.getEBlockAccess().getCommaKeyword_11_2_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getEBlockAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_11_2_1_0());
+						}
+						lv_variable_declarations_21_0=ruleEVariableDeclaration
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getEBlockRule());
+							}
+							add(
+								$current,
+								"variable_declarations",
+								lv_variable_declarations_21_0,
+								"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+			otherlv_22='}'
+			{
+				newLeafNode(otherlv_22, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_11_3());
+			}
+		)?
+		(
+			otherlv_23='exe_settings{'
+			{
+				newLeafNode(otherlv_23, grammarAccess.getEBlockAccess().getExe_settingsKeyword_12_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEBlockAccess().getExe_settingsEExecutionExeSettingsParserRuleCall_12_1_0());
+					}
+					lv_exe_settings_24_0=ruleEExecutionExeSettings
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEBlockRule());
+						}
+						set(
+							$current,
+							"exe_settings",
+							lv_exe_settings_24_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EExecutionExeSettings");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_25='}'
+			{
+				newLeafNode(otherlv_25, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_12_2());
+			}
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEBlockAccess().getDelegationEDelegationParserRuleCall_13_0());
+				}
+				lv_delegation_26_0=ruleEDelegation
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEBlockRule());
+					}
+					set(
+						$current,
+						"delegation",
+						lv_delegation_26_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EDelegation");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			otherlv_27='when:'
+			{
+				newLeafNode(otherlv_27, grammarAccess.getEBlockAccess().getWhenKeyword_14_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEBlockAccess().getWhen_expressionEConditionalExpressionParserRuleCall_14_1_0());
+					}
+					lv_when_expression_28_0=ruleEConditionalExpression
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEBlockRule());
+						}
+						set(
+							$current,
+							"when_expression",
+							lv_when_expression_28_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EConditionalExpression");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_29='error_handling{'
+			{
+				newLeafNode(otherlv_29, grammarAccess.getEBlockAccess().getError_handlingKeyword_15_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEBlockAccess().getError_handlingEBlockErrorHandlingParserRuleCall_15_1_0());
+					}
+					lv_error_handling_30_0=ruleEBlockErrorHandling
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEBlockRule());
@@ -856,27 +1450,27 @@ ruleEBlock returns [EObject current=null]
 						set(
 							$current,
 							"error_handling",
-							lv_error_handling_10_0,
+							lv_error_handling_30_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.EBlockErrorHandling");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-			otherlv_11='}'
+			otherlv_31='}'
 			{
-				newLeafNode(otherlv_11, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_8_2());
+				newLeafNode(otherlv_31, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_15_2());
 			}
 		)?
-		otherlv_12='tasks{'
+		otherlv_32='tasks{'
 		{
-			newLeafNode(otherlv_12, grammarAccess.getEBlockAccess().getTasksKeyword_9());
+			newLeafNode(otherlv_32, grammarAccess.getEBlockAccess().getTasksKeyword_16());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEBlockAccess().getTasksETaskParserRuleCall_10_0());
+					newCompositeNode(grammarAccess.getEBlockAccess().getTasksETaskParserRuleCall_17_0());
 				}
-				lv_tasks_13_0=ruleETask
+				lv_tasks_33_0=ruleETask
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEBlockRule());
@@ -884,27 +1478,27 @@ ruleEBlock returns [EObject current=null]
 					add(
 						$current,
 						"tasks",
-						lv_tasks_13_0,
+						lv_tasks_33_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.ETask");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)+
-		otherlv_14='}'
+		otherlv_34='}'
 		{
-			newLeafNode(otherlv_14, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_11());
+			newLeafNode(otherlv_34, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_18());
 		}
 		(
-			otherlv_15='rescue_tasks{'
+			otherlv_35='rescue_tasks{'
 			{
-				newLeafNode(otherlv_15, grammarAccess.getEBlockAccess().getRescue_tasksKeyword_12_0());
+				newLeafNode(otherlv_35, grammarAccess.getEBlockAccess().getRescue_tasksKeyword_19_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEBlockAccess().getRescue_tasksETaskParserRuleCall_12_1_0());
+						newCompositeNode(grammarAccess.getEBlockAccess().getRescue_tasksETaskParserRuleCall_19_1_0());
 					}
-					lv_rescue_tasks_16_0=ruleETask
+					lv_rescue_tasks_36_0=ruleETask
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEBlockRule());
@@ -912,28 +1506,28 @@ ruleEBlock returns [EObject current=null]
 						add(
 							$current,
 							"rescue_tasks",
-							lv_rescue_tasks_16_0,
+							lv_rescue_tasks_36_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.ETask");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)+
-			otherlv_17='}'
+			otherlv_37='}'
 			{
-				newLeafNode(otherlv_17, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_12_2());
+				newLeafNode(otherlv_37, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_19_2());
 			}
 		)?
 		(
-			otherlv_18='always_tasks{'
+			otherlv_38='always_tasks{'
 			{
-				newLeafNode(otherlv_18, grammarAccess.getEBlockAccess().getAlways_tasksKeyword_13_0());
+				newLeafNode(otherlv_38, grammarAccess.getEBlockAccess().getAlways_tasksKeyword_20_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEBlockAccess().getAlways_tasksETaskParserRuleCall_13_1_0());
+						newCompositeNode(grammarAccess.getEBlockAccess().getAlways_tasksETaskParserRuleCall_20_1_0());
 					}
-					lv_always_tasks_19_0=ruleETask
+					lv_always_tasks_39_0=ruleETask
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEBlockRule());
@@ -941,20 +1535,20 @@ ruleEBlock returns [EObject current=null]
 						add(
 							$current,
 							"always_tasks",
-							lv_always_tasks_19_0,
+							lv_always_tasks_39_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.ETask");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)+
-			otherlv_20='}'
+			otherlv_40='}'
 			{
-				newLeafNode(otherlv_20, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_13_2());
+				newLeafNode(otherlv_40, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_20_2());
 			}
 		)?
-		otherlv_21='}'
+		otherlv_41='}'
 		{
-			newLeafNode(otherlv_21, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_14());
+			newLeafNode(otherlv_41, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_21());
 		}
 	)
 ;
@@ -1002,91 +1596,581 @@ ruleETask returns [EObject current=null]
 					}
 				)
 			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getETaskAccess().getPrivilage_escalationEPrivilageEscalationParserRuleCall_2_0());
+				}
+				lv_privilage_escalation_3_0=ruleEPrivilageEscalation
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getETaskRule());
+					}
+					set(
+						$current,
+						"privilage_escalation",
+						lv_privilage_escalation_3_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EPrivilageEscalation");
+					afterParserOrEnumRuleCall();
+				}
+			)
 		)?
-		otherlv_3='base_settings{'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getETaskAccess().getBase_settingsKeyword_2());
-		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getETaskAccess().getBase_common_keywordsEBaseCommonKeywordsParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getETaskAccess().getValidation_modeEValidationModeParserRuleCall_3_0());
 				}
-				lv_base_common_keywords_4_0=ruleEBaseCommonKeywords
+				lv_validation_mode_4_0=ruleEValidationMode
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getETaskRule());
 					}
 					set(
 						$current,
-						"base_common_keywords",
-						lv_base_common_keywords_4_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EBaseCommonKeywords");
+						"validation_mode",
+						lv_validation_mode_4_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EValidationMode");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		otherlv_5='}'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_4());
-		}
-		otherlv_6='execution_settings{'
-		{
-			newLeafNode(otherlv_6, grammarAccess.getETaskAccess().getExecution_settingsKeyword_5());
-		}
+		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getETaskAccess().getExe_common_keywordsEExecutionCommonKeywordsParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getETaskAccess().getConnectionEConnectionParserRuleCall_4_0());
 				}
-				lv_exe_common_keywords_7_0=ruleEExecutionCommonKeywords
+				lv_connection_5_0=ruleEConnection
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getETaskRule());
 					}
 					set(
 						$current,
-						"exe_common_keywords",
-						lv_exe_common_keywords_7_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EExecutionCommonKeywords");
+						"connection",
+						lv_connection_5_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EConnection");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		otherlv_8='}'
-		{
-			newLeafNode(otherlv_8, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_7());
-		}
-		otherlv_9='task_settings{'
-		{
-			newLeafNode(otherlv_9, grammarAccess.getETaskAccess().getTask_settingsKeyword_8());
-		}
+		)?
+		(
+			otherlv_6='no_log:'
+			{
+				newLeafNode(otherlv_6, grammarAccess.getETaskAccess().getNo_logKeyword_5_0());
+			}
+			(
+				(
+					lv_no_log_7_0=RULE_BOOLEAN
+					{
+						newLeafNode(lv_no_log_7_0, grammarAccess.getETaskAccess().getNo_logBOOLEANTerminalRuleCall_5_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getETaskRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"no_log",
+							lv_no_log_7_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
+					}
+				)
+			)
+		)?
+		(
+			otherlv_8='debugger:'
+			{
+				newLeafNode(otherlv_8, grammarAccess.getETaskAccess().getDebuggerKeyword_6_0());
+			}
+			(
+				(
+					(
+						lv_debugger_9_1='always'
+						{
+							newLeafNode(lv_debugger_9_1, grammarAccess.getETaskAccess().getDebuggerAlwaysKeyword_6_1_0_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getETaskRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_1, null);
+						}
+						    |
+						lv_debugger_9_2='never'
+						{
+							newLeafNode(lv_debugger_9_2, grammarAccess.getETaskAccess().getDebuggerNeverKeyword_6_1_0_1());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getETaskRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_2, null);
+						}
+						    |
+						lv_debugger_9_3='on_failed'
+						{
+							newLeafNode(lv_debugger_9_3, grammarAccess.getETaskAccess().getDebuggerOn_failedKeyword_6_1_0_2());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getETaskRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_3, null);
+						}
+						    |
+						lv_debugger_9_4='on_unreachable'
+						{
+							newLeafNode(lv_debugger_9_4, grammarAccess.getETaskAccess().getDebuggerOn_unreachableKeyword_6_1_0_3());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getETaskRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_4, null);
+						}
+						    |
+						lv_debugger_9_5='on_skipped'
+						{
+							newLeafNode(lv_debugger_9_5, grammarAccess.getETaskAccess().getDebuggerOn_skippedKeyword_6_1_0_4());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getETaskRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_5, null);
+						}
+					)
+				)
+			)
+		)?
+		(
+			otherlv_10='module_defaults:'
+			{
+				newLeafNode(otherlv_10, grammarAccess.getETaskAccess().getModule_defaultsKeyword_7_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getModule_defaultsEListParserRuleCall_7_1_0());
+					}
+					lv_module_defaults_11_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						set(
+							$current,
+							"module_defaults",
+							lv_module_defaults_11_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_12='environment:'
+			{
+				newLeafNode(otherlv_12, grammarAccess.getETaskAccess().getEnvironmentKeyword_8_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getEnvironmentEListParserRuleCall_8_1_0());
+					}
+					lv_environment_13_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						set(
+							$current,
+							"environment",
+							lv_environment_13_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_14='collections:'
+			{
+				newLeafNode(otherlv_14, grammarAccess.getETaskAccess().getCollectionsKeyword_9_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getCollectionsEListParserRuleCall_9_1_0());
+					}
+					lv_collections_15_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						set(
+							$current,
+							"collections",
+							lv_collections_15_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_16='tags:'
+			{
+				newLeafNode(otherlv_16, grammarAccess.getETaskAccess().getTagsKeyword_10_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getTagsEListParserRuleCall_10_1_0());
+					}
+					lv_tags_17_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						set(
+							$current,
+							"tags",
+							lv_tags_17_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_18='vars{'
+			{
+				newLeafNode(otherlv_18, grammarAccess.getETaskAccess().getVarsKeyword_11_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_11_1_0());
+					}
+					lv_variable_declarations_19_0=ruleEVariableDeclaration
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						add(
+							$current,
+							"variable_declarations",
+							lv_variable_declarations_19_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_20=','
+				{
+					newLeafNode(otherlv_20, grammarAccess.getETaskAccess().getCommaKeyword_11_2_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getETaskAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_11_2_1_0());
+						}
+						lv_variable_declarations_21_0=ruleEVariableDeclaration
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getETaskRule());
+							}
+							add(
+								$current,
+								"variable_declarations",
+								lv_variable_declarations_21_0,
+								"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+			otherlv_22='}'
+			{
+				newLeafNode(otherlv_22, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_11_3());
+			}
+		)?
+		(
+			otherlv_23='exe_settings{'
+			{
+				newLeafNode(otherlv_23, grammarAccess.getETaskAccess().getExe_settingsKeyword_12_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getExe_settingsEExecutionExeSettingsParserRuleCall_12_1_0());
+					}
+					lv_exe_settings_24_0=ruleEExecutionExeSettings
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						set(
+							$current,
+							"exe_settings",
+							lv_exe_settings_24_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EExecutionExeSettings");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_25='}'
+			{
+				newLeafNode(otherlv_25, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_12_2());
+			}
+		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getETaskAccess().getTask_handler_common_keywordsETaskHandlerCommonKeywordsParserRuleCall_9_0());
+					newCompositeNode(grammarAccess.getETaskAccess().getDelegationEDelegationParserRuleCall_13_0());
 				}
-				lv_task_handler_common_keywords_10_0=ruleETaskHandlerCommonKeywords
+				lv_delegation_26_0=ruleEDelegation
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getETaskRule());
 					}
 					set(
 						$current,
-						"task_handler_common_keywords",
-						lv_task_handler_common_keywords_10_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.ETaskHandlerCommonKeywords");
+						"delegation",
+						lv_delegation_26_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EDelegation");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			otherlv_27='when:'
+			{
+				newLeafNode(otherlv_27, grammarAccess.getETaskAccess().getWhenKeyword_14_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getWhen_expressionEConditionalExpressionParserRuleCall_14_1_0());
+					}
+					lv_when_expression_28_0=ruleEConditionalExpression
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						set(
+							$current,
+							"when_expression",
+							lv_when_expression_28_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EConditionalExpression");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_29='error_handling{'
+			{
+				newLeafNode(otherlv_29, grammarAccess.getETaskAccess().getError_handlingKeyword_15_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getError_handlingETaskHandlerErrorHandlingParserRuleCall_15_1_0());
+					}
+					lv_error_handling_30_0=ruleETaskHandlerErrorHandling
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						set(
+							$current,
+							"error_handling",
+							lv_error_handling_30_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.ETaskHandlerErrorHandling");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_31='}'
+			{
+				newLeafNode(otherlv_31, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_15_2());
+			}
+		)?
+		(
+			otherlv_32='action:'
+			{
+				newLeafNode(otherlv_32, grammarAccess.getETaskAccess().getActionKeyword_16_0());
+			}
+			(
+				(
+					lv_action_33_0=RULE_STRING
+					{
+						newLeafNode(lv_action_33_0, grammarAccess.getETaskAccess().getActionSTRINGTerminalRuleCall_16_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getETaskRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"action",
+							lv_action_33_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)?
+		(
+			otherlv_34='asynchronous_settings{'
+			{
+				newLeafNode(otherlv_34, grammarAccess.getETaskAccess().getAsynchronous_settingsKeyword_17_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getAsynchronous_settingsEAsynchronousSettingsParserRuleCall_17_1_0());
+					}
+					lv_asynchronous_settings_35_0=ruleEAsynchronousSettings
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						set(
+							$current,
+							"asynchronous_settings",
+							lv_asynchronous_settings_35_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EAsynchronousSettings");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_36='}'
+			{
+				newLeafNode(otherlv_36, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_17_2());
+			}
+		)?
+		(
+			otherlv_37='args:'
+			{
+				newLeafNode(otherlv_37, grammarAccess.getETaskAccess().getArgsKeyword_18_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getArgsEDictionaryParserRuleCall_18_1_0());
+					}
+					lv_args_38_0=ruleEDictionary
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						set(
+							$current,
+							"args",
+							lv_args_38_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EDictionary");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		otherlv_39='module_call{'
+		{
+			newLeafNode(otherlv_39, grammarAccess.getETaskAccess().getModule_callKeyword_19());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getETaskAccess().getModuleEModuleCallParserRuleCall_20_0());
+				}
+				lv_module_40_0=ruleEModuleCall
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getETaskRule());
+					}
+					set(
+						$current,
+						"module",
+						lv_module_40_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EModuleCall");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_11='}'
+		otherlv_41='}'
 		{
-			newLeafNode(otherlv_11, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_10());
+			newLeafNode(otherlv_41, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_21());
 		}
-		otherlv_12='}'
+		(
+			otherlv_42='notify:'
+			{
+				newLeafNode(otherlv_42, grammarAccess.getETaskAccess().getNotifyKeyword_22_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getETaskAccess().getNotifiablesENotifiableParserRuleCall_22_1_0());
+					}
+					lv_notifiables_43_0=ruleENotifiable
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getETaskRule());
+						}
+						add(
+							$current,
+							"notifiables",
+							lv_notifiables_43_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.ENotifiable");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)+
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getETaskAccess().getLoopELoopParserRuleCall_23_0());
+				}
+				lv_loop_44_0=ruleELoop
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getETaskRule());
+					}
+					set(
+						$current,
+						"loop",
+						lv_loop_44_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.ELoop");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getETaskAccess().getRegisterERegisterVariableParserRuleCall_24_0());
+				}
+				lv_register_45_0=ruleERegisterVariable
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getETaskRule());
+					}
+					set(
+						$current,
+						"register",
+						lv_register_45_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.ERegisterVariable");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		otherlv_46='}'
 		{
-			newLeafNode(otherlv_12, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_11());
+			newLeafNode(otherlv_46, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_25());
 		}
 	)
 ;
@@ -1134,389 +2218,534 @@ ruleEHandler returns [EObject current=null]
 					}
 				)
 			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEHandlerAccess().getPrivilage_escalationEPrivilageEscalationParserRuleCall_2_0());
+				}
+				lv_privilage_escalation_3_0=ruleEPrivilageEscalation
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEHandlerRule());
+					}
+					set(
+						$current,
+						"privilage_escalation",
+						lv_privilage_escalation_3_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EPrivilageEscalation");
+					afterParserOrEnumRuleCall();
+				}
+			)
 		)?
-		otherlv_3='base_settings{'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getEHandlerAccess().getBase_settingsKeyword_2());
-		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEHandlerAccess().getBase_common_keywordsEBaseCommonKeywordsParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getEHandlerAccess().getValidation_modeEValidationModeParserRuleCall_3_0());
 				}
-				lv_base_common_keywords_4_0=ruleEBaseCommonKeywords
+				lv_validation_mode_4_0=ruleEValidationMode
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 					}
 					set(
 						$current,
-						"base_common_keywords",
-						lv_base_common_keywords_4_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EBaseCommonKeywords");
+						"validation_mode",
+						lv_validation_mode_4_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EValidationMode");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		otherlv_5='}'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_4());
-		}
-		otherlv_6='execution_settings{'
-		{
-			newLeafNode(otherlv_6, grammarAccess.getEHandlerAccess().getExecution_settingsKeyword_5());
-		}
+		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEHandlerAccess().getExe_common_keywordsEExecutionCommonKeywordsParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getEHandlerAccess().getConnectionEConnectionParserRuleCall_4_0());
 				}
-				lv_exe_common_keywords_7_0=ruleEExecutionCommonKeywords
+				lv_connection_5_0=ruleEConnection
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 					}
 					set(
 						$current,
-						"exe_common_keywords",
-						lv_exe_common_keywords_7_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EExecutionCommonKeywords");
+						"connection",
+						lv_connection_5_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EConnection");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		otherlv_8='}'
-		{
-			newLeafNode(otherlv_8, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_7());
-		}
-		otherlv_9='task_settings{'
-		{
-			newLeafNode(otherlv_9, grammarAccess.getEHandlerAccess().getTask_settingsKeyword_8());
-		}
+		)?
 		(
-			(
-				{
-					newCompositeNode(grammarAccess.getEHandlerAccess().getTask_handler_common_keywordsETaskHandlerCommonKeywordsParserRuleCall_9_0());
-				}
-				lv_task_handler_common_keywords_10_0=ruleETaskHandlerCommonKeywords
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEHandlerRule());
-					}
-					set(
-						$current,
-						"task_handler_common_keywords",
-						lv_task_handler_common_keywords_10_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.ETaskHandlerCommonKeywords");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_11='}'
-		{
-			newLeafNode(otherlv_11, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_10());
-		}
-		(
-			otherlv_12='listen:'
+			otherlv_6='no_log:'
 			{
-				newLeafNode(otherlv_12, grammarAccess.getEHandlerAccess().getListenKeyword_11_0());
+				newLeafNode(otherlv_6, grammarAccess.getEHandlerAccess().getNo_logKeyword_5_0());
 			}
 			(
 				(
+					lv_no_log_7_0=RULE_BOOLEAN
+					{
+						newLeafNode(lv_no_log_7_0, grammarAccess.getEHandlerAccess().getNo_logBOOLEANTerminalRuleCall_5_1_0());
+					}
 					{
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getEHandlerRule());
 						}
-					}
-					otherlv_13=RULE_STRING
-					{
-						newLeafNode(otherlv_13, grammarAccess.getEHandlerAccess().getListen_toENotifiedTopicCrossReference_11_1_0());
+						setWithLastConsumed(
+							$current,
+							"no_log",
+							lv_no_log_7_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
 					}
 				)
-			)+
+			)
 		)?
-		otherlv_14='}'
-		{
-			newLeafNode(otherlv_14, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_12());
-		}
-	)
-;
-
-// Entry rule entryRuleEExecutionCommonKeywords
-entryRuleEExecutionCommonKeywords returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getEExecutionCommonKeywordsRule()); }
-	iv_ruleEExecutionCommonKeywords=ruleEExecutionCommonKeywords
-	{ $current=$iv_ruleEExecutionCommonKeywords.current; }
-	EOF;
-
-// Rule EExecutionCommonKeywords
-ruleEExecutionCommonKeywords returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
 		(
+			otherlv_8='debugger:'
 			{
-				$current = forceCreateModelElement(
-					grammarAccess.getEExecutionCommonKeywordsAccess().getEExecutionCommonKeywordsAction_0(),
-					$current);
+				newLeafNode(otherlv_8, grammarAccess.getEHandlerAccess().getDebuggerKeyword_6_0());
 			}
-		)
+			(
+				(
+					(
+						lv_debugger_9_1='always'
+						{
+							newLeafNode(lv_debugger_9_1, grammarAccess.getEHandlerAccess().getDebuggerAlwaysKeyword_6_1_0_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEHandlerRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_1, null);
+						}
+						    |
+						lv_debugger_9_2='never'
+						{
+							newLeafNode(lv_debugger_9_2, grammarAccess.getEHandlerAccess().getDebuggerNeverKeyword_6_1_0_1());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEHandlerRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_2, null);
+						}
+						    |
+						lv_debugger_9_3='on_failed'
+						{
+							newLeafNode(lv_debugger_9_3, grammarAccess.getEHandlerAccess().getDebuggerOn_failedKeyword_6_1_0_2());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEHandlerRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_3, null);
+						}
+						    |
+						lv_debugger_9_4='on_unreachable'
+						{
+							newLeafNode(lv_debugger_9_4, grammarAccess.getEHandlerAccess().getDebuggerOn_unreachableKeyword_6_1_0_3());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEHandlerRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_4, null);
+						}
+						    |
+						lv_debugger_9_5='on_skipped'
+						{
+							newLeafNode(lv_debugger_9_5, grammarAccess.getEHandlerAccess().getDebuggerOn_skippedKeyword_6_1_0_4());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEHandlerRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_5, null);
+						}
+					)
+				)
+			)
+		)?
 		(
-			otherlv_1='exe_settings{'
+			otherlv_10='module_defaults:'
 			{
-				newLeafNode(otherlv_1, grammarAccess.getEExecutionCommonKeywordsAccess().getExe_settingsKeyword_1_0());
+				newLeafNode(otherlv_10, grammarAccess.getEHandlerAccess().getModule_defaultsKeyword_7_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEExecutionCommonKeywordsAccess().getExe_settingsEExecutionExeSettingsParserRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getEHandlerAccess().getModule_defaultsEListParserRuleCall_7_1_0());
 					}
-					lv_exe_settings_2_0=ruleEExecutionExeSettings
+					lv_module_defaults_11_0=ruleEList
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEExecutionCommonKeywordsRule());
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
+						}
+						set(
+							$current,
+							"module_defaults",
+							lv_module_defaults_11_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_12='environment:'
+			{
+				newLeafNode(otherlv_12, grammarAccess.getEHandlerAccess().getEnvironmentKeyword_8_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEHandlerAccess().getEnvironmentEListParserRuleCall_8_1_0());
+					}
+					lv_environment_13_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
+						}
+						set(
+							$current,
+							"environment",
+							lv_environment_13_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_14='collections:'
+			{
+				newLeafNode(otherlv_14, grammarAccess.getEHandlerAccess().getCollectionsKeyword_9_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEHandlerAccess().getCollectionsEListParserRuleCall_9_1_0());
+					}
+					lv_collections_15_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
+						}
+						set(
+							$current,
+							"collections",
+							lv_collections_15_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_16='tags:'
+			{
+				newLeafNode(otherlv_16, grammarAccess.getEHandlerAccess().getTagsKeyword_10_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEHandlerAccess().getTagsEListParserRuleCall_10_1_0());
+					}
+					lv_tags_17_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
+						}
+						set(
+							$current,
+							"tags",
+							lv_tags_17_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_18='vars{'
+			{
+				newLeafNode(otherlv_18, grammarAccess.getEHandlerAccess().getVarsKeyword_11_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEHandlerAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_11_1_0());
+					}
+					lv_variable_declarations_19_0=ruleEVariableDeclaration
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
+						}
+						add(
+							$current,
+							"variable_declarations",
+							lv_variable_declarations_19_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_20=','
+				{
+					newLeafNode(otherlv_20, grammarAccess.getEHandlerAccess().getCommaKeyword_11_2_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getEHandlerAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_11_2_1_0());
+						}
+						lv_variable_declarations_21_0=ruleEVariableDeclaration
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getEHandlerRule());
+							}
+							add(
+								$current,
+								"variable_declarations",
+								lv_variable_declarations_21_0,
+								"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+			otherlv_22='}'
+			{
+				newLeafNode(otherlv_22, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_11_3());
+			}
+		)?
+		(
+			otherlv_23='exe_settings{'
+			{
+				newLeafNode(otherlv_23, grammarAccess.getEHandlerAccess().getExe_settingsKeyword_12_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEHandlerAccess().getExe_settingsEExecutionExeSettingsParserRuleCall_12_1_0());
+					}
+					lv_exe_settings_24_0=ruleEExecutionExeSettings
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 						}
 						set(
 							$current,
 							"exe_settings",
-							lv_exe_settings_2_0,
+							lv_exe_settings_24_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.EExecutionExeSettings");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-			otherlv_3='}'
+			otherlv_25='}'
 			{
-				newLeafNode(otherlv_3, grammarAccess.getEExecutionCommonKeywordsAccess().getRightCurlyBracketKeyword_1_2());
+				newLeafNode(otherlv_25, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_12_2());
 			}
 		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEExecutionCommonKeywordsAccess().getDelegationEDelegationParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getEHandlerAccess().getDelegationEDelegationParserRuleCall_13_0());
 				}
-				lv_delegation_4_0=ruleEDelegation
+				lv_delegation_26_0=ruleEDelegation
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEExecutionCommonKeywordsRule());
+						$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 					}
 					set(
 						$current,
 						"delegation",
-						lv_delegation_4_0,
+						lv_delegation_26_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.EDelegation");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)?
 		(
-			otherlv_5='when:'
+			otherlv_27='when:'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getEExecutionCommonKeywordsAccess().getWhenKeyword_3_0());
+				newLeafNode(otherlv_27, grammarAccess.getEHandlerAccess().getWhenKeyword_14_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEExecutionCommonKeywordsAccess().getWhen_expressionEConditionalExpressionParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getEHandlerAccess().getWhen_expressionEConditionalExpressionParserRuleCall_14_1_0());
 					}
-					lv_when_expression_6_0=ruleEConditionalExpression
+					lv_when_expression_28_0=ruleEConditionalExpression
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEExecutionCommonKeywordsRule());
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 						}
 						set(
 							$current,
 							"when_expression",
-							lv_when_expression_6_0,
+							lv_when_expression_28_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.EConditionalExpression");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)?
-	)
-;
-
-// Entry rule entryRuleETaskHandlerCommonKeywords
-entryRuleETaskHandlerCommonKeywords returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getETaskHandlerCommonKeywordsRule()); }
-	iv_ruleETaskHandlerCommonKeywords=ruleETaskHandlerCommonKeywords
-	{ $current=$iv_ruleETaskHandlerCommonKeywords.current; }
-	EOF;
-
-// Rule ETaskHandlerCommonKeywords
-ruleETaskHandlerCommonKeywords returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
 		(
+			otherlv_29='error_handling{'
 			{
-				$current = forceCreateModelElement(
-					grammarAccess.getETaskHandlerCommonKeywordsAccess().getETaskHandlerCommonKeywordsAction_0(),
-					$current);
-			}
-		)
-		(
-			otherlv_1='error_handling{'
-			{
-				newLeafNode(otherlv_1, grammarAccess.getETaskHandlerCommonKeywordsAccess().getError_handlingKeyword_1_0());
+				newLeafNode(otherlv_29, grammarAccess.getEHandlerAccess().getError_handlingKeyword_15_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getETaskHandlerCommonKeywordsAccess().getError_handlingETaskHandlerErrorHandlingParserRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getEHandlerAccess().getError_handlingETaskHandlerErrorHandlingParserRuleCall_15_1_0());
 					}
-					lv_error_handling_2_0=ruleETaskHandlerErrorHandling
+					lv_error_handling_30_0=ruleETaskHandlerErrorHandling
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getETaskHandlerCommonKeywordsRule());
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 						}
 						set(
 							$current,
 							"error_handling",
-							lv_error_handling_2_0,
+							lv_error_handling_30_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.ETaskHandlerErrorHandling");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-			otherlv_3='}'
+			otherlv_31='}'
 			{
-				newLeafNode(otherlv_3, grammarAccess.getETaskHandlerCommonKeywordsAccess().getRightCurlyBracketKeyword_1_2());
+				newLeafNode(otherlv_31, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_15_2());
 			}
 		)?
 		(
-			otherlv_4='action:'
+			otherlv_32='action:'
 			{
-				newLeafNode(otherlv_4, grammarAccess.getETaskHandlerCommonKeywordsAccess().getActionKeyword_2_0());
+				newLeafNode(otherlv_32, grammarAccess.getEHandlerAccess().getActionKeyword_16_0());
 			}
 			(
 				(
-					lv_action_5_0=RULE_STRING
+					lv_action_33_0=RULE_STRING
 					{
-						newLeafNode(lv_action_5_0, grammarAccess.getETaskHandlerCommonKeywordsAccess().getActionSTRINGTerminalRuleCall_2_1_0());
+						newLeafNode(lv_action_33_0, grammarAccess.getEHandlerAccess().getActionSTRINGTerminalRuleCall_16_1_0());
 					}
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getETaskHandlerCommonKeywordsRule());
+							$current = createModelElement(grammarAccess.getEHandlerRule());
 						}
 						setWithLastConsumed(
 							$current,
 							"action",
-							lv_action_5_0,
+							lv_action_33_0,
 							"org.eclipse.xtext.common.Terminals.STRING");
 					}
 				)
 			)
 		)?
 		(
-			otherlv_6='asynchronous_settings{'
+			otherlv_34='asynchronous_settings{'
 			{
-				newLeafNode(otherlv_6, grammarAccess.getETaskHandlerCommonKeywordsAccess().getAsynchronous_settingsKeyword_3_0());
+				newLeafNode(otherlv_34, grammarAccess.getEHandlerAccess().getAsynchronous_settingsKeyword_17_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getETaskHandlerCommonKeywordsAccess().getAsynchronous_settingsEAsynchronousSettingsParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getEHandlerAccess().getAsynchronous_settingsEAsynchronousSettingsParserRuleCall_17_1_0());
 					}
-					lv_asynchronous_settings_7_0=ruleEAsynchronousSettings
+					lv_asynchronous_settings_35_0=ruleEAsynchronousSettings
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getETaskHandlerCommonKeywordsRule());
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 						}
 						set(
 							$current,
 							"asynchronous_settings",
-							lv_asynchronous_settings_7_0,
+							lv_asynchronous_settings_35_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.EAsynchronousSettings");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-			otherlv_8='}'
+			otherlv_36='}'
 			{
-				newLeafNode(otherlv_8, grammarAccess.getETaskHandlerCommonKeywordsAccess().getRightCurlyBracketKeyword_3_2());
+				newLeafNode(otherlv_36, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_17_2());
 			}
 		)?
 		(
-			otherlv_9='args:'
+			otherlv_37='args:'
 			{
-				newLeafNode(otherlv_9, grammarAccess.getETaskHandlerCommonKeywordsAccess().getArgsKeyword_4_0());
+				newLeafNode(otherlv_37, grammarAccess.getEHandlerAccess().getArgsKeyword_18_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getETaskHandlerCommonKeywordsAccess().getArgsEDictionaryParserRuleCall_4_1_0());
+						newCompositeNode(grammarAccess.getEHandlerAccess().getArgsEDictionaryParserRuleCall_18_1_0());
 					}
-					lv_args_10_0=ruleEDictionary
+					lv_args_38_0=ruleEDictionary
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getETaskHandlerCommonKeywordsRule());
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 						}
 						set(
 							$current,
 							"args",
-							lv_args_10_0,
+							lv_args_38_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.EDictionary");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)?
-		otherlv_11='module_call{'
+		otherlv_39='module_call{'
 		{
-			newLeafNode(otherlv_11, grammarAccess.getETaskHandlerCommonKeywordsAccess().getModule_callKeyword_5());
+			newLeafNode(otherlv_39, grammarAccess.getEHandlerAccess().getModule_callKeyword_19());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getETaskHandlerCommonKeywordsAccess().getModuleEModuleCallParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getEHandlerAccess().getModuleEModuleCallParserRuleCall_20_0());
 				}
-				lv_module_12_0=ruleEModuleCall
+				lv_module_40_0=ruleEModuleCall
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getETaskHandlerCommonKeywordsRule());
+						$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 					}
 					set(
 						$current,
 						"module",
-						lv_module_12_0,
+						lv_module_40_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.EModuleCall");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_13='}'
+		otherlv_41='}'
 		{
-			newLeafNode(otherlv_13, grammarAccess.getETaskHandlerCommonKeywordsAccess().getRightCurlyBracketKeyword_7());
+			newLeafNode(otherlv_41, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_21());
 		}
 		(
-			otherlv_14='notify:'
+			otherlv_42='notify:'
 			{
-				newLeafNode(otherlv_14, grammarAccess.getETaskHandlerCommonKeywordsAccess().getNotifyKeyword_8_0());
+				newLeafNode(otherlv_42, grammarAccess.getEHandlerAccess().getNotifyKeyword_22_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getETaskHandlerCommonKeywordsAccess().getNotifiablesENotifiableParserRuleCall_8_1_0());
+						newCompositeNode(grammarAccess.getEHandlerAccess().getNotifiablesENotifiableParserRuleCall_22_1_0());
 					}
-					lv_notifiables_15_0=ruleENotifiable
+					lv_notifiables_43_0=ruleENotifiable
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getETaskHandlerCommonKeywordsRule());
+							$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 						}
 						add(
 							$current,
 							"notifiables",
-							lv_notifiables_15_0,
+							lv_notifiables_43_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.ENotifiable");
 						afterParserOrEnumRuleCall();
 					}
@@ -1526,17 +2755,17 @@ ruleETaskHandlerCommonKeywords returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getETaskHandlerCommonKeywordsAccess().getLoopELoopParserRuleCall_9_0());
+					newCompositeNode(grammarAccess.getEHandlerAccess().getLoopELoopParserRuleCall_23_0());
 				}
-				lv_loop_16_0=ruleELoop
+				lv_loop_44_0=ruleELoop
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getETaskHandlerCommonKeywordsRule());
+						$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 					}
 					set(
 						$current,
 						"loop",
-						lv_loop_16_0,
+						lv_loop_44_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.ELoop");
 					afterParserOrEnumRuleCall();
 				}
@@ -1545,22 +2774,45 @@ ruleETaskHandlerCommonKeywords returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getETaskHandlerCommonKeywordsAccess().getRegisterERegisterVariableParserRuleCall_10_0());
+					newCompositeNode(grammarAccess.getEHandlerAccess().getRegisterERegisterVariableParserRuleCall_24_0());
 				}
-				lv_register_17_0=ruleERegisterVariable
+				lv_register_45_0=ruleERegisterVariable
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getETaskHandlerCommonKeywordsRule());
+						$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 					}
 					set(
 						$current,
 						"register",
-						lv_register_17_0,
+						lv_register_45_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.ERegisterVariable");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)?
+		(
+			otherlv_46='listen:'
+			{
+				newLeafNode(otherlv_46, grammarAccess.getEHandlerAccess().getListenKeyword_25_0());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEHandlerRule());
+						}
+					}
+					otherlv_47=RULE_STRING
+					{
+						newLeafNode(otherlv_47, grammarAccess.getEHandlerAccess().getListen_toENotifiedTopicCrossReference_25_1_0());
+					}
+				)
+			)+
+		)?
+		otherlv_48='}'
+		{
+			newLeafNode(otherlv_48, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_26());
+		}
 	)
 ;
 
@@ -2147,64 +3399,384 @@ ruleERoleInclusion returns [EObject current=null]
 					}
 				)
 			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getERoleInclusionAccess().getPrivilage_escalationEPrivilageEscalationParserRuleCall_2_0());
+				}
+				lv_privilage_escalation_3_0=ruleEPrivilageEscalation
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+					}
+					set(
+						$current,
+						"privilage_escalation",
+						lv_privilage_escalation_3_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EPrivilageEscalation");
+					afterParserOrEnumRuleCall();
+				}
+			)
 		)?
-		otherlv_3='base_settings{'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getERoleInclusionAccess().getBase_settingsKeyword_2());
-		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getERoleInclusionAccess().getBase_common_keywordsEBaseCommonKeywordsParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getERoleInclusionAccess().getValidation_modeEValidationModeParserRuleCall_3_0());
 				}
-				lv_base_common_keywords_4_0=ruleEBaseCommonKeywords
+				lv_validation_mode_4_0=ruleEValidationMode
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
 					}
 					set(
 						$current,
-						"base_common_keywords",
-						lv_base_common_keywords_4_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EBaseCommonKeywords");
+						"validation_mode",
+						lv_validation_mode_4_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EValidationMode");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		otherlv_5='}'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_4());
-		}
-		otherlv_6='execution_settings{'
-		{
-			newLeafNode(otherlv_6, grammarAccess.getERoleInclusionAccess().getExecution_settingsKeyword_5());
-		}
+		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getERoleInclusionAccess().getExe_common_keywordsEExecutionCommonKeywordsParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getERoleInclusionAccess().getConnectionEConnectionParserRuleCall_4_0());
 				}
-				lv_exe_common_keywords_7_0=ruleEExecutionCommonKeywords
+				lv_connection_5_0=ruleEConnection
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
 					}
 					set(
 						$current,
-						"exe_common_keywords",
-						lv_exe_common_keywords_7_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EExecutionCommonKeywords");
+						"connection",
+						lv_connection_5_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EConnection");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		otherlv_8='}'
+		)?
+		(
+			otherlv_6='no_log:'
+			{
+				newLeafNode(otherlv_6, grammarAccess.getERoleInclusionAccess().getNo_logKeyword_5_0());
+			}
+			(
+				(
+					lv_no_log_7_0=RULE_BOOLEAN
+					{
+						newLeafNode(lv_no_log_7_0, grammarAccess.getERoleInclusionAccess().getNo_logBOOLEANTerminalRuleCall_5_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getERoleInclusionRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"no_log",
+							lv_no_log_7_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
+					}
+				)
+			)
+		)?
+		(
+			otherlv_8='debugger:'
+			{
+				newLeafNode(otherlv_8, grammarAccess.getERoleInclusionAccess().getDebuggerKeyword_6_0());
+			}
+			(
+				(
+					(
+						lv_debugger_9_1='always'
+						{
+							newLeafNode(lv_debugger_9_1, grammarAccess.getERoleInclusionAccess().getDebuggerAlwaysKeyword_6_1_0_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getERoleInclusionRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_1, null);
+						}
+						    |
+						lv_debugger_9_2='never'
+						{
+							newLeafNode(lv_debugger_9_2, grammarAccess.getERoleInclusionAccess().getDebuggerNeverKeyword_6_1_0_1());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getERoleInclusionRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_2, null);
+						}
+						    |
+						lv_debugger_9_3='on_failed'
+						{
+							newLeafNode(lv_debugger_9_3, grammarAccess.getERoleInclusionAccess().getDebuggerOn_failedKeyword_6_1_0_2());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getERoleInclusionRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_3, null);
+						}
+						    |
+						lv_debugger_9_4='on_unreachable'
+						{
+							newLeafNode(lv_debugger_9_4, grammarAccess.getERoleInclusionAccess().getDebuggerOn_unreachableKeyword_6_1_0_3());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getERoleInclusionRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_4, null);
+						}
+						    |
+						lv_debugger_9_5='on_skipped'
+						{
+							newLeafNode(lv_debugger_9_5, grammarAccess.getERoleInclusionAccess().getDebuggerOn_skippedKeyword_6_1_0_4());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getERoleInclusionRule());
+							}
+							setWithLastConsumed($current, "debugger", lv_debugger_9_5, null);
+						}
+					)
+				)
+			)
+		)?
+		(
+			otherlv_10='module_defaults:'
+			{
+				newLeafNode(otherlv_10, grammarAccess.getERoleInclusionAccess().getModule_defaultsKeyword_7_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getERoleInclusionAccess().getModule_defaultsEListParserRuleCall_7_1_0());
+					}
+					lv_module_defaults_11_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+						}
+						set(
+							$current,
+							"module_defaults",
+							lv_module_defaults_11_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_12='environment:'
+			{
+				newLeafNode(otherlv_12, grammarAccess.getERoleInclusionAccess().getEnvironmentKeyword_8_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getERoleInclusionAccess().getEnvironmentEListParserRuleCall_8_1_0());
+					}
+					lv_environment_13_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+						}
+						set(
+							$current,
+							"environment",
+							lv_environment_13_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_14='collections:'
+			{
+				newLeafNode(otherlv_14, grammarAccess.getERoleInclusionAccess().getCollectionsKeyword_9_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getERoleInclusionAccess().getCollectionsEListParserRuleCall_9_1_0());
+					}
+					lv_collections_15_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+						}
+						set(
+							$current,
+							"collections",
+							lv_collections_15_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_16='tags:'
+			{
+				newLeafNode(otherlv_16, grammarAccess.getERoleInclusionAccess().getTagsKeyword_10_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getERoleInclusionAccess().getTagsEListParserRuleCall_10_1_0());
+					}
+					lv_tags_17_0=ruleEList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+						}
+						set(
+							$current,
+							"tags",
+							lv_tags_17_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			otherlv_18='vars{'
+			{
+				newLeafNode(otherlv_18, grammarAccess.getERoleInclusionAccess().getVarsKeyword_11_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getERoleInclusionAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_11_1_0());
+					}
+					lv_variable_declarations_19_0=ruleEVariableDeclaration
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+						}
+						add(
+							$current,
+							"variable_declarations",
+							lv_variable_declarations_19_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_20=','
+				{
+					newLeafNode(otherlv_20, grammarAccess.getERoleInclusionAccess().getCommaKeyword_11_2_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getERoleInclusionAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_11_2_1_0());
+						}
+						lv_variable_declarations_21_0=ruleEVariableDeclaration
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+							}
+							add(
+								$current,
+								"variable_declarations",
+								lv_variable_declarations_21_0,
+								"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+			otherlv_22='}'
+			{
+				newLeafNode(otherlv_22, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_11_3());
+			}
+		)?
+		(
+			otherlv_23='exe_settings{'
+			{
+				newLeafNode(otherlv_23, grammarAccess.getERoleInclusionAccess().getExe_settingsKeyword_12_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getERoleInclusionAccess().getExe_settingsEExecutionExeSettingsParserRuleCall_12_1_0());
+					}
+					lv_exe_settings_24_0=ruleEExecutionExeSettings
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+						}
+						set(
+							$current,
+							"exe_settings",
+							lv_exe_settings_24_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EExecutionExeSettings");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_25='}'
+			{
+				newLeafNode(otherlv_25, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_12_2());
+			}
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getERoleInclusionAccess().getDelegationEDelegationParserRuleCall_13_0());
+				}
+				lv_delegation_26_0=ruleEDelegation
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+					}
+					set(
+						$current,
+						"delegation",
+						lv_delegation_26_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EDelegation");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			otherlv_27='when:'
+			{
+				newLeafNode(otherlv_27, grammarAccess.getERoleInclusionAccess().getWhenKeyword_14_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getERoleInclusionAccess().getWhen_expressionEConditionalExpressionParserRuleCall_14_1_0());
+					}
+					lv_when_expression_28_0=ruleEConditionalExpression
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+						}
+						set(
+							$current,
+							"when_expression",
+							lv_when_expression_28_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EConditionalExpression");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		otherlv_29='}'
 		{
-			newLeafNode(otherlv_8, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_7());
-		}
-		otherlv_9='}'
-		{
-			newLeafNode(otherlv_9, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_8());
+			newLeafNode(otherlv_29, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_15());
 		}
 	)
 ;
@@ -3589,333 +5161,6 @@ ruleETaskHandlerErrorHandling returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleEBaseCommonKeywords
-entryRuleEBaseCommonKeywords returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getEBaseCommonKeywordsRule()); }
-	iv_ruleEBaseCommonKeywords=ruleEBaseCommonKeywords
-	{ $current=$iv_ruleEBaseCommonKeywords.current; }
-	EOF;
-
-// Rule EBaseCommonKeywords
-ruleEBaseCommonKeywords returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getEBaseCommonKeywordsAccess().getEBaseCommonKeywordsAction_0(),
-					$current);
-			}
-		)
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getEBaseCommonKeywordsAccess().getPrivilage_escalationEPrivilageEscalationParserRuleCall_1_0());
-				}
-				lv_privilage_escalation_1_0=ruleEPrivilageEscalation
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEBaseCommonKeywordsRule());
-					}
-					set(
-						$current,
-						"privilage_escalation",
-						lv_privilage_escalation_1_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EPrivilageEscalation");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getEBaseCommonKeywordsAccess().getValidation_modeEValidationModeParserRuleCall_2_0());
-				}
-				lv_validation_mode_2_0=ruleEValidationMode
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEBaseCommonKeywordsRule());
-					}
-					set(
-						$current,
-						"validation_mode",
-						lv_validation_mode_2_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EValidationMode");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getEBaseCommonKeywordsAccess().getConnectionEConnectionParserRuleCall_3_0());
-				}
-				lv_connection_3_0=ruleEConnection
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEBaseCommonKeywordsRule());
-					}
-					set(
-						$current,
-						"connection",
-						lv_connection_3_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EConnection");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-		(
-			otherlv_4='no_log:'
-			{
-				newLeafNode(otherlv_4, grammarAccess.getEBaseCommonKeywordsAccess().getNo_logKeyword_4_0());
-			}
-			(
-				(
-					lv_no_log_5_0=RULE_BOOLEAN
-					{
-						newLeafNode(lv_no_log_5_0, grammarAccess.getEBaseCommonKeywordsAccess().getNo_logBOOLEANTerminalRuleCall_4_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getEBaseCommonKeywordsRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"no_log",
-							lv_no_log_5_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
-					}
-				)
-			)
-		)?
-		(
-			otherlv_6='debugger:'
-			{
-				newLeafNode(otherlv_6, grammarAccess.getEBaseCommonKeywordsAccess().getDebuggerKeyword_5_0());
-			}
-			(
-				(
-					(
-						lv_debugger_7_1='always'
-						{
-							newLeafNode(lv_debugger_7_1, grammarAccess.getEBaseCommonKeywordsAccess().getDebuggerAlwaysKeyword_5_1_0_0());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getEBaseCommonKeywordsRule());
-							}
-							setWithLastConsumed($current, "debugger", lv_debugger_7_1, null);
-						}
-						    |
-						lv_debugger_7_2='never'
-						{
-							newLeafNode(lv_debugger_7_2, grammarAccess.getEBaseCommonKeywordsAccess().getDebuggerNeverKeyword_5_1_0_1());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getEBaseCommonKeywordsRule());
-							}
-							setWithLastConsumed($current, "debugger", lv_debugger_7_2, null);
-						}
-						    |
-						lv_debugger_7_3='on_failed'
-						{
-							newLeafNode(lv_debugger_7_3, grammarAccess.getEBaseCommonKeywordsAccess().getDebuggerOn_failedKeyword_5_1_0_2());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getEBaseCommonKeywordsRule());
-							}
-							setWithLastConsumed($current, "debugger", lv_debugger_7_3, null);
-						}
-						    |
-						lv_debugger_7_4='on_unreachable'
-						{
-							newLeafNode(lv_debugger_7_4, grammarAccess.getEBaseCommonKeywordsAccess().getDebuggerOn_unreachableKeyword_5_1_0_3());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getEBaseCommonKeywordsRule());
-							}
-							setWithLastConsumed($current, "debugger", lv_debugger_7_4, null);
-						}
-						    |
-						lv_debugger_7_5='on_skipped'
-						{
-							newLeafNode(lv_debugger_7_5, grammarAccess.getEBaseCommonKeywordsAccess().getDebuggerOn_skippedKeyword_5_1_0_4());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getEBaseCommonKeywordsRule());
-							}
-							setWithLastConsumed($current, "debugger", lv_debugger_7_5, null);
-						}
-					)
-				)
-			)
-		)?
-		(
-			otherlv_8='module_defaults:'
-			{
-				newLeafNode(otherlv_8, grammarAccess.getEBaseCommonKeywordsAccess().getModule_defaultsKeyword_6_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getEBaseCommonKeywordsAccess().getModule_defaultsEListParserRuleCall_6_1_0());
-					}
-					lv_module_defaults_9_0=ruleEList
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEBaseCommonKeywordsRule());
-						}
-						set(
-							$current,
-							"module_defaults",
-							lv_module_defaults_9_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			otherlv_10='environment:'
-			{
-				newLeafNode(otherlv_10, grammarAccess.getEBaseCommonKeywordsAccess().getEnvironmentKeyword_7_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getEBaseCommonKeywordsAccess().getEnvironmentEListParserRuleCall_7_1_0());
-					}
-					lv_environment_11_0=ruleEList
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEBaseCommonKeywordsRule());
-						}
-						set(
-							$current,
-							"environment",
-							lv_environment_11_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			otherlv_12='collections:'
-			{
-				newLeafNode(otherlv_12, grammarAccess.getEBaseCommonKeywordsAccess().getCollectionsKeyword_8_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getEBaseCommonKeywordsAccess().getCollectionsEListParserRuleCall_8_1_0());
-					}
-					lv_collections_13_0=ruleEList
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEBaseCommonKeywordsRule());
-						}
-						set(
-							$current,
-							"collections",
-							lv_collections_13_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			otherlv_14='tags:'
-			{
-				newLeafNode(otherlv_14, grammarAccess.getEBaseCommonKeywordsAccess().getTagsKeyword_9_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getEBaseCommonKeywordsAccess().getTagsEListParserRuleCall_9_1_0());
-					}
-					lv_tags_15_0=ruleEList
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEBaseCommonKeywordsRule());
-						}
-						set(
-							$current,
-							"tags",
-							lv_tags_15_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EList");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			otherlv_16='vars{'
-			{
-				newLeafNode(otherlv_16, grammarAccess.getEBaseCommonKeywordsAccess().getVarsKeyword_10_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getEBaseCommonKeywordsAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_10_1_0());
-					}
-					lv_variable_declarations_17_0=ruleEVariableDeclaration
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEBaseCommonKeywordsRule());
-						}
-						add(
-							$current,
-							"variable_declarations",
-							lv_variable_declarations_17_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-			(
-				otherlv_18=','
-				{
-					newLeafNode(otherlv_18, grammarAccess.getEBaseCommonKeywordsAccess().getCommaKeyword_10_2_0());
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getEBaseCommonKeywordsAccess().getVariable_declarationsEVariableDeclarationParserRuleCall_10_2_1_0());
-						}
-						lv_variable_declarations_19_0=ruleEVariableDeclaration
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getEBaseCommonKeywordsRule());
-							}
-							add(
-								$current,
-								"variable_declarations",
-								lv_variable_declarations_19_0,
-								"org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)*
-			otherlv_20='}'
-			{
-				newLeafNode(otherlv_20, grammarAccess.getEBaseCommonKeywordsAccess().getRightCurlyBracketKeyword_10_3());
-			}
-		)?
-	)
-;
-
 // Entry rule entryRuleEFactsSettings
 entryRuleEFactsSettings returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getEFactsSettingsRule()); }
@@ -4360,6 +5605,15 @@ ruleEValuePassed returns [EObject current=null]
 			$current = $this_EFactGathered_1.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEValuePassedAccess().getEItemParserRuleCall_2());
+		}
+		this_EItem_2=ruleEItem
+		{
+			$current = $this_EItem_2.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -4465,6 +5719,92 @@ ruleEValue returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleEItem
+entryRuleEItem returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEItemRule()); }
+	iv_ruleEItem=ruleEItem
+	{ $current=$iv_ruleEItem.current; }
+	EOF;
+
+// Rule EItem
+ruleEItem returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getEItemAccess().getEItemAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='{{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getEItemAccess().getLeftCurlyBracketLeftCurlyBracketKeyword_1());
+		}
+		otherlv_2='item'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getEItemAccess().getItemKeyword_2());
+		}
+		(
+			otherlv_3='.'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getEItemAccess().getFullStopKeyword_3_0());
+			}
+			(
+				(
+					lv_tail_4_0=RULE_ID
+					{
+						newLeafNode(lv_tail_4_0, grammarAccess.getEItemAccess().getTailIDTerminalRuleCall_3_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEItemRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"tail",
+							lv_tail_4_0,
+							"org.eclipse.xtext.common.Terminals.ID");
+					}
+				)
+			)
+		)*
+		(
+			otherlv_5='|'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getEItemAccess().getVerticalLineKeyword_4_0());
+			}
+			(
+				(
+					lv_filter_commands_6_0=RULE_STRING
+					{
+						newLeafNode(lv_filter_commands_6_0, grammarAccess.getEItemAccess().getFilter_commandsSTRINGTerminalRuleCall_4_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEItemRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"filter_commands",
+							lv_filter_commands_6_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)*
+		otherlv_7='}}'
+		{
+			newLeafNode(otherlv_7, grammarAccess.getEItemAccess().getRightCurlyBracketRightCurlyBracketKeyword_5());
+		}
+	)
+;
+
 // Entry rule entryRuleEFilteredVariable
 entryRuleEFilteredVariable returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getEFilteredVariableRule()); }
@@ -4499,16 +5839,44 @@ ruleEFilteredVariable returns [EObject current=null]
 			)
 		)
 		(
-			otherlv_2='.'
+			otherlv_2='['
 			{
-				newLeafNode(otherlv_2, grammarAccess.getEFilteredVariableAccess().getFullStopKeyword_2_0());
+				newLeafNode(otherlv_2, grammarAccess.getEFilteredVariableAccess().getLeftSquareBracketKeyword_2_0());
+			}
+			(
+				(
+					lv_index_3_0=RULE_INT
+					{
+						newLeafNode(lv_index_3_0, grammarAccess.getEFilteredVariableAccess().getIndexINTTerminalRuleCall_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEFilteredVariableRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"index",
+							lv_index_3_0,
+							"org.eclipse.xtext.common.Terminals.INT");
+					}
+				)
+			)
+			otherlv_4=']'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getEFilteredVariableAccess().getRightSquareBracketKeyword_2_2());
+			}
+		)?
+		(
+			otherlv_5='.'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getEFilteredVariableAccess().getFullStopKeyword_3_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEFilteredVariableAccess().getTailEDictionaryPairReferenceParserRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getEFilteredVariableAccess().getTailEDictionaryPairReferenceParserRuleCall_3_1_0());
 					}
-					lv_tail_3_0=ruleEDictionaryPairReference
+					lv_tail_6_0=ruleEDictionaryPairReference
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEFilteredVariableRule());
@@ -4516,7 +5884,7 @@ ruleEFilteredVariable returns [EObject current=null]
 						add(
 							$current,
 							"tail",
-							lv_tail_3_0,
+							lv_tail_6_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.EDictionaryPairReference");
 						afterParserOrEnumRuleCall();
 					}
@@ -4524,15 +5892,15 @@ ruleEFilteredVariable returns [EObject current=null]
 			)
 		)*
 		(
-			otherlv_4='|'
+			otherlv_7='|'
 			{
-				newLeafNode(otherlv_4, grammarAccess.getEFilteredVariableAccess().getVerticalLineKeyword_3_0());
+				newLeafNode(otherlv_7, grammarAccess.getEFilteredVariableAccess().getVerticalLineKeyword_4_0());
 			}
 			(
 				(
-					lv_filter_commands_5_0=RULE_STRING
+					lv_filter_commands_8_0=RULE_STRING
 					{
-						newLeafNode(lv_filter_commands_5_0, grammarAccess.getEFilteredVariableAccess().getFilter_commandsSTRINGTerminalRuleCall_3_1_0());
+						newLeafNode(lv_filter_commands_8_0, grammarAccess.getEFilteredVariableAccess().getFilter_commandsSTRINGTerminalRuleCall_4_1_0());
 					}
 					{
 						if ($current==null) {
@@ -4541,15 +5909,15 @@ ruleEFilteredVariable returns [EObject current=null]
 						addWithLastConsumed(
 							$current,
 							"filter_commands",
-							lv_filter_commands_5_0,
+							lv_filter_commands_8_0,
 							"org.eclipse.xtext.common.Terminals.STRING");
 					}
 				)
 			)
 		)*
-		otherlv_6='}}'
+		otherlv_9='}}'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getEFilteredVariableAccess().getRightCurlyBracketRightCurlyBracketKeyword_4());
+			newLeafNode(otherlv_9, grammarAccess.getEFilteredVariableAccess().getRightCurlyBracketRightCurlyBracketKeyword_5());
 		}
 	)
 ;
@@ -4674,16 +6042,46 @@ ruleEDictionaryPairReference returns [EObject current=null]
 }:
 	(
 		(
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getEDictionaryPairReferenceRule());
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEDictionaryPairReferenceRule());
+					}
 				}
-			}
-			otherlv_0=RULE_ID
-			{
-				newLeafNode(otherlv_0, grammarAccess.getEDictionaryPairReferenceAccess().getNameEDictionaryPairCrossReference_0());
-			}
+				otherlv_0=RULE_ID
+				{
+					newLeafNode(otherlv_0, grammarAccess.getEDictionaryPairReferenceAccess().getNameEDictionaryPairCrossReference_0_0());
+				}
+			)
 		)
+		(
+			otherlv_1='['
+			{
+				newLeafNode(otherlv_1, grammarAccess.getEDictionaryPairReferenceAccess().getLeftSquareBracketKeyword_1_0());
+			}
+			(
+				(
+					lv_index_2_0=RULE_INT
+					{
+						newLeafNode(lv_index_2_0, grammarAccess.getEDictionaryPairReferenceAccess().getIndexINTTerminalRuleCall_1_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEDictionaryPairReferenceRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"index",
+							lv_index_2_0,
+							"org.eclipse.xtext.common.Terminals.INT");
+					}
+				)
+			)
+			otherlv_3=']'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getEDictionaryPairReferenceAccess().getRightSquareBracketKeyword_1_2());
+			}
+		)?
 	)
 ;
 

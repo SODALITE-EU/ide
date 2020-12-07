@@ -10,17 +10,50 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBase">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_common_keywords" eType="#//EBaseCommonKeywords"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="privilage_escalation" eType="#//EPrivilageEscalation"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="validation_mode" eType="#//EValidationMode"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connection" eType="#//EConnection"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="no_log" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debugger" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="module_defaults" eType="#//EList"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="#//EList"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collections" eType="#//EList"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tags" eType="#//EList"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable_declarations"
+        upperBound="-1" eType="#//EVariableDeclaration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EExecution" eSuperTypes="#//EBase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exe_common_keywords" eType="#//EExecutionCommonKeywords"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exe_settings" eType="#//EExecutionExeSettings"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" eType="#//EDelegation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//EConditionalExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBlockTask"/>
   <eClassifiers xsi:type="ecore:EClass" name="ETaskHandler" eSuperTypes="#//EExecution">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="task_handler_common_keywords"
-        eType="#//ETaskHandlerCommonKeywords" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//ETaskHandlerErrorHandling"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="asynchronous_settings"
+        eType="#//EAsynchronousSettings" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="args" eType="#//EDictionary"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="module" eType="#//EModuleCall"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notifiables" upperBound="-1"
+        eType="#//ENotifiable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loop" eType="#//ELoop"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="register" eType="#//ERegisterVariable"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPlay" eSuperTypes="#//EBase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="play_exe_settings" eType="#//EPlayExeSettings"
@@ -59,31 +92,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="EHandler" eSuperTypes="#//ETaskHandler">
     <eStructuralFeatures xsi:type="ecore:EReference" name="listen_to" unique="false"
         upperBound="-1" eType="#//ENotifiedTopic"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EExecutionCommonKeywords">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exe_settings" eType="#//EExecutionExeSettings"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" eType="#//EDelegation"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//EConditionalExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ETaskHandlerCommonKeywords">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//ETaskHandlerErrorHandling"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="asynchronous_settings"
-        eType="#//EAsynchronousSettings" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="args" eType="#//EDictionary"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="module" eType="#//EModuleCall"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="notifiables" upperBound="-1"
-        eType="#//ENotifiable" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="loop" eType="#//ELoop"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="register" eType="#//ERegisterVariable"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EModuleCall">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -185,26 +193,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="failed_when" eType="#//EConditionalExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EBaseCommonKeywords">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="privilage_escalation" eType="#//EPrivilageEscalation"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="validation_mode" eType="#//EValidationMode"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connection" eType="#//EConnection"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="no_log" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debugger" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="module_defaults" eType="#//EList"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="#//EList"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collections" eType="#//EList"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tags" eType="#//EList"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable_declarations"
-        upperBound="-1" eType="#//EVariableDeclaration" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFactsSettings">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="gather_facts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="gather_subset" eType="#//EList"
@@ -232,8 +220,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value_string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value_int" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EItem" eSuperTypes="#//EValuePassed">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter_commands" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFilteredVariable" eSuperTypes="#//ELoopList #//EFilteredVariableOrString">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//EDeclaredVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//EDictionaryPairReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter_commands" unique="false"
@@ -248,6 +243,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPairReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EDictionaryPair"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDeclaredVariable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

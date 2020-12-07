@@ -114,24 +114,6 @@ public interface AnsibleDslFactory extends EFactory
   EHandler createEHandler();
 
   /**
-   * Returns a new object of class '<em>EExecution Common Keywords</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EExecution Common Keywords</em>'.
-   * @generated
-   */
-  EExecutionCommonKeywords createEExecutionCommonKeywords();
-
-  /**
-   * Returns a new object of class '<em>ETask Handler Common Keywords</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>ETask Handler Common Keywords</em>'.
-   * @generated
-   */
-  ETaskHandlerCommonKeywords createETaskHandlerCommonKeywords();
-
-  /**
    * Returns a new object of class '<em>EModule Call</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -321,15 +303,6 @@ public interface AnsibleDslFactory extends EFactory
   ETaskHandlerErrorHandling createETaskHandlerErrorHandling();
 
   /**
-   * Returns a new object of class '<em>EBase Common Keywords</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EBase Common Keywords</em>'.
-   * @generated
-   */
-  EBaseCommonKeywords createEBaseCommonKeywords();
-
-  /**
    * Returns a new object of class '<em>EFacts Settings</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -400,6 +373,15 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EValue createEValue();
+
+  /**
+   * Returns a new object of class '<em>EItem</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EItem</em>'.
+   * @generated
+   */
+  EItem createEItem();
 
   /**
    * Returns a new object of class '<em>EFiltered Variable</em>'.

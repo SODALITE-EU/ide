@@ -14,7 +14,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslFactory;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
-import org.sodalite.sdl.ansible.ansibleDsl.EBaseCommonKeywords;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
@@ -29,7 +28,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
-import org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
@@ -37,6 +35,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
+import org.sodalite.sdl.ansible.ansibleDsl.EItem;
 import org.sodalite.sdl.ansible.ansibleDsl.EList;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
@@ -57,7 +56,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
-import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
@@ -143,20 +141,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eHandlerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eExecutionCommonKeywordsEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eTaskHandlerCommonKeywordsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -310,13 +294,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eBaseCommonKeywordsEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass eFactsSettingsEClass = null;
 
   /**
@@ -367,6 +344,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eItemEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -580,9 +564,108 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEBase_Base_common_keywords()
+  public EReference getEBase_Privilage_escalation()
   {
     return (EReference)eBaseEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBase_Validation_mode()
+  {
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBase_Connection()
+  {
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEBase_No_log()
+  {
+    return (EAttribute)eBaseEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEBase_Debugger()
+  {
+    return (EAttribute)eBaseEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBase_Module_defaults()
+  {
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBase_Environment()
+  {
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBase_Collections()
+  {
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBase_Tags()
+  {
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBase_Variable_declarations()
+  {
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(10);
   }
 
   /**
@@ -602,9 +685,31 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEExecution_Exe_common_keywords()
+  public EReference getEExecution_Exe_settings()
   {
     return (EReference)eExecutionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEExecution_Delegation()
+  {
+    return (EReference)eExecutionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEExecution_When_expression()
+  {
+    return (EReference)eExecutionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -635,9 +740,86 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getETaskHandler_Task_handler_common_keywords()
+  public EReference getETaskHandler_Error_handling()
   {
     return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETaskHandler_Action()
+  {
+    return (EAttribute)eTaskHandlerEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandler_Asynchronous_settings()
+  {
+    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandler_Args()
+  {
+    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandler_Module()
+  {
+    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandler_Notifiables()
+  {
+    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandler_Loop()
+  {
+    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandler_Register()
+  {
+    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -858,149 +1040,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EReference getEHandler_Listen_to()
   {
     return (EReference)eHandlerEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getEExecutionCommonKeywords()
-  {
-    return eExecutionCommonKeywordsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEExecutionCommonKeywords_Exe_settings()
-  {
-    return (EReference)eExecutionCommonKeywordsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEExecutionCommonKeywords_Delegation()
-  {
-    return (EReference)eExecutionCommonKeywordsEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEExecutionCommonKeywords_When_expression()
-  {
-    return (EReference)eExecutionCommonKeywordsEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getETaskHandlerCommonKeywords()
-  {
-    return eTaskHandlerCommonKeywordsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getETaskHandlerCommonKeywords_Error_handling()
-  {
-    return (EReference)eTaskHandlerCommonKeywordsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getETaskHandlerCommonKeywords_Action()
-  {
-    return (EAttribute)eTaskHandlerCommonKeywordsEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getETaskHandlerCommonKeywords_Asynchronous_settings()
-  {
-    return (EReference)eTaskHandlerCommonKeywordsEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getETaskHandlerCommonKeywords_Args()
-  {
-    return (EReference)eTaskHandlerCommonKeywordsEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getETaskHandlerCommonKeywords_Module()
-  {
-    return (EReference)eTaskHandlerCommonKeywordsEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getETaskHandlerCommonKeywords_Notifiables()
-  {
-    return (EReference)eTaskHandlerCommonKeywordsEClass.getEStructuralFeatures().get(5);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getETaskHandlerCommonKeywords_Loop()
-  {
-    return (EReference)eTaskHandlerCommonKeywordsEClass.getEStructuralFeatures().get(6);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getETaskHandlerCommonKeywords_Register()
-  {
-    return (EReference)eTaskHandlerCommonKeywordsEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -1757,127 +1796,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEBaseCommonKeywords()
-  {
-    return eBaseCommonKeywordsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBaseCommonKeywords_Privilage_escalation()
-  {
-    return (EReference)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBaseCommonKeywords_Validation_mode()
-  {
-    return (EReference)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBaseCommonKeywords_Connection()
-  {
-    return (EReference)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEBaseCommonKeywords_No_log()
-  {
-    return (EAttribute)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEBaseCommonKeywords_Debugger()
-  {
-    return (EAttribute)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBaseCommonKeywords_Module_defaults()
-  {
-    return (EReference)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(5);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBaseCommonKeywords_Environment()
-  {
-    return (EReference)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(6);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBaseCommonKeywords_Collections()
-  {
-    return (EReference)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(7);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBaseCommonKeywords_Tags()
-  {
-    return (EReference)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(8);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBaseCommonKeywords_Variable_declarations()
-  {
-    return (EReference)eBaseCommonKeywordsEClass.getEStructuralFeatures().get(9);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getEFactsSettings()
   {
     return eFactsSettingsEClass;
@@ -2098,6 +2016,39 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getEItem()
+  {
+    return eItemEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEItem_Tail()
+  {
+    return (EAttribute)eItemEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEItem_Filter_commands()
+  {
+    return (EAttribute)eItemEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEFilteredVariable()
   {
     return eFilteredVariableEClass;
@@ -2120,9 +2071,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EAttribute getEFilteredVariable_Index()
+  {
+    return (EAttribute)eFilteredVariableEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getEFilteredVariable_Tail()
   {
-    return (EReference)eFilteredVariableEClass.getEStructuralFeatures().get(1);
+    return (EReference)eFilteredVariableEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -2133,7 +2095,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EAttribute getEFilteredVariable_Filter_commands()
   {
-    return (EAttribute)eFilteredVariableEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)eFilteredVariableEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -2200,6 +2162,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EReference getEDictionaryPairReference_Name()
   {
     return (EReference)eDictionaryPairReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEDictionaryPairReference_Index()
+  {
+    return (EAttribute)eDictionaryPairReferenceEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2395,15 +2368,33 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eBaseEClass = createEClass(EBASE);
     createEAttribute(eBaseEClass, EBASE__NAME);
-    createEReference(eBaseEClass, EBASE__BASE_COMMON_KEYWORDS);
+    createEReference(eBaseEClass, EBASE__PRIVILAGE_ESCALATION);
+    createEReference(eBaseEClass, EBASE__VALIDATION_MODE);
+    createEReference(eBaseEClass, EBASE__CONNECTION);
+    createEAttribute(eBaseEClass, EBASE__NO_LOG);
+    createEAttribute(eBaseEClass, EBASE__DEBUGGER);
+    createEReference(eBaseEClass, EBASE__MODULE_DEFAULTS);
+    createEReference(eBaseEClass, EBASE__ENVIRONMENT);
+    createEReference(eBaseEClass, EBASE__COLLECTIONS);
+    createEReference(eBaseEClass, EBASE__TAGS);
+    createEReference(eBaseEClass, EBASE__VARIABLE_DECLARATIONS);
 
     eExecutionEClass = createEClass(EEXECUTION);
-    createEReference(eExecutionEClass, EEXECUTION__EXE_COMMON_KEYWORDS);
+    createEReference(eExecutionEClass, EEXECUTION__EXE_SETTINGS);
+    createEReference(eExecutionEClass, EEXECUTION__DELEGATION);
+    createEReference(eExecutionEClass, EEXECUTION__WHEN_EXPRESSION);
 
     eBlockTaskEClass = createEClass(EBLOCK_TASK);
 
     eTaskHandlerEClass = createEClass(ETASK_HANDLER);
-    createEReference(eTaskHandlerEClass, ETASK_HANDLER__TASK_HANDLER_COMMON_KEYWORDS);
+    createEReference(eTaskHandlerEClass, ETASK_HANDLER__ERROR_HANDLING);
+    createEAttribute(eTaskHandlerEClass, ETASK_HANDLER__ACTION);
+    createEReference(eTaskHandlerEClass, ETASK_HANDLER__ASYNCHRONOUS_SETTINGS);
+    createEReference(eTaskHandlerEClass, ETASK_HANDLER__ARGS);
+    createEReference(eTaskHandlerEClass, ETASK_HANDLER__MODULE);
+    createEReference(eTaskHandlerEClass, ETASK_HANDLER__NOTIFIABLES);
+    createEReference(eTaskHandlerEClass, ETASK_HANDLER__LOOP);
+    createEReference(eTaskHandlerEClass, ETASK_HANDLER__REGISTER);
 
     ePlayEClass = createEClass(EPLAY);
     createEReference(ePlayEClass, EPLAY__PLAY_EXE_SETTINGS);
@@ -2428,21 +2419,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eHandlerEClass = createEClass(EHANDLER);
     createEReference(eHandlerEClass, EHANDLER__LISTEN_TO);
-
-    eExecutionCommonKeywordsEClass = createEClass(EEXECUTION_COMMON_KEYWORDS);
-    createEReference(eExecutionCommonKeywordsEClass, EEXECUTION_COMMON_KEYWORDS__EXE_SETTINGS);
-    createEReference(eExecutionCommonKeywordsEClass, EEXECUTION_COMMON_KEYWORDS__DELEGATION);
-    createEReference(eExecutionCommonKeywordsEClass, EEXECUTION_COMMON_KEYWORDS__WHEN_EXPRESSION);
-
-    eTaskHandlerCommonKeywordsEClass = createEClass(ETASK_HANDLER_COMMON_KEYWORDS);
-    createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__ERROR_HANDLING);
-    createEAttribute(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__ACTION);
-    createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__ASYNCHRONOUS_SETTINGS);
-    createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__ARGS);
-    createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__MODULE);
-    createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__NOTIFIABLES);
-    createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__LOOP);
-    createEReference(eTaskHandlerCommonKeywordsEClass, ETASK_HANDLER_COMMON_KEYWORDS__REGISTER);
 
     eModuleCallEClass = createEClass(EMODULE_CALL);
     createEAttribute(eModuleCallEClass, EMODULE_CALL__NAME);
@@ -2533,18 +2509,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eTaskHandlerErrorHandlingEClass, ETASK_HANDLER_ERROR_HANDLING__CHANGED_WHEN);
     createEReference(eTaskHandlerErrorHandlingEClass, ETASK_HANDLER_ERROR_HANDLING__FAILED_WHEN);
 
-    eBaseCommonKeywordsEClass = createEClass(EBASE_COMMON_KEYWORDS);
-    createEReference(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__PRIVILAGE_ESCALATION);
-    createEReference(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__VALIDATION_MODE);
-    createEReference(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__CONNECTION);
-    createEAttribute(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__NO_LOG);
-    createEAttribute(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__DEBUGGER);
-    createEReference(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__MODULE_DEFAULTS);
-    createEReference(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__ENVIRONMENT);
-    createEReference(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__COLLECTIONS);
-    createEReference(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__TAGS);
-    createEReference(eBaseCommonKeywordsEClass, EBASE_COMMON_KEYWORDS__VARIABLE_DECLARATIONS);
-
     eFactsSettingsEClass = createEClass(EFACTS_SETTINGS);
     createEAttribute(eFactsSettingsEClass, EFACTS_SETTINGS__GATHER_FACTS);
     createEReference(eFactsSettingsEClass, EFACTS_SETTINGS__GATHER_SUBSET);
@@ -2573,8 +2537,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEAttribute(eValueEClass, EVALUE__VALUE_STRING);
     createEAttribute(eValueEClass, EVALUE__VALUE_INT);
 
+    eItemEClass = createEClass(EITEM);
+    createEAttribute(eItemEClass, EITEM__TAIL);
+    createEAttribute(eItemEClass, EITEM__FILTER_COMMANDS);
+
     eFilteredVariableEClass = createEClass(EFILTERED_VARIABLE);
     createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__VARIABLE);
+    createEAttribute(eFilteredVariableEClass, EFILTERED_VARIABLE__INDEX);
     createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__TAIL);
     createEAttribute(eFilteredVariableEClass, EFILTERED_VARIABLE__FILTER_COMMANDS);
 
@@ -2586,6 +2555,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eDictionaryPairReferenceEClass = createEClass(EDICTIONARY_PAIR_REFERENCE);
     createEReference(eDictionaryPairReferenceEClass, EDICTIONARY_PAIR_REFERENCE__NAME);
+    createEAttribute(eDictionaryPairReferenceEClass, EDICTIONARY_PAIR_REFERENCE__INDEX);
 
     eDeclaredVariableEClass = createEClass(EDECLARED_VARIABLE);
     createEAttribute(eDeclaredVariableEClass, EDECLARED_VARIABLE__NAME);
@@ -2658,6 +2628,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eNotifiedHandlerEClass.getESuperTypes().add(this.getENotifiable());
     eNotifiedTopicEClass.getESuperTypes().add(this.getENotifiable());
     eValueEClass.getESuperTypes().add(this.getEValuePassed());
+    eItemEClass.getESuperTypes().add(this.getEValuePassed());
     eFilteredVariableEClass.getESuperTypes().add(this.getELoopList());
     eFilteredVariableEClass.getESuperTypes().add(this.getEFilteredVariableOrString());
     eFilteredVariablesAndStringEClass.getESuperTypes().add(this.getEValue());
@@ -2678,15 +2649,33 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eBaseEClass, EBase.class, "EBase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEBase_Name(), ecorePackage.getEString(), "name", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Base_common_keywords(), this.getEBaseCommonKeywords(), null, "base_common_keywords", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Privilage_escalation(), this.getEPrivilageEscalation(), null, "privilage_escalation", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Validation_mode(), this.getEValidationMode(), null, "validation_mode", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Connection(), this.getEConnection(), null, "connection", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEBase_No_log(), ecorePackage.getEString(), "no_log", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEBase_Debugger(), ecorePackage.getEString(), "debugger", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Module_defaults(), this.getEList(), null, "module_defaults", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Environment(), this.getEList(), null, "environment", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Collections(), this.getEList(), null, "collections", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Tags(), this.getEList(), null, "tags", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Variable_declarations(), this.getEVariableDeclaration(), null, "variable_declarations", null, 0, -1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eExecutionEClass, EExecution.class, "EExecution", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEExecution_Exe_common_keywords(), this.getEExecutionCommonKeywords(), null, "exe_common_keywords", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExecution_Exe_settings(), this.getEExecutionExeSettings(), null, "exe_settings", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExecution_Delegation(), this.getEDelegation(), null, "delegation", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExecution_When_expression(), this.getEConditionalExpression(), null, "when_expression", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBlockTaskEClass, EBlockTask.class, "EBlockTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eTaskHandlerEClass, ETaskHandler.class, "ETaskHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getETaskHandler_Task_handler_common_keywords(), this.getETaskHandlerCommonKeywords(), null, "task_handler_common_keywords", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandler_Error_handling(), this.getETaskHandlerErrorHandling(), null, "error_handling", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getETaskHandler_Action(), ecorePackage.getEString(), "action", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandler_Asynchronous_settings(), this.getEAsynchronousSettings(), null, "asynchronous_settings", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandler_Args(), this.getEDictionary(), null, "args", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandler_Module(), this.getEModuleCall(), null, "module", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandler_Notifiables(), this.getENotifiable(), null, "notifiables", null, 0, -1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandler_Loop(), this.getELoop(), null, "loop", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandler_Register(), this.getERegisterVariable(), null, "register", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePlayEClass, EPlay.class, "EPlay", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEPlay_Play_exe_settings(), this.getEPlayExeSettings(), null, "play_exe_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2711,21 +2700,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eHandlerEClass, EHandler.class, "EHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEHandler_Listen_to(), this.getENotifiedTopic(), null, "listen_to", null, 0, -1, EHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eExecutionCommonKeywordsEClass, EExecutionCommonKeywords.class, "EExecutionCommonKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEExecutionCommonKeywords_Exe_settings(), this.getEExecutionExeSettings(), null, "exe_settings", null, 0, 1, EExecutionCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEExecutionCommonKeywords_Delegation(), this.getEDelegation(), null, "delegation", null, 0, 1, EExecutionCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEExecutionCommonKeywords_When_expression(), this.getEConditionalExpression(), null, "when_expression", null, 0, 1, EExecutionCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eTaskHandlerCommonKeywordsEClass, ETaskHandlerCommonKeywords.class, "ETaskHandlerCommonKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getETaskHandlerCommonKeywords_Error_handling(), this.getETaskHandlerErrorHandling(), null, "error_handling", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getETaskHandlerCommonKeywords_Action(), ecorePackage.getEString(), "action", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerCommonKeywords_Asynchronous_settings(), this.getEAsynchronousSettings(), null, "asynchronous_settings", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerCommonKeywords_Args(), this.getEDictionary(), null, "args", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerCommonKeywords_Module(), this.getEModuleCall(), null, "module", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerCommonKeywords_Notifiables(), this.getENotifiable(), null, "notifiables", null, 0, -1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerCommonKeywords_Loop(), this.getELoop(), null, "loop", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerCommonKeywords_Register(), this.getERegisterVariable(), null, "register", null, 0, 1, ETaskHandlerCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eModuleCallEClass, EModuleCall.class, "EModuleCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEModuleCall_Name(), ecorePackage.getEString(), "name", null, 0, 1, EModuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2816,18 +2790,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getETaskHandlerErrorHandling_Changed_when(), this.getEConditionalExpression(), null, "changed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerErrorHandling_Failed_when(), this.getEConditionalExpression(), null, "failed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eBaseCommonKeywordsEClass, EBaseCommonKeywords.class, "EBaseCommonKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEBaseCommonKeywords_Privilage_escalation(), this.getEPrivilageEscalation(), null, "privilage_escalation", null, 0, 1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseCommonKeywords_Validation_mode(), this.getEValidationMode(), null, "validation_mode", null, 0, 1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseCommonKeywords_Connection(), this.getEConnection(), null, "connection", null, 0, 1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEBaseCommonKeywords_No_log(), ecorePackage.getEString(), "no_log", null, 0, 1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEBaseCommonKeywords_Debugger(), ecorePackage.getEString(), "debugger", null, 0, 1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseCommonKeywords_Module_defaults(), this.getEList(), null, "module_defaults", null, 0, 1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseCommonKeywords_Environment(), this.getEList(), null, "environment", null, 0, 1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseCommonKeywords_Collections(), this.getEList(), null, "collections", null, 0, 1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseCommonKeywords_Tags(), this.getEList(), null, "tags", null, 0, 1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseCommonKeywords_Variable_declarations(), this.getEVariableDeclaration(), null, "variable_declarations", null, 0, -1, EBaseCommonKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(eFactsSettingsEClass, EFactsSettings.class, "EFactsSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEFactsSettings_Gather_facts(), ecorePackage.getEString(), "gather_facts", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEFactsSettings_Gather_subset(), this.getEList(), null, "gather_subset", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2856,8 +2818,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEAttribute(getEValue_Value_string(), ecorePackage.getEString(), "value_string", null, 0, 1, EValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEValue_Value_int(), ecorePackage.getEInt(), "value_int", null, 0, 1, EValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(eItemEClass, EItem.class, "EItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEItem_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, EItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEItem_Filter_commands(), ecorePackage.getEString(), "filter_commands", null, 0, -1, EItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(eFilteredVariableEClass, EFilteredVariable.class, "EFilteredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEFilteredVariable_Variable(), this.getEDeclaredVariable(), null, "variable", null, 0, 1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEFilteredVariable_Index(), ecorePackage.getEInt(), "index", null, 0, 1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEFilteredVariable_Tail(), this.getEDictionaryPairReference(), null, "tail", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEFilteredVariable_Filter_commands(), ecorePackage.getEString(), "filter_commands", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2869,6 +2836,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eDictionaryPairReferenceEClass, EDictionaryPairReference.class, "EDictionaryPairReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEDictionaryPairReference_Name(), this.getEDictionaryPair(), null, "name", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEDictionaryPairReference_Index(), ecorePackage.getEInt(), "index", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDeclaredVariableEClass, EDeclaredVariable.class, "EDeclaredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEDeclaredVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, EDeclaredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

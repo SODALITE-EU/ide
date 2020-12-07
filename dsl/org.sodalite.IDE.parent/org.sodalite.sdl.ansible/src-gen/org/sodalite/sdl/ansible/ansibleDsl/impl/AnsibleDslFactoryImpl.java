@@ -75,8 +75,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EBLOCK: return createEBlock();
       case AnsibleDslPackage.ETASK: return createETask();
       case AnsibleDslPackage.EHANDLER: return createEHandler();
-      case AnsibleDslPackage.EEXECUTION_COMMON_KEYWORDS: return createEExecutionCommonKeywords();
-      case AnsibleDslPackage.ETASK_HANDLER_COMMON_KEYWORDS: return createETaskHandlerCommonKeywords();
       case AnsibleDslPackage.EMODULE_CALL: return createEModuleCall();
       case AnsibleDslPackage.EPARAMETER: return createEParameter();
       case AnsibleDslPackage.ECONDITIONAL_EXPRESSION: return createEConditionalExpression();
@@ -98,7 +96,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EBLOCK_ERROR_HANDLING: return createEBlockErrorHandling();
       case AnsibleDslPackage.EPLAY_ERROR_HANDLING: return createEPlayErrorHandling();
       case AnsibleDslPackage.ETASK_HANDLER_ERROR_HANDLING: return createETaskHandlerErrorHandling();
-      case AnsibleDslPackage.EBASE_COMMON_KEYWORDS: return createEBaseCommonKeywords();
       case AnsibleDslPackage.EFACTS_SETTINGS: return createEFactsSettings();
       case AnsibleDslPackage.EDELEGATION: return createEDelegation();
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS: return createEAsynchronousSettings();
@@ -107,6 +104,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ENOTIFIED_TOPIC: return createENotifiedTopic();
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
       case AnsibleDslPackage.EVALUE: return createEValue();
+      case AnsibleDslPackage.EITEM: return createEItem();
       case AnsibleDslPackage.EFILTERED_VARIABLE: return createEFilteredVariable();
       case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING: return createEFilteredVariableOrString();
       case AnsibleDslPackage.EFILTERED_VARIABLES_AND_STRING: return createEFilteredVariablesAndString();
@@ -241,30 +239,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EHandlerImpl eHandler = new EHandlerImpl();
     return eHandler;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EExecutionCommonKeywords createEExecutionCommonKeywords()
-  {
-    EExecutionCommonKeywordsImpl eExecutionCommonKeywords = new EExecutionCommonKeywordsImpl();
-    return eExecutionCommonKeywords;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ETaskHandlerCommonKeywords createETaskHandlerCommonKeywords()
-  {
-    ETaskHandlerCommonKeywordsImpl eTaskHandlerCommonKeywords = new ETaskHandlerCommonKeywordsImpl();
-    return eTaskHandlerCommonKeywords;
   }
 
   /**
@@ -525,18 +499,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EBaseCommonKeywords createEBaseCommonKeywords()
-  {
-    EBaseCommonKeywordsImpl eBaseCommonKeywords = new EBaseCommonKeywordsImpl();
-    return eBaseCommonKeywords;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EFactsSettings createEFactsSettings()
   {
     EFactsSettingsImpl eFactsSettings = new EFactsSettingsImpl();
@@ -625,6 +587,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EValueImpl eValue = new EValueImpl();
     return eValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EItem createEItem()
+  {
+    EItemImpl eItem = new EItemImpl();
+    return eItem;
   }
 
   /**

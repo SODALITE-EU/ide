@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getIndex <em>Index</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEDictionaryPairReference()
@@ -44,5 +45,27 @@ public interface EDictionaryPairReference extends EObject
    * @generated
    */
   void setName(EDictionaryPair value);
+
+  /**
+   * Returns the value of the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Index</em>' attribute.
+   * @see #setIndex(int)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEDictionaryPairReference_Index()
+   * @model
+   * @generated
+   */
+  int getIndex();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getIndex <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Index</em>' attribute.
+   * @see #getIndex()
+   * @generated
+   */
+  void setIndex(int value);
 
 } // EDictionaryPairReference

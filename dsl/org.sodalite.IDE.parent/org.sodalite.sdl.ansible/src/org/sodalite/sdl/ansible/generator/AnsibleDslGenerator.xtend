@@ -10,7 +10,6 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary
-import org.sodalite.sdl.ansible.ansibleDsl.EBaseCommonKeywords
 import org.sodalite.sdl.ansible.ansibleDsl.EValue
 import org.sodalite.sdl.ansible.ansibleDsl.EList
 import java.util.ArrayList
@@ -19,14 +18,12 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler
-import org.sodalite.sdl.ansible.ansibleDsl.EExecutionCommonKeywords
 import org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock
 import org.sodalite.sdl.ansible.ansibleDsl.ETask
 import org.sodalite.sdl.ansible.ansibleDsl.EBase
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler
-import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerCommonKeywords
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic
@@ -37,6 +34,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EUntil
 import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
+import org.sodalite.sdl.ansible.ansibleDsl.EItem
 
 /**
  * Generates code from your model files on save.
@@ -62,27 +60,6 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDFOR»
 	'''
 	
-	def compileBase(EBase base, String space) '''
-		«IF base.name !== null»
-			«space»- name: «base.name»
-		«ENDIF»
-		«IF base instanceof EPlay»
-			«space.concat('  ')»hosts: all
-		«ENDIF»
-		«IF base instanceof EBlock»
-			«space.concat('  ')»block:
-		«ENDIF»
-		«IF base.base_common_keywords !== null»
-			«compileBaseCommonKeywords(base.base_common_keywords, space.concat('  '))»
-		«ENDIF»
-		«IF base instanceof EPlay»
-			«compilePlay(base, space.concat('  '))»
-		«ENDIF»
-		«IF base instanceof EExecution»
-			«compileExecution(base, space.concat('  '))»
-		«ENDIF»		
-	'''
-	
 	def compilePlay(EPlay play, String space) '''
 		«IF play.name !== null»
 			- name: «play.name»
@@ -90,9 +67,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ELSE»
 			- hosts: all
 		«ENDIF»
-		«IF play.base_common_keywords !== null»
-			«compileBaseCommonKeywords(play.base_common_keywords, space)»
-		«ENDIF»
+		«compileBaseCommonKeywords(play, space)»
 		«IF play.play_exe_settings !== null»
 			«compilePlayExeSettings(play.play_exe_settings, space)»
 		«ENDIF»
@@ -165,71 +140,67 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileRoleInclusion(ERoleInclusion roleInclusion, String space)'''
 		«space»- role: «roleInclusion.name»
-		«IF roleInclusion.base_common_keywords !== null»
-			«compileBaseCommonKeywords(roleInclusion.base_common_keywords, space.concat('  '))»
-		«ENDIF»
-		«IF roleInclusion.exe_common_keywords !== null»
-			«compileExecutionCommonKeywords(roleInclusion.exe_common_keywords, space.concat('  '))»
-		«ENDIF»
+		«compileBaseCommonKeywords(roleInclusion, space.concat('  '))»
+		«compileExecutionCommonKeywords(roleInclusion, space.concat('  '))»
 	'''
 	
-	def compileBaseCommonKeywords(EBaseCommonKeywords baseCommonKeywords, String space) '''
-		«IF baseCommonKeywords.privilage_escalation !== null»
-			«IF baseCommonKeywords.privilage_escalation.become !== null»
-				«space»become: «baseCommonKeywords.privilage_escalation.become»
+	def compileBaseCommonKeywords(EBase base, String space) '''
+		«IF base.privilage_escalation !== null»
+			«IF base.privilage_escalation.become !== null»
+				«space»become: «base.privilage_escalation.become»
 			«ENDIF»
-			«IF baseCommonKeywords.privilage_escalation.become_exe !== null»
-				«space»become_exe: «baseCommonKeywords.privilage_escalation.become_exe»
+			«IF base.privilage_escalation.become_exe !== null»
+				«space»become_exe: «base.privilage_escalation.become_exe»
 			«ENDIF»
-			«IF baseCommonKeywords.privilage_escalation.become_flags !== null»
-				«space»become_flags: «baseCommonKeywords.privilage_escalation.become_flags»
+			«IF base.privilage_escalation.become_flags !== null»
+				«space»become_flags: «base.privilage_escalation.become_flags»
 			«ENDIF»
-			«IF baseCommonKeywords.privilage_escalation.become_method !== null»
-				«space»become_method: «baseCommonKeywords.privilage_escalation.become_method»
+			«IF base.privilage_escalation.become_method !== null»
+				«space»become_method: «base.privilage_escalation.become_method»
 			«ENDIF»
-			«IF baseCommonKeywords.privilage_escalation.become_user !== null»
-				«space»become_user: «baseCommonKeywords.privilage_escalation.become_user»
-			«ENDIF»
-		«ENDIF»
-		«IF baseCommonKeywords.validation_mode !== null»
-			«IF baseCommonKeywords.validation_mode.check_mode !== null»
-				«space»check_moode: «baseCommonKeywords.validation_mode.check_mode»
-			«ENDIF»
-			«IF baseCommonKeywords.validation_mode.diff !== null»
-				«space»diff: «baseCommonKeywords.validation_mode.diff»
+			«IF base.privilage_escalation.become_user !== null»
+				«space»become_user: «base.privilage_escalation.become_user»
 			«ENDIF»
 		«ENDIF»
-		«IF baseCommonKeywords.connection !== null»
-			«IF baseCommonKeywords.connection.connection !== null»
-				«space»connection: «baseCommonKeywords.connection.connection»
+		«IF base.validation_mode !== null»
+			«IF base.validation_mode.check_mode !== null»
+				«space»check_moode: «base.validation_mode.check_mode»
 			«ENDIF»
-			«IF baseCommonKeywords.connection.port.toString() !== null»
-				«space»port: «baseCommonKeywords.connection.port»
-			«ENDIF»
-			«IF baseCommonKeywords.connection.remote_user !== null»
-				«space»remote_user: «baseCommonKeywords.connection.remote_user»
+			«IF base.validation_mode.diff !== null»
+				«space»diff: «base.validation_mode.diff»
 			«ENDIF»
 		«ENDIF»
-		«IF baseCommonKeywords.no_log !== null»
-			«space»no_log: «baseCommonKeywords.no_log»
+		«IF base.connection !== null»
+			«IF base.connection.connection !== null»
+				«space»connection: «base.connection.connection»
+			«ENDIF»
+			«IF base.connection.port.toString() !== null»
+				«space»port: «base.connection.port»
+			«ENDIF»
+			«IF base.connection.remote_user !== null»
+				«space»remote_user: «base.connection.remote_user»
+			«ENDIF»
 		«ENDIF»
-		«IF baseCommonKeywords.debugger !== null»
-			«space»debugger: «baseCommonKeywords.debugger»
+		«IF base.no_log !== null»
+			«space»no_log: «base.no_log»
 		«ENDIF»
-		«IF baseCommonKeywords.module_defaults !== null»
-			«space»module_defaults: «baseCommonKeywords.module_defaults.compileList»
+		«IF base.debugger !== null»
+			«space»debugger: «base.debugger»
 		«ENDIF»
-		«IF baseCommonKeywords.environment !== null»
-			«space»environment: «baseCommonKeywords.environment.compileList»
+		«IF base.module_defaults !== null»
+			«space»module_defaults: «base.module_defaults.compileList»
 		«ENDIF»
-		«IF baseCommonKeywords.collections !== null»
-			«space»collections: «baseCommonKeywords.collections.compileList»
+		«IF base.environment !== null»
+			«space»environment: «base.environment.compileList»
 		«ENDIF»
-		«IF baseCommonKeywords.tags !== null»
-			«space»tags: «baseCommonKeywords.tags.compileList »
+		«IF base.collections !== null»
+			«space»collections: «base.collections.compileList»
 		«ENDIF»
-		«IF baseCommonKeywords.variable_declarations.size !== 0»
-			«space»vars: «baseCommonKeywords.compileVariableDeclarations»
+		«IF base.tags !== null»
+			«space»tags: «base.tags.compileList »
+		«ENDIF»
+		«IF base.variable_declarations.size !== 0»
+			«space»vars: «base.compileVariableDeclarations»
 		«ENDIF»
 	'''
 	
@@ -314,12 +285,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 				«compileTaskHandler(task, space.concat('  ').concat('  '))»
 			«ENDFOR»
 		«ENDIF»
-		«IF block.base_common_keywords !== null»
-			«compileBaseCommonKeywords(block.base_common_keywords, space.concat('  '))»
-		«ENDIF»
-		«IF block.exe_common_keywords !== null»
-			«compileExecutionCommonKeywords(block.exe_common_keywords, space.concat('  '))»
-		«ENDIF»
+		«compileBaseCommonKeywords(block, space.concat('  '))»
+		«compileExecutionCommonKeywords(block, space.concat('  '))»
 		«IF block.error_handling !== null»
 			«IF block.error_handling.any_errors_fatal !== null»
 				«space.concat('  ')»any_errors_fatal: «block.error_handling.any_errors_fatal»
@@ -333,58 +300,48 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 	'''
 	
-	def compileExecutionCommonKeywords(EExecutionCommonKeywords executionCommonKeywords, String space) '''
-		«IF executionCommonKeywords.exe_settings !== null»
-			«IF executionCommonKeywords.exe_settings.throttle != 0»
-				«space»throttle: «executionCommonKeywords.exe_settings.throttle»
+	def compileExecutionCommonKeywords(EExecution execution, String space) '''
+		«IF execution.exe_settings !== null»
+			«IF execution.exe_settings.throttle != 0»
+				«space»throttle: «execution.exe_settings.throttle»
 			«ENDIF»
-			«IF executionCommonKeywords.exe_settings.run_once !== null»
-				«space»run_once: «executionCommonKeywords.exe_settings.run_once»
-			«ENDIF»
-		«ENDIF»
-		«IF executionCommonKeywords.delegation !== null»
-			«IF executionCommonKeywords.delegation.delegate_to !== null»
-				«space»delegate_to: «executionCommonKeywords.delegation.delegate_to»
-			«ENDIF»
-			«IF executionCommonKeywords.delegation.delegate_facts !== null»
-				«space»delegate_facts: «executionCommonKeywords.delegation.delegate_facts»
+			«IF execution.exe_settings.run_once !== null»
+				«space»run_once: «execution.exe_settings.run_once»
 			«ENDIF»
 		«ENDIF»
-		«IF executionCommonKeywords.when_expression !== null»
-			«space»when: «executionCommonKeywords.when_expression.compileConditionalExpression»
+		«IF execution.delegation !== null»
+			«IF execution.delegation.delegate_to !== null»
+				«space»delegate_to: «execution.delegation.delegate_to»
+			«ENDIF»
+			«IF execution.delegation.delegate_facts !== null»
+				«space»delegate_facts: «execution.delegation.delegate_facts»
+			«ENDIF»
+		«ENDIF»
+		«IF execution.when_expression !== null»
+			«space»when: «execution.when_expression.compileConditionalExpression»
 		«ENDIF»
 	'''
 	
 	def compileTaskHandler(ETaskHandler taskHandler, String space) '''
 		«IF taskHandler.name !== null»
 			«space»- name: «taskHandler.name»
-			«IF taskHandler.task_handler_common_keywords !== null»
-				«IF taskHandler.task_handler_common_keywords.module !== null»
-					«space.concat('  ')»«taskHandler.task_handler_common_keywords.module.name»:
-					«FOR parameter: taskHandler.task_handler_common_keywords.module.parameters»
-						«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
-					«ENDFOR»
-				«ENDIF»
+			«IF taskHandler.module !== null»
+				«space.concat('  ')»«taskHandler.module.name»:
+				«FOR parameter: taskHandler.module.parameters»
+					«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
+				«ENDFOR»
 			«ENDIF»
 		«ELSE»
-			«IF taskHandler.task_handler_common_keywords !== null»
-				«IF taskHandler.task_handler_common_keywords.module !== null»
-					«space»- «taskHandler.task_handler_common_keywords.module.name»:
-					«FOR parameter: taskHandler.task_handler_common_keywords.module.parameters»
-						«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
-					«ENDFOR»
-				«ENDIF»
+			«IF taskHandler.module !== null»
+				«space»- «taskHandler.module.name»:
+				«FOR parameter: taskHandler.module.parameters»
+					«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
+				«ENDFOR»
 			«ENDIF»
 		«ENDIF»
-		«IF taskHandler.base_common_keywords !== null»
-			«compileBaseCommonKeywords(taskHandler.base_common_keywords, space.concat('  '))»
-		«ENDIF»
-		«IF taskHandler.exe_common_keywords !== null»
-			«compileExecutionCommonKeywords(taskHandler.exe_common_keywords, space.concat('  '))»
-		«ENDIF»
-		«IF taskHandler.task_handler_common_keywords !== null»
-			«compileTaskHandlerCommonKeywords(taskHandler.task_handler_common_keywords, space.concat('  '))»
-		«ENDIF»
+		«compileBaseCommonKeywords(taskHandler, space.concat('  '))»
+		«compileExecutionCommonKeywords(taskHandler, space.concat('  '))»
+		«compileTaskHandlerCommonKeywords(taskHandler, space.concat('  '))»
 		«IF taskHandler instanceof EHandler»
 			«IF taskHandler.listen_to !== null»
 				«space.concat('  ')»listen: «compileNotifiedTopics(taskHandler)»
@@ -392,82 +349,82 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 	'''
 	
-	def compileTaskHandlerCommonKeywords(ETaskHandlerCommonKeywords taskHandlerCommonKeywords, String space) '''
-		«IF taskHandlerCommonKeywords.error_handling !== null»
-			«IF taskHandlerCommonKeywords.error_handling.changed_when !== null»
-				«space»change_when: «compileConditionalExpression(taskHandlerCommonKeywords.error_handling.changed_when)»
+	def compileTaskHandlerCommonKeywords(ETaskHandler taskHandler, String space) '''
+		«IF taskHandler.error_handling !== null»
+			«IF taskHandler.error_handling.changed_when !== null»
+				«space»change_when: «compileConditionalExpression(taskHandler.error_handling.changed_when)»
 			«ENDIF»
-			«IF taskHandlerCommonKeywords.error_handling.failed_when !== null»
-				«space»failed_when: «compileConditionalExpression(taskHandlerCommonKeywords.error_handling.failed_when)»
+			«IF taskHandler.error_handling.failed_when !== null»
+				«space»failed_when: «compileConditionalExpression(taskHandler.error_handling.failed_when)»
 			«ENDIF»
-			«IF taskHandlerCommonKeywords.error_handling.any_errors_fatal !== null»
-				«space»any_errors_fatal: «taskHandlerCommonKeywords.error_handling.any_errors_fatal»
+			«IF taskHandler.error_handling.any_errors_fatal !== null»
+				«space»any_errors_fatal: «taskHandler.error_handling.any_errors_fatal»
 			«ENDIF»
-			«IF taskHandlerCommonKeywords.error_handling.ignore_errors !== null»
-				«space»ignore_errors: «taskHandlerCommonKeywords.error_handling.ignore_errors»
+			«IF taskHandler.error_handling.ignore_errors !== null»
+				«space»ignore_errors: «taskHandler.error_handling.ignore_errors»
 			«ENDIF»
-			«IF taskHandlerCommonKeywords.error_handling.ignore_unreachable !== null»
-				«space»ignore_unreachable: «taskHandlerCommonKeywords.error_handling.ignore_unreachable»
-			«ENDIF»
-		«ENDIF»
-		«IF taskHandlerCommonKeywords.action !== null»
-			«space»action: «taskHandlerCommonKeywords.action»
-		«ENDIF»
-		«IF taskHandlerCommonKeywords.asynchronous_settings !== null»
-			«IF taskHandlerCommonKeywords.asynchronous_settings.async !== 0»
-				«space»async: «taskHandlerCommonKeywords.asynchronous_settings.async»
-			«ENDIF»
-			«IF taskHandlerCommonKeywords.asynchronous_settings.poll !== 0»
-				«space»poll: «taskHandlerCommonKeywords.asynchronous_settings.poll»
+			«IF taskHandler.error_handling.ignore_unreachable !== null»
+				«space»ignore_unreachable: «taskHandler.error_handling.ignore_unreachable»
 			«ENDIF»
 		«ENDIF»
-		«IF taskHandlerCommonKeywords.args !== null»
-			«space»args: «taskHandlerCommonKeywords.args.compileValue»
+		«IF taskHandler.action !== null»
+			«space»action: «taskHandler.action»
 		«ENDIF»
-		«IF taskHandlerCommonKeywords.notifiables.size !== 0»
-			«space»notify: «compileNotifiables(taskHandlerCommonKeywords)»
+		«IF taskHandler.asynchronous_settings !== null»
+			«IF taskHandler.asynchronous_settings.async !== 0»
+				«space»async: «taskHandler.asynchronous_settings.async»
+			«ENDIF»
+			«IF taskHandler.asynchronous_settings.poll !== 0»
+				«space»poll: «taskHandler.asynchronous_settings.poll»
+			«ENDIF»
 		«ENDIF»
-		«IF taskHandlerCommonKeywords.loop !== null»
-			«IF taskHandlerCommonKeywords.loop instanceof ELoopOverList»
-				«space»loop: «compileLoopList((taskHandlerCommonKeywords.loop as ELoopOverList).loop_list)»
-				«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control !== null»
-					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.label !== null»
-						«space»label: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.label.compileValuePassed»
+		«IF taskHandler.args !== null»
+			«space»args: «taskHandler.args.compileValue»
+		«ENDIF»
+		«IF taskHandler.notifiables.size !== 0»
+			«space»notify: «compileNotifiables(taskHandler)»
+		«ENDIF»
+		«IF taskHandler.loop !== null»
+			«IF taskHandler.loop instanceof ELoopOverList»
+				«space»loop: «compileLoopList((taskHandler.loop as ELoopOverList).loop_list)»
+				«IF (taskHandler.loop as ELoopOverList).loop_control !== null»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.label !== null»
+						«space»label: «(taskHandler.loop as ELoopOverList).loop_control.label.compileValuePassed»
 					«ENDIF»
-					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.pause !== 0»
-						«space»pause: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.pause»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.pause !== 0»
+						«space»pause: «(taskHandler.loop as ELoopOverList).loop_control.pause»
 					«ENDIF»
-					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.index_var !== null»
-						«space»index_var: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.index_var»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.index_var !== null»
+						«space»index_var: «(taskHandler.loop as ELoopOverList).loop_control.index_var»
 					«ENDIF»
-					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.loop_var !== null»
-						«space»loop_var: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.loop_var»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.loop_var !== null»
+						«space»loop_var: «(taskHandler.loop as ELoopOverList).loop_control.loop_var»
 					«ENDIF»
-					«IF (taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.extended !== null»
-						«space»extended: «(taskHandlerCommonKeywords.loop as ELoopOverList).loop_control.extended»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.extended !== null»
+						«space»extended: «(taskHandler.loop as ELoopOverList).loop_control.extended»
 					«ENDIF»
 				«ENDIF»
 			«ENDIF»
-			«IF taskHandlerCommonKeywords.loop instanceof EUntil»
-				«IF (taskHandlerCommonKeywords.loop as EUntil).until !== null»
-					«space»until: «(taskHandlerCommonKeywords.loop as EUntil).until.compileConditionalExpression»
+			«IF taskHandler.loop instanceof EUntil»
+				«IF (taskHandler.loop as EUntil).until !== null»
+					«space»until: «(taskHandler.loop as EUntil).until.compileConditionalExpression»
 				«ENDIF»
-				«IF (taskHandlerCommonKeywords.loop as EUntil).retries !== 0»
-					«space»retries: «(taskHandlerCommonKeywords.loop as EUntil).retries»
+				«IF (taskHandler.loop as EUntil).retries !== 0»
+					«space»retries: «(taskHandler.loop as EUntil).retries»
 				«ENDIF»
-				«IF (taskHandlerCommonKeywords.loop as EUntil).delay !== 0»
-					«space»delay: «(taskHandlerCommonKeywords.loop as EUntil).delay»
+				«IF (taskHandler.loop as EUntil).delay !== 0»
+					«space»delay: «(taskHandler.loop as EUntil).delay»
 				«ENDIF»
 			«ENDIF»
 		«ENDIF»
-		«IF taskHandlerCommonKeywords.register !== null»
-			«space»register: «taskHandlerCommonKeywords.register.name»
+		«IF taskHandler.register !== null»
+			«space»register: «taskHandler.register.name»
 		«ENDIF»
 	'''
 	
-	def compileNotifiables(ETaskHandlerCommonKeywords taskHandlerCommonKeywords){
+	def compileNotifiables(ETaskHandler taskHandler){
 		var newList = new ArrayList()
-		for (notifiable : taskHandlerCommonKeywords.notifiables){
+		for (notifiable : taskHandler.notifiables){
 			if (notifiable instanceof ENotifiedTopic){
 				newList.add("\"".concat(notifiable.name).concat("\""))	
 			}
@@ -524,6 +481,17 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			}
 			return factString
 		}
+		else if (valuePassed instanceof EItem){
+			var itemString = "{{ item"
+			for (tailElement : valuePassed.tail) {
+				itemString = itemString.concat(".").concat(tailElement)
+			}
+			for (filterCommand : valuePassed.filter_commands) {
+				itemString = itemString.concat(" | ").concat(filterCommand)
+			}
+			itemString = itemString.concat(" }}")
+			return itemString
+		}
 	}
 	
 	def compileLoopList(EValuePassed loopList){
@@ -547,8 +515,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			for (variable_or_string : value.variable_and_string){
 				if (variable_or_string instanceof EFilteredVariable){
 					variablesAndString = variablesAndString.concat("{{ ".concat(variable_or_string.variable.name))
+					if (variable_or_string.index !== -150) variablesAndString = variablesAndString.concat("[").concat(variable_or_string.index.toString()).concat("]")
 					for (dictionaryPairReference : variable_or_string.tail){
 						variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.name.name)
+						if (dictionaryPairReference.index !== -150) variablesAndString = variablesAndString.concat("[").concat(dictionaryPairReference.index.toString()).concat("]")
 					}
 					for (filterCommand : variable_or_string.filter_commands){
 						variablesAndString = variablesAndString.concat(" | ").concat(filterCommand)
@@ -565,9 +535,9 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else return value.value_int
 	}
 	
-	def compileVariableDeclarations(EBaseCommonKeywords baseCommonKeywords){
+	def compileVariableDeclarations(EBase base){
 		var variableDeclarationsString = '{'
-		for (variable_declaration : baseCommonKeywords.variable_declarations){
+		for (variable_declaration : base.variable_declarations){
 			variableDeclarationsString = variableDeclarationsString.concat(variable_declaration.name).concat(': ').concat(compileValue(variable_declaration.value_passed).toString()).concat(', ')
 		}
 		variableDeclarationsString = variableDeclarationsString.substring(0, variableDeclarationsString.length() - 2)
