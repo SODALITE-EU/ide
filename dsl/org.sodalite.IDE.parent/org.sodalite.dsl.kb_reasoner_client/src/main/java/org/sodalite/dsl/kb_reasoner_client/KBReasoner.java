@@ -101,4 +101,11 @@ public interface KBReasoner {
 	ModelData getRMsInModule(String module) throws Exception;
 
 	void deleteModel(String modelId) throws Exception;
+
+	String getSecurityToken() throws Exception;
+
+	Boolean isValidToken(String token) throws Exception;
+
+	void setUserAccount(String user, String password, String client_id, String user_secret);
+
 }

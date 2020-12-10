@@ -92,11 +92,24 @@ public class KBReasonerClient implements KBReasoner {
 	private String kbReasonerUri;
 	private String iacUri;
 	private String xoperaUri;
+	private String keycloakUri;
+	private String keycloak_user;
+	private String keycloak_password;
+	private String keycloak_client_id;
+	private String keycloak_client_secret;
 
-	public KBReasonerClient(String kbReasonerUri, String iacUri, String xoperaUri) {
+	public KBReasonerClient(String kbReasonerUri, String iacUri, String xoperaUri, String keycloakUri) {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.xoperaUri = xoperaUri;
+		this.keycloakUri = keycloakUri;
+	}
+
+	public void setUserAccount(String user, String password, String client_id, String client_secret) {
+		this.keycloak_user = user;
+		this.keycloak_password = password;
+		this.keycloak_client_id = client_id;
+		this.keycloak_client_secret = client_secret;
 	}
 
 	private RestTemplate getSslRestTemplate()
@@ -112,6 +125,8 @@ public class KBReasonerClient implements KBReasoner {
 					.build();
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setHttpClient(httpClient);
+			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
+			requestFactory.setReadTimeout(30 * 1000);
 			sslRestTemplate = new RestTemplate(requestFactory);
 		}
 		return sslRestTemplate;
@@ -119,7 +134,11 @@ public class KBReasonerClient implements KBReasoner {
 
 	private RestTemplate getRestTemplate() {
 		if (restTemplate == null) {
-			restTemplate = new RestTemplate();
+			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
+			requestFactory.setReadTimeout(30 * 1000);
+
+			restTemplate = new RestTemplate(requestFactory);
 		}
 		return restTemplate;
 	}
@@ -798,6 +817,18 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
+	private <T> T sendFormURLEncodedMessageWithCredentials(URI uri, Class<T> returnType,
+			MultiValueMap<String, Object> parts, HttpMethod method, String username, String password) throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		headers.setBasicAuth(username, password);
+
+		HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(parts, headers);
+		ResponseEntity<T> response = exchange(uri, method, entity, returnType);
+
+		return response.getBody();
+	}
+
 	private <T> T sendFormURLEncodedMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts,
 			HttpMethod method) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
@@ -881,6 +912,35 @@ public class KBReasonerClient implements KBReasoner {
 		headers.add("Accept", "*/*");
 		HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
 		return getRestTemplate().exchange(uri, HttpMethod.DELETE, requestEntity, String.class);
+	}
+
+	@Override
+	public String getSecurityToken() throws Exception {
+		String url = keycloakUri + "auth/realms/SODALITE/protocol/openid-connect/token";
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+		map.add("grant_type", "password");
+		map.add("username", this.keycloak_user);
+		map.add("password", this.keycloak_password);
+		map.add("client_id", this.keycloak_client_id);
+		map.add("client_secret", this.keycloak_client_secret);
+
+		String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
+		JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
+		return jsonObject.get("access_token").getAsString();
+	}
+
+	@Override
+	public Boolean isValidToken(String token) throws Exception {
+		String url = keycloakUri + "auth/realms/SODALITE/protocol/openid-connect/token/introspect";
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+		map.add("token", token);
+
+		String result = sendFormURLEncodedMessageWithCredentials(new URI(url), String.class, map, HttpMethod.POST,
+				this.keycloak_client_id, this.keycloak_client_secret);
+		JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
+		return jsonObject.get("active").getAsBoolean();
 	}
 
 }

@@ -119,18 +119,57 @@ public class KBView {
 		return splits[splits.length - 1];
 	}
 
-	private KBReasonerClient getKBReasoner() {
+	private KBReasonerClient getKBReasoner() throws Exception {
 		// Configure KBReasonerClient endpoint from preference page information
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
 		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		if (kbReasonerURI.isEmpty())
+			raiseConfigurationIssue("KB Reasoner URI user not set");
+
 		String iacURI = store.getString(PreferenceConstants.IaC_URI);
+		if (iacURI.isEmpty())
+			raiseConfigurationIssue("IaC URI user not set");
+
 		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
-		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
-		SodaliteLogger.log(
-				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
-						kbReasonerURI, iacURI, xoperaURI));
+		if (xoperaURI.isEmpty())
+			raiseConfigurationIssue("xOpera URI user not set");
+
+		String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
+		if (keycloakURI.isEmpty())
+			raiseConfigurationIssue("Keycloak URI user not set");
+
+		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
+
+		String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
+		if (keycloak_user.isEmpty())
+			raiseConfigurationIssue("Keycloak user not set");
+
+		String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
+		if (keycloak_password.isEmpty())
+			raiseConfigurationIssue("Keycloak password not set");
+
+		String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
+		if (keycloak_client_id.isEmpty())
+			raiseConfigurationIssue("Keycloak client_id not set");
+
+		String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
+		if (keycloak_client_secret.isEmpty())
+			raiseConfigurationIssue("Keycloak client secret not set");
+
+		kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
+
+		SodaliteLogger.log(MessageFormat.format(
+				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
+				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
+
 		return kbclient;
+	}
+
+	private void raiseConfigurationIssue(String message) throws Exception {
+		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
 	private void createContextMenu(TreeViewer viewer) {
