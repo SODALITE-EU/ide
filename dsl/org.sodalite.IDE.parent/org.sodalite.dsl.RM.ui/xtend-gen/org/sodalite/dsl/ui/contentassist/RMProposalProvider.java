@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.widgets.FileDialog;
@@ -35,6 +36,7 @@ import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.ERelationshipType;
 import org.sodalite.dsl.rM.RM_Model;
+import org.sodalite.dsl.ui.backend.BackendLogger;
 import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
@@ -64,14 +66,63 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     "to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship).");
   
   public KBReasoner getKBReasoner() {
-    final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-    final String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-    final KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
-    System.out.println(
-      MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}", kbReasonerURI, iacURI, xoperaURI));
-    return kbclient;
+    try {
+      final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+      final String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+      boolean _isEmpty = kbReasonerURI.isEmpty();
+      if (_isEmpty) {
+        this.raiseConfigurationIssue("KB Reasoner URI user not set");
+      }
+      final String iacURI = store.getString(PreferenceConstants.IaC_URI);
+      boolean _isEmpty_1 = iacURI.isEmpty();
+      if (_isEmpty_1) {
+        this.raiseConfigurationIssue("IaC URI user not set");
+      }
+      final String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
+      boolean _isEmpty_2 = xoperaURI.isEmpty();
+      if (_isEmpty_2) {
+        this.raiseConfigurationIssue("xOpera URI user not set");
+      }
+      final String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
+      boolean _isEmpty_3 = keycloakURI.isEmpty();
+      if (_isEmpty_3) {
+        this.raiseConfigurationIssue("Keycloak URI user not set");
+      }
+      final KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
+      final String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
+      boolean _isEmpty_4 = keycloak_user.isEmpty();
+      if (_isEmpty_4) {
+        this.raiseConfigurationIssue("Keycloak user not set");
+      }
+      final String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
+      boolean _isEmpty_5 = keycloak_password.isEmpty();
+      if (_isEmpty_5) {
+        this.raiseConfigurationIssue("Keycloak password not set");
+      }
+      final String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
+      boolean _isEmpty_6 = keycloak_client_id.isEmpty();
+      if (_isEmpty_6) {
+        this.raiseConfigurationIssue("Keycloak client_id not set");
+      }
+      final String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
+      boolean _isEmpty_7 = keycloak_client_secret.isEmpty();
+      if (_isEmpty_7) {
+        this.raiseConfigurationIssue("Keycloak client secret not set");
+      }
+      kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
+      BackendLogger.log(
+        MessageFormat.format(
+          "Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}", kbReasonerURI, iacURI, xoperaURI, keycloakURI));
+      return kbclient;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void raiseConfigurationIssue(final String message) throws Exception {
+    final Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+    MessageDialog.openError(parent, "Sodalite Preferences Error", (message + " in Sodalite preferences pages"));
+    throw new Exception((message + " in Sodalite preferences pages"));
   }
   
   @Override
