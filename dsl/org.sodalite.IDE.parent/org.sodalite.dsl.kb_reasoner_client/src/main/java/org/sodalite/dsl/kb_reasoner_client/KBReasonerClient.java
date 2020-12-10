@@ -291,6 +291,7 @@ public class KBReasonerClient implements KBReasoner {
 			List<String> modules) throws Exception {
 		Assert.notNull(requirementId, "Pass a not null requirementId");
 		Assert.notNull(nodeType, "Pass a not null nodeType");
+		Assert.notNull(modules, "Pass a not null modules");
 		String url = kbReasonerUri + "valid-requirement-nodes;requirement=" + requirementId + ";nodeType="
 				+ encodeValue(nodeType);
 		for (String module : modules)
@@ -305,11 +306,15 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType) throws Exception {
+	public TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType, List<String> modules)
+			throws Exception {
 		Assert.notNull(requirementId, "Pass a not null requirementId");
 		Assert.notNull(nodeType, "Pass a not null nodeType");
-		String url = kbReasonerUri + "valid-requirement-nodes-type?requirement=" + requirementId + "&nodeType="
-				+ nodeType;
+		Assert.notNull(modules, "Pass a not null modules");
+		String url = kbReasonerUri + "valid-requirement-nodes-type;requirement=" + requirementId + ";nodeType="
+				+ encodeValue(nodeType);
+		for (String module : modules)
+			url += ";imports=" + module;
 		TypeData data = getJSONObjectForType(TypeData.class, new URI(url), HttpStatus.OK);
 		if (data == null) {
 			data = new TypeData();

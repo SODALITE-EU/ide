@@ -184,7 +184,7 @@ class KBReasonerTest {
 	@Test
 	void testGetValidRequirementNodes() throws Exception {
 		String nodeType = "docker/sodalite.nodes.DockerizedComponent";
-		List<String> modules = Arrays.asList("snow", "clinical");
+		List<String> modules = Arrays.asList("snow", "docker");
 		ValidRequirementNodeData valid_requirement_nodes = kbclient.getValidRequirementNodes(requirementId, nodeType,
 				modules);
 		assertFalse(valid_requirement_nodes.getElements().isEmpty());
@@ -195,8 +195,9 @@ class KBReasonerTest {
 	@Test
 	void testGetTypeOfValidRequirementNodes() throws Exception {
 		String requirementId = "host";
-		String nodeType = "docker/sodalite.nodes.DockerHost";
-		TypeData typedata = kbclient.getTypeOfValidRequirementNodes(requirementId, nodeType);
+		List<String> modules = Arrays.asList("openstack", "docker");
+		String nodeType = "docker/sodalite.nodes.DockerizedComponent";
+		TypeData typedata = kbclient.getTypeOfValidRequirementNodes(requirementId, nodeType, modules);
 		assertFalse(typedata.getElements().isEmpty());
 		System.out.println("TypeOfValidRequirementNodes for resource: " + resourceId + " is "
 				+ typedata.getElements().get(0).getLabel());

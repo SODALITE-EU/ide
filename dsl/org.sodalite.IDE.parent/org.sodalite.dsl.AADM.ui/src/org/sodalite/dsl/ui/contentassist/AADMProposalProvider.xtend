@@ -516,7 +516,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		importedModules.add(module)
 		
 		val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
-		val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId);
+		val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
 		if (!vrnd.elements.empty){
 			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
 			for (ValidRequirementNode vrn: vrnd.elements){

@@ -70,7 +70,8 @@ public interface KBReasoner {
 	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType, List<String> modules)
 			throws Exception;
 
-	TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType) throws Exception;
+	TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType, List<String> modules)
+			throws Exception;
 
 	Boolean isSubClassOf(String subclass, String superclass) throws Exception;
 

@@ -1797,7 +1797,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append(_plusPlus);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
-    _builder.append("rdf:type exchange:CapabilityType ;");
+    _builder.append("rdf:type exchange:Type ;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("exchange:name \"");
@@ -1933,7 +1933,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append(_plusPlus_1);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
-    _builder.append("rdf:type exchange:RelationshipType ;");
+    _builder.append("rdf:type exchange:Type ;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("exchange:name \"");
@@ -2050,7 +2050,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append(_plusPlus);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
-    _builder.append("rdf:type exchange:NodeType ;");
+    _builder.append("rdf:type exchange:Type ;");
     _builder.newLine();
     {
       String _description = n.getNode().getDescription();
@@ -2189,7 +2189,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append(_plusPlus);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
-    _builder.append("rdf:type exchange:DataType ;");
+    _builder.append("rdf:type exchange:Type ;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("exchange:name \"");
