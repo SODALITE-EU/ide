@@ -14,6 +14,7 @@ import org.eclipse.xtext.Assignment
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
 
 /** 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -30,7 +31,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		acceptor.accept(createCompletionProposal("Null", context));
 	}
 	
-	override void completeEFilteredVariable_Variable(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	override void completeEDeclaredVariableReference_Variable(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
 		//if rootPlay is different from null then we are in a play. else, we are in a role
 		if (rootPlay !== null){
@@ -60,8 +61,8 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	}
 
 	override void completeEDictionaryPairReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val filteredVariable = EcoreUtil2.getContainerOfType(model, EFilteredVariableImpl)
-		val tail = filteredVariable.tail
+		val declaredVariableReference = EcoreUtil2.getContainerOfType(model, EDeclaredVariableReferenceImpl)
+		val tail = declaredVariableReference.tail
 		val index = tail.size - 1
 		if (index > 0){
 			val previousDictionaryPair = tail.get(index - 1).name
@@ -72,9 +73,9 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			}
 		}
 		else {
-			if (filteredVariable.variable instanceof EVariableDeclarationImpl){
-				if ((filteredVariable.variable as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
-					for (dictionaryPair : (((filteredVariable.variable as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
+			if (declaredVariableReference.variable instanceof EVariableDeclarationImpl){
+				if ((declaredVariableReference.variable as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
+					for (dictionaryPair : (((declaredVariableReference.variable as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
 						acceptor.accept(createCompletionProposal(dictionaryPair.name, context))
 					}
 				}

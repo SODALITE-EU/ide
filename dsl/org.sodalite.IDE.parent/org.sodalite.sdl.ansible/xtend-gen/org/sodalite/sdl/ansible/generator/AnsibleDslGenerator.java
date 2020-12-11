@@ -4,6 +4,7 @@
 package org.sodalite.sdl.ansible.generator;
 
 import com.google.common.collect.Iterables;
+import java.io.Serializable;
 import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -21,6 +22,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 import org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
+import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
@@ -50,6 +53,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
@@ -1278,15 +1282,15 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileConditionalExpression(final EConditionalExpression conditionalExpression) {
     if ((((conditionalExpression.getLeft_term() != null) && (conditionalExpression.getEquality_term() != null)) && (conditionalExpression.getRight_term() != null))) {
-      return this.compileValuePassed(conditionalExpression.getLeft_term()).concat(" ").concat(conditionalExpression.getEquality_term()).concat(" ").concat(this.compileValuePassed(conditionalExpression.getRight_term()));
+      return this.compileValuePassedInFormula(conditionalExpression.getLeft_term()).concat(" ").concat(conditionalExpression.getEquality_term()).concat(" ").concat(this.compileValuePassedInFormula(conditionalExpression.getRight_term()));
     } else {
       if (((conditionalExpression.getLeft_term() != null) && (conditionalExpression.getStatus() != null))) {
         String _is_not = conditionalExpression.getIs_not();
         boolean _tripleNotEquals = (_is_not != null);
         if (_tripleNotEquals) {
-          return this.compileValuePassed(conditionalExpression.getLeft_term()).concat(" is not ").concat(conditionalExpression.getStatus());
+          return this.compileValuePassedInFormula(conditionalExpression.getLeft_term()).concat(" is not ").concat(conditionalExpression.getStatus());
         } else {
-          return this.compileValuePassed(conditionalExpression.getLeft_term()).concat(" is ").concat(conditionalExpression.getStatus());
+          return this.compileValuePassedInFormula(conditionalExpression.getLeft_term()).concat(" is ").concat(conditionalExpression.getStatus());
         }
       } else {
         EConditionalFormula _formula = conditionalExpression.getFormula();
@@ -1343,7 +1347,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         return factString;
       } else {
         if ((valuePassed instanceof EItem)) {
-          String itemString = "{{ item";
+          String itemString = "\"{{ item";
           EList<String> _tail_1 = ((EItem)valuePassed).getTail();
           for (final String tailElement : _tail_1) {
             itemString = itemString.concat(".").concat(tailElement);
@@ -1352,8 +1356,103 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           for (final String filterCommand : _filter_commands) {
             itemString = itemString.concat(" | ").concat(filterCommand);
           }
-          itemString = itemString.concat(" }}");
+          itemString = itemString.concat(" }}\"");
           return itemString;
+        }
+      }
+    }
+    return null;
+  }
+  
+  public String compileValuePassedInFormula(final EValuePassed valuePassed) {
+    if ((valuePassed instanceof EValue)) {
+      return this.compileValueInFormula(((EValue)valuePassed)).toString();
+    } else {
+      if ((valuePassed instanceof EFactGathered)) {
+        String factString = "ansible_facts";
+        EList<String> _tail = ((EFactGathered)valuePassed).getTail();
+        for (final String field : _tail) {
+          factString = factString.concat(".").concat("field");
+        }
+        return factString;
+      } else {
+        if ((valuePassed instanceof EItem)) {
+          String itemString = "item";
+          EList<String> _tail_1 = ((EItem)valuePassed).getTail();
+          for (final String tailElement : _tail_1) {
+            itemString = itemString.concat(".").concat(tailElement);
+          }
+          EList<String> _filter_commands = ((EItem)valuePassed).getFilter_commands();
+          for (final String filterCommand : _filter_commands) {
+            itemString = itemString.concat(" | ").concat(filterCommand);
+          }
+          return itemString;
+        }
+      }
+    }
+    return null;
+  }
+  
+  public Serializable compileValueInFormula(final EValue value) {
+    if ((value instanceof EDictionary)) {
+      String dictionaryString = "{";
+      EList<EDictionaryPair> _dictionary_pairs = ((EDictionary)value).getDictionary_pairs();
+      for (final EDictionaryPair dictionary_pair : _dictionary_pairs) {
+        dictionaryString = dictionaryString.concat(dictionary_pair.getName()).concat(": ").concat(this.compileValue(dictionary_pair.getValue()).toString()).concat(", ");
+      }
+      int _length = dictionaryString.length();
+      int _minus = (_length - 2);
+      dictionaryString = dictionaryString.substring(0, _minus);
+      dictionaryString = dictionaryString.concat("}");
+      return dictionaryString;
+    } else {
+      if ((value instanceof org.sodalite.sdl.ansible.ansibleDsl.EList)) {
+        return this.compileList(((org.sodalite.sdl.ansible.ansibleDsl.EList)value));
+      } else {
+        if ((value instanceof EFilteredVariablesAndString)) {
+          String variablesAndString = "";
+          EList<EFilteredVariableOrString> _variable_and_string = ((EFilteredVariablesAndString)value).getVariable_and_string();
+          for (final EFilteredVariableOrString variable_or_string : _variable_and_string) {
+            if ((variable_or_string instanceof EFilteredVariable)) {
+              EList<EDeclaredVariableReferenceOrString> _variable_reference_or_string = ((EFilteredVariable)variable_or_string).getVariable_reference_or_string();
+              for (final EDeclaredVariableReferenceOrString variable_reference_or_string : _variable_reference_or_string) {
+                if ((variable_reference_or_string instanceof EDeclaredVariableReference)) {
+                  variablesAndString = variablesAndString.concat(((EDeclaredVariableReference)variable_reference_or_string).getVariable().getName());
+                  int _index = ((EDeclaredVariableReference)variable_reference_or_string).getIndex();
+                  boolean _tripleNotEquals = (_index != (-150));
+                  if (_tripleNotEquals) {
+                    variablesAndString = variablesAndString.concat("[").concat(Integer.valueOf(((EDeclaredVariableReference)variable_reference_or_string).getIndex()).toString()).concat("]");
+                  }
+                  EList<EDictionaryPairReference> _tail = ((EDeclaredVariableReference)variable_reference_or_string).getTail();
+                  for (final EDictionaryPairReference dictionaryPairReference : _tail) {
+                    {
+                      variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.getName().getName());
+                      int _index_1 = dictionaryPairReference.getIndex();
+                      boolean _tripleNotEquals_1 = (_index_1 != (-150));
+                      if (_tripleNotEquals_1) {
+                        variablesAndString = variablesAndString.concat("[").concat(Integer.valueOf(dictionaryPairReference.getIndex()).toString()).concat("]");
+                      }
+                    }
+                  }
+                } else {
+                  variablesAndString = variablesAndString.concat(variable_reference_or_string.getString());
+                }
+              }
+            } else {
+              variablesAndString = variablesAndString.concat("\"").concat(variable_or_string.getString()).concat("\"");
+            }
+          }
+          return variablesAndString;
+        } else {
+          if ((value instanceof ESimpleValue)) {
+            String _value_string = ((ESimpleValue)value).getValue_string();
+            boolean _tripleNotEquals_1 = (_value_string != null);
+            if (_tripleNotEquals_1) {
+              return ((ESimpleValue)value).getValue_string();
+            } else {
+              return Integer.valueOf(((ESimpleValue)value).getValue_int());
+            }
+          }
         }
       }
     }
@@ -1389,26 +1488,30 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           EList<EFilteredVariableOrString> _variable_and_string = ((EFilteredVariablesAndString)value).getVariable_and_string();
           for (final EFilteredVariableOrString variable_or_string : _variable_and_string) {
             if ((variable_or_string instanceof EFilteredVariable)) {
-              variablesAndString = variablesAndString.concat("{{ ".concat(((EFilteredVariable)variable_or_string).getVariable().getName()));
-              int _index = ((EFilteredVariable)variable_or_string).getIndex();
-              boolean _tripleNotEquals = (_index != (-150));
-              if (_tripleNotEquals) {
-                variablesAndString = variablesAndString.concat("[").concat(Integer.valueOf(((EFilteredVariable)variable_or_string).getIndex()).toString()).concat("]");
-              }
-              EList<EDictionaryPairReference> _tail = ((EFilteredVariable)variable_or_string).getTail();
-              for (final EDictionaryPairReference dictionaryPairReference : _tail) {
-                {
-                  variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.getName().getName());
-                  int _index_1 = dictionaryPairReference.getIndex();
-                  boolean _tripleNotEquals_1 = (_index_1 != (-150));
-                  if (_tripleNotEquals_1) {
-                    variablesAndString = variablesAndString.concat("[").concat(Integer.valueOf(dictionaryPairReference.getIndex()).toString()).concat("]");
+              variablesAndString = variablesAndString.concat("{{ ");
+              EList<EDeclaredVariableReferenceOrString> _variable_reference_or_string = ((EFilteredVariable)variable_or_string).getVariable_reference_or_string();
+              for (final EDeclaredVariableReferenceOrString variable_reference_or_string : _variable_reference_or_string) {
+                if ((variable_reference_or_string instanceof EDeclaredVariableReference)) {
+                  variablesAndString = variablesAndString.concat(((EDeclaredVariableReference)variable_reference_or_string).getVariable().getName());
+                  int _index = ((EDeclaredVariableReference)variable_reference_or_string).getIndex();
+                  boolean _tripleNotEquals = (_index != (-150));
+                  if (_tripleNotEquals) {
+                    variablesAndString = variablesAndString.concat("[").concat(Integer.valueOf(((EDeclaredVariableReference)variable_reference_or_string).getIndex()).toString()).concat("]");
                   }
+                  EList<EDictionaryPairReference> _tail = ((EDeclaredVariableReference)variable_reference_or_string).getTail();
+                  for (final EDictionaryPairReference dictionaryPairReference : _tail) {
+                    {
+                      variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.getName().getName());
+                      int _index_1 = dictionaryPairReference.getIndex();
+                      boolean _tripleNotEquals_1 = (_index_1 != (-150));
+                      if (_tripleNotEquals_1) {
+                        variablesAndString = variablesAndString.concat("[").concat(Integer.valueOf(dictionaryPairReference.getIndex()).toString()).concat("]");
+                      }
+                    }
+                  }
+                } else {
+                  variablesAndString = variablesAndString.concat(variable_reference_or_string.getString());
                 }
-              }
-              EList<String> _filter_commands = ((EFilteredVariable)variable_or_string).getFilter_commands();
-              for (final String filterCommand : _filter_commands) {
-                variablesAndString = variablesAndString.concat(" | ").concat(filterCommand);
               }
               variablesAndString = variablesAndString.concat(" }}");
             } else {
@@ -1417,16 +1520,19 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           }
           return variablesAndString.concat("\"");
         } else {
-          String _value_string = value.getValue_string();
-          boolean _tripleNotEquals_1 = (_value_string != null);
-          if (_tripleNotEquals_1) {
-            return value.getValue_string();
-          } else {
-            return Integer.valueOf(value.getValue_int());
+          if ((value instanceof ESimpleValue)) {
+            String _value_string = ((ESimpleValue)value).getValue_string();
+            boolean _tripleNotEquals_1 = (_value_string != null);
+            if (_tripleNotEquals_1) {
+              return ((ESimpleValue)value).getValue_string();
+            } else {
+              return Integer.valueOf(((ESimpleValue)value).getValue_int());
+            }
           }
         }
       }
     }
+    return null;
   }
   
   public String compileVariableDeclarations(final EBase base) {

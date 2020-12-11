@@ -17,6 +17,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import java.util.ArrayList
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
 
 /** 
  * This class contains custom scoping description.
@@ -25,7 +26,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
  */
 class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 	override IScope getScope(EObject context, EReference reference) {
-		if (context instanceof EFilteredVariableImpl && reference == AnsibleDslPackage.Literals.EFILTERED_VARIABLE__VARIABLE){
+		if (context instanceof EDeclaredVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EDECLARED_VARIABLE_REFERENCE__VARIABLE){
 			val rootPlay = EcoreUtil2.getContainerOfType(context, EPlayImpl)
 			//if rootPlay is different from null then we are in a play. else, we are in a role
 			if (rootPlay !== null){
@@ -52,8 +53,8 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 		}
 		
 		if (context instanceof EDictionaryPairReferenceImpl && reference == AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME){
-			val filteredVariable = EcoreUtil2.getContainerOfType(context, EFilteredVariableImpl)
-			val tail = filteredVariable.tail
+			val declaredVariableReference = EcoreUtil2.getContainerOfType(context, EDeclaredVariableReferenceImpl)
+			val tail = declaredVariableReference.tail
 			val index = tail.indexOf(context)
 			var candidatesOfDictionary = new ArrayList<EDictionaryPair>
 			if (index > 0){
@@ -65,9 +66,9 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 				}
 			}
 			else {
-				if (filteredVariable.variable instanceof EVariableDeclarationImpl){
-					if ((filteredVariable.variable as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
-						for (dictionaryPair : (((filteredVariable.variable as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
+				if (declaredVariableReference.variable instanceof EVariableDeclarationImpl){
+					if ((declaredVariableReference.variable as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
+						for (dictionaryPair : (((declaredVariableReference.variable as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
 							candidatesOfDictionary.add(dictionaryPair)
 						}
 					}

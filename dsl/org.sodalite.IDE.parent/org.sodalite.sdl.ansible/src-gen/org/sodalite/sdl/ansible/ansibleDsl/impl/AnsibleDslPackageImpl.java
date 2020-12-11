@@ -21,6 +21,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
@@ -54,6 +56,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
@@ -350,7 +353,28 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eSimpleValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eItemEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eDeclaredVariableReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eDeclaredVariableReferenceOrStringEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1994,9 +2018,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEValue_Value_string()
+  public EClass getESimpleValue()
   {
-    return (EAttribute)eValueEClass.getEStructuralFeatures().get(0);
+    return eSimpleValueEClass;
   }
 
   /**
@@ -2005,9 +2029,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEValue_Value_int()
+  public EAttribute getESimpleValue_Value_string()
   {
-    return (EAttribute)eValueEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)eSimpleValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getESimpleValue_Value_int()
+  {
+    return (EAttribute)eSimpleValueEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2049,6 +2084,72 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getEDeclaredVariableReference()
+  {
+    return eDeclaredVariableReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEDeclaredVariableReference_Variable()
+  {
+    return (EReference)eDeclaredVariableReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEDeclaredVariableReference_Index()
+  {
+    return (EAttribute)eDeclaredVariableReferenceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEDeclaredVariableReference_Tail()
+  {
+    return (EReference)eDeclaredVariableReferenceEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEDeclaredVariableReferenceOrString()
+  {
+    return eDeclaredVariableReferenceOrStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEDeclaredVariableReferenceOrString_String()
+  {
+    return (EAttribute)eDeclaredVariableReferenceOrStringEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEFilteredVariable()
   {
     return eFilteredVariableEClass;
@@ -2060,42 +2161,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEFilteredVariable_Variable()
+  public EReference getEFilteredVariable_Variable_reference_or_string()
   {
     return (EReference)eFilteredVariableEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEFilteredVariable_Index()
-  {
-    return (EAttribute)eFilteredVariableEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEFilteredVariable_Tail()
-  {
-    return (EReference)eFilteredVariableEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEFilteredVariable_Filter_commands()
-  {
-    return (EAttribute)eFilteredVariableEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -2534,18 +2602,25 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eValuePassedEClass = createEClass(EVALUE_PASSED);
 
     eValueEClass = createEClass(EVALUE);
-    createEAttribute(eValueEClass, EVALUE__VALUE_STRING);
-    createEAttribute(eValueEClass, EVALUE__VALUE_INT);
+
+    eSimpleValueEClass = createEClass(ESIMPLE_VALUE);
+    createEAttribute(eSimpleValueEClass, ESIMPLE_VALUE__VALUE_STRING);
+    createEAttribute(eSimpleValueEClass, ESIMPLE_VALUE__VALUE_INT);
 
     eItemEClass = createEClass(EITEM);
     createEAttribute(eItemEClass, EITEM__TAIL);
     createEAttribute(eItemEClass, EITEM__FILTER_COMMANDS);
 
+    eDeclaredVariableReferenceEClass = createEClass(EDECLARED_VARIABLE_REFERENCE);
+    createEReference(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__VARIABLE);
+    createEAttribute(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__INDEX);
+    createEReference(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__TAIL);
+
+    eDeclaredVariableReferenceOrStringEClass = createEClass(EDECLARED_VARIABLE_REFERENCE_OR_STRING);
+    createEAttribute(eDeclaredVariableReferenceOrStringEClass, EDECLARED_VARIABLE_REFERENCE_OR_STRING__STRING);
+
     eFilteredVariableEClass = createEClass(EFILTERED_VARIABLE);
-    createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__VARIABLE);
-    createEAttribute(eFilteredVariableEClass, EFILTERED_VARIABLE__INDEX);
-    createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__TAIL);
-    createEAttribute(eFilteredVariableEClass, EFILTERED_VARIABLE__FILTER_COMMANDS);
+    createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__VARIABLE_REFERENCE_OR_STRING);
 
     eFilteredVariableOrStringEClass = createEClass(EFILTERED_VARIABLE_OR_STRING);
     createEAttribute(eFilteredVariableOrStringEClass, EFILTERED_VARIABLE_OR_STRING__STRING);
@@ -2628,7 +2703,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eNotifiedHandlerEClass.getESuperTypes().add(this.getENotifiable());
     eNotifiedTopicEClass.getESuperTypes().add(this.getENotifiable());
     eValueEClass.getESuperTypes().add(this.getEValuePassed());
+    eSimpleValueEClass.getESuperTypes().add(this.getEValue());
     eItemEClass.getESuperTypes().add(this.getEValuePassed());
+    eDeclaredVariableReferenceEClass.getESuperTypes().add(this.getEDeclaredVariableReferenceOrString());
     eFilteredVariableEClass.getESuperTypes().add(this.getELoopList());
     eFilteredVariableEClass.getESuperTypes().add(this.getEFilteredVariableOrString());
     eFilteredVariablesAndStringEClass.getESuperTypes().add(this.getEValue());
@@ -2815,18 +2892,25 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eValuePassedEClass, EValuePassed.class, "EValuePassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eValueEClass, EValue.class, "EValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEValue_Value_string(), ecorePackage.getEString(), "value_string", null, 0, 1, EValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEValue_Value_int(), ecorePackage.getEInt(), "value_int", null, 0, 1, EValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eSimpleValueEClass, ESimpleValue.class, "ESimpleValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getESimpleValue_Value_string(), ecorePackage.getEString(), "value_string", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getESimpleValue_Value_int(), ecorePackage.getEInt(), "value_int", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eItemEClass, EItem.class, "EItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEItem_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, EItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEItem_Filter_commands(), ecorePackage.getEString(), "filter_commands", null, 0, -1, EItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(eDeclaredVariableReferenceEClass, EDeclaredVariableReference.class, "EDeclaredVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEDeclaredVariableReference_Variable(), this.getEDeclaredVariable(), null, "variable", null, 0, 1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEDeclaredVariableReference_Index(), ecorePackage.getEInt(), "index", null, 0, 1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEDeclaredVariableReference_Tail(), this.getEDictionaryPairReference(), null, "tail", null, 0, -1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eDeclaredVariableReferenceOrStringEClass, EDeclaredVariableReferenceOrString.class, "EDeclaredVariableReferenceOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEDeclaredVariableReferenceOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EDeclaredVariableReferenceOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(eFilteredVariableEClass, EFilteredVariable.class, "EFilteredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEFilteredVariable_Variable(), this.getEDeclaredVariable(), null, "variable", null, 0, 1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEFilteredVariable_Index(), ecorePackage.getEInt(), "index", null, 0, 1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEFilteredVariable_Tail(), this.getEDictionaryPairReference(), null, "tail", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEFilteredVariable_Filter_commands(), ecorePackage.getEString(), "filter_commands", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFilteredVariable_Variable_reference_or_string(), this.getEDeclaredVariableReferenceOrString(), null, "variable_reference_or_string", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eFilteredVariableOrStringEClass, EFilteredVariableOrString.class, "EFilteredVariableOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEFilteredVariableOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EFilteredVariableOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

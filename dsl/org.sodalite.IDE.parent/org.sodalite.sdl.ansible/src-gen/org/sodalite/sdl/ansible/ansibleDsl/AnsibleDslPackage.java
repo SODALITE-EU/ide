@@ -2752,13 +2752,32 @@ public interface AnsibleDslPackage extends EPackage
   int EVALUE = 38;
 
   /**
+   * The number of structural features of the '<em>EValue</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVALUE_FEATURE_COUNT = EVALUE_PASSED_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl <em>ESimple Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESimpleValue()
+   * @generated
+   */
+  int ESIMPLE_VALUE = 39;
+
+  /**
    * The feature id for the '<em><b>Value string</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVALUE__VALUE_STRING = EVALUE_PASSED_FEATURE_COUNT + 0;
+  int ESIMPLE_VALUE__VALUE_STRING = EVALUE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Value int</b></em>' attribute.
@@ -2767,16 +2786,16 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EVALUE__VALUE_INT = EVALUE_PASSED_FEATURE_COUNT + 1;
+  int ESIMPLE_VALUE__VALUE_INT = EVALUE_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>EValue</em>' class.
+   * The number of structural features of the '<em>ESimple Value</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVALUE_FEATURE_COUNT = EVALUE_PASSED_FEATURE_COUNT + 2;
+  int ESIMPLE_VALUE_FEATURE_COUNT = EVALUE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl <em>EItem</em>}' class.
@@ -2786,7 +2805,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEItem()
    * @generated
    */
-  int EITEM = 39;
+  int EITEM = 40;
 
   /**
    * The feature id for the '<em><b>Tail</b></em>' attribute list.
@@ -2816,6 +2835,89 @@ public interface AnsibleDslPackage extends EPackage
   int EITEM_FEATURE_COUNT = EVALUE_PASSED_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceOrStringImpl <em>EDeclared Variable Reference Or String</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceOrStringImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariableReferenceOrString()
+   * @generated
+   */
+  int EDECLARED_VARIABLE_REFERENCE_OR_STRING = 42;
+
+  /**
+   * The feature id for the '<em><b>String</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE_OR_STRING__STRING = 0;
+
+  /**
+   * The number of structural features of the '<em>EDeclared Variable Reference Or String</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl <em>EDeclared Variable Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariableReference()
+   * @generated
+   */
+  int EDECLARED_VARIABLE_REFERENCE = 41;
+
+  /**
+   * The feature id for the '<em><b>String</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE__STRING = EDECLARED_VARIABLE_REFERENCE_OR_STRING__STRING;
+
+  /**
+   * The feature id for the '<em><b>Variable</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE__VARIABLE = EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE__INDEX = EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Tail</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE__TAIL = EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>EDeclared Variable Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE_FEATURE_COUNT = EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT + 3;
+
+  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl <em>EFiltered Variable</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2823,7 +2925,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariable()
    * @generated
    */
-  int EFILTERED_VARIABLE = 40;
+  int EFILTERED_VARIABLE = 43;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -2835,40 +2937,13 @@ public interface AnsibleDslPackage extends EPackage
   int EFILTERED_VARIABLE__STRING = ELOOP_LIST_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Variable</b></em>' reference.
+   * The feature id for the '<em><b>Variable reference or string</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EFILTERED_VARIABLE__VARIABLE = ELOOP_LIST_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFILTERED_VARIABLE__INDEX = ELOOP_LIST_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Tail</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFILTERED_VARIABLE__TAIL = ELOOP_LIST_FEATURE_COUNT + 3;
-
-  /**
-   * The feature id for the '<em><b>Filter commands</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFILTERED_VARIABLE__FILTER_COMMANDS = ELOOP_LIST_FEATURE_COUNT + 4;
+  int EFILTERED_VARIABLE__VARIABLE_REFERENCE_OR_STRING = ELOOP_LIST_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>EFiltered Variable</em>' class.
@@ -2877,7 +2952,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFILTERED_VARIABLE_FEATURE_COUNT = ELOOP_LIST_FEATURE_COUNT + 5;
+  int EFILTERED_VARIABLE_FEATURE_COUNT = ELOOP_LIST_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableOrStringImpl <em>EFiltered Variable Or String</em>}' class.
@@ -2887,7 +2962,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariableOrString()
    * @generated
    */
-  int EFILTERED_VARIABLE_OR_STRING = 41;
+  int EFILTERED_VARIABLE_OR_STRING = 44;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -2915,25 +2990,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariablesAndString()
    * @generated
    */
-  int EFILTERED_VARIABLES_AND_STRING = 42;
-
-  /**
-   * The feature id for the '<em><b>Value string</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFILTERED_VARIABLES_AND_STRING__VALUE_STRING = EVALUE__VALUE_STRING;
-
-  /**
-   * The feature id for the '<em><b>Value int</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFILTERED_VARIABLES_AND_STRING__VALUE_INT = EVALUE__VALUE_INT;
+  int EFILTERED_VARIABLES_AND_STRING = 45;
 
   /**
    * The feature id for the '<em><b>Variable and string</b></em>' containment reference list.
@@ -2961,7 +3018,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairReference()
    * @generated
    */
-  int EDICTIONARY_PAIR_REFERENCE = 43;
+  int EDICTIONARY_PAIR_REFERENCE = 46;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -2998,7 +3055,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariable()
    * @generated
    */
-  int EDECLARED_VARIABLE = 44;
+  int EDECLARED_VARIABLE = 47;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3026,7 +3083,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclaration()
    * @generated
    */
-  int EVARIABLE_DECLARATION = 45;
+  int EVARIABLE_DECLARATION = 48;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3063,7 +3120,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariable()
    * @generated
    */
-  int EREGISTER_VARIABLE = 46;
+  int EREGISTER_VARIABLE = 49;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3091,7 +3148,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFactGathered()
    * @generated
    */
-  int EFACT_GATHERED = 47;
+  int EFACT_GATHERED = 50;
 
   /**
    * The feature id for the '<em><b>Tail</b></em>' attribute list.
@@ -3119,25 +3176,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 48;
-
-  /**
-   * The feature id for the '<em><b>Value string</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDICTIONARY__VALUE_STRING = EVALUE__VALUE_STRING;
-
-  /**
-   * The feature id for the '<em><b>Value int</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDICTIONARY__VALUE_INT = EVALUE__VALUE_INT;
+  int EDICTIONARY = 51;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -3165,7 +3204,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 49;
+  int EDICTIONARY_PAIR = 52;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3202,25 +3241,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 50;
-
-  /**
-   * The feature id for the '<em><b>Value string</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELIST__VALUE_STRING = ELOOP_LIST_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Value int</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELIST__VALUE_INT = ELOOP_LIST_FEATURE_COUNT + 1;
+  int ELIST = 53;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -3229,7 +3250,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST__ELEMENTS = ELOOP_LIST_FEATURE_COUNT + 2;
+  int ELIST__ELEMENTS = ELOOP_LIST_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>EList</em>' class.
@@ -3238,7 +3259,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST_FEATURE_COUNT = ELOOP_LIST_FEATURE_COUNT + 3;
+  int ELIST_FEATURE_COUNT = ELOOP_LIST_FEATURE_COUNT + 1;
 
 
   /**
@@ -4699,26 +4720,36 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEValue();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EValue#getValue_string <em>Value string</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue <em>ESimple Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ESimple Value</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue
+   * @generated
+   */
+  EClass getESimpleValue();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_string <em>Value string</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Value string</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EValue#getValue_string()
-   * @see #getEValue()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_string()
+   * @see #getESimpleValue()
    * @generated
    */
-  EAttribute getEValue_Value_string();
+  EAttribute getESimpleValue_Value_string();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EValue#getValue_int <em>Value int</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_int <em>Value int</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Value int</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EValue#getValue_int()
-   * @see #getEValue()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_int()
+   * @see #getESimpleValue()
    * @generated
    */
-  EAttribute getEValue_Value_int();
+  EAttribute getESimpleValue_Value_int();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EItem <em>EItem</em>}'.
@@ -4753,6 +4784,70 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getEItem_Filter_commands();
 
   /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference <em>EDeclared Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EDeclared Variable Reference</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference
+   * @generated
+   */
+  EClass getEDeclaredVariableReference();
+
+  /**
+   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable <em>Variable</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Variable</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable()
+   * @see #getEDeclaredVariableReference()
+   * @generated
+   */
+  EReference getEDeclaredVariableReference_Variable();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getIndex <em>Index</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Index</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getIndex()
+   * @see #getEDeclaredVariableReference()
+   * @generated
+   */
+  EAttribute getEDeclaredVariableReference_Index();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getTail <em>Tail</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tail</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getTail()
+   * @see #getEDeclaredVariableReference()
+   * @generated
+   */
+  EReference getEDeclaredVariableReference_Tail();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString <em>EDeclared Variable Reference Or String</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EDeclared Variable Reference Or String</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString
+   * @generated
+   */
+  EClass getEDeclaredVariableReferenceOrString();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString#getString <em>String</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>String</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString#getString()
+   * @see #getEDeclaredVariableReferenceOrString()
+   * @generated
+   */
+  EAttribute getEDeclaredVariableReferenceOrString_String();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable <em>EFiltered Variable</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4763,48 +4858,15 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEFilteredVariable();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getVariable <em>Variable</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getVariable_reference_or_string <em>Variable reference or string</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Variable</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getVariable()
+   * @return the meta object for the containment reference list '<em>Variable reference or string</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getVariable_reference_or_string()
    * @see #getEFilteredVariable()
    * @generated
    */
-  EReference getEFilteredVariable_Variable();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getIndex <em>Index</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Index</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getIndex()
-   * @see #getEFilteredVariable()
-   * @generated
-   */
-  EAttribute getEFilteredVariable_Index();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Tail</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getTail()
-   * @see #getEFilteredVariable()
-   * @generated
-   */
-  EReference getEFilteredVariable_Tail();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getFilter_commands <em>Filter commands</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Filter commands</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getFilter_commands()
-   * @see #getEFilteredVariable()
-   * @generated
-   */
-  EAttribute getEFilteredVariable_Filter_commands();
+  EReference getEFilteredVariable_Variable_reference_or_string();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString <em>EFiltered Variable Or String</em>}'.
@@ -6217,12 +6279,22 @@ public interface AnsibleDslPackage extends EPackage
     EClass EVALUE = eINSTANCE.getEValue();
 
     /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl <em>ESimple Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESimpleValue()
+     * @generated
+     */
+    EClass ESIMPLE_VALUE = eINSTANCE.getESimpleValue();
+
+    /**
      * The meta object literal for the '<em><b>Value string</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EVALUE__VALUE_STRING = eINSTANCE.getEValue_Value_string();
+    EAttribute ESIMPLE_VALUE__VALUE_STRING = eINSTANCE.getESimpleValue_Value_string();
 
     /**
      * The meta object literal for the '<em><b>Value int</b></em>' attribute feature.
@@ -6230,7 +6302,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EVALUE__VALUE_INT = eINSTANCE.getEValue_Value_int();
+    EAttribute ESIMPLE_VALUE__VALUE_INT = eINSTANCE.getESimpleValue_Value_int();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl <em>EItem</em>}' class.
@@ -6259,6 +6331,58 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute EITEM__FILTER_COMMANDS = eINSTANCE.getEItem_Filter_commands();
 
     /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl <em>EDeclared Variable Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariableReference()
+     * @generated
+     */
+    EClass EDECLARED_VARIABLE_REFERENCE = eINSTANCE.getEDeclaredVariableReference();
+
+    /**
+     * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EDECLARED_VARIABLE_REFERENCE__VARIABLE = eINSTANCE.getEDeclaredVariableReference_Variable();
+
+    /**
+     * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EDECLARED_VARIABLE_REFERENCE__INDEX = eINSTANCE.getEDeclaredVariableReference_Index();
+
+    /**
+     * The meta object literal for the '<em><b>Tail</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EDECLARED_VARIABLE_REFERENCE__TAIL = eINSTANCE.getEDeclaredVariableReference_Tail();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceOrStringImpl <em>EDeclared Variable Reference Or String</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceOrStringImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariableReferenceOrString()
+     * @generated
+     */
+    EClass EDECLARED_VARIABLE_REFERENCE_OR_STRING = eINSTANCE.getEDeclaredVariableReferenceOrString();
+
+    /**
+     * The meta object literal for the '<em><b>String</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EDECLARED_VARIABLE_REFERENCE_OR_STRING__STRING = eINSTANCE.getEDeclaredVariableReferenceOrString_String();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl <em>EFiltered Variable</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6269,36 +6393,12 @@ public interface AnsibleDslPackage extends EPackage
     EClass EFILTERED_VARIABLE = eINSTANCE.getEFilteredVariable();
 
     /**
-     * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Variable reference or string</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EFILTERED_VARIABLE__VARIABLE = eINSTANCE.getEFilteredVariable_Variable();
-
-    /**
-     * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EFILTERED_VARIABLE__INDEX = eINSTANCE.getEFilteredVariable_Index();
-
-    /**
-     * The meta object literal for the '<em><b>Tail</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EFILTERED_VARIABLE__TAIL = eINSTANCE.getEFilteredVariable_Tail();
-
-    /**
-     * The meta object literal for the '<em><b>Filter commands</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EFILTERED_VARIABLE__FILTER_COMMANDS = eINSTANCE.getEFilteredVariable_Filter_commands();
+    EReference EFILTERED_VARIABLE__VARIABLE_REFERENCE_OR_STRING = eINSTANCE.getEFilteredVariable_Variable_reference_or_string();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableOrStringImpl <em>EFiltered Variable Or String</em>}' class.

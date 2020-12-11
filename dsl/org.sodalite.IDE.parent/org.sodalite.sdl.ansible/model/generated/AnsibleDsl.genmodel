@@ -169,19 +169,25 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENotifiedTopic/name"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EValuePassed"/>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EValue">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EValue/value_string"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EValue/value_int"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EValue"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ESimpleValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValue/value_string"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValue/value_int"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EItem/tail"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EItem/filter_commands"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EDeclaredVariableReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDeclaredVariableReference/variable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDeclaredVariableReference/index"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDeclaredVariableReference/tail"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EDeclaredVariableReferenceOrString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDeclaredVariableReferenceOrString/string"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFilteredVariable">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredVariable/variable"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFilteredVariable/index"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredVariable/tail"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFilteredVariable/filter_commands"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredVariable/variable_reference_or_string"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFilteredVariableOrString">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFilteredVariableOrString/string"/>

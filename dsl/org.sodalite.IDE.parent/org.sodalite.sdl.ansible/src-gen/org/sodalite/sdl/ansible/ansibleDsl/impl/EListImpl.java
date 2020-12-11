@@ -5,13 +5,10 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -19,7 +16,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EList;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
-import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,8 +25,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListImpl#getValue_string <em>Value string</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListImpl#getValue_int <em>Value int</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
@@ -38,46 +32,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
  */
 public class EListImpl extends ELoopListImpl implements EList
 {
-  /**
-   * The default value of the '{@link #getValue_string() <em>Value string</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue_string()
-   * @generated
-   * @ordered
-   */
-  protected static final String VALUE_STRING_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getValue_string() <em>Value string</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue_string()
-   * @generated
-   * @ordered
-   */
-  protected String value_string = VALUE_STRING_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getValue_int() <em>Value int</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue_int()
-   * @generated
-   * @ordered
-   */
-  protected static final int VALUE_INT_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getValue_int() <em>Value int</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue_int()
-   * @generated
-   * @ordered
-   */
-  protected int value_int = VALUE_INT_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -107,56 +61,6 @@ public class EListImpl extends ELoopListImpl implements EList
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.ELIST;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getValue_string()
-  {
-    return value_string;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setValue_string(String newValue_string)
-  {
-    String oldValue_string = value_string;
-    value_string = newValue_string;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELIST__VALUE_STRING, oldValue_string, value_string));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int getValue_int()
-  {
-    return value_int;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setValue_int(int newValue_int)
-  {
-    int oldValue_int = value_int;
-    value_int = newValue_int;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELIST__VALUE_INT, oldValue_int, value_int));
   }
 
   /**
@@ -200,10 +104,6 @@ public class EListImpl extends ELoopListImpl implements EList
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ELIST__VALUE_STRING:
-        return getValue_string();
-      case AnsibleDslPackage.ELIST__VALUE_INT:
-        return getValue_int();
       case AnsibleDslPackage.ELIST__ELEMENTS:
         return getElements();
     }
@@ -221,12 +121,6 @@ public class EListImpl extends ELoopListImpl implements EList
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ELIST__VALUE_STRING:
-        setValue_string((String)newValue);
-        return;
-      case AnsibleDslPackage.ELIST__VALUE_INT:
-        setValue_int((Integer)newValue);
-        return;
       case AnsibleDslPackage.ELIST__ELEMENTS:
         getElements().clear();
         getElements().addAll((Collection<? extends EValue>)newValue);
@@ -245,12 +139,6 @@ public class EListImpl extends ELoopListImpl implements EList
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ELIST__VALUE_STRING:
-        setValue_string(VALUE_STRING_EDEFAULT);
-        return;
-      case AnsibleDslPackage.ELIST__VALUE_INT:
-        setValue_int(VALUE_INT_EDEFAULT);
-        return;
       case AnsibleDslPackage.ELIST__ELEMENTS:
         getElements().clear();
         return;
@@ -268,87 +156,10 @@ public class EListImpl extends ELoopListImpl implements EList
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ELIST__VALUE_STRING:
-        return VALUE_STRING_EDEFAULT == null ? value_string != null : !VALUE_STRING_EDEFAULT.equals(value_string);
-      case AnsibleDslPackage.ELIST__VALUE_INT:
-        return value_int != VALUE_INT_EDEFAULT;
       case AnsibleDslPackage.ELIST__ELEMENTS:
         return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == EValuePassed.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == EValue.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case AnsibleDslPackage.ELIST__VALUE_STRING: return AnsibleDslPackage.EVALUE__VALUE_STRING;
-        case AnsibleDslPackage.ELIST__VALUE_INT: return AnsibleDslPackage.EVALUE__VALUE_INT;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == EValuePassed.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == EValue.class)
-    {
-      switch (baseFeatureID)
-      {
-        case AnsibleDslPackage.EVALUE__VALUE_STRING: return AnsibleDslPackage.ELIST__VALUE_STRING;
-        case AnsibleDslPackage.EVALUE__VALUE_INT: return AnsibleDslPackage.ELIST__VALUE_INT;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (value_string: ");
-    result.append(value_string);
-    result.append(", value_int: ");
-    result.append(value_int);
-    result.append(')');
-    return result.toString();
   }
 
 } //EListImpl

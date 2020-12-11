@@ -379,7 +379,11 @@ EValuePassed:
 ;
 
 EValue:
-	EDictionary | EList | EFilteredVariablesAndString | value_string=BOOLEAN | value_string=NULL | value_int=INT
+	EDictionary | EList | EFilteredVariablesAndString | ESimpleValue
+;
+
+ESimpleValue:
+	value_string=BOOLEAN | value_string=NULL | value_int=INT
 ;
 
 EItem:
@@ -387,8 +391,16 @@ EItem:
 	'{{' 'item' ( "." tail+=ID)* ('|' filter_commands+=STRING)* '}}'
 ;
 
+EDeclaredVariableReference:
+	variable=[EDeclaredVariable|ID]  ('[' index=INT ']')? ( "." tail+=EDictionaryPairReference)* 
+;
+
+EDeclaredVariableReferenceOrString:
+	EDeclaredVariableReference | string=STRING
+;
+
 EFilteredVariable:
-	'{{' variable=[EDeclaredVariable|ID]  ('[' index=INT ']')? ( "." tail+=EDictionaryPairReference)* ('|' filter_commands+=STRING)* '}}'
+	'{{' (variable_reference_or_string+=EDeclaredVariableReferenceOrString)+ '}}'
 ;
 
 EFilteredVariableOrString:
@@ -439,3 +451,18 @@ terminal BOOLEAN:
 terminal NULL:
 	'Null'
 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

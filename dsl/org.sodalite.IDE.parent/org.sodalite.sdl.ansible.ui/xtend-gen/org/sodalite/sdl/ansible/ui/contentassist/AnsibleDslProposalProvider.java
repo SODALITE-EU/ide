@@ -16,8 +16,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ui.contentassist.AbstractAnsibleDslProposalProvider;
@@ -40,7 +40,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
-  public void completeEFilteredVariable_Variable(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeEDeclaredVariableReference_Variable(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
     if ((rootPlay != null)) {
       final List<EDeclaredVariableImpl> candidates = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootPlay, EDeclaredVariableImpl.class);
@@ -52,8 +52,8 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void completeEDictionaryPairReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EFilteredVariableImpl filteredVariable = EcoreUtil2.<EFilteredVariableImpl>getContainerOfType(model, EFilteredVariableImpl.class);
-    final EList<EDictionaryPairReference> tail = filteredVariable.getTail();
+    final EDeclaredVariableReferenceImpl declaredVariableReference = EcoreUtil2.<EDeclaredVariableReferenceImpl>getContainerOfType(model, EDeclaredVariableReferenceImpl.class);
+    final EList<EDictionaryPairReference> tail = declaredVariableReference.getTail();
     int _size = tail.size();
     final int index = (_size - 1);
     if ((index > 0)) {
@@ -67,12 +67,12 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
         }
       }
     } else {
-      EDeclaredVariable _variable = filteredVariable.getVariable();
+      EDeclaredVariable _variable = declaredVariableReference.getVariable();
       if ((_variable instanceof EVariableDeclarationImpl)) {
-        EDeclaredVariable _variable_1 = filteredVariable.getVariable();
+        EDeclaredVariable _variable_1 = declaredVariableReference.getVariable();
         EValue _value_passed = ((EVariableDeclarationImpl) _variable_1).getValue_passed();
         if ((_value_passed instanceof EDictionaryImpl)) {
-          EDeclaredVariable _variable_2 = filteredVariable.getVariable();
+          EDeclaredVariable _variable_2 = declaredVariableReference.getVariable();
           EValue _value_passed_1 = ((EVariableDeclarationImpl) _variable_2).getValue_passed();
           EList<EDictionaryPair> _dictionary_pairs_1 = ((EDictionaryImpl) _value_passed_1).getDictionary_pairs();
           for (final EDictionaryPair dictionaryPair_1 : _dictionary_pairs_1) {

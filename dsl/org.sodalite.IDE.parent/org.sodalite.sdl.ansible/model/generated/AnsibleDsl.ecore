@@ -216,7 +216,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassed"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EValue" eSuperTypes="#//EValuePassed">
+  <eClassifiers xsi:type="ecore:EClass" name="EValue" eSuperTypes="#//EValuePassed"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ESimpleValue" eSuperTypes="#//EValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value_string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value_int" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
@@ -226,13 +227,18 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter_commands" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EFilteredVariable" eSuperTypes="#//ELoopList #//EFilteredVariableOrString">
+  <eClassifiers xsi:type="ecore:EClass" name="EDeclaredVariableReference" eSuperTypes="#//EDeclaredVariableReferenceOrString">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//EDeclaredVariable"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//EDictionaryPairReference"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter_commands" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EDeclaredVariableReferenceOrString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EFilteredVariable" eSuperTypes="#//ELoopList #//EFilteredVariableOrString">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable_reference_or_string"
+        upperBound="-1" eType="#//EDeclaredVariableReferenceOrString" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFilteredVariableOrString">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

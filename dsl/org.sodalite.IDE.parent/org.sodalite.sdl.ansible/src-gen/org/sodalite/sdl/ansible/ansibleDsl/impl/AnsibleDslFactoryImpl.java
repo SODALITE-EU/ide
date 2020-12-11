@@ -104,7 +104,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ENOTIFIED_TOPIC: return createENotifiedTopic();
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
       case AnsibleDslPackage.EVALUE: return createEValue();
+      case AnsibleDslPackage.ESIMPLE_VALUE: return createESimpleValue();
       case AnsibleDslPackage.EITEM: return createEItem();
+      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE: return createEDeclaredVariableReference();
+      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE_OR_STRING: return createEDeclaredVariableReferenceOrString();
       case AnsibleDslPackage.EFILTERED_VARIABLE: return createEFilteredVariable();
       case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING: return createEFilteredVariableOrString();
       case AnsibleDslPackage.EFILTERED_VARIABLES_AND_STRING: return createEFilteredVariablesAndString();
@@ -595,10 +598,46 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
+  public ESimpleValue createESimpleValue()
+  {
+    ESimpleValueImpl eSimpleValue = new ESimpleValueImpl();
+    return eSimpleValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EItem createEItem()
   {
     EItemImpl eItem = new EItemImpl();
     return eItem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDeclaredVariableReference createEDeclaredVariableReference()
+  {
+    EDeclaredVariableReferenceImpl eDeclaredVariableReference = new EDeclaredVariableReferenceImpl();
+    return eDeclaredVariableReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDeclaredVariableReferenceOrString createEDeclaredVariableReferenceOrString()
+  {
+    EDeclaredVariableReferenceOrStringImpl eDeclaredVariableReferenceOrString = new EDeclaredVariableReferenceOrStringImpl();
+    return eDeclaredVariableReferenceOrString;
   }
 
   /**

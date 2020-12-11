@@ -375,6 +375,15 @@ public interface AnsibleDslFactory extends EFactory
   EValue createEValue();
 
   /**
+   * Returns a new object of class '<em>ESimple Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ESimple Value</em>'.
+   * @generated
+   */
+  ESimpleValue createESimpleValue();
+
+  /**
    * Returns a new object of class '<em>EItem</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -382,6 +391,24 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EItem createEItem();
+
+  /**
+   * Returns a new object of class '<em>EDeclared Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDeclared Variable Reference</em>'.
+   * @generated
+   */
+  EDeclaredVariableReference createEDeclaredVariableReference();
+
+  /**
+   * Returns a new object of class '<em>EDeclared Variable Reference Or String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDeclared Variable Reference Or String</em>'.
+   * @generated
+   */
+  EDeclaredVariableReferenceOrString createEDeclaredVariableReferenceOrString();
 
   /**
    * Returns a new object of class '<em>EFiltered Variable</em>'.

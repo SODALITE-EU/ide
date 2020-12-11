@@ -373,11 +373,35 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.ESIMPLE_VALUE:
+      {
+        ESimpleValue eSimpleValue = (ESimpleValue)theEObject;
+        T result = caseESimpleValue(eSimpleValue);
+        if (result == null) result = caseEValue(eSimpleValue);
+        if (result == null) result = caseEValuePassed(eSimpleValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.EITEM:
       {
         EItem eItem = (EItem)theEObject;
         T result = caseEItem(eItem);
         if (result == null) result = caseEValuePassed(eItem);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE:
+      {
+        EDeclaredVariableReference eDeclaredVariableReference = (EDeclaredVariableReference)theEObject;
+        T result = caseEDeclaredVariableReference(eDeclaredVariableReference);
+        if (result == null) result = caseEDeclaredVariableReferenceOrString(eDeclaredVariableReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE_OR_STRING:
+      {
+        EDeclaredVariableReferenceOrString eDeclaredVariableReferenceOrString = (EDeclaredVariableReferenceOrString)theEObject;
+        T result = caseEDeclaredVariableReferenceOrString(eDeclaredVariableReferenceOrString);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1100,6 +1124,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>ESimple Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ESimple Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseESimpleValue(ESimpleValue object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EItem</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1111,6 +1151,38 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEItem(EItem object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EDeclared Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EDeclared Variable Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEDeclaredVariableReference(EDeclaredVariableReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EDeclared Variable Reference Or String</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EDeclared Variable Reference Or String</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEDeclaredVariableReferenceOrString(EDeclaredVariableReferenceOrString object)
   {
     return null;
   }

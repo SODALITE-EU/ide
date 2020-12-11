@@ -35,6 +35,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.EItem
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue
+import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference
 
 /**
  * Generates code from your model files on save.
@@ -445,11 +447,11 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileConditionalExpression(EConditionalExpression conditionalExpression){
 		if (conditionalExpression.left_term !== null && conditionalExpression.equality_term !== null && conditionalExpression.right_term !== null){
-			return compileValuePassed(conditionalExpression.left_term).concat(" ").concat(conditionalExpression.equality_term).concat(" ").concat(compileValuePassed(conditionalExpression.right_term))
+			return compileValuePassedInFormula(conditionalExpression.left_term).concat(" ").concat(conditionalExpression.equality_term).concat(" ").concat(compileValuePassedInFormula(conditionalExpression.right_term))
 		}
 		else if (conditionalExpression.left_term !== null && conditionalExpression.status !== null){
-			if (conditionalExpression.is_not !== null) return compileValuePassed(conditionalExpression.left_term).concat(" is not ").concat(conditionalExpression.status)
-			else return compileValuePassed(conditionalExpression.left_term).concat(" is ").concat(conditionalExpression.status)
+			if (conditionalExpression.is_not !== null) return compileValuePassedInFormula(conditionalExpression.left_term).concat(" is not ").concat(conditionalExpression.status)
+			else return compileValuePassedInFormula(conditionalExpression.left_term).concat(" is ").concat(conditionalExpression.status)
 		}
 		else if (conditionalExpression.formula !== null) return compileConditionalFormula(conditionalExpression.formula)
 		else if (conditionalExpression.is_true !== null) return conditionalExpression.is_true
@@ -482,15 +484,77 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			return factString
 		}
 		else if (valuePassed instanceof EItem){
-			var itemString = "{{ item"
+			var itemString = "\"{{ item"
 			for (tailElement : valuePassed.tail) {
 				itemString = itemString.concat(".").concat(tailElement)
 			}
 			for (filterCommand : valuePassed.filter_commands) {
 				itemString = itemString.concat(" | ").concat(filterCommand)
 			}
-			itemString = itemString.concat(" }}")
+			itemString = itemString.concat(" }}\"")
 			return itemString
+		}
+	}
+	
+	def compileValuePassedInFormula(EValuePassed valuePassed){
+		if (valuePassed instanceof EValue) return compileValueInFormula(valuePassed).toString()
+		else if (valuePassed instanceof EFactGathered){
+			var factString = "ansible_facts"
+			for (field : valuePassed.tail){
+				factString = factString.concat(".").concat("field")
+			}
+			return factString
+		}
+		else if (valuePassed instanceof EItem){
+			var itemString = "item"
+			for (tailElement : valuePassed.tail) {
+				itemString = itemString.concat(".").concat(tailElement)
+			}
+			for (filterCommand : valuePassed.filter_commands) {
+				itemString = itemString.concat(" | ").concat(filterCommand)
+			}
+			return itemString
+		}
+	}
+	
+	def compileValueInFormula(EValue value){
+		if (value instanceof EDictionary){
+			var dictionaryString = '{'
+			for (dictionary_pair : value.dictionary_pairs){
+				dictionaryString = dictionaryString.concat(dictionary_pair.name).concat(': ').concat(compileValue(dictionary_pair.value).toString()).concat(', ')
+			}
+			dictionaryString = dictionaryString.substring(0, dictionaryString.length() - 2)
+			dictionaryString = dictionaryString.concat('}')
+			return dictionaryString
+		}
+		else if (value instanceof EList) return compileList(value)
+		else if (value instanceof EFilteredVariablesAndString){
+			var variablesAndString = ""
+			for (variable_or_string : value.variable_and_string){
+				if (variable_or_string instanceof EFilteredVariable){
+					for (variable_reference_or_string : variable_or_string.variable_reference_or_string){
+						if (variable_reference_or_string instanceof EDeclaredVariableReference){
+							variablesAndString = variablesAndString.concat(variable_reference_or_string.variable.name)
+							if (variable_reference_or_string.index !== -150) variablesAndString = variablesAndString.concat("[").concat(variable_reference_or_string.index.toString()).concat("]")
+							for (dictionaryPairReference : variable_reference_or_string.tail){
+								variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.name.name)
+								if (dictionaryPairReference.index !== -150) variablesAndString = variablesAndString.concat("[").concat(dictionaryPairReference.index.toString()).concat("]")
+							}
+						}
+						else {
+							variablesAndString = variablesAndString.concat(variable_reference_or_string.string)
+						}
+					}
+				}
+				else {
+					variablesAndString = variablesAndString.concat("\"").concat(variable_or_string.string).concat("\"")
+				}
+			}
+			return variablesAndString
+		}
+		else if (value instanceof ESimpleValue){
+			if (value.value_string !== null) return value.value_string
+			else return value.value_int
 		}
 	}
 	
@@ -514,15 +578,22 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			var variablesAndString = "\""
 			for (variable_or_string : value.variable_and_string){
 				if (variable_or_string instanceof EFilteredVariable){
-					variablesAndString = variablesAndString.concat("{{ ".concat(variable_or_string.variable.name))
-					if (variable_or_string.index !== -150) variablesAndString = variablesAndString.concat("[").concat(variable_or_string.index.toString()).concat("]")
-					for (dictionaryPairReference : variable_or_string.tail){
-						variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.name.name)
-						if (dictionaryPairReference.index !== -150) variablesAndString = variablesAndString.concat("[").concat(dictionaryPairReference.index.toString()).concat("]")
+					variablesAndString = variablesAndString.concat("{{ ")
+					
+					for (variable_reference_or_string : variable_or_string.variable_reference_or_string){					
+						if (variable_reference_or_string instanceof EDeclaredVariableReference){
+							variablesAndString = variablesAndString.concat(variable_reference_or_string.variable.name)
+							if (variable_reference_or_string.index !== -150) variablesAndString = variablesAndString.concat("[").concat(variable_reference_or_string.index.toString()).concat("]")
+							for (dictionaryPairReference : variable_reference_or_string.tail){
+								variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.name.name)
+								if (dictionaryPairReference.index !== -150) variablesAndString = variablesAndString.concat("[").concat(dictionaryPairReference.index.toString()).concat("]")
+							}
+						}
+						else {
+							variablesAndString = variablesAndString.concat(variable_reference_or_string.string)
+						}	
 					}
-					for (filterCommand : variable_or_string.filter_commands){
-						variablesAndString = variablesAndString.concat(" | ").concat(filterCommand)
-					}
+					
 					variablesAndString = variablesAndString.concat(" }}")
 				}
 				else {
@@ -531,8 +602,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			}
 			return variablesAndString.concat("\"")
 		}
-		else if (value.value_string !== null) return value.value_string
-		else return value.value_int
+		else if (value instanceof ESimpleValue){
+			if (value.value_string !== null) return value.value_string
+			else return value.value_int
+		}
 	}
 	
 	def compileVariableDeclarations(EBase base){

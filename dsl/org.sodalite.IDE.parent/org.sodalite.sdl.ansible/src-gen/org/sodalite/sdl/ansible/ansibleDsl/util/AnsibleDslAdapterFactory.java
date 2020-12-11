@@ -271,9 +271,24 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEValueAdapter();
       }
       @Override
+      public Adapter caseESimpleValue(ESimpleValue object)
+      {
+        return createESimpleValueAdapter();
+      }
+      @Override
       public Adapter caseEItem(EItem object)
       {
         return createEItemAdapter();
+      }
+      @Override
+      public Adapter caseEDeclaredVariableReference(EDeclaredVariableReference object)
+      {
+        return createEDeclaredVariableReferenceAdapter();
+      }
+      @Override
+      public Adapter caseEDeclaredVariableReferenceOrString(EDeclaredVariableReferenceOrString object)
+      {
+        return createEDeclaredVariableReferenceOrStringAdapter();
       }
       @Override
       public Adapter caseEFilteredVariable(EFilteredVariable object)
@@ -938,6 +953,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue <em>ESimple Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue
+   * @generated
+   */
+  public Adapter createESimpleValueAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EItem <em>EItem</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -948,6 +978,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEItemAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference <em>EDeclared Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference
+   * @generated
+   */
+  public Adapter createEDeclaredVariableReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString <em>EDeclared Variable Reference Or String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString
+   * @generated
+   */
+  public Adapter createEDeclaredVariableReferenceOrStringAdapter()
   {
     return null;
   }

@@ -5660,20 +5660,47 @@ ruleEValue returns [EObject current=null]
 			afterParserOrEnumRuleCall();
 		}
 		    |
+		{
+			newCompositeNode(grammarAccess.getEValueAccess().getESimpleValueParserRuleCall_3());
+		}
+		this_ESimpleValue_3=ruleESimpleValue
+		{
+			$current = $this_ESimpleValue_3.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleESimpleValue
+entryRuleESimpleValue returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getESimpleValueRule()); }
+	iv_ruleESimpleValue=ruleESimpleValue
+	{ $current=$iv_ruleESimpleValue.current; }
+	EOF;
+
+// Rule ESimpleValue
+ruleESimpleValue returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
 		(
 			(
-				lv_value_string_3_0=RULE_BOOLEAN
+				lv_value_string_0_0=RULE_BOOLEAN
 				{
-					newLeafNode(lv_value_string_3_0, grammarAccess.getEValueAccess().getValue_stringBOOLEANTerminalRuleCall_3_0());
+					newLeafNode(lv_value_string_0_0, grammarAccess.getESimpleValueAccess().getValue_stringBOOLEANTerminalRuleCall_0_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEValueRule());
+						$current = createModelElement(grammarAccess.getESimpleValueRule());
 					}
 					setWithLastConsumed(
 						$current,
 						"value_string",
-						lv_value_string_3_0,
+						lv_value_string_0_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
 				}
 			)
@@ -5681,18 +5708,18 @@ ruleEValue returns [EObject current=null]
 		    |
 		(
 			(
-				lv_value_string_4_0=RULE_NULL
+				lv_value_string_1_0=RULE_NULL
 				{
-					newLeafNode(lv_value_string_4_0, grammarAccess.getEValueAccess().getValue_stringNULLTerminalRuleCall_4_0());
+					newLeafNode(lv_value_string_1_0, grammarAccess.getESimpleValueAccess().getValue_stringNULLTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEValueRule());
+						$current = createModelElement(grammarAccess.getESimpleValueRule());
 					}
 					setWithLastConsumed(
 						$current,
 						"value_string",
-						lv_value_string_4_0,
+						lv_value_string_1_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.NULL");
 				}
 			)
@@ -5700,18 +5727,18 @@ ruleEValue returns [EObject current=null]
 		    |
 		(
 			(
-				lv_value_int_5_0=RULE_INT
+				lv_value_int_2_0=RULE_INT
 				{
-					newLeafNode(lv_value_int_5_0, grammarAccess.getEValueAccess().getValue_intINTTerminalRuleCall_5_0());
+					newLeafNode(lv_value_int_2_0, grammarAccess.getESimpleValueAccess().getValue_intINTTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEValueRule());
+						$current = createModelElement(grammarAccess.getESimpleValueRule());
 					}
 					setWithLastConsumed(
 						$current,
 						"value_int",
-						lv_value_int_5_0,
+						lv_value_int_2_0,
 						"org.eclipse.xtext.common.Terminals.INT");
 				}
 			)
@@ -5805,6 +5832,137 @@ ruleEItem returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleEDeclaredVariableReference
+entryRuleEDeclaredVariableReference returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEDeclaredVariableReferenceRule()); }
+	iv_ruleEDeclaredVariableReference=ruleEDeclaredVariableReference
+	{ $current=$iv_ruleEDeclaredVariableReference.current; }
+	EOF;
+
+// Rule EDeclaredVariableReference
+ruleEDeclaredVariableReference returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEDeclaredVariableReferenceRule());
+					}
+				}
+				otherlv_0=RULE_ID
+				{
+					newLeafNode(otherlv_0, grammarAccess.getEDeclaredVariableReferenceAccess().getVariableEDeclaredVariableCrossReference_0_0());
+				}
+			)
+		)
+		(
+			otherlv_1='['
+			{
+				newLeafNode(otherlv_1, grammarAccess.getEDeclaredVariableReferenceAccess().getLeftSquareBracketKeyword_1_0());
+			}
+			(
+				(
+					lv_index_2_0=RULE_INT
+					{
+						newLeafNode(lv_index_2_0, grammarAccess.getEDeclaredVariableReferenceAccess().getIndexINTTerminalRuleCall_1_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEDeclaredVariableReferenceRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"index",
+							lv_index_2_0,
+							"org.eclipse.xtext.common.Terminals.INT");
+					}
+				)
+			)
+			otherlv_3=']'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getEDeclaredVariableReferenceAccess().getRightSquareBracketKeyword_1_2());
+			}
+		)?
+		(
+			otherlv_4='.'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getEDeclaredVariableReferenceAccess().getFullStopKeyword_2_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEDeclaredVariableReferenceAccess().getTailEDictionaryPairReferenceParserRuleCall_2_1_0());
+					}
+					lv_tail_5_0=ruleEDictionaryPairReference
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEDeclaredVariableReferenceRule());
+						}
+						add(
+							$current,
+							"tail",
+							lv_tail_5_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EDictionaryPairReference");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+	)
+;
+
+// Entry rule entryRuleEDeclaredVariableReferenceOrString
+entryRuleEDeclaredVariableReferenceOrString returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEDeclaredVariableReferenceOrStringRule()); }
+	iv_ruleEDeclaredVariableReferenceOrString=ruleEDeclaredVariableReferenceOrString
+	{ $current=$iv_ruleEDeclaredVariableReferenceOrString.current; }
+	EOF;
+
+// Rule EDeclaredVariableReferenceOrString
+ruleEDeclaredVariableReferenceOrString returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getEDeclaredVariableReferenceOrStringAccess().getEDeclaredVariableReferenceParserRuleCall_0());
+		}
+		this_EDeclaredVariableReference_0=ruleEDeclaredVariableReference
+		{
+			$current = $this_EDeclaredVariableReference_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		(
+			(
+				lv_string_1_0=RULE_STRING
+				{
+					newLeafNode(lv_string_1_0, grammarAccess.getEDeclaredVariableReferenceOrStringAccess().getStringSTRINGTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEDeclaredVariableReferenceOrStringRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"string",
+						lv_string_1_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+	)
+;
+
 // Entry rule entryRuleEFilteredVariable
 entryRuleEFilteredVariable returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getEFilteredVariableRule()); }
@@ -5828,96 +5986,25 @@ ruleEFilteredVariable returns [EObject current=null]
 		(
 			(
 				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEFilteredVariableRule());
-					}
+					newCompositeNode(grammarAccess.getEFilteredVariableAccess().getVariable_reference_or_stringEDeclaredVariableReferenceOrStringParserRuleCall_1_0());
 				}
-				otherlv_1=RULE_ID
+				lv_variable_reference_or_string_1_0=ruleEDeclaredVariableReferenceOrString
 				{
-					newLeafNode(otherlv_1, grammarAccess.getEFilteredVariableAccess().getVariableEDeclaredVariableCrossReference_1_0());
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEFilteredVariableRule());
+					}
+					add(
+						$current,
+						"variable_reference_or_string",
+						lv_variable_reference_or_string_1_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EDeclaredVariableReferenceOrString");
+					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		(
-			otherlv_2='['
-			{
-				newLeafNode(otherlv_2, grammarAccess.getEFilteredVariableAccess().getLeftSquareBracketKeyword_2_0());
-			}
-			(
-				(
-					lv_index_3_0=RULE_INT
-					{
-						newLeafNode(lv_index_3_0, grammarAccess.getEFilteredVariableAccess().getIndexINTTerminalRuleCall_2_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getEFilteredVariableRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"index",
-							lv_index_3_0,
-							"org.eclipse.xtext.common.Terminals.INT");
-					}
-				)
-			)
-			otherlv_4=']'
-			{
-				newLeafNode(otherlv_4, grammarAccess.getEFilteredVariableAccess().getRightSquareBracketKeyword_2_2());
-			}
-		)?
-		(
-			otherlv_5='.'
-			{
-				newLeafNode(otherlv_5, grammarAccess.getEFilteredVariableAccess().getFullStopKeyword_3_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getEFilteredVariableAccess().getTailEDictionaryPairReferenceParserRuleCall_3_1_0());
-					}
-					lv_tail_6_0=ruleEDictionaryPairReference
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEFilteredVariableRule());
-						}
-						add(
-							$current,
-							"tail",
-							lv_tail_6_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EDictionaryPairReference");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)*
-		(
-			otherlv_7='|'
-			{
-				newLeafNode(otherlv_7, grammarAccess.getEFilteredVariableAccess().getVerticalLineKeyword_4_0());
-			}
-			(
-				(
-					lv_filter_commands_8_0=RULE_STRING
-					{
-						newLeafNode(lv_filter_commands_8_0, grammarAccess.getEFilteredVariableAccess().getFilter_commandsSTRINGTerminalRuleCall_4_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getEFilteredVariableRule());
-						}
-						addWithLastConsumed(
-							$current,
-							"filter_commands",
-							lv_filter_commands_8_0,
-							"org.eclipse.xtext.common.Terminals.STRING");
-					}
-				)
-			)
-		)*
-		otherlv_9='}}'
+		)+
+		otherlv_2='}}'
 		{
-			newLeafNode(otherlv_9, grammarAccess.getEFilteredVariableAccess().getRightCurlyBracketRightCurlyBracketKeyword_5());
+			newLeafNode(otherlv_2, grammarAccess.getEFilteredVariableAccess().getRightCurlyBracketRightCurlyBracketKeyword_2());
 		}
 	)
 ;
