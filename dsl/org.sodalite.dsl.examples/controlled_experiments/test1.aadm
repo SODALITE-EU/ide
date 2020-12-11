@@ -1,0 +1,180 @@
+module: test
+
+import: docker
+import: openstack
+
+inputs:
+	vm_name:
+		type: string
+	ssh-key-name:
+		type: string
+	image-name:
+		type: string
+	openstack-network-name:
+		type: string
+	security-groups:
+		type: string
+	flavor-name:
+		type: string
+	username:
+		type: string
+	docker-network:
+		type: string
+	docker-public-registry-url:
+		type: string
+
+node_templates:
+	security-rules-ml:
+		type: openstack/sodalite.nodes.OpenStack.SecurityRules
+		properties:
+			ports:
+				remote_access:
+					port_range_max: 22
+					remote_ip_prefix: '0.0.0.0/0'
+					port_range_min: 20
+					protocol: 'tcp'
+				ports_5000:
+					port_range_min: 5000
+					port_range_max: 5002
+					protocol: 'tcp'
+					remote_ip_prefix: '0.0.0.0/0'
+				group_name: 'sodalite-ml'
+				group_description: 'Sodalite ML security group'
+				
+	ml-vm:
+		type: sodalite.nodes.OpenStack.VM
+		properties:
+			name:	get_input: vm_name
+			key_name:	get_input: ssh-key-name
+			image:  get_input: image-name
+			network: get_input: openstack-network-name
+			security_groups: get_input: security-groups
+			flavor:  get_input: flavor-name
+			username:  get_input: username
+		requirements:
+			protected_by: 
+				node: security-rules-ml
+				
+	docker-host:
+		type: sodalite.nodes.DockerHost
+		requirements:
+			host: 
+				node: ml-vm
+				
+	docker-network:
+		type: sodalite.nodes.DockerNetwork
+		properties:
+			name: get_input: docker-network
+		requirements:
+			host: 
+				node: ml-vm
+			dependency: 
+				node: docker-host
+				
+	docker-public-registry:
+		type: sodalite.nodes.DockerRegistry
+		properties:
+			docker_registry_url: get_input: docker-public-registry-url
+		requirements:
+			host: 
+				node: ml-vm
+			dependency: 
+				node: docker-host
+
+	training-db-volume:
+		type: sodalite.nodes.DockerVolume
+		properties:
+			name: 'training-db-vol'
+		requirements:
+			host: 
+				node: ml-vm
+
+	model-repo-volume:
+		type: sodalite.nodes.DockerVolume
+		properties:
+			name: 'model-repo'
+		requirements:
+			host: 
+				node: ml-vm
+
+	training-db-service:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			image_name: 'indikakumara/trainingdbapi:0.0.1'
+			volumes:
+				training-db-vol: '/usr/src/tdb'
+			ports: [ '5000:5000' ]
+			alias: 'training-db-service'
+			env:
+				DB_LOC: '/usr/src/tdb/'
+			docker_network_name: get_property: 
+				entity: SELF
+				req_cap: test/training-db-service.network
+				property: test/docker-network.name
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network
+			registry: 
+				node: docker-public-registry
+			dependency: 
+				node: training-db-volume
+
+	training-cp-service:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			image_name: 'indikakumara/trainingcpapi:0.0.1'
+			volumes:
+				model-repo: '/usr/src/models'
+			ports: [ '5001:5000' ]
+			alias: 'training-cp-service'
+			env:
+				MODEL_REPO: '/usr/src/models'
+				TRAIN_DB_API: 'http://training-db-service:5000/training-db/diabetes'
+			docker_network_name: get_property: 
+				entity: SELF
+				req_cap: test/training-db-service.network
+				property: test/docker-network.name
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network
+			registry: 
+				node: docker-public-registry
+			dependency: 
+				node: training-db-service
+			dependency: 
+				node: model-repo-volume
+
+	prediction-cp-service:
+		type: sodalite.nodes.DockerizedComponent
+		properties:
+			image_name: 'indikakumara/predictionapi:0.0.1'
+			volumes:
+				model-repo: '/usr/src/models'
+			ports: [ '5002:5000' ]
+			alias: 'prediction-cp-service'
+			env:
+				MODEL_REPO: '/usr/src/models'
+			docker_network_name: get_property: 
+				entity: SELF
+				req_cap: test/training-db-service.network
+				property: test/docker-network.name
+		requirements:
+			host: 
+				node: docker-host
+			network: 
+				node: docker-network
+			registry: 
+				node: docker-public-registry
+			dependency: 
+				node: training-db-service
+			dependency: 
+				node: training-cp-service
+			dependency: 
+				node: model-repo-volume	
+        
+        
+        
