@@ -53,13 +53,13 @@ node_templates:
 			username:  get_input: username
 		requirements:
 			protected_by: 
-				node: security-rules-ml
+				node: test/security-rules-ml
 				
 	docker-host:
 		type: sodalite.nodes.DockerHost
 		requirements:
 			host: 
-				node: ml-vm
+				node: test/ml-vm
 				
 	docker-network:
 		type: sodalite.nodes.DockerNetwork
@@ -67,9 +67,9 @@ node_templates:
 			name: get_input: docker-network
 		requirements:
 			host: 
-				node: ml-vm
+				node: test/ml-vm
 			dependency: 
-				node: docker-host
+				node: test/docker-host
 				
 	docker-public-registry:
 		type: sodalite.nodes.DockerRegistry
@@ -77,9 +77,9 @@ node_templates:
 			docker_registry_url: get_input: docker-public-registry-url
 		requirements:
 			host: 
-				node: ml-vm
+				node: test/ml-vm
 			dependency: 
-				node: docker-host
+				node: test/docker-host
 
 	training-db-volume:
 		type: sodalite.nodes.DockerVolume
@@ -87,7 +87,7 @@ node_templates:
 			name: 'training-db-vol'
 		requirements:
 			host: 
-				node: ml-vm
+				node: test/ml-vm
 
 	model-repo-volume:
 		type: sodalite.nodes.DockerVolume
@@ -95,7 +95,7 @@ node_templates:
 			name: 'model-repo'
 		requirements:
 			host: 
-				node: ml-vm
+				node: test/ml-vm
 
 	training-db-service:
 		type: sodalite.nodes.DockerizedComponent
@@ -113,13 +113,13 @@ node_templates:
 				property: test/docker-network.name
 		requirements:
 			host: 
-				node: docker-host
+				node: test/docker-host
 			network: 
-				node: docker-network
+				node: test/docker-network
 			registry: 
-				node: docker-public-registry
+				node: test/docker-public-registry
 			dependency: 
-				node: training-db-volume
+				node: test/training-db-volume
 
 	training-cp-service:
 		type: sodalite.nodes.DockerizedComponent
@@ -138,15 +138,15 @@ node_templates:
 				property: test/docker-network.name
 		requirements:
 			host: 
-				node: docker-host
+				node: test/docker-host
 			network: 
-				node: docker-network
+				node: test/docker-network
 			registry: 
-				node: docker-public-registry
+				node: test/docker-public-registry
 			dependency: 
-				node: training-db-service
+				node: test/training-db-service
 			dependency: 
-				node: model-repo-volume
+				node: test/model-repo-volume
 
 	prediction-cp-service:
 		type: sodalite.nodes.DockerizedComponent
@@ -164,17 +164,17 @@ node_templates:
 				property: test/docker-network.name
 		requirements:
 			host: 
-				node: docker-host
+				node: test/docker-host
 			network: 
-				node: docker-network
+				node: test/docker-network
 			registry: 
-				node: docker-public-registry
+				node: test/docker-public-registry
 			dependency: 
-				node: training-db-service
+				node: test/training-db-service
 			dependency: 
-				node: training-cp-service
+				node: test/training-cp-service
 			dependency: 
-				node: model-repo-volume	
+				node: test/model-repo-volume	
         
         
         
