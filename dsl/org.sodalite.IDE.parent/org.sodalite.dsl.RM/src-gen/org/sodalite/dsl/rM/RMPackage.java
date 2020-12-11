@@ -759,13 +759,31 @@ public interface RMPackage extends EPackage
   int EPOLICY_TYPE_BODY__DESCRIPTION = 1;
 
   /**
+   * The feature id for the '<em><b>Properties</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPOLICY_TYPE_BODY__PROPERTIES = 2;
+
+  /**
+   * The feature id for the '<em><b>Targets</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPOLICY_TYPE_BODY__TARGETS = 3;
+
+  /**
    * The number of structural features of the '<em>EPolicy Type Body</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPOLICY_TYPE_BODY_FEATURE_COUNT = 2;
+  int EPOLICY_TYPE_BODY_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ENodeTypesImpl <em>ENode Types</em>}' class.
@@ -3812,6 +3830,28 @@ public interface RMPackage extends EPackage
   EAttribute getEPolicyTypeBody_Description();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getProperties <em>Properties</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Properties</em>'.
+   * @see org.sodalite.dsl.rM.EPolicyTypeBody#getProperties()
+   * @see #getEPolicyTypeBody()
+   * @generated
+   */
+  EReference getEPolicyTypeBody_Properties();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getTargets <em>Targets</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Targets</em>'.
+   * @see org.sodalite.dsl.rM.EPolicyTypeBody#getTargets()
+   * @see #getEPolicyTypeBody()
+   * @generated
+   */
+  EReference getEPolicyTypeBody_Targets();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ENodeTypes <em>ENode Types</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6324,6 +6364,22 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EAttribute EPOLICY_TYPE_BODY__DESCRIPTION = eINSTANCE.getEPolicyTypeBody_Description();
+
+    /**
+     * The meta object literal for the '<em><b>Properties</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPOLICY_TYPE_BODY__PROPERTIES = eINSTANCE.getEPolicyTypeBody_Properties();
+
+    /**
+     * The meta object literal for the '<em><b>Targets</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPOLICY_TYPE_BODY__TARGETS = eINSTANCE.getEPolicyTypeBody_Targets();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ENodeTypesImpl <em>ENode Types</em>}' class.

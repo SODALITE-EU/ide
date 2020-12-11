@@ -82,6 +82,8 @@
     <genClasses ecoreClass="RM.ecore#//EPolicyTypeBody">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPolicyTypeBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/targets"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ENodeTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypes/nodeTypes"/>

@@ -1898,6 +1898,72 @@ ruleEPolicyTypeBody returns [EObject current=null]
 				  getUnorderedGroupHelper().leave(grammarAccess.getEPolicyTypeBodyAccess().getUnorderedGroup_1());
 				}
 		)
+		(
+			otherlv_6=Properties
+			{
+				newLeafNode(otherlv_6, grammarAccess.getEPolicyTypeBodyAccess().getPropertiesKeyword_2_0());
+			}
+			this_BEGIN_7=RULE_BEGIN
+			{
+				newLeafNode(this_BEGIN_7, grammarAccess.getEPolicyTypeBodyAccess().getBEGINTerminalRuleCall_2_1());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEPolicyTypeBodyAccess().getPropertiesEPropertiesParserRuleCall_2_2_0());
+					}
+					lv_properties_8_0=ruleEProperties
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEPolicyTypeBodyRule());
+						}
+						set(
+							$current,
+							"properties",
+							lv_properties_8_0,
+							"org.sodalite.dsl.RM.EProperties");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			this_END_9=RULE_END
+			{
+				newLeafNode(this_END_9, grammarAccess.getEPolicyTypeBodyAccess().getENDTerminalRuleCall_2_3());
+			}
+		)?
+		(
+			otherlv_10=Targets
+			{
+				newLeafNode(otherlv_10, grammarAccess.getEPolicyTypeBodyAccess().getTargetsKeyword_3_0());
+			}
+			otherlv_11=LeftSquareBracket
+			{
+				newLeafNode(otherlv_11, grammarAccess.getEPolicyTypeBodyAccess().getLeftSquareBracketKeyword_3_1());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEPolicyTypeBodyAccess().getTargetsEValidTargetTypesParserRuleCall_3_2_0());
+					}
+					lv_targets_12_0=ruleEValidTargetTypes
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEPolicyTypeBodyRule());
+						}
+						add(
+							$current,
+							"targets",
+							lv_targets_12_0,
+							"org.sodalite.dsl.RM.EValidTargetTypes");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)?
+			otherlv_13=RightSquareBracket
+			{
+				newLeafNode(otherlv_13, grammarAccess.getEPolicyTypeBodyAccess().getRightSquareBracketKeyword_3_3());
+			}
+		)?
 	)
 ;
 

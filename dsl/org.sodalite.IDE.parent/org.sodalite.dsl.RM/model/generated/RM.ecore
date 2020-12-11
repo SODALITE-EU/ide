@@ -107,6 +107,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//EPREFIX_TYPE"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//EProperties"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
+        eType="#//EValidTargetTypes" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ENodeTypes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeTypes" upperBound="-1"

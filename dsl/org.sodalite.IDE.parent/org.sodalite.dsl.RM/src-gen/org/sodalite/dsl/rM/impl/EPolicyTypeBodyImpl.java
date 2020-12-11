@@ -3,8 +3,12 @@
  */
 package org.sodalite.dsl.rM.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,8 +16,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPolicyTypeBody;
+import org.sodalite.dsl.rM.EProperties;
+import org.sodalite.dsl.rM.EValidTargetTypes;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -26,6 +35,8 @@ import org.sodalite.dsl.rM.RMPackage;
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EPolicyTypeBodyImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EPolicyTypeBodyImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EPolicyTypeBodyImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EPolicyTypeBodyImpl#getTargets <em>Targets</em>}</li>
  * </ul>
  *
  * @generated
@@ -61,6 +72,26 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
    * @ordered
    */
   protected String description = DESCRIPTION_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getProperties()
+   * @generated
+   * @ordered
+   */
+  protected EProperties properties;
+
+  /**
+   * The cached value of the '{@link #getTargets() <em>Targets</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTargets()
+   * @generated
+   * @ordered
+   */
+  protected EList<EValidTargetTypes> targets;
 
   /**
    * <!-- begin-user-doc -->
@@ -164,12 +195,81 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
+  public EProperties getProperties()
+  {
+    return properties;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetProperties(EProperties newProperties, NotificationChain msgs)
+  {
+    EProperties oldProperties = properties;
+    properties = newProperties;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPOLICY_TYPE_BODY__PROPERTIES, oldProperties, newProperties);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setProperties(EProperties newProperties)
+  {
+    if (newProperties != properties)
+    {
+      NotificationChain msgs = null;
+      if (properties != null)
+        msgs = ((InternalEObject)properties).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPOLICY_TYPE_BODY__PROPERTIES, null, msgs);
+      if (newProperties != null)
+        msgs = ((InternalEObject)newProperties).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPOLICY_TYPE_BODY__PROPERTIES, null, msgs);
+      msgs = basicSetProperties(newProperties, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPOLICY_TYPE_BODY__PROPERTIES, newProperties, newProperties));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<EValidTargetTypes> getTargets()
+  {
+    if (targets == null)
+    {
+      targets = new EObjectContainmentEList<EValidTargetTypes>(EValidTargetTypes.class, this, RMPackage.EPOLICY_TYPE_BODY__TARGETS);
+    }
+    return targets;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case RMPackage.EPOLICY_TYPE_BODY__SUPER_TYPE:
         return basicSetSuperType(null, msgs);
+      case RMPackage.EPOLICY_TYPE_BODY__PROPERTIES:
+        return basicSetProperties(null, msgs);
+      case RMPackage.EPOLICY_TYPE_BODY__TARGETS:
+        return ((InternalEList<?>)getTargets()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -188,6 +288,10 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
         return getSuperType();
       case RMPackage.EPOLICY_TYPE_BODY__DESCRIPTION:
         return getDescription();
+      case RMPackage.EPOLICY_TYPE_BODY__PROPERTIES:
+        return getProperties();
+      case RMPackage.EPOLICY_TYPE_BODY__TARGETS:
+        return getTargets();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -197,6 +301,7 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -207,6 +312,13 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
         return;
       case RMPackage.EPOLICY_TYPE_BODY__DESCRIPTION:
         setDescription((String)newValue);
+        return;
+      case RMPackage.EPOLICY_TYPE_BODY__PROPERTIES:
+        setProperties((EProperties)newValue);
+        return;
+      case RMPackage.EPOLICY_TYPE_BODY__TARGETS:
+        getTargets().clear();
+        getTargets().addAll((Collection<? extends EValidTargetTypes>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -228,6 +340,12 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
       case RMPackage.EPOLICY_TYPE_BODY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
         return;
+      case RMPackage.EPOLICY_TYPE_BODY__PROPERTIES:
+        setProperties((EProperties)null);
+        return;
+      case RMPackage.EPOLICY_TYPE_BODY__TARGETS:
+        getTargets().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -246,6 +364,10 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
         return superType != null;
       case RMPackage.EPOLICY_TYPE_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+      case RMPackage.EPOLICY_TYPE_BODY__PROPERTIES:
+        return properties != null;
+      case RMPackage.EPOLICY_TYPE_BODY__TARGETS:
+        return targets != null && !targets.isEmpty();
     }
     return super.eIsSet(featureID);
   }

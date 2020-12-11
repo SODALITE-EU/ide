@@ -137,7 +137,66 @@ EPolicyType:
 
 EPolicyTypeBody:
 	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
-	('description:' description=STRING)?);
+	('description:' description=STRING)?)
+	('properties:'
+	BEGIN
+	properties=EProperties
+	END)?
+	('targets:' '[' (targets+=EValidTargetTypes)? ']')?
+	('triggers:'
+	BEGIN
+	triggers=ETriggers
+	END)?
+;
+
+ETriggers:
+	{ETriggers} (triggers+=ETriggerDefinition)*;
+	
+ETriggerDefinition:
+	name=QUALIFIED_NAME ':' 
+	BEGIN
+	trigger=ETriggerDefinitionBody
+	END;
+
+ETriggerDefinitionBody:
+	('description:' description=STRING)? &
+	('event:' event=STRING) &
+	('target_filter:'
+		BEGIN 
+		target_filter=EEvenFilter
+		END
+	)? &
+	('condition:'
+		BEGIN
+		condition=EConditionClauseDefinition
+		END
+	)? &
+	('action:'
+		BEGIN
+		action=EActivityDefinition
+		END
+	)?
+;
+
+EEvenFilter:
+	('node:' node=EPREFIX_TYPE) &
+	('requirement:' requirement=STRING)? &
+	('capability:' capability=STRING)?
+;
+
+EConditionClauseDefinition:
+	name=ID
+;
+
+EActivityDefinition:
+	ECallOperationActivityDefinition
+;
+
+ECallOperationActivityDefinition:
+	('call_operation:' call_operation=STRING) &
+	('operation:' operation=STRING)? &
+	('inputs:' node=EInputs)? 
+;	
 
 ENodeTypes:
 	{ENodeTypes} (nodeTypes+=ENodeType)+;

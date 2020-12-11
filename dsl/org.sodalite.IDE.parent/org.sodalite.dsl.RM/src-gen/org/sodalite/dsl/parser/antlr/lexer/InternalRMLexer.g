@@ -99,6 +99,8 @@ Primary : 'primary:';
 
 Req_cap : 'req_cap:';
 
+Targets : 'targets:';
+
 Entity : 'entity:';
 
 Import : 'import:';

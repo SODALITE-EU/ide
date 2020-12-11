@@ -1429,6 +1429,28 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EReference getEPolicyTypeBody_Properties()
+  {
+    return (EReference)ePolicyTypeBodyEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPolicyTypeBody_Targets()
+  {
+    return (EReference)ePolicyTypeBodyEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getENodeTypes()
   {
     return eNodeTypesEClass;
@@ -3576,6 +3598,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     ePolicyTypeBodyEClass = createEClass(EPOLICY_TYPE_BODY);
     createEReference(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__SUPER_TYPE);
     createEAttribute(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__DESCRIPTION);
+    createEReference(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__PROPERTIES);
+    createEReference(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__TARGETS);
 
     eNodeTypesEClass = createEClass(ENODE_TYPES);
     createEReference(eNodeTypesEClass, ENODE_TYPES__NODE_TYPES);
@@ -3973,6 +3997,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEClass(ePolicyTypeBodyEClass, EPolicyTypeBody.class, "EPolicyTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEPolicyTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPolicyTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPolicyTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPolicyTypeBody_Targets(), this.getEValidTargetTypes(), null, "targets", null, 0, -1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eNodeTypesEClass, ENodeTypes.class, "ENodeTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getENodeTypes_NodeTypes(), this.getENodeType(), null, "nodeTypes", null, 0, -1, ENodeTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

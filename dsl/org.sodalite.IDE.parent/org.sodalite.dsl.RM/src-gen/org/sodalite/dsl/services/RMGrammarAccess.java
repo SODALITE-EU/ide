@@ -1026,12 +1026,28 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Keyword cDescriptionKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cDescriptionAssignment_1_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cPropertiesKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
+		private final Assignment cPropertiesAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cPropertiesEPropertiesParserRuleCall_2_2_0 = (RuleCall)cPropertiesAssignment_2_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_2_3 = (RuleCall)cGroup_2.eContents().get(3);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cTargetsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Keyword cLeftSquareBracketKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Assignment cTargetsAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cTargetsEValidTargetTypesParserRuleCall_3_2_0 = (RuleCall)cTargetsAssignment_3_2.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//EPolicyTypeBody:
-		//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?);
+		//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?) ('properties:'
+		//	BEGIN
+		//	properties=EProperties
+		//	END)? ('targets:' '[' targets+=EValidTargetTypes? ']')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?)
+		//{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?) ('properties:'
+		//BEGIN properties=EProperties END)? ('targets:' '[' targets+=EValidTargetTypes? ']')?
 		public Group getGroup() { return cGroup; }
 		
 		//{EPolicyTypeBody}
@@ -1063,6 +1079,42 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		
 		//STRING
 		public RuleCall getDescriptionSTRINGTerminalRuleCall_1_1_1_0() { return cDescriptionSTRINGTerminalRuleCall_1_1_1_0; }
+		
+		//('properties:' BEGIN properties=EProperties END)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'properties:'
+		public Keyword getPropertiesKeyword_2_0() { return cPropertiesKeyword_2_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_2_1() { return cBEGINTerminalRuleCall_2_1; }
+		
+		//properties=EProperties
+		public Assignment getPropertiesAssignment_2_2() { return cPropertiesAssignment_2_2; }
+		
+		//EProperties
+		public RuleCall getPropertiesEPropertiesParserRuleCall_2_2_0() { return cPropertiesEPropertiesParserRuleCall_2_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_2_3() { return cENDTerminalRuleCall_2_3; }
+		
+		//('targets:' '[' targets+=EValidTargetTypes? ']')?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'targets:'
+		public Keyword getTargetsKeyword_3_0() { return cTargetsKeyword_3_0; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_3_1() { return cLeftSquareBracketKeyword_3_1; }
+		
+		//targets+=EValidTargetTypes?
+		public Assignment getTargetsAssignment_3_2() { return cTargetsAssignment_3_2; }
+		
+		//EValidTargetTypes
+		public RuleCall getTargetsEValidTargetTypesParserRuleCall_3_2_0() { return cTargetsEValidTargetTypesParserRuleCall_3_2_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_3_3() { return cRightSquareBracketKeyword_3_3; }
 	}
 	public class ENodeTypesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ENodeTypes");
@@ -4436,7 +4488,10 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EPolicyTypeBody:
-	//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?);
+	//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?) ('properties:'
+	//	BEGIN
+	//	properties=EProperties
+	//	END)? ('targets:' '[' targets+=EValidTargetTypes? ']')?;
 	public EPolicyTypeBodyElements getEPolicyTypeBodyAccess() {
 		return pEPolicyTypeBody;
 	}

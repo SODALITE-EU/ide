@@ -84,6 +84,8 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getGroup(), "rule__EPolicyTypeBody__Group__0");
 			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getGroup_1_0(), "rule__EPolicyTypeBody__Group_1_0__0");
 			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getGroup_1_1(), "rule__EPolicyTypeBody__Group_1_1__0");
+			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getGroup_2(), "rule__EPolicyTypeBody__Group_2__0");
+			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getGroup_3(), "rule__EPolicyTypeBody__Group_3__0");
 			builder.put(grammarAccess.getENodeTypesAccess().getGroup(), "rule__ENodeTypes__Group__0");
 			builder.put(grammarAccess.getENodeTypeAccess().getGroup(), "rule__ENodeType__Group__0");
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getGroup(), "rule__ENodeTypeBody__Group__0");
@@ -234,6 +236,8 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPolicyTypeAccess().getPolicyAssignment_3(), "rule__EPolicyType__PolicyAssignment_3");
 			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getSuperTypeAssignment_1_0_1(), "rule__EPolicyTypeBody__SuperTypeAssignment_1_0_1");
 			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__EPolicyTypeBody__DescriptionAssignment_1_1_1");
+			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getPropertiesAssignment_2_2(), "rule__EPolicyTypeBody__PropertiesAssignment_2_2");
+			builder.put(grammarAccess.getEPolicyTypeBodyAccess().getTargetsAssignment_3_2(), "rule__EPolicyTypeBody__TargetsAssignment_3_2");
 			builder.put(grammarAccess.getENodeTypesAccess().getNodeTypesAssignment_1(), "rule__ENodeTypes__NodeTypesAssignment_1");
 			builder.put(grammarAccess.getENodeTypeAccess().getNameAssignment_0(), "rule__ENodeType__NameAssignment_0");
 			builder.put(grammarAccess.getENodeTypeAccess().getNodeAssignment_3(), "rule__ENodeType__NodeAssignment_3");
