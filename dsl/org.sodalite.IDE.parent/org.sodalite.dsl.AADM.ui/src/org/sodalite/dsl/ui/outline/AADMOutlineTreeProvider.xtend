@@ -8,13 +8,11 @@ import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode
-import org.sodalite.dsl.rM.ELIST
-import org.eclipse.xtext.AbstractElement
 import org.sodalite.dsl.rM.EMAP
 import org.sodalite.dsl.rM.EMapEntry
-import org.sodalite.dsl.aADM.EPropertyAssignment
 import org.sodalite.dsl.rM.ESTRING
 import org.sodalite.dsl.aADM.ENodeTemplate
+import org.sodalite.dsl.rM.EPropertyAssignment
 
 /**
  * Customization of the default outline structure.

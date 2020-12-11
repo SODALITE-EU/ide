@@ -161,6 +161,86 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEPolicyTypeBodyAdapter();
       }
       @Override
+      public Adapter caseETriggers(ETriggers object)
+      {
+        return createETriggersAdapter();
+      }
+      @Override
+      public Adapter caseETriggerDefinition(ETriggerDefinition object)
+      {
+        return createETriggerDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseETriggerDefinitionBody(ETriggerDefinitionBody object)
+      {
+        return createETriggerDefinitionBodyAdapter();
+      }
+      @Override
+      public Adapter caseEEvenFilter(EEvenFilter object)
+      {
+        return createEEvenFilterAdapter();
+      }
+      @Override
+      public Adapter caseEConditionClauseDefinition(EConditionClauseDefinition object)
+      {
+        return createEConditionClauseDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseEConditionClauseDefinitionAND(EConditionClauseDefinitionAND object)
+      {
+        return createEConditionClauseDefinitionANDAdapter();
+      }
+      @Override
+      public Adapter caseEConditionClauseDefinitionOR(EConditionClauseDefinitionOR object)
+      {
+        return createEConditionClauseDefinitionORAdapter();
+      }
+      @Override
+      public Adapter caseEConditionClauseDefinitionNOT(EConditionClauseDefinitionNOT object)
+      {
+        return createEConditionClauseDefinitionNOTAdapter();
+      }
+      @Override
+      public Adapter caseEConditionClauseDefinitionAssert(EConditionClauseDefinitionAssert object)
+      {
+        return createEConditionClauseDefinitionAssertAdapter();
+      }
+      @Override
+      public Adapter caseEAssertionDefinition(EAssertionDefinition object)
+      {
+        return createEAssertionDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseEConstraintList(EConstraintList object)
+      {
+        return createEConstraintListAdapter();
+      }
+      @Override
+      public Adapter caseEActivityDefinition(EActivityDefinition object)
+      {
+        return createEActivityDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseECallOperationActivityDefinition(ECallOperationActivityDefinition object)
+      {
+        return createECallOperationActivityDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseECallOperationActivityDefinitionBody(ECallOperationActivityDefinitionBody object)
+      {
+        return createECallOperationActivityDefinitionBodyAdapter();
+      }
+      @Override
+      public Adapter caseEPropertyAssignments(EPropertyAssignments object)
+      {
+        return createEPropertyAssignmentsAdapter();
+      }
+      @Override
+      public Adapter caseEPropertyAssignment(EPropertyAssignment object)
+      {
+        return createEPropertyAssignmentAdapter();
+      }
+      @Override
       public Adapter caseENodeTypes(ENodeTypes object)
       {
         return createENodeTypesAdapter();
@@ -778,6 +858,246 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEPolicyTypeBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ETriggers <em>ETriggers</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ETriggers
+   * @generated
+   */
+  public Adapter createETriggersAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ETriggerDefinition <em>ETrigger Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ETriggerDefinition
+   * @generated
+   */
+  public Adapter createETriggerDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody <em>ETrigger Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ETriggerDefinitionBody
+   * @generated
+   */
+  public Adapter createETriggerDefinitionBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EEvenFilter <em>EEven Filter</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EEvenFilter
+   * @generated
+   */
+  public Adapter createEEvenFilterAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EConditionClauseDefinition <em>ECondition Clause Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinition
+   * @generated
+   */
+  public Adapter createEConditionClauseDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionAND <em>ECondition Clause Definition AND</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionAND
+   * @generated
+   */
+  public Adapter createEConditionClauseDefinitionANDAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionOR <em>ECondition Clause Definition OR</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionOR
+   * @generated
+   */
+  public Adapter createEConditionClauseDefinitionORAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionNOT <em>ECondition Clause Definition NOT</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionNOT
+   * @generated
+   */
+  public Adapter createEConditionClauseDefinitionNOTAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionAssert <em>ECondition Clause Definition Assert</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
+   * @generated
+   */
+  public Adapter createEConditionClauseDefinitionAssertAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EAssertionDefinition <em>EAssertion Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EAssertionDefinition
+   * @generated
+   */
+  public Adapter createEAssertionDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EConstraintList <em>EConstraint List</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EConstraintList
+   * @generated
+   */
+  public Adapter createEConstraintListAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EActivityDefinition <em>EActivity Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EActivityDefinition
+   * @generated
+   */
+  public Adapter createEActivityDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinition <em>ECall Operation Activity Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ECallOperationActivityDefinition
+   * @generated
+   */
+  public Adapter createECallOperationActivityDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody <em>ECall Operation Activity Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody
+   * @generated
+   */
+  public Adapter createECallOperationActivityDefinitionBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPropertyAssignments <em>EProperty Assignments</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPropertyAssignments
+   * @generated
+   */
+  public Adapter createEPropertyAssignmentsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPropertyAssignment <em>EProperty Assignment</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPropertyAssignment
+   * @generated
+   */
+  public Adapter createEPropertyAssignmentAdapter()
   {
     return null;
   }

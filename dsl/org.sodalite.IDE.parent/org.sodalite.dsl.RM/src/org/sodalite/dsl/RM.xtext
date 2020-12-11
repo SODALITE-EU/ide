@@ -185,18 +185,66 @@ EEvenFilter:
 ;
 
 EConditionClauseDefinition:
-	name=ID
+	EConditionClauseDefinitionAND | EConditionClauseDefinitionOR | EConditionClauseDefinitionNOT | EConditionClauseDefinitionAssert
 ;
+
+EConditionClauseDefinitionAND:
+	'and:'
+	BEGIN
+	and = EConditionClauseDefinition
+	END
+;
+
+EConditionClauseDefinitionOR:
+	'or:'
+	BEGIN
+	or = EConditionClauseDefinition
+	END
+;
+
+EConditionClauseDefinitionNOT:
+	'not:'
+	BEGIN
+	not = EConditionClauseDefinition
+	END
+;
+
+EConditionClauseDefinitionAssert:
+	{EConditionClauseDefinitionAssert} (assertions += EAssertionDefinition)*
+;
+
+EAssertionDefinition:
+	attribute_name = ID ':' '[' constraints=EConstraintList ']' 
+;
+
+EConstraintList:
+	list+=EConstraint (',' list+=EConstraint)*;
 
 EActivityDefinition:
 	ECallOperationActivityDefinition
 ;
 
 ECallOperationActivityDefinition:
-	('call_operation:' call_operation=STRING) &
-	('operation:' operation=STRING)? &
-	('inputs:' node=EInputs)? 
+	'call_operation:' 
+	BEGIN
+	operation=ECallOperationActivityDefinitionBody
+	END
 ;	
+
+ECallOperationActivityDefinitionBody:
+	('operation:' name=EPREFIX_TYPE) &
+	('inputs:'
+		BEGIN 
+		inputs=EPropertyAssignments
+		END
+	)? 
+;
+
+EPropertyAssignments:
+	{EPropertyAssignments} (properties+=EPropertyAssignment)*;
+
+EPropertyAssignment:
+	name = ID ':' value=EAssignmentValue;
 
 ENodeTypes:
 	{ENodeTypes} (nodeTypes+=ENodeType)+;

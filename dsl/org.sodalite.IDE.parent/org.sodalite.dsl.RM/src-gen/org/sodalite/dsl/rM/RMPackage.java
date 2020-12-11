@@ -777,13 +777,542 @@ public interface RMPackage extends EPackage
   int EPOLICY_TYPE_BODY__TARGETS = 3;
 
   /**
+   * The feature id for the '<em><b>Triggers</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPOLICY_TYPE_BODY__TRIGGERS = 4;
+
+  /**
    * The number of structural features of the '<em>EPolicy Type Body</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPOLICY_TYPE_BODY_FEATURE_COUNT = 4;
+  int EPOLICY_TYPE_BODY_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ETriggersImpl <em>ETriggers</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.ETriggersImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getETriggers()
+   * @generated
+   */
+  int ETRIGGERS = 17;
+
+  /**
+   * The feature id for the '<em><b>Triggers</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGERS__TRIGGERS = 0;
+
+  /**
+   * The number of structural features of the '<em>ETriggers</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGERS_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionImpl <em>ETrigger Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.ETriggerDefinitionImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getETriggerDefinition()
+   * @generated
+   */
+  int ETRIGGER_DEFINITION = 18;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGER_DEFINITION__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Trigger</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGER_DEFINITION__TRIGGER = 1;
+
+  /**
+   * The number of structural features of the '<em>ETrigger Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGER_DEFINITION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl <em>ETrigger Definition Body</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getETriggerDefinitionBody()
+   * @generated
+   */
+  int ETRIGGER_DEFINITION_BODY = 19;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGER_DEFINITION_BODY__DESCRIPTION = 0;
+
+  /**
+   * The feature id for the '<em><b>Event</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGER_DEFINITION_BODY__EVENT = 1;
+
+  /**
+   * The feature id for the '<em><b>Target filter</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGER_DEFINITION_BODY__TARGET_FILTER = 2;
+
+  /**
+   * The feature id for the '<em><b>Condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGER_DEFINITION_BODY__CONDITION = 3;
+
+  /**
+   * The feature id for the '<em><b>Action</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGER_DEFINITION_BODY__ACTION = 4;
+
+  /**
+   * The number of structural features of the '<em>ETrigger Definition Body</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRIGGER_DEFINITION_BODY_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EEvenFilterImpl <em>EEven Filter</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EEvenFilterImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEEvenFilter()
+   * @generated
+   */
+  int EEVEN_FILTER = 20;
+
+  /**
+   * The feature id for the '<em><b>Node</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEVEN_FILTER__NODE = 0;
+
+  /**
+   * The feature id for the '<em><b>Requirement</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEVEN_FILTER__REQUIREMENT = 1;
+
+  /**
+   * The feature id for the '<em><b>Capability</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEVEN_FILTER__CAPABILITY = 2;
+
+  /**
+   * The number of structural features of the '<em>EEven Filter</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEVEN_FILTER_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionImpl <em>ECondition Clause Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinition()
+   * @generated
+   */
+  int ECONDITION_CLAUSE_DEFINITION = 21;
+
+  /**
+   * The number of structural features of the '<em>ECondition Clause Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_CLAUSE_DEFINITION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionANDImpl <em>ECondition Clause Definition AND</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionANDImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinitionAND()
+   * @generated
+   */
+  int ECONDITION_CLAUSE_DEFINITION_AND = 22;
+
+  /**
+   * The feature id for the '<em><b>And</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_CLAUSE_DEFINITION_AND__AND = ECONDITION_CLAUSE_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>ECondition Clause Definition AND</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_CLAUSE_DEFINITION_AND_FEATURE_COUNT = ECONDITION_CLAUSE_DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionORImpl <em>ECondition Clause Definition OR</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionORImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinitionOR()
+   * @generated
+   */
+  int ECONDITION_CLAUSE_DEFINITION_OR = 23;
+
+  /**
+   * The feature id for the '<em><b>Or</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_CLAUSE_DEFINITION_OR__OR = ECONDITION_CLAUSE_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>ECondition Clause Definition OR</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_CLAUSE_DEFINITION_OR_FEATURE_COUNT = ECONDITION_CLAUSE_DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionNOTImpl <em>ECondition Clause Definition NOT</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionNOTImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinitionNOT()
+   * @generated
+   */
+  int ECONDITION_CLAUSE_DEFINITION_NOT = 24;
+
+  /**
+   * The feature id for the '<em><b>Not</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_CLAUSE_DEFINITION_NOT__NOT = ECONDITION_CLAUSE_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>ECondition Clause Definition NOT</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_CLAUSE_DEFINITION_NOT_FEATURE_COUNT = ECONDITION_CLAUSE_DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionAssertImpl <em>ECondition Clause Definition Assert</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionAssertImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinitionAssert()
+   * @generated
+   */
+  int ECONDITION_CLAUSE_DEFINITION_ASSERT = 25;
+
+  /**
+   * The feature id for the '<em><b>Assertions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_CLAUSE_DEFINITION_ASSERT__ASSERTIONS = ECONDITION_CLAUSE_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>ECondition Clause Definition Assert</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_CLAUSE_DEFINITION_ASSERT_FEATURE_COUNT = ECONDITION_CLAUSE_DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EAssertionDefinitionImpl <em>EAssertion Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EAssertionDefinitionImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAssertionDefinition()
+   * @generated
+   */
+  int EASSERTION_DEFINITION = 26;
+
+  /**
+   * The feature id for the '<em><b>Attribute name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EASSERTION_DEFINITION__ATTRIBUTE_NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Constraints</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EASSERTION_DEFINITION__CONSTRAINTS = 1;
+
+  /**
+   * The number of structural features of the '<em>EAssertion Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EASSERTION_DEFINITION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EConstraintListImpl <em>EConstraint List</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EConstraintListImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConstraintList()
+   * @generated
+   */
+  int ECONSTRAINT_LIST = 27;
+
+  /**
+   * The feature id for the '<em><b>List</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONSTRAINT_LIST__LIST = 0;
+
+  /**
+   * The number of structural features of the '<em>EConstraint List</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONSTRAINT_LIST_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EActivityDefinitionImpl <em>EActivity Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EActivityDefinitionImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEActivityDefinition()
+   * @generated
+   */
+  int EACTIVITY_DEFINITION = 28;
+
+  /**
+   * The number of structural features of the '<em>EActivity Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EACTIVITY_DEFINITION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionImpl <em>ECall Operation Activity Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECallOperationActivityDefinition()
+   * @generated
+   */
+  int ECALL_OPERATION_ACTIVITY_DEFINITION = 29;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECALL_OPERATION_ACTIVITY_DEFINITION__OPERATION = EACTIVITY_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>ECall Operation Activity Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECALL_OPERATION_ACTIVITY_DEFINITION_FEATURE_COUNT = EACTIVITY_DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionBodyImpl <em>ECall Operation Activity Definition Body</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionBodyImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECallOperationActivityDefinitionBody()
+   * @generated
+   */
+  int ECALL_OPERATION_ACTIVITY_DEFINITION_BODY = 30;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Inputs</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__INPUTS = 1;
+
+  /**
+   * The number of structural features of the '<em>ECall Operation Activity Definition Body</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECALL_OPERATION_ACTIVITY_DEFINITION_BODY_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl <em>EProperty Assignments</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPropertyAssignments()
+   * @generated
+   */
+  int EPROPERTY_ASSIGNMENTS = 31;
+
+  /**
+   * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPROPERTY_ASSIGNMENTS__PROPERTIES = 0;
+
+  /**
+   * The number of structural features of the '<em>EProperty Assignments</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPROPERTY_ASSIGNMENTS_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EPropertyAssignmentImpl <em>EProperty Assignment</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EPropertyAssignmentImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPropertyAssignment()
+   * @generated
+   */
+  int EPROPERTY_ASSIGNMENT = 32;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPROPERTY_ASSIGNMENT__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPROPERTY_ASSIGNMENT__VALUE = 1;
+
+  /**
+   * The number of structural features of the '<em>EProperty Assignment</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPROPERTY_ASSIGNMENT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ENodeTypesImpl <em>ENode Types</em>}' class.
@@ -793,7 +1322,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getENodeTypes()
    * @generated
    */
-  int ENODE_TYPES = 17;
+  int ENODE_TYPES = 33;
 
   /**
    * The feature id for the '<em><b>Node Types</b></em>' containment reference list.
@@ -821,7 +1350,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getENodeType()
    * @generated
    */
-  int ENODE_TYPE = 18;
+  int ENODE_TYPE = 34;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -858,7 +1387,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getENodeTypeBody()
    * @generated
    */
-  int ENODE_TYPE_BODY = 19;
+  int ENODE_TYPE_BODY = 35;
 
   /**
    * The feature id for the '<em><b>Super Type</b></em>' containment reference.
@@ -940,7 +1469,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERelationshipTypes()
    * @generated
    */
-  int ERELATIONSHIP_TYPES = 20;
+  int ERELATIONSHIP_TYPES = 36;
 
   /**
    * The feature id for the '<em><b>Relationship Types</b></em>' containment reference list.
@@ -968,7 +1497,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERelationshipType()
    * @generated
    */
-  int ERELATIONSHIP_TYPE = 21;
+  int ERELATIONSHIP_TYPE = 37;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1005,7 +1534,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERelationshipTypeBody()
    * @generated
    */
-  int ERELATIONSHIP_TYPE_BODY = 22;
+  int ERELATIONSHIP_TYPE_BODY = 38;
 
   /**
    * The feature id for the '<em><b>Super Type</b></em>' containment reference.
@@ -1078,7 +1607,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEValidTargetTypes()
    * @generated
    */
-  int EVALID_TARGET_TYPES = 23;
+  int EVALID_TARGET_TYPES = 39;
 
   /**
    * The feature id for the '<em><b>Target Types</b></em>' containment reference list.
@@ -1115,7 +1644,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilityTypeRef()
    * @generated
    */
-  int ECAPABILITY_TYPE_REF = 24;
+  int ECAPABILITY_TYPE_REF = 40;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -1143,7 +1672,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEProperties()
    * @generated
    */
-  int EPROPERTIES = 25;
+  int EPROPERTIES = 41;
 
   /**
    * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1171,7 +1700,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPropertyDefinition()
    * @generated
    */
-  int EPROPERTY_DEFINITION = 26;
+  int EPROPERTY_DEFINITION = 42;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1208,7 +1737,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPropertyDefinitionBody()
    * @generated
    */
-  int EPROPERTY_DEFINITION_BODY = 27;
+  int EPROPERTY_DEFINITION_BODY = 43;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1290,7 +1819,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAttributes()
    * @generated
    */
-  int EATTRIBUTES = 28;
+  int EATTRIBUTES = 44;
 
   /**
    * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -1318,7 +1847,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAttributeDefinition()
    * @generated
    */
-  int EATTRIBUTE_DEFINITION = 29;
+  int EATTRIBUTE_DEFINITION = 45;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1355,7 +1884,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAttributeDefinitionBody()
    * @generated
    */
-  int EATTRIBUTE_DEFINITION_BODY = 30;
+  int EATTRIBUTE_DEFINITION_BODY = 46;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1419,7 +1948,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEInterfaces()
    * @generated
    */
-  int EINTERFACES = 31;
+  int EINTERFACES = 47;
 
   /**
    * The feature id for the '<em><b>Interfaces</b></em>' containment reference list.
@@ -1447,7 +1976,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEInterfaceDefinition()
    * @generated
    */
-  int EINTERFACE_DEFINITION = 32;
+  int EINTERFACE_DEFINITION = 48;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1484,7 +2013,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEInterfaceDefinitionBody()
    * @generated
    */
-  int EINTERFACE_DEFINITION_BODY = 33;
+  int EINTERFACE_DEFINITION_BODY = 49;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1530,7 +2059,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEOperations()
    * @generated
    */
-  int EOPERATIONS = 34;
+  int EOPERATIONS = 50;
 
   /**
    * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1558,7 +2087,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEOperationDefinition()
    * @generated
    */
-  int EOPERATION_DEFINITION = 35;
+  int EOPERATION_DEFINITION = 51;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1595,7 +2124,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEOperationDefinitionBody()
    * @generated
    */
-  int EOPERATION_DEFINITION_BODY = 36;
+  int EOPERATION_DEFINITION_BODY = 52;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1641,7 +2170,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEImplementation()
    * @generated
    */
-  int EIMPLEMENTATION = 37;
+  int EIMPLEMENTATION = 53;
 
   /**
    * The feature id for the '<em><b>Primary</b></em>' containment reference.
@@ -1678,7 +2207,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPrimary()
    * @generated
    */
-  int EPRIMARY = 38;
+  int EPRIMARY = 54;
 
   /**
    * The feature id for the '<em><b>File</b></em>' attribute.
@@ -1715,7 +2244,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEDependencies()
    * @generated
    */
-  int EDEPENDENCIES = 39;
+  int EDEPENDENCIES = 55;
 
   /**
    * The feature id for the '<em><b>Files</b></em>' containment reference.
@@ -1752,7 +2281,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEDependencyFiles()
    * @generated
    */
-  int EDEPENDENCY_FILES = 40;
+  int EDEPENDENCY_FILES = 56;
 
   /**
    * The feature id for the '<em><b>Files</b></em>' attribute list.
@@ -1780,7 +2309,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEInputs()
    * @generated
    */
-  int EINPUTS = 41;
+  int EINPUTS = 57;
 
   /**
    * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
@@ -1808,7 +2337,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEParameterDefinition()
    * @generated
    */
-  int EPARAMETER_DEFINITION = 42;
+  int EPARAMETER_DEFINITION = 58;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1845,7 +2374,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEParameterDefinitionBody()
    * @generated
    */
-  int EPARAMETER_DEFINITION_BODY = 43;
+  int EPARAMETER_DEFINITION_BODY = 59;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1891,7 +2420,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEValueExpression()
    * @generated
    */
-  int EVALUE_EXPRESSION = 44;
+  int EVALUE_EXPRESSION = 60;
 
   /**
    * The number of structural features of the '<em>EValue Expression</em>' class.
@@ -1910,7 +2439,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEFunction()
    * @generated
    */
-  int EFUNCTION = 45;
+  int EFUNCTION = 61;
 
   /**
    * The number of structural features of the '<em>EFunction</em>' class.
@@ -1929,7 +2458,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetInput()
    * @generated
    */
-  int GET_INPUT = 46;
+  int GET_INPUT = 62;
 
   /**
    * The feature id for the '<em><b>Input</b></em>' reference.
@@ -1957,7 +2486,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetAttribute()
    * @generated
    */
-  int GET_ATTRIBUTE = 47;
+  int GET_ATTRIBUTE = 63;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' containment reference.
@@ -1985,7 +2514,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetAttributeBody()
    * @generated
    */
-  int GET_ATTRIBUTE_BODY = 48;
+  int GET_ATTRIBUTE_BODY = 64;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' containment reference.
@@ -2031,7 +2560,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetProperty()
    * @generated
    */
-  int GET_PROPERTY = 49;
+  int GET_PROPERTY = 65;
 
   /**
    * The feature id for the '<em><b>Property</b></em>' containment reference.
@@ -2059,7 +2588,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetPropertyBody()
    * @generated
    */
-  int GET_PROPERTY_BODY = 50;
+  int GET_PROPERTY_BODY = 66;
 
   /**
    * The feature id for the '<em><b>Property</b></em>' containment reference.
@@ -2105,7 +2634,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilities()
    * @generated
    */
-  int ECAPABILITIES = 51;
+  int ECAPABILITIES = 67;
 
   /**
    * The feature id for the '<em><b>Capabilities</b></em>' containment reference list.
@@ -2133,7 +2662,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEReqOrCap()
    * @generated
    */
-  int EREQ_OR_CAP = 58;
+  int EREQ_OR_CAP = 74;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2161,7 +2690,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilityDefinition()
    * @generated
    */
-  int ECAPABILITY_DEFINITION = 52;
+  int ECAPABILITY_DEFINITION = 68;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2198,7 +2727,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilityDefinitionBody()
    * @generated
    */
-  int ECAPABILITY_DEFINITION_BODY = 53;
+  int ECAPABILITY_DEFINITION_BODY = 69;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -2280,7 +2809,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEValidSourceType()
    * @generated
    */
-  int EVALID_SOURCE_TYPE = 54;
+  int EVALID_SOURCE_TYPE = 70;
 
   /**
    * The feature id for the '<em><b>Source Types</b></em>' containment reference list.
@@ -2317,7 +2846,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERequirements()
    * @generated
    */
-  int EREQUIREMENTS = 55;
+  int EREQUIREMENTS = 71;
 
   /**
    * The feature id for the '<em><b>Requirements</b></em>' containment reference list.
@@ -2345,7 +2874,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERequirementDefinition()
    * @generated
    */
-  int EREQUIREMENT_DEFINITION = 56;
+  int EREQUIREMENT_DEFINITION = 72;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2382,7 +2911,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERequirementDefinitionBody()
    * @generated
    */
-  int EREQUIREMENT_DEFINITION_BODY = 57;
+  int EREQUIREMENT_DEFINITION_BODY = 73;
 
   /**
    * The feature id for the '<em><b>Capability</b></em>' containment reference.
@@ -2446,7 +2975,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConstraints()
    * @generated
    */
-  int ECONSTRAINTS = 59;
+  int ECONSTRAINTS = 75;
 
   /**
    * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -2474,7 +3003,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConstraint()
    * @generated
    */
-  int ECONSTRAINT = 60;
+  int ECONSTRAINT = 76;
 
   /**
    * The number of structural features of the '<em>EConstraint</em>' class.
@@ -2493,7 +3022,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMaxLength()
    * @generated
    */
-  int EMAX_LENGTH = 61;
+  int EMAX_LENGTH = 77;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2521,7 +3050,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMinLength()
    * @generated
    */
-  int EMIN_LENGTH = 62;
+  int EMIN_LENGTH = 78;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2549,7 +3078,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELength()
    * @generated
    */
-  int ELENGTH = 63;
+  int ELENGTH = 79;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2577,7 +3106,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEValid_Values()
    * @generated
    */
-  int EVALID_VALUES = 64;
+  int EVALID_VALUES = 80;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2605,7 +3134,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAssignmentValue()
    * @generated
    */
-  int EASSIGNMENT_VALUE = 72;
+  int EASSIGNMENT_VALUE = 88;
 
   /**
    * The number of structural features of the '<em>EAssignment Value</em>' class.
@@ -2624,7 +3153,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELIST()
    * @generated
    */
-  int ELIST = 65;
+  int ELIST = 81;
 
   /**
    * The feature id for the '<em><b>List</b></em>' containment reference list.
@@ -2652,7 +3181,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEInRange()
    * @generated
    */
-  int EIN_RANGE = 66;
+  int EIN_RANGE = 82;
 
   /**
    * The feature id for the '<em><b>Start</b></em>' containment reference.
@@ -2689,7 +3218,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELessOrEqual()
    * @generated
    */
-  int ELESS_OR_EQUAL = 67;
+  int ELESS_OR_EQUAL = 83;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2717,7 +3246,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELessThan()
    * @generated
    */
-  int ELESS_THAN = 68;
+  int ELESS_THAN = 84;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2745,7 +3274,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEGreaterOrEqual()
    * @generated
    */
-  int EGREATER_OR_EQUAL = 69;
+  int EGREATER_OR_EQUAL = 85;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2773,7 +3302,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEGreaterThan()
    * @generated
    */
-  int EGREATER_THAN = 70;
+  int EGREATER_THAN = 86;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2801,7 +3330,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEEqual()
    * @generated
    */
-  int EEQUAL = 71;
+  int EEQUAL = 87;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -2829,7 +3358,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESingleValue()
    * @generated
    */
-  int ESINGLE_VALUE = 73;
+  int ESINGLE_VALUE = 89;
 
   /**
    * The number of structural features of the '<em>ESingle Value</em>' class.
@@ -2848,7 +3377,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAlphaNumericValue()
    * @generated
    */
-  int EALPHA_NUMERIC_VALUE = 74;
+  int EALPHA_NUMERIC_VALUE = 90;
 
   /**
    * The number of structural features of the '<em>EAlpha Numeric Value</em>' class.
@@ -2867,7 +3396,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESTRING()
    * @generated
    */
-  int ESTRING = 75;
+  int ESTRING = 91;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2895,7 +3424,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEBOOLEAN()
    * @generated
    */
-  int EBOOLEAN = 76;
+  int EBOOLEAN = 92;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2923,7 +3452,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEFLOAT()
    * @generated
    */
-  int EFLOAT = 77;
+  int EFLOAT = 93;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2951,7 +3480,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESIGNEDINT()
    * @generated
    */
-  int ESIGNEDINT = 78;
+  int ESIGNEDINT = 94;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2979,7 +3508,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMAP()
    * @generated
    */
-  int EMAP = 79;
+  int EMAP = 95;
 
   /**
    * The feature id for the '<em><b>Map</b></em>' containment reference list.
@@ -3007,7 +3536,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMapEntry()
    * @generated
    */
-  int EMAP_ENTRY = 80;
+  int EMAP_ENTRY = 96;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -3044,7 +3573,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEEntityReference()
    * @generated
    */
-  int EENTITY_REFERENCE = 81;
+  int EENTITY_REFERENCE = 97;
 
   /**
    * The number of structural features of the '<em>EEntity Reference</em>' class.
@@ -3063,7 +3592,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPREFIX_TYPE()
    * @generated
    */
-  int EPREFIX_TYPE = 82;
+  int EPREFIX_TYPE = 98;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -3100,7 +3629,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPREFIX_ID()
    * @generated
    */
-  int EPREFIX_ID = 83;
+  int EPREFIX_ID = 99;
 
   /**
    * The feature id for the '<em><b>Module</b></em>' attribute.
@@ -3137,7 +3666,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPRIMITIVE_TYPE()
    * @generated
    */
-  int EPRIMITIVE_TYPE = 84;
+  int EPRIMITIVE_TYPE = 100;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -3165,7 +3694,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEEntity()
    * @generated
    */
-  int EENTITY = 85;
+  int EENTITY = 101;
 
   /**
    * The feature id for the '<em><b>Entity</b></em>' attribute.
@@ -3850,6 +4379,441 @@ public interface RMPackage extends EPackage
    * @generated
    */
   EReference getEPolicyTypeBody_Targets();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getTriggers <em>Triggers</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Triggers</em>'.
+   * @see org.sodalite.dsl.rM.EPolicyTypeBody#getTriggers()
+   * @see #getEPolicyTypeBody()
+   * @generated
+   */
+  EReference getEPolicyTypeBody_Triggers();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.ETriggers <em>ETriggers</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ETriggers</em>'.
+   * @see org.sodalite.dsl.rM.ETriggers
+   * @generated
+   */
+  EClass getETriggers();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.ETriggers#getTriggers <em>Triggers</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Triggers</em>'.
+   * @see org.sodalite.dsl.rM.ETriggers#getTriggers()
+   * @see #getETriggers()
+   * @generated
+   */
+  EReference getETriggers_Triggers();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.ETriggerDefinition <em>ETrigger Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ETrigger Definition</em>'.
+   * @see org.sodalite.dsl.rM.ETriggerDefinition
+   * @generated
+   */
+  EClass getETriggerDefinition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ETriggerDefinition#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.sodalite.dsl.rM.ETriggerDefinition#getName()
+   * @see #getETriggerDefinition()
+   * @generated
+   */
+  EAttribute getETriggerDefinition_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ETriggerDefinition#getTrigger <em>Trigger</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Trigger</em>'.
+   * @see org.sodalite.dsl.rM.ETriggerDefinition#getTrigger()
+   * @see #getETriggerDefinition()
+   * @generated
+   */
+  EReference getETriggerDefinition_Trigger();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody <em>ETrigger Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ETrigger Definition Body</em>'.
+   * @see org.sodalite.dsl.rM.ETriggerDefinitionBody
+   * @generated
+   */
+  EClass getETriggerDefinitionBody();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getDescription <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Description</em>'.
+   * @see org.sodalite.dsl.rM.ETriggerDefinitionBody#getDescription()
+   * @see #getETriggerDefinitionBody()
+   * @generated
+   */
+  EAttribute getETriggerDefinitionBody_Description();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getEvent <em>Event</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Event</em>'.
+   * @see org.sodalite.dsl.rM.ETriggerDefinitionBody#getEvent()
+   * @see #getETriggerDefinitionBody()
+   * @generated
+   */
+  EAttribute getETriggerDefinitionBody_Event();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getTarget_filter <em>Target filter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Target filter</em>'.
+   * @see org.sodalite.dsl.rM.ETriggerDefinitionBody#getTarget_filter()
+   * @see #getETriggerDefinitionBody()
+   * @generated
+   */
+  EReference getETriggerDefinitionBody_Target_filter();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getCondition <em>Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Condition</em>'.
+   * @see org.sodalite.dsl.rM.ETriggerDefinitionBody#getCondition()
+   * @see #getETriggerDefinitionBody()
+   * @generated
+   */
+  EReference getETriggerDefinitionBody_Condition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getAction <em>Action</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Action</em>'.
+   * @see org.sodalite.dsl.rM.ETriggerDefinitionBody#getAction()
+   * @see #getETriggerDefinitionBody()
+   * @generated
+   */
+  EReference getETriggerDefinitionBody_Action();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EEvenFilter <em>EEven Filter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EEven Filter</em>'.
+   * @see org.sodalite.dsl.rM.EEvenFilter
+   * @generated
+   */
+  EClass getEEvenFilter();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EEvenFilter#getNode <em>Node</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Node</em>'.
+   * @see org.sodalite.dsl.rM.EEvenFilter#getNode()
+   * @see #getEEvenFilter()
+   * @generated
+   */
+  EReference getEEvenFilter_Node();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EEvenFilter#getRequirement <em>Requirement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Requirement</em>'.
+   * @see org.sodalite.dsl.rM.EEvenFilter#getRequirement()
+   * @see #getEEvenFilter()
+   * @generated
+   */
+  EAttribute getEEvenFilter_Requirement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EEvenFilter#getCapability <em>Capability</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Capability</em>'.
+   * @see org.sodalite.dsl.rM.EEvenFilter#getCapability()
+   * @see #getEEvenFilter()
+   * @generated
+   */
+  EAttribute getEEvenFilter_Capability();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EConditionClauseDefinition <em>ECondition Clause Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ECondition Clause Definition</em>'.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinition
+   * @generated
+   */
+  EClass getEConditionClauseDefinition();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionAND <em>ECondition Clause Definition AND</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ECondition Clause Definition AND</em>'.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionAND
+   * @generated
+   */
+  EClass getEConditionClauseDefinitionAND();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionAND#getAnd <em>And</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>And</em>'.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionAND#getAnd()
+   * @see #getEConditionClauseDefinitionAND()
+   * @generated
+   */
+  EReference getEConditionClauseDefinitionAND_And();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionOR <em>ECondition Clause Definition OR</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ECondition Clause Definition OR</em>'.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionOR
+   * @generated
+   */
+  EClass getEConditionClauseDefinitionOR();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionOR#getOr <em>Or</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Or</em>'.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionOR#getOr()
+   * @see #getEConditionClauseDefinitionOR()
+   * @generated
+   */
+  EReference getEConditionClauseDefinitionOR_Or();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionNOT <em>ECondition Clause Definition NOT</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ECondition Clause Definition NOT</em>'.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionNOT
+   * @generated
+   */
+  EClass getEConditionClauseDefinitionNOT();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionNOT#getNot <em>Not</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Not</em>'.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionNOT#getNot()
+   * @see #getEConditionClauseDefinitionNOT()
+   * @generated
+   */
+  EReference getEConditionClauseDefinitionNOT_Not();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionAssert <em>ECondition Clause Definition Assert</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ECondition Clause Definition Assert</em>'.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
+   * @generated
+   */
+  EClass getEConditionClauseDefinitionAssert();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.EConditionClauseDefinitionAssert#getAssertions <em>Assertions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Assertions</em>'.
+   * @see org.sodalite.dsl.rM.EConditionClauseDefinitionAssert#getAssertions()
+   * @see #getEConditionClauseDefinitionAssert()
+   * @generated
+   */
+  EReference getEConditionClauseDefinitionAssert_Assertions();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EAssertionDefinition <em>EAssertion Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EAssertion Definition</em>'.
+   * @see org.sodalite.dsl.rM.EAssertionDefinition
+   * @generated
+   */
+  EClass getEAssertionDefinition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EAssertionDefinition#getAttribute_name <em>Attribute name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Attribute name</em>'.
+   * @see org.sodalite.dsl.rM.EAssertionDefinition#getAttribute_name()
+   * @see #getEAssertionDefinition()
+   * @generated
+   */
+  EAttribute getEAssertionDefinition_Attribute_name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EAssertionDefinition#getConstraints <em>Constraints</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constraints</em>'.
+   * @see org.sodalite.dsl.rM.EAssertionDefinition#getConstraints()
+   * @see #getEAssertionDefinition()
+   * @generated
+   */
+  EReference getEAssertionDefinition_Constraints();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EConstraintList <em>EConstraint List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EConstraint List</em>'.
+   * @see org.sodalite.dsl.rM.EConstraintList
+   * @generated
+   */
+  EClass getEConstraintList();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.EConstraintList#getList <em>List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>List</em>'.
+   * @see org.sodalite.dsl.rM.EConstraintList#getList()
+   * @see #getEConstraintList()
+   * @generated
+   */
+  EReference getEConstraintList_List();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EActivityDefinition <em>EActivity Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EActivity Definition</em>'.
+   * @see org.sodalite.dsl.rM.EActivityDefinition
+   * @generated
+   */
+  EClass getEActivityDefinition();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinition <em>ECall Operation Activity Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ECall Operation Activity Definition</em>'.
+   * @see org.sodalite.dsl.rM.ECallOperationActivityDefinition
+   * @generated
+   */
+  EClass getECallOperationActivityDefinition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinition#getOperation <em>Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Operation</em>'.
+   * @see org.sodalite.dsl.rM.ECallOperationActivityDefinition#getOperation()
+   * @see #getECallOperationActivityDefinition()
+   * @generated
+   */
+  EReference getECallOperationActivityDefinition_Operation();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody <em>ECall Operation Activity Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ECall Operation Activity Definition Body</em>'.
+   * @see org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody
+   * @generated
+   */
+  EClass getECallOperationActivityDefinitionBody();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Name</em>'.
+   * @see org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getName()
+   * @see #getECallOperationActivityDefinitionBody()
+   * @generated
+   */
+  EReference getECallOperationActivityDefinitionBody_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getInputs <em>Inputs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Inputs</em>'.
+   * @see org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getInputs()
+   * @see #getECallOperationActivityDefinitionBody()
+   * @generated
+   */
+  EReference getECallOperationActivityDefinitionBody_Inputs();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EPropertyAssignments <em>EProperty Assignments</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EProperty Assignments</em>'.
+   * @see org.sodalite.dsl.rM.EPropertyAssignments
+   * @generated
+   */
+  EClass getEPropertyAssignments();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.EPropertyAssignments#getProperties <em>Properties</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Properties</em>'.
+   * @see org.sodalite.dsl.rM.EPropertyAssignments#getProperties()
+   * @see #getEPropertyAssignments()
+   * @generated
+   */
+  EReference getEPropertyAssignments_Properties();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EPropertyAssignment <em>EProperty Assignment</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EProperty Assignment</em>'.
+   * @see org.sodalite.dsl.rM.EPropertyAssignment
+   * @generated
+   */
+  EClass getEPropertyAssignment();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EPropertyAssignment#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.sodalite.dsl.rM.EPropertyAssignment#getName()
+   * @see #getEPropertyAssignment()
+   * @generated
+   */
+  EAttribute getEPropertyAssignment_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EPropertyAssignment#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Value</em>'.
+   * @see org.sodalite.dsl.rM.EPropertyAssignment#getValue()
+   * @see #getEPropertyAssignment()
+   * @generated
+   */
+  EReference getEPropertyAssignment_Value();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ENodeTypes <em>ENode Types</em>}'.
@@ -6380,6 +7344,366 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EReference EPOLICY_TYPE_BODY__TARGETS = eINSTANCE.getEPolicyTypeBody_Targets();
+
+    /**
+     * The meta object literal for the '<em><b>Triggers</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPOLICY_TYPE_BODY__TRIGGERS = eINSTANCE.getEPolicyTypeBody_Triggers();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ETriggersImpl <em>ETriggers</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.ETriggersImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getETriggers()
+     * @generated
+     */
+    EClass ETRIGGERS = eINSTANCE.getETriggers();
+
+    /**
+     * The meta object literal for the '<em><b>Triggers</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETRIGGERS__TRIGGERS = eINSTANCE.getETriggers_Triggers();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionImpl <em>ETrigger Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.ETriggerDefinitionImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getETriggerDefinition()
+     * @generated
+     */
+    EClass ETRIGGER_DEFINITION = eINSTANCE.getETriggerDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ETRIGGER_DEFINITION__NAME = eINSTANCE.getETriggerDefinition_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Trigger</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETRIGGER_DEFINITION__TRIGGER = eINSTANCE.getETriggerDefinition_Trigger();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl <em>ETrigger Definition Body</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getETriggerDefinitionBody()
+     * @generated
+     */
+    EClass ETRIGGER_DEFINITION_BODY = eINSTANCE.getETriggerDefinitionBody();
+
+    /**
+     * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ETRIGGER_DEFINITION_BODY__DESCRIPTION = eINSTANCE.getETriggerDefinitionBody_Description();
+
+    /**
+     * The meta object literal for the '<em><b>Event</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ETRIGGER_DEFINITION_BODY__EVENT = eINSTANCE.getETriggerDefinitionBody_Event();
+
+    /**
+     * The meta object literal for the '<em><b>Target filter</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETRIGGER_DEFINITION_BODY__TARGET_FILTER = eINSTANCE.getETriggerDefinitionBody_Target_filter();
+
+    /**
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETRIGGER_DEFINITION_BODY__CONDITION = eINSTANCE.getETriggerDefinitionBody_Condition();
+
+    /**
+     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETRIGGER_DEFINITION_BODY__ACTION = eINSTANCE.getETriggerDefinitionBody_Action();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EEvenFilterImpl <em>EEven Filter</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EEvenFilterImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEEvenFilter()
+     * @generated
+     */
+    EClass EEVEN_FILTER = eINSTANCE.getEEvenFilter();
+
+    /**
+     * The meta object literal for the '<em><b>Node</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EEVEN_FILTER__NODE = eINSTANCE.getEEvenFilter_Node();
+
+    /**
+     * The meta object literal for the '<em><b>Requirement</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EEVEN_FILTER__REQUIREMENT = eINSTANCE.getEEvenFilter_Requirement();
+
+    /**
+     * The meta object literal for the '<em><b>Capability</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EEVEN_FILTER__CAPABILITY = eINSTANCE.getEEvenFilter_Capability();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionImpl <em>ECondition Clause Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinition()
+     * @generated
+     */
+    EClass ECONDITION_CLAUSE_DEFINITION = eINSTANCE.getEConditionClauseDefinition();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionANDImpl <em>ECondition Clause Definition AND</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionANDImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinitionAND()
+     * @generated
+     */
+    EClass ECONDITION_CLAUSE_DEFINITION_AND = eINSTANCE.getEConditionClauseDefinitionAND();
+
+    /**
+     * The meta object literal for the '<em><b>And</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ECONDITION_CLAUSE_DEFINITION_AND__AND = eINSTANCE.getEConditionClauseDefinitionAND_And();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionORImpl <em>ECondition Clause Definition OR</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionORImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinitionOR()
+     * @generated
+     */
+    EClass ECONDITION_CLAUSE_DEFINITION_OR = eINSTANCE.getEConditionClauseDefinitionOR();
+
+    /**
+     * The meta object literal for the '<em><b>Or</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ECONDITION_CLAUSE_DEFINITION_OR__OR = eINSTANCE.getEConditionClauseDefinitionOR_Or();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionNOTImpl <em>ECondition Clause Definition NOT</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionNOTImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinitionNOT()
+     * @generated
+     */
+    EClass ECONDITION_CLAUSE_DEFINITION_NOT = eINSTANCE.getEConditionClauseDefinitionNOT();
+
+    /**
+     * The meta object literal for the '<em><b>Not</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ECONDITION_CLAUSE_DEFINITION_NOT__NOT = eINSTANCE.getEConditionClauseDefinitionNOT_Not();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionAssertImpl <em>ECondition Clause Definition Assert</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EConditionClauseDefinitionAssertImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConditionClauseDefinitionAssert()
+     * @generated
+     */
+    EClass ECONDITION_CLAUSE_DEFINITION_ASSERT = eINSTANCE.getEConditionClauseDefinitionAssert();
+
+    /**
+     * The meta object literal for the '<em><b>Assertions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ECONDITION_CLAUSE_DEFINITION_ASSERT__ASSERTIONS = eINSTANCE.getEConditionClauseDefinitionAssert_Assertions();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EAssertionDefinitionImpl <em>EAssertion Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EAssertionDefinitionImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAssertionDefinition()
+     * @generated
+     */
+    EClass EASSERTION_DEFINITION = eINSTANCE.getEAssertionDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Attribute name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EASSERTION_DEFINITION__ATTRIBUTE_NAME = eINSTANCE.getEAssertionDefinition_Attribute_name();
+
+    /**
+     * The meta object literal for the '<em><b>Constraints</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EASSERTION_DEFINITION__CONSTRAINTS = eINSTANCE.getEAssertionDefinition_Constraints();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EConstraintListImpl <em>EConstraint List</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EConstraintListImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConstraintList()
+     * @generated
+     */
+    EClass ECONSTRAINT_LIST = eINSTANCE.getEConstraintList();
+
+    /**
+     * The meta object literal for the '<em><b>List</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ECONSTRAINT_LIST__LIST = eINSTANCE.getEConstraintList_List();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EActivityDefinitionImpl <em>EActivity Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EActivityDefinitionImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEActivityDefinition()
+     * @generated
+     */
+    EClass EACTIVITY_DEFINITION = eINSTANCE.getEActivityDefinition();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionImpl <em>ECall Operation Activity Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECallOperationActivityDefinition()
+     * @generated
+     */
+    EClass ECALL_OPERATION_ACTIVITY_DEFINITION = eINSTANCE.getECallOperationActivityDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Operation</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ECALL_OPERATION_ACTIVITY_DEFINITION__OPERATION = eINSTANCE.getECallOperationActivityDefinition_Operation();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionBodyImpl <em>ECall Operation Activity Definition Body</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionBodyImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECallOperationActivityDefinitionBody()
+     * @generated
+     */
+    EClass ECALL_OPERATION_ACTIVITY_DEFINITION_BODY = eINSTANCE.getECallOperationActivityDefinitionBody();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME = eINSTANCE.getECallOperationActivityDefinitionBody_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Inputs</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__INPUTS = eINSTANCE.getECallOperationActivityDefinitionBody_Inputs();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl <em>EProperty Assignments</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPropertyAssignments()
+     * @generated
+     */
+    EClass EPROPERTY_ASSIGNMENTS = eINSTANCE.getEPropertyAssignments();
+
+    /**
+     * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPROPERTY_ASSIGNMENTS__PROPERTIES = eINSTANCE.getEPropertyAssignments_Properties();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EPropertyAssignmentImpl <em>EProperty Assignment</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EPropertyAssignmentImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPropertyAssignment()
+     * @generated
+     */
+    EClass EPROPERTY_ASSIGNMENT = eINSTANCE.getEPropertyAssignment();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EPROPERTY_ASSIGNMENT__NAME = eINSTANCE.getEPropertyAssignment_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPROPERTY_ASSIGNMENT__VALUE = eINSTANCE.getEPropertyAssignment_Value();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ENodeTypesImpl <em>ENode Types</em>}' class.

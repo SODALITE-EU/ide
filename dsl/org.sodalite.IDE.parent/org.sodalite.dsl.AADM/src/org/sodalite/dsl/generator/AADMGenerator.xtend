@@ -17,7 +17,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import org.eclipse.emf.common.util.URI
 import org.sodalite.dsl.aADM.ENodeTemplate
-import org.sodalite.dsl.aADM.EPropertyAssignment
 import java.util.HashMap
 import java.util.Map
 import org.sodalite.dsl.aADM.ERequirementAssignment
@@ -51,6 +50,7 @@ import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
 import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.rM.EEntity
+import org.sodalite.dsl.rM.EPropertyAssignment
 
 /**
  * Generates code from your model files on save.

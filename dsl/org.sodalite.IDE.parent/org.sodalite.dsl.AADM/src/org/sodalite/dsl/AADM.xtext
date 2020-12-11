@@ -45,7 +45,7 @@ ENodeTemplateBody:
 	('optimization:' optimization=[opt::Optimization_Model|QUALIFIED_NAME])? &
 	('properties:'
 	BEGIN
-		properties=EPropertyAssigments
+		properties=EPropertyAssignments
 	END)? &
 	('attributes:'
 	BEGIN
@@ -78,7 +78,7 @@ ECapabilityAssignment:
 	BEGIN
 		('properties:'
 		BEGIN
-			properties=EPropertyAssigments
+			properties=EPropertyAssignments
 		END)? 
 	END;
 
@@ -88,11 +88,7 @@ EAttributeAssigments:
 EAttributeAssignment:
 	name = ID ':' value=EAssignmentValue;
 
-EPropertyAssigments:
-	{EPropertyAssigments} (properties+=EPropertyAssignment)*;
 
-EPropertyAssignment:
-	name = ID ':' value=EAssignmentValue;
 	
 
 

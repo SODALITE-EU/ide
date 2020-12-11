@@ -192,9 +192,13 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('targets:' '[' ']')?
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) 'triggers:' BEGIN triggers=ETriggers
 	 *     (rule start) (ambiguity) (rule start)
+	 *     description=STRING (ambiguity) 'triggers:' BEGIN triggers=ETriggers
 	 *     description=STRING (ambiguity) (rule end)
+	 *     properties=EProperties END (ambiguity) 'triggers:' BEGIN triggers=ETriggers
 	 *     properties=EProperties END (ambiguity) (rule end)
+	 *     superType=EPREFIX_TYPE (ambiguity) 'triggers:' BEGIN triggers=ETriggers
 	 *     superType=EPREFIX_TYPE (ambiguity) (rule end)
 	 */
 	protected void emit_EPolicyTypeBody___TargetsKeyword_3_0_LeftSquareBracketKeyword_3_1_RightSquareBracketKeyword_3_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {

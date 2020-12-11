@@ -1038,16 +1038,26 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Assignment cTargetsAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
 		private final RuleCall cTargetsEValidTargetTypesParserRuleCall_3_2_0 = (RuleCall)cTargetsAssignment_3_2.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cTriggersKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
+		private final Assignment cTriggersAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
+		private final RuleCall cTriggersETriggersParserRuleCall_4_2_0 = (RuleCall)cTriggersAssignment_4_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_4_3 = (RuleCall)cGroup_4.eContents().get(3);
 		
 		//EPolicyTypeBody:
 		//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?) ('properties:'
 		//	BEGIN
 		//	properties=EProperties
-		//	END)? ('targets:' '[' targets+=EValidTargetTypes? ']')?;
+		//	END)? ('targets:' '[' targets+=EValidTargetTypes? ']')? ('triggers:'
+		//	BEGIN
+		//	triggers=ETriggers
+		//	END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?) ('properties:'
-		//BEGIN properties=EProperties END)? ('targets:' '[' targets+=EValidTargetTypes? ']')?
+		//BEGIN properties=EProperties END)? ('targets:' '[' targets+=EValidTargetTypes? ']')? ('triggers:' BEGIN
+		//triggers=ETriggers END)?
 		public Group getGroup() { return cGroup; }
 		
 		//{EPolicyTypeBody}
@@ -1115,6 +1125,654 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_3_3() { return cRightSquareBracketKeyword_3_3; }
+		
+		//('triggers:' BEGIN triggers=ETriggers END)?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//'triggers:'
+		public Keyword getTriggersKeyword_4_0() { return cTriggersKeyword_4_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_4_1() { return cBEGINTerminalRuleCall_4_1; }
+		
+		//triggers=ETriggers
+		public Assignment getTriggersAssignment_4_2() { return cTriggersAssignment_4_2; }
+		
+		//ETriggers
+		public RuleCall getTriggersETriggersParserRuleCall_4_2_0() { return cTriggersETriggersParserRuleCall_4_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_4_3() { return cENDTerminalRuleCall_4_3; }
+	}
+	public class ETriggersElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ETriggers");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cETriggersAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cTriggersAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTriggersETriggerDefinitionParserRuleCall_1_0 = (RuleCall)cTriggersAssignment_1.eContents().get(0);
+		
+		//ETriggers:
+		//	{ETriggers} triggers+=ETriggerDefinition*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{ETriggers} triggers+=ETriggerDefinition*
+		public Group getGroup() { return cGroup; }
+		
+		//{ETriggers}
+		public Action getETriggersAction_0() { return cETriggersAction_0; }
+		
+		//triggers+=ETriggerDefinition*
+		public Assignment getTriggersAssignment_1() { return cTriggersAssignment_1; }
+		
+		//ETriggerDefinition
+		public RuleCall getTriggersETriggerDefinitionParserRuleCall_1_0() { return cTriggersETriggerDefinitionParserRuleCall_1_0; }
+	}
+	public class ETriggerDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ETriggerDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameQUALIFIED_NAMETerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cBEGINTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cTriggerAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTriggerETriggerDefinitionBodyParserRuleCall_3_0 = (RuleCall)cTriggerAssignment_3.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
+		
+		//ETriggerDefinition:
+		//	name=QUALIFIED_NAME ':'
+		//	BEGIN
+		//	trigger=ETriggerDefinitionBody
+		//	END;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=QUALIFIED_NAME ':' BEGIN trigger=ETriggerDefinitionBody END
+		public Group getGroup() { return cGroup; }
+		
+		//name=QUALIFIED_NAME
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
+		//QUALIFIED_NAME
+		public RuleCall getNameQUALIFIED_NAMETerminalRuleCall_0_0() { return cNameQUALIFIED_NAMETerminalRuleCall_0_0; }
+		
+		//':'
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_2() { return cBEGINTerminalRuleCall_2; }
+		
+		//trigger=ETriggerDefinitionBody
+		public Assignment getTriggerAssignment_3() { return cTriggerAssignment_3; }
+		
+		//ETriggerDefinitionBody
+		public RuleCall getTriggerETriggerDefinitionBodyParserRuleCall_3_0() { return cTriggerETriggerDefinitionBodyParserRuleCall_3_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_4() { return cENDTerminalRuleCall_4; }
+	}
+	public class ETriggerDefinitionBodyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ETriggerDefinitionBody");
+		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
+		private final Keyword cDescriptionKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cDescriptionAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cDescriptionSTRINGTerminalRuleCall_0_1_0 = (RuleCall)cDescriptionAssignment_0_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
+		private final Keyword cEventKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cEventAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cEventSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cEventAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
+		private final Keyword cTarget_filterKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
+		private final Assignment cTarget_filterAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cTarget_filterEEvenFilterParserRuleCall_2_2_0 = (RuleCall)cTarget_filterAssignment_2_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_2_3 = (RuleCall)cGroup_2.eContents().get(3);
+		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
+		private final Keyword cConditionKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_3_1 = (RuleCall)cGroup_3.eContents().get(1);
+		private final Assignment cConditionAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cConditionEConditionClauseDefinitionParserRuleCall_3_2_0 = (RuleCall)cConditionAssignment_3_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_3_3 = (RuleCall)cGroup_3.eContents().get(3);
+		private final Group cGroup_4 = (Group)cUnorderedGroup.eContents().get(4);
+		private final Keyword cActionKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
+		private final Assignment cActionAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
+		private final RuleCall cActionEActivityDefinitionParserRuleCall_4_2_0 = (RuleCall)cActionAssignment_4_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_4_3 = (RuleCall)cGroup_4.eContents().get(3);
+		
+		//ETriggerDefinitionBody:
+		//	('description:' description=STRING)? & 'event:' event=STRING & ('target_filter:'
+		//	BEGIN
+		//	target_filter=EEvenFilter
+		//	END)? & ('condition:'
+		//	BEGIN
+		//	condition=EConditionClauseDefinition
+		//	END)? & ('action:'
+		//	BEGIN
+		//	action=EActivityDefinition
+		//	END)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//('description:' description=STRING)? & 'event:' event=STRING & ('target_filter:' BEGIN target_filter=EEvenFilter END)? &
+		//('condition:' BEGIN condition=EConditionClauseDefinition END)? & ('action:' BEGIN action=EActivityDefinition END)?
+		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
+		
+		//('description:' description=STRING)?
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//'description:'
+		public Keyword getDescriptionKeyword_0_0() { return cDescriptionKeyword_0_0; }
+		
+		//description=STRING
+		public Assignment getDescriptionAssignment_0_1() { return cDescriptionAssignment_0_1; }
+		
+		//STRING
+		public RuleCall getDescriptionSTRINGTerminalRuleCall_0_1_0() { return cDescriptionSTRINGTerminalRuleCall_0_1_0; }
+		
+		//'event:' event=STRING
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'event:'
+		public Keyword getEventKeyword_1_0() { return cEventKeyword_1_0; }
+		
+		//event=STRING
+		public Assignment getEventAssignment_1_1() { return cEventAssignment_1_1; }
+		
+		//STRING
+		public RuleCall getEventSTRINGTerminalRuleCall_1_1_0() { return cEventSTRINGTerminalRuleCall_1_1_0; }
+		
+		//('target_filter:' BEGIN target_filter=EEvenFilter END)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'target_filter:'
+		public Keyword getTarget_filterKeyword_2_0() { return cTarget_filterKeyword_2_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_2_1() { return cBEGINTerminalRuleCall_2_1; }
+		
+		//target_filter=EEvenFilter
+		public Assignment getTarget_filterAssignment_2_2() { return cTarget_filterAssignment_2_2; }
+		
+		//EEvenFilter
+		public RuleCall getTarget_filterEEvenFilterParserRuleCall_2_2_0() { return cTarget_filterEEvenFilterParserRuleCall_2_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_2_3() { return cENDTerminalRuleCall_2_3; }
+		
+		//('condition:' BEGIN condition=EConditionClauseDefinition END)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'condition:'
+		public Keyword getConditionKeyword_3_0() { return cConditionKeyword_3_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_3_1() { return cBEGINTerminalRuleCall_3_1; }
+		
+		//condition=EConditionClauseDefinition
+		public Assignment getConditionAssignment_3_2() { return cConditionAssignment_3_2; }
+		
+		//EConditionClauseDefinition
+		public RuleCall getConditionEConditionClauseDefinitionParserRuleCall_3_2_0() { return cConditionEConditionClauseDefinitionParserRuleCall_3_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_3_3() { return cENDTerminalRuleCall_3_3; }
+		
+		//('action:' BEGIN action=EActivityDefinition END)?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//'action:'
+		public Keyword getActionKeyword_4_0() { return cActionKeyword_4_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_4_1() { return cBEGINTerminalRuleCall_4_1; }
+		
+		//action=EActivityDefinition
+		public Assignment getActionAssignment_4_2() { return cActionAssignment_4_2; }
+		
+		//EActivityDefinition
+		public RuleCall getActionEActivityDefinitionParserRuleCall_4_2_0() { return cActionEActivityDefinitionParserRuleCall_4_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_4_3() { return cENDTerminalRuleCall_4_3; }
+	}
+	public class EEvenFilterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EEvenFilter");
+		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
+		private final Keyword cNodeKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cNodeAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cNodeEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cNodeAssignment_0_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
+		private final Keyword cRequirementKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cRequirementAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cRequirementSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cRequirementAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
+		private final Keyword cCapabilityKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cCapabilityAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cCapabilitySTRINGTerminalRuleCall_2_1_0 = (RuleCall)cCapabilityAssignment_2_1.eContents().get(0);
+		
+		//EEvenFilter:
+		//	'node:' node=EPREFIX_TYPE & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'node:' node=EPREFIX_TYPE & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?
+		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
+		
+		//'node:' node=EPREFIX_TYPE
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//'node:'
+		public Keyword getNodeKeyword_0_0() { return cNodeKeyword_0_0; }
+		
+		//node=EPREFIX_TYPE
+		public Assignment getNodeAssignment_0_1() { return cNodeAssignment_0_1; }
+		
+		//EPREFIX_TYPE
+		public RuleCall getNodeEPREFIX_TYPEParserRuleCall_0_1_0() { return cNodeEPREFIX_TYPEParserRuleCall_0_1_0; }
+		
+		//('requirement:' requirement=STRING)?
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'requirement:'
+		public Keyword getRequirementKeyword_1_0() { return cRequirementKeyword_1_0; }
+		
+		//requirement=STRING
+		public Assignment getRequirementAssignment_1_1() { return cRequirementAssignment_1_1; }
+		
+		//STRING
+		public RuleCall getRequirementSTRINGTerminalRuleCall_1_1_0() { return cRequirementSTRINGTerminalRuleCall_1_1_0; }
+		
+		//('capability:' capability=STRING)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'capability:'
+		public Keyword getCapabilityKeyword_2_0() { return cCapabilityKeyword_2_0; }
+		
+		//capability=STRING
+		public Assignment getCapabilityAssignment_2_1() { return cCapabilityAssignment_2_1; }
+		
+		//STRING
+		public RuleCall getCapabilitySTRINGTerminalRuleCall_2_1_0() { return cCapabilitySTRINGTerminalRuleCall_2_1_0; }
+	}
+	public class EConditionClauseDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EConditionClauseDefinition");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEConditionClauseDefinitionANDParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEConditionClauseDefinitionORParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEConditionClauseDefinitionNOTParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cEConditionClauseDefinitionAssertParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		
+		//EConditionClauseDefinition:
+		//	EConditionClauseDefinitionAND | EConditionClauseDefinitionOR | EConditionClauseDefinitionNOT |
+		//	EConditionClauseDefinitionAssert;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//EConditionClauseDefinitionAND | EConditionClauseDefinitionOR | EConditionClauseDefinitionNOT |
+		//EConditionClauseDefinitionAssert
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//EConditionClauseDefinitionAND
+		public RuleCall getEConditionClauseDefinitionANDParserRuleCall_0() { return cEConditionClauseDefinitionANDParserRuleCall_0; }
+		
+		//EConditionClauseDefinitionOR
+		public RuleCall getEConditionClauseDefinitionORParserRuleCall_1() { return cEConditionClauseDefinitionORParserRuleCall_1; }
+		
+		//EConditionClauseDefinitionNOT
+		public RuleCall getEConditionClauseDefinitionNOTParserRuleCall_2() { return cEConditionClauseDefinitionNOTParserRuleCall_2; }
+		
+		//EConditionClauseDefinitionAssert
+		public RuleCall getEConditionClauseDefinitionAssertParserRuleCall_3() { return cEConditionClauseDefinitionAssertParserRuleCall_3; }
+	}
+	public class EConditionClauseDefinitionANDElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EConditionClauseDefinitionAND");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAndKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cAndAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAndEConditionClauseDefinitionParserRuleCall_2_0 = (RuleCall)cAndAssignment_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		
+		//EConditionClauseDefinitionAND:
+		//	'and:'
+		//	BEGIN
+		//	and=EConditionClauseDefinition
+		//	END;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'and:' BEGIN and=EConditionClauseDefinition END
+		public Group getGroup() { return cGroup; }
+		
+		//'and:'
+		public Keyword getAndKeyword_0() { return cAndKeyword_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
+		
+		//and=EConditionClauseDefinition
+		public Assignment getAndAssignment_2() { return cAndAssignment_2; }
+		
+		//EConditionClauseDefinition
+		public RuleCall getAndEConditionClauseDefinitionParserRuleCall_2_0() { return cAndEConditionClauseDefinitionParserRuleCall_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
+	}
+	public class EConditionClauseDefinitionORElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EConditionClauseDefinitionOR");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cOrKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cOrAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOrEConditionClauseDefinitionParserRuleCall_2_0 = (RuleCall)cOrAssignment_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		
+		//EConditionClauseDefinitionOR:
+		//	'or:'
+		//	BEGIN
+		//	or=EConditionClauseDefinition
+		//	END;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'or:' BEGIN or=EConditionClauseDefinition END
+		public Group getGroup() { return cGroup; }
+		
+		//'or:'
+		public Keyword getOrKeyword_0() { return cOrKeyword_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
+		
+		//or=EConditionClauseDefinition
+		public Assignment getOrAssignment_2() { return cOrAssignment_2; }
+		
+		//EConditionClauseDefinition
+		public RuleCall getOrEConditionClauseDefinitionParserRuleCall_2_0() { return cOrEConditionClauseDefinitionParserRuleCall_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
+	}
+	public class EConditionClauseDefinitionNOTElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EConditionClauseDefinitionNOT");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNotKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cNotAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNotEConditionClauseDefinitionParserRuleCall_2_0 = (RuleCall)cNotAssignment_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		
+		//EConditionClauseDefinitionNOT:
+		//	'not:'
+		//	BEGIN
+		//	not=EConditionClauseDefinition
+		//	END;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'not:' BEGIN not=EConditionClauseDefinition END
+		public Group getGroup() { return cGroup; }
+		
+		//'not:'
+		public Keyword getNotKeyword_0() { return cNotKeyword_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
+		
+		//not=EConditionClauseDefinition
+		public Assignment getNotAssignment_2() { return cNotAssignment_2; }
+		
+		//EConditionClauseDefinition
+		public RuleCall getNotEConditionClauseDefinitionParserRuleCall_2_0() { return cNotEConditionClauseDefinitionParserRuleCall_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
+	}
+	public class EConditionClauseDefinitionAssertElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EConditionClauseDefinitionAssert");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cEConditionClauseDefinitionAssertAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cAssertionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cAssertionsEAssertionDefinitionParserRuleCall_1_0 = (RuleCall)cAssertionsAssignment_1.eContents().get(0);
+		
+		//EConditionClauseDefinitionAssert:
+		//	{EConditionClauseDefinitionAssert} assertions+=EAssertionDefinition*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{EConditionClauseDefinitionAssert} assertions+=EAssertionDefinition*
+		public Group getGroup() { return cGroup; }
+		
+		//{EConditionClauseDefinitionAssert}
+		public Action getEConditionClauseDefinitionAssertAction_0() { return cEConditionClauseDefinitionAssertAction_0; }
+		
+		//assertions+=EAssertionDefinition*
+		public Assignment getAssertionsAssignment_1() { return cAssertionsAssignment_1; }
+		
+		//EAssertionDefinition
+		public RuleCall getAssertionsEAssertionDefinitionParserRuleCall_1_0() { return cAssertionsEAssertionDefinitionParserRuleCall_1_0; }
+	}
+	public class EAssertionDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EAssertionDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cAttribute_nameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cAttribute_nameIDTerminalRuleCall_0_0 = (RuleCall)cAttribute_nameAssignment_0.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cConstraintsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cConstraintsEConstraintListParserRuleCall_3_0 = (RuleCall)cConstraintsAssignment_3.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//EAssertionDefinition:
+		//	attribute_name=ID ':' '[' constraints=EConstraintList ']';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//attribute_name=ID ':' '[' constraints=EConstraintList ']'
+		public Group getGroup() { return cGroup; }
+		
+		//attribute_name=ID
+		public Assignment getAttribute_nameAssignment_0() { return cAttribute_nameAssignment_0; }
+		
+		//ID
+		public RuleCall getAttribute_nameIDTerminalRuleCall_0_0() { return cAttribute_nameIDTerminalRuleCall_0_0; }
+		
+		//':'
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_2() { return cLeftSquareBracketKeyword_2; }
+		
+		//constraints=EConstraintList
+		public Assignment getConstraintsAssignment_3() { return cConstraintsAssignment_3; }
+		
+		//EConstraintList
+		public RuleCall getConstraintsEConstraintListParserRuleCall_3_0() { return cConstraintsEConstraintListParserRuleCall_3_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_4() { return cRightSquareBracketKeyword_4; }
+	}
+	public class EConstraintListElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EConstraintList");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cListAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cListEConstraintParserRuleCall_0_0 = (RuleCall)cListAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cListAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cListEConstraintParserRuleCall_1_1_0 = (RuleCall)cListAssignment_1_1.eContents().get(0);
+		
+		//EConstraintList:
+		//	list+=EConstraint (',' list+=EConstraint)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//list+=EConstraint (',' list+=EConstraint)*
+		public Group getGroup() { return cGroup; }
+		
+		//list+=EConstraint
+		public Assignment getListAssignment_0() { return cListAssignment_0; }
+		
+		//EConstraint
+		public RuleCall getListEConstraintParserRuleCall_0_0() { return cListEConstraintParserRuleCall_0_0; }
+		
+		//(',' list+=EConstraint)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//','
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
+		
+		//list+=EConstraint
+		public Assignment getListAssignment_1_1() { return cListAssignment_1_1; }
+		
+		//EConstraint
+		public RuleCall getListEConstraintParserRuleCall_1_1_0() { return cListEConstraintParserRuleCall_1_1_0; }
+	}
+	public class EActivityDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EActivityDefinition");
+		private final RuleCall cECallOperationActivityDefinitionParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//EActivityDefinition:
+		//	ECallOperationActivityDefinition;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ECallOperationActivityDefinition
+		public RuleCall getECallOperationActivityDefinitionParserRuleCall() { return cECallOperationActivityDefinitionParserRuleCall; }
+	}
+	public class ECallOperationActivityDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ECallOperationActivityDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cCall_operationKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cOperationAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOperationECallOperationActivityDefinitionBodyParserRuleCall_2_0 = (RuleCall)cOperationAssignment_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		
+		//ECallOperationActivityDefinition:
+		//	'call_operation:'
+		//	BEGIN
+		//	operation=ECallOperationActivityDefinitionBody
+		//	END;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'call_operation:' BEGIN operation=ECallOperationActivityDefinitionBody END
+		public Group getGroup() { return cGroup; }
+		
+		//'call_operation:'
+		public Keyword getCall_operationKeyword_0() { return cCall_operationKeyword_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
+		
+		//operation=ECallOperationActivityDefinitionBody
+		public Assignment getOperationAssignment_2() { return cOperationAssignment_2; }
+		
+		//ECallOperationActivityDefinitionBody
+		public RuleCall getOperationECallOperationActivityDefinitionBodyParserRuleCall_2_0() { return cOperationECallOperationActivityDefinitionBodyParserRuleCall_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
+	}
+	public class ECallOperationActivityDefinitionBodyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ECallOperationActivityDefinitionBody");
+		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
+		private final Keyword cOperationKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cNameEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
+		private final Keyword cInputsKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		private final Assignment cInputsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cInputsEPropertyAssignmentsParserRuleCall_1_2_0 = (RuleCall)cInputsAssignment_1_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
+		
+		//ECallOperationActivityDefinitionBody:
+		//	'operation:' name=EPREFIX_TYPE & ('inputs:'
+		//	BEGIN
+		//	inputs=EPropertyAssignments
+		//	END)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'operation:' name=EPREFIX_TYPE & ('inputs:' BEGIN inputs=EPropertyAssignments END)?
+		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
+		
+		//'operation:' name=EPREFIX_TYPE
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//'operation:'
+		public Keyword getOperationKeyword_0_0() { return cOperationKeyword_0_0; }
+		
+		//name=EPREFIX_TYPE
+		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
+		
+		//EPREFIX_TYPE
+		public RuleCall getNameEPREFIX_TYPEParserRuleCall_0_1_0() { return cNameEPREFIX_TYPEParserRuleCall_0_1_0; }
+		
+		//('inputs:' BEGIN inputs=EPropertyAssignments END)?
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'inputs:'
+		public Keyword getInputsKeyword_1_0() { return cInputsKeyword_1_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_1_1() { return cBEGINTerminalRuleCall_1_1; }
+		
+		//inputs=EPropertyAssignments
+		public Assignment getInputsAssignment_1_2() { return cInputsAssignment_1_2; }
+		
+		//EPropertyAssignments
+		public RuleCall getInputsEPropertyAssignmentsParserRuleCall_1_2_0() { return cInputsEPropertyAssignmentsParserRuleCall_1_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_1_3() { return cENDTerminalRuleCall_1_3; }
+	}
+	public class EPropertyAssignmentsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EPropertyAssignments");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cEPropertyAssignmentsAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cPropertiesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cPropertiesEPropertyAssignmentParserRuleCall_1_0 = (RuleCall)cPropertiesAssignment_1.eContents().get(0);
+		
+		//EPropertyAssignments:
+		//	{EPropertyAssignments} properties+=EPropertyAssignment*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{EPropertyAssignments} properties+=EPropertyAssignment*
+		public Group getGroup() { return cGroup; }
+		
+		//{EPropertyAssignments}
+		public Action getEPropertyAssignmentsAction_0() { return cEPropertyAssignmentsAction_0; }
+		
+		//properties+=EPropertyAssignment*
+		public Assignment getPropertiesAssignment_1() { return cPropertiesAssignment_1; }
+		
+		//EPropertyAssignment
+		public RuleCall getPropertiesEPropertyAssignmentParserRuleCall_1_0() { return cPropertiesEPropertyAssignmentParserRuleCall_1_0; }
+	}
+	public class EPropertyAssignmentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EPropertyAssignment");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValueEAssignmentValueParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		
+		//EPropertyAssignment:
+		//	name=ID ':' value=EAssignmentValue;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=ID ':' value=EAssignmentValue
+		public Group getGroup() { return cGroup; }
+		
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		
+		//':'
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		
+		//value=EAssignmentValue
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+		
+		//EAssignmentValue
+		public RuleCall getValueEAssignmentValueParserRuleCall_2_0() { return cValueEAssignmentValueParserRuleCall_2_0; }
 	}
 	public class ENodeTypesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ENodeTypes");
@@ -4061,6 +4719,22 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final EPolicyTypesElements pEPolicyTypes;
 	private final EPolicyTypeElements pEPolicyType;
 	private final EPolicyTypeBodyElements pEPolicyTypeBody;
+	private final ETriggersElements pETriggers;
+	private final ETriggerDefinitionElements pETriggerDefinition;
+	private final ETriggerDefinitionBodyElements pETriggerDefinitionBody;
+	private final EEvenFilterElements pEEvenFilter;
+	private final EConditionClauseDefinitionElements pEConditionClauseDefinition;
+	private final EConditionClauseDefinitionANDElements pEConditionClauseDefinitionAND;
+	private final EConditionClauseDefinitionORElements pEConditionClauseDefinitionOR;
+	private final EConditionClauseDefinitionNOTElements pEConditionClauseDefinitionNOT;
+	private final EConditionClauseDefinitionAssertElements pEConditionClauseDefinitionAssert;
+	private final EAssertionDefinitionElements pEAssertionDefinition;
+	private final EConstraintListElements pEConstraintList;
+	private final EActivityDefinitionElements pEActivityDefinition;
+	private final ECallOperationActivityDefinitionElements pECallOperationActivityDefinition;
+	private final ECallOperationActivityDefinitionBodyElements pECallOperationActivityDefinitionBody;
+	private final EPropertyAssignmentsElements pEPropertyAssignments;
+	private final EPropertyAssignmentElements pEPropertyAssignment;
 	private final ENodeTypesElements pENodeTypes;
 	private final ENodeTypeElements pENodeType;
 	private final ENodeTypeBodyElements pENodeTypeBody;
@@ -4165,6 +4839,22 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pEPolicyTypes = new EPolicyTypesElements();
 		this.pEPolicyType = new EPolicyTypeElements();
 		this.pEPolicyTypeBody = new EPolicyTypeBodyElements();
+		this.pETriggers = new ETriggersElements();
+		this.pETriggerDefinition = new ETriggerDefinitionElements();
+		this.pETriggerDefinitionBody = new ETriggerDefinitionBodyElements();
+		this.pEEvenFilter = new EEvenFilterElements();
+		this.pEConditionClauseDefinition = new EConditionClauseDefinitionElements();
+		this.pEConditionClauseDefinitionAND = new EConditionClauseDefinitionANDElements();
+		this.pEConditionClauseDefinitionOR = new EConditionClauseDefinitionORElements();
+		this.pEConditionClauseDefinitionNOT = new EConditionClauseDefinitionNOTElements();
+		this.pEConditionClauseDefinitionAssert = new EConditionClauseDefinitionAssertElements();
+		this.pEAssertionDefinition = new EAssertionDefinitionElements();
+		this.pEConstraintList = new EConstraintListElements();
+		this.pEActivityDefinition = new EActivityDefinitionElements();
+		this.pECallOperationActivityDefinition = new ECallOperationActivityDefinitionElements();
+		this.pECallOperationActivityDefinitionBody = new ECallOperationActivityDefinitionBodyElements();
+		this.pEPropertyAssignments = new EPropertyAssignmentsElements();
+		this.pEPropertyAssignment = new EPropertyAssignmentElements();
 		this.pENodeTypes = new ENodeTypesElements();
 		this.pENodeType = new ENodeTypeElements();
 		this.pENodeTypeBody = new ENodeTypeBodyElements();
@@ -4491,13 +5181,204 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?) ('properties:'
 	//	BEGIN
 	//	properties=EProperties
-	//	END)? ('targets:' '[' targets+=EValidTargetTypes? ']')?;
+	//	END)? ('targets:' '[' targets+=EValidTargetTypes? ']')? ('triggers:'
+	//	BEGIN
+	//	triggers=ETriggers
+	//	END)?;
 	public EPolicyTypeBodyElements getEPolicyTypeBodyAccess() {
 		return pEPolicyTypeBody;
 	}
 	
 	public ParserRule getEPolicyTypeBodyRule() {
 		return getEPolicyTypeBodyAccess().getRule();
+	}
+	
+	//ETriggers:
+	//	{ETriggers} triggers+=ETriggerDefinition*;
+	public ETriggersElements getETriggersAccess() {
+		return pETriggers;
+	}
+	
+	public ParserRule getETriggersRule() {
+		return getETriggersAccess().getRule();
+	}
+	
+	//ETriggerDefinition:
+	//	name=QUALIFIED_NAME ':'
+	//	BEGIN
+	//	trigger=ETriggerDefinitionBody
+	//	END;
+	public ETriggerDefinitionElements getETriggerDefinitionAccess() {
+		return pETriggerDefinition;
+	}
+	
+	public ParserRule getETriggerDefinitionRule() {
+		return getETriggerDefinitionAccess().getRule();
+	}
+	
+	//ETriggerDefinitionBody:
+	//	('description:' description=STRING)? & 'event:' event=STRING & ('target_filter:'
+	//	BEGIN
+	//	target_filter=EEvenFilter
+	//	END)? & ('condition:'
+	//	BEGIN
+	//	condition=EConditionClauseDefinition
+	//	END)? & ('action:'
+	//	BEGIN
+	//	action=EActivityDefinition
+	//	END)?;
+	public ETriggerDefinitionBodyElements getETriggerDefinitionBodyAccess() {
+		return pETriggerDefinitionBody;
+	}
+	
+	public ParserRule getETriggerDefinitionBodyRule() {
+		return getETriggerDefinitionBodyAccess().getRule();
+	}
+	
+	//EEvenFilter:
+	//	'node:' node=EPREFIX_TYPE & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?;
+	public EEvenFilterElements getEEvenFilterAccess() {
+		return pEEvenFilter;
+	}
+	
+	public ParserRule getEEvenFilterRule() {
+		return getEEvenFilterAccess().getRule();
+	}
+	
+	//EConditionClauseDefinition:
+	//	EConditionClauseDefinitionAND | EConditionClauseDefinitionOR | EConditionClauseDefinitionNOT |
+	//	EConditionClauseDefinitionAssert;
+	public EConditionClauseDefinitionElements getEConditionClauseDefinitionAccess() {
+		return pEConditionClauseDefinition;
+	}
+	
+	public ParserRule getEConditionClauseDefinitionRule() {
+		return getEConditionClauseDefinitionAccess().getRule();
+	}
+	
+	//EConditionClauseDefinitionAND:
+	//	'and:'
+	//	BEGIN
+	//	and=EConditionClauseDefinition
+	//	END;
+	public EConditionClauseDefinitionANDElements getEConditionClauseDefinitionANDAccess() {
+		return pEConditionClauseDefinitionAND;
+	}
+	
+	public ParserRule getEConditionClauseDefinitionANDRule() {
+		return getEConditionClauseDefinitionANDAccess().getRule();
+	}
+	
+	//EConditionClauseDefinitionOR:
+	//	'or:'
+	//	BEGIN
+	//	or=EConditionClauseDefinition
+	//	END;
+	public EConditionClauseDefinitionORElements getEConditionClauseDefinitionORAccess() {
+		return pEConditionClauseDefinitionOR;
+	}
+	
+	public ParserRule getEConditionClauseDefinitionORRule() {
+		return getEConditionClauseDefinitionORAccess().getRule();
+	}
+	
+	//EConditionClauseDefinitionNOT:
+	//	'not:'
+	//	BEGIN
+	//	not=EConditionClauseDefinition
+	//	END;
+	public EConditionClauseDefinitionNOTElements getEConditionClauseDefinitionNOTAccess() {
+		return pEConditionClauseDefinitionNOT;
+	}
+	
+	public ParserRule getEConditionClauseDefinitionNOTRule() {
+		return getEConditionClauseDefinitionNOTAccess().getRule();
+	}
+	
+	//EConditionClauseDefinitionAssert:
+	//	{EConditionClauseDefinitionAssert} assertions+=EAssertionDefinition*;
+	public EConditionClauseDefinitionAssertElements getEConditionClauseDefinitionAssertAccess() {
+		return pEConditionClauseDefinitionAssert;
+	}
+	
+	public ParserRule getEConditionClauseDefinitionAssertRule() {
+		return getEConditionClauseDefinitionAssertAccess().getRule();
+	}
+	
+	//EAssertionDefinition:
+	//	attribute_name=ID ':' '[' constraints=EConstraintList ']';
+	public EAssertionDefinitionElements getEAssertionDefinitionAccess() {
+		return pEAssertionDefinition;
+	}
+	
+	public ParserRule getEAssertionDefinitionRule() {
+		return getEAssertionDefinitionAccess().getRule();
+	}
+	
+	//EConstraintList:
+	//	list+=EConstraint (',' list+=EConstraint)*;
+	public EConstraintListElements getEConstraintListAccess() {
+		return pEConstraintList;
+	}
+	
+	public ParserRule getEConstraintListRule() {
+		return getEConstraintListAccess().getRule();
+	}
+	
+	//EActivityDefinition:
+	//	ECallOperationActivityDefinition;
+	public EActivityDefinitionElements getEActivityDefinitionAccess() {
+		return pEActivityDefinition;
+	}
+	
+	public ParserRule getEActivityDefinitionRule() {
+		return getEActivityDefinitionAccess().getRule();
+	}
+	
+	//ECallOperationActivityDefinition:
+	//	'call_operation:'
+	//	BEGIN
+	//	operation=ECallOperationActivityDefinitionBody
+	//	END;
+	public ECallOperationActivityDefinitionElements getECallOperationActivityDefinitionAccess() {
+		return pECallOperationActivityDefinition;
+	}
+	
+	public ParserRule getECallOperationActivityDefinitionRule() {
+		return getECallOperationActivityDefinitionAccess().getRule();
+	}
+	
+	//ECallOperationActivityDefinitionBody:
+	//	'operation:' name=EPREFIX_TYPE & ('inputs:'
+	//	BEGIN
+	//	inputs=EPropertyAssignments
+	//	END)?;
+	public ECallOperationActivityDefinitionBodyElements getECallOperationActivityDefinitionBodyAccess() {
+		return pECallOperationActivityDefinitionBody;
+	}
+	
+	public ParserRule getECallOperationActivityDefinitionBodyRule() {
+		return getECallOperationActivityDefinitionBodyAccess().getRule();
+	}
+	
+	//EPropertyAssignments:
+	//	{EPropertyAssignments} properties+=EPropertyAssignment*;
+	public EPropertyAssignmentsElements getEPropertyAssignmentsAccess() {
+		return pEPropertyAssignments;
+	}
+	
+	public ParserRule getEPropertyAssignmentsRule() {
+		return getEPropertyAssignmentsAccess().getRule();
+	}
+	
+	//EPropertyAssignment:
+	//	name=ID ':' value=EAssignmentValue;
+	public EPropertyAssignmentElements getEPropertyAssignmentAccess() {
+		return pEPropertyAssignment;
+	}
+	
+	public ParserRule getEPropertyAssignmentRule() {
+		return getEPropertyAssignmentAccess().getRule();
 	}
 	
 	//ENodeTypes:

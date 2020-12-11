@@ -177,6 +177,150 @@ public interface RMFactory extends EFactory
   EPolicyTypeBody createEPolicyTypeBody();
 
   /**
+   * Returns a new object of class '<em>ETriggers</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ETriggers</em>'.
+   * @generated
+   */
+  ETriggers createETriggers();
+
+  /**
+   * Returns a new object of class '<em>ETrigger Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ETrigger Definition</em>'.
+   * @generated
+   */
+  ETriggerDefinition createETriggerDefinition();
+
+  /**
+   * Returns a new object of class '<em>ETrigger Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ETrigger Definition Body</em>'.
+   * @generated
+   */
+  ETriggerDefinitionBody createETriggerDefinitionBody();
+
+  /**
+   * Returns a new object of class '<em>EEven Filter</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EEven Filter</em>'.
+   * @generated
+   */
+  EEvenFilter createEEvenFilter();
+
+  /**
+   * Returns a new object of class '<em>ECondition Clause Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECondition Clause Definition</em>'.
+   * @generated
+   */
+  EConditionClauseDefinition createEConditionClauseDefinition();
+
+  /**
+   * Returns a new object of class '<em>ECondition Clause Definition AND</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECondition Clause Definition AND</em>'.
+   * @generated
+   */
+  EConditionClauseDefinitionAND createEConditionClauseDefinitionAND();
+
+  /**
+   * Returns a new object of class '<em>ECondition Clause Definition OR</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECondition Clause Definition OR</em>'.
+   * @generated
+   */
+  EConditionClauseDefinitionOR createEConditionClauseDefinitionOR();
+
+  /**
+   * Returns a new object of class '<em>ECondition Clause Definition NOT</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECondition Clause Definition NOT</em>'.
+   * @generated
+   */
+  EConditionClauseDefinitionNOT createEConditionClauseDefinitionNOT();
+
+  /**
+   * Returns a new object of class '<em>ECondition Clause Definition Assert</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECondition Clause Definition Assert</em>'.
+   * @generated
+   */
+  EConditionClauseDefinitionAssert createEConditionClauseDefinitionAssert();
+
+  /**
+   * Returns a new object of class '<em>EAssertion Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EAssertion Definition</em>'.
+   * @generated
+   */
+  EAssertionDefinition createEAssertionDefinition();
+
+  /**
+   * Returns a new object of class '<em>EConstraint List</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EConstraint List</em>'.
+   * @generated
+   */
+  EConstraintList createEConstraintList();
+
+  /**
+   * Returns a new object of class '<em>EActivity Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EActivity Definition</em>'.
+   * @generated
+   */
+  EActivityDefinition createEActivityDefinition();
+
+  /**
+   * Returns a new object of class '<em>ECall Operation Activity Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECall Operation Activity Definition</em>'.
+   * @generated
+   */
+  ECallOperationActivityDefinition createECallOperationActivityDefinition();
+
+  /**
+   * Returns a new object of class '<em>ECall Operation Activity Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECall Operation Activity Definition Body</em>'.
+   * @generated
+   */
+  ECallOperationActivityDefinitionBody createECallOperationActivityDefinitionBody();
+
+  /**
+   * Returns a new object of class '<em>EProperty Assignments</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EProperty Assignments</em>'.
+   * @generated
+   */
+  EPropertyAssignments createEPropertyAssignments();
+
+  /**
+   * Returns a new object of class '<em>EProperty Assignment</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EProperty Assignment</em>'.
+   * @generated
+   */
+  EPropertyAssignment createEPropertyAssignment();
+
+  /**
    * Returns a new object of class '<em>ENode Types</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

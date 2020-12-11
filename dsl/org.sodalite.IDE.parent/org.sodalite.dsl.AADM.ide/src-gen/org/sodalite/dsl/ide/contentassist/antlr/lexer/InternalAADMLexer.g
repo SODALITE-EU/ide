@@ -25,6 +25,8 @@ Interface_types : 'interface_types:';
 
 Artifact_types : 'artifact_types:';
 
+Call_operation : 'call_operation:';
+
 Implementation : 'implementation:';
 
 Node_templates : 'node_templates:';
@@ -34,6 +36,8 @@ Get_attribute : 'get_attribute:';
 Less_or_equal : 'less_or_equal:';
 
 Relative_path : 'relative_path:';
+
+Target_filter : 'target_filter:';
 
 Capabilities : 'capabilities:';
 
@@ -63,6 +67,8 @@ Description : 'description:';
 
 Occurrences : 'occurrences:';
 
+Requirement : 'requirement:';
+
 Attributes : 'attributes:';
 
 Capability : 'capability:';
@@ -83,11 +89,15 @@ Properties : 'properties:';
 
 Attribute : 'attribute:';
 
+Condition : 'condition:';
+
 Get_input : 'get_input:';
 
 Less_than : 'less_than:';
 
 Mime_type : 'mime_type:';
+
+Operation : 'operation:';
 
 File_ext : 'file_ext:';
 
@@ -97,11 +107,17 @@ Property : 'property:';
 
 Required : 'required:';
 
+Triggers : 'triggers:';
+
 Default : 'default:';
 
 Primary : 'primary:';
 
 Req_cap : 'req_cap:';
+
+Targets : 'targets:';
+
+Action : 'action:';
 
 Entity : 'entity:';
 
@@ -117,11 +133,19 @@ Status : 'status:';
 
 Equal : 'equal:';
 
+Event : 'event:';
+
 Value : 'value:';
 
 Node : 'node:';
 
 Type : 'type:';
+
+And : 'and:';
+
+Not : 'not:';
+
+Or : 'or:';
 
 Comma : ',';
 

@@ -82,6 +82,22 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EPOLICY_TYPES: return createEPolicyTypes();
       case RMPackage.EPOLICY_TYPE: return createEPolicyType();
       case RMPackage.EPOLICY_TYPE_BODY: return createEPolicyTypeBody();
+      case RMPackage.ETRIGGERS: return createETriggers();
+      case RMPackage.ETRIGGER_DEFINITION: return createETriggerDefinition();
+      case RMPackage.ETRIGGER_DEFINITION_BODY: return createETriggerDefinitionBody();
+      case RMPackage.EEVEN_FILTER: return createEEvenFilter();
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION: return createEConditionClauseDefinition();
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_AND: return createEConditionClauseDefinitionAND();
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_OR: return createEConditionClauseDefinitionOR();
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT: return createEConditionClauseDefinitionNOT();
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_ASSERT: return createEConditionClauseDefinitionAssert();
+      case RMPackage.EASSERTION_DEFINITION: return createEAssertionDefinition();
+      case RMPackage.ECONSTRAINT_LIST: return createEConstraintList();
+      case RMPackage.EACTIVITY_DEFINITION: return createEActivityDefinition();
+      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION: return createECallOperationActivityDefinition();
+      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY: return createECallOperationActivityDefinitionBody();
+      case RMPackage.EPROPERTY_ASSIGNMENTS: return createEPropertyAssignments();
+      case RMPackage.EPROPERTY_ASSIGNMENT: return createEPropertyAssignment();
       case RMPackage.ENODE_TYPES: return createENodeTypes();
       case RMPackage.ENODE_TYPE: return createENodeType();
       case RMPackage.ENODE_TYPE_BODY: return createENodeTypeBody();
@@ -358,6 +374,198 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EPolicyTypeBodyImpl ePolicyTypeBody = new EPolicyTypeBodyImpl();
     return ePolicyTypeBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ETriggers createETriggers()
+  {
+    ETriggersImpl eTriggers = new ETriggersImpl();
+    return eTriggers;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ETriggerDefinition createETriggerDefinition()
+  {
+    ETriggerDefinitionImpl eTriggerDefinition = new ETriggerDefinitionImpl();
+    return eTriggerDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ETriggerDefinitionBody createETriggerDefinitionBody()
+  {
+    ETriggerDefinitionBodyImpl eTriggerDefinitionBody = new ETriggerDefinitionBodyImpl();
+    return eTriggerDefinitionBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEvenFilter createEEvenFilter()
+  {
+    EEvenFilterImpl eEvenFilter = new EEvenFilterImpl();
+    return eEvenFilter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EConditionClauseDefinition createEConditionClauseDefinition()
+  {
+    EConditionClauseDefinitionImpl eConditionClauseDefinition = new EConditionClauseDefinitionImpl();
+    return eConditionClauseDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EConditionClauseDefinitionAND createEConditionClauseDefinitionAND()
+  {
+    EConditionClauseDefinitionANDImpl eConditionClauseDefinitionAND = new EConditionClauseDefinitionANDImpl();
+    return eConditionClauseDefinitionAND;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EConditionClauseDefinitionOR createEConditionClauseDefinitionOR()
+  {
+    EConditionClauseDefinitionORImpl eConditionClauseDefinitionOR = new EConditionClauseDefinitionORImpl();
+    return eConditionClauseDefinitionOR;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EConditionClauseDefinitionNOT createEConditionClauseDefinitionNOT()
+  {
+    EConditionClauseDefinitionNOTImpl eConditionClauseDefinitionNOT = new EConditionClauseDefinitionNOTImpl();
+    return eConditionClauseDefinitionNOT;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EConditionClauseDefinitionAssert createEConditionClauseDefinitionAssert()
+  {
+    EConditionClauseDefinitionAssertImpl eConditionClauseDefinitionAssert = new EConditionClauseDefinitionAssertImpl();
+    return eConditionClauseDefinitionAssert;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAssertionDefinition createEAssertionDefinition()
+  {
+    EAssertionDefinitionImpl eAssertionDefinition = new EAssertionDefinitionImpl();
+    return eAssertionDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EConstraintList createEConstraintList()
+  {
+    EConstraintListImpl eConstraintList = new EConstraintListImpl();
+    return eConstraintList;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EActivityDefinition createEActivityDefinition()
+  {
+    EActivityDefinitionImpl eActivityDefinition = new EActivityDefinitionImpl();
+    return eActivityDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ECallOperationActivityDefinition createECallOperationActivityDefinition()
+  {
+    ECallOperationActivityDefinitionImpl eCallOperationActivityDefinition = new ECallOperationActivityDefinitionImpl();
+    return eCallOperationActivityDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ECallOperationActivityDefinitionBody createECallOperationActivityDefinitionBody()
+  {
+    ECallOperationActivityDefinitionBodyImpl eCallOperationActivityDefinitionBody = new ECallOperationActivityDefinitionBodyImpl();
+    return eCallOperationActivityDefinitionBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPropertyAssignments createEPropertyAssignments()
+  {
+    EPropertyAssignmentsImpl ePropertyAssignments = new EPropertyAssignmentsImpl();
+    return ePropertyAssignments;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPropertyAssignment createEPropertyAssignment()
+  {
+    EPropertyAssignmentImpl ePropertyAssignment = new EPropertyAssignmentImpl();
+    return ePropertyAssignment;
   }
 
   /**

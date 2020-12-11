@@ -78,7 +78,6 @@ import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADMPackage;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
-import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
@@ -96,6 +95,8 @@ import org.sodalite.dsl.optimization.optimization.EAITraining;
 import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 import org.sodalite.dsl.optimization.optimization.Optimization_Model;
+import org.sodalite.dsl.rM.EPropertyAssignment;
+import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.ui.helper.AADMHelper;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
@@ -901,7 +902,7 @@ public class BackendProxy {
 											.getProperties()) {
 										if (property.getName().contentEquals(entity_name)) {
 											result = new ValidationSourceFeature(property,
-													AADMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
+													RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
 										}
 									}
 								} else if ("requirements".equals(path_type)) {
