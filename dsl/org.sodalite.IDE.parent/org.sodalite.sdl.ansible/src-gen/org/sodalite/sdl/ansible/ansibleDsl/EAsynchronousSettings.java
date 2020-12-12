@@ -29,12 +29,12 @@ public interface EAsynchronousSettings extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Async</em>' attribute.
-   * @see #setAsync(int)
+   * @see #setAsync(String)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEAsynchronousSettings_Async()
    * @model
    * @generated
    */
-  int getAsync();
+  String getAsync();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings#getAsync <em>Async</em>}' attribute.
@@ -44,19 +44,19 @@ public interface EAsynchronousSettings extends EObject
    * @see #getAsync()
    * @generated
    */
-  void setAsync(int value);
+  void setAsync(String value);
 
   /**
    * Returns the value of the '<em><b>Poll</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Poll</em>' attribute.
-   * @see #setPoll(int)
+   * @see #setPoll(String)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEAsynchronousSettings_Poll()
    * @model
    * @generated
    */
-  int getPoll();
+  String getPoll();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings#getPoll <em>Poll</em>}' attribute.
@@ -66,6 +66,6 @@ public interface EAsynchronousSettings extends EObject
    * @see #getPoll()
    * @generated
    */
-  void setPoll(int value);
+  void setPoll(String value);
 
 } // EAsynchronousSettings

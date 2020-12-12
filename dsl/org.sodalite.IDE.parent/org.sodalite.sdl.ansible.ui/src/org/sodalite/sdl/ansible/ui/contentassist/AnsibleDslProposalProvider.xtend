@@ -11,7 +11,6 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.EcoreUtil2
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl
 import org.eclipse.xtext.Assignment
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
@@ -31,7 +30,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		acceptor.accept(createCompletionProposal("Null", context));
 	}
 	
-	override void completeEDeclaredVariableReference_Variable(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	override void completeEDeclaredVariableReference_Variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
 		//if rootPlay is different from null then we are in a play. else, we are in a role
 		if (rootPlay !== null){
@@ -73,9 +72,9 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			}
 		}
 		else {
-			if (declaredVariableReference.variable instanceof EVariableDeclarationImpl){
-				if ((declaredVariableReference.variable as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
-					for (dictionaryPair : (((declaredVariableReference.variable as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
+			if (declaredVariableReference.variable_reference instanceof EVariableDeclarationImpl){
+				if ((declaredVariableReference.variable_reference as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
+					for (dictionaryPair : (((declaredVariableReference.variable_reference as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
 						acceptor.accept(createCompletionProposal(dictionaryPair.name, context))
 					}
 				}

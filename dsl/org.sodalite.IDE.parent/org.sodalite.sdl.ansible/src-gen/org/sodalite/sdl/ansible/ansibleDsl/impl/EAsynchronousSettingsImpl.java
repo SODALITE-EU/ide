@@ -37,7 +37,7 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    * @ordered
    */
-  protected static final int ASYNC_EDEFAULT = 0;
+  protected static final String ASYNC_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getAsync() <em>Async</em>}' attribute.
@@ -47,7 +47,7 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    * @ordered
    */
-  protected int async = ASYNC_EDEFAULT;
+  protected String async = ASYNC_EDEFAULT;
 
   /**
    * The default value of the '{@link #getPoll() <em>Poll</em>}' attribute.
@@ -57,7 +57,7 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    * @ordered
    */
-  protected static final int POLL_EDEFAULT = 0;
+  protected static final String POLL_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getPoll() <em>Poll</em>}' attribute.
@@ -67,7 +67,7 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    * @ordered
    */
-  protected int poll = POLL_EDEFAULT;
+  protected String poll = POLL_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -96,7 +96,7 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public int getAsync()
+  public String getAsync()
   {
     return async;
   }
@@ -107,9 +107,9 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public void setAsync(int newAsync)
+  public void setAsync(String newAsync)
   {
-    int oldAsync = async;
+    String oldAsync = async;
     async = newAsync;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC, oldAsync, async));
@@ -121,7 +121,7 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public int getPoll()
+  public String getPoll()
   {
     return poll;
   }
@@ -132,9 +132,9 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public void setPoll(int newPoll)
+  public void setPoll(String newPoll)
   {
-    int oldPoll = poll;
+    String oldPoll = poll;
     poll = newPoll;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL, oldPoll, poll));
@@ -169,10 +169,10 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC:
-        setAsync((Integer)newValue);
+        setAsync((String)newValue);
         return;
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL:
-        setPoll((Integer)newValue);
+        setPoll((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -209,9 +209,9 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC:
-        return async != ASYNC_EDEFAULT;
+        return ASYNC_EDEFAULT == null ? async != null : !ASYNC_EDEFAULT.equals(async);
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL:
-        return poll != POLL_EDEFAULT;
+        return POLL_EDEFAULT == null ? poll != null : !POLL_EDEFAULT.equals(poll);
     }
     return super.eIsSet(featureID);
   }

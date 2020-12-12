@@ -51,12 +51,12 @@ public interface EDictionaryPairReference extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Index</em>' attribute.
-   * @see #setIndex(int)
+   * @see #setIndex(String)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEDictionaryPairReference_Index()
    * @model
    * @generated
    */
-  int getIndex();
+  String getIndex();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getIndex <em>Index</em>}' attribute.
@@ -66,6 +66,6 @@ public interface EDictionaryPairReference extends EObject
    * @see #getIndex()
    * @generated
    */
-  void setIndex(int value);
+  void setIndex(String value);
 
 } // EDictionaryPairReference

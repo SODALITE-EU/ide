@@ -31,24 +31,24 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl#getVariable_reference <em>Variable reference</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl#getIndex <em>Index</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOrStringImpl implements EDeclaredVariableReference
+public class EDeclaredVariableReferenceImpl extends EValuePassedToJinjaExpressionImpl implements EDeclaredVariableReference
 {
   /**
-   * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
+   * The cached value of the '{@link #getVariable_reference() <em>Variable reference</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVariable()
+   * @see #getVariable_reference()
    * @generated
    * @ordered
    */
-  protected EDeclaredVariable variable;
+  protected EDeclaredVariable variable_reference;
 
   /**
    * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
@@ -58,7 +58,7 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
    * @generated
    * @ordered
    */
-  protected static final int INDEX_EDEFAULT = 0;
+  protected static final String INDEX_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
@@ -68,7 +68,7 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
    * @generated
    * @ordered
    */
-  protected int index = INDEX_EDEFAULT;
+  protected String index = INDEX_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getTail() <em>Tail</em>}' containment reference list.
@@ -107,19 +107,19 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
    * @generated
    */
   @Override
-  public EDeclaredVariable getVariable()
+  public EDeclaredVariable getVariable_reference()
   {
-    if (variable != null && variable.eIsProxy())
+    if (variable_reference != null && variable_reference.eIsProxy())
     {
-      InternalEObject oldVariable = (InternalEObject)variable;
-      variable = (EDeclaredVariable)eResolveProxy(oldVariable);
-      if (variable != oldVariable)
+      InternalEObject oldVariable_reference = (InternalEObject)variable_reference;
+      variable_reference = (EDeclaredVariable)eResolveProxy(oldVariable_reference);
+      if (variable_reference != oldVariable_reference)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE, oldVariable, variable));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE, oldVariable_reference, variable_reference));
       }
     }
-    return variable;
+    return variable_reference;
   }
 
   /**
@@ -127,9 +127,9 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
    * <!-- end-user-doc -->
    * @generated
    */
-  public EDeclaredVariable basicGetVariable()
+  public EDeclaredVariable basicGetVariable_reference()
   {
-    return variable;
+    return variable_reference;
   }
 
   /**
@@ -138,12 +138,12 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
    * @generated
    */
   @Override
-  public void setVariable(EDeclaredVariable newVariable)
+  public void setVariable_reference(EDeclaredVariable newVariable_reference)
   {
-    EDeclaredVariable oldVariable = variable;
-    variable = newVariable;
+    EDeclaredVariable oldVariable_reference = variable_reference;
+    variable_reference = newVariable_reference;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE, oldVariable, variable));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE, oldVariable_reference, variable_reference));
   }
 
   /**
@@ -152,7 +152,7 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
    * @generated
    */
   @Override
-  public int getIndex()
+  public String getIndex()
   {
     return index;
   }
@@ -163,9 +163,9 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
    * @generated
    */
   @Override
-  public void setIndex(int newIndex)
+  public void setIndex(String newIndex)
   {
-    int oldIndex = index;
+    String oldIndex = index;
     index = newIndex;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__INDEX, oldIndex, index));
@@ -212,9 +212,9 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE:
-        if (resolve) return getVariable();
-        return basicGetVariable();
+      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE:
+        if (resolve) return getVariable_reference();
+        return basicGetVariable_reference();
       case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__INDEX:
         return getIndex();
       case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__TAIL:
@@ -234,11 +234,11 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE:
-        setVariable((EDeclaredVariable)newValue);
+      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE:
+        setVariable_reference((EDeclaredVariable)newValue);
         return;
       case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__INDEX:
-        setIndex((Integer)newValue);
+        setIndex((String)newValue);
         return;
       case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__TAIL:
         getTail().clear();
@@ -258,8 +258,8 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE:
-        setVariable((EDeclaredVariable)null);
+      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE:
+        setVariable_reference((EDeclaredVariable)null);
         return;
       case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__INDEX:
         setIndex(INDEX_EDEFAULT);
@@ -281,10 +281,10 @@ public class EDeclaredVariableReferenceImpl extends EDeclaredVariableReferenceOr
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE:
-        return variable != null;
+      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE:
+        return variable_reference != null;
       case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__INDEX:
-        return index != INDEX_EDEFAULT;
+        return INDEX_EDEFAULT == null ? index != null : !INDEX_EDEFAULT.equals(index);
       case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE__TAIL:
         return tail != null && !tail.isEmpty();
     }

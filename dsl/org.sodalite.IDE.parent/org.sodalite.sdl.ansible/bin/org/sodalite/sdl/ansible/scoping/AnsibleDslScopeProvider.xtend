@@ -6,7 +6,6 @@ package org.sodalite.sdl.ansible.scoping
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.emf.ecore.EReference
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage
 import org.eclipse.xtext.scoping.Scopes
 import org.eclipse.xtext.EcoreUtil2
@@ -26,7 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
  */
 class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 	override IScope getScope(EObject context, EReference reference) {
-		if (context instanceof EDeclaredVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EDECLARED_VARIABLE_REFERENCE__VARIABLE){
+		if (context instanceof EDeclaredVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE){
 			val rootPlay = EcoreUtil2.getContainerOfType(context, EPlayImpl)
 			//if rootPlay is different from null then we are in a play. else, we are in a role
 			if (rootPlay !== null){
@@ -66,9 +65,9 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 				}
 			}
 			else {
-				if (declaredVariableReference.variable instanceof EVariableDeclarationImpl){
-					if ((declaredVariableReference.variable as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
-						for (dictionaryPair : (((declaredVariableReference.variable as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
+				if (declaredVariableReference.variable_reference instanceof EVariableDeclarationImpl){
+					if ((declaredVariableReference.variable_reference as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
+						for (dictionaryPair : (((declaredVariableReference.variable_reference as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
 							candidatesOfDictionary.add(dictionaryPair)
 						}
 					}

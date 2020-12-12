@@ -20,7 +20,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EList extends ELoopList, EValue
+public interface EList extends EValue
 {
   /**
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.

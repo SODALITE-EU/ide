@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface EFactGathered extends ELoopList, EValuePassed
+public interface EFactGathered extends EValuePassedToJinjaExpression
 {
   /**
    * Returns the value of the '<em><b>Tail</b></em>' attribute list.

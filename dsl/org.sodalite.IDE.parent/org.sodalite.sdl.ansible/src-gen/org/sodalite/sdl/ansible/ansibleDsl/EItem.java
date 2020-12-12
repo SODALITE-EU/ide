@@ -15,14 +15,13 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EItem#getTail <em>Tail</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EItem#getFilter_commands <em>Filter commands</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEItem()
  * @model
  * @generated
  */
-public interface EItem extends EValuePassed
+public interface EItem extends EValuePassedToJinjaExpression
 {
   /**
    * Returns the value of the '<em><b>Tail</b></em>' attribute list.
@@ -35,17 +34,5 @@ public interface EItem extends EValuePassed
    * @generated
    */
   EList<String> getTail();
-
-  /**
-   * Returns the value of the '<em><b>Filter commands</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Filter commands</em>' attribute list.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEItem_Filter_commands()
-   * @model unique="false"
-   * @generated
-   */
-  EList<String> getFilter_commands();
 
 } // EItem

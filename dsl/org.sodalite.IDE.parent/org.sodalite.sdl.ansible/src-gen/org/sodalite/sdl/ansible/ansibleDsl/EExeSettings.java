@@ -29,12 +29,12 @@ public interface EExeSettings extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Throttle</em>' attribute.
-   * @see #setThrottle(int)
+   * @see #setThrottle(String)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEExeSettings_Throttle()
    * @model
    * @generated
    */
-  int getThrottle();
+  String getThrottle();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExeSettings#getThrottle <em>Throttle</em>}' attribute.
@@ -44,7 +44,7 @@ public interface EExeSettings extends EObject
    * @see #getThrottle()
    * @generated
    */
-  void setThrottle(int value);
+  void setThrottle(String value);
 
   /**
    * Returns the value of the '<em><b>Run once</b></em>' attribute.

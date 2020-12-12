@@ -72,7 +72,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected static final int GATHER_TIMEOUT_EDEFAULT = 0;
+  protected static final String GATHER_TIMEOUT_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getGather_timeout() <em>Gather timeout</em>}' attribute.
@@ -82,7 +82,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected int gather_timeout = GATHER_TIMEOUT_EDEFAULT;
+  protected String gather_timeout = GATHER_TIMEOUT_EDEFAULT;
 
   /**
    * The default value of the '{@link #getFact_path() <em>Fact path</em>}' attribute.
@@ -206,7 +206,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public int getGather_timeout()
+  public String getGather_timeout()
   {
     return gather_timeout;
   }
@@ -217,9 +217,9 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public void setGather_timeout(int newGather_timeout)
+  public void setGather_timeout(String newGather_timeout)
   {
-    int oldGather_timeout = gather_timeout;
+    String oldGather_timeout = gather_timeout;
     gather_timeout = newGather_timeout;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT, oldGather_timeout, gather_timeout));
@@ -305,7 +305,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
         setGather_subset((EList)newValue);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT:
-        setGather_timeout((Integer)newValue);
+        setGather_timeout((String)newValue);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH:
         setFact_path((String)newValue);
@@ -355,7 +355,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_SUBSET:
         return gather_subset != null;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT:
-        return gather_timeout != GATHER_TIMEOUT_EDEFAULT;
+        return GATHER_TIMEOUT_EDEFAULT == null ? gather_timeout != null : !GATHER_TIMEOUT_EDEFAULT.equals(gather_timeout);
       case AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH:
         return FACT_PATH_EDEFAULT == null ? fact_path != null : !FACT_PATH_EDEFAULT.equals(fact_path);
     }

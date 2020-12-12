@@ -12,17 +12,15 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslFactory;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
-import org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference;
-import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
@@ -33,21 +31,27 @@ import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString;
-import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
+import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EItem;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.EList;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
-import org.sodalite.sdl.ansible.ansibleDsl.ELoopList;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
+import org.sodalite.sdl.ansible.ansibleDsl.EOperation;
+import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
+import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
@@ -60,10 +64,12 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 import org.sodalite.sdl.ansible.ansibleDsl.Model;
 
@@ -164,20 +170,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eConditionalExpressionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eConditionalFormulaEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass eRoleInclusionEClass = null;
 
   /**
@@ -200,13 +192,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eLoopOverListEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eLoopListEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -339,7 +324,21 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eFilteredVariableOrStringEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eValuePassedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eValuePassedToJinjaExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -374,28 +373,77 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eDeclaredVariableReferenceOrStringEClass = null;
+  private EClass eJinjaExpressionEvaluationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eFilteredVariableEClass = null;
+  private EClass eJinjaExpressionEvaluationWithoutBracketsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eFilteredVariableOrStringEClass = null;
+  private EClass eFunctionCallEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eFilteredVariablesAndStringEClass = null;
+  private EClass eFilteredExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eOrExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eAndExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eTruthExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eIsExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eParenthesisedExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eIfExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1138,149 +1186,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEConditionalExpression()
-  {
-    return eConditionalExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEConditionalExpression_Left_term()
-  {
-    return (EReference)eConditionalExpressionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEConditionalExpression_Equality_term()
-  {
-    return (EAttribute)eConditionalExpressionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEConditionalExpression_Right_term()
-  {
-    return (EReference)eConditionalExpressionEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEConditionalExpression_Is_not()
-  {
-    return (EAttribute)eConditionalExpressionEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEConditionalExpression_Status()
-  {
-    return (EAttribute)eConditionalExpressionEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEConditionalExpression_Formula()
-  {
-    return (EReference)eConditionalExpressionEClass.getEStructuralFeatures().get(5);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEConditionalExpression_Is_true()
-  {
-    return (EAttribute)eConditionalExpressionEClass.getEStructuralFeatures().get(6);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getEConditionalFormula()
-  {
-    return eConditionalFormulaEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEConditionalFormula_Left_expression()
-  {
-    return (EReference)eConditionalFormulaEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEConditionalFormula_And_or()
-  {
-    return (EAttribute)eConditionalFormulaEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEConditionalFormula_Right_expression()
-  {
-    return (EReference)eConditionalFormulaEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEConditionalFormula_Negated_expression()
-  {
-    return (EReference)eConditionalFormulaEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getERoleInclusion()
   {
     return eRoleInclusionEClass;
@@ -1350,17 +1255,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EReference getELoopOverList_Loop_control()
   {
     return (EReference)eLoopOverListEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getELoopList()
-  {
-    return eLoopListEClass;
   }
 
   /**
@@ -1996,9 +1890,53 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getEFilteredVariableOrString()
+  {
+    return eFilteredVariableOrStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEFilteredVariableOrString_String()
+  {
+    return (EAttribute)eFilteredVariableOrStringEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEValuePassed()
   {
     return eValuePassedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEValuePassed_Variable_and_string()
+  {
+    return (EReference)eValuePassedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEValuePassedToJinjaExpression()
+  {
+    return eValuePassedToJinjaExpressionEClass;
   }
 
   /**
@@ -2040,7 +1978,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getESimpleValue_Value_int()
+  public EAttribute getESimpleValue_Value_number()
   {
     return (EAttribute)eSimpleValueEClass.getEStructuralFeatures().get(1);
   }
@@ -2073,17 +2011,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEItem_Filter_commands()
-  {
-    return (EAttribute)eItemEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getEDeclaredVariableReference()
   {
     return eDeclaredVariableReferenceEClass;
@@ -2095,7 +2022,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEDeclaredVariableReference_Variable()
+  public EReference getEDeclaredVariableReference_Variable_reference()
   {
     return (EReference)eDeclaredVariableReferenceEClass.getEStructuralFeatures().get(0);
   }
@@ -2128,9 +2055,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEDeclaredVariableReferenceOrString()
+  public EClass getEJinjaExpressionEvaluation()
   {
-    return eDeclaredVariableReferenceOrStringEClass;
+    return eJinjaExpressionEvaluationEClass;
   }
 
   /**
@@ -2139,9 +2066,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEDeclaredVariableReferenceOrString_String()
+  public EReference getEJinjaExpressionEvaluation_Jinja_expression()
   {
-    return (EAttribute)eDeclaredVariableReferenceOrStringEClass.getEStructuralFeatures().get(0);
+    return (EReference)eJinjaExpressionEvaluationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2150,9 +2077,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEFilteredVariable()
+  public EClass getEJinjaExpressionEvaluationWithoutBrackets()
   {
-    return eFilteredVariableEClass;
+    return eJinjaExpressionEvaluationWithoutBracketsEClass;
   }
 
   /**
@@ -2161,9 +2088,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEFilteredVariable_Variable_reference_or_string()
+  public EClass getEFunctionCall()
   {
-    return (EReference)eFilteredVariableEClass.getEStructuralFeatures().get(0);
+    return eFunctionCallEClass;
   }
 
   /**
@@ -2172,9 +2099,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEFilteredVariableOrString()
+  public EAttribute getEFunctionCall_Name()
   {
-    return eFilteredVariableOrStringEClass;
+    return (EAttribute)eFunctionCallEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2183,9 +2110,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEFilteredVariableOrString_String()
+  public EReference getEFunctionCall_Parameters()
   {
-    return (EAttribute)eFilteredVariableOrStringEClass.getEStructuralFeatures().get(0);
+    return (EReference)eFunctionCallEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2194,9 +2121,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEFilteredVariablesAndString()
+  public EClass getEFilteredExpression()
   {
-    return eFilteredVariablesAndStringEClass;
+    return eFilteredExpressionEClass;
   }
 
   /**
@@ -2205,9 +2132,317 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEFilteredVariablesAndString_Variable_and_string()
+  public EReference getEFilteredExpression_To_filter()
   {
-    return (EReference)eFilteredVariablesAndStringEClass.getEStructuralFeatures().get(0);
+    return (EReference)eFilteredExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEFilteredExpression_Tail()
+  {
+    return (EReference)eFilteredExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEFilteredExpression_Filter()
+  {
+    return (EReference)eFilteredExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEOrExpression()
+  {
+    return eOrExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEOrExpression_Left_or()
+  {
+    return (EReference)eOrExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEOrExpression_Right_or()
+  {
+    return (EReference)eOrExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEAndExpression()
+  {
+    return eAndExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEAndExpression_Left_and()
+  {
+    return (EReference)eAndExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEAndExpression_Right_and()
+  {
+    return (EReference)eAndExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getETruthExpression()
+  {
+    return eTruthExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETruthExpression_Left_value()
+  {
+    return (EReference)eTruthExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETruthExpression_Equality_sign()
+  {
+    return (EAttribute)eTruthExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETruthExpression_Right_value()
+  {
+    return (EReference)eTruthExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEOperation()
+  {
+    return eOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEOperation_Left_operand()
+  {
+    return (EReference)eOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEOperation_Operator()
+  {
+    return (EAttribute)eOperationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEOperation_Right_operand()
+  {
+    return (EReference)eOperationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEIsExpression()
+  {
+    return eIsExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEIsExpression_Filtered_expression()
+  {
+    return (EReference)eIsExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEIsExpression_Is_not()
+  {
+    return (EAttribute)eIsExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEIsExpression_Status()
+  {
+    return (EReference)eIsExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEIsExpression_Container_expression()
+  {
+    return (EReference)eIsExpressionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEParenthesisedExpression()
+  {
+    return eParenthesisedExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEParenthesisedExpression_Basic_Value()
+  {
+    return (EReference)eParenthesisedExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEParenthesisedExpression_Parenthesised_term()
+  {
+    return (EReference)eParenthesisedExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEIfExpression()
+  {
+    return eIfExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEIfExpression_If_expression()
+  {
+    return (EReference)eIfExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEIfExpression_If_condition()
+  {
+    return (EReference)eIfExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEIfExpression_Else_expression()
+  {
+    return (EReference)eIfExpressionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -2496,21 +2731,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEAttribute(eParameterEClass, EPARAMETER__NAME);
     createEReference(eParameterEClass, EPARAMETER__VALUE_PASSED);
 
-    eConditionalExpressionEClass = createEClass(ECONDITIONAL_EXPRESSION);
-    createEReference(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__LEFT_TERM);
-    createEAttribute(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__EQUALITY_TERM);
-    createEReference(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__RIGHT_TERM);
-    createEAttribute(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__IS_NOT);
-    createEAttribute(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__STATUS);
-    createEReference(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__FORMULA);
-    createEAttribute(eConditionalExpressionEClass, ECONDITIONAL_EXPRESSION__IS_TRUE);
-
-    eConditionalFormulaEClass = createEClass(ECONDITIONAL_FORMULA);
-    createEReference(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__LEFT_EXPRESSION);
-    createEAttribute(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__AND_OR);
-    createEReference(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__RIGHT_EXPRESSION);
-    createEReference(eConditionalFormulaEClass, ECONDITIONAL_FORMULA__NEGATED_EXPRESSION);
-
     eRoleInclusionEClass = createEClass(EROLE_INCLUSION);
 
     eRoleInclusionsEClass = createEClass(EROLE_INCLUSIONS);
@@ -2521,8 +2741,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eLoopOverListEClass = createEClass(ELOOP_OVER_LIST);
     createEReference(eLoopOverListEClass, ELOOP_OVER_LIST__LOOP_LIST);
     createEReference(eLoopOverListEClass, ELOOP_OVER_LIST__LOOP_CONTROL);
-
-    eLoopListEClass = createEClass(ELOOP_LIST);
 
     eLoopControlEClass = createEClass(ELOOP_CONTROL);
     createEReference(eLoopControlEClass, ELOOP_CONTROL__LABEL);
@@ -2599,34 +2817,74 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eNotifiedTopicEClass = createEClass(ENOTIFIED_TOPIC);
     createEAttribute(eNotifiedTopicEClass, ENOTIFIED_TOPIC__NAME);
 
+    eFilteredVariableOrStringEClass = createEClass(EFILTERED_VARIABLE_OR_STRING);
+    createEAttribute(eFilteredVariableOrStringEClass, EFILTERED_VARIABLE_OR_STRING__STRING);
+
     eValuePassedEClass = createEClass(EVALUE_PASSED);
+    createEReference(eValuePassedEClass, EVALUE_PASSED__VARIABLE_AND_STRING);
+
+    eValuePassedToJinjaExpressionEClass = createEClass(EVALUE_PASSED_TO_JINJA_EXPRESSION);
 
     eValueEClass = createEClass(EVALUE);
 
     eSimpleValueEClass = createEClass(ESIMPLE_VALUE);
     createEAttribute(eSimpleValueEClass, ESIMPLE_VALUE__VALUE_STRING);
-    createEAttribute(eSimpleValueEClass, ESIMPLE_VALUE__VALUE_INT);
+    createEAttribute(eSimpleValueEClass, ESIMPLE_VALUE__VALUE_NUMBER);
 
     eItemEClass = createEClass(EITEM);
     createEAttribute(eItemEClass, EITEM__TAIL);
-    createEAttribute(eItemEClass, EITEM__FILTER_COMMANDS);
 
     eDeclaredVariableReferenceEClass = createEClass(EDECLARED_VARIABLE_REFERENCE);
-    createEReference(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__VARIABLE);
+    createEReference(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE);
     createEAttribute(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__INDEX);
     createEReference(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__TAIL);
 
-    eDeclaredVariableReferenceOrStringEClass = createEClass(EDECLARED_VARIABLE_REFERENCE_OR_STRING);
-    createEAttribute(eDeclaredVariableReferenceOrStringEClass, EDECLARED_VARIABLE_REFERENCE_OR_STRING__STRING);
+    eJinjaExpressionEvaluationEClass = createEClass(EJINJA_EXPRESSION_EVALUATION);
+    createEReference(eJinjaExpressionEvaluationEClass, EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION);
 
-    eFilteredVariableEClass = createEClass(EFILTERED_VARIABLE);
-    createEReference(eFilteredVariableEClass, EFILTERED_VARIABLE__VARIABLE_REFERENCE_OR_STRING);
+    eJinjaExpressionEvaluationWithoutBracketsEClass = createEClass(EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS);
 
-    eFilteredVariableOrStringEClass = createEClass(EFILTERED_VARIABLE_OR_STRING);
-    createEAttribute(eFilteredVariableOrStringEClass, EFILTERED_VARIABLE_OR_STRING__STRING);
+    eFunctionCallEClass = createEClass(EFUNCTION_CALL);
+    createEAttribute(eFunctionCallEClass, EFUNCTION_CALL__NAME);
+    createEReference(eFunctionCallEClass, EFUNCTION_CALL__PARAMETERS);
 
-    eFilteredVariablesAndStringEClass = createEClass(EFILTERED_VARIABLES_AND_STRING);
-    createEReference(eFilteredVariablesAndStringEClass, EFILTERED_VARIABLES_AND_STRING__VARIABLE_AND_STRING);
+    eFilteredExpressionEClass = createEClass(EFILTERED_EXPRESSION);
+    createEReference(eFilteredExpressionEClass, EFILTERED_EXPRESSION__TO_FILTER);
+    createEReference(eFilteredExpressionEClass, EFILTERED_EXPRESSION__TAIL);
+    createEReference(eFilteredExpressionEClass, EFILTERED_EXPRESSION__FILTER);
+
+    eOrExpressionEClass = createEClass(EOR_EXPRESSION);
+    createEReference(eOrExpressionEClass, EOR_EXPRESSION__LEFT_OR);
+    createEReference(eOrExpressionEClass, EOR_EXPRESSION__RIGHT_OR);
+
+    eAndExpressionEClass = createEClass(EAND_EXPRESSION);
+    createEReference(eAndExpressionEClass, EAND_EXPRESSION__LEFT_AND);
+    createEReference(eAndExpressionEClass, EAND_EXPRESSION__RIGHT_AND);
+
+    eTruthExpressionEClass = createEClass(ETRUTH_EXPRESSION);
+    createEReference(eTruthExpressionEClass, ETRUTH_EXPRESSION__LEFT_VALUE);
+    createEAttribute(eTruthExpressionEClass, ETRUTH_EXPRESSION__EQUALITY_SIGN);
+    createEReference(eTruthExpressionEClass, ETRUTH_EXPRESSION__RIGHT_VALUE);
+
+    eOperationEClass = createEClass(EOPERATION);
+    createEReference(eOperationEClass, EOPERATION__LEFT_OPERAND);
+    createEAttribute(eOperationEClass, EOPERATION__OPERATOR);
+    createEReference(eOperationEClass, EOPERATION__RIGHT_OPERAND);
+
+    eIsExpressionEClass = createEClass(EIS_EXPRESSION);
+    createEReference(eIsExpressionEClass, EIS_EXPRESSION__FILTERED_EXPRESSION);
+    createEAttribute(eIsExpressionEClass, EIS_EXPRESSION__IS_NOT);
+    createEReference(eIsExpressionEClass, EIS_EXPRESSION__STATUS);
+    createEReference(eIsExpressionEClass, EIS_EXPRESSION__CONTAINER_EXPRESSION);
+
+    eParenthesisedExpressionEClass = createEClass(EPARENTHESISED_EXPRESSION);
+    createEReference(eParenthesisedExpressionEClass, EPARENTHESISED_EXPRESSION__BASIC_VALUE);
+    createEReference(eParenthesisedExpressionEClass, EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM);
+
+    eIfExpressionEClass = createEClass(EIF_EXPRESSION);
+    createEReference(eIfExpressionEClass, EIF_EXPRESSION__IF_EXPRESSION);
+    createEReference(eIfExpressionEClass, EIF_EXPRESSION__IF_CONDITION);
+    createEReference(eIfExpressionEClass, EIF_EXPRESSION__ELSE_EXPRESSION);
 
     eDictionaryPairReferenceEClass = createEClass(EDICTIONARY_PAIR_REFERENCE);
     createEReference(eDictionaryPairReferenceEClass, EDICTIONARY_PAIR_REFERENCE__NAME);
@@ -2702,19 +2960,18 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eTaskHandlerErrorHandlingEClass.getESuperTypes().add(this.getEErrorHandling());
     eNotifiedHandlerEClass.getESuperTypes().add(this.getENotifiable());
     eNotifiedTopicEClass.getESuperTypes().add(this.getENotifiable());
-    eValueEClass.getESuperTypes().add(this.getEValuePassed());
+    eValueEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eSimpleValueEClass.getESuperTypes().add(this.getEValue());
-    eItemEClass.getESuperTypes().add(this.getEValuePassed());
-    eDeclaredVariableReferenceEClass.getESuperTypes().add(this.getEDeclaredVariableReferenceOrString());
-    eFilteredVariableEClass.getESuperTypes().add(this.getELoopList());
-    eFilteredVariableEClass.getESuperTypes().add(this.getEFilteredVariableOrString());
-    eFilteredVariablesAndStringEClass.getESuperTypes().add(this.getEValue());
+    eItemEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
+    eDeclaredVariableReferenceEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
+    eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEFilteredVariableOrString());
+    eFunctionCallEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
+    eFilteredExpressionEClass.getESuperTypes().add(this.getEJinjaExpressionEvaluationWithoutBrackets());
+    eIfExpressionEClass.getESuperTypes().add(this.getEJinjaExpressionEvaluationWithoutBrackets());
     eVariableDeclarationEClass.getESuperTypes().add(this.getEDeclaredVariable());
     eRegisterVariableEClass.getESuperTypes().add(this.getEDeclaredVariable());
-    eFactGatheredEClass.getESuperTypes().add(this.getELoopList());
-    eFactGatheredEClass.getESuperTypes().add(this.getEValuePassed());
+    eFactGatheredEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eDictionaryEClass.getESuperTypes().add(this.getEValue());
-    eListEClass.getESuperTypes().add(this.getELoopList());
     eListEClass.getESuperTypes().add(this.getEValue());
 
     // Initialize classes and features; add operations and parameters
@@ -2740,7 +2997,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eExecutionEClass, EExecution.class, "EExecution", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEExecution_Exe_settings(), this.getEExecutionExeSettings(), null, "exe_settings", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEExecution_Delegation(), this.getEDelegation(), null, "delegation", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEExecution_When_expression(), this.getEConditionalExpression(), null, "when_expression", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExecution_When_expression(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "when_expression", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBlockTaskEClass, EBlockTask.class, "EBlockTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2786,21 +3043,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEAttribute(getEParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, EParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParameter_Value_passed(), this.getEValuePassed(), null, "value_passed", null, 0, 1, EParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eConditionalExpressionEClass, EConditionalExpression.class, "EConditionalExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEConditionalExpression_Left_term(), this.getEValuePassed(), null, "left_term", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEConditionalExpression_Equality_term(), ecorePackage.getEString(), "equality_term", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEConditionalExpression_Right_term(), this.getEValuePassed(), null, "right_term", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEConditionalExpression_Is_not(), ecorePackage.getEString(), "is_not", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEConditionalExpression_Status(), ecorePackage.getEString(), "status", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEConditionalExpression_Formula(), this.getEConditionalFormula(), null, "formula", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEConditionalExpression_Is_true(), ecorePackage.getEString(), "is_true", null, 0, 1, EConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eConditionalFormulaEClass, EConditionalFormula.class, "EConditionalFormula", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEConditionalFormula_Left_expression(), this.getEConditionalExpression(), null, "left_expression", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEConditionalFormula_And_or(), ecorePackage.getEString(), "and_or", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEConditionalFormula_Right_expression(), this.getEConditionalExpression(), null, "right_expression", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEConditionalFormula_Negated_expression(), this.getEConditionalExpression(), null, "negated_expression", null, 0, 1, EConditionalFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(eRoleInclusionEClass, ERoleInclusion.class, "ERoleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eRoleInclusionsEClass, ERoleInclusions.class, "ERoleInclusions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2812,19 +3054,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getELoopOverList_Loop_list(), this.getEValuePassed(), null, "loop_list", null, 0, 1, ELoopOverList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getELoopOverList_Loop_control(), this.getELoopControl(), null, "loop_control", null, 0, 1, ELoopOverList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eLoopListEClass, ELoopList.class, "ELoopList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(eLoopControlEClass, ELoopControl.class, "ELoopControl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getELoopControl_Label(), this.getEValuePassed(), null, "label", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getELoopControl_Pause(), ecorePackage.getEInt(), "pause", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getELoopControl_Pause(), ecorePackage.getEString(), "pause", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getELoopControl_Index_var(), ecorePackage.getEString(), "index_var", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getELoopControl_Loop_var(), ecorePackage.getEString(), "loop_var", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getELoopControl_Extended(), ecorePackage.getEString(), "extended", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eUntilEClass, EUntil.class, "EUntil", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEUntil_Until(), this.getEConditionalExpression(), null, "until", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEUntil_Retries(), ecorePackage.getEInt(), "retries", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEUntil_Delay(), ecorePackage.getEInt(), "delay", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEUntil_Until(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "until", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEUntil_Retries(), ecorePackage.getEString(), "retries", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEUntil_Delay(), ecorePackage.getEString(), "delay", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePrivilageEscalationEClass, EPrivilageEscalation.class, "EPrivilageEscalation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPrivilageEscalation_Become(), ecorePackage.getEString(), "become", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2839,11 +3079,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eConnectionEClass, EConnection.class, "EConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEConnection_Connection(), ecorePackage.getEString(), "connection", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEConnection_Port(), ecorePackage.getEInt(), "port", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEConnection_Port(), ecorePackage.getEString(), "port", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEConnection_Remote_user(), ecorePackage.getEString(), "remote_user", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eExeSettingsEClass, EExeSettings.class, "EExeSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEExeSettings_Throttle(), ecorePackage.getEInt(), "throttle", null, 0, 1, EExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEExeSettings_Throttle(), ecorePackage.getEString(), "throttle", null, 0, 1, EExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEExeSettings_Run_once(), ecorePackage.getEString(), "run_once", null, 0, 1, EExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePlayExeSettingsEClass, EPlayExeSettings.class, "EPlayExeSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2861,16 +3101,16 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eBlockErrorHandlingEClass, EBlockErrorHandling.class, "EBlockErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(ePlayErrorHandlingEClass, EPlayErrorHandling.class, "EPlayErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEPlayErrorHandling_Max_fail_percentage(), ecorePackage.getEInt(), "max_fail_percentage", null, 0, 1, EPlayErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEPlayErrorHandling_Max_fail_percentage(), ecorePackage.getEString(), "max_fail_percentage", null, 0, 1, EPlayErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eTaskHandlerErrorHandlingEClass, ETaskHandlerErrorHandling.class, "ETaskHandlerErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getETaskHandlerErrorHandling_Changed_when(), this.getEConditionalExpression(), null, "changed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerErrorHandling_Failed_when(), this.getEConditionalExpression(), null, "failed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerErrorHandling_Changed_when(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "changed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerErrorHandling_Failed_when(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "failed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eFactsSettingsEClass, EFactsSettings.class, "EFactsSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEFactsSettings_Gather_facts(), ecorePackage.getEString(), "gather_facts", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEFactsSettings_Gather_subset(), this.getEList(), null, "gather_subset", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEFactsSettings_Gather_timeout(), ecorePackage.getEInt(), "gather_timeout", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEFactsSettings_Gather_timeout(), ecorePackage.getEString(), "gather_timeout", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEFactsSettings_Fact_path(), ecorePackage.getEString(), "fact_path", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDelegationEClass, EDelegation.class, "EDelegation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2878,8 +3118,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEAttribute(getEDelegation_Delegate_facts(), ecorePackage.getEString(), "delegate_facts", null, 0, 1, EDelegation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eAsynchronousSettingsEClass, EAsynchronousSettings.class, "EAsynchronousSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEAsynchronousSettings_Async(), ecorePackage.getEInt(), "async", null, 0, 1, EAsynchronousSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEAsynchronousSettings_Poll(), ecorePackage.getEInt(), "poll", null, 0, 1, EAsynchronousSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEAsynchronousSettings_Async(), ecorePackage.getEString(), "async", null, 0, 1, EAsynchronousSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEAsynchronousSettings_Poll(), ecorePackage.getEString(), "poll", null, 0, 1, EAsynchronousSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eNotifiableEClass, ENotifiable.class, "ENotifiable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2889,38 +3129,78 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eNotifiedTopicEClass, ENotifiedTopic.class, "ENotifiedTopic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getENotifiedTopic_Name(), ecorePackage.getEString(), "name", null, 0, 1, ENotifiedTopic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(eFilteredVariableOrStringEClass, EFilteredVariableOrString.class, "EFilteredVariableOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEFilteredVariableOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EFilteredVariableOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(eValuePassedEClass, EValuePassed.class, "EValuePassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEValuePassed_Variable_and_string(), this.getEFilteredVariableOrString(), null, "variable_and_string", null, 0, -1, EValuePassed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eValuePassedToJinjaExpressionEClass, EValuePassedToJinjaExpression.class, "EValuePassedToJinjaExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eValueEClass, EValue.class, "EValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eSimpleValueEClass, ESimpleValue.class, "ESimpleValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getESimpleValue_Value_string(), ecorePackage.getEString(), "value_string", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getESimpleValue_Value_int(), ecorePackage.getEInt(), "value_int", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getESimpleValue_Value_number(), ecorePackage.getEString(), "value_number", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eItemEClass, EItem.class, "EItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEItem_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, EItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEItem_Filter_commands(), ecorePackage.getEString(), "filter_commands", null, 0, -1, EItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDeclaredVariableReferenceEClass, EDeclaredVariableReference.class, "EDeclaredVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEDeclaredVariableReference_Variable(), this.getEDeclaredVariable(), null, "variable", null, 0, 1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEDeclaredVariableReference_Index(), ecorePackage.getEInt(), "index", null, 0, 1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEDeclaredVariableReference_Variable_reference(), this.getEDeclaredVariable(), null, "variable_reference", null, 0, 1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEDeclaredVariableReference_Index(), ecorePackage.getEString(), "index", null, 0, 1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEDeclaredVariableReference_Tail(), this.getEDictionaryPairReference(), null, "tail", null, 0, -1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eDeclaredVariableReferenceOrStringEClass, EDeclaredVariableReferenceOrString.class, "EDeclaredVariableReferenceOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEDeclaredVariableReferenceOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EDeclaredVariableReferenceOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eJinjaExpressionEvaluationEClass, EJinjaExpressionEvaluation.class, "EJinjaExpressionEvaluation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEJinjaExpressionEvaluation_Jinja_expression(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "jinja_expression", null, 0, 1, EJinjaExpressionEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eFilteredVariableEClass, EFilteredVariable.class, "EFilteredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEFilteredVariable_Variable_reference_or_string(), this.getEDeclaredVariableReferenceOrString(), null, "variable_reference_or_string", null, 0, -1, EFilteredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eJinjaExpressionEvaluationWithoutBracketsEClass, EJinjaExpressionEvaluationWithoutBrackets.class, "EJinjaExpressionEvaluationWithoutBrackets", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(eFilteredVariableOrStringEClass, EFilteredVariableOrString.class, "EFilteredVariableOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEFilteredVariableOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EFilteredVariableOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eFunctionCallEClass, EFunctionCall.class, "EFunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEFunctionCall_Name(), ecorePackage.getEString(), "name", null, 0, 1, EFunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFunctionCall_Parameters(), this.getEFilteredExpression(), null, "parameters", null, 0, -1, EFunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eFilteredVariablesAndStringEClass, EFilteredVariablesAndString.class, "EFilteredVariablesAndString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEFilteredVariablesAndString_Variable_and_string(), this.getEFilteredVariableOrString(), null, "variable_and_string", null, 0, -1, EFilteredVariablesAndString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eFilteredExpressionEClass, EFilteredExpression.class, "EFilteredExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEFilteredExpression_To_filter(), this.getEOrExpression(), null, "to_filter", null, 0, 1, EFilteredExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFilteredExpression_Tail(), this.getEFunctionCall(), null, "tail", null, 0, -1, EFilteredExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFilteredExpression_Filter(), this.getEFilteredExpression(), null, "filter", null, 0, 1, EFilteredExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eOrExpressionEClass, EOrExpression.class, "EOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEOrExpression_Left_or(), this.getEAndExpression(), null, "left_or", null, 0, 1, EOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEOrExpression_Right_or(), this.getEOrExpression(), null, "right_or", null, 0, 1, EOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eAndExpressionEClass, EAndExpression.class, "EAndExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEAndExpression_Left_and(), this.getETruthExpression(), null, "left_and", null, 0, 1, EAndExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEAndExpression_Right_and(), this.getEAndExpression(), null, "right_and", null, 0, 1, EAndExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eTruthExpressionEClass, ETruthExpression.class, "ETruthExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getETruthExpression_Left_value(), this.getEOperation(), null, "left_value", null, 0, 1, ETruthExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getETruthExpression_Equality_sign(), ecorePackage.getEString(), "equality_sign", null, 0, 1, ETruthExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETruthExpression_Right_value(), this.getETruthExpression(), null, "right_value", null, 0, 1, ETruthExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eOperationEClass, EOperation.class, "EOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEOperation_Left_operand(), this.getEIsExpression(), null, "left_operand", null, 0, 1, EOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEOperation_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, EOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEOperation_Right_operand(), this.getEOperation(), null, "right_operand", null, 0, 1, EOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eIsExpressionEClass, EIsExpression.class, "EIsExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEIsExpression_Filtered_expression(), this.getEParenthesisedExpression(), null, "filtered_expression", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEIsExpression_Is_not(), ecorePackage.getEString(), "is_not", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEIsExpression_Status(), this.getEIsExpression(), null, "status", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEIsExpression_Container_expression(), this.getEIsExpression(), null, "container_expression", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eParenthesisedExpressionEClass, EParenthesisedExpression.class, "EParenthesisedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEParenthesisedExpression_Basic_Value(), this.getEValuePassedToJinjaExpression(), null, "basic_Value", null, 0, 1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEParenthesisedExpression_Parenthesised_term(), this.getEOrExpression(), null, "parenthesised_term", null, 0, 1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eIfExpressionEClass, EIfExpression.class, "EIfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEIfExpression_If_expression(), this.getEFilteredExpression(), null, "if_expression", null, 0, 1, EIfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEIfExpression_If_condition(), this.getEFilteredExpression(), null, "if_condition", null, 0, 1, EIfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEIfExpression_Else_expression(), this.getEFilteredExpression(), null, "else_expression", null, 0, 1, EIfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDictionaryPairReferenceEClass, EDictionaryPairReference.class, "EDictionaryPairReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEDictionaryPairReference_Name(), this.getEDictionaryPair(), null, "name", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEDictionaryPairReference_Index(), ecorePackage.getEInt(), "index", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEDictionaryPairReference_Index(), ecorePackage.getEString(), "index", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDeclaredVariableEClass, EDeclaredVariable.class, "EDeclaredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEDeclaredVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, EDeclaredVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

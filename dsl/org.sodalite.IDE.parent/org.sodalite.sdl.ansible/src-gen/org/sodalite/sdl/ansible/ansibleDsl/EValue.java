@@ -14,6 +14,6 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EValue extends EValuePassed
+public interface EValue extends EValuePassedToJinjaExpression
 {
 } // EValue

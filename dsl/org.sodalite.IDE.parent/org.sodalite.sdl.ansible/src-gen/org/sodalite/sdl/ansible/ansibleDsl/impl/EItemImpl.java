@@ -23,12 +23,11 @@ import org.sodalite.sdl.ansible.ansibleDsl.EItem;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl#getTail <em>Tail</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl#getFilter_commands <em>Filter commands</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EItemImpl extends EValuePassedImpl implements EItem
+public class EItemImpl extends EValuePassedToJinjaExpressionImpl implements EItem
 {
   /**
    * The cached value of the '{@link #getTail() <em>Tail</em>}' attribute list.
@@ -39,16 +38,6 @@ public class EItemImpl extends EValuePassedImpl implements EItem
    * @ordered
    */
   protected EList<String> tail;
-
-  /**
-   * The cached value of the '{@link #getFilter_commands() <em>Filter commands</em>}' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFilter_commands()
-   * @generated
-   * @ordered
-   */
-  protected EList<String> filter_commands;
 
   /**
    * <!-- begin-user-doc -->
@@ -92,29 +81,12 @@ public class EItemImpl extends EValuePassedImpl implements EItem
    * @generated
    */
   @Override
-  public EList<String> getFilter_commands()
-  {
-    if (filter_commands == null)
-    {
-      filter_commands = new EDataTypeEList<String>(String.class, this, AnsibleDslPackage.EITEM__FILTER_COMMANDS);
-    }
-    return filter_commands;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case AnsibleDslPackage.EITEM__TAIL:
         return getTail();
-      case AnsibleDslPackage.EITEM__FILTER_COMMANDS:
-        return getFilter_commands();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -134,10 +106,6 @@ public class EItemImpl extends EValuePassedImpl implements EItem
         getTail().clear();
         getTail().addAll((Collection<? extends String>)newValue);
         return;
-      case AnsibleDslPackage.EITEM__FILTER_COMMANDS:
-        getFilter_commands().clear();
-        getFilter_commands().addAll((Collection<? extends String>)newValue);
-        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -155,9 +123,6 @@ public class EItemImpl extends EValuePassedImpl implements EItem
       case AnsibleDslPackage.EITEM__TAIL:
         getTail().clear();
         return;
-      case AnsibleDslPackage.EITEM__FILTER_COMMANDS:
-        getFilter_commands().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -174,8 +139,6 @@ public class EItemImpl extends EValuePassedImpl implements EItem
     {
       case AnsibleDslPackage.EITEM__TAIL:
         return tail != null && !tail.isEmpty();
-      case AnsibleDslPackage.EITEM__FILTER_COMMANDS:
-        return filter_commands != null && !filter_commands.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -193,8 +156,6 @@ public class EItemImpl extends EValuePassedImpl implements EItem
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (tail: ");
     result.append(tail);
-    result.append(", filter_commands: ");
-    result.append(filter_commands);
     result.append(')');
     return result.toString();
   }

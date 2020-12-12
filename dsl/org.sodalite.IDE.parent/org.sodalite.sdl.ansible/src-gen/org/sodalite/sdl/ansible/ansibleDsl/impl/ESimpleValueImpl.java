@@ -21,7 +21,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl#getValue_string <em>Value string</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl#getValue_int <em>Value int</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl#getValue_number <em>Value number</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,24 +49,24 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
   protected String value_string = VALUE_STRING_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getValue_int() <em>Value int</em>}' attribute.
+   * The default value of the '{@link #getValue_number() <em>Value number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue_int()
+   * @see #getValue_number()
    * @generated
    * @ordered
    */
-  protected static final int VALUE_INT_EDEFAULT = 0;
+  protected static final String VALUE_NUMBER_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getValue_int() <em>Value int</em>}' attribute.
+   * The cached value of the '{@link #getValue_number() <em>Value number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue_int()
+   * @see #getValue_number()
    * @generated
    * @ordered
    */
-  protected int value_int = VALUE_INT_EDEFAULT;
+  protected String value_number = VALUE_NUMBER_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -120,9 +120,9 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
    * @generated
    */
   @Override
-  public int getValue_int()
+  public String getValue_number()
   {
-    return value_int;
+    return value_number;
   }
 
   /**
@@ -131,12 +131,12 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
    * @generated
    */
   @Override
-  public void setValue_int(int newValue_int)
+  public void setValue_number(String newValue_number)
   {
-    int oldValue_int = value_int;
-    value_int = newValue_int;
+    String oldValue_number = value_number;
+    value_number = newValue_number;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE__VALUE_INT, oldValue_int, value_int));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER, oldValue_number, value_number));
   }
 
   /**
@@ -151,8 +151,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
     {
       case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_STRING:
         return getValue_string();
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_INT:
-        return getValue_int();
+      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER:
+        return getValue_number();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -170,8 +170,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
       case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_STRING:
         setValue_string((String)newValue);
         return;
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_INT:
-        setValue_int((Integer)newValue);
+      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER:
+        setValue_number((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -190,8 +190,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
       case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_STRING:
         setValue_string(VALUE_STRING_EDEFAULT);
         return;
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_INT:
-        setValue_int(VALUE_INT_EDEFAULT);
+      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER:
+        setValue_number(VALUE_NUMBER_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -209,8 +209,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
     {
       case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_STRING:
         return VALUE_STRING_EDEFAULT == null ? value_string != null : !VALUE_STRING_EDEFAULT.equals(value_string);
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_INT:
-        return value_int != VALUE_INT_EDEFAULT;
+      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER:
+        return VALUE_NUMBER_EDEFAULT == null ? value_number != null : !VALUE_NUMBER_EDEFAULT.equals(value_number);
     }
     return super.eIsSet(featureID);
   }
@@ -228,8 +228,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (value_string: ");
     result.append(value_string);
-    result.append(", value_int: ");
-    result.append(value_int);
+    result.append(", value_number: ");
+    result.append(value_number);
     result.append(')');
     return result.toString();
   }

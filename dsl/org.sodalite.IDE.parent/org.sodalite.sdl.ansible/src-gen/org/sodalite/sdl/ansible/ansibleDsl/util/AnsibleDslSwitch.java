@@ -172,20 +172,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION:
-      {
-        EConditionalExpression eConditionalExpression = (EConditionalExpression)theEObject;
-        T result = caseEConditionalExpression(eConditionalExpression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AnsibleDslPackage.ECONDITIONAL_FORMULA:
-      {
-        EConditionalFormula eConditionalFormula = (EConditionalFormula)theEObject;
-        T result = caseEConditionalFormula(eConditionalFormula);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AnsibleDslPackage.EROLE_INCLUSION:
       {
         ERoleInclusion eRoleInclusion = (ERoleInclusion)theEObject;
@@ -214,13 +200,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         ELoopOverList eLoopOverList = (ELoopOverList)theEObject;
         T result = caseELoopOverList(eLoopOverList);
         if (result == null) result = caseELoop(eLoopOverList);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AnsibleDslPackage.ELOOP_LIST:
-      {
-        ELoopList eLoopList = (ELoopList)theEObject;
-        T result = caseELoopList(eLoopList);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -358,6 +337,13 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING:
+      {
+        EFilteredVariableOrString eFilteredVariableOrString = (EFilteredVariableOrString)theEObject;
+        T result = caseEFilteredVariableOrString(eFilteredVariableOrString);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.EVALUE_PASSED:
       {
         EValuePassed eValuePassed = (EValuePassed)theEObject;
@@ -365,11 +351,18 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.EVALUE_PASSED_TO_JINJA_EXPRESSION:
+      {
+        EValuePassedToJinjaExpression eValuePassedToJinjaExpression = (EValuePassedToJinjaExpression)theEObject;
+        T result = caseEValuePassedToJinjaExpression(eValuePassedToJinjaExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.EVALUE:
       {
         EValue eValue = (EValue)theEObject;
         T result = caseEValue(eValue);
-        if (result == null) result = caseEValuePassed(eValue);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eValue);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -378,7 +371,7 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         ESimpleValue eSimpleValue = (ESimpleValue)theEObject;
         T result = caseESimpleValue(eSimpleValue);
         if (result == null) result = caseEValue(eSimpleValue);
-        if (result == null) result = caseEValuePassed(eSimpleValue);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eSimpleValue);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -386,7 +379,7 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EItem eItem = (EItem)theEObject;
         T result = caseEItem(eItem);
-        if (result == null) result = caseEValuePassed(eItem);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eItem);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -394,39 +387,88 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EDeclaredVariableReference eDeclaredVariableReference = (EDeclaredVariableReference)theEObject;
         T result = caseEDeclaredVariableReference(eDeclaredVariableReference);
-        if (result == null) result = caseEDeclaredVariableReferenceOrString(eDeclaredVariableReference);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eDeclaredVariableReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE_OR_STRING:
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION:
       {
-        EDeclaredVariableReferenceOrString eDeclaredVariableReferenceOrString = (EDeclaredVariableReferenceOrString)theEObject;
-        T result = caseEDeclaredVariableReferenceOrString(eDeclaredVariableReferenceOrString);
+        EJinjaExpressionEvaluation eJinjaExpressionEvaluation = (EJinjaExpressionEvaluation)theEObject;
+        T result = caseEJinjaExpressionEvaluation(eJinjaExpressionEvaluation);
+        if (result == null) result = caseEFilteredVariableOrString(eJinjaExpressionEvaluation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EFILTERED_VARIABLE:
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS:
       {
-        EFilteredVariable eFilteredVariable = (EFilteredVariable)theEObject;
-        T result = caseEFilteredVariable(eFilteredVariable);
-        if (result == null) result = caseELoopList(eFilteredVariable);
-        if (result == null) result = caseEFilteredVariableOrString(eFilteredVariable);
+        EJinjaExpressionEvaluationWithoutBrackets eJinjaExpressionEvaluationWithoutBrackets = (EJinjaExpressionEvaluationWithoutBrackets)theEObject;
+        T result = caseEJinjaExpressionEvaluationWithoutBrackets(eJinjaExpressionEvaluationWithoutBrackets);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING:
+      case AnsibleDslPackage.EFUNCTION_CALL:
       {
-        EFilteredVariableOrString eFilteredVariableOrString = (EFilteredVariableOrString)theEObject;
-        T result = caseEFilteredVariableOrString(eFilteredVariableOrString);
+        EFunctionCall eFunctionCall = (EFunctionCall)theEObject;
+        T result = caseEFunctionCall(eFunctionCall);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eFunctionCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EFILTERED_VARIABLES_AND_STRING:
+      case AnsibleDslPackage.EFILTERED_EXPRESSION:
       {
-        EFilteredVariablesAndString eFilteredVariablesAndString = (EFilteredVariablesAndString)theEObject;
-        T result = caseEFilteredVariablesAndString(eFilteredVariablesAndString);
-        if (result == null) result = caseEValue(eFilteredVariablesAndString);
-        if (result == null) result = caseEValuePassed(eFilteredVariablesAndString);
+        EFilteredExpression eFilteredExpression = (EFilteredExpression)theEObject;
+        T result = caseEFilteredExpression(eFilteredExpression);
+        if (result == null) result = caseEJinjaExpressionEvaluationWithoutBrackets(eFilteredExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EOR_EXPRESSION:
+      {
+        EOrExpression eOrExpression = (EOrExpression)theEObject;
+        T result = caseEOrExpression(eOrExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EAND_EXPRESSION:
+      {
+        EAndExpression eAndExpression = (EAndExpression)theEObject;
+        T result = caseEAndExpression(eAndExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.ETRUTH_EXPRESSION:
+      {
+        ETruthExpression eTruthExpression = (ETruthExpression)theEObject;
+        T result = caseETruthExpression(eTruthExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EOPERATION:
+      {
+        EOperation eOperation = (EOperation)theEObject;
+        T result = caseEOperation(eOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EIS_EXPRESSION:
+      {
+        EIsExpression eIsExpression = (EIsExpression)theEObject;
+        T result = caseEIsExpression(eIsExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION:
+      {
+        EParenthesisedExpression eParenthesisedExpression = (EParenthesisedExpression)theEObject;
+        T result = caseEParenthesisedExpression(eParenthesisedExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EIF_EXPRESSION:
+      {
+        EIfExpression eIfExpression = (EIfExpression)theEObject;
+        T result = caseEIfExpression(eIfExpression);
+        if (result == null) result = caseEJinjaExpressionEvaluationWithoutBrackets(eIfExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -464,8 +506,7 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EFactGathered eFactGathered = (EFactGathered)theEObject;
         T result = caseEFactGathered(eFactGathered);
-        if (result == null) result = caseELoopList(eFactGathered);
-        if (result == null) result = caseEValuePassed(eFactGathered);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eFactGathered);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -474,7 +515,7 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         EDictionary eDictionary = (EDictionary)theEObject;
         T result = caseEDictionary(eDictionary);
         if (result == null) result = caseEValue(eDictionary);
-        if (result == null) result = caseEValuePassed(eDictionary);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eDictionary);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -489,9 +530,8 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EList eList = (EList)theEObject;
         T result = caseEList(eList);
-        if (result == null) result = caseELoopList(eList);
         if (result == null) result = caseEValue(eList);
-        if (result == null) result = caseEValuePassed(eList);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eList);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -692,38 +732,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EConditional Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EConditional Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEConditionalExpression(EConditionalExpression object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EConditional Formula</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EConditional Formula</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEConditionalFormula(EConditionalFormula object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>ERole Inclusion</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -783,22 +791,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseELoopOverList(ELoopOverList object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>ELoop List</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ELoop List</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseELoopList(ELoopList object)
   {
     return null;
   }
@@ -1092,6 +1084,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EFiltered Variable Or String</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EFiltered Variable Or String</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEFilteredVariableOrString(EFilteredVariableOrString object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EValue Passed</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1103,6 +1111,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEValuePassed(EValuePassed object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EValue Passed To Jinja Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EValue Passed To Jinja Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEValuePassedToJinjaExpression(EValuePassedToJinjaExpression object)
   {
     return null;
   }
@@ -1172,65 +1196,177 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EDeclared Variable Reference Or String</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EJinja Expression Evaluation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EDeclared Variable Reference Or String</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EJinja Expression Evaluation</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEDeclaredVariableReferenceOrString(EDeclaredVariableReferenceOrString object)
+  public T caseEJinjaExpressionEvaluation(EJinjaExpressionEvaluation object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EFiltered Variable</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EJinja Expression Evaluation Without Brackets</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EFiltered Variable</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EJinja Expression Evaluation Without Brackets</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEFilteredVariable(EFilteredVariable object)
+  public T caseEJinjaExpressionEvaluationWithoutBrackets(EJinjaExpressionEvaluationWithoutBrackets object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EFiltered Variable Or String</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EFunction Call</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EFiltered Variable Or String</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EFunction Call</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEFilteredVariableOrString(EFilteredVariableOrString object)
+  public T caseEFunctionCall(EFunctionCall object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EFiltered Variables And String</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EFiltered Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EFiltered Variables And String</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EFiltered Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEFilteredVariablesAndString(EFilteredVariablesAndString object)
+  public T caseEFilteredExpression(EFilteredExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EOr Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EOr Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEOrExpression(EOrExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EAnd Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EAnd Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEAndExpression(EAndExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ETruth Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ETruth Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseETruthExpression(ETruthExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EOperation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EOperation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEOperation(EOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EIs Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EIs Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEIsExpression(EIsExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EParenthesised Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EParenthesised Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEParenthesisedExpression(EParenthesisedExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EIf Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EIf Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEIfExpression(EIfExpression object)
   {
     return null;
   }

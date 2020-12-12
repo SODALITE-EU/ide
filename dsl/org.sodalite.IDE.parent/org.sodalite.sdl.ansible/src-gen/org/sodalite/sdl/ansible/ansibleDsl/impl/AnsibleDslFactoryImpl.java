@@ -77,13 +77,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EHANDLER: return createEHandler();
       case AnsibleDslPackage.EMODULE_CALL: return createEModuleCall();
       case AnsibleDslPackage.EPARAMETER: return createEParameter();
-      case AnsibleDslPackage.ECONDITIONAL_EXPRESSION: return createEConditionalExpression();
-      case AnsibleDslPackage.ECONDITIONAL_FORMULA: return createEConditionalFormula();
       case AnsibleDslPackage.EROLE_INCLUSION: return createERoleInclusion();
       case AnsibleDslPackage.EROLE_INCLUSIONS: return createERoleInclusions();
       case AnsibleDslPackage.ELOOP: return createELoop();
       case AnsibleDslPackage.ELOOP_OVER_LIST: return createELoopOverList();
-      case AnsibleDslPackage.ELOOP_LIST: return createELoopList();
       case AnsibleDslPackage.ELOOP_CONTROL: return createELoopControl();
       case AnsibleDslPackage.EUNTIL: return createEUntil();
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION: return createEPrivilageEscalation();
@@ -102,15 +99,24 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ENOTIFIABLE: return createENotifiable();
       case AnsibleDslPackage.ENOTIFIED_HANDLER: return createENotifiedHandler();
       case AnsibleDslPackage.ENOTIFIED_TOPIC: return createENotifiedTopic();
+      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING: return createEFilteredVariableOrString();
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
+      case AnsibleDslPackage.EVALUE_PASSED_TO_JINJA_EXPRESSION: return createEValuePassedToJinjaExpression();
       case AnsibleDslPackage.EVALUE: return createEValue();
       case AnsibleDslPackage.ESIMPLE_VALUE: return createESimpleValue();
       case AnsibleDslPackage.EITEM: return createEItem();
       case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE: return createEDeclaredVariableReference();
-      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE_OR_STRING: return createEDeclaredVariableReferenceOrString();
-      case AnsibleDslPackage.EFILTERED_VARIABLE: return createEFilteredVariable();
-      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING: return createEFilteredVariableOrString();
-      case AnsibleDslPackage.EFILTERED_VARIABLES_AND_STRING: return createEFilteredVariablesAndString();
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION: return createEJinjaExpressionEvaluation();
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS: return createEJinjaExpressionEvaluationWithoutBrackets();
+      case AnsibleDslPackage.EFUNCTION_CALL: return createEFunctionCall();
+      case AnsibleDslPackage.EFILTERED_EXPRESSION: return createEFilteredExpression();
+      case AnsibleDslPackage.EOR_EXPRESSION: return createEOrExpression();
+      case AnsibleDslPackage.EAND_EXPRESSION: return createEAndExpression();
+      case AnsibleDslPackage.ETRUTH_EXPRESSION: return createETruthExpression();
+      case AnsibleDslPackage.EOPERATION: return createEOperation();
+      case AnsibleDslPackage.EIS_EXPRESSION: return createEIsExpression();
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION: return createEParenthesisedExpression();
+      case AnsibleDslPackage.EIF_EXPRESSION: return createEIfExpression();
       case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE: return createEDictionaryPairReference();
       case AnsibleDslPackage.EDECLARED_VARIABLE: return createEDeclaredVariable();
       case AnsibleDslPackage.EVARIABLE_DECLARATION: return createEVariableDeclaration();
@@ -274,30 +280,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EConditionalExpression createEConditionalExpression()
-  {
-    EConditionalExpressionImpl eConditionalExpression = new EConditionalExpressionImpl();
-    return eConditionalExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EConditionalFormula createEConditionalFormula()
-  {
-    EConditionalFormulaImpl eConditionalFormula = new EConditionalFormulaImpl();
-    return eConditionalFormula;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public ERoleInclusion createERoleInclusion()
   {
     ERoleInclusionImpl eRoleInclusion = new ERoleInclusionImpl();
@@ -338,18 +320,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     ELoopOverListImpl eLoopOverList = new ELoopOverListImpl();
     return eLoopOverList;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ELoopList createELoopList()
-  {
-    ELoopListImpl eLoopList = new ELoopListImpl();
-    return eLoopList;
   }
 
   /**
@@ -574,10 +544,34 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
+  public EFilteredVariableOrString createEFilteredVariableOrString()
+  {
+    EFilteredVariableOrStringImpl eFilteredVariableOrString = new EFilteredVariableOrStringImpl();
+    return eFilteredVariableOrString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EValuePassed createEValuePassed()
   {
     EValuePassedImpl eValuePassed = new EValuePassedImpl();
     return eValuePassed;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EValuePassedToJinjaExpression createEValuePassedToJinjaExpression()
+  {
+    EValuePassedToJinjaExpressionImpl eValuePassedToJinjaExpression = new EValuePassedToJinjaExpressionImpl();
+    return eValuePassedToJinjaExpression;
   }
 
   /**
@@ -634,10 +628,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EDeclaredVariableReferenceOrString createEDeclaredVariableReferenceOrString()
+  public EJinjaExpressionEvaluation createEJinjaExpressionEvaluation()
   {
-    EDeclaredVariableReferenceOrStringImpl eDeclaredVariableReferenceOrString = new EDeclaredVariableReferenceOrStringImpl();
-    return eDeclaredVariableReferenceOrString;
+    EJinjaExpressionEvaluationImpl eJinjaExpressionEvaluation = new EJinjaExpressionEvaluationImpl();
+    return eJinjaExpressionEvaluation;
   }
 
   /**
@@ -646,10 +640,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EFilteredVariable createEFilteredVariable()
+  public EJinjaExpressionEvaluationWithoutBrackets createEJinjaExpressionEvaluationWithoutBrackets()
   {
-    EFilteredVariableImpl eFilteredVariable = new EFilteredVariableImpl();
-    return eFilteredVariable;
+    EJinjaExpressionEvaluationWithoutBracketsImpl eJinjaExpressionEvaluationWithoutBrackets = new EJinjaExpressionEvaluationWithoutBracketsImpl();
+    return eJinjaExpressionEvaluationWithoutBrackets;
   }
 
   /**
@@ -658,10 +652,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EFilteredVariableOrString createEFilteredVariableOrString()
+  public EFunctionCall createEFunctionCall()
   {
-    EFilteredVariableOrStringImpl eFilteredVariableOrString = new EFilteredVariableOrStringImpl();
-    return eFilteredVariableOrString;
+    EFunctionCallImpl eFunctionCall = new EFunctionCallImpl();
+    return eFunctionCall;
   }
 
   /**
@@ -670,10 +664,94 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EFilteredVariablesAndString createEFilteredVariablesAndString()
+  public EFilteredExpression createEFilteredExpression()
   {
-    EFilteredVariablesAndStringImpl eFilteredVariablesAndString = new EFilteredVariablesAndStringImpl();
-    return eFilteredVariablesAndString;
+    EFilteredExpressionImpl eFilteredExpression = new EFilteredExpressionImpl();
+    return eFilteredExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EOrExpression createEOrExpression()
+  {
+    EOrExpressionImpl eOrExpression = new EOrExpressionImpl();
+    return eOrExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAndExpression createEAndExpression()
+  {
+    EAndExpressionImpl eAndExpression = new EAndExpressionImpl();
+    return eAndExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ETruthExpression createETruthExpression()
+  {
+    ETruthExpressionImpl eTruthExpression = new ETruthExpressionImpl();
+    return eTruthExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EOperation createEOperation()
+  {
+    EOperationImpl eOperation = new EOperationImpl();
+    return eOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EIsExpression createEIsExpression()
+  {
+    EIsExpressionImpl eIsExpression = new EIsExpressionImpl();
+    return eIsExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EParenthesisedExpression createEParenthesisedExpression()
+  {
+    EParenthesisedExpressionImpl eParenthesisedExpression = new EParenthesisedExpressionImpl();
+    return eParenthesisedExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EIfExpression createEIfExpression()
+  {
+    EIfExpressionImpl eIfExpression = new EIfExpressionImpl();
+    return eIfExpression;
   }
 
   /**

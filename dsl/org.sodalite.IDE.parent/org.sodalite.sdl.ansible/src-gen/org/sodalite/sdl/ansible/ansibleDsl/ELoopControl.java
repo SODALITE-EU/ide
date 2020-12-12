@@ -54,12 +54,12 @@ public interface ELoopControl extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Pause</em>' attribute.
-   * @see #setPause(int)
+   * @see #setPause(String)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getELoopControl_Pause()
    * @model
    * @generated
    */
-  int getPause();
+  String getPause();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl#getPause <em>Pause</em>}' attribute.
@@ -69,7 +69,7 @@ public interface ELoopControl extends EObject
    * @see #getPause()
    * @generated
    */
-  void setPause(int value);
+  void setPause(String value);
 
   /**
    * Returns the value of the '<em><b>Index var</b></em>' attribute.

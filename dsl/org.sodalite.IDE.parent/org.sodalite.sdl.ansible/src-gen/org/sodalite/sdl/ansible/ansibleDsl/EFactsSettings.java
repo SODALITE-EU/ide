@@ -75,12 +75,12 @@ public interface EFactsSettings extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Gather timeout</em>' attribute.
-   * @see #setGather_timeout(int)
+   * @see #setGather_timeout(String)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFactsSettings_Gather_timeout()
    * @model
    * @generated
    */
-  int getGather_timeout();
+  String getGather_timeout();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getGather_timeout <em>Gather timeout</em>}' attribute.
@@ -90,7 +90,7 @@ public interface EFactsSettings extends EObject
    * @see #getGather_timeout()
    * @generated
    */
-  void setGather_timeout(int value);
+  void setGather_timeout(String value);
 
   /**
    * Returns the value of the '<em><b>Fact path</b></em>' attribute.

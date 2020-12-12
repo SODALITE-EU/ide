@@ -37,7 +37,7 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
    * @generated
    * @ordered
    */
-  protected static final int THROTTLE_EDEFAULT = 0;
+  protected static final String THROTTLE_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getThrottle() <em>Throttle</em>}' attribute.
@@ -47,7 +47,7 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
    * @generated
    * @ordered
    */
-  protected int throttle = THROTTLE_EDEFAULT;
+  protected String throttle = THROTTLE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getRun_once() <em>Run once</em>}' attribute.
@@ -96,7 +96,7 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
    * @generated
    */
   @Override
-  public int getThrottle()
+  public String getThrottle()
   {
     return throttle;
   }
@@ -107,9 +107,9 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
    * @generated
    */
   @Override
-  public void setThrottle(int newThrottle)
+  public void setThrottle(String newThrottle)
   {
-    int oldThrottle = throttle;
+    String oldThrottle = throttle;
     throttle = newThrottle;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXE_SETTINGS__THROTTLE, oldThrottle, throttle));
@@ -169,7 +169,7 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
     switch (featureID)
     {
       case AnsibleDslPackage.EEXE_SETTINGS__THROTTLE:
-        setThrottle((Integer)newValue);
+        setThrottle((String)newValue);
         return;
       case AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE:
         setRun_once((String)newValue);
@@ -209,7 +209,7 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
     switch (featureID)
     {
       case AnsibleDslPackage.EEXE_SETTINGS__THROTTLE:
-        return throttle != THROTTLE_EDEFAULT;
+        return THROTTLE_EDEFAULT == null ? throttle != null : !THROTTLE_EDEFAULT.equals(throttle);
       case AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE:
         return RUN_ONCE_EDEFAULT == null ? run_once != null : !RUN_ONCE_EDEFAULT.equals(run_once);
     }

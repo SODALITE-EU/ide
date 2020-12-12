@@ -53,7 +53,7 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * @generated
    * @ordered
    */
-  protected static final int PAUSE_EDEFAULT = 0;
+  protected static final String PAUSE_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getPause() <em>Pause</em>}' attribute.
@@ -63,7 +63,7 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * @generated
    * @ordered
    */
-  protected int pause = PAUSE_EDEFAULT;
+  protected String pause = PAUSE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getIndex_var() <em>Index var</em>}' attribute.
@@ -202,7 +202,7 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * @generated
    */
   @Override
-  public int getPause()
+  public String getPause()
   {
     return pause;
   }
@@ -213,9 +213,9 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * @generated
    */
   @Override
-  public void setPause(int newPause)
+  public void setPause(String newPause)
   {
-    int oldPause = pause;
+    String oldPause = pause;
     pause = newPause;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__PAUSE, oldPause, pause));
@@ -350,7 +350,7 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
         setLabel((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__PAUSE:
-        setPause((Integer)newValue);
+        setPause((String)newValue);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR:
         setIndex_var((String)newValue);
@@ -407,7 +407,7 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
       case AnsibleDslPackage.ELOOP_CONTROL__LABEL:
         return label != null;
       case AnsibleDslPackage.ELOOP_CONTROL__PAUSE:
-        return pause != PAUSE_EDEFAULT;
+        return PAUSE_EDEFAULT == null ? pause != null : !PAUSE_EDEFAULT.equals(pause);
       case AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR:
         return INDEX_VAR_EDEFAULT == null ? index_var != null : !INDEX_VAR_EDEFAULT.equals(index_var);
       case AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR:

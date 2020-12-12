@@ -132,24 +132,6 @@ public interface AnsibleDslFactory extends EFactory
   EParameter createEParameter();
 
   /**
-   * Returns a new object of class '<em>EConditional Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EConditional Expression</em>'.
-   * @generated
-   */
-  EConditionalExpression createEConditionalExpression();
-
-  /**
-   * Returns a new object of class '<em>EConditional Formula</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EConditional Formula</em>'.
-   * @generated
-   */
-  EConditionalFormula createEConditionalFormula();
-
-  /**
    * Returns a new object of class '<em>ERole Inclusion</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -184,15 +166,6 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   ELoopOverList createELoopOverList();
-
-  /**
-   * Returns a new object of class '<em>ELoop List</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>ELoop List</em>'.
-   * @generated
-   */
-  ELoopList createELoopList();
 
   /**
    * Returns a new object of class '<em>ELoop Control</em>'.
@@ -357,6 +330,15 @@ public interface AnsibleDslFactory extends EFactory
   ENotifiedTopic createENotifiedTopic();
 
   /**
+   * Returns a new object of class '<em>EFiltered Variable Or String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EFiltered Variable Or String</em>'.
+   * @generated
+   */
+  EFilteredVariableOrString createEFilteredVariableOrString();
+
+  /**
    * Returns a new object of class '<em>EValue Passed</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -364,6 +346,15 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EValuePassed createEValuePassed();
+
+  /**
+   * Returns a new object of class '<em>EValue Passed To Jinja Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EValue Passed To Jinja Expression</em>'.
+   * @generated
+   */
+  EValuePassedToJinjaExpression createEValuePassedToJinjaExpression();
 
   /**
    * Returns a new object of class '<em>EValue</em>'.
@@ -402,40 +393,103 @@ public interface AnsibleDslFactory extends EFactory
   EDeclaredVariableReference createEDeclaredVariableReference();
 
   /**
-   * Returns a new object of class '<em>EDeclared Variable Reference Or String</em>'.
+   * Returns a new object of class '<em>EJinja Expression Evaluation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EDeclared Variable Reference Or String</em>'.
+   * @return a new object of class '<em>EJinja Expression Evaluation</em>'.
    * @generated
    */
-  EDeclaredVariableReferenceOrString createEDeclaredVariableReferenceOrString();
+  EJinjaExpressionEvaluation createEJinjaExpressionEvaluation();
 
   /**
-   * Returns a new object of class '<em>EFiltered Variable</em>'.
+   * Returns a new object of class '<em>EJinja Expression Evaluation Without Brackets</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EFiltered Variable</em>'.
+   * @return a new object of class '<em>EJinja Expression Evaluation Without Brackets</em>'.
    * @generated
    */
-  EFilteredVariable createEFilteredVariable();
+  EJinjaExpressionEvaluationWithoutBrackets createEJinjaExpressionEvaluationWithoutBrackets();
 
   /**
-   * Returns a new object of class '<em>EFiltered Variable Or String</em>'.
+   * Returns a new object of class '<em>EFunction Call</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EFiltered Variable Or String</em>'.
+   * @return a new object of class '<em>EFunction Call</em>'.
    * @generated
    */
-  EFilteredVariableOrString createEFilteredVariableOrString();
+  EFunctionCall createEFunctionCall();
 
   /**
-   * Returns a new object of class '<em>EFiltered Variables And String</em>'.
+   * Returns a new object of class '<em>EFiltered Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EFiltered Variables And String</em>'.
+   * @return a new object of class '<em>EFiltered Expression</em>'.
    * @generated
    */
-  EFilteredVariablesAndString createEFilteredVariablesAndString();
+  EFilteredExpression createEFilteredExpression();
+
+  /**
+   * Returns a new object of class '<em>EOr Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EOr Expression</em>'.
+   * @generated
+   */
+  EOrExpression createEOrExpression();
+
+  /**
+   * Returns a new object of class '<em>EAnd Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EAnd Expression</em>'.
+   * @generated
+   */
+  EAndExpression createEAndExpression();
+
+  /**
+   * Returns a new object of class '<em>ETruth Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ETruth Expression</em>'.
+   * @generated
+   */
+  ETruthExpression createETruthExpression();
+
+  /**
+   * Returns a new object of class '<em>EOperation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EOperation</em>'.
+   * @generated
+   */
+  EOperation createEOperation();
+
+  /**
+   * Returns a new object of class '<em>EIs Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EIs Expression</em>'.
+   * @generated
+   */
+  EIsExpression createEIsExpression();
+
+  /**
+   * Returns a new object of class '<em>EParenthesised Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EParenthesised Expression</em>'.
+   * @generated
+   */
+  EParenthesisedExpression createEParenthesisedExpression();
+
+  /**
+   * Returns a new object of class '<em>EIf Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EIf Expression</em>'.
+   * @generated
+   */
+  EIfExpression createEIfExpression();
 
   /**
    * Returns a new object of class '<em>EDictionary Pair Reference</em>'.

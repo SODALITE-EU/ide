@@ -15,7 +15,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValue;
  *
  * @generated
  */
-public class EValueImpl extends EValuePassedImpl implements EValue
+public class EValueImpl extends EValuePassedToJinjaExpressionImpl implements EValue
 {
   /**
    * <!-- begin-user-doc -->

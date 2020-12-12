@@ -58,7 +58,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    * @ordered
    */
-  protected static final int PORT_EDEFAULT = 0;
+  protected static final String PORT_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getPort() <em>Port</em>}' attribute.
@@ -68,7 +68,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    * @ordered
    */
-  protected int port = PORT_EDEFAULT;
+  protected String port = PORT_EDEFAULT;
 
   /**
    * The default value of the '{@link #getRemote_user() <em>Remote user</em>}' attribute.
@@ -142,7 +142,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
-  public int getPort()
+  public String getPort()
   {
     return port;
   }
@@ -153,9 +153,9 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
-  public void setPort(int newPort)
+  public void setPort(String newPort)
   {
-    int oldPort = port;
+    String oldPort = port;
     port = newPort;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__PORT, oldPort, port));
@@ -220,7 +220,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
         setConnection((String)newValue);
         return;
       case AnsibleDslPackage.ECONNECTION__PORT:
-        setPort((Integer)newValue);
+        setPort((String)newValue);
         return;
       case AnsibleDslPackage.ECONNECTION__REMOTE_USER:
         setRemote_user((String)newValue);
@@ -265,7 +265,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
       case AnsibleDslPackage.ECONNECTION__CONNECTION:
         return CONNECTION_EDEFAULT == null ? connection != null : !CONNECTION_EDEFAULT.equals(connection);
       case AnsibleDslPackage.ECONNECTION__PORT:
-        return port != PORT_EDEFAULT;
+        return PORT_EDEFAULT == null ? port != null : !PORT_EDEFAULT.equals(port);
       case AnsibleDslPackage.ECONNECTION__REMOTE_USER:
         return REMOTE_USER_EDEFAULT == null ? remote_user != null : !REMOTE_USER_EDEFAULT.equals(remote_user);
     }

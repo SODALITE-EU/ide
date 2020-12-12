@@ -30,7 +30,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValue;
  *
  * @generated
  */
-public class EListImpl extends ELoopListImpl implements EList
+public class EListImpl extends EValueImpl implements EList
 {
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.

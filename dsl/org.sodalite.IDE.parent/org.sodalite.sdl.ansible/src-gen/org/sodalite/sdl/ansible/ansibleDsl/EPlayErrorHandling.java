@@ -27,12 +27,12 @@ public interface EPlayErrorHandling extends EErrorHandling
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Max fail percentage</em>' attribute.
-   * @see #setMax_fail_percentage(int)
+   * @see #setMax_fail_percentage(String)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlayErrorHandling_Max_fail_percentage()
    * @model
    * @generated
    */
-  int getMax_fail_percentage();
+  String getMax_fail_percentage();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling#getMax_fail_percentage <em>Max fail percentage</em>}' attribute.
@@ -42,6 +42,6 @@ public interface EPlayErrorHandling extends EErrorHandling
    * @see #getMax_fail_percentage()
    * @generated
    */
-  void setMax_fail_percentage(int value);
+  void setMax_fail_percentage(String value);
 
 } // EPlayErrorHandling

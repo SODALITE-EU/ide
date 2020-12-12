@@ -34,7 +34,7 @@ import org.sodalite.sdl.ansible.scoping.AbstractAnsibleDslScopeProvider;
 public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
   @Override
   public IScope getScope(final EObject context, final EReference reference) {
-    if (((context instanceof EDeclaredVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EDECLARED_VARIABLE_REFERENCE__VARIABLE))) {
+    if (((context instanceof EDeclaredVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE))) {
       final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(context, EPlayImpl.class);
       if ((rootPlay != null)) {
         final List<EDeclaredVariableImpl> candidates = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootPlay, EDeclaredVariableImpl.class);
@@ -57,13 +57,13 @@ public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
           }
         }
       } else {
-        EDeclaredVariable _variable = declaredVariableReference.getVariable();
-        if ((_variable instanceof EVariableDeclarationImpl)) {
-          EDeclaredVariable _variable_1 = declaredVariableReference.getVariable();
-          EValue _value_passed = ((EVariableDeclarationImpl) _variable_1).getValue_passed();
+        EDeclaredVariable _variable_reference = declaredVariableReference.getVariable_reference();
+        if ((_variable_reference instanceof EVariableDeclarationImpl)) {
+          EDeclaredVariable _variable_reference_1 = declaredVariableReference.getVariable_reference();
+          EValue _value_passed = ((EVariableDeclarationImpl) _variable_reference_1).getValue_passed();
           if ((_value_passed instanceof EDictionaryImpl)) {
-            EDeclaredVariable _variable_2 = declaredVariableReference.getVariable();
-            EValue _value_passed_1 = ((EVariableDeclarationImpl) _variable_2).getValue_passed();
+            EDeclaredVariable _variable_reference_2 = declaredVariableReference.getVariable_reference();
+            EValue _value_passed_1 = ((EVariableDeclarationImpl) _variable_reference_2).getValue_passed();
             EList<EDictionaryPair> _dictionary_pairs_1 = ((EDictionaryImpl) _value_passed_1).getDictionary_pairs();
             for (final EDictionaryPair dictionaryPair_1 : _dictionary_pairs_1) {
               candidatesOfDictionary.add(dictionaryPair_1);

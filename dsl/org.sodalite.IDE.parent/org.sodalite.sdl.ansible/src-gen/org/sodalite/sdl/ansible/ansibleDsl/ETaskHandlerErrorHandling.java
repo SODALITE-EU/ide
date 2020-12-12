@@ -28,12 +28,12 @@ public interface ETaskHandlerErrorHandling extends EErrorHandling
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Changed when</em>' containment reference.
-   * @see #setChanged_when(EConditionalExpression)
+   * @see #setChanged_when(EJinjaExpressionEvaluationWithoutBrackets)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETaskHandlerErrorHandling_Changed_when()
    * @model containment="true"
    * @generated
    */
-  EConditionalExpression getChanged_when();
+  EJinjaExpressionEvaluationWithoutBrackets getChanged_when();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling#getChanged_when <em>Changed when</em>}' containment reference.
@@ -43,19 +43,19 @@ public interface ETaskHandlerErrorHandling extends EErrorHandling
    * @see #getChanged_when()
    * @generated
    */
-  void setChanged_when(EConditionalExpression value);
+  void setChanged_when(EJinjaExpressionEvaluationWithoutBrackets value);
 
   /**
    * Returns the value of the '<em><b>Failed when</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Failed when</em>' containment reference.
-   * @see #setFailed_when(EConditionalExpression)
+   * @see #setFailed_when(EJinjaExpressionEvaluationWithoutBrackets)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETaskHandlerErrorHandling_Failed_when()
    * @model containment="true"
    * @generated
    */
-  EConditionalExpression getFailed_when();
+  EJinjaExpressionEvaluationWithoutBrackets getFailed_when();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling#getFailed_when <em>Failed when</em>}' containment reference.
@@ -65,6 +65,6 @@ public interface ETaskHandlerErrorHandling extends EErrorHandling
    * @see #getFailed_when()
    * @generated
    */
-  void setFailed_when(EConditionalExpression value);
+  void setFailed_when(EJinjaExpressionEvaluationWithoutBrackets value);
 
 } // ETaskHandlerErrorHandling

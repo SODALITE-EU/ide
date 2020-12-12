@@ -1528,143 +1528,6 @@ public interface AnsibleDslPackage extends EPackage
   int EPARAMETER_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl <em>EConditional Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEConditionalExpression()
-   * @generated
-   */
-  int ECONDITIONAL_EXPRESSION = 12;
-
-  /**
-   * The feature id for the '<em><b>Left term</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_EXPRESSION__LEFT_TERM = 0;
-
-  /**
-   * The feature id for the '<em><b>Equality term</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_EXPRESSION__EQUALITY_TERM = 1;
-
-  /**
-   * The feature id for the '<em><b>Right term</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_EXPRESSION__RIGHT_TERM = 2;
-
-  /**
-   * The feature id for the '<em><b>Is not</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_EXPRESSION__IS_NOT = 3;
-
-  /**
-   * The feature id for the '<em><b>Status</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_EXPRESSION__STATUS = 4;
-
-  /**
-   * The feature id for the '<em><b>Formula</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_EXPRESSION__FORMULA = 5;
-
-  /**
-   * The feature id for the '<em><b>Is true</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_EXPRESSION__IS_TRUE = 6;
-
-  /**
-   * The number of structural features of the '<em>EConditional Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_EXPRESSION_FEATURE_COUNT = 7;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalFormulaImpl <em>EConditional Formula</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalFormulaImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEConditionalFormula()
-   * @generated
-   */
-  int ECONDITIONAL_FORMULA = 13;
-
-  /**
-   * The feature id for the '<em><b>Left expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_FORMULA__LEFT_EXPRESSION = 0;
-
-  /**
-   * The feature id for the '<em><b>And or</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_FORMULA__AND_OR = 1;
-
-  /**
-   * The feature id for the '<em><b>Right expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_FORMULA__RIGHT_EXPRESSION = 2;
-
-  /**
-   * The feature id for the '<em><b>Negated expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_FORMULA__NEGATED_EXPRESSION = 3;
-
-  /**
-   * The number of structural features of the '<em>EConditional Formula</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ECONDITIONAL_FORMULA_FEATURE_COUNT = 4;
-
-  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionImpl <em>ERole Inclusion</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1672,7 +1535,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleInclusion()
    * @generated
    */
-  int EROLE_INCLUSION = 14;
+  int EROLE_INCLUSION = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1817,7 +1680,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleInclusions()
    * @generated
    */
-  int EROLE_INCLUSIONS = 15;
+  int EROLE_INCLUSIONS = 13;
 
   /**
    * The feature id for the '<em><b>Roles</b></em>' containment reference list.
@@ -1845,7 +1708,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoop()
    * @generated
    */
-  int ELOOP = 16;
+  int ELOOP = 14;
 
   /**
    * The number of structural features of the '<em>ELoop</em>' class.
@@ -1864,7 +1727,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoopOverList()
    * @generated
    */
-  int ELOOP_OVER_LIST = 17;
+  int ELOOP_OVER_LIST = 15;
 
   /**
    * The feature id for the '<em><b>Loop list</b></em>' containment reference.
@@ -1894,25 +1757,6 @@ public interface AnsibleDslPackage extends EPackage
   int ELOOP_OVER_LIST_FEATURE_COUNT = ELOOP_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopListImpl <em>ELoop List</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopListImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoopList()
-   * @generated
-   */
-  int ELOOP_LIST = 18;
-
-  /**
-   * The number of structural features of the '<em>ELoop List</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELOOP_LIST_FEATURE_COUNT = 0;
-
-  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopControlImpl <em>ELoop Control</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1920,7 +1764,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoopControl()
    * @generated
    */
-  int ELOOP_CONTROL = 19;
+  int ELOOP_CONTROL = 16;
 
   /**
    * The feature id for the '<em><b>Label</b></em>' containment reference.
@@ -1984,7 +1828,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEUntil()
    * @generated
    */
-  int EUNTIL = 20;
+  int EUNTIL = 17;
 
   /**
    * The feature id for the '<em><b>Until</b></em>' containment reference.
@@ -2030,7 +1874,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPrivilageEscalation()
    * @generated
    */
-  int EPRIVILAGE_ESCALATION = 21;
+  int EPRIVILAGE_ESCALATION = 18;
 
   /**
    * The feature id for the '<em><b>Become</b></em>' attribute.
@@ -2094,7 +1938,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValidationMode()
    * @generated
    */
-  int EVALIDATION_MODE = 22;
+  int EVALIDATION_MODE = 19;
 
   /**
    * The feature id for the '<em><b>Check mode</b></em>' attribute.
@@ -2131,7 +1975,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEConnection()
    * @generated
    */
-  int ECONNECTION = 23;
+  int ECONNECTION = 20;
 
   /**
    * The feature id for the '<em><b>Connection</b></em>' attribute.
@@ -2177,7 +2021,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExeSettings()
    * @generated
    */
-  int EEXE_SETTINGS = 24;
+  int EEXE_SETTINGS = 21;
 
   /**
    * The feature id for the '<em><b>Throttle</b></em>' attribute.
@@ -2214,7 +2058,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPlayExeSettings()
    * @generated
    */
-  int EPLAY_EXE_SETTINGS = 25;
+  int EPLAY_EXE_SETTINGS = 22;
 
   /**
    * The feature id for the '<em><b>Throttle</b></em>' attribute.
@@ -2278,7 +2122,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExecutionExeSettings()
    * @generated
    */
-  int EEXECUTION_EXE_SETTINGS = 26;
+  int EEXECUTION_EXE_SETTINGS = 23;
 
   /**
    * The feature id for the '<em><b>Throttle</b></em>' attribute.
@@ -2315,7 +2159,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEErrorHandling()
    * @generated
    */
-  int EERROR_HANDLING = 27;
+  int EERROR_HANDLING = 24;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -2361,7 +2205,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBlockErrorHandling()
    * @generated
    */
-  int EBLOCK_ERROR_HANDLING = 28;
+  int EBLOCK_ERROR_HANDLING = 25;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -2407,7 +2251,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPlayErrorHandling()
    * @generated
    */
-  int EPLAY_ERROR_HANDLING = 29;
+  int EPLAY_ERROR_HANDLING = 26;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -2462,7 +2306,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETaskHandlerErrorHandling()
    * @generated
    */
-  int ETASK_HANDLER_ERROR_HANDLING = 30;
+  int ETASK_HANDLER_ERROR_HANDLING = 27;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -2526,7 +2370,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFactsSettings()
    * @generated
    */
-  int EFACTS_SETTINGS = 31;
+  int EFACTS_SETTINGS = 28;
 
   /**
    * The feature id for the '<em><b>Gather facts</b></em>' attribute.
@@ -2581,7 +2425,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDelegation()
    * @generated
    */
-  int EDELEGATION = 32;
+  int EDELEGATION = 29;
 
   /**
    * The feature id for the '<em><b>Delegate to</b></em>' attribute.
@@ -2618,7 +2462,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEAsynchronousSettings()
    * @generated
    */
-  int EASYNCHRONOUS_SETTINGS = 33;
+  int EASYNCHRONOUS_SETTINGS = 30;
 
   /**
    * The feature id for the '<em><b>Async</b></em>' attribute.
@@ -2655,7 +2499,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENotifiable()
    * @generated
    */
-  int ENOTIFIABLE = 34;
+  int ENOTIFIABLE = 31;
 
   /**
    * The number of structural features of the '<em>ENotifiable</em>' class.
@@ -2674,7 +2518,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENotifiedHandler()
    * @generated
    */
-  int ENOTIFIED_HANDLER = 35;
+  int ENOTIFIED_HANDLER = 32;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -2702,7 +2546,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENotifiedTopic()
    * @generated
    */
-  int ENOTIFIED_TOPIC = 36;
+  int ENOTIFIED_TOPIC = 33;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2723,238 +2567,6 @@ public interface AnsibleDslPackage extends EPackage
   int ENOTIFIED_TOPIC_FEATURE_COUNT = ENOTIFIABLE_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedImpl <em>EValue Passed</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValuePassed()
-   * @generated
-   */
-  int EVALUE_PASSED = 37;
-
-  /**
-   * The number of structural features of the '<em>EValue Passed</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVALUE_PASSED_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValueImpl <em>EValue</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EValueImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValue()
-   * @generated
-   */
-  int EVALUE = 38;
-
-  /**
-   * The number of structural features of the '<em>EValue</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVALUE_FEATURE_COUNT = EVALUE_PASSED_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl <em>ESimple Value</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESimpleValue()
-   * @generated
-   */
-  int ESIMPLE_VALUE = 39;
-
-  /**
-   * The feature id for the '<em><b>Value string</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESIMPLE_VALUE__VALUE_STRING = EVALUE_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Value int</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESIMPLE_VALUE__VALUE_INT = EVALUE_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>ESimple Value</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESIMPLE_VALUE_FEATURE_COUNT = EVALUE_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl <em>EItem</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEItem()
-   * @generated
-   */
-  int EITEM = 40;
-
-  /**
-   * The feature id for the '<em><b>Tail</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EITEM__TAIL = EVALUE_PASSED_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Filter commands</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EITEM__FILTER_COMMANDS = EVALUE_PASSED_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>EItem</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EITEM_FEATURE_COUNT = EVALUE_PASSED_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceOrStringImpl <em>EDeclared Variable Reference Or String</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceOrStringImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariableReferenceOrString()
-   * @generated
-   */
-  int EDECLARED_VARIABLE_REFERENCE_OR_STRING = 42;
-
-  /**
-   * The feature id for the '<em><b>String</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDECLARED_VARIABLE_REFERENCE_OR_STRING__STRING = 0;
-
-  /**
-   * The number of structural features of the '<em>EDeclared Variable Reference Or String</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl <em>EDeclared Variable Reference</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariableReference()
-   * @generated
-   */
-  int EDECLARED_VARIABLE_REFERENCE = 41;
-
-  /**
-   * The feature id for the '<em><b>String</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDECLARED_VARIABLE_REFERENCE__STRING = EDECLARED_VARIABLE_REFERENCE_OR_STRING__STRING;
-
-  /**
-   * The feature id for the '<em><b>Variable</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDECLARED_VARIABLE_REFERENCE__VARIABLE = EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDECLARED_VARIABLE_REFERENCE__INDEX = EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Tail</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDECLARED_VARIABLE_REFERENCE__TAIL = EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>EDeclared Variable Reference</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDECLARED_VARIABLE_REFERENCE_FEATURE_COUNT = EDECLARED_VARIABLE_REFERENCE_OR_STRING_FEATURE_COUNT + 3;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl <em>EFiltered Variable</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariable()
-   * @generated
-   */
-  int EFILTERED_VARIABLE = 43;
-
-  /**
-   * The feature id for the '<em><b>String</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFILTERED_VARIABLE__STRING = ELOOP_LIST_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Variable reference or string</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFILTERED_VARIABLE__VARIABLE_REFERENCE_OR_STRING = ELOOP_LIST_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>EFiltered Variable</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFILTERED_VARIABLE_FEATURE_COUNT = ELOOP_LIST_FEATURE_COUNT + 2;
-
-  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableOrStringImpl <em>EFiltered Variable Or String</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2962,7 +2574,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariableOrString()
    * @generated
    */
-  int EFILTERED_VARIABLE_OR_STRING = 44;
+  int EFILTERED_VARIABLE_OR_STRING = 34;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -2983,14 +2595,14 @@ public interface AnsibleDslPackage extends EPackage
   int EFILTERED_VARIABLE_OR_STRING_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariablesAndStringImpl <em>EFiltered Variables And String</em>}' class.
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedImpl <em>EValue Passed</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariablesAndStringImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariablesAndString()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValuePassed()
    * @generated
    */
-  int EFILTERED_VARIABLES_AND_STRING = 45;
+  int EVALUE_PASSED = 35;
 
   /**
    * The feature id for the '<em><b>Variable and string</b></em>' containment reference list.
@@ -2999,16 +2611,608 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFILTERED_VARIABLES_AND_STRING__VARIABLE_AND_STRING = EVALUE_FEATURE_COUNT + 0;
+  int EVALUE_PASSED__VARIABLE_AND_STRING = 0;
 
   /**
-   * The number of structural features of the '<em>EFiltered Variables And String</em>' class.
+   * The number of structural features of the '<em>EValue Passed</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EFILTERED_VARIABLES_AND_STRING_FEATURE_COUNT = EVALUE_FEATURE_COUNT + 1;
+  int EVALUE_PASSED_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedToJinjaExpressionImpl <em>EValue Passed To Jinja Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedToJinjaExpressionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValuePassedToJinjaExpression()
+   * @generated
+   */
+  int EVALUE_PASSED_TO_JINJA_EXPRESSION = 36;
+
+  /**
+   * The number of structural features of the '<em>EValue Passed To Jinja Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValueImpl <em>EValue</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EValueImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValue()
+   * @generated
+   */
+  int EVALUE = 37;
+
+  /**
+   * The number of structural features of the '<em>EValue</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVALUE_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl <em>ESimple Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESimpleValue()
+   * @generated
+   */
+  int ESIMPLE_VALUE = 38;
+
+  /**
+   * The feature id for the '<em><b>Value string</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESIMPLE_VALUE__VALUE_STRING = EVALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Value number</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESIMPLE_VALUE__VALUE_NUMBER = EVALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>ESimple Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESIMPLE_VALUE_FEATURE_COUNT = EVALUE_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl <em>EItem</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEItem()
+   * @generated
+   */
+  int EITEM = 39;
+
+  /**
+   * The feature id for the '<em><b>Tail</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EITEM__TAIL = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>EItem</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EITEM_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl <em>EDeclared Variable Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariableReference()
+   * @generated
+   */
+  int EDECLARED_VARIABLE_REFERENCE = 40;
+
+  /**
+   * The feature id for the '<em><b>Variable reference</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE__INDEX = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Tail</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE__TAIL = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>EDeclared Variable Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDECLARED_VARIABLE_REFERENCE_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl <em>EJinja Expression Evaluation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionEvaluation()
+   * @generated
+   */
+  int EJINJA_EXPRESSION_EVALUATION = 41;
+
+  /**
+   * The feature id for the '<em><b>String</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_EXPRESSION_EVALUATION__STRING = EFILTERED_VARIABLE_OR_STRING__STRING;
+
+  /**
+   * The feature id for the '<em><b>Jinja expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION = EFILTERED_VARIABLE_OR_STRING_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>EJinja Expression Evaluation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_EXPRESSION_EVALUATION_FEATURE_COUNT = EFILTERED_VARIABLE_OR_STRING_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationWithoutBracketsImpl <em>EJinja Expression Evaluation Without Brackets</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationWithoutBracketsImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionEvaluationWithoutBrackets()
+   * @generated
+   */
+  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS = 42;
+
+  /**
+   * The number of structural features of the '<em>EJinja Expression Evaluation Without Brackets</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl <em>EFunction Call</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFunctionCall()
+   * @generated
+   */
+  int EFUNCTION_CALL = 43;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFUNCTION_CALL__NAME = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFUNCTION_CALL__PARAMETERS = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>EFunction Call</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFUNCTION_CALL_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl <em>EFiltered Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredExpression()
+   * @generated
+   */
+  int EFILTERED_EXPRESSION = 44;
+
+  /**
+   * The feature id for the '<em><b>To filter</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFILTERED_EXPRESSION__TO_FILTER = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Tail</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFILTERED_EXPRESSION__TAIL = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Filter</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFILTERED_EXPRESSION__FILTER = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>EFiltered Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFILTERED_EXPRESSION_FEATURE_COUNT = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EOrExpressionImpl <em>EOr Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EOrExpressionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEOrExpression()
+   * @generated
+   */
+  int EOR_EXPRESSION = 45;
+
+  /**
+   * The feature id for the '<em><b>Left or</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOR_EXPRESSION__LEFT_OR = 0;
+
+  /**
+   * The feature id for the '<em><b>Right or</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOR_EXPRESSION__RIGHT_OR = 1;
+
+  /**
+   * The number of structural features of the '<em>EOr Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOR_EXPRESSION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EAndExpressionImpl <em>EAnd Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EAndExpressionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEAndExpression()
+   * @generated
+   */
+  int EAND_EXPRESSION = 46;
+
+  /**
+   * The feature id for the '<em><b>Left and</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EAND_EXPRESSION__LEFT_AND = 0;
+
+  /**
+   * The feature id for the '<em><b>Right and</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EAND_EXPRESSION__RIGHT_AND = 1;
+
+  /**
+   * The number of structural features of the '<em>EAnd Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EAND_EXPRESSION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETruthExpressionImpl <em>ETruth Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ETruthExpressionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETruthExpression()
+   * @generated
+   */
+  int ETRUTH_EXPRESSION = 47;
+
+  /**
+   * The feature id for the '<em><b>Left value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRUTH_EXPRESSION__LEFT_VALUE = 0;
+
+  /**
+   * The feature id for the '<em><b>Equality sign</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRUTH_EXPRESSION__EQUALITY_SIGN = 1;
+
+  /**
+   * The feature id for the '<em><b>Right value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRUTH_EXPRESSION__RIGHT_VALUE = 2;
+
+  /**
+   * The number of structural features of the '<em>ETruth Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETRUTH_EXPRESSION_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EOperationImpl <em>EOperation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EOperationImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEOperation()
+   * @generated
+   */
+  int EOPERATION = 48;
+
+  /**
+   * The feature id for the '<em><b>Left operand</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOPERATION__LEFT_OPERAND = 0;
+
+  /**
+   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOPERATION__OPERATOR = 1;
+
+  /**
+   * The feature id for the '<em><b>Right operand</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOPERATION__RIGHT_OPERAND = 2;
+
+  /**
+   * The number of structural features of the '<em>EOperation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOPERATION_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl <em>EIs Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIsExpression()
+   * @generated
+   */
+  int EIS_EXPRESSION = 49;
+
+  /**
+   * The feature id for the '<em><b>Filtered expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIS_EXPRESSION__FILTERED_EXPRESSION = 0;
+
+  /**
+   * The feature id for the '<em><b>Is not</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIS_EXPRESSION__IS_NOT = 1;
+
+  /**
+   * The feature id for the '<em><b>Status</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIS_EXPRESSION__STATUS = 2;
+
+  /**
+   * The feature id for the '<em><b>Container expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIS_EXPRESSION__CONTAINER_EXPRESSION = 3;
+
+  /**
+   * The number of structural features of the '<em>EIs Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIS_EXPRESSION_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl <em>EParenthesised Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEParenthesisedExpression()
+   * @generated
+   */
+  int EPARENTHESISED_EXPRESSION = 50;
+
+  /**
+   * The feature id for the '<em><b>Basic Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPARENTHESISED_EXPRESSION__BASIC_VALUE = 0;
+
+  /**
+   * The feature id for the '<em><b>Parenthesised term</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM = 1;
+
+  /**
+   * The number of structural features of the '<em>EParenthesised Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPARENTHESISED_EXPRESSION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl <em>EIf Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIfExpression()
+   * @generated
+   */
+  int EIF_EXPRESSION = 51;
+
+  /**
+   * The feature id for the '<em><b>If expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_EXPRESSION__IF_EXPRESSION = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>If condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_EXPRESSION__IF_CONDITION = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Else expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_EXPRESSION__ELSE_EXPRESSION = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>EIf Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_EXPRESSION_FEATURE_COUNT = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl <em>EDictionary Pair Reference</em>}' class.
@@ -3018,7 +3222,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairReference()
    * @generated
    */
-  int EDICTIONARY_PAIR_REFERENCE = 46;
+  int EDICTIONARY_PAIR_REFERENCE = 52;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -3055,7 +3259,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariable()
    * @generated
    */
-  int EDECLARED_VARIABLE = 47;
+  int EDECLARED_VARIABLE = 53;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3083,7 +3287,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclaration()
    * @generated
    */
-  int EVARIABLE_DECLARATION = 48;
+  int EVARIABLE_DECLARATION = 54;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3120,7 +3324,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariable()
    * @generated
    */
-  int EREGISTER_VARIABLE = 49;
+  int EREGISTER_VARIABLE = 55;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3148,7 +3352,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFactGathered()
    * @generated
    */
-  int EFACT_GATHERED = 50;
+  int EFACT_GATHERED = 56;
 
   /**
    * The feature id for the '<em><b>Tail</b></em>' attribute list.
@@ -3157,7 +3361,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFACT_GATHERED__TAIL = ELOOP_LIST_FEATURE_COUNT + 0;
+  int EFACT_GATHERED__TAIL = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>EFact Gathered</em>' class.
@@ -3166,7 +3370,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFACT_GATHERED_FEATURE_COUNT = ELOOP_LIST_FEATURE_COUNT + 1;
+  int EFACT_GATHERED_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl <em>EDictionary</em>}' class.
@@ -3176,7 +3380,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 51;
+  int EDICTIONARY = 57;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -3204,7 +3408,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 52;
+  int EDICTIONARY_PAIR = 58;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3241,7 +3445,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 53;
+  int ELIST = 59;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -3250,7 +3454,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST__ELEMENTS = ELOOP_LIST_FEATURE_COUNT + 0;
+  int ELIST__ELEMENTS = EVALUE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>EList</em>' class.
@@ -3259,7 +3463,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST_FEATURE_COUNT = ELOOP_LIST_FEATURE_COUNT + 1;
+  int ELIST_FEATURE_COUNT = EVALUE_FEATURE_COUNT + 1;
 
 
   /**
@@ -3867,147 +4071,6 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEParameter_Value_passed();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression <em>EConditional Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EConditional Expression</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression
-   * @generated
-   */
-  EClass getEConditionalExpression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getLeft_term <em>Left term</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left term</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getLeft_term()
-   * @see #getEConditionalExpression()
-   * @generated
-   */
-  EReference getEConditionalExpression_Left_term();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getEquality_term <em>Equality term</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Equality term</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getEquality_term()
-   * @see #getEConditionalExpression()
-   * @generated
-   */
-  EAttribute getEConditionalExpression_Equality_term();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getRight_term <em>Right term</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right term</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getRight_term()
-   * @see #getEConditionalExpression()
-   * @generated
-   */
-  EReference getEConditionalExpression_Right_term();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getIs_not <em>Is not</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Is not</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getIs_not()
-   * @see #getEConditionalExpression()
-   * @generated
-   */
-  EAttribute getEConditionalExpression_Is_not();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getStatus <em>Status</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Status</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getStatus()
-   * @see #getEConditionalExpression()
-   * @generated
-   */
-  EAttribute getEConditionalExpression_Status();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getFormula <em>Formula</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Formula</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getFormula()
-   * @see #getEConditionalExpression()
-   * @generated
-   */
-  EReference getEConditionalExpression_Formula();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getIs_true <em>Is true</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Is true</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression#getIs_true()
-   * @see #getEConditionalExpression()
-   * @generated
-   */
-  EAttribute getEConditionalExpression_Is_true();
-
-  /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula <em>EConditional Formula</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EConditional Formula</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula
-   * @generated
-   */
-  EClass getEConditionalFormula();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getLeft_expression <em>Left expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left expression</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getLeft_expression()
-   * @see #getEConditionalFormula()
-   * @generated
-   */
-  EReference getEConditionalFormula_Left_expression();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getAnd_or <em>And or</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>And or</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getAnd_or()
-   * @see #getEConditionalFormula()
-   * @generated
-   */
-  EAttribute getEConditionalFormula_And_or();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getRight_expression <em>Right expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right expression</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getRight_expression()
-   * @see #getEConditionalFormula()
-   * @generated
-   */
-  EReference getEConditionalFormula_Right_expression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getNegated_expression <em>Negated expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Negated expression</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula#getNegated_expression()
-   * @see #getEConditionalFormula()
-   * @generated
-   */
-  EReference getEConditionalFormula_Negated_expression();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion <em>ERole Inclusion</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4079,16 +4142,6 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EReference getELoopOverList_Loop_control();
-
-  /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopList <em>ELoop List</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>ELoop List</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ELoopList
-   * @generated
-   */
-  EClass getELoopList();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl <em>ELoop Control</em>}'.
@@ -4700,6 +4753,27 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getENotifiedTopic_Name();
 
   /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString <em>EFiltered Variable Or String</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EFiltered Variable Or String</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString
+   * @generated
+   */
+  EClass getEFilteredVariableOrString();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString#getString <em>String</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>String</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString#getString()
+   * @see #getEFilteredVariableOrString()
+   * @generated
+   */
+  EAttribute getEFilteredVariableOrString_String();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValuePassed <em>EValue Passed</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4708,6 +4782,27 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EClass getEValuePassed();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EValuePassed#getVariable_and_string <em>Variable and string</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Variable and string</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EValuePassed#getVariable_and_string()
+   * @see #getEValuePassed()
+   * @generated
+   */
+  EReference getEValuePassed_Variable_and_string();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression <em>EValue Passed To Jinja Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EValue Passed To Jinja Expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression
+   * @generated
+   */
+  EClass getEValuePassedToJinjaExpression();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValue <em>EValue</em>}'.
@@ -4741,15 +4836,15 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getESimpleValue_Value_string();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_int <em>Value int</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_number <em>Value number</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value int</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_int()
+   * @return the meta object for the attribute '<em>Value number</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_number()
    * @see #getESimpleValue()
    * @generated
    */
-  EAttribute getESimpleValue_Value_int();
+  EAttribute getESimpleValue_Value_number();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EItem <em>EItem</em>}'.
@@ -4773,17 +4868,6 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getEItem_Tail();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.EItem#getFilter_commands <em>Filter commands</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Filter commands</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EItem#getFilter_commands()
-   * @see #getEItem()
-   * @generated
-   */
-  EAttribute getEItem_Filter_commands();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference <em>EDeclared Variable Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4794,15 +4878,15 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEDeclaredVariableReference();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable <em>Variable</em>}'.
+   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable_reference <em>Variable reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Variable</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable()
+   * @return the meta object for the reference '<em>Variable reference</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable_reference()
    * @see #getEDeclaredVariableReference()
    * @generated
    */
-  EReference getEDeclaredVariableReference_Variable();
+  EReference getEDeclaredVariableReference_Variable_reference();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getIndex <em>Index</em>}'.
@@ -4827,88 +4911,389 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEDeclaredVariableReference_Tail();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString <em>EDeclared Variable Reference Or String</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation <em>EJinja Expression Evaluation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EDeclared Variable Reference Or String</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString
+   * @return the meta object for class '<em>EJinja Expression Evaluation</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation
    * @generated
    */
-  EClass getEDeclaredVariableReferenceOrString();
+  EClass getEJinjaExpressionEvaluation();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString#getString <em>String</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation#getJinja_expression <em>Jinja expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>String</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString#getString()
-   * @see #getEDeclaredVariableReferenceOrString()
+   * @return the meta object for the containment reference '<em>Jinja expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation#getJinja_expression()
+   * @see #getEJinjaExpressionEvaluation()
    * @generated
    */
-  EAttribute getEDeclaredVariableReferenceOrString_String();
+  EReference getEJinjaExpressionEvaluation_Jinja_expression();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable <em>EFiltered Variable</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets <em>EJinja Expression Evaluation Without Brackets</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EFiltered Variable</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable
+   * @return the meta object for class '<em>EJinja Expression Evaluation Without Brackets</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets
    * @generated
    */
-  EClass getEFilteredVariable();
+  EClass getEJinjaExpressionEvaluationWithoutBrackets();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getVariable_reference_or_string <em>Variable reference or string</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall <em>EFunction Call</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Variable reference or string</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable#getVariable_reference_or_string()
-   * @see #getEFilteredVariable()
+   * @return the meta object for class '<em>EFunction Call</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall
    * @generated
    */
-  EReference getEFilteredVariable_Variable_reference_or_string();
+  EClass getEFunctionCall();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString <em>EFiltered Variable Or String</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EFiltered Variable Or String</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getName()
+   * @see #getEFunctionCall()
    * @generated
    */
-  EClass getEFilteredVariableOrString();
+  EAttribute getEFunctionCall_Name();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString#getString <em>String</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getParameters <em>Parameters</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>String</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString#getString()
-   * @see #getEFilteredVariableOrString()
+   * @return the meta object for the containment reference list '<em>Parameters</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getParameters()
+   * @see #getEFunctionCall()
    * @generated
    */
-  EAttribute getEFilteredVariableOrString_String();
+  EReference getEFunctionCall_Parameters();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString <em>EFiltered Variables And String</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression <em>EFiltered Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EFiltered Variables And String</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString
+   * @return the meta object for class '<em>EFiltered Expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression
    * @generated
    */
-  EClass getEFilteredVariablesAndString();
+  EClass getEFilteredExpression();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString#getVariable_and_string <em>Variable and string</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression#getTo_filter <em>To filter</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Variable and string</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString#getVariable_and_string()
-   * @see #getEFilteredVariablesAndString()
+   * @return the meta object for the containment reference '<em>To filter</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression#getTo_filter()
+   * @see #getEFilteredExpression()
    * @generated
    */
-  EReference getEFilteredVariablesAndString_Variable_and_string();
+  EReference getEFilteredExpression_To_filter();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression#getTail <em>Tail</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tail</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression#getTail()
+   * @see #getEFilteredExpression()
+   * @generated
+   */
+  EReference getEFilteredExpression_Tail();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression#getFilter <em>Filter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Filter</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression#getFilter()
+   * @see #getEFilteredExpression()
+   * @generated
+   */
+  EReference getEFilteredExpression_Filter();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EOrExpression <em>EOr Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EOr Expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EOrExpression
+   * @generated
+   */
+  EClass getEOrExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EOrExpression#getLeft_or <em>Left or</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left or</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EOrExpression#getLeft_or()
+   * @see #getEOrExpression()
+   * @generated
+   */
+  EReference getEOrExpression_Left_or();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EOrExpression#getRight_or <em>Right or</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right or</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EOrExpression#getRight_or()
+   * @see #getEOrExpression()
+   * @generated
+   */
+  EReference getEOrExpression_Right_or();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EAndExpression <em>EAnd Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EAnd Expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EAndExpression
+   * @generated
+   */
+  EClass getEAndExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EAndExpression#getLeft_and <em>Left and</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left and</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EAndExpression#getLeft_and()
+   * @see #getEAndExpression()
+   * @generated
+   */
+  EReference getEAndExpression_Left_and();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EAndExpression#getRight_and <em>Right and</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right and</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EAndExpression#getRight_and()
+   * @see #getEAndExpression()
+   * @generated
+   */
+  EReference getEAndExpression_Right_and();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression <em>ETruth Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ETruth Expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression
+   * @generated
+   */
+  EClass getETruthExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression#getLeft_value <em>Left value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left value</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression#getLeft_value()
+   * @see #getETruthExpression()
+   * @generated
+   */
+  EReference getETruthExpression_Left_value();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression#getEquality_sign <em>Equality sign</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Equality sign</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression#getEquality_sign()
+   * @see #getETruthExpression()
+   * @generated
+   */
+  EAttribute getETruthExpression_Equality_sign();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression#getRight_value <em>Right value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right value</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression#getRight_value()
+   * @see #getETruthExpression()
+   * @generated
+   */
+  EReference getETruthExpression_Right_value();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EOperation <em>EOperation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EOperation</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EOperation
+   * @generated
+   */
+  EClass getEOperation();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EOperation#getLeft_operand <em>Left operand</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left operand</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EOperation#getLeft_operand()
+   * @see #getEOperation()
+   * @generated
+   */
+  EReference getEOperation_Left_operand();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EOperation#getOperator <em>Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Operator</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EOperation#getOperator()
+   * @see #getEOperation()
+   * @generated
+   */
+  EAttribute getEOperation_Operator();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EOperation#getRight_operand <em>Right operand</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right operand</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EOperation#getRight_operand()
+   * @see #getEOperation()
+   * @generated
+   */
+  EReference getEOperation_Right_operand();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression <em>EIs Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EIs Expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIsExpression
+   * @generated
+   */
+  EClass getEIsExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getFiltered_expression <em>Filtered expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Filtered expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getFiltered_expression()
+   * @see #getEIsExpression()
+   * @generated
+   */
+  EReference getEIsExpression_Filtered_expression();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getIs_not <em>Is not</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Is not</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getIs_not()
+   * @see #getEIsExpression()
+   * @generated
+   */
+  EAttribute getEIsExpression_Is_not();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getStatus <em>Status</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Status</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getStatus()
+   * @see #getEIsExpression()
+   * @generated
+   */
+  EReference getEIsExpression_Status();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getContainer_expression <em>Container expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Container expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getContainer_expression()
+   * @see #getEIsExpression()
+   * @generated
+   */
+  EReference getEIsExpression_Container_expression();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression <em>EParenthesised Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EParenthesised Expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression
+   * @generated
+   */
+  EClass getEParenthesisedExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getBasic_Value <em>Basic Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Basic Value</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getBasic_Value()
+   * @see #getEParenthesisedExpression()
+   * @generated
+   */
+  EReference getEParenthesisedExpression_Basic_Value();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getParenthesised_term <em>Parenthesised term</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Parenthesised term</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getParenthesised_term()
+   * @see #getEParenthesisedExpression()
+   * @generated
+   */
+  EReference getEParenthesisedExpression_Parenthesised_term();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression <em>EIf Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EIf Expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression
+   * @generated
+   */
+  EClass getEIfExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getIf_expression <em>If expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>If expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getIf_expression()
+   * @see #getEIfExpression()
+   * @generated
+   */
+  EReference getEIfExpression_If_expression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getIf_condition <em>If condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>If condition</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getIf_condition()
+   * @see #getEIfExpression()
+   * @generated
+   */
+  EReference getEIfExpression_If_condition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getElse_expression <em>Else expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Else expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getElse_expression()
+   * @see #getEIfExpression()
+   * @generated
+   */
+  EReference getEIfExpression_Else_expression();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference <em>EDictionary Pair Reference</em>}'.
@@ -5585,114 +5970,6 @@ public interface AnsibleDslPackage extends EPackage
     EReference EPARAMETER__VALUE_PASSED = eINSTANCE.getEParameter_Value_passed();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl <em>EConditional Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalExpressionImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEConditionalExpression()
-     * @generated
-     */
-    EClass ECONDITIONAL_EXPRESSION = eINSTANCE.getEConditionalExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Left term</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ECONDITIONAL_EXPRESSION__LEFT_TERM = eINSTANCE.getEConditionalExpression_Left_term();
-
-    /**
-     * The meta object literal for the '<em><b>Equality term</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ECONDITIONAL_EXPRESSION__EQUALITY_TERM = eINSTANCE.getEConditionalExpression_Equality_term();
-
-    /**
-     * The meta object literal for the '<em><b>Right term</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ECONDITIONAL_EXPRESSION__RIGHT_TERM = eINSTANCE.getEConditionalExpression_Right_term();
-
-    /**
-     * The meta object literal for the '<em><b>Is not</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ECONDITIONAL_EXPRESSION__IS_NOT = eINSTANCE.getEConditionalExpression_Is_not();
-
-    /**
-     * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ECONDITIONAL_EXPRESSION__STATUS = eINSTANCE.getEConditionalExpression_Status();
-
-    /**
-     * The meta object literal for the '<em><b>Formula</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ECONDITIONAL_EXPRESSION__FORMULA = eINSTANCE.getEConditionalExpression_Formula();
-
-    /**
-     * The meta object literal for the '<em><b>Is true</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ECONDITIONAL_EXPRESSION__IS_TRUE = eINSTANCE.getEConditionalExpression_Is_true();
-
-    /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalFormulaImpl <em>EConditional Formula</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionalFormulaImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEConditionalFormula()
-     * @generated
-     */
-    EClass ECONDITIONAL_FORMULA = eINSTANCE.getEConditionalFormula();
-
-    /**
-     * The meta object literal for the '<em><b>Left expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ECONDITIONAL_FORMULA__LEFT_EXPRESSION = eINSTANCE.getEConditionalFormula_Left_expression();
-
-    /**
-     * The meta object literal for the '<em><b>And or</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ECONDITIONAL_FORMULA__AND_OR = eINSTANCE.getEConditionalFormula_And_or();
-
-    /**
-     * The meta object literal for the '<em><b>Right expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ECONDITIONAL_FORMULA__RIGHT_EXPRESSION = eINSTANCE.getEConditionalFormula_Right_expression();
-
-    /**
-     * The meta object literal for the '<em><b>Negated expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ECONDITIONAL_FORMULA__NEGATED_EXPRESSION = eINSTANCE.getEConditionalFormula_Negated_expression();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionImpl <em>ERole Inclusion</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -5755,16 +6032,6 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference ELOOP_OVER_LIST__LOOP_CONTROL = eINSTANCE.getELoopOverList_Loop_control();
-
-    /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopListImpl <em>ELoop List</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopListImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoopList()
-     * @generated
-     */
-    EClass ELOOP_LIST = eINSTANCE.getELoopList();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopControlImpl <em>ELoop Control</em>}' class.
@@ -6259,6 +6526,24 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute ENOTIFIED_TOPIC__NAME = eINSTANCE.getENotifiedTopic_Name();
 
     /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableOrStringImpl <em>EFiltered Variable Or String</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableOrStringImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariableOrString()
+     * @generated
+     */
+    EClass EFILTERED_VARIABLE_OR_STRING = eINSTANCE.getEFilteredVariableOrString();
+
+    /**
+     * The meta object literal for the '<em><b>String</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EFILTERED_VARIABLE_OR_STRING__STRING = eINSTANCE.getEFilteredVariableOrString_String();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedImpl <em>EValue Passed</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6267,6 +6552,24 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EClass EVALUE_PASSED = eINSTANCE.getEValuePassed();
+
+    /**
+     * The meta object literal for the '<em><b>Variable and string</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EVALUE_PASSED__VARIABLE_AND_STRING = eINSTANCE.getEValuePassed_Variable_and_string();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedToJinjaExpressionImpl <em>EValue Passed To Jinja Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedToJinjaExpressionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValuePassedToJinjaExpression()
+     * @generated
+     */
+    EClass EVALUE_PASSED_TO_JINJA_EXPRESSION = eINSTANCE.getEValuePassedToJinjaExpression();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValueImpl <em>EValue</em>}' class.
@@ -6297,12 +6600,12 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute ESIMPLE_VALUE__VALUE_STRING = eINSTANCE.getESimpleValue_Value_string();
 
     /**
-     * The meta object literal for the '<em><b>Value int</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Value number</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ESIMPLE_VALUE__VALUE_INT = eINSTANCE.getESimpleValue_Value_int();
+    EAttribute ESIMPLE_VALUE__VALUE_NUMBER = eINSTANCE.getESimpleValue_Value_number();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl <em>EItem</em>}' class.
@@ -6323,14 +6626,6 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute EITEM__TAIL = eINSTANCE.getEItem_Tail();
 
     /**
-     * The meta object literal for the '<em><b>Filter commands</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EITEM__FILTER_COMMANDS = eINSTANCE.getEItem_Filter_commands();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl <em>EDeclared Variable Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6341,12 +6636,12 @@ public interface AnsibleDslPackage extends EPackage
     EClass EDECLARED_VARIABLE_REFERENCE = eINSTANCE.getEDeclaredVariableReference();
 
     /**
-     * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Variable reference</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EDECLARED_VARIABLE_REFERENCE__VARIABLE = eINSTANCE.getEDeclaredVariableReference_Variable();
+    EReference EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE = eINSTANCE.getEDeclaredVariableReference_Variable_reference();
 
     /**
      * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
@@ -6365,76 +6660,314 @@ public interface AnsibleDslPackage extends EPackage
     EReference EDECLARED_VARIABLE_REFERENCE__TAIL = eINSTANCE.getEDeclaredVariableReference_Tail();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceOrStringImpl <em>EDeclared Variable Reference Or String</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl <em>EJinja Expression Evaluation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceOrStringImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDeclaredVariableReferenceOrString()
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionEvaluation()
      * @generated
      */
-    EClass EDECLARED_VARIABLE_REFERENCE_OR_STRING = eINSTANCE.getEDeclaredVariableReferenceOrString();
+    EClass EJINJA_EXPRESSION_EVALUATION = eINSTANCE.getEJinjaExpressionEvaluation();
 
     /**
-     * The meta object literal for the '<em><b>String</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Jinja expression</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EDECLARED_VARIABLE_REFERENCE_OR_STRING__STRING = eINSTANCE.getEDeclaredVariableReferenceOrString_String();
+    EReference EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION = eINSTANCE.getEJinjaExpressionEvaluation_Jinja_expression();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl <em>EFiltered Variable</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationWithoutBracketsImpl <em>EJinja Expression Evaluation Without Brackets</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariable()
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationWithoutBracketsImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionEvaluationWithoutBrackets()
      * @generated
      */
-    EClass EFILTERED_VARIABLE = eINSTANCE.getEFilteredVariable();
+    EClass EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS = eINSTANCE.getEJinjaExpressionEvaluationWithoutBrackets();
 
     /**
-     * The meta object literal for the '<em><b>Variable reference or string</b></em>' containment reference list feature.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl <em>EFunction Call</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFunctionCall()
      * @generated
      */
-    EReference EFILTERED_VARIABLE__VARIABLE_REFERENCE_OR_STRING = eINSTANCE.getEFilteredVariable_Variable_reference_or_string();
+    EClass EFUNCTION_CALL = eINSTANCE.getEFunctionCall();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableOrStringImpl <em>EFiltered Variable Or String</em>}' class.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableOrStringImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariableOrString()
      * @generated
      */
-    EClass EFILTERED_VARIABLE_OR_STRING = eINSTANCE.getEFilteredVariableOrString();
+    EAttribute EFUNCTION_CALL__NAME = eINSTANCE.getEFunctionCall_Name();
 
     /**
-     * The meta object literal for the '<em><b>String</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EFILTERED_VARIABLE_OR_STRING__STRING = eINSTANCE.getEFilteredVariableOrString_String();
+    EReference EFUNCTION_CALL__PARAMETERS = eINSTANCE.getEFunctionCall_Parameters();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariablesAndStringImpl <em>EFiltered Variables And String</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl <em>EFiltered Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariablesAndStringImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredVariablesAndString()
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredExpression()
      * @generated
      */
-    EClass EFILTERED_VARIABLES_AND_STRING = eINSTANCE.getEFilteredVariablesAndString();
+    EClass EFILTERED_EXPRESSION = eINSTANCE.getEFilteredExpression();
 
     /**
-     * The meta object literal for the '<em><b>Variable and string</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>To filter</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EFILTERED_VARIABLES_AND_STRING__VARIABLE_AND_STRING = eINSTANCE.getEFilteredVariablesAndString_Variable_and_string();
+    EReference EFILTERED_EXPRESSION__TO_FILTER = eINSTANCE.getEFilteredExpression_To_filter();
+
+    /**
+     * The meta object literal for the '<em><b>Tail</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EFILTERED_EXPRESSION__TAIL = eINSTANCE.getEFilteredExpression_Tail();
+
+    /**
+     * The meta object literal for the '<em><b>Filter</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EFILTERED_EXPRESSION__FILTER = eINSTANCE.getEFilteredExpression_Filter();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EOrExpressionImpl <em>EOr Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EOrExpressionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEOrExpression()
+     * @generated
+     */
+    EClass EOR_EXPRESSION = eINSTANCE.getEOrExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Left or</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EOR_EXPRESSION__LEFT_OR = eINSTANCE.getEOrExpression_Left_or();
+
+    /**
+     * The meta object literal for the '<em><b>Right or</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EOR_EXPRESSION__RIGHT_OR = eINSTANCE.getEOrExpression_Right_or();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EAndExpressionImpl <em>EAnd Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EAndExpressionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEAndExpression()
+     * @generated
+     */
+    EClass EAND_EXPRESSION = eINSTANCE.getEAndExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Left and</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EAND_EXPRESSION__LEFT_AND = eINSTANCE.getEAndExpression_Left_and();
+
+    /**
+     * The meta object literal for the '<em><b>Right and</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EAND_EXPRESSION__RIGHT_AND = eINSTANCE.getEAndExpression_Right_and();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETruthExpressionImpl <em>ETruth Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ETruthExpressionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETruthExpression()
+     * @generated
+     */
+    EClass ETRUTH_EXPRESSION = eINSTANCE.getETruthExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Left value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETRUTH_EXPRESSION__LEFT_VALUE = eINSTANCE.getETruthExpression_Left_value();
+
+    /**
+     * The meta object literal for the '<em><b>Equality sign</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ETRUTH_EXPRESSION__EQUALITY_SIGN = eINSTANCE.getETruthExpression_Equality_sign();
+
+    /**
+     * The meta object literal for the '<em><b>Right value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETRUTH_EXPRESSION__RIGHT_VALUE = eINSTANCE.getETruthExpression_Right_value();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EOperationImpl <em>EOperation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EOperationImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEOperation()
+     * @generated
+     */
+    EClass EOPERATION = eINSTANCE.getEOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Left operand</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EOPERATION__LEFT_OPERAND = eINSTANCE.getEOperation_Left_operand();
+
+    /**
+     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EOPERATION__OPERATOR = eINSTANCE.getEOperation_Operator();
+
+    /**
+     * The meta object literal for the '<em><b>Right operand</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EOPERATION__RIGHT_OPERAND = eINSTANCE.getEOperation_Right_operand();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl <em>EIs Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIsExpression()
+     * @generated
+     */
+    EClass EIS_EXPRESSION = eINSTANCE.getEIsExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Filtered expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIS_EXPRESSION__FILTERED_EXPRESSION = eINSTANCE.getEIsExpression_Filtered_expression();
+
+    /**
+     * The meta object literal for the '<em><b>Is not</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EIS_EXPRESSION__IS_NOT = eINSTANCE.getEIsExpression_Is_not();
+
+    /**
+     * The meta object literal for the '<em><b>Status</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIS_EXPRESSION__STATUS = eINSTANCE.getEIsExpression_Status();
+
+    /**
+     * The meta object literal for the '<em><b>Container expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIS_EXPRESSION__CONTAINER_EXPRESSION = eINSTANCE.getEIsExpression_Container_expression();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl <em>EParenthesised Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEParenthesisedExpression()
+     * @generated
+     */
+    EClass EPARENTHESISED_EXPRESSION = eINSTANCE.getEParenthesisedExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Basic Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPARENTHESISED_EXPRESSION__BASIC_VALUE = eINSTANCE.getEParenthesisedExpression_Basic_Value();
+
+    /**
+     * The meta object literal for the '<em><b>Parenthesised term</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM = eINSTANCE.getEParenthesisedExpression_Parenthesised_term();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl <em>EIf Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIfExpression()
+     * @generated
+     */
+    EClass EIF_EXPRESSION = eINSTANCE.getEIfExpression();
+
+    /**
+     * The meta object literal for the '<em><b>If expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIF_EXPRESSION__IF_EXPRESSION = eINSTANCE.getEIfExpression_If_expression();
+
+    /**
+     * The meta object literal for the '<em><b>If condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIF_EXPRESSION__IF_CONDITION = eINSTANCE.getEIfExpression_If_condition();
+
+    /**
+     * The meta object literal for the '<em><b>Else expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIF_EXPRESSION__ELSE_EXPRESSION = eINSTANCE.getEIfExpression_Else_expression();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl <em>EDictionary Pair Reference</em>}' class.

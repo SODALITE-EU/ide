@@ -91,7 +91,7 @@ EBlock:
 			exe_settings=EExecutionExeSettings
 		'}')?
 		(delegation=EDelegation)?
-		('when:' when_expression=EConditionalExpression)?
+		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
 		('error_handling{'
 			error_handling=EBlockErrorHandling
 		'}')?
@@ -126,7 +126,7 @@ ETask:
 			exe_settings=EExecutionExeSettings
 		'}')?
 		(delegation=EDelegation)?
-		('when:' when_expression=EConditionalExpression)?
+		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
 		('error_handling{'
 			error_handling=ETaskHandlerErrorHandling
 		'}')?
@@ -163,7 +163,7 @@ EHandler:
 			exe_settings=EExecutionExeSettings
 		'}')?
 		(delegation=EDelegation)?
-		('when:' when_expression=EConditionalExpression)?
+		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
 		('error_handling{'
 			error_handling=ETaskHandlerErrorHandling
 		'}')?
@@ -193,19 +193,6 @@ EParameter:
 	name=ID ':' value_passed=EValuePassed
 ;
 
-EConditionalExpression:
-	left_term=EValuePassed (equality_term=('==' | '!=' | '<' | '>' | '<=' | '>=') right_term=EValuePassed |
-		'is' (is_not='not')? status=('skipped' | 'failed' | 'succeeded' | 'fail' | 'success' | 'defined' | 'undefined')
-	)
-	| formula=EConditionalFormula
-	| is_true=BOOLEAN
-;
-
-EConditionalFormula:
-	'(' left_expression=EConditionalExpression ')' and_or=('and' | 'or') '(' right_expression=EConditionalExpression ')'
-	| 'not' '(' negated_expression=EConditionalExpression ')'
-;
-
 ERoleInclusion:
 	'role{'
 		('role_name:' name=STRING)
@@ -225,7 +212,7 @@ ERoleInclusion:
 			exe_settings=EExecutionExeSettings
 		'}')?
 		(delegation=EDelegation)?
-		('when:' when_expression=EConditionalExpression)?
+		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
 	'}'
 ;
 
@@ -244,15 +231,11 @@ ELoopOverList:
 	(loop_control=ELoopControl)?
 ;
 
-ELoopList:
-	EList | EFilteredVariable | EFactGathered
-;
-
 ELoopControl:
 	{ELoopControl}
 	'loop_control{'
 		('label:' label=EValuePassed)?
-		('pause:' pause=INT)? //number of seconds
+		('pause:' pause=NUMBER)? //number of seconds
 		('index_var:' index_var=ID)?
 		('loop_var:' loop_var=ID)?
 		('extended:' extended=BOOLEAN)?
@@ -260,9 +243,9 @@ ELoopControl:
 ;
 
 EUntil:
-	'until:' until=EConditionalExpression &
-	'retries:' retries=INT &
-	'delay:' delay=INT //number of seconds
+	'until:' until=EJinjaExpressionEvaluationWithoutBrackets &
+	'retries:' retries=NUMBER &
+	'delay:' delay=NUMBER //number of seconds
 ;
 
 EPrivilageEscalation:
@@ -288,7 +271,7 @@ EConnection:
 	{EConnection}
 	'connection_info{'
 		('connection:' connection=STRING)?
-		('port:' port=INT)?
+		('port:' port=NUMBER)?
 		('remote_user:' remote_user=STRING)?
 	'}'
 ;
@@ -302,13 +285,13 @@ EPlayExeSettings:
 	('strategy:' strategy=STRING)?
 	('serial:' serial_list=EList)?
 	('order:' order=STRING)?
-	('throttle:' throttle=INT)?
+	('throttle:' throttle=NUMBER)?
 	('run_once:' run_once=BOOLEAN)?
 ;
 
 EExecutionExeSettings:
 	{EExecutionExeSettings}
-	('throttle:' throttle=INT)?
+	('throttle:' throttle=NUMBER)?
 	('run_once:' run_once=BOOLEAN)?
 ;
 
@@ -325,7 +308,7 @@ EBlockErrorHandling:
 
 EPlayErrorHandling:
 	{EPlayErrorHandling}
-	('max_fail_percentage:' max_fail_percentage=INT)?
+	('max_fail_percentage:' max_fail_percentage=NUMBER)?
 	('any_errors_fatal:' any_errors_fatal=BOOLEAN)?
 	('ignore_errors:' ignore_errors=BOOLEAN)?
 	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
@@ -333,8 +316,8 @@ EPlayErrorHandling:
 
 ETaskHandlerErrorHandling:
 	{ETaskHandlerErrorHandling}
-	('changed_when:' changed_when=EConditionalExpression)?
-	('failed_when:' failed_when=EConditionalExpression)?
+	('changed_when:' changed_when=EJinjaExpressionEvaluationWithoutBrackets)?
+	('failed_when:' failed_when=EJinjaExpressionEvaluationWithoutBrackets)?
 	('any_errors_fatal:' any_errors_fatal=BOOLEAN)?
 	('ignore_errors:' ignore_errors=BOOLEAN)?
 	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
@@ -345,7 +328,7 @@ EFactsSettings:
 	'facts_setttings{'
 		('gather_facts:' gather_facts=BOOLEAN)?
 		('gather_subset:' gather_subset=EList)?
-		('gather_timeout:'gather_timeout=INT)?
+		('gather_timeout:'gather_timeout=NUMBER)?
 		('fact_path:' fact_path=STRING)?
 	'}'
 ;
@@ -358,8 +341,8 @@ EDelegation:
 ;
 
 EAsynchronousSettings:
-	('async:' async=INT) &
-	('poll:' poll=INT)
+	('async:' async=NUMBER) &
+	('poll:' poll=NUMBER)
 ;
 
 ENotifiable:
@@ -374,45 +357,81 @@ ENotifiedTopic:
 	'topic:' name=STRING
 ;
 
+EFilteredVariableOrString:
+	EJinjaExpressionEvaluation | string=STRING
+;
+
 EValuePassed:
-	EValue | EFactGathered | EItem
+	(variable_and_string+=EFilteredVariableOrString)+
+;
+
+EValuePassedToJinjaExpression:
+	EValue | EFactGathered | EItem | EDeclaredVariableReference | EFunctionCall
 ;
 
 EValue:
-	EDictionary | EList | EFilteredVariablesAndString | ESimpleValue
+	EDictionary | EList | ESimpleValue
 ;
 
 ESimpleValue:
-	value_string=BOOLEAN | value_string=NULL | value_int=INT
+	value_string=STRING | value_string=BOOLEAN | value_string=NULL | value_number=NUMBER
 ;
 
 EItem:
 	{EItem}
-	'{{' 'item' ( "." tail+=ID)* ('|' filter_commands+=STRING)* '}}'
+	'item' ( "." tail+=ID)*
 ;
 
 EDeclaredVariableReference:
-	variable=[EDeclaredVariable|ID]  ('[' index=INT ']')? ( "." tail+=EDictionaryPairReference)* 
+	variable_reference=[EDeclaredVariable|ID] ('[' index=NUMBER ']')? ( "." tail+=EDictionaryPairReference)*
 ;
 
-EDeclaredVariableReferenceOrString:
-	EDeclaredVariableReference | string=STRING
+EJinjaExpressionEvaluation:
+	'{{' jinja_expression=EJinjaExpressionEvaluationWithoutBrackets '}}'
 ;
 
-EFilteredVariable:
-	'{{' (variable_reference_or_string+=EDeclaredVariableReferenceOrString)+ '}}'
+EJinjaExpressionEvaluationWithoutBrackets:
+	EFilteredExpression | EIfExpression
 ;
 
-EFilteredVariableOrString:
-	EFilteredVariable | string=STRING
+EFunctionCall:
+	name=ID ('(' parameters+=EFilteredExpression (',' parameters+=EFilteredExpression)* ')' | '(' ')')
 ;
 
-EFilteredVariablesAndString:
-	(variable_and_string+=EFilteredVariableOrString) (variable_and_string+=EFilteredVariableOrString)*
+EFilteredExpression:
+	to_filter=EOrExpression ('.' tail+=EFunctionCall)*  ('|' filter=EFilteredExpression)?
+;
+
+EOrExpression:
+	left_or=EAndExpression ('or' right_or=EOrExpression)?
+;
+
+EAndExpression:
+	left_and=ETruthExpression ('and' right_and=EAndExpression)?
+;
+
+ETruthExpression:
+	left_value=EOperation (equality_sign=('==' | '!=' | '<' | '>' | '<=' | '>=') right_value=ETruthExpression)?
+;
+
+EOperation:
+	left_operand=EIsExpression (operator=('+' | '-' | '/' | '//' | '%' | '*' | '**') right_operand=EOperation)?
+;
+
+EIsExpression:
+	filtered_expression=EParenthesisedExpression ('is' (is_not='not')? status=EIsExpression | (is_not='not')? 'in' container_expression=EIsExpression)?
+;
+
+EParenthesisedExpression:
+	basic_Value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')'
+;
+
+EIfExpression:
+	'return' if_expression=EFilteredExpression 'if' if_condition=EFilteredExpression ('else' else_expression=EFilteredExpression)?
 ;
 
 EDictionaryPairReference:
-	name=[EDictionaryPair|ID] ('[' index=INT ']')?
+	name=[EDictionaryPair|ID] ('[' index=NUMBER ']')?
 ;
 
 EDeclaredVariable:
@@ -445,13 +464,16 @@ EList:
 ;
 
 terminal BOOLEAN:
-	'yes' | 'no'
+	'yes' | 'True' | 'true' | 'no' | 'False' | 'false'
 ;
 
 terminal NULL:
 	'Null'
 ;
 
+terminal NUMBER:
+	(('1'..'9')('0'..'9')* | '0') ('.'('0'..'9')+)?
+;
 
 
 

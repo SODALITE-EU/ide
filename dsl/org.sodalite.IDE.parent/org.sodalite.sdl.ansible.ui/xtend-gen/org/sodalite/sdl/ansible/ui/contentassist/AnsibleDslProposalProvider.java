@@ -40,7 +40,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
-  public void completeEDeclaredVariableReference_Variable(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeEDeclaredVariableReference_Variable_reference(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
     if ((rootPlay != null)) {
       final List<EDeclaredVariableImpl> candidates = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootPlay, EDeclaredVariableImpl.class);
@@ -67,13 +67,13 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
         }
       }
     } else {
-      EDeclaredVariable _variable = declaredVariableReference.getVariable();
-      if ((_variable instanceof EVariableDeclarationImpl)) {
-        EDeclaredVariable _variable_1 = declaredVariableReference.getVariable();
-        EValue _value_passed = ((EVariableDeclarationImpl) _variable_1).getValue_passed();
+      EDeclaredVariable _variable_reference = declaredVariableReference.getVariable_reference();
+      if ((_variable_reference instanceof EVariableDeclarationImpl)) {
+        EDeclaredVariable _variable_reference_1 = declaredVariableReference.getVariable_reference();
+        EValue _value_passed = ((EVariableDeclarationImpl) _variable_reference_1).getValue_passed();
         if ((_value_passed instanceof EDictionaryImpl)) {
-          EDeclaredVariable _variable_2 = declaredVariableReference.getVariable();
-          EValue _value_passed_1 = ((EVariableDeclarationImpl) _variable_2).getValue_passed();
+          EDeclaredVariable _variable_reference_2 = declaredVariableReference.getVariable_reference();
+          EValue _value_passed_1 = ((EVariableDeclarationImpl) _variable_reference_2).getValue_passed();
           EList<EDictionaryPair> _dictionary_pairs_1 = ((EDictionaryImpl) _value_passed_1).getDictionary_pairs();
           for (final EDictionaryPair dictionaryPair_1 : _dictionary_pairs_1) {
             acceptor.accept(this.createCompletionProposal(dictionaryPair_1.getName(), context));

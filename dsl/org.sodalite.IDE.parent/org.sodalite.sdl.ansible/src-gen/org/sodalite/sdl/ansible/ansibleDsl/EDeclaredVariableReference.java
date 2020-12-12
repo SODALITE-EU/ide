@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable_reference <em>Variable reference</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getIndex <em>Index</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getTail <em>Tail</em>}</li>
  * </ul>
@@ -23,41 +23,41 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface EDeclaredVariableReference extends EDeclaredVariableReferenceOrString
+public interface EDeclaredVariableReference extends EValuePassedToJinjaExpression
 {
   /**
-   * Returns the value of the '<em><b>Variable</b></em>' reference.
+   * Returns the value of the '<em><b>Variable reference</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Variable</em>' reference.
-   * @see #setVariable(EDeclaredVariable)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEDeclaredVariableReference_Variable()
+   * @return the value of the '<em>Variable reference</em>' reference.
+   * @see #setVariable_reference(EDeclaredVariable)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEDeclaredVariableReference_Variable_reference()
    * @model
    * @generated
    */
-  EDeclaredVariable getVariable();
+  EDeclaredVariable getVariable_reference();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable <em>Variable</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getVariable_reference <em>Variable reference</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Variable</em>' reference.
-   * @see #getVariable()
+   * @param value the new value of the '<em>Variable reference</em>' reference.
+   * @see #getVariable_reference()
    * @generated
    */
-  void setVariable(EDeclaredVariable value);
+  void setVariable_reference(EDeclaredVariable value);
 
   /**
    * Returns the value of the '<em><b>Index</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Index</em>' attribute.
-   * @see #setIndex(int)
+   * @see #setIndex(String)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEDeclaredVariableReference_Index()
    * @model
    * @generated
    */
-  int getIndex();
+  String getIndex();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference#getIndex <em>Index</em>}' attribute.
@@ -67,7 +67,7 @@ public interface EDeclaredVariableReference extends EDeclaredVariableReferenceOr
    * @see #getIndex()
    * @generated
    */
-  void setIndex(int value);
+  void setIndex(String value);
 
   /**
    * Returns the value of the '<em><b>Tail</b></em>' containment reference list.

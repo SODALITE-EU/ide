@@ -14,7 +14,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_string <em>Value string</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_int <em>Value int</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_number <em>Value number</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValue()
@@ -46,25 +46,25 @@ public interface ESimpleValue extends EValue
   void setValue_string(String value);
 
   /**
-   * Returns the value of the '<em><b>Value int</b></em>' attribute.
+   * Returns the value of the '<em><b>Value number</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Value int</em>' attribute.
-   * @see #setValue_int(int)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValue_Value_int()
+   * @return the value of the '<em>Value number</em>' attribute.
+   * @see #setValue_number(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValue_Value_number()
    * @model
    * @generated
    */
-  int getValue_int();
+  String getValue_number();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_int <em>Value int</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_number <em>Value number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value int</em>' attribute.
-   * @see #getValue_int()
+   * @param value the new value of the '<em>Value number</em>' attribute.
+   * @see #getValue_number()
    * @generated
    */
-  void setValue_int(int value);
+  void setValue_number(String value);
 
 } // ESimpleValue

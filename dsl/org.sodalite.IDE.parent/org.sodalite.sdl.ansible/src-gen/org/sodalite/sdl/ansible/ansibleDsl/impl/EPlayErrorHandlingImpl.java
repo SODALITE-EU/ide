@@ -35,7 +35,7 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
    * @generated
    * @ordered
    */
-  protected static final int MAX_FAIL_PERCENTAGE_EDEFAULT = 0;
+  protected static final String MAX_FAIL_PERCENTAGE_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getMax_fail_percentage() <em>Max fail percentage</em>}' attribute.
@@ -45,7 +45,7 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
    * @generated
    * @ordered
    */
-  protected int max_fail_percentage = MAX_FAIL_PERCENTAGE_EDEFAULT;
+  protected String max_fail_percentage = MAX_FAIL_PERCENTAGE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
    * @generated
    */
   @Override
-  public int getMax_fail_percentage()
+  public String getMax_fail_percentage()
   {
     return max_fail_percentage;
   }
@@ -85,9 +85,9 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
    * @generated
    */
   @Override
-  public void setMax_fail_percentage(int newMax_fail_percentage)
+  public void setMax_fail_percentage(String newMax_fail_percentage)
   {
-    int oldMax_fail_percentage = max_fail_percentage;
+    String oldMax_fail_percentage = max_fail_percentage;
     max_fail_percentage = newMax_fail_percentage;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE, oldMax_fail_percentage, max_fail_percentage));
@@ -120,7 +120,7 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE:
-        setMax_fail_percentage((Integer)newValue);
+        setMax_fail_percentage((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -154,7 +154,7 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE:
-        return max_fail_percentage != MAX_FAIL_PERCENTAGE_EDEFAULT;
+        return MAX_FAIL_PERCENTAGE_EDEFAULT == null ? max_fail_percentage != null : !MAX_FAIL_PERCENTAGE_EDEFAULT.equals(max_fail_percentage);
     }
     return super.eIsSet(featureID);
   }

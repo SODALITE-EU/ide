@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 
 /**
@@ -39,7 +39,7 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
    * @generated
    * @ordered
    */
-  protected EConditionalExpression changed_when;
+  protected EJinjaExpressionEvaluationWithoutBrackets changed_when;
 
   /**
    * The cached value of the '{@link #getFailed_when() <em>Failed when</em>}' containment reference.
@@ -49,7 +49,7 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
    * @generated
    * @ordered
    */
-  protected EConditionalExpression failed_when;
+  protected EJinjaExpressionEvaluationWithoutBrackets failed_when;
 
   /**
    * <!-- begin-user-doc -->
@@ -78,7 +78,7 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
    * @generated
    */
   @Override
-  public EConditionalExpression getChanged_when()
+  public EJinjaExpressionEvaluationWithoutBrackets getChanged_when()
   {
     return changed_when;
   }
@@ -88,9 +88,9 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetChanged_when(EConditionalExpression newChanged_when, NotificationChain msgs)
+  public NotificationChain basicSetChanged_when(EJinjaExpressionEvaluationWithoutBrackets newChanged_when, NotificationChain msgs)
   {
-    EConditionalExpression oldChanged_when = changed_when;
+    EJinjaExpressionEvaluationWithoutBrackets oldChanged_when = changed_when;
     changed_when = newChanged_when;
     if (eNotificationRequired())
     {
@@ -106,7 +106,7 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
    * @generated
    */
   @Override
-  public void setChanged_when(EConditionalExpression newChanged_when)
+  public void setChanged_when(EJinjaExpressionEvaluationWithoutBrackets newChanged_when)
   {
     if (newChanged_when != changed_when)
     {
@@ -128,7 +128,7 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
    * @generated
    */
   @Override
-  public EConditionalExpression getFailed_when()
+  public EJinjaExpressionEvaluationWithoutBrackets getFailed_when()
   {
     return failed_when;
   }
@@ -138,9 +138,9 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFailed_when(EConditionalExpression newFailed_when, NotificationChain msgs)
+  public NotificationChain basicSetFailed_when(EJinjaExpressionEvaluationWithoutBrackets newFailed_when, NotificationChain msgs)
   {
-    EConditionalExpression oldFailed_when = failed_when;
+    EJinjaExpressionEvaluationWithoutBrackets oldFailed_when = failed_when;
     failed_when = newFailed_when;
     if (eNotificationRequired())
     {
@@ -156,7 +156,7 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
    * @generated
    */
   @Override
-  public void setFailed_when(EConditionalExpression newFailed_when)
+  public void setFailed_when(EJinjaExpressionEvaluationWithoutBrackets newFailed_when)
   {
     if (newFailed_when != failed_when)
     {
@@ -219,10 +219,10 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
     switch (featureID)
     {
       case AnsibleDslPackage.ETASK_HANDLER_ERROR_HANDLING__CHANGED_WHEN:
-        setChanged_when((EConditionalExpression)newValue);
+        setChanged_when((EJinjaExpressionEvaluationWithoutBrackets)newValue);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ERROR_HANDLING__FAILED_WHEN:
-        setFailed_when((EConditionalExpression)newValue);
+        setFailed_when((EJinjaExpressionEvaluationWithoutBrackets)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -239,10 +239,10 @@ public class ETaskHandlerErrorHandlingImpl extends EErrorHandlingImpl implements
     switch (featureID)
     {
       case AnsibleDslPackage.ETASK_HANDLER_ERROR_HANDLING__CHANGED_WHEN:
-        setChanged_when((EConditionalExpression)null);
+        setChanged_when((EJinjaExpressionEvaluationWithoutBrackets)null);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ERROR_HANDLING__FAILED_WHEN:
-        setFailed_when((EConditionalExpression)null);
+        setFailed_when((EJinjaExpressionEvaluationWithoutBrackets)null);
         return;
     }
     super.eUnset(featureID);

@@ -52,12 +52,12 @@ public interface EConnection extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Port</em>' attribute.
-   * @see #setPort(int)
+   * @see #setPort(String)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConnection_Port()
    * @model
    * @generated
    */
-  int getPort();
+  String getPort();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConnection#getPort <em>Port</em>}' attribute.
@@ -67,7 +67,7 @@ public interface EConnection extends EObject
    * @see #getPort()
    * @generated
    */
-  void setPort(int value);
+  void setPort(String value);
 
   /**
    * Returns the value of the '<em><b>Remote user</b></em>' attribute.

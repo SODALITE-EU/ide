@@ -136,16 +136,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEParameterAdapter();
       }
       @Override
-      public Adapter caseEConditionalExpression(EConditionalExpression object)
-      {
-        return createEConditionalExpressionAdapter();
-      }
-      @Override
-      public Adapter caseEConditionalFormula(EConditionalFormula object)
-      {
-        return createEConditionalFormulaAdapter();
-      }
-      @Override
       public Adapter caseERoleInclusion(ERoleInclusion object)
       {
         return createERoleInclusionAdapter();
@@ -164,11 +154,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseELoopOverList(ELoopOverList object)
       {
         return createELoopOverListAdapter();
-      }
-      @Override
-      public Adapter caseELoopList(ELoopList object)
-      {
-        return createELoopListAdapter();
       }
       @Override
       public Adapter caseELoopControl(ELoopControl object)
@@ -261,9 +246,19 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createENotifiedTopicAdapter();
       }
       @Override
+      public Adapter caseEFilteredVariableOrString(EFilteredVariableOrString object)
+      {
+        return createEFilteredVariableOrStringAdapter();
+      }
+      @Override
       public Adapter caseEValuePassed(EValuePassed object)
       {
         return createEValuePassedAdapter();
+      }
+      @Override
+      public Adapter caseEValuePassedToJinjaExpression(EValuePassedToJinjaExpression object)
+      {
+        return createEValuePassedToJinjaExpressionAdapter();
       }
       @Override
       public Adapter caseEValue(EValue object)
@@ -286,24 +281,59 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEDeclaredVariableReferenceAdapter();
       }
       @Override
-      public Adapter caseEDeclaredVariableReferenceOrString(EDeclaredVariableReferenceOrString object)
+      public Adapter caseEJinjaExpressionEvaluation(EJinjaExpressionEvaluation object)
       {
-        return createEDeclaredVariableReferenceOrStringAdapter();
+        return createEJinjaExpressionEvaluationAdapter();
       }
       @Override
-      public Adapter caseEFilteredVariable(EFilteredVariable object)
+      public Adapter caseEJinjaExpressionEvaluationWithoutBrackets(EJinjaExpressionEvaluationWithoutBrackets object)
       {
-        return createEFilteredVariableAdapter();
+        return createEJinjaExpressionEvaluationWithoutBracketsAdapter();
       }
       @Override
-      public Adapter caseEFilteredVariableOrString(EFilteredVariableOrString object)
+      public Adapter caseEFunctionCall(EFunctionCall object)
       {
-        return createEFilteredVariableOrStringAdapter();
+        return createEFunctionCallAdapter();
       }
       @Override
-      public Adapter caseEFilteredVariablesAndString(EFilteredVariablesAndString object)
+      public Adapter caseEFilteredExpression(EFilteredExpression object)
       {
-        return createEFilteredVariablesAndStringAdapter();
+        return createEFilteredExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEOrExpression(EOrExpression object)
+      {
+        return createEOrExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEAndExpression(EAndExpression object)
+      {
+        return createEAndExpressionAdapter();
+      }
+      @Override
+      public Adapter caseETruthExpression(ETruthExpression object)
+      {
+        return createETruthExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEOperation(EOperation object)
+      {
+        return createEOperationAdapter();
+      }
+      @Override
+      public Adapter caseEIsExpression(EIsExpression object)
+      {
+        return createEIsExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEParenthesisedExpression(EParenthesisedExpression object)
+      {
+        return createEParenthesisedExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEIfExpression(EIfExpression object)
+      {
+        return createEIfExpressionAdapter();
       }
       @Override
       public Adapter caseEDictionaryPairReference(EDictionaryPairReference object)
@@ -548,36 +578,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression <em>EConditional Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression
-   * @generated
-   */
-  public Adapter createEConditionalExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula <em>EConditional Formula</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula
-   * @generated
-   */
-  public Adapter createEConditionalFormulaAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion <em>ERole Inclusion</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -633,21 +633,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createELoopOverListAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopList <em>ELoop List</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ELoopList
-   * @generated
-   */
-  public Adapter createELoopListAdapter()
   {
     return null;
   }
@@ -923,6 +908,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString <em>EFiltered Variable Or String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString
+   * @generated
+   */
+  public Adapter createEFilteredVariableOrStringAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValuePassed <em>EValue Passed</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -933,6 +933,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEValuePassedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression <em>EValue Passed To Jinja Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression
+   * @generated
+   */
+  public Adapter createEValuePassedToJinjaExpressionAdapter()
   {
     return null;
   }
@@ -998,61 +1013,166 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString <em>EDeclared Variable Reference Or String</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation <em>EJinja Expression Evaluation</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReferenceOrString
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation
    * @generated
    */
-  public Adapter createEDeclaredVariableReferenceOrStringAdapter()
+  public Adapter createEJinjaExpressionEvaluationAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable <em>EFiltered Variable</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets <em>EJinja Expression Evaluation Without Brackets</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets
    * @generated
    */
-  public Adapter createEFilteredVariableAdapter()
+  public Adapter createEJinjaExpressionEvaluationWithoutBracketsAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString <em>EFiltered Variable Or String</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall <em>EFunction Call</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall
    * @generated
    */
-  public Adapter createEFilteredVariableOrStringAdapter()
+  public Adapter createEFunctionCallAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString <em>EFiltered Variables And String</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression <em>EFiltered Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression
    * @generated
    */
-  public Adapter createEFilteredVariablesAndStringAdapter()
+  public Adapter createEFilteredExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EOrExpression <em>EOr Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EOrExpression
+   * @generated
+   */
+  public Adapter createEOrExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EAndExpression <em>EAnd Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EAndExpression
+   * @generated
+   */
+  public Adapter createEAndExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression <em>ETruth Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression
+   * @generated
+   */
+  public Adapter createETruthExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EOperation <em>EOperation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EOperation
+   * @generated
+   */
+  public Adapter createEOperationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression <em>EIs Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIsExpression
+   * @generated
+   */
+  public Adapter createEIsExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression <em>EParenthesised Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression
+   * @generated
+   */
+  public Adapter createEParenthesisedExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression <em>EIf Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression
+   * @generated
+   */
+  public Adapter createEIfExpressionAdapter()
   {
     return null;
   }

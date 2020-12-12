@@ -27,7 +27,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
  *
  * @generated
  */
-public class EFactGatheredImpl extends ELoopListImpl implements EFactGathered
+public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl implements EFactGathered
 {
   /**
    * The cached value of the '{@link #getTail() <em>Tail</em>}' attribute list.
