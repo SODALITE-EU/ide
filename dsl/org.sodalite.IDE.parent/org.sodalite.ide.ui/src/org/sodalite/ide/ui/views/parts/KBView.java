@@ -167,9 +167,9 @@ public class KBView {
 	}
 
 	private void raiseConfigurationIssue(String message) throws Exception {
-		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
-		throw new Exception(message + " in Sodalite preferences pages");
+//		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+//		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
 	private void createContextMenu(TreeViewer viewer) {

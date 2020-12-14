@@ -142,8 +142,8 @@ public class BackendProxy {
 	}
 
 	private void raiseConfigurationIssue(String message) throws Exception {
-		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
-		throw new Exception(message + " in Sodalite preferences pages");
+//		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+//		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
 	public void processSaveRM(ExecutionEvent event) throws Exception {

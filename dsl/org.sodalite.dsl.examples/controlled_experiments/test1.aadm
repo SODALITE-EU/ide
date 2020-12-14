@@ -42,7 +42,7 @@ node_templates:
 				group_description: 'Sodalite ML security group'
 				
 	ml-vm:
-		type: sodalite.nodes.OpenStack.VM
+		type: openstack/sodalite.nodes.OpenStack.VM
 		properties:
 			name:	get_input: vm_name
 			key_name:	get_input: ssh-key-name
@@ -56,13 +56,13 @@ node_templates:
 				node: test/security-rules-ml
 				
 	docker-host:
-		type: sodalite.nodes.DockerHost
+		type: docker/sodalite.nodes.DockerHost
 		requirements:
 			host: 
 				node: test/ml-vm
 				
 	docker-network:
-		type: sodalite.nodes.DockerNetwork
+		type: docker/sodalite.nodes.DockerNetwork
 		properties:
 			name: get_input: docker-network
 		requirements:
@@ -72,7 +72,7 @@ node_templates:
 				node: test/docker-host
 				
 	docker-public-registry:
-		type: sodalite.nodes.DockerRegistry
+		type: docker/sodalite.nodes.DockerRegistry
 		properties:
 			docker_registry_url: get_input: docker-public-registry-url
 		requirements:
@@ -82,7 +82,7 @@ node_templates:
 				node: test/docker-host
 
 	training-db-volume:
-		type: sodalite.nodes.DockerVolume
+		type: docker/sodalite.nodes.DockerVolume
 		properties:
 			name: 'training-db-vol'
 		requirements:
@@ -90,7 +90,7 @@ node_templates:
 				node: test/ml-vm
 
 	model-repo-volume:
-		type: sodalite.nodes.DockerVolume
+		type: docker/sodalite.nodes.DockerVolume
 		properties:
 			name: 'model-repo'
 		requirements:
@@ -98,7 +98,7 @@ node_templates:
 				node: test/ml-vm
 
 	training-db-service:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			image_name: 'indikakumara/trainingdbapi:0.0.1'
 			volumes:
@@ -122,7 +122,7 @@ node_templates:
 				node: test/training-db-volume
 
 	training-cp-service:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			image_name: 'indikakumara/trainingcpapi:0.0.1'
 			volumes:
@@ -149,7 +149,7 @@ node_templates:
 				node: test/model-repo-volume
 
 	prediction-cp-service:
-		type: sodalite.nodes.DockerizedComponent
+		type: docker/sodalite.nodes.DockerizedComponent
 		properties:
 			image_name: 'indikakumara/predictionapi:0.0.1'
 			volumes:

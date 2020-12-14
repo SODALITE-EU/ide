@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.widgets.FileDialog;
@@ -120,9 +119,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   private void raiseConfigurationIssue(final String message) throws Exception {
-    final Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-    MessageDialog.openError(parent, "Sodalite Preferences Error", (message + " in Sodalite preferences pages"));
-    throw new Exception((message + " in Sodalite preferences pages"));
   }
   
   @Override

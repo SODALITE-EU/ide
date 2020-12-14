@@ -97,9 +97,9 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	def private void raiseConfigurationIssue(String message) throws Exception {
-		val Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
-		throw new Exception(message + " in Sodalite preferences pages");
+//		val Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+//		throw new Exception(message + " in Sodalite preferences pages");
 	}
 	
 	
