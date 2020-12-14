@@ -27,7 +27,7 @@ Then, click on *Add* button.
 Name: Sirius-XText integration, Location: https://altran-mde.github.io/xtext-sirius-integration.io/p2/
 3. Make sure that in the *Install software* dialog window, in the *Work with* combo box, you also select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
 
-![Dialog to select the SODALITE features to install](images/Sodalite_Repository_Wizard.png)
+![Dialog to select the SODALITE features to install](images/Sodalite_Installation_Wizard.png)
 
 Note: update site links are not browsable. Do not think these above links are wrong if you try to open them in a browser and you get a empty page or a 404 Page not found error.
 
