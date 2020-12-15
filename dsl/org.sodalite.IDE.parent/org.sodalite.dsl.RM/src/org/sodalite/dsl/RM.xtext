@@ -142,7 +142,7 @@ EPolicyTypeBody:
 	BEGIN
 	properties=EProperties
 	END)?
-	('targets:' '[' (targets+=EValidTargetTypes)? ']')?
+	('targets:' '[' targets=EValidTargetTypes ']')?
 	('triggers:'
 	BEGIN
 	triggers=ETriggers

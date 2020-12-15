@@ -1950,7 +1950,7 @@ ruleEPolicyTypeBody returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEPolicyTypeBodyRule());
 						}
-						add(
+						set(
 							$current,
 							"targets",
 							lv_targets_12_0,
@@ -1958,7 +1958,7 @@ ruleEPolicyTypeBody returns [EObject current=null]
 						afterParserOrEnumRuleCall();
 					}
 				)
-			)?
+			)
 			otherlv_13=RightSquareBracket
 			{
 				newLeafNode(otherlv_13, grammarAccess.getEPolicyTypeBodyAccess().getRightSquareBracketKeyword_3_3());

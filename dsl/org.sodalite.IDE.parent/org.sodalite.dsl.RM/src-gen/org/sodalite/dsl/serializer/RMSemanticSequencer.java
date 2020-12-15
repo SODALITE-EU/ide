@@ -1408,7 +1408,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EPolicyTypeBody returns EPolicyTypeBody
 	 *
 	 * Constraint:
-	 *     ((superType=EPREFIX_TYPE | description=STRING)* properties=EProperties? targets+=EValidTargetTypes? triggers=ETriggers?)
+	 *     ((superType=EPREFIX_TYPE | description=STRING)* properties=EProperties? targets=EValidTargetTypes? triggers=ETriggers?)
 	 */
 	protected void sequence_EPolicyTypeBody(ISerializationContext context, EPolicyTypeBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

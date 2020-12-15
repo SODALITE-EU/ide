@@ -3,21 +3,14 @@
  */
 package org.sodalite.dsl.rM.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPolicyTypeBody;
@@ -86,14 +79,14 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
   protected EProperties properties;
 
   /**
-   * The cached value of the '{@link #getTargets() <em>Targets</em>}' containment reference list.
+   * The cached value of the '{@link #getTargets() <em>Targets</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTargets()
    * @generated
    * @ordered
    */
-  protected EList<EValidTargetTypes> targets;
+  protected EValidTargetTypes targets;
 
   /**
    * The cached value of the '{@link #getTriggers() <em>Triggers</em>}' containment reference.
@@ -257,13 +250,48 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EList<EValidTargetTypes> getTargets()
+  public EValidTargetTypes getTargets()
   {
-    if (targets == null)
-    {
-      targets = new EObjectContainmentEList<EValidTargetTypes>(EValidTargetTypes.class, this, RMPackage.EPOLICY_TYPE_BODY__TARGETS);
-    }
     return targets;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTargets(EValidTargetTypes newTargets, NotificationChain msgs)
+  {
+    EValidTargetTypes oldTargets = targets;
+    targets = newTargets;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPOLICY_TYPE_BODY__TARGETS, oldTargets, newTargets);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTargets(EValidTargetTypes newTargets)
+  {
+    if (newTargets != targets)
+    {
+      NotificationChain msgs = null;
+      if (targets != null)
+        msgs = ((InternalEObject)targets).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPOLICY_TYPE_BODY__TARGETS, null, msgs);
+      if (newTargets != null)
+        msgs = ((InternalEObject)newTargets).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPOLICY_TYPE_BODY__TARGETS, null, msgs);
+      msgs = basicSetTargets(newTargets, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPOLICY_TYPE_BODY__TARGETS, newTargets, newTargets));
   }
 
   /**
@@ -331,7 +359,7 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
       case RMPackage.EPOLICY_TYPE_BODY__PROPERTIES:
         return basicSetProperties(null, msgs);
       case RMPackage.EPOLICY_TYPE_BODY__TARGETS:
-        return ((InternalEList<?>)getTargets()).basicRemove(otherEnd, msgs);
+        return basicSetTargets(null, msgs);
       case RMPackage.EPOLICY_TYPE_BODY__TRIGGERS:
         return basicSetTriggers(null, msgs);
     }
@@ -367,7 +395,6 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -383,8 +410,7 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
         setProperties((EProperties)newValue);
         return;
       case RMPackage.EPOLICY_TYPE_BODY__TARGETS:
-        getTargets().clear();
-        getTargets().addAll((Collection<? extends EValidTargetTypes>)newValue);
+        setTargets((EValidTargetTypes)newValue);
         return;
       case RMPackage.EPOLICY_TYPE_BODY__TRIGGERS:
         setTriggers((ETriggers)newValue);
@@ -413,7 +439,7 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
         setProperties((EProperties)null);
         return;
       case RMPackage.EPOLICY_TYPE_BODY__TARGETS:
-        getTargets().clear();
+        setTargets((EValidTargetTypes)null);
         return;
       case RMPackage.EPOLICY_TYPE_BODY__TRIGGERS:
         setTriggers((ETriggers)null);
@@ -439,7 +465,7 @@ public class EPolicyTypeBodyImpl extends MinimalEObjectImpl.Container implements
       case RMPackage.EPOLICY_TYPE_BODY__PROPERTIES:
         return properties != null;
       case RMPackage.EPOLICY_TYPE_BODY__TARGETS:
-        return targets != null && !targets.isEmpty();
+        return targets != null;
       case RMPackage.EPOLICY_TYPE_BODY__TRIGGERS:
         return triggers != null;
     }

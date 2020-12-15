@@ -1049,14 +1049,14 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?) ('properties:'
 		//	BEGIN
 		//	properties=EProperties
-		//	END)? ('targets:' '[' targets+=EValidTargetTypes? ']')? ('triggers:'
+		//	END)? ('targets:' '[' targets=EValidTargetTypes ']')? ('triggers:'
 		//	BEGIN
 		//	triggers=ETriggers
 		//	END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?) ('properties:'
-		//BEGIN properties=EProperties END)? ('targets:' '[' targets+=EValidTargetTypes? ']')? ('triggers:' BEGIN
+		//BEGIN properties=EProperties END)? ('targets:' '[' targets=EValidTargetTypes ']')? ('triggers:' BEGIN
 		//triggers=ETriggers END)?
 		public Group getGroup() { return cGroup; }
 		
@@ -1108,7 +1108,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//END
 		public RuleCall getENDTerminalRuleCall_2_3() { return cENDTerminalRuleCall_2_3; }
 		
-		//('targets:' '[' targets+=EValidTargetTypes? ']')?
+		//('targets:' '[' targets=EValidTargetTypes ']')?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'targets:'
@@ -1117,7 +1117,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//'['
 		public Keyword getLeftSquareBracketKeyword_3_1() { return cLeftSquareBracketKeyword_3_1; }
 		
-		//targets+=EValidTargetTypes?
+		//targets=EValidTargetTypes
 		public Assignment getTargetsAssignment_3_2() { return cTargetsAssignment_3_2; }
 		
 		//EValidTargetTypes
@@ -5181,7 +5181,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	//	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)?) ('properties:'
 	//	BEGIN
 	//	properties=EProperties
-	//	END)? ('targets:' '[' targets+=EValidTargetTypes? ']')? ('triggers:'
+	//	END)? ('targets:' '[' targets=EValidTargetTypes ']')? ('triggers:'
 	//	BEGIN
 	//	triggers=ETriggers
 	//	END)?;

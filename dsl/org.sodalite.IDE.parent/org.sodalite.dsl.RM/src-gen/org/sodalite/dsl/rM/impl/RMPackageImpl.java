@@ -4639,7 +4639,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEPolicyTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPolicyTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPolicyTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPolicyTypeBody_Targets(), this.getEValidTargetTypes(), null, "targets", null, 0, -1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPolicyTypeBody_Targets(), this.getEValidTargetTypes(), null, "targets", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPolicyTypeBody_Triggers(), this.getETriggers(), null, "triggers", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eTriggersEClass, ETriggers.class, "ETriggers", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

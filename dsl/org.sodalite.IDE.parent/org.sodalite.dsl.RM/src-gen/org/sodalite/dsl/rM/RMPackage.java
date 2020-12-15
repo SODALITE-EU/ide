@@ -768,7 +768,7 @@ public interface RMPackage extends EPackage
   int EPOLICY_TYPE_BODY__PROPERTIES = 2;
 
   /**
-   * The feature id for the '<em><b>Targets</b></em>' containment reference list.
+   * The feature id for the '<em><b>Targets</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -4370,10 +4370,10 @@ public interface RMPackage extends EPackage
   EReference getEPolicyTypeBody_Properties();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getTargets <em>Targets</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getTargets <em>Targets</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Targets</em>'.
+   * @return the meta object for the containment reference '<em>Targets</em>'.
    * @see org.sodalite.dsl.rM.EPolicyTypeBody#getTargets()
    * @see #getEPolicyTypeBody()
    * @generated
@@ -7338,7 +7338,7 @@ public interface RMPackage extends EPackage
     EReference EPOLICY_TYPE_BODY__PROPERTIES = eINSTANCE.getEPolicyTypeBody_Properties();
 
     /**
-     * The meta object literal for the '<em><b>Targets</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Targets</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

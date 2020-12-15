@@ -53,6 +53,16 @@ import org.sodalite.dsl.rM.EDataTypeName
 import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EEntity
 import org.sodalite.dsl.rM.EPREFIX_ID
+import org.sodalite.dsl.rM.EPolicyType
+import org.sodalite.dsl.rM.ETriggerDefinition
+import org.sodalite.dsl.rM.EEvenFilter
+import org.sodalite.dsl.rM.EConditionClauseDefinition
+import org.sodalite.dsl.rM.EActivityDefinition
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition
+import org.sodalite.dsl.rM.EPropertyAssignment
+import org.sodalite.dsl.rM.ELIST
+import org.sodalite.dsl.rM.EMAP
+import org.sodalite.dsl.rM.GetInput
 
 /**
  * Generates code from your model files on save.
@@ -70,12 +80,15 @@ class RMGenerator extends AbstractGenerator {
 	var int relationship_counter = 1
 	var int parameter_counter = 1
 	var int interface_counter = 1
+	var int policy_counter = 1
+	var int trigger_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
 	var Map<EAttributeDefinition, Integer> attribute_numbers
 	var Map<ERequirementDefinition, Integer> requirement_numbers
 	var Map<ECapabilityDefinition, Integer> capability_numbers
 	var Map<EInterfaceDefinition, Integer> interface_numbers
 	var Map<Object, Map<String,Integer>> parameter_numbers
+	var Map<ETriggerDefinition, Integer> trigger_numbers
 	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		data_type_counter = 1
@@ -88,12 +101,15 @@ class RMGenerator extends AbstractGenerator {
 		relationship_counter = 1
 		parameter_counter = 1
 		interface_counter = 1
+		policy_counter = 1
+		trigger_counter = 1
 		property_numbers = new HashMap<EPropertyDefinition, Integer>()
 		attribute_numbers = new HashMap<EAttributeDefinition, Integer>()
 		requirement_numbers = new HashMap<ERequirementDefinition, Integer>()
 		capability_numbers = new HashMap<ECapabilityDefinition, Integer>()
 		parameter_numbers = new HashMap<Object, Map<String, Integer>>()
 		interface_numbers = new HashMap<EInterfaceDefinition, Integer>()
+		trigger_numbers = new HashMap<ETriggerDefinition, Integer>()
 		
 		val filename = getFilename(resource.URI)
 		fsa.generateFile(filename,  compileRM (resource))
@@ -125,7 +141,7 @@ class RMGenerator extends AbstractGenerator {
 	«FOR c:r.allContents.toIterable.filter(EConstraint)»
 	«c.compile»
 	«ENDFOR»
-		
+	
 	«FOR p:r.allContents.toIterable.filter(GetProperty)»
 	«p.compile»
 	«ENDFOR»
@@ -144,6 +160,14 @@ class RMGenerator extends AbstractGenerator {
 
  	«FOR p:r.allContents.toIterable.filter(EPropertyDefinition)»
 	«p.compile»
+	«ENDFOR»
+	
+ 	«FOR p:r.allContents.toIterable.filter(EPropertyAssignment)»
+	«p.compile»
+	«ENDFOR»
+	
+	«FOR t:r.allContents.toIterable.filter(ETriggerDefinition)»
+	«t.compile»
 	«ENDFOR»
 	
  	«FOR p:r.allContents.toIterable.filter(EAttributeDefinition)»
@@ -176,6 +200,10 @@ class RMGenerator extends AbstractGenerator {
 	
 	«FOR rt:r.allContents.toIterable.filter(ERelationshipType)»
 	«rt.compile»
+	«ENDFOR»
+	
+	«FOR p:r.allContents.toIterable.filter(EPolicyType)»
+	«p.compile»
 	«ENDFOR»
 	'''
 	
@@ -549,6 +577,90 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDIF»  
 	.	
 	'''
+	
+	def compile(EConditionClauseDefinition ccd, String name) '''
+		//TODO
+	'''
+	
+	def compile(EActivityDefinition ad, String name) '''
+	
+	«IF ad instanceof ECallOperationActivityDefinition»
+	«(ad as ECallOperationActivityDefinition).compile()»
+	«ENDIF»
+	
+	«putParameterNumber(ad, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«name»" ;
+	  «IF ad instanceof ECallOperationActivityDefinition»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "call_operation")» ;
+	  «ENDIF»
+	'''
+	
+	def compile(ECallOperationActivityDefinition ad) '''
+	«putParameterNumber(ad, "operation", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "operation" ;
+	  exchange:value '«trim(ad.operation.name.compile())»' ;
+	  
+	«putParameterNumber(ad, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «FOR i:ad.operation.inputs.properties»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "name")» ;
+	  «ENDFOR»
+	
+	«putParameterNumber(ad, "call_operation", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "call_operation" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "operation")» ;
+	  «IF ad instanceof ECallOperationActivityDefinition»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "inputs")» ;
+	  «ENDIF»
+	'''
+	
+	def compile(EEvenFilter ef, String name) '''
+	«putParameterNumber(ef, "node", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "node" ;  
+	  exchange:value '«trim(ef.node.compile())»' ;
+	.
+	
+	«putParameterNumber(ef, "requirement", parameter_counter)»
+	«IF ef.requirement !== null»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "requirement" ;  
+	  exchange:value '«ef.requirement»' ;
+	.
+	«ENDIF»
+	
+	«putParameterNumber(ef, "capability", parameter_counter)»
+	«IF ef.capability !== null»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "capability" ;  
+	  exchange:value '«ef.capability»' ;
+	.
+	«ENDIF»
+	
+	«putParameterNumber(ef, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(ef, "node")» ;
+	  «IF ef.requirement !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ef, "requirement")» ;
+	  «ENDIF»
+	  «IF ef.capability !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ef, "capability")» ;
+	  «ENDIF»	  
+	.
+	'''
 
 	def compile(GetProperty p) '''
 	«IF p.property.property !== null»
@@ -777,6 +889,50 @@ class RMGenerator extends AbstractGenerator {
 	.  
 	'''
 	
+	def compile (EPolicyType p) '''
+	
+	«IF p.policy.targets !== null»
+	«putParameterNumber(p, "targets", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "targets" ;
+	  «FOR entry:(p.policy.targets.targetTypes as EObjectContainmentEList<ECapabilityTypeRef>)»
+	  «IF entry.name.module !== null»
+	  exchange:listValue '«entry.name.module»/«entry.name.type»' ; 
+	  «ELSE»
+	  exchange:listValue "«entry.name.type»" ; 
+	  «ENDIF»
+	  «ENDFOR»
+	.
+	«ENDIF»
+	
+	:PolicyType_«policy_counter++»
+	  rdf:type exchange:Type ;
+	  exchange:name "«p.name»" ;
+	  «IF p.policy.description !== null»
+	  exchange:description '«processDescription(p.policy.description)»' ;
+	  «ENDIF»
+	  «IF p.policy.superType.module !== null»
+	  exchange:derivesFrom '«p.policy.superType.module»/«p.policy.superType.type»' ;
+	  «ELSE»
+	  exchange:derivesFrom '«p.policy.superType.type»' ;
+	  «ENDIF»
+	  «IF p.policy.properties !== null»
+	  «FOR prop:p.policy.properties.properties»
+	  exchange:properties :Property_«property_numbers.get(prop)» ;
+	  «ENDFOR»
+	  «ENDIF»
+	  «IF p.policy.targets !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "targets")» ;
+	  «ENDIF»
+	  «IF p.policy.triggers !== null»
+	  «FOR t:p.policy.triggers.triggers»
+	  exchange:triggers :Trigger_«trigger_numbers.get(t)» ; 
+	  «ENDFOR»
+	  «ENDIF»
+	.
+  	'''
+	
 	def compile (EPropertyDefinition p) '''
 	«IF p.property.type !== null»
 	«putParameterNumber(p, "type", parameter_counter)»
@@ -870,6 +1026,67 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "constraints")» ;
 	  «ENDIF»
 	.
+	'''
+	
+	def compile (EPropertyAssignment p) '''
+	«putParameterNumber(p, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«p.name»" ;
+	  «IF p.value instanceof ELIST»
+	  		«FOR entry:(p.value as ELIST).list»
+	  		exchange:listValue "«trim(entry.compile().toString)»" ;
+	  		«ENDFOR»
+	  «ELSEIF p.value instanceof EMAP»
+	    «FOR entry:(p.value as EMAP).map»
+	    	exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
+	    «ENDFOR»	  
+	  «ELSEIF p.value instanceof EFunction»
+	  	«IF p.value instanceof GetInput»
+	  	exchange:value "{ get_input: «(p.value as GetInput).input.name» }" ;
+	  	«ELSEIF p.value instanceof GetProperty»
+	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
+	  	«ENDIF»
+	  «ELSEIF p.value instanceof ESingleValue»
+	  	exchange:value "«trim((p.value as ESingleValue).compile().toString)»" ;
+	  «ENDIF»
+	.
+	'''
+	
+	def compile (ETriggerDefinition t) '''
+	«putParameterNumber(t, "event", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "event" ;
+	  exchange:value '«t.trigger.event»' ;
+	.
+	  «IF t.trigger.target_filter !== null»
+	«t.trigger.target_filter.compile("target_filter")»
+	  «ENDIF»
+	  «IF t.trigger.condition !== null»
+	«t.trigger.condition.compile("condition")»
+	 «ENDIF»
+	  «IF t.trigger.action !== null»
+	«t.trigger.action.compile("action")»
+	  «ENDIF»
+	
+	:Trigger_«trigger_counter++»
+	  rdf:type exchange:Trigger ;
+	  exchange:name "«t.name»" ;
+	  «IF t.trigger.description !== null»
+	  exchange:description '«processDescription(t.trigger.description)»' ;
+	«ENDIF»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t, "event")» ;
+	  «IF t.trigger.target_filter !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.target_filter, "name")» ;
+	  «ENDIF»
+	  «IF t.trigger.condition !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.condition, "name")» ;
+	  «ENDIF»
+	  «IF t.trigger.action !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.action, "name")» ;
+	  «ENDIF»
+	  .
 	'''
 	
 	def compile (EAttributeDefinition a) '''

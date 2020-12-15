@@ -7929,7 +7929,7 @@ rule__EPolicyTypeBody__Group_3__2__Impl
 :
 (
 	{ before(grammarAccess.getEPolicyTypeBodyAccess().getTargetsAssignment_3_2()); }
-	(rule__EPolicyTypeBody__TargetsAssignment_3_2)?
+	(rule__EPolicyTypeBody__TargetsAssignment_3_2)
 	{ after(grammarAccess.getEPolicyTypeBodyAccess().getTargetsAssignment_3_2()); }
 )
 ;

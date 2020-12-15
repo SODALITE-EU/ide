@@ -26,7 +26,6 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_ECapabilityDefinitionBody___RightSquareBracketKeyword_4_3_Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1__p;
 	protected AbstractElementAlias match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__a;
 	protected AbstractElementAlias match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p;
-	protected AbstractElementAlias match_EPolicyTypeBody___TargetsKeyword_3_0_LeftSquareBracketKeyword_3_1_RightSquareBracketKeyword_3_3__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
@@ -36,7 +35,6 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_ECapabilityDefinitionBody___RightSquareBracketKeyword_4_3_Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_4_3()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_4_1()));
 		match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_4_3()));
 		match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_4_3()));
-		match_EPolicyTypeBody___TargetsKeyword_3_0_LeftSquareBracketKeyword_3_1_RightSquareBracketKeyword_3_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPolicyTypeBodyAccess().getTargetsKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getEPolicyTypeBodyAccess().getLeftSquareBracketKeyword_3_1()), new TokenAlias(false, false, grammarAccess.getEPolicyTypeBodyAccess().getRightSquareBracketKeyword_3_3()));
 	}
 	
 	@Override
@@ -76,8 +74,6 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p.equals(syntax))
 				emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EPolicyTypeBody___TargetsKeyword_3_0_LeftSquareBracketKeyword_3_1_RightSquareBracketKeyword_3_3__q.equals(syntax))
-				emit_EPolicyTypeBody___TargetsKeyword_3_0_LeftSquareBracketKeyword_3_1_RightSquareBracketKeyword_3_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -184,24 +180,6 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) (rule start)
 	 */
 	protected void emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     ('targets:' '[' ']')?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) 'triggers:' BEGIN triggers=ETriggers
-	 *     (rule start) (ambiguity) (rule start)
-	 *     description=STRING (ambiguity) 'triggers:' BEGIN triggers=ETriggers
-	 *     description=STRING (ambiguity) (rule end)
-	 *     properties=EProperties END (ambiguity) 'triggers:' BEGIN triggers=ETriggers
-	 *     properties=EProperties END (ambiguity) (rule end)
-	 *     superType=EPREFIX_TYPE (ambiguity) 'triggers:' BEGIN triggers=ETriggers
-	 *     superType=EPREFIX_TYPE (ambiguity) (rule end)
-	 */
-	protected void emit_EPolicyTypeBody___TargetsKeyword_3_0_LeftSquareBracketKeyword_3_1_RightSquareBracketKeyword_3_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

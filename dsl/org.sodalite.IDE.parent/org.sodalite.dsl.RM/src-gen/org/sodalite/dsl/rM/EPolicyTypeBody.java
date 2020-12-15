@@ -3,8 +3,6 @@
  */
 package org.sodalite.dsl.rM;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -96,16 +94,26 @@ public interface EPolicyTypeBody extends EObject
   void setProperties(EProperties value);
 
   /**
-   * Returns the value of the '<em><b>Targets</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.dsl.rM.EValidTargetTypes}.
+   * Returns the value of the '<em><b>Targets</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Targets</em>' containment reference list.
+   * @return the value of the '<em>Targets</em>' containment reference.
+   * @see #setTargets(EValidTargetTypes)
    * @see org.sodalite.dsl.rM.RMPackage#getEPolicyTypeBody_Targets()
    * @model containment="true"
    * @generated
    */
-  EList<EValidTargetTypes> getTargets();
+  EValidTargetTypes getTargets();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getTargets <em>Targets</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Targets</em>' containment reference.
+   * @see #getTargets()
+   * @generated
+   */
+  void setTargets(EValidTargetTypes value);
 
   /**
    * Returns the value of the '<em><b>Triggers</b></em>' containment reference.
