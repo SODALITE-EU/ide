@@ -648,7 +648,7 @@ class RMGenerator extends AbstractGenerator {
 
 	def compile(ECapabilityType c) '''
 	:CapabilityType_«capabilitytype_counter++»
-	  rdf:type exchange:CapabilityType ;
+	  rdf:type exchange:Type ;
 	  exchange:name "«c.name»" ;
 	  «IF c.capability.superType.module !== null»
 	  exchange:derivesFrom '«c.capability.superType.module»/«c.capability.superType.type»' ;  
@@ -690,7 +690,7 @@ class RMGenerator extends AbstractGenerator {
 	«ENDIF»
 	
 	:RelationshipType_«relationship_counter++»
-	  rdf:type exchange:RelationshipType ;
+	  rdf:type exchange:Type ;
 	  exchange:name "«r.name»" ;
 	  «IF r.relationship.superType.module !== null»
 	  exchange:derivesFrom '«r.relationship.superType.module»/«r.relationship.superType.type»' ;  
@@ -723,7 +723,7 @@ class RMGenerator extends AbstractGenerator {
 
 	def compile(ENodeType n) '''
 	:NodeType_«node_counter++»
-	  rdf:type exchange:NodeType ;
+	  rdf:type exchange:Type ;
 	  «IF n.node.description !== null»
 	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
@@ -763,7 +763,7 @@ class RMGenerator extends AbstractGenerator {
 	
 	def compile(EDataType d) '''
 	:DataType_«data_type_counter++»
-	  rdf:type exchange:DataType ;
+	  rdf:type exchange:Type ;
 	  exchange:name "«trim(d.name.compile)»" ;
 	  exchange:derivesFrom '«trim(d.data.superType.compile)»' ;
 	  «IF d.data.description !== null»

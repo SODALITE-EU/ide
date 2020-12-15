@@ -9,6 +9,12 @@
 	        id="org.sodalite.dsl.aadm.ui.preferences.SodaliteBackendPreferencePage"
 	        name="Sodalite Backend">
 	  </page>
+   <page
+         category="org.sodalite.dsl.AADM"
+         class="org.sodalite.dsl.ui.preferences.UserAccountPreferencePage"
+         id="org.sodalite.dsl.aadm.ui.preferences.UserAccountPreferencePage"
+         name="Sodalite User Account">
+   </page>
   </extension>
  <extension
        point="org.eclipse.core.runtime.preferences">

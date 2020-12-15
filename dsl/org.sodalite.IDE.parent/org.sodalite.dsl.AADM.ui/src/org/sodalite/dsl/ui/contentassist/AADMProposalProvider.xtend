@@ -187,8 +187,13 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		for (req: template.node.requirements.requirements){
 			if (req.name.equals(requirement)){
 				val AADM_Model model = findModel(template) as AADM_Model
-				val module = model.module
-				if (req.node.module.equals(module)){
+				var module1 = model.module
+				if (module1 === null)
+					module1 = ""
+				var module2 = req.node.module
+				if (module2 === null)
+					module2 = ""
+				if (module1.equals(module2)){
 					node = findNode(model, req.node.id)						
 				}else{
 					//TODO Find node in KB
@@ -516,7 +521,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		importedModules.add(module)
 		
 		val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
-		val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId);
+		val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
 		if (!vrnd.elements.empty){
 			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
 			for (ValidRequirementNode vrn: vrnd.elements){

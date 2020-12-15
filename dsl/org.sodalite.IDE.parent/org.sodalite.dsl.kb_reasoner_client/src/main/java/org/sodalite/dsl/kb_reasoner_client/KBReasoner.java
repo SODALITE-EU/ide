@@ -70,7 +70,8 @@ public interface KBReasoner {
 	ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType, List<String> modules)
 			throws Exception;
 
-	TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType) throws Exception;
+	TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType, List<String> modules)
+			throws Exception;
 
 	Boolean isSubClassOf(String subclass, String superclass) throws Exception;
 
@@ -100,4 +101,11 @@ public interface KBReasoner {
 	ModelData getRMsInModule(String module) throws Exception;
 
 	void deleteModel(String modelId) throws Exception;
+
+	String getSecurityToken() throws Exception;
+
+	Boolean isValidToken(String token) throws Exception;
+
+	void setUserAccount(String user, String password, String client_id, String user_secret);
+
 }

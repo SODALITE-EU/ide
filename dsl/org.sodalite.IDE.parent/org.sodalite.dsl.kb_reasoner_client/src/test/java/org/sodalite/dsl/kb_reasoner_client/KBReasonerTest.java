@@ -45,7 +45,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 
 class KBReasonerTest {
-	private KBReasonerClient kbclient;
+	private KBReasoner kbclient;
 	String resourceId = "tosca.nodes.Compute";
 	String requirementId = "host";
 	String nodeType = "tosca.nodes.SoftwareComponent";
@@ -53,12 +53,19 @@ class KBReasonerTest {
 	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
 	private final String IaC_URI = "http://154.48.185.202:8080/";
 	private final String xOPERA_URI = "http://154.48.185.209:5001/";
+	private final String KEYCLOAK_URI = "http://192.168.2.179:8080/";
+
+	private final String client_id = "sodalite-ide";
+	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
+	private final String user = "yosu";
+	private final String password = "qwerty";
 
 	private String aadmURI = null;
 
 	@BeforeEach
 	void setup() throws IOException, Exception {
-		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI);
+		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI, KEYCLOAK_URI);
+		kbclient.setUserAccount(user, password, client_id, client_secret);
 	}
 
 	@Test
@@ -184,7 +191,7 @@ class KBReasonerTest {
 	@Test
 	void testGetValidRequirementNodes() throws Exception {
 		String nodeType = "docker/sodalite.nodes.DockerizedComponent";
-		List<String> modules = Arrays.asList("snow", "clinical");
+		List<String> modules = Arrays.asList("snow", "docker");
 		ValidRequirementNodeData valid_requirement_nodes = kbclient.getValidRequirementNodes(requirementId, nodeType,
 				modules);
 		assertFalse(valid_requirement_nodes.getElements().isEmpty());
@@ -195,8 +202,9 @@ class KBReasonerTest {
 	@Test
 	void testGetTypeOfValidRequirementNodes() throws Exception {
 		String requirementId = "host";
-		String nodeType = "docker/sodalite.nodes.DockerHost";
-		TypeData typedata = kbclient.getTypeOfValidRequirementNodes(requirementId, nodeType);
+		List<String> modules = Arrays.asList("openstack", "docker");
+		String nodeType = "docker/sodalite.nodes.DockerizedComponent";
+		TypeData typedata = kbclient.getTypeOfValidRequirementNodes(requirementId, nodeType, modules);
 		assertFalse(typedata.getElements().isEmpty());
 		System.out.println("TypeOfValidRequirementNodes for resource: " + resourceId + " is "
 				+ typedata.getElements().get(0).getLabel());
@@ -344,6 +352,19 @@ class KBReasonerTest {
 		String session_token = "d892456a-5db1-4656-b896-ed2389c8639f";
 		DeploymentStatus status = kbclient.getAADMDeploymentStatus(session_token);
 		assertNotNull(status);
+	}
+
+	@Test
+	void testGetSecurityToken() throws Exception {
+		String token = kbclient.getSecurityToken();
+		assertNotNull(token);
+	}
+
+	@Test
+	void testIsValidToken() throws Exception {
+		String token = kbclient.getSecurityToken();
+		assertNotNull(token);
+		assertTrue(kbclient.isValidToken(token));
 	}
 
 }

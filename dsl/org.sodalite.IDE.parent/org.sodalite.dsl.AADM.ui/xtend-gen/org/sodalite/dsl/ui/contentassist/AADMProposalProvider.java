@@ -254,8 +254,15 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       if (_equals) {
         Object _findModel = this.findModel(template);
         final AADM_Model model = ((AADM_Model) _findModel);
-        final String module = model.getModule();
-        boolean _equals_1 = req.getNode().getModule().equals(module);
+        String module1 = model.getModule();
+        if ((module1 == null)) {
+          module1 = "";
+        }
+        String module2 = req.getNode().getModule();
+        if ((module2 == null)) {
+          module2 = "";
+        }
+        boolean _equals_1 = module1.equals(module2);
         if (_equals_1) {
           node = this.findNode(model, req.getNode().getId());
         } else {
@@ -799,7 +806,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       final String module = this.getModule(model);
       importedModules.add(module);
       final ValidRequirementNodeData vrnd = this.getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
-      final TypeData tovrnd = this.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId);
+      final TypeData tovrnd = this.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
       boolean _isEmpty = vrnd.getElements().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {

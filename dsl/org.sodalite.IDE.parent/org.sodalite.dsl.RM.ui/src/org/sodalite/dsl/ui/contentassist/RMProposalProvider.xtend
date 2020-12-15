@@ -26,6 +26,9 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.swt.widgets.FileDialog
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.sodalite.dsl.rM.EPREFIX_TYPE
+import org.sodalite.dsl.ui.backend.BackendLogger
+import org.eclipse.jface.dialogs.MessageDialog
+import org.eclipse.swt.widgets.Shell
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -49,15 +52,54 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def KBReasoner getKBReasoner() {
 		// Configure KBReasonerClient endpoint from preference page information
 		val IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-
+		
 		val String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		val String iacURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		val String xoperaURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		val KBReasoner kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI);
-		System.out.println(
-				MessageFormat.format("Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}",
-						kbReasonerURI, iacURI, xoperaURI));
+		if (kbReasonerURI.isEmpty())
+			raiseConfigurationIssue("KB Reasoner URI user not set");
+
+		val String iacURI = store.getString(PreferenceConstants.IaC_URI);
+		if (iacURI.isEmpty())
+			raiseConfigurationIssue("IaC URI user not set");
+
+		val String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
+		if (xoperaURI.isEmpty())
+			raiseConfigurationIssue("xOpera URI user not set");
+
+		val String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
+		if (keycloakURI.isEmpty())
+			raiseConfigurationIssue("Keycloak URI user not set");
+
+		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
+
+		val String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
+		if (keycloak_user.isEmpty())
+			raiseConfigurationIssue("Keycloak user not set");
+
+		val String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
+		if (keycloak_password.isEmpty())
+			raiseConfigurationIssue("Keycloak password not set");
+
+		val String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
+		if (keycloak_client_id.isEmpty())
+			raiseConfigurationIssue("Keycloak client_id not set");
+
+		val String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
+		if (keycloak_client_secret.isEmpty())
+			raiseConfigurationIssue("Keycloak client secret not set");
+
+		kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
+
+		BackendLogger.log(MessageFormat.format(
+				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
+				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
+
 		return kbclient;
+	}
+	
+	def private void raiseConfigurationIssue(String message) throws Exception {
+//		val Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+//		throw new Exception(message + " in Sodalite preferences pages");
 	}
 	
 	
