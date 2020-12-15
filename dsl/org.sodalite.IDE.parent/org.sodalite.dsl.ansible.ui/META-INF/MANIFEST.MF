@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.sodalite.dsl.ansible.ui
+Bundle-ManifestVersion: 2
+Bundle-Name: org.sodalite.dsl.ansible.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.sodalite.dsl.ansible.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.sodalite.dsl.ansible,
+ org.sodalite.dsl.ansible.ide,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.sodalite.sdl.ansible.ui.quickfix,
+ org.sodalite.sdl.ansible.ui.contentassist,
+ org.sodalite.dsl.ansible.ui.internal
+Bundle-Activator: org.sodalite.dsl.ansible.ui.internal.AnsibleActivator
