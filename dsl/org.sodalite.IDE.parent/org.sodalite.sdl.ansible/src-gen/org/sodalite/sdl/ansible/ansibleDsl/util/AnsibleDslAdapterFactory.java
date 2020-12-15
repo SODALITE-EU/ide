@@ -246,9 +246,14 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createENotifiedTopicAdapter();
       }
       @Override
-      public Adapter caseEFilteredVariableOrString(EFilteredVariableOrString object)
+      public Adapter caseEJinjaExpressionOrString(EJinjaExpressionOrString object)
       {
-        return createEFilteredVariableOrStringAdapter();
+        return createEJinjaExpressionOrStringAdapter();
+      }
+      @Override
+      public Adapter caseEJinjaExpressionAndString(EJinjaExpressionAndString object)
+      {
+        return createEJinjaExpressionAndStringAdapter();
       }
       @Override
       public Adapter caseEValuePassed(EValuePassed object)
@@ -261,9 +266,24 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEValuePassedToJinjaExpressionAdapter();
       }
       @Override
+      public Adapter caseEComposedValue(EComposedValue object)
+      {
+        return createEComposedValueAdapter();
+      }
+      @Override
       public Adapter caseEValue(EValue object)
       {
         return createEValueAdapter();
+      }
+      @Override
+      public Adapter caseEValueWithoutString(EValueWithoutString object)
+      {
+        return createEValueWithoutStringAdapter();
+      }
+      @Override
+      public Adapter caseESimpleValueWithoutString(ESimpleValueWithoutString object)
+      {
+        return createESimpleValueWithoutStringAdapter();
       }
       @Override
       public Adapter caseESimpleValue(ESimpleValue object)
@@ -908,16 +928,31 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString <em>EFiltered Variable Or String</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString <em>EJinja Expression Or String</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString
    * @generated
    */
-  public Adapter createEFilteredVariableOrStringAdapter()
+  public Adapter createEJinjaExpressionOrStringAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString <em>EJinja Expression And String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString
+   * @generated
+   */
+  public Adapter createEJinjaExpressionAndStringAdapter()
   {
     return null;
   }
@@ -953,6 +988,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EComposedValue <em>EComposed Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EComposedValue
+   * @generated
+   */
+  public Adapter createEComposedValueAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValue <em>EValue</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -963,6 +1013,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString <em>EValue Without String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString
+   * @generated
+   */
+  public Adapter createEValueWithoutStringAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString <em>ESimple Value Without String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString
+   * @generated
+   */
+  public Adapter createESimpleValueWithoutStringAdapter()
   {
     return null;
   }

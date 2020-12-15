@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface EDictionary extends EValue
+public interface EDictionary extends EComposedValue
 {
   /**
    * Returns the value of the '<em><b>Dictionary pairs</b></em>' containment reference list.

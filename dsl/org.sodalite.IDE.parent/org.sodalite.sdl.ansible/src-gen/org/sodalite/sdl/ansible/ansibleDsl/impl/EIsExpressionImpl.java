@@ -24,7 +24,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getFiltered_expression <em>Filtered expression</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getParenthesised_expression <em>Parenthesised expression</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getIs_not <em>Is not</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getContainer_expression <em>Container expression</em>}</li>
@@ -35,14 +35,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
 public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements EIsExpression
 {
   /**
-   * The cached value of the '{@link #getFiltered_expression() <em>Filtered expression</em>}' containment reference.
+   * The cached value of the '{@link #getParenthesised_expression() <em>Parenthesised expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFiltered_expression()
+   * @see #getParenthesised_expression()
    * @generated
    * @ordered
    */
-  protected EParenthesisedExpression filtered_expression;
+  protected EParenthesisedExpression parenthesised_expression;
 
   /**
    * The default value of the '{@link #getIs_not() <em>Is not</em>}' attribute.
@@ -111,9 +111,9 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
-  public EParenthesisedExpression getFiltered_expression()
+  public EParenthesisedExpression getParenthesised_expression()
   {
-    return filtered_expression;
+    return parenthesised_expression;
   }
 
   /**
@@ -121,13 +121,13 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFiltered_expression(EParenthesisedExpression newFiltered_expression, NotificationChain msgs)
+  public NotificationChain basicSetParenthesised_expression(EParenthesisedExpression newParenthesised_expression, NotificationChain msgs)
   {
-    EParenthesisedExpression oldFiltered_expression = filtered_expression;
-    filtered_expression = newFiltered_expression;
+    EParenthesisedExpression oldParenthesised_expression = parenthesised_expression;
+    parenthesised_expression = newParenthesised_expression;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIS_EXPRESSION__FILTERED_EXPRESSION, oldFiltered_expression, newFiltered_expression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION, oldParenthesised_expression, newParenthesised_expression);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -139,20 +139,20 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
-  public void setFiltered_expression(EParenthesisedExpression newFiltered_expression)
+  public void setParenthesised_expression(EParenthesisedExpression newParenthesised_expression)
   {
-    if (newFiltered_expression != filtered_expression)
+    if (newParenthesised_expression != parenthesised_expression)
     {
       NotificationChain msgs = null;
-      if (filtered_expression != null)
-        msgs = ((InternalEObject)filtered_expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIS_EXPRESSION__FILTERED_EXPRESSION, null, msgs);
-      if (newFiltered_expression != null)
-        msgs = ((InternalEObject)newFiltered_expression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIS_EXPRESSION__FILTERED_EXPRESSION, null, msgs);
-      msgs = basicSetFiltered_expression(newFiltered_expression, msgs);
+      if (parenthesised_expression != null)
+        msgs = ((InternalEObject)parenthesised_expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION, null, msgs);
+      if (newParenthesised_expression != null)
+        msgs = ((InternalEObject)newParenthesised_expression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION, null, msgs);
+      msgs = basicSetParenthesised_expression(newParenthesised_expression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIS_EXPRESSION__FILTERED_EXPRESSION, newFiltered_expression, newFiltered_expression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION, newParenthesised_expression, newParenthesised_expression));
   }
 
   /**
@@ -290,8 +290,8 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIS_EXPRESSION__FILTERED_EXPRESSION:
-        return basicSetFiltered_expression(null, msgs);
+      case AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION:
+        return basicSetParenthesised_expression(null, msgs);
       case AnsibleDslPackage.EIS_EXPRESSION__STATUS:
         return basicSetStatus(null, msgs);
       case AnsibleDslPackage.EIS_EXPRESSION__CONTAINER_EXPRESSION:
@@ -310,8 +310,8 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIS_EXPRESSION__FILTERED_EXPRESSION:
-        return getFiltered_expression();
+      case AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION:
+        return getParenthesised_expression();
       case AnsibleDslPackage.EIS_EXPRESSION__IS_NOT:
         return getIs_not();
       case AnsibleDslPackage.EIS_EXPRESSION__STATUS:
@@ -332,8 +332,8 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIS_EXPRESSION__FILTERED_EXPRESSION:
-        setFiltered_expression((EParenthesisedExpression)newValue);
+      case AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION:
+        setParenthesised_expression((EParenthesisedExpression)newValue);
         return;
       case AnsibleDslPackage.EIS_EXPRESSION__IS_NOT:
         setIs_not((String)newValue);
@@ -358,8 +358,8 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIS_EXPRESSION__FILTERED_EXPRESSION:
-        setFiltered_expression((EParenthesisedExpression)null);
+      case AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION:
+        setParenthesised_expression((EParenthesisedExpression)null);
         return;
       case AnsibleDslPackage.EIS_EXPRESSION__IS_NOT:
         setIs_not(IS_NOT_EDEFAULT);
@@ -384,8 +384,8 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIS_EXPRESSION__FILTERED_EXPRESSION:
-        return filtered_expression != null;
+      case AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION:
+        return parenthesised_expression != null;
       case AnsibleDslPackage.EIS_EXPRESSION__IS_NOT:
         return IS_NOT_EDEFAULT == null ? is_not != null : !IS_NOT_EDEFAULT.equals(is_not);
       case AnsibleDslPackage.EIS_EXPRESSION__STATUS:

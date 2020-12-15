@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getFiltered_expression <em>Filtered expression</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getParenthesised_expression <em>Parenthesised expression</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getIs_not <em>Is not</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getStatus <em>Status</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getContainer_expression <em>Container expression</em>}</li>
@@ -27,26 +27,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface EIsExpression extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Filtered expression</b></em>' containment reference.
+   * Returns the value of the '<em><b>Parenthesised expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Filtered expression</em>' containment reference.
-   * @see #setFiltered_expression(EParenthesisedExpression)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEIsExpression_Filtered_expression()
+   * @return the value of the '<em>Parenthesised expression</em>' containment reference.
+   * @see #setParenthesised_expression(EParenthesisedExpression)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEIsExpression_Parenthesised_expression()
    * @model containment="true"
    * @generated
    */
-  EParenthesisedExpression getFiltered_expression();
+  EParenthesisedExpression getParenthesised_expression();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getFiltered_expression <em>Filtered expression</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getParenthesised_expression <em>Parenthesised expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Filtered expression</em>' containment reference.
-   * @see #getFiltered_expression()
+   * @param value the new value of the '<em>Parenthesised expression</em>' containment reference.
+   * @see #getParenthesised_expression()
    * @generated
    */
-  void setFiltered_expression(EParenthesisedExpression value);
+  void setParenthesised_expression(EParenthesisedExpression value);
 
   /**
    * Returns the value of the '<em><b>Is not</b></em>' attribute.

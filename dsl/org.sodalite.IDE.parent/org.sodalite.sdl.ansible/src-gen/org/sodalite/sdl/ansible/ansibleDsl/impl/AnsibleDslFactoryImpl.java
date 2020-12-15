@@ -99,10 +99,14 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ENOTIFIABLE: return createENotifiable();
       case AnsibleDslPackage.ENOTIFIED_HANDLER: return createENotifiedHandler();
       case AnsibleDslPackage.ENOTIFIED_TOPIC: return createENotifiedTopic();
-      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING: return createEFilteredVariableOrString();
+      case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING: return createEJinjaExpressionOrString();
+      case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING: return createEJinjaExpressionAndString();
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
       case AnsibleDslPackage.EVALUE_PASSED_TO_JINJA_EXPRESSION: return createEValuePassedToJinjaExpression();
+      case AnsibleDslPackage.ECOMPOSED_VALUE: return createEComposedValue();
       case AnsibleDslPackage.EVALUE: return createEValue();
+      case AnsibleDslPackage.EVALUE_WITHOUT_STRING: return createEValueWithoutString();
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING: return createESimpleValueWithoutString();
       case AnsibleDslPackage.ESIMPLE_VALUE: return createESimpleValue();
       case AnsibleDslPackage.EITEM: return createEItem();
       case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE: return createEDeclaredVariableReference();
@@ -544,10 +548,22 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EFilteredVariableOrString createEFilteredVariableOrString()
+  public EJinjaExpressionOrString createEJinjaExpressionOrString()
   {
-    EFilteredVariableOrStringImpl eFilteredVariableOrString = new EFilteredVariableOrStringImpl();
-    return eFilteredVariableOrString;
+    EJinjaExpressionOrStringImpl eJinjaExpressionOrString = new EJinjaExpressionOrStringImpl();
+    return eJinjaExpressionOrString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionAndString createEJinjaExpressionAndString()
+  {
+    EJinjaExpressionAndStringImpl eJinjaExpressionAndString = new EJinjaExpressionAndStringImpl();
+    return eJinjaExpressionAndString;
   }
 
   /**
@@ -580,10 +596,46 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
+  public EComposedValue createEComposedValue()
+  {
+    EComposedValueImpl eComposedValue = new EComposedValueImpl();
+    return eComposedValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EValue createEValue()
   {
     EValueImpl eValue = new EValueImpl();
     return eValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EValueWithoutString createEValueWithoutString()
+  {
+    EValueWithoutStringImpl eValueWithoutString = new EValueWithoutStringImpl();
+    return eValueWithoutString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ESimpleValueWithoutString createESimpleValueWithoutString()
+  {
+    ESimpleValueWithoutStringImpl eSimpleValueWithoutString = new ESimpleValueWithoutStringImpl();
+    return eSimpleValueWithoutString;
   }
 
   /**

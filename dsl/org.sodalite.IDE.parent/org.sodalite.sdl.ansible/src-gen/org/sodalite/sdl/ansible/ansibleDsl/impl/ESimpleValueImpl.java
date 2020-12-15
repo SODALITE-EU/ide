@@ -20,8 +20,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl#getValue_string <em>Value string</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl#getValue_number <em>Value number</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueImpl#getSimple_value_string <em>Simple value string</em>}</li>
  * </ul>
  *
  * @generated
@@ -29,44 +28,24 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
 {
   /**
-   * The default value of the '{@link #getValue_string() <em>Value string</em>}' attribute.
+   * The default value of the '{@link #getSimple_value_string() <em>Simple value string</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue_string()
+   * @see #getSimple_value_string()
    * @generated
    * @ordered
    */
-  protected static final String VALUE_STRING_EDEFAULT = null;
+  protected static final String SIMPLE_VALUE_STRING_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getValue_string() <em>Value string</em>}' attribute.
+   * The cached value of the '{@link #getSimple_value_string() <em>Simple value string</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue_string()
+   * @see #getSimple_value_string()
    * @generated
    * @ordered
    */
-  protected String value_string = VALUE_STRING_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getValue_number() <em>Value number</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue_number()
-   * @generated
-   * @ordered
-   */
-  protected static final String VALUE_NUMBER_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getValue_number() <em>Value number</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue_number()
-   * @generated
-   * @ordered
-   */
-  protected String value_number = VALUE_NUMBER_EDEFAULT;
+  protected String simple_value_string = SIMPLE_VALUE_STRING_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -95,9 +74,9 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
    * @generated
    */
   @Override
-  public String getValue_string()
+  public String getSimple_value_string()
   {
-    return value_string;
+    return simple_value_string;
   }
 
   /**
@@ -106,37 +85,12 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
    * @generated
    */
   @Override
-  public void setValue_string(String newValue_string)
+  public void setSimple_value_string(String newSimple_value_string)
   {
-    String oldValue_string = value_string;
-    value_string = newValue_string;
+    String oldSimple_value_string = simple_value_string;
+    simple_value_string = newSimple_value_string;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE__VALUE_STRING, oldValue_string, value_string));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getValue_number()
-  {
-    return value_number;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setValue_number(String newValue_number)
-  {
-    String oldValue_number = value_number;
-    value_number = newValue_number;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER, oldValue_number, value_number));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE__SIMPLE_VALUE_STRING, oldSimple_value_string, simple_value_string));
   }
 
   /**
@@ -149,10 +103,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_STRING:
-        return getValue_string();
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER:
-        return getValue_number();
+      case AnsibleDslPackage.ESIMPLE_VALUE__SIMPLE_VALUE_STRING:
+        return getSimple_value_string();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -167,11 +119,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_STRING:
-        setValue_string((String)newValue);
-        return;
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER:
-        setValue_number((String)newValue);
+      case AnsibleDslPackage.ESIMPLE_VALUE__SIMPLE_VALUE_STRING:
+        setSimple_value_string((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -187,11 +136,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_STRING:
-        setValue_string(VALUE_STRING_EDEFAULT);
-        return;
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER:
-        setValue_number(VALUE_NUMBER_EDEFAULT);
+      case AnsibleDslPackage.ESIMPLE_VALUE__SIMPLE_VALUE_STRING:
+        setSimple_value_string(SIMPLE_VALUE_STRING_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -207,10 +153,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_STRING:
-        return VALUE_STRING_EDEFAULT == null ? value_string != null : !VALUE_STRING_EDEFAULT.equals(value_string);
-      case AnsibleDslPackage.ESIMPLE_VALUE__VALUE_NUMBER:
-        return VALUE_NUMBER_EDEFAULT == null ? value_number != null : !VALUE_NUMBER_EDEFAULT.equals(value_number);
+      case AnsibleDslPackage.ESIMPLE_VALUE__SIMPLE_VALUE_STRING:
+        return SIMPLE_VALUE_STRING_EDEFAULT == null ? simple_value_string != null : !SIMPLE_VALUE_STRING_EDEFAULT.equals(simple_value_string);
     }
     return super.eIsSet(featureID);
   }
@@ -226,10 +170,8 @@ public class ESimpleValueImpl extends EValueImpl implements ESimpleValue
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (value_string: ");
-    result.append(value_string);
-    result.append(", value_number: ");
-    result.append(value_number);
+    result.append(" (simple_value_string: ");
+    result.append(simple_value_string);
     result.append(')');
     return result.toString();
   }

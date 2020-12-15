@@ -8,52 +8,51 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EFiltered Variable Or String</b></em>'.
+ * An implementation of the model object '<em><b>ESimple Value Without String</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredVariableOrStringImpl#getString <em>String</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueWithoutStringImpl#getSimple_value <em>Simple value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EFilteredVariableOrStringImpl extends MinimalEObjectImpl.Container implements EFilteredVariableOrString
+public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl implements ESimpleValueWithoutString
 {
   /**
-   * The default value of the '{@link #getString() <em>String</em>}' attribute.
+   * The default value of the '{@link #getSimple_value() <em>Simple value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getString()
+   * @see #getSimple_value()
    * @generated
    * @ordered
    */
-  protected static final String STRING_EDEFAULT = null;
+  protected static final String SIMPLE_VALUE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getString() <em>String</em>}' attribute.
+   * The cached value of the '{@link #getSimple_value() <em>Simple value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getString()
+   * @see #getSimple_value()
    * @generated
    * @ordered
    */
-  protected String string = STRING_EDEFAULT;
+  protected String simple_value = SIMPLE_VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EFilteredVariableOrStringImpl()
+  protected ESimpleValueWithoutStringImpl()
   {
     super();
   }
@@ -66,7 +65,7 @@ public class EFilteredVariableOrStringImpl extends MinimalEObjectImpl.Container 
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EFILTERED_VARIABLE_OR_STRING;
+    return AnsibleDslPackage.Literals.ESIMPLE_VALUE_WITHOUT_STRING;
   }
 
   /**
@@ -75,9 +74,9 @@ public class EFilteredVariableOrStringImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public String getString()
+  public String getSimple_value()
   {
-    return string;
+    return simple_value;
   }
 
   /**
@@ -86,12 +85,12 @@ public class EFilteredVariableOrStringImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public void setString(String newString)
+  public void setSimple_value(String newSimple_value)
   {
-    String oldString = string;
-    string = newString;
+    String oldSimple_value = simple_value;
+    simple_value = newSimple_value;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING__STRING, oldString, string));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE, oldSimple_value, simple_value));
   }
 
   /**
@@ -104,8 +103,8 @@ public class EFilteredVariableOrStringImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING__STRING:
-        return getString();
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
+        return getSimple_value();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +119,8 @@ public class EFilteredVariableOrStringImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING__STRING:
-        setString((String)newValue);
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
+        setSimple_value((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +136,8 @@ public class EFilteredVariableOrStringImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING__STRING:
-        setString(STRING_EDEFAULT);
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
+        setSimple_value(SIMPLE_VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -154,8 +153,8 @@ public class EFilteredVariableOrStringImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFILTERED_VARIABLE_OR_STRING__STRING:
-        return STRING_EDEFAULT == null ? string != null : !STRING_EDEFAULT.equals(string);
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
+        return SIMPLE_VALUE_EDEFAULT == null ? simple_value != null : !SIMPLE_VALUE_EDEFAULT.equals(simple_value);
     }
     return super.eIsSet(featureID);
   }
@@ -171,10 +170,10 @@ public class EFilteredVariableOrStringImpl extends MinimalEObjectImpl.Container 
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (string: ");
-    result.append(string);
+    result.append(" (simple_value: ");
+    result.append(simple_value);
     result.append(')');
     return result.toString();
   }
 
-} //EFilteredVariableOrStringImpl
+} //ESimpleValueWithoutStringImpl

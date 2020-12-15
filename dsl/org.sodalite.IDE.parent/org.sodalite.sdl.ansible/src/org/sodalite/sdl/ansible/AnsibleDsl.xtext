@@ -357,24 +357,39 @@ ENotifiedTopic:
 	'topic:' name=STRING
 ;
 
-EFilteredVariableOrString:
+EJinjaExpressionOrString:
 	EJinjaExpressionEvaluation | string=STRING
 ;
 
+EJinjaExpressionAndString:
+	(jinja_expression_and_string+=EJinjaExpressionOrString)+
+;
+
 EValuePassed:
-	(variable_and_string+=EFilteredVariableOrString)+
+	EJinjaExpressionAndString | EValueWithoutString
 ;
 
 EValuePassedToJinjaExpression:
 	EValue | EFactGathered | EItem | EDeclaredVariableReference | EFunctionCall
 ;
 
-EValue:
-	EDictionary | EList | ESimpleValue
+EComposedValue:
+	EDictionary | EList
 ;
 
+EValue:
+	EComposedValue | ESimpleValue
+;
+
+EValueWithoutString:
+	EComposedValue | ESimpleValueWithoutString
+;
+
+ESimpleValueWithoutString:
+	simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER
+;
 ESimpleValue:
-	value_string=STRING | value_string=BOOLEAN | value_string=NULL | value_number=NUMBER
+	simple_value_string=STRING | simple_value_string=BOOLEAN | simple_value_string=NULL | simple_value_string=NUMBER
 ;
 
 EItem:
@@ -419,11 +434,11 @@ EOperation:
 ;
 
 EIsExpression:
-	filtered_expression=EParenthesisedExpression ('is' (is_not='not')? status=EIsExpression | (is_not='not')? 'in' container_expression=EIsExpression)?
+	parenthesised_expression=EParenthesisedExpression ('is' (is_not='not')? status=EIsExpression | (is_not='not')? 'in' container_expression=EIsExpression)?
 ;
 
 EParenthesisedExpression:
-	basic_Value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')'
+	basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')'
 ;
 
 EIfExpression:

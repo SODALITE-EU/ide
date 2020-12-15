@@ -20,7 +20,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EJinjaExpressionEvaluation extends EFilteredVariableOrString
+public interface EJinjaExpressionEvaluation extends EJinjaExpressionOrString
 {
   /**
    * Returns the value of the '<em><b>Jinja expression</b></em>' containment reference.

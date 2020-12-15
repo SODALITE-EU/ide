@@ -3,8 +3,6 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -12,12 +10,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>EValue Passed</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EValuePassed#getVariable_and_string <em>Variable and string</em>}</li>
- * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEValuePassed()
  * @model
@@ -25,16 +17,4 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface EValuePassed extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Variable and string</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Variable and string</em>' containment reference list.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEValuePassed_Variable_and_string()
-   * @model containment="true"
-   * @generated
-   */
-  EList<EFilteredVariableOrString> getVariable_and_string();
-
 } // EValuePassed

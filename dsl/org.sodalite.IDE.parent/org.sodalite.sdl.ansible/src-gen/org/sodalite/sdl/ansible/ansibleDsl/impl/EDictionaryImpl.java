@@ -32,7 +32,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
  *
  * @generated
  */
-public class EDictionaryImpl extends EValueImpl implements EDictionary
+public class EDictionaryImpl extends EComposedValueImpl implements EDictionary
 {
   /**
    * The cached value of the '{@link #getDictionary_pairs() <em>Dictionary pairs</em>}' containment reference list.

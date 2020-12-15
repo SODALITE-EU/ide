@@ -330,13 +330,22 @@ public interface AnsibleDslFactory extends EFactory
   ENotifiedTopic createENotifiedTopic();
 
   /**
-   * Returns a new object of class '<em>EFiltered Variable Or String</em>'.
+   * Returns a new object of class '<em>EJinja Expression Or String</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EFiltered Variable Or String</em>'.
+   * @return a new object of class '<em>EJinja Expression Or String</em>'.
    * @generated
    */
-  EFilteredVariableOrString createEFilteredVariableOrString();
+  EJinjaExpressionOrString createEJinjaExpressionOrString();
+
+  /**
+   * Returns a new object of class '<em>EJinja Expression And String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EJinja Expression And String</em>'.
+   * @generated
+   */
+  EJinjaExpressionAndString createEJinjaExpressionAndString();
 
   /**
    * Returns a new object of class '<em>EValue Passed</em>'.
@@ -357,6 +366,15 @@ public interface AnsibleDslFactory extends EFactory
   EValuePassedToJinjaExpression createEValuePassedToJinjaExpression();
 
   /**
+   * Returns a new object of class '<em>EComposed Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EComposed Value</em>'.
+   * @generated
+   */
+  EComposedValue createEComposedValue();
+
+  /**
    * Returns a new object of class '<em>EValue</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -364,6 +382,24 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EValue createEValue();
+
+  /**
+   * Returns a new object of class '<em>EValue Without String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EValue Without String</em>'.
+   * @generated
+   */
+  EValueWithoutString createEValueWithoutString();
+
+  /**
+   * Returns a new object of class '<em>ESimple Value Without String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ESimple Value Without String</em>'.
+   * @generated
+   */
+  ESimpleValueWithoutString createESimpleValueWithoutString();
 
   /**
    * Returns a new object of class '<em>ESimple Value</em>'.

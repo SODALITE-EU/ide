@@ -18,6 +18,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
+import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference;
@@ -32,14 +33,15 @@ import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EItem;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EList;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
@@ -61,6 +63,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
@@ -70,6 +73,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 import org.sodalite.sdl.ansible.ansibleDsl.Model;
 
@@ -324,7 +328,14 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eFilteredVariableOrStringEClass = null;
+  private EClass eJinjaExpressionOrStringEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eJinjaExpressionAndStringEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -345,7 +356,28 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eComposedValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eValueWithoutStringEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eSimpleValueWithoutStringEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1890,9 +1922,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEFilteredVariableOrString()
+  public EClass getEJinjaExpressionOrString()
   {
-    return eFilteredVariableOrStringEClass;
+    return eJinjaExpressionOrStringEClass;
   }
 
   /**
@@ -1901,9 +1933,31 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEFilteredVariableOrString_String()
+  public EAttribute getEJinjaExpressionOrString_String()
   {
-    return (EAttribute)eFilteredVariableOrStringEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eJinjaExpressionOrStringEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEJinjaExpressionAndString()
+  {
+    return eJinjaExpressionAndStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEJinjaExpressionAndString_Jinja_expression_and_string()
+  {
+    return (EReference)eJinjaExpressionAndStringEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1923,9 +1977,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEValuePassed_Variable_and_string()
+  public EClass getEValuePassedToJinjaExpression()
   {
-    return (EReference)eValuePassedEClass.getEStructuralFeatures().get(0);
+    return eValuePassedToJinjaExpressionEClass;
   }
 
   /**
@@ -1934,9 +1988,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEValuePassedToJinjaExpression()
+  public EClass getEComposedValue()
   {
-    return eValuePassedToJinjaExpressionEClass;
+    return eComposedValueEClass;
   }
 
   /**
@@ -1956,6 +2010,39 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getEValueWithoutString()
+  {
+    return eValueWithoutStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getESimpleValueWithoutString()
+  {
+    return eSimpleValueWithoutStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getESimpleValueWithoutString_Simple_value()
+  {
+    return (EAttribute)eSimpleValueWithoutStringEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getESimpleValue()
   {
     return eSimpleValueEClass;
@@ -1967,20 +2054,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getESimpleValue_Value_string()
+  public EAttribute getESimpleValue_Simple_value_string()
   {
     return (EAttribute)eSimpleValueEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getESimpleValue_Value_number()
-  {
-    return (EAttribute)eSimpleValueEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2330,7 +2406,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEIsExpression_Filtered_expression()
+  public EReference getEIsExpression_Parenthesised_expression()
   {
     return (EReference)eIsExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -2385,7 +2461,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEParenthesisedExpression_Basic_Value()
+  public EReference getEParenthesisedExpression_Basic_value()
   {
     return (EReference)eParenthesisedExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -2817,19 +2893,27 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eNotifiedTopicEClass = createEClass(ENOTIFIED_TOPIC);
     createEAttribute(eNotifiedTopicEClass, ENOTIFIED_TOPIC__NAME);
 
-    eFilteredVariableOrStringEClass = createEClass(EFILTERED_VARIABLE_OR_STRING);
-    createEAttribute(eFilteredVariableOrStringEClass, EFILTERED_VARIABLE_OR_STRING__STRING);
+    eJinjaExpressionOrStringEClass = createEClass(EJINJA_EXPRESSION_OR_STRING);
+    createEAttribute(eJinjaExpressionOrStringEClass, EJINJA_EXPRESSION_OR_STRING__STRING);
+
+    eJinjaExpressionAndStringEClass = createEClass(EJINJA_EXPRESSION_AND_STRING);
+    createEReference(eJinjaExpressionAndStringEClass, EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING);
 
     eValuePassedEClass = createEClass(EVALUE_PASSED);
-    createEReference(eValuePassedEClass, EVALUE_PASSED__VARIABLE_AND_STRING);
 
     eValuePassedToJinjaExpressionEClass = createEClass(EVALUE_PASSED_TO_JINJA_EXPRESSION);
 
+    eComposedValueEClass = createEClass(ECOMPOSED_VALUE);
+
     eValueEClass = createEClass(EVALUE);
 
+    eValueWithoutStringEClass = createEClass(EVALUE_WITHOUT_STRING);
+
+    eSimpleValueWithoutStringEClass = createEClass(ESIMPLE_VALUE_WITHOUT_STRING);
+    createEAttribute(eSimpleValueWithoutStringEClass, ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE);
+
     eSimpleValueEClass = createEClass(ESIMPLE_VALUE);
-    createEAttribute(eSimpleValueEClass, ESIMPLE_VALUE__VALUE_STRING);
-    createEAttribute(eSimpleValueEClass, ESIMPLE_VALUE__VALUE_NUMBER);
+    createEAttribute(eSimpleValueEClass, ESIMPLE_VALUE__SIMPLE_VALUE_STRING);
 
     eItemEClass = createEClass(EITEM);
     createEAttribute(eItemEClass, EITEM__TAIL);
@@ -2872,7 +2956,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eOperationEClass, EOPERATION__RIGHT_OPERAND);
 
     eIsExpressionEClass = createEClass(EIS_EXPRESSION);
-    createEReference(eIsExpressionEClass, EIS_EXPRESSION__FILTERED_EXPRESSION);
+    createEReference(eIsExpressionEClass, EIS_EXPRESSION__PARENTHESISED_EXPRESSION);
     createEAttribute(eIsExpressionEClass, EIS_EXPRESSION__IS_NOT);
     createEReference(eIsExpressionEClass, EIS_EXPRESSION__STATUS);
     createEReference(eIsExpressionEClass, EIS_EXPRESSION__CONTAINER_EXPRESSION);
@@ -2960,19 +3044,24 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eTaskHandlerErrorHandlingEClass.getESuperTypes().add(this.getEErrorHandling());
     eNotifiedHandlerEClass.getESuperTypes().add(this.getENotifiable());
     eNotifiedTopicEClass.getESuperTypes().add(this.getENotifiable());
+    eJinjaExpressionAndStringEClass.getESuperTypes().add(this.getEValuePassed());
+    eComposedValueEClass.getESuperTypes().add(this.getEValue());
+    eComposedValueEClass.getESuperTypes().add(this.getEValueWithoutString());
     eValueEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
+    eValueWithoutStringEClass.getESuperTypes().add(this.getEValuePassed());
+    eSimpleValueWithoutStringEClass.getESuperTypes().add(this.getEValueWithoutString());
     eSimpleValueEClass.getESuperTypes().add(this.getEValue());
     eItemEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eDeclaredVariableReferenceEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
-    eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEFilteredVariableOrString());
+    eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEJinjaExpressionOrString());
     eFunctionCallEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eFilteredExpressionEClass.getESuperTypes().add(this.getEJinjaExpressionEvaluationWithoutBrackets());
     eIfExpressionEClass.getESuperTypes().add(this.getEJinjaExpressionEvaluationWithoutBrackets());
     eVariableDeclarationEClass.getESuperTypes().add(this.getEDeclaredVariable());
     eRegisterVariableEClass.getESuperTypes().add(this.getEDeclaredVariable());
     eFactGatheredEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
-    eDictionaryEClass.getESuperTypes().add(this.getEValue());
-    eListEClass.getESuperTypes().add(this.getEValue());
+    eDictionaryEClass.getESuperTypes().add(this.getEComposedValue());
+    eListEClass.getESuperTypes().add(this.getEComposedValue());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3129,19 +3218,27 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eNotifiedTopicEClass, ENotifiedTopic.class, "ENotifiedTopic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getENotifiedTopic_Name(), ecorePackage.getEString(), "name", null, 0, 1, ENotifiedTopic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eFilteredVariableOrStringEClass, EFilteredVariableOrString.class, "EFilteredVariableOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEFilteredVariableOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EFilteredVariableOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eJinjaExpressionOrStringEClass, EJinjaExpressionOrString.class, "EJinjaExpressionOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEJinjaExpressionOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EJinjaExpressionOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eJinjaExpressionAndStringEClass, EJinjaExpressionAndString.class, "EJinjaExpressionAndString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEJinjaExpressionAndString_Jinja_expression_and_string(), this.getEJinjaExpressionOrString(), null, "jinja_expression_and_string", null, 0, -1, EJinjaExpressionAndString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eValuePassedEClass, EValuePassed.class, "EValuePassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEValuePassed_Variable_and_string(), this.getEFilteredVariableOrString(), null, "variable_and_string", null, 0, -1, EValuePassed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eValuePassedToJinjaExpressionEClass, EValuePassedToJinjaExpression.class, "EValuePassedToJinjaExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(eComposedValueEClass, EComposedValue.class, "EComposedValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(eValueEClass, EValue.class, "EValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(eValueWithoutStringEClass, EValueWithoutString.class, "EValueWithoutString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eSimpleValueWithoutStringEClass, ESimpleValueWithoutString.class, "ESimpleValueWithoutString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getESimpleValueWithoutString_Simple_value(), ecorePackage.getEString(), "simple_value", null, 0, 1, ESimpleValueWithoutString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(eSimpleValueEClass, ESimpleValue.class, "ESimpleValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getESimpleValue_Value_string(), ecorePackage.getEString(), "value_string", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getESimpleValue_Value_number(), ecorePackage.getEString(), "value_number", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getESimpleValue_Simple_value_string(), ecorePackage.getEString(), "simple_value_string", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eItemEClass, EItem.class, "EItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEItem_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, EItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3184,13 +3281,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEOperation_Right_operand(), this.getEOperation(), null, "right_operand", null, 0, 1, EOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eIsExpressionEClass, EIsExpression.class, "EIsExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEIsExpression_Filtered_expression(), this.getEParenthesisedExpression(), null, "filtered_expression", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEIsExpression_Parenthesised_expression(), this.getEParenthesisedExpression(), null, "parenthesised_expression", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEIsExpression_Is_not(), ecorePackage.getEString(), "is_not", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEIsExpression_Status(), this.getEIsExpression(), null, "status", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEIsExpression_Container_expression(), this.getEIsExpression(), null, "container_expression", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eParenthesisedExpressionEClass, EParenthesisedExpression.class, "EParenthesisedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEParenthesisedExpression_Basic_Value(), this.getEValuePassedToJinjaExpression(), null, "basic_Value", null, 0, 1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEParenthesisedExpression_Basic_value(), this.getEValuePassedToJinjaExpression(), null, "basic_value", null, 0, 1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParenthesisedExpression_Parenthesised_term(), this.getEOrExpression(), null, "parenthesised_term", null, 0, 1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eIfExpressionEClass, EIfExpression.class, "EIfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

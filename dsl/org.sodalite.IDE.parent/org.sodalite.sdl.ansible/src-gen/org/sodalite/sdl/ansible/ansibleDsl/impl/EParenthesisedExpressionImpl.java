@@ -25,7 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getBasic_Value <em>Basic Value</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getBasic_value <em>Basic value</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getParenthesised_term <em>Parenthesised term</em>}</li>
  * </ul>
  *
@@ -34,14 +34,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container implements EParenthesisedExpression
 {
   /**
-   * The cached value of the '{@link #getBasic_Value() <em>Basic Value</em>}' containment reference.
+   * The cached value of the '{@link #getBasic_value() <em>Basic value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBasic_Value()
+   * @see #getBasic_value()
    * @generated
    * @ordered
    */
-  protected EValuePassedToJinjaExpression basic_Value;
+  protected EValuePassedToJinjaExpression basic_value;
 
   /**
    * The cached value of the '{@link #getParenthesised_term() <em>Parenthesised term</em>}' containment reference.
@@ -80,9 +80,9 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public EValuePassedToJinjaExpression getBasic_Value()
+  public EValuePassedToJinjaExpression getBasic_value()
   {
-    return basic_Value;
+    return basic_value;
   }
 
   /**
@@ -90,13 +90,13 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBasic_Value(EValuePassedToJinjaExpression newBasic_Value, NotificationChain msgs)
+  public NotificationChain basicSetBasic_value(EValuePassedToJinjaExpression newBasic_value, NotificationChain msgs)
   {
-    EValuePassedToJinjaExpression oldBasic_Value = basic_Value;
-    basic_Value = newBasic_Value;
+    EValuePassedToJinjaExpression oldBasic_value = basic_value;
+    basic_value = newBasic_value;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE, oldBasic_Value, newBasic_Value);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE, oldBasic_value, newBasic_value);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -108,20 +108,20 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public void setBasic_Value(EValuePassedToJinjaExpression newBasic_Value)
+  public void setBasic_value(EValuePassedToJinjaExpression newBasic_value)
   {
-    if (newBasic_Value != basic_Value)
+    if (newBasic_value != basic_value)
     {
       NotificationChain msgs = null;
-      if (basic_Value != null)
-        msgs = ((InternalEObject)basic_Value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE, null, msgs);
-      if (newBasic_Value != null)
-        msgs = ((InternalEObject)newBasic_Value).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE, null, msgs);
-      msgs = basicSetBasic_Value(newBasic_Value, msgs);
+      if (basic_value != null)
+        msgs = ((InternalEObject)basic_value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE, null, msgs);
+      if (newBasic_value != null)
+        msgs = ((InternalEObject)newBasic_value).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE, null, msgs);
+      msgs = basicSetBasic_value(newBasic_value, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE, newBasic_Value, newBasic_Value));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE, newBasic_value, newBasic_value));
   }
 
   /**
@@ -185,7 +185,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE:
-        return basicSetBasic_Value(null, msgs);
+        return basicSetBasic_value(null, msgs);
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         return basicSetParenthesised_term(null, msgs);
     }
@@ -203,7 +203,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE:
-        return getBasic_Value();
+        return getBasic_value();
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         return getParenthesised_term();
     }
@@ -221,7 +221,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE:
-        setBasic_Value((EValuePassedToJinjaExpression)newValue);
+        setBasic_value((EValuePassedToJinjaExpression)newValue);
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         setParenthesised_term((EOrExpression)newValue);
@@ -241,7 +241,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE:
-        setBasic_Value((EValuePassedToJinjaExpression)null);
+        setBasic_value((EValuePassedToJinjaExpression)null);
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         setParenthesised_term((EOrExpression)null);
@@ -261,7 +261,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
     switch (featureID)
     {
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__BASIC_VALUE:
-        return basic_Value != null;
+        return basic_value != null;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         return parenthesised_term != null;
     }

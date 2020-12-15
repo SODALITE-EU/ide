@@ -3306,14 +3306,14 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_1_0() { return cNameSTRINGTerminalRuleCall_1_0; }
 	}
-	public class EFilteredVariableOrStringElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EFilteredVariableOrString");
+	public class EJinjaExpressionOrStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionOrString");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEJinjaExpressionEvaluationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Assignment cStringAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cStringSTRINGTerminalRuleCall_1_0 = (RuleCall)cStringAssignment_1.eContents().get(0);
 		
-		//EFilteredVariableOrString:
+		//EJinjaExpressionOrString:
 		//	EJinjaExpressionEvaluation | string=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3329,20 +3329,39 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//STRING
 		public RuleCall getStringSTRINGTerminalRuleCall_1_0() { return cStringSTRINGTerminalRuleCall_1_0; }
 	}
-	public class EValuePassedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
-		private final Assignment cVariable_and_stringAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cVariable_and_stringEFilteredVariableOrStringParserRuleCall_0 = (RuleCall)cVariable_and_stringAssignment.eContents().get(0);
+	public class EJinjaExpressionAndStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+		private final Assignment cJinja_expression_and_stringAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0 = (RuleCall)cJinja_expression_and_stringAssignment.eContents().get(0);
 		
-		//EValuePassed:
-		//	variable_and_string+=EFilteredVariableOrString+;
+		//EJinjaExpressionAndString:
+		//	jinja_expression_and_string+=EJinjaExpressionOrString+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//variable_and_string+=EFilteredVariableOrString+
-		public Assignment getVariable_and_stringAssignment() { return cVariable_and_stringAssignment; }
+		//jinja_expression_and_string+=EJinjaExpressionOrString+
+		public Assignment getJinja_expression_and_stringAssignment() { return cJinja_expression_and_stringAssignment; }
 		
-		//EFilteredVariableOrString
-		public RuleCall getVariable_and_stringEFilteredVariableOrStringParserRuleCall_0() { return cVariable_and_stringEFilteredVariableOrStringParserRuleCall_0; }
+		//EJinjaExpressionOrString
+		public RuleCall getJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0() { return cJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0; }
+	}
+	public class EValuePassedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEJinjaExpressionAndStringParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEValueWithoutStringParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//EValuePassed:
+		//	EJinjaExpressionAndString | EValueWithoutString;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//EJinjaExpressionAndString | EValueWithoutString
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//EJinjaExpressionAndString
+		public RuleCall getEJinjaExpressionAndStringParserRuleCall_0() { return cEJinjaExpressionAndStringParserRuleCall_0; }
+		
+		//EValueWithoutString
+		public RuleCall getEValueWithoutStringParserRuleCall_1() { return cEValueWithoutStringParserRuleCall_1; }
 	}
 	public class EValuePassedToJinjaExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EValuePassedToJinjaExpression");
@@ -3375,18 +3394,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EFunctionCall
 		public RuleCall getEFunctionCallParserRuleCall_4() { return cEFunctionCallParserRuleCall_4; }
 	}
-	public class EValueElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EValue");
+	public class EComposedValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EComposedValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEDictionaryParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEListParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cESimpleValueParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//EValue:
-		//	EDictionary | EList | ESimpleValue;
+		//EComposedValue:
+		//	EDictionary | EList;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EDictionary | EList | ESimpleValue
+		//EDictionary | EList
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//EDictionary
@@ -3394,52 +3412,122 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//EList
 		public RuleCall getEListParserRuleCall_1() { return cEListParserRuleCall_1; }
+	}
+	public class EValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EValue");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEComposedValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cESimpleValueParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//EValue:
+		//	EComposedValue | ESimpleValue;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//EComposedValue | ESimpleValue
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//EComposedValue
+		public RuleCall getEComposedValueParserRuleCall_0() { return cEComposedValueParserRuleCall_0; }
 		
 		//ESimpleValue
-		public RuleCall getESimpleValueParserRuleCall_2() { return cESimpleValueParserRuleCall_2; }
+		public RuleCall getESimpleValueParserRuleCall_1() { return cESimpleValueParserRuleCall_1; }
+	}
+	public class EValueWithoutStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EValueWithoutString");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEComposedValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cESimpleValueWithoutStringParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//EValueWithoutString:
+		//	EComposedValue | ESimpleValueWithoutString;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//EComposedValue | ESimpleValueWithoutString
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//EComposedValue
+		public RuleCall getEComposedValueParserRuleCall_0() { return cEComposedValueParserRuleCall_0; }
+		
+		//ESimpleValueWithoutString
+		public RuleCall getESimpleValueWithoutStringParserRuleCall_1() { return cESimpleValueWithoutStringParserRuleCall_1; }
+	}
+	public class ESimpleValueWithoutStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ESimpleValueWithoutString");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cSimple_valueAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cSimple_valueBOOLEANTerminalRuleCall_0_0 = (RuleCall)cSimple_valueAssignment_0.eContents().get(0);
+		private final Assignment cSimple_valueAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cSimple_valueNULLTerminalRuleCall_1_0 = (RuleCall)cSimple_valueAssignment_1.eContents().get(0);
+		private final Assignment cSimple_valueAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cSimple_valueNUMBERTerminalRuleCall_2_0 = (RuleCall)cSimple_valueAssignment_2.eContents().get(0);
+		
+		//ESimpleValueWithoutString:
+		//	simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//simple_value=BOOLEAN
+		public Assignment getSimple_valueAssignment_0() { return cSimple_valueAssignment_0; }
+		
+		//BOOLEAN
+		public RuleCall getSimple_valueBOOLEANTerminalRuleCall_0_0() { return cSimple_valueBOOLEANTerminalRuleCall_0_0; }
+		
+		//simple_value=NULL
+		public Assignment getSimple_valueAssignment_1() { return cSimple_valueAssignment_1; }
+		
+		//NULL
+		public RuleCall getSimple_valueNULLTerminalRuleCall_1_0() { return cSimple_valueNULLTerminalRuleCall_1_0; }
+		
+		//simple_value=NUMBER
+		public Assignment getSimple_valueAssignment_2() { return cSimple_valueAssignment_2; }
+		
+		//NUMBER
+		public RuleCall getSimple_valueNUMBERTerminalRuleCall_2_0() { return cSimple_valueNUMBERTerminalRuleCall_2_0; }
 	}
 	public class ESimpleValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ESimpleValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment cValue_stringAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
-		private final RuleCall cValue_stringSTRINGTerminalRuleCall_0_0 = (RuleCall)cValue_stringAssignment_0.eContents().get(0);
-		private final Assignment cValue_stringAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cValue_stringBOOLEANTerminalRuleCall_1_0 = (RuleCall)cValue_stringAssignment_1.eContents().get(0);
-		private final Assignment cValue_stringAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
-		private final RuleCall cValue_stringNULLTerminalRuleCall_2_0 = (RuleCall)cValue_stringAssignment_2.eContents().get(0);
-		private final Assignment cValue_numberAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
-		private final RuleCall cValue_numberNUMBERTerminalRuleCall_3_0 = (RuleCall)cValue_numberAssignment_3.eContents().get(0);
+		private final Assignment cSimple_value_stringAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cSimple_value_stringSTRINGTerminalRuleCall_0_0 = (RuleCall)cSimple_value_stringAssignment_0.eContents().get(0);
+		private final Assignment cSimple_value_stringAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cSimple_value_stringBOOLEANTerminalRuleCall_1_0 = (RuleCall)cSimple_value_stringAssignment_1.eContents().get(0);
+		private final Assignment cSimple_value_stringAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cSimple_value_stringNULLTerminalRuleCall_2_0 = (RuleCall)cSimple_value_stringAssignment_2.eContents().get(0);
+		private final Assignment cSimple_value_stringAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
+		private final RuleCall cSimple_value_stringNUMBERTerminalRuleCall_3_0 = (RuleCall)cSimple_value_stringAssignment_3.eContents().get(0);
 		
 		//ESimpleValue:
-		//	value_string=STRING | value_string=BOOLEAN | value_string=NULL | value_number=NUMBER;
+		//	simple_value_string=STRING | simple_value_string=BOOLEAN | simple_value_string=NULL | simple_value_string=NUMBER;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//value_string=STRING | value_string=BOOLEAN | value_string=NULL | value_number=NUMBER
+		//simple_value_string=STRING | simple_value_string=BOOLEAN | simple_value_string=NULL | simple_value_string=NUMBER
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//value_string=STRING
-		public Assignment getValue_stringAssignment_0() { return cValue_stringAssignment_0; }
+		//simple_value_string=STRING
+		public Assignment getSimple_value_stringAssignment_0() { return cSimple_value_stringAssignment_0; }
 		
 		//STRING
-		public RuleCall getValue_stringSTRINGTerminalRuleCall_0_0() { return cValue_stringSTRINGTerminalRuleCall_0_0; }
+		public RuleCall getSimple_value_stringSTRINGTerminalRuleCall_0_0() { return cSimple_value_stringSTRINGTerminalRuleCall_0_0; }
 		
-		//value_string=BOOLEAN
-		public Assignment getValue_stringAssignment_1() { return cValue_stringAssignment_1; }
+		//simple_value_string=BOOLEAN
+		public Assignment getSimple_value_stringAssignment_1() { return cSimple_value_stringAssignment_1; }
 		
 		//BOOLEAN
-		public RuleCall getValue_stringBOOLEANTerminalRuleCall_1_0() { return cValue_stringBOOLEANTerminalRuleCall_1_0; }
+		public RuleCall getSimple_value_stringBOOLEANTerminalRuleCall_1_0() { return cSimple_value_stringBOOLEANTerminalRuleCall_1_0; }
 		
-		//value_string=NULL
-		public Assignment getValue_stringAssignment_2() { return cValue_stringAssignment_2; }
+		//simple_value_string=NULL
+		public Assignment getSimple_value_stringAssignment_2() { return cSimple_value_stringAssignment_2; }
 		
 		//NULL
-		public RuleCall getValue_stringNULLTerminalRuleCall_2_0() { return cValue_stringNULLTerminalRuleCall_2_0; }
+		public RuleCall getSimple_value_stringNULLTerminalRuleCall_2_0() { return cSimple_value_stringNULLTerminalRuleCall_2_0; }
 		
-		//value_number=NUMBER
-		public Assignment getValue_numberAssignment_3() { return cValue_numberAssignment_3; }
+		//simple_value_string=NUMBER
+		public Assignment getSimple_value_stringAssignment_3() { return cSimple_value_stringAssignment_3; }
 		
 		//NUMBER
-		public RuleCall getValue_numberNUMBERTerminalRuleCall_3_0() { return cValue_numberNUMBERTerminalRuleCall_3_0; }
+		public RuleCall getSimple_value_stringNUMBERTerminalRuleCall_3_0() { return cSimple_value_stringNUMBERTerminalRuleCall_3_0; }
 	}
 	public class EItemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EItem");
@@ -3907,8 +3995,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	public class EIsExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EIsExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cFiltered_expressionAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cFiltered_expressionEParenthesisedExpressionParserRuleCall_0_0 = (RuleCall)cFiltered_expressionAssignment_0.eContents().get(0);
+		private final Assignment cParenthesised_expressionAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cParenthesised_expressionEParenthesisedExpressionParserRuleCall_0_0 = (RuleCall)cParenthesised_expressionAssignment_0.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
 		private final Keyword cIsKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
@@ -3924,19 +4012,19 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final RuleCall cContainer_expressionEIsExpressionParserRuleCall_1_1_2_0 = (RuleCall)cContainer_expressionAssignment_1_1_2.eContents().get(0);
 		
 		//EIsExpression:
-		//	filtered_expression=EParenthesisedExpression ('is' is_not='not'? status=EIsExpression | is_not='not'? 'in'
+		//	parenthesised_expression=EParenthesisedExpression ('is' is_not='not'? status=EIsExpression | is_not='not'? 'in'
 		//	container_expression=EIsExpression)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//filtered_expression=EParenthesisedExpression ('is' is_not='not'? status=EIsExpression | is_not='not'? 'in'
+		//parenthesised_expression=EParenthesisedExpression ('is' is_not='not'? status=EIsExpression | is_not='not'? 'in'
 		//container_expression=EIsExpression)?
 		public Group getGroup() { return cGroup; }
 		
-		//filtered_expression=EParenthesisedExpression
-		public Assignment getFiltered_expressionAssignment_0() { return cFiltered_expressionAssignment_0; }
+		//parenthesised_expression=EParenthesisedExpression
+		public Assignment getParenthesised_expressionAssignment_0() { return cParenthesised_expressionAssignment_0; }
 		
 		//EParenthesisedExpression
-		public RuleCall getFiltered_expressionEParenthesisedExpressionParserRuleCall_0_0() { return cFiltered_expressionEParenthesisedExpressionParserRuleCall_0_0; }
+		public RuleCall getParenthesised_expressionEParenthesisedExpressionParserRuleCall_0_0() { return cParenthesised_expressionEParenthesisedExpressionParserRuleCall_0_0; }
 		
 		//('is' is_not='not'? status=EIsExpression | is_not='not'? 'in' container_expression=EIsExpression)?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
@@ -3980,8 +4068,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	public class EParenthesisedExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EParenthesisedExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment cBasic_ValueAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
-		private final RuleCall cBasic_ValueEValuePassedToJinjaExpressionParserRuleCall_0_0 = (RuleCall)cBasic_ValueAssignment_0.eContents().get(0);
+		private final Assignment cBasic_valueAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cBasic_valueEValuePassedToJinjaExpressionParserRuleCall_0_0 = (RuleCall)cBasic_valueAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cParenthesised_termAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -3989,17 +4077,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//EParenthesisedExpression:
-		//	basic_Value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')';
+		//	basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//basic_Value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')'
+		//basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//basic_Value=EValuePassedToJinjaExpression
-		public Assignment getBasic_ValueAssignment_0() { return cBasic_ValueAssignment_0; }
+		//basic_value=EValuePassedToJinjaExpression
+		public Assignment getBasic_valueAssignment_0() { return cBasic_valueAssignment_0; }
 		
 		//EValuePassedToJinjaExpression
-		public RuleCall getBasic_ValueEValuePassedToJinjaExpressionParserRuleCall_0_0() { return cBasic_ValueEValuePassedToJinjaExpressionParserRuleCall_0_0; }
+		public RuleCall getBasic_valueEValuePassedToJinjaExpressionParserRuleCall_0_0() { return cBasic_valueEValuePassedToJinjaExpressionParserRuleCall_0_0; }
 		
 		//'(' parenthesised_term=EOrExpression ')'
 		public Group getGroup_1() { return cGroup_1; }
@@ -4374,10 +4462,14 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final ENotifiableElements pENotifiable;
 	private final ENotifiedHandlerElements pENotifiedHandler;
 	private final ENotifiedTopicElements pENotifiedTopic;
-	private final EFilteredVariableOrStringElements pEFilteredVariableOrString;
+	private final EJinjaExpressionOrStringElements pEJinjaExpressionOrString;
+	private final EJinjaExpressionAndStringElements pEJinjaExpressionAndString;
 	private final EValuePassedElements pEValuePassed;
 	private final EValuePassedToJinjaExpressionElements pEValuePassedToJinjaExpression;
+	private final EComposedValueElements pEComposedValue;
 	private final EValueElements pEValue;
+	private final EValueWithoutStringElements pEValueWithoutString;
+	private final ESimpleValueWithoutStringElements pESimpleValueWithoutString;
 	private final ESimpleValueElements pESimpleValue;
 	private final EItemElements pEItem;
 	private final EDeclaredVariableReferenceElements pEDeclaredVariableReference;
@@ -4447,10 +4539,14 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pENotifiable = new ENotifiableElements();
 		this.pENotifiedHandler = new ENotifiedHandlerElements();
 		this.pENotifiedTopic = new ENotifiedTopicElements();
-		this.pEFilteredVariableOrString = new EFilteredVariableOrStringElements();
+		this.pEJinjaExpressionOrString = new EJinjaExpressionOrStringElements();
+		this.pEJinjaExpressionAndString = new EJinjaExpressionAndStringElements();
 		this.pEValuePassed = new EValuePassedElements();
 		this.pEValuePassedToJinjaExpression = new EValuePassedToJinjaExpressionElements();
+		this.pEComposedValue = new EComposedValueElements();
 		this.pEValue = new EValueElements();
+		this.pEValueWithoutString = new EValueWithoutStringElements();
+		this.pESimpleValueWithoutString = new ESimpleValueWithoutStringElements();
 		this.pESimpleValue = new ESimpleValueElements();
 		this.pEItem = new EItemElements();
 		this.pEDeclaredVariableReference = new EDeclaredVariableReferenceElements();
@@ -4967,18 +5063,28 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		return getENotifiedTopicAccess().getRule();
 	}
 	
-	//EFilteredVariableOrString:
+	//EJinjaExpressionOrString:
 	//	EJinjaExpressionEvaluation | string=STRING;
-	public EFilteredVariableOrStringElements getEFilteredVariableOrStringAccess() {
-		return pEFilteredVariableOrString;
+	public EJinjaExpressionOrStringElements getEJinjaExpressionOrStringAccess() {
+		return pEJinjaExpressionOrString;
 	}
 	
-	public ParserRule getEFilteredVariableOrStringRule() {
-		return getEFilteredVariableOrStringAccess().getRule();
+	public ParserRule getEJinjaExpressionOrStringRule() {
+		return getEJinjaExpressionOrStringAccess().getRule();
+	}
+	
+	//EJinjaExpressionAndString:
+	//	jinja_expression_and_string+=EJinjaExpressionOrString+;
+	public EJinjaExpressionAndStringElements getEJinjaExpressionAndStringAccess() {
+		return pEJinjaExpressionAndString;
+	}
+	
+	public ParserRule getEJinjaExpressionAndStringRule() {
+		return getEJinjaExpressionAndStringAccess().getRule();
 	}
 	
 	//EValuePassed:
-	//	variable_and_string+=EFilteredVariableOrString+;
+	//	EJinjaExpressionAndString | EValueWithoutString;
 	public EValuePassedElements getEValuePassedAccess() {
 		return pEValuePassed;
 	}
@@ -4997,8 +5103,18 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		return getEValuePassedToJinjaExpressionAccess().getRule();
 	}
 	
+	//EComposedValue:
+	//	EDictionary | EList;
+	public EComposedValueElements getEComposedValueAccess() {
+		return pEComposedValue;
+	}
+	
+	public ParserRule getEComposedValueRule() {
+		return getEComposedValueAccess().getRule();
+	}
+	
 	//EValue:
-	//	EDictionary | EList | ESimpleValue;
+	//	EComposedValue | ESimpleValue;
 	public EValueElements getEValueAccess() {
 		return pEValue;
 	}
@@ -5007,8 +5123,28 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		return getEValueAccess().getRule();
 	}
 	
+	//EValueWithoutString:
+	//	EComposedValue | ESimpleValueWithoutString;
+	public EValueWithoutStringElements getEValueWithoutStringAccess() {
+		return pEValueWithoutString;
+	}
+	
+	public ParserRule getEValueWithoutStringRule() {
+		return getEValueWithoutStringAccess().getRule();
+	}
+	
+	//ESimpleValueWithoutString:
+	//	simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER;
+	public ESimpleValueWithoutStringElements getESimpleValueWithoutStringAccess() {
+		return pESimpleValueWithoutString;
+	}
+	
+	public ParserRule getESimpleValueWithoutStringRule() {
+		return getESimpleValueWithoutStringAccess().getRule();
+	}
+	
 	//ESimpleValue:
-	//	value_string=STRING | value_string=BOOLEAN | value_string=NULL | value_number=NUMBER;
+	//	simple_value_string=STRING | simple_value_string=BOOLEAN | simple_value_string=NULL | simple_value_string=NUMBER;
 	public ESimpleValueElements getESimpleValueAccess() {
 		return pESimpleValue;
 	}
@@ -5119,7 +5255,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EIsExpression:
-	//	filtered_expression=EParenthesisedExpression ('is' is_not='not'? status=EIsExpression | is_not='not'? 'in'
+	//	parenthesised_expression=EParenthesisedExpression ('is' is_not='not'? status=EIsExpression | is_not='not'? 'in'
 	//	container_expression=EIsExpression)?;
 	public EIsExpressionElements getEIsExpressionAccess() {
 		return pEIsExpression;
@@ -5130,7 +5266,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EParenthesisedExpression:
-	//	basic_Value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')';
+	//	basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')';
 	public EParenthesisedExpressionElements getEParenthesisedExpressionAccess() {
 		return pEParenthesisedExpression;
 	}

@@ -20,7 +20,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EList extends EValue
+public interface EList extends EComposedValue
 {
   /**
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.

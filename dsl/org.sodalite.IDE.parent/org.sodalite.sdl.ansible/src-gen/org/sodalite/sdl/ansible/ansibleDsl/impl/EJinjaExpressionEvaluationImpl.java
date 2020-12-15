@@ -28,7 +28,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrac
  *
  * @generated
  */
-public class EJinjaExpressionEvaluationImpl extends EFilteredVariableOrStringImpl implements EJinjaExpressionEvaluation
+public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl implements EJinjaExpressionEvaluation
 {
   /**
    * The cached value of the '{@link #getJinja_expression() <em>Jinja expression</em>}' containment reference.

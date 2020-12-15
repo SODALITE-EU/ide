@@ -13,8 +13,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_string <em>Value string</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_number <em>Value number</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getSimple_value_string <em>Simple value string</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValue()
@@ -24,47 +23,25 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 public interface ESimpleValue extends EValue
 {
   /**
-   * Returns the value of the '<em><b>Value string</b></em>' attribute.
+   * Returns the value of the '<em><b>Simple value string</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Value string</em>' attribute.
-   * @see #setValue_string(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValue_Value_string()
+   * @return the value of the '<em>Simple value string</em>' attribute.
+   * @see #setSimple_value_string(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValue_Simple_value_string()
    * @model
    * @generated
    */
-  String getValue_string();
+  String getSimple_value_string();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_string <em>Value string</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getSimple_value_string <em>Simple value string</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value string</em>' attribute.
-   * @see #getValue_string()
+   * @param value the new value of the '<em>Simple value string</em>' attribute.
+   * @see #getSimple_value_string()
    * @generated
    */
-  void setValue_string(String value);
-
-  /**
-   * Returns the value of the '<em><b>Value number</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Value number</em>' attribute.
-   * @see #setValue_number(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValue_Value_number()
-   * @model
-   * @generated
-   */
-  String getValue_number();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue#getValue_number <em>Value number</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value number</em>' attribute.
-   * @see #getValue_number()
-   * @generated
-   */
-  void setValue_number(String value);
+  void setSimple_value_string(String value);
 
 } // ESimpleValue

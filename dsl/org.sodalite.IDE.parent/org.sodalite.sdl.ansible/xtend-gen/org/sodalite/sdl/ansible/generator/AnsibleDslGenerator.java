@@ -1018,6 +1018,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       + "\nEFilteredVariablesAndString cannot be resolved to a type."
       + "\nEFilteredVariable cannot be resolved to a type."
       + "\nThe method or field variable_and_string is undefined for the type EValue"
+      + "\nThe method or field value_string is undefined for the type ESimpleValue"
+      + "\nThe method or field value_string is undefined for the type ESimpleValue"
       + "\nThe method or field value_int is undefined for the type ESimpleValue"
       + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
       + "\nvariable_reference_or_string cannot be resolved"
@@ -1035,7 +1037,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       + "\nindex cannot be resolved"
       + "\ntoString cannot be resolved"
       + "\nstring cannot be resolved"
-      + "\nstring cannot be resolved");
+      + "\nstring cannot be resolved"
+      + "\n!== cannot be resolved");
   }
   
   public String compileLoopList(final EValuePassed loopList) {
@@ -1048,6 +1051,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       + "\nEFilteredVariablesAndString cannot be resolved to a type."
       + "\nEFilteredVariable cannot be resolved to a type."
       + "\nThe method or field variable_and_string is undefined for the type EValue"
+      + "\nThe method or field value_string is undefined for the type ESimpleValue"
+      + "\nThe method or field value_string is undefined for the type ESimpleValue"
       + "\nThe method or field value_int is undefined for the type ESimpleValue"
       + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
       + "\nvariable_reference_or_string cannot be resolved"
@@ -1065,7 +1070,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       + "\nindex cannot be resolved"
       + "\ntoString cannot be resolved"
       + "\nstring cannot be resolved"
-      + "\nstring cannot be resolved");
+      + "\nstring cannot be resolved"
+      + "\n!== cannot be resolved");
   }
   
   public String compileVariableDeclarations(final EBase base) {

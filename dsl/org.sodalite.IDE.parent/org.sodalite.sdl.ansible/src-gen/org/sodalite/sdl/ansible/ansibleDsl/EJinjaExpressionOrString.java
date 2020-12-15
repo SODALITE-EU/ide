@@ -7,21 +7,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>EFiltered Variable Or String</b></em>'.
+ * A representation of the model object '<em><b>EJinja Expression Or String</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString#getString <em>String</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString#getString <em>String</em>}</li>
  * </ul>
  *
- * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFilteredVariableOrString()
+ * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEJinjaExpressionOrString()
  * @model
  * @generated
  */
-public interface EFilteredVariableOrString extends EObject
+public interface EJinjaExpressionOrString extends EObject
 {
   /**
    * Returns the value of the '<em><b>String</b></em>' attribute.
@@ -29,14 +29,14 @@ public interface EFilteredVariableOrString extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>String</em>' attribute.
    * @see #setString(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFilteredVariableOrString_String()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEJinjaExpressionOrString_String()
    * @model
    * @generated
    */
   String getString();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariableOrString#getString <em>String</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString#getString <em>String</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>String</em>' attribute.
@@ -45,4 +45,4 @@ public interface EFilteredVariableOrString extends EObject
    */
   void setString(String value);
 
-} // EFilteredVariableOrString
+} // EJinjaExpressionOrString

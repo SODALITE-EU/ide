@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getBasic_Value <em>Basic Value</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getBasic_value <em>Basic value</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getParenthesised_term <em>Parenthesised term</em>}</li>
  * </ul>
  *
@@ -25,26 +25,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface EParenthesisedExpression extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Basic Value</b></em>' containment reference.
+   * Returns the value of the '<em><b>Basic value</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Basic Value</em>' containment reference.
-   * @see #setBasic_Value(EValuePassedToJinjaExpression)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEParenthesisedExpression_Basic_Value()
+   * @return the value of the '<em>Basic value</em>' containment reference.
+   * @see #setBasic_value(EValuePassedToJinjaExpression)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEParenthesisedExpression_Basic_value()
    * @model containment="true"
    * @generated
    */
-  EValuePassedToJinjaExpression getBasic_Value();
+  EValuePassedToJinjaExpression getBasic_value();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getBasic_Value <em>Basic Value</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getBasic_value <em>Basic value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Basic Value</em>' containment reference.
-   * @see #getBasic_Value()
+   * @param value the new value of the '<em>Basic value</em>' containment reference.
+   * @see #getBasic_value()
    * @generated
    */
-  void setBasic_Value(EValuePassedToJinjaExpression value);
+  void setBasic_value(EValuePassedToJinjaExpression value);
 
   /**
    * Returns the value of the '<em><b>Parenthesised term</b></em>' containment reference.
