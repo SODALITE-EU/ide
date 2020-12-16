@@ -63,6 +63,11 @@ import org.sodalite.dsl.rM.EPropertyAssignment
 import org.sodalite.dsl.rM.ELIST
 import org.sodalite.dsl.rM.EMAP
 import org.sodalite.dsl.rM.GetInput
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAND
+import org.sodalite.dsl.rM.EConditionClauseDefinitionOR
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
+import org.sodalite.dsl.rM.EAssertionDefinition
 
 /**
  * Generates code from your model files on save.
@@ -578,8 +583,70 @@ class RMGenerator extends AbstractGenerator {
 	.	
 	'''
 	
-	def compile(EConditionClauseDefinition ccd, String name) '''
-		//TODO
+	def compile(EConditionClauseDefinition ccd) '''
+	«IF ccd instanceof EConditionClauseDefinitionNOT»
+	«(ccd as EConditionClauseDefinitionNOT).not.compile()»
+	«ELSEIF ccd instanceof EConditionClauseDefinitionAND»
+	«(ccd as EConditionClauseDefinitionAND).and.compile()»
+	«ELSEIF ccd instanceof EConditionClauseDefinitionOR»
+	«(ccd as EConditionClauseDefinitionOR).or.compile()»
+	«ELSEIF ccd instanceof EConditionClauseDefinitionAssert»
+	«FOR assertion:ccd.assertions»
+	«assertion.compile()»
+	«ENDFOR»
+	«ENDIF»
+	
+	«IF getName(ccd) !== null»
+	«putParameterNumber(ccd, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«getName(ccd)»" ;
+	  «IF getChild(ccd) instanceof EConditionClauseDefinitionAssert»
+	  «FOR assertion:(getChild(ccd) as EConditionClauseDefinitionAssert).assertions»
+	  exchange:hasParameter :Parameter_«getParameterNumber(assertion, "name")» ;
+	  «ENDFOR»
+	  «ELSE»
+	  exchange:hasParameter :Parameter_«getParameterNumber(getChild(ccd), "name")» ;
+	  «ENDIF»
+	.
+	«ENDIF»
+	'''
+	
+	def getName (EConditionClauseDefinition ccd){
+		if (ccd instanceof EConditionClauseDefinitionNOT)
+			return "not"
+		else if (ccd instanceof EConditionClauseDefinitionAND)
+			return "and"
+		else if (ccd instanceof EConditionClauseDefinitionOR)
+			return "or"
+		else
+			return null
+	}
+	
+	def getChild (EConditionClauseDefinition ccd){
+		if (ccd instanceof EConditionClauseDefinitionNOT)
+			return (ccd as EConditionClauseDefinitionNOT).not
+		else if (ccd instanceof EConditionClauseDefinitionAND)
+			return (ccd as EConditionClauseDefinitionAND).and
+		else if (ccd instanceof EConditionClauseDefinitionOR)
+			return (ccd as EConditionClauseDefinitionOR).or
+		else
+			return null
+	}
+	
+	def compile(EAssertionDefinition ad) '''
+	«FOR constraint:ad.constraints.list»
+	  «constraint.compile()»
+	«ENDFOR»
+	
+	«putParameterNumber(ad, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«ad.attribute_name»" ;
+	  «FOR constraint:ad.constraints.list»
+	  exchange:hasParameter :Parameter_«getParameterNumber(constraint, "name")» ;
+	  «ENDFOR»
+	.
 	'''
 	
 	def compile(EActivityDefinition ad, String name) '''
@@ -595,6 +662,7 @@ class RMGenerator extends AbstractGenerator {
 	  «IF ad instanceof ECallOperationActivityDefinition»
 	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "call_operation")» ;
 	  «ENDIF»
+	.
 	'''
 	
 	def compile(ECallOperationActivityDefinition ad) '''
@@ -603,7 +671,8 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "operation" ;
 	  exchange:value '«trim(ad.operation.name.compile())»' ;
-	  
+	.
+	
 	«putParameterNumber(ad, "inputs", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
@@ -611,6 +680,7 @@ class RMGenerator extends AbstractGenerator {
 	  «FOR i:ad.operation.inputs.properties»
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "name")» ;
 	  «ENDFOR»
+	.
 	
 	«putParameterNumber(ad, "call_operation", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -620,6 +690,7 @@ class RMGenerator extends AbstractGenerator {
 	  «IF ad instanceof ECallOperationActivityDefinition»
 	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "inputs")» ;
 	  «ENDIF»
+	.
 	'''
 	
 	def compile(EEvenFilter ef, String name) '''
@@ -1063,13 +1134,23 @@ class RMGenerator extends AbstractGenerator {
 	  «IF t.trigger.target_filter !== null»
 	«t.trigger.target_filter.compile("target_filter")»
 	  «ENDIF»
+	  
 	  «IF t.trigger.condition !== null»
-	«t.trigger.condition.compile("condition")»
-	 «ENDIF»
+	«t.trigger.condition.compile()»  
+	
+	«putParameterNumber(t, "condition", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "condition" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.condition, "name")»
+	.
+	  «ENDIF»
+	
 	  «IF t.trigger.action !== null»
 	«t.trigger.action.compile("action")»
 	  «ENDIF»
 	
+	«trigger_numbers.put(t, trigger_counter)»
 	:Trigger_«trigger_counter++»
 	  rdf:type exchange:Trigger ;
 	  exchange:name "«t.name»" ;
@@ -1081,7 +1162,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.target_filter, "name")» ;
 	  «ENDIF»
 	  «IF t.trigger.condition !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.condition, "name")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(t, "condition")» ;
 	  «ENDIF»
 	  «IF t.trigger.action !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.action, "name")» ;
