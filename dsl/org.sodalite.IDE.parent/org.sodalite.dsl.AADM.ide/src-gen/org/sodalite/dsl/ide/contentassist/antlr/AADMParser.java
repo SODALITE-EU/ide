@@ -287,7 +287,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEAttributeAssignmentAccess().getValueAssignment_2(), "rule__EAttributeAssignment__ValueAssignment_2");
 			builder.put(grammarAccess.getEPoliciesAccess().getPoliciesAssignment_1(), "rule__EPolicies__PoliciesAssignment_1");
 			builder.put(grammarAccess.getEPolicyDefinitionAccess().getNameAssignment_0(), "rule__EPolicyDefinition__NameAssignment_0");
-			builder.put(grammarAccess.getEPolicyDefinitionAccess().getNodeAssignment_3(), "rule__EPolicyDefinition__NodeAssignment_3");
+			builder.put(grammarAccess.getEPolicyDefinitionAccess().getPolicyAssignment_3(), "rule__EPolicyDefinition__PolicyAssignment_3");
 			builder.put(grammarAccess.getEPolicyDefinitionBodyAccess().getTypeAssignment_0_1(), "rule__EPolicyDefinitionBody__TypeAssignment_0_1");
 			builder.put(grammarAccess.getEPolicyDefinitionBodyAccess().getDescriptionAssignment_1_1(), "rule__EPolicyDefinitionBody__DescriptionAssignment_1_1");
 			builder.put(grammarAccess.getEPolicyDefinitionBodyAccess().getPropertiesAssignment_2_2(), "rule__EPolicyDefinitionBody__PropertiesAssignment_2_2");

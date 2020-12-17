@@ -679,9 +679,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "inputs" ;
+	  «IF ad.operation.inputs !== null»
 	  «FOR i:ad.operation.inputs.properties»
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "name")» ;
 	  «ENDFOR»
+	  «ENDIF»
 	.
 	
 	«putParameterNumber(ad, "call_operation", parameter_counter)»

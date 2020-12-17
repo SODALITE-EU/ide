@@ -73,6 +73,7 @@ import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EPolicyType;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.EPropertyAssignment;
+import org.sodalite.dsl.rM.EPropertyAssignments;
 import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.ERelationshipType;
 import org.sodalite.dsl.rM.ERequirementDefinition;
@@ -1775,14 +1776,20 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"inputs\" ;");
     _builder.newLine();
     {
-      EList<EPropertyAssignment> _properties = ad.getOperation().getInputs().getProperties();
-      for(final EPropertyAssignment i : _properties) {
-        _builder.append("  ");
-        _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber = this.getParameterNumber(i, "name");
-        _builder.append(_parameterNumber, "  ");
-        _builder.append(" ;");
-        _builder.newLineIfNotEmpty();
+      EPropertyAssignments _inputs = ad.getOperation().getInputs();
+      boolean _tripleNotEquals = (_inputs != null);
+      if (_tripleNotEquals) {
+        {
+          EList<EPropertyAssignment> _properties = ad.getOperation().getInputs().getProperties();
+          for(final EPropertyAssignment i : _properties) {
+            _builder.append("  ");
+            _builder.append("exchange:hasParameter :Parameter_");
+            Integer _parameterNumber = this.getParameterNumber(i, "name");
+            _builder.append(_parameterNumber, "  ");
+            _builder.append(" ;");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     _builder.append(".");

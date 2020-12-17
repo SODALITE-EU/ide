@@ -99,7 +99,7 @@ EPolicies:
 EPolicyDefinition:
 	name = ID ':'
 	BEGIN
-		node=EPolicyDefinitionBody
+		policy=EPolicyDefinitionBody
 	END
 ;
 

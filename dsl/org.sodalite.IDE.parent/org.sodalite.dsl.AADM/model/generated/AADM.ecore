@@ -68,7 +68,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPolicyDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//EPolicyDefinitionBody"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="policy" eType="#//EPolicyDefinitionBody"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPolicyDefinitionBody">

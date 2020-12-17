@@ -55,7 +55,7 @@
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//EPolicyDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//EPolicyDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPolicyDefinition/node"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPolicyDefinition/policy"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//EPolicyDefinitionBody">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPolicyDefinitionBody/type"/>

@@ -17356,31 +17356,31 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPolicyDefinition__Group__3__Impl"
-    // InternalAADMParser.g:5660:1: rule__EPolicyDefinition__Group__3__Impl : ( ( rule__EPolicyDefinition__NodeAssignment_3 ) ) ;
+    // InternalAADMParser.g:5660:1: rule__EPolicyDefinition__Group__3__Impl : ( ( rule__EPolicyDefinition__PolicyAssignment_3 ) ) ;
     public final void rule__EPolicyDefinition__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:5664:1: ( ( ( rule__EPolicyDefinition__NodeAssignment_3 ) ) )
-            // InternalAADMParser.g:5665:1: ( ( rule__EPolicyDefinition__NodeAssignment_3 ) )
+            // InternalAADMParser.g:5664:1: ( ( ( rule__EPolicyDefinition__PolicyAssignment_3 ) ) )
+            // InternalAADMParser.g:5665:1: ( ( rule__EPolicyDefinition__PolicyAssignment_3 ) )
             {
-            // InternalAADMParser.g:5665:1: ( ( rule__EPolicyDefinition__NodeAssignment_3 ) )
-            // InternalAADMParser.g:5666:2: ( rule__EPolicyDefinition__NodeAssignment_3 )
+            // InternalAADMParser.g:5665:1: ( ( rule__EPolicyDefinition__PolicyAssignment_3 ) )
+            // InternalAADMParser.g:5666:2: ( rule__EPolicyDefinition__PolicyAssignment_3 )
             {
-             before(grammarAccess.getEPolicyDefinitionAccess().getNodeAssignment_3()); 
-            // InternalAADMParser.g:5667:2: ( rule__EPolicyDefinition__NodeAssignment_3 )
-            // InternalAADMParser.g:5667:3: rule__EPolicyDefinition__NodeAssignment_3
+             before(grammarAccess.getEPolicyDefinitionAccess().getPolicyAssignment_3()); 
+            // InternalAADMParser.g:5667:2: ( rule__EPolicyDefinition__PolicyAssignment_3 )
+            // InternalAADMParser.g:5667:3: rule__EPolicyDefinition__PolicyAssignment_3
             {
             pushFollow(FOLLOW_2);
-            rule__EPolicyDefinition__NodeAssignment_3();
+            rule__EPolicyDefinition__PolicyAssignment_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEPolicyDefinitionAccess().getNodeAssignment_3()); 
+             after(grammarAccess.getEPolicyDefinitionAccess().getPolicyAssignment_3()); 
 
             }
 
@@ -72309,9 +72309,9 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__EPolicyDefinition__NameAssignment_0"
 
 
-    // $ANTLR start "rule__EPolicyDefinition__NodeAssignment_3"
-    // InternalAADMParser.g:23517:1: rule__EPolicyDefinition__NodeAssignment_3 : ( ruleEPolicyDefinitionBody ) ;
-    public final void rule__EPolicyDefinition__NodeAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__EPolicyDefinition__PolicyAssignment_3"
+    // InternalAADMParser.g:23517:1: rule__EPolicyDefinition__PolicyAssignment_3 : ( ruleEPolicyDefinitionBody ) ;
+    public final void rule__EPolicyDefinition__PolicyAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -72322,13 +72322,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:23522:2: ( ruleEPolicyDefinitionBody )
             // InternalAADMParser.g:23523:3: ruleEPolicyDefinitionBody
             {
-             before(grammarAccess.getEPolicyDefinitionAccess().getNodeEPolicyDefinitionBodyParserRuleCall_3_0()); 
+             before(grammarAccess.getEPolicyDefinitionAccess().getPolicyEPolicyDefinitionBodyParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
             ruleEPolicyDefinitionBody();
 
             state._fsp--;
 
-             after(grammarAccess.getEPolicyDefinitionAccess().getNodeEPolicyDefinitionBodyParserRuleCall_3_0()); 
+             after(grammarAccess.getEPolicyDefinitionAccess().getPolicyEPolicyDefinitionBodyParserRuleCall_3_0()); 
 
             }
 
@@ -72347,7 +72347,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EPolicyDefinition__NodeAssignment_3"
+    // $ANTLR end "rule__EPolicyDefinition__PolicyAssignment_3"
 
 
     // $ANTLR start "rule__EPolicyDefinitionBody__TypeAssignment_0_1"

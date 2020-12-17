@@ -5663,9 +5663,9 @@ rule__EPolicyDefinition__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEPolicyDefinitionAccess().getNodeAssignment_3()); }
-	(rule__EPolicyDefinition__NodeAssignment_3)
-	{ after(grammarAccess.getEPolicyDefinitionAccess().getNodeAssignment_3()); }
+	{ before(grammarAccess.getEPolicyDefinitionAccess().getPolicyAssignment_3()); }
+	(rule__EPolicyDefinition__PolicyAssignment_3)
+	{ after(grammarAccess.getEPolicyDefinitionAccess().getPolicyAssignment_3()); }
 )
 ;
 finally {
@@ -23514,15 +23514,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__EPolicyDefinition__NodeAssignment_3
+rule__EPolicyDefinition__PolicyAssignment_3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getEPolicyDefinitionAccess().getNodeEPolicyDefinitionBodyParserRuleCall_3_0()); }
+		{ before(grammarAccess.getEPolicyDefinitionAccess().getPolicyEPolicyDefinitionBodyParserRuleCall_3_0()); }
 		ruleEPolicyDefinitionBody
-		{ after(grammarAccess.getEPolicyDefinitionAccess().getNodeEPolicyDefinitionBodyParserRuleCall_3_0()); }
+		{ after(grammarAccess.getEPolicyDefinitionAccess().getPolicyEPolicyDefinitionBodyParserRuleCall_3_0()); }
 	)
 ;
 finally {
