@@ -3,6 +3,7 @@
  */
 package org.sodalite.sdl.ansible.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
@@ -13,31 +14,64 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
+import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
+import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
+import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
+import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EItem;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
+import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
+import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
+import org.sodalite.sdl.ansible.ansibleDsl.EOperation;
+import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
+import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
+import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
+import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 
 /**
@@ -536,7 +570,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       String _throttle = playExeSettings.getThrottle();
-      boolean _tripleNotEquals_3 = (_throttle != Integer.valueOf(0));
+      boolean _tripleNotEquals_3 = (_throttle != null);
       if (_tripleNotEquals_3) {
         _builder.append(space);
         _builder.append("throttle: ");
@@ -563,7 +597,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     {
       String _max_fail_percentage = playErrorHandling.getMax_fail_percentage();
-      boolean _tripleNotEquals = (_max_fail_percentage != Integer.valueOf(0));
+      boolean _tripleNotEquals = (_max_fail_percentage != null);
       if (_tripleNotEquals) {
         _builder.append(space);
         _builder.append("max_fail_percentage: ");
@@ -634,7 +668,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       String _gather_timeout = factsSettings.getGather_timeout();
-      boolean _tripleNotEquals_2 = (_gather_timeout != Integer.valueOf(0));
+      boolean _tripleNotEquals_2 = (_gather_timeout != null);
       if (_tripleNotEquals_2) {
         _builder.append(space);
         _builder.append("gather_timeout: ");
@@ -799,8 +833,75 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public CharSequence compileExecutionCommonKeywords(final EExecution execution, final String space) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method compileConditionalExpression(EConditionalExpression) from the type AnsibleDslGenerator refers to the missing type Object");
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EExecutionExeSettings _exe_settings = execution.getExe_settings();
+      boolean _tripleNotEquals = (_exe_settings != null);
+      if (_tripleNotEquals) {
+        {
+          String _throttle = execution.getExe_settings().getThrottle();
+          boolean _notEquals = (!Objects.equal(_throttle, Integer.valueOf(0)));
+          if (_notEquals) {
+            _builder.append(space);
+            _builder.append("throttle: ");
+            String _throttle_1 = execution.getExe_settings().getThrottle();
+            _builder.append(_throttle_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _run_once = execution.getExe_settings().getRun_once();
+          boolean _tripleNotEquals_1 = (_run_once != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(space);
+            _builder.append("run_once: ");
+            String _run_once_1 = execution.getExe_settings().getRun_once();
+            _builder.append(_run_once_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      EDelegation _delegation = execution.getDelegation();
+      boolean _tripleNotEquals_2 = (_delegation != null);
+      if (_tripleNotEquals_2) {
+        {
+          String _delegate_to = execution.getDelegation().getDelegate_to();
+          boolean _tripleNotEquals_3 = (_delegate_to != null);
+          if (_tripleNotEquals_3) {
+            _builder.append(space);
+            _builder.append("delegate_to: ");
+            String _delegate_to_1 = execution.getDelegation().getDelegate_to();
+            _builder.append(_delegate_to_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _delegate_facts = execution.getDelegation().getDelegate_facts();
+          boolean _tripleNotEquals_4 = (_delegate_facts != null);
+          if (_tripleNotEquals_4) {
+            _builder.append(space);
+            _builder.append("delegate_facts: ");
+            String _delegate_facts_1 = execution.getDelegation().getDelegate_facts();
+            _builder.append(_delegate_facts_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      EJinjaExpressionEvaluationWithoutBrackets _when_expression = execution.getWhen_expression();
+      boolean _tripleNotEquals_5 = (_when_expression != null);
+      if (_tripleNotEquals_5) {
+        _builder.append(space);
+        _builder.append("when: ");
+        String _compileJinjaExpressionEvaluationWithoutBrackets = this.compileJinjaExpressionEvaluationWithoutBrackets(execution.getWhen_expression());
+        _builder.append(_compileJinjaExpressionEvaluationWithoutBrackets);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
   }
   
   public CharSequence compileTaskHandler(final ETaskHandler taskHandler, final String space) {
@@ -832,7 +933,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                 String _name_3 = parameter.getName();
                 _builder.append(_name_3);
                 _builder.append(": ");
-                String _compileValuePassed = this.compileValuePassed(parameter.getValue_passed());
+                Object _compileValuePassed = this.compileValuePassed(parameter.getValue_passed());
                 _builder.append(_compileValuePassed);
                 _builder.newLineIfNotEmpty();
               }
@@ -858,7 +959,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                 String _name_5 = parameter_1.getName();
                 _builder.append(_name_5);
                 _builder.append(": ");
-                String _compileValuePassed_1 = this.compileValuePassed(parameter_1.getValue_passed());
+                Object _compileValuePassed_1 = this.compileValuePassed(parameter_1.getValue_passed());
                 _builder.append(_compileValuePassed_1);
                 _builder.newLineIfNotEmpty();
               }
@@ -896,10 +997,274 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public CharSequence compileTaskHandlerCommonKeywords(final ETaskHandler taskHandler, final String space) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method compileConditionalExpression(EConditionalExpression) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\nThe method compileConditionalExpression(EConditionalExpression) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\nThe method compileConditionalExpression(EConditionalExpression) from the type AnsibleDslGenerator refers to the missing type Object");
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      ETaskHandlerErrorHandling _error_handling = taskHandler.getError_handling();
+      boolean _tripleNotEquals = (_error_handling != null);
+      if (_tripleNotEquals) {
+        {
+          EJinjaExpressionEvaluationWithoutBrackets _changed_when = taskHandler.getError_handling().getChanged_when();
+          boolean _tripleNotEquals_1 = (_changed_when != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(space);
+            _builder.append("change_when: ");
+            String _compileJinjaExpressionEvaluationWithoutBrackets = this.compileJinjaExpressionEvaluationWithoutBrackets(taskHandler.getError_handling().getChanged_when());
+            _builder.append(_compileJinjaExpressionEvaluationWithoutBrackets);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EJinjaExpressionEvaluationWithoutBrackets _failed_when = taskHandler.getError_handling().getFailed_when();
+          boolean _tripleNotEquals_2 = (_failed_when != null);
+          if (_tripleNotEquals_2) {
+            _builder.append(space);
+            _builder.append("failed_when: ");
+            String _compileJinjaExpressionEvaluationWithoutBrackets_1 = this.compileJinjaExpressionEvaluationWithoutBrackets(taskHandler.getError_handling().getFailed_when());
+            _builder.append(_compileJinjaExpressionEvaluationWithoutBrackets_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _any_errors_fatal = taskHandler.getError_handling().getAny_errors_fatal();
+          boolean _tripleNotEquals_3 = (_any_errors_fatal != null);
+          if (_tripleNotEquals_3) {
+            _builder.append(space);
+            _builder.append("any_errors_fatal: ");
+            String _any_errors_fatal_1 = taskHandler.getError_handling().getAny_errors_fatal();
+            _builder.append(_any_errors_fatal_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _ignore_errors = taskHandler.getError_handling().getIgnore_errors();
+          boolean _tripleNotEquals_4 = (_ignore_errors != null);
+          if (_tripleNotEquals_4) {
+            _builder.append(space);
+            _builder.append("ignore_errors: ");
+            String _ignore_errors_1 = taskHandler.getError_handling().getIgnore_errors();
+            _builder.append(_ignore_errors_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _ignore_unreachable = taskHandler.getError_handling().getIgnore_unreachable();
+          boolean _tripleNotEquals_5 = (_ignore_unreachable != null);
+          if (_tripleNotEquals_5) {
+            _builder.append(space);
+            _builder.append("ignore_unreachable: ");
+            String _ignore_unreachable_1 = taskHandler.getError_handling().getIgnore_unreachable();
+            _builder.append(_ignore_unreachable_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      String _action = taskHandler.getAction();
+      boolean _tripleNotEquals_6 = (_action != null);
+      if (_tripleNotEquals_6) {
+        _builder.append(space);
+        _builder.append("action: ");
+        String _action_1 = taskHandler.getAction();
+        _builder.append(_action_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EAsynchronousSettings _asynchronous_settings = taskHandler.getAsynchronous_settings();
+      boolean _tripleNotEquals_7 = (_asynchronous_settings != null);
+      if (_tripleNotEquals_7) {
+        {
+          String _async = taskHandler.getAsynchronous_settings().getAsync();
+          boolean _tripleNotEquals_8 = (_async != null);
+          if (_tripleNotEquals_8) {
+            _builder.append(space);
+            _builder.append("async: ");
+            String _async_1 = taskHandler.getAsynchronous_settings().getAsync();
+            _builder.append(_async_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _poll = taskHandler.getAsynchronous_settings().getPoll();
+          boolean _tripleNotEquals_9 = (_poll != null);
+          if (_tripleNotEquals_9) {
+            _builder.append(space);
+            _builder.append("poll: ");
+            String _poll_1 = taskHandler.getAsynchronous_settings().getPoll();
+            _builder.append(_poll_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      EDictionary _args = taskHandler.getArgs();
+      boolean _tripleNotEquals_10 = (_args != null);
+      if (_tripleNotEquals_10) {
+        _builder.append(space);
+        _builder.append("args: ");
+        Object _compileValue = this.compileValue(taskHandler.getArgs());
+        _builder.append(_compileValue);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      int _size = taskHandler.getNotifiables().size();
+      boolean _tripleNotEquals_11 = (_size != 0);
+      if (_tripleNotEquals_11) {
+        _builder.append(space);
+        _builder.append("notify: ");
+        ArrayList<String> _compileNotifiables = this.compileNotifiables(taskHandler);
+        _builder.append(_compileNotifiables);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      ELoop _loop = taskHandler.getLoop();
+      boolean _tripleNotEquals_12 = (_loop != null);
+      if (_tripleNotEquals_12) {
+        {
+          ELoop _loop_1 = taskHandler.getLoop();
+          if ((_loop_1 instanceof ELoopOverList)) {
+            _builder.append(space);
+            _builder.append("loop: ");
+            ELoop _loop_2 = taskHandler.getLoop();
+            Object _compileLoopList = this.compileLoopList(((ELoopOverList) _loop_2).getLoop_list());
+            _builder.append(_compileLoopList);
+            _builder.newLineIfNotEmpty();
+            {
+              ELoop _loop_3 = taskHandler.getLoop();
+              ELoopControl _loop_control = ((ELoopOverList) _loop_3).getLoop_control();
+              boolean _tripleNotEquals_13 = (_loop_control != null);
+              if (_tripleNotEquals_13) {
+                {
+                  ELoop _loop_4 = taskHandler.getLoop();
+                  EValuePassed _label = ((ELoopOverList) _loop_4).getLoop_control().getLabel();
+                  boolean _tripleNotEquals_14 = (_label != null);
+                  if (_tripleNotEquals_14) {
+                    _builder.append(space);
+                    _builder.append("label: ");
+                    ELoop _loop_5 = taskHandler.getLoop();
+                    Object _compileValuePassed = this.compileValuePassed(((ELoopOverList) _loop_5).getLoop_control().getLabel());
+                    _builder.append(_compileValuePassed);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+                {
+                  ELoop _loop_6 = taskHandler.getLoop();
+                  String _pause = ((ELoopOverList) _loop_6).getLoop_control().getPause();
+                  boolean _tripleNotEquals_15 = (_pause != null);
+                  if (_tripleNotEquals_15) {
+                    _builder.append(space);
+                    _builder.append("pause: ");
+                    ELoop _loop_7 = taskHandler.getLoop();
+                    String _pause_1 = ((ELoopOverList) _loop_7).getLoop_control().getPause();
+                    _builder.append(_pause_1);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+                {
+                  ELoop _loop_8 = taskHandler.getLoop();
+                  String _index_var = ((ELoopOverList) _loop_8).getLoop_control().getIndex_var();
+                  boolean _tripleNotEquals_16 = (_index_var != null);
+                  if (_tripleNotEquals_16) {
+                    _builder.append(space);
+                    _builder.append("index_var: ");
+                    ELoop _loop_9 = taskHandler.getLoop();
+                    String _index_var_1 = ((ELoopOverList) _loop_9).getLoop_control().getIndex_var();
+                    _builder.append(_index_var_1);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+                {
+                  ELoop _loop_10 = taskHandler.getLoop();
+                  String _loop_var = ((ELoopOverList) _loop_10).getLoop_control().getLoop_var();
+                  boolean _tripleNotEquals_17 = (_loop_var != null);
+                  if (_tripleNotEquals_17) {
+                    _builder.append(space);
+                    _builder.append("loop_var: ");
+                    ELoop _loop_11 = taskHandler.getLoop();
+                    String _loop_var_1 = ((ELoopOverList) _loop_11).getLoop_control().getLoop_var();
+                    _builder.append(_loop_var_1);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+                {
+                  ELoop _loop_12 = taskHandler.getLoop();
+                  String _extended = ((ELoopOverList) _loop_12).getLoop_control().getExtended();
+                  boolean _tripleNotEquals_18 = (_extended != null);
+                  if (_tripleNotEquals_18) {
+                    _builder.append(space);
+                    _builder.append("extended: ");
+                    ELoop _loop_13 = taskHandler.getLoop();
+                    String _extended_1 = ((ELoopOverList) _loop_13).getLoop_control().getExtended();
+                    _builder.append(_extended_1);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+              }
+            }
+          }
+        }
+        {
+          ELoop _loop_14 = taskHandler.getLoop();
+          if ((_loop_14 instanceof EUntil)) {
+            {
+              ELoop _loop_15 = taskHandler.getLoop();
+              EJinjaExpressionEvaluationWithoutBrackets _until = ((EUntil) _loop_15).getUntil();
+              boolean _tripleNotEquals_19 = (_until != null);
+              if (_tripleNotEquals_19) {
+                _builder.append(space);
+                _builder.append("until: ");
+                ELoop _loop_16 = taskHandler.getLoop();
+                String _compileJinjaExpressionEvaluationWithoutBrackets_2 = this.compileJinjaExpressionEvaluationWithoutBrackets(((EUntil) _loop_16).getUntil());
+                _builder.append(_compileJinjaExpressionEvaluationWithoutBrackets_2);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              ELoop _loop_17 = taskHandler.getLoop();
+              String _retries = ((EUntil) _loop_17).getRetries();
+              boolean _tripleNotEquals_20 = (_retries != null);
+              if (_tripleNotEquals_20) {
+                _builder.append(space);
+                _builder.append("retries: ");
+                ELoop _loop_18 = taskHandler.getLoop();
+                String _retries_1 = ((EUntil) _loop_18).getRetries();
+                _builder.append(_retries_1);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              ELoop _loop_19 = taskHandler.getLoop();
+              String _delay = ((EUntil) _loop_19).getDelay();
+              boolean _tripleNotEquals_21 = (_delay != null);
+              if (_tripleNotEquals_21) {
+                _builder.append(space);
+                _builder.append("delay: ");
+                ELoop _loop_20 = taskHandler.getLoop();
+                String _delay_1 = ((EUntil) _loop_20).getDelay();
+                _builder.append(_delay_1);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+      }
+    }
+    {
+      ERegisterVariable _register = taskHandler.getRegister();
+      boolean _tripleNotEquals_22 = (_register != null);
+      if (_tripleNotEquals_22) {
+        _builder.append(space);
+        _builder.append("register: ");
+        String _name = taskHandler.getRegister().getName();
+        _builder.append(_name);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
   }
   
   public ArrayList<String> compileNotifiables(final ETaskHandler taskHandler) {
@@ -926,70 +1291,133 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return newList;
   }
   
-  public Object compileConditionalExpression(final /* EConditionalExpression */Object conditionalExpression) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method compileValuePassedInFormula(EValuePassed) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\nThe method compileValuePassedInFormula(EValuePassed) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\nThe method compileValuePassedInFormula(EValuePassed) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\nThe method compileValuePassedInFormula(EValuePassed) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\nThe method compileConditionalFormula(EConditionalFormula) from the type AnsibleDslGenerator refers to the missing type EConditionalFormula"
-      + "\nleft_term cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\n&& cannot be resolved"
-      + "\nequality_term cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\n&& cannot be resolved"
-      + "\nright_term cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nleft_term cannot be resolved"
-      + "\nconcat cannot be resolved"
-      + "\nconcat cannot be resolved"
-      + "\nequality_term cannot be resolved"
-      + "\nconcat cannot be resolved"
-      + "\nconcat cannot be resolved"
-      + "\nright_term cannot be resolved"
-      + "\nleft_term cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\n&& cannot be resolved"
-      + "\nstatus cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nis_not cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nleft_term cannot be resolved"
-      + "\nconcat cannot be resolved"
-      + "\nconcat cannot be resolved"
-      + "\nstatus cannot be resolved"
-      + "\nleft_term cannot be resolved"
-      + "\nconcat cannot be resolved"
-      + "\nconcat cannot be resolved"
-      + "\nstatus cannot be resolved"
-      + "\nformula cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nformula cannot be resolved"
-      + "\nis_true cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nis_true cannot be resolved");
+  public String compileJinjaExpressionEvaluationWithoutBrackets(final EJinjaExpressionEvaluationWithoutBrackets jinja) {
+    if ((jinja instanceof EFilteredExpression)) {
+      return this.compileFilteredExpression(((EFilteredExpression)jinja));
+    } else {
+      if ((jinja instanceof EIfExpression)) {
+        return this.compileIfExpression(((EIfExpression)jinja));
+      }
+    }
+    return null;
   }
   
-  public String compileConditionalFormula(final /* EConditionalFormula */Object conditionalFormula) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method compileConditionalExpression(EConditionalExpression) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\nThe method compileConditionalExpression(EConditionalExpression) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\nThe method compileConditionalExpression(EConditionalExpression) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\nleft_expression cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\n&& cannot be resolved"
-      + "\nand_or cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\n&& cannot be resolved"
-      + "\nright_expression cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nleft_expression cannot be resolved"
-      + "\nand_or cannot be resolved"
-      + "\nright_expression cannot be resolved"
-      + "\nnegated_expression cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nnegated_expression cannot be resolved");
+  public String compileFunctionCall(final EFunctionCall functionCall) {
+    String stringToReturn = functionCall.getName();
+    stringToReturn = stringToReturn.concat("(");
+    for (int index = 0; (index < functionCall.getParameters().size()); index++) {
+      if ((index == 0)) {
+        stringToReturn = stringToReturn.concat(this.compileFilteredExpression(functionCall.getParameters().get(index)).toString());
+      } else {
+        stringToReturn = stringToReturn.concat(", ").concat(this.compileFilteredExpression(functionCall.getParameters().get(index)).toString());
+      }
+    }
+    stringToReturn = stringToReturn.concat(")");
+    return stringToReturn;
+  }
+  
+  public String compileIfExpression(final EIfExpression ifExpression) {
+    String stringToReturn = this.compileFilteredExpression(ifExpression.getIf_expression());
+    stringToReturn = stringToReturn.concat(" if ").concat(this.compileFilteredExpression(ifExpression.getIf_condition()));
+    EFilteredExpression _else_expression = ifExpression.getElse_expression();
+    boolean _tripleNotEquals = (_else_expression != null);
+    if (_tripleNotEquals) {
+      stringToReturn = stringToReturn.concat(" else ").concat(this.compileFilteredExpression(ifExpression.getElse_expression()));
+    }
+    return stringToReturn;
+  }
+  
+  public String compileFilteredExpression(final EFilteredExpression filteredExpression) {
+    String stringToReturn = this.compileOrExpression(filteredExpression.getTo_filter()).toString();
+    EList<EFunctionCall> _tail = filteredExpression.getTail();
+    for (final EFunctionCall functionCall : _tail) {
+      stringToReturn = stringToReturn.concat(".").concat(this.compileFunctionCall(functionCall));
+    }
+    EFilteredExpression _filter = filteredExpression.getFilter();
+    boolean _tripleNotEquals = (_filter != null);
+    if (_tripleNotEquals) {
+      stringToReturn = stringToReturn.concat(this.compileJinjaExpressionEvaluationWithoutBrackets(filteredExpression.getFilter()).toString());
+    }
+    return stringToReturn;
+  }
+  
+  public String compileOrExpression(final EOrExpression orExpression) {
+    String stringToReturn = this.compileAndExpression(orExpression.getLeft_or()).toString();
+    EOrExpression _right_or = orExpression.getRight_or();
+    boolean _tripleNotEquals = (_right_or != null);
+    if (_tripleNotEquals) {
+      stringToReturn = stringToReturn.concat(" or ").concat(this.compileOrExpression(orExpression.getRight_or()).toString());
+    }
+    return stringToReturn;
+  }
+  
+  public String compileAndExpression(final EAndExpression andExpression) {
+    String stringToReturn = this.compileTruthExpression(andExpression.getLeft_and()).toString();
+    EAndExpression _right_and = andExpression.getRight_and();
+    boolean _tripleNotEquals = (_right_and != null);
+    if (_tripleNotEquals) {
+      stringToReturn = stringToReturn.concat(" and ").concat(this.compileAndExpression(andExpression.getRight_and()).toString());
+    }
+    return stringToReturn;
+  }
+  
+  public String compileTruthExpression(final ETruthExpression truthExpression) {
+    String stringToReturn = this.compileOperation(truthExpression.getLeft_value()).toString();
+    if (((truthExpression.getEquality_sign() != null) && (truthExpression.getRight_value() != null))) {
+      stringToReturn = stringToReturn.concat(" ").concat(truthExpression.getEquality_sign()).concat(" ").concat(this.compileTruthExpression(truthExpression.getRight_value()).toString());
+    }
+    return stringToReturn;
+  }
+  
+  public String compileOperation(final EOperation operation) {
+    String stringToReturn = this.compileIsExpression(operation.getLeft_operand()).toString();
+    if (((operation.getOperator() != null) && (operation.getRight_operand() != null))) {
+      stringToReturn = stringToReturn.concat(" ").concat(operation.getOperator()).concat(" ").concat(this.compileOperation(operation.getRight_operand()).toString());
+    }
+    return stringToReturn;
+  }
+  
+  public String compileIsExpression(final EIsExpression isExpression) {
+    String stringToReturn = this.compileParenthesisedExpression(isExpression.getParenthesised_expression()).toString();
+    EIsExpression _status = isExpression.getStatus();
+    boolean _tripleNotEquals = (_status != null);
+    if (_tripleNotEquals) {
+      String _is_not = isExpression.getIs_not();
+      boolean _tripleNotEquals_1 = (_is_not != null);
+      if (_tripleNotEquals_1) {
+        stringToReturn = stringToReturn.concat(" is not ").concat(this.compileIsExpression(isExpression.getStatus()).toString());
+      } else {
+        stringToReturn = stringToReturn.concat(" is ").concat(this.compileIsExpression(isExpression.getStatus()).toString());
+      }
+    } else {
+      EIsExpression _container_expression = isExpression.getContainer_expression();
+      boolean _tripleNotEquals_2 = (_container_expression != null);
+      if (_tripleNotEquals_2) {
+        String _is_not_1 = isExpression.getIs_not();
+        boolean _tripleNotEquals_3 = (_is_not_1 != null);
+        if (_tripleNotEquals_3) {
+          stringToReturn = stringToReturn.concat(" not in ").concat(this.compileIsExpression(isExpression.getContainer_expression()).toString());
+        } else {
+          stringToReturn = stringToReturn.concat(" in ").concat(this.compileIsExpression(isExpression.getContainer_expression()).toString());
+        }
+      }
+    }
+    return stringToReturn;
+  }
+  
+  public String compileParenthesisedExpression(final EParenthesisedExpression parenthesisedExpression) {
+    EValuePassedToJinjaExpression _basic_value = parenthesisedExpression.getBasic_value();
+    boolean _tripleNotEquals = (_basic_value != null);
+    if (_tripleNotEquals) {
+      return this.compileValuePassedToJinjaExpression(parenthesisedExpression.getBasic_value());
+    } else {
+      EOrExpression _parenthesised_term = parenthesisedExpression.getParenthesised_term();
+      boolean _tripleNotEquals_1 = (_parenthesised_term != null);
+      if (_tripleNotEquals_1) {
+        return "(".concat(this.compileOrExpression(parenthesisedExpression.getParenthesised_term()).toString()).concat(")");
+      }
+    }
+    return null;
   }
   
   public ArrayList<Object> compileList(final org.sodalite.sdl.ansible.ansibleDsl.EList list) {
@@ -1001,77 +1429,157 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return newList;
   }
   
-  public String compileValuePassed(final EValuePassed valuePassed) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field filter_commands is undefined for the type EValuePassed & EItem");
+  public Object compileValuePassed(final EValuePassed valuePassed) {
+    if ((valuePassed instanceof EJinjaExpressionAndString)) {
+      return this.compileJinjaExpressionAndString(((EJinjaExpressionAndString)valuePassed));
+    } else {
+      if ((valuePassed instanceof EValueWithoutString)) {
+        return this.compileValueWithoutString(((EValueWithoutString)valuePassed));
+      }
+    }
+    return null;
   }
   
-  public Object compileValuePassedInFormula(final EValuePassed valuePassed) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field filter_commands is undefined for the type EValuePassed & EItem"
-      + "\nThe method compileValueInFormula(EValue) from the type AnsibleDslGenerator refers to the missing type Object"
-      + "\ntoString cannot be resolved");
+  public String compileJinjaExpressionAndString(final EJinjaExpressionAndString jinja) {
+    String stringToReturn = "\"";
+    EList<EJinjaExpressionOrString> _jinja_expression_and_string = jinja.getJinja_expression_and_string();
+    for (final EJinjaExpressionOrString jinjaOr : _jinja_expression_and_string) {
+      stringToReturn = stringToReturn.concat(this.compileJinjaExpressionOrString(jinjaOr));
+    }
+    stringToReturn = stringToReturn.concat("\"");
+    return stringToReturn;
   }
   
-  public Object compileValueInFormula(final EValue value) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nEFilteredVariablesAndString cannot be resolved to a type."
-      + "\nEFilteredVariable cannot be resolved to a type."
-      + "\nThe method or field variable_and_string is undefined for the type EValue"
-      + "\nThe method or field value_string is undefined for the type ESimpleValue"
-      + "\nThe method or field value_string is undefined for the type ESimpleValue"
-      + "\nThe method or field value_int is undefined for the type ESimpleValue"
-      + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
-      + "\nvariable_reference_or_string cannot be resolved"
-      + "\nvariable cannot be resolved"
-      + "\nname cannot be resolved"
-      + "\nindex cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nindex cannot be resolved"
-      + "\ntoString cannot be resolved"
-      + "\ntail cannot be resolved"
-      + "\nname cannot be resolved"
-      + "\nname cannot be resolved"
-      + "\nindex cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nindex cannot be resolved"
-      + "\ntoString cannot be resolved"
-      + "\nstring cannot be resolved"
-      + "\nstring cannot be resolved"
-      + "\n!== cannot be resolved");
+  public String compileJinjaExpressionOrString(final EJinjaExpressionOrString jinja) {
+    String _string = jinja.getString();
+    boolean _tripleNotEquals = (_string != null);
+    if (_tripleNotEquals) {
+      return jinja.getString();
+    } else {
+      if ((jinja instanceof EJinjaExpressionEvaluation)) {
+        return this.compileJinjaExpressionEvaluation(((EJinjaExpressionEvaluation)jinja));
+      }
+    }
+    return null;
   }
   
-  public String compileLoopList(final EValuePassed loopList) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nEFilteredVariablesAndString cannot be resolved to a type.");
+  public String compileJinjaExpressionEvaluation(final EJinjaExpressionEvaluation jinja) {
+    return "{{ ".concat(this.compileJinjaExpressionEvaluationWithoutBrackets(jinja.getJinja_expression())).concat(" }}");
+  }
+  
+  public String compileValuePassedToJinjaExpression(final EValuePassedToJinjaExpression valuePassedToJinjaExpression) {
+    if ((valuePassedToJinjaExpression instanceof EValue)) {
+      return this.compileValue(((EValue)valuePassedToJinjaExpression)).toString();
+    } else {
+      if ((valuePassedToJinjaExpression instanceof EFactGathered)) {
+        String factString = "ansible_facts";
+        EList<String> _tail = ((EFactGathered)valuePassedToJinjaExpression).getTail();
+        for (final String field : _tail) {
+          factString = factString.concat(".").concat(field);
+        }
+        return factString;
+      } else {
+        if ((valuePassedToJinjaExpression instanceof EItem)) {
+          String itemString = "item";
+          EList<String> _tail_1 = ((EItem)valuePassedToJinjaExpression).getTail();
+          for (final String tailElement : _tail_1) {
+            itemString = itemString.concat(".").concat(tailElement);
+          }
+          return itemString;
+        } else {
+          if ((valuePassedToJinjaExpression instanceof EDeclaredVariableReference)) {
+            String declaredVariableString = "";
+            declaredVariableString = declaredVariableString.concat(((EDeclaredVariableReference)valuePassedToJinjaExpression).getVariable_reference().getName());
+            String _index = ((EDeclaredVariableReference)valuePassedToJinjaExpression).getIndex();
+            boolean _tripleNotEquals = (_index != null);
+            if (_tripleNotEquals) {
+              declaredVariableString = declaredVariableString.concat("[").concat(((EDeclaredVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
+            }
+            EList<EDictionaryPairReference> _tail_2 = ((EDeclaredVariableReference)valuePassedToJinjaExpression).getTail();
+            for (final EDictionaryPairReference dictionaryPairReference : _tail_2) {
+              {
+                declaredVariableString = declaredVariableString.concat(".").concat(dictionaryPairReference.getName().getName());
+                String _index_1 = dictionaryPairReference.getIndex();
+                boolean _tripleNotEquals_1 = (_index_1 != null);
+                if (_tripleNotEquals_1) {
+                  declaredVariableString = declaredVariableString.concat("[").concat(dictionaryPairReference.getIndex()).concat("]");
+                }
+              }
+            }
+            return declaredVariableString;
+          } else {
+            if ((valuePassedToJinjaExpression instanceof EFunctionCall)) {
+              return this.compileFunctionCall(((EFunctionCall)valuePassedToJinjaExpression));
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+  
+  public Object compileLoopList(final EValuePassed loopList) {
+    if (((loopList instanceof EJinjaExpressionAndString) || (loopList instanceof org.sodalite.sdl.ansible.ansibleDsl.EList))) {
+      return this.compileValuePassed(loopList);
+    } else {
+      return "[".concat(this.compileValuePassed(loopList).toString()).concat("]");
+    }
   }
   
   public Object compileValue(final EValue value) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nEFilteredVariablesAndString cannot be resolved to a type."
-      + "\nEFilteredVariable cannot be resolved to a type."
-      + "\nThe method or field variable_and_string is undefined for the type EValue"
-      + "\nThe method or field value_string is undefined for the type ESimpleValue"
-      + "\nThe method or field value_string is undefined for the type ESimpleValue"
-      + "\nThe method or field value_int is undefined for the type ESimpleValue"
-      + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
-      + "\nvariable_reference_or_string cannot be resolved"
-      + "\nvariable cannot be resolved"
-      + "\nname cannot be resolved"
-      + "\nindex cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nindex cannot be resolved"
-      + "\ntoString cannot be resolved"
-      + "\ntail cannot be resolved"
-      + "\nname cannot be resolved"
-      + "\nname cannot be resolved"
-      + "\nindex cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nindex cannot be resolved"
-      + "\ntoString cannot be resolved"
-      + "\nstring cannot be resolved"
-      + "\nstring cannot be resolved"
-      + "\n!== cannot be resolved");
+    Object _xifexpression = null;
+    if ((value instanceof EComposedValue)) {
+      _xifexpression = this.compileComposedValue(((EComposedValue)value));
+    } else {
+      String _xifexpression_1 = null;
+      if ((value instanceof ESimpleValue)) {
+        _xifexpression_1 = this.compileSimpleValue(((ESimpleValue)value));
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  public Object compileValueWithoutString(final EValueWithoutString valueWithoutString) {
+    Object _xifexpression = null;
+    if ((valueWithoutString instanceof EComposedValue)) {
+      _xifexpression = this.compileComposedValue(((EComposedValue)valueWithoutString));
+    } else {
+      String _xifexpression_1 = null;
+      if ((valueWithoutString instanceof ESimpleValueWithoutString)) {
+        _xifexpression_1 = this.compileSimpleValueWithoutString(((ESimpleValueWithoutString)valueWithoutString));
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  public Object compileComposedValue(final EComposedValue composedValue) {
+    if ((composedValue instanceof org.sodalite.sdl.ansible.ansibleDsl.EList)) {
+      return this.compileList(((org.sodalite.sdl.ansible.ansibleDsl.EList)composedValue));
+    } else {
+      if ((composedValue instanceof EDictionary)) {
+        String dictionaryString = "{";
+        EList<EDictionaryPair> _dictionary_pairs = ((EDictionary)composedValue).getDictionary_pairs();
+        for (final EDictionaryPair dictionary_pair : _dictionary_pairs) {
+          dictionaryString = dictionaryString.concat(dictionary_pair.getName()).concat(": ").concat(this.compileValue(dictionary_pair.getValue()).toString()).concat(", ");
+        }
+        int _length = dictionaryString.length();
+        int _minus = (_length - 2);
+        dictionaryString = dictionaryString.substring(0, _minus);
+        dictionaryString = dictionaryString.concat("}");
+        return dictionaryString;
+      }
+    }
+    return null;
+  }
+  
+  public String compileSimpleValue(final ESimpleValue simpleValue) {
+    return "\"".concat(simpleValue.getSimple_value_string()).concat("\"");
+  }
+  
+  public String compileSimpleValueWithoutString(final ESimpleValueWithoutString simpleValueWithoutString) {
+    return simpleValueWithoutString.getSimple_value();
   }
   
   public String compileVariableDeclarations(final EBase base) {

@@ -18,25 +18,38 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler
-import org.sodalite.sdl.ansible.ansibleDsl.EConditionalExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock
 import org.sodalite.sdl.ansible.ansibleDsl.ETask
 import org.sodalite.sdl.ansible.ansibleDsl.EBase
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed
-import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariable
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler
-import org.sodalite.sdl.ansible.ansibleDsl.EConditionalFormula
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil
 import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered
-import org.sodalite.sdl.ansible.ansibleDsl.EFilteredVariablesAndString
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.EItem
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue
 import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression
+import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall
+import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression
+import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression
+import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression
+import org.sodalite.sdl.ansible.ansibleDsl.EOperation
+import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression
+import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString
+import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression
+import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation
 
 /**
  * Generates code from your model files on save.
@@ -216,7 +229,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«IF playExeSettings.order !== null»
 			«space»order: «playExeSettings.order»
 		«ENDIF»
-		«IF playExeSettings.throttle !== 0»
+		«IF playExeSettings.throttle !== null»
 			«space»throttle: «playExeSettings.throttle»
 		«ENDIF»
 		«IF playExeSettings.run_once !== null»
@@ -225,7 +238,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compilePlayErrorHandling(EPlayErrorHandling playErrorHandling, String space) '''
-		«IF playErrorHandling.max_fail_percentage !== 0»
+		«IF playErrorHandling.max_fail_percentage !== null»
 			«space»max_fail_percentage: «playErrorHandling.max_fail_percentage»
 		«ENDIF»
 		«IF playErrorHandling.any_errors_fatal !== null»
@@ -246,7 +259,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«IF factsSettings.gather_subset !== null»
 			«space»gather_subset: «factsSettings.gather_subset.compileList»
 		«ENDIF»
-		«IF factsSettings.gather_timeout !== 0»
+		«IF factsSettings.gather_timeout !== null»
 			«space»gather_timeout: «factsSettings.gather_timeout»
 		«ENDIF»
 		«IF factsSettings.fact_path !== null»
@@ -320,7 +333,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«ENDIF»
 		«ENDIF»
 		«IF execution.when_expression !== null»
-			«space»when: «execution.when_expression.compileConditionalExpression»
+			«space»when: «execution.when_expression.compileJinjaExpressionEvaluationWithoutBrackets»
 		«ENDIF»
 	'''
 	
@@ -354,10 +367,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileTaskHandlerCommonKeywords(ETaskHandler taskHandler, String space) '''
 		«IF taskHandler.error_handling !== null»
 			«IF taskHandler.error_handling.changed_when !== null»
-				«space»change_when: «compileConditionalExpression(taskHandler.error_handling.changed_when)»
+				«space»change_when: «taskHandler.error_handling.changed_when.compileJinjaExpressionEvaluationWithoutBrackets»
 			«ENDIF»
 			«IF taskHandler.error_handling.failed_when !== null»
-				«space»failed_when: «compileConditionalExpression(taskHandler.error_handling.failed_when)»
+				«space»failed_when: «taskHandler.error_handling.failed_when.compileJinjaExpressionEvaluationWithoutBrackets»
 			«ENDIF»
 			«IF taskHandler.error_handling.any_errors_fatal !== null»
 				«space»any_errors_fatal: «taskHandler.error_handling.any_errors_fatal»
@@ -373,10 +386,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»action: «taskHandler.action»
 		«ENDIF»
 		«IF taskHandler.asynchronous_settings !== null»
-			«IF taskHandler.asynchronous_settings.async !== 0»
+			«IF taskHandler.asynchronous_settings.async !== null»
 				«space»async: «taskHandler.asynchronous_settings.async»
 			«ENDIF»
-			«IF taskHandler.asynchronous_settings.poll !== 0»
+			«IF taskHandler.asynchronous_settings.poll !== null»
 				«space»poll: «taskHandler.asynchronous_settings.poll»
 			«ENDIF»
 		«ENDIF»
@@ -393,7 +406,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 					«IF (taskHandler.loop as ELoopOverList).loop_control.label !== null»
 						«space»label: «(taskHandler.loop as ELoopOverList).loop_control.label.compileValuePassed»
 					«ENDIF»
-					«IF (taskHandler.loop as ELoopOverList).loop_control.pause !== 0»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.pause !== null»
 						«space»pause: «(taskHandler.loop as ELoopOverList).loop_control.pause»
 					«ENDIF»
 					«IF (taskHandler.loop as ELoopOverList).loop_control.index_var !== null»
@@ -409,12 +422,12 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«ENDIF»
 			«IF taskHandler.loop instanceof EUntil»
 				«IF (taskHandler.loop as EUntil).until !== null»
-					«space»until: «(taskHandler.loop as EUntil).until.compileConditionalExpression»
+					«space»until: «(taskHandler.loop as EUntil).until.compileJinjaExpressionEvaluationWithoutBrackets»
 				«ENDIF»
-				«IF (taskHandler.loop as EUntil).retries !== 0»
+				«IF (taskHandler.loop as EUntil).retries !== null»
 					«space»retries: «(taskHandler.loop as EUntil).retries»
 				«ENDIF»
-				«IF (taskHandler.loop as EUntil).delay !== 0»
+				«IF (taskHandler.loop as EUntil).delay !== null»
 					«space»delay: «(taskHandler.loop as EUntil).delay»
 				«ENDIF»
 			«ENDIF»
@@ -445,25 +458,107 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return newList
 	}
 	
-	def compileConditionalExpression(EConditionalExpression conditionalExpression){
-		if (conditionalExpression.left_term !== null && conditionalExpression.equality_term !== null && conditionalExpression.right_term !== null){
-			return compileValuePassedInFormula(conditionalExpression.left_term).concat(" ").concat(conditionalExpression.equality_term).concat(" ").concat(compileValuePassedInFormula(conditionalExpression.right_term))
+	def compileJinjaExpressionEvaluationWithoutBrackets(EJinjaExpressionEvaluationWithoutBrackets jinja){
+		if (jinja instanceof EFilteredExpression){
+			return jinja.compileFilteredExpression
 		}
-		else if (conditionalExpression.left_term !== null && conditionalExpression.status !== null){
-			if (conditionalExpression.is_not !== null) return compileValuePassedInFormula(conditionalExpression.left_term).concat(" is not ").concat(conditionalExpression.status)
-			else return compileValuePassedInFormula(conditionalExpression.left_term).concat(" is ").concat(conditionalExpression.status)
+		else if (jinja instanceof EIfExpression){
+			return jinja.compileIfExpression
 		}
-		else if (conditionalExpression.formula !== null) return compileConditionalFormula(conditionalExpression.formula)
-		else if (conditionalExpression.is_true !== null) return conditionalExpression.is_true
+	}
+
+	def compileFunctionCall(EFunctionCall functionCall){
+		var stringToReturn = functionCall.name
+		stringToReturn = stringToReturn.concat("(")
+		for (var index = 0; index < functionCall.parameters.size; index++){	
+			//the first parameter shouldn't have a comma before it, the others yes
+			if (index == 0){
+				stringToReturn = stringToReturn.concat(functionCall.parameters.get(index).compileFilteredExpression.toString())
+			}
+			else {
+				stringToReturn = stringToReturn.concat(", ").concat(functionCall.parameters.get(index).compileFilteredExpression.toString())
+			}
+		}
+		stringToReturn = stringToReturn.concat(")")
+		return stringToReturn
 	}
 	
-	def compileConditionalFormula(EConditionalFormula conditionalFormula){
-		if (conditionalFormula.left_expression !== null && conditionalFormula.and_or !== null && conditionalFormula.right_expression !== null){
-			return "(".concat(compileConditionalExpression(conditionalFormula.left_expression) as String).concat(") ").concat(conditionalFormula.and_or).concat(" (").concat(compileConditionalExpression(conditionalFormula.right_expression) as String).concat(")")
+	def compileIfExpression(EIfExpression ifExpression){
+		var stringToReturn = ifExpression.if_expression.compileFilteredExpression
+		stringToReturn = stringToReturn.concat(" if ").concat(ifExpression.if_condition.compileFilteredExpression)
+		if (ifExpression.else_expression !== null){
+			stringToReturn = stringToReturn.concat(" else ").concat(ifExpression.else_expression.compileFilteredExpression)
 		}
-		else if (conditionalFormula.negated_expression !== null){
-			return "not (".concat(compileConditionalExpression(conditionalFormula.negated_expression) as String).concat(")")
+		return stringToReturn
+	}
+	
+	def compileFilteredExpression(EFilteredExpression filteredExpression){
+		var stringToReturn = filteredExpression.to_filter.compileOrExpression.toString()
+		for (functionCall : filteredExpression.tail){
+			stringToReturn = stringToReturn.concat(".").concat(functionCall.compileFunctionCall)
 		}
+		if (filteredExpression.filter !== null){
+			stringToReturn = stringToReturn.concat(filteredExpression.filter.compileJinjaExpressionEvaluationWithoutBrackets.toString())
+		}
+		return stringToReturn
+	}
+	
+	def compileOrExpression(EOrExpression orExpression){
+		var stringToReturn = orExpression.left_or.compileAndExpression.toString()
+		if (orExpression.right_or !== null){
+			stringToReturn = stringToReturn.concat(" or ").concat(orExpression.right_or.compileOrExpression.toString())
+		}
+		return stringToReturn
+	}
+	
+	def compileAndExpression(EAndExpression andExpression){
+		var stringToReturn = andExpression.left_and.compileTruthExpression.toString()
+		if (andExpression.right_and !== null){
+			stringToReturn = stringToReturn.concat(" and ").concat(andExpression.right_and.compileAndExpression.toString())
+		}
+		return stringToReturn
+	}
+	
+	def compileTruthExpression(ETruthExpression truthExpression){
+		var stringToReturn = truthExpression.left_value.compileOperation.toString()
+		if (truthExpression.equality_sign !== null && truthExpression.right_value !== null){
+			stringToReturn = stringToReturn.concat(" ").concat(truthExpression.equality_sign).concat(" ").concat(truthExpression.right_value.compileTruthExpression.toString())
+		}
+		return stringToReturn
+	}
+	
+	def compileOperation(EOperation operation){
+		var stringToReturn = operation.left_operand.compileIsExpression.toString()
+		if (operation.operator !== null && operation.right_operand !== null){
+			stringToReturn = stringToReturn.concat(" ").concat(operation.operator).concat(" ").concat(operation.right_operand.compileOperation.toString())
+		}
+		return stringToReturn
+	}
+	
+	def compileIsExpression(EIsExpression isExpression){
+		var stringToReturn = isExpression.parenthesised_expression.compileParenthesisedExpression.toString()
+		if (isExpression.status !== null){
+			if (isExpression.is_not !== null){
+				stringToReturn = stringToReturn.concat(" is not ").concat(isExpression.status.compileIsExpression.toString())	
+			}
+			else {
+				stringToReturn = stringToReturn.concat(" is ").concat(isExpression.status.compileIsExpression.toString())	
+			}
+		}
+		else if (isExpression.container_expression !== null){
+			if (isExpression.is_not !== null){
+				stringToReturn = stringToReturn.concat(" not in ").concat(isExpression.container_expression.compileIsExpression.toString())
+			}
+			else {
+				stringToReturn = stringToReturn.concat(" in ").concat(isExpression.container_expression.compileIsExpression.toString())
+			}
+		}
+		return stringToReturn
+	}
+	
+	def compileParenthesisedExpression(EParenthesisedExpression parenthesisedExpression){
+		if (parenthesisedExpression.basic_value !== null) return parenthesisedExpression.basic_value.compileValuePassedToJinjaExpression
+		else if (parenthesisedExpression.parenthesised_term !== null) return "(".concat(parenthesisedExpression.parenthesised_term.compileOrExpression.toString()).concat(")")
 	}
 	
 	def compileList(EList list){
@@ -475,137 +570,102 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileValuePassed(EValuePassed valuePassed){
-		if (valuePassed instanceof EValue) return compileValue(valuePassed).toString()
-		else if (valuePassed instanceof EFactGathered){
-			var factString = "ansible_facts"
-			for (field : valuePassed.tail){
-				factString = factString.concat(".").concat("field")
-			}
-			return factString
+		if (valuePassed instanceof EJinjaExpressionAndString){
+			return valuePassed.compileJinjaExpressionAndString
 		}
-		else if (valuePassed instanceof EItem){
-			var itemString = "\"{{ item"
-			for (tailElement : valuePassed.tail) {
-				itemString = itemString.concat(".").concat(tailElement)
-			}
-			for (filterCommand : valuePassed.filter_commands) {
-				itemString = itemString.concat(" | ").concat(filterCommand)
-			}
-			itemString = itemString.concat(" }}\"")
-			return itemString
+		else if (valuePassed instanceof EValueWithoutString){
+			return valuePassed.compileValueWithoutString
 		}
 	}
 	
-	def compileValuePassedInFormula(EValuePassed valuePassed){
-		if (valuePassed instanceof EValue) return compileValueInFormula(valuePassed).toString()
-		else if (valuePassed instanceof EFactGathered){
+	def compileJinjaExpressionAndString(EJinjaExpressionAndString jinja){
+		var stringToReturn = "\""
+		for (jinjaOr : jinja.jinja_expression_and_string){
+			stringToReturn = stringToReturn.concat(jinjaOr.compileJinjaExpressionOrString)
+		}
+		stringToReturn = stringToReturn.concat("\"")
+		return stringToReturn
+	}
+	
+	def compileJinjaExpressionOrString(EJinjaExpressionOrString jinja){
+		if (jinja.string !== null){
+			return jinja.string
+		}
+		else if (jinja instanceof EJinjaExpressionEvaluation){
+			return jinja.compileJinjaExpressionEvaluation
+		}
+	}
+	
+	def compileJinjaExpressionEvaluation(EJinjaExpressionEvaluation jinja){
+		return "{{ ".concat(jinja.jinja_expression.compileJinjaExpressionEvaluationWithoutBrackets).concat(" }}")
+	}
+	
+	def compileValuePassedToJinjaExpression(EValuePassedToJinjaExpression valuePassedToJinjaExpression){
+		if (valuePassedToJinjaExpression instanceof EValue) return compileValue(valuePassedToJinjaExpression).toString()
+		else if (valuePassedToJinjaExpression instanceof EFactGathered){
 			var factString = "ansible_facts"
-			for (field : valuePassed.tail){
-				factString = factString.concat(".").concat("field")
+			for (field : valuePassedToJinjaExpression.tail){
+				factString = factString.concat(".").concat(field)
 			}
 			return factString
 		}
-		else if (valuePassed instanceof EItem){
+		else if (valuePassedToJinjaExpression instanceof EItem){
 			var itemString = "item"
-			for (tailElement : valuePassed.tail) {
+			for (tailElement : valuePassedToJinjaExpression.tail) {
 				itemString = itemString.concat(".").concat(tailElement)
-			}
-			for (filterCommand : valuePassed.filter_commands) {
-				itemString = itemString.concat(" | ").concat(filterCommand)
 			}
 			return itemString
 		}
-	}
-	
-	def compileValueInFormula(EValue value){
-		if (value instanceof EDictionary){
-			var dictionaryString = '{'
-			for (dictionary_pair : value.dictionary_pairs){
-				dictionaryString = dictionaryString.concat(dictionary_pair.name).concat(': ').concat(compileValue(dictionary_pair.value).toString()).concat(', ')
+		else if (valuePassedToJinjaExpression instanceof EDeclaredVariableReference){
+			var declaredVariableString = ""
+			declaredVariableString = declaredVariableString.concat(valuePassedToJinjaExpression.variable_reference.name)
+			if (valuePassedToJinjaExpression.index !== null) declaredVariableString = declaredVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
+			for (dictionaryPairReference : valuePassedToJinjaExpression.tail){
+				declaredVariableString = declaredVariableString.concat(".").concat(dictionaryPairReference.name.name)
+				if (dictionaryPairReference.index !== null) declaredVariableString = declaredVariableString.concat("[").concat(dictionaryPairReference.index).concat("]")
 			}
-			dictionaryString = dictionaryString.substring(0, dictionaryString.length() - 2)
-			dictionaryString = dictionaryString.concat('}')
-			return dictionaryString
+			return declaredVariableString
 		}
-		else if (value instanceof EList) return compileList(value)
-		else if (value instanceof EFilteredVariablesAndString){
-			var variablesAndString = ""
-			for (variable_or_string : value.variable_and_string){
-				if (variable_or_string instanceof EFilteredVariable){
-					for (variable_reference_or_string : variable_or_string.variable_reference_or_string){
-						if (variable_reference_or_string instanceof EDeclaredVariableReference){
-							variablesAndString = variablesAndString.concat(variable_reference_or_string.variable.name)
-							if (variable_reference_or_string.index !== -150) variablesAndString = variablesAndString.concat("[").concat(variable_reference_or_string.index.toString()).concat("]")
-							for (dictionaryPairReference : variable_reference_or_string.tail){
-								variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.name.name)
-								if (dictionaryPairReference.index !== -150) variablesAndString = variablesAndString.concat("[").concat(dictionaryPairReference.index.toString()).concat("]")
-							}
-						}
-						else {
-							variablesAndString = variablesAndString.concat(variable_reference_or_string.string)
-						}
-					}
-				}
-				else {
-					variablesAndString = variablesAndString.concat("\"").concat(variable_or_string.string).concat("\"")
-				}
-			}
-			return variablesAndString
-		}
-		else if (value instanceof ESimpleValue){
-			if (value.value_string !== null) return value.value_string
-			else return value.value_int
+		else if (valuePassedToJinjaExpression instanceof EFunctionCall){
+			return valuePassedToJinjaExpression.compileFunctionCall
 		}
 	}
 	
 	def compileLoopList(EValuePassed loopList){
-		if (loopList instanceof EFilteredVariablesAndString || loopList instanceof EFactGathered || loopList instanceof EList) return compileValuePassed(loopList)
-		else return "[".concat(loopList.compileValuePassed).concat("]")
+		if (loopList instanceof EJinjaExpressionAndString || loopList instanceof EList) return compileValuePassed(loopList)
+		else return "[".concat(loopList.compileValuePassed.toString()).concat("]")
 	}
 	
+	
 	def compileValue(EValue value){
-		if (value instanceof EDictionary){
+		if (value instanceof EComposedValue) value.compileComposedValue
+		else if (value instanceof ESimpleValue) value.compileSimpleValue
+	}
+	
+	def compileValueWithoutString(EValueWithoutString valueWithoutString){
+		if (valueWithoutString instanceof EComposedValue) valueWithoutString.compileComposedValue
+		else if (valueWithoutString instanceof ESimpleValueWithoutString) valueWithoutString.compileSimpleValueWithoutString
+	}
+	
+	def compileComposedValue(EComposedValue composedValue){
+		if (composedValue instanceof EList) return composedValue.compileList
+		else if (composedValue instanceof EDictionary){
 			var dictionaryString = '{'
-			for (dictionary_pair : value.dictionary_pairs){
+			for (dictionary_pair : composedValue.dictionary_pairs){
 				dictionaryString = dictionaryString.concat(dictionary_pair.name).concat(': ').concat(compileValue(dictionary_pair.value).toString()).concat(', ')
 			}
 			dictionaryString = dictionaryString.substring(0, dictionaryString.length() - 2)
 			dictionaryString = dictionaryString.concat('}')
 			return dictionaryString
 		}
-		else if (value instanceof EList) return compileList(value)
-		else if (value instanceof EFilteredVariablesAndString){
-			var variablesAndString = "\""
-			for (variable_or_string : value.variable_and_string){
-				if (variable_or_string instanceof EFilteredVariable){
-					variablesAndString = variablesAndString.concat("{{ ")
-					
-					for (variable_reference_or_string : variable_or_string.variable_reference_or_string){					
-						if (variable_reference_or_string instanceof EDeclaredVariableReference){
-							variablesAndString = variablesAndString.concat(variable_reference_or_string.variable.name)
-							if (variable_reference_or_string.index !== -150) variablesAndString = variablesAndString.concat("[").concat(variable_reference_or_string.index.toString()).concat("]")
-							for (dictionaryPairReference : variable_reference_or_string.tail){
-								variablesAndString = variablesAndString.concat(".").concat(dictionaryPairReference.name.name)
-								if (dictionaryPairReference.index !== -150) variablesAndString = variablesAndString.concat("[").concat(dictionaryPairReference.index.toString()).concat("]")
-							}
-						}
-						else {
-							variablesAndString = variablesAndString.concat(variable_reference_or_string.string)
-						}	
-					}
-					
-					variablesAndString = variablesAndString.concat(" }}")
-				}
-				else {
-					variablesAndString = variablesAndString.concat(variable_or_string.string)
-				}
-			}
-			return variablesAndString.concat("\"")
-		}
-		else if (value instanceof ESimpleValue){
-			if (value.value_string !== null) return value.value_string
-			else return value.value_int
-		}
+	}
+	
+	def compileSimpleValue(ESimpleValue simpleValue){
+		return "\"".concat(simpleValue.simple_value_string).concat("\"")
+	}
+	
+	def compileSimpleValueWithoutString(ESimpleValueWithoutString simpleValueWithoutString){
+		return simpleValueWithoutString.simple_value
 	}
 	
 	def compileVariableDeclarations(EBase base){
