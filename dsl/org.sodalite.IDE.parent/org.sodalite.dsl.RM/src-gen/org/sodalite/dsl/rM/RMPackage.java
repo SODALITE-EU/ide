@@ -1072,7 +1072,7 @@ public interface RMPackage extends EPackage
   int EEVEN_FILTER__NODE = 0;
 
   /**
-   * The feature id for the '<em><b>Requirement</b></em>' attribute.
+   * The feature id for the '<em><b>Requirement</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1081,7 +1081,7 @@ public interface RMPackage extends EPackage
   int EEVEN_FILTER__REQUIREMENT = 1;
 
   /**
-   * The feature id for the '<em><b>Capability</b></em>' attribute.
+   * The feature id for the '<em><b>Capability</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -4788,26 +4788,26 @@ public interface RMPackage extends EPackage
   EReference getEEvenFilter_Node();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EEvenFilter#getRequirement <em>Requirement</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EEvenFilter#getRequirement <em>Requirement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Requirement</em>'.
+   * @return the meta object for the containment reference '<em>Requirement</em>'.
    * @see org.sodalite.dsl.rM.EEvenFilter#getRequirement()
    * @see #getEEvenFilter()
    * @generated
    */
-  EAttribute getEEvenFilter_Requirement();
+  EReference getEEvenFilter_Requirement();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EEvenFilter#getCapability <em>Capability</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EEvenFilter#getCapability <em>Capability</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Capability</em>'.
+   * @return the meta object for the containment reference '<em>Capability</em>'.
    * @see org.sodalite.dsl.rM.EEvenFilter#getCapability()
    * @see #getEEvenFilter()
    * @generated
    */
-  EAttribute getEEvenFilter_Capability();
+  EReference getEEvenFilter_Capability();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EConditionClauseDefinition <em>ECondition Clause Definition</em>}'.
@@ -7816,20 +7816,20 @@ public interface RMPackage extends EPackage
     EReference EEVEN_FILTER__NODE = eINSTANCE.getEEvenFilter_Node();
 
     /**
-     * The meta object literal for the '<em><b>Requirement</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Requirement</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EEVEN_FILTER__REQUIREMENT = eINSTANCE.getEEvenFilter_Requirement();
+    EReference EEVEN_FILTER__REQUIREMENT = eINSTANCE.getEEvenFilter_Requirement();
 
     /**
-     * The meta object literal for the '<em><b>Capability</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Capability</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EEVEN_FILTER__CAPABILITY = eINSTANCE.getEEvenFilter_Capability();
+    EReference EEVEN_FILTER__CAPABILITY = eINSTANCE.getEEvenFilter_Capability();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionImpl <em>ECondition Clause Definition</em>}' class.

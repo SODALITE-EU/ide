@@ -31562,7 +31562,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:10534:1: ( rule__EEvenFilter__Group_1__0__Impl rule__EEvenFilter__Group_1__1 )
             // InternalAADMParser.g:10535:2: rule__EEvenFilter__Group_1__0__Impl rule__EEvenFilter__Group_1__1
             {
-            pushFollow(FOLLOW_12);
+            pushFollow(FOLLOW_11);
             rule__EEvenFilter__Group_1__0__Impl();
 
             state._fsp--;
@@ -31717,7 +31717,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:10588:1: ( rule__EEvenFilter__Group_2__0__Impl rule__EEvenFilter__Group_2__1 )
             // InternalAADMParser.g:10589:2: rule__EEvenFilter__Group_2__0__Impl rule__EEvenFilter__Group_2__1
             {
-            pushFollow(FOLLOW_12);
+            pushFollow(FOLLOW_11);
             rule__EEvenFilter__Group_2__0__Impl();
 
             state._fsp--;
@@ -74776,21 +74776,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EEvenFilter__RequirementAssignment_1_1"
-    // InternalAADMParser.g:24447:1: rule__EEvenFilter__RequirementAssignment_1_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:24447:1: rule__EEvenFilter__RequirementAssignment_1_1 : ( ruleEPREFIX_REF ) ;
     public final void rule__EEvenFilter__RequirementAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:24451:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:24452:2: ( RULE_STRING )
+            // InternalAADMParser.g:24451:1: ( ( ruleEPREFIX_REF ) )
+            // InternalAADMParser.g:24452:2: ( ruleEPREFIX_REF )
             {
-            // InternalAADMParser.g:24452:2: ( RULE_STRING )
-            // InternalAADMParser.g:24453:3: RULE_STRING
+            // InternalAADMParser.g:24452:2: ( ruleEPREFIX_REF )
+            // InternalAADMParser.g:24453:3: ruleEPREFIX_REF
             {
-             before(grammarAccess.getEEvenFilterAccess().getRequirementSTRINGTerminalRuleCall_1_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEEvenFilterAccess().getRequirementSTRINGTerminalRuleCall_1_1_0()); 
+             before(grammarAccess.getEEvenFilterAccess().getRequirementEPREFIX_REFParserRuleCall_1_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEPREFIX_REF();
+
+            state._fsp--;
+
+             after(grammarAccess.getEEvenFilterAccess().getRequirementEPREFIX_REFParserRuleCall_1_1_0()); 
 
             }
 
@@ -74813,21 +74817,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EEvenFilter__CapabilityAssignment_2_1"
-    // InternalAADMParser.g:24462:1: rule__EEvenFilter__CapabilityAssignment_2_1 : ( RULE_STRING ) ;
+    // InternalAADMParser.g:24462:1: rule__EEvenFilter__CapabilityAssignment_2_1 : ( ruleEPREFIX_REF ) ;
     public final void rule__EEvenFilter__CapabilityAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:24466:1: ( ( RULE_STRING ) )
-            // InternalAADMParser.g:24467:2: ( RULE_STRING )
+            // InternalAADMParser.g:24466:1: ( ( ruleEPREFIX_REF ) )
+            // InternalAADMParser.g:24467:2: ( ruleEPREFIX_REF )
             {
-            // InternalAADMParser.g:24467:2: ( RULE_STRING )
-            // InternalAADMParser.g:24468:3: RULE_STRING
+            // InternalAADMParser.g:24467:2: ( ruleEPREFIX_REF )
+            // InternalAADMParser.g:24468:3: ruleEPREFIX_REF
             {
-             before(grammarAccess.getEEvenFilterAccess().getCapabilitySTRINGTerminalRuleCall_2_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEEvenFilterAccess().getCapabilitySTRINGTerminalRuleCall_2_1_0()); 
+             before(grammarAccess.getEEvenFilterAccess().getCapabilityEPREFIX_REFParserRuleCall_2_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEPREFIX_REF();
+
+            state._fsp--;
+
+             after(grammarAccess.getEEvenFilterAccess().getCapabilityEPREFIX_REFParserRuleCall_2_1_0()); 
 
             }
 

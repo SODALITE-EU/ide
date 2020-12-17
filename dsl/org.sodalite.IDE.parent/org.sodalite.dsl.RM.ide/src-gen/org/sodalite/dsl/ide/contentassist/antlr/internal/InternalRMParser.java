@@ -9346,11 +9346,11 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             if ( (LA1_0==RULE_ID) ) {
                 int LA1_1 = input.LA(2);
 
-                if ( (LA1_1==EOF||(LA1_1>=Derived_from && LA1_1<=Entry_schema)||(LA1_1>=Constraints && LA1_1<=Description)||LA1_1==Properties||LA1_1==Required||LA1_1==Default||LA1_1==Status||LA1_1==Value||LA1_1==Type||LA1_1==Colon||LA1_1==RULE_END) ) {
-                    alt1=2;
-                }
-                else if ( (LA1_1==Solidus) ) {
+                if ( (LA1_1==Solidus) ) {
                     alt1=1;
+                }
+                else if ( (LA1_1==EOF||(LA1_1>=Derived_from && LA1_1<=Entry_schema)||(LA1_1>=Constraints && LA1_1<=Description)||LA1_1==Properties||LA1_1==Required||LA1_1==Default||LA1_1==Status||LA1_1==Value||LA1_1==Type||LA1_1==Colon||LA1_1==RULE_END) ) {
+                    alt1=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -26378,7 +26378,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:8216:1: ( rule__EEvenFilter__Group_1__0__Impl rule__EEvenFilter__Group_1__1 )
             // InternalRMParser.g:8217:2: rule__EEvenFilter__Group_1__0__Impl rule__EEvenFilter__Group_1__1
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_5);
             rule__EEvenFilter__Group_1__0__Impl();
 
             state._fsp--;
@@ -26541,7 +26541,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:8270:1: ( rule__EEvenFilter__Group_2__0__Impl rule__EEvenFilter__Group_2__1 )
             // InternalRMParser.g:8271:2: rule__EEvenFilter__Group_2__0__Impl rule__EEvenFilter__Group_2__1
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_5);
             rule__EEvenFilter__Group_2__0__Impl();
 
             state._fsp--;
@@ -69794,24 +69794,28 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EEvenFilter__RequirementAssignment_1_1"
-    // InternalRMParser.g:21632:1: rule__EEvenFilter__RequirementAssignment_1_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:21632:1: rule__EEvenFilter__RequirementAssignment_1_1 : ( ruleEPREFIX_REF ) ;
     public final void rule__EEvenFilter__RequirementAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:21636:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:21637:2: ( RULE_STRING )
+            // InternalRMParser.g:21636:1: ( ( ruleEPREFIX_REF ) )
+            // InternalRMParser.g:21637:2: ( ruleEPREFIX_REF )
             {
-            // InternalRMParser.g:21637:2: ( RULE_STRING )
-            // InternalRMParser.g:21638:3: RULE_STRING
+            // InternalRMParser.g:21637:2: ( ruleEPREFIX_REF )
+            // InternalRMParser.g:21638:3: ruleEPREFIX_REF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getEEvenFilterAccess().getRequirementSTRINGTerminalRuleCall_1_1_0()); 
+               before(grammarAccess.getEEvenFilterAccess().getRequirementEPREFIX_REFParserRuleCall_1_1_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_2); if (state.failed) return ;
+            pushFollow(FOLLOW_2);
+            ruleEPREFIX_REF();
+
+            state._fsp--;
+            if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getEEvenFilterAccess().getRequirementSTRINGTerminalRuleCall_1_1_0()); 
+               after(grammarAccess.getEEvenFilterAccess().getRequirementEPREFIX_REFParserRuleCall_1_1_0()); 
             }
 
             }
@@ -69835,24 +69839,28 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EEvenFilter__CapabilityAssignment_2_1"
-    // InternalRMParser.g:21647:1: rule__EEvenFilter__CapabilityAssignment_2_1 : ( RULE_STRING ) ;
+    // InternalRMParser.g:21647:1: rule__EEvenFilter__CapabilityAssignment_2_1 : ( ruleEPREFIX_REF ) ;
     public final void rule__EEvenFilter__CapabilityAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:21651:1: ( ( RULE_STRING ) )
-            // InternalRMParser.g:21652:2: ( RULE_STRING )
+            // InternalRMParser.g:21651:1: ( ( ruleEPREFIX_REF ) )
+            // InternalRMParser.g:21652:2: ( ruleEPREFIX_REF )
             {
-            // InternalRMParser.g:21652:2: ( RULE_STRING )
-            // InternalRMParser.g:21653:3: RULE_STRING
+            // InternalRMParser.g:21652:2: ( ruleEPREFIX_REF )
+            // InternalRMParser.g:21653:3: ruleEPREFIX_REF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getEEvenFilterAccess().getCapabilitySTRINGTerminalRuleCall_2_1_0()); 
+               before(grammarAccess.getEEvenFilterAccess().getCapabilityEPREFIX_REFParserRuleCall_2_1_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_2); if (state.failed) return ;
+            pushFollow(FOLLOW_2);
+            ruleEPREFIX_REF();
+
+            state._fsp--;
+            if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getEEvenFilterAccess().getCapabilitySTRINGTerminalRuleCall_2_1_0()); 
+               after(grammarAccess.getEEvenFilterAccess().getCapabilityEPREFIX_REFParserRuleCall_2_1_0()); 
             }
 
             }

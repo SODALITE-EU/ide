@@ -205,8 +205,8 @@ ETimeInterval:
 
 EEvenFilter:
 	('node:' node=EPREFIX_REF) &
-	('requirement:' requirement=STRING)? &
-	('capability:' capability=STRING)?
+	('requirement:' requirement=EPREFIX_REF)? &
+	('capability:' capability=EPREFIX_REF)?
 ;
 
 EConditionClauseDefinition:

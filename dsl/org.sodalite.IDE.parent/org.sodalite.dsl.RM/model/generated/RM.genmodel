@@ -116,8 +116,8 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EEvenFilter">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EEvenFilter/node"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EEvenFilter/requirement"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EEvenFilter/capability"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EEvenFilter/requirement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EEvenFilter/capability"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EConditionClauseDefinition"/>
     <genClasses ecoreClass="RM.ecore#//EConditionClauseDefinitionAND">

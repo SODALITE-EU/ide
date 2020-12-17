@@ -21635,9 +21635,9 @@ rule__EEvenFilter__RequirementAssignment_1_1
 	}
 :
 	(
-		{ before(grammarAccess.getEEvenFilterAccess().getRequirementSTRINGTerminalRuleCall_1_1_0()); }
-		RULE_STRING
-		{ after(grammarAccess.getEEvenFilterAccess().getRequirementSTRINGTerminalRuleCall_1_1_0()); }
+		{ before(grammarAccess.getEEvenFilterAccess().getRequirementEPREFIX_REFParserRuleCall_1_1_0()); }
+		ruleEPREFIX_REF
+		{ after(grammarAccess.getEEvenFilterAccess().getRequirementEPREFIX_REFParserRuleCall_1_1_0()); }
 	)
 ;
 finally {
@@ -21650,9 +21650,9 @@ rule__EEvenFilter__CapabilityAssignment_2_1
 	}
 :
 	(
-		{ before(grammarAccess.getEEvenFilterAccess().getCapabilitySTRINGTerminalRuleCall_2_1_0()); }
-		RULE_STRING
-		{ after(grammarAccess.getEEvenFilterAccess().getCapabilitySTRINGTerminalRuleCall_2_1_0()); }
+		{ before(grammarAccess.getEEvenFilterAccess().getCapabilityEPREFIX_REFParserRuleCall_2_1_0()); }
+		ruleEPREFIX_REF
+		{ after(grammarAccess.getEEvenFilterAccess().getCapabilityEPREFIX_REFParserRuleCall_2_1_0()); }
 	)
 ;
 finally {

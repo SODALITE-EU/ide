@@ -1854,7 +1854,7 @@ public class RMGenerator extends AbstractGenerator {
     this.putParameterNumber(ef, "requirement", Integer.valueOf(this.parameter_counter));
     _builder.newLineIfNotEmpty();
     {
-      String _requirement = ef.getRequirement();
+      EPREFIX_REF _requirement = ef.getRequirement();
       boolean _tripleNotEquals = (_requirement != null);
       if (_tripleNotEquals) {
         _builder.append(":Parameter_");
@@ -1869,8 +1869,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _requirement_1 = ef.getRequirement();
-        _builder.append(_requirement_1, "  ");
+        String _trim_1 = this.trim(this.compile(ef.getRequirement()));
+        _builder.append(_trim_1, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -1881,7 +1881,7 @@ public class RMGenerator extends AbstractGenerator {
     this.putParameterNumber(ef, "capability", Integer.valueOf(this.parameter_counter));
     _builder.newLineIfNotEmpty();
     {
-      String _capability = ef.getCapability();
+      EPREFIX_REF _capability = ef.getCapability();
       boolean _tripleNotEquals_1 = (_capability != null);
       if (_tripleNotEquals_1) {
         _builder.append(":Parameter_");
@@ -1896,8 +1896,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _capability_1 = ef.getCapability();
-        _builder.append(_capability_1, "  ");
+        String _trim_2 = this.trim(this.compile(ef.getCapability()));
+        _builder.append(_trim_2, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -1926,8 +1926,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append(" ;");
     _builder.newLineIfNotEmpty();
     {
-      String _requirement_2 = ef.getRequirement();
-      boolean _tripleNotEquals_2 = (_requirement_2 != null);
+      EPREFIX_REF _requirement_1 = ef.getRequirement();
+      boolean _tripleNotEquals_2 = (_requirement_1 != null);
       if (_tripleNotEquals_2) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -1938,8 +1938,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      String _capability_2 = ef.getCapability();
-      boolean _tripleNotEquals_3 = (_capability_2 != null);
+      EPREFIX_REF _capability_1 = ef.getCapability();
+      boolean _tripleNotEquals_3 = (_capability_1 != null);
       if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");

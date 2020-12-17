@@ -494,7 +494,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "requirement" ;  
-	  exchange:value '«ef.requirement»' ;
+	  exchange:value '«trim(ef.requirement.compile())»' ;
 	.
 	«ENDIF»
 	
@@ -503,7 +503,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "capability" ;  
-	  exchange:value '«ef.capability»' ;
+	  exchange:value '«trim(ef.capability.compile())»' ;
 	.
 	«ENDIF»
 	

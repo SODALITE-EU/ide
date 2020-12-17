@@ -1525,17 +1525,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cRequirementKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cRequirementAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cRequirementSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cRequirementAssignment_1_1.eContents().get(0);
+		private final RuleCall cRequirementEPREFIX_REFParserRuleCall_1_1_0 = (RuleCall)cRequirementAssignment_1_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
 		private final Keyword cCapabilityKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cCapabilityAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cCapabilitySTRINGTerminalRuleCall_2_1_0 = (RuleCall)cCapabilityAssignment_2_1.eContents().get(0);
+		private final RuleCall cCapabilityEPREFIX_REFParserRuleCall_2_1_0 = (RuleCall)cCapabilityAssignment_2_1.eContents().get(0);
 		
 		//EEvenFilter:
-		//	'node:' node=EPREFIX_REF & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?;
+		//	'node:' node=EPREFIX_REF & ('requirement:' requirement=EPREFIX_REF)? & ('capability:' capability=EPREFIX_REF)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'node:' node=EPREFIX_REF & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?
+		//'node:' node=EPREFIX_REF & ('requirement:' requirement=EPREFIX_REF)? & ('capability:' capability=EPREFIX_REF)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//'node:' node=EPREFIX_REF
@@ -1550,29 +1550,29 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//EPREFIX_REF
 		public RuleCall getNodeEPREFIX_REFParserRuleCall_0_1_0() { return cNodeEPREFIX_REFParserRuleCall_0_1_0; }
 		
-		//('requirement:' requirement=STRING)?
+		//('requirement:' requirement=EPREFIX_REF)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'requirement:'
 		public Keyword getRequirementKeyword_1_0() { return cRequirementKeyword_1_0; }
 		
-		//requirement=STRING
+		//requirement=EPREFIX_REF
 		public Assignment getRequirementAssignment_1_1() { return cRequirementAssignment_1_1; }
 		
-		//STRING
-		public RuleCall getRequirementSTRINGTerminalRuleCall_1_1_0() { return cRequirementSTRINGTerminalRuleCall_1_1_0; }
+		//EPREFIX_REF
+		public RuleCall getRequirementEPREFIX_REFParserRuleCall_1_1_0() { return cRequirementEPREFIX_REFParserRuleCall_1_1_0; }
 		
-		//('capability:' capability=STRING)?
+		//('capability:' capability=EPREFIX_REF)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'capability:'
 		public Keyword getCapabilityKeyword_2_0() { return cCapabilityKeyword_2_0; }
 		
-		//capability=STRING
+		//capability=EPREFIX_REF
 		public Assignment getCapabilityAssignment_2_1() { return cCapabilityAssignment_2_1; }
 		
-		//STRING
-		public RuleCall getCapabilitySTRINGTerminalRuleCall_2_1_0() { return cCapabilitySTRINGTerminalRuleCall_2_1_0; }
+		//EPREFIX_REF
+		public RuleCall getCapabilityEPREFIX_REFParserRuleCall_2_1_0() { return cCapabilityEPREFIX_REFParserRuleCall_2_1_0; }
 	}
 	public class EConditionClauseDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EConditionClauseDefinition");
@@ -5480,7 +5480,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EEvenFilter:
-	//	'node:' node=EPREFIX_REF & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?;
+	//	'node:' node=EPREFIX_REF & ('requirement:' requirement=EPREFIX_REF)? & ('capability:' capability=EPREFIX_REF)?;
 	public EEvenFilterElements getEEvenFilterAccess() {
 		return pEEvenFilter;
 	}

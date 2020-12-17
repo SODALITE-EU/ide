@@ -2731,19 +2731,20 @@ ruleEEvenFilter returns [EObject current=null]
 							}
 							(
 								(
-									lv_requirement_4_0=RULE_STRING
 									{
-										newLeafNode(lv_requirement_4_0, grammarAccess.getEEvenFilterAccess().getRequirementSTRINGTerminalRuleCall_1_1_0());
+										newCompositeNode(grammarAccess.getEEvenFilterAccess().getRequirementEPREFIX_REFParserRuleCall_1_1_0());
 									}
+									lv_requirement_4_0=ruleEPREFIX_REF
 									{
 										if ($current==null) {
-											$current = createModelElement(grammarAccess.getEEvenFilterRule());
+											$current = createModelElementForParent(grammarAccess.getEEvenFilterRule());
 										}
-										setWithLastConsumed(
+										set(
 											$current,
 											"requirement",
 											lv_requirement_4_0,
-											"org.eclipse.xtext.common.Terminals.STRING");
+											"org.sodalite.dsl.RM.EPREFIX_REF");
+										afterParserOrEnumRuleCall();
 									}
 								)
 							)
@@ -2764,19 +2765,20 @@ ruleEEvenFilter returns [EObject current=null]
 							}
 							(
 								(
-									lv_capability_6_0=RULE_STRING
 									{
-										newLeafNode(lv_capability_6_0, grammarAccess.getEEvenFilterAccess().getCapabilitySTRINGTerminalRuleCall_2_1_0());
+										newCompositeNode(grammarAccess.getEEvenFilterAccess().getCapabilityEPREFIX_REFParserRuleCall_2_1_0());
 									}
+									lv_capability_6_0=ruleEPREFIX_REF
 									{
 										if ($current==null) {
-											$current = createModelElement(grammarAccess.getEEvenFilterRule());
+											$current = createModelElementForParent(grammarAccess.getEEvenFilterRule());
 										}
-										setWithLastConsumed(
+										set(
 											$current,
 											"capability",
 											lv_capability_6_0,
-											"org.eclipse.xtext.common.Terminals.STRING");
+											"org.sodalite.dsl.RM.EPREFIX_REF");
+										afterParserOrEnumRuleCall();
 									}
 								)
 							)

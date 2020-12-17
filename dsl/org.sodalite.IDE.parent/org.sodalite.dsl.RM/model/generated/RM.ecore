@@ -154,8 +154,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="EEvenFilter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//EPREFIX_REF"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="capability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requirement" eType="#//EPREFIX_REF"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="capability" eType="#//EPREFIX_REF"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EConditionClauseDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="EConditionClauseDefinitionAND" eSuperTypes="#//EConditionClauseDefinition">

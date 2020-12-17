@@ -887,7 +887,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EEvenFilter returns EEvenFilter
 	 *
 	 * Constraint:
-	 *     (node=EPREFIX_REF | requirement=STRING | capability=STRING)+
+	 *     (node=EPREFIX_REF | requirement=EPREFIX_REF | capability=EPREFIX_REF)+
 	 */
 	protected void sequence_EEvenFilter(ISerializationContext context, EEvenFilter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

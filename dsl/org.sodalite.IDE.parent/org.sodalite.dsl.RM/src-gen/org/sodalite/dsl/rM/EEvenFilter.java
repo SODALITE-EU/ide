@@ -48,47 +48,47 @@ public interface EEvenFilter extends EObject
   void setNode(EPREFIX_REF value);
 
   /**
-   * Returns the value of the '<em><b>Requirement</b></em>' attribute.
+   * Returns the value of the '<em><b>Requirement</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Requirement</em>' attribute.
-   * @see #setRequirement(String)
+   * @return the value of the '<em>Requirement</em>' containment reference.
+   * @see #setRequirement(EPREFIX_REF)
    * @see org.sodalite.dsl.rM.RMPackage#getEEvenFilter_Requirement()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getRequirement();
+  EPREFIX_REF getRequirement();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EEvenFilter#getRequirement <em>Requirement</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EEvenFilter#getRequirement <em>Requirement</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Requirement</em>' attribute.
+   * @param value the new value of the '<em>Requirement</em>' containment reference.
    * @see #getRequirement()
    * @generated
    */
-  void setRequirement(String value);
+  void setRequirement(EPREFIX_REF value);
 
   /**
-   * Returns the value of the '<em><b>Capability</b></em>' attribute.
+   * Returns the value of the '<em><b>Capability</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Capability</em>' attribute.
-   * @see #setCapability(String)
+   * @return the value of the '<em>Capability</em>' containment reference.
+   * @see #setCapability(EPREFIX_REF)
    * @see org.sodalite.dsl.rM.RMPackage#getEEvenFilter_Capability()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getCapability();
+  EPREFIX_REF getCapability();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EEvenFilter#getCapability <em>Capability</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EEvenFilter#getCapability <em>Capability</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Capability</em>' attribute.
+   * @param value the new value of the '<em>Capability</em>' containment reference.
    * @see #getCapability()
    * @generated
    */
-  void setCapability(String value);
+  void setCapability(EPREFIX_REF value);
 
 } // EEvenFilter

@@ -44,44 +44,24 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
   protected EPREFIX_REF node;
 
   /**
-   * The default value of the '{@link #getRequirement() <em>Requirement</em>}' attribute.
+   * The cached value of the '{@link #getRequirement() <em>Requirement</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getRequirement()
    * @generated
    * @ordered
    */
-  protected static final String REQUIREMENT_EDEFAULT = null;
+  protected EPREFIX_REF requirement;
 
   /**
-   * The cached value of the '{@link #getRequirement() <em>Requirement</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRequirement()
-   * @generated
-   * @ordered
-   */
-  protected String requirement = REQUIREMENT_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getCapability() <em>Capability</em>}' attribute.
+   * The cached value of the '{@link #getCapability() <em>Capability</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getCapability()
    * @generated
    * @ordered
    */
-  protected static final String CAPABILITY_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getCapability() <em>Capability</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCapability()
-   * @generated
-   * @ordered
-   */
-  protected String capability = CAPABILITY_EDEFAULT;
+  protected EPREFIX_REF capability;
 
   /**
    * <!-- begin-user-doc -->
@@ -160,7 +140,7 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
    * @generated
    */
   @Override
-  public String getRequirement()
+  public EPREFIX_REF getRequirement()
   {
     return requirement;
   }
@@ -170,13 +150,16 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setRequirement(String newRequirement)
+  public NotificationChain basicSetRequirement(EPREFIX_REF newRequirement, NotificationChain msgs)
   {
-    String oldRequirement = requirement;
+    EPREFIX_REF oldRequirement = requirement;
     requirement = newRequirement;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EEVEN_FILTER__REQUIREMENT, oldRequirement, requirement));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EEVEN_FILTER__REQUIREMENT, oldRequirement, newRequirement);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -185,7 +168,29 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
    * @generated
    */
   @Override
-  public String getCapability()
+  public void setRequirement(EPREFIX_REF newRequirement)
+  {
+    if (newRequirement != requirement)
+    {
+      NotificationChain msgs = null;
+      if (requirement != null)
+        msgs = ((InternalEObject)requirement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EEVEN_FILTER__REQUIREMENT, null, msgs);
+      if (newRequirement != null)
+        msgs = ((InternalEObject)newRequirement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EEVEN_FILTER__REQUIREMENT, null, msgs);
+      msgs = basicSetRequirement(newRequirement, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EEVEN_FILTER__REQUIREMENT, newRequirement, newRequirement));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPREFIX_REF getCapability()
   {
     return capability;
   }
@@ -195,13 +200,38 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setCapability(String newCapability)
+  public NotificationChain basicSetCapability(EPREFIX_REF newCapability, NotificationChain msgs)
   {
-    String oldCapability = capability;
+    EPREFIX_REF oldCapability = capability;
     capability = newCapability;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EEVEN_FILTER__CAPABILITY, oldCapability, capability));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EEVEN_FILTER__CAPABILITY, oldCapability, newCapability);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setCapability(EPREFIX_REF newCapability)
+  {
+    if (newCapability != capability)
+    {
+      NotificationChain msgs = null;
+      if (capability != null)
+        msgs = ((InternalEObject)capability).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EEVEN_FILTER__CAPABILITY, null, msgs);
+      if (newCapability != null)
+        msgs = ((InternalEObject)newCapability).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EEVEN_FILTER__CAPABILITY, null, msgs);
+      msgs = basicSetCapability(newCapability, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EEVEN_FILTER__CAPABILITY, newCapability, newCapability));
   }
 
   /**
@@ -216,6 +246,10 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
     {
       case RMPackage.EEVEN_FILTER__NODE:
         return basicSetNode(null, msgs);
+      case RMPackage.EEVEN_FILTER__REQUIREMENT:
+        return basicSetRequirement(null, msgs);
+      case RMPackage.EEVEN_FILTER__CAPABILITY:
+        return basicSetCapability(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -254,10 +288,10 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
         setNode((EPREFIX_REF)newValue);
         return;
       case RMPackage.EEVEN_FILTER__REQUIREMENT:
-        setRequirement((String)newValue);
+        setRequirement((EPREFIX_REF)newValue);
         return;
       case RMPackage.EEVEN_FILTER__CAPABILITY:
-        setCapability((String)newValue);
+        setCapability((EPREFIX_REF)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -277,10 +311,10 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
         setNode((EPREFIX_REF)null);
         return;
       case RMPackage.EEVEN_FILTER__REQUIREMENT:
-        setRequirement(REQUIREMENT_EDEFAULT);
+        setRequirement((EPREFIX_REF)null);
         return;
       case RMPackage.EEVEN_FILTER__CAPABILITY:
-        setCapability(CAPABILITY_EDEFAULT);
+        setCapability((EPREFIX_REF)null);
         return;
     }
     super.eUnset(featureID);
@@ -299,30 +333,11 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
       case RMPackage.EEVEN_FILTER__NODE:
         return node != null;
       case RMPackage.EEVEN_FILTER__REQUIREMENT:
-        return REQUIREMENT_EDEFAULT == null ? requirement != null : !REQUIREMENT_EDEFAULT.equals(requirement);
+        return requirement != null;
       case RMPackage.EEVEN_FILTER__CAPABILITY:
-        return CAPABILITY_EDEFAULT == null ? capability != null : !CAPABILITY_EDEFAULT.equals(capability);
+        return capability != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (requirement: ");
-    result.append(requirement);
-    result.append(", capability: ");
-    result.append(capability);
-    result.append(')');
-    return result.toString();
   }
 
 } //EEvenFilterImpl

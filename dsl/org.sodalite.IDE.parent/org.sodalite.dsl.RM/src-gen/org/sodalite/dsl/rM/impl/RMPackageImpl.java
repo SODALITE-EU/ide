@@ -1885,9 +1885,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getEEvenFilter_Requirement()
+  public EReference getEEvenFilter_Requirement()
   {
-    return (EAttribute)eEvenFilterEClass.getEStructuralFeatures().get(1);
+    return (EReference)eEvenFilterEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1896,9 +1896,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getEEvenFilter_Capability()
+  public EReference getEEvenFilter_Capability()
   {
-    return (EAttribute)eEvenFilterEClass.getEStructuralFeatures().get(2);
+    return (EReference)eEvenFilterEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -4363,8 +4363,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eEvenFilterEClass = createEClass(EEVEN_FILTER);
     createEReference(eEvenFilterEClass, EEVEN_FILTER__NODE);
-    createEAttribute(eEvenFilterEClass, EEVEN_FILTER__REQUIREMENT);
-    createEAttribute(eEvenFilterEClass, EEVEN_FILTER__CAPABILITY);
+    createEReference(eEvenFilterEClass, EEVEN_FILTER__REQUIREMENT);
+    createEReference(eEvenFilterEClass, EEVEN_FILTER__CAPABILITY);
 
     eConditionClauseDefinitionEClass = createEClass(ECONDITION_CLAUSE_DEFINITION);
 
@@ -4841,8 +4841,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eEvenFilterEClass, EEvenFilter.class, "EEvenFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEEvenFilter_Node(), this.getEPREFIX_REF(), null, "node", null, 0, 1, EEvenFilter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEEvenFilter_Requirement(), ecorePackage.getEString(), "requirement", null, 0, 1, EEvenFilter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEEvenFilter_Capability(), ecorePackage.getEString(), "capability", null, 0, 1, EEvenFilter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEEvenFilter_Requirement(), this.getEPREFIX_REF(), null, "requirement", null, 0, 1, EEvenFilter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEEvenFilter_Capability(), this.getEPREFIX_REF(), null, "capability", null, 0, 1, EEvenFilter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eConditionClauseDefinitionEClass, EConditionClauseDefinition.class, "EConditionClauseDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

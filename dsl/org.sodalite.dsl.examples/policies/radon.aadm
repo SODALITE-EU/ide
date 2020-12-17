@@ -47,8 +47,8 @@ policies:
 					end_time: '2022-04-08T21:59:43.10-06:00'
 				target_filter:
 					node: radon/openstack_vm
-					requirement: 'workstation'
-					capability: 'host_capability'
+					requirement: radon/openstack_vm.host
+					capability: radon/openstack_vm.host
 				condition:
 					constraint:
 						not:
