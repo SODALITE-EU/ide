@@ -1,5 +1,67 @@
 module: radon
 
+node_types:
+	radon.nodes.OpenStack.VM:
+		derived_from: tosca.nodes.Compute
+		attributes:
+			available_instances:
+				type: integer
+				default: 42
+			available_space:
+				type: integer
+				default: 1000
+		properties:
+			name:
+				type: string
+			image:
+				type: string
+			flavor:
+				type: string
+			network:
+				type: string
+			key_name:
+				type: string
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/xopera-opera/examples/policy_triggers/playbooks/create.yaml"
+							
+interface_types:
+	radon.interfaces.scaling.ScaleDown:
+		derived_from: tosca.interfaces.Root
+		operations:
+			scale_down:
+				inputs:
+					adjustment:
+						default: 1
+						type: integer
+	radon.interfaces.scaling.ScaleUp:
+		derived_from: tosca.interfaces.Root
+		operations:
+			scale_up:
+				inputs:
+					adjustment: 
+						default: 1
+						type: integer
+				description: 'Operation for scaling up.'
+				implementation: 
+					primary: "/home/yosu/Projects/Sodalite/Git/xopera-opera/examples/policy_triggers/playbooks/scale_up.yaml"
+
+	radon.interfaces.scaling.AutoScale:
+		derived_from: tosca.interfaces.Root
+		operations:
+			retrieve_info:
+				description: 'Operation for autoscaling.'
+				implementation: 
+					primary: "/home/yosu/Projects/Sodalite/Git/xopera-opera/examples/policy_triggers/playbooks/retrieve_info.yaml"
+			autoscale:
+				description: 'Operation for autoscaling.'
+				implementation: 
+					primary: "/home/yosu/Projects/Sodalite/Git/xopera-opera/examples/policy_triggers/playbooks/auto_scale.yaml"
+										
 policy_types:
 	radon.policies.scaling.ScaleDown:
 		derived_from: tosca.policies.Scaling
@@ -16,13 +78,13 @@ policy_types:
 				required: false
 				constraints:
 					less_or_equal: -1
-		targets: [ radon.nodes.OpenStack.VM ]
+		targets: [ radon/radon.nodes.OpenStack.VM ]
 		triggers:
       		radon.triggers.scaling:
         		description: 'A trigger for scaling down'
         		event: 'scale_down_trigger'
         		target_filter:
-          			node: radon.nodes.OpenStack.VM
+          			node: radon/radon.nodes.OpenStack.VM
         		condition:
         			constraint:
 	          			not:
@@ -31,8 +93,62 @@ policy_types:
 								available_space: [ greater_than: 1000 ]
         		action:
           			call_operation:
-						operation: radon.interfaces.scaling.ScaleDown.scale_down
+						operation: radon/radon.interfaces.scaling.ScaleDown.scale_down
 						inputs: 
 							adjustment: get_property: 
 								entity: SELF
-								property: radon.policies.scaling.ScaleDown.adjustment
+								property: radon/radon.policies.scaling.ScaleDown.adjustment
+								
+	radon.policies.scaling.ScaleUp:
+		derived_from: tosca.policies.Scaling
+		properties:
+			cpu_upper_bound:
+				description: 'The upper bound for the CPU'
+				type: float
+				required: false
+				constraints:
+					greater_or_equal: 80.0
+			adjustment:
+				description: 'The amount by which to scale'
+				type: integer
+				required: false
+				constraints:
+  					greater_or_equal: 1
+		targets: [ radon/radon.nodes.OpenStack.VM ]
+		triggers:
+			radon.triggers.scaling:
+				description: 'A trigger for scaling up'
+				event: 'scale_up_trigger'
+				target_filter:
+					node: radon/radon.nodes.OpenStack.VM
+				condition:
+					constraint:
+						not:
+							and:
+								available_instances: [ greater_than: 42  ]
+								available_space: [ greater_than: 1000 ]
+				action:
+					call_operation:
+						operation: radon/radon.interfaces.scaling.ScaleUp.scale_up
+						inputs:
+ 							adjustment: get_property: 
+								entity: SELF
+								property: radon/radon.policies.scaling.ScaleUp.adjustment
+
+	radon.policies.scaling.AutoScale:
+		derived_from: tosca.policies.Scaling
+		properties:
+			min_size:
+				type: integer
+				description: 'The minimum number of instances'
+				required: true
+				status: 'supported'
+				constraints:
+					greater_or_equal: 1
+			max_size:
+				type: integer
+				description: 'The maximum number of instances'
+				required: true
+				status: 'supported'
+				constraints:
+					greater_or_equal: 10

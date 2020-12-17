@@ -1,0 +1,66 @@
+module: radon
+
+node_templates:
+	workstation:
+		type: tosca.nodes.Compute
+		attributes:
+			private_address:  'localhost'
+			public_address: 'localhost'
+
+	openstack_vm:
+		type: radon/radon.nodes.OpenStack.VM
+		properties:
+			name: 'HostVM'
+			image: 'centos7'
+			flavor: 'm1.xsmall'
+			network: 'provider_64_net'
+			key_name: 'my_key'
+		requirements:
+			host: 
+				node: radon/workstation
+
+policies:
+	scale_down:
+		type: radon/radon.policies.scaling.ScaleDown
+		properties:
+			cpu_upper_bound: 90
+			adjustment: 1
+	
+	scale_up:
+		type: radon/radon.policies.scaling.ScaleUp
+		properties:
+			cpu_upper_bound: 90
+			adjustment: 1
+
+	autoscale:
+		type: radon/radon.policies.scaling.AutoScale
+		properties:
+			min_size: 3
+			max_size: 7
+		targets: [ radon/openstack_vm]
+		triggers:
+			radon.triggers.scaling:
+				description: 'A trigger for autoscaling'
+				event: 'auto_scale_trigger'
+				schedule:
+					start_time: '2020-04-08T21:59:43.10-06:00'
+					end_time: '2022-04-08T21:59:43.10-06:00'
+				target_filter:
+					node: radon/openstack_vm
+					requirement: 'workstation'
+					capability: 'host_capability'
+				condition:
+					constraint:
+						not:
+							and:
+								available_instances: [ greater_than: 42]
+								available_space: [ greater_than: 1000]
+					period: '60 sec'
+					evaluations: 2
+					method: 'average'
+				action:
+					call_operation:
+						operation: radon/radon.interfaces.scaling.AutoScale.retrieve_info
+					call_operation:
+						operation: radon/radon.interfaces.scaling.AutoScale.autoscale
+				
