@@ -40,7 +40,6 @@ import org.sodalite.dsl.rM.ELength
 import org.sodalite.dsl.rM.EMaxLength
 import org.sodalite.dsl.rM.ECapabilityType
 import org.sodalite.dsl.rM.ERelationshipType
-import org.sodalite.dsl.rM.ECapabilityTypeRef
 import java.io.File
 import org.sodalite.dsl.rM.ESingleValue
 import org.sodalite.dsl.rM.EAlphaNumericValue
@@ -68,6 +67,9 @@ import org.sodalite.dsl.rM.EConditionClauseDefinitionAND
 import org.sodalite.dsl.rM.EConditionClauseDefinitionOR
 import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
 import org.sodalite.dsl.rM.EAssertionDefinition
+import org.sodalite.dsl.rM.ETargetType
+import org.sodalite.dsl.rM.EPREFIX_REF
+import org.sodalite.dsl.rM.EExtendedTriggerCondition
 
 /**
  * Generates code from your model files on save.
@@ -862,7 +864,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "valid_target_types" ;
-	  «FOR entry:(r.relationship.valid_target_types.targetTypes as EObjectContainmentEList<ECapabilityTypeRef>)»
+	  «FOR entry:(r.relationship.valid_target_types.targetTypes as EObjectContainmentEList<ETargetType>)»
 	  «IF entry.name.module !== null»
 	  exchange:listValue '«entry.name.module»/«entry.name.type»' ; 
 	  «ELSE»
@@ -966,8 +968,7 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(p, "targets", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "targets" ;
-	  «FOR entry:(p.policy.targets.targetTypes as EObjectContainmentEList<ECapabilityTypeRef>)»
+	  «FOR entry:(p.policy.targets.targetTypes as EObjectContainmentEList<ETargetType>)»
 	  «IF entry.name.module !== null»
 	  exchange:listValue '«entry.name.module»/«entry.name.type»' ; 
 	  «ELSE»
@@ -994,7 +995,7 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDFOR»
 	  «ENDIF»
 	  «IF p.policy.targets !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p, "targets")» ;
+	  exchange:targets :Parameter_«getParameterNumber(p, "targets")» ;
 	  «ENDIF»
 	  «IF p.policy.triggers !== null»
 	  «FOR t:p.policy.triggers.triggers»
@@ -1136,19 +1137,12 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	  
 	  «IF t.trigger.condition !== null»
-	«t.trigger.condition.compile()»  
-	
-	«putParameterNumber(t, "condition", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "condition" ;
-	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.condition, "name")»
-	.
+	«t.trigger.condition.compile("condition")»  
 	  «ENDIF»
 	
-	  «IF t.trigger.action !== null»
-	«t.trigger.action.compile("action")»
-	  «ENDIF»
+	«FOR action: t.trigger.action.list»
+	«action.compile("action")»
+	«ENDFOR»
 	
 	«trigger_numbers.put(t, trigger_counter)»
 	:Trigger_«trigger_counter++»
@@ -1162,12 +1156,70 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.target_filter, "name")» ;
 	  «ENDIF»
 	  «IF t.trigger.condition !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(t, "condition")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.condition, "name")» ;
 	  «ENDIF»
-	  «IF t.trigger.action !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.action, "name")» ;
-	  «ENDIF»
+	  «FOR action: t.trigger.action.list»
+	  exchange:hasParameter :Parameter_«getParameterNumber(action, "name")» ;
+	  «ENDFOR»
 	  .
+	'''
+	
+	def compile (EExtendedTriggerCondition etc, String name)'''
+	
+	  «IF etc.constraint !== null»
+	«etc.constraint.compile()»
+	  «ENDIF»
+	
+	  «IF etc.constraint !== null»
+	  «putParameterNumber(etc, "constraint", parameter_counter)»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "constraint" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc.constraint, "name")» ;
+	  .
+	  «ENDIF»
+	  «putParameterNumber(etc, "period", parameter_counter)»
+	  «IF etc.period !== null»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "period" ;
+	  exchange:value «etc.period» ;
+	  .
+	  «ENDIF»
+	  «IF etc.evaluations !== null»
+	  «putParameterNumber(etc, "evaluations", parameter_counter)»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "evaluations" ;
+	  exchange:value «etc.evaluations.value» ;
+	  .
+	  «ENDIF»
+	  «IF etc.method !== null»
+	  «putParameterNumber(etc, "method", parameter_counter)»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "method" ;
+	  exchange:value «etc.method» ;
+	  .
+	  «ENDIF»
+	
+	«putParameterNumber(etc, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«name»" ;
+	  «IF etc.constraint !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "constraint")» ;
+  	  «ENDIF»
+	  «IF etc.period !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "period")» ;
+  	  «ENDIF»
+	  «IF etc.evaluations !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "evaluations")» ;
+  	  «ENDIF»
+	  «IF etc.method !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "method")» ;
+  	  «ENDIF»
+	.
 	'''
 	
 	def compile (EAttributeDefinition a) '''
@@ -1273,6 +1325,14 @@ class RMGenerator extends AbstractGenerator {
 	«ENDIF»
 	'''
 	
+	def compile (EPREFIX_REF r) '''
+	«IF r instanceof EPREFIX_TYPE»
+	  «(r as EPREFIX_TYPE).compile»  
+	«ELSEIF r instanceof EPREFIX_ID»
+	  «(r as EPREFIX_ID).compile»
+	«ENDIF»
+	'''
+	
 	def compile (EEntityReference t) '''
 	«IF t instanceof EPREFIX_TYPE»
 	  «(t as EPREFIX_TYPE).compile»
@@ -1292,6 +1352,14 @@ class RMGenerator extends AbstractGenerator {
 	  «t.module»/«t.type»  
 	«ELSE»
 	  «t.type»
+	«ENDIF»
+	'''
+	
+	def compile (EPREFIX_ID t) '''
+	«IF t.module !== null»
+	  «t.module»/«t.id»  
+	«ELSE»
+	  «t.id»
 	«ENDIF»
 	'''
 	

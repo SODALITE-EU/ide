@@ -12,9 +12,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.EActivityDefinition;
-import org.sodalite.dsl.rM.EConditionClauseDefinition;
+import org.sodalite.dsl.rM.EActivityDefinitions;
 import org.sodalite.dsl.rM.EEvenFilter;
+import org.sodalite.dsl.rM.EExtendedTriggerCondition;
+import org.sodalite.dsl.rM.ETimeInterval;
 import org.sodalite.dsl.rM.ETriggerDefinitionBody;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -28,6 +29,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl#getEvent <em>Event</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl#getSchedule <em>Schedule</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl#getTarget_filter <em>Target filter</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.ETriggerDefinitionBodyImpl#getAction <em>Action</em>}</li>
@@ -78,6 +80,16 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
   protected String event = EVENT_EDEFAULT;
 
   /**
+   * The cached value of the '{@link #getSchedule() <em>Schedule</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSchedule()
+   * @generated
+   * @ordered
+   */
+  protected ETimeInterval schedule;
+
+  /**
    * The cached value of the '{@link #getTarget_filter() <em>Target filter</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -95,7 +107,7 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
    * @generated
    * @ordered
    */
-  protected EConditionClauseDefinition condition;
+  protected EExtendedTriggerCondition condition;
 
   /**
    * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
@@ -105,7 +117,7 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
    * @generated
    * @ordered
    */
-  protected EActivityDefinition action;
+  protected EActivityDefinitions action;
 
   /**
    * <!-- begin-user-doc -->
@@ -184,6 +196,56 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
    * @generated
    */
   @Override
+  public ETimeInterval getSchedule()
+  {
+    return schedule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSchedule(ETimeInterval newSchedule, NotificationChain msgs)
+  {
+    ETimeInterval oldSchedule = schedule;
+    schedule = newSchedule;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ETRIGGER_DEFINITION_BODY__SCHEDULE, oldSchedule, newSchedule);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSchedule(ETimeInterval newSchedule)
+  {
+    if (newSchedule != schedule)
+    {
+      NotificationChain msgs = null;
+      if (schedule != null)
+        msgs = ((InternalEObject)schedule).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ETRIGGER_DEFINITION_BODY__SCHEDULE, null, msgs);
+      if (newSchedule != null)
+        msgs = ((InternalEObject)newSchedule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ETRIGGER_DEFINITION_BODY__SCHEDULE, null, msgs);
+      msgs = basicSetSchedule(newSchedule, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ETRIGGER_DEFINITION_BODY__SCHEDULE, newSchedule, newSchedule));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EEvenFilter getTarget_filter()
   {
     return target_filter;
@@ -234,7 +296,7 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
    * @generated
    */
   @Override
-  public EConditionClauseDefinition getCondition()
+  public EExtendedTriggerCondition getCondition()
   {
     return condition;
   }
@@ -244,9 +306,9 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetCondition(EConditionClauseDefinition newCondition, NotificationChain msgs)
+  public NotificationChain basicSetCondition(EExtendedTriggerCondition newCondition, NotificationChain msgs)
   {
-    EConditionClauseDefinition oldCondition = condition;
+    EExtendedTriggerCondition oldCondition = condition;
     condition = newCondition;
     if (eNotificationRequired())
     {
@@ -262,7 +324,7 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
    * @generated
    */
   @Override
-  public void setCondition(EConditionClauseDefinition newCondition)
+  public void setCondition(EExtendedTriggerCondition newCondition)
   {
     if (newCondition != condition)
     {
@@ -284,7 +346,7 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
    * @generated
    */
   @Override
-  public EActivityDefinition getAction()
+  public EActivityDefinitions getAction()
   {
     return action;
   }
@@ -294,9 +356,9 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAction(EActivityDefinition newAction, NotificationChain msgs)
+  public NotificationChain basicSetAction(EActivityDefinitions newAction, NotificationChain msgs)
   {
-    EActivityDefinition oldAction = action;
+    EActivityDefinitions oldAction = action;
     action = newAction;
     if (eNotificationRequired())
     {
@@ -312,7 +374,7 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
    * @generated
    */
   @Override
-  public void setAction(EActivityDefinition newAction)
+  public void setAction(EActivityDefinitions newAction)
   {
     if (newAction != action)
     {
@@ -338,6 +400,8 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
   {
     switch (featureID)
     {
+      case RMPackage.ETRIGGER_DEFINITION_BODY__SCHEDULE:
+        return basicSetSchedule(null, msgs);
       case RMPackage.ETRIGGER_DEFINITION_BODY__TARGET_FILTER:
         return basicSetTarget_filter(null, msgs);
       case RMPackage.ETRIGGER_DEFINITION_BODY__CONDITION:
@@ -362,6 +426,8 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
         return getDescription();
       case RMPackage.ETRIGGER_DEFINITION_BODY__EVENT:
         return getEvent();
+      case RMPackage.ETRIGGER_DEFINITION_BODY__SCHEDULE:
+        return getSchedule();
       case RMPackage.ETRIGGER_DEFINITION_BODY__TARGET_FILTER:
         return getTarget_filter();
       case RMPackage.ETRIGGER_DEFINITION_BODY__CONDITION:
@@ -388,14 +454,17 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
       case RMPackage.ETRIGGER_DEFINITION_BODY__EVENT:
         setEvent((String)newValue);
         return;
+      case RMPackage.ETRIGGER_DEFINITION_BODY__SCHEDULE:
+        setSchedule((ETimeInterval)newValue);
+        return;
       case RMPackage.ETRIGGER_DEFINITION_BODY__TARGET_FILTER:
         setTarget_filter((EEvenFilter)newValue);
         return;
       case RMPackage.ETRIGGER_DEFINITION_BODY__CONDITION:
-        setCondition((EConditionClauseDefinition)newValue);
+        setCondition((EExtendedTriggerCondition)newValue);
         return;
       case RMPackage.ETRIGGER_DEFINITION_BODY__ACTION:
-        setAction((EActivityDefinition)newValue);
+        setAction((EActivityDefinitions)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -417,14 +486,17 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
       case RMPackage.ETRIGGER_DEFINITION_BODY__EVENT:
         setEvent(EVENT_EDEFAULT);
         return;
+      case RMPackage.ETRIGGER_DEFINITION_BODY__SCHEDULE:
+        setSchedule((ETimeInterval)null);
+        return;
       case RMPackage.ETRIGGER_DEFINITION_BODY__TARGET_FILTER:
         setTarget_filter((EEvenFilter)null);
         return;
       case RMPackage.ETRIGGER_DEFINITION_BODY__CONDITION:
-        setCondition((EConditionClauseDefinition)null);
+        setCondition((EExtendedTriggerCondition)null);
         return;
       case RMPackage.ETRIGGER_DEFINITION_BODY__ACTION:
-        setAction((EActivityDefinition)null);
+        setAction((EActivityDefinitions)null);
         return;
     }
     super.eUnset(featureID);
@@ -444,6 +516,8 @@ public class ETriggerDefinitionBodyImpl extends MinimalEObjectImpl.Container imp
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.ETRIGGER_DEFINITION_BODY__EVENT:
         return EVENT_EDEFAULT == null ? event != null : !EVENT_EDEFAULT.equals(event);
+      case RMPackage.ETRIGGER_DEFINITION_BODY__SCHEDULE:
+        return schedule != null;
       case RMPackage.ETRIGGER_DEFINITION_BODY__TARGET_FILTER:
         return target_filter != null;
       case RMPackage.ETRIGGER_DEFINITION_BODY__CONDITION:

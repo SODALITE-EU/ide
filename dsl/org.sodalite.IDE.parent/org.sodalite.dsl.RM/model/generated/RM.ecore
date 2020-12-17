@@ -126,15 +126,33 @@
   <eClassifiers xsi:type="ecore:EClass" name="ETriggerDefinitionBody">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//ETimeInterval"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target_filter" eType="#//EEvenFilter"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//EConditionClauseDefinition"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//EExtendedTriggerCondition"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//EActivityDefinition"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//EActivityDefinitions"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EActivityDefinitions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="list" upperBound="-1" eType="#//EActivityDefinition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EExtendedTriggerCondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//EConditionClauseDefinition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="period" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="evaluations" eType="#//ESIGNEDINT"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="method" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ETimeInterval">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start_time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end_time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EEvenFilter">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//EPREFIX_TYPE"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//EPREFIX_REF"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="capability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -233,11 +251,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValidTargetTypes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetTypes" upperBound="-1"
-        eType="#//ECapabilityTypeRef" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceType" upperBound="-1"
-        eType="#//ECapabilityTypeRef" containment="true"/>
+        eType="#//ETargetType" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ECapabilityTypeRef">
+  <eClassifiers xsi:type="ecore:EClass" name="ETargetType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EPREFIX_TYPE"
         containment="true"/>
   </eClassifiers>
@@ -507,10 +523,11 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EEntityReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_TYPE" eSuperTypes="#//EDataTypeName #//EEntityReference">
+  <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_REF"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_TYPE" eSuperTypes="#//EDataTypeName #//EEntityReference #//EPREFIX_REF">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="module" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_ID" eSuperTypes="#//EEntityReference">
+  <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_ID" eSuperTypes="#//EEntityReference #//EPREFIX_REF">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="module" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

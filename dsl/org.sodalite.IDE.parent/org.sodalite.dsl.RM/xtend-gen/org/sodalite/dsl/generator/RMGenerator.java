@@ -31,7 +31,6 @@ import org.sodalite.dsl.rM.ECallOperationActivityDefinition;
 import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.ECapabilityDefinition;
 import org.sodalite.dsl.rM.ECapabilityType;
-import org.sodalite.dsl.rM.ECapabilityTypeRef;
 import org.sodalite.dsl.rM.EConditionClauseDefinition;
 import org.sodalite.dsl.rM.EConditionClauseDefinitionAND;
 import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert;
@@ -46,6 +45,7 @@ import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EEqual;
 import org.sodalite.dsl.rM.EEvenFilter;
+import org.sodalite.dsl.rM.EExtendedTriggerCondition;
 import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.EFunction;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
@@ -66,6 +66,7 @@ import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EOperations;
 import org.sodalite.dsl.rM.EPREFIX_ID;
+import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
@@ -79,6 +80,7 @@ import org.sodalite.dsl.rM.ERequirements;
 import org.sodalite.dsl.rM.ESIGNEDINT;
 import org.sodalite.dsl.rM.ESTRING;
 import org.sodalite.dsl.rM.ESingleValue;
+import org.sodalite.dsl.rM.ETargetType;
 import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.rM.ETriggers;
 import org.sodalite.dsl.rM.EValidSourceType;
@@ -2356,8 +2358,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"valid_target_types\" ;");
         _builder.newLine();
         {
-          EList<ECapabilityTypeRef> _targetTypes = r.getRelationship().getValid_target_types().getTargetTypes();
-          for(final ECapabilityTypeRef entry : ((EObjectContainmentEList<ECapabilityTypeRef>) _targetTypes)) {
+          EList<ETargetType> _targetTypes = r.getRelationship().getValid_target_types().getTargetTypes();
+          for(final ETargetType entry : ((EObjectContainmentEList<ETargetType>) _targetTypes)) {
             {
               String _module = entry.getName().getModule();
               boolean _tripleNotEquals_1 = (_module != null);
@@ -2712,12 +2714,9 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("rdf:type exchange:Parameter ;");
         _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:name \"targets\" ;");
-        _builder.newLine();
         {
-          EList<ECapabilityTypeRef> _targetTypes = p.getPolicy().getTargets().getTargetTypes();
-          for(final ECapabilityTypeRef entry : ((EObjectContainmentEList<ECapabilityTypeRef>) _targetTypes)) {
+          EList<ETargetType> _targetTypes = p.getPolicy().getTargets().getTargetTypes();
+          for(final ETargetType entry : ((EObjectContainmentEList<ETargetType>) _targetTypes)) {
             {
               String _module = entry.getName().getModule();
               boolean _tripleNotEquals_1 = (_module != null);
@@ -2816,7 +2815,7 @@ public class RMGenerator extends AbstractGenerator {
       boolean _tripleNotEquals_5 = (_targets_1 != null);
       if (_tripleNotEquals_5) {
         _builder.append("  ");
-        _builder.append("exchange:hasParameter :Parameter_");
+        _builder.append("exchange:targets :Parameter_");
         Integer _parameterNumber = this.getParameterNumber(p, "targets");
         _builder.append(_parameterNumber, "  ");
         _builder.append(" ;");
@@ -3270,41 +3269,20 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("  ");
     _builder.newLine();
     {
-      EConditionClauseDefinition _condition = t.getTrigger().getCondition();
+      EExtendedTriggerCondition _condition = t.getTrigger().getCondition();
       boolean _tripleNotEquals_1 = (_condition != null);
       if (_tripleNotEquals_1) {
-        CharSequence _compile_1 = this.compile(t.getTrigger().getCondition());
+        CharSequence _compile_1 = this.compile(t.getTrigger().getCondition(), "condition");
         _builder.append(_compile_1);
         _builder.append("  ");
         _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        this.putParameterNumber(t, "condition", Integer.valueOf(this.parameter_counter));
-        _builder.newLineIfNotEmpty();
-        _builder.append(":Parameter_");
-        int _plusPlus_1 = this.parameter_counter++;
-        _builder.append(_plusPlus_1);
-        _builder.newLineIfNotEmpty();
-        _builder.append("  ");
-        _builder.append("rdf:type exchange:Parameter ;");
-        _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:name \"condition\" ;");
-        _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber = this.getParameterNumber(t.getTrigger().getCondition(), "name");
-        _builder.append(_parameterNumber, "  ");
-        _builder.newLineIfNotEmpty();
-        _builder.append(".");
-        _builder.newLine();
       }
     }
     _builder.newLine();
     {
-      EActivityDefinition _action = t.getTrigger().getAction();
-      boolean _tripleNotEquals_2 = (_action != null);
-      if (_tripleNotEquals_2) {
-        CharSequence _compile_2 = this.compile(t.getTrigger().getAction(), "action");
+      EList<EActivityDefinition> _list = t.getTrigger().getAction().getList();
+      for(final EActivityDefinition action : _list) {
+        CharSequence _compile_2 = this.compile(action, "action");
         _builder.append(_compile_2);
         _builder.newLineIfNotEmpty();
       }
@@ -3314,8 +3292,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append(_put);
     _builder.newLineIfNotEmpty();
     _builder.append(":Trigger_");
-    int _plusPlus_2 = this.trigger_counter++;
-    _builder.append(_plusPlus_2);
+    int _plusPlus_1 = this.trigger_counter++;
+    _builder.append(_plusPlus_1);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("rdf:type exchange:Trigger ;");
@@ -3328,8 +3306,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     {
       String _description = t.getTrigger().getDescription();
-      boolean _tripleNotEquals_3 = (_description != null);
-      if (_tripleNotEquals_3) {
+      boolean _tripleNotEquals_2 = (_description != null);
+      if (_tripleNotEquals_2) {
         _builder.append("  ");
         _builder.append("exchange:description \'");
         String _processDescription = this.processDescription(t.getTrigger().getDescription());
@@ -3340,47 +3318,243 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.append("  ");
     _builder.append("exchange:hasParameter :Parameter_");
-    Integer _parameterNumber_1 = this.getParameterNumber(t, "event");
-    _builder.append(_parameterNumber_1, "  ");
+    Integer _parameterNumber = this.getParameterNumber(t, "event");
+    _builder.append(_parameterNumber, "  ");
     _builder.append(" ;");
     _builder.newLineIfNotEmpty();
     {
       EEvenFilter _target_filter_1 = t.getTrigger().getTarget_filter();
-      boolean _tripleNotEquals_4 = (_target_filter_1 != null);
+      boolean _tripleNotEquals_3 = (_target_filter_1 != null);
+      if (_tripleNotEquals_3) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_1 = this.getParameterNumber(t.getTrigger().getTarget_filter(), "name");
+        _builder.append(_parameterNumber_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EExtendedTriggerCondition _condition_1 = t.getTrigger().getCondition();
+      boolean _tripleNotEquals_4 = (_condition_1 != null);
       if (_tripleNotEquals_4) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_2 = this.getParameterNumber(t.getTrigger().getTarget_filter(), "name");
+        Integer _parameterNumber_2 = this.getParameterNumber(t.getTrigger().getCondition(), "name");
         _builder.append(_parameterNumber_2, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      EConditionClauseDefinition _condition_1 = t.getTrigger().getCondition();
-      boolean _tripleNotEquals_5 = (_condition_1 != null);
+      EList<EActivityDefinition> _list_1 = t.getTrigger().getAction().getList();
+      for(final EActivityDefinition action_1 : _list_1) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_3 = this.getParameterNumber(action_1, "name");
+        _builder.append(_parameterNumber_3, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("  ");
+    _builder.append(".");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compile(final EExtendedTriggerCondition etc, final String name) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    {
+      EConditionClauseDefinition _constraint = etc.getConstraint();
+      boolean _tripleNotEquals = (_constraint != null);
+      if (_tripleNotEquals) {
+        CharSequence _compile = this.compile(etc.getConstraint());
+        _builder.append(_compile);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
+    {
+      EConditionClauseDefinition _constraint_1 = etc.getConstraint();
+      boolean _tripleNotEquals_1 = (_constraint_1 != null);
+      if (_tripleNotEquals_1) {
+        _builder.append("  ");
+        this.putParameterNumber(etc, "constraint", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append(":Parameter_");
+        int _plusPlus = this.parameter_counter++;
+        _builder.append(_plusPlus, "  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"constraint\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber = this.getParameterNumber(etc.getConstraint(), "name");
+        _builder.append(_parameterNumber, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.append("  ");
+    this.putParameterNumber(etc, "period", Integer.valueOf(this.parameter_counter));
+    _builder.newLineIfNotEmpty();
+    {
+      String _period = etc.getPeriod();
+      boolean _tripleNotEquals_2 = (_period != null);
+      if (_tripleNotEquals_2) {
+        _builder.append("  ");
+        _builder.append(":Parameter_");
+        int _plusPlus_1 = this.parameter_counter++;
+        _builder.append(_plusPlus_1, "  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"period\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value ");
+        String _period_1 = etc.getPeriod();
+        _builder.append(_period_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    {
+      ESIGNEDINT _evaluations = etc.getEvaluations();
+      boolean _tripleNotEquals_3 = (_evaluations != null);
+      if (_tripleNotEquals_3) {
+        _builder.append("  ");
+        this.putParameterNumber(etc, "evaluations", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append(":Parameter_");
+        int _plusPlus_2 = this.parameter_counter++;
+        _builder.append(_plusPlus_2, "  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"evaluations\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value ");
+        int _value = etc.getEvaluations().getValue();
+        _builder.append(_value, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    {
+      String _method = etc.getMethod();
+      boolean _tripleNotEquals_4 = (_method != null);
+      if (_tripleNotEquals_4) {
+        _builder.append("  ");
+        this.putParameterNumber(etc, "method", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append(":Parameter_");
+        int _plusPlus_3 = this.parameter_counter++;
+        _builder.append(_plusPlus_3, "  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"method\" ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value ");
+        String _method_1 = etc.getMethod();
+        _builder.append(_method_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
+    this.putParameterNumber(etc, "name", Integer.valueOf(this.parameter_counter));
+    _builder.newLineIfNotEmpty();
+    _builder.append(":Parameter_");
+    int _plusPlus_4 = this.parameter_counter++;
+    _builder.append(_plusPlus_4);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Parameter ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:name \"");
+    _builder.append(name, "  ");
+    _builder.append("\" ;");
+    _builder.newLineIfNotEmpty();
+    {
+      EConditionClauseDefinition _constraint_2 = etc.getConstraint();
+      boolean _tripleNotEquals_5 = (_constraint_2 != null);
       if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_3 = this.getParameterNumber(t, "condition");
+        Integer _parameterNumber_1 = this.getParameterNumber(etc, "constraint");
+        _builder.append(_parameterNumber_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _period_2 = etc.getPeriod();
+      boolean _tripleNotEquals_6 = (_period_2 != null);
+      if (_tripleNotEquals_6) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_2 = this.getParameterNumber(etc, "period");
+        _builder.append(_parameterNumber_2, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      ESIGNEDINT _evaluations_1 = etc.getEvaluations();
+      boolean _tripleNotEquals_7 = (_evaluations_1 != null);
+      if (_tripleNotEquals_7) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_3 = this.getParameterNumber(etc, "evaluations");
         _builder.append(_parameterNumber_3, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      EActivityDefinition _action_1 = t.getTrigger().getAction();
-      boolean _tripleNotEquals_6 = (_action_1 != null);
-      if (_tripleNotEquals_6) {
+      String _method_2 = etc.getMethod();
+      boolean _tripleNotEquals_8 = (_method_2 != null);
+      if (_tripleNotEquals_8) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_4 = this.getParameterNumber(t.getTrigger().getAction(), "name");
+        Integer _parameterNumber_4 = this.getParameterNumber(etc, "method");
         _builder.append(_parameterNumber_4, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("  ");
     _builder.append(".");
     _builder.newLine();
     return _builder;
@@ -3684,6 +3858,25 @@ public class RMGenerator extends AbstractGenerator {
     return _builder;
   }
   
+  public CharSequence compile(final EPREFIX_REF r) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((r instanceof EPREFIX_TYPE)) {
+        CharSequence _compile = this.compile(((EPREFIX_TYPE) r));
+        _builder.append(_compile);
+        _builder.append("  ");
+        _builder.newLineIfNotEmpty();
+      } else {
+        if ((r instanceof EPREFIX_ID)) {
+          CharSequence _compile_1 = this.compile(((EPREFIX_ID) r));
+          _builder.append(_compile_1);
+          _builder.newLineIfNotEmpty();
+        }
+      }
+    }
+    return _builder;
+  }
+  
   public CharSequence compile(final EEntityReference t) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -3732,6 +3925,28 @@ public class RMGenerator extends AbstractGenerator {
       } else {
         String _type_1 = t.getType();
         _builder.append(_type_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compile(final EPREFIX_ID t) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      String _module = t.getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = t.getModule();
+        _builder.append(_module_1);
+        _builder.append("/");
+        String _id = t.getId();
+        _builder.append(_id);
+        _builder.append("  ");
+        _builder.newLineIfNotEmpty();
+      } else {
+        String _id_1 = t.getId();
+        _builder.append(_id_1);
         _builder.newLineIfNotEmpty();
       }
     }

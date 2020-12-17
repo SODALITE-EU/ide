@@ -1,3 +1,5 @@
+module: radon
+
 policy_types:
 	radon.policies.scaling.ScaleDown:
 		derived_from: tosca.policies.Scaling
@@ -22,10 +24,11 @@ policy_types:
         		target_filter:
           			node: radon.nodes.OpenStack.VM
         		condition:
-          			not:
-            			and:
-							available_instances: [ greater_than: 42 ]
-							available_space: [ greater_than: 1000 ]
+        			constraint:
+	          			not:
+	            			and:
+								available_instances: [ greater_than: 42 ]
+								available_space: [ greater_than: 1000 ]
         		action:
           			call_operation:
 						operation: radon.interfaces.scaling.ScaleDown.scale_down
@@ -33,4 +36,3 @@ policy_types:
 							adjustment: get_property: 
 								entity: SELF
 								property: radon.policies.scaling.ScaleDown.adjustment
-                			

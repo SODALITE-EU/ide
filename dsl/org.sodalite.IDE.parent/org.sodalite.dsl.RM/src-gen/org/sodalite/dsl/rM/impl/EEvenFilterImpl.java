@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EEvenFilter;
-import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -41,7 +41,7 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
    * @generated
    * @ordered
    */
-  protected EPREFIX_TYPE node;
+  protected EPREFIX_REF node;
 
   /**
    * The default value of the '{@link #getRequirement() <em>Requirement</em>}' attribute.
@@ -110,7 +110,7 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
    * @generated
    */
   @Override
-  public EPREFIX_TYPE getNode()
+  public EPREFIX_REF getNode()
   {
     return node;
   }
@@ -120,9 +120,9 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetNode(EPREFIX_TYPE newNode, NotificationChain msgs)
+  public NotificationChain basicSetNode(EPREFIX_REF newNode, NotificationChain msgs)
   {
-    EPREFIX_TYPE oldNode = node;
+    EPREFIX_REF oldNode = node;
     node = newNode;
     if (eNotificationRequired())
     {
@@ -138,7 +138,7 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
    * @generated
    */
   @Override
-  public void setNode(EPREFIX_TYPE newNode)
+  public void setNode(EPREFIX_REF newNode)
   {
     if (newNode != node)
     {
@@ -251,7 +251,7 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
     switch (featureID)
     {
       case RMPackage.EEVEN_FILTER__NODE:
-        setNode((EPREFIX_TYPE)newValue);
+        setNode((EPREFIX_REF)newValue);
         return;
       case RMPackage.EEVEN_FILTER__REQUIREMENT:
         setRequirement((String)newValue);
@@ -274,7 +274,7 @@ public class EEvenFilterImpl extends MinimalEObjectImpl.Container implements EEv
     switch (featureID)
     {
       case RMPackage.EEVEN_FILTER__NODE:
-        setNode((EPREFIX_TYPE)null);
+        setNode((EPREFIX_REF)null);
         return;
       case RMPackage.EEVEN_FILTER__REQUIREMENT:
         setRequirement(REQUIREMENT_EDEFAULT);

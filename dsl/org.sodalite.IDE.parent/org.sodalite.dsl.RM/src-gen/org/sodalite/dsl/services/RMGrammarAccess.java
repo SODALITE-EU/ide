@@ -1221,39 +1221,49 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Assignment cEventAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cEventSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cEventAssignment_1_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
-		private final Keyword cTarget_filterKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Keyword cScheduleKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
-		private final Assignment cTarget_filterAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cTarget_filterEEvenFilterParserRuleCall_2_2_0 = (RuleCall)cTarget_filterAssignment_2_2.eContents().get(0);
+		private final Assignment cScheduleAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cScheduleETimeIntervalParserRuleCall_2_2_0 = (RuleCall)cScheduleAssignment_2_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_2_3 = (RuleCall)cGroup_2.eContents().get(3);
 		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
-		private final Keyword cConditionKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Keyword cTarget_filterKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_3_1 = (RuleCall)cGroup_3.eContents().get(1);
-		private final Assignment cConditionAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
-		private final RuleCall cConditionEConditionClauseDefinitionParserRuleCall_3_2_0 = (RuleCall)cConditionAssignment_3_2.eContents().get(0);
+		private final Assignment cTarget_filterAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cTarget_filterEEvenFilterParserRuleCall_3_2_0 = (RuleCall)cTarget_filterAssignment_3_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3_3 = (RuleCall)cGroup_3.eContents().get(3);
 		private final Group cGroup_4 = (Group)cUnorderedGroup.eContents().get(4);
-		private final Keyword cActionKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Keyword cConditionKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
-		private final Assignment cActionAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
-		private final RuleCall cActionEActivityDefinitionParserRuleCall_4_2_0 = (RuleCall)cActionAssignment_4_2.eContents().get(0);
+		private final Assignment cConditionAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
+		private final RuleCall cConditionEExtendedTriggerConditionParserRuleCall_4_2_0 = (RuleCall)cConditionAssignment_4_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_4_3 = (RuleCall)cGroup_4.eContents().get(3);
+		private final Group cGroup_5 = (Group)cUnorderedGroup.eContents().get(5);
+		private final Keyword cActionKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_5_1 = (RuleCall)cGroup_5.eContents().get(1);
+		private final Assignment cActionAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
+		private final RuleCall cActionEActivityDefinitionsParserRuleCall_5_2_0 = (RuleCall)cActionAssignment_5_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_5_3 = (RuleCall)cGroup_5.eContents().get(3);
 		
 		//ETriggerDefinitionBody:
-		//	('description:' description=STRING)? & 'event:' event=STRING & ('target_filter:'
+		//	('description:' description=STRING)? & 'event:' event=STRING & ('schedule:'
+		//	BEGIN
+		//	schedule=ETimeInterval
+		//	END)? & ('target_filter:'
 		//	BEGIN
 		//	target_filter=EEvenFilter
 		//	END)? & ('condition:'
 		//	BEGIN
-		//	condition=EConditionClauseDefinition
-		//	END)? & ('action:'
+		//	condition=EExtendedTriggerCondition
+		//	END)? & 'action:'
 		//	BEGIN
-		//	action=EActivityDefinition
-		//	END)?;
+		//	action=EActivityDefinitions
+		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('description:' description=STRING)? & 'event:' event=STRING & ('target_filter:' BEGIN target_filter=EEvenFilter END)? &
-		//('condition:' BEGIN condition=EConditionClauseDefinition END)? & ('action:' BEGIN action=EActivityDefinition END)?
+		//('description:' description=STRING)? & 'event:' event=STRING & ('schedule:' BEGIN schedule=ETimeInterval END)? &
+		//('target_filter:' BEGIN target_filter=EEvenFilter END)? & ('condition:' BEGIN condition=EExtendedTriggerCondition END)?
+		//& 'action:' BEGIN action=EActivityDefinitions END
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
 		//('description:' description=STRING)?
@@ -1280,59 +1290,230 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//STRING
 		public RuleCall getEventSTRINGTerminalRuleCall_1_1_0() { return cEventSTRINGTerminalRuleCall_1_1_0; }
 		
-		//('target_filter:' BEGIN target_filter=EEvenFilter END)?
+		//('schedule:' BEGIN schedule=ETimeInterval END)?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//'target_filter:'
-		public Keyword getTarget_filterKeyword_2_0() { return cTarget_filterKeyword_2_0; }
+		//'schedule:'
+		public Keyword getScheduleKeyword_2_0() { return cScheduleKeyword_2_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_2_1() { return cBEGINTerminalRuleCall_2_1; }
 		
-		//target_filter=EEvenFilter
-		public Assignment getTarget_filterAssignment_2_2() { return cTarget_filterAssignment_2_2; }
+		//schedule=ETimeInterval
+		public Assignment getScheduleAssignment_2_2() { return cScheduleAssignment_2_2; }
 		
-		//EEvenFilter
-		public RuleCall getTarget_filterEEvenFilterParserRuleCall_2_2_0() { return cTarget_filterEEvenFilterParserRuleCall_2_2_0; }
+		//ETimeInterval
+		public RuleCall getScheduleETimeIntervalParserRuleCall_2_2_0() { return cScheduleETimeIntervalParserRuleCall_2_2_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_2_3() { return cENDTerminalRuleCall_2_3; }
 		
-		//('condition:' BEGIN condition=EConditionClauseDefinition END)?
+		//('target_filter:' BEGIN target_filter=EEvenFilter END)?
 		public Group getGroup_3() { return cGroup_3; }
 		
-		//'condition:'
-		public Keyword getConditionKeyword_3_0() { return cConditionKeyword_3_0; }
+		//'target_filter:'
+		public Keyword getTarget_filterKeyword_3_0() { return cTarget_filterKeyword_3_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_3_1() { return cBEGINTerminalRuleCall_3_1; }
 		
-		//condition=EConditionClauseDefinition
-		public Assignment getConditionAssignment_3_2() { return cConditionAssignment_3_2; }
+		//target_filter=EEvenFilter
+		public Assignment getTarget_filterAssignment_3_2() { return cTarget_filterAssignment_3_2; }
 		
-		//EConditionClauseDefinition
-		public RuleCall getConditionEConditionClauseDefinitionParserRuleCall_3_2_0() { return cConditionEConditionClauseDefinitionParserRuleCall_3_2_0; }
+		//EEvenFilter
+		public RuleCall getTarget_filterEEvenFilterParserRuleCall_3_2_0() { return cTarget_filterEEvenFilterParserRuleCall_3_2_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_3_3() { return cENDTerminalRuleCall_3_3; }
 		
-		//('action:' BEGIN action=EActivityDefinition END)?
+		//('condition:' BEGIN condition=EExtendedTriggerCondition END)?
 		public Group getGroup_4() { return cGroup_4; }
 		
-		//'action:'
-		public Keyword getActionKeyword_4_0() { return cActionKeyword_4_0; }
+		//'condition:'
+		public Keyword getConditionKeyword_4_0() { return cConditionKeyword_4_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_4_1() { return cBEGINTerminalRuleCall_4_1; }
 		
-		//action=EActivityDefinition
-		public Assignment getActionAssignment_4_2() { return cActionAssignment_4_2; }
+		//condition=EExtendedTriggerCondition
+		public Assignment getConditionAssignment_4_2() { return cConditionAssignment_4_2; }
 		
-		//EActivityDefinition
-		public RuleCall getActionEActivityDefinitionParserRuleCall_4_2_0() { return cActionEActivityDefinitionParserRuleCall_4_2_0; }
+		//EExtendedTriggerCondition
+		public RuleCall getConditionEExtendedTriggerConditionParserRuleCall_4_2_0() { return cConditionEExtendedTriggerConditionParserRuleCall_4_2_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_4_3() { return cENDTerminalRuleCall_4_3; }
+		
+		//'action:' BEGIN action=EActivityDefinitions END
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//'action:'
+		public Keyword getActionKeyword_5_0() { return cActionKeyword_5_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_5_1() { return cBEGINTerminalRuleCall_5_1; }
+		
+		//action=EActivityDefinitions
+		public Assignment getActionAssignment_5_2() { return cActionAssignment_5_2; }
+		
+		//EActivityDefinitions
+		public RuleCall getActionEActivityDefinitionsParserRuleCall_5_2_0() { return cActionEActivityDefinitionsParserRuleCall_5_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_5_3() { return cENDTerminalRuleCall_5_3; }
+	}
+	public class EActivityDefinitionsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EActivityDefinitions");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cEActivityDefinitionsAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cListAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cListEActivityDefinitionParserRuleCall_1_0 = (RuleCall)cListAssignment_1.eContents().get(0);
+		
+		//EActivityDefinitions:
+		//	{EActivityDefinitions} list+=EActivityDefinition*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{EActivityDefinitions} list+=EActivityDefinition*
+		public Group getGroup() { return cGroup; }
+		
+		//{EActivityDefinitions}
+		public Action getEActivityDefinitionsAction_0() { return cEActivityDefinitionsAction_0; }
+		
+		//list+=EActivityDefinition*
+		public Assignment getListAssignment_1() { return cListAssignment_1; }
+		
+		//EActivityDefinition
+		public RuleCall getListEActivityDefinitionParserRuleCall_1_0() { return cListEActivityDefinitionParserRuleCall_1_0; }
+	}
+	public class EExtendedTriggerConditionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EExtendedTriggerCondition");
+		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
+		private final Keyword cConstraintKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final Assignment cConstraintAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
+		private final RuleCall cConstraintEConditionClauseDefinitionParserRuleCall_0_2_0 = (RuleCall)cConstraintAssignment_0_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_0_3 = (RuleCall)cGroup_0.eContents().get(3);
+		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
+		private final Keyword cPeriodKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cPeriodAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cPeriodSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cPeriodAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
+		private final Keyword cEvaluationsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cEvaluationsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cEvaluationsESIGNEDINTParserRuleCall_2_1_0 = (RuleCall)cEvaluationsAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
+		private final Keyword cMethodKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cMethodAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cMethodSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cMethodAssignment_3_1.eContents().get(0);
+		
+		//EExtendedTriggerCondition:
+		//	('constraint:'
+		//	BEGIN
+		//	constraint=EConditionClauseDefinition
+		//	END)? & ('period:' period=STRING)? & ('evaluations:' evaluations=ESIGNEDINT)? & ('method:' method=STRING)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//('constraint:' BEGIN constraint=EConditionClauseDefinition END)? & ('period:' period=STRING)? & ('evaluations:'
+		//evaluations=ESIGNEDINT)? & ('method:' method=STRING)?
+		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
+		
+		//('constraint:' BEGIN constraint=EConditionClauseDefinition END)?
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//'constraint:'
+		public Keyword getConstraintKeyword_0_0() { return cConstraintKeyword_0_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_0_1() { return cBEGINTerminalRuleCall_0_1; }
+		
+		//constraint=EConditionClauseDefinition
+		public Assignment getConstraintAssignment_0_2() { return cConstraintAssignment_0_2; }
+		
+		//EConditionClauseDefinition
+		public RuleCall getConstraintEConditionClauseDefinitionParserRuleCall_0_2_0() { return cConstraintEConditionClauseDefinitionParserRuleCall_0_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_0_3() { return cENDTerminalRuleCall_0_3; }
+		
+		//('period:' period=STRING)?
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'period:'
+		public Keyword getPeriodKeyword_1_0() { return cPeriodKeyword_1_0; }
+		
+		//period=STRING
+		public Assignment getPeriodAssignment_1_1() { return cPeriodAssignment_1_1; }
+		
+		//STRING
+		public RuleCall getPeriodSTRINGTerminalRuleCall_1_1_0() { return cPeriodSTRINGTerminalRuleCall_1_1_0; }
+		
+		//('evaluations:' evaluations=ESIGNEDINT)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'evaluations:'
+		public Keyword getEvaluationsKeyword_2_0() { return cEvaluationsKeyword_2_0; }
+		
+		//evaluations=ESIGNEDINT
+		public Assignment getEvaluationsAssignment_2_1() { return cEvaluationsAssignment_2_1; }
+		
+		//ESIGNEDINT
+		public RuleCall getEvaluationsESIGNEDINTParserRuleCall_2_1_0() { return cEvaluationsESIGNEDINTParserRuleCall_2_1_0; }
+		
+		//('method:' method=STRING)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'method:'
+		public Keyword getMethodKeyword_3_0() { return cMethodKeyword_3_0; }
+		
+		//method=STRING
+		public Assignment getMethodAssignment_3_1() { return cMethodAssignment_3_1; }
+		
+		//STRING
+		public RuleCall getMethodSTRINGTerminalRuleCall_3_1_0() { return cMethodSTRINGTerminalRuleCall_3_1_0; }
+	}
+	public class ETimeIntervalElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ETimeInterval");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cStart_timeKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cStart_timeAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cStart_timeSTRINGTerminalRuleCall_0_1_0 = (RuleCall)cStart_timeAssignment_0_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cEnd_timeKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cEnd_timeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cEnd_timeSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cEnd_timeAssignment_1_1.eContents().get(0);
+		
+		//ETimeInterval:
+		//	('start_time:' start_time=STRING) ('end_time:' end_time=STRING);
+		@Override public ParserRule getRule() { return rule; }
+		
+		//('start_time:' start_time=STRING) ('end_time:' end_time=STRING)
+		public Group getGroup() { return cGroup; }
+		
+		//('start_time:' start_time=STRING)
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//'start_time:'
+		public Keyword getStart_timeKeyword_0_0() { return cStart_timeKeyword_0_0; }
+		
+		//start_time=STRING
+		public Assignment getStart_timeAssignment_0_1() { return cStart_timeAssignment_0_1; }
+		
+		//STRING
+		public RuleCall getStart_timeSTRINGTerminalRuleCall_0_1_0() { return cStart_timeSTRINGTerminalRuleCall_0_1_0; }
+		
+		//('end_time:' end_time=STRING)
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'end_time:'
+		public Keyword getEnd_timeKeyword_1_0() { return cEnd_timeKeyword_1_0; }
+		
+		//end_time=STRING
+		public Assignment getEnd_timeAssignment_1_1() { return cEnd_timeAssignment_1_1; }
+		
+		//STRING
+		public RuleCall getEnd_timeSTRINGTerminalRuleCall_1_1_0() { return cEnd_timeSTRINGTerminalRuleCall_1_1_0; }
 	}
 	public class EEvenFilterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EEvenFilter");
@@ -1340,7 +1521,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
 		private final Keyword cNodeKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cNodeAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cNodeEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cNodeAssignment_0_1.eContents().get(0);
+		private final RuleCall cNodeEPREFIX_REFParserRuleCall_0_1_0 = (RuleCall)cNodeAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cRequirementKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cRequirementAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -1351,23 +1532,23 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cCapabilitySTRINGTerminalRuleCall_2_1_0 = (RuleCall)cCapabilityAssignment_2_1.eContents().get(0);
 		
 		//EEvenFilter:
-		//	'node:' node=EPREFIX_TYPE & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?;
+		//	'node:' node=EPREFIX_REF & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'node:' node=EPREFIX_TYPE & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?
+		//'node:' node=EPREFIX_REF & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//'node:' node=EPREFIX_TYPE
+		//'node:' node=EPREFIX_REF
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'node:'
 		public Keyword getNodeKeyword_0_0() { return cNodeKeyword_0_0; }
 		
-		//node=EPREFIX_TYPE
+		//node=EPREFIX_REF
 		public Assignment getNodeAssignment_0_1() { return cNodeAssignment_0_1; }
 		
-		//EPREFIX_TYPE
-		public RuleCall getNodeEPREFIX_TYPEParserRuleCall_0_1_0() { return cNodeEPREFIX_TYPEParserRuleCall_0_1_0; }
+		//EPREFIX_REF
+		public RuleCall getNodeEPREFIX_REFParserRuleCall_0_1_0() { return cNodeEPREFIX_REFParserRuleCall_0_1_0; }
 		
 		//('requirement:' requirement=STRING)?
 		public Group getGroup_1() { return cGroup_1; }
@@ -2261,43 +2442,43 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EValidTargetTypes");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTargetTypesAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTargetTypesECapabilityTypeRefParserRuleCall_0_0 = (RuleCall)cTargetTypesAssignment_0.eContents().get(0);
+		private final RuleCall cTargetTypesETargetTypeParserRuleCall_0_0 = (RuleCall)cTargetTypesAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cSourceTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cSourceTypeECapabilityTypeRefParserRuleCall_1_1_0 = (RuleCall)cSourceTypeAssignment_1_1.eContents().get(0);
+		private final Assignment cTargetTypesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cTargetTypesETargetTypeParserRuleCall_1_1_0 = (RuleCall)cTargetTypesAssignment_1_1.eContents().get(0);
 		
 		//EValidTargetTypes:
-		//	targetTypes+=ECapabilityTypeRef (',' sourceType+=ECapabilityTypeRef)*;
+		//	targetTypes+=ETargetType (',' targetTypes+=ETargetType)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//targetTypes+=ECapabilityTypeRef (',' sourceType+=ECapabilityTypeRef)*
+		//targetTypes+=ETargetType (',' targetTypes+=ETargetType)*
 		public Group getGroup() { return cGroup; }
 		
-		//targetTypes+=ECapabilityTypeRef
+		//targetTypes+=ETargetType
 		public Assignment getTargetTypesAssignment_0() { return cTargetTypesAssignment_0; }
 		
-		//ECapabilityTypeRef
-		public RuleCall getTargetTypesECapabilityTypeRefParserRuleCall_0_0() { return cTargetTypesECapabilityTypeRefParserRuleCall_0_0; }
+		//ETargetType
+		public RuleCall getTargetTypesETargetTypeParserRuleCall_0_0() { return cTargetTypesETargetTypeParserRuleCall_0_0; }
 		
-		//(',' sourceType+=ECapabilityTypeRef)*
+		//(',' targetTypes+=ETargetType)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//','
 		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
 		
-		//sourceType+=ECapabilityTypeRef
-		public Assignment getSourceTypeAssignment_1_1() { return cSourceTypeAssignment_1_1; }
+		//targetTypes+=ETargetType
+		public Assignment getTargetTypesAssignment_1_1() { return cTargetTypesAssignment_1_1; }
 		
-		//ECapabilityTypeRef
-		public RuleCall getSourceTypeECapabilityTypeRefParserRuleCall_1_1_0() { return cSourceTypeECapabilityTypeRefParserRuleCall_1_1_0; }
+		//ETargetType
+		public RuleCall getTargetTypesETargetTypeParserRuleCall_1_1_0() { return cTargetTypesETargetTypeParserRuleCall_1_1_0; }
 	}
-	public class ECapabilityTypeRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ECapabilityTypeRef");
+	public class ETargetTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ETargetType");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameEPREFIX_TYPEParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//ECapabilityTypeRef:
+		//ETargetType:
 		//	name=EPREFIX_TYPE;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -4558,6 +4739,25 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//EPREFIX_ID
 		public RuleCall getEPREFIX_IDParserRuleCall_2() { return cEPREFIX_IDParserRuleCall_2; }
 	}
+	public class EPREFIX_REFElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EPREFIX_REF");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEPREFIX_TYPEParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEPREFIX_IDParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//EPREFIX_REF:
+		//	EPREFIX_TYPE | EPREFIX_ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//EPREFIX_TYPE | EPREFIX_ID
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//EPREFIX_TYPE
+		public RuleCall getEPREFIX_TYPEParserRuleCall_0() { return cEPREFIX_TYPEParserRuleCall_0; }
+		
+		//EPREFIX_ID
+		public RuleCall getEPREFIX_IDParserRuleCall_1() { return cEPREFIX_IDParserRuleCall_1; }
+	}
 	public class EPREFIX_TYPEElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EPREFIX_TYPE");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -4722,6 +4922,9 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final ETriggersElements pETriggers;
 	private final ETriggerDefinitionElements pETriggerDefinition;
 	private final ETriggerDefinitionBodyElements pETriggerDefinitionBody;
+	private final EActivityDefinitionsElements pEActivityDefinitions;
+	private final EExtendedTriggerConditionElements pEExtendedTriggerCondition;
+	private final ETimeIntervalElements pETimeInterval;
 	private final EEvenFilterElements pEEvenFilter;
 	private final EConditionClauseDefinitionElements pEConditionClauseDefinition;
 	private final EConditionClauseDefinitionANDElements pEConditionClauseDefinitionAND;
@@ -4742,7 +4945,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final ERelationshipTypeElements pERelationshipType;
 	private final ERelationshipTypeBodyElements pERelationshipTypeBody;
 	private final EValidTargetTypesElements pEValidTargetTypes;
-	private final ECapabilityTypeRefElements pECapabilityTypeRef;
+	private final ETargetTypeElements pETargetType;
 	private final EPropertiesElements pEProperties;
 	private final EPropertyDefinitionElements pEPropertyDefinition;
 	private final EPropertyDefinitionBodyElements pEPropertyDefinitionBody;
@@ -4800,6 +5003,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final EMAPElements pEMAP;
 	private final EMapEntryElements pEMapEntry;
 	private final EEntityReferenceElements pEEntityReference;
+	private final EPREFIX_REFElements pEPREFIX_REF;
 	private final EPREFIX_TYPEElements pEPREFIX_TYPE;
 	private final EPREFIX_IDElements pEPREFIX_ID;
 	private final EPRIMITIVE_TYPEElements pEPRIMITIVE_TYPE;
@@ -4842,6 +5046,9 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pETriggers = new ETriggersElements();
 		this.pETriggerDefinition = new ETriggerDefinitionElements();
 		this.pETriggerDefinitionBody = new ETriggerDefinitionBodyElements();
+		this.pEActivityDefinitions = new EActivityDefinitionsElements();
+		this.pEExtendedTriggerCondition = new EExtendedTriggerConditionElements();
+		this.pETimeInterval = new ETimeIntervalElements();
 		this.pEEvenFilter = new EEvenFilterElements();
 		this.pEConditionClauseDefinition = new EConditionClauseDefinitionElements();
 		this.pEConditionClauseDefinitionAND = new EConditionClauseDefinitionANDElements();
@@ -4862,7 +5069,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pERelationshipType = new ERelationshipTypeElements();
 		this.pERelationshipTypeBody = new ERelationshipTypeBodyElements();
 		this.pEValidTargetTypes = new EValidTargetTypesElements();
-		this.pECapabilityTypeRef = new ECapabilityTypeRefElements();
+		this.pETargetType = new ETargetTypeElements();
 		this.pEProperties = new EPropertiesElements();
 		this.pEPropertyDefinition = new EPropertyDefinitionElements();
 		this.pEPropertyDefinitionBody = new EPropertyDefinitionBodyElements();
@@ -4920,6 +5127,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pEMAP = new EMAPElements();
 		this.pEMapEntry = new EMapEntryElements();
 		this.pEEntityReference = new EEntityReferenceElements();
+		this.pEPREFIX_REF = new EPREFIX_REFElements();
 		this.pEPREFIX_TYPE = new EPREFIX_TYPEElements();
 		this.pEPREFIX_ID = new EPREFIX_IDElements();
 		this.pEPRIMITIVE_TYPE = new EPRIMITIVE_TYPEElements();
@@ -5217,16 +5425,19 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ETriggerDefinitionBody:
-	//	('description:' description=STRING)? & 'event:' event=STRING & ('target_filter:'
+	//	('description:' description=STRING)? & 'event:' event=STRING & ('schedule:'
+	//	BEGIN
+	//	schedule=ETimeInterval
+	//	END)? & ('target_filter:'
 	//	BEGIN
 	//	target_filter=EEvenFilter
 	//	END)? & ('condition:'
 	//	BEGIN
-	//	condition=EConditionClauseDefinition
-	//	END)? & ('action:'
+	//	condition=EExtendedTriggerCondition
+	//	END)? & 'action:'
 	//	BEGIN
-	//	action=EActivityDefinition
-	//	END)?;
+	//	action=EActivityDefinitions
+	//	END;
 	public ETriggerDefinitionBodyElements getETriggerDefinitionBodyAccess() {
 		return pETriggerDefinitionBody;
 	}
@@ -5235,8 +5446,41 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		return getETriggerDefinitionBodyAccess().getRule();
 	}
 	
+	//EActivityDefinitions:
+	//	{EActivityDefinitions} list+=EActivityDefinition*;
+	public EActivityDefinitionsElements getEActivityDefinitionsAccess() {
+		return pEActivityDefinitions;
+	}
+	
+	public ParserRule getEActivityDefinitionsRule() {
+		return getEActivityDefinitionsAccess().getRule();
+	}
+	
+	//EExtendedTriggerCondition:
+	//	('constraint:'
+	//	BEGIN
+	//	constraint=EConditionClauseDefinition
+	//	END)? & ('period:' period=STRING)? & ('evaluations:' evaluations=ESIGNEDINT)? & ('method:' method=STRING)?;
+	public EExtendedTriggerConditionElements getEExtendedTriggerConditionAccess() {
+		return pEExtendedTriggerCondition;
+	}
+	
+	public ParserRule getEExtendedTriggerConditionRule() {
+		return getEExtendedTriggerConditionAccess().getRule();
+	}
+	
+	//ETimeInterval:
+	//	('start_time:' start_time=STRING) ('end_time:' end_time=STRING);
+	public ETimeIntervalElements getETimeIntervalAccess() {
+		return pETimeInterval;
+	}
+	
+	public ParserRule getETimeIntervalRule() {
+		return getETimeIntervalAccess().getRule();
+	}
+	
 	//EEvenFilter:
-	//	'node:' node=EPREFIX_TYPE & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?;
+	//	'node:' node=EPREFIX_REF & ('requirement:' requirement=STRING)? & ('capability:' capability=STRING)?;
 	public EEvenFilterElements getEEvenFilterAccess() {
 		return pEEvenFilter;
 	}
@@ -5473,7 +5717,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EValidTargetTypes:
-	//	targetTypes+=ECapabilityTypeRef (',' sourceType+=ECapabilityTypeRef)*;
+	//	targetTypes+=ETargetType (',' targetTypes+=ETargetType)*;
 	public EValidTargetTypesElements getEValidTargetTypesAccess() {
 		return pEValidTargetTypes;
 	}
@@ -5482,14 +5726,14 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		return getEValidTargetTypesAccess().getRule();
 	}
 	
-	//ECapabilityTypeRef:
+	//ETargetType:
 	//	name=EPREFIX_TYPE;
-	public ECapabilityTypeRefElements getECapabilityTypeRefAccess() {
-		return pECapabilityTypeRef;
+	public ETargetTypeElements getETargetTypeAccess() {
+		return pETargetType;
 	}
 	
-	public ParserRule getECapabilityTypeRefRule() {
-		return getECapabilityTypeRefAccess().getRule();
+	public ParserRule getETargetTypeRule() {
+		return getETargetTypeAccess().getRule();
 	}
 	
 	//EProperties:
@@ -6117,6 +6361,16 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	
 	public ParserRule getEEntityReferenceRule() {
 		return getEEntityReferenceAccess().getRule();
+	}
+	
+	//EPREFIX_REF:
+	//	EPREFIX_TYPE | EPREFIX_ID;
+	public EPREFIX_REFElements getEPREFIX_REFAccess() {
+		return pEPREFIX_REF;
+	}
+	
+	public ParserRule getEPREFIX_REFRule() {
+		return getEPREFIX_REFAccess().getRule();
 	}
 	
 	//EPREFIX_TYPE:

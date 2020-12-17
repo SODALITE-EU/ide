@@ -176,6 +176,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createETriggerDefinitionBodyAdapter();
       }
       @Override
+      public Adapter caseEActivityDefinitions(EActivityDefinitions object)
+      {
+        return createEActivityDefinitionsAdapter();
+      }
+      @Override
+      public Adapter caseEExtendedTriggerCondition(EExtendedTriggerCondition object)
+      {
+        return createEExtendedTriggerConditionAdapter();
+      }
+      @Override
+      public Adapter caseETimeInterval(ETimeInterval object)
+      {
+        return createETimeIntervalAdapter();
+      }
+      @Override
       public Adapter caseEEvenFilter(EEvenFilter object)
       {
         return createEEvenFilterAdapter();
@@ -276,9 +291,9 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEValidTargetTypesAdapter();
       }
       @Override
-      public Adapter caseECapabilityTypeRef(ECapabilityTypeRef object)
+      public Adapter caseETargetType(ETargetType object)
       {
-        return createECapabilityTypeRefAdapter();
+        return createETargetTypeAdapter();
       }
       @Override
       public Adapter caseEProperties(EProperties object)
@@ -564,6 +579,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEEntityReference(EEntityReference object)
       {
         return createEEntityReferenceAdapter();
+      }
+      @Override
+      public Adapter caseEPREFIX_REF(EPREFIX_REF object)
+      {
+        return createEPREFIX_REFAdapter();
       }
       @Override
       public Adapter caseEPREFIX_TYPE(EPREFIX_TYPE object)
@@ -908,6 +928,51 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EActivityDefinitions <em>EActivity Definitions</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EActivityDefinitions
+   * @generated
+   */
+  public Adapter createEActivityDefinitionsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EExtendedTriggerCondition <em>EExtended Trigger Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EExtendedTriggerCondition
+   * @generated
+   */
+  public Adapter createEExtendedTriggerConditionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ETimeInterval <em>ETime Interval</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.ETimeInterval
+   * @generated
+   */
+  public Adapter createETimeIntervalAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EEvenFilter <em>EEven Filter</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1208,16 +1273,16 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ECapabilityTypeRef <em>ECapability Type Ref</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ETargetType <em>ETarget Type</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.dsl.rM.ECapabilityTypeRef
+   * @see org.sodalite.dsl.rM.ETargetType
    * @generated
    */
-  public Adapter createECapabilityTypeRefAdapter()
+  public Adapter createETargetTypeAdapter()
   {
     return null;
   }
@@ -2073,6 +2138,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEEntityReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EPREFIX_REF <em>EPREFIX REF</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EPREFIX_REF
+   * @generated
+   */
+  public Adapter createEPREFIX_REFAdapter()
   {
     return null;
   }

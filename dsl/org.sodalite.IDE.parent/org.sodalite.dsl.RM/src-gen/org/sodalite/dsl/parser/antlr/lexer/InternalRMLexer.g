@@ -61,6 +61,8 @@ Constraints : 'constraints:';
 
 Description : 'description:';
 
+Evaluations : 'evaluations:';
+
 Occurrences : 'occurrences:';
 
 Requirement : 'requirement:';
@@ -68,6 +70,8 @@ Requirement : 'requirement:';
 Attributes : 'attributes:';
 
 Capability : 'capability:';
+
+Constraint : 'constraint:';
 
 Data_types : 'data_types:';
 
@@ -83,6 +87,8 @@ Operations : 'operations:';
 
 Properties : 'properties:';
 
+Start_time : 'start_time:';
+
 Attribute : 'attribute:';
 
 Condition : 'condition:';
@@ -95,6 +101,8 @@ Mime_type : 'mime_type:';
 
 Operation : 'operation:';
 
+End_time : 'end_time:';
+
 File_ext : 'file_ext:';
 
 In_range : 'in_range:';
@@ -102,6 +110,8 @@ In_range : 'in_range:';
 Property : 'property:';
 
 Required : 'required:';
+
+Schedule : 'schedule:';
 
 Triggers : 'triggers:';
 
@@ -123,7 +133,11 @@ Inputs : 'inputs:';
 
 Length : 'length:';
 
+Method : 'method:';
+
 Module : 'module:';
+
+Period : 'period:';
 
 Status : 'status:';
 

@@ -204,6 +204,33 @@ public interface RMFactory extends EFactory
   ETriggerDefinitionBody createETriggerDefinitionBody();
 
   /**
+   * Returns a new object of class '<em>EActivity Definitions</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EActivity Definitions</em>'.
+   * @generated
+   */
+  EActivityDefinitions createEActivityDefinitions();
+
+  /**
+   * Returns a new object of class '<em>EExtended Trigger Condition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EExtended Trigger Condition</em>'.
+   * @generated
+   */
+  EExtendedTriggerCondition createEExtendedTriggerCondition();
+
+  /**
+   * Returns a new object of class '<em>ETime Interval</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ETime Interval</em>'.
+   * @generated
+   */
+  ETimeInterval createETimeInterval();
+
+  /**
    * Returns a new object of class '<em>EEven Filter</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -384,13 +411,13 @@ public interface RMFactory extends EFactory
   EValidTargetTypes createEValidTargetTypes();
 
   /**
-   * Returns a new object of class '<em>ECapability Type Ref</em>'.
+   * Returns a new object of class '<em>ETarget Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>ECapability Type Ref</em>'.
+   * @return a new object of class '<em>ETarget Type</em>'.
    * @generated
    */
-  ECapabilityTypeRef createECapabilityTypeRef();
+  ETargetType createETargetType();
 
   /**
    * Returns a new object of class '<em>EProperties</em>'.
@@ -904,6 +931,15 @@ public interface RMFactory extends EFactory
    * @generated
    */
   EEntityReference createEEntityReference();
+
+  /**
+   * Returns a new object of class '<em>EPREFIX REF</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EPREFIX REF</em>'.
+   * @generated
+   */
+  EPREFIX_REF createEPREFIX_REF();
 
   /**
    * Returns a new object of class '<em>EPREFIX TYPE</em>'.

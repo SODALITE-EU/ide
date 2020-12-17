@@ -12,24 +12,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.ECapabilityTypeRef;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.ETargetType;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>ECapability Type Ref</b></em>'.
+ * An implementation of the model object '<em><b>ETarget Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityTypeRefImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ETargetTypeImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container implements ECapabilityTypeRef
+public class ETargetTypeImpl extends MinimalEObjectImpl.Container implements ETargetType
 {
   /**
    * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
@@ -46,7 +46,7 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ECapabilityTypeRefImpl()
+  protected ETargetTypeImpl()
   {
     super();
   }
@@ -59,7 +59,7 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   @Override
   protected EClass eStaticClass()
   {
-    return RMPackage.Literals.ECAPABILITY_TYPE_REF;
+    return RMPackage.Literals.ETARGET_TYPE;
   }
 
   /**
@@ -84,7 +84,7 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
     name = newName;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_TYPE_REF__NAME, oldName, newName);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ETARGET_TYPE__NAME, oldName, newName);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -102,14 +102,14 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
     {
       NotificationChain msgs = null;
       if (name != null)
-        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_TYPE_REF__NAME, null, msgs);
+        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ETARGET_TYPE__NAME, null, msgs);
       if (newName != null)
-        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_TYPE_REF__NAME, null, msgs);
+        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ETARGET_TYPE__NAME, null, msgs);
       msgs = basicSetName(newName, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_TYPE_REF__NAME, newName, newName));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ETARGET_TYPE__NAME, newName, newName));
   }
 
   /**
@@ -122,7 +122,7 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
+      case RMPackage.ETARGET_TYPE__NAME:
         return basicSetName(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -138,7 +138,7 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
+      case RMPackage.ETARGET_TYPE__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -154,7 +154,7 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
+      case RMPackage.ETARGET_TYPE__NAME:
         setName((EPREFIX_TYPE)newValue);
         return;
     }
@@ -171,7 +171,7 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
+      case RMPackage.ETARGET_TYPE__NAME:
         setName((EPREFIX_TYPE)null);
         return;
     }
@@ -188,10 +188,10 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
+      case RMPackage.ETARGET_TYPE__NAME:
         return name != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ECapabilityTypeRefImpl
+} //ETargetTypeImpl

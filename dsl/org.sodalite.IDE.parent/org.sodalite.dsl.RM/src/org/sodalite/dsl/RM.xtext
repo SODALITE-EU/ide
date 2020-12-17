@@ -161,6 +161,11 @@ ETriggerDefinition:
 ETriggerDefinitionBody:
 	('description:' description=STRING)? &
 	('event:' event=STRING) &
+	('schedule:' 
+		BEGIN
+		schedule=ETimeInterval
+		END
+	)? &
 	('target_filter:'
 		BEGIN 
 		target_filter=EEvenFilter
@@ -168,18 +173,38 @@ ETriggerDefinitionBody:
 	)? &
 	('condition:'
 		BEGIN
-		condition=EConditionClauseDefinition
+		condition=EExtendedTriggerCondition
 		END
 	)? &
 	('action:'
 		BEGIN
-		action=EActivityDefinition
+		action=EActivityDefinitions
 		END
-	)?
+	)
+;
+
+EActivityDefinitions:
+	{EActivityDefinitions} (list += EActivityDefinition)*
+;
+
+EExtendedTriggerCondition:
+	('constraint:'
+		BEGIN
+		constraint=EConditionClauseDefinition
+		END
+	)? &
+	('period:' period=STRING)? &
+	('evaluations:' evaluations=ESIGNEDINT)? &
+	('method:' method=STRING)?
+;
+
+ETimeInterval:
+	('start_time:' start_time=STRING)
+	('end_time:' end_time=STRING)
 ;
 
 EEvenFilter:
-	('node:' node=EPREFIX_TYPE) &
+	('node:' node=EPREFIX_REF) &
 	('requirement:' requirement=STRING)? &
 	('capability:' capability=STRING)?
 ;
@@ -306,9 +331,9 @@ ERelationshipTypeBody:
 	('valid_target_types:' '[' valid_target_types=EValidTargetTypes "]")?);
 
 EValidTargetTypes:
-	targetTypes+=ECapabilityTypeRef (',' sourceType+=ECapabilityTypeRef)*;
+	targetTypes+=ETargetType (',' targetTypes+=ETargetType)*;
 
-ECapabilityTypeRef:
+ETargetType:
 	name=EPREFIX_TYPE;
 
 EProperties:
@@ -583,6 +608,10 @@ EMapEntry:
 
 EEntityReference:
 	EEntity | EPREFIX_TYPE | EPREFIX_ID
+;
+
+EPREFIX_REF:
+	EPREFIX_TYPE | EPREFIX_ID
 ;
 
 EPREFIX_TYPE:

@@ -9,6 +9,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeTemplates" eType="#//ENodeTemplates"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="policies" eType="#//EPolicies"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ENodeTemplates">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeTemplates" upperBound="-1"
@@ -58,6 +60,36 @@
   <eClassifiers xsi:type="ecore:EClass" name="EAttributeAssignment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EAssignmentValue"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPolicies">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="policies" upperBound="-1"
+        eType="#//EPolicyDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPolicyDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//EPolicyDefinitionBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPolicyDefinitionBody">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPREFIX_TYPE"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPropertyAssignments"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" eType="#//ETarget"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" eType="#//ETriggerDefinitions"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ETriggerDefinitions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//ETriggerDefinition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ETarget">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPREFIX_ID"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

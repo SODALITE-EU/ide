@@ -2206,9 +2206,9 @@ ruleETriggerDefinitionBody returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 2);
 				}
-							({true}?=>(otherlv_5=Target_filter
+							({true}?=>(otherlv_5=Schedule
 							{
-								newLeafNode(otherlv_5, grammarAccess.getETriggerDefinitionBodyAccess().getTarget_filterKeyword_2_0());
+								newLeafNode(otherlv_5, grammarAccess.getETriggerDefinitionBodyAccess().getScheduleKeyword_2_0());
 							}
 							this_BEGIN_6=RULE_BEGIN
 							{
@@ -2217,18 +2217,18 @@ ruleETriggerDefinitionBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getTarget_filterEEvenFilterParserRuleCall_2_2_0());
+										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getScheduleETimeIntervalParserRuleCall_2_2_0());
 									}
-									lv_target_filter_7_0=ruleEEvenFilter
+									lv_schedule_7_0=ruleETimeInterval
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getETriggerDefinitionBodyRule());
 										}
 										set(
 											$current,
-											"target_filter",
-											lv_target_filter_7_0,
-											"org.sodalite.dsl.RM.EEvenFilter");
+											"schedule",
+											lv_schedule_7_0,
+											"org.sodalite.dsl.RM.ETimeInterval");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -2248,9 +2248,9 @@ ruleETriggerDefinitionBody returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 3);
 				}
-							({true}?=>(otherlv_9=Condition
+							({true}?=>(otherlv_9=Target_filter
 							{
-								newLeafNode(otherlv_9, grammarAccess.getETriggerDefinitionBodyAccess().getConditionKeyword_3_0());
+								newLeafNode(otherlv_9, grammarAccess.getETriggerDefinitionBodyAccess().getTarget_filterKeyword_3_0());
 							}
 							this_BEGIN_10=RULE_BEGIN
 							{
@@ -2259,18 +2259,18 @@ ruleETriggerDefinitionBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getConditionEConditionClauseDefinitionParserRuleCall_3_2_0());
+										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getTarget_filterEEvenFilterParserRuleCall_3_2_0());
 									}
-									lv_condition_11_0=ruleEConditionClauseDefinition
+									lv_target_filter_11_0=ruleEEvenFilter
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getETriggerDefinitionBodyRule());
 										}
 										set(
 											$current,
-											"condition",
-											lv_condition_11_0,
-											"org.sodalite.dsl.RM.EConditionClauseDefinition");
+											"target_filter",
+											lv_target_filter_11_0,
+											"org.sodalite.dsl.RM.EEvenFilter");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -2290,9 +2290,9 @@ ruleETriggerDefinitionBody returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 4);
 				}
-							({true}?=>(otherlv_13=Action
+							({true}?=>(otherlv_13=Condition
 							{
-								newLeafNode(otherlv_13, grammarAccess.getETriggerDefinitionBodyAccess().getActionKeyword_4_0());
+								newLeafNode(otherlv_13, grammarAccess.getETriggerDefinitionBodyAccess().getConditionKeyword_4_0());
 							}
 							this_BEGIN_14=RULE_BEGIN
 							{
@@ -2301,18 +2301,18 @@ ruleETriggerDefinitionBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getActionEActivityDefinitionParserRuleCall_4_2_0());
+										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getConditionEExtendedTriggerConditionParserRuleCall_4_2_0());
 									}
-									lv_action_15_0=ruleEActivityDefinition
+									lv_condition_15_0=ruleEExtendedTriggerCondition
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getETriggerDefinitionBodyRule());
 										}
 										set(
 											$current,
-											"action",
-											lv_action_15_0,
-											"org.sodalite.dsl.RM.EActivityDefinition");
+											"condition",
+											lv_condition_15_0,
+											"org.sodalite.dsl.RM.EExtendedTriggerCondition");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -2320,6 +2320,48 @@ ruleETriggerDefinitionBody returns [EObject current=null]
 							this_END_16=RULE_END
 							{
 								newLeafNode(this_END_16, grammarAccess.getETriggerDefinitionBodyAccess().getENDTerminalRuleCall_4_3());
+							}
+							))
+				{ 
+					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
+				}
+			)
+		)|
+		(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 5)}?=>(
+				{
+					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 5);
+				}
+							({true}?=>(otherlv_17=Action
+							{
+								newLeafNode(otherlv_17, grammarAccess.getETriggerDefinitionBodyAccess().getActionKeyword_5_0());
+							}
+							this_BEGIN_18=RULE_BEGIN
+							{
+								newLeafNode(this_BEGIN_18, grammarAccess.getETriggerDefinitionBodyAccess().getBEGINTerminalRuleCall_5_1());
+							}
+							(
+								(
+									{
+										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getActionEActivityDefinitionsParserRuleCall_5_2_0());
+									}
+									lv_action_19_0=ruleEActivityDefinitions
+									{
+										if ($current==null) {
+											$current = createModelElementForParent(grammarAccess.getETriggerDefinitionBodyRule());
+										}
+										set(
+											$current,
+											"action",
+											lv_action_19_0,
+											"org.sodalite.dsl.RM.EActivityDefinitions");
+										afterParserOrEnumRuleCall();
+									}
+								)
+							)
+							this_END_20=RULE_END
+							{
+								newLeafNode(this_END_20, grammarAccess.getETriggerDefinitionBodyAccess().getENDTerminalRuleCall_5_3());
 							}
 							))
 				{ 
@@ -2334,6 +2376,291 @@ ruleETriggerDefinitionBody returns [EObject current=null]
 			{ 
 			  getUnorderedGroupHelper().leave(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
 			}
+	)
+;
+
+// Entry rule entryRuleEActivityDefinitions
+entryRuleEActivityDefinitions returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEActivityDefinitionsRule()); }
+	iv_ruleEActivityDefinitions=ruleEActivityDefinitions
+	{ $current=$iv_ruleEActivityDefinitions.current; }
+	EOF;
+
+// Rule EActivityDefinitions
+ruleEActivityDefinitions returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getEActivityDefinitionsAccess().getEActivityDefinitionsAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEActivityDefinitionsAccess().getListEActivityDefinitionParserRuleCall_1_0());
+				}
+				lv_list_1_0=ruleEActivityDefinition
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEActivityDefinitionsRule());
+					}
+					add(
+						$current,
+						"list",
+						lv_list_1_0,
+						"org.sodalite.dsl.RM.EActivityDefinition");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+	)
+;
+
+// Entry rule entryRuleEExtendedTriggerCondition
+entryRuleEExtendedTriggerCondition returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEExtendedTriggerConditionRule()); }
+	iv_ruleEExtendedTriggerCondition=ruleEExtendedTriggerCondition
+	{ $current=$iv_ruleEExtendedTriggerCondition.current; }
+	EOF;
+
+// Rule EExtendedTriggerCondition
+ruleEExtendedTriggerCondition returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{ 
+			  getUnorderedGroupHelper().enter(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+			}
+			(
+				(
+		(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 0)}?=>(
+				{
+					getUnorderedGroupHelper().select(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 0);
+				}
+							({true}?=>(otherlv_1=Constraint
+							{
+								newLeafNode(otherlv_1, grammarAccess.getEExtendedTriggerConditionAccess().getConstraintKeyword_0_0());
+							}
+							this_BEGIN_2=RULE_BEGIN
+							{
+								newLeafNode(this_BEGIN_2, grammarAccess.getEExtendedTriggerConditionAccess().getBEGINTerminalRuleCall_0_1());
+							}
+							(
+								(
+									{
+										newCompositeNode(grammarAccess.getEExtendedTriggerConditionAccess().getConstraintEConditionClauseDefinitionParserRuleCall_0_2_0());
+									}
+									lv_constraint_3_0=ruleEConditionClauseDefinition
+									{
+										if ($current==null) {
+											$current = createModelElementForParent(grammarAccess.getEExtendedTriggerConditionRule());
+										}
+										set(
+											$current,
+											"constraint",
+											lv_constraint_3_0,
+											"org.sodalite.dsl.RM.EConditionClauseDefinition");
+										afterParserOrEnumRuleCall();
+									}
+								)
+							)
+							this_END_4=RULE_END
+							{
+								newLeafNode(this_END_4, grammarAccess.getEExtendedTriggerConditionAccess().getENDTerminalRuleCall_0_3());
+							}
+							))
+				{ 
+					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+				}
+			)
+		)|
+		(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 1)}?=>(
+				{
+					getUnorderedGroupHelper().select(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 1);
+				}
+							({true}?=>(otherlv_5=Period
+							{
+								newLeafNode(otherlv_5, grammarAccess.getEExtendedTriggerConditionAccess().getPeriodKeyword_1_0());
+							}
+							(
+								(
+									lv_period_6_0=RULE_STRING
+									{
+										newLeafNode(lv_period_6_0, grammarAccess.getEExtendedTriggerConditionAccess().getPeriodSTRINGTerminalRuleCall_1_1_0());
+									}
+									{
+										if ($current==null) {
+											$current = createModelElement(grammarAccess.getEExtendedTriggerConditionRule());
+										}
+										setWithLastConsumed(
+											$current,
+											"period",
+											lv_period_6_0,
+											"org.eclipse.xtext.common.Terminals.STRING");
+									}
+								)
+							)
+							))
+				{ 
+					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+				}
+			)
+		)|
+		(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 2)}?=>(
+				{
+					getUnorderedGroupHelper().select(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 2);
+				}
+							({true}?=>(otherlv_7=Evaluations
+							{
+								newLeafNode(otherlv_7, grammarAccess.getEExtendedTriggerConditionAccess().getEvaluationsKeyword_2_0());
+							}
+							(
+								(
+									{
+										newCompositeNode(grammarAccess.getEExtendedTriggerConditionAccess().getEvaluationsESIGNEDINTParserRuleCall_2_1_0());
+									}
+									lv_evaluations_8_0=ruleESIGNEDINT
+									{
+										if ($current==null) {
+											$current = createModelElementForParent(grammarAccess.getEExtendedTriggerConditionRule());
+										}
+										set(
+											$current,
+											"evaluations",
+											lv_evaluations_8_0,
+											"org.sodalite.dsl.RM.ESIGNEDINT");
+										afterParserOrEnumRuleCall();
+									}
+								)
+							)
+							))
+				{ 
+					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+				}
+			)
+		)|
+		(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 3)}?=>(
+				{
+					getUnorderedGroupHelper().select(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 3);
+				}
+							({true}?=>(otherlv_9=Method
+							{
+								newLeafNode(otherlv_9, grammarAccess.getEExtendedTriggerConditionAccess().getMethodKeyword_3_0());
+							}
+							(
+								(
+									lv_method_10_0=RULE_STRING
+									{
+										newLeafNode(lv_method_10_0, grammarAccess.getEExtendedTriggerConditionAccess().getMethodSTRINGTerminalRuleCall_3_1_0());
+									}
+									{
+										if ($current==null) {
+											$current = createModelElement(grammarAccess.getEExtendedTriggerConditionRule());
+										}
+										setWithLastConsumed(
+											$current,
+											"method",
+											lv_method_10_0,
+											"org.eclipse.xtext.common.Terminals.STRING");
+									}
+								)
+							)
+							))
+				{ 
+					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+				}
+			)
+		)
+				)*
+			)
+		)
+			{ 
+			  getUnorderedGroupHelper().leave(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+			}
+	)
+;
+
+// Entry rule entryRuleETimeInterval
+entryRuleETimeInterval returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getETimeIntervalRule()); }
+	iv_ruleETimeInterval=ruleETimeInterval
+	{ $current=$iv_ruleETimeInterval.current; }
+	EOF;
+
+// Rule ETimeInterval
+ruleETimeInterval returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			otherlv_0=Start_time
+			{
+				newLeafNode(otherlv_0, grammarAccess.getETimeIntervalAccess().getStart_timeKeyword_0_0());
+			}
+			(
+				(
+					lv_start_time_1_0=RULE_STRING
+					{
+						newLeafNode(lv_start_time_1_0, grammarAccess.getETimeIntervalAccess().getStart_timeSTRINGTerminalRuleCall_0_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getETimeIntervalRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"start_time",
+							lv_start_time_1_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)
+		(
+			otherlv_2=End_time
+			{
+				newLeafNode(otherlv_2, grammarAccess.getETimeIntervalAccess().getEnd_timeKeyword_1_0());
+			}
+			(
+				(
+					lv_end_time_3_0=RULE_STRING
+					{
+						newLeafNode(lv_end_time_3_0, grammarAccess.getETimeIntervalAccess().getEnd_timeSTRINGTerminalRuleCall_1_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getETimeIntervalRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"end_time",
+							lv_end_time_3_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)
 	)
 ;
 
@@ -2371,9 +2698,9 @@ ruleEEvenFilter returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getEEvenFilterAccess().getNodeEPREFIX_TYPEParserRuleCall_0_1_0());
+										newCompositeNode(grammarAccess.getEEvenFilterAccess().getNodeEPREFIX_REFParserRuleCall_0_1_0());
 									}
-									lv_node_2_0=ruleEPREFIX_TYPE
+									lv_node_2_0=ruleEPREFIX_REF
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEEvenFilterRule());
@@ -2382,7 +2709,7 @@ ruleEEvenFilter returns [EObject current=null]
 											$current,
 											"node",
 											lv_node_2_0,
-											"org.sodalite.dsl.RM.EPREFIX_TYPE");
+											"org.sodalite.dsl.RM.EPREFIX_REF");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -3974,9 +4301,9 @@ ruleEValidTargetTypes returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEValidTargetTypesAccess().getTargetTypesECapabilityTypeRefParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getEValidTargetTypesAccess().getTargetTypesETargetTypeParserRuleCall_0_0());
 				}
-				lv_targetTypes_0_0=ruleECapabilityTypeRef
+				lv_targetTypes_0_0=ruleETargetType
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEValidTargetTypesRule());
@@ -3985,7 +4312,7 @@ ruleEValidTargetTypes returns [EObject current=null]
 						$current,
 						"targetTypes",
 						lv_targetTypes_0_0,
-						"org.sodalite.dsl.RM.ECapabilityTypeRef");
+						"org.sodalite.dsl.RM.ETargetType");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -3998,18 +4325,18 @@ ruleEValidTargetTypes returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEValidTargetTypesAccess().getSourceTypeECapabilityTypeRefParserRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getEValidTargetTypesAccess().getTargetTypesETargetTypeParserRuleCall_1_1_0());
 					}
-					lv_sourceType_2_0=ruleECapabilityTypeRef
+					lv_targetTypes_2_0=ruleETargetType
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEValidTargetTypesRule());
 						}
 						add(
 							$current,
-							"sourceType",
-							lv_sourceType_2_0,
-							"org.sodalite.dsl.RM.ECapabilityTypeRef");
+							"targetTypes",
+							lv_targetTypes_2_0,
+							"org.sodalite.dsl.RM.ETargetType");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -4018,15 +4345,15 @@ ruleEValidTargetTypes returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleECapabilityTypeRef
-entryRuleECapabilityTypeRef returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getECapabilityTypeRefRule()); }
-	iv_ruleECapabilityTypeRef=ruleECapabilityTypeRef
-	{ $current=$iv_ruleECapabilityTypeRef.current; }
+// Entry rule entryRuleETargetType
+entryRuleETargetType returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getETargetTypeRule()); }
+	iv_ruleETargetType=ruleETargetType
+	{ $current=$iv_ruleETargetType.current; }
 	EOF;
 
-// Rule ECapabilityTypeRef
-ruleECapabilityTypeRef returns [EObject current=null]
+// Rule ETargetType
+ruleETargetType returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -4036,12 +4363,12 @@ ruleECapabilityTypeRef returns [EObject current=null]
 	(
 		(
 			{
-				newCompositeNode(grammarAccess.getECapabilityTypeRefAccess().getNameEPREFIX_TYPEParserRuleCall_0());
+				newCompositeNode(grammarAccess.getETargetTypeAccess().getNameEPREFIX_TYPEParserRuleCall_0());
 			}
 			lv_name_0_0=ruleEPREFIX_TYPE
 			{
 				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getECapabilityTypeRefRule());
+					$current = createModelElementForParent(grammarAccess.getETargetTypeRule());
 				}
 				set(
 					$current,
@@ -8197,6 +8524,42 @@ ruleEEntityReference returns [EObject current=null]
 		this_EPREFIX_ID_2=ruleEPREFIX_ID
 		{
 			$current = $this_EPREFIX_ID_2.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleEPREFIX_REF
+entryRuleEPREFIX_REF returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEPREFIX_REFRule()); }
+	iv_ruleEPREFIX_REF=ruleEPREFIX_REF
+	{ $current=$iv_ruleEPREFIX_REF.current; }
+	EOF;
+
+// Rule EPREFIX_REF
+ruleEPREFIX_REF returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getEPREFIX_REFAccess().getEPREFIX_TYPEParserRuleCall_0());
+		}
+		this_EPREFIX_TYPE_0=ruleEPREFIX_TYPE
+		{
+			$current = $this_EPREFIX_TYPE_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEPREFIX_REFAccess().getEPREFIX_IDParserRuleCall_1());
+		}
+		this_EPREFIX_ID_1=ruleEPREFIX_ID
+		{
+			$current = $this_EPREFIX_ID_1.current;
 			afterParserOrEnumRuleCall();
 		}
 	)

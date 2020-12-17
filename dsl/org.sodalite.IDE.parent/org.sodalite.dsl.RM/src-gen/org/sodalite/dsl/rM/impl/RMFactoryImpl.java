@@ -85,6 +85,9 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.ETRIGGERS: return createETriggers();
       case RMPackage.ETRIGGER_DEFINITION: return createETriggerDefinition();
       case RMPackage.ETRIGGER_DEFINITION_BODY: return createETriggerDefinitionBody();
+      case RMPackage.EACTIVITY_DEFINITIONS: return createEActivityDefinitions();
+      case RMPackage.EEXTENDED_TRIGGER_CONDITION: return createEExtendedTriggerCondition();
+      case RMPackage.ETIME_INTERVAL: return createETimeInterval();
       case RMPackage.EEVEN_FILTER: return createEEvenFilter();
       case RMPackage.ECONDITION_CLAUSE_DEFINITION: return createEConditionClauseDefinition();
       case RMPackage.ECONDITION_CLAUSE_DEFINITION_AND: return createEConditionClauseDefinitionAND();
@@ -105,7 +108,7 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.ERELATIONSHIP_TYPE: return createERelationshipType();
       case RMPackage.ERELATIONSHIP_TYPE_BODY: return createERelationshipTypeBody();
       case RMPackage.EVALID_TARGET_TYPES: return createEValidTargetTypes();
-      case RMPackage.ECAPABILITY_TYPE_REF: return createECapabilityTypeRef();
+      case RMPackage.ETARGET_TYPE: return createETargetType();
       case RMPackage.EPROPERTIES: return createEProperties();
       case RMPackage.EPROPERTY_DEFINITION: return createEPropertyDefinition();
       case RMPackage.EPROPERTY_DEFINITION_BODY: return createEPropertyDefinitionBody();
@@ -163,6 +166,7 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EMAP: return createEMAP();
       case RMPackage.EMAP_ENTRY: return createEMapEntry();
       case RMPackage.EENTITY_REFERENCE: return createEEntityReference();
+      case RMPackage.EPREFIX_REF: return createEPREFIX_REF();
       case RMPackage.EPREFIX_TYPE: return createEPREFIX_TYPE();
       case RMPackage.EPREFIX_ID: return createEPREFIX_ID();
       case RMPackage.EPRIMITIVE_TYPE: return createEPRIMITIVE_TYPE();
@@ -418,6 +422,42 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
+  public EActivityDefinitions createEActivityDefinitions()
+  {
+    EActivityDefinitionsImpl eActivityDefinitions = new EActivityDefinitionsImpl();
+    return eActivityDefinitions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EExtendedTriggerCondition createEExtendedTriggerCondition()
+  {
+    EExtendedTriggerConditionImpl eExtendedTriggerCondition = new EExtendedTriggerConditionImpl();
+    return eExtendedTriggerCondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ETimeInterval createETimeInterval()
+  {
+    ETimeIntervalImpl eTimeInterval = new ETimeIntervalImpl();
+    return eTimeInterval;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EEvenFilter createEEvenFilter()
   {
     EEvenFilterImpl eEvenFilter = new EEvenFilterImpl();
@@ -658,10 +698,10 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
    * @generated
    */
   @Override
-  public ECapabilityTypeRef createECapabilityTypeRef()
+  public ETargetType createETargetType()
   {
-    ECapabilityTypeRefImpl eCapabilityTypeRef = new ECapabilityTypeRefImpl();
-    return eCapabilityTypeRef;
+    ETargetTypeImpl eTargetType = new ETargetTypeImpl();
+    return eTargetType;
   }
 
   /**
@@ -1346,6 +1386,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EEntityReferenceImpl eEntityReference = new EEntityReferenceImpl();
     return eEntityReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPREFIX_REF createEPREFIX_REF()
+  {
+    EPREFIX_REFImpl eprefiX_REF = new EPREFIX_REFImpl();
+    return eprefiX_REF;
   }
 
   /**

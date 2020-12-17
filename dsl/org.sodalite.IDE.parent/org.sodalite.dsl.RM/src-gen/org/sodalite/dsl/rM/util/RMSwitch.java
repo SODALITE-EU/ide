@@ -213,6 +213,27 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EACTIVITY_DEFINITIONS:
+      {
+        EActivityDefinitions eActivityDefinitions = (EActivityDefinitions)theEObject;
+        T result = caseEActivityDefinitions(eActivityDefinitions);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EEXTENDED_TRIGGER_CONDITION:
+      {
+        EExtendedTriggerCondition eExtendedTriggerCondition = (EExtendedTriggerCondition)theEObject;
+        T result = caseEExtendedTriggerCondition(eExtendedTriggerCondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ETIME_INTERVAL:
+      {
+        ETimeInterval eTimeInterval = (ETimeInterval)theEObject;
+        T result = caseETimeInterval(eTimeInterval);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EEVEN_FILTER:
       {
         EEvenFilter eEvenFilter = (EEvenFilter)theEObject;
@@ -358,10 +379,10 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RMPackage.ECAPABILITY_TYPE_REF:
+      case RMPackage.ETARGET_TYPE:
       {
-        ECapabilityTypeRef eCapabilityTypeRef = (ECapabilityTypeRef)theEObject;
-        T result = caseECapabilityTypeRef(eCapabilityTypeRef);
+        ETargetType eTargetType = (ETargetType)theEObject;
+        T result = caseETargetType(eTargetType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -806,12 +827,20 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EPREFIX_REF:
+      {
+        EPREFIX_REF eprefiX_REF = (EPREFIX_REF)theEObject;
+        T result = caseEPREFIX_REF(eprefiX_REF);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EPREFIX_TYPE:
       {
         EPREFIX_TYPE eprefiX_TYPE = (EPREFIX_TYPE)theEObject;
         T result = caseEPREFIX_TYPE(eprefiX_TYPE);
         if (result == null) result = caseEDataTypeName(eprefiX_TYPE);
         if (result == null) result = caseEEntityReference(eprefiX_TYPE);
+        if (result == null) result = caseEPREFIX_REF(eprefiX_TYPE);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -820,6 +849,7 @@ public class RMSwitch<T> extends Switch<T>
         EPREFIX_ID eprefiX_ID = (EPREFIX_ID)theEObject;
         T result = caseEPREFIX_ID(eprefiX_ID);
         if (result == null) result = caseEEntityReference(eprefiX_ID);
+        if (result == null) result = caseEPREFIX_REF(eprefiX_ID);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1164,6 +1194,54 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EActivity Definitions</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EActivity Definitions</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEActivityDefinitions(EActivityDefinitions object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EExtended Trigger Condition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EExtended Trigger Condition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEExtendedTriggerCondition(EExtendedTriggerCondition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ETime Interval</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ETime Interval</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseETimeInterval(ETimeInterval object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EEven Filter</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1484,17 +1562,17 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>ECapability Type Ref</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>ETarget Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ECapability Type Ref</em>'.
+   * @return the result of interpreting the object as an instance of '<em>ETarget Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseECapabilityTypeRef(ECapabilityTypeRef object)
+  public T caseETargetType(ETargetType object)
   {
     return null;
   }
@@ -2407,6 +2485,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEEntityReference(EEntityReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EPREFIX REF</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EPREFIX REF</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPREFIX_REF(EPREFIX_REF object)
   {
     return null;
   }

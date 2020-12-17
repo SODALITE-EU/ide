@@ -30,12 +30,12 @@ public interface EEvenFilter extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Node</em>' containment reference.
-   * @see #setNode(EPREFIX_TYPE)
+   * @see #setNode(EPREFIX_REF)
    * @see org.sodalite.dsl.rM.RMPackage#getEEvenFilter_Node()
    * @model containment="true"
    * @generated
    */
-  EPREFIX_TYPE getNode();
+  EPREFIX_REF getNode();
 
   /**
    * Sets the value of the '{@link org.sodalite.dsl.rM.EEvenFilter#getNode <em>Node</em>}' containment reference.
@@ -45,7 +45,7 @@ public interface EEvenFilter extends EObject
    * @see #getNode()
    * @generated
    */
-  void setNode(EPREFIX_TYPE value);
+  void setNode(EPREFIX_REF value);
 
   /**
    * Returns the value of the '<em><b>Requirement</b></em>' attribute.

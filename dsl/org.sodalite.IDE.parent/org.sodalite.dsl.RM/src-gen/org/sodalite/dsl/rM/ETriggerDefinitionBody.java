@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getDescription <em>Description</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getEvent <em>Event</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getSchedule <em>Schedule</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getTarget_filter <em>Target filter</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getAction <em>Action</em>}</li>
@@ -72,6 +73,28 @@ public interface ETriggerDefinitionBody extends EObject
   void setEvent(String value);
 
   /**
+   * Returns the value of the '<em><b>Schedule</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Schedule</em>' containment reference.
+   * @see #setSchedule(ETimeInterval)
+   * @see org.sodalite.dsl.rM.RMPackage#getETriggerDefinitionBody_Schedule()
+   * @model containment="true"
+   * @generated
+   */
+  ETimeInterval getSchedule();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getSchedule <em>Schedule</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Schedule</em>' containment reference.
+   * @see #getSchedule()
+   * @generated
+   */
+  void setSchedule(ETimeInterval value);
+
+  /**
    * Returns the value of the '<em><b>Target filter</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -98,12 +121,12 @@ public interface ETriggerDefinitionBody extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Condition</em>' containment reference.
-   * @see #setCondition(EConditionClauseDefinition)
+   * @see #setCondition(EExtendedTriggerCondition)
    * @see org.sodalite.dsl.rM.RMPackage#getETriggerDefinitionBody_Condition()
    * @model containment="true"
    * @generated
    */
-  EConditionClauseDefinition getCondition();
+  EExtendedTriggerCondition getCondition();
 
   /**
    * Sets the value of the '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getCondition <em>Condition</em>}' containment reference.
@@ -113,19 +136,19 @@ public interface ETriggerDefinitionBody extends EObject
    * @see #getCondition()
    * @generated
    */
-  void setCondition(EConditionClauseDefinition value);
+  void setCondition(EExtendedTriggerCondition value);
 
   /**
    * Returns the value of the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Action</em>' containment reference.
-   * @see #setAction(EActivityDefinition)
+   * @see #setAction(EActivityDefinitions)
    * @see org.sodalite.dsl.rM.RMPackage#getETriggerDefinitionBody_Action()
    * @model containment="true"
    * @generated
    */
-  EActivityDefinition getAction();
+  EActivityDefinitions getAction();
 
   /**
    * Sets the value of the '{@link org.sodalite.dsl.rM.ETriggerDefinitionBody#getAction <em>Action</em>}' containment reference.
@@ -135,6 +158,6 @@ public interface ETriggerDefinitionBody extends EObject
    * @see #getAction()
    * @generated
    */
-  void setAction(EActivityDefinition value);
+  void setAction(EActivityDefinitions value);
 
 } // ETriggerDefinitionBody

@@ -17,41 +17,41 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.sodalite.dsl.rM.ETargetType;
-import org.sodalite.dsl.rM.EValidTargetTypes;
+import org.sodalite.dsl.rM.EActivityDefinition;
+import org.sodalite.dsl.rM.EActivityDefinitions;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EValid Target Types</b></em>'.
+ * An implementation of the model object '<em><b>EActivity Definitions</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.EValidTargetTypesImpl#getTargetTypes <em>Target Types</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EActivityDefinitionsImpl#getList <em>List</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implements EValidTargetTypes
+public class EActivityDefinitionsImpl extends MinimalEObjectImpl.Container implements EActivityDefinitions
 {
   /**
-   * The cached value of the '{@link #getTargetTypes() <em>Target Types</em>}' containment reference list.
+   * The cached value of the '{@link #getList() <em>List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTargetTypes()
+   * @see #getList()
    * @generated
    * @ordered
    */
-  protected EList<ETargetType> targetTypes;
+  protected EList<EActivityDefinition> list;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EValidTargetTypesImpl()
+  protected EActivityDefinitionsImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
   @Override
   protected EClass eStaticClass()
   {
-    return RMPackage.Literals.EVALID_TARGET_TYPES;
+    return RMPackage.Literals.EACTIVITY_DEFINITIONS;
   }
 
   /**
@@ -73,13 +73,13 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    */
   @Override
-  public EList<ETargetType> getTargetTypes()
+  public EList<EActivityDefinition> getList()
   {
-    if (targetTypes == null)
+    if (list == null)
     {
-      targetTypes = new EObjectContainmentEList<ETargetType>(ETargetType.class, this, RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES);
+      list = new EObjectContainmentEList<EActivityDefinition>(EActivityDefinition.class, this, RMPackage.EACTIVITY_DEFINITIONS__LIST);
     }
-    return targetTypes;
+    return list;
   }
 
   /**
@@ -92,8 +92,8 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
-        return ((InternalEList<?>)getTargetTypes()).basicRemove(otherEnd, msgs);
+      case RMPackage.EACTIVITY_DEFINITIONS__LIST:
+        return ((InternalEList<?>)getList()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +108,8 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
-        return getTargetTypes();
+      case RMPackage.EACTIVITY_DEFINITIONS__LIST:
+        return getList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +125,9 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
-        getTargetTypes().clear();
-        getTargetTypes().addAll((Collection<? extends ETargetType>)newValue);
+      case RMPackage.EACTIVITY_DEFINITIONS__LIST:
+        getList().clear();
+        getList().addAll((Collection<? extends EActivityDefinition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +143,8 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
-        getTargetTypes().clear();
+      case RMPackage.EACTIVITY_DEFINITIONS__LIST:
+        getList().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +160,10 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
-        return targetTypes != null && !targetTypes.isEmpty();
+      case RMPackage.EACTIVITY_DEFINITIONS__LIST:
+        return list != null && !list.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //EValidTargetTypesImpl
+} //EActivityDefinitionsImpl

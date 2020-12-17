@@ -26,7 +26,12 @@ AADM_Model:
 	('node_templates:'
 		BEGIN
 		nodeTemplates=ENodeTemplates
-		END)?;
+		END)?
+	('policies:'
+		BEGIN
+		policies=EPolicies
+		END)?
+;
 
 
 ENodeTemplates:
@@ -88,7 +93,35 @@ EAttributeAssigments:
 EAttributeAssignment:
 	name = ID ':' value=EAssignmentValue;
 
+EPolicies:
+	{EPolicies} (policies+=EPolicyDefinition)+;
+	
+EPolicyDefinition:
+	name = ID ':'
+	BEGIN
+		node=EPolicyDefinitionBody
+	END
+;
 
+EPolicyDefinitionBody:
+	('type:' type=EPREFIX_TYPE) &
+	('description:' description=STRING)? &
+	('properties:'
+	BEGIN
+		properties=EPropertyAssignments
+	END)? &
+	('targets:' '[' targets=ETarget ']')? &
+	('triggers:'
+	BEGIN
+		triggers=ETriggerDefinitions
+	END)?
+;
+
+ETriggerDefinitions:
+	{ETriggerDefinitions} (triggers+=ETriggerDefinition)+;
+	
 	
 
+ETarget:
+	target+=EPREFIX_ID (',' target+=EPREFIX_ID)*;
 
