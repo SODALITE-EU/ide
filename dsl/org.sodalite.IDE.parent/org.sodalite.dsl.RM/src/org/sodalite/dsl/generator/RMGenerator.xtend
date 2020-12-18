@@ -70,6 +70,7 @@ import org.sodalite.dsl.rM.EAssertionDefinition
 import org.sodalite.dsl.rM.ETargetType
 import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.rM.EExtendedTriggerCondition
+import org.sodalite.dsl.rM.EInterfaceType
 
 /**
  * Generates code from your model files on save.
@@ -87,6 +88,7 @@ class RMGenerator extends AbstractGenerator {
 	var int relationship_counter = 1
 	var int parameter_counter = 1
 	var int interface_counter = 1
+	var int interface_type_counter = 1
 	var int policy_counter = 1
 	var int trigger_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
@@ -108,6 +110,7 @@ class RMGenerator extends AbstractGenerator {
 		relationship_counter = 1
 		parameter_counter = 1
 		interface_counter = 1
+		interface_type_counter = 1
 		policy_counter = 1
 		trigger_counter = 1
 		property_numbers = new HashMap<EPropertyDefinition, Integer>()
@@ -211,6 +214,10 @@ class RMGenerator extends AbstractGenerator {
 	
 	«FOR p:r.allContents.toIterable.filter(EPolicyType)»
 	«p.compile»
+	«ENDFOR»
+	
+	«FOR i:r.allContents.toIterable.filter(EInterfaceType)»
+	«i.compile»
 	«ENDFOR»
 	'''
 	
@@ -400,6 +407,17 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	«IF i.interface.inputs !== null»
+	«putParameterNumber(i, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «FOR prop:(i.interface.inputs.properties)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(prop, "name")» ;
+	  «ENDFOR»	  
+	.
+	«ENDIF»	
+	
 	«IF i.interface.operations !== null»
 	«putParameterNumber(i, "operations", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -418,6 +436,9 @@ class RMGenerator extends AbstractGenerator {
 	  «IF i.interface.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "type")» ;
 	  «ENDIF»
+	  «IF i.interface.inputs !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "inputs")» ;
+	  «ENDIF»
 	  «IF i.interface.operations !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "operations")» ;
 	  «ENDIF»
@@ -429,6 +450,9 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(o, "inputs", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
+	  «IF o.operation.description !== null»
+	  exchange:description '«processDescription(o.operation.description)»' ;
+	  «ENDIF»
 	  exchange:name "inputs" ;
 	  «FOR in:(o.operation.inputs.inputs)»
 	  exchange:hasParameter :Parameter_«getParameterNumber(in, "name")» ;
@@ -543,44 +567,61 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(EParameterDefinition p) '''
+	«IF p.parameter.type !== null»
+	«putParameterNumber(p, "type", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "type" ;
+	  exchange:value '«trim(p.parameter.type.compile)»' ;  
+	.
+	«ENDIF»
+	
 	«IF p.parameter.value !== null»
 	«putParameterNumber(p, "value", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "value" ;  
+	  exchange:name "value" ;
+	  «IF p.parameter.value instanceof EFunction»
+	  «IF p.parameter.value instanceof GetInput»
+	  exchange:value "{ get_input: «(p.parameter.value as GetInput).input.name» }" ;
+	  «ELSEIF p.parameter.value instanceof GetProperty || p.parameter.value instanceof GetAttribute»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
+	  «ENDIF»
+	  «ELSEIF p.parameter.value instanceof ESingleValue»
+	  exchange:value "«trim((p.parameter.value as ESingleValue).compile().toString)»" ;
+	  «ENDIF»
 	.
-	«ENDIF»		
+	«ENDIF»
 	
 	«IF p.parameter.^default !== null»
 	«putParameterNumber(p, "default", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "default" ;  
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ; 
+	  exchange:name "value" ;
+	  «IF p.parameter.^default instanceof EFunction»
+	  «IF p.parameter.^default instanceof GetInput»
+	  exchange:value "{ get_input: «(p.parameter.^default as GetInput).input.name» }" ;
+	  «ELSEIF p.parameter.^default instanceof GetProperty || p.parameter.^default instanceof GetAttribute»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
+	  «ENDIF»
+	  «ELSEIF p.parameter.^default instanceof ESingleValue»
+	  exchange:value "«trim((p.parameter.^default as ESingleValue).compile().toString)»" ;
+	  «ENDIF»
 	.
-	«ENDIF»	
+	«ENDIF»
 	
 	«putParameterNumber(p, "name", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "«p.name»" ;
 	  «IF p.parameter.type !== null»
-	  exchange:value '«p.parameter.type»' ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ; 
 	  «ENDIF»
 	  «IF p.parameter.value !== null»
-	  «IF p.parameter.value instanceof EFunction»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "value")» ;
-	  «ELSEIF p.parameter.value instanceof ESingleValue»
-	  exchange:value '«trim((p.parameter.value as ESingleValue).compile.toString)»' ;	  
-	  «ENDIF»
 	  «ENDIF»
 	  «IF p.parameter.^default !== null»
-	  «IF p.parameter.^default instanceof EFunction»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "default")» ;
-	  «ELSEIF p.parameter.^default instanceof ESingleValue»
-	  exchange:value '«trim((p.parameter.^default as ESingleValue).compile.toString)»' ;	  
-	  «ENDIF»	  
 	  «ENDIF»  
 	.	
 	'''
@@ -1006,6 +1047,50 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	.
   	'''
+  	
+	def compile (EInterfaceType i) '''
+	
+	«IF i.interface.inputs !== null»
+	«putParameterNumber(i, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «FOR prop:(i.interface.inputs.properties)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(prop, "name")» ;
+	  «ENDFOR»	  
+	.
+	«ENDIF»	
+	
+	«IF i.interface.operations !== null»
+	«putParameterNumber(i, "operations", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "operations" ;
+	  «FOR op:(i.interface.operations.operations)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(op, "name")» ;
+	  «ENDFOR»	  
+	.
+	«ENDIF»	
+	
+	:InterfaceType_«interface_type_counter++»
+	  rdf:type exchange:Type ;
+	  exchange:name "«i.name»" ;
+	  «IF i.interface.description !== null»
+	  exchange:description '«processDescription(i.interface.description)»' ;
+	  «ENDIF»
+	  «IF i.interface.superType.module !== null»
+	  exchange:derivesFrom '«i.interface.superType.module»/«i.interface.superType.type»' ;
+	  «ELSE»
+	  exchange:derivesFrom '«i.interface.superType.type»' ;
+	  «ENDIF»
+	  «IF i.interface.inputs !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "inputs")» ;
+	  «ENDIF»
+	  «IF i.interface.operations !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "operations")» ;
+	  «ENDIF»
+	.
+  	'''
 	
 	def compile (EPropertyDefinition p) '''
 	«IF p.property.type !== null»
@@ -1031,9 +1116,13 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "default" ;
 	  «IF p.property.^default !== null»
 	  «IF p.property.^default instanceof EFunction»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p, "default")» ;
-	  «ELSE»
-	  exchange:value '«trim((p.property.^default as ESingleValue).compile.toString)»' ;
+	  «IF p.property.^default instanceof GetInput»
+	  exchange:value "{ get_input: «(p.property.^default as GetInput).input.name» }" ;
+	   «ELSEIF p.property.^default instanceof GetProperty || p.property.^default instanceof GetAttribute»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p.property.^default, "name")» ;
+	   «ENDIF»
+	  «ELSEIF p.property.^default instanceof ESingleValue»
+	  exchange:value "«trim((p.property.^default as ESingleValue).compile.toString)»" ;
 	  «ENDIF»	  
 	  «ENDIF» 
 	.
@@ -1118,7 +1207,7 @@ class RMGenerator extends AbstractGenerator {
 	  «ELSEIF p.value instanceof EFunction»
 	  	«IF p.value instanceof GetInput»
 	  	exchange:value "{ get_input: «(p.value as GetInput).input.name» }" ;
-	  	«ELSEIF p.value instanceof GetProperty»
+	  	«ELSEIF p.value instanceof GetProperty || p.value instanceof GetAttribute»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
 	  	«ENDIF»
 	  «ELSEIF p.value instanceof ESingleValue»
@@ -1241,10 +1330,14 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "default" ;
 	  «IF a.attribute.^default !== null»
 	  «IF a.attribute.^default instanceof EFunction»
-	  exchange:hasParameter :Parameter_«getParameterNumber(a, "default")» ;
-	  «ELSE»
-	  exchange:value '«trim((a.attribute.^default as ESingleValue).compile.toString)»' ;
-	  «ENDIF»	  
+	  	«IF a.attribute.^default instanceof GetInput»
+	  	exchange:value "{ get_input: «(a.attribute.^default as GetInput).input.name» }" ;
+	  	«ELSEIF a.attribute.^default instanceof GetProperty || a.attribute.^default instanceof GetAttribute»
+	  	exchange:hasParameter :Parameter_«getParameterNumber(a.attribute.^default, "name")» ;
+	  	«ENDIF»
+	  «ELSEIF a.attribute.^default instanceof ESingleValue»
+	  	exchange:value "«trim((a.attribute.^default as ESingleValue).compile().toString)»" ;
+	  «ENDIF»  
 	  «ENDIF» 
 	.
 	«ENDIF»
