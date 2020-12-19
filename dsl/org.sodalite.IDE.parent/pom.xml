@@ -41,6 +41,11 @@
 		<module>org.sodalite.dsl.optimization.ui</module>
 		<module>org.sodalite.dsl.preferences</module>
 		<module>org.sodalite.ide.ui</module>
+		<module>org.sodalite.dsl.ansible</module>
+		<module>org.sodalite.dsl.ansible.ide</module>
+		<module>org.sodalite.dsl.ansible.tests</module>
+		<module>org.sodalite.dsl.ansible.ui</module>
+		<module>org.sodalite.dsl.ansible.ui.tests</module>
 	</modules>
 	<build>
 		<plugins>

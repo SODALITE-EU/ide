@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.sodalite.dsl.rM.EOperationDefinition;
+
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
@@ -31,6 +33,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getPlays <em>Plays</em>}</li>
  * </ul>
  *
@@ -57,6 +60,16 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getOperation() <em>Operation</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperation()
+   * @generated
+   * @ordered
+   */
+  protected EOperationDefinition operation;
 
   /**
    * The cached value of the '{@link #getPlays() <em>Plays</em>}' containment reference list.
@@ -120,6 +133,51 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
    * @generated
    */
   @Override
+  public EOperationDefinition getOperation()
+  {
+    if (operation != null && operation.eIsProxy())
+    {
+      InternalEObject oldOperation = (InternalEObject)operation;
+      operation = (EOperationDefinition)eResolveProxy(oldOperation);
+      if (operation != oldOperation)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EPLAYBOOK__OPERATION, oldOperation, operation));
+      }
+    }
+    return operation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EOperationDefinition basicGetOperation()
+  {
+    return operation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setOperation(EOperationDefinition newOperation)
+  {
+    EOperationDefinition oldOperation = operation;
+    operation = newOperation;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAYBOOK__OPERATION, oldOperation, operation));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<EPlay> getPlays()
   {
     if (plays == null)
@@ -157,6 +215,9 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
     {
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         return getName();
+      case AnsibleDslPackage.EPLAYBOOK__OPERATION:
+        if (resolve) return getOperation();
+        return basicGetOperation();
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         return getPlays();
     }
@@ -176,6 +237,9 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
     {
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         setName((String)newValue);
+        return;
+      case AnsibleDslPackage.EPLAYBOOK__OPERATION:
+        setOperation((EOperationDefinition)newValue);
         return;
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         getPlays().clear();
@@ -198,6 +262,9 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case AnsibleDslPackage.EPLAYBOOK__OPERATION:
+        setOperation((EOperationDefinition)null);
+        return;
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         getPlays().clear();
         return;
@@ -217,6 +284,8 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
     {
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case AnsibleDslPackage.EPLAYBOOK__OPERATION:
+        return operation != null;
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         return plays != null && !plays.isEmpty();
     }

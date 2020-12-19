@@ -43,18 +43,23 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Keyword cPlaybook_nameKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameSTRINGTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Keyword cPlaysKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cPlayKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cPlaysAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cPlaysEPlayParserRuleCall_4_1_0 = (RuleCall)cPlaysAssignment_4_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cOperationKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cOperationAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cOperationEOperationDefinitionCrossReference_4_0 = (CrossReference)cOperationAssignment_4.eContents().get(0);
+		private final RuleCall cOperationEOperationDefinitionSTRINGTerminalRuleCall_4_0_1 = (RuleCall)cOperationEOperationDefinitionCrossReference_4_0.eContents().get(1);
+		private final Keyword cPlaysKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cPlayKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cPlaysAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cPlaysEPlayParserRuleCall_6_1_0 = (RuleCall)cPlaysAssignment_6_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6_2 = (Keyword)cGroup_6.eContents().get(2);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//EPlaybook:
 		//	'playbook{'
 		//	'playbook_name:' name=STRING
+		//	'operation:' operation=[rm::EOperationDefinition|STRING]
 		//	'plays{' ('play{'
 		//	plays+=EPlay
 		//	'}')+
@@ -62,7 +67,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'playbook{' 'playbook_name:' name=STRING 'plays{' ('play{' plays+=EPlay '}')+ '}' '}'
+		//'playbook{' 'playbook_name:' name=STRING 'operation:' operation=[rm::EOperationDefinition|STRING] 'plays{' ('play{'
+		//plays+=EPlay '}')+ '}' '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'playbook{'
@@ -77,29 +83,41 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_2_0() { return cNameSTRINGTerminalRuleCall_2_0; }
 		
+		//'operation:'
+		public Keyword getOperationKeyword_3() { return cOperationKeyword_3; }
+		
+		//operation=[rm::EOperationDefinition|STRING]
+		public Assignment getOperationAssignment_4() { return cOperationAssignment_4; }
+		
+		//[rm::EOperationDefinition|STRING]
+		public CrossReference getOperationEOperationDefinitionCrossReference_4_0() { return cOperationEOperationDefinitionCrossReference_4_0; }
+		
+		//STRING
+		public RuleCall getOperationEOperationDefinitionSTRINGTerminalRuleCall_4_0_1() { return cOperationEOperationDefinitionSTRINGTerminalRuleCall_4_0_1; }
+		
 		//'plays{'
-		public Keyword getPlaysKeyword_3() { return cPlaysKeyword_3; }
+		public Keyword getPlaysKeyword_5() { return cPlaysKeyword_5; }
 		
 		//('play{' plays+=EPlay '}')+
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_6() { return cGroup_6; }
 		
 		//'play{'
-		public Keyword getPlayKeyword_4_0() { return cPlayKeyword_4_0; }
+		public Keyword getPlayKeyword_6_0() { return cPlayKeyword_6_0; }
 		
 		//plays+=EPlay
-		public Assignment getPlaysAssignment_4_1() { return cPlaysAssignment_4_1; }
+		public Assignment getPlaysAssignment_6_1() { return cPlaysAssignment_6_1; }
 		
 		//EPlay
-		public RuleCall getPlaysEPlayParserRuleCall_4_1_0() { return cPlaysEPlayParserRuleCall_4_1_0; }
+		public RuleCall getPlaysEPlayParserRuleCall_6_1_0() { return cPlaysEPlayParserRuleCall_6_1_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_4_2() { return cRightCurlyBracketKeyword_4_2; }
+		public Keyword getRightCurlyBracketKeyword_6_2() { return cRightCurlyBracketKeyword_6_2; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 	public class EBaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EBase");
@@ -4205,12 +4223,13 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEVariableDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cERegisterVariableParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEInputVariableParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//EDeclaredVariable:
-		//	EVariableDeclaration | ERegisterVariable;
+		//	EVariableDeclaration | ERegisterVariable | EInputVariable;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EVariableDeclaration | ERegisterVariable
+		//EVariableDeclaration | ERegisterVariable | EInputVariable
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//EVariableDeclaration
@@ -4218,6 +4237,9 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//ERegisterVariable
 		public RuleCall getERegisterVariableParserRuleCall_1() { return cERegisterVariableParserRuleCall_1; }
+		
+		//EInputVariable
+		public RuleCall getEInputVariableParserRuleCall_2() { return cEInputVariableParserRuleCall_2; }
 	}
 	public class EVariableDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EVariableDeclaration");
@@ -4272,6 +4294,25 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
+	public class EInputVariableElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EInputVariable");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cNameEParameterDefinitionCrossReference_0 = (CrossReference)cNameAssignment.eContents().get(0);
+		private final RuleCall cNameEParameterDefinitionSTRINGTerminalRuleCall_0_1 = (RuleCall)cNameEParameterDefinitionCrossReference_0.eContents().get(1);
+		
+		//EInputVariable:
+		//	name=[rm::EParameterDefinition|STRING];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=[rm::EParameterDefinition|STRING]
+		public Assignment getNameAssignment() { return cNameAssignment; }
+		
+		//[rm::EParameterDefinition|STRING]
+		public CrossReference getNameEParameterDefinitionCrossReference_0() { return cNameEParameterDefinitionCrossReference_0; }
+		
+		//STRING
+		public RuleCall getNameEParameterDefinitionSTRINGTerminalRuleCall_0_1() { return cNameEParameterDefinitionSTRINGTerminalRuleCall_0_1; }
 	}
 	public class EFactGatheredElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EFactGathered");
@@ -4488,6 +4529,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final EDeclaredVariableElements pEDeclaredVariable;
 	private final EVariableDeclarationElements pEVariableDeclaration;
 	private final ERegisterVariableElements pERegisterVariable;
+	private final EInputVariableElements pEInputVariable;
 	private final EFactGatheredElements pEFactGathered;
 	private final EDictionaryElements pEDictionary;
 	private final EDictionaryPairElements pEDictionaryPair;
@@ -4565,6 +4607,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pEDeclaredVariable = new EDeclaredVariableElements();
 		this.pEVariableDeclaration = new EVariableDeclarationElements();
 		this.pERegisterVariable = new ERegisterVariableElements();
+		this.pEInputVariable = new EInputVariableElements();
 		this.pEFactGathered = new EFactGatheredElements();
 		this.pEDictionary = new EDictionaryElements();
 		this.pEDictionaryPair = new EDictionaryPairElements();
@@ -4614,6 +4657,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//EPlaybook:
 	//	'playbook{'
 	//	'playbook_name:' name=STRING
+	//	'operation:' operation=[rm::EOperationDefinition|STRING]
 	//	'plays{' ('play{'
 	//	plays+=EPlay
 	//	'}')+
@@ -5297,7 +5341,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EDeclaredVariable:
-	//	EVariableDeclaration | ERegisterVariable;
+	//	EVariableDeclaration | ERegisterVariable | EInputVariable;
 	public EDeclaredVariableElements getEDeclaredVariableAccess() {
 		return pEDeclaredVariable;
 	}
@@ -5324,6 +5368,16 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	public ParserRule getERegisterVariableRule() {
 		return getERegisterVariableAccess().getRule();
+	}
+	
+	//EInputVariable:
+	//	name=[rm::EParameterDefinition|STRING];
+	public EInputVariableElements getEInputVariableAccess() {
+		return pEInputVariable;
+	}
+	
+	public ParserRule getEInputVariableRule() {
+		return getEInputVariableAccess().getRule();
 	}
 	
 	//EFactGathered:

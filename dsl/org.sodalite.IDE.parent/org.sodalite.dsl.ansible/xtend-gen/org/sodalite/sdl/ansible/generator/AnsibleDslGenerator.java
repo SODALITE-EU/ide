@@ -1489,7 +1489,6 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         } else {
           if ((valuePassedToJinjaExpression instanceof EDeclaredVariableReference)) {
             String declaredVariableString = "";
-            declaredVariableString = declaredVariableString.concat(((EDeclaredVariableReference)valuePassedToJinjaExpression).getVariable_reference().getName());
             String _index = ((EDeclaredVariableReference)valuePassedToJinjaExpression).getIndex();
             boolean _tripleNotEquals = (_index != null);
             if (_tripleNotEquals) {

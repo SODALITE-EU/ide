@@ -46,7 +46,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 				}
 			}*/
 			for (candidate: candidates){
-				acceptor.accept(createCompletionProposal(candidate.name, context))
+				acceptor.accept(createCompletionProposal(candidate.name, context)) //TODO fix this
 			}
 		}
 		//this else is entered it we are in a role

@@ -15,7 +15,6 @@ import org.sodalite.dsl.optimization.ide.OptimizationIdeModule;
  */
 @SuppressWarnings("all")
 public class OptimizationIdeSetup extends OptimizationStandaloneSetup {
-  @Override
   public Injector createInjector() {
     OptimizationRuntimeModule _optimizationRuntimeModule = new OptimizationRuntimeModule();
     OptimizationIdeModule _optimizationIdeModule = new OptimizationIdeModule();

@@ -3,7 +3,6 @@
  */
 package org.sodalite.sdl.ansible.ui.contentassist;
 
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
@@ -15,10 +14,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ui.contentassist.AbstractAnsibleDslProposalProvider;
 
@@ -41,13 +38,8 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void completeEDeclaredVariableReference_Variable_reference(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
-    if ((rootPlay != null)) {
-      final List<EDeclaredVariableImpl> candidates = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootPlay, EDeclaredVariableImpl.class);
-      for (final EDeclaredVariableImpl candidate : candidates) {
-        acceptor.accept(this.createCompletionProposal(candidate.getName(), context));
-      }
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field name is undefined for the type EDeclaredVariableImpl");
   }
   
   @Override

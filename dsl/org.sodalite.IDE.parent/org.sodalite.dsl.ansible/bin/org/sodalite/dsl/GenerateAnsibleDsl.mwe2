@@ -32,6 +32,9 @@ Workflow {
 		}
 		language = StandardLanguage {
 			name = "org.sodalite.dsl.AnsibleDsl"
+			
+			referencedResource = "platform:/resource/org.sodalite.dsl.RM/model/generated/RM.genmodel"
+			
 			fileExtensions = "ans"
 
 			serializer = {

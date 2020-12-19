@@ -125,6 +125,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EDECLARED_VARIABLE: return createEDeclaredVariable();
       case AnsibleDslPackage.EVARIABLE_DECLARATION: return createEVariableDeclaration();
       case AnsibleDslPackage.EREGISTER_VARIABLE: return createERegisterVariable();
+      case AnsibleDslPackage.EINPUT_VARIABLE: return createEInputVariable();
       case AnsibleDslPackage.EFACT_GATHERED: return createEFactGathered();
       case AnsibleDslPackage.EDICTIONARY: return createEDictionary();
       case AnsibleDslPackage.EDICTIONARY_PAIR: return createEDictionaryPair();
@@ -852,6 +853,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     ERegisterVariableImpl eRegisterVariable = new ERegisterVariableImpl();
     return eRegisterVariable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EInputVariable createEInputVariable()
+  {
+    EInputVariableImpl eInputVariable = new EInputVariableImpl();
+    return eInputVariable;
   }
 
   /**

@@ -24,7 +24,6 @@ import org.sodalite.dsl.optimization.ui.contentassist.AbstractOptimizationPropos
  */
 @SuppressWarnings("all")
 public class OptimizationProposalProvider extends AbstractOptimizationProposalProvider {
-  @Override
   public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     String _value = keyword.getValue();
     String _plus = ("keyword: " + _value);
@@ -240,32 +239,26 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
     }
   }
   
-  @Override
   public void completeEOptimization_Enable_opt_build(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createBooleanCompletionProposal(context, acceptor);
   }
   
-  @Override
   public void completeEOptimization_Enable_autotuning(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createBooleanCompletionProposal(context, acceptor);
   }
   
-  @Override
   public void completeEAITrainingConfig_Distributed_training(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createBooleanCompletionProposal(context, acceptor);
   }
   
-  @Override
   public void completeETensorFlow_Xla(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createBooleanCompletionProposal(context, acceptor);
   }
   
-  @Override
   public void completeEPyTorch_Glow(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createBooleanCompletionProposal(context, acceptor);
   }
   
-  @Override
   public void completeEOptimization_App_type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("ai_training", "ai_training", context, "", acceptor);
     this.createNonEditableCompletionProposal("hpc", "hpc", context, "", acceptor);
@@ -273,7 +266,6 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
     this.createNonEditableCompletionProposal("ai_inference", "ai_inference", context, "AI_Inference not supported in this version", acceptor);
   }
   
-  @Override
   public void completeEOptBuild_Cpu_type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("x86", "x86", context, "", acceptor);
     this.createNonEditableCompletionProposal("arm", "arm", context, "", acceptor);
@@ -281,20 +273,17 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
     this.createNonEditableCompletionProposal("power", "power", context, "", acceptor);
   }
   
-  @Override
   public void completeEOptBuild_Acc_type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("nvidia", "nvidia", context, "", acceptor);
     this.createNonEditableCompletionProposal("amd", "amd", context, "", acceptor);
     this.createNonEditableCompletionProposal("fpga", "fpga", context, "", acceptor);
   }
   
-  @Override
   public void completeEAutotuning_Tuner(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("cresta", "cresta", context, "", acceptor);
     this.createNonEditableCompletionProposal("autotune", "autotune", context, "", acceptor);
   }
   
-  @Override
   public void completeEAITrainingConfig_Ai_framework(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("tensorflow", "tensorflow", context, "", acceptor);
     this.createNonEditableCompletionProposal("pytorch", "pytorch", context, "", acceptor);
@@ -303,7 +292,6 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
     this.createNonEditableCompletionProposal("mxnet", "mxnet", context, "MXNet not supported in this version", acceptor);
   }
   
-  @Override
   public void completeEAITrainingConfig_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("image_classification", "image_classification", context, "", acceptor);
     this.createNonEditableCompletionProposal("object_detection", "object_detection", context, "", acceptor);
@@ -312,14 +300,12 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
     this.createNonEditableCompletionProposal("reinforncement_learning", "reinforncement_learning", context, "", acceptor);
   }
   
-  @Override
   public void completeEAITrainingData_Basedata(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("imagenet", "imagenet", context, "", acceptor);
     this.createNonEditableCompletionProposal("cifar", "cifar", context, "", acceptor);
     this.createNonEditableCompletionProposal("mnist", "mnist", context, "", acceptor);
   }
   
-  @Override
   public void completeEKeras_Backend(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("tensorflow", "tensorflow", context, "", acceptor);
     this.createNonEditableCompletionProposal("pytorch", "pytorch", context, "", acceptor);
@@ -328,7 +314,6 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
     this.createNonEditableCompletionProposal("mxnet", "mxnet", context, "MXNet not supported in this version", acceptor);
   }
   
-  @Override
   public void completeEHPCConfig_Parallelisation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("mpi", "mpi", context, "", acceptor);
     this.createNonEditableCompletionProposal("openmp", "openmp", context, "", acceptor);
@@ -336,44 +321,37 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
     this.createNonEditableCompletionProposal("opencl", "opencl", context, "", acceptor);
   }
   
-  @Override
   public void completeEHPCData_Basedata(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("image", "image", context, "", acceptor);
     this.createNonEditableCompletionProposal("restart", "restart", context, "", acceptor);
   }
   
-  @Override
   public void completeEMPI_Library(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("mvapch", "mvapch", context, "", acceptor);
     this.createNonEditableCompletionProposal("opnmpi", "opnmpi", context, "", acceptor);
   }
   
-  @Override
   public void completeEMPI_Message_size(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("small", "small", context, "", acceptor);
     this.createNonEditableCompletionProposal("medium", "medium", context, "", acceptor);
     this.createNonEditableCompletionProposal("large", "large", context, "", acceptor);
   }
   
-  @Override
   public void completeEOPENMP_Affinity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("block", "block", context, "", acceptor);
     this.createNonEditableCompletionProposal("simple", "simple", context, "", acceptor);
   }
   
-  @Override
   public void completeEOPENCL_Compiler(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("pgi", "pgi", context, "", acceptor);
     this.createNonEditableCompletionProposal("cray", "cray", context, "", acceptor);
   }
   
-  @Override
   public void completeEOPENACC_Compiler(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("pgi", "pgi", context, "", acceptor);
     this.createNonEditableCompletionProposal("cray", "cray", context, "", acceptor);
   }
   
-  @Override
   public void completeEAutotuning_Input(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
     FileDialog fileDialog = new FileDialog(shell);

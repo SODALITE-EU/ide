@@ -618,7 +618,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 		else if (valuePassedToJinjaExpression instanceof EDeclaredVariableReference){
 			var declaredVariableString = ""
-			declaredVariableString = declaredVariableString.concat(valuePassedToJinjaExpression.variable_reference.name)
+			//TODO non va commentata questa riga di codice
+			//declaredVariableString = declaredVariableString.concat(valuePassedToJinjaExpression.variable_reference.name)
 			if (valuePassedToJinjaExpression.index !== null) declaredVariableString = declaredVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
 			for (dictionaryPairReference : valuePassedToJinjaExpression.tail){
 				declaredVariableString = declaredVariableString.concat(".").concat(dictionaryPairReference.name.name)

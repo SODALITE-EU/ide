@@ -9,6 +9,12 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * A representation of the model object '<em><b>ERegister Variable</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable#getName <em>Name</em>}</li>
+ * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getERegisterVariable()
  * @model
@@ -16,4 +22,26 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  */
 public interface ERegisterVariable extends EDeclaredVariable
 {
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getERegisterVariable_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
+
 } // ERegisterVariable

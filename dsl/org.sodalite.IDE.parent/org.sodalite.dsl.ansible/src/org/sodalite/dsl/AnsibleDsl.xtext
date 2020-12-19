@@ -1,6 +1,7 @@
 grammar org.sodalite.sdl.ansible.AnsibleDsl with org.eclipse.xtext.common.Terminals
 
 generate ansibleDsl "http://www.sodalite.org/dsl/AnsibleDsl"
+import "http://www.sodalite.org/dsl/RM" as rm
 
 Model:
 	EPlaybook
@@ -9,6 +10,7 @@ Model:
 EPlaybook:
 	'playbook{'
 		'playbook_name:' name=STRING
+		'operation:' operation=[rm::EOperationDefinition|STRING]
 		'plays{'
 			('play{'
 				plays+=EPlay
@@ -450,7 +452,7 @@ EDictionaryPairReference:
 ;
 
 EDeclaredVariable:
-	EVariableDeclaration | ERegisterVariable
+	EVariableDeclaration | ERegisterVariable | EInputVariable
 ;
 
 EVariableDeclaration:
@@ -459,6 +461,10 @@ EVariableDeclaration:
 
 ERegisterVariable:
 	'register:' name=ID
+;
+
+EInputVariable:
+	name=[rm::EParameterDefinition|STRING]
 ;
 
 EFactGathered:

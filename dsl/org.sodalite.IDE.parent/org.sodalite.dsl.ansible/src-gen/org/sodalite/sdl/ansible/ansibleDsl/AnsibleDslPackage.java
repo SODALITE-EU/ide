@@ -96,13 +96,22 @@ public interface AnsibleDslPackage extends EPackage
   int EPLAYBOOK__NAME = MODEL_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Operation</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPLAYBOOK__OPERATION = MODEL_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Plays</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPLAYBOOK__PLAYS = MODEL_FEATURE_COUNT + 1;
+  int EPLAYBOOK__PLAYS = MODEL_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>EPlaybook</em>' class.
@@ -111,7 +120,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPLAYBOOK_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
+  int EPLAYBOOK_FEATURE_COUNT = MODEL_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl <em>EBase</em>}' class.
@@ -3338,22 +3347,13 @@ public interface AnsibleDslPackage extends EPackage
   int EDECLARED_VARIABLE = 57;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDECLARED_VARIABLE__NAME = 0;
-
-  /**
    * The number of structural features of the '<em>EDeclared Variable</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EDECLARED_VARIABLE_FEATURE_COUNT = 1;
+  int EDECLARED_VARIABLE_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl <em>EVariable Declaration</em>}' class.
@@ -3372,7 +3372,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EVARIABLE_DECLARATION__NAME = EDECLARED_VARIABLE__NAME;
+  int EVARIABLE_DECLARATION__NAME = EDECLARED_VARIABLE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Value passed</b></em>' containment reference.
@@ -3381,7 +3381,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EVARIABLE_DECLARATION__VALUE_PASSED = EDECLARED_VARIABLE_FEATURE_COUNT + 0;
+  int EVARIABLE_DECLARATION__VALUE_PASSED = EDECLARED_VARIABLE_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>EVariable Declaration</em>' class.
@@ -3390,7 +3390,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EVARIABLE_DECLARATION_FEATURE_COUNT = EDECLARED_VARIABLE_FEATURE_COUNT + 1;
+  int EVARIABLE_DECLARATION_FEATURE_COUNT = EDECLARED_VARIABLE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl <em>ERegister Variable</em>}' class.
@@ -3409,7 +3409,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EREGISTER_VARIABLE__NAME = EDECLARED_VARIABLE__NAME;
+  int EREGISTER_VARIABLE__NAME = EDECLARED_VARIABLE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>ERegister Variable</em>' class.
@@ -3418,7 +3418,35 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EREGISTER_VARIABLE_FEATURE_COUNT = EDECLARED_VARIABLE_FEATURE_COUNT + 0;
+  int EREGISTER_VARIABLE_FEATURE_COUNT = EDECLARED_VARIABLE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableImpl <em>EInput Variable</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEInputVariable()
+   * @generated
+   */
+  int EINPUT_VARIABLE = 60;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EINPUT_VARIABLE__NAME = EDECLARED_VARIABLE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>EInput Variable</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EINPUT_VARIABLE_FEATURE_COUNT = EDECLARED_VARIABLE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFactGatheredImpl <em>EFact Gathered</em>}' class.
@@ -3428,7 +3456,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFactGathered()
    * @generated
    */
-  int EFACT_GATHERED = 60;
+  int EFACT_GATHERED = 61;
 
   /**
    * The feature id for the '<em><b>Tail</b></em>' attribute list.
@@ -3456,7 +3484,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 61;
+  int EDICTIONARY = 62;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -3484,7 +3512,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 62;
+  int EDICTIONARY_PAIR = 63;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3521,7 +3549,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 63;
+  int ELIST = 64;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -3572,6 +3600,17 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EAttribute getEPlaybook_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getOperation <em>Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Operation</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getOperation()
+   * @see #getEPlaybook()
+   * @generated
+   */
+  EReference getEPlaybook_Operation();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getPlays <em>Plays</em>}'.
@@ -5454,17 +5493,6 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEDeclaredVariable();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable#getName()
-   * @see #getEDeclaredVariable()
-   * @generated
-   */
-  EAttribute getEDeclaredVariable_Name();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration <em>EVariable Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5473,6 +5501,17 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EClass getEVariableDeclaration();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration#getName()
+   * @see #getEVariableDeclaration()
+   * @generated
+   */
+  EAttribute getEVariableDeclaration_Name();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration#getValue_passed <em>Value passed</em>}'.
@@ -5494,6 +5533,38 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EClass getERegisterVariable();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable#getName()
+   * @see #getERegisterVariable()
+   * @generated
+   */
+  EAttribute getERegisterVariable_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputVariable <em>EInput Variable</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EInput Variable</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EInputVariable
+   * @generated
+   */
+  EClass getEInputVariable();
+
+  /**
+   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputVariable#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Name</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EInputVariable#getName()
+   * @see #getEInputVariable()
+   * @generated
+   */
+  EReference getEInputVariable_Name();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactGathered <em>EFact Gathered</em>}'.
@@ -5640,6 +5711,14 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EAttribute EPLAYBOOK__NAME = eINSTANCE.getEPlaybook_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Operation</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPLAYBOOK__OPERATION = eINSTANCE.getEPlaybook_Operation();
 
     /**
      * The meta object literal for the '<em><b>Plays</b></em>' containment reference list feature.
@@ -7162,14 +7241,6 @@ public interface AnsibleDslPackage extends EPackage
     EClass EDECLARED_VARIABLE = eINSTANCE.getEDeclaredVariable();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EDECLARED_VARIABLE__NAME = eINSTANCE.getEDeclaredVariable_Name();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl <em>EVariable Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7178,6 +7249,14 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EClass EVARIABLE_DECLARATION = eINSTANCE.getEVariableDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EVARIABLE_DECLARATION__NAME = eINSTANCE.getEVariableDeclaration_Name();
 
     /**
      * The meta object literal for the '<em><b>Value passed</b></em>' containment reference feature.
@@ -7196,6 +7275,32 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EClass EREGISTER_VARIABLE = eINSTANCE.getERegisterVariable();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EREGISTER_VARIABLE__NAME = eINSTANCE.getERegisterVariable_Name();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableImpl <em>EInput Variable</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEInputVariable()
+     * @generated
+     */
+    EClass EINPUT_VARIABLE = eINSTANCE.getEInputVariable();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EINPUT_VARIABLE__NAME = eINSTANCE.getEInputVariable_Name();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFactGatheredImpl <em>EFact Gathered</em>}' class.

@@ -32,6 +32,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EInputVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EItem;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
@@ -129,6 +130,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EIF_EXPRESSION:
 				sequence_EIfExpression(context, (EIfExpression) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EINPUT_VARIABLE:
+				sequence_EInputVariable(context, (EInputVariable) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EIS_EXPRESSION:
 				sequence_EIsExpression(context, (EIsExpression) semanticObject); 
@@ -504,6 +508,25 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     EDeclaredVariable returns EInputVariable
+	 *     EInputVariable returns EInputVariable
+	 *
+	 * Constraint:
+	 *     name=[EParameterDefinition|STRING]
+	 */
+	protected void sequence_EInputVariable(ISerializationContext context, EInputVariable semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EINPUT_VARIABLE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EINPUT_VARIABLE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEInputVariableAccess().getNameEParameterDefinitionSTRINGTerminalRuleCall_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EINPUT_VARIABLE__NAME, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EIsExpression returns EIsExpression
 	 *
 	 * Constraint:
@@ -811,7 +834,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EPlaybook returns EPlaybook
 	 *
 	 * Constraint:
-	 *     (name=STRING plays+=EPlay+)
+	 *     (name=STRING operation=[EOperationDefinition|STRING] plays+=EPlay+)
 	 */
 	protected void sequence_EPlaybook(ISerializationContext context, EPlaybook semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -840,8 +863,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 */
 	protected void sequence_ERegisterVariable(ISerializationContext context, ERegisterVariable semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EDECLARED_VARIABLE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EDECLARED_VARIABLE__NAME));
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EREGISTER_VARIABLE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EREGISTER_VARIABLE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getERegisterVariableAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
@@ -1036,8 +1059,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 */
 	protected void sequence_EVariableDeclaration(ISerializationContext context, EVariableDeclaration semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EDECLARED_VARIABLE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EDECLARED_VARIABLE__NAME));
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION__NAME));
 			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION__VALUE_PASSED) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION__VALUE_PASSED));
 		}

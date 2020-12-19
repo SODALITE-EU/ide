@@ -564,6 +564,15 @@ public interface AnsibleDslFactory extends EFactory
   ERegisterVariable createERegisterVariable();
 
   /**
+   * Returns a new object of class '<em>EInput Variable</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EInput Variable</em>'.
+   * @generated
+   */
+  EInputVariable createEInputVariable();
+
+  /**
    * Returns a new object of class '<em>EFact Gathered</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

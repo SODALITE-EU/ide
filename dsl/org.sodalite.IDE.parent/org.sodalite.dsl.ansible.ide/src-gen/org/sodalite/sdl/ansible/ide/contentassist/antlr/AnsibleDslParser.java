@@ -60,7 +60,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getAlternatives(), "rule__EParenthesisedExpression__Alternatives");
 			builder.put(grammarAccess.getEDeclaredVariableAccess().getAlternatives(), "rule__EDeclaredVariable__Alternatives");
 			builder.put(grammarAccess.getEPlaybookAccess().getGroup(), "rule__EPlaybook__Group__0");
-			builder.put(grammarAccess.getEPlaybookAccess().getGroup_4(), "rule__EPlaybook__Group_4__0");
+			builder.put(grammarAccess.getEPlaybookAccess().getGroup_6(), "rule__EPlaybook__Group_6__0");
 			builder.put(grammarAccess.getEPlayAccess().getGroup_0(), "rule__EPlay__Group_0__0");
 			builder.put(grammarAccess.getEPlayAccess().getGroup_0_0(), "rule__EPlay__Group_0_0__0");
 			builder.put(grammarAccess.getEPlayAccess().getGroup_0_4(), "rule__EPlay__Group_0_4__0");
@@ -242,7 +242,8 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEListAccess().getGroup(), "rule__EList__Group__0");
 			builder.put(grammarAccess.getEListAccess().getGroup_2(), "rule__EList__Group_2__0");
 			builder.put(grammarAccess.getEPlaybookAccess().getNameAssignment_2(), "rule__EPlaybook__NameAssignment_2");
-			builder.put(grammarAccess.getEPlaybookAccess().getPlaysAssignment_4_1(), "rule__EPlaybook__PlaysAssignment_4_1");
+			builder.put(grammarAccess.getEPlaybookAccess().getOperationAssignment_4(), "rule__EPlaybook__OperationAssignment_4");
+			builder.put(grammarAccess.getEPlaybookAccess().getPlaysAssignment_6_1(), "rule__EPlaybook__PlaysAssignment_6_1");
 			builder.put(grammarAccess.getEPlayAccess().getNameAssignment_0_0_1(), "rule__EPlay__NameAssignment_0_0_1");
 			builder.put(grammarAccess.getEPlayAccess().getPrivilage_escalationAssignment_0_1(), "rule__EPlay__Privilage_escalationAssignment_0_1");
 			builder.put(grammarAccess.getEPlayAccess().getValidation_modeAssignment_0_2(), "rule__EPlay__Validation_modeAssignment_0_2");
@@ -447,6 +448,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getNameAssignment_0(), "rule__EVariableDeclaration__NameAssignment_0");
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getValue_passedAssignment_2(), "rule__EVariableDeclaration__Value_passedAssignment_2");
 			builder.put(grammarAccess.getERegisterVariableAccess().getNameAssignment_1(), "rule__ERegisterVariable__NameAssignment_1");
+			builder.put(grammarAccess.getEInputVariableAccess().getNameAssignment(), "rule__EInputVariable__NameAssignment");
 			builder.put(grammarAccess.getEFactGatheredAccess().getTailAssignment_2_1(), "rule__EFactGathered__TailAssignment_2_1");
 			builder.put(grammarAccess.getEDictionaryAccess().getDictionary_pairsAssignment_1(), "rule__EDictionary__Dictionary_pairsAssignment_1");
 			builder.put(grammarAccess.getEDictionaryAccess().getDictionary_pairsAssignment_2_1(), "rule__EDictionary__Dictionary_pairsAssignment_2_1");

@@ -127,21 +127,38 @@ ruleEPlaybook returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_3='plays{'
+		otherlv_3='operation:'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getEPlaybookAccess().getPlaysKeyword_3());
+			newLeafNode(otherlv_3, grammarAccess.getEPlaybookAccess().getOperationKeyword_3());
 		}
 		(
-			otherlv_4='play{'
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEPlaybookRule());
+					}
+				}
+				otherlv_4=RULE_STRING
+				{
+					newLeafNode(otherlv_4, grammarAccess.getEPlaybookAccess().getOperationEOperationDefinitionCrossReference_4_0());
+				}
+			)
+		)
+		otherlv_5='plays{'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getEPlaybookAccess().getPlaysKeyword_5());
+		}
+		(
+			otherlv_6='play{'
 			{
-				newLeafNode(otherlv_4, grammarAccess.getEPlaybookAccess().getPlayKeyword_4_0());
+				newLeafNode(otherlv_6, grammarAccess.getEPlaybookAccess().getPlayKeyword_6_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEPlaybookAccess().getPlaysEPlayParserRuleCall_4_1_0());
+						newCompositeNode(grammarAccess.getEPlaybookAccess().getPlaysEPlayParserRuleCall_6_1_0());
 					}
-					lv_plays_5_0=ruleEPlay
+					lv_plays_7_0=ruleEPlay
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEPlaybookRule());
@@ -149,24 +166,24 @@ ruleEPlaybook returns [EObject current=null]
 						add(
 							$current,
 							"plays",
-							lv_plays_5_0,
+							lv_plays_7_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.EPlay");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-			otherlv_6='}'
+			otherlv_8='}'
 			{
-				newLeafNode(otherlv_6, grammarAccess.getEPlaybookAccess().getRightCurlyBracketKeyword_4_2());
+				newLeafNode(otherlv_8, grammarAccess.getEPlaybookAccess().getRightCurlyBracketKeyword_6_2());
 			}
 		)+
-		otherlv_7='}'
+		otherlv_9='}'
 		{
-			newLeafNode(otherlv_7, grammarAccess.getEPlaybookAccess().getRightCurlyBracketKeyword_5());
+			newLeafNode(otherlv_9, grammarAccess.getEPlaybookAccess().getRightCurlyBracketKeyword_7());
 		}
-		otherlv_8='}'
+		otherlv_10='}'
 		{
-			newLeafNode(otherlv_8, grammarAccess.getEPlaybookAccess().getRightCurlyBracketKeyword_6());
+			newLeafNode(otherlv_10, grammarAccess.getEPlaybookAccess().getRightCurlyBracketKeyword_8());
 		}
 	)
 ;
@@ -6862,6 +6879,36 @@ ruleERegisterVariable returns [EObject current=null]
 						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
+		)
+	)
+;
+
+// Entry rule entryRuleEInputVariable
+entryRuleEInputVariable returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEInputVariableRule()); }
+	iv_ruleEInputVariable=ruleEInputVariable
+	{ $current=$iv_ruleEInputVariable.current; }
+	EOF;
+
+// Rule EInputVariable
+ruleEInputVariable returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getEInputVariableRule());
+				}
+			}
+			otherlv_0=RULE_STRING
+			{
+				newLeafNode(otherlv_0, grammarAccess.getEInputVariableAccess().getNameEParameterDefinitionCrossReference_0());
+			}
 		)
 	)
 ;

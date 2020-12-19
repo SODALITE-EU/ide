@@ -23,6 +23,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl#getValue_passed <em>Value passed</em>}</li>
  * </ul>
  *
@@ -30,6 +31,26 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  */
 public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements EVariableDeclaration
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getValue_passed() <em>Value passed</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -59,6 +80,31 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.EVARIABLE_DECLARATION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVARIABLE_DECLARATION__NAME, oldName, name));
   }
 
   /**
@@ -137,6 +183,8 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EVARIABLE_DECLARATION__NAME:
+        return getName();
       case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
         return getValue_passed();
     }
@@ -153,6 +201,9 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EVARIABLE_DECLARATION__NAME:
+        setName((String)newValue);
+        return;
       case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
         setValue_passed((EValue)newValue);
         return;
@@ -170,6 +221,9 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EVARIABLE_DECLARATION__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
         setValue_passed((EValue)null);
         return;
@@ -187,10 +241,29 @@ public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements E
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EVARIABLE_DECLARATION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
         return value_passed != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //EVariableDeclarationImpl
