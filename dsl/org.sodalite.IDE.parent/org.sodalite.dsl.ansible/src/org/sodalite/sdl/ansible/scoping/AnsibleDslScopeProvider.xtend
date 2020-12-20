@@ -10,13 +10,18 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage
 import org.eclipse.xtext.scoping.Scopes
 import org.eclipse.xtext.EcoreUtil2
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import java.util.ArrayList
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableReferenceImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl
+import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl
+import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableReferenceImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl
 
 /** 
  * This class contains custom scoping description.
@@ -25,34 +30,24 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl
  */
 class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 	override IScope getScope(EObject context, EReference reference) {
-		if (context instanceof EDeclaredVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE){
+		if (context instanceof EVariableDeclarationVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE){
 			val rootPlay = EcoreUtil2.getContainerOfType(context, EPlayImpl)
-			//if rootPlay is different from null then we are in a play. else, we are in a role
 			if (rootPlay !== null){
-				val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EDeclaredVariableImpl)
-				//also the variables declared in the imported roles must be scoped
-				/*val roleCalls = EcoreUtil2.getAllContentsOfType(rootPlay, ERoleCallsImpl)
-				for (roleCall: roleCalls){
-					for (role: roleCall.roles){
-						val candidatesRole = EcoreUtil2.getAllContentsOfType(role, EDeclaredVariableImpl)
-						for (candidateRole: candidatesRole){
-							candidates.add(candidateRole)
-						}
-					}
-				}*/
+				val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EVariableDeclarationImpl)
 				return Scopes.scopeFor(candidates)
 			}
-			//this else is entered it we are in a role
-			/*else {
-				val rootRole = EcoreUtil2.getContainerOfType(context, ERoleImpl)
-				val candidates = EcoreUtil2.getAllContentsOfType(rootRole, EDeclaredVariableImpl)
+		}
+		
+		if (context instanceof ERegisterVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE){
+			val rootPlay = EcoreUtil2.getContainerOfType(context, EPlayImpl)
+			if (rootPlay !== null){
+				val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, ERegisterVariableImpl)
 				return Scopes.scopeFor(candidates)
-			}*/
-			
+			}
 		}
 		
 		if (context instanceof EDictionaryPairReferenceImpl && reference == AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME){
-			val declaredVariableReference = EcoreUtil2.getContainerOfType(context, EDeclaredVariableReferenceImpl)
+			val declaredVariableReference = EcoreUtil2.getContainerOfType(context, EVariableDeclarationVariableReferenceImpl)
 			val tail = declaredVariableReference.tail
 			val index = tail.indexOf(context)
 			var candidatesOfDictionary = new ArrayList<EDictionaryPair>
@@ -65,9 +60,9 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 				}
 			}
 			else {
-				if (declaredVariableReference.variable_reference instanceof EVariableDeclarationImpl){
-					if ((declaredVariableReference.variable_reference as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
-						for (dictionaryPair : (((declaredVariableReference.variable_reference as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
+				if (declaredVariableReference.variable_declaration_variable_reference instanceof EVariableDeclarationImpl){
+					if ((declaredVariableReference.variable_declaration_variable_reference as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
+						for (dictionaryPair : (((declaredVariableReference.variable_declaration_variable_reference as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
 							candidatesOfDictionary.add(dictionaryPair)
 						}
 					}
@@ -75,6 +70,25 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 			}
 			return Scopes.scopeFor(candidatesOfDictionary)
 		}
+		
+		if (context instanceof EPlaybookImpl && reference == AnsibleDslPackage.Literals.EPLAYBOOK__OPERATION){
+			val nodeType = (context as EPlaybookImpl).node_type
+			if (nodeType !== null){
+				val candidates = EcoreUtil2.getAllContentsOfType(nodeType, EOperationDefinitionImpl)
+				return Scopes.scopeFor(candidates)
+			}
+		}
+		
+		if (context instanceof EInputVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EINPUT_VARIABLE_REFERENCE__NAME){
+			val rootPlaybook = EcoreUtil2.getContainerOfType(context, EPlaybookImpl)
+			val operation = rootPlaybook.operation
+			if (operation !== null){
+				val candidates = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
+				return Scopes.scopeFor(candidates)
+			}
+		}
+		
+		
 		
 		return super.getScope(context, reference);
 	}

@@ -6,46 +6,53 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.sodalite.dsl.rM.EParameterDefinition;
-
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EInputVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EInput Variable</b></em>'.
+ * An implementation of the model object '<em><b>EVariable Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableReferenceImpl#getIndex <em>Index</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EInputVariableImpl extends EDeclaredVariableImpl implements EInputVariable
+public class EVariableReferenceImpl extends EValuePassedToJinjaExpressionImpl implements EVariableReference
 {
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' reference.
+   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getIndex()
    * @generated
    * @ordered
    */
-  protected EParameterDefinition name;
+  protected static final String INDEX_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIndex()
+   * @generated
+   * @ordered
+   */
+  protected String index = INDEX_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EInputVariableImpl()
+  protected EVariableReferenceImpl()
   {
     super();
   }
@@ -58,7 +65,7 @@ public class EInputVariableImpl extends EDeclaredVariableImpl implements EInputV
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EINPUT_VARIABLE;
+    return AnsibleDslPackage.Literals.EVARIABLE_REFERENCE;
   }
 
   /**
@@ -67,29 +74,9 @@ public class EInputVariableImpl extends EDeclaredVariableImpl implements EInputV
    * @generated
    */
   @Override
-  public EParameterDefinition getName()
+  public String getIndex()
   {
-    if (name != null && name.eIsProxy())
-    {
-      InternalEObject oldName = (InternalEObject)name;
-      name = (EParameterDefinition)eResolveProxy(oldName);
-      if (name != oldName)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EINPUT_VARIABLE__NAME, oldName, name));
-      }
-    }
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EParameterDefinition basicGetName()
-  {
-    return name;
+    return index;
   }
 
   /**
@@ -98,12 +85,12 @@ public class EInputVariableImpl extends EDeclaredVariableImpl implements EInputV
    * @generated
    */
   @Override
-  public void setName(EParameterDefinition newName)
+  public void setIndex(String newIndex)
   {
-    EParameterDefinition oldName = name;
-    name = newName;
+    String oldIndex = index;
+    index = newIndex;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EINPUT_VARIABLE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVARIABLE_REFERENCE__INDEX, oldIndex, index));
   }
 
   /**
@@ -116,9 +103,8 @@ public class EInputVariableImpl extends EDeclaredVariableImpl implements EInputV
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_VARIABLE__NAME:
-        if (resolve) return getName();
-        return basicGetName();
+      case AnsibleDslPackage.EVARIABLE_REFERENCE__INDEX:
+        return getIndex();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -133,8 +119,8 @@ public class EInputVariableImpl extends EDeclaredVariableImpl implements EInputV
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_VARIABLE__NAME:
-        setName((EParameterDefinition)newValue);
+      case AnsibleDslPackage.EVARIABLE_REFERENCE__INDEX:
+        setIndex((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -150,8 +136,8 @@ public class EInputVariableImpl extends EDeclaredVariableImpl implements EInputV
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_VARIABLE__NAME:
-        setName((EParameterDefinition)null);
+      case AnsibleDslPackage.EVARIABLE_REFERENCE__INDEX:
+        setIndex(INDEX_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -167,10 +153,27 @@ public class EInputVariableImpl extends EDeclaredVariableImpl implements EInputV
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_VARIABLE__NAME:
-        return name != null;
+      case AnsibleDslPackage.EVARIABLE_REFERENCE__INDEX:
+        return INDEX_EDEFAULT == null ? index != null : !INDEX_EDEFAULT.equals(index);
     }
     return super.eIsSet(featureID);
   }
 
-} //EInputVariableImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (index: ");
+    result.append(index);
+    result.append(')');
+    return result.toString();
+  }
+
+} //EVariableReferenceImpl

@@ -296,11 +296,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEItemAdapter();
       }
       @Override
-      public Adapter caseEDeclaredVariableReference(EDeclaredVariableReference object)
-      {
-        return createEDeclaredVariableReferenceAdapter();
-      }
-      @Override
       public Adapter caseEJinjaExpressionEvaluation(EJinjaExpressionEvaluation object)
       {
         return createEJinjaExpressionEvaluationAdapter();
@@ -361,9 +356,14 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEDictionaryPairReferenceAdapter();
       }
       @Override
-      public Adapter caseEDeclaredVariable(EDeclaredVariable object)
+      public Adapter caseEVariableDeclarationVariableReference(EVariableDeclarationVariableReference object)
       {
-        return createEDeclaredVariableAdapter();
+        return createEVariableDeclarationVariableReferenceAdapter();
+      }
+      @Override
+      public Adapter caseERegisterVariableReference(ERegisterVariableReference object)
+      {
+        return createERegisterVariableReferenceAdapter();
       }
       @Override
       public Adapter caseEVariableDeclaration(EVariableDeclaration object)
@@ -376,9 +376,14 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createERegisterVariableAdapter();
       }
       @Override
-      public Adapter caseEInputVariable(EInputVariable object)
+      public Adapter caseEInputVariableReference(EInputVariableReference object)
       {
-        return createEInputVariableAdapter();
+        return createEInputVariableReferenceAdapter();
+      }
+      @Override
+      public Adapter caseEVariableReference(EVariableReference object)
+      {
+        return createEVariableReferenceAdapter();
       }
       @Override
       public Adapter caseEFactGathered(EFactGathered object)
@@ -1083,21 +1088,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference <em>EDeclared Variable Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference
-   * @generated
-   */
-  public Adapter createEDeclaredVariableReferenceAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation <em>EJinja Expression Evaluation</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1278,16 +1268,31 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable <em>EDeclared Variable</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference <em>EVariable Declaration Variable Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference
    * @generated
    */
-  public Adapter createEDeclaredVariableAdapter()
+  public Adapter createEVariableDeclarationVariableReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference <em>ERegister Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference
+   * @generated
+   */
+  public Adapter createERegisterVariableReferenceAdapter()
   {
     return null;
   }
@@ -1323,16 +1328,31 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputVariable <em>EInput Variable</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference <em>EInput Variable Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EInputVariable
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference
    * @generated
    */
-  public Adapter createEInputVariableAdapter()
+  public Adapter createEInputVariableReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableReference <em>EVariable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EVariableReference
+   * @generated
+   */
+  public Adapter createEVariableReferenceAdapter()
   {
     return null;
   }

@@ -32,7 +32,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.EItem
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue
-import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression
@@ -50,6 +49,9 @@ import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation
+import org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference
 
 /**
  * Generates code from your model files on save.
@@ -498,7 +500,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			stringToReturn = stringToReturn.concat(".").concat(functionCall.compileFunctionCall)
 		}
 		if (filteredExpression.filter !== null){
-			stringToReturn = stringToReturn.concat(filteredExpression.filter.compileJinjaExpressionEvaluationWithoutBrackets.toString())
+			stringToReturn = stringToReturn.concat(" | ").concat(filteredExpression.filter.compileJinjaExpressionEvaluationWithoutBrackets.toString())
 		}
 		return stringToReturn
 	}
@@ -616,16 +618,33 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			}
 			return itemString
 		}
-		else if (valuePassedToJinjaExpression instanceof EDeclaredVariableReference){
+		else if (valuePassedToJinjaExpression instanceof EVariableDeclarationVariableReference){
 			var declaredVariableString = ""
-			//TODO non va commentata questa riga di codice
-			//declaredVariableString = declaredVariableString.concat(valuePassedToJinjaExpression.variable_reference.name)
+			declaredVariableString = declaredVariableString.concat(valuePassedToJinjaExpression.variable_declaration_variable_reference.name)
 			if (valuePassedToJinjaExpression.index !== null) declaredVariableString = declaredVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
 			for (dictionaryPairReference : valuePassedToJinjaExpression.tail){
 				declaredVariableString = declaredVariableString.concat(".").concat(dictionaryPairReference.name.name)
 				if (dictionaryPairReference.index !== null) declaredVariableString = declaredVariableString.concat("[").concat(dictionaryPairReference.index).concat("]")
 			}
 			return declaredVariableString
+		}
+		else if (valuePassedToJinjaExpression instanceof ERegisterVariableReference){
+			var registerVariableString = ""
+			registerVariableString = registerVariableString.concat(valuePassedToJinjaExpression.register_variable_reference.name)
+			if (valuePassedToJinjaExpression.index !== null) registerVariableString = registerVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
+			for (tailElement : valuePassedToJinjaExpression.tail){
+				registerVariableString = registerVariableString.concat(".").concat(tailElement)
+			}
+			return registerVariableString
+		}
+		else if (valuePassedToJinjaExpression instanceof EInputVariableReference){
+			var inputVariableString = ""
+			inputVariableString = inputVariableString.concat(valuePassedToJinjaExpression.name.name)
+			if (valuePassedToJinjaExpression.index !== null) inputVariableString = inputVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
+			for (tailElement : valuePassedToJinjaExpression.tail){
+				inputVariableString = inputVariableString.concat(".").concat(tailElement)
+			}
+			return inputVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof EFunctionCall){
 			return valuePassedToJinjaExpression.compileFunctionCall
@@ -662,7 +681,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileSimpleValue(ESimpleValue simpleValue){
-		return "\"".concat(simpleValue.simple_value_string).concat("\"")
+		if (simpleValue.simple_value_without_string !== null) return compileSimpleValueWithoutString(simpleValue.simple_value_without_string)
+		else return "\'".concat(simpleValue.simple_value_string).concat("\'")
 	}
 	
 	def compileSimpleValueWithoutString(ESimpleValueWithoutString simpleValueWithoutString){

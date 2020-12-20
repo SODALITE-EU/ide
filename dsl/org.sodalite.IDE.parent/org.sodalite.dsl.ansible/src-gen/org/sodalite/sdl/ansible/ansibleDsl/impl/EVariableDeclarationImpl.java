@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
@@ -29,7 +30,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  *
  * @generated
  */
-public class EVariableDeclarationImpl extends EDeclaredVariableImpl implements EVariableDeclaration
+public class EVariableDeclarationImpl extends MinimalEObjectImpl.Container implements EVariableDeclaration
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

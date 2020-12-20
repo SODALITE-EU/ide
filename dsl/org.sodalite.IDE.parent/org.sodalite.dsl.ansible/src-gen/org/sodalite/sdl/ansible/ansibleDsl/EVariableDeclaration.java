@@ -3,6 +3,7 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +22,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EVariableDeclaration extends EDeclaredVariable
+public interface EVariableDeclaration extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

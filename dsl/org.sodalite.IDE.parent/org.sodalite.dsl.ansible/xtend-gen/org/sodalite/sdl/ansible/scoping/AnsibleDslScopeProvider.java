@@ -12,17 +12,24 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
+import org.sodalite.dsl.rM.ENodeType;
+import org.sodalite.dsl.rM.EOperationDefinition;
+import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl;
+import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EDeclaredVariableReferenceImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableReferenceImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableReferenceImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl;
 import org.sodalite.sdl.ansible.scoping.AbstractAnsibleDslScopeProvider;
 
 /**
@@ -34,15 +41,22 @@ import org.sodalite.sdl.ansible.scoping.AbstractAnsibleDslScopeProvider;
 public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
   @Override
   public IScope getScope(final EObject context, final EReference reference) {
-    if (((context instanceof EDeclaredVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE))) {
+    if (((context instanceof EVariableDeclarationVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE))) {
       final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(context, EPlayImpl.class);
       if ((rootPlay != null)) {
-        final List<EDeclaredVariableImpl> candidates = EcoreUtil2.<EDeclaredVariableImpl>getAllContentsOfType(rootPlay, EDeclaredVariableImpl.class);
+        final List<EVariableDeclarationImpl> candidates = EcoreUtil2.<EVariableDeclarationImpl>getAllContentsOfType(rootPlay, EVariableDeclarationImpl.class);
         return Scopes.scopeFor(candidates);
       }
     }
+    if (((context instanceof ERegisterVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE))) {
+      final EPlayImpl rootPlay_1 = EcoreUtil2.<EPlayImpl>getContainerOfType(context, EPlayImpl.class);
+      if ((rootPlay_1 != null)) {
+        final List<ERegisterVariableImpl> candidates_1 = EcoreUtil2.<ERegisterVariableImpl>getAllContentsOfType(rootPlay_1, ERegisterVariableImpl.class);
+        return Scopes.scopeFor(candidates_1);
+      }
+    }
     if (((context instanceof EDictionaryPairReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME))) {
-      final EDeclaredVariableReferenceImpl declaredVariableReference = EcoreUtil2.<EDeclaredVariableReferenceImpl>getContainerOfType(context, EDeclaredVariableReferenceImpl.class);
+      final EVariableDeclarationVariableReferenceImpl declaredVariableReference = EcoreUtil2.<EVariableDeclarationVariableReferenceImpl>getContainerOfType(context, EVariableDeclarationVariableReferenceImpl.class);
       final EList<EDictionaryPairReference> tail = declaredVariableReference.getTail();
       final int index = tail.indexOf(context);
       ArrayList<EDictionaryPair> candidatesOfDictionary = new ArrayList<EDictionaryPair>();
@@ -57,13 +71,13 @@ public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
           }
         }
       } else {
-        EDeclaredVariable _variable_reference = declaredVariableReference.getVariable_reference();
-        if ((_variable_reference instanceof EVariableDeclarationImpl)) {
-          EDeclaredVariable _variable_reference_1 = declaredVariableReference.getVariable_reference();
-          EValue _value_passed = ((EVariableDeclarationImpl) _variable_reference_1).getValue_passed();
+        EVariableDeclaration _variable_declaration_variable_reference = declaredVariableReference.getVariable_declaration_variable_reference();
+        if ((_variable_declaration_variable_reference instanceof EVariableDeclarationImpl)) {
+          EVariableDeclaration _variable_declaration_variable_reference_1 = declaredVariableReference.getVariable_declaration_variable_reference();
+          EValue _value_passed = ((EVariableDeclarationImpl) _variable_declaration_variable_reference_1).getValue_passed();
           if ((_value_passed instanceof EDictionaryImpl)) {
-            EDeclaredVariable _variable_reference_2 = declaredVariableReference.getVariable_reference();
-            EValue _value_passed_1 = ((EVariableDeclarationImpl) _variable_reference_2).getValue_passed();
+            EVariableDeclaration _variable_declaration_variable_reference_2 = declaredVariableReference.getVariable_declaration_variable_reference();
+            EValue _value_passed_1 = ((EVariableDeclarationImpl) _variable_declaration_variable_reference_2).getValue_passed();
             EList<EDictionaryPair> _dictionary_pairs_1 = ((EDictionaryImpl) _value_passed_1).getDictionary_pairs();
             for (final EDictionaryPair dictionaryPair_1 : _dictionary_pairs_1) {
               candidatesOfDictionary.add(dictionaryPair_1);
@@ -72,6 +86,21 @@ public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
         }
       }
       return Scopes.scopeFor(candidatesOfDictionary);
+    }
+    if (((context instanceof EPlaybookImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EPLAYBOOK__OPERATION))) {
+      final ENodeType nodeType = ((EPlaybookImpl) context).getNode_type();
+      if ((nodeType != null)) {
+        final List<EOperationDefinitionImpl> candidates_2 = EcoreUtil2.<EOperationDefinitionImpl>getAllContentsOfType(nodeType, EOperationDefinitionImpl.class);
+        return Scopes.scopeFor(candidates_2);
+      }
+    }
+    if (((context instanceof EInputVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EINPUT_VARIABLE_REFERENCE__NAME))) {
+      final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(context, EPlaybookImpl.class);
+      final EOperationDefinition operation = rootPlaybook.getOperation();
+      if ((operation != null)) {
+        final List<EParameterDefinitionImpl> candidates_3 = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
+        return Scopes.scopeFor(candidates_3);
+      }
     }
     return super.getScope(context, reference);
   }

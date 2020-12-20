@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EOperationDefinition;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
@@ -33,6 +34,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getNode_type <em>Node type</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getPlays <em>Plays</em>}</li>
  * </ul>
@@ -60,6 +62,16 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getNode_type() <em>Node type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNode_type()
+   * @generated
+   * @ordered
+   */
+  protected ENodeType node_type;
 
   /**
    * The cached value of the '{@link #getOperation() <em>Operation</em>}' reference.
@@ -125,6 +137,51 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
     name = newName;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAYBOOK__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ENodeType getNode_type()
+  {
+    if (node_type != null && node_type.eIsProxy())
+    {
+      InternalEObject oldNode_type = (InternalEObject)node_type;
+      node_type = (ENodeType)eResolveProxy(oldNode_type);
+      if (node_type != oldNode_type)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EPLAYBOOK__NODE_TYPE, oldNode_type, node_type));
+      }
+    }
+    return node_type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ENodeType basicGetNode_type()
+  {
+    return node_type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setNode_type(ENodeType newNode_type)
+  {
+    ENodeType oldNode_type = node_type;
+    node_type = newNode_type;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAYBOOK__NODE_TYPE, oldNode_type, node_type));
   }
 
   /**
@@ -215,6 +272,9 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
     {
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         return getName();
+      case AnsibleDslPackage.EPLAYBOOK__NODE_TYPE:
+        if (resolve) return getNode_type();
+        return basicGetNode_type();
       case AnsibleDslPackage.EPLAYBOOK__OPERATION:
         if (resolve) return getOperation();
         return basicGetOperation();
@@ -237,6 +297,9 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
     {
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         setName((String)newValue);
+        return;
+      case AnsibleDslPackage.EPLAYBOOK__NODE_TYPE:
+        setNode_type((ENodeType)newValue);
         return;
       case AnsibleDslPackage.EPLAYBOOK__OPERATION:
         setOperation((EOperationDefinition)newValue);
@@ -262,6 +325,9 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case AnsibleDslPackage.EPLAYBOOK__NODE_TYPE:
+        setNode_type((ENodeType)null);
+        return;
       case AnsibleDslPackage.EPLAYBOOK__OPERATION:
         setOperation((EOperationDefinition)null);
         return;
@@ -284,6 +350,8 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
     {
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case AnsibleDslPackage.EPLAYBOOK__NODE_TYPE:
+        return node_type != null;
       case AnsibleDslPackage.EPLAYBOOK__OPERATION:
         return operation != null;
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:

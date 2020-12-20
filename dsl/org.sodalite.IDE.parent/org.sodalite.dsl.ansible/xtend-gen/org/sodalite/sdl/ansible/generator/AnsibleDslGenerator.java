@@ -22,7 +22,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
-import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
@@ -35,6 +34,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EItem;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
@@ -58,6 +58,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
@@ -73,6 +74,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference;
 
 /**
  * Generates code from your model files on save.
@@ -1336,7 +1338,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     EFilteredExpression _filter = filteredExpression.getFilter();
     boolean _tripleNotEquals = (_filter != null);
     if (_tripleNotEquals) {
-      stringToReturn = stringToReturn.concat(this.compileJinjaExpressionEvaluationWithoutBrackets(filteredExpression.getFilter()).toString());
+      stringToReturn = stringToReturn.concat(" | ").concat(this.compileJinjaExpressionEvaluationWithoutBrackets(filteredExpression.getFilter()).toString());
     }
     return stringToReturn;
   }
@@ -1487,14 +1489,15 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           }
           return itemString;
         } else {
-          if ((valuePassedToJinjaExpression instanceof EDeclaredVariableReference)) {
+          if ((valuePassedToJinjaExpression instanceof EVariableDeclarationVariableReference)) {
             String declaredVariableString = "";
-            String _index = ((EDeclaredVariableReference)valuePassedToJinjaExpression).getIndex();
+            declaredVariableString = declaredVariableString.concat(((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getVariable_declaration_variable_reference().getName());
+            String _index = ((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getIndex();
             boolean _tripleNotEquals = (_index != null);
             if (_tripleNotEquals) {
-              declaredVariableString = declaredVariableString.concat("[").concat(((EDeclaredVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
+              declaredVariableString = declaredVariableString.concat("[").concat(((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
             }
-            EList<EDictionaryPairReference> _tail_2 = ((EDeclaredVariableReference)valuePassedToJinjaExpression).getTail();
+            EList<EDictionaryPairReference> _tail_2 = ((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getTail();
             for (final EDictionaryPairReference dictionaryPairReference : _tail_2) {
               {
                 declaredVariableString = declaredVariableString.concat(".").concat(dictionaryPairReference.getName().getName());
@@ -1507,8 +1510,38 @@ public class AnsibleDslGenerator extends AbstractGenerator {
             }
             return declaredVariableString;
           } else {
-            if ((valuePassedToJinjaExpression instanceof EFunctionCall)) {
-              return this.compileFunctionCall(((EFunctionCall)valuePassedToJinjaExpression));
+            if ((valuePassedToJinjaExpression instanceof ERegisterVariableReference)) {
+              String registerVariableString = "";
+              registerVariableString = registerVariableString.concat(((ERegisterVariableReference)valuePassedToJinjaExpression).getRegister_variable_reference().getName());
+              String _index_1 = ((ERegisterVariableReference)valuePassedToJinjaExpression).getIndex();
+              boolean _tripleNotEquals_1 = (_index_1 != null);
+              if (_tripleNotEquals_1) {
+                registerVariableString = registerVariableString.concat("[").concat(((ERegisterVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
+              }
+              EList<String> _tail_3 = ((ERegisterVariableReference)valuePassedToJinjaExpression).getTail();
+              for (final String tailElement_1 : _tail_3) {
+                registerVariableString = registerVariableString.concat(".").concat(tailElement_1);
+              }
+              return registerVariableString;
+            } else {
+              if ((valuePassedToJinjaExpression instanceof EInputVariableReference)) {
+                String inputVariableString = "";
+                inputVariableString = inputVariableString.concat(((EInputVariableReference)valuePassedToJinjaExpression).getName().getName());
+                String _index_2 = ((EInputVariableReference)valuePassedToJinjaExpression).getIndex();
+                boolean _tripleNotEquals_2 = (_index_2 != null);
+                if (_tripleNotEquals_2) {
+                  inputVariableString = inputVariableString.concat("[").concat(((EInputVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
+                }
+                EList<String> _tail_4 = ((EInputVariableReference)valuePassedToJinjaExpression).getTail();
+                for (final String tailElement_2 : _tail_4) {
+                  inputVariableString = inputVariableString.concat(".").concat(tailElement_2);
+                }
+                return inputVariableString;
+              } else {
+                if ((valuePassedToJinjaExpression instanceof EFunctionCall)) {
+                  return this.compileFunctionCall(((EFunctionCall)valuePassedToJinjaExpression));
+                }
+              }
             }
           }
         }
@@ -1574,7 +1607,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public String compileSimpleValue(final ESimpleValue simpleValue) {
-    return "\"".concat(simpleValue.getSimple_value_string()).concat("\"");
+    ESimpleValueWithoutString _simple_value_without_string = simpleValue.getSimple_value_without_string();
+    boolean _tripleNotEquals = (_simple_value_without_string != null);
+    if (_tripleNotEquals) {
+      return this.compileSimpleValueWithoutString(simpleValue.getSimple_value_without_string());
+    } else {
+      return "\'".concat(simpleValue.getSimple_value_string()).concat("\'");
+    }
   }
   
   public String compileSimpleValueWithoutString(final ESimpleValueWithoutString simpleValueWithoutString) {

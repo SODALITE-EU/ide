@@ -419,14 +419,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE:
-      {
-        EDeclaredVariableReference eDeclaredVariableReference = (EDeclaredVariableReference)theEObject;
-        T result = caseEDeclaredVariableReference(eDeclaredVariableReference);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eDeclaredVariableReference);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION:
       {
         EJinjaExpressionEvaluation eJinjaExpressionEvaluation = (EJinjaExpressionEvaluation)theEObject;
@@ -515,10 +507,21 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EDECLARED_VARIABLE:
+      case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE:
       {
-        EDeclaredVariable eDeclaredVariable = (EDeclaredVariable)theEObject;
-        T result = caseEDeclaredVariable(eDeclaredVariable);
+        EVariableDeclarationVariableReference eVariableDeclarationVariableReference = (EVariableDeclarationVariableReference)theEObject;
+        T result = caseEVariableDeclarationVariableReference(eVariableDeclarationVariableReference);
+        if (result == null) result = caseEVariableReference(eVariableDeclarationVariableReference);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eVariableDeclarationVariableReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE:
+      {
+        ERegisterVariableReference eRegisterVariableReference = (ERegisterVariableReference)theEObject;
+        T result = caseERegisterVariableReference(eRegisterVariableReference);
+        if (result == null) result = caseEVariableReference(eRegisterVariableReference);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eRegisterVariableReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -526,7 +529,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EVariableDeclaration eVariableDeclaration = (EVariableDeclaration)theEObject;
         T result = caseEVariableDeclaration(eVariableDeclaration);
-        if (result == null) result = caseEDeclaredVariable(eVariableDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -534,15 +536,23 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         ERegisterVariable eRegisterVariable = (ERegisterVariable)theEObject;
         T result = caseERegisterVariable(eRegisterVariable);
-        if (result == null) result = caseEDeclaredVariable(eRegisterVariable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EINPUT_VARIABLE:
+      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE:
       {
-        EInputVariable eInputVariable = (EInputVariable)theEObject;
-        T result = caseEInputVariable(eInputVariable);
-        if (result == null) result = caseEDeclaredVariable(eInputVariable);
+        EInputVariableReference eInputVariableReference = (EInputVariableReference)theEObject;
+        T result = caseEInputVariableReference(eInputVariableReference);
+        if (result == null) result = caseEVariableReference(eInputVariableReference);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eInputVariableReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EVARIABLE_REFERENCE:
+      {
+        EVariableReference eVariableReference = (EVariableReference)theEObject;
+        T result = caseEVariableReference(eVariableReference);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eVariableReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1294,22 +1304,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EDeclared Variable Reference</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EDeclared Variable Reference</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEDeclaredVariableReference(EDeclaredVariableReference object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>EJinja Expression Evaluation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1502,17 +1496,33 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EDeclared Variable</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EVariable Declaration Variable Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EDeclared Variable</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EVariable Declaration Variable Reference</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEDeclaredVariable(EDeclaredVariable object)
+  public T caseEVariableDeclarationVariableReference(EVariableDeclarationVariableReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ERegister Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ERegister Variable Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseERegisterVariableReference(ERegisterVariableReference object)
   {
     return null;
   }
@@ -1550,17 +1560,33 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EInput Variable</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EInput Variable Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EInput Variable</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EInput Variable Reference</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEInputVariable(EInputVariable object)
+  public T caseEInputVariableReference(EInputVariableReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EVariable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EVariable Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEVariableReference(EVariableReference object)
   {
     return null;
   }

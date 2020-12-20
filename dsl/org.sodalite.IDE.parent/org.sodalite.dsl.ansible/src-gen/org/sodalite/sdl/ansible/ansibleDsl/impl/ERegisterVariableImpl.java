@@ -8,6 +8,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
@@ -25,7 +26,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
  *
  * @generated
  */
-public class ERegisterVariableImpl extends EDeclaredVariableImpl implements ERegisterVariable
+public class ERegisterVariableImpl extends MinimalEObjectImpl.Container implements ERegisterVariable
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

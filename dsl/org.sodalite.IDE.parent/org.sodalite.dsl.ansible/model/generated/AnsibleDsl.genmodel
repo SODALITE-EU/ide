@@ -9,6 +9,7 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//Model"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EPlaybook">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EPlaybook/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlaybook/node_type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlaybook/operation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlaybook/plays"/>
     </genClasses>
@@ -169,14 +170,10 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ESimpleValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValue/simple_value_string"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESimpleValue/simple_value_without_string"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EItem/tail"/>
-    </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EDeclaredVariableReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDeclaredVariableReference/variable_reference"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDeclaredVariableReference/index"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDeclaredVariableReference/tail"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionEvaluation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionEvaluation/jinja_expression"/>
@@ -228,7 +225,14 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionaryPairReference/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDictionaryPairReference/index"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EDeclaredVariable"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableDeclarationVariableReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EVariableDeclarationVariableReference/variable_declaration_variable_reference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EVariableDeclarationVariableReference/tail"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ERegisterVariableReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERegisterVariableReference/register_variable_reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERegisterVariableReference/tail"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EVariableDeclaration/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EVariableDeclaration/value_passed"/>
@@ -236,8 +240,12 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERegisterVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERegisterVariable/name"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EInputVariable">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EInputVariable/name"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EInputVariableReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EInputVariableReference/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EInputVariableReference/tail"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EVariableReference/index"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFactGathered">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFactGathered/tail"/>

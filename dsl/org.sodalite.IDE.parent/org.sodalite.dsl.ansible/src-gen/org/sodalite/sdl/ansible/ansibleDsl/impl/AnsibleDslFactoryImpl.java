@@ -109,7 +109,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING: return createESimpleValueWithoutString();
       case AnsibleDslPackage.ESIMPLE_VALUE: return createESimpleValue();
       case AnsibleDslPackage.EITEM: return createEItem();
-      case AnsibleDslPackage.EDECLARED_VARIABLE_REFERENCE: return createEDeclaredVariableReference();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION: return createEJinjaExpressionEvaluation();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS: return createEJinjaExpressionEvaluationWithoutBrackets();
       case AnsibleDslPackage.EFUNCTION_CALL: return createEFunctionCall();
@@ -122,10 +121,12 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION: return createEParenthesisedExpression();
       case AnsibleDslPackage.EIF_EXPRESSION: return createEIfExpression();
       case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE: return createEDictionaryPairReference();
-      case AnsibleDslPackage.EDECLARED_VARIABLE: return createEDeclaredVariable();
+      case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE: return createEVariableDeclarationVariableReference();
+      case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE: return createERegisterVariableReference();
       case AnsibleDslPackage.EVARIABLE_DECLARATION: return createEVariableDeclaration();
       case AnsibleDslPackage.EREGISTER_VARIABLE: return createERegisterVariable();
-      case AnsibleDslPackage.EINPUT_VARIABLE: return createEInputVariable();
+      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE: return createEInputVariableReference();
+      case AnsibleDslPackage.EVARIABLE_REFERENCE: return createEVariableReference();
       case AnsibleDslPackage.EFACT_GATHERED: return createEFactGathered();
       case AnsibleDslPackage.EDICTIONARY: return createEDictionary();
       case AnsibleDslPackage.EDICTIONARY_PAIR: return createEDictionaryPair();
@@ -669,18 +670,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EDeclaredVariableReference createEDeclaredVariableReference()
-  {
-    EDeclaredVariableReferenceImpl eDeclaredVariableReference = new EDeclaredVariableReferenceImpl();
-    return eDeclaredVariableReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EJinjaExpressionEvaluation createEJinjaExpressionEvaluation()
   {
     EJinjaExpressionEvaluationImpl eJinjaExpressionEvaluation = new EJinjaExpressionEvaluationImpl();
@@ -825,10 +814,22 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EDeclaredVariable createEDeclaredVariable()
+  public EVariableDeclarationVariableReference createEVariableDeclarationVariableReference()
   {
-    EDeclaredVariableImpl eDeclaredVariable = new EDeclaredVariableImpl();
-    return eDeclaredVariable;
+    EVariableDeclarationVariableReferenceImpl eVariableDeclarationVariableReference = new EVariableDeclarationVariableReferenceImpl();
+    return eVariableDeclarationVariableReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ERegisterVariableReference createERegisterVariableReference()
+  {
+    ERegisterVariableReferenceImpl eRegisterVariableReference = new ERegisterVariableReferenceImpl();
+    return eRegisterVariableReference;
   }
 
   /**
@@ -861,10 +862,22 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EInputVariable createEInputVariable()
+  public EInputVariableReference createEInputVariableReference()
   {
-    EInputVariableImpl eInputVariable = new EInputVariableImpl();
-    return eInputVariable;
+    EInputVariableReferenceImpl eInputVariableReference = new EInputVariableReferenceImpl();
+    return eInputVariableReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EVariableReference createEVariableReference()
+  {
+    EVariableReferenceImpl eVariableReference = new EVariableReferenceImpl();
+    return eVariableReference;
   }
 
   /**

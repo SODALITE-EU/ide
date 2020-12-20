@@ -4,6 +4,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Model"/>
   <eClassifiers xsi:type="ecore:EClass" name="EPlaybook" eSuperTypes="#//Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node_type" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//ENodeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EOperationDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="plays" upperBound="-1"
         eType="#//EPlay" containment="true"/>
@@ -210,16 +211,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ESimpleValue" eSuperTypes="#//EValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple_value_string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simple_value_without_string"
+        eType="#//ESimpleValueWithoutString" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EItem" eSuperTypes="#//EValuePassedToJinjaExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EDeclaredVariableReference" eSuperTypes="#//EValuePassedToJinjaExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable_reference" eType="#//EDeclaredVariable"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//EDictionaryPairReference"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionEvaluation" eSuperTypes="#//EJinjaExpressionOrString">
     <eStructuralFeatures xsi:type="ecore:EReference" name="jinja_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
@@ -292,17 +289,34 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EDictionaryPair"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EDeclaredVariable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EVariableDeclaration" eSuperTypes="#//EDeclaredVariable">
+  <eClassifiers xsi:type="ecore:EClass" name="EVariableDeclarationVariableReference"
+      eSuperTypes="#//EVariableReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable_declaration_variable_reference"
+        eType="#//EVariableDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//EDictionaryPairReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ERegisterVariableReference" eSuperTypes="#//EVariableReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="register_variable_reference"
+        eType="#//ERegisterVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EVariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value_passed" eType="#//EValue"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ERegisterVariable" eSuperTypes="#//EDeclaredVariable">
+  <eClassifiers xsi:type="ecore:EClass" name="ERegisterVariable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EInputVariable" eSuperTypes="#//EDeclaredVariable">
+  <eClassifiers xsi:type="ecore:EClass" name="EInputVariableReference" eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EParameterDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EVariableReference" eSuperTypes="#//EValuePassedToJinjaExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFactGathered" eSuperTypes="#//EValuePassedToJinjaExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"

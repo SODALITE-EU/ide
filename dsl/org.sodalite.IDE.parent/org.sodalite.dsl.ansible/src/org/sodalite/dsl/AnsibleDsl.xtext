@@ -10,7 +10,10 @@ Model:
 EPlaybook:
 	'playbook{'
 		'playbook_name:' name=STRING
-		'operation:' operation=[rm::EOperationDefinition|STRING]
+		('used_by{'
+			'node_type:' node_type=[rm::ENodeType|STRING]
+			'operation:' operation=[rm::EOperationDefinition|STRING]
+		'}')?
 		'plays{'
 			('play{'
 				plays+=EPlay
@@ -372,7 +375,7 @@ EValuePassed:
 ;
 
 EValuePassedToJinjaExpression:
-	EValue | EFactGathered | EItem | EDeclaredVariableReference | EFunctionCall
+	EValue | EFactGathered | EItem | EVariableReference | EFunctionCall
 ;
 
 EComposedValue:
@@ -391,16 +394,12 @@ ESimpleValueWithoutString:
 	simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER
 ;
 ESimpleValue:
-	simple_value_string=STRING | simple_value_string=BOOLEAN | simple_value_string=NULL | simple_value_string=NUMBER
+	simple_value_string=STRING | simple_value_without_string=ESimpleValueWithoutString
 ;
 
 EItem:
 	{EItem}
 	'item' ( "." tail+=ID)*
-;
-
-EDeclaredVariableReference:
-	variable_reference=[EDeclaredVariable|ID] ('[' index=NUMBER ']')? ( "." tail+=EDictionaryPairReference)*
 ;
 
 EJinjaExpressionEvaluation:
@@ -451,9 +450,14 @@ EDictionaryPairReference:
 	name=[EDictionaryPair|ID] ('[' index=NUMBER ']')?
 ;
 
-EDeclaredVariable:
-	EVariableDeclaration | ERegisterVariable | EInputVariable
+EVariableDeclarationVariableReference:
+	variable_declaration_variable_reference=[EVariableDeclaration|ID] ('[' index=NUMBER ']')? ( "." tail+=EDictionaryPairReference)*
 ;
+
+ERegisterVariableReference:
+	'registered_variable:' register_variable_reference=[ERegisterVariable|ID] ('[' index=NUMBER ']')? ( "." tail+=ID)*
+;
+
 
 EVariableDeclaration:
 	name=ID ':' value_passed=EValue
@@ -463,8 +467,12 @@ ERegisterVariable:
 	'register:' name=ID
 ;
 
-EInputVariable:
-	name=[rm::EParameterDefinition|STRING]
+EInputVariableReference:
+	'interface_input:' name=[rm::EParameterDefinition|STRING] ('[' index=NUMBER ']')? ( "." tail+=ID)*
+;
+
+EVariableReference:
+	EVariableDeclarationVariableReference | ERegisterVariableReference | EInputVariableReference
 ;
 
 EFactGathered:
@@ -485,7 +493,7 @@ EList:
 ;
 
 terminal BOOLEAN:
-	'yes' | 'True' | 'true' | 'no' | 'False' | 'false'
+	'True' |'False'
 ;
 
 terminal NULL:

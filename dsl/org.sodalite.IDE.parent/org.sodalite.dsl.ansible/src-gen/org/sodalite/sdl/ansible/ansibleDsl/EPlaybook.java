@@ -5,6 +5,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EOperationDefinition;
 
 /**
@@ -17,6 +18,7 @@ import org.sodalite.dsl.rM.EOperationDefinition;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getNode_type <em>Node type</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getPlays <em>Plays</em>}</li>
  * </ul>
@@ -48,6 +50,28 @@ public interface EPlaybook extends Model
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Node type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Node type</em>' reference.
+   * @see #setNode_type(ENodeType)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlaybook_Node_type()
+   * @model
+   * @generated
+   */
+  ENodeType getNode_type();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getNode_type <em>Node type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Node type</em>' reference.
+   * @see #getNode_type()
+   * @generated
+   */
+  void setNode_type(ENodeType value);
 
   /**
    * Returns the value of the '<em><b>Operation</b></em>' reference.

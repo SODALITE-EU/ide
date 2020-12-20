@@ -22,8 +22,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
-import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariable;
-import org.sodalite.sdl.ansible.ansibleDsl.EDeclaredVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
@@ -38,7 +36,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EInputVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EItem;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
@@ -63,6 +61,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
@@ -78,6 +77,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.Model;
 
 /**
@@ -401,13 +402,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eDeclaredVariableReferenceEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass eJinjaExpressionEvaluationEClass = null;
 
   /**
@@ -492,7 +486,14 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eDeclaredVariableEClass = null;
+  private EClass eVariableDeclarationVariableReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eRegisterVariableReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -513,7 +514,14 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eInputVariableEClass = null;
+  private EClass eInputVariableReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eVariableReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -648,7 +656,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlaybook_Operation()
+  public EReference getEPlaybook_Node_type()
   {
     return (EReference)ePlaybookEClass.getEStructuralFeatures().get(1);
   }
@@ -659,9 +667,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlaybook_Plays()
+  public EReference getEPlaybook_Operation()
   {
     return (EReference)ePlaybookEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPlaybook_Plays()
+  {
+    return (EReference)ePlaybookEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -2089,6 +2108,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EReference getESimpleValue_Simple_value_without_string()
+  {
+    return (EReference)eSimpleValueEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEItem()
   {
     return eItemEClass;
@@ -2103,50 +2133,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EAttribute getEItem_Tail()
   {
     return (EAttribute)eItemEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getEDeclaredVariableReference()
-  {
-    return eDeclaredVariableReferenceEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEDeclaredVariableReference_Variable_reference()
-  {
-    return (EReference)eDeclaredVariableReferenceEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEDeclaredVariableReference_Index()
-  {
-    return (EAttribute)eDeclaredVariableReferenceEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEDeclaredVariableReference_Tail()
-  {
-    return (EReference)eDeclaredVariableReferenceEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -2584,9 +2570,64 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEDeclaredVariable()
+  public EClass getEVariableDeclarationVariableReference()
   {
-    return eDeclaredVariableEClass;
+    return eVariableDeclarationVariableReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEVariableDeclarationVariableReference_Variable_declaration_variable_reference()
+  {
+    return (EReference)eVariableDeclarationVariableReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEVariableDeclarationVariableReference_Tail()
+  {
+    return (EReference)eVariableDeclarationVariableReferenceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getERegisterVariableReference()
+  {
+    return eRegisterVariableReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getERegisterVariableReference_Register_variable_reference()
+  {
+    return (EReference)eRegisterVariableReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getERegisterVariableReference_Tail()
+  {
+    return (EAttribute)eRegisterVariableReferenceEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2650,9 +2691,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEInputVariable()
+  public EClass getEInputVariableReference()
   {
-    return eInputVariableEClass;
+    return eInputVariableReferenceEClass;
   }
 
   /**
@@ -2661,9 +2702,42 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEInputVariable_Name()
+  public EReference getEInputVariableReference_Name()
   {
-    return (EReference)eInputVariableEClass.getEStructuralFeatures().get(0);
+    return (EReference)eInputVariableReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEInputVariableReference_Tail()
+  {
+    return (EAttribute)eInputVariableReferenceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEVariableReference()
+  {
+    return eVariableReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEVariableReference_Index()
+  {
+    return (EAttribute)eVariableReferenceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2800,6 +2874,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     ePlaybookEClass = createEClass(EPLAYBOOK);
     createEAttribute(ePlaybookEClass, EPLAYBOOK__NAME);
+    createEReference(ePlaybookEClass, EPLAYBOOK__NODE_TYPE);
     createEReference(ePlaybookEClass, EPLAYBOOK__OPERATION);
     createEReference(ePlaybookEClass, EPLAYBOOK__PLAYS);
 
@@ -2972,14 +3047,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eSimpleValueEClass = createEClass(ESIMPLE_VALUE);
     createEAttribute(eSimpleValueEClass, ESIMPLE_VALUE__SIMPLE_VALUE_STRING);
+    createEReference(eSimpleValueEClass, ESIMPLE_VALUE__SIMPLE_VALUE_WITHOUT_STRING);
 
     eItemEClass = createEClass(EITEM);
     createEAttribute(eItemEClass, EITEM__TAIL);
-
-    eDeclaredVariableReferenceEClass = createEClass(EDECLARED_VARIABLE_REFERENCE);
-    createEReference(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__VARIABLE_REFERENCE);
-    createEAttribute(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__INDEX);
-    createEReference(eDeclaredVariableReferenceEClass, EDECLARED_VARIABLE_REFERENCE__TAIL);
 
     eJinjaExpressionEvaluationEClass = createEClass(EJINJA_EXPRESSION_EVALUATION);
     createEReference(eJinjaExpressionEvaluationEClass, EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION);
@@ -3032,7 +3103,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eDictionaryPairReferenceEClass, EDICTIONARY_PAIR_REFERENCE__NAME);
     createEAttribute(eDictionaryPairReferenceEClass, EDICTIONARY_PAIR_REFERENCE__INDEX);
 
-    eDeclaredVariableEClass = createEClass(EDECLARED_VARIABLE);
+    eVariableDeclarationVariableReferenceEClass = createEClass(EVARIABLE_DECLARATION_VARIABLE_REFERENCE);
+    createEReference(eVariableDeclarationVariableReferenceEClass, EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE);
+    createEReference(eVariableDeclarationVariableReferenceEClass, EVARIABLE_DECLARATION_VARIABLE_REFERENCE__TAIL);
+
+    eRegisterVariableReferenceEClass = createEClass(EREGISTER_VARIABLE_REFERENCE);
+    createEReference(eRegisterVariableReferenceEClass, EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE);
+    createEAttribute(eRegisterVariableReferenceEClass, EREGISTER_VARIABLE_REFERENCE__TAIL);
 
     eVariableDeclarationEClass = createEClass(EVARIABLE_DECLARATION);
     createEAttribute(eVariableDeclarationEClass, EVARIABLE_DECLARATION__NAME);
@@ -3041,8 +3118,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eRegisterVariableEClass = createEClass(EREGISTER_VARIABLE);
     createEAttribute(eRegisterVariableEClass, EREGISTER_VARIABLE__NAME);
 
-    eInputVariableEClass = createEClass(EINPUT_VARIABLE);
-    createEReference(eInputVariableEClass, EINPUT_VARIABLE__NAME);
+    eInputVariableReferenceEClass = createEClass(EINPUT_VARIABLE_REFERENCE);
+    createEReference(eInputVariableReferenceEClass, EINPUT_VARIABLE_REFERENCE__NAME);
+    createEAttribute(eInputVariableReferenceEClass, EINPUT_VARIABLE_REFERENCE__TAIL);
+
+    eVariableReferenceEClass = createEClass(EVARIABLE_REFERENCE);
+    createEAttribute(eVariableReferenceEClass, EVARIABLE_REFERENCE__INDEX);
 
     eFactGatheredEClass = createEClass(EFACT_GATHERED);
     createEAttribute(eFactGatheredEClass, EFACT_GATHERED__TAIL);
@@ -3117,14 +3198,14 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eSimpleValueWithoutStringEClass.getESuperTypes().add(this.getEValueWithoutString());
     eSimpleValueEClass.getESuperTypes().add(this.getEValue());
     eItemEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
-    eDeclaredVariableReferenceEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEJinjaExpressionOrString());
     eFunctionCallEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eFilteredExpressionEClass.getESuperTypes().add(this.getEJinjaExpressionEvaluationWithoutBrackets());
     eIfExpressionEClass.getESuperTypes().add(this.getEJinjaExpressionEvaluationWithoutBrackets());
-    eVariableDeclarationEClass.getESuperTypes().add(this.getEDeclaredVariable());
-    eRegisterVariableEClass.getESuperTypes().add(this.getEDeclaredVariable());
-    eInputVariableEClass.getESuperTypes().add(this.getEDeclaredVariable());
+    eVariableDeclarationVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
+    eRegisterVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
+    eInputVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
+    eVariableReferenceEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eFactGatheredEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eDictionaryEClass.getESuperTypes().add(this.getEComposedValue());
     eListEClass.getESuperTypes().add(this.getEComposedValue());
@@ -3134,6 +3215,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(ePlaybookEClass, EPlaybook.class, "EPlaybook", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPlaybook_Name(), ecorePackage.getEString(), "name", null, 0, 1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlaybook_Node_type(), theRMPackage.getENodeType(), null, "node_type", null, 0, 1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlaybook_Operation(), theRMPackage.getEOperationDefinition(), null, "operation", null, 0, 1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlaybook_Plays(), this.getEPlay(), null, "plays", null, 0, -1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3306,14 +3388,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eSimpleValueEClass, ESimpleValue.class, "ESimpleValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getESimpleValue_Simple_value_string(), ecorePackage.getEString(), "simple_value_string", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getESimpleValue_Simple_value_without_string(), this.getESimpleValueWithoutString(), null, "simple_value_without_string", null, 0, 1, ESimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eItemEClass, EItem.class, "EItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEItem_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, EItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eDeclaredVariableReferenceEClass, EDeclaredVariableReference.class, "EDeclaredVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEDeclaredVariableReference_Variable_reference(), this.getEDeclaredVariable(), null, "variable_reference", null, 0, 1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEDeclaredVariableReference_Index(), ecorePackage.getEString(), "index", null, 0, 1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEDeclaredVariableReference_Tail(), this.getEDictionaryPairReference(), null, "tail", null, 0, -1, EDeclaredVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eJinjaExpressionEvaluationEClass, EJinjaExpressionEvaluation.class, "EJinjaExpressionEvaluation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEJinjaExpressionEvaluation_Jinja_expression(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "jinja_expression", null, 0, 1, EJinjaExpressionEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3366,7 +3444,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEDictionaryPairReference_Name(), this.getEDictionaryPair(), null, "name", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEDictionaryPairReference_Index(), ecorePackage.getEString(), "index", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eDeclaredVariableEClass, EDeclaredVariable.class, "EDeclaredVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(eVariableDeclarationVariableReferenceEClass, EVariableDeclarationVariableReference.class, "EVariableDeclarationVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEVariableDeclarationVariableReference_Variable_declaration_variable_reference(), this.getEVariableDeclaration(), null, "variable_declaration_variable_reference", null, 0, 1, EVariableDeclarationVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEVariableDeclarationVariableReference_Tail(), this.getEDictionaryPairReference(), null, "tail", null, 0, -1, EVariableDeclarationVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eRegisterVariableReferenceEClass, ERegisterVariableReference.class, "ERegisterVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getERegisterVariableReference_Register_variable_reference(), this.getERegisterVariable(), null, "register_variable_reference", null, 0, 1, ERegisterVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getERegisterVariableReference_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, ERegisterVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eVariableDeclarationEClass, EVariableDeclaration.class, "EVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEVariableDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, EVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3375,8 +3459,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eRegisterVariableEClass, ERegisterVariable.class, "ERegisterVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getERegisterVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, ERegisterVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eInputVariableEClass, EInputVariable.class, "EInputVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEInputVariable_Name(), theRMPackage.getEParameterDefinition(), null, "name", null, 0, 1, EInputVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eInputVariableReferenceEClass, EInputVariableReference.class, "EInputVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEInputVariableReference_Name(), theRMPackage.getEParameterDefinition(), null, "name", null, 0, 1, EInputVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEInputVariableReference_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, EInputVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eVariableReferenceEClass, EVariableReference.class, "EVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEVariableReference_Index(), ecorePackage.getEString(), "index", null, 0, 1, EVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eFactGatheredEClass, EFactGathered.class, "EFactGathered", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEFactGathered_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, EFactGathered.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

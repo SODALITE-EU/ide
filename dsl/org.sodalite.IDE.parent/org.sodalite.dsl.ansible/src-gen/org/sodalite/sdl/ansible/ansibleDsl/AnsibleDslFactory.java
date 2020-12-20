@@ -420,15 +420,6 @@ public interface AnsibleDslFactory extends EFactory
   EItem createEItem();
 
   /**
-   * Returns a new object of class '<em>EDeclared Variable Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EDeclared Variable Reference</em>'.
-   * @generated
-   */
-  EDeclaredVariableReference createEDeclaredVariableReference();
-
-  /**
    * Returns a new object of class '<em>EJinja Expression Evaluation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -537,13 +528,22 @@ public interface AnsibleDslFactory extends EFactory
   EDictionaryPairReference createEDictionaryPairReference();
 
   /**
-   * Returns a new object of class '<em>EDeclared Variable</em>'.
+   * Returns a new object of class '<em>EVariable Declaration Variable Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EDeclared Variable</em>'.
+   * @return a new object of class '<em>EVariable Declaration Variable Reference</em>'.
    * @generated
    */
-  EDeclaredVariable createEDeclaredVariable();
+  EVariableDeclarationVariableReference createEVariableDeclarationVariableReference();
+
+  /**
+   * Returns a new object of class '<em>ERegister Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ERegister Variable Reference</em>'.
+   * @generated
+   */
+  ERegisterVariableReference createERegisterVariableReference();
 
   /**
    * Returns a new object of class '<em>EVariable Declaration</em>'.
@@ -564,13 +564,22 @@ public interface AnsibleDslFactory extends EFactory
   ERegisterVariable createERegisterVariable();
 
   /**
-   * Returns a new object of class '<em>EInput Variable</em>'.
+   * Returns a new object of class '<em>EInput Variable Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EInput Variable</em>'.
+   * @return a new object of class '<em>EInput Variable Reference</em>'.
    * @generated
    */
-  EInputVariable createEInputVariable();
+  EInputVariableReference createEInputVariableReference();
+
+  /**
+   * Returns a new object of class '<em>EVariable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EVariable Reference</em>'.
+   * @generated
+   */
+  EVariableReference createEVariableReference();
 
   /**
    * Returns a new object of class '<em>EFact Gathered</em>'.
