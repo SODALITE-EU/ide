@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EList;
-import org.sodalite.sdl.ansible.ansibleDsl.EValue;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class EListImpl extends EComposedValueImpl implements EList
    * @generated
    * @ordered
    */
-  protected org.eclipse.emf.common.util.EList<EValue> elements;
+  protected org.eclipse.emf.common.util.EList<EValuePassed> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,11 +69,11 @@ public class EListImpl extends EComposedValueImpl implements EList
    * @generated
    */
   @Override
-  public org.eclipse.emf.common.util.EList<EValue> getElements()
+  public org.eclipse.emf.common.util.EList<EValuePassed> getElements()
   {
     if (elements == null)
     {
-      elements = new EObjectContainmentEList<EValue>(EValue.class, this, AnsibleDslPackage.ELIST__ELEMENTS);
+      elements = new EObjectContainmentEList<EValuePassed>(EValuePassed.class, this, AnsibleDslPackage.ELIST__ELEMENTS);
     }
     return elements;
   }
@@ -123,7 +123,7 @@ public class EListImpl extends EComposedValueImpl implements EList
     {
       case AnsibleDslPackage.ELIST__ELEMENTS:
         getElements().clear();
-        getElements().addAll((Collection<? extends EValue>)newValue);
+        getElements().addAll((Collection<? extends EValuePassed>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

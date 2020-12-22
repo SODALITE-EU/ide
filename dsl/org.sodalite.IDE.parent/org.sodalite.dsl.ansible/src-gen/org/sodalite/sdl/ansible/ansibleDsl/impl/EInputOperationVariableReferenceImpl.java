@@ -19,23 +19,23 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.sodalite.dsl.rM.EParameterDefinition;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EInput Variable Reference</b></em>'.
+ * An implementation of the model object '<em><b>EInput Operation Variable Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableReferenceImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableReferenceImpl#getTail <em>Tail</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputOperationVariableReferenceImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputOperationVariableReferenceImpl#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EInputVariableReferenceImpl extends EVariableReferenceImpl implements EInputVariableReference
+public class EInputOperationVariableReferenceImpl extends EVariableReferenceImpl implements EInputOperationVariableReference
 {
   /**
    * The cached value of the '{@link #getName() <em>Name</em>}' reference.
@@ -62,7 +62,7 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EInputVariableReferenceImpl()
+  protected EInputOperationVariableReferenceImpl()
   {
     super();
   }
@@ -75,7 +75,7 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EINPUT_VARIABLE_REFERENCE;
+    return AnsibleDslPackage.Literals.EINPUT_OPERATION_VARIABLE_REFERENCE;
   }
 
   /**
@@ -93,7 +93,7 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
       if (name != oldName)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__NAME, oldName, name));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME, oldName, name));
       }
     }
     return name;
@@ -120,7 +120,7 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
     EParameterDefinition oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME, oldName, name));
   }
 
   /**
@@ -133,7 +133,7 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
   {
     if (tail == null)
     {
-      tail = new EDataTypeEList<String>(String.class, this, AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__TAIL);
+      tail = new EDataTypeEList<String>(String.class, this, AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__TAIL);
     }
     return tail;
   }
@@ -148,10 +148,10 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__NAME:
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME:
         if (resolve) return getName();
         return basicGetName();
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__TAIL:
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__TAIL:
         return getTail();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -168,10 +168,10 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__NAME:
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME:
         setName((EParameterDefinition)newValue);
         return;
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__TAIL:
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__TAIL:
         getTail().clear();
         getTail().addAll((Collection<? extends String>)newValue);
         return;
@@ -189,10 +189,10 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__NAME:
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME:
         setName((EParameterDefinition)null);
         return;
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__TAIL:
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__TAIL:
         getTail().clear();
         return;
     }
@@ -209,9 +209,9 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__NAME:
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME:
         return name != null;
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE__TAIL:
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE__TAIL:
         return tail != null && !tail.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -234,4 +234,4 @@ public class EInputVariableReferenceImpl extends EVariableReferenceImpl implemen
     return result.toString();
   }
 
-} //EInputVariableReferenceImpl
+} //EInputOperationVariableReferenceImpl

@@ -591,13 +591,22 @@ public interface AnsibleDslFactory extends EFactory
   ERegisterVariable createERegisterVariable();
 
   /**
-   * Returns a new object of class '<em>EInput Variable Reference</em>'.
+   * Returns a new object of class '<em>EInput Operation Variable Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EInput Variable Reference</em>'.
+   * @return a new object of class '<em>EInput Operation Variable Reference</em>'.
    * @generated
    */
-  EInputVariableReference createEInputVariableReference();
+  EInputOperationVariableReference createEInputOperationVariableReference();
+
+  /**
+   * Returns a new object of class '<em>EInput Interface Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EInput Interface Variable Reference</em>'.
+   * @generated
+   */
+  EInputInterfaceVariableReference createEInputInterfaceVariableReference();
 
   /**
    * Returns a new object of class '<em>EVariable Reference</em>'.
@@ -609,13 +618,13 @@ public interface AnsibleDslFactory extends EFactory
   EVariableReference createEVariableReference();
 
   /**
-   * Returns a new object of class '<em>EFact Gathered</em>'.
+   * Returns a new object of class '<em>ESpecial Variable</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EFact Gathered</em>'.
+   * @return a new object of class '<em>ESpecial Variable</em>'.
    * @generated
    */
-  EFactGathered createEFactGathered();
+  ESpecialVariable createESpecialVariable();
 
   /**
    * Returns a new object of class '<em>EDictionary</em>'.

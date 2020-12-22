@@ -51,12 +51,12 @@ public interface EVariableDeclaration extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value passed</em>' containment reference.
-   * @see #setValue_passed(EValue)
+   * @see #setValue_passed(EValuePassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEVariableDeclaration_Value_passed()
    * @model containment="true"
    * @generated
    */
-  EValue getValue_passed();
+  EValuePassed getValue_passed();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration#getValue_passed <em>Value passed</em>}' containment reference.
@@ -66,6 +66,6 @@ public interface EVariableDeclaration extends EObject
    * @see #getValue_passed()
    * @generated
    */
-  void setValue_passed(EValue value);
+  void setValue_passed(EValuePassed value);
 
 } // EVariableDeclaration

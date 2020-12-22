@@ -560,12 +560,21 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE:
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE:
       {
-        EInputVariableReference eInputVariableReference = (EInputVariableReference)theEObject;
-        T result = caseEInputVariableReference(eInputVariableReference);
-        if (result == null) result = caseEVariableReference(eInputVariableReference);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eInputVariableReference);
+        EInputOperationVariableReference eInputOperationVariableReference = (EInputOperationVariableReference)theEObject;
+        T result = caseEInputOperationVariableReference(eInputOperationVariableReference);
+        if (result == null) result = caseEVariableReference(eInputOperationVariableReference);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eInputOperationVariableReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE:
+      {
+        EInputInterfaceVariableReference eInputInterfaceVariableReference = (EInputInterfaceVariableReference)theEObject;
+        T result = caseEInputInterfaceVariableReference(eInputInterfaceVariableReference);
+        if (result == null) result = caseEVariableReference(eInputInterfaceVariableReference);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eInputInterfaceVariableReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -577,11 +586,11 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EFACT_GATHERED:
+      case AnsibleDslPackage.ESPECIAL_VARIABLE:
       {
-        EFactGathered eFactGathered = (EFactGathered)theEObject;
-        T result = caseEFactGathered(eFactGathered);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eFactGathered);
+        ESpecialVariable eSpecialVariable = (ESpecialVariable)theEObject;
+        T result = caseESpecialVariable(eSpecialVariable);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eSpecialVariable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1629,17 +1638,33 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EInput Variable Reference</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EInput Operation Variable Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EInput Variable Reference</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EInput Operation Variable Reference</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEInputVariableReference(EInputVariableReference object)
+  public T caseEInputOperationVariableReference(EInputOperationVariableReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EInput Interface Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EInput Interface Variable Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEInputInterfaceVariableReference(EInputInterfaceVariableReference object)
   {
     return null;
   }
@@ -1661,17 +1686,17 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EFact Gathered</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>ESpecial Variable</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EFact Gathered</em>'.
+   * @return the result of interpreting the object as an instance of '<em>ESpecial Variable</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEFactGathered(EFactGathered object)
+  public T caseESpecialVariable(ESpecialVariable object)
   {
     return null;
   }

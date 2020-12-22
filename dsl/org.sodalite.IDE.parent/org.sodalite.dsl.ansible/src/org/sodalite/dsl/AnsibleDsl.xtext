@@ -185,9 +185,10 @@ EHandler:
 
 EModuleCall:
 	'module_name:' name=ID
-	'parameters{'
-		(parameters+=EParameter)*
-	'}'
+	('direct_input:' direct_input=EValuePassed)?
+	('parameters{'
+		(parameters+=EParameter)+
+	'}')?
 ;
 
 EParameter:
@@ -366,7 +367,7 @@ EValuePassed:
 ;
 
 EValuePassedToJinjaExpression:
-	EValue | EFactGathered | EItem | EVariableReference | EFunctionCall
+	EValue | ESpecialVariable | EItem | EVariableReference | EFunctionCall
 ;
 
 EComposedValue:
@@ -382,7 +383,7 @@ EValueWithoutString:
 ;
 
 ESimpleValueWithoutString:
-	simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER
+	simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER | simple_value=NONE
 ;
 ESimpleValue:
 	simple_value_string=STRING | simple_value_without_string=ESimpleValueWithoutString
@@ -430,7 +431,7 @@ EIsExpression:
 ;
 
 EParenthesisedExpression:
-	basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EOrExpression ')'
+	basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')'
 ;
 
 EIfExpression:
@@ -449,26 +450,29 @@ ERegisterVariableReference:
 	'registered_variable:' register_variable_reference=[ERegisterVariable|ID] ('[' index=NUMBER ']')? ( "." tail+=ID)*
 ;
 
-
 EVariableDeclaration:
-	name=ID ':' value_passed=EValue
+	name=ID ':' value_passed=EValuePassed
 ;
 
 ERegisterVariable:
 	'register:' name=ID
 ;
 
-EInputVariableReference:
-	'interface_input:' name=[rm::EParameterDefinition|STRING] ('[' index=NUMBER ']')? ( "." tail+=ID)*
+EInputOperationVariableReference:
+	'operation_input:' name=[rm::EParameterDefinition|STRING] ('[' index=NUMBER ']')? ( "." tail+=ID)*
+;
+
+EInputInterfaceVariableReference:
+	'interface_input:' name=[rm::EPropertyDefinition|STRING] ('[' index=NUMBER ']')? ( "." tail+=ID)*
 ;
 
 EVariableReference:
-	EVariableDeclarationVariableReference | ERegisterVariableReference | EInputVariableReference
+	EVariableDeclarationVariableReference | ERegisterVariableReference | EInputOperationVariableReference | EInputInterfaceVariableReference
 ;
 
-EFactGathered:
-	{EFactGathered}
-	'ansible_facts' ("." tail+=ID)*
+ESpecialVariable: //https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
+	{ESpecialVariable}
+	'special_variable:' name=ID  ("." tail+=ID)*
 ;
 
 EDictionary:
@@ -476,11 +480,11 @@ EDictionary:
 ;
 
 EDictionaryPair:
-	name=ID ':' value=EValue
+	name=ID ':' value=EValuePassed
 ;
 
 EList:
-	'[' elements+=EValue (',' elements+=EValue)* ']'
+	'[' elements+=EValuePassed (',' elements+=EValuePassed)* ']'
 ;
 
 terminal BOOLEAN:
@@ -489,6 +493,10 @@ terminal BOOLEAN:
 
 terminal NULL:
 	'Null'
+;
+
+terminal NONE:
+	'None'
 ;
 
 terminal NUMBER:

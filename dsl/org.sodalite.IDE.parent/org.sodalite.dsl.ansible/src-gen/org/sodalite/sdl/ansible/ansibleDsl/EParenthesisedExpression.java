@@ -51,12 +51,12 @@ public interface EParenthesisedExpression extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parenthesised term</em>' containment reference.
-   * @see #setParenthesised_term(EOrExpression)
+   * @see #setParenthesised_term(EFilteredExpression)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEParenthesisedExpression_Parenthesised_term()
    * @model containment="true"
    * @generated
    */
-  EOrExpression getParenthesised_term();
+  EFilteredExpression getParenthesised_term();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getParenthesised_term <em>Parenthesised term</em>}' containment reference.
@@ -66,6 +66,6 @@ public interface EParenthesisedExpression extends EObject
    * @see #getParenthesised_term()
    * @generated
    */
-  void setParenthesised_term(EOrExpression value);
+  void setParenthesised_term(EFilteredExpression value);
 
 } // EParenthesisedExpression

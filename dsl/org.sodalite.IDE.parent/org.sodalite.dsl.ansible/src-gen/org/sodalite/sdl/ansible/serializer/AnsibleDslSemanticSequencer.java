@@ -27,13 +27,13 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EItem;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
@@ -60,6 +60,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
+import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
@@ -120,9 +121,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EEXECUTION_EXE_SETTINGS:
 				sequence_EExecutionExeSettings(context, (EExecutionExeSettings) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EFACT_GATHERED:
-				sequence_EFactGathered(context, (EFactGathered) semanticObject); 
-				return; 
 			case AnsibleDslPackage.EFACTS_SETTINGS:
 				sequence_EFactsSettings(context, (EFactsSettings) semanticObject); 
 				return; 
@@ -138,8 +136,11 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EIF_EXPRESSION:
 				sequence_EIfExpression(context, (EIfExpression) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE:
-				sequence_EInputVariableReference(context, (EInputVariableReference) semanticObject); 
+			case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE:
+				sequence_EInputInterfaceVariableReference(context, (EInputInterfaceVariableReference) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE:
+				sequence_EInputOperationVariableReference(context, (EInputOperationVariableReference) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EIS_EXPRESSION:
 				sequence_EIsExpression(context, (EIsExpression) semanticObject); 
@@ -218,6 +219,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING:
 				sequence_ESimpleValueWithoutString(context, (ESimpleValueWithoutString) semanticObject); 
+				return; 
+			case AnsibleDslPackage.ESPECIAL_VARIABLE:
+				sequence_ESpecialVariable(context, (ESpecialVariable) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ETASK:
 				sequence_ETask(context, (ETask) semanticObject); 
@@ -376,7 +380,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EDictionaryPair returns EDictionaryPair
 	 *
 	 * Constraint:
-	 *     (name=ID value=EValue)
+	 *     (name=ID value=EValuePassed)
 	 */
 	protected void sequence_EDictionaryPair(ISerializationContext context, EDictionaryPair semanticObject) {
 		if (errorAcceptor != null) {
@@ -387,7 +391,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEDictionaryPairAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEDictionaryPairAccess().getValueEValueParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getEDictionaryPairAccess().getValueEValuePassedParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -430,19 +434,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (throttle=NUMBER | run_once=BOOLEAN)+
 	 */
 	protected void sequence_EExecutionExeSettings(ISerializationContext context, EExecutionExeSettings semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     EValuePassedToJinjaExpression returns EFactGathered
-	 *     EFactGathered returns EFactGathered
-	 *
-	 * Constraint:
-	 *     tail+=ID*
-	 */
-	protected void sequence_EFactGathered(ISerializationContext context, EFactGathered semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -521,14 +512,28 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EValuePassedToJinjaExpression returns EInputVariableReference
-	 *     EInputVariableReference returns EInputVariableReference
-	 *     EVariableReference returns EInputVariableReference
+	 *     EValuePassedToJinjaExpression returns EInputInterfaceVariableReference
+	 *     EInputInterfaceVariableReference returns EInputInterfaceVariableReference
+	 *     EVariableReference returns EInputInterfaceVariableReference
+	 *
+	 * Constraint:
+	 *     (name=[EPropertyDefinition|STRING] index=NUMBER? tail+=ID*)
+	 */
+	protected void sequence_EInputInterfaceVariableReference(ISerializationContext context, EInputInterfaceVariableReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EValuePassedToJinjaExpression returns EInputOperationVariableReference
+	 *     EInputOperationVariableReference returns EInputOperationVariableReference
+	 *     EVariableReference returns EInputOperationVariableReference
 	 *
 	 * Constraint:
 	 *     (name=[EParameterDefinition|STRING] index=NUMBER? tail+=ID*)
 	 */
-	protected void sequence_EInputVariableReference(ISerializationContext context, EInputVariableReference semanticObject) {
+	protected void sequence_EInputOperationVariableReference(ISerializationContext context, EInputOperationVariableReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -621,7 +626,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EList returns EList
 	 *
 	 * Constraint:
-	 *     (elements+=EValue elements+=EValue*)
+	 *     (elements+=EValuePassed elements+=EValuePassed*)
 	 */
 	protected void sequence_EList(ISerializationContext context, EList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -658,7 +663,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EModuleCall returns EModuleCall
 	 *
 	 * Constraint:
-	 *     (name=ID parameters+=EParameter*)
+	 *     (name=ID direct_input=EValuePassed? parameters+=EParameter*)
 	 */
 	protected void sequence_EModuleCall(ISerializationContext context, EModuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -767,7 +772,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EParenthesisedExpression returns EParenthesisedExpression
 	 *
 	 * Constraint:
-	 *     (basic_value=EValuePassedToJinjaExpression | parenthesised_term=EOrExpression)
+	 *     (basic_value=EValuePassedToJinjaExpression | parenthesised_term=EFilteredExpression)
 	 */
 	protected void sequence_EParenthesisedExpression(ISerializationContext context, EParenthesisedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -915,7 +920,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ESimpleValueWithoutString returns ESimpleValueWithoutString
 	 *
 	 * Constraint:
-	 *     (simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER)
+	 *     (simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER | simple_value=NONE)
 	 */
 	protected void sequence_ESimpleValueWithoutString(ISerializationContext context, ESimpleValueWithoutString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -932,6 +937,19 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (simple_value_string=STRING | simple_value_without_string=ESimpleValueWithoutString)
 	 */
 	protected void sequence_ESimpleValue(ISerializationContext context, ESimpleValue semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EValuePassedToJinjaExpression returns ESpecialVariable
+	 *     ESpecialVariable returns ESpecialVariable
+	 *
+	 * Constraint:
+	 *     (name=ID tail+=ID*)
+	 */
+	protected void sequence_ESpecialVariable(ISerializationContext context, ESpecialVariable semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1023,7 +1041,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EUntil returns EUntil
 	 *
 	 * Constraint:
-	 *     ((until=EJinjaExpressionEvaluationWithoutBrackets retries=NUMBER?) | delay=NUMBER)+
+	 *     (until=EJinjaExpressionEvaluationWithoutBrackets (retries=NUMBER | delay=NUMBER)*)
 	 */
 	protected void sequence_EUntil(ISerializationContext context, EUntil semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1061,7 +1079,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EVariableDeclaration returns EVariableDeclaration
 	 *
 	 * Constraint:
-	 *     (name=ID value_passed=EValue)
+	 *     (name=ID value_passed=EValuePassed)
 	 */
 	protected void sequence_EVariableDeclaration(ISerializationContext context, EVariableDeclaration semanticObject) {
 		if (errorAcceptor != null) {
@@ -1072,7 +1090,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEVariableDeclarationAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEVariableDeclarationAccess().getValue_passedEValueParserRuleCall_2_0(), semanticObject.getValue_passed());
+		feeder.accept(grammarAccess.getEVariableDeclarationAccess().getValue_passedEValuePassedParserRuleCall_2_0(), semanticObject.getValue_passed());
 		feeder.finish();
 	}
 	

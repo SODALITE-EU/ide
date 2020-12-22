@@ -5,30 +5,55 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
+import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EFact Gathered</b></em>'.
+ * An implementation of the model object '<em><b>ESpecial Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFactGatheredImpl#getTail <em>Tail</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESpecialVariableImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESpecialVariableImpl#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl implements EFactGathered
+public class ESpecialVariableImpl extends EValuePassedToJinjaExpressionImpl implements ESpecialVariable
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getTail() <em>Tail</em>}' attribute list.
    * <!-- begin-user-doc -->
@@ -44,7 +69,7 @@ public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EFactGatheredImpl()
+  protected ESpecialVariableImpl()
   {
     super();
   }
@@ -57,7 +82,32 @@ public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl impleme
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EFACT_GATHERED;
+    return AnsibleDslPackage.Literals.ESPECIAL_VARIABLE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESPECIAL_VARIABLE__NAME, oldName, name));
   }
 
   /**
@@ -70,7 +120,7 @@ public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     if (tail == null)
     {
-      tail = new EDataTypeEList<String>(String.class, this, AnsibleDslPackage.EFACT_GATHERED__TAIL);
+      tail = new EDataTypeEList<String>(String.class, this, AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL);
     }
     return tail;
   }
@@ -85,7 +135,9 @@ public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFACT_GATHERED__TAIL:
+      case AnsibleDslPackage.ESPECIAL_VARIABLE__NAME:
+        return getName();
+      case AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL:
         return getTail();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -102,7 +154,10 @@ public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFACT_GATHERED__TAIL:
+      case AnsibleDslPackage.ESPECIAL_VARIABLE__NAME:
+        setName((String)newValue);
+        return;
+      case AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL:
         getTail().clear();
         getTail().addAll((Collection<? extends String>)newValue);
         return;
@@ -120,7 +175,10 @@ public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFACT_GATHERED__TAIL:
+      case AnsibleDslPackage.ESPECIAL_VARIABLE__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL:
         getTail().clear();
         return;
     }
@@ -137,7 +195,9 @@ public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFACT_GATHERED__TAIL:
+      case AnsibleDslPackage.ESPECIAL_VARIABLE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL:
         return tail != null && !tail.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -154,10 +214,12 @@ public class EFactGatheredImpl extends EValuePassedToJinjaExpressionImpl impleme
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (tail: ");
+    result.append(" (name: ");
+    result.append(name);
+    result.append(", tail: ");
     result.append(tail);
     result.append(')');
     return result.toString();
   }
 
-} //EFactGatheredImpl
+} //ESpecialVariableImpl

@@ -128,9 +128,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE: return createERegisterVariableReference();
       case AnsibleDslPackage.EVARIABLE_DECLARATION: return createEVariableDeclaration();
       case AnsibleDslPackage.EREGISTER_VARIABLE: return createERegisterVariable();
-      case AnsibleDslPackage.EINPUT_VARIABLE_REFERENCE: return createEInputVariableReference();
+      case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE: return createEInputOperationVariableReference();
+      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE: return createEInputInterfaceVariableReference();
       case AnsibleDslPackage.EVARIABLE_REFERENCE: return createEVariableReference();
-      case AnsibleDslPackage.EFACT_GATHERED: return createEFactGathered();
+      case AnsibleDslPackage.ESPECIAL_VARIABLE: return createESpecialVariable();
       case AnsibleDslPackage.EDICTIONARY: return createEDictionary();
       case AnsibleDslPackage.EDICTIONARY_PAIR: return createEDictionaryPair();
       case AnsibleDslPackage.ELIST: return createEList();
@@ -901,10 +902,22 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EInputVariableReference createEInputVariableReference()
+  public EInputOperationVariableReference createEInputOperationVariableReference()
   {
-    EInputVariableReferenceImpl eInputVariableReference = new EInputVariableReferenceImpl();
-    return eInputVariableReference;
+    EInputOperationVariableReferenceImpl eInputOperationVariableReference = new EInputOperationVariableReferenceImpl();
+    return eInputOperationVariableReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EInputInterfaceVariableReference createEInputInterfaceVariableReference()
+  {
+    EInputInterfaceVariableReferenceImpl eInputInterfaceVariableReference = new EInputInterfaceVariableReferenceImpl();
+    return eInputInterfaceVariableReference;
   }
 
   /**
@@ -925,10 +938,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EFactGathered createEFactGathered()
+  public ESpecialVariable createESpecialVariable()
   {
-    EFactGatheredImpl eFactGathered = new EFactGatheredImpl();
-    return eFactGathered;
+    ESpecialVariableImpl eSpecialVariable = new ESpecialVariableImpl();
+    return eSpecialVariable;
   }
 
   /**

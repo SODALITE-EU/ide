@@ -108,6 +108,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EModuleCall">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="direct_input" eType="#//EValuePassed"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//EParameter" containment="true"/>
   </eClassifiers>
@@ -286,7 +288,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EParenthesisedExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="basic_value" eType="#//EValuePassedToJinjaExpression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parenthesised_term" eType="#//EOrExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parenthesised_term" eType="#//EFilteredExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EIfExpression" eSuperTypes="#//EJinjaExpressionEvaluationWithoutBrackets">
@@ -316,21 +318,27 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EVariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value_passed" eType="#//EValue"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value_passed" eType="#//EValuePassed"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERegisterVariable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EInputVariableReference" eSuperTypes="#//EVariableReference">
+  <eClassifiers xsi:type="ecore:EClass" name="EInputOperationVariableReference" eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EParameterDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EInputInterfaceVariableReference" eSuperTypes="#//EVariableReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPropertyDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EVariableReference" eSuperTypes="#//EValuePassedToJinjaExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EFactGathered" eSuperTypes="#//EValuePassedToJinjaExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="ESpecialVariable" eSuperTypes="#//EValuePassedToJinjaExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -340,11 +348,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPair">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EValue"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EValuePassed"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EList" eSuperTypes="#//EComposedValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//EValue" containment="true"/>
+        eType="#//EValuePassed" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

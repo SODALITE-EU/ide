@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 
@@ -51,7 +51,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    * @ordered
    */
-  protected EOrExpression parenthesised_term;
+  protected EFilteredExpression parenthesised_term;
 
   /**
    * <!-- begin-user-doc -->
@@ -130,7 +130,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public EOrExpression getParenthesised_term()
+  public EFilteredExpression getParenthesised_term()
   {
     return parenthesised_term;
   }
@@ -140,9 +140,9 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetParenthesised_term(EOrExpression newParenthesised_term, NotificationChain msgs)
+  public NotificationChain basicSetParenthesised_term(EFilteredExpression newParenthesised_term, NotificationChain msgs)
   {
-    EOrExpression oldParenthesised_term = parenthesised_term;
+    EFilteredExpression oldParenthesised_term = parenthesised_term;
     parenthesised_term = newParenthesised_term;
     if (eNotificationRequired())
     {
@@ -158,7 +158,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public void setParenthesised_term(EOrExpression newParenthesised_term)
+  public void setParenthesised_term(EFilteredExpression newParenthesised_term)
   {
     if (newParenthesised_term != parenthesised_term)
     {
@@ -224,7 +224,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         setBasic_value((EValuePassedToJinjaExpression)newValue);
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
-        setParenthesised_term((EOrExpression)newValue);
+        setParenthesised_term((EFilteredExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -244,7 +244,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         setBasic_value((EValuePassedToJinjaExpression)null);
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
-        setParenthesised_term((EOrExpression)null);
+        setParenthesised_term((EFilteredExpression)null);
         return;
     }
     super.eUnset(featureID);

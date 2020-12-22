@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
-import org.sodalite.sdl.ansible.ansibleDsl.EValue;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,7 +60,7 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected EValue value;
+  protected EValuePassed value;
 
   /**
    * <!-- begin-user-doc -->
@@ -114,7 +114,7 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EValue getValue()
+  public EValuePassed getValue()
   {
     return value;
   }
@@ -124,9 +124,9 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(EValue newValue, NotificationChain msgs)
+  public NotificationChain basicSetValue(EValuePassed newValue, NotificationChain msgs)
   {
-    EValue oldValue = value;
+    EValuePassed oldValue = value;
     value = newValue;
     if (eNotificationRequired())
     {
@@ -142,7 +142,7 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setValue(EValue newValue)
+  public void setValue(EValuePassed newValue)
   {
     if (newValue != value)
     {
@@ -206,7 +206,7 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
         setName((String)newValue);
         return;
       case AnsibleDslPackage.EDICTIONARY_PAIR__VALUE:
-        setValue((EValue)newValue);
+        setValue((EValuePassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -226,7 +226,7 @@ public class EDictionaryPairImpl extends MinimalEObjectImpl.Container implements
         setName(NAME_EDEFAULT);
         return;
       case AnsibleDslPackage.EDICTIONARY_PAIR__VALUE:
-        setValue((EValue)null);
+        setValue((EValuePassed)null);
         return;
     }
     super.eUnset(featureID);

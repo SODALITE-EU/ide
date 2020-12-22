@@ -26,7 +26,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil
-import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.EItem
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue
@@ -47,12 +46,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation
-import org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes
+import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable
+import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference
 
 /**
  * Generates code from your model files on save.
@@ -344,7 +345,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»- name: «taskHandler.name»
 			«IF taskHandler.task_handler_attributes !== null»
 				«IF taskHandler.task_handler_attributes.module !== null»
-					«space.concat('  ')»«taskHandler.task_handler_attributes.module.name»:
+					«space.concat('  ')»«taskHandler.task_handler_attributes.module.name»:«IF taskHandler.task_handler_attributes.module.direct_input !== null» «taskHandler.task_handler_attributes.module.direct_input.compileValuePassed»«ENDIF»
 					«FOR parameter: taskHandler.task_handler_attributes.module.parameters»
 						«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
 					«ENDFOR»
@@ -353,7 +354,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ELSE»
 			«IF taskHandler.task_handler_attributes !== null»
 				«IF taskHandler.task_handler_attributes.module !== null»
-					«space»- «taskHandler.task_handler_attributes.module.name»:
+					«space»- «taskHandler.task_handler_attributes.module.name»:«IF taskHandler.task_handler_attributes.module.direct_input !== null» «taskHandler.task_handler_attributes.module.direct_input.compileValuePassed»«ENDIF»
 					«FOR parameter: taskHandler.task_handler_attributes.module.parameters»
 						«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
 					«ENDFOR»
@@ -571,13 +572,13 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileParenthesisedExpression(EParenthesisedExpression parenthesisedExpression){
 		if (parenthesisedExpression.basic_value !== null) return parenthesisedExpression.basic_value.compileValuePassedToJinjaExpression
-		else if (parenthesisedExpression.parenthesised_term !== null) return "(".concat(parenthesisedExpression.parenthesised_term.compileOrExpression.toString()).concat(")")
+		else if (parenthesisedExpression.parenthesised_term !== null) return "(".concat(parenthesisedExpression.parenthesised_term.compileFilteredExpression.toString()).concat(")")
 	}
 	
 	def compileList(EList list){
 		var newList = new ArrayList()
 		for (element: list.elements){
-			newList.add(element.compileValue)
+			newList.add(element.compileValuePassed)
 		}
 		return newList
 	}
@@ -615,12 +616,12 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileValuePassedToJinjaExpression(EValuePassedToJinjaExpression valuePassedToJinjaExpression){
 		if (valuePassedToJinjaExpression instanceof EValue) return compileValue(valuePassedToJinjaExpression).toString()
-		else if (valuePassedToJinjaExpression instanceof EFactGathered){
-			var factString = "ansible_facts"
+		else if (valuePassedToJinjaExpression instanceof ESpecialVariable){
+			var specialVariableString = valuePassedToJinjaExpression.name
 			for (field : valuePassedToJinjaExpression.tail){
-				factString = factString.concat(".").concat(field)
+				specialVariableString = specialVariableString.concat(".").concat(field)
 			}
-			return factString
+			return specialVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof EItem){
 			var itemString = "item"
@@ -648,14 +649,23 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			}
 			return registerVariableString
 		}
-		else if (valuePassedToJinjaExpression instanceof EInputVariableReference){
-			var inputVariableString = ""
-			inputVariableString = inputVariableString.concat(valuePassedToJinjaExpression.name.name)
-			if (valuePassedToJinjaExpression.index !== null) inputVariableString = inputVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
+		else if (valuePassedToJinjaExpression instanceof EInputOperationVariableReference){
+			var inputOperationVariableString = ""
+			inputOperationVariableString = inputOperationVariableString.concat(valuePassedToJinjaExpression.name.name)
+			if (valuePassedToJinjaExpression.index !== null) inputOperationVariableString = inputOperationVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
 			for (tailElement : valuePassedToJinjaExpression.tail){
-				inputVariableString = inputVariableString.concat(".").concat(tailElement)
+				inputOperationVariableString = inputOperationVariableString.concat(".").concat(tailElement)
 			}
-			return inputVariableString
+			return inputOperationVariableString
+		}
+		else if (valuePassedToJinjaExpression instanceof EInputInterfaceVariableReference){
+			var inputInterfaceVariableString = ""
+			inputInterfaceVariableString = inputInterfaceVariableString.concat(valuePassedToJinjaExpression.name.name)
+			if (valuePassedToJinjaExpression.index !== null) inputInterfaceVariableString = inputInterfaceVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
+			for (tailElement : valuePassedToJinjaExpression.tail){
+				inputInterfaceVariableString = inputInterfaceVariableString.concat(".").concat(tailElement)
+			}
+			return inputInterfaceVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof EFunctionCall){
 			return valuePassedToJinjaExpression.compileFunctionCall
@@ -683,7 +693,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (composedValue instanceof EDictionary){
 			var dictionaryString = '{'
 			for (dictionary_pair : composedValue.dictionary_pairs){
-				dictionaryString = dictionaryString.concat(dictionary_pair.name).concat(': ').concat(compileValue(dictionary_pair.value).toString()).concat(', ')
+				dictionaryString = dictionaryString.concat(dictionary_pair.name).concat(': ').concat(compileValuePassed(dictionary_pair.value).toString()).concat(', ')
 			}
 			dictionaryString = dictionaryString.substring(0, dictionaryString.length() - 2)
 			dictionaryString = dictionaryString.concat('}')
@@ -703,7 +713,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileVariableDeclarations(EBaseAttributes baseAttributes){
 		var variableDeclarationsString = '{'
 		for (variable_declaration : baseAttributes.variable_declarations){
-			variableDeclarationsString = variableDeclarationsString.concat(variable_declaration.name).concat(': ').concat(compileValue(variable_declaration.value_passed).toString()).concat(', ')
+			variableDeclarationsString = variableDeclarationsString.concat(variable_declaration.name).concat(': ').concat(compileValuePassed(variable_declaration.value_passed).toString()).concat(', ')
 		}
 		variableDeclarationsString = variableDeclarationsString.substring(0, variableDeclarationsString.length() - 2)
 			variableDeclarationsString = variableDeclarationsString.concat('}')

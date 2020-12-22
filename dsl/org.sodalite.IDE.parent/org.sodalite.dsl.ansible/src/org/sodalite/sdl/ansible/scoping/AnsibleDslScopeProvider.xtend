@@ -15,13 +15,16 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import java.util.ArrayList
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputVariableReferenceImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl
 import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl
 import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableReferenceImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl
+import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputOperationVariableReferenceImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl
+import org.sodalite.dsl.rM.EPropertyDefinition
 
 /** 
  * This class contains custom scoping description.
@@ -79,11 +82,27 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 			}
 		}
 		
-		if (context instanceof EInputVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EINPUT_VARIABLE_REFERENCE__NAME){
+		if (context instanceof EInputOperationVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME){
 			val rootPlaybook = EcoreUtil2.getContainerOfType(context, EPlaybookImpl)
 			val operation = rootPlaybook.operation
 			if (operation !== null){
+				//the variables to scope for are the inputs of the specific operation in the RM
 				val candidates = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
+				return Scopes.scopeFor(candidates)
+			}
+		}
+		
+		if (context instanceof EInputInterfaceVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME){
+			val rootPlaybook = EcoreUtil2.getContainerOfType(context, EPlaybookImpl)
+			val candidates = new ArrayList<EPropertyDefinition>
+			val operation = rootPlaybook.operation
+			if (operation !== null){
+				//the variables to scope for are the inputs defined in the specific interface in the RM
+				val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
+				val inputsProperties = interfaceDefinitionBody.inputs
+				for (input : inputsProperties.properties){
+					candidates.add(input)
+				}
 				return Scopes.scopeFor(candidates)
 			}
 		}

@@ -391,9 +391,14 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createERegisterVariableAdapter();
       }
       @Override
-      public Adapter caseEInputVariableReference(EInputVariableReference object)
+      public Adapter caseEInputOperationVariableReference(EInputOperationVariableReference object)
       {
-        return createEInputVariableReferenceAdapter();
+        return createEInputOperationVariableReferenceAdapter();
+      }
+      @Override
+      public Adapter caseEInputInterfaceVariableReference(EInputInterfaceVariableReference object)
+      {
+        return createEInputInterfaceVariableReferenceAdapter();
       }
       @Override
       public Adapter caseEVariableReference(EVariableReference object)
@@ -401,9 +406,9 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEVariableReferenceAdapter();
       }
       @Override
-      public Adapter caseEFactGathered(EFactGathered object)
+      public Adapter caseESpecialVariable(ESpecialVariable object)
       {
-        return createEFactGatheredAdapter();
+        return createESpecialVariableAdapter();
       }
       @Override
       public Adapter caseEDictionary(EDictionary object)
@@ -1388,16 +1393,31 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference <em>EInput Variable Reference</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference <em>EInput Operation Variable Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference
    * @generated
    */
-  public Adapter createEInputVariableReferenceAdapter()
+  public Adapter createEInputOperationVariableReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference <em>EInput Interface Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference
+   * @generated
+   */
+  public Adapter createEInputInterfaceVariableReferenceAdapter()
   {
     return null;
   }
@@ -1418,16 +1438,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactGathered <em>EFact Gathered</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable <em>ESpecial Variable</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFactGathered
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable
    * @generated
    */
-  public Adapter createEFactGatheredAdapter()
+  public Adapter createESpecialVariableAdapter()
   {
     return null;
   }

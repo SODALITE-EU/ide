@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getDirect_input <em>Direct input</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
@@ -47,6 +48,28 @@ public interface EModuleCall extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Direct input</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Direct input</em>' containment reference.
+   * @see #setDirect_input(EValuePassed)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEModuleCall_Direct_input()
+   * @model containment="true"
+   * @generated
+   */
+  EValuePassed getDirect_input();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getDirect_input <em>Direct input</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Direct input</em>' containment reference.
+   * @see #getDirect_input()
+   * @generated
+   */
+  void setDirect_input(EValuePassed value);
 
   /**
    * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.

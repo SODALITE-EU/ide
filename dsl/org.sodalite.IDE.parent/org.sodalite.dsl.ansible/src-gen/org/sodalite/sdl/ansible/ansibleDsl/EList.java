@@ -24,7 +24,7 @@ public interface EList extends EComposedValue
 {
   /**
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EValue}.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EValuePassed}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Elements</em>' containment reference list.
@@ -32,6 +32,6 @@ public interface EList extends EComposedValue
    * @model containment="true"
    * @generated
    */
-  org.eclipse.emf.common.util.EList<EValue> getElements();
+  org.eclipse.emf.common.util.EList<EValuePassed> getElements();
 
 } // EList

@@ -51,12 +51,12 @@ public interface EDictionaryPair extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(EValue)
+   * @see #setValue(EValuePassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEDictionaryPair_Value()
    * @model containment="true"
    * @generated
    */
-  EValue getValue();
+  EValuePassed getValue();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair#getValue <em>Value</em>}' containment reference.
@@ -66,6 +66,6 @@ public interface EDictionaryPair extends EObject
    * @see #getValue()
    * @generated
    */
-  void setValue(EValue value);
+  void setValue(EValuePassed value);
 
 } // EDictionaryPair

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EValue;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 
 /**
@@ -60,7 +60,7 @@ public class EVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    * @ordered
    */
-  protected EValue value_passed;
+  protected EValuePassed value_passed;
 
   /**
    * <!-- begin-user-doc -->
@@ -114,7 +114,7 @@ public class EVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public EValue getValue_passed()
+  public EValuePassed getValue_passed()
   {
     return value_passed;
   }
@@ -124,9 +124,9 @@ public class EVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue_passed(EValue newValue_passed, NotificationChain msgs)
+  public NotificationChain basicSetValue_passed(EValuePassed newValue_passed, NotificationChain msgs)
   {
-    EValue oldValue_passed = value_passed;
+    EValuePassed oldValue_passed = value_passed;
     value_passed = newValue_passed;
     if (eNotificationRequired())
     {
@@ -142,7 +142,7 @@ public class EVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setValue_passed(EValue newValue_passed)
+  public void setValue_passed(EValuePassed newValue_passed)
   {
     if (newValue_passed != value_passed)
     {
@@ -206,7 +206,7 @@ public class EVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
         setName((String)newValue);
         return;
       case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
-        setValue_passed((EValue)newValue);
+        setValue_passed((EValuePassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -226,7 +226,7 @@ public class EVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
         setName(NAME_EDEFAULT);
         return;
       case AnsibleDslPackage.EVARIABLE_DECLARATION__VALUE_PASSED:
-        setValue_passed((EValue)null);
+        setValue_passed((EValuePassed)null);
         return;
     }
     super.eUnset(featureID);

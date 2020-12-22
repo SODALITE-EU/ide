@@ -9,22 +9,22 @@ import org.sodalite.dsl.rM.EParameterDefinition;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>EInput Variable Reference</b></em>'.
+ * A representation of the model object '<em><b>EInput Operation Variable Reference</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference#getTail <em>Tail</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference#getTail <em>Tail</em>}</li>
  * </ul>
  *
- * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEInputVariableReference()
+ * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEInputOperationVariableReference()
  * @model
  * @generated
  */
-public interface EInputVariableReference extends EVariableReference
+public interface EInputOperationVariableReference extends EVariableReference
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' reference.
@@ -32,14 +32,14 @@ public interface EInputVariableReference extends EVariableReference
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' reference.
    * @see #setName(EParameterDefinition)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEInputVariableReference_Name()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEInputOperationVariableReference_Name()
    * @model
    * @generated
    */
   EParameterDefinition getName();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputVariableReference#getName <em>Name</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference#getName <em>Name</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' reference.
@@ -54,10 +54,10 @@ public interface EInputVariableReference extends EVariableReference
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Tail</em>' attribute list.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEInputVariableReference_Tail()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEInputOperationVariableReference_Tail()
    * @model unique="false"
    * @generated
    */
   EList<String> getTail();
 
-} // EInputVariableReference
+} // EInputOperationVariableReference
