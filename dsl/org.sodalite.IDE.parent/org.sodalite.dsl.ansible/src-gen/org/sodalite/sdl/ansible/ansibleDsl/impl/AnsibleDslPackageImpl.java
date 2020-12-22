@@ -17,6 +17,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
+import org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
@@ -29,6 +30,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
+import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactGathered;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
@@ -68,6 +70,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
+import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
@@ -130,6 +133,27 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eTaskHandlerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eBaseAttributesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eExecutionAttributesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eTaskHandlerAttributesEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -711,108 +735,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEBase_Privilage_escalation()
+  public EReference getEBase_Base_attributes()
   {
     return (EReference)eBaseEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBase_Validation_mode()
-  {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBase_Connection()
-  {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEBase_No_log()
-  {
-    return (EAttribute)eBaseEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEBase_Debugger()
-  {
-    return (EAttribute)eBaseEClass.getEStructuralFeatures().get(5);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBase_Module_defaults()
-  {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(6);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBase_Environment()
-  {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(7);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBase_Collections()
-  {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(8);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBase_Tags()
-  {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(9);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEBase_Variable_declarations()
-  {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(10);
   }
 
   /**
@@ -832,31 +757,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEExecution_Exe_settings()
+  public EReference getEExecution_Execution_attributes()
   {
     return (EReference)eExecutionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEExecution_Delegation()
-  {
-    return (EReference)eExecutionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEExecution_When_expression()
-  {
-    return (EReference)eExecutionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -887,7 +790,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getETaskHandler_Error_handling()
+  public EReference getETaskHandler_Task_handler_attributes()
   {
     return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(0);
   }
@@ -898,9 +801,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getETaskHandler_Action()
+  public EClass getEBaseAttributes()
   {
-    return (EAttribute)eTaskHandlerEClass.getEStructuralFeatures().get(1);
+    return eBaseAttributesEClass;
   }
 
   /**
@@ -909,9 +812,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getETaskHandler_Asynchronous_settings()
+  public EReference getEBaseAttributes_Privilage_escalation()
   {
-    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(2);
+    return (EReference)eBaseAttributesEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -920,9 +823,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getETaskHandler_Args()
+  public EReference getEBaseAttributes_Validation_mode()
   {
-    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(3);
+    return (EReference)eBaseAttributesEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -931,9 +834,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getETaskHandler_Module()
+  public EReference getEBaseAttributes_Connection()
   {
-    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(4);
+    return (EReference)eBaseAttributesEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -942,9 +845,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getETaskHandler_Notifiables()
+  public EAttribute getEBaseAttributes_No_log()
   {
-    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(5);
+    return (EAttribute)eBaseAttributesEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -953,9 +856,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getETaskHandler_Loop()
+  public EAttribute getEBaseAttributes_Debugger()
   {
-    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(6);
+    return (EAttribute)eBaseAttributesEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -964,9 +867,196 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getETaskHandler_Register()
+  public EReference getEBaseAttributes_Module_defaults()
   {
-    return (EReference)eTaskHandlerEClass.getEStructuralFeatures().get(7);
+    return (EReference)eBaseAttributesEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBaseAttributes_Environment()
+  {
+    return (EReference)eBaseAttributesEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBaseAttributes_Collections()
+  {
+    return (EReference)eBaseAttributesEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBaseAttributes_Tags()
+  {
+    return (EReference)eBaseAttributesEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBaseAttributes_Variable_declarations()
+  {
+    return (EReference)eBaseAttributesEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEExecutionAttributes()
+  {
+    return eExecutionAttributesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEExecutionAttributes_Exe_settings()
+  {
+    return (EReference)eExecutionAttributesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEExecutionAttributes_Delegation()
+  {
+    return (EReference)eExecutionAttributesEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEExecutionAttributes_When_expression()
+  {
+    return (EReference)eExecutionAttributesEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getETaskHandlerAttributes()
+  {
+    return eTaskHandlerAttributesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandlerAttributes_Error_handling()
+  {
+    return (EReference)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETaskHandlerAttributes_Action()
+  {
+    return (EAttribute)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandlerAttributes_Asynchronous_settings()
+  {
+    return (EReference)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandlerAttributes_Args()
+  {
+    return (EReference)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandlerAttributes_Module()
+  {
+    return (EReference)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandlerAttributes_Notifiables()
+  {
+    return (EReference)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandlerAttributes_Loop()
+  {
+    return (EReference)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETaskHandlerAttributes_Register()
+  {
+    return (EReference)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -2880,33 +2970,42 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eBaseEClass = createEClass(EBASE);
     createEAttribute(eBaseEClass, EBASE__NAME);
-    createEReference(eBaseEClass, EBASE__PRIVILAGE_ESCALATION);
-    createEReference(eBaseEClass, EBASE__VALIDATION_MODE);
-    createEReference(eBaseEClass, EBASE__CONNECTION);
-    createEAttribute(eBaseEClass, EBASE__NO_LOG);
-    createEAttribute(eBaseEClass, EBASE__DEBUGGER);
-    createEReference(eBaseEClass, EBASE__MODULE_DEFAULTS);
-    createEReference(eBaseEClass, EBASE__ENVIRONMENT);
-    createEReference(eBaseEClass, EBASE__COLLECTIONS);
-    createEReference(eBaseEClass, EBASE__TAGS);
-    createEReference(eBaseEClass, EBASE__VARIABLE_DECLARATIONS);
+    createEReference(eBaseEClass, EBASE__BASE_ATTRIBUTES);
 
     eExecutionEClass = createEClass(EEXECUTION);
-    createEReference(eExecutionEClass, EEXECUTION__EXE_SETTINGS);
-    createEReference(eExecutionEClass, EEXECUTION__DELEGATION);
-    createEReference(eExecutionEClass, EEXECUTION__WHEN_EXPRESSION);
+    createEReference(eExecutionEClass, EEXECUTION__EXECUTION_ATTRIBUTES);
 
     eBlockTaskEClass = createEClass(EBLOCK_TASK);
 
     eTaskHandlerEClass = createEClass(ETASK_HANDLER);
-    createEReference(eTaskHandlerEClass, ETASK_HANDLER__ERROR_HANDLING);
-    createEAttribute(eTaskHandlerEClass, ETASK_HANDLER__ACTION);
-    createEReference(eTaskHandlerEClass, ETASK_HANDLER__ASYNCHRONOUS_SETTINGS);
-    createEReference(eTaskHandlerEClass, ETASK_HANDLER__ARGS);
-    createEReference(eTaskHandlerEClass, ETASK_HANDLER__MODULE);
-    createEReference(eTaskHandlerEClass, ETASK_HANDLER__NOTIFIABLES);
-    createEReference(eTaskHandlerEClass, ETASK_HANDLER__LOOP);
-    createEReference(eTaskHandlerEClass, ETASK_HANDLER__REGISTER);
+    createEReference(eTaskHandlerEClass, ETASK_HANDLER__TASK_HANDLER_ATTRIBUTES);
+
+    eBaseAttributesEClass = createEClass(EBASE_ATTRIBUTES);
+    createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__PRIVILAGE_ESCALATION);
+    createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__VALIDATION_MODE);
+    createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__CONNECTION);
+    createEAttribute(eBaseAttributesEClass, EBASE_ATTRIBUTES__NO_LOG);
+    createEAttribute(eBaseAttributesEClass, EBASE_ATTRIBUTES__DEBUGGER);
+    createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__MODULE_DEFAULTS);
+    createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__ENVIRONMENT);
+    createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__COLLECTIONS);
+    createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__TAGS);
+    createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__VARIABLE_DECLARATIONS);
+
+    eExecutionAttributesEClass = createEClass(EEXECUTION_ATTRIBUTES);
+    createEReference(eExecutionAttributesEClass, EEXECUTION_ATTRIBUTES__EXE_SETTINGS);
+    createEReference(eExecutionAttributesEClass, EEXECUTION_ATTRIBUTES__DELEGATION);
+    createEReference(eExecutionAttributesEClass, EEXECUTION_ATTRIBUTES__WHEN_EXPRESSION);
+
+    eTaskHandlerAttributesEClass = createEClass(ETASK_HANDLER_ATTRIBUTES);
+    createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__ERROR_HANDLING);
+    createEAttribute(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__ACTION);
+    createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__ASYNCHRONOUS_SETTINGS);
+    createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__ARGS);
+    createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__MODULE);
+    createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__NOTIFIABLES);
+    createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__LOOP);
+    createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__REGISTER);
 
     ePlayEClass = createEClass(EPLAY);
     createEReference(ePlayEClass, EPLAY__PLAY_EXE_SETTINGS);
@@ -3221,33 +3320,42 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eBaseEClass, EBase.class, "EBase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEBase_Name(), ecorePackage.getEString(), "name", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Privilage_escalation(), this.getEPrivilageEscalation(), null, "privilage_escalation", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Validation_mode(), this.getEValidationMode(), null, "validation_mode", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Connection(), this.getEConnection(), null, "connection", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEBase_No_log(), ecorePackage.getEString(), "no_log", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEBase_Debugger(), ecorePackage.getEString(), "debugger", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Module_defaults(), this.getEList(), null, "module_defaults", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Environment(), this.getEList(), null, "environment", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Collections(), this.getEList(), null, "collections", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Tags(), this.getEList(), null, "tags", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Variable_declarations(), this.getEVariableDeclaration(), null, "variable_declarations", null, 0, -1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Base_attributes(), this.getEBaseAttributes(), null, "base_attributes", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eExecutionEClass, EExecution.class, "EExecution", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEExecution_Exe_settings(), this.getEExecutionExeSettings(), null, "exe_settings", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEExecution_Delegation(), this.getEDelegation(), null, "delegation", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEExecution_When_expression(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "when_expression", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExecution_Execution_attributes(), this.getEExecutionAttributes(), null, "execution_attributes", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBlockTaskEClass, EBlockTask.class, "EBlockTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eTaskHandlerEClass, ETaskHandler.class, "ETaskHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getETaskHandler_Error_handling(), this.getETaskHandlerErrorHandling(), null, "error_handling", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getETaskHandler_Action(), ecorePackage.getEString(), "action", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandler_Asynchronous_settings(), this.getEAsynchronousSettings(), null, "asynchronous_settings", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandler_Args(), this.getEDictionary(), null, "args", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandler_Module(), this.getEModuleCall(), null, "module", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandler_Notifiables(), this.getENotifiable(), null, "notifiables", null, 0, -1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandler_Loop(), this.getELoop(), null, "loop", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandler_Register(), this.getERegisterVariable(), null, "register", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandler_Task_handler_attributes(), this.getETaskHandlerAttributes(), null, "task_handler_attributes", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eBaseAttributesEClass, EBaseAttributes.class, "EBaseAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEBaseAttributes_Privilage_escalation(), this.getEPrivilageEscalation(), null, "privilage_escalation", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Validation_mode(), this.getEValidationMode(), null, "validation_mode", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Connection(), this.getEConnection(), null, "connection", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEBaseAttributes_No_log(), ecorePackage.getEString(), "no_log", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEBaseAttributes_Debugger(), ecorePackage.getEString(), "debugger", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Module_defaults(), this.getEList(), null, "module_defaults", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Environment(), this.getEList(), null, "environment", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Collections(), this.getEList(), null, "collections", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Tags(), this.getEList(), null, "tags", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Variable_declarations(), this.getEVariableDeclaration(), null, "variable_declarations", null, 0, -1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eExecutionAttributesEClass, EExecutionAttributes.class, "EExecutionAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEExecutionAttributes_Exe_settings(), this.getEExecutionExeSettings(), null, "exe_settings", null, 0, 1, EExecutionAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExecutionAttributes_Delegation(), this.getEDelegation(), null, "delegation", null, 0, 1, EExecutionAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExecutionAttributes_When_expression(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "when_expression", null, 0, 1, EExecutionAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eTaskHandlerAttributesEClass, ETaskHandlerAttributes.class, "ETaskHandlerAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getETaskHandlerAttributes_Error_handling(), this.getETaskHandlerErrorHandling(), null, "error_handling", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getETaskHandlerAttributes_Action(), ecorePackage.getEString(), "action", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerAttributes_Asynchronous_settings(), this.getEAsynchronousSettings(), null, "asynchronous_settings", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerAttributes_Args(), this.getEDictionary(), null, "args", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerAttributes_Module(), this.getEModuleCall(), null, "module", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerAttributes_Notifiables(), this.getENotifiable(), null, "notifiables", null, 0, -1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerAttributes_Loop(), this.getELoop(), null, "loop", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerAttributes_Register(), this.getERegisterVariable(), null, "register", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePlayEClass, EPlay.class, "EPlay", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEPlay_Play_exe_settings(), this.getEPlayExeSettings(), null, "play_exe_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

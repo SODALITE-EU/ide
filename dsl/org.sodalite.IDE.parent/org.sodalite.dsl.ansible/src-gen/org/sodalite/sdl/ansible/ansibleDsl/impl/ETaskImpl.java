@@ -3,8 +3,6 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -13,29 +11,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
-import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
-import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
-import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
+import org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
-import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
-import org.sodalite.sdl.ansible.ansibleDsl.EList;
-import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
-import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
-import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
-import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
-import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
-import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
-import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
-import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
+import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,27 +29,9 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getPrivilage_escalation <em>Privilage escalation</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getValidation_mode <em>Validation mode</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getConnection <em>Connection</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getNo_log <em>No log</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getDebugger <em>Debugger</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getModule_defaults <em>Module defaults</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getEnvironment <em>Environment</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getCollections <em>Collections</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getVariable_declarations <em>Variable declarations</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getExe_settings <em>Exe settings</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getDelegation <em>Delegation</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getWhen_expression <em>When expression</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getError_handling <em>Error handling</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getAction <em>Action</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getAsynchronous_settings <em>Asynchronous settings</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getArgs <em>Args</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getModule <em>Module</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getNotifiables <em>Notifiables</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getLoop <em>Loop</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getRegister <em>Register</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getBase_attributes <em>Base attributes</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getExecution_attributes <em>Execution attributes</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getTask_handler_attributes <em>Task handler attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -94,244 +59,34 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getPrivilage_escalation() <em>Privilage escalation</em>}' containment reference.
+   * The cached value of the '{@link #getBase_attributes() <em>Base attributes</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPrivilage_escalation()
+   * @see #getBase_attributes()
    * @generated
    * @ordered
    */
-  protected EPrivilageEscalation privilage_escalation;
+  protected EBaseAttributes base_attributes;
 
   /**
-   * The cached value of the '{@link #getValidation_mode() <em>Validation mode</em>}' containment reference.
+   * The cached value of the '{@link #getExecution_attributes() <em>Execution attributes</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValidation_mode()
+   * @see #getExecution_attributes()
    * @generated
    * @ordered
    */
-  protected EValidationMode validation_mode;
+  protected EExecutionAttributes execution_attributes;
 
   /**
-   * The cached value of the '{@link #getConnection() <em>Connection</em>}' containment reference.
+   * The cached value of the '{@link #getTask_handler_attributes() <em>Task handler attributes</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getConnection()
+   * @see #getTask_handler_attributes()
    * @generated
    * @ordered
    */
-  protected EConnection connection;
-
-  /**
-   * The default value of the '{@link #getNo_log() <em>No log</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNo_log()
-   * @generated
-   * @ordered
-   */
-  protected static final String NO_LOG_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getNo_log() <em>No log</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNo_log()
-   * @generated
-   * @ordered
-   */
-  protected String no_log = NO_LOG_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getDebugger() <em>Debugger</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDebugger()
-   * @generated
-   * @ordered
-   */
-  protected static final String DEBUGGER_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDebugger() <em>Debugger</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDebugger()
-   * @generated
-   * @ordered
-   */
-  protected String debugger = DEBUGGER_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getModule_defaults() <em>Module defaults</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getModule_defaults()
-   * @generated
-   * @ordered
-   */
-  protected EList module_defaults;
-
-  /**
-   * The cached value of the '{@link #getEnvironment() <em>Environment</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEnvironment()
-   * @generated
-   * @ordered
-   */
-  protected EList environment;
-
-  /**
-   * The cached value of the '{@link #getCollections() <em>Collections</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCollections()
-   * @generated
-   * @ordered
-   */
-  protected EList collections;
-
-  /**
-   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTags()
-   * @generated
-   * @ordered
-   */
-  protected EList tags;
-
-  /**
-   * The cached value of the '{@link #getVariable_declarations() <em>Variable declarations</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getVariable_declarations()
-   * @generated
-   * @ordered
-   */
-  protected org.eclipse.emf.common.util.EList<EVariableDeclaration> variable_declarations;
-
-  /**
-   * The cached value of the '{@link #getExe_settings() <em>Exe settings</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getExe_settings()
-   * @generated
-   * @ordered
-   */
-  protected EExecutionExeSettings exe_settings;
-
-  /**
-   * The cached value of the '{@link #getDelegation() <em>Delegation</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDelegation()
-   * @generated
-   * @ordered
-   */
-  protected EDelegation delegation;
-
-  /**
-   * The cached value of the '{@link #getWhen_expression() <em>When expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getWhen_expression()
-   * @generated
-   * @ordered
-   */
-  protected EJinjaExpressionEvaluationWithoutBrackets when_expression;
-
-  /**
-   * The cached value of the '{@link #getError_handling() <em>Error handling</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getError_handling()
-   * @generated
-   * @ordered
-   */
-  protected ETaskHandlerErrorHandling error_handling;
-
-  /**
-   * The default value of the '{@link #getAction() <em>Action</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAction()
-   * @generated
-   * @ordered
-   */
-  protected static final String ACTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getAction() <em>Action</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAction()
-   * @generated
-   * @ordered
-   */
-  protected String action = ACTION_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getAsynchronous_settings() <em>Asynchronous settings</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAsynchronous_settings()
-   * @generated
-   * @ordered
-   */
-  protected EAsynchronousSettings asynchronous_settings;
-
-  /**
-   * The cached value of the '{@link #getArgs() <em>Args</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getArgs()
-   * @generated
-   * @ordered
-   */
-  protected EDictionary args;
-
-  /**
-   * The cached value of the '{@link #getModule() <em>Module</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getModule()
-   * @generated
-   * @ordered
-   */
-  protected EModuleCall module;
-
-  /**
-   * The cached value of the '{@link #getNotifiables() <em>Notifiables</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNotifiables()
-   * @generated
-   * @ordered
-   */
-  protected org.eclipse.emf.common.util.EList<ENotifiable> notifiables;
-
-  /**
-   * The cached value of the '{@link #getLoop() <em>Loop</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getLoop()
-   * @generated
-   * @ordered
-   */
-  protected ELoop loop;
-
-  /**
-   * The cached value of the '{@link #getRegister() <em>Register</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRegister()
-   * @generated
-   * @ordered
-   */
-  protected ERegisterVariable register;
+  protected ETaskHandlerAttributes task_handler_attributes;
 
   /**
    * <!-- begin-user-doc -->
@@ -385,9 +140,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EPrivilageEscalation getPrivilage_escalation()
+  public EBaseAttributes getBase_attributes()
   {
-    return privilage_escalation;
+    return base_attributes;
   }
 
   /**
@@ -395,13 +150,13 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPrivilage_escalation(EPrivilageEscalation newPrivilage_escalation, NotificationChain msgs)
+  public NotificationChain basicSetBase_attributes(EBaseAttributes newBase_attributes, NotificationChain msgs)
   {
-    EPrivilageEscalation oldPrivilage_escalation = privilage_escalation;
-    privilage_escalation = newPrivilage_escalation;
+    EBaseAttributes oldBase_attributes = base_attributes;
+    base_attributes = newBase_attributes;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION, oldPrivilage_escalation, newPrivilage_escalation);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__BASE_ATTRIBUTES, oldBase_attributes, newBase_attributes);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -413,20 +168,20 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setPrivilage_escalation(EPrivilageEscalation newPrivilage_escalation)
+  public void setBase_attributes(EBaseAttributes newBase_attributes)
   {
-    if (newPrivilage_escalation != privilage_escalation)
+    if (newBase_attributes != base_attributes)
     {
       NotificationChain msgs = null;
-      if (privilage_escalation != null)
-        msgs = ((InternalEObject)privilage_escalation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION, null, msgs);
-      if (newPrivilage_escalation != null)
-        msgs = ((InternalEObject)newPrivilage_escalation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION, null, msgs);
-      msgs = basicSetPrivilage_escalation(newPrivilage_escalation, msgs);
+      if (base_attributes != null)
+        msgs = ((InternalEObject)base_attributes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__BASE_ATTRIBUTES, null, msgs);
+      if (newBase_attributes != null)
+        msgs = ((InternalEObject)newBase_attributes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__BASE_ATTRIBUTES, null, msgs);
+      msgs = basicSetBase_attributes(newBase_attributes, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION, newPrivilage_escalation, newPrivilage_escalation));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__BASE_ATTRIBUTES, newBase_attributes, newBase_attributes));
   }
 
   /**
@@ -435,9 +190,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EValidationMode getValidation_mode()
+  public EExecutionAttributes getExecution_attributes()
   {
-    return validation_mode;
+    return execution_attributes;
   }
 
   /**
@@ -445,13 +200,13 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValidation_mode(EValidationMode newValidation_mode, NotificationChain msgs)
+  public NotificationChain basicSetExecution_attributes(EExecutionAttributes newExecution_attributes, NotificationChain msgs)
   {
-    EValidationMode oldValidation_mode = validation_mode;
-    validation_mode = newValidation_mode;
+    EExecutionAttributes oldExecution_attributes = execution_attributes;
+    execution_attributes = newExecution_attributes;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__VALIDATION_MODE, oldValidation_mode, newValidation_mode);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES, oldExecution_attributes, newExecution_attributes);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -463,20 +218,20 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setValidation_mode(EValidationMode newValidation_mode)
+  public void setExecution_attributes(EExecutionAttributes newExecution_attributes)
   {
-    if (newValidation_mode != validation_mode)
+    if (newExecution_attributes != execution_attributes)
     {
       NotificationChain msgs = null;
-      if (validation_mode != null)
-        msgs = ((InternalEObject)validation_mode).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__VALIDATION_MODE, null, msgs);
-      if (newValidation_mode != null)
-        msgs = ((InternalEObject)newValidation_mode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__VALIDATION_MODE, null, msgs);
-      msgs = basicSetValidation_mode(newValidation_mode, msgs);
+      if (execution_attributes != null)
+        msgs = ((InternalEObject)execution_attributes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES, null, msgs);
+      if (newExecution_attributes != null)
+        msgs = ((InternalEObject)newExecution_attributes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES, null, msgs);
+      msgs = basicSetExecution_attributes(newExecution_attributes, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__VALIDATION_MODE, newValidation_mode, newValidation_mode));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES, newExecution_attributes, newExecution_attributes));
   }
 
   /**
@@ -485,9 +240,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EConnection getConnection()
+  public ETaskHandlerAttributes getTask_handler_attributes()
   {
-    return connection;
+    return task_handler_attributes;
   }
 
   /**
@@ -495,13 +250,13 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetConnection(EConnection newConnection, NotificationChain msgs)
+  public NotificationChain basicSetTask_handler_attributes(ETaskHandlerAttributes newTask_handler_attributes, NotificationChain msgs)
   {
-    EConnection oldConnection = connection;
-    connection = newConnection;
+    ETaskHandlerAttributes oldTask_handler_attributes = task_handler_attributes;
+    task_handler_attributes = newTask_handler_attributes;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__CONNECTION, oldConnection, newConnection);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES, oldTask_handler_attributes, newTask_handler_attributes);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -513,775 +268,20 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setConnection(EConnection newConnection)
+  public void setTask_handler_attributes(ETaskHandlerAttributes newTask_handler_attributes)
   {
-    if (newConnection != connection)
+    if (newTask_handler_attributes != task_handler_attributes)
     {
       NotificationChain msgs = null;
-      if (connection != null)
-        msgs = ((InternalEObject)connection).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__CONNECTION, null, msgs);
-      if (newConnection != null)
-        msgs = ((InternalEObject)newConnection).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__CONNECTION, null, msgs);
-      msgs = basicSetConnection(newConnection, msgs);
+      if (task_handler_attributes != null)
+        msgs = ((InternalEObject)task_handler_attributes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES, null, msgs);
+      if (newTask_handler_attributes != null)
+        msgs = ((InternalEObject)newTask_handler_attributes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES, null, msgs);
+      msgs = basicSetTask_handler_attributes(newTask_handler_attributes, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__CONNECTION, newConnection, newConnection));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getNo_log()
-  {
-    return no_log;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setNo_log(String newNo_log)
-  {
-    String oldNo_log = no_log;
-    no_log = newNo_log;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__NO_LOG, oldNo_log, no_log));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getDebugger()
-  {
-    return debugger;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDebugger(String newDebugger)
-  {
-    String oldDebugger = debugger;
-    debugger = newDebugger;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__DEBUGGER, oldDebugger, debugger));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList getModule_defaults()
-  {
-    return module_defaults;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetModule_defaults(EList newModule_defaults, NotificationChain msgs)
-  {
-    EList oldModule_defaults = module_defaults;
-    module_defaults = newModule_defaults;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__MODULE_DEFAULTS, oldModule_defaults, newModule_defaults);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setModule_defaults(EList newModule_defaults)
-  {
-    if (newModule_defaults != module_defaults)
-    {
-      NotificationChain msgs = null;
-      if (module_defaults != null)
-        msgs = ((InternalEObject)module_defaults).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__MODULE_DEFAULTS, null, msgs);
-      if (newModule_defaults != null)
-        msgs = ((InternalEObject)newModule_defaults).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__MODULE_DEFAULTS, null, msgs);
-      msgs = basicSetModule_defaults(newModule_defaults, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__MODULE_DEFAULTS, newModule_defaults, newModule_defaults));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList getEnvironment()
-  {
-    return environment;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetEnvironment(EList newEnvironment, NotificationChain msgs)
-  {
-    EList oldEnvironment = environment;
-    environment = newEnvironment;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__ENVIRONMENT, oldEnvironment, newEnvironment);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setEnvironment(EList newEnvironment)
-  {
-    if (newEnvironment != environment)
-    {
-      NotificationChain msgs = null;
-      if (environment != null)
-        msgs = ((InternalEObject)environment).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__ENVIRONMENT, null, msgs);
-      if (newEnvironment != null)
-        msgs = ((InternalEObject)newEnvironment).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__ENVIRONMENT, null, msgs);
-      msgs = basicSetEnvironment(newEnvironment, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__ENVIRONMENT, newEnvironment, newEnvironment));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList getCollections()
-  {
-    return collections;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetCollections(EList newCollections, NotificationChain msgs)
-  {
-    EList oldCollections = collections;
-    collections = newCollections;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__COLLECTIONS, oldCollections, newCollections);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setCollections(EList newCollections)
-  {
-    if (newCollections != collections)
-    {
-      NotificationChain msgs = null;
-      if (collections != null)
-        msgs = ((InternalEObject)collections).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__COLLECTIONS, null, msgs);
-      if (newCollections != null)
-        msgs = ((InternalEObject)newCollections).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__COLLECTIONS, null, msgs);
-      msgs = basicSetCollections(newCollections, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__COLLECTIONS, newCollections, newCollections));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList getTags()
-  {
-    return tags;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTags(EList newTags, NotificationChain msgs)
-  {
-    EList oldTags = tags;
-    tags = newTags;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__TAGS, oldTags, newTags);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setTags(EList newTags)
-  {
-    if (newTags != tags)
-    {
-      NotificationChain msgs = null;
-      if (tags != null)
-        msgs = ((InternalEObject)tags).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__TAGS, null, msgs);
-      if (newTags != null)
-        msgs = ((InternalEObject)newTags).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__TAGS, null, msgs);
-      msgs = basicSetTags(newTags, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__TAGS, newTags, newTags));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public org.eclipse.emf.common.util.EList<EVariableDeclaration> getVariable_declarations()
-  {
-    if (variable_declarations == null)
-    {
-      variable_declarations = new EObjectContainmentEList<EVariableDeclaration>(EVariableDeclaration.class, this, AnsibleDslPackage.ETASK__VARIABLE_DECLARATIONS);
-    }
-    return variable_declarations;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EExecutionExeSettings getExe_settings()
-  {
-    return exe_settings;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetExe_settings(EExecutionExeSettings newExe_settings, NotificationChain msgs)
-  {
-    EExecutionExeSettings oldExe_settings = exe_settings;
-    exe_settings = newExe_settings;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__EXE_SETTINGS, oldExe_settings, newExe_settings);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setExe_settings(EExecutionExeSettings newExe_settings)
-  {
-    if (newExe_settings != exe_settings)
-    {
-      NotificationChain msgs = null;
-      if (exe_settings != null)
-        msgs = ((InternalEObject)exe_settings).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__EXE_SETTINGS, null, msgs);
-      if (newExe_settings != null)
-        msgs = ((InternalEObject)newExe_settings).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__EXE_SETTINGS, null, msgs);
-      msgs = basicSetExe_settings(newExe_settings, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__EXE_SETTINGS, newExe_settings, newExe_settings));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EDelegation getDelegation()
-  {
-    return delegation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetDelegation(EDelegation newDelegation, NotificationChain msgs)
-  {
-    EDelegation oldDelegation = delegation;
-    delegation = newDelegation;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__DELEGATION, oldDelegation, newDelegation);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDelegation(EDelegation newDelegation)
-  {
-    if (newDelegation != delegation)
-    {
-      NotificationChain msgs = null;
-      if (delegation != null)
-        msgs = ((InternalEObject)delegation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__DELEGATION, null, msgs);
-      if (newDelegation != null)
-        msgs = ((InternalEObject)newDelegation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__DELEGATION, null, msgs);
-      msgs = basicSetDelegation(newDelegation, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__DELEGATION, newDelegation, newDelegation));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EJinjaExpressionEvaluationWithoutBrackets getWhen_expression()
-  {
-    return when_expression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetWhen_expression(EJinjaExpressionEvaluationWithoutBrackets newWhen_expression, NotificationChain msgs)
-  {
-    EJinjaExpressionEvaluationWithoutBrackets oldWhen_expression = when_expression;
-    when_expression = newWhen_expression;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__WHEN_EXPRESSION, oldWhen_expression, newWhen_expression);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setWhen_expression(EJinjaExpressionEvaluationWithoutBrackets newWhen_expression)
-  {
-    if (newWhen_expression != when_expression)
-    {
-      NotificationChain msgs = null;
-      if (when_expression != null)
-        msgs = ((InternalEObject)when_expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__WHEN_EXPRESSION, null, msgs);
-      if (newWhen_expression != null)
-        msgs = ((InternalEObject)newWhen_expression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__WHEN_EXPRESSION, null, msgs);
-      msgs = basicSetWhen_expression(newWhen_expression, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__WHEN_EXPRESSION, newWhen_expression, newWhen_expression));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ETaskHandlerErrorHandling getError_handling()
-  {
-    return error_handling;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetError_handling(ETaskHandlerErrorHandling newError_handling, NotificationChain msgs)
-  {
-    ETaskHandlerErrorHandling oldError_handling = error_handling;
-    error_handling = newError_handling;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__ERROR_HANDLING, oldError_handling, newError_handling);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setError_handling(ETaskHandlerErrorHandling newError_handling)
-  {
-    if (newError_handling != error_handling)
-    {
-      NotificationChain msgs = null;
-      if (error_handling != null)
-        msgs = ((InternalEObject)error_handling).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__ERROR_HANDLING, null, msgs);
-      if (newError_handling != null)
-        msgs = ((InternalEObject)newError_handling).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__ERROR_HANDLING, null, msgs);
-      msgs = basicSetError_handling(newError_handling, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__ERROR_HANDLING, newError_handling, newError_handling));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getAction()
-  {
-    return action;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setAction(String newAction)
-  {
-    String oldAction = action;
-    action = newAction;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__ACTION, oldAction, action));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAsynchronousSettings getAsynchronous_settings()
-  {
-    return asynchronous_settings;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetAsynchronous_settings(EAsynchronousSettings newAsynchronous_settings, NotificationChain msgs)
-  {
-    EAsynchronousSettings oldAsynchronous_settings = asynchronous_settings;
-    asynchronous_settings = newAsynchronous_settings;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS, oldAsynchronous_settings, newAsynchronous_settings);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setAsynchronous_settings(EAsynchronousSettings newAsynchronous_settings)
-  {
-    if (newAsynchronous_settings != asynchronous_settings)
-    {
-      NotificationChain msgs = null;
-      if (asynchronous_settings != null)
-        msgs = ((InternalEObject)asynchronous_settings).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS, null, msgs);
-      if (newAsynchronous_settings != null)
-        msgs = ((InternalEObject)newAsynchronous_settings).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS, null, msgs);
-      msgs = basicSetAsynchronous_settings(newAsynchronous_settings, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS, newAsynchronous_settings, newAsynchronous_settings));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EDictionary getArgs()
-  {
-    return args;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetArgs(EDictionary newArgs, NotificationChain msgs)
-  {
-    EDictionary oldArgs = args;
-    args = newArgs;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__ARGS, oldArgs, newArgs);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setArgs(EDictionary newArgs)
-  {
-    if (newArgs != args)
-    {
-      NotificationChain msgs = null;
-      if (args != null)
-        msgs = ((InternalEObject)args).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__ARGS, null, msgs);
-      if (newArgs != null)
-        msgs = ((InternalEObject)newArgs).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__ARGS, null, msgs);
-      msgs = basicSetArgs(newArgs, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__ARGS, newArgs, newArgs));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EModuleCall getModule()
-  {
-    return module;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetModule(EModuleCall newModule, NotificationChain msgs)
-  {
-    EModuleCall oldModule = module;
-    module = newModule;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__MODULE, oldModule, newModule);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setModule(EModuleCall newModule)
-  {
-    if (newModule != module)
-    {
-      NotificationChain msgs = null;
-      if (module != null)
-        msgs = ((InternalEObject)module).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__MODULE, null, msgs);
-      if (newModule != null)
-        msgs = ((InternalEObject)newModule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__MODULE, null, msgs);
-      msgs = basicSetModule(newModule, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__MODULE, newModule, newModule));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public org.eclipse.emf.common.util.EList<ENotifiable> getNotifiables()
-  {
-    if (notifiables == null)
-    {
-      notifiables = new EObjectContainmentEList<ENotifiable>(ENotifiable.class, this, AnsibleDslPackage.ETASK__NOTIFIABLES);
-    }
-    return notifiables;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ELoop getLoop()
-  {
-    return loop;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetLoop(ELoop newLoop, NotificationChain msgs)
-  {
-    ELoop oldLoop = loop;
-    loop = newLoop;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__LOOP, oldLoop, newLoop);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setLoop(ELoop newLoop)
-  {
-    if (newLoop != loop)
-    {
-      NotificationChain msgs = null;
-      if (loop != null)
-        msgs = ((InternalEObject)loop).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__LOOP, null, msgs);
-      if (newLoop != null)
-        msgs = ((InternalEObject)newLoop).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__LOOP, null, msgs);
-      msgs = basicSetLoop(newLoop, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__LOOP, newLoop, newLoop));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ERegisterVariable getRegister()
-  {
-    return register;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetRegister(ERegisterVariable newRegister, NotificationChain msgs)
-  {
-    ERegisterVariable oldRegister = register;
-    register = newRegister;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__REGISTER, oldRegister, newRegister);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setRegister(ERegisterVariable newRegister)
-  {
-    if (newRegister != register)
-    {
-      NotificationChain msgs = null;
-      if (register != null)
-        msgs = ((InternalEObject)register).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__REGISTER, null, msgs);
-      if (newRegister != null)
-        msgs = ((InternalEObject)newRegister).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__REGISTER, null, msgs);
-      msgs = basicSetRegister(newRegister, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__REGISTER, newRegister, newRegister));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES, newTask_handler_attributes, newTask_handler_attributes));
   }
 
   /**
@@ -1294,42 +294,12 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        return basicSetPrivilage_escalation(null, msgs);
-      case AnsibleDslPackage.ETASK__VALIDATION_MODE:
-        return basicSetValidation_mode(null, msgs);
-      case AnsibleDslPackage.ETASK__CONNECTION:
-        return basicSetConnection(null, msgs);
-      case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
-        return basicSetModule_defaults(null, msgs);
-      case AnsibleDslPackage.ETASK__ENVIRONMENT:
-        return basicSetEnvironment(null, msgs);
-      case AnsibleDslPackage.ETASK__COLLECTIONS:
-        return basicSetCollections(null, msgs);
-      case AnsibleDslPackage.ETASK__TAGS:
-        return basicSetTags(null, msgs);
-      case AnsibleDslPackage.ETASK__VARIABLE_DECLARATIONS:
-        return ((InternalEList<?>)getVariable_declarations()).basicRemove(otherEnd, msgs);
-      case AnsibleDslPackage.ETASK__EXE_SETTINGS:
-        return basicSetExe_settings(null, msgs);
-      case AnsibleDslPackage.ETASK__DELEGATION:
-        return basicSetDelegation(null, msgs);
-      case AnsibleDslPackage.ETASK__WHEN_EXPRESSION:
-        return basicSetWhen_expression(null, msgs);
-      case AnsibleDslPackage.ETASK__ERROR_HANDLING:
-        return basicSetError_handling(null, msgs);
-      case AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS:
-        return basicSetAsynchronous_settings(null, msgs);
-      case AnsibleDslPackage.ETASK__ARGS:
-        return basicSetArgs(null, msgs);
-      case AnsibleDslPackage.ETASK__MODULE:
-        return basicSetModule(null, msgs);
-      case AnsibleDslPackage.ETASK__NOTIFIABLES:
-        return ((InternalEList<?>)getNotifiables()).basicRemove(otherEnd, msgs);
-      case AnsibleDslPackage.ETASK__LOOP:
-        return basicSetLoop(null, msgs);
-      case AnsibleDslPackage.ETASK__REGISTER:
-        return basicSetRegister(null, msgs);
+      case AnsibleDslPackage.ETASK__BASE_ATTRIBUTES:
+        return basicSetBase_attributes(null, msgs);
+      case AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES:
+        return basicSetExecution_attributes(null, msgs);
+      case AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES:
+        return basicSetTask_handler_attributes(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1346,48 +316,12 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       case AnsibleDslPackage.ETASK__NAME:
         return getName();
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        return getPrivilage_escalation();
-      case AnsibleDslPackage.ETASK__VALIDATION_MODE:
-        return getValidation_mode();
-      case AnsibleDslPackage.ETASK__CONNECTION:
-        return getConnection();
-      case AnsibleDslPackage.ETASK__NO_LOG:
-        return getNo_log();
-      case AnsibleDslPackage.ETASK__DEBUGGER:
-        return getDebugger();
-      case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
-        return getModule_defaults();
-      case AnsibleDslPackage.ETASK__ENVIRONMENT:
-        return getEnvironment();
-      case AnsibleDslPackage.ETASK__COLLECTIONS:
-        return getCollections();
-      case AnsibleDslPackage.ETASK__TAGS:
-        return getTags();
-      case AnsibleDslPackage.ETASK__VARIABLE_DECLARATIONS:
-        return getVariable_declarations();
-      case AnsibleDslPackage.ETASK__EXE_SETTINGS:
-        return getExe_settings();
-      case AnsibleDslPackage.ETASK__DELEGATION:
-        return getDelegation();
-      case AnsibleDslPackage.ETASK__WHEN_EXPRESSION:
-        return getWhen_expression();
-      case AnsibleDslPackage.ETASK__ERROR_HANDLING:
-        return getError_handling();
-      case AnsibleDslPackage.ETASK__ACTION:
-        return getAction();
-      case AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS:
-        return getAsynchronous_settings();
-      case AnsibleDslPackage.ETASK__ARGS:
-        return getArgs();
-      case AnsibleDslPackage.ETASK__MODULE:
-        return getModule();
-      case AnsibleDslPackage.ETASK__NOTIFIABLES:
-        return getNotifiables();
-      case AnsibleDslPackage.ETASK__LOOP:
-        return getLoop();
-      case AnsibleDslPackage.ETASK__REGISTER:
-        return getRegister();
+      case AnsibleDslPackage.ETASK__BASE_ATTRIBUTES:
+        return getBase_attributes();
+      case AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES:
+        return getExecution_attributes();
+      case AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES:
+        return getTask_handler_attributes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -1397,7 +331,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -1406,70 +339,14 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       case AnsibleDslPackage.ETASK__NAME:
         setName((String)newValue);
         return;
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        setPrivilage_escalation((EPrivilageEscalation)newValue);
+      case AnsibleDslPackage.ETASK__BASE_ATTRIBUTES:
+        setBase_attributes((EBaseAttributes)newValue);
         return;
-      case AnsibleDslPackage.ETASK__VALIDATION_MODE:
-        setValidation_mode((EValidationMode)newValue);
+      case AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES:
+        setExecution_attributes((EExecutionAttributes)newValue);
         return;
-      case AnsibleDslPackage.ETASK__CONNECTION:
-        setConnection((EConnection)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__NO_LOG:
-        setNo_log((String)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__DEBUGGER:
-        setDebugger((String)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
-        setModule_defaults((EList)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__ENVIRONMENT:
-        setEnvironment((EList)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__COLLECTIONS:
-        setCollections((EList)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__TAGS:
-        setTags((EList)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__VARIABLE_DECLARATIONS:
-        getVariable_declarations().clear();
-        getVariable_declarations().addAll((Collection<? extends EVariableDeclaration>)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__EXE_SETTINGS:
-        setExe_settings((EExecutionExeSettings)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__DELEGATION:
-        setDelegation((EDelegation)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__WHEN_EXPRESSION:
-        setWhen_expression((EJinjaExpressionEvaluationWithoutBrackets)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__ERROR_HANDLING:
-        setError_handling((ETaskHandlerErrorHandling)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__ACTION:
-        setAction((String)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS:
-        setAsynchronous_settings((EAsynchronousSettings)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__ARGS:
-        setArgs((EDictionary)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__MODULE:
-        setModule((EModuleCall)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__NOTIFIABLES:
-        getNotifiables().clear();
-        getNotifiables().addAll((Collection<? extends ENotifiable>)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__LOOP:
-        setLoop((ELoop)newValue);
-        return;
-      case AnsibleDslPackage.ETASK__REGISTER:
-        setRegister((ERegisterVariable)newValue);
+      case AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES:
+        setTask_handler_attributes((ETaskHandlerAttributes)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -1488,68 +365,14 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       case AnsibleDslPackage.ETASK__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        setPrivilage_escalation((EPrivilageEscalation)null);
+      case AnsibleDslPackage.ETASK__BASE_ATTRIBUTES:
+        setBase_attributes((EBaseAttributes)null);
         return;
-      case AnsibleDslPackage.ETASK__VALIDATION_MODE:
-        setValidation_mode((EValidationMode)null);
+      case AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES:
+        setExecution_attributes((EExecutionAttributes)null);
         return;
-      case AnsibleDslPackage.ETASK__CONNECTION:
-        setConnection((EConnection)null);
-        return;
-      case AnsibleDslPackage.ETASK__NO_LOG:
-        setNo_log(NO_LOG_EDEFAULT);
-        return;
-      case AnsibleDslPackage.ETASK__DEBUGGER:
-        setDebugger(DEBUGGER_EDEFAULT);
-        return;
-      case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
-        setModule_defaults((EList)null);
-        return;
-      case AnsibleDslPackage.ETASK__ENVIRONMENT:
-        setEnvironment((EList)null);
-        return;
-      case AnsibleDslPackage.ETASK__COLLECTIONS:
-        setCollections((EList)null);
-        return;
-      case AnsibleDslPackage.ETASK__TAGS:
-        setTags((EList)null);
-        return;
-      case AnsibleDslPackage.ETASK__VARIABLE_DECLARATIONS:
-        getVariable_declarations().clear();
-        return;
-      case AnsibleDslPackage.ETASK__EXE_SETTINGS:
-        setExe_settings((EExecutionExeSettings)null);
-        return;
-      case AnsibleDslPackage.ETASK__DELEGATION:
-        setDelegation((EDelegation)null);
-        return;
-      case AnsibleDslPackage.ETASK__WHEN_EXPRESSION:
-        setWhen_expression((EJinjaExpressionEvaluationWithoutBrackets)null);
-        return;
-      case AnsibleDslPackage.ETASK__ERROR_HANDLING:
-        setError_handling((ETaskHandlerErrorHandling)null);
-        return;
-      case AnsibleDslPackage.ETASK__ACTION:
-        setAction(ACTION_EDEFAULT);
-        return;
-      case AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS:
-        setAsynchronous_settings((EAsynchronousSettings)null);
-        return;
-      case AnsibleDslPackage.ETASK__ARGS:
-        setArgs((EDictionary)null);
-        return;
-      case AnsibleDslPackage.ETASK__MODULE:
-        setModule((EModuleCall)null);
-        return;
-      case AnsibleDslPackage.ETASK__NOTIFIABLES:
-        getNotifiables().clear();
-        return;
-      case AnsibleDslPackage.ETASK__LOOP:
-        setLoop((ELoop)null);
-        return;
-      case AnsibleDslPackage.ETASK__REGISTER:
-        setRegister((ERegisterVariable)null);
+      case AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES:
+        setTask_handler_attributes((ETaskHandlerAttributes)null);
         return;
     }
     super.eUnset(featureID);
@@ -1567,48 +390,12 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       case AnsibleDslPackage.ETASK__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        return privilage_escalation != null;
-      case AnsibleDslPackage.ETASK__VALIDATION_MODE:
-        return validation_mode != null;
-      case AnsibleDslPackage.ETASK__CONNECTION:
-        return connection != null;
-      case AnsibleDslPackage.ETASK__NO_LOG:
-        return NO_LOG_EDEFAULT == null ? no_log != null : !NO_LOG_EDEFAULT.equals(no_log);
-      case AnsibleDslPackage.ETASK__DEBUGGER:
-        return DEBUGGER_EDEFAULT == null ? debugger != null : !DEBUGGER_EDEFAULT.equals(debugger);
-      case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
-        return module_defaults != null;
-      case AnsibleDslPackage.ETASK__ENVIRONMENT:
-        return environment != null;
-      case AnsibleDslPackage.ETASK__COLLECTIONS:
-        return collections != null;
-      case AnsibleDslPackage.ETASK__TAGS:
-        return tags != null;
-      case AnsibleDslPackage.ETASK__VARIABLE_DECLARATIONS:
-        return variable_declarations != null && !variable_declarations.isEmpty();
-      case AnsibleDslPackage.ETASK__EXE_SETTINGS:
-        return exe_settings != null;
-      case AnsibleDslPackage.ETASK__DELEGATION:
-        return delegation != null;
-      case AnsibleDslPackage.ETASK__WHEN_EXPRESSION:
-        return when_expression != null;
-      case AnsibleDslPackage.ETASK__ERROR_HANDLING:
-        return error_handling != null;
-      case AnsibleDslPackage.ETASK__ACTION:
-        return ACTION_EDEFAULT == null ? action != null : !ACTION_EDEFAULT.equals(action);
-      case AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS:
-        return asynchronous_settings != null;
-      case AnsibleDslPackage.ETASK__ARGS:
-        return args != null;
-      case AnsibleDslPackage.ETASK__MODULE:
-        return module != null;
-      case AnsibleDslPackage.ETASK__NOTIFIABLES:
-        return notifiables != null && !notifiables.isEmpty();
-      case AnsibleDslPackage.ETASK__LOOP:
-        return loop != null;
-      case AnsibleDslPackage.ETASK__REGISTER:
-        return register != null;
+      case AnsibleDslPackage.ETASK__BASE_ATTRIBUTES:
+        return base_attributes != null;
+      case AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES:
+        return execution_attributes != null;
+      case AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES:
+        return task_handler_attributes != null;
     }
     return super.eIsSet(featureID);
   }
@@ -1626,16 +413,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       switch (derivedFeatureID)
       {
         case AnsibleDslPackage.ETASK__NAME: return AnsibleDslPackage.EBASE__NAME;
-        case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION: return AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION;
-        case AnsibleDslPackage.ETASK__VALIDATION_MODE: return AnsibleDslPackage.EBASE__VALIDATION_MODE;
-        case AnsibleDslPackage.ETASK__CONNECTION: return AnsibleDslPackage.EBASE__CONNECTION;
-        case AnsibleDslPackage.ETASK__NO_LOG: return AnsibleDslPackage.EBASE__NO_LOG;
-        case AnsibleDslPackage.ETASK__DEBUGGER: return AnsibleDslPackage.EBASE__DEBUGGER;
-        case AnsibleDslPackage.ETASK__MODULE_DEFAULTS: return AnsibleDslPackage.EBASE__MODULE_DEFAULTS;
-        case AnsibleDslPackage.ETASK__ENVIRONMENT: return AnsibleDslPackage.EBASE__ENVIRONMENT;
-        case AnsibleDslPackage.ETASK__COLLECTIONS: return AnsibleDslPackage.EBASE__COLLECTIONS;
-        case AnsibleDslPackage.ETASK__TAGS: return AnsibleDslPackage.EBASE__TAGS;
-        case AnsibleDslPackage.ETASK__VARIABLE_DECLARATIONS: return AnsibleDslPackage.EBASE__VARIABLE_DECLARATIONS;
+        case AnsibleDslPackage.ETASK__BASE_ATTRIBUTES: return AnsibleDslPackage.EBASE__BASE_ATTRIBUTES;
         default: return -1;
       }
     }
@@ -1643,9 +421,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       switch (derivedFeatureID)
       {
-        case AnsibleDslPackage.ETASK__EXE_SETTINGS: return AnsibleDslPackage.EEXECUTION__EXE_SETTINGS;
-        case AnsibleDslPackage.ETASK__DELEGATION: return AnsibleDslPackage.EEXECUTION__DELEGATION;
-        case AnsibleDslPackage.ETASK__WHEN_EXPRESSION: return AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION;
+        case AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES: return AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES;
         default: return -1;
       }
     }
@@ -1653,14 +429,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       switch (derivedFeatureID)
       {
-        case AnsibleDslPackage.ETASK__ERROR_HANDLING: return AnsibleDslPackage.ETASK_HANDLER__ERROR_HANDLING;
-        case AnsibleDslPackage.ETASK__ACTION: return AnsibleDslPackage.ETASK_HANDLER__ACTION;
-        case AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS: return AnsibleDslPackage.ETASK_HANDLER__ASYNCHRONOUS_SETTINGS;
-        case AnsibleDslPackage.ETASK__ARGS: return AnsibleDslPackage.ETASK_HANDLER__ARGS;
-        case AnsibleDslPackage.ETASK__MODULE: return AnsibleDslPackage.ETASK_HANDLER__MODULE;
-        case AnsibleDslPackage.ETASK__NOTIFIABLES: return AnsibleDslPackage.ETASK_HANDLER__NOTIFIABLES;
-        case AnsibleDslPackage.ETASK__LOOP: return AnsibleDslPackage.ETASK_HANDLER__LOOP;
-        case AnsibleDslPackage.ETASK__REGISTER: return AnsibleDslPackage.ETASK_HANDLER__REGISTER;
+        case AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES: return AnsibleDslPackage.ETASK_HANDLER__TASK_HANDLER_ATTRIBUTES;
         default: return -1;
       }
     }
@@ -1680,16 +449,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       switch (baseFeatureID)
       {
         case AnsibleDslPackage.EBASE__NAME: return AnsibleDslPackage.ETASK__NAME;
-        case AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION: return AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION;
-        case AnsibleDslPackage.EBASE__VALIDATION_MODE: return AnsibleDslPackage.ETASK__VALIDATION_MODE;
-        case AnsibleDslPackage.EBASE__CONNECTION: return AnsibleDslPackage.ETASK__CONNECTION;
-        case AnsibleDslPackage.EBASE__NO_LOG: return AnsibleDslPackage.ETASK__NO_LOG;
-        case AnsibleDslPackage.EBASE__DEBUGGER: return AnsibleDslPackage.ETASK__DEBUGGER;
-        case AnsibleDslPackage.EBASE__MODULE_DEFAULTS: return AnsibleDslPackage.ETASK__MODULE_DEFAULTS;
-        case AnsibleDslPackage.EBASE__ENVIRONMENT: return AnsibleDslPackage.ETASK__ENVIRONMENT;
-        case AnsibleDslPackage.EBASE__COLLECTIONS: return AnsibleDslPackage.ETASK__COLLECTIONS;
-        case AnsibleDslPackage.EBASE__TAGS: return AnsibleDslPackage.ETASK__TAGS;
-        case AnsibleDslPackage.EBASE__VARIABLE_DECLARATIONS: return AnsibleDslPackage.ETASK__VARIABLE_DECLARATIONS;
+        case AnsibleDslPackage.EBASE__BASE_ATTRIBUTES: return AnsibleDslPackage.ETASK__BASE_ATTRIBUTES;
         default: return -1;
       }
     }
@@ -1697,9 +457,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       switch (baseFeatureID)
       {
-        case AnsibleDslPackage.EEXECUTION__EXE_SETTINGS: return AnsibleDslPackage.ETASK__EXE_SETTINGS;
-        case AnsibleDslPackage.EEXECUTION__DELEGATION: return AnsibleDslPackage.ETASK__DELEGATION;
-        case AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION: return AnsibleDslPackage.ETASK__WHEN_EXPRESSION;
+        case AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES: return AnsibleDslPackage.ETASK__EXECUTION_ATTRIBUTES;
         default: return -1;
       }
     }
@@ -1707,14 +465,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       switch (baseFeatureID)
       {
-        case AnsibleDslPackage.ETASK_HANDLER__ERROR_HANDLING: return AnsibleDslPackage.ETASK__ERROR_HANDLING;
-        case AnsibleDslPackage.ETASK_HANDLER__ACTION: return AnsibleDslPackage.ETASK__ACTION;
-        case AnsibleDslPackage.ETASK_HANDLER__ASYNCHRONOUS_SETTINGS: return AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS;
-        case AnsibleDslPackage.ETASK_HANDLER__ARGS: return AnsibleDslPackage.ETASK__ARGS;
-        case AnsibleDslPackage.ETASK_HANDLER__MODULE: return AnsibleDslPackage.ETASK__MODULE;
-        case AnsibleDslPackage.ETASK_HANDLER__NOTIFIABLES: return AnsibleDslPackage.ETASK__NOTIFIABLES;
-        case AnsibleDslPackage.ETASK_HANDLER__LOOP: return AnsibleDslPackage.ETASK__LOOP;
-        case AnsibleDslPackage.ETASK_HANDLER__REGISTER: return AnsibleDslPackage.ETASK__REGISTER;
+        case AnsibleDslPackage.ETASK_HANDLER__TASK_HANDLER_ATTRIBUTES: return AnsibleDslPackage.ETASK__TASK_HANDLER_ATTRIBUTES;
         default: return -1;
       }
     }
@@ -1734,12 +485,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", no_log: ");
-    result.append(no_log);
-    result.append(", debugger: ");
-    result.append(debugger);
-    result.append(", action: ");
-    result.append(action);
     result.append(')');
     return result.toString();
   }

@@ -106,6 +106,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createETaskHandlerAdapter();
       }
       @Override
+      public Adapter caseEBaseAttributes(EBaseAttributes object)
+      {
+        return createEBaseAttributesAdapter();
+      }
+      @Override
+      public Adapter caseEExecutionAttributes(EExecutionAttributes object)
+      {
+        return createEExecutionAttributesAdapter();
+      }
+      @Override
+      public Adapter caseETaskHandlerAttributes(ETaskHandlerAttributes object)
+      {
+        return createETaskHandlerAttributesAdapter();
+      }
+      @Override
       public Adapter caseEPlay(EPlay object)
       {
         return createEPlayAdapter();
@@ -513,6 +528,51 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createETaskHandlerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes <em>EBase Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes
+   * @generated
+   */
+  public Adapter createEBaseAttributesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes <em>EExecution Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes
+   * @generated
+   */
+  public Adapter createEExecutionAttributesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes <em>ETask Handler Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes
+   * @generated
+   */
+  public Adapter createETaskHandlerAttributesAdapter()
   {
     return null;
   }

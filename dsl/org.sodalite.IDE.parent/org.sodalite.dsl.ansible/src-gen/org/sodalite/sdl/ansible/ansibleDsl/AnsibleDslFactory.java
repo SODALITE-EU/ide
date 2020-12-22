@@ -78,6 +78,33 @@ public interface AnsibleDslFactory extends EFactory
   ETaskHandler createETaskHandler();
 
   /**
+   * Returns a new object of class '<em>EBase Attributes</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EBase Attributes</em>'.
+   * @generated
+   */
+  EBaseAttributes createEBaseAttributes();
+
+  /**
+   * Returns a new object of class '<em>EExecution Attributes</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EExecution Attributes</em>'.
+   * @generated
+   */
+  EExecutionAttributes createEExecutionAttributes();
+
+  /**
+   * Returns a new object of class '<em>ETask Handler Attributes</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ETask Handler Attributes</em>'.
+   * @generated
+   */
+  ETaskHandlerAttributes createETaskHandlerAttributes();
+
+  /**
    * Returns a new object of class '<em>EPlay</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

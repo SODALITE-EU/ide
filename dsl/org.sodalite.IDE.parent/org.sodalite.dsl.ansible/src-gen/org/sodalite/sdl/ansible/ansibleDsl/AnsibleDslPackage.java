@@ -151,94 +151,13 @@ public interface AnsibleDslPackage extends EPackage
   int EBASE__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Base attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EBASE__PRIVILAGE_ESCALATION = 1;
-
-  /**
-   * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBASE__VALIDATION_MODE = 2;
-
-  /**
-   * The feature id for the '<em><b>Connection</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBASE__CONNECTION = 3;
-
-  /**
-   * The feature id for the '<em><b>No log</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBASE__NO_LOG = 4;
-
-  /**
-   * The feature id for the '<em><b>Debugger</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBASE__DEBUGGER = 5;
-
-  /**
-   * The feature id for the '<em><b>Module defaults</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBASE__MODULE_DEFAULTS = 6;
-
-  /**
-   * The feature id for the '<em><b>Environment</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBASE__ENVIRONMENT = 7;
-
-  /**
-   * The feature id for the '<em><b>Collections</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBASE__COLLECTIONS = 8;
-
-  /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBASE__TAGS = 9;
-
-  /**
-   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBASE__VARIABLE_DECLARATIONS = 10;
+  int EBASE__BASE_ATTRIBUTES = 1;
 
   /**
    * The number of structural features of the '<em>EBase</em>' class.
@@ -247,7 +166,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EBASE_FEATURE_COUNT = 11;
+  int EBASE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionImpl <em>EExecution</em>}' class.
@@ -269,121 +188,22 @@ public interface AnsibleDslPackage extends EPackage
   int EEXECUTION__NAME = EBASE__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Base attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EEXECUTION__PRIVILAGE_ESCALATION = EBASE__PRIVILAGE_ESCALATION;
+  int EEXECUTION__BASE_ATTRIBUTES = EBASE__BASE_ATTRIBUTES;
 
   /**
-   * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
+   * The feature id for the '<em><b>Execution attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EEXECUTION__VALIDATION_MODE = EBASE__VALIDATION_MODE;
-
-  /**
-   * The feature id for the '<em><b>Connection</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__CONNECTION = EBASE__CONNECTION;
-
-  /**
-   * The feature id for the '<em><b>No log</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__NO_LOG = EBASE__NO_LOG;
-
-  /**
-   * The feature id for the '<em><b>Debugger</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__DEBUGGER = EBASE__DEBUGGER;
-
-  /**
-   * The feature id for the '<em><b>Module defaults</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__MODULE_DEFAULTS = EBASE__MODULE_DEFAULTS;
-
-  /**
-   * The feature id for the '<em><b>Environment</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__ENVIRONMENT = EBASE__ENVIRONMENT;
-
-  /**
-   * The feature id for the '<em><b>Collections</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__COLLECTIONS = EBASE__COLLECTIONS;
-
-  /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__TAGS = EBASE__TAGS;
-
-  /**
-   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__VARIABLE_DECLARATIONS = EBASE__VARIABLE_DECLARATIONS;
-
-  /**
-   * The feature id for the '<em><b>Exe settings</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__EXE_SETTINGS = EBASE_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Delegation</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__DELEGATION = EBASE_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>When expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EEXECUTION__WHEN_EXPRESSION = EBASE_FEATURE_COUNT + 2;
+  int EEXECUTION__EXECUTION_ATTRIBUTES = EBASE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>EExecution</em>' class.
@@ -392,7 +212,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EEXECUTION_FEATURE_COUNT = EBASE_FEATURE_COUNT + 3;
+  int EEXECUTION_FEATURE_COUNT = EBASE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockTaskImpl <em>EBlock Task</em>}' class.
@@ -433,193 +253,31 @@ public interface AnsibleDslPackage extends EPackage
   int ETASK_HANDLER__NAME = EEXECUTION__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Base attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETASK_HANDLER__PRIVILAGE_ESCALATION = EEXECUTION__PRIVILAGE_ESCALATION;
+  int ETASK_HANDLER__BASE_ATTRIBUTES = EEXECUTION__BASE_ATTRIBUTES;
 
   /**
-   * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
+   * The feature id for the '<em><b>Execution attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETASK_HANDLER__VALIDATION_MODE = EEXECUTION__VALIDATION_MODE;
+  int ETASK_HANDLER__EXECUTION_ATTRIBUTES = EEXECUTION__EXECUTION_ATTRIBUTES;
 
   /**
-   * The feature id for the '<em><b>Connection</b></em>' containment reference.
+   * The feature id for the '<em><b>Task handler attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETASK_HANDLER__CONNECTION = EEXECUTION__CONNECTION;
-
-  /**
-   * The feature id for the '<em><b>No log</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__NO_LOG = EEXECUTION__NO_LOG;
-
-  /**
-   * The feature id for the '<em><b>Debugger</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__DEBUGGER = EEXECUTION__DEBUGGER;
-
-  /**
-   * The feature id for the '<em><b>Module defaults</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__MODULE_DEFAULTS = EEXECUTION__MODULE_DEFAULTS;
-
-  /**
-   * The feature id for the '<em><b>Environment</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__ENVIRONMENT = EEXECUTION__ENVIRONMENT;
-
-  /**
-   * The feature id for the '<em><b>Collections</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__COLLECTIONS = EEXECUTION__COLLECTIONS;
-
-  /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__TAGS = EEXECUTION__TAGS;
-
-  /**
-   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__VARIABLE_DECLARATIONS = EEXECUTION__VARIABLE_DECLARATIONS;
-
-  /**
-   * The feature id for the '<em><b>Exe settings</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__EXE_SETTINGS = EEXECUTION__EXE_SETTINGS;
-
-  /**
-   * The feature id for the '<em><b>Delegation</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__DELEGATION = EEXECUTION__DELEGATION;
-
-  /**
-   * The feature id for the '<em><b>When expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__WHEN_EXPRESSION = EEXECUTION__WHEN_EXPRESSION;
-
-  /**
-   * The feature id for the '<em><b>Error handling</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__ERROR_HANDLING = EEXECUTION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__ACTION = EEXECUTION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Asynchronous settings</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__ASYNCHRONOUS_SETTINGS = EEXECUTION_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Args</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__ARGS = EEXECUTION_FEATURE_COUNT + 3;
-
-  /**
-   * The feature id for the '<em><b>Module</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__MODULE = EEXECUTION_FEATURE_COUNT + 4;
-
-  /**
-   * The feature id for the '<em><b>Notifiables</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__NOTIFIABLES = EEXECUTION_FEATURE_COUNT + 5;
-
-  /**
-   * The feature id for the '<em><b>Loop</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__LOOP = EEXECUTION_FEATURE_COUNT + 6;
-
-  /**
-   * The feature id for the '<em><b>Register</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK_HANDLER__REGISTER = EEXECUTION_FEATURE_COUNT + 7;
+  int ETASK_HANDLER__TASK_HANDLER_ATTRIBUTES = EEXECUTION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>ETask Handler</em>' class.
@@ -628,7 +286,253 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ETASK_HANDLER_FEATURE_COUNT = EEXECUTION_FEATURE_COUNT + 8;
+  int ETASK_HANDLER_FEATURE_COUNT = EEXECUTION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseAttributesImpl <em>EBase Attributes</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseAttributesImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBaseAttributes()
+   * @generated
+   */
+  int EBASE_ATTRIBUTES = 6;
+
+  /**
+   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__PRIVILAGE_ESCALATION = 0;
+
+  /**
+   * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__VALIDATION_MODE = 1;
+
+  /**
+   * The feature id for the '<em><b>Connection</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__CONNECTION = 2;
+
+  /**
+   * The feature id for the '<em><b>No log</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__NO_LOG = 3;
+
+  /**
+   * The feature id for the '<em><b>Debugger</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__DEBUGGER = 4;
+
+  /**
+   * The feature id for the '<em><b>Module defaults</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__MODULE_DEFAULTS = 5;
+
+  /**
+   * The feature id for the '<em><b>Environment</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__ENVIRONMENT = 6;
+
+  /**
+   * The feature id for the '<em><b>Collections</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__COLLECTIONS = 7;
+
+  /**
+   * The feature id for the '<em><b>Tags</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__TAGS = 8;
+
+  /**
+   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES__VARIABLE_DECLARATIONS = 9;
+
+  /**
+   * The number of structural features of the '<em>EBase Attributes</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EBASE_ATTRIBUTES_FEATURE_COUNT = 10;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionAttributesImpl <em>EExecution Attributes</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionAttributesImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExecutionAttributes()
+   * @generated
+   */
+  int EEXECUTION_ATTRIBUTES = 7;
+
+  /**
+   * The feature id for the '<em><b>Exe settings</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEXECUTION_ATTRIBUTES__EXE_SETTINGS = 0;
+
+  /**
+   * The feature id for the '<em><b>Delegation</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEXECUTION_ATTRIBUTES__DELEGATION = 1;
+
+  /**
+   * The feature id for the '<em><b>When expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEXECUTION_ATTRIBUTES__WHEN_EXPRESSION = 2;
+
+  /**
+   * The number of structural features of the '<em>EExecution Attributes</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEXECUTION_ATTRIBUTES_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerAttributesImpl <em>ETask Handler Attributes</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerAttributesImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETaskHandlerAttributes()
+   * @generated
+   */
+  int ETASK_HANDLER_ATTRIBUTES = 8;
+
+  /**
+   * The feature id for the '<em><b>Error handling</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETASK_HANDLER_ATTRIBUTES__ERROR_HANDLING = 0;
+
+  /**
+   * The feature id for the '<em><b>Action</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETASK_HANDLER_ATTRIBUTES__ACTION = 1;
+
+  /**
+   * The feature id for the '<em><b>Asynchronous settings</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETASK_HANDLER_ATTRIBUTES__ASYNCHRONOUS_SETTINGS = 2;
+
+  /**
+   * The feature id for the '<em><b>Args</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETASK_HANDLER_ATTRIBUTES__ARGS = 3;
+
+  /**
+   * The feature id for the '<em><b>Module</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETASK_HANDLER_ATTRIBUTES__MODULE = 4;
+
+  /**
+   * The feature id for the '<em><b>Notifiables</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETASK_HANDLER_ATTRIBUTES__NOTIFIABLES = 5;
+
+  /**
+   * The feature id for the '<em><b>Loop</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETASK_HANDLER_ATTRIBUTES__LOOP = 6;
+
+  /**
+   * The feature id for the '<em><b>Register</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETASK_HANDLER_ATTRIBUTES__REGISTER = 7;
+
+  /**
+   * The number of structural features of the '<em>ETask Handler Attributes</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ETASK_HANDLER_ATTRIBUTES_FEATURE_COUNT = 8;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl <em>EPlay</em>}' class.
@@ -638,7 +542,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPlay()
    * @generated
    */
-  int EPLAY = 6;
+  int EPLAY = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -650,94 +554,13 @@ public interface AnsibleDslPackage extends EPackage
   int EPLAY__NAME = EBASE__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Base attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPLAY__PRIVILAGE_ESCALATION = EBASE__PRIVILAGE_ESCALATION;
-
-  /**
-   * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPLAY__VALIDATION_MODE = EBASE__VALIDATION_MODE;
-
-  /**
-   * The feature id for the '<em><b>Connection</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPLAY__CONNECTION = EBASE__CONNECTION;
-
-  /**
-   * The feature id for the '<em><b>No log</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPLAY__NO_LOG = EBASE__NO_LOG;
-
-  /**
-   * The feature id for the '<em><b>Debugger</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPLAY__DEBUGGER = EBASE__DEBUGGER;
-
-  /**
-   * The feature id for the '<em><b>Module defaults</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPLAY__MODULE_DEFAULTS = EBASE__MODULE_DEFAULTS;
-
-  /**
-   * The feature id for the '<em><b>Environment</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPLAY__ENVIRONMENT = EBASE__ENVIRONMENT;
-
-  /**
-   * The feature id for the '<em><b>Collections</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPLAY__COLLECTIONS = EBASE__COLLECTIONS;
-
-  /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPLAY__TAGS = EBASE__TAGS;
-
-  /**
-   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EPLAY__VARIABLE_DECLARATIONS = EBASE__VARIABLE_DECLARATIONS;
+  int EPLAY__BASE_ATTRIBUTES = EBASE__BASE_ATTRIBUTES;
 
   /**
    * The feature id for the '<em><b>Play exe settings</b></em>' containment reference.
@@ -855,7 +678,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBlock()
    * @generated
    */
-  int EBLOCK = 7;
+  int EBLOCK = 10;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -867,121 +690,22 @@ public interface AnsibleDslPackage extends EPackage
   int EBLOCK__NAME = EEXECUTION__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Base attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EBLOCK__PRIVILAGE_ESCALATION = EEXECUTION__PRIVILAGE_ESCALATION;
+  int EBLOCK__BASE_ATTRIBUTES = EEXECUTION__BASE_ATTRIBUTES;
 
   /**
-   * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
+   * The feature id for the '<em><b>Execution attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EBLOCK__VALIDATION_MODE = EEXECUTION__VALIDATION_MODE;
-
-  /**
-   * The feature id for the '<em><b>Connection</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__CONNECTION = EEXECUTION__CONNECTION;
-
-  /**
-   * The feature id for the '<em><b>No log</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__NO_LOG = EEXECUTION__NO_LOG;
-
-  /**
-   * The feature id for the '<em><b>Debugger</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__DEBUGGER = EEXECUTION__DEBUGGER;
-
-  /**
-   * The feature id for the '<em><b>Module defaults</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__MODULE_DEFAULTS = EEXECUTION__MODULE_DEFAULTS;
-
-  /**
-   * The feature id for the '<em><b>Environment</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__ENVIRONMENT = EEXECUTION__ENVIRONMENT;
-
-  /**
-   * The feature id for the '<em><b>Collections</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__COLLECTIONS = EEXECUTION__COLLECTIONS;
-
-  /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__TAGS = EEXECUTION__TAGS;
-
-  /**
-   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__VARIABLE_DECLARATIONS = EEXECUTION__VARIABLE_DECLARATIONS;
-
-  /**
-   * The feature id for the '<em><b>Exe settings</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__EXE_SETTINGS = EEXECUTION__EXE_SETTINGS;
-
-  /**
-   * The feature id for the '<em><b>Delegation</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__DELEGATION = EEXECUTION__DELEGATION;
-
-  /**
-   * The feature id for the '<em><b>When expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EBLOCK__WHEN_EXPRESSION = EEXECUTION__WHEN_EXPRESSION;
+  int EBLOCK__EXECUTION_ATTRIBUTES = EEXECUTION__EXECUTION_ATTRIBUTES;
 
   /**
    * The feature id for the '<em><b>Error handling</b></em>' containment reference.
@@ -1036,7 +760,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETask()
    * @generated
    */
-  int ETASK = 8;
+  int ETASK = 11;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1048,193 +772,31 @@ public interface AnsibleDslPackage extends EPackage
   int ETASK__NAME = EBLOCK_TASK_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Base attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETASK__PRIVILAGE_ESCALATION = EBLOCK_TASK_FEATURE_COUNT + 1;
+  int ETASK__BASE_ATTRIBUTES = EBLOCK_TASK_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
+   * The feature id for the '<em><b>Execution attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETASK__VALIDATION_MODE = EBLOCK_TASK_FEATURE_COUNT + 2;
+  int ETASK__EXECUTION_ATTRIBUTES = EBLOCK_TASK_FEATURE_COUNT + 2;
 
   /**
-   * The feature id for the '<em><b>Connection</b></em>' containment reference.
+   * The feature id for the '<em><b>Task handler attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETASK__CONNECTION = EBLOCK_TASK_FEATURE_COUNT + 3;
-
-  /**
-   * The feature id for the '<em><b>No log</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__NO_LOG = EBLOCK_TASK_FEATURE_COUNT + 4;
-
-  /**
-   * The feature id for the '<em><b>Debugger</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__DEBUGGER = EBLOCK_TASK_FEATURE_COUNT + 5;
-
-  /**
-   * The feature id for the '<em><b>Module defaults</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__MODULE_DEFAULTS = EBLOCK_TASK_FEATURE_COUNT + 6;
-
-  /**
-   * The feature id for the '<em><b>Environment</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__ENVIRONMENT = EBLOCK_TASK_FEATURE_COUNT + 7;
-
-  /**
-   * The feature id for the '<em><b>Collections</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__COLLECTIONS = EBLOCK_TASK_FEATURE_COUNT + 8;
-
-  /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__TAGS = EBLOCK_TASK_FEATURE_COUNT + 9;
-
-  /**
-   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__VARIABLE_DECLARATIONS = EBLOCK_TASK_FEATURE_COUNT + 10;
-
-  /**
-   * The feature id for the '<em><b>Exe settings</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__EXE_SETTINGS = EBLOCK_TASK_FEATURE_COUNT + 11;
-
-  /**
-   * The feature id for the '<em><b>Delegation</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__DELEGATION = EBLOCK_TASK_FEATURE_COUNT + 12;
-
-  /**
-   * The feature id for the '<em><b>When expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__WHEN_EXPRESSION = EBLOCK_TASK_FEATURE_COUNT + 13;
-
-  /**
-   * The feature id for the '<em><b>Error handling</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__ERROR_HANDLING = EBLOCK_TASK_FEATURE_COUNT + 14;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__ACTION = EBLOCK_TASK_FEATURE_COUNT + 15;
-
-  /**
-   * The feature id for the '<em><b>Asynchronous settings</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__ASYNCHRONOUS_SETTINGS = EBLOCK_TASK_FEATURE_COUNT + 16;
-
-  /**
-   * The feature id for the '<em><b>Args</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__ARGS = EBLOCK_TASK_FEATURE_COUNT + 17;
-
-  /**
-   * The feature id for the '<em><b>Module</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__MODULE = EBLOCK_TASK_FEATURE_COUNT + 18;
-
-  /**
-   * The feature id for the '<em><b>Notifiables</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__NOTIFIABLES = EBLOCK_TASK_FEATURE_COUNT + 19;
-
-  /**
-   * The feature id for the '<em><b>Loop</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__LOOP = EBLOCK_TASK_FEATURE_COUNT + 20;
-
-  /**
-   * The feature id for the '<em><b>Register</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETASK__REGISTER = EBLOCK_TASK_FEATURE_COUNT + 21;
+  int ETASK__TASK_HANDLER_ATTRIBUTES = EBLOCK_TASK_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>ETask</em>' class.
@@ -1243,7 +805,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ETASK_FEATURE_COUNT = EBLOCK_TASK_FEATURE_COUNT + 22;
+  int ETASK_FEATURE_COUNT = EBLOCK_TASK_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl <em>EHandler</em>}' class.
@@ -1253,7 +815,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEHandler()
    * @generated
    */
-  int EHANDLER = 9;
+  int EHANDLER = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1265,193 +827,31 @@ public interface AnsibleDslPackage extends EPackage
   int EHANDLER__NAME = ETASK_HANDLER__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Base attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EHANDLER__PRIVILAGE_ESCALATION = ETASK_HANDLER__PRIVILAGE_ESCALATION;
+  int EHANDLER__BASE_ATTRIBUTES = ETASK_HANDLER__BASE_ATTRIBUTES;
 
   /**
-   * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
+   * The feature id for the '<em><b>Execution attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EHANDLER__VALIDATION_MODE = ETASK_HANDLER__VALIDATION_MODE;
+  int EHANDLER__EXECUTION_ATTRIBUTES = ETASK_HANDLER__EXECUTION_ATTRIBUTES;
 
   /**
-   * The feature id for the '<em><b>Connection</b></em>' containment reference.
+   * The feature id for the '<em><b>Task handler attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EHANDLER__CONNECTION = ETASK_HANDLER__CONNECTION;
-
-  /**
-   * The feature id for the '<em><b>No log</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__NO_LOG = ETASK_HANDLER__NO_LOG;
-
-  /**
-   * The feature id for the '<em><b>Debugger</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__DEBUGGER = ETASK_HANDLER__DEBUGGER;
-
-  /**
-   * The feature id for the '<em><b>Module defaults</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__MODULE_DEFAULTS = ETASK_HANDLER__MODULE_DEFAULTS;
-
-  /**
-   * The feature id for the '<em><b>Environment</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__ENVIRONMENT = ETASK_HANDLER__ENVIRONMENT;
-
-  /**
-   * The feature id for the '<em><b>Collections</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__COLLECTIONS = ETASK_HANDLER__COLLECTIONS;
-
-  /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__TAGS = ETASK_HANDLER__TAGS;
-
-  /**
-   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__VARIABLE_DECLARATIONS = ETASK_HANDLER__VARIABLE_DECLARATIONS;
-
-  /**
-   * The feature id for the '<em><b>Exe settings</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__EXE_SETTINGS = ETASK_HANDLER__EXE_SETTINGS;
-
-  /**
-   * The feature id for the '<em><b>Delegation</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__DELEGATION = ETASK_HANDLER__DELEGATION;
-
-  /**
-   * The feature id for the '<em><b>When expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__WHEN_EXPRESSION = ETASK_HANDLER__WHEN_EXPRESSION;
-
-  /**
-   * The feature id for the '<em><b>Error handling</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__ERROR_HANDLING = ETASK_HANDLER__ERROR_HANDLING;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__ACTION = ETASK_HANDLER__ACTION;
-
-  /**
-   * The feature id for the '<em><b>Asynchronous settings</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__ASYNCHRONOUS_SETTINGS = ETASK_HANDLER__ASYNCHRONOUS_SETTINGS;
-
-  /**
-   * The feature id for the '<em><b>Args</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__ARGS = ETASK_HANDLER__ARGS;
-
-  /**
-   * The feature id for the '<em><b>Module</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__MODULE = ETASK_HANDLER__MODULE;
-
-  /**
-   * The feature id for the '<em><b>Notifiables</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__NOTIFIABLES = ETASK_HANDLER__NOTIFIABLES;
-
-  /**
-   * The feature id for the '<em><b>Loop</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__LOOP = ETASK_HANDLER__LOOP;
-
-  /**
-   * The feature id for the '<em><b>Register</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EHANDLER__REGISTER = ETASK_HANDLER__REGISTER;
+  int EHANDLER__TASK_HANDLER_ATTRIBUTES = ETASK_HANDLER__TASK_HANDLER_ATTRIBUTES;
 
   /**
    * The feature id for the '<em><b>Listen to</b></em>' reference list.
@@ -1479,7 +879,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEModuleCall()
    * @generated
    */
-  int EMODULE_CALL = 10;
+  int EMODULE_CALL = 13;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1516,7 +916,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEParameter()
    * @generated
    */
-  int EPARAMETER = 11;
+  int EPARAMETER = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1553,7 +953,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleInclusion()
    * @generated
    */
-  int EROLE_INCLUSION = 12;
+  int EROLE_INCLUSION = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1565,121 +965,22 @@ public interface AnsibleDslPackage extends EPackage
   int EROLE_INCLUSION__NAME = EEXECUTION__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Base attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EROLE_INCLUSION__PRIVILAGE_ESCALATION = EEXECUTION__PRIVILAGE_ESCALATION;
+  int EROLE_INCLUSION__BASE_ATTRIBUTES = EEXECUTION__BASE_ATTRIBUTES;
 
   /**
-   * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
+   * The feature id for the '<em><b>Execution attributes</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EROLE_INCLUSION__VALIDATION_MODE = EEXECUTION__VALIDATION_MODE;
-
-  /**
-   * The feature id for the '<em><b>Connection</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__CONNECTION = EEXECUTION__CONNECTION;
-
-  /**
-   * The feature id for the '<em><b>No log</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__NO_LOG = EEXECUTION__NO_LOG;
-
-  /**
-   * The feature id for the '<em><b>Debugger</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__DEBUGGER = EEXECUTION__DEBUGGER;
-
-  /**
-   * The feature id for the '<em><b>Module defaults</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__MODULE_DEFAULTS = EEXECUTION__MODULE_DEFAULTS;
-
-  /**
-   * The feature id for the '<em><b>Environment</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__ENVIRONMENT = EEXECUTION__ENVIRONMENT;
-
-  /**
-   * The feature id for the '<em><b>Collections</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__COLLECTIONS = EEXECUTION__COLLECTIONS;
-
-  /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__TAGS = EEXECUTION__TAGS;
-
-  /**
-   * The feature id for the '<em><b>Variable declarations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__VARIABLE_DECLARATIONS = EEXECUTION__VARIABLE_DECLARATIONS;
-
-  /**
-   * The feature id for the '<em><b>Exe settings</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__EXE_SETTINGS = EEXECUTION__EXE_SETTINGS;
-
-  /**
-   * The feature id for the '<em><b>Delegation</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__DELEGATION = EEXECUTION__DELEGATION;
-
-  /**
-   * The feature id for the '<em><b>When expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EROLE_INCLUSION__WHEN_EXPRESSION = EEXECUTION__WHEN_EXPRESSION;
+  int EROLE_INCLUSION__EXECUTION_ATTRIBUTES = EEXECUTION__EXECUTION_ATTRIBUTES;
 
   /**
    * The number of structural features of the '<em>ERole Inclusion</em>' class.
@@ -1698,7 +999,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERoleInclusions()
    * @generated
    */
-  int EROLE_INCLUSIONS = 13;
+  int EROLE_INCLUSIONS = 16;
 
   /**
    * The feature id for the '<em><b>Roles</b></em>' containment reference list.
@@ -1726,7 +1027,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoop()
    * @generated
    */
-  int ELOOP = 14;
+  int ELOOP = 17;
 
   /**
    * The number of structural features of the '<em>ELoop</em>' class.
@@ -1745,7 +1046,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoopOverList()
    * @generated
    */
-  int ELOOP_OVER_LIST = 15;
+  int ELOOP_OVER_LIST = 18;
 
   /**
    * The feature id for the '<em><b>Loop list</b></em>' containment reference.
@@ -1782,7 +1083,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getELoopControl()
    * @generated
    */
-  int ELOOP_CONTROL = 16;
+  int ELOOP_CONTROL = 19;
 
   /**
    * The feature id for the '<em><b>Label</b></em>' containment reference.
@@ -1846,7 +1147,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEUntil()
    * @generated
    */
-  int EUNTIL = 17;
+  int EUNTIL = 20;
 
   /**
    * The feature id for the '<em><b>Until</b></em>' containment reference.
@@ -1892,7 +1193,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPrivilageEscalation()
    * @generated
    */
-  int EPRIVILAGE_ESCALATION = 18;
+  int EPRIVILAGE_ESCALATION = 21;
 
   /**
    * The feature id for the '<em><b>Become</b></em>' attribute.
@@ -1956,7 +1257,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValidationMode()
    * @generated
    */
-  int EVALIDATION_MODE = 19;
+  int EVALIDATION_MODE = 22;
 
   /**
    * The feature id for the '<em><b>Check mode</b></em>' attribute.
@@ -1993,7 +1294,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEConnection()
    * @generated
    */
-  int ECONNECTION = 20;
+  int ECONNECTION = 23;
 
   /**
    * The feature id for the '<em><b>Connection</b></em>' attribute.
@@ -2039,7 +1340,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExeSettings()
    * @generated
    */
-  int EEXE_SETTINGS = 21;
+  int EEXE_SETTINGS = 24;
 
   /**
    * The feature id for the '<em><b>Throttle</b></em>' attribute.
@@ -2076,7 +1377,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPlayExeSettings()
    * @generated
    */
-  int EPLAY_EXE_SETTINGS = 22;
+  int EPLAY_EXE_SETTINGS = 25;
 
   /**
    * The feature id for the '<em><b>Throttle</b></em>' attribute.
@@ -2140,7 +1441,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExecutionExeSettings()
    * @generated
    */
-  int EEXECUTION_EXE_SETTINGS = 23;
+  int EEXECUTION_EXE_SETTINGS = 26;
 
   /**
    * The feature id for the '<em><b>Throttle</b></em>' attribute.
@@ -2177,7 +1478,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEErrorHandling()
    * @generated
    */
-  int EERROR_HANDLING = 24;
+  int EERROR_HANDLING = 27;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -2223,7 +1524,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBlockErrorHandling()
    * @generated
    */
-  int EBLOCK_ERROR_HANDLING = 25;
+  int EBLOCK_ERROR_HANDLING = 28;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -2269,7 +1570,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPlayErrorHandling()
    * @generated
    */
-  int EPLAY_ERROR_HANDLING = 26;
+  int EPLAY_ERROR_HANDLING = 29;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -2324,7 +1625,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETaskHandlerErrorHandling()
    * @generated
    */
-  int ETASK_HANDLER_ERROR_HANDLING = 27;
+  int ETASK_HANDLER_ERROR_HANDLING = 30;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' attribute.
@@ -2388,7 +1689,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFactsSettings()
    * @generated
    */
-  int EFACTS_SETTINGS = 28;
+  int EFACTS_SETTINGS = 31;
 
   /**
    * The feature id for the '<em><b>Gather facts</b></em>' attribute.
@@ -2443,7 +1744,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDelegation()
    * @generated
    */
-  int EDELEGATION = 29;
+  int EDELEGATION = 32;
 
   /**
    * The feature id for the '<em><b>Delegate to</b></em>' attribute.
@@ -2480,7 +1781,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEAsynchronousSettings()
    * @generated
    */
-  int EASYNCHRONOUS_SETTINGS = 30;
+  int EASYNCHRONOUS_SETTINGS = 33;
 
   /**
    * The feature id for the '<em><b>Async</b></em>' attribute.
@@ -2517,7 +1818,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENotifiable()
    * @generated
    */
-  int ENOTIFIABLE = 31;
+  int ENOTIFIABLE = 34;
 
   /**
    * The number of structural features of the '<em>ENotifiable</em>' class.
@@ -2536,7 +1837,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENotifiedHandler()
    * @generated
    */
-  int ENOTIFIED_HANDLER = 32;
+  int ENOTIFIED_HANDLER = 35;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -2564,7 +1865,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENotifiedTopic()
    * @generated
    */
-  int ENOTIFIED_TOPIC = 33;
+  int ENOTIFIED_TOPIC = 36;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2592,7 +1893,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionOrString()
    * @generated
    */
-  int EJINJA_EXPRESSION_OR_STRING = 34;
+  int EJINJA_EXPRESSION_OR_STRING = 37;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -2620,7 +1921,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValuePassed()
    * @generated
    */
-  int EVALUE_PASSED = 36;
+  int EVALUE_PASSED = 39;
 
   /**
    * The number of structural features of the '<em>EValue Passed</em>' class.
@@ -2639,7 +1940,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionAndString()
    * @generated
    */
-  int EJINJA_EXPRESSION_AND_STRING = 35;
+  int EJINJA_EXPRESSION_AND_STRING = 38;
 
   /**
    * The feature id for the '<em><b>Jinja expression and string</b></em>' containment reference list.
@@ -2667,7 +1968,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValuePassedToJinjaExpression()
    * @generated
    */
-  int EVALUE_PASSED_TO_JINJA_EXPRESSION = 37;
+  int EVALUE_PASSED_TO_JINJA_EXPRESSION = 40;
 
   /**
    * The number of structural features of the '<em>EValue Passed To Jinja Expression</em>' class.
@@ -2686,7 +1987,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValue()
    * @generated
    */
-  int EVALUE = 39;
+  int EVALUE = 42;
 
   /**
    * The number of structural features of the '<em>EValue</em>' class.
@@ -2705,7 +2006,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEComposedValue()
    * @generated
    */
-  int ECOMPOSED_VALUE = 38;
+  int ECOMPOSED_VALUE = 41;
 
   /**
    * The number of structural features of the '<em>EComposed Value</em>' class.
@@ -2724,7 +2025,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEValueWithoutString()
    * @generated
    */
-  int EVALUE_WITHOUT_STRING = 40;
+  int EVALUE_WITHOUT_STRING = 43;
 
   /**
    * The number of structural features of the '<em>EValue Without String</em>' class.
@@ -2743,7 +2044,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESimpleValueWithoutString()
    * @generated
    */
-  int ESIMPLE_VALUE_WITHOUT_STRING = 41;
+  int ESIMPLE_VALUE_WITHOUT_STRING = 44;
 
   /**
    * The feature id for the '<em><b>Simple value</b></em>' attribute.
@@ -2771,7 +2072,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESimpleValue()
    * @generated
    */
-  int ESIMPLE_VALUE = 42;
+  int ESIMPLE_VALUE = 45;
 
   /**
    * The feature id for the '<em><b>Simple value string</b></em>' attribute.
@@ -2808,7 +2109,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEItem()
    * @generated
    */
-  int EITEM = 43;
+  int EITEM = 46;
 
   /**
    * The feature id for the '<em><b>Tail</b></em>' attribute list.
@@ -2836,7 +2137,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionEvaluation()
    * @generated
    */
-  int EJINJA_EXPRESSION_EVALUATION = 44;
+  int EJINJA_EXPRESSION_EVALUATION = 47;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -2873,7 +2174,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionEvaluationWithoutBrackets()
    * @generated
    */
-  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS = 45;
+  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS = 48;
 
   /**
    * The number of structural features of the '<em>EJinja Expression Evaluation Without Brackets</em>' class.
@@ -2892,7 +2193,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFunctionCall()
    * @generated
    */
-  int EFUNCTION_CALL = 46;
+  int EFUNCTION_CALL = 49;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2929,7 +2230,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredExpression()
    * @generated
    */
-  int EFILTERED_EXPRESSION = 47;
+  int EFILTERED_EXPRESSION = 50;
 
   /**
    * The feature id for the '<em><b>To filter</b></em>' containment reference.
@@ -2975,7 +2276,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEOrExpression()
    * @generated
    */
-  int EOR_EXPRESSION = 48;
+  int EOR_EXPRESSION = 51;
 
   /**
    * The feature id for the '<em><b>Left or</b></em>' containment reference.
@@ -3012,7 +2313,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEAndExpression()
    * @generated
    */
-  int EAND_EXPRESSION = 49;
+  int EAND_EXPRESSION = 52;
 
   /**
    * The feature id for the '<em><b>Left and</b></em>' containment reference.
@@ -3049,7 +2350,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETruthExpression()
    * @generated
    */
-  int ETRUTH_EXPRESSION = 50;
+  int ETRUTH_EXPRESSION = 53;
 
   /**
    * The feature id for the '<em><b>Left value</b></em>' containment reference.
@@ -3095,7 +2396,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEOperation()
    * @generated
    */
-  int EOPERATION = 51;
+  int EOPERATION = 54;
 
   /**
    * The feature id for the '<em><b>Left operand</b></em>' containment reference.
@@ -3141,7 +2442,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIsExpression()
    * @generated
    */
-  int EIS_EXPRESSION = 52;
+  int EIS_EXPRESSION = 55;
 
   /**
    * The feature id for the '<em><b>Parenthesised expression</b></em>' containment reference.
@@ -3196,7 +2497,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEParenthesisedExpression()
    * @generated
    */
-  int EPARENTHESISED_EXPRESSION = 53;
+  int EPARENTHESISED_EXPRESSION = 56;
 
   /**
    * The feature id for the '<em><b>Basic value</b></em>' containment reference.
@@ -3233,7 +2534,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIfExpression()
    * @generated
    */
-  int EIF_EXPRESSION = 54;
+  int EIF_EXPRESSION = 57;
 
   /**
    * The feature id for the '<em><b>If expression</b></em>' containment reference.
@@ -3279,7 +2580,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairReference()
    * @generated
    */
-  int EDICTIONARY_PAIR_REFERENCE = 55;
+  int EDICTIONARY_PAIR_REFERENCE = 58;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -3316,7 +2617,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableReference()
    * @generated
    */
-  int EVARIABLE_REFERENCE = 61;
+  int EVARIABLE_REFERENCE = 64;
 
   /**
    * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -3344,7 +2645,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclarationVariableReference()
    * @generated
    */
-  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE = 56;
+  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE = 59;
 
   /**
    * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -3390,7 +2691,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariableReference()
    * @generated
    */
-  int EREGISTER_VARIABLE_REFERENCE = 57;
+  int EREGISTER_VARIABLE_REFERENCE = 60;
 
   /**
    * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -3436,7 +2737,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclaration()
    * @generated
    */
-  int EVARIABLE_DECLARATION = 58;
+  int EVARIABLE_DECLARATION = 61;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3473,7 +2774,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariable()
    * @generated
    */
-  int EREGISTER_VARIABLE = 59;
+  int EREGISTER_VARIABLE = 62;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3501,7 +2802,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEInputVariableReference()
    * @generated
    */
-  int EINPUT_VARIABLE_REFERENCE = 60;
+  int EINPUT_VARIABLE_REFERENCE = 63;
 
   /**
    * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -3547,7 +2848,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFactGathered()
    * @generated
    */
-  int EFACT_GATHERED = 62;
+  int EFACT_GATHERED = 65;
 
   /**
    * The feature id for the '<em><b>Tail</b></em>' attribute list.
@@ -3575,7 +2876,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 63;
+  int EDICTIONARY = 66;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -3603,7 +2904,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 64;
+  int EDICTIONARY_PAIR = 67;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3640,7 +2941,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 65;
+  int ELIST = 68;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -3747,114 +3048,15 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getEBase_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilage_escalation <em>Privilage escalation</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getBase_attributes <em>Base attributes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Privilage escalation</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilage_escalation()
+   * @return the meta object for the containment reference '<em>Base attributes</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getBase_attributes()
    * @see #getEBase()
    * @generated
    */
-  EReference getEBase_Privilage_escalation();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getValidation_mode <em>Validation mode</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Validation mode</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getValidation_mode()
-   * @see #getEBase()
-   * @generated
-   */
-  EReference getEBase_Validation_mode();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getConnection <em>Connection</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Connection</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getConnection()
-   * @see #getEBase()
-   * @generated
-   */
-  EReference getEBase_Connection();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getNo_log <em>No log</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>No log</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getNo_log()
-   * @see #getEBase()
-   * @generated
-   */
-  EAttribute getEBase_No_log();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getDebugger <em>Debugger</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Debugger</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getDebugger()
-   * @see #getEBase()
-   * @generated
-   */
-  EAttribute getEBase_Debugger();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getModule_defaults <em>Module defaults</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Module defaults</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getModule_defaults()
-   * @see #getEBase()
-   * @generated
-   */
-  EReference getEBase_Module_defaults();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getEnvironment <em>Environment</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Environment</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getEnvironment()
-   * @see #getEBase()
-   * @generated
-   */
-  EReference getEBase_Environment();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getCollections <em>Collections</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Collections</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getCollections()
-   * @see #getEBase()
-   * @generated
-   */
-  EReference getEBase_Collections();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getTags <em>Tags</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Tags</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getTags()
-   * @see #getEBase()
-   * @generated
-   */
-  EReference getEBase_Tags();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getVariable_declarations <em>Variable declarations</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Variable declarations</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getVariable_declarations()
-   * @see #getEBase()
-   * @generated
-   */
-  EReference getEBase_Variable_declarations();
+  EReference getEBase_Base_attributes();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution <em>EExecution</em>}'.
@@ -3867,37 +3069,15 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEExecution();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getExe_settings <em>Exe settings</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getExecution_attributes <em>Execution attributes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Exe settings</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecution#getExe_settings()
+   * @return the meta object for the containment reference '<em>Execution attributes</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecution#getExecution_attributes()
    * @see #getEExecution()
    * @generated
    */
-  EReference getEExecution_Exe_settings();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getDelegation <em>Delegation</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Delegation</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecution#getDelegation()
-   * @see #getEExecution()
-   * @generated
-   */
-  EReference getEExecution_Delegation();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getWhen_expression <em>When expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>When expression</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecution#getWhen_expression()
-   * @see #getEExecution()
-   * @generated
-   */
-  EReference getEExecution_When_expression();
+  EReference getEExecution_Execution_attributes();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlockTask <em>EBlock Task</em>}'.
@@ -3920,92 +3100,276 @@ public interface AnsibleDslPackage extends EPackage
   EClass getETaskHandler();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getError_handling <em>Error handling</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getTask_handler_attributes <em>Task handler attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Task handler attributes</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getTask_handler_attributes()
+   * @see #getETaskHandler()
+   * @generated
+   */
+  EReference getETaskHandler_Task_handler_attributes();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes <em>EBase Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EBase Attributes</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes
+   * @generated
+   */
+  EClass getEBaseAttributes();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getPrivilage_escalation <em>Privilage escalation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Privilage escalation</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getPrivilage_escalation()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EReference getEBaseAttributes_Privilage_escalation();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getValidation_mode <em>Validation mode</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Validation mode</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getValidation_mode()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EReference getEBaseAttributes_Validation_mode();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getConnection <em>Connection</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Connection</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getConnection()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EReference getEBaseAttributes_Connection();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getNo_log <em>No log</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>No log</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getNo_log()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EAttribute getEBaseAttributes_No_log();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getDebugger <em>Debugger</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Debugger</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getDebugger()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EAttribute getEBaseAttributes_Debugger();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getModule_defaults <em>Module defaults</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Module defaults</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getModule_defaults()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EReference getEBaseAttributes_Module_defaults();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getEnvironment <em>Environment</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Environment</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getEnvironment()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EReference getEBaseAttributes_Environment();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getCollections <em>Collections</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Collections</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getCollections()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EReference getEBaseAttributes_Collections();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getTags <em>Tags</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Tags</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getTags()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EReference getEBaseAttributes_Tags();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getVariable_declarations <em>Variable declarations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Variable declarations</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getVariable_declarations()
+   * @see #getEBaseAttributes()
+   * @generated
+   */
+  EReference getEBaseAttributes_Variable_declarations();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes <em>EExecution Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EExecution Attributes</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes
+   * @generated
+   */
+  EClass getEExecutionAttributes();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes#getExe_settings <em>Exe settings</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Exe settings</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes#getExe_settings()
+   * @see #getEExecutionAttributes()
+   * @generated
+   */
+  EReference getEExecutionAttributes_Exe_settings();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes#getDelegation <em>Delegation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Delegation</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes#getDelegation()
+   * @see #getEExecutionAttributes()
+   * @generated
+   */
+  EReference getEExecutionAttributes_Delegation();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes#getWhen_expression <em>When expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>When expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes#getWhen_expression()
+   * @see #getEExecutionAttributes()
+   * @generated
+   */
+  EReference getEExecutionAttributes_When_expression();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes <em>ETask Handler Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ETask Handler Attributes</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes
+   * @generated
+   */
+  EClass getETaskHandlerAttributes();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getError_handling <em>Error handling</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Error handling</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getError_handling()
-   * @see #getETaskHandler()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getError_handling()
+   * @see #getETaskHandlerAttributes()
    * @generated
    */
-  EReference getETaskHandler_Error_handling();
+  EReference getETaskHandlerAttributes_Error_handling();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getAction <em>Action</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getAction <em>Action</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Action</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getAction()
-   * @see #getETaskHandler()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getAction()
+   * @see #getETaskHandlerAttributes()
    * @generated
    */
-  EAttribute getETaskHandler_Action();
+  EAttribute getETaskHandlerAttributes_Action();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getAsynchronous_settings <em>Asynchronous settings</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getAsynchronous_settings <em>Asynchronous settings</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Asynchronous settings</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getAsynchronous_settings()
-   * @see #getETaskHandler()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getAsynchronous_settings()
+   * @see #getETaskHandlerAttributes()
    * @generated
    */
-  EReference getETaskHandler_Asynchronous_settings();
+  EReference getETaskHandlerAttributes_Asynchronous_settings();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getArgs <em>Args</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getArgs <em>Args</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Args</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getArgs()
-   * @see #getETaskHandler()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getArgs()
+   * @see #getETaskHandlerAttributes()
    * @generated
    */
-  EReference getETaskHandler_Args();
+  EReference getETaskHandlerAttributes_Args();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getModule <em>Module</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getModule <em>Module</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Module</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getModule()
-   * @see #getETaskHandler()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getModule()
+   * @see #getETaskHandlerAttributes()
    * @generated
    */
-  EReference getETaskHandler_Module();
+  EReference getETaskHandlerAttributes_Module();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getNotifiables <em>Notifiables</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getNotifiables <em>Notifiables</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Notifiables</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getNotifiables()
-   * @see #getETaskHandler()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getNotifiables()
+   * @see #getETaskHandlerAttributes()
    * @generated
    */
-  EReference getETaskHandler_Notifiables();
+  EReference getETaskHandlerAttributes_Notifiables();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getLoop <em>Loop</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getLoop <em>Loop</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Loop</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getLoop()
-   * @see #getETaskHandler()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getLoop()
+   * @see #getETaskHandlerAttributes()
    * @generated
    */
-  EReference getETaskHandler_Loop();
+  EReference getETaskHandlerAttributes_Loop();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getRegister <em>Register</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getRegister <em>Register</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Register</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getRegister()
-   * @see #getETaskHandler()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getRegister()
+   * @see #getETaskHandlerAttributes()
    * @generated
    */
-  EReference getETaskHandler_Register();
+  EReference getETaskHandlerAttributes_Register();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay <em>EPlay</em>}'.
@@ -5911,84 +5275,12 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute EBASE__NAME = eINSTANCE.getEBase_Name();
 
     /**
-     * The meta object literal for the '<em><b>Privilage escalation</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Base attributes</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EBASE__PRIVILAGE_ESCALATION = eINSTANCE.getEBase_Privilage_escalation();
-
-    /**
-     * The meta object literal for the '<em><b>Validation mode</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EBASE__VALIDATION_MODE = eINSTANCE.getEBase_Validation_mode();
-
-    /**
-     * The meta object literal for the '<em><b>Connection</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EBASE__CONNECTION = eINSTANCE.getEBase_Connection();
-
-    /**
-     * The meta object literal for the '<em><b>No log</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EBASE__NO_LOG = eINSTANCE.getEBase_No_log();
-
-    /**
-     * The meta object literal for the '<em><b>Debugger</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EBASE__DEBUGGER = eINSTANCE.getEBase_Debugger();
-
-    /**
-     * The meta object literal for the '<em><b>Module defaults</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EBASE__MODULE_DEFAULTS = eINSTANCE.getEBase_Module_defaults();
-
-    /**
-     * The meta object literal for the '<em><b>Environment</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EBASE__ENVIRONMENT = eINSTANCE.getEBase_Environment();
-
-    /**
-     * The meta object literal for the '<em><b>Collections</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EBASE__COLLECTIONS = eINSTANCE.getEBase_Collections();
-
-    /**
-     * The meta object literal for the '<em><b>Tags</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EBASE__TAGS = eINSTANCE.getEBase_Tags();
-
-    /**
-     * The meta object literal for the '<em><b>Variable declarations</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EBASE__VARIABLE_DECLARATIONS = eINSTANCE.getEBase_Variable_declarations();
+    EReference EBASE__BASE_ATTRIBUTES = eINSTANCE.getEBase_Base_attributes();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionImpl <em>EExecution</em>}' class.
@@ -6001,28 +5293,12 @@ public interface AnsibleDslPackage extends EPackage
     EClass EEXECUTION = eINSTANCE.getEExecution();
 
     /**
-     * The meta object literal for the '<em><b>Exe settings</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Execution attributes</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EEXECUTION__EXE_SETTINGS = eINSTANCE.getEExecution_Exe_settings();
-
-    /**
-     * The meta object literal for the '<em><b>Delegation</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EEXECUTION__DELEGATION = eINSTANCE.getEExecution_Delegation();
-
-    /**
-     * The meta object literal for the '<em><b>When expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EEXECUTION__WHEN_EXPRESSION = eINSTANCE.getEExecution_When_expression();
+    EReference EEXECUTION__EXECUTION_ATTRIBUTES = eINSTANCE.getEExecution_Execution_attributes();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockTaskImpl <em>EBlock Task</em>}' class.
@@ -6045,12 +5321,154 @@ public interface AnsibleDslPackage extends EPackage
     EClass ETASK_HANDLER = eINSTANCE.getETaskHandler();
 
     /**
+     * The meta object literal for the '<em><b>Task handler attributes</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETASK_HANDLER__TASK_HANDLER_ATTRIBUTES = eINSTANCE.getETaskHandler_Task_handler_attributes();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseAttributesImpl <em>EBase Attributes</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseAttributesImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBaseAttributes()
+     * @generated
+     */
+    EClass EBASE_ATTRIBUTES = eINSTANCE.getEBaseAttributes();
+
+    /**
+     * The meta object literal for the '<em><b>Privilage escalation</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EBASE_ATTRIBUTES__PRIVILAGE_ESCALATION = eINSTANCE.getEBaseAttributes_Privilage_escalation();
+
+    /**
+     * The meta object literal for the '<em><b>Validation mode</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EBASE_ATTRIBUTES__VALIDATION_MODE = eINSTANCE.getEBaseAttributes_Validation_mode();
+
+    /**
+     * The meta object literal for the '<em><b>Connection</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EBASE_ATTRIBUTES__CONNECTION = eINSTANCE.getEBaseAttributes_Connection();
+
+    /**
+     * The meta object literal for the '<em><b>No log</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EBASE_ATTRIBUTES__NO_LOG = eINSTANCE.getEBaseAttributes_No_log();
+
+    /**
+     * The meta object literal for the '<em><b>Debugger</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EBASE_ATTRIBUTES__DEBUGGER = eINSTANCE.getEBaseAttributes_Debugger();
+
+    /**
+     * The meta object literal for the '<em><b>Module defaults</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EBASE_ATTRIBUTES__MODULE_DEFAULTS = eINSTANCE.getEBaseAttributes_Module_defaults();
+
+    /**
+     * The meta object literal for the '<em><b>Environment</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EBASE_ATTRIBUTES__ENVIRONMENT = eINSTANCE.getEBaseAttributes_Environment();
+
+    /**
+     * The meta object literal for the '<em><b>Collections</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EBASE_ATTRIBUTES__COLLECTIONS = eINSTANCE.getEBaseAttributes_Collections();
+
+    /**
+     * The meta object literal for the '<em><b>Tags</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EBASE_ATTRIBUTES__TAGS = eINSTANCE.getEBaseAttributes_Tags();
+
+    /**
+     * The meta object literal for the '<em><b>Variable declarations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EBASE_ATTRIBUTES__VARIABLE_DECLARATIONS = eINSTANCE.getEBaseAttributes_Variable_declarations();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionAttributesImpl <em>EExecution Attributes</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionAttributesImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExecutionAttributes()
+     * @generated
+     */
+    EClass EEXECUTION_ATTRIBUTES = eINSTANCE.getEExecutionAttributes();
+
+    /**
+     * The meta object literal for the '<em><b>Exe settings</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EEXECUTION_ATTRIBUTES__EXE_SETTINGS = eINSTANCE.getEExecutionAttributes_Exe_settings();
+
+    /**
+     * The meta object literal for the '<em><b>Delegation</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EEXECUTION_ATTRIBUTES__DELEGATION = eINSTANCE.getEExecutionAttributes_Delegation();
+
+    /**
+     * The meta object literal for the '<em><b>When expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EEXECUTION_ATTRIBUTES__WHEN_EXPRESSION = eINSTANCE.getEExecutionAttributes_When_expression();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerAttributesImpl <em>ETask Handler Attributes</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskHandlerAttributesImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETaskHandlerAttributes()
+     * @generated
+     */
+    EClass ETASK_HANDLER_ATTRIBUTES = eINSTANCE.getETaskHandlerAttributes();
+
+    /**
      * The meta object literal for the '<em><b>Error handling</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ETASK_HANDLER__ERROR_HANDLING = eINSTANCE.getETaskHandler_Error_handling();
+    EReference ETASK_HANDLER_ATTRIBUTES__ERROR_HANDLING = eINSTANCE.getETaskHandlerAttributes_Error_handling();
 
     /**
      * The meta object literal for the '<em><b>Action</b></em>' attribute feature.
@@ -6058,7 +5476,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ETASK_HANDLER__ACTION = eINSTANCE.getETaskHandler_Action();
+    EAttribute ETASK_HANDLER_ATTRIBUTES__ACTION = eINSTANCE.getETaskHandlerAttributes_Action();
 
     /**
      * The meta object literal for the '<em><b>Asynchronous settings</b></em>' containment reference feature.
@@ -6066,7 +5484,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ETASK_HANDLER__ASYNCHRONOUS_SETTINGS = eINSTANCE.getETaskHandler_Asynchronous_settings();
+    EReference ETASK_HANDLER_ATTRIBUTES__ASYNCHRONOUS_SETTINGS = eINSTANCE.getETaskHandlerAttributes_Asynchronous_settings();
 
     /**
      * The meta object literal for the '<em><b>Args</b></em>' containment reference feature.
@@ -6074,7 +5492,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ETASK_HANDLER__ARGS = eINSTANCE.getETaskHandler_Args();
+    EReference ETASK_HANDLER_ATTRIBUTES__ARGS = eINSTANCE.getETaskHandlerAttributes_Args();
 
     /**
      * The meta object literal for the '<em><b>Module</b></em>' containment reference feature.
@@ -6082,7 +5500,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ETASK_HANDLER__MODULE = eINSTANCE.getETaskHandler_Module();
+    EReference ETASK_HANDLER_ATTRIBUTES__MODULE = eINSTANCE.getETaskHandlerAttributes_Module();
 
     /**
      * The meta object literal for the '<em><b>Notifiables</b></em>' containment reference list feature.
@@ -6090,7 +5508,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ETASK_HANDLER__NOTIFIABLES = eINSTANCE.getETaskHandler_Notifiables();
+    EReference ETASK_HANDLER_ATTRIBUTES__NOTIFIABLES = eINSTANCE.getETaskHandlerAttributes_Notifiables();
 
     /**
      * The meta object literal for the '<em><b>Loop</b></em>' containment reference feature.
@@ -6098,7 +5516,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ETASK_HANDLER__LOOP = eINSTANCE.getETaskHandler_Loop();
+    EReference ETASK_HANDLER_ATTRIBUTES__LOOP = eINSTANCE.getETaskHandlerAttributes_Loop();
 
     /**
      * The meta object literal for the '<em><b>Register</b></em>' containment reference feature.
@@ -6106,7 +5524,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ETASK_HANDLER__REGISTER = eINSTANCE.getETaskHandler_Register();
+    EReference ETASK_HANDLER_ATTRIBUTES__REGISTER = eINSTANCE.getETaskHandlerAttributes_Register();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl <em>EPlay</em>}' class.

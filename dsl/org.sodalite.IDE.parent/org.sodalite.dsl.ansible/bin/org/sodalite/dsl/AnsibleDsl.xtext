@@ -38,19 +38,66 @@ ETaskHandler:
 	ETask | EHandler
 ;
 
-EPlay:
-	('play_name:' name=STRING)
-	(privilage_escalation=EPrivilageEscalation)?
-	(validation_mode=EValidationMode)?
-	(connection=EConnection)?
-	('no_log:' no_log=BOOLEAN)?
-	('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
-	('module_defaults:' module_defaults=EList)?
-	('environment:' environment=EList)?
-	('collections:' collections=EList)?
-	('tags:' tags=EList)?
+EBaseAttributes:
+	(
+	('privilage_escalation{'
+		privilage_escalation=EPrivilageEscalation
+	'}')? &
+	('validation_mode{'
+		validation_mode=EValidationMode
+	'}')? &
+	('connection_info{'
+		connection=EConnection
+	'}')? &
+	('no_log:' no_log=BOOLEAN)? &
+	('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))? &
+	('module_defaults:' module_defaults=EList)? &
+	('environment:' environment=EList)? &
+	('collections:' collections=EList)? &
+	('tags:' tags=EList)? &
 	('vars{'
-		variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		(variable_declarations+=EVariableDeclaration)+
+	'}')?
+	)
+;
+
+EExecutionAttributes:
+	(
+	('exe_settings{'
+		exe_settings=EExecutionExeSettings
+	'}')? &
+	('delegation{'
+		delegation=EDelegation
+	'}')? &
+	('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
+	)
+;
+
+ETaskHandlerAttributes:
+	(
+	('error_handling{'
+		error_handling=ETaskHandlerErrorHandling
+	'}')? &
+	('action:' action=STRING)? &
+	('asynchronous_settings{'
+		asynchronous_settings=EAsynchronousSettings
+	'}')? &
+	('args:' args=EDictionary)? &
+	('module_call{'
+		module=EModuleCall
+	'}') &
+	('notify:' (notifiables+=ENotifiable)+)? &
+	('loop{'
+		loop=ELoop
+	'}')? &
+	(register=ERegisterVariable)?
+	)
+;
+
+EPlay:
+	'play_name:' name=STRING
+	('base_attributes{'
+		base_attributes=EBaseAttributes
 	'}')?
 	('play_exe_settings{'
 		play_exe_settings=EPlayExeSettings
@@ -58,7 +105,9 @@ EPlay:
 	('error_handling{'
 		error_handling=EPlayErrorHandling
 	'}')? &
-	(facts_settings=EFactsSettings)? &
+	('facts_settings{'
+		facts_settings=EFactsSettings
+	'}')? &
 	('vars_files:' vars_files=EList)? &
 	('vars_prompt:' vars_prompt=EList)? &
 	('force_handlers:' force_handlers=BOOLEAN)? &
@@ -66,12 +115,12 @@ EPlay:
 		(pre_tasks_list+=EBlockTask)+
 	'}')? &
 	(roles_inclusions=ERoleInclusions)? &
-	'tasks_list{'
+	('tasks_list{'
 		(tasks_list+=EBlockTask)+
-	'}'
+	'}')? &
 	('post_tasks{'
 		(post_tasks_list+=EBlockTask)+
-	'}')?
+	'}')? &
 	('handlers{'
 		(handlers+=EHandler)+
 	'}')?
@@ -79,24 +128,13 @@ EPlay:
 
 EBlock:
 	'block{'
-		('block_name:' name=STRING)
-		(privilage_escalation=EPrivilageEscalation)?
-		(validation_mode=EValidationMode)?
-		(connection=EConnection)?
-		('no_log:' no_log=BOOLEAN)?
-		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
-		('module_defaults:' module_defaults=EList)?
-		('environment:' environment=EList)?
-		('collections:' collections=EList)?
-		('tags:' tags=EList)?
-		('vars{'
-			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		('block_name:' name=STRING)?
+		('base_attributes{'
+			base_attributes=EBaseAttributes
 		'}')?
-		('exe_settings{'
-			exe_settings=EExecutionExeSettings
+		('execution_attributes{'
+			execution_attributes=EExecutionAttributes
 		'}')?
-		(delegation=EDelegation)?
-		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
 		('error_handling{'
 			error_handling=EBlockErrorHandling
 		'}')?
@@ -113,76 +151,34 @@ EBlock:
 ;
 
 ETask:
+	{ETask}
 	'task{'
-		('task_name:' name=STRING)
-		(privilage_escalation=EPrivilageEscalation)?
-		(validation_mode=EValidationMode)?
-		(connection=EConnection)?
-		('no_log:' no_log=BOOLEAN)?
-		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
-		('module_defaults:' module_defaults=EList)?
-		('environment:' environment=EList)?
-		('collections:' collections=EList)?
-		('tags:' tags=EList)?
-		('vars{'
-			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		('task_name:' name=STRING)?
+		('base_attributes{'
+			base_attributes=EBaseAttributes
 		'}')?
-		('exe_settings{'
-			exe_settings=EExecutionExeSettings
+		('execution_attributes{'
+			execution_attributes=EExecutionAttributes
 		'}')?
-		(delegation=EDelegation)?
-		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
-		('error_handling{'
-			error_handling=ETaskHandlerErrorHandling
+		('task_handler_attributes{'
+			task_handler_attributes=ETaskHandlerAttributes
 		'}')?
-		('action:' action=STRING)?
-		('asynchronous_settings{'
-			asynchronous_settings=EAsynchronousSettings
-		'}')?
-		('args:' args=EDictionary)?
-		'module_call{'
-			module=EModuleCall
-		'}'
-		('notify:' (notifiables+=ENotifiable)+)?
-		(loop=ELoop)?
-		(register=ERegisterVariable)?
 	'}'
 ;
 
 EHandler:
+	{EHandler}
 	'handler{'
-		('handler_name:' name=STRING)
-		(privilage_escalation=EPrivilageEscalation)?
-		(validation_mode=EValidationMode)?
-		(connection=EConnection)?
-		('no_log:' no_log=BOOLEAN)?
-		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
-		('module_defaults:' module_defaults=EList)?
-		('environment:' environment=EList)?
-		('collections:' collections=EList)?
-		('tags:' tags=EList)?
-		('vars{'
-			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		('handler_name:' name=STRING)?
+		('base_attributes{'
+			base_attributes=EBaseAttributes
 		'}')?
-		('exe_settings{'
-			exe_settings=EExecutionExeSettings
+		('execution_attributes{'
+			execution_attributes=EExecutionAttributes
 		'}')?
-		(delegation=EDelegation)?
-		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
-		('error_handling{'
-			error_handling=ETaskHandlerErrorHandling
+		('task_handler_attributes{'
+			task_handler_attributes=ETaskHandlerAttributes
 		'}')?
-		('action:' action=STRING)?
-		('asynchronous_settings{'
-			asynchronous_settings=EAsynchronousSettings
-		'}')?
-		('args:' args=EDictionary)?
-		'module_call{'
-			module=EModuleCall
-		'}'
-		('notify:' (notifiables+=ENotifiable)+)?
-		(loop=ELoop)?
-		(register=ERegisterVariable)?
 		('listen:' (listen_to+=[ENotifiedTopic|STRING])+)?
 	'}'
 ;
@@ -200,30 +196,19 @@ EParameter:
 
 ERoleInclusion:
 	'role{'
-		('role_name:' name=STRING)
-		(privilage_escalation=EPrivilageEscalation)?
-		(validation_mode=EValidationMode)?
-		(connection=EConnection)?
-		('no_log:' no_log=BOOLEAN)?
-		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))?
-		('module_defaults:' module_defaults=EList)?
-		('environment:' environment=EList)?
-		('collections:' collections=EList)?
-		('tags:' tags=EList)?
-		('vars{'
-			variable_declarations+=EVariableDeclaration (',' variable_declarations+=EVariableDeclaration)*
+		'role_name:' name=STRING
+		('base_attributes{'
+			base_attributes=EBaseAttributes
 		'}')?
-		('exe_settings{'
-			exe_settings=EExecutionExeSettings
+		('execution_attributes{'
+			execution_attributes=EExecutionAttributes
 		'}')?
-		(delegation=EDelegation)?
-		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
 	'}'
 ;
 
 ERoleInclusions:
 	'roles_inclusions{'
-		roles+=ERoleInclusion (roles+=ERoleInclusion)*
+		(roles+=ERoleInclusion)+
 	'}'
 ;
 
@@ -232,53 +217,53 @@ ELoop:
 ;
 
 ELoopOverList:
-	'loop:' loop_list=EValuePassed
-	(loop_control=ELoopControl)?
+	'loop_over:' loop_list=EValuePassed
+	('loop_control{'
+		loop_control=ELoopControl
+	'}')?
 ;
 
 ELoopControl:
-	{ELoopControl}
-	'loop_control{'
-		('label:' label=EValuePassed)?
-		('pause:' pause=NUMBER)? //number of seconds
-		('index_var:' index_var=ID)?
-		('loop_var:' loop_var=ID)?
-		('extended:' extended=BOOLEAN)?
-	'}'
+	(
+	('label:' label=EValuePassed)? &
+	('pause:' pause=NUMBER)? & //number of seconds
+	('index_var:' index_var=ID)? &
+	('loop_var:' loop_var=ID)? &
+	('extended:' extended=BOOLEAN)?
+	)
 ;
 
 EUntil:
-	'until:' until=EJinjaExpressionEvaluationWithoutBrackets &
-	'retries:' retries=NUMBER &
-	'delay:' delay=NUMBER //number of seconds
+	'until:' until=EJinjaExpressionEvaluationWithoutBrackets
+	(
+	('retries:' retries=NUMBER)? &
+	('delay:' delay=NUMBER)? //number of seconds
+	)
 ;
 
 EPrivilageEscalation:
-	{EPrivilageEscalation}
-	'privilage_escalation{'
-		('become:' become=BOOLEAN)?
-		('become_exe:' become_exe=STRING)?
-		('become_flags:' become_flags=STRING)?
-		('become_method:' become_method=STRING)?
-		('become_user:' become_user=STRING)?
-	'}'
+	(
+	('become:' become=BOOLEAN)? &
+	('become_exe:' become_exe=STRING)? &
+	('become_flags:' become_flags=STRING)? &
+	('become_method:' become_method=STRING)? &
+	('become_user:' become_user=STRING)?
+	)
 ;
 
 EValidationMode:
-	{EValidationMode}
-	'validation_mode{'
-		('check_mode:' check_mode=BOOLEAN)?
-		('diff:' diff=BOOLEAN)?
-	'}'
+	(
+	('check_mode:' check_mode=BOOLEAN)? &
+	('diff:' diff=BOOLEAN)?
+	)
 ;
 
 EConnection:
-	{EConnection}
-	'connection_info{'
-		('connection:' connection=STRING)?
-		('port:' port=NUMBER)?
-		('remote_user:' remote_user=STRING)?
-	'}'
+	(
+	('connection:' connection=STRING)? &
+	('port:' port=NUMBER)? &
+	('remote_user:' remote_user=STRING)?
+	)
 ;
 
 EExeSettings:
@@ -286,18 +271,20 @@ EExeSettings:
 ;
 
 EPlayExeSettings:
-	{EPlayExeSettings}
-	('strategy:' strategy=STRING)?
-	('serial:' serial_list=EList)?
-	('order:' order=STRING)?
-	('throttle:' throttle=NUMBER)?
+	(
+	('strategy:' strategy=STRING)? &
+	('serial:' serial_list=EList)? &
+	('order:' order=STRING)? &
+	('throttle:' throttle=NUMBER)? &
 	('run_once:' run_once=BOOLEAN)?
+	)
 ;
 
 EExecutionExeSettings:
-	{EExecutionExeSettings}
-	('throttle:' throttle=NUMBER)?
+	(
+	('throttle:' throttle=NUMBER)? &
 	('run_once:' run_once=BOOLEAN)?
+	)
 ;
 
 EErrorHandling:
@@ -305,49 +292,53 @@ EErrorHandling:
 ;
 
 EBlockErrorHandling:
-	{EBlockErrorHandling}
-	('any_errors_fatal:' any_errors_fatal=BOOLEAN)?
-	('ignore_errors:' ignore_errors=BOOLEAN)?
+	(
+	('any_errors_fatal:' any_errors_fatal=BOOLEAN)? &
+	('ignore_errors:' ignore_errors=BOOLEAN)? &
 	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
+	)
 ;
 
 EPlayErrorHandling:
-	{EPlayErrorHandling}
-	('max_fail_percentage:' max_fail_percentage=NUMBER)?
-	('any_errors_fatal:' any_errors_fatal=BOOLEAN)?
-	('ignore_errors:' ignore_errors=BOOLEAN)?
+	(
+	('max_fail_percentage:' max_fail_percentage=NUMBER)? &
+	('any_errors_fatal:' any_errors_fatal=BOOLEAN)? &
+	('ignore_errors:' ignore_errors=BOOLEAN)? &
 	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
+	)
 ;
 
 ETaskHandlerErrorHandling:
-	{ETaskHandlerErrorHandling}
-	('changed_when:' changed_when=EJinjaExpressionEvaluationWithoutBrackets)?
-	('failed_when:' failed_when=EJinjaExpressionEvaluationWithoutBrackets)?
-	('any_errors_fatal:' any_errors_fatal=BOOLEAN)?
-	('ignore_errors:' ignore_errors=BOOLEAN)?
+	(
+	('changed_when:' changed_when=EJinjaExpressionEvaluationWithoutBrackets)? &
+	('failed_when:' failed_when=EJinjaExpressionEvaluationWithoutBrackets)? &
+	('any_errors_fatal:' any_errors_fatal=BOOLEAN)? &
+	('ignore_errors:' ignore_errors=BOOLEAN)? &
 	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
+	)
 ;
 
 EFactsSettings:
-	{EFactsSettings}
-	'facts_setttings{'
-		('gather_facts:' gather_facts=BOOLEAN)?
-		('gather_subset:' gather_subset=EList)?
-		('gather_timeout:'gather_timeout=NUMBER)?
-		('fact_path:' fact_path=STRING)?
-	'}'
+	(
+	('gather_facts:' gather_facts=BOOLEAN)? &
+	('gather_subset:' gather_subset=EList)? &
+	('gather_timeout:'gather_timeout=NUMBER)? &
+	('fact_path:' fact_path=STRING)?
+	)
 ;
 
 EDelegation:
-	'delegation{'
-		('delegate_to:' delegate_to=STRING)
-		('delegate_facts:' delegate_facts=BOOLEAN)?
-	'}'
+	(
+	('delegate_to:' delegate_to=STRING)? &
+	('delegate_facts:' delegate_facts=BOOLEAN)?
+	)
 ;
 
 EAsynchronousSettings:
-	('async:' async=NUMBER) &
-	('poll:' poll=NUMBER)
+	(
+	('async:' async=NUMBER)? &
+	('poll:' poll=NUMBER)?
+	)
 ;
 
 ENotifiable:

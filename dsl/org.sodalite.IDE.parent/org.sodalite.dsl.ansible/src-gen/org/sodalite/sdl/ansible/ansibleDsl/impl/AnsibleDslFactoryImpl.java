@@ -71,6 +71,9 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EEXECUTION: return createEExecution();
       case AnsibleDslPackage.EBLOCK_TASK: return createEBlockTask();
       case AnsibleDslPackage.ETASK_HANDLER: return createETaskHandler();
+      case AnsibleDslPackage.EBASE_ATTRIBUTES: return createEBaseAttributes();
+      case AnsibleDslPackage.EEXECUTION_ATTRIBUTES: return createEExecutionAttributes();
+      case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES: return createETaskHandlerAttributes();
       case AnsibleDslPackage.EPLAY: return createEPlay();
       case AnsibleDslPackage.EBLOCK: return createEBlock();
       case AnsibleDslPackage.ETASK: return createETask();
@@ -206,6 +209,42 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     ETaskHandlerImpl eTaskHandler = new ETaskHandlerImpl();
     return eTaskHandler;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EBaseAttributes createEBaseAttributes()
+  {
+    EBaseAttributesImpl eBaseAttributes = new EBaseAttributesImpl();
+    return eBaseAttributes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EExecutionAttributes createEExecutionAttributes()
+  {
+    EExecutionAttributesImpl eExecutionAttributes = new EExecutionAttributesImpl();
+    return eExecutionAttributes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ETaskHandlerAttributes createETaskHandlerAttributes()
+  {
+    ETaskHandlerAttributesImpl eTaskHandlerAttributes = new ETaskHandlerAttributesImpl();
+    return eTaskHandlerAttributes;
   }
 
   /**

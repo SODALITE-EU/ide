@@ -11,6 +11,19 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBase">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_attributes" eType="#//EBaseAttributes"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EExecution" eSuperTypes="#//EBase">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="execution_attributes" eType="#//EExecutionAttributes"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EBlockTask"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ETaskHandler" eSuperTypes="#//EExecution">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="task_handler_attributes"
+        eType="#//ETaskHandlerAttributes" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EBaseAttributes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="privilage_escalation" eType="#//EPrivilageEscalation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="validation_mode" eType="#//EValidationMode"
@@ -30,7 +43,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable_declarations"
         upperBound="-1" eType="#//EVariableDeclaration" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EExecution" eSuperTypes="#//EBase">
+  <eClassifiers xsi:type="ecore:EClass" name="EExecutionAttributes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="exe_settings" eType="#//EExecutionExeSettings"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" eType="#//EDelegation"
@@ -38,8 +51,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EBlockTask"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ETaskHandler" eSuperTypes="#//EExecution">
+  <eClassifiers xsi:type="ecore:EClass" name="ETaskHandlerAttributes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//ETaskHandlerErrorHandling"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
