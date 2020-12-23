@@ -4,13 +4,16 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EErrorHandling;
 
 /**
@@ -31,64 +34,34 @@ import org.sodalite.sdl.ansible.ansibleDsl.EErrorHandling;
 public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements EErrorHandling
 {
   /**
-   * The default value of the '{@link #getAny_errors_fatal() <em>Any errors fatal</em>}' attribute.
+   * The cached value of the '{@link #getAny_errors_fatal() <em>Any errors fatal</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getAny_errors_fatal()
    * @generated
    * @ordered
    */
-  protected static final String ANY_ERRORS_FATAL_EDEFAULT = null;
+  protected EBooleanPassed any_errors_fatal;
 
   /**
-   * The cached value of the '{@link #getAny_errors_fatal() <em>Any errors fatal</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAny_errors_fatal()
-   * @generated
-   * @ordered
-   */
-  protected String any_errors_fatal = ANY_ERRORS_FATAL_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getIgnore_errors() <em>Ignore errors</em>}' attribute.
+   * The cached value of the '{@link #getIgnore_errors() <em>Ignore errors</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getIgnore_errors()
    * @generated
    * @ordered
    */
-  protected static final String IGNORE_ERRORS_EDEFAULT = null;
+  protected EBooleanPassed ignore_errors;
 
   /**
-   * The cached value of the '{@link #getIgnore_errors() <em>Ignore errors</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIgnore_errors()
-   * @generated
-   * @ordered
-   */
-  protected String ignore_errors = IGNORE_ERRORS_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getIgnore_unreachable() <em>Ignore unreachable</em>}' attribute.
+   * The cached value of the '{@link #getIgnore_unreachable() <em>Ignore unreachable</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getIgnore_unreachable()
    * @generated
    * @ordered
    */
-  protected static final String IGNORE_UNREACHABLE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getIgnore_unreachable() <em>Ignore unreachable</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIgnore_unreachable()
-   * @generated
-   * @ordered
-   */
-  protected String ignore_unreachable = IGNORE_UNREACHABLE_EDEFAULT;
+  protected EBooleanPassed ignore_unreachable;
 
   /**
    * <!-- begin-user-doc -->
@@ -117,7 +90,7 @@ public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public String getAny_errors_fatal()
+  public EBooleanPassed getAny_errors_fatal()
   {
     return any_errors_fatal;
   }
@@ -127,13 +100,16 @@ public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setAny_errors_fatal(String newAny_errors_fatal)
+  public NotificationChain basicSetAny_errors_fatal(EBooleanPassed newAny_errors_fatal, NotificationChain msgs)
   {
-    String oldAny_errors_fatal = any_errors_fatal;
+    EBooleanPassed oldAny_errors_fatal = any_errors_fatal;
     any_errors_fatal = newAny_errors_fatal;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EERROR_HANDLING__ANY_ERRORS_FATAL, oldAny_errors_fatal, any_errors_fatal));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EERROR_HANDLING__ANY_ERRORS_FATAL, oldAny_errors_fatal, newAny_errors_fatal);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -142,7 +118,29 @@ public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public String getIgnore_errors()
+  public void setAny_errors_fatal(EBooleanPassed newAny_errors_fatal)
+  {
+    if (newAny_errors_fatal != any_errors_fatal)
+    {
+      NotificationChain msgs = null;
+      if (any_errors_fatal != null)
+        msgs = ((InternalEObject)any_errors_fatal).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EERROR_HANDLING__ANY_ERRORS_FATAL, null, msgs);
+      if (newAny_errors_fatal != null)
+        msgs = ((InternalEObject)newAny_errors_fatal).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EERROR_HANDLING__ANY_ERRORS_FATAL, null, msgs);
+      msgs = basicSetAny_errors_fatal(newAny_errors_fatal, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EERROR_HANDLING__ANY_ERRORS_FATAL, newAny_errors_fatal, newAny_errors_fatal));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EBooleanPassed getIgnore_errors()
   {
     return ignore_errors;
   }
@@ -152,13 +150,16 @@ public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setIgnore_errors(String newIgnore_errors)
+  public NotificationChain basicSetIgnore_errors(EBooleanPassed newIgnore_errors, NotificationChain msgs)
   {
-    String oldIgnore_errors = ignore_errors;
+    EBooleanPassed oldIgnore_errors = ignore_errors;
     ignore_errors = newIgnore_errors;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EERROR_HANDLING__IGNORE_ERRORS, oldIgnore_errors, ignore_errors));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EERROR_HANDLING__IGNORE_ERRORS, oldIgnore_errors, newIgnore_errors);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -167,7 +168,29 @@ public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public String getIgnore_unreachable()
+  public void setIgnore_errors(EBooleanPassed newIgnore_errors)
+  {
+    if (newIgnore_errors != ignore_errors)
+    {
+      NotificationChain msgs = null;
+      if (ignore_errors != null)
+        msgs = ((InternalEObject)ignore_errors).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EERROR_HANDLING__IGNORE_ERRORS, null, msgs);
+      if (newIgnore_errors != null)
+        msgs = ((InternalEObject)newIgnore_errors).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EERROR_HANDLING__IGNORE_ERRORS, null, msgs);
+      msgs = basicSetIgnore_errors(newIgnore_errors, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EERROR_HANDLING__IGNORE_ERRORS, newIgnore_errors, newIgnore_errors));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EBooleanPassed getIgnore_unreachable()
   {
     return ignore_unreachable;
   }
@@ -177,13 +200,58 @@ public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setIgnore_unreachable(String newIgnore_unreachable)
+  public NotificationChain basicSetIgnore_unreachable(EBooleanPassed newIgnore_unreachable, NotificationChain msgs)
   {
-    String oldIgnore_unreachable = ignore_unreachable;
+    EBooleanPassed oldIgnore_unreachable = ignore_unreachable;
     ignore_unreachable = newIgnore_unreachable;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EERROR_HANDLING__IGNORE_UNREACHABLE, oldIgnore_unreachable, ignore_unreachable));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EERROR_HANDLING__IGNORE_UNREACHABLE, oldIgnore_unreachable, newIgnore_unreachable);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setIgnore_unreachable(EBooleanPassed newIgnore_unreachable)
+  {
+    if (newIgnore_unreachable != ignore_unreachable)
+    {
+      NotificationChain msgs = null;
+      if (ignore_unreachable != null)
+        msgs = ((InternalEObject)ignore_unreachable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EERROR_HANDLING__IGNORE_UNREACHABLE, null, msgs);
+      if (newIgnore_unreachable != null)
+        msgs = ((InternalEObject)newIgnore_unreachable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EERROR_HANDLING__IGNORE_UNREACHABLE, null, msgs);
+      msgs = basicSetIgnore_unreachable(newIgnore_unreachable, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EERROR_HANDLING__IGNORE_UNREACHABLE, newIgnore_unreachable, newIgnore_unreachable));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.EERROR_HANDLING__ANY_ERRORS_FATAL:
+        return basicSetAny_errors_fatal(null, msgs);
+      case AnsibleDslPackage.EERROR_HANDLING__IGNORE_ERRORS:
+        return basicSetIgnore_errors(null, msgs);
+      case AnsibleDslPackage.EERROR_HANDLING__IGNORE_UNREACHABLE:
+        return basicSetIgnore_unreachable(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -217,13 +285,13 @@ public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements 
     switch (featureID)
     {
       case AnsibleDslPackage.EERROR_HANDLING__ANY_ERRORS_FATAL:
-        setAny_errors_fatal((String)newValue);
+        setAny_errors_fatal((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EERROR_HANDLING__IGNORE_ERRORS:
-        setIgnore_errors((String)newValue);
+        setIgnore_errors((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EERROR_HANDLING__IGNORE_UNREACHABLE:
-        setIgnore_unreachable((String)newValue);
+        setIgnore_unreachable((EBooleanPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -240,13 +308,13 @@ public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements 
     switch (featureID)
     {
       case AnsibleDslPackage.EERROR_HANDLING__ANY_ERRORS_FATAL:
-        setAny_errors_fatal(ANY_ERRORS_FATAL_EDEFAULT);
+        setAny_errors_fatal((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EERROR_HANDLING__IGNORE_ERRORS:
-        setIgnore_errors(IGNORE_ERRORS_EDEFAULT);
+        setIgnore_errors((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EERROR_HANDLING__IGNORE_UNREACHABLE:
-        setIgnore_unreachable(IGNORE_UNREACHABLE_EDEFAULT);
+        setIgnore_unreachable((EBooleanPassed)null);
         return;
     }
     super.eUnset(featureID);
@@ -263,34 +331,13 @@ public class EErrorHandlingImpl extends MinimalEObjectImpl.Container implements 
     switch (featureID)
     {
       case AnsibleDslPackage.EERROR_HANDLING__ANY_ERRORS_FATAL:
-        return ANY_ERRORS_FATAL_EDEFAULT == null ? any_errors_fatal != null : !ANY_ERRORS_FATAL_EDEFAULT.equals(any_errors_fatal);
+        return any_errors_fatal != null;
       case AnsibleDslPackage.EERROR_HANDLING__IGNORE_ERRORS:
-        return IGNORE_ERRORS_EDEFAULT == null ? ignore_errors != null : !IGNORE_ERRORS_EDEFAULT.equals(ignore_errors);
+        return ignore_errors != null;
       case AnsibleDslPackage.EERROR_HANDLING__IGNORE_UNREACHABLE:
-        return IGNORE_UNREACHABLE_EDEFAULT == null ? ignore_unreachable != null : !IGNORE_UNREACHABLE_EDEFAULT.equals(ignore_unreachable);
+        return ignore_unreachable != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (any_errors_fatal: ");
-    result.append(any_errors_fatal);
-    result.append(", ignore_errors: ");
-    result.append(ignore_errors);
-    result.append(", ignore_unreachable: ");
-    result.append(ignore_unreachable);
-    result.append(')');
-    return result.toString();
   }
 
 } //EErrorHandlingImpl

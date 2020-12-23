@@ -25,47 +25,47 @@ import org.eclipse.emf.ecore.EObject;
 public interface EValidationMode extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Check mode</b></em>' attribute.
+   * Returns the value of the '<em><b>Check mode</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Check mode</em>' attribute.
-   * @see #setCheck_mode(String)
+   * @return the value of the '<em>Check mode</em>' containment reference.
+   * @see #setCheck_mode(EBooleanPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEValidationMode_Check_mode()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getCheck_mode();
+  EBooleanPassed getCheck_mode();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EValidationMode#getCheck_mode <em>Check mode</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EValidationMode#getCheck_mode <em>Check mode</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Check mode</em>' attribute.
+   * @param value the new value of the '<em>Check mode</em>' containment reference.
    * @see #getCheck_mode()
    * @generated
    */
-  void setCheck_mode(String value);
+  void setCheck_mode(EBooleanPassed value);
 
   /**
-   * Returns the value of the '<em><b>Diff</b></em>' attribute.
+   * Returns the value of the '<em><b>Diff</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Diff</em>' attribute.
-   * @see #setDiff(String)
+   * @return the value of the '<em>Diff</em>' containment reference.
+   * @see #setDiff(EBooleanPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEValidationMode_Diff()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getDiff();
+  EBooleanPassed getDiff();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EValidationMode#getDiff <em>Diff</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EValidationMode#getDiff <em>Diff</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Diff</em>' attribute.
+   * @param value the new value of the '<em>Diff</em>' containment reference.
    * @see #getDiff()
    * @generated
    */
-  void setDiff(String value);
+  void setDiff(EBooleanPassed value);
 
 } // EValidationMode

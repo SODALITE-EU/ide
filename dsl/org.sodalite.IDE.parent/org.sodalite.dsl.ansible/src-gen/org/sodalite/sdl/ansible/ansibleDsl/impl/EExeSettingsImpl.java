@@ -4,14 +4,18 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,44 +34,24 @@ import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
 public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EExeSettings
 {
   /**
-   * The default value of the '{@link #getThrottle() <em>Throttle</em>}' attribute.
+   * The cached value of the '{@link #getThrottle() <em>Throttle</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getThrottle()
    * @generated
    * @ordered
    */
-  protected static final String THROTTLE_EDEFAULT = null;
+  protected ENumberPassed throttle;
 
   /**
-   * The cached value of the '{@link #getThrottle() <em>Throttle</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getThrottle()
-   * @generated
-   * @ordered
-   */
-  protected String throttle = THROTTLE_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getRun_once() <em>Run once</em>}' attribute.
+   * The cached value of the '{@link #getRun_once() <em>Run once</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getRun_once()
    * @generated
    * @ordered
    */
-  protected static final String RUN_ONCE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getRun_once() <em>Run once</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRun_once()
-   * @generated
-   * @ordered
-   */
-  protected String run_once = RUN_ONCE_EDEFAULT;
+  protected EBooleanPassed run_once;
 
   /**
    * <!-- begin-user-doc -->
@@ -96,7 +80,7 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
    * @generated
    */
   @Override
-  public String getThrottle()
+  public ENumberPassed getThrottle()
   {
     return throttle;
   }
@@ -106,13 +90,16 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setThrottle(String newThrottle)
+  public NotificationChain basicSetThrottle(ENumberPassed newThrottle, NotificationChain msgs)
   {
-    String oldThrottle = throttle;
+    ENumberPassed oldThrottle = throttle;
     throttle = newThrottle;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXE_SETTINGS__THROTTLE, oldThrottle, throttle));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXE_SETTINGS__THROTTLE, oldThrottle, newThrottle);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -121,7 +108,29 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
    * @generated
    */
   @Override
-  public String getRun_once()
+  public void setThrottle(ENumberPassed newThrottle)
+  {
+    if (newThrottle != throttle)
+    {
+      NotificationChain msgs = null;
+      if (throttle != null)
+        msgs = ((InternalEObject)throttle).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXE_SETTINGS__THROTTLE, null, msgs);
+      if (newThrottle != null)
+        msgs = ((InternalEObject)newThrottle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXE_SETTINGS__THROTTLE, null, msgs);
+      msgs = basicSetThrottle(newThrottle, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXE_SETTINGS__THROTTLE, newThrottle, newThrottle));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EBooleanPassed getRun_once()
   {
     return run_once;
   }
@@ -131,13 +140,56 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setRun_once(String newRun_once)
+  public NotificationChain basicSetRun_once(EBooleanPassed newRun_once, NotificationChain msgs)
   {
-    String oldRun_once = run_once;
+    EBooleanPassed oldRun_once = run_once;
     run_once = newRun_once;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE, oldRun_once, run_once));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE, oldRun_once, newRun_once);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRun_once(EBooleanPassed newRun_once)
+  {
+    if (newRun_once != run_once)
+    {
+      NotificationChain msgs = null;
+      if (run_once != null)
+        msgs = ((InternalEObject)run_once).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE, null, msgs);
+      if (newRun_once != null)
+        msgs = ((InternalEObject)newRun_once).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE, null, msgs);
+      msgs = basicSetRun_once(newRun_once, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE, newRun_once, newRun_once));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.EEXE_SETTINGS__THROTTLE:
+        return basicSetThrottle(null, msgs);
+      case AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE:
+        return basicSetRun_once(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -169,10 +221,10 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
     switch (featureID)
     {
       case AnsibleDslPackage.EEXE_SETTINGS__THROTTLE:
-        setThrottle((String)newValue);
+        setThrottle((ENumberPassed)newValue);
         return;
       case AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE:
-        setRun_once((String)newValue);
+        setRun_once((EBooleanPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -189,10 +241,10 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
     switch (featureID)
     {
       case AnsibleDslPackage.EEXE_SETTINGS__THROTTLE:
-        setThrottle(THROTTLE_EDEFAULT);
+        setThrottle((ENumberPassed)null);
         return;
       case AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE:
-        setRun_once(RUN_ONCE_EDEFAULT);
+        setRun_once((EBooleanPassed)null);
         return;
     }
     super.eUnset(featureID);
@@ -209,30 +261,11 @@ public class EExeSettingsImpl extends MinimalEObjectImpl.Container implements EE
     switch (featureID)
     {
       case AnsibleDslPackage.EEXE_SETTINGS__THROTTLE:
-        return THROTTLE_EDEFAULT == null ? throttle != null : !THROTTLE_EDEFAULT.equals(throttle);
+        return throttle != null;
       case AnsibleDslPackage.EEXE_SETTINGS__RUN_ONCE:
-        return RUN_ONCE_EDEFAULT == null ? run_once != null : !RUN_ONCE_EDEFAULT.equals(run_once);
+        return run_once != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (throttle: ");
-    result.append(throttle);
-    result.append(", run_once: ");
-    result.append(run_once);
-    result.append(')');
-    return result.toString();
   }
 
 } //EExeSettingsImpl

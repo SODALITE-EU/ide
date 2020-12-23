@@ -49,12 +49,12 @@ EBaseAttributes:
 	('connection_info{'
 		connection=EConnection
 	'}')? &
-	('no_log:' no_log=BOOLEAN)? &
+	('no_log:' no_log=EBooleanPassed)? &
 	('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))? &
-	('module_defaults:' module_defaults=EList)? &
-	('environment:' environment=EList)? &
-	('collections:' collections=EList)? &
-	('tags:' tags=EList)? &
+	('module_defaults:' module_defaults=EListPassed)? &
+	('environment:' environment=EListPassed)? &
+	('collections:' collections=EListPassed)? &
+	('tags:' tags=EListPassed)? &
 	('vars{'
 		(variable_declarations+=EVariableDeclaration)+
 	'}')?
@@ -78,11 +78,11 @@ ETaskHandlerAttributes:
 	('error_handling{'
 		error_handling=ETaskHandlerErrorHandling
 	'}')? &
-	('action:' action=STRING)? &
+	('action:' action=EJinjaExpressionAndString)? &
 	('asynchronous_settings{'
 		asynchronous_settings=EAsynchronousSettings
 	'}')? &
-	('args:' args=EDictionary)? &
+	('args:' args=EDictionaryPassed)? &
 	('module_call{'
 		module=EModuleCall
 	'}') &
@@ -108,9 +108,9 @@ EPlay:
 	('facts_settings{'
 		facts_settings=EFactsSettings
 	'}')? &
-	('vars_files:' vars_files=EList)? &
-	('vars_prompt:' vars_prompt=EList)? &
-	('force_handlers:' force_handlers=BOOLEAN)? &
+	('vars_files:' vars_files=EListPassed)? &
+	('vars_prompt:' vars_prompt=EListPassed)? &
+	('force_handlers:' force_handlers=EBooleanPassed)? &
 	('pre_tasks{'
 		(pre_tasks_list+=EBlockTask)+
 	'}')? &
@@ -185,7 +185,7 @@ EHandler:
 
 EModuleCall:
 	'module_name:' name=ID
-	('direct_input:' direct_input=EValuePassed)?
+	('direct_parameter:' direct_parameter=EValuePassed)?
 	('parameters{'
 		(parameters+=EParameter)+
 	'}')?
@@ -227,43 +227,43 @@ ELoopOverList:
 ELoopControl:
 	(
 	('label:' label=EValuePassed)? &
-	('pause:' pause=NUMBER)? & //number of seconds
-	('index_var:' index_var=ID)? &
-	('loop_var:' loop_var=ID)? &
-	('extended:' extended=BOOLEAN)?
+	('pause:' pause=ENumberPassed)? & //number of seconds
+	('index_var:' index_var=EIndexOrLoopVariable)? &
+	('loop_var:' loop_var=EIndexOrLoopVariable)? &
+	('extended:' extended=EBooleanPassed)?
 	)
 ;
 
 EUntil:
 	'until:' until=EJinjaExpressionEvaluationWithoutBrackets
 	(
-	('retries:' retries=NUMBER)? &
-	('delay:' delay=NUMBER)? //number of seconds
+	('retries:' retries=ENumberPassed)? &
+	('delay:' delay=ENumberPassed)? //number of seconds
 	)
 ;
 
 EPrivilageEscalation:
 	(
-	('become:' become=BOOLEAN)? &
-	('become_exe:' become_exe=STRING)? &
-	('become_flags:' become_flags=STRING)? &
-	('become_method:' become_method=STRING)? &
-	('become_user:' become_user=STRING)?
+	('become:' become=EBooleanPassed)? &
+	('become_exe:' become_exe=EJinjaExpressionAndString)? &
+	('become_flags:' become_flags=EJinjaExpressionAndString)? &
+	('become_method:' become_method=EJinjaExpressionAndString)? &
+	('become_user:' become_user=EJinjaExpressionAndString)?
 	)
 ;
 
 EValidationMode:
 	(
-	('check_mode:' check_mode=BOOLEAN)? &
-	('diff:' diff=BOOLEAN)?
+	('check_mode:' check_mode=EBooleanPassed)? &
+	('diff:' diff=EBooleanPassed)?
 	)
 ;
 
 EConnection:
 	(
-	('connection:' connection=STRING)? &
-	('port:' port=NUMBER)? &
-	('remote_user:' remote_user=STRING)?
+	('connection:' connection=EJinjaExpressionAndString)? &
+	('port:' port=ENumberPassed)? &
+	('remote_user:' remote_user=EJinjaExpressionAndString)?
 	)
 ;
 
@@ -273,18 +273,18 @@ EExeSettings:
 
 EPlayExeSettings:
 	(
-	('strategy:' strategy=STRING)? &
-	('serial:' serial_list=EList)? &
-	('order:' order=STRING)? &
-	('throttle:' throttle=NUMBER)? &
-	('run_once:' run_once=BOOLEAN)?
+	('strategy:' strategy=EJinjaExpressionAndString)? &
+	('serial:' serial_list=EListPassed)? &
+	('order:' order=EJinjaExpressionAndString)? &
+	('throttle:' throttle=ENumberPassed)? &
+	('run_once:' run_once=EBooleanPassed)?
 	)
 ;
 
 EExecutionExeSettings:
 	(
-	('throttle:' throttle=NUMBER)? &
-	('run_once:' run_once=BOOLEAN)?
+	('throttle:' throttle=ENumberPassed)? &
+	('run_once:' run_once=EBooleanPassed)?
 	)
 ;
 
@@ -294,18 +294,18 @@ EErrorHandling:
 
 EBlockErrorHandling:
 	(
-	('any_errors_fatal:' any_errors_fatal=BOOLEAN)? &
-	('ignore_errors:' ignore_errors=BOOLEAN)? &
-	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
+	('any_errors_fatal:' any_errors_fatal=EBooleanPassed)? &
+	('ignore_errors:' ignore_errors=EBooleanPassed)? &
+	('ignore_unreachable:' ignore_unreachable=EBooleanPassed)?
 	)
 ;
 
 EPlayErrorHandling:
 	(
-	('max_fail_percentage:' max_fail_percentage=NUMBER)? &
-	('any_errors_fatal:' any_errors_fatal=BOOLEAN)? &
-	('ignore_errors:' ignore_errors=BOOLEAN)? &
-	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
+	('max_fail_percentage:' max_fail_percentage=ENumberPassed)? &
+	('any_errors_fatal:' any_errors_fatal=EBooleanPassed)? &
+	('ignore_errors:' ignore_errors=EBooleanPassed)? &
+	('ignore_unreachable:' ignore_unreachable=EBooleanPassed)?
 	)
 ;
 
@@ -313,32 +313,32 @@ ETaskHandlerErrorHandling:
 	(
 	('changed_when:' changed_when=EJinjaExpressionEvaluationWithoutBrackets)? &
 	('failed_when:' failed_when=EJinjaExpressionEvaluationWithoutBrackets)? &
-	('any_errors_fatal:' any_errors_fatal=BOOLEAN)? &
-	('ignore_errors:' ignore_errors=BOOLEAN)? &
-	('ignore_unreachable:' ignore_unreachable=BOOLEAN)?
+	('any_errors_fatal:' any_errors_fatal=EBooleanPassed)? &
+	('ignore_errors:' ignore_errors=EBooleanPassed)? &
+	('ignore_unreachable:' ignore_unreachable=EBooleanPassed)?
 	)
 ;
 
 EFactsSettings:
 	(
-	('gather_facts:' gather_facts=BOOLEAN)? &
-	('gather_subset:' gather_subset=EList)? &
-	('gather_timeout:'gather_timeout=NUMBER)? &
-	('fact_path:' fact_path=STRING)?
+	('gather_facts:' gather_facts=EBooleanPassed)? &
+	('gather_subset:' gather_subset=EListPassed)? &
+	('gather_timeout:'gather_timeout=ENumberPassed)? &
+	('fact_path:' fact_path=EJinjaExpressionAndString)?
 	)
 ;
 
 EDelegation:
 	(
-	('delegate_to:' delegate_to=STRING)? &
-	('delegate_facts:' delegate_facts=BOOLEAN)?
+	('delegate_to:' delegate_to=EJinjaExpressionAndString)? &
+	('delegate_facts:' delegate_facts=EBooleanPassed)?
 	)
 ;
 
 EAsynchronousSettings:
 	(
-	('async:' async=NUMBER)? &
-	('poll:' poll=NUMBER)?
+	('async:' async=ENumberPassed)? &
+	('poll:' poll=ENumberPassed)?
 	)
 ;
 
@@ -454,6 +454,14 @@ EVariableDeclaration:
 	name=ID ':' value_passed=EValuePassed
 ;
 
+EIndexOrLoopVariable:
+	name=ID
+;
+
+EIndexOrLoopVariableReference:
+	'index_or_loop_var:' name=[EIndexOrLoopVariable|ID] ('[' index=NUMBER ']')? ( "." tail+=ID)*
+;
+
 ERegisterVariable:
 	'register:' name=ID
 ;
@@ -467,12 +475,16 @@ EInputInterfaceVariableReference:
 ;
 
 EVariableReference:
-	EVariableDeclarationVariableReference | ERegisterVariableReference | EInputOperationVariableReference | EInputInterfaceVariableReference
+	EVariableDeclarationVariableReference | ERegisterVariableReference | EInputOperationVariableReference | EInputInterfaceVariableReference | EIndexOrLoopVariableReference
 ;
 
 ESpecialVariable: //https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
 	{ESpecialVariable}
 	'special_variable:' name=ID  ("." tail+=ID)*
+;
+
+ETailElement:
+	(identifier_ID=ID | identifier_jinja=EJinjaExpressionEvaluation) ('[' index=NUMBER ']')?
 ;
 
 EDictionary:
@@ -485,6 +497,22 @@ EDictionaryPair:
 
 EList:
 	'[' elements+=EValuePassed (',' elements+=EValuePassed)* ']'
+;
+
+EDictionaryPassed:
+	EJinjaExpressionEvaluation | EDictionary
+;
+
+EListPassed:
+	EJinjaExpressionEvaluation | EList
+;
+
+ENumberPassed:
+	EJinjaExpressionEvaluation | number_passed=NUMBER | number_passed=NULL
+;
+
+EBooleanPassed:
+	EJinjaExpressionEvaluation | boolean_passed=BOOLEAN | boolean_passed=NULL
 ;
 
 terminal BOOLEAN:

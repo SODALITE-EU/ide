@@ -50,91 +50,91 @@ public interface ELoopControl extends EObject
   void setLabel(EValuePassed value);
 
   /**
-   * Returns the value of the '<em><b>Pause</b></em>' attribute.
+   * Returns the value of the '<em><b>Pause</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Pause</em>' attribute.
-   * @see #setPause(String)
+   * @return the value of the '<em>Pause</em>' containment reference.
+   * @see #setPause(ENumberPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getELoopControl_Pause()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getPause();
+  ENumberPassed getPause();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl#getPause <em>Pause</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl#getPause <em>Pause</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Pause</em>' attribute.
+   * @param value the new value of the '<em>Pause</em>' containment reference.
    * @see #getPause()
    * @generated
    */
-  void setPause(String value);
+  void setPause(ENumberPassed value);
 
   /**
-   * Returns the value of the '<em><b>Index var</b></em>' attribute.
+   * Returns the value of the '<em><b>Index var</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Index var</em>' attribute.
-   * @see #setIndex_var(String)
+   * @return the value of the '<em>Index var</em>' containment reference.
+   * @see #setIndex_var(EIndexOrLoopVariable)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getELoopControl_Index_var()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getIndex_var();
+  EIndexOrLoopVariable getIndex_var();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl#getIndex_var <em>Index var</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl#getIndex_var <em>Index var</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Index var</em>' attribute.
+   * @param value the new value of the '<em>Index var</em>' containment reference.
    * @see #getIndex_var()
    * @generated
    */
-  void setIndex_var(String value);
+  void setIndex_var(EIndexOrLoopVariable value);
 
   /**
-   * Returns the value of the '<em><b>Loop var</b></em>' attribute.
+   * Returns the value of the '<em><b>Loop var</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Loop var</em>' attribute.
-   * @see #setLoop_var(String)
+   * @return the value of the '<em>Loop var</em>' containment reference.
+   * @see #setLoop_var(EIndexOrLoopVariable)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getELoopControl_Loop_var()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getLoop_var();
+  EIndexOrLoopVariable getLoop_var();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl#getLoop_var <em>Loop var</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl#getLoop_var <em>Loop var</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Loop var</em>' attribute.
+   * @param value the new value of the '<em>Loop var</em>' containment reference.
    * @see #getLoop_var()
    * @generated
    */
-  void setLoop_var(String value);
+  void setLoop_var(EIndexOrLoopVariable value);
 
   /**
-   * Returns the value of the '<em><b>Extended</b></em>' attribute.
+   * Returns the value of the '<em><b>Extended</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Extended</em>' attribute.
-   * @see #setExtended(String)
+   * @return the value of the '<em>Extended</em>' containment reference.
+   * @see #setExtended(EBooleanPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getELoopControl_Extended()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getExtended();
+  EBooleanPassed getExtended();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl#getExtended <em>Extended</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoopControl#getExtended <em>Extended</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Extended</em>' attribute.
+   * @param value the new value of the '<em>Extended</em>' containment reference.
    * @see #getExtended()
    * @generated
    */
-  void setExtended(String value);
+  void setExtended(EBooleanPassed value);
 
 } // ELoopControl

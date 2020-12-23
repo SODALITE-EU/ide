@@ -25,47 +25,47 @@ import org.eclipse.emf.ecore.EObject;
 public interface EAsynchronousSettings extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Async</b></em>' attribute.
+   * Returns the value of the '<em><b>Async</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Async</em>' attribute.
-   * @see #setAsync(String)
+   * @return the value of the '<em>Async</em>' containment reference.
+   * @see #setAsync(ENumberPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEAsynchronousSettings_Async()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getAsync();
+  ENumberPassed getAsync();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings#getAsync <em>Async</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings#getAsync <em>Async</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Async</em>' attribute.
+   * @param value the new value of the '<em>Async</em>' containment reference.
    * @see #getAsync()
    * @generated
    */
-  void setAsync(String value);
+  void setAsync(ENumberPassed value);
 
   /**
-   * Returns the value of the '<em><b>Poll</b></em>' attribute.
+   * Returns the value of the '<em><b>Poll</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Poll</em>' attribute.
-   * @see #setPoll(String)
+   * @return the value of the '<em>Poll</em>' containment reference.
+   * @see #setPoll(ENumberPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEAsynchronousSettings_Poll()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getPoll();
+  ENumberPassed getPoll();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings#getPoll <em>Poll</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings#getPoll <em>Poll</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Poll</em>' attribute.
+   * @param value the new value of the '<em>Poll</em>' containment reference.
    * @see #getPoll()
    * @generated
    */
-  void setPoll(String value);
+  void setPoll(ENumberPassed value);
 
 } // EAsynchronousSettings

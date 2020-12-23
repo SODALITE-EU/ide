@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
@@ -62,24 +63,14 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
   protected ETaskHandlerErrorHandling error_handling;
 
   /**
-   * The default value of the '{@link #getAction() <em>Action</em>}' attribute.
+   * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getAction()
    * @generated
    * @ordered
    */
-  protected static final String ACTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getAction() <em>Action</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAction()
-   * @generated
-   * @ordered
-   */
-  protected String action = ACTION_EDEFAULT;
+  protected EJinjaExpressionAndString action;
 
   /**
    * The cached value of the '{@link #getAsynchronous_settings() <em>Asynchronous settings</em>}' containment reference.
@@ -99,7 +90,7 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
    * @generated
    * @ordered
    */
-  protected EDictionary args;
+  protected EDictionaryPassed args;
 
   /**
    * The cached value of the '{@link #getModule() <em>Module</em>}' containment reference.
@@ -218,7 +209,7 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
    * @generated
    */
   @Override
-  public String getAction()
+  public EJinjaExpressionAndString getAction()
   {
     return action;
   }
@@ -228,13 +219,38 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setAction(String newAction)
+  public NotificationChain basicSetAction(EJinjaExpressionAndString newAction, NotificationChain msgs)
   {
-    String oldAction = action;
+    EJinjaExpressionAndString oldAction = action;
     action = newAction;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ACTION, oldAction, action));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ACTION, oldAction, newAction);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAction(EJinjaExpressionAndString newAction)
+  {
+    if (newAction != action)
+    {
+      NotificationChain msgs = null;
+      if (action != null)
+        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ACTION, null, msgs);
+      if (newAction != null)
+        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ACTION, null, msgs);
+      msgs = basicSetAction(newAction, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ACTION, newAction, newAction));
   }
 
   /**
@@ -293,7 +309,7 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
    * @generated
    */
   @Override
-  public EDictionary getArgs()
+  public EDictionaryPassed getArgs()
   {
     return args;
   }
@@ -303,9 +319,9 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetArgs(EDictionary newArgs, NotificationChain msgs)
+  public NotificationChain basicSetArgs(EDictionaryPassed newArgs, NotificationChain msgs)
   {
-    EDictionary oldArgs = args;
+    EDictionaryPassed oldArgs = args;
     args = newArgs;
     if (eNotificationRequired())
     {
@@ -321,7 +337,7 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
    * @generated
    */
   @Override
-  public void setArgs(EDictionary newArgs)
+  public void setArgs(EDictionaryPassed newArgs)
   {
     if (newArgs != args)
     {
@@ -514,6 +530,8 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
     {
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ERROR_HANDLING:
         return basicSetError_handling(null, msgs);
+      case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ACTION:
+        return basicSetAction(null, msgs);
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ASYNCHRONOUS_SETTINGS:
         return basicSetAsynchronous_settings(null, msgs);
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ARGS:
@@ -575,13 +593,13 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
         setError_handling((ETaskHandlerErrorHandling)newValue);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ACTION:
-        setAction((String)newValue);
+        setAction((EJinjaExpressionAndString)newValue);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ASYNCHRONOUS_SETTINGS:
         setAsynchronous_settings((EAsynchronousSettings)newValue);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ARGS:
-        setArgs((EDictionary)newValue);
+        setArgs((EDictionaryPassed)newValue);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__MODULE:
         setModule((EModuleCall)newValue);
@@ -614,13 +632,13 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
         setError_handling((ETaskHandlerErrorHandling)null);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ACTION:
-        setAction(ACTION_EDEFAULT);
+        setAction((EJinjaExpressionAndString)null);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ASYNCHRONOUS_SETTINGS:
         setAsynchronous_settings((EAsynchronousSettings)null);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ARGS:
-        setArgs((EDictionary)null);
+        setArgs((EDictionaryPassed)null);
         return;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__MODULE:
         setModule((EModuleCall)null);
@@ -651,7 +669,7 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ERROR_HANDLING:
         return error_handling != null;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ACTION:
-        return ACTION_EDEFAULT == null ? action != null : !ACTION_EDEFAULT.equals(action);
+        return action != null;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ASYNCHRONOUS_SETTINGS:
         return asynchronous_settings != null;
       case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES__ARGS:
@@ -666,23 +684,6 @@ public class ETaskHandlerAttributesImpl extends MinimalEObjectImpl.Container imp
         return register != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (action: ");
-    result.append(action);
-    result.append(')');
-    return result.toString();
   }
 
 } //ETaskHandlerAttributesImpl

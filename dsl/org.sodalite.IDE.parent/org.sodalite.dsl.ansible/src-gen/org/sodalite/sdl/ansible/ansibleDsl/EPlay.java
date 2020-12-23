@@ -3,6 +3,7 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -103,12 +104,12 @@ public interface EPlay extends EBase
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Vars files</em>' containment reference.
-   * @see #setVars_files(EList)
+   * @see #setVars_files(EListPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Vars_files()
    * @model containment="true"
    * @generated
    */
-  EList getVars_files();
+  EListPassed getVars_files();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getVars_files <em>Vars files</em>}' containment reference.
@@ -118,19 +119,19 @@ public interface EPlay extends EBase
    * @see #getVars_files()
    * @generated
    */
-  void setVars_files(EList value);
+  void setVars_files(EListPassed value);
 
   /**
    * Returns the value of the '<em><b>Vars prompt</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Vars prompt</em>' containment reference.
-   * @see #setVars_prompt(EList)
+   * @see #setVars_prompt(EListPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Vars_prompt()
    * @model containment="true"
    * @generated
    */
-  EList getVars_prompt();
+  EListPassed getVars_prompt();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getVars_prompt <em>Vars prompt</em>}' containment reference.
@@ -140,29 +141,29 @@ public interface EPlay extends EBase
    * @see #getVars_prompt()
    * @generated
    */
-  void setVars_prompt(EList value);
+  void setVars_prompt(EListPassed value);
 
   /**
-   * Returns the value of the '<em><b>Force handlers</b></em>' attribute.
+   * Returns the value of the '<em><b>Force handlers</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Force handlers</em>' attribute.
-   * @see #setForce_handlers(String)
+   * @return the value of the '<em>Force handlers</em>' containment reference.
+   * @see #setForce_handlers(EBooleanPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Force_handlers()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getForce_handlers();
+  EBooleanPassed getForce_handlers();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getForce_handlers <em>Force handlers</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getForce_handlers <em>Force handlers</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Force handlers</em>' attribute.
+   * @param value the new value of the '<em>Force handlers</em>' containment reference.
    * @see #getForce_handlers()
    * @generated
    */
-  void setForce_handlers(String value);
+  void setForce_handlers(EBooleanPassed value);
 
   /**
    * Returns the value of the '<em><b>Pre tasks list</b></em>' containment reference list.
@@ -174,7 +175,7 @@ public interface EPlay extends EBase
    * @model containment="true"
    * @generated
    */
-  org.eclipse.emf.common.util.EList<EBlockTask> getPre_tasks_list();
+  EList<EBlockTask> getPre_tasks_list();
 
   /**
    * Returns the value of the '<em><b>Roles inclusions</b></em>' containment reference.
@@ -208,7 +209,7 @@ public interface EPlay extends EBase
    * @model containment="true"
    * @generated
    */
-  org.eclipse.emf.common.util.EList<EBlockTask> getTasks_list();
+  EList<EBlockTask> getTasks_list();
 
   /**
    * Returns the value of the '<em><b>Post tasks list</b></em>' containment reference list.
@@ -220,7 +221,7 @@ public interface EPlay extends EBase
    * @model containment="true"
    * @generated
    */
-  org.eclipse.emf.common.util.EList<EBlockTask> getPost_tasks_list();
+  EList<EBlockTask> getPost_tasks_list();
 
   /**
    * Returns the value of the '<em><b>Handlers</b></em>' containment reference list.
@@ -232,6 +233,6 @@ public interface EPlay extends EBase
    * @model containment="true"
    * @generated
    */
-  org.eclipse.emf.common.util.EList<EHandler> getHandlers();
+  EList<EHandler> getHandlers();
 
 } // EPlay

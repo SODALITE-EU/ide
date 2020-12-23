@@ -127,14 +127,21 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE: return createEVariableDeclarationVariableReference();
       case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE: return createERegisterVariableReference();
       case AnsibleDslPackage.EVARIABLE_DECLARATION: return createEVariableDeclaration();
+      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE: return createEIndexOrLoopVariable();
+      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE: return createEIndexOrLoopVariableReference();
       case AnsibleDslPackage.EREGISTER_VARIABLE: return createERegisterVariable();
       case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE: return createEInputOperationVariableReference();
       case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE: return createEInputInterfaceVariableReference();
       case AnsibleDslPackage.EVARIABLE_REFERENCE: return createEVariableReference();
       case AnsibleDslPackage.ESPECIAL_VARIABLE: return createESpecialVariable();
+      case AnsibleDslPackage.ETAIL_ELEMENT: return createETailElement();
       case AnsibleDslPackage.EDICTIONARY: return createEDictionary();
       case AnsibleDslPackage.EDICTIONARY_PAIR: return createEDictionaryPair();
       case AnsibleDslPackage.ELIST: return createEList();
+      case AnsibleDslPackage.EDICTIONARY_PASSED: return createEDictionaryPassed();
+      case AnsibleDslPackage.ELIST_PASSED: return createEListPassed();
+      case AnsibleDslPackage.ENUMBER_PASSED: return createENumberPassed();
+      case AnsibleDslPackage.EBOOLEAN_PASSED: return createEBooleanPassed();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -890,6 +897,30 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
+  public EIndexOrLoopVariable createEIndexOrLoopVariable()
+  {
+    EIndexOrLoopVariableImpl eIndexOrLoopVariable = new EIndexOrLoopVariableImpl();
+    return eIndexOrLoopVariable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EIndexOrLoopVariableReference createEIndexOrLoopVariableReference()
+  {
+    EIndexOrLoopVariableReferenceImpl eIndexOrLoopVariableReference = new EIndexOrLoopVariableReferenceImpl();
+    return eIndexOrLoopVariableReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public ERegisterVariable createERegisterVariable()
   {
     ERegisterVariableImpl eRegisterVariable = new ERegisterVariableImpl();
@@ -950,6 +981,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
+  public ETailElement createETailElement()
+  {
+    ETailElementImpl eTailElement = new ETailElementImpl();
+    return eTailElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EDictionary createEDictionary()
   {
     EDictionaryImpl eDictionary = new EDictionaryImpl();
@@ -978,6 +1021,54 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EListImpl eList = new EListImpl();
     return eList;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDictionaryPassed createEDictionaryPassed()
+  {
+    EDictionaryPassedImpl eDictionaryPassed = new EDictionaryPassedImpl();
+    return eDictionaryPassed;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EListPassed createEListPassed()
+  {
+    EListPassedImpl eListPassed = new EListPassedImpl();
+    return eListPassed;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ENumberPassed createENumberPassed()
+  {
+    ENumberPassedImpl eNumberPassed = new ENumberPassedImpl();
+    return eNumberPassed;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EBooleanPassed createEBooleanPassed()
+  {
+    EBooleanPassedImpl eBooleanPassed = new EBooleanPassedImpl();
+    return eBooleanPassed;
   }
 
   /**

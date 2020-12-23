@@ -445,6 +445,10 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         EJinjaExpressionEvaluation eJinjaExpressionEvaluation = (EJinjaExpressionEvaluation)theEObject;
         T result = caseEJinjaExpressionEvaluation(eJinjaExpressionEvaluation);
         if (result == null) result = caseEJinjaExpressionOrString(eJinjaExpressionEvaluation);
+        if (result == null) result = caseEDictionaryPassed(eJinjaExpressionEvaluation);
+        if (result == null) result = caseEListPassed(eJinjaExpressionEvaluation);
+        if (result == null) result = caseENumberPassed(eJinjaExpressionEvaluation);
+        if (result == null) result = caseEBooleanPassed(eJinjaExpressionEvaluation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -553,6 +557,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE:
+      {
+        EIndexOrLoopVariable eIndexOrLoopVariable = (EIndexOrLoopVariable)theEObject;
+        T result = caseEIndexOrLoopVariable(eIndexOrLoopVariable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE:
+      {
+        EIndexOrLoopVariableReference eIndexOrLoopVariableReference = (EIndexOrLoopVariableReference)theEObject;
+        T result = caseEIndexOrLoopVariableReference(eIndexOrLoopVariableReference);
+        if (result == null) result = caseEVariableReference(eIndexOrLoopVariableReference);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eIndexOrLoopVariableReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.EREGISTER_VARIABLE:
       {
         ERegisterVariable eRegisterVariable = (ERegisterVariable)theEObject;
@@ -594,11 +614,19 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.ETAIL_ELEMENT:
+      {
+        ETailElement eTailElement = (ETailElement)theEObject;
+        T result = caseETailElement(eTailElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.EDICTIONARY:
       {
         EDictionary eDictionary = (EDictionary)theEObject;
         T result = caseEDictionary(eDictionary);
         if (result == null) result = caseEComposedValue(eDictionary);
+        if (result == null) result = caseEDictionaryPassed(eDictionary);
         if (result == null) result = caseEValue(eDictionary);
         if (result == null) result = caseEValueWithoutString(eDictionary);
         if (result == null) result = caseEValuePassedToJinjaExpression(eDictionary);
@@ -618,10 +646,39 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         EList eList = (EList)theEObject;
         T result = caseEList(eList);
         if (result == null) result = caseEComposedValue(eList);
+        if (result == null) result = caseEListPassed(eList);
         if (result == null) result = caseEValue(eList);
         if (result == null) result = caseEValueWithoutString(eList);
         if (result == null) result = caseEValuePassedToJinjaExpression(eList);
         if (result == null) result = caseEValuePassed(eList);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EDICTIONARY_PASSED:
+      {
+        EDictionaryPassed eDictionaryPassed = (EDictionaryPassed)theEObject;
+        T result = caseEDictionaryPassed(eDictionaryPassed);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.ELIST_PASSED:
+      {
+        EListPassed eListPassed = (EListPassed)theEObject;
+        T result = caseEListPassed(eListPassed);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.ENUMBER_PASSED:
+      {
+        ENumberPassed eNumberPassed = (ENumberPassed)theEObject;
+        T result = caseENumberPassed(eNumberPassed);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EBOOLEAN_PASSED:
+      {
+        EBooleanPassed eBooleanPassed = (EBooleanPassed)theEObject;
+        T result = caseEBooleanPassed(eBooleanPassed);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1622,6 +1679,38 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EIndex Or Loop Variable</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EIndex Or Loop Variable</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEIndexOrLoopVariable(EIndexOrLoopVariable object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EIndex Or Loop Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EIndex Or Loop Variable Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEIndexOrLoopVariableReference(EIndexOrLoopVariableReference object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>ERegister Variable</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1702,6 +1791,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>ETail Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ETail Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseETailElement(ETailElement object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EDictionary</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1745,6 +1850,70 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEList(EList object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EDictionary Passed</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EDictionary Passed</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEDictionaryPassed(EDictionaryPassed object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EList Passed</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EList Passed</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEListPassed(EListPassed object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ENumber Passed</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ENumber Passed</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseENumberPassed(ENumberPassed object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EBoolean Passed</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EBoolean Passed</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEBooleanPassed(EBooleanPassed object)
   {
     return null;
   }

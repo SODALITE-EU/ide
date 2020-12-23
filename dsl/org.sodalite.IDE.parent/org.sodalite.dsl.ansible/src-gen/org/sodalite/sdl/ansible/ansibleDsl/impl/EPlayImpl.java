@@ -8,6 +8,8 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -18,9 +20,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
-import org.sodalite.sdl.ansible.ansibleDsl.EList;
+import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
@@ -89,7 +92,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    * @ordered
    */
-  protected EList vars_files;
+  protected EListPassed vars_files;
 
   /**
    * The cached value of the '{@link #getVars_prompt() <em>Vars prompt</em>}' containment reference.
@@ -99,27 +102,17 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    * @ordered
    */
-  protected EList vars_prompt;
+  protected EListPassed vars_prompt;
 
   /**
-   * The default value of the '{@link #getForce_handlers() <em>Force handlers</em>}' attribute.
+   * The cached value of the '{@link #getForce_handlers() <em>Force handlers</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getForce_handlers()
    * @generated
    * @ordered
    */
-  protected static final String FORCE_HANDLERS_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getForce_handlers() <em>Force handlers</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getForce_handlers()
-   * @generated
-   * @ordered
-   */
-  protected String force_handlers = FORCE_HANDLERS_EDEFAULT;
+  protected EBooleanPassed force_handlers;
 
   /**
    * The cached value of the '{@link #getPre_tasks_list() <em>Pre tasks list</em>}' containment reference list.
@@ -129,7 +122,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    * @ordered
    */
-  protected org.eclipse.emf.common.util.EList<EBlockTask> pre_tasks_list;
+  protected EList<EBlockTask> pre_tasks_list;
 
   /**
    * The cached value of the '{@link #getRoles_inclusions() <em>Roles inclusions</em>}' containment reference.
@@ -149,7 +142,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    * @ordered
    */
-  protected org.eclipse.emf.common.util.EList<EBlockTask> tasks_list;
+  protected EList<EBlockTask> tasks_list;
 
   /**
    * The cached value of the '{@link #getPost_tasks_list() <em>Post tasks list</em>}' containment reference list.
@@ -159,7 +152,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    * @ordered
    */
-  protected org.eclipse.emf.common.util.EList<EBlockTask> post_tasks_list;
+  protected EList<EBlockTask> post_tasks_list;
 
   /**
    * The cached value of the '{@link #getHandlers() <em>Handlers</em>}' containment reference list.
@@ -169,7 +162,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    * @ordered
    */
-  protected org.eclipse.emf.common.util.EList<EHandler> handlers;
+  protected EList<EHandler> handlers;
 
   /**
    * <!-- begin-user-doc -->
@@ -348,7 +341,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public EList getVars_files()
+  public EListPassed getVars_files()
   {
     return vars_files;
   }
@@ -358,9 +351,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetVars_files(EList newVars_files, NotificationChain msgs)
+  public NotificationChain basicSetVars_files(EListPassed newVars_files, NotificationChain msgs)
   {
-    EList oldVars_files = vars_files;
+    EListPassed oldVars_files = vars_files;
     vars_files = newVars_files;
     if (eNotificationRequired())
     {
@@ -376,7 +369,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public void setVars_files(EList newVars_files)
+  public void setVars_files(EListPassed newVars_files)
   {
     if (newVars_files != vars_files)
     {
@@ -398,7 +391,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public EList getVars_prompt()
+  public EListPassed getVars_prompt()
   {
     return vars_prompt;
   }
@@ -408,9 +401,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetVars_prompt(EList newVars_prompt, NotificationChain msgs)
+  public NotificationChain basicSetVars_prompt(EListPassed newVars_prompt, NotificationChain msgs)
   {
-    EList oldVars_prompt = vars_prompt;
+    EListPassed oldVars_prompt = vars_prompt;
     vars_prompt = newVars_prompt;
     if (eNotificationRequired())
     {
@@ -426,7 +419,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public void setVars_prompt(EList newVars_prompt)
+  public void setVars_prompt(EListPassed newVars_prompt)
   {
     if (newVars_prompt != vars_prompt)
     {
@@ -448,7 +441,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public String getForce_handlers()
+  public EBooleanPassed getForce_handlers()
   {
     return force_handlers;
   }
@@ -458,13 +451,16 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setForce_handlers(String newForce_handlers)
+  public NotificationChain basicSetForce_handlers(EBooleanPassed newForce_handlers, NotificationChain msgs)
   {
-    String oldForce_handlers = force_handlers;
+    EBooleanPassed oldForce_handlers = force_handlers;
     force_handlers = newForce_handlers;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__FORCE_HANDLERS, oldForce_handlers, force_handlers));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__FORCE_HANDLERS, oldForce_handlers, newForce_handlers);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -473,7 +469,29 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public org.eclipse.emf.common.util.EList<EBlockTask> getPre_tasks_list()
+  public void setForce_handlers(EBooleanPassed newForce_handlers)
+  {
+    if (newForce_handlers != force_handlers)
+    {
+      NotificationChain msgs = null;
+      if (force_handlers != null)
+        msgs = ((InternalEObject)force_handlers).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__FORCE_HANDLERS, null, msgs);
+      if (newForce_handlers != null)
+        msgs = ((InternalEObject)newForce_handlers).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__FORCE_HANDLERS, null, msgs);
+      msgs = basicSetForce_handlers(newForce_handlers, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__FORCE_HANDLERS, newForce_handlers, newForce_handlers));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<EBlockTask> getPre_tasks_list()
   {
     if (pre_tasks_list == null)
     {
@@ -538,7 +556,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public org.eclipse.emf.common.util.EList<EBlockTask> getTasks_list()
+  public EList<EBlockTask> getTasks_list()
   {
     if (tasks_list == null)
     {
@@ -553,7 +571,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public org.eclipse.emf.common.util.EList<EBlockTask> getPost_tasks_list()
+  public EList<EBlockTask> getPost_tasks_list()
   {
     if (post_tasks_list == null)
     {
@@ -568,7 +586,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public org.eclipse.emf.common.util.EList<EHandler> getHandlers()
+  public EList<EHandler> getHandlers()
   {
     if (handlers == null)
     {
@@ -597,6 +615,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return basicSetVars_files(null, msgs);
       case AnsibleDslPackage.EPLAY__VARS_PROMPT:
         return basicSetVars_prompt(null, msgs);
+      case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
+        return basicSetForce_handlers(null, msgs);
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return ((InternalEList<?>)getPre_tasks_list()).basicRemove(otherEnd, msgs);
       case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
@@ -668,13 +688,13 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         setFacts_settings((EFactsSettings)newValue);
         return;
       case AnsibleDslPackage.EPLAY__VARS_FILES:
-        setVars_files((EList)newValue);
+        setVars_files((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY__VARS_PROMPT:
-        setVars_prompt((EList)newValue);
+        setVars_prompt((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
-        setForce_handlers((String)newValue);
+        setForce_handlers((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         getPre_tasks_list().clear();
@@ -719,13 +739,13 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         setFacts_settings((EFactsSettings)null);
         return;
       case AnsibleDslPackage.EPLAY__VARS_FILES:
-        setVars_files((EList)null);
+        setVars_files((EListPassed)null);
         return;
       case AnsibleDslPackage.EPLAY__VARS_PROMPT:
-        setVars_prompt((EList)null);
+        setVars_prompt((EListPassed)null);
         return;
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
-        setForce_handlers(FORCE_HANDLERS_EDEFAULT);
+        setForce_handlers((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         getPre_tasks_list().clear();
@@ -767,7 +787,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
       case AnsibleDslPackage.EPLAY__VARS_PROMPT:
         return vars_prompt != null;
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
-        return FORCE_HANDLERS_EDEFAULT == null ? force_handlers != null : !FORCE_HANDLERS_EDEFAULT.equals(force_handlers);
+        return force_handlers != null;
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return pre_tasks_list != null && !pre_tasks_list.isEmpty();
       case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
@@ -780,23 +800,6 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return handlers != null && !handlers.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (force_handlers: ");
-    result.append(force_handlers);
-    result.append(')');
-    return result.toString();
   }
 
 } //EPlayImpl

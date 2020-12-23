@@ -55,26 +55,26 @@ public interface ETaskHandlerAttributes extends EObject
   void setError_handling(ETaskHandlerErrorHandling value);
 
   /**
-   * Returns the value of the '<em><b>Action</b></em>' attribute.
+   * Returns the value of the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Action</em>' attribute.
-   * @see #setAction(String)
+   * @return the value of the '<em>Action</em>' containment reference.
+   * @see #setAction(EJinjaExpressionAndString)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETaskHandlerAttributes_Action()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getAction();
+  EJinjaExpressionAndString getAction();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getAction <em>Action</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getAction <em>Action</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Action</em>' attribute.
+   * @param value the new value of the '<em>Action</em>' containment reference.
    * @see #getAction()
    * @generated
    */
-  void setAction(String value);
+  void setAction(EJinjaExpressionAndString value);
 
   /**
    * Returns the value of the '<em><b>Asynchronous settings</b></em>' containment reference.
@@ -103,12 +103,12 @@ public interface ETaskHandlerAttributes extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Args</em>' containment reference.
-   * @see #setArgs(EDictionary)
+   * @see #setArgs(EDictionaryPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETaskHandlerAttributes_Args()
    * @model containment="true"
    * @generated
    */
-  EDictionary getArgs();
+  EDictionaryPassed getArgs();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes#getArgs <em>Args</em>}' containment reference.
@@ -118,7 +118,7 @@ public interface ETaskHandlerAttributes extends EObject
    * @see #getArgs()
    * @generated
    */
-  void setArgs(EDictionary value);
+  void setArgs(EDictionaryPassed value);
 
   /**
    * Returns the value of the '<em><b>Module</b></em>' containment reference.

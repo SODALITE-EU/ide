@@ -33,7 +33,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getDirect_input <em>Direct input</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getDirect_parameter <em>Direct parameter</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
@@ -62,14 +62,14 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getDirect_input() <em>Direct input</em>}' containment reference.
+   * The cached value of the '{@link #getDirect_parameter() <em>Direct parameter</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDirect_input()
+   * @see #getDirect_parameter()
    * @generated
    * @ordered
    */
-  protected EValuePassed direct_input;
+  protected EValuePassed direct_parameter;
 
   /**
    * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -133,9 +133,9 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
    * @generated
    */
   @Override
-  public EValuePassed getDirect_input()
+  public EValuePassed getDirect_parameter()
   {
-    return direct_input;
+    return direct_parameter;
   }
 
   /**
@@ -143,13 +143,13 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDirect_input(EValuePassed newDirect_input, NotificationChain msgs)
+  public NotificationChain basicSetDirect_parameter(EValuePassed newDirect_parameter, NotificationChain msgs)
   {
-    EValuePassed oldDirect_input = direct_input;
-    direct_input = newDirect_input;
+    EValuePassed oldDirect_parameter = direct_parameter;
+    direct_parameter = newDirect_parameter;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__DIRECT_INPUT, oldDirect_input, newDirect_input);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER, oldDirect_parameter, newDirect_parameter);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -161,20 +161,20 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
    * @generated
    */
   @Override
-  public void setDirect_input(EValuePassed newDirect_input)
+  public void setDirect_parameter(EValuePassed newDirect_parameter)
   {
-    if (newDirect_input != direct_input)
+    if (newDirect_parameter != direct_parameter)
     {
       NotificationChain msgs = null;
-      if (direct_input != null)
-        msgs = ((InternalEObject)direct_input).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__DIRECT_INPUT, null, msgs);
-      if (newDirect_input != null)
-        msgs = ((InternalEObject)newDirect_input).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__DIRECT_INPUT, null, msgs);
-      msgs = basicSetDirect_input(newDirect_input, msgs);
+      if (direct_parameter != null)
+        msgs = ((InternalEObject)direct_parameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER, null, msgs);
+      if (newDirect_parameter != null)
+        msgs = ((InternalEObject)newDirect_parameter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER, null, msgs);
+      msgs = basicSetDirect_parameter(newDirect_parameter, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__DIRECT_INPUT, newDirect_input, newDirect_input));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER, newDirect_parameter, newDirect_parameter));
   }
 
   /**
@@ -202,8 +202,8 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EMODULE_CALL__DIRECT_INPUT:
-        return basicSetDirect_input(null, msgs);
+      case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
+        return basicSetDirect_parameter(null, msgs);
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
     }
@@ -222,8 +222,8 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
     {
       case AnsibleDslPackage.EMODULE_CALL__NAME:
         return getName();
-      case AnsibleDslPackage.EMODULE_CALL__DIRECT_INPUT:
-        return getDirect_input();
+      case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
+        return getDirect_parameter();
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
         return getParameters();
     }
@@ -244,8 +244,8 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
       case AnsibleDslPackage.EMODULE_CALL__NAME:
         setName((String)newValue);
         return;
-      case AnsibleDslPackage.EMODULE_CALL__DIRECT_INPUT:
-        setDirect_input((EValuePassed)newValue);
+      case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
+        setDirect_parameter((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
         getParameters().clear();
@@ -268,8 +268,8 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
       case AnsibleDslPackage.EMODULE_CALL__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AnsibleDslPackage.EMODULE_CALL__DIRECT_INPUT:
-        setDirect_input((EValuePassed)null);
+      case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
+        setDirect_parameter((EValuePassed)null);
         return;
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
         getParameters().clear();
@@ -290,8 +290,8 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
     {
       case AnsibleDslPackage.EMODULE_CALL__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AnsibleDslPackage.EMODULE_CALL__DIRECT_INPUT:
-        return direct_input != null;
+      case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
+        return direct_parameter != null;
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
     }

@@ -27,38 +27,38 @@ import org.eclipse.emf.ecore.EObject;
 public interface EFactsSettings extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Gather facts</b></em>' attribute.
+   * Returns the value of the '<em><b>Gather facts</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Gather facts</em>' attribute.
-   * @see #setGather_facts(String)
+   * @return the value of the '<em>Gather facts</em>' containment reference.
+   * @see #setGather_facts(EBooleanPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFactsSettings_Gather_facts()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getGather_facts();
+  EBooleanPassed getGather_facts();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getGather_facts <em>Gather facts</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getGather_facts <em>Gather facts</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Gather facts</em>' attribute.
+   * @param value the new value of the '<em>Gather facts</em>' containment reference.
    * @see #getGather_facts()
    * @generated
    */
-  void setGather_facts(String value);
+  void setGather_facts(EBooleanPassed value);
 
   /**
    * Returns the value of the '<em><b>Gather subset</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Gather subset</em>' containment reference.
-   * @see #setGather_subset(EList)
+   * @see #setGather_subset(EListPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFactsSettings_Gather_subset()
    * @model containment="true"
    * @generated
    */
-  EList getGather_subset();
+  EListPassed getGather_subset();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getGather_subset <em>Gather subset</em>}' containment reference.
@@ -68,50 +68,50 @@ public interface EFactsSettings extends EObject
    * @see #getGather_subset()
    * @generated
    */
-  void setGather_subset(EList value);
+  void setGather_subset(EListPassed value);
 
   /**
-   * Returns the value of the '<em><b>Gather timeout</b></em>' attribute.
+   * Returns the value of the '<em><b>Gather timeout</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Gather timeout</em>' attribute.
-   * @see #setGather_timeout(String)
+   * @return the value of the '<em>Gather timeout</em>' containment reference.
+   * @see #setGather_timeout(ENumberPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFactsSettings_Gather_timeout()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getGather_timeout();
+  ENumberPassed getGather_timeout();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getGather_timeout <em>Gather timeout</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getGather_timeout <em>Gather timeout</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Gather timeout</em>' attribute.
+   * @param value the new value of the '<em>Gather timeout</em>' containment reference.
    * @see #getGather_timeout()
    * @generated
    */
-  void setGather_timeout(String value);
+  void setGather_timeout(ENumberPassed value);
 
   /**
-   * Returns the value of the '<em><b>Fact path</b></em>' attribute.
+   * Returns the value of the '<em><b>Fact path</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Fact path</em>' attribute.
-   * @see #setFact_path(String)
+   * @return the value of the '<em>Fact path</em>' containment reference.
+   * @see #setFact_path(EJinjaExpressionAndString)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFactsSettings_Fact_path()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getFact_path();
+  EJinjaExpressionAndString getFact_path();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getFact_path <em>Fact path</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getFact_path <em>Fact path</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Fact path</em>' attribute.
+   * @param value the new value of the '<em>Fact path</em>' containment reference.
    * @see #getFact_path()
    * @generated
    */
-  void setFact_path(String value);
+  void setFact_path(EJinjaExpressionAndString value);
 
 } // EFactsSettings

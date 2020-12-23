@@ -25,47 +25,47 @@ import org.eclipse.emf.ecore.EObject;
 public interface EExeSettings extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Throttle</b></em>' attribute.
+   * Returns the value of the '<em><b>Throttle</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Throttle</em>' attribute.
-   * @see #setThrottle(String)
+   * @return the value of the '<em>Throttle</em>' containment reference.
+   * @see #setThrottle(ENumberPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEExeSettings_Throttle()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getThrottle();
+  ENumberPassed getThrottle();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExeSettings#getThrottle <em>Throttle</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExeSettings#getThrottle <em>Throttle</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Throttle</em>' attribute.
+   * @param value the new value of the '<em>Throttle</em>' containment reference.
    * @see #getThrottle()
    * @generated
    */
-  void setThrottle(String value);
+  void setThrottle(ENumberPassed value);
 
   /**
-   * Returns the value of the '<em><b>Run once</b></em>' attribute.
+   * Returns the value of the '<em><b>Run once</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Run once</em>' attribute.
-   * @see #setRun_once(String)
+   * @return the value of the '<em>Run once</em>' containment reference.
+   * @see #setRun_once(EBooleanPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEExeSettings_Run_once()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getRun_once();
+  EBooleanPassed getRun_once();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExeSettings#getRun_once <em>Run once</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExeSettings#getRun_once <em>Run once</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Run once</em>' attribute.
+   * @param value the new value of the '<em>Run once</em>' containment reference.
    * @see #getRun_once()
    * @generated
    */
-  void setRun_once(String value);
+  void setRun_once(EBooleanPassed value);
 
 } // EExeSettings

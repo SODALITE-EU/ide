@@ -47,47 +47,47 @@ public interface EUntil extends ELoop
   void setUntil(EJinjaExpressionEvaluationWithoutBrackets value);
 
   /**
-   * Returns the value of the '<em><b>Retries</b></em>' attribute.
+   * Returns the value of the '<em><b>Retries</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Retries</em>' attribute.
-   * @see #setRetries(String)
+   * @return the value of the '<em>Retries</em>' containment reference.
+   * @see #setRetries(ENumberPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEUntil_Retries()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getRetries();
+  ENumberPassed getRetries();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EUntil#getRetries <em>Retries</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EUntil#getRetries <em>Retries</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Retries</em>' attribute.
+   * @param value the new value of the '<em>Retries</em>' containment reference.
    * @see #getRetries()
    * @generated
    */
-  void setRetries(String value);
+  void setRetries(ENumberPassed value);
 
   /**
-   * Returns the value of the '<em><b>Delay</b></em>' attribute.
+   * Returns the value of the '<em><b>Delay</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Delay</em>' attribute.
-   * @see #setDelay(String)
+   * @return the value of the '<em>Delay</em>' containment reference.
+   * @see #setDelay(ENumberPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEUntil_Delay()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getDelay();
+  ENumberPassed getDelay();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EUntil#getDelay <em>Delay</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EUntil#getDelay <em>Delay</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Delay</em>' attribute.
+   * @param value the new value of the '<em>Delay</em>' containment reference.
    * @see #getDelay()
    * @generated
    */
-  void setDelay(String value);
+  void setDelay(ENumberPassed value);
 
 } // EUntil

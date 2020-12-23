@@ -13,7 +13,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 
 /**
@@ -46,84 +49,44 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
   protected EValuePassed label;
 
   /**
-   * The default value of the '{@link #getPause() <em>Pause</em>}' attribute.
+   * The cached value of the '{@link #getPause() <em>Pause</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getPause()
    * @generated
    * @ordered
    */
-  protected static final String PAUSE_EDEFAULT = null;
+  protected ENumberPassed pause;
 
   /**
-   * The cached value of the '{@link #getPause() <em>Pause</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPause()
-   * @generated
-   * @ordered
-   */
-  protected String pause = PAUSE_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getIndex_var() <em>Index var</em>}' attribute.
+   * The cached value of the '{@link #getIndex_var() <em>Index var</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getIndex_var()
    * @generated
    * @ordered
    */
-  protected static final String INDEX_VAR_EDEFAULT = null;
+  protected EIndexOrLoopVariable index_var;
 
   /**
-   * The cached value of the '{@link #getIndex_var() <em>Index var</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIndex_var()
-   * @generated
-   * @ordered
-   */
-  protected String index_var = INDEX_VAR_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getLoop_var() <em>Loop var</em>}' attribute.
+   * The cached value of the '{@link #getLoop_var() <em>Loop var</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getLoop_var()
    * @generated
    * @ordered
    */
-  protected static final String LOOP_VAR_EDEFAULT = null;
+  protected EIndexOrLoopVariable loop_var;
 
   /**
-   * The cached value of the '{@link #getLoop_var() <em>Loop var</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getLoop_var()
-   * @generated
-   * @ordered
-   */
-  protected String loop_var = LOOP_VAR_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getExtended() <em>Extended</em>}' attribute.
+   * The cached value of the '{@link #getExtended() <em>Extended</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getExtended()
    * @generated
    * @ordered
    */
-  protected static final String EXTENDED_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getExtended() <em>Extended</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getExtended()
-   * @generated
-   * @ordered
-   */
-  protected String extended = EXTENDED_EDEFAULT;
+  protected EBooleanPassed extended;
 
   /**
    * <!-- begin-user-doc -->
@@ -202,7 +165,7 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * @generated
    */
   @Override
-  public String getPause()
+  public ENumberPassed getPause()
   {
     return pause;
   }
@@ -212,13 +175,16 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setPause(String newPause)
+  public NotificationChain basicSetPause(ENumberPassed newPause, NotificationChain msgs)
   {
-    String oldPause = pause;
+    ENumberPassed oldPause = pause;
     pause = newPause;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__PAUSE, oldPause, pause));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__PAUSE, oldPause, newPause);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -227,7 +193,29 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * @generated
    */
   @Override
-  public String getIndex_var()
+  public void setPause(ENumberPassed newPause)
+  {
+    if (newPause != pause)
+    {
+      NotificationChain msgs = null;
+      if (pause != null)
+        msgs = ((InternalEObject)pause).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ELOOP_CONTROL__PAUSE, null, msgs);
+      if (newPause != null)
+        msgs = ((InternalEObject)newPause).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ELOOP_CONTROL__PAUSE, null, msgs);
+      msgs = basicSetPause(newPause, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__PAUSE, newPause, newPause));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EIndexOrLoopVariable getIndex_var()
   {
     return index_var;
   }
@@ -237,13 +225,16 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setIndex_var(String newIndex_var)
+  public NotificationChain basicSetIndex_var(EIndexOrLoopVariable newIndex_var, NotificationChain msgs)
   {
-    String oldIndex_var = index_var;
+    EIndexOrLoopVariable oldIndex_var = index_var;
     index_var = newIndex_var;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR, oldIndex_var, index_var));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR, oldIndex_var, newIndex_var);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -252,7 +243,29 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * @generated
    */
   @Override
-  public String getLoop_var()
+  public void setIndex_var(EIndexOrLoopVariable newIndex_var)
+  {
+    if (newIndex_var != index_var)
+    {
+      NotificationChain msgs = null;
+      if (index_var != null)
+        msgs = ((InternalEObject)index_var).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR, null, msgs);
+      if (newIndex_var != null)
+        msgs = ((InternalEObject)newIndex_var).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR, null, msgs);
+      msgs = basicSetIndex_var(newIndex_var, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR, newIndex_var, newIndex_var));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EIndexOrLoopVariable getLoop_var()
   {
     return loop_var;
   }
@@ -262,13 +275,16 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setLoop_var(String newLoop_var)
+  public NotificationChain basicSetLoop_var(EIndexOrLoopVariable newLoop_var, NotificationChain msgs)
   {
-    String oldLoop_var = loop_var;
+    EIndexOrLoopVariable oldLoop_var = loop_var;
     loop_var = newLoop_var;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR, oldLoop_var, loop_var));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR, oldLoop_var, newLoop_var);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -277,7 +293,29 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * @generated
    */
   @Override
-  public String getExtended()
+  public void setLoop_var(EIndexOrLoopVariable newLoop_var)
+  {
+    if (newLoop_var != loop_var)
+    {
+      NotificationChain msgs = null;
+      if (loop_var != null)
+        msgs = ((InternalEObject)loop_var).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR, null, msgs);
+      if (newLoop_var != null)
+        msgs = ((InternalEObject)newLoop_var).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR, null, msgs);
+      msgs = basicSetLoop_var(newLoop_var, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR, newLoop_var, newLoop_var));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EBooleanPassed getExtended()
   {
     return extended;
   }
@@ -287,13 +325,38 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setExtended(String newExtended)
+  public NotificationChain basicSetExtended(EBooleanPassed newExtended, NotificationChain msgs)
   {
-    String oldExtended = extended;
+    EBooleanPassed oldExtended = extended;
     extended = newExtended;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__EXTENDED, oldExtended, extended));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__EXTENDED, oldExtended, newExtended);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setExtended(EBooleanPassed newExtended)
+  {
+    if (newExtended != extended)
+    {
+      NotificationChain msgs = null;
+      if (extended != null)
+        msgs = ((InternalEObject)extended).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ELOOP_CONTROL__EXTENDED, null, msgs);
+      if (newExtended != null)
+        msgs = ((InternalEObject)newExtended).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ELOOP_CONTROL__EXTENDED, null, msgs);
+      msgs = basicSetExtended(newExtended, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ELOOP_CONTROL__EXTENDED, newExtended, newExtended));
   }
 
   /**
@@ -308,6 +371,14 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
     {
       case AnsibleDslPackage.ELOOP_CONTROL__LABEL:
         return basicSetLabel(null, msgs);
+      case AnsibleDslPackage.ELOOP_CONTROL__PAUSE:
+        return basicSetPause(null, msgs);
+      case AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR:
+        return basicSetIndex_var(null, msgs);
+      case AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR:
+        return basicSetLoop_var(null, msgs);
+      case AnsibleDslPackage.ELOOP_CONTROL__EXTENDED:
+        return basicSetExtended(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -350,16 +421,16 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
         setLabel((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__PAUSE:
-        setPause((String)newValue);
+        setPause((ENumberPassed)newValue);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR:
-        setIndex_var((String)newValue);
+        setIndex_var((EIndexOrLoopVariable)newValue);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR:
-        setLoop_var((String)newValue);
+        setLoop_var((EIndexOrLoopVariable)newValue);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__EXTENDED:
-        setExtended((String)newValue);
+        setExtended((EBooleanPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -379,16 +450,16 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
         setLabel((EValuePassed)null);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__PAUSE:
-        setPause(PAUSE_EDEFAULT);
+        setPause((ENumberPassed)null);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR:
-        setIndex_var(INDEX_VAR_EDEFAULT);
+        setIndex_var((EIndexOrLoopVariable)null);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR:
-        setLoop_var(LOOP_VAR_EDEFAULT);
+        setLoop_var((EIndexOrLoopVariable)null);
         return;
       case AnsibleDslPackage.ELOOP_CONTROL__EXTENDED:
-        setExtended(EXTENDED_EDEFAULT);
+        setExtended((EBooleanPassed)null);
         return;
     }
     super.eUnset(featureID);
@@ -407,38 +478,15 @@ public class ELoopControlImpl extends MinimalEObjectImpl.Container implements EL
       case AnsibleDslPackage.ELOOP_CONTROL__LABEL:
         return label != null;
       case AnsibleDslPackage.ELOOP_CONTROL__PAUSE:
-        return PAUSE_EDEFAULT == null ? pause != null : !PAUSE_EDEFAULT.equals(pause);
+        return pause != null;
       case AnsibleDslPackage.ELOOP_CONTROL__INDEX_VAR:
-        return INDEX_VAR_EDEFAULT == null ? index_var != null : !INDEX_VAR_EDEFAULT.equals(index_var);
+        return index_var != null;
       case AnsibleDslPackage.ELOOP_CONTROL__LOOP_VAR:
-        return LOOP_VAR_EDEFAULT == null ? loop_var != null : !LOOP_VAR_EDEFAULT.equals(loop_var);
+        return loop_var != null;
       case AnsibleDslPackage.ELOOP_CONTROL__EXTENDED:
-        return EXTENDED_EDEFAULT == null ? extended != null : !EXTENDED_EDEFAULT.equals(extended);
+        return extended != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (pause: ");
-    result.append(pause);
-    result.append(", index_var: ");
-    result.append(index_var);
-    result.append(", loop_var: ");
-    result.append(loop_var);
-    result.append(", extended: ");
-    result.append(extended);
-    result.append(')');
-    return result.toString();
   }
 
 } //ELoopControlImpl

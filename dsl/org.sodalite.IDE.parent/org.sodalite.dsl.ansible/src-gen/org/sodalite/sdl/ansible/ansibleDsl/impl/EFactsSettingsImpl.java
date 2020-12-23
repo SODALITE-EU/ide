@@ -13,8 +13,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EList;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,24 +38,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EList;
 public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements EFactsSettings
 {
   /**
-   * The default value of the '{@link #getGather_facts() <em>Gather facts</em>}' attribute.
+   * The cached value of the '{@link #getGather_facts() <em>Gather facts</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getGather_facts()
    * @generated
    * @ordered
    */
-  protected static final String GATHER_FACTS_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getGather_facts() <em>Gather facts</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getGather_facts()
-   * @generated
-   * @ordered
-   */
-  protected String gather_facts = GATHER_FACTS_EDEFAULT;
+  protected EBooleanPassed gather_facts;
 
   /**
    * The cached value of the '{@link #getGather_subset() <em>Gather subset</em>}' containment reference.
@@ -62,47 +55,27 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected EList gather_subset;
+  protected EListPassed gather_subset;
 
   /**
-   * The default value of the '{@link #getGather_timeout() <em>Gather timeout</em>}' attribute.
+   * The cached value of the '{@link #getGather_timeout() <em>Gather timeout</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getGather_timeout()
    * @generated
    * @ordered
    */
-  protected static final String GATHER_TIMEOUT_EDEFAULT = null;
+  protected ENumberPassed gather_timeout;
 
   /**
-   * The cached value of the '{@link #getGather_timeout() <em>Gather timeout</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getGather_timeout()
-   * @generated
-   * @ordered
-   */
-  protected String gather_timeout = GATHER_TIMEOUT_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getFact_path() <em>Fact path</em>}' attribute.
+   * The cached value of the '{@link #getFact_path() <em>Fact path</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getFact_path()
    * @generated
    * @ordered
    */
-  protected static final String FACT_PATH_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getFact_path() <em>Fact path</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFact_path()
-   * @generated
-   * @ordered
-   */
-  protected String fact_path = FACT_PATH_EDEFAULT;
+  protected EJinjaExpressionAndString fact_path;
 
   /**
    * <!-- begin-user-doc -->
@@ -131,7 +104,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public String getGather_facts()
+  public EBooleanPassed getGather_facts()
   {
     return gather_facts;
   }
@@ -141,13 +114,16 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setGather_facts(String newGather_facts)
+  public NotificationChain basicSetGather_facts(EBooleanPassed newGather_facts, NotificationChain msgs)
   {
-    String oldGather_facts = gather_facts;
+    EBooleanPassed oldGather_facts = gather_facts;
     gather_facts = newGather_facts;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__GATHER_FACTS, oldGather_facts, gather_facts));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__GATHER_FACTS, oldGather_facts, newGather_facts);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -156,7 +132,29 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public EList getGather_subset()
+  public void setGather_facts(EBooleanPassed newGather_facts)
+  {
+    if (newGather_facts != gather_facts)
+    {
+      NotificationChain msgs = null;
+      if (gather_facts != null)
+        msgs = ((InternalEObject)gather_facts).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EFACTS_SETTINGS__GATHER_FACTS, null, msgs);
+      if (newGather_facts != null)
+        msgs = ((InternalEObject)newGather_facts).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EFACTS_SETTINGS__GATHER_FACTS, null, msgs);
+      msgs = basicSetGather_facts(newGather_facts, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__GATHER_FACTS, newGather_facts, newGather_facts));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EListPassed getGather_subset()
   {
     return gather_subset;
   }
@@ -166,9 +164,9 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetGather_subset(EList newGather_subset, NotificationChain msgs)
+  public NotificationChain basicSetGather_subset(EListPassed newGather_subset, NotificationChain msgs)
   {
-    EList oldGather_subset = gather_subset;
+    EListPassed oldGather_subset = gather_subset;
     gather_subset = newGather_subset;
     if (eNotificationRequired())
     {
@@ -184,7 +182,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public void setGather_subset(EList newGather_subset)
+  public void setGather_subset(EListPassed newGather_subset)
   {
     if (newGather_subset != gather_subset)
     {
@@ -206,7 +204,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public String getGather_timeout()
+  public ENumberPassed getGather_timeout()
   {
     return gather_timeout;
   }
@@ -216,13 +214,16 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setGather_timeout(String newGather_timeout)
+  public NotificationChain basicSetGather_timeout(ENumberPassed newGather_timeout, NotificationChain msgs)
   {
-    String oldGather_timeout = gather_timeout;
+    ENumberPassed oldGather_timeout = gather_timeout;
     gather_timeout = newGather_timeout;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT, oldGather_timeout, gather_timeout));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT, oldGather_timeout, newGather_timeout);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -231,7 +232,29 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public String getFact_path()
+  public void setGather_timeout(ENumberPassed newGather_timeout)
+  {
+    if (newGather_timeout != gather_timeout)
+    {
+      NotificationChain msgs = null;
+      if (gather_timeout != null)
+        msgs = ((InternalEObject)gather_timeout).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT, null, msgs);
+      if (newGather_timeout != null)
+        msgs = ((InternalEObject)newGather_timeout).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT, null, msgs);
+      msgs = basicSetGather_timeout(newGather_timeout, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT, newGather_timeout, newGather_timeout));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionAndString getFact_path()
   {
     return fact_path;
   }
@@ -241,13 +264,38 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setFact_path(String newFact_path)
+  public NotificationChain basicSetFact_path(EJinjaExpressionAndString newFact_path, NotificationChain msgs)
   {
-    String oldFact_path = fact_path;
+    EJinjaExpressionAndString oldFact_path = fact_path;
     fact_path = newFact_path;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH, oldFact_path, fact_path));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH, oldFact_path, newFact_path);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setFact_path(EJinjaExpressionAndString newFact_path)
+  {
+    if (newFact_path != fact_path)
+    {
+      NotificationChain msgs = null;
+      if (fact_path != null)
+        msgs = ((InternalEObject)fact_path).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH, null, msgs);
+      if (newFact_path != null)
+        msgs = ((InternalEObject)newFact_path).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH, null, msgs);
+      msgs = basicSetFact_path(newFact_path, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH, newFact_path, newFact_path));
   }
 
   /**
@@ -260,8 +308,14 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_FACTS:
+        return basicSetGather_facts(null, msgs);
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_SUBSET:
         return basicSetGather_subset(null, msgs);
+      case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT:
+        return basicSetGather_timeout(null, msgs);
+      case AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH:
+        return basicSetFact_path(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -299,16 +353,16 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
     switch (featureID)
     {
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_FACTS:
-        setGather_facts((String)newValue);
+        setGather_facts((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_SUBSET:
-        setGather_subset((EList)newValue);
+        setGather_subset((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT:
-        setGather_timeout((String)newValue);
+        setGather_timeout((ENumberPassed)newValue);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH:
-        setFact_path((String)newValue);
+        setFact_path((EJinjaExpressionAndString)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -325,16 +379,16 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
     switch (featureID)
     {
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_FACTS:
-        setGather_facts(GATHER_FACTS_EDEFAULT);
+        setGather_facts((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_SUBSET:
-        setGather_subset((EList)null);
+        setGather_subset((EListPassed)null);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT:
-        setGather_timeout(GATHER_TIMEOUT_EDEFAULT);
+        setGather_timeout((ENumberPassed)null);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH:
-        setFact_path(FACT_PATH_EDEFAULT);
+        setFact_path((EJinjaExpressionAndString)null);
         return;
     }
     super.eUnset(featureID);
@@ -351,36 +405,15 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
     switch (featureID)
     {
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_FACTS:
-        return GATHER_FACTS_EDEFAULT == null ? gather_facts != null : !GATHER_FACTS_EDEFAULT.equals(gather_facts);
+        return gather_facts != null;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_SUBSET:
         return gather_subset != null;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT:
-        return GATHER_TIMEOUT_EDEFAULT == null ? gather_timeout != null : !GATHER_TIMEOUT_EDEFAULT.equals(gather_timeout);
+        return gather_timeout != null;
       case AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH:
-        return FACT_PATH_EDEFAULT == null ? fact_path != null : !FACT_PATH_EDEFAULT.equals(fact_path);
+        return fact_path != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (gather_facts: ");
-    result.append(gather_facts);
-    result.append(", gather_timeout: ");
-    result.append(gather_timeout);
-    result.append(", fact_path: ");
-    result.append(fact_path);
-    result.append(')');
-    return result.toString();
   }
 
 } //EFactsSettingsImpl

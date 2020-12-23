@@ -8,6 +8,8 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -19,8 +21,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
-import org.sodalite.sdl.ansible.ansibleDsl.EList;
+import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
@@ -80,24 +83,14 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
   protected EConnection connection;
 
   /**
-   * The default value of the '{@link #getNo_log() <em>No log</em>}' attribute.
+   * The cached value of the '{@link #getNo_log() <em>No log</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getNo_log()
    * @generated
    * @ordered
    */
-  protected static final String NO_LOG_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getNo_log() <em>No log</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNo_log()
-   * @generated
-   * @ordered
-   */
-  protected String no_log = NO_LOG_EDEFAULT;
+  protected EBooleanPassed no_log;
 
   /**
    * The default value of the '{@link #getDebugger() <em>Debugger</em>}' attribute.
@@ -127,7 +120,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected EList module_defaults;
+  protected EListPassed module_defaults;
 
   /**
    * The cached value of the '{@link #getEnvironment() <em>Environment</em>}' containment reference.
@@ -137,7 +130,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected EList environment;
+  protected EListPassed environment;
 
   /**
    * The cached value of the '{@link #getCollections() <em>Collections</em>}' containment reference.
@@ -147,7 +140,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected EList collections;
+  protected EListPassed collections;
 
   /**
    * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
@@ -157,7 +150,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected EList tags;
+  protected EListPassed tags;
 
   /**
    * The cached value of the '{@link #getVariable_declarations() <em>Variable declarations</em>}' containment reference list.
@@ -167,7 +160,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected org.eclipse.emf.common.util.EList<EVariableDeclaration> variable_declarations;
+  protected EList<EVariableDeclaration> variable_declarations;
 
   /**
    * <!-- begin-user-doc -->
@@ -346,7 +339,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public String getNo_log()
+  public EBooleanPassed getNo_log()
   {
     return no_log;
   }
@@ -356,13 +349,38 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setNo_log(String newNo_log)
+  public NotificationChain basicSetNo_log(EBooleanPassed newNo_log, NotificationChain msgs)
   {
-    String oldNo_log = no_log;
+    EBooleanPassed oldNo_log = no_log;
     no_log = newNo_log;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE_ATTRIBUTES__NO_LOG, oldNo_log, no_log));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE_ATTRIBUTES__NO_LOG, oldNo_log, newNo_log);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setNo_log(EBooleanPassed newNo_log)
+  {
+    if (newNo_log != no_log)
+    {
+      NotificationChain msgs = null;
+      if (no_log != null)
+        msgs = ((InternalEObject)no_log).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBASE_ATTRIBUTES__NO_LOG, null, msgs);
+      if (newNo_log != null)
+        msgs = ((InternalEObject)newNo_log).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBASE_ATTRIBUTES__NO_LOG, null, msgs);
+      msgs = basicSetNo_log(newNo_log, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE_ATTRIBUTES__NO_LOG, newNo_log, newNo_log));
   }
 
   /**
@@ -396,7 +414,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EList getModule_defaults()
+  public EListPassed getModule_defaults()
   {
     return module_defaults;
   }
@@ -406,9 +424,9 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetModule_defaults(EList newModule_defaults, NotificationChain msgs)
+  public NotificationChain basicSetModule_defaults(EListPassed newModule_defaults, NotificationChain msgs)
   {
-    EList oldModule_defaults = module_defaults;
+    EListPassed oldModule_defaults = module_defaults;
     module_defaults = newModule_defaults;
     if (eNotificationRequired())
     {
@@ -424,7 +442,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setModule_defaults(EList newModule_defaults)
+  public void setModule_defaults(EListPassed newModule_defaults)
   {
     if (newModule_defaults != module_defaults)
     {
@@ -446,7 +464,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EList getEnvironment()
+  public EListPassed getEnvironment()
   {
     return environment;
   }
@@ -456,9 +474,9 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetEnvironment(EList newEnvironment, NotificationChain msgs)
+  public NotificationChain basicSetEnvironment(EListPassed newEnvironment, NotificationChain msgs)
   {
-    EList oldEnvironment = environment;
+    EListPassed oldEnvironment = environment;
     environment = newEnvironment;
     if (eNotificationRequired())
     {
@@ -474,7 +492,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setEnvironment(EList newEnvironment)
+  public void setEnvironment(EListPassed newEnvironment)
   {
     if (newEnvironment != environment)
     {
@@ -496,7 +514,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EList getCollections()
+  public EListPassed getCollections()
   {
     return collections;
   }
@@ -506,9 +524,9 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetCollections(EList newCollections, NotificationChain msgs)
+  public NotificationChain basicSetCollections(EListPassed newCollections, NotificationChain msgs)
   {
-    EList oldCollections = collections;
+    EListPassed oldCollections = collections;
     collections = newCollections;
     if (eNotificationRequired())
     {
@@ -524,7 +542,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setCollections(EList newCollections)
+  public void setCollections(EListPassed newCollections)
   {
     if (newCollections != collections)
     {
@@ -546,7 +564,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EList getTags()
+  public EListPassed getTags()
   {
     return tags;
   }
@@ -556,9 +574,9 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTags(EList newTags, NotificationChain msgs)
+  public NotificationChain basicSetTags(EListPassed newTags, NotificationChain msgs)
   {
-    EList oldTags = tags;
+    EListPassed oldTags = tags;
     tags = newTags;
     if (eNotificationRequired())
     {
@@ -574,7 +592,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setTags(EList newTags)
+  public void setTags(EListPassed newTags)
   {
     if (newTags != tags)
     {
@@ -596,7 +614,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public org.eclipse.emf.common.util.EList<EVariableDeclaration> getVariable_declarations()
+  public EList<EVariableDeclaration> getVariable_declarations()
   {
     if (variable_declarations == null)
     {
@@ -621,6 +639,8 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
         return basicSetValidation_mode(null, msgs);
       case AnsibleDslPackage.EBASE_ATTRIBUTES__CONNECTION:
         return basicSetConnection(null, msgs);
+      case AnsibleDslPackage.EBASE_ATTRIBUTES__NO_LOG:
+        return basicSetNo_log(null, msgs);
       case AnsibleDslPackage.EBASE_ATTRIBUTES__MODULE_DEFAULTS:
         return basicSetModule_defaults(null, msgs);
       case AnsibleDslPackage.EBASE_ATTRIBUTES__ENVIRONMENT:
@@ -690,22 +710,22 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
         setConnection((EConnection)newValue);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__NO_LOG:
-        setNo_log((String)newValue);
+        setNo_log((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__DEBUGGER:
         setDebugger((String)newValue);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__MODULE_DEFAULTS:
-        setModule_defaults((EList)newValue);
+        setModule_defaults((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__ENVIRONMENT:
-        setEnvironment((EList)newValue);
+        setEnvironment((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__COLLECTIONS:
-        setCollections((EList)newValue);
+        setCollections((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__TAGS:
-        setTags((EList)newValue);
+        setTags((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__VARIABLE_DECLARATIONS:
         getVariable_declarations().clear();
@@ -735,22 +755,22 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
         setConnection((EConnection)null);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__NO_LOG:
-        setNo_log(NO_LOG_EDEFAULT);
+        setNo_log((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__DEBUGGER:
         setDebugger(DEBUGGER_EDEFAULT);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__MODULE_DEFAULTS:
-        setModule_defaults((EList)null);
+        setModule_defaults((EListPassed)null);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__ENVIRONMENT:
-        setEnvironment((EList)null);
+        setEnvironment((EListPassed)null);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__COLLECTIONS:
-        setCollections((EList)null);
+        setCollections((EListPassed)null);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__TAGS:
-        setTags((EList)null);
+        setTags((EListPassed)null);
         return;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__VARIABLE_DECLARATIONS:
         getVariable_declarations().clear();
@@ -776,7 +796,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
       case AnsibleDslPackage.EBASE_ATTRIBUTES__CONNECTION:
         return connection != null;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__NO_LOG:
-        return NO_LOG_EDEFAULT == null ? no_log != null : !NO_LOG_EDEFAULT.equals(no_log);
+        return no_log != null;
       case AnsibleDslPackage.EBASE_ATTRIBUTES__DEBUGGER:
         return DEBUGGER_EDEFAULT == null ? debugger != null : !DEBUGGER_EDEFAULT.equals(debugger);
       case AnsibleDslPackage.EBASE_ATTRIBUTES__MODULE_DEFAULTS:
@@ -804,9 +824,7 @@ public class EBaseAttributesImpl extends MinimalEObjectImpl.Container implements
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (no_log: ");
-    result.append(no_log);
-    result.append(", debugger: ");
+    result.append(" (debugger: ");
     result.append(debugger);
     result.append(')');
     return result.toString();

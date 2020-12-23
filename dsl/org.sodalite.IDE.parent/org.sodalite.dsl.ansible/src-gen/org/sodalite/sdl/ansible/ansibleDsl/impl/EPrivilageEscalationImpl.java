@@ -4,13 +4,17 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 
 /**
@@ -33,104 +37,54 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
 public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container implements EPrivilageEscalation
 {
   /**
-   * The default value of the '{@link #getBecome() <em>Become</em>}' attribute.
+   * The cached value of the '{@link #getBecome() <em>Become</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getBecome()
    * @generated
    * @ordered
    */
-  protected static final String BECOME_EDEFAULT = null;
+  protected EBooleanPassed become;
 
   /**
-   * The cached value of the '{@link #getBecome() <em>Become</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBecome()
-   * @generated
-   * @ordered
-   */
-  protected String become = BECOME_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getBecome_exe() <em>Become exe</em>}' attribute.
+   * The cached value of the '{@link #getBecome_exe() <em>Become exe</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getBecome_exe()
    * @generated
    * @ordered
    */
-  protected static final String BECOME_EXE_EDEFAULT = null;
+  protected EJinjaExpressionAndString become_exe;
 
   /**
-   * The cached value of the '{@link #getBecome_exe() <em>Become exe</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBecome_exe()
-   * @generated
-   * @ordered
-   */
-  protected String become_exe = BECOME_EXE_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getBecome_flags() <em>Become flags</em>}' attribute.
+   * The cached value of the '{@link #getBecome_flags() <em>Become flags</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getBecome_flags()
    * @generated
    * @ordered
    */
-  protected static final String BECOME_FLAGS_EDEFAULT = null;
+  protected EJinjaExpressionAndString become_flags;
 
   /**
-   * The cached value of the '{@link #getBecome_flags() <em>Become flags</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBecome_flags()
-   * @generated
-   * @ordered
-   */
-  protected String become_flags = BECOME_FLAGS_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getBecome_method() <em>Become method</em>}' attribute.
+   * The cached value of the '{@link #getBecome_method() <em>Become method</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getBecome_method()
    * @generated
    * @ordered
    */
-  protected static final String BECOME_METHOD_EDEFAULT = null;
+  protected EJinjaExpressionAndString become_method;
 
   /**
-   * The cached value of the '{@link #getBecome_method() <em>Become method</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBecome_method()
-   * @generated
-   * @ordered
-   */
-  protected String become_method = BECOME_METHOD_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getBecome_user() <em>Become user</em>}' attribute.
+   * The cached value of the '{@link #getBecome_user() <em>Become user</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getBecome_user()
    * @generated
    * @ordered
    */
-  protected static final String BECOME_USER_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getBecome_user() <em>Become user</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBecome_user()
-   * @generated
-   * @ordered
-   */
-  protected String become_user = BECOME_USER_EDEFAULT;
+  protected EJinjaExpressionAndString become_user;
 
   /**
    * <!-- begin-user-doc -->
@@ -159,7 +113,7 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public String getBecome()
+  public EBooleanPassed getBecome()
   {
     return become;
   }
@@ -169,13 +123,16 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setBecome(String newBecome)
+  public NotificationChain basicSetBecome(EBooleanPassed newBecome, NotificationChain msgs)
   {
-    String oldBecome = become;
+    EBooleanPassed oldBecome = become;
     become = newBecome;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME, oldBecome, become));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME, oldBecome, newBecome);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -184,7 +141,29 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public String getBecome_exe()
+  public void setBecome(EBooleanPassed newBecome)
+  {
+    if (newBecome != become)
+    {
+      NotificationChain msgs = null;
+      if (become != null)
+        msgs = ((InternalEObject)become).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME, null, msgs);
+      if (newBecome != null)
+        msgs = ((InternalEObject)newBecome).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME, null, msgs);
+      msgs = basicSetBecome(newBecome, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME, newBecome, newBecome));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionAndString getBecome_exe()
   {
     return become_exe;
   }
@@ -194,13 +173,16 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setBecome_exe(String newBecome_exe)
+  public NotificationChain basicSetBecome_exe(EJinjaExpressionAndString newBecome_exe, NotificationChain msgs)
   {
-    String oldBecome_exe = become_exe;
+    EJinjaExpressionAndString oldBecome_exe = become_exe;
     become_exe = newBecome_exe;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_EXE, oldBecome_exe, become_exe));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_EXE, oldBecome_exe, newBecome_exe);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -209,7 +191,29 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public String getBecome_flags()
+  public void setBecome_exe(EJinjaExpressionAndString newBecome_exe)
+  {
+    if (newBecome_exe != become_exe)
+    {
+      NotificationChain msgs = null;
+      if (become_exe != null)
+        msgs = ((InternalEObject)become_exe).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_EXE, null, msgs);
+      if (newBecome_exe != null)
+        msgs = ((InternalEObject)newBecome_exe).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_EXE, null, msgs);
+      msgs = basicSetBecome_exe(newBecome_exe, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_EXE, newBecome_exe, newBecome_exe));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionAndString getBecome_flags()
   {
     return become_flags;
   }
@@ -219,13 +223,16 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setBecome_flags(String newBecome_flags)
+  public NotificationChain basicSetBecome_flags(EJinjaExpressionAndString newBecome_flags, NotificationChain msgs)
   {
-    String oldBecome_flags = become_flags;
+    EJinjaExpressionAndString oldBecome_flags = become_flags;
     become_flags = newBecome_flags;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_FLAGS, oldBecome_flags, become_flags));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_FLAGS, oldBecome_flags, newBecome_flags);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -234,7 +241,29 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public String getBecome_method()
+  public void setBecome_flags(EJinjaExpressionAndString newBecome_flags)
+  {
+    if (newBecome_flags != become_flags)
+    {
+      NotificationChain msgs = null;
+      if (become_flags != null)
+        msgs = ((InternalEObject)become_flags).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_FLAGS, null, msgs);
+      if (newBecome_flags != null)
+        msgs = ((InternalEObject)newBecome_flags).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_FLAGS, null, msgs);
+      msgs = basicSetBecome_flags(newBecome_flags, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_FLAGS, newBecome_flags, newBecome_flags));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionAndString getBecome_method()
   {
     return become_method;
   }
@@ -244,13 +273,16 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setBecome_method(String newBecome_method)
+  public NotificationChain basicSetBecome_method(EJinjaExpressionAndString newBecome_method, NotificationChain msgs)
   {
-    String oldBecome_method = become_method;
+    EJinjaExpressionAndString oldBecome_method = become_method;
     become_method = newBecome_method;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_METHOD, oldBecome_method, become_method));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_METHOD, oldBecome_method, newBecome_method);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -259,7 +291,29 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public String getBecome_user()
+  public void setBecome_method(EJinjaExpressionAndString newBecome_method)
+  {
+    if (newBecome_method != become_method)
+    {
+      NotificationChain msgs = null;
+      if (become_method != null)
+        msgs = ((InternalEObject)become_method).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_METHOD, null, msgs);
+      if (newBecome_method != null)
+        msgs = ((InternalEObject)newBecome_method).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_METHOD, null, msgs);
+      msgs = basicSetBecome_method(newBecome_method, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_METHOD, newBecome_method, newBecome_method));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionAndString getBecome_user()
   {
     return become_user;
   }
@@ -269,13 +323,62 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setBecome_user(String newBecome_user)
+  public NotificationChain basicSetBecome_user(EJinjaExpressionAndString newBecome_user, NotificationChain msgs)
   {
-    String oldBecome_user = become_user;
+    EJinjaExpressionAndString oldBecome_user = become_user;
     become_user = newBecome_user;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_USER, oldBecome_user, become_user));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_USER, oldBecome_user, newBecome_user);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setBecome_user(EJinjaExpressionAndString newBecome_user)
+  {
+    if (newBecome_user != become_user)
+    {
+      NotificationChain msgs = null;
+      if (become_user != null)
+        msgs = ((InternalEObject)become_user).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_USER, null, msgs);
+      if (newBecome_user != null)
+        msgs = ((InternalEObject)newBecome_user).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_USER, null, msgs);
+      msgs = basicSetBecome_user(newBecome_user, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_USER, newBecome_user, newBecome_user));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME:
+        return basicSetBecome(null, msgs);
+      case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_EXE:
+        return basicSetBecome_exe(null, msgs);
+      case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_FLAGS:
+        return basicSetBecome_flags(null, msgs);
+      case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_METHOD:
+        return basicSetBecome_method(null, msgs);
+      case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_USER:
+        return basicSetBecome_user(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -313,19 +416,19 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
     switch (featureID)
     {
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME:
-        setBecome((String)newValue);
+        setBecome((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_EXE:
-        setBecome_exe((String)newValue);
+        setBecome_exe((EJinjaExpressionAndString)newValue);
         return;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_FLAGS:
-        setBecome_flags((String)newValue);
+        setBecome_flags((EJinjaExpressionAndString)newValue);
         return;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_METHOD:
-        setBecome_method((String)newValue);
+        setBecome_method((EJinjaExpressionAndString)newValue);
         return;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_USER:
-        setBecome_user((String)newValue);
+        setBecome_user((EJinjaExpressionAndString)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -342,19 +445,19 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
     switch (featureID)
     {
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME:
-        setBecome(BECOME_EDEFAULT);
+        setBecome((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_EXE:
-        setBecome_exe(BECOME_EXE_EDEFAULT);
+        setBecome_exe((EJinjaExpressionAndString)null);
         return;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_FLAGS:
-        setBecome_flags(BECOME_FLAGS_EDEFAULT);
+        setBecome_flags((EJinjaExpressionAndString)null);
         return;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_METHOD:
-        setBecome_method(BECOME_METHOD_EDEFAULT);
+        setBecome_method((EJinjaExpressionAndString)null);
         return;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_USER:
-        setBecome_user(BECOME_USER_EDEFAULT);
+        setBecome_user((EJinjaExpressionAndString)null);
         return;
     }
     super.eUnset(featureID);
@@ -371,42 +474,17 @@ public class EPrivilageEscalationImpl extends MinimalEObjectImpl.Container imple
     switch (featureID)
     {
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME:
-        return BECOME_EDEFAULT == null ? become != null : !BECOME_EDEFAULT.equals(become);
+        return become != null;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_EXE:
-        return BECOME_EXE_EDEFAULT == null ? become_exe != null : !BECOME_EXE_EDEFAULT.equals(become_exe);
+        return become_exe != null;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_FLAGS:
-        return BECOME_FLAGS_EDEFAULT == null ? become_flags != null : !BECOME_FLAGS_EDEFAULT.equals(become_flags);
+        return become_flags != null;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_METHOD:
-        return BECOME_METHOD_EDEFAULT == null ? become_method != null : !BECOME_METHOD_EDEFAULT.equals(become_method);
+        return become_method != null;
       case AnsibleDslPackage.EPRIVILAGE_ESCALATION__BECOME_USER:
-        return BECOME_USER_EDEFAULT == null ? become_user != null : !BECOME_USER_EDEFAULT.equals(become_user);
+        return become_user != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (become: ");
-    result.append(become);
-    result.append(", become_exe: ");
-    result.append(become_exe);
-    result.append(", become_flags: ");
-    result.append(become_flags);
-    result.append(", become_method: ");
-    result.append(become_method);
-    result.append(", become_user: ");
-    result.append(become_user);
-    result.append(')');
-    return result.toString();
   }
 
 } //EPrivilageEscalationImpl

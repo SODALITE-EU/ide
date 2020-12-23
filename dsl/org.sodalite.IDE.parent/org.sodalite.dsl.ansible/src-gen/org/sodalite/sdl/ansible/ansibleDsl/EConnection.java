@@ -26,69 +26,69 @@ import org.eclipse.emf.ecore.EObject;
 public interface EConnection extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Connection</b></em>' attribute.
+   * Returns the value of the '<em><b>Connection</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Connection</em>' attribute.
-   * @see #setConnection(String)
+   * @return the value of the '<em>Connection</em>' containment reference.
+   * @see #setConnection(EJinjaExpressionAndString)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConnection_Connection()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getConnection();
+  EJinjaExpressionAndString getConnection();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConnection#getConnection <em>Connection</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConnection#getConnection <em>Connection</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Connection</em>' attribute.
+   * @param value the new value of the '<em>Connection</em>' containment reference.
    * @see #getConnection()
    * @generated
    */
-  void setConnection(String value);
+  void setConnection(EJinjaExpressionAndString value);
 
   /**
-   * Returns the value of the '<em><b>Port</b></em>' attribute.
+   * Returns the value of the '<em><b>Port</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Port</em>' attribute.
-   * @see #setPort(String)
+   * @return the value of the '<em>Port</em>' containment reference.
+   * @see #setPort(ENumberPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConnection_Port()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getPort();
+  ENumberPassed getPort();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConnection#getPort <em>Port</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConnection#getPort <em>Port</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Port</em>' attribute.
+   * @param value the new value of the '<em>Port</em>' containment reference.
    * @see #getPort()
    * @generated
    */
-  void setPort(String value);
+  void setPort(ENumberPassed value);
 
   /**
-   * Returns the value of the '<em><b>Remote user</b></em>' attribute.
+   * Returns the value of the '<em><b>Remote user</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Remote user</em>' attribute.
-   * @see #setRemote_user(String)
+   * @return the value of the '<em>Remote user</em>' containment reference.
+   * @see #setRemote_user(EJinjaExpressionAndString)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConnection_Remote_user()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getRemote_user();
+  EJinjaExpressionAndString getRemote_user();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConnection#getRemote_user <em>Remote user</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConnection#getRemote_user <em>Remote user</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Remote user</em>' attribute.
+   * @param value the new value of the '<em>Remote user</em>' containment reference.
    * @see #getRemote_user()
    * @generated
    */
-  void setRemote_user(String value);
+  void setRemote_user(EJinjaExpressionAndString value);
 
 } // EConnection

@@ -3,6 +3,8 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -99,26 +101,26 @@ public interface EBaseAttributes extends EObject
   void setConnection(EConnection value);
 
   /**
-   * Returns the value of the '<em><b>No log</b></em>' attribute.
+   * Returns the value of the '<em><b>No log</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>No log</em>' attribute.
-   * @see #setNo_log(String)
+   * @return the value of the '<em>No log</em>' containment reference.
+   * @see #setNo_log(EBooleanPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBaseAttributes_No_log()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getNo_log();
+  EBooleanPassed getNo_log();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getNo_log <em>No log</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getNo_log <em>No log</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>No log</em>' attribute.
+   * @param value the new value of the '<em>No log</em>' containment reference.
    * @see #getNo_log()
    * @generated
    */
-  void setNo_log(String value);
+  void setNo_log(EBooleanPassed value);
 
   /**
    * Returns the value of the '<em><b>Debugger</b></em>' attribute.
@@ -147,12 +149,12 @@ public interface EBaseAttributes extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Module defaults</em>' containment reference.
-   * @see #setModule_defaults(EList)
+   * @see #setModule_defaults(EListPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBaseAttributes_Module_defaults()
    * @model containment="true"
    * @generated
    */
-  EList getModule_defaults();
+  EListPassed getModule_defaults();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getModule_defaults <em>Module defaults</em>}' containment reference.
@@ -162,19 +164,19 @@ public interface EBaseAttributes extends EObject
    * @see #getModule_defaults()
    * @generated
    */
-  void setModule_defaults(EList value);
+  void setModule_defaults(EListPassed value);
 
   /**
    * Returns the value of the '<em><b>Environment</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Environment</em>' containment reference.
-   * @see #setEnvironment(EList)
+   * @see #setEnvironment(EListPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBaseAttributes_Environment()
    * @model containment="true"
    * @generated
    */
-  EList getEnvironment();
+  EListPassed getEnvironment();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getEnvironment <em>Environment</em>}' containment reference.
@@ -184,19 +186,19 @@ public interface EBaseAttributes extends EObject
    * @see #getEnvironment()
    * @generated
    */
-  void setEnvironment(EList value);
+  void setEnvironment(EListPassed value);
 
   /**
    * Returns the value of the '<em><b>Collections</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Collections</em>' containment reference.
-   * @see #setCollections(EList)
+   * @see #setCollections(EListPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBaseAttributes_Collections()
    * @model containment="true"
    * @generated
    */
-  EList getCollections();
+  EListPassed getCollections();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getCollections <em>Collections</em>}' containment reference.
@@ -206,19 +208,19 @@ public interface EBaseAttributes extends EObject
    * @see #getCollections()
    * @generated
    */
-  void setCollections(EList value);
+  void setCollections(EListPassed value);
 
   /**
    * Returns the value of the '<em><b>Tags</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Tags</em>' containment reference.
-   * @see #setTags(EList)
+   * @see #setTags(EListPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBaseAttributes_Tags()
    * @model containment="true"
    * @generated
    */
-  EList getTags();
+  EListPassed getTags();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes#getTags <em>Tags</em>}' containment reference.
@@ -228,7 +230,7 @@ public interface EBaseAttributes extends EObject
    * @see #getTags()
    * @generated
    */
-  void setTags(EList value);
+  void setTags(EListPassed value);
 
   /**
    * Returns the value of the '<em><b>Variable declarations</b></em>' containment reference list.
@@ -240,6 +242,6 @@ public interface EBaseAttributes extends EObject
    * @model containment="true"
    * @generated
    */
-  org.eclipse.emf.common.util.EList<EVariableDeclaration> getVariable_declarations();
+  EList<EVariableDeclaration> getVariable_declarations();
 
 } // EBaseAttributes

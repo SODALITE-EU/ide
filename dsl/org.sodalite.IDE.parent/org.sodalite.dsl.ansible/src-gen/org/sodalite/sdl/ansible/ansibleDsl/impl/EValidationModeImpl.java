@@ -4,13 +4,16 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 
 /**
@@ -30,44 +33,24 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 public class EValidationModeImpl extends MinimalEObjectImpl.Container implements EValidationMode
 {
   /**
-   * The default value of the '{@link #getCheck_mode() <em>Check mode</em>}' attribute.
+   * The cached value of the '{@link #getCheck_mode() <em>Check mode</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getCheck_mode()
    * @generated
    * @ordered
    */
-  protected static final String CHECK_MODE_EDEFAULT = null;
+  protected EBooleanPassed check_mode;
 
   /**
-   * The cached value of the '{@link #getCheck_mode() <em>Check mode</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCheck_mode()
-   * @generated
-   * @ordered
-   */
-  protected String check_mode = CHECK_MODE_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getDiff() <em>Diff</em>}' attribute.
+   * The cached value of the '{@link #getDiff() <em>Diff</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getDiff()
    * @generated
    * @ordered
    */
-  protected static final String DIFF_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDiff() <em>Diff</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDiff()
-   * @generated
-   * @ordered
-   */
-  protected String diff = DIFF_EDEFAULT;
+  protected EBooleanPassed diff;
 
   /**
    * <!-- begin-user-doc -->
@@ -96,7 +79,7 @@ public class EValidationModeImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public String getCheck_mode()
+  public EBooleanPassed getCheck_mode()
   {
     return check_mode;
   }
@@ -106,13 +89,16 @@ public class EValidationModeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setCheck_mode(String newCheck_mode)
+  public NotificationChain basicSetCheck_mode(EBooleanPassed newCheck_mode, NotificationChain msgs)
   {
-    String oldCheck_mode = check_mode;
+    EBooleanPassed oldCheck_mode = check_mode;
     check_mode = newCheck_mode;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVALIDATION_MODE__CHECK_MODE, oldCheck_mode, check_mode));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVALIDATION_MODE__CHECK_MODE, oldCheck_mode, newCheck_mode);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -121,7 +107,29 @@ public class EValidationModeImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public String getDiff()
+  public void setCheck_mode(EBooleanPassed newCheck_mode)
+  {
+    if (newCheck_mode != check_mode)
+    {
+      NotificationChain msgs = null;
+      if (check_mode != null)
+        msgs = ((InternalEObject)check_mode).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EVALIDATION_MODE__CHECK_MODE, null, msgs);
+      if (newCheck_mode != null)
+        msgs = ((InternalEObject)newCheck_mode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EVALIDATION_MODE__CHECK_MODE, null, msgs);
+      msgs = basicSetCheck_mode(newCheck_mode, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVALIDATION_MODE__CHECK_MODE, newCheck_mode, newCheck_mode));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EBooleanPassed getDiff()
   {
     return diff;
   }
@@ -131,13 +139,56 @@ public class EValidationModeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setDiff(String newDiff)
+  public NotificationChain basicSetDiff(EBooleanPassed newDiff, NotificationChain msgs)
   {
-    String oldDiff = diff;
+    EBooleanPassed oldDiff = diff;
     diff = newDiff;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVALIDATION_MODE__DIFF, oldDiff, diff));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVALIDATION_MODE__DIFF, oldDiff, newDiff);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDiff(EBooleanPassed newDiff)
+  {
+    if (newDiff != diff)
+    {
+      NotificationChain msgs = null;
+      if (diff != null)
+        msgs = ((InternalEObject)diff).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EVALIDATION_MODE__DIFF, null, msgs);
+      if (newDiff != null)
+        msgs = ((InternalEObject)newDiff).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EVALIDATION_MODE__DIFF, null, msgs);
+      msgs = basicSetDiff(newDiff, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EVALIDATION_MODE__DIFF, newDiff, newDiff));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.EVALIDATION_MODE__CHECK_MODE:
+        return basicSetCheck_mode(null, msgs);
+      case AnsibleDslPackage.EVALIDATION_MODE__DIFF:
+        return basicSetDiff(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -169,10 +220,10 @@ public class EValidationModeImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case AnsibleDslPackage.EVALIDATION_MODE__CHECK_MODE:
-        setCheck_mode((String)newValue);
+        setCheck_mode((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EVALIDATION_MODE__DIFF:
-        setDiff((String)newValue);
+        setDiff((EBooleanPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -189,10 +240,10 @@ public class EValidationModeImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case AnsibleDslPackage.EVALIDATION_MODE__CHECK_MODE:
-        setCheck_mode(CHECK_MODE_EDEFAULT);
+        setCheck_mode((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EVALIDATION_MODE__DIFF:
-        setDiff(DIFF_EDEFAULT);
+        setDiff((EBooleanPassed)null);
         return;
     }
     super.eUnset(featureID);
@@ -209,30 +260,11 @@ public class EValidationModeImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case AnsibleDslPackage.EVALIDATION_MODE__CHECK_MODE:
-        return CHECK_MODE_EDEFAULT == null ? check_mode != null : !CHECK_MODE_EDEFAULT.equals(check_mode);
+        return check_mode != null;
       case AnsibleDslPackage.EVALIDATION_MODE__DIFF:
-        return DIFF_EDEFAULT == null ? diff != null : !DIFF_EDEFAULT.equals(diff);
+        return diff != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (check_mode: ");
-    result.append(check_mode);
-    result.append(", diff: ");
-    result.append(diff);
-    result.append(')');
-    return result.toString();
   }
 
 } //EValidationModeImpl

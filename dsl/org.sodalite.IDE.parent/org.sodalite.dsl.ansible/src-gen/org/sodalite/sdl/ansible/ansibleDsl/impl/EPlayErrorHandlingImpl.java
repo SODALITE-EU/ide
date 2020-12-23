@@ -4,12 +4,15 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 
 /**
@@ -28,24 +31,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayErrorHandling
 {
   /**
-   * The default value of the '{@link #getMax_fail_percentage() <em>Max fail percentage</em>}' attribute.
+   * The cached value of the '{@link #getMax_fail_percentage() <em>Max fail percentage</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getMax_fail_percentage()
    * @generated
    * @ordered
    */
-  protected static final String MAX_FAIL_PERCENTAGE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getMax_fail_percentage() <em>Max fail percentage</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getMax_fail_percentage()
-   * @generated
-   * @ordered
-   */
-  protected String max_fail_percentage = MAX_FAIL_PERCENTAGE_EDEFAULT;
+  protected ENumberPassed max_fail_percentage;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,7 +67,7 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
    * @generated
    */
   @Override
-  public String getMax_fail_percentage()
+  public ENumberPassed getMax_fail_percentage()
   {
     return max_fail_percentage;
   }
@@ -84,13 +77,54 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setMax_fail_percentage(String newMax_fail_percentage)
+  public NotificationChain basicSetMax_fail_percentage(ENumberPassed newMax_fail_percentage, NotificationChain msgs)
   {
-    String oldMax_fail_percentage = max_fail_percentage;
+    ENumberPassed oldMax_fail_percentage = max_fail_percentage;
     max_fail_percentage = newMax_fail_percentage;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE, oldMax_fail_percentage, max_fail_percentage));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE, oldMax_fail_percentage, newMax_fail_percentage);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setMax_fail_percentage(ENumberPassed newMax_fail_percentage)
+  {
+    if (newMax_fail_percentage != max_fail_percentage)
+    {
+      NotificationChain msgs = null;
+      if (max_fail_percentage != null)
+        msgs = ((InternalEObject)max_fail_percentage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE, null, msgs);
+      if (newMax_fail_percentage != null)
+        msgs = ((InternalEObject)newMax_fail_percentage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE, null, msgs);
+      msgs = basicSetMax_fail_percentage(newMax_fail_percentage, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE, newMax_fail_percentage, newMax_fail_percentage));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE:
+        return basicSetMax_fail_percentage(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -120,7 +154,7 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE:
-        setMax_fail_percentage((String)newValue);
+        setMax_fail_percentage((ENumberPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,7 +171,7 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE:
-        setMax_fail_percentage(MAX_FAIL_PERCENTAGE_EDEFAULT);
+        setMax_fail_percentage((ENumberPassed)null);
         return;
     }
     super.eUnset(featureID);
@@ -154,26 +188,9 @@ public class EPlayErrorHandlingImpl extends EErrorHandlingImpl implements EPlayE
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE:
-        return MAX_FAIL_PERCENTAGE_EDEFAULT == null ? max_fail_percentage != null : !MAX_FAIL_PERCENTAGE_EDEFAULT.equals(max_fail_percentage);
+        return max_fail_percentage != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (max_fail_percentage: ");
-    result.append(max_fail_percentage);
-    result.append(')');
-    return result.toString();
   }
 
 } //EPlayErrorHandlingImpl

@@ -25,38 +25,38 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 public interface EPlayExeSettings extends EExeSettings
 {
   /**
-   * Returns the value of the '<em><b>Strategy</b></em>' attribute.
+   * Returns the value of the '<em><b>Strategy</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Strategy</em>' attribute.
-   * @see #setStrategy(String)
+   * @return the value of the '<em>Strategy</em>' containment reference.
+   * @see #setStrategy(EJinjaExpressionAndString)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlayExeSettings_Strategy()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getStrategy();
+  EJinjaExpressionAndString getStrategy();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings#getStrategy <em>Strategy</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings#getStrategy <em>Strategy</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Strategy</em>' attribute.
+   * @param value the new value of the '<em>Strategy</em>' containment reference.
    * @see #getStrategy()
    * @generated
    */
-  void setStrategy(String value);
+  void setStrategy(EJinjaExpressionAndString value);
 
   /**
    * Returns the value of the '<em><b>Serial list</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Serial list</em>' containment reference.
-   * @see #setSerial_list(EList)
+   * @see #setSerial_list(EListPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlayExeSettings_Serial_list()
    * @model containment="true"
    * @generated
    */
-  EList getSerial_list();
+  EListPassed getSerial_list();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings#getSerial_list <em>Serial list</em>}' containment reference.
@@ -66,28 +66,28 @@ public interface EPlayExeSettings extends EExeSettings
    * @see #getSerial_list()
    * @generated
    */
-  void setSerial_list(EList value);
+  void setSerial_list(EListPassed value);
 
   /**
-   * Returns the value of the '<em><b>Order</b></em>' attribute.
+   * Returns the value of the '<em><b>Order</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Order</em>' attribute.
-   * @see #setOrder(String)
+   * @return the value of the '<em>Order</em>' containment reference.
+   * @see #setOrder(EJinjaExpressionAndString)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlayExeSettings_Order()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getOrder();
+  EJinjaExpressionAndString getOrder();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings#getOrder <em>Order</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings#getOrder <em>Order</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Order</em>' attribute.
+   * @param value the new value of the '<em>Order</em>' containment reference.
    * @see #getOrder()
    * @generated
    */
-  void setOrder(String value);
+  void setOrder(EJinjaExpressionAndString value);
 
 } // EPlayExeSettings

@@ -582,6 +582,24 @@ public interface AnsibleDslFactory extends EFactory
   EVariableDeclaration createEVariableDeclaration();
 
   /**
+   * Returns a new object of class '<em>EIndex Or Loop Variable</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EIndex Or Loop Variable</em>'.
+   * @generated
+   */
+  EIndexOrLoopVariable createEIndexOrLoopVariable();
+
+  /**
+   * Returns a new object of class '<em>EIndex Or Loop Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EIndex Or Loop Variable Reference</em>'.
+   * @generated
+   */
+  EIndexOrLoopVariableReference createEIndexOrLoopVariableReference();
+
+  /**
    * Returns a new object of class '<em>ERegister Variable</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -627,6 +645,15 @@ public interface AnsibleDslFactory extends EFactory
   ESpecialVariable createESpecialVariable();
 
   /**
+   * Returns a new object of class '<em>ETail Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ETail Element</em>'.
+   * @generated
+   */
+  ETailElement createETailElement();
+
+  /**
    * Returns a new object of class '<em>EDictionary</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -652,6 +679,42 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EList createEList();
+
+  /**
+   * Returns a new object of class '<em>EDictionary Passed</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDictionary Passed</em>'.
+   * @generated
+   */
+  EDictionaryPassed createEDictionaryPassed();
+
+  /**
+   * Returns a new object of class '<em>EList Passed</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EList Passed</em>'.
+   * @generated
+   */
+  EListPassed createEListPassed();
+
+  /**
+   * Returns a new object of class '<em>ENumber Passed</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ENumber Passed</em>'.
+   * @generated
+   */
+  ENumberPassed createENumberPassed();
+
+  /**
+   * Returns a new object of class '<em>EBoolean Passed</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EBoolean Passed</em>'.
+   * @generated
+   */
+  EBooleanPassed createEBooleanPassed();
 
   /**
    * Returns the package supported by this factory.

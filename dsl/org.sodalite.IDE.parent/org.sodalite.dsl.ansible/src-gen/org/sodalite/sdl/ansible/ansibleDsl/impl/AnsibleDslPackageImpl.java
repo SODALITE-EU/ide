@@ -21,12 +21,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
@@ -37,6 +39,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
@@ -46,6 +50,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EList;
+import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList;
@@ -53,6 +58,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EOperation;
 import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
@@ -69,6 +75,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes;
@@ -532,6 +539,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eIndexOrLoopVariableEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eIndexOrLoopVariableReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eRegisterVariableEClass = null;
 
   /**
@@ -567,6 +588,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eTailElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eDictionaryEClass = null;
 
   /**
@@ -582,6 +610,34 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eListEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eDictionaryPassedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eListPassedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eNumberPassedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eBooleanPassedEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -853,9 +909,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEBaseAttributes_No_log()
+  public EReference getEBaseAttributes_No_log()
   {
-    return (EAttribute)eBaseAttributesEClass.getEStructuralFeatures().get(3);
+    return (EReference)eBaseAttributesEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -996,9 +1052,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getETaskHandlerAttributes_Action()
+  public EReference getETaskHandlerAttributes_Action()
   {
-    return (EAttribute)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(1);
+    return (EReference)eTaskHandlerAttributesEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1139,9 +1195,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPlay_Force_handlers()
+  public EReference getEPlay_Force_handlers()
   {
-    return (EAttribute)ePlayEClass.getEStructuralFeatures().get(5);
+    return (EReference)ePlayEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -1315,7 +1371,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEModuleCall_Direct_input()
+  public EReference getEModuleCall_Direct_parameter()
   {
     return (EReference)eModuleCallEClass.getEStructuralFeatures().get(1);
   }
@@ -1469,9 +1525,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getELoopControl_Pause()
+  public EReference getELoopControl_Pause()
   {
-    return (EAttribute)eLoopControlEClass.getEStructuralFeatures().get(1);
+    return (EReference)eLoopControlEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1480,9 +1536,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getELoopControl_Index_var()
+  public EReference getELoopControl_Index_var()
   {
-    return (EAttribute)eLoopControlEClass.getEStructuralFeatures().get(2);
+    return (EReference)eLoopControlEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1491,9 +1547,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getELoopControl_Loop_var()
+  public EReference getELoopControl_Loop_var()
   {
-    return (EAttribute)eLoopControlEClass.getEStructuralFeatures().get(3);
+    return (EReference)eLoopControlEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1502,9 +1558,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getELoopControl_Extended()
+  public EReference getELoopControl_Extended()
   {
-    return (EAttribute)eLoopControlEClass.getEStructuralFeatures().get(4);
+    return (EReference)eLoopControlEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1535,9 +1591,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEUntil_Retries()
+  public EReference getEUntil_Retries()
   {
-    return (EAttribute)eUntilEClass.getEStructuralFeatures().get(1);
+    return (EReference)eUntilEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1546,9 +1602,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEUntil_Delay()
+  public EReference getEUntil_Delay()
   {
-    return (EAttribute)eUntilEClass.getEStructuralFeatures().get(2);
+    return (EReference)eUntilEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1568,9 +1624,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPrivilageEscalation_Become()
+  public EReference getEPrivilageEscalation_Become()
   {
-    return (EAttribute)ePrivilageEscalationEClass.getEStructuralFeatures().get(0);
+    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1579,9 +1635,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPrivilageEscalation_Become_exe()
+  public EReference getEPrivilageEscalation_Become_exe()
   {
-    return (EAttribute)ePrivilageEscalationEClass.getEStructuralFeatures().get(1);
+    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1590,9 +1646,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPrivilageEscalation_Become_flags()
+  public EReference getEPrivilageEscalation_Become_flags()
   {
-    return (EAttribute)ePrivilageEscalationEClass.getEStructuralFeatures().get(2);
+    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1601,9 +1657,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPrivilageEscalation_Become_method()
+  public EReference getEPrivilageEscalation_Become_method()
   {
-    return (EAttribute)ePrivilageEscalationEClass.getEStructuralFeatures().get(3);
+    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1612,9 +1668,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPrivilageEscalation_Become_user()
+  public EReference getEPrivilageEscalation_Become_user()
   {
-    return (EAttribute)ePrivilageEscalationEClass.getEStructuralFeatures().get(4);
+    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1634,9 +1690,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEValidationMode_Check_mode()
+  public EReference getEValidationMode_Check_mode()
   {
-    return (EAttribute)eValidationModeEClass.getEStructuralFeatures().get(0);
+    return (EReference)eValidationModeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1645,9 +1701,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEValidationMode_Diff()
+  public EReference getEValidationMode_Diff()
   {
-    return (EAttribute)eValidationModeEClass.getEStructuralFeatures().get(1);
+    return (EReference)eValidationModeEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1667,9 +1723,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEConnection_Connection()
+  public EReference getEConnection_Connection()
   {
-    return (EAttribute)eConnectionEClass.getEStructuralFeatures().get(0);
+    return (EReference)eConnectionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1678,9 +1734,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEConnection_Port()
+  public EReference getEConnection_Port()
   {
-    return (EAttribute)eConnectionEClass.getEStructuralFeatures().get(1);
+    return (EReference)eConnectionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1689,9 +1745,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEConnection_Remote_user()
+  public EReference getEConnection_Remote_user()
   {
-    return (EAttribute)eConnectionEClass.getEStructuralFeatures().get(2);
+    return (EReference)eConnectionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1711,9 +1767,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEExeSettings_Throttle()
+  public EReference getEExeSettings_Throttle()
   {
-    return (EAttribute)eExeSettingsEClass.getEStructuralFeatures().get(0);
+    return (EReference)eExeSettingsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1722,9 +1778,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEExeSettings_Run_once()
+  public EReference getEExeSettings_Run_once()
   {
-    return (EAttribute)eExeSettingsEClass.getEStructuralFeatures().get(1);
+    return (EReference)eExeSettingsEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1744,9 +1800,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPlayExeSettings_Strategy()
+  public EReference getEPlayExeSettings_Strategy()
   {
-    return (EAttribute)ePlayExeSettingsEClass.getEStructuralFeatures().get(0);
+    return (EReference)ePlayExeSettingsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1766,9 +1822,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPlayExeSettings_Order()
+  public EReference getEPlayExeSettings_Order()
   {
-    return (EAttribute)ePlayExeSettingsEClass.getEStructuralFeatures().get(2);
+    return (EReference)ePlayExeSettingsEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1799,9 +1855,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEErrorHandling_Any_errors_fatal()
+  public EReference getEErrorHandling_Any_errors_fatal()
   {
-    return (EAttribute)eErrorHandlingEClass.getEStructuralFeatures().get(0);
+    return (EReference)eErrorHandlingEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1810,9 +1866,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEErrorHandling_Ignore_errors()
+  public EReference getEErrorHandling_Ignore_errors()
   {
-    return (EAttribute)eErrorHandlingEClass.getEStructuralFeatures().get(1);
+    return (EReference)eErrorHandlingEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1821,9 +1877,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEErrorHandling_Ignore_unreachable()
+  public EReference getEErrorHandling_Ignore_unreachable()
   {
-    return (EAttribute)eErrorHandlingEClass.getEStructuralFeatures().get(2);
+    return (EReference)eErrorHandlingEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1854,9 +1910,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPlayErrorHandling_Max_fail_percentage()
+  public EReference getEPlayErrorHandling_Max_fail_percentage()
   {
-    return (EAttribute)ePlayErrorHandlingEClass.getEStructuralFeatures().get(0);
+    return (EReference)ePlayErrorHandlingEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1909,9 +1965,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEFactsSettings_Gather_facts()
+  public EReference getEFactsSettings_Gather_facts()
   {
-    return (EAttribute)eFactsSettingsEClass.getEStructuralFeatures().get(0);
+    return (EReference)eFactsSettingsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1931,9 +1987,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEFactsSettings_Gather_timeout()
+  public EReference getEFactsSettings_Gather_timeout()
   {
-    return (EAttribute)eFactsSettingsEClass.getEStructuralFeatures().get(2);
+    return (EReference)eFactsSettingsEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1942,9 +1998,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEFactsSettings_Fact_path()
+  public EReference getEFactsSettings_Fact_path()
   {
-    return (EAttribute)eFactsSettingsEClass.getEStructuralFeatures().get(3);
+    return (EReference)eFactsSettingsEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1964,9 +2020,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEDelegation_Delegate_to()
+  public EReference getEDelegation_Delegate_to()
   {
-    return (EAttribute)eDelegationEClass.getEStructuralFeatures().get(0);
+    return (EReference)eDelegationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1975,9 +2031,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEDelegation_Delegate_facts()
+  public EReference getEDelegation_Delegate_facts()
   {
-    return (EAttribute)eDelegationEClass.getEStructuralFeatures().get(1);
+    return (EReference)eDelegationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1997,9 +2053,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEAsynchronousSettings_Async()
+  public EReference getEAsynchronousSettings_Async()
   {
-    return (EAttribute)eAsynchronousSettingsEClass.getEStructuralFeatures().get(0);
+    return (EReference)eAsynchronousSettingsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2008,9 +2064,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEAsynchronousSettings_Poll()
+  public EReference getEAsynchronousSettings_Poll()
   {
-    return (EAttribute)eAsynchronousSettingsEClass.getEStructuralFeatures().get(1);
+    return (EReference)eAsynchronousSettingsEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2778,6 +2834,61 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getEIndexOrLoopVariable()
+  {
+    return eIndexOrLoopVariableEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEIndexOrLoopVariable_Name()
+  {
+    return (EAttribute)eIndexOrLoopVariableEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEIndexOrLoopVariableReference()
+  {
+    return eIndexOrLoopVariableReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEIndexOrLoopVariableReference_Name()
+  {
+    return (EReference)eIndexOrLoopVariableReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEIndexOrLoopVariableReference_Tail()
+  {
+    return (EAttribute)eIndexOrLoopVariableReferenceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getERegisterVariable()
   {
     return eRegisterVariableEClass;
@@ -2921,6 +3032,50 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getETailElement()
+  {
+    return eTailElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETailElement_Identifier_ID()
+  {
+    return (EAttribute)eTailElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETailElement_Identifier_jinja()
+  {
+    return (EReference)eTailElementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETailElement_Index()
+  {
+    return (EAttribute)eTailElementEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEDictionary()
   {
     return eDictionaryEClass;
@@ -2998,6 +3153,72 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getEDictionaryPassed()
+  {
+    return eDictionaryPassedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEListPassed()
+  {
+    return eListPassedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getENumberPassed()
+  {
+    return eNumberPassedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getENumberPassed_Number_passed()
+  {
+    return (EAttribute)eNumberPassedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEBooleanPassed()
+  {
+    return eBooleanPassedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEBooleanPassed_Boolean_passed()
+  {
+    return (EAttribute)eBooleanPassedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public AnsibleDslFactory getAnsibleDslFactory()
   {
     return (AnsibleDslFactory)getEFactoryInstance();
@@ -3047,7 +3268,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__PRIVILAGE_ESCALATION);
     createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__VALIDATION_MODE);
     createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__CONNECTION);
-    createEAttribute(eBaseAttributesEClass, EBASE_ATTRIBUTES__NO_LOG);
+    createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__NO_LOG);
     createEAttribute(eBaseAttributesEClass, EBASE_ATTRIBUTES__DEBUGGER);
     createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__MODULE_DEFAULTS);
     createEReference(eBaseAttributesEClass, EBASE_ATTRIBUTES__ENVIRONMENT);
@@ -3062,7 +3283,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eTaskHandlerAttributesEClass = createEClass(ETASK_HANDLER_ATTRIBUTES);
     createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__ERROR_HANDLING);
-    createEAttribute(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__ACTION);
+    createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__ACTION);
     createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__ASYNCHRONOUS_SETTINGS);
     createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__ARGS);
     createEReference(eTaskHandlerAttributesEClass, ETASK_HANDLER_ATTRIBUTES__MODULE);
@@ -3076,7 +3297,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(ePlayEClass, EPLAY__FACTS_SETTINGS);
     createEReference(ePlayEClass, EPLAY__VARS_FILES);
     createEReference(ePlayEClass, EPLAY__VARS_PROMPT);
-    createEAttribute(ePlayEClass, EPLAY__FORCE_HANDLERS);
+    createEReference(ePlayEClass, EPLAY__FORCE_HANDLERS);
     createEReference(ePlayEClass, EPLAY__PRE_TASKS_LIST);
     createEReference(ePlayEClass, EPLAY__ROLES_INCLUSIONS);
     createEReference(ePlayEClass, EPLAY__TASKS_LIST);
@@ -3096,7 +3317,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eModuleCallEClass = createEClass(EMODULE_CALL);
     createEAttribute(eModuleCallEClass, EMODULE_CALL__NAME);
-    createEReference(eModuleCallEClass, EMODULE_CALL__DIRECT_INPUT);
+    createEReference(eModuleCallEClass, EMODULE_CALL__DIRECT_PARAMETER);
     createEReference(eModuleCallEClass, EMODULE_CALL__PARAMETERS);
 
     eParameterEClass = createEClass(EPARAMETER);
@@ -3116,70 +3337,70 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eLoopControlEClass = createEClass(ELOOP_CONTROL);
     createEReference(eLoopControlEClass, ELOOP_CONTROL__LABEL);
-    createEAttribute(eLoopControlEClass, ELOOP_CONTROL__PAUSE);
-    createEAttribute(eLoopControlEClass, ELOOP_CONTROL__INDEX_VAR);
-    createEAttribute(eLoopControlEClass, ELOOP_CONTROL__LOOP_VAR);
-    createEAttribute(eLoopControlEClass, ELOOP_CONTROL__EXTENDED);
+    createEReference(eLoopControlEClass, ELOOP_CONTROL__PAUSE);
+    createEReference(eLoopControlEClass, ELOOP_CONTROL__INDEX_VAR);
+    createEReference(eLoopControlEClass, ELOOP_CONTROL__LOOP_VAR);
+    createEReference(eLoopControlEClass, ELOOP_CONTROL__EXTENDED);
 
     eUntilEClass = createEClass(EUNTIL);
     createEReference(eUntilEClass, EUNTIL__UNTIL);
-    createEAttribute(eUntilEClass, EUNTIL__RETRIES);
-    createEAttribute(eUntilEClass, EUNTIL__DELAY);
+    createEReference(eUntilEClass, EUNTIL__RETRIES);
+    createEReference(eUntilEClass, EUNTIL__DELAY);
 
     ePrivilageEscalationEClass = createEClass(EPRIVILAGE_ESCALATION);
-    createEAttribute(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME);
-    createEAttribute(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_EXE);
-    createEAttribute(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_FLAGS);
-    createEAttribute(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_METHOD);
-    createEAttribute(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_USER);
+    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME);
+    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_EXE);
+    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_FLAGS);
+    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_METHOD);
+    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_USER);
 
     eValidationModeEClass = createEClass(EVALIDATION_MODE);
-    createEAttribute(eValidationModeEClass, EVALIDATION_MODE__CHECK_MODE);
-    createEAttribute(eValidationModeEClass, EVALIDATION_MODE__DIFF);
+    createEReference(eValidationModeEClass, EVALIDATION_MODE__CHECK_MODE);
+    createEReference(eValidationModeEClass, EVALIDATION_MODE__DIFF);
 
     eConnectionEClass = createEClass(ECONNECTION);
-    createEAttribute(eConnectionEClass, ECONNECTION__CONNECTION);
-    createEAttribute(eConnectionEClass, ECONNECTION__PORT);
-    createEAttribute(eConnectionEClass, ECONNECTION__REMOTE_USER);
+    createEReference(eConnectionEClass, ECONNECTION__CONNECTION);
+    createEReference(eConnectionEClass, ECONNECTION__PORT);
+    createEReference(eConnectionEClass, ECONNECTION__REMOTE_USER);
 
     eExeSettingsEClass = createEClass(EEXE_SETTINGS);
-    createEAttribute(eExeSettingsEClass, EEXE_SETTINGS__THROTTLE);
-    createEAttribute(eExeSettingsEClass, EEXE_SETTINGS__RUN_ONCE);
+    createEReference(eExeSettingsEClass, EEXE_SETTINGS__THROTTLE);
+    createEReference(eExeSettingsEClass, EEXE_SETTINGS__RUN_ONCE);
 
     ePlayExeSettingsEClass = createEClass(EPLAY_EXE_SETTINGS);
-    createEAttribute(ePlayExeSettingsEClass, EPLAY_EXE_SETTINGS__STRATEGY);
+    createEReference(ePlayExeSettingsEClass, EPLAY_EXE_SETTINGS__STRATEGY);
     createEReference(ePlayExeSettingsEClass, EPLAY_EXE_SETTINGS__SERIAL_LIST);
-    createEAttribute(ePlayExeSettingsEClass, EPLAY_EXE_SETTINGS__ORDER);
+    createEReference(ePlayExeSettingsEClass, EPLAY_EXE_SETTINGS__ORDER);
 
     eExecutionExeSettingsEClass = createEClass(EEXECUTION_EXE_SETTINGS);
 
     eErrorHandlingEClass = createEClass(EERROR_HANDLING);
-    createEAttribute(eErrorHandlingEClass, EERROR_HANDLING__ANY_ERRORS_FATAL);
-    createEAttribute(eErrorHandlingEClass, EERROR_HANDLING__IGNORE_ERRORS);
-    createEAttribute(eErrorHandlingEClass, EERROR_HANDLING__IGNORE_UNREACHABLE);
+    createEReference(eErrorHandlingEClass, EERROR_HANDLING__ANY_ERRORS_FATAL);
+    createEReference(eErrorHandlingEClass, EERROR_HANDLING__IGNORE_ERRORS);
+    createEReference(eErrorHandlingEClass, EERROR_HANDLING__IGNORE_UNREACHABLE);
 
     eBlockErrorHandlingEClass = createEClass(EBLOCK_ERROR_HANDLING);
 
     ePlayErrorHandlingEClass = createEClass(EPLAY_ERROR_HANDLING);
-    createEAttribute(ePlayErrorHandlingEClass, EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE);
+    createEReference(ePlayErrorHandlingEClass, EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE);
 
     eTaskHandlerErrorHandlingEClass = createEClass(ETASK_HANDLER_ERROR_HANDLING);
     createEReference(eTaskHandlerErrorHandlingEClass, ETASK_HANDLER_ERROR_HANDLING__CHANGED_WHEN);
     createEReference(eTaskHandlerErrorHandlingEClass, ETASK_HANDLER_ERROR_HANDLING__FAILED_WHEN);
 
     eFactsSettingsEClass = createEClass(EFACTS_SETTINGS);
-    createEAttribute(eFactsSettingsEClass, EFACTS_SETTINGS__GATHER_FACTS);
+    createEReference(eFactsSettingsEClass, EFACTS_SETTINGS__GATHER_FACTS);
     createEReference(eFactsSettingsEClass, EFACTS_SETTINGS__GATHER_SUBSET);
-    createEAttribute(eFactsSettingsEClass, EFACTS_SETTINGS__GATHER_TIMEOUT);
-    createEAttribute(eFactsSettingsEClass, EFACTS_SETTINGS__FACT_PATH);
+    createEReference(eFactsSettingsEClass, EFACTS_SETTINGS__GATHER_TIMEOUT);
+    createEReference(eFactsSettingsEClass, EFACTS_SETTINGS__FACT_PATH);
 
     eDelegationEClass = createEClass(EDELEGATION);
-    createEAttribute(eDelegationEClass, EDELEGATION__DELEGATE_TO);
-    createEAttribute(eDelegationEClass, EDELEGATION__DELEGATE_FACTS);
+    createEReference(eDelegationEClass, EDELEGATION__DELEGATE_TO);
+    createEReference(eDelegationEClass, EDELEGATION__DELEGATE_FACTS);
 
     eAsynchronousSettingsEClass = createEClass(EASYNCHRONOUS_SETTINGS);
-    createEAttribute(eAsynchronousSettingsEClass, EASYNCHRONOUS_SETTINGS__ASYNC);
-    createEAttribute(eAsynchronousSettingsEClass, EASYNCHRONOUS_SETTINGS__POLL);
+    createEReference(eAsynchronousSettingsEClass, EASYNCHRONOUS_SETTINGS__ASYNC);
+    createEReference(eAsynchronousSettingsEClass, EASYNCHRONOUS_SETTINGS__POLL);
 
     eNotifiableEClass = createEClass(ENOTIFIABLE);
 
@@ -3278,6 +3499,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEAttribute(eVariableDeclarationEClass, EVARIABLE_DECLARATION__NAME);
     createEReference(eVariableDeclarationEClass, EVARIABLE_DECLARATION__VALUE_PASSED);
 
+    eIndexOrLoopVariableEClass = createEClass(EINDEX_OR_LOOP_VARIABLE);
+    createEAttribute(eIndexOrLoopVariableEClass, EINDEX_OR_LOOP_VARIABLE__NAME);
+
+    eIndexOrLoopVariableReferenceEClass = createEClass(EINDEX_OR_LOOP_VARIABLE_REFERENCE);
+    createEReference(eIndexOrLoopVariableReferenceEClass, EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME);
+    createEAttribute(eIndexOrLoopVariableReferenceEClass, EINDEX_OR_LOOP_VARIABLE_REFERENCE__TAIL);
+
     eRegisterVariableEClass = createEClass(EREGISTER_VARIABLE);
     createEAttribute(eRegisterVariableEClass, EREGISTER_VARIABLE__NAME);
 
@@ -3296,6 +3524,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEAttribute(eSpecialVariableEClass, ESPECIAL_VARIABLE__NAME);
     createEAttribute(eSpecialVariableEClass, ESPECIAL_VARIABLE__TAIL);
 
+    eTailElementEClass = createEClass(ETAIL_ELEMENT);
+    createEAttribute(eTailElementEClass, ETAIL_ELEMENT__IDENTIFIER_ID);
+    createEReference(eTailElementEClass, ETAIL_ELEMENT__IDENTIFIER_JINJA);
+    createEAttribute(eTailElementEClass, ETAIL_ELEMENT__INDEX);
+
     eDictionaryEClass = createEClass(EDICTIONARY);
     createEReference(eDictionaryEClass, EDICTIONARY__DICTIONARY_PAIRS);
 
@@ -3305,6 +3538,16 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eListEClass = createEClass(ELIST);
     createEReference(eListEClass, ELIST__ELEMENTS);
+
+    eDictionaryPassedEClass = createEClass(EDICTIONARY_PASSED);
+
+    eListPassedEClass = createEClass(ELIST_PASSED);
+
+    eNumberPassedEClass = createEClass(ENUMBER_PASSED);
+    createEAttribute(eNumberPassedEClass, ENUMBER_PASSED__NUMBER_PASSED);
+
+    eBooleanPassedEClass = createEClass(EBOOLEAN_PASSED);
+    createEAttribute(eBooleanPassedEClass, EBOOLEAN_PASSED__BOOLEAN_PASSED);
   }
 
   /**
@@ -3367,17 +3610,24 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eSimpleValueEClass.getESuperTypes().add(this.getEValue());
     eItemEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEJinjaExpressionOrString());
+    eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEDictionaryPassed());
+    eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEListPassed());
+    eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getENumberPassed());
+    eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEBooleanPassed());
     eFunctionCallEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eFilteredExpressionEClass.getESuperTypes().add(this.getEJinjaExpressionEvaluationWithoutBrackets());
     eIfExpressionEClass.getESuperTypes().add(this.getEJinjaExpressionEvaluationWithoutBrackets());
     eVariableDeclarationVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
     eRegisterVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
+    eIndexOrLoopVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
     eInputOperationVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
     eInputInterfaceVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
     eVariableReferenceEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eSpecialVariableEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eDictionaryEClass.getESuperTypes().add(this.getEComposedValue());
+    eDictionaryEClass.getESuperTypes().add(this.getEDictionaryPassed());
     eListEClass.getESuperTypes().add(this.getEComposedValue());
+    eListEClass.getESuperTypes().add(this.getEListPassed());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3404,12 +3654,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEBaseAttributes_Privilage_escalation(), this.getEPrivilageEscalation(), null, "privilage_escalation", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBaseAttributes_Validation_mode(), this.getEValidationMode(), null, "validation_mode", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBaseAttributes_Connection(), this.getEConnection(), null, "connection", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEBaseAttributes_No_log(), ecorePackage.getEString(), "no_log", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_No_log(), this.getEBooleanPassed(), null, "no_log", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEBaseAttributes_Debugger(), ecorePackage.getEString(), "debugger", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseAttributes_Module_defaults(), this.getEList(), null, "module_defaults", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseAttributes_Environment(), this.getEList(), null, "environment", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseAttributes_Collections(), this.getEList(), null, "collections", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBaseAttributes_Tags(), this.getEList(), null, "tags", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Module_defaults(), this.getEListPassed(), null, "module_defaults", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Environment(), this.getEListPassed(), null, "environment", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Collections(), this.getEListPassed(), null, "collections", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBaseAttributes_Tags(), this.getEListPassed(), null, "tags", null, 0, 1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBaseAttributes_Variable_declarations(), this.getEVariableDeclaration(), null, "variable_declarations", null, 0, -1, EBaseAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eExecutionAttributesEClass, EExecutionAttributes.class, "EExecutionAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3419,9 +3669,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eTaskHandlerAttributesEClass, ETaskHandlerAttributes.class, "ETaskHandlerAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getETaskHandlerAttributes_Error_handling(), this.getETaskHandlerErrorHandling(), null, "error_handling", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getETaskHandlerAttributes_Action(), ecorePackage.getEString(), "action", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerAttributes_Action(), this.getEJinjaExpressionAndString(), null, "action", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerAttributes_Asynchronous_settings(), this.getEAsynchronousSettings(), null, "asynchronous_settings", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerAttributes_Args(), this.getEDictionary(), null, "args", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerAttributes_Args(), this.getEDictionaryPassed(), null, "args", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerAttributes_Module(), this.getEModuleCall(), null, "module", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerAttributes_Notifiables(), this.getENotifiable(), null, "notifiables", null, 0, -1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerAttributes_Loop(), this.getELoop(), null, "loop", null, 0, 1, ETaskHandlerAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3431,9 +3681,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEPlay_Play_exe_settings(), this.getEPlayExeSettings(), null, "play_exe_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Error_handling(), this.getEPlayErrorHandling(), null, "error_handling", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Facts_settings(), this.getEFactsSettings(), null, "facts_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlay_Vars_files(), this.getEList(), null, "vars_files", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlay_Vars_prompt(), this.getEList(), null, "vars_prompt", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEPlay_Force_handlers(), ecorePackage.getEString(), "force_handlers", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_Vars_files(), this.getEListPassed(), null, "vars_files", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_Vars_prompt(), this.getEListPassed(), null, "vars_prompt", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_Force_handlers(), this.getEBooleanPassed(), null, "force_handlers", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Pre_tasks_list(), this.getEBlockTask(), null, "pre_tasks_list", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Roles_inclusions(), this.getERoleInclusions(), null, "roles_inclusions", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Tasks_list(), this.getEBlockTask(), null, "tasks_list", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3453,7 +3703,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eModuleCallEClass, EModuleCall.class, "EModuleCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEModuleCall_Name(), ecorePackage.getEString(), "name", null, 0, 1, EModuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEModuleCall_Direct_input(), this.getEValuePassed(), null, "direct_input", null, 0, 1, EModuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEModuleCall_Direct_parameter(), this.getEValuePassed(), null, "direct_parameter", null, 0, 1, EModuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEModuleCall_Parameters(), this.getEParameter(), null, "parameters", null, 0, -1, EModuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eParameterEClass, EParameter.class, "EParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3473,70 +3723,70 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eLoopControlEClass, ELoopControl.class, "ELoopControl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getELoopControl_Label(), this.getEValuePassed(), null, "label", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getELoopControl_Pause(), ecorePackage.getEString(), "pause", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getELoopControl_Index_var(), ecorePackage.getEString(), "index_var", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getELoopControl_Loop_var(), ecorePackage.getEString(), "loop_var", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getELoopControl_Extended(), ecorePackage.getEString(), "extended", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getELoopControl_Pause(), this.getENumberPassed(), null, "pause", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getELoopControl_Index_var(), this.getEIndexOrLoopVariable(), null, "index_var", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getELoopControl_Loop_var(), this.getEIndexOrLoopVariable(), null, "loop_var", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getELoopControl_Extended(), this.getEBooleanPassed(), null, "extended", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eUntilEClass, EUntil.class, "EUntil", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEUntil_Until(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "until", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEUntil_Retries(), ecorePackage.getEString(), "retries", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEUntil_Delay(), ecorePackage.getEString(), "delay", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEUntil_Retries(), this.getENumberPassed(), null, "retries", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEUntil_Delay(), this.getENumberPassed(), null, "delay", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePrivilageEscalationEClass, EPrivilageEscalation.class, "EPrivilageEscalation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEPrivilageEscalation_Become(), ecorePackage.getEString(), "become", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEPrivilageEscalation_Become_exe(), ecorePackage.getEString(), "become_exe", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEPrivilageEscalation_Become_flags(), ecorePackage.getEString(), "become_flags", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEPrivilageEscalation_Become_method(), ecorePackage.getEString(), "become_method", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEPrivilageEscalation_Become_user(), ecorePackage.getEString(), "become_user", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPrivilageEscalation_Become(), this.getEBooleanPassed(), null, "become", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPrivilageEscalation_Become_exe(), this.getEJinjaExpressionAndString(), null, "become_exe", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPrivilageEscalation_Become_flags(), this.getEJinjaExpressionAndString(), null, "become_flags", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPrivilageEscalation_Become_method(), this.getEJinjaExpressionAndString(), null, "become_method", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPrivilageEscalation_Become_user(), this.getEJinjaExpressionAndString(), null, "become_user", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eValidationModeEClass, EValidationMode.class, "EValidationMode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEValidationMode_Check_mode(), ecorePackage.getEString(), "check_mode", null, 0, 1, EValidationMode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEValidationMode_Diff(), ecorePackage.getEString(), "diff", null, 0, 1, EValidationMode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEValidationMode_Check_mode(), this.getEBooleanPassed(), null, "check_mode", null, 0, 1, EValidationMode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEValidationMode_Diff(), this.getEBooleanPassed(), null, "diff", null, 0, 1, EValidationMode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eConnectionEClass, EConnection.class, "EConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEConnection_Connection(), ecorePackage.getEString(), "connection", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEConnection_Port(), ecorePackage.getEString(), "port", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEConnection_Remote_user(), ecorePackage.getEString(), "remote_user", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEConnection_Connection(), this.getEJinjaExpressionAndString(), null, "connection", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEConnection_Port(), this.getENumberPassed(), null, "port", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEConnection_Remote_user(), this.getEJinjaExpressionAndString(), null, "remote_user", null, 0, 1, EConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eExeSettingsEClass, EExeSettings.class, "EExeSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEExeSettings_Throttle(), ecorePackage.getEString(), "throttle", null, 0, 1, EExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEExeSettings_Run_once(), ecorePackage.getEString(), "run_once", null, 0, 1, EExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExeSettings_Throttle(), this.getENumberPassed(), null, "throttle", null, 0, 1, EExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExeSettings_Run_once(), this.getEBooleanPassed(), null, "run_once", null, 0, 1, EExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePlayExeSettingsEClass, EPlayExeSettings.class, "EPlayExeSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEPlayExeSettings_Strategy(), ecorePackage.getEString(), "strategy", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlayExeSettings_Serial_list(), this.getEList(), null, "serial_list", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEPlayExeSettings_Order(), ecorePackage.getEString(), "order", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlayExeSettings_Strategy(), this.getEJinjaExpressionAndString(), null, "strategy", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlayExeSettings_Serial_list(), this.getEListPassed(), null, "serial_list", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlayExeSettings_Order(), this.getEJinjaExpressionAndString(), null, "order", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eExecutionExeSettingsEClass, EExecutionExeSettings.class, "EExecutionExeSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eErrorHandlingEClass, EErrorHandling.class, "EErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEErrorHandling_Any_errors_fatal(), ecorePackage.getEString(), "any_errors_fatal", null, 0, 1, EErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEErrorHandling_Ignore_errors(), ecorePackage.getEString(), "ignore_errors", null, 0, 1, EErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEErrorHandling_Ignore_unreachable(), ecorePackage.getEString(), "ignore_unreachable", null, 0, 1, EErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEErrorHandling_Any_errors_fatal(), this.getEBooleanPassed(), null, "any_errors_fatal", null, 0, 1, EErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEErrorHandling_Ignore_errors(), this.getEBooleanPassed(), null, "ignore_errors", null, 0, 1, EErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEErrorHandling_Ignore_unreachable(), this.getEBooleanPassed(), null, "ignore_unreachable", null, 0, 1, EErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBlockErrorHandlingEClass, EBlockErrorHandling.class, "EBlockErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(ePlayErrorHandlingEClass, EPlayErrorHandling.class, "EPlayErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEPlayErrorHandling_Max_fail_percentage(), ecorePackage.getEString(), "max_fail_percentage", null, 0, 1, EPlayErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlayErrorHandling_Max_fail_percentage(), this.getENumberPassed(), null, "max_fail_percentage", null, 0, 1, EPlayErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eTaskHandlerErrorHandlingEClass, ETaskHandlerErrorHandling.class, "ETaskHandlerErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getETaskHandlerErrorHandling_Changed_when(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "changed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETaskHandlerErrorHandling_Failed_when(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "failed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eFactsSettingsEClass, EFactsSettings.class, "EFactsSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEFactsSettings_Gather_facts(), ecorePackage.getEString(), "gather_facts", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEFactsSettings_Gather_subset(), this.getEList(), null, "gather_subset", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEFactsSettings_Gather_timeout(), ecorePackage.getEString(), "gather_timeout", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEFactsSettings_Fact_path(), ecorePackage.getEString(), "fact_path", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFactsSettings_Gather_facts(), this.getEBooleanPassed(), null, "gather_facts", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFactsSettings_Gather_subset(), this.getEListPassed(), null, "gather_subset", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFactsSettings_Gather_timeout(), this.getENumberPassed(), null, "gather_timeout", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFactsSettings_Fact_path(), this.getEJinjaExpressionAndString(), null, "fact_path", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDelegationEClass, EDelegation.class, "EDelegation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEDelegation_Delegate_to(), ecorePackage.getEString(), "delegate_to", null, 0, 1, EDelegation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEDelegation_Delegate_facts(), ecorePackage.getEString(), "delegate_facts", null, 0, 1, EDelegation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEDelegation_Delegate_to(), this.getEJinjaExpressionAndString(), null, "delegate_to", null, 0, 1, EDelegation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEDelegation_Delegate_facts(), this.getEBooleanPassed(), null, "delegate_facts", null, 0, 1, EDelegation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eAsynchronousSettingsEClass, EAsynchronousSettings.class, "EAsynchronousSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEAsynchronousSettings_Async(), ecorePackage.getEString(), "async", null, 0, 1, EAsynchronousSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEAsynchronousSettings_Poll(), ecorePackage.getEString(), "poll", null, 0, 1, EAsynchronousSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEAsynchronousSettings_Async(), this.getENumberPassed(), null, "async", null, 0, 1, EAsynchronousSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEAsynchronousSettings_Poll(), this.getENumberPassed(), null, "poll", null, 0, 1, EAsynchronousSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eNotifiableEClass, ENotifiable.class, "ENotifiable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3635,6 +3885,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEAttribute(getEVariableDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, EVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEVariableDeclaration_Value_passed(), this.getEValuePassed(), null, "value_passed", null, 0, 1, EVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(eIndexOrLoopVariableEClass, EIndexOrLoopVariable.class, "EIndexOrLoopVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEIndexOrLoopVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, EIndexOrLoopVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eIndexOrLoopVariableReferenceEClass, EIndexOrLoopVariableReference.class, "EIndexOrLoopVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEIndexOrLoopVariableReference_Name(), this.getEIndexOrLoopVariable(), null, "name", null, 0, 1, EIndexOrLoopVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEIndexOrLoopVariableReference_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, EIndexOrLoopVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(eRegisterVariableEClass, ERegisterVariable.class, "ERegisterVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getERegisterVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, ERegisterVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3653,6 +3910,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEAttribute(getESpecialVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, ESpecialVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getESpecialVariable_Tail(), ecorePackage.getEString(), "tail", null, 0, -1, ESpecialVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(eTailElementEClass, ETailElement.class, "ETailElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getETailElement_Identifier_ID(), ecorePackage.getEString(), "identifier_ID", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETailElement_Identifier_jinja(), this.getEJinjaExpressionEvaluation(), null, "identifier_jinja", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getETailElement_Index(), ecorePackage.getEString(), "index", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(eDictionaryEClass, EDictionary.class, "EDictionary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEDictionary_Dictionary_pairs(), this.getEDictionaryPair(), null, "dictionary_pairs", null, 0, -1, EDictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3662,6 +3924,16 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eListEClass, EList.class, "EList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEList_Elements(), this.getEValuePassed(), null, "elements", null, 0, -1, EList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eDictionaryPassedEClass, EDictionaryPassed.class, "EDictionaryPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eListPassedEClass, EListPassed.class, "EListPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eNumberPassedEClass, ENumberPassed.class, "ENumberPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getENumberPassed_Number_passed(), ecorePackage.getEString(), "number_passed", null, 0, 1, ENumberPassed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eBooleanPassedEClass, EBooleanPassed.class, "EBooleanPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEBooleanPassed_Boolean_passed(), ecorePackage.getEString(), "boolean_passed", null, 0, 1, EBooleanPassed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

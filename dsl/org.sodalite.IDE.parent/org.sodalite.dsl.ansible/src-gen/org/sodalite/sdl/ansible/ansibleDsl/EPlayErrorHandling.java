@@ -23,25 +23,25 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 public interface EPlayErrorHandling extends EErrorHandling
 {
   /**
-   * Returns the value of the '<em><b>Max fail percentage</b></em>' attribute.
+   * Returns the value of the '<em><b>Max fail percentage</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Max fail percentage</em>' attribute.
-   * @see #setMax_fail_percentage(String)
+   * @return the value of the '<em>Max fail percentage</em>' containment reference.
+   * @see #setMax_fail_percentage(ENumberPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlayErrorHandling_Max_fail_percentage()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getMax_fail_percentage();
+  ENumberPassed getMax_fail_percentage();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling#getMax_fail_percentage <em>Max fail percentage</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling#getMax_fail_percentage <em>Max fail percentage</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Max fail percentage</em>' attribute.
+   * @param value the new value of the '<em>Max fail percentage</em>' containment reference.
    * @see #getMax_fail_percentage()
    * @generated
    */
-  void setMax_fail_percentage(String value);
+  void setMax_fail_percentage(ENumberPassed value);
 
 } // EPlayErrorHandling

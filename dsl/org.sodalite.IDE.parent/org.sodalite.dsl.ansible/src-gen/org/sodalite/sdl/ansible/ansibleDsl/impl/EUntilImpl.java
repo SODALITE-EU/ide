@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
 
 /**
@@ -43,44 +44,24 @@ public class EUntilImpl extends ELoopImpl implements EUntil
   protected EJinjaExpressionEvaluationWithoutBrackets until;
 
   /**
-   * The default value of the '{@link #getRetries() <em>Retries</em>}' attribute.
+   * The cached value of the '{@link #getRetries() <em>Retries</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getRetries()
    * @generated
    * @ordered
    */
-  protected static final String RETRIES_EDEFAULT = null;
+  protected ENumberPassed retries;
 
   /**
-   * The cached value of the '{@link #getRetries() <em>Retries</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRetries()
-   * @generated
-   * @ordered
-   */
-  protected String retries = RETRIES_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getDelay() <em>Delay</em>}' attribute.
+   * The cached value of the '{@link #getDelay() <em>Delay</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getDelay()
    * @generated
    * @ordered
    */
-  protected static final String DELAY_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDelay() <em>Delay</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDelay()
-   * @generated
-   * @ordered
-   */
-  protected String delay = DELAY_EDEFAULT;
+  protected ENumberPassed delay;
 
   /**
    * <!-- begin-user-doc -->
@@ -159,7 +140,7 @@ public class EUntilImpl extends ELoopImpl implements EUntil
    * @generated
    */
   @Override
-  public String getRetries()
+  public ENumberPassed getRetries()
   {
     return retries;
   }
@@ -169,13 +150,16 @@ public class EUntilImpl extends ELoopImpl implements EUntil
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setRetries(String newRetries)
+  public NotificationChain basicSetRetries(ENumberPassed newRetries, NotificationChain msgs)
   {
-    String oldRetries = retries;
+    ENumberPassed oldRetries = retries;
     retries = newRetries;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EUNTIL__RETRIES, oldRetries, retries));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EUNTIL__RETRIES, oldRetries, newRetries);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -184,7 +168,29 @@ public class EUntilImpl extends ELoopImpl implements EUntil
    * @generated
    */
   @Override
-  public String getDelay()
+  public void setRetries(ENumberPassed newRetries)
+  {
+    if (newRetries != retries)
+    {
+      NotificationChain msgs = null;
+      if (retries != null)
+        msgs = ((InternalEObject)retries).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EUNTIL__RETRIES, null, msgs);
+      if (newRetries != null)
+        msgs = ((InternalEObject)newRetries).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EUNTIL__RETRIES, null, msgs);
+      msgs = basicSetRetries(newRetries, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EUNTIL__RETRIES, newRetries, newRetries));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ENumberPassed getDelay()
   {
     return delay;
   }
@@ -194,13 +200,38 @@ public class EUntilImpl extends ELoopImpl implements EUntil
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setDelay(String newDelay)
+  public NotificationChain basicSetDelay(ENumberPassed newDelay, NotificationChain msgs)
   {
-    String oldDelay = delay;
+    ENumberPassed oldDelay = delay;
     delay = newDelay;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EUNTIL__DELAY, oldDelay, delay));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EUNTIL__DELAY, oldDelay, newDelay);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDelay(ENumberPassed newDelay)
+  {
+    if (newDelay != delay)
+    {
+      NotificationChain msgs = null;
+      if (delay != null)
+        msgs = ((InternalEObject)delay).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EUNTIL__DELAY, null, msgs);
+      if (newDelay != null)
+        msgs = ((InternalEObject)newDelay).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EUNTIL__DELAY, null, msgs);
+      msgs = basicSetDelay(newDelay, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EUNTIL__DELAY, newDelay, newDelay));
   }
 
   /**
@@ -215,6 +246,10 @@ public class EUntilImpl extends ELoopImpl implements EUntil
     {
       case AnsibleDslPackage.EUNTIL__UNTIL:
         return basicSetUntil(null, msgs);
+      case AnsibleDslPackage.EUNTIL__RETRIES:
+        return basicSetRetries(null, msgs);
+      case AnsibleDslPackage.EUNTIL__DELAY:
+        return basicSetDelay(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -253,10 +288,10 @@ public class EUntilImpl extends ELoopImpl implements EUntil
         setUntil((EJinjaExpressionEvaluationWithoutBrackets)newValue);
         return;
       case AnsibleDslPackage.EUNTIL__RETRIES:
-        setRetries((String)newValue);
+        setRetries((ENumberPassed)newValue);
         return;
       case AnsibleDslPackage.EUNTIL__DELAY:
-        setDelay((String)newValue);
+        setDelay((ENumberPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -276,10 +311,10 @@ public class EUntilImpl extends ELoopImpl implements EUntil
         setUntil((EJinjaExpressionEvaluationWithoutBrackets)null);
         return;
       case AnsibleDslPackage.EUNTIL__RETRIES:
-        setRetries(RETRIES_EDEFAULT);
+        setRetries((ENumberPassed)null);
         return;
       case AnsibleDslPackage.EUNTIL__DELAY:
-        setDelay(DELAY_EDEFAULT);
+        setDelay((ENumberPassed)null);
         return;
     }
     super.eUnset(featureID);
@@ -298,30 +333,11 @@ public class EUntilImpl extends ELoopImpl implements EUntil
       case AnsibleDslPackage.EUNTIL__UNTIL:
         return until != null;
       case AnsibleDslPackage.EUNTIL__RETRIES:
-        return RETRIES_EDEFAULT == null ? retries != null : !RETRIES_EDEFAULT.equals(retries);
+        return retries != null;
       case AnsibleDslPackage.EUNTIL__DELAY:
-        return DELAY_EDEFAULT == null ? delay != null : !DELAY_EDEFAULT.equals(delay);
+        return delay != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (retries: ");
-    result.append(retries);
-    result.append(", delay: ");
-    result.append(delay);
-    result.append(')');
-    return result.toString();
   }
 
 } //EUntilImpl

@@ -12,7 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EList;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 
 /**
@@ -33,24 +34,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSettings
 {
   /**
-   * The default value of the '{@link #getStrategy() <em>Strategy</em>}' attribute.
+   * The cached value of the '{@link #getStrategy() <em>Strategy</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getStrategy()
    * @generated
    * @ordered
    */
-  protected static final String STRATEGY_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getStrategy() <em>Strategy</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStrategy()
-   * @generated
-   * @ordered
-   */
-  protected String strategy = STRATEGY_EDEFAULT;
+  protected EJinjaExpressionAndString strategy;
 
   /**
    * The cached value of the '{@link #getSerial_list() <em>Serial list</em>}' containment reference.
@@ -60,27 +51,17 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    * @ordered
    */
-  protected EList serial_list;
+  protected EListPassed serial_list;
 
   /**
-   * The default value of the '{@link #getOrder() <em>Order</em>}' attribute.
+   * The cached value of the '{@link #getOrder() <em>Order</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getOrder()
    * @generated
    * @ordered
    */
-  protected static final String ORDER_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getOrder() <em>Order</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOrder()
-   * @generated
-   * @ordered
-   */
-  protected String order = ORDER_EDEFAULT;
+  protected EJinjaExpressionAndString order;
 
   /**
    * <!-- begin-user-doc -->
@@ -109,7 +90,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public String getStrategy()
+  public EJinjaExpressionAndString getStrategy()
   {
     return strategy;
   }
@@ -119,13 +100,16 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setStrategy(String newStrategy)
+  public NotificationChain basicSetStrategy(EJinjaExpressionAndString newStrategy, NotificationChain msgs)
   {
-    String oldStrategy = strategy;
+    EJinjaExpressionAndString oldStrategy = strategy;
     strategy = newStrategy;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY, oldStrategy, strategy));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY, oldStrategy, newStrategy);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -134,7 +118,29 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public EList getSerial_list()
+  public void setStrategy(EJinjaExpressionAndString newStrategy)
+  {
+    if (newStrategy != strategy)
+    {
+      NotificationChain msgs = null;
+      if (strategy != null)
+        msgs = ((InternalEObject)strategy).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY, null, msgs);
+      if (newStrategy != null)
+        msgs = ((InternalEObject)newStrategy).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY, null, msgs);
+      msgs = basicSetStrategy(newStrategy, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY, newStrategy, newStrategy));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EListPassed getSerial_list()
   {
     return serial_list;
   }
@@ -144,9 +150,9 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetSerial_list(EList newSerial_list, NotificationChain msgs)
+  public NotificationChain basicSetSerial_list(EListPassed newSerial_list, NotificationChain msgs)
   {
-    EList oldSerial_list = serial_list;
+    EListPassed oldSerial_list = serial_list;
     serial_list = newSerial_list;
     if (eNotificationRequired())
     {
@@ -162,7 +168,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public void setSerial_list(EList newSerial_list)
+  public void setSerial_list(EListPassed newSerial_list)
   {
     if (newSerial_list != serial_list)
     {
@@ -184,7 +190,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public String getOrder()
+  public EJinjaExpressionAndString getOrder()
   {
     return order;
   }
@@ -194,13 +200,38 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setOrder(String newOrder)
+  public NotificationChain basicSetOrder(EJinjaExpressionAndString newOrder, NotificationChain msgs)
   {
-    String oldOrder = order;
+    EJinjaExpressionAndString oldOrder = order;
     order = newOrder;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER, oldOrder, order));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER, oldOrder, newOrder);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setOrder(EJinjaExpressionAndString newOrder)
+  {
+    if (newOrder != order)
+    {
+      NotificationChain msgs = null;
+      if (order != null)
+        msgs = ((InternalEObject)order).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER, null, msgs);
+      if (newOrder != null)
+        msgs = ((InternalEObject)newOrder).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER, null, msgs);
+      msgs = basicSetOrder(newOrder, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER, newOrder, newOrder));
   }
 
   /**
@@ -213,8 +244,12 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY:
+        return basicSetStrategy(null, msgs);
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__SERIAL_LIST:
         return basicSetSerial_list(null, msgs);
+      case AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER:
+        return basicSetOrder(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -250,13 +285,13 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY:
-        setStrategy((String)newValue);
+        setStrategy((EJinjaExpressionAndString)newValue);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__SERIAL_LIST:
-        setSerial_list((EList)newValue);
+        setSerial_list((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER:
-        setOrder((String)newValue);
+        setOrder((EJinjaExpressionAndString)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -273,13 +308,13 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY:
-        setStrategy(STRATEGY_EDEFAULT);
+        setStrategy((EJinjaExpressionAndString)null);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__SERIAL_LIST:
-        setSerial_list((EList)null);
+        setSerial_list((EListPassed)null);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER:
-        setOrder(ORDER_EDEFAULT);
+        setOrder((EJinjaExpressionAndString)null);
         return;
     }
     super.eUnset(featureID);
@@ -296,32 +331,13 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY:
-        return STRATEGY_EDEFAULT == null ? strategy != null : !STRATEGY_EDEFAULT.equals(strategy);
+        return strategy != null;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__SERIAL_LIST:
         return serial_list != null;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER:
-        return ORDER_EDEFAULT == null ? order != null : !ORDER_EDEFAULT.equals(order);
+        return order != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (strategy: ");
-    result.append(strategy);
-    result.append(", order: ");
-    result.append(order);
-    result.append(')');
-    return result.toString();
   }
 
 } //EPlayExeSettingsImpl

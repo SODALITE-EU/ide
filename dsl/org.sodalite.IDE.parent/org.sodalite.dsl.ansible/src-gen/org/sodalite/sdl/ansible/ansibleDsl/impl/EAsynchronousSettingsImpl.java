@@ -4,14 +4,17 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,44 +33,24 @@ import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container implements EAsynchronousSettings
 {
   /**
-   * The default value of the '{@link #getAsync() <em>Async</em>}' attribute.
+   * The cached value of the '{@link #getAsync() <em>Async</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getAsync()
    * @generated
    * @ordered
    */
-  protected static final String ASYNC_EDEFAULT = null;
+  protected ENumberPassed async;
 
   /**
-   * The cached value of the '{@link #getAsync() <em>Async</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAsync()
-   * @generated
-   * @ordered
-   */
-  protected String async = ASYNC_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getPoll() <em>Poll</em>}' attribute.
+   * The cached value of the '{@link #getPoll() <em>Poll</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getPoll()
    * @generated
    * @ordered
    */
-  protected static final String POLL_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getPoll() <em>Poll</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPoll()
-   * @generated
-   * @ordered
-   */
-  protected String poll = POLL_EDEFAULT;
+  protected ENumberPassed poll;
 
   /**
    * <!-- begin-user-doc -->
@@ -96,7 +79,7 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public String getAsync()
+  public ENumberPassed getAsync()
   {
     return async;
   }
@@ -106,13 +89,16 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setAsync(String newAsync)
+  public NotificationChain basicSetAsync(ENumberPassed newAsync, NotificationChain msgs)
   {
-    String oldAsync = async;
+    ENumberPassed oldAsync = async;
     async = newAsync;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC, oldAsync, async));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC, oldAsync, newAsync);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -121,7 +107,29 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public String getPoll()
+  public void setAsync(ENumberPassed newAsync)
+  {
+    if (newAsync != async)
+    {
+      NotificationChain msgs = null;
+      if (async != null)
+        msgs = ((InternalEObject)async).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC, null, msgs);
+      if (newAsync != null)
+        msgs = ((InternalEObject)newAsync).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC, null, msgs);
+      msgs = basicSetAsync(newAsync, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC, newAsync, newAsync));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ENumberPassed getPoll()
   {
     return poll;
   }
@@ -131,13 +139,56 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setPoll(String newPoll)
+  public NotificationChain basicSetPoll(ENumberPassed newPoll, NotificationChain msgs)
   {
-    String oldPoll = poll;
+    ENumberPassed oldPoll = poll;
     poll = newPoll;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL, oldPoll, poll));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL, oldPoll, newPoll);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setPoll(ENumberPassed newPoll)
+  {
+    if (newPoll != poll)
+    {
+      NotificationChain msgs = null;
+      if (poll != null)
+        msgs = ((InternalEObject)poll).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL, null, msgs);
+      if (newPoll != null)
+        msgs = ((InternalEObject)newPoll).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL, null, msgs);
+      msgs = basicSetPoll(newPoll, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL, newPoll, newPoll));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC:
+        return basicSetAsync(null, msgs);
+      case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL:
+        return basicSetPoll(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -169,10 +220,10 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC:
-        setAsync((String)newValue);
+        setAsync((ENumberPassed)newValue);
         return;
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL:
-        setPoll((String)newValue);
+        setPoll((ENumberPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -189,10 +240,10 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC:
-        setAsync(ASYNC_EDEFAULT);
+        setAsync((ENumberPassed)null);
         return;
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL:
-        setPoll(POLL_EDEFAULT);
+        setPoll((ENumberPassed)null);
         return;
     }
     super.eUnset(featureID);
@@ -209,30 +260,11 @@ public class EAsynchronousSettingsImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__ASYNC:
-        return ASYNC_EDEFAULT == null ? async != null : !ASYNC_EDEFAULT.equals(async);
+        return async != null;
       case AnsibleDslPackage.EASYNCHRONOUS_SETTINGS__POLL:
-        return POLL_EDEFAULT == null ? poll != null : !POLL_EDEFAULT.equals(poll);
+        return poll != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (async: ");
-    result.append(async);
-    result.append(", poll: ");
-    result.append(poll);
-    result.append(')');
-    return result.toString();
   }
 
 } //EAsynchronousSettingsImpl

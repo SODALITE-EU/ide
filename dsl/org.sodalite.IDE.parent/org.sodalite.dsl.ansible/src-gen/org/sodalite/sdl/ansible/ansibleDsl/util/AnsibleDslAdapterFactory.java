@@ -386,6 +386,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEVariableDeclarationAdapter();
       }
       @Override
+      public Adapter caseEIndexOrLoopVariable(EIndexOrLoopVariable object)
+      {
+        return createEIndexOrLoopVariableAdapter();
+      }
+      @Override
+      public Adapter caseEIndexOrLoopVariableReference(EIndexOrLoopVariableReference object)
+      {
+        return createEIndexOrLoopVariableReferenceAdapter();
+      }
+      @Override
       public Adapter caseERegisterVariable(ERegisterVariable object)
       {
         return createERegisterVariableAdapter();
@@ -411,6 +421,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createESpecialVariableAdapter();
       }
       @Override
+      public Adapter caseETailElement(ETailElement object)
+      {
+        return createETailElementAdapter();
+      }
+      @Override
       public Adapter caseEDictionary(EDictionary object)
       {
         return createEDictionaryAdapter();
@@ -424,6 +439,26 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEList(EList object)
       {
         return createEListAdapter();
+      }
+      @Override
+      public Adapter caseEDictionaryPassed(EDictionaryPassed object)
+      {
+        return createEDictionaryPassedAdapter();
+      }
+      @Override
+      public Adapter caseEListPassed(EListPassed object)
+      {
+        return createEListPassedAdapter();
+      }
+      @Override
+      public Adapter caseENumberPassed(ENumberPassed object)
+      {
+        return createENumberPassedAdapter();
+      }
+      @Override
+      public Adapter caseEBooleanPassed(EBooleanPassed object)
+      {
+        return createEBooleanPassedAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -1378,6 +1413,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariable <em>EIndex Or Loop Variable</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariable
+   * @generated
+   */
+  public Adapter createEIndexOrLoopVariableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference <em>EIndex Or Loop Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference
+   * @generated
+   */
+  public Adapter createEIndexOrLoopVariableReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable <em>ERegister Variable</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1453,6 +1518,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement <em>ETail Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETailElement
+   * @generated
+   */
+  public Adapter createETailElementAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionary <em>EDictionary</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1493,6 +1573,66 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEListAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed <em>EDictionary Passed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed
+   * @generated
+   */
+  public Adapter createEDictionaryPassedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EListPassed <em>EList Passed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EListPassed
+   * @generated
+   */
+  public Adapter createEListPassedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed <em>ENumber Passed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed
+   * @generated
+   */
+  public Adapter createENumberPassedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed <em>EBoolean Passed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed
+   * @generated
+   */
+  public Adapter createEBooleanPassedAdapter()
   {
     return null;
   }

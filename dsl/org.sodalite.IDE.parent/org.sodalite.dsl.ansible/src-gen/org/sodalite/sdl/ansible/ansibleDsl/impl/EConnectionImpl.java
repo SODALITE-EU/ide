@@ -4,14 +4,18 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,64 +35,34 @@ import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 public class EConnectionImpl extends MinimalEObjectImpl.Container implements EConnection
 {
   /**
-   * The default value of the '{@link #getConnection() <em>Connection</em>}' attribute.
+   * The cached value of the '{@link #getConnection() <em>Connection</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getConnection()
    * @generated
    * @ordered
    */
-  protected static final String CONNECTION_EDEFAULT = null;
+  protected EJinjaExpressionAndString connection;
 
   /**
-   * The cached value of the '{@link #getConnection() <em>Connection</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConnection()
-   * @generated
-   * @ordered
-   */
-  protected String connection = CONNECTION_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getPort() <em>Port</em>}' attribute.
+   * The cached value of the '{@link #getPort() <em>Port</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getPort()
    * @generated
    * @ordered
    */
-  protected static final String PORT_EDEFAULT = null;
+  protected ENumberPassed port;
 
   /**
-   * The cached value of the '{@link #getPort() <em>Port</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPort()
-   * @generated
-   * @ordered
-   */
-  protected String port = PORT_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getRemote_user() <em>Remote user</em>}' attribute.
+   * The cached value of the '{@link #getRemote_user() <em>Remote user</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getRemote_user()
    * @generated
    * @ordered
    */
-  protected static final String REMOTE_USER_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getRemote_user() <em>Remote user</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRemote_user()
-   * @generated
-   * @ordered
-   */
-  protected String remote_user = REMOTE_USER_EDEFAULT;
+  protected EJinjaExpressionAndString remote_user;
 
   /**
    * <!-- begin-user-doc -->
@@ -117,7 +91,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
-  public String getConnection()
+  public EJinjaExpressionAndString getConnection()
   {
     return connection;
   }
@@ -127,13 +101,16 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setConnection(String newConnection)
+  public NotificationChain basicSetConnection(EJinjaExpressionAndString newConnection, NotificationChain msgs)
   {
-    String oldConnection = connection;
+    EJinjaExpressionAndString oldConnection = connection;
     connection = newConnection;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__CONNECTION, oldConnection, connection));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__CONNECTION, oldConnection, newConnection);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -142,7 +119,29 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
-  public String getPort()
+  public void setConnection(EJinjaExpressionAndString newConnection)
+  {
+    if (newConnection != connection)
+    {
+      NotificationChain msgs = null;
+      if (connection != null)
+        msgs = ((InternalEObject)connection).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ECONNECTION__CONNECTION, null, msgs);
+      if (newConnection != null)
+        msgs = ((InternalEObject)newConnection).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ECONNECTION__CONNECTION, null, msgs);
+      msgs = basicSetConnection(newConnection, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__CONNECTION, newConnection, newConnection));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ENumberPassed getPort()
   {
     return port;
   }
@@ -152,13 +151,16 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setPort(String newPort)
+  public NotificationChain basicSetPort(ENumberPassed newPort, NotificationChain msgs)
   {
-    String oldPort = port;
+    ENumberPassed oldPort = port;
     port = newPort;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__PORT, oldPort, port));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__PORT, oldPort, newPort);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -167,7 +169,29 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
-  public String getRemote_user()
+  public void setPort(ENumberPassed newPort)
+  {
+    if (newPort != port)
+    {
+      NotificationChain msgs = null;
+      if (port != null)
+        msgs = ((InternalEObject)port).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ECONNECTION__PORT, null, msgs);
+      if (newPort != null)
+        msgs = ((InternalEObject)newPort).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ECONNECTION__PORT, null, msgs);
+      msgs = basicSetPort(newPort, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__PORT, newPort, newPort));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionAndString getRemote_user()
   {
     return remote_user;
   }
@@ -177,13 +201,58 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setRemote_user(String newRemote_user)
+  public NotificationChain basicSetRemote_user(EJinjaExpressionAndString newRemote_user, NotificationChain msgs)
   {
-    String oldRemote_user = remote_user;
+    EJinjaExpressionAndString oldRemote_user = remote_user;
     remote_user = newRemote_user;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__REMOTE_USER, oldRemote_user, remote_user));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__REMOTE_USER, oldRemote_user, newRemote_user);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRemote_user(EJinjaExpressionAndString newRemote_user)
+  {
+    if (newRemote_user != remote_user)
+    {
+      NotificationChain msgs = null;
+      if (remote_user != null)
+        msgs = ((InternalEObject)remote_user).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ECONNECTION__REMOTE_USER, null, msgs);
+      if (newRemote_user != null)
+        msgs = ((InternalEObject)newRemote_user).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ECONNECTION__REMOTE_USER, null, msgs);
+      msgs = basicSetRemote_user(newRemote_user, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ECONNECTION__REMOTE_USER, newRemote_user, newRemote_user));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.ECONNECTION__CONNECTION:
+        return basicSetConnection(null, msgs);
+      case AnsibleDslPackage.ECONNECTION__PORT:
+        return basicSetPort(null, msgs);
+      case AnsibleDslPackage.ECONNECTION__REMOTE_USER:
+        return basicSetRemote_user(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -217,13 +286,13 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
     switch (featureID)
     {
       case AnsibleDslPackage.ECONNECTION__CONNECTION:
-        setConnection((String)newValue);
+        setConnection((EJinjaExpressionAndString)newValue);
         return;
       case AnsibleDslPackage.ECONNECTION__PORT:
-        setPort((String)newValue);
+        setPort((ENumberPassed)newValue);
         return;
       case AnsibleDslPackage.ECONNECTION__REMOTE_USER:
-        setRemote_user((String)newValue);
+        setRemote_user((EJinjaExpressionAndString)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -240,13 +309,13 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
     switch (featureID)
     {
       case AnsibleDslPackage.ECONNECTION__CONNECTION:
-        setConnection(CONNECTION_EDEFAULT);
+        setConnection((EJinjaExpressionAndString)null);
         return;
       case AnsibleDslPackage.ECONNECTION__PORT:
-        setPort(PORT_EDEFAULT);
+        setPort((ENumberPassed)null);
         return;
       case AnsibleDslPackage.ECONNECTION__REMOTE_USER:
-        setRemote_user(REMOTE_USER_EDEFAULT);
+        setRemote_user((EJinjaExpressionAndString)null);
         return;
     }
     super.eUnset(featureID);
@@ -263,34 +332,13 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
     switch (featureID)
     {
       case AnsibleDslPackage.ECONNECTION__CONNECTION:
-        return CONNECTION_EDEFAULT == null ? connection != null : !CONNECTION_EDEFAULT.equals(connection);
+        return connection != null;
       case AnsibleDslPackage.ECONNECTION__PORT:
-        return PORT_EDEFAULT == null ? port != null : !PORT_EDEFAULT.equals(port);
+        return port != null;
       case AnsibleDslPackage.ECONNECTION__REMOTE_USER:
-        return REMOTE_USER_EDEFAULT == null ? remote_user != null : !REMOTE_USER_EDEFAULT.equals(remote_user);
+        return remote_user != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (connection: ");
-    result.append(connection);
-    result.append(", port: ");
-    result.append(port);
-    result.append(", remote_user: ");
-    result.append(remote_user);
-    result.append(')');
-    return result.toString();
   }
 
 } //EConnectionImpl

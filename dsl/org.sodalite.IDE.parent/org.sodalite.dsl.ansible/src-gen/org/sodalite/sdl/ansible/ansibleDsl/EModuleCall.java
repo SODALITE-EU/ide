@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getDirect_input <em>Direct input</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getDirect_parameter <em>Direct parameter</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
@@ -50,26 +50,26 @@ public interface EModuleCall extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Direct input</b></em>' containment reference.
+   * Returns the value of the '<em><b>Direct parameter</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Direct input</em>' containment reference.
-   * @see #setDirect_input(EValuePassed)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEModuleCall_Direct_input()
+   * @return the value of the '<em>Direct parameter</em>' containment reference.
+   * @see #setDirect_parameter(EValuePassed)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEModuleCall_Direct_parameter()
    * @model containment="true"
    * @generated
    */
-  EValuePassed getDirect_input();
+  EValuePassed getDirect_parameter();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getDirect_input <em>Direct input</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EModuleCall#getDirect_parameter <em>Direct parameter</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Direct input</em>' containment reference.
-   * @see #getDirect_input()
+   * @param value the new value of the '<em>Direct parameter</em>' containment reference.
+   * @see #getDirect_parameter()
    * @generated
    */
-  void setDirect_input(EValuePassed value);
+  void setDirect_parameter(EValuePassed value);
 
   /**
    * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
