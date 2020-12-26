@@ -3,17 +3,11 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
@@ -27,7 +21,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESpecialVariableImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESpecialVariableImpl#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @generated
@@ -53,16 +46,6 @@ public class ESpecialVariableImpl extends EValuePassedToJinjaExpressionImpl impl
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getTail() <em>Tail</em>}' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTail()
-   * @generated
-   * @ordered
-   */
-  protected EList<String> tail;
 
   /**
    * <!-- begin-user-doc -->
@@ -116,29 +99,12 @@ public class ESpecialVariableImpl extends EValuePassedToJinjaExpressionImpl impl
    * @generated
    */
   @Override
-  public EList<String> getTail()
-  {
-    if (tail == null)
-    {
-      tail = new EDataTypeEList<String>(String.class, this, AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL);
-    }
-    return tail;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case AnsibleDslPackage.ESPECIAL_VARIABLE__NAME:
         return getName();
-      case AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL:
-        return getTail();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -148,7 +114,6 @@ public class ESpecialVariableImpl extends EValuePassedToJinjaExpressionImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -156,10 +121,6 @@ public class ESpecialVariableImpl extends EValuePassedToJinjaExpressionImpl impl
     {
       case AnsibleDslPackage.ESPECIAL_VARIABLE__NAME:
         setName((String)newValue);
-        return;
-      case AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL:
-        getTail().clear();
-        getTail().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -178,9 +139,6 @@ public class ESpecialVariableImpl extends EValuePassedToJinjaExpressionImpl impl
       case AnsibleDslPackage.ESPECIAL_VARIABLE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL:
-        getTail().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -197,8 +155,6 @@ public class ESpecialVariableImpl extends EValuePassedToJinjaExpressionImpl impl
     {
       case AnsibleDslPackage.ESPECIAL_VARIABLE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AnsibleDslPackage.ESPECIAL_VARIABLE__TAIL:
-        return tail != null && !tail.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -216,8 +172,6 @@ public class ESpecialVariableImpl extends EValuePassedToJinjaExpressionImpl impl
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", tail: ");
-    result.append(tail);
     result.append(')');
     return result.toString();
   }

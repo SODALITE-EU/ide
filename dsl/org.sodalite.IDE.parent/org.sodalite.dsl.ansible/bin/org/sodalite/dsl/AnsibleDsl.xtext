@@ -391,7 +391,7 @@ ESimpleValue:
 
 EItem:
 	{EItem}
-	'item' ( "." tail+=ID)*
+	'item'  //TODO: maybe this should be included in ESpecialVariable, thus it shouldn't exist as a rule?
 ;
 
 EJinjaExpressionEvaluation:
@@ -403,11 +403,11 @@ EJinjaExpressionEvaluationWithoutBrackets:
 ;
 
 EFunctionCall:
-	name=ID ('(' parameters+=EFilteredExpression (',' parameters+=EFilteredExpression)* ')' | '(' ')')
+	name=ID ('(' parameters+=EFilteredExpression (',' parameters+=EFilteredExpression)* ')' | '(' ')') //TODO maybe it's better to call it "function_name" instead of "name"
 ;
 
 EFilteredExpression:
-	to_filter=EOrExpression ('.' tail+=EFunctionCall)*  ('|' filter=EFilteredExpression)?
+	to_filter=EOrExpression ('|' filter=EFilteredExpression)?
 ;
 
 EOrExpression:
@@ -431,7 +431,7 @@ EIsExpression:
 ;
 
 EParenthesisedExpression:
-	basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')'
+	(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')') ('[' index=NUMBER ']')? ('.' tail+=ETailElement)*
 ;
 
 EIfExpression:
@@ -443,11 +443,11 @@ EDictionaryPairReference:
 ;
 
 EVariableDeclarationVariableReference:
-	variable_declaration_variable_reference=[EVariableDeclaration|ID] ('[' index=NUMBER ']')? ( "." tail+=EDictionaryPairReference)*
+	variable_declaration_variable_reference=[EVariableDeclaration|ID]
 ;
 
 ERegisterVariableReference:
-	'registered_variable:' register_variable_reference=[ERegisterVariable|ID] ('[' index=NUMBER ']')? ( "." tail+=ID)*
+	'registered_variable:' register_variable_reference=[ERegisterVariable|ID]
 ;
 
 EVariableDeclaration:
@@ -459,7 +459,7 @@ EIndexOrLoopVariable:
 ;
 
 EIndexOrLoopVariableReference:
-	'index_or_loop_var:' name=[EIndexOrLoopVariable|ID] ('[' index=NUMBER ']')? ( "." tail+=ID)*
+	'index_or_loop_var:' name=[EIndexOrLoopVariable|ID]
 ;
 
 ERegisterVariable:
@@ -467,11 +467,11 @@ ERegisterVariable:
 ;
 
 EInputOperationVariableReference:
-	'operation_input:' name=[rm::EParameterDefinition|STRING] ('[' index=NUMBER ']')? ( "." tail+=ID)*
+	'operation_input:' name=[rm::EParameterDefinition|STRING]
 ;
 
 EInputInterfaceVariableReference:
-	'interface_input:' name=[rm::EPropertyDefinition|STRING] ('[' index=NUMBER ']')? ( "." tail+=ID)*
+	'interface_input:' name=[rm::EPropertyDefinition|STRING]
 ;
 
 EVariableReference:
@@ -480,11 +480,11 @@ EVariableReference:
 
 ESpecialVariable: //https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
 	{ESpecialVariable}
-	'special_variable:' name=ID  ("." tail+=ID)*
+	'special_variable:' name=ID
 ;
 
 ETailElement:
-	(identifier_ID=ID | identifier_jinja=EJinjaExpressionEvaluation) ('[' index=NUMBER ']')?
+	(identifier_ID=ID | function_call=EFunctionCall) ('[' index=NUMBER ']')?
 ;
 
 EDictionary:

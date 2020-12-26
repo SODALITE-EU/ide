@@ -3,18 +3,12 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.sodalite.dsl.rM.EPropertyDefinition;
 
@@ -30,7 +24,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @generated
@@ -46,16 +39,6 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
    * @ordered
    */
   protected EPropertyDefinition name;
-
-  /**
-   * The cached value of the '{@link #getTail() <em>Tail</em>}' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTail()
-   * @generated
-   * @ordered
-   */
-  protected EList<String> tail;
 
   /**
    * <!-- begin-user-doc -->
@@ -129,21 +112,6 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
    * @generated
    */
   @Override
-  public EList<String> getTail()
-  {
-    if (tail == null)
-    {
-      tail = new EDataTypeEList<String>(String.class, this, AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__TAIL);
-    }
-    return tail;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -151,8 +119,6 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
       case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME:
         if (resolve) return getName();
         return basicGetName();
-      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__TAIL:
-        return getTail();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -162,7 +128,6 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -170,10 +135,6 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
     {
       case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME:
         setName((EPropertyDefinition)newValue);
-        return;
-      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__TAIL:
-        getTail().clear();
-        getTail().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -192,9 +153,6 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
       case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME:
         setName((EPropertyDefinition)null);
         return;
-      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__TAIL:
-        getTail().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -211,27 +169,8 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
     {
       case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME:
         return name != null;
-      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__TAIL:
-        return tail != null && !tail.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (tail: ");
-    result.append(tail);
-    result.append(')');
-    return result.toString();
   }
 
 } //EInputInterfaceVariableReferenceImpl

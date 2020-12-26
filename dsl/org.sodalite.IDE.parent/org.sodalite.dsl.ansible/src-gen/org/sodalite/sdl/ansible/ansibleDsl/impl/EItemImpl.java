@@ -3,13 +3,7 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EItem;
@@ -18,27 +12,11 @@ import org.sodalite.sdl.ansible.ansibleDsl.EItem;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>EItem</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EItemImpl#getTail <em>Tail</em>}</li>
- * </ul>
  *
  * @generated
  */
 public class EItemImpl extends EValuePassedToJinjaExpressionImpl implements EItem
 {
-  /**
-   * The cached value of the '{@link #getTail() <em>Tail</em>}' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTail()
-   * @generated
-   * @ordered
-   */
-  protected EList<String> tail;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -58,106 +36,6 @@ public class EItemImpl extends EValuePassedToJinjaExpressionImpl implements EIte
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.EITEM;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<String> getTail()
-  {
-    if (tail == null)
-    {
-      tail = new EDataTypeEList<String>(String.class, this, AnsibleDslPackage.EITEM__TAIL);
-    }
-    return tail;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.EITEM__TAIL:
-        return getTail();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.EITEM__TAIL:
-        getTail().clear();
-        getTail().addAll((Collection<? extends String>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.EITEM__TAIL:
-        getTail().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.EITEM__TAIL:
-        return tail != null && !tail.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (tail: ");
-    result.append(tail);
-    result.append(')');
-    return result.toString();
   }
 
 } //EItemImpl

@@ -3,18 +3,12 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
@@ -29,7 +23,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableReferenceImpl#getRegister_variable_reference <em>Register variable reference</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableReferenceImpl#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,16 +38,6 @@ public class ERegisterVariableReferenceImpl extends EVariableReferenceImpl imple
    * @ordered
    */
   protected ERegisterVariable register_variable_reference;
-
-  /**
-   * The cached value of the '{@link #getTail() <em>Tail</em>}' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTail()
-   * @generated
-   * @ordered
-   */
-  protected EList<String> tail;
 
   /**
    * <!-- begin-user-doc -->
@@ -128,21 +111,6 @@ public class ERegisterVariableReferenceImpl extends EVariableReferenceImpl imple
    * @generated
    */
   @Override
-  public EList<String> getTail()
-  {
-    if (tail == null)
-    {
-      tail = new EDataTypeEList<String>(String.class, this, AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE__TAIL);
-    }
-    return tail;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -150,8 +118,6 @@ public class ERegisterVariableReferenceImpl extends EVariableReferenceImpl imple
       case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE:
         if (resolve) return getRegister_variable_reference();
         return basicGetRegister_variable_reference();
-      case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE__TAIL:
-        return getTail();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -161,7 +127,6 @@ public class ERegisterVariableReferenceImpl extends EVariableReferenceImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -169,10 +134,6 @@ public class ERegisterVariableReferenceImpl extends EVariableReferenceImpl imple
     {
       case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE:
         setRegister_variable_reference((ERegisterVariable)newValue);
-        return;
-      case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE__TAIL:
-        getTail().clear();
-        getTail().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -191,9 +152,6 @@ public class ERegisterVariableReferenceImpl extends EVariableReferenceImpl imple
       case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE:
         setRegister_variable_reference((ERegisterVariable)null);
         return;
-      case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE__TAIL:
-        getTail().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -210,27 +168,8 @@ public class ERegisterVariableReferenceImpl extends EVariableReferenceImpl imple
     {
       case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE:
         return register_variable_reference != null;
-      case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE__TAIL:
-        return tail != null && !tail.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (tail: ");
-    result.append(tail);
-    result.append(')');
-    return result.toString();
   }
 
 } //ERegisterVariableReferenceImpl

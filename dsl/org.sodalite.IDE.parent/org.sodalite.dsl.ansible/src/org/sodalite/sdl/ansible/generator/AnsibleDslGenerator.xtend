@@ -59,6 +59,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.ETailElement
 
 /**
  * Generates code from your model files on save.
@@ -497,6 +498,14 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (booleanPassed.boolean_passed !== null) return booleanPassed.boolean_passed
 	}
 	
+	def compileTailElement(ETailElement tailElement){
+		var tailElementString = ""
+		if (tailElement.identifier_ID !== null) tailElementString = tailElementString.concat(tailElement.identifier_ID)
+		else if (tailElement.function_call !== null) tailElementString = tailElementString.concat(tailElement.function_call.compileFunctionCall)
+		if (tailElement.index !== null) tailElementString = tailElementString.concat("[").concat(tailElement.index).concat("]")
+		return tailElementString
+	}
+	
 	def compileJinjaExpressionEvaluationWithoutBrackets(EJinjaExpressionEvaluationWithoutBrackets jinja){
 		if (jinja instanceof EFilteredExpression){
 			return jinja.compileFilteredExpression
@@ -533,9 +542,6 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileFilteredExpression(EFilteredExpression filteredExpression){
 		var stringToReturn = filteredExpression.to_filter.compileOrExpression.toString()
-		for (functionCall : filteredExpression.tail){
-			stringToReturn = stringToReturn.concat(".").concat(functionCall.compileFunctionCall)
-		}
 		if (filteredExpression.filter !== null){
 			stringToReturn = stringToReturn.concat(" | ").concat(filteredExpression.filter.compileJinjaExpressionEvaluationWithoutBrackets.toString())
 		}
@@ -596,8 +602,14 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileParenthesisedExpression(EParenthesisedExpression parenthesisedExpression){
-		if (parenthesisedExpression.basic_value !== null) return parenthesisedExpression.basic_value.compileValuePassedToJinjaExpression
-		else if (parenthesisedExpression.parenthesised_term !== null) return "(".concat(parenthesisedExpression.parenthesised_term.compileFilteredExpression.toString()).concat(")")
+		var stringToReturn = ""
+		if (parenthesisedExpression.basic_value !== null) stringToReturn = stringToReturn.concat(parenthesisedExpression.basic_value.compileValuePassedToJinjaExpression)
+		else if (parenthesisedExpression.parenthesised_term !== null) stringToReturn = stringToReturn.concat("(").concat(parenthesisedExpression.parenthesised_term.compileFilteredExpression.toString()).concat(")")
+		if (parenthesisedExpression.index !== null) stringToReturn = stringToReturn.concat("[").concat(parenthesisedExpression.index).concat("]")
+		for (tailElement : parenthesisedExpression.tail){
+			stringToReturn = stringToReturn.concat(".").concat(tailElement.compileTailElement)
+		}
+		return stringToReturn
 	}
 	
 	def compileList(EList list){
@@ -643,62 +655,35 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		if (valuePassedToJinjaExpression instanceof EValue) return compileValue(valuePassedToJinjaExpression).toString()
 		else if (valuePassedToJinjaExpression instanceof ESpecialVariable){
 			var specialVariableString = valuePassedToJinjaExpression.name
-			for (field : valuePassedToJinjaExpression.tail){
-				specialVariableString = specialVariableString.concat(".").concat(field)
-			}
 			return specialVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof EItem){
 			var itemString = "item"
-			for (tailElement : valuePassedToJinjaExpression.tail) {
-				itemString = itemString.concat(".").concat(tailElement)
-			}
 			return itemString
 		}
 		else if (valuePassedToJinjaExpression instanceof EVariableDeclarationVariableReference){
 			var declaredVariableString = ""
 			declaredVariableString = declaredVariableString.concat(valuePassedToJinjaExpression.variable_declaration_variable_reference.name)
-			if (valuePassedToJinjaExpression.index !== null) declaredVariableString = declaredVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
-			for (dictionaryPairReference : valuePassedToJinjaExpression.tail){
-				declaredVariableString = declaredVariableString.concat(".").concat(dictionaryPairReference.name.name)
-				if (dictionaryPairReference.index !== null) declaredVariableString = declaredVariableString.concat("[").concat(dictionaryPairReference.index).concat("]")
-			}
 			return declaredVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof ERegisterVariableReference){
 			var registerVariableString = ""
 			registerVariableString = registerVariableString.concat(valuePassedToJinjaExpression.register_variable_reference.name)
-			if (valuePassedToJinjaExpression.index !== null) registerVariableString = registerVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
-			for (tailElement : valuePassedToJinjaExpression.tail){
-				registerVariableString = registerVariableString.concat(".").concat(tailElement)
-			}
 			return registerVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof EInputOperationVariableReference){
 			var inputOperationVariableString = ""
 			inputOperationVariableString = inputOperationVariableString.concat(valuePassedToJinjaExpression.name.name)
-			if (valuePassedToJinjaExpression.index !== null) inputOperationVariableString = inputOperationVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
-			for (tailElement : valuePassedToJinjaExpression.tail){
-				inputOperationVariableString = inputOperationVariableString.concat(".").concat(tailElement)
-			}
 			return inputOperationVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof EInputInterfaceVariableReference){
 			var inputInterfaceVariableString = ""
 			inputInterfaceVariableString = inputInterfaceVariableString.concat(valuePassedToJinjaExpression.name.name)
-			if (valuePassedToJinjaExpression.index !== null) inputInterfaceVariableString = inputInterfaceVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
-			for (tailElement : valuePassedToJinjaExpression.tail){
-				inputInterfaceVariableString = inputInterfaceVariableString.concat(".").concat(tailElement)
-			}
 			return inputInterfaceVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof EIndexOrLoopVariableReference){
 			var indexOrLoopVariableString= ""
 			indexOrLoopVariableString = indexOrLoopVariableString.concat(indexOrLoopVariableString.concat(valuePassedToJinjaExpression.name.name))
-			if (valuePassedToJinjaExpression.index !== null) indexOrLoopVariableString = indexOrLoopVariableString.concat("[").concat(valuePassedToJinjaExpression.index).concat("]")
-			for (tailElement : valuePassedToJinjaExpression.tail){
-				indexOrLoopVariableString = indexOrLoopVariableString.concat(".").concat(tailElement)
-			}
 			return indexOrLoopVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof EFunctionCall){

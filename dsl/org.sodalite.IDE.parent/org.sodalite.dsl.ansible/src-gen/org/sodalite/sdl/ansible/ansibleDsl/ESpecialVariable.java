@@ -3,7 +3,6 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESpecialVariable()
@@ -45,17 +43,5 @@ public interface ESpecialVariable extends EValuePassedToJinjaExpression
    * @generated
    */
   void setName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Tail</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Tail</em>' attribute list.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESpecialVariable_Tail()
-   * @model unique="false"
-   * @generated
-   */
-  EList<String> getTail();
 
 } // ESpecialVariable

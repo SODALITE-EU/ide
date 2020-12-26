@@ -3,8 +3,6 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.sodalite.dsl.rM.EParameterDefinition;
 
 /**
@@ -17,7 +15,6 @@ import org.sodalite.dsl.rM.EParameterDefinition;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEInputOperationVariableReference()
@@ -47,17 +44,5 @@ public interface EInputOperationVariableReference extends EVariableReference
    * @generated
    */
   void setName(EParameterDefinition value);
-
-  /**
-   * Returns the value of the '<em><b>Tail</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Tail</em>' attribute list.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEInputOperationVariableReference_Tail()
-   * @model unique="false"
-   * @generated
-   */
-  EList<String> getTail();
 
 } // EInputOperationVariableReference

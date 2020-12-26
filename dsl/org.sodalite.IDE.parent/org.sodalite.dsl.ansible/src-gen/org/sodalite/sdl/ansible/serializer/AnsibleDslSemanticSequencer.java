@@ -489,7 +489,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EFilteredExpression returns EFilteredExpression
 	 *
 	 * Constraint:
-	 *     (to_filter=EOrExpression tail+=EFunctionCall* filter=EFilteredExpression?)
+	 *     (to_filter=EOrExpression filter=EFilteredExpression?)
 	 */
 	protected void sequence_EFilteredExpression(ISerializationContext context, EFilteredExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -550,10 +550,16 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EVariableReference returns EIndexOrLoopVariableReference
 	 *
 	 * Constraint:
-	 *     (name=[EIndexOrLoopVariable|ID] index=NUMBER? tail+=ID*)
+	 *     name=[EIndexOrLoopVariable|ID]
 	 */
 	protected void sequence_EIndexOrLoopVariableReference(ISerializationContext context, EIndexOrLoopVariableReference semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEIndexOrLoopVariableReferenceAccess().getNameEIndexOrLoopVariableIDTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME, false));
+		feeder.finish();
 	}
 	
 	
@@ -582,10 +588,16 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EVariableReference returns EInputInterfaceVariableReference
 	 *
 	 * Constraint:
-	 *     (name=[EPropertyDefinition|STRING] index=NUMBER? tail+=ID*)
+	 *     name=[EPropertyDefinition|STRING]
 	 */
 	protected void sequence_EInputInterfaceVariableReference(ISerializationContext context, EInputInterfaceVariableReference semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEInputInterfaceVariableReferenceAccess().getNameEPropertyDefinitionSTRINGTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME, false));
+		feeder.finish();
 	}
 	
 	
@@ -596,10 +608,16 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EVariableReference returns EInputOperationVariableReference
 	 *
 	 * Constraint:
-	 *     (name=[EParameterDefinition|STRING] index=NUMBER? tail+=ID*)
+	 *     name=[EParameterDefinition|STRING]
 	 */
 	protected void sequence_EInputOperationVariableReference(ISerializationContext context, EInputOperationVariableReference semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEInputOperationVariableReferenceAccess().getNameEParameterDefinitionSTRINGTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME, false));
+		feeder.finish();
 	}
 	
 	
@@ -624,7 +642,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EItem returns EItem
 	 *
 	 * Constraint:
-	 *     tail+=ID*
+	 *     {EItem}
 	 */
 	protected void sequence_EItem(ISerializationContext context, EItem semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -854,7 +872,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EParenthesisedExpression returns EParenthesisedExpression
 	 *
 	 * Constraint:
-	 *     (basic_value=EValuePassedToJinjaExpression | parenthesised_term=EFilteredExpression)
+	 *     ((basic_value=EValuePassedToJinjaExpression | parenthesised_term=EFilteredExpression) index=NUMBER? tail+=ETailElement*)
 	 */
 	protected void sequence_EParenthesisedExpression(ISerializationContext context, EParenthesisedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -950,10 +968,16 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EVariableReference returns ERegisterVariableReference
 	 *
 	 * Constraint:
-	 *     (register_variable_reference=[ERegisterVariable|ID] index=NUMBER? tail+=ID*)
+	 *     register_variable_reference=[ERegisterVariable|ID]
 	 */
 	protected void sequence_ERegisterVariableReference(ISerializationContext context, ERegisterVariableReference semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getERegisterVariableReferenceAccess().getRegister_variable_referenceERegisterVariableIDTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE, false));
+		feeder.finish();
 	}
 	
 	
@@ -1035,10 +1059,16 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ESpecialVariable returns ESpecialVariable
 	 *
 	 * Constraint:
-	 *     (name=ID tail+=ID*)
+	 *     name=ID
 	 */
 	protected void sequence_ESpecialVariable(ISerializationContext context, ESpecialVariable semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.ESPECIAL_VARIABLE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.ESPECIAL_VARIABLE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getESpecialVariableAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -1047,7 +1077,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ETailElement returns ETailElement
 	 *
 	 * Constraint:
-	 *     ((identifier_ID=ID | identifier_jinja=EJinjaExpressionEvaluation) index=NUMBER?)
+	 *     ((identifier_ID=ID | function_call=EFunctionCall) index=NUMBER?)
 	 */
 	protected void sequence_ETailElement(ISerializationContext context, ETailElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1167,10 +1197,16 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EVariableReference returns EVariableDeclarationVariableReference
 	 *
 	 * Constraint:
-	 *     (variable_declaration_variable_reference=[EVariableDeclaration|ID] index=NUMBER? tail+=EDictionaryPairReference*)
+	 *     variable_declaration_variable_reference=[EVariableDeclaration|ID]
 	 */
 	protected void sequence_EVariableDeclarationVariableReference(ISerializationContext context, EVariableDeclarationVariableReference semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEVariableDeclarationVariableReferenceAccess().getVariable_declaration_variable_referenceEVariableDeclarationIDTerminalRuleCall_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE, false));
+		feeder.finish();
 	}
 	
 	

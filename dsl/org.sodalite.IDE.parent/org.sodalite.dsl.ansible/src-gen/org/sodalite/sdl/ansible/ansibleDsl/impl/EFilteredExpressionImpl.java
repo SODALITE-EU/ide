@@ -3,24 +3,16 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
 
 /**
@@ -32,7 +24,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl#getTo_filter <em>To filter</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl#getTail <em>Tail</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl#getFilter <em>Filter</em>}</li>
  * </ul>
  *
@@ -49,16 +40,6 @@ public class EFilteredExpressionImpl extends EJinjaExpressionEvaluationWithoutBr
    * @ordered
    */
   protected EOrExpression to_filter;
-
-  /**
-   * The cached value of the '{@link #getTail() <em>Tail</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTail()
-   * @generated
-   * @ordered
-   */
-  protected EList<EFunctionCall> tail;
 
   /**
    * The cached value of the '{@link #getFilter() <em>Filter</em>}' containment reference.
@@ -147,21 +128,6 @@ public class EFilteredExpressionImpl extends EJinjaExpressionEvaluationWithoutBr
    * @generated
    */
   @Override
-  public EList<EFunctionCall> getTail()
-  {
-    if (tail == null)
-    {
-      tail = new EObjectContainmentEList<EFunctionCall>(EFunctionCall.class, this, AnsibleDslPackage.EFILTERED_EXPRESSION__TAIL);
-    }
-    return tail;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EFilteredExpression getFilter()
   {
     return filter;
@@ -218,8 +184,6 @@ public class EFilteredExpressionImpl extends EJinjaExpressionEvaluationWithoutBr
     {
       case AnsibleDslPackage.EFILTERED_EXPRESSION__TO_FILTER:
         return basicSetTo_filter(null, msgs);
-      case AnsibleDslPackage.EFILTERED_EXPRESSION__TAIL:
-        return ((InternalEList<?>)getTail()).basicRemove(otherEnd, msgs);
       case AnsibleDslPackage.EFILTERED_EXPRESSION__FILTER:
         return basicSetFilter(null, msgs);
     }
@@ -238,8 +202,6 @@ public class EFilteredExpressionImpl extends EJinjaExpressionEvaluationWithoutBr
     {
       case AnsibleDslPackage.EFILTERED_EXPRESSION__TO_FILTER:
         return getTo_filter();
-      case AnsibleDslPackage.EFILTERED_EXPRESSION__TAIL:
-        return getTail();
       case AnsibleDslPackage.EFILTERED_EXPRESSION__FILTER:
         return getFilter();
     }
@@ -251,7 +213,6 @@ public class EFilteredExpressionImpl extends EJinjaExpressionEvaluationWithoutBr
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -259,10 +220,6 @@ public class EFilteredExpressionImpl extends EJinjaExpressionEvaluationWithoutBr
     {
       case AnsibleDslPackage.EFILTERED_EXPRESSION__TO_FILTER:
         setTo_filter((EOrExpression)newValue);
-        return;
-      case AnsibleDslPackage.EFILTERED_EXPRESSION__TAIL:
-        getTail().clear();
-        getTail().addAll((Collection<? extends EFunctionCall>)newValue);
         return;
       case AnsibleDslPackage.EFILTERED_EXPRESSION__FILTER:
         setFilter((EFilteredExpression)newValue);
@@ -284,9 +241,6 @@ public class EFilteredExpressionImpl extends EJinjaExpressionEvaluationWithoutBr
       case AnsibleDslPackage.EFILTERED_EXPRESSION__TO_FILTER:
         setTo_filter((EOrExpression)null);
         return;
-      case AnsibleDslPackage.EFILTERED_EXPRESSION__TAIL:
-        getTail().clear();
-        return;
       case AnsibleDslPackage.EFILTERED_EXPRESSION__FILTER:
         setFilter((EFilteredExpression)null);
         return;
@@ -306,8 +260,6 @@ public class EFilteredExpressionImpl extends EJinjaExpressionEvaluationWithoutBr
     {
       case AnsibleDslPackage.EFILTERED_EXPRESSION__TO_FILTER:
         return to_filter != null;
-      case AnsibleDslPackage.EFILTERED_EXPRESSION__TAIL:
-        return tail != null && !tail.isEmpty();
       case AnsibleDslPackage.EFILTERED_EXPRESSION__FILTER:
         return filter != null;
     }

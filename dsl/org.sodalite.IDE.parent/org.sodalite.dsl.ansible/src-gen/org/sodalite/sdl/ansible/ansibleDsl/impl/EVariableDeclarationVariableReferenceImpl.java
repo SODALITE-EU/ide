@@ -3,23 +3,14 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference;
 
@@ -32,7 +23,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl#getVariable_declaration_variable_reference <em>Variable declaration variable reference</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @generated
@@ -48,16 +38,6 @@ public class EVariableDeclarationVariableReferenceImpl extends EVariableReferenc
    * @ordered
    */
   protected EVariableDeclaration variable_declaration_variable_reference;
-
-  /**
-   * The cached value of the '{@link #getTail() <em>Tail</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTail()
-   * @generated
-   * @ordered
-   */
-  protected EList<EDictionaryPairReference> tail;
 
   /**
    * <!-- begin-user-doc -->
@@ -131,37 +111,6 @@ public class EVariableDeclarationVariableReferenceImpl extends EVariableReferenc
    * @generated
    */
   @Override
-  public EList<EDictionaryPairReference> getTail()
-  {
-    if (tail == null)
-    {
-      tail = new EObjectContainmentEList<EDictionaryPairReference>(EDictionaryPairReference.class, this, AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__TAIL);
-    }
-    return tail;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__TAIL:
-        return ((InternalEList<?>)getTail()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -169,8 +118,6 @@ public class EVariableDeclarationVariableReferenceImpl extends EVariableReferenc
       case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE:
         if (resolve) return getVariable_declaration_variable_reference();
         return basicGetVariable_declaration_variable_reference();
-      case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__TAIL:
-        return getTail();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -180,7 +127,6 @@ public class EVariableDeclarationVariableReferenceImpl extends EVariableReferenc
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -188,10 +134,6 @@ public class EVariableDeclarationVariableReferenceImpl extends EVariableReferenc
     {
       case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE:
         setVariable_declaration_variable_reference((EVariableDeclaration)newValue);
-        return;
-      case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__TAIL:
-        getTail().clear();
-        getTail().addAll((Collection<? extends EDictionaryPairReference>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -210,9 +152,6 @@ public class EVariableDeclarationVariableReferenceImpl extends EVariableReferenc
       case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE:
         setVariable_declaration_variable_reference((EVariableDeclaration)null);
         return;
-      case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__TAIL:
-        getTail().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -229,8 +168,6 @@ public class EVariableDeclarationVariableReferenceImpl extends EVariableReferenc
     {
       case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE:
         return variable_declaration_variable_reference != null;
-      case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__TAIL:
-        return tail != null && !tail.isEmpty();
     }
     return super.eIsSet(featureID);
   }

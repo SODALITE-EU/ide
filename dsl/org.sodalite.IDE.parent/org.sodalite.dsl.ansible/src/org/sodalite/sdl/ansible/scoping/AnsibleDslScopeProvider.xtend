@@ -49,7 +49,7 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 			}
 		}
 		
-		if (context instanceof EDictionaryPairReferenceImpl && reference == AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME){
+		/*if (context instanceof EDictionaryPairReferenceImpl && reference == AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME){
 			val declaredVariableReference = EcoreUtil2.getContainerOfType(context, EVariableDeclarationVariableReferenceImpl)
 			val tail = declaredVariableReference.tail
 			val index = tail.indexOf(context)
@@ -72,7 +72,7 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 				}
 			}
 			return Scopes.scopeFor(candidatesOfDictionary)
-		}
+		}*/
 		
 		if (context instanceof EPlaybookImpl && reference == AnsibleDslPackage.Literals.EPLAYBOOK__OPERATION){
 			val nodeType = (context as EPlaybookImpl).node_type

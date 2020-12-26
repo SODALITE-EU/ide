@@ -27,7 +27,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
-import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
@@ -71,6 +70,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes;
@@ -1402,6 +1402,27 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return null;
   }
   
+  public String compileTailElement(final ETailElement tailElement) {
+    String tailElementString = "";
+    String _identifier_ID = tailElement.getIdentifier_ID();
+    boolean _tripleNotEquals = (_identifier_ID != null);
+    if (_tripleNotEquals) {
+      tailElementString = tailElementString.concat(tailElement.getIdentifier_ID());
+    } else {
+      EFunctionCall _function_call = tailElement.getFunction_call();
+      boolean _tripleNotEquals_1 = (_function_call != null);
+      if (_tripleNotEquals_1) {
+        tailElementString = tailElementString.concat(this.compileFunctionCall(tailElement.getFunction_call()));
+      }
+    }
+    String _index = tailElement.getIndex();
+    boolean _tripleNotEquals_2 = (_index != null);
+    if (_tripleNotEquals_2) {
+      tailElementString = tailElementString.concat("[").concat(tailElement.getIndex()).concat("]");
+    }
+    return tailElementString;
+  }
+  
   public String compileJinjaExpressionEvaluationWithoutBrackets(final EJinjaExpressionEvaluationWithoutBrackets jinja) {
     if ((jinja instanceof EFilteredExpression)) {
       return this.compileFilteredExpression(((EFilteredExpression)jinja));
@@ -1440,10 +1461,6 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileFilteredExpression(final EFilteredExpression filteredExpression) {
     String stringToReturn = this.compileOrExpression(filteredExpression.getTo_filter()).toString();
-    EList<EFunctionCall> _tail = filteredExpression.getTail();
-    for (final EFunctionCall functionCall : _tail) {
-      stringToReturn = stringToReturn.concat(".").concat(this.compileFunctionCall(functionCall));
-    }
     EFilteredExpression _filter = filteredExpression.getFilter();
     boolean _tripleNotEquals = (_filter != null);
     if (_tripleNotEquals) {
@@ -1517,18 +1534,28 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public String compileParenthesisedExpression(final EParenthesisedExpression parenthesisedExpression) {
+    String stringToReturn = "";
     EValuePassedToJinjaExpression _basic_value = parenthesisedExpression.getBasic_value();
     boolean _tripleNotEquals = (_basic_value != null);
     if (_tripleNotEquals) {
-      return this.compileValuePassedToJinjaExpression(parenthesisedExpression.getBasic_value());
+      stringToReturn = stringToReturn.concat(this.compileValuePassedToJinjaExpression(parenthesisedExpression.getBasic_value()));
     } else {
       EFilteredExpression _parenthesised_term = parenthesisedExpression.getParenthesised_term();
       boolean _tripleNotEquals_1 = (_parenthesised_term != null);
       if (_tripleNotEquals_1) {
-        return "(".concat(this.compileFilteredExpression(parenthesisedExpression.getParenthesised_term()).toString()).concat(")");
+        stringToReturn = stringToReturn.concat("(").concat(this.compileFilteredExpression(parenthesisedExpression.getParenthesised_term()).toString()).concat(")");
       }
     }
-    return null;
+    String _index = parenthesisedExpression.getIndex();
+    boolean _tripleNotEquals_2 = (_index != null);
+    if (_tripleNotEquals_2) {
+      stringToReturn = stringToReturn.concat("[").concat(parenthesisedExpression.getIndex()).concat("]");
+    }
+    EList<ETailElement> _tail = parenthesisedExpression.getTail();
+    for (final ETailElement tailElement : _tail) {
+      stringToReturn = stringToReturn.concat(".").concat(this.compileTailElement(tailElement));
+    }
+    return stringToReturn;
   }
   
   public ArrayList<Object> compileList(final org.sodalite.sdl.ansible.ansibleDsl.EList list) {
@@ -1584,95 +1611,35 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     } else {
       if ((valuePassedToJinjaExpression instanceof ESpecialVariable)) {
         String specialVariableString = ((ESpecialVariable)valuePassedToJinjaExpression).getName();
-        EList<String> _tail = ((ESpecialVariable)valuePassedToJinjaExpression).getTail();
-        for (final String field : _tail) {
-          specialVariableString = specialVariableString.concat(".").concat(field);
-        }
         return specialVariableString;
       } else {
         if ((valuePassedToJinjaExpression instanceof EItem)) {
           String itemString = "item";
-          EList<String> _tail_1 = ((EItem)valuePassedToJinjaExpression).getTail();
-          for (final String tailElement : _tail_1) {
-            itemString = itemString.concat(".").concat(tailElement);
-          }
           return itemString;
         } else {
           if ((valuePassedToJinjaExpression instanceof EVariableDeclarationVariableReference)) {
             String declaredVariableString = "";
             declaredVariableString = declaredVariableString.concat(((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getVariable_declaration_variable_reference().getName());
-            String _index = ((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getIndex();
-            boolean _tripleNotEquals = (_index != null);
-            if (_tripleNotEquals) {
-              declaredVariableString = declaredVariableString.concat("[").concat(((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
-            }
-            EList<EDictionaryPairReference> _tail_2 = ((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getTail();
-            for (final EDictionaryPairReference dictionaryPairReference : _tail_2) {
-              {
-                declaredVariableString = declaredVariableString.concat(".").concat(dictionaryPairReference.getName().getName());
-                String _index_1 = dictionaryPairReference.getIndex();
-                boolean _tripleNotEquals_1 = (_index_1 != null);
-                if (_tripleNotEquals_1) {
-                  declaredVariableString = declaredVariableString.concat("[").concat(dictionaryPairReference.getIndex()).concat("]");
-                }
-              }
-            }
             return declaredVariableString;
           } else {
             if ((valuePassedToJinjaExpression instanceof ERegisterVariableReference)) {
               String registerVariableString = "";
               registerVariableString = registerVariableString.concat(((ERegisterVariableReference)valuePassedToJinjaExpression).getRegister_variable_reference().getName());
-              String _index_1 = ((ERegisterVariableReference)valuePassedToJinjaExpression).getIndex();
-              boolean _tripleNotEquals_1 = (_index_1 != null);
-              if (_tripleNotEquals_1) {
-                registerVariableString = registerVariableString.concat("[").concat(((ERegisterVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
-              }
-              EList<String> _tail_3 = ((ERegisterVariableReference)valuePassedToJinjaExpression).getTail();
-              for (final String tailElement_1 : _tail_3) {
-                registerVariableString = registerVariableString.concat(".").concat(tailElement_1);
-              }
               return registerVariableString;
             } else {
               if ((valuePassedToJinjaExpression instanceof EInputOperationVariableReference)) {
                 String inputOperationVariableString = "";
                 inputOperationVariableString = inputOperationVariableString.concat(((EInputOperationVariableReference)valuePassedToJinjaExpression).getName().getName());
-                String _index_2 = ((EInputOperationVariableReference)valuePassedToJinjaExpression).getIndex();
-                boolean _tripleNotEquals_2 = (_index_2 != null);
-                if (_tripleNotEquals_2) {
-                  inputOperationVariableString = inputOperationVariableString.concat("[").concat(((EInputOperationVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
-                }
-                EList<String> _tail_4 = ((EInputOperationVariableReference)valuePassedToJinjaExpression).getTail();
-                for (final String tailElement_2 : _tail_4) {
-                  inputOperationVariableString = inputOperationVariableString.concat(".").concat(tailElement_2);
-                }
                 return inputOperationVariableString;
               } else {
                 if ((valuePassedToJinjaExpression instanceof EInputInterfaceVariableReference)) {
                   String inputInterfaceVariableString = "";
                   inputInterfaceVariableString = inputInterfaceVariableString.concat(((EInputInterfaceVariableReference)valuePassedToJinjaExpression).getName().getName());
-                  String _index_3 = ((EInputInterfaceVariableReference)valuePassedToJinjaExpression).getIndex();
-                  boolean _tripleNotEquals_3 = (_index_3 != null);
-                  if (_tripleNotEquals_3) {
-                    inputInterfaceVariableString = inputInterfaceVariableString.concat("[").concat(((EInputInterfaceVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
-                  }
-                  EList<String> _tail_5 = ((EInputInterfaceVariableReference)valuePassedToJinjaExpression).getTail();
-                  for (final String tailElement_3 : _tail_5) {
-                    inputInterfaceVariableString = inputInterfaceVariableString.concat(".").concat(tailElement_3);
-                  }
                   return inputInterfaceVariableString;
                 } else {
                   if ((valuePassedToJinjaExpression instanceof EIndexOrLoopVariableReference)) {
                     String indexOrLoopVariableString = "";
                     indexOrLoopVariableString = indexOrLoopVariableString.concat(indexOrLoopVariableString.concat(((EIndexOrLoopVariableReference)valuePassedToJinjaExpression).getName().getName()));
-                    String _index_4 = ((EIndexOrLoopVariableReference)valuePassedToJinjaExpression).getIndex();
-                    boolean _tripleNotEquals_4 = (_index_4 != null);
-                    if (_tripleNotEquals_4) {
-                      indexOrLoopVariableString = indexOrLoopVariableString.concat("[").concat(((EIndexOrLoopVariableReference)valuePassedToJinjaExpression).getIndex()).concat("]");
-                    }
-                    EList<String> _tail_6 = ((EIndexOrLoopVariableReference)valuePassedToJinjaExpression).getTail();
-                    for (final String tailElement_4 : _tail_6) {
-                      indexOrLoopVariableString = indexOrLoopVariableString.concat(".").concat(tailElement_4);
-                    }
                     return indexOrLoopVariableString;
                   } else {
                     if ((valuePassedToJinjaExpression instanceof EFunctionCall)) {

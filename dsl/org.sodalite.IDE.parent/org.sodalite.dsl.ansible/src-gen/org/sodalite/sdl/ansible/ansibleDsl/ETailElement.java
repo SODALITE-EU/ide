@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIdentifier_ID <em>Identifier ID</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIdentifier_jinja <em>Identifier jinja</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getFunction_call <em>Function call</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIndex <em>Index</em>}</li>
  * </ul>
  *
@@ -48,26 +48,26 @@ public interface ETailElement extends EObject
   void setIdentifier_ID(String value);
 
   /**
-   * Returns the value of the '<em><b>Identifier jinja</b></em>' containment reference.
+   * Returns the value of the '<em><b>Function call</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Identifier jinja</em>' containment reference.
-   * @see #setIdentifier_jinja(EJinjaExpressionEvaluation)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETailElement_Identifier_jinja()
+   * @return the value of the '<em>Function call</em>' containment reference.
+   * @see #setFunction_call(EFunctionCall)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETailElement_Function_call()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionEvaluation getIdentifier_jinja();
+  EFunctionCall getFunction_call();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIdentifier_jinja <em>Identifier jinja</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getFunction_call <em>Function call</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Identifier jinja</em>' containment reference.
-   * @see #getIdentifier_jinja()
+   * @param value the new value of the '<em>Function call</em>' containment reference.
+   * @see #getFunction_call()
    * @generated
    */
-  void setIdentifier_jinja(EJinjaExpressionEvaluation value);
+  void setFunction_call(EFunctionCall value);
 
   /**
    * Returns the value of the '<em><b>Index</b></em>' attribute.

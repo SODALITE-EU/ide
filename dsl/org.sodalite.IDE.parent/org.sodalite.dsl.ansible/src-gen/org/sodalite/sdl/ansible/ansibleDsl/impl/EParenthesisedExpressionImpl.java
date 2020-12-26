@@ -3,8 +3,12 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,9 +16,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 
 /**
@@ -27,6 +35,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getBasic_value <em>Basic value</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getParenthesised_term <em>Parenthesised term</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @generated
@@ -52,6 +62,36 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @ordered
    */
   protected EFilteredExpression parenthesised_term;
+
+  /**
+   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIndex()
+   * @generated
+   * @ordered
+   */
+  protected static final String INDEX_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIndex()
+   * @generated
+   * @ordered
+   */
+  protected String index = INDEX_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getTail() <em>Tail</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTail()
+   * @generated
+   * @ordered
+   */
+  protected EList<ETailElement> tail;
 
   /**
    * <!-- begin-user-doc -->
@@ -180,6 +220,46 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
+  public String getIndex()
+  {
+    return index;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setIndex(String newIndex)
+  {
+    String oldIndex = index;
+    index = newIndex;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX, oldIndex, index));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<ETailElement> getTail()
+  {
+    if (tail == null)
+    {
+      tail = new EObjectContainmentEList<ETailElement>(ETailElement.class, this, AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL);
+    }
+    return tail;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -188,6 +268,8 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         return basicSetBasic_value(null, msgs);
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         return basicSetParenthesised_term(null, msgs);
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
+        return ((InternalEList<?>)getTail()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -206,6 +288,10 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         return getBasic_value();
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         return getParenthesised_term();
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX:
+        return getIndex();
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
+        return getTail();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -215,6 +301,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -225,6 +312,13 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         setParenthesised_term((EFilteredExpression)newValue);
+        return;
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX:
+        setIndex((String)newValue);
+        return;
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
+        getTail().clear();
+        getTail().addAll((Collection<? extends ETailElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -246,6 +340,12 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         setParenthesised_term((EFilteredExpression)null);
         return;
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX:
+        setIndex(INDEX_EDEFAULT);
+        return;
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
+        getTail().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -264,8 +364,29 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         return basic_value != null;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         return parenthesised_term != null;
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX:
+        return INDEX_EDEFAULT == null ? index != null : !INDEX_EDEFAULT.equals(index);
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
+        return tail != null && !tail.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (index: ");
+    result.append(index);
+    result.append(')');
+    return result.toString();
   }
 
 } //EParenthesisedExpressionImpl

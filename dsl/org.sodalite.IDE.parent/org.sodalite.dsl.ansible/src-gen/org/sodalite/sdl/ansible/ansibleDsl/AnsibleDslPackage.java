@@ -2121,22 +2121,13 @@ public interface AnsibleDslPackage extends EPackage
   int EITEM = 46;
 
   /**
-   * The feature id for the '<em><b>Tail</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EITEM__TAIL = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
    * The number of structural features of the '<em>EItem</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EITEM_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 1;
+  int EITEM_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl <em>EJinja Expression Evaluation</em>}' class.
@@ -2269,22 +2260,13 @@ public interface AnsibleDslPackage extends EPackage
   int EFILTERED_EXPRESSION__TO_FILTER = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Tail</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFILTERED_EXPRESSION__TAIL = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 1;
-
-  /**
    * The feature id for the '<em><b>Filter</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EFILTERED_EXPRESSION__FILTER = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 2;
+  int EFILTERED_EXPRESSION__FILTER = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>EFiltered Expression</em>' class.
@@ -2293,7 +2275,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFILTERED_EXPRESSION_FEATURE_COUNT = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 3;
+  int EFILTERED_EXPRESSION_FEATURE_COUNT = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EOrExpressionImpl <em>EOr Expression</em>}' class.
@@ -2545,13 +2527,31 @@ public interface AnsibleDslPackage extends EPackage
   int EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM = 1;
 
   /**
+   * The feature id for the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPARENTHESISED_EXPRESSION__INDEX = 2;
+
+  /**
+   * The feature id for the '<em><b>Tail</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPARENTHESISED_EXPRESSION__TAIL = 3;
+
+  /**
    * The number of structural features of the '<em>EParenthesised Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPARENTHESISED_EXPRESSION_FEATURE_COUNT = 2;
+  int EPARENTHESISED_EXPRESSION_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl <em>EIf Expression</em>}' class.
@@ -2647,22 +2647,13 @@ public interface AnsibleDslPackage extends EPackage
   int EVARIABLE_REFERENCE = 67;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVARIABLE_REFERENCE__INDEX = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
    * The number of structural features of the '<em>EVariable Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVARIABLE_REFERENCE_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 1;
+  int EVARIABLE_REFERENCE_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl <em>EVariable Declaration Variable Reference</em>}' class.
@@ -2675,15 +2666,6 @@ public interface AnsibleDslPackage extends EPackage
   int EVARIABLE_DECLARATION_VARIABLE_REFERENCE = 59;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE__INDEX = EVARIABLE_REFERENCE__INDEX;
-
-  /**
    * The feature id for the '<em><b>Variable declaration variable reference</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2693,22 +2675,13 @@ public interface AnsibleDslPackage extends EPackage
   int EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE = EVARIABLE_REFERENCE_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Tail</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE__TAIL = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
-
-  /**
    * The number of structural features of the '<em>EVariable Declaration Variable Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 2;
+  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableReferenceImpl <em>ERegister Variable Reference</em>}' class.
@@ -2721,15 +2694,6 @@ public interface AnsibleDslPackage extends EPackage
   int EREGISTER_VARIABLE_REFERENCE = 60;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EREGISTER_VARIABLE_REFERENCE__INDEX = EVARIABLE_REFERENCE__INDEX;
-
-  /**
    * The feature id for the '<em><b>Register variable reference</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2739,22 +2703,13 @@ public interface AnsibleDslPackage extends EPackage
   int EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE = EVARIABLE_REFERENCE_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Tail</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EREGISTER_VARIABLE_REFERENCE__TAIL = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
-
-  /**
    * The number of structural features of the '<em>ERegister Variable Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EREGISTER_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 2;
+  int EREGISTER_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl <em>EVariable Declaration</em>}' class.
@@ -2832,15 +2787,6 @@ public interface AnsibleDslPackage extends EPackage
   int EINDEX_OR_LOOP_VARIABLE_REFERENCE = 63;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX = EVARIABLE_REFERENCE__INDEX;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2850,22 +2796,13 @@ public interface AnsibleDslPackage extends EPackage
   int EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME = EVARIABLE_REFERENCE_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Tail</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EINDEX_OR_LOOP_VARIABLE_REFERENCE__TAIL = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
-
-  /**
    * The number of structural features of the '<em>EIndex Or Loop Variable Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EINDEX_OR_LOOP_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 2;
+  int EINDEX_OR_LOOP_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl <em>ERegister Variable</em>}' class.
@@ -2906,15 +2843,6 @@ public interface AnsibleDslPackage extends EPackage
   int EINPUT_OPERATION_VARIABLE_REFERENCE = 65;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EINPUT_OPERATION_VARIABLE_REFERENCE__INDEX = EVARIABLE_REFERENCE__INDEX;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2924,22 +2852,13 @@ public interface AnsibleDslPackage extends EPackage
   int EINPUT_OPERATION_VARIABLE_REFERENCE__NAME = EVARIABLE_REFERENCE_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Tail</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EINPUT_OPERATION_VARIABLE_REFERENCE__TAIL = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
-
-  /**
    * The number of structural features of the '<em>EInput Operation Variable Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EINPUT_OPERATION_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 2;
+  int EINPUT_OPERATION_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl <em>EInput Interface Variable Reference</em>}' class.
@@ -2952,15 +2871,6 @@ public interface AnsibleDslPackage extends EPackage
   int EINPUT_INTERFACE_VARIABLE_REFERENCE = 66;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EINPUT_INTERFACE_VARIABLE_REFERENCE__INDEX = EVARIABLE_REFERENCE__INDEX;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2970,22 +2880,13 @@ public interface AnsibleDslPackage extends EPackage
   int EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME = EVARIABLE_REFERENCE_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Tail</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EINPUT_INTERFACE_VARIABLE_REFERENCE__TAIL = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
-
-  /**
    * The number of structural features of the '<em>EInput Interface Variable Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EINPUT_INTERFACE_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 2;
+  int EINPUT_INTERFACE_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESpecialVariableImpl <em>ESpecial Variable</em>}' class.
@@ -3007,22 +2908,13 @@ public interface AnsibleDslPackage extends EPackage
   int ESPECIAL_VARIABLE__NAME = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Tail</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESPECIAL_VARIABLE__TAIL = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
    * The number of structural features of the '<em>ESpecial Variable</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ESPECIAL_VARIABLE_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 2;
+  int ESPECIAL_VARIABLE_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl <em>ETail Element</em>}' class.
@@ -3044,13 +2936,13 @@ public interface AnsibleDslPackage extends EPackage
   int ETAIL_ELEMENT__IDENTIFIER_ID = 0;
 
   /**
-   * The feature id for the '<em><b>Identifier jinja</b></em>' containment reference.
+   * The feature id for the '<em><b>Function call</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETAIL_ELEMENT__IDENTIFIER_JINJA = 1;
+  int ETAIL_ELEMENT__FUNCTION_CALL = 1;
 
   /**
    * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -4796,17 +4688,6 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEItem();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.EItem#getTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Tail</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EItem#getTail()
-   * @see #getEItem()
-   * @generated
-   */
-  EAttribute getEItem_Tail();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation <em>EJinja Expression Evaluation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4889,17 +4770,6 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EReference getEFilteredExpression_To_filter();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression#getTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Tail</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression#getTail()
-   * @see #getEFilteredExpression()
-   * @generated
-   */
-  EReference getEFilteredExpression_Tail();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression#getFilter <em>Filter</em>}'.
@@ -5149,6 +5019,28 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEParenthesisedExpression_Parenthesised_term();
 
   /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getIndex <em>Index</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Index</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getIndex()
+   * @see #getEParenthesisedExpression()
+   * @generated
+   */
+  EAttribute getEParenthesisedExpression_Index();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getTail <em>Tail</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tail</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getTail()
+   * @see #getEParenthesisedExpression()
+   * @generated
+   */
+  EReference getEParenthesisedExpression_Tail();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression <em>EIf Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5245,17 +5137,6 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEVariableDeclarationVariableReference_Variable_declaration_variable_reference();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference#getTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Tail</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference#getTail()
-   * @see #getEVariableDeclarationVariableReference()
-   * @generated
-   */
-  EReference getEVariableDeclarationVariableReference_Tail();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference <em>ERegister Variable Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5275,17 +5156,6 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EReference getERegisterVariableReference_Register_variable_reference();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference#getTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Tail</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference#getTail()
-   * @see #getERegisterVariableReference()
-   * @generated
-   */
-  EAttribute getERegisterVariableReference_Tail();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration <em>EVariable Declaration</em>}'.
@@ -5362,17 +5232,6 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEIndexOrLoopVariableReference_Name();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Tail</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getTail()
-   * @see #getEIndexOrLoopVariableReference()
-   * @generated
-   */
-  EAttribute getEIndexOrLoopVariableReference_Tail();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable <em>ERegister Variable</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5415,17 +5274,6 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEInputOperationVariableReference_Name();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference#getTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Tail</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference#getTail()
-   * @see #getEInputOperationVariableReference()
-   * @generated
-   */
-  EAttribute getEInputOperationVariableReference_Tail();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference <em>EInput Interface Variable Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5447,17 +5295,6 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEInputInterfaceVariableReference_Name();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference#getTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Tail</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference#getTail()
-   * @see #getEInputInterfaceVariableReference()
-   * @generated
-   */
-  EAttribute getEInputInterfaceVariableReference_Tail();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableReference <em>EVariable Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5466,17 +5303,6 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EClass getEVariableReference();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableReference#getIndex <em>Index</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Index</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EVariableReference#getIndex()
-   * @see #getEVariableReference()
-   * @generated
-   */
-  EAttribute getEVariableReference_Index();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable <em>ESpecial Variable</em>}'.
@@ -5500,17 +5326,6 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getESpecialVariable_Name();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable#getTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Tail</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable#getTail()
-   * @see #getESpecialVariable()
-   * @generated
-   */
-  EAttribute getESpecialVariable_Tail();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement <em>ETail Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5532,15 +5347,15 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getETailElement_Identifier_ID();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIdentifier_jinja <em>Identifier jinja</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getFunction_call <em>Function call</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Identifier jinja</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIdentifier_jinja()
+   * @return the meta object for the containment reference '<em>Function call</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getFunction_call()
    * @see #getETailElement()
    * @generated
    */
-  EReference getETailElement_Identifier_jinja();
+  EReference getETailElement_Function_call();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIndex <em>Index</em>}'.
@@ -6959,14 +6774,6 @@ public interface AnsibleDslPackage extends EPackage
     EClass EITEM = eINSTANCE.getEItem();
 
     /**
-     * The meta object literal for the '<em><b>Tail</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EITEM__TAIL = eINSTANCE.getEItem_Tail();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl <em>EJinja Expression Evaluation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7037,14 +6844,6 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference EFILTERED_EXPRESSION__TO_FILTER = eINSTANCE.getEFilteredExpression_To_filter();
-
-    /**
-     * The meta object literal for the '<em><b>Tail</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EFILTERED_EXPRESSION__TAIL = eINSTANCE.getEFilteredExpression_Tail();
 
     /**
      * The meta object literal for the '<em><b>Filter</b></em>' containment reference feature.
@@ -7243,6 +7042,22 @@ public interface AnsibleDslPackage extends EPackage
     EReference EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM = eINSTANCE.getEParenthesisedExpression_Parenthesised_term();
 
     /**
+     * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EPARENTHESISED_EXPRESSION__INDEX = eINSTANCE.getEParenthesisedExpression_Index();
+
+    /**
+     * The meta object literal for the '<em><b>Tail</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EPARENTHESISED_EXPRESSION__TAIL = eINSTANCE.getEParenthesisedExpression_Tail();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl <em>EIf Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7321,14 +7136,6 @@ public interface AnsibleDslPackage extends EPackage
     EReference EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE = eINSTANCE.getEVariableDeclarationVariableReference_Variable_declaration_variable_reference();
 
     /**
-     * The meta object literal for the '<em><b>Tail</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EVARIABLE_DECLARATION_VARIABLE_REFERENCE__TAIL = eINSTANCE.getEVariableDeclarationVariableReference_Tail();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableReferenceImpl <em>ERegister Variable Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7345,14 +7152,6 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE = eINSTANCE.getERegisterVariableReference_Register_variable_reference();
-
-    /**
-     * The meta object literal for the '<em><b>Tail</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EREGISTER_VARIABLE_REFERENCE__TAIL = eINSTANCE.getERegisterVariableReference_Tail();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl <em>EVariable Declaration</em>}' class.
@@ -7417,14 +7216,6 @@ public interface AnsibleDslPackage extends EPackage
     EReference EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME = eINSTANCE.getEIndexOrLoopVariableReference_Name();
 
     /**
-     * The meta object literal for the '<em><b>Tail</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EINDEX_OR_LOOP_VARIABLE_REFERENCE__TAIL = eINSTANCE.getEIndexOrLoopVariableReference_Tail();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl <em>ERegister Variable</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7461,14 +7252,6 @@ public interface AnsibleDslPackage extends EPackage
     EReference EINPUT_OPERATION_VARIABLE_REFERENCE__NAME = eINSTANCE.getEInputOperationVariableReference_Name();
 
     /**
-     * The meta object literal for the '<em><b>Tail</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EINPUT_OPERATION_VARIABLE_REFERENCE__TAIL = eINSTANCE.getEInputOperationVariableReference_Tail();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl <em>EInput Interface Variable Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7487,14 +7270,6 @@ public interface AnsibleDslPackage extends EPackage
     EReference EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME = eINSTANCE.getEInputInterfaceVariableReference_Name();
 
     /**
-     * The meta object literal for the '<em><b>Tail</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EINPUT_INTERFACE_VARIABLE_REFERENCE__TAIL = eINSTANCE.getEInputInterfaceVariableReference_Tail();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableReferenceImpl <em>EVariable Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7503,14 +7278,6 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EClass EVARIABLE_REFERENCE = eINSTANCE.getEVariableReference();
-
-    /**
-     * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EVARIABLE_REFERENCE__INDEX = eINSTANCE.getEVariableReference_Index();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESpecialVariableImpl <em>ESpecial Variable</em>}' class.
@@ -7531,14 +7298,6 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute ESPECIAL_VARIABLE__NAME = eINSTANCE.getESpecialVariable_Name();
 
     /**
-     * The meta object literal for the '<em><b>Tail</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ESPECIAL_VARIABLE__TAIL = eINSTANCE.getESpecialVariable_Tail();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl <em>ETail Element</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7557,12 +7316,12 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute ETAIL_ELEMENT__IDENTIFIER_ID = eINSTANCE.getETailElement_Identifier_ID();
 
     /**
-     * The meta object literal for the '<em><b>Identifier jinja</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Function call</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ETAIL_ELEMENT__IDENTIFIER_JINJA = eINSTANCE.getETailElement_Identifier_jinja();
+    EReference ETAIL_ELEMENT__FUNCTION_CALL = eINSTANCE.getETailElement_Function_call();
 
     /**
      * The meta object literal for the '<em><b>Index</b></em>' attribute feature.

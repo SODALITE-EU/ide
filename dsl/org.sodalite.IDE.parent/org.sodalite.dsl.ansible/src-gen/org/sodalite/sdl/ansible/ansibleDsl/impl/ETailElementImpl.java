@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 
 /**
@@ -25,7 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getIdentifier_ID <em>Identifier ID</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getIdentifier_jinja <em>Identifier jinja</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getFunction_call <em>Function call</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getIndex <em>Index</em>}</li>
  * </ul>
  *
@@ -54,14 +54,14 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
   protected String identifier_ID = IDENTIFIER_ID_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getIdentifier_jinja() <em>Identifier jinja</em>}' containment reference.
+   * The cached value of the '{@link #getFunction_call() <em>Function call</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIdentifier_jinja()
+   * @see #getFunction_call()
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionEvaluation identifier_jinja;
+  protected EFunctionCall function_call;
 
   /**
    * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
@@ -135,9 +135,9 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * @generated
    */
   @Override
-  public EJinjaExpressionEvaluation getIdentifier_jinja()
+  public EFunctionCall getFunction_call()
   {
-    return identifier_jinja;
+    return function_call;
   }
 
   /**
@@ -145,13 +145,13 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetIdentifier_jinja(EJinjaExpressionEvaluation newIdentifier_jinja, NotificationChain msgs)
+  public NotificationChain basicSetFunction_call(EFunctionCall newFunction_call, NotificationChain msgs)
   {
-    EJinjaExpressionEvaluation oldIdentifier_jinja = identifier_jinja;
-    identifier_jinja = newIdentifier_jinja;
+    EFunctionCall oldFunction_call = function_call;
+    function_call = newFunction_call;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_JINJA, oldIdentifier_jinja, newIdentifier_jinja);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL, oldFunction_call, newFunction_call);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -163,20 +163,20 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * @generated
    */
   @Override
-  public void setIdentifier_jinja(EJinjaExpressionEvaluation newIdentifier_jinja)
+  public void setFunction_call(EFunctionCall newFunction_call)
   {
-    if (newIdentifier_jinja != identifier_jinja)
+    if (newFunction_call != function_call)
     {
       NotificationChain msgs = null;
-      if (identifier_jinja != null)
-        msgs = ((InternalEObject)identifier_jinja).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_JINJA, null, msgs);
-      if (newIdentifier_jinja != null)
-        msgs = ((InternalEObject)newIdentifier_jinja).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_JINJA, null, msgs);
-      msgs = basicSetIdentifier_jinja(newIdentifier_jinja, msgs);
+      if (function_call != null)
+        msgs = ((InternalEObject)function_call).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL, null, msgs);
+      if (newFunction_call != null)
+        msgs = ((InternalEObject)newFunction_call).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL, null, msgs);
+      msgs = basicSetFunction_call(newFunction_call, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_JINJA, newIdentifier_jinja, newIdentifier_jinja));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL, newFunction_call, newFunction_call));
   }
 
   /**
@@ -214,8 +214,8 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_JINJA:
-        return basicSetIdentifier_jinja(null, msgs);
+      case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
+        return basicSetFunction_call(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -232,8 +232,8 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_ID:
         return getIdentifier_ID();
-      case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_JINJA:
-        return getIdentifier_jinja();
+      case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
+        return getFunction_call();
       case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
         return getIndex();
     }
@@ -253,8 +253,8 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
       case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_ID:
         setIdentifier_ID((String)newValue);
         return;
-      case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_JINJA:
-        setIdentifier_jinja((EJinjaExpressionEvaluation)newValue);
+      case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
+        setFunction_call((EFunctionCall)newValue);
         return;
       case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
         setIndex((String)newValue);
@@ -276,8 +276,8 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
       case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_ID:
         setIdentifier_ID(IDENTIFIER_ID_EDEFAULT);
         return;
-      case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_JINJA:
-        setIdentifier_jinja((EJinjaExpressionEvaluation)null);
+      case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
+        setFunction_call((EFunctionCall)null);
         return;
       case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
         setIndex(INDEX_EDEFAULT);
@@ -298,8 +298,8 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_ID:
         return IDENTIFIER_ID_EDEFAULT == null ? identifier_ID != null : !IDENTIFIER_ID_EDEFAULT.equals(identifier_ID);
-      case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_JINJA:
-        return identifier_jinja != null;
+      case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
+        return function_call != null;
       case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
         return INDEX_EDEFAULT == null ? index != null : !INDEX_EDEFAULT.equals(index);
     }

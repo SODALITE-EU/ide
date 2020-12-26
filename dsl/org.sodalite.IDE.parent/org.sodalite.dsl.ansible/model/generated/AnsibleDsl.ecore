@@ -262,10 +262,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="simple_value_without_string"
         eType="#//ESimpleValueWithoutString" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EItem" eSuperTypes="#//EValuePassedToJinjaExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EItem" eSuperTypes="#//EValuePassedToJinjaExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionEvaluation" eSuperTypes="#//EJinjaExpressionOrString #//EDictionaryPassed #//EListPassed #//ENumberPassed #//EBooleanPassed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="jinja_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>
@@ -278,8 +275,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFilteredExpression" eSuperTypes="#//EJinjaExpressionEvaluationWithoutBrackets">
     <eStructuralFeatures xsi:type="ecore:EReference" name="to_filter" eType="#//EOrExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//EFunctionCall"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="#//EFilteredExpression"
         containment="true"/>
@@ -324,6 +319,9 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parenthesised_term" eType="#//EFilteredExpression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//ETailElement"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EIfExpression" eSuperTypes="#//EJinjaExpressionEvaluationWithoutBrackets">
     <eStructuralFeatures xsi:type="ecore:EReference" name="if_expression" eType="#//EFilteredExpression"
@@ -341,14 +339,10 @@
       eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable_declaration_variable_reference"
         eType="#//EVariableDeclaration"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//EDictionaryPairReference"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERegisterVariableReference" eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="register_variable_reference"
         eType="#//ERegisterVariable"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EVariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -360,33 +354,23 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EIndexOrLoopVariableReference" eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EIndexOrLoopVariable"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERegisterVariable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInputOperationVariableReference" eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EParameterDefinition"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInputInterfaceVariableReference" eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPropertyDefinition"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EVariableReference" eSuperTypes="#//EValuePassedToJinjaExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EVariableReference" eSuperTypes="#//EValuePassedToJinjaExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="ESpecialVariable" eSuperTypes="#//EValuePassedToJinjaExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tail" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ETailElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier_ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="identifier_jinja" eType="#//EJinjaExpressionEvaluation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function_call" eType="#//EFunctionCall"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

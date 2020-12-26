@@ -182,9 +182,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValue/simple_value_string"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESimpleValue/simple_value_without_string"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EItem">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EItem/tail"/>
-    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EItem"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionEvaluation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionEvaluation/jinja_expression"/>
     </genClasses>
@@ -195,7 +193,6 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFilteredExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredExpression/to_filter"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredExpression/tail"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredExpression/filter"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EOrExpression">
@@ -225,6 +222,8 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//EParenthesisedExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/basic_value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/parenthesised_term"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EParenthesisedExpression/index"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/tail"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EIfExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfExpression/if_expression"/>
@@ -237,11 +236,9 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableDeclarationVariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EVariableDeclarationVariableReference/variable_declaration_variable_reference"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EVariableDeclarationVariableReference/tail"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERegisterVariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERegisterVariableReference/register_variable_reference"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERegisterVariableReference/tail"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EVariableDeclaration/name"/>
@@ -252,29 +249,23 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EIndexOrLoopVariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIndexOrLoopVariableReference/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EIndexOrLoopVariableReference/tail"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERegisterVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERegisterVariable/name"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EInputOperationVariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EInputOperationVariableReference/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EInputOperationVariableReference/tail"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EInputInterfaceVariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EInputInterfaceVariableReference/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EInputInterfaceVariableReference/tail"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableReference">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EVariableReference/index"/>
-    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableReference"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ESpecialVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESpecialVariable/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESpecialVariable/tail"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ETailElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ETailElement/identifier_ID"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETailElement/identifier_jinja"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETailElement/function_call"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ETailElement/index"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionary">

@@ -3,7 +3,6 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference#getVariable_declaration_variable_reference <em>Variable declaration variable reference</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference#getTail <em>Tail</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEVariableDeclarationVariableReference()
@@ -45,17 +43,5 @@ public interface EVariableDeclarationVariableReference extends EVariableReferenc
    * @generated
    */
   void setVariable_declaration_variable_reference(EVariableDeclaration value);
-
-  /**
-   * Returns the value of the '<em><b>Tail</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Tail</em>' containment reference list.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEVariableDeclarationVariableReference_Tail()
-   * @model containment="true"
-   * @generated
-   */
-  EList<EDictionaryPairReference> getTail();
 
 } // EVariableDeclarationVariableReference
