@@ -3,6 +3,8 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -15,7 +17,16 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getBase_attributes <em>Base attributes</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilage_escalation <em>Privilage escalation</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getValidation_mode <em>Validation mode</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getConnection <em>Connection</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getNo_log <em>No log</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getDebugger <em>Debugger</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getModule_defaults <em>Module defaults</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getEnvironment <em>Environment</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getCollections <em>Collections</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getVariable_declarations <em>Variable declarations</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase()
@@ -47,25 +58,213 @@ public interface EBase extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Base attributes</b></em>' containment reference.
+   * Returns the value of the '<em><b>Privilage escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Base attributes</em>' containment reference.
-   * @see #setBase_attributes(EBaseAttributes)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Base_attributes()
+   * @return the value of the '<em>Privilage escalation</em>' containment reference.
+   * @see #setPrivilage_escalation(EPrivilageEscalation)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Privilage_escalation()
    * @model containment="true"
    * @generated
    */
-  EBaseAttributes getBase_attributes();
+  EPrivilageEscalation getPrivilage_escalation();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getBase_attributes <em>Base attributes</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilage_escalation <em>Privilage escalation</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Base attributes</em>' containment reference.
-   * @see #getBase_attributes()
+   * @param value the new value of the '<em>Privilage escalation</em>' containment reference.
+   * @see #getPrivilage_escalation()
    * @generated
    */
-  void setBase_attributes(EBaseAttributes value);
+  void setPrivilage_escalation(EPrivilageEscalation value);
+
+  /**
+   * Returns the value of the '<em><b>Validation mode</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Validation mode</em>' containment reference.
+   * @see #setValidation_mode(EValidationMode)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Validation_mode()
+   * @model containment="true"
+   * @generated
+   */
+  EValidationMode getValidation_mode();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getValidation_mode <em>Validation mode</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Validation mode</em>' containment reference.
+   * @see #getValidation_mode()
+   * @generated
+   */
+  void setValidation_mode(EValidationMode value);
+
+  /**
+   * Returns the value of the '<em><b>Connection</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Connection</em>' containment reference.
+   * @see #setConnection(EConnection)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Connection()
+   * @model containment="true"
+   * @generated
+   */
+  EConnection getConnection();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getConnection <em>Connection</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Connection</em>' containment reference.
+   * @see #getConnection()
+   * @generated
+   */
+  void setConnection(EConnection value);
+
+  /**
+   * Returns the value of the '<em><b>No log</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>No log</em>' containment reference.
+   * @see #setNo_log(EBooleanPassed)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_No_log()
+   * @model containment="true"
+   * @generated
+   */
+  EBooleanPassed getNo_log();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getNo_log <em>No log</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>No log</em>' containment reference.
+   * @see #getNo_log()
+   * @generated
+   */
+  void setNo_log(EBooleanPassed value);
+
+  /**
+   * Returns the value of the '<em><b>Debugger</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Debugger</em>' attribute.
+   * @see #setDebugger(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Debugger()
+   * @model
+   * @generated
+   */
+  String getDebugger();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getDebugger <em>Debugger</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Debugger</em>' attribute.
+   * @see #getDebugger()
+   * @generated
+   */
+  void setDebugger(String value);
+
+  /**
+   * Returns the value of the '<em><b>Module defaults</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Module defaults</em>' containment reference.
+   * @see #setModule_defaults(EListPassed)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Module_defaults()
+   * @model containment="true"
+   * @generated
+   */
+  EListPassed getModule_defaults();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getModule_defaults <em>Module defaults</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Module defaults</em>' containment reference.
+   * @see #getModule_defaults()
+   * @generated
+   */
+  void setModule_defaults(EListPassed value);
+
+  /**
+   * Returns the value of the '<em><b>Environment</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Environment</em>' containment reference.
+   * @see #setEnvironment(EListPassed)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Environment()
+   * @model containment="true"
+   * @generated
+   */
+  EListPassed getEnvironment();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getEnvironment <em>Environment</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Environment</em>' containment reference.
+   * @see #getEnvironment()
+   * @generated
+   */
+  void setEnvironment(EListPassed value);
+
+  /**
+   * Returns the value of the '<em><b>Collections</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Collections</em>' containment reference.
+   * @see #setCollections(EListPassed)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Collections()
+   * @model containment="true"
+   * @generated
+   */
+  EListPassed getCollections();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getCollections <em>Collections</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Collections</em>' containment reference.
+   * @see #getCollections()
+   * @generated
+   */
+  void setCollections(EListPassed value);
+
+  /**
+   * Returns the value of the '<em><b>Tags</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Tags</em>' containment reference.
+   * @see #setTags(EListPassed)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Tags()
+   * @model containment="true"
+   * @generated
+   */
+  EListPassed getTags();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getTags <em>Tags</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Tags</em>' containment reference.
+   * @see #getTags()
+   * @generated
+   */
+  void setTags(EListPassed value);
+
+  /**
+   * Returns the value of the '<em><b>Variable declarations</b></em>' containment reference list.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Variable declarations</em>' containment reference list.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Variable_declarations()
+   * @model containment="true"
+   * @generated
+   */
+  EList<EVariableDeclaration> getVariable_declarations();
 
 } // EBase

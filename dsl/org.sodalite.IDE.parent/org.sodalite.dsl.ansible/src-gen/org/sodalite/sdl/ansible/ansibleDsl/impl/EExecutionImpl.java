@@ -12,8 +12,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
-import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes;
+import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +25,9 @@ import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionImpl#getExecution_attributes <em>Execution attributes</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionImpl#getExe_settings <em>Exe settings</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionImpl#getDelegation <em>Delegation</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExecutionImpl#getWhen_expression <em>When expression</em>}</li>
  * </ul>
  *
  * @generated
@@ -31,14 +35,34 @@ import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes;
 public class EExecutionImpl extends EBaseImpl implements EExecution
 {
   /**
-   * The cached value of the '{@link #getExecution_attributes() <em>Execution attributes</em>}' containment reference.
+   * The cached value of the '{@link #getExe_settings() <em>Exe settings</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExecution_attributes()
+   * @see #getExe_settings()
    * @generated
    * @ordered
    */
-  protected EExecutionAttributes execution_attributes;
+  protected EExecutionExeSettings exe_settings;
+
+  /**
+   * The cached value of the '{@link #getDelegation() <em>Delegation</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDelegation()
+   * @generated
+   * @ordered
+   */
+  protected EDelegation delegation;
+
+  /**
+   * The cached value of the '{@link #getWhen_expression() <em>When expression</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getWhen_expression()
+   * @generated
+   * @ordered
+   */
+  protected EJinjaExpressionEvaluationWithoutBrackets when_expression;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,9 +91,9 @@ public class EExecutionImpl extends EBaseImpl implements EExecution
    * @generated
    */
   @Override
-  public EExecutionAttributes getExecution_attributes()
+  public EExecutionExeSettings getExe_settings()
   {
-    return execution_attributes;
+    return exe_settings;
   }
 
   /**
@@ -77,13 +101,13 @@ public class EExecutionImpl extends EBaseImpl implements EExecution
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExecution_attributes(EExecutionAttributes newExecution_attributes, NotificationChain msgs)
+  public NotificationChain basicSetExe_settings(EExecutionExeSettings newExe_settings, NotificationChain msgs)
   {
-    EExecutionAttributes oldExecution_attributes = execution_attributes;
-    execution_attributes = newExecution_attributes;
+    EExecutionExeSettings oldExe_settings = exe_settings;
+    exe_settings = newExe_settings;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES, oldExecution_attributes, newExecution_attributes);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXECUTION__EXE_SETTINGS, oldExe_settings, newExe_settings);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -95,20 +119,120 @@ public class EExecutionImpl extends EBaseImpl implements EExecution
    * @generated
    */
   @Override
-  public void setExecution_attributes(EExecutionAttributes newExecution_attributes)
+  public void setExe_settings(EExecutionExeSettings newExe_settings)
   {
-    if (newExecution_attributes != execution_attributes)
+    if (newExe_settings != exe_settings)
     {
       NotificationChain msgs = null;
-      if (execution_attributes != null)
-        msgs = ((InternalEObject)execution_attributes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES, null, msgs);
-      if (newExecution_attributes != null)
-        msgs = ((InternalEObject)newExecution_attributes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES, null, msgs);
-      msgs = basicSetExecution_attributes(newExecution_attributes, msgs);
+      if (exe_settings != null)
+        msgs = ((InternalEObject)exe_settings).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXECUTION__EXE_SETTINGS, null, msgs);
+      if (newExe_settings != null)
+        msgs = ((InternalEObject)newExe_settings).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXECUTION__EXE_SETTINGS, null, msgs);
+      msgs = basicSetExe_settings(newExe_settings, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES, newExecution_attributes, newExecution_attributes));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXECUTION__EXE_SETTINGS, newExe_settings, newExe_settings));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDelegation getDelegation()
+  {
+    return delegation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDelegation(EDelegation newDelegation, NotificationChain msgs)
+  {
+    EDelegation oldDelegation = delegation;
+    delegation = newDelegation;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXECUTION__DELEGATION, oldDelegation, newDelegation);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDelegation(EDelegation newDelegation)
+  {
+    if (newDelegation != delegation)
+    {
+      NotificationChain msgs = null;
+      if (delegation != null)
+        msgs = ((InternalEObject)delegation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXECUTION__DELEGATION, null, msgs);
+      if (newDelegation != null)
+        msgs = ((InternalEObject)newDelegation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXECUTION__DELEGATION, null, msgs);
+      msgs = basicSetDelegation(newDelegation, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXECUTION__DELEGATION, newDelegation, newDelegation));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionEvaluationWithoutBrackets getWhen_expression()
+  {
+    return when_expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetWhen_expression(EJinjaExpressionEvaluationWithoutBrackets newWhen_expression, NotificationChain msgs)
+  {
+    EJinjaExpressionEvaluationWithoutBrackets oldWhen_expression = when_expression;
+    when_expression = newWhen_expression;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION, oldWhen_expression, newWhen_expression);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setWhen_expression(EJinjaExpressionEvaluationWithoutBrackets newWhen_expression)
+  {
+    if (newWhen_expression != when_expression)
+    {
+      NotificationChain msgs = null;
+      if (when_expression != null)
+        msgs = ((InternalEObject)when_expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION, null, msgs);
+      if (newWhen_expression != null)
+        msgs = ((InternalEObject)newWhen_expression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION, null, msgs);
+      msgs = basicSetWhen_expression(newWhen_expression, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION, newWhen_expression, newWhen_expression));
   }
 
   /**
@@ -121,8 +245,12 @@ public class EExecutionImpl extends EBaseImpl implements EExecution
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES:
-        return basicSetExecution_attributes(null, msgs);
+      case AnsibleDslPackage.EEXECUTION__EXE_SETTINGS:
+        return basicSetExe_settings(null, msgs);
+      case AnsibleDslPackage.EEXECUTION__DELEGATION:
+        return basicSetDelegation(null, msgs);
+      case AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION:
+        return basicSetWhen_expression(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +265,12 @@ public class EExecutionImpl extends EBaseImpl implements EExecution
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES:
-        return getExecution_attributes();
+      case AnsibleDslPackage.EEXECUTION__EXE_SETTINGS:
+        return getExe_settings();
+      case AnsibleDslPackage.EEXECUTION__DELEGATION:
+        return getDelegation();
+      case AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION:
+        return getWhen_expression();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -153,8 +285,14 @@ public class EExecutionImpl extends EBaseImpl implements EExecution
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES:
-        setExecution_attributes((EExecutionAttributes)newValue);
+      case AnsibleDslPackage.EEXECUTION__EXE_SETTINGS:
+        setExe_settings((EExecutionExeSettings)newValue);
+        return;
+      case AnsibleDslPackage.EEXECUTION__DELEGATION:
+        setDelegation((EDelegation)newValue);
+        return;
+      case AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION:
+        setWhen_expression((EJinjaExpressionEvaluationWithoutBrackets)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,8 +308,14 @@ public class EExecutionImpl extends EBaseImpl implements EExecution
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES:
-        setExecution_attributes((EExecutionAttributes)null);
+      case AnsibleDslPackage.EEXECUTION__EXE_SETTINGS:
+        setExe_settings((EExecutionExeSettings)null);
+        return;
+      case AnsibleDslPackage.EEXECUTION__DELEGATION:
+        setDelegation((EDelegation)null);
+        return;
+      case AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION:
+        setWhen_expression((EJinjaExpressionEvaluationWithoutBrackets)null);
         return;
     }
     super.eUnset(featureID);
@@ -187,8 +331,12 @@ public class EExecutionImpl extends EBaseImpl implements EExecution
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EEXECUTION__EXECUTION_ATTRIBUTES:
-        return execution_attributes != null;
+      case AnsibleDslPackage.EEXECUTION__EXE_SETTINGS:
+        return exe_settings != null;
+      case AnsibleDslPackage.EEXECUTION__DELEGATION:
+        return delegation != null;
+      case AnsibleDslPackage.EEXECUTION__WHEN_EXPRESSION:
+        return when_expression != null;
     }
     return super.eIsSet(featureID);
   }

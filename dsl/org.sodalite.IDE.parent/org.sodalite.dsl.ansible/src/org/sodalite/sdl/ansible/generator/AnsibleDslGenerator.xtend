@@ -48,9 +48,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference
-import org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes
-import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes
-import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable
 import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference
@@ -60,6 +57,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement
+import org.sodalite.sdl.ansible.ansibleDsl.EBase
+import org.sodalite.sdl.ansible.ansibleDsl.EExecution
 
 /**
  * Generates code from your model files on save.
@@ -92,9 +91,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ELSE»
 			- hosts: all
 		«ENDIF»
-		«IF play.base_attributes !== null»
-			«compileBaseAttributes(play.base_attributes, space)»
-		«ENDIF»
+		«compileBaseAttributes(play, space)»
 		«IF play.play_exe_settings !== null»
 			«compilePlayExeSettings(play.play_exe_settings, space)»
 		«ENDIF»
@@ -155,71 +152,67 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileRoleInclusion(ERoleInclusion roleInclusion, String space)'''
 		«space»- role: «roleInclusion.name»
-		«IF roleInclusion.base_attributes !== null»
-			«compileBaseAttributes(roleInclusion.base_attributes, space.concat('  '))»
-		«ENDIF»
-		«IF roleInclusion.execution_attributes !== null»
-			«compileExecutionAttributes(roleInclusion.execution_attributes, space.concat('  '))»
-		«ENDIF»
+		«compileBaseAttributes(roleInclusion, space.concat('  '))»
+		«compileExecutionAttributes(roleInclusion, space.concat('  '))»
 	'''
 	
-	def compileBaseAttributes(EBaseAttributes baseAttributes, String space) '''
-		«IF baseAttributes.privilage_escalation !== null»
-			«IF baseAttributes.privilage_escalation.become !== null»
-				«space»become: «baseAttributes.privilage_escalation.become.compileBooleanPassed»
+	def compileBaseAttributes(EBase base, String space) '''
+		«IF base.privilage_escalation !== null»
+			«IF base.privilage_escalation.become !== null»
+				«space»become: «base.privilage_escalation.become.compileBooleanPassed»
 			«ENDIF»
-			«IF baseAttributes.privilage_escalation.become_exe !== null»
-				«space»become_exe: «baseAttributes.privilage_escalation.become_exe.compileJinjaExpressionAndString»
+			«IF base.privilage_escalation.become_exe !== null»
+				«space»become_exe: «base.privilage_escalation.become_exe.compileJinjaExpressionAndString»
 			«ENDIF»
-			«IF baseAttributes.privilage_escalation.become_flags !== null»
-				«space»become_flags: «baseAttributes.privilage_escalation.become_flags.compileJinjaExpressionAndString»
+			«IF base.privilage_escalation.become_flags !== null»
+				«space»become_flags: «base.privilage_escalation.become_flags.compileJinjaExpressionAndString»
 			«ENDIF»
-			«IF baseAttributes.privilage_escalation.become_method !== null»
-				«space»become_method: «baseAttributes.privilage_escalation.become_method.compileJinjaExpressionAndString»
+			«IF base.privilage_escalation.become_method !== null»
+				«space»become_method: «base.privilage_escalation.become_method.compileJinjaExpressionAndString»
 			«ENDIF»
-			«IF baseAttributes.privilage_escalation.become_user !== null»
-				«space»become_user: «baseAttributes.privilage_escalation.become_user.compileJinjaExpressionAndString»
-			«ENDIF»
-		«ENDIF»
-		«IF baseAttributes.validation_mode !== null»
-			«IF baseAttributes.validation_mode.check_mode !== null»
-				«space»check_moode: «baseAttributes.validation_mode.check_mode.compileBooleanPassed»
-			«ENDIF»
-			«IF baseAttributes.validation_mode.diff !== null»
-				«space»diff: «baseAttributes.validation_mode.diff.compileBooleanPassed»
+			«IF base.privilage_escalation.become_user !== null»
+				«space»become_user: «base.privilage_escalation.become_user.compileJinjaExpressionAndString»
 			«ENDIF»
 		«ENDIF»
-		«IF baseAttributes.connection !== null»
-			«IF baseAttributes.connection.connection !== null»
-				«space»connection: «baseAttributes.connection.connection.compileJinjaExpressionAndString»
+		«IF base.validation_mode !== null»
+			«IF base.validation_mode.check_mode !== null»
+				«space»check_moode: «base.validation_mode.check_mode.compileBooleanPassed»
 			«ENDIF»
-			«IF baseAttributes.connection.port !== null»
-				«space»port: «baseAttributes.connection.port.compileNumberPassed»
-			«ENDIF»
-			«IF baseAttributes.connection.remote_user !== null»
-				«space»remote_user: «baseAttributes.connection.remote_user.compileJinjaExpressionAndString»
+			«IF base.validation_mode.diff !== null»
+				«space»diff: «base.validation_mode.diff.compileBooleanPassed»
 			«ENDIF»
 		«ENDIF»
-		«IF baseAttributes.no_log !== null»
-			«space»no_log: «baseAttributes.no_log.compileBooleanPassed»
+		«IF base.connection !== null»
+			«IF base.connection.connection !== null»
+				«space»connection: «base.connection.connection.compileJinjaExpressionAndString»
+			«ENDIF»
+			«IF base.connection.port !== null»
+				«space»port: «base.connection.port.compileNumberPassed»
+			«ENDIF»
+			«IF base.connection.remote_user !== null»
+				«space»remote_user: «base.connection.remote_user.compileJinjaExpressionAndString»
+			«ENDIF»
 		«ENDIF»
-		«IF baseAttributes.debugger !== null»
-			«space»debugger: «baseAttributes.debugger»
+		«IF base.no_log !== null»
+			«space»no_log: «base.no_log.compileBooleanPassed»
 		«ENDIF»
-		«IF baseAttributes.module_defaults !== null»
-			«space»module_defaults: «baseAttributes.module_defaults.compileListPassed»
+		«IF base.debugger !== null»
+			«space»debugger: «base.debugger»
 		«ENDIF»
-		«IF baseAttributes.environment !== null»
-			«space»environment: «baseAttributes.environment.compileListPassed»
+		«IF base.module_defaults !== null»
+			«space»module_defaults: «base.module_defaults.compileListPassed»
 		«ENDIF»
-		«IF baseAttributes.collections !== null»
-			«space»collections: «baseAttributes.collections.compileListPassed»
+		«IF base.environment !== null»
+			«space»environment: «base.environment.compileListPassed»
 		«ENDIF»
-		«IF baseAttributes.tags !== null»
-			«space»tags: «baseAttributes.tags.compileListPassed»
+		«IF base.collections !== null»
+			«space»collections: «base.collections.compileListPassed»
 		«ENDIF»
-		«IF baseAttributes.variable_declarations.size !== 0»
-			«space»vars: «baseAttributes.compileVariableDeclarations»
+		«IF base.tags !== null»
+			«space»tags: «base.tags.compileListPassed»
+		«ENDIF»
+		«IF base.variable_declarations.size !== 0»
+			«space»vars: «base.compileVariableDeclarations»
 		«ENDIF»
 	'''
 	
@@ -304,12 +297,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 				«compileTaskHandler(task, space.concat('  ').concat('  '))»
 			«ENDFOR»
 		«ENDIF»
-		«IF block.base_attributes !== null»
-			«compileBaseAttributes(block.base_attributes, space.concat('  '))»
-		«ENDIF»
-		«IF block.execution_attributes !== null»
-			«compileExecutionAttributes(block.execution_attributes, space.concat('  '))»
-		«ENDIF»
+		«compileBaseAttributes(block, space.concat('  '))»
+		«compileExecutionAttributes(block, space.concat('  '))»
 		«IF block.error_handling !== null»
 			«IF block.error_handling.any_errors_fatal !== null»
 				«space.concat('  ')»any_errors_fatal: «block.error_handling.any_errors_fatal.compileBooleanPassed»
@@ -323,25 +312,25 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 	'''
 	
-	def compileExecutionAttributes(EExecutionAttributes executionAttributes, String space) '''
-		«IF executionAttributes.exe_settings !== null»
-			«IF executionAttributes.exe_settings.throttle != 0»
-				«space»throttle: «executionAttributes.exe_settings.throttle.compileNumberPassed»
+	def compileExecutionAttributes(EExecution execution, String space) '''
+		«IF execution.exe_settings !== null»
+			«IF execution.exe_settings.throttle != 0»
+				«space»throttle: «execution.exe_settings.throttle.compileNumberPassed»
 			«ENDIF»
-			«IF executionAttributes.exe_settings.run_once !== null»
-				«space»run_once: «executionAttributes.exe_settings.run_once.compileBooleanPassed»
-			«ENDIF»
-		«ENDIF»
-		«IF executionAttributes.delegation !== null»
-			«IF executionAttributes.delegation.delegate_to !== null»
-				«space»delegate_to: «executionAttributes.delegation.delegate_to.compileJinjaExpressionAndString»
-			«ENDIF»
-			«IF executionAttributes.delegation.delegate_facts !== null»
-				«space»delegate_facts: «executionAttributes.delegation.delegate_facts.compileBooleanPassed»
+			«IF execution.exe_settings.run_once !== null»
+				«space»run_once: «execution.exe_settings.run_once.compileBooleanPassed»
 			«ENDIF»
 		«ENDIF»
-		«IF executionAttributes.when_expression !== null»
-			«space»when: «executionAttributes.when_expression.compileJinjaExpressionEvaluationWithoutBrackets»
+		«IF execution.delegation !== null»
+			«IF execution.delegation.delegate_to !== null»
+				«space»delegate_to: «execution.delegation.delegate_to.compileJinjaExpressionAndString»
+			«ENDIF»
+			«IF execution.delegation.delegate_facts !== null»
+				«space»delegate_facts: «execution.delegation.delegate_facts.compileBooleanPassed»
+			«ENDIF»
+		«ENDIF»
+		«IF execution.when_expression !== null»
+			«space»when: «execution.when_expression.compileJinjaExpressionEvaluationWithoutBrackets»
 		«ENDIF»
 	'''
 	
@@ -349,33 +338,23 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileTaskHandler(ETaskHandler taskHandler, String space) '''
 		«IF taskHandler.name !== null»
 			«space»- name: «taskHandler.name»
-			«IF taskHandler.task_handler_attributes !== null»
-				«IF taskHandler.task_handler_attributes.module !== null»
-					«space.concat('  ')»«taskHandler.task_handler_attributes.module.name»:«IF taskHandler.task_handler_attributes.module.direct_parameter !== null» «taskHandler.task_handler_attributes.module.direct_parameter.compileValuePassed»«ENDIF»
-					«FOR parameter: taskHandler.task_handler_attributes.module.parameters»
-						«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
-					«ENDFOR»
-				«ENDIF»
+			«IF taskHandler.module !== null»
+				«space.concat('  ')»«taskHandler.module.name»:«IF taskHandler.module.direct_parameter !== null» «taskHandler.module.direct_parameter.compileValuePassed»«ENDIF»
+				«FOR parameter: taskHandler.module.parameters»
+					«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
+				«ENDFOR»
 			«ENDIF»
 		«ELSE»
-			«IF taskHandler.task_handler_attributes !== null»
-				«IF taskHandler.task_handler_attributes.module !== null»
-					«space»- «taskHandler.task_handler_attributes.module.name»:«IF taskHandler.task_handler_attributes.module.direct_parameter !== null» «taskHandler.task_handler_attributes.module.direct_parameter.compileValuePassed»«ENDIF»
-					«FOR parameter: taskHandler.task_handler_attributes.module.parameters»
-						«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
-					«ENDFOR»
-				«ENDIF»
+			«IF taskHandler.module !== null»
+				«space»- «taskHandler.module.name»:«IF taskHandler.module.direct_parameter !== null» «taskHandler.module.direct_parameter.compileValuePassed»«ENDIF»
+				«FOR parameter: taskHandler.module.parameters»
+					«space.concat('  ').concat('  ')»«parameter.name»: «parameter.value_passed.compileValuePassed»
+				«ENDFOR»
 			«ENDIF»
 		«ENDIF»
-		«IF taskHandler.base_attributes !== null»
-			«compileBaseAttributes(taskHandler.base_attributes, space.concat('  '))»
-		«ENDIF»
-		«IF taskHandler.execution_attributes !== null»
-			«compileExecutionAttributes(taskHandler.execution_attributes, space.concat('  '))»
-		«ENDIF»
-		«IF taskHandler.task_handler_attributes !== null»
-			«compileTaskHandlerAttributes(taskHandler.task_handler_attributes, space.concat('  '))»
-		«ENDIF»
+		«compileBaseAttributes(taskHandler, space.concat('  '))»
+		«compileExecutionAttributes(taskHandler, space.concat('  '))»
+		«compileTaskHandlerAttributes(taskHandler, space.concat('  '))»
 		«IF taskHandler instanceof EHandler»
 			«IF taskHandler.listen_to !== null»
 				«space.concat('  ')»listen: «compileNotifiedTopics(taskHandler)»
@@ -384,82 +363,82 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	'''
 	
 	//the assumption is that the module used was already generated by the compileTaskHandler function
-	def compileTaskHandlerAttributes(ETaskHandlerAttributes taskHandlerAttributes, String space) '''
-		«IF taskHandlerAttributes.error_handling !== null»
-			«IF taskHandlerAttributes.error_handling.changed_when !== null»
-				«space»change_when: «taskHandlerAttributes.error_handling.changed_when.compileJinjaExpressionEvaluationWithoutBrackets»
+	def compileTaskHandlerAttributes(ETaskHandler taskHandler, String space) '''
+		«IF taskHandler.error_handling !== null»
+			«IF taskHandler.error_handling.changed_when !== null»
+				«space»change_when: «taskHandler.error_handling.changed_when.compileJinjaExpressionEvaluationWithoutBrackets»
 			«ENDIF»
-			«IF taskHandlerAttributes.error_handling.failed_when !== null»
-				«space»failed_when: «taskHandlerAttributes.error_handling.failed_when.compileJinjaExpressionEvaluationWithoutBrackets»
+			«IF taskHandler.error_handling.failed_when !== null»
+				«space»failed_when: «taskHandler.error_handling.failed_when.compileJinjaExpressionEvaluationWithoutBrackets»
 			«ENDIF»
-			«IF taskHandlerAttributes.error_handling.any_errors_fatal !== null»
-				«space»any_errors_fatal: «taskHandlerAttributes.error_handling.any_errors_fatal.compileBooleanPassed»
+			«IF taskHandler.error_handling.any_errors_fatal !== null»
+				«space»any_errors_fatal: «taskHandler.error_handling.any_errors_fatal.compileBooleanPassed»
 			«ENDIF»
-			«IF taskHandlerAttributes.error_handling.ignore_errors !== null»
-				«space»ignore_errors: «taskHandlerAttributes.error_handling.ignore_errors.compileBooleanPassed»
+			«IF taskHandler.error_handling.ignore_errors !== null»
+				«space»ignore_errors: «taskHandler.error_handling.ignore_errors.compileBooleanPassed»
 			«ENDIF»
-			«IF taskHandlerAttributes.error_handling.ignore_unreachable !== null»
-				«space»ignore_unreachable: «taskHandlerAttributes.error_handling.ignore_unreachable.compileBooleanPassed»
-			«ENDIF»
-		«ENDIF»
-		«IF taskHandlerAttributes.action !== null»
-			«space»action: «taskHandlerAttributes.action.compileJinjaExpressionAndString»
-		«ENDIF»
-		«IF taskHandlerAttributes.asynchronous_settings !== null»
-			«IF taskHandlerAttributes.asynchronous_settings.async !== null»
-				«space»async: «taskHandlerAttributes.asynchronous_settings.async.compileNumberPassed»
-			«ENDIF»
-			«IF taskHandlerAttributes.asynchronous_settings.poll !== null»
-				«space»poll: «taskHandlerAttributes.asynchronous_settings.poll.compileNumberPassed»
+			«IF taskHandler.error_handling.ignore_unreachable !== null»
+				«space»ignore_unreachable: «taskHandler.error_handling.ignore_unreachable.compileBooleanPassed»
 			«ENDIF»
 		«ENDIF»
-		«IF taskHandlerAttributes.args !== null»
-			«space»args: «taskHandlerAttributes.args.compileDictionaryPassed»
+		«IF taskHandler.action !== null»
+			«space»action: «taskHandler.action.compileJinjaExpressionAndString»
 		«ENDIF»
-		«IF taskHandlerAttributes.notifiables.size !== 0»
-			«space»notify: «compileNotifiables(taskHandlerAttributes)»
+		«IF taskHandler.asynchronous_settings !== null»
+			«IF taskHandler.asynchronous_settings.async !== null»
+				«space»async: «taskHandler.asynchronous_settings.async.compileNumberPassed»
+			«ENDIF»
+			«IF taskHandler.asynchronous_settings.poll !== null»
+				«space»poll: «taskHandler.asynchronous_settings.poll.compileNumberPassed»
+			«ENDIF»
 		«ENDIF»
-		«IF taskHandlerAttributes.loop !== null»
-			«IF taskHandlerAttributes.loop instanceof ELoopOverList»
-				«space»loop: «compileLoopList((taskHandlerAttributes.loop as ELoopOverList).loop_list)»
-				«IF (taskHandlerAttributes.loop as ELoopOverList).loop_control !== null»
-					«IF (taskHandlerAttributes.loop as ELoopOverList).loop_control.label !== null»
-						«space»label: «(taskHandlerAttributes.loop as ELoopOverList).loop_control.label.compileValuePassed»
+		«IF taskHandler.args !== null»
+			«space»args: «taskHandler.args.compileDictionaryPassed»
+		«ENDIF»
+		«IF taskHandler.notifiables.size !== 0»
+			«space»notify: «compileNotifiables(taskHandler)»
+		«ENDIF»
+		«IF taskHandler.loop !== null»
+			«IF taskHandler.loop instanceof ELoopOverList»
+				«space»loop: «compileLoopList((taskHandler.loop as ELoopOverList).loop_list)»
+				«IF (taskHandler.loop as ELoopOverList).loop_control !== null»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.label !== null»
+						«space»label: «(taskHandler.loop as ELoopOverList).loop_control.label.compileValuePassed»
 					«ENDIF»
-					«IF (taskHandlerAttributes.loop as ELoopOverList).loop_control.pause !== null»
-						«space»pause: «(taskHandlerAttributes.loop as ELoopOverList).loop_control.pause.compileNumberPassed»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.pause !== null»
+						«space»pause: «(taskHandler.loop as ELoopOverList).loop_control.pause.compileNumberPassed»
 					«ENDIF»
-					«IF (taskHandlerAttributes.loop as ELoopOverList).loop_control.index_var !== null»
-						«space»index_var: «(taskHandlerAttributes.loop as ELoopOverList).loop_control.index_var.name»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.index_var !== null»
+						«space»index_var: «(taskHandler.loop as ELoopOverList).loop_control.index_var.name»
 					«ENDIF»
-					«IF (taskHandlerAttributes.loop as ELoopOverList).loop_control.loop_var !== null»
-						«space»loop_var: «(taskHandlerAttributes.loop as ELoopOverList).loop_control.loop_var.name»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.loop_var !== null»
+						«space»loop_var: «(taskHandler.loop as ELoopOverList).loop_control.loop_var.name»
 					«ENDIF»
-					«IF (taskHandlerAttributes.loop as ELoopOverList).loop_control.extended !== null»
-						«space»extended: «(taskHandlerAttributes.loop as ELoopOverList).loop_control.extended.compileBooleanPassed»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.extended !== null»
+						«space»extended: «(taskHandler.loop as ELoopOverList).loop_control.extended.compileBooleanPassed»
 					«ENDIF»
 				«ENDIF»
 			«ENDIF»
-			«IF taskHandlerAttributes.loop instanceof EUntil»
-				«IF (taskHandlerAttributes.loop as EUntil).until !== null»
-					«space»until: «(taskHandlerAttributes.loop as EUntil).until.compileJinjaExpressionEvaluationWithoutBrackets»
+			«IF taskHandler.loop instanceof EUntil»
+				«IF (taskHandler.loop as EUntil).until !== null»
+					«space»until: «(taskHandler.loop as EUntil).until.compileJinjaExpressionEvaluationWithoutBrackets»
 				«ENDIF»
-				«IF (taskHandlerAttributes.loop as EUntil).retries !== null»
-					«space»retries: «(taskHandlerAttributes.loop as EUntil).retries.compileNumberPassed»
+				«IF (taskHandler.loop as EUntil).retries !== null»
+					«space»retries: «(taskHandler.loop as EUntil).retries.compileNumberPassed»
 				«ENDIF»
-				«IF (taskHandlerAttributes.loop as EUntil).delay !== null»
-					«space»delay: «(taskHandlerAttributes.loop as EUntil).delay.compileNumberPassed»
+				«IF (taskHandler.loop as EUntil).delay !== null»
+					«space»delay: «(taskHandler.loop as EUntil).delay.compileNumberPassed»
 				«ENDIF»
 			«ENDIF»
 		«ENDIF»
-		«IF taskHandlerAttributes.register !== null»
-			«space»register: «taskHandlerAttributes.register.name»
+		«IF taskHandler.register !== null»
+			«space»register: «taskHandler.register.name»
 		«ENDIF»
 	'''
 	
-	def compileNotifiables(ETaskHandlerAttributes taskHandlerAttributes){
+	def compileNotifiables(ETaskHandler taskHandler){
 		var newList = new ArrayList()
-		for (notifiable : taskHandlerAttributes.notifiables){
+		for (notifiable : taskHandler.notifiables){
 			if (notifiable instanceof ENotifiedTopic){
 				newList.add("\"".concat(notifiable.name).concat("\""))	
 			}
@@ -735,9 +714,9 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return simpleValueWithoutString.simple_value
 	}
 	
-	def compileVariableDeclarations(EBaseAttributes baseAttributes){
+	def compileVariableDeclarations(EBase base){
 		var variableDeclarationsString = '{'
-		for (variable_declaration : baseAttributes.variable_declarations){
+		for (variable_declaration : base.variable_declarations){
 			variableDeclarationsString = variableDeclarationsString.concat(variable_declaration.name).concat(': ').concat(compileValuePassed(variable_declaration.value_passed).toString()).concat(', ')
 		}
 		variableDeclarationsString = variableDeclarationsString.substring(0, variableDeclarationsString.length() - 2)

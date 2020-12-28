@@ -38,8 +38,10 @@ ETaskHandler:
 	ETask | EHandler
 ;
 
-EBaseAttributes:
+EPlay:
+	{EPlay}
 	(
+	('play_name:' name=STRING)? &
 	('privilage_escalation{'
 		privilage_escalation=EPrivilageEscalation
 	'}')? &
@@ -57,48 +59,7 @@ EBaseAttributes:
 	('tags:' tags=EListPassed)? &
 	('vars{'
 		(variable_declarations+=EVariableDeclaration)+
-	'}')?
-	)
-;
-
-EExecutionAttributes:
-	(
-	('exe_settings{'
-		exe_settings=EExecutionExeSettings
 	'}')? &
-	('delegation{'
-		delegation=EDelegation
-	'}')? &
-	('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
-	)
-;
-
-ETaskHandlerAttributes:
-	(
-	('error_handling{'
-		error_handling=ETaskHandlerErrorHandling
-	'}')? &
-	('action:' action=EJinjaExpressionAndString)? &
-	('asynchronous_settings{'
-		asynchronous_settings=EAsynchronousSettings
-	'}')? &
-	('args:' args=EDictionaryPassed)? &
-	('module_call{'
-		module=EModuleCall
-	'}') &
-	('notify:' (notifiables+=ENotifiable)+)? &
-	('loop{'
-		loop=ELoop
-	'}')? &
-	(register=ERegisterVariable)?
-	)
-;
-
-EPlay:
-	'play_name:' name=STRING
-	('base_attributes{'
-		base_attributes=EBaseAttributes
-	'}')?
 	('play_exe_settings{'
 		play_exe_settings=EPlayExeSettings
 	'}')? &
@@ -124,62 +85,152 @@ EPlay:
 	('handlers{'
 		(handlers+=EHandler)+
 	'}')?
+	)
 ;
 
 EBlock:
 	'block{'
-		('block_name:' name=STRING)?
-		('base_attributes{'
-			base_attributes=EBaseAttributes
-		'}')?
-		('execution_attributes{'
-			execution_attributes=EExecutionAttributes
-		'}')?
+		(
+		('block_name:' name=STRING)? &
+		('privilage_escalation{'
+			privilage_escalation=EPrivilageEscalation
+		'}')? &
+		('validation_mode{'
+			validation_mode=EValidationMode
+		'}')? &
+		('connection_info{'
+			connection=EConnection
+		'}')? &
+		('no_log:' no_log=EBooleanPassed)? &
+		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))? &
+		('module_defaults:' module_defaults=EListPassed)? &
+		('environment:' environment=EListPassed)? &
+		('collections:' collections=EListPassed)? &
+		('tags:' tags=EListPassed)? &
+		('vars{'
+			(variable_declarations+=EVariableDeclaration)+
+		'}')? &
+		('exe_settings{'
+			exe_settings=EExecutionExeSettings
+		'}')? &
+		('delegation{'
+			delegation=EDelegation
+		'}')? &
+		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
 		('error_handling{'
 			error_handling=EBlockErrorHandling
-		'}')?
-		'tasks{'
+		'}')? &
+		('tasks{'
 			(tasks+=ETask)+
-		'}'
+		'}') &
 		('rescue_tasks{'
 			(rescue_tasks+=ETask)+
-		'}')?
+		'}')? &
 		('always_tasks{'
 			(always_tasks+=ETask)+
 		'}')?
+		)
 	'}'
 ;
 
 ETask:
 	{ETask}
 	'task{'
-		('task_name:' name=STRING)?
-		('base_attributes{'
-			base_attributes=EBaseAttributes
-		'}')?
-		('execution_attributes{'
-			execution_attributes=EExecutionAttributes
-		'}')?
-		('task_handler_attributes{'
-			task_handler_attributes=ETaskHandlerAttributes
-		'}')?
+		(
+		('task_name:' name=STRING)? &
+		('privilage_escalation{'
+			privilage_escalation=EPrivilageEscalation
+		'}')? &
+		('validation_mode{'
+			validation_mode=EValidationMode
+		'}')? &
+		('connection_info{'
+			connection=EConnection
+		'}')? &
+		('no_log:' no_log=EBooleanPassed)? &
+		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))? &
+		('module_defaults:' module_defaults=EListPassed)? &
+		('environment:' environment=EListPassed)? &
+		('collections:' collections=EListPassed)? &
+		('tags:' tags=EListPassed)? &
+		('vars{'
+			(variable_declarations+=EVariableDeclaration)+
+		'}')? &
+		('exe_settings{'
+			exe_settings=EExecutionExeSettings
+		'}')? &
+		('delegation{'
+			delegation=EDelegation
+		'}')? &
+		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
+		('error_handling{'
+			error_handling=ETaskHandlerErrorHandling
+		'}')? &
+		('action:' action=EJinjaExpressionAndString)? &
+		('asynchronous_settings{'
+			asynchronous_settings=EAsynchronousSettings
+		'}')? &
+		('args:' args=EDictionaryPassed)? &
+		('module_call{'
+			module=EModuleCall
+		'}') &
+		('notify:' (notifiables+=ENotifiable)+)? &
+		('loop{'
+			loop=ELoop
+		'}')? &
+		(register=ERegisterVariable)?
+		)
 	'}'
 ;
 
 EHandler:
 	{EHandler}
 	'handler{'
-		('handler_name:' name=STRING)?
-		('base_attributes{'
-			base_attributes=EBaseAttributes
-		'}')?
-		('execution_attributes{'
-			execution_attributes=EExecutionAttributes
-		'}')?
-		('task_handler_attributes{'
-			task_handler_attributes=ETaskHandlerAttributes
-		'}')?
+		(
+		('handler_name:' name=STRING)? &
+		('privilage_escalation{'
+			privilage_escalation=EPrivilageEscalation
+		'}')? &
+		('validation_mode{'
+			validation_mode=EValidationMode
+		'}')? &
+		('connection_info{'
+			connection=EConnection
+		'}')? &
+		('no_log:' no_log=EBooleanPassed)? &
+		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))? &
+		('module_defaults:' module_defaults=EListPassed)? &
+		('environment:' environment=EListPassed)? &
+		('collections:' collections=EListPassed)? &
+		('tags:' tags=EListPassed)? &
+		('vars{'
+			(variable_declarations+=EVariableDeclaration)+
+		'}')? &
+		('exe_settings{'
+			exe_settings=EExecutionExeSettings
+		'}')? &
+		('delegation{'
+			delegation=EDelegation
+		'}')? &
+		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
+		('error_handling{'
+			error_handling=ETaskHandlerErrorHandling
+		'}')? &
+		('action:' action=EJinjaExpressionAndString)? &
+		('asynchronous_settings{'
+			asynchronous_settings=EAsynchronousSettings
+		'}')? &
+		('args:' args=EDictionaryPassed)? &
+		('module_call{'
+			module=EModuleCall
+		'}') &
+		('notify:' (notifiables+=ENotifiable)+)? &
+		('loop{'
+			loop=ELoop
+		'}')? &
+		(register=ERegisterVariable)? &
 		('listen:' (listen_to+=[ENotifiedTopic|STRING])+)?
+		)
 	'}'
 ;
 
@@ -198,12 +249,33 @@ EParameter:
 ERoleInclusion:
 	'role{'
 		'role_name:' name=STRING
-		('base_attributes{'
-			base_attributes=EBaseAttributes
-		'}')?
-		('execution_attributes{'
-			execution_attributes=EExecutionAttributes
-		'}')?
+		(
+		('privilage_escalation{'
+			privilage_escalation=EPrivilageEscalation
+		'}')? &
+		('validation_mode{'
+			validation_mode=EValidationMode
+		'}')? &
+		('connection_info{'
+			connection=EConnection
+		'}')? &
+		('no_log:' no_log=EBooleanPassed)? &
+		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))? &
+		('module_defaults:' module_defaults=EListPassed)? &
+		('environment:' environment=EListPassed)? &
+		('collections:' collections=EListPassed)? &
+		('tags:' tags=EListPassed)? &
+		('vars{'
+			(variable_declarations+=EVariableDeclaration)+
+		'}')? &
+		('exe_settings{'
+			exe_settings=EExecutionExeSettings
+		'}')? &
+		('delegation{'
+			delegation=EDelegation
+		'}')? &
+		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
+		)
 	'}'
 ;
 

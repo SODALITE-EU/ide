@@ -21,22 +21,40 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected AnsibleDslGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_EBaseAttributes___RightCurlyBracketKeyword_9_2_VarsKeyword_9_0__q;
-	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_10_2_HandlersKeyword_10_0__q;
-	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q;
-	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q;
-	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_9_2_Post_tasksKeyword_9_0__q;
-	protected AbstractElementAlias match_ETaskHandlerAttributes_NotifyKeyword_5_0_q;
+	protected AbstractElementAlias match_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q;
+	protected AbstractElementAlias match_EBlock___RightCurlyBracketKeyword_1_15_2_TasksKeyword_1_15_0__q;
+	protected AbstractElementAlias match_EBlock___RightCurlyBracketKeyword_1_16_2_Rescue_tasksKeyword_1_16_0__q;
+	protected AbstractElementAlias match_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q;
+	protected AbstractElementAlias match_EHandler_ListenKeyword_2_22_0_q;
+	protected AbstractElementAlias match_EHandler_NotifyKeyword_2_19_0_q;
+	protected AbstractElementAlias match_EHandler___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q;
+	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q;
+	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_1_17_2_Pre_tasksKeyword_1_17_0__q;
+	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_1_19_2_Tasks_listKeyword_1_19_0__q;
+	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_1_20_2_Post_tasksKeyword_1_20_0__q;
+	protected AbstractElementAlias match_EPlay___RightCurlyBracketKeyword_1_21_2_HandlersKeyword_1_21_0__q;
+	protected AbstractElementAlias match_ERoleInclusion___RightCurlyBracketKeyword_3_9_2_VarsKeyword_3_9_0__q;
+	protected AbstractElementAlias match_ETask_NotifyKeyword_2_19_0_q;
+	protected AbstractElementAlias match_ETask___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (AnsibleDslGrammarAccess) access;
-		match_EBaseAttributes___RightCurlyBracketKeyword_9_2_VarsKeyword_9_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBaseAttributesAccess().getRightCurlyBracketKeyword_9_2()), new TokenAlias(false, false, grammarAccess.getEBaseAttributesAccess().getVarsKeyword_9_0()));
-		match_EPlay___RightCurlyBracketKeyword_10_2_HandlersKeyword_10_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_10_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getHandlersKeyword_10_0()));
-		match_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_6_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getPre_tasksKeyword_6_0()));
-		match_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_8_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getTasks_listKeyword_8_0()));
-		match_EPlay___RightCurlyBracketKeyword_9_2_Post_tasksKeyword_9_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_9_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getPost_tasksKeyword_9_0()));
-		match_ETaskHandlerAttributes_NotifyKeyword_5_0_q = new TokenAlias(false, true, grammarAccess.getETaskHandlerAttributesAccess().getNotifyKeyword_5_0());
+		match_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_1_10_2()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getVarsKeyword_1_10_0()));
+		match_EBlock___RightCurlyBracketKeyword_1_15_2_TasksKeyword_1_15_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_1_15_2()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getTasksKeyword_1_15_0()));
+		match_EBlock___RightCurlyBracketKeyword_1_16_2_Rescue_tasksKeyword_1_16_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_1_16_2()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRescue_tasksKeyword_1_16_0()));
+		match_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_1_17_2()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getAlways_tasksKeyword_1_17_0()));
+		match_EHandler_ListenKeyword_2_22_0_q = new TokenAlias(false, true, grammarAccess.getEHandlerAccess().getListenKeyword_2_22_0());
+		match_EHandler_NotifyKeyword_2_19_0_q = new TokenAlias(false, true, grammarAccess.getEHandlerAccess().getNotifyKeyword_2_19_0());
+		match_EHandler___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_2_10_2()), new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getVarsKeyword_2_10_0()));
+		match_EPlay___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_1_10_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getVarsKeyword_1_10_0()));
+		match_EPlay___RightCurlyBracketKeyword_1_17_2_Pre_tasksKeyword_1_17_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_1_17_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getPre_tasksKeyword_1_17_0()));
+		match_EPlay___RightCurlyBracketKeyword_1_19_2_Tasks_listKeyword_1_19_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_1_19_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getTasks_listKeyword_1_19_0()));
+		match_EPlay___RightCurlyBracketKeyword_1_20_2_Post_tasksKeyword_1_20_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_1_20_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getPost_tasksKeyword_1_20_0()));
+		match_EPlay___RightCurlyBracketKeyword_1_21_2_HandlersKeyword_1_21_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getRightCurlyBracketKeyword_1_21_2()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getHandlersKeyword_1_21_0()));
+		match_ERoleInclusion___RightCurlyBracketKeyword_3_9_2_VarsKeyword_3_9_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getERoleInclusionAccess().getRightCurlyBracketKeyword_3_9_2()), new TokenAlias(false, false, grammarAccess.getERoleInclusionAccess().getVarsKeyword_3_9_0()));
+		match_ETask_NotifyKeyword_2_19_0_q = new TokenAlias(false, true, grammarAccess.getETaskAccess().getNotifyKeyword_2_19_0());
+		match_ETask___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getETaskAccess().getRightCurlyBracketKeyword_2_10_2()), new TokenAlias(false, false, grammarAccess.getETaskAccess().getVarsKeyword_2_10_0()));
 	}
 	
 	@Override
@@ -51,18 +69,36 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_EBaseAttributes___RightCurlyBracketKeyword_9_2_VarsKeyword_9_0__q.equals(syntax))
-				emit_EBaseAttributes___RightCurlyBracketKeyword_9_2_VarsKeyword_9_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EPlay___RightCurlyBracketKeyword_10_2_HandlersKeyword_10_0__q.equals(syntax))
-				emit_EPlay___RightCurlyBracketKeyword_10_2_HandlersKeyword_10_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q.equals(syntax))
-				emit_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q.equals(syntax))
-				emit_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EPlay___RightCurlyBracketKeyword_9_2_Post_tasksKeyword_9_0__q.equals(syntax))
-				emit_EPlay___RightCurlyBracketKeyword_9_2_Post_tasksKeyword_9_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ETaskHandlerAttributes_NotifyKeyword_5_0_q.equals(syntax))
-				emit_ETaskHandlerAttributes_NotifyKeyword_5_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q.equals(syntax))
+				emit_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EBlock___RightCurlyBracketKeyword_1_15_2_TasksKeyword_1_15_0__q.equals(syntax))
+				emit_EBlock___RightCurlyBracketKeyword_1_15_2_TasksKeyword_1_15_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EBlock___RightCurlyBracketKeyword_1_16_2_Rescue_tasksKeyword_1_16_0__q.equals(syntax))
+				emit_EBlock___RightCurlyBracketKeyword_1_16_2_Rescue_tasksKeyword_1_16_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q.equals(syntax))
+				emit_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EHandler_ListenKeyword_2_22_0_q.equals(syntax))
+				emit_EHandler_ListenKeyword_2_22_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EHandler_NotifyKeyword_2_19_0_q.equals(syntax))
+				emit_EHandler_NotifyKeyword_2_19_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EHandler___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q.equals(syntax))
+				emit_EHandler___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EPlay___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q.equals(syntax))
+				emit_EPlay___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EPlay___RightCurlyBracketKeyword_1_17_2_Pre_tasksKeyword_1_17_0__q.equals(syntax))
+				emit_EPlay___RightCurlyBracketKeyword_1_17_2_Pre_tasksKeyword_1_17_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EPlay___RightCurlyBracketKeyword_1_19_2_Tasks_listKeyword_1_19_0__q.equals(syntax))
+				emit_EPlay___RightCurlyBracketKeyword_1_19_2_Tasks_listKeyword_1_19_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EPlay___RightCurlyBracketKeyword_1_20_2_Post_tasksKeyword_1_20_0__q.equals(syntax))
+				emit_EPlay___RightCurlyBracketKeyword_1_20_2_Post_tasksKeyword_1_20_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EPlay___RightCurlyBracketKeyword_1_21_2_HandlersKeyword_1_21_0__q.equals(syntax))
+				emit_EPlay___RightCurlyBracketKeyword_1_21_2_HandlersKeyword_1_21_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ERoleInclusion___RightCurlyBracketKeyword_3_9_2_VarsKeyword_3_9_0__q.equals(syntax))
+				emit_ERoleInclusion___RightCurlyBracketKeyword_3_9_2_VarsKeyword_3_9_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ETask_NotifyKeyword_2_19_0_q.equals(syntax))
+				emit_ETask_NotifyKeyword_2_19_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ETask___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q.equals(syntax))
+				emit_ETask___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -74,51 +110,51 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * This ambiguous syntax occurs at:
 	 *     variable_declarations+=EVariableDeclaration (ambiguity) variable_declarations+=EVariableDeclaration
 	 */
-	protected void emit_EBaseAttributes___RightCurlyBracketKeyword_9_2_VarsKeyword_9_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ('}' 'handlers{')?
+	 *     ('}' 'tasks{')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     handlers+=EHandler (ambiguity) handlers+=EHandler
+	 *     tasks+=ETask (ambiguity) tasks+=ETask
 	 */
-	protected void emit_EPlay___RightCurlyBracketKeyword_10_2_HandlersKeyword_10_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_EBlock___RightCurlyBracketKeyword_1_15_2_TasksKeyword_1_15_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ('}' 'pre_tasks{')?
+	 *     ('}' 'rescue_tasks{')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     pre_tasks_list+=EBlockTask (ambiguity) pre_tasks_list+=EBlockTask
+	 *     rescue_tasks+=ETask (ambiguity) rescue_tasks+=ETask
 	 */
-	protected void emit_EPlay___RightCurlyBracketKeyword_6_2_Pre_tasksKeyword_6_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_EBlock___RightCurlyBracketKeyword_1_16_2_Rescue_tasksKeyword_1_16_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ('}' 'tasks_list{')?
+	 *     ('}' 'always_tasks{')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     tasks_list+=EBlockTask (ambiguity) tasks_list+=EBlockTask
+	 *     always_tasks+=ETask (ambiguity) always_tasks+=ETask
 	 */
-	protected void emit_EPlay___RightCurlyBracketKeyword_8_2_Tasks_listKeyword_8_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ('}' 'post_tasks{')?
+	 *     'listen:'?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     post_tasks_list+=EBlockTask (ambiguity) post_tasks_list+=EBlockTask
+	 *     listen_to+=[ENotifiedTopic|STRING] (ambiguity) listen_to+=[ENotifiedTopic|STRING]
 	 */
-	protected void emit_EPlay___RightCurlyBracketKeyword_9_2_Post_tasksKeyword_9_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_EHandler_ListenKeyword_2_22_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -129,7 +165,106 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * This ambiguous syntax occurs at:
 	 *     notifiables+=ENotifiable (ambiguity) notifiables+=ENotifiable
 	 */
-	protected void emit_ETaskHandlerAttributes_NotifyKeyword_5_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_EHandler_NotifyKeyword_2_19_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('}' 'vars{')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     variable_declarations+=EVariableDeclaration (ambiguity) variable_declarations+=EVariableDeclaration
+	 */
+	protected void emit_EHandler___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('}' 'vars{')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     variable_declarations+=EVariableDeclaration (ambiguity) variable_declarations+=EVariableDeclaration
+	 */
+	protected void emit_EPlay___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('}' 'pre_tasks{')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     pre_tasks_list+=EBlockTask (ambiguity) pre_tasks_list+=EBlockTask
+	 */
+	protected void emit_EPlay___RightCurlyBracketKeyword_1_17_2_Pre_tasksKeyword_1_17_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('}' 'tasks_list{')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     tasks_list+=EBlockTask (ambiguity) tasks_list+=EBlockTask
+	 */
+	protected void emit_EPlay___RightCurlyBracketKeyword_1_19_2_Tasks_listKeyword_1_19_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('}' 'post_tasks{')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     post_tasks_list+=EBlockTask (ambiguity) post_tasks_list+=EBlockTask
+	 */
+	protected void emit_EPlay___RightCurlyBracketKeyword_1_20_2_Post_tasksKeyword_1_20_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('}' 'handlers{')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     handlers+=EHandler (ambiguity) handlers+=EHandler
+	 */
+	protected void emit_EPlay___RightCurlyBracketKeyword_1_21_2_HandlersKeyword_1_21_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('}' 'vars{')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     variable_declarations+=EVariableDeclaration (ambiguity) variable_declarations+=EVariableDeclaration
+	 */
+	protected void emit_ERoleInclusion___RightCurlyBracketKeyword_3_9_2_VarsKeyword_3_9_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'notify:'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     notifiables+=ENotifiable (ambiguity) notifiables+=ENotifiable
+	 */
+	protected void emit_ETask_NotifyKeyword_2_19_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('}' 'vars{')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     variable_declarations+=EVariableDeclaration (ambiguity) variable_declarations+=EVariableDeclaration
+	 */
+	protected void emit_ETask___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

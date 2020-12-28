@@ -119,27 +119,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EBASE_ATTRIBUTES:
-      {
-        EBaseAttributes eBaseAttributes = (EBaseAttributes)theEObject;
-        T result = caseEBaseAttributes(eBaseAttributes);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AnsibleDslPackage.EEXECUTION_ATTRIBUTES:
-      {
-        EExecutionAttributes eExecutionAttributes = (EExecutionAttributes)theEObject;
-        T result = caseEExecutionAttributes(eExecutionAttributes);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AnsibleDslPackage.ETASK_HANDLER_ATTRIBUTES:
-      {
-        ETaskHandlerAttributes eTaskHandlerAttributes = (ETaskHandlerAttributes)theEObject;
-        T result = caseETaskHandlerAttributes(eTaskHandlerAttributes);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AnsibleDslPackage.EPLAY:
       {
         EPlay ePlay = (EPlay)theEObject;
@@ -778,54 +757,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseETaskHandler(ETaskHandler object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EBase Attributes</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EBase Attributes</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEBaseAttributes(EBaseAttributes object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EExecution Attributes</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EExecution Attributes</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEExecutionAttributes(EExecutionAttributes object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>ETask Handler Attributes</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ETask Handler Attributes</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseETaskHandlerAttributes(ETaskHandlerAttributes object)
   {
     return null;
   }

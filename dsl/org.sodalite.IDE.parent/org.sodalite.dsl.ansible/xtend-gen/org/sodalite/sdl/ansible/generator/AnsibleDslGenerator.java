@@ -17,7 +17,7 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EBaseAttributes;
+import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
@@ -28,7 +28,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
-import org.sodalite.sdl.ansible.ansibleDsl.EExecutionAttributes;
+import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
@@ -73,7 +73,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
-import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerAttributes;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
@@ -133,19 +132,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         _builder.newLine();
       }
     }
-    {
-      EBaseAttributes _base_attributes = play.getBase_attributes();
-      boolean _tripleNotEquals_1 = (_base_attributes != null);
-      if (_tripleNotEquals_1) {
-        CharSequence _compileBaseAttributes = this.compileBaseAttributes(play.getBase_attributes(), space);
-        _builder.append(_compileBaseAttributes);
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    CharSequence _compileBaseAttributes = this.compileBaseAttributes(play, space);
+    _builder.append(_compileBaseAttributes);
+    _builder.newLineIfNotEmpty();
     {
       EPlayExeSettings _play_exe_settings = play.getPlay_exe_settings();
-      boolean _tripleNotEquals_2 = (_play_exe_settings != null);
-      if (_tripleNotEquals_2) {
+      boolean _tripleNotEquals_1 = (_play_exe_settings != null);
+      if (_tripleNotEquals_1) {
         CharSequence _compilePlayExeSettings = this.compilePlayExeSettings(play.getPlay_exe_settings(), space);
         _builder.append(_compilePlayExeSettings);
         _builder.newLineIfNotEmpty();
@@ -153,8 +146,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EPlayErrorHandling _error_handling = play.getError_handling();
-      boolean _tripleNotEquals_3 = (_error_handling != null);
-      if (_tripleNotEquals_3) {
+      boolean _tripleNotEquals_2 = (_error_handling != null);
+      if (_tripleNotEquals_2) {
         CharSequence _compilePlayErrorHandling = this.compilePlayErrorHandling(play.getError_handling(), space);
         _builder.append(_compilePlayErrorHandling);
         _builder.newLineIfNotEmpty();
@@ -162,8 +155,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EFactsSettings _facts_settings = play.getFacts_settings();
-      boolean _tripleNotEquals_4 = (_facts_settings != null);
-      if (_tripleNotEquals_4) {
+      boolean _tripleNotEquals_3 = (_facts_settings != null);
+      if (_tripleNotEquals_3) {
         CharSequence _compileFactsSettings = this.compileFactsSettings(play.getFacts_settings(), space);
         _builder.append(_compileFactsSettings);
         _builder.newLineIfNotEmpty();
@@ -171,8 +164,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EListPassed _vars_files = play.getVars_files();
-      boolean _tripleNotEquals_5 = (_vars_files != null);
-      if (_tripleNotEquals_5) {
+      boolean _tripleNotEquals_4 = (_vars_files != null);
+      if (_tripleNotEquals_4) {
         _builder.append(space);
         _builder.append("vars_files: ");
         Serializable _compileListPassed = this.compileListPassed(play.getVars_files());
@@ -182,8 +175,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EListPassed _vars_prompt = play.getVars_prompt();
-      boolean _tripleNotEquals_6 = (_vars_prompt != null);
-      if (_tripleNotEquals_6) {
+      boolean _tripleNotEquals_5 = (_vars_prompt != null);
+      if (_tripleNotEquals_5) {
         _builder.append(space);
         _builder.append("vars_prompt: ");
         Serializable _compileListPassed_1 = this.compileListPassed(play.getVars_prompt());
@@ -193,8 +186,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EBooleanPassed _force_handlers = play.getForce_handlers();
-      boolean _tripleNotEquals_7 = (_force_handlers != null);
-      if (_tripleNotEquals_7) {
+      boolean _tripleNotEquals_6 = (_force_handlers != null);
+      if (_tripleNotEquals_6) {
         _builder.append(space);
         _builder.append("force_handlers: ");
         String _compileBooleanPassed = this.compileBooleanPassed(play.getForce_handlers());
@@ -204,8 +197,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       ERoleInclusions _roles_inclusions = play.getRoles_inclusions();
-      boolean _tripleNotEquals_8 = (_roles_inclusions != null);
-      if (_tripleNotEquals_8) {
+      boolean _tripleNotEquals_7 = (_roles_inclusions != null);
+      if (_tripleNotEquals_7) {
         _builder.append(space);
         _builder.append("roles:");
         _builder.newLineIfNotEmpty();
@@ -221,8 +214,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size = play.getPre_tasks_list().size();
-      boolean _tripleNotEquals_9 = (_size != 0);
-      if (_tripleNotEquals_9) {
+      boolean _tripleNotEquals_8 = (_size != 0);
+      if (_tripleNotEquals_8) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("pre_tasks:");
@@ -240,8 +233,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size_1 = play.getTasks_list().size();
-      boolean _tripleNotEquals_10 = (_size_1 != 0);
-      if (_tripleNotEquals_10) {
+      boolean _tripleNotEquals_9 = (_size_1 != 0);
+      if (_tripleNotEquals_9) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("tasks:");
@@ -259,8 +252,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size_2 = play.getPost_tasks_list().size();
-      boolean _tripleNotEquals_11 = (_size_2 != 0);
-      if (_tripleNotEquals_11) {
+      boolean _tripleNotEquals_10 = (_size_2 != 0);
+      if (_tripleNotEquals_10) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("post_tasks:");
@@ -278,8 +271,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size_3 = play.getHandlers().size();
-      boolean _tripleNotEquals_12 = (_size_3 != 0);
-      if (_tripleNotEquals_12) {
+      boolean _tripleNotEquals_11 = (_size_3 != 0);
+      if (_tripleNotEquals_11) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("handlers:");
@@ -305,84 +298,72 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     String _name = roleInclusion.getName();
     _builder.append(_name);
     _builder.newLineIfNotEmpty();
-    {
-      EBaseAttributes _base_attributes = roleInclusion.getBase_attributes();
-      boolean _tripleNotEquals = (_base_attributes != null);
-      if (_tripleNotEquals) {
-        CharSequence _compileBaseAttributes = this.compileBaseAttributes(roleInclusion.getBase_attributes(), space.concat("  "));
-        _builder.append(_compileBaseAttributes);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EExecutionAttributes _execution_attributes = roleInclusion.getExecution_attributes();
-      boolean _tripleNotEquals_1 = (_execution_attributes != null);
-      if (_tripleNotEquals_1) {
-        CharSequence _compileExecutionAttributes = this.compileExecutionAttributes(roleInclusion.getExecution_attributes(), space.concat("  "));
-        _builder.append(_compileExecutionAttributes);
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    CharSequence _compileBaseAttributes = this.compileBaseAttributes(roleInclusion, space.concat("  "));
+    _builder.append(_compileBaseAttributes);
+    _builder.newLineIfNotEmpty();
+    CharSequence _compileExecutionAttributes = this.compileExecutionAttributes(roleInclusion, space.concat("  "));
+    _builder.append(_compileExecutionAttributes);
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  public CharSequence compileBaseAttributes(final EBaseAttributes baseAttributes, final String space) {
+  public CharSequence compileBaseAttributes(final EBase base, final String space) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EPrivilageEscalation _privilage_escalation = baseAttributes.getPrivilage_escalation();
+      EPrivilageEscalation _privilage_escalation = base.getPrivilage_escalation();
       boolean _tripleNotEquals = (_privilage_escalation != null);
       if (_tripleNotEquals) {
         {
-          EBooleanPassed _become = baseAttributes.getPrivilage_escalation().getBecome();
+          EBooleanPassed _become = base.getPrivilage_escalation().getBecome();
           boolean _tripleNotEquals_1 = (_become != null);
           if (_tripleNotEquals_1) {
             _builder.append(space);
             _builder.append("become: ");
-            String _compileBooleanPassed = this.compileBooleanPassed(baseAttributes.getPrivilage_escalation().getBecome());
+            String _compileBooleanPassed = this.compileBooleanPassed(base.getPrivilage_escalation().getBecome());
             _builder.append(_compileBooleanPassed);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionAndString _become_exe = baseAttributes.getPrivilage_escalation().getBecome_exe();
+          EJinjaExpressionAndString _become_exe = base.getPrivilage_escalation().getBecome_exe();
           boolean _tripleNotEquals_2 = (_become_exe != null);
           if (_tripleNotEquals_2) {
             _builder.append(space);
             _builder.append("become_exe: ");
-            String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(baseAttributes.getPrivilage_escalation().getBecome_exe());
+            String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(base.getPrivilage_escalation().getBecome_exe());
             _builder.append(_compileJinjaExpressionAndString);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionAndString _become_flags = baseAttributes.getPrivilage_escalation().getBecome_flags();
+          EJinjaExpressionAndString _become_flags = base.getPrivilage_escalation().getBecome_flags();
           boolean _tripleNotEquals_3 = (_become_flags != null);
           if (_tripleNotEquals_3) {
             _builder.append(space);
             _builder.append("become_flags: ");
-            String _compileJinjaExpressionAndString_1 = this.compileJinjaExpressionAndString(baseAttributes.getPrivilage_escalation().getBecome_flags());
+            String _compileJinjaExpressionAndString_1 = this.compileJinjaExpressionAndString(base.getPrivilage_escalation().getBecome_flags());
             _builder.append(_compileJinjaExpressionAndString_1);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionAndString _become_method = baseAttributes.getPrivilage_escalation().getBecome_method();
+          EJinjaExpressionAndString _become_method = base.getPrivilage_escalation().getBecome_method();
           boolean _tripleNotEquals_4 = (_become_method != null);
           if (_tripleNotEquals_4) {
             _builder.append(space);
             _builder.append("become_method: ");
-            String _compileJinjaExpressionAndString_2 = this.compileJinjaExpressionAndString(baseAttributes.getPrivilage_escalation().getBecome_method());
+            String _compileJinjaExpressionAndString_2 = this.compileJinjaExpressionAndString(base.getPrivilage_escalation().getBecome_method());
             _builder.append(_compileJinjaExpressionAndString_2);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionAndString _become_user = baseAttributes.getPrivilage_escalation().getBecome_user();
+          EJinjaExpressionAndString _become_user = base.getPrivilage_escalation().getBecome_user();
           boolean _tripleNotEquals_5 = (_become_user != null);
           if (_tripleNotEquals_5) {
             _builder.append(space);
             _builder.append("become_user: ");
-            String _compileJinjaExpressionAndString_3 = this.compileJinjaExpressionAndString(baseAttributes.getPrivilage_escalation().getBecome_user());
+            String _compileJinjaExpressionAndString_3 = this.compileJinjaExpressionAndString(base.getPrivilage_escalation().getBecome_user());
             _builder.append(_compileJinjaExpressionAndString_3);
             _builder.newLineIfNotEmpty();
           }
@@ -390,27 +371,27 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EValidationMode _validation_mode = baseAttributes.getValidation_mode();
+      EValidationMode _validation_mode = base.getValidation_mode();
       boolean _tripleNotEquals_6 = (_validation_mode != null);
       if (_tripleNotEquals_6) {
         {
-          EBooleanPassed _check_mode = baseAttributes.getValidation_mode().getCheck_mode();
+          EBooleanPassed _check_mode = base.getValidation_mode().getCheck_mode();
           boolean _tripleNotEquals_7 = (_check_mode != null);
           if (_tripleNotEquals_7) {
             _builder.append(space);
             _builder.append("check_moode: ");
-            String _compileBooleanPassed_1 = this.compileBooleanPassed(baseAttributes.getValidation_mode().getCheck_mode());
+            String _compileBooleanPassed_1 = this.compileBooleanPassed(base.getValidation_mode().getCheck_mode());
             _builder.append(_compileBooleanPassed_1);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _diff = baseAttributes.getValidation_mode().getDiff();
+          EBooleanPassed _diff = base.getValidation_mode().getDiff();
           boolean _tripleNotEquals_8 = (_diff != null);
           if (_tripleNotEquals_8) {
             _builder.append(space);
             _builder.append("diff: ");
-            String _compileBooleanPassed_2 = this.compileBooleanPassed(baseAttributes.getValidation_mode().getDiff());
+            String _compileBooleanPassed_2 = this.compileBooleanPassed(base.getValidation_mode().getDiff());
             _builder.append(_compileBooleanPassed_2);
             _builder.newLineIfNotEmpty();
           }
@@ -418,38 +399,38 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EConnection _connection = baseAttributes.getConnection();
+      EConnection _connection = base.getConnection();
       boolean _tripleNotEquals_9 = (_connection != null);
       if (_tripleNotEquals_9) {
         {
-          EJinjaExpressionAndString _connection_1 = baseAttributes.getConnection().getConnection();
+          EJinjaExpressionAndString _connection_1 = base.getConnection().getConnection();
           boolean _tripleNotEquals_10 = (_connection_1 != null);
           if (_tripleNotEquals_10) {
             _builder.append(space);
             _builder.append("connection: ");
-            String _compileJinjaExpressionAndString_4 = this.compileJinjaExpressionAndString(baseAttributes.getConnection().getConnection());
+            String _compileJinjaExpressionAndString_4 = this.compileJinjaExpressionAndString(base.getConnection().getConnection());
             _builder.append(_compileJinjaExpressionAndString_4);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          ENumberPassed _port = baseAttributes.getConnection().getPort();
+          ENumberPassed _port = base.getConnection().getPort();
           boolean _tripleNotEquals_11 = (_port != null);
           if (_tripleNotEquals_11) {
             _builder.append(space);
             _builder.append("port: ");
-            String _compileNumberPassed = this.compileNumberPassed(baseAttributes.getConnection().getPort());
+            String _compileNumberPassed = this.compileNumberPassed(base.getConnection().getPort());
             _builder.append(_compileNumberPassed);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionAndString _remote_user = baseAttributes.getConnection().getRemote_user();
+          EJinjaExpressionAndString _remote_user = base.getConnection().getRemote_user();
           boolean _tripleNotEquals_12 = (_remote_user != null);
           if (_tripleNotEquals_12) {
             _builder.append(space);
             _builder.append("remote_user: ");
-            String _compileJinjaExpressionAndString_5 = this.compileJinjaExpressionAndString(baseAttributes.getConnection().getRemote_user());
+            String _compileJinjaExpressionAndString_5 = this.compileJinjaExpressionAndString(base.getConnection().getRemote_user());
             _builder.append(_compileJinjaExpressionAndString_5);
             _builder.newLineIfNotEmpty();
           }
@@ -457,78 +438,78 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EBooleanPassed _no_log = baseAttributes.getNo_log();
+      EBooleanPassed _no_log = base.getNo_log();
       boolean _tripleNotEquals_13 = (_no_log != null);
       if (_tripleNotEquals_13) {
         _builder.append(space);
         _builder.append("no_log: ");
-        String _compileBooleanPassed_3 = this.compileBooleanPassed(baseAttributes.getNo_log());
+        String _compileBooleanPassed_3 = this.compileBooleanPassed(base.getNo_log());
         _builder.append(_compileBooleanPassed_3);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      String _debugger = baseAttributes.getDebugger();
+      String _debugger = base.getDebugger();
       boolean _tripleNotEquals_14 = (_debugger != null);
       if (_tripleNotEquals_14) {
         _builder.append(space);
         _builder.append("debugger: ");
-        String _debugger_1 = baseAttributes.getDebugger();
+        String _debugger_1 = base.getDebugger();
         _builder.append(_debugger_1);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      EListPassed _module_defaults = baseAttributes.getModule_defaults();
+      EListPassed _module_defaults = base.getModule_defaults();
       boolean _tripleNotEquals_15 = (_module_defaults != null);
       if (_tripleNotEquals_15) {
         _builder.append(space);
         _builder.append("module_defaults: ");
-        Serializable _compileListPassed = this.compileListPassed(baseAttributes.getModule_defaults());
+        Serializable _compileListPassed = this.compileListPassed(base.getModule_defaults());
         _builder.append(_compileListPassed);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      EListPassed _environment = baseAttributes.getEnvironment();
+      EListPassed _environment = base.getEnvironment();
       boolean _tripleNotEquals_16 = (_environment != null);
       if (_tripleNotEquals_16) {
         _builder.append(space);
         _builder.append("environment: ");
-        Serializable _compileListPassed_1 = this.compileListPassed(baseAttributes.getEnvironment());
+        Serializable _compileListPassed_1 = this.compileListPassed(base.getEnvironment());
         _builder.append(_compileListPassed_1);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      EListPassed _collections = baseAttributes.getCollections();
+      EListPassed _collections = base.getCollections();
       boolean _tripleNotEquals_17 = (_collections != null);
       if (_tripleNotEquals_17) {
         _builder.append(space);
         _builder.append("collections: ");
-        Serializable _compileListPassed_2 = this.compileListPassed(baseAttributes.getCollections());
+        Serializable _compileListPassed_2 = this.compileListPassed(base.getCollections());
         _builder.append(_compileListPassed_2);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      EListPassed _tags = baseAttributes.getTags();
+      EListPassed _tags = base.getTags();
       boolean _tripleNotEquals_18 = (_tags != null);
       if (_tripleNotEquals_18) {
         _builder.append(space);
         _builder.append("tags: ");
-        Serializable _compileListPassed_3 = this.compileListPassed(baseAttributes.getTags());
+        Serializable _compileListPassed_3 = this.compileListPassed(base.getTags());
         _builder.append(_compileListPassed_3);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      int _size = baseAttributes.getVariable_declarations().size();
+      int _size = base.getVariable_declarations().size();
       boolean _tripleNotEquals_19 = (_size != 0);
       if (_tripleNotEquals_19) {
         _builder.append(space);
         _builder.append("vars: ");
-        String _compileVariableDeclarations = this.compileVariableDeclarations(baseAttributes);
+        String _compileVariableDeclarations = this.compileVariableDeclarations(base);
         _builder.append(_compileVariableDeclarations);
         _builder.newLineIfNotEmpty();
       }
@@ -784,32 +765,20 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         }
       }
     }
-    {
-      EBaseAttributes _base_attributes = block.getBase_attributes();
-      boolean _tripleNotEquals_4 = (_base_attributes != null);
-      if (_tripleNotEquals_4) {
-        CharSequence _compileBaseAttributes = this.compileBaseAttributes(block.getBase_attributes(), space.concat("  "));
-        _builder.append(_compileBaseAttributes);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EExecutionAttributes _execution_attributes = block.getExecution_attributes();
-      boolean _tripleNotEquals_5 = (_execution_attributes != null);
-      if (_tripleNotEquals_5) {
-        CharSequence _compileExecutionAttributes = this.compileExecutionAttributes(block.getExecution_attributes(), space.concat("  "));
-        _builder.append(_compileExecutionAttributes);
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    CharSequence _compileBaseAttributes = this.compileBaseAttributes(block, space.concat("  "));
+    _builder.append(_compileBaseAttributes);
+    _builder.newLineIfNotEmpty();
+    CharSequence _compileExecutionAttributes = this.compileExecutionAttributes(block, space.concat("  "));
+    _builder.append(_compileExecutionAttributes);
+    _builder.newLineIfNotEmpty();
     {
       EBlockErrorHandling _error_handling = block.getError_handling();
-      boolean _tripleNotEquals_6 = (_error_handling != null);
-      if (_tripleNotEquals_6) {
+      boolean _tripleNotEquals_4 = (_error_handling != null);
+      if (_tripleNotEquals_4) {
         {
           EBooleanPassed _any_errors_fatal = block.getError_handling().getAny_errors_fatal();
-          boolean _tripleNotEquals_7 = (_any_errors_fatal != null);
-          if (_tripleNotEquals_7) {
+          boolean _tripleNotEquals_5 = (_any_errors_fatal != null);
+          if (_tripleNotEquals_5) {
             String _concat_3 = space.concat("  ");
             _builder.append(_concat_3);
             _builder.append("any_errors_fatal: ");
@@ -820,8 +789,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         }
         {
           EBooleanPassed _ignore_errors = block.getError_handling().getIgnore_errors();
-          boolean _tripleNotEquals_8 = (_ignore_errors != null);
-          if (_tripleNotEquals_8) {
+          boolean _tripleNotEquals_6 = (_ignore_errors != null);
+          if (_tripleNotEquals_6) {
             String _concat_4 = space.concat("  ");
             _builder.append(_concat_4);
             _builder.append("ignore_errors: ");
@@ -832,8 +801,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         }
         {
           EBooleanPassed _ignore_unreachable = block.getError_handling().getIgnore_unreachable();
-          boolean _tripleNotEquals_9 = (_ignore_unreachable != null);
-          if (_tripleNotEquals_9) {
+          boolean _tripleNotEquals_7 = (_ignore_unreachable != null);
+          if (_tripleNotEquals_7) {
             String _concat_5 = space.concat("  ");
             _builder.append(_concat_5);
             _builder.append("ignore_unreachable: ");
@@ -847,30 +816,30 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compileExecutionAttributes(final EExecutionAttributes executionAttributes, final String space) {
+  public CharSequence compileExecutionAttributes(final EExecution execution, final String space) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EExecutionExeSettings _exe_settings = executionAttributes.getExe_settings();
+      EExecutionExeSettings _exe_settings = execution.getExe_settings();
       boolean _tripleNotEquals = (_exe_settings != null);
       if (_tripleNotEquals) {
         {
-          ENumberPassed _throttle = executionAttributes.getExe_settings().getThrottle();
+          ENumberPassed _throttle = execution.getExe_settings().getThrottle();
           boolean _notEquals = (!Objects.equal(_throttle, Integer.valueOf(0)));
           if (_notEquals) {
             _builder.append(space);
             _builder.append("throttle: ");
-            String _compileNumberPassed = this.compileNumberPassed(executionAttributes.getExe_settings().getThrottle());
+            String _compileNumberPassed = this.compileNumberPassed(execution.getExe_settings().getThrottle());
             _builder.append(_compileNumberPassed);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _run_once = executionAttributes.getExe_settings().getRun_once();
+          EBooleanPassed _run_once = execution.getExe_settings().getRun_once();
           boolean _tripleNotEquals_1 = (_run_once != null);
           if (_tripleNotEquals_1) {
             _builder.append(space);
             _builder.append("run_once: ");
-            String _compileBooleanPassed = this.compileBooleanPassed(executionAttributes.getExe_settings().getRun_once());
+            String _compileBooleanPassed = this.compileBooleanPassed(execution.getExe_settings().getRun_once());
             _builder.append(_compileBooleanPassed);
             _builder.newLineIfNotEmpty();
           }
@@ -878,27 +847,27 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EDelegation _delegation = executionAttributes.getDelegation();
+      EDelegation _delegation = execution.getDelegation();
       boolean _tripleNotEquals_2 = (_delegation != null);
       if (_tripleNotEquals_2) {
         {
-          EJinjaExpressionAndString _delegate_to = executionAttributes.getDelegation().getDelegate_to();
+          EJinjaExpressionAndString _delegate_to = execution.getDelegation().getDelegate_to();
           boolean _tripleNotEquals_3 = (_delegate_to != null);
           if (_tripleNotEquals_3) {
             _builder.append(space);
             _builder.append("delegate_to: ");
-            String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(executionAttributes.getDelegation().getDelegate_to());
+            String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(execution.getDelegation().getDelegate_to());
             _builder.append(_compileJinjaExpressionAndString);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _delegate_facts = executionAttributes.getDelegation().getDelegate_facts();
+          EBooleanPassed _delegate_facts = execution.getDelegation().getDelegate_facts();
           boolean _tripleNotEquals_4 = (_delegate_facts != null);
           if (_tripleNotEquals_4) {
             _builder.append(space);
             _builder.append("delegate_facts: ");
-            String _compileBooleanPassed_1 = this.compileBooleanPassed(executionAttributes.getDelegation().getDelegate_facts());
+            String _compileBooleanPassed_1 = this.compileBooleanPassed(execution.getDelegation().getDelegate_facts());
             _builder.append(_compileBooleanPassed_1);
             _builder.newLineIfNotEmpty();
           }
@@ -906,12 +875,12 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EJinjaExpressionEvaluationWithoutBrackets _when_expression = executionAttributes.getWhen_expression();
+      EJinjaExpressionEvaluationWithoutBrackets _when_expression = execution.getWhen_expression();
       boolean _tripleNotEquals_5 = (_when_expression != null);
       if (_tripleNotEquals_5) {
         _builder.append(space);
         _builder.append("when: ");
-        String _compileJinjaExpressionEvaluationWithoutBrackets = this.compileJinjaExpressionEvaluationWithoutBrackets(executionAttributes.getWhen_expression());
+        String _compileJinjaExpressionEvaluationWithoutBrackets = this.compileJinjaExpressionEvaluationWithoutBrackets(execution.getWhen_expression());
         _builder.append(_compileJinjaExpressionEvaluationWithoutBrackets);
         _builder.newLineIfNotEmpty();
       }
@@ -931,121 +900,91 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         _builder.append(_name_1);
         _builder.newLineIfNotEmpty();
         {
-          ETaskHandlerAttributes _task_handler_attributes = taskHandler.getTask_handler_attributes();
-          boolean _tripleNotEquals_1 = (_task_handler_attributes != null);
+          EModuleCall _module = taskHandler.getModule();
+          boolean _tripleNotEquals_1 = (_module != null);
           if (_tripleNotEquals_1) {
+            String _concat = space.concat("  ");
+            _builder.append(_concat);
+            String _name_2 = taskHandler.getModule().getName();
+            _builder.append(_name_2);
+            _builder.append(":");
             {
-              EModuleCall _module = taskHandler.getTask_handler_attributes().getModule();
-              boolean _tripleNotEquals_2 = (_module != null);
+              EValuePassed _direct_parameter = taskHandler.getModule().getDirect_parameter();
+              boolean _tripleNotEquals_2 = (_direct_parameter != null);
               if (_tripleNotEquals_2) {
-                String _concat = space.concat("  ");
-                _builder.append(_concat);
-                String _name_2 = taskHandler.getTask_handler_attributes().getModule().getName();
-                _builder.append(_name_2);
-                _builder.append(":");
-                {
-                  EValuePassed _direct_parameter = taskHandler.getTask_handler_attributes().getModule().getDirect_parameter();
-                  boolean _tripleNotEquals_3 = (_direct_parameter != null);
-                  if (_tripleNotEquals_3) {
-                    _builder.append(" ");
-                    Object _compileValuePassed = this.compileValuePassed(taskHandler.getTask_handler_attributes().getModule().getDirect_parameter());
-                    _builder.append(_compileValuePassed);
-                  }
-                }
+                _builder.append(" ");
+                Object _compileValuePassed = this.compileValuePassed(taskHandler.getModule().getDirect_parameter());
+                _builder.append(_compileValuePassed);
+              }
+            }
+            _builder.newLineIfNotEmpty();
+            {
+              EList<EParameter> _parameters = taskHandler.getModule().getParameters();
+              for(final EParameter parameter : _parameters) {
+                String _concat_1 = space.concat("  ").concat("  ");
+                _builder.append(_concat_1);
+                String _name_3 = parameter.getName();
+                _builder.append(_name_3);
+                _builder.append(": ");
+                Object _compileValuePassed_1 = this.compileValuePassed(parameter.getValue_passed());
+                _builder.append(_compileValuePassed_1);
                 _builder.newLineIfNotEmpty();
-                {
-                  EList<EParameter> _parameters = taskHandler.getTask_handler_attributes().getModule().getParameters();
-                  for(final EParameter parameter : _parameters) {
-                    String _concat_1 = space.concat("  ").concat("  ");
-                    _builder.append(_concat_1);
-                    String _name_3 = parameter.getName();
-                    _builder.append(_name_3);
-                    _builder.append(": ");
-                    Object _compileValuePassed_1 = this.compileValuePassed(parameter.getValue_passed());
-                    _builder.append(_compileValuePassed_1);
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
               }
             }
           }
         }
       } else {
         {
-          ETaskHandlerAttributes _task_handler_attributes_1 = taskHandler.getTask_handler_attributes();
-          boolean _tripleNotEquals_4 = (_task_handler_attributes_1 != null);
-          if (_tripleNotEquals_4) {
+          EModuleCall _module_1 = taskHandler.getModule();
+          boolean _tripleNotEquals_3 = (_module_1 != null);
+          if (_tripleNotEquals_3) {
+            _builder.append(space);
+            _builder.append("- ");
+            String _name_4 = taskHandler.getModule().getName();
+            _builder.append(_name_4);
+            _builder.append(":");
             {
-              EModuleCall _module_1 = taskHandler.getTask_handler_attributes().getModule();
-              boolean _tripleNotEquals_5 = (_module_1 != null);
-              if (_tripleNotEquals_5) {
-                _builder.append(space);
-                _builder.append("- ");
-                String _name_4 = taskHandler.getTask_handler_attributes().getModule().getName();
-                _builder.append(_name_4);
-                _builder.append(":");
-                {
-                  EValuePassed _direct_parameter_1 = taskHandler.getTask_handler_attributes().getModule().getDirect_parameter();
-                  boolean _tripleNotEquals_6 = (_direct_parameter_1 != null);
-                  if (_tripleNotEquals_6) {
-                    _builder.append(" ");
-                    Object _compileValuePassed_2 = this.compileValuePassed(taskHandler.getTask_handler_attributes().getModule().getDirect_parameter());
-                    _builder.append(_compileValuePassed_2);
-                  }
-                }
+              EValuePassed _direct_parameter_1 = taskHandler.getModule().getDirect_parameter();
+              boolean _tripleNotEquals_4 = (_direct_parameter_1 != null);
+              if (_tripleNotEquals_4) {
+                _builder.append(" ");
+                Object _compileValuePassed_2 = this.compileValuePassed(taskHandler.getModule().getDirect_parameter());
+                _builder.append(_compileValuePassed_2);
+              }
+            }
+            _builder.newLineIfNotEmpty();
+            {
+              EList<EParameter> _parameters_1 = taskHandler.getModule().getParameters();
+              for(final EParameter parameter_1 : _parameters_1) {
+                String _concat_2 = space.concat("  ").concat("  ");
+                _builder.append(_concat_2);
+                String _name_5 = parameter_1.getName();
+                _builder.append(_name_5);
+                _builder.append(": ");
+                Object _compileValuePassed_3 = this.compileValuePassed(parameter_1.getValue_passed());
+                _builder.append(_compileValuePassed_3);
                 _builder.newLineIfNotEmpty();
-                {
-                  EList<EParameter> _parameters_1 = taskHandler.getTask_handler_attributes().getModule().getParameters();
-                  for(final EParameter parameter_1 : _parameters_1) {
-                    String _concat_2 = space.concat("  ").concat("  ");
-                    _builder.append(_concat_2);
-                    String _name_5 = parameter_1.getName();
-                    _builder.append(_name_5);
-                    _builder.append(": ");
-                    Object _compileValuePassed_3 = this.compileValuePassed(parameter_1.getValue_passed());
-                    _builder.append(_compileValuePassed_3);
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
               }
             }
           }
         }
       }
     }
-    {
-      EBaseAttributes _base_attributes = taskHandler.getBase_attributes();
-      boolean _tripleNotEquals_7 = (_base_attributes != null);
-      if (_tripleNotEquals_7) {
-        CharSequence _compileBaseAttributes = this.compileBaseAttributes(taskHandler.getBase_attributes(), space.concat("  "));
-        _builder.append(_compileBaseAttributes);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EExecutionAttributes _execution_attributes = taskHandler.getExecution_attributes();
-      boolean _tripleNotEquals_8 = (_execution_attributes != null);
-      if (_tripleNotEquals_8) {
-        CharSequence _compileExecutionAttributes = this.compileExecutionAttributes(taskHandler.getExecution_attributes(), space.concat("  "));
-        _builder.append(_compileExecutionAttributes);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      ETaskHandlerAttributes _task_handler_attributes_2 = taskHandler.getTask_handler_attributes();
-      boolean _tripleNotEquals_9 = (_task_handler_attributes_2 != null);
-      if (_tripleNotEquals_9) {
-        CharSequence _compileTaskHandlerAttributes = this.compileTaskHandlerAttributes(taskHandler.getTask_handler_attributes(), space.concat("  "));
-        _builder.append(_compileTaskHandlerAttributes);
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    CharSequence _compileBaseAttributes = this.compileBaseAttributes(taskHandler, space.concat("  "));
+    _builder.append(_compileBaseAttributes);
+    _builder.newLineIfNotEmpty();
+    CharSequence _compileExecutionAttributes = this.compileExecutionAttributes(taskHandler, space.concat("  "));
+    _builder.append(_compileExecutionAttributes);
+    _builder.newLineIfNotEmpty();
+    CharSequence _compileTaskHandlerAttributes = this.compileTaskHandlerAttributes(taskHandler, space.concat("  "));
+    _builder.append(_compileTaskHandlerAttributes);
+    _builder.newLineIfNotEmpty();
     {
       if ((taskHandler instanceof EHandler)) {
         {
           EList<ENotifiedTopic> _listen_to = ((EHandler)taskHandler).getListen_to();
-          boolean _tripleNotEquals_10 = (_listen_to != null);
-          if (_tripleNotEquals_10) {
+          boolean _tripleNotEquals_5 = (_listen_to != null);
+          if (_tripleNotEquals_5) {
             String _concat_3 = space.concat("  ");
             _builder.append(_concat_3);
             _builder.append("listen: ");
@@ -1059,63 +998,63 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compileTaskHandlerAttributes(final ETaskHandlerAttributes taskHandlerAttributes, final String space) {
+  public CharSequence compileTaskHandlerAttributes(final ETaskHandler taskHandler, final String space) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      ETaskHandlerErrorHandling _error_handling = taskHandlerAttributes.getError_handling();
+      ETaskHandlerErrorHandling _error_handling = taskHandler.getError_handling();
       boolean _tripleNotEquals = (_error_handling != null);
       if (_tripleNotEquals) {
         {
-          EJinjaExpressionEvaluationWithoutBrackets _changed_when = taskHandlerAttributes.getError_handling().getChanged_when();
+          EJinjaExpressionEvaluationWithoutBrackets _changed_when = taskHandler.getError_handling().getChanged_when();
           boolean _tripleNotEquals_1 = (_changed_when != null);
           if (_tripleNotEquals_1) {
             _builder.append(space);
             _builder.append("change_when: ");
-            String _compileJinjaExpressionEvaluationWithoutBrackets = this.compileJinjaExpressionEvaluationWithoutBrackets(taskHandlerAttributes.getError_handling().getChanged_when());
+            String _compileJinjaExpressionEvaluationWithoutBrackets = this.compileJinjaExpressionEvaluationWithoutBrackets(taskHandler.getError_handling().getChanged_when());
             _builder.append(_compileJinjaExpressionEvaluationWithoutBrackets);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionEvaluationWithoutBrackets _failed_when = taskHandlerAttributes.getError_handling().getFailed_when();
+          EJinjaExpressionEvaluationWithoutBrackets _failed_when = taskHandler.getError_handling().getFailed_when();
           boolean _tripleNotEquals_2 = (_failed_when != null);
           if (_tripleNotEquals_2) {
             _builder.append(space);
             _builder.append("failed_when: ");
-            String _compileJinjaExpressionEvaluationWithoutBrackets_1 = this.compileJinjaExpressionEvaluationWithoutBrackets(taskHandlerAttributes.getError_handling().getFailed_when());
+            String _compileJinjaExpressionEvaluationWithoutBrackets_1 = this.compileJinjaExpressionEvaluationWithoutBrackets(taskHandler.getError_handling().getFailed_when());
             _builder.append(_compileJinjaExpressionEvaluationWithoutBrackets_1);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _any_errors_fatal = taskHandlerAttributes.getError_handling().getAny_errors_fatal();
+          EBooleanPassed _any_errors_fatal = taskHandler.getError_handling().getAny_errors_fatal();
           boolean _tripleNotEquals_3 = (_any_errors_fatal != null);
           if (_tripleNotEquals_3) {
             _builder.append(space);
             _builder.append("any_errors_fatal: ");
-            String _compileBooleanPassed = this.compileBooleanPassed(taskHandlerAttributes.getError_handling().getAny_errors_fatal());
+            String _compileBooleanPassed = this.compileBooleanPassed(taskHandler.getError_handling().getAny_errors_fatal());
             _builder.append(_compileBooleanPassed);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _ignore_errors = taskHandlerAttributes.getError_handling().getIgnore_errors();
+          EBooleanPassed _ignore_errors = taskHandler.getError_handling().getIgnore_errors();
           boolean _tripleNotEquals_4 = (_ignore_errors != null);
           if (_tripleNotEquals_4) {
             _builder.append(space);
             _builder.append("ignore_errors: ");
-            String _compileBooleanPassed_1 = this.compileBooleanPassed(taskHandlerAttributes.getError_handling().getIgnore_errors());
+            String _compileBooleanPassed_1 = this.compileBooleanPassed(taskHandler.getError_handling().getIgnore_errors());
             _builder.append(_compileBooleanPassed_1);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _ignore_unreachable = taskHandlerAttributes.getError_handling().getIgnore_unreachable();
+          EBooleanPassed _ignore_unreachable = taskHandler.getError_handling().getIgnore_unreachable();
           boolean _tripleNotEquals_5 = (_ignore_unreachable != null);
           if (_tripleNotEquals_5) {
             _builder.append(space);
             _builder.append("ignore_unreachable: ");
-            String _compileBooleanPassed_2 = this.compileBooleanPassed(taskHandlerAttributes.getError_handling().getIgnore_unreachable());
+            String _compileBooleanPassed_2 = this.compileBooleanPassed(taskHandler.getError_handling().getIgnore_unreachable());
             _builder.append(_compileBooleanPassed_2);
             _builder.newLineIfNotEmpty();
           }
@@ -1123,38 +1062,38 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EJinjaExpressionAndString _action = taskHandlerAttributes.getAction();
+      EJinjaExpressionAndString _action = taskHandler.getAction();
       boolean _tripleNotEquals_6 = (_action != null);
       if (_tripleNotEquals_6) {
         _builder.append(space);
         _builder.append("action: ");
-        String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(taskHandlerAttributes.getAction());
+        String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(taskHandler.getAction());
         _builder.append(_compileJinjaExpressionAndString);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      EAsynchronousSettings _asynchronous_settings = taskHandlerAttributes.getAsynchronous_settings();
+      EAsynchronousSettings _asynchronous_settings = taskHandler.getAsynchronous_settings();
       boolean _tripleNotEquals_7 = (_asynchronous_settings != null);
       if (_tripleNotEquals_7) {
         {
-          ENumberPassed _async = taskHandlerAttributes.getAsynchronous_settings().getAsync();
+          ENumberPassed _async = taskHandler.getAsynchronous_settings().getAsync();
           boolean _tripleNotEquals_8 = (_async != null);
           if (_tripleNotEquals_8) {
             _builder.append(space);
             _builder.append("async: ");
-            String _compileNumberPassed = this.compileNumberPassed(taskHandlerAttributes.getAsynchronous_settings().getAsync());
+            String _compileNumberPassed = this.compileNumberPassed(taskHandler.getAsynchronous_settings().getAsync());
             _builder.append(_compileNumberPassed);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          ENumberPassed _poll = taskHandlerAttributes.getAsynchronous_settings().getPoll();
+          ENumberPassed _poll = taskHandler.getAsynchronous_settings().getPoll();
           boolean _tripleNotEquals_9 = (_poll != null);
           if (_tripleNotEquals_9) {
             _builder.append(space);
             _builder.append("poll: ");
-            String _compileNumberPassed_1 = this.compileNumberPassed(taskHandlerAttributes.getAsynchronous_settings().getPoll());
+            String _compileNumberPassed_1 = this.compileNumberPassed(taskHandler.getAsynchronous_settings().getPoll());
             _builder.append(_compileNumberPassed_1);
             _builder.newLineIfNotEmpty();
           }
@@ -1162,105 +1101,105 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EDictionaryPassed _args = taskHandlerAttributes.getArgs();
+      EDictionaryPassed _args = taskHandler.getArgs();
       boolean _tripleNotEquals_10 = (_args != null);
       if (_tripleNotEquals_10) {
         _builder.append(space);
         _builder.append("args: ");
-        String _compileDictionaryPassed = this.compileDictionaryPassed(taskHandlerAttributes.getArgs());
+        String _compileDictionaryPassed = this.compileDictionaryPassed(taskHandler.getArgs());
         _builder.append(_compileDictionaryPassed);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      int _size = taskHandlerAttributes.getNotifiables().size();
+      int _size = taskHandler.getNotifiables().size();
       boolean _tripleNotEquals_11 = (_size != 0);
       if (_tripleNotEquals_11) {
         _builder.append(space);
         _builder.append("notify: ");
-        ArrayList<String> _compileNotifiables = this.compileNotifiables(taskHandlerAttributes);
+        ArrayList<String> _compileNotifiables = this.compileNotifiables(taskHandler);
         _builder.append(_compileNotifiables);
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      ELoop _loop = taskHandlerAttributes.getLoop();
+      ELoop _loop = taskHandler.getLoop();
       boolean _tripleNotEquals_12 = (_loop != null);
       if (_tripleNotEquals_12) {
         {
-          ELoop _loop_1 = taskHandlerAttributes.getLoop();
+          ELoop _loop_1 = taskHandler.getLoop();
           if ((_loop_1 instanceof ELoopOverList)) {
             _builder.append(space);
             _builder.append("loop: ");
-            ELoop _loop_2 = taskHandlerAttributes.getLoop();
+            ELoop _loop_2 = taskHandler.getLoop();
             Object _compileLoopList = this.compileLoopList(((ELoopOverList) _loop_2).getLoop_list());
             _builder.append(_compileLoopList);
             _builder.newLineIfNotEmpty();
             {
-              ELoop _loop_3 = taskHandlerAttributes.getLoop();
+              ELoop _loop_3 = taskHandler.getLoop();
               ELoopControl _loop_control = ((ELoopOverList) _loop_3).getLoop_control();
               boolean _tripleNotEquals_13 = (_loop_control != null);
               if (_tripleNotEquals_13) {
                 {
-                  ELoop _loop_4 = taskHandlerAttributes.getLoop();
+                  ELoop _loop_4 = taskHandler.getLoop();
                   EValuePassed _label = ((ELoopOverList) _loop_4).getLoop_control().getLabel();
                   boolean _tripleNotEquals_14 = (_label != null);
                   if (_tripleNotEquals_14) {
                     _builder.append(space);
                     _builder.append("label: ");
-                    ELoop _loop_5 = taskHandlerAttributes.getLoop();
+                    ELoop _loop_5 = taskHandler.getLoop();
                     Object _compileValuePassed = this.compileValuePassed(((ELoopOverList) _loop_5).getLoop_control().getLabel());
                     _builder.append(_compileValuePassed);
                     _builder.newLineIfNotEmpty();
                   }
                 }
                 {
-                  ELoop _loop_6 = taskHandlerAttributes.getLoop();
+                  ELoop _loop_6 = taskHandler.getLoop();
                   ENumberPassed _pause = ((ELoopOverList) _loop_6).getLoop_control().getPause();
                   boolean _tripleNotEquals_15 = (_pause != null);
                   if (_tripleNotEquals_15) {
                     _builder.append(space);
                     _builder.append("pause: ");
-                    ELoop _loop_7 = taskHandlerAttributes.getLoop();
+                    ELoop _loop_7 = taskHandler.getLoop();
                     String _compileNumberPassed_2 = this.compileNumberPassed(((ELoopOverList) _loop_7).getLoop_control().getPause());
                     _builder.append(_compileNumberPassed_2);
                     _builder.newLineIfNotEmpty();
                   }
                 }
                 {
-                  ELoop _loop_8 = taskHandlerAttributes.getLoop();
+                  ELoop _loop_8 = taskHandler.getLoop();
                   EIndexOrLoopVariable _index_var = ((ELoopOverList) _loop_8).getLoop_control().getIndex_var();
                   boolean _tripleNotEquals_16 = (_index_var != null);
                   if (_tripleNotEquals_16) {
                     _builder.append(space);
                     _builder.append("index_var: ");
-                    ELoop _loop_9 = taskHandlerAttributes.getLoop();
+                    ELoop _loop_9 = taskHandler.getLoop();
                     String _name = ((ELoopOverList) _loop_9).getLoop_control().getIndex_var().getName();
                     _builder.append(_name);
                     _builder.newLineIfNotEmpty();
                   }
                 }
                 {
-                  ELoop _loop_10 = taskHandlerAttributes.getLoop();
+                  ELoop _loop_10 = taskHandler.getLoop();
                   EIndexOrLoopVariable _loop_var = ((ELoopOverList) _loop_10).getLoop_control().getLoop_var();
                   boolean _tripleNotEquals_17 = (_loop_var != null);
                   if (_tripleNotEquals_17) {
                     _builder.append(space);
                     _builder.append("loop_var: ");
-                    ELoop _loop_11 = taskHandlerAttributes.getLoop();
+                    ELoop _loop_11 = taskHandler.getLoop();
                     String _name_1 = ((ELoopOverList) _loop_11).getLoop_control().getLoop_var().getName();
                     _builder.append(_name_1);
                     _builder.newLineIfNotEmpty();
                   }
                 }
                 {
-                  ELoop _loop_12 = taskHandlerAttributes.getLoop();
+                  ELoop _loop_12 = taskHandler.getLoop();
                   EBooleanPassed _extended = ((ELoopOverList) _loop_12).getLoop_control().getExtended();
                   boolean _tripleNotEquals_18 = (_extended != null);
                   if (_tripleNotEquals_18) {
                     _builder.append(space);
                     _builder.append("extended: ");
-                    ELoop _loop_13 = taskHandlerAttributes.getLoop();
+                    ELoop _loop_13 = taskHandler.getLoop();
                     String _compileBooleanPassed_3 = this.compileBooleanPassed(((ELoopOverList) _loop_13).getLoop_control().getExtended());
                     _builder.append(_compileBooleanPassed_3);
                     _builder.newLineIfNotEmpty();
@@ -1271,42 +1210,42 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           }
         }
         {
-          ELoop _loop_14 = taskHandlerAttributes.getLoop();
+          ELoop _loop_14 = taskHandler.getLoop();
           if ((_loop_14 instanceof EUntil)) {
             {
-              ELoop _loop_15 = taskHandlerAttributes.getLoop();
+              ELoop _loop_15 = taskHandler.getLoop();
               EJinjaExpressionEvaluationWithoutBrackets _until = ((EUntil) _loop_15).getUntil();
               boolean _tripleNotEquals_19 = (_until != null);
               if (_tripleNotEquals_19) {
                 _builder.append(space);
                 _builder.append("until: ");
-                ELoop _loop_16 = taskHandlerAttributes.getLoop();
+                ELoop _loop_16 = taskHandler.getLoop();
                 String _compileJinjaExpressionEvaluationWithoutBrackets_2 = this.compileJinjaExpressionEvaluationWithoutBrackets(((EUntil) _loop_16).getUntil());
                 _builder.append(_compileJinjaExpressionEvaluationWithoutBrackets_2);
                 _builder.newLineIfNotEmpty();
               }
             }
             {
-              ELoop _loop_17 = taskHandlerAttributes.getLoop();
+              ELoop _loop_17 = taskHandler.getLoop();
               ENumberPassed _retries = ((EUntil) _loop_17).getRetries();
               boolean _tripleNotEquals_20 = (_retries != null);
               if (_tripleNotEquals_20) {
                 _builder.append(space);
                 _builder.append("retries: ");
-                ELoop _loop_18 = taskHandlerAttributes.getLoop();
+                ELoop _loop_18 = taskHandler.getLoop();
                 String _compileNumberPassed_3 = this.compileNumberPassed(((EUntil) _loop_18).getRetries());
                 _builder.append(_compileNumberPassed_3);
                 _builder.newLineIfNotEmpty();
               }
             }
             {
-              ELoop _loop_19 = taskHandlerAttributes.getLoop();
+              ELoop _loop_19 = taskHandler.getLoop();
               ENumberPassed _delay = ((EUntil) _loop_19).getDelay();
               boolean _tripleNotEquals_21 = (_delay != null);
               if (_tripleNotEquals_21) {
                 _builder.append(space);
                 _builder.append("delay: ");
-                ELoop _loop_20 = taskHandlerAttributes.getLoop();
+                ELoop _loop_20 = taskHandler.getLoop();
                 String _compileNumberPassed_4 = this.compileNumberPassed(((EUntil) _loop_20).getDelay());
                 _builder.append(_compileNumberPassed_4);
                 _builder.newLineIfNotEmpty();
@@ -1317,12 +1256,12 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      ERegisterVariable _register = taskHandlerAttributes.getRegister();
+      ERegisterVariable _register = taskHandler.getRegister();
       boolean _tripleNotEquals_22 = (_register != null);
       if (_tripleNotEquals_22) {
         _builder.append(space);
         _builder.append("register: ");
-        String _name_2 = taskHandlerAttributes.getRegister().getName();
+        String _name_2 = taskHandler.getRegister().getName();
         _builder.append(_name_2);
         _builder.newLineIfNotEmpty();
       }
@@ -1330,9 +1269,9 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public ArrayList<String> compileNotifiables(final ETaskHandlerAttributes taskHandlerAttributes) {
+  public ArrayList<String> compileNotifiables(final ETaskHandler taskHandler) {
     ArrayList<String> newList = new ArrayList<String>();
-    EList<ENotifiable> _notifiables = taskHandlerAttributes.getNotifiables();
+    EList<ENotifiable> _notifiables = taskHandler.getNotifiables();
     for (final ENotifiable notifiable : _notifiables) {
       if ((notifiable instanceof ENotifiedTopic)) {
         newList.add("\"".concat(((ENotifiedTopic)notifiable).getName()).concat("\""));
@@ -1734,9 +1673,9 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return simpleValueWithoutString.getSimple_value();
   }
   
-  public String compileVariableDeclarations(final EBaseAttributes baseAttributes) {
+  public String compileVariableDeclarations(final EBase base) {
     String variableDeclarationsString = "{";
-    EList<EVariableDeclaration> _variable_declarations = baseAttributes.getVariable_declarations();
+    EList<EVariableDeclaration> _variable_declarations = base.getVariable_declarations();
     for (final EVariableDeclaration variable_declaration : _variable_declarations) {
       variableDeclarationsString = variableDeclarationsString.concat(variable_declaration.getName()).concat(": ").concat(this.compileValuePassed(variable_declaration.getValue_passed()).toString()).concat(", ");
     }

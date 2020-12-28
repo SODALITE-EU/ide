@@ -13,7 +13,9 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getExecution_attributes <em>Execution attributes</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getExe_settings <em>Exe settings</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getDelegation <em>Delegation</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getWhen_expression <em>When expression</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEExecution()
@@ -23,25 +25,69 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 public interface EExecution extends EBase
 {
   /**
-   * Returns the value of the '<em><b>Execution attributes</b></em>' containment reference.
+   * Returns the value of the '<em><b>Exe settings</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Execution attributes</em>' containment reference.
-   * @see #setExecution_attributes(EExecutionAttributes)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEExecution_Execution_attributes()
+   * @return the value of the '<em>Exe settings</em>' containment reference.
+   * @see #setExe_settings(EExecutionExeSettings)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEExecution_Exe_settings()
    * @model containment="true"
    * @generated
    */
-  EExecutionAttributes getExecution_attributes();
+  EExecutionExeSettings getExe_settings();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getExecution_attributes <em>Execution attributes</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getExe_settings <em>Exe settings</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Execution attributes</em>' containment reference.
-   * @see #getExecution_attributes()
+   * @param value the new value of the '<em>Exe settings</em>' containment reference.
+   * @see #getExe_settings()
    * @generated
    */
-  void setExecution_attributes(EExecutionAttributes value);
+  void setExe_settings(EExecutionExeSettings value);
+
+  /**
+   * Returns the value of the '<em><b>Delegation</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Delegation</em>' containment reference.
+   * @see #setDelegation(EDelegation)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEExecution_Delegation()
+   * @model containment="true"
+   * @generated
+   */
+  EDelegation getDelegation();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getDelegation <em>Delegation</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Delegation</em>' containment reference.
+   * @see #getDelegation()
+   * @generated
+   */
+  void setDelegation(EDelegation value);
+
+  /**
+   * Returns the value of the '<em><b>When expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>When expression</em>' containment reference.
+   * @see #setWhen_expression(EJinjaExpressionEvaluationWithoutBrackets)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEExecution_When_expression()
+   * @model containment="true"
+   * @generated
+   */
+  EJinjaExpressionEvaluationWithoutBrackets getWhen_expression();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getWhen_expression <em>When expression</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>When expression</em>' containment reference.
+   * @see #getWhen_expression()
+   * @generated
+   */
+  void setWhen_expression(EJinjaExpressionEvaluationWithoutBrackets value);
 
 } // EExecution
