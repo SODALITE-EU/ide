@@ -500,8 +500,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileTailElement(ETailElement tailElement){
 		var tailElementString = ""
-		if (tailElement.identifier_ID !== null) tailElementString = tailElementString.concat(tailElement.identifier_ID)
-		else if (tailElement.function_call !== null) tailElementString = tailElementString.concat(tailElement.function_call.compileFunctionCall)
+		if (tailElement.function_call !== null) tailElementString = tailElementString.concat(tailElement.function_call.compileFunctionCall)
 		if (tailElement.index !== null) tailElementString = tailElementString.concat("[").concat(tailElement.index).concat("]")
 		return tailElementString
 	}
@@ -517,17 +516,22 @@ class AnsibleDslGenerator extends AbstractGenerator {
 
 	def compileFunctionCall(EFunctionCall functionCall){
 		var stringToReturn = functionCall.name
-		stringToReturn = stringToReturn.concat("(")
-		for (var index = 0; index < functionCall.parameters.size; index++){	
-			//the first parameter shouldn't have a comma before it, the others yes
-			if (index == 0){
-				stringToReturn = stringToReturn.concat(functionCall.parameters.get(index).compileFilteredExpression.toString())
+		if (functionCall.parameters.size !== 0){
+			stringToReturn = stringToReturn.concat("(")
+			for (var index = 0; index < functionCall.parameters.size; index++){	
+				//the first parameter shouldn't have a comma before it, the others yes
+				if (index == 0){
+					stringToReturn = stringToReturn.concat(functionCall.parameters.get(index).compileFilteredExpression.toString())
+				}
+				else {
+					stringToReturn = stringToReturn.concat(", ").concat(functionCall.parameters.get(index).compileFilteredExpression.toString())
+				}
 			}
-			else {
-				stringToReturn = stringToReturn.concat(", ").concat(functionCall.parameters.get(index).compileFilteredExpression.toString())
-			}
+			stringToReturn = stringToReturn.concat(")")	
 		}
-		stringToReturn = stringToReturn.concat(")")
+		else if (functionCall.empty_brackets !== null){
+			stringToReturn = stringToReturn.concat("()")
+		}
 		return stringToReturn
 	}
 	

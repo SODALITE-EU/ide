@@ -272,6 +272,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//EFilteredExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="empty_brackets" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFilteredExpression" eSuperTypes="#//EJinjaExpressionEvaluationWithoutBrackets">
     <eStructuralFeatures xsi:type="ecore:EReference" name="to_filter" eType="#//EOrExpression"
@@ -369,7 +370,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ETailElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier_ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="function_call" eType="#//EFunctionCall"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

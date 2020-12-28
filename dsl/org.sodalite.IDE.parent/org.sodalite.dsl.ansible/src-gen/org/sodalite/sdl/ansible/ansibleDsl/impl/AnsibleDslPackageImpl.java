@@ -2361,6 +2361,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EAttribute getEFunctionCall_Empty_brackets()
+  {
+    return (EAttribute)eFunctionCallEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEFilteredExpression()
   {
     return eFilteredExpressionEClass;
@@ -2966,20 +2977,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getETailElement_Identifier_ID()
-  {
-    return (EAttribute)eTailElementEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getETailElement_Function_call()
   {
-    return (EReference)eTailElementEClass.getEStructuralFeatures().get(1);
+    return (EReference)eTailElementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2990,7 +2990,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EAttribute getETailElement_Index()
   {
-    return (EAttribute)eTailElementEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)eTailElementEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3366,6 +3366,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eFunctionCallEClass = createEClass(EFUNCTION_CALL);
     createEAttribute(eFunctionCallEClass, EFUNCTION_CALL__NAME);
     createEReference(eFunctionCallEClass, EFUNCTION_CALL__PARAMETERS);
+    createEAttribute(eFunctionCallEClass, EFUNCTION_CALL__EMPTY_BRACKETS);
 
     eFilteredExpressionEClass = createEClass(EFILTERED_EXPRESSION);
     createEReference(eFilteredExpressionEClass, EFILTERED_EXPRESSION__TO_FILTER);
@@ -3441,7 +3442,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEAttribute(eSpecialVariableEClass, ESPECIAL_VARIABLE__NAME);
 
     eTailElementEClass = createEClass(ETAIL_ELEMENT);
-    createEAttribute(eTailElementEClass, ETAIL_ELEMENT__IDENTIFIER_ID);
     createEReference(eTailElementEClass, ETAIL_ELEMENT__FUNCTION_CALL);
     createEAttribute(eTailElementEClass, ETAIL_ELEMENT__INDEX);
 
@@ -3745,6 +3745,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eFunctionCallEClass, EFunctionCall.class, "EFunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEFunctionCall_Name(), ecorePackage.getEString(), "name", null, 0, 1, EFunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEFunctionCall_Parameters(), this.getEFilteredExpression(), null, "parameters", null, 0, -1, EFunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEFunctionCall_Empty_brackets(), ecorePackage.getEString(), "empty_brackets", null, 0, 1, EFunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eFilteredExpressionEClass, EFilteredExpression.class, "EFilteredExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEFilteredExpression_To_filter(), this.getEOrExpression(), null, "to_filter", null, 0, 1, EFilteredExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3820,7 +3821,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEAttribute(getESpecialVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, ESpecialVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eTailElementEClass, ETailElement.class, "ETailElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getETailElement_Identifier_ID(), ecorePackage.getEString(), "identifier_ID", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETailElement_Function_call(), this.getEFunctionCall(), null, "function_call", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getETailElement_Index(), ecorePackage.getEString(), "index", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

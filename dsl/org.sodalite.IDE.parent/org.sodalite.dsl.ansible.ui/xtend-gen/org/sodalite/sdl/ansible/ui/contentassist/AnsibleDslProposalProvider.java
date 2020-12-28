@@ -4,13 +4,24 @@
 package org.sodalite.sdl.ansible.ui.contentassist;
 
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.sodalite.dsl.rM.EOperationDefinition;
+import org.sodalite.dsl.rM.EProperties;
+import org.sodalite.dsl.rM.EPropertyDefinition;
+import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl;
+import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ui.contentassist.AbstractAnsibleDslProposalProvider;
@@ -52,5 +63,72 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
         acceptor.accept(this.createCompletionProposal(candidate.getName(), context));
       }
     }
+  }
+  
+  @Override
+  public void completeENotifiedHandler_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
+    if ((rootPlay != null)) {
+      final List<EHandlerImpl> candidates = EcoreUtil2.<EHandlerImpl>getAllContentsOfType(rootPlay, EHandlerImpl.class);
+      for (final EHandlerImpl candidate : candidates) {
+        acceptor.accept(this.createCompletionProposal("\"".concat(candidate.getName()).concat("\""), context));
+      }
+    }
+  }
+  
+  @Override
+  public void complete_EVariableReference(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
+    if ((rootPlay != null)) {
+      final List<EVariableDeclarationImpl> candidatesDeclaredVariables = EcoreUtil2.<EVariableDeclarationImpl>getAllContentsOfType(rootPlay, EVariableDeclarationImpl.class);
+      for (final EVariableDeclarationImpl candidate : candidatesDeclaredVariables) {
+        acceptor.accept(this.createCompletionProposal("declared_variable: ".concat(candidate.getName()), context));
+      }
+      final List<ERegisterVariableImpl> candidatesRegisteredVariables = EcoreUtil2.<ERegisterVariableImpl>getAllContentsOfType(rootPlay, ERegisterVariableImpl.class);
+      for (final ERegisterVariableImpl candidate_1 : candidatesRegisteredVariables) {
+        acceptor.accept(this.createCompletionProposal("registered_variable: ".concat(candidate_1.getName()), context));
+      }
+      final List<EIndexOrLoopVariableImpl> candidatesIndexOrLoopVariables = EcoreUtil2.<EIndexOrLoopVariableImpl>getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl.class);
+      for (final EIndexOrLoopVariableImpl candidate_2 : candidatesIndexOrLoopVariables) {
+        acceptor.accept(this.createCompletionProposal("index_or_loop_var: ".concat(candidate_2.getName()), context));
+      }
+      final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
+      final EOperationDefinition operation = rootPlaybook.getOperation();
+      if ((operation != null)) {
+        final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
+        for (final EParameterDefinitionImpl candidate_3 : candidatesInputVariableOperation) {
+          acceptor.accept(this.createCompletionProposal("operation_input: ".concat("\"").concat(candidate_3.getName()).concat("\""), context));
+        }
+        final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
+        final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
+        EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
+        for (final EPropertyDefinition input : _properties) {
+          acceptor.accept(this.createCompletionProposal("interface_input: ".concat("\"").concat(input.getName()).concat("\""), context));
+        }
+      }
+    }
+  }
+  
+  public void createNonEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+    if ((proposal instanceof ConfigurableCompletionProposal)) {
+      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
+      configurable.setAdditionalProposalInfo(additionalProposalInfo);
+      configurable.setAutoInsertable(false);
+    }
+    acceptor.accept(proposal);
+  }
+  
+  public void createEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+    if ((proposal instanceof ConfigurableCompletionProposal)) {
+      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
+      configurable.setSelectionStart(configurable.getReplacementOffset());
+      configurable.setSelectionLength(proposalText.length());
+      configurable.setAutoInsertable(false);
+      configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+      configurable.setAdditionalProposalInfo(additionalProposalInfo);
+    }
+    acceptor.accept(proposal);
   }
 }

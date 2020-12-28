@@ -32,6 +32,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl#getEmpty_brackets <em>Empty brackets</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,6 +68,26 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
    * @ordered
    */
   protected EList<EFilteredExpression> parameters;
+
+  /**
+   * The default value of the '{@link #getEmpty_brackets() <em>Empty brackets</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEmpty_brackets()
+   * @generated
+   * @ordered
+   */
+  protected static final String EMPTY_BRACKETS_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getEmpty_brackets() <em>Empty brackets</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEmpty_brackets()
+   * @generated
+   * @ordered
+   */
+  protected String empty_brackets = EMPTY_BRACKETS_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -135,6 +156,31 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
    * @generated
    */
   @Override
+  public String getEmpty_brackets()
+  {
+    return empty_brackets;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setEmpty_brackets(String newEmpty_brackets)
+  {
+    String oldEmpty_brackets = empty_brackets;
+    empty_brackets = newEmpty_brackets;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS, oldEmpty_brackets, empty_brackets));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -159,6 +205,8 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
         return getName();
       case AnsibleDslPackage.EFUNCTION_CALL__PARAMETERS:
         return getParameters();
+      case AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS:
+        return getEmpty_brackets();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -181,6 +229,9 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
         getParameters().clear();
         getParameters().addAll((Collection<? extends EFilteredExpression>)newValue);
         return;
+      case AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS:
+        setEmpty_brackets((String)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -201,6 +252,9 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
       case AnsibleDslPackage.EFUNCTION_CALL__PARAMETERS:
         getParameters().clear();
         return;
+      case AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS:
+        setEmpty_brackets(EMPTY_BRACKETS_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -219,6 +273,8 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AnsibleDslPackage.EFUNCTION_CALL__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
+      case AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS:
+        return EMPTY_BRACKETS_EDEFAULT == null ? empty_brackets != null : !EMPTY_BRACKETS_EDEFAULT.equals(empty_brackets);
     }
     return super.eIsSet(featureID);
   }
@@ -236,6 +292,8 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", empty_brackets: ");
+    result.append(empty_brackets);
     result.append(')');
     return result.toString();
   }

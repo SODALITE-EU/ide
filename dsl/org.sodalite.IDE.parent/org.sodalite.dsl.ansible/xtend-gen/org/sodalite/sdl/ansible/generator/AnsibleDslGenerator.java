@@ -1404,20 +1404,14 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileTailElement(final ETailElement tailElement) {
     String tailElementString = "";
-    String _identifier_ID = tailElement.getIdentifier_ID();
-    boolean _tripleNotEquals = (_identifier_ID != null);
+    EFunctionCall _function_call = tailElement.getFunction_call();
+    boolean _tripleNotEquals = (_function_call != null);
     if (_tripleNotEquals) {
-      tailElementString = tailElementString.concat(tailElement.getIdentifier_ID());
-    } else {
-      EFunctionCall _function_call = tailElement.getFunction_call();
-      boolean _tripleNotEquals_1 = (_function_call != null);
-      if (_tripleNotEquals_1) {
-        tailElementString = tailElementString.concat(this.compileFunctionCall(tailElement.getFunction_call()));
-      }
+      tailElementString = tailElementString.concat(this.compileFunctionCall(tailElement.getFunction_call()));
     }
     String _index = tailElement.getIndex();
-    boolean _tripleNotEquals_2 = (_index != null);
-    if (_tripleNotEquals_2) {
+    boolean _tripleNotEquals_1 = (_index != null);
+    if (_tripleNotEquals_1) {
       tailElementString = tailElementString.concat("[").concat(tailElement.getIndex()).concat("]");
     }
     return tailElementString;
@@ -1436,15 +1430,25 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileFunctionCall(final EFunctionCall functionCall) {
     String stringToReturn = functionCall.getName();
-    stringToReturn = stringToReturn.concat("(");
-    for (int index = 0; (index < functionCall.getParameters().size()); index++) {
-      if ((index == 0)) {
-        stringToReturn = stringToReturn.concat(this.compileFilteredExpression(functionCall.getParameters().get(index)).toString());
-      } else {
-        stringToReturn = stringToReturn.concat(", ").concat(this.compileFilteredExpression(functionCall.getParameters().get(index)).toString());
+    int _size = functionCall.getParameters().size();
+    boolean _tripleNotEquals = (_size != 0);
+    if (_tripleNotEquals) {
+      stringToReturn = stringToReturn.concat("(");
+      for (int index = 0; (index < functionCall.getParameters().size()); index++) {
+        if ((index == 0)) {
+          stringToReturn = stringToReturn.concat(this.compileFilteredExpression(functionCall.getParameters().get(index)).toString());
+        } else {
+          stringToReturn = stringToReturn.concat(", ").concat(this.compileFilteredExpression(functionCall.getParameters().get(index)).toString());
+        }
+      }
+      stringToReturn = stringToReturn.concat(")");
+    } else {
+      String _empty_brackets = functionCall.getEmpty_brackets();
+      boolean _tripleNotEquals_1 = (_empty_brackets != null);
+      if (_tripleNotEquals_1) {
+        stringToReturn = stringToReturn.concat("()");
       }
     }
-    stringToReturn = stringToReturn.concat(")");
     return stringToReturn;
   }
   

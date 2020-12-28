@@ -55,7 +55,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEIsExpressionAccess().getAlternatives_1(), "rule__EIsExpression__Alternatives_1");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getAlternatives_0(), "rule__EParenthesisedExpression__Alternatives_0");
 			builder.put(grammarAccess.getEVariableReferenceAccess().getAlternatives(), "rule__EVariableReference__Alternatives");
-			builder.put(grammarAccess.getETailElementAccess().getAlternatives_0(), "rule__ETailElement__Alternatives_0");
 			builder.put(grammarAccess.getEDictionaryPassedAccess().getAlternatives(), "rule__EDictionaryPassed__Alternatives");
 			builder.put(grammarAccess.getEListPassedAccess().getAlternatives(), "rule__EListPassed__Alternatives");
 			builder.put(grammarAccess.getENumberPassedAccess().getAlternatives(), "rule__ENumberPassed__Alternatives");
@@ -174,7 +173,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEFunctionCallAccess().getGroup(), "rule__EFunctionCall__Group__0");
 			builder.put(grammarAccess.getEFunctionCallAccess().getGroup_1_0(), "rule__EFunctionCall__Group_1_0__0");
 			builder.put(grammarAccess.getEFunctionCallAccess().getGroup_1_0_2(), "rule__EFunctionCall__Group_1_0_2__0");
-			builder.put(grammarAccess.getEFunctionCallAccess().getGroup_1_1(), "rule__EFunctionCall__Group_1_1__0");
 			builder.put(grammarAccess.getEFilteredExpressionAccess().getGroup(), "rule__EFilteredExpression__Group__0");
 			builder.put(grammarAccess.getEFilteredExpressionAccess().getGroup_1(), "rule__EFilteredExpression__Group_1__0");
 			builder.put(grammarAccess.getEOrExpressionAccess().getGroup(), "rule__EOrExpression__Group__0");
@@ -196,6 +194,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEIfExpressionAccess().getGroup_4(), "rule__EIfExpression__Group_4__0");
 			builder.put(grammarAccess.getEDictionaryPairReferenceAccess().getGroup(), "rule__EDictionaryPairReference__Group__0");
 			builder.put(grammarAccess.getEDictionaryPairReferenceAccess().getGroup_1(), "rule__EDictionaryPairReference__Group_1__0");
+			builder.put(grammarAccess.getEVariableDeclarationVariableReferenceAccess().getGroup(), "rule__EVariableDeclarationVariableReference__Group__0");
 			builder.put(grammarAccess.getERegisterVariableReferenceAccess().getGroup(), "rule__ERegisterVariableReference__Group__0");
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getGroup(), "rule__EVariableDeclaration__Group__0");
 			builder.put(grammarAccess.getEIndexOrLoopVariableReferenceAccess().getGroup(), "rule__EIndexOrLoopVariableReference__Group__0");
@@ -334,6 +333,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEFunctionCallAccess().getNameAssignment_0(), "rule__EFunctionCall__NameAssignment_0");
 			builder.put(grammarAccess.getEFunctionCallAccess().getParametersAssignment_1_0_1(), "rule__EFunctionCall__ParametersAssignment_1_0_1");
 			builder.put(grammarAccess.getEFunctionCallAccess().getParametersAssignment_1_0_2_1(), "rule__EFunctionCall__ParametersAssignment_1_0_2_1");
+			builder.put(grammarAccess.getEFunctionCallAccess().getEmpty_bracketsAssignment_1_1(), "rule__EFunctionCall__Empty_bracketsAssignment_1_1");
 			builder.put(grammarAccess.getEFilteredExpressionAccess().getTo_filterAssignment_0(), "rule__EFilteredExpression__To_filterAssignment_0");
 			builder.put(grammarAccess.getEFilteredExpressionAccess().getFilterAssignment_1_1(), "rule__EFilteredExpression__FilterAssignment_1_1");
 			builder.put(grammarAccess.getEOrExpressionAccess().getLeft_orAssignment_0(), "rule__EOrExpression__Left_orAssignment_0");
@@ -360,7 +360,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEIfExpressionAccess().getElse_expressionAssignment_4_1(), "rule__EIfExpression__Else_expressionAssignment_4_1");
 			builder.put(grammarAccess.getEDictionaryPairReferenceAccess().getNameAssignment_0(), "rule__EDictionaryPairReference__NameAssignment_0");
 			builder.put(grammarAccess.getEDictionaryPairReferenceAccess().getIndexAssignment_1_1(), "rule__EDictionaryPairReference__IndexAssignment_1_1");
-			builder.put(grammarAccess.getEVariableDeclarationVariableReferenceAccess().getVariable_declaration_variable_referenceAssignment(), "rule__EVariableDeclarationVariableReference__Variable_declaration_variable_referenceAssignment");
+			builder.put(grammarAccess.getEVariableDeclarationVariableReferenceAccess().getVariable_declaration_variable_referenceAssignment_1(), "rule__EVariableDeclarationVariableReference__Variable_declaration_variable_referenceAssignment_1");
 			builder.put(grammarAccess.getERegisterVariableReferenceAccess().getRegister_variable_referenceAssignment_1(), "rule__ERegisterVariableReference__Register_variable_referenceAssignment_1");
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getNameAssignment_0(), "rule__EVariableDeclaration__NameAssignment_0");
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getValue_passedAssignment_2(), "rule__EVariableDeclaration__Value_passedAssignment_2");
@@ -370,8 +370,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEInputOperationVariableReferenceAccess().getNameAssignment_1(), "rule__EInputOperationVariableReference__NameAssignment_1");
 			builder.put(grammarAccess.getEInputInterfaceVariableReferenceAccess().getNameAssignment_1(), "rule__EInputInterfaceVariableReference__NameAssignment_1");
 			builder.put(grammarAccess.getESpecialVariableAccess().getNameAssignment_2(), "rule__ESpecialVariable__NameAssignment_2");
-			builder.put(grammarAccess.getETailElementAccess().getIdentifier_IDAssignment_0_0(), "rule__ETailElement__Identifier_IDAssignment_0_0");
-			builder.put(grammarAccess.getETailElementAccess().getFunction_callAssignment_0_1(), "rule__ETailElement__Function_callAssignment_0_1");
+			builder.put(grammarAccess.getETailElementAccess().getFunction_callAssignment_0(), "rule__ETailElement__Function_callAssignment_0");
 			builder.put(grammarAccess.getETailElementAccess().getIndexAssignment_1_1(), "rule__ETailElement__IndexAssignment_1_1");
 			builder.put(grammarAccess.getEDictionaryAccess().getDictionary_pairsAssignment_1(), "rule__EDictionary__Dictionary_pairsAssignment_1");
 			builder.put(grammarAccess.getEDictionaryAccess().getDictionary_pairsAssignment_2_1(), "rule__EDictionary__Dictionary_pairsAssignment_2_1");

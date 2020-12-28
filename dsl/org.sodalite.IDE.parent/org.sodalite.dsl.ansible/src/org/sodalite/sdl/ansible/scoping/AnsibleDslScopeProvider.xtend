@@ -25,6 +25,8 @@ import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputOperationVariableReferenceImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl
 import org.sodalite.dsl.rM.EPropertyDefinition
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedHandlerImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl
 
 /** 
  * This class contains custom scoping description.
@@ -33,6 +35,7 @@ import org.sodalite.dsl.rM.EPropertyDefinition
  */
 class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 	override IScope getScope(EObject context, EReference reference) {
+		//scope for variables declared only in this specific play
 		if (context instanceof EVariableDeclarationVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE){
 			val rootPlay = EcoreUtil2.getContainerOfType(context, EPlayImpl)
 			if (rootPlay !== null){
@@ -41,10 +44,20 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 			}
 		}
 		
+		//scope for variables registered only in this specific play
 		if (context instanceof ERegisterVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EREGISTER_VARIABLE_REFERENCE__REGISTER_VARIABLE_REFERENCE){
 			val rootPlay = EcoreUtil2.getContainerOfType(context, EPlayImpl)
 			if (rootPlay !== null){
 				val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, ERegisterVariableImpl)
+				return Scopes.scopeFor(candidates)
+			}
+		}
+		
+		//scope for handlers defined only in this specific play
+		if (context instanceof ENotifiedHandlerImpl && reference == AnsibleDslPackage.Literals.ENOTIFIED_HANDLER__NAME){
+			val rootPlay = EcoreUtil2.getContainerOfType(context, EPlayImpl)
+			if (rootPlay !== null){
+				val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EHandlerImpl)
 				return Scopes.scopeFor(candidates)
 			}
 		}

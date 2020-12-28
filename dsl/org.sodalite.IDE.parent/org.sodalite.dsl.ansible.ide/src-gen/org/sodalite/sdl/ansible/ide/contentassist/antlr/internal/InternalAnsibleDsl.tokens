@@ -1,6 +1,7 @@
 '!='=21
 '%'=30
 '('=134
+'()'=156
 ')'=135
 '*'=31
 '**'=32
@@ -40,6 +41,7 @@
 'connection:'=108
 'connection_info{'=43
 'debugger:'=45
+'declared_variable:'=148
 'delay:'=100
 'delegate_facts:'=127
 'delegate_to:'=126
@@ -66,9 +68,9 @@
 'ignore_errors:'=117
 'ignore_unreachable:'=118
 'in'=141
-'index_or_loop_var:'=149
+'index_or_loop_var:'=150
 'index_var:'=95
-'interface_input:'=152
+'interface_input:'=153
 'is'=140
 'item'=131
 'label:'=93
@@ -84,13 +86,13 @@
 'never'=16
 'no_log:'=44
 'node_type:'=38
-'not'=155
+'not'=157
 'notify:'=59
 'on_failed'=17
 'on_skipped'=19
 'on_unreachable'=18
 'operation:'=39
-'operation_input:'=151
+'operation_input:'=152
 'or'=138
 'order:'=113
 'parameters{'=86
@@ -106,8 +108,8 @@
 'post_tasks{'=70
 'pre_tasks{'=68
 'privilage_escalation{'=41
-'register:'=150
-'registered_variable:'=148
+'register:'=151
+'registered_variable:'=149
 'remote_user:'=110
 'rescue_tasks{'=76
 'retries:'=99
@@ -117,7 +119,7 @@
 'role{'=88
 'run_once:'=115
 'serial:'=112
-'special_variable:'=153
+'special_variable:'=154
 'strategy:'=111
 'tags:'=49
 'task_handler_attributes{'=80
@@ -134,7 +136,7 @@
 'vars_prompt:'=66
 'vars{'=50
 'when:'=53
-'{'=154
+'{'=155
 '{{'=132
 '|'=137
 '}'=36
@@ -206,6 +208,8 @@ T__152=152
 T__153=153
 T__154=154
 T__155=155
+T__156=156
+T__157=157
 T__15=15
 T__16=16
 T__17=17

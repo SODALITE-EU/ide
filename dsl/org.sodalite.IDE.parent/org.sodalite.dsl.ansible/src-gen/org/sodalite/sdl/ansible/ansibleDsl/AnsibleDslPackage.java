@@ -2232,13 +2232,22 @@ public interface AnsibleDslPackage extends EPackage
   int EFUNCTION_CALL__PARAMETERS = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Empty brackets</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFUNCTION_CALL__EMPTY_BRACKETS = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>EFunction Call</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EFUNCTION_CALL_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 2;
+  int EFUNCTION_CALL_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl <em>EFiltered Expression</em>}' class.
@@ -2927,22 +2936,13 @@ public interface AnsibleDslPackage extends EPackage
   int ETAIL_ELEMENT = 69;
 
   /**
-   * The feature id for the '<em><b>Identifier ID</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETAIL_ELEMENT__IDENTIFIER_ID = 0;
-
-  /**
    * The feature id for the '<em><b>Function call</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETAIL_ELEMENT__FUNCTION_CALL = 1;
+  int ETAIL_ELEMENT__FUNCTION_CALL = 0;
 
   /**
    * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -2951,7 +2951,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ETAIL_ELEMENT__INDEX = 2;
+  int ETAIL_ELEMENT__INDEX = 1;
 
   /**
    * The number of structural features of the '<em>ETail Element</em>' class.
@@ -2960,7 +2960,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ETAIL_ELEMENT_FEATURE_COUNT = 3;
+  int ETAIL_ELEMENT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl <em>EDictionary</em>}' class.
@@ -4751,6 +4751,17 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEFunctionCall_Parameters();
 
   /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getEmpty_brackets <em>Empty brackets</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Empty brackets</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getEmpty_brackets()
+   * @see #getEFunctionCall()
+   * @generated
+   */
+  EAttribute getEFunctionCall_Empty_brackets();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression <em>EFiltered Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5334,17 +5345,6 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EClass getETailElement();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIdentifier_ID <em>Identifier ID</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Identifier ID</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIdentifier_ID()
-   * @see #getETailElement()
-   * @generated
-   */
-  EAttribute getETailElement_Identifier_ID();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getFunction_call <em>Function call</em>}'.
@@ -6828,6 +6828,14 @@ public interface AnsibleDslPackage extends EPackage
     EReference EFUNCTION_CALL__PARAMETERS = eINSTANCE.getEFunctionCall_Parameters();
 
     /**
+     * The meta object literal for the '<em><b>Empty brackets</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EFUNCTION_CALL__EMPTY_BRACKETS = eINSTANCE.getEFunctionCall_Empty_brackets();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl <em>EFiltered Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7306,14 +7314,6 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EClass ETAIL_ELEMENT = eINSTANCE.getETailElement();
-
-    /**
-     * The meta object literal for the '<em><b>Identifier ID</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ETAIL_ELEMENT__IDENTIFIER_ID = eINSTANCE.getETailElement_Identifier_ID();
 
     /**
      * The meta object literal for the '<em><b>Function call</b></em>' containment reference feature.

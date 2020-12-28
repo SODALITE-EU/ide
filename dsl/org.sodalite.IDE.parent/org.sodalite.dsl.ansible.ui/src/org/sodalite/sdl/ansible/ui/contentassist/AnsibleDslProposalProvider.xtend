@@ -12,6 +12,13 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.Assignment
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl
+import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl
+import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableImpl
+import org.eclipse.jface.text.contentassist.ICompletionProposal
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 
 /** 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -28,6 +35,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		acceptor.accept(createCompletionProposal("Null", context));
 	}
 	
+	//suggests variables declared only in this specific play
 	override void completeEVariableDeclarationVariableReference_Variable_declaration_variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
 		if (rootPlay !== null){
@@ -38,6 +46,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		}		
 	}
 
+	//suggests variables registered only in this specific play
 	override void completeERegisterVariableReference_Register_variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
 		if (rootPlay !== null){
@@ -46,5 +55,78 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 				acceptor.accept(createCompletionProposal(candidate.name, context))
 			}
 		}
+	}
+	
+	//suggest handlers defined only in this specific play
+	override void completeENotifiedHandler_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
+		if (rootPlay !== null){
+			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EHandlerImpl)
+			for (candidate: candidates){
+				acceptor.accept(createCompletionProposal("\"".concat(candidate.name).concat("\""), context))
+			}
+		}
+	}
+	
+	override void complete_EVariableReference(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
+		if (rootPlay !== null){
+			//suggest variables declared only in this specific play
+			val candidatesDeclaredVariables = EcoreUtil2.getAllContentsOfType(rootPlay, EVariableDeclarationImpl)
+			for (candidate: candidatesDeclaredVariables){
+				acceptor.accept(createCompletionProposal("declared_variable: ".concat(candidate.name), context))
+			}
+			//suggest variables registered only in this specific play
+			val candidatesRegisteredVariables = EcoreUtil2.getAllContentsOfType(rootPlay, ERegisterVariableImpl)
+			for (candidate: candidatesRegisteredVariables){
+				acceptor.accept(createCompletionProposal("registered_variable: ".concat(candidate.name), context))
+			}
+			//suggest index or loop variables defined only in this specific play
+			val candidatesIndexOrLoopVariables = EcoreUtil2.getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl)
+			for (candidate: candidatesIndexOrLoopVariables){
+				acceptor.accept(createCompletionProposal("index_or_loop_var: ".concat(candidate.name), context))
+			}
+			
+			val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+			val operation = rootPlaybook.operation
+			if (operation !== null){
+				//suggest variables given in input by the tosca operation
+				val candidatesInputVariableOperation = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
+				for (candidate: candidatesInputVariableOperation){
+					acceptor.accept(createCompletionProposal("operation_input: ".concat("\"").concat(candidate.name).concat("\""), context))
+				}
+				//suggest variables given in input by the tosca interface
+				val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
+				val inputsProperties = interfaceDefinitionBody.inputs
+				for (input : inputsProperties.properties){
+					acceptor.accept(createCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), context))
+				}
+			}
+		}
+	}
+	
+	def void createNonEditableCompletionProposal(String proposalText, String displayText,
+	ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setAdditionalProposalInfo(additionalProposalInfo);
+			configurable.setAutoInsertable(false);
+		}
+		acceptor.accept(proposal)
+	}
+	
+	def void createEditableCompletionProposal(String proposalText, String displayText,
+		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setSelectionStart(configurable.getReplacementOffset());
+			configurable.setSelectionLength(proposalText.length());
+			configurable.setAutoInsertable(false);
+			configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+			configurable.setAdditionalProposalInfo(additionalProposalInfo);
+		}
+		acceptor.accept(proposal)
 	}
 }

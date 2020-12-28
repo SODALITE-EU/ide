@@ -403,7 +403,7 @@ EJinjaExpressionEvaluationWithoutBrackets:
 ;
 
 EFunctionCall:
-	name=ID ('(' parameters+=EFilteredExpression (',' parameters+=EFilteredExpression)* ')' | '(' ')') //TODO maybe it's better to call it "function_name" instead of "name"
+	name=ID ('(' parameters+=EFilteredExpression (',' parameters+=EFilteredExpression)* ')' | empty_brackets='()')? //TODO maybe it's better to call it "function_name" instead of "name"
 ;
 
 EFilteredExpression:
@@ -443,7 +443,7 @@ EDictionaryPairReference:
 ;
 
 EVariableDeclarationVariableReference:
-	variable_declaration_variable_reference=[EVariableDeclaration|ID]
+	'declared_variable:' variable_declaration_variable_reference=[EVariableDeclaration|ID]
 ;
 
 ERegisterVariableReference:
@@ -484,7 +484,7 @@ ESpecialVariable: //https://docs.ansible.com/ansible/latest/reference_appendices
 ;
 
 ETailElement:
-	(identifier_ID=ID | function_call=EFunctionCall) ('[' index=NUMBER ']')?
+	function_call=EFunctionCall ('[' index=NUMBER ']')?
 ;
 
 EDictionary:

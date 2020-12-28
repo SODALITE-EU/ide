@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIdentifier_ID <em>Identifier ID</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getFunction_call <em>Function call</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIndex <em>Index</em>}</li>
  * </ul>
@@ -25,28 +24,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ETailElement extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Identifier ID</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Identifier ID</em>' attribute.
-   * @see #setIdentifier_ID(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETailElement_Identifier_ID()
-   * @model
-   * @generated
-   */
-  String getIdentifier_ID();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIdentifier_ID <em>Identifier ID</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Identifier ID</em>' attribute.
-   * @see #getIdentifier_ID()
-   * @generated
-   */
-  void setIdentifier_ID(String value);
-
   /**
    * Returns the value of the '<em><b>Function call</b></em>' containment reference.
    * <!-- begin-user-doc -->

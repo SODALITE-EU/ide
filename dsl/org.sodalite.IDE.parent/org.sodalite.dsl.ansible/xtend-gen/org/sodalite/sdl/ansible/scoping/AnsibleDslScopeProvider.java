@@ -20,8 +20,10 @@ import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl;
 import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl;
 import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputOperationVariableReferenceImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedHandlerImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl;
@@ -53,33 +55,40 @@ public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
         return Scopes.scopeFor(candidates_1);
       }
     }
+    if (((context instanceof ENotifiedHandlerImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.ENOTIFIED_HANDLER__NAME))) {
+      final EPlayImpl rootPlay_2 = EcoreUtil2.<EPlayImpl>getContainerOfType(context, EPlayImpl.class);
+      if ((rootPlay_2 != null)) {
+        final List<EHandlerImpl> candidates_2 = EcoreUtil2.<EHandlerImpl>getAllContentsOfType(rootPlay_2, EHandlerImpl.class);
+        return Scopes.scopeFor(candidates_2);
+      }
+    }
     if (((context instanceof EPlaybookImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EPLAYBOOK__OPERATION))) {
       final ENodeType nodeType = ((EPlaybookImpl) context).getNode_type();
       if ((nodeType != null)) {
-        final List<EOperationDefinitionImpl> candidates_2 = EcoreUtil2.<EOperationDefinitionImpl>getAllContentsOfType(nodeType, EOperationDefinitionImpl.class);
-        return Scopes.scopeFor(candidates_2);
+        final List<EOperationDefinitionImpl> candidates_3 = EcoreUtil2.<EOperationDefinitionImpl>getAllContentsOfType(nodeType, EOperationDefinitionImpl.class);
+        return Scopes.scopeFor(candidates_3);
       }
     }
     if (((context instanceof EInputOperationVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME))) {
       final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(context, EPlaybookImpl.class);
       final EOperationDefinition operation = rootPlaybook.getOperation();
       if ((operation != null)) {
-        final List<EParameterDefinitionImpl> candidates_3 = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
-        return Scopes.scopeFor(candidates_3);
+        final List<EParameterDefinitionImpl> candidates_4 = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
+        return Scopes.scopeFor(candidates_4);
       }
     }
     if (((context instanceof EInputInterfaceVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME))) {
       final EPlaybookImpl rootPlaybook_1 = EcoreUtil2.<EPlaybookImpl>getContainerOfType(context, EPlaybookImpl.class);
-      final ArrayList<EPropertyDefinition> candidates_4 = new ArrayList<EPropertyDefinition>();
+      final ArrayList<EPropertyDefinition> candidates_5 = new ArrayList<EPropertyDefinition>();
       final EOperationDefinition operation_1 = rootPlaybook_1.getOperation();
       if ((operation_1 != null)) {
         final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation_1, EInterfaceDefinitionBodyImpl.class);
         final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
         EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
         for (final EPropertyDefinition input : _properties) {
-          candidates_4.add(input);
+          candidates_5.add(input);
         }
-        return Scopes.scopeFor(candidates_4);
+        return Scopes.scopeFor(candidates_5);
       }
     }
     return super.getScope(context, reference);

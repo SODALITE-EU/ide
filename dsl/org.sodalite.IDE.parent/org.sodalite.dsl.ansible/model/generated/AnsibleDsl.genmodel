@@ -190,6 +190,7 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFunctionCall">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFunctionCall/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFunctionCall/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFunctionCall/empty_brackets"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFilteredExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredExpression/to_filter"/>
@@ -264,7 +265,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESpecialVariable/name"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ETailElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ETailElement/identifier_ID"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETailElement/function_call"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ETailElement/index"/>
     </genClasses>

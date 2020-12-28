@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getEmpty_brackets <em>Empty brackets</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCall()
@@ -57,5 +58,27 @@ public interface EFunctionCall extends EValuePassedToJinjaExpression
    * @generated
    */
   EList<EFilteredExpression> getParameters();
+
+  /**
+   * Returns the value of the '<em><b>Empty brackets</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Empty brackets</em>' attribute.
+   * @see #setEmpty_brackets(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCall_Empty_brackets()
+   * @model
+   * @generated
+   */
+  String getEmpty_brackets();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getEmpty_brackets <em>Empty brackets</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Empty brackets</em>' attribute.
+   * @see #getEmpty_brackets()
+   * @generated
+   */
+  void setEmpty_brackets(String value);
 
 } // EFunctionCall

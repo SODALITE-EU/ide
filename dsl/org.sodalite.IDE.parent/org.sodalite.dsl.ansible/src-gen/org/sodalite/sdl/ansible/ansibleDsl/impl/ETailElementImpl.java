@@ -24,7 +24,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getIdentifier_ID <em>Identifier ID</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getFunction_call <em>Function call</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getIndex <em>Index</em>}</li>
  * </ul>
@@ -33,26 +32,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
  */
 public class ETailElementImpl extends MinimalEObjectImpl.Container implements ETailElement
 {
-  /**
-   * The default value of the '{@link #getIdentifier_ID() <em>Identifier ID</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIdentifier_ID()
-   * @generated
-   * @ordered
-   */
-  protected static final String IDENTIFIER_ID_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getIdentifier_ID() <em>Identifier ID</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIdentifier_ID()
-   * @generated
-   * @ordered
-   */
-  protected String identifier_ID = IDENTIFIER_ID_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getFunction_call() <em>Function call</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -102,31 +81,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.ETAIL_ELEMENT;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getIdentifier_ID()
-  {
-    return identifier_ID;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setIdentifier_ID(String newIdentifier_ID)
-  {
-    String oldIdentifier_ID = identifier_ID;
-    identifier_ID = newIdentifier_ID;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_ID, oldIdentifier_ID, identifier_ID));
   }
 
   /**
@@ -230,8 +184,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_ID:
-        return getIdentifier_ID();
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         return getFunction_call();
       case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
@@ -250,9 +202,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_ID:
-        setIdentifier_ID((String)newValue);
-        return;
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         setFunction_call((EFunctionCall)newValue);
         return;
@@ -273,9 +222,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_ID:
-        setIdentifier_ID(IDENTIFIER_ID_EDEFAULT);
-        return;
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         setFunction_call((EFunctionCall)null);
         return;
@@ -296,8 +242,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETAIL_ELEMENT__IDENTIFIER_ID:
-        return IDENTIFIER_ID_EDEFAULT == null ? identifier_ID != null : !IDENTIFIER_ID_EDEFAULT.equals(identifier_ID);
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         return function_call != null;
       case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
@@ -317,9 +261,7 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (identifier_ID: ");
-    result.append(identifier_ID);
-    result.append(", index: ");
+    result.append(" (index: ");
     result.append(index);
     result.append(')');
     return result.toString();

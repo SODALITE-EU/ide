@@ -502,7 +502,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EFunctionCall returns EFunctionCall
 	 *
 	 * Constraint:
-	 *     (name=ID (parameters+=EFilteredExpression parameters+=EFilteredExpression*)?)
+	 *     (name=ID ((parameters+=EFilteredExpression parameters+=EFilteredExpression*) | empty_brackets='()')?)
 	 */
 	protected void sequence_EFunctionCall(ISerializationContext context, EFunctionCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1077,7 +1077,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ETailElement returns ETailElement
 	 *
 	 * Constraint:
-	 *     ((identifier_ID=ID | function_call=EFunctionCall) index=NUMBER?)
+	 *     (function_call=EFunctionCall index=NUMBER?)
 	 */
 	protected void sequence_ETailElement(ISerializationContext context, ETailElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1205,7 +1205,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEVariableDeclarationVariableReferenceAccess().getVariable_declaration_variable_referenceEVariableDeclarationIDTerminalRuleCall_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE, false));
+		feeder.accept(grammarAccess.getEVariableDeclarationVariableReferenceAccess().getVariable_declaration_variable_referenceEVariableDeclarationIDTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE, false));
 		feeder.finish();
 	}
 	
