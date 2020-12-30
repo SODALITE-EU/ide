@@ -186,13 +186,13 @@ public interface AnsibleDslFactory extends EFactory
   EUntil createEUntil();
 
   /**
-   * Returns a new object of class '<em>EPrivilage Escalation</em>'.
+   * Returns a new object of class '<em>EPrivilege Escalation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EPrivilage Escalation</em>'.
+   * @return a new object of class '<em>EPrivilege Escalation</em>'.
    * @generated
    */
-  EPrivilageEscalation createEPrivilageEscalation();
+  EPrivilegeEscalation createEPrivilegeEscalation();
 
   /**
    * Returns a new object of class '<em>EValidation Mode</em>'.

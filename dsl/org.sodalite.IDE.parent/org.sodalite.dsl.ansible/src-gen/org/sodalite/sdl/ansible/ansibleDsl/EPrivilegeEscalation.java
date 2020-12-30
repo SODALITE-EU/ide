@@ -7,25 +7,25 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>EPrivilage Escalation</b></em>'.
+ * A representation of the model object '<em><b>EPrivilege Escalation</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome <em>Become</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_exe <em>Become exe</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_flags <em>Become flags</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_method <em>Become method</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_user <em>Become user</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome <em>Become</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_exe <em>Become exe</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_flags <em>Become flags</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_method <em>Become method</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_user <em>Become user</em>}</li>
  * </ul>
  *
- * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilageEscalation()
+ * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilegeEscalation()
  * @model
  * @generated
  */
-public interface EPrivilageEscalation extends EObject
+public interface EPrivilegeEscalation extends EObject
 {
   /**
    * Returns the value of the '<em><b>Become</b></em>' containment reference.
@@ -33,14 +33,14 @@ public interface EPrivilageEscalation extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Become</em>' containment reference.
    * @see #setBecome(EBooleanPassed)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilageEscalation_Become()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilegeEscalation_Become()
    * @model containment="true"
    * @generated
    */
   EBooleanPassed getBecome();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome <em>Become</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome <em>Become</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Become</em>' containment reference.
@@ -55,14 +55,14 @@ public interface EPrivilageEscalation extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Become exe</em>' containment reference.
    * @see #setBecome_exe(EJinjaExpressionAndString)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilageEscalation_Become_exe()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilegeEscalation_Become_exe()
    * @model containment="true"
    * @generated
    */
   EJinjaExpressionAndString getBecome_exe();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_exe <em>Become exe</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_exe <em>Become exe</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Become exe</em>' containment reference.
@@ -77,14 +77,14 @@ public interface EPrivilageEscalation extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Become flags</em>' containment reference.
    * @see #setBecome_flags(EJinjaExpressionAndString)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilageEscalation_Become_flags()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilegeEscalation_Become_flags()
    * @model containment="true"
    * @generated
    */
   EJinjaExpressionAndString getBecome_flags();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_flags <em>Become flags</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_flags <em>Become flags</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Become flags</em>' containment reference.
@@ -99,14 +99,14 @@ public interface EPrivilageEscalation extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Become method</em>' containment reference.
    * @see #setBecome_method(EJinjaExpressionAndString)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilageEscalation_Become_method()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilegeEscalation_Become_method()
    * @model containment="true"
    * @generated
    */
   EJinjaExpressionAndString getBecome_method();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_method <em>Become method</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_method <em>Become method</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Become method</em>' containment reference.
@@ -121,14 +121,14 @@ public interface EPrivilageEscalation extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Become user</em>' containment reference.
    * @see #setBecome_user(EJinjaExpressionAndString)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilageEscalation_Become_user()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPrivilegeEscalation_Become_user()
    * @model containment="true"
    * @generated
    */
   EJinjaExpressionAndString getBecome_user();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_user <em>Become user</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_user <em>Become user</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Become user</em>' containment reference.
@@ -137,4 +137,4 @@ public interface EPrivilageEscalation extends EObject
    */
   void setBecome_user(EJinjaExpressionAndString value);
 
-} // EPrivilageEscalation
+} // EPrivilegeEscalation

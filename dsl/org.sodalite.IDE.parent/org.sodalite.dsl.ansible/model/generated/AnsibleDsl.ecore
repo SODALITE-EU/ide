@@ -11,7 +11,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBase">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="privilage_escalation" eType="#//EPrivilageEscalation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="privilege_escalation" eType="#//EPrivilegeEscalation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="validation_mode" eType="#//EValidationMode"
         containment="true"/>
@@ -61,7 +61,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EPlay" eSuperTypes="#//EBase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="play_exe_settings" eType="#//EPlayExeSettings"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//EPlayErrorHandling"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="play_error_handling" eType="#//EPlayErrorHandling"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="facts_settings" eType="#//EFactsSettings"
         containment="true"/>
@@ -83,7 +83,7 @@
         eType="#//EHandler" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBlock" eSuperTypes="#//EExecution #//EBlockTask">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//EBlockErrorHandling"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block_error_handling" eType="#//EBlockErrorHandling"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
         eType="#//ETask" containment="true"/>
@@ -141,7 +141,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="delay" eType="#//ENumberPassed"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EPrivilageEscalation">
+  <eClassifiers xsi:type="ecore:EClass" name="EPrivilegeEscalation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="become" eType="#//EBooleanPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="become_exe" eType="#//EJinjaExpressionAndString"

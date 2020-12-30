@@ -166,9 +166,9 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEUntilAdapter();
       }
       @Override
-      public Adapter caseEPrivilageEscalation(EPrivilageEscalation object)
+      public Adapter caseEPrivilegeEscalation(EPrivilegeEscalation object)
       {
-        return createEPrivilageEscalationAdapter();
+        return createEPrivilegeEscalationAdapter();
       }
       @Override
       public Adapter caseEValidationMode(EValidationMode object)
@@ -738,16 +738,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation <em>EPrivilage Escalation</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation <em>EPrivilege Escalation</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation
    * @generated
    */
-  public Adapter createEPrivilageEscalationAdapter()
+  public Adapter createEPrivilegeEscalationAdapter()
   {
     return null;
   }

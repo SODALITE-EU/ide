@@ -62,7 +62,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
-import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
+import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
@@ -145,10 +145,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EPlayErrorHandling _error_handling = play.getError_handling();
-      boolean _tripleNotEquals_2 = (_error_handling != null);
+      EPlayErrorHandling _play_error_handling = play.getPlay_error_handling();
+      boolean _tripleNotEquals_2 = (_play_error_handling != null);
       if (_tripleNotEquals_2) {
-        CharSequence _compilePlayErrorHandling = this.compilePlayErrorHandling(play.getError_handling(), space);
+        CharSequence _compilePlayErrorHandling = this.compilePlayErrorHandling(play.getPlay_error_handling(), space);
         _builder.append(_compilePlayErrorHandling);
         _builder.newLineIfNotEmpty();
       }
@@ -310,60 +310,60 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   public CharSequence compileBaseAttributes(final EBase base, final String space) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EPrivilageEscalation _privilage_escalation = base.getPrivilage_escalation();
-      boolean _tripleNotEquals = (_privilage_escalation != null);
+      EPrivilegeEscalation _privilege_escalation = base.getPrivilege_escalation();
+      boolean _tripleNotEquals = (_privilege_escalation != null);
       if (_tripleNotEquals) {
         {
-          EBooleanPassed _become = base.getPrivilage_escalation().getBecome();
+          EBooleanPassed _become = base.getPrivilege_escalation().getBecome();
           boolean _tripleNotEquals_1 = (_become != null);
           if (_tripleNotEquals_1) {
             _builder.append(space);
             _builder.append("become: ");
-            String _compileBooleanPassed = this.compileBooleanPassed(base.getPrivilage_escalation().getBecome());
+            String _compileBooleanPassed = this.compileBooleanPassed(base.getPrivilege_escalation().getBecome());
             _builder.append(_compileBooleanPassed);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionAndString _become_exe = base.getPrivilage_escalation().getBecome_exe();
+          EJinjaExpressionAndString _become_exe = base.getPrivilege_escalation().getBecome_exe();
           boolean _tripleNotEquals_2 = (_become_exe != null);
           if (_tripleNotEquals_2) {
             _builder.append(space);
             _builder.append("become_exe: ");
-            String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(base.getPrivilage_escalation().getBecome_exe());
+            String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(base.getPrivilege_escalation().getBecome_exe());
             _builder.append(_compileJinjaExpressionAndString);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionAndString _become_flags = base.getPrivilage_escalation().getBecome_flags();
+          EJinjaExpressionAndString _become_flags = base.getPrivilege_escalation().getBecome_flags();
           boolean _tripleNotEquals_3 = (_become_flags != null);
           if (_tripleNotEquals_3) {
             _builder.append(space);
             _builder.append("become_flags: ");
-            String _compileJinjaExpressionAndString_1 = this.compileJinjaExpressionAndString(base.getPrivilage_escalation().getBecome_flags());
+            String _compileJinjaExpressionAndString_1 = this.compileJinjaExpressionAndString(base.getPrivilege_escalation().getBecome_flags());
             _builder.append(_compileJinjaExpressionAndString_1);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionAndString _become_method = base.getPrivilage_escalation().getBecome_method();
+          EJinjaExpressionAndString _become_method = base.getPrivilege_escalation().getBecome_method();
           boolean _tripleNotEquals_4 = (_become_method != null);
           if (_tripleNotEquals_4) {
             _builder.append(space);
             _builder.append("become_method: ");
-            String _compileJinjaExpressionAndString_2 = this.compileJinjaExpressionAndString(base.getPrivilage_escalation().getBecome_method());
+            String _compileJinjaExpressionAndString_2 = this.compileJinjaExpressionAndString(base.getPrivilege_escalation().getBecome_method());
             _builder.append(_compileJinjaExpressionAndString_2);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EJinjaExpressionAndString _become_user = base.getPrivilage_escalation().getBecome_user();
+          EJinjaExpressionAndString _become_user = base.getPrivilege_escalation().getBecome_user();
           boolean _tripleNotEquals_5 = (_become_user != null);
           if (_tripleNotEquals_5) {
             _builder.append(space);
             _builder.append("become_user: ");
-            String _compileJinjaExpressionAndString_3 = this.compileJinjaExpressionAndString(base.getPrivilage_escalation().getBecome_user());
+            String _compileJinjaExpressionAndString_3 = this.compileJinjaExpressionAndString(base.getPrivilege_escalation().getBecome_user());
             _builder.append(_compileJinjaExpressionAndString_3);
             _builder.newLineIfNotEmpty();
           }
@@ -772,41 +772,41 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     _builder.append(_compileExecutionAttributes);
     _builder.newLineIfNotEmpty();
     {
-      EBlockErrorHandling _error_handling = block.getError_handling();
-      boolean _tripleNotEquals_4 = (_error_handling != null);
+      EBlockErrorHandling _block_error_handling = block.getBlock_error_handling();
+      boolean _tripleNotEquals_4 = (_block_error_handling != null);
       if (_tripleNotEquals_4) {
         {
-          EBooleanPassed _any_errors_fatal = block.getError_handling().getAny_errors_fatal();
+          EBooleanPassed _any_errors_fatal = block.getBlock_error_handling().getAny_errors_fatal();
           boolean _tripleNotEquals_5 = (_any_errors_fatal != null);
           if (_tripleNotEquals_5) {
             String _concat_3 = space.concat("  ");
             _builder.append(_concat_3);
             _builder.append("any_errors_fatal: ");
-            String _compileBooleanPassed = this.compileBooleanPassed(block.getError_handling().getAny_errors_fatal());
+            String _compileBooleanPassed = this.compileBooleanPassed(block.getBlock_error_handling().getAny_errors_fatal());
             _builder.append(_compileBooleanPassed);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _ignore_errors = block.getError_handling().getIgnore_errors();
+          EBooleanPassed _ignore_errors = block.getBlock_error_handling().getIgnore_errors();
           boolean _tripleNotEquals_6 = (_ignore_errors != null);
           if (_tripleNotEquals_6) {
             String _concat_4 = space.concat("  ");
             _builder.append(_concat_4);
             _builder.append("ignore_errors: ");
-            String _compileBooleanPassed_1 = this.compileBooleanPassed(block.getError_handling().getIgnore_errors());
+            String _compileBooleanPassed_1 = this.compileBooleanPassed(block.getBlock_error_handling().getIgnore_errors());
             _builder.append(_compileBooleanPassed_1);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _ignore_unreachable = block.getError_handling().getIgnore_unreachable();
+          EBooleanPassed _ignore_unreachable = block.getBlock_error_handling().getIgnore_unreachable();
           boolean _tripleNotEquals_7 = (_ignore_unreachable != null);
           if (_tripleNotEquals_7) {
             String _concat_5 = space.concat("  ");
             _builder.append(_concat_5);
             _builder.append("ignore_unreachable: ");
-            String _compileBooleanPassed_2 = this.compileBooleanPassed(block.getError_handling().getIgnore_unreachable());
+            String _compileBooleanPassed_2 = this.compileBooleanPassed(block.getBlock_error_handling().getIgnore_unreachable());
             _builder.append(_compileBooleanPassed_2);
             _builder.newLineIfNotEmpty();
           }

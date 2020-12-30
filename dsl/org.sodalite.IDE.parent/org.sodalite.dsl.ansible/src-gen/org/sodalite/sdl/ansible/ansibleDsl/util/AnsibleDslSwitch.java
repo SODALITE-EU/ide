@@ -218,10 +218,10 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EPRIVILAGE_ESCALATION:
+      case AnsibleDslPackage.EPRIVILEGE_ESCALATION:
       {
-        EPrivilageEscalation ePrivilageEscalation = (EPrivilageEscalation)theEObject;
-        T result = caseEPrivilageEscalation(ePrivilageEscalation);
+        EPrivilegeEscalation ePrivilegeEscalation = (EPrivilegeEscalation)theEObject;
+        T result = caseEPrivilegeEscalation(ePrivilegeEscalation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -954,17 +954,17 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EPrivilage Escalation</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EPrivilege Escalation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EPrivilage Escalation</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EPrivilege Escalation</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEPrivilageEscalation(EPrivilageEscalation object)
+  public T caseEPrivilegeEscalation(EPrivilegeEscalation object)
   {
     return null;
   }

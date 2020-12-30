@@ -83,7 +83,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ELOOP_OVER_LIST: return createELoopOverList();
       case AnsibleDslPackage.ELOOP_CONTROL: return createELoopControl();
       case AnsibleDslPackage.EUNTIL: return createEUntil();
-      case AnsibleDslPackage.EPRIVILAGE_ESCALATION: return createEPrivilageEscalation();
+      case AnsibleDslPackage.EPRIVILEGE_ESCALATION: return createEPrivilegeEscalation();
       case AnsibleDslPackage.EVALIDATION_MODE: return createEValidationMode();
       case AnsibleDslPackage.ECONNECTION: return createEConnection();
       case AnsibleDslPackage.EEXE_SETTINGS: return createEExeSettings();
@@ -366,10 +366,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EPrivilageEscalation createEPrivilageEscalation()
+  public EPrivilegeEscalation createEPrivilegeEscalation()
   {
-    EPrivilageEscalationImpl ePrivilageEscalation = new EPrivilageEscalationImpl();
-    return ePrivilageEscalation;
+    EPrivilegeEscalationImpl ePrivilegeEscalation = new EPrivilegeEscalationImpl();
+    return ePrivilegeEscalation;
   }
 
   /**

@@ -151,13 +151,13 @@ public interface AnsibleDslPackage extends EPackage
   int EBASE__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EBASE__PRIVILAGE_ESCALATION = 1;
+  int EBASE__PRIVILEGE_ESCALATION = 1;
 
   /**
    * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
@@ -269,13 +269,13 @@ public interface AnsibleDslPackage extends EPackage
   int EEXECUTION__NAME = EBASE__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EEXECUTION__PRIVILAGE_ESCALATION = EBASE__PRIVILAGE_ESCALATION;
+  int EEXECUTION__PRIVILEGE_ESCALATION = EBASE__PRIVILEGE_ESCALATION;
 
   /**
    * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
@@ -433,13 +433,13 @@ public interface AnsibleDslPackage extends EPackage
   int ETASK_HANDLER__NAME = EEXECUTION__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETASK_HANDLER__PRIVILAGE_ESCALATION = EEXECUTION__PRIVILAGE_ESCALATION;
+  int ETASK_HANDLER__PRIVILEGE_ESCALATION = EEXECUTION__PRIVILEGE_ESCALATION;
 
   /**
    * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
@@ -650,13 +650,13 @@ public interface AnsibleDslPackage extends EPackage
   int EPLAY__NAME = EBASE__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPLAY__PRIVILAGE_ESCALATION = EBASE__PRIVILAGE_ESCALATION;
+  int EPLAY__PRIVILEGE_ESCALATION = EBASE__PRIVILEGE_ESCALATION;
 
   /**
    * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
@@ -749,13 +749,13 @@ public interface AnsibleDslPackage extends EPackage
   int EPLAY__PLAY_EXE_SETTINGS = EBASE_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Error handling</b></em>' containment reference.
+   * The feature id for the '<em><b>Play error handling</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPLAY__ERROR_HANDLING = EBASE_FEATURE_COUNT + 1;
+  int EPLAY__PLAY_ERROR_HANDLING = EBASE_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Facts settings</b></em>' containment reference.
@@ -867,13 +867,13 @@ public interface AnsibleDslPackage extends EPackage
   int EBLOCK__NAME = EEXECUTION__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EBLOCK__PRIVILAGE_ESCALATION = EEXECUTION__PRIVILAGE_ESCALATION;
+  int EBLOCK__PRIVILEGE_ESCALATION = EEXECUTION__PRIVILEGE_ESCALATION;
 
   /**
    * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
@@ -984,13 +984,13 @@ public interface AnsibleDslPackage extends EPackage
   int EBLOCK__WHEN_EXPRESSION = EEXECUTION__WHEN_EXPRESSION;
 
   /**
-   * The feature id for the '<em><b>Error handling</b></em>' containment reference.
+   * The feature id for the '<em><b>Block error handling</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EBLOCK__ERROR_HANDLING = EEXECUTION_FEATURE_COUNT + 0;
+  int EBLOCK__BLOCK_ERROR_HANDLING = EEXECUTION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Tasks</b></em>' containment reference list.
@@ -1048,13 +1048,13 @@ public interface AnsibleDslPackage extends EPackage
   int ETASK__NAME = EBLOCK_TASK_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETASK__PRIVILAGE_ESCALATION = EBLOCK_TASK_FEATURE_COUNT + 1;
+  int ETASK__PRIVILEGE_ESCALATION = EBLOCK_TASK_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
@@ -1265,13 +1265,13 @@ public interface AnsibleDslPackage extends EPackage
   int EHANDLER__NAME = ETASK_HANDLER__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EHANDLER__PRIVILAGE_ESCALATION = ETASK_HANDLER__PRIVILAGE_ESCALATION;
+  int EHANDLER__PRIVILEGE_ESCALATION = ETASK_HANDLER__PRIVILEGE_ESCALATION;
 
   /**
    * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
@@ -1574,13 +1574,13 @@ public interface AnsibleDslPackage extends EPackage
   int EROLE_INCLUSION__NAME = EEXECUTION__NAME;
 
   /**
-   * The feature id for the '<em><b>Privilage escalation</b></em>' containment reference.
+   * The feature id for the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EROLE_INCLUSION__PRIVILAGE_ESCALATION = EEXECUTION__PRIVILAGE_ESCALATION;
+  int EROLE_INCLUSION__PRIVILEGE_ESCALATION = EEXECUTION__PRIVILEGE_ESCALATION;
 
   /**
    * The feature id for the '<em><b>Validation mode</b></em>' containment reference.
@@ -1894,14 +1894,14 @@ public interface AnsibleDslPackage extends EPackage
   int EUNTIL_FEATURE_COUNT = ELOOP_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPrivilageEscalationImpl <em>EPrivilage Escalation</em>}' class.
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPrivilegeEscalationImpl <em>EPrivilege Escalation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EPrivilageEscalationImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPrivilageEscalation()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EPrivilegeEscalationImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPrivilegeEscalation()
    * @generated
    */
-  int EPRIVILAGE_ESCALATION = 18;
+  int EPRIVILEGE_ESCALATION = 18;
 
   /**
    * The feature id for the '<em><b>Become</b></em>' containment reference.
@@ -1910,7 +1910,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPRIVILAGE_ESCALATION__BECOME = 0;
+  int EPRIVILEGE_ESCALATION__BECOME = 0;
 
   /**
    * The feature id for the '<em><b>Become exe</b></em>' containment reference.
@@ -1919,7 +1919,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPRIVILAGE_ESCALATION__BECOME_EXE = 1;
+  int EPRIVILEGE_ESCALATION__BECOME_EXE = 1;
 
   /**
    * The feature id for the '<em><b>Become flags</b></em>' containment reference.
@@ -1928,7 +1928,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPRIVILAGE_ESCALATION__BECOME_FLAGS = 2;
+  int EPRIVILEGE_ESCALATION__BECOME_FLAGS = 2;
 
   /**
    * The feature id for the '<em><b>Become method</b></em>' containment reference.
@@ -1937,7 +1937,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPRIVILAGE_ESCALATION__BECOME_METHOD = 3;
+  int EPRIVILEGE_ESCALATION__BECOME_METHOD = 3;
 
   /**
    * The feature id for the '<em><b>Become user</b></em>' containment reference.
@@ -1946,16 +1946,16 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPRIVILAGE_ESCALATION__BECOME_USER = 4;
+  int EPRIVILEGE_ESCALATION__BECOME_USER = 4;
 
   /**
-   * The number of structural features of the '<em>EPrivilage Escalation</em>' class.
+   * The number of structural features of the '<em>EPrivilege Escalation</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPRIVILAGE_ESCALATION_FEATURE_COUNT = 5;
+  int EPRIVILEGE_ESCALATION_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValidationModeImpl <em>EValidation Mode</em>}' class.
@@ -3935,15 +3935,15 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getEBase_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilage_escalation <em>Privilage escalation</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilege_escalation <em>Privilege escalation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Privilage escalation</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilage_escalation()
+   * @return the meta object for the containment reference '<em>Privilege escalation</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilege_escalation()
    * @see #getEBase()
    * @generated
    */
-  EReference getEBase_Privilage_escalation();
+  EReference getEBase_Privilege_escalation();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getValidation_mode <em>Validation mode</em>}'.
@@ -4217,15 +4217,15 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEPlay_Play_exe_settings();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getError_handling <em>Error handling</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_error_handling <em>Play error handling</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Error handling</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlay#getError_handling()
+   * @return the meta object for the containment reference '<em>Play error handling</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_error_handling()
    * @see #getEPlay()
    * @generated
    */
-  EReference getEPlay_Error_handling();
+  EReference getEPlay_Play_error_handling();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getFacts_settings <em>Facts settings</em>}'.
@@ -4337,15 +4337,15 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEBlock();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getError_handling <em>Error handling</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getBlock_error_handling <em>Block error handling</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Error handling</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBlock#getError_handling()
+   * @return the meta object for the containment reference '<em>Block error handling</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBlock#getBlock_error_handling()
    * @see #getEBlock()
    * @generated
    */
-  EReference getEBlock_Error_handling();
+  EReference getEBlock_Block_error_handling();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getTasks <em>Tasks</em>}'.
@@ -4668,69 +4668,69 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEUntil_Delay();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation <em>EPrivilage Escalation</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation <em>EPrivilege Escalation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EPrivilage Escalation</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation
+   * @return the meta object for class '<em>EPrivilege Escalation</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation
    * @generated
    */
-  EClass getEPrivilageEscalation();
+  EClass getEPrivilegeEscalation();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome <em>Become</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome <em>Become</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Become</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome()
-   * @see #getEPrivilageEscalation()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome()
+   * @see #getEPrivilegeEscalation()
    * @generated
    */
-  EReference getEPrivilageEscalation_Become();
+  EReference getEPrivilegeEscalation_Become();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_exe <em>Become exe</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_exe <em>Become exe</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Become exe</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_exe()
-   * @see #getEPrivilageEscalation()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_exe()
+   * @see #getEPrivilegeEscalation()
    * @generated
    */
-  EReference getEPrivilageEscalation_Become_exe();
+  EReference getEPrivilegeEscalation_Become_exe();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_flags <em>Become flags</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_flags <em>Become flags</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Become flags</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_flags()
-   * @see #getEPrivilageEscalation()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_flags()
+   * @see #getEPrivilegeEscalation()
    * @generated
    */
-  EReference getEPrivilageEscalation_Become_flags();
+  EReference getEPrivilegeEscalation_Become_flags();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_method <em>Become method</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_method <em>Become method</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Become method</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_method()
-   * @see #getEPrivilageEscalation()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_method()
+   * @see #getEPrivilegeEscalation()
    * @generated
    */
-  EReference getEPrivilageEscalation_Become_method();
+  EReference getEPrivilegeEscalation_Become_method();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_user <em>Become user</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_user <em>Become user</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Become user</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation#getBecome_user()
-   * @see #getEPrivilageEscalation()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation#getBecome_user()
+   * @see #getEPrivilegeEscalation()
    * @generated
    */
-  EReference getEPrivilageEscalation_Become_user();
+  EReference getEPrivilegeEscalation_Become_user();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValidationMode <em>EValidation Mode</em>}'.
@@ -6234,12 +6234,12 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute EBASE__NAME = eINSTANCE.getEBase_Name();
 
     /**
-     * The meta object literal for the '<em><b>Privilage escalation</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Privilege escalation</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EBASE__PRIVILAGE_ESCALATION = eINSTANCE.getEBase_Privilage_escalation();
+    EReference EBASE__PRIVILEGE_ESCALATION = eINSTANCE.getEBase_Privilege_escalation();
 
     /**
      * The meta object literal for the '<em><b>Validation mode</b></em>' containment reference feature.
@@ -6450,12 +6450,12 @@ public interface AnsibleDslPackage extends EPackage
     EReference EPLAY__PLAY_EXE_SETTINGS = eINSTANCE.getEPlay_Play_exe_settings();
 
     /**
-     * The meta object literal for the '<em><b>Error handling</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Play error handling</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPLAY__ERROR_HANDLING = eINSTANCE.getEPlay_Error_handling();
+    EReference EPLAY__PLAY_ERROR_HANDLING = eINSTANCE.getEPlay_Play_error_handling();
 
     /**
      * The meta object literal for the '<em><b>Facts settings</b></em>' containment reference feature.
@@ -6540,12 +6540,12 @@ public interface AnsibleDslPackage extends EPackage
     EClass EBLOCK = eINSTANCE.getEBlock();
 
     /**
-     * The meta object literal for the '<em><b>Error handling</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Block error handling</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EBLOCK__ERROR_HANDLING = eINSTANCE.getEBlock_Error_handling();
+    EReference EBLOCK__BLOCK_ERROR_HANDLING = eINSTANCE.getEBlock_Block_error_handling();
 
     /**
      * The meta object literal for the '<em><b>Tasks</b></em>' containment reference list feature.
@@ -6808,14 +6808,14 @@ public interface AnsibleDslPackage extends EPackage
     EReference EUNTIL__DELAY = eINSTANCE.getEUntil_Delay();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPrivilageEscalationImpl <em>EPrivilage Escalation</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPrivilegeEscalationImpl <em>EPrivilege Escalation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EPrivilageEscalationImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPrivilageEscalation()
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EPrivilegeEscalationImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPrivilegeEscalation()
      * @generated
      */
-    EClass EPRIVILAGE_ESCALATION = eINSTANCE.getEPrivilageEscalation();
+    EClass EPRIVILEGE_ESCALATION = eINSTANCE.getEPrivilegeEscalation();
 
     /**
      * The meta object literal for the '<em><b>Become</b></em>' containment reference feature.
@@ -6823,7 +6823,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPRIVILAGE_ESCALATION__BECOME = eINSTANCE.getEPrivilageEscalation_Become();
+    EReference EPRIVILEGE_ESCALATION__BECOME = eINSTANCE.getEPrivilegeEscalation_Become();
 
     /**
      * The meta object literal for the '<em><b>Become exe</b></em>' containment reference feature.
@@ -6831,7 +6831,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPRIVILAGE_ESCALATION__BECOME_EXE = eINSTANCE.getEPrivilageEscalation_Become_exe();
+    EReference EPRIVILEGE_ESCALATION__BECOME_EXE = eINSTANCE.getEPrivilegeEscalation_Become_exe();
 
     /**
      * The meta object literal for the '<em><b>Become flags</b></em>' containment reference feature.
@@ -6839,7 +6839,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPRIVILAGE_ESCALATION__BECOME_FLAGS = eINSTANCE.getEPrivilageEscalation_Become_flags();
+    EReference EPRIVILEGE_ESCALATION__BECOME_FLAGS = eINSTANCE.getEPrivilegeEscalation_Become_flags();
 
     /**
      * The meta object literal for the '<em><b>Become method</b></em>' containment reference feature.
@@ -6847,7 +6847,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPRIVILAGE_ESCALATION__BECOME_METHOD = eINSTANCE.getEPrivilageEscalation_Become_method();
+    EReference EPRIVILEGE_ESCALATION__BECOME_METHOD = eINSTANCE.getEPrivilegeEscalation_Become_method();
 
     /**
      * The meta object literal for the '<em><b>Become user</b></em>' containment reference feature.
@@ -6855,7 +6855,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPRIVILAGE_ESCALATION__BECOME_USER = eINSTANCE.getEPrivilageEscalation_Become_user();
+    EReference EPRIVILEGE_ESCALATION__BECOME_USER = eINSTANCE.getEPrivilegeEscalation_Become_user();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValidationModeImpl <em>EValidation Mode</em>}' class.

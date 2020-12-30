@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_exe_settings <em>Play exe settings</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getError_handling <em>Error handling</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_error_handling <em>Play error handling</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getFacts_settings <em>Facts settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getVars_files <em>Vars files</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getVars_prompt <em>Vars prompt</em>}</li>
@@ -56,26 +56,26 @@ public interface EPlay extends EBase
   void setPlay_exe_settings(EPlayExeSettings value);
 
   /**
-   * Returns the value of the '<em><b>Error handling</b></em>' containment reference.
+   * Returns the value of the '<em><b>Play error handling</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Error handling</em>' containment reference.
-   * @see #setError_handling(EPlayErrorHandling)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Error_handling()
+   * @return the value of the '<em>Play error handling</em>' containment reference.
+   * @see #setPlay_error_handling(EPlayErrorHandling)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Play_error_handling()
    * @model containment="true"
    * @generated
    */
-  EPlayErrorHandling getError_handling();
+  EPlayErrorHandling getPlay_error_handling();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getError_handling <em>Error handling</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_error_handling <em>Play error handling</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Error handling</em>' containment reference.
-   * @see #getError_handling()
+   * @param value the new value of the '<em>Play error handling</em>' containment reference.
+   * @see #getPlay_error_handling()
    * @generated
    */
-  void setError_handling(EPlayErrorHandling value);
+  void setPlay_error_handling(EPlayErrorHandling value);
 
   /**
    * Returns the value of the '<em><b>Facts settings</b></em>' containment reference.

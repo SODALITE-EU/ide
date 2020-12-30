@@ -10,6 +10,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
@@ -21,10 +22,12 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected AnsibleDslGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_EBlockErrorHandling_EPlayErrorHandling_ETaskHandlerErrorHandling___Block_error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Play_error_handlingKeyword_0_RightCurlyBracketKeyword_2__;
 	protected AbstractElementAlias match_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q;
 	protected AbstractElementAlias match_EBlock___RightCurlyBracketKeyword_1_15_2_TasksKeyword_1_15_0__q;
 	protected AbstractElementAlias match_EBlock___RightCurlyBracketKeyword_1_16_2_Rescue_tasksKeyword_1_16_0__q;
 	protected AbstractElementAlias match_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q;
+	protected AbstractElementAlias match_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_RightCurlyBracketKeyword_2___or___Play_exe_settingsKeyword_0_RightCurlyBracketKeyword_2__;
 	protected AbstractElementAlias match_EHandler_ListenKeyword_2_22_0_q;
 	protected AbstractElementAlias match_EHandler_NotifyKeyword_2_19_0_q;
 	protected AbstractElementAlias match_EHandler___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q;
@@ -40,10 +43,12 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (AnsibleDslGrammarAccess) access;
+		match_EBlockErrorHandling_EPlayErrorHandling_ETaskHandlerErrorHandling___Block_error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Play_error_handlingKeyword_0_RightCurlyBracketKeyword_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEBlockErrorHandlingAccess().getBlock_error_handlingKeyword_0()), new TokenAlias(false, false, grammarAccess.getEBlockErrorHandlingAccess().getRightCurlyBracketKeyword_2())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEPlayErrorHandlingAccess().getPlay_error_handlingKeyword_0()), new TokenAlias(false, false, grammarAccess.getEPlayErrorHandlingAccess().getRightCurlyBracketKeyword_2())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getETaskHandlerErrorHandlingAccess().getError_handlingKeyword_0()), new TokenAlias(false, false, grammarAccess.getETaskHandlerErrorHandlingAccess().getRightCurlyBracketKeyword_2())));
 		match_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_1_10_2()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getVarsKeyword_1_10_0()));
 		match_EBlock___RightCurlyBracketKeyword_1_15_2_TasksKeyword_1_15_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_1_15_2()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getTasksKeyword_1_15_0()));
 		match_EBlock___RightCurlyBracketKeyword_1_16_2_Rescue_tasksKeyword_1_16_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_1_16_2()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRescue_tasksKeyword_1_16_0()));
 		match_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRightCurlyBracketKeyword_1_17_2()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getAlways_tasksKeyword_1_17_0()));
+		match_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_RightCurlyBracketKeyword_2___or___Play_exe_settingsKeyword_0_RightCurlyBracketKeyword_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEExecutionExeSettingsAccess().getExe_settingsKeyword_0()), new TokenAlias(false, false, grammarAccess.getEExecutionExeSettingsAccess().getRightCurlyBracketKeyword_2())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEPlayExeSettingsAccess().getPlay_exe_settingsKeyword_0()), new TokenAlias(false, false, grammarAccess.getEPlayExeSettingsAccess().getRightCurlyBracketKeyword_2())));
 		match_EHandler_ListenKeyword_2_22_0_q = new TokenAlias(false, true, grammarAccess.getEHandlerAccess().getListenKeyword_2_22_0());
 		match_EHandler_NotifyKeyword_2_19_0_q = new TokenAlias(false, true, grammarAccess.getEHandlerAccess().getNotifyKeyword_2_19_0());
 		match_EHandler___RightCurlyBracketKeyword_2_10_2_VarsKeyword_2_10_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getRightCurlyBracketKeyword_2_10_2()), new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getVarsKeyword_2_10_0()));
@@ -69,7 +74,9 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q.equals(syntax))
+			if (match_EBlockErrorHandling_EPlayErrorHandling_ETaskHandlerErrorHandling___Block_error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Play_error_handlingKeyword_0_RightCurlyBracketKeyword_2__.equals(syntax))
+				emit_EBlockErrorHandling_EPlayErrorHandling_ETaskHandlerErrorHandling___Block_error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Play_error_handlingKeyword_0_RightCurlyBracketKeyword_2__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q.equals(syntax))
 				emit_EBlock___RightCurlyBracketKeyword_1_10_2_VarsKeyword_1_10_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EBlock___RightCurlyBracketKeyword_1_15_2_TasksKeyword_1_15_0__q.equals(syntax))
 				emit_EBlock___RightCurlyBracketKeyword_1_15_2_TasksKeyword_1_15_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
@@ -77,6 +84,8 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_EBlock___RightCurlyBracketKeyword_1_16_2_Rescue_tasksKeyword_1_16_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q.equals(syntax))
 				emit_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_RightCurlyBracketKeyword_2___or___Play_exe_settingsKeyword_0_RightCurlyBracketKeyword_2__.equals(syntax))
+				emit_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_RightCurlyBracketKeyword_2___or___Play_exe_settingsKeyword_0_RightCurlyBracketKeyword_2__(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EHandler_ListenKeyword_2_22_0_q.equals(syntax))
 				emit_EHandler_ListenKeyword_2_22_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EHandler_NotifyKeyword_2_19_0_q.equals(syntax))
@@ -103,6 +112,17 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     ('block_error_handling{' '}') | ('play_error_handling{' '}') | ('error_handling{' '}')
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
+	 */
+	protected void emit_EBlockErrorHandling_EPlayErrorHandling_ETaskHandlerErrorHandling___Block_error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Error_handlingKeyword_0_RightCurlyBracketKeyword_2___or___Play_error_handlingKeyword_0_RightCurlyBracketKeyword_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 	/**
 	 * Ambiguous syntax:
 	 *     ('}' 'vars{')?
@@ -144,6 +164,17 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     always_tasks+=ETask (ambiguity) always_tasks+=ETask
 	 */
 	protected void emit_EBlock___RightCurlyBracketKeyword_1_17_2_Always_tasksKeyword_1_17_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('play_exe_settings{' '}') | ('exe_settings{' '}')
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
+	 */
+	protected void emit_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_RightCurlyBracketKeyword_2___or___Play_exe_settingsKeyword_0_RightCurlyBracketKeyword_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

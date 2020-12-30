@@ -26,6 +26,175 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
  */
 class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
+	final String PRIVILEGE_ESCALATION_DESCRIPTION = 
+	"This is used for setting up the privilege escalation.\n\n" + 
+	"The attributes that can be set are:\n\n"+
+	"	- become\n"+
+	"	- become_exe\n"+
+	"	- become_flags\n"+
+	"	- become_method\n"+
+	"	- become_user"
+	
+	final String VALIDATION_MODE_DESCRIPTION =
+	"This is used for setting up the two modes of execution that validate tasks.\n\n"+
+	"The two modes, and the correspondent attributes that can be set, are:\n\n"+
+	"	- check_mode\n"+
+	"	- diff"
+	
+	final String CONNECTION_INFO_DESCRIPTION = 
+	"This is used for defining the settings of the connection.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- connection\n"+
+	"	- port\n"+
+	"	- remote_user"
+	
+	final String PLAY_EXE_SETTINGS_DESCRIPTION =
+	"This is used for controlling the execution of the play.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- strategy\n"+
+	"	- serial\n"+
+	"	- order\n"+
+	"	- throttle\n"+
+	"	- run_once"
+	
+	final String PLAY_ERROR_HANDLING_DESCRIPTION =
+	"This is used for setting up how to handle the errors in a play.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- max_fail_percentage\n"+
+	"	- any_errors_fatal\n"+
+	"	- ignore_errors\n"+
+	"	- ignore_unreachable"
+	
+	final String FACTS_SETTINGS_DESCRIPTION =
+	"This is used for setting up how the gathering of facts is handled.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- gather_facts\n"+
+	"	- gather_subset\n"+
+	"	- gather_timeout\n"+
+	"	- fact_path"
+	
+	final String EXECUTION_EXE_SETTINGS_DESCRIPTION =
+	"This is used for controlling the execution of the task/block/handler/role.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- throttle\n"+
+	"	- run_once"
+	
+	final String DELEGATION_DESCRIPTION =
+	"This is used for setting up the delegation settings.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- delegate_to\n"+
+	"	- delegate_facts"
+	
+	final String BLOCK_ERROR_HANDLING_DESCRIPTION =
+	"This is used for setting up how to handle the errors in a block.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- any_errors_fatal\n"+
+	"	- ignore_errors\n"+
+	"	- ignore_unreachable"
+	
+	final String TASK_HANDLER_ERROR_HANDLING_DESCRIPTION =
+	"This is used for setting up how to handle the errors in a task/handler.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- changed_when\n"+
+	"	- failed_when\n"+
+	"	- any_errors_fatal\n"+
+	"	- ignore_errors\n"+
+	"	- ignore_unreachable"
+	
+	final String ASYNCHRONOUS_SETTINGS_DESCRIPTION =
+	"This is used for setting up the asynchronous behavior of a task/handler.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- async\n"+
+	"	- poll"
+	
+	final String MODULE_CALL_DESCRIPTION =
+	"This is used for defining which is the module to be used in this task/handler.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- module_name: it's the identifier of the module to be used.\n"+
+	"	- direct_parameter: it's a value passed to the module without an explicit\n"+
+	"	   name of the parameter, like it's done for example with the shell module.\n"+
+	"	   This attribute isn't mandatory.\n"+
+	"	- parameters: it's just the keyword for defining the list of couples\n"+
+	"	   'identifier of the parameter'-'value passed to it'"
+	
+	final String LOOP_DESCRIPTION =
+	"This is used for defining a loop over the current task/handler.\n\n"+
+	"There are two types of loops and two correspondent attributes:\n\n"+
+	"	- loop_over: when the loop is done over a list of values.\n"+
+	"	   This attribute allows to specify which is the list.\n"+
+	"	   In this case the additional entity 'loop_control' can be used\n"+
+	"	   for specifying additional properties of the loop.\n"+
+	"	- until: when the operations are repeated until a condition is met.\n"+
+	"	   This attribute allows to specify the end condition to meet.\n"+
+	"	   Two additional attributes that can be set in this case are:\n"+
+	"	   	- retries\n"+
+	"	   	- delay\n"
+	
+	final String LOOP_CONTROL_DESCRIPTION =
+	"This is used for setting up how the loop over a list is done.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- label\n"+
+	"	- pause\n"+
+	"	- index_var\n"+
+	"	- loop_var\n"+
+	"	- extended"
+	
+	override void complete_EPrivilegeEscalation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("privilege_escalation{", "privilege_escalation{", context, PRIVILEGE_ESCALATION_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EValidationMode(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("validation_mode{", "validation_mode{", context, VALIDATION_MODE_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EConnection(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("connection_info{", "connection_info{", context, CONNECTION_INFO_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EPlayExeSettings(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("play_exe_settings{", "play_exe_settings{", context, PLAY_EXE_SETTINGS_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EPlayErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("play_error_handling{", "play_error_handling{", context, PLAY_ERROR_HANDLING_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EFactsSettings(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("facts_settings{", "facts_settings{", context, FACTS_SETTINGS_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EExecutionExeSettings(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("exe_settings{", "exe_settings{", context, EXECUTION_EXE_SETTINGS_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EDelegation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("delegation{", "delegation{", context, DELEGATION_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EBlockErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("block_error_handling{", "block_error_handling{", context, BLOCK_ERROR_HANDLING_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_ETaskHandlerErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("error_handling{", "error_handling{", context, TASK_HANDLER_ERROR_HANDLING_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EAsynchronousSettings(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("asynchronous_settings{", "asynchronous_settings{", context, ASYNCHRONOUS_SETTINGS_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EModuleCall(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("module_call{", "module_call{", context, MODULE_CALL_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_ELoop(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("loop{", "loop{", context, LOOP_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_ELoopControl(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("loop_control{", "loop_control{", context, LOOP_CONTROL_DESCRIPTION, acceptor)
+	}
+	
 	override void complete_BOOLEAN(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("False", context));
 		acceptor.accept(createCompletionProposal("True", context));

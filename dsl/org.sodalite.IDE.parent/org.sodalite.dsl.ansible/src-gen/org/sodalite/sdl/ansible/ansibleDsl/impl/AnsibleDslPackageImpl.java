@@ -65,7 +65,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
-import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
+import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
@@ -228,7 +228,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass ePrivilageEscalationEClass = null;
+  private EClass ePrivilegeEscalationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -775,7 +775,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEBase_Privilage_escalation()
+  public EReference getEBase_Privilege_escalation()
   {
     return (EReference)eBaseEClass.getEStructuralFeatures().get(1);
   }
@@ -1061,7 +1061,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Error_handling()
+  public EReference getEPlay_Play_error_handling()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(1);
   }
@@ -1182,7 +1182,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEBlock_Error_handling()
+  public EReference getEBlock_Block_error_handling()
   {
     return (EReference)eBlockEClass.getEStructuralFeatures().get(0);
   }
@@ -1523,9 +1523,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEPrivilageEscalation()
+  public EClass getEPrivilegeEscalation()
   {
-    return ePrivilageEscalationEClass;
+    return ePrivilegeEscalationEClass;
   }
 
   /**
@@ -1534,9 +1534,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPrivilageEscalation_Become()
+  public EReference getEPrivilegeEscalation_Become()
   {
-    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(0);
+    return (EReference)ePrivilegeEscalationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1545,9 +1545,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPrivilageEscalation_Become_exe()
+  public EReference getEPrivilegeEscalation_Become_exe()
   {
-    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(1);
+    return (EReference)ePrivilegeEscalationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1556,9 +1556,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPrivilageEscalation_Become_flags()
+  public EReference getEPrivilegeEscalation_Become_flags()
   {
-    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(2);
+    return (EReference)ePrivilegeEscalationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1567,9 +1567,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPrivilageEscalation_Become_method()
+  public EReference getEPrivilegeEscalation_Become_method()
   {
-    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(3);
+    return (EReference)ePrivilegeEscalationEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1578,9 +1578,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPrivilageEscalation_Become_user()
+  public EReference getEPrivilegeEscalation_Become_user()
   {
-    return (EReference)ePrivilageEscalationEClass.getEStructuralFeatures().get(4);
+    return (EReference)ePrivilegeEscalationEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -3087,7 +3087,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eBaseEClass = createEClass(EBASE);
     createEAttribute(eBaseEClass, EBASE__NAME);
-    createEReference(eBaseEClass, EBASE__PRIVILAGE_ESCALATION);
+    createEReference(eBaseEClass, EBASE__PRIVILEGE_ESCALATION);
     createEReference(eBaseEClass, EBASE__VALIDATION_MODE);
     createEReference(eBaseEClass, EBASE__CONNECTION);
     createEReference(eBaseEClass, EBASE__NO_LOG);
@@ -3117,7 +3117,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     ePlayEClass = createEClass(EPLAY);
     createEReference(ePlayEClass, EPLAY__PLAY_EXE_SETTINGS);
-    createEReference(ePlayEClass, EPLAY__ERROR_HANDLING);
+    createEReference(ePlayEClass, EPLAY__PLAY_ERROR_HANDLING);
     createEReference(ePlayEClass, EPLAY__FACTS_SETTINGS);
     createEReference(ePlayEClass, EPLAY__VARS_FILES);
     createEReference(ePlayEClass, EPLAY__VARS_PROMPT);
@@ -3129,7 +3129,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(ePlayEClass, EPLAY__HANDLERS);
 
     eBlockEClass = createEClass(EBLOCK);
-    createEReference(eBlockEClass, EBLOCK__ERROR_HANDLING);
+    createEReference(eBlockEClass, EBLOCK__BLOCK_ERROR_HANDLING);
     createEReference(eBlockEClass, EBLOCK__TASKS);
     createEReference(eBlockEClass, EBLOCK__RESCUE_TASKS);
     createEReference(eBlockEClass, EBLOCK__ALWAYS_TASKS);
@@ -3171,12 +3171,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eUntilEClass, EUNTIL__RETRIES);
     createEReference(eUntilEClass, EUNTIL__DELAY);
 
-    ePrivilageEscalationEClass = createEClass(EPRIVILAGE_ESCALATION);
-    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME);
-    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_EXE);
-    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_FLAGS);
-    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_METHOD);
-    createEReference(ePrivilageEscalationEClass, EPRIVILAGE_ESCALATION__BECOME_USER);
+    ePrivilegeEscalationEClass = createEClass(EPRIVILEGE_ESCALATION);
+    createEReference(ePrivilegeEscalationEClass, EPRIVILEGE_ESCALATION__BECOME);
+    createEReference(ePrivilegeEscalationEClass, EPRIVILEGE_ESCALATION__BECOME_EXE);
+    createEReference(ePrivilegeEscalationEClass, EPRIVILEGE_ESCALATION__BECOME_FLAGS);
+    createEReference(ePrivilegeEscalationEClass, EPRIVILEGE_ESCALATION__BECOME_METHOD);
+    createEReference(ePrivilegeEscalationEClass, EPRIVILEGE_ESCALATION__BECOME_USER);
 
     eValidationModeEClass = createEClass(EVALIDATION_MODE);
     createEReference(eValidationModeEClass, EVALIDATION_MODE__CHECK_MODE);
@@ -3457,7 +3457,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eBaseEClass, EBase.class, "EBase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEBase_Name(), ecorePackage.getEString(), "name", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Privilage_escalation(), this.getEPrivilageEscalation(), null, "privilage_escalation", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Privilege_escalation(), this.getEPrivilegeEscalation(), null, "privilege_escalation", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Validation_mode(), this.getEValidationMode(), null, "validation_mode", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Connection(), this.getEConnection(), null, "connection", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_No_log(), this.getEBooleanPassed(), null, "no_log", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3487,7 +3487,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(ePlayEClass, EPlay.class, "EPlay", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEPlay_Play_exe_settings(), this.getEPlayExeSettings(), null, "play_exe_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlay_Error_handling(), this.getEPlayErrorHandling(), null, "error_handling", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_Play_error_handling(), this.getEPlayErrorHandling(), null, "play_error_handling", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Facts_settings(), this.getEFactsSettings(), null, "facts_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Vars_files(), this.getEListPassed(), null, "vars_files", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Vars_prompt(), this.getEListPassed(), null, "vars_prompt", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3499,7 +3499,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEPlay_Handlers(), this.getEHandler(), null, "handlers", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBlockEClass, EBlock.class, "EBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEBlock_Error_handling(), this.getEBlockErrorHandling(), null, "error_handling", null, 0, 1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBlock_Block_error_handling(), this.getEBlockErrorHandling(), null, "block_error_handling", null, 0, 1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Tasks(), this.getETask(), null, "tasks", null, 0, -1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Rescue_tasks(), this.getETask(), null, "rescue_tasks", null, 0, -1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Always_tasks(), this.getETask(), null, "always_tasks", null, 0, -1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3541,12 +3541,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEUntil_Retries(), this.getENumberPassed(), null, "retries", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEUntil_Delay(), this.getENumberPassed(), null, "delay", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(ePrivilageEscalationEClass, EPrivilageEscalation.class, "EPrivilageEscalation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEPrivilageEscalation_Become(), this.getEBooleanPassed(), null, "become", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPrivilageEscalation_Become_exe(), this.getEJinjaExpressionAndString(), null, "become_exe", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPrivilageEscalation_Become_flags(), this.getEJinjaExpressionAndString(), null, "become_flags", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPrivilageEscalation_Become_method(), this.getEJinjaExpressionAndString(), null, "become_method", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPrivilageEscalation_Become_user(), this.getEJinjaExpressionAndString(), null, "become_user", null, 0, 1, EPrivilageEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(ePrivilegeEscalationEClass, EPrivilegeEscalation.class, "EPrivilegeEscalation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEPrivilegeEscalation_Become(), this.getEBooleanPassed(), null, "become", null, 0, 1, EPrivilegeEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPrivilegeEscalation_Become_exe(), this.getEJinjaExpressionAndString(), null, "become_exe", null, 0, 1, EPrivilegeEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPrivilegeEscalation_Become_flags(), this.getEJinjaExpressionAndString(), null, "become_flags", null, 0, 1, EPrivilegeEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPrivilegeEscalation_Become_method(), this.getEJinjaExpressionAndString(), null, "become_method", null, 0, 1, EPrivilegeEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPrivilegeEscalation_Become_user(), this.getEJinjaExpressionAndString(), null, "become_user", null, 0, 1, EPrivilegeEscalation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eValidationModeEClass, EValidationMode.class, "EValidationMode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEValidationMode_Check_mode(), this.getEBooleanPassed(), null, "check_mode", null, 0, 1, EValidationMode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

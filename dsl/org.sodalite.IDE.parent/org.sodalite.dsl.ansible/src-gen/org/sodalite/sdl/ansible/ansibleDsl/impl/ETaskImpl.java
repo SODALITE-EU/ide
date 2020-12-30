@@ -33,7 +33,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
-import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
+import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
@@ -50,7 +50,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getPrivilage_escalation <em>Privilage escalation</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getPrivilege_escalation <em>Privilege escalation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getValidation_mode <em>Validation mode</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getConnection <em>Connection</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getNo_log <em>No log</em>}</li>
@@ -98,14 +98,14 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getPrivilage_escalation() <em>Privilage escalation</em>}' containment reference.
+   * The cached value of the '{@link #getPrivilege_escalation() <em>Privilege escalation</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPrivilage_escalation()
+   * @see #getPrivilege_escalation()
    * @generated
    * @ordered
    */
-  protected EPrivilageEscalation privilage_escalation;
+  protected EPrivilegeEscalation privilege_escalation;
 
   /**
    * The cached value of the '{@link #getValidation_mode() <em>Validation mode</em>}' containment reference.
@@ -369,9 +369,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EPrivilageEscalation getPrivilage_escalation()
+  public EPrivilegeEscalation getPrivilege_escalation()
   {
-    return privilage_escalation;
+    return privilege_escalation;
   }
 
   /**
@@ -379,13 +379,13 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPrivilage_escalation(EPrivilageEscalation newPrivilage_escalation, NotificationChain msgs)
+  public NotificationChain basicSetPrivilege_escalation(EPrivilegeEscalation newPrivilege_escalation, NotificationChain msgs)
   {
-    EPrivilageEscalation oldPrivilage_escalation = privilage_escalation;
-    privilage_escalation = newPrivilage_escalation;
+    EPrivilegeEscalation oldPrivilege_escalation = privilege_escalation;
+    privilege_escalation = newPrivilege_escalation;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION, oldPrivilage_escalation, newPrivilage_escalation);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION, oldPrivilege_escalation, newPrivilege_escalation);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -397,20 +397,20 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setPrivilage_escalation(EPrivilageEscalation newPrivilage_escalation)
+  public void setPrivilege_escalation(EPrivilegeEscalation newPrivilege_escalation)
   {
-    if (newPrivilage_escalation != privilage_escalation)
+    if (newPrivilege_escalation != privilege_escalation)
     {
       NotificationChain msgs = null;
-      if (privilage_escalation != null)
-        msgs = ((InternalEObject)privilage_escalation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION, null, msgs);
-      if (newPrivilage_escalation != null)
-        msgs = ((InternalEObject)newPrivilage_escalation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION, null, msgs);
-      msgs = basicSetPrivilage_escalation(newPrivilage_escalation, msgs);
+      if (privilege_escalation != null)
+        msgs = ((InternalEObject)privilege_escalation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION, null, msgs);
+      if (newPrivilege_escalation != null)
+        msgs = ((InternalEObject)newPrivilege_escalation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION, null, msgs);
+      msgs = basicSetPrivilege_escalation(newPrivilege_escalation, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION, newPrivilage_escalation, newPrivilage_escalation));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION, newPrivilege_escalation, newPrivilege_escalation));
   }
 
   /**
@@ -1328,8 +1328,8 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        return basicSetPrivilage_escalation(null, msgs);
+      case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION:
+        return basicSetPrivilege_escalation(null, msgs);
       case AnsibleDslPackage.ETASK__VALIDATION_MODE:
         return basicSetValidation_mode(null, msgs);
       case AnsibleDslPackage.ETASK__CONNECTION:
@@ -1384,8 +1384,8 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       case AnsibleDslPackage.ETASK__NAME:
         return getName();
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        return getPrivilage_escalation();
+      case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION:
+        return getPrivilege_escalation();
       case AnsibleDslPackage.ETASK__VALIDATION_MODE:
         return getValidation_mode();
       case AnsibleDslPackage.ETASK__CONNECTION:
@@ -1444,8 +1444,8 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       case AnsibleDslPackage.ETASK__NAME:
         setName((String)newValue);
         return;
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        setPrivilage_escalation((EPrivilageEscalation)newValue);
+      case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION:
+        setPrivilege_escalation((EPrivilegeEscalation)newValue);
         return;
       case AnsibleDslPackage.ETASK__VALIDATION_MODE:
         setValidation_mode((EValidationMode)newValue);
@@ -1526,8 +1526,8 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       case AnsibleDslPackage.ETASK__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        setPrivilage_escalation((EPrivilageEscalation)null);
+      case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION:
+        setPrivilege_escalation((EPrivilegeEscalation)null);
         return;
       case AnsibleDslPackage.ETASK__VALIDATION_MODE:
         setValidation_mode((EValidationMode)null);
@@ -1605,8 +1605,8 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       case AnsibleDslPackage.ETASK__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION:
-        return privilage_escalation != null;
+      case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION:
+        return privilege_escalation != null;
       case AnsibleDslPackage.ETASK__VALIDATION_MODE:
         return validation_mode != null;
       case AnsibleDslPackage.ETASK__CONNECTION:
@@ -1664,7 +1664,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       switch (derivedFeatureID)
       {
         case AnsibleDslPackage.ETASK__NAME: return AnsibleDslPackage.EBASE__NAME;
-        case AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION: return AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION;
+        case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION: return AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION;
         case AnsibleDslPackage.ETASK__VALIDATION_MODE: return AnsibleDslPackage.EBASE__VALIDATION_MODE;
         case AnsibleDslPackage.ETASK__CONNECTION: return AnsibleDslPackage.EBASE__CONNECTION;
         case AnsibleDslPackage.ETASK__NO_LOG: return AnsibleDslPackage.EBASE__NO_LOG;
@@ -1718,7 +1718,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       switch (baseFeatureID)
       {
         case AnsibleDslPackage.EBASE__NAME: return AnsibleDslPackage.ETASK__NAME;
-        case AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION: return AnsibleDslPackage.ETASK__PRIVILAGE_ESCALATION;
+        case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION: return AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION;
         case AnsibleDslPackage.EBASE__VALIDATION_MODE: return AnsibleDslPackage.ETASK__VALIDATION_MODE;
         case AnsibleDslPackage.EBASE__CONNECTION: return AnsibleDslPackage.ETASK__CONNECTION;
         case AnsibleDslPackage.EBASE__NO_LOG: return AnsibleDslPackage.ETASK__NO_LOG;

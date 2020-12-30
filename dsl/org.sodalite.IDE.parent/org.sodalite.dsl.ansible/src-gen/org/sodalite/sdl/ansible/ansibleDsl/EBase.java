@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilage_escalation <em>Privilage escalation</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilege_escalation <em>Privilege escalation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getValidation_mode <em>Validation mode</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getConnection <em>Connection</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getNo_log <em>No log</em>}</li>
@@ -58,26 +58,26 @@ public interface EBase extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Privilage escalation</b></em>' containment reference.
+   * Returns the value of the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Privilage escalation</em>' containment reference.
-   * @see #setPrivilage_escalation(EPrivilageEscalation)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Privilage_escalation()
+   * @return the value of the '<em>Privilege escalation</em>' containment reference.
+   * @see #setPrivilege_escalation(EPrivilegeEscalation)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Privilege_escalation()
    * @model containment="true"
    * @generated
    */
-  EPrivilageEscalation getPrivilage_escalation();
+  EPrivilegeEscalation getPrivilege_escalation();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilage_escalation <em>Privilage escalation</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilege_escalation <em>Privilege escalation</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Privilage escalation</em>' containment reference.
-   * @see #getPrivilage_escalation()
+   * @param value the new value of the '<em>Privilege escalation</em>' containment reference.
+   * @see #getPrivilege_escalation()
    * @generated
    */
-  void setPrivilage_escalation(EPrivilageEscalation value);
+  void setPrivilege_escalation(EPrivilegeEscalation value);
 
   /**
    * Returns the value of the '<em><b>Validation mode</b></em>' containment reference.

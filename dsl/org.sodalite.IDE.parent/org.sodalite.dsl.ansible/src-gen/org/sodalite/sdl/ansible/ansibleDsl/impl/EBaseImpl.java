@@ -24,7 +24,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
-import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
+import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 
@@ -37,7 +37,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getPrivilage_escalation <em>Privilage escalation</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getPrivilege_escalation <em>Privilege escalation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getValidation_mode <em>Validation mode</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getConnection <em>Connection</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getNo_log <em>No log</em>}</li>
@@ -74,14 +74,14 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getPrivilage_escalation() <em>Privilage escalation</em>}' containment reference.
+   * The cached value of the '{@link #getPrivilege_escalation() <em>Privilege escalation</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPrivilage_escalation()
+   * @see #getPrivilege_escalation()
    * @generated
    * @ordered
    */
-  protected EPrivilageEscalation privilage_escalation;
+  protected EPrivilegeEscalation privilege_escalation;
 
   /**
    * The cached value of the '{@link #getValidation_mode() <em>Validation mode</em>}' containment reference.
@@ -235,9 +235,9 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    */
   @Override
-  public EPrivilageEscalation getPrivilage_escalation()
+  public EPrivilegeEscalation getPrivilege_escalation()
   {
-    return privilage_escalation;
+    return privilege_escalation;
   }
 
   /**
@@ -245,13 +245,13 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPrivilage_escalation(EPrivilageEscalation newPrivilage_escalation, NotificationChain msgs)
+  public NotificationChain basicSetPrivilege_escalation(EPrivilegeEscalation newPrivilege_escalation, NotificationChain msgs)
   {
-    EPrivilageEscalation oldPrivilage_escalation = privilage_escalation;
-    privilage_escalation = newPrivilage_escalation;
+    EPrivilegeEscalation oldPrivilege_escalation = privilege_escalation;
+    privilege_escalation = newPrivilege_escalation;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION, oldPrivilage_escalation, newPrivilage_escalation);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION, oldPrivilege_escalation, newPrivilege_escalation);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -263,20 +263,20 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    */
   @Override
-  public void setPrivilage_escalation(EPrivilageEscalation newPrivilage_escalation)
+  public void setPrivilege_escalation(EPrivilegeEscalation newPrivilege_escalation)
   {
-    if (newPrivilage_escalation != privilage_escalation)
+    if (newPrivilege_escalation != privilege_escalation)
     {
       NotificationChain msgs = null;
-      if (privilage_escalation != null)
-        msgs = ((InternalEObject)privilage_escalation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION, null, msgs);
-      if (newPrivilage_escalation != null)
-        msgs = ((InternalEObject)newPrivilage_escalation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION, null, msgs);
-      msgs = basicSetPrivilage_escalation(newPrivilage_escalation, msgs);
+      if (privilege_escalation != null)
+        msgs = ((InternalEObject)privilege_escalation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION, null, msgs);
+      if (newPrivilege_escalation != null)
+        msgs = ((InternalEObject)newPrivilege_escalation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION, null, msgs);
+      msgs = basicSetPrivilege_escalation(newPrivilege_escalation, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION, newPrivilage_escalation, newPrivilage_escalation));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION, newPrivilege_escalation, newPrivilege_escalation));
   }
 
   /**
@@ -679,8 +679,8 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION:
-        return basicSetPrivilage_escalation(null, msgs);
+      case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION:
+        return basicSetPrivilege_escalation(null, msgs);
       case AnsibleDslPackage.EBASE__VALIDATION_MODE:
         return basicSetValidation_mode(null, msgs);
       case AnsibleDslPackage.EBASE__CONNECTION:
@@ -713,8 +713,8 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
     {
       case AnsibleDslPackage.EBASE__NAME:
         return getName();
-      case AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION:
-        return getPrivilage_escalation();
+      case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION:
+        return getPrivilege_escalation();
       case AnsibleDslPackage.EBASE__VALIDATION_MODE:
         return getValidation_mode();
       case AnsibleDslPackage.EBASE__CONNECTION:
@@ -751,8 +751,8 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
       case AnsibleDslPackage.EBASE__NAME:
         setName((String)newValue);
         return;
-      case AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION:
-        setPrivilage_escalation((EPrivilageEscalation)newValue);
+      case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION:
+        setPrivilege_escalation((EPrivilegeEscalation)newValue);
         return;
       case AnsibleDslPackage.EBASE__VALIDATION_MODE:
         setValidation_mode((EValidationMode)newValue);
@@ -799,8 +799,8 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
       case AnsibleDslPackage.EBASE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION:
-        setPrivilage_escalation((EPrivilageEscalation)null);
+      case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION:
+        setPrivilege_escalation((EPrivilegeEscalation)null);
         return;
       case AnsibleDslPackage.EBASE__VALIDATION_MODE:
         setValidation_mode((EValidationMode)null);
@@ -845,8 +845,8 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
     {
       case AnsibleDslPackage.EBASE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AnsibleDslPackage.EBASE__PRIVILAGE_ESCALATION:
-        return privilage_escalation != null;
+      case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION:
+        return privilege_escalation != null;
       case AnsibleDslPackage.EBASE__VALIDATION_MODE:
         return validation_mode != null;
       case AnsibleDslPackage.EBASE__CONNECTION:

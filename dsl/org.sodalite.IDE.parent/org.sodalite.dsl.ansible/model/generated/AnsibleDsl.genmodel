@@ -15,7 +15,7 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBase">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBase/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/privilage_escalation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/privilege_escalation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/validation_mode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/connection"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/no_log"/>
@@ -44,7 +44,7 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EPlay">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/play_exe_settings"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/error_handling"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/play_error_handling"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/facts_settings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/vars_files"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/vars_prompt"/>
@@ -56,7 +56,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/handlers"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBlock">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/error_handling"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/block_error_handling"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/tasks"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/rescue_tasks"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/always_tasks"/>
@@ -95,12 +95,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EUntil/retries"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EUntil/delay"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EPrivilageEscalation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilageEscalation/become"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilageEscalation/become_exe"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilageEscalation/become_flags"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilageEscalation/become_method"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilageEscalation/become_user"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EPrivilegeEscalation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilegeEscalation/become"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilegeEscalation/become_exe"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilegeEscalation/become_flags"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilegeEscalation/become_method"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPrivilegeEscalation/become_user"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EValidationMode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EValidationMode/check_mode"/>

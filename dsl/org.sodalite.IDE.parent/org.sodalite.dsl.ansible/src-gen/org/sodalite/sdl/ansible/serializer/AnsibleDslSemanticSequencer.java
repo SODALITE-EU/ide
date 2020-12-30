@@ -55,7 +55,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
-import org.sodalite.sdl.ansible.ansibleDsl.EPrivilageEscalation;
+import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
@@ -207,8 +207,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EPLAYBOOK:
 				sequence_EPlaybook(context, (EPlaybook) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EPRIVILAGE_ESCALATION:
-				sequence_EPrivilageEscalation(context, (EPrivilageEscalation) semanticObject); 
+			case AnsibleDslPackage.EPRIVILEGE_ESCALATION:
+				sequence_EPrivilegeEscalation(context, (EPrivilegeEscalation) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EREGISTER_VARIABLE:
 				sequence_ERegisterVariable(context, (ERegisterVariable) semanticObject); 
@@ -307,7 +307,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 * Constraint:
 	 *     (
 	 *         name=STRING | 
-	 *         privilage_escalation=EPrivilageEscalation | 
+	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
@@ -324,7 +324,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         exe_settings=EExecutionExeSettings | 
 	 *         delegation=EDelegation | 
 	 *         when_expression=EJinjaExpressionEvaluationWithoutBrackets | 
-	 *         error_handling=EBlockErrorHandling | 
+	 *         block_error_handling=EBlockErrorHandling | 
 	 *         tasks+=ETask | 
 	 *         rescue_tasks+=ETask | 
 	 *         always_tasks+=ETask
@@ -483,7 +483,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 * Constraint:
 	 *     (
 	 *         name=STRING | 
-	 *         privilage_escalation=EPrivilageEscalation | 
+	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
@@ -899,7 +899,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 * Constraint:
 	 *     (
 	 *         name=STRING | 
-	 *         privilage_escalation=EPrivilageEscalation | 
+	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
@@ -914,7 +914,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         tags=EListPassed | 
 	 *         variable_declarations+=EVariableDeclaration | 
 	 *         play_exe_settings=EPlayExeSettings | 
-	 *         error_handling=EPlayErrorHandling | 
+	 *         play_error_handling=EPlayErrorHandling | 
 	 *         facts_settings=EFactsSettings | 
 	 *         vars_files=EListPassed | 
 	 *         vars_prompt=EListPassed | 
@@ -946,7 +946,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EPrivilageEscalation returns EPrivilageEscalation
+	 *     EPrivilegeEscalation returns EPrivilegeEscalation
 	 *
 	 * Constraint:
 	 *     (
@@ -957,7 +957,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         become_user=EJinjaExpressionAndString
 	 *     )+
 	 */
-	protected void sequence_EPrivilageEscalation(ISerializationContext context, EPrivilageEscalation semanticObject) {
+	protected void sequence_EPrivilegeEscalation(ISerializationContext context, EPrivilegeEscalation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1010,7 +1010,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (
 	 *         name=STRING 
 	 *         (
-	 *             privilage_escalation=EPrivilageEscalation | 
+	 *             privilege_escalation=EPrivilegeEscalation | 
 	 *             validation_mode=EValidationMode | 
 	 *             connection=EConnection | 
 	 *             no_log=EBooleanPassed | 
@@ -1136,7 +1136,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 * Constraint:
 	 *     (
 	 *         name=STRING | 
-	 *         privilage_escalation=EPrivilageEscalation | 
+	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 

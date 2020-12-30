@@ -95,8 +95,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«IF play.play_exe_settings !== null»
 			«compilePlayExeSettings(play.play_exe_settings, space)»
 		«ENDIF»
-		«IF play.error_handling !== null»
-			«compilePlayErrorHandling(play.error_handling, space)»
+		«IF play.play_error_handling !== null»
+			«compilePlayErrorHandling(play.play_error_handling, space)»
 		«ENDIF»
 		«IF play.facts_settings !== null»
 			«compileFactsSettings(play.facts_settings, space)»
@@ -157,21 +157,21 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileBaseAttributes(EBase base, String space) '''
-		«IF base.privilage_escalation !== null»
-			«IF base.privilage_escalation.become !== null»
-				«space»become: «base.privilage_escalation.become.compileBooleanPassed»
+		«IF base.privilege_escalation !== null»
+			«IF base.privilege_escalation.become !== null»
+				«space»become: «base.privilege_escalation.become.compileBooleanPassed»
 			«ENDIF»
-			«IF base.privilage_escalation.become_exe !== null»
-				«space»become_exe: «base.privilage_escalation.become_exe.compileJinjaExpressionAndString»
+			«IF base.privilege_escalation.become_exe !== null»
+				«space»become_exe: «base.privilege_escalation.become_exe.compileJinjaExpressionAndString»
 			«ENDIF»
-			«IF base.privilage_escalation.become_flags !== null»
-				«space»become_flags: «base.privilage_escalation.become_flags.compileJinjaExpressionAndString»
+			«IF base.privilege_escalation.become_flags !== null»
+				«space»become_flags: «base.privilege_escalation.become_flags.compileJinjaExpressionAndString»
 			«ENDIF»
-			«IF base.privilage_escalation.become_method !== null»
-				«space»become_method: «base.privilage_escalation.become_method.compileJinjaExpressionAndString»
+			«IF base.privilege_escalation.become_method !== null»
+				«space»become_method: «base.privilege_escalation.become_method.compileJinjaExpressionAndString»
 			«ENDIF»
-			«IF base.privilage_escalation.become_user !== null»
-				«space»become_user: «base.privilage_escalation.become_user.compileJinjaExpressionAndString»
+			«IF base.privilege_escalation.become_user !== null»
+				«space»become_user: «base.privilege_escalation.become_user.compileJinjaExpressionAndString»
 			«ENDIF»
 		«ENDIF»
 		«IF base.validation_mode !== null»
@@ -299,15 +299,15 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 		«compileBaseAttributes(block, space.concat('  '))»
 		«compileExecutionAttributes(block, space.concat('  '))»
-		«IF block.error_handling !== null»
-			«IF block.error_handling.any_errors_fatal !== null»
-				«space.concat('  ')»any_errors_fatal: «block.error_handling.any_errors_fatal.compileBooleanPassed»
+		«IF block.block_error_handling !== null»
+			«IF block.block_error_handling.any_errors_fatal !== null»
+				«space.concat('  ')»any_errors_fatal: «block.block_error_handling.any_errors_fatal.compileBooleanPassed»
 			«ENDIF»
-			«IF block.error_handling.ignore_errors !== null»
-				«space.concat('  ')»ignore_errors: «block.error_handling.ignore_errors.compileBooleanPassed»
+			«IF block.block_error_handling.ignore_errors !== null»
+				«space.concat('  ')»ignore_errors: «block.block_error_handling.ignore_errors.compileBooleanPassed»
 			«ENDIF»
-			«IF block.error_handling.ignore_unreachable !== null»
-				«space.concat('  ')»ignore_unreachable: «block.error_handling.ignore_unreachable.compileBooleanPassed»
+			«IF block.block_error_handling.ignore_unreachable !== null»
+				«space.concat('  ')»ignore_unreachable: «block.block_error_handling.ignore_unreachable.compileBooleanPassed»
 			«ENDIF»
 		«ENDIF»
 	'''
