@@ -20,14 +20,17 @@ import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl;
 import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl;
 import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EUsedByBody;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputOperationVariableReferenceImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedHandlerImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedTopicImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableReferenceImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EUsedByBodyImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl;
 import org.sodalite.sdl.ansible.scoping.AbstractAnsibleDslScopeProvider;
@@ -62,8 +65,8 @@ public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
         return Scopes.scopeFor(candidates_2);
       }
     }
-    if (((context instanceof EPlaybookImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EPLAYBOOK__OPERATION))) {
-      final ENodeType nodeType = ((EPlaybookImpl) context).getNode_type();
+    if (((context instanceof EUsedByBodyImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EUSED_BY_BODY__OPERATION))) {
+      final ENodeType nodeType = ((EUsedByBodyImpl) context).getNode_type();
       if ((nodeType != null)) {
         final List<EOperationDefinitionImpl> candidates_3 = EcoreUtil2.<EOperationDefinitionImpl>getAllContentsOfType(nodeType, EOperationDefinitionImpl.class);
         return Scopes.scopeFor(candidates_3);
@@ -71,24 +74,37 @@ public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
     }
     if (((context instanceof EInputOperationVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME))) {
       final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(context, EPlaybookImpl.class);
-      final EOperationDefinition operation = rootPlaybook.getOperation();
-      if ((operation != null)) {
-        final List<EParameterDefinitionImpl> candidates_4 = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
-        return Scopes.scopeFor(candidates_4);
+      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
+      if ((usedByBody != null)) {
+        final EOperationDefinition operation = usedByBody.getOperation();
+        if ((operation != null)) {
+          final List<EParameterDefinitionImpl> candidates_4 = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
+          return Scopes.scopeFor(candidates_4);
+        }
       }
     }
     if (((context instanceof EInputInterfaceVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME))) {
       final EPlaybookImpl rootPlaybook_1 = EcoreUtil2.<EPlaybookImpl>getContainerOfType(context, EPlaybookImpl.class);
       final ArrayList<EPropertyDefinition> candidates_5 = new ArrayList<EPropertyDefinition>();
-      final EOperationDefinition operation_1 = rootPlaybook_1.getOperation();
-      if ((operation_1 != null)) {
-        final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation_1, EInterfaceDefinitionBodyImpl.class);
-        final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
-        EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
-        for (final EPropertyDefinition input : _properties) {
-          candidates_5.add(input);
+      final EUsedByBody usedByBody_1 = rootPlaybook_1.getUsed_by();
+      if ((usedByBody_1 != null)) {
+        final EOperationDefinition operation_1 = usedByBody_1.getOperation();
+        if ((operation_1 != null)) {
+          final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation_1, EInterfaceDefinitionBodyImpl.class);
+          final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
+          EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
+          for (final EPropertyDefinition input : _properties) {
+            candidates_5.add(input);
+          }
+          return Scopes.scopeFor(candidates_5);
         }
-        return Scopes.scopeFor(candidates_5);
+      }
+    }
+    if (((context instanceof EHandlerImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EHANDLER__LISTEN_TO))) {
+      final EPlayImpl rootPlay_3 = EcoreUtil2.<EPlayImpl>getContainerOfType(context, EPlayImpl.class);
+      if ((rootPlay_3 != null)) {
+        final List<ENotifiedTopicImpl> candidates_6 = EcoreUtil2.<ENotifiedTopicImpl>getAllContentsOfType(rootPlay_3, ENotifiedTopicImpl.class);
+        return Scopes.scopeFor(candidates_6);
       }
     }
     return super.getScope(context, reference);

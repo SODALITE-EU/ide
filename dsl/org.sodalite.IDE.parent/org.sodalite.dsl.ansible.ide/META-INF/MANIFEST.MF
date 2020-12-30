@@ -12,4 +12,5 @@ Require-Bundle: org.sodalite.dsl.ansible,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.sodalite.sdl.ansible.ide.contentassist.antlr.internal,
- org.sodalite.sdl.ansible.ide.contentassist.antlr
+ org.sodalite.sdl.ansible.ide.contentassist.antlr,
+ org.sodalite.sdl.ansible.ide.contentassist.antlr.lexer

@@ -11,6 +11,6 @@ public class AnsibleDslAntlrTokenFileProvider implements IAntlrTokenFileProvider
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-		return classLoader.getResourceAsStream("org/sodalite/sdl/ansible/parser/antlr/internal/InternalAnsibleDsl.tokens");
+		return classLoader.getResourceAsStream("org/sodalite/sdl/ansible/parser/antlr/internal/InternalAnsibleDslParser.tokens");
 	}
 }

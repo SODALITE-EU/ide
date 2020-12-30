@@ -13,16 +13,22 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl;
+import org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl;
+import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl;
 import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.EUsedByBody;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedTopicImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EUsedByBodyImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ui.contentassist.AbstractAnsibleDslProposalProvider;
 
@@ -133,72 +139,72 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void complete_EPrivilegeEscalation(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("privilege_escalation{", "privilege_escalation{", context, this.PRIVILEGE_ESCALATION_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("privilege_escalation:", "privilege_escalation:", context, this.PRIVILEGE_ESCALATION_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EValidationMode(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("validation_mode{", "validation_mode{", context, this.VALIDATION_MODE_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("validation_mode:", "validation_mode:", context, this.VALIDATION_MODE_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EConnection(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("connection_info{", "connection_info{", context, this.CONNECTION_INFO_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("connection_info:", "connection_info:", context, this.CONNECTION_INFO_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EPlayExeSettings(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("play_exe_settings{", "play_exe_settings{", context, this.PLAY_EXE_SETTINGS_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("play_exe_settings:", "play_exe_settings:", context, this.PLAY_EXE_SETTINGS_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EPlayErrorHandling(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("play_error_handling{", "play_error_handling{", context, this.PLAY_ERROR_HANDLING_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("play_error_handling:", "play_error_handling:", context, this.PLAY_ERROR_HANDLING_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EFactsSettings(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("facts_settings{", "facts_settings{", context, this.FACTS_SETTINGS_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("facts_settings:", "facts_settings:", context, this.FACTS_SETTINGS_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EExecutionExeSettings(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("exe_settings{", "exe_settings{", context, this.EXECUTION_EXE_SETTINGS_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("exe_settings:", "exe_settings:", context, this.EXECUTION_EXE_SETTINGS_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EDelegation(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("delegation{", "delegation{", context, this.DELEGATION_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("delegation:", "delegation:", context, this.DELEGATION_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EBlockErrorHandling(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("block_error_handling{", "block_error_handling{", context, this.BLOCK_ERROR_HANDLING_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("block_error_handling:", "block_error_handling:", context, this.BLOCK_ERROR_HANDLING_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_ETaskHandlerErrorHandling(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("error_handling{", "error_handling{", context, this.TASK_HANDLER_ERROR_HANDLING_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("error_handling:", "error_handling:", context, this.TASK_HANDLER_ERROR_HANDLING_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EAsynchronousSettings(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("asynchronous_settings{", "asynchronous_settings{", context, this.ASYNCHRONOUS_SETTINGS_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("asynchronous_settings:", "asynchronous_settings:", context, this.ASYNCHRONOUS_SETTINGS_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EModuleCall(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("module_call{", "module_call{", context, this.MODULE_CALL_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("module_call:", "module_call:", context, this.MODULE_CALL_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_ELoop(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("loop{", "loop{", context, this.LOOP_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("loop:", "loop:", context, this.LOOP_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_ELoopControl(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("loop_control{", "loop_control{", context, this.LOOP_CONTROL_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("loop_control:", "loop_control:", context, this.LOOP_CONTROL_DESCRIPTION, acceptor);
   }
   
   @Override
@@ -262,18 +268,47 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
         acceptor.accept(this.createCompletionProposal("index_or_loop_var: ".concat(candidate_2.getName()), context));
       }
       final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
-      final EOperationDefinition operation = rootPlaybook.getOperation();
-      if ((operation != null)) {
-        final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
-        for (final EParameterDefinitionImpl candidate_3 : candidatesInputVariableOperation) {
-          acceptor.accept(this.createCompletionProposal("operation_input: ".concat("\"").concat(candidate_3.getName()).concat("\""), context));
+      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
+      if ((usedByBody != null)) {
+        final EOperationDefinition operation = usedByBody.getOperation();
+        if ((operation != null)) {
+          final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
+          for (final EParameterDefinitionImpl candidate_3 : candidatesInputVariableOperation) {
+            acceptor.accept(this.createCompletionProposal("operation_input: ".concat("\"").concat(candidate_3.getName()).concat("\""), context));
+          }
+          final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
+          final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
+          EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
+          for (final EPropertyDefinition input : _properties) {
+            acceptor.accept(this.createCompletionProposal("interface_input: ".concat("\"").concat(input.getName()).concat("\""), context));
+          }
         }
-        final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
-        final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
-        EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
-        for (final EPropertyDefinition input : _properties) {
-          acceptor.accept(this.createCompletionProposal("interface_input: ".concat("\"").concat(input.getName()).concat("\""), context));
+      }
+    }
+  }
+  
+  @Override
+  public void completeEUsedByBody_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EUsedByBodyImpl useByBody = EcoreUtil2.<EUsedByBodyImpl>getContainerOfType(model, EUsedByBodyImpl.class);
+    final ENodeType nodeType = useByBody.getNode_type();
+    if ((nodeType != null)) {
+      final List<EOperationDefinitionImpl> candidatesOperation = EcoreUtil2.<EOperationDefinitionImpl>getAllContentsOfType(nodeType, EOperationDefinitionImpl.class);
+      for (final EOperationDefinitionImpl candidate : candidatesOperation) {
+        {
+          final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(candidate, EInterfaceDefinitionImpl.class);
+          this.createNonEditableCompletionProposal("\"".concat(candidate.getName()).concat("\""), candidate.getName().concat(" - Interface: ").concat(interfaceDefinition.getName()), context, "One of the operations belonging to the selected node type.", acceptor);
         }
+      }
+    }
+  }
+  
+  @Override
+  public void completeEHandler_Listen_to(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
+    if ((rootPlay != null)) {
+      final List<ENotifiedTopicImpl> candidatesTopics = EcoreUtil2.<ENotifiedTopicImpl>getAllContentsOfType(rootPlay, ENotifiedTopicImpl.class);
+      for (final ENotifiedTopicImpl candidate : candidatesTopics) {
+        acceptor.accept(this.createCompletionProposal("\"".concat(candidate.getName()).concat("\""), context));
       }
     }
   }

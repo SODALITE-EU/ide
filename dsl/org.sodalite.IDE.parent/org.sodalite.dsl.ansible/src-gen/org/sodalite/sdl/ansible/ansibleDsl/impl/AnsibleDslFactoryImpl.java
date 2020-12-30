@@ -67,6 +67,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
     {
       case AnsibleDslPackage.MODEL: return createModel();
       case AnsibleDslPackage.EPLAYBOOK: return createEPlaybook();
+      case AnsibleDslPackage.EUSED_BY_BODY: return createEUsedByBody();
       case AnsibleDslPackage.EBASE: return createEBase();
       case AnsibleDslPackage.EEXECUTION: return createEExecution();
       case AnsibleDslPackage.EBLOCK_TASK: return createEBlockTask();
@@ -166,6 +167,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EPlaybookImpl ePlaybook = new EPlaybookImpl();
     return ePlaybook;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EUsedByBody createEUsedByBody()
+  {
+    EUsedByBodyImpl eUsedByBody = new EUsedByBodyImpl();
+    return eUsedByBody;
   }
 
   /**

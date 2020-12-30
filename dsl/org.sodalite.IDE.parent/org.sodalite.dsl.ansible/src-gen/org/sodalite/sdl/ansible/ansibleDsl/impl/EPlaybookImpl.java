@@ -18,12 +18,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.sodalite.dsl.rM.ENodeType;
-import org.sodalite.dsl.rM.EOperationDefinition;
-
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
+import org.sodalite.sdl.ansible.ansibleDsl.EUsedByBody;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,8 +32,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getNode_type <em>Node type</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getOperation <em>Operation</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getUsed_by <em>Used by</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl#getPlays <em>Plays</em>}</li>
  * </ul>
  *
@@ -64,24 +61,14 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getNode_type() <em>Node type</em>}' reference.
+   * The cached value of the '{@link #getUsed_by() <em>Used by</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNode_type()
+   * @see #getUsed_by()
    * @generated
    * @ordered
    */
-  protected ENodeType node_type;
-
-  /**
-   * The cached value of the '{@link #getOperation() <em>Operation</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOperation()
-   * @generated
-   * @ordered
-   */
-  protected EOperationDefinition operation;
+  protected EUsedByBody used_by;
 
   /**
    * The cached value of the '{@link #getPlays() <em>Plays</em>}' containment reference list.
@@ -145,19 +132,9 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
    * @generated
    */
   @Override
-  public ENodeType getNode_type()
+  public EUsedByBody getUsed_by()
   {
-    if (node_type != null && node_type.eIsProxy())
-    {
-      InternalEObject oldNode_type = (InternalEObject)node_type;
-      node_type = (ENodeType)eResolveProxy(oldNode_type);
-      if (node_type != oldNode_type)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EPLAYBOOK__NODE_TYPE, oldNode_type, node_type));
-      }
-    }
-    return node_type;
+    return used_by;
   }
 
   /**
@@ -165,54 +142,16 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
    * <!-- end-user-doc -->
    * @generated
    */
-  public ENodeType basicGetNode_type()
+  public NotificationChain basicSetUsed_by(EUsedByBody newUsed_by, NotificationChain msgs)
   {
-    return node_type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setNode_type(ENodeType newNode_type)
-  {
-    ENodeType oldNode_type = node_type;
-    node_type = newNode_type;
+    EUsedByBody oldUsed_by = used_by;
+    used_by = newUsed_by;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAYBOOK__NODE_TYPE, oldNode_type, node_type));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EOperationDefinition getOperation()
-  {
-    if (operation != null && operation.eIsProxy())
     {
-      InternalEObject oldOperation = (InternalEObject)operation;
-      operation = (EOperationDefinition)eResolveProxy(oldOperation);
-      if (operation != oldOperation)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EPLAYBOOK__OPERATION, oldOperation, operation));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAYBOOK__USED_BY, oldUsed_by, newUsed_by);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return operation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EOperationDefinition basicGetOperation()
-  {
-    return operation;
+    return msgs;
   }
 
   /**
@@ -221,12 +160,20 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
    * @generated
    */
   @Override
-  public void setOperation(EOperationDefinition newOperation)
+  public void setUsed_by(EUsedByBody newUsed_by)
   {
-    EOperationDefinition oldOperation = operation;
-    operation = newOperation;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAYBOOK__OPERATION, oldOperation, operation));
+    if (newUsed_by != used_by)
+    {
+      NotificationChain msgs = null;
+      if (used_by != null)
+        msgs = ((InternalEObject)used_by).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAYBOOK__USED_BY, null, msgs);
+      if (newUsed_by != null)
+        msgs = ((InternalEObject)newUsed_by).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAYBOOK__USED_BY, null, msgs);
+      msgs = basicSetUsed_by(newUsed_by, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAYBOOK__USED_BY, newUsed_by, newUsed_by));
   }
 
   /**
@@ -254,6 +201,8 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAYBOOK__USED_BY:
+        return basicSetUsed_by(null, msgs);
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         return ((InternalEList<?>)getPlays()).basicRemove(otherEnd, msgs);
     }
@@ -272,12 +221,8 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
     {
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         return getName();
-      case AnsibleDslPackage.EPLAYBOOK__NODE_TYPE:
-        if (resolve) return getNode_type();
-        return basicGetNode_type();
-      case AnsibleDslPackage.EPLAYBOOK__OPERATION:
-        if (resolve) return getOperation();
-        return basicGetOperation();
+      case AnsibleDslPackage.EPLAYBOOK__USED_BY:
+        return getUsed_by();
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         return getPlays();
     }
@@ -298,11 +243,8 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         setName((String)newValue);
         return;
-      case AnsibleDslPackage.EPLAYBOOK__NODE_TYPE:
-        setNode_type((ENodeType)newValue);
-        return;
-      case AnsibleDslPackage.EPLAYBOOK__OPERATION:
-        setOperation((EOperationDefinition)newValue);
+      case AnsibleDslPackage.EPLAYBOOK__USED_BY:
+        setUsed_by((EUsedByBody)newValue);
         return;
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         getPlays().clear();
@@ -325,11 +267,8 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AnsibleDslPackage.EPLAYBOOK__NODE_TYPE:
-        setNode_type((ENodeType)null);
-        return;
-      case AnsibleDslPackage.EPLAYBOOK__OPERATION:
-        setOperation((EOperationDefinition)null);
+      case AnsibleDslPackage.EPLAYBOOK__USED_BY:
+        setUsed_by((EUsedByBody)null);
         return;
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         getPlays().clear();
@@ -350,10 +289,8 @@ public class EPlaybookImpl extends ModelImpl implements EPlaybook
     {
       case AnsibleDslPackage.EPLAYBOOK__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AnsibleDslPackage.EPLAYBOOK__NODE_TYPE:
-        return node_type != null;
-      case AnsibleDslPackage.EPLAYBOOK__OPERATION:
-        return operation != null;
+      case AnsibleDslPackage.EPLAYBOOK__USED_BY:
+        return used_by != null;
       case AnsibleDslPackage.EPLAYBOOK__PLAYS:
         return plays != null && !plays.isEmpty();
     }

@@ -21,6 +21,8 @@ import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider;
+import org.eclipse.xtext.ide.editor.contentassist.IndentationAwareCompletionPrefixProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
@@ -71,7 +73,7 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.sodalite.sdl.ansible.ide.contentassist.antlr.AnsibleDslParser;
 import org.sodalite.sdl.ansible.ide.contentassist.antlr.PartialAnsibleDslContentAssistParser;
-import org.sodalite.sdl.ansible.ide.contentassist.antlr.internal.InternalAnsibleDslLexer;
+import org.sodalite.sdl.ansible.ide.contentassist.antlr.lexer.InternalAnsibleDslLexer;
 import org.sodalite.sdl.ansible.ui.contentassist.AnsibleDslProposalProvider;
 import org.sodalite.sdl.ansible.ui.labeling.AnsibleDslDescriptionLabelProvider;
 import org.sodalite.sdl.ansible.ui.labeling.AnsibleDslLabelProvider;
@@ -110,7 +112,7 @@ public abstract class AbstractAnsibleDslUiModule extends DefaultUiModule {
 	public void configureHighlightingLexer(Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
 			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
-			.to(org.sodalite.sdl.ansible.parser.antlr.internal.InternalAnsibleDslLexer.class);
+			.to(org.sodalite.sdl.ansible.parser.antlr.lexer.InternalAnsibleDslLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
@@ -133,6 +135,11 @@ public abstract class AbstractAnsibleDslUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
 		binder.bind(InternalAnsibleDslLexer.class).toProvider(LexerProvider.create(InternalAnsibleDslLexer.class));
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends CompletionPrefixProvider> bindCompletionPrefixProvider() {
+		return IndentationAwareCompletionPrefixProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2

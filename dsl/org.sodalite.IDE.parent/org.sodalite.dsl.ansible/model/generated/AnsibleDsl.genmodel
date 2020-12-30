@@ -9,9 +9,12 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//Model"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EPlaybook">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EPlaybook/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlaybook/node_type"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlaybook/operation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlaybook/used_by"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlaybook/plays"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EUsedByBody">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EUsedByBody/node_type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EUsedByBody/operation"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBase">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBase/name"/>

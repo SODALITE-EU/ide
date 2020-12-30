@@ -68,6 +68,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
+import org.sodalite.sdl.ansible.ansibleDsl.EUsedByBody;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference;
@@ -245,6 +246,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EUNTIL:
 				sequence_EUntil(context, (EUntil) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EUSED_BY_BODY:
+				sequence_EUsedByBody(context, (EUsedByBody) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EVALIDATION_MODE:
 				sequence_EValidationMode(context, (EValidationMode) semanticObject); 
@@ -937,7 +941,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EPlaybook returns EPlaybook
 	 *
 	 * Constraint:
-	 *     (name=STRING (node_type=[ENodeType|STRING] operation=[EOperationDefinition|STRING])? plays+=EPlay+)
+	 *     (name=STRING used_by=EUsedByBody? plays+=EPlay+)
 	 */
 	protected void sequence_EPlaybook(ISerializationContext context, EPlaybook semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1203,6 +1207,27 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 */
 	protected void sequence_EUntil(ISerializationContext context, EUntil semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EUsedByBody returns EUsedByBody
+	 *
+	 * Constraint:
+	 *     (node_type=[ENodeType|STRING] operation=[EOperationDefinition|STRING])
+	 */
+	protected void sequence_EUsedByBody(ISerializationContext context, EUsedByBody semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EUSED_BY_BODY__NODE_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EUSED_BY_BODY__NODE_TYPE));
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EUSED_BY_BODY__OPERATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EUSED_BY_BODY__OPERATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeSTRINGTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EUSED_BY_BODY__NODE_TYPE, false));
+		feeder.accept(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionSTRINGTerminalRuleCall_3_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EUSED_BY_BODY__OPERATION, false));
+		feeder.finish();
 	}
 	
 	

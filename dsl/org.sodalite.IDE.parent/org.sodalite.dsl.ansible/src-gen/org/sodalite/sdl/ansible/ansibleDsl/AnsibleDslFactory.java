@@ -42,6 +42,15 @@ public interface AnsibleDslFactory extends EFactory
   EPlaybook createEPlaybook();
 
   /**
+   * Returns a new object of class '<em>EUsed By Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EUsed By Body</em>'.
+   * @generated
+   */
+  EUsedByBody createEUsedByBody();
+
+  /**
    * Returns a new object of class '<em>EBase</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

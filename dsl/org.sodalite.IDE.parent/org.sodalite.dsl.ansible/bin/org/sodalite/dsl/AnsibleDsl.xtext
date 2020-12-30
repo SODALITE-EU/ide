@@ -8,18 +8,20 @@ Model:
 ;
 
 EPlaybook:
-	'playbook{'
-		'playbook_name:' name=STRING
-		('used_by{'
-			'node_type:' node_type=[rm::ENodeType|STRING]
-			'operation:' operation=[rm::EOperationDefinition|STRING]
-		'}')?
-		'plays{'
-			('play{'
-				plays+=EPlay
-			'}')+
-		'}'
-	'}'
+	'playbook_name:' name=STRING
+	('used_by:'
+	BEGIN
+		used_by=EUsedByBody
+	END)?
+	'plays:'
+	BEGIN
+		(plays+=EPlay+)
+	END
+;
+
+EUsedByBody:
+	'node_type:' node_type=[rm::ENodeType|STRING]
+	'operation:' operation=[rm::EOperationDefinition|STRING]
 ;
 
 EBase:
@@ -40,6 +42,8 @@ ETaskHandler:
 
 EPlay:
 	{EPlay}
+	'play:'
+	BEGIN
 	(
 		('play_name:' name=STRING)? &
 		(privilege_escalation=EPrivilegeEscalation)? &
@@ -51,33 +55,40 @@ EPlay:
 		('environment:' environment=EListPassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
-		('vars{'
+		('vars:'
+		BEGIN
 			(variable_declarations+=EVariableDeclaration)+
-		'}')? &
+		END)? &
 		(play_exe_settings=EPlayExeSettings)? &
 		(play_error_handling=EPlayErrorHandling)? &
 		(facts_settings=EFactsSettings)? &
 		('vars_files:' vars_files=EListPassed)? &
 		('vars_prompt:' vars_prompt=EListPassed)? &
 		('force_handlers:' force_handlers=EBooleanPassed)? &
-		('pre_tasks{'
+		('pre_tasks:'
+		BEGIN
 			(pre_tasks_list+=EBlockTask)+
-		'}')? &
+		END)? &
 		(roles_inclusions=ERoleInclusions)? &
-		('tasks_list{'
+		('tasks_list:'
+		BEGIN
 			(tasks_list+=EBlockTask)+
-		'}')? &
-		('post_tasks{'
+		END)? &
+		('post_tasks:'
+		BEGIN
 			(post_tasks_list+=EBlockTask)+
-		'}')? &
-		('handlers{'
+		END)? &
+		('handlers:'
+		BEGIN
 			(handlers+=EHandler)+
-		'}')?
+		END)?
 	)
+	END
 ;
 
 EBlock:
-	'block{'
+	'block:'
+	BEGIN
 	(
 		('block_name:' name=STRING)? &
 		(privilege_escalation=EPrivilegeEscalation)? &
@@ -89,29 +100,34 @@ EBlock:
 		('environment:' environment=EListPassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
-		('vars{'
+		('vars:'
+		BEGIN
 			(variable_declarations+=EVariableDeclaration)+
-		'}')? &
+		END)? &
 		(exe_settings=EExecutionExeSettings)? &
 		(delegation=EDelegation)? &
 		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
 		(block_error_handling=EBlockErrorHandling)? &
-		('tasks{'
+		('tasks:'
+		BEGIN
 			(tasks+=ETask)+
-		'}') &
-		('rescue_tasks{'
+		END) &
+		('rescue_tasks:'
+		BEGIN
 			(rescue_tasks+=ETask)+
-		'}')? &
-		('always_tasks{'
+		END)? &
+		('always_tasks:'
+		BEGIN
 			(always_tasks+=ETask)+
-		'}')?
+		END)?
 	)
-	'}'
+	END
 ;
 
 ETask:
 	{ETask}
-	'task{'
+	'task:'
+	BEGIN
 	(
 		('task_name:' name=STRING)? &
 		(privilege_escalation=EPrivilegeEscalation)? &
@@ -123,9 +139,10 @@ ETask:
 		('environment:' environment=EListPassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
-		('vars{'
+		('vars:'
+		BEGIN
 			(variable_declarations+=EVariableDeclaration)+
-		'}')? &
+		END)? &
 		(exe_settings=EExecutionExeSettings)? &
 		(delegation=EDelegation)? &
 		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
@@ -138,12 +155,13 @@ ETask:
 		(loop=ELoop)? &
 		(register=ERegisterVariable)?
 	)
-	'}'
+	END
 ;
 
 EHandler:
 	{EHandler}
-	'handler{'
+	'handler:'
+	BEGIN
 	(
 		('handler_name:' name=STRING)? &
 		(privilege_escalation=EPrivilegeEscalation)? &
@@ -155,9 +173,10 @@ EHandler:
 		('environment:' environment=EListPassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
-		('vars{'
+		('vars:'
+		BEGIN
 			(variable_declarations+=EVariableDeclaration)+
-		'}')? &
+		END)? &
 		(exe_settings=EExecutionExeSettings)? &
 		(delegation=EDelegation)? &
 		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
@@ -171,17 +190,21 @@ EHandler:
 		(register=ERegisterVariable)? &
 		('listen:' (listen_to+=[ENotifiedTopic|STRING])+)?
 	)
-	'}'
+	END
 ;
 
 EModuleCall:
-	'module_call{'
-	'module_name:' name=ID
-	('direct_parameter:' direct_parameter=EValuePassed)?
-	('parameters{'
-		(parameters+=EParameter)+
-	'}')?
-	'}'
+	'module_call:'
+	BEGIN
+	(
+		'module_name:' name=ID
+		('direct_parameter:' direct_parameter=EValuePassed)?
+		('parameters:'
+		BEGIN
+			(parameters+=EParameter)+
+		END)?
+	)
+	END
 ;
 
 EParameter:
@@ -189,38 +212,44 @@ EParameter:
 ;
 
 ERoleInclusion:
-	'role{'
-	'role_name:' name=STRING
+	'role:'
+	BEGIN
 	(
-		(privilege_escalation=EPrivilegeEscalation)? &
-		(validation_mode=EValidationMode)? &
-		(connection=EConnection)? &
-		('no_log:' no_log=EBooleanPassed)? &
-		('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))? &
-		('module_defaults:' module_defaults=EListPassed)? &
-		('environment:' environment=EListPassed)? &
-		('collections:' collections=EListPassed)? &
-		('tags:' tags=EListPassed)? &
-		('vars{'
-			(variable_declarations+=EVariableDeclaration)+
-		'}')? &
-		(exe_settings=EExecutionExeSettings)? &
-		(delegation=EDelegation)? &
-		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
+		'role_name:' name=STRING
+		(
+			(privilege_escalation=EPrivilegeEscalation)? &
+			(validation_mode=EValidationMode)? &
+			(connection=EConnection)? &
+			('no_log:' no_log=EBooleanPassed)? &
+			('debugger:' debugger= ('always' | 'never' | 'on_failed' | 'on_unreachable' | 'on_skipped'))? &
+			('module_defaults:' module_defaults=EListPassed)? &
+			('environment:' environment=EListPassed)? &
+			('collections:' collections=EListPassed)? &
+			('tags:' tags=EListPassed)? &
+			('vars:'
+			BEGIN
+				(variable_declarations+=EVariableDeclaration)+
+			END)? &
+			(exe_settings=EExecutionExeSettings)? &
+			(delegation=EDelegation)? &
+			('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
+		)
 	)
-	'}'
+	END
 ;
 
 ERoleInclusions:
-	'roles_inclusions{'
+	'roles_inclusions:'
+	BEGIN
 		(roles+=ERoleInclusion)+
-	'}'
+	END
 ;
 
 ELoop:
-	'loop{'
-	(ELoopOverList | EUntil)
-	'}'
+	'loop:'
+	BEGIN
+		(ELoopOverList | EUntil)
+	END
 ;
 
 ELoopOverList:
@@ -229,7 +258,8 @@ ELoopOverList:
 ;
 
 ELoopControl:
-	'loop_control{'
+	'loop_control:'
+	BEGIN
 	(
 		('label:' label=EValuePassed)? &
 		('pause:' pause=ENumberPassed)? & //number of seconds
@@ -237,7 +267,7 @@ ELoopControl:
 		('loop_var:' loop_var=EIndexOrLoopVariable)? &
 		('extended:' extended=EBooleanPassed)?
 	)
-	'}'
+	END
 ;
 
 EUntil:
@@ -249,7 +279,8 @@ EUntil:
 ;
 
 EPrivilegeEscalation:
-	'privilege_escalation{'
+	'privilege_escalation:'
+	BEGIN
 	(	
 		('become:' become=EBooleanPassed)? &
 		('become_exe:' become_exe=EJinjaExpressionAndString)? &
@@ -257,26 +288,28 @@ EPrivilegeEscalation:
 		('become_method:' become_method=EJinjaExpressionAndString)? &
 		('become_user:' become_user=EJinjaExpressionAndString)?
 	)
-	'}'
+	END
 ;
 
 EValidationMode:
-	'validation_mode{'
+	'validation_mode:'
+	BEGIN
 	(
 		('check_mode:' check_mode=EBooleanPassed)? &
 		('diff:' diff=EBooleanPassed)?
 	)
-	'}'
+	END
 ;
 
 EConnection:
-	'connection_info{'
+	'connection_info:'
+	BEGIN
 	(
 		('connection:' connection=EJinjaExpressionAndString)? &
 		('port:' port=ENumberPassed)? &
 		('remote_user:' remote_user=EJinjaExpressionAndString)?
 	)
-	'}'
+	END
 ;
 
 EExeSettings:
@@ -284,7 +317,8 @@ EExeSettings:
 ;
 
 EPlayExeSettings:
-	'play_exe_settings{'
+	'play_exe_settings:'
+	BEGIN
 	(
 		('strategy:' strategy=EJinjaExpressionAndString)? &
 		('serial:' serial_list=EListPassed)? &
@@ -292,16 +326,17 @@ EPlayExeSettings:
 		('throttle:' throttle=ENumberPassed)? &
 		('run_once:' run_once=EBooleanPassed)?
 	)
-	'}'
+	END
 ;
 
 EExecutionExeSettings:
-	'exe_settings{'
+	'exe_settings:'
+	BEGIN
 	(
 		('throttle:' throttle=ENumberPassed)? &
 		('run_once:' run_once=EBooleanPassed)?
 	)
-	'}'
+	END
 ;
 
 EErrorHandling:
@@ -309,28 +344,31 @@ EErrorHandling:
 ;
 
 EBlockErrorHandling:
-	'block_error_handling{'
+	'block_error_handling:'
+	BEGIN
 	(
 		('any_errors_fatal:' any_errors_fatal=EBooleanPassed)? &
 		('ignore_errors:' ignore_errors=EBooleanPassed)? &
 		('ignore_unreachable:' ignore_unreachable=EBooleanPassed)?
 	)
-	'}'
+	END
 ;
 
 EPlayErrorHandling:
-	'play_error_handling{'
+	'play_error_handling:'
+	BEGIN
 	(
 		('max_fail_percentage:' max_fail_percentage=ENumberPassed)? &
 		('any_errors_fatal:' any_errors_fatal=EBooleanPassed)? &
 		('ignore_errors:' ignore_errors=EBooleanPassed)? &
 		('ignore_unreachable:' ignore_unreachable=EBooleanPassed)?
 	)
-	'}'
+	END
 ;
 
 ETaskHandlerErrorHandling:
-	'error_handling{'
+	'error_handling:'
+	BEGIN
 	(
 		('changed_when:' changed_when=EJinjaExpressionEvaluationWithoutBrackets)? &
 		('failed_when:' failed_when=EJinjaExpressionEvaluationWithoutBrackets)? &
@@ -338,36 +376,39 @@ ETaskHandlerErrorHandling:
 		('ignore_errors:' ignore_errors=EBooleanPassed)? &
 		('ignore_unreachable:' ignore_unreachable=EBooleanPassed)?
 	)
-	'}'
+	END
 ;
 
 EFactsSettings:
-	'facts_settings{'
+	'facts_settings:'
+	BEGIN
 	(
 		('gather_facts:' gather_facts=EBooleanPassed)? &
 		('gather_subset:' gather_subset=EListPassed)? &
 		('gather_timeout:'gather_timeout=ENumberPassed)? &
 		('fact_path:' fact_path=EJinjaExpressionAndString)?
 	)
-	'}'
+	END
 ;
 
 EDelegation:
-	'delegation{'
+	'delegation:'
+	BEGIN
 	(
 		('delegate_to:' delegate_to=EJinjaExpressionAndString)? &
 		('delegate_facts:' delegate_facts=EBooleanPassed)?
 	)
-	'}'
+	END
 ;
 
 EAsynchronousSettings:
-	'asynchronous_settings{'
+	'asynchronous_settings:'
+	BEGIN
 	(
 		('async:' async=ENumberPassed)? &
 		('poll:' poll=ENumberPassed)?
 	)
-	'}'
+	END
 ;
 
 ENotifiable:
@@ -559,7 +600,9 @@ terminal NUMBER:
 	(('1'..'9')('0'..'9')* | '0') ('.'('0'..'9')+)?
 ;
 
-
+//Positional blocks delimited with indentation
+terminal BEGIN: 'synthetic:BEGIN';
+terminal END: 'synthetic:END';
 
 
 

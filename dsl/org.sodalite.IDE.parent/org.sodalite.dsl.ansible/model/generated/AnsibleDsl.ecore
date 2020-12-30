@@ -4,10 +4,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="Model"/>
   <eClassifiers xsi:type="ecore:EClass" name="EPlaybook" eSuperTypes="#//Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="node_type" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//ENodeType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EOperationDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="used_by" eType="#//EUsedByBody"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="plays" upperBound="-1"
         eType="#//EPlay" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EUsedByBody">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node_type" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//ENodeType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EOperationDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBase">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -46,7 +46,7 @@ import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.sodalite.sdl.ansible.generator.AnsibleDslGenerator;
 import org.sodalite.sdl.ansible.parser.antlr.AnsibleDslAntlrTokenFileProvider;
 import org.sodalite.sdl.ansible.parser.antlr.AnsibleDslParser;
-import org.sodalite.sdl.ansible.parser.antlr.internal.InternalAnsibleDslLexer;
+import org.sodalite.sdl.ansible.parser.antlr.lexer.InternalAnsibleDslLexer;
 import org.sodalite.sdl.ansible.scoping.AnsibleDslScopeProvider;
 import org.sodalite.sdl.ansible.serializer.AnsibleDslSemanticSequencer;
 import org.sodalite.sdl.ansible.serializer.AnsibleDslSyntacticSequencer;

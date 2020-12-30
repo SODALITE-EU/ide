@@ -5,9 +5,6 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.sodalite.dsl.rM.ENodeType;
-import org.sodalite.dsl.rM.EOperationDefinition;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>EPlaybook</b></em>'.
@@ -18,8 +15,7 @@ import org.sodalite.dsl.rM.EOperationDefinition;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getNode_type <em>Node type</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getOperation <em>Operation</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getUsed_by <em>Used by</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getPlays <em>Plays</em>}</li>
  * </ul>
  *
@@ -52,48 +48,26 @@ public interface EPlaybook extends Model
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Node type</b></em>' reference.
+   * Returns the value of the '<em><b>Used by</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Node type</em>' reference.
-   * @see #setNode_type(ENodeType)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlaybook_Node_type()
-   * @model
+   * @return the value of the '<em>Used by</em>' containment reference.
+   * @see #setUsed_by(EUsedByBody)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlaybook_Used_by()
+   * @model containment="true"
    * @generated
    */
-  ENodeType getNode_type();
+  EUsedByBody getUsed_by();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getNode_type <em>Node type</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getUsed_by <em>Used by</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Node type</em>' reference.
-   * @see #getNode_type()
+   * @param value the new value of the '<em>Used by</em>' containment reference.
+   * @see #getUsed_by()
    * @generated
    */
-  void setNode_type(ENodeType value);
-
-  /**
-   * Returns the value of the '<em><b>Operation</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Operation</em>' reference.
-   * @see #setOperation(EOperationDefinition)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlaybook_Operation()
-   * @model
-   * @generated
-   */
-  EOperationDefinition getOperation();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybook#getOperation <em>Operation</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Operation</em>' reference.
-   * @see #getOperation()
-   * @generated
-   */
-  void setOperation(EOperationDefinition value);
+  void setUsed_by(EUsedByBody value);
 
   /**
    * Returns the value of the '<em><b>Plays</b></em>' containment reference list.

@@ -79,6 +79,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
+import org.sodalite.sdl.ansible.ansibleDsl.EUsedByBody;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
@@ -110,6 +111,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass ePlaybookEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eUsedByBodyEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -720,7 +728,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlaybook_Node_type()
+  public EReference getEPlaybook_Used_by()
   {
     return (EReference)ePlaybookEClass.getEStructuralFeatures().get(1);
   }
@@ -731,7 +739,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlaybook_Operation()
+  public EReference getEPlaybook_Plays()
   {
     return (EReference)ePlaybookEClass.getEStructuralFeatures().get(2);
   }
@@ -742,9 +750,31 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlaybook_Plays()
+  public EClass getEUsedByBody()
   {
-    return (EReference)ePlaybookEClass.getEStructuralFeatures().get(3);
+    return eUsedByBodyEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEUsedByBody_Node_type()
+  {
+    return (EReference)eUsedByBodyEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEUsedByBody_Operation()
+  {
+    return (EReference)eUsedByBodyEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3081,9 +3111,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     ePlaybookEClass = createEClass(EPLAYBOOK);
     createEAttribute(ePlaybookEClass, EPLAYBOOK__NAME);
-    createEReference(ePlaybookEClass, EPLAYBOOK__NODE_TYPE);
-    createEReference(ePlaybookEClass, EPLAYBOOK__OPERATION);
+    createEReference(ePlaybookEClass, EPLAYBOOK__USED_BY);
     createEReference(ePlaybookEClass, EPLAYBOOK__PLAYS);
+
+    eUsedByBodyEClass = createEClass(EUSED_BY_BODY);
+    createEReference(eUsedByBodyEClass, EUSED_BY_BODY__NODE_TYPE);
+    createEReference(eUsedByBodyEClass, EUSED_BY_BODY__OPERATION);
 
     eBaseEClass = createEClass(EBASE);
     createEAttribute(eBaseEClass, EBASE__NAME);
@@ -3451,9 +3484,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(ePlaybookEClass, EPlaybook.class, "EPlaybook", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPlaybook_Name(), ecorePackage.getEString(), "name", null, 0, 1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlaybook_Node_type(), theRMPackage.getENodeType(), null, "node_type", null, 0, 1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlaybook_Operation(), theRMPackage.getEOperationDefinition(), null, "operation", null, 0, 1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlaybook_Used_by(), this.getEUsedByBody(), null, "used_by", null, 0, 1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlaybook_Plays(), this.getEPlay(), null, "plays", null, 0, -1, EPlaybook.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eUsedByBodyEClass, EUsedByBody.class, "EUsedByBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEUsedByBody_Node_type(), theRMPackage.getENodeType(), null, "node_type", null, 0, 1, EUsedByBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEUsedByBody_Operation(), theRMPackage.getEOperationDefinition(), null, "operation", null, 0, 1, EUsedByBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBaseEClass, EBase.class, "EBase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEBase_Name(), ecorePackage.getEString(), "name", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
