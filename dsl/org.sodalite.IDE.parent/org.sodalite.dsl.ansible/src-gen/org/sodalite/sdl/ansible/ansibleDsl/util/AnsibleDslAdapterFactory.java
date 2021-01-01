@@ -151,6 +151,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createERoleInclusionsAdapter();
       }
       @Override
+      public Adapter caseEPlaybookInclusion(EPlaybookInclusion object)
+      {
+        return createEPlaybookInclusionAdapter();
+      }
+      @Override
       public Adapter caseELoop(ELoop object)
       {
         return createELoopAdapter();
@@ -693,6 +698,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createERoleInclusionsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion <em>EPlaybook Inclusion</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion
+   * @generated
+   */
+  public Adapter createEPlaybookInclusionAdapter()
   {
     return null;
   }

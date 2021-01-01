@@ -46,6 +46,7 @@ EPlay:
 	BEGIN
 	(
 		('play_name:' name=STRING)? &
+		('hosts:' hosts=STRING)? &
 		(privilege_escalation=EPrivilegeEscalation)? &
 		(validation_mode=EValidationMode)? &
 		(connection=EConnection)? &
@@ -65,6 +66,7 @@ EPlay:
 		('vars_files:' vars_files=EListPassed)? &
 		('vars_prompt:' vars_prompt=EListPassed)? &
 		('force_handlers:' force_handlers=EBooleanPassed)? &
+		(playbook_inclusion=EPlaybookInclusion)? &
 		('pre_tasks:'
 		BEGIN
 			(pre_tasks_list+=EBlockTask)+
@@ -242,6 +244,16 @@ ERoleInclusions:
 	'roles_inclusions:'
 	BEGIN
 		(roles+=ERoleInclusion)+
+	END
+;
+
+EPlaybookInclusion:
+	'playbook_inclusion:'
+	BEGIN
+	(
+		('import_playbook:' playbook_file_name=STRING)&
+		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
+	)
 	END
 ;
 

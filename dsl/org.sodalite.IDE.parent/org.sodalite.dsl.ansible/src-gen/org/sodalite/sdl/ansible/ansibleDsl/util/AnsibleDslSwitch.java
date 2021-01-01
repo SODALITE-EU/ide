@@ -195,6 +195,13 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.EPLAYBOOK_INCLUSION:
+      {
+        EPlaybookInclusion ePlaybookInclusion = (EPlaybookInclusion)theEObject;
+        T result = caseEPlaybookInclusion(ePlaybookInclusion);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.ELOOP:
       {
         ELoop eLoop = (ELoop)theEObject;
@@ -908,6 +915,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseERoleInclusions(ERoleInclusions object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EPlaybook Inclusion</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EPlaybook Inclusion</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPlaybookInclusion(EPlaybookInclusion object)
   {
     return null;
   }

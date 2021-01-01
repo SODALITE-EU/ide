@@ -62,6 +62,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
+import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
@@ -124,12 +125,56 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         String _name_1 = play.getName();
         _builder.append(_name_1);
         _builder.newLineIfNotEmpty();
-        _builder.append(space);
-        _builder.append("hosts: all");
-        _builder.newLineIfNotEmpty();
+        {
+          String _hosts = play.getHosts();
+          boolean _tripleNotEquals_1 = (_hosts != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(space);
+            _builder.append("hosts: ");
+            String _hosts_1 = play.getHosts();
+            _builder.append(_hosts_1);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          EPlaybookInclusion _playbook_inclusion = play.getPlaybook_inclusion();
+          boolean _tripleNotEquals_2 = (_playbook_inclusion != null);
+          if (_tripleNotEquals_2) {
+            CharSequence _compilePlaybookInclusion = this.compilePlaybookInclusion(play.getPlaybook_inclusion(), space, false);
+            _builder.append(_compilePlaybookInclusion);
+            _builder.newLineIfNotEmpty();
+          }
+        }
       } else {
-        _builder.append("- hosts: all");
-        _builder.newLine();
+        {
+          String _hosts_2 = play.getHosts();
+          boolean _tripleNotEquals_3 = (_hosts_2 != null);
+          if (_tripleNotEquals_3) {
+            _builder.append("- hosts: ");
+            String _hosts_3 = play.getHosts();
+            _builder.append(_hosts_3);
+            _builder.newLineIfNotEmpty();
+            {
+              EPlaybookInclusion _playbook_inclusion_1 = play.getPlaybook_inclusion();
+              boolean _tripleNotEquals_4 = (_playbook_inclusion_1 != null);
+              if (_tripleNotEquals_4) {
+                CharSequence _compilePlaybookInclusion_1 = this.compilePlaybookInclusion(play.getPlaybook_inclusion(), space, false);
+                _builder.append(_compilePlaybookInclusion_1);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          } else {
+            {
+              EPlaybookInclusion _playbook_inclusion_2 = play.getPlaybook_inclusion();
+              boolean _tripleNotEquals_5 = (_playbook_inclusion_2 != null);
+              if (_tripleNotEquals_5) {
+                CharSequence _compilePlaybookInclusion_2 = this.compilePlaybookInclusion(play.getPlaybook_inclusion(), space, true);
+                _builder.append(_compilePlaybookInclusion_2);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
       }
     }
     CharSequence _compileBaseAttributes = this.compileBaseAttributes(play, space);
@@ -137,8 +182,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     {
       EPlayExeSettings _play_exe_settings = play.getPlay_exe_settings();
-      boolean _tripleNotEquals_1 = (_play_exe_settings != null);
-      if (_tripleNotEquals_1) {
+      boolean _tripleNotEquals_6 = (_play_exe_settings != null);
+      if (_tripleNotEquals_6) {
         CharSequence _compilePlayExeSettings = this.compilePlayExeSettings(play.getPlay_exe_settings(), space);
         _builder.append(_compilePlayExeSettings);
         _builder.newLineIfNotEmpty();
@@ -146,8 +191,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EPlayErrorHandling _play_error_handling = play.getPlay_error_handling();
-      boolean _tripleNotEquals_2 = (_play_error_handling != null);
-      if (_tripleNotEquals_2) {
+      boolean _tripleNotEquals_7 = (_play_error_handling != null);
+      if (_tripleNotEquals_7) {
         CharSequence _compilePlayErrorHandling = this.compilePlayErrorHandling(play.getPlay_error_handling(), space);
         _builder.append(_compilePlayErrorHandling);
         _builder.newLineIfNotEmpty();
@@ -155,8 +200,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EFactsSettings _facts_settings = play.getFacts_settings();
-      boolean _tripleNotEquals_3 = (_facts_settings != null);
-      if (_tripleNotEquals_3) {
+      boolean _tripleNotEquals_8 = (_facts_settings != null);
+      if (_tripleNotEquals_8) {
         CharSequence _compileFactsSettings = this.compileFactsSettings(play.getFacts_settings(), space);
         _builder.append(_compileFactsSettings);
         _builder.newLineIfNotEmpty();
@@ -164,8 +209,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EListPassed _vars_files = play.getVars_files();
-      boolean _tripleNotEquals_4 = (_vars_files != null);
-      if (_tripleNotEquals_4) {
+      boolean _tripleNotEquals_9 = (_vars_files != null);
+      if (_tripleNotEquals_9) {
         _builder.append(space);
         _builder.append("vars_files: ");
         Serializable _compileListPassed = this.compileListPassed(play.getVars_files());
@@ -175,8 +220,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EListPassed _vars_prompt = play.getVars_prompt();
-      boolean _tripleNotEquals_5 = (_vars_prompt != null);
-      if (_tripleNotEquals_5) {
+      boolean _tripleNotEquals_10 = (_vars_prompt != null);
+      if (_tripleNotEquals_10) {
         _builder.append(space);
         _builder.append("vars_prompt: ");
         Serializable _compileListPassed_1 = this.compileListPassed(play.getVars_prompt());
@@ -186,8 +231,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       EBooleanPassed _force_handlers = play.getForce_handlers();
-      boolean _tripleNotEquals_6 = (_force_handlers != null);
-      if (_tripleNotEquals_6) {
+      boolean _tripleNotEquals_11 = (_force_handlers != null);
+      if (_tripleNotEquals_11) {
         _builder.append(space);
         _builder.append("force_handlers: ");
         String _compileBooleanPassed = this.compileBooleanPassed(play.getForce_handlers());
@@ -197,8 +242,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       ERoleInclusions _roles_inclusions = play.getRoles_inclusions();
-      boolean _tripleNotEquals_7 = (_roles_inclusions != null);
-      if (_tripleNotEquals_7) {
+      boolean _tripleNotEquals_12 = (_roles_inclusions != null);
+      if (_tripleNotEquals_12) {
         _builder.append(space);
         _builder.append("roles:");
         _builder.newLineIfNotEmpty();
@@ -214,8 +259,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size = play.getPre_tasks_list().size();
-      boolean _tripleNotEquals_8 = (_size != 0);
-      if (_tripleNotEquals_8) {
+      boolean _tripleNotEquals_13 = (_size != 0);
+      if (_tripleNotEquals_13) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("pre_tasks:");
@@ -233,8 +278,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size_1 = play.getTasks_list().size();
-      boolean _tripleNotEquals_9 = (_size_1 != 0);
-      if (_tripleNotEquals_9) {
+      boolean _tripleNotEquals_14 = (_size_1 != 0);
+      if (_tripleNotEquals_14) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("tasks:");
@@ -252,8 +297,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size_2 = play.getPost_tasks_list().size();
-      boolean _tripleNotEquals_10 = (_size_2 != 0);
-      if (_tripleNotEquals_10) {
+      boolean _tripleNotEquals_15 = (_size_2 != 0);
+      if (_tripleNotEquals_15) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("post_tasks:");
@@ -271,8 +316,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
     {
       int _size_3 = play.getHandlers().size();
-      boolean _tripleNotEquals_11 = (_size_3 != 0);
-      if (_tripleNotEquals_11) {
+      boolean _tripleNotEquals_16 = (_size_3 != 0);
+      if (_tripleNotEquals_16) {
         _builder.newLine();
         _builder.append(space);
         _builder.append("handlers:");
@@ -283,6 +328,42 @@ public class AnsibleDslGenerator extends AbstractGenerator {
             _builder.newLine();
             CharSequence _compileTaskHandler = this.compileTaskHandler(handler, space.concat("  "));
             _builder.append(_compileTaskHandler);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compilePlaybookInclusion(final EPlaybookInclusion playbookInclusion, final String space, final boolean isFirstElementOfPlay) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((playbookInclusion != null)) {
+        {
+          if (((playbookInclusion.getPlaybook_file_name() != null) && (!isFirstElementOfPlay))) {
+            _builder.append(space);
+            _builder.append("import_playbook: ");
+            String _playbook_file_name = playbookInclusion.getPlaybook_file_name();
+            _builder.append(_playbook_file_name);
+            _builder.newLineIfNotEmpty();
+          } else {
+            if (((playbookInclusion.getPlaybook_file_name() != null) && isFirstElementOfPlay)) {
+              _builder.append("- import_playbook: ");
+              String _playbook_file_name_1 = playbookInclusion.getPlaybook_file_name();
+              _builder.append(_playbook_file_name_1);
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+        {
+          EJinjaExpressionEvaluationWithoutBrackets _when_expression = playbookInclusion.getWhen_expression();
+          boolean _tripleNotEquals = (_when_expression != null);
+          if (_tripleNotEquals) {
+            _builder.append(space);
+            _builder.append("when: ");
+            String _compileJinjaExpressionEvaluationWithoutBrackets = this.compileJinjaExpressionEvaluationWithoutBrackets(playbookInclusion.getWhen_expression());
+            _builder.append(_compileJinjaExpressionEvaluationWithoutBrackets);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -1531,7 +1612,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return stringToReturn;
   }
   
-  public Object compileJinjaExpressionOrString(final EJinjaExpressionOrString jinja) {
+  public String compileJinjaExpressionOrString(final EJinjaExpressionOrString jinja) {
     String _string = jinja.getString();
     boolean _tripleNotEquals = (_string != null);
     if (_tripleNotEquals) {
@@ -1545,7 +1626,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public String compileJinjaExpressionEvaluation(final EJinjaExpressionEvaluation jinja) {
-    return "{{ ".concat(this.compileJinjaExpressionEvaluationWithoutBrackets(jinja.getJinja_expression())).concat(" }}");
+    return "{{ ".concat(this.compileJinjaExpressionEvaluationWithoutBrackets(jinja.getJinja_expression()).toString()).concat(" }}");
   }
   
   public String compileValuePassedToJinjaExpression(final EValuePassedToJinjaExpression valuePassedToJinjaExpression) {

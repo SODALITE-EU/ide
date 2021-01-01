@@ -63,6 +63,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPlay" eSuperTypes="#//EBase">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hosts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="play_exe_settings" eType="#//EPlayExeSettings"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="play_error_handling" eType="#//EPlayErrorHandling"
@@ -74,6 +75,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="vars_prompt" eType="#//EListPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="force_handlers" eType="#//EBooleanPassed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="playbook_inclusion" eType="#//EPlaybookInclusion"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pre_tasks_list" upperBound="-1"
         eType="#//EBlockTask" containment="true"/>
@@ -117,6 +120,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusions">
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
         eType="#//ERoleInclusion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPlaybookInclusion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="playbook_file_name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ELoop"/>
   <eClassifiers xsi:type="ecore:EClass" name="ELoopOverList" eSuperTypes="#//ELoop">

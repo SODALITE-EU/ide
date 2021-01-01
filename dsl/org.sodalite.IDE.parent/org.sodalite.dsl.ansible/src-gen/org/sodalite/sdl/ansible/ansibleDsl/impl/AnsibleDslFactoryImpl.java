@@ -80,6 +80,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EPARAMETER: return createEParameter();
       case AnsibleDslPackage.EROLE_INCLUSION: return createERoleInclusion();
       case AnsibleDslPackage.EROLE_INCLUSIONS: return createERoleInclusions();
+      case AnsibleDslPackage.EPLAYBOOK_INCLUSION: return createEPlaybookInclusion();
       case AnsibleDslPackage.ELOOP: return createELoop();
       case AnsibleDslPackage.ELOOP_OVER_LIST: return createELoopOverList();
       case AnsibleDslPackage.ELOOP_CONTROL: return createELoopControl();
@@ -323,6 +324,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     ERoleInclusionsImpl eRoleInclusions = new ERoleInclusionsImpl();
     return eRoleInclusions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EPlaybookInclusion createEPlaybookInclusion()
+  {
+    EPlaybookInclusionImpl ePlaybookInclusion = new EPlaybookInclusionImpl();
+    return ePlaybookInclusion;
   }
 
   /**

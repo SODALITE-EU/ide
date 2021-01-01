@@ -25,6 +25,8 @@ Registered_variable : 'registered_variable:';
 
 Ignore_unreachable : 'ignore_unreachable:';
 
+Playbook_inclusion : 'playbook_inclusion:';
+
 Declared_variable : 'declared_variable:';
 
 Index_or_loop_var : 'index_or_loop_var:';
@@ -40,6 +42,8 @@ Roles_inclusions : 'roles_inclusions:';
 Special_variable : 'special_variable:';
 
 Connection_info : 'connection_info:';
+
+Import_playbook : 'import_playbook:';
 
 Interface_input : 'interface_input:';
 
@@ -184,6 +188,8 @@ Async : 'async:';
 Block : 'block:';
 
 Delay : 'delay:';
+
+Hosts : 'hosts:';
 
 Label : 'label:';
 

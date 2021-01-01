@@ -14,12 +14,14 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getHosts <em>Hosts</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_exe_settings <em>Play exe settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_error_handling <em>Play error handling</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getFacts_settings <em>Facts settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getVars_files <em>Vars files</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getVars_prompt <em>Vars prompt</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getForce_handlers <em>Force handlers</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlaybook_inclusion <em>Playbook inclusion</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPre_tasks_list <em>Pre tasks list</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles_inclusions <em>Roles inclusions</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getTasks_list <em>Tasks list</em>}</li>
@@ -33,6 +35,28 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface EPlay extends EBase
 {
+  /**
+   * Returns the value of the '<em><b>Hosts</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Hosts</em>' attribute.
+   * @see #setHosts(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Hosts()
+   * @model
+   * @generated
+   */
+  String getHosts();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getHosts <em>Hosts</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Hosts</em>' attribute.
+   * @see #getHosts()
+   * @generated
+   */
+  void setHosts(String value);
+
   /**
    * Returns the value of the '<em><b>Play exe settings</b></em>' containment reference.
    * <!-- begin-user-doc -->
@@ -164,6 +188,28 @@ public interface EPlay extends EBase
    * @generated
    */
   void setForce_handlers(EBooleanPassed value);
+
+  /**
+   * Returns the value of the '<em><b>Playbook inclusion</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Playbook inclusion</em>' containment reference.
+   * @see #setPlaybook_inclusion(EPlaybookInclusion)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Playbook_inclusion()
+   * @model containment="true"
+   * @generated
+   */
+  EPlaybookInclusion getPlaybook_inclusion();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlaybook_inclusion <em>Playbook inclusion</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Playbook inclusion</em>' containment reference.
+   * @see #getPlaybook_inclusion()
+   * @generated
+   */
+  void setPlaybook_inclusion(EPlaybookInclusion value);
 
   /**
    * Returns the value of the '<em><b>Pre tasks list</b></em>' containment reference list.

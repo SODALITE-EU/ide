@@ -65,6 +65,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
+import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
@@ -202,6 +203,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eRoleInclusionsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ePlaybookInclusionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1080,9 +1088,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Play_exe_settings()
+  public EAttribute getEPlay_Hosts()
   {
-    return (EReference)ePlayEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)ePlayEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1091,7 +1099,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Play_error_handling()
+  public EReference getEPlay_Play_exe_settings()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(1);
   }
@@ -1102,7 +1110,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Facts_settings()
+  public EReference getEPlay_Play_error_handling()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(2);
   }
@@ -1113,7 +1121,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Vars_files()
+  public EReference getEPlay_Facts_settings()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(3);
   }
@@ -1124,7 +1132,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Vars_prompt()
+  public EReference getEPlay_Vars_files()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(4);
   }
@@ -1135,7 +1143,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Force_handlers()
+  public EReference getEPlay_Vars_prompt()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(5);
   }
@@ -1146,7 +1154,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Pre_tasks_list()
+  public EReference getEPlay_Force_handlers()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(6);
   }
@@ -1157,7 +1165,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Roles_inclusions()
+  public EReference getEPlay_Playbook_inclusion()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(7);
   }
@@ -1168,7 +1176,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Tasks_list()
+  public EReference getEPlay_Pre_tasks_list()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(8);
   }
@@ -1179,7 +1187,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Post_tasks_list()
+  public EReference getEPlay_Roles_inclusions()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(9);
   }
@@ -1190,9 +1198,31 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Handlers()
+  public EReference getEPlay_Tasks_list()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(10);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPlay_Post_tasks_list()
+  {
+    return (EReference)ePlayEClass.getEStructuralFeatures().get(11);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPlay_Handlers()
+  {
+    return (EReference)ePlayEClass.getEStructuralFeatures().get(12);
   }
 
   /**
@@ -1391,6 +1421,39 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EReference getERoleInclusions_Roles()
   {
     return (EReference)eRoleInclusionsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEPlaybookInclusion()
+  {
+    return ePlaybookInclusionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEPlaybookInclusion_Playbook_file_name()
+  {
+    return (EAttribute)ePlaybookInclusionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPlaybookInclusion_When_expression()
+  {
+    return (EReference)ePlaybookInclusionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3149,12 +3212,14 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eTaskHandlerEClass, ETASK_HANDLER__REGISTER);
 
     ePlayEClass = createEClass(EPLAY);
+    createEAttribute(ePlayEClass, EPLAY__HOSTS);
     createEReference(ePlayEClass, EPLAY__PLAY_EXE_SETTINGS);
     createEReference(ePlayEClass, EPLAY__PLAY_ERROR_HANDLING);
     createEReference(ePlayEClass, EPLAY__FACTS_SETTINGS);
     createEReference(ePlayEClass, EPLAY__VARS_FILES);
     createEReference(ePlayEClass, EPLAY__VARS_PROMPT);
     createEReference(ePlayEClass, EPLAY__FORCE_HANDLERS);
+    createEReference(ePlayEClass, EPLAY__PLAYBOOK_INCLUSION);
     createEReference(ePlayEClass, EPLAY__PRE_TASKS_LIST);
     createEReference(ePlayEClass, EPLAY__ROLES_INCLUSIONS);
     createEReference(ePlayEClass, EPLAY__TASKS_LIST);
@@ -3185,6 +3250,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eRoleInclusionsEClass = createEClass(EROLE_INCLUSIONS);
     createEReference(eRoleInclusionsEClass, EROLE_INCLUSIONS__ROLES);
+
+    ePlaybookInclusionEClass = createEClass(EPLAYBOOK_INCLUSION);
+    createEAttribute(ePlaybookInclusionEClass, EPLAYBOOK_INCLUSION__PLAYBOOK_FILE_NAME);
+    createEReference(ePlaybookInclusionEClass, EPLAYBOOK_INCLUSION__WHEN_EXPRESSION);
 
     eLoopEClass = createEClass(ELOOP);
 
@@ -3522,12 +3591,14 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getETaskHandler_Register(), this.getERegisterVariable(), null, "register", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePlayEClass, EPlay.class, "EPlay", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEPlay_Hosts(), ecorePackage.getEString(), "hosts", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Play_exe_settings(), this.getEPlayExeSettings(), null, "play_exe_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Play_error_handling(), this.getEPlayErrorHandling(), null, "play_error_handling", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Facts_settings(), this.getEFactsSettings(), null, "facts_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Vars_files(), this.getEListPassed(), null, "vars_files", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Vars_prompt(), this.getEListPassed(), null, "vars_prompt", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Force_handlers(), this.getEBooleanPassed(), null, "force_handlers", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_Playbook_inclusion(), this.getEPlaybookInclusion(), null, "playbook_inclusion", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Pre_tasks_list(), this.getEBlockTask(), null, "pre_tasks_list", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Roles_inclusions(), this.getERoleInclusions(), null, "roles_inclusions", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Tasks_list(), this.getEBlockTask(), null, "tasks_list", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3558,6 +3629,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eRoleInclusionsEClass, ERoleInclusions.class, "ERoleInclusions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getERoleInclusions_Roles(), this.getERoleInclusion(), null, "roles", null, 0, -1, ERoleInclusions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(ePlaybookInclusionEClass, EPlaybookInclusion.class, "EPlaybookInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEPlaybookInclusion_Playbook_file_name(), ecorePackage.getEString(), "playbook_file_name", null, 0, 1, EPlaybookInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlaybookInclusion_When_expression(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "when_expression", null, 0, 1, EPlaybookInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eLoopEClass, ELoop.class, "ELoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -59,6 +59,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement
 import org.sodalite.sdl.ansible.ansibleDsl.EBase
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution
+import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion
 
 /**
  * Generates code from your model files on save.
@@ -87,9 +88,23 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compilePlay(EPlay play, String space) '''
 		«IF play.name !== null»
 			- name: «play.name»
-			«space»hosts: all
+			«IF play.hosts !== null»
+				«space»hosts: «play.hosts»
+			«ENDIF»
+			«IF play.playbook_inclusion !== null»
+				«compilePlaybookInclusion(play.playbook_inclusion, space, false)»
+			«ENDIF»
 		«ELSE»
-			- hosts: all
+			«IF play.hosts !== null»
+				- hosts: «play.hosts»
+				«IF play.playbook_inclusion !== null»
+					«compilePlaybookInclusion(play.playbook_inclusion, space, false)»
+				«ENDIF»
+			«ELSE»
+				«IF play.playbook_inclusion !== null»
+					«compilePlaybookInclusion(play.playbook_inclusion, space, true)»
+				«ENDIF»
+			«ENDIF»
 		«ENDIF»
 		«compileBaseAttributes(play, space)»
 		«IF play.play_exe_settings !== null»
@@ -147,6 +162,20 @@ class AnsibleDslGenerator extends AbstractGenerator {
 				
 				«compileTaskHandler(handler, space.concat('  '))»
 			«ENDFOR»
+		«ENDIF»
+	'''
+	
+	//isFirstElementOfPlay is true if both play.name and play.hosts are null, so if import_playbook needs the '- ' before it 
+	def compilePlaybookInclusion(EPlaybookInclusion playbookInclusion, String space, boolean isFirstElementOfPlay)'''
+		«IF playbookInclusion !== null»
+			«IF playbookInclusion.playbook_file_name !== null && !isFirstElementOfPlay»
+				«space»import_playbook: «playbookInclusion.playbook_file_name»
+			«ELSEIF playbookInclusion.playbook_file_name !== null && isFirstElementOfPlay»
+				- import_playbook: «playbookInclusion.playbook_file_name»
+			«ENDIF»			
+			«IF playbookInclusion.when_expression !== null»
+				«space»when: «playbookInclusion.when_expression.compileJinjaExpressionEvaluationWithoutBrackets»
+			«ENDIF»
 		«ENDIF»
 	'''
 	
@@ -631,7 +660,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileJinjaExpressionEvaluation(EJinjaExpressionEvaluation jinja){
-		return "{{ ".concat(jinja.jinja_expression.compileJinjaExpressionEvaluationWithoutBrackets).concat(" }}")
+		return "{{ ".concat(jinja.jinja_expression.compileJinjaExpressionEvaluationWithoutBrackets.toString()).concat(" }}")
 	}
 	
 	def compileValuePassedToJinjaExpression(EValuePassedToJinjaExpression valuePassedToJinjaExpression){

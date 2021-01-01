@@ -27,6 +27,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 
 /**
@@ -37,12 +38,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getHosts <em>Hosts</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPlay_exe_settings <em>Play exe settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPlay_error_handling <em>Play error handling</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getFacts_settings <em>Facts settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getVars_files <em>Vars files</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getVars_prompt <em>Vars prompt</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getForce_handlers <em>Force handlers</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPlaybook_inclusion <em>Playbook inclusion</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPre_tasks_list <em>Pre tasks list</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getRoles_inclusions <em>Roles inclusions</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getTasks_list <em>Tasks list</em>}</li>
@@ -54,6 +57,26 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
  */
 public class EPlayImpl extends EBaseImpl implements EPlay
 {
+  /**
+   * The default value of the '{@link #getHosts() <em>Hosts</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getHosts()
+   * @generated
+   * @ordered
+   */
+  protected static final String HOSTS_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getHosts() <em>Hosts</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getHosts()
+   * @generated
+   * @ordered
+   */
+  protected String hosts = HOSTS_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getPlay_exe_settings() <em>Play exe settings</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -113,6 +136,16 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @ordered
    */
   protected EBooleanPassed force_handlers;
+
+  /**
+   * The cached value of the '{@link #getPlaybook_inclusion() <em>Playbook inclusion</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPlaybook_inclusion()
+   * @generated
+   * @ordered
+   */
+  protected EPlaybookInclusion playbook_inclusion;
 
   /**
    * The cached value of the '{@link #getPre_tasks_list() <em>Pre tasks list</em>}' containment reference list.
@@ -183,6 +216,31 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.EPLAY;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getHosts()
+  {
+    return hosts;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setHosts(String newHosts)
+  {
+    String oldHosts = hosts;
+    hosts = newHosts;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__HOSTS, oldHosts, hosts));
   }
 
   /**
@@ -491,6 +549,56 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
+  public EPlaybookInclusion getPlaybook_inclusion()
+  {
+    return playbook_inclusion;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetPlaybook_inclusion(EPlaybookInclusion newPlaybook_inclusion, NotificationChain msgs)
+  {
+    EPlaybookInclusion oldPlaybook_inclusion = playbook_inclusion;
+    playbook_inclusion = newPlaybook_inclusion;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION, oldPlaybook_inclusion, newPlaybook_inclusion);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setPlaybook_inclusion(EPlaybookInclusion newPlaybook_inclusion)
+  {
+    if (newPlaybook_inclusion != playbook_inclusion)
+    {
+      NotificationChain msgs = null;
+      if (playbook_inclusion != null)
+        msgs = ((InternalEObject)playbook_inclusion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION, null, msgs);
+      if (newPlaybook_inclusion != null)
+        msgs = ((InternalEObject)newPlaybook_inclusion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION, null, msgs);
+      msgs = basicSetPlaybook_inclusion(newPlaybook_inclusion, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION, newPlaybook_inclusion, newPlaybook_inclusion));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<EBlockTask> getPre_tasks_list()
   {
     if (pre_tasks_list == null)
@@ -617,6 +725,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return basicSetVars_prompt(null, msgs);
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         return basicSetForce_handlers(null, msgs);
+      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
+        return basicSetPlaybook_inclusion(null, msgs);
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return ((InternalEList<?>)getPre_tasks_list()).basicRemove(otherEnd, msgs);
       case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
@@ -641,6 +751,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY__HOSTS:
+        return getHosts();
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         return getPlay_exe_settings();
       case AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING:
@@ -653,6 +765,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return getVars_prompt();
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         return getForce_handlers();
+      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
+        return getPlaybook_inclusion();
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return getPre_tasks_list();
       case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
@@ -678,6 +792,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY__HOSTS:
+        setHosts((String)newValue);
+        return;
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         setPlay_exe_settings((EPlayExeSettings)newValue);
         return;
@@ -695,6 +812,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return;
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         setForce_handlers((EBooleanPassed)newValue);
+        return;
+      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
+        setPlaybook_inclusion((EPlaybookInclusion)newValue);
         return;
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         getPre_tasks_list().clear();
@@ -729,6 +849,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY__HOSTS:
+        setHosts(HOSTS_EDEFAULT);
+        return;
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         setPlay_exe_settings((EPlayExeSettings)null);
         return;
@@ -746,6 +869,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return;
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         setForce_handlers((EBooleanPassed)null);
+        return;
+      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
+        setPlaybook_inclusion((EPlaybookInclusion)null);
         return;
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         getPre_tasks_list().clear();
@@ -776,6 +902,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY__HOSTS:
+        return HOSTS_EDEFAULT == null ? hosts != null : !HOSTS_EDEFAULT.equals(hosts);
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         return play_exe_settings != null;
       case AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING:
@@ -788,6 +916,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return vars_prompt != null;
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         return force_handlers != null;
+      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
+        return playbook_inclusion != null;
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return pre_tasks_list != null && !pre_tasks_list.isEmpty();
       case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
@@ -800,6 +930,23 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return handlers != null && !handlers.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (hosts: ");
+    result.append(hosts);
+    result.append(')');
+    return result.toString();
   }
 
 } //EPlayImpl

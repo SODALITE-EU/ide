@@ -55,6 +55,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
+import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
@@ -207,6 +208,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EPLAYBOOK:
 				sequence_EPlaybook(context, (EPlaybook) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EPLAYBOOK_INCLUSION:
+				sequence_EPlaybookInclusion(context, (EPlaybookInclusion) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EPRIVILEGE_ESCALATION:
 				sequence_EPrivilegeEscalation(context, (EPrivilegeEscalation) semanticObject); 
@@ -903,6 +907,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 * Constraint:
 	 *     (
 	 *         name=STRING | 
+	 *         hosts=STRING | 
 	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
@@ -923,6 +928,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         vars_files=EListPassed | 
 	 *         vars_prompt=EListPassed | 
 	 *         force_handlers=EBooleanPassed | 
+	 *         playbook_inclusion=EPlaybookInclusion | 
 	 *         pre_tasks_list+=EBlockTask | 
 	 *         roles_inclusions=ERoleInclusions | 
 	 *         tasks_list+=EBlockTask | 
@@ -931,6 +937,18 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     )*
 	 */
 	protected void sequence_EPlay(ISerializationContext context, EPlay semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EPlaybookInclusion returns EPlaybookInclusion
+	 *
+	 * Constraint:
+	 *     (playbook_file_name=STRING | when_expression=EJinjaExpressionEvaluationWithoutBrackets)+
+	 */
+	protected void sequence_EPlaybookInclusion(ISerializationContext context, EPlaybookInclusion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

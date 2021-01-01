@@ -137,6 +137,11 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     "\t- loop_var\n") + 
     "\t- extended");
   
+  private final String PLAYBOOK_INCLUSION_DESCRIPTION = ((("This is used for importing a playbook yaml file.\n\n" + 
+    "The attributes that can be set are:\n\n") + 
+    "\t- import_playbook\n") + 
+    "\t- when");
+  
   @Override
   public void complete_EPrivilegeEscalation(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("privilege_escalation:", "privilege_escalation:", context, this.PRIVILEGE_ESCALATION_DESCRIPTION, acceptor);
@@ -205,6 +210,11 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   @Override
   public void complete_ELoopControl(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("loop_control:", "loop_control:", context, this.LOOP_CONTROL_DESCRIPTION, acceptor);
+  }
+  
+  @Override
+  public void complete_EPlaybookInclusion(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.createNonEditableCompletionProposal("playbook_inclusion:", "playbook_inclusion:", context, this.PLAYBOOK_INCLUSION_DESCRIPTION, acceptor);
   }
   
   @Override

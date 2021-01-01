@@ -144,6 +144,12 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"	- loop_var\n"+
 	"	- extended"
 	
+	final String PLAYBOOK_INCLUSION_DESCRIPTION =
+	"This is used for importing a playbook yaml file.\n\n"+
+	"The attributes that can be set are:\n\n"+
+	"	- import_playbook\n"+
+	"	- when"
+	
 	override void complete_EPrivilegeEscalation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createNonEditableCompletionProposal("privilege_escalation:", "privilege_escalation:", context, PRIVILEGE_ESCALATION_DESCRIPTION, acceptor)
 	}
@@ -200,6 +206,10 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		createNonEditableCompletionProposal("loop_control:", "loop_control:", context, LOOP_CONTROL_DESCRIPTION, acceptor)
 	}
 	
+	override void complete_EPlaybookInclusion(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("playbook_inclusion:", "playbook_inclusion:", context, PLAYBOOK_INCLUSION_DESCRIPTION, acceptor)
+	}
+	
 	override void complete_BOOLEAN(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("False", context));
 		acceptor.accept(createCompletionProposal("True", context));
@@ -242,6 +252,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		}
 	}
 	
+	//suggest all the possible variables that can be referenced
 	override void complete_EVariableReference(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
 		if (rootPlay !== null){
