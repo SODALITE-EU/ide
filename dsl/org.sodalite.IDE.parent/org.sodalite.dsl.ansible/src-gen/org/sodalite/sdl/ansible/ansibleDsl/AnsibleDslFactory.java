@@ -618,6 +618,15 @@ public interface AnsibleDslFactory extends EFactory
   EInputInterfaceVariableReference createEInputInterfaceVariableReference();
 
   /**
+   * Returns a new object of class '<em>ESet Fact Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ESet Fact Variable Reference</em>'.
+   * @generated
+   */
+  ESetFactVariableReference createESetFactVariableReference();
+
+  /**
    * Returns a new object of class '<em>EVariable Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

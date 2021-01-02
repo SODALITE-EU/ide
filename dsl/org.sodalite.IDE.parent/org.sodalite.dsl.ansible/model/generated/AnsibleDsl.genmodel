@@ -260,6 +260,9 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//EInputInterfaceVariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EInputInterfaceVariableReference/name"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ESetFactVariableReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESetFactVariableReference/name"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableReference"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ESpecialVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESpecialVariable/name"/>

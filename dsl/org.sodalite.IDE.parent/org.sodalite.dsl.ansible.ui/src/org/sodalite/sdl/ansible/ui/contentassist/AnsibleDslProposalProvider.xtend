@@ -24,6 +24,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EUsedByBodyImpl
 import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl
 import org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedTopicImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl
+import java.util.ArrayList
+import org.sodalite.sdl.ansible.ansibleDsl.EParameter
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl
 
 /** 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -219,6 +223,10 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		acceptor.accept(createCompletionProposal("Null", context));
 	}
 	
+	override void complete_NUMBER(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createEditableCompletionProposal("0", "0", context, "A number", acceptor)
+	}
+	
 	//suggests variables declared only in this specific play
 	override void completeEVariableDeclarationVariableReference_Variable_declaration_variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
@@ -252,6 +260,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		}
 	}
 	
+	//TODO: use createNonEditableCompletionProposal function instead of acceptor.accept
 	//suggest all the possible variables that can be referenced
 	override void complete_EVariableReference(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
@@ -272,7 +281,22 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 				acceptor.accept(createCompletionProposal("index_or_loop_var: ".concat(candidate.name), context))
 			}
 			
+			//suggest variables set in a "set_fact" module in this specific playbook
 			val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+			val candidatesSetFactsVariables = EcoreUtil2.getAllContentsOfType(rootPlaybook, EParameterImpl)
+			//the parameters candidates should be only the ones set in a "set_fact" module
+			var legitCandidatesSetFactsVariables = new ArrayList<EParameter>
+			for (parameter: candidatesSetFactsVariables){
+				val moduleCall = EcoreUtil2.getContainerOfType(parameter, EModuleCallImpl)
+				if (moduleCall !== null){
+					if (moduleCall.name == "set_fact") legitCandidatesSetFactsVariables.add(parameter)
+				}
+			}
+			for (candidate: legitCandidatesSetFactsVariables){
+				acceptor.accept(createCompletionProposal("fact_set: ".concat(candidate.name), context))
+			}
+			
+			//the following piece of code is for variables given as input by the RM
 			val usedByBody = rootPlaybook.used_by
 			if (usedByBody !== null){
 				val operation = usedByBody.operation

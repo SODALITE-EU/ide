@@ -60,6 +60,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETailElement
 import org.sodalite.sdl.ansible.ansibleDsl.EBase
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion
+import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference
 
 /**
  * Generates code from your model files on save.
@@ -694,9 +695,13 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			return inputInterfaceVariableString
 		}
 		else if (valuePassedToJinjaExpression instanceof EIndexOrLoopVariableReference){
-			var indexOrLoopVariableString= ""
-			indexOrLoopVariableString = indexOrLoopVariableString.concat(indexOrLoopVariableString.concat(valuePassedToJinjaExpression.name.name))
+			var indexOrLoopVariableString = ""
+			indexOrLoopVariableString = indexOrLoopVariableString.concat(valuePassedToJinjaExpression.name.name)
 			return indexOrLoopVariableString
+		}
+		else if (valuePassedToJinjaExpression instanceof ESetFactVariableReference){
+			var setFactVariableReferenceString = ""
+			setFactVariableReferenceString = setFactVariableReferenceString.concat(valuePassedToJinjaExpression.name.name)
 		}
 		else if (valuePassedToJinjaExpression instanceof EFunctionCall){
 			return valuePassedToJinjaExpression.compileFunctionCall

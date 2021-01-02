@@ -61,6 +61,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
+import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
@@ -226,6 +227,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EROLE_INCLUSIONS:
 				sequence_ERoleInclusions(context, (ERoleInclusions) semanticObject); 
+				return; 
+			case AnsibleDslPackage.ESET_FACT_VARIABLE_REFERENCE:
+				sequence_ESetFactVariableReference(context, (ESetFactVariableReference) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ESIMPLE_VALUE:
 				sequence_ESimpleValue(context, (ESimpleValue) semanticObject); 
@@ -423,7 +427,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EDictionaryPassed returns EDictionary
 	 *
 	 * Constraint:
-	 *     (dictionary_pairs+=EDictionaryPair dictionary_pairs+=EDictionaryPair*)
+	 *     ((dictionary_pairs+=EDictionaryPair dictionary_pairs+=EDictionaryPair*) | dictionary_pairs+=EDictionaryPair+)
 	 */
 	protected void sequence_EDictionary(ISerializationContext context, EDictionary semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1066,6 +1070,26 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 */
 	protected void sequence_ERoleInclusions(ISerializationContext context, ERoleInclusions semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EValuePassedToJinjaExpression returns ESetFactVariableReference
+	 *     ESetFactVariableReference returns ESetFactVariableReference
+	 *     EVariableReference returns ESetFactVariableReference
+	 *
+	 * Constraint:
+	 *     name=[EParameter|ID]
+	 */
+	protected void sequence_ESetFactVariableReference(ISerializationContext context, ESetFactVariableReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.ESET_FACT_VARIABLE_REFERENCE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.ESET_FACT_VARIABLE_REFERENCE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getESetFactVariableReferenceAccess().getNameEParameterIDTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.ESET_FACT_VARIABLE_REFERENCE__NAME, false));
+		feeder.finish();
 	}
 	
 	

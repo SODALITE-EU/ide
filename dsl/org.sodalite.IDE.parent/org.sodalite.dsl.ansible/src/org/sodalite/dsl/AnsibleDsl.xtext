@@ -196,10 +196,9 @@ EHandler:
 ;
 
 EModuleCall:
-	'module_call:'
+	'module:' name=ID
 	BEGIN
 	(
-		'module_name:' name=ID
 		('direct_parameter:' direct_parameter=EValuePassed)?
 		('parameters:'
 		BEGIN
@@ -555,8 +554,12 @@ EInputInterfaceVariableReference:
 	'interface_input:' name=[rm::EPropertyDefinition|STRING]
 ;
 
+ESetFactVariableReference:
+	'fact_set:' name=[EParameter]
+;
+
 EVariableReference:
-	EVariableDeclarationVariableReference | ERegisterVariableReference | EInputOperationVariableReference | EInputInterfaceVariableReference | EIndexOrLoopVariableReference
+	EVariableDeclarationVariableReference | ERegisterVariableReference | EInputOperationVariableReference | EInputInterfaceVariableReference | EIndexOrLoopVariableReference | ESetFactVariableReference
 ;
 
 ESpecialVariable: //https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
@@ -569,7 +572,10 @@ ETailElement:
 ;
 
 EDictionary:
-	'{' dictionary_pairs+=EDictionaryPair (',' dictionary_pairs+=EDictionaryPair)* '}'
+	('{' dictionary_pairs+=EDictionaryPair (',' dictionary_pairs+=EDictionaryPair)* '}') |
+	BEGIN
+		(dictionary_pairs+=EDictionaryPair)+
+	END
 ;
 
 EDictionaryPair:

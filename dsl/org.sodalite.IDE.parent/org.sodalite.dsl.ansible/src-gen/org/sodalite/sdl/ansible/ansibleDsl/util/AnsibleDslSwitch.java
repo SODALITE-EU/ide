@@ -591,6 +591,15 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.ESET_FACT_VARIABLE_REFERENCE:
+      {
+        ESetFactVariableReference eSetFactVariableReference = (ESetFactVariableReference)theEObject;
+        T result = caseESetFactVariableReference(eSetFactVariableReference);
+        if (result == null) result = caseEVariableReference(eSetFactVariableReference);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eSetFactVariableReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.EVARIABLE_REFERENCE:
       {
         EVariableReference eVariableReference = (EVariableReference)theEObject;
@@ -1731,6 +1740,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEInputInterfaceVariableReference(EInputInterfaceVariableReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ESet Fact Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ESet Fact Variable Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseESetFactVariableReference(ESetFactVariableReference object)
   {
     return null;
   }

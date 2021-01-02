@@ -365,6 +365,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="EInputInterfaceVariableReference" eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPropertyDefinition"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ESetFactVariableReference" eSuperTypes="#//EVariableReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EParameter"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EVariableReference" eSuperTypes="#//EValuePassedToJinjaExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="ESpecialVariable" eSuperTypes="#//EValuePassedToJinjaExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

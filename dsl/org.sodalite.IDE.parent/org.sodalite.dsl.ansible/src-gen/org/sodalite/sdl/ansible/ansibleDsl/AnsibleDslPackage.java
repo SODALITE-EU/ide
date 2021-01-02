@@ -3435,7 +3435,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableReference()
    * @generated
    */
-  int EVARIABLE_REFERENCE = 66;
+  int EVARIABLE_REFERENCE = 67;
 
   /**
    * The number of structural features of the '<em>EVariable Reference</em>' class.
@@ -3680,6 +3680,34 @@ public interface AnsibleDslPackage extends EPackage
   int EINPUT_INTERFACE_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESetFactVariableReferenceImpl <em>ESet Fact Variable Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESetFactVariableReferenceImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESetFactVariableReference()
+   * @generated
+   */
+  int ESET_FACT_VARIABLE_REFERENCE = 66;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESET_FACT_VARIABLE_REFERENCE__NAME = EVARIABLE_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>ESet Fact Variable Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESET_FACT_VARIABLE_REFERENCE_FEATURE_COUNT = EVARIABLE_REFERENCE_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESpecialVariableImpl <em>ESpecial Variable</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3687,7 +3715,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESpecialVariable()
    * @generated
    */
-  int ESPECIAL_VARIABLE = 67;
+  int ESPECIAL_VARIABLE = 68;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3715,7 +3743,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETailElement()
    * @generated
    */
-  int ETAIL_ELEMENT = 68;
+  int ETAIL_ELEMENT = 69;
 
   /**
    * The feature id for the '<em><b>Function call</b></em>' containment reference.
@@ -3752,7 +3780,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 69;
+  int EDICTIONARY = 70;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -3780,7 +3808,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 70;
+  int EDICTIONARY_PAIR = 71;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3817,7 +3845,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 71;
+  int ELIST = 72;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -3845,7 +3873,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPassed()
    * @generated
    */
-  int EDICTIONARY_PASSED = 72;
+  int EDICTIONARY_PASSED = 73;
 
   /**
    * The number of structural features of the '<em>EDictionary Passed</em>' class.
@@ -3864,7 +3892,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListPassed()
    * @generated
    */
-  int ELIST_PASSED = 73;
+  int ELIST_PASSED = 74;
 
   /**
    * The number of structural features of the '<em>EList Passed</em>' class.
@@ -3883,7 +3911,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumberPassed()
    * @generated
    */
-  int ENUMBER_PASSED = 74;
+  int ENUMBER_PASSED = 75;
 
   /**
    * The feature id for the '<em><b>Number passed</b></em>' attribute.
@@ -3911,7 +3939,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanPassed()
    * @generated
    */
-  int EBOOLEAN_PASSED = 75;
+  int EBOOLEAN_PASSED = 76;
 
   /**
    * The feature id for the '<em><b>Boolean passed</b></em>' attribute.
@@ -6100,6 +6128,27 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEInputInterfaceVariableReference_Name();
 
   /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference <em>ESet Fact Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ESet Fact Variable Reference</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference
+   * @generated
+   */
+  EClass getESetFactVariableReference();
+
+  /**
+   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Name</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference#getName()
+   * @see #getESetFactVariableReference()
+   * @generated
+   */
+  EReference getESetFactVariableReference_Name();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableReference <em>EVariable Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -8076,6 +8125,24 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME = eINSTANCE.getEInputInterfaceVariableReference_Name();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESetFactVariableReferenceImpl <em>ESet Fact Variable Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESetFactVariableReferenceImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESetFactVariableReference()
+     * @generated
+     */
+    EClass ESET_FACT_VARIABLE_REFERENCE = eINSTANCE.getESetFactVariableReference();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ESET_FACT_VARIABLE_REFERENCE__NAME = eINSTANCE.getESetFactVariableReference_Name();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableReferenceImpl <em>EVariable Reference</em>}' class.

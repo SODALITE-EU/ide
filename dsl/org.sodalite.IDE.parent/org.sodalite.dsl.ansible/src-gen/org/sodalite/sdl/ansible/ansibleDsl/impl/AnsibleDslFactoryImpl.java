@@ -131,6 +131,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EREGISTER_VARIABLE: return createERegisterVariable();
       case AnsibleDslPackage.EINPUT_OPERATION_VARIABLE_REFERENCE: return createEInputOperationVariableReference();
       case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE: return createEInputInterfaceVariableReference();
+      case AnsibleDslPackage.ESET_FACT_VARIABLE_REFERENCE: return createESetFactVariableReference();
       case AnsibleDslPackage.EVARIABLE_REFERENCE: return createEVariableReference();
       case AnsibleDslPackage.ESPECIAL_VARIABLE: return createESpecialVariable();
       case AnsibleDslPackage.ETAIL_ELEMENT: return createETailElement();
@@ -936,6 +937,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EInputInterfaceVariableReferenceImpl eInputInterfaceVariableReference = new EInputInterfaceVariableReferenceImpl();
     return eInputInterfaceVariableReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ESetFactVariableReference createESetFactVariableReference()
+  {
+    ESetFactVariableReferenceImpl eSetFactVariableReference = new ESetFactVariableReferenceImpl();
+    return eSetFactVariableReference;
   }
 
   /**

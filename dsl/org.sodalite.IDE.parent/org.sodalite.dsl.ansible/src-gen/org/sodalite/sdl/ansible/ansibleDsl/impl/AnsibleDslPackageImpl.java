@@ -71,6 +71,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
+import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
@@ -560,6 +561,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eInputInterfaceVariableReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eSetFactVariableReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2936,6 +2944,28 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getESetFactVariableReference()
+  {
+    return eSetFactVariableReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getESetFactVariableReference_Name()
+  {
+    return (EReference)eSetFactVariableReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEVariableReference()
   {
     return eVariableReferenceEClass;
@@ -3439,6 +3469,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eInputInterfaceVariableReferenceEClass = createEClass(EINPUT_INTERFACE_VARIABLE_REFERENCE);
     createEReference(eInputInterfaceVariableReferenceEClass, EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME);
 
+    eSetFactVariableReferenceEClass = createEClass(ESET_FACT_VARIABLE_REFERENCE);
+    createEReference(eSetFactVariableReferenceEClass, ESET_FACT_VARIABLE_REFERENCE__NAME);
+
     eVariableReferenceEClass = createEClass(EVARIABLE_REFERENCE);
 
     eSpecialVariableEClass = createEClass(ESPECIAL_VARIABLE);
@@ -3541,6 +3574,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eIndexOrLoopVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
     eInputOperationVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
     eInputInterfaceVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
+    eSetFactVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
     eVariableReferenceEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eSpecialVariableEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eDictionaryEClass.getESuperTypes().add(this.getEComposedValue());
@@ -3817,6 +3851,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eInputInterfaceVariableReferenceEClass, EInputInterfaceVariableReference.class, "EInputInterfaceVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEInputInterfaceVariableReference_Name(), theRMPackage.getEPropertyDefinition(), null, "name", null, 0, 1, EInputInterfaceVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eSetFactVariableReferenceEClass, ESetFactVariableReference.class, "ESetFactVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getESetFactVariableReference_Name(), this.getEParameter(), null, "name", null, 0, 1, ESetFactVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eVariableReferenceEClass, EVariableReference.class, "EVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

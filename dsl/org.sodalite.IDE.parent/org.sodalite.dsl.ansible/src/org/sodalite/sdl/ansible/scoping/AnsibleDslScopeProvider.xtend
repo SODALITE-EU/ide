@@ -29,6 +29,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedHandlerImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EUsedByBodyImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedTopicImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ESetFactVariableReferenceImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl
+import org.sodalite.sdl.ansible.ansibleDsl.EParameter
 
 /** 
  * This class contains custom scoping description.
@@ -52,6 +56,23 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 			if (rootPlay !== null){
 				val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, ERegisterVariableImpl)
 				return Scopes.scopeFor(candidates)
+			}
+		}
+		
+		//scope for facts set, with the "set_facts" module, in this specific playbook
+		if (context instanceof ESetFactVariableReferenceImpl && reference == AnsibleDslPackage.Literals.ESET_FACT_VARIABLE_REFERENCE__NAME){
+			val rootPlaybook = EcoreUtil2.getContainerOfType(context, EPlaybookImpl)
+			if (rootPlaybook !== null){
+				val candidates = EcoreUtil2.getAllContentsOfType(rootPlaybook, EParameterImpl)
+				//the parameters candidates should be only the ones set in a "set_fact" module
+				var legitCandidates = new ArrayList<EParameter>
+				for (parameter: candidates){
+					val moduleCall = EcoreUtil2.getContainerOfType(parameter, EModuleCallImpl)
+					if (moduleCall !== null){
+						if (moduleCall.name == "set_fact") legitCandidates.add(parameter)
+					}
+				}
+				return Scopes.scopeFor(legitCandidates)
 			}
 		}
 		

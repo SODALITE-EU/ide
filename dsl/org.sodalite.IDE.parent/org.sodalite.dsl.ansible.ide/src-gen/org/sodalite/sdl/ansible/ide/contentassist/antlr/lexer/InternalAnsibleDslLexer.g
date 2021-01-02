@@ -99,10 +99,6 @@ Environment : 'environment:';
 
 Failed_when : 'failed_when:';
 
-Module_call : 'module_call:';
-
-Module_name : 'module_name:';
-
 Remote_user : 'remote_user:';
 
 Vars_prompt : 'vars_prompt:';
@@ -149,6 +145,8 @@ Debugger : 'debugger:';
 
 Extended : 'extended:';
 
+Fact_set : 'fact_set:';
+
 Handlers : 'handlers:';
 
 Loop_var : 'loop_var:';
@@ -174,6 +172,8 @@ Action : 'action:';
 Become : 'become:';
 
 Listen : 'listen:';
+
+Module : 'module:';
 
 No_log : 'no_log:';
 

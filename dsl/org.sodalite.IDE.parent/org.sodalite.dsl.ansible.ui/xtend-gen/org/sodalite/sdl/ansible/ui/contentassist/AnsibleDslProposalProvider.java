@@ -3,6 +3,8 @@
  */
 package org.sodalite.sdl.ansible.ui.contentassist;
 
+import com.google.common.base.Objects;
+import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -21,10 +23,13 @@ import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl;
 import org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl;
 import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl;
 import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
 import org.sodalite.sdl.ansible.ansibleDsl.EUsedByBody;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedTopicImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl;
@@ -229,6 +234,11 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
+  public void complete_NUMBER(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.createEditableCompletionProposal("0", "0", context, "A number", acceptor);
+  }
+  
+  @Override
   public void completeEVariableDeclarationVariableReference_Variable_declaration_variable_reference(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
     if ((rootPlay != null)) {
@@ -278,13 +288,30 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
         acceptor.accept(this.createCompletionProposal("index_or_loop_var: ".concat(candidate_2.getName()), context));
       }
       final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
+      final List<EParameterImpl> candidatesSetFactsVariables = EcoreUtil2.<EParameterImpl>getAllContentsOfType(rootPlaybook, EParameterImpl.class);
+      ArrayList<EParameter> legitCandidatesSetFactsVariables = new ArrayList<EParameter>();
+      for (final EParameterImpl parameter : candidatesSetFactsVariables) {
+        {
+          final EModuleCallImpl moduleCall = EcoreUtil2.<EModuleCallImpl>getContainerOfType(parameter, EModuleCallImpl.class);
+          if ((moduleCall != null)) {
+            String _name = moduleCall.getName();
+            boolean _equals = Objects.equal(_name, "set_fact");
+            if (_equals) {
+              legitCandidatesSetFactsVariables.add(parameter);
+            }
+          }
+        }
+      }
+      for (final EParameter candidate_3 : legitCandidatesSetFactsVariables) {
+        acceptor.accept(this.createCompletionProposal("fact_set: ".concat(candidate_3.getName()), context));
+      }
       final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
       if ((usedByBody != null)) {
         final EOperationDefinition operation = usedByBody.getOperation();
         if ((operation != null)) {
           final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
-          for (final EParameterDefinitionImpl candidate_3 : candidatesInputVariableOperation) {
-            acceptor.accept(this.createCompletionProposal("operation_input: ".concat("\"").concat(candidate_3.getName()).concat("\""), context));
+          for (final EParameterDefinitionImpl candidate_4 : candidatesInputVariableOperation) {
+            acceptor.accept(this.createCompletionProposal("operation_input: ".concat("\"").concat(candidate_4.getName()).concat("\""), context));
           }
           final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
           final EProperties inputsProperties = interfaceDefinitionBody.getInputs();

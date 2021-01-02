@@ -431,4 +431,33 @@
 			type="text">
 		</fileTypes>
 	</extension>
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<category id="org.sodalite.sdl.ansible.ui.category" name="AnsibleDsl">
+		</category>
+		<wizard
+			category="org.sodalite.sdl.ansible.ui.category"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
+			id="org.sodalite.sdl.ansible.ui.wizard.AnsibleDslNewProjectWizard"
+			name="AnsibleDsl Project"
+			icon="icons/new_AnsibleDsl_proj.gif"
+			project="true">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.projectTemplate">
+		<projectTemplateProvider
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.sodalite.sdl.ansible.ui.wizard.AnsibleDslProjectTemplateProvider"
+			grammarName="org.sodalite.sdl.ansible.AnsibleDsl">
+		</projectTemplateProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+			<newWizardShortcut id="org.sodalite.sdl.ansible.ui.wizard.AnsibleDslNewProjectWizard"/>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<newWizardShortcut id="org.sodalite.sdl.ansible.ui.wizard.AnsibleDslNewProjectWizard"/>
+		</perspectiveExtension>
+	</extension>
 </plugin>
