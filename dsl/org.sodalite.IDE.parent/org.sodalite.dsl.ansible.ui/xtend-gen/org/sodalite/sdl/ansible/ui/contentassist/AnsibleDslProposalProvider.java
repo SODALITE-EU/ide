@@ -9,6 +9,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.RuleCall;
@@ -149,77 +150,92 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void complete_EPrivilegeEscalation(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("privilege_escalation:", "privilege_escalation:", context, this.PRIVILEGE_ESCALATION_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("privilege_escalation:");
+    this.createNonEditableCompletionProposal("privilege_escalation:", _styledString, context, this.PRIVILEGE_ESCALATION_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EValidationMode(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("validation_mode:", "validation_mode:", context, this.VALIDATION_MODE_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("validation_mode:");
+    this.createNonEditableCompletionProposal("validation_mode:", _styledString, context, this.VALIDATION_MODE_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EConnection(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("connection_info:", "connection_info:", context, this.CONNECTION_INFO_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("connection_info:");
+    this.createNonEditableCompletionProposal("connection_info:", _styledString, context, this.CONNECTION_INFO_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EPlayExeSettings(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("play_exe_settings:", "play_exe_settings:", context, this.PLAY_EXE_SETTINGS_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("play_exe_settings:");
+    this.createNonEditableCompletionProposal("play_exe_settings:", _styledString, context, this.PLAY_EXE_SETTINGS_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EPlayErrorHandling(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("play_error_handling:", "play_error_handling:", context, this.PLAY_ERROR_HANDLING_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("play_error_handling:");
+    this.createNonEditableCompletionProposal("play_error_handling:", _styledString, context, this.PLAY_ERROR_HANDLING_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EFactsSettings(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("facts_settings:", "facts_settings:", context, this.FACTS_SETTINGS_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("facts_settings:");
+    this.createNonEditableCompletionProposal("facts_settings:", _styledString, context, this.FACTS_SETTINGS_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EExecutionExeSettings(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("exe_settings:", "exe_settings:", context, this.EXECUTION_EXE_SETTINGS_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("exe_settings:");
+    this.createNonEditableCompletionProposal("exe_settings:", _styledString, context, this.EXECUTION_EXE_SETTINGS_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EDelegation(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("delegation:", "delegation:", context, this.DELEGATION_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("delegation:");
+    this.createNonEditableCompletionProposal("delegation:", _styledString, context, this.DELEGATION_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EBlockErrorHandling(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("block_error_handling:", "block_error_handling:", context, this.BLOCK_ERROR_HANDLING_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("block_error_handling:");
+    this.createNonEditableCompletionProposal("block_error_handling:", _styledString, context, this.BLOCK_ERROR_HANDLING_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_ETaskHandlerErrorHandling(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("error_handling:", "error_handling:", context, this.TASK_HANDLER_ERROR_HANDLING_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("error_handling:");
+    this.createNonEditableCompletionProposal("error_handling:", _styledString, context, this.TASK_HANDLER_ERROR_HANDLING_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EAsynchronousSettings(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("asynchronous_settings:", "asynchronous_settings:", context, this.ASYNCHRONOUS_SETTINGS_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("asynchronous_settings:");
+    this.createNonEditableCompletionProposal("asynchronous_settings:", _styledString, context, this.ASYNCHRONOUS_SETTINGS_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EModuleCall(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("module_call:", "module_call:", context, this.MODULE_CALL_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("module_call:");
+    this.createNonEditableCompletionProposal("module_call:", _styledString, context, this.MODULE_CALL_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_ELoop(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("loop:", "loop:", context, this.LOOP_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("loop:");
+    this.createNonEditableCompletionProposal("loop:", _styledString, context, this.LOOP_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_ELoopControl(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("loop_control:", "loop_control:", context, this.LOOP_CONTROL_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("loop_control:");
+    this.createNonEditableCompletionProposal("loop_control:", _styledString, context, this.LOOP_CONTROL_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EPlaybookInclusion(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("playbook_inclusion:", "playbook_inclusion:", context, this.PLAYBOOK_INCLUSION_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("playbook_inclusion:");
+    this.createNonEditableCompletionProposal("playbook_inclusion:", _styledString, context, this.PLAYBOOK_INCLUSION_DESCRIPTION, acceptor);
   }
   
   @Override
@@ -235,7 +251,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void complete_NUMBER(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createEditableCompletionProposal("0", "0", context, "A number", acceptor);
+    this.createEditableCompletionProposal("0", "0 - NUMBER", context, "A number", acceptor);
   }
   
   @Override
@@ -277,15 +293,15 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     if ((rootPlay != null)) {
       final List<EVariableDeclarationImpl> candidatesDeclaredVariables = EcoreUtil2.<EVariableDeclarationImpl>getAllContentsOfType(rootPlay, EVariableDeclarationImpl.class);
       for (final EVariableDeclarationImpl candidate : candidatesDeclaredVariables) {
-        acceptor.accept(this.createCompletionProposal("declared_variable: ".concat(candidate.getName()), context));
+        this.createNonEditableCompletionProposal("declared_variable: ".concat(candidate.getName()), new StyledString("declared_variable: ").append(candidate.getName(), StyledString.COUNTER_STYLER), context, "A variable declared in this play.", acceptor);
       }
       final List<ERegisterVariableImpl> candidatesRegisteredVariables = EcoreUtil2.<ERegisterVariableImpl>getAllContentsOfType(rootPlay, ERegisterVariableImpl.class);
       for (final ERegisterVariableImpl candidate_1 : candidatesRegisteredVariables) {
-        acceptor.accept(this.createCompletionProposal("registered_variable: ".concat(candidate_1.getName()), context));
+        this.createNonEditableCompletionProposal("registered_variable: ".concat(candidate_1.getName()), new StyledString("registered_variable: ").append(candidate_1.getName(), StyledString.COUNTER_STYLER), context, "A variable registered in this play.", acceptor);
       }
       final List<EIndexOrLoopVariableImpl> candidatesIndexOrLoopVariables = EcoreUtil2.<EIndexOrLoopVariableImpl>getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl.class);
       for (final EIndexOrLoopVariableImpl candidate_2 : candidatesIndexOrLoopVariables) {
-        acceptor.accept(this.createCompletionProposal("index_or_loop_var: ".concat(candidate_2.getName()), context));
+        this.createNonEditableCompletionProposal("index_or_loop_var: ".concat(candidate_2.getName()), new StyledString("index_or_loop_var: ").append(candidate_2.getName(), StyledString.COUNTER_STYLER), context, "A variable defined with the \'index_var\' or \'loop_var\' keyword.", acceptor);
       }
       final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
       final List<EParameterImpl> candidatesSetFactsVariables = EcoreUtil2.<EParameterImpl>getAllContentsOfType(rootPlaybook, EParameterImpl.class);
@@ -303,7 +319,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
         }
       }
       for (final EParameter candidate_3 : legitCandidatesSetFactsVariables) {
-        acceptor.accept(this.createCompletionProposal("fact_set: ".concat(candidate_3.getName()), context));
+        this.createNonEditableCompletionProposal("fact_set: ".concat(candidate_3.getName()), new StyledString("fact_set: ").append(candidate_3.getName(), StyledString.COUNTER_STYLER), context, "A variable set with the \'set_fact\' module in this playbook.", acceptor);
       }
       final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
       if ((usedByBody != null)) {
@@ -311,13 +327,24 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
         if ((operation != null)) {
           final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
           for (final EParameterDefinitionImpl candidate_4 : candidatesInputVariableOperation) {
-            acceptor.accept(this.createCompletionProposal("operation_input: ".concat("\"").concat(candidate_4.getName()).concat("\""), context));
+            String _concat = "operation_input: ".concat("\"").concat(candidate_4.getName()).concat("\"");
+            StyledString _append = new StyledString("operation_input: ").append("\"".concat(candidate_4.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
+            String _name = operation.getName();
+            String _plus = ("An input variable from the \'" + _name);
+            String _plus_1 = (_plus + "\' operation.");
+            this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
           }
           final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
+          final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(operation, EInterfaceDefinitionImpl.class);
           final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
           EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
           for (final EPropertyDefinition input : _properties) {
-            acceptor.accept(this.createCompletionProposal("interface_input: ".concat("\"").concat(input.getName()).concat("\""), context));
+            String _concat_1 = "interface_input: ".concat("\"").concat(input.getName()).concat("\"");
+            StyledString _append_1 = new StyledString("interface_input: ").append("\"".concat(input.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
+            String _name_1 = interfaceDefinition.getName();
+            String _plus_2 = ("An input variable from the \'" + _name_1);
+            String _plus_3 = (_plus_2 + "\' interface.");
+            this.createNonEditableCompletionProposal(_concat_1, _append_1, context, _plus_3, acceptor);
           }
         }
       }
@@ -333,7 +360,8 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
       for (final EOperationDefinitionImpl candidate : candidatesOperation) {
         {
           final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(candidate, EInterfaceDefinitionImpl.class);
-          this.createNonEditableCompletionProposal("\"".concat(candidate.getName()).concat("\""), candidate.getName().concat(" - Interface: ").concat(interfaceDefinition.getName()), context, "One of the operations belonging to the selected node type.", acceptor);
+          String _concat = candidate.getName().concat(" - Interface: ");
+          this.createNonEditableCompletionProposal("\"".concat(candidate.getName()).concat("\""), new StyledString(_concat).append(interfaceDefinition.getName(), StyledString.COUNTER_STYLER), context, "One of the operations belonging to the selected node type.", acceptor);
         }
       }
     }
@@ -350,7 +378,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     }
   }
   
-  public void createNonEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+  public void createNonEditableCompletionProposal(final String proposalText, final StyledString displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
     ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
     if ((proposal instanceof ConfigurableCompletionProposal)) {
       final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);

@@ -28,6 +28,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl
 import java.util.ArrayList
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl
+import org.eclipse.jface.viewers.StyledString
 
 /** 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -155,63 +156,63 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"	- when"
 	
 	override void complete_EPrivilegeEscalation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("privilege_escalation:", "privilege_escalation:", context, PRIVILEGE_ESCALATION_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("privilege_escalation:", new StyledString("privilege_escalation:"), context, PRIVILEGE_ESCALATION_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EValidationMode(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("validation_mode:", "validation_mode:", context, VALIDATION_MODE_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("validation_mode:", new StyledString("validation_mode:"), context, VALIDATION_MODE_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EConnection(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("connection_info:", "connection_info:", context, CONNECTION_INFO_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("connection_info:", new StyledString("connection_info:"), context, CONNECTION_INFO_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EPlayExeSettings(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("play_exe_settings:", "play_exe_settings:", context, PLAY_EXE_SETTINGS_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("play_exe_settings:", new StyledString("play_exe_settings:"), context, PLAY_EXE_SETTINGS_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EPlayErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("play_error_handling:", "play_error_handling:", context, PLAY_ERROR_HANDLING_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("play_error_handling:", new StyledString("play_error_handling:"), context, PLAY_ERROR_HANDLING_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EFactsSettings(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("facts_settings:", "facts_settings:", context, FACTS_SETTINGS_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("facts_settings:", new StyledString("facts_settings:"), context, FACTS_SETTINGS_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EExecutionExeSettings(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("exe_settings:", "exe_settings:", context, EXECUTION_EXE_SETTINGS_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("exe_settings:", new StyledString("exe_settings:"), context, EXECUTION_EXE_SETTINGS_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EDelegation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("delegation:", "delegation:", context, DELEGATION_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("delegation:", new StyledString("delegation:"), context, DELEGATION_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EBlockErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("block_error_handling:", "block_error_handling:", context, BLOCK_ERROR_HANDLING_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("block_error_handling:", new StyledString("block_error_handling:"), context, BLOCK_ERROR_HANDLING_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_ETaskHandlerErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("error_handling:", "error_handling:", context, TASK_HANDLER_ERROR_HANDLING_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("error_handling:", new StyledString("error_handling:"), context, TASK_HANDLER_ERROR_HANDLING_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EAsynchronousSettings(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("asynchronous_settings:", "asynchronous_settings:", context, ASYNCHRONOUS_SETTINGS_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("asynchronous_settings:", new StyledString("asynchronous_settings:"), context, ASYNCHRONOUS_SETTINGS_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EModuleCall(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("module_call:", "module_call:", context, MODULE_CALL_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("module_call:", new StyledString("module_call:"), context, MODULE_CALL_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_ELoop(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("loop:", "loop:", context, LOOP_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("loop:", new StyledString("loop:"), context, LOOP_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_ELoopControl(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("loop_control:", "loop_control:", context, LOOP_CONTROL_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("loop_control:", new StyledString("loop_control:"), context, LOOP_CONTROL_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EPlaybookInclusion(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("playbook_inclusion:", "playbook_inclusion:", context, PLAYBOOK_INCLUSION_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("playbook_inclusion:", new StyledString("playbook_inclusion:"), context, PLAYBOOK_INCLUSION_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_BOOLEAN(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -224,7 +225,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	}
 	
 	override void complete_NUMBER(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createEditableCompletionProposal("0", "0", context, "A number", acceptor)
+		createEditableCompletionProposal("0", "0 - NUMBER", context, "A number", acceptor)
 	}
 	
 	//suggests variables declared only in this specific play
@@ -260,7 +261,6 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		}
 	}
 	
-	//TODO: use createNonEditableCompletionProposal function instead of acceptor.accept
 	//suggest all the possible variables that can be referenced
 	override void complete_EVariableReference(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
@@ -268,17 +268,17 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			//suggest variables declared only in this specific play
 			val candidatesDeclaredVariables = EcoreUtil2.getAllContentsOfType(rootPlay, EVariableDeclarationImpl)
 			for (candidate: candidatesDeclaredVariables){
-				acceptor.accept(createCompletionProposal("declared_variable: ".concat(candidate.name), context))
+				createNonEditableCompletionProposal("declared_variable: ".concat(candidate.name), new StyledString("declared_variable: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable declared in this play.", acceptor)
 			}
 			//suggest variables registered only in this specific play
 			val candidatesRegisteredVariables = EcoreUtil2.getAllContentsOfType(rootPlay, ERegisterVariableImpl)
 			for (candidate: candidatesRegisteredVariables){
-				acceptor.accept(createCompletionProposal("registered_variable: ".concat(candidate.name), context))
+				createNonEditableCompletionProposal("registered_variable: ".concat(candidate.name), new StyledString("registered_variable: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable registered in this play.", acceptor)
 			}
 			//suggest index or loop variables defined only in this specific play
 			val candidatesIndexOrLoopVariables = EcoreUtil2.getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl)
 			for (candidate: candidatesIndexOrLoopVariables){
-				acceptor.accept(createCompletionProposal("index_or_loop_var: ".concat(candidate.name), context))
+				createNonEditableCompletionProposal("index_or_loop_var: ".concat(candidate.name), new StyledString("index_or_loop_var: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable defined with the 'index_var' or 'loop_var' keyword.", acceptor)
 			}
 			
 			//suggest variables set in a "set_fact" module in this specific playbook
@@ -293,7 +293,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 				}
 			}
 			for (candidate: legitCandidatesSetFactsVariables){
-				acceptor.accept(createCompletionProposal("fact_set: ".concat(candidate.name), context))
+				createNonEditableCompletionProposal("fact_set: ".concat(candidate.name), new StyledString("fact_set: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable set with the 'set_fact' module in this playbook.", acceptor)
 			}
 			
 			//the following piece of code is for variables given as input by the RM
@@ -304,13 +304,14 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 					//suggest variables given in input by the tosca operation
 					val candidatesInputVariableOperation = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
 					for (candidate: candidatesInputVariableOperation){
-						acceptor.accept(createCompletionProposal("operation_input: ".concat("\"").concat(candidate.name).concat("\""), context))
+						createNonEditableCompletionProposal("operation_input: ".concat("\"").concat(candidate.name).concat("\""), new StyledString("operation_input: ").append("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
 					}
 					//suggest variables given in input by the tosca interface
 					val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
+					val interfaceDefinition = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionImpl)
 					val inputsProperties = interfaceDefinitionBody.inputs
 					for (input : inputsProperties.properties){
-						acceptor.accept(createCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), context))
+						createNonEditableCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), new StyledString("interface_input: ").append("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
 					}
 				}				
 			}
@@ -325,7 +326,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 				val candidatesOperation = EcoreUtil2.getAllContentsOfType(nodeType, EOperationDefinitionImpl)
 				for (candidate: candidatesOperation){
 					val interfaceDefinition = EcoreUtil2.getContainerOfType(candidate, EInterfaceDefinitionImpl)
-					createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), candidate.name.concat(" - Interface: ").concat(interfaceDefinition.name), context, "One of the operations belonging to the selected node type.", acceptor)
+					createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString(candidate.name.concat(" - Interface: ")).append(interfaceDefinition.name, StyledString.COUNTER_STYLER), context, "One of the operations belonging to the selected node type.", acceptor)
 				}
 			}		
 	}
@@ -341,7 +342,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		}
 	}
 	
-	def void createNonEditableCompletionProposal(String proposalText, String displayText,
+	def void createNonEditableCompletionProposal(String proposalText, StyledString displayText,
 	ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
 		if (proposal instanceof ConfigurableCompletionProposal) {
