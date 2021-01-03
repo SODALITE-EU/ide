@@ -461,6 +461,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEBooleanPassedAdapter();
       }
       @Override
+      public Adapter caseEEmptyCurlyBraces(EEmptyCurlyBraces object)
+      {
+        return createEEmptyCurlyBracesAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -1633,6 +1638,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEBooleanPassedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces <em>EEmpty Curly Braces</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces
+   * @generated
+   */
+  public Adapter createEEmptyCurlyBracesAdapter()
   {
     return null;
   }

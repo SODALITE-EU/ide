@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 
 /**
@@ -31,6 +32,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETask;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getBlock_error_handling <em>Block error handling</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getTasks <em>Tasks</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getRescue_tasks <em>Rescue tasks</em>}</li>
@@ -41,6 +43,16 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETask;
  */
 public class EBlockImpl extends EExecutionImpl implements EBlock
 {
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected EJinjaExpressionAndString name;
+
   /**
    * The cached value of the '{@link #getBlock_error_handling() <em>Block error handling</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -100,6 +112,56 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.EBLOCK;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionAndString getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetName(EJinjaExpressionAndString newName, NotificationChain msgs)
+  {
+    EJinjaExpressionAndString oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBLOCK__NAME, oldName, newName);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(EJinjaExpressionAndString newName)
+  {
+    if (newName != name)
+    {
+      NotificationChain msgs = null;
+      if (name != null)
+        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBLOCK__NAME, null, msgs);
+      if (newName != null)
+        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBLOCK__NAME, null, msgs);
+      msgs = basicSetName(newName, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBLOCK__NAME, newName, newName));
   }
 
   /**
@@ -207,6 +269,8 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EBLOCK__NAME:
+        return basicSetName(null, msgs);
       case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
         return basicSetBlock_error_handling(null, msgs);
       case AnsibleDslPackage.EBLOCK__TASKS:
@@ -229,6 +293,8 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EBLOCK__NAME:
+        return getName();
       case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
         return getBlock_error_handling();
       case AnsibleDslPackage.EBLOCK__TASKS:
@@ -252,6 +318,9 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EBLOCK__NAME:
+        setName((EJinjaExpressionAndString)newValue);
+        return;
       case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
         setBlock_error_handling((EBlockErrorHandling)newValue);
         return;
@@ -281,6 +350,9 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EBLOCK__NAME:
+        setName((EJinjaExpressionAndString)null);
+        return;
       case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
         setBlock_error_handling((EBlockErrorHandling)null);
         return;
@@ -307,6 +379,8 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EBLOCK__NAME:
+        return name != null;
       case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
         return block_error_handling != null;
       case AnsibleDslPackage.EBLOCK__TASKS:

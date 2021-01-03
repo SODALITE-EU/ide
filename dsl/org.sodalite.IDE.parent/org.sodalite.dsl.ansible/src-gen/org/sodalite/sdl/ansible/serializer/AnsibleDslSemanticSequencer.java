@@ -25,6 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
@@ -119,6 +120,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE:
 				sequence_EDictionaryPairReference(context, (EDictionaryPairReference) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EEMPTY_CURLY_BRACES:
+				sequence_EEmptyCurlyBraces(context, (EEmptyCurlyBraces) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EEXECUTION_EXE_SETTINGS:
 				sequence_EExecutionExeSettings(context, (EExecutionExeSettings) semanticObject); 
@@ -318,16 +322,12 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=STRING | 
+	 *         name=EJinjaExpressionAndString | 
 	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
-	 *         debugger='always' | 
-	 *         debugger='never' | 
-	 *         debugger='on_failed' | 
-	 *         debugger='on_unreachable' | 
-	 *         debugger='on_skipped' | 
+	 *         debugger=EJinjaExpressionAndString | 
 	 *         module_defaults=EListPassed | 
 	 *         environment=EListPassed | 
 	 *         collections=EListPassed | 
@@ -436,6 +436,28 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     EValuePassedToJinjaExpression returns EEmptyCurlyBraces
+	 *     EEmptyCurlyBraces returns EEmptyCurlyBraces
+	 *
+	 * Constraint:
+	 *     (left_curly_brace='{' right_curly_brace='}')
+	 */
+	protected void sequence_EEmptyCurlyBraces(ISerializationContext context, EEmptyCurlyBraces semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EEMPTY_CURLY_BRACES__LEFT_CURLY_BRACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EEMPTY_CURLY_BRACES__LEFT_CURLY_BRACE));
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EEMPTY_CURLY_BRACES__RIGHT_CURLY_BRACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EEMPTY_CURLY_BRACES__RIGHT_CURLY_BRACE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEEmptyCurlyBracesAccess().getLeft_curly_braceLeftCurlyBracketKeyword_0_0(), semanticObject.getLeft_curly_brace());
+		feeder.accept(grammarAccess.getEEmptyCurlyBracesAccess().getRight_curly_braceRightCurlyBracketKeyword_1_0(), semanticObject.getRight_curly_brace());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EExeSettings returns EExecutionExeSettings
 	 *     EExecutionExeSettings returns EExecutionExeSettings
 	 *
@@ -499,11 +521,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
-	 *         debugger='always' | 
-	 *         debugger='never' | 
-	 *         debugger='on_failed' | 
-	 *         debugger='on_unreachable' | 
-	 *         debugger='on_skipped' | 
+	 *         debugger=EJinjaExpressionAndString | 
 	 *         module_defaults=EListPassed | 
 	 *         environment=EListPassed | 
 	 *         collections=EListPassed | 
@@ -624,10 +642,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EIsExpression returns EIsExpression
 	 *
 	 * Constraint:
-	 *     (
-	 *         parenthesised_expression=EParenthesisedExpression 
-	 *         ((is_not='not'? status=EIsExpression) | (is_not='not'? container_expression=EIsExpression))?
-	 *     )
+	 *     (not='not'? parenthesised_expression=EParenthesisedExpression (status=EIsExpression | (not_in='not'? container_expression=EIsExpression))?)
 	 */
 	protected void sequence_EIsExpression(ISerializationContext context, EIsExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -910,17 +925,13 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=STRING | 
-	 *         hosts=STRING | 
+	 *         name=EJinjaExpressionAndString | 
+	 *         hosts=EJinjaExpressionAndString | 
 	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
-	 *         debugger='always' | 
-	 *         debugger='never' | 
-	 *         debugger='on_failed' | 
-	 *         debugger='on_unreachable' | 
-	 *         debugger='on_skipped' | 
+	 *         debugger=EJinjaExpressionAndString | 
 	 *         module_defaults=EListPassed | 
 	 *         environment=EListPassed | 
 	 *         collections=EListPassed | 
@@ -1034,17 +1045,13 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=STRING 
+	 *         name=EJinjaExpressionAndString 
 	 *         (
 	 *             privilege_escalation=EPrivilegeEscalation | 
 	 *             validation_mode=EValidationMode | 
 	 *             connection=EConnection | 
 	 *             no_log=EBooleanPassed | 
-	 *             debugger='always' | 
-	 *             debugger='never' | 
-	 *             debugger='on_failed' | 
-	 *             debugger='on_unreachable' | 
-	 *             debugger='on_skipped' | 
+	 *             debugger=EJinjaExpressionAndString | 
 	 *             module_defaults=EListPassed | 
 	 *             environment=EListPassed | 
 	 *             collections=EListPassed | 
@@ -1181,16 +1188,12 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=STRING | 
+	 *         name=EJinjaExpressionAndString | 
 	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
-	 *         debugger='always' | 
-	 *         debugger='never' | 
-	 *         debugger='on_failed' | 
-	 *         debugger='on_unreachable' | 
-	 *         debugger='on_skipped' | 
+	 *         debugger=EJinjaExpressionAndString | 
 	 *         module_defaults=EListPassed | 
 	 *         environment=EListPassed | 
 	 *         collections=EListPassed | 

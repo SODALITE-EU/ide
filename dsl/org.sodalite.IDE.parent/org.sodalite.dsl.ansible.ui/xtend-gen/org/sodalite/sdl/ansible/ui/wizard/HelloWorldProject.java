@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
-@ProjectTemplate(label = "Hello World", icon = "project_template.png", description = "<p><b>Hello World</b></p>\n<p>This is a parameterized hello world for AnsibleDsl. You can set a parameter to modify the content in the generated file\nand a parameter to set the package the file is created in.</p>")
+@ProjectTemplate(label = "Hello World", icon = "project_template.png", description = "<p><b>Hello World</b></p>\n<p>This is a hello world for AnsibleDsl.</p>")
 @SuppressWarnings("all")
 public final class HelloWorldProject extends AbstractProjectTemplate {
   private final BooleanTemplateVariable advanced = this.check("Advanced:", false);
@@ -101,13 +101,10 @@ public final class HelloWorldProject extends AbstractProjectTemplate {
       _builder_1.append("task_name: \"hello world task\"");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("module_call:");
+      _builder_1.append("module: debug");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t\t");
-      _builder_1.append("module_name: shell");
-      _builder_1.newLine();
-      _builder_1.append("\t\t\t\t\t");
-      _builder_1.append("direct_parameter: \"echo \'Hello world!\'\"");
+      _builder_1.append("msg: \"Hello world!\"");
       _builder_1.newLine();
       this.addFile(it, _builder, _builder_1);
     };

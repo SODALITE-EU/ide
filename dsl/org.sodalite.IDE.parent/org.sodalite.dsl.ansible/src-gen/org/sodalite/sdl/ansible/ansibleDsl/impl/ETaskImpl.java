@@ -49,7 +49,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getPrivilege_escalation <em>Privilege escalation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getValidation_mode <em>Validation mode</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getConnection <em>Connection</em>}</li>
@@ -71,32 +70,13 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getNotifiables <em>Notifiables</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getLoop <em>Loop</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getRegister <em>Register</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETaskImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ETaskImpl extends EBlockTaskImpl implements ETask
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getPrivilege_escalation() <em>Privilege escalation</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -138,24 +118,14 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   protected EBooleanPassed no_log;
 
   /**
-   * The default value of the '{@link #getDebugger() <em>Debugger</em>}' attribute.
+   * The cached value of the '{@link #getDebugger() <em>Debugger</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getDebugger()
    * @generated
    * @ordered
    */
-  protected static final String DEBUGGER_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDebugger() <em>Debugger</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDebugger()
-   * @generated
-   * @ordered
-   */
-  protected String debugger = DEBUGGER_EDEFAULT;
+  protected EJinjaExpressionAndString debugger;
 
   /**
    * The cached value of the '{@link #getModule_defaults() <em>Module defaults</em>}' containment reference.
@@ -318,6 +288,16 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   protected ERegisterVariable register;
 
   /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected EJinjaExpressionAndString name;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -336,31 +316,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.ETASK;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__NAME, oldName, name));
   }
 
   /**
@@ -569,7 +524,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public String getDebugger()
+  public EJinjaExpressionAndString getDebugger()
   {
     return debugger;
   }
@@ -579,13 +534,38 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setDebugger(String newDebugger)
+  public NotificationChain basicSetDebugger(EJinjaExpressionAndString newDebugger, NotificationChain msgs)
   {
-    String oldDebugger = debugger;
+    EJinjaExpressionAndString oldDebugger = debugger;
     debugger = newDebugger;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__DEBUGGER, oldDebugger, debugger));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__DEBUGGER, oldDebugger, newDebugger);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDebugger(EJinjaExpressionAndString newDebugger)
+  {
+    if (newDebugger != debugger)
+    {
+      NotificationChain msgs = null;
+      if (debugger != null)
+        msgs = ((InternalEObject)debugger).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__DEBUGGER, null, msgs);
+      if (newDebugger != null)
+        msgs = ((InternalEObject)newDebugger).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__DEBUGGER, null, msgs);
+      msgs = basicSetDebugger(newDebugger, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__DEBUGGER, newDebugger, newDebugger));
   }
 
   /**
@@ -1324,6 +1304,56 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
+  public EJinjaExpressionAndString getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetName(EJinjaExpressionAndString newName, NotificationChain msgs)
+  {
+    EJinjaExpressionAndString oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__NAME, oldName, newName);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(EJinjaExpressionAndString newName)
+  {
+    if (newName != name)
+    {
+      NotificationChain msgs = null;
+      if (name != null)
+        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__NAME, null, msgs);
+      if (newName != null)
+        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ETASK__NAME, null, msgs);
+      msgs = basicSetName(newName, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETASK__NAME, newName, newName));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -1336,6 +1366,8 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         return basicSetConnection(null, msgs);
       case AnsibleDslPackage.ETASK__NO_LOG:
         return basicSetNo_log(null, msgs);
+      case AnsibleDslPackage.ETASK__DEBUGGER:
+        return basicSetDebugger(null, msgs);
       case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
         return basicSetModule_defaults(null, msgs);
       case AnsibleDslPackage.ETASK__ENVIRONMENT:
@@ -1368,6 +1400,8 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         return basicSetLoop(null, msgs);
       case AnsibleDslPackage.ETASK__REGISTER:
         return basicSetRegister(null, msgs);
+      case AnsibleDslPackage.ETASK__NAME:
+        return basicSetName(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1382,8 +1416,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETASK__NAME:
-        return getName();
       case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION:
         return getPrivilege_escalation();
       case AnsibleDslPackage.ETASK__VALIDATION_MODE:
@@ -1426,6 +1458,8 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         return getLoop();
       case AnsibleDslPackage.ETASK__REGISTER:
         return getRegister();
+      case AnsibleDslPackage.ETASK__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -1441,9 +1475,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETASK__NAME:
-        setName((String)newValue);
-        return;
       case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION:
         setPrivilege_escalation((EPrivilegeEscalation)newValue);
         return;
@@ -1457,7 +1488,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setNo_log((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.ETASK__DEBUGGER:
-        setDebugger((String)newValue);
+        setDebugger((EJinjaExpressionAndString)newValue);
         return;
       case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
         setModule_defaults((EListPassed)newValue);
@@ -1509,6 +1540,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       case AnsibleDslPackage.ETASK__REGISTER:
         setRegister((ERegisterVariable)newValue);
         return;
+      case AnsibleDslPackage.ETASK__NAME:
+        setName((EJinjaExpressionAndString)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -1523,9 +1557,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETASK__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION:
         setPrivilege_escalation((EPrivilegeEscalation)null);
         return;
@@ -1539,7 +1570,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setNo_log((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.ETASK__DEBUGGER:
-        setDebugger(DEBUGGER_EDEFAULT);
+        setDebugger((EJinjaExpressionAndString)null);
         return;
       case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
         setModule_defaults((EListPassed)null);
@@ -1589,6 +1620,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       case AnsibleDslPackage.ETASK__REGISTER:
         setRegister((ERegisterVariable)null);
         return;
+      case AnsibleDslPackage.ETASK__NAME:
+        setName((EJinjaExpressionAndString)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -1603,8 +1637,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ETASK__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION:
         return privilege_escalation != null;
       case AnsibleDslPackage.ETASK__VALIDATION_MODE:
@@ -1614,7 +1646,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       case AnsibleDslPackage.ETASK__NO_LOG:
         return no_log != null;
       case AnsibleDslPackage.ETASK__DEBUGGER:
-        return DEBUGGER_EDEFAULT == null ? debugger != null : !DEBUGGER_EDEFAULT.equals(debugger);
+        return debugger != null;
       case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
         return module_defaults != null;
       case AnsibleDslPackage.ETASK__ENVIRONMENT:
@@ -1647,6 +1679,8 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         return loop != null;
       case AnsibleDslPackage.ETASK__REGISTER:
         return register != null;
+      case AnsibleDslPackage.ETASK__NAME:
+        return name != null;
     }
     return super.eIsSet(featureID);
   }
@@ -1663,7 +1697,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       switch (derivedFeatureID)
       {
-        case AnsibleDslPackage.ETASK__NAME: return AnsibleDslPackage.EBASE__NAME;
         case AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION: return AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION;
         case AnsibleDslPackage.ETASK__VALIDATION_MODE: return AnsibleDslPackage.EBASE__VALIDATION_MODE;
         case AnsibleDslPackage.ETASK__CONNECTION: return AnsibleDslPackage.EBASE__CONNECTION;
@@ -1717,7 +1750,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
     {
       switch (baseFeatureID)
       {
-        case AnsibleDslPackage.EBASE__NAME: return AnsibleDslPackage.ETASK__NAME;
         case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION: return AnsibleDslPackage.ETASK__PRIVILEGE_ESCALATION;
         case AnsibleDslPackage.EBASE__VALIDATION_MODE: return AnsibleDslPackage.ETASK__VALIDATION_MODE;
         case AnsibleDslPackage.EBASE__CONNECTION: return AnsibleDslPackage.ETASK__CONNECTION;
@@ -1757,25 +1789,6 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
       }
     }
     return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", debugger: ");
-    result.append(debugger);
-    result.append(')');
-    return result.toString();
   }
 
 } //ETaskImpl

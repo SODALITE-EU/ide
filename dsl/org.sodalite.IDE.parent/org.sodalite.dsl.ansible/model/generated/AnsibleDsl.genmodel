@@ -17,12 +17,11 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EUsedByBody/operation"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBase">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBase/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/privilege_escalation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/validation_mode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/connection"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/no_log"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBase/debugger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/debugger"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/module_defaults"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/environment"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBase/collections"/>
@@ -46,7 +45,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETaskHandler/register"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EPlay">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EPlay/hosts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/hosts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/play_exe_settings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/play_error_handling"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/facts_settings"/>
@@ -61,13 +61,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/handlers"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBlock">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/block_error_handling"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/tasks"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/rescue_tasks"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/always_tasks"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//ETask"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ETask">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETask/name"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EHandler">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EHandler/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EHandler/listen_to"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EModuleCall">
@@ -79,7 +83,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EParameter/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParameter/value_passed"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleInclusion"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleInclusion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleInclusion/name"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleInclusions">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleInclusions/roles"/>
     </genClasses>
@@ -215,9 +221,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EOperation/right_operand"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EIsExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EIsExpression/not"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIsExpression/parenthesised_expression"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EIsExpression/is_not"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIsExpression/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EIsExpression/not_in"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIsExpression/container_expression"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EParenthesisedExpression">
@@ -288,6 +295,10 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBooleanPassed">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBooleanPassed/boolean_passed"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EEmptyCurlyBraces">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EEmptyCurlyBraces/left_curly_brace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EEmptyCurlyBraces/right_curly_brace"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

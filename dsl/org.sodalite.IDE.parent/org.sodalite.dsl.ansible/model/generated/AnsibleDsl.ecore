@@ -14,7 +14,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EOperationDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBase">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="privilege_escalation" eType="#//EPrivilegeEscalation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="validation_mode" eType="#//EValidationMode"
@@ -23,7 +22,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="no_log" eType="#//EBooleanPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debugger" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="debugger" eType="#//EJinjaExpressionAndString"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="module_defaults" eType="#//EListPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="#//EListPassed"
@@ -63,7 +63,10 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPlay" eSuperTypes="#//EBase">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hosts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hosts" eType="#//EJinjaExpressionAndString"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="play_exe_settings" eType="#//EPlayExeSettings"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="play_error_handling" eType="#//EPlayErrorHandling"
@@ -90,6 +93,8 @@
         eType="#//EHandler" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBlock" eSuperTypes="#//EExecution #//EBlockTask">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="block_error_handling" eType="#//EBlockErrorHandling"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
@@ -99,8 +104,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="always_tasks" upperBound="-1"
         eType="#//ETask" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ETask" eSuperTypes="#//EBlockTask #//ETaskHandler"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ETask" eSuperTypes="#//EBlockTask #//ETaskHandler">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EHandler" eSuperTypes="#//ETaskHandler">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="listen_to" unique="false"
         upperBound="-1" eType="#//ENotifiedTopic"/>
   </eClassifiers>
@@ -116,7 +125,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value_passed" eType="#//EValuePassed"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusion" eSuperTypes="#//EExecution"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusion" eSuperTypes="#//EExecution">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusions">
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
         eType="#//ERoleInclusion" containment="true"/>
@@ -307,11 +319,12 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EIsExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="not" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parenthesised_expression"
         eType="#//EParenthesisedExpression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_not" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="status" eType="#//EIsExpression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="not_in" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="container_expression" eType="#//EIsExpression"
         containment="true"/>
   </eClassifiers>
@@ -397,5 +410,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBooleanPassed">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean_passed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EEmptyCurlyBraces" eSuperTypes="#//EValuePassedToJinjaExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="left_curly_brace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="right_curly_brace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

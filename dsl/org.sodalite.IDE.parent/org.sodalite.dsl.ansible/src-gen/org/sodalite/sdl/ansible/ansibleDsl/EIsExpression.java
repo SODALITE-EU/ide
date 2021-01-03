@@ -14,9 +14,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getNot <em>Not</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getParenthesised_expression <em>Parenthesised expression</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getIs_not <em>Is not</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getNot_in <em>Not in</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getContainer_expression <em>Container expression</em>}</li>
  * </ul>
  *
@@ -26,6 +27,28 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface EIsExpression extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Not</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Not</em>' attribute.
+   * @see #setNot(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEIsExpression_Not()
+   * @model
+   * @generated
+   */
+  String getNot();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getNot <em>Not</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Not</em>' attribute.
+   * @see #getNot()
+   * @generated
+   */
+  void setNot(String value);
+
   /**
    * Returns the value of the '<em><b>Parenthesised expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
@@ -49,28 +72,6 @@ public interface EIsExpression extends EObject
   void setParenthesised_expression(EParenthesisedExpression value);
 
   /**
-   * Returns the value of the '<em><b>Is not</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Is not</em>' attribute.
-   * @see #setIs_not(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEIsExpression_Is_not()
-   * @model
-   * @generated
-   */
-  String getIs_not();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getIs_not <em>Is not</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Is not</em>' attribute.
-   * @see #getIs_not()
-   * @generated
-   */
-  void setIs_not(String value);
-
-  /**
    * Returns the value of the '<em><b>Status</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -91,6 +92,28 @@ public interface EIsExpression extends EObject
    * @generated
    */
   void setStatus(EIsExpression value);
+
+  /**
+   * Returns the value of the '<em><b>Not in</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Not in</em>' attribute.
+   * @see #setNot_in(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEIsExpression_Not_in()
+   * @model
+   * @generated
+   */
+  String getNot_in();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EIsExpression#getNot_in <em>Not in</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Not in</em>' attribute.
+   * @see #getNot_in()
+   * @generated
+   */
+  void setNot_in(String value);
 
   /**
    * Returns the value of the '<em><b>Container expression</b></em>' containment reference.

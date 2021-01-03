@@ -23,6 +23,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
@@ -36,7 +37,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getPrivilege_escalation <em>Privilege escalation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getValidation_mode <em>Validation mode</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBaseImpl#getConnection <em>Connection</em>}</li>
@@ -53,26 +53,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
  */
 public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getPrivilege_escalation() <em>Privilege escalation</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -114,24 +94,14 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
   protected EBooleanPassed no_log;
 
   /**
-   * The default value of the '{@link #getDebugger() <em>Debugger</em>}' attribute.
+   * The cached value of the '{@link #getDebugger() <em>Debugger</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getDebugger()
    * @generated
    * @ordered
    */
-  protected static final String DEBUGGER_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getDebugger() <em>Debugger</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDebugger()
-   * @generated
-   * @ordered
-   */
-  protected String debugger = DEBUGGER_EDEFAULT;
+  protected EJinjaExpressionAndString debugger;
 
   /**
    * The cached value of the '{@link #getModule_defaults() <em>Module defaults</em>}' containment reference.
@@ -202,31 +172,6 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.EBASE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE__NAME, oldName, name));
   }
 
   /**
@@ -435,7 +380,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    */
   @Override
-  public String getDebugger()
+  public EJinjaExpressionAndString getDebugger()
   {
     return debugger;
   }
@@ -445,13 +390,38 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setDebugger(String newDebugger)
+  public NotificationChain basicSetDebugger(EJinjaExpressionAndString newDebugger, NotificationChain msgs)
   {
-    String oldDebugger = debugger;
+    EJinjaExpressionAndString oldDebugger = debugger;
     debugger = newDebugger;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE__DEBUGGER, oldDebugger, debugger));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE__DEBUGGER, oldDebugger, newDebugger);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDebugger(EJinjaExpressionAndString newDebugger)
+  {
+    if (newDebugger != debugger)
+    {
+      NotificationChain msgs = null;
+      if (debugger != null)
+        msgs = ((InternalEObject)debugger).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBASE__DEBUGGER, null, msgs);
+      if (newDebugger != null)
+        msgs = ((InternalEObject)newDebugger).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBASE__DEBUGGER, null, msgs);
+      msgs = basicSetDebugger(newDebugger, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBASE__DEBUGGER, newDebugger, newDebugger));
   }
 
   /**
@@ -687,6 +657,8 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         return basicSetConnection(null, msgs);
       case AnsibleDslPackage.EBASE__NO_LOG:
         return basicSetNo_log(null, msgs);
+      case AnsibleDslPackage.EBASE__DEBUGGER:
+        return basicSetDebugger(null, msgs);
       case AnsibleDslPackage.EBASE__MODULE_DEFAULTS:
         return basicSetModule_defaults(null, msgs);
       case AnsibleDslPackage.EBASE__ENVIRONMENT:
@@ -711,8 +683,6 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EBASE__NAME:
-        return getName();
       case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION:
         return getPrivilege_escalation();
       case AnsibleDslPackage.EBASE__VALIDATION_MODE:
@@ -748,9 +718,6 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EBASE__NAME:
-        setName((String)newValue);
-        return;
       case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION:
         setPrivilege_escalation((EPrivilegeEscalation)newValue);
         return;
@@ -764,7 +731,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         setNo_log((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE__DEBUGGER:
-        setDebugger((String)newValue);
+        setDebugger((EJinjaExpressionAndString)newValue);
         return;
       case AnsibleDslPackage.EBASE__MODULE_DEFAULTS:
         setModule_defaults((EListPassed)newValue);
@@ -796,9 +763,6 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EBASE__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION:
         setPrivilege_escalation((EPrivilegeEscalation)null);
         return;
@@ -812,7 +776,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         setNo_log((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EBASE__DEBUGGER:
-        setDebugger(DEBUGGER_EDEFAULT);
+        setDebugger((EJinjaExpressionAndString)null);
         return;
       case AnsibleDslPackage.EBASE__MODULE_DEFAULTS:
         setModule_defaults((EListPassed)null);
@@ -843,8 +807,6 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EBASE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AnsibleDslPackage.EBASE__PRIVILEGE_ESCALATION:
         return privilege_escalation != null;
       case AnsibleDslPackage.EBASE__VALIDATION_MODE:
@@ -854,7 +816,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
       case AnsibleDslPackage.EBASE__NO_LOG:
         return no_log != null;
       case AnsibleDslPackage.EBASE__DEBUGGER:
-        return DEBUGGER_EDEFAULT == null ? debugger != null : !DEBUGGER_EDEFAULT.equals(debugger);
+        return debugger != null;
       case AnsibleDslPackage.EBASE__MODULE_DEFAULTS:
         return module_defaults != null;
       case AnsibleDslPackage.EBASE__ENVIRONMENT:
@@ -867,25 +829,6 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         return variable_declarations != null && !variable_declarations.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", debugger: ");
-    result.append(debugger);
-    result.append(')');
-    return result.toString();
   }
 
 } //EBaseImpl

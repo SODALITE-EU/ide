@@ -28,6 +28,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
@@ -119,21 +120,21 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   public CharSequence compilePlay(final EPlay play, final String space) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      String _name = play.getName();
+      EJinjaExpressionAndString _name = play.getName();
       boolean _tripleNotEquals = (_name != null);
       if (_tripleNotEquals) {
         _builder.append("- name: ");
-        String _name_1 = play.getName();
-        _builder.append(_name_1);
+        String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(play.getName());
+        _builder.append(_compileJinjaExpressionAndString);
         _builder.newLineIfNotEmpty();
         {
-          String _hosts = play.getHosts();
+          EJinjaExpressionAndString _hosts = play.getHosts();
           boolean _tripleNotEquals_1 = (_hosts != null);
           if (_tripleNotEquals_1) {
             _builder.append(space);
             _builder.append("hosts: ");
-            String _hosts_1 = play.getHosts();
-            _builder.append(_hosts_1);
+            String _compileJinjaExpressionAndString_1 = this.compileJinjaExpressionAndString(play.getHosts());
+            _builder.append(_compileJinjaExpressionAndString_1);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -148,12 +149,12 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         }
       } else {
         {
-          String _hosts_2 = play.getHosts();
-          boolean _tripleNotEquals_3 = (_hosts_2 != null);
+          EJinjaExpressionAndString _hosts_1 = play.getHosts();
+          boolean _tripleNotEquals_3 = (_hosts_1 != null);
           if (_tripleNotEquals_3) {
             _builder.append("- hosts: ");
-            String _hosts_3 = play.getHosts();
-            _builder.append(_hosts_3);
+            String _compileJinjaExpressionAndString_2 = this.compileJinjaExpressionAndString(play.getHosts());
+            _builder.append(_compileJinjaExpressionAndString_2);
             _builder.newLineIfNotEmpty();
             {
               EPlaybookInclusion _playbook_inclusion_1 = play.getPlaybook_inclusion();
@@ -377,8 +378,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(space);
     _builder.append("- role: ");
-    String _name = roleInclusion.getName();
-    _builder.append(_name);
+    String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(roleInclusion.getName());
+    _builder.append(_compileJinjaExpressionAndString);
     _builder.newLineIfNotEmpty();
     CharSequence _compileBaseAttributes = this.compileBaseAttributes(roleInclusion, space.concat("  "));
     _builder.append(_compileBaseAttributes);
@@ -531,13 +532,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      String _debugger = base.getDebugger();
+      EJinjaExpressionAndString _debugger = base.getDebugger();
       boolean _tripleNotEquals_14 = (_debugger != null);
       if (_tripleNotEquals_14) {
         _builder.append(space);
         _builder.append("debugger: ");
-        String _debugger_1 = base.getDebugger();
-        _builder.append(_debugger_1);
+        String _compileJinjaExpressionAndString_6 = this.compileJinjaExpressionAndString(base.getDebugger());
+        _builder.append(_compileJinjaExpressionAndString_6);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -590,10 +591,21 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       boolean _tripleNotEquals_19 = (_size != 0);
       if (_tripleNotEquals_19) {
         _builder.append(space);
-        _builder.append("vars: ");
-        String _compileVariableDeclarations = this.compileVariableDeclarations(base);
-        _builder.append(_compileVariableDeclarations);
+        _builder.append("vars:");
         _builder.newLineIfNotEmpty();
+        {
+          EList<EVariableDeclaration> _variable_declarations = base.getVariable_declarations();
+          for(final EVariableDeclaration variable_declaration : _variable_declarations) {
+            String _concat = space.concat("  ");
+            _builder.append(_concat);
+            String _name = variable_declaration.getName();
+            _builder.append(_name);
+            _builder.append(": ");
+            String _string = this.compileValuePassed(variable_declaration.getValue_passed()).toString();
+            _builder.append(_string);
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     return _builder;
@@ -779,13 +791,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   public CharSequence compileBlock(final EBlock block, final String space) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      String _name = block.getName();
+      EJinjaExpressionAndString _name = block.getName();
       boolean _tripleNotEquals = (_name != null);
       if (_tripleNotEquals) {
         _builder.append(space);
         _builder.append("- name: ");
-        String _name_1 = block.getName();
-        _builder.append(_name_1);
+        String _compileJinjaExpressionAndString = this.compileJinjaExpressionAndString(block.getName());
+        _builder.append(_compileJinjaExpressionAndString);
         _builder.newLineIfNotEmpty();
         String _concat = space.concat("  ");
         _builder.append(_concat);
@@ -970,16 +982,33 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
+  public String taskHandlerName(final ETaskHandler taskHandler) {
+    if ((taskHandler instanceof ETask)) {
+      EJinjaExpressionAndString _name = ((ETask)taskHandler).getName();
+      boolean _tripleNotEquals = (_name != null);
+      if (_tripleNotEquals) {
+        return this.compileJinjaExpressionAndString(((ETask)taskHandler).getName());
+      } else {
+        return null;
+      }
+    } else {
+      if ((taskHandler instanceof EHandler)) {
+        return ((EHandler)taskHandler).getName();
+      }
+    }
+    return null;
+  }
+  
   public CharSequence compileTaskHandler(final ETaskHandler taskHandler, final String space) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      String _name = taskHandler.getName();
-      boolean _tripleNotEquals = (_name != null);
+      String _taskHandlerName = this.taskHandlerName(taskHandler);
+      boolean _tripleNotEquals = (_taskHandlerName != null);
       if (_tripleNotEquals) {
         _builder.append(space);
         _builder.append("- name: ");
-        String _name_1 = taskHandler.getName();
-        _builder.append(_name_1);
+        String _taskHandlerName_1 = this.taskHandlerName(taskHandler);
+        _builder.append(_taskHandlerName_1);
         _builder.newLineIfNotEmpty();
         {
           EModuleCall _module = taskHandler.getModule();
@@ -987,8 +1016,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           if (_tripleNotEquals_1) {
             String _concat = space.concat("  ");
             _builder.append(_concat);
-            String _name_2 = taskHandler.getModule().getName();
-            _builder.append(_name_2);
+            String _name = taskHandler.getModule().getName();
+            _builder.append(_name);
             _builder.append(":");
             {
               EValuePassed _direct_parameter = taskHandler.getModule().getDirect_parameter();
@@ -1005,8 +1034,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
               for(final EParameter parameter : _parameters) {
                 String _concat_1 = space.concat("  ").concat("  ");
                 _builder.append(_concat_1);
-                String _name_3 = parameter.getName();
-                _builder.append(_name_3);
+                String _name_1 = parameter.getName();
+                _builder.append(_name_1);
                 _builder.append(": ");
                 Object _compileValuePassed_1 = this.compileValuePassed(parameter.getValue_passed());
                 _builder.append(_compileValuePassed_1);
@@ -1022,8 +1051,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           if (_tripleNotEquals_3) {
             _builder.append(space);
             _builder.append("- ");
-            String _name_4 = taskHandler.getModule().getName();
-            _builder.append(_name_4);
+            String _name_2 = taskHandler.getModule().getName();
+            _builder.append(_name_2);
             _builder.append(":");
             {
               EValuePassed _direct_parameter_1 = taskHandler.getModule().getDirect_parameter();
@@ -1040,8 +1069,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
               for(final EParameter parameter_1 : _parameters_1) {
                 String _concat_2 = space.concat("  ").concat("  ");
                 _builder.append(_concat_2);
-                String _name_5 = parameter_1.getName();
-                _builder.append(_name_5);
+                String _name_3 = parameter_1.getName();
+                _builder.append(_name_3);
                 _builder.append(": ");
                 Object _compileValuePassed_3 = this.compileValuePassed(parameter_1.getValue_passed());
                 _builder.append(_compileValuePassed_3);
@@ -1531,23 +1560,23 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public String compileIsExpression(final EIsExpression isExpression) {
-    String stringToReturn = this.compileParenthesisedExpression(isExpression.getParenthesised_expression()).toString();
-    EIsExpression _status = isExpression.getStatus();
-    boolean _tripleNotEquals = (_status != null);
+    String stringToReturn = "";
+    String _not = isExpression.getNot();
+    boolean _tripleNotEquals = (_not != null);
     if (_tripleNotEquals) {
-      String _is_not = isExpression.getIs_not();
-      boolean _tripleNotEquals_1 = (_is_not != null);
-      if (_tripleNotEquals_1) {
-        stringToReturn = stringToReturn.concat(" is not ").concat(this.compileIsExpression(isExpression.getStatus()).toString());
-      } else {
-        stringToReturn = stringToReturn.concat(" is ").concat(this.compileIsExpression(isExpression.getStatus()).toString());
-      }
+      stringToReturn = stringToReturn.concat("not ");
+    }
+    stringToReturn = stringToReturn.concat(this.compileParenthesisedExpression(isExpression.getParenthesised_expression()).toString());
+    EIsExpression _status = isExpression.getStatus();
+    boolean _tripleNotEquals_1 = (_status != null);
+    if (_tripleNotEquals_1) {
+      stringToReturn = stringToReturn.concat(" is ").concat(this.compileIsExpression(isExpression.getStatus()).toString());
     } else {
       EIsExpression _container_expression = isExpression.getContainer_expression();
       boolean _tripleNotEquals_2 = (_container_expression != null);
       if (_tripleNotEquals_2) {
-        String _is_not_1 = isExpression.getIs_not();
-        boolean _tripleNotEquals_3 = (_is_not_1 != null);
+        String _not_in = isExpression.getNot_in();
+        boolean _tripleNotEquals_3 = (_not_in != null);
         if (_tripleNotEquals_3) {
           stringToReturn = stringToReturn.concat(" not in ").concat(this.compileIsExpression(isExpression.getContainer_expression()).toString());
         } else {
@@ -1686,6 +1715,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                     } else {
                       if ((valuePassedToJinjaExpression instanceof EFunctionCall)) {
                         return this.compileFunctionCall(((EFunctionCall)valuePassedToJinjaExpression));
+                      } else {
+                        if ((valuePassedToJinjaExpression instanceof EEmptyCurlyBraces)) {
+                          return "{}";
+                        }
                       }
                     }
                     _xifexpression_7 = _xifexpression_8;
@@ -1779,18 +1812,5 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileSimpleValueWithoutString(final ESimpleValueWithoutString simpleValueWithoutString) {
     return simpleValueWithoutString.getSimple_value();
-  }
-  
-  public String compileVariableDeclarations(final EBase base) {
-    String variableDeclarationsString = "{";
-    EList<EVariableDeclaration> _variable_declarations = base.getVariable_declarations();
-    for (final EVariableDeclaration variable_declaration : _variable_declarations) {
-      variableDeclarationsString = variableDeclarationsString.concat(variable_declaration.getName()).concat(": ").concat(this.compileValuePassed(variable_declaration.getValue_passed()).toString()).concat(", ");
-    }
-    int _length = variableDeclarationsString.length();
-    int _minus = (_length - 2);
-    variableDeclarationsString = variableDeclarationsString.substring(0, _minus);
-    variableDeclarationsString = variableDeclarationsString.concat("}");
-    return variableDeclarationsString;
   }
 }

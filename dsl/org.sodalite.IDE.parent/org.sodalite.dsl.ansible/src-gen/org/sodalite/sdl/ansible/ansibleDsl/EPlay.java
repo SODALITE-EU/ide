@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getHosts <em>Hosts</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_exe_settings <em>Play exe settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_error_handling <em>Play error handling</em>}</li>
@@ -36,26 +37,48 @@ import org.eclipse.emf.common.util.EList;
 public interface EPlay extends EBase
 {
   /**
-   * Returns the value of the '<em><b>Hosts</b></em>' attribute.
+   * Returns the value of the '<em><b>Name</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Hosts</em>' attribute.
-   * @see #setHosts(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Hosts()
-   * @model
+   * @return the value of the '<em>Name</em>' containment reference.
+   * @see #setName(EJinjaExpressionAndString)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Name()
+   * @model containment="true"
    * @generated
    */
-  String getHosts();
+  EJinjaExpressionAndString getName();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getHosts <em>Hosts</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getName <em>Name</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Hosts</em>' attribute.
+   * @param value the new value of the '<em>Name</em>' containment reference.
+   * @see #getName()
+   * @generated
+   */
+  void setName(EJinjaExpressionAndString value);
+
+  /**
+   * Returns the value of the '<em><b>Hosts</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Hosts</em>' containment reference.
+   * @see #setHosts(EJinjaExpressionAndString)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Hosts()
+   * @model containment="true"
+   * @generated
+   */
+  EJinjaExpressionAndString getHosts();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getHosts <em>Hosts</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Hosts</em>' containment reference.
    * @see #getHosts()
    * @generated
    */
-  void setHosts(String value);
+  void setHosts(EJinjaExpressionAndString value);
 
   /**
    * Returns the value of the '<em><b>Play exe settings</b></em>' containment reference.

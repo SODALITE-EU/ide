@@ -37,11 +37,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEExecutionAccess().getAlternatives(), "rule__EExecution__Alternatives");
 			builder.put(grammarAccess.getEBlockTaskAccess().getAlternatives(), "rule__EBlockTask__Alternatives");
 			builder.put(grammarAccess.getETaskHandlerAccess().getAlternatives(), "rule__ETaskHandler__Alternatives");
-			builder.put(grammarAccess.getEPlayAccess().getDebuggerAlternatives_3_6_1_0(), "rule__EPlay__DebuggerAlternatives_3_6_1_0");
-			builder.put(grammarAccess.getEBlockAccess().getDebuggerAlternatives_2_5_1_0(), "rule__EBlock__DebuggerAlternatives_2_5_1_0");
-			builder.put(grammarAccess.getETaskAccess().getDebuggerAlternatives_3_5_1_0(), "rule__ETask__DebuggerAlternatives_3_5_1_0");
-			builder.put(grammarAccess.getEHandlerAccess().getDebuggerAlternatives_3_5_1_0(), "rule__EHandler__DebuggerAlternatives_3_5_1_0");
-			builder.put(grammarAccess.getERoleInclusionAccess().getDebuggerAlternatives_2_2_4_1_0(), "rule__ERoleInclusion__DebuggerAlternatives_2_2_4_1_0");
 			builder.put(grammarAccess.getELoopAccess().getAlternatives_2(), "rule__ELoop__Alternatives_2");
 			builder.put(grammarAccess.getEExeSettingsAccess().getAlternatives(), "rule__EExeSettings__Alternatives");
 			builder.put(grammarAccess.getEErrorHandlingAccess().getAlternatives(), "rule__EErrorHandling__Alternatives");
@@ -58,7 +53,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEFunctionCallAccess().getAlternatives_1(), "rule__EFunctionCall__Alternatives_1");
 			builder.put(grammarAccess.getETruthExpressionAccess().getEquality_signAlternatives_1_0_0(), "rule__ETruthExpression__Equality_signAlternatives_1_0_0");
 			builder.put(grammarAccess.getEOperationAccess().getOperatorAlternatives_1_0_0(), "rule__EOperation__OperatorAlternatives_1_0_0");
-			builder.put(grammarAccess.getEIsExpressionAccess().getAlternatives_1(), "rule__EIsExpression__Alternatives_1");
+			builder.put(grammarAccess.getEIsExpressionAccess().getAlternatives_2(), "rule__EIsExpression__Alternatives_2");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getAlternatives_0(), "rule__EParenthesisedExpression__Alternatives_0");
 			builder.put(grammarAccess.getEVariableReferenceAccess().getAlternatives(), "rule__EVariableReference__Alternatives");
 			builder.put(grammarAccess.getEDictionaryAccess().getAlternatives(), "rule__EDictionary__Alternatives");
@@ -221,8 +216,8 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEOperationAccess().getGroup(), "rule__EOperation__Group__0");
 			builder.put(grammarAccess.getEOperationAccess().getGroup_1(), "rule__EOperation__Group_1__0");
 			builder.put(grammarAccess.getEIsExpressionAccess().getGroup(), "rule__EIsExpression__Group__0");
-			builder.put(grammarAccess.getEIsExpressionAccess().getGroup_1_0(), "rule__EIsExpression__Group_1_0__0");
-			builder.put(grammarAccess.getEIsExpressionAccess().getGroup_1_1(), "rule__EIsExpression__Group_1_1__0");
+			builder.put(grammarAccess.getEIsExpressionAccess().getGroup_2_0(), "rule__EIsExpression__Group_2_0__0");
+			builder.put(grammarAccess.getEIsExpressionAccess().getGroup_2_1(), "rule__EIsExpression__Group_2_1__0");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getGroup(), "rule__EParenthesisedExpression__Group__0");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getGroup_0_1(), "rule__EParenthesisedExpression__Group_0_1__0");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getGroup_1(), "rule__EParenthesisedExpression__Group_1__0");
@@ -248,6 +243,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEDictionaryPairAccess().getGroup(), "rule__EDictionaryPair__Group__0");
 			builder.put(grammarAccess.getEListAccess().getGroup(), "rule__EList__Group__0");
 			builder.put(grammarAccess.getEListAccess().getGroup_2(), "rule__EList__Group_2__0");
+			builder.put(grammarAccess.getEEmptyCurlyBracesAccess().getGroup(), "rule__EEmptyCurlyBraces__Group__0");
 			builder.put(grammarAccess.getEPlaybookAccess().getNameAssignment_1(), "rule__EPlaybook__NameAssignment_1");
 			builder.put(grammarAccess.getEPlaybookAccess().getUsed_byAssignment_2_2(), "rule__EPlaybook__Used_byAssignment_2_2");
 			builder.put(grammarAccess.getEPlaybookAccess().getPlaysAssignment_5(), "rule__EPlaybook__PlaysAssignment_5");
@@ -436,11 +432,11 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEOperationAccess().getLeft_operandAssignment_0(), "rule__EOperation__Left_operandAssignment_0");
 			builder.put(grammarAccess.getEOperationAccess().getOperatorAssignment_1_0(), "rule__EOperation__OperatorAssignment_1_0");
 			builder.put(grammarAccess.getEOperationAccess().getRight_operandAssignment_1_1(), "rule__EOperation__Right_operandAssignment_1_1");
-			builder.put(grammarAccess.getEIsExpressionAccess().getParenthesised_expressionAssignment_0(), "rule__EIsExpression__Parenthesised_expressionAssignment_0");
-			builder.put(grammarAccess.getEIsExpressionAccess().getIs_notAssignment_1_0_1(), "rule__EIsExpression__Is_notAssignment_1_0_1");
-			builder.put(grammarAccess.getEIsExpressionAccess().getStatusAssignment_1_0_2(), "rule__EIsExpression__StatusAssignment_1_0_2");
-			builder.put(grammarAccess.getEIsExpressionAccess().getIs_notAssignment_1_1_0(), "rule__EIsExpression__Is_notAssignment_1_1_0");
-			builder.put(grammarAccess.getEIsExpressionAccess().getContainer_expressionAssignment_1_1_2(), "rule__EIsExpression__Container_expressionAssignment_1_1_2");
+			builder.put(grammarAccess.getEIsExpressionAccess().getNotAssignment_0(), "rule__EIsExpression__NotAssignment_0");
+			builder.put(grammarAccess.getEIsExpressionAccess().getParenthesised_expressionAssignment_1(), "rule__EIsExpression__Parenthesised_expressionAssignment_1");
+			builder.put(grammarAccess.getEIsExpressionAccess().getStatusAssignment_2_0_1(), "rule__EIsExpression__StatusAssignment_2_0_1");
+			builder.put(grammarAccess.getEIsExpressionAccess().getNot_inAssignment_2_1_0(), "rule__EIsExpression__Not_inAssignment_2_1_0");
+			builder.put(grammarAccess.getEIsExpressionAccess().getContainer_expressionAssignment_2_1_2(), "rule__EIsExpression__Container_expressionAssignment_2_1_2");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getBasic_valueAssignment_0_0(), "rule__EParenthesisedExpression__Basic_valueAssignment_0_0");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getParenthesised_termAssignment_0_1_1(), "rule__EParenthesisedExpression__Parenthesised_termAssignment_0_1_1");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getIndexAssignment_1_1(), "rule__EParenthesisedExpression__IndexAssignment_1_1");
@@ -474,6 +470,8 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENumberPassedAccess().getNumber_passedAssignment_2(), "rule__ENumberPassed__Number_passedAssignment_2");
 			builder.put(grammarAccess.getEBooleanPassedAccess().getBoolean_passedAssignment_1(), "rule__EBooleanPassed__Boolean_passedAssignment_1");
 			builder.put(grammarAccess.getEBooleanPassedAccess().getBoolean_passedAssignment_2(), "rule__EBooleanPassed__Boolean_passedAssignment_2");
+			builder.put(grammarAccess.getEEmptyCurlyBracesAccess().getLeft_curly_braceAssignment_0(), "rule__EEmptyCurlyBraces__Left_curly_braceAssignment_0");
+			builder.put(grammarAccess.getEEmptyCurlyBracesAccess().getRight_curly_braceAssignment_1(), "rule__EEmptyCurlyBraces__Right_curly_braceAssignment_1");
 			builder.put(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), "rule__EPlay__UnorderedGroup_3");
 			builder.put(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), "rule__EBlock__UnorderedGroup_2");
 			builder.put(grammarAccess.getETaskAccess().getUnorderedGroup_3(), "rule__ETask__UnorderedGroup_3");

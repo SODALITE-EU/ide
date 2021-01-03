@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getPrivilege_escalation <em>Privilege escalation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getValidation_mode <em>Validation mode</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getConnection <em>Connection</em>}</li>
@@ -35,28 +34,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface EBase extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
   /**
    * Returns the value of the '<em><b>Privilege escalation</b></em>' containment reference.
    * <!-- begin-user-doc -->
@@ -146,26 +123,26 @@ public interface EBase extends EObject
   void setNo_log(EBooleanPassed value);
 
   /**
-   * Returns the value of the '<em><b>Debugger</b></em>' attribute.
+   * Returns the value of the '<em><b>Debugger</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Debugger</em>' attribute.
-   * @see #setDebugger(String)
+   * @return the value of the '<em>Debugger</em>' containment reference.
+   * @see #setDebugger(EJinjaExpressionAndString)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Debugger()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getDebugger();
+  EJinjaExpressionAndString getDebugger();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getDebugger <em>Debugger</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getDebugger <em>Debugger</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Debugger</em>' attribute.
+   * @param value the new value of the '<em>Debugger</em>' containment reference.
    * @see #getDebugger()
    * @generated
    */
-  void setDebugger(String value);
+  void setDebugger(EJinjaExpressionAndString value);
 
   /**
    * Returns the value of the '<em><b>Module defaults</b></em>' containment reference.

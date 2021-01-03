@@ -23,6 +23,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
@@ -38,6 +39,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getHosts <em>Hosts</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPlay_exe_settings <em>Play exe settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPlay_error_handling <em>Play error handling</em>}</li>
@@ -58,24 +60,24 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 public class EPlayImpl extends EBaseImpl implements EPlay
 {
   /**
-   * The default value of the '{@link #getHosts() <em>Hosts</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getHosts()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String HOSTS_EDEFAULT = null;
+  protected EJinjaExpressionAndString name;
 
   /**
-   * The cached value of the '{@link #getHosts() <em>Hosts</em>}' attribute.
+   * The cached value of the '{@link #getHosts() <em>Hosts</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getHosts()
    * @generated
    * @ordered
    */
-  protected String hosts = HOSTS_EDEFAULT;
+  protected EJinjaExpressionAndString hosts;
 
   /**
    * The cached value of the '{@link #getPlay_exe_settings() <em>Play exe settings</em>}' containment reference.
@@ -224,7 +226,57 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public String getHosts()
+  public EJinjaExpressionAndString getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetName(EJinjaExpressionAndString newName, NotificationChain msgs)
+  {
+    EJinjaExpressionAndString oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__NAME, oldName, newName);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(EJinjaExpressionAndString newName)
+  {
+    if (newName != name)
+    {
+      NotificationChain msgs = null;
+      if (name != null)
+        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__NAME, null, msgs);
+      if (newName != null)
+        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__NAME, null, msgs);
+      msgs = basicSetName(newName, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__NAME, newName, newName));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaExpressionAndString getHosts()
   {
     return hosts;
   }
@@ -234,13 +286,38 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setHosts(String newHosts)
+  public NotificationChain basicSetHosts(EJinjaExpressionAndString newHosts, NotificationChain msgs)
   {
-    String oldHosts = hosts;
+    EJinjaExpressionAndString oldHosts = hosts;
     hosts = newHosts;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__HOSTS, oldHosts, hosts));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__HOSTS, oldHosts, newHosts);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setHosts(EJinjaExpressionAndString newHosts)
+  {
+    if (newHosts != hosts)
+    {
+      NotificationChain msgs = null;
+      if (hosts != null)
+        msgs = ((InternalEObject)hosts).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__HOSTS, null, msgs);
+      if (newHosts != null)
+        msgs = ((InternalEObject)newHosts).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__HOSTS, null, msgs);
+      msgs = basicSetHosts(newHosts, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__HOSTS, newHosts, newHosts));
   }
 
   /**
@@ -713,6 +790,10 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY__NAME:
+        return basicSetName(null, msgs);
+      case AnsibleDslPackage.EPLAY__HOSTS:
+        return basicSetHosts(null, msgs);
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         return basicSetPlay_exe_settings(null, msgs);
       case AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING:
@@ -751,6 +832,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY__NAME:
+        return getName();
       case AnsibleDslPackage.EPLAY__HOSTS:
         return getHosts();
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
@@ -792,8 +875,11 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY__NAME:
+        setName((EJinjaExpressionAndString)newValue);
+        return;
       case AnsibleDslPackage.EPLAY__HOSTS:
-        setHosts((String)newValue);
+        setHosts((EJinjaExpressionAndString)newValue);
         return;
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         setPlay_exe_settings((EPlayExeSettings)newValue);
@@ -849,8 +935,11 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY__NAME:
+        setName((EJinjaExpressionAndString)null);
+        return;
       case AnsibleDslPackage.EPLAY__HOSTS:
-        setHosts(HOSTS_EDEFAULT);
+        setHosts((EJinjaExpressionAndString)null);
         return;
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         setPlay_exe_settings((EPlayExeSettings)null);
@@ -902,8 +991,10 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EPLAY__NAME:
+        return name != null;
       case AnsibleDslPackage.EPLAY__HOSTS:
-        return HOSTS_EDEFAULT == null ? hosts != null : !HOSTS_EDEFAULT.equals(hosts);
+        return hosts != null;
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         return play_exe_settings != null;
       case AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING:
@@ -930,23 +1021,6 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return handlers != null && !handlers.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (hosts: ");
-    result.append(hosts);
-    result.append(')');
-    return result.toString();
   }
 
 } //EPlayImpl

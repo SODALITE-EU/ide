@@ -61,6 +61,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBase
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces
 
 /**
  * Generates code from your model files on save.
@@ -88,16 +89,16 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compilePlay(EPlay play, String space) '''
 		«IF play.name !== null»
-			- name: «play.name»
+			- name: «play.name.compileJinjaExpressionAndString»
 			«IF play.hosts !== null»
-				«space»hosts: «play.hosts»
+				«space»hosts: «play.hosts.compileJinjaExpressionAndString»
 			«ENDIF»
 			«IF play.playbook_inclusion !== null»
 				«compilePlaybookInclusion(play.playbook_inclusion, space, false)»
 			«ENDIF»
 		«ELSE»
 			«IF play.hosts !== null»
-				- hosts: «play.hosts»
+				- hosts: «play.hosts.compileJinjaExpressionAndString»
 				«IF play.playbook_inclusion !== null»
 					«compilePlaybookInclusion(play.playbook_inclusion, space, false)»
 				«ENDIF»
@@ -181,7 +182,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileRoleInclusion(ERoleInclusion roleInclusion, String space)'''
-		«space»- role: «roleInclusion.name»
+		«space»- role: «roleInclusion.name.compileJinjaExpressionAndString»
 		«compileBaseAttributes(roleInclusion, space.concat('  '))»
 		«compileExecutionAttributes(roleInclusion, space.concat('  '))»
 	'''
@@ -227,7 +228,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»no_log: «base.no_log.compileBooleanPassed»
 		«ENDIF»
 		«IF base.debugger !== null»
-			«space»debugger: «base.debugger»
+			«space»debugger: «base.debugger.compileJinjaExpressionAndString»
 		«ENDIF»
 		«IF base.module_defaults !== null»
 			«space»module_defaults: «base.module_defaults.compileListPassed»
@@ -242,7 +243,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»tags: «base.tags.compileListPassed»
 		«ENDIF»
 		«IF base.variable_declarations.size !== 0»
-			«space»vars: «base.compileVariableDeclarations»
+			«space»vars:
+			«FOR variable_declaration: base.variable_declarations»
+				«space.concat('  ')»«variable_declaration.name»: «compileValuePassed(variable_declaration.value_passed).toString()»
+			«ENDFOR»
 		«ENDIF»
 	'''
 	
@@ -305,7 +309,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileBlock(EBlock block, String space) '''
 		«IF block.name !== null»
-			«space»- name: «block.name»
+			«space»- name: «block.name.compileJinjaExpressionAndString»
 			«space.concat('  ')»block:
 		«ELSE»
 			«space»- block:
@@ -364,10 +368,21 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 	'''
 	
+	//the name of the handler is a simple string because otherwise the scoping doesn't work, so this function is needed
+	//to distinguish between the 2 different cases and get the name of task/handler
+	def taskHandlerName(ETaskHandler taskHandler){
+		if (taskHandler instanceof ETask){
+			//this check is necessary in order to not pass null to compileJinjaExpressionAndString
+			if (taskHandler.name !== null) return taskHandler.name.compileJinjaExpressionAndString
+			else return null
+		} 
+		else if (taskHandler instanceof EHandler) return taskHandler.name
+	}
+	
 	//if the task/handler has a name, indent it correctly. the name of the module used is the first thing to show
 	def compileTaskHandler(ETaskHandler taskHandler, String space) '''
-		«IF taskHandler.name !== null»
-			«space»- name: «taskHandler.name»
+		«IF taskHandlerName(taskHandler) !== null»
+			«space»- name: «taskHandlerName(taskHandler)»
 			«IF taskHandler.module !== null»
 				«space.concat('  ')»«taskHandler.module.name»:«IF taskHandler.module.direct_parameter !== null» «taskHandler.module.direct_parameter.compileValuePassed»«ENDIF»
 				«FOR parameter: taskHandler.module.parameters»
@@ -594,17 +609,14 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileIsExpression(EIsExpression isExpression){
-		var stringToReturn = isExpression.parenthesised_expression.compileParenthesisedExpression.toString()
+		var stringToReturn = ""
+		if (isExpression.not !== null) stringToReturn = stringToReturn.concat("not ")
+		stringToReturn = stringToReturn.concat(isExpression.parenthesised_expression.compileParenthesisedExpression.toString())
 		if (isExpression.status !== null){
-			if (isExpression.is_not !== null){
-				stringToReturn = stringToReturn.concat(" is not ").concat(isExpression.status.compileIsExpression.toString())	
-			}
-			else {
-				stringToReturn = stringToReturn.concat(" is ").concat(isExpression.status.compileIsExpression.toString())	
-			}
+			stringToReturn = stringToReturn.concat(" is ").concat(isExpression.status.compileIsExpression.toString())	
 		}
 		else if (isExpression.container_expression !== null){
-			if (isExpression.is_not !== null){
+			if (isExpression.not_in !== null){
 				stringToReturn = stringToReturn.concat(" not in ").concat(isExpression.container_expression.compileIsExpression.toString())
 			}
 			else {
@@ -642,6 +654,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 	}
 	
+	//this is because it's used by the AnsibleDslProposalProvider. The "cascade" of functions called by this function
+	//are made as a consequence
 	def compileJinjaExpressionAndString(EJinjaExpressionAndString jinja){
 		var stringToReturn = "\""
 		for (jinjaOr : jinja.jinja_expression_and_string){
@@ -706,6 +720,9 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (valuePassedToJinjaExpression instanceof EFunctionCall){
 			return valuePassedToJinjaExpression.compileFunctionCall
 		}
+		else if (valuePassedToJinjaExpression instanceof EEmptyCurlyBraces){
+			return "{}"
+		}
 	}
 	
 	def compileLoopList(EValuePassed loopList){
@@ -747,14 +764,5 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileSimpleValueWithoutString(ESimpleValueWithoutString simpleValueWithoutString){
 		return simpleValueWithoutString.simple_value
 	}
-	
-	def compileVariableDeclarations(EBase base){
-		var variableDeclarationsString = '{'
-		for (variable_declaration : base.variable_declarations){
-			variableDeclarationsString = variableDeclarationsString.concat(variable_declaration.name).concat(': ').concat(compileValuePassed(variable_declaration.value_passed).toString()).concat(', ')
-		}
-		variableDeclarationsString = variableDeclarationsString.substring(0, variableDeclarationsString.length() - 2)
-			variableDeclarationsString = variableDeclarationsString.concat('}')
-			return variableDeclarationsString
-	}
+
 }

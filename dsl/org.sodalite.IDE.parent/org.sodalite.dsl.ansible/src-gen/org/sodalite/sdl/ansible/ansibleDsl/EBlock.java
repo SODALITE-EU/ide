@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getBlock_error_handling <em>Block error handling</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getTasks <em>Tasks</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getRescue_tasks <em>Rescue tasks</em>}</li>
@@ -26,6 +27,28 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface EBlock extends EExecution, EBlockTask
 {
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' containment reference.
+   * @see #setName(EJinjaExpressionAndString)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBlock_Name()
+   * @model containment="true"
+   * @generated
+   */
+  EJinjaExpressionAndString getName();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getName <em>Name</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' containment reference.
+   * @see #getName()
+   * @generated
+   */
+  void setName(EJinjaExpressionAndString value);
+
   /**
    * Returns the value of the '<em><b>Block error handling</b></em>' containment reference.
    * <!-- begin-user-doc -->

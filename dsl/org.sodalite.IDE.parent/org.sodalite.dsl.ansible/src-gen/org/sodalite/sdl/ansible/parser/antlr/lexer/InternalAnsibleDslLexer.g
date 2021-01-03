@@ -69,8 +69,6 @@ Gather_subset : 'gather_subset:';
 
 Ignore_errors : 'ignore_errors:';
 
-On_unreachable : 'on_unreachable';
-
 Playbook_name : 'playbook_name:';
 
 Always_tasks : 'always_tasks:';
@@ -129,8 +127,6 @@ Loop_over : 'loop_over:';
 
 Node_type : 'node_type:';
 
-On_skipped : 'on_skipped';
-
 Operation : 'operation:';
 
 Play_name : 'play_name:';
@@ -150,8 +146,6 @@ Fact_set : 'fact_set:';
 Handlers : 'handlers:';
 
 Loop_var : 'loop_var:';
-
-On_failed : 'on_failed';
 
 Register : 'register:';
 
@@ -180,8 +174,6 @@ No_log : 'no_log:';
 Notify : 'notify:';
 
 Serial : 'serial:';
-
-Always : 'always';
 
 Async : 'async:';
 
@@ -212,8 +204,6 @@ Args : 'args:';
 Diff : 'diff:';
 
 Loop : 'loop:';
-
-Never : 'never';
 
 Play : 'play:';
 

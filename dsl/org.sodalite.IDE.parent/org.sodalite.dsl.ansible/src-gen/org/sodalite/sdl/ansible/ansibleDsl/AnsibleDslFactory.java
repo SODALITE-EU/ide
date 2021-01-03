@@ -717,6 +717,15 @@ public interface AnsibleDslFactory extends EFactory
   EBooleanPassed createEBooleanPassed();
 
   /**
+   * Returns a new object of class '<em>EEmpty Curly Braces</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EEmpty Curly Braces</em>'.
+   * @generated
+   */
+  EEmptyCurlyBraces createEEmptyCurlyBraces();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

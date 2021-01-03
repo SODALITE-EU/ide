@@ -684,6 +684,14 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.EEMPTY_CURLY_BRACES:
+      {
+        EEmptyCurlyBraces eEmptyCurlyBraces = (EEmptyCurlyBraces)theEObject;
+        T result = caseEEmptyCurlyBraces(eEmptyCurlyBraces);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eEmptyCurlyBraces);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -1916,6 +1924,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEBooleanPassed(EBooleanPassed object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EEmpty Curly Braces</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EEmpty Curly Braces</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEEmptyCurlyBraces(EEmptyCurlyBraces object)
   {
     return null;
   }

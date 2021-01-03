@@ -28,6 +28,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces;
 import org.sodalite.sdl.ansible.ansibleDsl.EErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
@@ -640,6 +641,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   private EClass eBooleanPassedEClass = null;
 
   /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eEmptyCurlyBracesEClass = null;
+
+  /**
    * Creates an instance of the model <b>Package</b>, registered with
    * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
    * package URI value.
@@ -810,20 +818,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEBase_Name()
-  {
-    return (EAttribute)eBaseEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getEBase_Privilege_escalation()
   {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(1);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -834,7 +831,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getEBase_Validation_mode()
   {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(2);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -845,7 +842,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getEBase_Connection()
   {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(3);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -856,7 +853,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getEBase_No_log()
   {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(4);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -865,9 +862,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEBase_Debugger()
+  public EReference getEBase_Debugger()
   {
-    return (EAttribute)eBaseEClass.getEStructuralFeatures().get(5);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -878,7 +875,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getEBase_Module_defaults()
   {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(6);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -889,7 +886,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getEBase_Environment()
   {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(7);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -900,7 +897,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getEBase_Collections()
   {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(8);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -911,7 +908,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getEBase_Tags()
   {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(9);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(8);
   }
 
   /**
@@ -922,7 +919,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getEBase_Variable_declarations()
   {
-    return (EReference)eBaseEClass.getEStructuralFeatures().get(10);
+    return (EReference)eBaseEClass.getEStructuralFeatures().get(9);
   }
 
   /**
@@ -1096,9 +1093,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPlay_Hosts()
+  public EReference getEPlay_Name()
   {
-    return (EAttribute)ePlayEClass.getEStructuralFeatures().get(0);
+    return (EReference)ePlayEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1107,7 +1104,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Play_exe_settings()
+  public EReference getEPlay_Hosts()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(1);
   }
@@ -1118,7 +1115,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Play_error_handling()
+  public EReference getEPlay_Play_exe_settings()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(2);
   }
@@ -1129,7 +1126,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Facts_settings()
+  public EReference getEPlay_Play_error_handling()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(3);
   }
@@ -1140,7 +1137,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Vars_files()
+  public EReference getEPlay_Facts_settings()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(4);
   }
@@ -1151,7 +1148,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Vars_prompt()
+  public EReference getEPlay_Vars_files()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(5);
   }
@@ -1162,7 +1159,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Force_handlers()
+  public EReference getEPlay_Vars_prompt()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(6);
   }
@@ -1173,7 +1170,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Playbook_inclusion()
+  public EReference getEPlay_Force_handlers()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(7);
   }
@@ -1184,7 +1181,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Pre_tasks_list()
+  public EReference getEPlay_Playbook_inclusion()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(8);
   }
@@ -1195,7 +1192,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Roles_inclusions()
+  public EReference getEPlay_Pre_tasks_list()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(9);
   }
@@ -1206,7 +1203,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Tasks_list()
+  public EReference getEPlay_Roles_inclusions()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(10);
   }
@@ -1217,7 +1214,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Post_tasks_list()
+  public EReference getEPlay_Tasks_list()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(11);
   }
@@ -1228,9 +1225,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Handlers()
+  public EReference getEPlay_Post_tasks_list()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(12);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPlay_Handlers()
+  {
+    return (EReference)ePlayEClass.getEStructuralFeatures().get(13);
   }
 
   /**
@@ -1250,7 +1258,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEBlock_Block_error_handling()
+  public EReference getEBlock_Name()
   {
     return (EReference)eBlockEClass.getEStructuralFeatures().get(0);
   }
@@ -1261,7 +1269,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEBlock_Tasks()
+  public EReference getEBlock_Block_error_handling()
   {
     return (EReference)eBlockEClass.getEStructuralFeatures().get(1);
   }
@@ -1272,7 +1280,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEBlock_Rescue_tasks()
+  public EReference getEBlock_Tasks()
   {
     return (EReference)eBlockEClass.getEStructuralFeatures().get(2);
   }
@@ -1283,9 +1291,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEBlock_Always_tasks()
+  public EReference getEBlock_Rescue_tasks()
   {
     return (EReference)eBlockEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEBlock_Always_tasks()
+  {
+    return (EReference)eBlockEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1305,6 +1324,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EReference getETask_Name()
+  {
+    return (EReference)eTaskEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEHandler()
   {
     return eHandlerEClass;
@@ -1316,9 +1346,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EAttribute getEHandler_Name()
+  {
+    return (EAttribute)eHandlerEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getEHandler_Listen_to()
   {
-    return (EReference)eHandlerEClass.getEStructuralFeatures().get(0);
+    return (EReference)eHandlerEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1407,6 +1448,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EClass getERoleInclusion()
   {
     return eRoleInclusionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getERoleInclusion_Name()
+  {
+    return (EReference)eRoleInclusionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2581,9 +2633,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEIsExpression_Parenthesised_expression()
+  public EAttribute getEIsExpression_Not()
   {
-    return (EReference)eIsExpressionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eIsExpressionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2592,9 +2644,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEIsExpression_Is_not()
+  public EReference getEIsExpression_Parenthesised_expression()
   {
-    return (EAttribute)eIsExpressionEClass.getEStructuralFeatures().get(1);
+    return (EReference)eIsExpressionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2614,9 +2666,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EAttribute getEIsExpression_Not_in()
+  {
+    return (EAttribute)eIsExpressionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getEIsExpression_Container_expression()
   {
-    return (EReference)eIsExpressionEClass.getEStructuralFeatures().get(3);
+    return (EReference)eIsExpressionEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -3175,6 +3238,39 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getEEmptyCurlyBraces()
+  {
+    return eEmptyCurlyBracesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEEmptyCurlyBraces_Left_curly_brace()
+  {
+    return (EAttribute)eEmptyCurlyBracesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEEmptyCurlyBraces_Right_curly_brace()
+  {
+    return (EAttribute)eEmptyCurlyBracesEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public AnsibleDslFactory getAnsibleDslFactory()
   {
     return (AnsibleDslFactory)getEFactoryInstance();
@@ -3212,12 +3308,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eUsedByBodyEClass, EUSED_BY_BODY__OPERATION);
 
     eBaseEClass = createEClass(EBASE);
-    createEAttribute(eBaseEClass, EBASE__NAME);
     createEReference(eBaseEClass, EBASE__PRIVILEGE_ESCALATION);
     createEReference(eBaseEClass, EBASE__VALIDATION_MODE);
     createEReference(eBaseEClass, EBASE__CONNECTION);
     createEReference(eBaseEClass, EBASE__NO_LOG);
-    createEAttribute(eBaseEClass, EBASE__DEBUGGER);
+    createEReference(eBaseEClass, EBASE__DEBUGGER);
     createEReference(eBaseEClass, EBASE__MODULE_DEFAULTS);
     createEReference(eBaseEClass, EBASE__ENVIRONMENT);
     createEReference(eBaseEClass, EBASE__COLLECTIONS);
@@ -3242,7 +3337,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eTaskHandlerEClass, ETASK_HANDLER__REGISTER);
 
     ePlayEClass = createEClass(EPLAY);
-    createEAttribute(ePlayEClass, EPLAY__HOSTS);
+    createEReference(ePlayEClass, EPLAY__NAME);
+    createEReference(ePlayEClass, EPLAY__HOSTS);
     createEReference(ePlayEClass, EPLAY__PLAY_EXE_SETTINGS);
     createEReference(ePlayEClass, EPLAY__PLAY_ERROR_HANDLING);
     createEReference(ePlayEClass, EPLAY__FACTS_SETTINGS);
@@ -3257,14 +3353,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(ePlayEClass, EPLAY__HANDLERS);
 
     eBlockEClass = createEClass(EBLOCK);
+    createEReference(eBlockEClass, EBLOCK__NAME);
     createEReference(eBlockEClass, EBLOCK__BLOCK_ERROR_HANDLING);
     createEReference(eBlockEClass, EBLOCK__TASKS);
     createEReference(eBlockEClass, EBLOCK__RESCUE_TASKS);
     createEReference(eBlockEClass, EBLOCK__ALWAYS_TASKS);
 
     eTaskEClass = createEClass(ETASK);
+    createEReference(eTaskEClass, ETASK__NAME);
 
     eHandlerEClass = createEClass(EHANDLER);
+    createEAttribute(eHandlerEClass, EHANDLER__NAME);
     createEReference(eHandlerEClass, EHANDLER__LISTEN_TO);
 
     eModuleCallEClass = createEClass(EMODULE_CALL);
@@ -3277,6 +3376,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eParameterEClass, EPARAMETER__VALUE_PASSED);
 
     eRoleInclusionEClass = createEClass(EROLE_INCLUSION);
+    createEReference(eRoleInclusionEClass, EROLE_INCLUSION__NAME);
 
     eRoleInclusionsEClass = createEClass(EROLE_INCLUSIONS);
     createEReference(eRoleInclusionsEClass, EROLE_INCLUSIONS__ROLES);
@@ -3424,9 +3524,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eOperationEClass, EOPERATION__RIGHT_OPERAND);
 
     eIsExpressionEClass = createEClass(EIS_EXPRESSION);
+    createEAttribute(eIsExpressionEClass, EIS_EXPRESSION__NOT);
     createEReference(eIsExpressionEClass, EIS_EXPRESSION__PARENTHESISED_EXPRESSION);
-    createEAttribute(eIsExpressionEClass, EIS_EXPRESSION__IS_NOT);
     createEReference(eIsExpressionEClass, EIS_EXPRESSION__STATUS);
+    createEAttribute(eIsExpressionEClass, EIS_EXPRESSION__NOT_IN);
     createEReference(eIsExpressionEClass, EIS_EXPRESSION__CONTAINER_EXPRESSION);
 
     eParenthesisedExpressionEClass = createEClass(EPARENTHESISED_EXPRESSION);
@@ -3500,6 +3601,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eBooleanPassedEClass = createEClass(EBOOLEAN_PASSED);
     createEAttribute(eBooleanPassedEClass, EBOOLEAN_PASSED__BOOLEAN_PASSED);
+
+    eEmptyCurlyBracesEClass = createEClass(EEMPTY_CURLY_BRACES);
+    createEAttribute(eEmptyCurlyBracesEClass, EEMPTY_CURLY_BRACES__LEFT_CURLY_BRACE);
+    createEAttribute(eEmptyCurlyBracesEClass, EEMPTY_CURLY_BRACES__RIGHT_CURLY_BRACE);
   }
 
   /**
@@ -3581,6 +3686,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eDictionaryEClass.getESuperTypes().add(this.getEDictionaryPassed());
     eListEClass.getESuperTypes().add(this.getEComposedValue());
     eListEClass.getESuperTypes().add(this.getEListPassed());
+    eEmptyCurlyBracesEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3595,12 +3701,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEUsedByBody_Operation(), theRMPackage.getEOperationDefinition(), null, "operation", null, 0, 1, EUsedByBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBaseEClass, EBase.class, "EBase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEBase_Name(), ecorePackage.getEString(), "name", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Privilege_escalation(), this.getEPrivilegeEscalation(), null, "privilege_escalation", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Validation_mode(), this.getEValidationMode(), null, "validation_mode", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Connection(), this.getEConnection(), null, "connection", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_No_log(), this.getEBooleanPassed(), null, "no_log", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEBase_Debugger(), ecorePackage.getEString(), "debugger", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Debugger(), this.getEJinjaExpressionAndString(), null, "debugger", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Module_defaults(), this.getEListPassed(), null, "module_defaults", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Environment(), this.getEListPassed(), null, "environment", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Collections(), this.getEListPassed(), null, "collections", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3625,7 +3730,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getETaskHandler_Register(), this.getERegisterVariable(), null, "register", null, 0, 1, ETaskHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePlayEClass, EPlay.class, "EPlay", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEPlay_Hosts(), ecorePackage.getEString(), "hosts", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_Name(), this.getEJinjaExpressionAndString(), null, "name", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_Hosts(), this.getEJinjaExpressionAndString(), null, "hosts", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Play_exe_settings(), this.getEPlayExeSettings(), null, "play_exe_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Play_error_handling(), this.getEPlayErrorHandling(), null, "play_error_handling", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Facts_settings(), this.getEFactsSettings(), null, "facts_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3640,14 +3746,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEPlay_Handlers(), this.getEHandler(), null, "handlers", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBlockEClass, EBlock.class, "EBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEBlock_Name(), this.getEJinjaExpressionAndString(), null, "name", null, 0, 1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Block_error_handling(), this.getEBlockErrorHandling(), null, "block_error_handling", null, 0, 1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Tasks(), this.getETask(), null, "tasks", null, 0, -1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Rescue_tasks(), this.getETask(), null, "rescue_tasks", null, 0, -1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Always_tasks(), this.getETask(), null, "always_tasks", null, 0, -1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eTaskEClass, ETask.class, "ETask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getETask_Name(), this.getEJinjaExpressionAndString(), null, "name", null, 0, 1, ETask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eHandlerEClass, EHandler.class, "EHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEHandler_Name(), ecorePackage.getEString(), "name", null, 0, 1, EHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEHandler_Listen_to(), this.getENotifiedTopic(), null, "listen_to", null, 0, -1, EHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eModuleCallEClass, EModuleCall.class, "EModuleCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3660,6 +3769,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEParameter_Value_passed(), this.getEValuePassed(), null, "value_passed", null, 0, 1, EParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRoleInclusionEClass, ERoleInclusion.class, "ERoleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getERoleInclusion_Name(), this.getEJinjaExpressionAndString(), null, "name", null, 0, 1, ERoleInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRoleInclusionsEClass, ERoleInclusions.class, "ERoleInclusions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getERoleInclusions_Roles(), this.getERoleInclusion(), null, "roles", null, 0, -1, ERoleInclusions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3807,9 +3917,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEOperation_Right_operand(), this.getEOperation(), null, "right_operand", null, 0, 1, EOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eIsExpressionEClass, EIsExpression.class, "EIsExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEIsExpression_Not(), ecorePackage.getEString(), "not", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEIsExpression_Parenthesised_expression(), this.getEParenthesisedExpression(), null, "parenthesised_expression", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEIsExpression_Is_not(), ecorePackage.getEString(), "is_not", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEIsExpression_Status(), this.getEIsExpression(), null, "status", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEIsExpression_Not_in(), ecorePackage.getEString(), "not_in", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEIsExpression_Container_expression(), this.getEIsExpression(), null, "container_expression", null, 0, 1, EIsExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eParenthesisedExpressionEClass, EParenthesisedExpression.class, "EParenthesisedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3883,6 +3994,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eBooleanPassedEClass, EBooleanPassed.class, "EBooleanPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEBooleanPassed_Boolean_passed(), ecorePackage.getEString(), "boolean_passed", null, 0, 1, EBooleanPassed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eEmptyCurlyBracesEClass, EEmptyCurlyBraces.class, "EEmptyCurlyBraces", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEEmptyCurlyBraces_Left_curly_brace(), ecorePackage.getEString(), "left_curly_brace", null, 0, 1, EEmptyCurlyBraces.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEEmptyCurlyBraces_Right_curly_brace(), ecorePackage.getEString(), "right_curly_brace", null, 0, 1, EEmptyCurlyBraces.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

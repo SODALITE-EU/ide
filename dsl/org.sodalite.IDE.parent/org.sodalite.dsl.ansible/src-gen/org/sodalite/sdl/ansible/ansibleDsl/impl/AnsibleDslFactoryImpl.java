@@ -142,6 +142,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ELIST_PASSED: return createEListPassed();
       case AnsibleDslPackage.ENUMBER_PASSED: return createENumberPassed();
       case AnsibleDslPackage.EBOOLEAN_PASSED: return createEBooleanPassed();
+      case AnsibleDslPackage.EEMPTY_CURLY_BRACES: return createEEmptyCurlyBraces();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -1069,6 +1070,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EBooleanPassedImpl eBooleanPassed = new EBooleanPassedImpl();
     return eBooleanPassed;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEmptyCurlyBraces createEEmptyCurlyBraces()
+  {
+    EEmptyCurlyBracesImpl eEmptyCurlyBraces = new EEmptyCurlyBracesImpl();
+    return eEmptyCurlyBraces;
   }
 
   /**

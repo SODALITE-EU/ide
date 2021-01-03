@@ -24,9 +24,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getNot <em>Not</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getParenthesised_expression <em>Parenthesised expression</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getIs_not <em>Is not</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getNot_in <em>Not in</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIsExpressionImpl#getContainer_expression <em>Container expression</em>}</li>
  * </ul>
  *
@@ -34,6 +35,26 @@ import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
  */
 public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements EIsExpression
 {
+  /**
+   * The default value of the '{@link #getNot() <em>Not</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNot()
+   * @generated
+   * @ordered
+   */
+  protected static final String NOT_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getNot() <em>Not</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNot()
+   * @generated
+   * @ordered
+   */
+  protected String not = NOT_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getParenthesised_expression() <em>Parenthesised expression</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -45,26 +66,6 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   protected EParenthesisedExpression parenthesised_expression;
 
   /**
-   * The default value of the '{@link #getIs_not() <em>Is not</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIs_not()
-   * @generated
-   * @ordered
-   */
-  protected static final String IS_NOT_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getIs_not() <em>Is not</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIs_not()
-   * @generated
-   * @ordered
-   */
-  protected String is_not = IS_NOT_EDEFAULT;
-
-  /**
    * The cached value of the '{@link #getStatus() <em>Status</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -73,6 +74,26 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
    * @ordered
    */
   protected EIsExpression status;
+
+  /**
+   * The default value of the '{@link #getNot_in() <em>Not in</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNot_in()
+   * @generated
+   * @ordered
+   */
+  protected static final String NOT_IN_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getNot_in() <em>Not in</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNot_in()
+   * @generated
+   * @ordered
+   */
+  protected String not_in = NOT_IN_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getContainer_expression() <em>Container expression</em>}' containment reference.
@@ -103,6 +124,31 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.EIS_EXPRESSION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getNot()
+  {
+    return not;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setNot(String newNot)
+  {
+    String oldNot = not;
+    not = newNot;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIS_EXPRESSION__NOT, oldNot, not));
   }
 
   /**
@@ -161,31 +207,6 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
-  public String getIs_not()
-  {
-    return is_not;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setIs_not(String newIs_not)
-  {
-    String oldIs_not = is_not;
-    is_not = newIs_not;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIS_EXPRESSION__IS_NOT, oldIs_not, is_not));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EIsExpression getStatus()
   {
     return status;
@@ -228,6 +249,31 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIS_EXPRESSION__STATUS, newStatus, newStatus));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getNot_in()
+  {
+    return not_in;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setNot_in(String newNot_in)
+  {
+    String oldNot_in = not_in;
+    not_in = newNot_in;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIS_EXPRESSION__NOT_IN, oldNot_in, not_in));
   }
 
   /**
@@ -310,12 +356,14 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EIS_EXPRESSION__NOT:
+        return getNot();
       case AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION:
         return getParenthesised_expression();
-      case AnsibleDslPackage.EIS_EXPRESSION__IS_NOT:
-        return getIs_not();
       case AnsibleDslPackage.EIS_EXPRESSION__STATUS:
         return getStatus();
+      case AnsibleDslPackage.EIS_EXPRESSION__NOT_IN:
+        return getNot_in();
       case AnsibleDslPackage.EIS_EXPRESSION__CONTAINER_EXPRESSION:
         return getContainer_expression();
     }
@@ -332,14 +380,17 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EIS_EXPRESSION__NOT:
+        setNot((String)newValue);
+        return;
       case AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION:
         setParenthesised_expression((EParenthesisedExpression)newValue);
         return;
-      case AnsibleDslPackage.EIS_EXPRESSION__IS_NOT:
-        setIs_not((String)newValue);
-        return;
       case AnsibleDslPackage.EIS_EXPRESSION__STATUS:
         setStatus((EIsExpression)newValue);
+        return;
+      case AnsibleDslPackage.EIS_EXPRESSION__NOT_IN:
+        setNot_in((String)newValue);
         return;
       case AnsibleDslPackage.EIS_EXPRESSION__CONTAINER_EXPRESSION:
         setContainer_expression((EIsExpression)newValue);
@@ -358,14 +409,17 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EIS_EXPRESSION__NOT:
+        setNot(NOT_EDEFAULT);
+        return;
       case AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION:
         setParenthesised_expression((EParenthesisedExpression)null);
         return;
-      case AnsibleDslPackage.EIS_EXPRESSION__IS_NOT:
-        setIs_not(IS_NOT_EDEFAULT);
-        return;
       case AnsibleDslPackage.EIS_EXPRESSION__STATUS:
         setStatus((EIsExpression)null);
+        return;
+      case AnsibleDslPackage.EIS_EXPRESSION__NOT_IN:
+        setNot_in(NOT_IN_EDEFAULT);
         return;
       case AnsibleDslPackage.EIS_EXPRESSION__CONTAINER_EXPRESSION:
         setContainer_expression((EIsExpression)null);
@@ -384,12 +438,14 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EIS_EXPRESSION__NOT:
+        return NOT_EDEFAULT == null ? not != null : !NOT_EDEFAULT.equals(not);
       case AnsibleDslPackage.EIS_EXPRESSION__PARENTHESISED_EXPRESSION:
         return parenthesised_expression != null;
-      case AnsibleDslPackage.EIS_EXPRESSION__IS_NOT:
-        return IS_NOT_EDEFAULT == null ? is_not != null : !IS_NOT_EDEFAULT.equals(is_not);
       case AnsibleDslPackage.EIS_EXPRESSION__STATUS:
         return status != null;
+      case AnsibleDslPackage.EIS_EXPRESSION__NOT_IN:
+        return NOT_IN_EDEFAULT == null ? not_in != null : !NOT_IN_EDEFAULT.equals(not_in);
       case AnsibleDslPackage.EIS_EXPRESSION__CONTAINER_EXPRESSION:
         return container_expression != null;
     }
@@ -407,8 +463,10 @@ public class EIsExpressionImpl extends MinimalEObjectImpl.Container implements E
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (is_not: ");
-    result.append(is_not);
+    result.append(" (not: ");
+    result.append(not);
+    result.append(", not_in: ");
+    result.append(not_in);
     result.append(')');
     return result.toString();
   }

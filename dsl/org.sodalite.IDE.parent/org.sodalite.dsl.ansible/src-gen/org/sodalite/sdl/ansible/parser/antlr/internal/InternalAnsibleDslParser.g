@@ -402,19 +402,20 @@ ruleEPlay returns [EObject current=null]
 								}
 								(
 									(
-										lv_name_5_0=RULE_STRING
 										{
-											newLeafNode(lv_name_5_0, grammarAccess.getEPlayAccess().getNameSTRINGTerminalRuleCall_3_0_1_0());
+											newCompositeNode(grammarAccess.getEPlayAccess().getNameEJinjaExpressionAndStringParserRuleCall_3_0_1_0());
 										}
+										lv_name_5_0=ruleEJinjaExpressionAndString
 										{
 											if ($current==null) {
-												$current = createModelElement(grammarAccess.getEPlayRule());
+												$current = createModelElementForParent(grammarAccess.getEPlayRule());
 											}
-											setWithLastConsumed(
+											set(
 												$current,
 												"name",
 												lv_name_5_0,
-												"org.eclipse.xtext.common.Terminals.STRING");
+												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+											afterParserOrEnumRuleCall();
 										}
 									)
 								)
@@ -435,19 +436,20 @@ ruleEPlay returns [EObject current=null]
 								}
 								(
 									(
-										lv_hosts_7_0=RULE_STRING
 										{
-											newLeafNode(lv_hosts_7_0, grammarAccess.getEPlayAccess().getHostsSTRINGTerminalRuleCall_3_1_1_0());
+											newCompositeNode(grammarAccess.getEPlayAccess().getHostsEJinjaExpressionAndStringParserRuleCall_3_1_1_0());
 										}
+										lv_hosts_7_0=ruleEJinjaExpressionAndString
 										{
 											if ($current==null) {
-												$current = createModelElement(grammarAccess.getEPlayRule());
+												$current = createModelElementForParent(grammarAccess.getEPlayRule());
 											}
-											setWithLastConsumed(
+											set(
 												$current,
 												"hosts",
 												lv_hosts_7_0,
-												"org.eclipse.xtext.common.Terminals.STRING");
+												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+											afterParserOrEnumRuleCall();
 										}
 									)
 								)
@@ -586,62 +588,21 @@ ruleEPlay returns [EObject current=null]
 								}
 								(
 									(
-										(
-											lv_debugger_14_1=Always
-											{
-												newLeafNode(lv_debugger_14_1, grammarAccess.getEPlayAccess().getDebuggerAlwaysKeyword_3_6_1_0_0());
+										{
+											newCompositeNode(grammarAccess.getEPlayAccess().getDebuggerEJinjaExpressionAndStringParserRuleCall_3_6_1_0());
+										}
+										lv_debugger_14_0=ruleEJinjaExpressionAndString
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEPlayRule());
 											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEPlayRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_14_1, null);
-											}
-											    |
-											lv_debugger_14_2=Never
-											{
-												newLeafNode(lv_debugger_14_2, grammarAccess.getEPlayAccess().getDebuggerNeverKeyword_3_6_1_0_1());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEPlayRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_14_2, null);
-											}
-											    |
-											lv_debugger_14_3=On_failed
-											{
-												newLeafNode(lv_debugger_14_3, grammarAccess.getEPlayAccess().getDebuggerOn_failedKeyword_3_6_1_0_2());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEPlayRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_14_3, null);
-											}
-											    |
-											lv_debugger_14_4=On_unreachable
-											{
-												newLeafNode(lv_debugger_14_4, grammarAccess.getEPlayAccess().getDebuggerOn_unreachableKeyword_3_6_1_0_3());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEPlayRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_14_4, null);
-											}
-											    |
-											lv_debugger_14_5=On_skipped
-											{
-												newLeafNode(lv_debugger_14_5, grammarAccess.getEPlayAccess().getDebuggerOn_skippedKeyword_3_6_1_0_4());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEPlayRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_14_5, null);
-											}
-										)
+											set(
+												$current,
+												"debugger",
+												lv_debugger_14_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+											afterParserOrEnumRuleCall();
+										}
 									)
 								)
 								))
@@ -1294,19 +1255,20 @@ ruleEBlock returns [EObject current=null]
 								}
 								(
 									(
-										lv_name_4_0=RULE_STRING
 										{
-											newLeafNode(lv_name_4_0, grammarAccess.getEBlockAccess().getNameSTRINGTerminalRuleCall_2_0_1_0());
+											newCompositeNode(grammarAccess.getEBlockAccess().getNameEJinjaExpressionAndStringParserRuleCall_2_0_1_0());
 										}
+										lv_name_4_0=ruleEJinjaExpressionAndString
 										{
 											if ($current==null) {
-												$current = createModelElement(grammarAccess.getEBlockRule());
+												$current = createModelElementForParent(grammarAccess.getEBlockRule());
 											}
-											setWithLastConsumed(
+											set(
 												$current,
 												"name",
 												lv_name_4_0,
-												"org.eclipse.xtext.common.Terminals.STRING");
+												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+											afterParserOrEnumRuleCall();
 										}
 									)
 								)
@@ -1445,62 +1407,21 @@ ruleEBlock returns [EObject current=null]
 								}
 								(
 									(
-										(
-											lv_debugger_11_1=Always
-											{
-												newLeafNode(lv_debugger_11_1, grammarAccess.getEBlockAccess().getDebuggerAlwaysKeyword_2_5_1_0_0());
+										{
+											newCompositeNode(grammarAccess.getEBlockAccess().getDebuggerEJinjaExpressionAndStringParserRuleCall_2_5_1_0());
+										}
+										lv_debugger_11_0=ruleEJinjaExpressionAndString
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEBlockRule());
 											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEBlockRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_11_1, null);
-											}
-											    |
-											lv_debugger_11_2=Never
-											{
-												newLeafNode(lv_debugger_11_2, grammarAccess.getEBlockAccess().getDebuggerNeverKeyword_2_5_1_0_1());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEBlockRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_11_2, null);
-											}
-											    |
-											lv_debugger_11_3=On_failed
-											{
-												newLeafNode(lv_debugger_11_3, grammarAccess.getEBlockAccess().getDebuggerOn_failedKeyword_2_5_1_0_2());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEBlockRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_11_3, null);
-											}
-											    |
-											lv_debugger_11_4=On_unreachable
-											{
-												newLeafNode(lv_debugger_11_4, grammarAccess.getEBlockAccess().getDebuggerOn_unreachableKeyword_2_5_1_0_3());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEBlockRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_11_4, null);
-											}
-											    |
-											lv_debugger_11_5=On_skipped
-											{
-												newLeafNode(lv_debugger_11_5, grammarAccess.getEBlockAccess().getDebuggerOn_skippedKeyword_2_5_1_0_4());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEBlockRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_11_5, null);
-											}
-										)
+											set(
+												$current,
+												"debugger",
+												lv_debugger_11_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+											afterParserOrEnumRuleCall();
+										}
 									)
 								)
 								))
@@ -1995,19 +1916,20 @@ ruleETask returns [EObject current=null]
 								}
 								(
 									(
-										lv_name_5_0=RULE_STRING
 										{
-											newLeafNode(lv_name_5_0, grammarAccess.getETaskAccess().getNameSTRINGTerminalRuleCall_3_0_1_0());
+											newCompositeNode(grammarAccess.getETaskAccess().getNameEJinjaExpressionAndStringParserRuleCall_3_0_1_0());
 										}
+										lv_name_5_0=ruleEJinjaExpressionAndString
 										{
 											if ($current==null) {
-												$current = createModelElement(grammarAccess.getETaskRule());
+												$current = createModelElementForParent(grammarAccess.getETaskRule());
 											}
-											setWithLastConsumed(
+											set(
 												$current,
 												"name",
 												lv_name_5_0,
-												"org.eclipse.xtext.common.Terminals.STRING");
+												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+											afterParserOrEnumRuleCall();
 										}
 									)
 								)
@@ -2146,62 +2068,21 @@ ruleETask returns [EObject current=null]
 								}
 								(
 									(
-										(
-											lv_debugger_12_1=Always
-											{
-												newLeafNode(lv_debugger_12_1, grammarAccess.getETaskAccess().getDebuggerAlwaysKeyword_3_5_1_0_0());
+										{
+											newCompositeNode(grammarAccess.getETaskAccess().getDebuggerEJinjaExpressionAndStringParserRuleCall_3_5_1_0());
+										}
+										lv_debugger_12_0=ruleEJinjaExpressionAndString
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getETaskRule());
 											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getETaskRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_1, null);
-											}
-											    |
-											lv_debugger_12_2=Never
-											{
-												newLeafNode(lv_debugger_12_2, grammarAccess.getETaskAccess().getDebuggerNeverKeyword_3_5_1_0_1());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getETaskRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_2, null);
-											}
-											    |
-											lv_debugger_12_3=On_failed
-											{
-												newLeafNode(lv_debugger_12_3, grammarAccess.getETaskAccess().getDebuggerOn_failedKeyword_3_5_1_0_2());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getETaskRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_3, null);
-											}
-											    |
-											lv_debugger_12_4=On_unreachable
-											{
-												newLeafNode(lv_debugger_12_4, grammarAccess.getETaskAccess().getDebuggerOn_unreachableKeyword_3_5_1_0_3());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getETaskRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_4, null);
-											}
-											    |
-											lv_debugger_12_5=On_skipped
-											{
-												newLeafNode(lv_debugger_12_5, grammarAccess.getETaskAccess().getDebuggerOn_skippedKeyword_3_5_1_0_4());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getETaskRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_5, null);
-											}
-										)
+											set(
+												$current,
+												"debugger",
+												lv_debugger_12_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+											afterParserOrEnumRuleCall();
+										}
 									)
 								)
 								))
@@ -2935,62 +2816,21 @@ ruleEHandler returns [EObject current=null]
 								}
 								(
 									(
-										(
-											lv_debugger_12_1=Always
-											{
-												newLeafNode(lv_debugger_12_1, grammarAccess.getEHandlerAccess().getDebuggerAlwaysKeyword_3_5_1_0_0());
+										{
+											newCompositeNode(grammarAccess.getEHandlerAccess().getDebuggerEJinjaExpressionAndStringParserRuleCall_3_5_1_0());
+										}
+										lv_debugger_12_0=ruleEJinjaExpressionAndString
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEHandlerRule());
 											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEHandlerRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_1, null);
-											}
-											    |
-											lv_debugger_12_2=Never
-											{
-												newLeafNode(lv_debugger_12_2, grammarAccess.getEHandlerAccess().getDebuggerNeverKeyword_3_5_1_0_1());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEHandlerRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_2, null);
-											}
-											    |
-											lv_debugger_12_3=On_failed
-											{
-												newLeafNode(lv_debugger_12_3, grammarAccess.getEHandlerAccess().getDebuggerOn_failedKeyword_3_5_1_0_2());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEHandlerRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_3, null);
-											}
-											    |
-											lv_debugger_12_4=On_unreachable
-											{
-												newLeafNode(lv_debugger_12_4, grammarAccess.getEHandlerAccess().getDebuggerOn_unreachableKeyword_3_5_1_0_3());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEHandlerRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_4, null);
-											}
-											    |
-											lv_debugger_12_5=On_skipped
-											{
-												newLeafNode(lv_debugger_12_5, grammarAccess.getEHandlerAccess().getDebuggerOn_skippedKeyword_3_5_1_0_4());
-											}
-											{
-												if ($current==null) {
-													$current = createModelElement(grammarAccess.getEHandlerRule());
-												}
-												setWithLastConsumed($current, "debugger", lv_debugger_12_5, null);
-											}
-										)
+											set(
+												$current,
+												"debugger",
+												lv_debugger_12_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+											afterParserOrEnumRuleCall();
+										}
 									)
 								)
 								))
@@ -3752,19 +3592,20 @@ ruleERoleInclusion returns [EObject current=null]
 			}
 			(
 				(
-					lv_name_3_0=RULE_STRING
 					{
-						newLeafNode(lv_name_3_0, grammarAccess.getERoleInclusionAccess().getNameSTRINGTerminalRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getERoleInclusionAccess().getNameEJinjaExpressionAndStringParserRuleCall_2_1_0());
 					}
+					lv_name_3_0=ruleEJinjaExpressionAndString
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getERoleInclusionRule());
+							$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
 						}
-						setWithLastConsumed(
+						set(
 							$current,
 							"name",
 							lv_name_3_0,
-							"org.eclipse.xtext.common.Terminals.STRING");
+							"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -3904,62 +3745,21 @@ ruleERoleInclusion returns [EObject current=null]
 									}
 									(
 										(
-											(
-												lv_debugger_11_1=Always
-												{
-													newLeafNode(lv_debugger_11_1, grammarAccess.getERoleInclusionAccess().getDebuggerAlwaysKeyword_2_2_4_1_0_0());
+											{
+												newCompositeNode(grammarAccess.getERoleInclusionAccess().getDebuggerEJinjaExpressionAndStringParserRuleCall_2_2_4_1_0());
+											}
+											lv_debugger_11_0=ruleEJinjaExpressionAndString
+											{
+												if ($current==null) {
+													$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
 												}
-												{
-													if ($current==null) {
-														$current = createModelElement(grammarAccess.getERoleInclusionRule());
-													}
-													setWithLastConsumed($current, "debugger", lv_debugger_11_1, null);
-												}
-												    |
-												lv_debugger_11_2=Never
-												{
-													newLeafNode(lv_debugger_11_2, grammarAccess.getERoleInclusionAccess().getDebuggerNeverKeyword_2_2_4_1_0_1());
-												}
-												{
-													if ($current==null) {
-														$current = createModelElement(grammarAccess.getERoleInclusionRule());
-													}
-													setWithLastConsumed($current, "debugger", lv_debugger_11_2, null);
-												}
-												    |
-												lv_debugger_11_3=On_failed
-												{
-													newLeafNode(lv_debugger_11_3, grammarAccess.getERoleInclusionAccess().getDebuggerOn_failedKeyword_2_2_4_1_0_2());
-												}
-												{
-													if ($current==null) {
-														$current = createModelElement(grammarAccess.getERoleInclusionRule());
-													}
-													setWithLastConsumed($current, "debugger", lv_debugger_11_3, null);
-												}
-												    |
-												lv_debugger_11_4=On_unreachable
-												{
-													newLeafNode(lv_debugger_11_4, grammarAccess.getERoleInclusionAccess().getDebuggerOn_unreachableKeyword_2_2_4_1_0_3());
-												}
-												{
-													if ($current==null) {
-														$current = createModelElement(grammarAccess.getERoleInclusionRule());
-													}
-													setWithLastConsumed($current, "debugger", lv_debugger_11_4, null);
-												}
-												    |
-												lv_debugger_11_5=On_skipped
-												{
-													newLeafNode(lv_debugger_11_5, grammarAccess.getERoleInclusionAccess().getDebuggerOn_skippedKeyword_2_2_4_1_0_4());
-												}
-												{
-													if ($current==null) {
-														$current = createModelElement(grammarAccess.getERoleInclusionRule());
-													}
-													setWithLastConsumed($current, "debugger", lv_debugger_11_5, null);
-												}
-											)
+												set(
+													$current,
+													"debugger",
+													lv_debugger_11_0,
+													"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+												afterParserOrEnumRuleCall();
+											}
 										)
 									)
 									))
@@ -6902,6 +6702,15 @@ ruleEValuePassedToJinjaExpression returns [EObject current=null]
 			$current = $this_EFunctionCall_4.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEValuePassedToJinjaExpressionAccess().getEEmptyCurlyBracesParserRuleCall_5());
+		}
+		this_EEmptyCurlyBraces_5=ruleEEmptyCurlyBraces
+		{
+			$current = $this_EEmptyCurlyBraces_5.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -7862,10 +7671,24 @@ ruleEIsExpression returns [EObject current=null]
 	(
 		(
 			(
+				lv_not_0_0=Not
 				{
-					newCompositeNode(grammarAccess.getEIsExpressionAccess().getParenthesised_expressionEParenthesisedExpressionParserRuleCall_0_0());
+					newLeafNode(lv_not_0_0, grammarAccess.getEIsExpressionAccess().getNotNotKeyword_0_0());
 				}
-				lv_parenthesised_expression_0_0=ruleEParenthesisedExpression
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEIsExpressionRule());
+					}
+					setWithLastConsumed($current, "not", lv_not_0_0, "not");
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEIsExpressionAccess().getParenthesised_expressionEParenthesisedExpressionParserRuleCall_1_0());
+				}
+				lv_parenthesised_expression_1_0=ruleEParenthesisedExpression
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEIsExpressionRule());
@@ -7873,7 +7696,7 @@ ruleEIsExpression returns [EObject current=null]
 					set(
 						$current,
 						"parenthesised_expression",
-						lv_parenthesised_expression_0_0,
+						lv_parenthesised_expression_1_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.EParenthesisedExpression");
 					afterParserOrEnumRuleCall();
 				}
@@ -7881,28 +7704,14 @@ ruleEIsExpression returns [EObject current=null]
 		)
 		(
 			(
-				otherlv_1=Is
+				otherlv_2=Is
 				{
-					newLeafNode(otherlv_1, grammarAccess.getEIsExpressionAccess().getIsKeyword_1_0_0());
+					newLeafNode(otherlv_2, grammarAccess.getEIsExpressionAccess().getIsKeyword_2_0_0());
 				}
 				(
 					(
-						lv_is_not_2_0=Not
 						{
-							newLeafNode(lv_is_not_2_0, grammarAccess.getEIsExpressionAccess().getIs_notNotKeyword_1_0_1_0());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getEIsExpressionRule());
-							}
-							setWithLastConsumed($current, "is_not", lv_is_not_2_0, "not");
-						}
-					)
-				)?
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getEIsExpressionAccess().getStatusEIsExpressionParserRuleCall_1_0_2_0());
+							newCompositeNode(grammarAccess.getEIsExpressionAccess().getStatusEIsExpressionParserRuleCall_2_0_1_0());
 						}
 						lv_status_3_0=ruleEIsExpression
 						{
@@ -7923,26 +7732,26 @@ ruleEIsExpression returns [EObject current=null]
 			(
 				(
 					(
-						lv_is_not_4_0=Not
+						lv_not_in_4_0=Not
 						{
-							newLeafNode(lv_is_not_4_0, grammarAccess.getEIsExpressionAccess().getIs_notNotKeyword_1_1_0_0());
+							newLeafNode(lv_not_in_4_0, grammarAccess.getEIsExpressionAccess().getNot_inNotKeyword_2_1_0_0());
 						}
 						{
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getEIsExpressionRule());
 							}
-							setWithLastConsumed($current, "is_not", lv_is_not_4_0, "not");
+							setWithLastConsumed($current, "not_in", lv_not_in_4_0, "not");
 						}
 					)
 				)?
 				otherlv_5=In
 				{
-					newLeafNode(otherlv_5, grammarAccess.getEIsExpressionAccess().getInKeyword_1_1_1());
+					newLeafNode(otherlv_5, grammarAccess.getEIsExpressionAccess().getInKeyword_2_1_1());
 				}
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getEIsExpressionAccess().getContainer_expressionEIsExpressionParserRuleCall_1_1_2_0());
+							newCompositeNode(grammarAccess.getEIsExpressionAccess().getContainer_expressionEIsExpressionParserRuleCall_2_1_2_0());
 						}
 						lv_container_expression_6_0=ruleEIsExpression
 						{
@@ -9144,6 +8953,53 @@ ruleEBooleanPassed returns [EObject current=null]
 						"boolean_passed",
 						lv_boolean_passed_2_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.NULL");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleEEmptyCurlyBraces
+entryRuleEEmptyCurlyBraces returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEEmptyCurlyBracesRule()); }
+	iv_ruleEEmptyCurlyBraces=ruleEEmptyCurlyBraces
+	{ $current=$iv_ruleEEmptyCurlyBraces.current; }
+	EOF;
+
+// Rule EEmptyCurlyBraces
+ruleEEmptyCurlyBraces returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_left_curly_brace_0_0=LeftCurlyBracket
+				{
+					newLeafNode(lv_left_curly_brace_0_0, grammarAccess.getEEmptyCurlyBracesAccess().getLeft_curly_braceLeftCurlyBracketKeyword_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEEmptyCurlyBracesRule());
+					}
+					setWithLastConsumed($current, "left_curly_brace", lv_left_curly_brace_0_0, "{");
+				}
+			)
+		)
+		(
+			(
+				lv_right_curly_brace_1_0=RightCurlyBracket
+				{
+					newLeafNode(lv_right_curly_brace_1_0, grammarAccess.getEEmptyCurlyBracesAccess().getRight_curly_braceRightCurlyBracketKeyword_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEEmptyCurlyBracesRule());
+					}
+					setWithLastConsumed($current, "right_curly_brace", lv_right_curly_brace_1_0, "}");
 				}
 			)
 		)

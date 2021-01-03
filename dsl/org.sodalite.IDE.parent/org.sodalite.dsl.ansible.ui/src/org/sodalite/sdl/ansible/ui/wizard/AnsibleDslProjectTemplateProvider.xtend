@@ -26,8 +26,7 @@ class AnsibleDslProjectTemplateProvider implements IProjectTemplateProvider {
 }
 
 @ProjectTemplate(label="Hello World", icon="project_template.png", description="<p><b>Hello World</b></p>
-<p>This is a parameterized hello world for AnsibleDsl. You can set a parameter to modify the content in the generated file
-and a parameter to set the package the file is created in.</p>")
+<p>This is a hello world for AnsibleDsl.</p>")
 final class HelloWorldProject {
 	val advanced = check("Advanced:", false)
 	val advancedGroup = group("Properties")
@@ -66,9 +65,8 @@ final class HelloWorldProject {
 						tasks_list:
 							task:
 								task_name: "hello world task"
-								module_call:
-									module_name: shell
-									direct_parameter: "echo 'Hello world!'"
+								module: debug
+									msg: "Hello world!"
 			''')
 		])
 	}
