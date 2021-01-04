@@ -267,13 +267,13 @@ public interface AnsibleDslFactory extends EFactory
   EErrorHandling createEErrorHandling();
 
   /**
-   * Returns a new object of class '<em>EBlock Error Handling</em>'.
+   * Returns a new object of class '<em>EBlock And Role Error Handling</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EBlock Error Handling</em>'.
+   * @return a new object of class '<em>EBlock And Role Error Handling</em>'.
    * @generated
    */
-  EBlockErrorHandling createEBlockErrorHandling();
+  EBlockAndRoleErrorHandling createEBlockAndRoleErrorHandling();
 
   /**
    * Returns a new object of class '<em>EPlay Error Handling</em>'.

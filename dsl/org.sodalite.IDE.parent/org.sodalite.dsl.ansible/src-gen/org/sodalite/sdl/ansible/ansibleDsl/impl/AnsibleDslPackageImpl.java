@@ -18,7 +18,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
-import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
@@ -295,7 +295,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eBlockErrorHandlingEClass = null;
+  private EClass eBlockAndRoleErrorHandlingEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1126,7 +1126,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Play_error_handling()
+  public EReference getEPlay_Error_handling()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(3);
   }
@@ -1269,7 +1269,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEBlock_Block_error_handling()
+  public EReference getEBlock_Error_handling()
   {
     return (EReference)eBlockEClass.getEStructuralFeatures().get(1);
   }
@@ -1459,6 +1459,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EReference getERoleInclusion_Name()
   {
     return (EReference)eRoleInclusionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getERoleInclusion_Error_handling()
+  {
+    return (EReference)eRoleInclusionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1951,9 +1962,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEBlockErrorHandling()
+  public EClass getEBlockAndRoleErrorHandling()
   {
-    return eBlockErrorHandlingEClass;
+    return eBlockAndRoleErrorHandlingEClass;
   }
 
   /**
@@ -3340,7 +3351,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(ePlayEClass, EPLAY__NAME);
     createEReference(ePlayEClass, EPLAY__HOSTS);
     createEReference(ePlayEClass, EPLAY__PLAY_EXE_SETTINGS);
-    createEReference(ePlayEClass, EPLAY__PLAY_ERROR_HANDLING);
+    createEReference(ePlayEClass, EPLAY__ERROR_HANDLING);
     createEReference(ePlayEClass, EPLAY__FACTS_SETTINGS);
     createEReference(ePlayEClass, EPLAY__VARS_FILES);
     createEReference(ePlayEClass, EPLAY__VARS_PROMPT);
@@ -3354,7 +3365,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eBlockEClass = createEClass(EBLOCK);
     createEReference(eBlockEClass, EBLOCK__NAME);
-    createEReference(eBlockEClass, EBLOCK__BLOCK_ERROR_HANDLING);
+    createEReference(eBlockEClass, EBLOCK__ERROR_HANDLING);
     createEReference(eBlockEClass, EBLOCK__TASKS);
     createEReference(eBlockEClass, EBLOCK__RESCUE_TASKS);
     createEReference(eBlockEClass, EBLOCK__ALWAYS_TASKS);
@@ -3377,6 +3388,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eRoleInclusionEClass = createEClass(EROLE_INCLUSION);
     createEReference(eRoleInclusionEClass, EROLE_INCLUSION__NAME);
+    createEReference(eRoleInclusionEClass, EROLE_INCLUSION__ERROR_HANDLING);
 
     eRoleInclusionsEClass = createEClass(EROLE_INCLUSIONS);
     createEReference(eRoleInclusionsEClass, EROLE_INCLUSIONS__ROLES);
@@ -3435,7 +3447,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eErrorHandlingEClass, EERROR_HANDLING__IGNORE_ERRORS);
     createEReference(eErrorHandlingEClass, EERROR_HANDLING__IGNORE_UNREACHABLE);
 
-    eBlockErrorHandlingEClass = createEClass(EBLOCK_ERROR_HANDLING);
+    eBlockAndRoleErrorHandlingEClass = createEClass(EBLOCK_AND_ROLE_ERROR_HANDLING);
 
     ePlayErrorHandlingEClass = createEClass(EPLAY_ERROR_HANDLING);
     createEReference(ePlayErrorHandlingEClass, EPLAY_ERROR_HANDLING__MAX_FAIL_PERCENTAGE);
@@ -3653,7 +3665,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eUntilEClass.getESuperTypes().add(this.getELoop());
     ePlayExeSettingsEClass.getESuperTypes().add(this.getEExeSettings());
     eExecutionExeSettingsEClass.getESuperTypes().add(this.getEExeSettings());
-    eBlockErrorHandlingEClass.getESuperTypes().add(this.getEErrorHandling());
+    eBlockAndRoleErrorHandlingEClass.getESuperTypes().add(this.getEErrorHandling());
     ePlayErrorHandlingEClass.getESuperTypes().add(this.getEErrorHandling());
     eTaskHandlerErrorHandlingEClass.getESuperTypes().add(this.getEErrorHandling());
     eNotifiedHandlerEClass.getESuperTypes().add(this.getENotifiable());
@@ -3733,7 +3745,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEPlay_Name(), this.getEJinjaExpressionAndString(), null, "name", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Hosts(), this.getEJinjaExpressionAndString(), null, "hosts", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Play_exe_settings(), this.getEPlayExeSettings(), null, "play_exe_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlay_Play_error_handling(), this.getEPlayErrorHandling(), null, "play_error_handling", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_Error_handling(), this.getEPlayErrorHandling(), null, "error_handling", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Facts_settings(), this.getEFactsSettings(), null, "facts_settings", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Vars_files(), this.getEListPassed(), null, "vars_files", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Vars_prompt(), this.getEListPassed(), null, "vars_prompt", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3747,7 +3759,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eBlockEClass, EBlock.class, "EBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEBlock_Name(), this.getEJinjaExpressionAndString(), null, "name", null, 0, 1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBlock_Block_error_handling(), this.getEBlockErrorHandling(), null, "block_error_handling", null, 0, 1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBlock_Error_handling(), this.getEBlockAndRoleErrorHandling(), null, "error_handling", null, 0, 1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Tasks(), this.getETask(), null, "tasks", null, 0, -1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Rescue_tasks(), this.getETask(), null, "rescue_tasks", null, 0, -1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBlock_Always_tasks(), this.getETask(), null, "always_tasks", null, 0, -1, EBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3770,6 +3782,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eRoleInclusionEClass, ERoleInclusion.class, "ERoleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getERoleInclusion_Name(), this.getEJinjaExpressionAndString(), null, "name", null, 0, 1, ERoleInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getERoleInclusion_Error_handling(), this.getEBlockAndRoleErrorHandling(), null, "error_handling", null, 0, 1, ERoleInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRoleInclusionsEClass, ERoleInclusions.class, "ERoleInclusions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getERoleInclusions_Roles(), this.getERoleInclusion(), null, "roles", null, 0, -1, ERoleInclusions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3828,7 +3841,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEErrorHandling_Ignore_errors(), this.getEBooleanPassed(), null, "ignore_errors", null, 0, 1, EErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEErrorHandling_Ignore_unreachable(), this.getEBooleanPassed(), null, "ignore_unreachable", null, 0, 1, EErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eBlockErrorHandlingEClass, EBlockErrorHandling.class, "EBlockErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(eBlockAndRoleErrorHandlingEClass, EBlockAndRoleErrorHandling.class, "EBlockAndRoleErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(ePlayErrorHandlingEClass, EPlayErrorHandling.class, "EPlayErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEPlayErrorHandling_Max_fail_percentage(), this.getENumberPassed(), null, "max_fail_percentage", null, 0, 1, EPlayErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

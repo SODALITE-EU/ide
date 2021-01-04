@@ -283,11 +283,11 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EBLOCK_ERROR_HANDLING:
+      case AnsibleDslPackage.EBLOCK_AND_ROLE_ERROR_HANDLING:
       {
-        EBlockErrorHandling eBlockErrorHandling = (EBlockErrorHandling)theEObject;
-        T result = caseEBlockErrorHandling(eBlockErrorHandling);
-        if (result == null) result = caseEErrorHandling(eBlockErrorHandling);
+        EBlockAndRoleErrorHandling eBlockAndRoleErrorHandling = (EBlockAndRoleErrorHandling)theEObject;
+        T result = caseEBlockAndRoleErrorHandling(eBlockAndRoleErrorHandling);
+        if (result == null) result = caseEErrorHandling(eBlockAndRoleErrorHandling);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1129,17 +1129,17 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EBlock Error Handling</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EBlock And Role Error Handling</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EBlock Error Handling</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EBlock And Role Error Handling</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEBlockErrorHandling(EBlockErrorHandling object)
+  public T caseEBlockAndRoleErrorHandling(EBlockAndRoleErrorHandling object)
   {
     return null;
   }

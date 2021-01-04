@@ -6,23 +6,23 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EBlock Error Handling</b></em>'.
+ * An implementation of the model object '<em><b>EBlock And Role Error Handling</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class EBlockErrorHandlingImpl extends EErrorHandlingImpl implements EBlockErrorHandling
+public class EBlockAndRoleErrorHandlingImpl extends EErrorHandlingImpl implements EBlockAndRoleErrorHandling
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EBlockErrorHandlingImpl()
+  protected EBlockAndRoleErrorHandlingImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class EBlockErrorHandlingImpl extends EErrorHandlingImpl implements EBloc
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EBLOCK_ERROR_HANDLING;
+    return AnsibleDslPackage.Literals.EBLOCK_AND_ROLE_ERROR_HANDLING;
   }
 
-} //EBlockErrorHandlingImpl
+} //EBlockAndRoleErrorHandlingImpl

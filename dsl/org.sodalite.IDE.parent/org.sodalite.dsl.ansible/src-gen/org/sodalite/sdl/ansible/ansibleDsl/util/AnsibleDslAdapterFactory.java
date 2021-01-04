@@ -211,9 +211,9 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEErrorHandlingAdapter();
       }
       @Override
-      public Adapter caseEBlockErrorHandling(EBlockErrorHandling object)
+      public Adapter caseEBlockAndRoleErrorHandling(EBlockAndRoleErrorHandling object)
       {
-        return createEBlockErrorHandlingAdapter();
+        return createEBlockAndRoleErrorHandlingAdapter();
       }
       @Override
       public Adapter caseEPlayErrorHandling(EPlayErrorHandling object)
@@ -893,16 +893,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling <em>EBlock Error Handling</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling <em>EBlock And Role Error Handling</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling
    * @generated
    */
-  public Adapter createEBlockErrorHandlingAdapter()
+  public Adapter createEBlockAndRoleErrorHandlingAdapter()
   {
     return null;
   }

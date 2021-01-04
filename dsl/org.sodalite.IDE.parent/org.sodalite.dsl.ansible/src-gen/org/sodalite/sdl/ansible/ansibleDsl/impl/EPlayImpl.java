@@ -42,7 +42,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getHosts <em>Hosts</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPlay_exe_settings <em>Play exe settings</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPlay_error_handling <em>Play error handling</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getError_handling <em>Error handling</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getFacts_settings <em>Facts settings</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getVars_files <em>Vars files</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getVars_prompt <em>Vars prompt</em>}</li>
@@ -90,14 +90,14 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   protected EPlayExeSettings play_exe_settings;
 
   /**
-   * The cached value of the '{@link #getPlay_error_handling() <em>Play error handling</em>}' containment reference.
+   * The cached value of the '{@link #getError_handling() <em>Error handling</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPlay_error_handling()
+   * @see #getError_handling()
    * @generated
    * @ordered
    */
-  protected EPlayErrorHandling play_error_handling;
+  protected EPlayErrorHandling error_handling;
 
   /**
    * The cached value of the '{@link #getFacts_settings() <em>Facts settings</em>}' containment reference.
@@ -376,9 +376,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public EPlayErrorHandling getPlay_error_handling()
+  public EPlayErrorHandling getError_handling()
   {
-    return play_error_handling;
+    return error_handling;
   }
 
   /**
@@ -386,13 +386,13 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPlay_error_handling(EPlayErrorHandling newPlay_error_handling, NotificationChain msgs)
+  public NotificationChain basicSetError_handling(EPlayErrorHandling newError_handling, NotificationChain msgs)
   {
-    EPlayErrorHandling oldPlay_error_handling = play_error_handling;
-    play_error_handling = newPlay_error_handling;
+    EPlayErrorHandling oldError_handling = error_handling;
+    error_handling = newError_handling;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING, oldPlay_error_handling, newPlay_error_handling);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__ERROR_HANDLING, oldError_handling, newError_handling);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -404,20 +404,20 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public void setPlay_error_handling(EPlayErrorHandling newPlay_error_handling)
+  public void setError_handling(EPlayErrorHandling newError_handling)
   {
-    if (newPlay_error_handling != play_error_handling)
+    if (newError_handling != error_handling)
     {
       NotificationChain msgs = null;
-      if (play_error_handling != null)
-        msgs = ((InternalEObject)play_error_handling).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING, null, msgs);
-      if (newPlay_error_handling != null)
-        msgs = ((InternalEObject)newPlay_error_handling).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING, null, msgs);
-      msgs = basicSetPlay_error_handling(newPlay_error_handling, msgs);
+      if (error_handling != null)
+        msgs = ((InternalEObject)error_handling).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__ERROR_HANDLING, null, msgs);
+      if (newError_handling != null)
+        msgs = ((InternalEObject)newError_handling).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__ERROR_HANDLING, null, msgs);
+      msgs = basicSetError_handling(newError_handling, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING, newPlay_error_handling, newPlay_error_handling));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__ERROR_HANDLING, newError_handling, newError_handling));
   }
 
   /**
@@ -796,8 +796,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return basicSetHosts(null, msgs);
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         return basicSetPlay_exe_settings(null, msgs);
-      case AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING:
-        return basicSetPlay_error_handling(null, msgs);
+      case AnsibleDslPackage.EPLAY__ERROR_HANDLING:
+        return basicSetError_handling(null, msgs);
       case AnsibleDslPackage.EPLAY__FACTS_SETTINGS:
         return basicSetFacts_settings(null, msgs);
       case AnsibleDslPackage.EPLAY__VARS_FILES:
@@ -838,8 +838,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return getHosts();
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         return getPlay_exe_settings();
-      case AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING:
-        return getPlay_error_handling();
+      case AnsibleDslPackage.EPLAY__ERROR_HANDLING:
+        return getError_handling();
       case AnsibleDslPackage.EPLAY__FACTS_SETTINGS:
         return getFacts_settings();
       case AnsibleDslPackage.EPLAY__VARS_FILES:
@@ -884,8 +884,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         setPlay_exe_settings((EPlayExeSettings)newValue);
         return;
-      case AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING:
-        setPlay_error_handling((EPlayErrorHandling)newValue);
+      case AnsibleDslPackage.EPLAY__ERROR_HANDLING:
+        setError_handling((EPlayErrorHandling)newValue);
         return;
       case AnsibleDslPackage.EPLAY__FACTS_SETTINGS:
         setFacts_settings((EFactsSettings)newValue);
@@ -944,8 +944,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         setPlay_exe_settings((EPlayExeSettings)null);
         return;
-      case AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING:
-        setPlay_error_handling((EPlayErrorHandling)null);
+      case AnsibleDslPackage.EPLAY__ERROR_HANDLING:
+        setError_handling((EPlayErrorHandling)null);
         return;
       case AnsibleDslPackage.EPLAY__FACTS_SETTINGS:
         setFacts_settings((EFactsSettings)null);
@@ -997,8 +997,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return hosts != null;
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         return play_exe_settings != null;
-      case AnsibleDslPackage.EPLAY__PLAY_ERROR_HANDLING:
-        return play_error_handling != null;
+      case AnsibleDslPackage.EPLAY__ERROR_HANDLING:
+        return error_handling != null;
       case AnsibleDslPackage.EPLAY__FACTS_SETTINGS:
         return facts_settings != null;
       case AnsibleDslPackage.EPLAY__VARS_FILES:

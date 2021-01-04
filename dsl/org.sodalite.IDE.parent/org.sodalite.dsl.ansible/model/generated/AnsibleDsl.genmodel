@@ -48,7 +48,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/hosts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/play_exe_settings"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/play_error_handling"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/error_handling"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/facts_settings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/vars_files"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/vars_prompt"/>
@@ -62,7 +62,7 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBlock">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/block_error_handling"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/error_handling"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/tasks"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/rescue_tasks"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBlock/always_tasks"/>
@@ -85,6 +85,7 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleInclusion">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleInclusion/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleInclusion/error_handling"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleInclusions">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleInclusions/roles"/>
@@ -141,7 +142,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EErrorHandling/ignore_errors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EErrorHandling/ignore_unreachable"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EBlockErrorHandling"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EBlockAndRoleErrorHandling"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EPlayErrorHandling">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlayErrorHandling/max_fail_percentage"/>
     </genClasses>

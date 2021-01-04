@@ -13,13 +13,9 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 
 Asynchronous_settings : 'asynchronous_settings:';
 
-Block_error_handling : 'block_error_handling:';
-
 Privilege_escalation : 'privilege_escalation:';
 
 Max_fail_percentage : 'max_fail_percentage:';
-
-Play_error_handling : 'play_error_handling:';
 
 Registered_variable : 'registered_variable:';
 

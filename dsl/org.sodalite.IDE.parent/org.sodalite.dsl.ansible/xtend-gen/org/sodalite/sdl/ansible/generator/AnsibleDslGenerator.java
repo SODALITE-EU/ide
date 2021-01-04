@@ -19,7 +19,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
-import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
@@ -192,10 +192,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EPlayErrorHandling _play_error_handling = play.getPlay_error_handling();
-      boolean _tripleNotEquals_7 = (_play_error_handling != null);
+      EPlayErrorHandling _error_handling = play.getError_handling();
+      boolean _tripleNotEquals_7 = (_error_handling != null);
       if (_tripleNotEquals_7) {
-        CharSequence _compilePlayErrorHandling = this.compilePlayErrorHandling(play.getPlay_error_handling(), space);
+        CharSequence _compilePlayErrorHandling = this.compilePlayErrorHandling(play.getError_handling(), space);
         _builder.append(_compilePlayErrorHandling);
         _builder.newLineIfNotEmpty();
       }
@@ -387,6 +387,15 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     CharSequence _compileExecutionAttributes = this.compileExecutionAttributes(roleInclusion, space.concat("  "));
     _builder.append(_compileExecutionAttributes);
     _builder.newLineIfNotEmpty();
+    {
+      EBlockAndRoleErrorHandling _error_handling = roleInclusion.getError_handling();
+      boolean _tripleNotEquals = (_error_handling != null);
+      if (_tripleNotEquals) {
+        CharSequence _compileBlockAndRoleErrorHandling = this.compileBlockAndRoleErrorHandling(roleInclusion.getError_handling(), space.concat("  "));
+        _builder.append(_compileBlockAndRoleErrorHandling);
+        _builder.newLineIfNotEmpty();
+      }
+    }
     return _builder;
   }
   
@@ -866,41 +875,50 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     _builder.append(_compileExecutionAttributes);
     _builder.newLineIfNotEmpty();
     {
-      EBlockErrorHandling _block_error_handling = block.getBlock_error_handling();
-      boolean _tripleNotEquals_4 = (_block_error_handling != null);
+      EBlockAndRoleErrorHandling _error_handling = block.getError_handling();
+      boolean _tripleNotEquals_4 = (_error_handling != null);
       if (_tripleNotEquals_4) {
+        CharSequence _compileBlockAndRoleErrorHandling = this.compileBlockAndRoleErrorHandling(block.getError_handling(), space.concat("  "));
+        _builder.append(_compileBlockAndRoleErrorHandling);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compileBlockAndRoleErrorHandling(final EBlockAndRoleErrorHandling blockAndRoleErrorHandling, final String space) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((blockAndRoleErrorHandling != null)) {
         {
-          EBooleanPassed _any_errors_fatal = block.getBlock_error_handling().getAny_errors_fatal();
-          boolean _tripleNotEquals_5 = (_any_errors_fatal != null);
-          if (_tripleNotEquals_5) {
-            String _concat_3 = space.concat("  ");
-            _builder.append(_concat_3);
+          EBooleanPassed _any_errors_fatal = blockAndRoleErrorHandling.getAny_errors_fatal();
+          boolean _tripleNotEquals = (_any_errors_fatal != null);
+          if (_tripleNotEquals) {
+            _builder.append(space);
             _builder.append("any_errors_fatal: ");
-            String _compileBooleanPassed = this.compileBooleanPassed(block.getBlock_error_handling().getAny_errors_fatal());
+            String _compileBooleanPassed = this.compileBooleanPassed(blockAndRoleErrorHandling.getAny_errors_fatal());
             _builder.append(_compileBooleanPassed);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _ignore_errors = block.getBlock_error_handling().getIgnore_errors();
-          boolean _tripleNotEquals_6 = (_ignore_errors != null);
-          if (_tripleNotEquals_6) {
-            String _concat_4 = space.concat("  ");
-            _builder.append(_concat_4);
+          EBooleanPassed _ignore_errors = blockAndRoleErrorHandling.getIgnore_errors();
+          boolean _tripleNotEquals_1 = (_ignore_errors != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(space);
             _builder.append("ignore_errors: ");
-            String _compileBooleanPassed_1 = this.compileBooleanPassed(block.getBlock_error_handling().getIgnore_errors());
+            String _compileBooleanPassed_1 = this.compileBooleanPassed(blockAndRoleErrorHandling.getIgnore_errors());
             _builder.append(_compileBooleanPassed_1);
             _builder.newLineIfNotEmpty();
           }
         }
         {
-          EBooleanPassed _ignore_unreachable = block.getBlock_error_handling().getIgnore_unreachable();
-          boolean _tripleNotEquals_7 = (_ignore_unreachable != null);
-          if (_tripleNotEquals_7) {
-            String _concat_5 = space.concat("  ");
-            _builder.append(_concat_5);
+          EBooleanPassed _ignore_unreachable = blockAndRoleErrorHandling.getIgnore_unreachable();
+          boolean _tripleNotEquals_2 = (_ignore_unreachable != null);
+          if (_tripleNotEquals_2) {
+            _builder.append(space);
             _builder.append("ignore_unreachable: ");
-            String _compileBooleanPassed_2 = this.compileBooleanPassed(block.getBlock_error_handling().getIgnore_unreachable());
+            String _compileBooleanPassed_2 = this.compileBooleanPassed(blockAndRoleErrorHandling.getIgnore_unreachable());
             _builder.append(_compileBooleanPassed_2);
             _builder.newLineIfNotEmpty();
           }

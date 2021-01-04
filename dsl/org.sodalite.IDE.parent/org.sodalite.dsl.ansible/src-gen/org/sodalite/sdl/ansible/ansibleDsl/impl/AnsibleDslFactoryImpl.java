@@ -92,7 +92,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS: return createEPlayExeSettings();
       case AnsibleDslPackage.EEXECUTION_EXE_SETTINGS: return createEExecutionExeSettings();
       case AnsibleDslPackage.EERROR_HANDLING: return createEErrorHandling();
-      case AnsibleDslPackage.EBLOCK_ERROR_HANDLING: return createEBlockErrorHandling();
+      case AnsibleDslPackage.EBLOCK_AND_ROLE_ERROR_HANDLING: return createEBlockAndRoleErrorHandling();
       case AnsibleDslPackage.EPLAY_ERROR_HANDLING: return createEPlayErrorHandling();
       case AnsibleDslPackage.ETASK_HANDLER_ERROR_HANDLING: return createETaskHandlerErrorHandling();
       case AnsibleDslPackage.EFACTS_SETTINGS: return createEFactsSettings();
@@ -478,10 +478,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EBlockErrorHandling createEBlockErrorHandling()
+  public EBlockAndRoleErrorHandling createEBlockAndRoleErrorHandling()
   {
-    EBlockErrorHandlingImpl eBlockErrorHandling = new EBlockErrorHandlingImpl();
-    return eBlockErrorHandling;
+    EBlockAndRoleErrorHandlingImpl eBlockAndRoleErrorHandling = new EBlockAndRoleErrorHandlingImpl();
+    return eBlockAndRoleErrorHandling;
   }
 
   /**

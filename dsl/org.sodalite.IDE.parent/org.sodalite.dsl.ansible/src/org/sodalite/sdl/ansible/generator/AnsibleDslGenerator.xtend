@@ -62,6 +62,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EExecution
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling
 
 /**
  * Generates code from your model files on save.
@@ -112,8 +113,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«IF play.play_exe_settings !== null»
 			«compilePlayExeSettings(play.play_exe_settings, space)»
 		«ENDIF»
-		«IF play.play_error_handling !== null»
-			«compilePlayErrorHandling(play.play_error_handling, space)»
+		«IF play.error_handling !== null»
+			«compilePlayErrorHandling(play.error_handling, space)»
 		«ENDIF»
 		«IF play.facts_settings !== null»
 			«compileFactsSettings(play.facts_settings, space)»
@@ -185,6 +186,9 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«space»- role: «roleInclusion.name.compileJinjaExpressionAndString»
 		«compileBaseAttributes(roleInclusion, space.concat('  '))»
 		«compileExecutionAttributes(roleInclusion, space.concat('  '))»
+		«IF roleInclusion.error_handling !== null»
+			«compileBlockAndRoleErrorHandling(roleInclusion.error_handling, space.concat('  '))»
+		«ENDIF»
 	'''
 	
 	def compileBaseAttributes(EBase base, String space) '''
@@ -333,17 +337,23 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 		«compileBaseAttributes(block, space.concat('  '))»
 		«compileExecutionAttributes(block, space.concat('  '))»
-		«IF block.block_error_handling !== null»
-			«IF block.block_error_handling.any_errors_fatal !== null»
-				«space.concat('  ')»any_errors_fatal: «block.block_error_handling.any_errors_fatal.compileBooleanPassed»
-			«ENDIF»
-			«IF block.block_error_handling.ignore_errors !== null»
-				«space.concat('  ')»ignore_errors: «block.block_error_handling.ignore_errors.compileBooleanPassed»
-			«ENDIF»
-			«IF block.block_error_handling.ignore_unreachable !== null»
-				«space.concat('  ')»ignore_unreachable: «block.block_error_handling.ignore_unreachable.compileBooleanPassed»
-			«ENDIF»
+		«IF block.error_handling !== null»
+			«compileBlockAndRoleErrorHandling(block.error_handling, space.concat('  '))»
 		«ENDIF»
+	'''
+	
+	def compileBlockAndRoleErrorHandling(EBlockAndRoleErrorHandling blockAndRoleErrorHandling, String space)'''
+		«IF blockAndRoleErrorHandling !== null»
+			«IF blockAndRoleErrorHandling.any_errors_fatal !== null»
+				«space»any_errors_fatal: «blockAndRoleErrorHandling.any_errors_fatal.compileBooleanPassed»
+			«ENDIF»
+			«IF blockAndRoleErrorHandling.ignore_errors !== null»
+				«space»ignore_errors: «blockAndRoleErrorHandling.ignore_errors.compileBooleanPassed»
+			«ENDIF»
+			«IF blockAndRoleErrorHandling.ignore_unreachable !== null»
+				«space»ignore_unreachable: «blockAndRoleErrorHandling.ignore_unreachable.compileBooleanPassed»
+			«ENDIF»
+		«ENDIF»	
 	'''
 	
 	def compileExecutionAttributes(EExecution execution, String space) '''

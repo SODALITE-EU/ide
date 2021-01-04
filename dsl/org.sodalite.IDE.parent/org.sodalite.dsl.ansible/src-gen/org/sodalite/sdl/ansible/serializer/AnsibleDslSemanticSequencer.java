@@ -18,7 +18,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
-import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
@@ -100,8 +100,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EBLOCK:
 				sequence_EBlock(context, (EBlock) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EBLOCK_ERROR_HANDLING:
-				sequence_EBlockErrorHandling(context, (EBlockErrorHandling) semanticObject); 
+			case AnsibleDslPackage.EBLOCK_AND_ROLE_ERROR_HANDLING:
+				sequence_EBlockAndRoleErrorHandling(context, (EBlockAndRoleErrorHandling) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EBOOLEAN_PASSED:
 				sequence_EBooleanPassed(context, (EBooleanPassed) semanticObject); 
@@ -302,13 +302,13 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EErrorHandling returns EBlockErrorHandling
-	 *     EBlockErrorHandling returns EBlockErrorHandling
+	 *     EErrorHandling returns EBlockAndRoleErrorHandling
+	 *     EBlockAndRoleErrorHandling returns EBlockAndRoleErrorHandling
 	 *
 	 * Constraint:
 	 *     (any_errors_fatal=EBooleanPassed | ignore_errors=EBooleanPassed | ignore_unreachable=EBooleanPassed)+
 	 */
-	protected void sequence_EBlockErrorHandling(ISerializationContext context, EBlockErrorHandling semanticObject) {
+	protected void sequence_EBlockAndRoleErrorHandling(ISerializationContext context, EBlockAndRoleErrorHandling semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -336,7 +336,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         exe_settings=EExecutionExeSettings | 
 	 *         delegation=EDelegation | 
 	 *         when_expression=EJinjaExpressionEvaluationWithoutBrackets | 
-	 *         block_error_handling=EBlockErrorHandling | 
+	 *         error_handling=EBlockAndRoleErrorHandling | 
 	 *         tasks+=ETask | 
 	 *         rescue_tasks+=ETask | 
 	 *         always_tasks+=ETask
@@ -938,7 +938,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         tags=EListPassed | 
 	 *         variable_declarations+=EVariableDeclaration | 
 	 *         play_exe_settings=EPlayExeSettings | 
-	 *         play_error_handling=EPlayErrorHandling | 
+	 *         error_handling=EPlayErrorHandling | 
 	 *         facts_settings=EFactsSettings | 
 	 *         vars_files=EListPassed | 
 	 *         vars_prompt=EListPassed | 
@@ -1059,7 +1059,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             variable_declarations+=EVariableDeclaration | 
 	 *             exe_settings=EExecutionExeSettings | 
 	 *             delegation=EDelegation | 
-	 *             when_expression=EJinjaExpressionEvaluationWithoutBrackets
+	 *             when_expression=EJinjaExpressionEvaluationWithoutBrackets | 
+	 *             error_handling=EBlockAndRoleErrorHandling
 	 *         )*
 	 *     )
 	 */

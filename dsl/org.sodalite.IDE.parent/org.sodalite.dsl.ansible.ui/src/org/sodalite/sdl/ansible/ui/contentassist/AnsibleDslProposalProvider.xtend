@@ -95,8 +95,8 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"	- delegate_to\n"+
 	"	- delegate_facts"
 	
-	final String BLOCK_ERROR_HANDLING_DESCRIPTION =
-	"This is used for setting up how to handle the errors in a block.\n\n"+
+	final String BLOCK_AND_ROLE_ERROR_HANDLING_DESCRIPTION =
+	"This is used for setting up how to handle the errors in a block/role inclusion.\n\n"+
 	"The attributes that can be set are:\n\n"+
 	"	- any_errors_fatal\n"+
 	"	- ignore_errors\n"+
@@ -172,7 +172,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	}
 	
 	override void complete_EPlayErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("play_error_handling:", new StyledString("play_error_handling:"), context, PLAY_ERROR_HANDLING_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("error_handling:", new StyledString("error_handling:"), context, PLAY_ERROR_HANDLING_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EFactsSettings(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -187,8 +187,8 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		createNonEditableCompletionProposal("delegation:", new StyledString("delegation:"), context, DELEGATION_DESCRIPTION, acceptor)
 	}
 	
-	override void complete_EBlockErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("block_error_handling:", new StyledString("block_error_handling:"), context, BLOCK_ERROR_HANDLING_DESCRIPTION, acceptor)
+	override void complete_EBlockAndRoleErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("error_handling:", new StyledString("error_handling:"), context, BLOCK_AND_ROLE_ERROR_HANDLING_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_ETaskHandlerErrorHandling(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -213,6 +213,10 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
 	override void complete_EPlaybookInclusion(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createNonEditableCompletionProposal("playbook_inclusion:", new StyledString("playbook_inclusion:"), context, PLAYBOOK_INCLUSION_DESCRIPTION, acceptor)
+	}
+	
+	override void completeEPlaybookInclusion_Playbook_file_name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createEditableCompletionProposal("\"playbook_imported.yaml\"", "\"playbook_imported.yaml\"", context, "The yaml file of the playbook to import.", acceptor)
 	}
 	
 	override void complete_BOOLEAN(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

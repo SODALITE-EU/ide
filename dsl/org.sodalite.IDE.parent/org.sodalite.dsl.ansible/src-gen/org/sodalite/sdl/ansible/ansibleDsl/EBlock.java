@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getBlock_error_handling <em>Block error handling</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getError_handling <em>Error handling</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getTasks <em>Tasks</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getRescue_tasks <em>Rescue tasks</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getAlways_tasks <em>Always tasks</em>}</li>
@@ -50,26 +50,26 @@ public interface EBlock extends EExecution, EBlockTask
   void setName(EJinjaExpressionAndString value);
 
   /**
-   * Returns the value of the '<em><b>Block error handling</b></em>' containment reference.
+   * Returns the value of the '<em><b>Error handling</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Block error handling</em>' containment reference.
-   * @see #setBlock_error_handling(EBlockErrorHandling)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBlock_Block_error_handling()
+   * @return the value of the '<em>Error handling</em>' containment reference.
+   * @see #setError_handling(EBlockAndRoleErrorHandling)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBlock_Error_handling()
    * @model containment="true"
    * @generated
    */
-  EBlockErrorHandling getBlock_error_handling();
+  EBlockAndRoleErrorHandling getError_handling();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getBlock_error_handling <em>Block error handling</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getError_handling <em>Error handling</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Block error handling</em>' containment reference.
-   * @see #getBlock_error_handling()
+   * @param value the new value of the '<em>Error handling</em>' containment reference.
+   * @see #getError_handling()
    * @generated
    */
-  void setBlock_error_handling(EBlockErrorHandling value);
+  void setError_handling(EBlockAndRoleErrorHandling value);
 
   /**
    * Returns the value of the '<em><b>Tasks</b></em>' containment reference list.

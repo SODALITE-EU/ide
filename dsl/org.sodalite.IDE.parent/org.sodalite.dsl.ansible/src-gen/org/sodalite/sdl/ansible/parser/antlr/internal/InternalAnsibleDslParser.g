@@ -824,17 +824,17 @@ ruleEPlay returns [EObject current=null]
 					}
 								({true}?=>((
 									{
-										newCompositeNode(grammarAccess.getEPlayAccess().getPlay_error_handlingEPlayErrorHandlingParserRuleCall_3_13_0());
+										newCompositeNode(grammarAccess.getEPlayAccess().getError_handlingEPlayErrorHandlingParserRuleCall_3_13_0());
 									}
-									lv_play_error_handling_28_0=ruleEPlayErrorHandling
+									lv_error_handling_28_0=ruleEPlayErrorHandling
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEPlayRule());
 										}
 										set(
 											$current,
-											"play_error_handling",
-											lv_play_error_handling_28_0,
+											"error_handling",
+											lv_error_handling_28_0,
 											"org.sodalite.sdl.ansible.AnsibleDsl.EPlayErrorHandling");
 										afterParserOrEnumRuleCall();
 									}
@@ -1705,18 +1705,18 @@ ruleEBlock returns [EObject current=null]
 					}
 								({true}?=>((
 									{
-										newCompositeNode(grammarAccess.getEBlockAccess().getBlock_error_handlingEBlockErrorHandlingParserRuleCall_2_14_0());
+										newCompositeNode(grammarAccess.getEBlockAccess().getError_handlingEBlockAndRoleErrorHandlingParserRuleCall_2_14_0());
 									}
-									lv_block_error_handling_28_0=ruleEBlockErrorHandling
+									lv_error_handling_28_0=ruleEBlockAndRoleErrorHandling
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEBlockRule());
 										}
 										set(
 											$current,
-											"block_error_handling",
-											lv_block_error_handling_28_0,
-											"org.sodalite.sdl.ansible.AnsibleDsl.EBlockErrorHandling");
+											"error_handling",
+											lv_error_handling_28_0,
+											"org.sodalite.sdl.ansible.AnsibleDsl.EBlockAndRoleErrorHandling");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -4035,6 +4035,34 @@ ruleERoleInclusion returns [EObject current=null]
 							getUnorderedGroupHelper().returnFromSelection(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2());
 						}
 					)
+				)|
+				(
+					{getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 13)}?=>(
+						{
+							getUnorderedGroupHelper().select(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 13);
+						}
+									({true}?=>((
+										{
+											newCompositeNode(grammarAccess.getERoleInclusionAccess().getError_handlingEBlockAndRoleErrorHandlingParserRuleCall_2_2_13_0());
+										}
+										lv_error_handling_28_0=ruleEBlockAndRoleErrorHandling
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
+											}
+											set(
+												$current,
+												"error_handling",
+												lv_error_handling_28_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EBlockAndRoleErrorHandling");
+											afterParserOrEnumRuleCall();
+										}
+									)
+									))
+						{ 
+							getUnorderedGroupHelper().returnFromSelection(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2());
+						}
+					)
 				)
 						)*
 					)
@@ -4044,9 +4072,9 @@ ruleERoleInclusion returns [EObject current=null]
 					}
 			)
 		)
-		this_END_28=RULE_END
+		this_END_29=RULE_END
 		{
-			newLeafNode(this_END_28, grammarAccess.getERoleInclusionAccess().getENDTerminalRuleCall_3());
+			newLeafNode(this_END_29, grammarAccess.getERoleInclusionAccess().getENDTerminalRuleCall_3());
 		}
 	)
 ;
@@ -5467,15 +5495,15 @@ ruleEExecutionExeSettings returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleEBlockErrorHandling
-entryRuleEBlockErrorHandling returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getEBlockErrorHandlingRule()); }
-	iv_ruleEBlockErrorHandling=ruleEBlockErrorHandling
-	{ $current=$iv_ruleEBlockErrorHandling.current; }
+// Entry rule entryRuleEBlockAndRoleErrorHandling
+entryRuleEBlockAndRoleErrorHandling returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEBlockAndRoleErrorHandlingRule()); }
+	iv_ruleEBlockAndRoleErrorHandling=ruleEBlockAndRoleErrorHandling
+	{ $current=$iv_ruleEBlockAndRoleErrorHandling.current; }
 	EOF;
 
-// Rule EBlockErrorHandling
-ruleEBlockErrorHandling returns [EObject current=null]
+// Rule EBlockAndRoleErrorHandling
+ruleEBlockAndRoleErrorHandling returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -5483,39 +5511,39 @@ ruleEBlockErrorHandling returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Block_error_handling
+		otherlv_0=Error_handling
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEBlockErrorHandlingAccess().getBlock_error_handlingKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getError_handlingKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
-			newLeafNode(this_BEGIN_1, grammarAccess.getEBlockErrorHandlingAccess().getBEGINTerminalRuleCall_1());
+			newLeafNode(this_BEGIN_1, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getBEGINTerminalRuleCall_1());
 		}
 		(
 			(
 				{ 
-				  getUnorderedGroupHelper().enter(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2());
+				  getUnorderedGroupHelper().enter(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2());
 				}
 				(
 					(
 			(
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2(), 0)}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 0)}?=>(
 					{
-						getUnorderedGroupHelper().select(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2(), 0);
+						getUnorderedGroupHelper().select(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 0);
 					}
 								({true}?=>(otherlv_3=Any_errors_fatal
 								{
-									newLeafNode(otherlv_3, grammarAccess.getEBlockErrorHandlingAccess().getAny_errors_fatalKeyword_2_0_0());
+									newLeafNode(otherlv_3, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getAny_errors_fatalKeyword_2_0_0());
 								}
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEBlockErrorHandlingAccess().getAny_errors_fatalEBooleanPassedParserRuleCall_2_0_1_0());
+											newCompositeNode(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getAny_errors_fatalEBooleanPassedParserRuleCall_2_0_1_0());
 										}
 										lv_any_errors_fatal_4_0=ruleEBooleanPassed
 										{
 											if ($current==null) {
-												$current = createModelElementForParent(grammarAccess.getEBlockErrorHandlingRule());
+												$current = createModelElementForParent(grammarAccess.getEBlockAndRoleErrorHandlingRule());
 											}
 											set(
 												$current,
@@ -5528,28 +5556,28 @@ ruleEBlockErrorHandling returns [EObject current=null]
 								)
 								))
 					{ 
-						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2());
+						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2());
 					}
 				)
 			)|
 			(
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2(), 1)}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 1)}?=>(
 					{
-						getUnorderedGroupHelper().select(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2(), 1);
+						getUnorderedGroupHelper().select(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 1);
 					}
 								({true}?=>(otherlv_5=Ignore_errors
 								{
-									newLeafNode(otherlv_5, grammarAccess.getEBlockErrorHandlingAccess().getIgnore_errorsKeyword_2_1_0());
+									newLeafNode(otherlv_5, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_errorsKeyword_2_1_0());
 								}
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEBlockErrorHandlingAccess().getIgnore_errorsEBooleanPassedParserRuleCall_2_1_1_0());
+											newCompositeNode(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_errorsEBooleanPassedParserRuleCall_2_1_1_0());
 										}
 										lv_ignore_errors_6_0=ruleEBooleanPassed
 										{
 											if ($current==null) {
-												$current = createModelElementForParent(grammarAccess.getEBlockErrorHandlingRule());
+												$current = createModelElementForParent(grammarAccess.getEBlockAndRoleErrorHandlingRule());
 											}
 											set(
 												$current,
@@ -5562,28 +5590,28 @@ ruleEBlockErrorHandling returns [EObject current=null]
 								)
 								))
 					{ 
-						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2());
+						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2());
 					}
 				)
 			)|
 			(
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2(), 2)}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 2)}?=>(
 					{
-						getUnorderedGroupHelper().select(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2(), 2);
+						getUnorderedGroupHelper().select(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 2);
 					}
 								({true}?=>(otherlv_7=Ignore_unreachable
 								{
-									newLeafNode(otherlv_7, grammarAccess.getEBlockErrorHandlingAccess().getIgnore_unreachableKeyword_2_2_0());
+									newLeafNode(otherlv_7, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_unreachableKeyword_2_2_0());
 								}
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEBlockErrorHandlingAccess().getIgnore_unreachableEBooleanPassedParserRuleCall_2_2_1_0());
+											newCompositeNode(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_unreachableEBooleanPassedParserRuleCall_2_2_1_0());
 										}
 										lv_ignore_unreachable_8_0=ruleEBooleanPassed
 										{
 											if ($current==null) {
-												$current = createModelElementForParent(grammarAccess.getEBlockErrorHandlingRule());
+												$current = createModelElementForParent(grammarAccess.getEBlockAndRoleErrorHandlingRule());
 											}
 											set(
 												$current,
@@ -5596,7 +5624,7 @@ ruleEBlockErrorHandling returns [EObject current=null]
 								)
 								))
 					{ 
-						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2());
+						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2());
 					}
 				)
 			)
@@ -5604,12 +5632,12 @@ ruleEBlockErrorHandling returns [EObject current=null]
 				)
 			)
 				{ 
-				  getUnorderedGroupHelper().leave(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2());
+				  getUnorderedGroupHelper().leave(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2());
 				}
 		)
 		this_END_9=RULE_END
 		{
-			newLeafNode(this_END_9, grammarAccess.getEBlockErrorHandlingAccess().getENDTerminalRuleCall_3());
+			newLeafNode(this_END_9, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getENDTerminalRuleCall_3());
 		}
 	)
 ;
@@ -5630,9 +5658,9 @@ ruleEPlayErrorHandling returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Play_error_handling
+		otherlv_0=Error_handling
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEPlayErrorHandlingAccess().getPlay_error_handlingKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEPlayErrorHandlingAccess().getError_handlingKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{

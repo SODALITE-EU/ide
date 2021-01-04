@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
-import org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 
@@ -33,7 +33,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETask;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getBlock_error_handling <em>Block error handling</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getError_handling <em>Error handling</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getTasks <em>Tasks</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getRescue_tasks <em>Rescue tasks</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockImpl#getAlways_tasks <em>Always tasks</em>}</li>
@@ -54,14 +54,14 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
   protected EJinjaExpressionAndString name;
 
   /**
-   * The cached value of the '{@link #getBlock_error_handling() <em>Block error handling</em>}' containment reference.
+   * The cached value of the '{@link #getError_handling() <em>Error handling</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBlock_error_handling()
+   * @see #getError_handling()
    * @generated
    * @ordered
    */
-  protected EBlockErrorHandling block_error_handling;
+  protected EBlockAndRoleErrorHandling error_handling;
 
   /**
    * The cached value of the '{@link #getTasks() <em>Tasks</em>}' containment reference list.
@@ -170,9 +170,9 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
    * @generated
    */
   @Override
-  public EBlockErrorHandling getBlock_error_handling()
+  public EBlockAndRoleErrorHandling getError_handling()
   {
-    return block_error_handling;
+    return error_handling;
   }
 
   /**
@@ -180,13 +180,13 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBlock_error_handling(EBlockErrorHandling newBlock_error_handling, NotificationChain msgs)
+  public NotificationChain basicSetError_handling(EBlockAndRoleErrorHandling newError_handling, NotificationChain msgs)
   {
-    EBlockErrorHandling oldBlock_error_handling = block_error_handling;
-    block_error_handling = newBlock_error_handling;
+    EBlockAndRoleErrorHandling oldError_handling = error_handling;
+    error_handling = newError_handling;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING, oldBlock_error_handling, newBlock_error_handling);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBLOCK__ERROR_HANDLING, oldError_handling, newError_handling);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -198,20 +198,20 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
    * @generated
    */
   @Override
-  public void setBlock_error_handling(EBlockErrorHandling newBlock_error_handling)
+  public void setError_handling(EBlockAndRoleErrorHandling newError_handling)
   {
-    if (newBlock_error_handling != block_error_handling)
+    if (newError_handling != error_handling)
     {
       NotificationChain msgs = null;
-      if (block_error_handling != null)
-        msgs = ((InternalEObject)block_error_handling).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING, null, msgs);
-      if (newBlock_error_handling != null)
-        msgs = ((InternalEObject)newBlock_error_handling).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING, null, msgs);
-      msgs = basicSetBlock_error_handling(newBlock_error_handling, msgs);
+      if (error_handling != null)
+        msgs = ((InternalEObject)error_handling).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBLOCK__ERROR_HANDLING, null, msgs);
+      if (newError_handling != null)
+        msgs = ((InternalEObject)newError_handling).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EBLOCK__ERROR_HANDLING, null, msgs);
+      msgs = basicSetError_handling(newError_handling, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING, newBlock_error_handling, newBlock_error_handling));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EBLOCK__ERROR_HANDLING, newError_handling, newError_handling));
   }
 
   /**
@@ -271,8 +271,8 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
     {
       case AnsibleDslPackage.EBLOCK__NAME:
         return basicSetName(null, msgs);
-      case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
-        return basicSetBlock_error_handling(null, msgs);
+      case AnsibleDslPackage.EBLOCK__ERROR_HANDLING:
+        return basicSetError_handling(null, msgs);
       case AnsibleDslPackage.EBLOCK__TASKS:
         return ((InternalEList<?>)getTasks()).basicRemove(otherEnd, msgs);
       case AnsibleDslPackage.EBLOCK__RESCUE_TASKS:
@@ -295,8 +295,8 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
     {
       case AnsibleDslPackage.EBLOCK__NAME:
         return getName();
-      case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
-        return getBlock_error_handling();
+      case AnsibleDslPackage.EBLOCK__ERROR_HANDLING:
+        return getError_handling();
       case AnsibleDslPackage.EBLOCK__TASKS:
         return getTasks();
       case AnsibleDslPackage.EBLOCK__RESCUE_TASKS:
@@ -321,8 +321,8 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
       case AnsibleDslPackage.EBLOCK__NAME:
         setName((EJinjaExpressionAndString)newValue);
         return;
-      case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
-        setBlock_error_handling((EBlockErrorHandling)newValue);
+      case AnsibleDslPackage.EBLOCK__ERROR_HANDLING:
+        setError_handling((EBlockAndRoleErrorHandling)newValue);
         return;
       case AnsibleDslPackage.EBLOCK__TASKS:
         getTasks().clear();
@@ -353,8 +353,8 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
       case AnsibleDslPackage.EBLOCK__NAME:
         setName((EJinjaExpressionAndString)null);
         return;
-      case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
-        setBlock_error_handling((EBlockErrorHandling)null);
+      case AnsibleDslPackage.EBLOCK__ERROR_HANDLING:
+        setError_handling((EBlockAndRoleErrorHandling)null);
         return;
       case AnsibleDslPackage.EBLOCK__TASKS:
         getTasks().clear();
@@ -381,8 +381,8 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
     {
       case AnsibleDslPackage.EBLOCK__NAME:
         return name != null;
-      case AnsibleDslPackage.EBLOCK__BLOCK_ERROR_HANDLING:
-        return block_error_handling != null;
+      case AnsibleDslPackage.EBLOCK__ERROR_HANDLING:
+        return error_handling != null;
       case AnsibleDslPackage.EBLOCK__TASKS:
         return tasks != null && !tasks.isEmpty();
       case AnsibleDslPackage.EBLOCK__RESCUE_TASKS:

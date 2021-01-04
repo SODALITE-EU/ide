@@ -69,7 +69,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="play_exe_settings" eType="#//EPlayExeSettings"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="play_error_handling" eType="#//EPlayErrorHandling"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//EPlayErrorHandling"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="facts_settings" eType="#//EFactsSettings"
         containment="true"/>
@@ -95,7 +95,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EBlock" eSuperTypes="#//EExecution #//EBlockTask">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="block_error_handling" eType="#//EBlockErrorHandling"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//EBlockAndRoleErrorHandling"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
         eType="#//ETask" containment="true"/>
@@ -127,6 +127,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusion" eSuperTypes="#//EExecution">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//EBlockAndRoleErrorHandling"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusions">
@@ -214,7 +216,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ignore_unreachable" eType="#//EBooleanPassed"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EBlockErrorHandling" eSuperTypes="#//EErrorHandling"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EBlockAndRoleErrorHandling" eSuperTypes="#//EErrorHandling"/>
   <eClassifiers xsi:type="ecore:EClass" name="EPlayErrorHandling" eSuperTypes="#//EErrorHandling">
     <eStructuralFeatures xsi:type="ecore:EReference" name="max_fail_percentage" eType="#//ENumberPassed"
         containment="true"/>

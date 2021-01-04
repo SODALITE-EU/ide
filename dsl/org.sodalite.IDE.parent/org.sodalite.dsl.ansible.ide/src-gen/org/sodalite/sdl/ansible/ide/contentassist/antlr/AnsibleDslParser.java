@@ -173,10 +173,10 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEExecutionExeSettingsAccess().getGroup(), "rule__EExecutionExeSettings__Group__0");
 			builder.put(grammarAccess.getEExecutionExeSettingsAccess().getGroup_2_0(), "rule__EExecutionExeSettings__Group_2_0__0");
 			builder.put(grammarAccess.getEExecutionExeSettingsAccess().getGroup_2_1(), "rule__EExecutionExeSettings__Group_2_1__0");
-			builder.put(grammarAccess.getEBlockErrorHandlingAccess().getGroup(), "rule__EBlockErrorHandling__Group__0");
-			builder.put(grammarAccess.getEBlockErrorHandlingAccess().getGroup_2_0(), "rule__EBlockErrorHandling__Group_2_0__0");
-			builder.put(grammarAccess.getEBlockErrorHandlingAccess().getGroup_2_1(), "rule__EBlockErrorHandling__Group_2_1__0");
-			builder.put(grammarAccess.getEBlockErrorHandlingAccess().getGroup_2_2(), "rule__EBlockErrorHandling__Group_2_2__0");
+			builder.put(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getGroup(), "rule__EBlockAndRoleErrorHandling__Group__0");
+			builder.put(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getGroup_2_0(), "rule__EBlockAndRoleErrorHandling__Group_2_0__0");
+			builder.put(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getGroup_2_1(), "rule__EBlockAndRoleErrorHandling__Group_2_1__0");
+			builder.put(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getGroup_2_2(), "rule__EBlockAndRoleErrorHandling__Group_2_2__0");
 			builder.put(grammarAccess.getEPlayErrorHandlingAccess().getGroup(), "rule__EPlayErrorHandling__Group__0");
 			builder.put(grammarAccess.getEPlayErrorHandlingAccess().getGroup_2_0(), "rule__EPlayErrorHandling__Group_2_0__0");
 			builder.put(grammarAccess.getEPlayErrorHandlingAccess().getGroup_2_1(), "rule__EPlayErrorHandling__Group_2_1__0");
@@ -262,7 +262,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPlayAccess().getTagsAssignment_3_10_1(), "rule__EPlay__TagsAssignment_3_10_1");
 			builder.put(grammarAccess.getEPlayAccess().getVariable_declarationsAssignment_3_11_2(), "rule__EPlay__Variable_declarationsAssignment_3_11_2");
 			builder.put(grammarAccess.getEPlayAccess().getPlay_exe_settingsAssignment_3_12(), "rule__EPlay__Play_exe_settingsAssignment_3_12");
-			builder.put(grammarAccess.getEPlayAccess().getPlay_error_handlingAssignment_3_13(), "rule__EPlay__Play_error_handlingAssignment_3_13");
+			builder.put(grammarAccess.getEPlayAccess().getError_handlingAssignment_3_13(), "rule__EPlay__Error_handlingAssignment_3_13");
 			builder.put(grammarAccess.getEPlayAccess().getFacts_settingsAssignment_3_14(), "rule__EPlay__Facts_settingsAssignment_3_14");
 			builder.put(grammarAccess.getEPlayAccess().getVars_filesAssignment_3_15_1(), "rule__EPlay__Vars_filesAssignment_3_15_1");
 			builder.put(grammarAccess.getEPlayAccess().getVars_promptAssignment_3_16_1(), "rule__EPlay__Vars_promptAssignment_3_16_1");
@@ -287,7 +287,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEBlockAccess().getExe_settingsAssignment_2_11(), "rule__EBlock__Exe_settingsAssignment_2_11");
 			builder.put(grammarAccess.getEBlockAccess().getDelegationAssignment_2_12(), "rule__EBlock__DelegationAssignment_2_12");
 			builder.put(grammarAccess.getEBlockAccess().getWhen_expressionAssignment_2_13_1(), "rule__EBlock__When_expressionAssignment_2_13_1");
-			builder.put(grammarAccess.getEBlockAccess().getBlock_error_handlingAssignment_2_14(), "rule__EBlock__Block_error_handlingAssignment_2_14");
+			builder.put(grammarAccess.getEBlockAccess().getError_handlingAssignment_2_14(), "rule__EBlock__Error_handlingAssignment_2_14");
 			builder.put(grammarAccess.getEBlockAccess().getTasksAssignment_2_15_2(), "rule__EBlock__TasksAssignment_2_15_2");
 			builder.put(grammarAccess.getEBlockAccess().getRescue_tasksAssignment_2_16_2(), "rule__EBlock__Rescue_tasksAssignment_2_16_2");
 			builder.put(grammarAccess.getEBlockAccess().getAlways_tasksAssignment_2_17_2(), "rule__EBlock__Always_tasksAssignment_2_17_2");
@@ -355,6 +355,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getERoleInclusionAccess().getExe_settingsAssignment_2_2_10(), "rule__ERoleInclusion__Exe_settingsAssignment_2_2_10");
 			builder.put(grammarAccess.getERoleInclusionAccess().getDelegationAssignment_2_2_11(), "rule__ERoleInclusion__DelegationAssignment_2_2_11");
 			builder.put(grammarAccess.getERoleInclusionAccess().getWhen_expressionAssignment_2_2_12_1(), "rule__ERoleInclusion__When_expressionAssignment_2_2_12_1");
+			builder.put(grammarAccess.getERoleInclusionAccess().getError_handlingAssignment_2_2_13(), "rule__ERoleInclusion__Error_handlingAssignment_2_2_13");
 			builder.put(grammarAccess.getERoleInclusionsAccess().getRolesAssignment_2(), "rule__ERoleInclusions__RolesAssignment_2");
 			builder.put(grammarAccess.getEPlaybookInclusionAccess().getPlaybook_file_nameAssignment_2_0_1(), "rule__EPlaybookInclusion__Playbook_file_nameAssignment_2_0_1");
 			builder.put(grammarAccess.getEPlaybookInclusionAccess().getWhen_expressionAssignment_2_1_1(), "rule__EPlaybookInclusion__When_expressionAssignment_2_1_1");
@@ -385,9 +386,9 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPlayExeSettingsAccess().getRun_onceAssignment_2_4_1(), "rule__EPlayExeSettings__Run_onceAssignment_2_4_1");
 			builder.put(grammarAccess.getEExecutionExeSettingsAccess().getThrottleAssignment_2_0_1(), "rule__EExecutionExeSettings__ThrottleAssignment_2_0_1");
 			builder.put(grammarAccess.getEExecutionExeSettingsAccess().getRun_onceAssignment_2_1_1(), "rule__EExecutionExeSettings__Run_onceAssignment_2_1_1");
-			builder.put(grammarAccess.getEBlockErrorHandlingAccess().getAny_errors_fatalAssignment_2_0_1(), "rule__EBlockErrorHandling__Any_errors_fatalAssignment_2_0_1");
-			builder.put(grammarAccess.getEBlockErrorHandlingAccess().getIgnore_errorsAssignment_2_1_1(), "rule__EBlockErrorHandling__Ignore_errorsAssignment_2_1_1");
-			builder.put(grammarAccess.getEBlockErrorHandlingAccess().getIgnore_unreachableAssignment_2_2_1(), "rule__EBlockErrorHandling__Ignore_unreachableAssignment_2_2_1");
+			builder.put(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getAny_errors_fatalAssignment_2_0_1(), "rule__EBlockAndRoleErrorHandling__Any_errors_fatalAssignment_2_0_1");
+			builder.put(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_errorsAssignment_2_1_1(), "rule__EBlockAndRoleErrorHandling__Ignore_errorsAssignment_2_1_1");
+			builder.put(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_unreachableAssignment_2_2_1(), "rule__EBlockAndRoleErrorHandling__Ignore_unreachableAssignment_2_2_1");
 			builder.put(grammarAccess.getEPlayErrorHandlingAccess().getMax_fail_percentageAssignment_2_0_1(), "rule__EPlayErrorHandling__Max_fail_percentageAssignment_2_0_1");
 			builder.put(grammarAccess.getEPlayErrorHandlingAccess().getAny_errors_fatalAssignment_2_1_1(), "rule__EPlayErrorHandling__Any_errors_fatalAssignment_2_1_1");
 			builder.put(grammarAccess.getEPlayErrorHandlingAccess().getIgnore_errorsAssignment_2_2_1(), "rule__EPlayErrorHandling__Ignore_errorsAssignment_2_2_1");
@@ -485,7 +486,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), "rule__EConnection__UnorderedGroup_2");
 			builder.put(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), "rule__EPlayExeSettings__UnorderedGroup_2");
 			builder.put(grammarAccess.getEExecutionExeSettingsAccess().getUnorderedGroup_2(), "rule__EExecutionExeSettings__UnorderedGroup_2");
-			builder.put(grammarAccess.getEBlockErrorHandlingAccess().getUnorderedGroup_2(), "rule__EBlockErrorHandling__UnorderedGroup_2");
+			builder.put(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), "rule__EBlockAndRoleErrorHandling__UnorderedGroup_2");
 			builder.put(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), "rule__EPlayErrorHandling__UnorderedGroup_2");
 			builder.put(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), "rule__ETaskHandlerErrorHandling__UnorderedGroup_2");
 			builder.put(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), "rule__EFactsSettings__UnorderedGroup_2");

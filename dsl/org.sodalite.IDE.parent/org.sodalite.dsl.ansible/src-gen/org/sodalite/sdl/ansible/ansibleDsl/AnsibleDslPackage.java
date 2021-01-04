@@ -759,13 +759,13 @@ public interface AnsibleDslPackage extends EPackage
   int EPLAY__PLAY_EXE_SETTINGS = EBASE_FEATURE_COUNT + 2;
 
   /**
-   * The feature id for the '<em><b>Play error handling</b></em>' containment reference.
+   * The feature id for the '<em><b>Error handling</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPLAY__PLAY_ERROR_HANDLING = EBASE_FEATURE_COUNT + 3;
+  int EPLAY__ERROR_HANDLING = EBASE_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Facts settings</b></em>' containment reference.
@@ -1003,13 +1003,13 @@ public interface AnsibleDslPackage extends EPackage
   int EBLOCK__NAME = EEXECUTION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Block error handling</b></em>' containment reference.
+   * The feature id for the '<em><b>Error handling</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EBLOCK__BLOCK_ERROR_HANDLING = EEXECUTION_FEATURE_COUNT + 1;
+  int EBLOCK__ERROR_HANDLING = EEXECUTION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Tasks</b></em>' containment reference list.
@@ -1710,13 +1710,22 @@ public interface AnsibleDslPackage extends EPackage
   int EROLE_INCLUSION__NAME = EEXECUTION_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Error handling</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EROLE_INCLUSION__ERROR_HANDLING = EEXECUTION_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>ERole Inclusion</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EROLE_INCLUSION_FEATURE_COUNT = EEXECUTION_FEATURE_COUNT + 1;
+  int EROLE_INCLUSION_FEATURE_COUNT = EEXECUTION_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionsImpl <em>ERole Inclusions</em>}' class.
@@ -2281,14 +2290,14 @@ public interface AnsibleDslPackage extends EPackage
   int EERROR_HANDLING_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockErrorHandlingImpl <em>EBlock Error Handling</em>}' class.
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockAndRoleErrorHandlingImpl <em>EBlock And Role Error Handling</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockErrorHandlingImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBlockErrorHandling()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockAndRoleErrorHandlingImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBlockAndRoleErrorHandling()
    * @generated
    */
-  int EBLOCK_ERROR_HANDLING = 27;
+  int EBLOCK_AND_ROLE_ERROR_HANDLING = 27;
 
   /**
    * The feature id for the '<em><b>Any errors fatal</b></em>' containment reference.
@@ -2297,7 +2306,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EBLOCK_ERROR_HANDLING__ANY_ERRORS_FATAL = EERROR_HANDLING__ANY_ERRORS_FATAL;
+  int EBLOCK_AND_ROLE_ERROR_HANDLING__ANY_ERRORS_FATAL = EERROR_HANDLING__ANY_ERRORS_FATAL;
 
   /**
    * The feature id for the '<em><b>Ignore errors</b></em>' containment reference.
@@ -2306,7 +2315,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EBLOCK_ERROR_HANDLING__IGNORE_ERRORS = EERROR_HANDLING__IGNORE_ERRORS;
+  int EBLOCK_AND_ROLE_ERROR_HANDLING__IGNORE_ERRORS = EERROR_HANDLING__IGNORE_ERRORS;
 
   /**
    * The feature id for the '<em><b>Ignore unreachable</b></em>' containment reference.
@@ -2315,16 +2324,16 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EBLOCK_ERROR_HANDLING__IGNORE_UNREACHABLE = EERROR_HANDLING__IGNORE_UNREACHABLE;
+  int EBLOCK_AND_ROLE_ERROR_HANDLING__IGNORE_UNREACHABLE = EERROR_HANDLING__IGNORE_UNREACHABLE;
 
   /**
-   * The number of structural features of the '<em>EBlock Error Handling</em>' class.
+   * The number of structural features of the '<em>EBlock And Role Error Handling</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EBLOCK_ERROR_HANDLING_FEATURE_COUNT = EERROR_HANDLING_FEATURE_COUNT + 0;
+  int EBLOCK_AND_ROLE_ERROR_HANDLING_FEATURE_COUNT = EERROR_HANDLING_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayErrorHandlingImpl <em>EPlay Error Handling</em>}' class.
@@ -4379,15 +4388,15 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEPlay_Play_exe_settings();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_error_handling <em>Play error handling</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getError_handling <em>Error handling</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Play error handling</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlay_error_handling()
+   * @return the meta object for the containment reference '<em>Error handling</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlay#getError_handling()
    * @see #getEPlay()
    * @generated
    */
-  EReference getEPlay_Play_error_handling();
+  EReference getEPlay_Error_handling();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getFacts_settings <em>Facts settings</em>}'.
@@ -4521,15 +4530,15 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEBlock_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getBlock_error_handling <em>Block error handling</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getError_handling <em>Error handling</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Block error handling</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBlock#getBlock_error_handling()
+   * @return the meta object for the containment reference '<em>Error handling</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBlock#getError_handling()
    * @see #getEBlock()
    * @generated
    */
-  EReference getEBlock_Block_error_handling();
+  EReference getEBlock_Error_handling();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlock#getTasks <em>Tasks</em>}'.
@@ -4712,6 +4721,17 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EReference getERoleInclusion_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion#getError_handling <em>Error handling</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Error handling</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion#getError_handling()
+   * @see #getERoleInclusion()
+   * @generated
+   */
+  EReference getERoleInclusion_Error_handling();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions <em>ERole Inclusions</em>}'.
@@ -5185,14 +5205,14 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEErrorHandling_Ignore_unreachable();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling <em>EBlock Error Handling</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling <em>EBlock And Role Error Handling</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EBlock Error Handling</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EBlockErrorHandling
+   * @return the meta object for class '<em>EBlock And Role Error Handling</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling
    * @generated
    */
-  EClass getEBlockErrorHandling();
+  EClass getEBlockAndRoleErrorHandling();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling <em>EPlay Error Handling</em>}'.
@@ -6789,12 +6809,12 @@ public interface AnsibleDslPackage extends EPackage
     EReference EPLAY__PLAY_EXE_SETTINGS = eINSTANCE.getEPlay_Play_exe_settings();
 
     /**
-     * The meta object literal for the '<em><b>Play error handling</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Error handling</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPLAY__PLAY_ERROR_HANDLING = eINSTANCE.getEPlay_Play_error_handling();
+    EReference EPLAY__ERROR_HANDLING = eINSTANCE.getEPlay_Error_handling();
 
     /**
      * The meta object literal for the '<em><b>Facts settings</b></em>' containment reference feature.
@@ -6895,12 +6915,12 @@ public interface AnsibleDslPackage extends EPackage
     EReference EBLOCK__NAME = eINSTANCE.getEBlock_Name();
 
     /**
-     * The meta object literal for the '<em><b>Block error handling</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Error handling</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EBLOCK__BLOCK_ERROR_HANDLING = eINSTANCE.getEBlock_Block_error_handling();
+    EReference EBLOCK__ERROR_HANDLING = eINSTANCE.getEBlock_Error_handling();
 
     /**
      * The meta object literal for the '<em><b>Tasks</b></em>' containment reference list feature.
@@ -7047,6 +7067,14 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference EROLE_INCLUSION__NAME = eINSTANCE.getERoleInclusion_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Error handling</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EROLE_INCLUSION__ERROR_HANDLING = eINSTANCE.getERoleInclusion_Error_handling();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionsImpl <em>ERole Inclusions</em>}' class.
@@ -7427,14 +7455,14 @@ public interface AnsibleDslPackage extends EPackage
     EReference EERROR_HANDLING__IGNORE_UNREACHABLE = eINSTANCE.getEErrorHandling_Ignore_unreachable();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockErrorHandlingImpl <em>EBlock Error Handling</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockAndRoleErrorHandlingImpl <em>EBlock And Role Error Handling</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockErrorHandlingImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBlockErrorHandling()
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EBlockAndRoleErrorHandlingImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBlockAndRoleErrorHandling()
      * @generated
      */
-    EClass EBLOCK_ERROR_HANDLING = eINSTANCE.getEBlockErrorHandling();
+    EClass EBLOCK_AND_ROLE_ERROR_HANDLING = eINSTANCE.getEBlockAndRoleErrorHandling();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayErrorHandlingImpl <em>EPlay Error Handling</em>}' class.

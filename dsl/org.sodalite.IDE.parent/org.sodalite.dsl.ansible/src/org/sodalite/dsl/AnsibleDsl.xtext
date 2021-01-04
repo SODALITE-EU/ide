@@ -61,7 +61,7 @@ EPlay:
 			(variable_declarations+=EVariableDeclaration)+
 		END)? &
 		(play_exe_settings=EPlayExeSettings)? &
-		(play_error_handling=EPlayErrorHandling)? &
+		(error_handling=EPlayErrorHandling)? &
 		(facts_settings=EFactsSettings)? &
 		('vars_files:' vars_files=EListPassed)? &
 		('vars_prompt:' vars_prompt=EListPassed)? &
@@ -109,7 +109,7 @@ EBlock:
 		(exe_settings=EExecutionExeSettings)? &
 		(delegation=EDelegation)? &
 		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
-		(block_error_handling=EBlockErrorHandling)? &
+		(error_handling=EBlockAndRoleErrorHandling)? &
 		('tasks:'
 		BEGIN
 			(tasks+=ETask)+
@@ -233,7 +233,8 @@ ERoleInclusion:
 			END)? &
 			(exe_settings=EExecutionExeSettings)? &
 			(delegation=EDelegation)? &
-			('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
+			('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
+			(error_handling=EBlockAndRoleErrorHandling)?
 		)
 	)
 	END
@@ -351,11 +352,11 @@ EExecutionExeSettings:
 ;
 
 EErrorHandling:
-	EBlockErrorHandling | EPlayErrorHandling | ETaskHandlerErrorHandling
+	EBlockAndRoleErrorHandling | EPlayErrorHandling | ETaskHandlerErrorHandling
 ;
 
-EBlockErrorHandling:
-	'block_error_handling:'
+EBlockAndRoleErrorHandling:
+	'error_handling:'
 	BEGIN
 	(
 		('any_errors_fatal:' any_errors_fatal=EBooleanPassed)? &
@@ -366,7 +367,7 @@ EBlockErrorHandling:
 ;
 
 EPlayErrorHandling:
-	'play_error_handling:'
+	'error_handling:'
 	BEGIN
 	(
 		('max_fail_percentage:' max_fail_percentage=ENumberPassed)? &

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 
@@ -24,6 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERoleInclusionImpl#getError_handling <em>Error handling</em>}</li>
  * </ul>
  *
  * @generated
@@ -39,6 +41,16 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
    * @ordered
    */
   protected EJinjaExpressionAndString name;
+
+  /**
+   * The cached value of the '{@link #getError_handling() <em>Error handling</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getError_handling()
+   * @generated
+   * @ordered
+   */
+  protected EBlockAndRoleErrorHandling error_handling;
 
   /**
    * <!-- begin-user-doc -->
@@ -117,12 +129,64 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
    * @generated
    */
   @Override
+  public EBlockAndRoleErrorHandling getError_handling()
+  {
+    return error_handling;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetError_handling(EBlockAndRoleErrorHandling newError_handling, NotificationChain msgs)
+  {
+    EBlockAndRoleErrorHandling oldError_handling = error_handling;
+    error_handling = newError_handling;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING, oldError_handling, newError_handling);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setError_handling(EBlockAndRoleErrorHandling newError_handling)
+  {
+    if (newError_handling != error_handling)
+    {
+      NotificationChain msgs = null;
+      if (error_handling != null)
+        msgs = ((InternalEObject)error_handling).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING, null, msgs);
+      if (newError_handling != null)
+        msgs = ((InternalEObject)newError_handling).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING, null, msgs);
+      msgs = basicSetError_handling(newError_handling, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING, newError_handling, newError_handling));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case AnsibleDslPackage.EROLE_INCLUSION__NAME:
         return basicSetName(null, msgs);
+      case AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING:
+        return basicSetError_handling(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -139,6 +203,8 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
     {
       case AnsibleDslPackage.EROLE_INCLUSION__NAME:
         return getName();
+      case AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING:
+        return getError_handling();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -155,6 +221,9 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
     {
       case AnsibleDslPackage.EROLE_INCLUSION__NAME:
         setName((EJinjaExpressionAndString)newValue);
+        return;
+      case AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING:
+        setError_handling((EBlockAndRoleErrorHandling)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -173,6 +242,9 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
       case AnsibleDslPackage.EROLE_INCLUSION__NAME:
         setName((EJinjaExpressionAndString)null);
         return;
+      case AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING:
+        setError_handling((EBlockAndRoleErrorHandling)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -189,6 +261,8 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
     {
       case AnsibleDslPackage.EROLE_INCLUSION__NAME:
         return name != null;
+      case AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING:
+        return error_handling != null;
     }
     return super.eIsSet(featureID);
   }

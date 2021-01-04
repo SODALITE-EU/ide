@@ -32,7 +32,7 @@ plays:
 					varrrr1: 55
 				block_name: "this is a block"
 				when: declared_variable: var3.ccc.innerkey2 == "string"
-				block_error_handling:
+				error_handling:
 					any_errors_fatal: True
 					ignore_errors: False
 				tasks:

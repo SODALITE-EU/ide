@@ -95,7 +95,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     "\t- delegate_to\n") + 
     "\t- delegate_facts");
   
-  private final String BLOCK_ERROR_HANDLING_DESCRIPTION = (((("This is used for setting up how to handle the errors in a block.\n\n" + 
+  private final String BLOCK_AND_ROLE_ERROR_HANDLING_DESCRIPTION = (((("This is used for setting up how to handle the errors in a block/role inclusion.\n\n" + 
     "The attributes that can be set are:\n\n") + 
     "\t- any_errors_fatal\n") + 
     "\t- ignore_errors\n") + 
@@ -174,8 +174,8 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void complete_EPlayErrorHandling(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    StyledString _styledString = new StyledString("play_error_handling:");
-    this.createNonEditableCompletionProposal("play_error_handling:", _styledString, context, this.PLAY_ERROR_HANDLING_DESCRIPTION, acceptor);
+    StyledString _styledString = new StyledString("error_handling:");
+    this.createNonEditableCompletionProposal("error_handling:", _styledString, context, this.PLAY_ERROR_HANDLING_DESCRIPTION, acceptor);
   }
   
   @Override
@@ -197,9 +197,9 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
-  public void complete_EBlockErrorHandling(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    StyledString _styledString = new StyledString("block_error_handling:");
-    this.createNonEditableCompletionProposal("block_error_handling:", _styledString, context, this.BLOCK_ERROR_HANDLING_DESCRIPTION, acceptor);
+  public void complete_EBlockAndRoleErrorHandling(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    StyledString _styledString = new StyledString("error_handling:");
+    this.createNonEditableCompletionProposal("error_handling:", _styledString, context, this.BLOCK_AND_ROLE_ERROR_HANDLING_DESCRIPTION, acceptor);
   }
   
   @Override
@@ -236,6 +236,11 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   public void complete_EPlaybookInclusion(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     StyledString _styledString = new StyledString("playbook_inclusion:");
     this.createNonEditableCompletionProposal("playbook_inclusion:", _styledString, context, this.PLAYBOOK_INCLUSION_DESCRIPTION, acceptor);
+  }
+  
+  @Override
+  public void completeEPlaybookInclusion_Playbook_file_name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.createEditableCompletionProposal("\"playbook_imported.yaml\"", "\"playbook_imported.yaml\"", context, "The yaml file of the playbook to import.", acceptor);
   }
   
   @Override
