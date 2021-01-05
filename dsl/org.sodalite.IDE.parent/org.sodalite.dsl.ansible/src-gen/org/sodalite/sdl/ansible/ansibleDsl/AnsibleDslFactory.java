@@ -429,15 +429,6 @@ public interface AnsibleDslFactory extends EFactory
   ESimpleValue createESimpleValue();
 
   /**
-   * Returns a new object of class '<em>EItem</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EItem</em>'.
-   * @generated
-   */
-  EItem createEItem();
-
-  /**
    * Returns a new object of class '<em>EJinja Expression Evaluation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

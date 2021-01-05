@@ -104,6 +104,9 @@ public final class HelloWorldProject extends AbstractProjectTemplate {
       _builder_1.append("module: debug");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("parameters:");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t\t");
       _builder_1.append("msg: \"Hello world!\"");
       _builder_1.newLine();
       this.addFile(it, _builder, _builder_1);

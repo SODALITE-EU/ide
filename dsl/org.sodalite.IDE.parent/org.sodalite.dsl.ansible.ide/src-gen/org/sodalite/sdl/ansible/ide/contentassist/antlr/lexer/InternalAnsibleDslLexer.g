@@ -219,8 +219,6 @@ When : 'when:';
 
 Else : 'else';
 
-Item : 'item';
-
 And : 'and';
 
 Not : 'not';

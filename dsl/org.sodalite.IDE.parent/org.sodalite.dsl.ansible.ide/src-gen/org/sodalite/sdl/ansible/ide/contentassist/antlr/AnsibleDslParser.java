@@ -107,6 +107,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getETaskAccess().getGroup_3_15(), "rule__ETask__Group_3_15__0");
 			builder.put(grammarAccess.getETaskAccess().getGroup_3_17(), "rule__ETask__Group_3_17__0");
 			builder.put(grammarAccess.getETaskAccess().getGroup_3_19(), "rule__ETask__Group_3_19__0");
+			builder.put(grammarAccess.getETaskAccess().getGroup_3_19_2(), "rule__ETask__Group_3_19_2__0");
 			builder.put(grammarAccess.getEHandlerAccess().getGroup(), "rule__EHandler__Group__0");
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_0(), "rule__EHandler__Group_3_0__0");
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_4(), "rule__EHandler__Group_3_4__0");
@@ -120,6 +121,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_15(), "rule__EHandler__Group_3_15__0");
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_17(), "rule__EHandler__Group_3_17__0");
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_19(), "rule__EHandler__Group_3_19__0");
+			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_19_2(), "rule__EHandler__Group_3_19_2__0");
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_22(), "rule__EHandler__Group_3_22__0");
 			builder.put(grammarAccess.getEModuleCallAccess().getGroup(), "rule__EModuleCall__Group__0");
 			builder.put(grammarAccess.getEModuleCallAccess().getGroup_3(), "rule__EModuleCall__Group_3__0");
@@ -200,7 +202,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEAsynchronousSettingsAccess().getGroup_2_0(), "rule__EAsynchronousSettings__Group_2_0__0");
 			builder.put(grammarAccess.getEAsynchronousSettingsAccess().getGroup_2_1(), "rule__EAsynchronousSettings__Group_2_1__0");
 			builder.put(grammarAccess.getENotifiedTopicAccess().getGroup(), "rule__ENotifiedTopic__Group__0");
-			builder.put(grammarAccess.getEItemAccess().getGroup(), "rule__EItem__Group__0");
 			builder.put(grammarAccess.getEJinjaExpressionEvaluationAccess().getGroup(), "rule__EJinjaExpressionEvaluation__Group__0");
 			builder.put(grammarAccess.getEFunctionCallAccess().getGroup(), "rule__EFunctionCall__Group__0");
 			builder.put(grammarAccess.getEFunctionCallAccess().getGroup_1_0(), "rule__EFunctionCall__Group_1_0__0");
@@ -311,6 +312,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getETaskAccess().getArgsAssignment_3_17_1(), "rule__ETask__ArgsAssignment_3_17_1");
 			builder.put(grammarAccess.getETaskAccess().getModuleAssignment_3_18(), "rule__ETask__ModuleAssignment_3_18");
 			builder.put(grammarAccess.getETaskAccess().getNotifiablesAssignment_3_19_1(), "rule__ETask__NotifiablesAssignment_3_19_1");
+			builder.put(grammarAccess.getETaskAccess().getNotifiablesAssignment_3_19_2_1(), "rule__ETask__NotifiablesAssignment_3_19_2_1");
 			builder.put(grammarAccess.getETaskAccess().getLoopAssignment_3_20(), "rule__ETask__LoopAssignment_3_20");
 			builder.put(grammarAccess.getETaskAccess().getRegisterAssignment_3_21(), "rule__ETask__RegisterAssignment_3_21");
 			builder.put(grammarAccess.getEHandlerAccess().getNameAssignment_3_0_1(), "rule__EHandler__NameAssignment_3_0_1");
@@ -333,6 +335,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEHandlerAccess().getArgsAssignment_3_17_1(), "rule__EHandler__ArgsAssignment_3_17_1");
 			builder.put(grammarAccess.getEHandlerAccess().getModuleAssignment_3_18(), "rule__EHandler__ModuleAssignment_3_18");
 			builder.put(grammarAccess.getEHandlerAccess().getNotifiablesAssignment_3_19_1(), "rule__EHandler__NotifiablesAssignment_3_19_1");
+			builder.put(grammarAccess.getEHandlerAccess().getNotifiablesAssignment_3_19_2_1(), "rule__EHandler__NotifiablesAssignment_3_19_2_1");
 			builder.put(grammarAccess.getEHandlerAccess().getLoopAssignment_3_20(), "rule__EHandler__LoopAssignment_3_20");
 			builder.put(grammarAccess.getEHandlerAccess().getRegisterAssignment_3_21(), "rule__EHandler__RegisterAssignment_3_21");
 			builder.put(grammarAccess.getEHandlerAccess().getListen_toAssignment_3_22_1(), "rule__EHandler__Listen_toAssignment_3_22_1");

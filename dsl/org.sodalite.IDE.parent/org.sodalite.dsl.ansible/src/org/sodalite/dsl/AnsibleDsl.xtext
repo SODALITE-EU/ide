@@ -153,7 +153,7 @@ ETask:
 		(asynchronous_settings=EAsynchronousSettings)? &
 		('args:' args=EDictionaryPassed)? &
 		(module=EModuleCall) &
-		('notify:' (notifiables+=ENotifiable)+)? &
+		('notify:' (notifiables+=ENotifiable) (',' notifiables+=ENotifiable)*)? &
 		(loop=ELoop)? &
 		(register=ERegisterVariable)?
 	)
@@ -187,7 +187,7 @@ EHandler:
 		(asynchronous_settings=EAsynchronousSettings)? &
 		('args:' args=EDictionaryPassed)? &
 		(module=EModuleCall) &
-		('notify:' (notifiables+=ENotifiable)+)? &
+		('notify:' (notifiables+=ENotifiable) (',' notifiables+=ENotifiable)*)? &
 		(loop=ELoop)? &
 		(register=ERegisterVariable)? &
 		('listen:' (listen_to+=[ENotifiedTopic|STRING])+)?
@@ -448,7 +448,7 @@ EValuePassed:
 ;
 
 EValuePassedToJinjaExpression:
-	EValue | ESpecialVariable | EItem | EVariableReference | EFunctionCall | EEmptyCurlyBraces
+	EValue | ESpecialVariable | EVariableReference | EFunctionCall | EEmptyCurlyBraces
 ;
 
 EComposedValue:
@@ -468,11 +468,6 @@ ESimpleValueWithoutString:
 ;
 ESimpleValue:
 	simple_value_string=STRING | simple_value_without_string=ESimpleValueWithoutString
-;
-
-EItem:
-	{EItem}
-	'item'  //TODO: maybe this should be included in ESpecialVariable, thus it shouldn't exist as a rule?
 ;
 
 EJinjaExpressionEvaluation:

@@ -27,7 +27,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
-import org.sodalite.sdl.ansible.ansibleDsl.EItem
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression
@@ -85,6 +84,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compilePlays(EPlaybook playbook) '''
 		«FOR play : playbook.plays»
 			«compilePlay(play, '  ')»
+			
 		«ENDFOR»
 	'''
 	
@@ -693,10 +693,6 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (valuePassedToJinjaExpression instanceof ESpecialVariable){
 			var specialVariableString = valuePassedToJinjaExpression.name
 			return specialVariableString
-		}
-		else if (valuePassedToJinjaExpression instanceof EItem){
-			var itemString = "item"
-			return itemString
 		}
 		else if (valuePassedToJinjaExpression instanceof EVariableDeclarationVariableReference){
 			var declaredVariableString = ""

@@ -301,11 +301,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createESimpleValueAdapter();
       }
       @Override
-      public Adapter caseEItem(EItem object)
-      {
-        return createEItemAdapter();
-      }
-      @Override
       public Adapter caseEJinjaExpressionEvaluation(EJinjaExpressionEvaluation object)
       {
         return createEJinjaExpressionEvaluationAdapter();
@@ -1158,21 +1153,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createESimpleValueAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EItem <em>EItem</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EItem
-   * @generated
-   */
-  public Adapter createEItemAdapter()
   {
     return null;
   }

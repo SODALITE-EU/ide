@@ -1068,6 +1068,10 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Keyword cNotifyKeyword_3_19_0 = (Keyword)cGroup_3_19.eContents().get(0);
 		private final Assignment cNotifiablesAssignment_3_19_1 = (Assignment)cGroup_3_19.eContents().get(1);
 		private final RuleCall cNotifiablesENotifiableParserRuleCall_3_19_1_0 = (RuleCall)cNotifiablesAssignment_3_19_1.eContents().get(0);
+		private final Group cGroup_3_19_2 = (Group)cGroup_3_19.eContents().get(2);
+		private final Keyword cCommaKeyword_3_19_2_0 = (Keyword)cGroup_3_19_2.eContents().get(0);
+		private final Assignment cNotifiablesAssignment_3_19_2_1 = (Assignment)cGroup_3_19_2.eContents().get(1);
+		private final RuleCall cNotifiablesENotifiableParserRuleCall_3_19_2_1_0 = (RuleCall)cNotifiablesAssignment_3_19_2_1.eContents().get(0);
 		private final Assignment cLoopAssignment_3_20 = (Assignment)cUnorderedGroup_3.eContents().get(20);
 		private final RuleCall cLoopELoopParserRuleCall_3_20_0 = (RuleCall)cLoopAssignment_3_20.eContents().get(0);
 		private final Assignment cRegisterAssignment_3_21 = (Assignment)cUnorderedGroup_3.eContents().get(21);
@@ -1086,7 +1090,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 		//	when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
 		//	action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)?
-		//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable+)? & loop=ELoop? & register=ERegisterVariable?) END;
+		//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+		//	register=ERegisterVariable?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{ETask} 'task:' BEGIN (('task_name:' name=EJinjaExpressionAndString)? & privilege_escalation=EPrivilegeEscalation? &
@@ -1096,8 +1101,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
 		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? &
 		//('action:' action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:'
-		//args=EDictionaryPassed)? & module=EModuleCall & ('notify:' notifiables+=ENotifiable+)? & loop=ELoop? &
-		//register=ERegisterVariable?) END
+		//args=EDictionaryPassed)? & module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? &
+		//loop=ELoop? & register=ERegisterVariable?) END
 		public Group getGroup() { return cGroup; }
 		
 		//{ETask}
@@ -1116,8 +1121,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
 		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? &
 		//('action:' action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:'
-		//args=EDictionaryPassed)? & module=EModuleCall & ('notify:' notifiables+=ENotifiable+)? & loop=ELoop? &
-		//register=ERegisterVariable?)
+		//args=EDictionaryPassed)? & module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? &
+		//loop=ELoop? & register=ERegisterVariable?)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
 		//('task_name:' name=EJinjaExpressionAndString)?
@@ -1306,17 +1311,29 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EModuleCall
 		public RuleCall getModuleEModuleCallParserRuleCall_3_18_0() { return cModuleEModuleCallParserRuleCall_3_18_0; }
 		
-		//('notify:' notifiables+=ENotifiable+)?
+		//('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)?
 		public Group getGroup_3_19() { return cGroup_3_19; }
 		
 		//'notify:'
 		public Keyword getNotifyKeyword_3_19_0() { return cNotifyKeyword_3_19_0; }
 		
-		//notifiables+=ENotifiable+
+		//notifiables+=ENotifiable
 		public Assignment getNotifiablesAssignment_3_19_1() { return cNotifiablesAssignment_3_19_1; }
 		
 		//ENotifiable
 		public RuleCall getNotifiablesENotifiableParserRuleCall_3_19_1_0() { return cNotifiablesENotifiableParserRuleCall_3_19_1_0; }
+		
+		//(',' notifiables+=ENotifiable)*
+		public Group getGroup_3_19_2() { return cGroup_3_19_2; }
+		
+		//','
+		public Keyword getCommaKeyword_3_19_2_0() { return cCommaKeyword_3_19_2_0; }
+		
+		//notifiables+=ENotifiable
+		public Assignment getNotifiablesAssignment_3_19_2_1() { return cNotifiablesAssignment_3_19_2_1; }
+		
+		//ENotifiable
+		public RuleCall getNotifiablesENotifiableParserRuleCall_3_19_2_1_0() { return cNotifiablesENotifiableParserRuleCall_3_19_2_1_0; }
 		
 		//loop=ELoop?
 		public Assignment getLoopAssignment_3_20() { return cLoopAssignment_3_20; }
@@ -1406,6 +1423,10 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Keyword cNotifyKeyword_3_19_0 = (Keyword)cGroup_3_19.eContents().get(0);
 		private final Assignment cNotifiablesAssignment_3_19_1 = (Assignment)cGroup_3_19.eContents().get(1);
 		private final RuleCall cNotifiablesENotifiableParserRuleCall_3_19_1_0 = (RuleCall)cNotifiablesAssignment_3_19_1.eContents().get(0);
+		private final Group cGroup_3_19_2 = (Group)cGroup_3_19.eContents().get(2);
+		private final Keyword cCommaKeyword_3_19_2_0 = (Keyword)cGroup_3_19_2.eContents().get(0);
+		private final Assignment cNotifiablesAssignment_3_19_2_1 = (Assignment)cGroup_3_19_2.eContents().get(1);
+		private final RuleCall cNotifiablesENotifiableParserRuleCall_3_19_2_1_0 = (RuleCall)cNotifiablesAssignment_3_19_2_1.eContents().get(0);
 		private final Assignment cLoopAssignment_3_20 = (Assignment)cUnorderedGroup_3.eContents().get(20);
 		private final RuleCall cLoopELoopParserRuleCall_3_20_0 = (RuleCall)cLoopAssignment_3_20.eContents().get(0);
 		private final Assignment cRegisterAssignment_3_21 = (Assignment)cUnorderedGroup_3.eContents().get(21);
@@ -1429,8 +1450,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 		//	when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
 		//	action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)?
-		//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable+)? & loop=ELoop? & register=ERegisterVariable? & ('listen:'
-		//	listen_to+=[ENotifiedTopic|STRING]+)?) END;
+		//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+		//	register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{EHandler} 'handler:' BEGIN (('handler_name:' name=STRING)? & privilege_escalation=EPrivilegeEscalation? &
@@ -1440,8 +1461,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
 		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? &
 		//('action:' action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:'
-		//args=EDictionaryPassed)? & module=EModuleCall & ('notify:' notifiables+=ENotifiable+)? & loop=ELoop? &
-		//register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?) END
+		//args=EDictionaryPassed)? & module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? &
+		//loop=ELoop? & register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?) END
 		public Group getGroup() { return cGroup; }
 		
 		//{EHandler}
@@ -1460,8 +1481,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 		//when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
 		//action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
-		//module=EModuleCall & ('notify:' notifiables+=ENotifiable+)? & loop=ELoop? & register=ERegisterVariable? & ('listen:'
-		//listen_to+=[ENotifiedTopic|STRING]+)?)
+		//module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+		//register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
 		//('handler_name:' name=STRING)?
@@ -1651,17 +1672,29 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EModuleCall
 		public RuleCall getModuleEModuleCallParserRuleCall_3_18_0() { return cModuleEModuleCallParserRuleCall_3_18_0; }
 		
-		//('notify:' notifiables+=ENotifiable+)?
+		//('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)?
 		public Group getGroup_3_19() { return cGroup_3_19; }
 		
 		//'notify:'
 		public Keyword getNotifyKeyword_3_19_0() { return cNotifyKeyword_3_19_0; }
 		
-		//notifiables+=ENotifiable+
+		//notifiables+=ENotifiable
 		public Assignment getNotifiablesAssignment_3_19_1() { return cNotifiablesAssignment_3_19_1; }
 		
 		//ENotifiable
 		public RuleCall getNotifiablesENotifiableParserRuleCall_3_19_1_0() { return cNotifiablesENotifiableParserRuleCall_3_19_1_0; }
+		
+		//(',' notifiables+=ENotifiable)*
+		public Group getGroup_3_19_2() { return cGroup_3_19_2; }
+		
+		//','
+		public Keyword getCommaKeyword_3_19_2_0() { return cCommaKeyword_3_19_2_0; }
+		
+		//notifiables+=ENotifiable
+		public Assignment getNotifiablesAssignment_3_19_2_1() { return cNotifiablesAssignment_3_19_2_1; }
+		
+		//ENotifiable
+		public RuleCall getNotifiablesENotifiableParserRuleCall_3_19_2_1_0() { return cNotifiablesENotifiableParserRuleCall_3_19_2_1_0; }
 		
 		//loop=ELoop?
 		public Assignment getLoopAssignment_3_20() { return cLoopAssignment_3_20; }
@@ -3493,16 +3526,15 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cESpecialVariableParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cEItemParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cEVariableReferenceParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cEFunctionCallParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cEEmptyCurlyBracesParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cEVariableReferenceParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cEFunctionCallParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cEEmptyCurlyBracesParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//EValuePassedToJinjaExpression:
-		//	EValue | ESpecialVariable | EItem | EVariableReference | EFunctionCall | EEmptyCurlyBraces;
+		//	EValue | ESpecialVariable | EVariableReference | EFunctionCall | EEmptyCurlyBraces;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EValue | ESpecialVariable | EItem | EVariableReference | EFunctionCall | EEmptyCurlyBraces
+		//EValue | ESpecialVariable | EVariableReference | EFunctionCall | EEmptyCurlyBraces
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//EValue
@@ -3511,17 +3543,14 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//ESpecialVariable
 		public RuleCall getESpecialVariableParserRuleCall_1() { return cESpecialVariableParserRuleCall_1; }
 		
-		//EItem
-		public RuleCall getEItemParserRuleCall_2() { return cEItemParserRuleCall_2; }
-		
 		//EVariableReference
-		public RuleCall getEVariableReferenceParserRuleCall_3() { return cEVariableReferenceParserRuleCall_3; }
+		public RuleCall getEVariableReferenceParserRuleCall_2() { return cEVariableReferenceParserRuleCall_2; }
 		
 		//EFunctionCall
-		public RuleCall getEFunctionCallParserRuleCall_4() { return cEFunctionCallParserRuleCall_4; }
+		public RuleCall getEFunctionCallParserRuleCall_3() { return cEFunctionCallParserRuleCall_3; }
 		
 		//EEmptyCurlyBraces
-		public RuleCall getEEmptyCurlyBracesParserRuleCall_5() { return cEEmptyCurlyBracesParserRuleCall_5; }
+		public RuleCall getEEmptyCurlyBracesParserRuleCall_4() { return cEEmptyCurlyBracesParserRuleCall_4; }
 	}
 	public class EComposedValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EComposedValue");
@@ -3649,27 +3678,6 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//ESimpleValueWithoutString
 		public RuleCall getSimple_value_without_stringESimpleValueWithoutStringParserRuleCall_1_0() { return cSimple_value_without_stringESimpleValueWithoutStringParserRuleCall_1_0; }
-	}
-	public class EItemElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EItem");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cEItemAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cItemKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//EItem:
-		//	{EItem}
-		//	'item' //TODO: maybe this should be included in ESpecialVariable, thus it shouldn't exist as a rule?
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{EItem} 'item'
-		public Group getGroup() { return cGroup; }
-		
-		//{EItem}
-		public Action getEItemAction_0() { return cEItemAction_0; }
-		
-		//'item'
-		public Keyword getItemKeyword_1() { return cItemKeyword_1; }
 	}
 	public class EJinjaExpressionEvaluationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluation");
@@ -4923,7 +4931,6 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final EValueWithoutStringElements pEValueWithoutString;
 	private final ESimpleValueWithoutStringElements pESimpleValueWithoutString;
 	private final ESimpleValueElements pESimpleValue;
-	private final EItemElements pEItem;
 	private final EJinjaExpressionEvaluationElements pEJinjaExpressionEvaluation;
 	private final EJinjaExpressionEvaluationWithoutBracketsElements pEJinjaExpressionEvaluationWithoutBrackets;
 	private final EFunctionCallElements pEFunctionCall;
@@ -5017,7 +5024,6 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pEValueWithoutString = new EValueWithoutStringElements();
 		this.pESimpleValueWithoutString = new ESimpleValueWithoutStringElements();
 		this.pESimpleValue = new ESimpleValueElements();
-		this.pEItem = new EItemElements();
 		this.pEJinjaExpressionEvaluation = new EJinjaExpressionEvaluationElements();
 		this.pEJinjaExpressionEvaluationWithoutBrackets = new EJinjaExpressionEvaluationWithoutBracketsElements();
 		this.pEFunctionCall = new EFunctionCallElements();
@@ -5234,7 +5240,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 	//	when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
 	//	action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)?
-	//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable+)? & loop=ELoop? & register=ERegisterVariable?) END;
+	//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+	//	register=ERegisterVariable?) END;
 	public ETaskElements getETaskAccess() {
 		return pETask;
 	}
@@ -5255,8 +5262,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 	//	when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
 	//	action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)?
-	//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable+)? & loop=ELoop? & register=ERegisterVariable? & ('listen:'
-	//	listen_to+=[ENotifiedTopic|STRING]+)?) END;
+	//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+	//	register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?) END;
 	public EHandlerElements getEHandlerAccess() {
 		return pEHandler;
 	}
@@ -5593,7 +5600,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EValuePassedToJinjaExpression:
-	//	EValue | ESpecialVariable | EItem | EVariableReference | EFunctionCall | EEmptyCurlyBraces;
+	//	EValue | ESpecialVariable | EVariableReference | EFunctionCall | EEmptyCurlyBraces;
 	public EValuePassedToJinjaExpressionElements getEValuePassedToJinjaExpressionAccess() {
 		return pEValuePassedToJinjaExpression;
 	}
@@ -5650,18 +5657,6 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	public ParserRule getESimpleValueRule() {
 		return getESimpleValueAccess().getRule();
-	}
-	
-	//EItem:
-	//	{EItem}
-	//	'item' //TODO: maybe this should be included in ESpecialVariable, thus it shouldn't exist as a rule?
-	//;
-	public EItemElements getEItemAccess() {
-		return pEItem;
-	}
-	
-	public ParserRule getEItemRule() {
-		return getEItemAccess().getRule();
 	}
 	
 	//EJinjaExpressionEvaluation:

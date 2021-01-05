@@ -19,7 +19,6 @@ import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableImpl
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
-import org.eclipse.xtext.CrossReference
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EUsedByBodyImpl
 import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl
 import org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl
@@ -39,121 +38,121 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	final String PRIVILEGE_ESCALATION_DESCRIPTION = 
 	"This is used for setting up the privilege escalation.\n\n" + 
 	"The attributes that can be set are:\n\n"+
-	"	- become\n"+
-	"	- become_exe\n"+
-	"	- become_flags\n"+
-	"	- become_method\n"+
-	"	- become_user"
+	"	- become   -> bool\n"+
+	"	- become_exe   -> string\n"+
+	"	- become_flags   -> string\n"+
+	"	- become_method   -> string\n"+
+	"	- become_user   -> string"
 	
 	final String VALIDATION_MODE_DESCRIPTION =
 	"This is used for setting up the two modes of execution that validate tasks.\n\n"+
 	"The two modes, and the correspondent attributes that can be set, are:\n\n"+
-	"	- check_mode\n"+
-	"	- diff"
+	"	- check_mode   -> bool\n"+
+	"	- diff   -> bool"
 	
 	final String CONNECTION_INFO_DESCRIPTION = 
 	"This is used for defining the settings of the connection.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- connection\n"+
-	"	- port\n"+
-	"	- remote_user"
+	"	- connection   -> string\n"+
+	"	- port   -> int\n"+
+	"	- remote_user   -> string"
 	
 	final String PLAY_EXE_SETTINGS_DESCRIPTION =
 	"This is used for controlling the execution of the play.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- strategy\n"+
-	"	- serial\n"+
-	"	- order\n"+
-	"	- throttle\n"+
-	"	- run_once"
+	"	- strategy   -> string\n"+
+	"	- serial   -> list\n"+
+	"	- order   -> string\n"+
+	"	- throttle   -> int\n"+
+	"	- run_once   -> bool"
 	
 	final String PLAY_ERROR_HANDLING_DESCRIPTION =
 	"This is used for setting up how to handle the errors in a play.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- max_fail_percentage\n"+
-	"	- any_errors_fatal\n"+
-	"	- ignore_errors\n"+
-	"	- ignore_unreachable"
+	"	- max_fail_percentage   -> percentage\n"+
+	"	- any_errors_fatal   -> bool\n"+
+	"	- ignore_errors   -> bool\n"+
+	"	- ignore_unreachable   -> bool"
 	
 	final String FACTS_SETTINGS_DESCRIPTION =
 	"This is used for setting up how the gathering of facts is handled.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- gather_facts\n"+
-	"	- gather_subset\n"+
-	"	- gather_timeout\n"+
-	"	- fact_path"
+	"	- gather_facts   -> bool\n"+
+	"	- gather_subset   -> list\n"+
+	"	- gather_timeout   -> int\n"+
+	"	- fact_path   -> string"
 	
 	final String EXECUTION_EXE_SETTINGS_DESCRIPTION =
 	"This is used for controlling the execution of the task/block/handler/role.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- throttle\n"+
-	"	- run_once"
+	"	- throttle   -> int\n"+
+	"	- run_once   -> bool"
 	
 	final String DELEGATION_DESCRIPTION =
 	"This is used for setting up the delegation settings.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- delegate_to\n"+
-	"	- delegate_facts"
+	"	- delegate_to   -> string\n"+
+	"	- delegate_facts   -> bool"
 	
 	final String BLOCK_AND_ROLE_ERROR_HANDLING_DESCRIPTION =
 	"This is used for setting up how to handle the errors in a block/role inclusion.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- any_errors_fatal\n"+
-	"	- ignore_errors\n"+
-	"	- ignore_unreachable"
+	"	- any_errors_fatal   -> bool\n"+
+	"	- ignore_errors   -> bool\n"+
+	"	- ignore_unreachable   -> bool"
 	
 	final String TASK_HANDLER_ERROR_HANDLING_DESCRIPTION =
 	"This is used for setting up how to handle the errors in a task/handler.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- changed_when\n"+
-	"	- failed_when\n"+
-	"	- any_errors_fatal\n"+
-	"	- ignore_errors\n"+
-	"	- ignore_unreachable"
+	"	- changed_when   -> condition\n"+
+	"	- failed_when   -> condition\n"+
+	"	- any_errors_fatal   -> bool\n"+
+	"	- ignore_errors   -> bool\n"+
+	"	- ignore_unreachable   -> bool"
 	
 	final String ASYNCHRONOUS_SETTINGS_DESCRIPTION =
 	"This is used for setting up the asynchronous behavior of a task/handler.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- async\n"+
-	"	- poll"
+	"	- async   -> int\n"+
+	"	- poll   -> int"
 	
 	final String MODULE_CALL_DESCRIPTION =
 	"This is used for defining which is the module to be used in this task/handler.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- module_name: it's the identifier of the module to be used.\n"+
+	"	- module: it's the identifier of the module to be used.\n"+
 	"	- direct_parameter: it's a value passed to the module without an explicit\n"+
-	"	   name of the parameter, like it's done for example with the shell module.\n"+
-	"	   This attribute isn't mandatory.\n"+
+	"	  	  name of the parameter, like it's done for example with the shell module.\n"+
+	"	  	  This attribute isn't mandatory.\n"+
 	"	- parameters: it's just the keyword for defining the list of couples\n"+
-	"	   'identifier of the parameter'-'value passed to it'"
+	"	  	  'identifier of the parameter'-'value passed to it'"
 	
 	final String LOOP_DESCRIPTION =
 	"This is used for defining a loop over the current task/handler.\n\n"+
 	"There are two types of loops and two correspondent attributes:\n\n"+
 	"	- loop_over: when the loop is done over a list of values.\n"+
-	"	   This attribute allows to specify which is the list.\n"+
-	"	   In this case the additional entity 'loop_control' can be used\n"+
-	"	   for specifying additional properties of the loop.\n"+
+	"	  	  This attribute allows to specify which is the list.\n"+
+	"	  	  In this case the additional entity 'loop_control' can be used\n"+
+	"	  	  for specifying additional properties of the loop.\n"+
 	"	- until: when the operations are repeated until a condition is met.\n"+
-	"	   This attribute allows to specify the end condition to meet.\n"+
-	"	   Two additional attributes that can be set in this case are:\n"+
-	"	   	- retries\n"+
-	"	   	- delay\n"
+	"	  	  This attribute allows to specify the end condition to meet.\n"+
+	"	  	  Two additional attributes that can be set in this case are:\n"+
+	"	   	  	 - retries   -> int\n"+
+	"	   	   	 - delay   -> int\n"
 	
 	final String LOOP_CONTROL_DESCRIPTION =
 	"This is used for setting up how the loop over a list is done.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- label\n"+
-	"	- pause\n"+
-	"	- index_var\n"+
-	"	- loop_var\n"+
-	"	- extended"
+	"	- label   -> string\n"+
+	"	- pause   -> float\n"+
+	"	- index_var   -> identifier of the var\n"+
+	"	- loop_var   -> identifier of the var\n"+
+	"	- extended   -> bool"
 	
 	final String PLAYBOOK_INCLUSION_DESCRIPTION =
 	"This is used for importing a playbook yaml file.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- import_playbook\n"+
-	"	- when"
+	"	- import_playbook   -> the name of the yaml file\n"+
+	"	- when   -> condition"
 	
 	override void complete_EPrivilegeEscalation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createNonEditableCompletionProposal("privilege_escalation:", new StyledString("privilege_escalation:"), context, PRIVILEGE_ESCALATION_DESCRIPTION, acceptor)
@@ -200,7 +199,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	}
 	
 	override void complete_EModuleCall(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("module_call:", new StyledString("module_call:"), context, MODULE_CALL_DESCRIPTION, acceptor)
+		createNonEditableCompletionProposal("module:", new StyledString("module:"), context, MODULE_CALL_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_ELoop(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

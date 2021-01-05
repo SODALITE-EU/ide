@@ -41,7 +41,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EItem;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
@@ -112,6 +111,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         CharSequence _compilePlay = this.compilePlay(play, "  ");
         _builder.append(_compilePlay);
         _builder.newLineIfNotEmpty();
+        _builder.newLine();
       }
     }
     return _builder;
@@ -1688,58 +1688,51 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         return specialVariableString;
       } else {
         String _xifexpression_2 = null;
-        if ((valuePassedToJinjaExpression instanceof EItem)) {
-          String itemString = "item";
-          return itemString;
+        if ((valuePassedToJinjaExpression instanceof EVariableDeclarationVariableReference)) {
+          String declaredVariableString = "";
+          declaredVariableString = declaredVariableString.concat(((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getVariable_declaration_variable_reference().getName());
+          return declaredVariableString;
         } else {
           String _xifexpression_3 = null;
-          if ((valuePassedToJinjaExpression instanceof EVariableDeclarationVariableReference)) {
-            String declaredVariableString = "";
-            declaredVariableString = declaredVariableString.concat(((EVariableDeclarationVariableReference)valuePassedToJinjaExpression).getVariable_declaration_variable_reference().getName());
-            return declaredVariableString;
+          if ((valuePassedToJinjaExpression instanceof ERegisterVariableReference)) {
+            String registerVariableString = "";
+            registerVariableString = registerVariableString.concat(((ERegisterVariableReference)valuePassedToJinjaExpression).getRegister_variable_reference().getName());
+            return registerVariableString;
           } else {
             String _xifexpression_4 = null;
-            if ((valuePassedToJinjaExpression instanceof ERegisterVariableReference)) {
-              String registerVariableString = "";
-              registerVariableString = registerVariableString.concat(((ERegisterVariableReference)valuePassedToJinjaExpression).getRegister_variable_reference().getName());
-              return registerVariableString;
+            if ((valuePassedToJinjaExpression instanceof EInputOperationVariableReference)) {
+              String inputOperationVariableString = "";
+              inputOperationVariableString = inputOperationVariableString.concat(((EInputOperationVariableReference)valuePassedToJinjaExpression).getName().getName());
+              return inputOperationVariableString;
             } else {
               String _xifexpression_5 = null;
-              if ((valuePassedToJinjaExpression instanceof EInputOperationVariableReference)) {
-                String inputOperationVariableString = "";
-                inputOperationVariableString = inputOperationVariableString.concat(((EInputOperationVariableReference)valuePassedToJinjaExpression).getName().getName());
-                return inputOperationVariableString;
+              if ((valuePassedToJinjaExpression instanceof EInputInterfaceVariableReference)) {
+                String inputInterfaceVariableString = "";
+                inputInterfaceVariableString = inputInterfaceVariableString.concat(((EInputInterfaceVariableReference)valuePassedToJinjaExpression).getName().getName());
+                return inputInterfaceVariableString;
               } else {
                 String _xifexpression_6 = null;
-                if ((valuePassedToJinjaExpression instanceof EInputInterfaceVariableReference)) {
-                  String inputInterfaceVariableString = "";
-                  inputInterfaceVariableString = inputInterfaceVariableString.concat(((EInputInterfaceVariableReference)valuePassedToJinjaExpression).getName().getName());
-                  return inputInterfaceVariableString;
+                if ((valuePassedToJinjaExpression instanceof EIndexOrLoopVariableReference)) {
+                  String indexOrLoopVariableString = "";
+                  indexOrLoopVariableString = indexOrLoopVariableString.concat(((EIndexOrLoopVariableReference)valuePassedToJinjaExpression).getName().getName());
+                  return indexOrLoopVariableString;
                 } else {
                   String _xifexpression_7 = null;
-                  if ((valuePassedToJinjaExpression instanceof EIndexOrLoopVariableReference)) {
-                    String indexOrLoopVariableString = "";
-                    indexOrLoopVariableString = indexOrLoopVariableString.concat(((EIndexOrLoopVariableReference)valuePassedToJinjaExpression).getName().getName());
-                    return indexOrLoopVariableString;
+                  if ((valuePassedToJinjaExpression instanceof ESetFactVariableReference)) {
+                    String _xblockexpression = null;
+                    {
+                      String setFactVariableReferenceString = "";
+                      _xblockexpression = setFactVariableReferenceString = setFactVariableReferenceString.concat(((ESetFactVariableReference)valuePassedToJinjaExpression).getName().getName());
+                    }
+                    _xifexpression_7 = _xblockexpression;
                   } else {
-                    String _xifexpression_8 = null;
-                    if ((valuePassedToJinjaExpression instanceof ESetFactVariableReference)) {
-                      String _xblockexpression = null;
-                      {
-                        String setFactVariableReferenceString = "";
-                        _xblockexpression = setFactVariableReferenceString = setFactVariableReferenceString.concat(((ESetFactVariableReference)valuePassedToJinjaExpression).getName().getName());
-                      }
-                      _xifexpression_8 = _xblockexpression;
+                    if ((valuePassedToJinjaExpression instanceof EFunctionCall)) {
+                      return this.compileFunctionCall(((EFunctionCall)valuePassedToJinjaExpression));
                     } else {
-                      if ((valuePassedToJinjaExpression instanceof EFunctionCall)) {
-                        return this.compileFunctionCall(((EFunctionCall)valuePassedToJinjaExpression));
-                      } else {
-                        if ((valuePassedToJinjaExpression instanceof EEmptyCurlyBraces)) {
-                          return "{}";
-                        }
+                      if ((valuePassedToJinjaExpression instanceof EEmptyCurlyBraces)) {
+                        return "{}";
                       }
                     }
-                    _xifexpression_7 = _xifexpression_8;
                   }
                   _xifexpression_6 = _xifexpression_7;
                 }

@@ -110,7 +110,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EVALUE_WITHOUT_STRING: return createEValueWithoutString();
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING: return createESimpleValueWithoutString();
       case AnsibleDslPackage.ESIMPLE_VALUE: return createESimpleValue();
-      case AnsibleDslPackage.EITEM: return createEItem();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION: return createEJinjaExpressionEvaluation();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS: return createEJinjaExpressionEvaluationWithoutBrackets();
       case AnsibleDslPackage.EFUNCTION_CALL: return createEFunctionCall();
@@ -686,18 +685,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     ESimpleValueImpl eSimpleValue = new ESimpleValueImpl();
     return eSimpleValue;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EItem createEItem()
-  {
-    EItemImpl eItem = new EItemImpl();
-    return eItem;
   }
 
   /**

@@ -66,7 +66,8 @@ final class HelloWorldProject {
 							task:
 								task_name: "hello world task"
 								module: debug
-									msg: "Hello world!"
+									parameters:
+										msg: "Hello world!"
 			''')
 		])
 	}
