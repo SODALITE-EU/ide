@@ -78,9 +78,10 @@ public interface KBReasoner {
 	List<String> getSubClassesOf(List<String> subclasses, String superclass) throws Exception;
 
 	KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String name, String namespace, String aadmDSL,
-			boolean complete) throws Exception;
+			boolean complete, String token) throws Exception;
 
-	KBSaveReportData saveRM(String rmTTL, String rmURI, String name, String namespace, String rmDSL) throws Exception;
+	KBSaveReportData saveRM(String rmTTL, String rmURI, String name, String namespace, String rmDSL, String token)
+			throws Exception;
 
 	KBOptimizationReportData optimizeAADM(String aadmTTL, String aadmURI) throws Exception;
 

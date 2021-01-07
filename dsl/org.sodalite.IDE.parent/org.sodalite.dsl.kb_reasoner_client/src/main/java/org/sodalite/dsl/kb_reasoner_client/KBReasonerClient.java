@@ -33,6 +33,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.TokenExpiredException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
@@ -126,7 +128,7 @@ public class KBReasonerClient implements KBReasoner {
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setHttpClient(httpClient);
 			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
-			requestFactory.setReadTimeout(30 * 1000);
+			requestFactory.setReadTimeout(120 * 1000);
 			sslRestTemplate = new RestTemplate(requestFactory);
 		}
 		return sslRestTemplate;
@@ -136,7 +138,7 @@ public class KBReasonerClient implements KBReasoner {
 		if (restTemplate == null) {
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
-			requestFactory.setReadTimeout(30 * 1000);
+			requestFactory.setReadTimeout(120 * 1000);
 
 			restTemplate = new RestTemplate(requestFactory);
 		}
@@ -367,7 +369,7 @@ public class KBReasonerClient implements KBReasoner {
 
 	@Override
 	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String name, String namespace, String aadmDSL,
-			boolean complete) throws Exception {
+			boolean complete, String token) throws Exception {
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		Assert.isTrue(!aadmDSL.isEmpty(), "AADM DSL content can neither be null nor empty");
 		String url = kbReasonerUri + "saveAADM";
@@ -380,6 +382,7 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("name", name);
 		map.add("namespace", namespace);
 		map.add("aadmDSL", aadmDSL);
+		map.add("token", token);
 
 		KBSaveReportData report = new KBSaveReportData();
 		try {
@@ -402,6 +405,10 @@ public class KBReasonerClient implements KBReasoner {
 					String result = hcee.getResponseBodyAsString();
 					String json = result.substring(result.indexOf(":") + 1);
 					report.setErrors(processErrors(json));
+				} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.FORBIDDEN) {
+					throw new NotRolePermissionException();
+				} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.UNAUTHORIZED) {
+					throw new TokenExpiredException();
 				} else {
 					throw ex;
 				}
@@ -414,8 +421,8 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public KBSaveReportData saveRM(String rmTTL, String rmURI, String name, String namespace, String rmDSL)
-			throws Exception {
+	public KBSaveReportData saveRM(String rmTTL, String rmURI, String name, String namespace, String rmDSL,
+			String token) throws Exception {
 		Assert.isTrue(!rmTTL.isEmpty(), "Turtle content for RM can neither be null nor empty");
 		String url = kbReasonerUri + "saveRM";
 
@@ -426,6 +433,7 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("namespace", namespace);
 		map.add("name", name);
 		map.add("rmDSL", rmDSL);
+		map.add("token", token);
 
 		KBSaveReportData report = new KBSaveReportData();
 		try {
@@ -444,6 +452,10 @@ public class KBReasonerClient implements KBReasoner {
 					String result = hcee.getResponseBodyAsString();
 					String json = result.substring(result.indexOf(":") + 1);
 					report.setErrors(processErrors(json));
+				} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.FORBIDDEN) {
+					throw new NotRolePermissionException();
+				} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.UNAUTHORIZED) {
+					throw new TokenExpiredException();
 				} else {
 					throw ex;
 				}

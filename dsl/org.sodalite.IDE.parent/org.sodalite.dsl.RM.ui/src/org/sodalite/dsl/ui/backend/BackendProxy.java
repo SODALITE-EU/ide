@@ -74,6 +74,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.sodalite.dsl.RM.ui.internal.RMActivator;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
@@ -267,8 +268,8 @@ public class BackendProxy {
 				// Get module (namespace) from RM
 				String namespace = getRMModule(rmFile, event);
 				String name = rmFile.getName();
-
-				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI, name, namespace, rmDSL);
+				String token = getKBReasoner().getSecurityToken();
+				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI, name, namespace, rmDSL, token);
 				processValidationIssues(rmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception(
@@ -282,6 +283,14 @@ public class BackendProxy {
 						MessageDialog.openInformation(parent, "Save RM",
 								"The selected RM model has been successfully store in the KB with URI:\n"
 										+ saveReport.getURI());
+					}
+				});
+			} catch (NotRolePermissionException ex) {
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						MessageDialog.openError(parent, "Save RM",
+								"You have not permissions to save this model. Please, check your permission in the SODALITE AAI");
 					}
 				});
 			} catch (Exception e) {

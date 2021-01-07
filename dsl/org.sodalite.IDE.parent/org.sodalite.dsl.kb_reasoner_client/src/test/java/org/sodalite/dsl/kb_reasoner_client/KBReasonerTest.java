@@ -243,17 +243,17 @@ class KBReasonerTest {
 		String name = "snow.aadm";
 		String namespace = "snow";
 		boolean complete = false;
-		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/optimization.aadm.ttl",
-				"src/test/resources/snow.aadm", name, namespace, complete);
-		assertTrue(report.hasErrors());
+		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/snow.v2.snow_v2.aadm.ttl",
+				"src/test/resources/snow_v2.aadm", name, namespace, complete);
+		assertFalse(report.hasErrors());
 		assertNotNull(report.getURI());
 	}
 
 	@Test
 	void testSaveRM() throws Exception {
 		String rmURI = "";
-		String name = "snow.aadm";
-		String namespace = "docker_registry.rm";
+		String name = "docker_registry.rm";
+		String namespace = "docker";
 		KBSaveReportData report = saveRM(rmURI, "src/test/resources/modules.docker_registry.rm.ttl",
 				"src/test/resources/docker_registry.rm", name, namespace);
 		assertFalse(report.hasErrors());
@@ -266,7 +266,9 @@ class KBReasonerTest {
 		String rmTTL = new String(Files.readAllBytes(ttl_path));
 		Path dsl_path = FileSystems.getDefault().getPath(dslPath);
 		String rmDSL = new String(Files.readAllBytes(dsl_path));
-		KBSaveReportData report = kbclient.saveRM(rmTTL, rmURI, name, namespace, rmDSL);
+		String token = kbclient.getSecurityToken();
+		assertNotNull(token);
+		KBSaveReportData report = kbclient.saveRM(rmTTL, rmURI, name, namespace, rmDSL, token);
 		return report;
 	}
 
@@ -276,7 +278,9 @@ class KBReasonerTest {
 		String aadmTTL = new String(Files.readAllBytes(ttl_path));
 		Path dsl_path = FileSystems.getDefault().getPath(dslPath);
 		String aadmDSL = new String(Files.readAllBytes(dsl_path));
-		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete);
+		String token = kbclient.getSecurityToken();
+		assertNotNull(token);
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete, token);
 		return report;
 	}
 
