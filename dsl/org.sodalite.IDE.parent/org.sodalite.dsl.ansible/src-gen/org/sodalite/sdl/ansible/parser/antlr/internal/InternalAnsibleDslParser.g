@@ -6627,11 +6627,20 @@ ruleEJinjaExpressionOrString returns [EObject current=null]
 			afterParserOrEnumRuleCall();
 		}
 		    |
+		{
+			newCompositeNode(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaStatementParserRuleCall_1());
+		}
+		this_EJinjaStatement_1=ruleEJinjaStatement
+		{
+			$current = $this_EJinjaStatement_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
 		(
 			(
-				lv_string_1_0=RULE_STRING
+				lv_string_2_0=RULE_STRING
 				{
-					newLeafNode(lv_string_1_0, grammarAccess.getEJinjaExpressionOrStringAccess().getStringSTRINGTerminalRuleCall_1_0());
+					newLeafNode(lv_string_2_0, grammarAccess.getEJinjaExpressionOrStringAccess().getStringSTRINGTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -6640,7 +6649,7 @@ ruleEJinjaExpressionOrString returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"string",
-						lv_string_1_0,
+						lv_string_2_0,
 						"org.eclipse.xtext.common.Terminals.STRING");
 				}
 			)
@@ -8021,6 +8030,632 @@ ruleEIfExpression returns [EObject current=null]
 				)
 			)
 		)?
+	)
+;
+
+// Entry rule entryRuleEJinjaStatement
+entryRuleEJinjaStatement returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEJinjaStatementRule()); }
+	iv_ruleEJinjaStatement=ruleEJinjaStatement
+	{ $current=$iv_ruleEJinjaStatement.current; }
+	EOF;
+
+// Rule EJinjaStatement
+ruleEJinjaStatement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getEJinjaStatementAccess().getEIfStatementParserRuleCall_0());
+		}
+		this_EIfStatement_0=ruleEIfStatement
+		{
+			$current = $this_EIfStatement_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEJinjaStatementAccess().getEForStatementParserRuleCall_1());
+		}
+		this_EForStatement_1=ruleEForStatement
+		{
+			$current = $this_EForStatement_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleEIfStatement
+entryRuleEIfStatement returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEIfStatementRule()); }
+	iv_ruleEIfStatement=ruleEIfStatement
+	{ $current=$iv_ruleEIfStatement.current; }
+	EOF;
+
+// Rule EIfStatement
+ruleEIfStatement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0=LeftCurlyBracketPercentSign
+		{
+			newLeafNode(otherlv_0, grammarAccess.getEIfStatementAccess().getLeftCurlyBracketPercentSignKeyword_0());
+		}
+		(
+			(
+				(
+					lv_if_block_sign_1_1=PlusSign
+					{
+						newLeafNode(lv_if_block_sign_1_1, grammarAccess.getEIfStatementAccess().getIf_block_signPlusSignKeyword_1_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEIfStatementRule());
+						}
+						setWithLastConsumed($current, "if_block_sign", lv_if_block_sign_1_1, null);
+					}
+					    |
+					lv_if_block_sign_1_2=HyphenMinus
+					{
+						newLeafNode(lv_if_block_sign_1_2, grammarAccess.getEIfStatementAccess().getIf_block_signHyphenMinusKeyword_1_0_1());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEIfStatementRule());
+						}
+						setWithLastConsumed($current, "if_block_sign", lv_if_block_sign_1_2, null);
+					}
+				)
+			)
+		)?
+		otherlv_2=If
+		{
+			newLeafNode(otherlv_2, grammarAccess.getEIfStatementAccess().getIfKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEIfStatementAccess().getIf_conditionEFilteredExpressionParserRuleCall_3_0());
+				}
+				lv_if_condition_3_0=ruleEFilteredExpression
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEIfStatementRule());
+					}
+					set(
+						$current,
+						"if_condition",
+						lv_if_condition_3_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_4=PercentSignRightCurlyBracket
+		{
+			newLeafNode(otherlv_4, grammarAccess.getEIfStatementAccess().getPercentSignRightCurlyBracketKeyword_4());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEIfStatementAccess().getIf_bodyEValuePassedParserRuleCall_5_0());
+				}
+				lv_if_body_5_0=ruleEValuePassed
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEIfStatementRule());
+					}
+					set(
+						$current,
+						"if_body",
+						lv_if_body_5_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEIfStatementAccess().getElif_blocksEElifBlockParserRuleCall_6_0());
+				}
+				lv_elif_blocks_6_0=ruleEElifBlock
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEIfStatementRule());
+					}
+					add(
+						$current,
+						"elif_blocks",
+						lv_elif_blocks_6_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EElifBlock");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			otherlv_7=LeftCurlyBracketPercentSign
+			{
+				newLeafNode(otherlv_7, grammarAccess.getEIfStatementAccess().getLeftCurlyBracketPercentSignKeyword_7_0());
+			}
+			(
+				(
+					(
+						lv_else_block_sign_8_1=PlusSign
+						{
+							newLeafNode(lv_else_block_sign_8_1, grammarAccess.getEIfStatementAccess().getElse_block_signPlusSignKeyword_7_1_0_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEIfStatementRule());
+							}
+							setWithLastConsumed($current, "else_block_sign", lv_else_block_sign_8_1, null);
+						}
+						    |
+						lv_else_block_sign_8_2=HyphenMinus
+						{
+							newLeafNode(lv_else_block_sign_8_2, grammarAccess.getEIfStatementAccess().getElse_block_signHyphenMinusKeyword_7_1_0_1());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEIfStatementRule());
+							}
+							setWithLastConsumed($current, "else_block_sign", lv_else_block_sign_8_2, null);
+						}
+					)
+				)
+			)?
+			otherlv_9=Else
+			{
+				newLeafNode(otherlv_9, grammarAccess.getEIfStatementAccess().getElseKeyword_7_2());
+			}
+			otherlv_10=PercentSignRightCurlyBracket
+			{
+				newLeafNode(otherlv_10, grammarAccess.getEIfStatementAccess().getPercentSignRightCurlyBracketKeyword_7_3());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEIfStatementAccess().getElse_bodyEValuePassedParserRuleCall_7_4_0());
+					}
+					lv_else_body_11_0=ruleEValuePassed
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEIfStatementRule());
+						}
+						set(
+							$current,
+							"else_body",
+							lv_else_body_11_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		otherlv_12=LeftCurlyBracketPercentSign
+		{
+			newLeafNode(otherlv_12, grammarAccess.getEIfStatementAccess().getLeftCurlyBracketPercentSignKeyword_8());
+		}
+		(
+			(
+				(
+					lv_endif_block_sign_13_1=PlusSign
+					{
+						newLeafNode(lv_endif_block_sign_13_1, grammarAccess.getEIfStatementAccess().getEndif_block_signPlusSignKeyword_9_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEIfStatementRule());
+						}
+						setWithLastConsumed($current, "endif_block_sign", lv_endif_block_sign_13_1, null);
+					}
+					    |
+					lv_endif_block_sign_13_2=HyphenMinus
+					{
+						newLeafNode(lv_endif_block_sign_13_2, grammarAccess.getEIfStatementAccess().getEndif_block_signHyphenMinusKeyword_9_0_1());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEIfStatementRule());
+						}
+						setWithLastConsumed($current, "endif_block_sign", lv_endif_block_sign_13_2, null);
+					}
+				)
+			)
+		)?
+		otherlv_14=Endif
+		{
+			newLeafNode(otherlv_14, grammarAccess.getEIfStatementAccess().getEndifKeyword_10());
+		}
+		otherlv_15=PercentSignRightCurlyBracket
+		{
+			newLeafNode(otherlv_15, grammarAccess.getEIfStatementAccess().getPercentSignRightCurlyBracketKeyword_11());
+		}
+	)
+;
+
+// Entry rule entryRuleEElifBlock
+entryRuleEElifBlock returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEElifBlockRule()); }
+	iv_ruleEElifBlock=ruleEElifBlock
+	{ $current=$iv_ruleEElifBlock.current; }
+	EOF;
+
+// Rule EElifBlock
+ruleEElifBlock returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0=LeftCurlyBracketPercentSign
+		{
+			newLeafNode(otherlv_0, grammarAccess.getEElifBlockAccess().getLeftCurlyBracketPercentSignKeyword_0());
+		}
+		(
+			(
+				(
+					lv_elif_block_sign_1_1=PlusSign
+					{
+						newLeafNode(lv_elif_block_sign_1_1, grammarAccess.getEElifBlockAccess().getElif_block_signPlusSignKeyword_1_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEElifBlockRule());
+						}
+						setWithLastConsumed($current, "elif_block_sign", lv_elif_block_sign_1_1, null);
+					}
+					    |
+					lv_elif_block_sign_1_2=HyphenMinus
+					{
+						newLeafNode(lv_elif_block_sign_1_2, grammarAccess.getEElifBlockAccess().getElif_block_signHyphenMinusKeyword_1_0_1());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEElifBlockRule());
+						}
+						setWithLastConsumed($current, "elif_block_sign", lv_elif_block_sign_1_2, null);
+					}
+				)
+			)
+		)?
+		otherlv_2=Elif
+		{
+			newLeafNode(otherlv_2, grammarAccess.getEElifBlockAccess().getElifKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEElifBlockAccess().getElif_conditionEFilteredExpressionParserRuleCall_3_0());
+				}
+				lv_elif_condition_3_0=ruleEFilteredExpression
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEElifBlockRule());
+					}
+					set(
+						$current,
+						"elif_condition",
+						lv_elif_condition_3_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_4=PercentSignRightCurlyBracket
+		{
+			newLeafNode(otherlv_4, grammarAccess.getEElifBlockAccess().getPercentSignRightCurlyBracketKeyword_4());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEElifBlockAccess().getElif_bodyEValuePassedParserRuleCall_5_0());
+				}
+				lv_elif_body_5_0=ruleEValuePassed
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEElifBlockRule());
+					}
+					set(
+						$current,
+						"elif_body",
+						lv_elif_body_5_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleEForStatement
+entryRuleEForStatement returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEForStatementRule()); }
+	iv_ruleEForStatement=ruleEForStatement
+	{ $current=$iv_ruleEForStatement.current; }
+	EOF;
+
+// Rule EForStatement
+ruleEForStatement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0=LeftCurlyBracketPercentSign
+		{
+			newLeafNode(otherlv_0, grammarAccess.getEForStatementAccess().getLeftCurlyBracketPercentSignKeyword_0());
+		}
+		(
+			(
+				(
+					lv_for_block_sign_1_1=PlusSign
+					{
+						newLeafNode(lv_for_block_sign_1_1, grammarAccess.getEForStatementAccess().getFor_block_signPlusSignKeyword_1_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEForStatementRule());
+						}
+						setWithLastConsumed($current, "for_block_sign", lv_for_block_sign_1_1, null);
+					}
+					    |
+					lv_for_block_sign_1_2=HyphenMinus
+					{
+						newLeafNode(lv_for_block_sign_1_2, grammarAccess.getEForStatementAccess().getFor_block_signHyphenMinusKeyword_1_0_1());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEForStatementRule());
+						}
+						setWithLastConsumed($current, "for_block_sign", lv_for_block_sign_1_2, null);
+					}
+				)
+			)
+		)?
+		otherlv_2=For
+		{
+			newLeafNode(otherlv_2, grammarAccess.getEForStatementAccess().getForKeyword_2());
+		}
+		(
+			(
+				lv_identifiers_3_0=RULE_ID
+				{
+					newLeafNode(lv_identifiers_3_0, grammarAccess.getEForStatementAccess().getIdentifiersIDTerminalRuleCall_3_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEForStatementRule());
+					}
+					addWithLastConsumed(
+						$current,
+						"identifiers",
+						lv_identifiers_3_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			otherlv_4=Comma
+			{
+				newLeafNode(otherlv_4, grammarAccess.getEForStatementAccess().getCommaKeyword_4_0());
+			}
+			(
+				(
+					lv_identifiers_5_0=RULE_ID
+					{
+						newLeafNode(lv_identifiers_5_0, grammarAccess.getEForStatementAccess().getIdentifiersIDTerminalRuleCall_4_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEForStatementRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"identifiers",
+							lv_identifiers_5_0,
+							"org.eclipse.xtext.common.Terminals.ID");
+					}
+				)
+			)
+		)*
+		otherlv_6=In
+		{
+			newLeafNode(otherlv_6, grammarAccess.getEForStatementAccess().getInKeyword_5());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEForStatementAccess().getListEFilteredExpressionParserRuleCall_6_0());
+				}
+				lv_list_7_0=ruleEFilteredExpression
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEForStatementRule());
+					}
+					set(
+						$current,
+						"list",
+						lv_list_7_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_8=If
+			{
+				newLeafNode(otherlv_8, grammarAccess.getEForStatementAccess().getIfKeyword_7_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEForStatementAccess().getConditionEFilteredExpressionParserRuleCall_7_1_0());
+					}
+					lv_condition_9_0=ruleEFilteredExpression
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEForStatementRule());
+						}
+						set(
+							$current,
+							"condition",
+							lv_condition_9_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			(
+				lv_recursive_10_0=Recursive
+				{
+					newLeafNode(lv_recursive_10_0, grammarAccess.getEForStatementAccess().getRecursiveRecursiveKeyword_8_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEForStatementRule());
+					}
+					setWithLastConsumed($current, "recursive", lv_recursive_10_0, "recursive");
+				}
+			)
+		)?
+		otherlv_11=PercentSignRightCurlyBracket
+		{
+			newLeafNode(otherlv_11, grammarAccess.getEForStatementAccess().getPercentSignRightCurlyBracketKeyword_9());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEForStatementAccess().getFor_bodyEValuePassedParserRuleCall_10_0());
+				}
+				lv_for_body_12_0=ruleEValuePassed
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEForStatementRule());
+					}
+					set(
+						$current,
+						"for_body",
+						lv_for_body_12_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_13=LeftCurlyBracketPercentSign
+			{
+				newLeafNode(otherlv_13, grammarAccess.getEForStatementAccess().getLeftCurlyBracketPercentSignKeyword_11_0());
+			}
+			(
+				(
+					(
+						lv_else_block_sign_14_1=PlusSign
+						{
+							newLeafNode(lv_else_block_sign_14_1, grammarAccess.getEForStatementAccess().getElse_block_signPlusSignKeyword_11_1_0_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEForStatementRule());
+							}
+							setWithLastConsumed($current, "else_block_sign", lv_else_block_sign_14_1, null);
+						}
+						    |
+						lv_else_block_sign_14_2=HyphenMinus
+						{
+							newLeafNode(lv_else_block_sign_14_2, grammarAccess.getEForStatementAccess().getElse_block_signHyphenMinusKeyword_11_1_0_1());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getEForStatementRule());
+							}
+							setWithLastConsumed($current, "else_block_sign", lv_else_block_sign_14_2, null);
+						}
+					)
+				)
+			)?
+			otherlv_15=Else
+			{
+				newLeafNode(otherlv_15, grammarAccess.getEForStatementAccess().getElseKeyword_11_2());
+			}
+			otherlv_16=PercentSignRightCurlyBracket
+			{
+				newLeafNode(otherlv_16, grammarAccess.getEForStatementAccess().getPercentSignRightCurlyBracketKeyword_11_3());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEForStatementAccess().getElse_bodyEValuePassedParserRuleCall_11_4_0());
+					}
+					lv_else_body_17_0=ruleEValuePassed
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEForStatementRule());
+						}
+						set(
+							$current,
+							"else_body",
+							lv_else_body_17_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		otherlv_18=LeftCurlyBracketPercentSign
+		{
+			newLeafNode(otherlv_18, grammarAccess.getEForStatementAccess().getLeftCurlyBracketPercentSignKeyword_12());
+		}
+		(
+			(
+				(
+					lv_endfor_block_sign_19_1=PlusSign
+					{
+						newLeafNode(lv_endfor_block_sign_19_1, grammarAccess.getEForStatementAccess().getEndfor_block_signPlusSignKeyword_13_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEForStatementRule());
+						}
+						setWithLastConsumed($current, "endfor_block_sign", lv_endfor_block_sign_19_1, null);
+					}
+					    |
+					lv_endfor_block_sign_19_2=HyphenMinus
+					{
+						newLeafNode(lv_endfor_block_sign_19_2, grammarAccess.getEForStatementAccess().getEndfor_block_signHyphenMinusKeyword_13_0_1());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEForStatementRule());
+						}
+						setWithLastConsumed($current, "endfor_block_sign", lv_endfor_block_sign_19_2, null);
+					}
+				)
+			)
+		)?
+		otherlv_20=Endfor
+		{
+			newLeafNode(otherlv_20, grammarAccess.getEForStatementAccess().getEndforKeyword_14());
+		}
+		otherlv_21=PercentSignRightCurlyBracket
+		{
+			newLeafNode(otherlv_21, grammarAccess.getEForStatementAccess().getPercentSignRightCurlyBracketKeyword_15());
+		}
 	)
 ;
 

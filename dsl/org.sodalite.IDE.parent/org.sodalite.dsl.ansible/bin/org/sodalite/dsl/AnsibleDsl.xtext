@@ -436,7 +436,7 @@ ENotifiedTopic:
 ;
 
 EJinjaExpressionOrString:
-	EJinjaExpressionEvaluation | string=STRING
+	EJinjaExpressionEvaluation | EJinjaStatement | string=STRING
 ;
 
 EJinjaExpressionAndString:
@@ -512,6 +512,29 @@ EParenthesisedExpression:
 
 EIfExpression:
 	'return' if_expression=EFilteredExpression 'if' if_condition=EFilteredExpression ('else' else_expression=EFilteredExpression)?
+;
+
+EJinjaStatement:
+	EIfStatement | EForStatement
+;
+
+EIfStatement:
+	'{%' (if_block_sign=('+' | '-'))? 'if' if_condition=EFilteredExpression '%}'
+	if_body=EValuePassed
+	(elif_blocks+=EElifBlock)*
+	('{%' (else_block_sign=('+' | '-'))? 'else' '%}' else_body=EValuePassed)?
+	'{%' (endif_block_sign=('+' | '-'))? 'endif' '%}'
+;
+
+EElifBlock:
+	'{%' (elif_block_sign=('+' | '-'))? 'elif' elif_condition=EFilteredExpression '%}' elif_body=EValuePassed
+;
+
+EForStatement:
+	'{%' (for_block_sign=('+' | '-'))? 'for' identifiers+=ID (',' identifiers+=ID)* 'in' list=EFilteredExpression ('if' condition=EFilteredExpression)? (recursive='recursive')? '%}'
+	for_body=EValuePassed
+	('{%' (else_block_sign=('+' | '-'))? 'else' '%}' else_body=EValuePassed)?
+	'{%' (endfor_block_sign=('+' | '-'))? 'endfor' '%}'
 ;
 
 EDictionaryPairReference:

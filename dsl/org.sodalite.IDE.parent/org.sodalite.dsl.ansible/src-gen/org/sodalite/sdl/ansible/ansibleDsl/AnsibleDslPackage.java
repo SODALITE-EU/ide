@@ -3363,6 +3363,298 @@ public interface AnsibleDslPackage extends EPackage
   int EIF_EXPRESSION_FEATURE_COUNT = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 3;
 
   /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl <em>EJinja Statement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaStatement()
+   * @generated
+   */
+  int EJINJA_STATEMENT = 56;
+
+  /**
+   * The feature id for the '<em><b>String</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_STATEMENT__STRING = EJINJA_EXPRESSION_OR_STRING__STRING;
+
+  /**
+   * The feature id for the '<em><b>Else block sign</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_STATEMENT__ELSE_BLOCK_SIGN = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Else body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_STATEMENT__ELSE_BODY = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>EJinja Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_STATEMENT_FEATURE_COUNT = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfStatementImpl <em>EIf Statement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIfStatementImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIfStatement()
+   * @generated
+   */
+  int EIF_STATEMENT = 57;
+
+  /**
+   * The feature id for the '<em><b>String</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__STRING = EJINJA_STATEMENT__STRING;
+
+  /**
+   * The feature id for the '<em><b>Else block sign</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__ELSE_BLOCK_SIGN = EJINJA_STATEMENT__ELSE_BLOCK_SIGN;
+
+  /**
+   * The feature id for the '<em><b>Else body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__ELSE_BODY = EJINJA_STATEMENT__ELSE_BODY;
+
+  /**
+   * The feature id for the '<em><b>If block sign</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__IF_BLOCK_SIGN = EJINJA_STATEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>If condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__IF_CONDITION = EJINJA_STATEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>If body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__IF_BODY = EJINJA_STATEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Elif blocks</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__ELIF_BLOCKS = EJINJA_STATEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Endif block sign</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__ENDIF_BLOCK_SIGN = EJINJA_STATEMENT_FEATURE_COUNT + 4;
+
+  /**
+   * The number of structural features of the '<em>EIf Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT_FEATURE_COUNT = EJINJA_STATEMENT_FEATURE_COUNT + 5;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EElifBlockImpl <em>EElif Block</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EElifBlockImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEElifBlock()
+   * @generated
+   */
+  int EELIF_BLOCK = 58;
+
+  /**
+   * The feature id for the '<em><b>Elif block sign</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EELIF_BLOCK__ELIF_BLOCK_SIGN = 0;
+
+  /**
+   * The feature id for the '<em><b>Elif condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EELIF_BLOCK__ELIF_CONDITION = 1;
+
+  /**
+   * The feature id for the '<em><b>Elif body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EELIF_BLOCK__ELIF_BODY = 2;
+
+  /**
+   * The number of structural features of the '<em>EElif Block</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EELIF_BLOCK_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EForStatementImpl <em>EFor Statement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EForStatementImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEForStatement()
+   * @generated
+   */
+  int EFOR_STATEMENT = 59;
+
+  /**
+   * The feature id for the '<em><b>String</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__STRING = EJINJA_STATEMENT__STRING;
+
+  /**
+   * The feature id for the '<em><b>Else block sign</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__ELSE_BLOCK_SIGN = EJINJA_STATEMENT__ELSE_BLOCK_SIGN;
+
+  /**
+   * The feature id for the '<em><b>Else body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__ELSE_BODY = EJINJA_STATEMENT__ELSE_BODY;
+
+  /**
+   * The feature id for the '<em><b>For block sign</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__FOR_BLOCK_SIGN = EJINJA_STATEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__IDENTIFIERS = EJINJA_STATEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>List</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__LIST = EJINJA_STATEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__CONDITION = EJINJA_STATEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Recursive</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__RECURSIVE = EJINJA_STATEMENT_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>For body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__FOR_BODY = EJINJA_STATEMENT_FEATURE_COUNT + 5;
+
+  /**
+   * The feature id for the '<em><b>Endfor block sign</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__ENDFOR_BLOCK_SIGN = EJINJA_STATEMENT_FEATURE_COUNT + 6;
+
+  /**
+   * The number of structural features of the '<em>EFor Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT_FEATURE_COUNT = EJINJA_STATEMENT_FEATURE_COUNT + 7;
+
+  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl <em>EDictionary Pair Reference</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3370,7 +3662,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairReference()
    * @generated
    */
-  int EDICTIONARY_PAIR_REFERENCE = 56;
+  int EDICTIONARY_PAIR_REFERENCE = 60;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -3407,7 +3699,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableReference()
    * @generated
    */
-  int EVARIABLE_REFERENCE = 66;
+  int EVARIABLE_REFERENCE = 70;
 
   /**
    * The number of structural features of the '<em>EVariable Reference</em>' class.
@@ -3426,7 +3718,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclarationVariableReference()
    * @generated
    */
-  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE = 57;
+  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE = 61;
 
   /**
    * The feature id for the '<em><b>Variable declaration variable reference</b></em>' reference.
@@ -3454,7 +3746,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariableReference()
    * @generated
    */
-  int EREGISTER_VARIABLE_REFERENCE = 58;
+  int EREGISTER_VARIABLE_REFERENCE = 62;
 
   /**
    * The feature id for the '<em><b>Register variable reference</b></em>' reference.
@@ -3482,7 +3774,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclaration()
    * @generated
    */
-  int EVARIABLE_DECLARATION = 59;
+  int EVARIABLE_DECLARATION = 63;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3519,7 +3811,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIndexOrLoopVariable()
    * @generated
    */
-  int EINDEX_OR_LOOP_VARIABLE = 60;
+  int EINDEX_OR_LOOP_VARIABLE = 64;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3547,7 +3839,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIndexOrLoopVariableReference()
    * @generated
    */
-  int EINDEX_OR_LOOP_VARIABLE_REFERENCE = 61;
+  int EINDEX_OR_LOOP_VARIABLE_REFERENCE = 65;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -3575,7 +3867,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariable()
    * @generated
    */
-  int EREGISTER_VARIABLE = 62;
+  int EREGISTER_VARIABLE = 66;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3603,7 +3895,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEInputOperationVariableReference()
    * @generated
    */
-  int EINPUT_OPERATION_VARIABLE_REFERENCE = 63;
+  int EINPUT_OPERATION_VARIABLE_REFERENCE = 67;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -3631,7 +3923,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEInputInterfaceVariableReference()
    * @generated
    */
-  int EINPUT_INTERFACE_VARIABLE_REFERENCE = 64;
+  int EINPUT_INTERFACE_VARIABLE_REFERENCE = 68;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -3659,7 +3951,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESetFactVariableReference()
    * @generated
    */
-  int ESET_FACT_VARIABLE_REFERENCE = 65;
+  int ESET_FACT_VARIABLE_REFERENCE = 69;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -3687,7 +3979,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESpecialVariable()
    * @generated
    */
-  int ESPECIAL_VARIABLE = 67;
+  int ESPECIAL_VARIABLE = 71;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3715,7 +4007,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETailElement()
    * @generated
    */
-  int ETAIL_ELEMENT = 68;
+  int ETAIL_ELEMENT = 72;
 
   /**
    * The feature id for the '<em><b>Function call</b></em>' containment reference.
@@ -3752,7 +4044,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 69;
+  int EDICTIONARY = 73;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -3780,7 +4072,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 70;
+  int EDICTIONARY_PAIR = 74;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3817,7 +4109,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 71;
+  int ELIST = 75;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -3845,7 +4137,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPassed()
    * @generated
    */
-  int EDICTIONARY_PASSED = 72;
+  int EDICTIONARY_PASSED = 76;
 
   /**
    * The number of structural features of the '<em>EDictionary Passed</em>' class.
@@ -3864,7 +4156,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListPassed()
    * @generated
    */
-  int ELIST_PASSED = 73;
+  int ELIST_PASSED = 77;
 
   /**
    * The number of structural features of the '<em>EList Passed</em>' class.
@@ -3883,7 +4175,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumberPassed()
    * @generated
    */
-  int ENUMBER_PASSED = 74;
+  int ENUMBER_PASSED = 78;
 
   /**
    * The feature id for the '<em><b>Number passed</b></em>' attribute.
@@ -3911,7 +4203,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanPassed()
    * @generated
    */
-  int EBOOLEAN_PASSED = 75;
+  int EBOOLEAN_PASSED = 79;
 
   /**
    * The feature id for the '<em><b>Boolean passed</b></em>' attribute.
@@ -3939,7 +4231,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEEmptyCurlyBraces()
    * @generated
    */
-  int EEMPTY_CURLY_BRACES = 76;
+  int EEMPTY_CURLY_BRACES = 80;
 
   /**
    * The feature id for the '<em><b>Left curly brace</b></em>' attribute.
@@ -5980,6 +6272,233 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EReference getEIfExpression_Else_expression();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement <em>EJinja Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EJinja Statement</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement
+   * @generated
+   */
+  EClass getEJinjaStatement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement#getElse_block_sign <em>Else block sign</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Else block sign</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement#getElse_block_sign()
+   * @see #getEJinjaStatement()
+   * @generated
+   */
+  EAttribute getEJinjaStatement_Else_block_sign();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement#getElse_body <em>Else body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Else body</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement#getElse_body()
+   * @see #getEJinjaStatement()
+   * @generated
+   */
+  EReference getEJinjaStatement_Else_body();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfStatement <em>EIf Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EIf Statement</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfStatement
+   * @generated
+   */
+  EClass getEIfStatement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getIf_block_sign <em>If block sign</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>If block sign</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getIf_block_sign()
+   * @see #getEIfStatement()
+   * @generated
+   */
+  EAttribute getEIfStatement_If_block_sign();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getIf_condition <em>If condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>If condition</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getIf_condition()
+   * @see #getEIfStatement()
+   * @generated
+   */
+  EReference getEIfStatement_If_condition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getIf_body <em>If body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>If body</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getIf_body()
+   * @see #getEIfStatement()
+   * @generated
+   */
+  EReference getEIfStatement_If_body();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getElif_blocks <em>Elif blocks</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elif blocks</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getElif_blocks()
+   * @see #getEIfStatement()
+   * @generated
+   */
+  EReference getEIfStatement_Elif_blocks();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getEndif_block_sign <em>Endif block sign</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Endif block sign</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfStatement#getEndif_block_sign()
+   * @see #getEIfStatement()
+   * @generated
+   */
+  EAttribute getEIfStatement_Endif_block_sign();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EElifBlock <em>EElif Block</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EElif Block</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EElifBlock
+   * @generated
+   */
+  EClass getEElifBlock();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EElifBlock#getElif_block_sign <em>Elif block sign</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Elif block sign</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EElifBlock#getElif_block_sign()
+   * @see #getEElifBlock()
+   * @generated
+   */
+  EAttribute getEElifBlock_Elif_block_sign();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EElifBlock#getElif_condition <em>Elif condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Elif condition</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EElifBlock#getElif_condition()
+   * @see #getEElifBlock()
+   * @generated
+   */
+  EReference getEElifBlock_Elif_condition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EElifBlock#getElif_body <em>Elif body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Elif body</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EElifBlock#getElif_body()
+   * @see #getEElifBlock()
+   * @generated
+   */
+  EReference getEElifBlock_Elif_body();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EForStatement <em>EFor Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EFor Statement</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EForStatement
+   * @generated
+   */
+  EClass getEForStatement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getFor_block_sign <em>For block sign</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>For block sign</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getFor_block_sign()
+   * @see #getEForStatement()
+   * @generated
+   */
+  EAttribute getEForStatement_For_block_sign();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getIdentifiers <em>Identifiers</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Identifiers</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getIdentifiers()
+   * @see #getEForStatement()
+   * @generated
+   */
+  EAttribute getEForStatement_Identifiers();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getList <em>List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>List</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getList()
+   * @see #getEForStatement()
+   * @generated
+   */
+  EReference getEForStatement_List();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getCondition <em>Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Condition</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getCondition()
+   * @see #getEForStatement()
+   * @generated
+   */
+  EReference getEForStatement_Condition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getRecursive <em>Recursive</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Recursive</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getRecursive()
+   * @see #getEForStatement()
+   * @generated
+   */
+  EAttribute getEForStatement_Recursive();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getFor_body <em>For body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>For body</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getFor_body()
+   * @see #getEForStatement()
+   * @generated
+   */
+  EReference getEForStatement_For_body();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getEndfor_block_sign <em>Endfor block sign</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Endfor block sign</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EForStatement#getEndfor_block_sign()
+   * @see #getEForStatement()
+   * @generated
+   */
+  EAttribute getEForStatement_Endfor_block_sign();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference <em>EDictionary Pair Reference</em>}'.
@@ -8082,6 +8601,182 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference EIF_EXPRESSION__ELSE_EXPRESSION = eINSTANCE.getEIfExpression_Else_expression();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl <em>EJinja Statement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaStatement()
+     * @generated
+     */
+    EClass EJINJA_STATEMENT = eINSTANCE.getEJinjaStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Else block sign</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EJINJA_STATEMENT__ELSE_BLOCK_SIGN = eINSTANCE.getEJinjaStatement_Else_block_sign();
+
+    /**
+     * The meta object literal for the '<em><b>Else body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EJINJA_STATEMENT__ELSE_BODY = eINSTANCE.getEJinjaStatement_Else_body();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfStatementImpl <em>EIf Statement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIfStatementImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIfStatement()
+     * @generated
+     */
+    EClass EIF_STATEMENT = eINSTANCE.getEIfStatement();
+
+    /**
+     * The meta object literal for the '<em><b>If block sign</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EIF_STATEMENT__IF_BLOCK_SIGN = eINSTANCE.getEIfStatement_If_block_sign();
+
+    /**
+     * The meta object literal for the '<em><b>If condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIF_STATEMENT__IF_CONDITION = eINSTANCE.getEIfStatement_If_condition();
+
+    /**
+     * The meta object literal for the '<em><b>If body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIF_STATEMENT__IF_BODY = eINSTANCE.getEIfStatement_If_body();
+
+    /**
+     * The meta object literal for the '<em><b>Elif blocks</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIF_STATEMENT__ELIF_BLOCKS = eINSTANCE.getEIfStatement_Elif_blocks();
+
+    /**
+     * The meta object literal for the '<em><b>Endif block sign</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EIF_STATEMENT__ENDIF_BLOCK_SIGN = eINSTANCE.getEIfStatement_Endif_block_sign();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EElifBlockImpl <em>EElif Block</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EElifBlockImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEElifBlock()
+     * @generated
+     */
+    EClass EELIF_BLOCK = eINSTANCE.getEElifBlock();
+
+    /**
+     * The meta object literal for the '<em><b>Elif block sign</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EELIF_BLOCK__ELIF_BLOCK_SIGN = eINSTANCE.getEElifBlock_Elif_block_sign();
+
+    /**
+     * The meta object literal for the '<em><b>Elif condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EELIF_BLOCK__ELIF_CONDITION = eINSTANCE.getEElifBlock_Elif_condition();
+
+    /**
+     * The meta object literal for the '<em><b>Elif body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EELIF_BLOCK__ELIF_BODY = eINSTANCE.getEElifBlock_Elif_body();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EForStatementImpl <em>EFor Statement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EForStatementImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEForStatement()
+     * @generated
+     */
+    EClass EFOR_STATEMENT = eINSTANCE.getEForStatement();
+
+    /**
+     * The meta object literal for the '<em><b>For block sign</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EFOR_STATEMENT__FOR_BLOCK_SIGN = eINSTANCE.getEForStatement_For_block_sign();
+
+    /**
+     * The meta object literal for the '<em><b>Identifiers</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EFOR_STATEMENT__IDENTIFIERS = eINSTANCE.getEForStatement_Identifiers();
+
+    /**
+     * The meta object literal for the '<em><b>List</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EFOR_STATEMENT__LIST = eINSTANCE.getEForStatement_List();
+
+    /**
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EFOR_STATEMENT__CONDITION = eINSTANCE.getEForStatement_Condition();
+
+    /**
+     * The meta object literal for the '<em><b>Recursive</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EFOR_STATEMENT__RECURSIVE = eINSTANCE.getEForStatement_Recursive();
+
+    /**
+     * The meta object literal for the '<em><b>For body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EFOR_STATEMENT__FOR_BODY = eINSTANCE.getEForStatement_For_body();
+
+    /**
+     * The meta object literal for the '<em><b>Endfor block sign</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EFOR_STATEMENT__ENDFOR_BLOCK_SIGN = eINSTANCE.getEForStatement_Endfor_block_sign();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl <em>EDictionary Pair Reference</em>}' class.

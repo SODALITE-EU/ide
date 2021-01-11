@@ -62,6 +62,9 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement
+import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement
+import org.sodalite.sdl.ansible.ansibleDsl.EForStatement
 
 /**
  * Generates code from your model files on save.
@@ -682,10 +685,76 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (jinja instanceof EJinjaExpressionEvaluation){
 			return jinja.compileJinjaExpressionEvaluation
 		}
+		else if (jinja instanceof EJinjaStatement){
+			return jinja.compileJinjaStatement
+		}
 	}
 	
 	def compileJinjaExpressionEvaluation(EJinjaExpressionEvaluation jinja){
 		return "{{ ".concat(jinja.jinja_expression.compileJinjaExpressionEvaluationWithoutBrackets.toString()).concat(" }}")
+	}
+	
+	def compileJinjaStatement(EJinjaStatement jinjaStatement){
+		if (jinjaStatement instanceof EIfStatement){
+			var stringToReturn = "{%"
+			if (jinjaStatement.if_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.if_block_sign)
+			stringToReturn = stringToReturn.concat(" if ").concat(jinjaStatement.if_condition.compileFilteredExpression).concat(" %}")
+			stringToReturn = stringToReturn.concat(" ").concat(jinjaStatement.if_body.compileValuePassed.toString())
+			//the elif blocks, if present
+			for (elif : jinjaStatement.elif_blocks){
+				stringToReturn = stringToReturn.concat(" {%")
+				if (elif.elif_block_sign !== null) stringToReturn = stringToReturn.concat(elif.elif_block_sign)
+				stringToReturn = stringToReturn.concat(" elif ").concat(elif.elif_condition.compileFilteredExpression).concat(" %}")
+				stringToReturn = stringToReturn.concat(" ").concat(elif.elif_body.compileValuePassed.toString())
+			}
+			//the else block, if present
+			if (jinjaStatement.else_body !== null){
+				stringToReturn = stringToReturn.concat(" {%")
+				if (jinjaStatement.else_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.else_block_sign)
+				stringToReturn = stringToReturn.concat(" else %}")
+				stringToReturn = stringToReturn.concat(" ").concat(jinjaStatement.else_body.compileValuePassed.toString())
+			}
+			//the endif part
+			stringToReturn = stringToReturn.concat(" {%")
+			if (jinjaStatement.endif_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.endif_block_sign)
+			stringToReturn = stringToReturn.concat(" endif %}")
+			return stringToReturn
+		}
+		else if (jinjaStatement instanceof EForStatement){
+			var stringToReturn = "{%"
+			if (jinjaStatement.for_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.for_block_sign)
+			//the identifiers written after the "for"
+			for (var index = 0; index < jinjaStatement.identifiers.size ; index++){
+				//the first identifier shouldn't have a comma before it, the others yes
+				if (index == 0){
+					stringToReturn = stringToReturn.concat(" for ").concat(jinjaStatement.identifiers.get(index))
+				}
+				else {
+					stringToReturn = stringToReturn.concat(", ").concat(jinjaStatement.identifiers.get(index))
+				}
+			}
+			//the list of items to iterate after the "in"
+			stringToReturn = stringToReturn.concat(" in ").concat(jinjaStatement.list.compileFilteredExpression)
+			//the filter, if present
+			if (jinjaStatement.condition !== null) stringToReturn = stringToReturn.concat(" if ").concat(jinjaStatement.condition.compileFilteredExpression)
+			//the recursive keywork, if present
+			if (jinjaStatement.recursive !== null) stringToReturn = stringToReturn.concat(" recursive")
+			stringToReturn = stringToReturn.concat(" %}")
+			//body of the for
+			stringToReturn = stringToReturn.concat(" ").concat(jinjaStatement.for_body.compileValuePassed.toString())
+			//the else block, if present
+			if (jinjaStatement.else_body !== null){
+				stringToReturn = stringToReturn.concat(" {%")
+				if (jinjaStatement.else_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.else_block_sign)
+				stringToReturn = stringToReturn.concat(" else %}")
+				stringToReturn = stringToReturn.concat(" ").concat(jinjaStatement.else_body.compileValuePassed.toString())
+			}
+			//the endfor part
+			stringToReturn = stringToReturn.concat(" {%")
+			if (jinjaStatement.endfor_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.endfor_block_sign)
+			stringToReturn = stringToReturn.concat(" endfor %}")
+			return stringToReturn
+		}
 	}
 	
 	def compileValuePassedToJinjaExpression(EValuePassedToJinjaExpression valuePassedToJinjaExpression){

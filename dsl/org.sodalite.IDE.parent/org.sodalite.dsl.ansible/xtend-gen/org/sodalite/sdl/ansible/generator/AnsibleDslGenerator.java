@@ -28,14 +28,17 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
@@ -45,6 +48,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
@@ -1668,6 +1672,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     } else {
       if ((jinja instanceof EJinjaExpressionEvaluation)) {
         return this.compileJinjaExpressionEvaluation(((EJinjaExpressionEvaluation)jinja));
+      } else {
+        if ((jinja instanceof EJinjaStatement)) {
+          return this.compileJinjaStatement(((EJinjaStatement)jinja));
+        }
       }
     }
     return null;
@@ -1675,6 +1683,102 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileJinjaExpressionEvaluation(final EJinjaExpressionEvaluation jinja) {
     return "{{ ".concat(this.compileJinjaExpressionEvaluationWithoutBrackets(jinja.getJinja_expression()).toString()).concat(" }}");
+  }
+  
+  public String compileJinjaStatement(final EJinjaStatement jinjaStatement) {
+    if ((jinjaStatement instanceof EIfStatement)) {
+      String stringToReturn = "{%";
+      String _if_block_sign = ((EIfStatement)jinjaStatement).getIf_block_sign();
+      boolean _tripleNotEquals = (_if_block_sign != null);
+      if (_tripleNotEquals) {
+        stringToReturn = stringToReturn.concat(((EIfStatement)jinjaStatement).getIf_block_sign());
+      }
+      stringToReturn = stringToReturn.concat(" if ").concat(this.compileFilteredExpression(((EIfStatement)jinjaStatement).getIf_condition())).concat(" %}");
+      stringToReturn = stringToReturn.concat(" ").concat(this.compileValuePassed(((EIfStatement)jinjaStatement).getIf_body()).toString());
+      EList<EElifBlock> _elif_blocks = ((EIfStatement)jinjaStatement).getElif_blocks();
+      for (final EElifBlock elif : _elif_blocks) {
+        {
+          stringToReturn = stringToReturn.concat(" {%");
+          String _elif_block_sign = elif.getElif_block_sign();
+          boolean _tripleNotEquals_1 = (_elif_block_sign != null);
+          if (_tripleNotEquals_1) {
+            stringToReturn = stringToReturn.concat(elif.getElif_block_sign());
+          }
+          stringToReturn = stringToReturn.concat(" elif ").concat(this.compileFilteredExpression(elif.getElif_condition())).concat(" %}");
+          stringToReturn = stringToReturn.concat(" ").concat(this.compileValuePassed(elif.getElif_body()).toString());
+        }
+      }
+      EValuePassed _else_body = ((EIfStatement)jinjaStatement).getElse_body();
+      boolean _tripleNotEquals_1 = (_else_body != null);
+      if (_tripleNotEquals_1) {
+        stringToReturn = stringToReturn.concat(" {%");
+        String _else_block_sign = ((EIfStatement)jinjaStatement).getElse_block_sign();
+        boolean _tripleNotEquals_2 = (_else_block_sign != null);
+        if (_tripleNotEquals_2) {
+          stringToReturn = stringToReturn.concat(((EIfStatement)jinjaStatement).getElse_block_sign());
+        }
+        stringToReturn = stringToReturn.concat(" else %}");
+        stringToReturn = stringToReturn.concat(" ").concat(this.compileValuePassed(((EIfStatement)jinjaStatement).getElse_body()).toString());
+      }
+      stringToReturn = stringToReturn.concat(" {%");
+      String _endif_block_sign = ((EIfStatement)jinjaStatement).getEndif_block_sign();
+      boolean _tripleNotEquals_3 = (_endif_block_sign != null);
+      if (_tripleNotEquals_3) {
+        stringToReturn = stringToReturn.concat(((EIfStatement)jinjaStatement).getEndif_block_sign());
+      }
+      stringToReturn = stringToReturn.concat(" endif %}");
+      return stringToReturn;
+    } else {
+      if ((jinjaStatement instanceof EForStatement)) {
+        String stringToReturn_1 = "{%";
+        String _for_block_sign = ((EForStatement)jinjaStatement).getFor_block_sign();
+        boolean _tripleNotEquals_4 = (_for_block_sign != null);
+        if (_tripleNotEquals_4) {
+          stringToReturn_1 = stringToReturn_1.concat(((EForStatement)jinjaStatement).getFor_block_sign());
+        }
+        for (int index = 0; (index < ((EForStatement)jinjaStatement).getIdentifiers().size()); index++) {
+          if ((index == 0)) {
+            stringToReturn_1 = stringToReturn_1.concat(" for ").concat(((EForStatement)jinjaStatement).getIdentifiers().get(index));
+          } else {
+            stringToReturn_1 = stringToReturn_1.concat(", ").concat(((EForStatement)jinjaStatement).getIdentifiers().get(index));
+          }
+        }
+        stringToReturn_1 = stringToReturn_1.concat(" in ").concat(this.compileFilteredExpression(((EForStatement)jinjaStatement).getList()));
+        EFilteredExpression _condition = ((EForStatement)jinjaStatement).getCondition();
+        boolean _tripleNotEquals_5 = (_condition != null);
+        if (_tripleNotEquals_5) {
+          stringToReturn_1 = stringToReturn_1.concat(" if ").concat(this.compileFilteredExpression(((EForStatement)jinjaStatement).getCondition()));
+        }
+        String _recursive = ((EForStatement)jinjaStatement).getRecursive();
+        boolean _tripleNotEquals_6 = (_recursive != null);
+        if (_tripleNotEquals_6) {
+          stringToReturn_1 = stringToReturn_1.concat(" recursive");
+        }
+        stringToReturn_1 = stringToReturn_1.concat(" %}");
+        stringToReturn_1 = stringToReturn_1.concat(" ").concat(this.compileValuePassed(((EForStatement)jinjaStatement).getFor_body()).toString());
+        EValuePassed _else_body_1 = ((EForStatement)jinjaStatement).getElse_body();
+        boolean _tripleNotEquals_7 = (_else_body_1 != null);
+        if (_tripleNotEquals_7) {
+          stringToReturn_1 = stringToReturn_1.concat(" {%");
+          String _else_block_sign_1 = ((EForStatement)jinjaStatement).getElse_block_sign();
+          boolean _tripleNotEquals_8 = (_else_block_sign_1 != null);
+          if (_tripleNotEquals_8) {
+            stringToReturn_1 = stringToReturn_1.concat(((EForStatement)jinjaStatement).getElse_block_sign());
+          }
+          stringToReturn_1 = stringToReturn_1.concat(" else %}");
+          stringToReturn_1 = stringToReturn_1.concat(" ").concat(this.compileValuePassed(((EForStatement)jinjaStatement).getElse_body()).toString());
+        }
+        stringToReturn_1 = stringToReturn_1.concat(" {%");
+        String _endfor_block_sign = ((EForStatement)jinjaStatement).getEndfor_block_sign();
+        boolean _tripleNotEquals_9 = (_endfor_block_sign != null);
+        if (_tripleNotEquals_9) {
+          stringToReturn_1 = stringToReturn_1.concat(((EForStatement)jinjaStatement).getEndfor_block_sign());
+        }
+        stringToReturn_1 = stringToReturn_1.concat(" endfor %}");
+        return stringToReturn_1;
+      }
+    }
+    return null;
   }
   
   public String compileValuePassedToJinjaExpression(final EValuePassedToJinjaExpression valuePassedToJinjaExpression) {

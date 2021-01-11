@@ -3468,24 +3468,28 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionOrString");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEJinjaExpressionEvaluationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final Assignment cStringAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cStringSTRINGTerminalRuleCall_1_0 = (RuleCall)cStringAssignment_1.eContents().get(0);
+		private final RuleCall cEJinjaStatementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final Assignment cStringAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cStringSTRINGTerminalRuleCall_2_0 = (RuleCall)cStringAssignment_2.eContents().get(0);
 		
 		//EJinjaExpressionOrString:
-		//	EJinjaExpressionEvaluation | string=STRING;
+		//	EJinjaExpressionEvaluation | EJinjaStatement | string=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EJinjaExpressionEvaluation | string=STRING
+		//EJinjaExpressionEvaluation | EJinjaStatement | string=STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//EJinjaExpressionEvaluation
 		public RuleCall getEJinjaExpressionEvaluationParserRuleCall_0() { return cEJinjaExpressionEvaluationParserRuleCall_0; }
 		
+		//EJinjaStatement
+		public RuleCall getEJinjaStatementParserRuleCall_1() { return cEJinjaStatementParserRuleCall_1; }
+		
 		//string=STRING
-		public Assignment getStringAssignment_1() { return cStringAssignment_1; }
+		public Assignment getStringAssignment_2() { return cStringAssignment_2; }
 		
 		//STRING
-		public RuleCall getStringSTRINGTerminalRuleCall_1_0() { return cStringSTRINGTerminalRuleCall_1_0; }
+		public RuleCall getStringSTRINGTerminalRuleCall_2_0() { return cStringSTRINGTerminalRuleCall_2_0; }
 	}
 	public class EJinjaExpressionAndStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
@@ -4235,6 +4239,395 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EFilteredExpression
 		public RuleCall getElse_expressionEFilteredExpressionParserRuleCall_4_1_0() { return cElse_expressionEFilteredExpressionParserRuleCall_4_1_0; }
 	}
+	public class EJinjaStatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaStatement");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEIfStatementParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEForStatementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//EJinjaStatement:
+		//	EIfStatement | EForStatement;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//EIfStatement | EForStatement
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//EIfStatement
+		public RuleCall getEIfStatementParserRuleCall_0() { return cEIfStatementParserRuleCall_0; }
+		
+		//EForStatement
+		public RuleCall getEForStatementParserRuleCall_1() { return cEForStatementParserRuleCall_1; }
+	}
+	public class EIfStatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EIfStatement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketPercentSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cIf_block_signAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Alternatives cIf_block_signAlternatives_1_0 = (Alternatives)cIf_block_signAssignment_1.eContents().get(0);
+		private final Keyword cIf_block_signPlusSignKeyword_1_0_0 = (Keyword)cIf_block_signAlternatives_1_0.eContents().get(0);
+		private final Keyword cIf_block_signHyphenMinusKeyword_1_0_1 = (Keyword)cIf_block_signAlternatives_1_0.eContents().get(1);
+		private final Keyword cIfKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cIf_conditionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cIf_conditionEFilteredExpressionParserRuleCall_3_0 = (RuleCall)cIf_conditionAssignment_3.eContents().get(0);
+		private final Keyword cPercentSignRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cIf_bodyAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cIf_bodyEValuePassedParserRuleCall_5_0 = (RuleCall)cIf_bodyAssignment_5.eContents().get(0);
+		private final Assignment cElif_blocksAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cElif_blocksEElifBlockParserRuleCall_6_0 = (RuleCall)cElif_blocksAssignment_6.eContents().get(0);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cLeftCurlyBracketPercentSignKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cElse_block_signAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final Alternatives cElse_block_signAlternatives_7_1_0 = (Alternatives)cElse_block_signAssignment_7_1.eContents().get(0);
+		private final Keyword cElse_block_signPlusSignKeyword_7_1_0_0 = (Keyword)cElse_block_signAlternatives_7_1_0.eContents().get(0);
+		private final Keyword cElse_block_signHyphenMinusKeyword_7_1_0_1 = (Keyword)cElse_block_signAlternatives_7_1_0.eContents().get(1);
+		private final Keyword cElseKeyword_7_2 = (Keyword)cGroup_7.eContents().get(2);
+		private final Keyword cPercentSignRightCurlyBracketKeyword_7_3 = (Keyword)cGroup_7.eContents().get(3);
+		private final Assignment cElse_bodyAssignment_7_4 = (Assignment)cGroup_7.eContents().get(4);
+		private final RuleCall cElse_bodyEValuePassedParserRuleCall_7_4_0 = (RuleCall)cElse_bodyAssignment_7_4.eContents().get(0);
+		private final Keyword cLeftCurlyBracketPercentSignKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Assignment cEndif_block_signAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final Alternatives cEndif_block_signAlternatives_9_0 = (Alternatives)cEndif_block_signAssignment_9.eContents().get(0);
+		private final Keyword cEndif_block_signPlusSignKeyword_9_0_0 = (Keyword)cEndif_block_signAlternatives_9_0.eContents().get(0);
+		private final Keyword cEndif_block_signHyphenMinusKeyword_9_0_1 = (Keyword)cEndif_block_signAlternatives_9_0.eContents().get(1);
+		private final Keyword cEndifKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Keyword cPercentSignRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		
+		//EIfStatement:
+		//	'{%' if_block_sign=('+' | '-')? 'if' if_condition=EFilteredExpression '%}'
+		//	if_body=EValuePassed
+		//	elif_blocks+=EElifBlock* ('{%' else_block_sign=('+' | '-')? 'else' '%}' else_body=EValuePassed)?
+		//	'{%' endif_block_sign=('+' | '-')? 'endif' '%}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'{%' if_block_sign=('+' | '-')? 'if' if_condition=EFilteredExpression '%}' if_body=EValuePassed elif_blocks+=EElifBlock*
+		//('{%' else_block_sign=('+' | '-')? 'else' '%}' else_body=EValuePassed)? '{%' endif_block_sign=('+' | '-')? 'endif' '%}'
+		public Group getGroup() { return cGroup; }
+		
+		//'{%'
+		public Keyword getLeftCurlyBracketPercentSignKeyword_0() { return cLeftCurlyBracketPercentSignKeyword_0; }
+		
+		//if_block_sign=('+' | '-')?
+		public Assignment getIf_block_signAssignment_1() { return cIf_block_signAssignment_1; }
+		
+		//('+' | '-')
+		public Alternatives getIf_block_signAlternatives_1_0() { return cIf_block_signAlternatives_1_0; }
+		
+		//'+'
+		public Keyword getIf_block_signPlusSignKeyword_1_0_0() { return cIf_block_signPlusSignKeyword_1_0_0; }
+		
+		//'-'
+		public Keyword getIf_block_signHyphenMinusKeyword_1_0_1() { return cIf_block_signHyphenMinusKeyword_1_0_1; }
+		
+		//'if'
+		public Keyword getIfKeyword_2() { return cIfKeyword_2; }
+		
+		//if_condition=EFilteredExpression
+		public Assignment getIf_conditionAssignment_3() { return cIf_conditionAssignment_3; }
+		
+		//EFilteredExpression
+		public RuleCall getIf_conditionEFilteredExpressionParserRuleCall_3_0() { return cIf_conditionEFilteredExpressionParserRuleCall_3_0; }
+		
+		//'%}'
+		public Keyword getPercentSignRightCurlyBracketKeyword_4() { return cPercentSignRightCurlyBracketKeyword_4; }
+		
+		//if_body=EValuePassed
+		public Assignment getIf_bodyAssignment_5() { return cIf_bodyAssignment_5; }
+		
+		//EValuePassed
+		public RuleCall getIf_bodyEValuePassedParserRuleCall_5_0() { return cIf_bodyEValuePassedParserRuleCall_5_0; }
+		
+		//elif_blocks+=EElifBlock*
+		public Assignment getElif_blocksAssignment_6() { return cElif_blocksAssignment_6; }
+		
+		//EElifBlock
+		public RuleCall getElif_blocksEElifBlockParserRuleCall_6_0() { return cElif_blocksEElifBlockParserRuleCall_6_0; }
+		
+		//('{%' else_block_sign=('+' | '-')? 'else' '%}' else_body=EValuePassed)?
+		public Group getGroup_7() { return cGroup_7; }
+		
+		//'{%'
+		public Keyword getLeftCurlyBracketPercentSignKeyword_7_0() { return cLeftCurlyBracketPercentSignKeyword_7_0; }
+		
+		//else_block_sign=('+' | '-')?
+		public Assignment getElse_block_signAssignment_7_1() { return cElse_block_signAssignment_7_1; }
+		
+		//('+' | '-')
+		public Alternatives getElse_block_signAlternatives_7_1_0() { return cElse_block_signAlternatives_7_1_0; }
+		
+		//'+'
+		public Keyword getElse_block_signPlusSignKeyword_7_1_0_0() { return cElse_block_signPlusSignKeyword_7_1_0_0; }
+		
+		//'-'
+		public Keyword getElse_block_signHyphenMinusKeyword_7_1_0_1() { return cElse_block_signHyphenMinusKeyword_7_1_0_1; }
+		
+		//'else'
+		public Keyword getElseKeyword_7_2() { return cElseKeyword_7_2; }
+		
+		//'%}'
+		public Keyword getPercentSignRightCurlyBracketKeyword_7_3() { return cPercentSignRightCurlyBracketKeyword_7_3; }
+		
+		//else_body=EValuePassed
+		public Assignment getElse_bodyAssignment_7_4() { return cElse_bodyAssignment_7_4; }
+		
+		//EValuePassed
+		public RuleCall getElse_bodyEValuePassedParserRuleCall_7_4_0() { return cElse_bodyEValuePassedParserRuleCall_7_4_0; }
+		
+		//'{%'
+		public Keyword getLeftCurlyBracketPercentSignKeyword_8() { return cLeftCurlyBracketPercentSignKeyword_8; }
+		
+		//endif_block_sign=('+' | '-')?
+		public Assignment getEndif_block_signAssignment_9() { return cEndif_block_signAssignment_9; }
+		
+		//('+' | '-')
+		public Alternatives getEndif_block_signAlternatives_9_0() { return cEndif_block_signAlternatives_9_0; }
+		
+		//'+'
+		public Keyword getEndif_block_signPlusSignKeyword_9_0_0() { return cEndif_block_signPlusSignKeyword_9_0_0; }
+		
+		//'-'
+		public Keyword getEndif_block_signHyphenMinusKeyword_9_0_1() { return cEndif_block_signHyphenMinusKeyword_9_0_1; }
+		
+		//'endif'
+		public Keyword getEndifKeyword_10() { return cEndifKeyword_10; }
+		
+		//'%}'
+		public Keyword getPercentSignRightCurlyBracketKeyword_11() { return cPercentSignRightCurlyBracketKeyword_11; }
+	}
+	public class EElifBlockElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EElifBlock");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketPercentSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cElif_block_signAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Alternatives cElif_block_signAlternatives_1_0 = (Alternatives)cElif_block_signAssignment_1.eContents().get(0);
+		private final Keyword cElif_block_signPlusSignKeyword_1_0_0 = (Keyword)cElif_block_signAlternatives_1_0.eContents().get(0);
+		private final Keyword cElif_block_signHyphenMinusKeyword_1_0_1 = (Keyword)cElif_block_signAlternatives_1_0.eContents().get(1);
+		private final Keyword cElifKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cElif_conditionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cElif_conditionEFilteredExpressionParserRuleCall_3_0 = (RuleCall)cElif_conditionAssignment_3.eContents().get(0);
+		private final Keyword cPercentSignRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cElif_bodyAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cElif_bodyEValuePassedParserRuleCall_5_0 = (RuleCall)cElif_bodyAssignment_5.eContents().get(0);
+		
+		//EElifBlock:
+		//	'{%' elif_block_sign=('+' | '-')? 'elif' elif_condition=EFilteredExpression '%}' elif_body=EValuePassed;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'{%' elif_block_sign=('+' | '-')? 'elif' elif_condition=EFilteredExpression '%}' elif_body=EValuePassed
+		public Group getGroup() { return cGroup; }
+		
+		//'{%'
+		public Keyword getLeftCurlyBracketPercentSignKeyword_0() { return cLeftCurlyBracketPercentSignKeyword_0; }
+		
+		//elif_block_sign=('+' | '-')?
+		public Assignment getElif_block_signAssignment_1() { return cElif_block_signAssignment_1; }
+		
+		//('+' | '-')
+		public Alternatives getElif_block_signAlternatives_1_0() { return cElif_block_signAlternatives_1_0; }
+		
+		//'+'
+		public Keyword getElif_block_signPlusSignKeyword_1_0_0() { return cElif_block_signPlusSignKeyword_1_0_0; }
+		
+		//'-'
+		public Keyword getElif_block_signHyphenMinusKeyword_1_0_1() { return cElif_block_signHyphenMinusKeyword_1_0_1; }
+		
+		//'elif'
+		public Keyword getElifKeyword_2() { return cElifKeyword_2; }
+		
+		//elif_condition=EFilteredExpression
+		public Assignment getElif_conditionAssignment_3() { return cElif_conditionAssignment_3; }
+		
+		//EFilteredExpression
+		public RuleCall getElif_conditionEFilteredExpressionParserRuleCall_3_0() { return cElif_conditionEFilteredExpressionParserRuleCall_3_0; }
+		
+		//'%}'
+		public Keyword getPercentSignRightCurlyBracketKeyword_4() { return cPercentSignRightCurlyBracketKeyword_4; }
+		
+		//elif_body=EValuePassed
+		public Assignment getElif_bodyAssignment_5() { return cElif_bodyAssignment_5; }
+		
+		//EValuePassed
+		public RuleCall getElif_bodyEValuePassedParserRuleCall_5_0() { return cElif_bodyEValuePassedParserRuleCall_5_0; }
+	}
+	public class EForStatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EForStatement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketPercentSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cFor_block_signAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Alternatives cFor_block_signAlternatives_1_0 = (Alternatives)cFor_block_signAssignment_1.eContents().get(0);
+		private final Keyword cFor_block_signPlusSignKeyword_1_0_0 = (Keyword)cFor_block_signAlternatives_1_0.eContents().get(0);
+		private final Keyword cFor_block_signHyphenMinusKeyword_1_0_1 = (Keyword)cFor_block_signAlternatives_1_0.eContents().get(1);
+		private final Keyword cForKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cIdentifiersAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cIdentifiersIDTerminalRuleCall_3_0 = (RuleCall)cIdentifiersAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cIdentifiersAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cIdentifiersIDTerminalRuleCall_4_1_0 = (RuleCall)cIdentifiersAssignment_4_1.eContents().get(0);
+		private final Keyword cInKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cListAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cListEFilteredExpressionParserRuleCall_6_0 = (RuleCall)cListAssignment_6.eContents().get(0);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cIfKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cConditionAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cConditionEFilteredExpressionParserRuleCall_7_1_0 = (RuleCall)cConditionAssignment_7_1.eContents().get(0);
+		private final Assignment cRecursiveAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final Keyword cRecursiveRecursiveKeyword_8_0 = (Keyword)cRecursiveAssignment_8.eContents().get(0);
+		private final Keyword cPercentSignRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cFor_bodyAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cFor_bodyEValuePassedParserRuleCall_10_0 = (RuleCall)cFor_bodyAssignment_10.eContents().get(0);
+		private final Group cGroup_11 = (Group)cGroup.eContents().get(11);
+		private final Keyword cLeftCurlyBracketPercentSignKeyword_11_0 = (Keyword)cGroup_11.eContents().get(0);
+		private final Assignment cElse_block_signAssignment_11_1 = (Assignment)cGroup_11.eContents().get(1);
+		private final Alternatives cElse_block_signAlternatives_11_1_0 = (Alternatives)cElse_block_signAssignment_11_1.eContents().get(0);
+		private final Keyword cElse_block_signPlusSignKeyword_11_1_0_0 = (Keyword)cElse_block_signAlternatives_11_1_0.eContents().get(0);
+		private final Keyword cElse_block_signHyphenMinusKeyword_11_1_0_1 = (Keyword)cElse_block_signAlternatives_11_1_0.eContents().get(1);
+		private final Keyword cElseKeyword_11_2 = (Keyword)cGroup_11.eContents().get(2);
+		private final Keyword cPercentSignRightCurlyBracketKeyword_11_3 = (Keyword)cGroup_11.eContents().get(3);
+		private final Assignment cElse_bodyAssignment_11_4 = (Assignment)cGroup_11.eContents().get(4);
+		private final RuleCall cElse_bodyEValuePassedParserRuleCall_11_4_0 = (RuleCall)cElse_bodyAssignment_11_4.eContents().get(0);
+		private final Keyword cLeftCurlyBracketPercentSignKeyword_12 = (Keyword)cGroup.eContents().get(12);
+		private final Assignment cEndfor_block_signAssignment_13 = (Assignment)cGroup.eContents().get(13);
+		private final Alternatives cEndfor_block_signAlternatives_13_0 = (Alternatives)cEndfor_block_signAssignment_13.eContents().get(0);
+		private final Keyword cEndfor_block_signPlusSignKeyword_13_0_0 = (Keyword)cEndfor_block_signAlternatives_13_0.eContents().get(0);
+		private final Keyword cEndfor_block_signHyphenMinusKeyword_13_0_1 = (Keyword)cEndfor_block_signAlternatives_13_0.eContents().get(1);
+		private final Keyword cEndforKeyword_14 = (Keyword)cGroup.eContents().get(14);
+		private final Keyword cPercentSignRightCurlyBracketKeyword_15 = (Keyword)cGroup.eContents().get(15);
+		
+		//EForStatement:
+		//	'{%' for_block_sign=('+' | '-')? 'for' identifiers+=ID (',' identifiers+=ID)* 'in' list=EFilteredExpression ('if'
+		//	condition=EFilteredExpression)? recursive='recursive'? '%}'
+		//	for_body=EValuePassed ('{%' else_block_sign=('+' | '-')? 'else' '%}' else_body=EValuePassed)?
+		//	'{%' endfor_block_sign=('+' | '-')? 'endfor' '%}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'{%' for_block_sign=('+' | '-')? 'for' identifiers+=ID (',' identifiers+=ID)* 'in' list=EFilteredExpression ('if'
+		//condition=EFilteredExpression)? recursive='recursive'? '%}' for_body=EValuePassed ('{%' else_block_sign=('+' | '-')?
+		//'else' '%}' else_body=EValuePassed)? '{%' endfor_block_sign=('+' | '-')? 'endfor' '%}'
+		public Group getGroup() { return cGroup; }
+		
+		//'{%'
+		public Keyword getLeftCurlyBracketPercentSignKeyword_0() { return cLeftCurlyBracketPercentSignKeyword_0; }
+		
+		//for_block_sign=('+' | '-')?
+		public Assignment getFor_block_signAssignment_1() { return cFor_block_signAssignment_1; }
+		
+		//('+' | '-')
+		public Alternatives getFor_block_signAlternatives_1_0() { return cFor_block_signAlternatives_1_0; }
+		
+		//'+'
+		public Keyword getFor_block_signPlusSignKeyword_1_0_0() { return cFor_block_signPlusSignKeyword_1_0_0; }
+		
+		//'-'
+		public Keyword getFor_block_signHyphenMinusKeyword_1_0_1() { return cFor_block_signHyphenMinusKeyword_1_0_1; }
+		
+		//'for'
+		public Keyword getForKeyword_2() { return cForKeyword_2; }
+		
+		//identifiers+=ID
+		public Assignment getIdentifiersAssignment_3() { return cIdentifiersAssignment_3; }
+		
+		//ID
+		public RuleCall getIdentifiersIDTerminalRuleCall_3_0() { return cIdentifiersIDTerminalRuleCall_3_0; }
+		
+		//(',' identifiers+=ID)*
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//','
+		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
+		
+		//identifiers+=ID
+		public Assignment getIdentifiersAssignment_4_1() { return cIdentifiersAssignment_4_1; }
+		
+		//ID
+		public RuleCall getIdentifiersIDTerminalRuleCall_4_1_0() { return cIdentifiersIDTerminalRuleCall_4_1_0; }
+		
+		//'in'
+		public Keyword getInKeyword_5() { return cInKeyword_5; }
+		
+		//list=EFilteredExpression
+		public Assignment getListAssignment_6() { return cListAssignment_6; }
+		
+		//EFilteredExpression
+		public RuleCall getListEFilteredExpressionParserRuleCall_6_0() { return cListEFilteredExpressionParserRuleCall_6_0; }
+		
+		//('if' condition=EFilteredExpression)?
+		public Group getGroup_7() { return cGroup_7; }
+		
+		//'if'
+		public Keyword getIfKeyword_7_0() { return cIfKeyword_7_0; }
+		
+		//condition=EFilteredExpression
+		public Assignment getConditionAssignment_7_1() { return cConditionAssignment_7_1; }
+		
+		//EFilteredExpression
+		public RuleCall getConditionEFilteredExpressionParserRuleCall_7_1_0() { return cConditionEFilteredExpressionParserRuleCall_7_1_0; }
+		
+		//recursive='recursive'?
+		public Assignment getRecursiveAssignment_8() { return cRecursiveAssignment_8; }
+		
+		//'recursive'
+		public Keyword getRecursiveRecursiveKeyword_8_0() { return cRecursiveRecursiveKeyword_8_0; }
+		
+		//'%}'
+		public Keyword getPercentSignRightCurlyBracketKeyword_9() { return cPercentSignRightCurlyBracketKeyword_9; }
+		
+		//for_body=EValuePassed
+		public Assignment getFor_bodyAssignment_10() { return cFor_bodyAssignment_10; }
+		
+		//EValuePassed
+		public RuleCall getFor_bodyEValuePassedParserRuleCall_10_0() { return cFor_bodyEValuePassedParserRuleCall_10_0; }
+		
+		//('{%' else_block_sign=('+' | '-')? 'else' '%}' else_body=EValuePassed)?
+		public Group getGroup_11() { return cGroup_11; }
+		
+		//'{%'
+		public Keyword getLeftCurlyBracketPercentSignKeyword_11_0() { return cLeftCurlyBracketPercentSignKeyword_11_0; }
+		
+		//else_block_sign=('+' | '-')?
+		public Assignment getElse_block_signAssignment_11_1() { return cElse_block_signAssignment_11_1; }
+		
+		//('+' | '-')
+		public Alternatives getElse_block_signAlternatives_11_1_0() { return cElse_block_signAlternatives_11_1_0; }
+		
+		//'+'
+		public Keyword getElse_block_signPlusSignKeyword_11_1_0_0() { return cElse_block_signPlusSignKeyword_11_1_0_0; }
+		
+		//'-'
+		public Keyword getElse_block_signHyphenMinusKeyword_11_1_0_1() { return cElse_block_signHyphenMinusKeyword_11_1_0_1; }
+		
+		//'else'
+		public Keyword getElseKeyword_11_2() { return cElseKeyword_11_2; }
+		
+		//'%}'
+		public Keyword getPercentSignRightCurlyBracketKeyword_11_3() { return cPercentSignRightCurlyBracketKeyword_11_3; }
+		
+		//else_body=EValuePassed
+		public Assignment getElse_bodyAssignment_11_4() { return cElse_bodyAssignment_11_4; }
+		
+		//EValuePassed
+		public RuleCall getElse_bodyEValuePassedParserRuleCall_11_4_0() { return cElse_bodyEValuePassedParserRuleCall_11_4_0; }
+		
+		//'{%'
+		public Keyword getLeftCurlyBracketPercentSignKeyword_12() { return cLeftCurlyBracketPercentSignKeyword_12; }
+		
+		//endfor_block_sign=('+' | '-')?
+		public Assignment getEndfor_block_signAssignment_13() { return cEndfor_block_signAssignment_13; }
+		
+		//('+' | '-')
+		public Alternatives getEndfor_block_signAlternatives_13_0() { return cEndfor_block_signAlternatives_13_0; }
+		
+		//'+'
+		public Keyword getEndfor_block_signPlusSignKeyword_13_0_0() { return cEndfor_block_signPlusSignKeyword_13_0_0; }
+		
+		//'-'
+		public Keyword getEndfor_block_signHyphenMinusKeyword_13_0_1() { return cEndfor_block_signHyphenMinusKeyword_13_0_1; }
+		
+		//'endfor'
+		public Keyword getEndforKeyword_14() { return cEndforKeyword_14; }
+		
+		//'%}'
+		public Keyword getPercentSignRightCurlyBracketKeyword_15() { return cPercentSignRightCurlyBracketKeyword_15; }
+	}
 	public class EDictionaryPairReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EDictionaryPairReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -4942,6 +5335,10 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final EIsExpressionElements pEIsExpression;
 	private final EParenthesisedExpressionElements pEParenthesisedExpression;
 	private final EIfExpressionElements pEIfExpression;
+	private final EJinjaStatementElements pEJinjaStatement;
+	private final EIfStatementElements pEIfStatement;
+	private final EElifBlockElements pEElifBlock;
+	private final EForStatementElements pEForStatement;
 	private final EDictionaryPairReferenceElements pEDictionaryPairReference;
 	private final EVariableDeclarationVariableReferenceElements pEVariableDeclarationVariableReference;
 	private final ERegisterVariableReferenceElements pERegisterVariableReference;
@@ -5035,6 +5432,10 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pEIsExpression = new EIsExpressionElements();
 		this.pEParenthesisedExpression = new EParenthesisedExpressionElements();
 		this.pEIfExpression = new EIfExpressionElements();
+		this.pEJinjaStatement = new EJinjaStatementElements();
+		this.pEIfStatement = new EIfStatementElements();
+		this.pEElifBlock = new EElifBlockElements();
+		this.pEForStatement = new EForStatementElements();
 		this.pEDictionaryPairReference = new EDictionaryPairReferenceElements();
 		this.pEVariableDeclarationVariableReference = new EVariableDeclarationVariableReferenceElements();
 		this.pERegisterVariableReference = new ERegisterVariableReferenceElements();
@@ -5570,7 +5971,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EJinjaExpressionOrString:
-	//	EJinjaExpressionEvaluation | string=STRING;
+	//	EJinjaExpressionEvaluation | EJinjaStatement | string=STRING;
 	public EJinjaExpressionOrStringElements getEJinjaExpressionOrStringAccess() {
 		return pEJinjaExpressionOrString;
 	}
@@ -5771,6 +6172,52 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	public ParserRule getEIfExpressionRule() {
 		return getEIfExpressionAccess().getRule();
+	}
+	
+	//EJinjaStatement:
+	//	EIfStatement | EForStatement;
+	public EJinjaStatementElements getEJinjaStatementAccess() {
+		return pEJinjaStatement;
+	}
+	
+	public ParserRule getEJinjaStatementRule() {
+		return getEJinjaStatementAccess().getRule();
+	}
+	
+	//EIfStatement:
+	//	'{%' if_block_sign=('+' | '-')? 'if' if_condition=EFilteredExpression '%}'
+	//	if_body=EValuePassed
+	//	elif_blocks+=EElifBlock* ('{%' else_block_sign=('+' | '-')? 'else' '%}' else_body=EValuePassed)?
+	//	'{%' endif_block_sign=('+' | '-')? 'endif' '%}';
+	public EIfStatementElements getEIfStatementAccess() {
+		return pEIfStatement;
+	}
+	
+	public ParserRule getEIfStatementRule() {
+		return getEIfStatementAccess().getRule();
+	}
+	
+	//EElifBlock:
+	//	'{%' elif_block_sign=('+' | '-')? 'elif' elif_condition=EFilteredExpression '%}' elif_body=EValuePassed;
+	public EElifBlockElements getEElifBlockAccess() {
+		return pEElifBlock;
+	}
+	
+	public ParserRule getEElifBlockRule() {
+		return getEElifBlockAccess().getRule();
+	}
+	
+	//EForStatement:
+	//	'{%' for_block_sign=('+' | '-')? 'for' identifiers+=ID (',' identifiers+=ID)* 'in' list=EFilteredExpression ('if'
+	//	condition=EFilteredExpression)? recursive='recursive'? '%}'
+	//	for_body=EValuePassed ('{%' else_block_sign=('+' | '-')? 'else' '%}' else_body=EValuePassed)?
+	//	'{%' endfor_block_sign=('+' | '-')? 'endfor' '%}';
+	public EForStatementElements getEForStatementAccess() {
+		return pEForStatement;
+	}
+	
+	public ParserRule getEForStatementRule() {
+		return getEForStatementAccess().getRule();
 	}
 	
 	//EDictionaryPairReference:

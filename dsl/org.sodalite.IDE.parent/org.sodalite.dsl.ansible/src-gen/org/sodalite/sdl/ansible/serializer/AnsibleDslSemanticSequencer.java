@@ -25,13 +25,16 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
@@ -120,6 +123,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE:
 				sequence_EDictionaryPairReference(context, (EDictionaryPairReference) semanticObject); 
 				return; 
+			case AnsibleDslPackage.EELIF_BLOCK:
+				sequence_EElifBlock(context, (EElifBlock) semanticObject); 
+				return; 
 			case AnsibleDslPackage.EEMPTY_CURLY_BRACES:
 				sequence_EEmptyCurlyBraces(context, (EEmptyCurlyBraces) semanticObject); 
 				return; 
@@ -132,6 +138,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EFILTERED_EXPRESSION:
 				sequence_EFilteredExpression(context, (EFilteredExpression) semanticObject); 
 				return; 
+			case AnsibleDslPackage.EFOR_STATEMENT:
+				sequence_EForStatement(context, (EForStatement) semanticObject); 
+				return; 
 			case AnsibleDslPackage.EFUNCTION_CALL:
 				sequence_EFunctionCall(context, (EFunctionCall) semanticObject); 
 				return; 
@@ -140,6 +149,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EIF_EXPRESSION:
 				sequence_EIfExpression(context, (EIfExpression) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EIF_STATEMENT:
+				sequence_EIfStatement(context, (EIfStatement) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE:
 				sequence_EIndexOrLoopVariable(context, (EIndexOrLoopVariable) semanticObject); 
@@ -432,6 +444,18 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     EElifBlock returns EElifBlock
+	 *
+	 * Constraint:
+	 *     ((elif_block_sign='+' | elif_block_sign='-')? elif_condition=EFilteredExpression elif_body=EValuePassed)
+	 */
+	protected void sequence_EElifBlock(ISerializationContext context, EElifBlock semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EValuePassedToJinjaExpression returns EEmptyCurlyBraces
 	 *     EEmptyCurlyBraces returns EEmptyCurlyBraces
 	 *
@@ -486,6 +510,30 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (to_filter=EOrExpression filter=EFilteredExpression?)
 	 */
 	protected void sequence_EFilteredExpression(ISerializationContext context, EFilteredExpression semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EJinjaExpressionOrString returns EForStatement
+	 *     EJinjaStatement returns EForStatement
+	 *     EForStatement returns EForStatement
+	 *
+	 * Constraint:
+	 *     (
+	 *         (for_block_sign='+' | for_block_sign='-')? 
+	 *         identifiers+=ID 
+	 *         identifiers+=ID* 
+	 *         list=EFilteredExpression 
+	 *         condition=EFilteredExpression? 
+	 *         recursive='recursive'? 
+	 *         for_body=EValuePassed 
+	 *         ((else_block_sign='+' | else_block_sign='-')? else_body=EValuePassed)? 
+	 *         (endfor_block_sign='+' | endfor_block_sign='-')?
+	 *     )
+	 */
+	protected void sequence_EForStatement(ISerializationContext context, EForStatement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -553,6 +601,27 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (if_expression=EFilteredExpression if_condition=EFilteredExpression else_expression=EFilteredExpression?)
 	 */
 	protected void sequence_EIfExpression(ISerializationContext context, EIfExpression semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EJinjaExpressionOrString returns EIfStatement
+	 *     EJinjaStatement returns EIfStatement
+	 *     EIfStatement returns EIfStatement
+	 *
+	 * Constraint:
+	 *     (
+	 *         (if_block_sign='+' | if_block_sign='-')? 
+	 *         if_condition=EFilteredExpression 
+	 *         if_body=EValuePassed 
+	 *         elif_blocks+=EElifBlock* 
+	 *         ((else_block_sign='+' | else_block_sign='-')? else_body=EValuePassed)? 
+	 *         (endif_block_sign='+' | endif_block_sign='-')?
+	 *     )
+	 */
+	protected void sequence_EIfStatement(ISerializationContext context, EIfStatement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -696,7 +765,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EJINJA_EXPRESSION_OR_STRING__STRING));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEJinjaExpressionOrStringAccess().getStringSTRINGTerminalRuleCall_1_0(), semanticObject.getString());
+		feeder.accept(grammarAccess.getEJinjaExpressionOrStringAccess().getStringSTRINGTerminalRuleCall_2_0(), semanticObject.getString());
 		feeder.finish();
 	}
 	

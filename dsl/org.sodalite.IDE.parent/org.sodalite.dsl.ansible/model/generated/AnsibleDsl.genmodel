@@ -238,6 +238,31 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfExpression/if_condition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfExpression/else_expression"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EJinjaStatement/else_block_sign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaStatement/else_body"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EIfStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EIfStatement/if_block_sign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfStatement/if_condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfStatement/if_body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfStatement/elif_blocks"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EIfStatement/endif_block_sign"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EElifBlock">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EElifBlock/elif_block_sign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EElifBlock/elif_condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EElifBlock/elif_body"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EForStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EForStatement/for_block_sign"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EForStatement/identifiers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EForStatement/list"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EForStatement/condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EForStatement/recursive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EForStatement/for_body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EForStatement/endfor_block_sign"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryPairReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionaryPairReference/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDictionaryPairReference/index"/>

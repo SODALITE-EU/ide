@@ -510,6 +510,39 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.EJINJA_STATEMENT:
+      {
+        EJinjaStatement eJinjaStatement = (EJinjaStatement)theEObject;
+        T result = caseEJinjaStatement(eJinjaStatement);
+        if (result == null) result = caseEJinjaExpressionOrString(eJinjaStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EIF_STATEMENT:
+      {
+        EIfStatement eIfStatement = (EIfStatement)theEObject;
+        T result = caseEIfStatement(eIfStatement);
+        if (result == null) result = caseEJinjaStatement(eIfStatement);
+        if (result == null) result = caseEJinjaExpressionOrString(eIfStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EELIF_BLOCK:
+      {
+        EElifBlock eElifBlock = (EElifBlock)theEObject;
+        T result = caseEElifBlock(eElifBlock);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EFOR_STATEMENT:
+      {
+        EForStatement eForStatement = (EForStatement)theEObject;
+        T result = caseEForStatement(eForStatement);
+        if (result == null) result = caseEJinjaStatement(eForStatement);
+        if (result == null) result = caseEJinjaExpressionOrString(eForStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE:
       {
         EDictionaryPairReference eDictionaryPairReference = (EDictionaryPairReference)theEObject;
@@ -1580,6 +1613,70 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEIfExpression(EIfExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EJinja Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EJinja Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEJinjaStatement(EJinjaStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EIf Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EIf Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEIfStatement(EIfStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EElif Block</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EElif Block</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEElifBlock(EElifBlock object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EFor Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EFor Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEForStatement(EForStatement object)
   {
     return null;
   }

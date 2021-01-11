@@ -143,6 +143,8 @@ Handlers : 'handlers:';
 
 Loop_var : 'loop_var:';
 
+Recursive : 'recursive';
+
 Register : 'register:';
 
 Run_once : 'run_once:';
@@ -177,6 +179,8 @@ Block : 'block:';
 
 Delay : 'delay:';
 
+Endfor : 'endfor';
+
 Hosts : 'hosts:';
 
 Label : 'label:';
@@ -199,6 +203,8 @@ Args : 'args:';
 
 Diff : 'diff:';
 
+Endif : 'endif';
+
 Loop : 'loop:';
 
 Play : 'play:';
@@ -217,13 +223,19 @@ Vars : 'vars:';
 
 When : 'when:';
 
+Elif : 'elif';
+
 Else : 'else';
 
 And : 'and';
 
+For : 'for';
+
 Not : 'not';
 
 ExclamationMarkEqualsSign : '!=';
+
+PercentSignRightCurlyBracket : '%}';
 
 LeftParenthesisRightParenthesis : '()';
 
@@ -244,6 +256,8 @@ In : 'in';
 Is : 'is';
 
 Or : 'or';
+
+LeftCurlyBracketPercentSign : '{%';
 
 LeftCurlyBracketLeftCurlyBracket : '{{';
 

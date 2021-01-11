@@ -121,6 +121,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EIS_EXPRESSION: return createEIsExpression();
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION: return createEParenthesisedExpression();
       case AnsibleDslPackage.EIF_EXPRESSION: return createEIfExpression();
+      case AnsibleDslPackage.EJINJA_STATEMENT: return createEJinjaStatement();
+      case AnsibleDslPackage.EIF_STATEMENT: return createEIfStatement();
+      case AnsibleDslPackage.EELIF_BLOCK: return createEElifBlock();
+      case AnsibleDslPackage.EFOR_STATEMENT: return createEForStatement();
       case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE: return createEDictionaryPairReference();
       case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE: return createEVariableDeclarationVariableReference();
       case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE: return createERegisterVariableReference();
@@ -817,6 +821,54 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EIfExpressionImpl eIfExpression = new EIfExpressionImpl();
     return eIfExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EJinjaStatement createEJinjaStatement()
+  {
+    EJinjaStatementImpl eJinjaStatement = new EJinjaStatementImpl();
+    return eJinjaStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EIfStatement createEIfStatement()
+  {
+    EIfStatementImpl eIfStatement = new EIfStatementImpl();
+    return eIfStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EElifBlock createEElifBlock()
+  {
+    EElifBlockImpl eElifBlock = new EElifBlockImpl();
+    return eElifBlock;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EForStatement createEForStatement()
+  {
+    EForStatementImpl eForStatement = new EForStatementImpl();
+    return eForStatement;
   }
 
   /**

@@ -528,6 +528,42 @@ public interface AnsibleDslFactory extends EFactory
   EIfExpression createEIfExpression();
 
   /**
+   * Returns a new object of class '<em>EJinja Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EJinja Statement</em>'.
+   * @generated
+   */
+  EJinjaStatement createEJinjaStatement();
+
+  /**
+   * Returns a new object of class '<em>EIf Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EIf Statement</em>'.
+   * @generated
+   */
+  EIfStatement createEIfStatement();
+
+  /**
+   * Returns a new object of class '<em>EElif Block</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EElif Block</em>'.
+   * @generated
+   */
+  EElifBlock createEElifBlock();
+
+  /**
+   * Returns a new object of class '<em>EFor Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EFor Statement</em>'.
+   * @generated
+   */
+  EForStatement createEForStatement();
+
+  /**
    * Returns a new object of class '<em>EDictionary Pair Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

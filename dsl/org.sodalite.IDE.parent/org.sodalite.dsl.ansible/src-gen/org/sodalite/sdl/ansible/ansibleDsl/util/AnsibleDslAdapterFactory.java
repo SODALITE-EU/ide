@@ -356,6 +356,26 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEIfExpressionAdapter();
       }
       @Override
+      public Adapter caseEJinjaStatement(EJinjaStatement object)
+      {
+        return createEJinjaStatementAdapter();
+      }
+      @Override
+      public Adapter caseEIfStatement(EIfStatement object)
+      {
+        return createEIfStatementAdapter();
+      }
+      @Override
+      public Adapter caseEElifBlock(EElifBlock object)
+      {
+        return createEElifBlockAdapter();
+      }
+      @Override
+      public Adapter caseEForStatement(EForStatement object)
+      {
+        return createEForStatementAdapter();
+      }
+      @Override
       public Adapter caseEDictionaryPairReference(EDictionaryPairReference object)
       {
         return createEDictionaryPairReferenceAdapter();
@@ -1318,6 +1338,66 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEIfExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement <em>EJinja Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement
+   * @generated
+   */
+  public Adapter createEJinjaStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfStatement <em>EIf Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfStatement
+   * @generated
+   */
+  public Adapter createEIfStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EElifBlock <em>EElif Block</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EElifBlock
+   * @generated
+   */
+  public Adapter createEElifBlockAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EForStatement <em>EFor Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EForStatement
+   * @generated
+   */
+  public Adapter createEForStatementAdapter()
   {
     return null;
   }

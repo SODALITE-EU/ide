@@ -346,6 +346,41 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="else_expression" eType="#//EFilteredExpression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EJinjaStatement" eSuperTypes="#//EJinjaExpressionOrString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="else_block_sign" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else_body" eType="#//EValuePassed"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EIfStatement" eSuperTypes="#//EJinjaStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="if_block_sign" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="if_condition" eType="#//EFilteredExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="if_body" eType="#//EValuePassed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elif_blocks" upperBound="-1"
+        eType="#//EElifBlock" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endif_block_sign" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EElifBlock">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elif_block_sign" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elif_condition" eType="#//EFilteredExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elif_body" eType="#//EValuePassed"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EForStatement" eSuperTypes="#//EJinjaStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="for_block_sign" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifiers" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="list" eType="#//EFilteredExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//EFilteredExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="recursive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="for_body" eType="#//EValuePassed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endfor_block_sign" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPairReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EDictionaryPair"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
