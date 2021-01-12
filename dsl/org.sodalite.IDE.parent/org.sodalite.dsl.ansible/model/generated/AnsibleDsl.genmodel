@@ -106,6 +106,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ELoopControl/loop_var"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ELoopControl/extended"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EWithLookup">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EWithLookup/lookup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EWithLookup/with_list"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EUntil">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EUntil/until"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EUntil/retries"/>

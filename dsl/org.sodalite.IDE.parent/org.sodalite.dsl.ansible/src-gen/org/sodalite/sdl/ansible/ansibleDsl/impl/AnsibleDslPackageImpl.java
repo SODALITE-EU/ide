@@ -94,6 +94,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EWithLookup;
 import org.sodalite.sdl.ansible.ansibleDsl.Model;
 
 /**
@@ -236,6 +237,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eLoopControlEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eWithLookupEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1659,6 +1667,39 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EReference getELoopControl_Extended()
   {
     return (EReference)eLoopControlEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEWithLookup()
+  {
+    return eWithLookupEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEWithLookup_Lookup()
+  {
+    return (EAttribute)eWithLookupEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEWithLookup_With_list()
+  {
+    return (EReference)eWithLookupEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3654,6 +3695,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eLoopControlEClass, ELOOP_CONTROL__LOOP_VAR);
     createEReference(eLoopControlEClass, ELOOP_CONTROL__EXTENDED);
 
+    eWithLookupEClass = createEClass(EWITH_LOOKUP);
+    createEAttribute(eWithLookupEClass, EWITH_LOOKUP__LOOKUP);
+    createEReference(eWithLookupEClass, EWITH_LOOKUP__WITH_LIST);
+
     eUntilEClass = createEClass(EUNTIL);
     createEReference(eUntilEClass, EUNTIL__UNTIL);
     createEReference(eUntilEClass, EUNTIL__RETRIES);
@@ -3929,6 +3974,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eHandlerEClass.getESuperTypes().add(this.getETaskHandler());
     eRoleInclusionEClass.getESuperTypes().add(this.getEExecution());
     eLoopOverListEClass.getESuperTypes().add(this.getELoop());
+    eWithLookupEClass.getESuperTypes().add(this.getELoop());
     eUntilEClass.getESuperTypes().add(this.getELoop());
     ePlayExeSettingsEClass.getESuperTypes().add(this.getEExeSettings());
     eExecutionExeSettingsEClass.getESuperTypes().add(this.getEExeSettings());
@@ -4072,6 +4118,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getELoopControl_Index_var(), this.getEIndexOrLoopVariable(), null, "index_var", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getELoopControl_Loop_var(), this.getEIndexOrLoopVariable(), null, "loop_var", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getELoopControl_Extended(), this.getEBooleanPassed(), null, "extended", null, 0, 1, ELoopControl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eWithLookupEClass, EWithLookup.class, "EWithLookup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEWithLookup_Lookup(), ecorePackage.getEString(), "lookup", null, 0, 1, EWithLookup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEWithLookup_With_list(), this.getEValuePassed(), null, "with_list", null, 0, 1, EWithLookup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eUntilEClass, EUntil.class, "EUntil", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEUntil_Until(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "until", null, 0, 1, EUntil.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -21,11 +21,11 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Asynchronous_settings", "Privilege_escalation", "Max_fail_percentage", "Registered_variable", "Ignore_unreachable", "Playbook_inclusion", "Declared_variable", "Index_or_loop_var", "Play_exe_settings", "Any_errors_fatal", "Direct_parameter", "Roles_inclusions", "Special_variable", "Connection_info", "Import_playbook", "Interface_input", "Module_defaults", "Operation_input", "Validation_mode", "Delegate_facts", "Error_handling", "Facts_settings", "Force_handlers", "Gather_timeout", "Become_method", "Gather_subset", "Ignore_errors", "Playbook_name", "Always_tasks", "Become_flags", "Changed_when", "Exe_settings", "Gather_facts", "Handler_name", "Loop_control", "Rescue_tasks", "Become_user", "Collections", "Delegate_to", "Environment", "Failed_when", "Remote_user", "Vars_prompt", "Become_exe", "Block_name", "Check_mode", "Connection", "Delegation", "Parameters", "Post_tasks", "Tasks_list", "Vars_files", "Fact_path", "Index_var", "Loop_over", "Node_type", "Operation", "Play_name", "Pre_tasks", "Role_name", "Task_name", "Debugger", "Extended", "Fact_set", "Handlers", "Loop_var", "Recursive", "Register", "Run_once", "Strategy", "Throttle", "Handler", "Retries", "Used_by", "Action", "Become", "Listen", "Module", "No_log", "Notify", "Serial", "Async", "Block", "Delay", "Endfor", "Hosts", "Label", "Order", "Pause", "Plays", "Return", "Tasks", "Topic", "Until", "Args", "Diff", "Endif", "Loop", "Play", "Poll", "Port", "Role", "Tags", "Task", "Vars", "When", "Elif", "Else", "And", "For", "Not", "ExclamationMarkEqualsSign", "PercentSignRightCurlyBracket", "LeftParenthesisRightParenthesis", "AsteriskAsterisk", "SolidusSolidus", "LessThanSignEqualsSign", "EqualsSignEqualsSign", "GreaterThanSignEqualsSign", "If", "In", "Is", "Or", "LeftCurlyBracketPercentSign", "LeftCurlyBracketLeftCurlyBracket", "RightCurlyBracketRightCurlyBracket", "PercentSign", "LeftParenthesis", "RightParenthesis", "Asterisk", "PlusSign", "Comma", "HyphenMinus", "FullStop", "Solidus", "Colon", "LessThanSign", "GreaterThanSign", "LeftSquareBracket", "RightSquareBracket", "LeftCurlyBracket", "VerticalLine", "RightCurlyBracket", "RULE_BOOLEAN", "RULE_NULL", "RULE_NONE", "RULE_NUMBER", "RULE_BEGIN", "RULE_END", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Asynchronous_settings", "Privilege_escalation", "Max_fail_percentage", "Registered_variable", "Ignore_unreachable", "Playbook_inclusion", "Declared_variable", "Index_or_loop_var", "Play_exe_settings", "Any_errors_fatal", "Direct_parameter", "Roles_inclusions", "Special_variable", "Connection_info", "Import_playbook", "Interface_input", "Module_defaults", "Operation_input", "Validation_mode", "Delegate_facts", "Error_handling", "Facts_settings", "Force_handlers", "Gather_timeout", "Become_method", "Gather_subset", "Ignore_errors", "Playbook_name", "Always_tasks", "Become_flags", "Changed_when", "Exe_settings", "Gather_facts", "Handler_name", "Loop_control", "Rescue_tasks", "Become_user", "Collections", "Delegate_to", "Environment", "Failed_when", "Remote_user", "Vars_prompt", "Become_exe", "Block_name", "Check_mode", "Connection", "Delegation", "Parameters", "Post_tasks", "Tasks_list", "Vars_files", "Fact_path", "Index_var", "Loop_over", "Node_type", "Operation", "Play_name", "Pre_tasks", "Role_name", "Task_name", "Debugger", "Extended", "Fact_set", "Handlers", "Loop_var", "Recursive", "Register", "Run_once", "Strategy", "Throttle", "Handler", "Retries", "Used_by", "Action", "Become", "Listen", "Module", "No_log", "Notify", "Serial", "Async", "Block", "Delay", "Endfor", "Hosts", "Label", "Order", "Pause", "Plays", "Return", "Tasks", "Topic", "Until", "Args", "Diff", "Endif", "Loop", "Play", "Poll", "Port", "Role", "Tags", "Task", "Vars", "When", "Elif", "Else", "With", "And", "For", "Not", "ExclamationMarkEqualsSign", "PercentSignRightCurlyBracket", "LeftParenthesisRightParenthesis", "AsteriskAsterisk", "SolidusSolidus", "LessThanSignEqualsSign", "EqualsSignEqualsSign", "GreaterThanSignEqualsSign", "If", "In", "Is", "Or", "LeftCurlyBracketPercentSign", "LeftCurlyBracketLeftCurlyBracket", "RightCurlyBracketRightCurlyBracket", "PercentSign", "LeftParenthesis", "RightParenthesis", "Asterisk", "PlusSign", "Comma", "HyphenMinus", "FullStop", "Solidus", "Colon", "LessThanSign", "GreaterThanSign", "LeftSquareBracket", "RightSquareBracket", "LeftCurlyBracket", "VerticalLine", "RightCurlyBracket", "RULE_BOOLEAN", "RULE_NULL", "RULE_NONE", "RULE_NUMBER", "RULE_BEGIN", "RULE_END", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int Node_type=59;
     public static final int Rescue_tasks=39;
-    public static final int Or=126;
+    public static final int Or=127;
     public static final int Privilege_escalation=5;
     public static final int Notify=83;
     public static final int Diff=99;
@@ -34,52 +34,52 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     public static final int Playbook_inclusion=9;
     public static final int Extended=66;
     public static final int Roles_inclusions=15;
-    public static final int LessThanSign=140;
+    public static final int LessThanSign=141;
     public static final int Throttle=74;
     public static final int Play_name=61;
-    public static final int LeftParenthesis=131;
+    public static final int LeftParenthesis=132;
     public static final int Loop_control=38;
     public static final int Remote_user=45;
-    public static final int PercentSignRightCurlyBracket=116;
+    public static final int PercentSignRightCurlyBracket=117;
     public static final int Tags=106;
-    public static final int GreaterThanSign=141;
+    public static final int GreaterThanSign=142;
     public static final int Changed_when=34;
     public static final int Parameters=52;
-    public static final int RULE_ID=153;
+    public static final int RULE_ID=154;
     public static final int Exe_settings=35;
     public static final int Gather_facts=36;
-    public static final int SolidusSolidus=119;
+    public static final int SolidusSolidus=120;
     public static final int Become_exe=47;
-    public static final int GreaterThanSignEqualsSign=122;
-    public static final int EqualsSignEqualsSign=121;
+    public static final int GreaterThanSignEqualsSign=123;
+    public static final int EqualsSignEqualsSign=122;
     public static final int Handler_name=37;
-    public static final int VerticalLine=145;
-    public static final int PlusSign=134;
-    public static final int RULE_INT=154;
+    public static final int VerticalLine=146;
+    public static final int PlusSign=135;
+    public static final int RULE_INT=155;
     public static final int Max_fail_percentage=6;
-    public static final int RULE_ML_COMMENT=156;
-    public static final int LeftSquareBracket=142;
+    public static final int RULE_ML_COMMENT=157;
+    public static final int LeftSquareBracket=143;
     public static final int Loop_over=58;
     public static final int Module=81;
-    public static final int If=123;
+    public static final int If=124;
     public static final int Loop_var=69;
     public static final int Pause=92;
-    public static final int RightCurlyBracketRightCurlyBracket=129;
-    public static final int In=124;
+    public static final int RightCurlyBracketRightCurlyBracket=130;
+    public static final int In=125;
     public static final int Asynchronous_settings=4;
     public static final int Listen=80;
-    public static final int Is=125;
+    public static final int Is=126;
     public static final int Index_var=57;
     public static final int Always_tasks=32;
-    public static final int Comma=135;
-    public static final int LeftParenthesisRightParenthesis=117;
-    public static final int HyphenMinus=136;
+    public static final int Comma=136;
+    public static final int LeftParenthesisRightParenthesis=118;
+    public static final int HyphenMinus=137;
     public static final int Index_or_loop_var=11;
-    public static final int LessThanSignEqualsSign=120;
-    public static final int Solidus=138;
-    public static final int RightCurlyBracket=146;
+    public static final int LessThanSignEqualsSign=121;
+    public static final int Solidus=139;
+    public static final int RightCurlyBracket=147;
     public static final int Fact_set=67;
-    public static final int FullStop=137;
+    public static final int FullStop=138;
     public static final int Connection_info=17;
     public static final int Block_name=48;
     public static final int Vars=108;
@@ -98,14 +98,14 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     public static final int Register=71;
     public static final int Else=111;
     public static final int Interface_input=19;
-    public static final int ExclamationMarkEqualsSign=115;
+    public static final int ExclamationMarkEqualsSign=116;
     public static final int Gather_timeout=27;
     public static final int Delegate_to=42;
     public static final int Facts_settings=25;
-    public static final int LeftCurlyBracketPercentSign=127;
+    public static final int LeftCurlyBracketPercentSign=128;
     public static final int Hosts=89;
     public static final int Task=107;
-    public static final int RULE_BEGIN=151;
+    public static final int RULE_BEGIN=152;
     public static final int Failed_when=44;
     public static final int No_log=82;
     public static final int Registered_variable=7;
@@ -113,66 +113,67 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     public static final int Import_playbook=18;
     public static final int Label=90;
     public static final int Post_tasks=53;
-    public static final int RULE_BOOLEAN=147;
+    public static final int RULE_BOOLEAN=148;
     public static final int Fact_path=56;
     public static final int Delay=87;
-    public static final int PercentSign=130;
+    public static final int PercentSign=131;
     public static final int Become_flags=33;
     public static final int Used_by=77;
     public static final int Retries=76;
     public static final int Async=85;
     public static final int Ignore_unreachable=8;
     public static final int Collections=41;
-    public static final int RightSquareBracket=143;
+    public static final int RightSquareBracket=144;
     public static final int Order=91;
     public static final int Playbook_name=31;
     public static final int Tasks=95;
     public static final int Run_once=72;
-    public static final int For=113;
-    public static final int RightParenthesis=132;
+    public static final int For=114;
+    public static final int RightParenthesis=133;
     public static final int Handler=75;
     public static final int Role=105;
-    public static final int Not=114;
+    public static final int Not=115;
     public static final int Direct_parameter=14;
-    public static final int And=112;
-    public static final int AsteriskAsterisk=118;
+    public static final int And=113;
+    public static final int AsteriskAsterisk=119;
     public static final int Environment=43;
     public static final int Block=86;
     public static final int Become=79;
     public static final int Special_variable=16;
-    public static final int LeftCurlyBracketLeftCurlyBracket=128;
-    public static final int RULE_NONE=149;
+    public static final int LeftCurlyBracketLeftCurlyBracket=129;
+    public static final int RULE_NONE=150;
     public static final int Debugger=65;
     public static final int Error_handling=24;
     public static final int Action=78;
-    public static final int RULE_END=152;
-    public static final int RULE_STRING=155;
+    public static final int RULE_END=153;
+    public static final int RULE_STRING=156;
     public static final int Operation=60;
-    public static final int RULE_NULL=148;
-    public static final int RULE_SL_COMMENT=157;
+    public static final int RULE_NULL=149;
+    public static final int With=112;
+    public static final int RULE_SL_COMMENT=158;
     public static final int Ignore_errors=30;
     public static final int Task_name=64;
     public static final int Endfor=88;
     public static final int Play_exe_settings=12;
-    public static final int Colon=139;
+    public static final int Colon=140;
     public static final int Tasks_list=54;
     public static final int Topic=96;
     public static final int EOF=-1;
     public static final int Force_handlers=26;
-    public static final int Asterisk=133;
+    public static final int Asterisk=134;
     public static final int Until=97;
     public static final int Loop=101;
     public static final int Operation_input=21;
     public static final int Role_name=63;
     public static final int Args=98;
     public static final int Return=94;
-    public static final int RULE_WS=158;
+    public static final int RULE_WS=159;
     public static final int Vars_prompt=46;
     public static final int Endif=100;
-    public static final int LeftCurlyBracket=144;
+    public static final int LeftCurlyBracket=145;
     public static final int Validation_mode=22;
-    public static final int RULE_ANY_OTHER=159;
-    public static final int RULE_NUMBER=150;
+    public static final int RULE_ANY_OTHER=160;
+    public static final int RULE_NUMBER=151;
     public static final int Delegation=51;
     public static final int Vars_files=55;
     public static final int Become_user=40;
@@ -10860,27 +10861,29 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleELoop"
-    // InternalAnsibleDslParser.g:4303:1: ruleELoop returns [EObject current=null] : (otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EUntil_3= ruleEUntil ) this_END_4= RULE_END ) ;
+    // InternalAnsibleDslParser.g:4303:1: ruleELoop returns [EObject current=null] : (otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EWithLookup_3= ruleEWithLookup | this_EUntil_4= ruleEUntil ) this_END_5= RULE_END ) ;
     public final EObject ruleELoop() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token this_BEGIN_1=null;
-        Token this_END_4=null;
+        Token this_END_5=null;
         EObject this_ELoopOverList_2 = null;
 
-        EObject this_EUntil_3 = null;
+        EObject this_EWithLookup_3 = null;
+
+        EObject this_EUntil_4 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:4309:2: ( (otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EUntil_3= ruleEUntil ) this_END_4= RULE_END ) )
-            // InternalAnsibleDslParser.g:4310:2: (otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EUntil_3= ruleEUntil ) this_END_4= RULE_END )
+            // InternalAnsibleDslParser.g:4309:2: ( (otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EWithLookup_3= ruleEWithLookup | this_EUntil_4= ruleEUntil ) this_END_5= RULE_END ) )
+            // InternalAnsibleDslParser.g:4310:2: (otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EWithLookup_3= ruleEWithLookup | this_EUntil_4= ruleEUntil ) this_END_5= RULE_END )
             {
-            // InternalAnsibleDslParser.g:4310:2: (otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EUntil_3= ruleEUntil ) this_END_4= RULE_END )
-            // InternalAnsibleDslParser.g:4311:3: otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EUntil_3= ruleEUntil ) this_END_4= RULE_END
+            // InternalAnsibleDslParser.g:4310:2: (otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EWithLookup_3= ruleEWithLookup | this_EUntil_4= ruleEUntil ) this_END_5= RULE_END )
+            // InternalAnsibleDslParser.g:4311:3: otherlv_0= Loop this_BEGIN_1= RULE_BEGIN (this_ELoopOverList_2= ruleELoopOverList | this_EWithLookup_3= ruleEWithLookup | this_EUntil_4= ruleEUntil ) this_END_5= RULE_END
             {
             otherlv_0=(Token)match(input,Loop,FOLLOW_5); 
 
@@ -10890,22 +10893,31 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getELoopAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:4319:3: (this_ELoopOverList_2= ruleELoopOverList | this_EUntil_3= ruleEUntil )
-            int alt31=2;
-            int LA31_0 = input.LA(1);
-
-            if ( LA31_0 == Loop_over ) {
+            // InternalAnsibleDslParser.g:4319:3: (this_ELoopOverList_2= ruleELoopOverList | this_EWithLookup_3= ruleEWithLookup | this_EUntil_4= ruleEUntil )
+            int alt31=3;
+            switch ( input.LA(1) ) {
+            case Loop_over:
+                {
                 alt31=1;
-            }
-            else if ( (LA31_0==Until) ) {
+                }
+                break;
+            case With:
+                {
                 alt31=2;
-            }
-            else {
+                }
+                break;
+            case Until:
+                {
+                alt31=3;
+                }
+                break;
+            default:
                 NoViableAltException nvae =
                     new NoViableAltException("", 31, 0, input);
 
                 throw nvae;
             }
+
             switch (alt31) {
                 case 1 :
                     // InternalAnsibleDslParser.g:4320:4: this_ELoopOverList_2= ruleELoopOverList
@@ -10926,18 +10938,36 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:4329:4: this_EUntil_3= ruleEUntil
+                    // InternalAnsibleDslParser.g:4329:4: this_EWithLookup_3= ruleEWithLookup
                     {
 
-                    				newCompositeNode(grammarAccess.getELoopAccess().getEUntilParserRuleCall_2_1());
+                    				newCompositeNode(grammarAccess.getELoopAccess().getEWithLookupParserRuleCall_2_1());
                     			
                     pushFollow(FOLLOW_7);
-                    this_EUntil_3=ruleEUntil();
+                    this_EWithLookup_3=ruleEWithLookup();
 
                     state._fsp--;
 
 
-                    				current = this_EUntil_3;
+                    				current = this_EWithLookup_3;
+                    				afterParserOrEnumRuleCall();
+                    			
+
+                    }
+                    break;
+                case 3 :
+                    // InternalAnsibleDslParser.g:4338:4: this_EUntil_4= ruleEUntil
+                    {
+
+                    				newCompositeNode(grammarAccess.getELoopAccess().getEUntilParserRuleCall_2_2());
+                    			
+                    pushFollow(FOLLOW_7);
+                    this_EUntil_4=ruleEUntil();
+
+                    state._fsp--;
+
+
+                    				current = this_EUntil_4;
                     				afterParserOrEnumRuleCall();
                     			
 
@@ -10946,9 +10976,9 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_END_4=(Token)match(input,RULE_END,FOLLOW_2); 
+            this_END_5=(Token)match(input,RULE_END,FOLLOW_2); 
 
-            			newLeafNode(this_END_4, grammarAccess.getELoopAccess().getENDTerminalRuleCall_3());
+            			newLeafNode(this_END_5, grammarAccess.getELoopAccess().getENDTerminalRuleCall_3());
             		
 
             }
@@ -10973,7 +11003,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleELoopOverList"
-    // InternalAnsibleDslParser.g:4346:1: entryRuleELoopOverList returns [EObject current=null] : iv_ruleELoopOverList= ruleELoopOverList EOF ;
+    // InternalAnsibleDslParser.g:4355:1: entryRuleELoopOverList returns [EObject current=null] : iv_ruleELoopOverList= ruleELoopOverList EOF ;
     public final EObject entryRuleELoopOverList() throws RecognitionException {
         EObject current = null;
 
@@ -10981,8 +11011,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:4346:54: (iv_ruleELoopOverList= ruleELoopOverList EOF )
-            // InternalAnsibleDslParser.g:4347:2: iv_ruleELoopOverList= ruleELoopOverList EOF
+            // InternalAnsibleDslParser.g:4355:54: (iv_ruleELoopOverList= ruleELoopOverList EOF )
+            // InternalAnsibleDslParser.g:4356:2: iv_ruleELoopOverList= ruleELoopOverList EOF
             {
              newCompositeNode(grammarAccess.getELoopOverListRule()); 
             pushFollow(FOLLOW_1);
@@ -11009,7 +11039,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleELoopOverList"
-    // InternalAnsibleDslParser.g:4353:1: ruleELoopOverList returns [EObject current=null] : (otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )? ) ;
+    // InternalAnsibleDslParser.g:4362:1: ruleELoopOverList returns [EObject current=null] : (otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )? ) ;
     public final EObject ruleELoopOverList() throws RecognitionException {
         EObject current = null;
 
@@ -11023,21 +11053,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:4359:2: ( (otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )? ) )
-            // InternalAnsibleDslParser.g:4360:2: (otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )? )
+            // InternalAnsibleDslParser.g:4368:2: ( (otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )? ) )
+            // InternalAnsibleDslParser.g:4369:2: (otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )? )
             {
-            // InternalAnsibleDslParser.g:4360:2: (otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )? )
-            // InternalAnsibleDslParser.g:4361:3: otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )?
+            // InternalAnsibleDslParser.g:4369:2: (otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )? )
+            // InternalAnsibleDslParser.g:4370:3: otherlv_0= Loop_over ( (lv_loop_list_1_0= ruleEValuePassed ) ) ( (lv_loop_control_2_0= ruleELoopControl ) )?
             {
             otherlv_0=(Token)match(input,Loop_over,FOLLOW_35); 
 
             			newLeafNode(otherlv_0, grammarAccess.getELoopOverListAccess().getLoop_overKeyword_0());
             		
-            // InternalAnsibleDslParser.g:4365:3: ( (lv_loop_list_1_0= ruleEValuePassed ) )
-            // InternalAnsibleDslParser.g:4366:4: (lv_loop_list_1_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:4374:3: ( (lv_loop_list_1_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:4375:4: (lv_loop_list_1_0= ruleEValuePassed )
             {
-            // InternalAnsibleDslParser.g:4366:4: (lv_loop_list_1_0= ruleEValuePassed )
-            // InternalAnsibleDslParser.g:4367:5: lv_loop_list_1_0= ruleEValuePassed
+            // InternalAnsibleDslParser.g:4375:4: (lv_loop_list_1_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:4376:5: lv_loop_list_1_0= ruleEValuePassed
             {
 
             					newCompositeNode(grammarAccess.getELoopOverListAccess().getLoop_listEValuePassedParserRuleCall_1_0());
@@ -11064,7 +11094,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:4384:3: ( (lv_loop_control_2_0= ruleELoopControl ) )?
+            // InternalAnsibleDslParser.g:4393:3: ( (lv_loop_control_2_0= ruleELoopControl ) )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -11073,10 +11103,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt32) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:4385:4: (lv_loop_control_2_0= ruleELoopControl )
+                    // InternalAnsibleDslParser.g:4394:4: (lv_loop_control_2_0= ruleELoopControl )
                     {
-                    // InternalAnsibleDslParser.g:4385:4: (lv_loop_control_2_0= ruleELoopControl )
-                    // InternalAnsibleDslParser.g:4386:5: lv_loop_control_2_0= ruleELoopControl
+                    // InternalAnsibleDslParser.g:4394:4: (lv_loop_control_2_0= ruleELoopControl )
+                    // InternalAnsibleDslParser.g:4395:5: lv_loop_control_2_0= ruleELoopControl
                     {
 
                     					newCompositeNode(grammarAccess.getELoopOverListAccess().getLoop_controlELoopControlParserRuleCall_2_0());
@@ -11129,7 +11159,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleELoopControl"
-    // InternalAnsibleDslParser.g:4407:1: entryRuleELoopControl returns [EObject current=null] : iv_ruleELoopControl= ruleELoopControl EOF ;
+    // InternalAnsibleDslParser.g:4416:1: entryRuleELoopControl returns [EObject current=null] : iv_ruleELoopControl= ruleELoopControl EOF ;
     public final EObject entryRuleELoopControl() throws RecognitionException {
         EObject current = null;
 
@@ -11137,8 +11167,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:4407:53: (iv_ruleELoopControl= ruleELoopControl EOF )
-            // InternalAnsibleDslParser.g:4408:2: iv_ruleELoopControl= ruleELoopControl EOF
+            // InternalAnsibleDslParser.g:4416:53: (iv_ruleELoopControl= ruleELoopControl EOF )
+            // InternalAnsibleDslParser.g:4417:2: iv_ruleELoopControl= ruleELoopControl EOF
             {
              newCompositeNode(grammarAccess.getELoopControlRule()); 
             pushFollow(FOLLOW_1);
@@ -11165,7 +11195,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleELoopControl"
-    // InternalAnsibleDslParser.g:4414:1: ruleELoopControl returns [EObject current=null] : (otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) ;
+    // InternalAnsibleDslParser.g:4423:1: ruleELoopControl returns [EObject current=null] : (otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) ;
     public final EObject ruleELoopControl() throws RecognitionException {
         EObject current = null;
 
@@ -11192,11 +11222,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:4420:2: ( (otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) )
-            // InternalAnsibleDslParser.g:4421:2: (otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
+            // InternalAnsibleDslParser.g:4429:2: ( (otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) )
+            // InternalAnsibleDslParser.g:4430:2: (otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
             {
-            // InternalAnsibleDslParser.g:4421:2: (otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
-            // InternalAnsibleDslParser.g:4422:3: otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END
+            // InternalAnsibleDslParser.g:4430:2: (otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
+            // InternalAnsibleDslParser.g:4431:3: otherlv_0= Loop_control this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END
             {
             otherlv_0=(Token)match(input,Loop_control,FOLLOW_5); 
 
@@ -11206,19 +11236,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getELoopControlAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:4430:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:4431:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:4439:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:4440:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:4431:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:4432:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:4440:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:4441:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getELoopControlAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:4435:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:4436:6: ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:4444:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:4445:6: ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:4436:6: ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:4445:6: ( ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             loop33:
             do {
                 int alt33=6;
@@ -11243,38 +11273,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt33) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:4437:4: ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4446:4: ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4437:4: ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4438:5: {...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4446:4: ({...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4447:5: {...}? => ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:4438:109: ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4439:6: ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4447:109: ( ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4448:6: ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:4442:9: ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:4442:10: {...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) )
+            	    // InternalAnsibleDslParser.g:4451:9: ({...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4451:10: {...}? => (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4442:19: (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) )
-            	    // InternalAnsibleDslParser.g:4442:20: otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) )
+            	    // InternalAnsibleDslParser.g:4451:19: (otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) ) )
+            	    // InternalAnsibleDslParser.g:4451:20: otherlv_3= Label ( (lv_label_4_0= ruleEValuePassed ) )
             	    {
             	    otherlv_3=(Token)match(input,Label,FOLLOW_35); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getELoopControlAccess().getLabelKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4446:9: ( (lv_label_4_0= ruleEValuePassed ) )
-            	    // InternalAnsibleDslParser.g:4447:10: (lv_label_4_0= ruleEValuePassed )
+            	    // InternalAnsibleDslParser.g:4455:9: ( (lv_label_4_0= ruleEValuePassed ) )
+            	    // InternalAnsibleDslParser.g:4456:10: (lv_label_4_0= ruleEValuePassed )
             	    {
-            	    // InternalAnsibleDslParser.g:4447:10: (lv_label_4_0= ruleEValuePassed )
-            	    // InternalAnsibleDslParser.g:4448:11: lv_label_4_0= ruleEValuePassed
+            	    // InternalAnsibleDslParser.g:4456:10: (lv_label_4_0= ruleEValuePassed )
+            	    // InternalAnsibleDslParser.g:4457:11: lv_label_4_0= ruleEValuePassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getELoopControlAccess().getLabelEValuePassedParserRuleCall_2_0_1_0());
@@ -11320,38 +11350,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:4471:4: ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4480:4: ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4471:4: ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4472:5: {...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4480:4: ({...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4481:5: {...}? => ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:4472:109: ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4473:6: ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4481:109: ( ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4482:6: ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:4476:9: ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:4476:10: {...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4485:9: ({...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4485:10: {...}? => (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4476:19: (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:4476:20: otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:4485:19: (otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4485:20: otherlv_5= Pause ( (lv_pause_6_0= ruleENumberPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Pause,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getELoopControlAccess().getPauseKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4480:9: ( (lv_pause_6_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:4481:10: (lv_pause_6_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:4489:9: ( (lv_pause_6_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:4490:10: (lv_pause_6_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:4481:10: (lv_pause_6_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:4482:11: lv_pause_6_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:4490:10: (lv_pause_6_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:4491:11: lv_pause_6_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getELoopControlAccess().getPauseENumberPassedParserRuleCall_2_1_1_0());
@@ -11397,38 +11427,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalAnsibleDslParser.g:4505:4: ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4514:4: ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4505:4: ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4506:5: {...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4514:4: ({...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4515:5: {...}? => ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 2)");
             	    }
-            	    // InternalAnsibleDslParser.g:4506:109: ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4507:6: ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) )
+            	    // InternalAnsibleDslParser.g:4515:109: ( ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4516:6: ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 2);
             	    					
-            	    // InternalAnsibleDslParser.g:4510:9: ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) )
-            	    // InternalAnsibleDslParser.g:4510:10: {...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) )
+            	    // InternalAnsibleDslParser.g:4519:9: ({...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) ) )
+            	    // InternalAnsibleDslParser.g:4519:10: {...}? => (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4510:19: (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) )
-            	    // InternalAnsibleDslParser.g:4510:20: otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) )
+            	    // InternalAnsibleDslParser.g:4519:19: (otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) ) )
+            	    // InternalAnsibleDslParser.g:4519:20: otherlv_7= Index_var ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) )
             	    {
             	    otherlv_7=(Token)match(input,Index_var,FOLLOW_16); 
 
             	    									newLeafNode(otherlv_7, grammarAccess.getELoopControlAccess().getIndex_varKeyword_2_2_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4514:9: ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) )
-            	    // InternalAnsibleDslParser.g:4515:10: (lv_index_var_8_0= ruleEIndexOrLoopVariable )
+            	    // InternalAnsibleDslParser.g:4523:9: ( (lv_index_var_8_0= ruleEIndexOrLoopVariable ) )
+            	    // InternalAnsibleDslParser.g:4524:10: (lv_index_var_8_0= ruleEIndexOrLoopVariable )
             	    {
-            	    // InternalAnsibleDslParser.g:4515:10: (lv_index_var_8_0= ruleEIndexOrLoopVariable )
-            	    // InternalAnsibleDslParser.g:4516:11: lv_index_var_8_0= ruleEIndexOrLoopVariable
+            	    // InternalAnsibleDslParser.g:4524:10: (lv_index_var_8_0= ruleEIndexOrLoopVariable )
+            	    // InternalAnsibleDslParser.g:4525:11: lv_index_var_8_0= ruleEIndexOrLoopVariable
             	    {
 
             	    											newCompositeNode(grammarAccess.getELoopControlAccess().getIndex_varEIndexOrLoopVariableParserRuleCall_2_2_1_0());
@@ -11474,38 +11504,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalAnsibleDslParser.g:4539:4: ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4548:4: ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4539:4: ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4540:5: {...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4548:4: ({...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4549:5: {...}? => ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 3)");
             	    }
-            	    // InternalAnsibleDslParser.g:4540:109: ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4541:6: ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) )
+            	    // InternalAnsibleDslParser.g:4549:109: ( ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4550:6: ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 3);
             	    					
-            	    // InternalAnsibleDslParser.g:4544:9: ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) )
-            	    // InternalAnsibleDslParser.g:4544:10: {...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) )
+            	    // InternalAnsibleDslParser.g:4553:9: ({...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) ) )
+            	    // InternalAnsibleDslParser.g:4553:10: {...}? => (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4544:19: (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) )
-            	    // InternalAnsibleDslParser.g:4544:20: otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) )
+            	    // InternalAnsibleDslParser.g:4553:19: (otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) ) )
+            	    // InternalAnsibleDslParser.g:4553:20: otherlv_9= Loop_var ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) )
             	    {
             	    otherlv_9=(Token)match(input,Loop_var,FOLLOW_16); 
 
             	    									newLeafNode(otherlv_9, grammarAccess.getELoopControlAccess().getLoop_varKeyword_2_3_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4548:9: ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) )
-            	    // InternalAnsibleDslParser.g:4549:10: (lv_loop_var_10_0= ruleEIndexOrLoopVariable )
+            	    // InternalAnsibleDslParser.g:4557:9: ( (lv_loop_var_10_0= ruleEIndexOrLoopVariable ) )
+            	    // InternalAnsibleDslParser.g:4558:10: (lv_loop_var_10_0= ruleEIndexOrLoopVariable )
             	    {
-            	    // InternalAnsibleDslParser.g:4549:10: (lv_loop_var_10_0= ruleEIndexOrLoopVariable )
-            	    // InternalAnsibleDslParser.g:4550:11: lv_loop_var_10_0= ruleEIndexOrLoopVariable
+            	    // InternalAnsibleDslParser.g:4558:10: (lv_loop_var_10_0= ruleEIndexOrLoopVariable )
+            	    // InternalAnsibleDslParser.g:4559:11: lv_loop_var_10_0= ruleEIndexOrLoopVariable
             	    {
 
             	    											newCompositeNode(grammarAccess.getELoopControlAccess().getLoop_varEIndexOrLoopVariableParserRuleCall_2_3_1_0());
@@ -11551,38 +11581,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalAnsibleDslParser.g:4573:4: ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4582:4: ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4573:4: ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4574:5: {...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4582:4: ({...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4583:5: {...}? => ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "getUnorderedGroupHelper().canSelect(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 4)");
             	    }
-            	    // InternalAnsibleDslParser.g:4574:109: ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4575:6: ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4583:109: ( ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4584:6: ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), 4);
             	    					
-            	    // InternalAnsibleDslParser.g:4578:9: ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:4578:10: {...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4587:9: ({...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4587:10: {...}? => (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleELoopControl", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4578:19: (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:4578:20: otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:4587:19: (otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4587:20: otherlv_11= Extended ( (lv_extended_12_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_11=(Token)match(input,Extended,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_11, grammarAccess.getELoopControlAccess().getExtendedKeyword_2_4_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4582:9: ( (lv_extended_12_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:4583:10: (lv_extended_12_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:4591:9: ( (lv_extended_12_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:4592:10: (lv_extended_12_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:4583:10: (lv_extended_12_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:4584:11: lv_extended_12_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:4592:10: (lv_extended_12_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:4593:11: lv_extended_12_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getELoopControlAccess().getExtendedEBooleanPassedParserRuleCall_2_4_1_0());
@@ -11671,8 +11701,152 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleELoopControl"
 
 
+    // $ANTLR start "entryRuleEWithLookup"
+    // InternalAnsibleDslParser.g:4631:1: entryRuleEWithLookup returns [EObject current=null] : iv_ruleEWithLookup= ruleEWithLookup EOF ;
+    public final EObject entryRuleEWithLookup() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEWithLookup = null;
+
+
+        try {
+            // InternalAnsibleDslParser.g:4631:52: (iv_ruleEWithLookup= ruleEWithLookup EOF )
+            // InternalAnsibleDslParser.g:4632:2: iv_ruleEWithLookup= ruleEWithLookup EOF
+            {
+             newCompositeNode(grammarAccess.getEWithLookupRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEWithLookup=ruleEWithLookup();
+
+            state._fsp--;
+
+             current =iv_ruleEWithLookup; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEWithLookup"
+
+
+    // $ANTLR start "ruleEWithLookup"
+    // InternalAnsibleDslParser.g:4638:1: ruleEWithLookup returns [EObject current=null] : (otherlv_0= With ( (lv_lookup_1_0= RULE_ID ) ) otherlv_2= Colon ( (lv_with_list_3_0= ruleEValuePassed ) ) ) ;
+    public final EObject ruleEWithLookup() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_lookup_1_0=null;
+        Token otherlv_2=null;
+        EObject lv_with_list_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalAnsibleDslParser.g:4644:2: ( (otherlv_0= With ( (lv_lookup_1_0= RULE_ID ) ) otherlv_2= Colon ( (lv_with_list_3_0= ruleEValuePassed ) ) ) )
+            // InternalAnsibleDslParser.g:4645:2: (otherlv_0= With ( (lv_lookup_1_0= RULE_ID ) ) otherlv_2= Colon ( (lv_with_list_3_0= ruleEValuePassed ) ) )
+            {
+            // InternalAnsibleDslParser.g:4645:2: (otherlv_0= With ( (lv_lookup_1_0= RULE_ID ) ) otherlv_2= Colon ( (lv_with_list_3_0= ruleEValuePassed ) ) )
+            // InternalAnsibleDslParser.g:4646:3: otherlv_0= With ( (lv_lookup_1_0= RULE_ID ) ) otherlv_2= Colon ( (lv_with_list_3_0= ruleEValuePassed ) )
+            {
+            otherlv_0=(Token)match(input,With,FOLLOW_16); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getEWithLookupAccess().getWithKeyword_0());
+            		
+            // InternalAnsibleDslParser.g:4650:3: ( (lv_lookup_1_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:4651:4: (lv_lookup_1_0= RULE_ID )
+            {
+            // InternalAnsibleDslParser.g:4651:4: (lv_lookup_1_0= RULE_ID )
+            // InternalAnsibleDslParser.g:4652:5: lv_lookup_1_0= RULE_ID
+            {
+            lv_lookup_1_0=(Token)match(input,RULE_ID,FOLLOW_37); 
+
+            					newLeafNode(lv_lookup_1_0, grammarAccess.getEWithLookupAccess().getLookupIDTerminalRuleCall_1_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEWithLookupRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"lookup",
+            						lv_lookup_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,Colon,FOLLOW_35); 
+
+            			newLeafNode(otherlv_2, grammarAccess.getEWithLookupAccess().getColonKeyword_2());
+            		
+            // InternalAnsibleDslParser.g:4672:3: ( (lv_with_list_3_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:4673:4: (lv_with_list_3_0= ruleEValuePassed )
+            {
+            // InternalAnsibleDslParser.g:4673:4: (lv_with_list_3_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:4674:5: lv_with_list_3_0= ruleEValuePassed
+            {
+
+            					newCompositeNode(grammarAccess.getEWithLookupAccess().getWith_listEValuePassedParserRuleCall_3_0());
+            				
+            pushFollow(FOLLOW_2);
+            lv_with_list_3_0=ruleEValuePassed();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEWithLookupRule());
+            					}
+            					set(
+            						current,
+            						"with_list",
+            						lv_with_list_3_0,
+            						"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEWithLookup"
+
+
     // $ANTLR start "entryRuleEUntil"
-    // InternalAnsibleDslParser.g:4622:1: entryRuleEUntil returns [EObject current=null] : iv_ruleEUntil= ruleEUntil EOF ;
+    // InternalAnsibleDslParser.g:4695:1: entryRuleEUntil returns [EObject current=null] : iv_ruleEUntil= ruleEUntil EOF ;
     public final EObject entryRuleEUntil() throws RecognitionException {
         EObject current = null;
 
@@ -11680,8 +11854,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:4622:47: (iv_ruleEUntil= ruleEUntil EOF )
-            // InternalAnsibleDslParser.g:4623:2: iv_ruleEUntil= ruleEUntil EOF
+            // InternalAnsibleDslParser.g:4695:47: (iv_ruleEUntil= ruleEUntil EOF )
+            // InternalAnsibleDslParser.g:4696:2: iv_ruleEUntil= ruleEUntil EOF
             {
              newCompositeNode(grammarAccess.getEUntilRule()); 
             pushFollow(FOLLOW_1);
@@ -11708,7 +11882,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEUntil"
-    // InternalAnsibleDslParser.g:4629:1: ruleEUntil returns [EObject current=null] : (otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) ) ;
+    // InternalAnsibleDslParser.g:4702:1: ruleEUntil returns [EObject current=null] : (otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) ) ;
     public final EObject ruleEUntil() throws RecognitionException {
         EObject current = null;
 
@@ -11726,21 +11900,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:4635:2: ( (otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) ) )
-            // InternalAnsibleDslParser.g:4636:2: (otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) )
+            // InternalAnsibleDslParser.g:4708:2: ( (otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) ) )
+            // InternalAnsibleDslParser.g:4709:2: (otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) )
             {
-            // InternalAnsibleDslParser.g:4636:2: (otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) )
-            // InternalAnsibleDslParser.g:4637:3: otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:4709:2: (otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) )
+            // InternalAnsibleDslParser.g:4710:3: otherlv_0= Until ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) )
             {
             otherlv_0=(Token)match(input,Until,FOLLOW_24); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEUntilAccess().getUntilKeyword_0());
             		
-            // InternalAnsibleDslParser.g:4641:3: ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
-            // InternalAnsibleDslParser.g:4642:4: (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
+            // InternalAnsibleDslParser.g:4714:3: ( (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
+            // InternalAnsibleDslParser.g:4715:4: (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
             {
-            // InternalAnsibleDslParser.g:4642:4: (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
-            // InternalAnsibleDslParser.g:4643:5: lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets
+            // InternalAnsibleDslParser.g:4715:4: (lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
+            // InternalAnsibleDslParser.g:4716:5: lv_until_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets
             {
 
             					newCompositeNode(grammarAccess.getEUntilAccess().getUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0());
@@ -11767,19 +11941,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:4660:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:4661:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:4733:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:4734:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:4661:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:4662:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:4734:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:4735:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEUntilAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:4665:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:4666:6: ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:4738:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:4739:6: ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:4666:6: ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:4739:6: ( ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) ) )*
             loop34:
             do {
                 int alt34=3;
@@ -11795,38 +11969,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt34) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:4667:4: ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4740:4: ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4667:4: ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4668:5: {...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4740:4: ({...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4741:5: {...}? => ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEUntil", "getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:4668:103: ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4669:6: ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4741:103: ( ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4742:6: ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:4672:9: ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:4672:10: {...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4745:9: ({...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4745:10: {...}? => (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEUntil", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4672:19: (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:4672:20: otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:4745:19: (otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4745:20: otherlv_3= Retries ( (lv_retries_4_0= ruleENumberPassed ) )
             	    {
             	    otherlv_3=(Token)match(input,Retries,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEUntilAccess().getRetriesKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4676:9: ( (lv_retries_4_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:4677:10: (lv_retries_4_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:4749:9: ( (lv_retries_4_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:4750:10: (lv_retries_4_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:4677:10: (lv_retries_4_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:4678:11: lv_retries_4_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:4750:10: (lv_retries_4_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:4751:11: lv_retries_4_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEUntilAccess().getRetriesENumberPassedParserRuleCall_2_0_1_0());
@@ -11872,38 +12046,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:4701:4: ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4774:4: ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4701:4: ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4702:5: {...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4774:4: ({...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4775:5: {...}? => ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEUntil", "getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:4702:103: ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4703:6: ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4775:103: ( ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4776:6: ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:4706:9: ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:4706:10: {...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4779:9: ({...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4779:10: {...}? => (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEUntil", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4706:19: (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:4706:20: otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:4779:19: (otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4779:20: otherlv_5= Delay ( (lv_delay_6_0= ruleENumberPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Delay,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEUntilAccess().getDelayKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4710:9: ( (lv_delay_6_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:4711:10: (lv_delay_6_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:4783:9: ( (lv_delay_6_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:4784:10: (lv_delay_6_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:4711:10: (lv_delay_6_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:4712:11: lv_delay_6_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:4784:10: (lv_delay_6_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:4785:11: lv_delay_6_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEUntilAccess().getDelayENumberPassedParserRuleCall_2_1_1_0());
@@ -11989,7 +12163,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEPrivilegeEscalation"
-    // InternalAnsibleDslParser.g:4746:1: entryRuleEPrivilegeEscalation returns [EObject current=null] : iv_ruleEPrivilegeEscalation= ruleEPrivilegeEscalation EOF ;
+    // InternalAnsibleDslParser.g:4819:1: entryRuleEPrivilegeEscalation returns [EObject current=null] : iv_ruleEPrivilegeEscalation= ruleEPrivilegeEscalation EOF ;
     public final EObject entryRuleEPrivilegeEscalation() throws RecognitionException {
         EObject current = null;
 
@@ -11997,8 +12171,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:4746:61: (iv_ruleEPrivilegeEscalation= ruleEPrivilegeEscalation EOF )
-            // InternalAnsibleDslParser.g:4747:2: iv_ruleEPrivilegeEscalation= ruleEPrivilegeEscalation EOF
+            // InternalAnsibleDslParser.g:4819:61: (iv_ruleEPrivilegeEscalation= ruleEPrivilegeEscalation EOF )
+            // InternalAnsibleDslParser.g:4820:2: iv_ruleEPrivilegeEscalation= ruleEPrivilegeEscalation EOF
             {
              newCompositeNode(grammarAccess.getEPrivilegeEscalationRule()); 
             pushFollow(FOLLOW_1);
@@ -12025,7 +12199,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPrivilegeEscalation"
-    // InternalAnsibleDslParser.g:4753:1: ruleEPrivilegeEscalation returns [EObject current=null] : (otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) ;
+    // InternalAnsibleDslParser.g:4826:1: ruleEPrivilegeEscalation returns [EObject current=null] : (otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) ;
     public final EObject ruleEPrivilegeEscalation() throws RecognitionException {
         EObject current = null;
 
@@ -12052,11 +12226,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:4759:2: ( (otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) )
-            // InternalAnsibleDslParser.g:4760:2: (otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
+            // InternalAnsibleDslParser.g:4832:2: ( (otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) )
+            // InternalAnsibleDslParser.g:4833:2: (otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
             {
-            // InternalAnsibleDslParser.g:4760:2: (otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
-            // InternalAnsibleDslParser.g:4761:3: otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END
+            // InternalAnsibleDslParser.g:4833:2: (otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
+            // InternalAnsibleDslParser.g:4834:3: otherlv_0= Privilege_escalation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END
             {
             otherlv_0=(Token)match(input,Privilege_escalation,FOLLOW_5); 
 
@@ -12066,19 +12240,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEPrivilegeEscalationAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:4769:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:4770:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:4842:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:4843:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:4770:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:4771:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:4843:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:4844:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:4774:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:4775:6: ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:4847:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:4848:6: ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:4775:6: ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:4848:6: ( ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
             loop35:
             do {
                 int alt35=6;
@@ -12103,38 +12277,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt35) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:4776:4: ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4849:4: ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4776:4: ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4777:5: {...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4849:4: ({...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4850:5: {...}? => ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:4777:117: ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4778:6: ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4850:117: ( ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4851:6: ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:4781:9: ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:4781:10: {...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4854:9: ({...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:4854:10: {...}? => (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4781:19: (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:4781:20: otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:4854:19: (otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:4854:20: otherlv_3= Become ( (lv_become_4_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_3=(Token)match(input,Become,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEPrivilegeEscalationAccess().getBecomeKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4785:9: ( (lv_become_4_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:4786:10: (lv_become_4_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:4858:9: ( (lv_become_4_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:4859:10: (lv_become_4_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:4786:10: (lv_become_4_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:4787:11: lv_become_4_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:4859:10: (lv_become_4_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:4860:11: lv_become_4_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPrivilegeEscalationAccess().getBecomeEBooleanPassedParserRuleCall_2_0_1_0());
@@ -12180,38 +12354,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:4810:4: ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4883:4: ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4810:4: ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4811:5: {...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4883:4: ({...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4884:5: {...}? => ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:4811:117: ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4812:6: ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:4884:117: ( ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4885:6: ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:4815:9: ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:4815:10: {...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:4888:9: ({...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:4888:10: {...}? => (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4815:19: (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:4815:20: otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:4888:19: (otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:4888:20: otherlv_5= Become_exe ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_5=(Token)match(input,Become_exe,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEPrivilegeEscalationAccess().getBecome_exeKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4819:9: ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:4820:10: (lv_become_exe_6_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:4892:9: ( (lv_become_exe_6_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:4893:10: (lv_become_exe_6_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:4820:10: (lv_become_exe_6_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:4821:11: lv_become_exe_6_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:4893:10: (lv_become_exe_6_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:4894:11: lv_become_exe_6_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPrivilegeEscalationAccess().getBecome_exeEJinjaExpressionAndStringParserRuleCall_2_1_1_0());
@@ -12257,38 +12431,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalAnsibleDslParser.g:4844:4: ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4917:4: ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4844:4: ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4845:5: {...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4917:4: ({...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4918:5: {...}? => ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 2)");
             	    }
-            	    // InternalAnsibleDslParser.g:4845:117: ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4846:6: ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:4918:117: ( ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4919:6: ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 2);
             	    					
-            	    // InternalAnsibleDslParser.g:4849:9: ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:4849:10: {...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:4922:9: ({...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:4922:10: {...}? => (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4849:19: (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:4849:20: otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:4922:19: (otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:4922:20: otherlv_7= Become_flags ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_7=(Token)match(input,Become_flags,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_7, grammarAccess.getEPrivilegeEscalationAccess().getBecome_flagsKeyword_2_2_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4853:9: ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:4854:10: (lv_become_flags_8_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:4926:9: ( (lv_become_flags_8_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:4927:10: (lv_become_flags_8_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:4854:10: (lv_become_flags_8_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:4855:11: lv_become_flags_8_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:4927:10: (lv_become_flags_8_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:4928:11: lv_become_flags_8_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPrivilegeEscalationAccess().getBecome_flagsEJinjaExpressionAndStringParserRuleCall_2_2_1_0());
@@ -12334,38 +12508,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalAnsibleDslParser.g:4878:4: ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4951:4: ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4878:4: ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4879:5: {...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4951:4: ({...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4952:5: {...}? => ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 3)");
             	    }
-            	    // InternalAnsibleDslParser.g:4879:117: ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4880:6: ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:4952:117: ( ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4953:6: ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 3);
             	    					
-            	    // InternalAnsibleDslParser.g:4883:9: ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:4883:10: {...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:4956:9: ({...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:4956:10: {...}? => (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4883:19: (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:4883:20: otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:4956:19: (otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:4956:20: otherlv_9= Become_method ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_9=(Token)match(input,Become_method,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_9, grammarAccess.getEPrivilegeEscalationAccess().getBecome_methodKeyword_2_3_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4887:9: ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:4888:10: (lv_become_method_10_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:4960:9: ( (lv_become_method_10_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:4961:10: (lv_become_method_10_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:4888:10: (lv_become_method_10_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:4889:11: lv_become_method_10_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:4961:10: (lv_become_method_10_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:4962:11: lv_become_method_10_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPrivilegeEscalationAccess().getBecome_methodEJinjaExpressionAndStringParserRuleCall_2_3_1_0());
@@ -12411,38 +12585,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalAnsibleDslParser.g:4912:4: ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4985:4: ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4912:4: ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4913:5: {...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4985:4: ({...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4986:5: {...}? => ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 4)");
             	    }
-            	    // InternalAnsibleDslParser.g:4913:117: ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4914:6: ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:4986:117: ( ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:4987:6: ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), 4);
             	    					
-            	    // InternalAnsibleDslParser.g:4917:9: ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:4917:10: {...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:4990:9: ({...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:4990:10: {...}? => (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPrivilegeEscalation", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4917:19: (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:4917:20: otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:4990:19: (otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:4990:20: otherlv_11= Become_user ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_11=(Token)match(input,Become_user,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_11, grammarAccess.getEPrivilegeEscalationAccess().getBecome_userKeyword_2_4_0());
             	    								
-            	    // InternalAnsibleDslParser.g:4921:9: ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:4922:10: (lv_become_user_12_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:4994:9: ( (lv_become_user_12_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:4995:10: (lv_become_user_12_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:4922:10: (lv_become_user_12_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:4923:11: lv_become_user_12_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:4995:10: (lv_become_user_12_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:4996:11: lv_become_user_12_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPrivilegeEscalationAccess().getBecome_userEJinjaExpressionAndStringParserRuleCall_2_4_1_0());
@@ -12532,7 +12706,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEValidationMode"
-    // InternalAnsibleDslParser.g:4961:1: entryRuleEValidationMode returns [EObject current=null] : iv_ruleEValidationMode= ruleEValidationMode EOF ;
+    // InternalAnsibleDslParser.g:5034:1: entryRuleEValidationMode returns [EObject current=null] : iv_ruleEValidationMode= ruleEValidationMode EOF ;
     public final EObject entryRuleEValidationMode() throws RecognitionException {
         EObject current = null;
 
@@ -12540,8 +12714,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:4961:56: (iv_ruleEValidationMode= ruleEValidationMode EOF )
-            // InternalAnsibleDslParser.g:4962:2: iv_ruleEValidationMode= ruleEValidationMode EOF
+            // InternalAnsibleDslParser.g:5034:56: (iv_ruleEValidationMode= ruleEValidationMode EOF )
+            // InternalAnsibleDslParser.g:5035:2: iv_ruleEValidationMode= ruleEValidationMode EOF
             {
              newCompositeNode(grammarAccess.getEValidationModeRule()); 
             pushFollow(FOLLOW_1);
@@ -12568,7 +12742,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValidationMode"
-    // InternalAnsibleDslParser.g:4968:1: ruleEValidationMode returns [EObject current=null] : (otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) ;
+    // InternalAnsibleDslParser.g:5041:1: ruleEValidationMode returns [EObject current=null] : (otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) ;
     public final EObject ruleEValidationMode() throws RecognitionException {
         EObject current = null;
 
@@ -12586,11 +12760,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:4974:2: ( (otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) )
-            // InternalAnsibleDslParser.g:4975:2: (otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
+            // InternalAnsibleDslParser.g:5047:2: ( (otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) )
+            // InternalAnsibleDslParser.g:5048:2: (otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
             {
-            // InternalAnsibleDslParser.g:4975:2: (otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
-            // InternalAnsibleDslParser.g:4976:3: otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END
+            // InternalAnsibleDslParser.g:5048:2: (otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
+            // InternalAnsibleDslParser.g:5049:3: otherlv_0= Validation_mode this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END
             {
             otherlv_0=(Token)match(input,Validation_mode,FOLLOW_5); 
 
@@ -12600,19 +12774,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEValidationModeAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:4984:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:4985:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5057:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:5058:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:4985:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:4986:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5058:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5059:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEValidationModeAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:4989:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:4990:6: ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5062:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5063:6: ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:4990:6: ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5063:6: ( ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             loop36:
             do {
                 int alt36=3;
@@ -12628,38 +12802,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt36) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:4991:4: ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5064:4: ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:4991:4: ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4992:5: {...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5064:4: ({...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5065:5: {...}? => ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEValidationModeAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEValidationMode", "getUnorderedGroupHelper().canSelect(grammarAccess.getEValidationModeAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:4992:112: ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:4993:6: ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5065:112: ( ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5066:6: ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEValidationModeAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:4996:9: ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:4996:10: {...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5069:9: ({...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5069:10: {...}? => (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEValidationMode", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:4996:19: (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:4996:20: otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5069:19: (otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5069:20: otherlv_3= Check_mode ( (lv_check_mode_4_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_3=(Token)match(input,Check_mode,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEValidationModeAccess().getCheck_modeKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5000:9: ( (lv_check_mode_4_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5001:10: (lv_check_mode_4_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5073:9: ( (lv_check_mode_4_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5074:10: (lv_check_mode_4_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5001:10: (lv_check_mode_4_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5002:11: lv_check_mode_4_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5074:10: (lv_check_mode_4_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5075:11: lv_check_mode_4_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEValidationModeAccess().getCheck_modeEBooleanPassedParserRuleCall_2_0_1_0());
@@ -12705,38 +12879,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:5025:4: ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5098:4: ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5025:4: ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5026:5: {...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5098:4: ({...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5099:5: {...}? => ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEValidationModeAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEValidationMode", "getUnorderedGroupHelper().canSelect(grammarAccess.getEValidationModeAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:5026:112: ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5027:6: ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5099:112: ( ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5100:6: ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEValidationModeAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:5030:9: ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5030:10: {...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5103:9: ({...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5103:10: {...}? => (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEValidationMode", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5030:19: (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5030:20: otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5103:19: (otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5103:20: otherlv_5= Diff ( (lv_diff_6_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Diff,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEValidationModeAccess().getDiffKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5034:9: ( (lv_diff_6_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5035:10: (lv_diff_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5107:9: ( (lv_diff_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5108:10: (lv_diff_6_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5035:10: (lv_diff_6_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5036:11: lv_diff_6_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5108:10: (lv_diff_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5109:11: lv_diff_6_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEValidationModeAccess().getDiffEBooleanPassedParserRuleCall_2_1_1_0());
@@ -12826,7 +13000,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEConnection"
-    // InternalAnsibleDslParser.g:5074:1: entryRuleEConnection returns [EObject current=null] : iv_ruleEConnection= ruleEConnection EOF ;
+    // InternalAnsibleDslParser.g:5147:1: entryRuleEConnection returns [EObject current=null] : iv_ruleEConnection= ruleEConnection EOF ;
     public final EObject entryRuleEConnection() throws RecognitionException {
         EObject current = null;
 
@@ -12834,8 +13008,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:5074:52: (iv_ruleEConnection= ruleEConnection EOF )
-            // InternalAnsibleDslParser.g:5075:2: iv_ruleEConnection= ruleEConnection EOF
+            // InternalAnsibleDslParser.g:5147:52: (iv_ruleEConnection= ruleEConnection EOF )
+            // InternalAnsibleDslParser.g:5148:2: iv_ruleEConnection= ruleEConnection EOF
             {
              newCompositeNode(grammarAccess.getEConnectionRule()); 
             pushFollow(FOLLOW_1);
@@ -12862,7 +13036,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEConnection"
-    // InternalAnsibleDslParser.g:5081:1: ruleEConnection returns [EObject current=null] : (otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END ) ;
+    // InternalAnsibleDslParser.g:5154:1: ruleEConnection returns [EObject current=null] : (otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END ) ;
     public final EObject ruleEConnection() throws RecognitionException {
         EObject current = null;
 
@@ -12883,11 +13057,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:5087:2: ( (otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END ) )
-            // InternalAnsibleDslParser.g:5088:2: (otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END )
+            // InternalAnsibleDslParser.g:5160:2: ( (otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END ) )
+            // InternalAnsibleDslParser.g:5161:2: (otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END )
             {
-            // InternalAnsibleDslParser.g:5088:2: (otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END )
-            // InternalAnsibleDslParser.g:5089:3: otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END
+            // InternalAnsibleDslParser.g:5161:2: (otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END )
+            // InternalAnsibleDslParser.g:5162:3: otherlv_0= Connection_info this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END
             {
             otherlv_0=(Token)match(input,Connection_info,FOLLOW_5); 
 
@@ -12897,19 +13071,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEConnectionAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:5097:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:5098:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5170:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:5171:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:5098:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:5099:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5171:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5172:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEConnectionAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:5102:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:5103:6: ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5175:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5176:6: ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:5103:6: ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5176:6: ( ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
             loop37:
             do {
                 int alt37=4;
@@ -12928,38 +13102,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt37) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:5104:4: ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5177:4: ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5104:4: ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5105:5: {...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5177:4: ({...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5178:5: {...}? => ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEConnection", "getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:5105:108: ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5106:6: ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:5178:108: ( ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5179:6: ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:5109:9: ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:5109:10: {...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:5182:9: ({...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:5182:10: {...}? => (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEConnection", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5109:19: (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:5109:20: otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:5182:19: (otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:5182:20: otherlv_3= Connection ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_3=(Token)match(input,Connection,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEConnectionAccess().getConnectionKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5113:9: ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:5114:10: (lv_connection_4_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:5186:9: ( (lv_connection_4_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:5187:10: (lv_connection_4_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:5114:10: (lv_connection_4_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:5115:11: lv_connection_4_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:5187:10: (lv_connection_4_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:5188:11: lv_connection_4_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEConnectionAccess().getConnectionEJinjaExpressionAndStringParserRuleCall_2_0_1_0());
@@ -13005,38 +13179,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:5138:4: ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5211:4: ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5138:4: ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5139:5: {...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5211:4: ({...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5212:5: {...}? => ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEConnection", "getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:5139:108: ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5140:6: ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5212:108: ( ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5213:6: ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:5143:9: ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5143:10: {...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5216:9: ({...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5216:10: {...}? => (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEConnection", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5143:19: (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5143:20: otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:5216:19: (otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5216:20: otherlv_5= Port ( (lv_port_6_0= ruleENumberPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Port,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEConnectionAccess().getPortKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5147:9: ( (lv_port_6_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:5148:10: (lv_port_6_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:5220:9: ( (lv_port_6_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:5221:10: (lv_port_6_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5148:10: (lv_port_6_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:5149:11: lv_port_6_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:5221:10: (lv_port_6_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:5222:11: lv_port_6_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEConnectionAccess().getPortENumberPassedParserRuleCall_2_1_1_0());
@@ -13082,38 +13256,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalAnsibleDslParser.g:5172:4: ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5245:4: ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5172:4: ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5173:5: {...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5245:4: ({...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5246:5: {...}? => ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEConnection", "getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 2)");
             	    }
-            	    // InternalAnsibleDslParser.g:5173:108: ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5174:6: ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:5246:108: ( ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5247:6: ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 2);
             	    					
-            	    // InternalAnsibleDslParser.g:5177:9: ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:5177:10: {...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:5250:9: ({...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:5250:10: {...}? => (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEConnection", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5177:19: (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:5177:20: otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:5250:19: (otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:5250:20: otherlv_7= Remote_user ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_7=(Token)match(input,Remote_user,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_7, grammarAccess.getEConnectionAccess().getRemote_userKeyword_2_2_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5181:9: ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:5182:10: (lv_remote_user_8_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:5254:9: ( (lv_remote_user_8_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:5255:10: (lv_remote_user_8_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:5182:10: (lv_remote_user_8_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:5183:11: lv_remote_user_8_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:5255:10: (lv_remote_user_8_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:5256:11: lv_remote_user_8_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEConnectionAccess().getRemote_userEJinjaExpressionAndStringParserRuleCall_2_2_1_0());
@@ -13203,7 +13377,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEPlayExeSettings"
-    // InternalAnsibleDslParser.g:5221:1: entryRuleEPlayExeSettings returns [EObject current=null] : iv_ruleEPlayExeSettings= ruleEPlayExeSettings EOF ;
+    // InternalAnsibleDslParser.g:5294:1: entryRuleEPlayExeSettings returns [EObject current=null] : iv_ruleEPlayExeSettings= ruleEPlayExeSettings EOF ;
     public final EObject entryRuleEPlayExeSettings() throws RecognitionException {
         EObject current = null;
 
@@ -13211,8 +13385,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:5221:57: (iv_ruleEPlayExeSettings= ruleEPlayExeSettings EOF )
-            // InternalAnsibleDslParser.g:5222:2: iv_ruleEPlayExeSettings= ruleEPlayExeSettings EOF
+            // InternalAnsibleDslParser.g:5294:57: (iv_ruleEPlayExeSettings= ruleEPlayExeSettings EOF )
+            // InternalAnsibleDslParser.g:5295:2: iv_ruleEPlayExeSettings= ruleEPlayExeSettings EOF
             {
              newCompositeNode(grammarAccess.getEPlayExeSettingsRule()); 
             pushFollow(FOLLOW_1);
@@ -13239,7 +13413,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPlayExeSettings"
-    // InternalAnsibleDslParser.g:5228:1: ruleEPlayExeSettings returns [EObject current=null] : (otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) ;
+    // InternalAnsibleDslParser.g:5301:1: ruleEPlayExeSettings returns [EObject current=null] : (otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) ;
     public final EObject ruleEPlayExeSettings() throws RecognitionException {
         EObject current = null;
 
@@ -13266,11 +13440,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:5234:2: ( (otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) )
-            // InternalAnsibleDslParser.g:5235:2: (otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
+            // InternalAnsibleDslParser.g:5307:2: ( (otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) )
+            // InternalAnsibleDslParser.g:5308:2: (otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
             {
-            // InternalAnsibleDslParser.g:5235:2: (otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
-            // InternalAnsibleDslParser.g:5236:3: otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END
+            // InternalAnsibleDslParser.g:5308:2: (otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
+            // InternalAnsibleDslParser.g:5309:3: otherlv_0= Play_exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END
             {
             otherlv_0=(Token)match(input,Play_exe_settings,FOLLOW_5); 
 
@@ -13280,19 +13454,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEPlayExeSettingsAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:5244:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:5245:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5317:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:5318:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:5245:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:5246:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5318:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5319:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:5249:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:5250:6: ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5322:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5323:6: ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:5250:6: ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5323:6: ( ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             loop38:
             do {
                 int alt38=6;
@@ -13317,38 +13491,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt38) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:5251:4: ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5324:4: ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5251:4: ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5252:5: {...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5324:4: ({...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5325:5: {...}? => ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:5252:113: ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5253:6: ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:5325:113: ( ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5326:6: ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:5256:9: ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:5256:10: {...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:5329:9: ({...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:5329:10: {...}? => (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5256:19: (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:5256:20: otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:5329:19: (otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:5329:20: otherlv_3= Strategy ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_3=(Token)match(input,Strategy,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEPlayExeSettingsAccess().getStrategyKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5260:9: ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:5261:10: (lv_strategy_4_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:5333:9: ( (lv_strategy_4_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:5334:10: (lv_strategy_4_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:5261:10: (lv_strategy_4_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:5262:11: lv_strategy_4_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:5334:10: (lv_strategy_4_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:5335:11: lv_strategy_4_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPlayExeSettingsAccess().getStrategyEJinjaExpressionAndStringParserRuleCall_2_0_1_0());
@@ -13394,38 +13568,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:5285:4: ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5358:4: ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5285:4: ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5286:5: {...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5358:4: ({...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5359:5: {...}? => ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:5286:113: ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5287:6: ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5359:113: ( ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5360:6: ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:5290:9: ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5290:10: {...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5363:9: ({...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5363:10: {...}? => (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5290:19: (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5290:20: otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) )
+            	    // InternalAnsibleDslParser.g:5363:19: (otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5363:20: otherlv_5= Serial ( (lv_serial_list_6_0= ruleEListPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Serial,FOLLOW_15); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEPlayExeSettingsAccess().getSerialKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5294:9: ( (lv_serial_list_6_0= ruleEListPassed ) )
-            	    // InternalAnsibleDslParser.g:5295:10: (lv_serial_list_6_0= ruleEListPassed )
+            	    // InternalAnsibleDslParser.g:5367:9: ( (lv_serial_list_6_0= ruleEListPassed ) )
+            	    // InternalAnsibleDslParser.g:5368:10: (lv_serial_list_6_0= ruleEListPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5295:10: (lv_serial_list_6_0= ruleEListPassed )
-            	    // InternalAnsibleDslParser.g:5296:11: lv_serial_list_6_0= ruleEListPassed
+            	    // InternalAnsibleDslParser.g:5368:10: (lv_serial_list_6_0= ruleEListPassed )
+            	    // InternalAnsibleDslParser.g:5369:11: lv_serial_list_6_0= ruleEListPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPlayExeSettingsAccess().getSerial_listEListPassedParserRuleCall_2_1_1_0());
@@ -13471,38 +13645,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalAnsibleDslParser.g:5319:4: ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5392:4: ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5319:4: ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5320:5: {...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5392:4: ({...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5393:5: {...}? => ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 2)");
             	    }
-            	    // InternalAnsibleDslParser.g:5320:113: ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5321:6: ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:5393:113: ( ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5394:6: ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 2);
             	    					
-            	    // InternalAnsibleDslParser.g:5324:9: ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:5324:10: {...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:5397:9: ({...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:5397:10: {...}? => (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5324:19: (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:5324:20: otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:5397:19: (otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:5397:20: otherlv_7= Order ( (lv_order_8_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_7=(Token)match(input,Order,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_7, grammarAccess.getEPlayExeSettingsAccess().getOrderKeyword_2_2_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5328:9: ( (lv_order_8_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:5329:10: (lv_order_8_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:5401:9: ( (lv_order_8_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:5402:10: (lv_order_8_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:5329:10: (lv_order_8_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:5330:11: lv_order_8_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:5402:10: (lv_order_8_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:5403:11: lv_order_8_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPlayExeSettingsAccess().getOrderEJinjaExpressionAndStringParserRuleCall_2_2_1_0());
@@ -13548,38 +13722,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalAnsibleDslParser.g:5353:4: ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5426:4: ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5353:4: ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5354:5: {...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5426:4: ({...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5427:5: {...}? => ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 3)");
             	    }
-            	    // InternalAnsibleDslParser.g:5354:113: ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5355:6: ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5427:113: ( ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5428:6: ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 3);
             	    					
-            	    // InternalAnsibleDslParser.g:5358:9: ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5358:10: {...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5431:9: ({...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5431:10: {...}? => (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5358:19: (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5358:20: otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:5431:19: (otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5431:20: otherlv_9= Throttle ( (lv_throttle_10_0= ruleENumberPassed ) )
             	    {
             	    otherlv_9=(Token)match(input,Throttle,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_9, grammarAccess.getEPlayExeSettingsAccess().getThrottleKeyword_2_3_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5362:9: ( (lv_throttle_10_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:5363:10: (lv_throttle_10_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:5435:9: ( (lv_throttle_10_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:5436:10: (lv_throttle_10_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5363:10: (lv_throttle_10_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:5364:11: lv_throttle_10_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:5436:10: (lv_throttle_10_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:5437:11: lv_throttle_10_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPlayExeSettingsAccess().getThrottleENumberPassedParserRuleCall_2_3_1_0());
@@ -13625,38 +13799,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalAnsibleDslParser.g:5387:4: ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5460:4: ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5387:4: ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5388:5: {...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5460:4: ({...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5461:5: {...}? => ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 4)");
             	    }
-            	    // InternalAnsibleDslParser.g:5388:113: ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5389:6: ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5461:113: ( ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5462:6: ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPlayExeSettingsAccess().getUnorderedGroup_2(), 4);
             	    					
-            	    // InternalAnsibleDslParser.g:5392:9: ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5392:10: {...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5465:9: ({...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5465:10: {...}? => (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayExeSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5392:19: (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5392:20: otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5465:19: (otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5465:20: otherlv_11= Run_once ( (lv_run_once_12_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_11=(Token)match(input,Run_once,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_11, grammarAccess.getEPlayExeSettingsAccess().getRun_onceKeyword_2_4_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5396:9: ( (lv_run_once_12_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5397:10: (lv_run_once_12_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5469:9: ( (lv_run_once_12_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5470:10: (lv_run_once_12_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5397:10: (lv_run_once_12_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5398:11: lv_run_once_12_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5470:10: (lv_run_once_12_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5471:11: lv_run_once_12_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPlayExeSettingsAccess().getRun_onceEBooleanPassedParserRuleCall_2_4_1_0());
@@ -13746,7 +13920,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEExecutionExeSettings"
-    // InternalAnsibleDslParser.g:5436:1: entryRuleEExecutionExeSettings returns [EObject current=null] : iv_ruleEExecutionExeSettings= ruleEExecutionExeSettings EOF ;
+    // InternalAnsibleDslParser.g:5509:1: entryRuleEExecutionExeSettings returns [EObject current=null] : iv_ruleEExecutionExeSettings= ruleEExecutionExeSettings EOF ;
     public final EObject entryRuleEExecutionExeSettings() throws RecognitionException {
         EObject current = null;
 
@@ -13754,8 +13928,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:5436:62: (iv_ruleEExecutionExeSettings= ruleEExecutionExeSettings EOF )
-            // InternalAnsibleDslParser.g:5437:2: iv_ruleEExecutionExeSettings= ruleEExecutionExeSettings EOF
+            // InternalAnsibleDslParser.g:5509:62: (iv_ruleEExecutionExeSettings= ruleEExecutionExeSettings EOF )
+            // InternalAnsibleDslParser.g:5510:2: iv_ruleEExecutionExeSettings= ruleEExecutionExeSettings EOF
             {
              newCompositeNode(grammarAccess.getEExecutionExeSettingsRule()); 
             pushFollow(FOLLOW_1);
@@ -13782,7 +13956,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEExecutionExeSettings"
-    // InternalAnsibleDslParser.g:5443:1: ruleEExecutionExeSettings returns [EObject current=null] : (otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) ;
+    // InternalAnsibleDslParser.g:5516:1: ruleEExecutionExeSettings returns [EObject current=null] : (otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) ;
     public final EObject ruleEExecutionExeSettings() throws RecognitionException {
         EObject current = null;
 
@@ -13800,11 +13974,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:5449:2: ( (otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) )
-            // InternalAnsibleDslParser.g:5450:2: (otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
+            // InternalAnsibleDslParser.g:5522:2: ( (otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) )
+            // InternalAnsibleDslParser.g:5523:2: (otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
             {
-            // InternalAnsibleDslParser.g:5450:2: (otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
-            // InternalAnsibleDslParser.g:5451:3: otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END
+            // InternalAnsibleDslParser.g:5523:2: (otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
+            // InternalAnsibleDslParser.g:5524:3: otherlv_0= Exe_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END
             {
             otherlv_0=(Token)match(input,Exe_settings,FOLLOW_5); 
 
@@ -13814,19 +13988,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEExecutionExeSettingsAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:5459:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:5460:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5532:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:5533:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:5460:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:5461:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5533:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5534:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEExecutionExeSettingsAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:5464:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:5465:6: ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5537:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5538:6: ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:5465:6: ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5538:6: ( ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             loop39:
             do {
                 int alt39=3;
@@ -13842,38 +14016,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt39) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:5466:4: ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5539:4: ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5466:4: ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5467:5: {...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5539:4: ({...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5540:5: {...}? => ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEExecutionExeSettingsAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEExecutionExeSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEExecutionExeSettingsAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:5467:118: ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5468:6: ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5540:118: ( ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5541:6: ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEExecutionExeSettingsAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:5471:9: ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5471:10: {...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5544:9: ({...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5544:10: {...}? => (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEExecutionExeSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5471:19: (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5471:20: otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:5544:19: (otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5544:20: otherlv_3= Throttle ( (lv_throttle_4_0= ruleENumberPassed ) )
             	    {
             	    otherlv_3=(Token)match(input,Throttle,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEExecutionExeSettingsAccess().getThrottleKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5475:9: ( (lv_throttle_4_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:5476:10: (lv_throttle_4_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:5548:9: ( (lv_throttle_4_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:5549:10: (lv_throttle_4_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5476:10: (lv_throttle_4_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:5477:11: lv_throttle_4_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:5549:10: (lv_throttle_4_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:5550:11: lv_throttle_4_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEExecutionExeSettingsAccess().getThrottleENumberPassedParserRuleCall_2_0_1_0());
@@ -13919,38 +14093,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:5500:4: ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5573:4: ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5500:4: ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5501:5: {...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5573:4: ({...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5574:5: {...}? => ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEExecutionExeSettingsAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEExecutionExeSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEExecutionExeSettingsAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:5501:118: ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5502:6: ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5574:118: ( ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5575:6: ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEExecutionExeSettingsAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:5505:9: ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5505:10: {...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5578:9: ({...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5578:10: {...}? => (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEExecutionExeSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5505:19: (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5505:20: otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5578:19: (otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5578:20: otherlv_5= Run_once ( (lv_run_once_6_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Run_once,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEExecutionExeSettingsAccess().getRun_onceKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5509:9: ( (lv_run_once_6_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5510:10: (lv_run_once_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5582:9: ( (lv_run_once_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5583:10: (lv_run_once_6_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5510:10: (lv_run_once_6_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5511:11: lv_run_once_6_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5583:10: (lv_run_once_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5584:11: lv_run_once_6_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEExecutionExeSettingsAccess().getRun_onceEBooleanPassedParserRuleCall_2_1_1_0());
@@ -14040,7 +14214,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEBlockAndRoleErrorHandling"
-    // InternalAnsibleDslParser.g:5549:1: entryRuleEBlockAndRoleErrorHandling returns [EObject current=null] : iv_ruleEBlockAndRoleErrorHandling= ruleEBlockAndRoleErrorHandling EOF ;
+    // InternalAnsibleDslParser.g:5622:1: entryRuleEBlockAndRoleErrorHandling returns [EObject current=null] : iv_ruleEBlockAndRoleErrorHandling= ruleEBlockAndRoleErrorHandling EOF ;
     public final EObject entryRuleEBlockAndRoleErrorHandling() throws RecognitionException {
         EObject current = null;
 
@@ -14048,8 +14222,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:5549:67: (iv_ruleEBlockAndRoleErrorHandling= ruleEBlockAndRoleErrorHandling EOF )
-            // InternalAnsibleDslParser.g:5550:2: iv_ruleEBlockAndRoleErrorHandling= ruleEBlockAndRoleErrorHandling EOF
+            // InternalAnsibleDslParser.g:5622:67: (iv_ruleEBlockAndRoleErrorHandling= ruleEBlockAndRoleErrorHandling EOF )
+            // InternalAnsibleDslParser.g:5623:2: iv_ruleEBlockAndRoleErrorHandling= ruleEBlockAndRoleErrorHandling EOF
             {
              newCompositeNode(grammarAccess.getEBlockAndRoleErrorHandlingRule()); 
             pushFollow(FOLLOW_1);
@@ -14076,7 +14250,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEBlockAndRoleErrorHandling"
-    // InternalAnsibleDslParser.g:5556:1: ruleEBlockAndRoleErrorHandling returns [EObject current=null] : (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END ) ;
+    // InternalAnsibleDslParser.g:5629:1: ruleEBlockAndRoleErrorHandling returns [EObject current=null] : (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END ) ;
     public final EObject ruleEBlockAndRoleErrorHandling() throws RecognitionException {
         EObject current = null;
 
@@ -14097,11 +14271,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:5562:2: ( (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END ) )
-            // InternalAnsibleDslParser.g:5563:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END )
+            // InternalAnsibleDslParser.g:5635:2: ( (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END ) )
+            // InternalAnsibleDslParser.g:5636:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END )
             {
-            // InternalAnsibleDslParser.g:5563:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END )
-            // InternalAnsibleDslParser.g:5564:3: otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END
+            // InternalAnsibleDslParser.g:5636:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END )
+            // InternalAnsibleDslParser.g:5637:3: otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_9= RULE_END
             {
             otherlv_0=(Token)match(input,Error_handling,FOLLOW_5); 
 
@@ -14111,19 +14285,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:5572:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:5573:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5645:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:5646:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:5573:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:5574:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5646:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5647:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:5577:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:5578:6: ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5650:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5651:6: ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:5578:6: ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5651:6: ( ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             loop40:
             do {
                 int alt40=4;
@@ -14142,38 +14316,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt40) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:5579:4: ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5652:4: ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5579:4: ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5580:5: {...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5652:4: ({...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5653:5: {...}? => ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEBlockAndRoleErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:5580:123: ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5581:6: ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5653:123: ( ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5654:6: ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:5584:9: ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5584:10: {...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5657:9: ({...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5657:10: {...}? => (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEBlockAndRoleErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5584:19: (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5584:20: otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5657:19: (otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5657:20: otherlv_3= Any_errors_fatal ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_3=(Token)match(input,Any_errors_fatal,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getAny_errors_fatalKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5588:9: ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5589:10: (lv_any_errors_fatal_4_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5661:9: ( (lv_any_errors_fatal_4_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5662:10: (lv_any_errors_fatal_4_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5589:10: (lv_any_errors_fatal_4_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5590:11: lv_any_errors_fatal_4_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5662:10: (lv_any_errors_fatal_4_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5663:11: lv_any_errors_fatal_4_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getAny_errors_fatalEBooleanPassedParserRuleCall_2_0_1_0());
@@ -14219,38 +14393,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:5613:4: ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5686:4: ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5613:4: ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5614:5: {...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5686:4: ({...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5687:5: {...}? => ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEBlockAndRoleErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:5614:123: ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5615:6: ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5687:123: ( ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5688:6: ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:5618:9: ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5618:10: {...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5691:9: ({...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5691:10: {...}? => (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEBlockAndRoleErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5618:19: (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5618:20: otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5691:19: (otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5691:20: otherlv_5= Ignore_errors ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Ignore_errors,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_errorsKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5622:9: ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5623:10: (lv_ignore_errors_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5695:9: ( (lv_ignore_errors_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5696:10: (lv_ignore_errors_6_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5623:10: (lv_ignore_errors_6_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5624:11: lv_ignore_errors_6_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5696:10: (lv_ignore_errors_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5697:11: lv_ignore_errors_6_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_errorsEBooleanPassedParserRuleCall_2_1_1_0());
@@ -14296,38 +14470,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalAnsibleDslParser.g:5647:4: ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5720:4: ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5647:4: ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5648:5: {...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5720:4: ({...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5721:5: {...}? => ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEBlockAndRoleErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 2)");
             	    }
-            	    // InternalAnsibleDslParser.g:5648:123: ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5649:6: ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5721:123: ( ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5722:6: ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getUnorderedGroup_2(), 2);
             	    					
-            	    // InternalAnsibleDslParser.g:5652:9: ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5652:10: {...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5725:9: ({...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5725:10: {...}? => (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEBlockAndRoleErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5652:19: (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5652:20: otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5725:19: (otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5725:20: otherlv_7= Ignore_unreachable ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_7=(Token)match(input,Ignore_unreachable,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_7, grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_unreachableKeyword_2_2_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5656:9: ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5657:10: (lv_ignore_unreachable_8_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5729:9: ( (lv_ignore_unreachable_8_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5730:10: (lv_ignore_unreachable_8_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5657:10: (lv_ignore_unreachable_8_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5658:11: lv_ignore_unreachable_8_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5730:10: (lv_ignore_unreachable_8_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5731:11: lv_ignore_unreachable_8_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEBlockAndRoleErrorHandlingAccess().getIgnore_unreachableEBooleanPassedParserRuleCall_2_2_1_0());
@@ -14417,7 +14591,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEPlayErrorHandling"
-    // InternalAnsibleDslParser.g:5696:1: entryRuleEPlayErrorHandling returns [EObject current=null] : iv_ruleEPlayErrorHandling= ruleEPlayErrorHandling EOF ;
+    // InternalAnsibleDslParser.g:5769:1: entryRuleEPlayErrorHandling returns [EObject current=null] : iv_ruleEPlayErrorHandling= ruleEPlayErrorHandling EOF ;
     public final EObject entryRuleEPlayErrorHandling() throws RecognitionException {
         EObject current = null;
 
@@ -14425,8 +14599,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:5696:59: (iv_ruleEPlayErrorHandling= ruleEPlayErrorHandling EOF )
-            // InternalAnsibleDslParser.g:5697:2: iv_ruleEPlayErrorHandling= ruleEPlayErrorHandling EOF
+            // InternalAnsibleDslParser.g:5769:59: (iv_ruleEPlayErrorHandling= ruleEPlayErrorHandling EOF )
+            // InternalAnsibleDslParser.g:5770:2: iv_ruleEPlayErrorHandling= ruleEPlayErrorHandling EOF
             {
              newCompositeNode(grammarAccess.getEPlayErrorHandlingRule()); 
             pushFollow(FOLLOW_1);
@@ -14453,7 +14627,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPlayErrorHandling"
-    // InternalAnsibleDslParser.g:5703:1: ruleEPlayErrorHandling returns [EObject current=null] : (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END ) ;
+    // InternalAnsibleDslParser.g:5776:1: ruleEPlayErrorHandling returns [EObject current=null] : (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END ) ;
     public final EObject ruleEPlayErrorHandling() throws RecognitionException {
         EObject current = null;
 
@@ -14477,11 +14651,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:5709:2: ( (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END ) )
-            // InternalAnsibleDslParser.g:5710:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END )
+            // InternalAnsibleDslParser.g:5782:2: ( (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END ) )
+            // InternalAnsibleDslParser.g:5783:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END )
             {
-            // InternalAnsibleDslParser.g:5710:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END )
-            // InternalAnsibleDslParser.g:5711:3: otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END
+            // InternalAnsibleDslParser.g:5783:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END )
+            // InternalAnsibleDslParser.g:5784:3: otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END
             {
             otherlv_0=(Token)match(input,Error_handling,FOLLOW_5); 
 
@@ -14491,19 +14665,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEPlayErrorHandlingAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:5719:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:5720:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5792:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:5793:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:5720:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:5721:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5793:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5794:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:5724:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:5725:6: ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5797:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5798:6: ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:5725:6: ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5798:6: ( ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             loop41:
             do {
                 int alt41=5;
@@ -14525,38 +14699,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt41) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:5726:4: ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5799:4: ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5726:4: ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5727:5: {...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5799:4: ({...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5800:5: {...}? => ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:5727:115: ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5728:6: ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5800:115: ( ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5801:6: ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:5731:9: ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5731:10: {...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5804:9: ({...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5804:10: {...}? => (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5731:19: (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5731:20: otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:5804:19: (otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5804:20: otherlv_3= Max_fail_percentage ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) )
             	    {
             	    otherlv_3=(Token)match(input,Max_fail_percentage,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEPlayErrorHandlingAccess().getMax_fail_percentageKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5735:9: ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:5736:10: (lv_max_fail_percentage_4_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:5808:9: ( (lv_max_fail_percentage_4_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:5809:10: (lv_max_fail_percentage_4_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5736:10: (lv_max_fail_percentage_4_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:5737:11: lv_max_fail_percentage_4_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:5809:10: (lv_max_fail_percentage_4_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:5810:11: lv_max_fail_percentage_4_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPlayErrorHandlingAccess().getMax_fail_percentageENumberPassedParserRuleCall_2_0_1_0());
@@ -14602,38 +14776,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:5760:4: ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5833:4: ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5760:4: ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5761:5: {...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5833:4: ({...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5834:5: {...}? => ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:5761:115: ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5762:6: ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5834:115: ( ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5835:6: ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:5765:9: ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5765:10: {...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5838:9: ({...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5838:10: {...}? => (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5765:19: (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5765:20: otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5838:19: (otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5838:20: otherlv_5= Any_errors_fatal ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Any_errors_fatal,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEPlayErrorHandlingAccess().getAny_errors_fatalKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5769:9: ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5770:10: (lv_any_errors_fatal_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5842:9: ( (lv_any_errors_fatal_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5843:10: (lv_any_errors_fatal_6_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5770:10: (lv_any_errors_fatal_6_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5771:11: lv_any_errors_fatal_6_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5843:10: (lv_any_errors_fatal_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5844:11: lv_any_errors_fatal_6_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPlayErrorHandlingAccess().getAny_errors_fatalEBooleanPassedParserRuleCall_2_1_1_0());
@@ -14679,38 +14853,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalAnsibleDslParser.g:5794:4: ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5867:4: ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5794:4: ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5795:5: {...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5867:4: ({...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5868:5: {...}? => ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 2)");
             	    }
-            	    // InternalAnsibleDslParser.g:5795:115: ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5796:6: ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5868:115: ( ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5869:6: ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 2);
             	    					
-            	    // InternalAnsibleDslParser.g:5799:9: ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5799:10: {...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5872:9: ({...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5872:10: {...}? => (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5799:19: (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5799:20: otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5872:19: (otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5872:20: otherlv_7= Ignore_errors ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_7=(Token)match(input,Ignore_errors,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_7, grammarAccess.getEPlayErrorHandlingAccess().getIgnore_errorsKeyword_2_2_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5803:9: ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5804:10: (lv_ignore_errors_8_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5876:9: ( (lv_ignore_errors_8_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5877:10: (lv_ignore_errors_8_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5804:10: (lv_ignore_errors_8_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5805:11: lv_ignore_errors_8_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5877:10: (lv_ignore_errors_8_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5878:11: lv_ignore_errors_8_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPlayErrorHandlingAccess().getIgnore_errorsEBooleanPassedParserRuleCall_2_2_1_0());
@@ -14756,38 +14930,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalAnsibleDslParser.g:5828:4: ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5901:4: ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5828:4: ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5829:5: {...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5901:4: ({...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5902:5: {...}? => ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 3)");
             	    }
-            	    // InternalAnsibleDslParser.g:5829:115: ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5830:6: ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5902:115: ( ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5903:6: ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEPlayErrorHandlingAccess().getUnorderedGroup_2(), 3);
             	    					
-            	    // InternalAnsibleDslParser.g:5833:9: ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5833:10: {...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5906:9: ({...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:5906:10: {...}? => (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPlayErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5833:19: (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5833:20: otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5906:19: (otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:5906:20: otherlv_9= Ignore_unreachable ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_9=(Token)match(input,Ignore_unreachable,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_9, grammarAccess.getEPlayErrorHandlingAccess().getIgnore_unreachableKeyword_2_3_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5837:9: ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5838:10: (lv_ignore_unreachable_10_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5910:9: ( (lv_ignore_unreachable_10_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:5911:10: (lv_ignore_unreachable_10_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5838:10: (lv_ignore_unreachable_10_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5839:11: lv_ignore_unreachable_10_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:5911:10: (lv_ignore_unreachable_10_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:5912:11: lv_ignore_unreachable_10_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEPlayErrorHandlingAccess().getIgnore_unreachableEBooleanPassedParserRuleCall_2_3_1_0());
@@ -14877,7 +15051,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleETaskHandlerErrorHandling"
-    // InternalAnsibleDslParser.g:5877:1: entryRuleETaskHandlerErrorHandling returns [EObject current=null] : iv_ruleETaskHandlerErrorHandling= ruleETaskHandlerErrorHandling EOF ;
+    // InternalAnsibleDslParser.g:5950:1: entryRuleETaskHandlerErrorHandling returns [EObject current=null] : iv_ruleETaskHandlerErrorHandling= ruleETaskHandlerErrorHandling EOF ;
     public final EObject entryRuleETaskHandlerErrorHandling() throws RecognitionException {
         EObject current = null;
 
@@ -14885,8 +15059,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:5877:66: (iv_ruleETaskHandlerErrorHandling= ruleETaskHandlerErrorHandling EOF )
-            // InternalAnsibleDslParser.g:5878:2: iv_ruleETaskHandlerErrorHandling= ruleETaskHandlerErrorHandling EOF
+            // InternalAnsibleDslParser.g:5950:66: (iv_ruleETaskHandlerErrorHandling= ruleETaskHandlerErrorHandling EOF )
+            // InternalAnsibleDslParser.g:5951:2: iv_ruleETaskHandlerErrorHandling= ruleETaskHandlerErrorHandling EOF
             {
              newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingRule()); 
             pushFollow(FOLLOW_1);
@@ -14913,7 +15087,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleETaskHandlerErrorHandling"
-    // InternalAnsibleDslParser.g:5884:1: ruleETaskHandlerErrorHandling returns [EObject current=null] : (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) ;
+    // InternalAnsibleDslParser.g:5957:1: ruleETaskHandlerErrorHandling returns [EObject current=null] : (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) ;
     public final EObject ruleETaskHandlerErrorHandling() throws RecognitionException {
         EObject current = null;
 
@@ -14940,11 +15114,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:5890:2: ( (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) )
-            // InternalAnsibleDslParser.g:5891:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
+            // InternalAnsibleDslParser.g:5963:2: ( (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END ) )
+            // InternalAnsibleDslParser.g:5964:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
             {
-            // InternalAnsibleDslParser.g:5891:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
-            // InternalAnsibleDslParser.g:5892:3: otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END
+            // InternalAnsibleDslParser.g:5964:2: (otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END )
+            // InternalAnsibleDslParser.g:5965:3: otherlv_0= Error_handling this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_13= RULE_END
             {
             otherlv_0=(Token)match(input,Error_handling,FOLLOW_5); 
 
@@ -14954,19 +15128,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getETaskHandlerErrorHandlingAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:5900:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:5901:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5973:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:5974:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:5901:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:5902:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5974:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:5975:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:5905:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:5906:6: ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5978:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:5979:6: ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:5906:6: ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:5979:6: ( ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             loop42:
             do {
                 int alt42=6;
@@ -14991,38 +15165,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt42) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:5907:4: ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5980:4: ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5907:4: ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5908:5: {...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5980:4: ({...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5981:5: {...}? => ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:5908:122: ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5909:6: ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) )
+            	    // InternalAnsibleDslParser.g:5981:122: ( ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:5982:6: ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:5912:9: ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) )
-            	    // InternalAnsibleDslParser.g:5912:10: {...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) )
+            	    // InternalAnsibleDslParser.g:5985:9: ({...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) )
+            	    // InternalAnsibleDslParser.g:5985:10: {...}? => (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5912:19: (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) )
-            	    // InternalAnsibleDslParser.g:5912:20: otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
+            	    // InternalAnsibleDslParser.g:5985:19: (otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) )
+            	    // InternalAnsibleDslParser.g:5985:20: otherlv_3= Changed_when ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
             	    {
             	    otherlv_3=(Token)match(input,Changed_when,FOLLOW_24); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getETaskHandlerErrorHandlingAccess().getChanged_whenKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5916:9: ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
-            	    // InternalAnsibleDslParser.g:5917:10: (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
+            	    // InternalAnsibleDslParser.g:5989:9: ( (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
+            	    // InternalAnsibleDslParser.g:5990:10: (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
             	    {
-            	    // InternalAnsibleDslParser.g:5917:10: (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
-            	    // InternalAnsibleDslParser.g:5918:11: lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets
+            	    // InternalAnsibleDslParser.g:5990:10: (lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
+            	    // InternalAnsibleDslParser.g:5991:11: lv_changed_when_4_0= ruleEJinjaExpressionEvaluationWithoutBrackets
             	    {
 
             	    											newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingAccess().getChanged_whenEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_0_1_0());
@@ -15068,38 +15242,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:5941:4: ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6014:4: ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5941:4: ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5942:5: {...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6014:4: ({...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6015:5: {...}? => ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:5942:122: ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5943:6: ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) )
+            	    // InternalAnsibleDslParser.g:6015:122: ( ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6016:6: ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:5946:9: ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) )
-            	    // InternalAnsibleDslParser.g:5946:10: {...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) )
+            	    // InternalAnsibleDslParser.g:6019:9: ({...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) ) )
+            	    // InternalAnsibleDslParser.g:6019:10: {...}? => (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5946:19: (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) )
-            	    // InternalAnsibleDslParser.g:5946:20: otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
+            	    // InternalAnsibleDslParser.g:6019:19: (otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) )
+            	    // InternalAnsibleDslParser.g:6019:20: otherlv_5= Failed_when ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
             	    {
             	    otherlv_5=(Token)match(input,Failed_when,FOLLOW_24); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getETaskHandlerErrorHandlingAccess().getFailed_whenKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5950:9: ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
-            	    // InternalAnsibleDslParser.g:5951:10: (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
+            	    // InternalAnsibleDslParser.g:6023:9: ( (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
+            	    // InternalAnsibleDslParser.g:6024:10: (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
             	    {
-            	    // InternalAnsibleDslParser.g:5951:10: (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
-            	    // InternalAnsibleDslParser.g:5952:11: lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets
+            	    // InternalAnsibleDslParser.g:6024:10: (lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
+            	    // InternalAnsibleDslParser.g:6025:11: lv_failed_when_6_0= ruleEJinjaExpressionEvaluationWithoutBrackets
             	    {
 
             	    											newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingAccess().getFailed_whenEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_1_1_0());
@@ -15145,38 +15319,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalAnsibleDslParser.g:5975:4: ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6048:4: ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:5975:4: ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5976:5: {...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6048:4: ({...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6049:5: {...}? => ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 2)");
             	    }
-            	    // InternalAnsibleDslParser.g:5976:122: ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:5977:6: ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6049:122: ( ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6050:6: ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 2);
             	    					
-            	    // InternalAnsibleDslParser.g:5980:9: ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:5980:10: {...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6053:9: ({...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6053:10: {...}? => (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:5980:19: (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:5980:20: otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6053:19: (otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6053:20: otherlv_7= Any_errors_fatal ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_7=(Token)match(input,Any_errors_fatal,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_7, grammarAccess.getETaskHandlerErrorHandlingAccess().getAny_errors_fatalKeyword_2_2_0());
             	    								
-            	    // InternalAnsibleDslParser.g:5984:9: ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:5985:10: (lv_any_errors_fatal_8_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6057:9: ( (lv_any_errors_fatal_8_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6058:10: (lv_any_errors_fatal_8_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:5985:10: (lv_any_errors_fatal_8_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:5986:11: lv_any_errors_fatal_8_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:6058:10: (lv_any_errors_fatal_8_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6059:11: lv_any_errors_fatal_8_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingAccess().getAny_errors_fatalEBooleanPassedParserRuleCall_2_2_1_0());
@@ -15222,38 +15396,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalAnsibleDslParser.g:6009:4: ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6082:4: ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6009:4: ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6010:5: {...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6082:4: ({...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6083:5: {...}? => ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 3)");
             	    }
-            	    // InternalAnsibleDslParser.g:6010:122: ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6011:6: ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6083:122: ( ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6084:6: ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 3);
             	    					
-            	    // InternalAnsibleDslParser.g:6014:9: ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:6014:10: {...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6087:9: ({...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6087:10: {...}? => (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6014:19: (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:6014:20: otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6087:19: (otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6087:20: otherlv_9= Ignore_errors ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_9=(Token)match(input,Ignore_errors,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_9, grammarAccess.getETaskHandlerErrorHandlingAccess().getIgnore_errorsKeyword_2_3_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6018:9: ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:6019:10: (lv_ignore_errors_10_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6091:9: ( (lv_ignore_errors_10_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6092:10: (lv_ignore_errors_10_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:6019:10: (lv_ignore_errors_10_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:6020:11: lv_ignore_errors_10_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:6092:10: (lv_ignore_errors_10_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6093:11: lv_ignore_errors_10_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingAccess().getIgnore_errorsEBooleanPassedParserRuleCall_2_3_1_0());
@@ -15299,38 +15473,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalAnsibleDslParser.g:6043:4: ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6116:4: ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6043:4: ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6044:5: {...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6116:4: ({...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6117:5: {...}? => ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "getUnorderedGroupHelper().canSelect(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 4)");
             	    }
-            	    // InternalAnsibleDslParser.g:6044:122: ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6045:6: ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6117:122: ( ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6118:6: ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getETaskHandlerErrorHandlingAccess().getUnorderedGroup_2(), 4);
             	    					
-            	    // InternalAnsibleDslParser.g:6048:9: ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:6048:10: {...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6121:9: ({...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6121:10: {...}? => (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleETaskHandlerErrorHandling", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6048:19: (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:6048:20: otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6121:19: (otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6121:20: otherlv_11= Ignore_unreachable ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_11=(Token)match(input,Ignore_unreachable,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_11, grammarAccess.getETaskHandlerErrorHandlingAccess().getIgnore_unreachableKeyword_2_4_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6052:9: ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:6053:10: (lv_ignore_unreachable_12_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6125:9: ( (lv_ignore_unreachable_12_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6126:10: (lv_ignore_unreachable_12_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:6053:10: (lv_ignore_unreachable_12_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:6054:11: lv_ignore_unreachable_12_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:6126:10: (lv_ignore_unreachable_12_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6127:11: lv_ignore_unreachable_12_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingAccess().getIgnore_unreachableEBooleanPassedParserRuleCall_2_4_1_0());
@@ -15420,7 +15594,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEFactsSettings"
-    // InternalAnsibleDslParser.g:6092:1: entryRuleEFactsSettings returns [EObject current=null] : iv_ruleEFactsSettings= ruleEFactsSettings EOF ;
+    // InternalAnsibleDslParser.g:6165:1: entryRuleEFactsSettings returns [EObject current=null] : iv_ruleEFactsSettings= ruleEFactsSettings EOF ;
     public final EObject entryRuleEFactsSettings() throws RecognitionException {
         EObject current = null;
 
@@ -15428,8 +15602,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6092:55: (iv_ruleEFactsSettings= ruleEFactsSettings EOF )
-            // InternalAnsibleDslParser.g:6093:2: iv_ruleEFactsSettings= ruleEFactsSettings EOF
+            // InternalAnsibleDslParser.g:6165:55: (iv_ruleEFactsSettings= ruleEFactsSettings EOF )
+            // InternalAnsibleDslParser.g:6166:2: iv_ruleEFactsSettings= ruleEFactsSettings EOF
             {
              newCompositeNode(grammarAccess.getEFactsSettingsRule()); 
             pushFollow(FOLLOW_1);
@@ -15456,7 +15630,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEFactsSettings"
-    // InternalAnsibleDslParser.g:6099:1: ruleEFactsSettings returns [EObject current=null] : (otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END ) ;
+    // InternalAnsibleDslParser.g:6172:1: ruleEFactsSettings returns [EObject current=null] : (otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END ) ;
     public final EObject ruleEFactsSettings() throws RecognitionException {
         EObject current = null;
 
@@ -15480,11 +15654,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6105:2: ( (otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END ) )
-            // InternalAnsibleDslParser.g:6106:2: (otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END )
+            // InternalAnsibleDslParser.g:6178:2: ( (otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END ) )
+            // InternalAnsibleDslParser.g:6179:2: (otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END )
             {
-            // InternalAnsibleDslParser.g:6106:2: (otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END )
-            // InternalAnsibleDslParser.g:6107:3: otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END
+            // InternalAnsibleDslParser.g:6179:2: (otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END )
+            // InternalAnsibleDslParser.g:6180:3: otherlv_0= Facts_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) ) this_END_11= RULE_END
             {
             otherlv_0=(Token)match(input,Facts_settings,FOLLOW_5); 
 
@@ -15494,19 +15668,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEFactsSettingsAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:6115:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:6116:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:6188:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:6189:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:6116:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:6117:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:6189:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:6190:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:6120:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:6121:6: ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:6193:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:6194:6: ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:6121:6: ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:6194:6: ( ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) )*
             loop43:
             do {
                 int alt43=5;
@@ -15528,38 +15702,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt43) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:6122:4: ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6195:4: ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6122:4: ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6123:5: {...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6195:4: ({...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6196:5: {...}? => ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEFactsSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:6123:111: ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6124:6: ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6196:111: ( ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6197:6: ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:6127:9: ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:6127:10: {...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6200:9: ({...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6200:10: {...}? => (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEFactsSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6127:19: (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:6127:20: otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6200:19: (otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6200:20: otherlv_3= Gather_facts ( (lv_gather_facts_4_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_3=(Token)match(input,Gather_facts,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEFactsSettingsAccess().getGather_factsKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6131:9: ( (lv_gather_facts_4_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:6132:10: (lv_gather_facts_4_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6204:9: ( (lv_gather_facts_4_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6205:10: (lv_gather_facts_4_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:6132:10: (lv_gather_facts_4_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:6133:11: lv_gather_facts_4_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:6205:10: (lv_gather_facts_4_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6206:11: lv_gather_facts_4_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEFactsSettingsAccess().getGather_factsEBooleanPassedParserRuleCall_2_0_1_0());
@@ -15605,38 +15779,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:6156:4: ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6229:4: ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6156:4: ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6157:5: {...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6229:4: ({...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6230:5: {...}? => ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEFactsSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:6157:111: ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6158:6: ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6230:111: ( ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6231:6: ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:6161:9: ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:6161:10: {...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6234:9: ({...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6234:10: {...}? => (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEFactsSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6161:19: (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) )
-            	    // InternalAnsibleDslParser.g:6161:20: otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) )
+            	    // InternalAnsibleDslParser.g:6234:19: (otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6234:20: otherlv_5= Gather_subset ( (lv_gather_subset_6_0= ruleEListPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Gather_subset,FOLLOW_15); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEFactsSettingsAccess().getGather_subsetKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6165:9: ( (lv_gather_subset_6_0= ruleEListPassed ) )
-            	    // InternalAnsibleDslParser.g:6166:10: (lv_gather_subset_6_0= ruleEListPassed )
+            	    // InternalAnsibleDslParser.g:6238:9: ( (lv_gather_subset_6_0= ruleEListPassed ) )
+            	    // InternalAnsibleDslParser.g:6239:10: (lv_gather_subset_6_0= ruleEListPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:6166:10: (lv_gather_subset_6_0= ruleEListPassed )
-            	    // InternalAnsibleDslParser.g:6167:11: lv_gather_subset_6_0= ruleEListPassed
+            	    // InternalAnsibleDslParser.g:6239:10: (lv_gather_subset_6_0= ruleEListPassed )
+            	    // InternalAnsibleDslParser.g:6240:11: lv_gather_subset_6_0= ruleEListPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEFactsSettingsAccess().getGather_subsetEListPassedParserRuleCall_2_1_1_0());
@@ -15682,38 +15856,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalAnsibleDslParser.g:6190:4: ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6263:4: ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6190:4: ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6191:5: {...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6263:4: ({...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6264:5: {...}? => ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEFactsSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 2)");
             	    }
-            	    // InternalAnsibleDslParser.g:6191:111: ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6192:6: ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6264:111: ( ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6265:6: ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 2);
             	    					
-            	    // InternalAnsibleDslParser.g:6195:9: ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:6195:10: {...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6268:9: ({...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6268:10: {...}? => (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEFactsSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6195:19: (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:6195:20: otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:6268:19: (otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6268:20: otherlv_7= Gather_timeout ( (lv_gather_timeout_8_0= ruleENumberPassed ) )
             	    {
             	    otherlv_7=(Token)match(input,Gather_timeout,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_7, grammarAccess.getEFactsSettingsAccess().getGather_timeoutKeyword_2_2_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6199:9: ( (lv_gather_timeout_8_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:6200:10: (lv_gather_timeout_8_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:6272:9: ( (lv_gather_timeout_8_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:6273:10: (lv_gather_timeout_8_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:6200:10: (lv_gather_timeout_8_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:6201:11: lv_gather_timeout_8_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:6273:10: (lv_gather_timeout_8_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:6274:11: lv_gather_timeout_8_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEFactsSettingsAccess().getGather_timeoutENumberPassedParserRuleCall_2_2_1_0());
@@ -15759,38 +15933,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalAnsibleDslParser.g:6224:4: ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6297:4: ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6224:4: ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6225:5: {...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6297:4: ({...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6298:5: {...}? => ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleEFactsSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 3)");
             	    }
-            	    // InternalAnsibleDslParser.g:6225:111: ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6226:6: ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:6298:111: ( ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6299:6: ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEFactsSettingsAccess().getUnorderedGroup_2(), 3);
             	    					
-            	    // InternalAnsibleDslParser.g:6229:9: ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:6229:10: {...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:6302:9: ({...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:6302:10: {...}? => (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEFactsSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6229:19: (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:6229:20: otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:6302:19: (otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:6302:20: otherlv_9= Fact_path ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_9=(Token)match(input,Fact_path,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_9, grammarAccess.getEFactsSettingsAccess().getFact_pathKeyword_2_3_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6233:9: ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:6234:10: (lv_fact_path_10_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:6306:9: ( (lv_fact_path_10_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:6307:10: (lv_fact_path_10_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:6234:10: (lv_fact_path_10_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:6235:11: lv_fact_path_10_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:6307:10: (lv_fact_path_10_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:6308:11: lv_fact_path_10_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEFactsSettingsAccess().getFact_pathEJinjaExpressionAndStringParserRuleCall_2_3_1_0());
@@ -15880,7 +16054,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEDelegation"
-    // InternalAnsibleDslParser.g:6273:1: entryRuleEDelegation returns [EObject current=null] : iv_ruleEDelegation= ruleEDelegation EOF ;
+    // InternalAnsibleDslParser.g:6346:1: entryRuleEDelegation returns [EObject current=null] : iv_ruleEDelegation= ruleEDelegation EOF ;
     public final EObject entryRuleEDelegation() throws RecognitionException {
         EObject current = null;
 
@@ -15888,8 +16062,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6273:52: (iv_ruleEDelegation= ruleEDelegation EOF )
-            // InternalAnsibleDslParser.g:6274:2: iv_ruleEDelegation= ruleEDelegation EOF
+            // InternalAnsibleDslParser.g:6346:52: (iv_ruleEDelegation= ruleEDelegation EOF )
+            // InternalAnsibleDslParser.g:6347:2: iv_ruleEDelegation= ruleEDelegation EOF
             {
              newCompositeNode(grammarAccess.getEDelegationRule()); 
             pushFollow(FOLLOW_1);
@@ -15916,7 +16090,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEDelegation"
-    // InternalAnsibleDslParser.g:6280:1: ruleEDelegation returns [EObject current=null] : (otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) ;
+    // InternalAnsibleDslParser.g:6353:1: ruleEDelegation returns [EObject current=null] : (otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) ;
     public final EObject ruleEDelegation() throws RecognitionException {
         EObject current = null;
 
@@ -15934,11 +16108,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6286:2: ( (otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) )
-            // InternalAnsibleDslParser.g:6287:2: (otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
+            // InternalAnsibleDslParser.g:6359:2: ( (otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) )
+            // InternalAnsibleDslParser.g:6360:2: (otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
             {
-            // InternalAnsibleDslParser.g:6287:2: (otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
-            // InternalAnsibleDslParser.g:6288:3: otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END
+            // InternalAnsibleDslParser.g:6360:2: (otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
+            // InternalAnsibleDslParser.g:6361:3: otherlv_0= Delegation this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END
             {
             otherlv_0=(Token)match(input,Delegation,FOLLOW_5); 
 
@@ -15948,19 +16122,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEDelegationAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:6296:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:6297:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:6369:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:6370:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:6297:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:6298:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:6370:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:6371:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEDelegationAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:6301:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:6302:6: ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:6374:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:6375:6: ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:6302:6: ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:6375:6: ( ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) ) )*
             loop44:
             do {
                 int alt44=3;
@@ -15976,38 +16150,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt44) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:6303:4: ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6376:4: ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6303:4: ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6304:5: {...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6376:4: ({...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6377:5: {...}? => ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEDelegationAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEDelegation", "getUnorderedGroupHelper().canSelect(grammarAccess.getEDelegationAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:6304:108: ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6305:6: ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:6377:108: ( ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6378:6: ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEDelegationAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:6308:9: ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) )
-            	    // InternalAnsibleDslParser.g:6308:10: {...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:6381:9: ({...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) ) )
+            	    // InternalAnsibleDslParser.g:6381:10: {...}? => (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEDelegation", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6308:19: (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) )
-            	    // InternalAnsibleDslParser.g:6308:20: otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:6381:19: (otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) ) )
+            	    // InternalAnsibleDslParser.g:6381:20: otherlv_3= Delegate_to ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) )
             	    {
             	    otherlv_3=(Token)match(input,Delegate_to,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEDelegationAccess().getDelegate_toKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6312:9: ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:6313:10: (lv_delegate_to_4_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:6385:9: ( (lv_delegate_to_4_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:6386:10: (lv_delegate_to_4_0= ruleEJinjaExpressionAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:6313:10: (lv_delegate_to_4_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:6314:11: lv_delegate_to_4_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:6386:10: (lv_delegate_to_4_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:6387:11: lv_delegate_to_4_0= ruleEJinjaExpressionAndString
             	    {
 
             	    											newCompositeNode(grammarAccess.getEDelegationAccess().getDelegate_toEJinjaExpressionAndStringParserRuleCall_2_0_1_0());
@@ -16053,38 +16227,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:6337:4: ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6410:4: ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6337:4: ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6338:5: {...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6410:4: ({...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6411:5: {...}? => ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEDelegationAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEDelegation", "getUnorderedGroupHelper().canSelect(grammarAccess.getEDelegationAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:6338:108: ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6339:6: ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6411:108: ( ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6412:6: ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEDelegationAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:6342:9: ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:6342:10: {...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6415:9: ({...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6415:10: {...}? => (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEDelegation", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6342:19: (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) )
-            	    // InternalAnsibleDslParser.g:6342:20: otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6415:19: (otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6415:20: otherlv_5= Delegate_facts ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Delegate_facts,FOLLOW_14); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEDelegationAccess().getDelegate_factsKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6346:9: ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) )
-            	    // InternalAnsibleDslParser.g:6347:10: (lv_delegate_facts_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6419:9: ( (lv_delegate_facts_6_0= ruleEBooleanPassed ) )
+            	    // InternalAnsibleDslParser.g:6420:10: (lv_delegate_facts_6_0= ruleEBooleanPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:6347:10: (lv_delegate_facts_6_0= ruleEBooleanPassed )
-            	    // InternalAnsibleDslParser.g:6348:11: lv_delegate_facts_6_0= ruleEBooleanPassed
+            	    // InternalAnsibleDslParser.g:6420:10: (lv_delegate_facts_6_0= ruleEBooleanPassed )
+            	    // InternalAnsibleDslParser.g:6421:11: lv_delegate_facts_6_0= ruleEBooleanPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEDelegationAccess().getDelegate_factsEBooleanPassedParserRuleCall_2_1_1_0());
@@ -16174,7 +16348,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEAsynchronousSettings"
-    // InternalAnsibleDslParser.g:6386:1: entryRuleEAsynchronousSettings returns [EObject current=null] : iv_ruleEAsynchronousSettings= ruleEAsynchronousSettings EOF ;
+    // InternalAnsibleDslParser.g:6459:1: entryRuleEAsynchronousSettings returns [EObject current=null] : iv_ruleEAsynchronousSettings= ruleEAsynchronousSettings EOF ;
     public final EObject entryRuleEAsynchronousSettings() throws RecognitionException {
         EObject current = null;
 
@@ -16182,8 +16356,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6386:62: (iv_ruleEAsynchronousSettings= ruleEAsynchronousSettings EOF )
-            // InternalAnsibleDslParser.g:6387:2: iv_ruleEAsynchronousSettings= ruleEAsynchronousSettings EOF
+            // InternalAnsibleDslParser.g:6459:62: (iv_ruleEAsynchronousSettings= ruleEAsynchronousSettings EOF )
+            // InternalAnsibleDslParser.g:6460:2: iv_ruleEAsynchronousSettings= ruleEAsynchronousSettings EOF
             {
              newCompositeNode(grammarAccess.getEAsynchronousSettingsRule()); 
             pushFollow(FOLLOW_1);
@@ -16210,7 +16384,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEAsynchronousSettings"
-    // InternalAnsibleDslParser.g:6393:1: ruleEAsynchronousSettings returns [EObject current=null] : (otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) ;
+    // InternalAnsibleDslParser.g:6466:1: ruleEAsynchronousSettings returns [EObject current=null] : (otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) ;
     public final EObject ruleEAsynchronousSettings() throws RecognitionException {
         EObject current = null;
 
@@ -16228,11 +16402,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6399:2: ( (otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) )
-            // InternalAnsibleDslParser.g:6400:2: (otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
+            // InternalAnsibleDslParser.g:6472:2: ( (otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END ) )
+            // InternalAnsibleDslParser.g:6473:2: (otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
             {
-            // InternalAnsibleDslParser.g:6400:2: (otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
-            // InternalAnsibleDslParser.g:6401:3: otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END
+            // InternalAnsibleDslParser.g:6473:2: (otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END )
+            // InternalAnsibleDslParser.g:6474:3: otherlv_0= Asynchronous_settings this_BEGIN_1= RULE_BEGIN ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) ) this_END_7= RULE_END
             {
             otherlv_0=(Token)match(input,Asynchronous_settings,FOLLOW_5); 
 
@@ -16242,19 +16416,19 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEAsynchronousSettingsAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:6409:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) )
-            // InternalAnsibleDslParser.g:6410:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:6482:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) ) )
+            // InternalAnsibleDslParser.g:6483:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) )
             {
-            // InternalAnsibleDslParser.g:6410:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) )
-            // InternalAnsibleDslParser.g:6411:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:6483:4: ( ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* ) )
+            // InternalAnsibleDslParser.g:6484:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEAsynchronousSettingsAccess().getUnorderedGroup_2());
             				
-            // InternalAnsibleDslParser.g:6414:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* )
-            // InternalAnsibleDslParser.g:6415:6: ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:6487:5: ( ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )* )
+            // InternalAnsibleDslParser.g:6488:6: ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )*
             {
-            // InternalAnsibleDslParser.g:6415:6: ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )*
+            // InternalAnsibleDslParser.g:6488:6: ( ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) ) )*
             loop45:
             do {
                 int alt45=3;
@@ -16270,38 +16444,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt45) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:6416:4: ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6489:4: ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6416:4: ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6417:5: {...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6489:4: ({...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6490:5: {...}? => ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEAsynchronousSettingsAccess().getUnorderedGroup_2(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEAsynchronousSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEAsynchronousSettingsAccess().getUnorderedGroup_2(), 0)");
             	    }
-            	    // InternalAnsibleDslParser.g:6417:118: ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6418:6: ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6490:118: ( ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6491:6: ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEAsynchronousSettingsAccess().getUnorderedGroup_2(), 0);
             	    					
-            	    // InternalAnsibleDslParser.g:6421:9: ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:6421:10: {...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6494:9: ({...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6494:10: {...}? => (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEAsynchronousSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6421:19: (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:6421:20: otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:6494:19: (otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6494:20: otherlv_3= Async ( (lv_async_4_0= ruleENumberPassed ) )
             	    {
             	    otherlv_3=(Token)match(input,Async,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_3, grammarAccess.getEAsynchronousSettingsAccess().getAsyncKeyword_2_0_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6425:9: ( (lv_async_4_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:6426:10: (lv_async_4_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:6498:9: ( (lv_async_4_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:6499:10: (lv_async_4_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:6426:10: (lv_async_4_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:6427:11: lv_async_4_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:6499:10: (lv_async_4_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:6500:11: lv_async_4_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEAsynchronousSettingsAccess().getAsyncENumberPassedParserRuleCall_2_0_1_0());
@@ -16347,38 +16521,38 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalAnsibleDslParser.g:6450:4: ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6523:4: ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) )
             	    {
-            	    // InternalAnsibleDslParser.g:6450:4: ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6451:5: {...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6523:4: ({...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6524:5: {...}? => ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEAsynchronousSettingsAccess().getUnorderedGroup_2(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEAsynchronousSettings", "getUnorderedGroupHelper().canSelect(grammarAccess.getEAsynchronousSettingsAccess().getUnorderedGroup_2(), 1)");
             	    }
-            	    // InternalAnsibleDslParser.g:6451:118: ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) )
-            	    // InternalAnsibleDslParser.g:6452:6: ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6524:118: ( ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) ) )
+            	    // InternalAnsibleDslParser.g:6525:6: ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEAsynchronousSettingsAccess().getUnorderedGroup_2(), 1);
             	    					
-            	    // InternalAnsibleDslParser.g:6455:9: ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) )
-            	    // InternalAnsibleDslParser.g:6455:10: {...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6528:9: ({...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) ) )
+            	    // InternalAnsibleDslParser.g:6528:10: {...}? => (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEAsynchronousSettings", "true");
             	    }
-            	    // InternalAnsibleDslParser.g:6455:19: (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) )
-            	    // InternalAnsibleDslParser.g:6455:20: otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:6528:19: (otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) ) )
+            	    // InternalAnsibleDslParser.g:6528:20: otherlv_5= Poll ( (lv_poll_6_0= ruleENumberPassed ) )
             	    {
             	    otherlv_5=(Token)match(input,Poll,FOLLOW_47); 
 
             	    									newLeafNode(otherlv_5, grammarAccess.getEAsynchronousSettingsAccess().getPollKeyword_2_1_0());
             	    								
-            	    // InternalAnsibleDslParser.g:6459:9: ( (lv_poll_6_0= ruleENumberPassed ) )
-            	    // InternalAnsibleDslParser.g:6460:10: (lv_poll_6_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:6532:9: ( (lv_poll_6_0= ruleENumberPassed ) )
+            	    // InternalAnsibleDslParser.g:6533:10: (lv_poll_6_0= ruleENumberPassed )
             	    {
-            	    // InternalAnsibleDslParser.g:6460:10: (lv_poll_6_0= ruleENumberPassed )
-            	    // InternalAnsibleDslParser.g:6461:11: lv_poll_6_0= ruleENumberPassed
+            	    // InternalAnsibleDslParser.g:6533:10: (lv_poll_6_0= ruleENumberPassed )
+            	    // InternalAnsibleDslParser.g:6534:11: lv_poll_6_0= ruleENumberPassed
             	    {
 
             	    											newCompositeNode(grammarAccess.getEAsynchronousSettingsAccess().getPollENumberPassedParserRuleCall_2_1_1_0());
@@ -16468,7 +16642,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleENotifiable"
-    // InternalAnsibleDslParser.g:6499:1: entryRuleENotifiable returns [EObject current=null] : iv_ruleENotifiable= ruleENotifiable EOF ;
+    // InternalAnsibleDslParser.g:6572:1: entryRuleENotifiable returns [EObject current=null] : iv_ruleENotifiable= ruleENotifiable EOF ;
     public final EObject entryRuleENotifiable() throws RecognitionException {
         EObject current = null;
 
@@ -16476,8 +16650,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6499:52: (iv_ruleENotifiable= ruleENotifiable EOF )
-            // InternalAnsibleDslParser.g:6500:2: iv_ruleENotifiable= ruleENotifiable EOF
+            // InternalAnsibleDslParser.g:6572:52: (iv_ruleENotifiable= ruleENotifiable EOF )
+            // InternalAnsibleDslParser.g:6573:2: iv_ruleENotifiable= ruleENotifiable EOF
             {
              newCompositeNode(grammarAccess.getENotifiableRule()); 
             pushFollow(FOLLOW_1);
@@ -16504,7 +16678,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleENotifiable"
-    // InternalAnsibleDslParser.g:6506:1: ruleENotifiable returns [EObject current=null] : (this_ENotifiedHandler_0= ruleENotifiedHandler | this_ENotifiedTopic_1= ruleENotifiedTopic ) ;
+    // InternalAnsibleDslParser.g:6579:1: ruleENotifiable returns [EObject current=null] : (this_ENotifiedHandler_0= ruleENotifiedHandler | this_ENotifiedTopic_1= ruleENotifiedTopic ) ;
     public final EObject ruleENotifiable() throws RecognitionException {
         EObject current = null;
 
@@ -16517,10 +16691,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6512:2: ( (this_ENotifiedHandler_0= ruleENotifiedHandler | this_ENotifiedTopic_1= ruleENotifiedTopic ) )
-            // InternalAnsibleDslParser.g:6513:2: (this_ENotifiedHandler_0= ruleENotifiedHandler | this_ENotifiedTopic_1= ruleENotifiedTopic )
+            // InternalAnsibleDslParser.g:6585:2: ( (this_ENotifiedHandler_0= ruleENotifiedHandler | this_ENotifiedTopic_1= ruleENotifiedTopic ) )
+            // InternalAnsibleDslParser.g:6586:2: (this_ENotifiedHandler_0= ruleENotifiedHandler | this_ENotifiedTopic_1= ruleENotifiedTopic )
             {
-            // InternalAnsibleDslParser.g:6513:2: (this_ENotifiedHandler_0= ruleENotifiedHandler | this_ENotifiedTopic_1= ruleENotifiedTopic )
+            // InternalAnsibleDslParser.g:6586:2: (this_ENotifiedHandler_0= ruleENotifiedHandler | this_ENotifiedTopic_1= ruleENotifiedTopic )
             int alt46=2;
             int LA46_0 = input.LA(1);
 
@@ -16538,7 +16712,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt46) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:6514:3: this_ENotifiedHandler_0= ruleENotifiedHandler
+                    // InternalAnsibleDslParser.g:6587:3: this_ENotifiedHandler_0= ruleENotifiedHandler
                     {
 
                     			newCompositeNode(grammarAccess.getENotifiableAccess().getENotifiedHandlerParserRuleCall_0());
@@ -16556,7 +16730,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:6523:3: this_ENotifiedTopic_1= ruleENotifiedTopic
+                    // InternalAnsibleDslParser.g:6596:3: this_ENotifiedTopic_1= ruleENotifiedTopic
                     {
 
                     			newCompositeNode(grammarAccess.getENotifiableAccess().getENotifiedTopicParserRuleCall_1());
@@ -16596,7 +16770,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleENotifiedHandler"
-    // InternalAnsibleDslParser.g:6535:1: entryRuleENotifiedHandler returns [EObject current=null] : iv_ruleENotifiedHandler= ruleENotifiedHandler EOF ;
+    // InternalAnsibleDslParser.g:6608:1: entryRuleENotifiedHandler returns [EObject current=null] : iv_ruleENotifiedHandler= ruleENotifiedHandler EOF ;
     public final EObject entryRuleENotifiedHandler() throws RecognitionException {
         EObject current = null;
 
@@ -16604,8 +16778,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6535:57: (iv_ruleENotifiedHandler= ruleENotifiedHandler EOF )
-            // InternalAnsibleDslParser.g:6536:2: iv_ruleENotifiedHandler= ruleENotifiedHandler EOF
+            // InternalAnsibleDslParser.g:6608:57: (iv_ruleENotifiedHandler= ruleENotifiedHandler EOF )
+            // InternalAnsibleDslParser.g:6609:2: iv_ruleENotifiedHandler= ruleENotifiedHandler EOF
             {
              newCompositeNode(grammarAccess.getENotifiedHandlerRule()); 
             pushFollow(FOLLOW_1);
@@ -16632,7 +16806,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleENotifiedHandler"
-    // InternalAnsibleDslParser.g:6542:1: ruleENotifiedHandler returns [EObject current=null] : ( (otherlv_0= RULE_STRING ) ) ;
+    // InternalAnsibleDslParser.g:6615:1: ruleENotifiedHandler returns [EObject current=null] : ( (otherlv_0= RULE_STRING ) ) ;
     public final EObject ruleENotifiedHandler() throws RecognitionException {
         EObject current = null;
 
@@ -16642,14 +16816,14 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6548:2: ( ( (otherlv_0= RULE_STRING ) ) )
-            // InternalAnsibleDslParser.g:6549:2: ( (otherlv_0= RULE_STRING ) )
+            // InternalAnsibleDslParser.g:6621:2: ( ( (otherlv_0= RULE_STRING ) ) )
+            // InternalAnsibleDslParser.g:6622:2: ( (otherlv_0= RULE_STRING ) )
             {
-            // InternalAnsibleDslParser.g:6549:2: ( (otherlv_0= RULE_STRING ) )
-            // InternalAnsibleDslParser.g:6550:3: (otherlv_0= RULE_STRING )
+            // InternalAnsibleDslParser.g:6622:2: ( (otherlv_0= RULE_STRING ) )
+            // InternalAnsibleDslParser.g:6623:3: (otherlv_0= RULE_STRING )
             {
-            // InternalAnsibleDslParser.g:6550:3: (otherlv_0= RULE_STRING )
-            // InternalAnsibleDslParser.g:6551:4: otherlv_0= RULE_STRING
+            // InternalAnsibleDslParser.g:6623:3: (otherlv_0= RULE_STRING )
+            // InternalAnsibleDslParser.g:6624:4: otherlv_0= RULE_STRING
             {
 
             				if (current==null) {
@@ -16686,7 +16860,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleENotifiedTopic"
-    // InternalAnsibleDslParser.g:6565:1: entryRuleENotifiedTopic returns [EObject current=null] : iv_ruleENotifiedTopic= ruleENotifiedTopic EOF ;
+    // InternalAnsibleDslParser.g:6638:1: entryRuleENotifiedTopic returns [EObject current=null] : iv_ruleENotifiedTopic= ruleENotifiedTopic EOF ;
     public final EObject entryRuleENotifiedTopic() throws RecognitionException {
         EObject current = null;
 
@@ -16694,8 +16868,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6565:55: (iv_ruleENotifiedTopic= ruleENotifiedTopic EOF )
-            // InternalAnsibleDslParser.g:6566:2: iv_ruleENotifiedTopic= ruleENotifiedTopic EOF
+            // InternalAnsibleDslParser.g:6638:55: (iv_ruleENotifiedTopic= ruleENotifiedTopic EOF )
+            // InternalAnsibleDslParser.g:6639:2: iv_ruleENotifiedTopic= ruleENotifiedTopic EOF
             {
              newCompositeNode(grammarAccess.getENotifiedTopicRule()); 
             pushFollow(FOLLOW_1);
@@ -16722,7 +16896,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleENotifiedTopic"
-    // InternalAnsibleDslParser.g:6572:1: ruleENotifiedTopic returns [EObject current=null] : (otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) ) ) ;
+    // InternalAnsibleDslParser.g:6645:1: ruleENotifiedTopic returns [EObject current=null] : (otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleENotifiedTopic() throws RecognitionException {
         EObject current = null;
 
@@ -16733,21 +16907,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6578:2: ( (otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) ) ) )
-            // InternalAnsibleDslParser.g:6579:2: (otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) ) )
+            // InternalAnsibleDslParser.g:6651:2: ( (otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) ) ) )
+            // InternalAnsibleDslParser.g:6652:2: (otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) ) )
             {
-            // InternalAnsibleDslParser.g:6579:2: (otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) ) )
-            // InternalAnsibleDslParser.g:6580:3: otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) )
+            // InternalAnsibleDslParser.g:6652:2: (otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) ) )
+            // InternalAnsibleDslParser.g:6653:3: otherlv_0= Topic ( (lv_name_1_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,Topic,FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getENotifiedTopicAccess().getTopicKeyword_0());
             		
-            // InternalAnsibleDslParser.g:6584:3: ( (lv_name_1_0= RULE_STRING ) )
-            // InternalAnsibleDslParser.g:6585:4: (lv_name_1_0= RULE_STRING )
+            // InternalAnsibleDslParser.g:6657:3: ( (lv_name_1_0= RULE_STRING ) )
+            // InternalAnsibleDslParser.g:6658:4: (lv_name_1_0= RULE_STRING )
             {
-            // InternalAnsibleDslParser.g:6585:4: (lv_name_1_0= RULE_STRING )
-            // InternalAnsibleDslParser.g:6586:5: lv_name_1_0= RULE_STRING
+            // InternalAnsibleDslParser.g:6658:4: (lv_name_1_0= RULE_STRING )
+            // InternalAnsibleDslParser.g:6659:5: lv_name_1_0= RULE_STRING
             {
             lv_name_1_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -16792,7 +16966,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEJinjaExpressionOrString"
-    // InternalAnsibleDslParser.g:6606:1: entryRuleEJinjaExpressionOrString returns [EObject current=null] : iv_ruleEJinjaExpressionOrString= ruleEJinjaExpressionOrString EOF ;
+    // InternalAnsibleDslParser.g:6679:1: entryRuleEJinjaExpressionOrString returns [EObject current=null] : iv_ruleEJinjaExpressionOrString= ruleEJinjaExpressionOrString EOF ;
     public final EObject entryRuleEJinjaExpressionOrString() throws RecognitionException {
         EObject current = null;
 
@@ -16800,8 +16974,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6606:65: (iv_ruleEJinjaExpressionOrString= ruleEJinjaExpressionOrString EOF )
-            // InternalAnsibleDslParser.g:6607:2: iv_ruleEJinjaExpressionOrString= ruleEJinjaExpressionOrString EOF
+            // InternalAnsibleDslParser.g:6679:65: (iv_ruleEJinjaExpressionOrString= ruleEJinjaExpressionOrString EOF )
+            // InternalAnsibleDslParser.g:6680:2: iv_ruleEJinjaExpressionOrString= ruleEJinjaExpressionOrString EOF
             {
              newCompositeNode(grammarAccess.getEJinjaExpressionOrStringRule()); 
             pushFollow(FOLLOW_1);
@@ -16828,7 +17002,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEJinjaExpressionOrString"
-    // InternalAnsibleDslParser.g:6613:1: ruleEJinjaExpressionOrString returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) ) ;
+    // InternalAnsibleDslParser.g:6686:1: ruleEJinjaExpressionOrString returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) ) ;
     public final EObject ruleEJinjaExpressionOrString() throws RecognitionException {
         EObject current = null;
 
@@ -16842,10 +17016,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6619:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) ) )
-            // InternalAnsibleDslParser.g:6620:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) )
+            // InternalAnsibleDslParser.g:6692:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) ) )
+            // InternalAnsibleDslParser.g:6693:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) )
             {
-            // InternalAnsibleDslParser.g:6620:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) )
+            // InternalAnsibleDslParser.g:6693:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) )
             int alt47=3;
             switch ( input.LA(1) ) {
             case LeftCurlyBracketLeftCurlyBracket:
@@ -16872,7 +17046,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             switch (alt47) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:6621:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
+                    // InternalAnsibleDslParser.g:6694:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
                     {
 
                     			newCompositeNode(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
@@ -16890,7 +17064,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:6630:3: this_EJinjaStatement_1= ruleEJinjaStatement
+                    // InternalAnsibleDslParser.g:6703:3: this_EJinjaStatement_1= ruleEJinjaStatement
                     {
 
                     			newCompositeNode(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaStatementParserRuleCall_1());
@@ -16908,13 +17082,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalAnsibleDslParser.g:6639:3: ( (lv_string_2_0= RULE_STRING ) )
+                    // InternalAnsibleDslParser.g:6712:3: ( (lv_string_2_0= RULE_STRING ) )
                     {
-                    // InternalAnsibleDslParser.g:6639:3: ( (lv_string_2_0= RULE_STRING ) )
-                    // InternalAnsibleDslParser.g:6640:4: (lv_string_2_0= RULE_STRING )
+                    // InternalAnsibleDslParser.g:6712:3: ( (lv_string_2_0= RULE_STRING ) )
+                    // InternalAnsibleDslParser.g:6713:4: (lv_string_2_0= RULE_STRING )
                     {
-                    // InternalAnsibleDslParser.g:6640:4: (lv_string_2_0= RULE_STRING )
-                    // InternalAnsibleDslParser.g:6641:5: lv_string_2_0= RULE_STRING
+                    // InternalAnsibleDslParser.g:6713:4: (lv_string_2_0= RULE_STRING )
+                    // InternalAnsibleDslParser.g:6714:5: lv_string_2_0= RULE_STRING
                     {
                     lv_string_2_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -16962,7 +17136,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEJinjaExpressionAndString"
-    // InternalAnsibleDslParser.g:6661:1: entryRuleEJinjaExpressionAndString returns [EObject current=null] : iv_ruleEJinjaExpressionAndString= ruleEJinjaExpressionAndString EOF ;
+    // InternalAnsibleDslParser.g:6734:1: entryRuleEJinjaExpressionAndString returns [EObject current=null] : iv_ruleEJinjaExpressionAndString= ruleEJinjaExpressionAndString EOF ;
     public final EObject entryRuleEJinjaExpressionAndString() throws RecognitionException {
         EObject current = null;
 
@@ -16970,8 +17144,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6661:66: (iv_ruleEJinjaExpressionAndString= ruleEJinjaExpressionAndString EOF )
-            // InternalAnsibleDslParser.g:6662:2: iv_ruleEJinjaExpressionAndString= ruleEJinjaExpressionAndString EOF
+            // InternalAnsibleDslParser.g:6734:66: (iv_ruleEJinjaExpressionAndString= ruleEJinjaExpressionAndString EOF )
+            // InternalAnsibleDslParser.g:6735:2: iv_ruleEJinjaExpressionAndString= ruleEJinjaExpressionAndString EOF
             {
              newCompositeNode(grammarAccess.getEJinjaExpressionAndStringRule()); 
             pushFollow(FOLLOW_1);
@@ -16998,7 +17172,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEJinjaExpressionAndString"
-    // InternalAnsibleDslParser.g:6668:1: ruleEJinjaExpressionAndString returns [EObject current=null] : ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+ ;
+    // InternalAnsibleDslParser.g:6741:1: ruleEJinjaExpressionAndString returns [EObject current=null] : ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+ ;
     public final EObject ruleEJinjaExpressionAndString() throws RecognitionException {
         EObject current = null;
 
@@ -17009,10 +17183,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6674:2: ( ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+ )
-            // InternalAnsibleDslParser.g:6675:2: ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+
+            // InternalAnsibleDslParser.g:6747:2: ( ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+ )
+            // InternalAnsibleDslParser.g:6748:2: ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+
             {
-            // InternalAnsibleDslParser.g:6675:2: ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+
+            // InternalAnsibleDslParser.g:6748:2: ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+
             int cnt48=0;
             loop48:
             do {
@@ -17060,10 +17234,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt48) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:6676:3: (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString )
+            	    // InternalAnsibleDslParser.g:6749:3: (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString )
             	    {
-            	    // InternalAnsibleDslParser.g:6676:3: (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString )
-            	    // InternalAnsibleDslParser.g:6677:4: lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString
+            	    // InternalAnsibleDslParser.g:6749:3: (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString )
+            	    // InternalAnsibleDslParser.g:6750:4: lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString
             	    {
 
             	    				newCompositeNode(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0());
@@ -17120,7 +17294,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEValuePassed"
-    // InternalAnsibleDslParser.g:6697:1: entryRuleEValuePassed returns [EObject current=null] : iv_ruleEValuePassed= ruleEValuePassed EOF ;
+    // InternalAnsibleDslParser.g:6770:1: entryRuleEValuePassed returns [EObject current=null] : iv_ruleEValuePassed= ruleEValuePassed EOF ;
     public final EObject entryRuleEValuePassed() throws RecognitionException {
         EObject current = null;
 
@@ -17128,8 +17302,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6697:53: (iv_ruleEValuePassed= ruleEValuePassed EOF )
-            // InternalAnsibleDslParser.g:6698:2: iv_ruleEValuePassed= ruleEValuePassed EOF
+            // InternalAnsibleDslParser.g:6770:53: (iv_ruleEValuePassed= ruleEValuePassed EOF )
+            // InternalAnsibleDslParser.g:6771:2: iv_ruleEValuePassed= ruleEValuePassed EOF
             {
              newCompositeNode(grammarAccess.getEValuePassedRule()); 
             pushFollow(FOLLOW_1);
@@ -17156,7 +17330,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValuePassed"
-    // InternalAnsibleDslParser.g:6704:1: ruleEValuePassed returns [EObject current=null] : (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EValueWithoutString_1= ruleEValueWithoutString ) ;
+    // InternalAnsibleDslParser.g:6777:1: ruleEValuePassed returns [EObject current=null] : (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EValueWithoutString_1= ruleEValueWithoutString ) ;
     public final EObject ruleEValuePassed() throws RecognitionException {
         EObject current = null;
 
@@ -17169,10 +17343,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6710:2: ( (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EValueWithoutString_1= ruleEValueWithoutString ) )
-            // InternalAnsibleDslParser.g:6711:2: (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EValueWithoutString_1= ruleEValueWithoutString )
+            // InternalAnsibleDslParser.g:6783:2: ( (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EValueWithoutString_1= ruleEValueWithoutString ) )
+            // InternalAnsibleDslParser.g:6784:2: (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EValueWithoutString_1= ruleEValueWithoutString )
             {
-            // InternalAnsibleDslParser.g:6711:2: (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EValueWithoutString_1= ruleEValueWithoutString )
+            // InternalAnsibleDslParser.g:6784:2: (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EValueWithoutString_1= ruleEValueWithoutString )
             int alt49=2;
             int LA49_0 = input.LA(1);
 
@@ -17190,7 +17364,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt49) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:6712:3: this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString
+                    // InternalAnsibleDslParser.g:6785:3: this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString
                     {
 
                     			newCompositeNode(grammarAccess.getEValuePassedAccess().getEJinjaExpressionAndStringParserRuleCall_0());
@@ -17208,7 +17382,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:6721:3: this_EValueWithoutString_1= ruleEValueWithoutString
+                    // InternalAnsibleDslParser.g:6794:3: this_EValueWithoutString_1= ruleEValueWithoutString
                     {
 
                     			newCompositeNode(grammarAccess.getEValuePassedAccess().getEValueWithoutStringParserRuleCall_1());
@@ -17248,7 +17422,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEValuePassedToJinjaExpression"
-    // InternalAnsibleDslParser.g:6733:1: entryRuleEValuePassedToJinjaExpression returns [EObject current=null] : iv_ruleEValuePassedToJinjaExpression= ruleEValuePassedToJinjaExpression EOF ;
+    // InternalAnsibleDslParser.g:6806:1: entryRuleEValuePassedToJinjaExpression returns [EObject current=null] : iv_ruleEValuePassedToJinjaExpression= ruleEValuePassedToJinjaExpression EOF ;
     public final EObject entryRuleEValuePassedToJinjaExpression() throws RecognitionException {
         EObject current = null;
 
@@ -17256,8 +17430,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6733:70: (iv_ruleEValuePassedToJinjaExpression= ruleEValuePassedToJinjaExpression EOF )
-            // InternalAnsibleDslParser.g:6734:2: iv_ruleEValuePassedToJinjaExpression= ruleEValuePassedToJinjaExpression EOF
+            // InternalAnsibleDslParser.g:6806:70: (iv_ruleEValuePassedToJinjaExpression= ruleEValuePassedToJinjaExpression EOF )
+            // InternalAnsibleDslParser.g:6807:2: iv_ruleEValuePassedToJinjaExpression= ruleEValuePassedToJinjaExpression EOF
             {
              newCompositeNode(grammarAccess.getEValuePassedToJinjaExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -17284,7 +17458,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValuePassedToJinjaExpression"
-    // InternalAnsibleDslParser.g:6740:1: ruleEValuePassedToJinjaExpression returns [EObject current=null] : (this_EValue_0= ruleEValue | this_ESpecialVariable_1= ruleESpecialVariable | this_EVariableReference_2= ruleEVariableReference | this_EFunctionCall_3= ruleEFunctionCall | this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces ) ;
+    // InternalAnsibleDslParser.g:6813:1: ruleEValuePassedToJinjaExpression returns [EObject current=null] : (this_EValue_0= ruleEValue | this_ESpecialVariable_1= ruleESpecialVariable | this_EVariableReference_2= ruleEVariableReference | this_EFunctionCall_3= ruleEFunctionCall | this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces ) ;
     public final EObject ruleEValuePassedToJinjaExpression() throws RecognitionException {
         EObject current = null;
 
@@ -17303,10 +17477,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6746:2: ( (this_EValue_0= ruleEValue | this_ESpecialVariable_1= ruleESpecialVariable | this_EVariableReference_2= ruleEVariableReference | this_EFunctionCall_3= ruleEFunctionCall | this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces ) )
-            // InternalAnsibleDslParser.g:6747:2: (this_EValue_0= ruleEValue | this_ESpecialVariable_1= ruleESpecialVariable | this_EVariableReference_2= ruleEVariableReference | this_EFunctionCall_3= ruleEFunctionCall | this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces )
+            // InternalAnsibleDslParser.g:6819:2: ( (this_EValue_0= ruleEValue | this_ESpecialVariable_1= ruleESpecialVariable | this_EVariableReference_2= ruleEVariableReference | this_EFunctionCall_3= ruleEFunctionCall | this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces ) )
+            // InternalAnsibleDslParser.g:6820:2: (this_EValue_0= ruleEValue | this_ESpecialVariable_1= ruleESpecialVariable | this_EVariableReference_2= ruleEVariableReference | this_EFunctionCall_3= ruleEFunctionCall | this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces )
             {
-            // InternalAnsibleDslParser.g:6747:2: (this_EValue_0= ruleEValue | this_ESpecialVariable_1= ruleESpecialVariable | this_EVariableReference_2= ruleEVariableReference | this_EFunctionCall_3= ruleEFunctionCall | this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces )
+            // InternalAnsibleDslParser.g:6820:2: (this_EValue_0= ruleEValue | this_ESpecialVariable_1= ruleESpecialVariable | this_EVariableReference_2= ruleEVariableReference | this_EFunctionCall_3= ruleEFunctionCall | this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces )
             int alt50=5;
             switch ( input.LA(1) ) {
             case LeftCurlyBracket:
@@ -17367,7 +17541,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             switch (alt50) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:6748:3: this_EValue_0= ruleEValue
+                    // InternalAnsibleDslParser.g:6821:3: this_EValue_0= ruleEValue
                     {
 
                     			newCompositeNode(grammarAccess.getEValuePassedToJinjaExpressionAccess().getEValueParserRuleCall_0());
@@ -17385,7 +17559,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:6757:3: this_ESpecialVariable_1= ruleESpecialVariable
+                    // InternalAnsibleDslParser.g:6830:3: this_ESpecialVariable_1= ruleESpecialVariable
                     {
 
                     			newCompositeNode(grammarAccess.getEValuePassedToJinjaExpressionAccess().getESpecialVariableParserRuleCall_1());
@@ -17403,7 +17577,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalAnsibleDslParser.g:6766:3: this_EVariableReference_2= ruleEVariableReference
+                    // InternalAnsibleDslParser.g:6839:3: this_EVariableReference_2= ruleEVariableReference
                     {
 
                     			newCompositeNode(grammarAccess.getEValuePassedToJinjaExpressionAccess().getEVariableReferenceParserRuleCall_2());
@@ -17421,7 +17595,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalAnsibleDslParser.g:6775:3: this_EFunctionCall_3= ruleEFunctionCall
+                    // InternalAnsibleDslParser.g:6848:3: this_EFunctionCall_3= ruleEFunctionCall
                     {
 
                     			newCompositeNode(grammarAccess.getEValuePassedToJinjaExpressionAccess().getEFunctionCallParserRuleCall_3());
@@ -17439,7 +17613,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalAnsibleDslParser.g:6784:3: this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces
+                    // InternalAnsibleDslParser.g:6857:3: this_EEmptyCurlyBraces_4= ruleEEmptyCurlyBraces
                     {
 
                     			newCompositeNode(grammarAccess.getEValuePassedToJinjaExpressionAccess().getEEmptyCurlyBracesParserRuleCall_4());
@@ -17479,7 +17653,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEComposedValue"
-    // InternalAnsibleDslParser.g:6796:1: entryRuleEComposedValue returns [EObject current=null] : iv_ruleEComposedValue= ruleEComposedValue EOF ;
+    // InternalAnsibleDslParser.g:6869:1: entryRuleEComposedValue returns [EObject current=null] : iv_ruleEComposedValue= ruleEComposedValue EOF ;
     public final EObject entryRuleEComposedValue() throws RecognitionException {
         EObject current = null;
 
@@ -17487,8 +17661,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6796:55: (iv_ruleEComposedValue= ruleEComposedValue EOF )
-            // InternalAnsibleDslParser.g:6797:2: iv_ruleEComposedValue= ruleEComposedValue EOF
+            // InternalAnsibleDslParser.g:6869:55: (iv_ruleEComposedValue= ruleEComposedValue EOF )
+            // InternalAnsibleDslParser.g:6870:2: iv_ruleEComposedValue= ruleEComposedValue EOF
             {
              newCompositeNode(grammarAccess.getEComposedValueRule()); 
             pushFollow(FOLLOW_1);
@@ -17515,7 +17689,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEComposedValue"
-    // InternalAnsibleDslParser.g:6803:1: ruleEComposedValue returns [EObject current=null] : (this_EDictionary_0= ruleEDictionary | this_EList_1= ruleEList ) ;
+    // InternalAnsibleDslParser.g:6876:1: ruleEComposedValue returns [EObject current=null] : (this_EDictionary_0= ruleEDictionary | this_EList_1= ruleEList ) ;
     public final EObject ruleEComposedValue() throws RecognitionException {
         EObject current = null;
 
@@ -17528,10 +17702,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6809:2: ( (this_EDictionary_0= ruleEDictionary | this_EList_1= ruleEList ) )
-            // InternalAnsibleDslParser.g:6810:2: (this_EDictionary_0= ruleEDictionary | this_EList_1= ruleEList )
+            // InternalAnsibleDslParser.g:6882:2: ( (this_EDictionary_0= ruleEDictionary | this_EList_1= ruleEList ) )
+            // InternalAnsibleDslParser.g:6883:2: (this_EDictionary_0= ruleEDictionary | this_EList_1= ruleEList )
             {
-            // InternalAnsibleDslParser.g:6810:2: (this_EDictionary_0= ruleEDictionary | this_EList_1= ruleEList )
+            // InternalAnsibleDslParser.g:6883:2: (this_EDictionary_0= ruleEDictionary | this_EList_1= ruleEList )
             int alt51=2;
             int LA51_0 = input.LA(1);
 
@@ -17549,7 +17723,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt51) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:6811:3: this_EDictionary_0= ruleEDictionary
+                    // InternalAnsibleDslParser.g:6884:3: this_EDictionary_0= ruleEDictionary
                     {
 
                     			newCompositeNode(grammarAccess.getEComposedValueAccess().getEDictionaryParserRuleCall_0());
@@ -17567,7 +17741,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:6820:3: this_EList_1= ruleEList
+                    // InternalAnsibleDslParser.g:6893:3: this_EList_1= ruleEList
                     {
 
                     			newCompositeNode(grammarAccess.getEComposedValueAccess().getEListParserRuleCall_1());
@@ -17607,7 +17781,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEValue"
-    // InternalAnsibleDslParser.g:6832:1: entryRuleEValue returns [EObject current=null] : iv_ruleEValue= ruleEValue EOF ;
+    // InternalAnsibleDslParser.g:6905:1: entryRuleEValue returns [EObject current=null] : iv_ruleEValue= ruleEValue EOF ;
     public final EObject entryRuleEValue() throws RecognitionException {
         EObject current = null;
 
@@ -17615,8 +17789,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6832:47: (iv_ruleEValue= ruleEValue EOF )
-            // InternalAnsibleDslParser.g:6833:2: iv_ruleEValue= ruleEValue EOF
+            // InternalAnsibleDslParser.g:6905:47: (iv_ruleEValue= ruleEValue EOF )
+            // InternalAnsibleDslParser.g:6906:2: iv_ruleEValue= ruleEValue EOF
             {
              newCompositeNode(grammarAccess.getEValueRule()); 
             pushFollow(FOLLOW_1);
@@ -17643,7 +17817,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValue"
-    // InternalAnsibleDslParser.g:6839:1: ruleEValue returns [EObject current=null] : (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValue_1= ruleESimpleValue ) ;
+    // InternalAnsibleDslParser.g:6912:1: ruleEValue returns [EObject current=null] : (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValue_1= ruleESimpleValue ) ;
     public final EObject ruleEValue() throws RecognitionException {
         EObject current = null;
 
@@ -17656,10 +17830,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6845:2: ( (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValue_1= ruleESimpleValue ) )
-            // InternalAnsibleDslParser.g:6846:2: (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValue_1= ruleESimpleValue )
+            // InternalAnsibleDslParser.g:6918:2: ( (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValue_1= ruleESimpleValue ) )
+            // InternalAnsibleDslParser.g:6919:2: (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValue_1= ruleESimpleValue )
             {
-            // InternalAnsibleDslParser.g:6846:2: (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValue_1= ruleESimpleValue )
+            // InternalAnsibleDslParser.g:6919:2: (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValue_1= ruleESimpleValue )
             int alt52=2;
             int LA52_0 = input.LA(1);
 
@@ -17677,7 +17851,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt52) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:6847:3: this_EComposedValue_0= ruleEComposedValue
+                    // InternalAnsibleDslParser.g:6920:3: this_EComposedValue_0= ruleEComposedValue
                     {
 
                     			newCompositeNode(grammarAccess.getEValueAccess().getEComposedValueParserRuleCall_0());
@@ -17695,7 +17869,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:6856:3: this_ESimpleValue_1= ruleESimpleValue
+                    // InternalAnsibleDslParser.g:6929:3: this_ESimpleValue_1= ruleESimpleValue
                     {
 
                     			newCompositeNode(grammarAccess.getEValueAccess().getESimpleValueParserRuleCall_1());
@@ -17735,7 +17909,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEValueWithoutString"
-    // InternalAnsibleDslParser.g:6868:1: entryRuleEValueWithoutString returns [EObject current=null] : iv_ruleEValueWithoutString= ruleEValueWithoutString EOF ;
+    // InternalAnsibleDslParser.g:6941:1: entryRuleEValueWithoutString returns [EObject current=null] : iv_ruleEValueWithoutString= ruleEValueWithoutString EOF ;
     public final EObject entryRuleEValueWithoutString() throws RecognitionException {
         EObject current = null;
 
@@ -17743,8 +17917,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6868:60: (iv_ruleEValueWithoutString= ruleEValueWithoutString EOF )
-            // InternalAnsibleDslParser.g:6869:2: iv_ruleEValueWithoutString= ruleEValueWithoutString EOF
+            // InternalAnsibleDslParser.g:6941:60: (iv_ruleEValueWithoutString= ruleEValueWithoutString EOF )
+            // InternalAnsibleDslParser.g:6942:2: iv_ruleEValueWithoutString= ruleEValueWithoutString EOF
             {
              newCompositeNode(grammarAccess.getEValueWithoutStringRule()); 
             pushFollow(FOLLOW_1);
@@ -17771,7 +17945,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValueWithoutString"
-    // InternalAnsibleDslParser.g:6875:1: ruleEValueWithoutString returns [EObject current=null] : (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString ) ;
+    // InternalAnsibleDslParser.g:6948:1: ruleEValueWithoutString returns [EObject current=null] : (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString ) ;
     public final EObject ruleEValueWithoutString() throws RecognitionException {
         EObject current = null;
 
@@ -17784,10 +17958,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6881:2: ( (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString ) )
-            // InternalAnsibleDslParser.g:6882:2: (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString )
+            // InternalAnsibleDslParser.g:6954:2: ( (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString ) )
+            // InternalAnsibleDslParser.g:6955:2: (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString )
             {
-            // InternalAnsibleDslParser.g:6882:2: (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString )
+            // InternalAnsibleDslParser.g:6955:2: (this_EComposedValue_0= ruleEComposedValue | this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString )
             int alt53=2;
             int LA53_0 = input.LA(1);
 
@@ -17805,7 +17979,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt53) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:6883:3: this_EComposedValue_0= ruleEComposedValue
+                    // InternalAnsibleDslParser.g:6956:3: this_EComposedValue_0= ruleEComposedValue
                     {
 
                     			newCompositeNode(grammarAccess.getEValueWithoutStringAccess().getEComposedValueParserRuleCall_0());
@@ -17823,7 +17997,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:6892:3: this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString
+                    // InternalAnsibleDslParser.g:6965:3: this_ESimpleValueWithoutString_1= ruleESimpleValueWithoutString
                     {
 
                     			newCompositeNode(grammarAccess.getEValueWithoutStringAccess().getESimpleValueWithoutStringParserRuleCall_1());
@@ -17863,7 +18037,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleESimpleValueWithoutString"
-    // InternalAnsibleDslParser.g:6904:1: entryRuleESimpleValueWithoutString returns [EObject current=null] : iv_ruleESimpleValueWithoutString= ruleESimpleValueWithoutString EOF ;
+    // InternalAnsibleDslParser.g:6977:1: entryRuleESimpleValueWithoutString returns [EObject current=null] : iv_ruleESimpleValueWithoutString= ruleESimpleValueWithoutString EOF ;
     public final EObject entryRuleESimpleValueWithoutString() throws RecognitionException {
         EObject current = null;
 
@@ -17871,8 +18045,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6904:66: (iv_ruleESimpleValueWithoutString= ruleESimpleValueWithoutString EOF )
-            // InternalAnsibleDslParser.g:6905:2: iv_ruleESimpleValueWithoutString= ruleESimpleValueWithoutString EOF
+            // InternalAnsibleDslParser.g:6977:66: (iv_ruleESimpleValueWithoutString= ruleESimpleValueWithoutString EOF )
+            // InternalAnsibleDslParser.g:6978:2: iv_ruleESimpleValueWithoutString= ruleESimpleValueWithoutString EOF
             {
              newCompositeNode(grammarAccess.getESimpleValueWithoutStringRule()); 
             pushFollow(FOLLOW_1);
@@ -17899,7 +18073,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleESimpleValueWithoutString"
-    // InternalAnsibleDslParser.g:6911:1: ruleESimpleValueWithoutString returns [EObject current=null] : ( ( (lv_simple_value_0_0= RULE_BOOLEAN ) ) | ( (lv_simple_value_1_0= RULE_NULL ) ) | ( (lv_simple_value_2_0= RULE_NUMBER ) ) | ( (lv_simple_value_3_0= RULE_NONE ) ) ) ;
+    // InternalAnsibleDslParser.g:6984:1: ruleESimpleValueWithoutString returns [EObject current=null] : ( ( (lv_simple_value_0_0= RULE_BOOLEAN ) ) | ( (lv_simple_value_1_0= RULE_NULL ) ) | ( (lv_simple_value_2_0= RULE_NUMBER ) ) | ( (lv_simple_value_3_0= RULE_NONE ) ) ) ;
     public final EObject ruleESimpleValueWithoutString() throws RecognitionException {
         EObject current = null;
 
@@ -17912,10 +18086,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6917:2: ( ( ( (lv_simple_value_0_0= RULE_BOOLEAN ) ) | ( (lv_simple_value_1_0= RULE_NULL ) ) | ( (lv_simple_value_2_0= RULE_NUMBER ) ) | ( (lv_simple_value_3_0= RULE_NONE ) ) ) )
-            // InternalAnsibleDslParser.g:6918:2: ( ( (lv_simple_value_0_0= RULE_BOOLEAN ) ) | ( (lv_simple_value_1_0= RULE_NULL ) ) | ( (lv_simple_value_2_0= RULE_NUMBER ) ) | ( (lv_simple_value_3_0= RULE_NONE ) ) )
+            // InternalAnsibleDslParser.g:6990:2: ( ( ( (lv_simple_value_0_0= RULE_BOOLEAN ) ) | ( (lv_simple_value_1_0= RULE_NULL ) ) | ( (lv_simple_value_2_0= RULE_NUMBER ) ) | ( (lv_simple_value_3_0= RULE_NONE ) ) ) )
+            // InternalAnsibleDslParser.g:6991:2: ( ( (lv_simple_value_0_0= RULE_BOOLEAN ) ) | ( (lv_simple_value_1_0= RULE_NULL ) ) | ( (lv_simple_value_2_0= RULE_NUMBER ) ) | ( (lv_simple_value_3_0= RULE_NONE ) ) )
             {
-            // InternalAnsibleDslParser.g:6918:2: ( ( (lv_simple_value_0_0= RULE_BOOLEAN ) ) | ( (lv_simple_value_1_0= RULE_NULL ) ) | ( (lv_simple_value_2_0= RULE_NUMBER ) ) | ( (lv_simple_value_3_0= RULE_NONE ) ) )
+            // InternalAnsibleDslParser.g:6991:2: ( ( (lv_simple_value_0_0= RULE_BOOLEAN ) ) | ( (lv_simple_value_1_0= RULE_NULL ) ) | ( (lv_simple_value_2_0= RULE_NUMBER ) ) | ( (lv_simple_value_3_0= RULE_NONE ) ) )
             int alt54=4;
             switch ( input.LA(1) ) {
             case RULE_BOOLEAN:
@@ -17947,13 +18121,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             switch (alt54) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:6919:3: ( (lv_simple_value_0_0= RULE_BOOLEAN ) )
+                    // InternalAnsibleDslParser.g:6992:3: ( (lv_simple_value_0_0= RULE_BOOLEAN ) )
                     {
-                    // InternalAnsibleDslParser.g:6919:3: ( (lv_simple_value_0_0= RULE_BOOLEAN ) )
-                    // InternalAnsibleDslParser.g:6920:4: (lv_simple_value_0_0= RULE_BOOLEAN )
+                    // InternalAnsibleDslParser.g:6992:3: ( (lv_simple_value_0_0= RULE_BOOLEAN ) )
+                    // InternalAnsibleDslParser.g:6993:4: (lv_simple_value_0_0= RULE_BOOLEAN )
                     {
-                    // InternalAnsibleDslParser.g:6920:4: (lv_simple_value_0_0= RULE_BOOLEAN )
-                    // InternalAnsibleDslParser.g:6921:5: lv_simple_value_0_0= RULE_BOOLEAN
+                    // InternalAnsibleDslParser.g:6993:4: (lv_simple_value_0_0= RULE_BOOLEAN )
+                    // InternalAnsibleDslParser.g:6994:5: lv_simple_value_0_0= RULE_BOOLEAN
                     {
                     lv_simple_value_0_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_2); 
 
@@ -17979,13 +18153,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:6938:3: ( (lv_simple_value_1_0= RULE_NULL ) )
+                    // InternalAnsibleDslParser.g:7011:3: ( (lv_simple_value_1_0= RULE_NULL ) )
                     {
-                    // InternalAnsibleDslParser.g:6938:3: ( (lv_simple_value_1_0= RULE_NULL ) )
-                    // InternalAnsibleDslParser.g:6939:4: (lv_simple_value_1_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:7011:3: ( (lv_simple_value_1_0= RULE_NULL ) )
+                    // InternalAnsibleDslParser.g:7012:4: (lv_simple_value_1_0= RULE_NULL )
                     {
-                    // InternalAnsibleDslParser.g:6939:4: (lv_simple_value_1_0= RULE_NULL )
-                    // InternalAnsibleDslParser.g:6940:5: lv_simple_value_1_0= RULE_NULL
+                    // InternalAnsibleDslParser.g:7012:4: (lv_simple_value_1_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:7013:5: lv_simple_value_1_0= RULE_NULL
                     {
                     lv_simple_value_1_0=(Token)match(input,RULE_NULL,FOLLOW_2); 
 
@@ -18011,13 +18185,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalAnsibleDslParser.g:6957:3: ( (lv_simple_value_2_0= RULE_NUMBER ) )
+                    // InternalAnsibleDslParser.g:7030:3: ( (lv_simple_value_2_0= RULE_NUMBER ) )
                     {
-                    // InternalAnsibleDslParser.g:6957:3: ( (lv_simple_value_2_0= RULE_NUMBER ) )
-                    // InternalAnsibleDslParser.g:6958:4: (lv_simple_value_2_0= RULE_NUMBER )
+                    // InternalAnsibleDslParser.g:7030:3: ( (lv_simple_value_2_0= RULE_NUMBER ) )
+                    // InternalAnsibleDslParser.g:7031:4: (lv_simple_value_2_0= RULE_NUMBER )
                     {
-                    // InternalAnsibleDslParser.g:6958:4: (lv_simple_value_2_0= RULE_NUMBER )
-                    // InternalAnsibleDslParser.g:6959:5: lv_simple_value_2_0= RULE_NUMBER
+                    // InternalAnsibleDslParser.g:7031:4: (lv_simple_value_2_0= RULE_NUMBER )
+                    // InternalAnsibleDslParser.g:7032:5: lv_simple_value_2_0= RULE_NUMBER
                     {
                     lv_simple_value_2_0=(Token)match(input,RULE_NUMBER,FOLLOW_2); 
 
@@ -18043,13 +18217,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalAnsibleDslParser.g:6976:3: ( (lv_simple_value_3_0= RULE_NONE ) )
+                    // InternalAnsibleDslParser.g:7049:3: ( (lv_simple_value_3_0= RULE_NONE ) )
                     {
-                    // InternalAnsibleDslParser.g:6976:3: ( (lv_simple_value_3_0= RULE_NONE ) )
-                    // InternalAnsibleDslParser.g:6977:4: (lv_simple_value_3_0= RULE_NONE )
+                    // InternalAnsibleDslParser.g:7049:3: ( (lv_simple_value_3_0= RULE_NONE ) )
+                    // InternalAnsibleDslParser.g:7050:4: (lv_simple_value_3_0= RULE_NONE )
                     {
-                    // InternalAnsibleDslParser.g:6977:4: (lv_simple_value_3_0= RULE_NONE )
-                    // InternalAnsibleDslParser.g:6978:5: lv_simple_value_3_0= RULE_NONE
+                    // InternalAnsibleDslParser.g:7050:4: (lv_simple_value_3_0= RULE_NONE )
+                    // InternalAnsibleDslParser.g:7051:5: lv_simple_value_3_0= RULE_NONE
                     {
                     lv_simple_value_3_0=(Token)match(input,RULE_NONE,FOLLOW_2); 
 
@@ -18097,7 +18271,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleESimpleValue"
-    // InternalAnsibleDslParser.g:6998:1: entryRuleESimpleValue returns [EObject current=null] : iv_ruleESimpleValue= ruleESimpleValue EOF ;
+    // InternalAnsibleDslParser.g:7071:1: entryRuleESimpleValue returns [EObject current=null] : iv_ruleESimpleValue= ruleESimpleValue EOF ;
     public final EObject entryRuleESimpleValue() throws RecognitionException {
         EObject current = null;
 
@@ -18105,8 +18279,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:6998:53: (iv_ruleESimpleValue= ruleESimpleValue EOF )
-            // InternalAnsibleDslParser.g:6999:2: iv_ruleESimpleValue= ruleESimpleValue EOF
+            // InternalAnsibleDslParser.g:7071:53: (iv_ruleESimpleValue= ruleESimpleValue EOF )
+            // InternalAnsibleDslParser.g:7072:2: iv_ruleESimpleValue= ruleESimpleValue EOF
             {
              newCompositeNode(grammarAccess.getESimpleValueRule()); 
             pushFollow(FOLLOW_1);
@@ -18133,7 +18307,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleESimpleValue"
-    // InternalAnsibleDslParser.g:7005:1: ruleESimpleValue returns [EObject current=null] : ( ( (lv_simple_value_string_0_0= RULE_STRING ) ) | ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) ) ) ;
+    // InternalAnsibleDslParser.g:7078:1: ruleESimpleValue returns [EObject current=null] : ( ( (lv_simple_value_string_0_0= RULE_STRING ) ) | ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) ) ) ;
     public final EObject ruleESimpleValue() throws RecognitionException {
         EObject current = null;
 
@@ -18145,10 +18319,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7011:2: ( ( ( (lv_simple_value_string_0_0= RULE_STRING ) ) | ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) ) ) )
-            // InternalAnsibleDslParser.g:7012:2: ( ( (lv_simple_value_string_0_0= RULE_STRING ) ) | ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) ) )
+            // InternalAnsibleDslParser.g:7084:2: ( ( ( (lv_simple_value_string_0_0= RULE_STRING ) ) | ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) ) ) )
+            // InternalAnsibleDslParser.g:7085:2: ( ( (lv_simple_value_string_0_0= RULE_STRING ) ) | ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) ) )
             {
-            // InternalAnsibleDslParser.g:7012:2: ( ( (lv_simple_value_string_0_0= RULE_STRING ) ) | ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) ) )
+            // InternalAnsibleDslParser.g:7085:2: ( ( (lv_simple_value_string_0_0= RULE_STRING ) ) | ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) ) )
             int alt55=2;
             int LA55_0 = input.LA(1);
 
@@ -18166,13 +18340,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt55) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7013:3: ( (lv_simple_value_string_0_0= RULE_STRING ) )
+                    // InternalAnsibleDslParser.g:7086:3: ( (lv_simple_value_string_0_0= RULE_STRING ) )
                     {
-                    // InternalAnsibleDslParser.g:7013:3: ( (lv_simple_value_string_0_0= RULE_STRING ) )
-                    // InternalAnsibleDslParser.g:7014:4: (lv_simple_value_string_0_0= RULE_STRING )
+                    // InternalAnsibleDslParser.g:7086:3: ( (lv_simple_value_string_0_0= RULE_STRING ) )
+                    // InternalAnsibleDslParser.g:7087:4: (lv_simple_value_string_0_0= RULE_STRING )
                     {
-                    // InternalAnsibleDslParser.g:7014:4: (lv_simple_value_string_0_0= RULE_STRING )
-                    // InternalAnsibleDslParser.g:7015:5: lv_simple_value_string_0_0= RULE_STRING
+                    // InternalAnsibleDslParser.g:7087:4: (lv_simple_value_string_0_0= RULE_STRING )
+                    // InternalAnsibleDslParser.g:7088:5: lv_simple_value_string_0_0= RULE_STRING
                     {
                     lv_simple_value_string_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -18198,13 +18372,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:7032:3: ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) )
+                    // InternalAnsibleDslParser.g:7105:3: ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) )
                     {
-                    // InternalAnsibleDslParser.g:7032:3: ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) )
-                    // InternalAnsibleDslParser.g:7033:4: (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString )
+                    // InternalAnsibleDslParser.g:7105:3: ( (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString ) )
+                    // InternalAnsibleDslParser.g:7106:4: (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString )
                     {
-                    // InternalAnsibleDslParser.g:7033:4: (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString )
-                    // InternalAnsibleDslParser.g:7034:5: lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString
+                    // InternalAnsibleDslParser.g:7106:4: (lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString )
+                    // InternalAnsibleDslParser.g:7107:5: lv_simple_value_without_string_1_0= ruleESimpleValueWithoutString
                     {
 
                     					newCompositeNode(grammarAccess.getESimpleValueAccess().getSimple_value_without_stringESimpleValueWithoutStringParserRuleCall_1_0());
@@ -18257,7 +18431,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEJinjaExpressionEvaluation"
-    // InternalAnsibleDslParser.g:7055:1: entryRuleEJinjaExpressionEvaluation returns [EObject current=null] : iv_ruleEJinjaExpressionEvaluation= ruleEJinjaExpressionEvaluation EOF ;
+    // InternalAnsibleDslParser.g:7128:1: entryRuleEJinjaExpressionEvaluation returns [EObject current=null] : iv_ruleEJinjaExpressionEvaluation= ruleEJinjaExpressionEvaluation EOF ;
     public final EObject entryRuleEJinjaExpressionEvaluation() throws RecognitionException {
         EObject current = null;
 
@@ -18265,8 +18439,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7055:67: (iv_ruleEJinjaExpressionEvaluation= ruleEJinjaExpressionEvaluation EOF )
-            // InternalAnsibleDslParser.g:7056:2: iv_ruleEJinjaExpressionEvaluation= ruleEJinjaExpressionEvaluation EOF
+            // InternalAnsibleDslParser.g:7128:67: (iv_ruleEJinjaExpressionEvaluation= ruleEJinjaExpressionEvaluation EOF )
+            // InternalAnsibleDslParser.g:7129:2: iv_ruleEJinjaExpressionEvaluation= ruleEJinjaExpressionEvaluation EOF
             {
              newCompositeNode(grammarAccess.getEJinjaExpressionEvaluationRule()); 
             pushFollow(FOLLOW_1);
@@ -18293,7 +18467,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEJinjaExpressionEvaluation"
-    // InternalAnsibleDslParser.g:7062:1: ruleEJinjaExpressionEvaluation returns [EObject current=null] : (otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket ) ;
+    // InternalAnsibleDslParser.g:7135:1: ruleEJinjaExpressionEvaluation returns [EObject current=null] : (otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket ) ;
     public final EObject ruleEJinjaExpressionEvaluation() throws RecognitionException {
         EObject current = null;
 
@@ -18306,21 +18480,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7068:2: ( (otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket ) )
-            // InternalAnsibleDslParser.g:7069:2: (otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket )
+            // InternalAnsibleDslParser.g:7141:2: ( (otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket ) )
+            // InternalAnsibleDslParser.g:7142:2: (otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket )
             {
-            // InternalAnsibleDslParser.g:7069:2: (otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket )
-            // InternalAnsibleDslParser.g:7070:3: otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket
+            // InternalAnsibleDslParser.g:7142:2: (otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket )
+            // InternalAnsibleDslParser.g:7143:3: otherlv_0= LeftCurlyBracketLeftCurlyBracket ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) ) otherlv_2= RightCurlyBracketRightCurlyBracket
             {
             otherlv_0=(Token)match(input,LeftCurlyBracketLeftCurlyBracket,FOLLOW_24); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEJinjaExpressionEvaluationAccess().getLeftCurlyBracketLeftCurlyBracketKeyword_0());
             		
-            // InternalAnsibleDslParser.g:7074:3: ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
-            // InternalAnsibleDslParser.g:7075:4: (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
+            // InternalAnsibleDslParser.g:7147:3: ( (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets ) )
+            // InternalAnsibleDslParser.g:7148:4: (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
             {
-            // InternalAnsibleDslParser.g:7075:4: (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
-            // InternalAnsibleDslParser.g:7076:5: lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets
+            // InternalAnsibleDslParser.g:7148:4: (lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets )
+            // InternalAnsibleDslParser.g:7149:5: lv_jinja_expression_1_0= ruleEJinjaExpressionEvaluationWithoutBrackets
             {
 
             					newCompositeNode(grammarAccess.getEJinjaExpressionEvaluationAccess().getJinja_expressionEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0());
@@ -18374,7 +18548,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEJinjaExpressionEvaluationWithoutBrackets"
-    // InternalAnsibleDslParser.g:7101:1: entryRuleEJinjaExpressionEvaluationWithoutBrackets returns [EObject current=null] : iv_ruleEJinjaExpressionEvaluationWithoutBrackets= ruleEJinjaExpressionEvaluationWithoutBrackets EOF ;
+    // InternalAnsibleDslParser.g:7174:1: entryRuleEJinjaExpressionEvaluationWithoutBrackets returns [EObject current=null] : iv_ruleEJinjaExpressionEvaluationWithoutBrackets= ruleEJinjaExpressionEvaluationWithoutBrackets EOF ;
     public final EObject entryRuleEJinjaExpressionEvaluationWithoutBrackets() throws RecognitionException {
         EObject current = null;
 
@@ -18382,8 +18556,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7101:82: (iv_ruleEJinjaExpressionEvaluationWithoutBrackets= ruleEJinjaExpressionEvaluationWithoutBrackets EOF )
-            // InternalAnsibleDslParser.g:7102:2: iv_ruleEJinjaExpressionEvaluationWithoutBrackets= ruleEJinjaExpressionEvaluationWithoutBrackets EOF
+            // InternalAnsibleDslParser.g:7174:82: (iv_ruleEJinjaExpressionEvaluationWithoutBrackets= ruleEJinjaExpressionEvaluationWithoutBrackets EOF )
+            // InternalAnsibleDslParser.g:7175:2: iv_ruleEJinjaExpressionEvaluationWithoutBrackets= ruleEJinjaExpressionEvaluationWithoutBrackets EOF
             {
              newCompositeNode(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsRule()); 
             pushFollow(FOLLOW_1);
@@ -18410,7 +18584,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEJinjaExpressionEvaluationWithoutBrackets"
-    // InternalAnsibleDslParser.g:7108:1: ruleEJinjaExpressionEvaluationWithoutBrackets returns [EObject current=null] : (this_EFilteredExpression_0= ruleEFilteredExpression | this_EIfExpression_1= ruleEIfExpression ) ;
+    // InternalAnsibleDslParser.g:7181:1: ruleEJinjaExpressionEvaluationWithoutBrackets returns [EObject current=null] : (this_EFilteredExpression_0= ruleEFilteredExpression | this_EIfExpression_1= ruleEIfExpression ) ;
     public final EObject ruleEJinjaExpressionEvaluationWithoutBrackets() throws RecognitionException {
         EObject current = null;
 
@@ -18423,10 +18597,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7114:2: ( (this_EFilteredExpression_0= ruleEFilteredExpression | this_EIfExpression_1= ruleEIfExpression ) )
-            // InternalAnsibleDslParser.g:7115:2: (this_EFilteredExpression_0= ruleEFilteredExpression | this_EIfExpression_1= ruleEIfExpression )
+            // InternalAnsibleDslParser.g:7187:2: ( (this_EFilteredExpression_0= ruleEFilteredExpression | this_EIfExpression_1= ruleEIfExpression ) )
+            // InternalAnsibleDslParser.g:7188:2: (this_EFilteredExpression_0= ruleEFilteredExpression | this_EIfExpression_1= ruleEIfExpression )
             {
-            // InternalAnsibleDslParser.g:7115:2: (this_EFilteredExpression_0= ruleEFilteredExpression | this_EIfExpression_1= ruleEIfExpression )
+            // InternalAnsibleDslParser.g:7188:2: (this_EFilteredExpression_0= ruleEFilteredExpression | this_EIfExpression_1= ruleEIfExpression )
             int alt56=2;
             int LA56_0 = input.LA(1);
 
@@ -18444,7 +18618,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt56) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7116:3: this_EFilteredExpression_0= ruleEFilteredExpression
+                    // InternalAnsibleDslParser.g:7189:3: this_EFilteredExpression_0= ruleEFilteredExpression
                     {
 
                     			newCompositeNode(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getEFilteredExpressionParserRuleCall_0());
@@ -18462,7 +18636,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:7125:3: this_EIfExpression_1= ruleEIfExpression
+                    // InternalAnsibleDslParser.g:7198:3: this_EIfExpression_1= ruleEIfExpression
                     {
 
                     			newCompositeNode(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getEIfExpressionParserRuleCall_1());
@@ -18502,7 +18676,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEFunctionCall"
-    // InternalAnsibleDslParser.g:7137:1: entryRuleEFunctionCall returns [EObject current=null] : iv_ruleEFunctionCall= ruleEFunctionCall EOF ;
+    // InternalAnsibleDslParser.g:7210:1: entryRuleEFunctionCall returns [EObject current=null] : iv_ruleEFunctionCall= ruleEFunctionCall EOF ;
     public final EObject entryRuleEFunctionCall() throws RecognitionException {
         EObject current = null;
 
@@ -18510,8 +18684,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7137:54: (iv_ruleEFunctionCall= ruleEFunctionCall EOF )
-            // InternalAnsibleDslParser.g:7138:2: iv_ruleEFunctionCall= ruleEFunctionCall EOF
+            // InternalAnsibleDslParser.g:7210:54: (iv_ruleEFunctionCall= ruleEFunctionCall EOF )
+            // InternalAnsibleDslParser.g:7211:2: iv_ruleEFunctionCall= ruleEFunctionCall EOF
             {
              newCompositeNode(grammarAccess.getEFunctionCallRule()); 
             pushFollow(FOLLOW_1);
@@ -18538,7 +18712,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEFunctionCall"
-    // InternalAnsibleDslParser.g:7144:1: ruleEFunctionCall returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )? ) ;
+    // InternalAnsibleDslParser.g:7217:1: ruleEFunctionCall returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )? ) ;
     public final EObject ruleEFunctionCall() throws RecognitionException {
         EObject current = null;
 
@@ -18556,17 +18730,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7150:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )? ) )
-            // InternalAnsibleDslParser.g:7151:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )? )
+            // InternalAnsibleDslParser.g:7223:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )? ) )
+            // InternalAnsibleDslParser.g:7224:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )? )
             {
-            // InternalAnsibleDslParser.g:7151:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )? )
-            // InternalAnsibleDslParser.g:7152:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )?
+            // InternalAnsibleDslParser.g:7224:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )? )
+            // InternalAnsibleDslParser.g:7225:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )?
             {
-            // InternalAnsibleDslParser.g:7152:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalAnsibleDslParser.g:7153:4: (lv_name_0_0= RULE_ID )
+            // InternalAnsibleDslParser.g:7225:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:7226:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:7153:4: (lv_name_0_0= RULE_ID )
-            // InternalAnsibleDslParser.g:7154:5: lv_name_0_0= RULE_ID
+            // InternalAnsibleDslParser.g:7226:4: (lv_name_0_0= RULE_ID )
+            // InternalAnsibleDslParser.g:7227:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_62); 
 
@@ -18588,7 +18762,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7170:3: ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )?
+            // InternalAnsibleDslParser.g:7243:3: ( (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis ) | ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) ) )?
             int alt58=3;
             int LA58_0 = input.LA(1);
 
@@ -18600,20 +18774,20 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt58) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7171:4: (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis )
+                    // InternalAnsibleDslParser.g:7244:4: (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis )
                     {
-                    // InternalAnsibleDslParser.g:7171:4: (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis )
-                    // InternalAnsibleDslParser.g:7172:5: otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis
+                    // InternalAnsibleDslParser.g:7244:4: (otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis )
+                    // InternalAnsibleDslParser.g:7245:5: otherlv_1= LeftParenthesis ( (lv_parameters_2_0= ruleEFilteredExpression ) ) (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )* otherlv_5= RightParenthesis
                     {
                     otherlv_1=(Token)match(input,LeftParenthesis,FOLLOW_63); 
 
                     					newLeafNode(otherlv_1, grammarAccess.getEFunctionCallAccess().getLeftParenthesisKeyword_1_0_0());
                     				
-                    // InternalAnsibleDslParser.g:7176:5: ( (lv_parameters_2_0= ruleEFilteredExpression ) )
-                    // InternalAnsibleDslParser.g:7177:6: (lv_parameters_2_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:7249:5: ( (lv_parameters_2_0= ruleEFilteredExpression ) )
+                    // InternalAnsibleDslParser.g:7250:6: (lv_parameters_2_0= ruleEFilteredExpression )
                     {
-                    // InternalAnsibleDslParser.g:7177:6: (lv_parameters_2_0= ruleEFilteredExpression )
-                    // InternalAnsibleDslParser.g:7178:7: lv_parameters_2_0= ruleEFilteredExpression
+                    // InternalAnsibleDslParser.g:7250:6: (lv_parameters_2_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:7251:7: lv_parameters_2_0= ruleEFilteredExpression
                     {
 
                     							newCompositeNode(grammarAccess.getEFunctionCallAccess().getParametersEFilteredExpressionParserRuleCall_1_0_1_0());
@@ -18640,7 +18814,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalAnsibleDslParser.g:7195:5: (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )*
+                    // InternalAnsibleDslParser.g:7268:5: (otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) ) )*
                     loop57:
                     do {
                         int alt57=2;
@@ -18653,17 +18827,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt57) {
                     	case 1 :
-                    	    // InternalAnsibleDslParser.g:7196:6: otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) )
+                    	    // InternalAnsibleDslParser.g:7269:6: otherlv_3= Comma ( (lv_parameters_4_0= ruleEFilteredExpression ) )
                     	    {
                     	    otherlv_3=(Token)match(input,Comma,FOLLOW_63); 
 
                     	    						newLeafNode(otherlv_3, grammarAccess.getEFunctionCallAccess().getCommaKeyword_1_0_2_0());
                     	    					
-                    	    // InternalAnsibleDslParser.g:7200:6: ( (lv_parameters_4_0= ruleEFilteredExpression ) )
-                    	    // InternalAnsibleDslParser.g:7201:7: (lv_parameters_4_0= ruleEFilteredExpression )
+                    	    // InternalAnsibleDslParser.g:7273:6: ( (lv_parameters_4_0= ruleEFilteredExpression ) )
+                    	    // InternalAnsibleDslParser.g:7274:7: (lv_parameters_4_0= ruleEFilteredExpression )
                     	    {
-                    	    // InternalAnsibleDslParser.g:7201:7: (lv_parameters_4_0= ruleEFilteredExpression )
-                    	    // InternalAnsibleDslParser.g:7202:8: lv_parameters_4_0= ruleEFilteredExpression
+                    	    // InternalAnsibleDslParser.g:7274:7: (lv_parameters_4_0= ruleEFilteredExpression )
+                    	    // InternalAnsibleDslParser.g:7275:8: lv_parameters_4_0= ruleEFilteredExpression
                     	    {
 
                     	    								newCompositeNode(grammarAccess.getEFunctionCallAccess().getParametersEFilteredExpressionParserRuleCall_1_0_2_1_0());
@@ -18710,13 +18884,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:7226:4: ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) )
+                    // InternalAnsibleDslParser.g:7299:4: ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) )
                     {
-                    // InternalAnsibleDslParser.g:7226:4: ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) )
-                    // InternalAnsibleDslParser.g:7227:5: (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis )
+                    // InternalAnsibleDslParser.g:7299:4: ( (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis ) )
+                    // InternalAnsibleDslParser.g:7300:5: (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis )
                     {
-                    // InternalAnsibleDslParser.g:7227:5: (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis )
-                    // InternalAnsibleDslParser.g:7228:6: lv_empty_brackets_6_0= LeftParenthesisRightParenthesis
+                    // InternalAnsibleDslParser.g:7300:5: (lv_empty_brackets_6_0= LeftParenthesisRightParenthesis )
+                    // InternalAnsibleDslParser.g:7301:6: lv_empty_brackets_6_0= LeftParenthesisRightParenthesis
                     {
                     lv_empty_brackets_6_0=(Token)match(input,LeftParenthesisRightParenthesis,FOLLOW_2); 
 
@@ -18763,7 +18937,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEFilteredExpression"
-    // InternalAnsibleDslParser.g:7245:1: entryRuleEFilteredExpression returns [EObject current=null] : iv_ruleEFilteredExpression= ruleEFilteredExpression EOF ;
+    // InternalAnsibleDslParser.g:7318:1: entryRuleEFilteredExpression returns [EObject current=null] : iv_ruleEFilteredExpression= ruleEFilteredExpression EOF ;
     public final EObject entryRuleEFilteredExpression() throws RecognitionException {
         EObject current = null;
 
@@ -18771,8 +18945,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7245:60: (iv_ruleEFilteredExpression= ruleEFilteredExpression EOF )
-            // InternalAnsibleDslParser.g:7246:2: iv_ruleEFilteredExpression= ruleEFilteredExpression EOF
+            // InternalAnsibleDslParser.g:7318:60: (iv_ruleEFilteredExpression= ruleEFilteredExpression EOF )
+            // InternalAnsibleDslParser.g:7319:2: iv_ruleEFilteredExpression= ruleEFilteredExpression EOF
             {
              newCompositeNode(grammarAccess.getEFilteredExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -18799,7 +18973,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEFilteredExpression"
-    // InternalAnsibleDslParser.g:7252:1: ruleEFilteredExpression returns [EObject current=null] : ( ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )? ) ;
+    // InternalAnsibleDslParser.g:7325:1: ruleEFilteredExpression returns [EObject current=null] : ( ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )? ) ;
     public final EObject ruleEFilteredExpression() throws RecognitionException {
         EObject current = null;
 
@@ -18813,17 +18987,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7258:2: ( ( ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )? ) )
-            // InternalAnsibleDslParser.g:7259:2: ( ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )? )
+            // InternalAnsibleDslParser.g:7331:2: ( ( ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )? ) )
+            // InternalAnsibleDslParser.g:7332:2: ( ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )? )
             {
-            // InternalAnsibleDslParser.g:7259:2: ( ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )? )
-            // InternalAnsibleDslParser.g:7260:3: ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )?
+            // InternalAnsibleDslParser.g:7332:2: ( ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )? )
+            // InternalAnsibleDslParser.g:7333:3: ( (lv_to_filter_0_0= ruleEOrExpression ) ) (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )?
             {
-            // InternalAnsibleDslParser.g:7260:3: ( (lv_to_filter_0_0= ruleEOrExpression ) )
-            // InternalAnsibleDslParser.g:7261:4: (lv_to_filter_0_0= ruleEOrExpression )
+            // InternalAnsibleDslParser.g:7333:3: ( (lv_to_filter_0_0= ruleEOrExpression ) )
+            // InternalAnsibleDslParser.g:7334:4: (lv_to_filter_0_0= ruleEOrExpression )
             {
-            // InternalAnsibleDslParser.g:7261:4: (lv_to_filter_0_0= ruleEOrExpression )
-            // InternalAnsibleDslParser.g:7262:5: lv_to_filter_0_0= ruleEOrExpression
+            // InternalAnsibleDslParser.g:7334:4: (lv_to_filter_0_0= ruleEOrExpression )
+            // InternalAnsibleDslParser.g:7335:5: lv_to_filter_0_0= ruleEOrExpression
             {
 
             					newCompositeNode(grammarAccess.getEFilteredExpressionAccess().getTo_filterEOrExpressionParserRuleCall_0_0());
@@ -18850,7 +19024,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7279:3: (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )?
+            // InternalAnsibleDslParser.g:7352:3: (otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) ) )?
             int alt59=2;
             int LA59_0 = input.LA(1);
 
@@ -18859,17 +19033,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt59) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7280:4: otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) )
+                    // InternalAnsibleDslParser.g:7353:4: otherlv_1= VerticalLine ( (lv_filter_2_0= ruleEFilteredExpression ) )
                     {
                     otherlv_1=(Token)match(input,VerticalLine,FOLLOW_63); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getEFilteredExpressionAccess().getVerticalLineKeyword_1_0());
                     			
-                    // InternalAnsibleDslParser.g:7284:4: ( (lv_filter_2_0= ruleEFilteredExpression ) )
-                    // InternalAnsibleDslParser.g:7285:5: (lv_filter_2_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:7357:4: ( (lv_filter_2_0= ruleEFilteredExpression ) )
+                    // InternalAnsibleDslParser.g:7358:5: (lv_filter_2_0= ruleEFilteredExpression )
                     {
-                    // InternalAnsibleDslParser.g:7285:5: (lv_filter_2_0= ruleEFilteredExpression )
-                    // InternalAnsibleDslParser.g:7286:6: lv_filter_2_0= ruleEFilteredExpression
+                    // InternalAnsibleDslParser.g:7358:5: (lv_filter_2_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:7359:6: lv_filter_2_0= ruleEFilteredExpression
                     {
 
                     						newCompositeNode(grammarAccess.getEFilteredExpressionAccess().getFilterEFilteredExpressionParserRuleCall_1_1_0());
@@ -18925,7 +19099,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEOrExpression"
-    // InternalAnsibleDslParser.g:7308:1: entryRuleEOrExpression returns [EObject current=null] : iv_ruleEOrExpression= ruleEOrExpression EOF ;
+    // InternalAnsibleDslParser.g:7381:1: entryRuleEOrExpression returns [EObject current=null] : iv_ruleEOrExpression= ruleEOrExpression EOF ;
     public final EObject entryRuleEOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -18933,8 +19107,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7308:54: (iv_ruleEOrExpression= ruleEOrExpression EOF )
-            // InternalAnsibleDslParser.g:7309:2: iv_ruleEOrExpression= ruleEOrExpression EOF
+            // InternalAnsibleDslParser.g:7381:54: (iv_ruleEOrExpression= ruleEOrExpression EOF )
+            // InternalAnsibleDslParser.g:7382:2: iv_ruleEOrExpression= ruleEOrExpression EOF
             {
              newCompositeNode(grammarAccess.getEOrExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -18961,7 +19135,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEOrExpression"
-    // InternalAnsibleDslParser.g:7315:1: ruleEOrExpression returns [EObject current=null] : ( ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )? ) ;
+    // InternalAnsibleDslParser.g:7388:1: ruleEOrExpression returns [EObject current=null] : ( ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )? ) ;
     public final EObject ruleEOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -18975,17 +19149,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7321:2: ( ( ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )? ) )
-            // InternalAnsibleDslParser.g:7322:2: ( ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )? )
+            // InternalAnsibleDslParser.g:7394:2: ( ( ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )? ) )
+            // InternalAnsibleDslParser.g:7395:2: ( ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )? )
             {
-            // InternalAnsibleDslParser.g:7322:2: ( ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )? )
-            // InternalAnsibleDslParser.g:7323:3: ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )?
+            // InternalAnsibleDslParser.g:7395:2: ( ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )? )
+            // InternalAnsibleDslParser.g:7396:3: ( (lv_left_or_0_0= ruleEAndExpression ) ) (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )?
             {
-            // InternalAnsibleDslParser.g:7323:3: ( (lv_left_or_0_0= ruleEAndExpression ) )
-            // InternalAnsibleDslParser.g:7324:4: (lv_left_or_0_0= ruleEAndExpression )
+            // InternalAnsibleDslParser.g:7396:3: ( (lv_left_or_0_0= ruleEAndExpression ) )
+            // InternalAnsibleDslParser.g:7397:4: (lv_left_or_0_0= ruleEAndExpression )
             {
-            // InternalAnsibleDslParser.g:7324:4: (lv_left_or_0_0= ruleEAndExpression )
-            // InternalAnsibleDslParser.g:7325:5: lv_left_or_0_0= ruleEAndExpression
+            // InternalAnsibleDslParser.g:7397:4: (lv_left_or_0_0= ruleEAndExpression )
+            // InternalAnsibleDslParser.g:7398:5: lv_left_or_0_0= ruleEAndExpression
             {
 
             					newCompositeNode(grammarAccess.getEOrExpressionAccess().getLeft_orEAndExpressionParserRuleCall_0_0());
@@ -19012,7 +19186,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7342:3: (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )?
+            // InternalAnsibleDslParser.g:7415:3: (otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) ) )?
             int alt60=2;
             int LA60_0 = input.LA(1);
 
@@ -19021,17 +19195,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt60) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7343:4: otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) )
+                    // InternalAnsibleDslParser.g:7416:4: otherlv_1= Or ( (lv_right_or_2_0= ruleEOrExpression ) )
                     {
                     otherlv_1=(Token)match(input,Or,FOLLOW_63); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getEOrExpressionAccess().getOrKeyword_1_0());
                     			
-                    // InternalAnsibleDslParser.g:7347:4: ( (lv_right_or_2_0= ruleEOrExpression ) )
-                    // InternalAnsibleDslParser.g:7348:5: (lv_right_or_2_0= ruleEOrExpression )
+                    // InternalAnsibleDslParser.g:7420:4: ( (lv_right_or_2_0= ruleEOrExpression ) )
+                    // InternalAnsibleDslParser.g:7421:5: (lv_right_or_2_0= ruleEOrExpression )
                     {
-                    // InternalAnsibleDslParser.g:7348:5: (lv_right_or_2_0= ruleEOrExpression )
-                    // InternalAnsibleDslParser.g:7349:6: lv_right_or_2_0= ruleEOrExpression
+                    // InternalAnsibleDslParser.g:7421:5: (lv_right_or_2_0= ruleEOrExpression )
+                    // InternalAnsibleDslParser.g:7422:6: lv_right_or_2_0= ruleEOrExpression
                     {
 
                     						newCompositeNode(grammarAccess.getEOrExpressionAccess().getRight_orEOrExpressionParserRuleCall_1_1_0());
@@ -19087,7 +19261,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEAndExpression"
-    // InternalAnsibleDslParser.g:7371:1: entryRuleEAndExpression returns [EObject current=null] : iv_ruleEAndExpression= ruleEAndExpression EOF ;
+    // InternalAnsibleDslParser.g:7444:1: entryRuleEAndExpression returns [EObject current=null] : iv_ruleEAndExpression= ruleEAndExpression EOF ;
     public final EObject entryRuleEAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -19095,8 +19269,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7371:55: (iv_ruleEAndExpression= ruleEAndExpression EOF )
-            // InternalAnsibleDslParser.g:7372:2: iv_ruleEAndExpression= ruleEAndExpression EOF
+            // InternalAnsibleDslParser.g:7444:55: (iv_ruleEAndExpression= ruleEAndExpression EOF )
+            // InternalAnsibleDslParser.g:7445:2: iv_ruleEAndExpression= ruleEAndExpression EOF
             {
              newCompositeNode(grammarAccess.getEAndExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -19123,7 +19297,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEAndExpression"
-    // InternalAnsibleDslParser.g:7378:1: ruleEAndExpression returns [EObject current=null] : ( ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )? ) ;
+    // InternalAnsibleDslParser.g:7451:1: ruleEAndExpression returns [EObject current=null] : ( ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )? ) ;
     public final EObject ruleEAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -19137,17 +19311,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7384:2: ( ( ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )? ) )
-            // InternalAnsibleDslParser.g:7385:2: ( ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )? )
+            // InternalAnsibleDslParser.g:7457:2: ( ( ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )? ) )
+            // InternalAnsibleDslParser.g:7458:2: ( ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )? )
             {
-            // InternalAnsibleDslParser.g:7385:2: ( ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )? )
-            // InternalAnsibleDslParser.g:7386:3: ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )?
+            // InternalAnsibleDslParser.g:7458:2: ( ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )? )
+            // InternalAnsibleDslParser.g:7459:3: ( (lv_left_and_0_0= ruleETruthExpression ) ) (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )?
             {
-            // InternalAnsibleDslParser.g:7386:3: ( (lv_left_and_0_0= ruleETruthExpression ) )
-            // InternalAnsibleDslParser.g:7387:4: (lv_left_and_0_0= ruleETruthExpression )
+            // InternalAnsibleDslParser.g:7459:3: ( (lv_left_and_0_0= ruleETruthExpression ) )
+            // InternalAnsibleDslParser.g:7460:4: (lv_left_and_0_0= ruleETruthExpression )
             {
-            // InternalAnsibleDslParser.g:7387:4: (lv_left_and_0_0= ruleETruthExpression )
-            // InternalAnsibleDslParser.g:7388:5: lv_left_and_0_0= ruleETruthExpression
+            // InternalAnsibleDslParser.g:7460:4: (lv_left_and_0_0= ruleETruthExpression )
+            // InternalAnsibleDslParser.g:7461:5: lv_left_and_0_0= ruleETruthExpression
             {
 
             					newCompositeNode(grammarAccess.getEAndExpressionAccess().getLeft_andETruthExpressionParserRuleCall_0_0());
@@ -19174,7 +19348,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7405:3: (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )?
+            // InternalAnsibleDslParser.g:7478:3: (otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) ) )?
             int alt61=2;
             int LA61_0 = input.LA(1);
 
@@ -19183,17 +19357,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt61) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7406:4: otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) )
+                    // InternalAnsibleDslParser.g:7479:4: otherlv_1= And ( (lv_right_and_2_0= ruleEAndExpression ) )
                     {
                     otherlv_1=(Token)match(input,And,FOLLOW_63); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getEAndExpressionAccess().getAndKeyword_1_0());
                     			
-                    // InternalAnsibleDslParser.g:7410:4: ( (lv_right_and_2_0= ruleEAndExpression ) )
-                    // InternalAnsibleDslParser.g:7411:5: (lv_right_and_2_0= ruleEAndExpression )
+                    // InternalAnsibleDslParser.g:7483:4: ( (lv_right_and_2_0= ruleEAndExpression ) )
+                    // InternalAnsibleDslParser.g:7484:5: (lv_right_and_2_0= ruleEAndExpression )
                     {
-                    // InternalAnsibleDslParser.g:7411:5: (lv_right_and_2_0= ruleEAndExpression )
-                    // InternalAnsibleDslParser.g:7412:6: lv_right_and_2_0= ruleEAndExpression
+                    // InternalAnsibleDslParser.g:7484:5: (lv_right_and_2_0= ruleEAndExpression )
+                    // InternalAnsibleDslParser.g:7485:6: lv_right_and_2_0= ruleEAndExpression
                     {
 
                     						newCompositeNode(grammarAccess.getEAndExpressionAccess().getRight_andEAndExpressionParserRuleCall_1_1_0());
@@ -19249,7 +19423,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleETruthExpression"
-    // InternalAnsibleDslParser.g:7434:1: entryRuleETruthExpression returns [EObject current=null] : iv_ruleETruthExpression= ruleETruthExpression EOF ;
+    // InternalAnsibleDslParser.g:7507:1: entryRuleETruthExpression returns [EObject current=null] : iv_ruleETruthExpression= ruleETruthExpression EOF ;
     public final EObject entryRuleETruthExpression() throws RecognitionException {
         EObject current = null;
 
@@ -19257,8 +19431,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7434:57: (iv_ruleETruthExpression= ruleETruthExpression EOF )
-            // InternalAnsibleDslParser.g:7435:2: iv_ruleETruthExpression= ruleETruthExpression EOF
+            // InternalAnsibleDslParser.g:7507:57: (iv_ruleETruthExpression= ruleETruthExpression EOF )
+            // InternalAnsibleDslParser.g:7508:2: iv_ruleETruthExpression= ruleETruthExpression EOF
             {
              newCompositeNode(grammarAccess.getETruthExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -19285,7 +19459,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleETruthExpression"
-    // InternalAnsibleDslParser.g:7441:1: ruleETruthExpression returns [EObject current=null] : ( ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )? ) ;
+    // InternalAnsibleDslParser.g:7514:1: ruleETruthExpression returns [EObject current=null] : ( ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )? ) ;
     public final EObject ruleETruthExpression() throws RecognitionException {
         EObject current = null;
 
@@ -19304,17 +19478,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7447:2: ( ( ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )? ) )
-            // InternalAnsibleDslParser.g:7448:2: ( ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )? )
+            // InternalAnsibleDslParser.g:7520:2: ( ( ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )? ) )
+            // InternalAnsibleDslParser.g:7521:2: ( ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )? )
             {
-            // InternalAnsibleDslParser.g:7448:2: ( ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )? )
-            // InternalAnsibleDslParser.g:7449:3: ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )?
+            // InternalAnsibleDslParser.g:7521:2: ( ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )? )
+            // InternalAnsibleDslParser.g:7522:3: ( (lv_left_value_0_0= ruleEOperation ) ) ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )?
             {
-            // InternalAnsibleDslParser.g:7449:3: ( (lv_left_value_0_0= ruleEOperation ) )
-            // InternalAnsibleDslParser.g:7450:4: (lv_left_value_0_0= ruleEOperation )
+            // InternalAnsibleDslParser.g:7522:3: ( (lv_left_value_0_0= ruleEOperation ) )
+            // InternalAnsibleDslParser.g:7523:4: (lv_left_value_0_0= ruleEOperation )
             {
-            // InternalAnsibleDslParser.g:7450:4: (lv_left_value_0_0= ruleEOperation )
-            // InternalAnsibleDslParser.g:7451:5: lv_left_value_0_0= ruleEOperation
+            // InternalAnsibleDslParser.g:7523:4: (lv_left_value_0_0= ruleEOperation )
+            // InternalAnsibleDslParser.g:7524:5: lv_left_value_0_0= ruleEOperation
             {
 
             					newCompositeNode(grammarAccess.getETruthExpressionAccess().getLeft_valueEOperationParserRuleCall_0_0());
@@ -19341,7 +19515,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7468:3: ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )?
+            // InternalAnsibleDslParser.g:7541:3: ( ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) ) )?
             int alt63=2;
             int LA63_0 = input.LA(1);
 
@@ -19350,15 +19524,15 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt63) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7469:4: ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) )
+                    // InternalAnsibleDslParser.g:7542:4: ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) ) ( (lv_right_value_2_0= ruleETruthExpression ) )
                     {
-                    // InternalAnsibleDslParser.g:7469:4: ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) )
-                    // InternalAnsibleDslParser.g:7470:5: ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) )
+                    // InternalAnsibleDslParser.g:7542:4: ( ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) ) )
+                    // InternalAnsibleDslParser.g:7543:5: ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) )
                     {
-                    // InternalAnsibleDslParser.g:7470:5: ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) )
-                    // InternalAnsibleDslParser.g:7471:6: (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign )
+                    // InternalAnsibleDslParser.g:7543:5: ( (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign ) )
+                    // InternalAnsibleDslParser.g:7544:6: (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign )
                     {
-                    // InternalAnsibleDslParser.g:7471:6: (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign )
+                    // InternalAnsibleDslParser.g:7544:6: (lv_equality_sign_1_1= EqualsSignEqualsSign | lv_equality_sign_1_2= ExclamationMarkEqualsSign | lv_equality_sign_1_3= LessThanSign | lv_equality_sign_1_4= GreaterThanSign | lv_equality_sign_1_5= LessThanSignEqualsSign | lv_equality_sign_1_6= GreaterThanSignEqualsSign )
                     int alt62=6;
                     switch ( input.LA(1) ) {
                     case EqualsSignEqualsSign:
@@ -19400,7 +19574,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     switch (alt62) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:7472:7: lv_equality_sign_1_1= EqualsSignEqualsSign
+                            // InternalAnsibleDslParser.g:7545:7: lv_equality_sign_1_1= EqualsSignEqualsSign
                             {
                             lv_equality_sign_1_1=(Token)match(input,EqualsSignEqualsSign,FOLLOW_63); 
 
@@ -19416,7 +19590,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalAnsibleDslParser.g:7483:7: lv_equality_sign_1_2= ExclamationMarkEqualsSign
+                            // InternalAnsibleDslParser.g:7556:7: lv_equality_sign_1_2= ExclamationMarkEqualsSign
                             {
                             lv_equality_sign_1_2=(Token)match(input,ExclamationMarkEqualsSign,FOLLOW_63); 
 
@@ -19432,7 +19606,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalAnsibleDslParser.g:7494:7: lv_equality_sign_1_3= LessThanSign
+                            // InternalAnsibleDslParser.g:7567:7: lv_equality_sign_1_3= LessThanSign
                             {
                             lv_equality_sign_1_3=(Token)match(input,LessThanSign,FOLLOW_63); 
 
@@ -19448,7 +19622,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // InternalAnsibleDslParser.g:7505:7: lv_equality_sign_1_4= GreaterThanSign
+                            // InternalAnsibleDslParser.g:7578:7: lv_equality_sign_1_4= GreaterThanSign
                             {
                             lv_equality_sign_1_4=(Token)match(input,GreaterThanSign,FOLLOW_63); 
 
@@ -19464,7 +19638,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 5 :
-                            // InternalAnsibleDslParser.g:7516:7: lv_equality_sign_1_5= LessThanSignEqualsSign
+                            // InternalAnsibleDslParser.g:7589:7: lv_equality_sign_1_5= LessThanSignEqualsSign
                             {
                             lv_equality_sign_1_5=(Token)match(input,LessThanSignEqualsSign,FOLLOW_63); 
 
@@ -19480,7 +19654,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 6 :
-                            // InternalAnsibleDslParser.g:7527:7: lv_equality_sign_1_6= GreaterThanSignEqualsSign
+                            // InternalAnsibleDslParser.g:7600:7: lv_equality_sign_1_6= GreaterThanSignEqualsSign
                             {
                             lv_equality_sign_1_6=(Token)match(input,GreaterThanSignEqualsSign,FOLLOW_63); 
 
@@ -19504,11 +19678,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalAnsibleDslParser.g:7540:4: ( (lv_right_value_2_0= ruleETruthExpression ) )
-                    // InternalAnsibleDslParser.g:7541:5: (lv_right_value_2_0= ruleETruthExpression )
+                    // InternalAnsibleDslParser.g:7613:4: ( (lv_right_value_2_0= ruleETruthExpression ) )
+                    // InternalAnsibleDslParser.g:7614:5: (lv_right_value_2_0= ruleETruthExpression )
                     {
-                    // InternalAnsibleDslParser.g:7541:5: (lv_right_value_2_0= ruleETruthExpression )
-                    // InternalAnsibleDslParser.g:7542:6: lv_right_value_2_0= ruleETruthExpression
+                    // InternalAnsibleDslParser.g:7614:5: (lv_right_value_2_0= ruleETruthExpression )
+                    // InternalAnsibleDslParser.g:7615:6: lv_right_value_2_0= ruleETruthExpression
                     {
 
                     						newCompositeNode(grammarAccess.getETruthExpressionAccess().getRight_valueETruthExpressionParserRuleCall_1_1_0());
@@ -19564,7 +19738,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEOperation"
-    // InternalAnsibleDslParser.g:7564:1: entryRuleEOperation returns [EObject current=null] : iv_ruleEOperation= ruleEOperation EOF ;
+    // InternalAnsibleDslParser.g:7637:1: entryRuleEOperation returns [EObject current=null] : iv_ruleEOperation= ruleEOperation EOF ;
     public final EObject entryRuleEOperation() throws RecognitionException {
         EObject current = null;
 
@@ -19572,8 +19746,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7564:51: (iv_ruleEOperation= ruleEOperation EOF )
-            // InternalAnsibleDslParser.g:7565:2: iv_ruleEOperation= ruleEOperation EOF
+            // InternalAnsibleDslParser.g:7637:51: (iv_ruleEOperation= ruleEOperation EOF )
+            // InternalAnsibleDslParser.g:7638:2: iv_ruleEOperation= ruleEOperation EOF
             {
              newCompositeNode(grammarAccess.getEOperationRule()); 
             pushFollow(FOLLOW_1);
@@ -19600,7 +19774,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEOperation"
-    // InternalAnsibleDslParser.g:7571:1: ruleEOperation returns [EObject current=null] : ( ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )? ) ;
+    // InternalAnsibleDslParser.g:7644:1: ruleEOperation returns [EObject current=null] : ( ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )? ) ;
     public final EObject ruleEOperation() throws RecognitionException {
         EObject current = null;
 
@@ -19620,17 +19794,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7577:2: ( ( ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )? ) )
-            // InternalAnsibleDslParser.g:7578:2: ( ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )? )
+            // InternalAnsibleDslParser.g:7650:2: ( ( ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )? ) )
+            // InternalAnsibleDslParser.g:7651:2: ( ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )? )
             {
-            // InternalAnsibleDslParser.g:7578:2: ( ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )? )
-            // InternalAnsibleDslParser.g:7579:3: ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )?
+            // InternalAnsibleDslParser.g:7651:2: ( ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )? )
+            // InternalAnsibleDslParser.g:7652:3: ( (lv_left_operand_0_0= ruleEIsExpression ) ) ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )?
             {
-            // InternalAnsibleDslParser.g:7579:3: ( (lv_left_operand_0_0= ruleEIsExpression ) )
-            // InternalAnsibleDslParser.g:7580:4: (lv_left_operand_0_0= ruleEIsExpression )
+            // InternalAnsibleDslParser.g:7652:3: ( (lv_left_operand_0_0= ruleEIsExpression ) )
+            // InternalAnsibleDslParser.g:7653:4: (lv_left_operand_0_0= ruleEIsExpression )
             {
-            // InternalAnsibleDslParser.g:7580:4: (lv_left_operand_0_0= ruleEIsExpression )
-            // InternalAnsibleDslParser.g:7581:5: lv_left_operand_0_0= ruleEIsExpression
+            // InternalAnsibleDslParser.g:7653:4: (lv_left_operand_0_0= ruleEIsExpression )
+            // InternalAnsibleDslParser.g:7654:5: lv_left_operand_0_0= ruleEIsExpression
             {
 
             					newCompositeNode(grammarAccess.getEOperationAccess().getLeft_operandEIsExpressionParserRuleCall_0_0());
@@ -19657,7 +19831,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7598:3: ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )?
+            // InternalAnsibleDslParser.g:7671:3: ( ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) ) )?
             int alt65=2;
             int LA65_0 = input.LA(1);
 
@@ -19666,15 +19840,15 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt65) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7599:4: ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) )
+                    // InternalAnsibleDslParser.g:7672:4: ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) ) ( (lv_right_operand_2_0= ruleEOperation ) )
                     {
-                    // InternalAnsibleDslParser.g:7599:4: ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) )
-                    // InternalAnsibleDslParser.g:7600:5: ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) )
+                    // InternalAnsibleDslParser.g:7672:4: ( ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) ) )
+                    // InternalAnsibleDslParser.g:7673:5: ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) )
                     {
-                    // InternalAnsibleDslParser.g:7600:5: ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) )
-                    // InternalAnsibleDslParser.g:7601:6: (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk )
+                    // InternalAnsibleDslParser.g:7673:5: ( (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk ) )
+                    // InternalAnsibleDslParser.g:7674:6: (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk )
                     {
-                    // InternalAnsibleDslParser.g:7601:6: (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk )
+                    // InternalAnsibleDslParser.g:7674:6: (lv_operator_1_1= PlusSign | lv_operator_1_2= HyphenMinus | lv_operator_1_3= Solidus | lv_operator_1_4= SolidusSolidus | lv_operator_1_5= PercentSign | lv_operator_1_6= Asterisk | lv_operator_1_7= AsteriskAsterisk )
                     int alt64=7;
                     switch ( input.LA(1) ) {
                     case PlusSign:
@@ -19721,7 +19895,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     switch (alt64) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:7602:7: lv_operator_1_1= PlusSign
+                            // InternalAnsibleDslParser.g:7675:7: lv_operator_1_1= PlusSign
                             {
                             lv_operator_1_1=(Token)match(input,PlusSign,FOLLOW_63); 
 
@@ -19737,7 +19911,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalAnsibleDslParser.g:7613:7: lv_operator_1_2= HyphenMinus
+                            // InternalAnsibleDslParser.g:7686:7: lv_operator_1_2= HyphenMinus
                             {
                             lv_operator_1_2=(Token)match(input,HyphenMinus,FOLLOW_63); 
 
@@ -19753,7 +19927,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalAnsibleDslParser.g:7624:7: lv_operator_1_3= Solidus
+                            // InternalAnsibleDslParser.g:7697:7: lv_operator_1_3= Solidus
                             {
                             lv_operator_1_3=(Token)match(input,Solidus,FOLLOW_63); 
 
@@ -19769,7 +19943,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // InternalAnsibleDslParser.g:7635:7: lv_operator_1_4= SolidusSolidus
+                            // InternalAnsibleDslParser.g:7708:7: lv_operator_1_4= SolidusSolidus
                             {
                             lv_operator_1_4=(Token)match(input,SolidusSolidus,FOLLOW_63); 
 
@@ -19785,7 +19959,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 5 :
-                            // InternalAnsibleDslParser.g:7646:7: lv_operator_1_5= PercentSign
+                            // InternalAnsibleDslParser.g:7719:7: lv_operator_1_5= PercentSign
                             {
                             lv_operator_1_5=(Token)match(input,PercentSign,FOLLOW_63); 
 
@@ -19801,7 +19975,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 6 :
-                            // InternalAnsibleDslParser.g:7657:7: lv_operator_1_6= Asterisk
+                            // InternalAnsibleDslParser.g:7730:7: lv_operator_1_6= Asterisk
                             {
                             lv_operator_1_6=(Token)match(input,Asterisk,FOLLOW_63); 
 
@@ -19817,7 +19991,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 7 :
-                            // InternalAnsibleDslParser.g:7668:7: lv_operator_1_7= AsteriskAsterisk
+                            // InternalAnsibleDslParser.g:7741:7: lv_operator_1_7= AsteriskAsterisk
                             {
                             lv_operator_1_7=(Token)match(input,AsteriskAsterisk,FOLLOW_63); 
 
@@ -19841,11 +20015,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalAnsibleDslParser.g:7681:4: ( (lv_right_operand_2_0= ruleEOperation ) )
-                    // InternalAnsibleDslParser.g:7682:5: (lv_right_operand_2_0= ruleEOperation )
+                    // InternalAnsibleDslParser.g:7754:4: ( (lv_right_operand_2_0= ruleEOperation ) )
+                    // InternalAnsibleDslParser.g:7755:5: (lv_right_operand_2_0= ruleEOperation )
                     {
-                    // InternalAnsibleDslParser.g:7682:5: (lv_right_operand_2_0= ruleEOperation )
-                    // InternalAnsibleDslParser.g:7683:6: lv_right_operand_2_0= ruleEOperation
+                    // InternalAnsibleDslParser.g:7755:5: (lv_right_operand_2_0= ruleEOperation )
+                    // InternalAnsibleDslParser.g:7756:6: lv_right_operand_2_0= ruleEOperation
                     {
 
                     						newCompositeNode(grammarAccess.getEOperationAccess().getRight_operandEOperationParserRuleCall_1_1_0());
@@ -19901,7 +20075,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEIsExpression"
-    // InternalAnsibleDslParser.g:7705:1: entryRuleEIsExpression returns [EObject current=null] : iv_ruleEIsExpression= ruleEIsExpression EOF ;
+    // InternalAnsibleDslParser.g:7778:1: entryRuleEIsExpression returns [EObject current=null] : iv_ruleEIsExpression= ruleEIsExpression EOF ;
     public final EObject entryRuleEIsExpression() throws RecognitionException {
         EObject current = null;
 
@@ -19909,8 +20083,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7705:54: (iv_ruleEIsExpression= ruleEIsExpression EOF )
-            // InternalAnsibleDslParser.g:7706:2: iv_ruleEIsExpression= ruleEIsExpression EOF
+            // InternalAnsibleDslParser.g:7778:54: (iv_ruleEIsExpression= ruleEIsExpression EOF )
+            // InternalAnsibleDslParser.g:7779:2: iv_ruleEIsExpression= ruleEIsExpression EOF
             {
              newCompositeNode(grammarAccess.getEIsExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -19937,7 +20111,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEIsExpression"
-    // InternalAnsibleDslParser.g:7712:1: ruleEIsExpression returns [EObject current=null] : ( ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )? ) ;
+    // InternalAnsibleDslParser.g:7785:1: ruleEIsExpression returns [EObject current=null] : ( ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )? ) ;
     public final EObject ruleEIsExpression() throws RecognitionException {
         EObject current = null;
 
@@ -19956,13 +20130,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7718:2: ( ( ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )? ) )
-            // InternalAnsibleDslParser.g:7719:2: ( ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )? )
+            // InternalAnsibleDslParser.g:7791:2: ( ( ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )? ) )
+            // InternalAnsibleDslParser.g:7792:2: ( ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )? )
             {
-            // InternalAnsibleDslParser.g:7719:2: ( ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )? )
-            // InternalAnsibleDslParser.g:7720:3: ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )?
+            // InternalAnsibleDslParser.g:7792:2: ( ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )? )
+            // InternalAnsibleDslParser.g:7793:3: ( (lv_not_0_0= Not ) )? ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) ) ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )?
             {
-            // InternalAnsibleDslParser.g:7720:3: ( (lv_not_0_0= Not ) )?
+            // InternalAnsibleDslParser.g:7793:3: ( (lv_not_0_0= Not ) )?
             int alt66=2;
             int LA66_0 = input.LA(1);
 
@@ -19971,10 +20145,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt66) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7721:4: (lv_not_0_0= Not )
+                    // InternalAnsibleDslParser.g:7794:4: (lv_not_0_0= Not )
                     {
-                    // InternalAnsibleDslParser.g:7721:4: (lv_not_0_0= Not )
-                    // InternalAnsibleDslParser.g:7722:5: lv_not_0_0= Not
+                    // InternalAnsibleDslParser.g:7794:4: (lv_not_0_0= Not )
+                    // InternalAnsibleDslParser.g:7795:5: lv_not_0_0= Not
                     {
                     lv_not_0_0=(Token)match(input,Not,FOLLOW_63); 
 
@@ -19995,11 +20169,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7734:3: ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) )
-            // InternalAnsibleDslParser.g:7735:4: (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression )
+            // InternalAnsibleDslParser.g:7807:3: ( (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression ) )
+            // InternalAnsibleDslParser.g:7808:4: (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression )
             {
-            // InternalAnsibleDslParser.g:7735:4: (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression )
-            // InternalAnsibleDslParser.g:7736:5: lv_parenthesised_expression_1_0= ruleEParenthesisedExpression
+            // InternalAnsibleDslParser.g:7808:4: (lv_parenthesised_expression_1_0= ruleEParenthesisedExpression )
+            // InternalAnsibleDslParser.g:7809:5: lv_parenthesised_expression_1_0= ruleEParenthesisedExpression
             {
 
             					newCompositeNode(grammarAccess.getEIsExpressionAccess().getParenthesised_expressionEParenthesisedExpressionParserRuleCall_1_0());
@@ -20026,7 +20200,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7753:3: ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )?
+            // InternalAnsibleDslParser.g:7826:3: ( (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) ) | ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) ) )?
             int alt68=3;
             int LA68_0 = input.LA(1);
 
@@ -20038,20 +20212,20 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt68) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7754:4: (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) )
+                    // InternalAnsibleDslParser.g:7827:4: (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) )
                     {
-                    // InternalAnsibleDslParser.g:7754:4: (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) )
-                    // InternalAnsibleDslParser.g:7755:5: otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) )
+                    // InternalAnsibleDslParser.g:7827:4: (otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) ) )
+                    // InternalAnsibleDslParser.g:7828:5: otherlv_2= Is ( (lv_status_3_0= ruleEIsExpression ) )
                     {
                     otherlv_2=(Token)match(input,Is,FOLLOW_63); 
 
                     					newLeafNode(otherlv_2, grammarAccess.getEIsExpressionAccess().getIsKeyword_2_0_0());
                     				
-                    // InternalAnsibleDslParser.g:7759:5: ( (lv_status_3_0= ruleEIsExpression ) )
-                    // InternalAnsibleDslParser.g:7760:6: (lv_status_3_0= ruleEIsExpression )
+                    // InternalAnsibleDslParser.g:7832:5: ( (lv_status_3_0= ruleEIsExpression ) )
+                    // InternalAnsibleDslParser.g:7833:6: (lv_status_3_0= ruleEIsExpression )
                     {
-                    // InternalAnsibleDslParser.g:7760:6: (lv_status_3_0= ruleEIsExpression )
-                    // InternalAnsibleDslParser.g:7761:7: lv_status_3_0= ruleEIsExpression
+                    // InternalAnsibleDslParser.g:7833:6: (lv_status_3_0= ruleEIsExpression )
+                    // InternalAnsibleDslParser.g:7834:7: lv_status_3_0= ruleEIsExpression
                     {
 
                     							newCompositeNode(grammarAccess.getEIsExpressionAccess().getStatusEIsExpressionParserRuleCall_2_0_1_0());
@@ -20085,12 +20259,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:7780:4: ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) )
+                    // InternalAnsibleDslParser.g:7853:4: ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) )
                     {
-                    // InternalAnsibleDslParser.g:7780:4: ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) )
-                    // InternalAnsibleDslParser.g:7781:5: ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) )
+                    // InternalAnsibleDslParser.g:7853:4: ( ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) ) )
+                    // InternalAnsibleDslParser.g:7854:5: ( (lv_not_in_4_0= Not ) )? otherlv_5= In ( (lv_container_expression_6_0= ruleEIsExpression ) )
                     {
-                    // InternalAnsibleDslParser.g:7781:5: ( (lv_not_in_4_0= Not ) )?
+                    // InternalAnsibleDslParser.g:7854:5: ( (lv_not_in_4_0= Not ) )?
                     int alt67=2;
                     int LA67_0 = input.LA(1);
 
@@ -20099,10 +20273,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt67) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:7782:6: (lv_not_in_4_0= Not )
+                            // InternalAnsibleDslParser.g:7855:6: (lv_not_in_4_0= Not )
                             {
-                            // InternalAnsibleDslParser.g:7782:6: (lv_not_in_4_0= Not )
-                            // InternalAnsibleDslParser.g:7783:7: lv_not_in_4_0= Not
+                            // InternalAnsibleDslParser.g:7855:6: (lv_not_in_4_0= Not )
+                            // InternalAnsibleDslParser.g:7856:7: lv_not_in_4_0= Not
                             {
                             lv_not_in_4_0=(Token)match(input,Not,FOLLOW_71); 
 
@@ -20127,11 +20301,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     					newLeafNode(otherlv_5, grammarAccess.getEIsExpressionAccess().getInKeyword_2_1_1());
                     				
-                    // InternalAnsibleDslParser.g:7799:5: ( (lv_container_expression_6_0= ruleEIsExpression ) )
-                    // InternalAnsibleDslParser.g:7800:6: (lv_container_expression_6_0= ruleEIsExpression )
+                    // InternalAnsibleDslParser.g:7872:5: ( (lv_container_expression_6_0= ruleEIsExpression ) )
+                    // InternalAnsibleDslParser.g:7873:6: (lv_container_expression_6_0= ruleEIsExpression )
                     {
-                    // InternalAnsibleDslParser.g:7800:6: (lv_container_expression_6_0= ruleEIsExpression )
-                    // InternalAnsibleDslParser.g:7801:7: lv_container_expression_6_0= ruleEIsExpression
+                    // InternalAnsibleDslParser.g:7873:6: (lv_container_expression_6_0= ruleEIsExpression )
+                    // InternalAnsibleDslParser.g:7874:7: lv_container_expression_6_0= ruleEIsExpression
                     {
 
                     							newCompositeNode(grammarAccess.getEIsExpressionAccess().getContainer_expressionEIsExpressionParserRuleCall_2_1_2_0());
@@ -20190,7 +20364,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEParenthesisedExpression"
-    // InternalAnsibleDslParser.g:7824:1: entryRuleEParenthesisedExpression returns [EObject current=null] : iv_ruleEParenthesisedExpression= ruleEParenthesisedExpression EOF ;
+    // InternalAnsibleDslParser.g:7897:1: entryRuleEParenthesisedExpression returns [EObject current=null] : iv_ruleEParenthesisedExpression= ruleEParenthesisedExpression EOF ;
     public final EObject entryRuleEParenthesisedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -20198,8 +20372,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7824:65: (iv_ruleEParenthesisedExpression= ruleEParenthesisedExpression EOF )
-            // InternalAnsibleDslParser.g:7825:2: iv_ruleEParenthesisedExpression= ruleEParenthesisedExpression EOF
+            // InternalAnsibleDslParser.g:7897:65: (iv_ruleEParenthesisedExpression= ruleEParenthesisedExpression EOF )
+            // InternalAnsibleDslParser.g:7898:2: iv_ruleEParenthesisedExpression= ruleEParenthesisedExpression EOF
             {
              newCompositeNode(grammarAccess.getEParenthesisedExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -20226,7 +20400,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEParenthesisedExpression"
-    // InternalAnsibleDslParser.g:7831:1: ruleEParenthesisedExpression returns [EObject current=null] : ( ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )* ) ;
+    // InternalAnsibleDslParser.g:7904:1: ruleEParenthesisedExpression returns [EObject current=null] : ( ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )* ) ;
     public final EObject ruleEParenthesisedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -20247,13 +20421,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7837:2: ( ( ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )* ) )
-            // InternalAnsibleDslParser.g:7838:2: ( ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )* )
+            // InternalAnsibleDslParser.g:7910:2: ( ( ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )* ) )
+            // InternalAnsibleDslParser.g:7911:2: ( ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )* )
             {
-            // InternalAnsibleDslParser.g:7838:2: ( ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )* )
-            // InternalAnsibleDslParser.g:7839:3: ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )*
+            // InternalAnsibleDslParser.g:7911:2: ( ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )* )
+            // InternalAnsibleDslParser.g:7912:3: ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) ) (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )? (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )*
             {
-            // InternalAnsibleDslParser.g:7839:3: ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) )
+            // InternalAnsibleDslParser.g:7912:3: ( ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) ) | (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis ) )
             int alt69=2;
             int LA69_0 = input.LA(1);
 
@@ -20271,13 +20445,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt69) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7840:4: ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) )
+                    // InternalAnsibleDslParser.g:7913:4: ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) )
                     {
-                    // InternalAnsibleDslParser.g:7840:4: ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) )
-                    // InternalAnsibleDslParser.g:7841:5: (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression )
+                    // InternalAnsibleDslParser.g:7913:4: ( (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression ) )
+                    // InternalAnsibleDslParser.g:7914:5: (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression )
                     {
-                    // InternalAnsibleDslParser.g:7841:5: (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression )
-                    // InternalAnsibleDslParser.g:7842:6: lv_basic_value_0_0= ruleEValuePassedToJinjaExpression
+                    // InternalAnsibleDslParser.g:7914:5: (lv_basic_value_0_0= ruleEValuePassedToJinjaExpression )
+                    // InternalAnsibleDslParser.g:7915:6: lv_basic_value_0_0= ruleEValuePassedToJinjaExpression
                     {
 
                     						newCompositeNode(grammarAccess.getEParenthesisedExpressionAccess().getBasic_valueEValuePassedToJinjaExpressionParserRuleCall_0_0_0());
@@ -20308,20 +20482,20 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:7860:4: (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis )
+                    // InternalAnsibleDslParser.g:7933:4: (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis )
                     {
-                    // InternalAnsibleDslParser.g:7860:4: (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis )
-                    // InternalAnsibleDslParser.g:7861:5: otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis
+                    // InternalAnsibleDslParser.g:7933:4: (otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis )
+                    // InternalAnsibleDslParser.g:7934:5: otherlv_1= LeftParenthesis ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) ) otherlv_3= RightParenthesis
                     {
                     otherlv_1=(Token)match(input,LeftParenthesis,FOLLOW_63); 
 
                     					newLeafNode(otherlv_1, grammarAccess.getEParenthesisedExpressionAccess().getLeftParenthesisKeyword_0_1_0());
                     				
-                    // InternalAnsibleDslParser.g:7865:5: ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) )
-                    // InternalAnsibleDslParser.g:7866:6: (lv_parenthesised_term_2_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:7938:5: ( (lv_parenthesised_term_2_0= ruleEFilteredExpression ) )
+                    // InternalAnsibleDslParser.g:7939:6: (lv_parenthesised_term_2_0= ruleEFilteredExpression )
                     {
-                    // InternalAnsibleDslParser.g:7866:6: (lv_parenthesised_term_2_0= ruleEFilteredExpression )
-                    // InternalAnsibleDslParser.g:7867:7: lv_parenthesised_term_2_0= ruleEFilteredExpression
+                    // InternalAnsibleDslParser.g:7939:6: (lv_parenthesised_term_2_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:7940:7: lv_parenthesised_term_2_0= ruleEFilteredExpression
                     {
 
                     							newCompositeNode(grammarAccess.getEParenthesisedExpressionAccess().getParenthesised_termEFilteredExpressionParserRuleCall_0_1_1_0());
@@ -20361,7 +20535,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7890:3: (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )?
+            // InternalAnsibleDslParser.g:7963:3: (otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket )?
             int alt70=2;
             int LA70_0 = input.LA(1);
 
@@ -20370,17 +20544,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt70) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:7891:4: otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket
+                    // InternalAnsibleDslParser.g:7964:4: otherlv_4= LeftSquareBracket ( (lv_index_5_0= RULE_NUMBER ) ) otherlv_6= RightSquareBracket
                     {
                     otherlv_4=(Token)match(input,LeftSquareBracket,FOLLOW_74); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getEParenthesisedExpressionAccess().getLeftSquareBracketKeyword_1_0());
                     			
-                    // InternalAnsibleDslParser.g:7895:4: ( (lv_index_5_0= RULE_NUMBER ) )
-                    // InternalAnsibleDslParser.g:7896:5: (lv_index_5_0= RULE_NUMBER )
+                    // InternalAnsibleDslParser.g:7968:4: ( (lv_index_5_0= RULE_NUMBER ) )
+                    // InternalAnsibleDslParser.g:7969:5: (lv_index_5_0= RULE_NUMBER )
                     {
-                    // InternalAnsibleDslParser.g:7896:5: (lv_index_5_0= RULE_NUMBER )
-                    // InternalAnsibleDslParser.g:7897:6: lv_index_5_0= RULE_NUMBER
+                    // InternalAnsibleDslParser.g:7969:5: (lv_index_5_0= RULE_NUMBER )
+                    // InternalAnsibleDslParser.g:7970:6: lv_index_5_0= RULE_NUMBER
                     {
                     lv_index_5_0=(Token)match(input,RULE_NUMBER,FOLLOW_75); 
 
@@ -20412,7 +20586,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:7918:3: (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )*
+            // InternalAnsibleDslParser.g:7991:3: (otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) ) )*
             loop71:
             do {
                 int alt71=2;
@@ -20425,17 +20599,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt71) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:7919:4: otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) )
+            	    // InternalAnsibleDslParser.g:7992:4: otherlv_7= FullStop ( (lv_tail_8_0= ruleETailElement ) )
             	    {
             	    otherlv_7=(Token)match(input,FullStop,FOLLOW_16); 
 
             	    				newLeafNode(otherlv_7, grammarAccess.getEParenthesisedExpressionAccess().getFullStopKeyword_2_0());
             	    			
-            	    // InternalAnsibleDslParser.g:7923:4: ( (lv_tail_8_0= ruleETailElement ) )
-            	    // InternalAnsibleDslParser.g:7924:5: (lv_tail_8_0= ruleETailElement )
+            	    // InternalAnsibleDslParser.g:7996:4: ( (lv_tail_8_0= ruleETailElement ) )
+            	    // InternalAnsibleDslParser.g:7997:5: (lv_tail_8_0= ruleETailElement )
             	    {
-            	    // InternalAnsibleDslParser.g:7924:5: (lv_tail_8_0= ruleETailElement )
-            	    // InternalAnsibleDslParser.g:7925:6: lv_tail_8_0= ruleETailElement
+            	    // InternalAnsibleDslParser.g:7997:5: (lv_tail_8_0= ruleETailElement )
+            	    // InternalAnsibleDslParser.g:7998:6: lv_tail_8_0= ruleETailElement
             	    {
 
             	    						newCompositeNode(grammarAccess.getEParenthesisedExpressionAccess().getTailETailElementParserRuleCall_2_1_0());
@@ -20494,7 +20668,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEIfExpression"
-    // InternalAnsibleDslParser.g:7947:1: entryRuleEIfExpression returns [EObject current=null] : iv_ruleEIfExpression= ruleEIfExpression EOF ;
+    // InternalAnsibleDslParser.g:8020:1: entryRuleEIfExpression returns [EObject current=null] : iv_ruleEIfExpression= ruleEIfExpression EOF ;
     public final EObject entryRuleEIfExpression() throws RecognitionException {
         EObject current = null;
 
@@ -20502,8 +20676,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:7947:54: (iv_ruleEIfExpression= ruleEIfExpression EOF )
-            // InternalAnsibleDslParser.g:7948:2: iv_ruleEIfExpression= ruleEIfExpression EOF
+            // InternalAnsibleDslParser.g:8020:54: (iv_ruleEIfExpression= ruleEIfExpression EOF )
+            // InternalAnsibleDslParser.g:8021:2: iv_ruleEIfExpression= ruleEIfExpression EOF
             {
              newCompositeNode(grammarAccess.getEIfExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -20530,7 +20704,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEIfExpression"
-    // InternalAnsibleDslParser.g:7954:1: ruleEIfExpression returns [EObject current=null] : (otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )? ) ;
+    // InternalAnsibleDslParser.g:8027:1: ruleEIfExpression returns [EObject current=null] : (otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )? ) ;
     public final EObject ruleEIfExpression() throws RecognitionException {
         EObject current = null;
 
@@ -20548,21 +20722,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:7960:2: ( (otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )? ) )
-            // InternalAnsibleDslParser.g:7961:2: (otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )? )
+            // InternalAnsibleDslParser.g:8033:2: ( (otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )? ) )
+            // InternalAnsibleDslParser.g:8034:2: (otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )? )
             {
-            // InternalAnsibleDslParser.g:7961:2: (otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )? )
-            // InternalAnsibleDslParser.g:7962:3: otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )?
+            // InternalAnsibleDslParser.g:8034:2: (otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )? )
+            // InternalAnsibleDslParser.g:8035:3: otherlv_0= Return ( (lv_if_expression_1_0= ruleEFilteredExpression ) ) otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )?
             {
             otherlv_0=(Token)match(input,Return,FOLLOW_63); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEIfExpressionAccess().getReturnKeyword_0());
             		
-            // InternalAnsibleDslParser.g:7966:3: ( (lv_if_expression_1_0= ruleEFilteredExpression ) )
-            // InternalAnsibleDslParser.g:7967:4: (lv_if_expression_1_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8039:3: ( (lv_if_expression_1_0= ruleEFilteredExpression ) )
+            // InternalAnsibleDslParser.g:8040:4: (lv_if_expression_1_0= ruleEFilteredExpression )
             {
-            // InternalAnsibleDslParser.g:7967:4: (lv_if_expression_1_0= ruleEFilteredExpression )
-            // InternalAnsibleDslParser.g:7968:5: lv_if_expression_1_0= ruleEFilteredExpression
+            // InternalAnsibleDslParser.g:8040:4: (lv_if_expression_1_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8041:5: lv_if_expression_1_0= ruleEFilteredExpression
             {
 
             					newCompositeNode(grammarAccess.getEIfExpressionAccess().getIf_expressionEFilteredExpressionParserRuleCall_1_0());
@@ -20593,11 +20767,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getEIfExpressionAccess().getIfKeyword_2());
             		
-            // InternalAnsibleDslParser.g:7989:3: ( (lv_if_condition_3_0= ruleEFilteredExpression ) )
-            // InternalAnsibleDslParser.g:7990:4: (lv_if_condition_3_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8062:3: ( (lv_if_condition_3_0= ruleEFilteredExpression ) )
+            // InternalAnsibleDslParser.g:8063:4: (lv_if_condition_3_0= ruleEFilteredExpression )
             {
-            // InternalAnsibleDslParser.g:7990:4: (lv_if_condition_3_0= ruleEFilteredExpression )
-            // InternalAnsibleDslParser.g:7991:5: lv_if_condition_3_0= ruleEFilteredExpression
+            // InternalAnsibleDslParser.g:8063:4: (lv_if_condition_3_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8064:5: lv_if_condition_3_0= ruleEFilteredExpression
             {
 
             					newCompositeNode(grammarAccess.getEIfExpressionAccess().getIf_conditionEFilteredExpressionParserRuleCall_3_0());
@@ -20624,7 +20798,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:8008:3: (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )?
+            // InternalAnsibleDslParser.g:8081:3: (otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) ) )?
             int alt72=2;
             int LA72_0 = input.LA(1);
 
@@ -20633,17 +20807,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt72) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8009:4: otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) )
+                    // InternalAnsibleDslParser.g:8082:4: otherlv_4= Else ( (lv_else_expression_5_0= ruleEFilteredExpression ) )
                     {
                     otherlv_4=(Token)match(input,Else,FOLLOW_63); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getEIfExpressionAccess().getElseKeyword_4_0());
                     			
-                    // InternalAnsibleDslParser.g:8013:4: ( (lv_else_expression_5_0= ruleEFilteredExpression ) )
-                    // InternalAnsibleDslParser.g:8014:5: (lv_else_expression_5_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:8086:4: ( (lv_else_expression_5_0= ruleEFilteredExpression ) )
+                    // InternalAnsibleDslParser.g:8087:5: (lv_else_expression_5_0= ruleEFilteredExpression )
                     {
-                    // InternalAnsibleDslParser.g:8014:5: (lv_else_expression_5_0= ruleEFilteredExpression )
-                    // InternalAnsibleDslParser.g:8015:6: lv_else_expression_5_0= ruleEFilteredExpression
+                    // InternalAnsibleDslParser.g:8087:5: (lv_else_expression_5_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:8088:6: lv_else_expression_5_0= ruleEFilteredExpression
                     {
 
                     						newCompositeNode(grammarAccess.getEIfExpressionAccess().getElse_expressionEFilteredExpressionParserRuleCall_4_1_0());
@@ -20699,7 +20873,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEJinjaStatement"
-    // InternalAnsibleDslParser.g:8037:1: entryRuleEJinjaStatement returns [EObject current=null] : iv_ruleEJinjaStatement= ruleEJinjaStatement EOF ;
+    // InternalAnsibleDslParser.g:8110:1: entryRuleEJinjaStatement returns [EObject current=null] : iv_ruleEJinjaStatement= ruleEJinjaStatement EOF ;
     public final EObject entryRuleEJinjaStatement() throws RecognitionException {
         EObject current = null;
 
@@ -20707,8 +20881,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8037:56: (iv_ruleEJinjaStatement= ruleEJinjaStatement EOF )
-            // InternalAnsibleDslParser.g:8038:2: iv_ruleEJinjaStatement= ruleEJinjaStatement EOF
+            // InternalAnsibleDslParser.g:8110:56: (iv_ruleEJinjaStatement= ruleEJinjaStatement EOF )
+            // InternalAnsibleDslParser.g:8111:2: iv_ruleEJinjaStatement= ruleEJinjaStatement EOF
             {
              newCompositeNode(grammarAccess.getEJinjaStatementRule()); 
             pushFollow(FOLLOW_1);
@@ -20735,7 +20909,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEJinjaStatement"
-    // InternalAnsibleDslParser.g:8044:1: ruleEJinjaStatement returns [EObject current=null] : (this_EIfStatement_0= ruleEIfStatement | this_EForStatement_1= ruleEForStatement ) ;
+    // InternalAnsibleDslParser.g:8117:1: ruleEJinjaStatement returns [EObject current=null] : (this_EIfStatement_0= ruleEIfStatement | this_EForStatement_1= ruleEForStatement ) ;
     public final EObject ruleEJinjaStatement() throws RecognitionException {
         EObject current = null;
 
@@ -20748,10 +20922,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8050:2: ( (this_EIfStatement_0= ruleEIfStatement | this_EForStatement_1= ruleEForStatement ) )
-            // InternalAnsibleDslParser.g:8051:2: (this_EIfStatement_0= ruleEIfStatement | this_EForStatement_1= ruleEForStatement )
+            // InternalAnsibleDslParser.g:8123:2: ( (this_EIfStatement_0= ruleEIfStatement | this_EForStatement_1= ruleEForStatement ) )
+            // InternalAnsibleDslParser.g:8124:2: (this_EIfStatement_0= ruleEIfStatement | this_EForStatement_1= ruleEForStatement )
             {
-            // InternalAnsibleDslParser.g:8051:2: (this_EIfStatement_0= ruleEIfStatement | this_EForStatement_1= ruleEForStatement )
+            // InternalAnsibleDslParser.g:8124:2: (this_EIfStatement_0= ruleEIfStatement | this_EForStatement_1= ruleEForStatement )
             int alt73=2;
             int LA73_0 = input.LA(1);
 
@@ -20819,7 +20993,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt73) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8052:3: this_EIfStatement_0= ruleEIfStatement
+                    // InternalAnsibleDslParser.g:8125:3: this_EIfStatement_0= ruleEIfStatement
                     {
 
                     			newCompositeNode(grammarAccess.getEJinjaStatementAccess().getEIfStatementParserRuleCall_0());
@@ -20837,7 +21011,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:8061:3: this_EForStatement_1= ruleEForStatement
+                    // InternalAnsibleDslParser.g:8134:3: this_EForStatement_1= ruleEForStatement
                     {
 
                     			newCompositeNode(grammarAccess.getEJinjaStatementAccess().getEForStatementParserRuleCall_1());
@@ -20877,7 +21051,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEIfStatement"
-    // InternalAnsibleDslParser.g:8073:1: entryRuleEIfStatement returns [EObject current=null] : iv_ruleEIfStatement= ruleEIfStatement EOF ;
+    // InternalAnsibleDslParser.g:8146:1: entryRuleEIfStatement returns [EObject current=null] : iv_ruleEIfStatement= ruleEIfStatement EOF ;
     public final EObject entryRuleEIfStatement() throws RecognitionException {
         EObject current = null;
 
@@ -20885,8 +21059,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8073:53: (iv_ruleEIfStatement= ruleEIfStatement EOF )
-            // InternalAnsibleDslParser.g:8074:2: iv_ruleEIfStatement= ruleEIfStatement EOF
+            // InternalAnsibleDslParser.g:8146:53: (iv_ruleEIfStatement= ruleEIfStatement EOF )
+            // InternalAnsibleDslParser.g:8147:2: iv_ruleEIfStatement= ruleEIfStatement EOF
             {
              newCompositeNode(grammarAccess.getEIfStatementRule()); 
             pushFollow(FOLLOW_1);
@@ -20913,7 +21087,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEIfStatement"
-    // InternalAnsibleDslParser.g:8080:1: ruleEIfStatement returns [EObject current=null] : (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket ) ;
+    // InternalAnsibleDslParser.g:8153:1: ruleEIfStatement returns [EObject current=null] : (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket ) ;
     public final EObject ruleEIfStatement() throws RecognitionException {
         EObject current = null;
 
@@ -20945,17 +21119,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8086:2: ( (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket ) )
-            // InternalAnsibleDslParser.g:8087:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket )
+            // InternalAnsibleDslParser.g:8159:2: ( (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket ) )
+            // InternalAnsibleDslParser.g:8160:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket )
             {
-            // InternalAnsibleDslParser.g:8087:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket )
-            // InternalAnsibleDslParser.g:8088:3: otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket
+            // InternalAnsibleDslParser.g:8160:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket )
+            // InternalAnsibleDslParser.g:8161:3: otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= If ( (lv_if_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_if_body_5_0= ruleEValuePassed ) ) ( (lv_elif_blocks_6_0= ruleEElifBlock ) )* (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )? otherlv_12= LeftCurlyBracketPercentSign ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )? otherlv_14= Endif otherlv_15= PercentSignRightCurlyBracket
             {
             otherlv_0=(Token)match(input,LeftCurlyBracketPercentSign,FOLLOW_79); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEIfStatementAccess().getLeftCurlyBracketPercentSignKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8092:3: ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )?
+            // InternalAnsibleDslParser.g:8165:3: ( ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) ) )?
             int alt75=2;
             int LA75_0 = input.LA(1);
 
@@ -20964,12 +21138,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt75) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8093:4: ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8166:4: ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) )
                     {
-                    // InternalAnsibleDslParser.g:8093:4: ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) )
-                    // InternalAnsibleDslParser.g:8094:5: (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8166:4: ( (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8167:5: (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus )
                     {
-                    // InternalAnsibleDslParser.g:8094:5: (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8167:5: (lv_if_block_sign_1_1= PlusSign | lv_if_block_sign_1_2= HyphenMinus )
                     int alt74=2;
                     int LA74_0 = input.LA(1);
 
@@ -20987,7 +21161,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt74) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:8095:6: lv_if_block_sign_1_1= PlusSign
+                            // InternalAnsibleDslParser.g:8168:6: lv_if_block_sign_1_1= PlusSign
                             {
                             lv_if_block_sign_1_1=(Token)match(input,PlusSign,FOLLOW_77); 
 
@@ -21003,7 +21177,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalAnsibleDslParser.g:8106:6: lv_if_block_sign_1_2= HyphenMinus
+                            // InternalAnsibleDslParser.g:8179:6: lv_if_block_sign_1_2= HyphenMinus
                             {
                             lv_if_block_sign_1_2=(Token)match(input,HyphenMinus,FOLLOW_77); 
 
@@ -21034,11 +21208,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getEIfStatementAccess().getIfKeyword_2());
             		
-            // InternalAnsibleDslParser.g:8123:3: ( (lv_if_condition_3_0= ruleEFilteredExpression ) )
-            // InternalAnsibleDslParser.g:8124:4: (lv_if_condition_3_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8196:3: ( (lv_if_condition_3_0= ruleEFilteredExpression ) )
+            // InternalAnsibleDslParser.g:8197:4: (lv_if_condition_3_0= ruleEFilteredExpression )
             {
-            // InternalAnsibleDslParser.g:8124:4: (lv_if_condition_3_0= ruleEFilteredExpression )
-            // InternalAnsibleDslParser.g:8125:5: lv_if_condition_3_0= ruleEFilteredExpression
+            // InternalAnsibleDslParser.g:8197:4: (lv_if_condition_3_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8198:5: lv_if_condition_3_0= ruleEFilteredExpression
             {
 
             					newCompositeNode(grammarAccess.getEIfStatementAccess().getIf_conditionEFilteredExpressionParserRuleCall_3_0());
@@ -21069,11 +21243,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_4, grammarAccess.getEIfStatementAccess().getPercentSignRightCurlyBracketKeyword_4());
             		
-            // InternalAnsibleDslParser.g:8146:3: ( (lv_if_body_5_0= ruleEValuePassed ) )
-            // InternalAnsibleDslParser.g:8147:4: (lv_if_body_5_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:8219:3: ( (lv_if_body_5_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:8220:4: (lv_if_body_5_0= ruleEValuePassed )
             {
-            // InternalAnsibleDslParser.g:8147:4: (lv_if_body_5_0= ruleEValuePassed )
-            // InternalAnsibleDslParser.g:8148:5: lv_if_body_5_0= ruleEValuePassed
+            // InternalAnsibleDslParser.g:8220:4: (lv_if_body_5_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:8221:5: lv_if_body_5_0= ruleEValuePassed
             {
 
             					newCompositeNode(grammarAccess.getEIfStatementAccess().getIf_bodyEValuePassedParserRuleCall_5_0());
@@ -21100,7 +21274,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:8165:3: ( (lv_elif_blocks_6_0= ruleEElifBlock ) )*
+            // InternalAnsibleDslParser.g:8238:3: ( (lv_elif_blocks_6_0= ruleEElifBlock ) )*
             loop76:
             do {
                 int alt76=2;
@@ -21143,10 +21317,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt76) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:8166:4: (lv_elif_blocks_6_0= ruleEElifBlock )
+            	    // InternalAnsibleDslParser.g:8239:4: (lv_elif_blocks_6_0= ruleEElifBlock )
             	    {
-            	    // InternalAnsibleDslParser.g:8166:4: (lv_elif_blocks_6_0= ruleEElifBlock )
-            	    // InternalAnsibleDslParser.g:8167:5: lv_elif_blocks_6_0= ruleEElifBlock
+            	    // InternalAnsibleDslParser.g:8239:4: (lv_elif_blocks_6_0= ruleEElifBlock )
+            	    // InternalAnsibleDslParser.g:8240:5: lv_elif_blocks_6_0= ruleEElifBlock
             	    {
 
             	    					newCompositeNode(grammarAccess.getEIfStatementAccess().getElif_blocksEElifBlockParserRuleCall_6_0());
@@ -21179,7 +21353,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // InternalAnsibleDslParser.g:8184:3: (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )?
+            // InternalAnsibleDslParser.g:8257:3: (otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) ) )?
             int alt79=2;
             int LA79_0 = input.LA(1);
 
@@ -21213,13 +21387,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt79) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8185:4: otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) )
+                    // InternalAnsibleDslParser.g:8258:4: otherlv_7= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )? otherlv_9= Else otherlv_10= PercentSignRightCurlyBracket ( (lv_else_body_11_0= ruleEValuePassed ) )
                     {
                     otherlv_7=(Token)match(input,LeftCurlyBracketPercentSign,FOLLOW_82); 
 
                     				newLeafNode(otherlv_7, grammarAccess.getEIfStatementAccess().getLeftCurlyBracketPercentSignKeyword_7_0());
                     			
-                    // InternalAnsibleDslParser.g:8189:4: ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )?
+                    // InternalAnsibleDslParser.g:8262:4: ( ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) ) )?
                     int alt78=2;
                     int LA78_0 = input.LA(1);
 
@@ -21228,12 +21402,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt78) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:8190:5: ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) )
+                            // InternalAnsibleDslParser.g:8263:5: ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) )
                             {
-                            // InternalAnsibleDslParser.g:8190:5: ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) )
-                            // InternalAnsibleDslParser.g:8191:6: (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus )
+                            // InternalAnsibleDslParser.g:8263:5: ( (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus ) )
+                            // InternalAnsibleDslParser.g:8264:6: (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus )
                             {
-                            // InternalAnsibleDslParser.g:8191:6: (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus )
+                            // InternalAnsibleDslParser.g:8264:6: (lv_else_block_sign_8_1= PlusSign | lv_else_block_sign_8_2= HyphenMinus )
                             int alt77=2;
                             int LA77_0 = input.LA(1);
 
@@ -21251,7 +21425,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             switch (alt77) {
                                 case 1 :
-                                    // InternalAnsibleDslParser.g:8192:7: lv_else_block_sign_8_1= PlusSign
+                                    // InternalAnsibleDslParser.g:8265:7: lv_else_block_sign_8_1= PlusSign
                                     {
                                     lv_else_block_sign_8_1=(Token)match(input,PlusSign,FOLLOW_83); 
 
@@ -21267,7 +21441,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                                     }
                                     break;
                                 case 2 :
-                                    // InternalAnsibleDslParser.g:8203:7: lv_else_block_sign_8_2= HyphenMinus
+                                    // InternalAnsibleDslParser.g:8276:7: lv_else_block_sign_8_2= HyphenMinus
                                     {
                                     lv_else_block_sign_8_2=(Token)match(input,HyphenMinus,FOLLOW_83); 
 
@@ -21302,11 +21476,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_10, grammarAccess.getEIfStatementAccess().getPercentSignRightCurlyBracketKeyword_7_3());
                     			
-                    // InternalAnsibleDslParser.g:8224:4: ( (lv_else_body_11_0= ruleEValuePassed ) )
-                    // InternalAnsibleDslParser.g:8225:5: (lv_else_body_11_0= ruleEValuePassed )
+                    // InternalAnsibleDslParser.g:8297:4: ( (lv_else_body_11_0= ruleEValuePassed ) )
+                    // InternalAnsibleDslParser.g:8298:5: (lv_else_body_11_0= ruleEValuePassed )
                     {
-                    // InternalAnsibleDslParser.g:8225:5: (lv_else_body_11_0= ruleEValuePassed )
-                    // InternalAnsibleDslParser.g:8226:6: lv_else_body_11_0= ruleEValuePassed
+                    // InternalAnsibleDslParser.g:8298:5: (lv_else_body_11_0= ruleEValuePassed )
+                    // InternalAnsibleDslParser.g:8299:6: lv_else_body_11_0= ruleEValuePassed
                     {
 
                     						newCompositeNode(grammarAccess.getEIfStatementAccess().getElse_bodyEValuePassedParserRuleCall_7_4_0());
@@ -21343,7 +21517,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_12, grammarAccess.getEIfStatementAccess().getLeftCurlyBracketPercentSignKeyword_8());
             		
-            // InternalAnsibleDslParser.g:8248:3: ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )?
+            // InternalAnsibleDslParser.g:8321:3: ( ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) ) )?
             int alt81=2;
             int LA81_0 = input.LA(1);
 
@@ -21352,12 +21526,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt81) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8249:4: ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8322:4: ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) )
                     {
-                    // InternalAnsibleDslParser.g:8249:4: ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) )
-                    // InternalAnsibleDslParser.g:8250:5: (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8322:4: ( (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8323:5: (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus )
                     {
-                    // InternalAnsibleDslParser.g:8250:5: (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8323:5: (lv_endif_block_sign_13_1= PlusSign | lv_endif_block_sign_13_2= HyphenMinus )
                     int alt80=2;
                     int LA80_0 = input.LA(1);
 
@@ -21375,7 +21549,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt80) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:8251:6: lv_endif_block_sign_13_1= PlusSign
+                            // InternalAnsibleDslParser.g:8324:6: lv_endif_block_sign_13_1= PlusSign
                             {
                             lv_endif_block_sign_13_1=(Token)match(input,PlusSign,FOLLOW_85); 
 
@@ -21391,7 +21565,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalAnsibleDslParser.g:8262:6: lv_endif_block_sign_13_2= HyphenMinus
+                            // InternalAnsibleDslParser.g:8335:6: lv_endif_block_sign_13_2= HyphenMinus
                             {
                             lv_endif_block_sign_13_2=(Token)match(input,HyphenMinus,FOLLOW_85); 
 
@@ -21449,7 +21623,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEElifBlock"
-    // InternalAnsibleDslParser.g:8287:1: entryRuleEElifBlock returns [EObject current=null] : iv_ruleEElifBlock= ruleEElifBlock EOF ;
+    // InternalAnsibleDslParser.g:8360:1: entryRuleEElifBlock returns [EObject current=null] : iv_ruleEElifBlock= ruleEElifBlock EOF ;
     public final EObject entryRuleEElifBlock() throws RecognitionException {
         EObject current = null;
 
@@ -21457,8 +21631,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8287:51: (iv_ruleEElifBlock= ruleEElifBlock EOF )
-            // InternalAnsibleDslParser.g:8288:2: iv_ruleEElifBlock= ruleEElifBlock EOF
+            // InternalAnsibleDslParser.g:8360:51: (iv_ruleEElifBlock= ruleEElifBlock EOF )
+            // InternalAnsibleDslParser.g:8361:2: iv_ruleEElifBlock= ruleEElifBlock EOF
             {
              newCompositeNode(grammarAccess.getEElifBlockRule()); 
             pushFollow(FOLLOW_1);
@@ -21485,7 +21659,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEElifBlock"
-    // InternalAnsibleDslParser.g:8294:1: ruleEElifBlock returns [EObject current=null] : (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) ) ) ;
+    // InternalAnsibleDslParser.g:8367:1: ruleEElifBlock returns [EObject current=null] : (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) ) ) ;
     public final EObject ruleEElifBlock() throws RecognitionException {
         EObject current = null;
 
@@ -21503,17 +21677,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8300:2: ( (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) ) ) )
-            // InternalAnsibleDslParser.g:8301:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) ) )
+            // InternalAnsibleDslParser.g:8373:2: ( (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) ) ) )
+            // InternalAnsibleDslParser.g:8374:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) ) )
             {
-            // InternalAnsibleDslParser.g:8301:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) ) )
-            // InternalAnsibleDslParser.g:8302:3: otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:8374:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) ) )
+            // InternalAnsibleDslParser.g:8375:3: otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= Elif ( (lv_elif_condition_3_0= ruleEFilteredExpression ) ) otherlv_4= PercentSignRightCurlyBracket ( (lv_elif_body_5_0= ruleEValuePassed ) )
             {
             otherlv_0=(Token)match(input,LeftCurlyBracketPercentSign,FOLLOW_86); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEElifBlockAccess().getLeftCurlyBracketPercentSignKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8306:3: ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )?
+            // InternalAnsibleDslParser.g:8379:3: ( ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) ) )?
             int alt83=2;
             int LA83_0 = input.LA(1);
 
@@ -21522,12 +21696,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt83) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8307:4: ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8380:4: ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) )
                     {
-                    // InternalAnsibleDslParser.g:8307:4: ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) )
-                    // InternalAnsibleDslParser.g:8308:5: (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8380:4: ( (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8381:5: (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus )
                     {
-                    // InternalAnsibleDslParser.g:8308:5: (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8381:5: (lv_elif_block_sign_1_1= PlusSign | lv_elif_block_sign_1_2= HyphenMinus )
                     int alt82=2;
                     int LA82_0 = input.LA(1);
 
@@ -21545,7 +21719,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt82) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:8309:6: lv_elif_block_sign_1_1= PlusSign
+                            // InternalAnsibleDslParser.g:8382:6: lv_elif_block_sign_1_1= PlusSign
                             {
                             lv_elif_block_sign_1_1=(Token)match(input,PlusSign,FOLLOW_87); 
 
@@ -21561,7 +21735,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalAnsibleDslParser.g:8320:6: lv_elif_block_sign_1_2= HyphenMinus
+                            // InternalAnsibleDslParser.g:8393:6: lv_elif_block_sign_1_2= HyphenMinus
                             {
                             lv_elif_block_sign_1_2=(Token)match(input,HyphenMinus,FOLLOW_87); 
 
@@ -21592,11 +21766,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getEElifBlockAccess().getElifKeyword_2());
             		
-            // InternalAnsibleDslParser.g:8337:3: ( (lv_elif_condition_3_0= ruleEFilteredExpression ) )
-            // InternalAnsibleDslParser.g:8338:4: (lv_elif_condition_3_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8410:3: ( (lv_elif_condition_3_0= ruleEFilteredExpression ) )
+            // InternalAnsibleDslParser.g:8411:4: (lv_elif_condition_3_0= ruleEFilteredExpression )
             {
-            // InternalAnsibleDslParser.g:8338:4: (lv_elif_condition_3_0= ruleEFilteredExpression )
-            // InternalAnsibleDslParser.g:8339:5: lv_elif_condition_3_0= ruleEFilteredExpression
+            // InternalAnsibleDslParser.g:8411:4: (lv_elif_condition_3_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8412:5: lv_elif_condition_3_0= ruleEFilteredExpression
             {
 
             					newCompositeNode(grammarAccess.getEElifBlockAccess().getElif_conditionEFilteredExpressionParserRuleCall_3_0());
@@ -21627,11 +21801,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_4, grammarAccess.getEElifBlockAccess().getPercentSignRightCurlyBracketKeyword_4());
             		
-            // InternalAnsibleDslParser.g:8360:3: ( (lv_elif_body_5_0= ruleEValuePassed ) )
-            // InternalAnsibleDslParser.g:8361:4: (lv_elif_body_5_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:8433:3: ( (lv_elif_body_5_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:8434:4: (lv_elif_body_5_0= ruleEValuePassed )
             {
-            // InternalAnsibleDslParser.g:8361:4: (lv_elif_body_5_0= ruleEValuePassed )
-            // InternalAnsibleDslParser.g:8362:5: lv_elif_body_5_0= ruleEValuePassed
+            // InternalAnsibleDslParser.g:8434:4: (lv_elif_body_5_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:8435:5: lv_elif_body_5_0= ruleEValuePassed
             {
 
             					newCompositeNode(grammarAccess.getEElifBlockAccess().getElif_bodyEValuePassedParserRuleCall_5_0());
@@ -21681,7 +21855,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEForStatement"
-    // InternalAnsibleDslParser.g:8383:1: entryRuleEForStatement returns [EObject current=null] : iv_ruleEForStatement= ruleEForStatement EOF ;
+    // InternalAnsibleDslParser.g:8456:1: entryRuleEForStatement returns [EObject current=null] : iv_ruleEForStatement= ruleEForStatement EOF ;
     public final EObject entryRuleEForStatement() throws RecognitionException {
         EObject current = null;
 
@@ -21689,8 +21863,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8383:54: (iv_ruleEForStatement= ruleEForStatement EOF )
-            // InternalAnsibleDslParser.g:8384:2: iv_ruleEForStatement= ruleEForStatement EOF
+            // InternalAnsibleDslParser.g:8456:54: (iv_ruleEForStatement= ruleEForStatement EOF )
+            // InternalAnsibleDslParser.g:8457:2: iv_ruleEForStatement= ruleEForStatement EOF
             {
              newCompositeNode(grammarAccess.getEForStatementRule()); 
             pushFollow(FOLLOW_1);
@@ -21717,7 +21891,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEForStatement"
-    // InternalAnsibleDslParser.g:8390:1: ruleEForStatement returns [EObject current=null] : (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket ) ;
+    // InternalAnsibleDslParser.g:8463:1: ruleEForStatement returns [EObject current=null] : (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket ) ;
     public final EObject ruleEForStatement() throws RecognitionException {
         EObject current = null;
 
@@ -21755,17 +21929,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8396:2: ( (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket ) )
-            // InternalAnsibleDslParser.g:8397:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket )
+            // InternalAnsibleDslParser.g:8469:2: ( (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket ) )
+            // InternalAnsibleDslParser.g:8470:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket )
             {
-            // InternalAnsibleDslParser.g:8397:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket )
-            // InternalAnsibleDslParser.g:8398:3: otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket
+            // InternalAnsibleDslParser.g:8470:2: (otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket )
+            // InternalAnsibleDslParser.g:8471:3: otherlv_0= LeftCurlyBracketPercentSign ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )? otherlv_2= For ( (lv_identifiers_3_0= RULE_ID ) ) (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )* otherlv_6= In ( (lv_list_7_0= ruleEFilteredExpression ) ) (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )? ( (lv_recursive_10_0= Recursive ) )? otherlv_11= PercentSignRightCurlyBracket ( (lv_for_body_12_0= ruleEValuePassed ) ) (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )? otherlv_18= LeftCurlyBracketPercentSign ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )? otherlv_20= Endfor otherlv_21= PercentSignRightCurlyBracket
             {
             otherlv_0=(Token)match(input,LeftCurlyBracketPercentSign,FOLLOW_88); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEForStatementAccess().getLeftCurlyBracketPercentSignKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8402:3: ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )?
+            // InternalAnsibleDslParser.g:8475:3: ( ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) ) )?
             int alt85=2;
             int LA85_0 = input.LA(1);
 
@@ -21774,12 +21948,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt85) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8403:4: ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8476:4: ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) )
                     {
-                    // InternalAnsibleDslParser.g:8403:4: ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) )
-                    // InternalAnsibleDslParser.g:8404:5: (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8476:4: ( (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8477:5: (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus )
                     {
-                    // InternalAnsibleDslParser.g:8404:5: (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8477:5: (lv_for_block_sign_1_1= PlusSign | lv_for_block_sign_1_2= HyphenMinus )
                     int alt84=2;
                     int LA84_0 = input.LA(1);
 
@@ -21797,7 +21971,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt84) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:8405:6: lv_for_block_sign_1_1= PlusSign
+                            // InternalAnsibleDslParser.g:8478:6: lv_for_block_sign_1_1= PlusSign
                             {
                             lv_for_block_sign_1_1=(Token)match(input,PlusSign,FOLLOW_89); 
 
@@ -21813,7 +21987,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalAnsibleDslParser.g:8416:6: lv_for_block_sign_1_2= HyphenMinus
+                            // InternalAnsibleDslParser.g:8489:6: lv_for_block_sign_1_2= HyphenMinus
                             {
                             lv_for_block_sign_1_2=(Token)match(input,HyphenMinus,FOLLOW_89); 
 
@@ -21844,11 +22018,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getEForStatementAccess().getForKeyword_2());
             		
-            // InternalAnsibleDslParser.g:8433:3: ( (lv_identifiers_3_0= RULE_ID ) )
-            // InternalAnsibleDslParser.g:8434:4: (lv_identifiers_3_0= RULE_ID )
+            // InternalAnsibleDslParser.g:8506:3: ( (lv_identifiers_3_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8507:4: (lv_identifiers_3_0= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:8434:4: (lv_identifiers_3_0= RULE_ID )
-            // InternalAnsibleDslParser.g:8435:5: lv_identifiers_3_0= RULE_ID
+            // InternalAnsibleDslParser.g:8507:4: (lv_identifiers_3_0= RULE_ID )
+            // InternalAnsibleDslParser.g:8508:5: lv_identifiers_3_0= RULE_ID
             {
             lv_identifiers_3_0=(Token)match(input,RULE_ID,FOLLOW_90); 
 
@@ -21870,7 +22044,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:8451:3: (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )*
+            // InternalAnsibleDslParser.g:8524:3: (otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) ) )*
             loop86:
             do {
                 int alt86=2;
@@ -21883,17 +22057,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt86) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:8452:4: otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) )
+            	    // InternalAnsibleDslParser.g:8525:4: otherlv_4= Comma ( (lv_identifiers_5_0= RULE_ID ) )
             	    {
             	    otherlv_4=(Token)match(input,Comma,FOLLOW_16); 
 
             	    				newLeafNode(otherlv_4, grammarAccess.getEForStatementAccess().getCommaKeyword_4_0());
             	    			
-            	    // InternalAnsibleDslParser.g:8456:4: ( (lv_identifiers_5_0= RULE_ID ) )
-            	    // InternalAnsibleDslParser.g:8457:5: (lv_identifiers_5_0= RULE_ID )
+            	    // InternalAnsibleDslParser.g:8529:4: ( (lv_identifiers_5_0= RULE_ID ) )
+            	    // InternalAnsibleDslParser.g:8530:5: (lv_identifiers_5_0= RULE_ID )
             	    {
-            	    // InternalAnsibleDslParser.g:8457:5: (lv_identifiers_5_0= RULE_ID )
-            	    // InternalAnsibleDslParser.g:8458:6: lv_identifiers_5_0= RULE_ID
+            	    // InternalAnsibleDslParser.g:8530:5: (lv_identifiers_5_0= RULE_ID )
+            	    // InternalAnsibleDslParser.g:8531:6: lv_identifiers_5_0= RULE_ID
             	    {
             	    lv_identifiers_5_0=(Token)match(input,RULE_ID,FOLLOW_90); 
 
@@ -21928,11 +22102,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_6, grammarAccess.getEForStatementAccess().getInKeyword_5());
             		
-            // InternalAnsibleDslParser.g:8479:3: ( (lv_list_7_0= ruleEFilteredExpression ) )
-            // InternalAnsibleDslParser.g:8480:4: (lv_list_7_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8552:3: ( (lv_list_7_0= ruleEFilteredExpression ) )
+            // InternalAnsibleDslParser.g:8553:4: (lv_list_7_0= ruleEFilteredExpression )
             {
-            // InternalAnsibleDslParser.g:8480:4: (lv_list_7_0= ruleEFilteredExpression )
-            // InternalAnsibleDslParser.g:8481:5: lv_list_7_0= ruleEFilteredExpression
+            // InternalAnsibleDslParser.g:8553:4: (lv_list_7_0= ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:8554:5: lv_list_7_0= ruleEFilteredExpression
             {
 
             					newCompositeNode(grammarAccess.getEForStatementAccess().getListEFilteredExpressionParserRuleCall_6_0());
@@ -21959,7 +22133,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:8498:3: (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )?
+            // InternalAnsibleDslParser.g:8571:3: (otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) ) )?
             int alt87=2;
             int LA87_0 = input.LA(1);
 
@@ -21968,17 +22142,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt87) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8499:4: otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) )
+                    // InternalAnsibleDslParser.g:8572:4: otherlv_8= If ( (lv_condition_9_0= ruleEFilteredExpression ) )
                     {
                     otherlv_8=(Token)match(input,If,FOLLOW_63); 
 
                     				newLeafNode(otherlv_8, grammarAccess.getEForStatementAccess().getIfKeyword_7_0());
                     			
-                    // InternalAnsibleDslParser.g:8503:4: ( (lv_condition_9_0= ruleEFilteredExpression ) )
-                    // InternalAnsibleDslParser.g:8504:5: (lv_condition_9_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:8576:4: ( (lv_condition_9_0= ruleEFilteredExpression ) )
+                    // InternalAnsibleDslParser.g:8577:5: (lv_condition_9_0= ruleEFilteredExpression )
                     {
-                    // InternalAnsibleDslParser.g:8504:5: (lv_condition_9_0= ruleEFilteredExpression )
-                    // InternalAnsibleDslParser.g:8505:6: lv_condition_9_0= ruleEFilteredExpression
+                    // InternalAnsibleDslParser.g:8577:5: (lv_condition_9_0= ruleEFilteredExpression )
+                    // InternalAnsibleDslParser.g:8578:6: lv_condition_9_0= ruleEFilteredExpression
                     {
 
                     						newCompositeNode(grammarAccess.getEForStatementAccess().getConditionEFilteredExpressionParserRuleCall_7_1_0());
@@ -22011,7 +22185,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:8523:3: ( (lv_recursive_10_0= Recursive ) )?
+            // InternalAnsibleDslParser.g:8596:3: ( (lv_recursive_10_0= Recursive ) )?
             int alt88=2;
             int LA88_0 = input.LA(1);
 
@@ -22020,10 +22194,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt88) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8524:4: (lv_recursive_10_0= Recursive )
+                    // InternalAnsibleDslParser.g:8597:4: (lv_recursive_10_0= Recursive )
                     {
-                    // InternalAnsibleDslParser.g:8524:4: (lv_recursive_10_0= Recursive )
-                    // InternalAnsibleDslParser.g:8525:5: lv_recursive_10_0= Recursive
+                    // InternalAnsibleDslParser.g:8597:4: (lv_recursive_10_0= Recursive )
+                    // InternalAnsibleDslParser.g:8598:5: lv_recursive_10_0= Recursive
                     {
                     lv_recursive_10_0=(Token)match(input,Recursive,FOLLOW_80); 
 
@@ -22048,11 +22222,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_11, grammarAccess.getEForStatementAccess().getPercentSignRightCurlyBracketKeyword_9());
             		
-            // InternalAnsibleDslParser.g:8541:3: ( (lv_for_body_12_0= ruleEValuePassed ) )
-            // InternalAnsibleDslParser.g:8542:4: (lv_for_body_12_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:8614:3: ( (lv_for_body_12_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:8615:4: (lv_for_body_12_0= ruleEValuePassed )
             {
-            // InternalAnsibleDslParser.g:8542:4: (lv_for_body_12_0= ruleEValuePassed )
-            // InternalAnsibleDslParser.g:8543:5: lv_for_body_12_0= ruleEValuePassed
+            // InternalAnsibleDslParser.g:8615:4: (lv_for_body_12_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:8616:5: lv_for_body_12_0= ruleEValuePassed
             {
 
             					newCompositeNode(grammarAccess.getEForStatementAccess().getFor_bodyEValuePassedParserRuleCall_10_0());
@@ -22079,7 +22253,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:8560:3: (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )?
+            // InternalAnsibleDslParser.g:8633:3: (otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) ) )?
             int alt91=2;
             int LA91_0 = input.LA(1);
 
@@ -22113,13 +22287,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt91) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8561:4: otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) )
+                    // InternalAnsibleDslParser.g:8634:4: otherlv_13= LeftCurlyBracketPercentSign ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )? otherlv_15= Else otherlv_16= PercentSignRightCurlyBracket ( (lv_else_body_17_0= ruleEValuePassed ) )
                     {
                     otherlv_13=(Token)match(input,LeftCurlyBracketPercentSign,FOLLOW_82); 
 
                     				newLeafNode(otherlv_13, grammarAccess.getEForStatementAccess().getLeftCurlyBracketPercentSignKeyword_11_0());
                     			
-                    // InternalAnsibleDslParser.g:8565:4: ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )?
+                    // InternalAnsibleDslParser.g:8638:4: ( ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) ) )?
                     int alt90=2;
                     int LA90_0 = input.LA(1);
 
@@ -22128,12 +22302,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt90) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:8566:5: ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) )
+                            // InternalAnsibleDslParser.g:8639:5: ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) )
                             {
-                            // InternalAnsibleDslParser.g:8566:5: ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) )
-                            // InternalAnsibleDslParser.g:8567:6: (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus )
+                            // InternalAnsibleDslParser.g:8639:5: ( (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus ) )
+                            // InternalAnsibleDslParser.g:8640:6: (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus )
                             {
-                            // InternalAnsibleDslParser.g:8567:6: (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus )
+                            // InternalAnsibleDslParser.g:8640:6: (lv_else_block_sign_14_1= PlusSign | lv_else_block_sign_14_2= HyphenMinus )
                             int alt89=2;
                             int LA89_0 = input.LA(1);
 
@@ -22151,7 +22325,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             switch (alt89) {
                                 case 1 :
-                                    // InternalAnsibleDslParser.g:8568:7: lv_else_block_sign_14_1= PlusSign
+                                    // InternalAnsibleDslParser.g:8641:7: lv_else_block_sign_14_1= PlusSign
                                     {
                                     lv_else_block_sign_14_1=(Token)match(input,PlusSign,FOLLOW_83); 
 
@@ -22167,7 +22341,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                                     }
                                     break;
                                 case 2 :
-                                    // InternalAnsibleDslParser.g:8579:7: lv_else_block_sign_14_2= HyphenMinus
+                                    // InternalAnsibleDslParser.g:8652:7: lv_else_block_sign_14_2= HyphenMinus
                                     {
                                     lv_else_block_sign_14_2=(Token)match(input,HyphenMinus,FOLLOW_83); 
 
@@ -22202,11 +22376,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_16, grammarAccess.getEForStatementAccess().getPercentSignRightCurlyBracketKeyword_11_3());
                     			
-                    // InternalAnsibleDslParser.g:8600:4: ( (lv_else_body_17_0= ruleEValuePassed ) )
-                    // InternalAnsibleDslParser.g:8601:5: (lv_else_body_17_0= ruleEValuePassed )
+                    // InternalAnsibleDslParser.g:8673:4: ( (lv_else_body_17_0= ruleEValuePassed ) )
+                    // InternalAnsibleDslParser.g:8674:5: (lv_else_body_17_0= ruleEValuePassed )
                     {
-                    // InternalAnsibleDslParser.g:8601:5: (lv_else_body_17_0= ruleEValuePassed )
-                    // InternalAnsibleDslParser.g:8602:6: lv_else_body_17_0= ruleEValuePassed
+                    // InternalAnsibleDslParser.g:8674:5: (lv_else_body_17_0= ruleEValuePassed )
+                    // InternalAnsibleDslParser.g:8675:6: lv_else_body_17_0= ruleEValuePassed
                     {
 
                     						newCompositeNode(grammarAccess.getEForStatementAccess().getElse_bodyEValuePassedParserRuleCall_11_4_0());
@@ -22243,7 +22417,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_18, grammarAccess.getEForStatementAccess().getLeftCurlyBracketPercentSignKeyword_12());
             		
-            // InternalAnsibleDslParser.g:8624:3: ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )?
+            // InternalAnsibleDslParser.g:8697:3: ( ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) ) )?
             int alt93=2;
             int LA93_0 = input.LA(1);
 
@@ -22252,12 +22426,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt93) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:8625:4: ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8698:4: ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) )
                     {
-                    // InternalAnsibleDslParser.g:8625:4: ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) )
-                    // InternalAnsibleDslParser.g:8626:5: (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8698:4: ( (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus ) )
+                    // InternalAnsibleDslParser.g:8699:5: (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus )
                     {
-                    // InternalAnsibleDslParser.g:8626:5: (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus )
+                    // InternalAnsibleDslParser.g:8699:5: (lv_endfor_block_sign_19_1= PlusSign | lv_endfor_block_sign_19_2= HyphenMinus )
                     int alt92=2;
                     int LA92_0 = input.LA(1);
 
@@ -22275,7 +22449,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt92) {
                         case 1 :
-                            // InternalAnsibleDslParser.g:8627:6: lv_endfor_block_sign_19_1= PlusSign
+                            // InternalAnsibleDslParser.g:8700:6: lv_endfor_block_sign_19_1= PlusSign
                             {
                             lv_endfor_block_sign_19_1=(Token)match(input,PlusSign,FOLLOW_94); 
 
@@ -22291,7 +22465,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalAnsibleDslParser.g:8638:6: lv_endfor_block_sign_19_2= HyphenMinus
+                            // InternalAnsibleDslParser.g:8711:6: lv_endfor_block_sign_19_2= HyphenMinus
                             {
                             lv_endfor_block_sign_19_2=(Token)match(input,HyphenMinus,FOLLOW_94); 
 
@@ -22349,7 +22523,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEVariableDeclarationVariableReference"
-    // InternalAnsibleDslParser.g:8663:1: entryRuleEVariableDeclarationVariableReference returns [EObject current=null] : iv_ruleEVariableDeclarationVariableReference= ruleEVariableDeclarationVariableReference EOF ;
+    // InternalAnsibleDslParser.g:8736:1: entryRuleEVariableDeclarationVariableReference returns [EObject current=null] : iv_ruleEVariableDeclarationVariableReference= ruleEVariableDeclarationVariableReference EOF ;
     public final EObject entryRuleEVariableDeclarationVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -22357,8 +22531,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8663:78: (iv_ruleEVariableDeclarationVariableReference= ruleEVariableDeclarationVariableReference EOF )
-            // InternalAnsibleDslParser.g:8664:2: iv_ruleEVariableDeclarationVariableReference= ruleEVariableDeclarationVariableReference EOF
+            // InternalAnsibleDslParser.g:8736:78: (iv_ruleEVariableDeclarationVariableReference= ruleEVariableDeclarationVariableReference EOF )
+            // InternalAnsibleDslParser.g:8737:2: iv_ruleEVariableDeclarationVariableReference= ruleEVariableDeclarationVariableReference EOF
             {
              newCompositeNode(grammarAccess.getEVariableDeclarationVariableReferenceRule()); 
             pushFollow(FOLLOW_1);
@@ -22385,7 +22559,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEVariableDeclarationVariableReference"
-    // InternalAnsibleDslParser.g:8670:1: ruleEVariableDeclarationVariableReference returns [EObject current=null] : (otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalAnsibleDslParser.g:8743:1: ruleEVariableDeclarationVariableReference returns [EObject current=null] : (otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleEVariableDeclarationVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -22396,21 +22570,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8676:2: ( (otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalAnsibleDslParser.g:8677:2: (otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:8749:2: ( (otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) ) ) )
+            // InternalAnsibleDslParser.g:8750:2: (otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) ) )
             {
-            // InternalAnsibleDslParser.g:8677:2: (otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) ) )
-            // InternalAnsibleDslParser.g:8678:3: otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8750:2: (otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:8751:3: otherlv_0= Declared_variable ( (otherlv_1= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,Declared_variable,FOLLOW_16); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEVariableDeclarationVariableReferenceAccess().getDeclared_variableKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8682:3: ( (otherlv_1= RULE_ID ) )
-            // InternalAnsibleDslParser.g:8683:4: (otherlv_1= RULE_ID )
+            // InternalAnsibleDslParser.g:8755:3: ( (otherlv_1= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8756:4: (otherlv_1= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:8683:4: (otherlv_1= RULE_ID )
-            // InternalAnsibleDslParser.g:8684:5: otherlv_1= RULE_ID
+            // InternalAnsibleDslParser.g:8756:4: (otherlv_1= RULE_ID )
+            // InternalAnsibleDslParser.g:8757:5: otherlv_1= RULE_ID
             {
 
             					if (current==null) {
@@ -22450,7 +22624,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleERegisterVariableReference"
-    // InternalAnsibleDslParser.g:8699:1: entryRuleERegisterVariableReference returns [EObject current=null] : iv_ruleERegisterVariableReference= ruleERegisterVariableReference EOF ;
+    // InternalAnsibleDslParser.g:8772:1: entryRuleERegisterVariableReference returns [EObject current=null] : iv_ruleERegisterVariableReference= ruleERegisterVariableReference EOF ;
     public final EObject entryRuleERegisterVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -22458,8 +22632,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8699:67: (iv_ruleERegisterVariableReference= ruleERegisterVariableReference EOF )
-            // InternalAnsibleDslParser.g:8700:2: iv_ruleERegisterVariableReference= ruleERegisterVariableReference EOF
+            // InternalAnsibleDslParser.g:8772:67: (iv_ruleERegisterVariableReference= ruleERegisterVariableReference EOF )
+            // InternalAnsibleDslParser.g:8773:2: iv_ruleERegisterVariableReference= ruleERegisterVariableReference EOF
             {
              newCompositeNode(grammarAccess.getERegisterVariableReferenceRule()); 
             pushFollow(FOLLOW_1);
@@ -22486,7 +22660,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleERegisterVariableReference"
-    // InternalAnsibleDslParser.g:8706:1: ruleERegisterVariableReference returns [EObject current=null] : (otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalAnsibleDslParser.g:8779:1: ruleERegisterVariableReference returns [EObject current=null] : (otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleERegisterVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -22497,21 +22671,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8712:2: ( (otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalAnsibleDslParser.g:8713:2: (otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:8785:2: ( (otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) ) ) )
+            // InternalAnsibleDslParser.g:8786:2: (otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) ) )
             {
-            // InternalAnsibleDslParser.g:8713:2: (otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) ) )
-            // InternalAnsibleDslParser.g:8714:3: otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8786:2: (otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:8787:3: otherlv_0= Registered_variable ( (otherlv_1= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,Registered_variable,FOLLOW_16); 
 
             			newLeafNode(otherlv_0, grammarAccess.getERegisterVariableReferenceAccess().getRegistered_variableKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8718:3: ( (otherlv_1= RULE_ID ) )
-            // InternalAnsibleDslParser.g:8719:4: (otherlv_1= RULE_ID )
+            // InternalAnsibleDslParser.g:8791:3: ( (otherlv_1= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8792:4: (otherlv_1= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:8719:4: (otherlv_1= RULE_ID )
-            // InternalAnsibleDslParser.g:8720:5: otherlv_1= RULE_ID
+            // InternalAnsibleDslParser.g:8792:4: (otherlv_1= RULE_ID )
+            // InternalAnsibleDslParser.g:8793:5: otherlv_1= RULE_ID
             {
 
             					if (current==null) {
@@ -22551,7 +22725,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEVariableDeclaration"
-    // InternalAnsibleDslParser.g:8735:1: entryRuleEVariableDeclaration returns [EObject current=null] : iv_ruleEVariableDeclaration= ruleEVariableDeclaration EOF ;
+    // InternalAnsibleDslParser.g:8808:1: entryRuleEVariableDeclaration returns [EObject current=null] : iv_ruleEVariableDeclaration= ruleEVariableDeclaration EOF ;
     public final EObject entryRuleEVariableDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -22559,8 +22733,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8735:61: (iv_ruleEVariableDeclaration= ruleEVariableDeclaration EOF )
-            // InternalAnsibleDslParser.g:8736:2: iv_ruleEVariableDeclaration= ruleEVariableDeclaration EOF
+            // InternalAnsibleDslParser.g:8808:61: (iv_ruleEVariableDeclaration= ruleEVariableDeclaration EOF )
+            // InternalAnsibleDslParser.g:8809:2: iv_ruleEVariableDeclaration= ruleEVariableDeclaration EOF
             {
              newCompositeNode(grammarAccess.getEVariableDeclarationRule()); 
             pushFollow(FOLLOW_1);
@@ -22587,7 +22761,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEVariableDeclaration"
-    // InternalAnsibleDslParser.g:8742:1: ruleEVariableDeclaration returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) ) ) ;
+    // InternalAnsibleDslParser.g:8815:1: ruleEVariableDeclaration returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) ) ) ;
     public final EObject ruleEVariableDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -22600,17 +22774,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8748:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) ) ) )
-            // InternalAnsibleDslParser.g:8749:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) ) )
+            // InternalAnsibleDslParser.g:8821:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) ) ) )
+            // InternalAnsibleDslParser.g:8822:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) ) )
             {
-            // InternalAnsibleDslParser.g:8749:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) ) )
-            // InternalAnsibleDslParser.g:8750:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:8822:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) ) )
+            // InternalAnsibleDslParser.g:8823:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_passed_2_0= ruleEValuePassed ) )
             {
-            // InternalAnsibleDslParser.g:8750:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalAnsibleDslParser.g:8751:4: (lv_name_0_0= RULE_ID )
+            // InternalAnsibleDslParser.g:8823:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8824:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:8751:4: (lv_name_0_0= RULE_ID )
-            // InternalAnsibleDslParser.g:8752:5: lv_name_0_0= RULE_ID
+            // InternalAnsibleDslParser.g:8824:4: (lv_name_0_0= RULE_ID )
+            // InternalAnsibleDslParser.g:8825:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_37); 
 
@@ -22636,11 +22810,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEVariableDeclarationAccess().getColonKeyword_1());
             		
-            // InternalAnsibleDslParser.g:8772:3: ( (lv_value_passed_2_0= ruleEValuePassed ) )
-            // InternalAnsibleDslParser.g:8773:4: (lv_value_passed_2_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:8845:3: ( (lv_value_passed_2_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:8846:4: (lv_value_passed_2_0= ruleEValuePassed )
             {
-            // InternalAnsibleDslParser.g:8773:4: (lv_value_passed_2_0= ruleEValuePassed )
-            // InternalAnsibleDslParser.g:8774:5: lv_value_passed_2_0= ruleEValuePassed
+            // InternalAnsibleDslParser.g:8846:4: (lv_value_passed_2_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:8847:5: lv_value_passed_2_0= ruleEValuePassed
             {
 
             					newCompositeNode(grammarAccess.getEVariableDeclarationAccess().getValue_passedEValuePassedParserRuleCall_2_0());
@@ -22690,7 +22864,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEIndexOrLoopVariable"
-    // InternalAnsibleDslParser.g:8795:1: entryRuleEIndexOrLoopVariable returns [EObject current=null] : iv_ruleEIndexOrLoopVariable= ruleEIndexOrLoopVariable EOF ;
+    // InternalAnsibleDslParser.g:8868:1: entryRuleEIndexOrLoopVariable returns [EObject current=null] : iv_ruleEIndexOrLoopVariable= ruleEIndexOrLoopVariable EOF ;
     public final EObject entryRuleEIndexOrLoopVariable() throws RecognitionException {
         EObject current = null;
 
@@ -22698,8 +22872,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8795:61: (iv_ruleEIndexOrLoopVariable= ruleEIndexOrLoopVariable EOF )
-            // InternalAnsibleDslParser.g:8796:2: iv_ruleEIndexOrLoopVariable= ruleEIndexOrLoopVariable EOF
+            // InternalAnsibleDslParser.g:8868:61: (iv_ruleEIndexOrLoopVariable= ruleEIndexOrLoopVariable EOF )
+            // InternalAnsibleDslParser.g:8869:2: iv_ruleEIndexOrLoopVariable= ruleEIndexOrLoopVariable EOF
             {
              newCompositeNode(grammarAccess.getEIndexOrLoopVariableRule()); 
             pushFollow(FOLLOW_1);
@@ -22726,7 +22900,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEIndexOrLoopVariable"
-    // InternalAnsibleDslParser.g:8802:1: ruleEIndexOrLoopVariable returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalAnsibleDslParser.g:8875:1: ruleEIndexOrLoopVariable returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleEIndexOrLoopVariable() throws RecognitionException {
         EObject current = null;
 
@@ -22736,14 +22910,14 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8808:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalAnsibleDslParser.g:8809:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8881:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:8882:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalAnsibleDslParser.g:8809:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalAnsibleDslParser.g:8810:3: (lv_name_0_0= RULE_ID )
+            // InternalAnsibleDslParser.g:8882:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8883:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:8810:3: (lv_name_0_0= RULE_ID )
-            // InternalAnsibleDslParser.g:8811:4: lv_name_0_0= RULE_ID
+            // InternalAnsibleDslParser.g:8883:3: (lv_name_0_0= RULE_ID )
+            // InternalAnsibleDslParser.g:8884:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -22785,7 +22959,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEIndexOrLoopVariableReference"
-    // InternalAnsibleDslParser.g:8830:1: entryRuleEIndexOrLoopVariableReference returns [EObject current=null] : iv_ruleEIndexOrLoopVariableReference= ruleEIndexOrLoopVariableReference EOF ;
+    // InternalAnsibleDslParser.g:8903:1: entryRuleEIndexOrLoopVariableReference returns [EObject current=null] : iv_ruleEIndexOrLoopVariableReference= ruleEIndexOrLoopVariableReference EOF ;
     public final EObject entryRuleEIndexOrLoopVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -22793,8 +22967,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8830:70: (iv_ruleEIndexOrLoopVariableReference= ruleEIndexOrLoopVariableReference EOF )
-            // InternalAnsibleDslParser.g:8831:2: iv_ruleEIndexOrLoopVariableReference= ruleEIndexOrLoopVariableReference EOF
+            // InternalAnsibleDslParser.g:8903:70: (iv_ruleEIndexOrLoopVariableReference= ruleEIndexOrLoopVariableReference EOF )
+            // InternalAnsibleDslParser.g:8904:2: iv_ruleEIndexOrLoopVariableReference= ruleEIndexOrLoopVariableReference EOF
             {
              newCompositeNode(grammarAccess.getEIndexOrLoopVariableReferenceRule()); 
             pushFollow(FOLLOW_1);
@@ -22821,7 +22995,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEIndexOrLoopVariableReference"
-    // InternalAnsibleDslParser.g:8837:1: ruleEIndexOrLoopVariableReference returns [EObject current=null] : (otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalAnsibleDslParser.g:8910:1: ruleEIndexOrLoopVariableReference returns [EObject current=null] : (otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleEIndexOrLoopVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -22832,21 +23006,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8843:2: ( (otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalAnsibleDslParser.g:8844:2: (otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:8916:2: ( (otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) ) ) )
+            // InternalAnsibleDslParser.g:8917:2: (otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) ) )
             {
-            // InternalAnsibleDslParser.g:8844:2: (otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) ) )
-            // InternalAnsibleDslParser.g:8845:3: otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8917:2: (otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:8918:3: otherlv_0= Index_or_loop_var ( (otherlv_1= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,Index_or_loop_var,FOLLOW_16); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEIndexOrLoopVariableReferenceAccess().getIndex_or_loop_varKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8849:3: ( (otherlv_1= RULE_ID ) )
-            // InternalAnsibleDslParser.g:8850:4: (otherlv_1= RULE_ID )
+            // InternalAnsibleDslParser.g:8922:3: ( (otherlv_1= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8923:4: (otherlv_1= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:8850:4: (otherlv_1= RULE_ID )
-            // InternalAnsibleDslParser.g:8851:5: otherlv_1= RULE_ID
+            // InternalAnsibleDslParser.g:8923:4: (otherlv_1= RULE_ID )
+            // InternalAnsibleDslParser.g:8924:5: otherlv_1= RULE_ID
             {
 
             					if (current==null) {
@@ -22886,7 +23060,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleERegisterVariable"
-    // InternalAnsibleDslParser.g:8866:1: entryRuleERegisterVariable returns [EObject current=null] : iv_ruleERegisterVariable= ruleERegisterVariable EOF ;
+    // InternalAnsibleDslParser.g:8939:1: entryRuleERegisterVariable returns [EObject current=null] : iv_ruleERegisterVariable= ruleERegisterVariable EOF ;
     public final EObject entryRuleERegisterVariable() throws RecognitionException {
         EObject current = null;
 
@@ -22894,8 +23068,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8866:58: (iv_ruleERegisterVariable= ruleERegisterVariable EOF )
-            // InternalAnsibleDslParser.g:8867:2: iv_ruleERegisterVariable= ruleERegisterVariable EOF
+            // InternalAnsibleDslParser.g:8939:58: (iv_ruleERegisterVariable= ruleERegisterVariable EOF )
+            // InternalAnsibleDslParser.g:8940:2: iv_ruleERegisterVariable= ruleERegisterVariable EOF
             {
              newCompositeNode(grammarAccess.getERegisterVariableRule()); 
             pushFollow(FOLLOW_1);
@@ -22922,7 +23096,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleERegisterVariable"
-    // InternalAnsibleDslParser.g:8873:1: ruleERegisterVariable returns [EObject current=null] : (otherlv_0= Register ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalAnsibleDslParser.g:8946:1: ruleERegisterVariable returns [EObject current=null] : (otherlv_0= Register ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleERegisterVariable() throws RecognitionException {
         EObject current = null;
 
@@ -22933,21 +23107,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8879:2: ( (otherlv_0= Register ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalAnsibleDslParser.g:8880:2: (otherlv_0= Register ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:8952:2: ( (otherlv_0= Register ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalAnsibleDslParser.g:8953:2: (otherlv_0= Register ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalAnsibleDslParser.g:8880:2: (otherlv_0= Register ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalAnsibleDslParser.g:8881:3: otherlv_0= Register ( (lv_name_1_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8953:2: (otherlv_0= Register ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:8954:3: otherlv_0= Register ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,Register,FOLLOW_16); 
 
             			newLeafNode(otherlv_0, grammarAccess.getERegisterVariableAccess().getRegisterKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8885:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalAnsibleDslParser.g:8886:4: (lv_name_1_0= RULE_ID )
+            // InternalAnsibleDslParser.g:8958:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:8959:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:8886:4: (lv_name_1_0= RULE_ID )
-            // InternalAnsibleDslParser.g:8887:5: lv_name_1_0= RULE_ID
+            // InternalAnsibleDslParser.g:8959:4: (lv_name_1_0= RULE_ID )
+            // InternalAnsibleDslParser.g:8960:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -22992,7 +23166,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEInputOperationVariableReference"
-    // InternalAnsibleDslParser.g:8907:1: entryRuleEInputOperationVariableReference returns [EObject current=null] : iv_ruleEInputOperationVariableReference= ruleEInputOperationVariableReference EOF ;
+    // InternalAnsibleDslParser.g:8980:1: entryRuleEInputOperationVariableReference returns [EObject current=null] : iv_ruleEInputOperationVariableReference= ruleEInputOperationVariableReference EOF ;
     public final EObject entryRuleEInputOperationVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -23000,8 +23174,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8907:73: (iv_ruleEInputOperationVariableReference= ruleEInputOperationVariableReference EOF )
-            // InternalAnsibleDslParser.g:8908:2: iv_ruleEInputOperationVariableReference= ruleEInputOperationVariableReference EOF
+            // InternalAnsibleDslParser.g:8980:73: (iv_ruleEInputOperationVariableReference= ruleEInputOperationVariableReference EOF )
+            // InternalAnsibleDslParser.g:8981:2: iv_ruleEInputOperationVariableReference= ruleEInputOperationVariableReference EOF
             {
              newCompositeNode(grammarAccess.getEInputOperationVariableReferenceRule()); 
             pushFollow(FOLLOW_1);
@@ -23028,7 +23202,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEInputOperationVariableReference"
-    // InternalAnsibleDslParser.g:8914:1: ruleEInputOperationVariableReference returns [EObject current=null] : (otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) ) ) ;
+    // InternalAnsibleDslParser.g:8987:1: ruleEInputOperationVariableReference returns [EObject current=null] : (otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) ) ) ;
     public final EObject ruleEInputOperationVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -23039,21 +23213,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8920:2: ( (otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) ) ) )
-            // InternalAnsibleDslParser.g:8921:2: (otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) ) )
+            // InternalAnsibleDslParser.g:8993:2: ( (otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) ) ) )
+            // InternalAnsibleDslParser.g:8994:2: (otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) ) )
             {
-            // InternalAnsibleDslParser.g:8921:2: (otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) ) )
-            // InternalAnsibleDslParser.g:8922:3: otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) )
+            // InternalAnsibleDslParser.g:8994:2: (otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) ) )
+            // InternalAnsibleDslParser.g:8995:3: otherlv_0= Operation_input ( (otherlv_1= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,Operation_input,FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEInputOperationVariableReferenceAccess().getOperation_inputKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8926:3: ( (otherlv_1= RULE_STRING ) )
-            // InternalAnsibleDslParser.g:8927:4: (otherlv_1= RULE_STRING )
+            // InternalAnsibleDslParser.g:8999:3: ( (otherlv_1= RULE_STRING ) )
+            // InternalAnsibleDslParser.g:9000:4: (otherlv_1= RULE_STRING )
             {
-            // InternalAnsibleDslParser.g:8927:4: (otherlv_1= RULE_STRING )
-            // InternalAnsibleDslParser.g:8928:5: otherlv_1= RULE_STRING
+            // InternalAnsibleDslParser.g:9000:4: (otherlv_1= RULE_STRING )
+            // InternalAnsibleDslParser.g:9001:5: otherlv_1= RULE_STRING
             {
 
             					if (current==null) {
@@ -23093,7 +23267,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEInputInterfaceVariableReference"
-    // InternalAnsibleDslParser.g:8943:1: entryRuleEInputInterfaceVariableReference returns [EObject current=null] : iv_ruleEInputInterfaceVariableReference= ruleEInputInterfaceVariableReference EOF ;
+    // InternalAnsibleDslParser.g:9016:1: entryRuleEInputInterfaceVariableReference returns [EObject current=null] : iv_ruleEInputInterfaceVariableReference= ruleEInputInterfaceVariableReference EOF ;
     public final EObject entryRuleEInputInterfaceVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -23101,8 +23275,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8943:73: (iv_ruleEInputInterfaceVariableReference= ruleEInputInterfaceVariableReference EOF )
-            // InternalAnsibleDslParser.g:8944:2: iv_ruleEInputInterfaceVariableReference= ruleEInputInterfaceVariableReference EOF
+            // InternalAnsibleDslParser.g:9016:73: (iv_ruleEInputInterfaceVariableReference= ruleEInputInterfaceVariableReference EOF )
+            // InternalAnsibleDslParser.g:9017:2: iv_ruleEInputInterfaceVariableReference= ruleEInputInterfaceVariableReference EOF
             {
              newCompositeNode(grammarAccess.getEInputInterfaceVariableReferenceRule()); 
             pushFollow(FOLLOW_1);
@@ -23129,7 +23303,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEInputInterfaceVariableReference"
-    // InternalAnsibleDslParser.g:8950:1: ruleEInputInterfaceVariableReference returns [EObject current=null] : (otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) ) ) ;
+    // InternalAnsibleDslParser.g:9023:1: ruleEInputInterfaceVariableReference returns [EObject current=null] : (otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) ) ) ;
     public final EObject ruleEInputInterfaceVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -23140,21 +23314,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8956:2: ( (otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) ) ) )
-            // InternalAnsibleDslParser.g:8957:2: (otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) ) )
+            // InternalAnsibleDslParser.g:9029:2: ( (otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) ) ) )
+            // InternalAnsibleDslParser.g:9030:2: (otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) ) )
             {
-            // InternalAnsibleDslParser.g:8957:2: (otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) ) )
-            // InternalAnsibleDslParser.g:8958:3: otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) )
+            // InternalAnsibleDslParser.g:9030:2: (otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) ) )
+            // InternalAnsibleDslParser.g:9031:3: otherlv_0= Interface_input ( (otherlv_1= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,Interface_input,FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEInputInterfaceVariableReferenceAccess().getInterface_inputKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8962:3: ( (otherlv_1= RULE_STRING ) )
-            // InternalAnsibleDslParser.g:8963:4: (otherlv_1= RULE_STRING )
+            // InternalAnsibleDslParser.g:9035:3: ( (otherlv_1= RULE_STRING ) )
+            // InternalAnsibleDslParser.g:9036:4: (otherlv_1= RULE_STRING )
             {
-            // InternalAnsibleDslParser.g:8963:4: (otherlv_1= RULE_STRING )
-            // InternalAnsibleDslParser.g:8964:5: otherlv_1= RULE_STRING
+            // InternalAnsibleDslParser.g:9036:4: (otherlv_1= RULE_STRING )
+            // InternalAnsibleDslParser.g:9037:5: otherlv_1= RULE_STRING
             {
 
             					if (current==null) {
@@ -23194,7 +23368,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleESetFactVariableReference"
-    // InternalAnsibleDslParser.g:8979:1: entryRuleESetFactVariableReference returns [EObject current=null] : iv_ruleESetFactVariableReference= ruleESetFactVariableReference EOF ;
+    // InternalAnsibleDslParser.g:9052:1: entryRuleESetFactVariableReference returns [EObject current=null] : iv_ruleESetFactVariableReference= ruleESetFactVariableReference EOF ;
     public final EObject entryRuleESetFactVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -23202,8 +23376,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:8979:66: (iv_ruleESetFactVariableReference= ruleESetFactVariableReference EOF )
-            // InternalAnsibleDslParser.g:8980:2: iv_ruleESetFactVariableReference= ruleESetFactVariableReference EOF
+            // InternalAnsibleDslParser.g:9052:66: (iv_ruleESetFactVariableReference= ruleESetFactVariableReference EOF )
+            // InternalAnsibleDslParser.g:9053:2: iv_ruleESetFactVariableReference= ruleESetFactVariableReference EOF
             {
              newCompositeNode(grammarAccess.getESetFactVariableReferenceRule()); 
             pushFollow(FOLLOW_1);
@@ -23230,7 +23404,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleESetFactVariableReference"
-    // InternalAnsibleDslParser.g:8986:1: ruleESetFactVariableReference returns [EObject current=null] : (otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalAnsibleDslParser.g:9059:1: ruleESetFactVariableReference returns [EObject current=null] : (otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleESetFactVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -23241,21 +23415,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:8992:2: ( (otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalAnsibleDslParser.g:8993:2: (otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:9065:2: ( (otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) ) ) )
+            // InternalAnsibleDslParser.g:9066:2: (otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) ) )
             {
-            // InternalAnsibleDslParser.g:8993:2: (otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) ) )
-            // InternalAnsibleDslParser.g:8994:3: otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) )
+            // InternalAnsibleDslParser.g:9066:2: (otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:9067:3: otherlv_0= Fact_set ( (otherlv_1= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,Fact_set,FOLLOW_16); 
 
             			newLeafNode(otherlv_0, grammarAccess.getESetFactVariableReferenceAccess().getFact_setKeyword_0());
             		
-            // InternalAnsibleDslParser.g:8998:3: ( (otherlv_1= RULE_ID ) )
-            // InternalAnsibleDslParser.g:8999:4: (otherlv_1= RULE_ID )
+            // InternalAnsibleDslParser.g:9071:3: ( (otherlv_1= RULE_ID ) )
+            // InternalAnsibleDslParser.g:9072:4: (otherlv_1= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:8999:4: (otherlv_1= RULE_ID )
-            // InternalAnsibleDslParser.g:9000:5: otherlv_1= RULE_ID
+            // InternalAnsibleDslParser.g:9072:4: (otherlv_1= RULE_ID )
+            // InternalAnsibleDslParser.g:9073:5: otherlv_1= RULE_ID
             {
 
             					if (current==null) {
@@ -23295,7 +23469,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEVariableReference"
-    // InternalAnsibleDslParser.g:9015:1: entryRuleEVariableReference returns [EObject current=null] : iv_ruleEVariableReference= ruleEVariableReference EOF ;
+    // InternalAnsibleDslParser.g:9088:1: entryRuleEVariableReference returns [EObject current=null] : iv_ruleEVariableReference= ruleEVariableReference EOF ;
     public final EObject entryRuleEVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -23303,8 +23477,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9015:59: (iv_ruleEVariableReference= ruleEVariableReference EOF )
-            // InternalAnsibleDslParser.g:9016:2: iv_ruleEVariableReference= ruleEVariableReference EOF
+            // InternalAnsibleDslParser.g:9088:59: (iv_ruleEVariableReference= ruleEVariableReference EOF )
+            // InternalAnsibleDslParser.g:9089:2: iv_ruleEVariableReference= ruleEVariableReference EOF
             {
              newCompositeNode(grammarAccess.getEVariableReferenceRule()); 
             pushFollow(FOLLOW_1);
@@ -23331,7 +23505,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEVariableReference"
-    // InternalAnsibleDslParser.g:9022:1: ruleEVariableReference returns [EObject current=null] : (this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference | this_ERegisterVariableReference_1= ruleERegisterVariableReference | this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference | this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference | this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference | this_ESetFactVariableReference_5= ruleESetFactVariableReference ) ;
+    // InternalAnsibleDslParser.g:9095:1: ruleEVariableReference returns [EObject current=null] : (this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference | this_ERegisterVariableReference_1= ruleERegisterVariableReference | this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference | this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference | this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference | this_ESetFactVariableReference_5= ruleESetFactVariableReference ) ;
     public final EObject ruleEVariableReference() throws RecognitionException {
         EObject current = null;
 
@@ -23352,10 +23526,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9028:2: ( (this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference | this_ERegisterVariableReference_1= ruleERegisterVariableReference | this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference | this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference | this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference | this_ESetFactVariableReference_5= ruleESetFactVariableReference ) )
-            // InternalAnsibleDslParser.g:9029:2: (this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference | this_ERegisterVariableReference_1= ruleERegisterVariableReference | this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference | this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference | this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference | this_ESetFactVariableReference_5= ruleESetFactVariableReference )
+            // InternalAnsibleDslParser.g:9101:2: ( (this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference | this_ERegisterVariableReference_1= ruleERegisterVariableReference | this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference | this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference | this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference | this_ESetFactVariableReference_5= ruleESetFactVariableReference ) )
+            // InternalAnsibleDslParser.g:9102:2: (this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference | this_ERegisterVariableReference_1= ruleERegisterVariableReference | this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference | this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference | this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference | this_ESetFactVariableReference_5= ruleESetFactVariableReference )
             {
-            // InternalAnsibleDslParser.g:9029:2: (this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference | this_ERegisterVariableReference_1= ruleERegisterVariableReference | this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference | this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference | this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference | this_ESetFactVariableReference_5= ruleESetFactVariableReference )
+            // InternalAnsibleDslParser.g:9102:2: (this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference | this_ERegisterVariableReference_1= ruleERegisterVariableReference | this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference | this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference | this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference | this_ESetFactVariableReference_5= ruleESetFactVariableReference )
             int alt94=6;
             switch ( input.LA(1) ) {
             case Declared_variable:
@@ -23397,7 +23571,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             switch (alt94) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:9030:3: this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference
+                    // InternalAnsibleDslParser.g:9103:3: this_EVariableDeclarationVariableReference_0= ruleEVariableDeclarationVariableReference
                     {
 
                     			newCompositeNode(grammarAccess.getEVariableReferenceAccess().getEVariableDeclarationVariableReferenceParserRuleCall_0());
@@ -23415,7 +23589,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:9039:3: this_ERegisterVariableReference_1= ruleERegisterVariableReference
+                    // InternalAnsibleDslParser.g:9112:3: this_ERegisterVariableReference_1= ruleERegisterVariableReference
                     {
 
                     			newCompositeNode(grammarAccess.getEVariableReferenceAccess().getERegisterVariableReferenceParserRuleCall_1());
@@ -23433,7 +23607,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalAnsibleDslParser.g:9048:3: this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference
+                    // InternalAnsibleDslParser.g:9121:3: this_EInputOperationVariableReference_2= ruleEInputOperationVariableReference
                     {
 
                     			newCompositeNode(grammarAccess.getEVariableReferenceAccess().getEInputOperationVariableReferenceParserRuleCall_2());
@@ -23451,7 +23625,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalAnsibleDslParser.g:9057:3: this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference
+                    // InternalAnsibleDslParser.g:9130:3: this_EInputInterfaceVariableReference_3= ruleEInputInterfaceVariableReference
                     {
 
                     			newCompositeNode(grammarAccess.getEVariableReferenceAccess().getEInputInterfaceVariableReferenceParserRuleCall_3());
@@ -23469,7 +23643,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalAnsibleDslParser.g:9066:3: this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference
+                    // InternalAnsibleDslParser.g:9139:3: this_EIndexOrLoopVariableReference_4= ruleEIndexOrLoopVariableReference
                     {
 
                     			newCompositeNode(grammarAccess.getEVariableReferenceAccess().getEIndexOrLoopVariableReferenceParserRuleCall_4());
@@ -23487,7 +23661,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalAnsibleDslParser.g:9075:3: this_ESetFactVariableReference_5= ruleESetFactVariableReference
+                    // InternalAnsibleDslParser.g:9148:3: this_ESetFactVariableReference_5= ruleESetFactVariableReference
                     {
 
                     			newCompositeNode(grammarAccess.getEVariableReferenceAccess().getESetFactVariableReferenceParserRuleCall_5());
@@ -23527,7 +23701,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleESpecialVariable"
-    // InternalAnsibleDslParser.g:9087:1: entryRuleESpecialVariable returns [EObject current=null] : iv_ruleESpecialVariable= ruleESpecialVariable EOF ;
+    // InternalAnsibleDslParser.g:9160:1: entryRuleESpecialVariable returns [EObject current=null] : iv_ruleESpecialVariable= ruleESpecialVariable EOF ;
     public final EObject entryRuleESpecialVariable() throws RecognitionException {
         EObject current = null;
 
@@ -23535,8 +23709,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9087:57: (iv_ruleESpecialVariable= ruleESpecialVariable EOF )
-            // InternalAnsibleDslParser.g:9088:2: iv_ruleESpecialVariable= ruleESpecialVariable EOF
+            // InternalAnsibleDslParser.g:9160:57: (iv_ruleESpecialVariable= ruleESpecialVariable EOF )
+            // InternalAnsibleDslParser.g:9161:2: iv_ruleESpecialVariable= ruleESpecialVariable EOF
             {
              newCompositeNode(grammarAccess.getESpecialVariableRule()); 
             pushFollow(FOLLOW_1);
@@ -23563,7 +23737,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleESpecialVariable"
-    // InternalAnsibleDslParser.g:9094:1: ruleESpecialVariable returns [EObject current=null] : ( () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) ) ) ;
+    // InternalAnsibleDslParser.g:9167:1: ruleESpecialVariable returns [EObject current=null] : ( () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) ) ) ;
     public final EObject ruleESpecialVariable() throws RecognitionException {
         EObject current = null;
 
@@ -23574,14 +23748,14 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9100:2: ( ( () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) ) ) )
-            // InternalAnsibleDslParser.g:9101:2: ( () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:9173:2: ( ( () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) ) ) )
+            // InternalAnsibleDslParser.g:9174:2: ( () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) ) )
             {
-            // InternalAnsibleDslParser.g:9101:2: ( () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) ) )
-            // InternalAnsibleDslParser.g:9102:3: () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:9174:2: ( () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalAnsibleDslParser.g:9175:3: () otherlv_1= Special_variable ( (lv_name_2_0= RULE_ID ) )
             {
-            // InternalAnsibleDslParser.g:9102:3: ()
-            // InternalAnsibleDslParser.g:9103:4: 
+            // InternalAnsibleDslParser.g:9175:3: ()
+            // InternalAnsibleDslParser.g:9176:4: 
             {
 
             				current = forceCreateModelElement(
@@ -23595,11 +23769,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getESpecialVariableAccess().getSpecial_variableKeyword_1());
             		
-            // InternalAnsibleDslParser.g:9113:3: ( (lv_name_2_0= RULE_ID ) )
-            // InternalAnsibleDslParser.g:9114:4: (lv_name_2_0= RULE_ID )
+            // InternalAnsibleDslParser.g:9186:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:9187:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:9114:4: (lv_name_2_0= RULE_ID )
-            // InternalAnsibleDslParser.g:9115:5: lv_name_2_0= RULE_ID
+            // InternalAnsibleDslParser.g:9187:4: (lv_name_2_0= RULE_ID )
+            // InternalAnsibleDslParser.g:9188:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -23644,7 +23818,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleETailElement"
-    // InternalAnsibleDslParser.g:9135:1: entryRuleETailElement returns [EObject current=null] : iv_ruleETailElement= ruleETailElement EOF ;
+    // InternalAnsibleDslParser.g:9208:1: entryRuleETailElement returns [EObject current=null] : iv_ruleETailElement= ruleETailElement EOF ;
     public final EObject entryRuleETailElement() throws RecognitionException {
         EObject current = null;
 
@@ -23652,8 +23826,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9135:53: (iv_ruleETailElement= ruleETailElement EOF )
-            // InternalAnsibleDslParser.g:9136:2: iv_ruleETailElement= ruleETailElement EOF
+            // InternalAnsibleDslParser.g:9208:53: (iv_ruleETailElement= ruleETailElement EOF )
+            // InternalAnsibleDslParser.g:9209:2: iv_ruleETailElement= ruleETailElement EOF
             {
              newCompositeNode(grammarAccess.getETailElementRule()); 
             pushFollow(FOLLOW_1);
@@ -23680,7 +23854,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleETailElement"
-    // InternalAnsibleDslParser.g:9142:1: ruleETailElement returns [EObject current=null] : ( ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )? ) ;
+    // InternalAnsibleDslParser.g:9215:1: ruleETailElement returns [EObject current=null] : ( ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )? ) ;
     public final EObject ruleETailElement() throws RecognitionException {
         EObject current = null;
 
@@ -23694,17 +23868,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9148:2: ( ( ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )? ) )
-            // InternalAnsibleDslParser.g:9149:2: ( ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )? )
+            // InternalAnsibleDslParser.g:9221:2: ( ( ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )? ) )
+            // InternalAnsibleDslParser.g:9222:2: ( ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )? )
             {
-            // InternalAnsibleDslParser.g:9149:2: ( ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )? )
-            // InternalAnsibleDslParser.g:9150:3: ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )?
+            // InternalAnsibleDslParser.g:9222:2: ( ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )? )
+            // InternalAnsibleDslParser.g:9223:3: ( (lv_function_call_0_0= ruleEFunctionCall ) ) (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )?
             {
-            // InternalAnsibleDslParser.g:9150:3: ( (lv_function_call_0_0= ruleEFunctionCall ) )
-            // InternalAnsibleDslParser.g:9151:4: (lv_function_call_0_0= ruleEFunctionCall )
+            // InternalAnsibleDslParser.g:9223:3: ( (lv_function_call_0_0= ruleEFunctionCall ) )
+            // InternalAnsibleDslParser.g:9224:4: (lv_function_call_0_0= ruleEFunctionCall )
             {
-            // InternalAnsibleDslParser.g:9151:4: (lv_function_call_0_0= ruleEFunctionCall )
-            // InternalAnsibleDslParser.g:9152:5: lv_function_call_0_0= ruleEFunctionCall
+            // InternalAnsibleDslParser.g:9224:4: (lv_function_call_0_0= ruleEFunctionCall )
+            // InternalAnsibleDslParser.g:9225:5: lv_function_call_0_0= ruleEFunctionCall
             {
 
             					newCompositeNode(grammarAccess.getETailElementAccess().getFunction_callEFunctionCallParserRuleCall_0_0());
@@ -23731,7 +23905,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:9169:3: (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )?
+            // InternalAnsibleDslParser.g:9242:3: (otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket )?
             int alt95=2;
             int LA95_0 = input.LA(1);
 
@@ -23740,17 +23914,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt95) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:9170:4: otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket
+                    // InternalAnsibleDslParser.g:9243:4: otherlv_1= LeftSquareBracket ( (lv_index_2_0= RULE_NUMBER ) ) otherlv_3= RightSquareBracket
                     {
                     otherlv_1=(Token)match(input,LeftSquareBracket,FOLLOW_74); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getETailElementAccess().getLeftSquareBracketKeyword_1_0());
                     			
-                    // InternalAnsibleDslParser.g:9174:4: ( (lv_index_2_0= RULE_NUMBER ) )
-                    // InternalAnsibleDslParser.g:9175:5: (lv_index_2_0= RULE_NUMBER )
+                    // InternalAnsibleDslParser.g:9247:4: ( (lv_index_2_0= RULE_NUMBER ) )
+                    // InternalAnsibleDslParser.g:9248:5: (lv_index_2_0= RULE_NUMBER )
                     {
-                    // InternalAnsibleDslParser.g:9175:5: (lv_index_2_0= RULE_NUMBER )
-                    // InternalAnsibleDslParser.g:9176:6: lv_index_2_0= RULE_NUMBER
+                    // InternalAnsibleDslParser.g:9248:5: (lv_index_2_0= RULE_NUMBER )
+                    // InternalAnsibleDslParser.g:9249:6: lv_index_2_0= RULE_NUMBER
                     {
                     lv_index_2_0=(Token)match(input,RULE_NUMBER,FOLLOW_75); 
 
@@ -23805,7 +23979,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEDictionary"
-    // InternalAnsibleDslParser.g:9201:1: entryRuleEDictionary returns [EObject current=null] : iv_ruleEDictionary= ruleEDictionary EOF ;
+    // InternalAnsibleDslParser.g:9274:1: entryRuleEDictionary returns [EObject current=null] : iv_ruleEDictionary= ruleEDictionary EOF ;
     public final EObject entryRuleEDictionary() throws RecognitionException {
         EObject current = null;
 
@@ -23813,8 +23987,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9201:52: (iv_ruleEDictionary= ruleEDictionary EOF )
-            // InternalAnsibleDslParser.g:9202:2: iv_ruleEDictionary= ruleEDictionary EOF
+            // InternalAnsibleDslParser.g:9274:52: (iv_ruleEDictionary= ruleEDictionary EOF )
+            // InternalAnsibleDslParser.g:9275:2: iv_ruleEDictionary= ruleEDictionary EOF
             {
              newCompositeNode(grammarAccess.getEDictionaryRule()); 
             pushFollow(FOLLOW_1);
@@ -23841,7 +24015,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEDictionary"
-    // InternalAnsibleDslParser.g:9208:1: ruleEDictionary returns [EObject current=null] : ( (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket ) | (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END ) ) ;
+    // InternalAnsibleDslParser.g:9281:1: ruleEDictionary returns [EObject current=null] : ( (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket ) | (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END ) ) ;
     public final EObject ruleEDictionary() throws RecognitionException {
         EObject current = null;
 
@@ -23861,10 +24035,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9214:2: ( ( (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket ) | (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END ) ) )
-            // InternalAnsibleDslParser.g:9215:2: ( (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket ) | (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END ) )
+            // InternalAnsibleDslParser.g:9287:2: ( ( (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket ) | (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END ) ) )
+            // InternalAnsibleDslParser.g:9288:2: ( (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket ) | (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END ) )
             {
-            // InternalAnsibleDslParser.g:9215:2: ( (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket ) | (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END ) )
+            // InternalAnsibleDslParser.g:9288:2: ( (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket ) | (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END ) )
             int alt98=2;
             int LA98_0 = input.LA(1);
 
@@ -23882,20 +24056,20 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt98) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:9216:3: (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket )
+                    // InternalAnsibleDslParser.g:9289:3: (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket )
                     {
-                    // InternalAnsibleDslParser.g:9216:3: (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket )
-                    // InternalAnsibleDslParser.g:9217:4: otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket
+                    // InternalAnsibleDslParser.g:9289:3: (otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket )
+                    // InternalAnsibleDslParser.g:9290:4: otherlv_0= LeftCurlyBracket ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) ) (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )* otherlv_4= RightCurlyBracket
                     {
                     otherlv_0=(Token)match(input,LeftCurlyBracket,FOLLOW_16); 
 
                     				newLeafNode(otherlv_0, grammarAccess.getEDictionaryAccess().getLeftCurlyBracketKeyword_0_0());
                     			
-                    // InternalAnsibleDslParser.g:9221:4: ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) )
-                    // InternalAnsibleDslParser.g:9222:5: (lv_dictionary_pairs_1_0= ruleEDictionaryPair )
+                    // InternalAnsibleDslParser.g:9294:4: ( (lv_dictionary_pairs_1_0= ruleEDictionaryPair ) )
+                    // InternalAnsibleDslParser.g:9295:5: (lv_dictionary_pairs_1_0= ruleEDictionaryPair )
                     {
-                    // InternalAnsibleDslParser.g:9222:5: (lv_dictionary_pairs_1_0= ruleEDictionaryPair )
-                    // InternalAnsibleDslParser.g:9223:6: lv_dictionary_pairs_1_0= ruleEDictionaryPair
+                    // InternalAnsibleDslParser.g:9295:5: (lv_dictionary_pairs_1_0= ruleEDictionaryPair )
+                    // InternalAnsibleDslParser.g:9296:6: lv_dictionary_pairs_1_0= ruleEDictionaryPair
                     {
 
                     						newCompositeNode(grammarAccess.getEDictionaryAccess().getDictionary_pairsEDictionaryPairParserRuleCall_0_1_0());
@@ -23922,7 +24096,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalAnsibleDslParser.g:9240:4: (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )*
+                    // InternalAnsibleDslParser.g:9313:4: (otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) ) )*
                     loop96:
                     do {
                         int alt96=2;
@@ -23935,17 +24109,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt96) {
                     	case 1 :
-                    	    // InternalAnsibleDslParser.g:9241:5: otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) )
+                    	    // InternalAnsibleDslParser.g:9314:5: otherlv_2= Comma ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) )
                     	    {
                     	    otherlv_2=(Token)match(input,Comma,FOLLOW_16); 
 
                     	    					newLeafNode(otherlv_2, grammarAccess.getEDictionaryAccess().getCommaKeyword_0_2_0());
                     	    				
-                    	    // InternalAnsibleDslParser.g:9245:5: ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) )
-                    	    // InternalAnsibleDslParser.g:9246:6: (lv_dictionary_pairs_3_0= ruleEDictionaryPair )
+                    	    // InternalAnsibleDslParser.g:9318:5: ( (lv_dictionary_pairs_3_0= ruleEDictionaryPair ) )
+                    	    // InternalAnsibleDslParser.g:9319:6: (lv_dictionary_pairs_3_0= ruleEDictionaryPair )
                     	    {
-                    	    // InternalAnsibleDslParser.g:9246:6: (lv_dictionary_pairs_3_0= ruleEDictionaryPair )
-                    	    // InternalAnsibleDslParser.g:9247:7: lv_dictionary_pairs_3_0= ruleEDictionaryPair
+                    	    // InternalAnsibleDslParser.g:9319:6: (lv_dictionary_pairs_3_0= ruleEDictionaryPair )
+                    	    // InternalAnsibleDslParser.g:9320:7: lv_dictionary_pairs_3_0= ruleEDictionaryPair
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getEDictionaryAccess().getDictionary_pairsEDictionaryPairParserRuleCall_0_2_1_0());
@@ -23992,16 +24166,16 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:9271:3: (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END )
+                    // InternalAnsibleDslParser.g:9344:3: (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END )
                     {
-                    // InternalAnsibleDslParser.g:9271:3: (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END )
-                    // InternalAnsibleDslParser.g:9272:4: this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END
+                    // InternalAnsibleDslParser.g:9344:3: (this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END )
+                    // InternalAnsibleDslParser.g:9345:4: this_BEGIN_5= RULE_BEGIN ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+ this_END_7= RULE_END
                     {
                     this_BEGIN_5=(Token)match(input,RULE_BEGIN,FOLLOW_16); 
 
                     				newLeafNode(this_BEGIN_5, grammarAccess.getEDictionaryAccess().getBEGINTerminalRuleCall_1_0());
                     			
-                    // InternalAnsibleDslParser.g:9276:4: ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+
+                    // InternalAnsibleDslParser.g:9349:4: ( (lv_dictionary_pairs_6_0= ruleEDictionaryPair ) )+
                     int cnt97=0;
                     loop97:
                     do {
@@ -24015,10 +24189,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt97) {
                     	case 1 :
-                    	    // InternalAnsibleDslParser.g:9277:5: (lv_dictionary_pairs_6_0= ruleEDictionaryPair )
+                    	    // InternalAnsibleDslParser.g:9350:5: (lv_dictionary_pairs_6_0= ruleEDictionaryPair )
                     	    {
-                    	    // InternalAnsibleDslParser.g:9277:5: (lv_dictionary_pairs_6_0= ruleEDictionaryPair )
-                    	    // InternalAnsibleDslParser.g:9278:6: lv_dictionary_pairs_6_0= ruleEDictionaryPair
+                    	    // InternalAnsibleDslParser.g:9350:5: (lv_dictionary_pairs_6_0= ruleEDictionaryPair )
+                    	    // InternalAnsibleDslParser.g:9351:6: lv_dictionary_pairs_6_0= ruleEDictionaryPair
                     	    {
 
                     	    						newCompositeNode(grammarAccess.getEDictionaryAccess().getDictionary_pairsEDictionaryPairParserRuleCall_1_1_0());
@@ -24088,7 +24262,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEDictionaryPair"
-    // InternalAnsibleDslParser.g:9304:1: entryRuleEDictionaryPair returns [EObject current=null] : iv_ruleEDictionaryPair= ruleEDictionaryPair EOF ;
+    // InternalAnsibleDslParser.g:9377:1: entryRuleEDictionaryPair returns [EObject current=null] : iv_ruleEDictionaryPair= ruleEDictionaryPair EOF ;
     public final EObject entryRuleEDictionaryPair() throws RecognitionException {
         EObject current = null;
 
@@ -24096,8 +24270,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9304:56: (iv_ruleEDictionaryPair= ruleEDictionaryPair EOF )
-            // InternalAnsibleDslParser.g:9305:2: iv_ruleEDictionaryPair= ruleEDictionaryPair EOF
+            // InternalAnsibleDslParser.g:9377:56: (iv_ruleEDictionaryPair= ruleEDictionaryPair EOF )
+            // InternalAnsibleDslParser.g:9378:2: iv_ruleEDictionaryPair= ruleEDictionaryPair EOF
             {
              newCompositeNode(grammarAccess.getEDictionaryPairRule()); 
             pushFollow(FOLLOW_1);
@@ -24124,7 +24298,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEDictionaryPair"
-    // InternalAnsibleDslParser.g:9311:1: ruleEDictionaryPair returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) ) ) ;
+    // InternalAnsibleDslParser.g:9384:1: ruleEDictionaryPair returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) ) ) ;
     public final EObject ruleEDictionaryPair() throws RecognitionException {
         EObject current = null;
 
@@ -24137,17 +24311,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9317:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) ) ) )
-            // InternalAnsibleDslParser.g:9318:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) ) )
+            // InternalAnsibleDslParser.g:9390:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) ) ) )
+            // InternalAnsibleDslParser.g:9391:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) ) )
             {
-            // InternalAnsibleDslParser.g:9318:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) ) )
-            // InternalAnsibleDslParser.g:9319:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:9391:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) ) )
+            // InternalAnsibleDslParser.g:9392:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEValuePassed ) )
             {
-            // InternalAnsibleDslParser.g:9319:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalAnsibleDslParser.g:9320:4: (lv_name_0_0= RULE_ID )
+            // InternalAnsibleDslParser.g:9392:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalAnsibleDslParser.g:9393:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalAnsibleDslParser.g:9320:4: (lv_name_0_0= RULE_ID )
-            // InternalAnsibleDslParser.g:9321:5: lv_name_0_0= RULE_ID
+            // InternalAnsibleDslParser.g:9393:4: (lv_name_0_0= RULE_ID )
+            // InternalAnsibleDslParser.g:9394:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_37); 
 
@@ -24173,11 +24347,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEDictionaryPairAccess().getColonKeyword_1());
             		
-            // InternalAnsibleDslParser.g:9341:3: ( (lv_value_2_0= ruleEValuePassed ) )
-            // InternalAnsibleDslParser.g:9342:4: (lv_value_2_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:9414:3: ( (lv_value_2_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:9415:4: (lv_value_2_0= ruleEValuePassed )
             {
-            // InternalAnsibleDslParser.g:9342:4: (lv_value_2_0= ruleEValuePassed )
-            // InternalAnsibleDslParser.g:9343:5: lv_value_2_0= ruleEValuePassed
+            // InternalAnsibleDslParser.g:9415:4: (lv_value_2_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:9416:5: lv_value_2_0= ruleEValuePassed
             {
 
             					newCompositeNode(grammarAccess.getEDictionaryPairAccess().getValueEValuePassedParserRuleCall_2_0());
@@ -24227,7 +24401,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEList"
-    // InternalAnsibleDslParser.g:9364:1: entryRuleEList returns [EObject current=null] : iv_ruleEList= ruleEList EOF ;
+    // InternalAnsibleDslParser.g:9437:1: entryRuleEList returns [EObject current=null] : iv_ruleEList= ruleEList EOF ;
     public final EObject entryRuleEList() throws RecognitionException {
         EObject current = null;
 
@@ -24235,8 +24409,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9364:46: (iv_ruleEList= ruleEList EOF )
-            // InternalAnsibleDslParser.g:9365:2: iv_ruleEList= ruleEList EOF
+            // InternalAnsibleDslParser.g:9437:46: (iv_ruleEList= ruleEList EOF )
+            // InternalAnsibleDslParser.g:9438:2: iv_ruleEList= ruleEList EOF
             {
              newCompositeNode(grammarAccess.getEListRule()); 
             pushFollow(FOLLOW_1);
@@ -24263,7 +24437,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEList"
-    // InternalAnsibleDslParser.g:9371:1: ruleEList returns [EObject current=null] : (otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket ) ;
+    // InternalAnsibleDslParser.g:9444:1: ruleEList returns [EObject current=null] : (otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket ) ;
     public final EObject ruleEList() throws RecognitionException {
         EObject current = null;
 
@@ -24279,21 +24453,21 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9377:2: ( (otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket ) )
-            // InternalAnsibleDslParser.g:9378:2: (otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket )
+            // InternalAnsibleDslParser.g:9450:2: ( (otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket ) )
+            // InternalAnsibleDslParser.g:9451:2: (otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket )
             {
-            // InternalAnsibleDslParser.g:9378:2: (otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket )
-            // InternalAnsibleDslParser.g:9379:3: otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket
+            // InternalAnsibleDslParser.g:9451:2: (otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket )
+            // InternalAnsibleDslParser.g:9452:3: otherlv_0= LeftSquareBracket ( (lv_elements_1_0= ruleEValuePassed ) ) (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )* otherlv_4= RightSquareBracket
             {
             otherlv_0=(Token)match(input,LeftSquareBracket,FOLLOW_35); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEListAccess().getLeftSquareBracketKeyword_0());
             		
-            // InternalAnsibleDslParser.g:9383:3: ( (lv_elements_1_0= ruleEValuePassed ) )
-            // InternalAnsibleDslParser.g:9384:4: (lv_elements_1_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:9456:3: ( (lv_elements_1_0= ruleEValuePassed ) )
+            // InternalAnsibleDslParser.g:9457:4: (lv_elements_1_0= ruleEValuePassed )
             {
-            // InternalAnsibleDslParser.g:9384:4: (lv_elements_1_0= ruleEValuePassed )
-            // InternalAnsibleDslParser.g:9385:5: lv_elements_1_0= ruleEValuePassed
+            // InternalAnsibleDslParser.g:9457:4: (lv_elements_1_0= ruleEValuePassed )
+            // InternalAnsibleDslParser.g:9458:5: lv_elements_1_0= ruleEValuePassed
             {
 
             					newCompositeNode(grammarAccess.getEListAccess().getElementsEValuePassedParserRuleCall_1_0());
@@ -24320,7 +24494,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:9402:3: (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )*
+            // InternalAnsibleDslParser.g:9475:3: (otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) ) )*
             loop99:
             do {
                 int alt99=2;
@@ -24333,17 +24507,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt99) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:9403:4: otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) )
+            	    // InternalAnsibleDslParser.g:9476:4: otherlv_2= Comma ( (lv_elements_3_0= ruleEValuePassed ) )
             	    {
             	    otherlv_2=(Token)match(input,Comma,FOLLOW_35); 
 
             	    				newLeafNode(otherlv_2, grammarAccess.getEListAccess().getCommaKeyword_2_0());
             	    			
-            	    // InternalAnsibleDslParser.g:9407:4: ( (lv_elements_3_0= ruleEValuePassed ) )
-            	    // InternalAnsibleDslParser.g:9408:5: (lv_elements_3_0= ruleEValuePassed )
+            	    // InternalAnsibleDslParser.g:9480:4: ( (lv_elements_3_0= ruleEValuePassed ) )
+            	    // InternalAnsibleDslParser.g:9481:5: (lv_elements_3_0= ruleEValuePassed )
             	    {
-            	    // InternalAnsibleDslParser.g:9408:5: (lv_elements_3_0= ruleEValuePassed )
-            	    // InternalAnsibleDslParser.g:9409:6: lv_elements_3_0= ruleEValuePassed
+            	    // InternalAnsibleDslParser.g:9481:5: (lv_elements_3_0= ruleEValuePassed )
+            	    // InternalAnsibleDslParser.g:9482:6: lv_elements_3_0= ruleEValuePassed
             	    {
 
             	    						newCompositeNode(grammarAccess.getEListAccess().getElementsEValuePassedParserRuleCall_2_1_0());
@@ -24406,7 +24580,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEDictionaryPassed"
-    // InternalAnsibleDslParser.g:9435:1: entryRuleEDictionaryPassed returns [EObject current=null] : iv_ruleEDictionaryPassed= ruleEDictionaryPassed EOF ;
+    // InternalAnsibleDslParser.g:9508:1: entryRuleEDictionaryPassed returns [EObject current=null] : iv_ruleEDictionaryPassed= ruleEDictionaryPassed EOF ;
     public final EObject entryRuleEDictionaryPassed() throws RecognitionException {
         EObject current = null;
 
@@ -24414,8 +24588,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9435:58: (iv_ruleEDictionaryPassed= ruleEDictionaryPassed EOF )
-            // InternalAnsibleDslParser.g:9436:2: iv_ruleEDictionaryPassed= ruleEDictionaryPassed EOF
+            // InternalAnsibleDslParser.g:9508:58: (iv_ruleEDictionaryPassed= ruleEDictionaryPassed EOF )
+            // InternalAnsibleDslParser.g:9509:2: iv_ruleEDictionaryPassed= ruleEDictionaryPassed EOF
             {
              newCompositeNode(grammarAccess.getEDictionaryPassedRule()); 
             pushFollow(FOLLOW_1);
@@ -24442,7 +24616,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEDictionaryPassed"
-    // InternalAnsibleDslParser.g:9442:1: ruleEDictionaryPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary ) ;
+    // InternalAnsibleDslParser.g:9515:1: ruleEDictionaryPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary ) ;
     public final EObject ruleEDictionaryPassed() throws RecognitionException {
         EObject current = null;
 
@@ -24455,10 +24629,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9448:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary ) )
-            // InternalAnsibleDslParser.g:9449:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary )
+            // InternalAnsibleDslParser.g:9521:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary ) )
+            // InternalAnsibleDslParser.g:9522:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary )
             {
-            // InternalAnsibleDslParser.g:9449:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary )
+            // InternalAnsibleDslParser.g:9522:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary )
             int alt100=2;
             int LA100_0 = input.LA(1);
 
@@ -24476,7 +24650,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt100) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:9450:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
+                    // InternalAnsibleDslParser.g:9523:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
                     {
 
                     			newCompositeNode(grammarAccess.getEDictionaryPassedAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
@@ -24494,7 +24668,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:9459:3: this_EDictionary_1= ruleEDictionary
+                    // InternalAnsibleDslParser.g:9532:3: this_EDictionary_1= ruleEDictionary
                     {
 
                     			newCompositeNode(grammarAccess.getEDictionaryPassedAccess().getEDictionaryParserRuleCall_1());
@@ -24534,7 +24708,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEListPassed"
-    // InternalAnsibleDslParser.g:9471:1: entryRuleEListPassed returns [EObject current=null] : iv_ruleEListPassed= ruleEListPassed EOF ;
+    // InternalAnsibleDslParser.g:9544:1: entryRuleEListPassed returns [EObject current=null] : iv_ruleEListPassed= ruleEListPassed EOF ;
     public final EObject entryRuleEListPassed() throws RecognitionException {
         EObject current = null;
 
@@ -24542,8 +24716,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9471:52: (iv_ruleEListPassed= ruleEListPassed EOF )
-            // InternalAnsibleDslParser.g:9472:2: iv_ruleEListPassed= ruleEListPassed EOF
+            // InternalAnsibleDslParser.g:9544:52: (iv_ruleEListPassed= ruleEListPassed EOF )
+            // InternalAnsibleDslParser.g:9545:2: iv_ruleEListPassed= ruleEListPassed EOF
             {
              newCompositeNode(grammarAccess.getEListPassedRule()); 
             pushFollow(FOLLOW_1);
@@ -24570,7 +24744,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEListPassed"
-    // InternalAnsibleDslParser.g:9478:1: ruleEListPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList ) ;
+    // InternalAnsibleDslParser.g:9551:1: ruleEListPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList ) ;
     public final EObject ruleEListPassed() throws RecognitionException {
         EObject current = null;
 
@@ -24583,10 +24757,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9484:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList ) )
-            // InternalAnsibleDslParser.g:9485:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList )
+            // InternalAnsibleDslParser.g:9557:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList ) )
+            // InternalAnsibleDslParser.g:9558:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList )
             {
-            // InternalAnsibleDslParser.g:9485:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList )
+            // InternalAnsibleDslParser.g:9558:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList )
             int alt101=2;
             int LA101_0 = input.LA(1);
 
@@ -24604,7 +24778,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt101) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:9486:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
+                    // InternalAnsibleDslParser.g:9559:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
                     {
 
                     			newCompositeNode(grammarAccess.getEListPassedAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
@@ -24622,7 +24796,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:9495:3: this_EList_1= ruleEList
+                    // InternalAnsibleDslParser.g:9568:3: this_EList_1= ruleEList
                     {
 
                     			newCompositeNode(grammarAccess.getEListPassedAccess().getEListParserRuleCall_1());
@@ -24662,7 +24836,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleENumberPassed"
-    // InternalAnsibleDslParser.g:9507:1: entryRuleENumberPassed returns [EObject current=null] : iv_ruleENumberPassed= ruleENumberPassed EOF ;
+    // InternalAnsibleDslParser.g:9580:1: entryRuleENumberPassed returns [EObject current=null] : iv_ruleENumberPassed= ruleENumberPassed EOF ;
     public final EObject entryRuleENumberPassed() throws RecognitionException {
         EObject current = null;
 
@@ -24670,8 +24844,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9507:54: (iv_ruleENumberPassed= ruleENumberPassed EOF )
-            // InternalAnsibleDslParser.g:9508:2: iv_ruleENumberPassed= ruleENumberPassed EOF
+            // InternalAnsibleDslParser.g:9580:54: (iv_ruleENumberPassed= ruleENumberPassed EOF )
+            // InternalAnsibleDslParser.g:9581:2: iv_ruleENumberPassed= ruleENumberPassed EOF
             {
              newCompositeNode(grammarAccess.getENumberPassedRule()); 
             pushFollow(FOLLOW_1);
@@ -24698,7 +24872,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleENumberPassed"
-    // InternalAnsibleDslParser.g:9514:1: ruleENumberPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= RULE_NUMBER ) ) | ( (lv_number_passed_2_0= RULE_NULL ) ) ) ;
+    // InternalAnsibleDslParser.g:9587:1: ruleENumberPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= RULE_NUMBER ) ) | ( (lv_number_passed_2_0= RULE_NULL ) ) ) ;
     public final EObject ruleENumberPassed() throws RecognitionException {
         EObject current = null;
 
@@ -24711,10 +24885,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9520:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= RULE_NUMBER ) ) | ( (lv_number_passed_2_0= RULE_NULL ) ) ) )
-            // InternalAnsibleDslParser.g:9521:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= RULE_NUMBER ) ) | ( (lv_number_passed_2_0= RULE_NULL ) ) )
+            // InternalAnsibleDslParser.g:9593:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= RULE_NUMBER ) ) | ( (lv_number_passed_2_0= RULE_NULL ) ) ) )
+            // InternalAnsibleDslParser.g:9594:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= RULE_NUMBER ) ) | ( (lv_number_passed_2_0= RULE_NULL ) ) )
             {
-            // InternalAnsibleDslParser.g:9521:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= RULE_NUMBER ) ) | ( (lv_number_passed_2_0= RULE_NULL ) ) )
+            // InternalAnsibleDslParser.g:9594:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= RULE_NUMBER ) ) | ( (lv_number_passed_2_0= RULE_NULL ) ) )
             int alt102=3;
             switch ( input.LA(1) ) {
             case LeftCurlyBracketLeftCurlyBracket:
@@ -24741,7 +24915,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             switch (alt102) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:9522:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
+                    // InternalAnsibleDslParser.g:9595:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
                     {
 
                     			newCompositeNode(grammarAccess.getENumberPassedAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
@@ -24759,13 +24933,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:9531:3: ( (lv_number_passed_1_0= RULE_NUMBER ) )
+                    // InternalAnsibleDslParser.g:9604:3: ( (lv_number_passed_1_0= RULE_NUMBER ) )
                     {
-                    // InternalAnsibleDslParser.g:9531:3: ( (lv_number_passed_1_0= RULE_NUMBER ) )
-                    // InternalAnsibleDslParser.g:9532:4: (lv_number_passed_1_0= RULE_NUMBER )
+                    // InternalAnsibleDslParser.g:9604:3: ( (lv_number_passed_1_0= RULE_NUMBER ) )
+                    // InternalAnsibleDslParser.g:9605:4: (lv_number_passed_1_0= RULE_NUMBER )
                     {
-                    // InternalAnsibleDslParser.g:9532:4: (lv_number_passed_1_0= RULE_NUMBER )
-                    // InternalAnsibleDslParser.g:9533:5: lv_number_passed_1_0= RULE_NUMBER
+                    // InternalAnsibleDslParser.g:9605:4: (lv_number_passed_1_0= RULE_NUMBER )
+                    // InternalAnsibleDslParser.g:9606:5: lv_number_passed_1_0= RULE_NUMBER
                     {
                     lv_number_passed_1_0=(Token)match(input,RULE_NUMBER,FOLLOW_2); 
 
@@ -24791,13 +24965,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalAnsibleDslParser.g:9550:3: ( (lv_number_passed_2_0= RULE_NULL ) )
+                    // InternalAnsibleDslParser.g:9623:3: ( (lv_number_passed_2_0= RULE_NULL ) )
                     {
-                    // InternalAnsibleDslParser.g:9550:3: ( (lv_number_passed_2_0= RULE_NULL ) )
-                    // InternalAnsibleDslParser.g:9551:4: (lv_number_passed_2_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:9623:3: ( (lv_number_passed_2_0= RULE_NULL ) )
+                    // InternalAnsibleDslParser.g:9624:4: (lv_number_passed_2_0= RULE_NULL )
                     {
-                    // InternalAnsibleDslParser.g:9551:4: (lv_number_passed_2_0= RULE_NULL )
-                    // InternalAnsibleDslParser.g:9552:5: lv_number_passed_2_0= RULE_NULL
+                    // InternalAnsibleDslParser.g:9624:4: (lv_number_passed_2_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:9625:5: lv_number_passed_2_0= RULE_NULL
                     {
                     lv_number_passed_2_0=(Token)match(input,RULE_NULL,FOLLOW_2); 
 
@@ -24845,7 +25019,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEBooleanPassed"
-    // InternalAnsibleDslParser.g:9572:1: entryRuleEBooleanPassed returns [EObject current=null] : iv_ruleEBooleanPassed= ruleEBooleanPassed EOF ;
+    // InternalAnsibleDslParser.g:9645:1: entryRuleEBooleanPassed returns [EObject current=null] : iv_ruleEBooleanPassed= ruleEBooleanPassed EOF ;
     public final EObject entryRuleEBooleanPassed() throws RecognitionException {
         EObject current = null;
 
@@ -24853,8 +25027,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9572:55: (iv_ruleEBooleanPassed= ruleEBooleanPassed EOF )
-            // InternalAnsibleDslParser.g:9573:2: iv_ruleEBooleanPassed= ruleEBooleanPassed EOF
+            // InternalAnsibleDslParser.g:9645:55: (iv_ruleEBooleanPassed= ruleEBooleanPassed EOF )
+            // InternalAnsibleDslParser.g:9646:2: iv_ruleEBooleanPassed= ruleEBooleanPassed EOF
             {
              newCompositeNode(grammarAccess.getEBooleanPassedRule()); 
             pushFollow(FOLLOW_1);
@@ -24881,7 +25055,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEBooleanPassed"
-    // InternalAnsibleDslParser.g:9579:1: ruleEBooleanPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) ) | ( (lv_boolean_passed_2_0= RULE_NULL ) ) ) ;
+    // InternalAnsibleDslParser.g:9652:1: ruleEBooleanPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) ) | ( (lv_boolean_passed_2_0= RULE_NULL ) ) ) ;
     public final EObject ruleEBooleanPassed() throws RecognitionException {
         EObject current = null;
 
@@ -24894,10 +25068,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9585:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) ) | ( (lv_boolean_passed_2_0= RULE_NULL ) ) ) )
-            // InternalAnsibleDslParser.g:9586:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) ) | ( (lv_boolean_passed_2_0= RULE_NULL ) ) )
+            // InternalAnsibleDslParser.g:9658:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) ) | ( (lv_boolean_passed_2_0= RULE_NULL ) ) ) )
+            // InternalAnsibleDslParser.g:9659:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) ) | ( (lv_boolean_passed_2_0= RULE_NULL ) ) )
             {
-            // InternalAnsibleDslParser.g:9586:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) ) | ( (lv_boolean_passed_2_0= RULE_NULL ) ) )
+            // InternalAnsibleDslParser.g:9659:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) ) | ( (lv_boolean_passed_2_0= RULE_NULL ) ) )
             int alt103=3;
             switch ( input.LA(1) ) {
             case LeftCurlyBracketLeftCurlyBracket:
@@ -24924,7 +25098,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             switch (alt103) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:9587:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
+                    // InternalAnsibleDslParser.g:9660:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
                     {
 
                     			newCompositeNode(grammarAccess.getEBooleanPassedAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
@@ -24942,13 +25116,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:9596:3: ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) )
+                    // InternalAnsibleDslParser.g:9669:3: ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) )
                     {
-                    // InternalAnsibleDslParser.g:9596:3: ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) )
-                    // InternalAnsibleDslParser.g:9597:4: (lv_boolean_passed_1_0= RULE_BOOLEAN )
+                    // InternalAnsibleDslParser.g:9669:3: ( (lv_boolean_passed_1_0= RULE_BOOLEAN ) )
+                    // InternalAnsibleDslParser.g:9670:4: (lv_boolean_passed_1_0= RULE_BOOLEAN )
                     {
-                    // InternalAnsibleDslParser.g:9597:4: (lv_boolean_passed_1_0= RULE_BOOLEAN )
-                    // InternalAnsibleDslParser.g:9598:5: lv_boolean_passed_1_0= RULE_BOOLEAN
+                    // InternalAnsibleDslParser.g:9670:4: (lv_boolean_passed_1_0= RULE_BOOLEAN )
+                    // InternalAnsibleDslParser.g:9671:5: lv_boolean_passed_1_0= RULE_BOOLEAN
                     {
                     lv_boolean_passed_1_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_2); 
 
@@ -24974,13 +25148,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalAnsibleDslParser.g:9615:3: ( (lv_boolean_passed_2_0= RULE_NULL ) )
+                    // InternalAnsibleDslParser.g:9688:3: ( (lv_boolean_passed_2_0= RULE_NULL ) )
                     {
-                    // InternalAnsibleDslParser.g:9615:3: ( (lv_boolean_passed_2_0= RULE_NULL ) )
-                    // InternalAnsibleDslParser.g:9616:4: (lv_boolean_passed_2_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:9688:3: ( (lv_boolean_passed_2_0= RULE_NULL ) )
+                    // InternalAnsibleDslParser.g:9689:4: (lv_boolean_passed_2_0= RULE_NULL )
                     {
-                    // InternalAnsibleDslParser.g:9616:4: (lv_boolean_passed_2_0= RULE_NULL )
-                    // InternalAnsibleDslParser.g:9617:5: lv_boolean_passed_2_0= RULE_NULL
+                    // InternalAnsibleDslParser.g:9689:4: (lv_boolean_passed_2_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:9690:5: lv_boolean_passed_2_0= RULE_NULL
                     {
                     lv_boolean_passed_2_0=(Token)match(input,RULE_NULL,FOLLOW_2); 
 
@@ -25028,7 +25202,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEEmptyCurlyBraces"
-    // InternalAnsibleDslParser.g:9637:1: entryRuleEEmptyCurlyBraces returns [EObject current=null] : iv_ruleEEmptyCurlyBraces= ruleEEmptyCurlyBraces EOF ;
+    // InternalAnsibleDslParser.g:9710:1: entryRuleEEmptyCurlyBraces returns [EObject current=null] : iv_ruleEEmptyCurlyBraces= ruleEEmptyCurlyBraces EOF ;
     public final EObject entryRuleEEmptyCurlyBraces() throws RecognitionException {
         EObject current = null;
 
@@ -25036,8 +25210,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:9637:58: (iv_ruleEEmptyCurlyBraces= ruleEEmptyCurlyBraces EOF )
-            // InternalAnsibleDslParser.g:9638:2: iv_ruleEEmptyCurlyBraces= ruleEEmptyCurlyBraces EOF
+            // InternalAnsibleDslParser.g:9710:58: (iv_ruleEEmptyCurlyBraces= ruleEEmptyCurlyBraces EOF )
+            // InternalAnsibleDslParser.g:9711:2: iv_ruleEEmptyCurlyBraces= ruleEEmptyCurlyBraces EOF
             {
              newCompositeNode(grammarAccess.getEEmptyCurlyBracesRule()); 
             pushFollow(FOLLOW_1);
@@ -25064,7 +25238,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEEmptyCurlyBraces"
-    // InternalAnsibleDslParser.g:9644:1: ruleEEmptyCurlyBraces returns [EObject current=null] : ( ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) ) ) ;
+    // InternalAnsibleDslParser.g:9717:1: ruleEEmptyCurlyBraces returns [EObject current=null] : ( ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) ) ) ;
     public final EObject ruleEEmptyCurlyBraces() throws RecognitionException {
         EObject current = null;
 
@@ -25075,17 +25249,17 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:9650:2: ( ( ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) ) ) )
-            // InternalAnsibleDslParser.g:9651:2: ( ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) ) )
+            // InternalAnsibleDslParser.g:9723:2: ( ( ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) ) ) )
+            // InternalAnsibleDslParser.g:9724:2: ( ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) ) )
             {
-            // InternalAnsibleDslParser.g:9651:2: ( ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) ) )
-            // InternalAnsibleDslParser.g:9652:3: ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) )
+            // InternalAnsibleDslParser.g:9724:2: ( ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) ) )
+            // InternalAnsibleDslParser.g:9725:3: ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) ) ( (lv_right_curly_brace_1_0= RightCurlyBracket ) )
             {
-            // InternalAnsibleDslParser.g:9652:3: ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) )
-            // InternalAnsibleDslParser.g:9653:4: (lv_left_curly_brace_0_0= LeftCurlyBracket )
+            // InternalAnsibleDslParser.g:9725:3: ( (lv_left_curly_brace_0_0= LeftCurlyBracket ) )
+            // InternalAnsibleDslParser.g:9726:4: (lv_left_curly_brace_0_0= LeftCurlyBracket )
             {
-            // InternalAnsibleDslParser.g:9653:4: (lv_left_curly_brace_0_0= LeftCurlyBracket )
-            // InternalAnsibleDslParser.g:9654:5: lv_left_curly_brace_0_0= LeftCurlyBracket
+            // InternalAnsibleDslParser.g:9726:4: (lv_left_curly_brace_0_0= LeftCurlyBracket )
+            // InternalAnsibleDslParser.g:9727:5: lv_left_curly_brace_0_0= LeftCurlyBracket
             {
             lv_left_curly_brace_0_0=(Token)match(input,LeftCurlyBracket,FOLLOW_98); 
 
@@ -25103,11 +25277,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAnsibleDslParser.g:9666:3: ( (lv_right_curly_brace_1_0= RightCurlyBracket ) )
-            // InternalAnsibleDslParser.g:9667:4: (lv_right_curly_brace_1_0= RightCurlyBracket )
+            // InternalAnsibleDslParser.g:9739:3: ( (lv_right_curly_brace_1_0= RightCurlyBracket ) )
+            // InternalAnsibleDslParser.g:9740:4: (lv_right_curly_brace_1_0= RightCurlyBracket )
             {
-            // InternalAnsibleDslParser.g:9667:4: (lv_right_curly_brace_1_0= RightCurlyBracket )
-            // InternalAnsibleDslParser.g:9668:5: lv_right_curly_brace_1_0= RightCurlyBracket
+            // InternalAnsibleDslParser.g:9740:4: (lv_right_curly_brace_1_0= RightCurlyBracket )
+            // InternalAnsibleDslParser.g:9741:5: lv_right_curly_brace_1_0= RightCurlyBracket
             {
             lv_right_curly_brace_1_0=(Token)match(input,RightCurlyBracket,FOLLOW_2); 
 
@@ -25156,11 +25330,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     protected DFA28 dfa28 = new DFA28(this);
     static final String dfa_1s = "\32\uffff";
     static final String dfa_2s = "\1\5\31\uffff";
-    static final String dfa_3s = "\1\u0098\31\uffff";
+    static final String dfa_3s = "\1\u0099\31\uffff";
     static final String dfa_4s = "\1\uffff\1\31\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30";
     static final String dfa_5s = "\1\0\31\uffff}>";
     static final String[] dfa_6s = {
-            "\1\4\3\uffff\1\24\2\uffff\1\16\2\uffff\1\26\1\uffff\1\6\2\uffff\1\11\1\uffff\1\5\1\uffff\1\17\1\20\1\23\16\uffff\1\13\1\uffff\1\12\2\uffff\1\22\6\uffff\1\30\1\27\1\21\5\uffff\1\2\1\25\2\uffff\1\10\2\uffff\1\31\15\uffff\1\7\6\uffff\1\3\20\uffff\1\14\1\uffff\1\15\53\uffff\1\1",
+            "\1\4\3\uffff\1\24\2\uffff\1\16\2\uffff\1\26\1\uffff\1\6\2\uffff\1\11\1\uffff\1\5\1\uffff\1\17\1\20\1\23\16\uffff\1\13\1\uffff\1\12\2\uffff\1\22\6\uffff\1\30\1\27\1\21\5\uffff\1\2\1\25\2\uffff\1\10\2\uffff\1\31\15\uffff\1\7\6\uffff\1\3\20\uffff\1\14\1\uffff\1\15\54\uffff\1\1",
             "",
             "",
             "",
@@ -25285,11 +25459,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     }
     static final String dfa_7s = "\24\uffff";
     static final String dfa_8s = "\1\5\23\uffff";
-    static final String dfa_9s = "\1\u0098\23\uffff";
+    static final String dfa_9s = "\1\u0099\23\uffff";
     static final String dfa_10s = "\1\uffff\1\23\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22";
     static final String dfa_11s = "\1\0\23\uffff}>";
     static final String[] dfa_12s = {
-            "\1\3\13\uffff\1\5\2\uffff\1\10\1\uffff\1\4\1\uffff\1\20\7\uffff\1\23\2\uffff\1\15\3\uffff\1\22\1\uffff\1\12\1\uffff\1\11\4\uffff\1\2\2\uffff\1\16\15\uffff\1\7\20\uffff\1\6\14\uffff\1\21\12\uffff\1\13\1\uffff\1\14\1\17\52\uffff\1\1",
+            "\1\3\13\uffff\1\5\2\uffff\1\10\1\uffff\1\4\1\uffff\1\20\7\uffff\1\23\2\uffff\1\15\3\uffff\1\22\1\uffff\1\12\1\uffff\1\11\4\uffff\1\2\2\uffff\1\16\15\uffff\1\7\20\uffff\1\6\14\uffff\1\21\12\uffff\1\13\1\uffff\1\14\1\17\53\uffff\1\1",
             "",
             "",
             "",
@@ -25396,11 +25570,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     }
     static final String dfa_13s = "\30\uffff";
     static final String dfa_14s = "\1\4\27\uffff";
-    static final String dfa_15s = "\1\u0098\27\uffff";
+    static final String dfa_15s = "\1\u0099\27\uffff";
     static final String dfa_16s = "\1\uffff\1\27\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26";
     static final String dfa_17s = "\1\0\27\uffff}>";
     static final String[] dfa_18s = {
-            "\1\22\1\3\13\uffff\1\5\2\uffff\1\10\1\uffff\1\4\1\uffff\1\20\12\uffff\1\15\5\uffff\1\12\1\uffff\1\11\7\uffff\1\16\14\uffff\1\2\1\7\5\uffff\1\27\6\uffff\1\21\2\uffff\1\24\1\6\1\25\16\uffff\1\23\2\uffff\1\26\4\uffff\1\13\1\uffff\1\14\1\17\52\uffff\1\1",
+            "\1\22\1\3\13\uffff\1\5\2\uffff\1\10\1\uffff\1\4\1\uffff\1\20\12\uffff\1\15\5\uffff\1\12\1\uffff\1\11\7\uffff\1\16\14\uffff\1\2\1\7\5\uffff\1\27\6\uffff\1\21\2\uffff\1\24\1\6\1\25\16\uffff\1\23\2\uffff\1\26\4\uffff\1\13\1\uffff\1\14\1\17\53\uffff\1\1",
             "",
             "",
             "",
@@ -25519,11 +25693,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     }
     static final String dfa_19s = "\31\uffff";
     static final String dfa_20s = "\1\4\30\uffff";
-    static final String dfa_21s = "\1\u0098\30\uffff";
+    static final String dfa_21s = "\1\u0099\30\uffff";
     static final String dfa_22s = "\1\uffff\1\30\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27";
     static final String dfa_23s = "\1\0\30\uffff}>";
     static final String[] dfa_24s = {
-            "\1\22\1\3\13\uffff\1\5\2\uffff\1\10\1\uffff\1\4\1\uffff\1\20\12\uffff\1\15\1\uffff\1\2\3\uffff\1\12\1\uffff\1\11\7\uffff\1\16\15\uffff\1\7\5\uffff\1\27\6\uffff\1\21\1\uffff\1\30\1\24\1\6\1\25\16\uffff\1\23\2\uffff\1\26\4\uffff\1\13\1\uffff\1\14\1\17\52\uffff\1\1",
+            "\1\22\1\3\13\uffff\1\5\2\uffff\1\10\1\uffff\1\4\1\uffff\1\20\12\uffff\1\15\1\uffff\1\2\3\uffff\1\12\1\uffff\1\11\7\uffff\1\16\15\uffff\1\7\5\uffff\1\27\6\uffff\1\21\1\uffff\1\30\1\24\1\6\1\25\16\uffff\1\23\2\uffff\1\26\4\uffff\1\13\1\uffff\1\14\1\17\53\uffff\1\1",
             "",
             "",
             "",
@@ -25645,11 +25819,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     }
     static final String dfa_25s = "\20\uffff";
     static final String dfa_26s = "\1\5\17\uffff";
-    static final String dfa_27s = "\1\u0098\17\uffff";
+    static final String dfa_27s = "\1\u0099\17\uffff";
     static final String dfa_28s = "\1\uffff\1\17\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16";
     static final String dfa_29s = "\1\0\17\uffff}>";
     static final String[] dfa_30s = {
-            "\1\2\13\uffff\1\4\2\uffff\1\7\1\uffff\1\3\1\uffff\1\17\12\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\20\uffff\1\5\27\uffff\1\12\1\uffff\1\13\1\16\52\uffff\1\1",
+            "\1\2\13\uffff\1\4\2\uffff\1\7\1\uffff\1\3\1\uffff\1\17\12\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\20\uffff\1\5\27\uffff\1\12\1\uffff\1\13\1\16\53\uffff\1\1",
             "",
             "",
             "",
@@ -25746,101 +25920,101 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000008000000L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000010000000L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000000L,0x0000000020002000L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000800000L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000001000000L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0800000000000000L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000002000000L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000000L,0x0000000020000000L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L,0x0000000002000000L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x1000000000000000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x60E04A0007529220L,0x0000140002040012L,0x0000000001000000L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L,0x0000000008000001L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000180001L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000004001L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000002000000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000003000000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x60E04A0007529220L,0x0000140002040012L,0x0000000002000000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000010000003L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000300002L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000008002L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000004000000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000006000000L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000000000L,0x0000080000400000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000000000L,0x0000080000400000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000000000L,0x0000080000400000L,0x0000000002000000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L,0x0000000001000000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L,0x0000000002000000L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x00090A8901520020L,0x0000340080040002L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x00090A8901520020L,0x0000340080040002L,0x0000000001000000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000290C80L,0x0004000040000008L,0x000000000AF94009L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x00090A8901520020L,0x0000340080040002L,0x0000000002000000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000290C80L,0x0008000040000008L,0x0000000015F28012L});
     public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x00080A0801520030L,0x00003424000E4083L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x00080A0801520030L,0x00003424000E4083L,0x0000000001000000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000810001L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000000100000000L,0x0000000008000000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x00080A0801520030L,0x00003424000E4083L,0x0000000001000080L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x00080A0801520030L,0x00003424000E4083L,0x0000000002000000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000001020002L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000000100000000L,0x0000000010000000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x00080A0801520030L,0x00003424000E4083L,0x0000000002000100L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x00080A2801520030L,0x00003424000F4083L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x00080A2801520030L,0x00003424000F4083L,0x0000000001000000L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x00080A2801520030L,0x00003424000F4083L,0x0000000001000080L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x00080A2801520030L,0x00003424000F4083L,0x0000000009000000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0010000000004000L,0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L,0x0000000008F94001L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0010000000000000L,0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000800L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x00080A2801520030L,0x00003424000F4083L,0x0000000002000000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x00080A2801520030L,0x00003424000F4083L,0x0000000002000100L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x00080A2801520030L,0x00003424000F4083L,0x0000000012000000L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0010000000004000L,0x0000000000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000011F28003L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0010000000000000L,0x0000000000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000001000L});
     public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x8000000000000000L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x00080A0801520020L,0x0000340000040002L,0x0000000001000000L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x00080A0801520020L,0x0000340000040002L,0x0000000002000000L});
     public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000000L,0x0000020000000000L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0000020000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0000020000000000L,0x0000000002000000L});
     public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000000040000L,0x0000200000000000L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000040000L,0x0000200000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0400000000000000L,0x0000000200000000L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000040000L,0x0000200000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0400000000000000L,0x0001000200000000L});
     public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000004000000002L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0200000000000000L,0x0000000014000024L,0x0000000001000000L});
-    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000500001L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0200000000000000L,0x0000000014000024L,0x0000000002000000L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000A00002L});
     public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000000000000002L,0x0000000000801000L});
-    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000810210000000L,0x0000000000008000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0002000000000000L,0x0000000800000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0004200000000000L,0x0000010000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000000000000000L,0x0000000008100700L,0x0000000001000000L});
-    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000500L,0x0000000001000000L});
-    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0000000040002100L,0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0000000040002140L,0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0000100440002100L,0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0100001028000000L,0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000040000800000L,0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000000000000000L,0x0000008000200000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000000000000002L,0x8000000000000000L,0x0000000008000001L});
-    public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0000000000000002L,0x0020000000000000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_63 = new BitSet(new long[]{0x0000000000290C80L,0x0004000000000008L,0x000000000AF94009L});
-    public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000090L});
-    public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000020000L});
-    public static final BitSet FOLLOW_66 = new BitSet(new long[]{0x0000000000000002L,0x4000000000000000L});
-    public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x0000000000000002L,0x0001000000000000L});
-    public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x0000000000000002L,0x0708000000000000L,0x0000000000003000L});
-    public static final BitSet FOLLOW_69 = new BitSet(new long[]{0x0000000000000002L,0x00C0000000000000L,0x0000000000000564L});
-    public static final BitSet FOLLOW_70 = new BitSet(new long[]{0x0000000000000002L,0x3004000000000000L});
-    public static final BitSet FOLLOW_71 = new BitSet(new long[]{0x0000000000000000L,0x1000000000000000L});
-    public static final BitSet FOLLOW_72 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000004200L});
-    public static final BitSet FOLLOW_73 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_74 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000400000L});
-    public static final BitSet FOLLOW_75 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000008000L});
-    public static final BitSet FOLLOW_76 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000200L});
-    public static final BitSet FOLLOW_77 = new BitSet(new long[]{0x0000000000000000L,0x0800000000000000L});
+    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000810210000000L,0x0000000000008000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0002000000000000L,0x0000000800000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0004200000000000L,0x0000010000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000000000000000L,0x0000000008100700L,0x0000000002000000L});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000500L,0x0000000002000000L});
+    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0000000040002100L,0x0000000000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0000000040002140L,0x0000000000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0000100440002100L,0x0000000000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0100001028000000L,0x0000000000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000040000800000L,0x0000000000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000000000000000L,0x0000008000200000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000010000003L});
+    public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000004L});
+    public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0000000000000002L,0x0040000000000000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_63 = new BitSet(new long[]{0x0000000000290C80L,0x0008000000000008L,0x0000000015F28012L});
+    public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000120L});
+    public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000040000L});
+    public static final BitSet FOLLOW_66 = new BitSet(new long[]{0x0000000000000002L,0x8000000000000000L});
+    public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x0000000000000002L,0x0002000000000000L});
+    public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x0000000000000002L,0x0E10000000000000L,0x0000000000006000L});
+    public static final BitSet FOLLOW_69 = new BitSet(new long[]{0x0000000000000002L,0x0180000000000000L,0x0000000000000AC8L});
+    public static final BitSet FOLLOW_70 = new BitSet(new long[]{0x0000000000000002L,0x6008000000000000L});
+    public static final BitSet FOLLOW_71 = new BitSet(new long[]{0x0000000000000000L,0x2000000000000000L});
+    public static final BitSet FOLLOW_72 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000008400L});
+    public static final BitSet FOLLOW_73 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000020L});
+    public static final BitSet FOLLOW_74 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000800000L});
+    public static final BitSet FOLLOW_75 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000010000L});
+    public static final BitSet FOLLOW_76 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000400L});
+    public static final BitSet FOLLOW_77 = new BitSet(new long[]{0x0000000000000000L,0x1000000000000000L});
     public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0000000000000002L,0x0000800000000000L});
-    public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000000000000000L,0x0800000000000000L,0x0000000000000140L});
-    public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x0000000000000000L,0x0010000000000000L});
-    public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L});
-    public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x0000000000000000L,0x0000800000000000L,0x0000000000000140L});
+    public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000000000000000L,0x1000000000000000L,0x0000000000000280L});
+    public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x0000000000000000L,0x0020000000000000L});
+    public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x0000000000000000L,0x0000800000000000L,0x0000000000000280L});
     public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000000000000000L,0x0000800000000000L});
-    public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L,0x0000000000000140L});
+    public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L,0x0000000000000280L});
     public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L,0x0000000000000140L});
+    public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L,0x0000000000000280L});
     public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
-    public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L,0x0000000000000140L});
-    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
-    public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0000000000000000L,0x1000000000000000L,0x0000000000000080L});
-    public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x0000000000000000L,0x0810000000000040L});
-    public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x0000000000000000L,0x0010000000000040L});
-    public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L,0x0000000000000140L});
+    public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000000000000000L,0x0004000000000000L,0x0000000000000280L});
+    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000000000L,0x0004000000000000L});
+    public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0000000000000000L,0x2000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x0000000000000000L,0x1020000000000040L});
+    public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x0000000000000000L,0x0020000000000040L});
+    public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L,0x0000000000000280L});
     public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_95 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000004000L});
-    public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000040080L});
-    public static final BitSet FOLLOW_97 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000008080L});
-    public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000040000L});
+    public static final BitSet FOLLOW_95 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000008000L});
+    public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000080100L});
+    public static final BitSet FOLLOW_97 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000010100L});
+    public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000080000L});
 
 }

@@ -65,6 +65,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement
+import org.sodalite.sdl.ansible.ansibleDsl.EWithLookup
 
 /**
  * Generates code from your model files on save.
@@ -486,6 +487,11 @@ class AnsibleDslGenerator extends AbstractGenerator {
 				«ENDIF»
 				«IF (taskHandler.loop as EUntil).delay !== null»
 					«space»delay: «(taskHandler.loop as EUntil).delay.compileNumberPassed»
+				«ENDIF»
+			«ENDIF»
+			«IF taskHandler.loop instanceof EWithLookup»
+				«IF (taskHandler.loop as EWithLookup).lookup !== null && (taskHandler.loop as EWithLookup).with_list !== null»
+					«space»with_«(taskHandler.loop as EWithLookup).lookup»: «(taskHandler.loop as EWithLookup).with_list.compileValuePassed.toString()»
 				«ENDIF»
 			«ENDIF»
 		«ENDIF»

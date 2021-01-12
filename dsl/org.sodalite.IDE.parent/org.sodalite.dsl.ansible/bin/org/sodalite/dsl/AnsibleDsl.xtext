@@ -260,7 +260,7 @@ EPlaybookInclusion:
 ELoop:
 	'loop:'
 	BEGIN
-		(ELoopOverList | EUntil)
+		(ELoopOverList | EWithLookup | EUntil)
 	END
 ;
 
@@ -280,6 +280,10 @@ ELoopControl:
 		('extended:' extended=EBooleanPassed)?
 	)
 	END
+;
+
+EWithLookup:
+	'with' lookup=ID ':' with_list=EValuePassed
 ;
 
 EUntil:

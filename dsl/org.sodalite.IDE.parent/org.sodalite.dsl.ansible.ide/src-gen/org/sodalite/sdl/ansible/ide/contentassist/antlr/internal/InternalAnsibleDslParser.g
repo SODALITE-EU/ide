@@ -68,6 +68,7 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 		tokenNameToValue.put("Not", "'not'");
 		tokenNameToValue.put("Elif", "'elif'");
 		tokenNameToValue.put("Else", "'else'");
+		tokenNameToValue.put("With", "'with'");
 		tokenNameToValue.put("Args", "'args:'");
 		tokenNameToValue.put("Diff", "'diff:'");
 		tokenNameToValue.put("Endif", "'endif'");
@@ -638,6 +639,31 @@ ruleELoopControl
 		{ before(grammarAccess.getELoopControlAccess().getGroup()); }
 		(rule__ELoopControl__Group__0)
 		{ after(grammarAccess.getELoopControlAccess().getGroup()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+// Entry rule entryRuleEWithLookup
+entryRuleEWithLookup
+:
+{ before(grammarAccess.getEWithLookupRule()); }
+	 ruleEWithLookup
+{ after(grammarAccess.getEWithLookupRule()); } 
+	 EOF 
+;
+
+// Rule EWithLookup
+ruleEWithLookup 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getEWithLookupAccess().getGroup()); }
+		(rule__EWithLookup__Group__0)
+		{ after(grammarAccess.getEWithLookupAccess().getGroup()); }
 	)
 ;
 finally {
@@ -2207,9 +2233,15 @@ rule__ELoop__Alternatives_2
 	)
 	|
 	(
-		{ before(grammarAccess.getELoopAccess().getEUntilParserRuleCall_2_1()); }
+		{ before(grammarAccess.getELoopAccess().getEWithLookupParserRuleCall_2_1()); }
+		ruleEWithLookup
+		{ after(grammarAccess.getELoopAccess().getEWithLookupParserRuleCall_2_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getELoopAccess().getEUntilParserRuleCall_2_2()); }
 		ruleEUntil
-		{ after(grammarAccess.getELoopAccess().getEUntilParserRuleCall_2_1()); }
+		{ after(grammarAccess.getELoopAccess().getEUntilParserRuleCall_2_2()); }
 	)
 ;
 finally {
@@ -9590,6 +9622,114 @@ rule__ELoopControl__Group_2_4__1__Impl
 	{ before(grammarAccess.getELoopControlAccess().getExtendedAssignment_2_4_1()); }
 	(rule__ELoopControl__ExtendedAssignment_2_4_1)
 	{ after(grammarAccess.getELoopControlAccess().getExtendedAssignment_2_4_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__EWithLookup__Group__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__EWithLookup__Group__0__Impl
+	rule__EWithLookup__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EWithLookup__Group__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getEWithLookupAccess().getWithKeyword_0()); }
+	With
+	{ after(grammarAccess.getEWithLookupAccess().getWithKeyword_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EWithLookup__Group__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__EWithLookup__Group__1__Impl
+	rule__EWithLookup__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EWithLookup__Group__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getEWithLookupAccess().getLookupAssignment_1()); }
+	(rule__EWithLookup__LookupAssignment_1)
+	{ after(grammarAccess.getEWithLookupAccess().getLookupAssignment_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EWithLookup__Group__2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__EWithLookup__Group__2__Impl
+	rule__EWithLookup__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EWithLookup__Group__2__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getEWithLookupAccess().getColonKeyword_2()); }
+	Colon
+	{ after(grammarAccess.getEWithLookupAccess().getColonKeyword_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EWithLookup__Group__3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__EWithLookup__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EWithLookup__Group__3__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getEWithLookupAccess().getWith_listAssignment_3()); }
+	(rule__EWithLookup__With_listAssignment_3)
+	{ after(grammarAccess.getEWithLookupAccess().getWith_listAssignment_3()); }
 )
 ;
 finally {
@@ -23469,6 +23609,36 @@ rule__ELoopControl__ExtendedAssignment_2_4_1
 		{ before(grammarAccess.getELoopControlAccess().getExtendedEBooleanPassedParserRuleCall_2_4_1_0()); }
 		ruleEBooleanPassed
 		{ after(grammarAccess.getELoopControlAccess().getExtendedEBooleanPassedParserRuleCall_2_4_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EWithLookup__LookupAssignment_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getEWithLookupAccess().getLookupIDTerminalRuleCall_1_0()); }
+		RULE_ID
+		{ after(grammarAccess.getEWithLookupAccess().getLookupIDTerminalRuleCall_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__EWithLookup__With_listAssignment_3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getEWithLookupAccess().getWith_listEValuePassedParserRuleCall_3_0()); }
+		ruleEValuePassed
+		{ after(grammarAccess.getEWithLookupAccess().getWith_listEValuePassedParserRuleCall_3_0()); }
 	)
 ;
 finally {

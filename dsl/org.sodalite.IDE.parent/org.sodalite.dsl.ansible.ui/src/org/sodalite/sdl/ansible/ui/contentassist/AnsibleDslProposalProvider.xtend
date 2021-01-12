@@ -121,18 +121,19 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"The attributes that can be set are:\n\n"+
 	"	- module: it's the identifier of the module to be used.\n"+
 	"	- direct_parameter: it's a value passed to the module without an explicit\n"+
-	"	  	  name of the parameter, like it's done for example with the shell module.\n"+
+	"	  	  name of the parameter, like it's done for example with shell module.\n"+
 	"	  	  This attribute isn't mandatory.\n"+
 	"	- parameters: it's just the keyword for defining the list of couples\n"+
 	"	  	  'identifier of the parameter'-'value passed to it'"
 	
 	final String LOOP_DESCRIPTION =
 	"This is used for defining a loop over the current task/handler.\n\n"+
-	"There are two types of loops and two correspondent attributes:\n\n"+
+	"There are 3 types of loops and 3 correspondent attributes:\n\n"+
 	"	- loop_over: when the loop is done over a list of values.\n"+
 	"	  	  This attribute allows to specify which is the list.\n"+
 	"	  	  In this case the additional entity 'loop_control' can be used\n"+
 	"	  	  for specifying additional properties of the loop.\n"+
+	"	- with: the 'with_<lookup>' keyword for doing loops in Ansible.\n"+
 	"	- until: when the operations are repeated until a condition is met.\n"+
 	"	  	  This attribute allows to specify the end condition to meet.\n"+
 	"	  	  Two additional attributes that can be set in this case are:\n"+
@@ -153,6 +154,11 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"The attributes that can be set are:\n\n"+
 	"	- import_playbook   -> the name of the yaml file\n"+
 	"	- when   -> condition"
+	
+	final String WITH_LOOKUP_DESCRIPTION =
+	"This is the classic 'with_<lookup>' keyword in Ansible.\n"+
+	"The user is supposed to write 'with' followed by a space and the <lookup>.\n"+
+	"Writing for example 'with items:' will be translated into 'with_items:'."
 	
 	override void complete_EPrivilegeEscalation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createNonEditableCompletionProposal("privilege_escalation:", new StyledString("privilege_escalation:"), context, PRIVILEGE_ESCALATION_DESCRIPTION, acceptor)
@@ -216,6 +222,10 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
 	override void completeEPlaybookInclusion_Playbook_file_name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createEditableCompletionProposal("\"playbook_imported.yaml\"", "\"playbook_imported.yaml\"", context, "The yaml file of the playbook to import.", acceptor)
+	}
+	
+	override void complete_EWithLookup(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("with", new StyledString("with"), context, WITH_LOOKUP_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_BOOLEAN(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -343,6 +353,23 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 				acceptor.accept(createCompletionProposal("\"".concat(candidate.name).concat("\""), context))
 			}
 		}
+	}
+	
+	override void completeEWithLookup_Lookup(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var lookups = new ArrayList<String>
+		lookups.add("list")
+		lookups.add("items")
+		lookups.add("indexed_items")
+		lookups.add("flattened")
+		lookups.add("together")
+		lookups.add("dict")
+		lookups.add("sequence")
+		lookups.add("subelements")
+		lookups.add("nested")
+		lookups.add("cartesian")
+		lookups.add("random_choice")
+		
+		for (lookup : lookups) acceptor.accept(createCompletionProposal(lookup, context))
 	}
 	
 	def void createNonEditableCompletionProposal(String proposalText, StyledString displayText,

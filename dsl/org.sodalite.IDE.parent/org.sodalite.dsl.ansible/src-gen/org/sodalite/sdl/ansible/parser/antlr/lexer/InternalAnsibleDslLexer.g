@@ -227,6 +227,8 @@ Elif : 'elif';
 
 Else : 'else';
 
+With : 'with';
+
 And : 'and';
 
 For : 'for';

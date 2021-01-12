@@ -118,17 +118,18 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     "The attributes that can be set are:\n\n") + 
     "\t- module: it\'s the identifier of the module to be used.\n") + 
     "\t- direct_parameter: it\'s a value passed to the module without an explicit\n") + 
-    "\t  \t  name of the parameter, like it\'s done for example with the shell module.\n") + 
+    "\t  \t  name of the parameter, like it\'s done for example with shell module.\n") + 
     "\t  \t  This attribute isn\'t mandatory.\n") + 
     "\t- parameters: it\'s just the keyword for defining the list of couples\n") + 
     "\t  \t  \'identifier of the parameter\'-\'value passed to it\'");
   
-  private final String LOOP_DESCRIPTION = (((((((((("This is used for defining a loop over the current task/handler.\n\n" + 
-    "There are two types of loops and two correspondent attributes:\n\n") + 
+  private final String LOOP_DESCRIPTION = ((((((((((("This is used for defining a loop over the current task/handler.\n\n" + 
+    "There are 3 types of loops and 3 correspondent attributes:\n\n") + 
     "\t- loop_over: when the loop is done over a list of values.\n") + 
     "\t  \t  This attribute allows to specify which is the list.\n") + 
     "\t  \t  In this case the additional entity \'loop_control\' can be used\n") + 
     "\t  \t  for specifying additional properties of the loop.\n") + 
+    "\t- with: the \'with_<lookup>\' keyword for doing loops in Ansible.\n") + 
     "\t- until: when the operations are repeated until a condition is met.\n") + 
     "\t  \t  This attribute allows to specify the end condition to meet.\n") + 
     "\t  \t  Two additional attributes that can be set in this case are:\n") + 
@@ -147,6 +148,10 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     "The attributes that can be set are:\n\n") + 
     "\t- import_playbook   -> the name of the yaml file\n") + 
     "\t- when   -> condition");
+  
+  private final String WITH_LOOKUP_DESCRIPTION = (("This is the classic \'with_<lookup>\' keyword in Ansible.\n" + 
+    "The user is supposed to write \'with\' followed by a space and the <lookup>.\n") + 
+    "Writing for example \'with items:\' will be translated into \'with_items:\'.");
   
   @Override
   public void complete_EPrivilegeEscalation(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
@@ -241,6 +246,12 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   @Override
   public void completeEPlaybookInclusion_Playbook_file_name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createEditableCompletionProposal("\"playbook_imported.yaml\"", "\"playbook_imported.yaml\"", context, "The yaml file of the playbook to import.", acceptor);
+  }
+  
+  @Override
+  public void complete_EWithLookup(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    StyledString _styledString = new StyledString("with");
+    this.createNonEditableCompletionProposal("with", _styledString, context, this.WITH_LOOKUP_DESCRIPTION, acceptor);
   }
   
   @Override
@@ -380,6 +391,25 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
       for (final ENotifiedTopicImpl candidate : candidatesTopics) {
         acceptor.accept(this.createCompletionProposal("\"".concat(candidate.getName()).concat("\""), context));
       }
+    }
+  }
+  
+  @Override
+  public void completeEWithLookup_Lookup(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    ArrayList<String> lookups = new ArrayList<String>();
+    lookups.add("list");
+    lookups.add("items");
+    lookups.add("indexed_items");
+    lookups.add("flattened");
+    lookups.add("together");
+    lookups.add("dict");
+    lookups.add("sequence");
+    lookups.add("subelements");
+    lookups.add("nested");
+    lookups.add("cartesian");
+    lookups.add("random_choice");
+    for (final String lookup : lookups) {
+      acceptor.accept(this.createCompletionProposal(lookup, context));
     }
   }
   

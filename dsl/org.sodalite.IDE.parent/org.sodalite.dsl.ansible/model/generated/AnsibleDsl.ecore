@@ -159,6 +159,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="extended" eType="#//EBooleanPassed"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EWithLookup" eSuperTypes="#//ELoop">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lookup" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="with_list" eType="#//EValuePassed"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EUntil" eSuperTypes="#//ELoop">
     <eStructuralFeatures xsi:type="ecore:EReference" name="until" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>

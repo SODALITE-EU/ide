@@ -89,6 +89,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EWithLookup;
 
 /**
  * Generates code from your model files on save.
@@ -1381,6 +1382,25 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                 ELoop _loop_20 = taskHandler.getLoop();
                 String _compileNumberPassed_4 = this.compileNumberPassed(((EUntil) _loop_20).getDelay());
                 _builder.append(_compileNumberPassed_4);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+        {
+          ELoop _loop_21 = taskHandler.getLoop();
+          if ((_loop_21 instanceof EWithLookup)) {
+            {
+              if (((((EWithLookup) taskHandler.getLoop()).getLookup() != null) && (((EWithLookup) taskHandler.getLoop()).getWith_list() != null))) {
+                _builder.append(space);
+                _builder.append("with_");
+                ELoop _loop_22 = taskHandler.getLoop();
+                String _lookup = ((EWithLookup) _loop_22).getLookup();
+                _builder.append(_lookup);
+                _builder.append(": ");
+                ELoop _loop_23 = taskHandler.getLoop();
+                String _string = this.compileValuePassed(((EWithLookup) _loop_23).getWith_list()).toString();
+                _builder.append(_string);
                 _builder.newLineIfNotEmpty();
               }
             }

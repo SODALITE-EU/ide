@@ -84,6 +84,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ELOOP: return createELoop();
       case AnsibleDslPackage.ELOOP_OVER_LIST: return createELoopOverList();
       case AnsibleDslPackage.ELOOP_CONTROL: return createELoopControl();
+      case AnsibleDslPackage.EWITH_LOOKUP: return createEWithLookup();
       case AnsibleDslPackage.EUNTIL: return createEUntil();
       case AnsibleDslPackage.EPRIVILEGE_ESCALATION: return createEPrivilegeEscalation();
       case AnsibleDslPackage.EVALIDATION_MODE: return createEValidationMode();
@@ -377,6 +378,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     ELoopControlImpl eLoopControl = new ELoopControlImpl();
     return eLoopControl;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EWithLookup createEWithLookup()
+  {
+    EWithLookupImpl eWithLookup = new EWithLookupImpl();
+    return eWithLookup;
   }
 
   /**

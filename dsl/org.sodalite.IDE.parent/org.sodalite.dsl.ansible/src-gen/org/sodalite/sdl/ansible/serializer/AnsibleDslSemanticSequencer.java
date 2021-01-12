@@ -77,6 +77,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EUsedByBody;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EWithLookup;
 import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -278,6 +279,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE:
 				sequence_EVariableDeclarationVariableReference(context, (EVariableDeclarationVariableReference) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EWITH_LOOKUP:
+				sequence_EWithLookup(context, (EWithLookup) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -1382,6 +1386,28 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEVariableDeclarationAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getEVariableDeclarationAccess().getValue_passedEValuePassedParserRuleCall_2_0(), semanticObject.getValue_passed());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ELoop returns EWithLookup
+	 *     EWithLookup returns EWithLookup
+	 *
+	 * Constraint:
+	 *     (lookup=ID with_list=EValuePassed)
+	 */
+	protected void sequence_EWithLookup(ISerializationContext context, EWithLookup semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EWITH_LOOKUP__LOOKUP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EWITH_LOOKUP__LOOKUP));
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EWITH_LOOKUP__WITH_LIST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EWITH_LOOKUP__WITH_LIST));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEWithLookupAccess().getLookupIDTerminalRuleCall_1_0(), semanticObject.getLookup());
+		feeder.accept(grammarAccess.getEWithLookupAccess().getWith_listEValuePassedParserRuleCall_3_0(), semanticObject.getWith_list());
 		feeder.finish();
 	}
 	

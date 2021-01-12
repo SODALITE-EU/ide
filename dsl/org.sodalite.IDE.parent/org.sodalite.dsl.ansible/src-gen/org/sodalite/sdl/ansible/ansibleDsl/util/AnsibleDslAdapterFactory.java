@@ -171,6 +171,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createELoopControlAdapter();
       }
       @Override
+      public Adapter caseEWithLookup(EWithLookup object)
+      {
+        return createEWithLookupAdapter();
+      }
+      @Override
       public Adapter caseEUntil(EUntil object)
       {
         return createEUntilAdapter();
@@ -783,6 +788,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createELoopControlAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EWithLookup <em>EWith Lookup</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EWithLookup
+   * @generated
+   */
+  public Adapter createEWithLookupAdapter()
   {
     return null;
   }

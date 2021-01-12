@@ -195,6 +195,15 @@ public interface AnsibleDslFactory extends EFactory
   ELoopControl createELoopControl();
 
   /**
+   * Returns a new object of class '<em>EWith Lookup</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EWith Lookup</em>'.
+   * @generated
+   */
+  EWithLookup createEWithLookup();
+
+  /**
    * Returns a new object of class '<em>EUntil</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

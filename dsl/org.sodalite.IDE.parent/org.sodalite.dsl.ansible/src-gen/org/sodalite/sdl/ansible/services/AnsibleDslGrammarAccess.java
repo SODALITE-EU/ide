@@ -2190,15 +2190,16 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
 		private final RuleCall cELoopOverListParserRuleCall_2_0 = (RuleCall)cAlternatives_2.eContents().get(0);
-		private final RuleCall cEUntilParserRuleCall_2_1 = (RuleCall)cAlternatives_2.eContents().get(1);
+		private final RuleCall cEWithLookupParserRuleCall_2_1 = (RuleCall)cAlternatives_2.eContents().get(1);
+		private final RuleCall cEUntilParserRuleCall_2_2 = (RuleCall)cAlternatives_2.eContents().get(2);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//ELoop:
 		//	'loop:'
-		//	BEGIN (ELoopOverList | EUntil) END;
+		//	BEGIN (ELoopOverList | EWithLookup | EUntil) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'loop:' BEGIN (ELoopOverList | EUntil) END
+		//'loop:' BEGIN (ELoopOverList | EWithLookup | EUntil) END
 		public Group getGroup() { return cGroup; }
 		
 		//'loop:'
@@ -2207,14 +2208,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//(ELoopOverList | EUntil)
+		//(ELoopOverList | EWithLookup | EUntil)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//ELoopOverList
 		public RuleCall getELoopOverListParserRuleCall_2_0() { return cELoopOverListParserRuleCall_2_0; }
 		
+		//EWithLookup
+		public RuleCall getEWithLookupParserRuleCall_2_1() { return cEWithLookupParserRuleCall_2_1; }
+		
 		//EUntil
-		public RuleCall getEUntilParserRuleCall_2_1() { return cEUntilParserRuleCall_2_1; }
+		public RuleCall getEUntilParserRuleCall_2_2() { return cEUntilParserRuleCall_2_2; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
@@ -2363,6 +2367,41 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
+	}
+	public class EWithLookupElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EWithLookup");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cWithKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cLookupAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cLookupIDTerminalRuleCall_1_0 = (RuleCall)cLookupAssignment_1.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cWith_listAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cWith_listEValuePassedParserRuleCall_3_0 = (RuleCall)cWith_listAssignment_3.eContents().get(0);
+		
+		//EWithLookup:
+		//	'with' lookup=ID ':' with_list=EValuePassed;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'with' lookup=ID ':' with_list=EValuePassed
+		public Group getGroup() { return cGroup; }
+		
+		//'with'
+		public Keyword getWithKeyword_0() { return cWithKeyword_0; }
+		
+		//lookup=ID
+		public Assignment getLookupAssignment_1() { return cLookupAssignment_1; }
+		
+		//ID
+		public RuleCall getLookupIDTerminalRuleCall_1_0() { return cLookupIDTerminalRuleCall_1_0; }
+		
+		//':'
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		
+		//with_list=EValuePassed
+		public Assignment getWith_listAssignment_3() { return cWith_listAssignment_3; }
+		
+		//EValuePassed
+		public RuleCall getWith_listEValuePassedParserRuleCall_3_0() { return cWith_listEValuePassedParserRuleCall_3_0; }
 	}
 	public class EUntilElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EUntil");
@@ -5298,6 +5337,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final ELoopElements pELoop;
 	private final ELoopOverListElements pELoopOverList;
 	private final ELoopControlElements pELoopControl;
+	private final EWithLookupElements pEWithLookup;
 	private final EUntilElements pEUntil;
 	private final EPrivilegeEscalationElements pEPrivilegeEscalation;
 	private final EValidationModeElements pEValidationMode;
@@ -5395,6 +5435,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pELoop = new ELoopElements();
 		this.pELoopOverList = new ELoopOverListElements();
 		this.pELoopControl = new ELoopControlElements();
+		this.pEWithLookup = new EWithLookupElements();
 		this.pEUntil = new EUntilElements();
 		this.pEPrivilegeEscalation = new EPrivilegeEscalationElements();
 		this.pEValidationMode = new EValidationModeElements();
@@ -5742,7 +5783,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//ELoop:
 	//	'loop:'
-	//	BEGIN (ELoopOverList | EUntil) END;
+	//	BEGIN (ELoopOverList | EWithLookup | EUntil) END;
 	public ELoopElements getELoopAccess() {
 		return pELoop;
 	}
@@ -5773,6 +5814,16 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	public ParserRule getELoopControlRule() {
 		return getELoopControlAccess().getRule();
+	}
+	
+	//EWithLookup:
+	//	'with' lookup=ID ':' with_list=EValuePassed;
+	public EWithLookupElements getEWithLookupAccess() {
+		return pEWithLookup;
+	}
+	
+	public ParserRule getEWithLookupRule() {
+		return getEWithLookupAccess().getRule();
 	}
 	
 	//EUntil:

@@ -4327,17 +4327,26 @@ ruleELoop returns [EObject current=null]
 			}
 			    |
 			{
-				newCompositeNode(grammarAccess.getELoopAccess().getEUntilParserRuleCall_2_1());
+				newCompositeNode(grammarAccess.getELoopAccess().getEWithLookupParserRuleCall_2_1());
 			}
-			this_EUntil_3=ruleEUntil
+			this_EWithLookup_3=ruleEWithLookup
 			{
-				$current = $this_EUntil_3.current;
+				$current = $this_EWithLookup_3.current;
+				afterParserOrEnumRuleCall();
+			}
+			    |
+			{
+				newCompositeNode(grammarAccess.getELoopAccess().getEUntilParserRuleCall_2_2());
+			}
+			this_EUntil_4=ruleEUntil
+			{
+				$current = $this_EUntil_4.current;
 				afterParserOrEnumRuleCall();
 			}
 		)
-		this_END_4=RULE_END
+		this_END_5=RULE_END
 		{
-			newLeafNode(this_END_4, grammarAccess.getELoopAccess().getENDTerminalRuleCall_3());
+			newLeafNode(this_END_5, grammarAccess.getELoopAccess().getENDTerminalRuleCall_3());
 		}
 	)
 ;
@@ -4615,6 +4624,70 @@ ruleELoopControl returns [EObject current=null]
 		{
 			newLeafNode(this_END_13, grammarAccess.getELoopControlAccess().getENDTerminalRuleCall_3());
 		}
+	)
+;
+
+// Entry rule entryRuleEWithLookup
+entryRuleEWithLookup returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEWithLookupRule()); }
+	iv_ruleEWithLookup=ruleEWithLookup
+	{ $current=$iv_ruleEWithLookup.current; }
+	EOF;
+
+// Rule EWithLookup
+ruleEWithLookup returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0=With
+		{
+			newLeafNode(otherlv_0, grammarAccess.getEWithLookupAccess().getWithKeyword_0());
+		}
+		(
+			(
+				lv_lookup_1_0=RULE_ID
+				{
+					newLeafNode(lv_lookup_1_0, grammarAccess.getEWithLookupAccess().getLookupIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEWithLookupRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"lookup",
+						lv_lookup_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_2=Colon
+		{
+			newLeafNode(otherlv_2, grammarAccess.getEWithLookupAccess().getColonKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEWithLookupAccess().getWith_listEValuePassedParserRuleCall_3_0());
+				}
+				lv_with_list_3_0=ruleEValuePassed
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEWithLookupRule());
+					}
+					set(
+						$current,
+						"with_list",
+						lv_with_list_3_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 
