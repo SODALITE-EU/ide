@@ -266,9 +266,7 @@ class KBReasonerTest {
 		String rmTTL = new String(Files.readAllBytes(ttl_path));
 		Path dsl_path = FileSystems.getDefault().getPath(dslPath);
 		String rmDSL = new String(Files.readAllBytes(dsl_path));
-		String token = kbclient.getSecurityToken();
-		assertNotNull(token);
-		KBSaveReportData report = kbclient.saveRM(rmTTL, rmURI, name, namespace, rmDSL, token);
+		KBSaveReportData report = kbclient.saveRM(rmTTL, rmURI, name, namespace, rmDSL);
 		return report;
 	}
 
@@ -278,9 +276,7 @@ class KBReasonerTest {
 		String aadmTTL = new String(Files.readAllBytes(ttl_path));
 		Path dsl_path = FileSystems.getDefault().getPath(dslPath);
 		String aadmDSL = new String(Files.readAllBytes(dsl_path));
-		String token = kbclient.getSecurityToken();
-		assertNotNull(token);
-		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete, token);
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete);
 		return report;
 	}
 

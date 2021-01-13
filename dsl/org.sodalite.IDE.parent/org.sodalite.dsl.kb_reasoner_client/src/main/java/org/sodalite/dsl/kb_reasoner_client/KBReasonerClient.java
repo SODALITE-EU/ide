@@ -99,12 +99,16 @@ public class KBReasonerClient implements KBReasoner {
 	private String keycloak_password;
 	private String keycloak_client_id;
 	private String keycloak_client_secret;
+	private String aai_token;
 
-	public KBReasonerClient(String kbReasonerUri, String iacUri, String xoperaUri, String keycloakUri) {
+	public KBReasonerClient(String kbReasonerUri, String iacUri, String xoperaUri, String keycloakUri)
+			throws Exception {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.xoperaUri = xoperaUri;
 		this.keycloakUri = keycloakUri;
+		aai_token = getSecurityToken();
+		Assert.notNull(aai_token, "Error retrieving a valid security token");
 	}
 
 	public void setUserAccount(String user, String password, String client_id, String client_secret) {
@@ -369,10 +373,12 @@ public class KBReasonerClient implements KBReasoner {
 
 	@Override
 	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String name, String namespace, String aadmDSL,
-			boolean complete, String token) throws Exception {
+			boolean complete) throws Exception {
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		Assert.isTrue(!aadmDSL.isEmpty(), "AADM DSL content can neither be null nor empty");
 		String url = kbReasonerUri + "saveAADM";
+		String token = getSecurityToken();
+		Assert.notNull(token, "Error retrieving a valid security token");
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -421,10 +427,12 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public KBSaveReportData saveRM(String rmTTL, String rmURI, String name, String namespace, String rmDSL,
-			String token) throws Exception {
+	public KBSaveReportData saveRM(String rmTTL, String rmURI, String name, String namespace, String rmDSL)
+			throws Exception {
 		Assert.isTrue(!rmTTL.isEmpty(), "Turtle content for RM can neither be null nor empty");
 		String url = kbReasonerUri + "saveRM";
+		String token = getSecurityToken();
+		Assert.notNull(token, "Error retrieving a valid security token");
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
