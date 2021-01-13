@@ -79,6 +79,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
@@ -622,6 +623,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eTailElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eSquareBracketElementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2786,9 +2794,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEParenthesisedExpression_Index()
+  public EReference getEParenthesisedExpression_Square_bracket_elements()
   {
-    return (EAttribute)eParenthesisedExpressionEClass.getEStructuralFeatures().get(2);
+    return (EReference)eParenthesisedExpressionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -3380,9 +3388,42 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getETailElement_Index()
+  public EReference getETailElement_Square_bracket_elements()
   {
-    return (EAttribute)eTailElementEClass.getEStructuralFeatures().get(1);
+    return (EReference)eTailElementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getESquareBracketElement()
+  {
+    return eSquareBracketElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getESquareBracketElement_Index()
+  {
+    return (EAttribute)eSquareBracketElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getESquareBracketElement_Field()
+  {
+    return (EAttribute)eSquareBracketElementEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3832,7 +3873,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eParenthesisedExpressionEClass = createEClass(EPARENTHESISED_EXPRESSION);
     createEReference(eParenthesisedExpressionEClass, EPARENTHESISED_EXPRESSION__BASIC_VALUE);
     createEReference(eParenthesisedExpressionEClass, EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM);
-    createEAttribute(eParenthesisedExpressionEClass, EPARENTHESISED_EXPRESSION__INDEX);
+    createEReference(eParenthesisedExpressionEClass, EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS);
     createEReference(eParenthesisedExpressionEClass, EPARENTHESISED_EXPRESSION__TAIL);
 
     eIfExpressionEClass = createEClass(EIF_EXPRESSION);
@@ -3904,7 +3945,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eTailElementEClass = createEClass(ETAIL_ELEMENT);
     createEReference(eTailElementEClass, ETAIL_ELEMENT__FUNCTION_CALL);
-    createEAttribute(eTailElementEClass, ETAIL_ELEMENT__INDEX);
+    createEReference(eTailElementEClass, ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS);
+
+    eSquareBracketElementEClass = createEClass(ESQUARE_BRACKET_ELEMENT);
+    createEAttribute(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__INDEX);
+    createEAttribute(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__FIELD);
 
     eDictionaryEClass = createEClass(EDICTIONARY);
     createEReference(eDictionaryEClass, EDICTIONARY__DICTIONARY_PAIRS);
@@ -4256,7 +4301,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eParenthesisedExpressionEClass, EParenthesisedExpression.class, "EParenthesisedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEParenthesisedExpression_Basic_value(), this.getEValuePassedToJinjaExpression(), null, "basic_value", null, 0, 1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParenthesisedExpression_Parenthesised_term(), this.getEFilteredExpression(), null, "parenthesised_term", null, 0, 1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEParenthesisedExpression_Index(), ecorePackage.getEString(), "index", null, 0, 1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEParenthesisedExpression_Square_bracket_elements(), this.getESquareBracketElement(), null, "square_bracket_elements", null, 0, -1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParenthesisedExpression_Tail(), this.getETailElement(), null, "tail", null, 0, -1, EParenthesisedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eIfExpressionEClass, EIfExpression.class, "EIfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4328,7 +4373,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eTailElementEClass, ETailElement.class, "ETailElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getETailElement_Function_call(), this.getEFunctionCall(), null, "function_call", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getETailElement_Index(), ecorePackage.getEString(), "index", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETailElement_Square_bracket_elements(), this.getESquareBracketElement(), null, "square_bracket_elements", null, 0, -1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eSquareBracketElementEClass, ESquareBracketElement.class, "ESquareBracketElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getESquareBracketElement_Index(), ecorePackage.getEString(), "index", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getESquareBracketElement_Field(), ecorePackage.getEString(), "field", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDictionaryEClass, EDictionary.class, "EDictionary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEDictionary_Dictionary_pairs(), this.getEDictionaryPair(), null, "dictionary_pairs", null, 0, -1, EDictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

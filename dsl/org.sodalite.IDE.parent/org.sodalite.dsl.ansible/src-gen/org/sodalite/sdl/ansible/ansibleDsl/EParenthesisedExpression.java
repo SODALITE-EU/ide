@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getBasic_value <em>Basic value</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getParenthesised_term <em>Parenthesised term</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getSquare_bracket_elements <em>Square bracket elements</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getTail <em>Tail</em>}</li>
  * </ul>
  *
@@ -73,26 +73,16 @@ public interface EParenthesisedExpression extends EObject
   void setParenthesised_term(EFilteredExpression value);
 
   /**
-   * Returns the value of the '<em><b>Index</b></em>' attribute.
+   * Returns the value of the '<em><b>Square bracket elements</b></em>' containment reference list.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Index</em>' attribute.
-   * @see #setIndex(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEParenthesisedExpression_Index()
-   * @model
+   * @return the value of the '<em>Square bracket elements</em>' containment reference list.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEParenthesisedExpression_Square_bracket_elements()
+   * @model containment="true"
    * @generated
    */
-  String getIndex();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getIndex <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Index</em>' attribute.
-   * @see #getIndex()
-   * @generated
-   */
-  void setIndex(String value);
+  EList<ESquareBracketElement> getSquare_bracket_elements();
 
   /**
    * Returns the value of the '<em><b>Tail</b></em>' containment reference list.

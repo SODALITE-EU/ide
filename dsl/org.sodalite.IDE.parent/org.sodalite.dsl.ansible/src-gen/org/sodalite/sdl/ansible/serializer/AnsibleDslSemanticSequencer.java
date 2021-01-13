@@ -68,6 +68,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
@@ -252,6 +253,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.ESPECIAL_VARIABLE:
 				sequence_ESpecialVariable(context, (ESpecialVariable) semanticObject); 
+				return; 
+			case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT:
+				sequence_ESquareBracketElement(context, (ESquareBracketElement) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ETAIL_ELEMENT:
 				sequence_ETailElement(context, (ETailElement) semanticObject); 
@@ -943,7 +947,11 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EParenthesisedExpression returns EParenthesisedExpression
 	 *
 	 * Constraint:
-	 *     ((basic_value=EValuePassedToJinjaExpression | parenthesised_term=EFilteredExpression) index=NUMBER? tail+=ETailElement*)
+	 *     (
+	 *         (basic_value=EValuePassedToJinjaExpression | parenthesised_term=EFilteredExpression) 
+	 *         square_bracket_elements+=ESquareBracketElement* 
+	 *         tail+=ETailElement*
+	 *     )
 	 */
 	protected void sequence_EParenthesisedExpression(ISerializationContext context, EParenthesisedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1208,10 +1216,22 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     ESquareBracketElement returns ESquareBracketElement
+	 *
+	 * Constraint:
+	 *     (index=NUMBER | field=STRING)
+	 */
+	protected void sequence_ESquareBracketElement(ISerializationContext context, ESquareBracketElement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ETailElement returns ETailElement
 	 *
 	 * Constraint:
-	 *     (function_call=EFunctionCall index=NUMBER?)
+	 *     (function_call=EFunctionCall square_bracket_elements+=ESquareBracketElement*)
 	 */
 	protected void sequence_ETailElement(ISerializationContext context, ETailElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

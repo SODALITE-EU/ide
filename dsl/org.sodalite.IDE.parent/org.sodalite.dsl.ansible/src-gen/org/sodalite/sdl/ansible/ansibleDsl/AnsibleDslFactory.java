@@ -690,6 +690,15 @@ public interface AnsibleDslFactory extends EFactory
   ETailElement createETailElement();
 
   /**
+   * Returns a new object of class '<em>ESquare Bracket Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ESquare Bracket Element</em>'.
+   * @generated
+   */
+  ESquareBracketElement createESquareBracketElement();
+
+  /**
    * Returns a new object of class '<em>EDictionary</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

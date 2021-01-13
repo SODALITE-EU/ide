@@ -339,7 +339,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parenthesised_term" eType="#//EFilteredExpression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="square_bracket_elements"
+        upperBound="-1" eType="#//ESquareBracketElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//ETailElement"
         containment="true"/>
   </eClassifiers>
@@ -429,7 +430,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="ETailElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function_call" eType="#//EFunctionCall"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="square_bracket_elements"
+        upperBound="-1" eType="#//ESquareBracketElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ESquareBracketElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="field" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionary" eSuperTypes="#//EComposedValue #//EDictionaryPassed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dictionary_pairs" upperBound="-1"

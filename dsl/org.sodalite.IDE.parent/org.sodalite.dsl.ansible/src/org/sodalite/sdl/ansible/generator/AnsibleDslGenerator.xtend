@@ -66,6 +66,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement
 import org.sodalite.sdl.ansible.ansibleDsl.EWithLookup
+import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement
 
 /**
  * Generates code from your model files on save.
@@ -544,8 +545,17 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileTailElement(ETailElement tailElement){
 		var tailElementString = ""
 		if (tailElement.function_call !== null) tailElementString = tailElementString.concat(tailElement.function_call.compileFunctionCall)
-		if (tailElement.index !== null) tailElementString = tailElementString.concat("[").concat(tailElement.index).concat("]")
+		for (squareBracketElement : tailElement.square_bracket_elements){
+			tailElementString = tailElementString.concat(squareBracketElement.compileSquareBracketElement)
+		}
 		return tailElementString
+	}
+	
+	def compileSquareBracketElement(ESquareBracketElement squareBracketElement){
+		var stringToReturn = ""
+		if (squareBracketElement.index !== null) stringToReturn = stringToReturn.concat("[").concat(squareBracketElement.index).concat("]")
+		else if (squareBracketElement.field !== null) stringToReturn = stringToReturn.concat("['").concat(squareBracketElement.field).concat("']")
+		return stringToReturn
 	}
 	
 	def compileJinjaExpressionEvaluationWithoutBrackets(EJinjaExpressionEvaluationWithoutBrackets jinja){
@@ -649,7 +659,9 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		var stringToReturn = ""
 		if (parenthesisedExpression.basic_value !== null) stringToReturn = stringToReturn.concat(parenthesisedExpression.basic_value.compileValuePassedToJinjaExpression)
 		else if (parenthesisedExpression.parenthesised_term !== null) stringToReturn = stringToReturn.concat("(").concat(parenthesisedExpression.parenthesised_term.compileFilteredExpression.toString()).concat(")")
-		if (parenthesisedExpression.index !== null) stringToReturn = stringToReturn.concat("[").concat(parenthesisedExpression.index).concat("]")
+		for (squareBracketElement : parenthesisedExpression.square_bracket_elements){
+			stringToReturn = stringToReturn.concat(squareBracketElement.compileSquareBracketElement)
+		}
 		for (tailElement : parenthesisedExpression.tail){
 			stringToReturn = stringToReturn.concat(".").concat(tailElement.compileTailElement)
 		}

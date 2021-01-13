@@ -4155,23 +4155,20 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Assignment cParenthesised_termAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
 		private final RuleCall cParenthesised_termEFilteredExpressionParserRuleCall_0_1_1_0 = (RuleCall)cParenthesised_termAssignment_0_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_0_1_2 = (Keyword)cGroup_0_1.eContents().get(2);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cIndexAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cIndexNUMBERTerminalRuleCall_1_1_0 = (RuleCall)cIndexAssignment_1_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Assignment cSquare_bracket_elementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cSquare_bracket_elementsESquareBracketElementParserRuleCall_1_0 = (RuleCall)cSquare_bracket_elementsAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cFullStopKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cTailAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cTailETailElementParserRuleCall_2_1_0 = (RuleCall)cTailAssignment_2_1.eContents().get(0);
 		
 		//EParenthesisedExpression:
-		//	(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')') ('[' index=NUMBER ']')?
-		//	('.' tail+=ETailElement)*;
+		//	(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')')
+		//	square_bracket_elements+=ESquareBracketElement* ('.' tail+=ETailElement)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')') ('[' index=NUMBER ']')?
-		//('.' tail+=ETailElement)*
+		//(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')')
+		//square_bracket_elements+=ESquareBracketElement* ('.' tail+=ETailElement)*
 		public Group getGroup() { return cGroup; }
 		
 		//(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')')
@@ -4198,20 +4195,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//')'
 		public Keyword getRightParenthesisKeyword_0_1_2() { return cRightParenthesisKeyword_0_1_2; }
 		
-		//('[' index=NUMBER ']')?
-		public Group getGroup_1() { return cGroup_1; }
+		//square_bracket_elements+=ESquareBracketElement*
+		public Assignment getSquare_bracket_elementsAssignment_1() { return cSquare_bracket_elementsAssignment_1; }
 		
-		//'['
-		public Keyword getLeftSquareBracketKeyword_1_0() { return cLeftSquareBracketKeyword_1_0; }
-		
-		//index=NUMBER
-		public Assignment getIndexAssignment_1_1() { return cIndexAssignment_1_1; }
-		
-		//NUMBER
-		public RuleCall getIndexNUMBERTerminalRuleCall_1_1_0() { return cIndexNUMBERTerminalRuleCall_1_1_0; }
-		
-		//']'
-		public Keyword getRightSquareBracketKeyword_1_2() { return cRightSquareBracketKeyword_1_2; }
+		//ESquareBracketElement
+		public RuleCall getSquare_bracket_elementsESquareBracketElementParserRuleCall_1_0() { return cSquare_bracket_elementsESquareBracketElementParserRuleCall_1_0; }
 		
 		//('.' tail+=ETailElement)*
 		public Group getGroup_2() { return cGroup_2; }
@@ -5011,17 +4999,14 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cFunction_callAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cFunction_callEFunctionCallParserRuleCall_0_0 = (RuleCall)cFunction_callAssignment_0.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cIndexAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cIndexNUMBERTerminalRuleCall_1_1_0 = (RuleCall)cIndexAssignment_1_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Assignment cSquare_bracket_elementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cSquare_bracket_elementsESquareBracketElementParserRuleCall_1_0 = (RuleCall)cSquare_bracket_elementsAssignment_1.eContents().get(0);
 		
 		//ETailElement:
-		//	function_call=EFunctionCall ('[' index=NUMBER ']')?;
+		//	function_call=EFunctionCall square_bracket_elements+=ESquareBracketElement*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//function_call=EFunctionCall ('[' index=NUMBER ']')?
+		//function_call=EFunctionCall square_bracket_elements+=ESquareBracketElement*
 		public Group getGroup() { return cGroup; }
 		
 		//function_call=EFunctionCall
@@ -5030,20 +5015,50 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EFunctionCall
 		public RuleCall getFunction_callEFunctionCallParserRuleCall_0_0() { return cFunction_callEFunctionCallParserRuleCall_0_0; }
 		
-		//('[' index=NUMBER ']')?
-		public Group getGroup_1() { return cGroup_1; }
+		//square_bracket_elements+=ESquareBracketElement*
+		public Assignment getSquare_bracket_elementsAssignment_1() { return cSquare_bracket_elementsAssignment_1; }
+		
+		//ESquareBracketElement
+		public RuleCall getSquare_bracket_elementsESquareBracketElementParserRuleCall_1_0() { return cSquare_bracket_elementsESquareBracketElementParserRuleCall_1_0; }
+	}
+	public class ESquareBracketElementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ESquareBracketElement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cIndexAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cIndexNUMBERTerminalRuleCall_1_0_0 = (RuleCall)cIndexAssignment_1_0.eContents().get(0);
+		private final Assignment cFieldAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cFieldSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cFieldAssignment_1_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//ESquareBracketElement:
+		//	'[' (index=NUMBER | field=STRING) ']';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'[' (index=NUMBER | field=STRING) ']'
+		public Group getGroup() { return cGroup; }
 		
 		//'['
-		public Keyword getLeftSquareBracketKeyword_1_0() { return cLeftSquareBracketKeyword_1_0; }
+		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
+		
+		//(index=NUMBER | field=STRING)
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//index=NUMBER
-		public Assignment getIndexAssignment_1_1() { return cIndexAssignment_1_1; }
+		public Assignment getIndexAssignment_1_0() { return cIndexAssignment_1_0; }
 		
 		//NUMBER
-		public RuleCall getIndexNUMBERTerminalRuleCall_1_1_0() { return cIndexNUMBERTerminalRuleCall_1_1_0; }
+		public RuleCall getIndexNUMBERTerminalRuleCall_1_0_0() { return cIndexNUMBERTerminalRuleCall_1_0_0; }
+		
+		//field=STRING
+		public Assignment getFieldAssignment_1_1() { return cFieldAssignment_1_1; }
+		
+		//STRING
+		public RuleCall getFieldSTRINGTerminalRuleCall_1_1_0() { return cFieldSTRINGTerminalRuleCall_1_1_0; }
 		
 		//']'
-		public Keyword getRightSquareBracketKeyword_1_2() { return cRightSquareBracketKeyword_1_2; }
+		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
 	}
 	public class EDictionaryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EDictionary");
@@ -5392,6 +5407,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final EVariableReferenceElements pEVariableReference;
 	private final ESpecialVariableElements pESpecialVariable;
 	private final ETailElementElements pETailElement;
+	private final ESquareBracketElementElements pESquareBracketElement;
 	private final EDictionaryElements pEDictionary;
 	private final EDictionaryPairElements pEDictionaryPair;
 	private final EListElements pEList;
@@ -5490,6 +5506,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pEVariableReference = new EVariableReferenceElements();
 		this.pESpecialVariable = new ESpecialVariableElements();
 		this.pETailElement = new ETailElementElements();
+		this.pESquareBracketElement = new ESquareBracketElementElements();
 		this.pEDictionary = new EDictionaryElements();
 		this.pEDictionaryPair = new EDictionaryPairElements();
 		this.pEList = new EListElements();
@@ -6204,8 +6221,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EParenthesisedExpression:
-	//	(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')') ('[' index=NUMBER ']')?
-	//	('.' tail+=ETailElement)*;
+	//	(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')')
+	//	square_bracket_elements+=ESquareBracketElement* ('.' tail+=ETailElement)*;
 	public EParenthesisedExpressionElements getEParenthesisedExpressionAccess() {
 		return pEParenthesisedExpression;
 	}
@@ -6394,13 +6411,23 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//ETailElement:
-	//	function_call=EFunctionCall ('[' index=NUMBER ']')?;
+	//	function_call=EFunctionCall square_bracket_elements+=ESquareBracketElement*;
 	public ETailElementElements getETailElementAccess() {
 		return pETailElement;
 	}
 	
 	public ParserRule getETailElementRule() {
 		return getETailElementAccess().getRule();
+	}
+	
+	//ESquareBracketElement:
+	//	'[' (index=NUMBER | field=STRING) ']';
+	public ESquareBracketElementElements getESquareBracketElementAccess() {
+		return pESquareBracketElement;
+	}
+	
+	public ParserRule getESquareBracketElementRule() {
+		return getESquareBracketElementAccess().getRule();
 	}
 	
 	//EDictionary:

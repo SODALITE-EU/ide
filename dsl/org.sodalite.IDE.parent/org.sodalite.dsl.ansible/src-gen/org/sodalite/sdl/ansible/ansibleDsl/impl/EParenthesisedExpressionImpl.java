@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 
@@ -35,7 +36,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getBasic_value <em>Basic value</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getParenthesised_term <em>Parenthesised term</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getSquare_bracket_elements <em>Square bracket elements</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParenthesisedExpressionImpl#getTail <em>Tail</em>}</li>
  * </ul>
  *
@@ -64,24 +65,14 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
   protected EFilteredExpression parenthesised_term;
 
   /**
-   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * The cached value of the '{@link #getSquare_bracket_elements() <em>Square bracket elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIndex()
+   * @see #getSquare_bracket_elements()
    * @generated
    * @ordered
    */
-  protected static final String INDEX_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
-  protected String index = INDEX_EDEFAULT;
+  protected EList<ESquareBracketElement> square_bracket_elements;
 
   /**
    * The cached value of the '{@link #getTail() <em>Tail</em>}' containment reference list.
@@ -220,23 +211,13 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public String getIndex()
+  public EList<ESquareBracketElement> getSquare_bracket_elements()
   {
-    return index;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setIndex(String newIndex)
-  {
-    String oldIndex = index;
-    index = newIndex;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX, oldIndex, index));
+    if (square_bracket_elements == null)
+    {
+      square_bracket_elements = new EObjectContainmentEList<ESquareBracketElement>(ESquareBracketElement.class, this, AnsibleDslPackage.EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS);
+    }
+    return square_bracket_elements;
   }
 
   /**
@@ -268,6 +249,8 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         return basicSetBasic_value(null, msgs);
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         return basicSetParenthesised_term(null, msgs);
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS:
+        return ((InternalEList<?>)getSquare_bracket_elements()).basicRemove(otherEnd, msgs);
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
         return ((InternalEList<?>)getTail()).basicRemove(otherEnd, msgs);
     }
@@ -288,8 +271,8 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         return getBasic_value();
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         return getParenthesised_term();
-      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX:
-        return getIndex();
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS:
+        return getSquare_bracket_elements();
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
         return getTail();
     }
@@ -313,8 +296,9 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         setParenthesised_term((EFilteredExpression)newValue);
         return;
-      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX:
-        setIndex((String)newValue);
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS:
+        getSquare_bracket_elements().clear();
+        getSquare_bracket_elements().addAll((Collection<? extends ESquareBracketElement>)newValue);
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
         getTail().clear();
@@ -340,8 +324,8 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         setParenthesised_term((EFilteredExpression)null);
         return;
-      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX:
-        setIndex(INDEX_EDEFAULT);
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS:
+        getSquare_bracket_elements().clear();
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
         getTail().clear();
@@ -364,29 +348,12 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         return basic_value != null;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
         return parenthesised_term != null;
-      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__INDEX:
-        return INDEX_EDEFAULT == null ? index != null : !INDEX_EDEFAULT.equals(index);
+      case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS:
+        return square_bracket_elements != null && !square_bracket_elements.isEmpty();
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__TAIL:
         return tail != null && !tail.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (index: ");
-    result.append(index);
-    result.append(')');
-    return result.toString();
   }
 
 } //EParenthesisedExpressionImpl

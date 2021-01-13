@@ -234,7 +234,7 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//EParenthesisedExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/basic_value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/parenthesised_term"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EParenthesisedExpression/index"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/square_bracket_elements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/tail"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EIfExpression">
@@ -305,7 +305,11 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ETailElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETailElement/function_call"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ETailElement/index"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETailElement/square_bracket_elements"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ESquareBracketElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESquareBracketElement/index"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESquareBracketElement/field"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionary">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionary/dictionary_pairs"/>

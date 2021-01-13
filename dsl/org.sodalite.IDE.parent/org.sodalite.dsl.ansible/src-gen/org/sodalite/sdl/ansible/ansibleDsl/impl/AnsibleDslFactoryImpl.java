@@ -139,6 +139,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EVARIABLE_REFERENCE: return createEVariableReference();
       case AnsibleDslPackage.ESPECIAL_VARIABLE: return createESpecialVariable();
       case AnsibleDslPackage.ETAIL_ELEMENT: return createETailElement();
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT: return createESquareBracketElement();
       case AnsibleDslPackage.EDICTIONARY: return createEDictionary();
       case AnsibleDslPackage.EDICTIONARY_PAIR: return createEDictionaryPair();
       case AnsibleDslPackage.ELIST: return createEList();
@@ -1038,6 +1039,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     ETailElementImpl eTailElement = new ETailElementImpl();
     return eTailElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ESquareBracketElement createESquareBracketElement()
+  {
+    ESquareBracketElementImpl eSquareBracketElement = new ESquareBracketElementImpl();
+    return eSquareBracketElement;
   }
 
   /**

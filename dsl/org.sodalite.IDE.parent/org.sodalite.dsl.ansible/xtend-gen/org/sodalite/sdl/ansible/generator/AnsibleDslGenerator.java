@@ -76,6 +76,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
@@ -1501,12 +1502,27 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     if (_tripleNotEquals) {
       tailElementString = tailElementString.concat(this.compileFunctionCall(tailElement.getFunction_call()));
     }
-    String _index = tailElement.getIndex();
-    boolean _tripleNotEquals_1 = (_index != null);
-    if (_tripleNotEquals_1) {
-      tailElementString = tailElementString.concat("[").concat(tailElement.getIndex()).concat("]");
+    EList<ESquareBracketElement> _square_bracket_elements = tailElement.getSquare_bracket_elements();
+    for (final ESquareBracketElement squareBracketElement : _square_bracket_elements) {
+      tailElementString = tailElementString.concat(this.compileSquareBracketElement(squareBracketElement));
     }
     return tailElementString;
+  }
+  
+  public String compileSquareBracketElement(final ESquareBracketElement squareBracketElement) {
+    String stringToReturn = "";
+    String _index = squareBracketElement.getIndex();
+    boolean _tripleNotEquals = (_index != null);
+    if (_tripleNotEquals) {
+      stringToReturn = stringToReturn.concat("[").concat(squareBracketElement.getIndex()).concat("]");
+    } else {
+      String _field = squareBracketElement.getField();
+      boolean _tripleNotEquals_1 = (_field != null);
+      if (_tripleNotEquals_1) {
+        stringToReturn = stringToReturn.concat("[\'").concat(squareBracketElement.getField()).concat("\']");
+      }
+    }
+    return stringToReturn;
   }
   
   public String compileJinjaExpressionEvaluationWithoutBrackets(final EJinjaExpressionEvaluationWithoutBrackets jinja) {
@@ -1642,10 +1658,9 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         stringToReturn = stringToReturn.concat("(").concat(this.compileFilteredExpression(parenthesisedExpression.getParenthesised_term()).toString()).concat(")");
       }
     }
-    String _index = parenthesisedExpression.getIndex();
-    boolean _tripleNotEquals_2 = (_index != null);
-    if (_tripleNotEquals_2) {
-      stringToReturn = stringToReturn.concat("[").concat(parenthesisedExpression.getIndex()).concat("]");
+    EList<ESquareBracketElement> _square_bracket_elements = parenthesisedExpression.getSquare_bracket_elements();
+    for (final ESquareBracketElement squareBracketElement : _square_bracket_elements) {
+      stringToReturn = stringToReturn.concat(this.compileSquareBracketElement(squareBracketElement));
     }
     EList<ETailElement> _tail = parenthesisedExpression.getTail();
     for (final ETailElement tailElement : _tail) {

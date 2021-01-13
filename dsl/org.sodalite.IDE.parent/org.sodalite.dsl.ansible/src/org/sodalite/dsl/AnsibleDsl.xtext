@@ -511,7 +511,7 @@ EIsExpression:
 ;
 
 EParenthesisedExpression:
-	(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')') ('[' index=NUMBER ']')? ('.' tail+=ETailElement)*
+	(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')') (square_bracket_elements+=ESquareBracketElement)* ('.' tail+=ETailElement)*
 ;
 
 EIfExpression:
@@ -591,7 +591,11 @@ ESpecialVariable: //https://docs.ansible.com/ansible/latest/reference_appendices
 ;
 
 ETailElement:
-	function_call=EFunctionCall ('[' index=NUMBER ']')?
+	function_call=EFunctionCall (square_bracket_elements+=ESquareBracketElement)*
+;
+
+ESquareBracketElement:
+	'[' (index=NUMBER | field=STRING) ']'
 ;
 
 EDictionary:

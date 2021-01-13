@@ -7961,44 +7961,35 @@ ruleEParenthesisedExpression returns [EObject current=null]
 			)
 		)
 		(
-			otherlv_4=LeftSquareBracket
-			{
-				newLeafNode(otherlv_4, grammarAccess.getEParenthesisedExpressionAccess().getLeftSquareBracketKeyword_1_0());
-			}
 			(
-				(
-					lv_index_5_0=RULE_NUMBER
-					{
-						newLeafNode(lv_index_5_0, grammarAccess.getEParenthesisedExpressionAccess().getIndexNUMBERTerminalRuleCall_1_1_0());
+				{
+					newCompositeNode(grammarAccess.getEParenthesisedExpressionAccess().getSquare_bracket_elementsESquareBracketElementParserRuleCall_1_0());
+				}
+				lv_square_bracket_elements_4_0=ruleESquareBracketElement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEParenthesisedExpressionRule());
 					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getEParenthesisedExpressionRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"index",
-							lv_index_5_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
-					}
-				)
+					add(
+						$current,
+						"square_bracket_elements",
+						lv_square_bracket_elements_4_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.ESquareBracketElement");
+					afterParserOrEnumRuleCall();
+				}
 			)
-			otherlv_6=RightSquareBracket
-			{
-				newLeafNode(otherlv_6, grammarAccess.getEParenthesisedExpressionAccess().getRightSquareBracketKeyword_1_2());
-			}
-		)?
+		)*
 		(
-			otherlv_7=FullStop
+			otherlv_5=FullStop
 			{
-				newLeafNode(otherlv_7, grammarAccess.getEParenthesisedExpressionAccess().getFullStopKeyword_2_0());
+				newLeafNode(otherlv_5, grammarAccess.getEParenthesisedExpressionAccess().getFullStopKeyword_2_0());
 			}
 			(
 				(
 					{
 						newCompositeNode(grammarAccess.getEParenthesisedExpressionAccess().getTailETailElementParserRuleCall_2_1_0());
 					}
-					lv_tail_8_0=ruleETailElement
+					lv_tail_6_0=ruleETailElement
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEParenthesisedExpressionRule());
@@ -8006,7 +7997,7 @@ ruleEParenthesisedExpression returns [EObject current=null]
 						add(
 							$current,
 							"tail",
-							lv_tail_8_0,
+							lv_tail_6_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.ETailElement");
 						afterParserOrEnumRuleCall();
 					}
@@ -9240,33 +9231,90 @@ ruleETailElement returns [EObject current=null]
 			)
 		)
 		(
-			otherlv_1=LeftSquareBracket
-			{
-				newLeafNode(otherlv_1, grammarAccess.getETailElementAccess().getLeftSquareBracketKeyword_1_0());
-			}
+			(
+				{
+					newCompositeNode(grammarAccess.getETailElementAccess().getSquare_bracket_elementsESquareBracketElementParserRuleCall_1_0());
+				}
+				lv_square_bracket_elements_1_0=ruleESquareBracketElement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getETailElementRule());
+					}
+					add(
+						$current,
+						"square_bracket_elements",
+						lv_square_bracket_elements_1_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.ESquareBracketElement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+	)
+;
+
+// Entry rule entryRuleESquareBracketElement
+entryRuleESquareBracketElement returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getESquareBracketElementRule()); }
+	iv_ruleESquareBracketElement=ruleESquareBracketElement
+	{ $current=$iv_ruleESquareBracketElement.current; }
+	EOF;
+
+// Rule ESquareBracketElement
+ruleESquareBracketElement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0=LeftSquareBracket
+		{
+			newLeafNode(otherlv_0, grammarAccess.getESquareBracketElementAccess().getLeftSquareBracketKeyword_0());
+		}
+		(
 			(
 				(
-					lv_index_2_0=RULE_NUMBER
+					lv_index_1_0=RULE_NUMBER
 					{
-						newLeafNode(lv_index_2_0, grammarAccess.getETailElementAccess().getIndexNUMBERTerminalRuleCall_1_1_0());
+						newLeafNode(lv_index_1_0, grammarAccess.getESquareBracketElementAccess().getIndexNUMBERTerminalRuleCall_1_0_0());
 					}
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getETailElementRule());
+							$current = createModelElement(grammarAccess.getESquareBracketElementRule());
 						}
 						setWithLastConsumed(
 							$current,
 							"index",
-							lv_index_2_0,
+							lv_index_1_0,
 							"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
 					}
 				)
 			)
-			otherlv_3=RightSquareBracket
-			{
-				newLeafNode(otherlv_3, grammarAccess.getETailElementAccess().getRightSquareBracketKeyword_1_2());
-			}
-		)?
+			    |
+			(
+				(
+					lv_field_2_0=RULE_STRING
+					{
+						newLeafNode(lv_field_2_0, grammarAccess.getESquareBracketElementAccess().getFieldSTRINGTerminalRuleCall_1_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getESquareBracketElementRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"field",
+							lv_field_2_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)
+		otherlv_3=RightSquareBracket
+		{
+			newLeafNode(otherlv_3, grammarAccess.getESquareBracketElementAccess().getRightSquareBracketKeyword_2());
+		}
 	)
 ;
 

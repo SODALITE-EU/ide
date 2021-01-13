@@ -3327,13 +3327,13 @@ public interface AnsibleDslPackage extends EPackage
   int EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM = 1;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
+   * The feature id for the '<em><b>Square bracket elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPARENTHESISED_EXPRESSION__INDEX = 2;
+  int EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS = 2;
 
   /**
    * The feature id for the '<em><b>Tail</b></em>' containment reference list.
@@ -4056,13 +4056,13 @@ public interface AnsibleDslPackage extends EPackage
   int ETAIL_ELEMENT__FUNCTION_CALL = 0;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
+   * The feature id for the '<em><b>Square bracket elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETAIL_ELEMENT__INDEX = 1;
+  int ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS = 1;
 
   /**
    * The number of structural features of the '<em>ETail Element</em>' class.
@@ -4074,6 +4074,43 @@ public interface AnsibleDslPackage extends EPackage
   int ETAIL_ELEMENT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl <em>ESquare Bracket Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESquareBracketElement()
+   * @generated
+   */
+  int ESQUARE_BRACKET_ELEMENT = 74;
+
+  /**
+   * The feature id for the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESQUARE_BRACKET_ELEMENT__INDEX = 0;
+
+  /**
+   * The feature id for the '<em><b>Field</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESQUARE_BRACKET_ELEMENT__FIELD = 1;
+
+  /**
+   * The number of structural features of the '<em>ESquare Bracket Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESQUARE_BRACKET_ELEMENT_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl <em>EDictionary</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4081,7 +4118,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 74;
+  int EDICTIONARY = 75;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4109,7 +4146,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 75;
+  int EDICTIONARY_PAIR = 76;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4146,7 +4183,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 76;
+  int ELIST = 77;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4174,7 +4211,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPassed()
    * @generated
    */
-  int EDICTIONARY_PASSED = 77;
+  int EDICTIONARY_PASSED = 78;
 
   /**
    * The number of structural features of the '<em>EDictionary Passed</em>' class.
@@ -4193,7 +4230,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListPassed()
    * @generated
    */
-  int ELIST_PASSED = 78;
+  int ELIST_PASSED = 79;
 
   /**
    * The number of structural features of the '<em>EList Passed</em>' class.
@@ -4212,7 +4249,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumberPassed()
    * @generated
    */
-  int ENUMBER_PASSED = 79;
+  int ENUMBER_PASSED = 80;
 
   /**
    * The feature id for the '<em><b>Number passed</b></em>' attribute.
@@ -4240,7 +4277,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanPassed()
    * @generated
    */
-  int EBOOLEAN_PASSED = 80;
+  int EBOOLEAN_PASSED = 81;
 
   /**
    * The feature id for the '<em><b>Boolean passed</b></em>' attribute.
@@ -4268,7 +4305,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEEmptyCurlyBraces()
    * @generated
    */
-  int EEMPTY_CURLY_BRACES = 81;
+  int EEMPTY_CURLY_BRACES = 82;
 
   /**
    * The feature id for the '<em><b>Left curly brace</b></em>' attribute.
@@ -6278,15 +6315,15 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEParenthesisedExpression_Parenthesised_term();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getIndex <em>Index</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getSquare_bracket_elements <em>Square bracket elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Index</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getIndex()
+   * @return the meta object for the containment reference list '<em>Square bracket elements</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getSquare_bracket_elements()
    * @see #getEParenthesisedExpression()
    * @generated
    */
-  EAttribute getEParenthesisedExpression_Index();
+  EReference getEParenthesisedExpression_Square_bracket_elements();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getTail <em>Tail</em>}'.
@@ -6854,15 +6891,47 @@ public interface AnsibleDslPackage extends EPackage
   EReference getETailElement_Function_call();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIndex <em>Index</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getSquare_bracket_elements <em>Square bracket elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Index</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIndex()
+   * @return the meta object for the containment reference list '<em>Square bracket elements</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getSquare_bracket_elements()
    * @see #getETailElement()
    * @generated
    */
-  EAttribute getETailElement_Index();
+  EReference getETailElement_Square_bracket_elements();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement <em>ESquare Bracket Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ESquare Bracket Element</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement
+   * @generated
+   */
+  EClass getESquareBracketElement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Index</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex()
+   * @see #getESquareBracketElement()
+   * @generated
+   */
+  EAttribute getESquareBracketElement_Index();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField <em>Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Field</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField()
+   * @see #getESquareBracketElement()
+   * @generated
+   */
+  EAttribute getESquareBracketElement_Field();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionary <em>EDictionary</em>}'.
@@ -8648,12 +8717,12 @@ public interface AnsibleDslPackage extends EPackage
     EReference EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM = eINSTANCE.getEParenthesisedExpression_Parenthesised_term();
 
     /**
-     * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Square bracket elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EPARENTHESISED_EXPRESSION__INDEX = eINSTANCE.getEParenthesisedExpression_Index();
+    EReference EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS = eINSTANCE.getEParenthesisedExpression_Square_bracket_elements();
 
     /**
      * The meta object literal for the '<em><b>Tail</b></em>' containment reference list feature.
@@ -9116,12 +9185,38 @@ public interface AnsibleDslPackage extends EPackage
     EReference ETAIL_ELEMENT__FUNCTION_CALL = eINSTANCE.getETailElement_Function_call();
 
     /**
+     * The meta object literal for the '<em><b>Square bracket elements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS = eINSTANCE.getETailElement_Square_bracket_elements();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl <em>ESquare Bracket Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESquareBracketElement()
+     * @generated
+     */
+    EClass ESQUARE_BRACKET_ELEMENT = eINSTANCE.getESquareBracketElement();
+
+    /**
      * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ETAIL_ELEMENT__INDEX = eINSTANCE.getETailElement_Index();
+    EAttribute ESQUARE_BRACKET_ELEMENT__INDEX = eINSTANCE.getESquareBracketElement_Index();
+
+    /**
+     * The meta object literal for the '<em><b>Field</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESQUARE_BRACKET_ELEMENT__FIELD = eINSTANCE.getESquareBracketElement_Field();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl <em>EDictionary</em>}' class.

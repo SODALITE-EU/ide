@@ -3,6 +3,8 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -15,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getFunction_call <em>Function call</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getSquare_bracket_elements <em>Square bracket elements</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETailElement()
@@ -47,25 +49,15 @@ public interface ETailElement extends EObject
   void setFunction_call(EFunctionCall value);
 
   /**
-   * Returns the value of the '<em><b>Index</b></em>' attribute.
+   * Returns the value of the '<em><b>Square bracket elements</b></em>' containment reference list.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Index</em>' attribute.
-   * @see #setIndex(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETailElement_Index()
-   * @model
+   * @return the value of the '<em>Square bracket elements</em>' containment reference list.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETailElement_Square_bracket_elements()
+   * @model containment="true"
    * @generated
    */
-  String getIndex();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getIndex <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Index</em>' attribute.
-   * @see #getIndex()
-   * @generated
-   */
-  void setIndex(String value);
+  EList<ESquareBracketElement> getSquare_bracket_elements();
 
 } // ETailElement

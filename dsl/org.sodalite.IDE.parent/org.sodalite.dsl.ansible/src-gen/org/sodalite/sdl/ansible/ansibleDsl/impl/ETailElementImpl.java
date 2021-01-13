@@ -3,8 +3,12 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,8 +16,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
+import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 
 /**
@@ -25,7 +33,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getFunction_call <em>Function call</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getSquare_bracket_elements <em>Square bracket elements</em>}</li>
  * </ul>
  *
  * @generated
@@ -43,24 +51,14 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
   protected EFunctionCall function_call;
 
   /**
-   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * The cached value of the '{@link #getSquare_bracket_elements() <em>Square bracket elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIndex()
+   * @see #getSquare_bracket_elements()
    * @generated
    * @ordered
    */
-  protected static final String INDEX_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
-  protected String index = INDEX_EDEFAULT;
+  protected EList<ESquareBracketElement> square_bracket_elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -139,23 +137,13 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * @generated
    */
   @Override
-  public String getIndex()
+  public EList<ESquareBracketElement> getSquare_bracket_elements()
   {
-    return index;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setIndex(String newIndex)
-  {
-    String oldIndex = index;
-    index = newIndex;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETAIL_ELEMENT__INDEX, oldIndex, index));
+    if (square_bracket_elements == null)
+    {
+      square_bracket_elements = new EObjectContainmentEList<ESquareBracketElement>(ESquareBracketElement.class, this, AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS);
+    }
+    return square_bracket_elements;
   }
 
   /**
@@ -170,6 +158,8 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         return basicSetFunction_call(null, msgs);
+      case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
+        return ((InternalEList<?>)getSquare_bracket_elements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -186,8 +176,8 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         return getFunction_call();
-      case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
-        return getIndex();
+      case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
+        return getSquare_bracket_elements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -197,6 +187,7 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -205,8 +196,9 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         setFunction_call((EFunctionCall)newValue);
         return;
-      case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
-        setIndex((String)newValue);
+      case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
+        getSquare_bracket_elements().clear();
+        getSquare_bracket_elements().addAll((Collection<? extends ESquareBracketElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -225,8 +217,8 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         setFunction_call((EFunctionCall)null);
         return;
-      case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
-        setIndex(INDEX_EDEFAULT);
+      case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
+        getSquare_bracket_elements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -244,27 +236,10 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         return function_call != null;
-      case AnsibleDslPackage.ETAIL_ELEMENT__INDEX:
-        return INDEX_EDEFAULT == null ? index != null : !INDEX_EDEFAULT.equals(index);
+      case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
+        return square_bracket_elements != null && !square_bracket_elements.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (index: ");
-    result.append(index);
-    result.append(')');
-    return result.toString();
   }
 
 } //ETailElementImpl
