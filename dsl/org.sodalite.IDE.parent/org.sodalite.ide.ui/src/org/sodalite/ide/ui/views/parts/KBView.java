@@ -236,7 +236,7 @@ public class KBView {
 							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
 								modelData = getKBReasoner().getAADMsInModule(module);
 							}
-							if (!modelData.getElements().isEmpty()) {
+							if (modelData != null && !modelData.getElements().isEmpty()) {
 								// Prompt user to select the target folder
 								IContainer root = getWorkspaceRoot();
 								String msg = "Select a workspace folder where to upload the models of the selected module";
