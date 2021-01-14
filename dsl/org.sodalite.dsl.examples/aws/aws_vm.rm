@@ -1,0 +1,121 @@
+node_types:
+
+  sodalite.nodes.AWS.VM:  
+    derived_from: tosca.nodes.Compute 
+    properties:  
+      network:  
+        description: "AWS subnet ID in which to launch the instance (VPC)" 
+        type: string 
+      name:  
+        description: "Name that should be given to the VM in OpenStack" 
+        type: string 
+      security_groups:  
+        description: "AWS names of the security groups to which the instance should be added."
+        type: list 
+      flavor:  
+        description: "AWS flavor"
+        type: string 
+      image:  
+        description: "AWS image" 
+        type: string 
+      key_name:  
+        description: "AWS SSH key name that should be placed on the VM" 
+        type: string 
+      username:  
+        description: "Username for SSH connection" 
+        type: string  
+      region:
+        description: "The AWS region to use."
+        required: false 
+        type: string     
+      aws_access_key:
+        description: "The AWS access key."
+        required: false 
+        type: string   
+      aws_secret_key:
+        description: "The AWS secret key."
+        required: false 
+        type: string           
+    attributes:  
+      id:  
+        description: "AWS id of the VM" 
+        type: string 
+      ansible_ip:  
+        description: "ansible ipv4" 
+        type: string 
+    requirements:  
+    	protected_by:  
+			relationship: tosca.relationships.DependsOn 
+			node: sodalite.nodes.AWS.SecurityRules 
+			capability: tosca.capabilities.Node 
+    capabilities:  
+      feature:  
+        type: tosca.capabilities.Node 
+    interfaces:  
+      Standard:  
+        type: tosca.interfaces.node.lifecycle.Standard 
+        operations:
+          create:  
+            inputs:  
+				region:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.region
+				aws_access_key:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.aws_access_key
+				aws_secret_key:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.aws_secret_key
+				vm_name:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.name
+				flavor:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.flavor	
+				image:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.image
+				network:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.network
+				key_name:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.key_name
+				security_groups:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.security_groups
+				ansible_user:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.username
+            implementation: 
+              primary: "/workspace/iac-management/use-cases/aws/modules/aws/playbooks/vm_create.yml" 
+          delete:  
+            inputs:  
+				id:  
+					default: get_attribute:
+						entity: SELF
+						attribute: sodalite.nodes.AWS.VM.id
+				aws_access_key:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.aws_access_key
+				aws_secret_key:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.aws_secret_key
+				vm_name:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.VM.name
+            implementation: 
+              primary: "/workspace/iac-management/use-cases/aws/modules/aws/playbooks/vm_delete.yml" 
