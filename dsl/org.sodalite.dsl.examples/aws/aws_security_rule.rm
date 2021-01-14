@@ -1,0 +1,137 @@
+data_types: 
+
+  sodalite.datatypes.AWS.SecurityRule:  
+    derived_from: tosca.datatypes.Root 
+    properties:  
+      proto:  
+        required: true 
+        type: string 
+        default: "tcp" 
+        constraints:  
+          	valid_values: ['tcp', 'udp', 'icmp'] 
+      from_port:  
+        required: true 
+        type: tosca.datatypes.network.PortDef 
+      to_port:  
+        type: tosca.datatypes.network.PortDef 
+        required: true 
+      cidr_ip:  
+        default: "0.0.0.0/0" 
+        required: true 
+        type: string 
+      direction:  
+        default: "ingress"
+        type: string 
+        constraints:  
+          	valid_values: ['ingress', 'egress'] 
+
+node_types:        
+
+  sodalite.nodes.AWS.SecurityRules:  
+    derived_from: tosca.nodes.Root 
+    properties:  
+      group_name:  
+        description: "Name of the security group in AWS." 
+        required: true 
+        type: string 
+      rules:  
+        required: false 
+        constraints:  
+          min_length: "1"
+        type: list 
+        entry_schema: sodalite.datatypes.AWS.SecurityRule 
+      group_description:  
+        description: "Description of the security group in AWS." 
+        required: true 
+        type: string 
+      vpc_id:
+        description: "ID of the VPC to create the group in."
+        required: true 
+        type: string  
+      region:
+        description: "The AWS region to use."
+        required: false 
+        type: string     
+      aws_access_key:
+        description: "The AWS region to use."
+        required: false 
+        type: string   
+      aws_secret_key:
+        description: "The AWS region to use."
+        required: false 
+        type: string                               
+    attributes:
+      group_id:  
+        description: "ID of the security group in AWS." 
+        type: string           
+    interfaces:  
+      Standard:  
+        type: tosca.interfaces.node.lifecycle.Standard   
+        operations:
+          create:  
+            implementation: 
+              primary: "/workspace/iac-management/use-cases/aws/modules/aws/playbooks/security_rule_create.yml" 
+            inputs:
+				rules: 
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.rules
+				vpc_id:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.vpc_id
+				region:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.region
+				aws_access_key:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.aws_access_key
+				aws_secret_key:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.aws_secret_key
+				group_name:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.group_name
+				group_description:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.group_description				
+          delete:  
+            implementation: 
+              primary: "/workspace/iac-management/use-cases/aws/modules/aws/playbooks/security_rule_delete.yml" 
+            inputs:  
+				rules: 
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.rules
+				vpc_id:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.vpc_id
+				region:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.region
+				aws_access_key:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.aws_access_key
+				aws_secret_key:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.aws_secret_key
+				group_name:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.group_name
+				group_description:  
+					default: get_property:
+						entity: SELF
+						property: sodalite.nodes.AWS.SecurityRules.group_description	
+              
+              
+              
