@@ -46,6 +46,9 @@ public class AADMHelper {
 	public static SortedMap<String, InputDef> readInputsFromAADM(ExecutionEvent event) throws PartInitException {
 		SortedMap<String, InputDef> inputs = new TreeMap<>();
 		IFile aadmFile = getSelectedFile();
+		if (aadmFile == null)
+			return inputs;
+
 		AADM_Model aadmModel = readAADMModel(aadmFile, event);
 		AADMHelper helper = new AADMHelper();
 

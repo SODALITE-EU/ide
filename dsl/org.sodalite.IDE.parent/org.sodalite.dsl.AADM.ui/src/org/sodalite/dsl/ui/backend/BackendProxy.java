@@ -81,6 +81,7 @@ import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
@@ -160,8 +161,8 @@ public class BackendProxy {
 	}
 
 	private void raiseConfigurationIssue(String message) throws Exception {
-//		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
-//		throw new Exception(message + " in Sodalite preferences pages");
+		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
 	private void generateAADMModel(IFile aadmFile, IProgressMonitor monitor) {
@@ -312,7 +313,6 @@ public class BackendProxy {
 				// TODO Ask user on save model whether to complete the model by KB
 				boolean complete = false;
 				String name = aadmFile.getName();
-
 				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL,
 						complete);
 				processValidationIssues(aadmFile, saveReport, event);
@@ -330,6 +330,14 @@ public class BackendProxy {
 								+ saveReport.getURI();
 						MessageDialog.openInformation(parent, "Save AADM", message);
 						BackendLogger.log(message);
+					}
+				});
+			} catch (NotRolePermissionException ex) {
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						MessageDialog.openError(parent, "Save AADM",
+								"You have not permissions to save the model in the declared module. \nPlease, contact the AAI SODALITE administrator");
 					}
 				});
 			} catch (Exception e) {
@@ -412,7 +420,6 @@ public class BackendProxy {
 
 					boolean complete = true;
 					String name = aadmfile.getName();
-
 					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL,
 							complete);
 					if (saveReport == null)
@@ -480,6 +487,14 @@ public class BackendProxy {
 					});
 					subMonitor.worked(-1);
 					subMonitor.done();
+				} catch (NotRolePermissionException ex) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							MessageDialog.openError(parent, "Save AADM",
+									"You have not permissions to save this model. Please, check your permission in the SODALITE AAI");
+						}
+					});
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override

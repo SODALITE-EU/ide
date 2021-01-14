@@ -117,12 +117,18 @@ public class AADM_Helper {
 
 	public static String getModule(EObject obj) {
 		AADM_Model model = findModel(obj);
-		return model.getModule();
+		if (model != null)
+			return model.getModule();
+		else
+			return null;
 	}
 
 	public static List<String> getImports(EObject obj) {
 		AADM_Model model = findModel(obj);
-		return model.getImports();
+		if (model != null)
+			return model.getImports();
+		else
+			return null;
 	}
 
 	public static String renderType(Type type) {
@@ -152,11 +158,15 @@ public class AADM_Helper {
 		for (ERequirementAssignment req : template.getNode().getRequirements().getRequirements()) {
 			if (req.getName().equals(requirement)) {
 				AADM_Model model = (AADM_Model) findModel(template);
-				String module = model.getModule();
-				if (req.getNode().getModule().equals(module)) {
-					node = findNode(model, req.getNode().getId());
-				} else {
-					// TODO Find node in KB
+				if (model != null) {
+					String module = model.getModule();
+					if (module != null) {
+						if (req.getNode().getModule().equals(module)) {
+							node = findNode(model, req.getNode().getId());
+						} else {
+							// TODO Find node in KB
+						}
+					}
 				}
 			}
 		}

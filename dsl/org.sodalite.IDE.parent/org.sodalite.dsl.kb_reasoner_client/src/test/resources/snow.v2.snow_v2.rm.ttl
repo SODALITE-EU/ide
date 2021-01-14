@@ -1,0 +1,243 @@
+# baseURI: https://www.sodalite.eu/ontologies/exchange/rm/
+# imports: https://www.sodalite.eu/ontologies/exchange/
+
+@prefix : <https://www.sodalite.eu/ontologies/exchange/rm/> .
+@prefix exchange: <https://www.sodalite.eu/ontologies/exchange/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:
+  rdf:type owl:Ontology ;
+  owl:imports exchange: ;
+  owl:versionInfo "Created by the SODALITE IDE" ;
+.
+
+:RM_1
+  rdf:type exchange:RM ;
+  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
+.
+
+	
+:Parameter_1
+  rdf:type exchange:Parameter ;
+  exchange:name "property" ;  
+  exchange:value 'mysql_db_pass' ; 
+.
+
+:Parameter_2
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+
+:Parameter_3
+  rdf:type exchange:Parameter ;
+  exchange:name "get_property" ;
+  exchange:hasParameter :Parameter_1 ;
+  exchange:hasParameter :Parameter_2 ;
+.	
+
+:Parameter_4
+  rdf:type exchange:Parameter ;
+  exchange:name "attribute" ;  
+  exchange:value 'public_address' ; 
+.
+
+:Parameter_5
+  rdf:type exchange:Parameter ;
+  exchange:name "entity" ;  
+  exchange:value 'SELF' ; 
+.
+
+:Parameter_6
+  rdf:type exchange:Parameter ;
+  exchange:name "req_cap" ;  
+  exchange:value 'snow/sodalite.nodes.ConfigurationDemo.remote_server' ; 
+.
+
+:Parameter_7
+  rdf:type exchange:Parameter ;
+  exchange:name "get_attribute" ;
+  exchange:hasParameter :Parameter_4 ;
+  exchange:hasParameter :Parameter_5 ;
+  exchange:hasParameter :Parameter_6 ;
+.	
+
+
+:Parameter_8
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_7 ; 
+.
+
+:Parameter_9
+  rdf:type exchange:Parameter ;
+  exchange:name "remote_server" ;
+  exchange:hasParameter :Parameter_8 ;
+.	
+
+:Parameter_10
+  rdf:type exchange:Parameter ;
+  exchange:name "default" ;  
+  exchange:hasParameter :Parameter_3 ; 
+.
+
+:Parameter_11
+  rdf:type exchange:Parameter ;
+  exchange:name "mysql_db_pass" ;
+  exchange:hasParameter :Parameter_10 ;
+.	
+
+:Parameter_12
+  rdf:type exchange:Parameter ;
+  exchange:name "inputs" ;
+  exchange:hasParameter :Parameter_9 ;
+  exchange:hasParameter :Parameter_11 ;
+.
+
+:Parameter_13
+  rdf:type exchange:Parameter ;
+  exchange:name "path" ;
+  exchange:value '/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/snow-uc/snow-demo/playbooks/configure_demo.yml' ;
+.
+
+:Parameter_14
+  rdf:type exchange:Parameter ;
+  exchange:name "content" ;
+  exchange:value '- hosts: all\n  become: yes\n  tasks:  \n    - name: add config files to host\n      block:\n      - file: path=/tmp/conf state=directory\n      - file: path=/tmp/conf/config.json state=absent\n      - template:\n          src: "config.json.tmpl"\n          dest: "/tmp/conf/config.json"' ;
+.
+
+
+:Parameter_15
+  rdf:type exchange:Parameter ;
+  exchange:name "primary" ;
+  exchange:hasParameter :Parameter_13 ;
+  exchange:hasParameter :Parameter_14 ;
+.
+
+:Parameter_16
+  rdf:type exchange:Parameter ;
+  exchange:name "path" ;
+  exchange:value '/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/snow-uc/snow-demo/playbooks/config.json.tmpl' ; 
+ .
+
+:Parameter_17
+  rdf:type exchange:Parameter ;
+  exchange:name "content" ;
+  exchange:value '{\n    "dbUpdateTimeout": 30000,\n    "imageUpdateTimeout": 60000,\n    "hashReadBytes": 10000,\n    "httpTimeout": 120000,\n    "pathShots": "../data/shots/",\n    "shots_folder": "../data/shots/",\n    "daily_shots_folder": "../data/daily_shots/",\n    "webcam_masks_folder": "../data/masks/",\n    "skyline_extraction_service": "http://{{ remote_server }}:8080/skyline_extraction/process",\n    "skyline_alignement_service": "http://{{ remote_server }}:8081/skyline_alignment/process",\n    "skyline_render_service": "http://{{ remote_server }}:8081/skyline_alignment/render",\n    "output_folder": "../data/output/",\n    "maxSockets": 400,\n    "mysql": {\n        "host": "mysql",\n        "user": "root",\n        "password": "{{ mysql_db_pass }}",\n        "database": "wc_crawler_db"\n    },\n    "database": {\n        "host": "mysql",\n        "user": "root",\n        "password": "{{ mysql_db_pass }}",\n        "db_name": "wc_crawler_db"\n    }\n}' ;
+.
+
+:Parameter_18
+  rdf:type exchange:Parameter ;
+  exchange:name "file" ;
+  exchange:hasParameter :Parameter_16 ;
+  exchange:hasParameter :Parameter_17 ;
+.
+
+
+:Parameter_19
+  rdf:type exchange:Parameter ;
+  exchange:name "dependencies" ;
+  exchange:hasParameter :Parameter_18 ; 
+.
+
+:Parameter_20
+  rdf:type exchange:Parameter ;
+  exchange:name "implementation" ;
+  exchange:hasParameter :Parameter_15 ;
+ exchange:hasParameter :Parameter_19 ;
+.
+
+:Parameter_21
+  rdf:type exchange:Parameter ;
+  exchange:name "create" ;
+  exchange:hasParameter :Parameter_12 ;
+  exchange:hasParameter :Parameter_20 ;
+.
+
+:Parameter_22
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'string' ;  
+.
+
+:Parameter_23
+  rdf:type exchange:Parameter ;
+  exchange:name "required" ;
+  exchange:value 'true' ;
+.
+
+
+
+
+
+
+:Property_1
+  rdf:type exchange:Property ;
+  exchange:name "mysql_db_pass" ;
+  exchange:description 'MYSQL database password' ;
+  exchange:hasParameter :Parameter_22 ;
+  exchange:hasParameter :Parameter_23 ;
+.
+
+
+:Parameter_24
+  rdf:type exchange:Parameter ;
+  exchange:name "type" ;
+  exchange:value 'tosca.interfaces.node.lifecycle.Standard' ;
+.
+
+:Parameter_25
+  rdf:type exchange:Parameter ;
+  exchange:name "operations" ;
+  exchange:hasParameter :Parameter_21 ;
+.
+
+:Interface_1
+  rdf:type exchange:Interface ;
+  exchange:name "Standard" ;
+  exchange:hasParameter :Parameter_24 ;
+  exchange:hasParameter :Parameter_25 ;
+.
+
+
+:Parameter_26
+  rdf:type exchange:Parameter ;
+  exchange:name "capability" ;
+  exchange:value 'tosca.capabilities.Compute' ;  
+.
+
+:Parameter_27
+  rdf:type exchange:Parameter ;
+  exchange:name "node" ;
+  exchange:value 'openstack/sodalite.nodes.OpenStack.VM' ;  
+.
+
+:Parameter_28
+  rdf:type exchange:Parameter ;
+  exchange:name "relationship" ;	  
+  exchange:value 'tosca.relationships.DependsOn' ;  
+.
+
+:Requirement_1
+  rdf:type exchange:Requirement ;
+  exchange:name "remote_server" ;
+  exchange:hasParameter :Parameter_26 ;
+  exchange:hasParameter :Parameter_27 ;
+  exchange:hasParameter :Parameter_28 ;
+.		
+
+:NodeType_1
+  rdf:type exchange:Type ;
+  exchange:name "sodalite.nodes.ConfigurationDemo" ;
+  exchange:derivesFrom 'tosca.nodes.SoftwareComponent' ;  
+  exchange:properties :Property_1 ; 
+  exchange:requirements :Requirement_1 ; 
+  exchange:interfaces :Interface_1 ; 
+.  
+
+
+

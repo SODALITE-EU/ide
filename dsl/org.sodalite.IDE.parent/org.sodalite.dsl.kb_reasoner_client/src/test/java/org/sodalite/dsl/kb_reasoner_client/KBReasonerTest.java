@@ -15,11 +15,13 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,15 +59,24 @@ class KBReasonerTest {
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
-	private final String user = "yosu";
-	private final String password = "qwerty";
 
 	private String aadmURI = null;
 
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI, KEYCLOAK_URI);
-		kbclient.setUserAccount(user, password, client_id, client_secret);
+		Properties credentials = readCredentials();
+		kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
+				client_secret);
+	}
+
+	private Properties readCredentials() throws IOException {
+		final Properties credentials = new Properties();
+		Path credentials_path = FileSystems.getDefault().getPath("src/test/resources/credentials.properties");
+		try (final InputStream stream = Files.newInputStream(credentials_path)) {
+			credentials.load(stream);
+		}
+		return credentials;
 	}
 
 	@Test
@@ -145,7 +156,7 @@ class KBReasonerTest {
 
 	@Test
 	void testGetTypeCapabilities() throws Exception {
-		String resourceId = "sodalite.nodes.OpenStack.VM";
+		String resourceId = "openstack/sodalite.nodes.OpenStack.VM";
 		CapabilityDefinitionData capabilities = kbclient.getTypeCapabilities(resourceId);
 		assertFalse(capabilities.getElements().isEmpty());
 		System.out.println("Capabilities for resource: " + resourceId);
@@ -243,17 +254,17 @@ class KBReasonerTest {
 		String name = "snow.aadm";
 		String namespace = "snow";
 		boolean complete = false;
-		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/optimization.aadm.ttl",
-				"src/test/resources/snow.aadm", name, namespace, complete);
-		assertTrue(report.hasErrors());
+		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/snow.v2.snow_v2.aadm.ttl",
+				"src/test/resources/snow_v2.aadm", name, namespace, complete);
+		assertFalse(report.hasErrors());
 		assertNotNull(report.getURI());
 	}
 
 	@Test
 	void testSaveRM() throws Exception {
 		String rmURI = "";
-		String name = "snow.aadm";
-		String namespace = "docker_registry.rm";
+		String name = "docker_registry.rm";
+		String namespace = "docker";
 		KBSaveReportData report = saveRM(rmURI, "src/test/resources/modules.docker_registry.rm.ttl",
 				"src/test/resources/docker_registry.rm", name, namespace);
 		assertFalse(report.hasErrors());

@@ -74,6 +74,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.sodalite.dsl.RM.ui.internal.RMActivator;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
@@ -142,8 +143,8 @@ public class BackendProxy {
 	}
 
 	private void raiseConfigurationIssue(String message) throws Exception {
-//		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
-//		throw new Exception(message + " in Sodalite preferences pages");
+		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
 	public void processSaveRM(ExecutionEvent event) throws Exception {
@@ -267,7 +268,6 @@ public class BackendProxy {
 				// Get module (namespace) from RM
 				String namespace = getRMModule(rmFile, event);
 				String name = rmFile.getName();
-
 				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI, name, namespace, rmDSL);
 				processValidationIssues(rmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
@@ -282,6 +282,14 @@ public class BackendProxy {
 						MessageDialog.openInformation(parent, "Save RM",
 								"The selected RM model has been successfully store in the KB with URI:\n"
 										+ saveReport.getURI());
+					}
+				});
+			} catch (NotRolePermissionException ex) {
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						MessageDialog.openError(parent, "Save RM",
+								"You have not permissions to save the model in the declared module. \nPlease, contact the AAI SODALITE administrator");
 					}
 				});
 			} catch (Exception e) {

@@ -23,6 +23,7 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.sodalite.dsl.RM.ui.internal,
  org.sodalite.dsl.kb_reasoner_client,
+ org.sodalite.dsl.kb_reasoner_client.exceptions,
  org.sodalite.dsl.kb_reasoner_client.json,
  org.sodalite.dsl.kb_reasoner_client.types,
  org.sodalite.dsl.ui.contentassist,

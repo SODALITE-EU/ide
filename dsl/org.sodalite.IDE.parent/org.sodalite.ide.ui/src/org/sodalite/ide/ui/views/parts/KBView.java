@@ -167,9 +167,9 @@ public class KBView {
 	}
 
 	private void raiseConfigurationIssue(String message) throws Exception {
-//		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
-//		throw new Exception(message + " in Sodalite preferences pages");
+		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
 	private void createContextMenu(TreeViewer viewer) {
@@ -236,7 +236,7 @@ public class KBView {
 							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
 								modelData = getKBReasoner().getAADMsInModule(module);
 							}
-							if (!modelData.getElements().isEmpty()) {
+							if (modelData != null && !modelData.getElements().isEmpty()) {
 								// Prompt user to select the target folder
 								IContainer root = getWorkspaceRoot();
 								String msg = "Select a workspace folder where to upload the models of the selected module";

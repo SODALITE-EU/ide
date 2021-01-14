@@ -7,7 +7,10 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
@@ -81,9 +84,9 @@ public class KBReasonerProxy {
 	}
 
 	private static void raiseConfigurationIssue(String message) throws Exception {
-//		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
-//		throw new Exception(message + " in Sodalite preferences pages");
+		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
 	public SortedSet<String> getTypes(ENodeTemplate node) {

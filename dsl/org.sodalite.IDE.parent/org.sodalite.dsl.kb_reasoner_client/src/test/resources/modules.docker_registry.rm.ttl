@@ -164,7 +164,7 @@
 :Parameter_23
   rdf:type exchange:Parameter ;
   exchange:name "content" ;
-  exchange:value '---\n- hosts: all\n  become_user: root\n  become: yes\n  tasks:\n  - name: logging into Docker Registry\n    docker_login:\n      registry: "{{ docker_registry_url }}"\n      username: "{{ docker_user }}"\n      password: "{{ docker_pass }}"\n    when: docker_user != ""      \n  ' ;
+  exchange:value '---\n  - hosts: all\n    become_user: root\n    become: yes\n  \n    tasks:\n    - name: logging out Docker Hub\n      docker_login:\n        registry: "{{ docker_registry_url }}"\n        state: "absent"\n    - name: logging into Docker Registry\n      docker_login:\n        registry: "{{ docker_registry_url }}"\n        username: "{{ docker_user }}"\n        password: "{{ docker_pass }}"\n      when: \n        - docker_user != None \n        - docker_user != ""    \n  ' ;
 .
 
 
@@ -231,7 +231,7 @@
 :Parameter_33
   rdf:type exchange:Parameter ;
   exchange:name "type" ;
-  exchange:value 'string' ;
+  exchange:value 'string' ;  
 .
 
 :Parameter_34
@@ -255,7 +255,7 @@
 :Parameter_35
   rdf:type exchange:Parameter ;
   exchange:name "type" ;
-  exchange:value 'string' ;
+  exchange:value 'string' ;  
 .
 
 :Parameter_36
@@ -285,7 +285,7 @@
 :Parameter_38
   rdf:type exchange:Parameter ;
   exchange:name "type" ;
-  exchange:value 'string' ;
+  exchange:value 'string' ;  
 .
 
 :Parameter_39
@@ -337,9 +337,9 @@
 
 
 :NodeType_1
-  rdf:type exchange:NodeType ;
+  rdf:type exchange:Type ;
   exchange:name "sodalite.nodes.DockerRegistry" ;
-  exchange:derivesFrom "tosca.nodes.SoftwareComponent" ;
+  exchange:derivesFrom 'tosca.nodes.SoftwareComponent' ;  
   exchange:properties :Property_1 ; 
   exchange:properties :Property_2 ; 
   exchange:properties :Property_3 ; 
