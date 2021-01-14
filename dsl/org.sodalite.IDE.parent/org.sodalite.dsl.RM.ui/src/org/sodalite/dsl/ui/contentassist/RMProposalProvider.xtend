@@ -365,12 +365,12 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	override void completeGetAttributeBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//TODO
+		//TODO implement body
 	
 	}
 	
 	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//TODO
+		//TODO implement body
 
 	}
 	

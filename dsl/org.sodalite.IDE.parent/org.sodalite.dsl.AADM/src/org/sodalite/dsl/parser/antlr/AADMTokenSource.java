@@ -16,19 +16,16 @@ public class AADMTokenSource extends AbstractIndentationTokenSource {
 
 	@Override
 	protected boolean shouldSplitTokenImpl(Token token) {
-		// TODO Review assumption
 		return token.getType() == InternalAADMParser.RULE_WS;
 	}
 
 	@Override
 	protected int getBeginTokenType() {
-		// TODO Review assumption
 		return InternalAADMParser.RULE_BEGIN;
 	}
 
 	@Override
 	protected int getEndTokenType() {
-		// TODO Review assumption
 		return InternalAADMParser.RULE_END;
 	}
 
