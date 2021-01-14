@@ -95,7 +95,8 @@ public class AADM_Helper {
 	}
 
 	public static String renderTemplate(ENodeTemplate type) {
-		return (getModule(type) != null ? renderModule(getModule(type)) + "/" : "") + type.getName();
+		String module = getModule(type);
+		return (module != null ? renderModule(module) + "/" : "") + type.getName();
 	}
 
 	public static String renderModule(String module) {

@@ -281,7 +281,7 @@ public class KBView {
 							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
 								modelData = getKBReasoner().getAADMsInModule(module);
 							}
-							if (!modelData.getElements().isEmpty()) {
+							if (modelData != null && !modelData.getElements().isEmpty()) {
 								boolean confirmed = MessageDialog.openConfirm(shell, "Delete models in module",
 										"Do you want to delete all the models in module " + module);
 								if (confirmed) {

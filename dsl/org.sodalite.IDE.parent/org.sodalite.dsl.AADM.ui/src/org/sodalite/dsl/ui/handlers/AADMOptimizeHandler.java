@@ -7,11 +7,11 @@ import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.sodalite.dsl.ui.backend.BackendProxy;
+import org.sodalite.dsl.ui.backend.AADMBackendProxy;
 
 public class AADMOptimizeHandler implements IHandler {
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	private BackendProxy backendProxy = new BackendProxy();
+	private AADMBackendProxy backendProxy = new AADMBackendProxy();
 
 	@Override
 	public void addHandlerListener(IHandlerListener handlerListener) {
@@ -26,15 +26,16 @@ public class AADMOptimizeHandler implements IHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			if (PlatformUI.getWorkbench().saveAllEditors(true)) //Ask to save model before continue
+			if (PlatformUI.getWorkbench().saveAllEditors(true)) // Ask to save model before continue
 				backendProxy.processOptimizeAADM(event);
-		}catch (Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
-			MessageDialog.openError(parent, "Get AADM optimization recommendations error", "There were an error reported by the KB:\n" + ex.getMessage());
+			MessageDialog.openError(parent, "Get AADM optimization recommendations error",
+					"There were an error reported by the KB:\n" + ex.getMessage());
 		}
 		return this;
 	}
-	
+
 	@Override
 	public boolean isEnabled() {
 		// TODO Validate AADM before enabling

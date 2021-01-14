@@ -89,14 +89,14 @@ import org.sodalite.dsl.ui.validation.ValidationIssue;
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 
-public class BackendProxy {
+public class RMBackendProxy {
 	private MarkerCreator markerCreator;
 	private MarkerTypeProvider markerTypeProvider;
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-	private KBReasonerClient getKBReasoner() throws Exception {
+	protected KBReasonerClient getKBReasoner() throws Exception {
 		// Configure KBReasonerClient endpoint from preference page information
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
@@ -158,7 +158,7 @@ public class BackendProxy {
 		String rmTTL = readTurtle(rmFile, project);
 
 		// Send model to the KB
-		String rmUri = getRmURI(rmFile, project);
+		String rmUri = getModelURI(rmFile, project);
 		saveRM(rmTTL, rmFile, rmUri, project, event);
 	}
 
@@ -189,16 +189,16 @@ public class BackendProxy {
 		}
 	}
 
-	private String readTurtle(IFile modelFile, IProject project) throws IOException {
+	protected String readTurtle(IFile modelFile, IProject project) throws IOException {
 		String filename = modelFile.getFullPath().toOSString()
 				.substring(modelFile.getFullPath().toOSString().indexOf(File.separator, 1) + 1)
 				.replaceFirst(File.separator, ".");
 		IFile turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
 		String turtle_path = turtle.getLocationURI().toString();
 		turtle_path = turtle_path.substring(turtle_path.indexOf(File.separator));
-		Path rm_path = FileSystems.getDefault().getPath(turtle_path);
-		String rmTTL = new String(Files.readAllBytes(rm_path));
-		return rmTTL;
+		Path model_path = FileSystems.getDefault().getPath(turtle_path);
+		String modelTTL = new String(Files.readAllBytes(model_path));
+		return modelTTL;
 	}
 
 	private String readFile(IFile file) throws IOException {
@@ -209,8 +209,8 @@ public class BackendProxy {
 		return content;
 	}
 
-	private String getRmURI(IFile rmfile, IProject project) throws IOException {
-		Path path = getRMPropertiesFile(rmfile, project);
+	protected String getModelURI(IFile modelfile, IProject project) throws IOException {
+		Path path = getModelPropertiesFile(modelfile, project);
 		String uri = null;
 		if (Files.exists(path)) {
 			Properties props = new Properties();
@@ -225,11 +225,14 @@ public class BackendProxy {
 		return uri;
 	}
 
-	private Path getRMPropertiesFile(IFile rmfile, IProject project) {
-		String filepath = rmfile.toString();
+	protected Path getModelPropertiesFile(IFile modelfile, IProject project) {
+		String filepath = modelfile.toString();
 		String filename = filepath.substring(filepath.lastIndexOf(File.separator) + 1);
-		String directory = filepath.substring(filepath.indexOf(File.separator, 2) + 1,
-				filepath.lastIndexOf(File.separator));
+		int index1 = filepath.indexOf(File.separator, 2) + 1;
+		int index2 = filepath.lastIndexOf(File.separator);
+		String directory = "";
+		if (index2 > index1)
+			directory = filepath.substring(index1, index2);
 		IFile propertiesFile = project.getFile(directory + File.separator + "." + filename + ".properties");
 		String properties_path = propertiesFile.getLocationURI().toString();
 		properties_path = properties_path.substring(properties_path.indexOf(File.separator));
@@ -237,8 +240,8 @@ public class BackendProxy {
 		return path;
 	}
 
-	private void saveURI(String uri, IFile rmfile, IProject project) throws IOException {
-		Path path = getRMPropertiesFile(rmfile, project);
+	protected void saveURI(String uri, IFile modelfile, IProject project) throws IOException {
+		Path path = getModelPropertiesFile(modelfile, project);
 		Properties props = new Properties();
 
 		// Create properties file if it does not exist
@@ -307,21 +310,21 @@ public class BackendProxy {
 		job.schedule();
 	}
 
-	private void processValidationIssues(IFile rmFile, KBSaveReportData saveReport, ExecutionEvent event)
+	protected void processValidationIssues(IFile modelFile, KBSaveReportData saveReport, ExecutionEvent event)
 			throws Exception {
 		// TODO Check there are not warnings (they do not prevent storage in KB)
-		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings())) {
+		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
 			// Open RM file if not opened to show the errors and warnings
-			openFileInEditor(rmFile);
-			List<ValidationIssue> issues = readRecommendationsFromKB(saveReport);
-			manageRecommendationIssues(event, issues);
+			openFileInEditor(modelFile);
+			List<ValidationIssue> issues = readIssuesFromKB(saveReport);
+			manageIssues(event, issues);
 			if (saveReport.hasErrors()) {
-				throw new Exception("There are detected validation issues in the AADM, please fix them");
+				throw new Exception("There are detected validation issues in the model, please fix them");
 			}
 		}
 	}
 
-	private void openFileInEditor(IFile file) throws PartInitException {
+	protected void openFileInEditor(IFile file) throws PartInitException {
 		Display.getDefault().syncExec(new Runnable() {
 			@Override
 			public void run() {
@@ -330,13 +333,13 @@ public class BackendProxy {
 				try {
 					page.openEditor(new FileEditorInput(file), desc.getId());
 				} catch (PartInitException e) {
-					e.printStackTrace();
+					BackendLogger.log("Error open model in editor", e);
 				}
 			}
 		});
 	}
 
-	private List<ValidationIssue> readRecommendationsFromKB(KBSaveReportData saveReport) {
+	protected List<ValidationIssue> readIssuesFromKB(KBSaveReportData saveReport) {
 		// TODO Read issues from KB recommendations
 		List<ValidationIssue> issues = new ArrayList<>();
 
@@ -364,7 +367,7 @@ public class BackendProxy {
 		return issues;
 	}
 
-	private void manageRecommendationIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
+	protected void manageIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {
 			IValidationIssueProcessor issueProcessor;
@@ -386,7 +389,7 @@ public class BackendProxy {
 		}
 	}
 
-	private List<Issue> createIssues(IXtextDocument xtextDocument, List<ValidationIssue> validationIssues) {
+	protected List<Issue> createIssues(IXtextDocument xtextDocument, List<ValidationIssue> validationIssues) {
 		final List<Issue> issues = xtextDocument.tryReadOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
 			@Override
 			public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
@@ -397,7 +400,7 @@ public class BackendProxy {
 		return issues;
 	}
 
-	private void resolvedInjectedXtextObjects(XtextResource resource) {
+	protected void resolvedInjectedXtextObjects(XtextResource resource) {
 		issueResolutionProvider = resource.getResourceServiceProvider().get(IssueResolutionProvider.class);
 		markerTypeProvider = resource.getResourceServiceProvider().get(MarkerTypeProvider.class);
 		markerCreator = resource.getResourceServiceProvider().get(MarkerCreator.class);
@@ -440,7 +443,7 @@ public class BackendProxy {
 		return data;
 	}
 
-	private ValidationSourceFeature getIssueFeature(XtextResource resource, String path, String path_type) {
+	protected ValidationSourceFeature getIssueFeature(XtextResource resource, String path, String path_type) {
 		// Extract object path to find nodes
 		StringTokenizer st = new StringTokenizer(path, "/");
 		ValidationSourceFeature result = null;

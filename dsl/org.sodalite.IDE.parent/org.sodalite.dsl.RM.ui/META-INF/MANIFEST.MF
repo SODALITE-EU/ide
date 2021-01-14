@@ -26,6 +26,7 @@ Export-Package: org.sodalite.dsl.RM.ui.internal,
  org.sodalite.dsl.kb_reasoner_client.exceptions,
  org.sodalite.dsl.kb_reasoner_client.json,
  org.sodalite.dsl.kb_reasoner_client.types,
+ org.sodalite.dsl.ui.backend,
  org.sodalite.dsl.ui.contentassist,
  org.sodalite.dsl.ui.quickfix,
  org.sodalite.dsl.ui.validation

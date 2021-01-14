@@ -1,25 +1,13 @@
 package org.sodalite.dsl.ui.backend;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.channels.Channels;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.StringTokenizer;
@@ -32,23 +20,18 @@ import java.util.stream.Collectors;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -57,30 +40,17 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
-import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
-import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
-import org.eclipse.xtext.ui.editor.validation.MarkerIssueProcessor;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
-import org.eclipse.xtext.validation.CheckType;
-import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
-import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADMPackage;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
-import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
@@ -98,72 +68,18 @@ import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.ui.helper.AADMHelper;
-import org.sodalite.dsl.ui.preferences.Activator;
-import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.inject.Injector;
 
-public class BackendProxy {
+public class AADMBackendProxy extends RMBackendProxy {
 	private MarkerCreator markerCreator;
 	private MarkerTypeProvider markerTypeProvider;
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-
-	private KBReasonerClient getKBReasoner() throws Exception {
-		// Configure KBReasonerClient endpoint from preference page information
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-
-		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		if (kbReasonerURI.isEmpty())
-			raiseConfigurationIssue("KB Reasoner URI user not set");
-
-		String iacURI = store.getString(PreferenceConstants.IaC_URI);
-		if (iacURI.isEmpty())
-			raiseConfigurationIssue("IaC URI user not set");
-
-		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
-		if (xoperaURI.isEmpty())
-			raiseConfigurationIssue("xOpera URI user not set");
-
-		String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
-		if (keycloakURI.isEmpty())
-			raiseConfigurationIssue("Keycloak URI user not set");
-
-		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
-
-		String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-		if (keycloak_user.isEmpty())
-			raiseConfigurationIssue("Keycloak user not set");
-
-		String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-		if (keycloak_password.isEmpty())
-			raiseConfigurationIssue("Keycloak password not set");
-
-		String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-		if (keycloak_client_id.isEmpty())
-			raiseConfigurationIssue("Keycloak client_id not set");
-
-		String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-		if (keycloak_client_secret.isEmpty())
-			raiseConfigurationIssue("Keycloak client secret not set");
-
-		kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
-
-		BackendLogger.log(MessageFormat.format(
-				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
-				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
-		return kbclient;
-	}
-
-	private void raiseConfigurationIssue(String message) throws Exception {
-		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
-		throw new Exception(message + " in Sodalite preferences pages");
-	}
 
 	private void generateAADMModel(IFile aadmFile, IProgressMonitor monitor) {
 		try {
@@ -201,7 +117,7 @@ public class BackendProxy {
 		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFile, project);
-		String aadmURI = getAadmURI(aadmFile, project);
+		String aadmURI = getModelURI(aadmFile, project);
 
 		// Send model to the KB
 		saveAADM(aadmTTL, aadmFile, aadmURI, project, event);
@@ -218,7 +134,7 @@ public class BackendProxy {
 		String aadmTTL = readTurtle(aadmFile, project);
 
 		// Send model to the KB
-		String aadmURI = getAadmURI(aadmFile, project);
+		String aadmURI = getModelURI(aadmFile, project);
 		optimizeAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 
@@ -232,70 +148,8 @@ public class BackendProxy {
 		String aadmTTL = readTurtle(aadmFile, project);
 
 		// Deploy AADM model
-		String aadmURI = getAadmURI(aadmFile, project);
+		String aadmURI = getModelURI(aadmFile, project);
 		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, project, event);
-	}
-
-	private String readTurtle(IFile modelFile, IProject project) throws IOException {
-		String filename = modelFile.getFullPath().toOSString()
-				.substring(modelFile.getFullPath().toOSString().indexOf(File.separator, 1) + 1)
-				.replaceFirst(File.separator, ".");
-		IFile turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
-		String turtle_path = turtle.getLocationURI().toString();
-		turtle_path = turtle_path.substring(turtle_path.indexOf(File.separator));
-		Path aadm_path = FileSystems.getDefault().getPath(turtle_path);
-		String aadmTTL = new String(Files.readAllBytes(aadm_path));
-		return aadmTTL;
-	}
-
-	private String getAadmURI(IFile aadmFile, IProject project) throws IOException {
-		Path path = getAadmPropertiesFile(aadmFile, project);
-		String uri = null;
-		if (Files.exists(path)) {
-			Properties props = new Properties();
-			try (final FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
-					final InputStream in = Channels.newInputStream(channel);
-					final FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
-				props.load(in);
-			}
-			uri = props.getProperty("URI");
-		}
-
-		return uri;
-	}
-
-	private Path getAadmPropertiesFile(IFile aadmfile, IProject project) {
-		String filepath = aadmfile.toString();
-		String filename = filepath.substring(filepath.lastIndexOf(File.separator) + 1);
-		int index1 = filepath.indexOf(File.separator, 2) + 1;
-		int index2 = filepath.lastIndexOf(File.separator);
-		String directory = "";
-		if (index2 > index1)
-			directory = filepath.substring(index1, index2);
-		IFile propertiesFile = project.getFile(directory + File.separator + "." + filename + ".properties");
-		String properties_path = propertiesFile.getLocationURI().toString();
-		properties_path = properties_path.substring(properties_path.indexOf(File.separator));
-		Path path = FileSystems.getDefault().getPath(properties_path);
-		return path;
-	}
-
-	private void saveURI(String uri, IFile aadmFile, IProject project) throws IOException {
-		Path path = getAadmPropertiesFile(aadmFile, project);
-		Properties props = new Properties();
-
-		// Create properties file if it does not exist
-		if (!Files.exists(path, LinkOption.NOFOLLOW_LINKS))
-			Files.createFile(path);
-		try (final FileChannel inChannel = FileChannel.open(path, StandardOpenOption.READ);
-				final InputStream in = Channels.newInputStream(inChannel);
-				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
-			props.load(in);
-		}
-		props.setProperty("URI", uri);
-		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE);
-				final OutputStream out = Channels.newOutputStream(outChannel)) {
-			props.store(out, "Sodalite Metadata");
-		}
 	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
@@ -518,26 +372,12 @@ public class BackendProxy {
 		job.schedule();
 	}
 
-	private void processValidationIssues(IFile aadmFile, KBSaveReportData saveReport, ExecutionEvent event)
-			throws Exception {
-		// Check there are not warnings (they do not prevent storage in KB)
-		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
-			// Open AADM file if not opened to show the errors and warnings
-			AADMHelper.openFileInEditor(aadmFile);
-			List<ValidationIssue> issues = readIssuesFromKB(saveReport);
-			manageIssues(event, issues);
-			if (saveReport.hasErrors()) {
-				throw new Exception("There are detected validation issues in the AADM, please fix them");
-			}
-		}
-	}
-
 	private void processOptimizationIssues(IFile aadmFile, KBOptimizationReportData optimizationReport,
 			ExecutionEvent event) throws Exception {
 		// Check there are not warnings (they do not prevent storage in KB)
 		if (optimizationReport != null && (optimizationReport.hasErrors() || optimizationReport.hasWarnings())) {
 			// Open AADM file if not opened to show the errors and warnings
-			AADMHelper.openFileInEditor(aadmFile);
+			openFileInEditor(aadmFile);
 
 			List<ValidationIssue> issues = readIssuesFromKB(optimizationReport);
 			manageIssues(event, issues);
@@ -557,7 +397,7 @@ public class BackendProxy {
 				openOptimizationModel(nodeName, aadmModel);
 				List<ValidationIssue> issues = readOptimizationIssuesFromKB(
 						getIssuesForModel(optimizationReport, node));
-				manageOptimizationIssues(event, issues);
+				manageIssues(event, issues);
 			}
 
 			if (optimizationReport.hasOptimizationErrors()) {
@@ -608,7 +448,7 @@ public class BackendProxy {
 		Optimization_Model optimizationModel = nodeTemplate.getNode().getOptimization();
 		// Open the optimization model
 		IFile file = getFileFromModel(optimizationModel);
-		AADMHelper.openFileInEditor(file);
+		openFileInEditor(file);
 	}
 
 	private IFile getFileFromModel(Optimization_Model optimizationModel) {
@@ -632,6 +472,7 @@ public class BackendProxy {
 		return nodes;
 	}
 
+	// TODO Reuse readIssuesFromKB from RMBackendProxy
 	private List<ValidationIssue> readIssuesFromKB(KBOptimizationReportData optimizationReport) {
 		List<ValidationIssue> issues = new ArrayList<>();
 
@@ -692,7 +533,8 @@ public class BackendProxy {
 		return suggestion.replace(":{", ": ").replace("}", "").replace(",", ", ").replace("{", "").replace("\"", "");
 	}
 
-	private List<ValidationIssue> readIssuesFromKB(KBSaveReportData saveReport) {
+	@Override
+	protected List<ValidationIssue> readIssuesFromKB(KBSaveReportData saveReport) {
 		// Read issues from KB recommendations
 		List<ValidationIssue> issues = new ArrayList<>();
 
@@ -783,106 +625,8 @@ public class BackendProxy {
 		return sb.toString();
 	}
 
-	// TODO Fix this code
-	private void manageOptimizationIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
-		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
-		if (xtextEditor != null) {
-			IValidationIssueProcessor issueProcessor;
-			IXtextDocument xtextDocument = xtextEditor.getDocument();
-			IResource resource = xtextEditor.getResource();
-
-			List<Issue> issues = createIssues(xtextDocument, validationIssues);
-
-			if (resource != null)
-				issueProcessor = new MarkerIssueProcessor(resource,
-						xtextEditor.getInternalSourceViewer().getAnnotationModel(), markerCreator, markerTypeProvider);
-			else
-				issueProcessor = new AnnotationIssueProcessor(xtextDocument,
-						xtextEditor.getInternalSourceViewer().getAnnotationModel(), issueResolutionProvider);
-
-			// Process Issues
-			IProgressMonitor monitor = new NullProgressMonitor();
-			issueProcessor.processIssues(issues, monitor);
-		}
-	}
-
-	private void manageIssues(ExecutionEvent event, List<ValidationIssue> validationIssues) {
-		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
-		if (xtextEditor != null) {
-			IValidationIssueProcessor issueProcessor;
-			IXtextDocument xtextDocument = xtextEditor.getDocument();
-			IResource resource = xtextEditor.getResource();
-
-			List<Issue> issues = createIssues(xtextDocument, validationIssues);
-
-			if (resource != null)
-				issueProcessor = new MarkerIssueProcessor(resource,
-						xtextEditor.getInternalSourceViewer().getAnnotationModel(), markerCreator, markerTypeProvider);
-			else
-				issueProcessor = new AnnotationIssueProcessor(xtextDocument,
-						xtextEditor.getInternalSourceViewer().getAnnotationModel(), issueResolutionProvider);
-
-			// Process Issues
-			IProgressMonitor monitor = new NullProgressMonitor();
-			issueProcessor.processIssues(issues, monitor);
-		}
-	}
-
-	private List<Issue> createIssues(IXtextDocument xtextDocument, List<ValidationIssue> validationIssues) {
-		final List<Issue> issues = xtextDocument.tryReadOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
-			@Override
-			public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
-				resolvedInjectedXtextObjects(resource);
-				return createIssues(resource, validationIssues);
-			}
-		}, () -> Collections.emptyList());
-		return issues;
-	}
-
-	private void resolvedInjectedXtextObjects(XtextResource resource) {
-		issueResolutionProvider = resource.getResourceServiceProvider().get(IssueResolutionProvider.class);
-		markerTypeProvider = resource.getResourceServiceProvider().get(MarkerTypeProvider.class);
-		markerCreator = resource.getResourceServiceProvider().get(MarkerCreator.class);
-		converter = resource.getResourceServiceProvider().get(IDiagnosticConverter.class);
-	}
-
-	protected List<Issue> createIssues(XtextResource resource, List<ValidationIssue> validationIssues) {
-		final List<Issue> result = Lists
-				.newArrayListWithExpectedSize(resource.getErrors().size() + resource.getWarnings().size());
-		IAcceptor<Issue> acceptor = new ListBasedMarkerAcceptor(result);
-
-		// Create Diagnostics from issues
-		List<FeatureBasedDiagnostic> diagnostics = new ArrayList<FeatureBasedDiagnostic>();
-
-		for (ValidationIssue issue : validationIssues) {
-			// Add diagnostic
-			ValidationSourceFeature sourceFeature = getIssueFeature(resource, issue.getPath(), issue.getPathType());
-			if (sourceFeature == null)
-				continue; // Reported issue that does not correspond to the AADM
-			String[] data = processIssueData(issue.getData());
-			diagnostics.add(new FeatureBasedDiagnostic(toDiagnosticSeverity(issue.getType()), issue.getMessage(),
-					sourceFeature.getSource(), sourceFeature.getFeature(),
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, CheckType.NORMAL, issue.getCode(), data));
-		}
-
-		for (Diagnostic diagnostic : diagnostics) {
-			converter.convertValidatorDiagnostic(diagnostic, acceptor);
-		}
-
-		return result;
-	}
-
-	private String[] processIssueData(Object obj) {
-		String[] data = null;
-		if (obj instanceof ArrayList) {
-			data = (String[]) ((ArrayList<String>) obj).toArray(new String[((ArrayList) obj).size()]);
-		} else {
-			data = new String[] { obj.toString() };
-		}
-		return data;
-	}
-
-	private ValidationSourceFeature getIssueFeature(XtextResource resource, String path, String path_type) {
+	@Override
+	protected ValidationSourceFeature getIssueFeature(XtextResource resource, String path, String path_type) {
 		// Extract object path to find nodes
 		StringTokenizer st = new StringTokenizer(path, "/");
 		ValidationSourceFeature result = null;
@@ -974,52 +718,5 @@ public class BackendProxy {
 		if (matcher.find())
 			req = matcher.group(1);
 		return req;
-	}
-
-	protected static class ListBasedMarkerAcceptor implements IAcceptor<Issue> {
-		private final List<Issue> result;
-
-		protected ListBasedMarkerAcceptor(List<Issue> result) {
-			this.result = result;
-		}
-
-		@Override
-		public void accept(Issue issue) {
-			if (issue != null)
-				result.add(issue);
-		}
-	}
-
-	protected int toDiagnosticSeverity(Severity severity) {
-		int diagnosticSeverity = -1;
-		switch (severity) {
-		case ERROR:
-			diagnosticSeverity = Diagnostic.ERROR;
-			break;
-		case WARNING:
-			diagnosticSeverity = Diagnostic.WARNING;
-			break;
-		default:
-			throw new IllegalArgumentException("Unknow severity " + severity);
-		}
-		return diagnosticSeverity;
-	}
-
-	protected class ValidationSourceFeature {
-		EStructuralFeature feature;
-		EObject source;
-
-		public ValidationSourceFeature(EObject source, EStructuralFeature feature) {
-			this.source = source;
-			this.feature = feature;
-		}
-
-		public EStructuralFeature getFeature() {
-			return feature;
-		}
-
-		public EObject getSource() {
-			return source;
-		}
 	}
 }

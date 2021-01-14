@@ -7,11 +7,11 @@ import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.sodalite.dsl.ui.backend.BackendProxy;
+import org.sodalite.dsl.ui.backend.RMBackendProxy;
 
 public class RMSaveHandler implements IHandler {
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	private BackendProxy backendProxy = new BackendProxy();
+	private RMBackendProxy backendProxy = new RMBackendProxy();
 	
 	@Override
 	public void addHandlerListener(IHandlerListener handlerListener) {
