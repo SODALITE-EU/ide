@@ -184,7 +184,7 @@ public class RMBackendProxy {
 				}
 			});
 		} catch (IOException e) {
-			e.printStackTrace();
+			BackendLogger.log("Error generating model", e);
 		}
 	}
 
@@ -302,7 +302,7 @@ public class RMBackendProxy {
 								"There were problems to store the RM into the KB: " + e.getMessage());
 					}
 				});
-				e.printStackTrace();
+				BackendLogger.log("Error saving model", e);
 			}
 		});
 		job.setPriority(Job.SHORT);

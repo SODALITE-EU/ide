@@ -103,7 +103,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 				}
 			});
 		} catch (IOException e) {
-			e.printStackTrace();
+			BackendLogger.log("Error generating the AADM model", e);
 		}
 	}
 
@@ -361,7 +361,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 							BackendLogger.log(message, e);
 						}
 					});
-					e.printStackTrace();
+					BackendLogger.log("Error deploying model", e);
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;

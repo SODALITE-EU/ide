@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
+import org.sodalite.dsl.ui.backend.BackendLogger;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
 
 public class DeploymentWizardMainPage extends WizardPage {
@@ -87,7 +88,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 								// Assign inputs values in wizard form
 								input -> processInput(input));
 					} catch (IOException e) {
-						e.printStackTrace();
+						BackendLogger.log("Error", e);
 					}
 				}
 			}

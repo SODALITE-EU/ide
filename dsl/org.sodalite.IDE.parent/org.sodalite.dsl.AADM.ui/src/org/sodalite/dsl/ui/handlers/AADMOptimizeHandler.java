@@ -29,7 +29,6 @@ public class AADMOptimizeHandler implements IHandler {
 			if (PlatformUI.getWorkbench().saveAllEditors(true)) // Ask to save model before continue
 				backendProxy.processOptimizeAADM(event);
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			MessageDialog.openError(parent, "Get AADM optimization recommendations error",
 					"There were an error reported by the KB:\n" + ex.getMessage());
 		}

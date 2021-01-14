@@ -29,7 +29,6 @@ public class AADMSaveHandler implements IHandler {
 			if (PlatformUI.getWorkbench().saveAllEditors(true)) // Ask to save model before continue
 				backendProxy.processSaveAADM(event);
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			MessageDialog.openError(parent, "Save AADM Error",
 					"There were an error reported by the KB:\n" + ex.getMessage());
 		}
