@@ -40,11 +40,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
-import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
-import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADMPackage;
 import org.sodalite.dsl.aADM.AADM_Model;
@@ -75,10 +71,6 @@ import com.google.gson.JsonObject;
 import com.google.inject.Injector;
 
 public class AADMBackendProxy extends RMBackendProxy {
-	private MarkerCreator markerCreator;
-	private MarkerTypeProvider markerTypeProvider;
-	private IssueResolutionProvider issueResolutionProvider;
-	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
 	private void generateAADMModel(IFile aadmFile, IProgressMonitor monitor) {
