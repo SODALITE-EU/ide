@@ -268,8 +268,7 @@ public class BackendProxy {
 				// Get module (namespace) from RM
 				String namespace = getRMModule(rmFile, event);
 				String name = rmFile.getName();
-				String token = getKBReasoner().getSecurityToken();
-				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI, name, namespace, rmDSL, token);
+				KBSaveReportData saveReport = getKBReasoner().saveRM(rmTTL, rmURI, name, namespace, rmDSL);
 				processValidationIssues(rmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception(
@@ -290,7 +289,7 @@ public class BackendProxy {
 					@Override
 					public void run() {
 						MessageDialog.openError(parent, "Save RM",
-								"You have not permissions to save this model. Please, check your permission in the SODALITE AAI");
+								"You have not permissions to save the model in the declared module. \nPlease, contact the AAI SODALITE administrator");
 					}
 				});
 			} catch (Exception e) {

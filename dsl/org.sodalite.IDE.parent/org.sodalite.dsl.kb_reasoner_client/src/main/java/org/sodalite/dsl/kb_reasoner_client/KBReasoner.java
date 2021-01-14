@@ -106,6 +106,6 @@ public interface KBReasoner {
 
 	Boolean isValidToken(String token) throws Exception;
 
-	void setUserAccount(String user, String password, String client_id, String user_secret);
+	void setUserAccount(String user, String password, String client_id, String user_secret) throws Exception;
 
 }

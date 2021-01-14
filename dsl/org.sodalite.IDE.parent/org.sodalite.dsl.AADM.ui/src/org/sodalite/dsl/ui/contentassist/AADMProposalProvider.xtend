@@ -61,6 +61,11 @@ import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EEntity
 import org.sodalite.dsl.aADM.ECapabilityAssignment
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
+import org.eclipse.swt.widgets.MessageBox
+import org.eclipse.jface.dialogs.MessageDialog
+import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
+import org.eclipse.swt.widgets.Shell
+import org.eclipse.ui.PlatformUI
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -281,25 +286,28 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	override void completeENodeTemplateBody_Type(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for NodeTemplate::type property")
-		
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(model)
-		val String module = getModule(model)
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		
-		val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
-		System.out.println ("Nodes retrieved from KB:")
-		for (node: nodes.elements){
-			System.out.println ("\tNode: " + node.label)
-			val qnode = node.module !== null ?getLastSegment(node.module, '/') + '/' + node.label:node.label
-			val proposalText = qnode
-			val displayText = qnode
-			val additionalProposalInfo = node.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		try {
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			importedModules.add(module)
+			
+			val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
+			System.out.println ("Nodes retrieved from KB:")
+			for (node: nodes.elements){
+				System.out.println ("\tNode: " + node.label)
+				val qnode = node.module !== null ?getLastSegment(node.module, '/') + '/' + node.label:node.label
+				val proposalText = qnode
+				val displayText = qnode
+				val additionalProposalInfo = node.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+	
+			super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
+		}catch(NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-
-		super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
 	}
 		
 	override def getModule(EObject object) {
@@ -335,237 +343,260 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 	override void completeEAttributeAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EAttributeAssignment::name property")
-		var String proposalText = ""
-		var String displayText = ""
-		var String additionalProposalInfo = ""
-		
-		var resourceId = ""
-		var EPREFIX_TYPE type = null
-		if (model instanceof ENodeTemplateBodyImpl)
-			type = (model as ENodeTemplateBodyImpl).type
-			 
-		else if (model instanceof EAttributeAssigmentsImpl)
-			type = (model.eContainer as ENodeTemplateBodyImpl).type
+		try {
+			var String proposalText = ""
+			var String displayText = ""
+			var String additionalProposalInfo = ""
 			
-		resourceId = (type.module !== null? type.module + '/':'') + type.type
-
-		if (resourceId !== null){
-			val ReasonerData<AttributeDefinition> attributes = getKBReasoner().getTypeAttributes(resourceId)
-			if (attributes !== null){}
-				System.out.println ("Attributes retrieved from KB for resource: " + resourceId)
-				for (attribute: attributes.elements){
-					System.out.println ("\tAttribute: " + attribute.uri)
-					var attribute_label = attribute.uri.toString.substring(attribute.uri.toString.lastIndexOf('/') + 1, attribute.uri.toString.length)
-					proposalText = attribute_label
-					displayText = attribute_label
-					additionalProposalInfo = attribute.getType.getLabel!==null?"Type: " + attribute.getType.getLabel:""
-					additionalProposalInfo += attribute.getDescription!==null?"\nDescription: " + attribute.getDescription:""
-					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
-				}
+			var resourceId = ""
+			var EPREFIX_TYPE type = null
+			if (model instanceof ENodeTemplateBodyImpl)
+				type = (model as ENodeTemplateBodyImpl).type
+				 
+			else if (model instanceof EAttributeAssigmentsImpl)
+				type = (model.eContainer as ENodeTemplateBodyImpl).type
+				
+			resourceId = (type.module !== null? type.module + '/':'') + type.type
+	
+			if (resourceId !== null){
+				val ReasonerData<AttributeDefinition> attributes = getKBReasoner().getTypeAttributes(resourceId)
+				if (attributes !== null){}
+					System.out.println ("Attributes retrieved from KB for resource: " + resourceId)
+					for (attribute: attributes.elements){
+						System.out.println ("\tAttribute: " + attribute.uri)
+						var attribute_label = attribute.uri.toString.substring(attribute.uri.toString.lastIndexOf('/') + 1, attribute.uri.toString.length)
+						proposalText = attribute_label
+						displayText = attribute_label
+						additionalProposalInfo = attribute.getType.getLabel!==null?"Type: " + attribute.getType.getLabel:""
+						additionalProposalInfo += attribute.getDescription!==null?"\nDescription: " + attribute.getDescription:""
+						createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+					}
+			}
+	
+			proposalText = "attribute_name"
+			displayText = "attribute_name"
+			additionalProposalInfo = "represents the name of an attribute that would be used to select an attribute\ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship\nTemplate, etc.) which is declared (or reflected from a Property definition) in its declared type \n(e.g., a Node Type, Node Template, Capability Type, etc.). "
+	
+			createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		}catch(NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-
-		proposalText = "attribute_name"
-		displayText = "attribute_name"
-		additionalProposalInfo = "represents the name of an attribute that would be used to select an attribute\ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship\nTemplate, etc.) which is declared (or reflected from a Property definition) in its declared type \n(e.g., a Node Type, Node Template, Capability Type, etc.). "
-
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEPropertyAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EPropertyAssignment::name property")
-		var String proposalText = ""
-		var String displayText = ""
-		var String additionalProposalInfo = ""
-		
-		var resourceId = ""
-		var EPREFIX_TYPE type = null
-		
-		if (model instanceof ENodeTemplateBodyImpl)
-			type = (model as ENodeTemplateBodyImpl).type
-		else if (model instanceof EPropertyAssigmentsImpl)
-			type = (model.eContainer as ENodeTemplateBodyImpl).type
-		else if (model instanceof ENodeTemplateImpl)
-			type = (model as ENodeTemplateImpl).node.type
+			try {
+			var String proposalText = ""
+			var String displayText = ""
+			var String additionalProposalInfo = ""
 			
-		resourceId = (type.module !== null? type.module + '/':'') + type.type
-		
-		if (resourceId !== null){
-			val ReasonerData<PropertyDefinition> properties = getKBReasoner().getTypeProperties(resourceId)
-			if (properties !== null){
-				System.out.println ("Properties retrieved from KB for resource: " + resourceId)
-				for (property: properties.elements){
-				 	System.out.println ("\tProperty: " + property.uri)
-				 	var property_label = property.uri.toString.substring(property.uri.toString.lastIndexOf('/') + 1, property.uri.toString.length)
-					proposalText = property_label
-					displayText = property_label
-					additionalProposalInfo = (property.getType.getLabel!==null?"Type: " + property.getType.getLabel:"") 
-					additionalProposalInfo += property.getDescription!==null?"\nDescription: " + property.getDescription:""
-					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
-				 }
+			var resourceId = ""
+			var EPREFIX_TYPE type = null
+			
+			if (model instanceof ENodeTemplateBodyImpl)
+				type = (model as ENodeTemplateBodyImpl).type
+			else if (model instanceof EPropertyAssigmentsImpl)
+				type = (model.eContainer as ENodeTemplateBodyImpl).type
+			else if (model instanceof ENodeTemplateImpl)
+				type = (model as ENodeTemplateImpl).node.type
+				
+			resourceId = (type.module !== null? type.module + '/':'') + type.type
+			
+			if (resourceId !== null){
+				val ReasonerData<PropertyDefinition> properties = getKBReasoner().getTypeProperties(resourceId)
+				if (properties !== null){
+					System.out.println ("Properties retrieved from KB for resource: " + resourceId)
+					for (property: properties.elements){
+					 	System.out.println ("\tProperty: " + property.uri)
+					 	var property_label = property.uri.toString.substring(property.uri.toString.lastIndexOf('/') + 1, property.uri.toString.length)
+						proposalText = property_label
+						displayText = property_label
+						additionalProposalInfo = (property.getType.getLabel!==null?"Type: " + property.getType.getLabel:"") 
+						additionalProposalInfo += property.getDescription!==null?"\nDescription: " + property.getDescription:""
+						createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+					 }
+				}
 			}
+			
+			proposalText = "property_name"
+			displayText = "property_name"
+			additionalProposalInfo = "represents the name of a property that would be used to select a property \ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship \nTemplate, etc.,) which is declared in its declared type (e.g., a Node Type, Node Template, \nCapability Type, etc.). "
+	
+			createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		}catch(NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-		
-		proposalText = "property_name"
-		displayText = "property_name"
-		additionalProposalInfo = "represents the name of a property that would be used to select a property \ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship \nTemplate, etc.,) which is declared in its declared type (e.g., a Node Type, Node Template, \nCapability Type, etc.). "
-
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeECapabilityAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		System.out.println("Invoking content assist for ECapabilityAssignment::name property")
-		var String proposalText = ""
-		var String displayText = ""
-		var String additionalProposalInfo = ""
-		
-		var resourceId = ""
-		var EPREFIX_TYPE type = null
-		
-		if (model instanceof ENodeTemplateBodyImpl)
-			type = (model as ENodeTemplateBodyImpl).type
-		else if (model instanceof ECapabilityAssignmentsImpl)
-			type = (model.eContainer as ENodeTemplateBodyImpl).type
+		try{
+			var String proposalText = ""
+			var String displayText = ""
+			var String additionalProposalInfo = ""
 			
-		resourceId = (type.module !== null? type.module + '/':'') + type.type
-		
-		if (resourceId !== null){
-			val ReasonerData<CapabilityDefinition> capabilities = getKBReasoner().getTypeCapabilities(resourceId)
-			if (capabilities !== null){
-				System.out.println ("Capabilities retrieved from KB for resource: " + resourceId)
-				for (capability: capabilities.elements){
-					System.out.println ("\nCapability: " + capability.uri)
-				 	var property_label = capability.uri.toString.substring(capability.uri.toString.lastIndexOf('/') + 1, capability.uri.toString.length)
-					proposalText = property_label
-					displayText = property_label
-					additionalProposalInfo = ""
-					if (capability.getType !== null)
-						additionalProposalInfo += "\nType: " + capability.getType.getLabel
-					if (capability.getValid_source_types !== null)
-						additionalProposalInfo += "\nValid source types:" + capability.getValid_source_types 
-					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+			var resourceId = ""
+			var EPREFIX_TYPE type = null
+			
+			if (model instanceof ENodeTemplateBodyImpl)
+				type = (model as ENodeTemplateBodyImpl).type
+			else if (model instanceof ECapabilityAssignmentsImpl)
+				type = (model.eContainer as ENodeTemplateBodyImpl).type
+				
+			resourceId = (type.module !== null? type.module + '/':'') + type.type
+			
+			if (resourceId !== null){
+				val ReasonerData<CapabilityDefinition> capabilities = getKBReasoner().getTypeCapabilities(resourceId)
+				if (capabilities !== null){
+					System.out.println ("Capabilities retrieved from KB for resource: " + resourceId)
+					for (capability: capabilities.elements){
+						System.out.println ("\nCapability: " + capability.uri)
+					 	var property_label = capability.uri.toString.substring(capability.uri.toString.lastIndexOf('/') + 1, capability.uri.toString.length)
+						proposalText = property_label
+						displayText = property_label
+						additionalProposalInfo = ""
+						if (capability.getType !== null)
+							additionalProposalInfo += "\nType: " + capability.getType.getLabel
+						if (capability.getValid_source_types !== null)
+							additionalProposalInfo += "\nValid source types:" + capability.getValid_source_types 
+						createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+					}
 				}
 			}
+			proposalText = "capability_name"
+			displayText = "capability_name"
+			additionalProposalInfo = "represents the symbolic name of a capability assignment "
+	
+			createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		}catch(NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-		proposalText = "capability_name"
-		displayText = "capability_name"
-		additionalProposalInfo = "represents the symbolic name of a capability assignment "
-
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeERequirementAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for ERequirementAssignment::name property")
-		var String proposalText = ""
-		var String displayText = ""
-		var String additionalProposalInfo = ""
-		
-		var resourceId = ""
-		var EPREFIX_TYPE type = null
-		
-		if (model instanceof ENodeTemplateBodyImpl)
-			type = (model as ENodeTemplateBodyImpl).type
-		else if (model instanceof ERequirementAssignmentsImpl)
-			type = (model.eContainer as ENodeTemplateBodyImpl).type
+		try{
+			var String proposalText = ""
+			var String displayText = ""
+			var String additionalProposalInfo = ""
 			
-		resourceId = (type.module !== null? type.module + '/':'') + type.type
-		
-		if (resourceId !== null){
-			val ReasonerData<RequirementDefinition> requirements = getKBReasoner().getTypeRequirements(resourceId)
-			if (requirements !== null){
-				System.out.println ("Requirements retrieved from KB for resource: " + resourceId)
-				for (requirement: requirements.elements){
-					System.out.println ("\tRequirement: " + requirement.uri)
-				 	var property_label = requirement.uri.toString.substring(requirement.uri.toString.lastIndexOf('/') + 1, requirement.uri.toString.length)
-					proposalText = property_label
-					displayText = property_label
-					additionalProposalInfo = ""
-					if (requirement.getCapability !== null)
-						additionalProposalInfo += "\nCapability: " + requirement.getCapability.getLabel
-					if (requirement.getNode !== null)
-						additionalProposalInfo += "\nNode: " + requirement.getNode.getLabel
-					if (requirement.getOccurrences !== null)
-						additionalProposalInfo += "\nOccurrences: [" + requirement.getOccurrences.min + ", " + requirement.getOccurrences.max + "]"
-					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+			var resourceId = ""
+			var EPREFIX_TYPE type = null
+			
+			if (model instanceof ENodeTemplateBodyImpl)
+				type = (model as ENodeTemplateBodyImpl).type
+			else if (model instanceof ERequirementAssignmentsImpl)
+				type = (model.eContainer as ENodeTemplateBodyImpl).type
+				
+			resourceId = (type.module !== null? type.module + '/':'') + type.type
+			
+			if (resourceId !== null){
+				val ReasonerData<RequirementDefinition> requirements = getKBReasoner().getTypeRequirements(resourceId)
+				if (requirements !== null){
+					System.out.println ("Requirements retrieved from KB for resource: " + resourceId)
+					for (requirement: requirements.elements){
+						System.out.println ("\tRequirement: " + requirement.uri)
+					 	var property_label = requirement.uri.toString.substring(requirement.uri.toString.lastIndexOf('/') + 1, requirement.uri.toString.length)
+						proposalText = property_label
+						displayText = property_label
+						additionalProposalInfo = ""
+						if (requirement.getCapability !== null)
+							additionalProposalInfo += "\nCapability: " + requirement.getCapability.getLabel
+						if (requirement.getNode !== null)
+							additionalProposalInfo += "\nNode: " + requirement.getNode.getLabel
+						if (requirement.getOccurrences !== null)
+							additionalProposalInfo += "\nOccurrences: [" + requirement.getOccurrences.min + ", " + requirement.getOccurrences.max + "]"
+						createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+					}
 				}
 			}
+			proposalText = "requirement_name"
+			displayText = "requirement_name"
+			additionalProposalInfo = "represents the symbolic name of a requirement assignment "
+	
+			createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		}catch(NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-		proposalText = "requirement_name"
-		displayText = "requirement_name"
-		additionalProposalInfo = "represents the symbolic name of a requirement assignment "
-
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeERequirementAssignment_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for ERequirementAssignment::node property")
-		var String proposalText = ""
-		var String displayText = ""
-		var String additionalProposalInfo = ""
-		val requirementId = (model as ERequirementAssignmentImpl).name
-		val nodeType = (model.eContainer.eContainer as ENodeTemplateBodyImpl).type
-		val resourceId = (nodeType.module !== null? nodeType.module + '/':'') + nodeType.type
-		
-		val AADM_Model rootModel = findModel(model) as AADM_Model
-		val String aadmURI = getAADMURI (rootModel); //TODO Use aadmURI to determine if KB suggestion belongs to the local model
-		
-		//Get valid requirement nodes from KB
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(model)
-		val String module = getModule(model)
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		
-		val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
-		val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
-		if (!vrnd.elements.empty){
-			System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
-			for (ValidRequirementNode vrn: vrnd.elements){
-				val qtype = vrn.type.module !== null ?getLastSegment(vrn.type.module, '/') + '/' + vrn.type.label:vrn.type.label
-				val qnode = vrn.module !== null ?getLastSegment(vrn.module, '/') + '/' + vrn.label:vrn.label
-				System.out.println ("Valid requirement node: " + qnode)
-			 	displayText = qnode
+		try{
+			var String proposalText = ""
+			var String displayText = ""
+			var String additionalProposalInfo = ""
+			val requirementId = (model as ERequirementAssignmentImpl).name
+			val nodeType = (model.eContainer.eContainer as ENodeTemplateBodyImpl).type
+			val resourceId = (nodeType.module !== null? nodeType.module + '/':'') + nodeType.type
+			
+			val AADM_Model rootModel = findModel(model) as AADM_Model
+			val String aadmURI = getAADMURI (rootModel); //TODO Use aadmURI to determine if KB suggestion belongs to the local model
+			
+			//Get valid requirement nodes from KB
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			importedModules.add(module)
+			
+			val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
+			val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
+			if (!vrnd.elements.empty){
+				System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
+				for (ValidRequirementNode vrn: vrnd.elements){
+					val qtype = vrn.type.module !== null ?getLastSegment(vrn.type.module, '/') + '/' + vrn.type.label:vrn.type.label
+					val qnode = vrn.module !== null ?getLastSegment(vrn.module, '/') + '/' + vrn.label:vrn.label
+					System.out.println ("Valid requirement node: " + qnode)
+				 	displayText = qnode
+					proposalText = qnode
+					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+				}
+			}
+			
+			//Find local nodes that belongs to suggested types
+			if (tovrnd.elements.isEmpty)
+				throw new Exception ("Type of valid nodes satisfying the requirement not found");
+			val Type superType = tovrnd.elements.get(0)
+			val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
+			val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
+			for (ENodeTemplate node: localnodes){
+				System.out.println ("Valid requirement local node: " + node.name)
+			 	val qnode = module != null? module + '/' + node.name: node.name
+			 	val qtype = node.node.type.module != null? node.node.type.module + '/' + node.node.type.type: node.node.type.type
 				proposalText = qnode
+				displayText = qnode
 				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
 			}
-		}
-		
-		//Find local nodes that belongs to suggested types
-		if (tovrnd.elements.isEmpty)
-			throw new Exception ("Type of valid nodes satisfying the requirement not found");
-		val Type superType = tovrnd.elements.get(0)
-		val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
-		val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
-		for (ENodeTemplate node: localnodes){
-			System.out.println ("Valid requirement local node: " + node.name)
-		 	val qnode = module != null? module + '/' + node.name: node.name
-		 	val qtype = node.node.type.module != null? node.node.type.module + '/' + node.node.type.type: node.node.type.type
-			proposalText = qnode
-			displayText = qnode
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		}catch(NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
 	}
 	
 	override void completeEDataTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EDataType::supertype property")
-		
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(model)
-		val String module = getModule(model)
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		
-		val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
-		System.out.println ("Data types retrieved from KB:")
-		for (type: types.elements){
-			System.out.println ("\tData type: " + type.label)
-			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
-			val proposalText = qtype
-			val displayText = qtype
-			val additionalProposalInfo = type.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		try{
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			importedModules.add(module)
+			val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
+			System.out.println ("Data types retrieved from KB:")
+			for (type: types.elements){
+				System.out.println ("\tData type: " + type.label)
+				val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+				val proposalText = qtype
+				val displayText = qtype
+				val additionalProposalInfo = type.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-
-		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 	}
 		
 //	def existsInAadm(String nodeUri, String aadmUri) {
