@@ -232,6 +232,11 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		acceptor.accept(createCompletionProposal("False", context));
 		acceptor.accept(createCompletionProposal("True", context));
 	}
+
+	override void complete_BOOLEAN_YES_NO(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		acceptor.accept(createCompletionProposal("no", context));
+		acceptor.accept(createCompletionProposal("yes", context));
+	}
 	
 	override void complete_NULL(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("Null", context));

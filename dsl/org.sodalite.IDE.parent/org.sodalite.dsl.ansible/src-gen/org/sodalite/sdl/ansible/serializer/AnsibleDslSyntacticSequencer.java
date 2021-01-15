@@ -30,6 +30,7 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3___or___Play_exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3__;
 	protected AbstractElementAlias match_EHandler_ListenKeyword_3_22_0_q;
 	protected AbstractElementAlias match_EHandler___ENDTerminalRuleCall_3_10_3_VarsKeyword_3_10_0_BEGINTerminalRuleCall_3_10_1__q;
+	protected AbstractElementAlias match_EModuleCall___BEGINTerminalRuleCall_2_0_ENDTerminalRuleCall_2_2__q;
 	protected AbstractElementAlias match_EPlay___ENDTerminalRuleCall_3_11_3_VarsKeyword_3_11_0_BEGINTerminalRuleCall_3_11_1__q;
 	protected AbstractElementAlias match_EPlay___ENDTerminalRuleCall_3_19_3_Pre_tasksKeyword_3_19_0_BEGINTerminalRuleCall_3_19_1__q;
 	protected AbstractElementAlias match_EPlay___ENDTerminalRuleCall_3_21_3_Tasks_listKeyword_3_21_0_BEGINTerminalRuleCall_3_21_1__q;
@@ -49,6 +50,7 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3___or___Play_exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEExecutionExeSettingsAccess().getExe_settingsKeyword_0()), new TokenAlias(false, false, grammarAccess.getEExecutionExeSettingsAccess().getBEGINTerminalRuleCall_1()), new TokenAlias(false, false, grammarAccess.getEExecutionExeSettingsAccess().getENDTerminalRuleCall_3())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEPlayExeSettingsAccess().getPlay_exe_settingsKeyword_0()), new TokenAlias(false, false, grammarAccess.getEPlayExeSettingsAccess().getBEGINTerminalRuleCall_1()), new TokenAlias(false, false, grammarAccess.getEPlayExeSettingsAccess().getENDTerminalRuleCall_3())));
 		match_EHandler_ListenKeyword_3_22_0_q = new TokenAlias(false, true, grammarAccess.getEHandlerAccess().getListenKeyword_3_22_0());
 		match_EHandler___ENDTerminalRuleCall_3_10_3_VarsKeyword_3_10_0_BEGINTerminalRuleCall_3_10_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getENDTerminalRuleCall_3_10_3()), new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getVarsKeyword_3_10_0()), new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getBEGINTerminalRuleCall_3_10_1()));
+		match_EModuleCall___BEGINTerminalRuleCall_2_0_ENDTerminalRuleCall_2_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEModuleCallAccess().getBEGINTerminalRuleCall_2_0()), new TokenAlias(false, false, grammarAccess.getEModuleCallAccess().getENDTerminalRuleCall_2_2()));
 		match_EPlay___ENDTerminalRuleCall_3_11_3_VarsKeyword_3_11_0_BEGINTerminalRuleCall_3_11_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getENDTerminalRuleCall_3_11_3()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getVarsKeyword_3_11_0()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getBEGINTerminalRuleCall_3_11_1()));
 		match_EPlay___ENDTerminalRuleCall_3_19_3_Pre_tasksKeyword_3_19_0_BEGINTerminalRuleCall_3_19_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getENDTerminalRuleCall_3_19_3()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getPre_tasksKeyword_3_19_0()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getBEGINTerminalRuleCall_3_19_1()));
 		match_EPlay___ENDTerminalRuleCall_3_21_3_Tasks_listKeyword_3_21_0_BEGINTerminalRuleCall_3_21_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEPlayAccess().getENDTerminalRuleCall_3_21_3()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getTasks_listKeyword_3_21_0()), new TokenAlias(false, false, grammarAccess.getEPlayAccess().getBEGINTerminalRuleCall_3_21_1()));
@@ -101,6 +103,8 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_EHandler_ListenKeyword_3_22_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EHandler___ENDTerminalRuleCall_3_10_3_VarsKeyword_3_10_0_BEGINTerminalRuleCall_3_10_1__q.equals(syntax))
 				emit_EHandler___ENDTerminalRuleCall_3_10_3_VarsKeyword_3_10_0_BEGINTerminalRuleCall_3_10_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EModuleCall___BEGINTerminalRuleCall_2_0_ENDTerminalRuleCall_2_2__q.equals(syntax))
+				emit_EModuleCall___BEGINTerminalRuleCall_2_0_ENDTerminalRuleCall_2_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EPlay___ENDTerminalRuleCall_3_11_3_VarsKeyword_3_11_0_BEGINTerminalRuleCall_3_11_1__q.equals(syntax))
 				emit_EPlay___ENDTerminalRuleCall_3_11_3_VarsKeyword_3_11_0_BEGINTerminalRuleCall_3_11_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EPlay___ENDTerminalRuleCall_3_19_3_Pre_tasksKeyword_3_19_0_BEGINTerminalRuleCall_3_19_1__q.equals(syntax))
@@ -204,6 +208,17 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     variable_declarations+=EVariableDeclaration (ambiguity) variable_declarations+=EVariableDeclaration
 	 */
 	protected void emit_EHandler___ENDTerminalRuleCall_3_10_3_VarsKeyword_3_10_0_BEGINTerminalRuleCall_3_10_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (BEGIN END)?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=ID (ambiguity) (rule end)
+	 */
+	protected void emit_EModuleCall___BEGINTerminalRuleCall_2_0_ENDTerminalRuleCall_2_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

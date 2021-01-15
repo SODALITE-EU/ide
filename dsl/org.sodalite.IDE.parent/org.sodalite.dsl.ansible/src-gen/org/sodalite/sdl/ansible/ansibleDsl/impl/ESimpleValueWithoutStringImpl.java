@@ -4,12 +4,15 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 
 /**
@@ -20,6 +23,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueWithoutStringImpl#getSimple_value_boolean <em>Simple value boolean</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueWithoutStringImpl#getSimple_value <em>Simple value</em>}</li>
  * </ul>
  *
@@ -27,6 +31,16 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
  */
 public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl implements ESimpleValueWithoutString
 {
+  /**
+   * The cached value of the '{@link #getSimple_value_boolean() <em>Simple value boolean</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSimple_value_boolean()
+   * @generated
+   * @ordered
+   */
+  protected EBooleanAnsible simple_value_boolean;
+
   /**
    * The default value of the '{@link #getSimple_value() <em>Simple value</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -74,6 +88,56 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
    * @generated
    */
   @Override
+  public EBooleanAnsible getSimple_value_boolean()
+  {
+    return simple_value_boolean;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSimple_value_boolean(EBooleanAnsible newSimple_value_boolean, NotificationChain msgs)
+  {
+    EBooleanAnsible oldSimple_value_boolean = simple_value_boolean;
+    simple_value_boolean = newSimple_value_boolean;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN, oldSimple_value_boolean, newSimple_value_boolean);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSimple_value_boolean(EBooleanAnsible newSimple_value_boolean)
+  {
+    if (newSimple_value_boolean != simple_value_boolean)
+    {
+      NotificationChain msgs = null;
+      if (simple_value_boolean != null)
+        msgs = ((InternalEObject)simple_value_boolean).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN, null, msgs);
+      if (newSimple_value_boolean != null)
+        msgs = ((InternalEObject)newSimple_value_boolean).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN, null, msgs);
+      msgs = basicSetSimple_value_boolean(newSimple_value_boolean, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN, newSimple_value_boolean, newSimple_value_boolean));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public String getSimple_value()
   {
     return simple_value;
@@ -99,10 +163,28 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
    * @generated
    */
   @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN:
+        return basicSetSimple_value_boolean(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN:
+        return getSimple_value_boolean();
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
         return getSimple_value();
     }
@@ -119,6 +201,9 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN:
+        setSimple_value_boolean((EBooleanAnsible)newValue);
+        return;
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
         setSimple_value((String)newValue);
         return;
@@ -136,6 +221,9 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN:
+        setSimple_value_boolean((EBooleanAnsible)null);
+        return;
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
         setSimple_value(SIMPLE_VALUE_EDEFAULT);
         return;
@@ -153,6 +241,8 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN:
+        return simple_value_boolean != null;
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
         return SIMPLE_VALUE_EDEFAULT == null ? simple_value != null : !SIMPLE_VALUE_EDEFAULT.equals(simple_value);
     }

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed#getBoolean_passed <em>Boolean passed</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed#getBoolean_passed_null <em>Boolean passed null</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBooleanPassed()
@@ -24,25 +25,47 @@ import org.eclipse.emf.ecore.EObject;
 public interface EBooleanPassed extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Boolean passed</b></em>' attribute.
+   * Returns the value of the '<em><b>Boolean passed</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Boolean passed</em>' attribute.
-   * @see #setBoolean_passed(String)
+   * @return the value of the '<em>Boolean passed</em>' containment reference.
+   * @see #setBoolean_passed(EBooleanAnsible)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBooleanPassed_Boolean_passed()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getBoolean_passed();
+  EBooleanAnsible getBoolean_passed();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed#getBoolean_passed <em>Boolean passed</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed#getBoolean_passed <em>Boolean passed</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Boolean passed</em>' attribute.
+   * @param value the new value of the '<em>Boolean passed</em>' containment reference.
    * @see #getBoolean_passed()
    * @generated
    */
-  void setBoolean_passed(String value);
+  void setBoolean_passed(EBooleanAnsible value);
+
+  /**
+   * Returns the value of the '<em><b>Boolean passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Boolean passed null</em>' attribute.
+   * @see #setBoolean_passed_null(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBooleanPassed_Boolean_passed_null()
+   * @model
+   * @generated
+   */
+  String getBoolean_passed_null();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed#getBoolean_passed_null <em>Boolean passed null</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Boolean passed null</em>' attribute.
+   * @see #getBoolean_passed_null()
+   * @generated
+   */
+  void setBoolean_passed_null(String value);
 
 } // EBooleanPassed

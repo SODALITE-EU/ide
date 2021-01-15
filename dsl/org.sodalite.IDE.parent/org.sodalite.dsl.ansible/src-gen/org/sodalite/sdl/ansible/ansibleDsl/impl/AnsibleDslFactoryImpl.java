@@ -107,10 +107,11 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
       case AnsibleDslPackage.EVALUE_PASSED_TO_JINJA_EXPRESSION: return createEValuePassedToJinjaExpression();
       case AnsibleDslPackage.ECOMPOSED_VALUE: return createEComposedValue();
-      case AnsibleDslPackage.EVALUE: return createEValue();
+      case AnsibleDslPackage.ECOMPOSED_VALUE_IN_LINE: return createEComposedValueInLine();
+      case AnsibleDslPackage.EVALUE_IN_LINE: return createEValueInLine();
       case AnsibleDslPackage.EVALUE_WITHOUT_STRING: return createEValueWithoutString();
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING: return createESimpleValueWithoutString();
-      case AnsibleDslPackage.ESIMPLE_VALUE: return createESimpleValue();
+      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE: return createESimpleValueInLine();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION: return createEJinjaExpressionEvaluation();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS: return createEJinjaExpressionEvaluationWithoutBrackets();
       case AnsibleDslPackage.EFUNCTION_CALL: return createEFunctionCall();
@@ -141,13 +142,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ETAIL_ELEMENT: return createETailElement();
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT: return createESquareBracketElement();
       case AnsibleDslPackage.EDICTIONARY: return createEDictionary();
+      case AnsibleDslPackage.EDICTIONARY_IN_LINE: return createEDictionaryInLine();
+      case AnsibleDslPackage.EDICTIONARY_INDENTED: return createEDictionaryIndented();
       case AnsibleDslPackage.EDICTIONARY_PAIR: return createEDictionaryPair();
       case AnsibleDslPackage.ELIST: return createEList();
+      case AnsibleDslPackage.ELIST_IN_LINE: return createEListInLine();
+      case AnsibleDslPackage.ELIST_INDENTED: return createEListIndented();
       case AnsibleDslPackage.EDICTIONARY_PASSED: return createEDictionaryPassed();
       case AnsibleDslPackage.ELIST_PASSED: return createEListPassed();
       case AnsibleDslPackage.ENUMBER_PASSED: return createENumberPassed();
       case AnsibleDslPackage.EBOOLEAN_PASSED: return createEBooleanPassed();
       case AnsibleDslPackage.EEMPTY_CURLY_BRACES: return createEEmptyCurlyBraces();
+      case AnsibleDslPackage.EBOOLEAN_ANSIBLE: return createEBooleanAnsible();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -663,10 +669,22 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EValue createEValue()
+  public EComposedValueInLine createEComposedValueInLine()
   {
-    EValueImpl eValue = new EValueImpl();
-    return eValue;
+    EComposedValueInLineImpl eComposedValueInLine = new EComposedValueInLineImpl();
+    return eComposedValueInLine;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EValueInLine createEValueInLine()
+  {
+    EValueInLineImpl eValueInLine = new EValueInLineImpl();
+    return eValueInLine;
   }
 
   /**
@@ -699,10 +717,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public ESimpleValue createESimpleValue()
+  public ESimpleValueInLine createESimpleValueInLine()
   {
-    ESimpleValueImpl eSimpleValue = new ESimpleValueImpl();
-    return eSimpleValue;
+    ESimpleValueInLineImpl eSimpleValueInLine = new ESimpleValueInLineImpl();
+    return eSimpleValueInLine;
   }
 
   /**
@@ -1071,6 +1089,30 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
+  public EDictionaryInLine createEDictionaryInLine()
+  {
+    EDictionaryInLineImpl eDictionaryInLine = new EDictionaryInLineImpl();
+    return eDictionaryInLine;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDictionaryIndented createEDictionaryIndented()
+  {
+    EDictionaryIndentedImpl eDictionaryIndented = new EDictionaryIndentedImpl();
+    return eDictionaryIndented;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EDictionaryPair createEDictionaryPair()
   {
     EDictionaryPairImpl eDictionaryPair = new EDictionaryPairImpl();
@@ -1087,6 +1129,30 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EListImpl eList = new EListImpl();
     return eList;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EListInLine createEListInLine()
+  {
+    EListInLineImpl eListInLine = new EListInLineImpl();
+    return eListInLine;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EListIndented createEListIndented()
+  {
+    EListIndentedImpl eListIndented = new EListIndentedImpl();
+    return eListIndented;
   }
 
   /**
@@ -1147,6 +1213,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EEmptyCurlyBracesImpl eEmptyCurlyBraces = new EEmptyCurlyBracesImpl();
     return eEmptyCurlyBraces;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EBooleanAnsible createEBooleanAnsible()
+  {
+    EBooleanAnsibleImpl eBooleanAnsible = new EBooleanAnsibleImpl();
+    return eBooleanAnsible;
   }
 
   /**

@@ -13,6 +13,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString#getSimple_value_boolean <em>Simple value boolean</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString#getSimple_value <em>Simple value</em>}</li>
  * </ul>
  *
@@ -22,6 +23,28 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  */
 public interface ESimpleValueWithoutString extends EValueWithoutString
 {
+  /**
+   * Returns the value of the '<em><b>Simple value boolean</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Simple value boolean</em>' containment reference.
+   * @see #setSimple_value_boolean(EBooleanAnsible)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValueWithoutString_Simple_value_boolean()
+   * @model containment="true"
+   * @generated
+   */
+  EBooleanAnsible getSimple_value_boolean();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString#getSimple_value_boolean <em>Simple value boolean</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Simple value boolean</em>' containment reference.
+   * @see #getSimple_value_boolean()
+   * @generated
+   */
+  void setSimple_value_boolean(EBooleanAnsible value);
+
   /**
    * Returns the value of the '<em><b>Simple value</b></em>' attribute.
    * <!-- begin-user-doc -->

@@ -286,9 +286,14 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEComposedValueAdapter();
       }
       @Override
-      public Adapter caseEValue(EValue object)
+      public Adapter caseEComposedValueInLine(EComposedValueInLine object)
       {
-        return createEValueAdapter();
+        return createEComposedValueInLineAdapter();
+      }
+      @Override
+      public Adapter caseEValueInLine(EValueInLine object)
+      {
+        return createEValueInLineAdapter();
       }
       @Override
       public Adapter caseEValueWithoutString(EValueWithoutString object)
@@ -301,9 +306,9 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createESimpleValueWithoutStringAdapter();
       }
       @Override
-      public Adapter caseESimpleValue(ESimpleValue object)
+      public Adapter caseESimpleValueInLine(ESimpleValueInLine object)
       {
-        return createESimpleValueAdapter();
+        return createESimpleValueInLineAdapter();
       }
       @Override
       public Adapter caseEJinjaExpressionEvaluation(EJinjaExpressionEvaluation object)
@@ -456,6 +461,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEDictionaryAdapter();
       }
       @Override
+      public Adapter caseEDictionaryInLine(EDictionaryInLine object)
+      {
+        return createEDictionaryInLineAdapter();
+      }
+      @Override
+      public Adapter caseEDictionaryIndented(EDictionaryIndented object)
+      {
+        return createEDictionaryIndentedAdapter();
+      }
+      @Override
       public Adapter caseEDictionaryPair(EDictionaryPair object)
       {
         return createEDictionaryPairAdapter();
@@ -464,6 +479,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEList(EList object)
       {
         return createEListAdapter();
+      }
+      @Override
+      public Adapter caseEListInLine(EListInLine object)
+      {
+        return createEListInLineAdapter();
+      }
+      @Override
+      public Adapter caseEListIndented(EListIndented object)
+      {
+        return createEListIndentedAdapter();
       }
       @Override
       public Adapter caseEDictionaryPassed(EDictionaryPassed object)
@@ -489,6 +514,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEEmptyCurlyBraces(EEmptyCurlyBraces object)
       {
         return createEEmptyCurlyBracesAdapter();
+      }
+      @Override
+      public Adapter caseEBooleanAnsible(EBooleanAnsible object)
+      {
+        return createEBooleanAnsibleAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -1143,16 +1173,31 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValue <em>EValue</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EComposedValueInLine <em>EComposed Value In Line</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EValue
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EComposedValueInLine
    * @generated
    */
-  public Adapter createEValueAdapter()
+  public Adapter createEComposedValueInLineAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValueInLine <em>EValue In Line</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EValueInLine
+   * @generated
+   */
+  public Adapter createEValueInLineAdapter()
   {
     return null;
   }
@@ -1188,16 +1233,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue <em>ESimple Value</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine <em>ESimple Value In Line</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine
    * @generated
    */
-  public Adapter createESimpleValueAdapter()
+  public Adapter createESimpleValueInLineAdapter()
   {
     return null;
   }
@@ -1653,6 +1698,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine <em>EDictionary In Line</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine
+   * @generated
+   */
+  public Adapter createEDictionaryInLineAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented <em>EDictionary Indented</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented
+   * @generated
+   */
+  public Adapter createEDictionaryIndentedAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair <em>EDictionary Pair</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1678,6 +1753,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEListAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EListInLine <em>EList In Line</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EListInLine
+   * @generated
+   */
+  public Adapter createEListInLineAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EListIndented <em>EList Indented</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EListIndented
+   * @generated
+   */
+  public Adapter createEListIndentedAdapter()
   {
     return null;
   }
@@ -1753,6 +1858,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEEmptyCurlyBracesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible <em>EBoolean Ansible</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible
+   * @generated
+   */
+  public Adapter createEBooleanAnsibleAdapter()
   {
     return null;
   }

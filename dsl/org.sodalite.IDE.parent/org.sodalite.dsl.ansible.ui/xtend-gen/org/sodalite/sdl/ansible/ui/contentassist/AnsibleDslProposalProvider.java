@@ -261,6 +261,12 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
+  public void complete_BOOLEAN_YES_NO(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    acceptor.accept(this.createCompletionProposal("no", context));
+    acceptor.accept(this.createCompletionProposal("yes", context));
+  }
+  
+  @Override
   public void complete_NULL(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     acceptor.accept(this.createCompletionProposal("Null", context));
   }

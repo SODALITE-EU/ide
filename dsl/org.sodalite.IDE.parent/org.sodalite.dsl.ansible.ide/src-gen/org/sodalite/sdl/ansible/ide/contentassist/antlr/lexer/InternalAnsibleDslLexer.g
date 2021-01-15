@@ -301,6 +301,8 @@ RightCurlyBracket : '}';
 
 RULE_BOOLEAN : ('True'|'False');
 
+RULE_BOOLEAN_YES_NO : ('yes'|'no');
+
 RULE_NULL : 'Null';
 
 RULE_NONE : 'None';

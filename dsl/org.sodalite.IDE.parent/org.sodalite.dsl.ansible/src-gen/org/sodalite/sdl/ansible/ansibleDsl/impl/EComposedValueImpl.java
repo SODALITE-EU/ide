@@ -15,7 +15,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
  *
  * @generated
  */
-public class EComposedValueImpl extends EValueImpl implements EComposedValue
+public class EComposedValueImpl extends EValueWithoutStringImpl implements EComposedValue
 {
   /**
    * <!-- begin-user-doc -->

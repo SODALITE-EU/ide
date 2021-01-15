@@ -402,13 +402,22 @@ public interface AnsibleDslFactory extends EFactory
   EComposedValue createEComposedValue();
 
   /**
-   * Returns a new object of class '<em>EValue</em>'.
+   * Returns a new object of class '<em>EComposed Value In Line</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EValue</em>'.
+   * @return a new object of class '<em>EComposed Value In Line</em>'.
    * @generated
    */
-  EValue createEValue();
+  EComposedValueInLine createEComposedValueInLine();
+
+  /**
+   * Returns a new object of class '<em>EValue In Line</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EValue In Line</em>'.
+   * @generated
+   */
+  EValueInLine createEValueInLine();
 
   /**
    * Returns a new object of class '<em>EValue Without String</em>'.
@@ -429,13 +438,13 @@ public interface AnsibleDslFactory extends EFactory
   ESimpleValueWithoutString createESimpleValueWithoutString();
 
   /**
-   * Returns a new object of class '<em>ESimple Value</em>'.
+   * Returns a new object of class '<em>ESimple Value In Line</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>ESimple Value</em>'.
+   * @return a new object of class '<em>ESimple Value In Line</em>'.
    * @generated
    */
-  ESimpleValue createESimpleValue();
+  ESimpleValueInLine createESimpleValueInLine();
 
   /**
    * Returns a new object of class '<em>EJinja Expression Evaluation</em>'.
@@ -708,6 +717,24 @@ public interface AnsibleDslFactory extends EFactory
   EDictionary createEDictionary();
 
   /**
+   * Returns a new object of class '<em>EDictionary In Line</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDictionary In Line</em>'.
+   * @generated
+   */
+  EDictionaryInLine createEDictionaryInLine();
+
+  /**
+   * Returns a new object of class '<em>EDictionary Indented</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDictionary Indented</em>'.
+   * @generated
+   */
+  EDictionaryIndented createEDictionaryIndented();
+
+  /**
    * Returns a new object of class '<em>EDictionary Pair</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -724,6 +751,24 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EList createEList();
+
+  /**
+   * Returns a new object of class '<em>EList In Line</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EList In Line</em>'.
+   * @generated
+   */
+  EListInLine createEListInLine();
+
+  /**
+   * Returns a new object of class '<em>EList Indented</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EList Indented</em>'.
+   * @generated
+   */
+  EListIndented createEListIndented();
 
   /**
    * Returns a new object of class '<em>EDictionary Passed</em>'.
@@ -769,6 +814,15 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EEmptyCurlyBraces createEEmptyCurlyBraces();
+
+  /**
+   * Returns a new object of class '<em>EBoolean Ansible</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EBoolean Ansible</em>'.
+   * @generated
+   */
+  EBooleanAnsible createEBooleanAnsible();
 
   /**
    * Returns the package supported by this factory.

@@ -6,23 +6,23 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EValue;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EValue</b></em>'.
+ * An implementation of the model object '<em><b>EDictionary Indented</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class EValueImpl extends EValuePassedToJinjaExpressionImpl implements EValue
+public class EDictionaryIndentedImpl extends EDictionaryImpl implements EDictionaryIndented
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EValueImpl()
+  protected EDictionaryIndentedImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class EValueImpl extends EValuePassedToJinjaExpressionImpl implements EVa
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EVALUE;
+    return AnsibleDslPackage.Literals.EDICTIONARY_INDENTED;
   }
 
-} //EValueImpl
+} //EDictionaryIndentedImpl

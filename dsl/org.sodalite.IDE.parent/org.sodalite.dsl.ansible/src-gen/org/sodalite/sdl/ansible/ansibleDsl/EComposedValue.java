@@ -14,6 +14,6 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EComposedValue extends EValue, EValueWithoutString
+public interface EComposedValue extends EValueWithoutString
 {
 } // EComposedValue

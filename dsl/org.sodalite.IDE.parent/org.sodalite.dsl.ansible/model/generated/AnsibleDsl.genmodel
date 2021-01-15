@@ -179,19 +179,22 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EJinjaExpressionOrString/string"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionAndString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EJinjaExpressionAndString/new_line_command"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionAndString/jinja_expression_and_string"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EValuePassed"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EValuePassedToJinjaExpression"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EComposedValue"/>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EValue"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EComposedValueInLine"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EValueInLine"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EValueWithoutString"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ESimpleValueWithoutString">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESimpleValueWithoutString/simple_value_boolean"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValueWithoutString/simple_value"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//ESimpleValue">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValue/simple_value_string"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESimpleValue/simple_value_without_string"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ESimpleValueInLine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValueInLine/simple_value_string"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValueInLine/simple_value"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionEvaluation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionEvaluation/jinja_expression"/>
@@ -314,6 +317,8 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionary">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionary/dictionary_pairs"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryInLine"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryIndented"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryPair">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDictionaryPair/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionaryPair/value"/>
@@ -321,17 +326,23 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//EList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EList/elements"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EListInLine"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EListIndented"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryPassed"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EListPassed"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ENumberPassed">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENumberPassed/number_passed"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBooleanPassed">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBooleanPassed/boolean_passed"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBooleanPassed/boolean_passed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBooleanPassed/boolean_passed_null"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EEmptyCurlyBraces">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EEmptyCurlyBraces/left_curly_brace"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EEmptyCurlyBraces/right_curly_brace"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EBooleanAnsible">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBooleanAnsible/boolean_ansible"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

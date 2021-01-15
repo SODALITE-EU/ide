@@ -19,10 +19,12 @@ import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
-import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
@@ -43,7 +45,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
-import org.sodalite.sdl.ansible.ansibleDsl.EList;
+import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
+import org.sodalite.sdl.ansible.ansibleDsl.EListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
@@ -65,7 +68,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
-import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValue;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
@@ -107,6 +110,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EBLOCK_AND_ROLE_ERROR_HANDLING:
 				sequence_EBlockAndRoleErrorHandling(context, (EBlockAndRoleErrorHandling) semanticObject); 
 				return; 
+			case AnsibleDslPackage.EBOOLEAN_ANSIBLE:
+				sequence_EBooleanAnsible(context, (EBooleanAnsible) semanticObject); 
+				return; 
 			case AnsibleDslPackage.EBOOLEAN_PASSED:
 				sequence_EBooleanPassed(context, (EBooleanPassed) semanticObject); 
 				return; 
@@ -116,8 +122,11 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EDELEGATION:
 				sequence_EDelegation(context, (EDelegation) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EDICTIONARY:
-				sequence_EDictionary(context, (EDictionary) semanticObject); 
+			case AnsibleDslPackage.EDICTIONARY_IN_LINE:
+				sequence_EDictionaryInLine(context, (EDictionaryInLine) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EDICTIONARY_INDENTED:
+				sequence_EDictionaryIndented(context, (EDictionaryIndented) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EDICTIONARY_PAIR:
 				sequence_EDictionaryPair(context, (EDictionaryPair) semanticObject); 
@@ -179,8 +188,11 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING:
 				sequence_EJinjaExpressionOrString(context, (EJinjaExpressionOrString) semanticObject); 
 				return; 
-			case AnsibleDslPackage.ELIST:
-				sequence_EList(context, (EList) semanticObject); 
+			case AnsibleDslPackage.ELIST_IN_LINE:
+				sequence_EListInLine(context, (EListInLine) semanticObject); 
+				return; 
+			case AnsibleDslPackage.ELIST_INDENTED:
+				sequence_EListIndented(context, (EListIndented) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ELOOP_CONTROL:
 				sequence_ELoopControl(context, (ELoopControl) semanticObject); 
@@ -245,8 +257,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.ESET_FACT_VARIABLE_REFERENCE:
 				sequence_ESetFactVariableReference(context, (ESetFactVariableReference) semanticObject); 
 				return; 
-			case AnsibleDslPackage.ESIMPLE_VALUE:
-				sequence_ESimpleValue(context, (ESimpleValue) semanticObject); 
+			case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE:
+				sequence_ESimpleValueInLine(context, (ESimpleValueInLine) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING:
 				sequence_ESimpleValueWithoutString(context, (ESimpleValueWithoutString) semanticObject); 
@@ -365,10 +377,22 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     EBooleanAnsible returns EBooleanAnsible
+	 *
+	 * Constraint:
+	 *     (boolean_ansible=BOOLEAN | boolean_ansible=BOOLEAN_YES_NO)
+	 */
+	protected void sequence_EBooleanAnsible(ISerializationContext context, EBooleanAnsible semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EBooleanPassed returns EBooleanPassed
 	 *
 	 * Constraint:
-	 *     (boolean_passed=BOOLEAN | boolean_passed=NULL)
+	 *     (boolean_passed=EBooleanAnsible | boolean_passed_null=NULL)
 	 */
 	protected void sequence_EBooleanPassed(ISerializationContext context, EBooleanPassed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -395,6 +419,43 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (delegate_to=EJinjaExpressionAndString | delegate_facts=EBooleanPassed)+
 	 */
 	protected void sequence_EDelegation(ISerializationContext context, EDelegation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EValuePassed returns EDictionaryInLine
+	 *     EValuePassedToJinjaExpression returns EDictionaryInLine
+	 *     EComposedValue returns EDictionaryInLine
+	 *     EComposedValueInLine returns EDictionaryInLine
+	 *     EValueInLine returns EDictionaryInLine
+	 *     EValueWithoutString returns EDictionaryInLine
+	 *     EDictionary returns EDictionaryInLine
+	 *     EDictionaryInLine returns EDictionaryInLine
+	 *     EDictionaryPassed returns EDictionaryInLine
+	 *
+	 * Constraint:
+	 *     (dictionary_pairs+=EDictionaryPair dictionary_pairs+=EDictionaryPair*)
+	 */
+	protected void sequence_EDictionaryInLine(ISerializationContext context, EDictionaryInLine semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EValuePassed returns EDictionaryIndented
+	 *     EComposedValue returns EDictionaryIndented
+	 *     EValueWithoutString returns EDictionaryIndented
+	 *     EDictionary returns EDictionaryIndented
+	 *     EDictionaryIndented returns EDictionaryIndented
+	 *     EDictionaryPassed returns EDictionaryIndented
+	 *
+	 * Constraint:
+	 *     dictionary_pairs+=EDictionaryPair+
+	 */
+	protected void sequence_EDictionaryIndented(ISerializationContext context, EDictionaryIndented semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -429,24 +490,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 		feeder.accept(grammarAccess.getEDictionaryPairAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getEDictionaryPairAccess().getValueEValuePassedParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     EValuePassed returns EDictionary
-	 *     EValuePassedToJinjaExpression returns EDictionary
-	 *     EComposedValue returns EDictionary
-	 *     EValue returns EDictionary
-	 *     EValueWithoutString returns EDictionary
-	 *     EDictionary returns EDictionary
-	 *     EDictionaryPassed returns EDictionary
-	 *
-	 * Constraint:
-	 *     ((dictionary_pairs+=EDictionaryPair dictionary_pairs+=EDictionaryPair*) | dictionary_pairs+=EDictionaryPair+)
-	 */
-	protected void sequence_EDictionary(ISerializationContext context, EDictionary semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -730,7 +773,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EValuePassed returns EJinjaExpressionAndString
 	 *
 	 * Constraint:
-	 *     jinja_expression_and_string+=EJinjaExpressionOrString+
+	 *     ((new_line_command='>' | new_line_command='|')? jinja_expression_and_string+=EJinjaExpressionOrString+)
 	 */
 	protected void sequence_EJinjaExpressionAndString(ISerializationContext context, EJinjaExpressionAndString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -780,18 +823,37 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EValuePassed returns EList
-	 *     EValuePassedToJinjaExpression returns EList
-	 *     EComposedValue returns EList
-	 *     EValue returns EList
-	 *     EValueWithoutString returns EList
-	 *     EList returns EList
-	 *     EListPassed returns EList
+	 *     EValuePassed returns EListInLine
+	 *     EValuePassedToJinjaExpression returns EListInLine
+	 *     EComposedValue returns EListInLine
+	 *     EComposedValueInLine returns EListInLine
+	 *     EValueInLine returns EListInLine
+	 *     EValueWithoutString returns EListInLine
+	 *     EList returns EListInLine
+	 *     EListInLine returns EListInLine
+	 *     EListPassed returns EListInLine
 	 *
 	 * Constraint:
 	 *     (elements+=EValuePassed elements+=EValuePassed*)
 	 */
-	protected void sequence_EList(ISerializationContext context, EList semanticObject) {
+	protected void sequence_EListInLine(ISerializationContext context, EListInLine semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EValuePassed returns EListIndented
+	 *     EComposedValue returns EListIndented
+	 *     EValueWithoutString returns EListIndented
+	 *     EList returns EListIndented
+	 *     EListIndented returns EListIndented
+	 *     EListPassed returns EListIndented
+	 *
+	 * Constraint:
+	 *     elements+=EValuePassed+
+	 */
+	protected void sequence_EListIndented(ISerializationContext context, EListIndented semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1169,28 +1231,28 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EValuePassed returns ESimpleValueWithoutString
-	 *     EValueWithoutString returns ESimpleValueWithoutString
-	 *     ESimpleValueWithoutString returns ESimpleValueWithoutString
+	 *     EValuePassedToJinjaExpression returns ESimpleValueInLine
+	 *     EValueInLine returns ESimpleValueInLine
+	 *     ESimpleValueInLine returns ESimpleValueInLine
 	 *
 	 * Constraint:
-	 *     (simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER | simple_value=NONE)
+	 *     (simple_value_string=STRING | simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER | simple_value=NONE)
 	 */
-	protected void sequence_ESimpleValueWithoutString(ISerializationContext context, ESimpleValueWithoutString semanticObject) {
+	protected void sequence_ESimpleValueInLine(ISerializationContext context, ESimpleValueInLine semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     EValuePassedToJinjaExpression returns ESimpleValue
-	 *     EValue returns ESimpleValue
-	 *     ESimpleValue returns ESimpleValue
+	 *     EValuePassed returns ESimpleValueWithoutString
+	 *     EValueWithoutString returns ESimpleValueWithoutString
+	 *     ESimpleValueWithoutString returns ESimpleValueWithoutString
 	 *
 	 * Constraint:
-	 *     (simple_value_string=STRING | simple_value_without_string=ESimpleValueWithoutString)
+	 *     (simple_value_boolean=EBooleanAnsible | simple_value=NULL | simple_value=NUMBER | simple_value=NONE)
 	 */
-	protected void sequence_ESimpleValue(ISerializationContext context, ESimpleValue semanticObject) {
+	protected void sequence_ESimpleValueWithoutString(ISerializationContext context, ESimpleValueWithoutString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

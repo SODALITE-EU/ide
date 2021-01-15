@@ -197,15 +197,17 @@ EHandler:
 
 EModuleCall:
 	'module:' name=ID
-	BEGIN
 	(
-		('direct_parameter:' direct_parameter=EValuePassed)?
-		('parameters:'
 		BEGIN
-			(parameters+=EParameter)+
-		END)?
-	)
-	END
+		(
+			('direct_parameter:' direct_parameter=EValuePassed)?
+			('parameters:'
+			BEGIN
+				(parameters+=EParameter)+
+			END)?
+		)
+		END
+	)?
 ;
 
 EParameter:
@@ -444,7 +446,7 @@ EJinjaExpressionOrString:
 ;
 
 EJinjaExpressionAndString:
-	(jinja_expression_and_string+=EJinjaExpressionOrString)+
+	(new_line_command=('>' | '|'))? (jinja_expression_and_string+=EJinjaExpressionOrString)+
 ;
 
 EValuePassed:
@@ -452,15 +454,19 @@ EValuePassed:
 ;
 
 EValuePassedToJinjaExpression:
-	EValue | ESpecialVariable | EVariableReference | EFunctionCall | EEmptyCurlyBraces
+	EValueInLine | ESpecialVariable | EVariableReference | EFunctionCall | EEmptyCurlyBraces
 ;
 
 EComposedValue:
 	EDictionary | EList
 ;
 
-EValue:
-	EComposedValue | ESimpleValue
+EComposedValueInLine:
+	EDictionaryInLine | EListInLine
+;
+
+EValueInLine:
+	EComposedValueInLine | ESimpleValueInLine
 ;
 
 EValueWithoutString:
@@ -468,10 +474,10 @@ EValueWithoutString:
 ;
 
 ESimpleValueWithoutString:
-	simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER | simple_value=NONE
+	simple_value_boolean=EBooleanAnsible | simple_value=NULL | simple_value=NUMBER | simple_value=NONE
 ;
-ESimpleValue:
-	simple_value_string=STRING | simple_value_without_string=ESimpleValueWithoutString
+ESimpleValueInLine:
+	simple_value_string=STRING | simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER | simple_value=NONE
 ;
 
 EJinjaExpressionEvaluation:
@@ -599,10 +605,17 @@ ESquareBracketElement:
 ;
 
 EDictionary:
-	('{' dictionary_pairs+=EDictionaryPair (',' dictionary_pairs+=EDictionaryPair)* '}') |
+	EDictionaryInLine | EDictionaryIndented
+;
+
+EDictionaryInLine:
+	'{' dictionary_pairs+=EDictionaryPair (',' dictionary_pairs+=EDictionaryPair)* '}'
+;
+
+EDictionaryIndented:
 	BEGIN
 		(dictionary_pairs+=EDictionaryPair)+
-	END
+	END	
 ;
 
 EDictionaryPair:
@@ -610,7 +623,17 @@ EDictionaryPair:
 ;
 
 EList:
+	EListInLine | EListIndented
+;
+
+EListInLine:
 	'[' elements+=EValuePassed (',' elements+=EValuePassed)* ']'
+;
+
+EListIndented:
+	BEGIN
+		( '-' elements+=EValuePassed)+
+	END
 ;
 
 EDictionaryPassed:
@@ -626,15 +649,23 @@ ENumberPassed:
 ;
 
 EBooleanPassed:
-	EJinjaExpressionEvaluation | boolean_passed=BOOLEAN | boolean_passed=NULL
+	EJinjaExpressionEvaluation | boolean_passed=EBooleanAnsible | boolean_passed_null=NULL
 ;
 
 EEmptyCurlyBraces:
 	left_curly_brace='{' right_curly_brace='}'
 ;
 
+EBooleanAnsible:
+	boolean_ansible=BOOLEAN | boolean_ansible=BOOLEAN_YES_NO
+;
+
 terminal BOOLEAN:
 	'True' |'False'
+;
+
+terminal BOOLEAN_YES_NO:
+	'yes' | 'no'
 ;
 
 terminal NULL:

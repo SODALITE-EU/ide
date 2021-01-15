@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
@@ -29,6 +30,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl#getNumber_passed <em>Number passed</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl#getBoolean_passed <em>Boolean passed</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl#getBoolean_passed_null <em>Boolean passed null</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl#getJinja_expression <em>Jinja expression</em>}</li>
  * </ul>
  *
@@ -57,24 +59,34 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
   protected String number_passed = NUMBER_PASSED_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getBoolean_passed() <em>Boolean passed</em>}' attribute.
+   * The cached value of the '{@link #getBoolean_passed() <em>Boolean passed</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getBoolean_passed()
    * @generated
    * @ordered
    */
-  protected static final String BOOLEAN_PASSED_EDEFAULT = null;
+  protected EBooleanAnsible boolean_passed;
 
   /**
-   * The cached value of the '{@link #getBoolean_passed() <em>Boolean passed</em>}' attribute.
+   * The default value of the '{@link #getBoolean_passed_null() <em>Boolean passed null</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBoolean_passed()
+   * @see #getBoolean_passed_null()
    * @generated
    * @ordered
    */
-  protected String boolean_passed = BOOLEAN_PASSED_EDEFAULT;
+  protected static final String BOOLEAN_PASSED_NULL_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getBoolean_passed_null() <em>Boolean passed null</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBoolean_passed_null()
+   * @generated
+   * @ordered
+   */
+  protected String boolean_passed_null = BOOLEAN_PASSED_NULL_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getJinja_expression() <em>Jinja expression</em>}' containment reference.
@@ -138,7 +150,7 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
    * @generated
    */
   @Override
-  public String getBoolean_passed()
+  public EBooleanAnsible getBoolean_passed()
   {
     return boolean_passed;
   }
@@ -148,13 +160,63 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setBoolean_passed(String newBoolean_passed)
+  public NotificationChain basicSetBoolean_passed(EBooleanAnsible newBoolean_passed, NotificationChain msgs)
   {
-    String oldBoolean_passed = boolean_passed;
+    EBooleanAnsible oldBoolean_passed = boolean_passed;
     boolean_passed = newBoolean_passed;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED, oldBoolean_passed, boolean_passed));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED, oldBoolean_passed, newBoolean_passed);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setBoolean_passed(EBooleanAnsible newBoolean_passed)
+  {
+    if (newBoolean_passed != boolean_passed)
+    {
+      NotificationChain msgs = null;
+      if (boolean_passed != null)
+        msgs = ((InternalEObject)boolean_passed).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED, null, msgs);
+      if (newBoolean_passed != null)
+        msgs = ((InternalEObject)newBoolean_passed).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED, null, msgs);
+      msgs = basicSetBoolean_passed(newBoolean_passed, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED, newBoolean_passed, newBoolean_passed));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getBoolean_passed_null()
+  {
+    return boolean_passed_null;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setBoolean_passed_null(String newBoolean_passed_null)
+  {
+    String oldBoolean_passed_null = boolean_passed_null;
+    boolean_passed_null = newBoolean_passed_null;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL, oldBoolean_passed_null, boolean_passed_null));
   }
 
   /**
@@ -217,6 +279,8 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
+        return basicSetBoolean_passed(null, msgs);
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION:
         return basicSetJinja_expression(null, msgs);
     }
@@ -237,6 +301,8 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
         return getNumber_passed();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
         return getBoolean_passed();
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL:
+        return getBoolean_passed_null();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION:
         return getJinja_expression();
     }
@@ -257,7 +323,10 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
         setNumber_passed((String)newValue);
         return;
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
-        setBoolean_passed((String)newValue);
+        setBoolean_passed((EBooleanAnsible)newValue);
+        return;
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL:
+        setBoolean_passed_null((String)newValue);
         return;
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION:
         setJinja_expression((EJinjaExpressionEvaluationWithoutBrackets)newValue);
@@ -280,7 +349,10 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
         setNumber_passed(NUMBER_PASSED_EDEFAULT);
         return;
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
-        setBoolean_passed(BOOLEAN_PASSED_EDEFAULT);
+        setBoolean_passed((EBooleanAnsible)null);
+        return;
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL:
+        setBoolean_passed_null(BOOLEAN_PASSED_NULL_EDEFAULT);
         return;
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION:
         setJinja_expression((EJinjaExpressionEvaluationWithoutBrackets)null);
@@ -302,7 +374,9 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED:
         return NUMBER_PASSED_EDEFAULT == null ? number_passed != null : !NUMBER_PASSED_EDEFAULT.equals(number_passed);
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
-        return BOOLEAN_PASSED_EDEFAULT == null ? boolean_passed != null : !BOOLEAN_PASSED_EDEFAULT.equals(boolean_passed);
+        return boolean_passed != null;
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL:
+        return BOOLEAN_PASSED_NULL_EDEFAULT == null ? boolean_passed_null != null : !BOOLEAN_PASSED_NULL_EDEFAULT.equals(boolean_passed_null);
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION:
         return jinja_expression != null;
     }
@@ -344,6 +418,7 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
       switch (derivedFeatureID)
       {
         case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED: return AnsibleDslPackage.EBOOLEAN_PASSED__BOOLEAN_PASSED;
+        case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL: return AnsibleDslPackage.EBOOLEAN_PASSED__BOOLEAN_PASSED_NULL;
         default: return -1;
       }
     }
@@ -385,6 +460,7 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
       switch (baseFeatureID)
       {
         case AnsibleDslPackage.EBOOLEAN_PASSED__BOOLEAN_PASSED: return AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED;
+        case AnsibleDslPackage.EBOOLEAN_PASSED__BOOLEAN_PASSED_NULL: return AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL;
         default: return -1;
       }
     }
@@ -404,8 +480,8 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (number_passed: ");
     result.append(number_passed);
-    result.append(", boolean_passed: ");
-    result.append(boolean_passed);
+    result.append(", boolean_passed_null: ");
+    result.append(boolean_passed_null);
     result.append(')');
     return result.toString();
   }
