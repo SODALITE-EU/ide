@@ -467,11 +467,17 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.EIF_BLOCK:
+      {
+        EIfBlock eIfBlock = (EIfBlock)theEObject;
+        T result = caseEIfBlock(eIfBlock);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.EFILTERED_EXPRESSION:
       {
         EFilteredExpression eFilteredExpression = (EFilteredExpression)theEObject;
         T result = caseEFilteredExpression(eFilteredExpression);
-        if (result == null) result = caseEJinjaExpressionEvaluationWithoutBrackets(eFilteredExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -514,14 +520,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EParenthesisedExpression eParenthesisedExpression = (EParenthesisedExpression)theEObject;
         T result = caseEParenthesisedExpression(eParenthesisedExpression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AnsibleDslPackage.EIF_EXPRESSION:
-      {
-        EIfExpression eIfExpression = (EIfExpression)theEObject;
-        T result = caseEIfExpression(eIfExpression);
-        if (result == null) result = caseEJinjaExpressionEvaluationWithoutBrackets(eIfExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1601,6 +1599,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EIf Block</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EIf Block</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEIfBlock(EIfBlock object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EFiltered Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1708,22 +1722,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEParenthesisedExpression(EParenthesisedExpression object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EIf Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EIf Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEIfExpression(EIfExpression object)
   {
     return null;
   }

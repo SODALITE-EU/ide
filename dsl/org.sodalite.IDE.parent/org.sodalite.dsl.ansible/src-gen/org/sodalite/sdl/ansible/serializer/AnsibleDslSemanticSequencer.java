@@ -35,7 +35,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
-import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EIfBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
@@ -44,6 +44,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.EListIndented;
@@ -158,8 +159,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EHANDLER:
 				sequence_EHandler(context, (EHandler) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EIF_EXPRESSION:
-				sequence_EIfExpression(context, (EIfExpression) semanticObject); 
+			case AnsibleDslPackage.EIF_BLOCK:
+				sequence_EIfBlock(context, (EIfBlock) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EIF_STATEMENT:
 				sequence_EIfStatement(context, (EIfStatement) semanticObject); 
@@ -184,6 +185,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION:
 				sequence_EJinjaExpressionEvaluation(context, (EJinjaExpressionEvaluation) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS:
+				sequence_EJinjaExpressionEvaluationWithoutBrackets(context, (EJinjaExpressionEvaluationWithoutBrackets) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING:
 				sequence_EJinjaExpressionOrString(context, (EJinjaExpressionOrString) semanticObject); 
@@ -554,7 +558,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EJinjaExpressionEvaluationWithoutBrackets returns EFilteredExpression
 	 *     EFilteredExpression returns EFilteredExpression
 	 *
 	 * Constraint:
@@ -645,13 +648,12 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EJinjaExpressionEvaluationWithoutBrackets returns EIfExpression
-	 *     EIfExpression returns EIfExpression
+	 *     EIfBlock returns EIfBlock
 	 *
 	 * Constraint:
-	 *     (if_expression=EFilteredExpression if_condition=EFilteredExpression else_expression=EFilteredExpression?)
+	 *     (if_condition=EFilteredExpression else_expression=EFilteredExpression?)
 	 */
-	protected void sequence_EIfExpression(ISerializationContext context, EIfExpression semanticObject) {
+	protected void sequence_EIfBlock(ISerializationContext context, EIfBlock semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -776,6 +778,18 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ((new_line_command='>' | new_line_command='|')? jinja_expression_and_string+=EJinjaExpressionOrString+)
 	 */
 	protected void sequence_EJinjaExpressionAndString(ISerializationContext context, EJinjaExpressionAndString semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EJinjaExpressionEvaluationWithoutBrackets returns EJinjaExpressionEvaluationWithoutBrackets
+	 *
+	 * Constraint:
+	 *     (expression_to_evaluate=EFilteredExpression if_chain+=EIfBlock*)
+	 */
+	protected void sequence_EJinjaExpressionEvaluationWithoutBrackets(ISerializationContext context, EJinjaExpressionEvaluationWithoutBrackets semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

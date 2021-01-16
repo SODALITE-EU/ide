@@ -288,14 +288,25 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="jinja_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionEvaluationWithoutBrackets"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionEvaluationWithoutBrackets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression_to_evaluate"
+        eType="#//EFilteredExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="if_chain" upperBound="-1"
+        eType="#//EIfBlock" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFunctionCall" eSuperTypes="#//EValuePassedToJinjaExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//EFilteredExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="empty_brackets" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EFilteredExpression" eSuperTypes="#//EJinjaExpressionEvaluationWithoutBrackets">
+  <eClassifiers xsi:type="ecore:EClass" name="EIfBlock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="if_condition" eType="#//EFilteredExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else_expression" eType="#//EFilteredExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EFilteredExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="to_filter" eType="#//EOrExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="#//EFilteredExpression"
@@ -345,14 +356,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="square_bracket_elements"
         upperBound="-1" eType="#//ESquareBracketElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//ETailElement"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EIfExpression" eSuperTypes="#//EJinjaExpressionEvaluationWithoutBrackets">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="if_expression" eType="#//EFilteredExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="if_condition" eType="#//EFilteredExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="else_expression" eType="#//EFilteredExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EJinjaStatement" eSuperTypes="#//EJinjaExpressionOrString">

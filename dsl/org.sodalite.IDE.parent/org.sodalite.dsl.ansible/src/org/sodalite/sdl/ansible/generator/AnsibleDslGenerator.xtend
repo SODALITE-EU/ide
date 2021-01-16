@@ -30,7 +30,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrac
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall
-import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression
 import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EOperation
@@ -564,12 +563,15 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileJinjaExpressionEvaluationWithoutBrackets(EJinjaExpressionEvaluationWithoutBrackets jinja, String space){
-		if (jinja instanceof EFilteredExpression){
-			return compileFilteredExpression(jinja, space)
+		var stringToReturn = ""
+		if (jinja.expression_to_evaluate !== null){
+			stringToReturn = stringToReturn.concat(compileFilteredExpression(jinja.expression_to_evaluate, space))
 		}
-		else if (jinja instanceof EIfExpression){
-			return compileIfExpression(jinja, space)
+		for (ifBlock : jinja.if_chain){
+			stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(ifBlock.if_condition, space))
+			if (ifBlock.else_expression !== null) stringToReturn = stringToReturn.concat(" else ").concat(compileFilteredExpression(ifBlock.else_expression, space))
 		}
+		return stringToReturn
 	}
 
 	def compileFunctionCall(EFunctionCall functionCall, String space){
@@ -593,19 +595,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return stringToReturn
 	}
 	
-	def compileIfExpression(EIfExpression ifExpression, String space){
-		var stringToReturn = compileFilteredExpression(ifExpression.if_expression, space)
-		stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(ifExpression.if_condition, space))
-		if (ifExpression.else_expression !== null){
-			stringToReturn = stringToReturn.concat(" else ").concat(compileFilteredExpression(ifExpression.else_expression, space))
-		}
-		return stringToReturn
-	}
-	
 	def compileFilteredExpression(EFilteredExpression filteredExpression, String space){
 		var stringToReturn = compileOrExpression(filteredExpression.to_filter, space).toString()
 		if (filteredExpression.filter !== null){
-			stringToReturn = stringToReturn.concat(" | ").concat(compileJinjaExpressionEvaluationWithoutBrackets(filteredExpression.filter, space).toString())
+			stringToReturn = stringToReturn.concat(" | ").concat(compileFilteredExpression(filteredExpression.filter, space).toString())
 		}
 		return stringToReturn
 	}

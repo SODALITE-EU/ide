@@ -3817,22 +3817,30 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	public class EJinjaExpressionEvaluationWithoutBracketsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cEFilteredExpressionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cEIfExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cExpression_to_evaluateAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cExpression_to_evaluateEFilteredExpressionParserRuleCall_0_0 = (RuleCall)cExpression_to_evaluateAssignment_0.eContents().get(0);
+		private final Assignment cIf_chainAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cIf_chainEIfBlockParserRuleCall_1_0 = (RuleCall)cIf_chainAssignment_1.eContents().get(0);
 		
 		//EJinjaExpressionEvaluationWithoutBrackets:
-		//	EFilteredExpression | EIfExpression;
+		//	expression_to_evaluate=EFilteredExpression if_chain+=EIfBlock*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EFilteredExpression | EIfExpression
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//expression_to_evaluate=EFilteredExpression if_chain+=EIfBlock*
+		public Group getGroup() { return cGroup; }
+		
+		//expression_to_evaluate=EFilteredExpression
+		public Assignment getExpression_to_evaluateAssignment_0() { return cExpression_to_evaluateAssignment_0; }
 		
 		//EFilteredExpression
-		public RuleCall getEFilteredExpressionParserRuleCall_0() { return cEFilteredExpressionParserRuleCall_0; }
+		public RuleCall getExpression_to_evaluateEFilteredExpressionParserRuleCall_0_0() { return cExpression_to_evaluateEFilteredExpressionParserRuleCall_0_0; }
 		
-		//EIfExpression
-		public RuleCall getEIfExpressionParserRuleCall_1() { return cEIfExpressionParserRuleCall_1; }
+		//if_chain+=EIfBlock*
+		public Assignment getIf_chainAssignment_1() { return cIf_chainAssignment_1; }
+		
+		//EIfBlock
+		public RuleCall getIf_chainEIfBlockParserRuleCall_1_0() { return cIf_chainEIfBlockParserRuleCall_1_0; }
 	}
 	public class EFunctionCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EFunctionCall");
@@ -3901,6 +3909,45 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//'()'
 		public Keyword getEmpty_bracketsLeftParenthesisRightParenthesisKeyword_1_1_0() { return cEmpty_bracketsLeftParenthesisRightParenthesisKeyword_1_1_0; }
+	}
+	public class EIfBlockElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EIfBlock");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cIf_conditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cIf_conditionEFilteredExpressionParserRuleCall_1_0 = (RuleCall)cIf_conditionAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cElseKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cElse_expressionAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cElse_expressionEFilteredExpressionParserRuleCall_2_1_0 = (RuleCall)cElse_expressionAssignment_2_1.eContents().get(0);
+		
+		//EIfBlock:
+		//	'if' if_condition=EFilteredExpression ('else' else_expression=EFilteredExpression)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'if' if_condition=EFilteredExpression ('else' else_expression=EFilteredExpression)?
+		public Group getGroup() { return cGroup; }
+		
+		//'if'
+		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
+		
+		//if_condition=EFilteredExpression
+		public Assignment getIf_conditionAssignment_1() { return cIf_conditionAssignment_1; }
+		
+		//EFilteredExpression
+		public RuleCall getIf_conditionEFilteredExpressionParserRuleCall_1_0() { return cIf_conditionEFilteredExpressionParserRuleCall_1_0; }
+		
+		//('else' else_expression=EFilteredExpression)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'else'
+		public Keyword getElseKeyword_2_0() { return cElseKeyword_2_0; }
+		
+		//else_expression=EFilteredExpression
+		public Assignment getElse_expressionAssignment_2_1() { return cElse_expressionAssignment_2_1; }
+		
+		//EFilteredExpression
+		public RuleCall getElse_expressionEFilteredExpressionParserRuleCall_2_1_0() { return cElse_expressionEFilteredExpressionParserRuleCall_2_1_0; }
 	}
 	public class EFilteredExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
@@ -4278,59 +4325,6 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//ETailElement
 		public RuleCall getTailETailElementParserRuleCall_2_1_0() { return cTailETailElementParserRuleCall_2_1_0; }
-	}
-	public class EIfExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EIfExpression");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cReturnKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cIf_expressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cIf_expressionEFilteredExpressionParserRuleCall_1_0 = (RuleCall)cIf_expressionAssignment_1.eContents().get(0);
-		private final Keyword cIfKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cIf_conditionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cIf_conditionEFilteredExpressionParserRuleCall_3_0 = (RuleCall)cIf_conditionAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cElseKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cElse_expressionAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cElse_expressionEFilteredExpressionParserRuleCall_4_1_0 = (RuleCall)cElse_expressionAssignment_4_1.eContents().get(0);
-		
-		//EIfExpression:
-		//	'return' if_expression=EFilteredExpression 'if' if_condition=EFilteredExpression ('else'
-		//	else_expression=EFilteredExpression)?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'return' if_expression=EFilteredExpression 'if' if_condition=EFilteredExpression ('else'
-		//else_expression=EFilteredExpression)?
-		public Group getGroup() { return cGroup; }
-		
-		//'return'
-		public Keyword getReturnKeyword_0() { return cReturnKeyword_0; }
-		
-		//if_expression=EFilteredExpression
-		public Assignment getIf_expressionAssignment_1() { return cIf_expressionAssignment_1; }
-		
-		//EFilteredExpression
-		public RuleCall getIf_expressionEFilteredExpressionParserRuleCall_1_0() { return cIf_expressionEFilteredExpressionParserRuleCall_1_0; }
-		
-		//'if'
-		public Keyword getIfKeyword_2() { return cIfKeyword_2; }
-		
-		//if_condition=EFilteredExpression
-		public Assignment getIf_conditionAssignment_3() { return cIf_conditionAssignment_3; }
-		
-		//EFilteredExpression
-		public RuleCall getIf_conditionEFilteredExpressionParserRuleCall_3_0() { return cIf_conditionEFilteredExpressionParserRuleCall_3_0; }
-		
-		//('else' else_expression=EFilteredExpression)?
-		public Group getGroup_4() { return cGroup_4; }
-		
-		//'else'
-		public Keyword getElseKeyword_4_0() { return cElseKeyword_4_0; }
-		
-		//else_expression=EFilteredExpression
-		public Assignment getElse_expressionAssignment_4_1() { return cElse_expressionAssignment_4_1; }
-		
-		//EFilteredExpression
-		public RuleCall getElse_expressionEFilteredExpressionParserRuleCall_4_1_0() { return cElse_expressionEFilteredExpressionParserRuleCall_4_1_0; }
 	}
 	public class EJinjaStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaStatement");
@@ -5552,6 +5546,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final EJinjaExpressionEvaluationElements pEJinjaExpressionEvaluation;
 	private final EJinjaExpressionEvaluationWithoutBracketsElements pEJinjaExpressionEvaluationWithoutBrackets;
 	private final EFunctionCallElements pEFunctionCall;
+	private final EIfBlockElements pEIfBlock;
 	private final EFilteredExpressionElements pEFilteredExpression;
 	private final EOrExpressionElements pEOrExpression;
 	private final EAndExpressionElements pEAndExpression;
@@ -5559,7 +5554,6 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final EOperationElements pEOperation;
 	private final EIsExpressionElements pEIsExpression;
 	private final EParenthesisedExpressionElements pEParenthesisedExpression;
-	private final EIfExpressionElements pEIfExpression;
 	private final EJinjaStatementElements pEJinjaStatement;
 	private final EIfStatementElements pEIfStatement;
 	private final EElifBlockElements pEElifBlock;
@@ -5658,6 +5652,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pEJinjaExpressionEvaluation = new EJinjaExpressionEvaluationElements();
 		this.pEJinjaExpressionEvaluationWithoutBrackets = new EJinjaExpressionEvaluationWithoutBracketsElements();
 		this.pEFunctionCall = new EFunctionCallElements();
+		this.pEIfBlock = new EIfBlockElements();
 		this.pEFilteredExpression = new EFilteredExpressionElements();
 		this.pEOrExpression = new EOrExpressionElements();
 		this.pEAndExpression = new EAndExpressionElements();
@@ -5665,7 +5660,6 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pEOperation = new EOperationElements();
 		this.pEIsExpression = new EIsExpressionElements();
 		this.pEParenthesisedExpression = new EParenthesisedExpressionElements();
-		this.pEIfExpression = new EIfExpressionElements();
 		this.pEJinjaStatement = new EJinjaStatementElements();
 		this.pEIfStatement = new EIfStatementElements();
 		this.pEElifBlock = new EElifBlockElements();
@@ -6331,7 +6325,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EJinjaExpressionEvaluationWithoutBrackets:
-	//	EFilteredExpression | EIfExpression;
+	//	expression_to_evaluate=EFilteredExpression if_chain+=EIfBlock*;
 	public EJinjaExpressionEvaluationWithoutBracketsElements getEJinjaExpressionEvaluationWithoutBracketsAccess() {
 		return pEJinjaExpressionEvaluationWithoutBrackets;
 	}
@@ -6349,6 +6343,16 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	public ParserRule getEFunctionCallRule() {
 		return getEFunctionCallAccess().getRule();
+	}
+	
+	//EIfBlock:
+	//	'if' if_condition=EFilteredExpression ('else' else_expression=EFilteredExpression)?;
+	public EIfBlockElements getEIfBlockAccess() {
+		return pEIfBlock;
+	}
+	
+	public ParserRule getEIfBlockRule() {
+		return getEIfBlockAccess().getRule();
 	}
 	
 	//EFilteredExpression:
@@ -6421,17 +6425,6 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	public ParserRule getEParenthesisedExpressionRule() {
 		return getEParenthesisedExpressionAccess().getRule();
-	}
-	
-	//EIfExpression:
-	//	'return' if_expression=EFilteredExpression 'if' if_condition=EFilteredExpression ('else'
-	//	else_expression=EFilteredExpression)?;
-	public EIfExpressionElements getEIfExpressionAccess() {
-		return pEIfExpression;
-	}
-	
-	public ParserRule getEIfExpressionRule() {
-		return getEIfExpressionAccess().getRule();
 	}
 	
 	//EJinjaStatement:

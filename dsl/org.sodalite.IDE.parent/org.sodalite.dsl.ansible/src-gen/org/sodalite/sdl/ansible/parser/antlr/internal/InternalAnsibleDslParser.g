@@ -7310,23 +7310,44 @@ ruleEJinjaExpressionEvaluationWithoutBrackets returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		{
-			newCompositeNode(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getEFilteredExpressionParserRuleCall_0());
-		}
-		this_EFilteredExpression_0=ruleEFilteredExpression
-		{
-			$current = $this_EFilteredExpression_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getEIfExpressionParserRuleCall_1());
-		}
-		this_EIfExpression_1=ruleEIfExpression
-		{
-			$current = $this_EIfExpression_1.current;
-			afterParserOrEnumRuleCall();
-		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getExpression_to_evaluateEFilteredExpressionParserRuleCall_0_0());
+				}
+				lv_expression_to_evaluate_0_0=ruleEFilteredExpression
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsRule());
+					}
+					set(
+						$current,
+						"expression_to_evaluate",
+						lv_expression_to_evaluate_0_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getIf_chainEIfBlockParserRuleCall_1_0());
+				}
+				lv_if_chain_1_0=ruleEIfBlock
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsRule());
+					}
+					add(
+						$current,
+						"if_chain",
+						lv_if_chain_1_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EIfBlock");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
 	)
 ;
 
@@ -7431,6 +7452,73 @@ ruleEFunctionCall returns [EObject current=null]
 							$current = createModelElement(grammarAccess.getEFunctionCallRule());
 						}
 						setWithLastConsumed($current, "empty_brackets", lv_empty_brackets_6_0, "()");
+					}
+				)
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleEIfBlock
+entryRuleEIfBlock returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEIfBlockRule()); }
+	iv_ruleEIfBlock=ruleEIfBlock
+	{ $current=$iv_ruleEIfBlock.current; }
+	EOF;
+
+// Rule EIfBlock
+ruleEIfBlock returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0=If
+		{
+			newLeafNode(otherlv_0, grammarAccess.getEIfBlockAccess().getIfKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEIfBlockAccess().getIf_conditionEFilteredExpressionParserRuleCall_1_0());
+				}
+				lv_if_condition_1_0=ruleEFilteredExpression
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEIfBlockRule());
+					}
+					set(
+						$current,
+						"if_condition",
+						lv_if_condition_1_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_2=Else
+			{
+				newLeafNode(otherlv_2, grammarAccess.getEIfBlockAccess().getElseKeyword_2_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEIfBlockAccess().getElse_expressionEFilteredExpressionParserRuleCall_2_1_0());
+					}
+					lv_else_expression_3_0=ruleEFilteredExpression
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEIfBlockRule());
+						}
+						set(
+							$current,
+							"else_expression",
+							lv_else_expression_3_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -8128,96 +8216,6 @@ ruleEParenthesisedExpression returns [EObject current=null]
 				)
 			)
 		)*
-	)
-;
-
-// Entry rule entryRuleEIfExpression
-entryRuleEIfExpression returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getEIfExpressionRule()); }
-	iv_ruleEIfExpression=ruleEIfExpression
-	{ $current=$iv_ruleEIfExpression.current; }
-	EOF;
-
-// Rule EIfExpression
-ruleEIfExpression returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0=Return
-		{
-			newLeafNode(otherlv_0, grammarAccess.getEIfExpressionAccess().getReturnKeyword_0());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getEIfExpressionAccess().getIf_expressionEFilteredExpressionParserRuleCall_1_0());
-				}
-				lv_if_expression_1_0=ruleEFilteredExpression
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEIfExpressionRule());
-					}
-					set(
-						$current,
-						"if_expression",
-						lv_if_expression_1_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_2=If
-		{
-			newLeafNode(otherlv_2, grammarAccess.getEIfExpressionAccess().getIfKeyword_2());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getEIfExpressionAccess().getIf_conditionEFilteredExpressionParserRuleCall_3_0());
-				}
-				lv_if_condition_3_0=ruleEFilteredExpression
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEIfExpressionRule());
-					}
-					set(
-						$current,
-						"if_condition",
-						lv_if_condition_3_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		(
-			otherlv_4=Else
-			{
-				newLeafNode(otherlv_4, grammarAccess.getEIfExpressionAccess().getElseKeyword_4_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getEIfExpressionAccess().getElse_expressionEFilteredExpressionParserRuleCall_4_1_0());
-					}
-					lv_else_expression_5_0=ruleEFilteredExpression
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEIfExpressionRule());
-						}
-						set(
-							$current,
-							"else_expression",
-							lv_else_expression_5_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EFilteredExpression");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
 	)
 ;
 

@@ -326,6 +326,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEFunctionCallAdapter();
       }
       @Override
+      public Adapter caseEIfBlock(EIfBlock object)
+      {
+        return createEIfBlockAdapter();
+      }
+      @Override
       public Adapter caseEFilteredExpression(EFilteredExpression object)
       {
         return createEFilteredExpressionAdapter();
@@ -359,11 +364,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEParenthesisedExpression(EParenthesisedExpression object)
       {
         return createEParenthesisedExpressionAdapter();
-      }
-      @Override
-      public Adapter caseEIfExpression(EIfExpression object)
-      {
-        return createEIfExpressionAdapter();
       }
       @Override
       public Adapter caseEJinjaStatement(EJinjaStatement object)
@@ -1293,6 +1293,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfBlock <em>EIf Block</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfBlock
+   * @generated
+   */
+  public Adapter createEIfBlockAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression <em>EFiltered Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1393,21 +1408,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEParenthesisedExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression <em>EIf Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression
-   * @generated
-   */
-  public Adapter createEIfExpressionAdapter()
   {
     return null;
   }

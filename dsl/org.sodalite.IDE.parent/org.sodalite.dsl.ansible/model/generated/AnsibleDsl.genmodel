@@ -199,11 +199,18 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionEvaluation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionEvaluation/jinja_expression"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionEvaluationWithoutBrackets"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionEvaluationWithoutBrackets">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionEvaluationWithoutBrackets/expression_to_evaluate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionEvaluationWithoutBrackets/if_chain"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFunctionCall">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFunctionCall/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFunctionCall/parameters"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EFunctionCall/empty_brackets"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EIfBlock">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfBlock/if_condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfBlock/else_expression"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EFilteredExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EFilteredExpression/to_filter"/>
@@ -239,11 +246,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/parenthesised_term"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/square_bracket_elements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EParenthesisedExpression/tail"/>
-    </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EIfExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfExpression/if_expression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfExpression/if_condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIfExpression/else_expression"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EJinjaStatement/else_block_sign"/>

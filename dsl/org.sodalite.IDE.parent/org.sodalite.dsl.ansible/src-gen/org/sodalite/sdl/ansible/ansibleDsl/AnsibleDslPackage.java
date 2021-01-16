@@ -3023,13 +3023,31 @@ public interface AnsibleDslPackage extends EPackage
   int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS = 48;
 
   /**
+   * The feature id for the '<em><b>Expression to evaluate</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS__EXPRESSION_TO_EVALUATE = 0;
+
+  /**
+   * The feature id for the '<em><b>If chain</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS__IF_CHAIN = 1;
+
+  /**
    * The number of structural features of the '<em>EJinja Expression Evaluation Without Brackets</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT = 0;
+  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl <em>EFunction Call</em>}' class.
@@ -3078,6 +3096,43 @@ public interface AnsibleDslPackage extends EPackage
   int EFUNCTION_CALL_FEATURE_COUNT = EVALUE_PASSED_TO_JINJA_EXPRESSION_FEATURE_COUNT + 3;
 
   /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfBlockImpl <em>EIf Block</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIfBlockImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIfBlock()
+   * @generated
+   */
+  int EIF_BLOCK = 50;
+
+  /**
+   * The feature id for the '<em><b>If condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_BLOCK__IF_CONDITION = 0;
+
+  /**
+   * The feature id for the '<em><b>Else expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_BLOCK__ELSE_EXPRESSION = 1;
+
+  /**
+   * The number of structural features of the '<em>EIf Block</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_BLOCK_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl <em>EFiltered Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3085,7 +3140,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEFilteredExpression()
    * @generated
    */
-  int EFILTERED_EXPRESSION = 50;
+  int EFILTERED_EXPRESSION = 51;
 
   /**
    * The feature id for the '<em><b>To filter</b></em>' containment reference.
@@ -3094,7 +3149,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFILTERED_EXPRESSION__TO_FILTER = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 0;
+  int EFILTERED_EXPRESSION__TO_FILTER = 0;
 
   /**
    * The feature id for the '<em><b>Filter</b></em>' containment reference.
@@ -3103,7 +3158,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFILTERED_EXPRESSION__FILTER = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 1;
+  int EFILTERED_EXPRESSION__FILTER = 1;
 
   /**
    * The number of structural features of the '<em>EFiltered Expression</em>' class.
@@ -3112,7 +3167,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFILTERED_EXPRESSION_FEATURE_COUNT = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 2;
+  int EFILTERED_EXPRESSION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EOrExpressionImpl <em>EOr Expression</em>}' class.
@@ -3122,7 +3177,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEOrExpression()
    * @generated
    */
-  int EOR_EXPRESSION = 51;
+  int EOR_EXPRESSION = 52;
 
   /**
    * The feature id for the '<em><b>Left or</b></em>' containment reference.
@@ -3159,7 +3214,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEAndExpression()
    * @generated
    */
-  int EAND_EXPRESSION = 52;
+  int EAND_EXPRESSION = 53;
 
   /**
    * The feature id for the '<em><b>Left and</b></em>' containment reference.
@@ -3196,7 +3251,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETruthExpression()
    * @generated
    */
-  int ETRUTH_EXPRESSION = 53;
+  int ETRUTH_EXPRESSION = 54;
 
   /**
    * The feature id for the '<em><b>Left value</b></em>' containment reference.
@@ -3242,7 +3297,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEOperation()
    * @generated
    */
-  int EOPERATION = 54;
+  int EOPERATION = 55;
 
   /**
    * The feature id for the '<em><b>Left operand</b></em>' containment reference.
@@ -3288,7 +3343,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIsExpression()
    * @generated
    */
-  int EIS_EXPRESSION = 55;
+  int EIS_EXPRESSION = 56;
 
   /**
    * The feature id for the '<em><b>Not</b></em>' attribute.
@@ -3352,7 +3407,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEParenthesisedExpression()
    * @generated
    */
-  int EPARENTHESISED_EXPRESSION = 56;
+  int EPARENTHESISED_EXPRESSION = 57;
 
   /**
    * The feature id for the '<em><b>Basic value</b></em>' containment reference.
@@ -3398,52 +3453,6 @@ public interface AnsibleDslPackage extends EPackage
    * @ordered
    */
   int EPARENTHESISED_EXPRESSION_FEATURE_COUNT = 4;
-
-  /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl <em>EIf Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIfExpression()
-   * @generated
-   */
-  int EIF_EXPRESSION = 57;
-
-  /**
-   * The feature id for the '<em><b>If expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EIF_EXPRESSION__IF_EXPRESSION = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>If condition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EIF_EXPRESSION__IF_CONDITION = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Else expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EIF_EXPRESSION__ELSE_EXPRESSION = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>EIf Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EIF_EXPRESSION_FEATURE_COUNT = EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl <em>EJinja Statement</em>}' class.
@@ -6220,6 +6229,28 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEJinjaExpressionEvaluationWithoutBrackets();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets#getExpression_to_evaluate <em>Expression to evaluate</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expression to evaluate</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets#getExpression_to_evaluate()
+   * @see #getEJinjaExpressionEvaluationWithoutBrackets()
+   * @generated
+   */
+  EReference getEJinjaExpressionEvaluationWithoutBrackets_Expression_to_evaluate();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets#getIf_chain <em>If chain</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>If chain</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets#getIf_chain()
+   * @see #getEJinjaExpressionEvaluationWithoutBrackets()
+   * @generated
+   */
+  EReference getEJinjaExpressionEvaluationWithoutBrackets_If_chain();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall <em>EFunction Call</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6261,6 +6292,38 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EAttribute getEFunctionCall_Empty_brackets();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfBlock <em>EIf Block</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EIf Block</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfBlock
+   * @generated
+   */
+  EClass getEIfBlock();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfBlock#getIf_condition <em>If condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>If condition</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfBlock#getIf_condition()
+   * @see #getEIfBlock()
+   * @generated
+   */
+  EReference getEIfBlock_If_condition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfBlock#getElse_expression <em>Else expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Else expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfBlock#getElse_expression()
+   * @see #getEIfBlock()
+   * @generated
+   */
+  EReference getEIfBlock_Else_expression();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression <em>EFiltered Expression</em>}'.
@@ -6562,49 +6625,6 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EReference getEParenthesisedExpression_Tail();
-
-  /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression <em>EIf Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EIf Expression</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression
-   * @generated
-   */
-  EClass getEIfExpression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getIf_expression <em>If expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>If expression</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getIf_expression()
-   * @see #getEIfExpression()
-   * @generated
-   */
-  EReference getEIfExpression_If_expression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getIf_condition <em>If condition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>If condition</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getIf_condition()
-   * @see #getEIfExpression()
-   * @generated
-   */
-  EReference getEIfExpression_If_condition();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getElse_expression <em>Else expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Else expression</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EIfExpression#getElse_expression()
-   * @see #getEIfExpression()
-   * @generated
-   */
-  EReference getEIfExpression_Else_expression();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement <em>EJinja Statement</em>}'.
@@ -8786,6 +8806,22 @@ public interface AnsibleDslPackage extends EPackage
     EClass EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS = eINSTANCE.getEJinjaExpressionEvaluationWithoutBrackets();
 
     /**
+     * The meta object literal for the '<em><b>Expression to evaluate</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS__EXPRESSION_TO_EVALUATE = eINSTANCE.getEJinjaExpressionEvaluationWithoutBrackets_Expression_to_evaluate();
+
+    /**
+     * The meta object literal for the '<em><b>If chain</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS__IF_CHAIN = eINSTANCE.getEJinjaExpressionEvaluationWithoutBrackets_If_chain();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl <em>EFunction Call</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -8818,6 +8854,32 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EAttribute EFUNCTION_CALL__EMPTY_BRACKETS = eINSTANCE.getEFunctionCall_Empty_brackets();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfBlockImpl <em>EIf Block</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIfBlockImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIfBlock()
+     * @generated
+     */
+    EClass EIF_BLOCK = eINSTANCE.getEIfBlock();
+
+    /**
+     * The meta object literal for the '<em><b>If condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIF_BLOCK__IF_CONDITION = eINSTANCE.getEIfBlock_If_condition();
+
+    /**
+     * The meta object literal for the '<em><b>Else expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EIF_BLOCK__ELSE_EXPRESSION = eINSTANCE.getEIfBlock_Else_expression();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFilteredExpressionImpl <em>EFiltered Expression</em>}' class.
@@ -9056,40 +9118,6 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference EPARENTHESISED_EXPRESSION__TAIL = eINSTANCE.getEParenthesisedExpression_Tail();
-
-    /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl <em>EIf Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIfExpression()
-     * @generated
-     */
-    EClass EIF_EXPRESSION = eINSTANCE.getEIfExpression();
-
-    /**
-     * The meta object literal for the '<em><b>If expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EIF_EXPRESSION__IF_EXPRESSION = eINSTANCE.getEIfExpression_If_expression();
-
-    /**
-     * The meta object literal for the '<em><b>If condition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EIF_EXPRESSION__IF_CONDITION = eINSTANCE.getEIfExpression_If_condition();
-
-    /**
-     * The meta object literal for the '<em><b>Else expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EIF_EXPRESSION__ELSE_EXPRESSION = eINSTANCE.getEIfExpression_Else_expression();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl <em>EJinja Statement</em>}' class.

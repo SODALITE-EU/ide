@@ -51,7 +51,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEValueWithoutStringAccess().getAlternatives(), "rule__EValueWithoutString__Alternatives");
 			builder.put(grammarAccess.getESimpleValueWithoutStringAccess().getAlternatives(), "rule__ESimpleValueWithoutString__Alternatives");
 			builder.put(grammarAccess.getESimpleValueInLineAccess().getAlternatives(), "rule__ESimpleValueInLine__Alternatives");
-			builder.put(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getAlternatives(), "rule__EJinjaExpressionEvaluationWithoutBrackets__Alternatives");
 			builder.put(grammarAccess.getEFunctionCallAccess().getAlternatives_1(), "rule__EFunctionCall__Alternatives_1");
 			builder.put(grammarAccess.getETruthExpressionAccess().getEquality_signAlternatives_1_0_0(), "rule__ETruthExpression__Equality_signAlternatives_1_0_0");
 			builder.put(grammarAccess.getEOperationAccess().getOperatorAlternatives_1_0_0(), "rule__EOperation__OperatorAlternatives_1_0_0");
@@ -219,9 +218,12 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENotifiedTopicAccess().getGroup(), "rule__ENotifiedTopic__Group__0");
 			builder.put(grammarAccess.getEJinjaExpressionAndStringAccess().getGroup(), "rule__EJinjaExpressionAndString__Group__0");
 			builder.put(grammarAccess.getEJinjaExpressionEvaluationAccess().getGroup(), "rule__EJinjaExpressionEvaluation__Group__0");
+			builder.put(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getGroup(), "rule__EJinjaExpressionEvaluationWithoutBrackets__Group__0");
 			builder.put(grammarAccess.getEFunctionCallAccess().getGroup(), "rule__EFunctionCall__Group__0");
 			builder.put(grammarAccess.getEFunctionCallAccess().getGroup_1_0(), "rule__EFunctionCall__Group_1_0__0");
 			builder.put(grammarAccess.getEFunctionCallAccess().getGroup_1_0_2(), "rule__EFunctionCall__Group_1_0_2__0");
+			builder.put(grammarAccess.getEIfBlockAccess().getGroup(), "rule__EIfBlock__Group__0");
+			builder.put(grammarAccess.getEIfBlockAccess().getGroup_2(), "rule__EIfBlock__Group_2__0");
 			builder.put(grammarAccess.getEFilteredExpressionAccess().getGroup(), "rule__EFilteredExpression__Group__0");
 			builder.put(grammarAccess.getEFilteredExpressionAccess().getGroup_1(), "rule__EFilteredExpression__Group_1__0");
 			builder.put(grammarAccess.getEOrExpressionAccess().getGroup(), "rule__EOrExpression__Group__0");
@@ -238,8 +240,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getGroup(), "rule__EParenthesisedExpression__Group__0");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getGroup_0_1(), "rule__EParenthesisedExpression__Group_0_1__0");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getGroup_2(), "rule__EParenthesisedExpression__Group_2__0");
-			builder.put(grammarAccess.getEIfExpressionAccess().getGroup(), "rule__EIfExpression__Group__0");
-			builder.put(grammarAccess.getEIfExpressionAccess().getGroup_4(), "rule__EIfExpression__Group_4__0");
 			builder.put(grammarAccess.getEIfStatementAccess().getGroup(), "rule__EIfStatement__Group__0");
 			builder.put(grammarAccess.getEIfStatementAccess().getGroup_7(), "rule__EIfStatement__Group_7__0");
 			builder.put(grammarAccess.getEElifBlockAccess().getGroup(), "rule__EElifBlock__Group__0");
@@ -450,10 +450,14 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getESimpleValueInLineAccess().getSimple_valueAssignment_3(), "rule__ESimpleValueInLine__Simple_valueAssignment_3");
 			builder.put(grammarAccess.getESimpleValueInLineAccess().getSimple_valueAssignment_4(), "rule__ESimpleValueInLine__Simple_valueAssignment_4");
 			builder.put(grammarAccess.getEJinjaExpressionEvaluationAccess().getJinja_expressionAssignment_1(), "rule__EJinjaExpressionEvaluation__Jinja_expressionAssignment_1");
+			builder.put(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getExpression_to_evaluateAssignment_0(), "rule__EJinjaExpressionEvaluationWithoutBrackets__Expression_to_evaluateAssignment_0");
+			builder.put(grammarAccess.getEJinjaExpressionEvaluationWithoutBracketsAccess().getIf_chainAssignment_1(), "rule__EJinjaExpressionEvaluationWithoutBrackets__If_chainAssignment_1");
 			builder.put(grammarAccess.getEFunctionCallAccess().getNameAssignment_0(), "rule__EFunctionCall__NameAssignment_0");
 			builder.put(grammarAccess.getEFunctionCallAccess().getParametersAssignment_1_0_1(), "rule__EFunctionCall__ParametersAssignment_1_0_1");
 			builder.put(grammarAccess.getEFunctionCallAccess().getParametersAssignment_1_0_2_1(), "rule__EFunctionCall__ParametersAssignment_1_0_2_1");
 			builder.put(grammarAccess.getEFunctionCallAccess().getEmpty_bracketsAssignment_1_1(), "rule__EFunctionCall__Empty_bracketsAssignment_1_1");
+			builder.put(grammarAccess.getEIfBlockAccess().getIf_conditionAssignment_1(), "rule__EIfBlock__If_conditionAssignment_1");
+			builder.put(grammarAccess.getEIfBlockAccess().getElse_expressionAssignment_2_1(), "rule__EIfBlock__Else_expressionAssignment_2_1");
 			builder.put(grammarAccess.getEFilteredExpressionAccess().getTo_filterAssignment_0(), "rule__EFilteredExpression__To_filterAssignment_0");
 			builder.put(grammarAccess.getEFilteredExpressionAccess().getFilterAssignment_1_1(), "rule__EFilteredExpression__FilterAssignment_1_1");
 			builder.put(grammarAccess.getEOrExpressionAccess().getLeft_orAssignment_0(), "rule__EOrExpression__Left_orAssignment_0");
@@ -475,9 +479,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getParenthesised_termAssignment_0_1_1(), "rule__EParenthesisedExpression__Parenthesised_termAssignment_0_1_1");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getSquare_bracket_elementsAssignment_1(), "rule__EParenthesisedExpression__Square_bracket_elementsAssignment_1");
 			builder.put(grammarAccess.getEParenthesisedExpressionAccess().getTailAssignment_2_1(), "rule__EParenthesisedExpression__TailAssignment_2_1");
-			builder.put(grammarAccess.getEIfExpressionAccess().getIf_expressionAssignment_1(), "rule__EIfExpression__If_expressionAssignment_1");
-			builder.put(grammarAccess.getEIfExpressionAccess().getIf_conditionAssignment_3(), "rule__EIfExpression__If_conditionAssignment_3");
-			builder.put(grammarAccess.getEIfExpressionAccess().getElse_expressionAssignment_4_1(), "rule__EIfExpression__Else_expressionAssignment_4_1");
 			builder.put(grammarAccess.getEIfStatementAccess().getIf_block_signAssignment_1(), "rule__EIfStatement__If_block_signAssignment_1");
 			builder.put(grammarAccess.getEIfStatementAccess().getIf_conditionAssignment_3(), "rule__EIfStatement__If_conditionAssignment_3");
 			builder.put(grammarAccess.getEIfStatementAccess().getIf_bodyAssignment_5(), "rule__EIfStatement__If_bodyAssignment_5");

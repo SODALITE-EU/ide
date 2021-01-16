@@ -474,6 +474,15 @@ public interface AnsibleDslFactory extends EFactory
   EFunctionCall createEFunctionCall();
 
   /**
+   * Returns a new object of class '<em>EIf Block</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EIf Block</em>'.
+   * @generated
+   */
+  EIfBlock createEIfBlock();
+
+  /**
    * Returns a new object of class '<em>EFiltered Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -535,15 +544,6 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EParenthesisedExpression createEParenthesisedExpression();
-
-  /**
-   * Returns a new object of class '<em>EIf Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EIf Expression</em>'.
-   * @generated
-   */
-  EIfExpression createEIfExpression();
 
   /**
    * Returns a new object of class '<em>EJinja Statement</em>'.

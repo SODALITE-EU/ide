@@ -115,6 +115,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION: return createEJinjaExpressionEvaluation();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS: return createEJinjaExpressionEvaluationWithoutBrackets();
       case AnsibleDslPackage.EFUNCTION_CALL: return createEFunctionCall();
+      case AnsibleDslPackage.EIF_BLOCK: return createEIfBlock();
       case AnsibleDslPackage.EFILTERED_EXPRESSION: return createEFilteredExpression();
       case AnsibleDslPackage.EOR_EXPRESSION: return createEOrExpression();
       case AnsibleDslPackage.EAND_EXPRESSION: return createEAndExpression();
@@ -122,7 +123,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EOPERATION: return createEOperation();
       case AnsibleDslPackage.EIS_EXPRESSION: return createEIsExpression();
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION: return createEParenthesisedExpression();
-      case AnsibleDslPackage.EIF_EXPRESSION: return createEIfExpression();
       case AnsibleDslPackage.EJINJA_STATEMENT: return createEJinjaStatement();
       case AnsibleDslPackage.EIF_STATEMENT: return createEIfStatement();
       case AnsibleDslPackage.EELIF_BLOCK: return createEElifBlock();
@@ -765,6 +765,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
+  public EIfBlock createEIfBlock()
+  {
+    EIfBlockImpl eIfBlock = new EIfBlockImpl();
+    return eIfBlock;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EFilteredExpression createEFilteredExpression()
   {
     EFilteredExpressionImpl eFilteredExpression = new EFilteredExpressionImpl();
@@ -841,18 +853,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EParenthesisedExpressionImpl eParenthesisedExpression = new EParenthesisedExpressionImpl();
     return eParenthesisedExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EIfExpression createEIfExpression()
-  {
-    EIfExpressionImpl eIfExpression = new EIfExpressionImpl();
-    return eIfExpression;
   }
 
   /**

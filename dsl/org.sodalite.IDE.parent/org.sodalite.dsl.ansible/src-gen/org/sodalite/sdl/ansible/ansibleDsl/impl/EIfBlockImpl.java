@@ -10,38 +10,28 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EIfBlock;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EIf Expression</b></em>'.
+ * An implementation of the model object '<em><b>EIf Block</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl#getIf_expression <em>If expression</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl#getIf_condition <em>If condition</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfExpressionImpl#getElse_expression <em>Else expression</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfBlockImpl#getIf_condition <em>If condition</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfBlockImpl#getElse_expression <em>Else expression</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBracketsImpl implements EIfExpression
+public class EIfBlockImpl extends MinimalEObjectImpl.Container implements EIfBlock
 {
-  /**
-   * The cached value of the '{@link #getIf_expression() <em>If expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIf_expression()
-   * @generated
-   * @ordered
-   */
-  protected EFilteredExpression if_expression;
-
   /**
    * The cached value of the '{@link #getIf_condition() <em>If condition</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -67,7 +57,7 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EIfExpressionImpl()
+  protected EIfBlockImpl()
   {
     super();
   }
@@ -80,57 +70,7 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EIF_EXPRESSION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EFilteredExpression getIf_expression()
-  {
-    return if_expression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetIf_expression(EFilteredExpression newIf_expression, NotificationChain msgs)
-  {
-    EFilteredExpression oldIf_expression = if_expression;
-    if_expression = newIf_expression;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_EXPRESSION__IF_EXPRESSION, oldIf_expression, newIf_expression);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setIf_expression(EFilteredExpression newIf_expression)
-  {
-    if (newIf_expression != if_expression)
-    {
-      NotificationChain msgs = null;
-      if (if_expression != null)
-        msgs = ((InternalEObject)if_expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_EXPRESSION__IF_EXPRESSION, null, msgs);
-      if (newIf_expression != null)
-        msgs = ((InternalEObject)newIf_expression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_EXPRESSION__IF_EXPRESSION, null, msgs);
-      msgs = basicSetIf_expression(newIf_expression, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_EXPRESSION__IF_EXPRESSION, newIf_expression, newIf_expression));
+    return AnsibleDslPackage.Literals.EIF_BLOCK;
   }
 
   /**
@@ -155,7 +95,7 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
     if_condition = newIf_condition;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_EXPRESSION__IF_CONDITION, oldIf_condition, newIf_condition);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_BLOCK__IF_CONDITION, oldIf_condition, newIf_condition);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -173,14 +113,14 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
     {
       NotificationChain msgs = null;
       if (if_condition != null)
-        msgs = ((InternalEObject)if_condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_EXPRESSION__IF_CONDITION, null, msgs);
+        msgs = ((InternalEObject)if_condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_BLOCK__IF_CONDITION, null, msgs);
       if (newIf_condition != null)
-        msgs = ((InternalEObject)newIf_condition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_EXPRESSION__IF_CONDITION, null, msgs);
+        msgs = ((InternalEObject)newIf_condition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_BLOCK__IF_CONDITION, null, msgs);
       msgs = basicSetIf_condition(newIf_condition, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_EXPRESSION__IF_CONDITION, newIf_condition, newIf_condition));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_BLOCK__IF_CONDITION, newIf_condition, newIf_condition));
   }
 
   /**
@@ -205,7 +145,7 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
     else_expression = newElse_expression;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_EXPRESSION__ELSE_EXPRESSION, oldElse_expression, newElse_expression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_BLOCK__ELSE_EXPRESSION, oldElse_expression, newElse_expression);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -223,14 +163,14 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
     {
       NotificationChain msgs = null;
       if (else_expression != null)
-        msgs = ((InternalEObject)else_expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_EXPRESSION__ELSE_EXPRESSION, null, msgs);
+        msgs = ((InternalEObject)else_expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_BLOCK__ELSE_EXPRESSION, null, msgs);
       if (newElse_expression != null)
-        msgs = ((InternalEObject)newElse_expression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_EXPRESSION__ELSE_EXPRESSION, null, msgs);
+        msgs = ((InternalEObject)newElse_expression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EIF_BLOCK__ELSE_EXPRESSION, null, msgs);
       msgs = basicSetElse_expression(newElse_expression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_EXPRESSION__ELSE_EXPRESSION, newElse_expression, newElse_expression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EIF_BLOCK__ELSE_EXPRESSION, newElse_expression, newElse_expression));
   }
 
   /**
@@ -243,11 +183,9 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_EXPRESSION:
-        return basicSetIf_expression(null, msgs);
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_CONDITION:
+      case AnsibleDslPackage.EIF_BLOCK__IF_CONDITION:
         return basicSetIf_condition(null, msgs);
-      case AnsibleDslPackage.EIF_EXPRESSION__ELSE_EXPRESSION:
+      case AnsibleDslPackage.EIF_BLOCK__ELSE_EXPRESSION:
         return basicSetElse_expression(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -263,11 +201,9 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_EXPRESSION:
-        return getIf_expression();
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_CONDITION:
+      case AnsibleDslPackage.EIF_BLOCK__IF_CONDITION:
         return getIf_condition();
-      case AnsibleDslPackage.EIF_EXPRESSION__ELSE_EXPRESSION:
+      case AnsibleDslPackage.EIF_BLOCK__ELSE_EXPRESSION:
         return getElse_expression();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -283,13 +219,10 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_EXPRESSION:
-        setIf_expression((EFilteredExpression)newValue);
-        return;
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_CONDITION:
+      case AnsibleDslPackage.EIF_BLOCK__IF_CONDITION:
         setIf_condition((EFilteredExpression)newValue);
         return;
-      case AnsibleDslPackage.EIF_EXPRESSION__ELSE_EXPRESSION:
+      case AnsibleDslPackage.EIF_BLOCK__ELSE_EXPRESSION:
         setElse_expression((EFilteredExpression)newValue);
         return;
     }
@@ -306,13 +239,10 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_EXPRESSION:
-        setIf_expression((EFilteredExpression)null);
-        return;
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_CONDITION:
+      case AnsibleDslPackage.EIF_BLOCK__IF_CONDITION:
         setIf_condition((EFilteredExpression)null);
         return;
-      case AnsibleDslPackage.EIF_EXPRESSION__ELSE_EXPRESSION:
+      case AnsibleDslPackage.EIF_BLOCK__ELSE_EXPRESSION:
         setElse_expression((EFilteredExpression)null);
         return;
     }
@@ -329,14 +259,12 @@ public class EIfExpressionImpl extends EJinjaExpressionEvaluationWithoutBrackets
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_EXPRESSION:
-        return if_expression != null;
-      case AnsibleDslPackage.EIF_EXPRESSION__IF_CONDITION:
+      case AnsibleDslPackage.EIF_BLOCK__IF_CONDITION:
         return if_condition != null;
-      case AnsibleDslPackage.EIF_EXPRESSION__ELSE_EXPRESSION:
+      case AnsibleDslPackage.EIF_BLOCK__ELSE_EXPRESSION:
         return else_expression != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //EIfExpressionImpl
+} //EIfBlockImpl

@@ -191,8 +191,6 @@ Pause : 'pause:';
 
 Plays : 'plays:';
 
-Return : 'return';
-
 Tasks : 'tasks:';
 
 Topic : 'topic:';

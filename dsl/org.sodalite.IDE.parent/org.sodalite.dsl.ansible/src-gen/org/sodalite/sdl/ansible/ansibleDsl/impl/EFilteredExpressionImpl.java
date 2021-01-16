@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
@@ -29,7 +30,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
  *
  * @generated
  */
-public class EFilteredExpressionImpl extends EJinjaExpressionEvaluationWithoutBracketsImpl implements EFilteredExpression
+public class EFilteredExpressionImpl extends MinimalEObjectImpl.Container implements EFilteredExpression
 {
   /**
    * The cached value of the '{@link #getTo_filter() <em>To filter</em>}' containment reference.

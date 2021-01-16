@@ -40,7 +40,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
-import org.sodalite.sdl.ansible.ansibleDsl.EIfExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EIfBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
@@ -1531,14 +1531,24 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public String compileJinjaExpressionEvaluationWithoutBrackets(final EJinjaExpressionEvaluationWithoutBrackets jinja, final String space) {
-    if ((jinja instanceof EFilteredExpression)) {
-      return this.compileFilteredExpression(((EFilteredExpression)jinja), space);
-    } else {
-      if ((jinja instanceof EIfExpression)) {
-        return this.compileIfExpression(((EIfExpression)jinja), space);
+    String stringToReturn = "";
+    EFilteredExpression _expression_to_evaluate = jinja.getExpression_to_evaluate();
+    boolean _tripleNotEquals = (_expression_to_evaluate != null);
+    if (_tripleNotEquals) {
+      stringToReturn = stringToReturn.concat(this.compileFilteredExpression(jinja.getExpression_to_evaluate(), space));
+    }
+    EList<EIfBlock> _if_chain = jinja.getIf_chain();
+    for (final EIfBlock ifBlock : _if_chain) {
+      {
+        stringToReturn = stringToReturn.concat(" if ").concat(this.compileFilteredExpression(ifBlock.getIf_condition(), space));
+        EFilteredExpression _else_expression = ifBlock.getElse_expression();
+        boolean _tripleNotEquals_1 = (_else_expression != null);
+        if (_tripleNotEquals_1) {
+          stringToReturn = stringToReturn.concat(" else ").concat(this.compileFilteredExpression(ifBlock.getElse_expression(), space));
+        }
       }
     }
-    return null;
+    return stringToReturn;
   }
   
   public String compileFunctionCall(final EFunctionCall functionCall, final String space) {
@@ -1565,23 +1575,12 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return stringToReturn;
   }
   
-  public String compileIfExpression(final EIfExpression ifExpression, final String space) {
-    String stringToReturn = this.compileFilteredExpression(ifExpression.getIf_expression(), space);
-    stringToReturn = stringToReturn.concat(" if ").concat(this.compileFilteredExpression(ifExpression.getIf_condition(), space));
-    EFilteredExpression _else_expression = ifExpression.getElse_expression();
-    boolean _tripleNotEquals = (_else_expression != null);
-    if (_tripleNotEquals) {
-      stringToReturn = stringToReturn.concat(" else ").concat(this.compileFilteredExpression(ifExpression.getElse_expression(), space));
-    }
-    return stringToReturn;
-  }
-  
   public String compileFilteredExpression(final EFilteredExpression filteredExpression, final String space) {
     String stringToReturn = this.compileOrExpression(filteredExpression.getTo_filter(), space).toString();
     EFilteredExpression _filter = filteredExpression.getFilter();
     boolean _tripleNotEquals = (_filter != null);
     if (_tripleNotEquals) {
-      stringToReturn = stringToReturn.concat(" | ").concat(this.compileJinjaExpressionEvaluationWithoutBrackets(filteredExpression.getFilter(), space).toString());
+      stringToReturn = stringToReturn.concat(" | ").concat(this.compileFilteredExpression(filteredExpression.getFilter(), space).toString());
     }
     return stringToReturn;
   }
